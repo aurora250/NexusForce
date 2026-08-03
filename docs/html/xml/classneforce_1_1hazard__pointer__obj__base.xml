@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1hazard__pointer__obj__base" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>neforce::hazard_pointer_obj_base</compoundname>
+    <derivedcompoundref refid="classneforce_1_1hazard__pointer__obj" prot="public" virt="non-virtual">neforce::hazard_pointer_obj&lt; T, Deleter &gt;</derivedcompoundref>
+    <includes refid="hazard__ptr_8hpp" local="no">hazard_ptr.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classneforce_1_1hazard__pointer__obj__base_1a508bd9833008bae25e0bd9534d50ada0" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1hazard__pointer__obj__base" kindref="compound">hazard_pointer_obj_base</ref> *</type>
+        <definition>hazard_pointer_obj_base* neforce::hazard_pointer_obj_base::next</definition>
+        <argsstring></argsstring>
+        <name>next</name>
+        <qualifiedname>neforce::hazard_pointer_obj_base::next</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+<para>链表中的下一个对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="86" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="86" bodyend="86"/>
+        <referencedby refid="structneforce_1_1retire__list_1ab91fa61b5457c169758c2c990b9893cb" compoundref="hazard__ptr_8hpp" startline="173" endline="177">neforce::retire_list::add</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1hazard__pointer__obj__base_1a099e658f031577770b141db8446d31d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual neforce::hazard_pointer_obj_base::~hazard_pointer_obj_base</definition>
+        <argsstring>()=default</argsstring>
+        <name>~hazard_pointer_obj_base</name>
+        <qualifiedname>neforce::hazard_pointer_obj_base::~hazard_pointer_obj_base</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="88" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hazard__pointer__obj__base_1a0fa987d8875f7edfe8773e3b44c4f08b" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void neforce::hazard_pointer_obj_base::destroy</definition>
+        <argsstring>()=0</argsstring>
+        <name>destroy</name>
+        <qualifiedname>neforce::hazard_pointer_obj_base::destroy</qualifiedname>
+        <reimplementedby refid="classneforce_1_1hazard__pointer__obj_1a2a18d7a55281b8197c68a86bec8eae8f">destroy</reimplementedby>
+        <briefdescription>
+<para>销毁对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="89" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hazard__pointer__obj__base_1a46e6a275198a6cbb921c33ab66db8623" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>void *</type>
+        <definition>virtual void * neforce::hazard_pointer_obj_base::get_ptr</definition>
+        <argsstring>() const =0</argsstring>
+        <name>get_ptr</name>
+        <qualifiedname>neforce::hazard_pointer_obj_base::get_ptr</qualifiedname>
+        <reimplementedby refid="classneforce_1_1hazard__pointer__obj_1a926de62ea40f3db7d441ec9912b5aa20">get_ptr</reimplementedby>
+        <briefdescription>
+<para>获取包装的内部指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="90" column="19"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>险象指针对象基类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>所有需要通过险象指针回收的对象都需要继承此类。 提供多态销毁接口。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>neforce::hazard_pointer_obj&lt; T, Deleter &gt;</label>
+        <link refid="classneforce_1_1hazard__pointer__obj"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::hazard_pointer_obj_base</label>
+        <link refid="classneforce_1_1hazard__pointer__obj__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::hazard_pointer_obj_base</label>
+        <link refid="classneforce_1_1hazard__pointer__obj__base"/>
+        <childnode refid="1" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="84" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="84" bodyend="91"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1hazard__pointer__obj__base_1a0fa987d8875f7edfe8773e3b44c4f08b" prot="public" virt="pure-virtual"><scope>neforce::hazard_pointer_obj_base</scope><name>destroy</name></member>
+      <member refid="classneforce_1_1hazard__pointer__obj__base_1a46e6a275198a6cbb921c33ab66db8623" prot="public" virt="pure-virtual"><scope>neforce::hazard_pointer_obj_base</scope><name>get_ptr</name></member>
+      <member refid="classneforce_1_1hazard__pointer__obj__base_1a508bd9833008bae25e0bd9534d50ada0" prot="public" virt="non-virtual"><scope>neforce::hazard_pointer_obj_base</scope><name>next</name></member>
+      <member refid="classneforce_1_1hazard__pointer__obj__base_1a099e658f031577770b141db8446d31d0" prot="public" virt="virtual"><scope>neforce::hazard_pointer_obj_base</scope><name>~hazard_pointer_obj_base</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

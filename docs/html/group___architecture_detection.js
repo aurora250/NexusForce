@@ -2,8 +2,9 @@ var group___architecture_detection =
 [
     [ "NEFORCE_ARCH_AARCH64", "group___architecture_detection.html#ga740c964d99e5841376078d15c797e4d8", null ],
     [ "NEFORCE_ARCH_ARM", "group___architecture_detection.html#ga7fb22d228f7447af72e0bc9522c58b21", null ],
-    [ "NEFORCE_ARCH_ARM32", "group___architecture_detection.html#gaab89dc6e17ee856e2d9ddd71a75e9134", null ],
     [ "NEFORCE_ARCH_LOONGARCH", "group___architecture_detection.html#ga74f071c781a344188cb89f788c2a8587", null ],
+    [ "NEFORCE_ARCH_LOONGARCH32", "group___architecture_detection.html#ga1b32280b6d1d19799983eb87a06cfc69", null ],
+    [ "NEFORCE_ARCH_LOONGARCH64", "group___architecture_detection.html#gacd874c39503ab85a42f73d3ee2016fec", null ],
     [ "NEFORCE_ARCH_RISCV", "group___architecture_detection.html#ga8fcf45f667147e73a52d8fc95efa9580", null ],
     [ "NEFORCE_ARCH_RISCV32", "group___architecture_detection.html#gad5235f264177cc54807ec24aaab541bf", null ],
     [ "NEFORCE_ARCH_RISCV64", "group___architecture_detection.html#gac26c41e22b90470f3f951cd37cbef335", null ],

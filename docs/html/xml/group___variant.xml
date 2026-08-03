@@ -3,25 +3,26 @@
   <compounddef id="group___variant" kind="group">
     <compoundname>Variant</compoundname>
     <title>变体</title>
-    <innerclass refid="structvariant__index" prot="public">variant_index</innerclass>
-    <innerclass refid="structvariant__alternative" prot="public">variant_alternative</innerclass>
-    <innerclass refid="structvariant" prot="public">variant</innerclass>
+    <innerclass refid="structneforce_1_1variant__index" prot="public">neforce::variant_index</innerclass>
+    <innerclass refid="structneforce_1_1variant__alternative" prot="public">neforce::variant_alternative</innerclass>
+    <innerclass refid="structneforce_1_1variant" prot="public">neforce::variant</innerclass>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="group___variant_1gac276a03687a0669787a73fafe9ffedef" prot="public" static="no">
+      <memberdef kind="typedef" id="group___variant_1gab08ae7b9478ea726602d976e69f052d8" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename Variant</type>
           </param>
           <param>
-            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <type>size_t</type>
             <declname>Idx</declname>
             <defname>Idx</defname>
           </param>
         </templateparamlist>
-        <type>typename <ref refid="structvariant__alternative" kindref="compound">variant_alternative</ref>&lt; Variant, Idx &gt;::type</type>
-        <definition>using variant_alternative_t = typename variant_alternative&lt;Variant, Idx&gt;::type</definition>
+        <type>typename variant_alternative&lt; Variant, Idx &gt;::type</type>
+        <definition>using neforce::variant_alternative_t = typename variant_alternative&lt;Variant, Idx&gt;::type</definition>
         <argsstring></argsstring>
         <name>variant_alternative_t</name>
+        <qualifiedname>neforce::variant_alternative_t</qualifiedname>
         <briefdescription>
 <para>variant_alternative的便捷别名，获取变体中指定索引位置的类型 </para>
         </briefdescription>
@@ -33,7 +34,7 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="group___variant_1ga6a6286e88fa95ee0ae386a322640f6ce" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___variant_1gad70ec0481cd156611fa1efc095bf5be5" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename Variant</type>
@@ -42,11 +43,12 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
-        <definition>size_t variant_index_v</definition>
+        <type>size_t</type>
+        <definition>size_t neforce::variant_index_v</definition>
         <argsstring></argsstring>
         <name>variant_index_v</name>
-        <initializer>= <ref refid="structvariant__index" kindref="compound">variant_index</ref>&lt;Variant, T&gt;::value</initializer>
+        <qualifiedname>neforce::variant_index_v</qualifiedname>
+        <initializer>= variant_index&lt;Variant, T&gt;::value</initializer>
         <briefdescription>
 <para>variant_index的便捷别名，获取类型在变体中的索引值 </para>
         </briefdescription>
@@ -55,12 +57,12 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="39" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="39" bodyend="-1"/>
-        <referencedby refid="structvariant_1a9df2b4f106069a0ee9067a80b896156c" compoundref="variant_8hpp" startline="442" endline="444">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::holds_alternative</referencedby>
-        <referencedby refid="structvariant_1aad94f5e20e8354e881876c09c8814788" compoundref="variant_8hpp" startline="283" endline="287">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::variant</referencedby>
+        <referencedby refid="structneforce_1_1variant_1a93df07e6a6ad6da7d400e162bd1a3f1c" compoundref="variant_8hpp" startline="442" endline="444">neforce::variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::holds_alternative</referencedby>
+        <referencedby refid="structneforce_1_1variant_1a8b72def7ee4f0f77b94307b2f74e2cda" compoundref="variant_8hpp" startline="283" endline="287">neforce::variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::variant</referencedby>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___variant_1gac6ae2cba6b51a858d9aa8737cc505afb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___variant_1gac68d64c36ff81af200c87d12fba1503c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename...</type>
@@ -69,9 +71,10 @@
           </param>
         </templateparamlist>
         <type></type>
-        <definition>variant</definition>
+        <definition>neforce::variant</definition>
         <argsstring>(Args...) -&gt; variant&lt; Args... &gt;</argsstring>
         <name>variant</name>
+        <qualifiedname>neforce::variant</qualifiedname>
         <param>
           <type>Args...</type>
         </param>
@@ -83,10 +86,10 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="638" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" declline="638" declcolumn="1"/>
       </memberdef>
-      <memberdef kind="function" id="group___variant_1ga37f06d84003e496274a4b730d9b7f3e1" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___variant_1ga86798e11bdbb719fc768a409373f22a7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <type>size_t</type>
             <declname>Idx</declname>
             <defname>Idx</defname>
           </param>
@@ -96,12 +99,13 @@
             <defname>Types</defname>
           </param>
         </templateparamlist>
-        <type><ref refid="group___variant_1gac276a03687a0669787a73fafe9ffedef" kindref="member">variant_alternative_t</ref>&lt; <ref refid="structvariant" kindref="compound">variant</ref>&lt; Types... &gt;, Idx &gt; &amp;</type>
-        <definition>variant_alternative_t&lt; variant&lt; Types... &gt;, Idx &gt; &amp; get</definition>
+        <type>variant_alternative_t&lt; variant&lt; Types... &gt;, Idx &gt; &amp;</type>
+        <definition>variant_alternative_t&lt; variant&lt; Types... &gt;, Idx &gt; &amp; neforce::get</definition>
         <argsstring>(variant&lt; Types... &gt; &amp;v)</argsstring>
         <name>get</name>
+        <qualifiedname>neforce::get</qualifiedname>
         <param>
-          <type><ref refid="structvariant" kindref="compound">variant</ref>&lt; Types... &gt; &amp;</type>
+          <type>variant&lt; Types... &gt; &amp;</type>
           <declname>v</declname>
         </param>
         <briefdescription>
@@ -141,16 +145,12 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="669" column="33" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="669" bodyend="673"/>
-        <references refid="group___variant_1ga37f06d84003e496274a4b730d9b7f3e1" compoundref="variant_8hpp" startline="669" endline="673">get</references>
-        <referencedby refid="group___variant_1gaa9037f2395e93a4a125509ae752e8af6" compoundref="variant_8hpp" startline="711" endline="715">get</referencedby>
-        <referencedby refid="group___variant_1ga5748ec585c80ed52247f5701d898b7c6" compoundref="variant_8hpp" startline="683" endline="687">get</referencedby>
-        <referencedby refid="group___variant_1gaa1f6fe5d80ff5a430a4e5736d3285860" compoundref="variant_8hpp" startline="697" endline="701">get</referencedby>
-        <referencedby refid="group___variant_1ga37f06d84003e496274a4b730d9b7f3e1" compoundref="variant_8hpp" startline="669" endline="673">get</referencedby>
+        <references refid="group___async_1ga62fae7780686a01cf8f94a914db3e161" compoundref="future_8hpp" startline="1189" endline="1192">neforce::get</references>
       </memberdef>
-      <memberdef kind="function" id="group___variant_1ga5748ec585c80ed52247f5701d898b7c6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___variant_1gaee7bac36dc5c9cd9721d861e3d073654" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <type>size_t</type>
             <declname>Idx</declname>
             <defname>Idx</defname>
           </param>
@@ -160,12 +160,13 @@
             <defname>Types</defname>
           </param>
         </templateparamlist>
-        <type>const <ref refid="group___variant_1gac276a03687a0669787a73fafe9ffedef" kindref="member">variant_alternative_t</ref>&lt; <ref refid="structvariant" kindref="compound">variant</ref>&lt; Types... &gt;, Idx &gt; &amp;</type>
-        <definition>const variant_alternative_t&lt; variant&lt; Types... &gt;, Idx &gt; &amp; get</definition>
+        <type>const variant_alternative_t&lt; variant&lt; Types... &gt;, Idx &gt; &amp;</type>
+        <definition>const variant_alternative_t&lt; variant&lt; Types... &gt;, Idx &gt; &amp; neforce::get</definition>
         <argsstring>(const variant&lt; Types... &gt; &amp;v)</argsstring>
         <name>get</name>
+        <qualifiedname>neforce::get</qualifiedname>
         <param>
-          <type>const <ref refid="structvariant" kindref="compound">variant</ref>&lt; Types... &gt; &amp;</type>
+          <type>const variant&lt; Types... &gt; &amp;</type>
           <declname>v</declname>
         </param>
         <briefdescription>
@@ -205,12 +206,12 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="683" column="39" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="683" bodyend="687"/>
-        <references refid="group___variant_1ga37f06d84003e496274a4b730d9b7f3e1" compoundref="variant_8hpp" startline="669" endline="673">get</references>
+        <references refid="group___async_1ga62fae7780686a01cf8f94a914db3e161" compoundref="future_8hpp" startline="1189" endline="1192">neforce::get</references>
       </memberdef>
-      <memberdef kind="function" id="group___variant_1gaa1f6fe5d80ff5a430a4e5736d3285860" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___variant_1gaf7e2576ea22fcebd7d4bb037b7feac80" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <type>size_t</type>
             <declname>Idx</declname>
             <defname>Idx</defname>
           </param>
@@ -220,12 +221,13 @@
             <defname>Types</defname>
           </param>
         </templateparamlist>
-        <type><ref refid="group___variant_1gac276a03687a0669787a73fafe9ffedef" kindref="member">variant_alternative_t</ref>&lt; <ref refid="structvariant" kindref="compound">variant</ref>&lt; Types... &gt;, Idx &gt; &amp;&amp;</type>
-        <definition>variant_alternative_t&lt; variant&lt; Types... &gt;, Idx &gt; &amp;&amp; get</definition>
+        <type>variant_alternative_t&lt; variant&lt; Types... &gt;, Idx &gt; &amp;&amp;</type>
+        <definition>variant_alternative_t&lt; variant&lt; Types... &gt;, Idx &gt; &amp;&amp; neforce::get</definition>
         <argsstring>(variant&lt; Types... &gt; &amp;&amp;v)</argsstring>
         <name>get</name>
+        <qualifiedname>neforce::get</qualifiedname>
         <param>
-          <type><ref refid="structvariant" kindref="compound">variant</ref>&lt; Types... &gt; &amp;&amp;</type>
+          <type>variant&lt; Types... &gt; &amp;&amp;</type>
           <declname>v</declname>
         </param>
         <briefdescription>
@@ -265,12 +267,12 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="697" column="33" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="697" bodyend="701"/>
-        <references refid="group___variant_1ga37f06d84003e496274a4b730d9b7f3e1" compoundref="variant_8hpp" startline="669" endline="673">get</references>
+        <references refid="group___async_1ga62fae7780686a01cf8f94a914db3e161" compoundref="future_8hpp" startline="1189" endline="1192">neforce::get</references>
       </memberdef>
-      <memberdef kind="function" id="group___variant_1gaa9037f2395e93a4a125509ae752e8af6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___variant_1gad57f6075105f72acd80177d46d49fa31" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <type>size_t</type>
             <declname>Idx</declname>
             <defname>Idx</defname>
           </param>
@@ -280,12 +282,13 @@
             <defname>Types</defname>
           </param>
         </templateparamlist>
-        <type>const <ref refid="group___variant_1gac276a03687a0669787a73fafe9ffedef" kindref="member">variant_alternative_t</ref>&lt; <ref refid="structvariant" kindref="compound">variant</ref>&lt; Types... &gt;, Idx &gt; &amp;&amp;</type>
-        <definition>const variant_alternative_t&lt; variant&lt; Types... &gt;, Idx &gt; &amp;&amp; get</definition>
+        <type>const variant_alternative_t&lt; variant&lt; Types... &gt;, Idx &gt; &amp;&amp;</type>
+        <definition>const variant_alternative_t&lt; variant&lt; Types... &gt;, Idx &gt; &amp;&amp; neforce::get</definition>
         <argsstring>(const variant&lt; Types... &gt; &amp;&amp;v)</argsstring>
         <name>get</name>
+        <qualifiedname>neforce::get</qualifiedname>
         <param>
-          <type>const <ref refid="structvariant" kindref="compound">variant</ref>&lt; Types... &gt; &amp;&amp;</type>
+          <type>const variant&lt; Types... &gt; &amp;&amp;</type>
           <declname>v</declname>
         </param>
         <briefdescription>
@@ -325,7 +328,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="711" column="39" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="711" bodyend="715"/>
-        <references refid="group___variant_1ga37f06d84003e496274a4b730d9b7f3e1" compoundref="variant_8hpp" startline="669" endline="673">get</references>
+        <references refid="group___async_1ga62fae7780686a01cf8f94a914db3e161" compoundref="future_8hpp" startline="1189" endline="1192">neforce::get</references>
       </memberdef>
     </sectiondef>
     <briefdescription>

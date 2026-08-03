@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1steady__clock" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::steady_clock</compoundname>
+    <includes refid="clocks_8hpp" local="no">clocks.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structneforce_1_1steady__clock_1ada904e5c4376b5d153ad18c53d85b563" prot="public" static="no">
+        <type><ref refid="group___duration_1ga2f6a67b4ec57cd92a9212f6489d42b81" kindref="member">nanoseconds</ref></type>
+        <definition>using neforce::steady_clock::duration = nanoseconds</definition>
+        <argsstring></argsstring>
+        <name>duration</name>
+        <qualifiedname>neforce::steady_clock::duration</qualifiedname>
+        <briefdescription>
+<para>持续时间类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" line="81" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structneforce_1_1steady__clock_1a6bcd58fc6c2f684dee1d7796ad4b24f6" prot="public" static="no">
+        <type><ref refid="structneforce_1_1duration_1acb808f8b034a913c798fab915be0a4c7" kindref="member">duration::rep</ref></type>
+        <definition>using neforce::steady_clock::rep = duration::rep</definition>
+        <argsstring></argsstring>
+        <name>rep</name>
+        <qualifiedname>neforce::steady_clock::rep</qualifiedname>
+        <briefdescription>
+<para>数值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" line="82" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structneforce_1_1steady__clock_1af5ade164e4b3fb6ca659896a114f2fe6" prot="public" static="no">
+        <type><ref refid="structneforce_1_1duration_1ac4143731c62c816447a9882b43132aed" kindref="member">duration::period</ref></type>
+        <definition>using neforce::steady_clock::period = duration::period</definition>
+        <argsstring></argsstring>
+        <name>period</name>
+        <qualifiedname>neforce::steady_clock::period</qualifiedname>
+        <briefdescription>
+<para>时间单位比例 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" line="83" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structneforce_1_1steady__clock_1a571235516977f769fec5e0eaaf49e077" prot="public" static="no">
+        <type>_NEFORCE <ref refid="structneforce_1_1steady__clock_1a571235516977f769fec5e0eaaf49e077" kindref="member">time_point</ref>&lt; <ref refid="structneforce_1_1steady__clock" kindref="compound">steady_clock</ref> &gt;</type>
+        <definition>using neforce::steady_clock::time_point = _NEFORCE time_point&lt;steady_clock&gt;</definition>
+        <argsstring></argsstring>
+        <name>time_point</name>
+        <qualifiedname>neforce::steady_clock::time_point</qualifiedname>
+        <briefdescription>
+<para>时间点类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" line="84" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structneforce_1_1steady__clock_1a15854dfc5bf9561a4ef1458c1290a678" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::steady_clock::is_steady</definition>
+        <argsstring></argsstring>
+        <name>is_steady</name>
+        <qualifiedname>neforce::steady_clock::is_steady</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>时钟稳定性标识 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>稳定时钟是单调递增的，不受系统时间调整影响。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" line="91" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" bodystart="91" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structneforce_1_1steady__clock_1a21d376e7630c7c35cde610180e214a1d" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1steady__clock_1a571235516977f769fec5e0eaaf49e077" kindref="member">time_point</ref></type>
+        <definition>static time_point neforce::steady_clock::now</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>now</name>
+        <qualifiedname>neforce::steady_clock::now</qualifiedname>
+        <briefdescription>
+<para>获取当前时间点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前稳定时钟的时间点 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" line="97" column="23"/>
+        <referencedby refid="classneforce_1_1ttl__cache_1ad14b0e8f88545e66d155bbf51f3a2399" compoundref="ttl__cache_8hpp" startline="253" endline="256">neforce::ttl_cache&lt; Key, Value &gt;::cleanup</referencedby>
+        <referencedby refid="classneforce_1_1ttl__cache_1adcc445ff144f708f66eb20269d478810" compoundref="ttl__cache_8hpp" startline="210" endline="221">neforce::ttl_cache&lt; Key, Value &gt;::contains</referencedby>
+        <referencedby refid="classneforce_1_1basic__timer_1af3a902f5b71a796860573a939d13bef5" compoundref="timer_8hpp" startline="378" endline="381">neforce::basic_timer&lt; steady_clock &gt;::expires_after</referencedby>
+        <referencedby refid="classneforce_1_1lru__cache_1abd58821b369bc4e75d1051b0bfe2b76e" compoundref="lru__cache_8hpp" startline="113" endline="121">neforce::lru_cache&lt; Key, Value &gt;::get</referencedby>
+        <referencedby refid="classneforce_1_1ttl__cache_1ad21b2abcaf44332a77d20642110c47bc" compoundref="ttl__cache_8hpp" startline="182" endline="201">neforce::ttl_cache&lt; Key, Value &gt;::get</referencedby>
+        <referencedby refid="structneforce_1_1idb__connect_1ab19c064add26edacd224ec8f106561c5" compoundref="db__interface_8hpp" startline="276" endline="278">neforce::idb_connect::get_alive</referencedby>
+        <referencedby refid="classneforce_1_1atomic__futex_1ad027687423537edc31cfddf9f2c7641d" compoundref="atomic__futex_8hpp" startline="197" endline="201">neforce::atomic_futex&lt; WaiterBit &gt;::load_when_equal_for</referencedby>
+        <referencedby refid="classneforce_1_1atomic__futex_1aacede2e1d54d744a55db6cbfa965a3da" compoundref="atomic__futex_8hpp" startline="215" endline="226">neforce::atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</referencedby>
+        <referencedby refid="classneforce_1_1lru__cache_1a0512ddccb31dc50200988ea8de2e4c12" compoundref="lru__cache_8hpp" startline="88" endline="104">neforce::lru_cache&lt; Key, Value &gt;::put</referencedby>
+        <referencedby refid="classneforce_1_1ttl__cache_1a3c08bfa27db3e3e12ff777adbe22b3b9" compoundref="ttl__cache_8hpp" startline="157" endline="160">neforce::ttl_cache&lt; Key, Value &gt;::put</referencedby>
+        <referencedby refid="classneforce_1_1ttl__cache_1a54ecfcb1251ffe4dcd7401bd95a9c077" compoundref="ttl__cache_8hpp" startline="170" endline="173">neforce::ttl_cache&lt; Key, Value &gt;::put</referencedby>
+        <referencedby refid="structneforce_1_1idb__connect_1a31a6f186564ed8fba7ce897b657cc50b" compoundref="db__interface_8hpp" startline="270" endline="270">neforce::idb_connect::refresh_alive</referencedby>
+        <referencedby refid="classneforce_1_1lru__cache_1a555280af06a7bdfb25ba1e99c3065508" compoundref="lru__cache_8hpp" startline="161" endline="172">neforce::lru_cache&lt; Key, Value &gt;::remove_expired</referencedby>
+        <referencedby refid="structneforce_1_1steady__clock_1a9d4e2993abe871b321d8ba641b0b99f2" compoundref="clocks_8hpp" startline="105" endline="111">to_system</referencedby>
+        <referencedby refid="classneforce_1_1condition__variable_1af152f56a4bcf07556c22ca1fb7b1702c" compoundref="condition__variable_8hpp" startline="302" endline="305">neforce::condition_variable::wait_for</referencedby>
+        <referencedby refid="classneforce_1_1condition__variable_1a28d1cf8102b2d2d95e11ed5c23a889ae" compoundref="condition__variable_8hpp" startline="318" endline="321">neforce::condition_variable::wait_for</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1steady__clock_1a9d4e2993abe871b321d8ba641b0b99f2" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Dur</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structneforce_1_1system__clock_1aedace2ff398931d352203dda880cf57d" kindref="member">system_clock::time_point</ref></type>
+        <definition>static system_clock::time_point neforce::steady_clock::to_system</definition>
+        <argsstring>(const _NEFORCE time_point&lt; steady_clock, Dur &gt; &amp;tp)</argsstring>
+        <name>to_system</name>
+        <qualifiedname>neforce::steady_clock::to_system</qualifiedname>
+        <param>
+          <type>const _NEFORCE <ref refid="structneforce_1_1steady__clock_1a571235516977f769fec5e0eaaf49e077" kindref="member">time_point</ref>&lt; <ref refid="structneforce_1_1steady__clock" kindref="compound">steady_clock</ref>, Dur &gt; &amp;</type>
+          <declname>tp</declname>
+        </param>
+        <briefdescription>
+<para>将稳定时钟转为系统时钟 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>稳定时钟时间点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>系统时钟时间点 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" line="105" column="37" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" bodystart="105" bodyend="111"/>
+        <references refid="structneforce_1_1steady__clock_1a21d376e7630c7c35cde610180e214a1d">now</references>
+        <references refid="structneforce_1_1system__clock_1a6ec41371ab7c4b29358f7fbb43431d09">neforce::system_clock::now</references>
+        <references refid="group___duration_1ga89d9c0e7540c0ac580481c7de279ad3b" compoundref="duration_8hpp" startline="144" endline="152">neforce::time_cast</references>
+        <references refid="structneforce_1_1steady__clock_1a9d4e2993abe871b321d8ba641b0b99f2" compoundref="clocks_8hpp" startline="105" endline="111">to_system</references>
+        <referencedby refid="structneforce_1_1steady__clock_1a9d4e2993abe871b321d8ba641b0b99f2" compoundref="clocks_8hpp" startline="105" endline="111">to_system</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>稳定时钟 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>表示单调递增的时钟，不受系统时间调整影响。 稳定时钟的时间点仅用于测量时间间隔。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" line="80" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" bodystart="80" bodyend="112"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1steady__clock_1ada904e5c4376b5d153ad18c53d85b563" prot="public" virt="non-virtual"><scope>neforce::steady_clock</scope><name>duration</name></member>
+      <member refid="structneforce_1_1steady__clock_1a15854dfc5bf9561a4ef1458c1290a678" prot="public" virt="non-virtual"><scope>neforce::steady_clock</scope><name>is_steady</name></member>
+      <member refid="structneforce_1_1steady__clock_1a21d376e7630c7c35cde610180e214a1d" prot="public" virt="non-virtual"><scope>neforce::steady_clock</scope><name>now</name></member>
+      <member refid="structneforce_1_1steady__clock_1af5ade164e4b3fb6ca659896a114f2fe6" prot="public" virt="non-virtual"><scope>neforce::steady_clock</scope><name>period</name></member>
+      <member refid="structneforce_1_1steady__clock_1a6bcd58fc6c2f684dee1d7796ad4b24f6" prot="public" virt="non-virtual"><scope>neforce::steady_clock</scope><name>rep</name></member>
+      <member refid="structneforce_1_1steady__clock_1a571235516977f769fec5e0eaaf49e077" prot="public" virt="non-virtual"><scope>neforce::steady_clock</scope><name>time_point</name></member>
+      <member refid="structneforce_1_1steady__clock_1a9d4e2993abe871b321d8ba641b0b99f2" prot="public" virt="non-virtual"><scope>neforce::steady_clock</scope><name>to_system</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

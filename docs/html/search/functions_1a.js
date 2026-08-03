@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['zero_0',['zero',['../structduration.html#addac7f644268d8a3cc561218ebb72734',1,'duration']]]
+  ['zero_0',['zero',['../structneforce_1_1duration.html#a72d6f2bdff9b7bb7516223279b63325d',1,'neforce::duration']]]
 ];

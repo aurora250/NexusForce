@@ -1,0 +1,292 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1ssl__exception" kind="struct" language="C++" prot="public" final="yes">
+    <compoundname>neforce::ssl_exception</compoundname>
+    <basecompoundref refid="structneforce_1_1thirdparty__exception" prot="public" virt="non-virtual">neforce::thirdparty_exception</basecompoundref>
+    <includes refid="ssl__exception_8hpp" local="no">ssl_exception.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structneforce_1_1ssl__exception_1a5c255403f3667d5b5e0efff9e23fa94a" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref></type>
+        <definition>error_code neforce::ssl_exception::code_</definition>
+        <argsstring></argsstring>
+        <name>code_</name>
+        <qualifiedname>neforce::ssl_exception::code_</qualifiedname>
+        <briefdescription>
+<para>错误码 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_exception.hpp" line="107" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_exception.hpp" bodystart="107" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structneforce_1_1ssl__exception_1acc1749ba2daa20ee51adb16cfe42b7c6" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref></type>
+        <definition>static error_code neforce::ssl_exception::last_error</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>last_error</name>
+        <qualifiedname>neforce::ssl_exception::last_error</qualifiedname>
+        <briefdescription>
+<para>获取OpenSSL错误队列中的最后一个错误码（不弹出） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_exception.hpp" line="64" column="23"/>
+        <referencedby refid="structneforce_1_1ssl__exception_1ac02f7aed9b6769cf5f211abfed83ef1d" compoundref="ssl__exception_8hpp" startline="72" endline="74">ssl_exception</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1ssl__exception_1ac02f7aed9b6769cf5f211abfed83ef1d" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::ssl_exception::ssl_exception</definition>
+        <argsstring>(const string &amp;info=&quot;SSL Operation Failed.&quot;) noexcept</argsstring>
+        <name>ssl_exception</name>
+        <qualifiedname>neforce::ssl_exception::ssl_exception</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>info</declname>
+          <defval>&quot;SSL Operation Failed.&quot;</defval>
+        </param>
+        <briefdescription>
+<para>错误信息构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>错误描述信息</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+错误码自动从 OpenSSL 错误队列获取。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_exception.hpp" line="72" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_exception.hpp" bodystart="72" bodyend="74"/>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+        <references refid="structneforce_1_1ssl__exception_1acc1749ba2daa20ee51adb16cfe42b7c6">last_error</references>
+        <references refid="structneforce_1_1ssl__exception_1ac02f7aed9b6769cf5f211abfed83ef1d" compoundref="ssl__exception_8hpp" startline="72" endline="74">ssl_exception</references>
+        <referencedby refid="structneforce_1_1ssl__exception_1ac02f7aed9b6769cf5f211abfed83ef1d" compoundref="ssl__exception_8hpp" startline="72" endline="74">ssl_exception</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ssl__exception_1ad484afac35d2ead93f6e96be75aa0612" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::ssl_exception::ssl_exception</definition>
+        <argsstring>(const int code)</argsstring>
+        <name>ssl_exception</name>
+        <qualifiedname>neforce::ssl_exception::ssl_exception</qualifiedname>
+        <param>
+          <type>const int</type>
+          <declname>code</declname>
+        </param>
+        <briefdescription>
+<para>错误码构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>code</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>OpenSSL错误码 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_exception.hpp" line="80" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_exception.hpp" bodystart="80" bodyend="82"/>
+        <references refid="structneforce_1_1ssl__exception_1a2c8d980fcbe1fe1967748ee5b8771f8f" compoundref="ssl__exception_8hpp" startline="104" endline="104">code</references>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+        <references refid="group___error_code_1ga21291bf64d44470ffbd9d85fc8340fe5">neforce::ssl_category</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ssl__exception_1aee7c2cd1ebb544ca41c8e9bf74c9e063" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::ssl_exception::ssl_exception</definition>
+        <argsstring>(const string &amp;info, const int code) noexcept</argsstring>
+        <name>ssl_exception</name>
+        <qualifiedname>neforce::ssl_exception::ssl_exception</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>info</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>code</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>错误描述信息 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>code</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>OpenSSL错误码 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_exception.hpp" line="89" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_exception.hpp" bodystart="89" bodyend="91"/>
+        <references refid="structneforce_1_1ssl__exception_1a2c8d980fcbe1fe1967748ee5b8771f8f" compoundref="ssl__exception_8hpp" startline="104" endline="104">code</references>
+        <references refid="group___error_code_1ga21291bf64d44470ffbd9d85fc8340fe5">neforce::ssl_category</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ssl__exception_1abd46ec9cda6f92b2143ac5853e8e783b" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::ssl_exception::ssl_exception</definition>
+        <argsstring>(const exception &amp;e)</argsstring>
+        <name>ssl_exception</name>
+        <qualifiedname>neforce::ssl_exception::ssl_exception</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1exception" kindref="compound">exception</ref> &amp;</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_exception.hpp" line="93" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_exception.hpp" bodystart="93" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ssl__exception_1a977b254e766b67eca4901c89dc9192e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::ssl_exception::~ssl_exception</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~ssl_exception</name>
+        <qualifiedname>neforce::ssl_exception::~ssl_exception</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_exception.hpp" line="96" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ssl__exception_1ae09501a02f12c4843f297616b246e16c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>const char *</type>
+        <definition>const char * neforce::ssl_exception::type</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>type</name>
+        <qualifiedname>neforce::ssl_exception::type</qualifiedname>
+        <reimplements refid="structneforce_1_1exception_1a894b80a406db269fa18cde6422101197">type</reimplements>
+        <briefdescription>
+<para>获取异常类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>异常类型字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_exception.hpp" line="98" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_exception.hpp" bodystart="98" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ssl__exception_1a2c8d980fcbe1fe1967748ee5b8771f8f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref> &amp;</type>
+        <definition>const error_code &amp; neforce::ssl_exception::code</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>code</name>
+        <qualifiedname>neforce::ssl_exception::code</qualifiedname>
+        <briefdescription>
+<para>获取 <ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref> 对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref> 常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_exception.hpp" line="104" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_exception.hpp" bodystart="104" bodyend="104"/>
+        <referencedby refid="structneforce_1_1ssl__exception_1ad484afac35d2ead93f6e96be75aa0612" compoundref="ssl__exception_8hpp" startline="80" endline="82">ssl_exception</referencedby>
+        <referencedby refid="structneforce_1_1ssl__exception_1aee7c2cd1ebb544ca41c8e9bf74c9e063" compoundref="ssl__exception_8hpp" startline="89" endline="91">ssl_exception</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>SSL操作异常 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>neforce::exception</label>
+        <link refid="structneforce_1_1exception"/>
+      </node>
+      <node id="1">
+        <label>neforce::ssl_exception</label>
+        <link refid="structneforce_1_1ssl__exception"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::thirdparty_exception</label>
+        <link refid="structneforce_1_1thirdparty__exception"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>neforce::exception</label>
+        <link refid="structneforce_1_1exception"/>
+      </node>
+      <node id="1">
+        <label>neforce::ssl_exception</label>
+        <link refid="structneforce_1_1ssl__exception"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::thirdparty_exception</label>
+        <link refid="structneforce_1_1thirdparty__exception"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_exception.hpp" line="59" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_exception.hpp" bodystart="59" bodyend="108"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1ssl__exception_1a2c8d980fcbe1fe1967748ee5b8771f8f" prot="public" virt="non-virtual"><scope>neforce::ssl_exception</scope><name>code</name></member>
+      <member refid="structneforce_1_1ssl__exception_1a5c255403f3667d5b5e0efff9e23fa94a" prot="private" virt="non-virtual"><scope>neforce::ssl_exception</scope><name>code_</name></member>
+      <member refid="structneforce_1_1exception_1ae64bcc0873cb85a3b913e43b523ac45c" prot="public" virt="non-virtual"><scope>neforce::ssl_exception</scope><name>exception</name></member>
+      <member refid="structneforce_1_1exception_1a9ae6ab2dc5699adfc63ec7571e87ec94" prot="public" virt="non-virtual"><scope>neforce::ssl_exception</scope><name>exception</name></member>
+      <member refid="structneforce_1_1exception_1a295286b9d2ce7d9338815964b564e289" prot="public" virt="non-virtual"><scope>neforce::ssl_exception</scope><name>exception</name></member>
+      <member refid="structneforce_1_1exception_1ae2992fe5862a76e5fae94c9290aca38e" prot="public" virt="non-virtual"><scope>neforce::ssl_exception</scope><name>exception</name></member>
+      <member refid="structneforce_1_1ssl__exception_1acc1749ba2daa20ee51adb16cfe42b7c6" prot="public" virt="non-virtual"><scope>neforce::ssl_exception</scope><name>last_error</name></member>
+      <member refid="structneforce_1_1exception_1a159169892770b6020d5ab0bcbf6066e5" prot="public" virt="non-virtual"><scope>neforce::ssl_exception</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1exception_1a9e4ddd8f9b01a26777cff21e282511a5" prot="public" virt="non-virtual"><scope>neforce::ssl_exception</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1ssl__exception_1ac02f7aed9b6769cf5f211abfed83ef1d" prot="public" virt="non-virtual"><scope>neforce::ssl_exception</scope><name>ssl_exception</name></member>
+      <member refid="structneforce_1_1ssl__exception_1ad484afac35d2ead93f6e96be75aa0612" prot="public" virt="non-virtual"><scope>neforce::ssl_exception</scope><name>ssl_exception</name></member>
+      <member refid="structneforce_1_1ssl__exception_1aee7c2cd1ebb544ca41c8e9bf74c9e063" prot="public" virt="non-virtual"><scope>neforce::ssl_exception</scope><name>ssl_exception</name></member>
+      <member refid="structneforce_1_1ssl__exception_1abd46ec9cda6f92b2143ac5853e8e783b" prot="public" virt="non-virtual"><scope>neforce::ssl_exception</scope><name>ssl_exception</name></member>
+      <member refid="structneforce_1_1thirdparty__exception_1aee11d01e742e793dbfdf72cf1b8e8ec4" prot="public" virt="non-virtual"><scope>neforce::ssl_exception</scope><name>thirdparty_exception</name></member>
+      <member refid="structneforce_1_1thirdparty__exception_1a1a7605578bd3a587a911ade0f891286e" prot="public" virt="non-virtual"><scope>neforce::ssl_exception</scope><name>thirdparty_exception</name></member>
+      <member refid="structneforce_1_1ssl__exception_1ae09501a02f12c4843f297616b246e16c" prot="public" virt="virtual"><scope>neforce::ssl_exception</scope><name>type</name></member>
+      <member refid="structneforce_1_1exception_1a4c6dcdeed9716bc2d4eed8d28a9a6d14" prot="public" virt="virtual"><scope>neforce::ssl_exception</scope><name>what</name></member>
+      <member refid="structneforce_1_1exception_1aaa0545c19e5f71dd3da3ef74e19c190e" prot="public" virt="virtual"><scope>neforce::ssl_exception</scope><name>~exception</name></member>
+      <member refid="structneforce_1_1ssl__exception_1a977b254e766b67eca4901c89dc9192e2" prot="public" virt="non-virtual"><scope>neforce::ssl_exception</scope><name>~ssl_exception</name></member>
+      <member refid="structneforce_1_1thirdparty__exception_1ad527863277eb4009ebbf45bd522a8608" prot="public" virt="non-virtual"><scope>neforce::ssl_exception</scope><name>~thirdparty_exception</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

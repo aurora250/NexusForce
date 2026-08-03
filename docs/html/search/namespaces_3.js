@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ranges_0',['ranges',['../namespaceranges.html',1,'']]]
+  ['placeholders_0',['placeholders',['../namespaceplaceholders.html',1,'']]]
 ];

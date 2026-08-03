@@ -1,7 +1,7 @@
 var atomic__wait_8hpp =
 [
-    [ "atomic_notify_address", "group___atomic_operations.html#ga5c5949e5e1c0b7d9c13b91322f47f79d", null ],
-    [ "atomic_spin", "group___atomic_operations.html#ga434f8215fe9022960d09c84d7efca4e9", null ],
-    [ "atomic_wait_address", "group___atomic_operations.html#ga04b378083d850b094555357ea10e17ef", null ],
-    [ "atomic_wait_address_v", "group___atomic_operations.html#ga546bc65d02a41df5d8915cdce428bb61", null ]
+    [ "neforce::atomic_notify_address", "group___atomic_operations.html#gafe5ce51b3344134870849f820098063f", null ],
+    [ "neforce::atomic_spin", "group___atomic_operations.html#gae7af15a99c97869bb10c298659b0928b", null ],
+    [ "neforce::atomic_wait_address", "group___atomic_operations.html#gae06adb4c7ce500e642f4fa53f1c5411d", null ],
+    [ "neforce::atomic_wait_address_v", "group___atomic_operations.html#ga8c89443dcfc10dc33425c5e39196cf09", null ]
 ];

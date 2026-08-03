@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
   </td>
  </tr>
  </tbody>
@@ -102,21 +102,21 @@ $(function(){initNavTree('logger_8hpp.html','',''); });
 </div><div class="textblock"><div class="dynheader">
 logger.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="logger_8hpp__incl.svg" width="4175" height="1760"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="logger_8hpp__incl.svg" width="4406" height="1398"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="logger_8hpp_source.html">浏览该文件的源代码.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 类</h2></td></tr>
-<tr class="memitem:logger" id="r_logger"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classlogger.html">logger</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">层级化日志记录器  <a href="classlogger.html#details">更多...</a><br /></td></tr>
-<tr class="memitem:logger_5Fregistry" id="r_logger_5Fregistry"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classlogger__registry.html">logger_registry</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">全局 Logger 注册中心  <a href="classlogger__registry.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:neforce_3A_3Alogger" id="r_neforce_3A_3Alogger"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classneforce_1_1logger.html">neforce::logger</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">层级化日志记录器  <a href="classneforce_1_1logger.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:neforce_3A_3Alogger_5Fregistry" id="r_neforce_3A_3Alogger_5Fregistry"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classneforce_1_1logger__registry.html">neforce::logger_registry</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">全局 Logger 注册中心  <a href="classneforce_1_1logger__registry.html#details">更多...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 宏定义</h2></td></tr>
-<tr class="memitem:ga4903ba74c9a8264d6a58f866f9af6505" id="r_ga4903ba74c9a8264d6a58f866f9af6505"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#ga4903ba74c9a8264d6a58f866f9af6505">NEFORCE_GET_LOGGER</a>(<a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>)</td></tr>
+<tr class="memitem:ga4903ba74c9a8264d6a58f866f9af6505" id="r_ga4903ba74c9a8264d6a58f866f9af6505"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#ga4903ba74c9a8264d6a58f866f9af6505">NEFORCE_GET_LOGGER</a>(name)</td></tr>
 <tr class="memdesc:ga4903ba74c9a8264d6a58f866f9af6505"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建或获取命名 Logger  <br /></td></tr>
 <tr class="memitem:ga2b7f74f87f026b1f9cc26e19fec1eb2c" id="r_ga2b7f74f87f026b1f9cc26e19fec1eb2c"><td class="memItemLeft">
 #define&#160;</td><td class="memItemRight"><b>NEFORCE_ROOT_LOGGER</b>()</td></tr>
@@ -185,31 +185,31 @@ logger.hpp 的引用(Include)关系图:</div>
 <tr class="memitem:gae357b114cdf296b244c603d865fd100e" id="r_gae357b114cdf296b244c603d865fd100e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#gae357b114cdf296b244c603d865fd100e">NEFORCE_LOG_FATAL_FIRST_N</a>(n,  msg)</td></tr>
 <tr class="memdesc:gae357b114cdf296b244c603d865fd100e"><td class="mdescLeft">&#160;</td><td class="mdescRight">次数限制 FATAL 日志：仅前 n 次调用输出  <br /></td></tr>
 <tr id="define-members-1" class="groupHeader"><td colspan="2"><div class="groupHeader">命名 Logger 日志宏</div></td></tr>
-<tr><td colspan="2" class="ititle"><div class="groupText"><p>使用指定名称的 Logger 输出日志。Logger 在首次使用时通过 <a class="el" href="classlogger__registry.html#afcbe976bbf2a3b04fd9864c1178d8623" title="获取或创建指定名称的 Logger">logger_registry::get_logger()</a> 自动创建。 </p>
+<tr><td colspan="2" class="ititle"><div class="groupText"><p>使用指定名称的 Logger 输出日志。Logger 在首次使用时通过 logger_registry::get_logger() 自动创建。 </p>
 </div></td></tr>
-<tr class="memitem:gacd4854d7af6725b7776683351a70c084" id="r_gacd4854d7af6725b7776683351a70c084"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#gacd4854d7af6725b7776683351a70c084">NEFORCE_LOGGER_LOG_TRACE</a>(<a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>,  msg)</td></tr>
+<tr class="memitem:gacd4854d7af6725b7776683351a70c084" id="r_gacd4854d7af6725b7776683351a70c084"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#gacd4854d7af6725b7776683351a70c084">NEFORCE_LOGGER_LOG_TRACE</a>(name,  msg)</td></tr>
 <tr class="memdesc:gacd4854d7af6725b7776683351a70c084"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用命名 Logger 输出 TRACE 级别日志  <br /></td></tr>
-<tr class="memitem:gaf312f5a54971c1fd0cce1f64bf19582b" id="r_gaf312f5a54971c1fd0cce1f64bf19582b"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#gaf312f5a54971c1fd0cce1f64bf19582b">NEFORCE_LOGGER_LOGF_TRACE</a>(<a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>,  msg, ...)</td></tr>
+<tr class="memitem:gaf312f5a54971c1fd0cce1f64bf19582b" id="r_gaf312f5a54971c1fd0cce1f64bf19582b"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#gaf312f5a54971c1fd0cce1f64bf19582b">NEFORCE_LOGGER_LOGF_TRACE</a>(name,  msg, ...)</td></tr>
 <tr class="memdesc:gaf312f5a54971c1fd0cce1f64bf19582b"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用命名 Logger 输出格式化 TRACE 级别日志  <br /></td></tr>
-<tr class="memitem:ga81a0650146f3642c904b60049d901789" id="r_ga81a0650146f3642c904b60049d901789"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#ga81a0650146f3642c904b60049d901789">NEFORCE_LOGGER_LOG_DEBUG</a>(<a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>,  msg)</td></tr>
+<tr class="memitem:ga81a0650146f3642c904b60049d901789" id="r_ga81a0650146f3642c904b60049d901789"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#ga81a0650146f3642c904b60049d901789">NEFORCE_LOGGER_LOG_DEBUG</a>(name,  msg)</td></tr>
 <tr class="memdesc:ga81a0650146f3642c904b60049d901789"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用命名 Logger 输出 DEBUG 级别日志  <br /></td></tr>
-<tr class="memitem:ga015c2a6807174c04aa5d7acc35b9479c" id="r_ga015c2a6807174c04aa5d7acc35b9479c"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#ga015c2a6807174c04aa5d7acc35b9479c">NEFORCE_LOGGER_LOGF_DEBUG</a>(<a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>,  msg, ...)</td></tr>
+<tr class="memitem:ga015c2a6807174c04aa5d7acc35b9479c" id="r_ga015c2a6807174c04aa5d7acc35b9479c"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#ga015c2a6807174c04aa5d7acc35b9479c">NEFORCE_LOGGER_LOGF_DEBUG</a>(name,  msg, ...)</td></tr>
 <tr class="memdesc:ga015c2a6807174c04aa5d7acc35b9479c"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用命名 Logger 输出格式化 DEBUG 级别日志  <br /></td></tr>
-<tr class="memitem:gab5e9877673557806fd9ba7d523d511f1" id="r_gab5e9877673557806fd9ba7d523d511f1"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#gab5e9877673557806fd9ba7d523d511f1">NEFORCE_LOGGER_LOG_INFO</a>(<a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>,  msg)</td></tr>
+<tr class="memitem:gab5e9877673557806fd9ba7d523d511f1" id="r_gab5e9877673557806fd9ba7d523d511f1"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#gab5e9877673557806fd9ba7d523d511f1">NEFORCE_LOGGER_LOG_INFO</a>(name,  msg)</td></tr>
 <tr class="memdesc:gab5e9877673557806fd9ba7d523d511f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用命名 Logger 输出 INFO 级别日志  <br /></td></tr>
-<tr class="memitem:gae48d86dee88321afaf6b5cd098e1653b" id="r_gae48d86dee88321afaf6b5cd098e1653b"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#gae48d86dee88321afaf6b5cd098e1653b">NEFORCE_LOGGER_LOGF_INFO</a>(<a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>,  msg, ...)</td></tr>
+<tr class="memitem:gae48d86dee88321afaf6b5cd098e1653b" id="r_gae48d86dee88321afaf6b5cd098e1653b"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#gae48d86dee88321afaf6b5cd098e1653b">NEFORCE_LOGGER_LOGF_INFO</a>(name,  msg, ...)</td></tr>
 <tr class="memdesc:gae48d86dee88321afaf6b5cd098e1653b"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用命名 Logger 输出格式化 INFO 级别日志  <br /></td></tr>
-<tr class="memitem:gaa8b508c88bc134f07c708e0dd67b62b6" id="r_gaa8b508c88bc134f07c708e0dd67b62b6"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#gaa8b508c88bc134f07c708e0dd67b62b6">NEFORCE_LOGGER_LOG_WARN</a>(<a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>,  msg)</td></tr>
+<tr class="memitem:gaa8b508c88bc134f07c708e0dd67b62b6" id="r_gaa8b508c88bc134f07c708e0dd67b62b6"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#gaa8b508c88bc134f07c708e0dd67b62b6">NEFORCE_LOGGER_LOG_WARN</a>(name,  msg)</td></tr>
 <tr class="memdesc:gaa8b508c88bc134f07c708e0dd67b62b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用命名 Logger 输出 WARN 级别日志  <br /></td></tr>
-<tr class="memitem:ga65dcf26b7992d37fdb4ca35848085599" id="r_ga65dcf26b7992d37fdb4ca35848085599"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#ga65dcf26b7992d37fdb4ca35848085599">NEFORCE_LOGGER_LOGF_WARN</a>(<a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>,  msg, ...)</td></tr>
+<tr class="memitem:ga65dcf26b7992d37fdb4ca35848085599" id="r_ga65dcf26b7992d37fdb4ca35848085599"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#ga65dcf26b7992d37fdb4ca35848085599">NEFORCE_LOGGER_LOGF_WARN</a>(name,  msg, ...)</td></tr>
 <tr class="memdesc:ga65dcf26b7992d37fdb4ca35848085599"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用命名 Logger 输出格式化 WARN 级别日志  <br /></td></tr>
-<tr class="memitem:gad6fa4e338b0774d8ba04dd1fb07ca313" id="r_gad6fa4e338b0774d8ba04dd1fb07ca313"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#gad6fa4e338b0774d8ba04dd1fb07ca313">NEFORCE_LOGGER_LOG_ERROR</a>(<a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>,  msg)</td></tr>
+<tr class="memitem:gad6fa4e338b0774d8ba04dd1fb07ca313" id="r_gad6fa4e338b0774d8ba04dd1fb07ca313"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#gad6fa4e338b0774d8ba04dd1fb07ca313">NEFORCE_LOGGER_LOG_ERROR</a>(name,  msg)</td></tr>
 <tr class="memdesc:gad6fa4e338b0774d8ba04dd1fb07ca313"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用命名 Logger 输出 ERROR 级别日志  <br /></td></tr>
-<tr class="memitem:gac4dbc05197f36556a163bd5a1506db53" id="r_gac4dbc05197f36556a163bd5a1506db53"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#gac4dbc05197f36556a163bd5a1506db53">NEFORCE_LOGGER_LOGF_ERROR</a>(<a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>,  msg, ...)</td></tr>
+<tr class="memitem:gac4dbc05197f36556a163bd5a1506db53" id="r_gac4dbc05197f36556a163bd5a1506db53"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#gac4dbc05197f36556a163bd5a1506db53">NEFORCE_LOGGER_LOGF_ERROR</a>(name,  msg, ...)</td></tr>
 <tr class="memdesc:gac4dbc05197f36556a163bd5a1506db53"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用命名 Logger 输出格式化 ERROR 级别日志  <br /></td></tr>
-<tr class="memitem:ga63dcf0eb012d1222864aaa4af0cb4fa8" id="r_ga63dcf0eb012d1222864aaa4af0cb4fa8"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#ga63dcf0eb012d1222864aaa4af0cb4fa8">NEFORCE_LOGGER_LOG_FATAL</a>(<a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>,  msg)</td></tr>
+<tr class="memitem:ga63dcf0eb012d1222864aaa4af0cb4fa8" id="r_ga63dcf0eb012d1222864aaa4af0cb4fa8"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#ga63dcf0eb012d1222864aaa4af0cb4fa8">NEFORCE_LOGGER_LOG_FATAL</a>(name,  msg)</td></tr>
 <tr class="memdesc:ga63dcf0eb012d1222864aaa4af0cb4fa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用命名 Logger 输出 FATAL 级别日志  <br /></td></tr>
-<tr class="memitem:ga97594604c68f1a7faae73caaf5cfde22" id="r_ga97594604c68f1a7faae73caaf5cfde22"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#ga97594604c68f1a7faae73caaf5cfde22">NEFORCE_LOGGER_LOGF_FATAL</a>(<a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>,  msg, ...)</td></tr>
+<tr class="memitem:ga97594604c68f1a7faae73caaf5cfde22" id="r_ga97594604c68f1a7faae73caaf5cfde22"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#ga97594604c68f1a7faae73caaf5cfde22">NEFORCE_LOGGER_LOGF_FATAL</a>(name,  msg, ...)</td></tr>
 <tr class="memdesc:ga97594604c68f1a7faae73caaf5cfde22"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用命名 Logger 输出格式化 FATAL 级别日志  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>

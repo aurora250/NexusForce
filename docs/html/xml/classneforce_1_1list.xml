@@ -1,0 +1,2709 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1list" kind="class" language="C++" prot="public">
+    <compoundname>neforce::list</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">icollector&lt; list&lt; T, allocator&lt; list_node&lt; T &gt; &gt; &gt; &gt;</basecompoundref>
+    <includes refid="list_8hpp" local="no">list.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename Alloc</type>
+        <defval><ref refid="group___memory_allocator_1gabd6174043c688f04c1d71b9b21148ec1" kindref="member">allocator</ref>&lt;<ref refid="structneforce_1_1list__node" kindref="compound">list_node</ref>&lt;T&gt;&gt;</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1list_1a343ce1070af2969049505b9fc49b6e97" prot="public" static="no">
+        <type>T *</type>
+        <definition>using neforce::list&lt; T, Alloc &gt;::pointer = T*</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>neforce::list::pointer</qualifiedname>
+        <briefdescription>
+<para>指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="191" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="191" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1list_1a574998096d8b97a6de7e6eb45ed57b41" prot="public" static="no">
+        <type>T &amp;</type>
+        <definition>using neforce::list&lt; T, Alloc &gt;::reference = T&amp;</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>neforce::list::reference</qualifiedname>
+        <briefdescription>
+<para>引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="192" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="192" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1list_1ac3044d235bd602092e61ac5b5357d222" prot="public" static="no">
+        <type>const T *</type>
+        <definition>using neforce::list&lt; T, Alloc &gt;::const_pointer = const T*</definition>
+        <argsstring></argsstring>
+        <name>const_pointer</name>
+        <qualifiedname>neforce::list::const_pointer</qualifiedname>
+        <briefdescription>
+<para>常量指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="193" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="193" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1list_1a7a1222971d4535b5f0019b3459db70f8" prot="public" static="no">
+        <type>const T &amp;</type>
+        <definition>using neforce::list&lt; T, Alloc &gt;::const_reference = const T&amp;</definition>
+        <argsstring></argsstring>
+        <name>const_reference</name>
+        <qualifiedname>neforce::list::const_reference</qualifiedname>
+        <briefdescription>
+<para>常量引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="194" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="194" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1list_1ad63d54b0d009a063097d95dddeccbfc3" prot="public" static="no">
+        <type>T</type>
+        <definition>using neforce::list&lt; T, Alloc &gt;::value_type = T</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>neforce::list::value_type</qualifiedname>
+        <briefdescription>
+<para>值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="195" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="195" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1list_1a163c35ba6bf0967b513d35c70fac59df" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>using neforce::list&lt; T, Alloc &gt;::size_type = size_t</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>neforce::list::size_type</qualifiedname>
+        <briefdescription>
+<para>大小类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="196" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="196" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1list_1a0702cd51349c52e4d0f0eed943659673" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1gab2c4bc5144496796ce8a7feed7b8ad58" kindref="member">ptrdiff_t</ref></type>
+        <definition>using neforce::list&lt; T, Alloc &gt;::difference_type = ptrdiff_t</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>neforce::list::difference_type</qualifiedname>
+        <briefdescription>
+<para>差值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="197" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="197" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" prot="public" static="no">
+        <type>list_iterator&lt; false, <ref refid="classneforce_1_1list_1a3e9adef8fa2cdc8e48e840e94cc38efc" kindref="member">list</ref> &gt;</type>
+        <definition>using neforce::list&lt; T, Alloc &gt;::iterator = list_iterator&lt;false, list&gt;</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>neforce::list::iterator</qualifiedname>
+        <briefdescription>
+<para>迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="198" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="198" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1list_1a362fd7b8d774e7d78d76cb77460cbeb5" prot="public" static="no">
+        <type>list_iterator&lt; true, <ref refid="classneforce_1_1list_1a3e9adef8fa2cdc8e48e840e94cc38efc" kindref="member">list</ref> &gt;</type>
+        <definition>using neforce::list&lt; T, Alloc &gt;::const_iterator = list_iterator&lt;true, list&gt;</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <qualifiedname>neforce::list::const_iterator</qualifiedname>
+        <briefdescription>
+<para>常量迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="199" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="199" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1list_1a59eb8999edaab2961d8224438898f0a5" prot="public" static="no">
+        <type>_NEFORCE <ref refid="classneforce_1_1list_1a59eb8999edaab2961d8224438898f0a5" kindref="member">reverse_iterator</ref>&lt; <ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref> &gt;</type>
+        <definition>using neforce::list&lt; T, Alloc &gt;::reverse_iterator = _NEFORCE reverse_iterator&lt;iterator&gt;</definition>
+        <argsstring></argsstring>
+        <name>reverse_iterator</name>
+        <qualifiedname>neforce::list::reverse_iterator</qualifiedname>
+        <briefdescription>
+<para>反向迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="200" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="200" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1list_1ab670a3da48fd0b6135abea7765093bc4" prot="public" static="no">
+        <type>_NEFORCE <ref refid="classneforce_1_1list_1a59eb8999edaab2961d8224438898f0a5" kindref="member">reverse_iterator</ref>&lt; <ref refid="classneforce_1_1list_1a362fd7b8d774e7d78d76cb77460cbeb5" kindref="member">const_iterator</ref> &gt;</type>
+        <definition>using neforce::list&lt; T, Alloc &gt;::const_reverse_iterator = _NEFORCE reverse_iterator&lt;const_iterator&gt;</definition>
+        <argsstring></argsstring>
+        <name>const_reverse_iterator</name>
+        <qualifiedname>neforce::list::const_reverse_iterator</qualifiedname>
+        <briefdescription>
+<para>常量反向迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="201" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="201" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1list_1a7ce352d02a94d4764e432049a95567f1" prot="public" static="no">
+        <type>Alloc</type>
+        <definition>using neforce::list&lt; T, Alloc &gt;::allocator_type = Alloc</definition>
+        <argsstring></argsstring>
+        <name>allocator_type</name>
+        <qualifiedname>neforce::list::allocator_type</qualifiedname>
+        <briefdescription>
+<para>分配器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="202" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="202" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classneforce_1_1list_1a5a8c0dbd0f60fff0b6126468018fe768" prot="private" static="no">
+        <type><ref refid="structneforce_1_1list__node" kindref="compound">list_node</ref>&lt; T &gt;</type>
+        <definition>using neforce::list&lt; T, Alloc &gt;::node_type = list_node&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>node_type</name>
+        <qualifiedname>neforce::list::node_type</qualifiedname>
+        <briefdescription>
+<para>节点类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="205" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="205" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1list_1aef6c2e11a745211e6ff32119622fa343" prot="private" static="no">
+        <type>node_type *</type>
+        <definition>using neforce::list&lt; T, Alloc &gt;::link_type = node_type*</definition>
+        <argsstring></argsstring>
+        <name>link_type</name>
+        <qualifiedname>neforce::list::link_type</qualifiedname>
+        <briefdescription>
+<para>节点指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="206" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="206" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1list_1a2de0795506c5f4c6f995b3024accc833" prot="private" static="no" mutable="no">
+        <type>link_type</type>
+        <definition>link_type neforce::list&lt; T, Alloc &gt;::head_</definition>
+        <argsstring></argsstring>
+        <name>head_</name>
+        <qualifiedname>neforce::list::head_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>头节点指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="208" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="208" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1list_1abb2863717272acb9eba17c670ab46245" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1compressed__pair" kindref="compound">compressed_pair</ref>&lt; <ref refid="classneforce_1_1list_1a7ce352d02a94d4764e432049a95567f1" kindref="member">allocator_type</ref>, <ref refid="classneforce_1_1list_1a163c35ba6bf0967b513d35c70fac59df" kindref="member">size_type</ref> &gt;</type>
+        <definition>compressed_pair&lt;allocator_type, size_type&gt; neforce::list&lt; T, Alloc &gt;::pair_</definition>
+        <argsstring></argsstring>
+        <name>pair_</name>
+        <qualifiedname>neforce::list::pair_</qualifiedname>
+        <initializer>{<ref refid="structneforce_1_1default__construct__tag" kindref="compound">default_construct_tag</ref>{}, 0}</initializer>
+        <briefdescription>
+<para>压缩存储的分配器和大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="209" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="209" bodyend="209"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classneforce_1_1list_1ab5b40e2c693e14579bbfad0dc5161aca" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>struct</type>
+        <definition>friend struct list_iterator</definition>
+        <argsstring></argsstring>
+        <name>list_iterator</name>
+        <qualifiedname>neforce::list::list_iterator</qualifiedname>
+        <param>
+          <type>list_iterator</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="212" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="212" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1list_1a34e31bfea34532047ddc463f412fb0be" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>link_type</type>
+        <definition>link_type neforce::list&lt; T, Alloc &gt;::create_node</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>create_node</name>
+        <qualifiedname>neforce::list::create_node</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>创建新节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>新创建的节点指针</para>
+</simplesect>
+分配内存并构造节点，如果构造失败则释放内存。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="224" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="224" bodyend="233"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a2f943bc13c737f3eaadeeaf3ce4fd92a" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; node_type &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::destroy_node</definition>
+        <argsstring>(link_type p)</argsstring>
+        <name>destroy_node</name>
+        <qualifiedname>neforce::list::destroy_node</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>销毁节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要销毁的节点指针</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+析构节点数据并释放内存。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="241" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="241" bodyend="244"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a76f7bf822a7a7ba9b2fbdb59d039259b" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::init_header</definition>
+        <argsstring>()</argsstring>
+        <name>init_header</name>
+        <qualifiedname>neforce::list::init_header</qualifiedname>
+        <briefdescription>
+<para>初始化头节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>创建并初始化哨兵节点，其prev和next都指向自身。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="251" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="251" bodyend="260"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1list_1a3e9adef8fa2cdc8e48e840e94cc38efc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::list&lt; T, Alloc &gt;::list</definition>
+        <argsstring>()</argsstring>
+        <name>list</name>
+        <qualifiedname>neforce::list::list</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>构造一个空链表。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="268" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="268" bodyend="268"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1ab61fe32592ae9d2b3bd063c93cec84ba" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::list&lt; T, Alloc &gt;::list</definition>
+        <argsstring>(size_type n)</argsstring>
+        <name>list</name>
+        <qualifiedname>neforce::list::list</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a163c35ba6bf0967b513d35c70fac59df" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>构造包含n个默认构造元素的链表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素数量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="274" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="274" bodyend="275"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a4a8b071cd5b5af7e6df88935dabf659f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::list&lt; T, Alloc &gt;::list</definition>
+        <argsstring>(size_type n, const T &amp;value)</argsstring>
+        <name>list</name>
+        <qualifiedname>neforce::list::list</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a163c35ba6bf0967b513d35c70fac59df" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>构造包含n个指定值元素的链表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素数量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="282" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="282" bodyend="292"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a3f24c981613dba85fb83fc8af366d2f9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga4f7b2f70ba1539ec3326d52e89698f13" kindref="member">is_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::list&lt; T, Alloc &gt;::list</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>list</name>
+        <qualifiedname>neforce::list::list</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="301" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="301" bodyend="312"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a9ff79b9d3def40be095bbf5f1c04cc30" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::list&lt; T, Alloc &gt;::list</definition>
+        <argsstring>(std::initializer_list&lt; T &gt; ilist)</argsstring>
+        <name>list</name>
+        <qualifiedname>neforce::list::list</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; T &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="318" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="318" bodyend="319"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1adae53643960d9a9634d7ec7b4ee9fab0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a3e9adef8fa2cdc8e48e840e94cc38efc" kindref="member">list</ref> &amp;</type>
+        <definition>list &amp; neforce::list&lt; T, Alloc &gt;::operator=</definition>
+        <argsstring>(std::initializer_list&lt; T &gt; ilist)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::list::operator=</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; T &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="326" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="326" bodyend="330"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1afb3df1c0d6778652144d329355469f6c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::list&lt; T, Alloc &gt;::list</definition>
+        <argsstring>(const list &amp;other)</argsstring>
+        <name>list</name>
+        <qualifiedname>neforce::list::list</qualifiedname>
+        <param>
+          <type>const list &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源链表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="336" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="336" bodyend="337"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1afe4939695f4a98d091ace2d23974f361" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a3e9adef8fa2cdc8e48e840e94cc38efc" kindref="member">list</ref> &amp;</type>
+        <definition>list &amp; neforce::list&lt; T, Alloc &gt;::operator=</definition>
+        <argsstring>(const list &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::list::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1list_1a3e9adef8fa2cdc8e48e840e94cc38efc" kindref="member">list</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源链表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="344" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="344" bodyend="351"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a1689a7e8ebd085100876080997ce1736" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_swappable_v&lt; compressed_pair&lt; allocator_type, size_type &gt; &gt;" virt="non-virtual">
+        <type></type>
+        <definition>neforce::list&lt; T, Alloc &gt;::list</definition>
+        <argsstring>(list &amp;&amp;other)</argsstring>
+        <name>list</name>
+        <qualifiedname>neforce::list::list</qualifiedname>
+        <param>
+          <type>list &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源链表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="357" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="357" bodyend="360"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a9dd56edd6208b374e59b99a2f19551db" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_swappable_v&lt; compressed_pair&lt; allocator_type, size_type &gt; &gt; &amp;&amp;is_nothrow_destructible_v&lt; node_type &gt;" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a3e9adef8fa2cdc8e48e840e94cc38efc" kindref="member">list</ref> &amp;</type>
+        <definition>list &amp; neforce::list&lt; T, Alloc &gt;::operator=</definition>
+        <argsstring>(list &amp;&amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::list::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a3e9adef8fa2cdc8e48e840e94cc38efc" kindref="member">list</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源链表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="367" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="367" bodyend="375"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1ac5e04045b28cfc709e1a0a79dbfb16f2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::list&lt; T, Alloc &gt;::~list</definition>
+        <argsstring>()</argsstring>
+        <name>~list</name>
+        <qualifiedname>neforce::list::~list</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>销毁所有元素并释放内存。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="382" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="382" bodyend="390"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a202307b17eaf5ebb2a853faec4b10e42" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::list&lt; T, Alloc &gt;::begin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>neforce::list::begin</qualifiedname>
+        <briefdescription>
+<para>获取起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="396" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="396" bodyend="396"/>
+        <referencedby refid="classneforce_1_1deque_1a59f5decf7ce283e1f86051cb2d44ec78" compoundref="deque_8hpp" startline="1264" endline="1266">neforce::deque&lt; T, Alloc, BufSize &gt;::insert</referencedby>
+        <referencedby refid="group___compare_algorithms_1gae00d0e8f79ee598628b504570cf16432" compoundref="algorithm_2compare_8hpp" startline="270" endline="272">neforce::max</referencedby>
+        <referencedby refid="classneforce_1_1list_1acee18998e056b76ce0f7a3c663642c37" compoundref="list_8hpp" startline="911" endline="934">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::merge_if</referencedby>
+        <referencedby refid="group___compare_algorithms_1ga4a6cdb3b098594bd7f2066b678981b51" compoundref="algorithm_2compare_8hpp" startline="320" endline="322">neforce::min</referencedby>
+        <referencedby refid="classneforce_1_1list_1a4bd3625c1e495e1710c25b981e9cd150" compoundref="list_8hpp" startline="851" endline="858">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::splice</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1ad324ccc01be09a167fdda863fce62e0f" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::list&lt; T, Alloc &gt;::end</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>neforce::list::end</qualifiedname>
+        <briefdescription>
+<para>获取结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向无效元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="402" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="402" bodyend="402"/>
+        <referencedby refid="classneforce_1_1deque_1a59f5decf7ce283e1f86051cb2d44ec78" compoundref="deque_8hpp" startline="1264" endline="1266">neforce::deque&lt; T, Alloc, BufSize &gt;::insert</referencedby>
+        <referencedby refid="group___compare_algorithms_1gae00d0e8f79ee598628b504570cf16432" compoundref="algorithm_2compare_8hpp" startline="270" endline="272">neforce::max</referencedby>
+        <referencedby refid="classneforce_1_1list_1acee18998e056b76ce0f7a3c663642c37" compoundref="list_8hpp" startline="911" endline="934">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::merge_if</referencedby>
+        <referencedby refid="group___compare_algorithms_1ga4a6cdb3b098594bd7f2066b678981b51" compoundref="algorithm_2compare_8hpp" startline="320" endline="322">neforce::min</referencedby>
+        <referencedby refid="classneforce_1_1list_1a4bd3625c1e495e1710c25b981e9cd150" compoundref="list_8hpp" startline="851" endline="858">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::splice</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a2a85c9ded3bae6348a505b558ca00695" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a362fd7b8d774e7d78d76cb77460cbeb5" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::list&lt; T, Alloc &gt;::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>neforce::list::begin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="408" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="408" bodyend="408"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a77fd8e60a7acb30b16ca80e3329608f0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a362fd7b8d774e7d78d76cb77460cbeb5" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::list&lt; T, Alloc &gt;::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>neforce::list::end</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向无效元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="414" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="414" bodyend="414"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1aa87ae366bd1001b77c4057e427b6cce5" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a59eb8999edaab2961d8224438898f0a5" kindref="member">reverse_iterator</ref></type>
+        <definition>reverse_iterator neforce::list&lt; T, Alloc &gt;::rbegin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>rbegin</name>
+        <qualifiedname>neforce::list::rbegin</qualifiedname>
+        <briefdescription>
+<para>获取反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向无效元素的反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="420" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="420" bodyend="420"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a7e98499630053e434abc23325ea1deab" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a59eb8999edaab2961d8224438898f0a5" kindref="member">reverse_iterator</ref></type>
+        <definition>reverse_iterator neforce::list&lt; T, Alloc &gt;::rend</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>rend</name>
+        <qualifiedname>neforce::list::rend</qualifiedname>
+        <briefdescription>
+<para>获取反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="426" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="426" bodyend="426"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a741e6049cb6d9988eca8082611f69de8" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1ab670a3da48fd0b6135abea7765093bc4" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator neforce::list&lt; T, Alloc &gt;::rbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rbegin</name>
+        <qualifiedname>neforce::list::rbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向无效元素的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="432" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="432" bodyend="432"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1af2a8a64c1143d6f0064b254980bce6c5" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1ab670a3da48fd0b6135abea7765093bc4" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator neforce::list&lt; T, Alloc &gt;::rend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rend</name>
+        <qualifiedname>neforce::list::rend</qualifiedname>
+        <briefdescription>
+<para>获取常量反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="438" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="438" bodyend="438"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a330fbfca54c9d7f548ed7e41070bfd40" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a362fd7b8d774e7d78d76cb77460cbeb5" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::list&lt; T, Alloc &gt;::cbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cbegin</name>
+        <qualifiedname>neforce::list::cbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="444" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="444" bodyend="444"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a1f468b5c9d3370c789b85545cce23090" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a362fd7b8d774e7d78d76cb77460cbeb5" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::list&lt; T, Alloc &gt;::cend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cend</name>
+        <qualifiedname>neforce::list::cend</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向无效元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="450" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="450" bodyend="450"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a21c55939e4e7380e8f6d1c1b79f03bec" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1ab670a3da48fd0b6135abea7765093bc4" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator neforce::list&lt; T, Alloc &gt;::crbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>crbegin</name>
+        <qualifiedname>neforce::list::crbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向无效元素的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="456" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="456" bodyend="456"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a78afb76354dbeb54ee8260c9957de78f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1ab670a3da48fd0b6135abea7765093bc4" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator neforce::list&lt; T, Alloc &gt;::crend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>crend</name>
+        <qualifiedname>neforce::list::crend</qualifiedname>
+        <briefdescription>
+<para>获取常量反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="462" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="462" bodyend="462"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a5445d1b5ecd7bb7a3af7822e8515e184" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a163c35ba6bf0967b513d35c70fac59df" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::list&lt; T, Alloc &gt;::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>neforce::list::size</qualifiedname>
+        <briefdescription>
+<para>获取当前元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="468" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="468" bodyend="468"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a75e53ec59a07d8156556dcb3515f2fd9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a163c35ba6bf0967b513d35c70fac59df" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::list&lt; T, Alloc &gt;::max_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>max_size</name>
+        <qualifiedname>neforce::list::max_size</qualifiedname>
+        <briefdescription>
+<para>获取最大可能大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="474" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="474" bodyend="474"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1aacad383fc0091dbaaed125243e0f9d02" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::list&lt; T, Alloc &gt;::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>neforce::list::empty</qualifiedname>
+        <briefdescription>
+<para>检查是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否为空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="480" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="480" bodyend="480"/>
+        <referencedby refid="classneforce_1_1list_1a4bd3625c1e495e1710c25b981e9cd150" compoundref="list_8hpp" startline="851" endline="858">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::splice</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1aba0edefb03db276a77f78140b5e07dff" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a574998096d8b97a6de7e6eb45ed57b41" kindref="member">reference</ref></type>
+        <definition>reference neforce::list&lt; T, Alloc &gt;::front</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>front</name>
+        <qualifiedname>neforce::list::front</qualifiedname>
+        <briefdescription>
+<para>访问第一个元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>第一个元素的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="486" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="486" bodyend="489"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a18a363e635e8f5e535a80b3ff63010f0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a7a1222971d4535b5f0019b3459db70f8" kindref="member">const_reference</ref></type>
+        <definition>const_reference neforce::list&lt; T, Alloc &gt;::front</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>front</name>
+        <qualifiedname>neforce::list::front</qualifiedname>
+        <briefdescription>
+<para>访问第一个常量元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>第一个元素的常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="495" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="495" bodyend="498"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1afc63d5f019a86d566e010a4aff1a2f75" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a574998096d8b97a6de7e6eb45ed57b41" kindref="member">reference</ref></type>
+        <definition>reference neforce::list&lt; T, Alloc &gt;::back</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>back</name>
+        <qualifiedname>neforce::list::back</qualifiedname>
+        <briefdescription>
+<para>访问最后一个元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最后一个元素的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="504" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="504" bodyend="507"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1ab4b2fd0e137d02d9738b8c9ce1ac29c7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a7a1222971d4535b5f0019b3459db70f8" kindref="member">const_reference</ref></type>
+        <definition>const_reference neforce::list&lt; T, Alloc &gt;::back</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>back</name>
+        <qualifiedname>neforce::list::back</qualifiedname>
+        <briefdescription>
+<para>访问最后一个常量元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最后一个元素的常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="513" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="513" bodyend="516"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a88570737c77532c69bd2a0af3c337cf1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::list&lt; T, Alloc &gt;::emplace</definition>
+        <argsstring>(iterator position, Args &amp;&amp;... args)</argsstring>
+        <name>emplace</name>
+        <qualifiedname>neforce::list::emplace</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在指定位置构造元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="526" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="526" bodyend="534"/>
+        <referencedby refid="classneforce_1_1list_1a45f52f209a0c6e1f46184a0287aae587" compoundref="list_8hpp" startline="543" endline="545">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::emplace_back</referencedby>
+        <referencedby refid="classneforce_1_1list_1a647d3045f2bae78607e34b0987fed362" compoundref="list_8hpp" startline="554" endline="556">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::emplace_front</referencedby>
+        <referencedby refid="classneforce_1_1list_1a749860b84826d9755747a73bb9ab5a45" compoundref="list_8hpp" startline="626" endline="626">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::insert</referencedby>
+        <referencedby refid="classneforce_1_1list_1a5f9ff7d5ed872eab6ceaf3251b16fb34" compoundref="list_8hpp" startline="634" endline="634">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::insert</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a45f52f209a0c6e1f46184a0287aae587" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::list&lt; T, Alloc &gt;::emplace_back</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace_back</name>
+        <qualifiedname>neforce::list::emplace_back</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在末尾构造元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="543" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="543" bodyend="545"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a647d3045f2bae78607e34b0987fed362" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::list&lt; T, Alloc &gt;::emplace_front</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace_front</name>
+        <qualifiedname>neforce::list::emplace_front</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在开头构造元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="554" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="554" bodyend="556"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a34cfd3800cdb2dcc075083a505349847" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::push_front</definition>
+        <argsstring>(const T &amp;value)</argsstring>
+        <name>push_front</name>
+        <qualifiedname>neforce::list::push_front</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在开头拷贝插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="562" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="562" bodyend="562"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a41c83873b6e5d20b6c3d51e183b56e59" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::push_front</definition>
+        <argsstring>(T &amp;&amp;value)</argsstring>
+        <name>push_front</name>
+        <qualifiedname>neforce::list::push_front</qualifiedname>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在开头移动插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="568" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="568" bodyend="568"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a84c65e934083906847b7c097f8881b08" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::push_back</definition>
+        <argsstring>(const T &amp;value)</argsstring>
+        <name>push_back</name>
+        <qualifiedname>neforce::list::push_back</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在末尾拷贝插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="574" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="574" bodyend="574"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a7d824dbed8a40411458574b858c4125b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::push_back</definition>
+        <argsstring>(T &amp;&amp;value)</argsstring>
+        <name>push_back</name>
+        <qualifiedname>neforce::list::push_back</qualifiedname>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在末尾移动插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="580" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="580" bodyend="580"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a4571d093da9e7677b925cd7e951acc3b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::pop_front</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>pop_front</name>
+        <qualifiedname>neforce::list::pop_front</qualifiedname>
+        <briefdescription>
+<para>移除开头元素 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="585" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="585" bodyend="585"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1ab13005e97707bdffa3491be5c9234a20" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::pop_back</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>pop_back</name>
+        <qualifiedname>neforce::list::pop_back</qualifiedname>
+        <briefdescription>
+<para>移除末尾元素 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="590" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="590" bodyend="590"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1aafd6b84a4f0792648f0718ec2370dfb7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::assign</definition>
+        <argsstring>(const size_type n, const T &amp;value)</argsstring>
+        <name>assign</name>
+        <qualifiedname>neforce::list::assign</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1list_1a163c35ba6bf0967b513d35c70fac59df" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>赋值n个指定值的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素数量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要赋的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="597" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="597" bodyend="600"/>
+        <referencedby refid="classneforce_1_1list_1a5a95d736bdbcde8a0fe0b3521e9518d8" compoundref="list_8hpp" startline="618" endline="618">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::assign</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a94ce2608148a744dc5792e697cd5601f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga4f7b2f70ba1539ec3326d52e89698f13" kindref="member">is_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::assign</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>assign</name>
+        <qualifiedname>neforce::list::assign</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="609" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="609" bodyend="612"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a5a95d736bdbcde8a0fe0b3521e9518d8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::assign</definition>
+        <argsstring>(std::initializer_list&lt; T &gt; ilist)</argsstring>
+        <name>assign</name>
+        <qualifiedname>neforce::list::assign</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; T &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="618" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="618" bodyend="618"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a749860b84826d9755747a73bb9ab5a45" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::list&lt; T, Alloc &gt;::insert</definition>
+        <argsstring>(iterator position, const T &amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::list::insert</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在指定位置拷贝插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="626" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="626" bodyend="626"/>
+        <referencedby refid="classneforce_1_1list_1aafd6b84a4f0792648f0718ec2370dfb7" compoundref="list_8hpp" startline="597" endline="600">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::assign</referencedby>
+        <referencedby refid="classneforce_1_1list_1a94ce2608148a744dc5792e697cd5601f" compoundref="list_8hpp" startline="609" endline="612">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::assign</referencedby>
+        <referencedby refid="classneforce_1_1list_1a1798913cc46afc05797b7cb4995aa672" compoundref="list_8hpp" startline="691" endline="693">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::insert</referencedby>
+        <referencedby refid="classneforce_1_1list_1adae53643960d9a9634d7ec7b4ee9fab0" compoundref="list_8hpp" startline="326" endline="330">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1list_1a84c65e934083906847b7c097f8881b08" compoundref="list_8hpp" startline="574" endline="574">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::push_back</referencedby>
+        <referencedby refid="classneforce_1_1list_1a7d824dbed8a40411458574b858c4125b" compoundref="list_8hpp" startline="580" endline="580">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::push_back</referencedby>
+        <referencedby refid="classneforce_1_1list_1a34cfd3800cdb2dcc075083a505349847" compoundref="list_8hpp" startline="562" endline="562">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::push_front</referencedby>
+        <referencedby refid="classneforce_1_1list_1a41c83873b6e5d20b6c3d51e183b56e59" compoundref="list_8hpp" startline="568" endline="568">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::push_front</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a5f9ff7d5ed872eab6ceaf3251b16fb34" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::list&lt; T, Alloc &gt;::insert</definition>
+        <argsstring>(iterator position, T &amp;&amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::list::insert</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在指定位置移动插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="634" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="634" bodyend="634"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1ab8778e60c0fb0b55e1215274447407ff" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga4f7b2f70ba1539ec3326d52e89698f13" kindref="member">is_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::insert</definition>
+        <argsstring>(iterator position, Iterator first, Iterator last)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::list::insert</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将[first, last)范围内的元素插入到position之前。 如果插入过程中发生异常，会回滚已插入的元素。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="647" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="647" bodyend="684"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a1798913cc46afc05797b7cb4995aa672" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::insert</definition>
+        <argsstring>(iterator position, std::initializer_list&lt; T &gt; ilist)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::list::insert</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>std::initializer_list&lt; T &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表插入 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="691" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="691" bodyend="693"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a753a383edb60238e84701be51c6cde48" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::insert</definition>
+        <argsstring>(iterator position, size_type n, const T &amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::list::insert</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a163c35ba6bf0967b513d35c70fac59df" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>插入n个指定值的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素数量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+如果插入过程中发生异常，会回滚已插入的元素。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="703" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="703" bodyend="739"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1add2d5ccc41db43f8f45cfe53e40cf5e7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; node_type &gt;" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::list&lt; T, Alloc &gt;::erase</definition>
+        <argsstring>(iterator position)</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::list::erase</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>删除指定位置的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向被删除元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="746" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="746" bodyend="756"/>
+        <referencedby refid="classneforce_1_1list_1a772c8605d48ab86ce1ddc0f6ef08fc91" compoundref="list_8hpp" startline="764" endline="769">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::erase</referencedby>
+        <referencedby refid="classneforce_1_1list_1ab13005e97707bdffa3491be5c9234a20" compoundref="list_8hpp" startline="590" endline="590">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::pop_back</referencedby>
+        <referencedby refid="classneforce_1_1list_1a4571d093da9e7677b925cd7e951acc3b" compoundref="list_8hpp" startline="585" endline="585">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::pop_front</referencedby>
+        <referencedby refid="classneforce_1_1list_1aab03e4ead86aa297bd88f70237697418" compoundref="list_8hpp" startline="825" endline="834">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::remove_if</referencedby>
+        <referencedby refid="classneforce_1_1list_1a2de4f47023b192fdb75297668f10e264" compoundref="list_8hpp" startline="964" endline="978">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::unique_if</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a772c8605d48ab86ce1ddc0f6ef08fc91" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; node_type &gt;" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::list&lt; T, Alloc &gt;::erase</definition>
+        <argsstring>(iterator first, iterator last)</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::list::erase</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除指定范围内的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向最后一个被删除元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="764" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="764" bodyend="769"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1adafe7bb9c0afa418cc21fca0d5dbc568" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; node_type &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>neforce::list::clear</qualifiedname>
+        <briefdescription>
+<para>清空链表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>销毁所有元素，但保留哨兵节点。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="776" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="776" bodyend="786"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1afc01e1bd6f9388aa8e505b2131b9566a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_swappable_v&lt; allocator_type &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::swap</definition>
+        <argsstring>(list &amp;other)</argsstring>
+        <name>swap</name>
+        <qualifiedname>neforce::list::swap</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a3e9adef8fa2cdc8e48e840e94cc38efc" kindref="member">list</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个链表的内容 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的另一个链表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="792" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="792" bodyend="795"/>
+        <referencedby refid="classneforce_1_1list_1a1689a7e8ebd085100876080997ce1736" compoundref="list_8hpp" startline="357" endline="360">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::list</referencedby>
+        <referencedby refid="classneforce_1_1list_1afe4939695f4a98d091ace2d23974f361" compoundref="list_8hpp" startline="344" endline="351">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1list_1a9dd56edd6208b374e59b99a2f19551db" compoundref="list_8hpp" startline="367" endline="375">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1ab5986b772d30e83298b4f297aca968d0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::transfer</definition>
+        <argsstring>(iterator position, iterator first, iterator last)</argsstring>
+        <name>transfer</name>
+        <qualifiedname>neforce::list::transfer</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>传输元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将[first, last)范围内的元素从当前链表传输到position之前。 此操作为常数时间，不涉及元素构造和析构。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="806" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="806" bodyend="817"/>
+        <referencedby refid="classneforce_1_1list_1acee18998e056b76ce0f7a3c663642c37" compoundref="list_8hpp" startline="911" endline="934">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::merge_if</referencedby>
+        <referencedby refid="classneforce_1_1list_1a4bd3625c1e495e1710c25b981e9cd150" compoundref="list_8hpp" startline="851" endline="858">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::splice</referencedby>
+        <referencedby refid="classneforce_1_1list_1a610a26faeb5eb453f913a304edb81097" compoundref="list_8hpp" startline="888" endline="899">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::splice</referencedby>
+        <referencedby refid="classneforce_1_1list_1ad9ba8b7e70303790d95439152f7b9462" compoundref="list_8hpp" startline="868" endline="877">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::splice</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1aab03e4ead86aa297bd88f70237697418" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Pred</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::remove_if</definition>
+        <argsstring>(Pred pred)</argsstring>
+        <name>remove_if</name>
+        <qualifiedname>neforce::list::remove_if</qualifiedname>
+        <param>
+          <type>Pred</type>
+          <declname>pred</declname>
+        </param>
+        <briefdescription>
+<para>根据谓词移除元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Pred</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>谓词类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pred</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>一元谓词，返回true的元素将被移除 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="825" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="825" bodyend="834"/>
+        <referencedby refid="classneforce_1_1list_1a2e2995457fb3a32ddf0259bf0ea254af" compoundref="list_8hpp" startline="840" endline="842">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::remove</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a2e2995457fb3a32ddf0259bf0ea254af" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::remove</definition>
+        <argsstring>(const T &amp;value)</argsstring>
+        <name>remove</name>
+        <qualifiedname>neforce::list::remove</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>移除指定值的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移除的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="840" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="840" bodyend="842"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a4bd3625c1e495e1710c25b981e9cd150" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::splice</definition>
+        <argsstring>(iterator position, list &amp;other)</argsstring>
+        <name>splice</name>
+        <qualifiedname>neforce::list::splice</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a3e9adef8fa2cdc8e48e840e94cc38efc" kindref="member">list</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拼接整个链表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源链表</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将other链表的所有元素拼接到position之前，other变为空链表。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="851" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="851" bodyend="858"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1ad9ba8b7e70303790d95439152f7b9462" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::splice</definition>
+        <argsstring>(iterator position, list &amp;other, iterator iter)</argsstring>
+        <name>splice</name>
+        <qualifiedname>neforce::list::splice</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a3e9adef8fa2cdc8e48e840e94cc38efc" kindref="member">list</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+          <declname>iter</declname>
+        </param>
+        <briefdescription>
+<para>拼接单个元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源链表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>iter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指向要拼接元素的迭代器</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将other链表中的iter指向的元素拼接到position之前。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="868" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="868" bodyend="877"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a610a26faeb5eb453f913a304edb81097" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::splice</definition>
+        <argsstring>(iterator position, list &amp;other, iterator first, iterator last)</argsstring>
+        <name>splice</name>
+        <qualifiedname>neforce::list::splice</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a3e9adef8fa2cdc8e48e840e94cc38efc" kindref="member">list</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" kindref="member">iterator</ref></type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>拼接范围内的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源链表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将other链表中[first, last)范围内的元素拼接到position之前。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="888" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="888" bodyend="899"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1acee18998e056b76ce0f7a3c663642c37" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Pred</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::merge_if</definition>
+        <argsstring>(list &amp;other, Pred pred)</argsstring>
+        <name>merge_if</name>
+        <qualifiedname>neforce::list::merge_if</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a3e9adef8fa2cdc8e48e840e94cc38efc" kindref="member">list</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <param>
+          <type>Pred</type>
+          <declname>pred</declname>
+        </param>
+        <briefdescription>
+<para>合并两个有序链表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Pred</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较谓词类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要合并的链表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pred</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>二元比较谓词</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将有序链表other合并到当前有序链表中，合并后仍保持有序。 使用pred作为比较准则。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="911" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="911" bodyend="934"/>
+        <referencedby refid="classneforce_1_1list_1af3aa3a9c109d6f7edb5c3b78ef4e682f" compoundref="list_8hpp" startline="940" endline="940">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::merge</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1af3aa3a9c109d6f7edb5c3b78ef4e682f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::merge</definition>
+        <argsstring>(list &amp;other)</argsstring>
+        <name>merge</name>
+        <qualifiedname>neforce::list::merge</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a3e9adef8fa2cdc8e48e840e94cc38efc" kindref="member">list</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>合并两个有序链表（默认使用小于比较） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要合并的链表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="940" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="940" bodyend="940"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1aabdb72ec39382fae75294b5acecde155" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::reverse</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>reverse</name>
+        <qualifiedname>neforce::list::reverse</qualifiedname>
+        <briefdescription>
+<para>反转链表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="945" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="945" bodyend="954"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a2de4f47023b192fdb75297668f10e264" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Pred</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::unique_if</definition>
+        <argsstring>(Pred pred) noexcept</argsstring>
+        <name>unique_if</name>
+        <qualifiedname>neforce::list::unique_if</qualifiedname>
+        <param>
+          <type>Pred</type>
+          <declname>pred</declname>
+        </param>
+        <briefdescription>
+<para>移除连续的重复元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Pred</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>二元谓词类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pred</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>用于判断两个元素是否相等的谓词</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+移除链表中所有连续重复的元素，只保留第一个。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="964" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="964" bodyend="978"/>
+        <referencedby refid="classneforce_1_1list_1a6fba573e3becc1076165df3cbabed98f" compoundref="list_8hpp" startline="983" endline="983">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::unique</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a6fba573e3becc1076165df3cbabed98f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::unique</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>unique</name>
+        <qualifiedname>neforce::list::unique</qualifiedname>
+        <briefdescription>
+<para>移除连续的重复元素（默认使用等于比较） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="983" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="983" bodyend="983"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1afcadc2a3d3110be487dea9e41ab89d16" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Pred</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::sort_if</definition>
+        <argsstring>(Pred pred)</argsstring>
+        <name>sort_if</name>
+        <qualifiedname>neforce::list::sort_if</qualifiedname>
+        <param>
+          <type>Pred</type>
+          <declname>pred</declname>
+        </param>
+        <briefdescription>
+<para>对链表进行排序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Pred</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较谓词类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pred</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>二元比较谓词</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+使用插入排序算法对链表进行排序。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="993" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="993" bodyend="1008"/>
+        <referencedby refid="classneforce_1_1list_1acaac44bfe84c0df827e790f0b35726cd" compoundref="list_8hpp" startline="1013" endline="1013">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::sort</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1acaac44bfe84c0df827e790f0b35726cd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::list&lt; T, Alloc &gt;::sort</definition>
+        <argsstring>()</argsstring>
+        <name>sort</name>
+        <qualifiedname>neforce::list::sort</qualifiedname>
+        <briefdescription>
+<para>对链表进行排序（默认使用小于比较） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="1013" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="1013" bodyend="1013"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a77cadef56a57dc05126b69af43ac194a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a7a1222971d4535b5f0019b3459db70f8" kindref="member">const_reference</ref></type>
+        <definition>const_reference neforce::list&lt; T, Alloc &gt;::at</definition>
+        <argsstring>(size_type position) const</argsstring>
+        <name>at</name>
+        <qualifiedname>neforce::list::at</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a163c35ba6bf0967b513d35c70fac59df" kindref="member">size_type</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>常量索引访问 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置元素的常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="1020" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="1020" bodyend="1026"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a5c6700b7245cfc0615fce62792648f11" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a574998096d8b97a6de7e6eb45ed57b41" kindref="member">reference</ref></type>
+        <definition>reference neforce::list&lt; T, Alloc &gt;::at</definition>
+        <argsstring>(size_type position)</argsstring>
+        <name>at</name>
+        <qualifiedname>neforce::list::at</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1list_1a163c35ba6bf0967b513d35c70fac59df" kindref="member">size_type</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>索引访问 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置元素的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="1033" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="1033" bodyend="1039"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a67881bcd750d42ae7d36900067d82f76" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a7a1222971d4535b5f0019b3459db70f8" kindref="member">const_reference</ref></type>
+        <definition>const_reference neforce::list&lt; T, Alloc &gt;::operator[]</definition>
+        <argsstring>(const size_type position) const</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>neforce::list::operator[]</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1list_1a163c35ba6bf0967b513d35c70fac59df" kindref="member">size_type</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>常量下标访问操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置元素的常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="1046" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="1046" bodyend="1046"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a296321064d54287a5d807ec616abc279" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1list_1a574998096d8b97a6de7e6eb45ed57b41" kindref="member">reference</ref></type>
+        <definition>reference neforce::list&lt; T, Alloc &gt;::operator[]</definition>
+        <argsstring>(const size_type position)</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>neforce::list::operator[]</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1list_1a163c35ba6bf0967b513d35c70fac59df" kindref="member">size_type</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>下标访问操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置元素的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="1053" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="1053" bodyend="1053"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1a4eedbcc20f4d8e050a98a1201d54c76c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(_NEFORCE equal(cbegin(), cend(), rhs.cbegin()))" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::list&lt; T, Alloc &gt;::equal_to</definition>
+        <argsstring>(const list &amp;rhs) const</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>neforce::list::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1list_1a3e9adef8fa2cdc8e48e840e94cc38efc" kindref="member">list</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧链表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果两个链表大小相等且对应元素相等返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="1060" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="1060" bodyend="1063"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1list_1afb0faad1f8e10f1c4cd4d8d19adac8e3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(_NEFORCE lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend()))" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::list&lt; T, Alloc &gt;::less_than</definition>
+        <argsstring>(const list &amp;rhs) const</argsstring>
+        <name>less_than</name>
+        <qualifiedname>neforce::list::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1list_1a3e9adef8fa2cdc8e48e840e94cc38efc" kindref="member">list</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧链表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>按字典序比较结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="1070" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="1070" bodyend="1073"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>双向链表容器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>分配器类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+双向链表容器，提供常数时间的插入和删除操作。 不支持随机访问，但支持双向迭代。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="185" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/list.hpp" bodystart="185" bodyend="1074"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1list_1a7ce352d02a94d4764e432049a95567f1" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>allocator_type</name></member>
+      <member refid="classneforce_1_1list_1aafd6b84a4f0792648f0718ec2370dfb7" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>assign</name></member>
+      <member refid="classneforce_1_1list_1a94ce2608148a744dc5792e697cd5601f" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>assign</name></member>
+      <member refid="classneforce_1_1list_1a5a95d736bdbcde8a0fe0b3521e9518d8" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>assign</name></member>
+      <member refid="classneforce_1_1list_1a77cadef56a57dc05126b69af43ac194a" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>at</name></member>
+      <member refid="classneforce_1_1list_1a5c6700b7245cfc0615fce62792648f11" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>at</name></member>
+      <member refid="classneforce_1_1list_1afc63d5f019a86d566e010a4aff1a2f75" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>back</name></member>
+      <member refid="classneforce_1_1list_1ab4b2fd0e137d02d9738b8c9ce1ac29c7" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>back</name></member>
+      <member refid="classneforce_1_1list_1a202307b17eaf5ebb2a853faec4b10e42" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>begin</name></member>
+      <member refid="classneforce_1_1list_1a2a85c9ded3bae6348a505b558ca00695" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>begin</name></member>
+      <member refid="classneforce_1_1list_1a330fbfca54c9d7f548ed7e41070bfd40" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>cbegin</name></member>
+      <member refid="classneforce_1_1list_1a1f468b5c9d3370c789b85545cce23090" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>cend</name></member>
+      <member refid="classneforce_1_1list_1adafe7bb9c0afa418cc21fca0d5dbc568" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>clear</name></member>
+      <member refid="classneforce_1_1list_1a362fd7b8d774e7d78d76cb77460cbeb5" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>const_iterator</name></member>
+      <member refid="classneforce_1_1list_1ac3044d235bd602092e61ac5b5357d222" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>const_pointer</name></member>
+      <member refid="classneforce_1_1list_1a7a1222971d4535b5f0019b3459db70f8" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>const_reference</name></member>
+      <member refid="classneforce_1_1list_1ab670a3da48fd0b6135abea7765093bc4" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>const_reverse_iterator</name></member>
+      <member refid="classneforce_1_1list_1a21c55939e4e7380e8f6d1c1b79f03bec" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>crbegin</name></member>
+      <member refid="classneforce_1_1list_1a34e31bfea34532047ddc463f412fb0be" prot="private" virt="non-virtual"><scope>neforce::list</scope><name>create_node</name></member>
+      <member refid="classneforce_1_1list_1a78afb76354dbeb54ee8260c9957de78f" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>crend</name></member>
+      <member refid="classneforce_1_1list_1a2f943bc13c737f3eaadeeaf3ce4fd92a" prot="private" virt="non-virtual"><scope>neforce::list</scope><name>destroy_node</name></member>
+      <member refid="classneforce_1_1list_1a0702cd51349c52e4d0f0eed943659673" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>difference_type</name></member>
+      <member refid="classneforce_1_1list_1a88570737c77532c69bd2a0af3c337cf1" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>emplace</name></member>
+      <member refid="classneforce_1_1list_1a45f52f209a0c6e1f46184a0287aae587" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>emplace_back</name></member>
+      <member refid="classneforce_1_1list_1a647d3045f2bae78607e34b0987fed362" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>emplace_front</name></member>
+      <member refid="classneforce_1_1list_1aacad383fc0091dbaaed125243e0f9d02" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>empty</name></member>
+      <member refid="classneforce_1_1list_1ad324ccc01be09a167fdda863fce62e0f" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>end</name></member>
+      <member refid="classneforce_1_1list_1a77fd8e60a7acb30b16ca80e3329608f0" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>end</name></member>
+      <member refid="classneforce_1_1list_1a4eedbcc20f4d8e050a98a1201d54c76c" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>equal_to</name></member>
+      <member refid="classneforce_1_1list_1add2d5ccc41db43f8f45cfe53e40cf5e7" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>erase</name></member>
+      <member refid="classneforce_1_1list_1a772c8605d48ab86ce1ddc0f6ef08fc91" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>erase</name></member>
+      <member refid="classneforce_1_1list_1aba0edefb03db276a77f78140b5e07dff" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>front</name></member>
+      <member refid="classneforce_1_1list_1a18a363e635e8f5e535a80b3ff63010f0" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>front</name></member>
+      <member refid="classneforce_1_1list_1a2de0795506c5f4c6f995b3024accc833" prot="private" virt="non-virtual"><scope>neforce::list</scope><name>head_</name></member>
+      <member refid="classneforce_1_1list_1a76f7bf822a7a7ba9b2fbdb59d039259b" prot="private" virt="non-virtual"><scope>neforce::list</scope><name>init_header</name></member>
+      <member refid="classneforce_1_1list_1a749860b84826d9755747a73bb9ab5a45" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>insert</name></member>
+      <member refid="classneforce_1_1list_1a5f9ff7d5ed872eab6ceaf3251b16fb34" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>insert</name></member>
+      <member refid="classneforce_1_1list_1ab8778e60c0fb0b55e1215274447407ff" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>insert</name></member>
+      <member refid="classneforce_1_1list_1a1798913cc46afc05797b7cb4995aa672" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>insert</name></member>
+      <member refid="classneforce_1_1list_1a753a383edb60238e84701be51c6cde48" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>insert</name></member>
+      <member refid="classneforce_1_1list_1a81cd4ae73112f6a3a54740b4af542799" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>iterator</name></member>
+      <member refid="classneforce_1_1list_1afb0faad1f8e10f1c4cd4d8d19adac8e3" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>less_than</name></member>
+      <member refid="classneforce_1_1list_1aef6c2e11a745211e6ff32119622fa343" prot="private" virt="non-virtual"><scope>neforce::list</scope><name>link_type</name></member>
+      <member refid="classneforce_1_1list_1a3e9adef8fa2cdc8e48e840e94cc38efc" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>list</name></member>
+      <member refid="classneforce_1_1list_1ab61fe32592ae9d2b3bd063c93cec84ba" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>list</name></member>
+      <member refid="classneforce_1_1list_1a4a8b071cd5b5af7e6df88935dabf659f" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>list</name></member>
+      <member refid="classneforce_1_1list_1a3f24c981613dba85fb83fc8af366d2f9" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>list</name></member>
+      <member refid="classneforce_1_1list_1a9ff79b9d3def40be095bbf5f1c04cc30" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>list</name></member>
+      <member refid="classneforce_1_1list_1afb3df1c0d6778652144d329355469f6c" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>list</name></member>
+      <member refid="classneforce_1_1list_1a1689a7e8ebd085100876080997ce1736" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>list</name></member>
+      <member refid="classneforce_1_1list_1a75e53ec59a07d8156556dcb3515f2fd9" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>max_size</name></member>
+      <member refid="classneforce_1_1list_1af3aa3a9c109d6f7edb5c3b78ef4e682f" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>merge</name></member>
+      <member refid="classneforce_1_1list_1acee18998e056b76ce0f7a3c663642c37" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>merge_if</name></member>
+      <member refid="classneforce_1_1list_1a5a8c0dbd0f60fff0b6126468018fe768" prot="private" virt="non-virtual"><scope>neforce::list</scope><name>node_type</name></member>
+      <member refid="classneforce_1_1list_1adae53643960d9a9634d7ec7b4ee9fab0" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1list_1afe4939695f4a98d091ace2d23974f361" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1list_1a9dd56edd6208b374e59b99a2f19551db" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1list_1a67881bcd750d42ae7d36900067d82f76" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>operator[]</name></member>
+      <member refid="classneforce_1_1list_1a296321064d54287a5d807ec616abc279" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>operator[]</name></member>
+      <member refid="classneforce_1_1list_1abb2863717272acb9eba17c670ab46245" prot="private" virt="non-virtual"><scope>neforce::list</scope><name>pair_</name></member>
+      <member refid="classneforce_1_1list_1a343ce1070af2969049505b9fc49b6e97" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>pointer</name></member>
+      <member refid="classneforce_1_1list_1ab13005e97707bdffa3491be5c9234a20" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>pop_back</name></member>
+      <member refid="classneforce_1_1list_1a4571d093da9e7677b925cd7e951acc3b" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>pop_front</name></member>
+      <member refid="classneforce_1_1list_1a84c65e934083906847b7c097f8881b08" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>push_back</name></member>
+      <member refid="classneforce_1_1list_1a7d824dbed8a40411458574b858c4125b" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>push_back</name></member>
+      <member refid="classneforce_1_1list_1a34cfd3800cdb2dcc075083a505349847" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>push_front</name></member>
+      <member refid="classneforce_1_1list_1a41c83873b6e5d20b6c3d51e183b56e59" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>push_front</name></member>
+      <member refid="classneforce_1_1list_1aa87ae366bd1001b77c4057e427b6cce5" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>rbegin</name></member>
+      <member refid="classneforce_1_1list_1a741e6049cb6d9988eca8082611f69de8" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>rbegin</name></member>
+      <member refid="classneforce_1_1list_1a574998096d8b97a6de7e6eb45ed57b41" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>reference</name></member>
+      <member refid="classneforce_1_1list_1a2e2995457fb3a32ddf0259bf0ea254af" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>remove</name></member>
+      <member refid="classneforce_1_1list_1aab03e4ead86aa297bd88f70237697418" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>remove_if</name></member>
+      <member refid="classneforce_1_1list_1a7e98499630053e434abc23325ea1deab" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>rend</name></member>
+      <member refid="classneforce_1_1list_1af2a8a64c1143d6f0064b254980bce6c5" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>rend</name></member>
+      <member refid="classneforce_1_1list_1aabdb72ec39382fae75294b5acecde155" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>reverse</name></member>
+      <member refid="classneforce_1_1list_1a59eb8999edaab2961d8224438898f0a5" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>reverse_iterator</name></member>
+      <member refid="classneforce_1_1list_1a5445d1b5ecd7bb7a3af7822e8515e184" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>size</name></member>
+      <member refid="classneforce_1_1list_1a163c35ba6bf0967b513d35c70fac59df" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>size_type</name></member>
+      <member refid="classneforce_1_1list_1acaac44bfe84c0df827e790f0b35726cd" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>sort</name></member>
+      <member refid="classneforce_1_1list_1afcadc2a3d3110be487dea9e41ab89d16" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>sort_if</name></member>
+      <member refid="classneforce_1_1list_1a4bd3625c1e495e1710c25b981e9cd150" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>splice</name></member>
+      <member refid="classneforce_1_1list_1ad9ba8b7e70303790d95439152f7b9462" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>splice</name></member>
+      <member refid="classneforce_1_1list_1a610a26faeb5eb453f913a304edb81097" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>splice</name></member>
+      <member refid="classneforce_1_1list_1afc01e1bd6f9388aa8e505b2131b9566a" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>swap</name></member>
+      <member refid="classneforce_1_1list_1ab5986b772d30e83298b4f297aca968d0" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>transfer</name></member>
+      <member refid="classneforce_1_1list_1a6fba573e3becc1076165df3cbabed98f" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>unique</name></member>
+      <member refid="classneforce_1_1list_1a2de4f47023b192fdb75297668f10e264" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>unique_if</name></member>
+      <member refid="classneforce_1_1list_1ad63d54b0d009a063097d95dddeccbfc3" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>value_type</name></member>
+      <member refid="classneforce_1_1list_1ac5e04045b28cfc709e1a0a79dbfb16f2" prot="public" virt="non-virtual"><scope>neforce::list</scope><name>~list</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

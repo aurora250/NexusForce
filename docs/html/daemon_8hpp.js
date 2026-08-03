@@ -1,5 +1,5 @@
 var daemon_8hpp =
 [
-    [ "daemon::child_config", "structdaemon_1_1child__config.html", "structdaemon_1_1child__config" ],
-    [ "daemon::child_status", "structdaemon_1_1child__status.html", "structdaemon_1_1child__status" ]
+    [ "neforce::daemon::child_config", "structneforce_1_1daemon_1_1child__config.html", "structneforce_1_1daemon_1_1child__config" ],
+    [ "neforce::daemon::child_status", "structneforce_1_1daemon_1_1child__status.html", "structneforce_1_1daemon_1_1child__status" ]
 ];

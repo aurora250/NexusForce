@@ -3,8 +3,8 @@
   <compounddef id="group___i_c_m_p" kind="group">
     <compoundname>ICMP</compoundname>
     <title>ICMP</title>
-    <innerclass refid="structicmp__header" prot="public">icmp_header</innerclass>
-    <innerclass refid="classicmp__socket" prot="public">icmp_socket</innerclass>
+    <innerclass refid="structneforce_1_1icmp__header" prot="public">neforce::icmp_header</innerclass>
+    <innerclass refid="classneforce_1_1icmp__socket" prot="public">neforce::icmp_socket</innerclass>
     <briefdescription>
 <para>ICMP协议实现 </para>
     </briefdescription>
@@ -199,21 +199,21 @@
 </para>
 </sect1>
 <sect1 id="group___s_m_t_p_1usage_examples">
-<title>使用示例</title><para>Ping 操作： <programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classicmp__socket" kindref="compound">icmp_socket</ref><sp/>sock;</highlight></codeline>
-<codeline><highlight class="normal">sock.<ref refid="classicmp__socket_1a5e22d67c0aa794d751b4bee655c762af" kindref="member">open</ref>();</highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dest<sp/>=<sp/><ref refid="classip__address_1add2ce58669f6042593d6970743e7311a" kindref="member">ip_address::parse</ref>(</highlight><highlight class="stringliteral">&quot;8.8.8.8&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<title>使用示例</title><para>Ping 操作： <programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classneforce_1_1icmp__socket" kindref="compound">icmp_socket</ref><sp/>sock;</highlight></codeline>
+<codeline><highlight class="normal">sock.<ref refid="classneforce_1_1icmp__socket_1a50fc7b97c473a0fbeab35fb917f20727" kindref="member">open</ref>();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dest<sp/>=<sp/><ref refid="classneforce_1_1ip__address_1a97ab60c5c74caa7679adc3220a206044" kindref="member">ip_address::parse</ref>(</highlight><highlight class="stringliteral">&quot;8.8.8.8&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(dest)<sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>sock.<ref refid="classicmp__socket_1a2635f1da346bb2d7473d692cd960497f" kindref="member">ping</ref>(*dest,<sp/><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref>(2000));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>sock.<ref refid="classneforce_1_1icmp__socket_1ab55084298084be71ee8028d8136a32d8" kindref="member">ping</ref>(*dest,<sp/><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref>(2000));</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(result.success)<sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1gadd269b1d24f35618e1eb0ea848dbf6a0" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;{}:<sp/>bytes={}<sp/>time={}ms<sp/>TTL={}&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1ga9c4e1ac58957b1892c3091006222f66b" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;{}:<sp/>bytes={}<sp/>time={}ms<sp/>TTL={}&quot;</highlight><highlight class="normal">,</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dest-&gt;to_string(),<sp/>result.reply_size,</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result.rtt.count(),<sp/>result.reply_ttl);</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline><highlight class="normal">}</highlight></codeline>
 </programlisting></para>
-<para>Traceroute 操作： <programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>hops<sp/>=<sp/>sock.<ref refid="classicmp__socket_1a5d7a7d636558ba6fb91d5d4e1ff2811d" kindref="member">traceroute</ref>(*dest,<sp/>30,<sp/><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref>(1000),<sp/>3);</highlight></codeline>
+<para>Traceroute 操作： <programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>hops<sp/>=<sp/>sock.<ref refid="classneforce_1_1icmp__socket_1a463e462f1e68f80e93a3d30195ff1ef3" kindref="member">traceroute</ref>(*dest,<sp/>30,<sp/><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref>(1000),<sp/>3);</highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>hops.size();<sp/>++i)<sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1gadd269b1d24f35618e1eb0ea848dbf6a0" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;{}:<sp/>{}<sp/>(reached={})&quot;</highlight><highlight class="normal">,<sp/>i<sp/>+<sp/>1,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1ga9c4e1ac58957b1892c3091006222f66b" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;{}:<sp/>{}<sp/>(reached={})&quot;</highlight><highlight class="normal">,<sp/>i<sp/>+<sp/>1,</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>hops[i].address.is_valid()<sp/>?<sp/>hops[i].address.to_string()<sp/>:<sp/></highlight><highlight class="stringliteral">&quot;*&quot;</highlight><highlight class="normal">,</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>hops[i].reached);</highlight></codeline>
 <codeline><highlight class="normal">}</highlight></codeline>

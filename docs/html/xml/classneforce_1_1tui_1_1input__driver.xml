@@ -1,0 +1,549 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1tui_1_1input__driver" kind="class" language="C++" prot="public">
+    <compoundname>neforce::tui::input_driver</compoundname>
+    <includes refid="input_8hpp" local="no">input.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1input__driver_1a154a4259116443eaaf757f3c41cb1dc7" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+        <definition>io_context&amp; neforce::tui::input_driver::ctx_</definition>
+        <argsstring></argsstring>
+        <name>ctx_</name>
+        <qualifiedname>neforce::tui::input_driver::ctx_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="81" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1input__driver_1ad8cf3d5434cdd18db8bd536acd5d6ca0" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1tui_1_1reconciler" kindref="compound">reconciler</ref> &amp;</type>
+        <definition>reconciler&amp; neforce::tui::input_driver::reconiler_</definition>
+        <argsstring></argsstring>
+        <name>reconiler_</name>
+        <qualifiedname>neforce::tui::input_driver::reconiler_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="82" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1input__driver_1a5e08302920fcb7abc9c540cfb7379c57" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1strand" kindref="compound">strand</ref> &amp;</type>
+        <definition>strand&amp; neforce::tui::input_driver::strand_</definition>
+        <argsstring></argsstring>
+        <name>strand_</name>
+        <qualifiedname>neforce::tui::input_driver::strand_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="83" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1input__driver_1a08c5f922d4c95d878fc495197d594e2d" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1sys__console" kindref="compound">sys_console</ref> &amp;</type>
+        <definition>sys_console&amp; neforce::tui::input_driver::console_</definition>
+        <argsstring></argsstring>
+        <name>console_</name>
+        <qualifiedname>neforce::tui::input_driver::console_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="84" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1input__driver_1a008788a4821f5f84446bc2e21a818200" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::tui::input_driver::accum_</definition>
+        <argsstring></argsstring>
+        <name>accum_</name>
+        <qualifiedname>neforce::tui::input_driver::accum_</qualifiedname>
+        <briefdescription>
+<para>转义序列 / UTF-8 累积缓冲 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="86" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1input__driver_1a2ec6b9722c7b23c7889c94710c7117ba" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::tui::input_driver::esc_active_</definition>
+        <argsstring></argsstring>
+        <name>esc_active_</name>
+        <qualifiedname>neforce::tui::input_driver::esc_active_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否在处理 ESC 序列 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="87" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1input__driver_1a7dc84711798fb64d0ed2a3f8670fcd1a" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::tui::input_driver::mouse_active_</definition>
+        <argsstring></argsstring>
+        <name>mouse_active_</name>
+        <qualifiedname>neforce::tui::input_driver::mouse_active_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否在处理鼠标序列 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="88" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1input__driver_1af28c8be1dda8a7cf682575fcfc53afd8" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::tui::input_driver::utf8_active_</definition>
+        <argsstring></argsstring>
+        <name>utf8_active_</name>
+        <qualifiedname>neforce::tui::input_driver::utf8_active_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否在处理 UTF-8 多字节序列 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="89" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1input__driver_1a31442f08bb527d8dbe08e42038acebfc" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::tui::input_driver::listening_</definition>
+        <argsstring></argsstring>
+        <name>listening_</name>
+        <qualifiedname>neforce::tui::input_driver::listening_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否已启动监听 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="90" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1input__driver_1ae93c3a81689d036d1324021f9a6c67c8" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::tui::input_driver::term_saved_</definition>
+        <argsstring></argsstring>
+        <name>term_saved_</name>
+        <qualifiedname>neforce::tui::input_driver::term_saved_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否已保存原始终端属性 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="92" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1input__driver_1a92a1862ecb1552b741402f2b9f5149d2" prot="private" static="no" mutable="no">
+        <type>::termios</type>
+        <definition>::termios neforce::tui::input_driver::old_termios_</definition>
+        <argsstring></argsstring>
+        <name>old_termios_</name>
+        <qualifiedname>neforce::tui::input_driver::old_termios_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>原始终端属性 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="94" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" bodystart="94" bodyend="94"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1tui_1_1input__driver_1a07ca3865b291ffcb4dd9960c2cc25925" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::tui::input_driver::input_driver</definition>
+        <argsstring>(io_context &amp;ctx, reconciler &amp;r, strand &amp;s)</argsstring>
+        <name>input_driver</name>
+        <qualifiedname>neforce::tui::input_driver::input_driver</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1tui_1_1reconciler" kindref="compound">reconciler</ref> &amp;</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1strand" kindref="compound">strand</ref> &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>事件循环上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>r</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>reconciler 引用 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>串行执行器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="42" column="5"/>
+        <references refid="classneforce_1_1tui_1_1input__driver_1a07ca3865b291ffcb4dd9960c2cc25925">input_driver</references>
+        <referencedby refid="classneforce_1_1tui_1_1input__driver_1a07ca3865b291ffcb4dd9960c2cc25925">input_driver</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1input__driver_1a199bc867708e042a1af9e8b854810169" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::tui::input_driver::~input_driver</definition>
+        <argsstring>()</argsstring>
+        <name>~input_driver</name>
+        <qualifiedname>neforce::tui::input_driver::~input_driver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="43" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1input__driver_1a844badce6190c5d3c6d7cfaf7f3900a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::tui::input_driver::input_driver</definition>
+        <argsstring>(const input_driver &amp;)=delete</argsstring>
+        <name>input_driver</name>
+        <qualifiedname>neforce::tui::input_driver::input_driver</qualifiedname>
+        <param>
+          <type>const input_driver &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="45" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1input__driver_1abadcd4006d372d239785041212e58c8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1tui_1_1input__driver_1a07ca3865b291ffcb4dd9960c2cc25925" kindref="member">input_driver</ref> &amp;</type>
+        <definition>input_driver &amp; neforce::tui::input_driver::operator=</definition>
+        <argsstring>(const input_driver &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::tui::input_driver::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1tui_1_1input__driver_1a07ca3865b291ffcb4dd9960c2cc25925" kindref="member">input_driver</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="46" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1input__driver_1a0b2a90419bfde71e49a24ca970d71289" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::tui::input_driver::input_driver</definition>
+        <argsstring>(input_driver &amp;&amp;)=delete</argsstring>
+        <name>input_driver</name>
+        <qualifiedname>neforce::tui::input_driver::input_driver</qualifiedname>
+        <param>
+          <type>input_driver &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="47" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1input__driver_1a955145d396dddadc97c44c5ad1884b82" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1tui_1_1input__driver_1a07ca3865b291ffcb4dd9960c2cc25925" kindref="member">input_driver</ref> &amp;</type>
+        <definition>input_driver &amp; neforce::tui::input_driver::operator=</definition>
+        <argsstring>(input_driver &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::tui::input_driver::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1tui_1_1input__driver_1a07ca3865b291ffcb4dd9960c2cc25925" kindref="member">input_driver</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="48" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1input__driver_1a6fd14a834706e045210c6bbe8df66416" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::tui::input_driver::start</definition>
+        <argsstring>()</argsstring>
+        <name>start</name>
+        <qualifiedname>neforce::tui::input_driver::start</qualifiedname>
+        <briefdescription>
+<para>启动 stdin 监听 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="53" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1input__driver_1a5ac06fb2d282ec845963bd6e579199f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::tui::input_driver::stop</definition>
+        <argsstring>()</argsstring>
+        <name>stop</name>
+        <qualifiedname>neforce::tui::input_driver::stop</qualifiedname>
+        <briefdescription>
+<para>停止 stdin 监听 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="58" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1tui_1_1input__driver_1abced8e0b3424ce039312f499270ef5e2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool neforce::tui::input_driver::check_resize_flag</definition>
+        <argsstring>()</argsstring>
+        <name>check_resize_flag</name>
+        <qualifiedname>neforce::tui::input_driver::check_resize_flag</qualifiedname>
+        <briefdescription>
+<para>检查并清除终端尺寸变更标记 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true 表示终端尺寸已改变 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="64" column="17"/>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1tui_1_1input__driver_1a04bfccec8b031a67d906bdd63bf2e192" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::tui::input_driver::drain_stdin</definition>
+        <argsstring>(int fd, uint32_t events, error_code ec)</argsstring>
+        <name>drain_stdin</name>
+        <qualifiedname>neforce::tui::input_driver::drain_stdin</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>fd</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>events</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref></type>
+          <declname>ec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="68" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1input__driver_1a55f0aae0925dec82c01ad315acfbe7f0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::tui::input_driver::process_byte</definition>
+        <argsstring>(byte_t byte)</argsstring>
+        <name>process_byte</name>
+        <qualifiedname>neforce::tui::input_driver::process_byte</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref></type>
+          <declname>byte</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="73" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1input__driver_1a203d273e70baef1798be93e847eeb502" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::tui::input_driver::parse_escape_sequence</definition>
+        <argsstring>()</argsstring>
+        <name>parse_escape_sequence</name>
+        <qualifiedname>neforce::tui::input_driver::parse_escape_sequence</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="74" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1input__driver_1a85701e8f85385a20456d835595ae03a5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::tui::input_driver::parse_utf8_sequence</definition>
+        <argsstring>()</argsstring>
+        <name>parse_utf8_sequence</name>
+        <qualifiedname>neforce::tui::input_driver::parse_utf8_sequence</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="75" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1input__driver_1acd038d13c108871a69e69d24606a8261" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::tui::input_driver::parse_mouse_sequence</definition>
+        <argsstring>()</argsstring>
+        <name>parse_mouse_sequence</name>
+        <qualifiedname>neforce::tui::input_driver::parse_mouse_sequence</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="76" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1input__driver_1ada76fba234e4184532f22c5a4e092ba4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::tui::input_driver::dispatch_key</definition>
+        <argsstring>(const key_event &amp;e)</argsstring>
+        <name>dispatch_key</name>
+        <qualifiedname>neforce::tui::input_driver::dispatch_key</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1tui_1_1key__event" kindref="compound">key_event</ref> &amp;</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="77" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1input__driver_1a250c2272a1f9d01581e24bd874686366" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::tui::input_driver::dispatch_mouse</definition>
+        <argsstring>(const mouse_event &amp;e)</argsstring>
+        <name>dispatch_mouse</name>
+        <qualifiedname>neforce::tui::input_driver::dispatch_mouse</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1tui_1_1mouse__event" kindref="compound">mouse_event</ref> &amp;</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="78" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1input__driver_1a6b5a8462c054aad6f2530ec2d6ac1261" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::tui::input_driver::process_accumulated_bytes</definition>
+        <argsstring>(const byte_t *data, size_t len)</argsstring>
+        <name>process_accumulated_bytes</name>
+        <qualifiedname>neforce::tui::input_driver::process_accumulated_bytes</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="79" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>终端输入驱动 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>监听输入，解析为 <ref refid="structneforce_1_1tui_1_1key__event" kindref="compound">key_event</ref> 或 <ref refid="structneforce_1_1tui_1_1mouse__event" kindref="compound">mouse_event</ref> 后分发到 reconciler。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" line="34" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/input.hpp" bodystart="34" bodyend="100"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1tui_1_1input__driver_1a008788a4821f5f84446bc2e21a818200" prot="private" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>accum_</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1abced8e0b3424ce039312f499270ef5e2" prot="public" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>check_resize_flag</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1a08c5f922d4c95d878fc495197d594e2d" prot="private" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>console_</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1a154a4259116443eaaf757f3c41cb1dc7" prot="private" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>ctx_</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1ada76fba234e4184532f22c5a4e092ba4" prot="private" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>dispatch_key</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1a250c2272a1f9d01581e24bd874686366" prot="private" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>dispatch_mouse</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1a04bfccec8b031a67d906bdd63bf2e192" prot="private" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>drain_stdin</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1a2ec6b9722c7b23c7889c94710c7117ba" prot="private" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>esc_active_</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1a07ca3865b291ffcb4dd9960c2cc25925" prot="public" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>input_driver</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1a844badce6190c5d3c6d7cfaf7f3900a9" prot="public" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>input_driver</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1a0b2a90419bfde71e49a24ca970d71289" prot="public" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>input_driver</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1a31442f08bb527d8dbe08e42038acebfc" prot="private" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>listening_</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1a7dc84711798fb64d0ed2a3f8670fcd1a" prot="private" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>mouse_active_</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1a92a1862ecb1552b741402f2b9f5149d2" prot="private" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>old_termios_</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1abadcd4006d372d239785041212e58c8a" prot="public" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1a955145d396dddadc97c44c5ad1884b82" prot="public" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1a203d273e70baef1798be93e847eeb502" prot="private" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>parse_escape_sequence</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1acd038d13c108871a69e69d24606a8261" prot="private" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>parse_mouse_sequence</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1a85701e8f85385a20456d835595ae03a5" prot="private" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>parse_utf8_sequence</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1a6b5a8462c054aad6f2530ec2d6ac1261" prot="private" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>process_accumulated_bytes</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1a55f0aae0925dec82c01ad315acfbe7f0" prot="private" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>process_byte</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1ad8cf3d5434cdd18db8bd536acd5d6ca0" prot="private" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>reconiler_</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1a6fd14a834706e045210c6bbe8df66416" prot="public" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>start</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1a5ac06fb2d282ec845963bd6e579199f7" prot="public" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>stop</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1a5e08302920fcb7abc9c540cfb7379c57" prot="private" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>strand_</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1ae93c3a81689d036d1324021f9a6c67c8" prot="private" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>term_saved_</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1af28c8be1dda8a7cf682575fcfc53afd8" prot="private" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>utf8_active_</name></member>
+      <member refid="classneforce_1_1tui_1_1input__driver_1a199bc867708e042a1af9e8b854810169" prot="public" virt="non-virtual"><scope>neforce::tui::input_driver</scope><name>~input_driver</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

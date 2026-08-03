@@ -1,7 +1,7 @@
 var group___merge_algorithms =
 [
-    [ "inplace_merge", "group___merge_algorithms.html#gaee0dcfc14e269a86ad7ffaa635970ef1", null ],
-    [ "inplace_merge", "group___merge_algorithms.html#ga6715ef726249eda60e6460a96678138f", null ],
-    [ "merge", "group___merge_algorithms.html#ga91839cd96c2e631f63fabfb72bd70482", null ],
-    [ "merge", "group___merge_algorithms.html#ga0b9cd2bc635fe355dff2344b03e0b7bb", null ]
+    [ "neforce::inplace_merge", "group___merge_algorithms.html#gae464239af7b227bcc51c275e8d3fb0d8", null ],
+    [ "neforce::inplace_merge", "group___merge_algorithms.html#ga7643d4dfc6ec0f239e9a905d3de7da47", null ],
+    [ "neforce::merge", "group___merge_algorithms.html#gacba80dd1aa14af5801fd46deadd4b45f", null ],
+    [ "neforce::merge", "group___merge_algorithms.html#ga2dc6c2eec324fdb83105ef79c4bc1e16", null ]
 ];

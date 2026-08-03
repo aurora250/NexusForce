@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
   </td>
  </tr>
  </tbody>
@@ -92,42 +92,46 @@ $(function(){initNavTree('dropdown_8hpp_source.html','',''); });
   <div class="headertitle"><div class="title">dropdown.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="dropdown_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_TUI_DROPDOWN_HPP__</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_TUI_DROPDOWN_HPP__</span></div>
+<a href="dropdown_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_TUI_COMPONENT_DROPDOWN_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_TUI_COMPONENT_DROPDOWN_HPP__</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="component_8hpp.html">NeForce/tui/component/component.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="ref_8hpp.html">NeForce/tui/dom/ref.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>NEFORCE_BEGIN_NAMESPACE__</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>NEFORCE_BEGIN_TUI__</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
-<div class="foldopen" id="foldopen00024" data-start="{" data-end="};">
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="structdropdown__option.html">   24</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structdropdown__option.html">dropdown_option</a> {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="structdropdown__option.html#a4dd46f444809d7d9b21e909fa39b0d37">   25</a></span>    <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a> <a class="code hl_variable" href="structdropdown__option.html#a4dd46f444809d7d9b21e909fa39b0d37">entries</a>;     </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="structdropdown__option.html#ad68c198266cd315e9462e979e4fd33ec">   26</a></span>    <span class="keywordtype">int</span>* <a class="code hl_variable" href="structdropdown__option.html#ad68c198266cd315e9462e979e4fd33ec">selected</a> = <span class="keyword">nullptr</span>;    </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="structdropdown__option.html#ad77154d4b70060a0a474069599b78a30">   27</a></span>    <span class="keywordtype">bool</span>* <a class="code hl_variable" href="structdropdown__option.html#ad77154d4b70060a0a474069599b78a30">open</a> = <span class="keyword">nullptr</span>;       </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="structdropdown__option.html#afc5df7509f811702e6a2030c3f3dba33">   28</a></span>    <a class="code hl_class" href="classfunction.html">function</a>&lt;void()&gt; <a class="code hl_variable" href="structdropdown__option.html#afc5df7509f811702e6a2030c3f3dba33">on_change</a>; </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>};</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>NEFORCE_BEGIN_COMPONENTS__</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span></div>
+<div class="foldopen" id="foldopen00030" data-start="{" data-end="};">
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="structneforce_1_1tui_1_1components_1_1dropdown__option.html">   30</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structneforce_1_1tui_1_1components_1_1dropdown__option.html">dropdown_option</a> {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="structneforce_1_1tui_1_1components_1_1dropdown__option.html#ae02891cafd0088ce37d967ed50b50bad">   31</a></span>    <a class="code hl_class" href="classneforce_1_1vector.html">vector&lt;string&gt;</a> <a class="code hl_variable" href="structneforce_1_1tui_1_1components_1_1dropdown__option.html#ae02891cafd0088ce37d967ed50b50bad">entries</a>;     </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="structneforce_1_1tui_1_1components_1_1dropdown__option.html#a70cb49b09879372f1885d7ef615f0105">   32</a></span>    <span class="keywordtype">int</span>* <a class="code hl_variable" href="structneforce_1_1tui_1_1components_1_1dropdown__option.html#a70cb49b09879372f1885d7ef615f0105">selected</a> = <span class="keyword">nullptr</span>;    </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="structneforce_1_1tui_1_1components_1_1dropdown__option.html#a411272e5e8d863e8e3055136580accb0">   33</a></span>    <span class="keywordtype">bool</span>* <a class="code hl_variable" href="structneforce_1_1tui_1_1components_1_1dropdown__option.html#a411272e5e8d863e8e3055136580accb0">open</a> = <span class="keyword">nullptr</span>;       </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="structneforce_1_1tui_1_1components_1_1dropdown__option.html#ad003e4701bf3d9ba8efbde481e2d50b6">   34</a></span>    <a class="code hl_class" href="classneforce_1_1function.html">function</a>&lt;void()&gt; <a class="code hl_variable" href="structneforce_1_1tui_1_1components_1_1dropdown__option.html#ad003e4701bf3d9ba8efbde481e2d50b6">on_change</a>; </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>};</div>
 </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="group___t_u_i.html#gabdf745cb52372a76a5da226775a68484">   36</a></span><a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;component_base&gt;</a> NEFORCE_API <a class="code hl_function" href="group___t_u_i.html#gabdf745cb52372a76a5da226775a68484">dropdown</a>(<a class="code hl_struct" href="structdropdown__option.html">dropdown_option</a> option);</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> <span class="comment">// TUI</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>NEFORCE_END_TUI__</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>NEFORCE_END_NAMESPACE__</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_TUI_DROPDOWN_HPP__</span></div>
-<div class="ttc" id="aclassfunction_html"><div class="ttname"><a href="classfunction.html">function</a></div><div class="ttdoc">函数包装器主模板声明</div><div class="ttdef"><b>定义</b> <a href="functional_2function_8hpp_source.html#l00029">functional/function.hpp:29</a></div></div>
-<div class="ttc" id="aclassunique__ptr_html"><div class="ttname"><a href="classunique__ptr.html">unique_ptr</a></div><div class="ttdoc">独占智能指针</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00206">unique_ptr.hpp:206</a></div></div>
-<div class="ttc" id="aclassvector_html"><div class="ttname"><a href="classvector.html">vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00167">vector.hpp:167</a></div></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="group___components.html#ga77762c5f3266e1961b96a3aa05a33e5a">   42</a></span><a class="code hl_class" href="classneforce_1_1unique__ptr.html">unique_ptr&lt;component_base&gt;</a> NEFORCE_API <a class="code hl_function" href="group___components.html#ga77762c5f3266e1961b96a3aa05a33e5a">dropdown</a>(<a class="code hl_struct" href="structneforce_1_1tui_1_1components_1_1dropdown__option.html">dropdown_option</a> option);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> <span class="comment">// Components</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> <span class="comment">// TUI</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>NEFORCE_END_COMPONENTS__</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>NEFORCE_END_TUI__</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_TUI_COMPONENT_DROPDOWN_HPP__</span></div>
+<div class="ttc" id="aclassneforce_1_1function_html"><div class="ttname"><a href="classneforce_1_1function.html">neforce::function</a></div><div class="ttdoc">函数包装器主模板声明</div><div class="ttdef"><b>定义</b> <a href="functional_2function_8hpp_source.html#l00030">functional/function.hpp:30</a></div></div>
+<div class="ttc" id="aclassneforce_1_1unique__ptr_html"><div class="ttname"><a href="classneforce_1_1unique__ptr.html">neforce::unique_ptr</a></div><div class="ttdoc">独占智能指针</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00206">unique_ptr.hpp:206</a></div></div>
+<div class="ttc" id="aclassneforce_1_1vector_html"><div class="ttname"><a href="classneforce_1_1vector.html">neforce::vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00167">vector.hpp:167</a></div></div>
 <div class="ttc" id="acomponent_8hpp_html"><div class="ttname"><a href="component_8hpp.html">component.hpp</a></div><div class="ttdoc">TUI组件基类</div></div>
-<div class="ttc" id="agroup___t_u_i_html_gabdf745cb52372a76a5da226775a68484"><div class="ttname"><a href="group___t_u_i.html#gabdf745cb52372a76a5da226775a68484">dropdown</a></div><div class="ttdeci">unique_ptr&lt; component_base &gt; dropdown(dropdown_option option)</div><div class="ttdoc">创建下拉选择组件</div></div>
+<div class="ttc" id="agroup___components_html_ga77762c5f3266e1961b96a3aa05a33e5a"><div class="ttname"><a href="group___components.html#ga77762c5f3266e1961b96a3aa05a33e5a">neforce::tui::components::dropdown</a></div><div class="ttdeci">unique_ptr&lt; component_base &gt; dropdown(dropdown_option option)</div><div class="ttdoc">创建下拉选择组件</div></div>
 <div class="ttc" id="aref_8hpp_html"><div class="ttname"><a href="ref_8hpp.html">ref.hpp</a></div><div class="ttdoc">状态绑定适配器</div></div>
-<div class="ttc" id="astructdropdown__option_html"><div class="ttname"><a href="structdropdown__option.html">dropdown_option</a></div><div class="ttdoc">下拉选择组件配置</div><div class="ttdef"><b>定义</b> <a href="#l00024">dropdown.hpp:24</a></div></div>
-<div class="ttc" id="astructdropdown__option_html_a4dd46f444809d7d9b21e909fa39b0d37"><div class="ttname"><a href="structdropdown__option.html#a4dd46f444809d7d9b21e909fa39b0d37">dropdown_option::entries</a></div><div class="ttdeci">vector&lt; string &gt; entries</div><div class="ttdoc">选项列表</div><div class="ttdef"><b>定义</b> <a href="#l00025">dropdown.hpp:25</a></div></div>
-<div class="ttc" id="astructdropdown__option_html_ad68c198266cd315e9462e979e4fd33ec"><div class="ttname"><a href="structdropdown__option.html#ad68c198266cd315e9462e979e4fd33ec">dropdown_option::selected</a></div><div class="ttdeci">int * selected</div><div class="ttdoc">当前选中索引</div><div class="ttdef"><b>定义</b> <a href="#l00026">dropdown.hpp:26</a></div></div>
-<div class="ttc" id="astructdropdown__option_html_ad77154d4b70060a0a474069599b78a30"><div class="ttname"><a href="structdropdown__option.html#ad77154d4b70060a0a474069599b78a30">dropdown_option::open</a></div><div class="ttdeci">bool * open</div><div class="ttdoc">展开状态</div><div class="ttdef"><b>定义</b> <a href="#l00027">dropdown.hpp:27</a></div></div>
-<div class="ttc" id="astructdropdown__option_html_afc5df7509f811702e6a2030c3f3dba33"><div class="ttname"><a href="structdropdown__option.html#afc5df7509f811702e6a2030c3f3dba33">dropdown_option::on_change</a></div><div class="ttdeci">function&lt; void()&gt; on_change</div><div class="ttdoc">选择变更回调</div><div class="ttdef"><b>定义</b> <a href="#l00028">dropdown.hpp:28</a></div></div>
+<div class="ttc" id="astructneforce_1_1tui_1_1components_1_1dropdown__option_html"><div class="ttname"><a href="structneforce_1_1tui_1_1components_1_1dropdown__option.html">neforce::tui::components::dropdown_option</a></div><div class="ttdoc">下拉选择组件配置</div><div class="ttdef"><b>定义</b> <a href="#l00030">dropdown.hpp:30</a></div></div>
+<div class="ttc" id="astructneforce_1_1tui_1_1components_1_1dropdown__option_html_a411272e5e8d863e8e3055136580accb0"><div class="ttname"><a href="structneforce_1_1tui_1_1components_1_1dropdown__option.html#a411272e5e8d863e8e3055136580accb0">neforce::tui::components::dropdown_option::open</a></div><div class="ttdeci">bool * open</div><div class="ttdoc">展开状态</div><div class="ttdef"><b>定义</b> <a href="#l00033">dropdown.hpp:33</a></div></div>
+<div class="ttc" id="astructneforce_1_1tui_1_1components_1_1dropdown__option_html_a70cb49b09879372f1885d7ef615f0105"><div class="ttname"><a href="structneforce_1_1tui_1_1components_1_1dropdown__option.html#a70cb49b09879372f1885d7ef615f0105">neforce::tui::components::dropdown_option::selected</a></div><div class="ttdeci">int * selected</div><div class="ttdoc">当前选中索引</div><div class="ttdef"><b>定义</b> <a href="#l00032">dropdown.hpp:32</a></div></div>
+<div class="ttc" id="astructneforce_1_1tui_1_1components_1_1dropdown__option_html_ad003e4701bf3d9ba8efbde481e2d50b6"><div class="ttname"><a href="structneforce_1_1tui_1_1components_1_1dropdown__option.html#ad003e4701bf3d9ba8efbde481e2d50b6">neforce::tui::components::dropdown_option::on_change</a></div><div class="ttdeci">function&lt; void()&gt; on_change</div><div class="ttdoc">选择变更回调</div><div class="ttdef"><b>定义</b> <a href="#l00034">dropdown.hpp:34</a></div></div>
+<div class="ttc" id="astructneforce_1_1tui_1_1components_1_1dropdown__option_html_ae02891cafd0088ce37d967ed50b50bad"><div class="ttname"><a href="structneforce_1_1tui_1_1components_1_1dropdown__option.html#ae02891cafd0088ce37d967ed50b50bad">neforce::tui::components::dropdown_option::entries</a></div><div class="ttdeci">vector&lt; string &gt; entries</div><div class="ttdoc">选项列表</div><div class="ttdef"><b>定义</b> <a href="#l00031">dropdown.hpp:31</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

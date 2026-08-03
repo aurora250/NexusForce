@@ -3,16 +3,16 @@
   <compounddef id="group___function_binders" kind="group">
     <compoundname>FunctionBinders</compoundname>
     <title>绑定函数</title>
-    <innerclass refid="classbinder" prot="public">binder</innerclass>
-    <innerclass refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4" prot="public">binder&lt; Func(BoundArgs...)&gt;</innerclass>
-    <innerclass refid="classbindrer" prot="public">bindrer</innerclass>
-    <innerclass refid="classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4" prot="public">bindrer&lt; Res, Func(BoundArgs...)&gt;</innerclass>
-    <innerclass refid="structbind__helper" prot="public">bind_helper</innerclass>
-    <innerclass refid="structbind__helper_3_01true_00_01_func_00_01_bound_args_8_8_8_01_4" prot="public">bind_helper&lt; true, Func, BoundArgs... &gt;</innerclass>
-    <innerclass refid="structbindr__helper" prot="public">bindr_helper</innerclass>
-    <innerclass refid="structbinder__front" prot="public">binder_front</innerclass>
+    <innerclass refid="classneforce_1_1binder" prot="public">neforce::binder</innerclass>
+    <innerclass refid="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4" prot="public">neforce::binder&lt; Func(BoundArgs...)&gt;</innerclass>
+    <innerclass refid="classneforce_1_1bindrer" prot="public">neforce::bindrer</innerclass>
+    <innerclass refid="classneforce_1_1bindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4" prot="public">neforce::bindrer&lt; Res, Func(BoundArgs...)&gt;</innerclass>
+    <innerclass refid="structneforce_1_1bind__helper" prot="public">neforce::bind_helper</innerclass>
+    <innerclass refid="structneforce_1_1bind__helper_3_01true_00_01_func_00_01_bound_args_8_8_8_01_4" prot="public">neforce::bind_helper&lt; true, Func, BoundArgs... &gt;</innerclass>
+    <innerclass refid="structneforce_1_1bindr__helper" prot="public">neforce::bindr_helper</innerclass>
+    <innerclass refid="structneforce_1_1binder__front" prot="public">neforce::binder_front</innerclass>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="group___function_binders_1gaaf0fa7c3eafa3f876acbc6be2279a9f9" prot="public" static="no">
+      <memberdef kind="typedef" id="group___function_binders_1ga0ad4b5ae810daf9c83c7afe71719aa52" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>bool</type>
@@ -28,10 +28,11 @@
             <defname>BoundArgs</defname>
           </param>
         </templateparamlist>
-        <type>typename <ref refid="structbind__helper" kindref="compound">bind_helper</ref>&lt; IntLike, Func, BoundArgs... &gt;::type</type>
-        <definition>using bind_helper_t = typename bind_helper&lt;IntLike, Func, BoundArgs...&gt;::type</definition>
+        <type>typename bind_helper&lt; IntLike, Func, BoundArgs... &gt;::type</type>
+        <definition>using neforce::bind_helper_t = typename bind_helper&lt;IntLike, Func, BoundArgs...&gt;::type</definition>
         <argsstring></argsstring>
         <name>bind_helper_t</name>
+        <qualifiedname>neforce::bind_helper_t</qualifiedname>
         <briefdescription>
 <para>bind_helper的便捷别名 </para>
         </briefdescription>
@@ -41,7 +42,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="729" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="729" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___function_binders_1gaa5a92e90a3ca473839441b27e57ca6ac" prot="public" static="no">
+      <memberdef kind="typedef" id="group___function_binders_1gab72476a6545e0b26a1d3a4b5a12f46c0" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename Res</type>
@@ -55,10 +56,11 @@
             <defname>BoundArgs</defname>
           </param>
         </templateparamlist>
-        <type>typename <ref refid="structbindr__helper" kindref="compound">bindr_helper</ref>&lt; Res, Func, BoundArgs... &gt;::type</type>
-        <definition>using bindr_helper_t = typename bindr_helper&lt;Res, Func, BoundArgs...&gt;::type</definition>
+        <type>typename bindr_helper&lt; Res, Func, BoundArgs... &gt;::type</type>
+        <definition>using neforce::bindr_helper_t = typename bindr_helper&lt;Res, Func, BoundArgs...&gt;::type</definition>
         <argsstring></argsstring>
         <name>bindr_helper_t</name>
+        <qualifiedname>neforce::bindr_helper_t</qualifiedname>
         <briefdescription>
 <para>bindr_helper的便捷别名 </para>
         </briefdescription>
@@ -68,7 +70,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="767" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="767" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___function_binders_1gaa8edf673d24f0a45eb8ce43d4071e8a8" prot="public" static="no">
+      <memberdef kind="typedef" id="group___function_binders_1gacb57e911807b370168fa88364773c4b3" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename Func</type>
@@ -79,10 +81,11 @@
             <defname>Args</defname>
           </param>
         </templateparamlist>
-        <type><ref refid="structbinder__front" kindref="compound">binder_front</ref>&lt; <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Func &gt;, <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Args &gt;... &gt;</type>
-        <definition>using binder_front_type = binder_front&lt;decay_t&lt;Func&gt;, decay_t&lt;Args&gt;...&gt;</definition>
+        <type>binder_front&lt; decay_t&lt; Func &gt;, decay_t&lt; Args &gt;... &gt;</type>
+        <definition>using neforce::binder_front_type = binder_front&lt;decay_t&lt;Func&gt;, decay_t&lt;Args&gt;...&gt;</definition>
         <argsstring></argsstring>
         <name>binder_front_type</name>
+        <qualifiedname>neforce::binder_front_type</qualifiedname>
         <briefdescription>
 <para>binder_front类型的便捷别名 </para>
         </briefdescription>
@@ -111,23 +114,8 @@
         <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="912" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="912" bodyend="-1"/>
       </memberdef>
     </sectiondef>
-    <sectiondef kind="var">
-      <memberdef kind="variable" id="group___function_binders_1gabc804dd9d3293d4c066a9bd6fda0963e" prot="public" static="no" mutable="no">
-        <type></type>
-        <definition>Func</definition>
-        <argsstring></argsstring>
-        <name>Func</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="745" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="745" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___function_binders_1ga735d7a66a48afa25064e760a02effb9d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___function_binders_1ga7d545effd5c29c85f733bdf64a7cf8f4" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Func</type>
@@ -138,12 +126,18 @@
             <defname>BoundArgs</defname>
           </param>
         </templateparamlist>
-        <type></type>
-        <definition>NEFORCE_DEPRECATED_FOR</definition>
-        <argsstring>(&quot;use lambda or bind_front instead of bind&quot;) const expr bind_helper_t&lt; is_integral_like_v&lt; Func &gt;</argsstring>
-        <name>NEFORCE_DEPRECATED_FOR</name>
+        <type>bind_helper_t&lt; is_integral_like_v&lt; Func &gt;, Func, BoundArgs... &gt;</type>
+        <definition>bind_helper_t&lt; is_integral_like_v&lt; Func &gt;, Func, BoundArgs... &gt; neforce::bind</definition>
+        <argsstring>(Func &amp;&amp;func, BoundArgs &amp;&amp;... args)</argsstring>
+        <name>bind</name>
+        <qualifiedname>neforce::bind</qualifiedname>
         <param>
-          <type>&quot;use lambda or <ref refid="group___function_binders_1ga66bfcbcd5b6bb9cb6df055b38d1a5f17" kindref="member">bind_front</ref> instead of bind&quot;</type>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>BoundArgs &amp;&amp;...</type>
+          <declname>args</declname>
         </param>
         <briefdescription>
 <para>bind函数 </para>
@@ -189,32 +183,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="743" column="1"/>
-        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
-        <references refid="group___base_type_qualifier_check_1ga2a3ef7f1a7d99754765b11f910eedb8a" compoundref="type__traits_8hpp" startline="1603">is_integral_like_v</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="745" column="33" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="745" bodyend="747"/>
+        <references refid="group___function_binders_1ga7d545effd5c29c85f733bdf64a7cf8f4" compoundref="bind_8hpp" startline="745" endline="747">neforce::bind</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___base_type_qualifier_check_1ga5d164f7facbe7c232244a5c3dd84b55c" compoundref="type__traits_8hpp" startline="1603">neforce::is_integral_like_v</references>
+        <referencedby refid="group___function_binders_1ga7d545effd5c29c85f733bdf64a7cf8f4" compoundref="bind_8hpp" startline="745" endline="747">neforce::bind</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___function_binders_1ga4b66bff2edcf2070f62494205601c2a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>BoundArgs</type>
-        <definition>BoundArgs bind</definition>
-        <argsstring>(Func &amp;&amp;func, BoundArgs &amp;&amp;... args)</argsstring>
-        <name>bind</name>
-        <param>
-          <type>Func &amp;&amp;</type>
-          <declname>func</declname>
-        </param>
-        <param>
-          <type>BoundArgs &amp;&amp;...</type>
-          <declname>args</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="745" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="745" bodyend="747"/>
-      </memberdef>
-      <memberdef kind="function" id="group___function_binders_1ga2bd8c60e21f8f039828d61ee454822a9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___function_binders_1ga11206fd9af48d466a8dc3c3d13d42e3a" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Res</type>
@@ -228,12 +203,18 @@
             <defname>BoundArgs</defname>
           </param>
         </templateparamlist>
-        <type></type>
-        <definition>NEFORCE_DEPRECATED_FOR</definition>
-        <argsstring>(&quot;use lambda or bind_front instead of bind&quot;) const expr bindr_helper_t&lt; Res</argsstring>
-        <name>NEFORCE_DEPRECATED_FOR</name>
+        <type>bindr_helper_t&lt; Res, Func, BoundArgs... &gt;</type>
+        <definition>bindr_helper_t&lt; Res, Func, BoundArgs... &gt; neforce::bind</definition>
+        <argsstring>(Func &amp;&amp;func, BoundArgs &amp;&amp;... args)</argsstring>
+        <name>bind</name>
+        <qualifiedname>neforce::bind</qualifiedname>
         <param>
-          <type>&quot;use lambda or <ref refid="group___function_binders_1ga66bfcbcd5b6bb9cb6df055b38d1a5f17" kindref="member">bind_front</ref> instead of bind&quot;</type>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>BoundArgs &amp;&amp;...</type>
+          <declname>args</declname>
         </param>
         <briefdescription>
 <para>指定返回类型的bind函数 </para>
@@ -287,10 +268,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="782" column="1"/>
-        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="783" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="783" bodyend="785"/>
+        <references refid="group___function_binders_1ga7d545effd5c29c85f733bdf64a7cf8f4" compoundref="bind_8hpp" startline="745" endline="747">neforce::bind</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
       </memberdef>
-      <memberdef kind="function" id="group___function_binders_1ga66bfcbcd5b6bb9cb6df055b38d1a5f17" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_constructible&lt; binder_front_type&lt; Func, Args... &gt;, int, Func, Args... &gt;::value" virt="non-virtual">
+      <memberdef kind="function" id="group___function_binders_1ga5adb9c96259605477518e606595e1413" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_constructible&lt; binder_front_type&lt; Func, Args... &gt;, int, Func, Args... &gt;::value" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Func</type>
@@ -301,10 +283,11 @@
             <defname>Args</defname>
           </param>
         </templateparamlist>
-        <type><ref refid="group___function_binders_1gaa8edf673d24f0a45eb8ce43d4071e8a8" kindref="member">binder_front_type</ref>&lt; Func, Args... &gt;</type>
-        <definition>binder_front_type&lt; Func, Args... &gt; bind_front</definition>
+        <type>binder_front_type&lt; Func, Args... &gt;</type>
+        <definition>binder_front_type&lt; Func, Args... &gt; neforce::bind_front</definition>
         <argsstring>(Func &amp;&amp;func, Args &amp;&amp;... args)</argsstring>
         <name>bind_front</name>
+        <qualifiedname>neforce::bind_front</qualifiedname>
         <param>
           <type>Func &amp;&amp;</type>
           <declname>func</declname>
@@ -358,7 +341,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="925" column="30" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="925" bodyend="928"/>
-        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
+        <references refid="group___function_binders_1ga5adb9c96259605477518e606595e1413" compoundref="bind_8hpp" startline="925" endline="928">neforce::bind_front</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <referencedby refid="group___function_binders_1ga5adb9c96259605477518e606595e1413" compoundref="bind_8hpp" startline="925" endline="928">neforce::bind_front</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

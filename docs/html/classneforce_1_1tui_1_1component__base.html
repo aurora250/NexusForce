@@ -1,0 +1,1176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::tui::component_base类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1tui_1_1component__base.html','','classneforce_1_1tui_1_1component__base-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::tui::component_base类 参考<span class="mlabels"><span class="mlabel abstract">abstract</span></span><div class="ingroups"><a class="el" href="group___t_u_i.html">TUI</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>组件基类  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="component_8hpp_source.html">component.hpp</a>&gt;</code></p>
+<div class="dynheader">
+类 neforce::tui::component_base 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classneforce_1_1tui_1_1component__base__inherit__graph.svg" width="204" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a2041f66a3c35966be31037e991abd5fb" id="r_a2041f66a3c35966be31037e991abd5fb"><td class="memItemLeft">virtual <a class="el" href="classneforce_1_1tui_1_1element.html">element</a>&#160;</td><td class="memItemRight"><a class="el" href="#a2041f66a3c35966be31037e991abd5fb">render</a> ()=0</td></tr>
+<tr class="memdesc:a2041f66a3c35966be31037e991abd5fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">声明式渲染  <br /></td></tr>
+<tr class="memitem:a0b25da364ce75e255497611c8cf02f92" id="r_a0b25da364ce75e255497611c8cf02f92"><td class="memItemLeft">virtual bool&#160;</td><td class="memItemRight"><a class="el" href="#a0b25da364ce75e255497611c8cf02f92">on_key</a> (const <a class="el" href="structneforce_1_1tui_1_1key__event.html">key_event</a> &amp;e)</td></tr>
+<tr class="memdesc:a0b25da364ce75e255497611c8cf02f92"><td class="mdescLeft">&#160;</td><td class="mdescRight">键盘事件处理  <br /></td></tr>
+<tr class="memitem:af4bfaddd53a497fb4e64367c01eecb63" id="r_af4bfaddd53a497fb4e64367c01eecb63"><td class="memItemLeft">virtual bool&#160;</td><td class="memItemRight"><a class="el" href="#af4bfaddd53a497fb4e64367c01eecb63">on_mouse</a> (const <a class="el" href="structneforce_1_1tui_1_1mouse__event.html">mouse_event</a> &amp;e)</td></tr>
+<tr class="memdesc:af4bfaddd53a497fb4e64367c01eecb63"><td class="mdescLeft">&#160;</td><td class="mdescRight">鼠标事件处理  <br /></td></tr>
+<tr class="memitem:a82ce416c23877065fa4c353f76c8b935" id="r_a82ce416c23877065fa4c353f76c8b935"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#a82ce416c23877065fa4c353f76c8b935">on_mouse_leave</a> ()</td></tr>
+<tr class="memdesc:a82ce416c23877065fa4c353f76c8b935"><td class="mdescLeft">&#160;</td><td class="mdescRight">鼠标离开回调  <br /></td></tr>
+<tr class="memitem:a44b29970061a6bb03ce1b0146fb16826" id="r_a44b29970061a6bb03ce1b0146fb16826"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a44b29970061a6bb03ce1b0146fb16826">set_pass_through</a> (bool v) noexcept</td></tr>
+<tr class="memdesc:a44b29970061a6bb03ce1b0146fb16826"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置事件穿透  <br /></td></tr>
+<tr class="memitem:a296c0a23e06b886a60e78af7ea3aaf35" id="r_a296c0a23e06b886a60e78af7ea3aaf35"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a296c0a23e06b886a60e78af7ea3aaf35">pass_through</a> () const noexcept</td></tr>
+<tr class="memdesc:a296c0a23e06b886a60e78af7ea3aaf35"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否启用事件穿透  <br /></td></tr>
+<tr class="memitem:a5a41bc0181e5ad936a1390c1ff2ffd03" id="r_a5a41bc0181e5ad936a1390c1ff2ffd03"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a5a41bc0181e5ad936a1390c1ff2ffd03">has_focus</a> () const noexcept</td></tr>
+<tr class="memdesc:a5a41bc0181e5ad936a1390c1ff2ffd03"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否持有 Reconciler 键盘焦点  <br /></td></tr>
+<tr class="memitem:ad7e2f2c27c22aea35c6c57d8e5456588" id="r_ad7e2f2c27c22aea35c6c57d8e5456588"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad7e2f2c27c22aea35c6c57d8e5456588">set_has_focus</a> (bool v) noexcept</td></tr>
+<tr class="memdesc:ad7e2f2c27c22aea35c6c57d8e5456588"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置 Reconciler 焦点状态（由 Reconciler 调用）  <br /></td></tr>
+<tr class="memitem:a81fa01cfe5b19e0b72b99393e4bd147c" id="r_a81fa01cfe5b19e0b72b99393e4bd147c"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#a81fa01cfe5b19e0b72b99393e4bd147c">on_animation</a> (<a class="el" href="group___core_types.html#ga0b098d32ebd9cc922390914e765ca674">int64_t</a> delta)</td></tr>
+<tr class="memdesc:a81fa01cfe5b19e0b72b99393e4bd147c"><td class="mdescLeft">&#160;</td><td class="mdescRight">动画帧回调  <br /></td></tr>
+<tr class="memitem:a736db56c7d8740e70b2be1d8bfef8636" id="r_a736db56c7d8740e70b2be1d8bfef8636"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#a736db56c7d8740e70b2be1d8bfef8636">setup</a> ()</td></tr>
+<tr class="memdesc:a736db56c7d8740e70b2be1d8bfef8636"><td class="mdescLeft">&#160;</td><td class="mdescRight">挂载回调  <br /></td></tr>
+<tr class="memitem:ae75c976b0eec61ec50ae985cc8656aff" id="r_ae75c976b0eec61ec50ae985cc8656aff"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#ae75c976b0eec61ec50ae985cc8656aff">cleanup</a> () noexcept</td></tr>
+<tr class="memdesc:ae75c976b0eec61ec50ae985cc8656aff"><td class="mdescLeft">&#160;</td><td class="mdescRight">卸载回调  <br /></td></tr>
+<tr class="memitem:af5053f5d794fbe69c00b543050ab1130" id="r_af5053f5d794fbe69c00b543050ab1130"><td class="memItemLeft">virtual bool&#160;</td><td class="memItemRight"><a class="el" href="#af5053f5d794fbe69c00b543050ab1130">should_update</a> ()</td></tr>
+<tr class="memdesc:af5053f5d794fbe69c00b543050ab1130"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否需要更新  <br /></td></tr>
+<tr class="memitem:ac948e4367be25aa197105e4972760922" id="r_ac948e4367be25aa197105e4972760922"><td class="memItemLeft"><a class="el" href="classneforce_1_1tui_1_1component__base.html">component_base</a> *&#160;</td><td class="memItemRight"><a class="el" href="#ac948e4367be25aa197105e4972760922">parent</a> () const noexcept</td></tr>
+<tr class="memdesc:ac948e4367be25aa197105e4972760922"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取父组件  <br /></td></tr>
+<tr class="memitem:ac00c6d3259dceb08c4dc4e6aaa0a1ef0" id="r_ac00c6d3259dceb08c4dc4e6aaa0a1ef0"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ac00c6d3259dceb08c4dc4e6aaa0a1ef0">child_count</a> () const noexcept</td></tr>
+<tr class="memdesc:ac00c6d3259dceb08c4dc4e6aaa0a1ef0"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取子组件数量  <br /></td></tr>
+<tr class="memitem:ac2d0059d4d48b0522fd7c1ffde7b9b66" id="r_ac2d0059d4d48b0522fd7c1ffde7b9b66"><td class="memItemLeft"><a class="el" href="classneforce_1_1tui_1_1component__base.html">component_base</a> *&#160;</td><td class="memItemRight"><a class="el" href="#ac2d0059d4d48b0522fd7c1ffde7b9b66">child_at</a> (<a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> i) const noexcept</td></tr>
+<tr class="memdesc:ac2d0059d4d48b0522fd7c1ffde7b9b66"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取指定索引的子组件  <br /></td></tr>
+<tr class="memitem:a5342dbc7ef88ce2d6de50086b0e5db6f" id="r_a5342dbc7ef88ce2d6de50086b0e5db6f"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a5342dbc7ef88ce2d6de50086b0e5db6f">index</a> () const noexcept</td></tr>
+<tr class="memdesc:a5342dbc7ef88ce2d6de50086b0e5db6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取自身在父组件中的索引  <br /></td></tr>
+<tr class="memitem:a0226d7a0b3784f2cbff7e6ec8f87e4fe" id="r_a0226d7a0b3784f2cbff7e6ec8f87e4fe"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0226d7a0b3784f2cbff7e6ec8f87e4fe">add_child</a> (<a class="el" href="classneforce_1_1unique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classneforce_1_1tui_1_1component__base.html">component_base</a> &gt; child)</td></tr>
+<tr class="memdesc:a0226d7a0b3784f2cbff7e6ec8f87e4fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册子组件  <br /></td></tr>
+<tr class="memitem:aa99564aa3133a592d13e3e7751b229c7" id="r_aa99564aa3133a592d13e3e7751b229c7"><td class="memItemLeft"><a class="el" href="classneforce_1_1unique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classneforce_1_1tui_1_1component__base.html">component_base</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aa99564aa3133a592d13e3e7751b229c7">remove_child</a> (<a class="el" href="classneforce_1_1tui_1_1component__base.html">component_base</a> *child)</td></tr>
+<tr class="memdesc:aa99564aa3133a592d13e3e7751b229c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除子组件  <br /></td></tr>
+<tr class="memitem:acca399f5c1e6fe6c3135db87b8ae71c2" id="r_acca399f5c1e6fe6c3135db87b8ae71c2"><td class="memItemLeft"><a class="el" href="classneforce_1_1unique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classneforce_1_1tui_1_1component__base.html">component_base</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#acca399f5c1e6fe6c3135db87b8ae71c2">detach</a> ()</td></tr>
+<tr class="memdesc:acca399f5c1e6fe6c3135db87b8ae71c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">从父组件中脱离自身  <br /></td></tr>
+<tr class="memitem:acc6779e6eb699d9287b3ab1d2275e289" id="r_acc6779e6eb699d9287b3ab1d2275e289"><td class="memItemLeft"><a id="acc6779e6eb699d9287b3ab1d2275e289" name="acc6779e6eb699d9287b3ab1d2275e289"></a>
+void&#160;</td><td class="memItemRight"><b>detach_all_children</b> ()</td></tr>
+<tr class="memdesc:acc6779e6eb699d9287b3ab1d2275e289"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除所有子组件 <br /></td></tr>
+<tr class="memitem:a80de146cd35df1c867722d78eb0fae4d" id="r_a80de146cd35df1c867722d78eb0fae4d"><td class="memItemLeft">virtual bool&#160;</td><td class="memItemRight"><a class="el" href="#a80de146cd35df1c867722d78eb0fae4d">focusable</a> () const</td></tr>
+<tr class="memdesc:a80de146cd35df1c867722d78eb0fae4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否可获取焦点  <br /></td></tr>
+<tr class="memitem:a1417df6a96170278ccae50d47c86db57" id="r_a1417df6a96170278ccae50d47c86db57"><td class="memItemLeft"><a class="el" href="classneforce_1_1tui_1_1component__base.html">component_base</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a1417df6a96170278ccae50d47c86db57">active_child</a> () noexcept</td></tr>
+<tr class="memdesc:a1417df6a96170278ccae50d47c86db57"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前激活的子组件  <br /></td></tr>
+<tr class="memitem:a40dd5704371529d5a3080807b2ff927d" id="r_a40dd5704371529d5a3080807b2ff927d"><td class="memItemLeft">const <a class="el" href="classneforce_1_1tui_1_1component__base.html">component_base</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a40dd5704371529d5a3080807b2ff927d">active_child</a> () const noexcept</td></tr>
+<tr class="memdesc:a40dd5704371529d5a3080807b2ff927d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前激活的子组件  <br /></td></tr>
+<tr class="memitem:a1fc6ce924b5303ac76813806c1da6760" id="r_a1fc6ce924b5303ac76813806c1da6760"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1fc6ce924b5303ac76813806c1da6760">set_active_child</a> (<a class="el" href="classneforce_1_1tui_1_1component__base.html">component_base</a> *child) noexcept</td></tr>
+<tr class="memdesc:a1fc6ce924b5303ac76813806c1da6760"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置激活的子组件  <br /></td></tr>
+<tr class="memitem:a31855b9fb899bf783ed3d12f17a53940" id="r_a31855b9fb899bf783ed3d12f17a53940"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a31855b9fb899bf783ed3d12f17a53940">active</a> () const noexcept</td></tr>
+<tr class="memdesc:a31855b9fb899bf783ed3d12f17a53940"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否处于激活状态  <br /></td></tr>
+<tr class="memitem:a963e0c1e213b62414651c6b3c3b3fc88" id="r_a963e0c1e213b62414651c6b3c3b3fc88"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a963e0c1e213b62414651c6b3c3b3fc88">focused</a> () const noexcept</td></tr>
+<tr class="memdesc:a963e0c1e213b62414651c6b3c3b3fc88"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否拥有焦点  <br /></td></tr>
+<tr class="memitem:a22adbe654da678fcea385b372d3bcd97" id="r_a22adbe654da678fcea385b372d3bcd97"><td class="memItemLeft"><a id="a22adbe654da678fcea385b372d3bcd97" name="a22adbe654da678fcea385b372d3bcd97"></a>
+virtual void&#160;</td><td class="memItemRight"><b>take_focus</b> ()</td></tr>
+<tr class="memdesc:a22adbe654da678fcea385b372d3bcd97"><td class="mdescLeft">&#160;</td><td class="mdescRight">请求焦点 <br /></td></tr>
+<tr class="memitem:a8768fd357a3ebc8e3a113fa6168be502" id="r_a8768fd357a3ebc8e3a113fa6168be502"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8768fd357a3ebc8e3a113fa6168be502">schedule_render</a> ()</td></tr>
+<tr class="memdesc:a8768fd357a3ebc8e3a113fa6168be502"><td class="mdescLeft">&#160;</td><td class="mdescRight">调度重渲染  <br /></td></tr>
+<tr class="memitem:a5e0cd2ed9e7c1ccb0a7360476f66f39a" id="r_a5e0cd2ed9e7c1ccb0a7360476f66f39a"><td class="memTemplParams" colspan="2">template&lt;typename Ctx&gt; </td></tr>
+<tr class="memitem:a5e0cd2ed9e7c1ccb0a7360476f66f39a template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a5e0cd2ed9e7c1ccb0a7360476f66f39a">provide_context</a> (Ctx value)</td></tr>
+<tr class="memdesc:a5e0cd2ed9e7c1ccb0a7360476f66f39a"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置上下文值  <br /></td></tr>
+<tr class="memitem:abb6caddef954ff9b2998cd9562a85490" id="r_abb6caddef954ff9b2998cd9562a85490"><td class="memTemplParams" colspan="2">template&lt;typename Ctx&gt; </td></tr>
+<tr class="memitem:abb6caddef954ff9b2998cd9562a85490 template"><td class="memItemLeft">const Ctx &amp;&#160;</td><td class="memItemRight"><a class="el" href="#abb6caddef954ff9b2998cd9562a85490">context</a> () const</td></tr>
+<tr class="memdesc:abb6caddef954ff9b2998cd9562a85490"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取上下文值  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected 属性</h2></td></tr>
+<tr class="memitem:a2ad426ec8797c7ab855840eda6991ae3" id="r_a2ad426ec8797c7ab855840eda6991ae3"><td class="memItemLeft"><a id="a2ad426ec8797c7ab855840eda6991ae3" name="a2ad426ec8797c7ab855840eda6991ae3"></a>
+<a class="el" href="classneforce_1_1tui_1_1component__base.html">component_base</a> *&#160;</td><td class="memItemRight"><b>parent_</b> = nullptr</td></tr>
+<tr class="memdesc:a2ad426ec8797c7ab855840eda6991ae3"><td class="mdescLeft">&#160;</td><td class="mdescRight">父组件指针 <br /></td></tr>
+<tr class="memitem:a80aebfa7eef650cacfe5d0e61af1a9f1" id="r_a80aebfa7eef650cacfe5d0e61af1a9f1"><td class="memItemLeft"><a id="a80aebfa7eef650cacfe5d0e61af1a9f1" name="a80aebfa7eef650cacfe5d0e61af1a9f1"></a>
+<a class="el" href="classneforce_1_1tui_1_1component__base.html">component_base</a> *&#160;</td><td class="memItemRight"><b>active_child_</b> = nullptr</td></tr>
+<tr class="memdesc:a80aebfa7eef650cacfe5d0e61af1a9f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">当前激活的子组件 <br /></td></tr>
+<tr class="memitem:a876201a2059b279844047e8944bb5a61" id="r_a876201a2059b279844047e8944bb5a61"><td class="memItemLeft"><a id="a876201a2059b279844047e8944bb5a61" name="a876201a2059b279844047e8944bb5a61"></a>
+bool&#160;</td><td class="memItemRight"><b>has_focus_</b> = false</td></tr>
+<tr class="memdesc:a876201a2059b279844047e8944bb5a61"><td class="mdescLeft">&#160;</td><td class="mdescRight">reconciler 焦点状态 <br /></td></tr>
+<tr class="memitem:a676128402c69a9488e3f52193d70534d" id="r_a676128402c69a9488e3f52193d70534d"><td class="memItemLeft"><a id="a676128402c69a9488e3f52193d70534d" name="a676128402c69a9488e3f52193d70534d"></a>
+bool&#160;</td><td class="memItemRight"><b>pass_through_</b> = false</td></tr>
+<tr class="memdesc:a676128402c69a9488e3f52193d70534d"><td class="mdescLeft">&#160;</td><td class="mdescRight">事件穿透标志 <br /></td></tr>
+<tr class="memitem:a08878b052b4c79a6ac0e12b2dfb23230" id="r_a08878b052b4c79a6ac0e12b2dfb23230"><td class="memItemLeft"><a id="a08878b052b4c79a6ac0e12b2dfb23230" name="a08878b052b4c79a6ac0e12b2dfb23230"></a>
+<a class="el" href="classneforce_1_1strand.html">strand</a> *&#160;</td><td class="memItemRight"><b>strand_</b> = nullptr</td></tr>
+<tr class="memdesc:a08878b052b4c79a6ac0e12b2dfb23230"><td class="mdescLeft">&#160;</td><td class="mdescRight">串行执行器 <br /></td></tr>
+<tr class="memitem:aa810dd5d278dc8c9a1e2cb152dd87372" id="r_aa810dd5d278dc8c9a1e2cb152dd87372"><td class="memItemLeft"><a id="aa810dd5d278dc8c9a1e2cb152dd87372" name="aa810dd5d278dc8c9a1e2cb152dd87372"></a>
+<a class="el" href="classneforce_1_1io__context.html">io_context</a> *&#160;</td><td class="memItemRight"><b>ctx_</b> = nullptr</td></tr>
+<tr class="memdesc:aa810dd5d278dc8c9a1e2cb152dd87372"><td class="mdescLeft">&#160;</td><td class="mdescRight">事件循环上下文 <br /></td></tr>
+<tr class="memitem:aefbcc973f77793bd823ec79c300dc5df" id="r_aefbcc973f77793bd823ec79c300dc5df"><td class="memItemLeft"><a id="aefbcc973f77793bd823ec79c300dc5df" name="aefbcc973f77793bd823ec79c300dc5df"></a>
+<a class="el" href="classneforce_1_1vector.html">vector</a>&lt; <a class="el" href="classneforce_1_1unique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classneforce_1_1tui_1_1component__base.html">component_base</a> &gt; &gt;&#160;</td><td class="memItemRight"><b>children_</b></td></tr>
+<tr class="memdesc:aefbcc973f77793bd823ec79c300dc5df"><td class="mdescLeft">&#160;</td><td class="mdescRight">子组件列表 <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>组件基类 </p>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00036">36</a> 行定义.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a31855b9fb899bf783ed3d12f17a53940" name="a31855b9fb899bf783ed3d12f17a53940"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31855b9fb899bf783ed3d12f17a53940">&#9670;&#160;</a></span>active()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::tui::component_base::active </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>是否处于激活状态 </p>
+<dl class="section return"><dt>返回</dt><dd>是否活跃 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00251">251</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="component_8hpp_source.html#l00320">parent_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="component_8hpp_source.html#l00257">focused()</a>.</p>
+
+</div>
+</div>
+<a id="a40dd5704371529d5a3080807b2ff927d" name="a40dd5704371529d5a3080807b2ff927d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40dd5704371529d5a3080807b2ff927d">&#9670;&#160;</a></span>active_child() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classneforce_1_1tui_1_1component__base.html">component_base</a> * neforce::tui::component_base::active_child </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取当前激活的子组件 </p>
+<dl class="section return"><dt>返回</dt><dd>激活的子组件指针 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00239">239</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="component_8hpp_source.html#l00321">active_child_</a>.</p>
+
+</div>
+</div>
+<a id="a1417df6a96170278ccae50d47c86db57" name="a1417df6a96170278ccae50d47c86db57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1417df6a96170278ccae50d47c86db57">&#9670;&#160;</a></span>active_child() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1tui_1_1component__base.html">component_base</a> * neforce::tui::component_base::active_child </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取当前激活的子组件 </p>
+<dl class="section return"><dt>返回</dt><dd>激活的子组件指针 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00233">233</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="component_8hpp_source.html#l00321">active_child_</a>.</p>
+
+</div>
+</div>
+<a id="a0226d7a0b3784f2cbff7e6ec8f87e4fe" name="a0226d7a0b3784f2cbff7e6ec8f87e4fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0226d7a0b3784f2cbff7e6ec8f87e4fe">&#9670;&#160;</a></span>add_child()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::tui::component_base::add_child </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1unique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classneforce_1_1tui_1_1component__base.html">component_base</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>child</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>注册子组件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">child</td><td>子组件指针</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>父组件接管子组件生命周期。注册后子组件将参与焦点链遍历和生命周期管理。 </p>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00175">175</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="component_8hpp_source.html#l00326">children_</a>, <a class="el" href="component_8hpp_source.html#l00325">ctx_</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00320">neforce::unique_ptr&lt; T, Deleter &gt;::get()</a>, <a class="el" href="shift_8hpp_source.html#l00312">neforce::move()</a> , 以及 <a class="el" href="component_8hpp_source.html#l00324">strand_</a>.</p>
+
+</div>
+</div>
+<a id="ac2d0059d4d48b0522fd7c1ffde7b9b66" name="ac2d0059d4d48b0522fd7c1ffde7b9b66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2d0059d4d48b0522fd7c1ffde7b9b66">&#9670;&#160;</a></span>child_at()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1tui_1_1component__base.html">component_base</a> * neforce::tui::component_base::child_at </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取指定索引的子组件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>索引 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>子组件指针 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00151">151</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="component_8hpp_source.html#l00326">children_</a>.</p>
+
+</div>
+</div>
+<a id="ac00c6d3259dceb08c4dc4e6aaa0a1ef0" name="ac00c6d3259dceb08c4dc4e6aaa0a1ef0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac00c6d3259dceb08c4dc4e6aaa0a1ef0">&#9670;&#160;</a></span>child_count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> neforce::tui::component_base::child_count </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取子组件数量 </p>
+<dl class="section return"><dt>返回</dt><dd>子组件数 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00144">144</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="component_8hpp_source.html#l00326">children_</a>.</p>
+
+</div>
+</div>
+<a id="ae75c976b0eec61ec50ae985cc8656aff" name="ae75c976b0eec61ec50ae985cc8656aff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae75c976b0eec61ec50ae985cc8656aff">&#9670;&#160;</a></span>cleanup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void neforce::tui::component_base::cleanup </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel virtual">virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>卸载回调 </p>
+<p>在组件被移除前调用。在此断开连接、释放资源。 </p>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00123">123</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="component_8hpp_source.html#l00190">remove_child()</a>.</p>
+
+</div>
+</div>
+<a id="abb6caddef954ff9b2998cd9562a85490" name="abb6caddef954ff9b2998cd9562a85490"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb6caddef954ff9b2998cd9562a85490">&#9670;&#160;</a></span>context()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Ctx&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const Ctx &amp; neforce::tui::component_base::context </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取上下文值 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Ctx</td><td>上下文类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>上下文常量引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00305">305</a> 行定义.</p>
+
+</div>
+</div>
+<a id="acca399f5c1e6fe6c3135db87b8ae71c2" name="acca399f5c1e6fe6c3135db87b8ae71c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acca399f5c1e6fe6c3135db87b8ae71c2">&#9670;&#160;</a></span>detach()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1unique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classneforce_1_1tui_1_1component__base.html">component_base</a> &gt; neforce::tui::component_base::detach </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>从父组件中脱离自身 </p>
+<dl class="section return"><dt>返回</dt><dd>自身指针 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00207">207</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="component_8hpp_source.html#l00320">parent_</a>.</p>
+
+</div>
+</div>
+<a id="a80de146cd35df1c867722d78eb0fae4d" name="a80de146cd35df1c867722d78eb0fae4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80de146cd35df1c867722d78eb0fae4d">&#9670;&#160;</a></span>focusable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool neforce::tui::component_base::focusable </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>是否可获取焦点 </p>
+<dl class="section return"><dt>返回</dt><dd>true 表示该组件可接收键盘事件 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00227">227</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a963e0c1e213b62414651c6b3c3b3fc88" name="a963e0c1e213b62414651c6b3c3b3fc88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a963e0c1e213b62414651c6b3c3b3fc88">&#9670;&#160;</a></span>focused()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::tui::component_base::focused </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>是否拥有焦点 </p>
+<dl class="section return"><dt>返回</dt><dd>是否已聚焦 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00257">257</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="component_8hpp_source.html#l00251">active()</a> , 以及 <a class="el" href="component_8hpp_source.html#l00320">parent_</a>.</p>
+
+</div>
+</div>
+<a id="a5a41bc0181e5ad936a1390c1ff2ffd03" name="a5a41bc0181e5ad936a1390c1ff2ffd03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a41bc0181e5ad936a1390c1ff2ffd03">&#9670;&#160;</a></span>has_focus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::tui::component_base::has_focus </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>是否持有 Reconciler 键盘焦点 </p>
+<dl class="section return"><dt>返回</dt><dd>是否聚焦 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00097">97</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="component_8hpp_source.html#l00322">has_focus_</a>.</p>
+
+</div>
+</div>
+<a id="a5342dbc7ef88ce2d6de50086b0e5db6f" name="a5342dbc7ef88ce2d6de50086b0e5db6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5342dbc7ef88ce2d6de50086b0e5db6f">&#9670;&#160;</a></span>index()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int neforce::tui::component_base::index </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取自身在父组件中的索引 </p>
+<dl class="section return"><dt>返回</dt><dd>索引，无父组件返回 -1 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00157">157</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="component_8hpp_source.html#l00320">parent_</a>.</p>
+
+</div>
+</div>
+<a id="a81fa01cfe5b19e0b72b99393e4bd147c" name="a81fa01cfe5b19e0b72b99393e4bd147c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81fa01cfe5b19e0b72b99393e4bd147c">&#9670;&#160;</a></span>on_animation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void neforce::tui::component_base::on_animation </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#ga0b098d32ebd9cc922390914e765ca674">int64_t</a></td>          <td class="paramname"><span class="paramname"><em>delta</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>动画帧回调 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delta</td><td>距上一帧的毫秒数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00109">109</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a0b25da364ce75e255497611c8cf02f92" name="a0b25da364ce75e255497611c8cf02f92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b25da364ce75e255497611c8cf02f92">&#9670;&#160;</a></span>on_key()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool neforce::tui::component_base::on_key </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structneforce_1_1tui_1_1key__event.html">key_event</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>e</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>键盘事件处理 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td>键盘事件 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>true 表示事件已消费，false 继续向父组件传递 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00056">56</a> 行定义.</p>
+
+</div>
+</div>
+<a id="af4bfaddd53a497fb4e64367c01eecb63" name="af4bfaddd53a497fb4e64367c01eecb63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4bfaddd53a497fb4e64367c01eecb63">&#9670;&#160;</a></span>on_mouse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool neforce::tui::component_base::on_mouse </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structneforce_1_1tui_1_1mouse__event.html">mouse_event</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>e</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>鼠标事件处理 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td>鼠标事件 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>true 表示事件已消费 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00066">66</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a82ce416c23877065fa4c353f76c8b935" name="a82ce416c23877065fa4c353f76c8b935"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82ce416c23877065fa4c353f76c8b935">&#9670;&#160;</a></span>on_mouse_leave()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void neforce::tui::component_base::on_mouse_leave </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>鼠标离开回调 </p>
+<p>当鼠标从前一帧的当前组件移动到其他组件时，Reconciler 调用此方法。 </p>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00076">76</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ac948e4367be25aa197105e4972760922" name="ac948e4367be25aa197105e4972760922"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac948e4367be25aa197105e4972760922">&#9670;&#160;</a></span>parent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1tui_1_1component__base.html">component_base</a> * neforce::tui::component_base::parent </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取父组件 </p>
+<dl class="section return"><dt>返回</dt><dd>父组件指针，根组件返回 nullptr </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00138">138</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="component_8hpp_source.html#l00320">parent_</a>.</p>
+
+</div>
+</div>
+<a id="a296c0a23e06b886a60e78af7ea3aaf35" name="a296c0a23e06b886a60e78af7ea3aaf35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a296c0a23e06b886a60e78af7ea3aaf35">&#9670;&#160;</a></span>pass_through()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::tui::component_base::pass_through </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>是否启用事件穿透 </p>
+<dl class="section return"><dt>返回</dt><dd>是否穿透 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00091">91</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="component_8hpp_source.html#l00323">pass_through_</a>.</p>
+
+</div>
+</div>
+<a id="a5e0cd2ed9e7c1ccb0a7360476f66f39a" name="a5e0cd2ed9e7c1ccb0a7360476f66f39a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e0cd2ed9e7c1ccb0a7360476f66f39a">&#9670;&#160;</a></span>provide_context()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Ctx&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::tui::component_base::provide_context </td>
+          <td>(</td>
+          <td class="paramtype">Ctx</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置上下文值 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Ctx</td><td>上下文类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>上下文值 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00295">295</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shared__ptr_8hpp_source.html#l00849">neforce::make_shared()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">neforce::move()</a>.</p>
+
+</div>
+</div>
+<a id="aa99564aa3133a592d13e3e7751b229c7" name="aa99564aa3133a592d13e3e7751b229c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa99564aa3133a592d13e3e7751b229c7">&#9670;&#160;</a></span>remove_child()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1unique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classneforce_1_1tui_1_1component__base.html">component_base</a> &gt; neforce::tui::component_base::remove_child </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1tui_1_1component__base.html">component_base</a> *</td>          <td class="paramname"><span class="paramname"><em>child</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移除子组件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">child</td><td>子组件指针 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>子组件指针，调用者接管其生命周期 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00190">190</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="component_8hpp_source.html#l00326">children_</a>, <a class="el" href="component_8hpp_source.html#l00123">cleanup()</a>, <a class="el" href="shift_8hpp_source.html#l00312">neforce::move()</a> , 以及 <a class="el" href="component_8hpp_source.html#l00320">parent_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="component_8hpp_source.html#l00217">detach_all_children()</a>.</p>
+
+</div>
+</div>
+<a id="a2041f66a3c35966be31037e991abd5fb" name="a2041f66a3c35966be31037e991abd5fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2041f66a3c35966be31037e991abd5fb">&#9670;&#160;</a></span>render()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classneforce_1_1tui_1_1element.html">element</a> neforce::tui::component_base::render </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>声明式渲染 </p>
+<dl class="section return"><dt>返回</dt><dd>虚拟元素树</dd></dl>
+<p>Reconciler 每次 flush 时调用此方法获取最新 UI 描述。 实现必须是纯函数——仅构建 element 树，禁止终端 I/O。</p>
+<dl class="section note"><dt>注解</dt><dd>禁止在 <a class="el" href="#a2041f66a3c35966be31037e991abd5fb" title="声明式渲染">render()</a> 中修改 State。 </dd></dl>
+
+</div>
+</div>
+<a id="a8768fd357a3ebc8e3a113fa6168be502" name="a8768fd357a3ebc8e3a113fa6168be502"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8768fd357a3ebc8e3a113fa6168be502">&#9670;&#160;</a></span>schedule_render()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::tui::component_base::schedule_render </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>调度重渲染 </p>
+<p>由 <a class="el" href="classneforce_1_1tui_1_1state.html" title="响应式状态变量">state&lt;T&gt;</a> 在写入时调用，通知 reconciler。 </p>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00283">283</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a1fc6ce924b5303ac76813806c1da6760" name="a1fc6ce924b5303ac76813806c1da6760"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fc6ce924b5303ac76813806c1da6760">&#9670;&#160;</a></span>set_active_child()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::tui::component_base::set_active_child </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1tui_1_1component__base.html">component_base</a> *</td>          <td class="paramname"><span class="paramname"><em>child</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置激活的子组件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">child</td><td>要激活的子组件指针 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00245">245</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="component_8hpp_source.html#l00321">active_child_</a>.</p>
+
+</div>
+</div>
+<a id="ad7e2f2c27c22aea35c6c57d8e5456588" name="ad7e2f2c27c22aea35c6c57d8e5456588"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7e2f2c27c22aea35c6c57d8e5456588">&#9670;&#160;</a></span>set_has_focus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::tui::component_base::set_has_focus </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置 Reconciler 焦点状态（由 Reconciler 调用） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>是否聚焦 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00103">103</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="component_8hpp_source.html#l00322">has_focus_</a>.</p>
+
+</div>
+</div>
+<a id="a44b29970061a6bb03ce1b0146fb16826" name="a44b29970061a6bb03ce1b0146fb16826"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44b29970061a6bb03ce1b0146fb16826">&#9670;&#160;</a></span>set_pass_through()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::tui::component_base::set_pass_through </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置事件穿透 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>是否穿透</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>当设为 true 时，聚焦组件未消费的键盘事件会继续向父组件传递； 默认为 false，未消费的事件将被丢弃。 </p>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00085">85</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="component_8hpp_source.html#l00323">pass_through_</a>.</p>
+
+</div>
+</div>
+<a id="a736db56c7d8740e70b2be1d8bfef8636" name="a736db56c7d8740e70b2be1d8bfef8636"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a736db56c7d8740e70b2be1d8bfef8636">&#9670;&#160;</a></span>setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void neforce::tui::component_base::setup </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>挂载回调 </p>
+<p>在首次 <a class="el" href="#a2041f66a3c35966be31037e991abd5fb" title="声明式渲染">render()</a> 之前调用。在此连接 signal、订阅事件、启动异步操作。 </p>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00116">116</a> 行定义.</p>
+
+</div>
+</div>
+<a id="af5053f5d794fbe69c00b543050ab1130" name="af5053f5d794fbe69c00b543050ab1130"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5053f5d794fbe69c00b543050ab1130">&#9670;&#160;</a></span>should_update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool neforce::tui::component_base::should_update </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>是否需要更新 </p>
+<dl class="section return"><dt>返回</dt><dd>true 表示需要重新 render，false 跳过本次渲染</dd></dl>
+<p>性能优化钩子。reconciler 在每次 flush 前检查此方法， 返回 false 则复用上次的 element 树。 </p>
+
+<p class="definition">在文件 <a class="el" href="component_8hpp_source.html">component.hpp</a> 第 <a class="el" href="component_8hpp_source.html#l00132">132</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="component_8hpp_source.html">component.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><b>tui</b></li><li class="navelem"><a href="classneforce_1_1tui_1_1component__base.html">component_base</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

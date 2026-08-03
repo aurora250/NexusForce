@@ -1,4 +1,4 @@
 var stacktrace_8hpp =
 [
-    [ "stacktrace::frame", "classstacktrace_1_1frame.html", "classstacktrace_1_1frame" ]
+    [ "neforce::stacktrace::frame", "classneforce_1_1stacktrace_1_1frame.html", "classneforce_1_1stacktrace_1_1frame" ]
 ];

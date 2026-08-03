@@ -1,0 +1,235 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1tui_1_1linear__gradient" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::tui::linear_gradient</compoundname>
+    <includes refid="linear__gradient_8hpp" local="no">linear_gradient.hpp</includes>
+    <innerclass refid="structneforce_1_1tui_1_1linear__gradient_1_1color__stop" prot="private">neforce::tui::linear_gradient::color_stop</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structneforce_1_1tui_1_1linear__gradient_1ab4cff0208dac8ac937ac953188c47eb8" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float neforce::tui::linear_gradient::angle_</definition>
+        <argsstring></argsstring>
+        <name>angle_</name>
+        <qualifiedname>neforce::tui::linear_gradient::angle_</qualifiedname>
+        <initializer>= 0.0F</initializer>
+        <briefdescription>
+<para>渐变角度 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/linear_gradient.hpp" line="47" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/linear_gradient.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1tui_1_1linear__gradient_1a4f2e7537ea222ad427cd8596f5b2d7ef" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; color_stop &gt;</type>
+        <definition>vector&lt;color_stop&gt; neforce::tui::linear_gradient::stops_</definition>
+        <argsstring></argsstring>
+        <name>stops_</name>
+        <qualifiedname>neforce::tui::linear_gradient::stops_</qualifiedname>
+        <briefdescription>
+<para>色标列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/linear_gradient.hpp" line="48" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/linear_gradient.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1tui_1_1linear__gradient_1a820858ddee37bab8131c9b6557b7d25e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::tui::linear_gradient::linear_gradient</definition>
+        <argsstring>()</argsstring>
+        <name>linear_gradient</name>
+        <qualifiedname>neforce::tui::linear_gradient::linear_gradient</qualifiedname>
+        <briefdescription>
+<para>默认构造 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/linear_gradient.hpp" line="54" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/linear_gradient.hpp" bodystart="54" bodyend="57"/>
+        <references refid="classneforce_1_1color_1a90e7aa75e880ac2f28b725be10f6b953" compoundref="color_8hpp" startline="810" endline="810">neforce::color::black</references>
+        <references refid="classneforce_1_1color_1ab98aa3d36e8f19116cfd70448252f42b" compoundref="color_8hpp" startline="840" endline="840">neforce::color::transparent</references>
+        <referencedby refid="structneforce_1_1tui_1_1linear__gradient_1a2fda38009b435b0b7377427e4cf90dca" compoundref="linear__gradient_8hpp" startline="85" endline="88">add_stop</referencedby>
+        <referencedby refid="structneforce_1_1tui_1_1linear__gradient_1a8074b6856a65e56085f463a321fb357d" compoundref="linear__gradient_8hpp" startline="74" endline="77">angle</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1tui_1_1linear__gradient_1a5e4fc68a47cbe9113ceb0b0b29a4ab39" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::tui::linear_gradient::linear_gradient</definition>
+        <argsstring>(_NEFORCE color begin, struct color end)</argsstring>
+        <name>linear_gradient</name>
+        <qualifiedname>neforce::tui::linear_gradient::linear_gradient</qualifiedname>
+        <param>
+          <type>_NEFORCE <ref refid="group___t_u_i_1ga5a6710b179fd24c551c9b1c8c1719f0d" kindref="member">color</ref></type>
+          <declname>begin</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="group___t_u_i_1ga5a6710b179fd24c551c9b1c8c1719f0d" kindref="member">color</ref></type>
+          <declname>end</declname>
+        </param>
+        <briefdescription>
+<para>从起止颜色构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>begin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始颜色 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>end</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束颜色 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/linear_gradient.hpp" line="64" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/linear_gradient.hpp" bodystart="64" bodyend="67"/>
+        <references refid="group___type_erasure_functions_1ga95ec604cbbeaea30e64f01a8790b5a92" compoundref="type__erase_8hpp" startline="30" endline="32">neforce::begin</references>
+        <references refid="group___t_u_i_1ga5a6710b179fd24c551c9b1c8c1719f0d" compoundref="element_8hpp" startline="329" endline="335">neforce::tui::color</references>
+        <references refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" compoundref="type__erase_8hpp" startline="41" endline="43">neforce::end</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1tui_1_1linear__gradient_1a8074b6856a65e56085f463a321fb357d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1tui_1_1linear__gradient_1a820858ddee37bab8131c9b6557b7d25e" kindref="member">linear_gradient</ref> &amp;</type>
+        <definition>linear_gradient &amp; neforce::tui::linear_gradient::angle</definition>
+        <argsstring>(const float a)</argsstring>
+        <name>angle</name>
+        <qualifiedname>neforce::tui::linear_gradient::angle</qualifiedname>
+        <param>
+          <type>const float</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+<para>设置渐变角度 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>角度（度） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/linear_gradient.hpp" line="74" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/linear_gradient.hpp" bodystart="74" bodyend="77"/>
+        <references refid="structneforce_1_1tui_1_1linear__gradient_1a820858ddee37bab8131c9b6557b7d25e" compoundref="linear__gradient_8hpp" startline="54" endline="57">linear_gradient</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1tui_1_1linear__gradient_1a2fda38009b435b0b7377427e4cf90dca" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1tui_1_1linear__gradient_1a820858ddee37bab8131c9b6557b7d25e" kindref="member">linear_gradient</ref> &amp;</type>
+        <definition>linear_gradient &amp; neforce::tui::linear_gradient::add_stop</definition>
+        <argsstring>(const struct color &amp;c, optional&lt; float &gt; pos=none)</argsstring>
+        <name>add_stop</name>
+        <qualifiedname>neforce::tui::linear_gradient::add_stop</qualifiedname>
+        <param>
+          <type>const struct <ref refid="group___t_u_i_1ga5a6710b179fd24c551c9b1c8c1719f0d" kindref="member">color</ref> &amp;</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; float &gt;</type>
+          <declname>pos</declname>
+          <defval><ref refid="group___none_1gae83f5d6b9256e35bb2781ebb286996d3" kindref="member">none</ref></defval>
+        </param>
+        <briefdescription>
+<para>添加色标 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>颜色 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位置（none 自动分配） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/linear_gradient.hpp" line="85" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/linear_gradient.hpp" bodystart="85" bodyend="88"/>
+        <references refid="group___t_u_i_1ga5a6710b179fd24c551c9b1c8c1719f0d" compoundref="element_8hpp" startline="329" endline="335">neforce::tui::color</references>
+        <references refid="structneforce_1_1tui_1_1linear__gradient_1a820858ddee37bab8131c9b6557b7d25e" compoundref="linear__gradient_8hpp" startline="54" endline="57">linear_gradient</references>
+        <references refid="group___none_1gae83f5d6b9256e35bb2781ebb286996d3" compoundref="none_8hpp" startline="73" endline="73">neforce::none</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1tui_1_1linear__gradient_1aab109a2d388d1783c58ac061985ccace" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>_NEFORCE <ref refid="group___t_u_i_1ga5a6710b179fd24c551c9b1c8c1719f0d" kindref="member">color</ref></type>
+        <definition>_NEFORCE color neforce::tui::linear_gradient::sample</definition>
+        <argsstring>(float t) const</argsstring>
+        <name>sample</name>
+        <qualifiedname>neforce::tui::linear_gradient::sample</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+<para>在指定位置采样颜色 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>归一化位置 (0.0-1.0) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插值颜色 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/linear_gradient.hpp" line="95" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/linear_gradient.hpp" bodystart="95" bodyend="121"/>
+        <references refid="group___t_u_i_1ga5a6710b179fd24c551c9b1c8c1719f0d" compoundref="element_8hpp" startline="329" endline="335">neforce::tui::color</references>
+        <references refid="classneforce_1_1color_1a4c94ffc1b08aaad2bac493606e803671" compoundref="color_8hpp" startline="463" endline="467">neforce::color::lerp</references>
+        <references refid="classneforce_1_1optional_1acd91dfb42420087a4370f1147b3181e6" compoundref="optional_8hpp" startline="545" endline="550">neforce::optional&lt; T &gt;::value_or</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>线性渐变配置 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>定义一组色标，颜色在色标之间线性插值。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/linear_gradient.hpp" line="28" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/linear_gradient.hpp" bodystart="28" bodyend="122"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1tui_1_1linear__gradient_1a2fda38009b435b0b7377427e4cf90dca" prot="public" virt="non-virtual"><scope>neforce::tui::linear_gradient</scope><name>add_stop</name></member>
+      <member refid="structneforce_1_1tui_1_1linear__gradient_1a8074b6856a65e56085f463a321fb357d" prot="public" virt="non-virtual"><scope>neforce::tui::linear_gradient</scope><name>angle</name></member>
+      <member refid="structneforce_1_1tui_1_1linear__gradient_1ab4cff0208dac8ac937ac953188c47eb8" prot="private" virt="non-virtual"><scope>neforce::tui::linear_gradient</scope><name>angle_</name></member>
+      <member refid="structneforce_1_1tui_1_1linear__gradient_1a820858ddee37bab8131c9b6557b7d25e" prot="public" virt="non-virtual"><scope>neforce::tui::linear_gradient</scope><name>linear_gradient</name></member>
+      <member refid="structneforce_1_1tui_1_1linear__gradient_1a5e4fc68a47cbe9113ceb0b0b29a4ab39" prot="public" virt="non-virtual"><scope>neforce::tui::linear_gradient</scope><name>linear_gradient</name></member>
+      <member refid="structneforce_1_1tui_1_1linear__gradient_1aab109a2d388d1783c58ac061985ccace" prot="public" virt="non-virtual"><scope>neforce::tui::linear_gradient</scope><name>sample</name></member>
+      <member refid="structneforce_1_1tui_1_1linear__gradient_1a4f2e7537ea222ad427cd8596f5b2d7ef" prot="private" virt="non-virtual"><scope>neforce::tui::linear_gradient</scope><name>stops_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

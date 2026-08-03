@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1sysinfo_1_1numa__node__info" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::sysinfo::numa_node_info</compoundname>
+    <includes refid="sysinfo_8hpp" local="no">sysinfo.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structneforce_1_1sysinfo_1_1numa__node__info_1a0e3d9f0bd0d381e031d1c7f3865b9d90" prot="public" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::sysinfo::numa_node_info::node_id</definition>
+        <argsstring></argsstring>
+        <name>node_id</name>
+        <qualifiedname>neforce::sysinfo::numa_node_info::node_id</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>NUMA 节点编号 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="187" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" bodystart="187" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1sysinfo_1_1numa__node__info_1ac25a7a4d05791f6a444cd3d878655acd" prot="public" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::sysinfo::numa_node_info::core_count</definition>
+        <argsstring></argsstring>
+        <name>core_count</name>
+        <qualifiedname>neforce::sysinfo::numa_node_info::core_count</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>属于该节点的逻辑核心数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="188" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" bodystart="188" bodyend="188"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1sysinfo_1_1numa__node__info_1aedecd7e033d5189522bc1820b2a8f6f0" prot="public" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga5405672bf9962081e6fcd1448d4bce4a" kindref="member">uint64_t</ref></type>
+        <definition>uint64_t neforce::sysinfo::numa_node_info::core_mask</definition>
+        <argsstring></argsstring>
+        <name>core_mask</name>
+        <qualifiedname>neforce::sysinfo::numa_node_info::core_mask</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>核心位图掩码（64 核以内直接可用） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="189" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" bodystart="189" bodyend="189"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1sysinfo_1_1numa__node__info_1a89ff21622a5a3df6cc65be24ef83ef18" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref> &gt;</type>
+        <definition>vector&lt;uint32_t&gt; neforce::sysinfo::numa_node_info::core_list</definition>
+        <argsstring></argsstring>
+        <name>core_list</name>
+        <qualifiedname>neforce::sysinfo::numa_node_info::core_list</qualifiedname>
+        <briefdescription>
+<para>核心逻辑编号列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="190" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" bodystart="190" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>NUMA 节点信息 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>描述单个 NUMA 节点的拓扑信息，包括节点编号、 所属逻辑核心列表和核心位图掩码 </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>neforce::icollector&lt; T &gt;</label>
+        <link refid="structneforce_1_1icollector"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="1">
+        <label>neforce::sysinfo::numa_node_info</label>
+        <link refid="structneforce_1_1sysinfo_1_1numa__node__info"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>core_list</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::vector&lt; uint32_t &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="186" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" bodystart="186" bodyend="191"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1sysinfo_1_1numa__node__info_1ac25a7a4d05791f6a444cd3d878655acd" prot="public" virt="non-virtual"><scope>neforce::sysinfo::numa_node_info</scope><name>core_count</name></member>
+      <member refid="structneforce_1_1sysinfo_1_1numa__node__info_1a89ff21622a5a3df6cc65be24ef83ef18" prot="public" virt="non-virtual"><scope>neforce::sysinfo::numa_node_info</scope><name>core_list</name></member>
+      <member refid="structneforce_1_1sysinfo_1_1numa__node__info_1aedecd7e033d5189522bc1820b2a8f6f0" prot="public" virt="non-virtual"><scope>neforce::sysinfo::numa_node_info</scope><name>core_mask</name></member>
+      <member refid="structneforce_1_1sysinfo_1_1numa__node__info_1a0e3d9f0bd0d381e031d1c7f3865b9d90" prot="public" virt="non-virtual"><scope>neforce::sysinfo::numa_node_info</scope><name>node_id</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

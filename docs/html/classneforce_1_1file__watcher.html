@@ -1,0 +1,452 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::file_watcher类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1file__watcher.html','','classneforce_1_1file__watcher-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::file_watcher类 参考<div class="ingroups"><a class="el" href="group___file.html">文件</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>文件系统监视器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="file__watcher_8hpp_source.html">file_watcher.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:ab2933ac793915f7f9c5c190c94fde704" id="r_ab2933ac793915f7f9c5c190c94fde704"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ab2933ac793915f7f9c5c190c94fde704">file_watcher</a> (<a class="el" href="classneforce_1_1path.html">path</a> <a class="el" href="#a70889175f0faa3f429e578fc7f708f84">watch_path</a>, bool recursive=false)</td></tr>
+<tr class="memdesc:ab2933ac793915f7f9c5c190c94fde704"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:af05caf983aed91e2c9de9ad979f7450d" id="r_af05caf983aed91e2c9de9ad979f7450d"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#af05caf983aed91e2c9de9ad979f7450d">~file_watcher</a> ()</td></tr>
+<tr class="memdesc:af05caf983aed91e2c9de9ad979f7450d"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数  <br /></td></tr>
+<tr class="memitem:a2c3393d41909f30e01501e130fa29149" id="r_a2c3393d41909f30e01501e130fa29149"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a2c3393d41909f30e01501e130fa29149">start</a> (callback_t callback, <a class="el" href="group___file.html#gaef1668c6bc60132ead74a495cef136dc">file_watch_event</a> events=<a class="el" href="group___file.html#ggaef1668c6bc60132ead74a495cef136dca5fb1f955b45e38e31789286a1790398d">file_watch_event::ALL</a>)</td></tr>
+<tr class="memdesc:a2c3393d41909f30e01501e130fa29149"><td class="mdescLeft">&#160;</td><td class="mdescRight">开始监视  <br /></td></tr>
+<tr class="memitem:adfafb4dcdda9581581a471e9f2b557a0" id="r_adfafb4dcdda9581581a471e9f2b557a0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#adfafb4dcdda9581581a471e9f2b557a0">stop</a> ()</td></tr>
+<tr class="memdesc:adfafb4dcdda9581581a471e9f2b557a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">停止监视  <br /></td></tr>
+<tr class="memitem:a70889175f0faa3f429e578fc7f708f84" id="r_a70889175f0faa3f429e578fc7f708f84"><td class="memItemLeft">const <a class="el" href="classneforce_1_1path.html">path</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a70889175f0faa3f429e578fc7f708f84">watch_path</a> () const noexcept</td></tr>
+<tr class="memdesc:a70889175f0faa3f429e578fc7f708f84"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取监视的目录路径  <br /></td></tr>
+<tr class="memitem:afff9ade76d5d213342ad6140808b0493" id="r_afff9ade76d5d213342ad6140808b0493"><td class="memItemLeft"><a class="el" href="group___file.html#gaef1668c6bc60132ead74a495cef136dc">file_watch_event</a>&#160;</td><td class="memItemRight"><a class="el" href="#afff9ade76d5d213342ad6140808b0493">current_events</a> () const noexcept</td></tr>
+<tr class="memdesc:afff9ade76d5d213342ad6140808b0493"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前监视的事件类型  <br /></td></tr>
+<tr class="memitem:a2375821f24739770b4477ff9117aa987" id="r_a2375821f24739770b4477ff9117aa987"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a2375821f24739770b4477ff9117aa987">is_watching</a> () const noexcept</td></tr>
+<tr class="memdesc:a2375821f24739770b4477ff9117aa987"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否正在监视  <br /></td></tr>
+<tr class="memitem:a967d044a8f5d4e880c5a67fc1c5bee69" id="r_a967d044a8f5d4e880c5a67fc1c5bee69"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a967d044a8f5d4e880c5a67fc1c5bee69">is_recursive</a> () const noexcept</td></tr>
+<tr class="memdesc:a967d044a8f5d4e880c5a67fc1c5bee69"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否递归监视子目录  <br /></td></tr>
+<tr class="memitem:ae26aa4341263de2f8af05af52e530522" id="r_ae26aa4341263de2f8af05af52e530522"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ae26aa4341263de2f8af05af52e530522">update_watch</a> (<a class="el" href="group___file.html#gaef1668c6bc60132ead74a495cef136dc">file_watch_event</a> events)</td></tr>
+<tr class="memdesc:ae26aa4341263de2f8af05af52e530522"><td class="mdescLeft">&#160;</td><td class="mdescRight">更新监视的事件类型  <br /></td></tr>
+<tr class="memitem:aa05b35013594263d0e5a4318acfcc8a2" id="r_aa05b35013594263d0e5a4318acfcc8a2"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aa05b35013594263d0e5a4318acfcc8a2">update_recursive</a> (bool recursive)</td></tr>
+<tr class="memdesc:aa05b35013594263d0e5a4318acfcc8a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">更新递归设置  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>文件系统监视器 </p>
+<p>监视指定目录中的文件变化事件，支持递归监视子目录。 当文件被创建、删除、修改、重命名或访问时，触发回调函数。 </p>
+
+<p class="definition">在文件 <a class="el" href="file__watcher_8hpp_source.html">file_watcher.hpp</a> 第 <a class="el" href="file__watcher_8hpp_source.html#l00034">34</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="ab2933ac793915f7f9c5c190c94fde704" name="ab2933ac793915f7f9c5c190c94fde704"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2933ac793915f7f9c5c190c94fde704">&#9670;&#160;</a></span>file_watcher()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">neforce::file_watcher::file_watcher </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1path.html">path</a></td>          <td class="paramname"><span class="paramname"><em>watch_path</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>recursive</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel explicit">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">watch_path</td><td>要监视的目录路径 </td></tr>
+    <tr><td class="paramname">recursive</td><td>是否递归监视子目录 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1system__exception.html" title="系统访问异常">system_exception</a></td><td>路径不存在或不是目录时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="file__watcher_8hpp_source.html#l00107">watch_path()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#af05caf983aed91e2c9de9ad979f7450d">~file_watcher()</a>.</p>
+
+</div>
+</div>
+<a id="af05caf983aed91e2c9de9ad979f7450d" name="af05caf983aed91e2c9de9ad979f7450d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af05caf983aed91e2c9de9ad979f7450d">&#9670;&#160;</a></span>~file_watcher()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">neforce::file_watcher::~file_watcher </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>析构函数 </p>
+<p>停止监视并清理资源。 </p>
+
+<p class="reference">引用了 <a class="el" href="#ab2933ac793915f7f9c5c190c94fde704">file_watcher()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="afff9ade76d5d213342ad6140808b0493" name="afff9ade76d5d213342ad6140808b0493"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afff9ade76d5d213342ad6140808b0493">&#9670;&#160;</a></span>current_events()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___file.html#gaef1668c6bc60132ead74a495cef136dc">file_watch_event</a> neforce::file_watcher::current_events </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取当前监视的事件类型 </p>
+<dl class="section return"><dt>返回</dt><dd>事件类型 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="file__watcher_8hpp_source.html">file_watcher.hpp</a> 第 <a class="el" href="file__watcher_8hpp_source.html#l00113">113</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a967d044a8f5d4e880c5a67fc1c5bee69" name="a967d044a8f5d4e880c5a67fc1c5bee69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a967d044a8f5d4e880c5a67fc1c5bee69">&#9670;&#160;</a></span>is_recursive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::file_watcher::is_recursive </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查是否递归监视子目录 </p>
+<dl class="section return"><dt>返回</dt><dd>是否递归 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="file__watcher_8hpp_source.html">file_watcher.hpp</a> 第 <a class="el" href="file__watcher_8hpp_source.html#l00125">125</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2375821f24739770b4477ff9117aa987" name="a2375821f24739770b4477ff9117aa987"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2375821f24739770b4477ff9117aa987">&#9670;&#160;</a></span>is_watching()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::file_watcher::is_watching </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查是否正在监视 </p>
+<dl class="section return"><dt>返回</dt><dd>是否正在监视 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="file__watcher_8hpp_source.html">file_watcher.hpp</a> 第 <a class="el" href="file__watcher_8hpp_source.html#l00119">119</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2c3393d41909f30e01501e130fa29149" name="a2c3393d41909f30e01501e130fa29149"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c3393d41909f30e01501e130fa29149">&#9670;&#160;</a></span>start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::file_watcher::start </td>
+          <td>(</td>
+          <td class="paramtype">callback_t</td>          <td class="paramname"><span class="paramname"><em>callback</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___file.html#gaef1668c6bc60132ead74a495cef136dc">file_watch_event</a></td>          <td class="paramname"><span class="paramname"><em>events</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___file.html#ggaef1668c6bc60132ead74a495cef136dca5fb1f955b45e38e31789286a1790398d">file_watch_event::ALL</a></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>开始监视 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callback</td><td>事件回调函数 </td></tr>
+    <tr><td class="paramname">events</td><td>要监视的事件类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否成功启动</dd></dl>
+<p>启动一个后台线程开始监视文件系统事件。 当指定的事件发生时，回调函数会被调用，参数为文件路径和事件类型。 </p>
+
+<p class="reference">引用了 <a class="el" href="file__constants_8hpp_source.html#l00251">ALL</a>.</p>
+
+</div>
+</div>
+<a id="adfafb4dcdda9581581a471e9f2b557a0" name="adfafb4dcdda9581581a471e9f2b557a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfafb4dcdda9581581a471e9f2b557a0">&#9670;&#160;</a></span>stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::file_watcher::stop </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>停止监视 </p>
+<p>停止监视线程并清理相关资源。 </p>
+
+</div>
+</div>
+<a id="aa05b35013594263d0e5a4318acfcc8a2" name="aa05b35013594263d0e5a4318acfcc8a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa05b35013594263d0e5a4318acfcc8a2">&#9670;&#160;</a></span>update_recursive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::file_watcher::update_recursive </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>recursive</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>更新递归设置 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">recursive</td><td>新的递归设置 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否成功更新</dd></dl>
+<p>如果正在监视中，会重启监视器以应用新的递归设置。 </p>
+
+</div>
+</div>
+<a id="ae26aa4341263de2f8af05af52e530522" name="ae26aa4341263de2f8af05af52e530522"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae26aa4341263de2f8af05af52e530522">&#9670;&#160;</a></span>update_watch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::file_watcher::update_watch </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___file.html#gaef1668c6bc60132ead74a495cef136dc">file_watch_event</a></td>          <td class="paramname"><span class="paramname"><em>events</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>更新监视的事件类型 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">events</td><td>新的事件类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否成功更新</dd></dl>
+<p>如果正在监视中，会重启监视器以应用新的事件类型。 </p>
+
+</div>
+</div>
+<a id="a70889175f0faa3f429e578fc7f708f84" name="a70889175f0faa3f429e578fc7f708f84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70889175f0faa3f429e578fc7f708f84">&#9670;&#160;</a></span>watch_path()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classneforce_1_1path.html">path</a> &amp; neforce::file_watcher::watch_path </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取监视的目录路径 </p>
+<dl class="section return"><dt>返回</dt><dd>目录路径 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="file__watcher_8hpp_source.html">file_watcher.hpp</a> 第 <a class="el" href="file__watcher_8hpp_source.html#l00107">107</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ab2933ac793915f7f9c5c190c94fde704">file_watcher()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="file__watcher_8hpp_source.html">file_watcher.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><a href="classneforce_1_1file__watcher.html">file_watcher</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

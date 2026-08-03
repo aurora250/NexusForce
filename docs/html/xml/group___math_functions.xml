@@ -4,13 +4,14 @@
     <compoundname>MathFunctions</compoundname>
     <title>数学函数</title>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___math_functions_1gaf540aa0243b017964ab8140fa72e0193" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
-        <definition>int64_t safe_trunc</definition>
+      <memberdef kind="function" id="group___math_functions_1gade348309cd45272e7109eda6adafe663" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int64_t</type>
+        <definition>int64_t neforce::safe_trunc</definition>
         <argsstring>(const decimal_t x) noexcept</argsstring>
         <name>safe_trunc</name>
+        <qualifiedname>neforce::safe_trunc</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -21,36 +22,40 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="148" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="148" bodyend="167"/>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1gabc4196c327c7a6784316819881ec3c3d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
-        <definition>uint64_t safe_decimal_to_uint64</definition>
+      <memberdef kind="function" id="group___math_functions_1ga5d1060c894be1ee2635b478daea39ce2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t neforce::safe_decimal_to_uint64</definition>
         <argsstring>(const decimal_t x) noexcept</argsstring>
         <name>safe_decimal_to_uint64</name>
+        <qualifiedname>neforce::safe_decimal_to_uint64</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <briefdescription>
-<para>将非负 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref> 安全转换为 uint64_t（避免 &gt;= 2^63 时的 UB） </para>
+<para>将非负 <ref refid="group___core_types_1ga9826f42a5c348e197df1f2395f4471b1" kindref="member">decimal_t</ref> 安全转换为 uint64_t（避免 &gt;= 2^63 时的 UB） </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>对应的 <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref> 值 </para>
+<para><simplesect kind="return"><para>对应的 <ref refid="group___core_types_1ga5405672bf9962081e6fcd1448d4bce4a" kindref="member">uint64_t</ref> 值 </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="173" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="173" bodyend="180"/>
-        <referencedby refid="group___math_functions_1ga4b9ab0ae93aa724d216a640d96979082" compoundref="math_8hpp" startline="632" endline="656">ceil</referencedby>
-        <referencedby refid="group___math_functions_1ga290b6c7868b8a1edde452cb9bb4784ea" compoundref="math_8hpp" startline="586" endline="609">floor</referencedby>
+        <references refid="group___math_functions_1ga5d1060c894be1ee2635b478daea39ce2" compoundref="math_8hpp" startline="173" endline="180">neforce::safe_decimal_to_uint64</references>
+        <referencedby refid="group___math_functions_1ga41e02cdd039ccd8b93a379fcc590b9ad" compoundref="math_8hpp" startline="632" endline="656">neforce::ceil</referencedby>
+        <referencedby refid="group___math_functions_1ga8cf50bd734047468de42681ec383e1d3" compoundref="math_8hpp" startline="586" endline="609">neforce::floor</referencedby>
+        <referencedby refid="group___math_functions_1ga5d1060c894be1ee2635b478daea39ce2" compoundref="math_8hpp" startline="173" endline="180">neforce::safe_decimal_to_uint64</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga9e273a74b94438c5bd66d8b9595c953e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
-        <definition>uint64_t fibonacci</definition>
+      <memberdef kind="function" id="group___math_functions_1gaa56045f668ecadc58fb5742e10d0e0a5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t neforce::fibonacci</definition>
         <argsstring>(const uint32_t n) noexcept</argsstring>
         <name>fibonacci</name>
+        <qualifiedname>neforce::fibonacci</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <type>const uint32_t</type>
           <declname>n</declname>
         </param>
         <briefdescription>
@@ -73,15 +78,20 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="190" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="190" bodyend="202"/>
-        <referencedby refid="group___math_functions_1ga6d17df0d2b138bb205baa9b723c6e7f8" compoundref="math_8hpp" startline="211" endline="213">leonardo</referencedby>
+        <references refid="group___math_functions_1gaa56045f668ecadc58fb5742e10d0e0a5" compoundref="math_8hpp" startline="190" endline="202">neforce::fibonacci</references>
+        <references refid="group___math_constants_1ga214efcd05bdec2a7890ca44e03ac5cdc" compoundref="math_8hpp" startline="69">neforce::constants::FIBONACCI_COUNT</references>
+        <references refid="group___math_constants_1ga47424f27742041be5f1675c5239f7fbd" compoundref="math_8hpp" startline="61" endline="67">neforce::constants::FIBONACCI_LIST</references>
+        <referencedby refid="group___math_functions_1gaa56045f668ecadc58fb5742e10d0e0a5" compoundref="math_8hpp" startline="190" endline="202">neforce::fibonacci</referencedby>
+        <referencedby refid="group___math_functions_1gab7ea136b43b1aa902d69855f34e54a9a" compoundref="math_8hpp" startline="211" endline="213">neforce::leonardo</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga6d17df0d2b138bb205baa9b723c6e7f8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
-        <definition>uint64_t leonardo</definition>
+      <memberdef kind="function" id="group___math_functions_1gab7ea136b43b1aa902d69855f34e54a9a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t neforce::leonardo</definition>
         <argsstring>(const uint32_t n) noexcept</argsstring>
         <name>leonardo</name>
+        <qualifiedname>neforce::leonardo</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <type>const uint32_t</type>
           <declname>n</declname>
         </param>
         <briefdescription>
@@ -104,21 +114,24 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="211" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="211" bodyend="213"/>
-        <references refid="group___math_functions_1ga9e273a74b94438c5bd66d8b9595c953e" compoundref="math_8hpp" startline="190" endline="202">fibonacci</references>
-        <referencedby refid="group___leonardo_heap_1gac60b0313c9a99501982d00f52c3017c4" compoundref="leonardo__heap_8hpp" startline="128" endline="178">adjust_leonardo_heap</referencedby>
-        <referencedby refid="group___leonardo_heap_1ga136d8080ad6127b70845b45e199e2c5d" compoundref="leonardo__heap_8hpp" startline="236" endline="267">pop_leonardo_heap</referencedby>
-        <referencedby refid="group___leonardo_heap_1ga30b3db79677a6fbb9e3b71a62b48933f" compoundref="leonardo__heap_8hpp" startline="278" endline="316">sort_leonardo_heap</referencedby>
+        <references refid="group___math_functions_1gaa56045f668ecadc58fb5742e10d0e0a5" compoundref="math_8hpp" startline="190" endline="202">neforce::fibonacci</references>
+        <references refid="group___math_functions_1gab7ea136b43b1aa902d69855f34e54a9a" compoundref="math_8hpp" startline="211" endline="213">neforce::leonardo</references>
+        <referencedby refid="group___leonardo_heap_1gadab369d42b30db503093fb7710a0c071" compoundref="leonardo__heap_8hpp" startline="128" endline="178">neforce::adjust_leonardo_heap</referencedby>
+        <referencedby refid="group___math_functions_1gab7ea136b43b1aa902d69855f34e54a9a" compoundref="math_8hpp" startline="211" endline="213">neforce::leonardo</referencedby>
+        <referencedby refid="group___leonardo_heap_1gae0b8e0d88ab3f099800a507e1c56678c" compoundref="leonardo__heap_8hpp" startline="236" endline="267">neforce::pop_leonardo_heap</referencedby>
+        <referencedby refid="group___leonardo_heap_1gac8bc87194be6d7619c0ac6ba70bc8640" compoundref="leonardo__heap_8hpp" startline="278" endline="316">neforce::sort_leonardo_heap</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga6d1eef00878569c1915becfbab85bb6b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___math_functions_1ga7d4f128a01bc3e58a699d67b85ccfe58" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>T</type>
-        <definition>T angular2radian</definition>
+        <definition>T neforce::angular2radian</definition>
         <argsstring>(const T angular) noexcept</argsstring>
         <name>angular2radian</name>
+        <qualifiedname>neforce::angular2radian</qualifiedname>
         <param>
           <type>const T</type>
           <declname>angular</declname>
@@ -152,18 +165,23 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="222" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="222" bodyend="225"/>
-        <references refid="group___base_type_properties_1gabf2224be65b8fb8794372d049a1d37d9" compoundref="type__traits_8hpp" startline="927">is_arithmetic_v</references>
+        <references refid="group___math_functions_1ga7d4f128a01bc3e58a699d67b85ccfe58" compoundref="math_8hpp" startline="222" endline="225">neforce::angular2radian</references>
+        <references refid="group___base_type_properties_1ga6fcb1c62c84e7247c26261bf2b271b56" compoundref="type__traits_8hpp" startline="927">neforce::is_arithmetic_v</references>
+        <references refid="group___math_constants_1ga0b8083f84702c7b4a6e2029fd6ff31bc" compoundref="math_8hpp" startline="39">neforce::constants::PI</references>
+        <references refid="group___math_constants_1ga01421da451c281b0925aa91e96778eee" compoundref="math_8hpp" startline="41">neforce::constants::SEMI_CIRCLE</references>
+        <referencedby refid="group___math_functions_1ga7d4f128a01bc3e58a699d67b85ccfe58" compoundref="math_8hpp" startline="222" endline="225">neforce::angular2radian</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga7f8db26ae0f2ed85ad6fb8bcd280381d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___math_functions_1ga197e4970d7957ff20a81fded763716e5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>T</type>
-        <definition>T radian2angular</definition>
+        <definition>T neforce::radian2angular</definition>
         <argsstring>(const T radian) noexcept</argsstring>
         <name>radian2angular</name>
+        <qualifiedname>neforce::radian2angular</qualifiedname>
         <param>
           <type>const T</type>
           <declname>radian</declname>
@@ -197,18 +215,23 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="234" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="234" bodyend="237"/>
-        <references refid="group___base_type_properties_1gabf2224be65b8fb8794372d049a1d37d9" compoundref="type__traits_8hpp" startline="927">is_arithmetic_v</references>
+        <references refid="group___base_type_properties_1ga6fcb1c62c84e7247c26261bf2b271b56" compoundref="type__traits_8hpp" startline="927">neforce::is_arithmetic_v</references>
+        <references refid="group___math_constants_1ga0b8083f84702c7b4a6e2029fd6ff31bc" compoundref="math_8hpp" startline="39">neforce::constants::PI</references>
+        <references refid="group___math_functions_1ga197e4970d7957ff20a81fded763716e5" compoundref="math_8hpp" startline="234" endline="237">neforce::radian2angular</references>
+        <references refid="group___math_constants_1ga01421da451c281b0925aa91e96778eee" compoundref="math_8hpp" startline="41">neforce::constants::SEMI_CIRCLE</references>
+        <referencedby refid="group___math_functions_1ga197e4970d7957ff20a81fded763716e5" compoundref="math_8hpp" startline="234" endline="237">neforce::radian2angular</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga83da80691fafcd172af23e1e3c66d8d4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___math_functions_1gadc2eba7edcbf6a7f6eb94b9cdd72a948" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga05c78609bb9e06b42e0a4c0c4409b0a1" kindref="member">is_signed_v</ref>&lt; T &gt;, T &gt;</type>
-        <definition>enable_if_t&lt; is_signed_v&lt; T &gt;, T &gt; absolute</definition>
+        <type>enable_if_t&lt; is_signed_v&lt; T &gt;, T &gt;</type>
+        <definition>enable_if_t&lt; is_signed_v&lt; T &gt;, T &gt; neforce::absolute</definition>
         <argsstring>(const T x) noexcept</argsstring>
         <name>absolute</name>
+        <qualifiedname>neforce::absolute</qualifiedname>
         <param>
           <type>const T</type>
           <declname>x</declname>
@@ -242,30 +265,33 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="246" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="246" bodyend="248"/>
-        <referencedby refid="group___math_functions_1ga2262dc12412d07c72325a80d5d02e7c0" compoundref="math_8hpp" startline="1095" endline="1109">arccosine</referencedby>
-        <referencedby refid="group___math_functions_1gaafabd349b97354b207ba83e41c2868fc" compoundref="math_8hpp" startline="1074" endline="1088">arcsine</referencedby>
-        <referencedby refid="group___math_functions_1ga5723c1f8ea9aa2a4eaaeb21e6ae61f5f" compoundref="math_8hpp" startline="1029" endline="1067">arctangent</referencedby>
-        <referencedby refid="group___math_functions_1gab6427cef0dbd04aedd0e0575838f19c3" compoundref="math_8hpp" startline="783" endline="790">around_multiple</referencedby>
-        <referencedby refid="group___math_functions_1ga85bd4411cce7ccffb0f86da358f89e1d" compoundref="math_8hpp" startline="808" endline="810">around_zero</referencedby>
-        <referencedby refid="group___math_functions_1ga4b9ab0ae93aa724d216a640d96979082" compoundref="math_8hpp" startline="632" endline="656">ceil</referencedby>
-        <referencedby refid="group___math_functions_1ga316213d51761356da9ed86312071fe3b" compoundref="math_8hpp" startline="544" endline="566">cube_root</referencedby>
-        <referencedby refid="group___math_functions_1ga290b6c7868b8a1edde452cb9bb4784ea" compoundref="math_8hpp" startline="586" endline="609">floor</referencedby>
-        <referencedby refid="group___math_functions_1ga7129f0b3cf184e0836aea549d9ce89ca" compoundref="math_8hpp" startline="326" endline="335">gcd</referencedby>
-        <referencedby refid="group___math_functions_1ga4d196a984b7cd0b8bf56aaab3c734245" compoundref="math_8hpp" startline="430" endline="473">logarithm_e</referencedby>
-        <referencedby refid="group___math_functions_1gaedd5856ca6e41f0174b5d9bd91b8995c" compoundref="math_8hpp" startline="674" endline="695">round</referencedby>
-        <referencedby refid="group___math_functions_1ga498a7e743d1082430484d1b821aa6c71" compoundref="math_8hpp" startline="512" endline="533">square_root</referencedby>
-        <referencedby refid="group___math_functions_1ga6ac0d975bef8138e4f98e4d9e738fc28" compoundref="math_8hpp" startline="758" endline="761">truncate</referencedby>
+        <references refid="group___math_functions_1gadc2eba7edcbf6a7f6eb94b9cdd72a948" compoundref="math_8hpp" startline="246" endline="248">neforce::absolute</references>
+        <referencedby refid="group___math_functions_1gadc2eba7edcbf6a7f6eb94b9cdd72a948" compoundref="math_8hpp" startline="246" endline="248">neforce::absolute</referencedby>
+        <referencedby refid="group___math_functions_1ga0d945c06ef0dd7045b5afde833afc65b" compoundref="math_8hpp" startline="1095" endline="1109">neforce::arccosine</referencedby>
+        <referencedby refid="group___math_functions_1gabf7eb40ef217388451fceb4103e08d1a" compoundref="math_8hpp" startline="1074" endline="1088">neforce::arcsine</referencedby>
+        <referencedby refid="group___math_functions_1ga5803713f49090eebae89acb404bb5c56" compoundref="math_8hpp" startline="1029" endline="1067">neforce::arctangent</referencedby>
+        <referencedby refid="group___math_functions_1ga741297f8ebf4a8690e7d6140a8cc7821" compoundref="math_8hpp" startline="783" endline="790">neforce::around_multiple</referencedby>
+        <referencedby refid="group___math_functions_1ga9256e0dddca3d14c9693e2706a442c71" compoundref="math_8hpp" startline="808" endline="810">neforce::around_zero</referencedby>
+        <referencedby refid="group___math_functions_1ga41e02cdd039ccd8b93a379fcc590b9ad" compoundref="math_8hpp" startline="632" endline="656">neforce::ceil</referencedby>
+        <referencedby refid="group___math_functions_1gab01e95ef610a233c8cd662219e97df05" compoundref="math_8hpp" startline="544" endline="566">neforce::cube_root</referencedby>
+        <referencedby refid="group___math_functions_1ga8cf50bd734047468de42681ec383e1d3" compoundref="math_8hpp" startline="586" endline="609">neforce::floor</referencedby>
+        <referencedby refid="group___math_functions_1gaa34c162216e2632128b278590dd0021b" compoundref="math_8hpp" startline="326" endline="335">neforce::gcd</referencedby>
+        <referencedby refid="group___math_functions_1ga0a46a03b39d82b81e8e162795a424ec2" compoundref="math_8hpp" startline="430" endline="473">neforce::logarithm_e</referencedby>
+        <referencedby refid="group___math_functions_1ga188aad6947a583fb75024a1a03631d7c" compoundref="math_8hpp" startline="674" endline="695">neforce::round</referencedby>
+        <referencedby refid="group___math_functions_1gaad863b13ce587addf559f7f8edf0d07c" compoundref="math_8hpp" startline="512" endline="533">neforce::square_root</referencedby>
+        <referencedby refid="group___math_functions_1ga11aea140c852d2498d87a083fa94485e" compoundref="math_8hpp" startline="758" endline="761">neforce::truncate</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1gabba846441c5c2275f09e7f4fdfe5c0f5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___math_functions_1ga17cbf58ee93644556b5b3f0b293e8ed3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>const T &amp;</type>
-        <definition>const T &amp; sum</definition>
+        <definition>const T &amp; neforce::sum</definition>
         <argsstring>(const T &amp;x) noexcept</argsstring>
         <name>sum</name>
+        <qualifiedname>neforce::sum</qualifiedname>
         <param>
           <type>const T &amp;</type>
           <declname>x</declname>
@@ -299,11 +325,13 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="271" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="271" bodyend="273"/>
-        <referencedby refid="group___math_functions_1ga743363ff679412699ab9b01b052cba93" compoundref="math_8hpp" startline="295" endline="297">average</referencedby>
-        <referencedby refid="group___s_i_m_d_1gae8bea998735e930a78078476388d8a24" compoundref="arithmetic_8hpp" startline="411" endline="430">saturated_add_u16</referencedby>
-        <referencedby refid="group___math_functions_1ga3c4715923b8f3d77ce1826e960a405dc" compoundref="math_8hpp" startline="284" endline="286">sum</referencedby>
+        <references refid="group___math_functions_1ga17cbf58ee93644556b5b3f0b293e8ed3" compoundref="math_8hpp" startline="271" endline="273">neforce::sum</references>
+        <referencedby refid="group___math_functions_1ga99c9ad52e932e87878ad85bd6e0a3f37" compoundref="math_8hpp" startline="295" endline="297">neforce::average</referencedby>
+        <referencedby refid="group___s_i_m_d_1gaf59aabcf67d0bc83c8d806c02bc97d90" compoundref="arithmetic_8hpp" startline="410" endline="429">neforce::simd::saturated_add_u16</referencedby>
+        <referencedby refid="group___math_functions_1ga17cbf58ee93644556b5b3f0b293e8ed3" compoundref="math_8hpp" startline="271" endline="273">neforce::sum</referencedby>
+        <referencedby refid="group___math_functions_1ga47e0ba56eb2ae68ac2c50029a411a84f" compoundref="math_8hpp" startline="284" endline="286">neforce::sum</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga3c4715923b8f3d77ce1826e960a405dc" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___math_functions_1ga47e0ba56eb2ae68ac2c50029a411a84f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename First</type>
@@ -314,14 +342,15 @@
             <defname>Rests</defname>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;(sizeof...(Rests) &gt; 0), int &gt;</type>
+            <type>enable_if_t&lt;(sizeof...(Rests) &gt; 0), int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
         <type>decltype(auto)</type>
-        <definition>decltype(auto) sum</definition>
+        <definition>decltype(auto) neforce::sum</definition>
         <argsstring>(First first, Rests... args)</argsstring>
         <name>sum</name>
+        <qualifiedname>neforce::sum</qualifiedname>
         <param>
           <type>First</type>
           <declname>first</declname>
@@ -375,9 +404,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="284" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="284" bodyend="286"/>
-        <references refid="group___math_functions_1gabba846441c5c2275f09e7f4fdfe5c0f5" compoundref="math_8hpp" startline="271" endline="273">sum</references>
+        <references refid="group___math_functions_1ga17cbf58ee93644556b5b3f0b293e8ed3" compoundref="math_8hpp" startline="271" endline="273">neforce::sum</references>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga743363ff679412699ab9b01b052cba93" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___math_functions_1ga99c9ad52e932e87878ad85bd6e0a3f37" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename...</type>
@@ -385,14 +414,15 @@
             <defname>Args</defname>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;(sizeof...(Args) &gt; 0), int &gt;</type>
+            <type>enable_if_t&lt;(sizeof...(Args) &gt; 0), int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
         <type>decltype(auto)</type>
-        <definition>decltype(auto) average</definition>
+        <definition>decltype(auto) neforce::average</definition>
         <argsstring>(Args... args)</argsstring>
         <name>average</name>
+        <qualifiedname>neforce::average</qualifiedname>
         <param>
           <type>Args...</type>
           <declname>args</declname>
@@ -426,18 +456,21 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="295" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="295" bodyend="297"/>
-        <references refid="group___math_functions_1gabba846441c5c2275f09e7f4fdfe5c0f5" compoundref="math_8hpp" startline="271" endline="273">sum</references>
+        <references refid="group___math_functions_1ga99c9ad52e932e87878ad85bd6e0a3f37" compoundref="math_8hpp" startline="295" endline="297">neforce::average</references>
+        <references refid="group___math_functions_1ga17cbf58ee93644556b5b3f0b293e8ed3" compoundref="math_8hpp" startline="271" endline="273">neforce::sum</references>
+        <referencedby refid="group___math_functions_1ga99c9ad52e932e87878ad85bd6e0a3f37" compoundref="math_8hpp" startline="295" endline="297">neforce::average</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga23914db0e0e2f93e6534f4ce4d62ba2d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___math_functions_1gafbeebd881301d8e263f30b2b21f6ce11" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>int</type>
-        <definition>int sign</definition>
+        <definition>int neforce::sign</definition>
         <argsstring>(const T &amp;value) noexcept</argsstring>
         <name>sign</name>
+        <qualifiedname>neforce::sign</qualifiedname>
         <param>
           <type>const T &amp;</type>
           <declname>value</declname>
@@ -471,26 +504,29 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="306" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="306" bodyend="316"/>
-        <references refid="group___base_type_properties_1gabf2224be65b8fb8794372d049a1d37d9" compoundref="type__traits_8hpp" startline="927">is_arithmetic_v</references>
-        <referencedby refid="group___s_i_m_d_1ga801e04507fe0106340fab56f8a55e254" compoundref="arithmetic_8hpp" startline="771" endline="788">max_i8</referencedby>
-        <referencedby refid="group___s_i_m_d_1gae84e844f0e4c8ae579e355765df079b9" compoundref="arithmetic_8hpp" startline="893" endline="912">max_u32</referencedby>
-        <referencedby refid="group___s_i_m_d_1gaa197981c4c00a449e6ccd025c214fbc8" compoundref="arithmetic_8hpp" startline="621" endline="640">min_i8</referencedby>
-        <referencedby refid="group___s_i_m_d_1ga64dc48f0d5f1d52e14228129f7df56c8" compoundref="arithmetic_8hpp" startline="744" endline="763">min_u32</referencedby>
-        <referencedby refid="classdatetime_1ae9f455af8bdb838b497501bfbec4e9d8" compoundref="datetime_8hpp" startline="1233" endline="1274">datetime::parse_RFC3339</referencedby>
-        <referencedby refid="group___s_i_m_d_1gae8bea998735e930a78078476388d8a24" compoundref="arithmetic_8hpp" startline="411" endline="430">saturated_add_u16</referencedby>
-        <referencedby refid="group___s_i_m_d_1ga5adaf9f6ea8e6561113978e79ba0e309" compoundref="arithmetic_8hpp" startline="516" endline="535">saturated_sub_u16</referencedby>
-        <referencedby refid="classdatetime_1a4f3a9b577cfed5171c2fdcd50cbb6177" compoundref="datetime_8hpp" startline="1167" endline="1180">datetime::to_offset_string</referencedby>
+        <references refid="group___base_type_properties_1ga6fcb1c62c84e7247c26261bf2b271b56" compoundref="type__traits_8hpp" startline="927">neforce::is_arithmetic_v</references>
+        <references refid="group___math_functions_1gafbeebd881301d8e263f30b2b21f6ce11" compoundref="math_8hpp" startline="306" endline="316">neforce::sign</references>
+        <referencedby refid="group___s_i_m_d_1gafec1eb0ad094d87c84740c60f07dd8a6" compoundref="arithmetic_8hpp" startline="773" endline="790">neforce::simd::max_i8</referencedby>
+        <referencedby refid="group___s_i_m_d_1ga1bcc180f5f38c767bd8490c647d6cb52" compoundref="arithmetic_8hpp" startline="895" endline="914">neforce::simd::max_u32</referencedby>
+        <referencedby refid="group___s_i_m_d_1ga332ea79acd6d9b88d51f6cb8c5e3e9f4" compoundref="arithmetic_8hpp" startline="623" endline="642">neforce::simd::min_i8</referencedby>
+        <referencedby refid="group___s_i_m_d_1ga0160ace1049fe46f09765ea367301151" compoundref="arithmetic_8hpp" startline="746" endline="765">neforce::simd::min_u32</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a26c6c2faf41d8e2cadb2bfb2d7007a7b" compoundref="datetime_8hpp" startline="1233" endline="1274">neforce::datetime::parse_RFC3339</referencedby>
+        <referencedby refid="group___s_i_m_d_1gaf59aabcf67d0bc83c8d806c02bc97d90" compoundref="arithmetic_8hpp" startline="410" endline="429">neforce::simd::saturated_add_u16</referencedby>
+        <referencedby refid="group___s_i_m_d_1ga1f916c9e59a3c7654f408df593e59c82" compoundref="arithmetic_8hpp" startline="515" endline="534">neforce::simd::saturated_sub_u16</referencedby>
+        <referencedby refid="group___math_functions_1gafbeebd881301d8e263f30b2b21f6ce11" compoundref="math_8hpp" startline="306" endline="316">neforce::sign</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a9d008257223b6375dd936c9c288aac51" compoundref="datetime_8hpp" startline="1167" endline="1180">neforce::datetime::to_offset_string</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga7129f0b3cf184e0836aea549d9ce89ca" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___math_functions_1gaa34c162216e2632128b278590dd0021b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>T</type>
-        <definition>T gcd</definition>
+        <definition>T neforce::gcd</definition>
         <argsstring>(const T &amp;m, const T &amp;n) noexcept</argsstring>
         <name>gcd</name>
+        <qualifiedname>neforce::gcd</qualifiedname>
         <param>
           <type>const T &amp;</type>
           <declname>m</declname>
@@ -536,19 +572,22 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="326" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="326" bodyend="335"/>
-        <references refid="group___math_functions_1ga83da80691fafcd172af23e1e3c66d8d4" compoundref="math_8hpp" startline="246" endline="248">absolute</references>
-        <referencedby refid="group___math_functions_1gaf11c8d4a321b44f2dc37b672645a5eb8" compoundref="math_8hpp" startline="345" endline="347">lcm</referencedby>
+        <references refid="group___math_functions_1gadc2eba7edcbf6a7f6eb94b9cdd72a948" compoundref="math_8hpp" startline="246" endline="248">neforce::absolute</references>
+        <references refid="group___math_functions_1gaa34c162216e2632128b278590dd0021b" compoundref="math_8hpp" startline="326" endline="335">neforce::gcd</references>
+        <referencedby refid="group___math_functions_1gaa34c162216e2632128b278590dd0021b" compoundref="math_8hpp" startline="326" endline="335">neforce::gcd</referencedby>
+        <referencedby refid="group___math_functions_1ga9db2122d9b64b3270ceb4f1f2cf8dc1a" compoundref="math_8hpp" startline="345" endline="347">neforce::lcm</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1gaf11c8d4a321b44f2dc37b672645a5eb8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___math_functions_1ga9db2122d9b64b3270ceb4f1f2cf8dc1a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>T</type>
-        <definition>T lcm</definition>
+        <definition>T neforce::lcm</definition>
         <argsstring>(const T &amp;m, const T &amp;n) noexcept</argsstring>
         <name>lcm</name>
+        <qualifiedname>neforce::lcm</qualifiedname>
         <param>
           <type>const T &amp;</type>
           <declname>m</declname>
@@ -594,18 +633,21 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="345" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="345" bodyend="347"/>
-        <references refid="group___math_functions_1ga7129f0b3cf184e0836aea549d9ce89ca" compoundref="math_8hpp" startline="326" endline="335">gcd</references>
+        <references refid="group___math_functions_1gaa34c162216e2632128b278590dd0021b" compoundref="math_8hpp" startline="326" endline="335">neforce::gcd</references>
+        <references refid="group___math_functions_1ga9db2122d9b64b3270ceb4f1f2cf8dc1a" compoundref="math_8hpp" startline="345" endline="347">neforce::lcm</references>
+        <referencedby refid="group___math_functions_1ga9db2122d9b64b3270ceb4f1f2cf8dc1a" compoundref="math_8hpp" startline="345" endline="347">neforce::lcm</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga1af3558471e357423df0f8171dec0491" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___math_functions_1gab94dbdf460bf3c861b16565e98837f1d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga8a70da46bf8635132fd3757deb2fff94" kindref="member">is_floating_point_v</ref>&lt; T &gt;, T &gt;</type>
-        <definition>enable_if_t&lt; is_floating_point_v&lt; T &gt;, T &gt; mod</definition>
+        <type>enable_if_t&lt; is_floating_point_v&lt; T &gt;, T &gt;</type>
+        <definition>enable_if_t&lt; is_floating_point_v&lt; T &gt;, T &gt; neforce::mod</definition>
         <argsstring>(const T x, const T y)</argsstring>
         <name>mod</name>
+        <qualifiedname>neforce::mod</qualifiedname>
         <param>
           <type>const T</type>
           <declname>x</declname>
@@ -648,7 +690,7 @@
 </simplesect>
 <parameterlist kind="exception"><parameteritem>
 <parameternamelist>
-<parametername><ref refid="structmath__exception" kindref="compound">math_exception</ref></parametername>
+<parametername><ref refid="structneforce_1_1math__exception" kindref="compound">math_exception</ref></parametername>
 </parameternamelist>
 <parameterdescription>
 <para>除数为0时 </para>
@@ -660,29 +702,32 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="358" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="358" bodyend="369"/>
-        <references refid="group___numeric_type_checks_1ga673ecf65f4df0e8731a08ed2a81a483d" compoundref="numeric__types_8hpp" startline="102" endline="104">is_infinity</references>
-        <references refid="group___numeric_type_checks_1gab2c227da4229861df95e5c6df99cc700" compoundref="numeric__types_8hpp" startline="65" endline="68">is_nan</references>
-        <references refid="classnumeric__traits_1a4a365e1002991e6c6873abaa78e3fb06" compoundref="numeric__traits_8hpp" startline="193" endline="193">numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
-        <referencedby refid="structipackage_1a92ce2f75002df8eab6ade4cf29bc0b29" compoundref="ipackage_8hpp" startline="188" endline="191">ipackage&lt; integer8, int8_t &gt;::operator%=</referencedby>
-        <referencedby refid="group___memory_order_1gaa412d48215ac5173e7fc457a4e9443e6" compoundref="memory__order_8hpp" startline="236" endline="238">operator&amp;</referencedby>
-        <referencedby refid="group___memory_order_1ga4d9a876d4d53afcbc2b20efdf7f0d170" compoundref="memory__order_8hpp" startline="222" endline="224">operator|</referencedby>
+        <references refid="group___numeric_type_checks_1gaa24923d0f821c4ff900bc19a12e0f581" compoundref="numeric__types_8hpp" startline="102" endline="104">neforce::is_infinity</references>
+        <references refid="group___numeric_type_checks_1ga69529551bf1bf78e074bfca6d21dd073" compoundref="numeric__types_8hpp" startline="65" endline="68">neforce::is_nan</references>
+        <references refid="group___math_functions_1gab94dbdf460bf3c861b16565e98837f1d" compoundref="math_8hpp" startline="358" endline="369">neforce::mod</references>
+        <references refid="classneforce_1_1numeric__traits_1a255b4e7ede58b3390b3940f1399482cf" compoundref="numeric__traits_8hpp" startline="193" endline="193">neforce::numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
+        <referencedby refid="group___math_functions_1gab94dbdf460bf3c861b16565e98837f1d" compoundref="math_8hpp" startline="358" endline="369">neforce::mod</referencedby>
+        <referencedby refid="structneforce_1_1ipackage_1a7196368c898a0b74138e89b873443143" compoundref="ipackage_8hpp" startline="188" endline="191">neforce::ipackage&lt; integer8, int8_t &gt;::operator%=</referencedby>
+        <referencedby refid="group___memory_order_1ga3d0b2b44fde876fc12a03a142142dafa" compoundref="memory__order_8hpp" startline="236" endline="238">neforce::operator&amp;</referencedby>
+        <referencedby refid="group___memory_order_1gaac2fd6266ced57c7adadbf5a9909af1a" compoundref="memory__order_8hpp" startline="222" endline="224">neforce::operator|</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1gabccdceb14df19df976aba7ae15c9560e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___math_functions_1gafca00f12f0039d13fa803ebcb521848c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>T</type>
-        <definition>T power</definition>
+        <definition>T neforce::power</definition>
         <argsstring>(const T &amp;x, uint32_t n) noexcept</argsstring>
         <name>power</name>
+        <qualifiedname>neforce::power</qualifiedname>
         <param>
           <type>const T &amp;</type>
           <declname>x</declname>
         </param>
         <param>
-          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <type>uint32_t</type>
           <declname>n</declname>
         </param>
         <briefdescription>
@@ -722,24 +767,27 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="397" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="397" bodyend="412"/>
-        <references refid="group___base_type_properties_1gabf2224be65b8fb8794372d049a1d37d9" compoundref="type__traits_8hpp" startline="927">is_arithmetic_v</references>
-        <referencedby refid="group___math_functions_1ga0039526b953ba838f78a0e22fb80fd2a" compoundref="math_8hpp" startline="664" endline="667">ceil</referencedby>
-        <referencedby refid="group___math_functions_1ga92a708ad82690f396b38dab402ec095e" compoundref="math_8hpp" startline="715" endline="718">ceil_bit</referencedby>
-        <referencedby refid="group___math_functions_1ga13853b1380b9b78ec6876442d0d4bd5a" compoundref="math_8hpp" startline="419" endline="421">exponential</referencedby>
-        <referencedby refid="classbloom__filter_1aca55a5774ae468ed172b045d553a25cc" compoundref="bloom__filter_8hpp" startline="340" endline="349">bloom_filter&lt; T, Hash &gt;::false_positive_rate</referencedby>
-        <referencedby refid="group___math_functions_1ga23f47f970cc36873ba044bd696ed0923" compoundref="math_8hpp" startline="617" endline="620">floor</referencedby>
-        <referencedby refid="group___math_functions_1ga31898ebdefe256c9d96a2c06a58e8c77" compoundref="math_8hpp" startline="704" endline="707">floor_bit</referencedby>
-        <referencedby refid="group___math_functions_1ga56a1ca86fd642d4ed8266412fb6bd0b0" compoundref="math_8hpp" startline="747" endline="750">round</referencedby>
-        <referencedby refid="group___math_functions_1gaffe322740f760d37d8a6d083106ed1b1" compoundref="math_8hpp" startline="726" endline="728">round_bit</referencedby>
-        <referencedby refid="group___math_functions_1ga6ac0d975bef8138e4f98e4d9e738fc28" compoundref="math_8hpp" startline="758" endline="761">truncate</referencedby>
+        <references refid="group___base_type_properties_1ga6fcb1c62c84e7247c26261bf2b271b56" compoundref="type__traits_8hpp" startline="927">neforce::is_arithmetic_v</references>
+        <references refid="group___math_functions_1gafca00f12f0039d13fa803ebcb521848c" compoundref="math_8hpp" startline="397" endline="412">neforce::power</references>
+        <referencedby refid="group___math_functions_1ga7e33bc9bb76e6899ac1958c5149b1972" compoundref="math_8hpp" startline="664" endline="667">neforce::ceil</referencedby>
+        <referencedby refid="group___math_functions_1ga02d64eac4d5fc225cff362eda510da12" compoundref="math_8hpp" startline="715" endline="718">neforce::ceil_bit</referencedby>
+        <referencedby refid="group___math_functions_1ga269d21da5cd1cf3369320bd85f80715c" compoundref="math_8hpp" startline="419" endline="421">neforce::exponential</referencedby>
+        <referencedby refid="classneforce_1_1bloom__filter_1a84275fc1c4f2b1842479672088e69bd1" compoundref="bloom__filter_8hpp" startline="340" endline="349">neforce::bloom_filter&lt; T, Hash &gt;::false_positive_rate</referencedby>
+        <referencedby refid="group___math_functions_1ga60e07bce278ff74ec63bb9e301f66e33" compoundref="math_8hpp" startline="617" endline="620">neforce::floor</referencedby>
+        <referencedby refid="group___math_functions_1ga0263aecc1f2ba621d8de1508a15359c7" compoundref="math_8hpp" startline="704" endline="707">neforce::floor_bit</referencedby>
+        <referencedby refid="group___math_functions_1gafca00f12f0039d13fa803ebcb521848c" compoundref="math_8hpp" startline="397" endline="412">neforce::power</referencedby>
+        <referencedby refid="group___math_functions_1ga3e5dbc5ee82af4db90fb79d694610957" compoundref="math_8hpp" startline="747" endline="750">neforce::round</referencedby>
+        <referencedby refid="group___math_functions_1ga7af45e98e8a82fd4788f64fd5d1542d6" compoundref="math_8hpp" startline="726" endline="728">neforce::round_bit</referencedby>
+        <referencedby refid="group___math_functions_1ga11aea140c852d2498d87a083fa94485e" compoundref="math_8hpp" startline="758" endline="761">neforce::truncate</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga13853b1380b9b78ec6876442d0d4bd5a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t exponential</definition>
+      <memberdef kind="function" id="group___math_functions_1ga269d21da5cd1cf3369320bd85f80715c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::exponential</definition>
         <argsstring>(const uint32_t n) noexcept</argsstring>
         <name>exponential</name>
+        <qualifiedname>neforce::exponential</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <type>const uint32_t</type>
           <declname>n</declname>
         </param>
         <briefdescription>
@@ -762,15 +810,19 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="419" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="419" bodyend="421"/>
-        <references refid="group___math_functions_1gabccdceb14df19df976aba7ae15c9560e" compoundref="math_8hpp" startline="397" endline="412">power</references>
+        <references refid="group___math_constants_1gabc0180af76e928c95b713b386cabc5fe" compoundref="math_8hpp" startline="38">neforce::constants::EULER</references>
+        <references refid="group___math_functions_1ga269d21da5cd1cf3369320bd85f80715c" compoundref="math_8hpp" startline="419" endline="421">neforce::exponential</references>
+        <references refid="group___math_functions_1gafca00f12f0039d13fa803ebcb521848c" compoundref="math_8hpp" startline="397" endline="412">neforce::power</references>
+        <referencedby refid="group___math_functions_1ga269d21da5cd1cf3369320bd85f80715c" compoundref="math_8hpp" startline="419" endline="421">neforce::exponential</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga4d196a984b7cd0b8bf56aaab3c734245" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t logarithm_e</definition>
+      <memberdef kind="function" id="group___math_functions_1ga0a46a03b39d82b81e8e162795a424ec2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::logarithm_e</definition>
         <argsstring>(const decimal_t x) noexcept</argsstring>
         <name>logarithm_e</name>
+        <qualifiedname>neforce::logarithm_e</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -793,26 +845,30 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="430" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="430" bodyend="473"/>
-        <references refid="group___math_functions_1ga83da80691fafcd172af23e1e3c66d8d4" compoundref="math_8hpp" startline="246" endline="248">absolute</references>
-        <references refid="classnumeric__traits_1a29b5f24b0176f50e68b0e59e832d849b" compoundref="numeric__traits_8hpp" startline="183" endline="183">numeric_traits&lt; T, Dummy &gt;::infinity</references>
-        <references refid="group___numeric_type_checks_1ga673ecf65f4df0e8731a08ed2a81a483d" compoundref="numeric__types_8hpp" startline="102" endline="104">is_infinity</references>
-        <references refid="group___numeric_type_checks_1gab2c227da4229861df95e5c6df99cc700" compoundref="numeric__types_8hpp" startline="65" endline="68">is_nan</references>
-        <references refid="classnumeric__traits_1a4a365e1002991e6c6873abaa78e3fb06" compoundref="numeric__traits_8hpp" startline="193" endline="193">numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
-        <referencedby refid="classbloom__filter_1a3018c4b2bab45081b0925fab2d4b7af5" compoundref="bloom__filter_8hpp" startline="323" endline="332">bloom_filter&lt; T, Hash &gt;::approximate_count</referencedby>
-        <referencedby refid="classbloom__filter_1a302392cc3c37047327fa93ae2c3e6d4a" compoundref="bloom__filter_8hpp" startline="288" endline="290">bloom_filter&lt; T, Hash &gt;::capacity</referencedby>
-        <referencedby refid="group___math_functions_1ga8fc435af63b7cee2763bc85a8902eeae" compoundref="math_8hpp" startline="481" endline="487">logarithm</referencedby>
+        <references refid="group___math_functions_1gadc2eba7edcbf6a7f6eb94b9cdd72a948" compoundref="math_8hpp" startline="246" endline="248">neforce::absolute</references>
+        <references refid="classneforce_1_1numeric__traits_1a51b20e681edb410a9897b687663ff3c0" compoundref="numeric__traits_8hpp" startline="183" endline="183">neforce::numeric_traits&lt; T, Dummy &gt;::infinity</references>
+        <references refid="group___numeric_type_checks_1gaa24923d0f821c4ff900bc19a12e0f581" compoundref="numeric__types_8hpp" startline="102" endline="104">neforce::is_infinity</references>
+        <references refid="group___numeric_type_checks_1ga69529551bf1bf78e074bfca6d21dd073" compoundref="numeric__types_8hpp" startline="65" endline="68">neforce::is_nan</references>
+        <references refid="group___math_functions_1ga0a46a03b39d82b81e8e162795a424ec2" compoundref="math_8hpp" startline="430" endline="473">neforce::logarithm_e</references>
+        <references refid="group___math_constants_1ga7091c52270e3d84044528fcb5c99f9ea" compoundref="math_8hpp" startline="50">neforce::constants::MACHINE_EPSILON</references>
+        <references refid="classneforce_1_1numeric__traits_1a255b4e7ede58b3390b3940f1399482cf" compoundref="numeric__traits_8hpp" startline="193" endline="193">neforce::numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
+        <referencedby refid="classneforce_1_1bloom__filter_1adef6c65523dbd6ae0bf6f11b925217b3" compoundref="bloom__filter_8hpp" startline="323" endline="332">neforce::bloom_filter&lt; T, Hash &gt;::approximate_count</referencedby>
+        <referencedby refid="classneforce_1_1bloom__filter_1a844ca16f00a48acb87394b162de0f068" compoundref="bloom__filter_8hpp" startline="288" endline="290">neforce::bloom_filter&lt; T, Hash &gt;::capacity</referencedby>
+        <referencedby refid="group___math_functions_1ga094aad2052f0f7f75e33efdd54866993" compoundref="math_8hpp" startline="481" endline="487">neforce::logarithm</referencedby>
+        <referencedby refid="group___math_functions_1ga0a46a03b39d82b81e8e162795a424ec2" compoundref="math_8hpp" startline="430" endline="473">neforce::logarithm_e</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga8fc435af63b7cee2763bc85a8902eeae" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t logarithm</definition>
+      <memberdef kind="function" id="group___math_functions_1ga094aad2052f0f7f75e33efdd54866993" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::logarithm</definition>
         <argsstring>(const decimal_t x, const uint32_t base)</argsstring>
         <name>logarithm</name>
+        <qualifiedname>neforce::logarithm</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <param>
-          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <type>const uint32_t</type>
           <declname>base</declname>
         </param>
         <briefdescription>
@@ -843,17 +899,20 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="481" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="481" bodyend="487"/>
-        <references refid="group___math_functions_1ga4d196a984b7cd0b8bf56aaab3c734245" compoundref="math_8hpp" startline="430" endline="473">logarithm_e</references>
-        <referencedby refid="group___math_functions_1gada202be183411566255205c7b46a4483" compoundref="math_8hpp" startline="501" endline="501">logarithm_10</referencedby>
-        <referencedby refid="group___math_functions_1ga7391f4a604e9e6365cdfacc15ef8a45f" compoundref="math_8hpp" startline="494" endline="494">logarithm_2</referencedby>
+        <references refid="group___math_functions_1ga094aad2052f0f7f75e33efdd54866993" compoundref="math_8hpp" startline="481" endline="487">neforce::logarithm</references>
+        <references refid="group___math_functions_1ga0a46a03b39d82b81e8e162795a424ec2" compoundref="math_8hpp" startline="430" endline="473">neforce::logarithm_e</references>
+        <referencedby refid="group___math_functions_1ga094aad2052f0f7f75e33efdd54866993" compoundref="math_8hpp" startline="481" endline="487">neforce::logarithm</referencedby>
+        <referencedby refid="group___math_functions_1gad87d1857ed64485266a8e88a07a86cdc" compoundref="math_8hpp" startline="501" endline="501">neforce::logarithm_10</referencedby>
+        <referencedby refid="group___math_functions_1ga13406796bd171dbe1fc23b8935558485" compoundref="math_8hpp" startline="494" endline="494">neforce::logarithm_2</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga7391f4a604e9e6365cdfacc15ef8a45f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t logarithm_2</definition>
+      <memberdef kind="function" id="group___math_functions_1ga13406796bd171dbe1fc23b8935558485" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::logarithm_2</definition>
         <argsstring>(const decimal_t x)</argsstring>
         <name>logarithm_2</name>
+        <qualifiedname>neforce::logarithm_2</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -876,15 +935,18 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="494" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="494" bodyend="494"/>
-        <references refid="group___math_functions_1ga8fc435af63b7cee2763bc85a8902eeae" compoundref="math_8hpp" startline="481" endline="487">logarithm</references>
+        <references refid="group___math_functions_1ga094aad2052f0f7f75e33efdd54866993" compoundref="math_8hpp" startline="481" endline="487">neforce::logarithm</references>
+        <references refid="group___math_functions_1ga13406796bd171dbe1fc23b8935558485" compoundref="math_8hpp" startline="494" endline="494">neforce::logarithm_2</references>
+        <referencedby refid="group___math_functions_1ga13406796bd171dbe1fc23b8935558485" compoundref="math_8hpp" startline="494" endline="494">neforce::logarithm_2</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1gada202be183411566255205c7b46a4483" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t logarithm_10</definition>
+      <memberdef kind="function" id="group___math_functions_1gad87d1857ed64485266a8e88a07a86cdc" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::logarithm_10</definition>
         <argsstring>(const decimal_t x)</argsstring>
         <name>logarithm_10</name>
+        <qualifiedname>neforce::logarithm_10</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -907,21 +969,24 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="501" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="501" bodyend="501"/>
-        <references refid="group___math_functions_1ga8fc435af63b7cee2763bc85a8902eeae" compoundref="math_8hpp" startline="481" endline="487">logarithm</references>
+        <references refid="group___math_functions_1ga094aad2052f0f7f75e33efdd54866993" compoundref="math_8hpp" startline="481" endline="487">neforce::logarithm</references>
+        <references refid="group___math_functions_1gad87d1857ed64485266a8e88a07a86cdc" compoundref="math_8hpp" startline="501" endline="501">neforce::logarithm_10</references>
+        <referencedby refid="group___math_functions_1gad87d1857ed64485266a8e88a07a86cdc" compoundref="math_8hpp" startline="501" endline="501">neforce::logarithm_10</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga498a7e743d1082430484d1b821aa6c71" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t square_root</definition>
+      <memberdef kind="function" id="group___math_functions_1gaad863b13ce587addf559f7f8edf0d07c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::square_root</definition>
         <argsstring>(const decimal_t x, const decimal_t precise=constants::DEFAULT_TOLERANCE) noexcept</argsstring>
         <name>square_root</name>
+        <qualifiedname>neforce::square_root</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>precise</declname>
-          <defval><ref refid="group___math_constants_1gad62cb98b78e83330e55e9b9ce87af8ae" kindref="member">constants::DEFAULT_TOLERANCE</ref></defval>
+          <defval>constants::DEFAULT_TOLERANCE</defval>
         </param>
         <briefdescription>
 <para>计算平方根 </para>
@@ -951,27 +1016,31 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="512" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="512" bodyend="533"/>
-        <references refid="group___math_functions_1ga83da80691fafcd172af23e1e3c66d8d4" compoundref="math_8hpp" startline="246" endline="248">absolute</references>
-        <references refid="group___numeric_type_checks_1ga673ecf65f4df0e8731a08ed2a81a483d" compoundref="numeric__types_8hpp" startline="102" endline="104">is_infinity</references>
-        <references refid="group___numeric_type_checks_1gab2c227da4229861df95e5c6df99cc700" compoundref="numeric__types_8hpp" startline="65" endline="68">is_nan</references>
-        <references refid="group___iterator_operation_1gaf4cd040af11ff6b9b0fc0f4d70a7eb5e" compoundref="iterator_8hpp" startline="141" endline="145">prev</references>
-        <references refid="classnumeric__traits_1a4a365e1002991e6c6873abaa78e3fb06" compoundref="numeric__traits_8hpp" startline="193" endline="193">numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
-        <referencedby refid="group___math_functions_1gaafabd349b97354b207ba83e41c2868fc" compoundref="math_8hpp" startline="1074" endline="1088">arcsine</referencedby>
-        <referencedby refid="group___math_functions_1ga5723c1f8ea9aa2a4eaaeb21e6ae61f5f" compoundref="math_8hpp" startline="1029" endline="1067">arctangent</referencedby>
+        <references refid="group___math_functions_1gadc2eba7edcbf6a7f6eb94b9cdd72a948" compoundref="math_8hpp" startline="246" endline="248">neforce::absolute</references>
+        <references refid="group___math_constants_1ga4941b41cd281b5a5da16c1a4bda67dee" compoundref="math_8hpp" startline="52">neforce::constants::DEFAULT_TOLERANCE</references>
+        <references refid="group___numeric_type_checks_1gaa24923d0f821c4ff900bc19a12e0f581" compoundref="numeric__types_8hpp" startline="102" endline="104">neforce::is_infinity</references>
+        <references refid="group___numeric_type_checks_1ga69529551bf1bf78e074bfca6d21dd073" compoundref="numeric__types_8hpp" startline="65" endline="68">neforce::is_nan</references>
+        <references refid="group___iterator_operation_1gac6b661a80c5a42d3f9e8349a0dc6d181" compoundref="iterator_8hpp" startline="141" endline="145">neforce::prev</references>
+        <references refid="classneforce_1_1numeric__traits_1a255b4e7ede58b3390b3940f1399482cf" compoundref="numeric__traits_8hpp" startline="193" endline="193">neforce::numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
+        <references refid="group___math_functions_1gaad863b13ce587addf559f7f8edf0d07c" compoundref="math_8hpp" startline="512" endline="533">neforce::square_root</references>
+        <referencedby refid="group___math_functions_1gabf7eb40ef217388451fceb4103e08d1a" compoundref="math_8hpp" startline="1074" endline="1088">neforce::arcsine</referencedby>
+        <referencedby refid="group___math_functions_1ga5803713f49090eebae89acb404bb5c56" compoundref="math_8hpp" startline="1029" endline="1067">neforce::arctangent</referencedby>
+        <referencedby refid="group___math_functions_1gaad863b13ce587addf559f7f8edf0d07c" compoundref="math_8hpp" startline="512" endline="533">neforce::square_root</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga316213d51761356da9ed86312071fe3b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t cube_root</definition>
+      <memberdef kind="function" id="group___math_functions_1gab01e95ef610a233c8cd662219e97df05" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::cube_root</definition>
         <argsstring>(const decimal_t x, const decimal_t precise=constants::DEFAULT_TOLERANCE) noexcept</argsstring>
         <name>cube_root</name>
+        <qualifiedname>neforce::cube_root</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>precise</declname>
-          <defval><ref refid="group___math_constants_1gad62cb98b78e83330e55e9b9ce87af8ae" kindref="member">constants::DEFAULT_TOLERANCE</ref></defval>
+          <defval>constants::DEFAULT_TOLERANCE</defval>
         </param>
         <briefdescription>
 <para>计算立方根 </para>
@@ -1001,18 +1070,22 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="544" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="544" bodyend="566"/>
-        <references refid="group___math_functions_1ga83da80691fafcd172af23e1e3c66d8d4" compoundref="math_8hpp" startline="246" endline="248">absolute</references>
-        <references refid="group___numeric_type_checks_1ga673ecf65f4df0e8731a08ed2a81a483d" compoundref="numeric__types_8hpp" startline="102" endline="104">is_infinity</references>
-        <references refid="group___numeric_type_checks_1gab2c227da4229861df95e5c6df99cc700" compoundref="numeric__types_8hpp" startline="65" endline="68">is_nan</references>
-        <references refid="group___iterator_operation_1gaf4cd040af11ff6b9b0fc0f4d70a7eb5e" compoundref="iterator_8hpp" startline="141" endline="145">prev</references>
+        <references refid="group___math_functions_1gadc2eba7edcbf6a7f6eb94b9cdd72a948" compoundref="math_8hpp" startline="246" endline="248">neforce::absolute</references>
+        <references refid="group___math_functions_1gab01e95ef610a233c8cd662219e97df05" compoundref="math_8hpp" startline="544" endline="566">neforce::cube_root</references>
+        <references refid="group___math_constants_1ga4941b41cd281b5a5da16c1a4bda67dee" compoundref="math_8hpp" startline="52">neforce::constants::DEFAULT_TOLERANCE</references>
+        <references refid="group___numeric_type_checks_1gaa24923d0f821c4ff900bc19a12e0f581" compoundref="numeric__types_8hpp" startline="102" endline="104">neforce::is_infinity</references>
+        <references refid="group___numeric_type_checks_1ga69529551bf1bf78e074bfca6d21dd073" compoundref="numeric__types_8hpp" startline="65" endline="68">neforce::is_nan</references>
+        <references refid="group___iterator_operation_1gac6b661a80c5a42d3f9e8349a0dc6d181" compoundref="iterator_8hpp" startline="141" endline="145">neforce::prev</references>
+        <referencedby refid="group___math_functions_1gab01e95ef610a233c8cd662219e97df05" compoundref="math_8hpp" startline="544" endline="566">neforce::cube_root</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga4176efc4c35029e23895213994b382ff" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
-        <definition>uint64_t factorial</definition>
+      <memberdef kind="function" id="group___math_functions_1ga284f038452aa0d2c56a96569ebac6f46" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t neforce::factorial</definition>
         <argsstring>(const uint32_t n) noexcept</argsstring>
         <name>factorial</name>
+        <qualifiedname>neforce::factorial</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <type>const uint32_t</type>
           <declname>n</declname>
         </param>
         <briefdescription>
@@ -1035,14 +1108,17 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="573" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="573" bodyend="579"/>
+        <references refid="group___math_functions_1ga284f038452aa0d2c56a96569ebac6f46" compoundref="math_8hpp" startline="573" endline="579">neforce::factorial</references>
+        <referencedby refid="group___math_functions_1ga284f038452aa0d2c56a96569ebac6f46" compoundref="math_8hpp" startline="573" endline="579">neforce::factorial</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga290b6c7868b8a1edde452cb9bb4784ea" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t floor</definition>
+      <memberdef kind="function" id="group___math_functions_1ga8cf50bd734047468de42681ec383e1d3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::floor</definition>
         <argsstring>(const decimal_t x) noexcept</argsstring>
         <name>floor</name>
+        <qualifiedname>neforce::floor</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -1065,27 +1141,32 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="586" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="586" bodyend="609"/>
-        <references refid="group___math_functions_1ga83da80691fafcd172af23e1e3c66d8d4" compoundref="math_8hpp" startline="246" endline="248">absolute</references>
-        <references refid="group___numeric_type_checks_1gabc3f4202a4c893e260ce8b5154845022" compoundref="numeric__types_8hpp" startline="115" endline="117">is_finite</references>
-        <references refid="classnumeric__traits_1a43c99621a2fec69a3fb258505fcf7ce9" compoundref="numeric__traits_8hpp" startline="153" endline="153">numeric_traits&lt; T, Dummy &gt;::max</references>
-        <references refid="group___math_functions_1gabc4196c327c7a6784316819881ec3c3d" compoundref="math_8hpp" startline="173" endline="180">safe_decimal_to_uint64</references>
-        <referencedby refid="group___bit_manipulation_1ga153ce92edb2a29fe0261b05609191cf6" compoundref="bit_8hpp" startline="294" endline="300">bit_ceil</referencedby>
-        <referencedby refid="group___math_functions_1ga23f47f970cc36873ba044bd696ed0923" compoundref="math_8hpp" startline="617" endline="620">floor</referencedby>
-        <referencedby refid="group___math_functions_1ga31898ebdefe256c9d96a2c06a58e8c77" compoundref="math_8hpp" startline="704" endline="707">floor_bit</referencedby>
-        <referencedby refid="group___math_functions_1gaedd5856ca6e41f0174b5d9bd91b8995c" compoundref="math_8hpp" startline="674" endline="695">round</referencedby>
-        <referencedby refid="group___math_functions_1ga6ac0d975bef8138e4f98e4d9e738fc28" compoundref="math_8hpp" startline="758" endline="761">truncate</referencedby>
+        <references refid="group___math_functions_1gadc2eba7edcbf6a7f6eb94b9cdd72a948" compoundref="math_8hpp" startline="246" endline="248">neforce::absolute</references>
+        <references refid="group___math_functions_1ga8cf50bd734047468de42681ec383e1d3" compoundref="math_8hpp" startline="586" endline="609">neforce::floor</references>
+        <references refid="group___numeric_type_checks_1ga1491d2f97daa9bd777e96ddf2289d5f6" compoundref="numeric__types_8hpp" startline="115" endline="117">neforce::is_finite</references>
+        <references refid="group___math_constants_1ga7091c52270e3d84044528fcb5c99f9ea" compoundref="math_8hpp" startline="50">neforce::constants::MACHINE_EPSILON</references>
+        <references refid="classneforce_1_1numeric__traits_1a3a4cc2bdbf7e98a487d29367781db135" compoundref="numeric__traits_8hpp" startline="153" endline="153">neforce::numeric_traits&lt; T, Dummy &gt;::max</references>
+        <references refid="group___math_functions_1ga5d1060c894be1ee2635b478daea39ce2" compoundref="math_8hpp" startline="173" endline="180">neforce::safe_decimal_to_uint64</references>
+        <referencedby refid="group___bit_manipulation_1ga0b638297f9874ef984732affe3cf84ff" compoundref="bit_8hpp" startline="294" endline="300">neforce::bit_ceil</referencedby>
+        <referencedby refid="group___math_functions_1ga8cf50bd734047468de42681ec383e1d3" compoundref="math_8hpp" startline="586" endline="609">neforce::floor</referencedby>
+        <referencedby refid="group___math_functions_1ga60e07bce278ff74ec63bb9e301f66e33" compoundref="math_8hpp" startline="617" endline="620">neforce::floor</referencedby>
+        <referencedby refid="group___duration_1ga62d8b473b2c6c55cde909701b3c754c4" compoundref="duration_8hpp" startline="688" endline="694">neforce::floor</referencedby>
+        <referencedby refid="group___math_functions_1ga0263aecc1f2ba621d8de1508a15359c7" compoundref="math_8hpp" startline="704" endline="707">neforce::floor_bit</referencedby>
+        <referencedby refid="group___math_functions_1ga188aad6947a583fb75024a1a03631d7c" compoundref="math_8hpp" startline="674" endline="695">neforce::round</referencedby>
+        <referencedby refid="group___math_functions_1ga11aea140c852d2498d87a083fa94485e" compoundref="math_8hpp" startline="758" endline="761">neforce::truncate</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga23f47f970cc36873ba044bd696ed0923" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t floor</definition>
+      <memberdef kind="function" id="group___math_functions_1ga60e07bce278ff74ec63bb9e301f66e33" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::floor</definition>
         <argsstring>(const decimal_t x, const uint32_t bit) noexcept</argsstring>
         <name>floor</name>
+        <qualifiedname>neforce::floor</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <param>
-          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <type>const uint32_t</type>
           <declname>bit</declname>
         </param>
         <briefdescription>
@@ -1116,16 +1197,17 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="617" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="617" bodyend="620"/>
-        <references refid="group___math_functions_1ga290b6c7868b8a1edde452cb9bb4784ea" compoundref="math_8hpp" startline="586" endline="609">floor</references>
-        <references refid="group___math_functions_1gabccdceb14df19df976aba7ae15c9560e" compoundref="math_8hpp" startline="397" endline="412">power</references>
+        <references refid="group___math_functions_1ga8cf50bd734047468de42681ec383e1d3" compoundref="math_8hpp" startline="586" endline="609">neforce::floor</references>
+        <references refid="group___math_functions_1gafca00f12f0039d13fa803ebcb521848c" compoundref="math_8hpp" startline="397" endline="412">neforce::power</references>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1gad0e220f5d205ae18758cfc62bdf936f7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___math_functions_1ga2060f4b6aff5c4b8ec44f22b1f425da1" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>bool</type>
-        <definition>bool is_even_integer</definition>
+        <definition>bool neforce::is_even_integer</definition>
         <argsstring>(const decimal_t x) noexcept</argsstring>
         <name>is_even_integer</name>
+        <qualifiedname>neforce::is_even_integer</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -1136,13 +1218,14 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="622" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="622" bodyend="625"/>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga4b9ab0ae93aa724d216a640d96979082" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t ceil</definition>
+      <memberdef kind="function" id="group___math_functions_1ga41e02cdd039ccd8b93a379fcc590b9ad" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::ceil</definition>
         <argsstring>(const decimal_t x) noexcept</argsstring>
         <name>ceil</name>
+        <qualifiedname>neforce::ceil</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -1165,32 +1248,37 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="632" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="632" bodyend="656"/>
-        <references refid="group___math_functions_1ga83da80691fafcd172af23e1e3c66d8d4" compoundref="math_8hpp" startline="246" endline="248">absolute</references>
-        <references refid="group___numeric_type_checks_1gabc3f4202a4c893e260ce8b5154845022" compoundref="numeric__types_8hpp" startline="115" endline="117">is_finite</references>
-        <references refid="classnumeric__traits_1a43c99621a2fec69a3fb258505fcf7ce9" compoundref="numeric__traits_8hpp" startline="153" endline="153">numeric_traits&lt; T, Dummy &gt;::max</references>
-        <references refid="group___math_functions_1gabc4196c327c7a6784316819881ec3c3d" compoundref="math_8hpp" startline="173" endline="180">safe_decimal_to_uint64</references>
-        <referencedby refid="group___math_functions_1ga0039526b953ba838f78a0e22fb80fd2a" compoundref="math_8hpp" startline="664" endline="667">ceil</referencedby>
-        <referencedby refid="group___math_functions_1ga92a708ad82690f396b38dab402ec095e" compoundref="math_8hpp" startline="715" endline="718">ceil_bit</referencedby>
-        <referencedby refid="classatomic__futex_1aa85254e78d5dd5dbb2984502bade0f65" compoundref="atomic__futex_8hpp" startline="197" endline="201">atomic_futex&lt; WaiterBit &gt;::load_when_equal_for</referencedby>
-        <referencedby refid="classatomic__futex_1aad3626e00b9ec8eca67c946a549d6008" compoundref="atomic__futex_8hpp" startline="215" endline="226">atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</referencedby>
-        <referencedby refid="classhashtable_1af78667277f9f62e843dcc636c5f39cfb" compoundref="hashtable_8hpp" startline="1092" endline="1124">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::rehash</referencedby>
-        <referencedby refid="classhashtable_1aade225b3d610a99390047417b93fc8bc" compoundref="hashtable_8hpp" startline="1132" endline="1143">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::reserve</referencedby>
-        <referencedby refid="group___math_functions_1ga6ac0d975bef8138e4f98e4d9e738fc28" compoundref="math_8hpp" startline="758" endline="761">truncate</referencedby>
-        <referencedby refid="classcondition__variable_1a9caf38ad7eec6460fbca1bb971b3837c" compoundref="condition__variable_8hpp" startline="302" endline="305">condition_variable::wait_for</referencedby>
-        <referencedby refid="classcondition__variable_1a315ef6f2b9eb7625826b045b429326c5" compoundref="condition__variable_8hpp" startline="318" endline="321">condition_variable::wait_for</referencedby>
-        <referencedby refid="classcondition__variable_1a216086e8b7e905fb379cfd99ea41eb14" compoundref="condition__variable_8hpp" startline="258" endline="269">condition_variable::wait_until</referencedby>
+        <references refid="group___math_functions_1gadc2eba7edcbf6a7f6eb94b9cdd72a948" compoundref="math_8hpp" startline="246" endline="248">neforce::absolute</references>
+        <references refid="group___math_functions_1ga41e02cdd039ccd8b93a379fcc590b9ad" compoundref="math_8hpp" startline="632" endline="656">neforce::ceil</references>
+        <references refid="group___numeric_type_checks_1ga1491d2f97daa9bd777e96ddf2289d5f6" compoundref="numeric__types_8hpp" startline="115" endline="117">neforce::is_finite</references>
+        <references refid="group___math_constants_1ga7091c52270e3d84044528fcb5c99f9ea" compoundref="math_8hpp" startline="50">neforce::constants::MACHINE_EPSILON</references>
+        <references refid="classneforce_1_1numeric__traits_1a3a4cc2bdbf7e98a487d29367781db135" compoundref="numeric__traits_8hpp" startline="153" endline="153">neforce::numeric_traits&lt; T, Dummy &gt;::max</references>
+        <references refid="group___math_functions_1ga5d1060c894be1ee2635b478daea39ce2" compoundref="math_8hpp" startline="173" endline="180">neforce::safe_decimal_to_uint64</references>
+        <referencedby refid="group___math_functions_1ga41e02cdd039ccd8b93a379fcc590b9ad" compoundref="math_8hpp" startline="632" endline="656">neforce::ceil</referencedby>
+        <referencedby refid="group___math_functions_1ga7e33bc9bb76e6899ac1958c5149b1972" compoundref="math_8hpp" startline="664" endline="667">neforce::ceil</referencedby>
+        <referencedby refid="group___duration_1ga77736cc86606a3829e12b1d7ace94753" compoundref="duration_8hpp" startline="705" endline="711">neforce::ceil</referencedby>
+        <referencedby refid="group___math_functions_1ga02d64eac4d5fc225cff362eda510da12" compoundref="math_8hpp" startline="715" endline="718">neforce::ceil_bit</referencedby>
+        <referencedby refid="classneforce_1_1atomic__futex_1ad027687423537edc31cfddf9f2c7641d" compoundref="atomic__futex_8hpp" startline="197" endline="201">neforce::atomic_futex&lt; WaiterBit &gt;::load_when_equal_for</referencedby>
+        <referencedby refid="classneforce_1_1atomic__futex_1aacede2e1d54d744a55db6cbfa965a3da" compoundref="atomic__futex_8hpp" startline="215" endline="226">neforce::atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</referencedby>
+        <referencedby refid="classneforce_1_1hashtable_1af7d98df17fd541fd4f59d308181f8951" compoundref="hashtable_8hpp" startline="1092" endline="1124">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::rehash</referencedby>
+        <referencedby refid="classneforce_1_1hashtable_1ac37b4b36ec82f0ed42949dc774c19dca" compoundref="hashtable_8hpp" startline="1132" endline="1143">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::reserve</referencedby>
+        <referencedby refid="group___math_functions_1ga11aea140c852d2498d87a083fa94485e" compoundref="math_8hpp" startline="758" endline="761">neforce::truncate</referencedby>
+        <referencedby refid="classneforce_1_1condition__variable_1af152f56a4bcf07556c22ca1fb7b1702c" compoundref="condition__variable_8hpp" startline="302" endline="305">neforce::condition_variable::wait_for</referencedby>
+        <referencedby refid="classneforce_1_1condition__variable_1a28d1cf8102b2d2d95e11ed5c23a889ae" compoundref="condition__variable_8hpp" startline="318" endline="321">neforce::condition_variable::wait_for</referencedby>
+        <referencedby refid="classneforce_1_1condition__variable_1a70fe24c10736b5fde62229b85e031a5b" compoundref="condition__variable_8hpp" startline="258" endline="269">neforce::condition_variable::wait_until</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga0039526b953ba838f78a0e22fb80fd2a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t ceil</definition>
+      <memberdef kind="function" id="group___math_functions_1ga7e33bc9bb76e6899ac1958c5149b1972" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::ceil</definition>
         <argsstring>(const decimal_t x, const uint32_t bit) noexcept</argsstring>
         <name>ceil</name>
+        <qualifiedname>neforce::ceil</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <param>
-          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <type>const uint32_t</type>
           <declname>bit</declname>
         </param>
         <briefdescription>
@@ -1221,16 +1309,17 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="664" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="664" bodyend="667"/>
-        <references refid="group___math_functions_1ga4b9ab0ae93aa724d216a640d96979082" compoundref="math_8hpp" startline="632" endline="656">ceil</references>
-        <references refid="group___math_functions_1gabccdceb14df19df976aba7ae15c9560e" compoundref="math_8hpp" startline="397" endline="412">power</references>
+        <references refid="group___math_functions_1ga41e02cdd039ccd8b93a379fcc590b9ad" compoundref="math_8hpp" startline="632" endline="656">neforce::ceil</references>
+        <references refid="group___math_functions_1gafca00f12f0039d13fa803ebcb521848c" compoundref="math_8hpp" startline="397" endline="412">neforce::power</references>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1gaedd5856ca6e41f0174b5d9bd91b8995c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t round</definition>
+      <memberdef kind="function" id="group___math_functions_1ga188aad6947a583fb75024a1a03631d7c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::round</definition>
         <argsstring>(const decimal_t x) noexcept</argsstring>
         <name>round</name>
+        <qualifiedname>neforce::round</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -1253,30 +1342,33 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="674" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="674" bodyend="695"/>
-        <references refid="group___math_functions_1ga83da80691fafcd172af23e1e3c66d8d4" compoundref="math_8hpp" startline="246" endline="248">absolute</references>
-        <references refid="group___math_functions_1ga290b6c7868b8a1edde452cb9bb4784ea" compoundref="math_8hpp" startline="586" endline="609">floor</references>
-        <references refid="group___numeric_type_checks_1gabc3f4202a4c893e260ce8b5154845022" compoundref="numeric__types_8hpp" startline="115" endline="117">is_finite</references>
-        <referencedby refid="group___math_functions_1gab6427cef0dbd04aedd0e0575838f19c3" compoundref="math_8hpp" startline="783" endline="790">around_multiple</referencedby>
-        <referencedby refid="classcolor_1ae53ab3ef6d437baaf0a3d20f9cd3b5d0" compoundref="color_8hpp" startline="581" endline="608">color::blend</referencedby>
-        <referencedby refid="classcolor_1a4c9a749834568a41153848f9f6b03a7e" compoundref="color_8hpp" startline="769" endline="776">color::from_premultiplied</referencedby>
-        <referencedby refid="classcolor_1a9b6198cac504ba87c2bc32193b8600c1" compoundref="color_8hpp" startline="492" endline="497">color::operator*</referencedby>
-        <referencedby refid="classcolor_1a8c35ffb5d5ae4168eab6aa477a5480d1" compoundref="color_8hpp" startline="539" endline="545">color::operator*=</referencedby>
-        <referencedby refid="group___math_functions_1gaff7c9e0e66113479054c2a5d3a00a1d9" compoundref="math_8hpp" startline="821" endline="826">remainder</referencedby>
-        <referencedby refid="group___math_functions_1ga56a1ca86fd642d4ed8266412fb6bd0b0" compoundref="math_8hpp" startline="747" endline="750">round</referencedby>
-        <referencedby refid="classcolor_1a1b52a006d08508c7882ed9edd6129998" compoundref="color_8hpp" startline="449" endline="453">color::set_opacity</referencedby>
-        <referencedby refid="classcolor_1aed18999b65fb862323cfb99398b989e4" compoundref="color_8hpp" startline="758" endline="762">color::to_premultiplied</referencedby>
+        <references refid="group___math_functions_1gadc2eba7edcbf6a7f6eb94b9cdd72a948" compoundref="math_8hpp" startline="246" endline="248">neforce::absolute</references>
+        <references refid="group___math_functions_1ga8cf50bd734047468de42681ec383e1d3" compoundref="math_8hpp" startline="586" endline="609">neforce::floor</references>
+        <references refid="group___numeric_type_checks_1ga1491d2f97daa9bd777e96ddf2289d5f6" compoundref="numeric__types_8hpp" startline="115" endline="117">neforce::is_finite</references>
+        <references refid="group___math_functions_1ga188aad6947a583fb75024a1a03631d7c" compoundref="math_8hpp" startline="674" endline="695">neforce::round</references>
+        <referencedby refid="group___math_functions_1ga741297f8ebf4a8690e7d6140a8cc7821" compoundref="math_8hpp" startline="783" endline="790">neforce::around_multiple</referencedby>
+        <referencedby refid="classneforce_1_1color_1a6263abbb10e8096110af968c66b8e237" compoundref="color_8hpp" startline="581" endline="608">neforce::color::blend</referencedby>
+        <referencedby refid="classneforce_1_1color_1ab160d52cd0e8d1a07f5c18fe340eac6d" compoundref="color_8hpp" startline="769" endline="776">neforce::color::from_premultiplied</referencedby>
+        <referencedby refid="classneforce_1_1color_1a5328d79545288f9fe13169779c54587a" compoundref="color_8hpp" startline="492" endline="497">neforce::color::operator*</referencedby>
+        <referencedby refid="classneforce_1_1color_1a1de46b1338041d8cad9269f2b2e185bd" compoundref="color_8hpp" startline="539" endline="545">neforce::color::operator*=</referencedby>
+        <referencedby refid="group___math_functions_1ga8f4d76dded4266153cdf84129372cc93" compoundref="math_8hpp" startline="821" endline="826">neforce::remainder</referencedby>
+        <referencedby refid="group___math_functions_1ga188aad6947a583fb75024a1a03631d7c" compoundref="math_8hpp" startline="674" endline="695">neforce::round</referencedby>
+        <referencedby refid="group___math_functions_1ga3e5dbc5ee82af4db90fb79d694610957" compoundref="math_8hpp" startline="747" endline="750">neforce::round</referencedby>
+        <referencedby refid="classneforce_1_1color_1a2baad466dbc01afdddeaf9d85b1085b0" compoundref="color_8hpp" startline="449" endline="453">neforce::color::set_opacity</referencedby>
+        <referencedby refid="classneforce_1_1color_1a2d51727481fc54d037a6d06278678a22" compoundref="color_8hpp" startline="758" endline="762">neforce::color::to_premultiplied</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga31898ebdefe256c9d96a2c06a58e8c77" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t floor_bit</definition>
+      <memberdef kind="function" id="group___math_functions_1ga0263aecc1f2ba621d8de1508a15359c7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::floor_bit</definition>
         <argsstring>(const decimal_t x, const uint32_t bit) noexcept</argsstring>
         <name>floor_bit</name>
+        <qualifiedname>neforce::floor_bit</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <param>
-          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <type>const uint32_t</type>
           <declname>bit</declname>
         </param>
         <briefdescription>
@@ -1307,22 +1399,25 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="704" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="704" bodyend="707"/>
-        <references refid="group___math_functions_1ga290b6c7868b8a1edde452cb9bb4784ea" compoundref="math_8hpp" startline="586" endline="609">floor</references>
-        <references refid="group___math_functions_1gabccdceb14df19df976aba7ae15c9560e" compoundref="math_8hpp" startline="397" endline="412">power</references>
-        <referencedby refid="group___math_functions_1gaffe322740f760d37d8a6d083106ed1b1" compoundref="math_8hpp" startline="726" endline="728">round_bit</referencedby>
-        <referencedby refid="group___math_functions_1ga0b6e440651d04894b505be41e921edab" compoundref="math_8hpp" startline="736" endline="738">truncate_bit</referencedby>
+        <references refid="group___math_functions_1ga8cf50bd734047468de42681ec383e1d3" compoundref="math_8hpp" startline="586" endline="609">neforce::floor</references>
+        <references refid="group___math_functions_1ga0263aecc1f2ba621d8de1508a15359c7" compoundref="math_8hpp" startline="704" endline="707">neforce::floor_bit</references>
+        <references refid="group___math_functions_1gafca00f12f0039d13fa803ebcb521848c" compoundref="math_8hpp" startline="397" endline="412">neforce::power</references>
+        <referencedby refid="group___math_functions_1ga0263aecc1f2ba621d8de1508a15359c7" compoundref="math_8hpp" startline="704" endline="707">neforce::floor_bit</referencedby>
+        <referencedby refid="group___math_functions_1ga7af45e98e8a82fd4788f64fd5d1542d6" compoundref="math_8hpp" startline="726" endline="728">neforce::round_bit</referencedby>
+        <referencedby refid="group___math_functions_1ga617826770a2da9f859f7d434ad38553d" compoundref="math_8hpp" startline="736" endline="738">neforce::truncate_bit</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga92a708ad82690f396b38dab402ec095e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t ceil_bit</definition>
+      <memberdef kind="function" id="group___math_functions_1ga02d64eac4d5fc225cff362eda510da12" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::ceil_bit</definition>
         <argsstring>(const decimal_t x, const uint32_t bit) noexcept</argsstring>
         <name>ceil_bit</name>
+        <qualifiedname>neforce::ceil_bit</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <param>
-          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <type>const uint32_t</type>
           <declname>bit</declname>
         </param>
         <briefdescription>
@@ -1353,22 +1448,25 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="715" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="715" bodyend="718"/>
-        <references refid="group___math_functions_1ga4b9ab0ae93aa724d216a640d96979082" compoundref="math_8hpp" startline="632" endline="656">ceil</references>
-        <references refid="group___math_functions_1gabccdceb14df19df976aba7ae15c9560e" compoundref="math_8hpp" startline="397" endline="412">power</references>
-        <referencedby refid="group___math_functions_1gaffe322740f760d37d8a6d083106ed1b1" compoundref="math_8hpp" startline="726" endline="728">round_bit</referencedby>
-        <referencedby refid="group___math_functions_1ga0b6e440651d04894b505be41e921edab" compoundref="math_8hpp" startline="736" endline="738">truncate_bit</referencedby>
+        <references refid="group___math_functions_1ga41e02cdd039ccd8b93a379fcc590b9ad" compoundref="math_8hpp" startline="632" endline="656">neforce::ceil</references>
+        <references refid="group___math_functions_1ga02d64eac4d5fc225cff362eda510da12" compoundref="math_8hpp" startline="715" endline="718">neforce::ceil_bit</references>
+        <references refid="group___math_functions_1gafca00f12f0039d13fa803ebcb521848c" compoundref="math_8hpp" startline="397" endline="412">neforce::power</references>
+        <referencedby refid="group___math_functions_1ga02d64eac4d5fc225cff362eda510da12" compoundref="math_8hpp" startline="715" endline="718">neforce::ceil_bit</referencedby>
+        <referencedby refid="group___math_functions_1ga7af45e98e8a82fd4788f64fd5d1542d6" compoundref="math_8hpp" startline="726" endline="728">neforce::round_bit</referencedby>
+        <referencedby refid="group___math_functions_1ga617826770a2da9f859f7d434ad38553d" compoundref="math_8hpp" startline="736" endline="738">neforce::truncate_bit</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1gaffe322740f760d37d8a6d083106ed1b1" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t round_bit</definition>
+      <memberdef kind="function" id="group___math_functions_1ga7af45e98e8a82fd4788f64fd5d1542d6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::round_bit</definition>
         <argsstring>(const decimal_t x, const uint32_t bit) noexcept</argsstring>
         <name>round_bit</name>
+        <qualifiedname>neforce::round_bit</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <param>
-          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <type>const uint32_t</type>
           <declname>bit</declname>
         </param>
         <briefdescription>
@@ -1399,21 +1497,24 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="726" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="726" bodyend="728"/>
-        <references refid="group___math_functions_1ga92a708ad82690f396b38dab402ec095e" compoundref="math_8hpp" startline="715" endline="718">ceil_bit</references>
-        <references refid="group___math_functions_1ga31898ebdefe256c9d96a2c06a58e8c77" compoundref="math_8hpp" startline="704" endline="707">floor_bit</references>
-        <references refid="group___math_functions_1gabccdceb14df19df976aba7ae15c9560e" compoundref="math_8hpp" startline="397" endline="412">power</references>
+        <references refid="group___math_functions_1ga02d64eac4d5fc225cff362eda510da12" compoundref="math_8hpp" startline="715" endline="718">neforce::ceil_bit</references>
+        <references refid="group___math_functions_1ga0263aecc1f2ba621d8de1508a15359c7" compoundref="math_8hpp" startline="704" endline="707">neforce::floor_bit</references>
+        <references refid="group___math_functions_1gafca00f12f0039d13fa803ebcb521848c" compoundref="math_8hpp" startline="397" endline="412">neforce::power</references>
+        <references refid="group___math_functions_1ga7af45e98e8a82fd4788f64fd5d1542d6" compoundref="math_8hpp" startline="726" endline="728">neforce::round_bit</references>
+        <referencedby refid="group___math_functions_1ga7af45e98e8a82fd4788f64fd5d1542d6" compoundref="math_8hpp" startline="726" endline="728">neforce::round_bit</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga0b6e440651d04894b505be41e921edab" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t truncate_bit</definition>
+      <memberdef kind="function" id="group___math_functions_1ga617826770a2da9f859f7d434ad38553d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::truncate_bit</definition>
         <argsstring>(const decimal_t x, const uint32_t bit) noexcept</argsstring>
         <name>truncate_bit</name>
+        <qualifiedname>neforce::truncate_bit</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <param>
-          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <type>const uint32_t</type>
           <declname>bit</declname>
         </param>
         <briefdescription>
@@ -1444,20 +1545,23 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="736" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="736" bodyend="738"/>
-        <references refid="group___math_functions_1ga92a708ad82690f396b38dab402ec095e" compoundref="math_8hpp" startline="715" endline="718">ceil_bit</references>
-        <references refid="group___math_functions_1ga31898ebdefe256c9d96a2c06a58e8c77" compoundref="math_8hpp" startline="704" endline="707">floor_bit</references>
+        <references refid="group___math_functions_1ga02d64eac4d5fc225cff362eda510da12" compoundref="math_8hpp" startline="715" endline="718">neforce::ceil_bit</references>
+        <references refid="group___math_functions_1ga0263aecc1f2ba621d8de1508a15359c7" compoundref="math_8hpp" startline="704" endline="707">neforce::floor_bit</references>
+        <references refid="group___math_functions_1ga617826770a2da9f859f7d434ad38553d" compoundref="math_8hpp" startline="736" endline="738">neforce::truncate_bit</references>
+        <referencedby refid="group___math_functions_1ga617826770a2da9f859f7d434ad38553d" compoundref="math_8hpp" startline="736" endline="738">neforce::truncate_bit</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga56a1ca86fd642d4ed8266412fb6bd0b0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t round</definition>
+      <memberdef kind="function" id="group___math_functions_1ga3e5dbc5ee82af4db90fb79d694610957" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::round</definition>
         <argsstring>(const decimal_t x, const uint32_t bit) noexcept</argsstring>
         <name>round</name>
+        <qualifiedname>neforce::round</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <param>
-          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <type>const uint32_t</type>
           <declname>bit</declname>
         </param>
         <briefdescription>
@@ -1488,16 +1592,17 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="747" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="747" bodyend="750"/>
-        <references refid="group___math_functions_1gabccdceb14df19df976aba7ae15c9560e" compoundref="math_8hpp" startline="397" endline="412">power</references>
-        <references refid="group___math_functions_1gaedd5856ca6e41f0174b5d9bd91b8995c" compoundref="math_8hpp" startline="674" endline="695">round</references>
+        <references refid="group___math_functions_1gafca00f12f0039d13fa803ebcb521848c" compoundref="math_8hpp" startline="397" endline="412">neforce::power</references>
+        <references refid="group___math_functions_1ga188aad6947a583fb75024a1a03631d7c" compoundref="math_8hpp" startline="674" endline="695">neforce::round</references>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga6ac0d975bef8138e4f98e4d9e738fc28" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t truncate</definition>
+      <memberdef kind="function" id="group___math_functions_1ga11aea140c852d2498d87a083fa94485e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::truncate</definition>
         <argsstring>(const decimal_t x, const int bit) noexcept</argsstring>
         <name>truncate</name>
+        <qualifiedname>neforce::truncate</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <param>
@@ -1532,18 +1637,22 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="758" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="758" bodyend="761"/>
-        <references refid="group___math_functions_1ga83da80691fafcd172af23e1e3c66d8d4" compoundref="math_8hpp" startline="246" endline="248">absolute</references>
-        <references refid="group___math_functions_1ga4b9ab0ae93aa724d216a640d96979082" compoundref="math_8hpp" startline="632" endline="656">ceil</references>
-        <references refid="group___math_functions_1ga290b6c7868b8a1edde452cb9bb4784ea" compoundref="math_8hpp" startline="586" endline="609">floor</references>
-        <references refid="group___math_functions_1gabccdceb14df19df976aba7ae15c9560e" compoundref="math_8hpp" startline="397" endline="412">power</references>
+        <references refid="group___math_functions_1gadc2eba7edcbf6a7f6eb94b9cdd72a948" compoundref="math_8hpp" startline="246" endline="248">neforce::absolute</references>
+        <references refid="group___math_functions_1ga41e02cdd039ccd8b93a379fcc590b9ad" compoundref="math_8hpp" startline="632" endline="656">neforce::ceil</references>
+        <references refid="group___math_functions_1ga8cf50bd734047468de42681ec383e1d3" compoundref="math_8hpp" startline="586" endline="609">neforce::floor</references>
+        <references refid="group___math_functions_1gafca00f12f0039d13fa803ebcb521848c" compoundref="math_8hpp" startline="397" endline="412">neforce::power</references>
+        <references refid="group___math_functions_1ga11aea140c852d2498d87a083fa94485e" compoundref="math_8hpp" startline="758" endline="761">neforce::truncate</references>
+        <referencedby refid="group___math_functions_1gafeaacdf9043e86ef5b78814339a11754" compoundref="math_8hpp" startline="768" endline="773">neforce::truncate</referencedby>
+        <referencedby refid="group___math_functions_1ga11aea140c852d2498d87a083fa94485e" compoundref="math_8hpp" startline="758" endline="761">neforce::truncate</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1gad91dc2bacc127a410a6272f8a45d9f84" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t truncate</definition>
+      <memberdef kind="function" id="group___math_functions_1gafeaacdf9043e86ef5b78814339a11754" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::truncate</definition>
         <argsstring>(const decimal_t x) noexcept</argsstring>
         <name>truncate</name>
+        <qualifiedname>neforce::truncate</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -1566,25 +1675,27 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="768" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="768" bodyend="773"/>
-        <references refid="group___numeric_type_checks_1gabc3f4202a4c893e260ce8b5154845022" compoundref="numeric__types_8hpp" startline="115" endline="117">is_finite</references>
+        <references refid="group___numeric_type_checks_1ga1491d2f97daa9bd777e96ddf2289d5f6" compoundref="numeric__types_8hpp" startline="115" endline="117">neforce::is_finite</references>
+        <references refid="group___math_functions_1ga11aea140c852d2498d87a083fa94485e" compoundref="math_8hpp" startline="758" endline="761">neforce::truncate</references>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1gab6427cef0dbd04aedd0e0575838f19c3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___math_functions_1ga741297f8ebf4a8690e7d6140a8cc7821" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
-        <definition>bool around_multiple</definition>
+        <definition>bool neforce::around_multiple</definition>
         <argsstring>(const decimal_t x, const decimal_t axis, const decimal_t toler=constants::DEFAULT_TOLERANCE)</argsstring>
         <name>around_multiple</name>
+        <qualifiedname>neforce::around_multiple</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>axis</declname>
         </param>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>toler</declname>
-          <defval><ref refid="group___math_constants_1gad62cb98b78e83330e55e9b9ce87af8ae" kindref="member">constants::DEFAULT_TOLERANCE</ref></defval>
+          <defval>constants::DEFAULT_TOLERANCE</defval>
         </param>
         <briefdescription>
 <para>判断是否接近某个倍数值 </para>
@@ -1619,7 +1730,7 @@
 </simplesect>
 <parameterlist kind="exception"><parameteritem>
 <parameternamelist>
-<parametername><ref refid="structmath__exception" kindref="compound">math_exception</ref></parametername>
+<parametername><ref refid="structneforce_1_1math__exception" kindref="compound">math_exception</ref></parametername>
 </parameternamelist>
 <parameterdescription>
 <para>当axis为0时抛出 </para>
@@ -1631,23 +1742,28 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="783" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="783" bodyend="790"/>
-        <references refid="group___math_functions_1ga83da80691fafcd172af23e1e3c66d8d4" compoundref="math_8hpp" startline="246" endline="248">absolute</references>
-        <references refid="group___math_functions_1gaedd5856ca6e41f0174b5d9bd91b8995c" compoundref="math_8hpp" startline="674" endline="695">round</references>
-        <referencedby refid="group___math_functions_1ga19e96c78d392932a5ccaefeaa12cab37" compoundref="math_8hpp" startline="798" endline="800">around_pi</referencedby>
+        <references refid="group___math_functions_1gadc2eba7edcbf6a7f6eb94b9cdd72a948" compoundref="math_8hpp" startline="246" endline="248">neforce::absolute</references>
+        <references refid="group___math_functions_1ga741297f8ebf4a8690e7d6140a8cc7821" compoundref="math_8hpp" startline="783" endline="790">neforce::around_multiple</references>
+        <references refid="group___math_constants_1ga4941b41cd281b5a5da16c1a4bda67dee" compoundref="math_8hpp" startline="52">neforce::constants::DEFAULT_TOLERANCE</references>
+        <references refid="group___math_constants_1ga7091c52270e3d84044528fcb5c99f9ea" compoundref="math_8hpp" startline="50">neforce::constants::MACHINE_EPSILON</references>
+        <references refid="group___math_functions_1ga188aad6947a583fb75024a1a03631d7c" compoundref="math_8hpp" startline="674" endline="695">neforce::round</references>
+        <referencedby refid="group___math_functions_1ga741297f8ebf4a8690e7d6140a8cc7821" compoundref="math_8hpp" startline="783" endline="790">neforce::around_multiple</referencedby>
+        <referencedby refid="group___math_functions_1gac41acbbbe67da9ca5c3aadfa21fc496a" compoundref="math_8hpp" startline="798" endline="800">neforce::around_pi</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga19e96c78d392932a5ccaefeaa12cab37" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___math_functions_1gac41acbbbe67da9ca5c3aadfa21fc496a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
-        <definition>bool around_pi</definition>
+        <definition>bool neforce::around_pi</definition>
         <argsstring>(const decimal_t x, const decimal_t toler=constants::LOOSE_TOLERANCE)</argsstring>
         <name>around_pi</name>
+        <qualifiedname>neforce::around_pi</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>toler</declname>
-          <defval><ref refid="group___math_constants_1ga0d0621f7c05efa7d863b3975a077808e" kindref="member">constants::LOOSE_TOLERANCE</ref></defval>
+          <defval>constants::LOOSE_TOLERANCE</defval>
         </param>
         <briefdescription>
 <para>判断是否接近π的整数倍 </para>
@@ -1677,21 +1793,26 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="798" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="798" bodyend="800"/>
-        <references refid="group___math_functions_1gab6427cef0dbd04aedd0e0575838f19c3" compoundref="math_8hpp" startline="783" endline="790">around_multiple</references>
+        <references refid="group___math_functions_1ga741297f8ebf4a8690e7d6140a8cc7821" compoundref="math_8hpp" startline="783" endline="790">neforce::around_multiple</references>
+        <references refid="group___math_functions_1gac41acbbbe67da9ca5c3aadfa21fc496a" compoundref="math_8hpp" startline="798" endline="800">neforce::around_pi</references>
+        <references refid="group___math_constants_1ga628a1a9dc3ee8e6672dd5cb1e51699bd" compoundref="math_8hpp" startline="54">neforce::constants::LOOSE_TOLERANCE</references>
+        <references refid="group___math_constants_1ga0b8083f84702c7b4a6e2029fd6ff31bc" compoundref="math_8hpp" startline="39">neforce::constants::PI</references>
+        <referencedby refid="group___math_functions_1gac41acbbbe67da9ca5c3aadfa21fc496a" compoundref="math_8hpp" startline="798" endline="800">neforce::around_pi</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga85bd4411cce7ccffb0f86da358f89e1d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___math_functions_1ga9256e0dddca3d14c9693e2706a442c71" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>bool</type>
-        <definition>bool around_zero</definition>
+        <definition>bool neforce::around_zero</definition>
         <argsstring>(const decimal_t x, const decimal_t toler=constants::LOOSE_TOLERANCE) noexcept</argsstring>
         <name>around_zero</name>
+        <qualifiedname>neforce::around_zero</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>toler</declname>
-          <defval><ref refid="group___math_constants_1ga0d0621f7c05efa7d863b3975a077808e" kindref="member">constants::LOOSE_TOLERANCE</ref></defval>
+          <defval>constants::LOOSE_TOLERANCE</defval>
         </param>
         <briefdescription>
 <para>判断是否接近零 </para>
@@ -1721,20 +1842,24 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="808" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="808" bodyend="810"/>
-        <references refid="group___math_functions_1ga83da80691fafcd172af23e1e3c66d8d4" compoundref="math_8hpp" startline="246" endline="248">absolute</references>
-        <referencedby refid="group___math_functions_1ga3f8b47692b7051859e4ca435dbb02c46" compoundref="math_8hpp" startline="977" endline="1012">tangent</referencedby>
+        <references refid="group___math_functions_1gadc2eba7edcbf6a7f6eb94b9cdd72a948" compoundref="math_8hpp" startline="246" endline="248">neforce::absolute</references>
+        <references refid="group___math_functions_1ga9256e0dddca3d14c9693e2706a442c71" compoundref="math_8hpp" startline="808" endline="810">neforce::around_zero</references>
+        <references refid="group___math_constants_1ga628a1a9dc3ee8e6672dd5cb1e51699bd" compoundref="math_8hpp" startline="54">neforce::constants::LOOSE_TOLERANCE</references>
+        <referencedby refid="group___math_functions_1ga9256e0dddca3d14c9693e2706a442c71" compoundref="math_8hpp" startline="808" endline="810">neforce::around_zero</referencedby>
+        <referencedby refid="group___math_functions_1ga51dde13845502632d2479b0b67dde707" compoundref="math_8hpp" startline="977" endline="1012">neforce::tangent</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1gaff7c9e0e66113479054c2a5d3a00a1d9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t remainder</definition>
+      <memberdef kind="function" id="group___math_functions_1ga8f4d76dded4266153cdf84129372cc93" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::remainder</definition>
         <argsstring>(const decimal_t x, const decimal_t y) noexcept</argsstring>
         <name>remainder</name>
+        <qualifiedname>neforce::remainder</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>y</declname>
         </param>
         <briefdescription>
@@ -1765,21 +1890,24 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="821" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="821" bodyend="826"/>
-        <references refid="group___numeric_type_checks_1ga673ecf65f4df0e8731a08ed2a81a483d" compoundref="numeric__types_8hpp" startline="102" endline="104">is_infinity</references>
-        <references refid="group___numeric_type_checks_1gab2c227da4229861df95e5c6df99cc700" compoundref="numeric__types_8hpp" startline="65" endline="68">is_nan</references>
-        <references refid="classnumeric__traits_1a4a365e1002991e6c6873abaa78e3fb06" compoundref="numeric__traits_8hpp" startline="193" endline="193">numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
-        <references refid="group___math_functions_1gaedd5856ca6e41f0174b5d9bd91b8995c" compoundref="math_8hpp" startline="674" endline="695">round</references>
-        <referencedby refid="group___m_s_v_c_compiler_intrinsics_1ga951c4f0a3d64d7bb2ba9254a988074ec" compoundref="msvc__intrinsic_8hpp" startline="113" endline="201">_udiv128</referencedby>
-        <referencedby refid="structuint128__t_1a81e9f179d4eb213d378e5aae33911bf8" compoundref="int128_8hpp" startline="303" endline="320">uint128_t::div64</referencedby>
-        <referencedby refid="group___int128_1ga69509dd7c99156f370da7052970acdf7" compoundref="int128_8hpp" startline="704" endline="747">uint128_t::divmod128</referencedby>
+        <references refid="group___numeric_type_checks_1gaa24923d0f821c4ff900bc19a12e0f581" compoundref="numeric__types_8hpp" startline="102" endline="104">neforce::is_infinity</references>
+        <references refid="group___numeric_type_checks_1ga69529551bf1bf78e074bfca6d21dd073" compoundref="numeric__types_8hpp" startline="65" endline="68">neforce::is_nan</references>
+        <references refid="classneforce_1_1numeric__traits_1a255b4e7ede58b3390b3940f1399482cf" compoundref="numeric__traits_8hpp" startline="193" endline="193">neforce::numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
+        <references refid="group___math_functions_1ga8f4d76dded4266153cdf84129372cc93" compoundref="math_8hpp" startline="821" endline="826">neforce::remainder</references>
+        <references refid="group___math_functions_1ga188aad6947a583fb75024a1a03631d7c" compoundref="math_8hpp" startline="674" endline="695">neforce::round</references>
+        <referencedby refid="group___m_s_v_c_compiler_intrinsics_1gac14362f64ac5b042cff208cfdc11654e" compoundref="msvc__intrinsic_8hpp" startline="113" endline="201">neforce::_udiv128</referencedby>
+        <referencedby refid="structneforce_1_1uint128__t_1a8536681e244f556ed13d2dcfb2ec6ead" compoundref="int128_8hpp" startline="303" endline="320">neforce::uint128_t::div64</referencedby>
+        <referencedby refid="group___int128_1gae7585188f450a3a2653753e5d1516512" compoundref="int128_8hpp" startline="704" endline="747">neforce::uint128_t::divmod128</referencedby>
+        <referencedby refid="group___math_functions_1ga8f4d76dded4266153cdf84129372cc93" compoundref="math_8hpp" startline="821" endline="826">neforce::remainder</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga81807acce94bc973bf39e6b15929156d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t float_part</definition>
+      <memberdef kind="function" id="group___math_functions_1gae0c662d5bd88e74a474b5ca25b06dc2f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::float_part</definition>
         <argsstring>(const decimal_t x) noexcept</argsstring>
         <name>float_part</name>
+        <qualifiedname>neforce::float_part</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -1802,18 +1930,21 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="833" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="833" bodyend="835"/>
+        <references refid="group___math_functions_1gae0c662d5bd88e74a474b5ca25b06dc2f" compoundref="math_8hpp" startline="833" endline="835">neforce::float_part</references>
+        <referencedby refid="group___math_functions_1gae0c662d5bd88e74a474b5ca25b06dc2f" compoundref="math_8hpp" startline="833" endline="835">neforce::float_part</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga0d2cb33ec053fa3295db2fe0b7ad3cbc" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t float_apart</definition>
+      <memberdef kind="function" id="group___math_functions_1ga71f0fe4702618cfb06c9acff24ca8774" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::float_apart</definition>
         <argsstring>(decimal_t x, int64_t *int_ptr) noexcept</argsstring>
         <name>float_apart</name>
+        <qualifiedname>neforce::float_apart</qualifiedname>
         <param>
-          <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>decimal_t</type>
           <declname>x</declname>
         </param>
         <param>
-          <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref> *</type>
+          <type>int64_t *</type>
           <declname>int_ptr</declname>
         </param>
         <briefdescription>
@@ -1844,14 +1975,17 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="845" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="845" bodyend="848"/>
+        <references refid="group___math_functions_1ga71f0fe4702618cfb06c9acff24ca8774" compoundref="math_8hpp" startline="845" endline="848">neforce::float_apart</references>
+        <referencedby refid="group___math_functions_1ga71f0fe4702618cfb06c9acff24ca8774" compoundref="math_8hpp" startline="845" endline="848">neforce::float_apart</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga2f22b0e948777d08ec705fdfc4b52168" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t sine</definition>
+      <memberdef kind="function" id="group___math_functions_1ga27da28439abe50446e7a2f853f49352c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::sine</definition>
         <argsstring>(decimal_t x) noexcept</argsstring>
         <name>sine</name>
+        <qualifiedname>neforce::sine</qualifiedname>
         <param>
-          <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>decimal_t</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -1874,17 +2008,20 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="919" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="919" bodyend="940"/>
-        <references refid="group___numeric_type_checks_1ga673ecf65f4df0e8731a08ed2a81a483d" compoundref="numeric__types_8hpp" startline="102" endline="104">is_infinity</references>
-        <references refid="group___numeric_type_checks_1gab2c227da4229861df95e5c6df99cc700" compoundref="numeric__types_8hpp" startline="65" endline="68">is_nan</references>
-        <references refid="classnumeric__traits_1a4a365e1002991e6c6873abaa78e3fb06" compoundref="numeric__traits_8hpp" startline="193" endline="193">numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
+        <references refid="group___numeric_type_checks_1gaa24923d0f821c4ff900bc19a12e0f581" compoundref="numeric__types_8hpp" startline="102" endline="104">neforce::is_infinity</references>
+        <references refid="group___numeric_type_checks_1ga69529551bf1bf78e074bfca6d21dd073" compoundref="numeric__types_8hpp" startline="65" endline="68">neforce::is_nan</references>
+        <references refid="classneforce_1_1numeric__traits_1a255b4e7ede58b3390b3940f1399482cf" compoundref="numeric__traits_8hpp" startline="193" endline="193">neforce::numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
+        <references refid="group___math_functions_1ga27da28439abe50446e7a2f853f49352c" compoundref="math_8hpp" startline="919" endline="940">neforce::sine</references>
+        <referencedby refid="group___math_functions_1ga27da28439abe50446e7a2f853f49352c" compoundref="math_8hpp" startline="919" endline="940">neforce::sine</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga680c3331bc9697279a35689ac8fe5815" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t cosine</definition>
+      <memberdef kind="function" id="group___math_functions_1ga85090c85a43393e68dfb9a7d2e6ea886" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::cosine</definition>
         <argsstring>(decimal_t x) noexcept</argsstring>
         <name>cosine</name>
+        <qualifiedname>neforce::cosine</qualifiedname>
         <param>
-          <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>decimal_t</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -1907,17 +2044,20 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="949" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="949" bodyend="969"/>
-        <references refid="group___numeric_type_checks_1ga673ecf65f4df0e8731a08ed2a81a483d" compoundref="numeric__types_8hpp" startline="102" endline="104">is_infinity</references>
-        <references refid="group___numeric_type_checks_1gab2c227da4229861df95e5c6df99cc700" compoundref="numeric__types_8hpp" startline="65" endline="68">is_nan</references>
-        <references refid="classnumeric__traits_1a4a365e1002991e6c6873abaa78e3fb06" compoundref="numeric__traits_8hpp" startline="193" endline="193">numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
+        <references refid="group___math_functions_1ga85090c85a43393e68dfb9a7d2e6ea886" compoundref="math_8hpp" startline="949" endline="969">neforce::cosine</references>
+        <references refid="group___numeric_type_checks_1gaa24923d0f821c4ff900bc19a12e0f581" compoundref="numeric__types_8hpp" startline="102" endline="104">neforce::is_infinity</references>
+        <references refid="group___numeric_type_checks_1ga69529551bf1bf78e074bfca6d21dd073" compoundref="numeric__types_8hpp" startline="65" endline="68">neforce::is_nan</references>
+        <references refid="classneforce_1_1numeric__traits_1a255b4e7ede58b3390b3940f1399482cf" compoundref="numeric__traits_8hpp" startline="193" endline="193">neforce::numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
+        <referencedby refid="group___math_functions_1ga85090c85a43393e68dfb9a7d2e6ea886" compoundref="math_8hpp" startline="949" endline="969">neforce::cosine</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga3f8b47692b7051859e4ca435dbb02c46" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t tangent</definition>
+      <memberdef kind="function" id="group___math_functions_1ga51dde13845502632d2479b0b67dde707" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::tangent</definition>
         <argsstring>(decimal_t x) noexcept</argsstring>
         <name>tangent</name>
+        <qualifiedname>neforce::tangent</qualifiedname>
         <param>
-          <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>decimal_t</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -1937,7 +2077,7 @@
 </simplesect>
 <parameterlist kind="exception"><parameteritem>
 <parameternamelist>
-<parametername><ref refid="structmath__exception" kindref="compound">math_exception</ref></parametername>
+<parametername><ref refid="structneforce_1_1math__exception" kindref="compound">math_exception</ref></parametername>
 </parameternamelist>
 <parameterdescription>
 <para>当x接近π/2的奇数倍时抛出 </para>
@@ -1949,20 +2089,24 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="977" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="977" bodyend="1012"/>
-        <references refid="group___math_functions_1ga85bd4411cce7ccffb0f86da358f89e1d" compoundref="math_8hpp" startline="808" endline="810">around_zero</references>
-        <references refid="classnumeric__traits_1a29b5f24b0176f50e68b0e59e832d849b" compoundref="numeric__traits_8hpp" startline="183" endline="183">numeric_traits&lt; T, Dummy &gt;::infinity</references>
-        <references refid="group___numeric_type_checks_1ga673ecf65f4df0e8731a08ed2a81a483d" compoundref="numeric__types_8hpp" startline="102" endline="104">is_infinity</references>
-        <references refid="group___numeric_type_checks_1gab2c227da4229861df95e5c6df99cc700" compoundref="numeric__types_8hpp" startline="65" endline="68">is_nan</references>
-        <references refid="classnumeric__traits_1a4a365e1002991e6c6873abaa78e3fb06" compoundref="numeric__traits_8hpp" startline="193" endline="193">numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
-        <referencedby refid="group___math_functions_1ga63ae13a5cea9458a8a3fdb5ba470fc7c" compoundref="math_8hpp" startline="1020" endline="1020">cotangent</referencedby>
+        <references refid="group___math_functions_1ga9256e0dddca3d14c9693e2706a442c71" compoundref="math_8hpp" startline="808" endline="810">neforce::around_zero</references>
+        <references refid="classneforce_1_1numeric__traits_1a51b20e681edb410a9897b687663ff3c0" compoundref="numeric__traits_8hpp" startline="183" endline="183">neforce::numeric_traits&lt; T, Dummy &gt;::infinity</references>
+        <references refid="group___numeric_type_checks_1gaa24923d0f821c4ff900bc19a12e0f581" compoundref="numeric__types_8hpp" startline="102" endline="104">neforce::is_infinity</references>
+        <references refid="group___numeric_type_checks_1ga69529551bf1bf78e074bfca6d21dd073" compoundref="numeric__types_8hpp" startline="65" endline="68">neforce::is_nan</references>
+        <references refid="group___math_constants_1ga628a1a9dc3ee8e6672dd5cb1e51699bd" compoundref="math_8hpp" startline="54">neforce::constants::LOOSE_TOLERANCE</references>
+        <references refid="classneforce_1_1numeric__traits_1a255b4e7ede58b3390b3940f1399482cf" compoundref="numeric__traits_8hpp" startline="193" endline="193">neforce::numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
+        <references refid="group___math_functions_1ga51dde13845502632d2479b0b67dde707" compoundref="math_8hpp" startline="977" endline="1012">neforce::tangent</references>
+        <referencedby refid="group___math_functions_1ga4c7ef587db032e48ad05360006a92525" compoundref="math_8hpp" startline="1020" endline="1020">neforce::cotangent</referencedby>
+        <referencedby refid="group___math_functions_1ga51dde13845502632d2479b0b67dde707" compoundref="math_8hpp" startline="977" endline="1012">neforce::tangent</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga63ae13a5cea9458a8a3fdb5ba470fc7c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t cotangent</definition>
+      <memberdef kind="function" id="group___math_functions_1ga4c7ef587db032e48ad05360006a92525" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::cotangent</definition>
         <argsstring>(const decimal_t x)</argsstring>
         <name>cotangent</name>
+        <qualifiedname>neforce::cotangent</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -1982,7 +2126,7 @@
 </simplesect>
 <parameterlist kind="exception"><parameteritem>
 <parameternamelist>
-<parametername><ref refid="structmath__exception" kindref="compound">math_exception</ref></parametername>
+<parametername><ref refid="structneforce_1_1math__exception" kindref="compound">math_exception</ref></parametername>
 </parameternamelist>
 <parameterdescription>
 <para>当x接近π的整数倍时抛出 </para>
@@ -1994,15 +2138,18 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="1020" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="1020" bodyend="1020"/>
-        <references refid="group___math_functions_1ga3f8b47692b7051859e4ca435dbb02c46" compoundref="math_8hpp" startline="977" endline="1012">tangent</references>
+        <references refid="group___math_functions_1ga4c7ef587db032e48ad05360006a92525" compoundref="math_8hpp" startline="1020" endline="1020">neforce::cotangent</references>
+        <references refid="group___math_functions_1ga51dde13845502632d2479b0b67dde707" compoundref="math_8hpp" startline="977" endline="1012">neforce::tangent</references>
+        <referencedby refid="group___math_functions_1ga4c7ef587db032e48ad05360006a92525" compoundref="math_8hpp" startline="1020" endline="1020">neforce::cotangent</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga5723c1f8ea9aa2a4eaaeb21e6ae61f5f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t arctangent</definition>
+      <memberdef kind="function" id="group___math_functions_1ga5803713f49090eebae89acb404bb5c56" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::arctangent</definition>
         <argsstring>(decimal_t x) noexcept</argsstring>
         <name>arctangent</name>
+        <qualifiedname>neforce::arctangent</qualifiedname>
         <param>
-          <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>decimal_t</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -2025,19 +2172,24 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="1029" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="1029" bodyend="1067"/>
-        <references refid="group___math_functions_1ga83da80691fafcd172af23e1e3c66d8d4" compoundref="math_8hpp" startline="246" endline="248">absolute</references>
-        <references refid="group___numeric_type_checks_1ga673ecf65f4df0e8731a08ed2a81a483d" compoundref="numeric__types_8hpp" startline="102" endline="104">is_infinity</references>
-        <references refid="group___numeric_type_checks_1gab2c227da4229861df95e5c6df99cc700" compoundref="numeric__types_8hpp" startline="65" endline="68">is_nan</references>
-        <references refid="group___math_functions_1ga498a7e743d1082430484d1b821aa6c71" compoundref="math_8hpp" startline="512" endline="533">square_root</references>
-        <referencedby refid="group___math_functions_1gaafabd349b97354b207ba83e41c2868fc" compoundref="math_8hpp" startline="1074" endline="1088">arcsine</referencedby>
+        <references refid="group___math_functions_1gadc2eba7edcbf6a7f6eb94b9cdd72a948" compoundref="math_8hpp" startline="246" endline="248">neforce::absolute</references>
+        <references refid="group___math_functions_1ga5803713f49090eebae89acb404bb5c56" compoundref="math_8hpp" startline="1029" endline="1067">neforce::arctangent</references>
+        <references refid="group___numeric_type_checks_1gaa24923d0f821c4ff900bc19a12e0f581" compoundref="numeric__types_8hpp" startline="102" endline="104">neforce::is_infinity</references>
+        <references refid="group___numeric_type_checks_1ga69529551bf1bf78e074bfca6d21dd073" compoundref="numeric__types_8hpp" startline="65" endline="68">neforce::is_nan</references>
+        <references refid="group___math_constants_1ga7091c52270e3d84044528fcb5c99f9ea" compoundref="math_8hpp" startline="50">neforce::constants::MACHINE_EPSILON</references>
+        <references refid="group___math_constants_1ga0b8083f84702c7b4a6e2029fd6ff31bc" compoundref="math_8hpp" startline="39">neforce::constants::PI</references>
+        <references refid="group___math_functions_1gaad863b13ce587addf559f7f8edf0d07c" compoundref="math_8hpp" startline="512" endline="533">neforce::square_root</references>
+        <referencedby refid="group___math_functions_1gabf7eb40ef217388451fceb4103e08d1a" compoundref="math_8hpp" startline="1074" endline="1088">neforce::arcsine</referencedby>
+        <referencedby refid="group___math_functions_1ga5803713f49090eebae89acb404bb5c56" compoundref="math_8hpp" startline="1029" endline="1067">neforce::arctangent</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1gaafabd349b97354b207ba83e41c2868fc" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t arcsine</definition>
+      <memberdef kind="function" id="group___math_functions_1gabf7eb40ef217388451fceb4103e08d1a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::arcsine</definition>
         <argsstring>(const decimal_t x) noexcept</argsstring>
         <name>arcsine</name>
+        <qualifiedname>neforce::arcsine</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -2060,20 +2212,24 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="1074" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="1074" bodyend="1088"/>
-        <references refid="group___math_functions_1ga83da80691fafcd172af23e1e3c66d8d4" compoundref="math_8hpp" startline="246" endline="248">absolute</references>
-        <references refid="group___math_functions_1ga5723c1f8ea9aa2a4eaaeb21e6ae61f5f" compoundref="math_8hpp" startline="1029" endline="1067">arctangent</references>
-        <references refid="group___numeric_type_checks_1gab2c227da4229861df95e5c6df99cc700" compoundref="numeric__types_8hpp" startline="65" endline="68">is_nan</references>
-        <references refid="classnumeric__traits_1a4a365e1002991e6c6873abaa78e3fb06" compoundref="numeric__traits_8hpp" startline="193" endline="193">numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
-        <references refid="group___math_functions_1ga498a7e743d1082430484d1b821aa6c71" compoundref="math_8hpp" startline="512" endline="533">square_root</references>
-        <referencedby refid="group___math_functions_1ga2262dc12412d07c72325a80d5d02e7c0" compoundref="math_8hpp" startline="1095" endline="1109">arccosine</referencedby>
+        <references refid="group___math_functions_1gadc2eba7edcbf6a7f6eb94b9cdd72a948" compoundref="math_8hpp" startline="246" endline="248">neforce::absolute</references>
+        <references refid="group___math_functions_1gabf7eb40ef217388451fceb4103e08d1a" compoundref="math_8hpp" startline="1074" endline="1088">neforce::arcsine</references>
+        <references refid="group___math_functions_1ga5803713f49090eebae89acb404bb5c56" compoundref="math_8hpp" startline="1029" endline="1067">neforce::arctangent</references>
+        <references refid="group___numeric_type_checks_1ga69529551bf1bf78e074bfca6d21dd073" compoundref="numeric__types_8hpp" startline="65" endline="68">neforce::is_nan</references>
+        <references refid="group___math_constants_1ga0b8083f84702c7b4a6e2029fd6ff31bc" compoundref="math_8hpp" startline="39">neforce::constants::PI</references>
+        <references refid="classneforce_1_1numeric__traits_1a255b4e7ede58b3390b3940f1399482cf" compoundref="numeric__traits_8hpp" startline="193" endline="193">neforce::numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
+        <references refid="group___math_functions_1gaad863b13ce587addf559f7f8edf0d07c" compoundref="math_8hpp" startline="512" endline="533">neforce::square_root</references>
+        <referencedby refid="group___math_functions_1ga0d945c06ef0dd7045b5afde833afc65b" compoundref="math_8hpp" startline="1095" endline="1109">neforce::arccosine</referencedby>
+        <referencedby refid="group___math_functions_1gabf7eb40ef217388451fceb4103e08d1a" compoundref="math_8hpp" startline="1074" endline="1088">neforce::arcsine</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___math_functions_1ga2262dc12412d07c72325a80d5d02e7c0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
-        <definition>decimal_t arccosine</definition>
+      <memberdef kind="function" id="group___math_functions_1ga0d945c06ef0dd7045b5afde833afc65b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>decimal_t</type>
+        <definition>decimal_t neforce::arccosine</definition>
         <argsstring>(const decimal_t x) noexcept</argsstring>
         <name>arccosine</name>
+        <qualifiedname>neforce::arccosine</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <type>const decimal_t</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -2096,10 +2252,13 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="1095" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="1095" bodyend="1109"/>
-        <references refid="group___math_functions_1ga83da80691fafcd172af23e1e3c66d8d4" compoundref="math_8hpp" startline="246" endline="248">absolute</references>
-        <references refid="group___math_functions_1gaafabd349b97354b207ba83e41c2868fc" compoundref="math_8hpp" startline="1074" endline="1088">arcsine</references>
-        <references refid="group___numeric_type_checks_1gab2c227da4229861df95e5c6df99cc700" compoundref="numeric__types_8hpp" startline="65" endline="68">is_nan</references>
-        <references refid="classnumeric__traits_1a4a365e1002991e6c6873abaa78e3fb06" compoundref="numeric__traits_8hpp" startline="193" endline="193">numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
+        <references refid="group___math_functions_1gadc2eba7edcbf6a7f6eb94b9cdd72a948" compoundref="math_8hpp" startline="246" endline="248">neforce::absolute</references>
+        <references refid="group___math_functions_1ga0d945c06ef0dd7045b5afde833afc65b" compoundref="math_8hpp" startline="1095" endline="1109">neforce::arccosine</references>
+        <references refid="group___math_functions_1gabf7eb40ef217388451fceb4103e08d1a" compoundref="math_8hpp" startline="1074" endline="1088">neforce::arcsine</references>
+        <references refid="group___numeric_type_checks_1ga69529551bf1bf78e074bfca6d21dd073" compoundref="numeric__types_8hpp" startline="65" endline="68">neforce::is_nan</references>
+        <references refid="group___math_constants_1ga0b8083f84702c7b4a6e2029fd6ff31bc" compoundref="math_8hpp" startline="39">neforce::constants::PI</references>
+        <references refid="classneforce_1_1numeric__traits_1a255b4e7ede58b3390b3940f1399482cf" compoundref="numeric__traits_8hpp" startline="193" endline="193">neforce::numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
+        <referencedby refid="group___math_functions_1ga0d945c06ef0dd7045b5afde833afc65b" compoundref="math_8hpp" startline="1095" endline="1109">neforce::arccosine</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -2133,7 +2292,7 @@
 </listitem><listitem><para>arctan(x) = x - x³/3 + x⁵/5 - x⁷/7 + ... (|x| ≤ 1)</para>
 </listitem></itemizedlist>
 </para>
-<para>迭代终止条件：当前项小于 <computeroutput><ref refid="group___math_constants_1ga436d4865ec4bdbf73b5e26ea32899b30" kindref="member">MACHINE_EPSILON</ref> × 当前和</computeroutput>。</para>
+<para>迭代终止条件：当前项小于 <computeroutput>MACHINE_EPSILON × 当前和</computeroutput>。</para>
 </sect1>
 <sect1 id="group___math_functions_1logarithm_implementation">
 <title>对数函数实现</title><para>**自然对数 ln(x)**：<itemizedlist>

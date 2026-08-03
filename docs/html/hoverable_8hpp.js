@@ -1,5 +1,5 @@
 var hoverable_8hpp =
 [
-    [ "hoverable", "group___t_u_i.html#ga9e081c85fb69d6706a1804825ec909e8", null ],
-    [ "hoverable", "group___t_u_i.html#gac0e9eaf4636dae34fcc0c8da16d9691e", null ]
+    [ "neforce::tui::components::hoverable", "group___components.html#ga5dbe15df43a410d8f78ed45d20ee2b77", null ],
+    [ "neforce::tui::components::hoverable", "group___components.html#ga3d560e81b9482e4e61d018891445e7c3", null ]
 ];

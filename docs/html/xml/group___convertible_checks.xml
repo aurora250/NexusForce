@@ -3,12 +3,12 @@
   <compounddef id="group___convertible_checks" kind="group">
     <compoundname>ConvertibleChecks</compoundname>
     <title>可转换性检查</title>
-    <innerclass refid="structis__convertible" prot="public">is_convertible</innerclass>
-    <innerclass refid="structis__nothrow__convertible" prot="public">is_nothrow_convertible</innerclass>
-    <innerclass refid="structis__nothrow__arrow" prot="public">is_nothrow_arrow</innerclass>
-    <innerconcept refid="conceptconvertible__to">convertible_to</innerconcept>
+    <innerclass refid="structneforce_1_1is__convertible" prot="public">neforce::is_convertible</innerclass>
+    <innerclass refid="structneforce_1_1is__nothrow__convertible" prot="public">neforce::is_nothrow_convertible</innerclass>
+    <innerclass refid="structneforce_1_1is__nothrow__arrow" prot="public">neforce::is_nothrow_arrow</innerclass>
+    <innerconcept refid="conceptneforce_1_1convertible__to">neforce::convertible_to</innerconcept>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="group___convertible_checks_1gab8efd424ae29f19c10d54d62118c763f" prot="public" static="no">
+      <memberdef kind="typedef" id="group___convertible_checks_1ga4b07ee011940a63c49ccbf4dd78ece3e" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename ToElement</type>
@@ -17,10 +17,11 @@
             <type>typename FromElement</type>
           </param>
         </templateparamlist>
-        <type><ref refid="structis__convertible" kindref="compound">is_convertible</ref>&lt; FromElement(*)[], ToElement(*)[]&gt;</type>
-        <definition>using is_array_convertible = is_convertible&lt;FromElement (*)[], ToElement (*)[]&gt;</definition>
+        <type>is_convertible&lt; FromElement(*)[], ToElement(*)[]&gt;</type>
+        <definition>using neforce::is_array_convertible = is_convertible&lt;FromElement (*)[], ToElement (*)[]&gt;</definition>
         <argsstring></argsstring>
         <name>is_array_convertible</name>
+        <qualifiedname>neforce::is_array_convertible</qualifiedname>
         <briefdescription>
 <para>判断数组元素类型FromElement是否可以转换为ToElement </para>
         </briefdescription>
@@ -50,7 +51,7 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="group___convertible_checks_1gadf5e75c4b12aa7982c5a97a14510ab35" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename From</type>
@@ -60,10 +61,11 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_convertible_v</definition>
+        <definition>bool neforce::is_convertible_v</definition>
         <argsstring></argsstring>
         <name>is_convertible_v</name>
-        <initializer>= <ref refid="structis__convertible" kindref="compound">is_convertible</ref>&lt;From, To&gt;::value</initializer>
+        <qualifiedname>neforce::is_convertible_v</qualifiedname>
+        <initializer>= is_convertible&lt;From, To&gt;::value</initializer>
         <briefdescription>
 <para>is_convertible的便捷变量模板 </para>
         </briefdescription>
@@ -73,7 +75,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3160" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3160" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="group___convertible_checks_1gad0909ba626136ee03418e47ffa949bb5" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___convertible_checks_1ga7c37828bbf1b26c0dfe0346cab304c39" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename ToElement</type>
@@ -83,10 +85,11 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_array_convertible_v</definition>
+        <definition>bool neforce::is_array_convertible_v</definition>
         <argsstring></argsstring>
         <name>is_array_convertible_v</name>
-        <initializer>= <ref refid="group___convertible_checks_1gab8efd424ae29f19c10d54d62118c763f" kindref="member">is_array_convertible</ref>&lt;ToElement, FromElement&gt;::value</initializer>
+        <qualifiedname>neforce::is_array_convertible_v</qualifiedname>
+        <initializer>= is_array_convertible&lt;ToElement, FromElement&gt;::value</initializer>
         <briefdescription>
 <para>is_array_convertible的便捷变量模板 </para>
         </briefdescription>
@@ -95,9 +98,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3192" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3192" bodyend="-1"/>
-        <referencedby refid="classmemory__view_1a7eb1bd51c6a73fd238b61576361493cb">memory_view&lt; char &gt;::memory_view</referencedby>
+        <referencedby refid="classneforce_1_1memory__view_1a61443f4e9ae317d77bd801d9791a63ae">neforce::memory_view&lt; char &gt;::memory_view</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="group___convertible_checks_1gaf70f6258c3e925eeb2d27b652374660d" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___convertible_checks_1ga22d8017969be798ceab46c14cec788e3" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename From</type>
@@ -107,10 +110,11 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_nothrow_convertible_v</definition>
+        <definition>bool neforce::is_nothrow_convertible_v</definition>
         <argsstring></argsstring>
         <name>is_nothrow_convertible_v</name>
-        <initializer>= <ref refid="structis__nothrow__convertible" kindref="compound">is_nothrow_convertible</ref>&lt;From, To&gt;::value</initializer>
+        <qualifiedname>neforce::is_nothrow_convertible_v</qualifiedname>
+        <initializer>= is_nothrow_convertible&lt;From, To&gt;::value</initializer>
         <briefdescription>
 <para>is_nothrow_convertible的便捷变量模板 </para>
         </briefdescription>
@@ -120,7 +124,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3222" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3222" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="group___convertible_checks_1ga77d0cd1abdca5aa356cae514cdd5b2aa" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___convertible_checks_1ga16439ed2ef14f3b9ede5f136f1a06264" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
@@ -130,10 +134,11 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_nothrow_arrow_v</definition>
+        <definition>bool neforce::is_nothrow_arrow_v</definition>
         <argsstring></argsstring>
         <name>is_nothrow_arrow_v</name>
-        <initializer>= <ref refid="structis__nothrow__arrow" kindref="compound">is_nothrow_arrow</ref>&lt;Iterator, Ptr&gt;::value</initializer>
+        <qualifiedname>neforce::is_nothrow_arrow_v</qualifiedname>
+        <initializer>= is_nothrow_arrow&lt;Iterator, Ptr&gt;::value</initializer>
         <briefdescription>
 <para>is_nothrow_arrow的便捷变量模板 </para>
         </briefdescription>

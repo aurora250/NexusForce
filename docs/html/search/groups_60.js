@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['稀疏向量_0',['稀疏向量',['../group___sparse_vector.html',1,'']]]
+  ['相邻元素算法_0',['相邻元素算法',['../group___adjacent_algorithms.html',1,'']]]
 ];

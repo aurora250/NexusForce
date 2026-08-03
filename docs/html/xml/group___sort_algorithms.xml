@@ -4,16 +4,17 @@
     <compoundname>SortAlgorithms</compoundname>
     <title>排序算法</title>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___sort_algorithms_1ga3468b006b2ed983e414f813d988feef8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1gaf5f42876a809dda5703c30384504f0ce" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void smooth_sort</definition>
+        <definition>void neforce::smooth_sort</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>smooth_sort</name>
+        <qualifiedname>neforce::smooth_sort</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -58,10 +59,12 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp" line="373" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp" bodystart="373" bodyend="376"/>
-        <references refid="group___leonardo_heap_1gaeccafcd2bf9df72de2f4a7ec6ff469fa" compoundref="leonardo__heap_8hpp" startline="327" endline="350">make_leonardo_heap</references>
-        <references refid="group___leonardo_heap_1ga30b3db79677a6fbb9e3b71a62b48933f" compoundref="leonardo__heap_8hpp" startline="278" endline="316">sort_leonardo_heap</references>
+        <references refid="group___leonardo_heap_1ga614eb82010a036730ed102df417c8f42" compoundref="leonardo__heap_8hpp" startline="327" endline="350">neforce::make_leonardo_heap</references>
+        <references refid="group___sort_algorithms_1gaf5f42876a809dda5703c30384504f0ce" compoundref="leonardo__heap_8hpp" startline="373" endline="376">neforce::smooth_sort</references>
+        <references refid="group___leonardo_heap_1gac8bc87194be6d7619c0ac6ba70bc8640" compoundref="leonardo__heap_8hpp" startline="278" endline="316">neforce::sort_leonardo_heap</references>
+        <referencedby refid="group___sort_algorithms_1gaf5f42876a809dda5703c30384504f0ce" compoundref="leonardo__heap_8hpp" startline="373" endline="376">neforce::smooth_sort</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1ga0b0349f7dec1fb2baa425eab3e0ea498" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1gad33b8ce780e1ad19c5c44b279f6c8c05" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
@@ -71,9 +74,10 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_sorted</definition>
+        <definition>bool neforce::is_sorted</definition>
         <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
         <name>is_sorted</name>
+        <qualifiedname>neforce::is_sorted</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -139,21 +143,24 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="137" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="137" bodyend="151"/>
-        <references refid="group___invoke_function_1ga81546ef85e40c0b8f4fbeb8c62add13d" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
-        <references refid="group___iterator_category_checks_1ga599d2f4fe13322580e70e5959b69778d" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
-        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
-        <referencedby refid="group___sort_algorithms_1ga54b0b59c4c05a63c1b96fdad1d71e61e" compoundref="sort_8hpp" startline="161" endline="163">is_sorted</referencedby>
+        <references refid="group___invoke_function_1gaa3688183bfd2e86a0a9073acc02f3c2d" compoundref="invoke_8hpp" startline="396">neforce::is_invocable_v</references>
+        <references refid="group___iterator_category_checks_1gad4ad20a0181ba7c28b10d7f297497fe9" compoundref="concepts_8hpp" startline="540">neforce::is_ranges_input_iter_v</references>
+        <references refid="group___sort_algorithms_1gad33b8ce780e1ad19c5c44b279f6c8c05" compoundref="sort_8hpp" startline="137" endline="151">neforce::is_sorted</references>
+        <references refid="group___iterator_operation_1gaec610c752e80ab2196ab3377eb84e06b" compoundref="iterator_8hpp" startline="157" endline="161">neforce::next</references>
+        <referencedby refid="group___sort_algorithms_1gaa46874b51956281716e7317707a50401" compoundref="sort_8hpp" startline="161" endline="163">neforce::is_sorted</referencedby>
+        <referencedby refid="group___sort_algorithms_1gad33b8ce780e1ad19c5c44b279f6c8c05" compoundref="sort_8hpp" startline="137" endline="151">neforce::is_sorted</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1ga54b0b59c4c05a63c1b96fdad1d71e61e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1gaa46874b51956281716e7317707a50401" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_sorted</definition>
+        <definition>bool neforce::is_sorted</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>is_sorted</name>
+        <qualifiedname>neforce::is_sorted</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -199,9 +206,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="161" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="161" bodyend="163"/>
-        <references refid="group___sort_algorithms_1ga0b0349f7dec1fb2baa425eab3e0ea498" compoundref="sort_8hpp" startline="137" endline="151">is_sorted</references>
+        <references refid="group___sort_algorithms_1gad33b8ce780e1ad19c5c44b279f6c8c05" compoundref="sort_8hpp" startline="137" endline="151">neforce::is_sorted</references>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1ga402909e515a44301eba22c4a98dc9e9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1ga3fe47e859e839627f980a8286884a5bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
@@ -211,9 +218,10 @@
           </param>
         </templateparamlist>
         <type>Iterator</type>
-        <definition>Iterator is_sorted_until</definition>
+        <definition>Iterator neforce::is_sorted_until</definition>
         <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
         <name>is_sorted_until</name>
+        <qualifiedname>neforce::is_sorted_until</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -279,21 +287,24 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="177" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="177" bodyend="191"/>
-        <references refid="group___invoke_function_1ga81546ef85e40c0b8f4fbeb8c62add13d" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
-        <references refid="group___iterator_category_checks_1ga599d2f4fe13322580e70e5959b69778d" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
-        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
-        <referencedby refid="group___sort_algorithms_1ga1364d104f129566eaea032b500fbb87a" compoundref="sort_8hpp" startline="201" endline="203">is_sorted_until</referencedby>
+        <references refid="group___invoke_function_1gaa3688183bfd2e86a0a9073acc02f3c2d" compoundref="invoke_8hpp" startline="396">neforce::is_invocable_v</references>
+        <references refid="group___iterator_category_checks_1gad4ad20a0181ba7c28b10d7f297497fe9" compoundref="concepts_8hpp" startline="540">neforce::is_ranges_input_iter_v</references>
+        <references refid="group___sort_algorithms_1ga3fe47e859e839627f980a8286884a5bd" compoundref="sort_8hpp" startline="177" endline="191">neforce::is_sorted_until</references>
+        <references refid="group___iterator_operation_1gaec610c752e80ab2196ab3377eb84e06b" compoundref="iterator_8hpp" startline="157" endline="161">neforce::next</references>
+        <referencedby refid="group___sort_algorithms_1ga368e2e8d100140727f8eba0c0756f880" compoundref="sort_8hpp" startline="201" endline="203">neforce::is_sorted_until</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga3fe47e859e839627f980a8286884a5bd" compoundref="sort_8hpp" startline="177" endline="191">neforce::is_sorted_until</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1ga1364d104f129566eaea032b500fbb87a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1ga368e2e8d100140727f8eba0c0756f880" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>Iterator</type>
-        <definition>Iterator is_sorted_until</definition>
+        <definition>Iterator neforce::is_sorted_until</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>is_sorted_until</name>
+        <qualifiedname>neforce::is_sorted_until</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -339,9 +350,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="201" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="201" bodyend="203"/>
-        <references refid="group___sort_algorithms_1ga402909e515a44301eba22c4a98dc9e9a" compoundref="sort_8hpp" startline="177" endline="191">is_sorted_until</references>
+        <references refid="group___sort_algorithms_1ga3fe47e859e839627f980a8286884a5bd" compoundref="sort_8hpp" startline="177" endline="191">neforce::is_sorted_until</references>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1ga821b14fdc1e7d63404b0d376f1c53d19" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1ga34fd3492d3de0dc84d289cb08a705715" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
@@ -351,9 +362,10 @@
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void bubble_sort</definition>
+        <definition>void neforce::bubble_sort</definition>
         <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
         <name>bubble_sort</name>
+        <qualifiedname>neforce::bubble_sort</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -418,23 +430,26 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="220" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="220" bodyend="245"/>
-        <references refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" compoundref="type__erase_8hpp" startline="41" endline="43">end</references>
-        <references refid="group___invoke_function_1ga81546ef85e40c0b8f4fbeb8c62add13d" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
-        <references refid="group___shift_algorithms_1gaf24b9918e7d6e917eb59c4c5f9cd613d" compoundref="shift_8hpp" startline="440" endline="444">iter_swap</references>
-        <references refid="group___reverse_iterator_1gaef957127a778bd747a07d86fb0059946" compoundref="reverse__iterator_8hpp" startline="388" endline="390">make_reverse_iterator</references>
-        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
-        <referencedby refid="group___sort_algorithms_1ga1571476c4b21b9e3cada0988126e6394" compoundref="sort_8hpp" startline="254" endline="256">bubble_sort</referencedby>
+        <references refid="group___sort_algorithms_1ga34fd3492d3de0dc84d289cb08a705715" compoundref="sort_8hpp" startline="220" endline="245">neforce::bubble_sort</references>
+        <references refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" compoundref="type__erase_8hpp" startline="41" endline="43">neforce::end</references>
+        <references refid="group___invoke_function_1gaa3688183bfd2e86a0a9073acc02f3c2d" compoundref="invoke_8hpp" startline="396">neforce::is_invocable_v</references>
+        <references refid="group___shift_algorithms_1ga323874bfbf5e57e5ad937fa9b02fe0de" compoundref="shift_8hpp" startline="440" endline="444">neforce::iter_swap</references>
+        <references refid="group___reverse_iterator_1gad5bde703f7123aa23346cced0a42646a" compoundref="reverse__iterator_8hpp" startline="388" endline="390">neforce::make_reverse_iterator</references>
+        <references refid="group___iterator_operation_1gaec610c752e80ab2196ab3377eb84e06b" compoundref="iterator_8hpp" startline="157" endline="161">neforce::next</references>
+        <referencedby refid="group___sort_algorithms_1ga7473c0cd8e2dbd4964f3c2c4229e6bc9" compoundref="sort_8hpp" startline="254" endline="256">neforce::bubble_sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga34fd3492d3de0dc84d289cb08a705715" compoundref="sort_8hpp" startline="220" endline="245">neforce::bubble_sort</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1ga1571476c4b21b9e3cada0988126e6394" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1ga7473c0cd8e2dbd4964f3c2c4229e6bc9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void bubble_sort</definition>
+        <definition>void neforce::bubble_sort</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>bubble_sort</name>
+        <qualifiedname>neforce::bubble_sort</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -478,9 +493,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="254" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="254" bodyend="256"/>
-        <references refid="group___sort_algorithms_1ga821b14fdc1e7d63404b0d376f1c53d19" compoundref="sort_8hpp" startline="220" endline="245">bubble_sort</references>
+        <references refid="group___sort_algorithms_1ga34fd3492d3de0dc84d289cb08a705715" compoundref="sort_8hpp" startline="220" endline="245">neforce::bubble_sort</references>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1ga897ea2a00ea276fcc6f16d9dcae7deda" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1ga8be648c40f5bde49757d4f18aa1e2dc6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
@@ -490,9 +505,10 @@
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void cocktail_sort</definition>
+        <definition>void neforce::cocktail_sort</definition>
         <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
         <name>cocktail_sort</name>
+        <qualifiedname>neforce::cocktail_sort</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -557,25 +573,26 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="273" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="273" bodyend="309"/>
-        <references refid="group___invoke_function_1ga81546ef85e40c0b8f4fbeb8c62add13d" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
-        <references refid="group___iterator_category_checks_1gaa1867b9281dc7506d92e81092147150a" compoundref="concepts_8hpp" startline="581">is_ranges_bid_iter_v</references>
-        <references refid="group___shift_algorithms_1gaf24b9918e7d6e917eb59c4c5f9cd613d" compoundref="shift_8hpp" startline="440" endline="444">iter_swap</references>
-        <references refid="group___t_u_i_1gga2ff19048a7ac6e99cb67e220980a2219a811882fecd5c7618d7099ebbd39ea254" compoundref="gauge_8hpp" startline="25">left</references>
-        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
-        <references refid="group___iterator_operation_1gaf4cd040af11ff6b9b0fc0f4d70a7eb5e" compoundref="iterator_8hpp" startline="141" endline="145">prev</references>
-        <references refid="group___t_u_i_1gga2ff19048a7ac6e99cb67e220980a2219a7c4f29407893c334a6cb7a87bf045c0d" compoundref="gauge_8hpp" startline="24">right</references>
-        <referencedby refid="group___sort_algorithms_1ga68d5f70eead6623c5d56c9f2ed9c7fac" compoundref="sort_8hpp" startline="318" endline="320">cocktail_sort</referencedby>
+        <references refid="group___sort_algorithms_1ga8be648c40f5bde49757d4f18aa1e2dc6" compoundref="sort_8hpp" startline="273" endline="309">neforce::cocktail_sort</references>
+        <references refid="group___invoke_function_1gaa3688183bfd2e86a0a9073acc02f3c2d" compoundref="invoke_8hpp" startline="396">neforce::is_invocable_v</references>
+        <references refid="group___iterator_category_checks_1ga6660aae77a45c6a5e2229b4824c02b2b" compoundref="concepts_8hpp" startline="581">neforce::is_ranges_bid_iter_v</references>
+        <references refid="group___shift_algorithms_1ga323874bfbf5e57e5ad937fa9b02fe0de" compoundref="shift_8hpp" startline="440" endline="444">neforce::iter_swap</references>
+        <references refid="group___iterator_operation_1gaec610c752e80ab2196ab3377eb84e06b" compoundref="iterator_8hpp" startline="157" endline="161">neforce::next</references>
+        <references refid="group___iterator_operation_1gac6b661a80c5a42d3f9e8349a0dc6d181" compoundref="iterator_8hpp" startline="141" endline="145">neforce::prev</references>
+        <referencedby refid="group___sort_algorithms_1gaf28f625b83c55454a4bd45cee4403c50" compoundref="sort_8hpp" startline="318" endline="320">neforce::cocktail_sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga8be648c40f5bde49757d4f18aa1e2dc6" compoundref="sort_8hpp" startline="273" endline="309">neforce::cocktail_sort</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1ga68d5f70eead6623c5d56c9f2ed9c7fac" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1gaf28f625b83c55454a4bd45cee4403c50" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void cocktail_sort</definition>
+        <definition>void neforce::cocktail_sort</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>cocktail_sort</name>
+        <qualifiedname>neforce::cocktail_sort</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -619,9 +636,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="318" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="318" bodyend="320"/>
-        <references refid="group___sort_algorithms_1ga897ea2a00ea276fcc6f16d9dcae7deda" compoundref="sort_8hpp" startline="273" endline="309">cocktail_sort</references>
+        <references refid="group___sort_algorithms_1ga8be648c40f5bde49757d4f18aa1e2dc6" compoundref="sort_8hpp" startline="273" endline="309">neforce::cocktail_sort</references>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1ga256c71a6285712b47d8e9c6869ddc0f9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1gaa3c2d18404a15b5c01094424d60bb22a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
@@ -631,9 +648,10 @@
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void select_sort</definition>
+        <definition>void neforce::select_sort</definition>
         <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
         <name>select_sort</name>
+        <qualifiedname>neforce::select_sort</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -698,22 +716,25 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="337" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="337" bodyend="355"/>
-        <references refid="group___invoke_function_1ga81546ef85e40c0b8f4fbeb8c62add13d" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
-        <references refid="group___iterator_category_checks_1ga3d298019699d72aef974a27a13c65393" compoundref="concepts_8hpp" startline="561">is_ranges_fwd_iter_v</references>
-        <references refid="group___shift_algorithms_1gaf24b9918e7d6e917eb59c4c5f9cd613d" compoundref="shift_8hpp" startline="440" endline="444">iter_swap</references>
-        <references refid="group___compare_algorithms_1gabf4803a4eaf181e17a6893b2aea9a4c5" compoundref="algorithm_2compare_8hpp" startline="163" endline="165">min</references>
-        <referencedby refid="group___sort_algorithms_1ga9d2806638895d54b557a2f6adf54d295" compoundref="sort_8hpp" startline="364" endline="366">select_sort</referencedby>
+        <references refid="group___invoke_function_1gaa3688183bfd2e86a0a9073acc02f3c2d" compoundref="invoke_8hpp" startline="396">neforce::is_invocable_v</references>
+        <references refid="group___iterator_category_checks_1gace1b5811f58b26e736680d8234eb5627" compoundref="concepts_8hpp" startline="561">neforce::is_ranges_fwd_iter_v</references>
+        <references refid="group___shift_algorithms_1ga323874bfbf5e57e5ad937fa9b02fe0de" compoundref="shift_8hpp" startline="440" endline="444">neforce::iter_swap</references>
+        <references refid="group___compare_algorithms_1ga7bddcf59f3f004edc5551486bdbf5595" compoundref="algorithm_2compare_8hpp" startline="163" endline="165">neforce::min</references>
+        <references refid="group___sort_algorithms_1gaa3c2d18404a15b5c01094424d60bb22a" compoundref="sort_8hpp" startline="337" endline="355">neforce::select_sort</references>
+        <referencedby refid="group___sort_algorithms_1ga6520b5f4fead0ff8b15e181cd54f365c" compoundref="sort_8hpp" startline="364" endline="366">neforce::select_sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1gaa3c2d18404a15b5c01094424d60bb22a" compoundref="sort_8hpp" startline="337" endline="355">neforce::select_sort</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1ga9d2806638895d54b557a2f6adf54d295" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1ga6520b5f4fead0ff8b15e181cd54f365c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void select_sort</definition>
+        <definition>void neforce::select_sort</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>select_sort</name>
+        <qualifiedname>neforce::select_sort</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -757,9 +778,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="364" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="364" bodyend="366"/>
-        <references refid="group___sort_algorithms_1ga256c71a6285712b47d8e9c6869ddc0f9" compoundref="sort_8hpp" startline="337" endline="355">select_sort</references>
+        <references refid="group___sort_algorithms_1gaa3c2d18404a15b5c01094424d60bb22a" compoundref="sort_8hpp" startline="337" endline="355">neforce::select_sort</references>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1ga5460a64be141e4d5b5e0eb165cbfc170" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1ga25d3caf235639ba184620b374bde3e86" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
@@ -768,14 +789,15 @@
             <type>typename Compare</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga7e90191894e0224a9597f070cd1dcb79" kindref="member">is_ranges_rnd_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_ranges_rnd_iter_v&lt; Iterator &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void shell_sort</definition>
+        <definition>void neforce::shell_sort</definition>
         <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
         <name>shell_sort</name>
+        <qualifiedname>neforce::shell_sort</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -840,22 +862,25 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="383" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="383" bodyend="401"/>
-        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
-        <references refid="group___invoke_function_1ga81546ef85e40c0b8f4fbeb8c62add13d" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
-        <references refid="group___iterator_category_checks_1ga7e90191894e0224a9597f070cd1dcb79" compoundref="concepts_8hpp" startline="601">is_ranges_rnd_iter_v</references>
-        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
-        <referencedby refid="group___sort_algorithms_1ga61d0989bb09c741f17b546b9cc307060" compoundref="sort_8hpp" startline="410" endline="412">shell_sort</referencedby>
+        <references refid="group___iterator_operation_1ga81cd39ae0fbc7198eef37acc9ff10950" compoundref="iterator_8hpp" startline="201" endline="218">neforce::distance</references>
+        <references refid="group___invoke_function_1gaa3688183bfd2e86a0a9073acc02f3c2d" compoundref="invoke_8hpp" startline="396">neforce::is_invocable_v</references>
+        <references refid="group___iterator_category_checks_1gabca13f6df73a191ea3c980af9121f3c1" compoundref="concepts_8hpp" startline="601">neforce::is_ranges_rnd_iter_v</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="group___sort_algorithms_1ga25d3caf235639ba184620b374bde3e86" compoundref="sort_8hpp" startline="383" endline="401">neforce::shell_sort</references>
+        <referencedby refid="group___sort_algorithms_1ga11f9797d83d2bc34db76523e6d7816e4" compoundref="sort_8hpp" startline="410" endline="412">neforce::shell_sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga25d3caf235639ba184620b374bde3e86" compoundref="sort_8hpp" startline="383" endline="401">neforce::shell_sort</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1ga61d0989bb09c741f17b546b9cc307060" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1ga11f9797d83d2bc34db76523e6d7816e4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void shell_sort</definition>
+        <definition>void neforce::shell_sort</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>shell_sort</name>
+        <qualifiedname>neforce::shell_sort</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -899,9 +924,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="410" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="410" bodyend="412"/>
-        <references refid="group___sort_algorithms_1ga5460a64be141e4d5b5e0eb165cbfc170" compoundref="sort_8hpp" startline="383" endline="401">shell_sort</references>
+        <references refid="group___sort_algorithms_1ga25d3caf235639ba184620b374bde3e86" compoundref="sort_8hpp" startline="383" endline="401">neforce::shell_sort</references>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1gac4e6fa13122e50c09e865328c3ab7af2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1gaac38a2038e8508eba8e2949ccbb77227" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
@@ -911,9 +936,10 @@
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void merge_sort</definition>
+        <definition>void neforce::merge_sort</definition>
         <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
         <name>merge_sort</name>
+        <qualifiedname>neforce::merge_sort</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -983,23 +1009,24 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="432" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="432" bodyend="443"/>
-        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
-        <references refid="group___merge_algorithms_1ga6715ef726249eda60e6460a96678138f" compoundref="merge_8hpp" startline="294" endline="303">inplace_merge</references>
-        <references refid="group___iterator_category_checks_1ga7e90191894e0224a9597f070cd1dcb79" compoundref="concepts_8hpp" startline="601">is_ranges_rnd_iter_v</references>
-        <references refid="group___sort_algorithms_1gac4e6fa13122e50c09e865328c3ab7af2" compoundref="sort_8hpp" startline="432" endline="443">merge_sort</references>
-        <referencedby refid="group___sort_algorithms_1ga121f4d074409e1a9fa7d105543adae87" compoundref="sort_8hpp" startline="452" endline="454">merge_sort</referencedby>
-        <referencedby refid="group___sort_algorithms_1gac4e6fa13122e50c09e865328c3ab7af2" compoundref="sort_8hpp" startline="432" endline="443">merge_sort</referencedby>
+        <references refid="group___iterator_operation_1ga81cd39ae0fbc7198eef37acc9ff10950" compoundref="iterator_8hpp" startline="201" endline="218">neforce::distance</references>
+        <references refid="group___merge_algorithms_1ga7643d4dfc6ec0f239e9a905d3de7da47" compoundref="merge_8hpp" startline="294" endline="303">neforce::inplace_merge</references>
+        <references refid="group___iterator_category_checks_1gabca13f6df73a191ea3c980af9121f3c1" compoundref="concepts_8hpp" startline="601">neforce::is_ranges_rnd_iter_v</references>
+        <references refid="group___sort_algorithms_1gaac38a2038e8508eba8e2949ccbb77227" compoundref="sort_8hpp" startline="432" endline="443">neforce::merge_sort</references>
+        <referencedby refid="group___sort_algorithms_1gaf20675373ba60957f37d1ef45aff78ac" compoundref="sort_8hpp" startline="452" endline="454">neforce::merge_sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1gaac38a2038e8508eba8e2949ccbb77227" compoundref="sort_8hpp" startline="432" endline="443">neforce::merge_sort</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1ga121f4d074409e1a9fa7d105543adae87" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1gaf20675373ba60957f37d1ef45aff78ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void merge_sort</definition>
+        <definition>void neforce::merge_sort</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>merge_sort</name>
+        <qualifiedname>neforce::merge_sort</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -1043,9 +1070,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="452" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="452" bodyend="454"/>
-        <references refid="group___sort_algorithms_1gac4e6fa13122e50c09e865328c3ab7af2" compoundref="sort_8hpp" startline="432" endline="443">merge_sort</references>
+        <references refid="group___sort_algorithms_1gaac38a2038e8508eba8e2949ccbb77227" compoundref="sort_8hpp" startline="432" endline="443">neforce::merge_sort</references>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1gab24fbf7b9775bd8334e5f592a8edf5f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1ga35b945cdd8b3c8030df9fa7f1dc44b56" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
@@ -1055,9 +1082,10 @@
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void partial_sort</definition>
+        <definition>void neforce::partial_sort</definition>
         <argsstring>(Iterator first, Iterator middle, Iterator last, Compare comp)</argsstring>
         <name>partial_sort</name>
+        <qualifiedname>neforce::partial_sort</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -1134,22 +1162,24 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="472" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="472" bodyend="483"/>
-        <references refid="group___heap_algorithms_1ga722e7721c4ee23d4adeb653bc7894856" compoundref="heap_8hpp" startline="392" endline="406">make_heap</references>
-        <references refid="group___t_u_i_1ggaf798e894dc9edcb17ec3660896a890baa4a548addbfb239bbd12f5afe11a4b6dc" compoundref="events_8hpp" startline="111">middle</references>
-        <references refid="group___heap_algorithms_1gabe9a6d92456fd947ff48095c7eb00e85" compoundref="heap_8hpp" startline="366" endline="370">sort_heap</references>
-        <referencedby refid="group___sort_algorithms_1ga2f3b7969dca0dcebd278ec8b44149329" compoundref="sort_8hpp" startline="646" endline="665">introspective_sort</referencedby>
-        <referencedby refid="group___sort_algorithms_1ga93c3ca069ff13f30369021482848ccc8" compoundref="sort_8hpp" startline="493" endline="495">partial_sort</referencedby>
+        <references refid="group___heap_algorithms_1gae1b5bf86a282c3fba78c3b6df7c05ad7" compoundref="heap_8hpp" startline="392" endline="406">neforce::make_heap</references>
+        <references refid="group___sort_algorithms_1ga35b945cdd8b3c8030df9fa7f1dc44b56" compoundref="sort_8hpp" startline="472" endline="483">neforce::partial_sort</references>
+        <references refid="group___heap_algorithms_1ga0e0bc3437a6f4482d6b9f7f8656c01ad" compoundref="heap_8hpp" startline="366" endline="370">neforce::sort_heap</references>
+        <referencedby refid="group___sort_algorithms_1gac47e3b0e7101bf103173ebc514864d67" compoundref="sort_8hpp" startline="646" endline="665">neforce::introspective_sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga239e2495584ce75064644f2ad6be381b" compoundref="sort_8hpp" startline="493" endline="495">neforce::partial_sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga35b945cdd8b3c8030df9fa7f1dc44b56" compoundref="sort_8hpp" startline="472" endline="483">neforce::partial_sort</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1ga93c3ca069ff13f30369021482848ccc8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1ga239e2495584ce75064644f2ad6be381b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void partial_sort</definition>
+        <definition>void neforce::partial_sort</definition>
         <argsstring>(Iterator first, Iterator middle, Iterator last)</argsstring>
         <name>partial_sort</name>
+        <qualifiedname>neforce::partial_sort</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -1205,10 +1235,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="493" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="493" bodyend="495"/>
-        <references refid="group___t_u_i_1ggaf798e894dc9edcb17ec3660896a890baa4a548addbfb239bbd12f5afe11a4b6dc" compoundref="events_8hpp" startline="111">middle</references>
-        <references refid="group___sort_algorithms_1gab24fbf7b9775bd8334e5f592a8edf5f6" compoundref="sort_8hpp" startline="472" endline="483">partial_sort</references>
+        <references refid="group___sort_algorithms_1ga35b945cdd8b3c8030df9fa7f1dc44b56" compoundref="sort_8hpp" startline="472" endline="483">neforce::partial_sort</references>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1ga7604c36909710fbc4e92db0d66ad5054" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1ga8b8c3b6f76f9e74f17a330bb8731f183" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator1</type>
@@ -1221,9 +1250,10 @@
           </param>
         </templateparamlist>
         <type>Iterator2</type>
-        <definition>Iterator2 partial_sort_copy</definition>
+        <definition>Iterator2 neforce::partial_sort_copy</definition>
         <argsstring>(Iterator1 first, Iterator1 last, Iterator2 result_first, Iterator2 result_last, Compare comp)</argsstring>
         <name>partial_sort_copy</name>
+        <qualifiedname>neforce::partial_sort_copy</qualifiedname>
         <param>
           <type>Iterator1</type>
           <declname>first</declname>
@@ -1322,13 +1352,15 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="514" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="514" bodyend="536"/>
-        <references refid="group___heap_algorithms_1ga89bb45036c9ed2eaf8225d4875db4387" compoundref="heap_8hpp" startline="264" endline="280">adjust_heap</references>
-        <references refid="group___iterator_category_checks_1ga599d2f4fe13322580e70e5959b69778d" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
-        <references refid="group___heap_algorithms_1ga722e7721c4ee23d4adeb653bc7894856" compoundref="heap_8hpp" startline="392" endline="406">make_heap</references>
-        <references refid="group___heap_algorithms_1gabe9a6d92456fd947ff48095c7eb00e85" compoundref="heap_8hpp" startline="366" endline="370">sort_heap</references>
-        <referencedby refid="group___sort_algorithms_1ga29e746c754c35147ebf13ab20c9a7ce2" compoundref="sort_8hpp" startline="549" endline="551">partial_sort_copy</referencedby>
+        <references refid="group___heap_algorithms_1gab4cc48fa07793ae72d6f6d248911c9e7" compoundref="heap_8hpp" startline="264" endline="280">neforce::adjust_heap</references>
+        <references refid="group___iterator_category_checks_1gad4ad20a0181ba7c28b10d7f297497fe9" compoundref="concepts_8hpp" startline="540">neforce::is_ranges_input_iter_v</references>
+        <references refid="group___heap_algorithms_1gae1b5bf86a282c3fba78c3b6df7c05ad7" compoundref="heap_8hpp" startline="392" endline="406">neforce::make_heap</references>
+        <references refid="group___sort_algorithms_1ga8b8c3b6f76f9e74f17a330bb8731f183" compoundref="sort_8hpp" startline="514" endline="536">neforce::partial_sort_copy</references>
+        <references refid="group___heap_algorithms_1ga0e0bc3437a6f4482d6b9f7f8656c01ad" compoundref="heap_8hpp" startline="366" endline="370">neforce::sort_heap</references>
+        <referencedby refid="group___sort_algorithms_1gaf391818d641d12f3551a46a1b580e13d" compoundref="sort_8hpp" startline="549" endline="551">neforce::partial_sort_copy</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga8b8c3b6f76f9e74f17a330bb8731f183" compoundref="sort_8hpp" startline="514" endline="536">neforce::partial_sort_copy</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1ga29e746c754c35147ebf13ab20c9a7ce2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1gaf391818d641d12f3551a46a1b580e13d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator1</type>
@@ -1338,9 +1370,10 @@
           </param>
         </templateparamlist>
         <type>Iterator2</type>
-        <definition>Iterator2 partial_sort_copy</definition>
+        <definition>Iterator2 neforce::partial_sort_copy</definition>
         <argsstring>(Iterator1 first, Iterator1 last, Iterator2 result_first, Iterator2 result_last)</argsstring>
         <name>partial_sort_copy</name>
+        <qualifiedname>neforce::partial_sort_copy</qualifiedname>
         <param>
           <type>Iterator1</type>
           <declname>first</declname>
@@ -1418,9 +1451,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="549" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="549" bodyend="551"/>
-        <references refid="group___sort_algorithms_1ga7604c36909710fbc4e92db0d66ad5054" compoundref="sort_8hpp" startline="514" endline="536">partial_sort_copy</references>
+        <references refid="group___sort_algorithms_1ga8b8c3b6f76f9e74f17a330bb8731f183" compoundref="sort_8hpp" startline="514" endline="536">neforce::partial_sort_copy</references>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1gad75649c2b023f9d65025c2623f049b59" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1gab5f13ad1ba32794bb29de060b88845e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
@@ -1430,9 +1463,10 @@
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void insertion_sort</definition>
+        <definition>void neforce::insertion_sort</definition>
         <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
         <name>insertion_sort</name>
+        <qualifiedname>neforce::insertion_sort</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -1497,24 +1531,27 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="598" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="598" bodyend="614"/>
-        <references refid="group___shift_algorithms_1ga4d3adeb0c2f00c00929d912671c22729" compoundref="shift_8hpp" startline="245" endline="254">copy_backward</references>
-        <references refid="group___invoke_function_1ga81546ef85e40c0b8f4fbeb8c62add13d" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
-        <references refid="group___iterator_category_checks_1ga7e90191894e0224a9597f070cd1dcb79" compoundref="concepts_8hpp" startline="601">is_ranges_rnd_iter_v</references>
-        <referencedby refid="group___sort_algorithms_1ga8a0aec613c2b702a0f34cf6299b7b190" compoundref="sort_8hpp" startline="623" endline="625">insertion_sort</referencedby>
-        <referencedby refid="group___sort_algorithms_1gac44c6ef290cec1428f3ac65b21eefbca" compoundref="sort_8hpp" startline="894" endline="904">nth_element</referencedby>
-        <referencedby refid="group___sort_algorithms_1ga3d93e28bad28595d49e09ec5e08a7895" compoundref="sort_8hpp" startline="789" endline="805">sort</referencedby>
-        <referencedby refid="group___sort_algorithms_1gaca897ca5f6f1015b57ef38709af2a2c4" compoundref="sort_8hpp" startline="833" endline="867">tim_sort</referencedby>
+        <references refid="group___shift_algorithms_1ga1fd7e111ad62b8f52e054383f93ca875" compoundref="shift_8hpp" startline="245" endline="254">neforce::copy_backward</references>
+        <references refid="group___sort_algorithms_1gab5f13ad1ba32794bb29de060b88845e3" compoundref="sort_8hpp" startline="598" endline="614">neforce::insertion_sort</references>
+        <references refid="group___invoke_function_1gaa3688183bfd2e86a0a9073acc02f3c2d" compoundref="invoke_8hpp" startline="396">neforce::is_invocable_v</references>
+        <references refid="group___iterator_category_checks_1gabca13f6df73a191ea3c980af9121f3c1" compoundref="concepts_8hpp" startline="601">neforce::is_ranges_rnd_iter_v</references>
+        <referencedby refid="group___sort_algorithms_1gad26d308f9c8997cf4224a68365708eed" compoundref="sort_8hpp" startline="623" endline="625">neforce::insertion_sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1gab5f13ad1ba32794bb29de060b88845e3" compoundref="sort_8hpp" startline="598" endline="614">neforce::insertion_sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga66861189967aee7289fd3b717c93867a" compoundref="sort_8hpp" startline="894" endline="904">neforce::nth_element</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga42f1e7fa192a7c284b6842bb47c5b264" compoundref="sort_8hpp" startline="789" endline="805">neforce::sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga41c9e2e012bc01ae98ff36334e3a02b5" compoundref="sort_8hpp" startline="833" endline="867">neforce::tim_sort</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1ga8a0aec613c2b702a0f34cf6299b7b190" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1gad26d308f9c8997cf4224a68365708eed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void insertion_sort</definition>
+        <definition>void neforce::insertion_sort</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>insertion_sort</name>
+        <qualifiedname>neforce::insertion_sort</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -1558,9 +1595,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="623" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="623" bodyend="625"/>
-        <references refid="group___sort_algorithms_1gad75649c2b023f9d65025c2623f049b59" compoundref="sort_8hpp" startline="598" endline="614">insertion_sort</references>
+        <references refid="group___sort_algorithms_1gab5f13ad1ba32794bb29de060b88845e3" compoundref="sort_8hpp" startline="598" endline="614">neforce::insertion_sort</references>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1ga2f3b7969dca0dcebd278ec8b44149329" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1gac47e3b0e7101bf103173ebc514864d67" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
@@ -1570,9 +1607,10 @@
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void introspective_sort</definition>
+        <definition>void neforce::introspective_sort</definition>
         <argsstring>(Iterator first, Iterator last, int depth_limit, Compare comp)</argsstring>
         <name>introspective_sort</name>
+        <qualifiedname>neforce::introspective_sort</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -1654,23 +1692,24 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="646" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="646" bodyend="665"/>
-        <references refid="group___sort_algorithms_1ga2f3b7969dca0dcebd278ec8b44149329" compoundref="sort_8hpp" startline="646" endline="665">introspective_sort</references>
-        <references refid="group___invoke_function_1ga81546ef85e40c0b8f4fbeb8c62add13d" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
-        <references refid="group___partition_algorithms_1ga09ca7889019a50556c6f23810bf2de1d" compoundref="partition_8hpp" startline="119" endline="145">lomuto_partition</references>
-        <references refid="group___sort_algorithms_1gab24fbf7b9775bd8334e5f592a8edf5f6" compoundref="sort_8hpp" startline="472" endline="483">partial_sort</references>
-        <referencedby refid="group___sort_algorithms_1gaffb3fd567cdefa23e2ab6a1a5a6e6947" compoundref="sort_8hpp" startline="675" endline="677">introspective_sort</referencedby>
-        <referencedby refid="group___sort_algorithms_1ga2f3b7969dca0dcebd278ec8b44149329" compoundref="sort_8hpp" startline="646" endline="665">introspective_sort</referencedby>
+        <references refid="group___sort_algorithms_1gac47e3b0e7101bf103173ebc514864d67" compoundref="sort_8hpp" startline="646" endline="665">neforce::introspective_sort</references>
+        <references refid="group___invoke_function_1gaa3688183bfd2e86a0a9073acc02f3c2d" compoundref="invoke_8hpp" startline="396">neforce::is_invocable_v</references>
+        <references refid="group___partition_algorithms_1gae80adb4f9cc2c99cdce991beba5bd6be" compoundref="partition_8hpp" startline="119" endline="145">neforce::lomuto_partition</references>
+        <references refid="group___sort_algorithms_1ga35b945cdd8b3c8030df9fa7f1dc44b56" compoundref="sort_8hpp" startline="472" endline="483">neforce::partial_sort</references>
+        <referencedby refid="group___sort_algorithms_1ga87c67c59fee9db285881366f6473ecff" compoundref="sort_8hpp" startline="675" endline="677">neforce::introspective_sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1gac47e3b0e7101bf103173ebc514864d67" compoundref="sort_8hpp" startline="646" endline="665">neforce::introspective_sort</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1gaffb3fd567cdefa23e2ab6a1a5a6e6947" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1ga87c67c59fee9db285881366f6473ecff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void introspective_sort</definition>
+        <definition>void neforce::introspective_sort</definition>
         <argsstring>(Iterator first, Iterator last, int depth_limit)</argsstring>
         <name>introspective_sort</name>
+        <qualifiedname>neforce::introspective_sort</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -1726,9 +1765,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="675" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="675" bodyend="677"/>
-        <references refid="group___sort_algorithms_1ga2f3b7969dca0dcebd278ec8b44149329" compoundref="sort_8hpp" startline="646" endline="665">introspective_sort</references>
+        <references refid="group___sort_algorithms_1gac47e3b0e7101bf103173ebc514864d67" compoundref="sort_8hpp" startline="646" endline="665">neforce::introspective_sort</references>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1ga7bb66b56d5311bd5f64e0d65abd153fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1gaf7a15915e05ae8dc62613aee9c24d909" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
@@ -1738,9 +1777,10 @@
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void quick_sort</definition>
+        <definition>void neforce::quick_sort</definition>
         <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
         <name>quick_sort</name>
+        <qualifiedname>neforce::quick_sort</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -1813,21 +1853,22 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="699" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="699" bodyend="705"/>
-        <references refid="group___partition_algorithms_1ga09ca7889019a50556c6f23810bf2de1d" compoundref="partition_8hpp" startline="119" endline="145">lomuto_partition</references>
-        <references refid="group___sort_algorithms_1ga7bb66b56d5311bd5f64e0d65abd153fc" compoundref="sort_8hpp" startline="699" endline="705">quick_sort</references>
-        <referencedby refid="group___sort_algorithms_1ga5daa37ac5f6fc132c53c076b24ce6163" compoundref="sort_8hpp" startline="714" endline="716">quick_sort</referencedby>
-        <referencedby refid="group___sort_algorithms_1ga7bb66b56d5311bd5f64e0d65abd153fc" compoundref="sort_8hpp" startline="699" endline="705">quick_sort</referencedby>
+        <references refid="group___partition_algorithms_1gae80adb4f9cc2c99cdce991beba5bd6be" compoundref="partition_8hpp" startline="119" endline="145">neforce::lomuto_partition</references>
+        <references refid="group___sort_algorithms_1gaf7a15915e05ae8dc62613aee9c24d909" compoundref="sort_8hpp" startline="699" endline="705">neforce::quick_sort</references>
+        <referencedby refid="group___sort_algorithms_1ga99048ac8ba2de01baeef25995a9d07da" compoundref="sort_8hpp" startline="714" endline="716">neforce::quick_sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1gaf7a15915e05ae8dc62613aee9c24d909" compoundref="sort_8hpp" startline="699" endline="705">neforce::quick_sort</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1ga5daa37ac5f6fc132c53c076b24ce6163" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1ga99048ac8ba2de01baeef25995a9d07da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void quick_sort</definition>
+        <definition>void neforce::quick_sort</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>quick_sort</name>
+        <qualifiedname>neforce::quick_sort</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -1871,9 +1912,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="714" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="714" bodyend="716"/>
-        <references refid="group___sort_algorithms_1ga7bb66b56d5311bd5f64e0d65abd153fc" compoundref="sort_8hpp" startline="699" endline="705">quick_sort</references>
+        <references refid="group___sort_algorithms_1gaf7a15915e05ae8dc62613aee9c24d909" compoundref="sort_8hpp" startline="699" endline="705">neforce::quick_sort</references>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1ga3d93e28bad28595d49e09ec5e08a7895" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1ga42f1e7fa192a7c284b6842bb47c5b264" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
@@ -1883,9 +1924,10 @@
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void sort</definition>
+        <definition>void neforce::sort</definition>
         <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
         <name>sort</name>
+        <qualifiedname>neforce::sort</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -1955,19 +1997,22 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="789" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="789" bodyend="805"/>
-        <references refid="group___sort_algorithms_1gad75649c2b023f9d65025c2623f049b59" compoundref="sort_8hpp" startline="598" endline="614">insertion_sort</references>
-        <referencedby refid="group___sort_algorithms_1ga7a4fdc8969bfed2d02cdd1941044a8d9" compoundref="sort_8hpp" startline="814" endline="816">sort</referencedby>
+        <references refid="group___sort_algorithms_1gab5f13ad1ba32794bb29de060b88845e3" compoundref="sort_8hpp" startline="598" endline="614">neforce::insertion_sort</references>
+        <references refid="group___sort_algorithms_1ga42f1e7fa192a7c284b6842bb47c5b264" compoundref="sort_8hpp" startline="789" endline="805">neforce::sort</references>
+        <referencedby refid="group___sort_algorithms_1ga452d4f3c944ccbe14327d5ac51a02782" compoundref="sort_8hpp" startline="814" endline="816">neforce::sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga42f1e7fa192a7c284b6842bb47c5b264" compoundref="sort_8hpp" startline="789" endline="805">neforce::sort</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1ga7a4fdc8969bfed2d02cdd1941044a8d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1ga452d4f3c944ccbe14327d5ac51a02782" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void sort</definition>
+        <definition>void neforce::sort</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>sort</name>
+        <qualifiedname>neforce::sort</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -2011,9 +2056,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="814" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="814" bodyend="816"/>
-        <references refid="group___sort_algorithms_1ga3d93e28bad28595d49e09ec5e08a7895" compoundref="sort_8hpp" startline="789" endline="805">sort</references>
+        <references refid="group___sort_algorithms_1ga42f1e7fa192a7c284b6842bb47c5b264" compoundref="sort_8hpp" startline="789" endline="805">neforce::sort</references>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1gaca897ca5f6f1015b57ef38709af2a2c4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1ga41c9e2e012bc01ae98ff36334e3a02b5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
@@ -2023,9 +2068,10 @@
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void tim_sort</definition>
+        <definition>void neforce::tim_sort</definition>
         <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
         <name>tim_sort</name>
+        <qualifiedname>neforce::tim_sort</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -2090,27 +2136,28 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="833" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="833" bodyend="867"/>
-        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
-        <references refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" compoundref="type__erase_8hpp" startline="41" endline="43">end</references>
-        <references refid="group___merge_algorithms_1ga6715ef726249eda60e6460a96678138f" compoundref="merge_8hpp" startline="294" endline="303">inplace_merge</references>
-        <references refid="group___sort_algorithms_1gad75649c2b023f9d65025c2623f049b59" compoundref="sort_8hpp" startline="598" endline="614">insertion_sort</references>
-        <references refid="group___t_u_i_1gga2ff19048a7ac6e99cb67e220980a2219a811882fecd5c7618d7099ebbd39ea254" compoundref="gauge_8hpp" startline="25">left</references>
-        <references refid="group___compare_algorithms_1gabf4803a4eaf181e17a6893b2aea9a4c5" compoundref="algorithm_2compare_8hpp" startline="163" endline="165">min</references>
-        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
-        <references refid="group___t_u_i_1gga2ff19048a7ac6e99cb67e220980a2219a7c4f29407893c334a6cb7a87bf045c0d" compoundref="gauge_8hpp" startline="24">right</references>
-        <references refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
-        <referencedby refid="group___sort_algorithms_1ga222427947ab54696f6798e5e3ab720cc" compoundref="sort_8hpp" startline="876" endline="878">tim_sort</referencedby>
+        <references refid="group___iterator_operation_1ga81cd39ae0fbc7198eef37acc9ff10950" compoundref="iterator_8hpp" startline="201" endline="218">neforce::distance</references>
+        <references refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" compoundref="type__erase_8hpp" startline="41" endline="43">neforce::end</references>
+        <references refid="group___merge_algorithms_1ga7643d4dfc6ec0f239e9a905d3de7da47" compoundref="merge_8hpp" startline="294" endline="303">neforce::inplace_merge</references>
+        <references refid="group___sort_algorithms_1gab5f13ad1ba32794bb29de060b88845e3" compoundref="sort_8hpp" startline="598" endline="614">neforce::insertion_sort</references>
+        <references refid="group___compare_algorithms_1ga7bddcf59f3f004edc5551486bdbf5595" compoundref="algorithm_2compare_8hpp" startline="163" endline="165">neforce::min</references>
+        <references refid="group___iterator_operation_1gaec610c752e80ab2196ab3377eb84e06b" compoundref="iterator_8hpp" startline="157" endline="161">neforce::next</references>
+        <references refid="group___type_erasure_functions_1ga69955a26617401117eaf53fa82162e2b" compoundref="type__erase_8hpp" startline="292" endline="294">neforce::size</references>
+        <references refid="group___sort_algorithms_1ga41c9e2e012bc01ae98ff36334e3a02b5" compoundref="sort_8hpp" startline="833" endline="867">neforce::tim_sort</references>
+        <referencedby refid="group___sort_algorithms_1ga256ee9f6e2f91ba53d49509d334ffb55" compoundref="sort_8hpp" startline="876" endline="878">neforce::tim_sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga41c9e2e012bc01ae98ff36334e3a02b5" compoundref="sort_8hpp" startline="833" endline="867">neforce::tim_sort</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1ga222427947ab54696f6798e5e3ab720cc" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1ga256ee9f6e2f91ba53d49509d334ffb55" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void tim_sort</definition>
+        <definition>void neforce::tim_sort</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>tim_sort</name>
+        <qualifiedname>neforce::tim_sort</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -2154,9 +2201,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="876" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="876" bodyend="878"/>
-        <references refid="group___sort_algorithms_1gaca897ca5f6f1015b57ef38709af2a2c4" compoundref="sort_8hpp" startline="833" endline="867">tim_sort</references>
+        <references refid="group___sort_algorithms_1ga41c9e2e012bc01ae98ff36334e3a02b5" compoundref="sort_8hpp" startline="833" endline="867">neforce::tim_sort</references>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1gac44c6ef290cec1428f3ac65b21eefbca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1ga66861189967aee7289fd3b717c93867a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
@@ -2166,9 +2213,10 @@
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void nth_element</definition>
+        <definition>void neforce::nth_element</definition>
         <argsstring>(Iterator first, Iterator nth, Iterator last, Compare comp)</argsstring>
         <name>nth_element</name>
+        <qualifiedname>neforce::nth_element</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -2244,20 +2292,23 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="894" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="894" bodyend="904"/>
-        <references refid="group___sort_algorithms_1gad75649c2b023f9d65025c2623f049b59" compoundref="sort_8hpp" startline="598" endline="614">insertion_sort</references>
-        <references refid="group___partition_algorithms_1ga09ca7889019a50556c6f23810bf2de1d" compoundref="partition_8hpp" startline="119" endline="145">lomuto_partition</references>
-        <referencedby refid="group___sort_algorithms_1gaf843abe1431e912979c95e0052a24a79" compoundref="sort_8hpp" startline="914" endline="916">nth_element</referencedby>
+        <references refid="group___sort_algorithms_1gab5f13ad1ba32794bb29de060b88845e3" compoundref="sort_8hpp" startline="598" endline="614">neforce::insertion_sort</references>
+        <references refid="group___partition_algorithms_1gae80adb4f9cc2c99cdce991beba5bd6be" compoundref="partition_8hpp" startline="119" endline="145">neforce::lomuto_partition</references>
+        <references refid="group___sort_algorithms_1ga66861189967aee7289fd3b717c93867a" compoundref="sort_8hpp" startline="894" endline="904">neforce::nth_element</references>
+        <referencedby refid="group___sort_algorithms_1ga71661a215c60fe61e1118fd65c2748d9" compoundref="sort_8hpp" startline="914" endline="916">neforce::nth_element</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga66861189967aee7289fd3b717c93867a" compoundref="sort_8hpp" startline="894" endline="904">neforce::nth_element</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___sort_algorithms_1gaf843abe1431e912979c95e0052a24a79" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___sort_algorithms_1ga71661a215c60fe61e1118fd65c2748d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void nth_element</definition>
+        <definition>void neforce::nth_element</definition>
         <argsstring>(Iterator first, Iterator nth, Iterator last)</argsstring>
         <name>nth_element</name>
+        <qualifiedname>neforce::nth_element</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -2313,7 +2364,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="914" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="914" bodyend="916"/>
-        <references refid="group___sort_algorithms_1gac44c6ef290cec1428f3ac65b21eefbca" compoundref="sort_8hpp" startline="894" endline="904">nth_element</references>
+        <references refid="group___sort_algorithms_1ga66861189967aee7289fd3b717c93867a" compoundref="sort_8hpp" startline="894" endline="904">neforce::nth_element</references>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -2515,7 +2566,7 @@
 </entry></row>
 </table>
 </para>
-<para><simplesect kind="note"><para>对于大多数应用场景，推荐使用标准排序 <computeroutput><ref refid="group___sort_algorithms_1ga3d93e28bad28595d49e09ec5e08a7895" kindref="member">sort</ref></computeroutput>（内省排序）， 它在平均和最坏情况下均表现良好，且经过了充分测试。</para>
+<para><simplesect kind="note"><para>对于大多数应用场景，推荐使用标准排序 <computeroutput><ref refid="group___sort_algorithms_1ga42f1e7fa192a7c284b6842bb47c5b264" kindref="member">sort</ref></computeroutput>（内省排序）， 它在平均和最坏情况下均表现良好，且经过了充分测试。</para>
 </simplesect>
 <simplesect kind="see"><para><ulink url="https://en.cppreference.com/w/cpp/algorithm/sort">https://en.cppreference.com/w/cpp/algorithm/sort</ulink> </para>
 </simplesect>

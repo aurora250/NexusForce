@@ -1,0 +1,503 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1ihashable" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::ihashable</compoundname>
+    <derivedcompoundref refid="structneforce_1_1icommon" prot="public" virt="non-virtual">neforce::icommon&lt; compressed_pair&lt; IfEmpty, T, is_empty_v&lt; IfEmpty &gt; &amp;&amp;!is_final_v&lt; IfEmpty &gt; &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structneforce_1_1icommon" prot="public" virt="non-virtual">neforce::icommon&lt; compressed_pair&lt; IfEmpty, T, false &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structneforce_1_1icommon" prot="public" virt="non-virtual">neforce::icommon&lt; optional&lt; T &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structneforce_1_1icommon" prot="public" virt="non-virtual">neforce::icommon&lt; optional&lt; T &amp; &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structneforce_1_1icommon" prot="public" virt="non-virtual">neforce::icommon&lt; T &gt;</derivedcompoundref>
+    <includes refid="icommon_8hpp" local="no">icommon.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="structneforce_1_1ihashable_1a43a511def598131fd842fa11e30aee7d" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T &amp; neforce::ihashable&lt; T &gt;::derived</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>derived</name>
+        <qualifiedname>neforce::ihashable::derived</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" line="32" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" bodystart="32" bodyend="32"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1ihashable_1a3bedfaa42740465ea8b6e58309c1f67e" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(derived().to_hash())" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::ihashable&lt; T &gt;::to_ihash</definition>
+        <argsstring>() const</argsstring>
+        <name>to_ihash</name>
+        <qualifiedname>neforce::ihashable::to_ihash</qualifiedname>
+        <briefdescription>
+<para>获取对象的哈希值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>哈希值</para>
+</simplesect>
+实际调用派生类的to_hash()方法 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" line="41" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" bodystart="41" bodyend="43"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>可哈希对象接口模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>派生类类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+派生类需要实现to_hash()方法，即可通过此接口自动获得哈希支持。 该接口会自动特化hash模板，使对象可用于哈希相关操作如哈希容器。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="59">
+        <label>neforce::basic_string&lt; CharT, Traits, Alloc &gt;</label>
+        <link refid="classneforce_1_1basic__string"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>neforce::basic_string&lt; char &gt;</label>
+        <link refid="classneforce_1_1basic__string"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>neforce::basic_string&lt; char16_t &gt;</label>
+        <link refid="classneforce_1_1basic__string"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>neforce::basic_string&lt; char32_t &gt;</label>
+        <link refid="classneforce_1_1basic__string"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>neforce::basic_string&lt; char8_t &gt;</label>
+        <link refid="classneforce_1_1basic__string"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>neforce::basic_string&lt; wchar_t &gt;</label>
+        <link refid="classneforce_1_1basic__string"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>neforce::basic_string_view&lt; char &gt;</label>
+        <link refid="classneforce_1_1basic__string__view"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>neforce::basic_string_view&lt; char16_t &gt;</label>
+        <link refid="classneforce_1_1basic__string__view"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>neforce::basic_string_view&lt; char32_t &gt;</label>
+        <link refid="classneforce_1_1basic__string__view"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>neforce::basic_string_view&lt; char8_t &gt;</label>
+        <link refid="classneforce_1_1basic__string__view"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>neforce::basic_string_view&lt; typename Traits::char_type, Traits &gt;</label>
+        <link refid="classneforce_1_1basic__string__view"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>neforce::basic_string_view&lt; wchar_t &gt;</label>
+        <link refid="classneforce_1_1basic__string__view"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="63">
+        <label>neforce::character</label>
+        <link refid="structneforce_1_1character"/>
+        <childnode refid="62" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>neforce::compressed_pair&lt; Func, bool &gt;</label>
+        <link refid="structneforce_1_1compressed__pair"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>neforce::compressed_pair&lt; Func, int &gt;</label>
+        <link refid="structneforce_1_1compressed__pair"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::compressed_pair&lt; IfEmpty, T, false &gt;</label>
+        <link refid="structneforce_1_1compressed__pair_3_01_if_empty_00_01_t_00_01false_01_4"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>neforce::compressed_pair&lt; allocator_type, float &gt;</label>
+        <link refid="structneforce_1_1compressed__pair"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>neforce::compressed_pair&lt; allocator_type, pointer &gt;</label>
+        <link refid="structneforce_1_1compressed__pair"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>neforce::compressed_pair&lt; allocator_type, size_t &gt;</label>
+        <link refid="structneforce_1_1compressed__pair"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>neforce::compressed_pair&lt; allocator_type, size_type &gt;</label>
+        <link refid="structneforce_1_1compressed__pair"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="60">
+        <label>neforce::compressed_pair&lt; IfEmpty, T, Compressed &gt;</label>
+        <link refid="structneforce_1_1compressed__pair"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>neforce::compressed_pair&lt; map_allocator, map_pointer &gt;</label>
+        <link refid="structneforce_1_1compressed__pair"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>neforce::compressed_pair&lt; neforce::standard_allocator, size_t &gt;</label>
+        <link refid="structneforce_1_1compressed__pair"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>neforce::decimal</label>
+        <link refid="structneforce_1_1decimal"/>
+        <childnode refid="53" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>neforce::float32</label>
+        <link refid="structneforce_1_1float32"/>
+        <childnode refid="49" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="52">
+        <label>neforce::float64</label>
+        <link refid="structneforce_1_1float64"/>
+        <childnode refid="51" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="56">
+        <label>neforce::icharacter&lt; T, CharT &gt;</label>
+        <link refid="structneforce_1_1icharacter"/>
+        <childnode refid="55" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="62">
+        <label>neforce::icharacter&lt; character, char &gt;</label>
+        <link refid="structneforce_1_1icharacter"/>
+        <childnode refid="61" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="68">
+        <label>neforce::icharacter&lt; u16character, char16_t &gt;</label>
+        <link refid="structneforce_1_1icharacter"/>
+        <childnode refid="61" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="70">
+        <label>neforce::icharacter&lt; u32character, char32_t &gt;</label>
+        <link refid="structneforce_1_1icharacter"/>
+        <childnode refid="61" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="66">
+        <label>neforce::icharacter&lt; u8character, char8_t &gt;</label>
+        <link refid="structneforce_1_1icharacter"/>
+        <childnode refid="61" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="64">
+        <label>neforce::icharacter&lt; wcharacter, wchar_t &gt;</label>
+        <link refid="structneforce_1_1icharacter"/>
+        <childnode refid="61" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>neforce::icommon&lt; T &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::icommon&lt; compressed_pair&lt; IfEmpty, T, false &gt; &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::icommon&lt; compressed_pair&lt; IfEmpty, T, is_empty_v&lt; IfEmpty &gt; &amp;&amp;!is_final_v&lt; IfEmpty &gt; &gt; &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>neforce::icommon&lt; optional&lt; T &amp; &gt; &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::icommon&lt; optional&lt; T &gt; &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::ihashable&lt; T &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="48">
+        <label>neforce::integer128</label>
+        <link refid="structneforce_1_1integer128"/>
+        <childnode refid="47" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>neforce::integer16</label>
+        <link refid="structneforce_1_1integer16"/>
+        <childnode refid="31" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>neforce::integer32</label>
+        <link refid="structneforce_1_1integer32"/>
+        <childnode refid="33" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>neforce::integer64</label>
+        <link refid="structneforce_1_1integer64"/>
+        <childnode refid="35" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>neforce::integer8</label>
+        <link refid="structneforce_1_1integer8"/>
+        <childnode refid="29" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="61">
+        <label>neforce::ipackage&lt; T, PackageT &gt;</label>
+        <link refid="structneforce_1_1ipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="55">
+        <label>neforce::ipackage&lt; T, CharT &gt;</label>
+        <link refid="structneforce_1_1ipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>neforce::ipackage&lt; decimal, decimal_t &gt;</label>
+        <link refid="structneforce_1_1ipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>neforce::ipackage&lt; float32, float32_t &gt;</label>
+        <link refid="structneforce_1_1ipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>neforce::ipackage&lt; float64, float64_t &gt;</label>
+        <link refid="structneforce_1_1ipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>neforce::ipackage&lt; integer128, int128_t &gt;</label>
+        <link refid="structneforce_1_1ipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>neforce::ipackage&lt; integer16, int16_t &gt;</label>
+        <link refid="structneforce_1_1ipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>neforce::ipackage&lt; integer32, int32_t &gt;</label>
+        <link refid="structneforce_1_1ipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>neforce::ipackage&lt; integer64, int64_t &gt;</label>
+        <link refid="structneforce_1_1ipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>neforce::ipackage&lt; integer8, int8_t &gt;</label>
+        <link refid="structneforce_1_1ipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>neforce::ipackage&lt; uinteger128, uint128_t &gt;</label>
+        <link refid="structneforce_1_1ipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>neforce::ipackage&lt; uinteger16, uint16_t &gt;</label>
+        <link refid="structneforce_1_1ipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>neforce::ipackage&lt; uinteger32, uint32_t &gt;</label>
+        <link refid="structneforce_1_1ipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>neforce::ipackage&lt; uinteger64, uint64_t &gt;</label>
+        <link refid="structneforce_1_1ipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>neforce::ipackage&lt; uinteger8, uint8_t &gt;</label>
+        <link refid="structneforce_1_1ipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>neforce::optional&lt; T &gt;</label>
+        <link refid="classneforce_1_1optional"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>neforce::optional&lt; T &amp; &gt;</label>
+        <link refid="classneforce_1_1optional_3_01_t_01_6_01_4"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="57">
+        <label>neforce::pair&lt; Key, T &gt;</label>
+        <link refid="structneforce_1_1pair"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="58">
+        <label>neforce::pair&lt; const Key, T &gt;</label>
+        <link refid="structneforce_1_1pair"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="69">
+        <label>neforce::u16character</label>
+        <link refid="structneforce_1_1u16character"/>
+        <childnode refid="68" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="71">
+        <label>neforce::u32character</label>
+        <link refid="structneforce_1_1u32character"/>
+        <childnode refid="70" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="67">
+        <label>neforce::u8character</label>
+        <link refid="structneforce_1_1u8character"/>
+        <childnode refid="66" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>neforce::uinteger128</label>
+        <link refid="structneforce_1_1uinteger128"/>
+        <childnode refid="45" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>neforce::uinteger16</label>
+        <link refid="structneforce_1_1uinteger16"/>
+        <childnode refid="39" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>neforce::uinteger32</label>
+        <link refid="structneforce_1_1uinteger32"/>
+        <childnode refid="41" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>neforce::uinteger64</label>
+        <link refid="structneforce_1_1uinteger64"/>
+        <childnode refid="43" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>neforce::uinteger8</label>
+        <link refid="structneforce_1_1uinteger8"/>
+        <childnode refid="37" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="65">
+        <label>neforce::wcharacter</label>
+        <link refid="structneforce_1_1wcharacter"/>
+        <childnode refid="64" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" line="30" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" bodystart="30" bodyend="44"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1ihashable_1a43a511def598131fd842fa11e30aee7d" prot="private" virt="non-virtual"><scope>neforce::ihashable</scope><name>derived</name></member>
+      <member refid="structneforce_1_1ihashable_1a3bedfaa42740465ea8b6e58309c1f67e" prot="public" virt="non-virtual"><scope>neforce::ihashable</scope><name>to_ihash</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,213 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1registry__key_1_1value__info" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::registry_key::value_info</compoundname>
+    <includes refid="registry__key_8hpp" local="no">registry_key.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structneforce_1_1registry__key_1_1value__info_1a9f4e6ec1e863949eb9515943afb25ae0" prot="public" static="no" mutable="no">
+        <type><ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref></type>
+        <definition>wstring neforce::registry_key::value_info::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>neforce::registry_key::value_info::name</qualifiedname>
+        <briefdescription>
+<para>值名称 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="125" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" bodystart="125" bodyend="-1"/>
+        <referencedby refid="structneforce_1_1registry__key_1_1value__info_1ae8e065a70da46391f494e4fbd7b78c1e">to_multi_string</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1registry__key_1_1value__info_1ae6436e11730f952e3115497818d8fcc4" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1registry__key_1ae380b49bb4e1922bf90fd553cb9af357" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::registry_key::value_info::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>neforce::registry_key::value_info::type</qualifiedname>
+        <briefdescription>
+<para>值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="126" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1registry__key_1_1value__info_1ab88f6aacbf8b8c0bbfa28f0c20b54e54" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> &gt;</type>
+        <definition>vector&lt;byte_t&gt; neforce::registry_key::value_info::data</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <qualifiedname>neforce::registry_key::value_info::data</qualifiedname>
+        <briefdescription>
+<para>原始数据 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="127" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" bodystart="127" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1registry__key_1_1value__info_1a911d8c24e46ed5779083ec55122c5467" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref></type>
+        <definition>wstring neforce::registry_key::value_info::to_string</definition>
+        <argsstring>() const</argsstring>
+        <name>to_string</name>
+        <qualifiedname>neforce::registry_key::value_info::to_string</qualifiedname>
+        <briefdescription>
+<para>将值数据转换为字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>字符串值 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1registry__key__exception" kindref="compound">registry_key_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当类型不是字符串类型时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="134" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1registry__key_1_1value__info_1a8cf76b3f417a664447b7b7c71105c260" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>::DWORD</type>
+        <definition>::DWORD neforce::registry_key::value_info::to_dword</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>to_dword</name>
+        <qualifiedname>neforce::registry_key::value_info::to_dword</qualifiedname>
+        <briefdescription>
+<para>将值数据转换为32位整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>DWORD值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="140" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1registry__key_1_1value__info_1a13a3b46ba9d1cb0baf55c8c892e16298" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>::ULONGLONG</type>
+        <definition>::ULONGLONG neforce::registry_key::value_info::to_qword</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>to_qword</name>
+        <qualifiedname>neforce::registry_key::value_info::to_qword</qualifiedname>
+        <briefdescription>
+<para>将值数据转换为64位整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>QWORD值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="146" column="22"/>
+        <references refid="structneforce_1_1registry__key_1_1value__info_1a13a3b46ba9d1cb0baf55c8c892e16298">to_qword</references>
+        <referencedby refid="structneforce_1_1registry__key_1_1value__info_1a13a3b46ba9d1cb0baf55c8c892e16298">to_qword</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1registry__key_1_1value__info_1ae8e065a70da46391f494e4fbd7b78c1e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &gt;</type>
+        <definition>vector&lt; wstring &gt; neforce::registry_key::value_info::to_multi_string</definition>
+        <argsstring>() const</argsstring>
+        <name>to_multi_string</name>
+        <qualifiedname>neforce::registry_key::value_info::to_multi_string</qualifiedname>
+        <briefdescription>
+<para>将值数据转换为多字符串列表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>字符串向量 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1registry__key__exception" kindref="compound">registry_key_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当类型不是REG_MULTI_SZ时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="153" column="17"/>
+        <references refid="structneforce_1_1registry__key_1_1value__info_1a9f4e6ec1e863949eb9515943afb25ae0" compoundref="registry__key_8hpp" startline="125">name</references>
+        <references refid="structneforce_1_1registry__key_1_1value__info_1ae8e065a70da46391f494e4fbd7b78c1e">to_multi_string</references>
+        <referencedby refid="structneforce_1_1registry__key_1_1value__info_1ae8e065a70da46391f494e4fbd7b78c1e">to_multi_string</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>系统注册表值信息结构 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>neforce::basic_string&lt; wchar_t &gt;</label>
+        <link refid="classneforce_1_1basic__string"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>neforce::icollector&lt; T &gt;</label>
+        <link refid="structneforce_1_1icollector"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::icommon&lt; T &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="5">
+        <label>neforce::ihashable&lt; T &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="1">
+        <label>neforce::registry_key::value_info</label>
+        <link refid="structneforce_1_1registry__key_1_1value__info"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>name</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>data</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>neforce::vector&lt; byte_t &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="124" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" bodystart="124" bodyend="154"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1registry__key_1_1value__info_1ab88f6aacbf8b8c0bbfa28f0c20b54e54" prot="public" virt="non-virtual"><scope>neforce::registry_key::value_info</scope><name>data</name></member>
+      <member refid="structneforce_1_1registry__key_1_1value__info_1a9f4e6ec1e863949eb9515943afb25ae0" prot="public" virt="non-virtual"><scope>neforce::registry_key::value_info</scope><name>name</name></member>
+      <member refid="structneforce_1_1registry__key_1_1value__info_1a8cf76b3f417a664447b7b7c71105c260" prot="public" virt="non-virtual"><scope>neforce::registry_key::value_info</scope><name>to_dword</name></member>
+      <member refid="structneforce_1_1registry__key_1_1value__info_1ae8e065a70da46391f494e4fbd7b78c1e" prot="public" virt="non-virtual"><scope>neforce::registry_key::value_info</scope><name>to_multi_string</name></member>
+      <member refid="structneforce_1_1registry__key_1_1value__info_1a13a3b46ba9d1cb0baf55c8c892e16298" prot="public" virt="non-virtual"><scope>neforce::registry_key::value_info</scope><name>to_qword</name></member>
+      <member refid="structneforce_1_1registry__key_1_1value__info_1a911d8c24e46ed5779083ec55122c5467" prot="public" virt="non-virtual"><scope>neforce::registry_key::value_info</scope><name>to_string</name></member>
+      <member refid="structneforce_1_1registry__key_1_1value__info_1ae6436e11730f952e3115497818d8fcc4" prot="public" virt="non-virtual"><scope>neforce::registry_key::value_info</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

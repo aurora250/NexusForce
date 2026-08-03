@@ -1,0 +1,1800 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1atomic__base_3_01_t_01_5_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::atomic_base&lt; T * &gt;</compoundname>
+    <derivedcompoundref refid="structneforce_1_1atomic_3_01_t_01_5_01_4" prot="public" virt="non-virtual">neforce::atomic&lt; T * &gt;</derivedcompoundref>
+    <includes refid="atomic__base_8hpp" local="no">atomic_base.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" prot="public" static="no">
+        <type>T *</type>
+        <definition>using neforce::atomic_base&lt; T * &gt;::value_type = T*</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::value_type</qualifiedname>
+        <briefdescription>
+<para>指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1939" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1939" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a125104fdac588e43347c746d95be8546" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1gab2c4bc5144496796ce8a7feed7b8ad58" kindref="member">ptrdiff_t</ref></type>
+        <definition>using neforce::atomic_base&lt; T * &gt;::difference_type = ptrdiff_t</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::difference_type</qualifiedname>
+        <briefdescription>
+<para>差值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1940" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1940" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a6c21eef8fa2ca7c4bafaf131e15c405c" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T * &gt;::ptr_</definition>
+        <argsstring></argsstring>
+        <name>ptr_</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::ptr_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>存储的指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1943" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1943" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1atomic__base_1a492536d20428f74f264fb7ed465e8434" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T &gt;::value_</definition>
+        <argsstring></argsstring>
+        <name>value_</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::value_</qualifiedname>
+        <briefdescription>
+<para>原子值存储 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1460" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1460" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a0f9f1b062e74db4f2d69f29909bb1554" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a125104fdac588e43347c746d95be8546" kindref="member">difference_type</ref></type>
+        <definition>static constexpr difference_type neforce::atomic_base&lt; T * &gt;::real_type_sizes</definition>
+        <argsstring>(const difference_type dest) noexcept</argsstring>
+        <name>real_type_sizes</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::real_type_sizes</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a125104fdac588e43347c746d95be8546" kindref="member">difference_type</ref></type>
+          <declname>dest</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1945" column="45" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1945" bodyend="1947"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a5cf9192fcfe97e41267b01254a71d65f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::atomic_base&lt; T * &gt;::atomic_base</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>atomic_base</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::atomic_base</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1950" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a44c4fb1c846906683b5dc95eae6ab125" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::atomic_base&lt; T * &gt;::atomic_base</definition>
+        <argsstring>(const atomic_base &amp;)=delete</argsstring>
+        <name>atomic_base</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::atomic_base</qualifiedname>
+        <param>
+          <type>const atomic_base &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1951" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a70c1f843e6d86a2216937c1c8bc0534d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>atomic_base &amp;</type>
+        <definition>atomic_base &amp; neforce::atomic_base&lt; T * &gt;::operator=</definition>
+        <argsstring>(const atomic_base &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::operator=</qualifiedname>
+        <param>
+          <type>const atomic_base &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1952" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1aac029af7d2f7724ef101bba2bd3c0f2d" prot="public" static="no" const="no" explicit="no" inline="no" volatile="yes" virt="non-virtual">
+        <type>atomic_base &amp;</type>
+        <definition>atomic_base &amp; neforce::atomic_base&lt; T * &gt;::operator=</definition>
+        <argsstring>(const atomic_base &amp;) volatile =delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::operator=</qualifiedname>
+        <param>
+          <type>const atomic_base &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1953" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a3c695c77f87277461b065b8ed864461b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::atomic_base&lt; T * &gt;::atomic_base</definition>
+        <argsstring>(atomic_base &amp;&amp;) noexcept=default</argsstring>
+        <name>atomic_base</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::atomic_base</qualifiedname>
+        <param>
+          <type>atomic_base &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1954" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a55e1fe1a5acd7f193003931651490c5f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>atomic_base &amp;</type>
+        <definition>atomic_base &amp; neforce::atomic_base&lt; T * &gt;::operator=</definition>
+        <argsstring>(atomic_base &amp;&amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::operator=</qualifiedname>
+        <param>
+          <type>atomic_base &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1955" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1ad47a8faa85270d496bf6f838a4935af8" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::atomic_base&lt; T * &gt;::~atomic_base</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>~atomic_base</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::~atomic_base</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1956" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1acb9a0602aa124aa6327f76e07835cadb" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::atomic_base&lt; T * &gt;::atomic_base</definition>
+        <argsstring>(const value_type ptr) noexcept</argsstring>
+        <name>atomic_base</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::atomic_base</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1962" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1962" bodyend="1963"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1acd61407a6b46aa8c537388dc0490b29b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::atomic_base&lt; T * &gt;::operator value_type</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator value_type</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::operator value_type</qualifiedname>
+        <briefdescription>
+<para>类型转换运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前指针值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1969" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1969" bodyend="1969"/>
+        <references refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a91a1bbb2883b0356b75f161ea4aeb34b" compoundref="atomic__base_8hpp" startline="2135" endline="2154">load</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a0b424c8c0096dcea8acdd6c29b5e3e42" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" volatile="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::atomic_base&lt; T * &gt;::operator value_type</definition>
+        <argsstring>() const volatile noexcept</argsstring>
+        <name>operator value_type</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::operator value_type</qualifiedname>
+        <briefdescription>
+<para>volatile版本的类型转换运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1974" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1974" bodyend="1974"/>
+        <references refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a91a1bbb2883b0356b75f161ea4aeb34b" compoundref="atomic__base_8hpp" startline="2135" endline="2154">load</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a6757b1b6d3f69bfeab81be74f0041725" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T * &gt;::operator=</definition>
+        <argsstring>(const value_type ptr) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要设置的指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置后的指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1981" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1981" bodyend="1984"/>
+        <references refid="structneforce_1_1atomic__base_1accda5b23ff95642417ca972e2c4cd383" compoundref="atomic__base_8hpp" startline="1651" endline="1663">neforce::atomic_base&lt; T &gt;::store</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a4e2dc933c25cf06ddd1cb4b8b5cbfe6e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" volatile="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T * &gt;::operator=</definition>
+        <argsstring>(const value_type ptr) volatile noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>volatile版本的赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1989" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1989" bodyend="1992"/>
+        <references refid="structneforce_1_1atomic__base_1accda5b23ff95642417ca972e2c4cd383" compoundref="atomic__base_8hpp" startline="1651" endline="1663">neforce::atomic_base&lt; T &gt;::store</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a2a14ddc6c59e274c7cc3437e4b4f317d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T * &gt;::operator++</definition>
+        <argsstring>(int) noexcept</argsstring>
+        <name>operator++</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::operator++</qualifiedname>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+<para>后置递增运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>递增前的指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1998" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1998" bodyend="1998"/>
+        <references refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a18d1a7d85fa0e3254ad0d347c21a2a76" compoundref="atomic__base_8hpp" startline="2335" endline="2341">fetch_add</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a19d81bc68774f89eb91048df9e4146b9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" volatile="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T * &gt;::operator++</definition>
+        <argsstring>(int) volatile noexcept</argsstring>
+        <name>operator++</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::operator++</qualifiedname>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+<para>volatile版本的后置递增运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2003" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2003" bodyend="2003"/>
+        <references refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a18d1a7d85fa0e3254ad0d347c21a2a76" compoundref="atomic__base_8hpp" startline="2335" endline="2341">fetch_add</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a04ad2a6e06060484e2cceeaa34ddebfa" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T * &gt;::operator--</definition>
+        <argsstring>(int) noexcept</argsstring>
+        <name>operator--</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::operator--</qualifiedname>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+<para>后置递减运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>递减前的指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2009" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2009" bodyend="2009"/>
+        <references refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a85e1d0b672a46f784440ec60849029f1" compoundref="atomic__base_8hpp" startline="2360" endline="2366">fetch_sub</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a52a1a282667a31b0d9d621655de5f1ed" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" volatile="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T * &gt;::operator--</definition>
+        <argsstring>(int) volatile noexcept</argsstring>
+        <name>operator--</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::operator--</qualifiedname>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+<para>volatile版本的后置递减运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2014" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2014" bodyend="2014"/>
+        <references refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a85e1d0b672a46f784440ec60849029f1" compoundref="atomic__base_8hpp" startline="2360" endline="2366">fetch_sub</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1aa62354791965780979d45d477cf631f3" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T * &gt;::operator++</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>operator++</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::operator++</qualifiedname>
+        <briefdescription>
+<para>前置递增运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>递增后的指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2020" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2020" bodyend="2020"/>
+        <references refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a18d1a7d85fa0e3254ad0d347c21a2a76" compoundref="atomic__base_8hpp" startline="2335" endline="2341">fetch_add</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a33f2ec8dd4ddce7ff944019cd68f45ac" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" volatile="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T * &gt;::operator++</definition>
+        <argsstring>() volatile noexcept</argsstring>
+        <name>operator++</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::operator++</qualifiedname>
+        <briefdescription>
+<para>volatile版本的前置递增运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2025" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2025" bodyend="2025"/>
+        <references refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a18d1a7d85fa0e3254ad0d347c21a2a76" compoundref="atomic__base_8hpp" startline="2335" endline="2341">fetch_add</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a70e8f27b4ee3375d72af6a5441882b8f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T * &gt;::operator--</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>operator--</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::operator--</qualifiedname>
+        <briefdescription>
+<para>前置递减运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>递减后的指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2031" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2031" bodyend="2031"/>
+        <references refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a85e1d0b672a46f784440ec60849029f1" compoundref="atomic__base_8hpp" startline="2360" endline="2366">fetch_sub</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a755fa61b73311d79a235bb9b4a1e22f6" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" volatile="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T * &gt;::operator--</definition>
+        <argsstring>() volatile noexcept</argsstring>
+        <name>operator--</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::operator--</qualifiedname>
+        <briefdescription>
+<para>volatile版本的前置递减运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2036" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2036" bodyend="2036"/>
+        <references refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a85e1d0b672a46f784440ec60849029f1" compoundref="atomic__base_8hpp" startline="2360" endline="2366">fetch_sub</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a4419ecb75cfdb049ab989e4c7b08bba4" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T * &gt;::operator+=</definition>
+        <argsstring>(const ptrdiff_t dest) noexcept</argsstring>
+        <name>operator+=</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::operator+=</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1gab2c4bc5144496796ce8a7feed7b8ad58" kindref="member">ptrdiff_t</ref></type>
+          <declname>dest</declname>
+        </param>
+        <briefdescription>
+<para>指针加法赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要增加的元素数量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>增加后的指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2043" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2043" bodyend="2043"/>
+        <references refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a18d1a7d85fa0e3254ad0d347c21a2a76" compoundref="atomic__base_8hpp" startline="2335" endline="2341">fetch_add</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a322fda0c7637d0af3748136d2f0ab916" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" volatile="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T * &gt;::operator+=</definition>
+        <argsstring>(const ptrdiff_t dest) volatile noexcept</argsstring>
+        <name>operator+=</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::operator+=</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1gab2c4bc5144496796ce8a7feed7b8ad58" kindref="member">ptrdiff_t</ref></type>
+          <declname>dest</declname>
+        </param>
+        <briefdescription>
+<para>volatile版本的指针加法赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2048" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2048" bodyend="2048"/>
+        <references refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a18d1a7d85fa0e3254ad0d347c21a2a76" compoundref="atomic__base_8hpp" startline="2335" endline="2341">fetch_add</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a019ea339de83cc6140b3ef4408a13f96" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T * &gt;::operator-=</definition>
+        <argsstring>(const ptrdiff_t dest) noexcept</argsstring>
+        <name>operator-=</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::operator-=</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1gab2c4bc5144496796ce8a7feed7b8ad58" kindref="member">ptrdiff_t</ref></type>
+          <declname>dest</declname>
+        </param>
+        <briefdescription>
+<para>指针减法赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要减少的元素数量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>减少后的指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2055" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2055" bodyend="2055"/>
+        <references refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a85e1d0b672a46f784440ec60849029f1" compoundref="atomic__base_8hpp" startline="2360" endline="2366">fetch_sub</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1ac84cb31c263b14e0519fefc04189b259" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" volatile="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T * &gt;::operator-=</definition>
+        <argsstring>(const ptrdiff_t dest) volatile noexcept</argsstring>
+        <name>operator-=</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::operator-=</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1gab2c4bc5144496796ce8a7feed7b8ad58" kindref="member">ptrdiff_t</ref></type>
+          <declname>dest</declname>
+        </param>
+        <briefdescription>
+<para>volatile版本的指针减法赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2060" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2060" bodyend="2060"/>
+        <references refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a85e1d0b672a46f784440ec60849029f1" compoundref="atomic__base_8hpp" startline="2360" endline="2366">fetch_sub</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a4dad8117510b08eed74734edf639aea2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::atomic_base&lt; T * &gt;::is_lock_free</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_lock_free</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::is_lock_free</qualifiedname>
+        <briefdescription>
+<para>检查是否支持无锁操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否支持无锁 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2066" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2066" bodyend="2068"/>
+        <references refid="group___atomic_operations_1gaa99ffbf4b9d6de26e0e6de3003f2bb28" compoundref="atomic__base_8hpp" startline="1254" endline="1260">neforce::is_always_lock_free</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1ac7f44d1fa3a613dd4069f25a3b9df00d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" volatile="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::atomic_base&lt; T * &gt;::is_lock_free</definition>
+        <argsstring>() const volatile noexcept</argsstring>
+        <name>is_lock_free</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::is_lock_free</qualifiedname>
+        <briefdescription>
+<para>volatile版本的检查是否支持无锁操作 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2073" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2073" bodyend="2075"/>
+        <references refid="group___atomic_operations_1gaa99ffbf4b9d6de26e0e6de3003f2bb28" compoundref="atomic__base_8hpp" startline="1254" endline="1260">neforce::is_always_lock_free</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1aaa2cdc6b521690619cdd3885316d9070" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::atomic_base&lt; T * &gt;::store</definition>
+        <argsstring>(value_type ptr, const memory_order mo=memory_order_seq_cst) noexcept</argsstring>
+        <name>store</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::store</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+          <defval><ref refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" kindref="member">memory_order_seq_cst</ref></defval>
+        </param>
+        <briefdescription>
+<para>原子存储指针操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要存储的指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2082" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2082" bodyend="2102"/>
+        <references refid="group___memory_order_1ga5a6b1c9c84d82e43a71b7c218f656883" compoundref="memory__order_8hpp" startline="181">neforce::memory_order_acq_rel</references>
+        <references refid="group___memory_order_1ga6367df7d3e137e9b30e17740435d1816" compoundref="memory__order_8hpp" startline="177">neforce::memory_order_acquire</references>
+        <references refid="group___memory_order_1ga704329d5e6c677b3bfc060b5c00d94b9" compoundref="memory__order_8hpp" startline="175">neforce::memory_order_consume</references>
+        <references refid="group___memory_order_1ggab929dd7161018c9091d124d0ac6c6ffca20cf99181cfd78cead0f8ae1994c17c8" compoundref="memory__order_8hpp" startline="203">memory_order_mask</references>
+        <references refid="group___memory_order_1ga0ecbdbbd5ddbe9eda2820b9cea4826fc" compoundref="memory__order_8hpp" startline="179">neforce::memory_order_release</references>
+        <references refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" compoundref="memory__order_8hpp" startline="183">neforce::memory_order_seq_cst</references>
+        <references refid="group___debug_and_assertions_1gaeb5cd7dd15c349020f35d669e0e7dd73" compoundref="debug_8hpp" startline="47" endline="52">NEFORCE_CONSTEXPR_ASSERT</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a7bb415ec516d975aa7e810d0c3d226ae" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" volatile="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::atomic_base&lt; T * &gt;::store</definition>
+        <argsstring>(const value_type ptr, const memory_order mo=memory_order_seq_cst) volatile noexcept</argsstring>
+        <name>store</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::store</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+          <defval><ref refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" kindref="member">memory_order_seq_cst</ref></defval>
+        </param>
+        <briefdescription>
+<para>volatile版本的原子存储指针操作 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2107" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2107" bodyend="2128"/>
+        <references refid="group___memory_order_1ga5a6b1c9c84d82e43a71b7c218f656883" compoundref="memory__order_8hpp" startline="181">neforce::memory_order_acq_rel</references>
+        <references refid="group___memory_order_1ga6367df7d3e137e9b30e17740435d1816" compoundref="memory__order_8hpp" startline="177">neforce::memory_order_acquire</references>
+        <references refid="group___memory_order_1ga704329d5e6c677b3bfc060b5c00d94b9" compoundref="memory__order_8hpp" startline="175">neforce::memory_order_consume</references>
+        <references refid="group___memory_order_1ggab929dd7161018c9091d124d0ac6c6ffca20cf99181cfd78cead0f8ae1994c17c8" compoundref="memory__order_8hpp" startline="203">memory_order_mask</references>
+        <references refid="group___memory_order_1ga0ecbdbbd5ddbe9eda2820b9cea4826fc" compoundref="memory__order_8hpp" startline="179">neforce::memory_order_release</references>
+        <references refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" compoundref="memory__order_8hpp" startline="183">neforce::memory_order_seq_cst</references>
+        <references refid="group___debug_and_assertions_1gaeb5cd7dd15c349020f35d669e0e7dd73" compoundref="debug_8hpp" startline="47" endline="52">NEFORCE_CONSTEXPR_ASSERT</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a91a1bbb2883b0356b75f161ea4aeb34b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T * &gt;::load</definition>
+        <argsstring>(const memory_order mo=memory_order_seq_cst) const noexcept</argsstring>
+        <name>load</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::load</qualifiedname>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+          <defval><ref refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" kindref="member">memory_order_seq_cst</ref></defval>
+        </param>
+        <briefdescription>
+<para>原子加载指针操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>加载的指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2135" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2135" bodyend="2154"/>
+        <references refid="group___memory_order_1ga5a6b1c9c84d82e43a71b7c218f656883" compoundref="memory__order_8hpp" startline="181">neforce::memory_order_acq_rel</references>
+        <references refid="group___memory_order_1ga6367df7d3e137e9b30e17740435d1816" compoundref="memory__order_8hpp" startline="177">neforce::memory_order_acquire</references>
+        <references refid="group___memory_order_1ggab929dd7161018c9091d124d0ac6c6ffca20cf99181cfd78cead0f8ae1994c17c8" compoundref="memory__order_8hpp" startline="203">memory_order_mask</references>
+        <references refid="group___memory_order_1ga0ecbdbbd5ddbe9eda2820b9cea4826fc" compoundref="memory__order_8hpp" startline="179">neforce::memory_order_release</references>
+        <references refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" compoundref="memory__order_8hpp" startline="183">neforce::memory_order_seq_cst</references>
+        <references refid="group___debug_and_assertions_1gaeb5cd7dd15c349020f35d669e0e7dd73" compoundref="debug_8hpp" startline="47" endline="52">NEFORCE_CONSTEXPR_ASSERT</references>
+        <referencedby refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1acd61407a6b46aa8c537388dc0490b29b" compoundref="atomic__base_8hpp" startline="1969" endline="1969">operator value_type</referencedby>
+        <referencedby refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a0b424c8c0096dcea8acdd6c29b5e3e42" compoundref="atomic__base_8hpp" startline="1974" endline="1974">operator value_type</referencedby>
+        <referencedby refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1ae69e1954db0e650ed44813e7f4fddc8b" compoundref="atomic__base_8hpp" startline="2315" endline="2317">wait</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a4b0a664bc53cdd050b903b49a3b3dadf" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" volatile="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T * &gt;::load</definition>
+        <argsstring>(const memory_order mo=memory_order_seq_cst) const volatile noexcept</argsstring>
+        <name>load</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::load</qualifiedname>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+          <defval><ref refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" kindref="member">memory_order_seq_cst</ref></defval>
+        </param>
+        <briefdescription>
+<para>volatile版本的原子加载指针操作 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2159" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2159" bodyend="2178"/>
+        <references refid="group___memory_order_1ga5a6b1c9c84d82e43a71b7c218f656883" compoundref="memory__order_8hpp" startline="181">neforce::memory_order_acq_rel</references>
+        <references refid="group___memory_order_1ga6367df7d3e137e9b30e17740435d1816" compoundref="memory__order_8hpp" startline="177">neforce::memory_order_acquire</references>
+        <references refid="group___memory_order_1ggab929dd7161018c9091d124d0ac6c6ffca20cf99181cfd78cead0f8ae1994c17c8" compoundref="memory__order_8hpp" startline="203">memory_order_mask</references>
+        <references refid="group___memory_order_1ga0ecbdbbd5ddbe9eda2820b9cea4826fc" compoundref="memory__order_8hpp" startline="179">neforce::memory_order_release</references>
+        <references refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" compoundref="memory__order_8hpp" startline="183">neforce::memory_order_seq_cst</references>
+        <references refid="group___debug_and_assertions_1gaeb5cd7dd15c349020f35d669e0e7dd73" compoundref="debug_8hpp" startline="47" endline="52">NEFORCE_CONSTEXPR_ASSERT</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1aa39f2bf2b93d4e8524f0e082636ae6fb" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T * &gt;::exchange</definition>
+        <argsstring>(const value_type ptr, const memory_order mo=memory_order_seq_cst) noexcept</argsstring>
+        <name>exchange</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::exchange</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+          <defval><ref refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" kindref="member">memory_order_seq_cst</ref></defval>
+        </param>
+        <briefdescription>
+<para>原子交换指针操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>交换前的指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2186" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2186" bodyend="2198"/>
+        <references refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" compoundref="memory__order_8hpp" startline="183">neforce::memory_order_seq_cst</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a1d6739112da3480f1848e269bc95b58f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" volatile="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T * &gt;::exchange</definition>
+        <argsstring>(const value_type ptr, const memory_order mo=memory_order_seq_cst) volatile noexcept</argsstring>
+        <name>exchange</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::exchange</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+          <defval><ref refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" kindref="member">memory_order_seq_cst</ref></defval>
+        </param>
+        <briefdescription>
+<para>volatile版本的原子交换指针操作 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2203" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2203" bodyend="2215"/>
+        <references refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" compoundref="memory__order_8hpp" startline="183">neforce::memory_order_seq_cst</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1afc31182a3c15be5acf11c41a4b0b7bb1" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::atomic_base&lt; T * &gt;::compare_exchange_weak</definition>
+        <argsstring>(value_type &amp;expected, value_type desired, const memory_order success, const memory_order failure) noexcept</argsstring>
+        <name>compare_exchange_weak</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::compare_exchange_weak</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref> &amp;</type>
+          <declname>expected</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+          <declname>desired</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>success</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>failure</declname>
+        </param>
+        <briefdescription>
+<para>弱比较交换指针操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>expected</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>desired</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望设置的指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>success</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>成功时的内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>failure</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>失败时的内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否交换成功 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2225" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2225" bodyend="2230"/>
+        <references refid="group___args_forward_functions_1ga57a2cf85645286e20c82caae70cd13dc" compoundref="type__traits_8hpp" startline="3084" endline="3086">neforce::addressof</references>
+        <references refid="group___atomic_operations_1ga6cad024ecadd245ada1fd627a79cd991" compoundref="atomic__base_8hpp" startline="952" endline="1059">neforce::atomic_cmpexch_weak_any</references>
+        <references refid="group___memory_order_1ga71dd5a8debd3ba14f2bdcb5d7d0bb427" compoundref="memory__order_8hpp" startline="297" endline="304">neforce::is_valid_cmpexch_failure_order</references>
+        <references refid="group___debug_and_assertions_1gaeb5cd7dd15c349020f35d669e0e7dd73" compoundref="debug_8hpp" startline="47" endline="52">NEFORCE_CONSTEXPR_ASSERT</references>
+        <references refid="group___condition_variables_1gga7042881af869b8f1ddb32322ab46a9ffa260ca9dd8a4577fc00b7bd5810298076" compoundref="condition__variable_8hpp" startline="34">success</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a997e0296ec4782e6653f621709f625dc" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" volatile="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::atomic_base&lt; T * &gt;::compare_exchange_weak</definition>
+        <argsstring>(value_type &amp;expected, value_type desired, const memory_order success, const memory_order failure) volatile noexcept</argsstring>
+        <name>compare_exchange_weak</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::compare_exchange_weak</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref> &amp;</type>
+          <declname>expected</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+          <declname>desired</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>success</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>failure</declname>
+        </param>
+        <briefdescription>
+<para>volatile版本的弱比较交换指针操作 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2235" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2235" bodyend="2241"/>
+        <references refid="group___args_forward_functions_1ga57a2cf85645286e20c82caae70cd13dc" compoundref="type__traits_8hpp" startline="3084" endline="3086">neforce::addressof</references>
+        <references refid="group___atomic_operations_1ga6cad024ecadd245ada1fd627a79cd991" compoundref="atomic__base_8hpp" startline="952" endline="1059">neforce::atomic_cmpexch_weak_any</references>
+        <references refid="group___memory_order_1ga71dd5a8debd3ba14f2bdcb5d7d0bb427" compoundref="memory__order_8hpp" startline="297" endline="304">neforce::is_valid_cmpexch_failure_order</references>
+        <references refid="group___debug_and_assertions_1gaeb5cd7dd15c349020f35d669e0e7dd73" compoundref="debug_8hpp" startline="47" endline="52">NEFORCE_CONSTEXPR_ASSERT</references>
+        <references refid="group___condition_variables_1gga7042881af869b8f1ddb32322ab46a9ffa260ca9dd8a4577fc00b7bd5810298076" compoundref="condition__variable_8hpp" startline="34">success</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1aa89f1cd25b419830ed412c39e3c474fd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::atomic_base&lt; T * &gt;::compare_exchange_weak</definition>
+        <argsstring>(value_type &amp;expected, value_type desired, const memory_order mo=memory_order_seq_cst) noexcept</argsstring>
+        <name>compare_exchange_weak</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::compare_exchange_weak</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref> &amp;</type>
+          <declname>expected</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+          <declname>desired</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+          <defval><ref refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" kindref="member">memory_order_seq_cst</ref></defval>
+        </param>
+        <briefdescription>
+<para>简化版弱比较交换指针操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>expected</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>desired</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望设置的指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否交换成功 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2250" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2250" bodyend="2253"/>
+        <references refid="group___memory_order_1ga32429d28b076dd15b690263f2d6c29cc" compoundref="memory__order_8hpp" startline="273" endline="289">neforce::cmpexch_failure_order</references>
+        <references refid="structneforce_1_1atomic__base_1aebed5cb981a1aa97a7782d0894413fcf" compoundref="atomic__base_8hpp" startline="1740" endline="1743">neforce::atomic_base&lt; T &gt;::compare_exchange_weak</references>
+        <references refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" compoundref="memory__order_8hpp" startline="183">neforce::memory_order_seq_cst</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1aecf97cd0677b977bea1d783899ed4f49" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" volatile="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::atomic_base&lt; T * &gt;::compare_exchange_weak</definition>
+        <argsstring>(value_type &amp;expected, value_type desired, const memory_order mo=memory_order_seq_cst) volatile noexcept</argsstring>
+        <name>compare_exchange_weak</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::compare_exchange_weak</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref> &amp;</type>
+          <declname>expected</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+          <declname>desired</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+          <defval><ref refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" kindref="member">memory_order_seq_cst</ref></defval>
+        </param>
+        <briefdescription>
+<para>volatile版本的简化版弱比较交换指针操作 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2258" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2258" bodyend="2261"/>
+        <references refid="group___memory_order_1ga32429d28b076dd15b690263f2d6c29cc" compoundref="memory__order_8hpp" startline="273" endline="289">neforce::cmpexch_failure_order</references>
+        <references refid="structneforce_1_1atomic__base_1aebed5cb981a1aa97a7782d0894413fcf" compoundref="atomic__base_8hpp" startline="1740" endline="1743">neforce::atomic_base&lt; T &gt;::compare_exchange_weak</references>
+        <references refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" compoundref="memory__order_8hpp" startline="183">neforce::memory_order_seq_cst</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1ac3b4cb97d9a1101c14ea09dadbc8f529" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::atomic_base&lt; T * &gt;::compare_exchange_strong</definition>
+        <argsstring>(value_type &amp;expected, value_type desired, const memory_order success, const memory_order failure) noexcept</argsstring>
+        <name>compare_exchange_strong</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::compare_exchange_strong</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref> &amp;</type>
+          <declname>expected</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+          <declname>desired</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>success</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>failure</declname>
+        </param>
+        <briefdescription>
+<para>强比较交换指针操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>expected</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>desired</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望设置的指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>success</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>成功时的内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>failure</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>失败时的内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否交换成功 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2271" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2271" bodyend="2277"/>
+        <references refid="group___args_forward_functions_1ga57a2cf85645286e20c82caae70cd13dc" compoundref="type__traits_8hpp" startline="3084" endline="3086">neforce::addressof</references>
+        <references refid="group___atomic_operations_1gabb221e34eb57f5c5301f200bfe969b3d" compoundref="atomic__base_8hpp" startline="1073" endline="1099">neforce::atomic_cmpexch_strong_any</references>
+        <references refid="group___memory_order_1ga71dd5a8debd3ba14f2bdcb5d7d0bb427" compoundref="memory__order_8hpp" startline="297" endline="304">neforce::is_valid_cmpexch_failure_order</references>
+        <references refid="group___debug_and_assertions_1gaeb5cd7dd15c349020f35d669e0e7dd73" compoundref="debug_8hpp" startline="47" endline="52">NEFORCE_CONSTEXPR_ASSERT</references>
+        <references refid="group___condition_variables_1gga7042881af869b8f1ddb32322ab46a9ffa260ca9dd8a4577fc00b7bd5810298076" compoundref="condition__variable_8hpp" startline="34">success</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1ad7cd9245cf7805eb5e582f6487c3fddd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" volatile="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::atomic_base&lt; T * &gt;::compare_exchange_strong</definition>
+        <argsstring>(value_type &amp;expected, value_type desired, const memory_order success, const memory_order failure) volatile noexcept</argsstring>
+        <name>compare_exchange_strong</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::compare_exchange_strong</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref> &amp;</type>
+          <declname>expected</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+          <declname>desired</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>success</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>failure</declname>
+        </param>
+        <briefdescription>
+<para>volatile版本的强比较交换指针操作 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2282" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2282" bodyend="2288"/>
+        <references refid="group___args_forward_functions_1ga57a2cf85645286e20c82caae70cd13dc" compoundref="type__traits_8hpp" startline="3084" endline="3086">neforce::addressof</references>
+        <references refid="group___atomic_operations_1gabb221e34eb57f5c5301f200bfe969b3d" compoundref="atomic__base_8hpp" startline="1073" endline="1099">neforce::atomic_cmpexch_strong_any</references>
+        <references refid="group___memory_order_1ga71dd5a8debd3ba14f2bdcb5d7d0bb427" compoundref="memory__order_8hpp" startline="297" endline="304">neforce::is_valid_cmpexch_failure_order</references>
+        <references refid="group___debug_and_assertions_1gaeb5cd7dd15c349020f35d669e0e7dd73" compoundref="debug_8hpp" startline="47" endline="52">NEFORCE_CONSTEXPR_ASSERT</references>
+        <references refid="group___condition_variables_1gga7042881af869b8f1ddb32322ab46a9ffa260ca9dd8a4577fc00b7bd5810298076" compoundref="condition__variable_8hpp" startline="34">success</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a7ce3f1b049f8ee6d86a63c3cc6047344" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::atomic_base&lt; T * &gt;::compare_exchange_strong</definition>
+        <argsstring>(value_type &amp;expected, value_type desired, const memory_order mo=memory_order_seq_cst) noexcept</argsstring>
+        <name>compare_exchange_strong</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::compare_exchange_strong</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref> &amp;</type>
+          <declname>expected</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+          <declname>desired</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+          <defval><ref refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" kindref="member">memory_order_seq_cst</ref></defval>
+        </param>
+        <briefdescription>
+<para>简化版强比较交换指针操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>expected</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>desired</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望设置的指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否交换成功 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2297" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2297" bodyend="2300"/>
+        <references refid="group___memory_order_1ga32429d28b076dd15b690263f2d6c29cc" compoundref="memory__order_8hpp" startline="273" endline="289">neforce::cmpexch_failure_order</references>
+        <references refid="structneforce_1_1atomic__base_1a092d17452349d0359d6ed7616f86b23f" compoundref="atomic__base_8hpp" startline="1782" endline="1786">neforce::atomic_base&lt; T &gt;::compare_exchange_strong</references>
+        <references refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" compoundref="memory__order_8hpp" startline="183">neforce::memory_order_seq_cst</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a00e42567d7ef9cc1f35be311819031fa" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" volatile="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::atomic_base&lt; T * &gt;::compare_exchange_strong</definition>
+        <argsstring>(value_type &amp;expected, value_type desired, const memory_order mo=memory_order_seq_cst) volatile noexcept</argsstring>
+        <name>compare_exchange_strong</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::compare_exchange_strong</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref> &amp;</type>
+          <declname>expected</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+          <declname>desired</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+          <defval><ref refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" kindref="member">memory_order_seq_cst</ref></defval>
+        </param>
+        <briefdescription>
+<para>volatile版本的简化版强比较交换指针操作 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2305" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2305" bodyend="2308"/>
+        <references refid="group___memory_order_1ga32429d28b076dd15b690263f2d6c29cc" compoundref="memory__order_8hpp" startline="273" endline="289">neforce::cmpexch_failure_order</references>
+        <references refid="structneforce_1_1atomic__base_1a092d17452349d0359d6ed7616f86b23f" compoundref="atomic__base_8hpp" startline="1782" endline="1786">neforce::atomic_base&lt; T &gt;::compare_exchange_strong</references>
+        <references refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" compoundref="memory__order_8hpp" startline="183">neforce::memory_order_seq_cst</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1ae69e1954db0e650ed44813e7f4fddc8b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::atomic_base&lt; T * &gt;::wait</definition>
+        <argsstring>(value_type old, const memory_order mo=memory_order_seq_cst) const noexcept</argsstring>
+        <name>wait</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::wait</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+          <declname>old</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+          <defval><ref refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" kindref="member">memory_order_seq_cst</ref></defval>
+        </param>
+        <briefdescription>
+<para>等待指针改变 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>old</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望的旧指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2315" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2315" bodyend="2317"/>
+        <references refid="group___atomic_operations_1ga8c89443dcfc10dc33425c5e39196cf09" compoundref="atomic__wait_8hpp" startline="418" endline="421">neforce::atomic_wait_address_v</references>
+        <references refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a91a1bbb2883b0356b75f161ea4aeb34b" compoundref="atomic__base_8hpp" startline="2135" endline="2154">load</references>
+        <references refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" compoundref="memory__order_8hpp" startline="183">neforce::memory_order_seq_cst</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1af9766e5da696d5ef2c16ff3c34e4a537" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::atomic_base&lt; T * &gt;::notify_one</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>notify_one</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::notify_one</qualifiedname>
+        <briefdescription>
+<para>通知一个等待线程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2322" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2322" bodyend="2322"/>
+        <references refid="group___atomic_operations_1gafe5ce51b3344134870849f820098063f" compoundref="atomic__wait_8hpp" startline="448" endline="451">neforce::atomic_notify_address</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1ae3b859ca2079b8d08612fbbcaf3acdc9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::atomic_base&lt; T * &gt;::notify_all</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>notify_all</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::notify_all</qualifiedname>
+        <briefdescription>
+<para>通知所有等待线程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2327" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2327" bodyend="2327"/>
+        <references refid="group___atomic_operations_1gafe5ce51b3344134870849f820098063f" compoundref="atomic__wait_8hpp" startline="448" endline="451">neforce::atomic_notify_address</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a18d1a7d85fa0e3254ad0d347c21a2a76" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T * &gt;::fetch_add</definition>
+        <argsstring>(const ptrdiff_t dest, const memory_order mo=memory_order_seq_cst) noexcept</argsstring>
+        <name>fetch_add</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::fetch_add</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1gab2c4bc5144496796ce8a7feed7b8ad58" kindref="member">ptrdiff_t</ref></type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+          <defval><ref refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" kindref="member">memory_order_seq_cst</ref></defval>
+        </param>
+        <briefdescription>
+<para>原子获取并添加指针偏移 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要增加的元素数量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>添加前的指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2335" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2335" bodyend="2341"/>
+        <references refid="group___args_forward_functions_1ga57a2cf85645286e20c82caae70cd13dc" compoundref="type__traits_8hpp" startline="3084" endline="3086">neforce::addressof</references>
+        <references refid="group___atomic_operations_1ga802d30a13b4490df6848798d2b5675ed" compoundref="atomic__base_8hpp" startline="1183" endline="1190">neforce::atomic_fetch_add_any</references>
+        <references refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" compoundref="memory__order_8hpp" startline="183">neforce::memory_order_seq_cst</references>
+        <referencedby refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1aa62354791965780979d45d477cf631f3" compoundref="atomic__base_8hpp" startline="2020" endline="2020">operator++</referencedby>
+        <referencedby refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a33f2ec8dd4ddce7ff944019cd68f45ac" compoundref="atomic__base_8hpp" startline="2025" endline="2025">operator++</referencedby>
+        <referencedby refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a2a14ddc6c59e274c7cc3437e4b4f317d" compoundref="atomic__base_8hpp" startline="1998" endline="1998">operator++</referencedby>
+        <referencedby refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a19d81bc68774f89eb91048df9e4146b9" compoundref="atomic__base_8hpp" startline="2003" endline="2003">operator++</referencedby>
+        <referencedby refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a4419ecb75cfdb049ab989e4c7b08bba4" compoundref="atomic__base_8hpp" startline="2043" endline="2043">operator+=</referencedby>
+        <referencedby refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a322fda0c7637d0af3748136d2f0ab916" compoundref="atomic__base_8hpp" startline="2048" endline="2048">operator+=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a7fde22fd2fc25d92695dc3bdf06a099c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" volatile="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T * &gt;::fetch_add</definition>
+        <argsstring>(const ptrdiff_t dest, const memory_order mo=memory_order_seq_cst) volatile noexcept</argsstring>
+        <name>fetch_add</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::fetch_add</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1gab2c4bc5144496796ce8a7feed7b8ad58" kindref="member">ptrdiff_t</ref></type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+          <defval><ref refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" kindref="member">memory_order_seq_cst</ref></defval>
+        </param>
+        <briefdescription>
+<para>volatile版本的原子获取并添加指针偏移 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2346" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2346" bodyend="2352"/>
+        <references refid="group___args_forward_functions_1ga57a2cf85645286e20c82caae70cd13dc" compoundref="type__traits_8hpp" startline="3084" endline="3086">neforce::addressof</references>
+        <references refid="group___atomic_operations_1ga802d30a13b4490df6848798d2b5675ed" compoundref="atomic__base_8hpp" startline="1183" endline="1190">neforce::atomic_fetch_add_any</references>
+        <references refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" compoundref="memory__order_8hpp" startline="183">neforce::memory_order_seq_cst</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a85e1d0b672a46f784440ec60849029f1" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T * &gt;::fetch_sub</definition>
+        <argsstring>(const ptrdiff_t dest, const memory_order mo=memory_order_seq_cst) noexcept</argsstring>
+        <name>fetch_sub</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::fetch_sub</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1gab2c4bc5144496796ce8a7feed7b8ad58" kindref="member">ptrdiff_t</ref></type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+          <defval><ref refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" kindref="member">memory_order_seq_cst</ref></defval>
+        </param>
+        <briefdescription>
+<para>原子获取并减去指针偏移 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要减少的元素数量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>减去前的指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2360" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2360" bodyend="2366"/>
+        <references refid="group___args_forward_functions_1ga57a2cf85645286e20c82caae70cd13dc" compoundref="type__traits_8hpp" startline="3084" endline="3086">neforce::addressof</references>
+        <references refid="group___atomic_operations_1ga2f23f6b3077f1340caea966727f82fac" compoundref="atomic__base_8hpp" startline="1201" endline="1208">neforce::atomic_fetch_sub_any</references>
+        <references refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" compoundref="memory__order_8hpp" startline="183">neforce::memory_order_seq_cst</references>
+        <referencedby refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a70e8f27b4ee3375d72af6a5441882b8f" compoundref="atomic__base_8hpp" startline="2031" endline="2031">operator--</referencedby>
+        <referencedby refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a755fa61b73311d79a235bb9b4a1e22f6" compoundref="atomic__base_8hpp" startline="2036" endline="2036">operator--</referencedby>
+        <referencedby refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a04ad2a6e06060484e2cceeaa34ddebfa" compoundref="atomic__base_8hpp" startline="2009" endline="2009">operator--</referencedby>
+        <referencedby refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a52a1a282667a31b0d9d621655de5f1ed" compoundref="atomic__base_8hpp" startline="2014" endline="2014">operator--</referencedby>
+        <referencedby refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a019ea339de83cc6140b3ef4408a13f96" compoundref="atomic__base_8hpp" startline="2055" endline="2055">operator-=</referencedby>
+        <referencedby refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1ac84cb31c263b14e0519fefc04189b259" compoundref="atomic__base_8hpp" startline="2060" endline="2060">operator-=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a0900b3a9ac3d6bf13bb45cfa1a77cd26" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" volatile="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T * &gt;::fetch_sub</definition>
+        <argsstring>(const ptrdiff_t dest, const memory_order mo=memory_order_seq_cst) volatile noexcept</argsstring>
+        <name>fetch_sub</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::fetch_sub</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1gab2c4bc5144496796ce8a7feed7b8ad58" kindref="member">ptrdiff_t</ref></type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+          <defval><ref refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" kindref="member">memory_order_seq_cst</ref></defval>
+        </param>
+        <briefdescription>
+<para>volatile版本的原子获取并减去指针偏移 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2371" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2371" bodyend="2377"/>
+        <references refid="group___args_forward_functions_1ga57a2cf85645286e20c82caae70cd13dc" compoundref="type__traits_8hpp" startline="3084" endline="3086">neforce::addressof</references>
+        <references refid="group___atomic_operations_1ga2f23f6b3077f1340caea966727f82fac" compoundref="atomic__base_8hpp" startline="1201" endline="1208">neforce::atomic_fetch_sub_any</references>
+        <references refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" compoundref="memory__order_8hpp" startline="183">neforce::memory_order_seq_cst</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_1a9221be07c1f49334547864a89e123896" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T &gt;::operator&amp;=</definition>
+        <argsstring>(value_type value) noexcept</argsstring>
+        <name>operator&amp;=</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::operator&amp;=</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>位与赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要进行与操作的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>与操作后的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1588" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1588" bodyend="1590"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_1ad165b73a365ebbbafb00b93161095546" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T &gt;::operator|=</definition>
+        <argsstring>(value_type value) noexcept</argsstring>
+        <name>operator|=</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::operator|=</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>位或赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要进行或操作的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>或操作后的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1604" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1604" bodyend="1606"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_1adf2e667a11af528dbad0e2037876aad2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T &gt;::operator^=</definition>
+        <argsstring>(value_type value) noexcept</argsstring>
+        <name>operator^=</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::operator^=</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>位异或赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要进行异或操作的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>异或操作后的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1620" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1620" bodyend="1622"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_1a6e0eb66d63303733c772d9e22aa68261" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T &gt;::fetch_and</definition>
+        <argsstring>(value_type value, const memory_order mo=memory_order_seq_cst) noexcept</argsstring>
+        <name>fetch_and</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::fetch_and</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+          <defval><ref refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" kindref="member">memory_order_seq_cst</ref></defval>
+        </param>
+        <briefdescription>
+<para>原子获取并与操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要进行与操作的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>操作前的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1880" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1880" bodyend="1883"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_1a322cdcab905a18a6de6963398e166a24" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T &gt;::fetch_or</definition>
+        <argsstring>(value_type value, const memory_order mo=memory_order_seq_cst) noexcept</argsstring>
+        <name>fetch_or</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::fetch_or</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+          <defval><ref refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" kindref="member">memory_order_seq_cst</ref></defval>
+        </param>
+        <briefdescription>
+<para>原子获取并或操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要进行或操作的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>操作前的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1899" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1899" bodyend="1901"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1atomic__base_1a05de12a7e9c259cccbfec589a65a3bbd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+        <definition>value_type neforce::atomic_base&lt; T &gt;::fetch_xor</definition>
+        <argsstring>(value_type value, const memory_order mo=memory_order_seq_cst) noexcept</argsstring>
+        <name>fetch_xor</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::fetch_xor</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" kindref="member">value_type</ref></type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+          <defval><ref refid="group___memory_order_1ga0f58a89872a7e9d14332b2722c26f037" kindref="member">memory_order_seq_cst</ref></defval>
+        </param>
+        <briefdescription>
+<para>原子获取并异或操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要进行异或操作的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>操作前的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1917" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1917" bodyend="1920"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="structneforce_1_1atomic__base_1a7b210324ea546295fbd4522f7de7fd88" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::atomic_base&lt; T &gt;::align_inner</definition>
+        <argsstring></argsstring>
+        <name>align_inner</name>
+        <qualifiedname>neforce::atomic_base&lt; T * &gt;::align_inner</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1458" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1458" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>指针类型的原子操作特化 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指针指向的类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+提供指针类型的原子操作实现，支持指针算术运算。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>neforce::atomic&lt; T * &gt;</label>
+        <link refid="structneforce_1_1atomic_3_01_t_01_5_01_4"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::atomic_base&lt; T * &gt;</label>
+        <link refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4"/>
+      </node>
+    </inheritancegraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1938" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1938" bodyend="2378"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1atomic__base_1a7b210324ea546295fbd4522f7de7fd88" prot="private" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>align_inner</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a5cf9192fcfe97e41267b01254a71d65f" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>atomic_base</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a44c4fb1c846906683b5dc95eae6ab125" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>atomic_base</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a3c695c77f87277461b065b8ed864461b" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>atomic_base</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1acb9a0602aa124aa6327f76e07835cadb" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>atomic_base</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1ac3b4cb97d9a1101c14ea09dadbc8f529" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>compare_exchange_strong</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1ad7cd9245cf7805eb5e582f6487c3fddd" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>compare_exchange_strong</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a7ce3f1b049f8ee6d86a63c3cc6047344" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>compare_exchange_strong</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a00e42567d7ef9cc1f35be311819031fa" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>compare_exchange_strong</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1afc31182a3c15be5acf11c41a4b0b7bb1" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>compare_exchange_weak</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a997e0296ec4782e6653f621709f625dc" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>compare_exchange_weak</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1aa89f1cd25b419830ed412c39e3c474fd" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>compare_exchange_weak</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1aecf97cd0677b977bea1d783899ed4f49" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>compare_exchange_weak</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a125104fdac588e43347c746d95be8546" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>difference_type</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1aa39f2bf2b93d4e8524f0e082636ae6fb" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>exchange</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a1d6739112da3480f1848e269bc95b58f" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>exchange</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a18d1a7d85fa0e3254ad0d347c21a2a76" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>fetch_add</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a7fde22fd2fc25d92695dc3bdf06a099c" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>fetch_add</name></member>
+      <member refid="structneforce_1_1atomic__base_1a6e0eb66d63303733c772d9e22aa68261" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>fetch_and</name></member>
+      <member refid="structneforce_1_1atomic__base_1a322cdcab905a18a6de6963398e166a24" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>fetch_or</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a85e1d0b672a46f784440ec60849029f1" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>fetch_sub</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a0900b3a9ac3d6bf13bb45cfa1a77cd26" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>fetch_sub</name></member>
+      <member refid="structneforce_1_1atomic__base_1a05de12a7e9c259cccbfec589a65a3bbd" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>fetch_xor</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a4dad8117510b08eed74734edf639aea2" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>is_lock_free</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1ac7f44d1fa3a613dd4069f25a3b9df00d" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>is_lock_free</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a91a1bbb2883b0356b75f161ea4aeb34b" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>load</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a4b0a664bc53cdd050b903b49a3b3dadf" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>load</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1ae3b859ca2079b8d08612fbbcaf3acdc9" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>notify_all</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1af9766e5da696d5ef2c16ff3c34e4a537" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>notify_one</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1acd61407a6b46aa8c537388dc0490b29b" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>operator value_type</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a0b424c8c0096dcea8acdd6c29b5e3e42" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>operator value_type</name></member>
+      <member refid="structneforce_1_1atomic__base_1a9221be07c1f49334547864a89e123896" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>operator&amp;=</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a2a14ddc6c59e274c7cc3437e4b4f317d" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>operator++</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a19d81bc68774f89eb91048df9e4146b9" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>operator++</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1aa62354791965780979d45d477cf631f3" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>operator++</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a33f2ec8dd4ddce7ff944019cd68f45ac" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>operator++</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a4419ecb75cfdb049ab989e4c7b08bba4" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>operator+=</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a322fda0c7637d0af3748136d2f0ab916" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>operator+=</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a04ad2a6e06060484e2cceeaa34ddebfa" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>operator--</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a52a1a282667a31b0d9d621655de5f1ed" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>operator--</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a70e8f27b4ee3375d72af6a5441882b8f" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>operator--</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a755fa61b73311d79a235bb9b4a1e22f6" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>operator--</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a019ea339de83cc6140b3ef4408a13f96" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>operator-=</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1ac84cb31c263b14e0519fefc04189b259" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>operator-=</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a70c1f843e6d86a2216937c1c8bc0534d" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1aac029af7d2f7724ef101bba2bd3c0f2d" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a55e1fe1a5acd7f193003931651490c5f" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a6757b1b6d3f69bfeab81be74f0041725" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a4e2dc933c25cf06ddd1cb4b8b5cbfe6e" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1atomic__base_1adf2e667a11af528dbad0e2037876aad2" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>operator^=</name></member>
+      <member refid="structneforce_1_1atomic__base_1ad165b73a365ebbbafb00b93161095546" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>operator|=</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a6c21eef8fa2ca7c4bafaf131e15c405c" prot="private" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>ptr_</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a0f9f1b062e74db4f2d69f29909bb1554" prot="private" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>real_type_sizes</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1aaa2cdc6b521690619cdd3885316d9070" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>store</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a7bb415ec516d975aa7e810d0c3d226ae" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>store</name></member>
+      <member refid="structneforce_1_1atomic__base_1a492536d20428f74f264fb7ed465e8434" prot="private" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>value_</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a64713c851bfa6aaef274434ebe4e4b27" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>value_type</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1ae69e1954db0e650ed44813e7f4fddc8b" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>wait</name></member>
+      <member refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1ad47a8faa85270d496bf6f838a4935af8" prot="public" virt="non-virtual"><scope>neforce::atomic_base&lt; T * &gt;</scope><name>~atomic_base</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

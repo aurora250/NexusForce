@@ -1,21 +1,21 @@
 var group___async_stream =
 [
-    [ "async_stream", "classasync__stream.html", [
-      [ "~async_stream", "classasync__stream.html#a77ea4f279fa385fe527b8ac032432a5a", null ],
-      [ "async_read", "classasync__stream.html#a31296aee86f5591a179850836e7b9fca", null ],
-      [ "async_read", "classasync__stream.html#a969402529c88b5f6ea5fce03fb89bf4a", null ],
-      [ "async_read", "classasync__stream.html#a4dec67d9232c626b29da1bc831757fd5", null ],
-      [ "async_read", "classasync__stream.html#a8ae4d0e9a1e4196adefdab847faaf6c8", null ],
-      [ "async_read", "classasync__stream.html#a0051d844a8e4a2a79429ba644bec9c32", null ],
-      [ "async_read", "classasync__stream.html#a0a640b341717691f22fae0acf674d235", null ],
-      [ "async_read", "classasync__stream.html#abe6469f417ff23bec1b439151c870998", null ],
-      [ "async_read", "classasync__stream.html#a3a686bf64f378efcd1ac737b3a62282f", null ],
-      [ "async_write", "classasync__stream.html#a5a1a66d6160f864f90225a9bddc7f605", null ],
-      [ "async_write", "classasync__stream.html#af044064a9c39321c16c7496aed30c67f", null ],
-      [ "async_write", "classasync__stream.html#aa6b1889815d02c3e8483252a45139b08", null ],
-      [ "async_write", "classasync__stream.html#abb3e320776014dd8e830433cc903e454", null ],
-      [ "async_write", "classasync__stream.html#af0350479bc553eb7e76dd103d0238859", null ],
-      [ "async_write", "classasync__stream.html#a929ddcabcc0650dd4e6177d3da04e3e1", null ],
-      [ "async_write", "classasync__stream.html#a6325eb7c21abf48337f0d0e0fc389834", null ]
+    [ "neforce::async_stream", "classneforce_1_1async__stream.html", [
+      [ "~async_stream", "classneforce_1_1async__stream.html#a5f85f4f4606e9d26f269ee668daf041c", null ],
+      [ "async_read", "classneforce_1_1async__stream.html#a469997cca6e819b2312d6c87d9a48af1", null ],
+      [ "async_read", "classneforce_1_1async__stream.html#ac2ec44c1f9dda962b027aeaa44047684", null ],
+      [ "async_read", "classneforce_1_1async__stream.html#ab6d9164d88a6c26d6bac7c0c8ad9a994", null ],
+      [ "async_read", "classneforce_1_1async__stream.html#a7f845e8b1a117c2f5033603d007f0c38", null ],
+      [ "async_read", "classneforce_1_1async__stream.html#af363ab413274c2c921e5c85f439fe531", null ],
+      [ "async_read", "classneforce_1_1async__stream.html#af7234d2a618f53a94eefc322dc2396ba", null ],
+      [ "async_read", "classneforce_1_1async__stream.html#aac0411a9c4cfcf3e3acf2db55fe45067", null ],
+      [ "async_read", "classneforce_1_1async__stream.html#a254b55f24e99e42840788a11ee73b5b6", null ],
+      [ "async_write", "classneforce_1_1async__stream.html#ad26516ab34705abca0a29a8489bcb610", null ],
+      [ "async_write", "classneforce_1_1async__stream.html#ab02da40de9fb90b4db5acc4a3efad235", null ],
+      [ "async_write", "classneforce_1_1async__stream.html#af6891cdbbaec583e9c834e53c2858aad", null ],
+      [ "async_write", "classneforce_1_1async__stream.html#a91ccbec10a037c057e0a4441e640f347", null ],
+      [ "async_write", "classneforce_1_1async__stream.html#a624256deadc1e290301e2d69e94cfc21", null ],
+      [ "async_write", "classneforce_1_1async__stream.html#a4c44a6f32907354ef70a018a7d0ea38c", null ],
+      [ "async_write", "classneforce_1_1async__stream.html#aa17076a09efe79ef5b838d79ea74a4c3", null ]
     ] ]
 ];

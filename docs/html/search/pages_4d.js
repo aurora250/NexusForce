@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['扩展特性_0',['GNU 扩展特性',['../group___command_line.html#gnu_extensions',1,'']]]
+  ['弃用列表_0',['弃用列表',['../deprecated.html',1,'']]]
 ];

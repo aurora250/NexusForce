@@ -1,0 +1,652 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1ini__document" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>neforce::ini_document</compoundname>
+    <basecompoundref refid="structneforce_1_1istringify" prot="public" virt="non-virtual">neforce::istringify&lt; ini_document &gt;</basecompoundref>
+    <includes refid="ini__value_8hpp" local="no">ini_value.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1ini__document_1a1af9351ee95396fae806f035419c5148" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref>, <ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1ini__section" kindref="compound">ini_section</ref> &gt; &gt;</type>
+        <definition>unordered_map&lt;string, unique_ptr&lt;ini_section&gt; &gt; neforce::ini_document::sections_</definition>
+        <argsstring></argsstring>
+        <name>sections_</name>
+        <qualifiedname>neforce::ini_document::sections_</qualifiedname>
+        <briefdescription>
+<para>节映射表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="363" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="363" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ini__document_1a2d398ab54d084bc264fa3a43924c6f58" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1ini__section" kindref="compound">ini_section</ref> &gt;</type>
+        <definition>unique_ptr&lt;ini_section&gt; neforce::ini_document::global_section_</definition>
+        <argsstring></argsstring>
+        <name>global_section_</name>
+        <qualifiedname>neforce::ini_document::global_section_</qualifiedname>
+        <briefdescription>
+<para>全局节（无名节） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="364" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="364" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1ini__document_1a1055ad75db2b36300e60db4e04d8519e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::ini_document::ini_document</definition>
+        <argsstring>()</argsstring>
+        <name>ini_document</name>
+        <qualifiedname>neforce::ini_document::ini_document</qualifiedname>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>创建空文档，初始化全局节。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="372" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="372" bodyend="373"/>
+        <references refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" compoundref="unique__ptr_8hpp" startline="973" endline="975">neforce::make_unique</references>
+        <referencedby refid="classneforce_1_1ini__document_1a41058d3be76e573bea961c273d63525e">ini_document</referencedby>
+        <referencedby refid="classneforce_1_1ini__document_1aad44b3f02645a1fce364a35f8aec61e8">operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__document_1a93606d3556ae91d03987d6268ccd2f30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::ini_document::ini_document</definition>
+        <argsstring>(const ini_document &amp;)=delete</argsstring>
+        <name>ini_document</name>
+        <qualifiedname>neforce::ini_document::ini_document</qualifiedname>
+        <param>
+          <type>const ini_document &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="375" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__document_1aba14cbf89428a989163e34030584d8c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1ini__document_1a1055ad75db2b36300e60db4e04d8519e" kindref="member">ini_document</ref> &amp;</type>
+        <definition>ini_document &amp; neforce::ini_document::operator=</definition>
+        <argsstring>(const ini_document &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::ini_document::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1ini__document_1a1055ad75db2b36300e60db4e04d8519e" kindref="member">ini_document</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="376" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__document_1a41058d3be76e573bea961c273d63525e" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::ini_document::ini_document</definition>
+        <argsstring>(ini_document &amp;&amp;other) noexcept=default</argsstring>
+        <name>ini_document</name>
+        <qualifiedname>neforce::ini_document::ini_document</qualifiedname>
+        <param>
+          <type>ini_document &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源文档 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="382" column="5"/>
+        <references refid="classneforce_1_1ini__document_1a1055ad75db2b36300e60db4e04d8519e" compoundref="ini__value_8hpp" startline="372" endline="373">ini_document</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__document_1aad44b3f02645a1fce364a35f8aec61e8" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1ini__document_1a1055ad75db2b36300e60db4e04d8519e" kindref="member">ini_document</ref> &amp;</type>
+        <definition>ini_document &amp; neforce::ini_document::operator=</definition>
+        <argsstring>(ini_document &amp;&amp;other) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::ini_document::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1ini__document_1a1055ad75db2b36300e60db4e04d8519e" kindref="member">ini_document</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源文档 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="389" column="18"/>
+        <references refid="classneforce_1_1ini__document_1a1055ad75db2b36300e60db4e04d8519e" compoundref="ini__value_8hpp" startline="372" endline="373">ini_document</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__document_1add88340bf25341e33468b4cda0da9601" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::ini_document::add_section</definition>
+        <argsstring>(const string &amp;name, unique_ptr&lt; ini_section &gt; section)</argsstring>
+        <name>add_section</name>
+        <qualifiedname>neforce::ini_document::add_section</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1ini__section" kindref="compound">ini_section</ref> &gt;</type>
+          <declname>section</declname>
+        </param>
+        <briefdescription>
+<para>添加节 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>section</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节智能指针</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+如果名称为空，则设置为全局节。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="398" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="398" bodyend="404"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__document_1a5f45a1e8dd57664949501eddfe74840d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="classneforce_1_1ini__section" kindref="compound">ini_section</ref> *</type>
+        <definition>const ini_section * neforce::ini_document::get_section</definition>
+        <argsstring>(const string &amp;name) const</argsstring>
+        <name>get_section</name>
+        <qualifiedname>neforce::ini_document::get_section</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>获取常量节指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>节的常量指针，不存在返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="411" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="411" bodyend="420"/>
+        <referencedby refid="classneforce_1_1ini__document_1ab64ba2450da6eeaa913c6a4a381c1a43" compoundref="ini__value_8hpp" startline="514" endline="517">get_bool</referencedby>
+        <referencedby refid="classneforce_1_1ini__document_1a20980afa3507b23cc960d987b829898c" compoundref="ini__value_8hpp" startline="502" endline="505">get_double</referencedby>
+        <referencedby refid="classneforce_1_1ini__document_1a8d608dc2e06fdfc67ad095623e21c22d" compoundref="ini__value_8hpp" startline="490" endline="493">get_int</referencedby>
+        <referencedby refid="classneforce_1_1ini__document_1a06e9f9316beda6a47c797609d88b9454" compoundref="ini__value_8hpp" startline="477" endline="481">get_string</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__document_1a56982f8c992b832c9f92f2f30abcc961" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1ini__section" kindref="compound">ini_section</ref> *</type>
+        <definition>ini_section * neforce::ini_document::get_section</definition>
+        <argsstring>(const string &amp;name)</argsstring>
+        <name>get_section</name>
+        <qualifiedname>neforce::ini_document::get_section</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>获取节指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>节的指针，不存在返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="427" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="427" bodyend="436"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__document_1a624a28a344001e137b72256fa1ab417a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::ini_document::has_section</definition>
+        <argsstring>(const string &amp;name) const</argsstring>
+        <name>has_section</name>
+        <qualifiedname>neforce::ini_document::has_section</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>检查节是否存在 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否存在 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="443" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="443" bodyend="448"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__document_1a9eed03dd4863b3b081cb49b377ffaf3a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref>, <ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1ini__section" kindref="compound">ini_section</ref> &gt; &gt; &amp;</type>
+        <definition>const unordered_map&lt; string, unique_ptr&lt; ini_section &gt; &gt; &amp; neforce::ini_document::get_sections</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_sections</name>
+        <qualifiedname>neforce::ini_document::get_sections</qualifiedname>
+        <briefdescription>
+<para>获取所有节的常量引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>节映射表的常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="454" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="454" bodyend="456"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__document_1a418ab23a2c2cd7d5b043be799a105eeb" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classneforce_1_1ini__section" kindref="compound">ini_section</ref> *</type>
+        <definition>const ini_section * neforce::ini_document::get_global_section</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_global_section</name>
+        <qualifiedname>neforce::ini_document::get_global_section</qualifiedname>
+        <briefdescription>
+<para>获取全局节的常量指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>全局节的常量指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="462" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="462" bodyend="462"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__document_1a6ac9bbb797f87e9ad993a167b5b622df" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1ini__section" kindref="compound">ini_section</ref> *</type>
+        <definition>ini_section * neforce::ini_document::get_global_section</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>get_global_section</name>
+        <qualifiedname>neforce::ini_document::get_global_section</qualifiedname>
+        <briefdescription>
+<para>获取全局节的指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>全局节的指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="468" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="468" bodyend="468"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__document_1a06e9f9316beda6a47c797609d88b9454" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::ini_document::get_string</definition>
+        <argsstring>(const string &amp;section, const string &amp;key, const string &amp;default_value=&quot;&quot;) const</argsstring>
+        <name>get_string</name>
+        <qualifiedname>neforce::ini_document::get_string</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>section</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>default_value</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+<para>获取字符串值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>section</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>属性键名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>default_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>默认值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定属性的字符串值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="477" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="477" bodyend="481"/>
+        <references refid="classneforce_1_1ini__document_1a5f45a1e8dd57664949501eddfe74840d" compoundref="ini__value_8hpp" startline="411" endline="420">get_section</references>
+        <references refid="classneforce_1_1ini__section_1a0ae3849e54457d5d9dc5e986855cdf66" compoundref="ini__value_8hpp" startline="314" endline="317">neforce::ini_section::get_string</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__document_1a8d608dc2e06fdfc67ad095623e21c22d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int neforce::ini_document::get_int</definition>
+        <argsstring>(const string &amp;section, const string &amp;key, int default_value=0) const</argsstring>
+        <name>get_int</name>
+        <qualifiedname>neforce::ini_document::get_int</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>section</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>default_value</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>获取整数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>section</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>属性键名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>default_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>默认值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定属性的整数值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="490" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="490" bodyend="493"/>
+        <references refid="classneforce_1_1ini__section_1ade6e3d47999c2e341479c715f09b29ec" compoundref="ini__value_8hpp" startline="325" endline="328">neforce::ini_section::get_int</references>
+        <references refid="classneforce_1_1ini__document_1a5f45a1e8dd57664949501eddfe74840d" compoundref="ini__value_8hpp" startline="411" endline="420">get_section</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__document_1a20980afa3507b23cc960d987b829898c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double neforce::ini_document::get_double</definition>
+        <argsstring>(const string &amp;section, const string &amp;key, double default_value=0.0) const</argsstring>
+        <name>get_double</name>
+        <qualifiedname>neforce::ini_document::get_double</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>section</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>default_value</declname>
+          <defval>0.0</defval>
+        </param>
+        <briefdescription>
+<para>获取双精度浮点值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>section</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>属性键名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>default_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>默认值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定属性的双精度浮点值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="502" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="502" bodyend="505"/>
+        <references refid="classneforce_1_1ini__section_1af3f69f55c2b7386bb61ae63c35917156" compoundref="ini__value_8hpp" startline="336" endline="339">neforce::ini_section::get_double</references>
+        <references refid="classneforce_1_1ini__document_1a5f45a1e8dd57664949501eddfe74840d" compoundref="ini__value_8hpp" startline="411" endline="420">get_section</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__document_1ab64ba2450da6eeaa913c6a4a381c1a43" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::ini_document::get_bool</definition>
+        <argsstring>(const string &amp;section, const string &amp;key, bool default_value=false) const</argsstring>
+        <name>get_bool</name>
+        <qualifiedname>neforce::ini_document::get_bool</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>section</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>default_value</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>获取布尔值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>section</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>属性键名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>default_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>默认值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定属性的布尔值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="514" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="514" bodyend="517"/>
+        <references refid="classneforce_1_1ini__section_1aa462120f74bf4cf5b81b540712ce99ec" compoundref="ini__value_8hpp" startline="347" endline="350">neforce::ini_section::get_bool</references>
+        <references refid="classneforce_1_1ini__document_1a5f45a1e8dd57664949501eddfe74840d" compoundref="ini__value_8hpp" startline="411" endline="420">get_section</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__document_1a558262b3e264ddf6365cd5a6491049e4" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::ini_document::to_string</definition>
+        <argsstring>() const</argsstring>
+        <name>to_string</name>
+        <qualifiedname>neforce::ini_document::to_string</qualifiedname>
+        <briefdescription>
+<para>转换为字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>整个文档的字符串表示 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="523" column="13"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>INI文档类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>管理整个INI配置文件，包含多个节(section)和一个全局节。 提供节的增删改查操作和类型安全的属性访问接口。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::ini_document</label>
+        <link refid="classneforce_1_1ini__document"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::istringify&lt; ini_document &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::ini_document</label>
+        <link refid="classneforce_1_1ini__document"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::istringify&lt; ini_document &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="361" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="361" bodyend="524"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1ini__document_1add88340bf25341e33468b4cda0da9601" prot="public" virt="non-virtual"><scope>neforce::ini_document</scope><name>add_section</name></member>
+      <member refid="classneforce_1_1ini__document_1ab64ba2450da6eeaa913c6a4a381c1a43" prot="public" virt="non-virtual"><scope>neforce::ini_document</scope><name>get_bool</name></member>
+      <member refid="classneforce_1_1ini__document_1a20980afa3507b23cc960d987b829898c" prot="public" virt="non-virtual"><scope>neforce::ini_document</scope><name>get_double</name></member>
+      <member refid="classneforce_1_1ini__document_1a418ab23a2c2cd7d5b043be799a105eeb" prot="public" virt="non-virtual"><scope>neforce::ini_document</scope><name>get_global_section</name></member>
+      <member refid="classneforce_1_1ini__document_1a6ac9bbb797f87e9ad993a167b5b622df" prot="public" virt="non-virtual"><scope>neforce::ini_document</scope><name>get_global_section</name></member>
+      <member refid="classneforce_1_1ini__document_1a8d608dc2e06fdfc67ad095623e21c22d" prot="public" virt="non-virtual"><scope>neforce::ini_document</scope><name>get_int</name></member>
+      <member refid="classneforce_1_1ini__document_1a5f45a1e8dd57664949501eddfe74840d" prot="public" virt="non-virtual"><scope>neforce::ini_document</scope><name>get_section</name></member>
+      <member refid="classneforce_1_1ini__document_1a56982f8c992b832c9f92f2f30abcc961" prot="public" virt="non-virtual"><scope>neforce::ini_document</scope><name>get_section</name></member>
+      <member refid="classneforce_1_1ini__document_1a9eed03dd4863b3b081cb49b377ffaf3a" prot="public" virt="non-virtual"><scope>neforce::ini_document</scope><name>get_sections</name></member>
+      <member refid="classneforce_1_1ini__document_1a06e9f9316beda6a47c797609d88b9454" prot="public" virt="non-virtual"><scope>neforce::ini_document</scope><name>get_string</name></member>
+      <member refid="classneforce_1_1ini__document_1a2d398ab54d084bc264fa3a43924c6f58" prot="private" virt="non-virtual"><scope>neforce::ini_document</scope><name>global_section_</name></member>
+      <member refid="classneforce_1_1ini__document_1a624a28a344001e137b72256fa1ab417a" prot="public" virt="non-virtual"><scope>neforce::ini_document</scope><name>has_section</name></member>
+      <member refid="classneforce_1_1ini__document_1a1055ad75db2b36300e60db4e04d8519e" prot="public" virt="non-virtual"><scope>neforce::ini_document</scope><name>ini_document</name></member>
+      <member refid="classneforce_1_1ini__document_1a93606d3556ae91d03987d6268ccd2f30" prot="public" virt="non-virtual"><scope>neforce::ini_document</scope><name>ini_document</name></member>
+      <member refid="classneforce_1_1ini__document_1a41058d3be76e573bea961c273d63525e" prot="public" virt="non-virtual"><scope>neforce::ini_document</scope><name>ini_document</name></member>
+      <member refid="classneforce_1_1ini__document_1aba14cbf89428a989163e34030584d8c3" prot="public" virt="non-virtual"><scope>neforce::ini_document</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1ini__document_1aad44b3f02645a1fce364a35f8aec61e8" prot="public" virt="non-virtual"><scope>neforce::ini_document</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1ini__document_1a1af9351ee95396fae806f035419c5148" prot="private" virt="non-virtual"><scope>neforce::ini_document</scope><name>sections_</name></member>
+      <member refid="classneforce_1_1ini__document_1a558262b3e264ddf6365cd5a6491049e4" prot="public" virt="non-virtual"><scope>neforce::ini_document</scope><name>to_string</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

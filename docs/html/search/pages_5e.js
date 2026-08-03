@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['格式规范_0',['格式规范',['../group___date_time.html#format_specifications',1,'']]]
+  ['标准合规_0',['📡 标准合规',['../index.html#autotoc_md8',1,'']]]
 ];

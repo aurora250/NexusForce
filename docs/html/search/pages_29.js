@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['十六进制表示_0',['十六进制表示',['../group___color.html#hex_format',1,'']]]
+  ['加密与安全_20encrypt_0',['🔐 加密与安全 (Encrypt)',['../index.html#autotoc_md20',1,'']]]
 ];

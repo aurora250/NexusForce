@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1smtp__exception" kind="struct" language="C++" prot="public" final="yes">
+    <compoundname>neforce::smtp_exception</compoundname>
+    <basecompoundref refid="structneforce_1_1network__exception" prot="public" virt="non-virtual">neforce::network_exception</basecompoundref>
+    <includes refid="smtp__socket_8hpp" local="no">smtp_socket.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1smtp__exception_1a6d8dfe35b8f3f3e1dca270a7efbb7099" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::smtp_exception::smtp_exception</definition>
+        <argsstring>(const char *info=&quot;SMTP Operation Failed.&quot;, const error_code code=last_error()) noexcept</argsstring>
+        <name>smtp_exception</name>
+        <qualifiedname>neforce::smtp_exception::smtp_exception</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>info</declname>
+          <defval>&quot;SMTP Operation Failed.&quot;</defval>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref></type>
+          <declname>code</declname>
+          <defval><ref refid="group___error_code_1ga7da0a00b538fca01dcfea41a3feb8321" kindref="member">last_error</ref>()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="31" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" bodystart="31" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1smtp__exception_1a8a9e7a30dd3369743dbd1619ac086ec0" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::smtp_exception::smtp_exception</definition>
+        <argsstring>(const exception &amp;e)</argsstring>
+        <name>smtp_exception</name>
+        <qualifiedname>neforce::smtp_exception::smtp_exception</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1exception" kindref="compound">exception</ref> &amp;</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="35" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" bodystart="35" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1smtp__exception_1ae00ad2ed7f40189d098e1bc2a5bea63c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::smtp_exception::~smtp_exception</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~smtp_exception</name>
+        <qualifiedname>neforce::smtp_exception::~smtp_exception</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="38" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1smtp__exception_1aa7f5b93362cc985672b7b359719e3c02" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>const char *</type>
+        <definition>const char * neforce::smtp_exception::type</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>type</name>
+        <qualifiedname>neforce::smtp_exception::type</qualifiedname>
+        <reimplements refid="structneforce_1_1network__exception_1adaa452d850f60ddb05ac7ccaa779894c">type</reimplements>
+        <briefdescription>
+<para>获取异常类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>异常类型字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="40" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" bodystart="40" bodyend="40"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>SMTP操作异常类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>SMTP协议操作失败时抛出的异常。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>neforce::exception</label>
+        <link refid="structneforce_1_1exception"/>
+      </node>
+      <node id="2">
+        <label>neforce::network_exception</label>
+        <link refid="structneforce_1_1network__exception"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::smtp_exception</label>
+        <link refid="structneforce_1_1smtp__exception"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::system_exception</label>
+        <link refid="structneforce_1_1system__exception"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="5">
+        <label>neforce::error_code</label>
+        <link refid="classneforce_1_1error__code"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::exception</label>
+        <link refid="structneforce_1_1exception"/>
+      </node>
+      <node id="6">
+        <label>neforce::icommon&lt; error_code &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>neforce::icomparable&lt; error_code &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="8">
+        <label>neforce::ihashable&lt; error_code &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="2">
+        <label>neforce::network_exception</label>
+        <link refid="structneforce_1_1network__exception"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::smtp_exception</label>
+        <link refid="structneforce_1_1smtp__exception"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::system_exception</label>
+        <link refid="structneforce_1_1system__exception"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>code_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="30" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" bodystart="30" bodyend="41"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1system__exception_1ada8397813b9f1f832a2c4556b41084ff" prot="public" virt="virtual"><scope>neforce::smtp_exception</scope><name>code</name></member>
+      <member refid="structneforce_1_1system__exception_1af2ce9019b46965c6bcd065f0efae0406" prot="protected" virt="non-virtual"><scope>neforce::smtp_exception</scope><name>code_</name></member>
+      <member refid="structneforce_1_1exception_1ae64bcc0873cb85a3b913e43b523ac45c" prot="public" virt="non-virtual"><scope>neforce::smtp_exception</scope><name>exception</name></member>
+      <member refid="structneforce_1_1exception_1a9ae6ab2dc5699adfc63ec7571e87ec94" prot="public" virt="non-virtual"><scope>neforce::smtp_exception</scope><name>exception</name></member>
+      <member refid="structneforce_1_1exception_1a295286b9d2ce7d9338815964b564e289" prot="public" virt="non-virtual"><scope>neforce::smtp_exception</scope><name>exception</name></member>
+      <member refid="structneforce_1_1exception_1ae2992fe5862a76e5fae94c9290aca38e" prot="public" virt="non-virtual"><scope>neforce::smtp_exception</scope><name>exception</name></member>
+      <member refid="structneforce_1_1network__exception_1a89e1d9a2788deb1e23f053d698b7f075" prot="public" virt="non-virtual"><scope>neforce::smtp_exception</scope><name>network_exception</name></member>
+      <member refid="structneforce_1_1network__exception_1a7591a5dbcf43452127c1a892fa412725" prot="public" virt="non-virtual"><scope>neforce::smtp_exception</scope><name>network_exception</name></member>
+      <member refid="structneforce_1_1network__exception_1ad72094cf393509c6e7b407334c533384" prot="public" virt="non-virtual"><scope>neforce::smtp_exception</scope><name>network_exception</name></member>
+      <member refid="structneforce_1_1exception_1a159169892770b6020d5ab0bcbf6066e5" prot="public" virt="non-virtual"><scope>neforce::smtp_exception</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1exception_1a9e4ddd8f9b01a26777cff21e282511a5" prot="public" virt="non-virtual"><scope>neforce::smtp_exception</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1smtp__exception_1a6d8dfe35b8f3f3e1dca270a7efbb7099" prot="public" virt="non-virtual"><scope>neforce::smtp_exception</scope><name>smtp_exception</name></member>
+      <member refid="structneforce_1_1smtp__exception_1a8a9e7a30dd3369743dbd1619ac086ec0" prot="public" virt="non-virtual"><scope>neforce::smtp_exception</scope><name>smtp_exception</name></member>
+      <member refid="structneforce_1_1system__exception_1a500e1d408cd16e8086ad3b2ace9be198" prot="public" virt="non-virtual"><scope>neforce::smtp_exception</scope><name>system_exception</name></member>
+      <member refid="structneforce_1_1system__exception_1a291b38afbef06d3012c734d098d92816" prot="public" virt="non-virtual"><scope>neforce::smtp_exception</scope><name>system_exception</name></member>
+      <member refid="structneforce_1_1system__exception_1a18f794f91a1b3310bc2aa6a38c2dac59" prot="public" virt="non-virtual"><scope>neforce::smtp_exception</scope><name>system_exception</name></member>
+      <member refid="structneforce_1_1smtp__exception_1aa7f5b93362cc985672b7b359719e3c02" prot="public" virt="virtual"><scope>neforce::smtp_exception</scope><name>type</name></member>
+      <member refid="structneforce_1_1exception_1a4c6dcdeed9716bc2d4eed8d28a9a6d14" prot="public" virt="virtual"><scope>neforce::smtp_exception</scope><name>what</name></member>
+      <member refid="structneforce_1_1exception_1aaa0545c19e5f71dd3da3ef74e19c190e" prot="public" virt="virtual"><scope>neforce::smtp_exception</scope><name>~exception</name></member>
+      <member refid="structneforce_1_1network__exception_1a9f5acd8fe79897090ac74c1892b59650" prot="public" virt="non-virtual"><scope>neforce::smtp_exception</scope><name>~network_exception</name></member>
+      <member refid="structneforce_1_1smtp__exception_1ae00ad2ed7f40189d098e1bc2a5bea63c" prot="public" virt="non-virtual"><scope>neforce::smtp_exception</scope><name>~smtp_exception</name></member>
+      <member refid="structneforce_1_1system__exception_1ac40c2ccd9ed14c2a4446ed96fec6e61f" prot="public" virt="non-virtual"><scope>neforce::smtp_exception</scope><name>~system_exception</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

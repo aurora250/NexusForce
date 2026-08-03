@@ -1,0 +1,314 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1http_1_1http__filter" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>neforce::http::http_filter</compoundname>
+    <derivedcompoundref refid="classneforce_1_1http_1_1async__filter" prot="public" virt="non-virtual">neforce::http::async_filter</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1http_1_1authentication__filter" prot="public" virt="non-virtual">neforce::http::authentication_filter</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1http_1_1cache__filter" prot="public" virt="non-virtual">neforce::http::cache_filter</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1http_1_1compress__filter" prot="public" virt="non-virtual">neforce::http::compress_filter</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1http_1_1cors__filter" prot="public" virt="non-virtual">neforce::http::cors_filter</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1http_1_1csrf__filter" prot="public" virt="non-virtual">neforce::http::csrf_filter</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1http_1_1health__check__filter" prot="public" virt="non-virtual">neforce::http::health_check_filter</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1http_1_1logging__filter" prot="public" virt="non-virtual">neforce::http::logging_filter</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1http_1_1reverse__proxy__filter" prot="public" virt="non-virtual">neforce::http::reverse_proxy_filter</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1http_1_1security__headers__filter" prot="public" virt="non-virtual">neforce::http::security_headers_filter</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1http_1_1static__file__filter" prot="public" virt="non-virtual">neforce::http::static_file_filter</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1http_1_1token__bucket__filter" prot="public" virt="non-virtual">neforce::http::token_bucket_filter</derivedcompoundref>
+    <includes refid="http__filter_8hpp" local="no">http_filter.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__filter_1a157ba2513278a823db4ea1b36be341f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual neforce::http::http_filter::~http_filter</definition>
+        <argsstring>()=default</argsstring>
+        <name>~http_filter</name>
+        <qualifiedname>neforce::http::http_filter::~http_filter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="50" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__filter_1a354b28748f728effc3a651e7c9fa96a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void neforce::http::http_filter::do_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response)=0</argsstring>
+        <name>do_filter</name>
+        <qualifiedname>neforce::http::http_filter::do_filter</qualifiedname>
+        <reimplementedby refid="classneforce_1_1http_1_1authentication__filter_1af6a12fc2b8cf6c3df8849ea5707f8ef4">do_filter</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1cache__filter_1a0b264122ac69358e5a4dfd2626c6225b">do_filter</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1compress__filter_1a33e575cfebb2a74762449e3681aba837">do_filter</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1cors__filter_1af7d390ddae3e85bb40c9f67de563de60">do_filter</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1csrf__filter_1a2faa52fd315a4f73b688052d8981dc39">do_filter</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1health__check__filter_1ae14477ed30a1b1ceadf15a77cd0609d7">do_filter</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1logging__filter_1a90efe632926a72e39716647618c963a4">do_filter</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1reverse__proxy__filter_1a502e18c3efb6d195151e173bead14999">do_filter</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1security__headers__filter_1a0438ef0b46932c0818fdd1619e2c9914">do_filter</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1static__file__filter_1afc9790e0ed0eaedecf236a6bf0809dd1">do_filter</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1token__bucket__filter_1afd61d8ee1ca12a03482d30085e277c6b">do_filter</reimplementedby>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>核心过滤方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+执行实际的过滤逻辑。通常由具体处理器实现， 中间件过滤器可能不实现此方法。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="60" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__filter_1a66c5af31a812075314a85ef38b9d55eb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool neforce::http::http_filter::pre_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response)</argsstring>
+        <name>pre_filter</name>
+        <qualifiedname>neforce::http::http_filter::pre_filter</qualifiedname>
+        <reimplementedby refid="classneforce_1_1http_1_1authentication__filter_1ac6e521ad936699a60e3b5333e16aedc5">pre_filter</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1cache__filter_1ab0e3b98a63ad5e0cad138398c310afda">pre_filter</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1cors__filter_1a83c89f73b4c43bb77d71d06b372ff798">pre_filter</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1csrf__filter_1aed31e7b25c76eb609f53c9b5fcd03197">pre_filter</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1health__check__filter_1a7c92b5708bf5dd37e61818dd7b1e5085">pre_filter</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1logging__filter_1a745d565188d3103a21fe69a3a7f14521">pre_filter</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1reverse__proxy__filter_1a22ccb6edcd2dbf3a3046df128e9ce811">pre_filter</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1security__headers__filter_1afbdf4a5c5f2b19b25c732eee1908b254">pre_filter</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1static__file__filter_1a2adcaac9d4b26d8799c34dc87e25ae74">pre_filter</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1token__bucket__filter_1af376dbb2bb29252c039cb5193cd184fc">pre_filter</reimplementedby>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>预处理方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>返回false表示中断后续处理</para>
+</simplesect>
+在请求处理前调用，可以检查请求、修改请求或提前返回响应。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="70" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="70" bodyend="70"/>
+        <referencedby refid="classneforce_1_1http_1_1async__filter_1a0720e78d3018aadf2e65bc65e1d2fa21" compoundref="async__filter_8hpp" startline="48" endline="55">neforce::http::async_filter::pre_filter_async</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__filter_1a14ac82a85eee7e20c9d912f97b50535f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void neforce::http::http_filter::post_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response)</argsstring>
+        <name>post_filter</name>
+        <qualifiedname>neforce::http::http_filter::post_filter</qualifiedname>
+        <reimplementedby refid="classneforce_1_1http_1_1cache__filter_1acd11a0f59edc9363567ee7e69bf19d86">post_filter</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1compress__filter_1ab7578d6060c49b8e3d0be2031efebd39">post_filter</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1logging__filter_1a383c0fc538d42202d69c283bc473dab4">post_filter</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1security__headers__filter_1a97ec096cd0884930c04fba42fb7b1db6">post_filter</reimplementedby>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>后处理方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+在响应发送前调用，可以修改响应头或正文。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="79" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="79" bodyend="79"/>
+        <referencedby refid="classneforce_1_1http_1_1async__filter_1a70b9cd8f4d576f9345208e4b1bc9ced2" compoundref="async__filter_8hpp" startline="66" endline="70">neforce::http::async_filter::post_filter_async</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__filter_1a16dc9ccb76e7dccf41f4ae732ea01afe" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>virtual string neforce::http::http_filter::name</definition>
+        <argsstring>() const</argsstring>
+        <name>name</name>
+        <qualifiedname>neforce::http::http_filter::name</qualifiedname>
+        <reimplementedby refid="classneforce_1_1http_1_1authentication__filter_1a8e723b63ec07b1f13d5579e71ed6c340">name</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1cache__filter_1aa74ab3abd62f7446cd8a1e06f80fe629">name</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1compress__filter_1a33408713076b98491edeb80afddc48cc">name</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1cors__filter_1a0c871b4f441b888f659e145183bcbf5c">name</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1csrf__filter_1ae7ea5a3eab8b806f554d003c61d09362">name</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1health__check__filter_1aa05b3ca933da33749399482227e985e6">name</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1logging__filter_1a0cc7bee4ac1df8842f8b2933a330e959">name</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1reverse__proxy__filter_1a2616fd75d1b24dc4115e39ed4b5e5c5c">name</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1security__headers__filter_1a1b8406e3d1c557036efb884cfc399c16">name</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1static__file__filter_1a6e9d5af41a460c6f8cfaeeef08ca7b6b">name</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1token__bucket__filter_1a152efaaa932a4ce148108d2965dd00c7">name</reimplementedby>
+        <briefdescription>
+<para>获取过滤器名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>过滤器名称 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="85" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="85" bodyend="85"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>HTTP过滤器基类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>所有HTTP过滤器的抽象基类，定义了过滤器的生命周期方法。</para>
+<para>过滤器生命周期：<orderedlist>
+<listitem><para>pre_filter：请求处理前调用</para>
+</listitem><listitem><para>do_filter：实际处理</para>
+</listitem><listitem><para>post_filter：响应发送前调用 </para>
+</listitem></orderedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>neforce::http::async_filter</label>
+        <link refid="classneforce_1_1http_1_1async__filter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::http::authentication_filter</label>
+        <link refid="classneforce_1_1http_1_1authentication__filter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::http::cache_filter</label>
+        <link refid="classneforce_1_1http_1_1cache__filter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::http::compress_filter</label>
+        <link refid="classneforce_1_1http_1_1compress__filter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>neforce::http::cors_filter</label>
+        <link refid="classneforce_1_1http_1_1cors__filter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>neforce::http::csrf_filter</label>
+        <link refid="classneforce_1_1http_1_1csrf__filter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>neforce::http::health_check_filter</label>
+        <link refid="classneforce_1_1http_1_1health__check__filter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::http::http_filter</label>
+        <link refid="classneforce_1_1http_1_1http__filter"/>
+      </node>
+      <node id="9">
+        <label>neforce::http::logging_filter</label>
+        <link refid="classneforce_1_1http_1_1logging__filter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>neforce::http::reverse_proxy_filter</label>
+        <link refid="classneforce_1_1http_1_1reverse__proxy__filter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>neforce::http::security_headers_filter</label>
+        <link refid="classneforce_1_1http_1_1security__headers__filter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>neforce::http::static_file_filter</label>
+        <link refid="classneforce_1_1http_1_1static__file__filter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>neforce::http::token_bucket_filter</label>
+        <link refid="classneforce_1_1http_1_1token__bucket__filter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="48" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="48" bodyend="86"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1http_1_1http__filter_1a354b28748f728effc3a651e7c9fa96a6" prot="public" virt="pure-virtual"><scope>neforce::http::http_filter</scope><name>do_filter</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter_1a16dc9ccb76e7dccf41f4ae732ea01afe" prot="public" virt="virtual"><scope>neforce::http::http_filter</scope><name>name</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter_1a14ac82a85eee7e20c9d912f97b50535f" prot="public" virt="virtual"><scope>neforce::http::http_filter</scope><name>post_filter</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter_1a66c5af31a812075314a85ef38b9d55eb" prot="public" virt="virtual"><scope>neforce::http::http_filter</scope><name>pre_filter</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter_1a157ba2513278a823db4ea1b36be341f0" prot="public" virt="virtual"><scope>neforce::http::http_filter</scope><name>~http_filter</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

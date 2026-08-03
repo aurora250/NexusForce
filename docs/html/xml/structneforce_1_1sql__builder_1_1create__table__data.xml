@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1sql__builder_1_1create__table__data" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::sql_builder::create_table_data</compoundname>
+    <includes refid="sql__builder_8hpp" local="no">sql_builder.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structneforce_1_1sql__builder_1_1create__table__data_1ab4ecf3934742679677a1d6ceedffa034" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1sql__builder_1_1column__definition" kindref="compound">column_definition</ref> &gt;</type>
+        <definition>vector&lt;column_definition&gt; neforce::sql_builder::create_table_data::columns</definition>
+        <argsstring></argsstring>
+        <name>columns</name>
+        <qualifiedname>neforce::sql_builder::create_table_data::columns</qualifiedname>
+        <briefdescription>
+<para>列定义列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="234" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" bodystart="234" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1sql__builder_1_1create__table__data_1a4629840e319a6940d0601f5d42ad955f" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt;</type>
+        <definition>vector&lt;string&gt; neforce::sql_builder::create_table_data::table_constraints</definition>
+        <argsstring></argsstring>
+        <name>table_constraints</name>
+        <qualifiedname>neforce::sql_builder::create_table_data::table_constraints</qualifiedname>
+        <briefdescription>
+<para>表级约束（预组装的SQL子句） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="235" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" bodystart="235" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1sql__builder_1_1create__table__data_1a3ae14bfbd2b9b422e77d85ba43c9ff99" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::sql_builder::create_table_data::if_not_exists</definition>
+        <argsstring></argsstring>
+        <name>if_not_exists</name>
+        <qualifiedname>neforce::sql_builder::create_table_data::if_not_exists</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否使用IF NOT EXISTS </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="236" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" bodystart="236" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1sql__builder_1_1create__table__data_1a0e50ce4743e5b241f3d7b8d1ccd355a9" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::sql_builder::create_table_data::temporary</definition>
+        <argsstring></argsstring>
+        <name>temporary</name>
+        <qualifiedname>neforce::sql_builder::create_table_data::temporary</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否创建临时表（TEMP TABLE） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="237" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" bodystart="237" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>CREATE TABLE语句的数据结构 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>neforce::icollector&lt; T &gt;</label>
+        <link refid="structneforce_1_1icollector"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="1">
+        <label>neforce::sql_builder::create_table_data</label>
+        <link refid="structneforce_1_1sql__builder_1_1create__table__data"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>columns</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>table_constraints</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::vector&lt; neforce::basic_string&lt; char &gt; &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+      </node>
+      <node id="2">
+        <label>neforce::vector&lt; neforce::sql_builder::column_definition &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="233" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" bodystart="233" bodyend="238"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1sql__builder_1_1create__table__data_1ab4ecf3934742679677a1d6ceedffa034" prot="public" virt="non-virtual"><scope>neforce::sql_builder::create_table_data</scope><name>columns</name></member>
+      <member refid="structneforce_1_1sql__builder_1_1create__table__data_1a3ae14bfbd2b9b422e77d85ba43c9ff99" prot="public" virt="non-virtual"><scope>neforce::sql_builder::create_table_data</scope><name>if_not_exists</name></member>
+      <member refid="structneforce_1_1sql__builder_1_1create__table__data_1a4629840e319a6940d0601f5d42ad955f" prot="public" virt="non-virtual"><scope>neforce::sql_builder::create_table_data</scope><name>table_constraints</name></member>
+      <member refid="structneforce_1_1sql__builder_1_1create__table__data_1a0e50ce4743e5b241f3d7b8d1ccd355a9" prot="public" virt="non-virtual"><scope>neforce::sql_builder::create_table_data</scope><name>temporary</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

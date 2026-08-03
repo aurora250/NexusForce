@@ -3,21 +3,22 @@
   <compounddef id="group___type_attribute_operations" kind="group">
     <compoundname>TypeAttributeOperations</compoundname>
     <title>类型属性操作</title>
-    <innerclass refid="structdecay" prot="public">decay</innerclass>
-    <innerclass refid="structcommon__type" prot="public">common_type</innerclass>
-    <innerclass refid="structcommon__reference" prot="public">common_reference</innerclass>
-    <innerclass refid="structis__specialization" prot="public">is_specialization</innerclass>
+    <innerclass refid="structneforce_1_1decay" prot="public">neforce::decay</innerclass>
+    <innerclass refid="structneforce_1_1common__type" prot="public">neforce::common_type</innerclass>
+    <innerclass refid="structneforce_1_1common__reference" prot="public">neforce::common_reference</innerclass>
+    <innerclass refid="structneforce_1_1is__specialization" prot="public">neforce::is_specialization</innerclass>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" prot="public" static="no">
+      <memberdef kind="typedef" id="group___type_attribute_operations_1ga63500a8dd0f79ce1c721aebb8023ce89" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>typename <ref refid="structdecay" kindref="compound">decay</ref>&lt; T &gt;::type</type>
-        <definition>using decay_t = typename decay&lt;T&gt;::type</definition>
+        <type>typename decay&lt; T &gt;::type</type>
+        <definition>using neforce::decay_t = typename decay&lt;T&gt;::type</definition>
         <argsstring></argsstring>
         <name>decay_t</name>
+        <qualifiedname>neforce::decay_t</qualifiedname>
         <briefdescription>
 <para>decay的便捷别名 </para>
         </briefdescription>
@@ -27,7 +28,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3574" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3574" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___type_attribute_operations_1ga999daadde7e6033d617ad91266fcfd7c" prot="public" static="no">
+      <memberdef kind="typedef" id="group___type_attribute_operations_1gaf50841fed5d67529a8385b66b8965882" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename Default</type>
@@ -44,9 +45,10 @@
           </param>
         </templateparamlist>
         <type>inner::__detector&lt; Default, void, Op, Args... &gt;</type>
-        <definition>using detected_or = inner::__detector&lt;Default, void, Op, Args...&gt;</definition>
+        <definition>using neforce::detected_or = inner::__detector&lt;Default, void, Op, Args...&gt;</definition>
         <argsstring></argsstring>
         <name>detected_or</name>
+        <qualifiedname>neforce::detected_or</qualifiedname>
         <briefdescription>
 <para>检测Op&lt;Args...&gt;是否有效，如果无效则使用Default类型 </para>
         </briefdescription>
@@ -82,7 +84,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3600" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3600" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___type_attribute_operations_1ga80f94c5a0b73ffc291247f406ee7e3b2" prot="public" static="no">
+      <memberdef kind="typedef" id="group___type_attribute_operations_1ga0c33d60739005f536e10c266ceb794cf" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename Default</type>
@@ -98,10 +100,11 @@
             <defname>Args</defname>
           </param>
         </templateparamlist>
-        <type>typename <ref refid="group___type_attribute_operations_1ga999daadde7e6033d617ad91266fcfd7c" kindref="member">detected_or</ref>&lt; Default, Op, Args... &gt;::type</type>
-        <definition>using detected_or_t = typename detected_or&lt;Default, Op, Args...&gt;::type</definition>
+        <type>typename detected_or&lt; Default, Op, Args... &gt;::type</type>
+        <definition>using neforce::detected_or_t = typename detected_or&lt;Default, Op, Args...&gt;::type</definition>
         <argsstring></argsstring>
         <name>detected_or_t</name>
+        <qualifiedname>neforce::detected_or_t</qualifiedname>
         <briefdescription>
 <para>detected_or的便捷别名，返回检测到的类型或默认类型 </para>
         </briefdescription>
@@ -111,7 +114,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3607" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3607" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___type_attribute_operations_1ga6f7624c2711c293f19f15c71febeaeb0" prot="public" static="no">
+      <memberdef kind="typedef" id="group___type_attribute_operations_1ga4288c098c2fc343dee442191b3b2ba15" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename T1</type>
@@ -120,10 +123,11 @@
             <type>typename T2</type>
           </param>
         </templateparamlist>
-        <type>decltype(true ? _NEFORCE <ref refid="group___declval_tools_1ga7c6502597045c02b014ec72343367f5c" kindref="member">declval</ref>&lt; T1 &gt;() :_NEFORCE <ref refid="group___declval_tools_1ga7c6502597045c02b014ec72343367f5c" kindref="member">declval</ref>&lt; T2 &gt;())</type>
-        <definition>using common_ternary_operator_t = decltype(true ? _NEFORCE declval&lt;T1&gt;() : _NEFORCE declval&lt;T2&gt;())</definition>
+        <type>decltype(true ? _NEFORCE declval&lt; T1 &gt;() :_NEFORCE declval&lt; T2 &gt;())</type>
+        <definition>using neforce::common_ternary_operator_t = decltype(true ? _NEFORCE declval&lt;T1&gt;() : _NEFORCE declval&lt;T2&gt;())</definition>
         <argsstring></argsstring>
         <name>common_ternary_operator_t</name>
+        <qualifiedname>neforce::common_ternary_operator_t</qualifiedname>
         <briefdescription>
 <para>三目运算符的公共类型推导 </para>
         </briefdescription>
@@ -156,7 +160,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3622" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3622" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___type_attribute_operations_1ga63597ca81f0a3a80001c836bc4cbbb84" prot="public" static="no">
+      <memberdef kind="typedef" id="group___type_attribute_operations_1gadd302feb38cdc0a2f632b46b2b10e981" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename...</type>
@@ -164,10 +168,11 @@
             <defname>Types</defname>
           </param>
         </templateparamlist>
-        <type>typename <ref refid="structcommon__type" kindref="compound">common_type</ref>&lt; Types... &gt;::type</type>
-        <definition>using common_type_t = typename common_type&lt;Types...&gt;::type</definition>
+        <type>typename common_type&lt; Types... &gt;::type</type>
+        <definition>using neforce::common_type_t = typename common_type&lt;Types...&gt;::type</definition>
         <argsstring></argsstring>
         <name>common_type_t</name>
+        <qualifiedname>neforce::common_type_t</qualifiedname>
         <briefdescription>
 <para>common_type的便捷别名 </para>
         </briefdescription>
@@ -177,7 +182,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3649" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3649" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___type_attribute_operations_1ga9159a6bfe7317dea917d34d2a9798fde" prot="public" static="no">
+      <memberdef kind="typedef" id="group___type_attribute_operations_1ga2ac9907e9b538e8634456db6f6d26eaa" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename...</type>
@@ -185,10 +190,11 @@
             <defname>Types</defname>
           </param>
         </templateparamlist>
-        <type>typename <ref refid="structcommon__reference" kindref="compound">common_reference</ref>&lt; Types... &gt;::type</type>
-        <definition>using common_reference_t = typename common_reference&lt;Types...&gt;::type</definition>
+        <type>typename common_reference&lt; Types... &gt;::type</type>
+        <definition>using neforce::common_reference_t = typename common_reference&lt;Types...&gt;::type</definition>
         <argsstring></argsstring>
         <name>common_reference_t</name>
+        <qualifiedname>neforce::common_reference_t</qualifiedname>
         <briefdescription>
 <para>common_reference的便捷别名 </para>
         </briefdescription>
@@ -200,7 +206,7 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="group___type_attribute_operations_1ga2e81b25ed6afcaf83a4f96dd2ffd3349" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___type_attribute_operations_1ga0851fed9930563e04c9f3134bc17c188" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -212,10 +218,11 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_specialization_v</definition>
+        <definition>bool neforce::is_specialization_v</definition>
         <argsstring></argsstring>
         <name>is_specialization_v</name>
-        <initializer>= <ref refid="structis__specialization" kindref="compound">is_specialization</ref>&lt;T, Template&gt;::value</initializer>
+        <qualifiedname>neforce::is_specialization_v</qualifiedname>
+        <initializer>= is_specialization&lt;T, Template&gt;::value</initializer>
         <briefdescription>
 <para>is_specialization的便捷变量模板 </para>
         </briefdescription>

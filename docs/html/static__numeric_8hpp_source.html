@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
   </td>
  </tr>
  </tbody>
@@ -103,13 +103,13 @@ $(function(){initNavTree('static__numeric_8hpp_source.html','',''); });
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span></div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">template</span> &lt;<span class="keywordtype">int</span>max_t Numerator&gt;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="structstatic__sign.html">   31</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structstatic__sign.html">static_sign</a> : <a class="code hl_struct" href="structintegral__constant.html">integral_constant</a>&lt;intmax_t, (Numerator &lt; 0) ? -1 : 1&gt; {};</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="structneforce_1_1static__sign.html">   31</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structneforce_1_1static__sign.html">static_sign</a> : <a class="code hl_struct" href="structneforce_1_1integral__constant.html">integral_constant</a>&lt;intmax_t, (Numerator &lt; 0) ? -1 : 1&gt; {};</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span></div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>template &lt;intmax_t Value&gt;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="structstatic__abs.html">   41</a></span>struct static_abs : integral_constant&lt;intmax_t, Value * static_sign&lt;Value&gt;::value&gt; {};</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="structneforce_1_1static__abs.html">   41</a></span>struct static_abs : integral_constant&lt;intmax_t, Value * static_sign&lt;Value&gt;::value&gt; {};</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span></div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>template &lt;intmax_t A, intmax_t B&gt;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="structstatic__gcd.html">   53</a></span>struct static_gcd : static_gcd&lt;B, (A % B)&gt; {};</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="structneforce_1_1static__gcd.html">   53</a></span>struct static_gcd : static_gcd&lt;B, (A % B)&gt; {};</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span></div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>template &lt;intmax_t A&gt;</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>struct static_gcd&lt;A, 0&gt; : integral_constant&lt;intmax_t, static_abs&lt;A&gt;::value&gt; {};</div>
@@ -119,7 +119,7 @@ $(function(){initNavTree('static__numeric_8hpp_source.html','',''); });
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span></div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>template &lt;intmax_t A, intmax_t B&gt;</div>
 <div class="foldopen" id="foldopen00072" data-start="{" data-end="};">
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="structsafe__multiply.html">   72</a></span>struct safe_multiply {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="structneforce_1_1safe__multiply.html">   72</a></span>struct safe_multiply {</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>private:</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    static constexpr uintmax_t half_range = static_cast&lt;uintmax_t&gt;(1) &lt;&lt; (sizeof(intmax_t) * 4);</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
@@ -140,30 +140,30 @@ $(function(){initNavTree('static__numeric_8hpp_source.html','',''); });
 </div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span></div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>template &lt;uintmax_t High1, uintmax_t Low1, uintmax_t High2, uintmax_t Low2&gt;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="structbig__less.html">  102</a></span>struct big_less : integral_constant&lt;bool, (High1 &lt; High2 || (High1 == High2 &amp;&amp; Low1 &lt; Low2))&gt; {};</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="structneforce_1_1big__less.html">  102</a></span>struct big_less : integral_constant&lt;bool, (High1 &lt; High2 || (High1 == High2 &amp;&amp; Low1 &lt; Low2))&gt; {};</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span></div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>template &lt;uintmax_t High1, uintmax_t Low1, uintmax_t High2, uintmax_t Low2&gt;</div>
 <div class="foldopen" id="foldopen00115" data-start="{" data-end="};">
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="structbig__add.html">  115</a></span>struct big_add {</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="structbig__add.html#ab00b896fa497d8985a91a75d4c820d7b">  116</a></span>    static constexpr uintmax_t result_low = Low1 + Low2; </div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="structbig__add.html#ae6f4db23c09c91dda3296937386accff">  117</a></span>    static constexpr uintmax_t result_high =</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="structneforce_1_1big__add.html">  115</a></span>struct big_add {</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="structneforce_1_1big__add.html#a3b148e24cf7c4f0944c7124cc1b4cc91">  116</a></span>    static constexpr uintmax_t result_low = Low1 + Low2; </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="structneforce_1_1big__add.html#a5de675d86f191dcbd62ba24409a98561">  117</a></span>    static constexpr uintmax_t result_high =</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            (High1 + High2 + static_cast&lt;uintmax_t&gt;(Low1 + Low2 &lt; Low1)); </div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>};</div>
 </div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span></div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>template &lt;uintmax_t High1, uintmax_t Low1, uintmax_t High2, uintmax_t Low2&gt;</div>
 <div class="foldopen" id="foldopen00132" data-start="{" data-end="};">
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="structbig__sub.html">  132</a></span>struct big_sub {</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="structneforce_1_1big__sub.html">  132</a></span>struct big_sub {</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    static_assert(!big_less&lt;High1, Low1, High2, Low2&gt;::value, &quot;Internal library error&quot;);</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno"><a class="line" href="structbig__sub.html#a1298a69dd278e89f5d71ad641c4ff538">  134</a></span>    static constexpr uintmax_t result_low = Low1 - Low2; </div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="structbig__sub.html#a685f44d30faad4d4fb366340e4da3d5e">  135</a></span>    static constexpr uintmax_t result_high =</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno"><a class="line" href="structneforce_1_1big__sub.html#a86e682f58b308c22fb732cb89e2e7824">  134</a></span>    static constexpr uintmax_t result_low = Low1 - Low2; </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="structneforce_1_1big__sub.html#ad2253ca554a3f52a70e9bf78139dadd8">  135</a></span>    static constexpr uintmax_t result_high =</div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>            (High1 - High2 - static_cast&lt;uintmax_t&gt;(Low1 &lt; Low2)); </div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>};</div>
 </div>
 <div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span></div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>template &lt;uintmax_t X, uintmax_t Y&gt;</div>
 <div class="foldopen" id="foldopen00148" data-start="{" data-end="};">
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="structbig__mul.html">  148</a></span>struct big_mul {</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="structneforce_1_1big__mul.html">  148</a></span>struct big_mul {</div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>private:</div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    static constexpr uintmax_t half_range = static_cast&lt;uintmax_t&gt;(1) &lt;&lt; (sizeof(intmax_t) * 4);</div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    static constexpr uintmax_t x_low = X % half_range;</div>
@@ -179,8 +179,8 @@ $(function(){initNavTree('static__numeric_8hpp_source.html','',''); });
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>            cross_sum / half_range + ((cross_sum &lt; cross_product1) ? half_range : 0);         </div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    using result_type = big_add&lt;cross_sum_high, cross_sum_low, x_high * y_high, low_product&gt;; </div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>public:</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno"><a class="line" href="structbig__mul.html#a86419bd4f1e7e0fab1d35233096c563f">  164</a></span>    static constexpr uintmax_t result_high = result_type::result_high; </div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno"><a class="line" href="structbig__mul.html#ab83f9c42fa2ab969bb87833444ff8670">  165</a></span>    static constexpr uintmax_t result_low = result_type::result_low;   </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno"><a class="line" href="structneforce_1_1big__mul.html#ab3e7866bb2c1897679ff11b28c31e5e4">  164</a></span>    static constexpr uintmax_t result_high = result_type::result_high; </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno"><a class="line" href="structneforce_1_1big__mul.html#a992b2fa30077f305758cf522dab2bfcb">  165</a></span>    static constexpr uintmax_t result_low = result_type::result_low;   </div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>};</div>
 </div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span></div>
@@ -229,7 +229,7 @@ $(function(){initNavTree('static__numeric_8hpp_source.html','',''); });
 <div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span></div>
 <div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>template &lt;uintmax_t NumHigh, uintmax_t NumLow, uintmax_t Den&gt;</div>
 <div class="foldopen" id="foldopen00232" data-start="{" data-end="};">
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno"><a class="line" href="structbig__div.html">  232</a></span>struct big_div {</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno"><a class="line" href="structneforce_1_1big__div.html">  232</a></span>struct big_div {</div>
 <div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>private:</div>
 <div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    static_assert(Den != 0, &quot;Internal library error&quot;);</div>
 <div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    static_assert(sizeof(uintmax_t) == sizeof(unsigned long long), &quot;clzll is unsafe on your platform.&quot;);</div>
@@ -247,9 +247,9 @@ $(function(){initNavTree('static__numeric_8hpp_source.html','',''); });
 <div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    using division_result = inner::__big_div_impl&lt;scaled_num_high, scaled_num_low, scaled_den&gt;; </div>
 <div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span> </div>
 <div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>public:</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno"><a class="line" href="structbig__div.html#a2d3156e58dcebed6eef7f8a752576b0c">  250</a></span>    static constexpr uintmax_t quotient_high = NumHigh / Den;                          </div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno"><a class="line" href="structbig__div.html#ab07ed2f4881c2c474e4ad10521828e5e">  251</a></span>    static constexpr uintmax_t quotient_low = division_result::quotient;               </div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno"><a class="line" href="structbig__div.html#a7dfcf842fc4cad5efb049774b17b0079">  252</a></span>    static constexpr uintmax_t remainder = division_result::remainder / shift_factor1; </div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno"><a class="line" href="structneforce_1_1big__div.html#a947c0ccdf587453723b4914959668521">  250</a></span>    static constexpr uintmax_t quotient_high = NumHigh / Den;                          </div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno"><a class="line" href="structneforce_1_1big__div.html#a333c838505846add2dd639b46b2a4b67">  251</a></span>    static constexpr uintmax_t quotient_low = division_result::quotient;               </div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno"><a class="line" href="structneforce_1_1big__div.html#acc215d17227b9faa48e24519f6824b92">  252</a></span>    static constexpr uintmax_t remainder = division_result::remainder / shift_factor1; </div>
 <div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span> </div>
 <div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>private:</div>
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    using product_low = big_mul&lt;quotient_low, Den&gt;;</div>
@@ -267,7 +267,7 @@ $(function(){initNavTree('static__numeric_8hpp_source.html','',''); });
 <div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span></div>
 <div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span></div>
 <div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>template &lt;uint32_t Base, char Digit&gt;</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno"><a class="line" href="structstatic__char__digit.html">  284</a></span>struct static_char_digit;</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno"><a class="line" href="structneforce_1_1static__char__digit.html">  284</a></span>struct static_char_digit;</div>
 <div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span> </div>
 <div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>template &lt;uint32_t Base&gt;</div>
 <div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>struct static_char_digit&lt;Base, &#39;0&#39;&gt; : uint32_constant&lt;0&gt; {</div>
@@ -377,7 +377,7 @@ $(function(){initNavTree('static__numeric_8hpp_source.html','',''); });
 <div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>NEFORCE_END_INNER__</div>
 <div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span></div>
 <div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>template &lt;uint32_t Base, char... Digits&gt;</div>
-<div class="line"><a id="l00423" name="l00423"></a><span class="lineno"><a class="line" href="structstatic__power.html">  423</a></span>struct static_power : inner::__power_helper&lt;Base, Digits...&gt;::type {};</div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno"><a class="line" href="structneforce_1_1static__power.html">  423</a></span>struct static_power : inner::__power_helper&lt;Base, Digits...&gt;::type {};</div>
 <div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span> </div>
 <div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>template &lt;uint32_t Base&gt;</div>
 <div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>struct static_power&lt;Base&gt; : uint64_constant&lt;0&gt; {};</div>
@@ -410,7 +410,7 @@ $(function(){initNavTree('static__numeric_8hpp_source.html','',''); });
 <div class="line"><a id="l00464" name="l00464"></a><span class="lineno">  464</span>NEFORCE_END_INNER__</div>
 <div class="line"><a id="l00466" name="l00466"></a><span class="lineno">  466</span></div>
 <div class="line"><a id="l00475" name="l00475"></a><span class="lineno">  475</span>template &lt;uint32_t Base, char... Digits&gt;</div>
-<div class="line"><a id="l00476" name="l00476"></a><span class="lineno"><a class="line" href="structstatic__number.html">  476</a></span>struct static_number : inner::__number_aux&lt;Base, static_power&lt;Base, Digits...&gt;::value, Digits...&gt;::type {};</div>
+<div class="line"><a id="l00476" name="l00476"></a><span class="lineno"><a class="line" href="structneforce_1_1static__number.html">  476</a></span>struct static_number : inner::__number_aux&lt;Base, static_power&lt;Base, Digits...&gt;::value, Digits...&gt;::type {};</div>
 <div class="line"><a id="l00477" name="l00477"></a><span class="lineno">  477</span> </div>
 <div class="line"><a id="l00478" name="l00478"></a><span class="lineno">  478</span>template &lt;uint32_t Base&gt;</div>
 <div class="line"><a id="l00479" name="l00479"></a><span class="lineno">  479</span>struct static_number&lt;Base&gt; : uint64_constant&lt;0&gt; {};</div>
@@ -435,7 +435,7 @@ $(function(){initNavTree('static__numeric_8hpp_source.html','',''); });
 <div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span>struct static_parse_int&lt;&#39;0&#39;, Digits...&gt; : static_number&lt;8U, Digits...&gt;::type {};</div>
 <div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span> </div>
 <div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span>template &lt;char... Digits&gt;</div>
-<div class="line"><a id="l00512" name="l00512"></a><span class="lineno"><a class="line" href="structstatic__parse__int.html">  512</a></span>struct static_parse_int : static_number&lt;10U, Digits...&gt;::type {};</div>
+<div class="line"><a id="l00512" name="l00512"></a><span class="lineno"><a class="line" href="structneforce_1_1static__parse__int.html">  512</a></span>struct static_parse_int : static_number&lt;10U, Digits...&gt;::type {};</div>
 <div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span> </div>
 <div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span></div>
 <div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span>NEFORCE_BEGIN_INNER__</div>
@@ -454,7 +454,7 @@ $(function(){initNavTree('static__numeric_8hpp_source.html','',''); });
 <div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>NEFORCE_END_INNER__</div>
 <div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span></div>
 <div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span>template &lt;char... Digits&gt;</div>
-<div class="line"><a id="l00548" name="l00548"></a><span class="lineno"><a class="line" href="group___static_char_digit.html#gad9e8411181e9bbde5abd8d542db5b8a4">  548</a></span>using static_select_int_t =</div>
+<div class="line"><a id="l00548" name="l00548"></a><span class="lineno"><a class="line" href="group___static_char_digit.html#gaf866f454f1d47e42f55de2c9c7851e12">  548</a></span>using static_select_int_t =</div>
 <div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span>        typename inner::__select_int_base&lt;static_parse_int&lt;Digits...&gt;::value, unsigned char, unsigned short,</div>
 <div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>                                          unsigned int, unsigned long, unsigned long long&gt;::type;</div>
 <div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span> <span class="comment">// StaticCharDigit</span></div>
@@ -463,8 +463,8 @@ $(function(){initNavTree('static__numeric_8hpp_source.html','',''); });
 <div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>#endif <span class="comment">// NEFORCE_CORE_NUMERIC_STATIC_NUMERIC_HPP__</span></div>
 <div class="ttc" id="abit_8hpp_html"><div class="ttname"><a href="bit_8hpp.html">bit.hpp</a></div><div class="ttdoc">位操作函数</div></div>
 <div class="ttc" id="anumeric__traits_8hpp_html"><div class="ttname"><a href="numeric__traits_8hpp.html">numeric_traits.hpp</a></div><div class="ttdoc">数值特征</div></div>
-<div class="ttc" id="astructintegral__constant_html"><div class="ttname"><a href="structintegral__constant.html">integral_constant</a></div><div class="ttdoc">整数常量包装器</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00036">type_traits.hpp:36</a></div></div>
-<div class="ttc" id="astructstatic__sign_html"><div class="ttname"><a href="structstatic__sign.html">static_sign</a></div><div class="ttdoc">计算整数的符号</div><div class="ttdef"><b>定义</b> <a href="#l00031">static_numeric.hpp:31</a></div></div>
+<div class="ttc" id="astructneforce_1_1integral__constant_html"><div class="ttname"><a href="structneforce_1_1integral__constant.html">neforce::integral_constant</a></div><div class="ttdoc">整数常量包装器</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00036">type_traits.hpp:36</a></div></div>
+<div class="ttc" id="astructneforce_1_1static__sign_html"><div class="ttname"><a href="structneforce_1_1static__sign.html">neforce::static_sign</a></div><div class="ttdoc">计算整数的符号</div><div class="ttdef"><b>定义</b> <a href="#l00031">static_numeric.hpp:31</a></div></div>
 <div class="ttc" id="atype__traits_8hpp_html"><div class="ttname"><a href="type__traits_8hpp.html">type_traits.hpp</a></div><div class="ttdoc">类型萃取</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

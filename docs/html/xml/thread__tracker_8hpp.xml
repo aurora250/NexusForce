@@ -87,8 +87,8 @@
         </childnode>
       </node>
       <node id="19">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
@@ -132,11 +132,8 @@
         <label>synchapi.h</label>
       </node>
     </incdepgraph>
-    <innerclass refid="classthread__tracker" prot="public">thread_tracker</innerclass>
-    <sectiondef kind="func">
-      <member refid="group___thread_1gab1dc640c1b7fdd51878e1f6d6f537070" kind="function"><name>is_single_threaded</name></member>
-      <member refid="group___thread_1ga7ff9c54b400cd659574896cfc29e321b" kind="function"><name>thread_count</name></member>
-    </sectiondef>
+    <innerclass refid="classneforce_1_1thread__tracker" prot="public">neforce::thread_tracker</innerclass>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
     <briefdescription>
 <para>线程跟踪器 </para>
     </briefdescription>
@@ -153,9 +150,9 @@
 <codeline lineno="13"><highlight class="normal"></highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight></codeline>
 <codeline lineno="25"><highlight class="normal"></highlight></codeline>
-<codeline lineno="34" refid="classthread__tracker" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">thread_tracker<sp/>{</highlight></codeline>
+<codeline lineno="34" refid="classneforce_1_1thread__tracker" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">thread_tracker<sp/>{</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structatomic" kindref="compound">atomic&lt;int&gt;</ref><sp/>count_;<sp/></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1atomic" kindref="compound">atomic&lt;int&gt;</ref><sp/>count_;<sp/></highlight></codeline>
 <codeline lineno="37"><highlight class="normal"></highlight></codeline>
 <codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">thread;</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight></codeline>
@@ -172,20 +169,20 @@
 <codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight></codeline>
 <codeline lineno="52"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="59" refid="classthread__tracker_1a2bd02c75012fa7b74dbbbbdb64ef86f9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>thread_tracker&amp;<sp/><ref refid="classthread__tracker_1a2bd02c75012fa7b74dbbbbdb64ef86f9" kindref="member">instance</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="59" refid="classneforce_1_1thread__tracker_1aeee36cf00d8e46e40935fc215238be2d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>thread_tracker&amp;<sp/><ref refid="classneforce_1_1thread__tracker_1aeee36cf00d8e46e40935fc215238be2d" kindref="member">instance</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
 <codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>thread_tracker<sp/>tracker;</highlight></codeline>
 <codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>tracker;</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"></highlight></codeline>
-<codeline lineno="70" refid="classthread__tracker_1a29478c0623727b1621184a39052b0381" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>NEFORCE_ALWAYS_INLINE<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classthread__tracker_1a29478c0623727b1621184a39052b0381" kindref="member">is_single_threaded</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classthread__tracker_1a2bd02c75012fa7b74dbbbbdb64ef86f9" kindref="member">instance</ref>().count_.<ref refid="structatomic_1a08238b88fc524dbab833b1f2efbca3ec" kindref="member">load</ref>()<sp/>==<sp/>1;<sp/>}</highlight></codeline>
+<codeline lineno="70" refid="classneforce_1_1thread__tracker_1a1f60d21016a141409e9bb0c3b6c61d95" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>NEFORCE_ALWAYS_INLINE<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1thread__tracker_1a1f60d21016a141409e9bb0c3b6c61d95" kindref="member">is_single_threaded</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1thread__tracker_1aeee36cf00d8e46e40935fc215238be2d" kindref="member">instance</ref>().count_.load()<sp/>==<sp/>1;<sp/>}</highlight></codeline>
 <codeline lineno="71"><highlight class="normal"></highlight></codeline>
-<codeline lineno="78" refid="classthread__tracker_1a1441dfad9d0f20ffe01a31a35fd66349" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>NEFORCE_ALWAYS_INLINE<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classthread__tracker_1a1441dfad9d0f20ffe01a31a35fd66349" kindref="member">thread_count</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classthread__tracker_1a2bd02c75012fa7b74dbbbbdb64ef86f9" kindref="member">instance</ref>().count_.<ref refid="structatomic_1a08238b88fc524dbab833b1f2efbca3ec" kindref="member">load</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="78" refid="classneforce_1_1thread__tracker_1afa87abd978582029916fb04f8e88c1bd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>NEFORCE_ALWAYS_INLINE<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1thread__tracker_1afa87abd978582029916fb04f8e88c1bd" kindref="member">thread_count</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1thread__tracker_1aeee36cf00d8e46e40935fc215238be2d" kindref="member">instance</ref>().count_.load();<sp/>}</highlight></codeline>
 <codeline lineno="79"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="80"><highlight class="normal"></highlight></codeline>
 <codeline lineno="81"><highlight class="normal"></highlight></codeline>
-<codeline lineno="86" refid="group___thread_1gab1dc640c1b7fdd51878e1f6d6f537070" refkind="member"><highlight class="normal">NEFORCE_ALWAYS_INLINE_INLINE<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___thread_1gab1dc640c1b7fdd51878e1f6d6f537070" kindref="member">is_single_threaded</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classthread__tracker_1a29478c0623727b1621184a39052b0381" kindref="member">thread_tracker::is_single_threaded</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="86" refid="group___thread_1gabeff08a2db027815193dba39b0fdf9c1" refkind="member"><highlight class="normal">NEFORCE_ALWAYS_INLINE_INLINE<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___thread_1gabeff08a2db027815193dba39b0fdf9c1" kindref="member">is_single_threaded</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1thread__tracker_1a1f60d21016a141409e9bb0c3b6c61d95" kindref="member">thread_tracker::is_single_threaded</ref>();<sp/>}</highlight></codeline>
 <codeline lineno="87"><highlight class="normal"></highlight></codeline>
-<codeline lineno="92" refid="group___thread_1ga7ff9c54b400cd659574896cfc29e321b" refkind="member"><highlight class="normal">NEFORCE_ALWAYS_INLINE_INLINE<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group___thread_1ga7ff9c54b400cd659574896cfc29e321b" kindref="member">thread_count</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classthread__tracker_1a1441dfad9d0f20ffe01a31a35fd66349" kindref="member">thread_tracker::thread_count</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="92" refid="group___thread_1ga6e98f43caf4609192ef39dac9de1529c" refkind="member"><highlight class="normal">NEFORCE_ALWAYS_INLINE_INLINE<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group___thread_1ga6e98f43caf4609192ef39dac9de1529c" kindref="member">thread_count</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1thread__tracker_1afa87abd978582029916fb04f8e88c1bd" kindref="member">thread_tracker::thread_count</ref>();<sp/>}</highlight></codeline>
 <codeline lineno="93"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Thread</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="95"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>AsyncComponents</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="97"><highlight class="normal"></highlight></codeline>

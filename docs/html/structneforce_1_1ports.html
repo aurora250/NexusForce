@@ -1,0 +1,797 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::ports结构体 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('structneforce_1_1ports.html','','structneforce_1_1ports-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::ports结构体 参考<div class="ingroups"><a class="el" href="group___network_util.html">网络工具</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>网络端口封装类  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="ports_8hpp_source.html">ports.hpp</a>&gt;</code></p>
+<div class="dynheader">
+类 neforce::ports 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structneforce_1_1ports__inherit__graph.svg" width="175" height="203"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a3815e4ed24921f9f5ada8aa1e068a1ea" id="r_a3815e4ed24921f9f5ada8aa1e068a1ea"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1ea">raw</a> : uint16_t { <br />
+&#160;&#160;<a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaa859e8cb4b2a1fdc18e0639ec8127cf1c">UNDEF</a> = 0
+, <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaa6c205e43910eb59e75fe3f8847ffda3b">FTP_DATA</a> = 20
+, <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaab41b3474799e27ec1e21603b200c5392">FTP</a> = 21
+, <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaa1ee5de71f649b8b09d922eb42e141c7b">SSH</a> = 22
+, <br />
+&#160;&#160;<a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaac00556ac46ff7fef8f35f9b1261d21d3">TELNET</a> = 23
+, <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaab46d7ea8f60afd9f5cc6ce8dd9322728">SMTP</a> = 25
+, <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaa63f854cd9bc0a0458a4a3abecebf94e7">DNS</a> = 53
+, <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaa89f6133a95e9711c0aafa4e6aef63c14">DHCP_SERVER</a> = 67
+, <br />
+&#160;&#160;<a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaaa204f03a488ce72710671d35c7845634">DHCP_CLIENT</a> = 68
+, <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaab83d8c2c4d3f781f832c96872e7cc070">TFTP</a> = 69
+, <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaab19b7e8d83fb4b86fdf0574ed822fe87">HTTP</a> = 80
+, <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaa74c6246972edf3c77870738ac05f07ca">WS</a> = 80
+, <br />
+&#160;&#160;<a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaa75c5ab7eb8169598d8e889260be74562">POP3</a> = 110
+, <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaa9043b9bf49a0210129ab02b1367a68b1">NTP</a> = 123
+, <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaad7ee8388ffdc7b80796564a8a0da3116">IMAP</a> = 143
+, <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaabdde7d766c50fb6be0a19599bffae310">SNMP</a> = 161
+, <br />
+&#160;&#160;<a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaa680dab87b24b76bfceab4f4bd7372e3a">SNMP_TRAP</a> = 162
+, <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaa5f097a208a96b418c10d5ec5e016485e">LDAP</a> = 389
+, <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaaea00dff9de08d3ff251ef8ddee7c7fcb">HTTPS</a> = 443
+, <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaa60abf934d746be3a9e5b8e9919f21626">WSS</a> = 443
+, <br />
+&#160;&#160;<a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaa462ace3bb66a7492bd81ba6596d6fdad">SMB</a> = 445
+, <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaa2d8479b0b6ba1406d1a25c090fd0d1c3">SMTPS</a> = 465
+, <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaa33de5d58abf3fb14f856b6c81319e575">SMTP_SUBMIT</a> = 587
+, <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaa3c2ff8f4ac0aba4f11d6703bcef2b70b">LDAPS</a> = 636
+, <br />
+&#160;&#160;<a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaa954c33eb961e7244f0b2814b50f77ad0">IMAPS</a> = 993
+, <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaa56fda4f3112f71a83b6f6179e4b58dcd">POP3S</a> = 995
+, <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaa9c6a577a2014b15b5028ca4ed63924ce">MYSQL</a> = 3306
+, <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaa7cb0bafd94a4d623be7b4eaa24ebf832">POSTGRESQL</a> = 5432
+, <br />
+&#160;&#160;<a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaa7666d99040ffc30acad998de637c5691">REDIS</a> = 6379
+, <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaac03cf833c73f1c1703be17add0825fc2">MONGODB</a> = 27017
+<br />
+ }</td></tr>
+<tr class="memdesc:a3815e4ed24921f9f5ada8aa1e068a1ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">端口号枚举值  <a href="#a3815e4ed24921f9f5ada8aa1e068a1ea">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a789c965359ed369ce0e688981473899f" id="r_a789c965359ed369ce0e688981473899f"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a789c965359ed369ce0e688981473899f">ports</a> () noexcept=default</td></tr>
+<tr class="memdesc:a789c965359ed369ce0e688981473899f"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
+<tr class="memitem:ab96c800351de471007983b7a4e8abbb3" id="r_ab96c800351de471007983b7a4e8abbb3"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ab96c800351de471007983b7a4e8abbb3">ports</a> (const <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1ea">raw</a> <a class="el" href="#adf4fde42ddaaf5d3b1c686432faf1376">port</a>) noexcept</td></tr>
+<tr class="memdesc:ab96c800351de471007983b7a4e8abbb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">从枚举值构造  <br /></td></tr>
+<tr class="memitem:af13563c16edeede398398e3845e1cfc7" id="r_af13563c16edeede398398e3845e1cfc7"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#af13563c16edeede398398e3845e1cfc7">ports</a> (const <a class="el" href="group___core_types.html#gabca631c03e4d34e2e77587fc66d05f52">uint16_t</a> <a class="el" href="#adf4fde42ddaaf5d3b1c686432faf1376">port</a>) noexcept</td></tr>
+<tr class="memdesc:af13563c16edeede398398e3845e1cfc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">从uint16_t构造  <br /></td></tr>
+<tr class="memitem:ad48380f45b8ed2ccf1b45f25adc10454" id="r_ad48380f45b8ed2ccf1b45f25adc10454"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ad48380f45b8ed2ccf1b45f25adc10454">operator bool</a> () const noexcept</td></tr>
+<tr class="memdesc:ad48380f45b8ed2ccf1b45f25adc10454"><td class="mdescLeft">&#160;</td><td class="mdescRight">布尔转换运算符  <br /></td></tr>
+<tr class="memitem:a3960601d307d82b3f33cd8af16e7f2b9" id="r_a3960601d307d82b3f33cd8af16e7f2b9"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a3960601d307d82b3f33cd8af16e7f2b9">operator uint16_t</a> () const noexcept</td></tr>
+<tr class="memdesc:a3960601d307d82b3f33cd8af16e7f2b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">uint16_t转换运算符  <br /></td></tr>
+<tr class="memitem:a5673de8862734bc403373b480bafd116" id="r_a5673de8862734bc403373b480bafd116"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a5673de8862734bc403373b480bafd116">is_well_known</a> () const noexcept</td></tr>
+<tr class="memdesc:a5673de8862734bc403373b480bafd116"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查端口是否在知名端口范围内  <br /></td></tr>
+<tr class="memitem:abed3b6d9ff6ad3389d3c443284aa5336" id="r_abed3b6d9ff6ad3389d3c443284aa5336"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#abed3b6d9ff6ad3389d3c443284aa5336">is_registered</a> () const noexcept</td></tr>
+<tr class="memdesc:abed3b6d9ff6ad3389d3c443284aa5336"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查端口是否在注册端口范围内  <br /></td></tr>
+<tr class="memitem:aa5d45d53aa8b6a3921ab6b78e0594e39" id="r_aa5d45d53aa8b6a3921ab6b78e0594e39"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#aa5d45d53aa8b6a3921ab6b78e0594e39">is_dynamic</a> () const noexcept</td></tr>
+<tr class="memdesc:aa5d45d53aa8b6a3921ab6b78e0594e39"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查端口是否在动态/私有端口范围内  <br /></td></tr>
+<tr class="memitem:ad70273293a7af709766258523016a966" id="r_ad70273293a7af709766258523016a966"><td class="memItemLeft"><a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad70273293a7af709766258523016a966">to_string</a> () const</td></tr>
+<tr class="memdesc:ad70273293a7af709766258523016a966"><td class="mdescLeft">&#160;</td><td class="mdescRight">转换为协议名称字符串  <br /></td></tr>
+<tr class="memitem:a8389c1d2a8c0039d47ff1b5102eb14d7" id="r_a8389c1d2a8c0039d47ff1b5102eb14d7"><td class="memItemLeft"><a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#a8389c1d2a8c0039d47ff1b5102eb14d7">to_string</a> (bool is_ws) const</td></tr>
+<tr class="memdesc:a8389c1d2a8c0039d47ff1b5102eb14d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">转换为协议名称字符串（支持WebSocket）  <br /></td></tr>
+<tr class="inherit_header pub_methods_structneforce_1_1iobject"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_structneforce_1_1iobject')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="structneforce_1_1iobject.html">neforce::iobject&lt; ports &gt;</a></td></tr>
+<tr class="memitem:ae8235cec74a7cfe8188d40827d5293d4 inherit pub_methods_structneforce_1_1iobject" id="r_ae8235cec74a7cfe8188d40827d5293d4"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1iobject.html#ae8235cec74a7cfe8188d40827d5293d4">try_parse</a> (const <a class="el" href="group___string_view.html#ga5a6e8b9da034ce8d4818231c4e005eff">string_view</a> str) noexcept</td></tr>
+<tr class="memdesc:ae8235cec74a7cfe8188d40827d5293d4 inherit pub_methods_structneforce_1_1iobject"><td class="mdescLeft">&#160;</td><td class="mdescRight">尝试从字符串解析对象  <br /></td></tr>
+<tr class="inherit_header pub_methods_structneforce_1_1istringify"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_structneforce_1_1istringify')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="structneforce_1_1istringify.html">neforce::istringify&lt; ports &gt;</a></td></tr>
+<tr class="memitem:abf57029b9f1cdf55ffaaf90c506a0dc3 inherit pub_methods_structneforce_1_1istringify" id="r_abf57029b9f1cdf55ffaaf90c506a0dc3"><td class="memItemLeft">constexpr <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a>&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1istringify.html#abf57029b9f1cdf55ffaaf90c506a0dc3">to_string</a> () const</td></tr>
+<tr class="memdesc:abf57029b9f1cdf55ffaaf90c506a0dc3 inherit pub_methods_structneforce_1_1istringify"><td class="mdescLeft">&#160;</td><td class="mdescRight">转换为字符串  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静态 Public 成员函数</h2></td></tr>
+<tr class="memitem:a9addb8e6ae40028b8ea1c36274c5cfe4" id="r_a9addb8e6ae40028b8ea1c36274c5cfe4"><td class="memItemLeft">static <a class="el" href="#a789c965359ed369ce0e688981473899f">ports</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9addb8e6ae40028b8ea1c36274c5cfe4">parse</a> (<a class="el" href="group___string_view.html#ga5a6e8b9da034ce8d4818231c4e005eff">string_view</a> scheme) noexcept</td></tr>
+<tr class="memdesc:a9addb8e6ae40028b8ea1c36274c5cfe4"><td class="mdescLeft">&#160;</td><td class="mdescRight">从协议名称解析端口  <br /></td></tr>
+<tr class="inherit_header pub_static_methods_structneforce_1_1iobject"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_static_methods_structneforce_1_1iobject')"><span class="dynarrow"><span class="arrowhead closed"></span></span>静态 Public 成员函数 继承自 <a class="el" href="structneforce_1_1iobject.html">neforce::iobject&lt; ports &gt;</a></td></tr>
+<tr class="memitem:a35ebf2f042b252b6df49e64a7bd3f31f inherit pub_static_methods_structneforce_1_1iobject" id="r_a35ebf2f042b252b6df49e64a7bd3f31f"><td class="memItemLeft">static constexpr <a class="el" href="structneforce_1_1ports.html">ports</a>&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1iobject.html#a35ebf2f042b252b6df49e64a7bd3f31f">parse</a> (const <a class="el" href="group___string_view.html#ga5a6e8b9da034ce8d4818231c4e005eff">string_view</a> str)</td></tr>
+<tr class="memdesc:a35ebf2f042b252b6df49e64a7bd3f31f inherit pub_static_methods_structneforce_1_1iobject"><td class="mdescLeft">&#160;</td><td class="mdescRight">从字符串解析对象  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public 属性</h2></td></tr>
+<tr class="memitem:adf4fde42ddaaf5d3b1c686432faf1376" id="r_adf4fde42ddaaf5d3b1c686432faf1376"><td class="memItemLeft"><a id="adf4fde42ddaaf5d3b1c686432faf1376" name="adf4fde42ddaaf5d3b1c686432faf1376"></a>
+<a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1ea">raw</a>&#160;</td><td class="memItemRight"><b>port</b> {<a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1eaa859e8cb4b2a1fdc18e0639ec8127cf1c">UNDEF</a>}</td></tr>
+<tr class="memdesc:adf4fde42ddaaf5d3b1c686432faf1376"><td class="mdescLeft">&#160;</td><td class="mdescRight">端口值 <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>网络端口封装类 </p>
+<p>提供类型安全的端口表示，封装了常见协议的端口号，支持从协议名称解析和反向转换。</p>
+<h1 class="doxsection"><a class="anchor" id="standards"></a>
+遵循的国际标准</h1>
+<p>本实现严格遵循以下网络服务与端口分配相关标准规范：</p>
+<p><b>端口号分配权威机构：</b></p><ul>
+<li>**IANA Service Name and Transport Protocol Port Number Registry**：服务名称与端口号注册表 <a href="https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml">https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml</a></li>
+</ul>
+<p><b>核心互联网协议标准：</b></p><ul>
+<li>**IETF RFC 1340**：Assigned Numbers（已废弃，由 IANA 在线数据库取代） <a href="https://www.rfc-editor.org/rfc/rfc1340.html">https://www.rfc-editor.org/rfc/rfc1340.html</a></li>
+<li>**IETF RFC 6335**：Internet 号码分配机构（IANA）服务名称和传输协议端口号注册程序 <a href="https://www.rfc-editor.org/rfc/rfc6335.html">https://www.rfc-editor.org/rfc/rfc6335.html</a></li>
+<li>**IETF STD 2**：Assigned Internet Protocol Numbers（已废弃，由 RFC 3232 取代） <a href="https://www.rfc-editor.org/rfc/rfc3232.html">https://www.rfc-editor.org/rfc/rfc3232.html</a></li>
+</ul>
+<p><b>各协议端口规范：</b> </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">协议  </th><th class="markdownTableHeadNone">端口号  </th><th class="markdownTableHeadNone">标准引用  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">HTTP  </td><td class="markdownTableBodyNone">80  </td><td class="markdownTableBodyNone">RFC 7230 §2.7.1（HTTP/1.1 消息语法与路由）  </td><td class="markdownTableBodyNone">万维网协议  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">HTTPS  </td><td class="markdownTableBodyNone">443  </td><td class="markdownTableBodyNone">RFC 2818 §2.4（HTTP Over TLS）  </td><td class="markdownTableBodyNone">HTTP over TLS/SSL  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">FTP  </td><td class="markdownTableBodyNone">21  </td><td class="markdownTableBodyNone">RFC 959 §3.2（文件传输协议）  </td><td class="markdownTableBodyNone">文件传输协议（控制端口）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">FTP-DATA  </td><td class="markdownTableBodyNone">20  </td><td class="markdownTableBodyNone">RFC 959 §3.2（文件传输协议）  </td><td class="markdownTableBodyNone">文件传输协议（数据端口）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SSH  </td><td class="markdownTableBodyNone">22  </td><td class="markdownTableBodyNone">RFC 4251 §4.1（安全 Shell 协议架构）  </td><td class="markdownTableBodyNone">安全 Shell 协议  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Telnet  </td><td class="markdownTableBodyNone">23  </td><td class="markdownTableBodyNone">RFC 854（Telnet 协议规范）  </td><td class="markdownTableBodyNone">远程登录协议  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SMTP  </td><td class="markdownTableBodyNone">25  </td><td class="markdownTableBodyNone">RFC 5321 §4.5.3.2（简单邮件传输协议）  </td><td class="markdownTableBodyNone">电子邮件传输  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">DNS  </td><td class="markdownTableBodyNone">53  </td><td class="markdownTableBodyNone">RFC 1035 §4.2（域名实现与规范）  </td><td class="markdownTableBodyNone">域名系统  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">TFTP  </td><td class="markdownTableBodyNone">69  </td><td class="markdownTableBodyNone">RFC 1350 §5（简单文件传输协议）  </td><td class="markdownTableBodyNone">简单文件传输协议  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">POP3  </td><td class="markdownTableBodyNone">110  </td><td class="markdownTableBodyNone">RFC 1939 §4（邮局协议版本3）  </td><td class="markdownTableBodyNone">电子邮件接收协议  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">IMAP  </td><td class="markdownTableBodyNone">143  </td><td class="markdownTableBodyNone">RFC 3501 §2.1（互联网消息访问协议）  </td><td class="markdownTableBodyNone">电子邮件访问协议  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">NTP  </td><td class="markdownTableBodyNone">123  </td><td class="markdownTableBodyNone">RFC 5905 §4（网络时间协议版本4）  </td><td class="markdownTableBodyNone">网络时间同步协议  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SNMP  </td><td class="markdownTableBodyNone">161  </td><td class="markdownTableBodyNone">RFC 3417 §3（简单网络管理协议）  </td><td class="markdownTableBodyNone">网络管理协议  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SNMP-TRAP  </td><td class="markdownTableBodyNone">162  </td><td class="markdownTableBodyNone">RFC 3417 §3（简单网络管理协议）  </td><td class="markdownTableBodyNone">SNMP陷阱通知  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">LDAP  </td><td class="markdownTableBodyNone">389  </td><td class="markdownTableBodyNone">RFC 4511 §3（轻量级目录访问协议）  </td><td class="markdownTableBodyNone">目录服务协议  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">LDAPS  </td><td class="markdownTableBodyNone">636  </td><td class="markdownTableBodyNone">RFC 4513 §5（LDAP over TLS）  </td><td class="markdownTableBodyNone">LDAP over TLS/SSL  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SMB  </td><td class="markdownTableBodyNone">445  </td><td class="markdownTableBodyNone">Microsoft SMB 协议规范  </td><td class="markdownTableBodyNone">服务器消息块协议  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">DHCP-SERVER  </td><td class="markdownTableBodyNone">67  </td><td class="markdownTableBodyNone">RFC 2131 §3（动态主机配置协议）  </td><td class="markdownTableBodyNone">DHCP服务器端口  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">DHCP-CLIENT  </td><td class="markdownTableBodyNone">68  </td><td class="markdownTableBodyNone">RFC 2131 §3（动态主机配置协议）  </td><td class="markdownTableBodyNone">DHCP客户端端口  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">MYSQL  </td><td class="markdownTableBodyNone">3306  </td><td class="markdownTableBodyNone">MySQL 官方文档  </td><td class="markdownTableBodyNone">MySQL数据库  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">POSTGRESQL  </td><td class="markdownTableBodyNone">5432  </td><td class="markdownTableBodyNone">PostgreSQL 官方文档  </td><td class="markdownTableBodyNone">PostgreSQL数据库  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">REDIS  </td><td class="markdownTableBodyNone">6379  </td><td class="markdownTableBodyNone">Redis 官方文档  </td><td class="markdownTableBodyNone">Redis键值存储  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">MONGODB  </td><td class="markdownTableBodyNone">27017  </td><td class="markdownTableBodyNone">MongoDB 官方文档  </td><td class="markdownTableBodyNone">MongoDB数据库  </td></tr>
+</table>
+<p><b>WebSocket 协议端口规范：</b> </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">协议  </th><th class="markdownTableHeadNone">端口号  </th><th class="markdownTableHeadNone">标准引用  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">WS  </td><td class="markdownTableBodyNone">80  </td><td class="markdownTableBodyNone">RFC 6455 §11.1（WebSocket 协议）  </td><td class="markdownTableBodyNone">WebSocket over HTTP  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">WSS  </td><td class="markdownTableBodyNone">443  </td><td class="markdownTableBodyNone">RFC 6455 §11.1（WebSocket 协议）  </td><td class="markdownTableBodyNone">WebSocket over TLS/SSL  </td></tr>
+</table>
+<p><b>邮件协议扩展端口规范：</b> </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">协议  </th><th class="markdownTableHeadNone">端口号  </th><th class="markdownTableHeadNone">标准引用  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SMTP-SUBMIT  </td><td class="markdownTableBodyNone">587  </td><td class="markdownTableBodyNone">RFC 6409 §3（邮件提交协议）  </td><td class="markdownTableBodyNone">邮件提交  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SMTPS  </td><td class="markdownTableBodyNone">465  </td><td class="markdownTableBodyNone">历史惯例（IANA已重新分配）  </td><td class="markdownTableBodyNone">SMTP over TLS（传统）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">POP3S  </td><td class="markdownTableBodyNone">995  </td><td class="markdownTableBodyNone">RFC 2595 §5（POP3 over TLS）  </td><td class="markdownTableBodyNone">POP3 over TLS/SSL  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">IMAPS  </td><td class="markdownTableBodyNone">993  </td><td class="markdownTableBodyNone">RFC 2595 §4（IMAP over TLS）  </td><td class="markdownTableBodyNone">IMAP over TLS/SSL  </td></tr>
+</table>
+<p><b>相关安全标准：</b></p><ul>
+<li>**IETF RFC 2818**：HTTP Over TLS（HTTPS 端口定义） <a href="https://www.rfc-editor.org/rfc/rfc2818.html">https://www.rfc-editor.org/rfc/rfc2818.html</a></li>
+<li>**IETF RFC 6455**：WebSocket 协议（WS/WSS 端口定义） <a href="https://www.rfc-editor.org/rfc/rfc6455.html">https://www.rfc-editor.org/rfc/rfc6455.html</a></li>
+<li>**IETF RFC 2595**：使用 TLS 的 IMAP、POP3 和 ACAP <a href="https://www.rfc-editor.org/rfc/rfc2595.html">https://www.rfc-editor.org/rfc/rfc2595.html</a></li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="port_registry"></a>
+IANA 端口号注册表</h1>
+<p>根据 IANA 服务名称和端口号注册表，端口号分为三类：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">范围  </th><th class="markdownTableHeadNone">类别  </th><th class="markdownTableHeadNone">说明  </th><th class="markdownTableHeadNone">分配要求  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">0-1023  </td><td class="markdownTableBodyNone">知名端口  </td><td class="markdownTableBodyNone">系统端口，由 IANA 分配和管控  </td><td class="markdownTableBodyNone">需要 IETF 共识或 IESG 批准  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1024-49151  </td><td class="markdownTableBodyNone">注册端口  </td><td class="markdownTableBodyNone">用户端口，由 IANA 注册  </td><td class="markdownTableBodyNone">需要 IETF 审核或专家审核  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">49152-65535  </td><td class="markdownTableBodyNone">动态/私有端口  </td><td class="markdownTableBodyNone">临时使用，自动分配  </td><td class="markdownTableBodyNone">无需分配  </td></tr>
+</table>
+<p>本文件中定义的所有端口包含知名端口（0-1023）和部分常用注册端口（1024-49151）。</p>
+<h1 class="doxsection"><a class="anchor" id="implementation_details"></a>
+实现细节</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">特性  </th><th class="markdownTableHeadNone">规范参数  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">端口数值类型  </td><td class="markdownTableBodyNone">uint16_t（0-65535）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">知名端口范围  </td><td class="markdownTableBodyNone">0-1023  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">注册端口范围  </td><td class="markdownTableBodyNone">1024-49151  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">默认端口值  </td><td class="markdownTableBodyNone">UNDEF（0）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">大小  </td><td class="markdownTableBodyNone">2 字节（uint16_t）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">协议名称解析  </td><td class="markdownTableBodyNone">大小写不敏感  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">未知协议处理  </td><td class="markdownTableBodyNone">返回 UNDEF  </td></tr>
+</table>
+<dl class="section note"><dt>注解</dt><dd>本实现中定义的端口号均取自 IANA 注册表及相关 RFC 标准文档。</dd></dl>
+<dl class="section warning"><dt>警告</dt><dd>端口号 80 和 443 同时服务于 HTTP/HTTPS 和 WebSocket（WS/WSS）协议。 使用 <span class="tt">to_string(bool is_ws)</span> 方法可明确区分协议类型。 端口号 465（smtps）虽然在实践中广泛使用，但 IANA 已将其重新分配给其他服务， 建议新应用使用端口 587（smtp-submit）配合 STARTTLS。</dd></dl>
+<dl class="section see"><dt>参见</dt><dd><a href="https://www.iana.org/assignments/service-names-port-numbers/">https://www.iana.org/assignments/service-names-port-numbers/</a> </dd>
+<dd>
+<a href="https://www.rfc-editor.org/rfc/rfc6335">https://www.rfc-editor.org/rfc/rfc6335</a> </dd>
+<dd>
+<a href="https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers">https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers</a> </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00124">124</a> 行定义.</p>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
+<a id="a3815e4ed24921f9f5ada8aa1e068a1ea" name="a3815e4ed24921f9f5ada8aa1e068a1ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3815e4ed24921f9f5ada8aa1e068a1ea">&#9670;&#160;</a></span>raw</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1ea">neforce::ports::raw</a> : <a class="el" href="group___core_types.html#gabca631c03e4d34e2e77587fc66d05f52">uint16_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>端口号枚举值 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaa859e8cb4b2a1fdc18e0639ec8127cf1c" name="a3815e4ed24921f9f5ada8aa1e068a1eaa859e8cb4b2a1fdc18e0639ec8127cf1c"></a>UNDEF&#160;</td><td class="fielddoc"><p>未定义/无效端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaa6c205e43910eb59e75fe3f8847ffda3b" name="a3815e4ed24921f9f5ada8aa1e068a1eaa6c205e43910eb59e75fe3f8847ffda3b"></a>FTP_DATA&#160;</td><td class="fielddoc"><p>FTP数据端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaab41b3474799e27ec1e21603b200c5392" name="a3815e4ed24921f9f5ada8aa1e068a1eaab41b3474799e27ec1e21603b200c5392"></a>FTP&#160;</td><td class="fielddoc"><p>FTP控制端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaa1ee5de71f649b8b09d922eb42e141c7b" name="a3815e4ed24921f9f5ada8aa1e068a1eaa1ee5de71f649b8b09d922eb42e141c7b"></a>SSH&#160;</td><td class="fielddoc"><p>SSH协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaac00556ac46ff7fef8f35f9b1261d21d3" name="a3815e4ed24921f9f5ada8aa1e068a1eaac00556ac46ff7fef8f35f9b1261d21d3"></a>TELNET&#160;</td><td class="fielddoc"><p>Telnet协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaab46d7ea8f60afd9f5cc6ce8dd9322728" name="a3815e4ed24921f9f5ada8aa1e068a1eaab46d7ea8f60afd9f5cc6ce8dd9322728"></a>SMTP&#160;</td><td class="fielddoc"><p>SMTP协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaa63f854cd9bc0a0458a4a3abecebf94e7" name="a3815e4ed24921f9f5ada8aa1e068a1eaa63f854cd9bc0a0458a4a3abecebf94e7"></a>DNS&#160;</td><td class="fielddoc"><p>DNS协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaa89f6133a95e9711c0aafa4e6aef63c14" name="a3815e4ed24921f9f5ada8aa1e068a1eaa89f6133a95e9711c0aafa4e6aef63c14"></a>DHCP_SERVER&#160;</td><td class="fielddoc"><p>DHCP服务器端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaaa204f03a488ce72710671d35c7845634" name="a3815e4ed24921f9f5ada8aa1e068a1eaaa204f03a488ce72710671d35c7845634"></a>DHCP_CLIENT&#160;</td><td class="fielddoc"><p>DHCP客户端端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaab83d8c2c4d3f781f832c96872e7cc070" name="a3815e4ed24921f9f5ada8aa1e068a1eaab83d8c2c4d3f781f832c96872e7cc070"></a>TFTP&#160;</td><td class="fielddoc"><p>TFTP协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaab19b7e8d83fb4b86fdf0574ed822fe87" name="a3815e4ed24921f9f5ada8aa1e068a1eaab19b7e8d83fb4b86fdf0574ed822fe87"></a>HTTP&#160;</td><td class="fielddoc"><p>HTTP协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaa74c6246972edf3c77870738ac05f07ca" name="a3815e4ed24921f9f5ada8aa1e068a1eaa74c6246972edf3c77870738ac05f07ca"></a>WS&#160;</td><td class="fielddoc"><p>WebSocket协议端口（与HTTP共用） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaa75c5ab7eb8169598d8e889260be74562" name="a3815e4ed24921f9f5ada8aa1e068a1eaa75c5ab7eb8169598d8e889260be74562"></a>POP3&#160;</td><td class="fielddoc"><p>POP3协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaa9043b9bf49a0210129ab02b1367a68b1" name="a3815e4ed24921f9f5ada8aa1e068a1eaa9043b9bf49a0210129ab02b1367a68b1"></a>NTP&#160;</td><td class="fielddoc"><p>NTP协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaad7ee8388ffdc7b80796564a8a0da3116" name="a3815e4ed24921f9f5ada8aa1e068a1eaad7ee8388ffdc7b80796564a8a0da3116"></a>IMAP&#160;</td><td class="fielddoc"><p>IMAP协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaabdde7d766c50fb6be0a19599bffae310" name="a3815e4ed24921f9f5ada8aa1e068a1eaabdde7d766c50fb6be0a19599bffae310"></a>SNMP&#160;</td><td class="fielddoc"><p>SNMP协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaa680dab87b24b76bfceab4f4bd7372e3a" name="a3815e4ed24921f9f5ada8aa1e068a1eaa680dab87b24b76bfceab4f4bd7372e3a"></a>SNMP_TRAP&#160;</td><td class="fielddoc"><p>SNMP陷阱通知端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaa5f097a208a96b418c10d5ec5e016485e" name="a3815e4ed24921f9f5ada8aa1e068a1eaa5f097a208a96b418c10d5ec5e016485e"></a>LDAP&#160;</td><td class="fielddoc"><p>LDAP协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaaea00dff9de08d3ff251ef8ddee7c7fcb" name="a3815e4ed24921f9f5ada8aa1e068a1eaaea00dff9de08d3ff251ef8ddee7c7fcb"></a>HTTPS&#160;</td><td class="fielddoc"><p>HTTPS协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaa60abf934d746be3a9e5b8e9919f21626" name="a3815e4ed24921f9f5ada8aa1e068a1eaa60abf934d746be3a9e5b8e9919f21626"></a>WSS&#160;</td><td class="fielddoc"><p>WebSocket Secure端口（与HTTPS共用） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaa462ace3bb66a7492bd81ba6596d6fdad" name="a3815e4ed24921f9f5ada8aa1e068a1eaa462ace3bb66a7492bd81ba6596d6fdad"></a>SMB&#160;</td><td class="fielddoc"><p>SMB/CIFS协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaa2d8479b0b6ba1406d1a25c090fd0d1c3" name="a3815e4ed24921f9f5ada8aa1e068a1eaa2d8479b0b6ba1406d1a25c090fd0d1c3"></a>SMTPS&#160;</td><td class="fielddoc"><p>SMTPS协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaa33de5d58abf3fb14f856b6c81319e575" name="a3815e4ed24921f9f5ada8aa1e068a1eaa33de5d58abf3fb14f856b6c81319e575"></a>SMTP_SUBMIT&#160;</td><td class="fielddoc"><p>SMTP邮件提交端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaa3c2ff8f4ac0aba4f11d6703bcef2b70b" name="a3815e4ed24921f9f5ada8aa1e068a1eaa3c2ff8f4ac0aba4f11d6703bcef2b70b"></a>LDAPS&#160;</td><td class="fielddoc"><p>LDAPS协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaa954c33eb961e7244f0b2814b50f77ad0" name="a3815e4ed24921f9f5ada8aa1e068a1eaa954c33eb961e7244f0b2814b50f77ad0"></a>IMAPS&#160;</td><td class="fielddoc"><p>IMAPS协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaa56fda4f3112f71a83b6f6179e4b58dcd" name="a3815e4ed24921f9f5ada8aa1e068a1eaa56fda4f3112f71a83b6f6179e4b58dcd"></a>POP3S&#160;</td><td class="fielddoc"><p>POP3S协议端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaa9c6a577a2014b15b5028ca4ed63924ce" name="a3815e4ed24921f9f5ada8aa1e068a1eaa9c6a577a2014b15b5028ca4ed63924ce"></a>MYSQL&#160;</td><td class="fielddoc"><p>MySQL数据库端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaa7cb0bafd94a4d623be7b4eaa24ebf832" name="a3815e4ed24921f9f5ada8aa1e068a1eaa7cb0bafd94a4d623be7b4eaa24ebf832"></a>POSTGRESQL&#160;</td><td class="fielddoc"><p>PostgreSQL数据库端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaa7666d99040ffc30acad998de637c5691" name="a3815e4ed24921f9f5ada8aa1e068a1eaa7666d99040ffc30acad998de637c5691"></a>REDIS&#160;</td><td class="fielddoc"><p>Redis数据库端口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3815e4ed24921f9f5ada8aa1e068a1eaac03cf833c73f1c1703be17add0825fc2" name="a3815e4ed24921f9f5ada8aa1e068a1eaac03cf833c73f1c1703be17add0825fc2"></a>MONGODB&#160;</td><td class="fielddoc"><p>MongoDB数据库端口 </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00129">129</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="a789c965359ed369ce0e688981473899f" name="a789c965359ed369ce0e688981473899f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a789c965359ed369ce0e688981473899f">&#9670;&#160;</a></span>ports() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">neforce::ports::ports </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel default">default</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>默认构造函数 </p>
+<p>创建未定义端口的对象。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a789c965359ed369ce0e688981473899f">ports()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a9addb8e6ae40028b8ea1c36274c5cfe4">parse()</a>, <a class="el" href="#a789c965359ed369ce0e688981473899f">ports()</a> , 以及 <a class="el" href="ports_8hpp_source.html#l00184">ports()</a>.</p>
+
+</div>
+</div>
+<a id="ab96c800351de471007983b7a4e8abbb3" name="ab96c800351de471007983b7a4e8abbb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab96c800351de471007983b7a4e8abbb3">&#9670;&#160;</a></span>ports() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">neforce::ports::ports </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a3815e4ed24921f9f5ada8aa1e068a1ea">raw</a></td>          <td class="paramname"><span class="paramname"><em>port</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>从枚举值构造 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">port</td><td>端口枚举值 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00184">184</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="ports_8hpp_source.html#l00164">port</a> , 以及 <a class="el" href="#a789c965359ed369ce0e688981473899f">ports()</a>.</p>
+
+</div>
+</div>
+<a id="af13563c16edeede398398e3845e1cfc7" name="af13563c16edeede398398e3845e1cfc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af13563c16edeede398398e3845e1cfc7">&#9670;&#160;</a></span>ports() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">neforce::ports::ports </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___core_types.html#gabca631c03e4d34e2e77587fc66d05f52">uint16_t</a></td>          <td class="paramname"><span class="paramname"><em>port</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>从uint16_t构造 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">port</td><td>端口数值 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00191">191</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="ports_8hpp_source.html#l00164">port</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="aa5d45d53aa8b6a3921ab6b78e0594e39" name="aa5d45d53aa8b6a3921ab6b78e0594e39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5d45d53aa8b6a3921ab6b78e0594e39">&#9670;&#160;</a></span>is_dynamic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::ports::is_dynamic </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查端口是否在动态/私有端口范围内 </p>
+<dl class="section return"><dt>返回</dt><dd>若端口号在49152-65535范围内返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00230">230</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="ports_8hpp_source.html#l00164">port</a>.</p>
+
+</div>
+</div>
+<a id="abed3b6d9ff6ad3389d3c443284aa5336" name="abed3b6d9ff6ad3389d3c443284aa5336"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abed3b6d9ff6ad3389d3c443284aa5336">&#9670;&#160;</a></span>is_registered()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::ports::is_registered </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查端口是否在注册端口范围内 </p>
+<dl class="section return"><dt>返回</dt><dd>若端口号在1024-49151范围内返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00221">221</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="ports_8hpp_source.html#l00164">port</a>.</p>
+
+</div>
+</div>
+<a id="a5673de8862734bc403373b480bafd116" name="a5673de8862734bc403373b480bafd116"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5673de8862734bc403373b480bafd116">&#9670;&#160;</a></span>is_well_known()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::ports::is_well_known </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查端口是否在知名端口范围内 </p>
+<dl class="section return"><dt>返回</dt><dd>若端口号在0-1023范围内返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00215">215</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="ports_8hpp_source.html#l00164">port</a>.</p>
+
+</div>
+</div>
+<a id="ad48380f45b8ed2ccf1b45f25adc10454" name="ad48380f45b8ed2ccf1b45f25adc10454"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad48380f45b8ed2ccf1b45f25adc10454">&#9670;&#160;</a></span>operator bool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">neforce::ports::operator bool </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>布尔转换运算符 </p>
+<dl class="section return"><dt>返回</dt><dd>端口有效返回true</dd></dl>
+<p>检查端口是否为undef。 </p>
+
+<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00201">201</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="ports_8hpp_source.html#l00164">port</a> , 以及 <a class="el" href="ports_8hpp_source.html#l00130">UNDEF</a>.</p>
+
+</div>
+</div>
+<a id="a3960601d307d82b3f33cd8af16e7f2b9" name="a3960601d307d82b3f33cd8af16e7f2b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3960601d307d82b3f33cd8af16e7f2b9">&#9670;&#160;</a></span>operator uint16_t()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">neforce::ports::operator <a class="el" href="group___core_types.html#gabca631c03e4d34e2e77587fc66d05f52">uint16_t</a> </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>uint16_t转换运算符 </p>
+<dl class="section return"><dt>返回</dt><dd>端口的数值表示 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="ports_8hpp_source.html">ports.hpp</a> 第 <a class="el" href="ports_8hpp_source.html#l00207">207</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="ports_8hpp_source.html#l00164">port</a>.</p>
+
+</div>
+</div>
+<a id="a9addb8e6ae40028b8ea1c36274c5cfe4" name="a9addb8e6ae40028b8ea1c36274c5cfe4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9addb8e6ae40028b8ea1c36274c5cfe4">&#9670;&#160;</a></span>parse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a789c965359ed369ce0e688981473899f">ports</a> neforce::ports::parse </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string_view.html#ga5a6e8b9da034ce8d4818231c4e005eff">string_view</a></td>          <td class="paramname"><span class="paramname"><em>scheme</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>从协议名称解析端口 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">scheme</td><td>协议名称（如"http"、"https"、"ws"等） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>对应的端口对象，无法识别返回undef</dd></dl>
+<p>支持常见协议名称到端口号的映射。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a789c965359ed369ce0e688981473899f">ports()</a>.</p>
+
+</div>
+</div>
+<a id="ad70273293a7af709766258523016a966" name="ad70273293a7af709766258523016a966"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad70273293a7af709766258523016a966">&#9670;&#160;</a></span>to_string() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> neforce::ports::to_string </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>转换为协议名称字符串 </p>
+<dl class="section return"><dt>返回</dt><dd>协议名称，非标准端口返回空字符串</dd></dl>
+<p>将端口号转换为对应的协议名称。 对于80端口返回"http"，443端口返回"https"。 </p>
+
+</div>
+</div>
+<a id="a8389c1d2a8c0039d47ff1b5102eb14d7" name="a8389c1d2a8c0039d47ff1b5102eb14d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8389c1d2a8c0039d47ff1b5102eb14d7">&#9670;&#160;</a></span>to_string() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> neforce::ports::to_string </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>is_ws</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>转换为协议名称字符串（支持WebSocket） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">is_ws</td><td>是否为WebSocket协议 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>协议名称</dd></dl>
+<p>当is_ws为true时，80端口返回"ws"，443端口返回"wss"； 否则返回"http"/"https"。 </p>
+
+</div>
+</div>
+<hr/>该结构体的文档由以下文件生成:<ul>
+<li><a class="el" href="ports_8hpp_source.html">ports.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><a href="structneforce_1_1ports.html">ports</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,991 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1mysql__result" kind="struct" language="C++" prot="public" final="yes">
+    <compoundname>neforce::mysql_result</compoundname>
+    <basecompoundref refid="structneforce_1_1idb__tb__result" prot="public" virt="non-virtual">neforce::idb_tb_result</basecompoundref>
+    <includes refid="mysql__result_8hpp" local="no">mysql_result.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structneforce_1_1mysql__result_1acadff1564cf7a9cb9f579fd53559b69d" prot="private" static="no" mutable="no">
+        <type>::MYSQL_RES *</type>
+        <definition>::MYSQL_RES* neforce::mysql_result::result_</definition>
+        <argsstring></argsstring>
+        <name>result_</name>
+        <qualifiedname>neforce::mysql_result::result_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>MySQL结果集句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="42" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1mysql__result_1a6741847fc7d13ed0e521a60c32815c0a" prot="private" static="no" mutable="no">
+        <type>::MYSQL_ROW</type>
+        <definition>::MYSQL_ROW neforce::mysql_result::cursor_</definition>
+        <argsstring></argsstring>
+        <name>cursor_</name>
+        <qualifiedname>neforce::mysql_result::cursor_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>当前行指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="43" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1mysql__result_1afab96f440ee14a0666090aa2b77541fc" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::mysql_result::rows_</definition>
+        <argsstring></argsstring>
+        <name>rows_</name>
+        <qualifiedname>neforce::mysql_result::rows_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>总行数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="44" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1mysql__result_1a8caa3697ff478e254de7105338a82637" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::mysql_result::columns_</definition>
+        <argsstring></argsstring>
+        <name>columns_</name>
+        <qualifiedname>neforce::mysql_result::columns_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>总列数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="45" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1mysql__result_1a2c3e7662b76404126fd5f5dc54f8350b" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref> &gt; &gt;</type>
+        <definition>unique_ptr&lt;vector&lt;string_view&gt; &gt; neforce::mysql_result::column_name_</definition>
+        <argsstring></argsstring>
+        <name>column_name_</name>
+        <qualifiedname>neforce::mysql_result::column_name_</qualifiedname>
+        <briefdescription>
+<para>列名列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="47" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1mysql__result_1a3278b033e1ad827be27dd5f736a49a51" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt;::enum_field_types &gt; &gt;</type>
+        <definition>unique_ptr&lt;vector&lt;::enum_field_types&gt; &gt; neforce::mysql_result::column_types_</definition>
+        <argsstring></argsstring>
+        <name>column_types_</name>
+        <qualifiedname>neforce::mysql_result::column_types_</qualifiedname>
+        <briefdescription>
+<para>列类型列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="48" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1mysql__result_1a861087427f5aff06cc844d1ca55a73e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::mysql_result::mysql_result</definition>
+        <argsstring>()</argsstring>
+        <name>mysql_result</name>
+        <qualifiedname>neforce::mysql_result::mysql_result</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>创建空结果集。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="56" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1mysql__result_1a70092d2cdeabaca83d0a85461d05d10e" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::mysql_result::mysql_result</definition>
+        <argsstring>(::MYSQL_RES *result)</argsstring>
+        <name>mysql_result</name>
+        <qualifiedname>neforce::mysql_result::mysql_result</qualifiedname>
+        <param>
+          <type>::MYSQL_RES *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MySQL结果集句柄</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+获取结果集元数据。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="64" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1mysql__result_1ad3f333d8d90c60ddeed076651a05ca1b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::mysql_result::~mysql_result</definition>
+        <argsstring>() override</argsstring>
+        <name>~mysql_result</name>
+        <qualifiedname>neforce::mysql_result::~mysql_result</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>释放结果集资源。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="71" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1mysql__result_1af33f8b035f15a1086b23445009a07309" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::mysql_result::empty</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>empty</name>
+        <qualifiedname>neforce::mysql_result::empty</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__result_1a0040c4ab65141f26d892682ac4cab61a">empty</reimplements>
+        <briefdescription>
+<para>检查结果集是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>空结果集返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="77" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" bodystart="77" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1mysql__result_1a80ca2bd79a1cdfd13829aa0ff6d09c20" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type><ref refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::mysql_result::row_count</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>row_count</name>
+        <qualifiedname>neforce::mysql_result::row_count</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__tb__result_1a0bc58ae12ed7f0d0d34c94332c2407a7">row_count</reimplements>
+        <briefdescription>
+<para>获取结果集行数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>总行数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="83" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" bodystart="83" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1mysql__result_1a2fa2470f682423727303dbea2a386fc6" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type><ref refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::mysql_result::column_count</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>column_count</name>
+        <qualifiedname>neforce::mysql_result::column_count</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__tb__result_1a8fd1c091cf5f36dee5c20e42d73c8135">column_count</reimplements>
+        <briefdescription>
+<para>获取结果集列数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>总列数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="89" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" bodystart="89" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1mysql__result_1a88d2bcc76927f1ab2376969f828a8368" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref> &gt; &amp;</type>
+        <definition>const vector&lt; string_view &gt; &amp; neforce::mysql_result::column_names</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>column_names</name>
+        <qualifiedname>neforce::mysql_result::column_names</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__tb__result_1ab7a91a67dd864e43c6749ee92409ecb9">column_names</reimplements>
+        <briefdescription>
+<para>获取列名列表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>列名视图列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="95" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" bodystart="95" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1mysql__result_1a067cb1babd7ae130a0d7f4b20bad9c63" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="structneforce_1_1column__meta" kindref="compound">column_meta</ref></type>
+        <definition>column_meta neforce::mysql_result::column_metadata</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>column_metadata</name>
+        <qualifiedname>neforce::mysql_result::column_metadata</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__tb__result_1a97664c0b07fa1bf508e05a30e53146be">column_metadata</reimplements>
+        <param>
+          <type><ref refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取列元数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引（从0开始） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>列元数据 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="97" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1mysql__result_1ad75ba92b0b4dd6aaaca718b7093c0e82" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt;::enum_field_types &gt; &amp;</type>
+        <definition>const vector&lt;::enum_field_types &gt; &amp; neforce::mysql_result::column_types</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>column_types</name>
+        <qualifiedname>neforce::mysql_result::column_types</qualifiedname>
+        <briefdescription>
+<para>获取列类型列表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>MySQL字段类型列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="103" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" bodystart="103" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1mysql__result_1aead3451df547d95689cfc4635488b45c" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::mysql_result::next</definition>
+        <argsstring>() noexcept override</argsstring>
+        <name>next</name>
+        <qualifiedname>neforce::mysql_result::next</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__result_1a60e0f20f35ec5525768825a37772489e">next</reimplements>
+        <briefdescription>
+<para>移动到下一行 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>成功移动返回true，到达末尾返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="109" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1mysql__result_1a0d605285474741e97e97e0955ee6c4af" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+        <definition>string_view neforce::mysql_result::get</definition>
+        <argsstring>(size_type n) const noexcept override</argsstring>
+        <name>get</name>
+        <qualifiedname>neforce::mysql_result::get</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__tb__result_1a41434171e9b717e55de7907eed6d3e5f">get</reimplements>
+        <param>
+          <type><ref refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取字符串值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引（从0开始） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字符串视图 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="116" column="18"/>
+        <references refid="structneforce_1_1mysql__result_1a0d605285474741e97e97e0955ee6c4af">get</references>
+        <referencedby refid="structneforce_1_1mysql__result_1a0d605285474741e97e97e0955ee6c4af">get</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1mysql__result_1a1df471a76d5edd7318d0d86d5afcf22c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::mysql_result::get_bool</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_bool</name>
+        <qualifiedname>neforce::mysql_result::get_bool</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__tb__result_1a11939064489f7227c9014a073b934225">get_bool</reimplements>
+        <param>
+          <type><ref refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取布尔值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>布尔值 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1database__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="124" column="11"/>
+        <references refid="structneforce_1_1mysql__result_1a1df471a76d5edd7318d0d86d5afcf22c">get_bool</references>
+        <referencedby refid="structneforce_1_1mysql__result_1a1df471a76d5edd7318d0d86d5afcf22c">get_bool</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1mysql__result_1a00017f0cf06aa90b4e3b62f9ddc1bcf1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="group___core_types_1gac6f134e56c47f0f3a9e09fe035862ce1" kindref="member">int16_t</ref></type>
+        <definition>int16_t neforce::mysql_result::get_int16</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_int16</name>
+        <qualifiedname>neforce::mysql_result::get_int16</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__tb__result_1a89a8d743de698b182d26e7713c3dcf0f">get_int16</reimplements>
+        <param>
+          <type><ref refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取16位整数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>16位整数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1database__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="132" column="14"/>
+        <references refid="structneforce_1_1mysql__result_1a00017f0cf06aa90b4e3b62f9ddc1bcf1">get_int16</references>
+        <referencedby refid="structneforce_1_1mysql__result_1a00017f0cf06aa90b4e3b62f9ddc1bcf1">get_int16</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1mysql__result_1a0157df6aa80e2cc79eea565c8bd29e0c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="group___core_types_1gaa0af497ed9ed410d4c911b409653515a" kindref="member">int32_t</ref></type>
+        <definition>int32_t neforce::mysql_result::get_int32</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_int32</name>
+        <qualifiedname>neforce::mysql_result::get_int32</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__tb__result_1a3b6ef4c03a0e22006be47885c3fbe936">get_int32</reimplements>
+        <param>
+          <type><ref refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取32位整数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>32位整数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1database__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="140" column="14"/>
+        <references refid="structneforce_1_1mysql__result_1a0157df6aa80e2cc79eea565c8bd29e0c">get_int32</references>
+        <referencedby refid="structneforce_1_1mysql__result_1a0157df6aa80e2cc79eea565c8bd29e0c">get_int32</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1mysql__result_1a6a882d1701cefa9a0e93f3946854f769" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="group___core_types_1ga0b098d32ebd9cc922390914e765ca674" kindref="member">int64_t</ref></type>
+        <definition>int64_t neforce::mysql_result::get_int64</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_int64</name>
+        <qualifiedname>neforce::mysql_result::get_int64</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__tb__result_1a29946ee1a36ec9c164a54c6417b1de39">get_int64</reimplements>
+        <param>
+          <type><ref refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取64位整数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>64位整数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1database__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="148" column="14"/>
+        <references refid="structneforce_1_1mysql__result_1a6a882d1701cefa9a0e93f3946854f769">get_int64</references>
+        <referencedby refid="structneforce_1_1mysql__result_1a6a882d1701cefa9a0e93f3946854f769">get_int64</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1mysql__result_1a082cf34717687cdcc1ecb54d2d4c2410" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="group___core_types_1ga1b74ac5b55adeb973d712d64e95c9a88" kindref="member">float32_t</ref></type>
+        <definition>float32_t neforce::mysql_result::get_float32</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_float32</name>
+        <qualifiedname>neforce::mysql_result::get_float32</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__tb__result_1aeefac909e3fee952c69fc346d3d22844">get_float32</reimplements>
+        <param>
+          <type><ref refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取32位浮点值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>32位浮点数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1database__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="156" column="16"/>
+        <references refid="structneforce_1_1mysql__result_1a082cf34717687cdcc1ecb54d2d4c2410">get_float32</references>
+        <referencedby refid="structneforce_1_1mysql__result_1a082cf34717687cdcc1ecb54d2d4c2410">get_float32</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1mysql__result_1aaf476c65c5f1b176c00b78daa0c9f85a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="group___core_types_1gaaa239a2e1903add7d22b684a72e71c9a" kindref="member">float64_t</ref></type>
+        <definition>float64_t neforce::mysql_result::get_float64</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_float64</name>
+        <qualifiedname>neforce::mysql_result::get_float64</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__tb__result_1ab1c079a1e03c57ed9a50dcc1c1046350">get_float64</reimplements>
+        <param>
+          <type><ref refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取64位浮点值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>64位浮点数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1database__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="164" column="16"/>
+        <references refid="structneforce_1_1mysql__result_1aaf476c65c5f1b176c00b78daa0c9f85a">get_float64</references>
+        <referencedby refid="structneforce_1_1mysql__result_1aaf476c65c5f1b176c00b78daa0c9f85a">get_float64</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1mysql__result_1ad4bf7fa9a86c71b1563abb54cf3c3c73" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="group___core_types_1ga9826f42a5c348e197df1f2395f4471b1" kindref="member">decimal_t</ref></type>
+        <definition>decimal_t neforce::mysql_result::get_decimal</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_decimal</name>
+        <qualifiedname>neforce::mysql_result::get_decimal</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__tb__result_1a4098b769941be4f118347eaaab1fdee1">get_decimal</reimplements>
+        <param>
+          <type><ref refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取十进制值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>十进制数对象 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1database__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="172" column="16"/>
+        <references refid="structneforce_1_1mysql__result_1ad4bf7fa9a86c71b1563abb54cf3c3c73">get_decimal</references>
+        <referencedby refid="structneforce_1_1mysql__result_1ad4bf7fa9a86c71b1563abb54cf3c3c73">get_decimal</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1mysql__result_1ae26478e35933cf68a1c9eab2993fa843" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; char &gt;</type>
+        <definition>vector&lt; char &gt; neforce::mysql_result::get_blob</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_blob</name>
+        <qualifiedname>neforce::mysql_result::get_blob</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__tb__result_1a7921f17149ed4ffad856ba48aaa7c85d">get_blob</reimplements>
+        <param>
+          <type><ref refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取BLOB二进制数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字节向量 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1database__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="180" column="13"/>
+        <references refid="structneforce_1_1mysql__result_1ae26478e35933cf68a1c9eab2993fa843">get_blob</references>
+        <referencedby refid="structneforce_1_1mysql__result_1ae26478e35933cf68a1c9eab2993fa843">get_blob</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1mysql__result_1a504e9f5423181cd513fc1e90a9978bf7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="group___core_types_1ga5405672bf9962081e6fcd1448d4bce4a" kindref="member">uint64_t</ref></type>
+        <definition>uint64_t neforce::mysql_result::get_bit</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_bit</name>
+        <qualifiedname>neforce::mysql_result::get_bit</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__tb__result_1a8732243cbfe3ce8b7a8c730e63de7683">get_bit</reimplements>
+        <param>
+          <type><ref refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取BIT位字段值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>位字段的整数值 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1database__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="188" column="15"/>
+        <references refid="structneforce_1_1mysql__result_1a504e9f5423181cd513fc1e90a9978bf7">get_bit</references>
+        <referencedby refid="structneforce_1_1mysql__result_1a504e9f5423181cd513fc1e90a9978bf7">get_bit</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1mysql__result_1a23c5c65a5037aaccb4542bc7e628a602" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classneforce_1_1date" kindref="compound">date</ref></type>
+        <definition>date neforce::mysql_result::get_date</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_date</name>
+        <qualifiedname>neforce::mysql_result::get_date</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__tb__result_1a9c60c71cbf41463e3ac48e891085a1e2">get_date</reimplements>
+        <param>
+          <type><ref refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取日期值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>日期对象 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1database__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="196" column="11"/>
+        <references refid="structneforce_1_1mysql__result_1a23c5c65a5037aaccb4542bc7e628a602">get_date</references>
+        <referencedby refid="structneforce_1_1mysql__result_1a23c5c65a5037aaccb4542bc7e628a602">get_date</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1mysql__result_1a4b64e4b66d66a95ba36835109674bd9d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classneforce_1_1time" kindref="compound">time</ref></type>
+        <definition>time neforce::mysql_result::get_time</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_time</name>
+        <qualifiedname>neforce::mysql_result::get_time</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__tb__result_1a877e69903f6fa3dc36ebac8d3f52e9b4">get_time</reimplements>
+        <param>
+          <type><ref refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取时间值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>时间对象 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1database__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="204" column="11"/>
+        <references refid="structneforce_1_1mysql__result_1a4b64e4b66d66a95ba36835109674bd9d">get_time</references>
+        <referencedby refid="structneforce_1_1mysql__result_1a4b64e4b66d66a95ba36835109674bd9d">get_time</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1mysql__result_1af75ce9b18bc89f52caf674e53722763b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classneforce_1_1datetime" kindref="compound">datetime</ref></type>
+        <definition>datetime neforce::mysql_result::get_datetime</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_datetime</name>
+        <qualifiedname>neforce::mysql_result::get_datetime</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__tb__result_1af53ce2d9bb54c0d55110488bf4d3e19f">get_datetime</reimplements>
+        <param>
+          <type><ref refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取日期时间值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>日期时间对象 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1database__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="212" column="15"/>
+        <references refid="structneforce_1_1mysql__result_1af75ce9b18bc89f52caf674e53722763b">get_datetime</references>
+        <referencedby refid="structneforce_1_1mysql__result_1af75ce9b18bc89f52caf674e53722763b">get_datetime</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1mysql__result_1a5564580d8d22422abf625a686b1d75cb" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classneforce_1_1timestamp" kindref="compound">timestamp</ref></type>
+        <definition>timestamp neforce::mysql_result::get_timestamp</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_timestamp</name>
+        <qualifiedname>neforce::mysql_result::get_timestamp</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__tb__result_1a12b0ad351f41f87d442f95394646347f">get_timestamp</reimplements>
+        <param>
+          <type><ref refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取时间戳值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>时间戳对象 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1database__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="220" column="16"/>
+        <references refid="structneforce_1_1mysql__result_1a5564580d8d22422abf625a686b1d75cb">get_timestamp</references>
+        <referencedby refid="structneforce_1_1mysql__result_1a5564580d8d22422abf625a686b1d75cb">get_timestamp</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>MySQL查询结果集类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>实现idb_tb_result接口，支持结果集遍历、列名获取和类型安全的数据读取。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>结果集元数据获取</para>
+</listitem><listitem><para>逐行遍历结果集</para>
+</listitem><listitem><para>支持多种数据类型转换</para>
+</listitem><listitem><para>自动处理NULL值和类型转换 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>neforce::idb_result</label>
+        <link refid="structneforce_1_1idb__result"/>
+      </node>
+      <node id="2">
+        <label>neforce::idb_tb_result</label>
+        <link refid="structneforce_1_1idb__tb__result"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::mysql_result</label>
+        <link refid="structneforce_1_1mysql__result"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>neforce::idb_result</label>
+        <link refid="structneforce_1_1idb__result"/>
+      </node>
+      <node id="2">
+        <label>neforce::idb_tb_result</label>
+        <link refid="structneforce_1_1idb__tb__result"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::mysql_result</label>
+        <link refid="structneforce_1_1mysql__result"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="40" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" bodystart="40" bodyend="221"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1mysql__result_1a2fa2470f682423727303dbea2a386fc6" prot="public" virt="virtual"><scope>neforce::mysql_result</scope><name>column_count</name></member>
+      <member refid="structneforce_1_1mysql__result_1a067cb1babd7ae130a0d7f4b20bad9c63" prot="public" virt="virtual"><scope>neforce::mysql_result</scope><name>column_metadata</name></member>
+      <member refid="structneforce_1_1mysql__result_1a2c3e7662b76404126fd5f5dc54f8350b" prot="private" virt="non-virtual"><scope>neforce::mysql_result</scope><name>column_name_</name></member>
+      <member refid="structneforce_1_1mysql__result_1a88d2bcc76927f1ab2376969f828a8368" prot="public" virt="virtual"><scope>neforce::mysql_result</scope><name>column_names</name></member>
+      <member refid="structneforce_1_1mysql__result_1ad75ba92b0b4dd6aaaca718b7093c0e82" prot="public" virt="non-virtual"><scope>neforce::mysql_result</scope><name>column_types</name></member>
+      <member refid="structneforce_1_1mysql__result_1a3278b033e1ad827be27dd5f736a49a51" prot="private" virt="non-virtual"><scope>neforce::mysql_result</scope><name>column_types_</name></member>
+      <member refid="structneforce_1_1mysql__result_1a8caa3697ff478e254de7105338a82637" prot="private" virt="non-virtual"><scope>neforce::mysql_result</scope><name>columns_</name></member>
+      <member refid="structneforce_1_1mysql__result_1a6741847fc7d13ed0e521a60c32815c0a" prot="private" virt="non-virtual"><scope>neforce::mysql_result</scope><name>cursor_</name></member>
+      <member refid="structneforce_1_1idb__result_1af7a1fe6b1af2018ef7737471858c214c" prot="public" virt="non-virtual"><scope>neforce::mysql_result</scope><name>difference_type</name></member>
+      <member refid="structneforce_1_1mysql__result_1af33f8b035f15a1086b23445009a07309" prot="public" virt="virtual"><scope>neforce::mysql_result</scope><name>empty</name></member>
+      <member refid="structneforce_1_1mysql__result_1a0d605285474741e97e97e0955ee6c4af" prot="public" virt="virtual"><scope>neforce::mysql_result</scope><name>get</name></member>
+      <member refid="structneforce_1_1mysql__result_1a504e9f5423181cd513fc1e90a9978bf7" prot="public" virt="virtual"><scope>neforce::mysql_result</scope><name>get_bit</name></member>
+      <member refid="structneforce_1_1mysql__result_1ae26478e35933cf68a1c9eab2993fa843" prot="public" virt="virtual"><scope>neforce::mysql_result</scope><name>get_blob</name></member>
+      <member refid="structneforce_1_1mysql__result_1a1df471a76d5edd7318d0d86d5afcf22c" prot="public" virt="virtual"><scope>neforce::mysql_result</scope><name>get_bool</name></member>
+      <member refid="structneforce_1_1mysql__result_1a23c5c65a5037aaccb4542bc7e628a602" prot="public" virt="virtual"><scope>neforce::mysql_result</scope><name>get_date</name></member>
+      <member refid="structneforce_1_1mysql__result_1af75ce9b18bc89f52caf674e53722763b" prot="public" virt="virtual"><scope>neforce::mysql_result</scope><name>get_datetime</name></member>
+      <member refid="structneforce_1_1mysql__result_1ad4bf7fa9a86c71b1563abb54cf3c3c73" prot="public" virt="virtual"><scope>neforce::mysql_result</scope><name>get_decimal</name></member>
+      <member refid="structneforce_1_1mysql__result_1a082cf34717687cdcc1ecb54d2d4c2410" prot="public" virt="virtual"><scope>neforce::mysql_result</scope><name>get_float32</name></member>
+      <member refid="structneforce_1_1mysql__result_1aaf476c65c5f1b176c00b78daa0c9f85a" prot="public" virt="virtual"><scope>neforce::mysql_result</scope><name>get_float64</name></member>
+      <member refid="structneforce_1_1mysql__result_1a00017f0cf06aa90b4e3b62f9ddc1bcf1" prot="public" virt="virtual"><scope>neforce::mysql_result</scope><name>get_int16</name></member>
+      <member refid="structneforce_1_1mysql__result_1a0157df6aa80e2cc79eea565c8bd29e0c" prot="public" virt="virtual"><scope>neforce::mysql_result</scope><name>get_int32</name></member>
+      <member refid="structneforce_1_1mysql__result_1a6a882d1701cefa9a0e93f3946854f769" prot="public" virt="virtual"><scope>neforce::mysql_result</scope><name>get_int64</name></member>
+      <member refid="structneforce_1_1mysql__result_1a4b64e4b66d66a95ba36835109674bd9d" prot="public" virt="virtual"><scope>neforce::mysql_result</scope><name>get_time</name></member>
+      <member refid="structneforce_1_1mysql__result_1a5564580d8d22422abf625a686b1d75cb" prot="public" virt="virtual"><scope>neforce::mysql_result</scope><name>get_timestamp</name></member>
+      <member refid="structneforce_1_1mysql__result_1a861087427f5aff06cc844d1ca55a73e1" prot="public" virt="non-virtual"><scope>neforce::mysql_result</scope><name>mysql_result</name></member>
+      <member refid="structneforce_1_1mysql__result_1a70092d2cdeabaca83d0a85461d05d10e" prot="public" virt="non-virtual"><scope>neforce::mysql_result</scope><name>mysql_result</name></member>
+      <member refid="structneforce_1_1mysql__result_1aead3451df547d95689cfc4635488b45c" prot="public" virt="virtual"><scope>neforce::mysql_result</scope><name>next</name></member>
+      <member refid="structneforce_1_1mysql__result_1acadff1564cf7a9cb9f579fd53559b69d" prot="private" virt="non-virtual"><scope>neforce::mysql_result</scope><name>result_</name></member>
+      <member refid="structneforce_1_1mysql__result_1a80ca2bd79a1cdfd13829aa0ff6d09c20" prot="public" virt="virtual"><scope>neforce::mysql_result</scope><name>row_count</name></member>
+      <member refid="structneforce_1_1mysql__result_1afab96f440ee14a0666090aa2b77541fc" prot="private" virt="non-virtual"><scope>neforce::mysql_result</scope><name>rows_</name></member>
+      <member refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" prot="public" virt="non-virtual"><scope>neforce::mysql_result</scope><name>size_type</name></member>
+      <member refid="structneforce_1_1idb__result_1af5e886679c216c3b3d063d16d32eb9c7" prot="public" virt="virtual"><scope>neforce::mysql_result</scope><name>~idb_result</name></member>
+      <member refid="structneforce_1_1idb__tb__result_1a1803bea7393916676c9fa3079adbb59d" prot="public" virt="non-virtual"><scope>neforce::mysql_result</scope><name>~idb_tb_result</name></member>
+      <member refid="structneforce_1_1mysql__result_1ad3f333d8d90c60ddeed076651a05ca1b" prot="public" virt="non-virtual"><scope>neforce::mysql_result</scope><name>~mysql_result</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

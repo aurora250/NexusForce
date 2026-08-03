@@ -4,20 +4,21 @@
     <compoundname>UTFConverts</compoundname>
     <title>UTF转换</title>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___u_t_f_converts_1ga64a58369986078d7a0ef24ca1a53c920" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1gab37042647bf269d5f84844a00bc70fc4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
-        <definition>string to_string</definition>
+        <type>string</type>
+        <definition>string neforce::to_string</definition>
         <argsstring>(const CharT &amp;c)</argsstring>
         <name>to_string</name>
+        <qualifiedname>neforce::to_string</qualifiedname>
         <param>
           <type>const CharT &amp;</type>
           <declname>c</declname>
@@ -51,36 +52,47 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="115" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="115" bodyend="117"/>
-        <references refid="group___u_t_f_converts_1ga64a58369986078d7a0ef24ca1a53c920" compoundref="icharacter_8hpp" startline="115" endline="117">to_string</references>
-        <referencedby refid="classload__balancer_1a8608548c02b515560a21bf95544e4065" compoundref="load__balancer_8hpp" startline="154" endline="161">load_balancer::backend_hosts</referencedby>
-        <referencedby refid="group___logging_1ga7ba3f1921075bd3adc62d2915630fce7" compoundref="log__sink_8hpp" startline="30" endline="30">default_sink_format</referencedby>
-        <referencedby refid="classsys__console_1ad7d29652f9ee122c5d5356de88ee7aa5" compoundref="console_8hpp" startline="330" endline="333">sys_console::eprint</referencedby>
-        <referencedby refid="classsys__console_1ad0aef99d1ef90300e1f3ec0f4e9b5c88" compoundref="console_8hpp" startline="358" endline="362">sys_console::eprintln</referencedby>
-        <referencedby refid="classsys__console_1a84916ebeddb2d36af5165f29f8254243" compoundref="console_8hpp" startline="220" endline="223">sys_console::print</referencedby>
-        <referencedby refid="classsys__console_1a5aae6ea9c8a40a30b1060cc2ebfa94e9" compoundref="console_8hpp" startline="244" endline="249">sys_console::printc</referencedby>
-        <referencedby refid="classsys__console_1aefcb792ac58903b47bcfbbd3d447f8e1" compoundref="console_8hpp" startline="302" endline="307">sys_console::printcln</referencedby>
-        <referencedby refid="classsys__console_1af72351fee58499d664c1d9f37e9cddfc" compoundref="console_8hpp" startline="276" endline="280">sys_console::println</referencedby>
-        <referencedby refid="classstring__ref_1ad8ce0d241d04c64cefde696793ef6d46" compoundref="ref_8hpp" startline="202" endline="203">string_ref::string_ref</referencedby>
-        <referencedby refid="group___u_t_f_converts_1ga02f6f68a057ef3aa6f5aa756017fb6b6" compoundref="icharacter_8hpp" startline="159" endline="161">to_string</referencedby>
-        <referencedby refid="group___u_t_f_converts_1ga7e1cb256d7dd43082b3c8cc71c790d9a" compoundref="icharacter_8hpp" startline="148" endline="150">to_string</referencedby>
-        <referencedby refid="group___u_t_f_converts_1gae298d8b4793456d3eee866c1034a99c4" compoundref="icharacter_8hpp" startline="137" endline="139">to_string</referencedby>
-        <referencedby refid="group___u_t_f_converts_1ga64a58369986078d7a0ef24ca1a53c920" compoundref="icharacter_8hpp" startline="115" endline="117">to_string</referencedby>
-        <referencedby refid="group___u_t_f_converts_1gace375e441e795bef948800d0eb5b37bf" compoundref="icharacter_8hpp" startline="126" endline="128">to_string</referencedby>
+        <references refid="group___u_t_f_converts_1gab37042647bf269d5f84844a00bc70fc4" compoundref="icharacter_8hpp" startline="115" endline="117">neforce::to_string</references>
+        <referencedby refid="classneforce_1_1string__builder_1ac71bbfab438dc427f846e7d5837b202d" compoundref="string__builder_8hpp" startline="91" endline="96">neforce::string_builder::append</referencedby>
+        <referencedby refid="classneforce_1_1http_1_1load__balancer_1a42092ffeb25235b191de3aa846006765" compoundref="load__balancer_8hpp" startline="154" endline="161">neforce::http::load_balancer::backend_hosts</referencedby>
+        <referencedby refid="group___logging_1ga91c817601024d3b815eb4bc44e4c17c4" compoundref="log__sink_8hpp" startline="30" endline="30">neforce::default_sink_format</referencedby>
+        <referencedby refid="classneforce_1_1sys__console_1a634e92ed7b2a99eabf4c23f92a8d4eea" compoundref="console_8hpp" startline="331" endline="334">neforce::sys_console::eprint</referencedby>
+        <referencedby refid="classneforce_1_1sys__console_1a90927fd7824476e23a75be340c46eda1" compoundref="console_8hpp" startline="245" endline="250">neforce::sys_console::printc</referencedby>
+        <referencedby refid="classneforce_1_1tui_1_1string__ref_1a8c5eca480d0c62afa8aa0cc0701f736a" compoundref="ref_8hpp" startline="202" endline="203">neforce::tui::string_ref::string_ref</referencedby>
+        <referencedby refid="group___u_t_f_converts_1ga1c1ce0a6377d32c9a8bb6cea23475864" compoundref="icharacter_8hpp" startline="159" endline="161">neforce::to_string</referencedby>
+        <referencedby refid="group___u_t_f_converts_1ga854dfa261c471a456adf564d6540a6c9" compoundref="icharacter_8hpp" startline="148" endline="150">neforce::to_string</referencedby>
+        <referencedby refid="group___u_t_f_converts_1ga8180fd53f0a0c6aa38e3b1e2d9745ba5" compoundref="icharacter_8hpp" startline="137" endline="139">neforce::to_string</referencedby>
+        <referencedby refid="group___u_t_f_converts_1gab37042647bf269d5f84844a00bc70fc4" compoundref="icharacter_8hpp" startline="115" endline="117">neforce::to_string</referencedby>
+        <referencedby refid="group___u_t_f_converts_1gaef9018733030d3003c0e49fdc33e1abc" compoundref="icharacter_8hpp" startline="126" endline="128">neforce::to_string</referencedby>
+        <referencedby refid="group___string_converts_1ga500234cc4795d260a27542a7408a4ee2" compoundref="to__string_8hpp" startline="159" endline="161">neforce::to_string</referencedby>
+        <referencedby refid="group___string_converts_1ga74d6ab334d8f518810ab5b94c6b00739" compoundref="to__string_8hpp" startline="147" endline="149">neforce::to_string</referencedby>
+        <referencedby refid="group___logging_1ga26ccc87120faa7840aaae70fcbd1fc27" compoundref="log__event_8hpp" startline="82" endline="101">neforce::to_string</referencedby>
+        <referencedby refid="group___string_converts_1ga3e81a0f62575632f9a7db4dbe8f1bd5a" compoundref="to__string_8hpp" startline="171" endline="173">neforce::to_string</referencedby>
+        <referencedby refid="to__string_8hpp_1ga90e1583389e8edade08d488c8ee7a0b9" compoundref="to__string_8hpp" startline="124" endline="126">neforce::to_string</referencedby>
+        <referencedby refid="to__string_8hpp_1ga90e1583389e8edade08d488c8ee7a0b9" compoundref="to__string_8hpp" startline="135" endline="137">neforce::to_string</referencedby>
+        <referencedby refid="to__string_8hpp_1ga90e1583389e8edade08d488c8ee7a0b9" compoundref="to__string_8hpp" startline="94" endline="96">neforce::to_string</referencedby>
+        <referencedby refid="group___string_converts_1ga90e1583389e8edade08d488c8ee7a0b9" compoundref="istringify_8hpp" startline="68" endline="70">neforce::to_string</referencedby>
+        <referencedby refid="to__string_8hpp_1ga90e1583389e8edade08d488c8ee7a0b9" compoundref="to__string_8hpp" startline="56" endline="58">neforce::to_string</referencedby>
+        <referencedby refid="group___string_converts_1gac11ad638deb7014420abcafe7a46237b" compoundref="to__string_8hpp" startline="36" endline="38">neforce::to_string</referencedby>
+        <referencedby refid="group___string_converts_1ga80e3113c6dbd89060b34bd10116a7c70" compoundref="to__string_8hpp" startline="214" endline="216">neforce::to_string</referencedby>
+        <referencedby refid="group___string_converts_1ga0f741552eda9402f0f966dce62232c24" compoundref="to__string_8hpp" startline="45" endline="45">neforce::to_string</referencedby>
+        <referencedby refid="group___u_t_f_converts_1ga2c62007376a0ca9641e372687f3045f5" compoundref="icharacter_8hpp" startline="169" endline="171">neforce::to_string&lt; char &gt;</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1gace375e441e795bef948800d0eb5b37bf" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1gaef9018733030d3003c0e49fdc33e1abc" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
-        <definition>string to_string</definition>
+        <type>string</type>
+        <definition>string neforce::to_string</definition>
         <argsstring>(const CharT *x)</argsstring>
         <name>to_string</name>
+        <qualifiedname>neforce::to_string</qualifiedname>
         <param>
           <type>const CharT *</type>
           <declname>x</declname>
@@ -114,24 +126,25 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="126" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="126" bodyend="128"/>
-        <references refid="group___u_t_f_converts_1ga64a58369986078d7a0ef24ca1a53c920" compoundref="icharacter_8hpp" startline="115" endline="117">to_string</references>
+        <references refid="group___u_t_f_converts_1gab37042647bf269d5f84844a00bc70fc4" compoundref="icharacter_8hpp" startline="115" endline="117">neforce::to_string</references>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1gae298d8b4793456d3eee866c1034a99c4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1ga8180fd53f0a0c6aa38e3b1e2d9745ba5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
-        <definition>string to_string</definition>
+        <type>string</type>
+        <definition>string neforce::to_string</definition>
         <argsstring>(const basic_string_view&lt; CharT &gt; x)</argsstring>
         <name>to_string</name>
+        <qualifiedname>neforce::to_string</qualifiedname>
         <param>
-          <type>const <ref refid="classbasic__string__view" kindref="compound">basic_string_view</ref>&lt; CharT &gt;</type>
+          <type>const basic_string_view&lt; CharT &gt;</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -163,24 +176,25 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="137" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="137" bodyend="139"/>
-        <references refid="group___u_t_f_converts_1ga64a58369986078d7a0ef24ca1a53c920" compoundref="icharacter_8hpp" startline="115" endline="117">to_string</references>
+        <references refid="group___u_t_f_converts_1gab37042647bf269d5f84844a00bc70fc4" compoundref="icharacter_8hpp" startline="115" endline="117">neforce::to_string</references>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1ga7e1cb256d7dd43082b3c8cc71c790d9a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1ga854dfa261c471a456adf564d6540a6c9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
-        <definition>string to_string</definition>
+        <type>string</type>
+        <definition>string neforce::to_string</definition>
         <argsstring>(const basic_string&lt; CharT &gt; &amp;x)</argsstring>
         <name>to_string</name>
+        <qualifiedname>neforce::to_string</qualifiedname>
         <param>
-          <type>const <ref refid="classbasic__string" kindref="compound">basic_string</ref>&lt; CharT &gt; &amp;</type>
+          <type>const basic_string&lt; CharT &gt; &amp;</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -212,25 +226,26 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="148" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="148" bodyend="150"/>
-        <references refid="group___u_t_f_converts_1ga64a58369986078d7a0ef24ca1a53c920" compoundref="icharacter_8hpp" startline="115" endline="117">to_string</references>
-        <references refid="classbasic__string_1ad5aafd7e8c50ae4762af6e22069b90d7" compoundref="basic__string_8hpp" startline="2146" endline="2146">basic_string&lt; CharT, Traits, Alloc &gt;::view</references>
+        <references refid="group___u_t_f_converts_1gab37042647bf269d5f84844a00bc70fc4" compoundref="icharacter_8hpp" startline="115" endline="117">neforce::to_string</references>
+        <references refid="classneforce_1_1basic__string_1a0049fbf44e36f4c7f57ebc85a2b0a376" compoundref="basic__string_8hpp" startline="2147" endline="2147">neforce::basic_string&lt; CharT, Traits, Alloc &gt;::view</references>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1ga02f6f68a057ef3aa6f5aa756017fb6b6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1ga1c1ce0a6377d32c9a8bb6cea23475864" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
-        <definition>string to_string</definition>
+        <type>string</type>
+        <definition>string neforce::to_string</definition>
         <argsstring>(basic_string&lt; CharT &gt; &amp;&amp;x)</argsstring>
         <name>to_string</name>
+        <qualifiedname>neforce::to_string</qualifiedname>
         <param>
-          <type><ref refid="classbasic__string" kindref="compound">basic_string</ref>&lt; CharT &gt; &amp;&amp;</type>
+          <type>basic_string&lt; CharT &gt; &amp;&amp;</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -262,17 +277,18 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="159" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="159" bodyend="161"/>
-        <references refid="group___u_t_f_converts_1ga64a58369986078d7a0ef24ca1a53c920" compoundref="icharacter_8hpp" startline="115" endline="117">to_string</references>
+        <references refid="group___u_t_f_converts_1gab37042647bf269d5f84844a00bc70fc4" compoundref="icharacter_8hpp" startline="115" endline="117">neforce::to_string</references>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1ga52ad27734c78e586bc4f84a68f5dee13" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1ga2c62007376a0ca9641e372687f3045f5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
         </templateparamlist>
-        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
-        <definition>string to_string&lt; char &gt;</definition>
+        <type>string</type>
+        <definition>string neforce::to_string&lt; char &gt;</definition>
         <argsstring>(string &amp;&amp;x)</argsstring>
         <name>to_string&lt; char &gt;</name>
+        <qualifiedname>neforce::to_string&lt; char &gt;</qualifiedname>
         <param>
-          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;&amp;</type>
+          <type>string &amp;&amp;</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -295,22 +311,24 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="169" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="169" bodyend="171"/>
-        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="group___u_t_f_converts_1gab37042647bf269d5f84844a00bc70fc4" compoundref="icharacter_8hpp" startline="115" endline="117">neforce::to_string</references>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1ga223f42ea0aedd6f1edefc7d9c7d6acc6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1ga0444ed0512fc29824bcd1754e3868952" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1gac8b291943e376bed3f3ed295a7dd68af" kindref="member">wstring</ref></type>
-        <definition>wstring to_wstring</definition>
+        <type>wstring</type>
+        <definition>wstring neforce::to_wstring</definition>
         <argsstring>(const CharT &amp;x)</argsstring>
         <name>to_wstring</name>
+        <qualifiedname>neforce::to_wstring</qualifiedname>
         <param>
           <type>const CharT &amp;</type>
           <declname>x</declname>
@@ -344,27 +362,29 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="180" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="180" bodyend="182"/>
-        <references refid="group___u_t_f_converts_1ga223f42ea0aedd6f1edefc7d9c7d6acc6" compoundref="icharacter_8hpp" startline="180" endline="182">to_wstring</references>
-        <referencedby refid="group___u_t_f_converts_1ga06ec75b5dcecd81d12956f72fe56ace0" compoundref="icharacter_8hpp" startline="224" endline="226">to_wstring</referencedby>
-        <referencedby refid="group___u_t_f_converts_1gafa7dd90c76c380f05d88f1988bfb21b0" compoundref="icharacter_8hpp" startline="213" endline="215">to_wstring</referencedby>
-        <referencedby refid="group___u_t_f_converts_1gad5797a0294d31d819268f73a81dbdb5f" compoundref="icharacter_8hpp" startline="202" endline="204">to_wstring</referencedby>
-        <referencedby refid="group___u_t_f_converts_1ga223f42ea0aedd6f1edefc7d9c7d6acc6" compoundref="icharacter_8hpp" startline="180" endline="182">to_wstring</referencedby>
-        <referencedby refid="group___u_t_f_converts_1ga660c6b123aa4ec214bc2821601e85684" compoundref="icharacter_8hpp" startline="191" endline="193">to_wstring</referencedby>
+        <references refid="group___u_t_f_converts_1ga0444ed0512fc29824bcd1754e3868952" compoundref="icharacter_8hpp" startline="180" endline="182">neforce::to_wstring</references>
+        <referencedby refid="group___u_t_f_converts_1ga888b1329fc6ca61d3bef2b4f93ac92a5" compoundref="icharacter_8hpp" startline="224" endline="226">neforce::to_wstring</referencedby>
+        <referencedby refid="group___u_t_f_converts_1gaba0b922971bcf29c031a358bc68645ee" compoundref="icharacter_8hpp" startline="213" endline="215">neforce::to_wstring</referencedby>
+        <referencedby refid="group___u_t_f_converts_1ga59e9da732e1e8632157d6409d6d9f284" compoundref="icharacter_8hpp" startline="202" endline="204">neforce::to_wstring</referencedby>
+        <referencedby refid="group___u_t_f_converts_1ga0444ed0512fc29824bcd1754e3868952" compoundref="icharacter_8hpp" startline="180" endline="182">neforce::to_wstring</referencedby>
+        <referencedby refid="group___u_t_f_converts_1gac5b09648bc7e10ccd496cfb5b237bb86" compoundref="icharacter_8hpp" startline="191" endline="193">neforce::to_wstring</referencedby>
+        <referencedby refid="group___u_t_f_converts_1ga2aa50e0bc99effc46fb0b89b49c2445b" compoundref="icharacter_8hpp" startline="234" endline="236">neforce::to_wstring&lt; wchar_t &gt;</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1ga660c6b123aa4ec214bc2821601e85684" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1gac5b09648bc7e10ccd496cfb5b237bb86" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1gac8b291943e376bed3f3ed295a7dd68af" kindref="member">wstring</ref></type>
-        <definition>wstring to_wstring</definition>
+        <type>wstring</type>
+        <definition>wstring neforce::to_wstring</definition>
         <argsstring>(const CharT *x)</argsstring>
         <name>to_wstring</name>
+        <qualifiedname>neforce::to_wstring</qualifiedname>
         <param>
           <type>const CharT *</type>
           <declname>x</declname>
@@ -398,24 +418,25 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="191" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="191" bodyend="193"/>
-        <references refid="group___u_t_f_converts_1ga223f42ea0aedd6f1edefc7d9c7d6acc6" compoundref="icharacter_8hpp" startline="180" endline="182">to_wstring</references>
+        <references refid="group___u_t_f_converts_1ga0444ed0512fc29824bcd1754e3868952" compoundref="icharacter_8hpp" startline="180" endline="182">neforce::to_wstring</references>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1gad5797a0294d31d819268f73a81dbdb5f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1ga59e9da732e1e8632157d6409d6d9f284" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1gac8b291943e376bed3f3ed295a7dd68af" kindref="member">wstring</ref></type>
-        <definition>wstring to_wstring</definition>
+        <type>wstring</type>
+        <definition>wstring neforce::to_wstring</definition>
         <argsstring>(const basic_string_view&lt; CharT &gt; x)</argsstring>
         <name>to_wstring</name>
+        <qualifiedname>neforce::to_wstring</qualifiedname>
         <param>
-          <type>const <ref refid="classbasic__string__view" kindref="compound">basic_string_view</ref>&lt; CharT &gt;</type>
+          <type>const basic_string_view&lt; CharT &gt;</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -447,24 +468,25 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="202" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="202" bodyend="204"/>
-        <references refid="group___u_t_f_converts_1ga223f42ea0aedd6f1edefc7d9c7d6acc6" compoundref="icharacter_8hpp" startline="180" endline="182">to_wstring</references>
+        <references refid="group___u_t_f_converts_1ga0444ed0512fc29824bcd1754e3868952" compoundref="icharacter_8hpp" startline="180" endline="182">neforce::to_wstring</references>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1gafa7dd90c76c380f05d88f1988bfb21b0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1gaba0b922971bcf29c031a358bc68645ee" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1gac8b291943e376bed3f3ed295a7dd68af" kindref="member">wstring</ref></type>
-        <definition>wstring to_wstring</definition>
+        <type>wstring</type>
+        <definition>wstring neforce::to_wstring</definition>
         <argsstring>(const basic_string&lt; CharT &gt; &amp;x)</argsstring>
         <name>to_wstring</name>
+        <qualifiedname>neforce::to_wstring</qualifiedname>
         <param>
-          <type>const <ref refid="classbasic__string" kindref="compound">basic_string</ref>&lt; CharT &gt; &amp;</type>
+          <type>const basic_string&lt; CharT &gt; &amp;</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -496,25 +518,26 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="213" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="213" bodyend="215"/>
-        <references refid="group___u_t_f_converts_1ga223f42ea0aedd6f1edefc7d9c7d6acc6" compoundref="icharacter_8hpp" startline="180" endline="182">to_wstring</references>
-        <references refid="classbasic__string_1ad5aafd7e8c50ae4762af6e22069b90d7" compoundref="basic__string_8hpp" startline="2146" endline="2146">basic_string&lt; CharT, Traits, Alloc &gt;::view</references>
+        <references refid="group___u_t_f_converts_1ga0444ed0512fc29824bcd1754e3868952" compoundref="icharacter_8hpp" startline="180" endline="182">neforce::to_wstring</references>
+        <references refid="classneforce_1_1basic__string_1a0049fbf44e36f4c7f57ebc85a2b0a376" compoundref="basic__string_8hpp" startline="2147" endline="2147">neforce::basic_string&lt; CharT, Traits, Alloc &gt;::view</references>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1ga06ec75b5dcecd81d12956f72fe56ace0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1ga888b1329fc6ca61d3bef2b4f93ac92a5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1gac8b291943e376bed3f3ed295a7dd68af" kindref="member">wstring</ref></type>
-        <definition>wstring to_wstring</definition>
+        <type>wstring</type>
+        <definition>wstring neforce::to_wstring</definition>
         <argsstring>(basic_string&lt; CharT &gt; &amp;&amp;x)</argsstring>
         <name>to_wstring</name>
+        <qualifiedname>neforce::to_wstring</qualifiedname>
         <param>
-          <type><ref refid="classbasic__string" kindref="compound">basic_string</ref>&lt; CharT &gt; &amp;&amp;</type>
+          <type>basic_string&lt; CharT &gt; &amp;&amp;</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -546,17 +569,18 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="224" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="224" bodyend="226"/>
-        <references refid="group___u_t_f_converts_1ga223f42ea0aedd6f1edefc7d9c7d6acc6" compoundref="icharacter_8hpp" startline="180" endline="182">to_wstring</references>
+        <references refid="group___u_t_f_converts_1ga0444ed0512fc29824bcd1754e3868952" compoundref="icharacter_8hpp" startline="180" endline="182">neforce::to_wstring</references>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1gac94d626399aa0f4f765c58fd0013987d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1ga2aa50e0bc99effc46fb0b89b49c2445b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
         </templateparamlist>
-        <type><ref refid="group___string_1gac8b291943e376bed3f3ed295a7dd68af" kindref="member">wstring</ref></type>
-        <definition>wstring to_wstring&lt; wchar_t &gt;</definition>
+        <type>wstring</type>
+        <definition>wstring neforce::to_wstring&lt; wchar_t &gt;</definition>
         <argsstring>(wstring &amp;&amp;x)</argsstring>
         <name>to_wstring&lt; wchar_t &gt;</name>
+        <qualifiedname>neforce::to_wstring&lt; wchar_t &gt;</qualifiedname>
         <param>
-          <type><ref refid="group___string_1gac8b291943e376bed3f3ed295a7dd68af" kindref="member">wstring</ref> &amp;&amp;</type>
+          <type>wstring &amp;&amp;</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -579,22 +603,24 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="234" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="234" bodyend="236"/>
-        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="group___u_t_f_converts_1ga0444ed0512fc29824bcd1754e3868952" compoundref="icharacter_8hpp" startline="180" endline="182">neforce::to_wstring</references>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1ga5542cf315c5cffd000cb9073d07c9cb9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1gad0b0246727fd6f756544c1390a248721" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1gaa25cbe3f775d6f4076da8510ffa1a0f4" kindref="member">u8string</ref></type>
-        <definition>u8string to_u8string</definition>
+        <type>u8string</type>
+        <definition>u8string neforce::to_u8string</definition>
         <argsstring>(const CharT &amp;x)</argsstring>
         <name>to_u8string</name>
+        <qualifiedname>neforce::to_u8string</qualifiedname>
         <param>
           <type>const CharT &amp;</type>
           <declname>x</declname>
@@ -628,27 +654,29 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="247" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="247" bodyend="249"/>
-        <references refid="group___u_t_f_converts_1ga5542cf315c5cffd000cb9073d07c9cb9" compoundref="icharacter_8hpp" startline="247" endline="249">to_u8string</references>
-        <referencedby refid="group___u_t_f_converts_1gab1cc1f9d9f14d56ea1be2b4de39713f0" compoundref="icharacter_8hpp" startline="291" endline="293">to_u8string</referencedby>
-        <referencedby refid="group___u_t_f_converts_1ga81815f49f5ed1504013bc6e63cbf8a0d" compoundref="icharacter_8hpp" startline="280" endline="282">to_u8string</referencedby>
-        <referencedby refid="group___u_t_f_converts_1ga0331a7cf701996a6a5a82aa933ee5728" compoundref="icharacter_8hpp" startline="269" endline="271">to_u8string</referencedby>
-        <referencedby refid="group___u_t_f_converts_1ga5542cf315c5cffd000cb9073d07c9cb9" compoundref="icharacter_8hpp" startline="247" endline="249">to_u8string</referencedby>
-        <referencedby refid="group___u_t_f_converts_1ga06c059d87468e29c477e13457de36993" compoundref="icharacter_8hpp" startline="258" endline="260">to_u8string</referencedby>
+        <references refid="group___u_t_f_converts_1gad0b0246727fd6f756544c1390a248721" compoundref="icharacter_8hpp" startline="247" endline="249">neforce::to_u8string</references>
+        <referencedby refid="group___u_t_f_converts_1gad35c6ce43cc16c802aae57e5af636ec0" compoundref="icharacter_8hpp" startline="291" endline="293">neforce::to_u8string</referencedby>
+        <referencedby refid="group___u_t_f_converts_1gad3823b59a791f3046c818dbe4488f3fe" compoundref="icharacter_8hpp" startline="280" endline="282">neforce::to_u8string</referencedby>
+        <referencedby refid="group___u_t_f_converts_1ga7959f2e00ada20809cd55c4f05b570fd" compoundref="icharacter_8hpp" startline="269" endline="271">neforce::to_u8string</referencedby>
+        <referencedby refid="group___u_t_f_converts_1gad0b0246727fd6f756544c1390a248721" compoundref="icharacter_8hpp" startline="247" endline="249">neforce::to_u8string</referencedby>
+        <referencedby refid="group___u_t_f_converts_1ga5cb6c7b6fb3ed4a2e3a2d5a61327659e" compoundref="icharacter_8hpp" startline="258" endline="260">neforce::to_u8string</referencedby>
+        <referencedby refid="group___u_t_f_converts_1ga7b42be659c4fb197456be0e9f5eebeaa" compoundref="icharacter_8hpp" startline="301" endline="303">neforce::to_u8string&lt; char8_t &gt;</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1ga06c059d87468e29c477e13457de36993" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1ga5cb6c7b6fb3ed4a2e3a2d5a61327659e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1gaa25cbe3f775d6f4076da8510ffa1a0f4" kindref="member">u8string</ref></type>
-        <definition>u8string to_u8string</definition>
+        <type>u8string</type>
+        <definition>u8string neforce::to_u8string</definition>
         <argsstring>(const CharT *x)</argsstring>
         <name>to_u8string</name>
+        <qualifiedname>neforce::to_u8string</qualifiedname>
         <param>
           <type>const CharT *</type>
           <declname>x</declname>
@@ -682,24 +710,25 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="258" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="258" bodyend="260"/>
-        <references refid="group___u_t_f_converts_1ga5542cf315c5cffd000cb9073d07c9cb9" compoundref="icharacter_8hpp" startline="247" endline="249">to_u8string</references>
+        <references refid="group___u_t_f_converts_1gad0b0246727fd6f756544c1390a248721" compoundref="icharacter_8hpp" startline="247" endline="249">neforce::to_u8string</references>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1ga0331a7cf701996a6a5a82aa933ee5728" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1ga7959f2e00ada20809cd55c4f05b570fd" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1gaa25cbe3f775d6f4076da8510ffa1a0f4" kindref="member">u8string</ref></type>
-        <definition>u8string to_u8string</definition>
+        <type>u8string</type>
+        <definition>u8string neforce::to_u8string</definition>
         <argsstring>(const basic_string_view&lt; CharT &gt; x)</argsstring>
         <name>to_u8string</name>
+        <qualifiedname>neforce::to_u8string</qualifiedname>
         <param>
-          <type>const <ref refid="classbasic__string__view" kindref="compound">basic_string_view</ref>&lt; CharT &gt;</type>
+          <type>const basic_string_view&lt; CharT &gt;</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -731,24 +760,25 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="269" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="269" bodyend="271"/>
-        <references refid="group___u_t_f_converts_1ga5542cf315c5cffd000cb9073d07c9cb9" compoundref="icharacter_8hpp" startline="247" endline="249">to_u8string</references>
+        <references refid="group___u_t_f_converts_1gad0b0246727fd6f756544c1390a248721" compoundref="icharacter_8hpp" startline="247" endline="249">neforce::to_u8string</references>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1ga81815f49f5ed1504013bc6e63cbf8a0d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1gad3823b59a791f3046c818dbe4488f3fe" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1gaa25cbe3f775d6f4076da8510ffa1a0f4" kindref="member">u8string</ref></type>
-        <definition>u8string to_u8string</definition>
+        <type>u8string</type>
+        <definition>u8string neforce::to_u8string</definition>
         <argsstring>(const basic_string&lt; CharT &gt; &amp;x)</argsstring>
         <name>to_u8string</name>
+        <qualifiedname>neforce::to_u8string</qualifiedname>
         <param>
-          <type>const <ref refid="classbasic__string" kindref="compound">basic_string</ref>&lt; CharT &gt; &amp;</type>
+          <type>const basic_string&lt; CharT &gt; &amp;</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -780,25 +810,26 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="280" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="280" bodyend="282"/>
-        <references refid="group___u_t_f_converts_1ga5542cf315c5cffd000cb9073d07c9cb9" compoundref="icharacter_8hpp" startline="247" endline="249">to_u8string</references>
-        <references refid="classbasic__string_1ad5aafd7e8c50ae4762af6e22069b90d7" compoundref="basic__string_8hpp" startline="2146" endline="2146">basic_string&lt; CharT, Traits, Alloc &gt;::view</references>
+        <references refid="group___u_t_f_converts_1gad0b0246727fd6f756544c1390a248721" compoundref="icharacter_8hpp" startline="247" endline="249">neforce::to_u8string</references>
+        <references refid="classneforce_1_1basic__string_1a0049fbf44e36f4c7f57ebc85a2b0a376" compoundref="basic__string_8hpp" startline="2147" endline="2147">neforce::basic_string&lt; CharT, Traits, Alloc &gt;::view</references>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1gab1cc1f9d9f14d56ea1be2b4de39713f0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1gad35c6ce43cc16c802aae57e5af636ec0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1gaa25cbe3f775d6f4076da8510ffa1a0f4" kindref="member">u8string</ref></type>
-        <definition>u8string to_u8string</definition>
+        <type>u8string</type>
+        <definition>u8string neforce::to_u8string</definition>
         <argsstring>(basic_string&lt; CharT &gt; &amp;&amp;x)</argsstring>
         <name>to_u8string</name>
+        <qualifiedname>neforce::to_u8string</qualifiedname>
         <param>
-          <type><ref refid="classbasic__string" kindref="compound">basic_string</ref>&lt; CharT &gt; &amp;&amp;</type>
+          <type>basic_string&lt; CharT &gt; &amp;&amp;</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -830,17 +861,18 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="291" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="291" bodyend="293"/>
-        <references refid="group___u_t_f_converts_1ga5542cf315c5cffd000cb9073d07c9cb9" compoundref="icharacter_8hpp" startline="247" endline="249">to_u8string</references>
+        <references refid="group___u_t_f_converts_1gad0b0246727fd6f756544c1390a248721" compoundref="icharacter_8hpp" startline="247" endline="249">neforce::to_u8string</references>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1ga632936e2bbad429e5d57d5a7c48e8d78" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1ga7b42be659c4fb197456be0e9f5eebeaa" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
         </templateparamlist>
-        <type><ref refid="group___string_1gaa25cbe3f775d6f4076da8510ffa1a0f4" kindref="member">u8string</ref></type>
-        <definition>u8string to_u8string&lt; char8_t &gt;</definition>
+        <type>u8string</type>
+        <definition>u8string neforce::to_u8string&lt; char8_t &gt;</definition>
         <argsstring>(u8string &amp;&amp;x)</argsstring>
         <name>to_u8string&lt; char8_t &gt;</name>
+        <qualifiedname>neforce::to_u8string&lt; char8_t &gt;</qualifiedname>
         <param>
-          <type><ref refid="group___string_1gaa25cbe3f775d6f4076da8510ffa1a0f4" kindref="member">u8string</ref> &amp;&amp;</type>
+          <type>u8string &amp;&amp;</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -863,22 +895,24 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="301" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="301" bodyend="303"/>
-        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="group___u_t_f_converts_1gad0b0246727fd6f756544c1390a248721" compoundref="icharacter_8hpp" startline="247" endline="249">neforce::to_u8string</references>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1gafb6946b824b73568ab678a8d76593509" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1ga3f0a66776242ced2e8fdb9707fdb0d67" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1ga5a46d14521a34d38878f9d7b09aa6452" kindref="member">u16string</ref></type>
-        <definition>u16string to_u16string</definition>
+        <type>u16string</type>
+        <definition>u16string neforce::to_u16string</definition>
         <argsstring>(const CharT &amp;x)</argsstring>
         <name>to_u16string</name>
+        <qualifiedname>neforce::to_u16string</qualifiedname>
         <param>
           <type>const CharT &amp;</type>
           <declname>x</declname>
@@ -912,27 +946,29 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="314" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="314" bodyend="316"/>
-        <references refid="group___u_t_f_converts_1gafb6946b824b73568ab678a8d76593509" compoundref="icharacter_8hpp" startline="314" endline="316">to_u16string</references>
-        <referencedby refid="group___u_t_f_converts_1gaa0b5bec3a19b6833818555ba439e25ff" compoundref="icharacter_8hpp" startline="358" endline="360">to_u16string</referencedby>
-        <referencedby refid="group___u_t_f_converts_1ga8ac9ff6ff292c620867fcea4b10c2596" compoundref="icharacter_8hpp" startline="347" endline="349">to_u16string</referencedby>
-        <referencedby refid="group___u_t_f_converts_1ga35a8fc006154095a2ff617906ac619f8" compoundref="icharacter_8hpp" startline="336" endline="338">to_u16string</referencedby>
-        <referencedby refid="group___u_t_f_converts_1gafb6946b824b73568ab678a8d76593509" compoundref="icharacter_8hpp" startline="314" endline="316">to_u16string</referencedby>
-        <referencedby refid="group___u_t_f_converts_1ga8eebebfce88a8370bfacaf671f61ea74" compoundref="icharacter_8hpp" startline="325" endline="327">to_u16string</referencedby>
+        <references refid="group___u_t_f_converts_1ga3f0a66776242ced2e8fdb9707fdb0d67" compoundref="icharacter_8hpp" startline="314" endline="316">neforce::to_u16string</references>
+        <referencedby refid="group___u_t_f_converts_1gae2c7e7e97b6e64c2a6f82b8b653e3613" compoundref="icharacter_8hpp" startline="358" endline="360">neforce::to_u16string</referencedby>
+        <referencedby refid="group___u_t_f_converts_1ga8695142f645a2b9772ffa6fcb3ef7efc" compoundref="icharacter_8hpp" startline="347" endline="349">neforce::to_u16string</referencedby>
+        <referencedby refid="group___u_t_f_converts_1ga8495daf023ee3a45ed8510b75f49a55f" compoundref="icharacter_8hpp" startline="336" endline="338">neforce::to_u16string</referencedby>
+        <referencedby refid="group___u_t_f_converts_1ga3f0a66776242ced2e8fdb9707fdb0d67" compoundref="icharacter_8hpp" startline="314" endline="316">neforce::to_u16string</referencedby>
+        <referencedby refid="group___u_t_f_converts_1gaba2d94a5fc97bd11a6e3dc4207a48937" compoundref="icharacter_8hpp" startline="325" endline="327">neforce::to_u16string</referencedby>
+        <referencedby refid="group___u_t_f_converts_1gaf2dadd60939cfb4b68f7266a34c2a70c" compoundref="icharacter_8hpp" startline="368" endline="370">neforce::to_u16string&lt; char16_t &gt;</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1ga8eebebfce88a8370bfacaf671f61ea74" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1gaba2d94a5fc97bd11a6e3dc4207a48937" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1ga5a46d14521a34d38878f9d7b09aa6452" kindref="member">u16string</ref></type>
-        <definition>u16string to_u16string</definition>
+        <type>u16string</type>
+        <definition>u16string neforce::to_u16string</definition>
         <argsstring>(const CharT *x)</argsstring>
         <name>to_u16string</name>
+        <qualifiedname>neforce::to_u16string</qualifiedname>
         <param>
           <type>const CharT *</type>
           <declname>x</declname>
@@ -966,24 +1002,25 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="325" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="325" bodyend="327"/>
-        <references refid="group___u_t_f_converts_1gafb6946b824b73568ab678a8d76593509" compoundref="icharacter_8hpp" startline="314" endline="316">to_u16string</references>
+        <references refid="group___u_t_f_converts_1ga3f0a66776242ced2e8fdb9707fdb0d67" compoundref="icharacter_8hpp" startline="314" endline="316">neforce::to_u16string</references>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1ga35a8fc006154095a2ff617906ac619f8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1ga8495daf023ee3a45ed8510b75f49a55f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1ga5a46d14521a34d38878f9d7b09aa6452" kindref="member">u16string</ref></type>
-        <definition>u16string to_u16string</definition>
+        <type>u16string</type>
+        <definition>u16string neforce::to_u16string</definition>
         <argsstring>(const basic_string_view&lt; CharT &gt; x)</argsstring>
         <name>to_u16string</name>
+        <qualifiedname>neforce::to_u16string</qualifiedname>
         <param>
-          <type>const <ref refid="classbasic__string__view" kindref="compound">basic_string_view</ref>&lt; CharT &gt;</type>
+          <type>const basic_string_view&lt; CharT &gt;</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -1015,24 +1052,25 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="336" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="336" bodyend="338"/>
-        <references refid="group___u_t_f_converts_1gafb6946b824b73568ab678a8d76593509" compoundref="icharacter_8hpp" startline="314" endline="316">to_u16string</references>
+        <references refid="group___u_t_f_converts_1ga3f0a66776242ced2e8fdb9707fdb0d67" compoundref="icharacter_8hpp" startline="314" endline="316">neforce::to_u16string</references>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1ga8ac9ff6ff292c620867fcea4b10c2596" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1ga8695142f645a2b9772ffa6fcb3ef7efc" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1ga5a46d14521a34d38878f9d7b09aa6452" kindref="member">u16string</ref></type>
-        <definition>u16string to_u16string</definition>
+        <type>u16string</type>
+        <definition>u16string neforce::to_u16string</definition>
         <argsstring>(const basic_string&lt; CharT &gt; &amp;x)</argsstring>
         <name>to_u16string</name>
+        <qualifiedname>neforce::to_u16string</qualifiedname>
         <param>
-          <type>const <ref refid="classbasic__string" kindref="compound">basic_string</ref>&lt; CharT &gt; &amp;</type>
+          <type>const basic_string&lt; CharT &gt; &amp;</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -1064,25 +1102,26 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="347" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="347" bodyend="349"/>
-        <references refid="group___u_t_f_converts_1gafb6946b824b73568ab678a8d76593509" compoundref="icharacter_8hpp" startline="314" endline="316">to_u16string</references>
-        <references refid="classbasic__string_1ad5aafd7e8c50ae4762af6e22069b90d7" compoundref="basic__string_8hpp" startline="2146" endline="2146">basic_string&lt; CharT, Traits, Alloc &gt;::view</references>
+        <references refid="group___u_t_f_converts_1ga3f0a66776242ced2e8fdb9707fdb0d67" compoundref="icharacter_8hpp" startline="314" endline="316">neforce::to_u16string</references>
+        <references refid="classneforce_1_1basic__string_1a0049fbf44e36f4c7f57ebc85a2b0a376" compoundref="basic__string_8hpp" startline="2147" endline="2147">neforce::basic_string&lt; CharT, Traits, Alloc &gt;::view</references>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1gaa0b5bec3a19b6833818555ba439e25ff" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1gae2c7e7e97b6e64c2a6f82b8b653e3613" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1ga5a46d14521a34d38878f9d7b09aa6452" kindref="member">u16string</ref></type>
-        <definition>u16string to_u16string</definition>
+        <type>u16string</type>
+        <definition>u16string neforce::to_u16string</definition>
         <argsstring>(basic_string&lt; CharT &gt; &amp;&amp;x)</argsstring>
         <name>to_u16string</name>
+        <qualifiedname>neforce::to_u16string</qualifiedname>
         <param>
-          <type><ref refid="classbasic__string" kindref="compound">basic_string</ref>&lt; CharT &gt; &amp;&amp;</type>
+          <type>basic_string&lt; CharT &gt; &amp;&amp;</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -1114,17 +1153,18 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="358" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="358" bodyend="360"/>
-        <references refid="group___u_t_f_converts_1gafb6946b824b73568ab678a8d76593509" compoundref="icharacter_8hpp" startline="314" endline="316">to_u16string</references>
+        <references refid="group___u_t_f_converts_1ga3f0a66776242ced2e8fdb9707fdb0d67" compoundref="icharacter_8hpp" startline="314" endline="316">neforce::to_u16string</references>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1gabbe5908b90c71021ca27d0b54268691e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1gaf2dadd60939cfb4b68f7266a34c2a70c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
         </templateparamlist>
-        <type><ref refid="group___string_1ga5a46d14521a34d38878f9d7b09aa6452" kindref="member">u16string</ref></type>
-        <definition>u16string to_u16string&lt; char16_t &gt;</definition>
+        <type>u16string</type>
+        <definition>u16string neforce::to_u16string&lt; char16_t &gt;</definition>
         <argsstring>(u16string &amp;&amp;x)</argsstring>
         <name>to_u16string&lt; char16_t &gt;</name>
+        <qualifiedname>neforce::to_u16string&lt; char16_t &gt;</qualifiedname>
         <param>
-          <type><ref refid="group___string_1ga5a46d14521a34d38878f9d7b09aa6452" kindref="member">u16string</ref> &amp;&amp;</type>
+          <type>u16string &amp;&amp;</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -1147,22 +1187,24 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="368" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="368" bodyend="370"/>
-        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="group___u_t_f_converts_1ga3f0a66776242ced2e8fdb9707fdb0d67" compoundref="icharacter_8hpp" startline="314" endline="316">neforce::to_u16string</references>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1gaf6190c51f7d2e774f275fa976225e15e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1ga63ecaeecc2624757e8c94f64e828ccdb" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1gae9d2688d8ad654e665cf2b8032125af9" kindref="member">u32string</ref></type>
-        <definition>u32string to_u32string</definition>
+        <type>u32string</type>
+        <definition>u32string neforce::to_u32string</definition>
         <argsstring>(const CharT &amp;x)</argsstring>
         <name>to_u32string</name>
+        <qualifiedname>neforce::to_u32string</qualifiedname>
         <param>
           <type>const CharT &amp;</type>
           <declname>x</declname>
@@ -1196,27 +1238,29 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="379" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="379" bodyend="381"/>
-        <references refid="group___u_t_f_converts_1gaf6190c51f7d2e774f275fa976225e15e" compoundref="icharacter_8hpp" startline="379" endline="381">to_u32string</references>
-        <referencedby refid="group___u_t_f_converts_1ga8e27b41f0908f575dc98054c979dc0bf" compoundref="icharacter_8hpp" startline="423" endline="425">to_u32string</referencedby>
-        <referencedby refid="group___u_t_f_converts_1ga9e4c290f49948b1c27ae60076d5669b5" compoundref="icharacter_8hpp" startline="412" endline="414">to_u32string</referencedby>
-        <referencedby refid="group___u_t_f_converts_1ga1aa847b453d3ffc5eb0907faaf01fe50" compoundref="icharacter_8hpp" startline="401" endline="403">to_u32string</referencedby>
-        <referencedby refid="group___u_t_f_converts_1gaf6190c51f7d2e774f275fa976225e15e" compoundref="icharacter_8hpp" startline="379" endline="381">to_u32string</referencedby>
-        <referencedby refid="group___u_t_f_converts_1ga0849c656100bb0019fc9cb414a114468" compoundref="icharacter_8hpp" startline="390" endline="392">to_u32string</referencedby>
+        <references refid="group___u_t_f_converts_1ga63ecaeecc2624757e8c94f64e828ccdb" compoundref="icharacter_8hpp" startline="379" endline="381">neforce::to_u32string</references>
+        <referencedby refid="group___u_t_f_converts_1ga6992dc613df40fe8ba26461780ed9365" compoundref="icharacter_8hpp" startline="423" endline="425">neforce::to_u32string</referencedby>
+        <referencedby refid="group___u_t_f_converts_1ga420797034abcd52d0168013b8e1c9415" compoundref="icharacter_8hpp" startline="412" endline="414">neforce::to_u32string</referencedby>
+        <referencedby refid="group___u_t_f_converts_1ga6342d3ba99897d928fd081f87bd8f64c" compoundref="icharacter_8hpp" startline="401" endline="403">neforce::to_u32string</referencedby>
+        <referencedby refid="group___u_t_f_converts_1ga63ecaeecc2624757e8c94f64e828ccdb" compoundref="icharacter_8hpp" startline="379" endline="381">neforce::to_u32string</referencedby>
+        <referencedby refid="group___u_t_f_converts_1ga88df40cd2429ec31e7d4cdb6a01714f7" compoundref="icharacter_8hpp" startline="390" endline="392">neforce::to_u32string</referencedby>
+        <referencedby refid="group___u_t_f_converts_1gac81fbe98114d39a9efb3a6ae5bdc5011" compoundref="icharacter_8hpp" startline="433" endline="435">neforce::to_u32string&lt; char32_t &gt;</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1ga0849c656100bb0019fc9cb414a114468" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1ga88df40cd2429ec31e7d4cdb6a01714f7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1gae9d2688d8ad654e665cf2b8032125af9" kindref="member">u32string</ref></type>
-        <definition>u32string to_u32string</definition>
+        <type>u32string</type>
+        <definition>u32string neforce::to_u32string</definition>
         <argsstring>(const CharT *x)</argsstring>
         <name>to_u32string</name>
+        <qualifiedname>neforce::to_u32string</qualifiedname>
         <param>
           <type>const CharT *</type>
           <declname>x</declname>
@@ -1250,24 +1294,25 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="390" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="390" bodyend="392"/>
-        <references refid="group___u_t_f_converts_1gaf6190c51f7d2e774f275fa976225e15e" compoundref="icharacter_8hpp" startline="379" endline="381">to_u32string</references>
+        <references refid="group___u_t_f_converts_1ga63ecaeecc2624757e8c94f64e828ccdb" compoundref="icharacter_8hpp" startline="379" endline="381">neforce::to_u32string</references>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1ga1aa847b453d3ffc5eb0907faaf01fe50" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1ga6342d3ba99897d928fd081f87bd8f64c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1gae9d2688d8ad654e665cf2b8032125af9" kindref="member">u32string</ref></type>
-        <definition>u32string to_u32string</definition>
+        <type>u32string</type>
+        <definition>u32string neforce::to_u32string</definition>
         <argsstring>(const basic_string_view&lt; CharT &gt; x)</argsstring>
         <name>to_u32string</name>
+        <qualifiedname>neforce::to_u32string</qualifiedname>
         <param>
-          <type>const <ref refid="classbasic__string__view" kindref="compound">basic_string_view</ref>&lt; CharT &gt;</type>
+          <type>const basic_string_view&lt; CharT &gt;</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -1299,24 +1344,25 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="401" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="401" bodyend="403"/>
-        <references refid="group___u_t_f_converts_1gaf6190c51f7d2e774f275fa976225e15e" compoundref="icharacter_8hpp" startline="379" endline="381">to_u32string</references>
+        <references refid="group___u_t_f_converts_1ga63ecaeecc2624757e8c94f64e828ccdb" compoundref="icharacter_8hpp" startline="379" endline="381">neforce::to_u32string</references>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1ga9e4c290f49948b1c27ae60076d5669b5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1ga420797034abcd52d0168013b8e1c9415" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1gae9d2688d8ad654e665cf2b8032125af9" kindref="member">u32string</ref></type>
-        <definition>u32string to_u32string</definition>
+        <type>u32string</type>
+        <definition>u32string neforce::to_u32string</definition>
         <argsstring>(const basic_string&lt; CharT &gt; &amp;x)</argsstring>
         <name>to_u32string</name>
+        <qualifiedname>neforce::to_u32string</qualifiedname>
         <param>
-          <type>const <ref refid="classbasic__string" kindref="compound">basic_string</ref>&lt; CharT &gt; &amp;</type>
+          <type>const basic_string&lt; CharT &gt; &amp;</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -1348,25 +1394,26 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="412" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="412" bodyend="414"/>
-        <references refid="group___u_t_f_converts_1gaf6190c51f7d2e774f275fa976225e15e" compoundref="icharacter_8hpp" startline="379" endline="381">to_u32string</references>
-        <references refid="classbasic__string_1ad5aafd7e8c50ae4762af6e22069b90d7" compoundref="basic__string_8hpp" startline="2146" endline="2146">basic_string&lt; CharT, Traits, Alloc &gt;::view</references>
+        <references refid="group___u_t_f_converts_1ga63ecaeecc2624757e8c94f64e828ccdb" compoundref="icharacter_8hpp" startline="379" endline="381">neforce::to_u32string</references>
+        <references refid="classneforce_1_1basic__string_1a0049fbf44e36f4c7f57ebc85a2b0a376" compoundref="basic__string_8hpp" startline="2147" endline="2147">neforce::basic_string&lt; CharT, Traits, Alloc &gt;::view</references>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1ga8e27b41f0908f575dc98054c979dc0bf" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1ga6992dc613df40fe8ba26461780ed9365" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" kindref="member">is_character_v</ref>&lt; CharT &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_character_v&lt; CharT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="group___string_1gae9d2688d8ad654e665cf2b8032125af9" kindref="member">u32string</ref></type>
-        <definition>u32string to_u32string</definition>
+        <type>u32string</type>
+        <definition>u32string neforce::to_u32string</definition>
         <argsstring>(basic_string&lt; CharT &gt; &amp;&amp;x)</argsstring>
         <name>to_u32string</name>
+        <qualifiedname>neforce::to_u32string</qualifiedname>
         <param>
-          <type><ref refid="classbasic__string" kindref="compound">basic_string</ref>&lt; CharT &gt; &amp;&amp;</type>
+          <type>basic_string&lt; CharT &gt; &amp;&amp;</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -1398,17 +1445,18 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="423" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="423" bodyend="425"/>
-        <references refid="group___u_t_f_converts_1gaf6190c51f7d2e774f275fa976225e15e" compoundref="icharacter_8hpp" startline="379" endline="381">to_u32string</references>
+        <references refid="group___u_t_f_converts_1ga63ecaeecc2624757e8c94f64e828ccdb" compoundref="icharacter_8hpp" startline="379" endline="381">neforce::to_u32string</references>
       </memberdef>
-      <memberdef kind="function" id="group___u_t_f_converts_1ga7a9d4743c42e7aec3be802224a082442" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___u_t_f_converts_1gac81fbe98114d39a9efb3a6ae5bdc5011" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
         </templateparamlist>
-        <type><ref refid="group___string_1gae9d2688d8ad654e665cf2b8032125af9" kindref="member">u32string</ref></type>
-        <definition>u32string to_u32string&lt; char32_t &gt;</definition>
+        <type>u32string</type>
+        <definition>u32string neforce::to_u32string&lt; char32_t &gt;</definition>
         <argsstring>(u32string &amp;&amp;x)</argsstring>
         <name>to_u32string&lt; char32_t &gt;</name>
+        <qualifiedname>neforce::to_u32string&lt; char32_t &gt;</qualifiedname>
         <param>
-          <type><ref refid="group___string_1gae9d2688d8ad654e665cf2b8032125af9" kindref="member">u32string</ref> &amp;&amp;</type>
+          <type>u32string &amp;&amp;</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -1431,7 +1479,8 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" line="433" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icharacter.hpp" bodystart="433" bodyend="435"/>
-        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="group___u_t_f_converts_1ga63ecaeecc2624757e8c94f64e828ccdb" compoundref="icharacter_8hpp" startline="379" endline="381">neforce::to_u32string</references>
       </memberdef>
     </sectiondef>
     <briefdescription>

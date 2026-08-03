@@ -53,7 +53,7 @@
         <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="51">
+      <node id="52">
         <label>NeForce/core/config/msvc_intrinsic.hpp</label>
         <link refid="msvc__intrinsic_8hpp"/>
         <childnode refid="33" relation="include">
@@ -88,8 +88,8 @@
         </childnode>
       </node>
       <node id="15">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="10" relation="include">
         </childnode>
       </node>
@@ -249,10 +249,10 @@
         <childnode refid="24" relation="include">
         </childnode>
       </node>
-      <node id="50">
+      <node id="51">
         <label>NeForce/core/numeric/random.hpp</label>
         <link refid="random_8hpp"/>
-        <childnode refid="51" relation="include">
+        <childnode refid="52" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
@@ -270,30 +270,44 @@
         </childnode>
         <childnode refid="46" relation="include">
         </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
         <childnode refid="40" relation="include">
         </childnode>
       </node>
-      <node id="47">
+      <node id="49">
         <label>NeForce/core/string/basic_string_view.hpp</label>
         <link refid="basic__string__view_8hpp"/>
         <childnode refid="38" relation="include">
         </childnode>
-        <childnode refid="48" relation="include">
+        <childnode refid="50" relation="include">
         </childnode>
-        <childnode refid="49" relation="include">
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
         </childnode>
       </node>
-      <node id="48">
+      <node id="50">
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="28" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
       </node>
-      <node id="49">
+      <node id="47">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>NeForce/core/string/charset.hpp</label>
+        <link refid="charset_8hpp"/>
+        <childnode refid="47" relation="include">
+        </childnode>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
@@ -303,10 +317,10 @@
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="46">
+      <node id="48">
         <label>NeForce/core/string/string_view.hpp</label>
         <link refid="string__view_8hpp"/>
-        <childnode refid="47" relation="include">
+        <childnode refid="49" relation="include">
         </childnode>
       </node>
       <node id="16">
@@ -339,13 +353,13 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="53">
+      <node id="54">
         <label>NeForce/core/utility/none.hpp</label>
         <link refid="none_8hpp"/>
         <childnode refid="31" relation="include">
         </childnode>
       </node>
-      <node id="52">
+      <node id="53">
         <label>NeForce/core/utility/optional.hpp</label>
         <link refid="optional_8hpp"/>
         <childnode refid="29" relation="include">
@@ -358,7 +372,7 @@
         </childnode>
         <childnode refid="44" relation="include">
         </childnode>
-        <childnode refid="53" relation="include">
+        <childnode refid="54" relation="include">
         </childnode>
       </node>
       <node id="30">
@@ -386,9 +400,9 @@
         </childnode>
         <childnode refid="26" relation="include">
         </childnode>
-        <childnode refid="50" relation="include">
+        <childnode refid="51" relation="include">
         </childnode>
-        <childnode refid="52" relation="include">
+        <childnode refid="53" relation="include">
         </childnode>
       </node>
       <node id="11">
@@ -404,10 +418,9 @@
         <label>utility</label>
       </node>
     </incdepgraph>
-    <innerclass refid="classuuid" prot="public">uuid</innerclass>
-    <sectiondef kind="func">
-      <member refid="group___user_literals_1gafad5d0db71f2bf2f44df5778b4356cbf" kind="function"><name>operator&quot;&quot;_uuid</name></member>
-    </sectiondef>
+    <innerclass refid="classneforce_1_1uuid" prot="public">neforce::uuid</innerclass>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
+    <innernamespace refid="namespaceneforce_1_1literals" inline="yes">neforce::literals</innernamespace>
     <briefdescription>
 <para>UUID实现 </para>
     </briefdescription>
@@ -426,44 +439,44 @@
 <codeline lineno="15"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight></codeline>
 <codeline lineno="41"><highlight class="normal"></highlight></codeline>
-<codeline lineno="49" refid="classuuid" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classuuid_1accde25e6bb9cab49d3bb4ae6cdfc8334" kindref="member">uuid</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="structistringify" kindref="compound">istringify</ref>&lt;uuid&gt;,<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="structihashable" kindref="compound">ihashable</ref>&lt;uuid&gt;<sp/>{</highlight></codeline>
+<codeline lineno="49" refid="classneforce_1_1uuid" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classneforce_1_1uuid_1a7d110a26ea7c9c4c3618bb48a9dcb054" kindref="member">uuid</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1istringify" kindref="compound">istringify</ref>&lt;uuid&gt;,<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1ihashable" kindref="compound">ihashable</ref>&lt;uuid&gt;<sp/>{</highlight></codeline>
 <codeline lineno="50"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classarray" kindref="compound">array&lt;byte_t, 16&gt;</ref><sp/>data_;<sp/></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1array" kindref="compound">array&lt;byte_t, 16&gt;</ref><sp/>data_;<sp/></highlight></codeline>
 <codeline lineno="52"><highlight class="normal"></highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classrandom__mt" kindref="compound">random_mt</ref>&amp;<sp/>tl_rng()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1random__mt" kindref="compound">random_mt</ref>&amp;<sp/>tl_rng()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"></highlight></codeline>
 <codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="61" refid="classuuid_1accde25e6bb9cab49d3bb4ae6cdfc8334" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classuuid_1accde25e6bb9cab49d3bb4ae6cdfc8334" kindref="member">uuid</ref>()<sp/>noexcept<sp/>{<sp/><ref refid="group___memory_functions_1ga2911230e02f6aa5fb1ef15843cf4d02d" kindref="member">memory_zero</ref>(data_.data(),<sp/>data_.size());<sp/>}</highlight></codeline>
+<codeline lineno="61" refid="classneforce_1_1uuid_1a7d110a26ea7c9c4c3618bb48a9dcb054" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1uuid_1a7d110a26ea7c9c4c3618bb48a9dcb054" kindref="member">uuid</ref>()<sp/>noexcept<sp/>{<sp/><ref refid="group___memory_functions_1gac83273a48377e6a3b08b0fc155778229" kindref="member">memory_zero</ref>(data_.data(),<sp/>data_.size());<sp/>}</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"></highlight></codeline>
-<codeline lineno="69" refid="classuuid_1abdc2b2f255bc9935d20bf5f8d13b8eac" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classuuid_1abdc2b2f255bc9935d20bf5f8d13b8eac" kindref="member">uuid</ref>(<ref refid="classmemory__view" kindref="compound">memory_view&lt;const byte_t, 16&gt;</ref><sp/><ref refid="classuuid_1a880f81167c90dd9db6f8ddb5f752bf87" kindref="member">bytes</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="69" refid="classneforce_1_1uuid_1a88e9b84b639d55817d4abc0ec8db8e0a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1uuid_1a88e9b84b639d55817d4abc0ec8db8e0a" kindref="member">uuid</ref>(<ref refid="classneforce_1_1memory__view" kindref="compound">memory_view&lt;const byte_t, 16&gt;</ref><sp/><ref refid="classneforce_1_1uuid_1af475935f87f3990a6bb2f1775297dc00" kindref="member">bytes</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="70"><highlight class="normal"></highlight></codeline>
-<codeline lineno="78" refid="classuuid_1ae740a427e628462de51c491325334dc5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classuuid_1ae740a427e628462de51c491325334dc5" kindref="member">uuid</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="classuuid_1a880f81167c90dd9db6f8ddb5f752bf87" kindref="member">bytes</ref>);</highlight></codeline>
+<codeline lineno="78" refid="classneforce_1_1uuid_1ac184fd629d859150f4425a2069de9500" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1uuid_1ac184fd629d859150f4425a2069de9500" kindref="member">uuid</ref>(<ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/><ref refid="classneforce_1_1uuid_1af475935f87f3990a6bb2f1775297dc00" kindref="member">bytes</ref>);</highlight></codeline>
 <codeline lineno="79"><highlight class="normal"></highlight></codeline>
-<codeline lineno="85" refid="classuuid_1ad12fb42024a742f86f68de18044e47bc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classuuid_1ad12fb42024a742f86f68de18044e47bc" kindref="member">generate_v4</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="85" refid="classneforce_1_1uuid_1a74eb149ddb79b21ebece36123a8f39c0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1uuid_1a74eb149ddb79b21ebece36123a8f39c0" kindref="member">generate_v4</ref>()<sp/>noexcept;</highlight></codeline>
 <codeline lineno="86"><highlight class="normal"></highlight></codeline>
-<codeline lineno="92" refid="classuuid_1a55b4c336e0ec07cadea7668956ff02dd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classuuid_1a55b4c336e0ec07cadea7668956ff02dd" kindref="member">generate_v7</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="92" refid="classneforce_1_1uuid_1a6f5e826659a4395ebc7061843c716d7e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1uuid_1a6f5e826659a4395ebc7061843c716d7e" kindref="member">generate_v7</ref>()<sp/>noexcept;</highlight></codeline>
 <codeline lineno="93"><highlight class="normal"></highlight></codeline>
-<codeline lineno="98" refid="classuuid_1a462e87115ef223b394dae51ea4cae207" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classuuid_1a462e87115ef223b394dae51ea4cae207" kindref="member">version</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(data_[6]<sp/>&gt;&gt;<sp/>4)<sp/>&amp;<sp/>0x0F;<sp/>}</highlight></codeline>
+<codeline lineno="98" refid="classneforce_1_1uuid_1ae9b3979b877e26171b610f9103536ba4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1uuid_1ae9b3979b877e26171b610f9103536ba4" kindref="member">version</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(data_[6]<sp/>&gt;&gt;<sp/>4)<sp/>&amp;<sp/>0x0F;<sp/>}</highlight></codeline>
 <codeline lineno="99"><highlight class="normal"></highlight></codeline>
-<codeline lineno="104" refid="classuuid_1a00fa0144643b16631d69c979b54932ba" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classuuid_1a00fa0144643b16631d69c979b54932ba" kindref="member">is_v4</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classuuid_1a462e87115ef223b394dae51ea4cae207" kindref="member">version</ref>()<sp/>==<sp/>4;<sp/>}</highlight></codeline>
+<codeline lineno="104" refid="classneforce_1_1uuid_1a3426f8c5b09cf6fda9098e7a4fbea363" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1uuid_1a3426f8c5b09cf6fda9098e7a4fbea363" kindref="member">is_v4</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1uuid_1ae9b3979b877e26171b610f9103536ba4" kindref="member">version</ref>()<sp/>==<sp/>4;<sp/>}</highlight></codeline>
 <codeline lineno="105"><highlight class="normal"></highlight></codeline>
-<codeline lineno="110" refid="classuuid_1a631c6d12d5a06d05a0fed436414a14c7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classuuid_1a631c6d12d5a06d05a0fed436414a14c7" kindref="member">is_v7</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classuuid_1a462e87115ef223b394dae51ea4cae207" kindref="member">version</ref>()<sp/>==<sp/>7;<sp/>}</highlight></codeline>
+<codeline lineno="110" refid="classneforce_1_1uuid_1adf69f838dc950f3f0ebf3074a1431498" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1uuid_1adf69f838dc950f3f0ebf3074a1431498" kindref="member">is_v7</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1uuid_1ae9b3979b877e26171b610f9103536ba4" kindref="member">version</ref>()<sp/>==<sp/>7;<sp/>}</highlight></codeline>
 <codeline lineno="111"><highlight class="normal"></highlight></codeline>
-<codeline lineno="118" refid="classuuid_1a045f878e5fc75861976476e7aba247fd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classoptional" kindref="compound">optional&lt;uint64_t&gt;</ref><sp/><ref refid="classuuid_1a045f878e5fc75861976476e7aba247fd" kindref="member">timestamp_v7</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
+<codeline lineno="118" refid="classneforce_1_1uuid_1ab45e10b774de5571ef169fb5b7b4fbd9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classneforce_1_1optional" kindref="compound">optional&lt;uint64_t&gt;</ref><sp/><ref refid="classneforce_1_1uuid_1ab45e10b774de5571ef169fb5b7b4fbd9" kindref="member">timestamp_v7</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
 <codeline lineno="119"><highlight class="normal"></highlight></codeline>
-<codeline lineno="126" refid="classuuid_1ad231806d78f04f5ca237ba12aff9ff9c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="classuuid_1ad231806d78f04f5ca237ba12aff9ff9c" kindref="member">to_string</ref>()<sp/>const;</highlight></codeline>
+<codeline lineno="126" refid="classneforce_1_1uuid_1ada1f983f38a9823a609c2275d5b1a202" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1uuid_1ada1f983f38a9823a609c2275d5b1a202" kindref="member">to_string</ref>()<sp/>const;</highlight></codeline>
 <codeline lineno="127"><highlight class="normal"></highlight></codeline>
-<codeline lineno="132" refid="classuuid_1a880f81167c90dd9db6f8ddb5f752bf87" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt;const<sp/><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref>,<sp/>16&gt;<sp/><ref refid="classuuid_1a880f81167c90dd9db6f8ddb5f752bf87" kindref="member">bytes</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{data_};<sp/>}</highlight></codeline>
+<codeline lineno="132" refid="classneforce_1_1uuid_1af475935f87f3990a6bb2f1775297dc00" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classneforce_1_1memory__view" kindref="compound">memory_view</ref>&lt;const<sp/><ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref>,<sp/>16&gt;<sp/><ref refid="classneforce_1_1uuid_1af475935f87f3990a6bb2f1775297dc00" kindref="member">bytes</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{data_};<sp/>}</highlight></codeline>
 <codeline lineno="133"><highlight class="normal"></highlight></codeline>
-<codeline lineno="138" refid="classuuid_1a4bde4221a0353b6ae34838cfc9a07a70" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classuuid_1a4bde4221a0353b6ae34838cfc9a07a70" kindref="member">begin</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>data_.begin();<sp/>}</highlight></codeline>
+<codeline lineno="138" refid="classneforce_1_1uuid_1ac9c97684d747de9ddd0ea41ee2735a8e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1uuid_1ac9c97684d747de9ddd0ea41ee2735a8e" kindref="member">begin</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>data_.begin();<sp/>}</highlight></codeline>
 <codeline lineno="139"><highlight class="normal"></highlight></codeline>
-<codeline lineno="144" refid="classuuid_1ae224840945a4a2873fc2950ff40a0dca" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classuuid_1ae224840945a4a2873fc2950ff40a0dca" kindref="member">end</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>data_.end();<sp/>}</highlight></codeline>
+<codeline lineno="144" refid="classneforce_1_1uuid_1a0e7ea8ed67beb318fc23165ed5d2aa11" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1uuid_1a0e7ea8ed67beb318fc23165ed5d2aa11" kindref="member">end</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>data_.end();<sp/>}</highlight></codeline>
 <codeline lineno="145"><highlight class="normal"></highlight></codeline>
-<codeline lineno="150" refid="classuuid_1a39e0dba0d3e3f3041efd6a4e2091d422" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classuuid_1accde25e6bb9cab49d3bb4ae6cdfc8334" kindref="member">uuid</ref><sp/><ref refid="classuuid_1a39e0dba0d3e3f3041efd6a4e2091d422" kindref="member">v4</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="150" refid="classneforce_1_1uuid_1aa1a9c421e765b22b7a26b6d81b348206" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1uuid_1a7d110a26ea7c9c4c3618bb48a9dcb054" kindref="member">uuid</ref><sp/><ref refid="classneforce_1_1uuid_1aa1a9c421e765b22b7a26b6d81b348206" kindref="member">v4</ref>()<sp/>noexcept;</highlight></codeline>
 <codeline lineno="151"><highlight class="normal"></highlight></codeline>
-<codeline lineno="156" refid="classuuid_1a7664699bea951feb280cbcb34533a212" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>static<sp/><ref refid="classuuid_1accde25e6bb9cab49d3bb4ae6cdfc8334" kindref="member">uuid</ref><sp/><ref refid="classuuid_1a7664699bea951feb280cbcb34533a212" kindref="member">v7</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="156" refid="classneforce_1_1uuid_1acbbfea5c00c6327c2919e1fc9094eb00" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>static<sp/><ref refid="classneforce_1_1uuid_1a7d110a26ea7c9c4c3618bb48a9dcb054" kindref="member">uuid</ref><sp/><ref refid="classneforce_1_1uuid_1acbbfea5c00c6327c2919e1fc9094eb00" kindref="member">v7</ref>()<sp/>noexcept;</highlight></codeline>
 <codeline lineno="157"><highlight class="normal"></highlight></codeline>
-<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>to_hash()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___hash_primary_1ga4ed3eee51919fef3671574ecda03f33f" kindref="member">FNV_hash</ref>(data_.data(),<sp/>data_.size());<sp/>}</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>to_hash()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___hash_primary_1ga52a95943fda4d4d12dd657d3f61ace21" kindref="member">FNV_hash</ref>(data_.data(),<sp/>data_.size());<sp/>}</highlight></codeline>
 <codeline lineno="159"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="160"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>UUID</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="162"><highlight class="normal"></highlight></codeline>
@@ -471,7 +484,7 @@
 <codeline lineno="164"><highlight class="normal">NEFORCE_BEGIN_LITERALS__</highlight></codeline>
 <codeline lineno="165"><highlight class="normal"></highlight></codeline>
 <codeline lineno="171"><highlight class="normal"></highlight></codeline>
-<codeline lineno="179" refid="group___user_literals_1gafad5d0db71f2bf2f44df5778b4356cbf" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="classuuid" kindref="compound">uuid</ref><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">_uuid(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>str,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>len)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classuuid" kindref="compound">uuid</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref>(str,<sp/>len));<sp/>}</highlight></codeline>
+<codeline lineno="179" refid="group___user_literals_1ga518aa42e008b938b72db32c2751538bd" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1uuid" kindref="compound">uuid</ref><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">_uuid(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>str,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>len)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1uuid" kindref="compound">uuid</ref>(<ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref>(str,<sp/>len));<sp/>}</highlight></codeline>
 <codeline lineno="180"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>UserLiterals</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="182"><highlight class="normal"></highlight></codeline>
 <codeline lineno="183"><highlight class="normal">NEFORCE_END_LITERALS__</highlight></codeline>

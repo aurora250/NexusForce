@@ -1,6 +1,6 @@
 var process_8hpp =
 [
-    [ "process::memory_info", "structprocess_1_1memory__info.html", "structprocess_1_1memory__info" ],
-    [ "process::time_info", "structprocess_1_1time__info.html", "structprocess_1_1time__info" ],
-    [ "process::shell_result", "structprocess_1_1shell__result.html", "structprocess_1_1shell__result" ]
+    [ "neforce::process::memory_info", "structneforce_1_1process_1_1memory__info.html", "structneforce_1_1process_1_1memory__info" ],
+    [ "neforce::process::time_info", "structneforce_1_1process_1_1time__info.html", "structneforce_1_1process_1_1time__info" ],
+    [ "neforce::process::shell_result", "structneforce_1_1process_1_1shell__result.html", "structneforce_1_1process_1_1shell__result" ]
 ];

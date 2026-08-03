@@ -1,0 +1,198 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1chacha20__poly1305" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::chacha20_poly1305</compoundname>
+    <includes refid="chacha20__poly1305_8hpp" local="no">chacha20_poly1305.hpp</includes>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structneforce_1_1chacha20__poly1305_1a7d01814f543f92ea1c53c2260bd48785" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector neforce::chacha20_poly1305::encrypt</definition>
+        <argsstring>(cbyte_view data, cbyte_view key, cbyte_view nonce, cbyte_view aad, byte_t *tag)</argsstring>
+        <name>encrypt</name>
+        <qualifiedname>neforce::chacha20_poly1305::encrypt</qualifiedname>
+        <param>
+          <type><ref refid="group___memory_view_1ga533a464153c7fc34d3fa5d92854c8613" kindref="member">cbyte_view</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1ga533a464153c7fc34d3fa5d92854c8613" kindref="member">cbyte_view</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1ga533a464153c7fc34d3fa5d92854c8613" kindref="member">cbyte_view</ref></type>
+          <declname>nonce</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1ga533a464153c7fc34d3fa5d92854c8613" kindref="member">cbyte_view</ref></type>
+          <declname>aad</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>tag</declname>
+        </param>
+        <briefdescription>
+<para>ChaCha20-Poly1305 AEAD 加密 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要加密的明文数据（可为空） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>32字节的密钥 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nonce</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>12字节的nonce（不可对同一密钥重用） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>aad</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>附加认证数据（可为空，仅认证不加密） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出认证标签缓冲区（16字节） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>加密后的密文（长度与明文相同） </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当密钥长度不是32字节、nonce长度不是12字节或tag为null时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/encrypt/chacha20_poly1305.hpp" line="78" column="24"/>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1chacha20__poly1305_1a7c093be214d1b07d0f745739a2fa7d6b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector neforce::chacha20_poly1305::decrypt</definition>
+        <argsstring>(cbyte_view data, cbyte_view key, cbyte_view nonce, cbyte_view aad, cbyte_view tag)</argsstring>
+        <name>decrypt</name>
+        <qualifiedname>neforce::chacha20_poly1305::decrypt</qualifiedname>
+        <param>
+          <type><ref refid="group___memory_view_1ga533a464153c7fc34d3fa5d92854c8613" kindref="member">cbyte_view</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1ga533a464153c7fc34d3fa5d92854c8613" kindref="member">cbyte_view</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1ga533a464153c7fc34d3fa5d92854c8613" kindref="member">cbyte_view</ref></type>
+          <declname>nonce</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1ga533a464153c7fc34d3fa5d92854c8613" kindref="member">cbyte_view</ref></type>
+          <declname>aad</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1ga533a464153c7fc34d3fa5d92854c8613" kindref="member">cbyte_view</ref></type>
+          <declname>tag</declname>
+        </param>
+        <briefdescription>
+<para>ChaCha20-Poly1305 AEAD 解密 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>密文数据（可为空） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>32字节密钥 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nonce</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>12字节nonce </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>aad</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>附加认证数据（必须与加密时使用的一致） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待验证的认证标签（16字节） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解密后的明文（长度与密文相同） </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当密钥长度不是32字节、nonce长度不是12字节、 tag长度不是16字节或认证失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/encrypt/chacha20_poly1305.hpp" line="91" column="24"/>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>ChaCha20-Poly1305 AEAD 加密算法结构体 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供静态方法进行 ChaCha20-Poly1305 认证加密和解密操作。 支持关联数据（AAD）认证，适用于保护网络协议和文件格式中的 未加密但需完整性保护的数据。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/encrypt/chacha20_poly1305.hpp" line="67" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/encrypt/chacha20_poly1305.hpp" bodystart="67" bodyend="92"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1chacha20__poly1305_1a7c093be214d1b07d0f745739a2fa7d6b" prot="public" virt="non-virtual"><scope>neforce::chacha20_poly1305</scope><name>decrypt</name></member>
+      <member refid="structneforce_1_1chacha20__poly1305_1a7d01814f543f92ea1c53c2260bd48785" prot="public" virt="non-virtual"><scope>neforce::chacha20_poly1305</scope><name>encrypt</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

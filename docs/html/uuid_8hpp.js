@@ -1,4 +1,4 @@
 var uuid_8hpp =
 [
-    [ "operator\"\"_uuid", "group___user_literals.html#gafad5d0db71f2bf2f44df5778b4356cbf", null ]
+    [ "neforce::literals::operator\"\"_uuid", "group___user_literals.html#ga518aa42e008b938b72db32c2751538bd", null ]
 ];

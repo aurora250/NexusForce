@@ -1,8 +1,8 @@
 var group___index_tuple =
 [
-    [ "index_tuple&lt; Values &gt;", "structindex__tuple.html", null ],
-    [ "build_index_tuple&lt; Num &gt;", "structbuild__index__tuple.html", [
-      [ "type", "structbuild__index__tuple.html#ae8e2b64a843d52f1f11a4c1d061bbfbe", null ]
+    [ "neforce::index_tuple&lt; Values &gt;", "structneforce_1_1index__tuple.html", null ],
+    [ "neforce::build_index_tuple&lt; Num &gt;", "structneforce_1_1build__index__tuple.html", [
+      [ "type", "structneforce_1_1build__index__tuple.html#a46dd8e69228fa656149bf068cec0b1f9", null ]
     ] ],
-    [ "build_index_tuple_t", "group___index_tuple.html#ga214c85ecd1d3447098af9f454f0ddada", null ]
+    [ "neforce::build_index_tuple_t", "group___index_tuple.html#ga89a73a4c0f4b82d7d6ae78748c08e098", null ]
 ];

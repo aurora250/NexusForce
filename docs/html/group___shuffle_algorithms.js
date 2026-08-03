@@ -1,5 +1,5 @@
 var group___shuffle_algorithms =
 [
-    [ "shuffle", "group___shuffle_algorithms.html#ga3bcbde813bd43737ddaf4c106caac469", null ],
-    [ "shuffle", "group___shuffle_algorithms.html#ga7d0bd6e732e8ea782985610e8276d3ce", null ]
+    [ "neforce::shuffle", "group___shuffle_algorithms.html#ga1923fb855d707c657d666fc6ea2c1228", null ],
+    [ "neforce::shuffle", "group___shuffle_algorithms.html#gab95287909b94bdae1092f2d0f28181c9", null ]
 ];

@@ -4,21 +4,22 @@
     <compoundname>MemoryFunctions</compoundname>
     <title>内存操作函数</title>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___memory_functions_1ga916bc1850129b8df023250fe45a2ef42" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___memory_functions_1ga5e08d60da165a1ac99e892d9efa6626f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void *</type>
-        <definition>void * memory_copy</definition>
-        <argsstring>(void *NEFORCE_RESTRICT dest, const void *NEFORCE_RESTRICT src, size_t count) noexcept</argsstring>
+        <definition>void * neforce::memory_copy</definition>
+        <argsstring>(void *__restrict dest, const void *__restrict src, size_t count) noexcept</argsstring>
         <name>memory_copy</name>
+        <qualifiedname>neforce::memory_copy</qualifiedname>
         <param>
-          <type>void *NEFORCE_RESTRICT</type>
+          <type>void *__restrict</type>
           <declname>dest</declname>
         </param>
         <param>
-          <type>const void *NEFORCE_RESTRICT</type>
+          <type>const void *__restrict</type>
           <declname>src</declname>
         </param>
         <param>
-          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>size_t</type>
           <declname>count</declname>
         </param>
         <briefdescription>
@@ -59,32 +60,35 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="29" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="29" bodyend="48"/>
-        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
-        <referencedby refid="group___atomic_operations_1ga772ceef8a06ba3e08118d11382fc6c9d" compoundref="atomic__base_8hpp" startline="1119" endline="1135">atomic_load_any</referencedby>
-        <referencedby refid="structbase__char__traits_1a9441f141e7409a997d4c505f2a30f302" compoundref="char__traits_8hpp" startline="47" endline="50">base_char_traits&lt; CharT, IntT &gt;::copy</referencedby>
-        <referencedby refid="structexception_1ad53654133be61ac0d671b96eea49a2c3" compoundref="exception_8hpp" startline="97" endline="97">exception::exception</referencedby>
-        <referencedby refid="structexception_1af7e2ec88aedbf1ac46326caa556ce434" compoundref="exception_8hpp" startline="115" endline="118">exception::exception</referencedby>
-        <referencedby refid="group___memory_functions_1ga6fd3367d5ce2f11f15aa430fef166c2d" compoundref="memory_2memory_8hpp" startline="310" endline="324">memory_cast</referencedby>
-        <referencedby refid="group___memory_functions_1gabf0190a30f18f9de68cbb34c67e5f671" compoundref="memory_2memory_8hpp" startline="59" endline="61">memory_copy</referencedby>
-        <referencedby refid="structexception_1a1a1667b7354203e2aa5a89d211ca3a6b" compoundref="exception_8hpp" startline="102" endline="110">exception::operator=</referencedby>
-        <referencedby refid="structexception_1a709d705f97cbad7d531dfb5023107536" compoundref="exception_8hpp" startline="123" endline="133">exception::operator=</referencedby>
+        <references refid="group___counting_algorithms_1ga74557c5cb91a609183df695efc54ba60" compoundref="search_8hpp" startline="391" endline="393">neforce::count</references>
+        <references refid="group___memory_functions_1ga5e08d60da165a1ac99e892d9efa6626f" compoundref="memory_2memory_8hpp" startline="29" endline="48">neforce::memory_copy</references>
+        <referencedby refid="group___atomic_operations_1ga200568b48ab0edf93f5e944c02b9ab90" compoundref="atomic__base_8hpp" startline="1130" endline="1146">neforce::atomic_load_any</referencedby>
+        <referencedby refid="structneforce_1_1base__char__traits_1aa802156ac7923d7979fd6f8ff8ef50e4" compoundref="char__traits_8hpp" startline="48" endline="51">neforce::base_char_traits&lt; CharT, IntT &gt;::copy</referencedby>
+        <referencedby refid="structneforce_1_1exception_1a9ae6ab2dc5699adfc63ec7571e87ec94" compoundref="exception_8hpp" startline="97" endline="97">neforce::exception::exception</referencedby>
+        <referencedby refid="structneforce_1_1exception_1a295286b9d2ce7d9338815964b564e289" compoundref="exception_8hpp" startline="115" endline="118">neforce::exception::exception</referencedby>
+        <referencedby refid="group___memory_functions_1ga00796bd51f127d25f5291c15f35a8946" compoundref="memory_2memory_8hpp" startline="310" endline="324">neforce::memory_cast</referencedby>
+        <referencedby refid="group___memory_functions_1ga55209f5d75dd1fa831aeb6c946840c77" compoundref="memory_2memory_8hpp" startline="59" endline="61">neforce::memory_copy</referencedby>
+        <referencedby refid="group___memory_functions_1ga5e08d60da165a1ac99e892d9efa6626f" compoundref="memory_2memory_8hpp" startline="29" endline="48">neforce::memory_copy</referencedby>
+        <referencedby refid="structneforce_1_1exception_1a159169892770b6020d5ab0bcbf6066e5" compoundref="exception_8hpp" startline="102" endline="110">neforce::exception::operator=</referencedby>
+        <referencedby refid="structneforce_1_1exception_1a9e4ddd8f9b01a26777cff21e282511a5" compoundref="exception_8hpp" startline="123" endline="133">neforce::exception::operator=</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___memory_functions_1gabf0190a30f18f9de68cbb34c67e5f671" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___memory_functions_1ga55209f5d75dd1fa831aeb6c946840c77" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>void *</type>
-        <definition>void * memory_copy</definition>
-        <argsstring>(T *NEFORCE_RESTRICT dest, const T *NEFORCE_RESTRICT src) noexcept</argsstring>
+        <definition>void * neforce::memory_copy</definition>
+        <argsstring>(T *__restrict dest, const T *__restrict src) noexcept</argsstring>
         <name>memory_copy</name>
+        <qualifiedname>neforce::memory_copy</qualifiedname>
         <param>
-          <type>T *NEFORCE_RESTRICT</type>
+          <type>T *__restrict</type>
           <declname>dest</declname>
         </param>
         <param>
-          <type>const T *NEFORCE_RESTRICT</type>
+          <type>const T *__restrict</type>
           <declname>src</declname>
         </param>
         <briefdescription>
@@ -126,23 +130,24 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="59" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="59" bodyend="61"/>
-        <references refid="group___memory_functions_1ga916bc1850129b8df023250fe45a2ef42" compoundref="memory_2memory_8hpp" startline="29" endline="48">memory_copy</references>
+        <references refid="group___memory_functions_1ga5e08d60da165a1ac99e892d9efa6626f" compoundref="memory_2memory_8hpp" startline="29" endline="48">neforce::memory_copy</references>
       </memberdef>
-      <memberdef kind="function" id="group___memory_functions_1gad29285bfc0375b5fd090c08ad911fa3e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___memory_functions_1ga23f3f1e1c8c0e5a34459525fccdfac03" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void *</type>
-        <definition>void * memory_copy_offset</definition>
-        <argsstring>(void *NEFORCE_RESTRICT dest, const void *NEFORCE_RESTRICT src, size_t count) noexcept</argsstring>
+        <definition>void * neforce::memory_copy_offset</definition>
+        <argsstring>(void *__restrict dest, const void *__restrict src, size_t count) noexcept</argsstring>
         <name>memory_copy_offset</name>
+        <qualifiedname>neforce::memory_copy_offset</qualifiedname>
         <param>
-          <type>void *NEFORCE_RESTRICT</type>
+          <type>void *__restrict</type>
           <declname>dest</declname>
         </param>
         <param>
-          <type>const void *NEFORCE_RESTRICT</type>
+          <type>const void *__restrict</type>
           <declname>src</declname>
         </param>
         <param>
-          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>size_t</type>
           <declname>count</declname>
         </param>
         <briefdescription>
@@ -183,13 +188,16 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="71" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="71" bodyend="85"/>
-        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
+        <references refid="group___counting_algorithms_1ga74557c5cb91a609183df695efc54ba60" compoundref="search_8hpp" startline="391" endline="393">neforce::count</references>
+        <references refid="group___memory_functions_1ga23f3f1e1c8c0e5a34459525fccdfac03" compoundref="memory_2memory_8hpp" startline="71" endline="85">neforce::memory_copy_offset</references>
+        <referencedby refid="group___memory_functions_1ga23f3f1e1c8c0e5a34459525fccdfac03" compoundref="memory_2memory_8hpp" startline="71" endline="85">neforce::memory_copy_offset</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___memory_functions_1ga853d6b81f12de4c651fcdf30b3e00699" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___memory_functions_1ga15652324e3f09255d2052bd4eacf40f9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void *</type>
-        <definition>void * memory_copy_until</definition>
+        <definition>void * neforce::memory_copy_until</definition>
         <argsstring>(void *dest, const void *src, const byte_t value, size_t count) noexcept</argsstring>
         <name>memory_copy_until</name>
+        <qualifiedname>neforce::memory_copy_until</qualifiedname>
         <param>
           <type>void *</type>
           <declname>dest</declname>
@@ -199,11 +207,11 @@
           <declname>src</declname>
         </param>
         <param>
-          <type>const <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref></type>
+          <type>const byte_t</type>
           <declname>value</declname>
         </param>
         <param>
-          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>size_t</type>
           <declname>count</declname>
         </param>
         <briefdescription>
@@ -250,13 +258,16 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="95" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="95" bodyend="113"/>
-        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
+        <references refid="group___counting_algorithms_1ga74557c5cb91a609183df695efc54ba60" compoundref="search_8hpp" startline="391" endline="393">neforce::count</references>
+        <references refid="group___memory_functions_1ga15652324e3f09255d2052bd4eacf40f9" compoundref="memory_2memory_8hpp" startline="95" endline="113">neforce::memory_copy_until</references>
+        <referencedby refid="group___memory_functions_1ga15652324e3f09255d2052bd4eacf40f9" compoundref="memory_2memory_8hpp" startline="95" endline="113">neforce::memory_copy_until</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___memory_functions_1ga17a7b0542a31c04bbf7a1750d5273f78" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___memory_functions_1ga8211a331e086472eec2629de2ea7f163" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>int</type>
-        <definition>int memory_compare</definition>
+        <definition>int neforce::memory_compare</definition>
         <argsstring>(const void *lhs, const void *rhs, size_t count) noexcept</argsstring>
         <name>memory_compare</name>
+        <qualifiedname>neforce::memory_compare</qualifiedname>
         <param>
           <type>const void *</type>
           <declname>lhs</declname>
@@ -266,7 +277,7 @@
           <declname>rhs</declname>
         </param>
         <param>
-          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>size_t</type>
           <declname>count</declname>
         </param>
         <briefdescription>
@@ -310,21 +321,24 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="125" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="125" bodyend="144"/>
-        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
-        <referencedby refid="group___atomic_operations_1ga02cda74ae7b485daa38aa961566b51f1" compoundref="atomic__base_8hpp" startline="1062" endline="1088">atomic_cmpexch_strong_any</referencedby>
-        <referencedby refid="structnarrow__char__traits_1a789fae5c626604932994ad9d9c60b0ae" compoundref="char__traits_8hpp" startline="181" endline="184">narrow_char_traits&lt; CharT, IntT &gt;::compare</referencedby>
-        <referencedby refid="group___memory_functions_1ga318824dacad28e4169290a0974b768bd" compoundref="memory_2memory_8hpp" startline="157" endline="159">memory_compare</referencedby>
+        <references refid="group___counting_algorithms_1ga74557c5cb91a609183df695efc54ba60" compoundref="search_8hpp" startline="391" endline="393">neforce::count</references>
+        <references refid="group___memory_functions_1ga8211a331e086472eec2629de2ea7f163" compoundref="memory_2memory_8hpp" startline="125" endline="144">neforce::memory_compare</references>
+        <referencedby refid="group___atomic_operations_1gabb221e34eb57f5c5301f200bfe969b3d" compoundref="atomic__base_8hpp" startline="1073" endline="1099">neforce::atomic_cmpexch_strong_any</referencedby>
+        <referencedby refid="structneforce_1_1narrow__char__traits_1a60ea32fdade801236a9877db377e4e8b" compoundref="char__traits_8hpp" startline="182" endline="185">neforce::narrow_char_traits&lt; CharT, IntT &gt;::compare</referencedby>
+        <referencedby refid="group___memory_functions_1ga32b854ce6d0ab3d6efa934fa79e683bf" compoundref="memory_2memory_8hpp" startline="157" endline="159">neforce::memory_compare</referencedby>
+        <referencedby refid="group___memory_functions_1ga8211a331e086472eec2629de2ea7f163" compoundref="memory_2memory_8hpp" startline="125" endline="144">neforce::memory_compare</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___memory_functions_1ga318824dacad28e4169290a0974b768bd" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___memory_functions_1ga32b854ce6d0ab3d6efa934fa79e683bf" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>int</type>
-        <definition>int memory_compare</definition>
+        <definition>int neforce::memory_compare</definition>
         <argsstring>(const T &amp;lhs, const T &amp;rhs) noexcept</argsstring>
         <name>memory_compare</name>
+        <qualifiedname>neforce::memory_compare</qualifiedname>
         <param>
           <type>const T &amp;</type>
           <declname>lhs</declname>
@@ -375,13 +389,14 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="157" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="157" bodyend="159"/>
-        <references refid="group___memory_functions_1ga17a7b0542a31c04bbf7a1750d5273f78" compoundref="memory_2memory_8hpp" startline="125" endline="144">memory_compare</references>
+        <references refid="group___memory_functions_1ga8211a331e086472eec2629de2ea7f163" compoundref="memory_2memory_8hpp" startline="125" endline="144">neforce::memory_compare</references>
       </memberdef>
-      <memberdef kind="function" id="group___memory_functions_1ga90da368347e24536d638332d1acb9eef" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___memory_functions_1gaff8a4e50848006da9520683f2cdfc2b2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void *</type>
-        <definition>void * memory_move</definition>
+        <definition>void * neforce::memory_move</definition>
         <argsstring>(void *dest, const void *src, size_t count) noexcept</argsstring>
         <name>memory_move</name>
+        <qualifiedname>neforce::memory_move</qualifiedname>
         <param>
           <type>void *</type>
           <declname>dest</declname>
@@ -391,7 +406,7 @@
           <declname>src</declname>
         </param>
         <param>
-          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>size_t</type>
           <declname>count</declname>
         </param>
         <briefdescription>
@@ -432,25 +447,28 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="169" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="169" bodyend="189"/>
-        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
-        <referencedby refid="classdynamic__buffer_1a27ba6fcc4aeaf27dd964629057c18c32" compoundref="buffer_8hpp" startline="269" endline="277">dynamic_buffer::consume</referencedby>
-        <referencedby refid="structbase__char__traits_1a902ab3a5f3e5e6e83cba89be5ce4fe2c" compoundref="char__traits_8hpp" startline="59" endline="62">base_char_traits&lt; CharT, IntT &gt;::move</referencedby>
+        <references refid="group___counting_algorithms_1ga74557c5cb91a609183df695efc54ba60" compoundref="search_8hpp" startline="391" endline="393">neforce::count</references>
+        <references refid="group___memory_functions_1gaff8a4e50848006da9520683f2cdfc2b2" compoundref="memory_2memory_8hpp" startline="169" endline="189">neforce::memory_move</references>
+        <referencedby refid="classneforce_1_1dynamic__buffer_1adf92915f3469913b2562f87bd4584d73" compoundref="buffer_8hpp" startline="269" endline="277">neforce::dynamic_buffer::consume</referencedby>
+        <referencedby refid="group___memory_functions_1gaff8a4e50848006da9520683f2cdfc2b2" compoundref="memory_2memory_8hpp" startline="169" endline="189">neforce::memory_move</referencedby>
+        <referencedby refid="structneforce_1_1base__char__traits_1a92630f47aaf9d77e08625259066f1d47" compoundref="char__traits_8hpp" startline="60" endline="63">neforce::base_char_traits&lt; CharT, IntT &gt;::move</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___memory_functions_1ga4b04ad7935fed30fc73128ff3e76b417" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___memory_functions_1gab5ff3054f92c4812dc7271397c900065" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void *</type>
-        <definition>void * memory_set</definition>
+        <definition>void * neforce::memory_set</definition>
         <argsstring>(void *dest, const byte_t value, size_t count) noexcept</argsstring>
         <name>memory_set</name>
+        <qualifiedname>neforce::memory_set</qualifiedname>
         <param>
           <type>void *</type>
           <declname>dest</declname>
         </param>
         <param>
-          <type>const <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref></type>
+          <type>const byte_t</type>
           <declname>value</declname>
         </param>
         <param>
-          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>size_t</type>
           <declname>count</declname>
         </param>
         <briefdescription>
@@ -489,20 +507,23 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="198" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="198" bodyend="210"/>
-        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
-        <referencedby refid="structnarrow__char__traits_1a797f3bcecfe1d37aba5414606822f79f" compoundref="char__traits_8hpp" startline="205" endline="207">narrow_char_traits&lt; CharT, IntT &gt;::assign</referencedby>
+        <references refid="group___counting_algorithms_1ga74557c5cb91a609183df695efc54ba60" compoundref="search_8hpp" startline="391" endline="393">neforce::count</references>
+        <references refid="group___memory_functions_1gab5ff3054f92c4812dc7271397c900065" compoundref="memory_2memory_8hpp" startline="198" endline="210">neforce::memory_set</references>
+        <referencedby refid="structneforce_1_1narrow__char__traits_1a5dd6ef1a9a25d74899ccd679d81a9618" compoundref="char__traits_8hpp" startline="206" endline="208">neforce::narrow_char_traits&lt; CharT, IntT &gt;::assign</referencedby>
+        <referencedby refid="group___memory_functions_1gab5ff3054f92c4812dc7271397c900065" compoundref="memory_2memory_8hpp" startline="198" endline="210">neforce::memory_set</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___memory_functions_1ga2911230e02f6aa5fb1ef15843cf4d02d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___memory_functions_1gac83273a48377e6a3b08b0fc155778229" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void memory_zero</definition>
+        <definition>void neforce::memory_zero</definition>
         <argsstring>(void *dest, const size_t count) noexcept</argsstring>
         <name>memory_zero</name>
+        <qualifiedname>neforce::memory_zero</qualifiedname>
         <param>
           <type>void *</type>
           <declname>dest</declname>
         </param>
         <param>
-          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>const size_t</type>
           <declname>count</declname>
         </param>
         <briefdescription>
@@ -531,20 +552,23 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="219" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="219" bodyend="228"/>
-        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
-        <referencedby refid="group___memory_functions_1gac8ffd2837fb71b4f12bec7e5b272fc87" compoundref="memory_2memory_8hpp" startline="238" endline="240">memory_zero</referencedby>
-        <referencedby refid="classuuid_1accde25e6bb9cab49d3bb4ae6cdfc8334" compoundref="uuid_8hpp" startline="61" endline="61">uuid::uuid</referencedby>
+        <references refid="group___counting_algorithms_1ga74557c5cb91a609183df695efc54ba60" compoundref="search_8hpp" startline="391" endline="393">neforce::count</references>
+        <references refid="group___memory_functions_1gac83273a48377e6a3b08b0fc155778229" compoundref="memory_2memory_8hpp" startline="219" endline="228">neforce::memory_zero</references>
+        <referencedby refid="group___memory_functions_1ga2a1b5b55c287398506cc55d2f65e854c" compoundref="memory_2memory_8hpp" startline="238" endline="240">neforce::memory_zero</referencedby>
+        <referencedby refid="group___memory_functions_1gac83273a48377e6a3b08b0fc155778229" compoundref="memory_2memory_8hpp" startline="219" endline="228">neforce::memory_zero</referencedby>
+        <referencedby refid="classneforce_1_1uuid_1a7d110a26ea7c9c4c3618bb48a9dcb054" compoundref="uuid_8hpp" startline="61" endline="61">neforce::uuid::uuid</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___memory_functions_1gac8ffd2837fb71b4f12bec7e5b272fc87" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___memory_functions_1ga2a1b5b55c287398506cc55d2f65e854c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void memory_zero</definition>
+        <definition>void neforce::memory_zero</definition>
         <argsstring>(T *dest) noexcept</argsstring>
         <name>memory_zero</name>
+        <qualifiedname>neforce::memory_zero</qualifiedname>
         <param>
           <type>T *</type>
           <declname>dest</declname>
@@ -576,23 +600,24 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="238" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="238" bodyend="240"/>
-        <references refid="group___memory_functions_1ga2911230e02f6aa5fb1ef15843cf4d02d" compoundref="memory_2memory_8hpp" startline="219" endline="228">memory_zero</references>
+        <references refid="group___memory_functions_1gac83273a48377e6a3b08b0fc155778229" compoundref="memory_2memory_8hpp" startline="219" endline="228">neforce::memory_zero</references>
       </memberdef>
-      <memberdef kind="function" id="group___memory_functions_1ga1db643a07a63bc11d295bf871e3434d6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___memory_functions_1ga435d7aa3f981d443f484d01019e34163" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>const void *</type>
-        <definition>const void * memory_find</definition>
+        <definition>const void * neforce::memory_find</definition>
         <argsstring>(const void *dest, const byte_t value, size_t count) noexcept</argsstring>
         <name>memory_find</name>
+        <qualifiedname>neforce::memory_find</qualifiedname>
         <param>
           <type>const void *</type>
           <declname>dest</declname>
         </param>
         <param>
-          <type>const <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref></type>
+          <type>const byte_t</type>
           <declname>value</declname>
         </param>
         <param>
-          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>size_t</type>
           <declname>count</declname>
         </param>
         <briefdescription>
@@ -631,20 +656,23 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="249" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="249" bodyend="262"/>
-        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
-        <referencedby refid="structnarrow__char__traits_1a3b9430e8b7906fc4651ae8c0e1dc7ecb" compoundref="char__traits_8hpp" startline="193" endline="196">narrow_char_traits&lt; CharT, IntT &gt;::find</referencedby>
+        <references refid="group___counting_algorithms_1ga74557c5cb91a609183df695efc54ba60" compoundref="search_8hpp" startline="391" endline="393">neforce::count</references>
+        <references refid="group___memory_functions_1ga435d7aa3f981d443f484d01019e34163" compoundref="memory_2memory_8hpp" startline="249" endline="262">neforce::memory_find</references>
+        <referencedby refid="structneforce_1_1narrow__char__traits_1a7e6150cf675734e1e3feff4dba577424" compoundref="char__traits_8hpp" startline="194" endline="197">neforce::narrow_char_traits&lt; CharT, IntT &gt;::find</referencedby>
+        <referencedby refid="group___memory_functions_1ga435d7aa3f981d443f484d01019e34163" compoundref="memory_2memory_8hpp" startline="249" endline="262">neforce::memory_find</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___memory_functions_1ga5a90c76f15f02e0b1a81ab6e59595188" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___memory_functions_1gaeb5007eb063ac03dcc5d0605d58e80c3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>const void *</type>
-        <definition>const void * memory_find_pattern</definition>
+        <definition>const void * neforce::memory_find_pattern</definition>
         <argsstring>(const void *data, const size_t data_len, const void *pattern, const size_t pattern_len) noexcept</argsstring>
         <name>memory_find_pattern</name>
+        <qualifiedname>neforce::memory_find_pattern</qualifiedname>
         <param>
           <type>const void *</type>
           <declname>data</declname>
         </param>
         <param>
-          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>const size_t</type>
           <declname>data_len</declname>
         </param>
         <param>
@@ -652,7 +680,7 @@
           <declname>pattern</declname>
         </param>
         <param>
-          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>const size_t</type>
           <declname>pattern_len</declname>
         </param>
         <briefdescription>
@@ -699,9 +727,11 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="272" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="272" bodyend="297"/>
-        <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+        <references refid="group___memory_functions_1gaeb5007eb063ac03dcc5d0605d58e80c3" compoundref="memory_2memory_8hpp" startline="272" endline="297">neforce::memory_find_pattern</references>
+        <referencedby refid="group___memory_functions_1gaeb5007eb063ac03dcc5d0605d58e80c3" compoundref="memory_2memory_8hpp" startline="272" endline="297">neforce::memory_find_pattern</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___memory_functions_1ga6fd3367d5ce2f11f15aa430fef166c2d" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___memory_functions_1ga00796bd51f127d25f5291c15f35a8946" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename To</type>
@@ -711,9 +741,10 @@
           </param>
         </templateparamlist>
         <type>To</type>
-        <definition>To memory_cast</definition>
+        <definition>To neforce::memory_cast</definition>
         <argsstring>(const From &amp;value) noexcept</argsstring>
         <name>memory_cast</name>
+        <qualifiedname>neforce::memory_cast</qualifiedname>
         <param>
           <type>const From &amp;</type>
           <declname>value</declname>
@@ -757,9 +788,11 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="310" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="310" bodyend="324"/>
-        <references refid="group___type_special_member_function_checks_1ga5d1a93c5d7a09590573ceccfb239a590" compoundref="type__traits_8hpp" startline="2410">is_default_constructible_v</references>
-        <references refid="group___type_special_member_function_checks_1gaf94b442e8b9fb5a0de351b1b84d6f703" compoundref="type__traits_8hpp" startline="2337">is_trivially_copyable_v</references>
-        <references refid="group___memory_functions_1ga916bc1850129b8df023250fe45a2ef42" compoundref="memory_2memory_8hpp" startline="29" endline="48">memory_copy</references>
+        <references refid="group___type_special_member_function_checks_1ga59d16c8fd9940071a34de559fba8573f" compoundref="type__traits_8hpp" startline="2410">neforce::is_default_constructible_v</references>
+        <references refid="group___type_special_member_function_checks_1ga5e7f30dadba0c4f41e7f8171ca435976" compoundref="type__traits_8hpp" startline="2337">neforce::is_trivially_copyable_v</references>
+        <references refid="group___memory_functions_1ga00796bd51f127d25f5291c15f35a8946" compoundref="memory_2memory_8hpp" startline="310" endline="324">neforce::memory_cast</references>
+        <references refid="group___memory_functions_1ga5e08d60da165a1ac99e892d9efa6626f" compoundref="memory_2memory_8hpp" startline="29" endline="48">neforce::memory_copy</references>
+        <referencedby refid="group___memory_functions_1ga00796bd51f127d25f5291c15f35a8946" compoundref="memory_2memory_8hpp" startline="310" endline="324">neforce::memory_cast</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

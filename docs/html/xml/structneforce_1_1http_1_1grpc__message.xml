@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1http_1_1grpc__message" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::http::grpc_message</compoundname>
+    <includes refid="grpc_8hpp" local="no">grpc.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structneforce_1_1http_1_1grpc__message_1a8224533244fa6172913a19a95de806e1" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::http::grpc_message::compressed</definition>
+        <argsstring></argsstring>
+        <name>compressed</name>
+        <qualifiedname>neforce::http::grpc_message::compressed</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="89" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" bodystart="89" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1http_1_1grpc__message_1aa7110087af7d16c283874797b615bc52" prot="public" static="no" mutable="no">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>byte_vector neforce::http::grpc_message::payload</definition>
+        <argsstring></argsstring>
+        <name>payload</name>
+        <qualifiedname>neforce::http::grpc_message::payload</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="90" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1http_1_1grpc__message_1ab342bd582f5c3b41019848245d7d9471" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::grpc_message::grpc_message</definition>
+        <argsstring>()=default</argsstring>
+        <name>grpc_message</name>
+        <qualifiedname>neforce::http::grpc_message::grpc_message</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="92" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1http_1_1grpc__message_1a43df1535436c2f6b77b235e92aec9ebc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::grpc_message::grpc_message</definition>
+        <argsstring>(byte_vector data, bool comp=false)</argsstring>
+        <name>grpc_message</name>
+        <qualifiedname>neforce::http::grpc_message::grpc_message</qualifiedname>
+        <param>
+          <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>comp</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="93" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" bodystart="93" bodyend="95"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>gRPC 消息帧 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>gRPC消息格式（RFC标准）： [1 byte: compressed-flag (0=uncompressed, 1=compressed)] [4 bytes: message-length (big-endian)] [message-length bytes: payload] </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::http::grpc_message</label>
+        <link refid="structneforce_1_1http_1_1grpc__message"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>payload</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::icollector&lt; T &gt;</label>
+        <link refid="structneforce_1_1icollector"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="2">
+        <label>neforce::vector&lt; byte_t &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="88" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" bodystart="88" bodyend="96"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1http_1_1grpc__message_1a8224533244fa6172913a19a95de806e1" prot="public" virt="non-virtual"><scope>neforce::http::grpc_message</scope><name>compressed</name></member>
+      <member refid="structneforce_1_1http_1_1grpc__message_1ab342bd582f5c3b41019848245d7d9471" prot="public" virt="non-virtual"><scope>neforce::http::grpc_message</scope><name>grpc_message</name></member>
+      <member refid="structneforce_1_1http_1_1grpc__message_1a43df1535436c2f6b77b235e92aec9ebc" prot="public" virt="non-virtual"><scope>neforce::http::grpc_message</scope><name>grpc_message</name></member>
+      <member refid="structneforce_1_1http_1_1grpc__message_1aa7110087af7d16c283874797b615bc52" prot="public" virt="non-virtual"><scope>neforce::http::grpc_message</scope><name>payload</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

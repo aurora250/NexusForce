@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['支持环境_0',['🖥️ 支持环境',['../md__m_a_i_n_p_a_g_e.html#autotoc_md4',1,'']]],
-  ['支持的yaml_201_202特性_1',['支持的YAML 1.2特性',['../classyaml__parser.html#parser_features',1,'']]]
+  ['插件系统_20plugin_0',['🔌 插件系统 (Plugin)',['../index.html#autotoc_md34',1,'']]],
+  ['插件_1',['插件',['../group___plugin.html',1,'']]],
+  ['插入迭代器_2',['插入迭代器',['../group___insert_iterators.html',1,'']]]
 ];

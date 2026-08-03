@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
   </td>
  </tr>
  </tbody>
@@ -104,20 +104,20 @@ $(function(){initNavTree('session__store__redis_8hpp_source.html','',''); });
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span></div>
 <div class="foldopen" id="foldopen00028" data-start="{" data-end="};">
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classredis__session__store.html">   28</a></span><span class="keyword">class </span>redis_session_store final : <span class="keyword">public</span> <a class="code hl_class" href="classsession__store.html">session_store</a> {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classneforce_1_1http_1_1redis__session__store.html">   28</a></span><span class="keyword">class </span>redis_session_store final : <span class="keyword">public</span> <a class="code hl_class" href="classneforce_1_1http_1_1session__store.html">session_store</a> {</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">explicit</span> redis_session_store(<a class="code hl_struct" href="structredis__connect.html">redis_connect</a>&amp; conn) :</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">explicit</span> redis_session_store(<a class="code hl_struct" href="structneforce_1_1redis__connect.html">redis_connect</a>&amp; conn) :</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    conn_(&amp;conn) {}</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <a class="code hl_class" href="classoptional.html">optional&lt;http_session&gt;</a> load(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <span class="keywordtype">id</span>) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">void</span> save(<span class="keyword">const</span> <a class="code hl_struct" href="structhttp__session.html">http_session</a>&amp; session) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <a class="code hl_class" href="classneforce_1_1optional.html">optional&lt;http_session&gt;</a> load(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <span class="keywordtype">id</span>) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">void</span> save(<span class="keyword">const</span> <a class="code hl_struct" href="structneforce_1_1http_1_1http__session.html">http_session</a>&amp; session) <span class="keyword">override</span>;</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordtype">void</span> remove(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <span class="keywordtype">id</span>)<span class="keyword"> override </span>{ conn_-&gt;del(prefix_ + <span class="keywordtype">id</span>); }</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> exists(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <span class="keywordtype">id</span>)<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> conn_-&gt;exists(prefix_ + <span class="keywordtype">id</span>); }</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">void</span> cleanup()<span class="keyword"> override </span>{}</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    NEFORCE_NODISCARD <span class="keywordtype">size_t</span> count()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> 0; }</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <a class="code hl_struct" href="structredis__connect.html">redis_connect</a>* conn_;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <a class="code hl_struct" href="structneforce_1_1redis__connect.html">redis_connect</a>* conn_;</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">string</span> prefix_{<span class="stringliteral">&quot;session:&quot;</span>};</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="comment">// TODO: Redis Cluster/Sentinel support — handle MOVED/ASK redirection and automatic failover for HA deployments</span></div>
@@ -131,12 +131,12 @@ $(function(){initNavTree('session__store__redis_8hpp_source.html','',''); });
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>NEFORCE_END_NAMESPACE__</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_NETWORK_HTTP_SESSION_STORE_REDIS_HPP__</span></div>
-<div class="ttc" id="aclassoptional_html"><div class="ttname"><a href="classoptional.html">optional</a></div><div class="ttdoc">可选值类</div><div class="ttdef"><b>定义</b> <a href="optional_8hpp_source.html#l00071">optional.hpp:71</a></div></div>
-<div class="ttc" id="aclasssession__store_html"><div class="ttname"><a href="classsession__store.html">session_store</a></div><div class="ttdoc">会话存储抽象接口</div><div class="ttdef"><b>定义</b> <a href="session__store_8hpp_source.html#l00026">session_store.hpp:26</a></div></div>
+<div class="ttc" id="aclassneforce_1_1http_1_1session__store_html"><div class="ttname"><a href="classneforce_1_1http_1_1session__store.html">neforce::http::session_store</a></div><div class="ttdoc">会话存储抽象接口</div><div class="ttdef"><b>定义</b> <a href="session__store_8hpp_source.html#l00026">session_store.hpp:26</a></div></div>
+<div class="ttc" id="aclassneforce_1_1optional_html"><div class="ttname"><a href="classneforce_1_1optional.html">neforce::optional</a></div><div class="ttdoc">可选值类</div><div class="ttdef"><b>定义</b> <a href="optional_8hpp_source.html#l00071">optional.hpp:71</a></div></div>
 <div class="ttc" id="aredis__connect_8hpp_html"><div class="ttname"><a href="redis__connect_8hpp.html">redis_connect.hpp</a></div><div class="ttdoc">Redis数据库连接实现</div></div>
 <div class="ttc" id="asession__store_8hpp_html"><div class="ttname"><a href="session__store_8hpp.html">session_store.hpp</a></div><div class="ttdoc">可插拔会话存储抽象层</div></div>
-<div class="ttc" id="astructhttp__session_html"><div class="ttname"><a href="structhttp__session.html">http_session</a></div><div class="ttdoc">HTTP会话结构</div><div class="ttdef"><b>定义</b> <a href="http__session_8hpp_source.html#l00165">http_session.hpp:165</a></div></div>
-<div class="ttc" id="astructredis__connect_html"><div class="ttname"><a href="structredis__connect.html">redis_connect</a></div><div class="ttdoc">Redis数据库连接类</div><div class="ttdef"><b>定义</b> <a href="redis__connect_8hpp_source.html#l00043">redis_connect.hpp:43</a></div></div>
+<div class="ttc" id="astructneforce_1_1http_1_1http__session_html"><div class="ttname"><a href="structneforce_1_1http_1_1http__session.html">neforce::http::http_session</a></div><div class="ttdoc">HTTP会话结构</div><div class="ttdef"><b>定义</b> <a href="http__session_8hpp_source.html#l00165">http_session.hpp:165</a></div></div>
+<div class="ttc" id="astructneforce_1_1redis__connect_html"><div class="ttname"><a href="structneforce_1_1redis__connect.html">neforce::redis_connect</a></div><div class="ttdoc">Redis数据库连接类</div><div class="ttdef"><b>定义</b> <a href="redis__connect_8hpp_source.html#l00043">redis_connect.hpp:43</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

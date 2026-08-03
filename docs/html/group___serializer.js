@@ -1,15 +1,15 @@
 var group___serializer =
 [
-    [ "binary_serializer", "classbinary__serializer.html", [
-      [ "buffer", "classbinary__serializer.html#af193d1cbeda444de78792c99760c043b", null ]
+    [ "neforce::serialize::binary_serializer", "classneforce_1_1serialize_1_1binary__serializer.html", [
+      [ "buffer", "classneforce_1_1serialize_1_1binary__serializer.html#a72793bd9fc5cdb4ba176685c775282b0", null ]
     ] ],
-    [ "json_serializer", "classjson__serializer.html", null ],
-    [ "serialize_context", "structserialize__context.html", [
-      [ "include_transient", "structserialize__context.html#ae1a237098618075be0ed713a68b2ee41", null ],
-      [ "pretty", "structserialize__context.html#adcc99b315494712629f952e4456ef9d0", null ],
-      [ "version", "structserialize__context.html#a2610730ea2e7a584b69c7ab8037c8fad", null ]
+    [ "neforce::serialize::json_serializer", "classneforce_1_1serialize_1_1json__serializer.html", null ],
+    [ "neforce::serialize::serialize_context", "structneforce_1_1serialize_1_1serialize__context.html", [
+      [ "include_transient", "structneforce_1_1serialize_1_1serialize__context.html#a7cfe6ca7f471ed21d62775032fe85b9e", null ],
+      [ "pretty", "structneforce_1_1serialize_1_1serialize__context.html#af17ecb87f3e4820005ee6eb94c6038c3", null ],
+      [ "version", "structneforce_1_1serialize_1_1serialize__context.html#af2e734f010fe78eaaad66c24c11f4db9", null ]
     ] ],
-    [ "is_arithmetic_type", "group___serializer.html#ga10816e4f3da1cb7193c3db334020b152", null ],
-    [ "is_char_type", "group___serializer.html#ga7ac23e284dcb1e7488f26fe308ed673b", null ],
-    [ "is_string_type", "group___serializer.html#gae8908b549ff69e930e2b249c9d38896d", null ]
+    [ "neforce::serialize::is_arithmetic_type", "group___serializer.html#ga8ea96cbdeea51f3740c7e91a35ea1cd5", null ],
+    [ "neforce::serialize::is_char_type", "group___serializer.html#gaeaa1c83939b7740fc68cbabed662a502", null ],
+    [ "neforce::serialize::is_string_type", "group___serializer.html#ga08e4544911cdc4c342c5900f18b06f3f", null ]
 ];

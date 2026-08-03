@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1dns__client_1_1pending__entry" kind="struct" language="C++" prot="private">
+    <compoundname>neforce::dns_client::pending_entry</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structneforce_1_1dns__client_1_1pending__entry_1a6e7d5ae97d9cc6505fa1838ed437fec7" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1weak__ptr" kindref="compound">weak_ptr</ref>&lt; dns_query_op &gt;</type>
+        <definition>weak_ptr&lt;dns_query_op&gt; neforce::dns_client::pending_entry::op</definition>
+        <argsstring></argsstring>
+        <name>op</name>
+        <qualifiedname>neforce::dns_client::pending_entry::op</qualifiedname>
+        <briefdescription>
+<para>待处理查询操作 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="86" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1dns__client_1_1pending__entry_1a35bf90ae4389722b9a0f7a87ee4904c8" prot="public" static="no" mutable="no">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>byte_vector neforce::dns_client::pending_entry::query_data</definition>
+        <argsstring></argsstring>
+        <name>query_data</name>
+        <qualifiedname>neforce::dns_client::pending_entry::query_data</qualifiedname>
+        <briefdescription>
+<para>查询数据 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="87" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1dns__client_1_1pending__entry_1a1802b0e80b128d456736a8f48734b180" prot="public" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1steady__clock_1a571235516977f769fec5e0eaaf49e077" kindref="member">steady_clock::time_point</ref></type>
+        <definition>steady_clock::time_point neforce::dns_client::pending_entry::created_at</definition>
+        <argsstring></argsstring>
+        <name>created_at</name>
+        <qualifiedname>neforce::dns_client::pending_entry::created_at</qualifiedname>
+        <initializer>{<ref refid="structneforce_1_1steady__clock_1a21d376e7630c7c35cde610180e214a1d" kindref="member">steady_clock::now</ref>()}</initializer>
+        <briefdescription>
+<para>创建时间 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="88" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="88" bodyend="88"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::dns_client::pending_entry</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>op</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>query_data</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>created_at</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::icollector&lt; T &gt;</label>
+        <link refid="structneforce_1_1icollector"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="6">
+        <label>neforce::time_point&lt; steady_clock &gt;</label>
+        <link refid="structneforce_1_1time__point"/>
+      </node>
+      <node id="3">
+        <label>neforce::vector&lt; byte_t &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::weak_ptr&lt; dns_query_op &gt;</label>
+        <link refid="classneforce_1_1weak__ptr"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="85" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="85" bodyend="89"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1dns__client_1_1pending__entry_1a1802b0e80b128d456736a8f48734b180" prot="public" virt="non-virtual"><scope>neforce::dns_client::pending_entry</scope><name>created_at</name></member>
+      <member refid="structneforce_1_1dns__client_1_1pending__entry_1a6e7d5ae97d9cc6505fa1838ed437fec7" prot="public" virt="non-virtual"><scope>neforce::dns_client::pending_entry</scope><name>op</name></member>
+      <member refid="structneforce_1_1dns__client_1_1pending__entry_1a35bf90ae4389722b9a0f7a87ee4904c8" prot="public" virt="non-virtual"><scope>neforce::dns_client::pending_entry</scope><name>query_data</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

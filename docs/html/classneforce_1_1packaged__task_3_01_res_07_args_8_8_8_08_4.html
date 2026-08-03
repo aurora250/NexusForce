@@ -1,0 +1,607 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::packaged_task&lt; Res(Args...)&gt; 模板类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1packaged__task_3_01_res_07_args_8_8_8_08_4.html','','classneforce_1_1packaged__task_3_01_res_07_args_8_8_8_08_4-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::packaged_task&lt; Res(Args...)&gt; 模板类 参考<div class="ingroups"><a class="el" href="group___async_components.html">异步组件</a> &raquo; <a class="el" href="group___async.html">异步调用</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>异步任务包装类模板  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a91026059c1a3803b7da092be65aef383" id="r_a91026059c1a3803b7da092be65aef383"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a91026059c1a3803b7da092be65aef383">packaged_task</a> () noexcept=default</td></tr>
+<tr class="memdesc:a91026059c1a3803b7da092be65aef383"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
+<tr class="memitem:ab4a34e7c062cf059e0ad66bfb2d87eb7" id="r_ab4a34e7c062cf059e0ad66bfb2d87eb7"><td class="memTemplParams" colspan="2">template&lt;typename Func, typename = enable_if_t&lt;!is_same_v&lt;packaged_task, remove_cvref_t&lt;Func&gt;&gt;&gt;&gt; </td></tr>
+<tr class="memitem:ab4a34e7c062cf059e0ad66bfb2d87eb7 template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ab4a34e7c062cf059e0ad66bfb2d87eb7">packaged_task</a> (Func &amp;&amp;<a class="el" href="classneforce_1_1function.html">function</a>)</td></tr>
+<tr class="memdesc:ab4a34e7c062cf059e0ad66bfb2d87eb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:a0d2c165701218ad752c877fc341cec6c" id="r_a0d2c165701218ad752c877fc341cec6c"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a0d2c165701218ad752c877fc341cec6c">~packaged_task</a> ()</td></tr>
+<tr class="memdesc:a0d2c165701218ad752c877fc341cec6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数  <br /></td></tr>
+<tr class="memitem:a3e487c91106072421ccd5c9f8d2b1522" id="r_a3e487c91106072421ccd5c9f8d2b1522"><td class="memItemLeft"><a id="a3e487c91106072421ccd5c9f8d2b1522" name="a3e487c91106072421ccd5c9f8d2b1522"></a>
+&#160;</td><td class="memItemRight"><b>packaged_task</b> (const packaged_task &amp;)=delete</td></tr>
+<tr class="memdesc:a3e487c91106072421ccd5c9f8d2b1522"><td class="mdescLeft">&#160;</td><td class="mdescRight">禁止拷贝构造 <br /></td></tr>
+<tr class="memitem:ae1f1d5cea9a6bc24c7f6499edf193d15" id="r_ae1f1d5cea9a6bc24c7f6499edf193d15"><td class="memItemLeft"><a id="ae1f1d5cea9a6bc24c7f6499edf193d15" name="ae1f1d5cea9a6bc24c7f6499edf193d15"></a>
+<a class="el" href="#a91026059c1a3803b7da092be65aef383">packaged_task</a> &amp;&#160;</td><td class="memItemRight"><b>operator=</b> (const <a class="el" href="#a91026059c1a3803b7da092be65aef383">packaged_task</a> &amp;)=delete</td></tr>
+<tr class="memdesc:ae1f1d5cea9a6bc24c7f6499edf193d15"><td class="mdescLeft">&#160;</td><td class="mdescRight">禁止拷贝赋值 <br /></td></tr>
+<tr class="memitem:a065d707675d15e7cbdb73d4cf3465389" id="r_a065d707675d15e7cbdb73d4cf3465389"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a065d707675d15e7cbdb73d4cf3465389">packaged_task</a> (packaged_task &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a065d707675d15e7cbdb73d4cf3465389"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造函数  <br /></td></tr>
+<tr class="memitem:a8cb57d21385c9adfd4f31fd0e93daff0" id="r_a8cb57d21385c9adfd4f31fd0e93daff0"><td class="memItemLeft"><a class="el" href="#a91026059c1a3803b7da092be65aef383">packaged_task</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a8cb57d21385c9adfd4f31fd0e93daff0">operator=</a> (<a class="el" href="#a91026059c1a3803b7da092be65aef383">packaged_task</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a8cb57d21385c9adfd4f31fd0e93daff0"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值运算符  <br /></td></tr>
+<tr class="memitem:ad32c85f307a496e8f0b7130091c3b923" id="r_ad32c85f307a496e8f0b7130091c3b923"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad32c85f307a496e8f0b7130091c3b923">swap</a> (<a class="el" href="#a91026059c1a3803b7da092be65aef383">packaged_task</a> &amp;other) noexcept</td></tr>
+<tr class="memdesc:ad32c85f307a496e8f0b7130091c3b923"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个packaged_task对象  <br /></td></tr>
+<tr class="memitem:a491276e484a1ced7023653357e934a0f" id="r_a491276e484a1ced7023653357e934a0f"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a491276e484a1ced7023653357e934a0f">valid</a> () const noexcept</td></tr>
+<tr class="memdesc:a491276e484a1ced7023653357e934a0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查任务是否有效  <br /></td></tr>
+<tr class="memitem:a80a5e799fd47093bbc3ed2151413937f" id="r_a80a5e799fd47093bbc3ed2151413937f"><td class="memItemLeft"><a class="el" href="classneforce_1_1future.html">future</a>&lt; Res &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a80a5e799fd47093bbc3ed2151413937f">get_future</a> ()</td></tr>
+<tr class="memdesc:a80a5e799fd47093bbc3ed2151413937f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取关联的future对象  <br /></td></tr>
+<tr class="memitem:a459c5e0541e905492053f4e2ab76e39b" id="r_a459c5e0541e905492053f4e2ab76e39b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a459c5e0541e905492053f4e2ab76e39b">operator()</a> (Args... args)</td></tr>
+<tr class="memdesc:a459c5e0541e905492053f4e2ab76e39b"><td class="mdescLeft">&#160;</td><td class="mdescRight">执行任务  <br /></td></tr>
+<tr class="memitem:a093534f060f905d0b1b47c726b812b18" id="r_a093534f060f905d0b1b47c726b812b18"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a093534f060f905d0b1b47c726b812b18">make_ready_at_thread_exit</a> (Args... args)</td></tr>
+<tr class="memdesc:a093534f060f905d0b1b47c726b812b18"><td class="mdescLeft">&#160;</td><td class="mdescRight">在线程退出时标记任务完成  <br /></td></tr>
+<tr class="memitem:a292b9343c8eefcc6e53098091f4b92c4" id="r_a292b9343c8eefcc6e53098091f4b92c4"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a292b9343c8eefcc6e53098091f4b92c4">reset</a> ()</td></tr>
+<tr class="memdesc:a292b9343c8eefcc6e53098091f4b92c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">重置任务  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename Res, typename... Args&gt;<br />
+class neforce::packaged_task&lt; Res(Args...)&gt;</div><p>异步任务包装类模板 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Res</td><td>结果类型 </td></tr>
+    <tr><td class="paramname">Args</td><td>参数类型</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>包装可调用对象，提供异步执行能力，并将执行结果或异常传递给关联的future。 </p>
+
+<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00036">36</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="a91026059c1a3803b7da092be65aef383" name="a91026059c1a3803b7da092be65aef383"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91026059c1a3803b7da092be65aef383">&#9670;&#160;</a></span>packaged_task() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Res, typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">neforce::packaged_task&lt; Res(Args...)&gt;::packaged_task </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel default">default</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>默认构造函数 </p>
+<p>创建空的packaged_task对象，不关联任何任务。 </p>
+
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l00188">neforce::is_same_v</a> , 以及 <a class="el" href="#a91026059c1a3803b7da092be65aef383">packaged_task()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ae1f1d5cea9a6bc24c7f6499edf193d15">operator=()</a>, <a class="el" href="packaged__task_8hpp_source.html#l00086">operator=()</a>, <a class="el" href="#a91026059c1a3803b7da092be65aef383">packaged_task()</a>, <a class="el" href="#a3e487c91106072421ccd5c9f8d2b1522">packaged_task()</a>, <a class="el" href="packaged__task_8hpp_source.html#l00058">packaged_task()</a>, <a class="el" href="packaged__task_8hpp_source.html#l00079">packaged_task()</a>, <a class="el" href="packaged__task_8hpp_source.html#l00142">reset()</a> , 以及 <a class="el" href="packaged__task_8hpp_source.html#l00095">swap()</a>.</p>
+
+</div>
+</div>
+<a id="ab4a34e7c062cf059e0ad66bfb2d87eb7" name="ab4a34e7c062cf059e0ad66bfb2d87eb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4a34e7c062cf059e0ad66bfb2d87eb7">&#9670;&#160;</a></span>packaged_task() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Res, typename... Args&gt; </div>
+<div class="memtemplate">
+template&lt;typename Func, typename = enable_if_t&lt;!is_same_v&lt;packaged_task, remove_cvref_t&lt;Func&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">neforce::packaged_task&lt; Res(Args...)&gt;::packaged_task </td>
+          <td>(</td>
+          <td class="paramtype">Func &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>function</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Func</td><td>可调用类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">function</td><td>要包装的可调用对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>创建包装指定函数的packaged_task对象。 函数签名必须与模板参数Res Args...兼容。 </p>
+
+<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00058">58</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03028">neforce::forward()</a> , 以及 <a class="el" href="#a91026059c1a3803b7da092be65aef383">packaged_task()</a>.</p>
+
+</div>
+</div>
+<a id="a0d2c165701218ad752c877fc341cec6c" name="a0d2c165701218ad752c877fc341cec6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d2c165701218ad752c877fc341cec6c">&#9670;&#160;</a></span>~packaged_task()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Res, typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">neforce::packaged_task&lt; Res(Args...)&gt;::~<a class="el" href="#a91026059c1a3803b7da092be65aef383">packaged_task</a> </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>析构函数 </p>
+<p>如果存在关联的future且任务未执行，会自动设置broken_promise异常。 </p>
+
+<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00066">66</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">neforce::move()</a>.</p>
+
+</div>
+</div>
+<a id="a065d707675d15e7cbdb73d4cf3465389" name="a065d707675d15e7cbdb73d4cf3465389"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a065d707675d15e7cbdb73d4cf3465389">&#9670;&#160;</a></span>packaged_task() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Res, typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">neforce::packaged_task&lt; Res(Args...)&gt;::packaged_task </td>
+          <td>(</td>
+          <td class="paramtype">packaged_task&lt; Res(Args...)&gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>要移动的packaged_task对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00079">79</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a91026059c1a3803b7da092be65aef383">packaged_task()</a> , 以及 <a class="el" href="packaged__task_8hpp_source.html#l00095">swap()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a80a5e799fd47093bbc3ed2151413937f" name="a80a5e799fd47093bbc3ed2151413937f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80a5e799fd47093bbc3ed2151413937f">&#9670;&#160;</a></span>get_future()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Res, typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1future.html">future</a>&lt; Res &gt; neforce::packaged_task&lt; Res(Args...)&gt;::get_future </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取关联的future对象 </p>
+<dl class="section return"><dt>返回</dt><dd>future对象 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1future__exception.html" title="期望值操作异常">future_exception</a></td><td>如果future已被获取 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00108">108</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a093534f060f905d0b1b47c726b812b18" name="a093534f060f905d0b1b47c726b812b18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a093534f060f905d0b1b47c726b812b18">&#9670;&#160;</a></span>make_ready_at_thread_exit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Res, typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::packaged_task&lt; Res(Args...)&gt;::make_ready_at_thread_exit </td>
+          <td>(</td>
+          <td class="paramtype">Args...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在线程退出时标记任务完成 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>任务参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1future__exception.html" title="期望值操作异常">future_exception</a></td><td>如果任务无效</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>执行任务但延迟结果设置，直到当前线程退出时才将结果传递给future。 适用于需要保证某些资源在结果设置前有效的场景。 </p>
+
+<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00130">130</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03028">neforce::forward()</a>.</p>
+
+</div>
+</div>
+<a id="a459c5e0541e905492053f4e2ab76e39b" name="a459c5e0541e905492053f4e2ab76e39b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a459c5e0541e905492053f4e2ab76e39b">&#9670;&#160;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Res, typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::packaged_task&lt; Res(Args...)&gt;::operator() </td>
+          <td>(</td>
+          <td class="paramtype">Args...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>执行任务 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>任务参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1future__exception.html" title="期望值操作异常">future_exception</a></td><td>如果任务无效</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>同步执行包装的任务，结果或异常会传递给关联的future。 </p>
+
+<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00117">117</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03028">neforce::forward()</a>.</p>
+
+</div>
+</div>
+<a id="a8cb57d21385c9adfd4f31fd0e93daff0" name="a8cb57d21385c9adfd4f31fd0e93daff0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cb57d21385c9adfd4f31fd0e93daff0">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Res, typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a91026059c1a3803b7da092be65aef383">packaged_task</a> &amp; neforce::packaged_task&lt; Res(Args...)&gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a91026059c1a3803b7da092be65aef383">packaged_task</a>&lt; Res(Args...)&gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动赋值运算符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>要移动的packaged_task对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>当前对象的引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00086">86</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">neforce::move()</a> , 以及 <a class="el" href="#a91026059c1a3803b7da092be65aef383">packaged_task()</a>.</p>
+
+</div>
+</div>
+<a id="a292b9343c8eefcc6e53098091f4b92c4" name="a292b9343c8eefcc6e53098091f4b92c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a292b9343c8eefcc6e53098091f4b92c4">&#9670;&#160;</a></span>reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Res, typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::packaged_task&lt; Res(Args...)&gt;::reset </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>重置任务 </p>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1future__exception.html" title="期望值操作异常">future_exception</a></td><td>如果任务无效</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>重置任务状态，可以重新关联新的future。 原有任务函数保持不变，但会创建新的共享状态。 </p>
+
+<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00142">142</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a91026059c1a3803b7da092be65aef383">packaged_task()</a>.</p>
+
+</div>
+</div>
+<a id="ad32c85f307a496e8f0b7130091c3b923" name="ad32c85f307a496e8f0b7130091c3b923"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad32c85f307a496e8f0b7130091c3b923">&#9670;&#160;</a></span>swap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Res, typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::packaged_task&lt; Res(Args...)&gt;::swap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a91026059c1a3803b7da092be65aef383">packaged_task</a>&lt; Res(Args...)&gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>交换两个packaged_task对象 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>要交换的packaged_task对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00095">95</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a91026059c1a3803b7da092be65aef383">packaged_task()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="packaged__task_8hpp_source.html#l00079">packaged_task()</a>.</p>
+
+</div>
+</div>
+<a id="a491276e484a1ced7023653357e934a0f" name="a491276e484a1ced7023653357e934a0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a491276e484a1ced7023653357e934a0f">&#9670;&#160;</a></span>valid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Res, typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::packaged_task&lt; Res(Args...)&gt;::valid </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查任务是否有效 </p>
+<dl class="section return"><dt>返回</dt><dd>是否关联了有效的可调用对象 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a> 第 <a class="el" href="packaged__task_8hpp_source.html#l00101">101</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="packaged__task_8hpp_source.html">packaged_task.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><a href="classneforce_1_1packaged__task_3_01_res_07_args_8_8_8_08_4.html">packaged_task&lt; Res(Args...)&gt;</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

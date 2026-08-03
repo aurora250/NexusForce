@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['建议_0',['IEEE 1541-2021 建议',['../group___byte_size.html#ieee_1541',1,'']]]
+  ['序列化_0',['序列化',['../group___serializer.html',1,'']]]
 ];

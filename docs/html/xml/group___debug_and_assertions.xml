@@ -1,0 +1,238 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___debug_and_assertions" kind="group">
+    <compoundname>DebugAndAssertions</compoundname>
+    <title>调试与断言</title>
+    <innerclass refid="structneforce_1_1source__location" prot="public">neforce::source_location</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___debug_and_assertions_1gada10310a069c1ff44c3b724e69421c32" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::unreachable</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>unreachable</name>
+        <qualifiedname>neforce::unreachable</qualifiedname>
+        <briefdescription>
+<para>标记不可达代码路径 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>该函数用于向编译器指示当前代码路径永远不会被执行。当编译器遇到此调用时， 可以进行激进的优化，假设此后的代码永远不会运行。如果实际执行到了此函数， 将导致未定义行为（通常是程序崩溃或产生不可预测的结果）。</para>
+<para><simplesect kind="note"><para>此函数永远不会返回，调用后程序行为未定义。 </para>
+</simplesect>
+<simplesect kind="warning"><para>仅在确定代码路径绝对不可达时使用，否则会导致严重的运行时问题。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/debug.hpp" line="68" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/debug.hpp" bodystart="68" bodyend="74"/>
+        <references refid="group___debug_and_assertions_1gada10310a069c1ff44c3b724e69421c32" compoundref="debug_8hpp" startline="68" endline="74">neforce::unreachable</references>
+        <referencedby refid="classneforce_1_1standard__allocator_1a3459190c2a3dc9b76b49fbf420ecc5c0" compoundref="standard__allocator_8hpp" startline="352" endline="361">neforce::standard_allocator&lt; U &gt;::allocate</referencedby>
+        <referencedby refid="group___any_1gadbcd39ffa874eb2a399e5691539ed384" compoundref="utility_2any_8hpp" startline="475" endline="486">neforce::any_cast</referencedby>
+        <referencedby refid="classneforce_1_1toml__datetime_1a3868e6b026b2e100b30223324db6497d" compoundref="toml__value_8hpp" startline="560" endline="578">neforce::toml_datetime::get_string_value</referencedby>
+        <referencedby refid="group___shared_pointer_1gad4c587b912dbadc84d237239630fc303" compoundref="shared__ptr_8hpp" startline="887" endline="898">neforce::make_shared</referencedby>
+        <referencedby refid="classneforce_1_1color_1a6bd5cef0e2f2559120f6fc4b9ca76287" compoundref="color_8hpp" startline="630" endline="651">neforce::color::parse</referencedby>
+        <referencedby refid="group___logging_1ga26ccc87120faa7840aaae70fcbd1fc27" compoundref="log__event_8hpp" startline="82" endline="101">neforce::to_string</referencedby>
+        <referencedby refid="classneforce_1_1toml__datetime_1ac904e42b60556c31c47be5878ab7193f" compoundref="toml__value_8hpp" startline="505" endline="536">neforce::toml_datetime::toml_datetime</referencedby>
+        <referencedby refid="group___debug_and_assertions_1gada10310a069c1ff44c3b724e69421c32" compoundref="debug_8hpp" startline="68" endline="74">neforce::unreachable</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___debug_and_assertions_1gafecd82bf49ca7a61bf972378b73139b9" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::is_constant_evaluated</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>is_constant_evaluated</name>
+        <qualifiedname>neforce::is_constant_evaluated</qualifiedname>
+        <briefdescription>
+<para>检查当前上下文是否在常量求值中 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果在常量求值上下文中返回true，否则返回false</para>
+</simplesect>
+用于区分编译时和运行时 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/debug.hpp" line="83" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/debug.hpp" bodystart="83" bodyend="85"/>
+        <references refid="group___debug_and_assertions_1gafecd82bf49ca7a61bf972378b73139b9" compoundref="debug_8hpp" startline="83" endline="85">neforce::is_constant_evaluated</references>
+        <referencedby refid="group___memory_allocator_1ga0ab55333431b15a376d8315da2e6977f" compoundref="standard__allocator_8hpp" startline="177" endline="192">neforce::allocate</referencedby>
+        <referencedby refid="group___memory_allocator_1ga10afb006af757ddac0612f95343e7d23" compoundref="standard__allocator_8hpp" startline="281" endline="294">neforce::deallocate</referencedby>
+        <referencedby refid="group___debug_and_assertions_1gafecd82bf49ca7a61bf972378b73139b9" compoundref="debug_8hpp" startline="83" endline="85">neforce::is_constant_evaluated</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___debug_and_assertions_1gab684719eb985c6fb6c57578beeaf5332" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::is_debugger_present</definition>
+        <argsstring>()</argsstring>
+        <name>is_debugger_present</name>
+        <qualifiedname>neforce::is_debugger_present</qualifiedname>
+        <briefdescription>
+<para>检测当前进程是否正在被调试器附加 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果正在调试则返回true，否则返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/debug.hpp" line="92" column="7" declfile="D:/Workspace/NexusForce/include/NeForce/core/exception/debug.hpp" declline="92" declcolumn="7"/>
+        <references refid="group___debug_and_assertions_1gab684719eb985c6fb6c57578beeaf5332">neforce::is_debugger_present</references>
+        <referencedby refid="group___debug_and_assertions_1ga1ce04557c8e30854cf40534846e9ae02" compoundref="debug_8hpp" startline="137" endline="141">neforce::breakpoint_if_debugging</referencedby>
+        <referencedby refid="group___debug_and_assertions_1gab684719eb985c6fb6c57578beeaf5332">neforce::is_debugger_present</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___debug_and_assertions_1ga571d39a1c2d89ce5a37caf2f478ad923" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::debug_assert</definition>
+        <argsstring>(bool condition, const char *message=nullptr)</argsstring>
+        <name>debug_assert</name>
+        <qualifiedname>neforce::debug_assert</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>condition</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>message</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>调试断言 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>condition</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>条件表达式 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>message</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>断言失败时的消息</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+当条件为false时，输出断言失败信息并触发调试断点（如果正在调试）。 仅在调试构建中有效，发布构建中此函数为空操作。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/debug.hpp" line="102" column="7" declfile="D:/Workspace/NexusForce/include/NeForce/core/exception/debug.hpp" declline="102" declcolumn="7"/>
+        <references refid="group___debug_and_assertions_1ga571d39a1c2d89ce5a37caf2f478ad923">neforce::debug_assert</references>
+        <referencedby refid="group___debug_and_assertions_1ga571d39a1c2d89ce5a37caf2f478ad923">neforce::debug_assert</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___debug_and_assertions_1gae58ae1dc4317bc26a1200c373477e381" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::breakpoint</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>breakpoint</name>
+        <qualifiedname>neforce::breakpoint</qualifiedname>
+        <briefdescription>
+<para>触发调试断点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>此函数会直接触发断点，无论是否有调试器附加。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/debug.hpp" line="109" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/debug.hpp" bodystart="109" bodyend="129"/>
+        <references refid="group___debug_and_assertions_1gae58ae1dc4317bc26a1200c373477e381" compoundref="debug_8hpp" startline="109" endline="129">neforce::breakpoint</references>
+        <referencedby refid="group___debug_and_assertions_1gae58ae1dc4317bc26a1200c373477e381" compoundref="debug_8hpp" startline="109" endline="129">neforce::breakpoint</referencedby>
+        <referencedby refid="group___debug_and_assertions_1ga1ce04557c8e30854cf40534846e9ae02" compoundref="debug_8hpp" startline="137" endline="141">neforce::breakpoint_if_debugging</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___debug_and_assertions_1ga1ce04557c8e30854cf40534846e9ae02" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::breakpoint_if_debugging</definition>
+        <argsstring>()</argsstring>
+        <name>breakpoint_if_debugging</name>
+        <qualifiedname>neforce::breakpoint_if_debugging</qualifiedname>
+        <briefdescription>
+<para>如果正在调试则触发断点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>首先检查是否有调试器附加，如果有则触发断点。 适用于条件性断点，避免在非调试环境中意外中断。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/debug.hpp" line="137" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/debug.hpp" bodystart="137" bodyend="141"/>
+        <references refid="group___debug_and_assertions_1gae58ae1dc4317bc26a1200c373477e381" compoundref="debug_8hpp" startline="109" endline="129">neforce::breakpoint</references>
+        <references refid="group___debug_and_assertions_1ga1ce04557c8e30854cf40534846e9ae02" compoundref="debug_8hpp" startline="137" endline="141">neforce::breakpoint_if_debugging</references>
+        <references refid="group___debug_and_assertions_1gab684719eb985c6fb6c57578beeaf5332">neforce::is_debugger_present</references>
+        <referencedby refid="group___debug_and_assertions_1ga1ce04557c8e30854cf40534846e9ae02" compoundref="debug_8hpp" startline="137" endline="141">neforce::breakpoint_if_debugging</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="group___debug_and_assertions_1ga2e66375a1cbe4c9de4100dc4a0dd7e6f" prot="public" static="no">
+        <name>NEFORCE_DEBUG_VERIFY</name>
+        <param><defname>CON</defname></param>
+        <param><defname>MESG</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/debug.hpp" line="36" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/debug.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___debug_and_assertions_1gaeb5cd7dd15c349020f35d669e0e7dd73" prot="public" static="no">
+        <name>NEFORCE_CONSTEXPR_ASSERT</name>
+        <param><defname>COND</defname></param>
+        <initializer>do {                                                       \
+    if (_NEFORCE is_constant_evaluated() &amp;&amp; !bool(COND)) { \
+        _NEFORCE unreachable();                            \
+    }                                                      \
+} while (false);</initializer>
+        <briefdescription>
+<para>编译时常量断言 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>在常量求值上下文中进行断言，如果条件为false则触发不可达代码。 仅在C++20及以上版本有效。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/debug.hpp" line="47" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/debug.hpp" bodystart="47" bodyend="52"/>
+        <referencedby refid="group___atomic_operations_1ga220f1c58eb3de4b40cd0f564b668d722" compoundref="atomic__base_8hpp" startline="698" endline="721">neforce::atomic_cmpexch_strong</referencedby>
+        <referencedby refid="group___atomic_operations_1gabb221e34eb57f5c5301f200bfe969b3d" compoundref="atomic__base_8hpp" startline="1073" endline="1099">neforce::atomic_cmpexch_strong_any</referencedby>
+        <referencedby refid="group___atomic_operations_1ga675158fb0b26507d61701769f2140def" compoundref="atomic__base_8hpp" startline="557" endline="683">neforce::atomic_cmpexch_weak</referencedby>
+        <referencedby refid="group___atomic_operations_1ga6cad024ecadd245ada1fd627a79cd991" compoundref="atomic__base_8hpp" startline="952" endline="1059">neforce::atomic_cmpexch_weak_any</referencedby>
+        <referencedby refid="structneforce_1_1atomic__ref__base_3_01_float_00_01false_00_01true_01_4_1a50891221c20df05bdcbc253d843896c4" compoundref="atomic__base_8hpp" startline="3088" endline="3091">neforce::atomic_ref_base&lt; Float, false, true &gt;::atomic_ref_base</referencedby>
+        <referencedby refid="structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4_1ad5f47b47774a7731f3e7ced79248bd23" compoundref="atomic__base_8hpp" startline="3287" endline="3290">neforce::atomic_ref_base&lt; T *, false, false &gt;::atomic_ref_base</referencedby>
+        <referencedby refid="structneforce_1_1atomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a26ba4ab5dfe585e4ecd153cc9146fafe" compoundref="atomic__base_8hpp" startline="2680" endline="2683">neforce::atomic_ref_base&lt; T, false, false &gt;::atomic_ref_base</referencedby>
+        <referencedby refid="structneforce_1_1atomic__ref__base_3_01_t_00_01true_00_01false_01_4_1adef70d3a3926998f8ed81a2dd9c61a9e" compoundref="atomic__base_8hpp" startline="2831" endline="2834">neforce::atomic_ref_base&lt; T, true, false &gt;::atomic_ref_base</referencedby>
+        <referencedby refid="classneforce_1_1atomic__semaphore_1a7f4b6fa8a97d3b80648fb1c037fbf5df" compoundref="semaphore_8hpp" startline="77" endline="80">neforce::atomic_semaphore&lt; 1 &gt;::atomic_semaphore</referencedby>
+        <referencedby refid="classneforce_1_1memory__view_1a0ae3fe6b35a014e70aa1aa823c241277" compoundref="memory__view_8hpp" startline="330" endline="333">neforce::memory_view&lt; char &gt;::back</referencedby>
+        <referencedby refid="structneforce_1_1atomic__flag_1a166a97ef3b0a7ac22a9efd440bff37fd" compoundref="atomic__base_8hpp" startline="1401" endline="1418">neforce::atomic_flag::clear</referencedby>
+        <referencedby refid="structneforce_1_1atomic__flag_1ac4b43a165fcf262e26c2ecebfb6f943a" compoundref="atomic__base_8hpp" startline="1423" endline="1440">neforce::atomic_flag::clear</referencedby>
+        <referencedby refid="structneforce_1_1atomic_1ab005c56f37fde27ee1e4b30bc0778cc4" compoundref="atomic_8hpp" startline="208" endline="213">neforce::atomic&lt; T &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structneforce_1_1atomic_1afc202dd104f0ce9c3a6e3e2b5cd98801" compoundref="atomic_8hpp" startline="218" endline="223">neforce::atomic&lt; T &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1ac3b4cb97d9a1101c14ea09dadbc8f529" compoundref="atomic__base_8hpp" startline="2271" endline="2277">neforce::atomic_base&lt; T * &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1ad7cd9245cf7805eb5e582f6487c3fddd" compoundref="atomic__base_8hpp" startline="2282" endline="2288">neforce::atomic_base&lt; T * &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structneforce_1_1atomic_1ad245cbf7b70f7d822077642659613d22" compoundref="atomic_8hpp" startline="167" endline="171">neforce::atomic&lt; T &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structneforce_1_1atomic_1ad5d0f6700002e0ba64d104d74b86edcd" compoundref="atomic_8hpp" startline="176" endline="180">neforce::atomic&lt; T &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1afc31182a3c15be5acf11c41a4b0b7bb1" compoundref="atomic__base_8hpp" startline="2225" endline="2230">neforce::atomic_base&lt; T * &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a997e0296ec4782e6653f621709f625dc" compoundref="atomic__base_8hpp" startline="2235" endline="2241">neforce::atomic_base&lt; T * &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="classneforce_1_1memory__view_1a52f487704ce9b656967a9832cf311a17" compoundref="memory__view_8hpp" startline="392" endline="395">neforce::memory_view&lt; char &gt;::first</referencedby>
+        <referencedby refid="classneforce_1_1memory__view_1a3a61dcd9eca12356b1f5802581aeec99" compoundref="memory__view_8hpp" startline="321" endline="324">neforce::memory_view&lt; char &gt;::front</referencedby>
+        <referencedby refid="classneforce_1_1memory__view_1ada49e869732d22b2f88b71c4ead46b3e" compoundref="memory__view_8hpp" startline="414" endline="417">neforce::memory_view&lt; char &gt;::last</referencedby>
+        <referencedby refid="classneforce_1_1latch_1a76543147be07fd675cc3d3eca9e08454" compoundref="latch_8hpp" startline="53" endline="56">neforce::latch::latch</referencedby>
+        <referencedby refid="structneforce_1_1atomic__base_1a502e1ae4dbead44d2a89f074a483373c" compoundref="atomic__base_8hpp" startline="1687" endline="1697">neforce::atomic_base&lt; char &gt;::load</referencedby>
+        <referencedby refid="structneforce_1_1atomic__base_1a3d5f0457cf33ecacb59eb410bbda8316" compoundref="atomic__base_8hpp" startline="1702" endline="1712">neforce::atomic_base&lt; char &gt;::load</referencedby>
+        <referencedby refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a91a1bbb2883b0356b75f161ea4aeb34b" compoundref="atomic__base_8hpp" startline="2135" endline="2154">neforce::atomic_base&lt; T * &gt;::load</referencedby>
+        <referencedby refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a4b0a664bc53cdd050b903b49a3b3dadf" compoundref="atomic__base_8hpp" startline="2159" endline="2178">neforce::atomic_base&lt; T * &gt;::load</referencedby>
+        <referencedby refid="structneforce_1_1generator_1_1iterator_1a4527243d0400c7e731a571a0def74b84" compoundref="generator_8hpp" startline="281" endline="284">neforce::generator&lt; T &gt;::iterator::operator*</referencedby>
+        <referencedby refid="classneforce_1_1memory__view_1a76ef54aedc1086cbf0fc0f4540afa021" compoundref="memory__view_8hpp" startline="340" endline="343">neforce::memory_view&lt; char &gt;::operator[]</referencedby>
+        <referencedby refid="structneforce_1_1atomic__base_1accda5b23ff95642417ca972e2c4cd383" compoundref="atomic__base_8hpp" startline="1651" endline="1663">neforce::atomic_base&lt; char &gt;::store</referencedby>
+        <referencedby refid="structneforce_1_1atomic__base_1a56fb206d811769b3c1f9dcd3179d1433" compoundref="atomic__base_8hpp" startline="1668" endline="1680">neforce::atomic_base&lt; char &gt;::store</referencedby>
+        <referencedby refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1a7bb415ec516d975aa7e810d0c3d226ae" compoundref="atomic__base_8hpp" startline="2107" endline="2128">neforce::atomic_base&lt; T * &gt;::store</referencedby>
+        <referencedby refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4_1aaa2cdc6b521690619cdd3885316d9070" compoundref="atomic__base_8hpp" startline="2082" endline="2102">neforce::atomic_base&lt; T * &gt;::store</referencedby>
+        <referencedby refid="classneforce_1_1memory__view_1a03a62d7864952e7ad43d244634166da7" compoundref="memory__view_8hpp" startline="437" endline="446">neforce::memory_view&lt; char &gt;::view</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>调试和断言工具 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

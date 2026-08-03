@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['探测策略_0',['探测策略',['../group___flat_hash_table.html#flat_hash_probe',1,'']]]
+  ['性能与精度说明_0',['性能与精度说明',['../group___math_functions.html#performance_notes',1,'']]]
 ];

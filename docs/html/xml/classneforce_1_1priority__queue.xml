@@ -1,0 +1,1026 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1priority__queue" kind="class" language="C++" prot="public">
+    <compoundname>neforce::priority_queue</compoundname>
+    <basecompoundref refid="structneforce_1_1icollector" prot="public" virt="non-virtual">neforce::icollector&lt; priority_queue&lt; T, vector&lt; T &gt;, less&lt; typename vector&lt; T &gt;::value_type &gt; &gt; &gt;</basecompoundref>
+    <includes refid="priority__queue_8hpp" local="no">priority_queue.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename Sequence</type>
+        <defval><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt;T&gt;</defval>
+      </param>
+      <param>
+        <type>typename Compare</type>
+        <defval><ref refid="structneforce_1_1less" kindref="compound">less</ref>&lt;typename Sequence::value_type&gt;</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1priority__queue_1ab5d1a16a405c590b91c3b45de4e00d8d" prot="public" static="no">
+        <type>typename Sequence::value_type</type>
+        <definition>using neforce::priority_queue&lt; T, Sequence, Compare &gt;::value_type = typename Sequence::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>neforce::priority_queue::value_type</qualifiedname>
+        <briefdescription>
+<para>值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="41" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1priority__queue_1ad24207b5030ccb5f29832d0ad6193f9a" prot="public" static="no">
+        <type>typename Sequence::difference_type</type>
+        <definition>using neforce::priority_queue&lt; T, Sequence, Compare &gt;::difference_type = typename Sequence::difference_type</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>neforce::priority_queue::difference_type</qualifiedname>
+        <briefdescription>
+<para>差值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="42" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1priority__queue_1a0fd6e2361eba3c982db5517cb9fcfda4" prot="public" static="no">
+        <type>typename Sequence::size_type</type>
+        <definition>using neforce::priority_queue&lt; T, Sequence, Compare &gt;::size_type = typename Sequence::size_type</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>neforce::priority_queue::size_type</qualifiedname>
+        <briefdescription>
+<para>大小类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="43" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1priority__queue_1aa4fa8d7c66b686e5ce408fb5643038f6" prot="public" static="no">
+        <type>typename Sequence::reference</type>
+        <definition>using neforce::priority_queue&lt; T, Sequence, Compare &gt;::reference = typename Sequence::reference</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>neforce::priority_queue::reference</qualifiedname>
+        <briefdescription>
+<para>引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="44" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1priority__queue_1ac6224c6676028996527499e9841117a0" prot="public" static="no">
+        <type>typename Sequence::const_reference</type>
+        <definition>using neforce::priority_queue&lt; T, Sequence, Compare &gt;::const_reference = typename Sequence::const_reference</definition>
+        <argsstring></argsstring>
+        <name>const_reference</name>
+        <qualifiedname>neforce::priority_queue::const_reference</qualifiedname>
+        <briefdescription>
+<para>常量引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="45" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1priority__queue_1ae941d883f4e1a41889b1425a1dea49ea" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1compressed__pair" kindref="compound">compressed_pair</ref>&lt; Compare, Sequence &gt;</type>
+        <definition>compressed_pair&lt;Compare, Sequence&gt; neforce::priority_queue&lt; T, Sequence, Compare &gt;::pair_</definition>
+        <argsstring></argsstring>
+        <name>pair_</name>
+        <qualifiedname>neforce::priority_queue::pair_</qualifiedname>
+        <initializer>{<ref refid="structneforce_1_1default__construct__tag" kindref="compound">default_construct_tag</ref>{}}</initializer>
+        <briefdescription>
+<para>压缩存储比较函数和底层容器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="48" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="48" bodyend="48"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1priority__queue_1aa49664b81f56fea55a700fbf2173de64" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::priority_queue&lt; T, Sequence, Compare &gt;::make_heap_inside</definition>
+        <argsstring>()</argsstring>
+        <name>make_heap_inside</name>
+        <qualifiedname>neforce::priority_queue::make_heap_inside</qualifiedname>
+        <briefdescription>
+<para>对底层容器建堆 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>将底层容器中的元素构建成堆结构。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="55" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="55" bodyend="57"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1priority__queue_1aade14a21862641cd7348ee89f39e6599" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::priority_queue&lt; T, Sequence, Compare &gt;::priority_queue</definition>
+        <argsstring>()=default</argsstring>
+        <name>priority_queue</name>
+        <qualifiedname>neforce::priority_queue::priority_queue</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>构造一个空的优先队列，使用默认比较函数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="65" column="5"/>
+        <referencedby refid="classneforce_1_1priority__queue_1adaf518cea3c96bd6591b824b2797947b" compoundref="priority__queue_8hpp" startline="250" endline="253">neforce::priority_queue&lt; T, Sequence, Compare &gt;::equal_to</referencedby>
+        <referencedby refid="classneforce_1_1priority__queue_1a11c1bcd6e136c19fc980e7ceff6b150d" compoundref="priority__queue_8hpp" startline="261" endline="264">neforce::priority_queue&lt; T, Sequence, Compare &gt;::less_than</referencedby>
+        <referencedby refid="classneforce_1_1priority__queue_1a1c9cdc2231829ad13cb08086141ec4d6" compoundref="priority__queue_8hpp" startline="240" endline="242">neforce::priority_queue&lt; T, Sequence, Compare &gt;::swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1priority__queue_1a9dca50d02317d0447bcb48497eb38c75" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_default_constructible_v&lt; Sequence &gt; &amp;&amp;is_nothrow_copy_constructible_v&lt; Compare &gt;" virt="non-virtual">
+        <type></type>
+        <definition>neforce::priority_queue&lt; T, Sequence, Compare &gt;::priority_queue</definition>
+        <argsstring>(const Compare &amp;comp)</argsstring>
+        <name>priority_queue</name>
+        <qualifiedname>neforce::priority_queue::priority_queue</qualifiedname>
+        <param>
+          <type>const Compare &amp;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="71" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="71" bodyend="73"/>
+        <references refid="group___type_special_member_function_checks_1gac2ccc147b2ba5ce7bccbbda00d6f9fda" compoundref="type__traits_8hpp" startline="2826">neforce::is_nothrow_copy_constructible_v</references>
+        <references refid="group___type_special_member_function_checks_1gae51579626a71da72af5702f35389d703" compoundref="type__traits_8hpp" startline="2844">neforce::is_nothrow_default_constructible_v</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1priority__queue_1af48d340252ead031caec6643f08d1c09" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::priority_queue&lt; T, Sequence, Compare &gt;::priority_queue</definition>
+        <argsstring>(const Compare &amp;comp, const Sequence &amp;seq)</argsstring>
+        <name>priority_queue</name>
+        <qualifiedname>neforce::priority_queue::priority_queue</qualifiedname>
+        <param>
+          <type>const Compare &amp;</type>
+          <declname>comp</declname>
+        </param>
+        <param>
+          <type>const Sequence &amp;</type>
+          <declname>seq</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定比较函数和底层容器副本 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>seq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>底层容器副本 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="80" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="80" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1priority__queue_1aa96978fec494421186759f649c6fb73e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; Sequence &gt; &amp;&amp;is_nothrow_copy_constructible_v&lt; Compare &gt;" virt="non-virtual">
+        <type></type>
+        <definition>neforce::priority_queue&lt; T, Sequence, Compare &gt;::priority_queue</definition>
+        <argsstring>(const Compare &amp;comp, Sequence &amp;&amp;seq)</argsstring>
+        <name>priority_queue</name>
+        <qualifiedname>neforce::priority_queue::priority_queue</qualifiedname>
+        <param>
+          <type>const Compare &amp;</type>
+          <declname>comp</declname>
+        </param>
+        <param>
+          <type>Sequence &amp;&amp;</type>
+          <declname>seq</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定比较函数和移动的底层容器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>seq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的底层容器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="90" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="90" bodyend="94"/>
+        <references refid="group___type_special_member_function_checks_1gac2ccc147b2ba5ce7bccbbda00d6f9fda" compoundref="type__traits_8hpp" startline="2826">neforce::is_nothrow_copy_constructible_v</references>
+        <references refid="group___type_special_member_function_checks_1gae20ac6ad74f8179d6959c23cbda15965" compoundref="type__traits_8hpp" startline="2862">neforce::is_nothrow_move_constructible_v</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1priority__queue_1a16c68e5c4f02d01a220ab5ba9bd36769" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga4f7b2f70ba1539ec3326d52e89698f13" kindref="member">is_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::priority_queue&lt; T, Sequence, Compare &gt;::priority_queue</definition>
+        <argsstring>(Iterator first, Iterator last, const Sequence &amp;seq)</argsstring>
+        <name>priority_queue</name>
+        <qualifiedname>neforce::priority_queue::priority_queue</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const Sequence &amp;</type>
+          <declname>seq</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数，指定底层容器副本 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>seq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>底层容器副本 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="104" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="104" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1priority__queue_1ad7cccd68ffab3e59a4dad8bed61ec35f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga4f7b2f70ba1539ec3326d52e89698f13" kindref="member">is_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::priority_queue&lt; T, Sequence, Compare &gt;::priority_queue</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>priority_queue</name>
+        <qualifiedname>neforce::priority_queue::priority_queue</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="117" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="117" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1priority__queue_1aad3a0ef8ccbb03807d7f288d3b579b6e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga4f7b2f70ba1539ec3326d52e89698f13" kindref="member">is_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::priority_queue&lt; T, Sequence, Compare &gt;::priority_queue</definition>
+        <argsstring>(Iterator first, Iterator last, const Compare &amp;comp)</argsstring>
+        <name>priority_queue</name>
+        <qualifiedname>neforce::priority_queue::priority_queue</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const Compare &amp;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数，指定比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="130" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="130" bodyend="133"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1priority__queue_1a4a065f7e993c8a2bfe15634c3890655a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga4f7b2f70ba1539ec3326d52e89698f13" kindref="member">is_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::priority_queue&lt; T, Sequence, Compare &gt;::priority_queue</definition>
+        <argsstring>(Iterator first, Iterator last, const Compare &amp;comp, const Sequence &amp;seq)</argsstring>
+        <name>priority_queue</name>
+        <qualifiedname>neforce::priority_queue::priority_queue</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const Compare &amp;</type>
+          <declname>comp</declname>
+        </param>
+        <param>
+          <type>const Sequence &amp;</type>
+          <declname>seq</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数，指定比较函数和底层容器副本 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>seq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>底层容器副本 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="144" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="144" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1priority__queue_1a26bd9bb6e697be5f2cb0dd4c448c6194" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga4f7b2f70ba1539ec3326d52e89698f13" kindref="member">is_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::priority_queue&lt; T, Sequence, Compare &gt;::priority_queue</definition>
+        <argsstring>(Iterator first, Iterator last, const Compare &amp;comp, Sequence &amp;&amp;seq)</argsstring>
+        <name>priority_queue</name>
+        <qualifiedname>neforce::priority_queue::priority_queue</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const Compare &amp;</type>
+          <declname>comp</declname>
+        </param>
+        <param>
+          <type>Sequence &amp;&amp;</type>
+          <declname>seq</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数，指定比较函数和移动的底层容器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>seq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的底层容器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="159" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="159" bodyend="163"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1priority__queue_1a8c01fd1741d405ff7b99937ba667fce6" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(_NEFORCE declval&lt; Sequence &gt;().empty())" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::priority_queue&lt; T, Sequence, Compare &gt;::empty</definition>
+        <argsstring>() const</argsstring>
+        <name>empty</name>
+        <qualifiedname>neforce::priority_queue::empty</qualifiedname>
+        <briefdescription>
+<para>检查优先队列是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>队列为空返回true，否则返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="169" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="169" bodyend="171"/>
+        <references refid="group___declval_tools_1ga7071848a30be73f786711db2ae038447">neforce::declval</references>
+        <references refid="classneforce_1_1priority__queue_1a8c01fd1741d405ff7b99937ba667fce6" compoundref="priority__queue_8hpp" startline="169" endline="171">neforce::priority_queue&lt; T, Sequence, Compare &gt;::empty</references>
+        <referencedby refid="classneforce_1_1priority__queue_1a8c01fd1741d405ff7b99937ba667fce6" compoundref="priority__queue_8hpp" startline="169" endline="171">neforce::priority_queue&lt; T, Sequence, Compare &gt;::empty</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1priority__queue_1a8ced163d7f01438d1f9c444ea0848975" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(_NEFORCE declval&lt; Sequence &gt;().size())" virt="non-virtual">
+        <type><ref refid="classneforce_1_1priority__queue_1a0fd6e2361eba3c982db5517cb9fcfda4" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::priority_queue&lt; T, Sequence, Compare &gt;::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <qualifiedname>neforce::priority_queue::size</qualifiedname>
+        <briefdescription>
+<para>获取优先队列大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>队列中的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="177" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="177" bodyend="179"/>
+        <references refid="group___declval_tools_1ga7071848a30be73f786711db2ae038447">neforce::declval</references>
+        <references refid="classneforce_1_1priority__queue_1a8ced163d7f01438d1f9c444ea0848975" compoundref="priority__queue_8hpp" startline="177" endline="179">neforce::priority_queue&lt; T, Sequence, Compare &gt;::size</references>
+        <referencedby refid="classneforce_1_1priority__queue_1a8ced163d7f01438d1f9c444ea0848975" compoundref="priority__queue_8hpp" startline="177" endline="179">neforce::priority_queue&lt; T, Sequence, Compare &gt;::size</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1priority__queue_1a46f280addd90a6b8a8c49f7c36bfd239" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(_NEFORCE declval&lt; Sequence &gt;().front())" virt="non-virtual">
+        <type><ref refid="classneforce_1_1priority__queue_1ac6224c6676028996527499e9841117a0" kindref="member">const_reference</ref></type>
+        <definition>const_reference neforce::priority_queue&lt; T, Sequence, Compare &gt;::top</definition>
+        <argsstring>() const</argsstring>
+        <name>top</name>
+        <qualifiedname>neforce::priority_queue::top</qualifiedname>
+        <briefdescription>
+<para>访问优先级最高的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>优先级最高元素的常量引用</para>
+</simplesect>
+返回堆顶元素，即根据Compare确定的优先级最高的元素。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="187" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="187" bodyend="189"/>
+        <references refid="group___declval_tools_1ga7071848a30be73f786711db2ae038447">neforce::declval</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1priority__queue_1a641c6724ba132b90be443f3183404ba7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::priority_queue&lt; T, Sequence, Compare &gt;::push</definition>
+        <argsstring>(const value_type &amp;value)</argsstring>
+        <name>push</name>
+        <qualifiedname>neforce::priority_queue::push</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1priority__queue_1ab5d1a16a405c590b91c3b45de4e00d8d" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>插入元素（拷贝版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将元素添加到优先队列中，并维护堆性质。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="197" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="197" bodyend="200"/>
+        <references refid="group___heap_algorithms_1gac3fc86aae4db55fc90d4c29daa444181" compoundref="heap_8hpp" startline="234" endline="239">neforce::push_heap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1priority__queue_1acf56127f017d1347d9bcabb752810026" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::priority_queue&lt; T, Sequence, Compare &gt;::push</definition>
+        <argsstring>(value_type &amp;&amp;value)</argsstring>
+        <name>push</name>
+        <qualifiedname>neforce::priority_queue::push</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1priority__queue_1ab5d1a16a405c590b91c3b45de4e00d8d" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>插入元素（移动版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将元素移动到优先队列中，并维护堆性质。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="208" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="208" bodyend="211"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="group___heap_algorithms_1gac3fc86aae4db55fc90d4c29daa444181" compoundref="heap_8hpp" startline="234" endline="239">neforce::push_heap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1priority__queue_1abbe64577ced77e3812ee2fc71c366030" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::priority_queue&lt; T, Sequence, Compare &gt;::pop</definition>
+        <argsstring>()</argsstring>
+        <name>pop</name>
+        <qualifiedname>neforce::priority_queue::pop</qualifiedname>
+        <briefdescription>
+<para>移除优先级最高的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>删除堆顶元素，并维护堆性质。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="218" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="218" bodyend="221"/>
+        <references refid="group___heap_algorithms_1ga25a45efe5bce7856a094ac013e7ef568" compoundref="heap_8hpp" startline="338" endline="344">neforce::pop_heap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1priority__queue_1a18e6a6ecbb790b7b6f2e66321372bee8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::priority_queue&lt; T, Sequence, Compare &gt;::emplace</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace</name>
+        <qualifiedname>neforce::priority_queue::emplace</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在优先队列中就地构造元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+在底层容器末尾就地构造元素，并维护堆性质。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="231" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="231" bodyend="234"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___heap_algorithms_1gac3fc86aae4db55fc90d4c29daa444181" compoundref="heap_8hpp" startline="234" endline="239">neforce::push_heap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1priority__queue_1a1c9cdc2231829ad13cb08086141ec4d6" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_swappable_v&lt; Sequence &gt; &amp;&amp;is_nothrow_swappable_v&lt; Compare &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::priority_queue&lt; T, Sequence, Compare &gt;::swap</definition>
+        <argsstring>(priority_queue &amp;other)</argsstring>
+        <name>swap</name>
+        <qualifiedname>neforce::priority_queue::swap</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1priority__queue_1aade14a21862641cd7348ee89f39e6599" kindref="member">priority_queue</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个优先队列的内容 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的另一个优先队列 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="240" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="240" bodyend="242"/>
+        <references refid="group___swap_utility_1gafcc46bf052d9d5c47c99d6a20dadd5bc" compoundref="type__traits_8hpp" startline="3967">neforce::is_nothrow_swappable_v</references>
+        <references refid="classneforce_1_1priority__queue_1aade14a21862641cd7348ee89f39e6599">neforce::priority_queue&lt; T, Sequence, Compare &gt;::priority_queue</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1priority__queue_1adaf518cea3c96bd6591b824b2797947b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(pair_.value==rhs.pair_.value)" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::priority_queue&lt; T, Sequence, Compare &gt;::equal_to</definition>
+        <argsstring>(const priority_queue &amp;rhs) const</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>neforce::priority_queue::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1priority__queue_1aade14a21862641cd7348ee89f39e6599" kindref="member">priority_queue</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧优先队列 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果两个优先队列的底层容器相等返回true </para>
+</simplesect>
+<simplesect kind="note"><para>此比较基于底层容器的元素顺序，而非优先级顺序。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="250" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="250" bodyend="253"/>
+        <references refid="classneforce_1_1priority__queue_1aade14a21862641cd7348ee89f39e6599">neforce::priority_queue&lt; T, Sequence, Compare &gt;::priority_queue</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1priority__queue_1a11c1bcd6e136c19fc980e7ceff6b150d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(pair_.value&lt; rhs.pair_.value)" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::priority_queue&lt; T, Sequence, Compare &gt;::less_than</definition>
+        <argsstring>(const priority_queue &amp;rhs) const</argsstring>
+        <name>less_than</name>
+        <qualifiedname>neforce::priority_queue::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1priority__queue_1aade14a21862641cd7348ee89f39e6599" kindref="member">priority_queue</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧优先队列 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>按字典序比较底层容器的结果 </para>
+</simplesect>
+<simplesect kind="note"><para>此比较基于底层容器的元素顺序，而非优先级顺序。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="261" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="261" bodyend="264"/>
+        <references refid="classneforce_1_1priority__queue_1aade14a21862641cd7348ee89f39e6599">neforce::priority_queue&lt; T, Sequence, Compare &gt;::priority_queue</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>优先队列容器适配器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Sequence</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>底层容器类型，默认为vector&lt;T&gt; </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象类型，默认为less&lt;T&gt;</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+优先队列是一种容器适配器，提供常数时间访问最大/最小元素， 对数时间插入和删除。元素按照严格弱序（strict weak ordering） 确定的优先级顺序出队。默认使用最大堆（less）实现，即top()返回最大元素。 通过指定不同的Compare可改变优先级顺序。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>neforce::icollector&lt; T &gt;</label>
+        <link refid="structneforce_1_1icollector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="1">
+        <label>neforce::priority_queue&lt; T, Sequence, Compare &gt;</label>
+        <link refid="classneforce_1_1priority__queue"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>neforce::icollector&lt; T &gt;</label>
+        <link refid="structneforce_1_1icollector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="1">
+        <label>neforce::priority_queue&lt; T, Sequence, Compare &gt;</label>
+        <link refid="classneforce_1_1priority__queue"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="36" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" bodystart="36" bodyend="265"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1priority__queue_1ac6224c6676028996527499e9841117a0" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>const_reference</name></member>
+      <member refid="classneforce_1_1priority__queue_1ad24207b5030ccb5f29832d0ad6193f9a" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>difference_type</name></member>
+      <member refid="classneforce_1_1priority__queue_1a18e6a6ecbb790b7b6f2e66321372bee8" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>emplace</name></member>
+      <member refid="classneforce_1_1priority__queue_1a8c01fd1741d405ff7b99937ba667fce6" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>empty</name></member>
+      <member refid="classneforce_1_1priority__queue_1adaf518cea3c96bd6591b824b2797947b" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>equal_to</name></member>
+      <member refid="classneforce_1_1priority__queue_1a11c1bcd6e136c19fc980e7ceff6b150d" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>less_than</name></member>
+      <member refid="classneforce_1_1priority__queue_1aa49664b81f56fea55a700fbf2173de64" prot="private" virt="non-virtual"><scope>neforce::priority_queue</scope><name>make_heap_inside</name></member>
+      <member refid="structneforce_1_1icomparable_1aa385e40eb8ac8bdae736966ad0cf568f" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>operator!=</name></member>
+      <member refid="structneforce_1_1icomparable_1a0641b58de65d6a0d5b87c2bcb47496a4" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>operator&lt;</name></member>
+      <member refid="structneforce_1_1icomparable_1a313fba4bce20aced1ff0e6173ad6aab2" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>operator&lt;=</name></member>
+      <member refid="structneforce_1_1icomparable_1ab9b06f7293eb15299f8c7d5341bfbc83" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>operator==</name></member>
+      <member refid="structneforce_1_1icomparable_1ab8de930acec5c0261656b787f576f08d" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>operator&gt;</name></member>
+      <member refid="structneforce_1_1icomparable_1a644c6002f703eb487427daadfec8fb16" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>operator&gt;=</name></member>
+      <member refid="classneforce_1_1priority__queue_1ae941d883f4e1a41889b1425a1dea49ea" prot="private" virt="non-virtual"><scope>neforce::priority_queue</scope><name>pair_</name></member>
+      <member refid="classneforce_1_1priority__queue_1abbe64577ced77e3812ee2fc71c366030" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>pop</name></member>
+      <member refid="classneforce_1_1priority__queue_1aade14a21862641cd7348ee89f39e6599" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>priority_queue</name></member>
+      <member refid="classneforce_1_1priority__queue_1a9dca50d02317d0447bcb48497eb38c75" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>priority_queue</name></member>
+      <member refid="classneforce_1_1priority__queue_1af48d340252ead031caec6643f08d1c09" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>priority_queue</name></member>
+      <member refid="classneforce_1_1priority__queue_1aa96978fec494421186759f649c6fb73e" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>priority_queue</name></member>
+      <member refid="classneforce_1_1priority__queue_1a16c68e5c4f02d01a220ab5ba9bd36769" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>priority_queue</name></member>
+      <member refid="classneforce_1_1priority__queue_1ad7cccd68ffab3e59a4dad8bed61ec35f" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>priority_queue</name></member>
+      <member refid="classneforce_1_1priority__queue_1aad3a0ef8ccbb03807d7f288d3b579b6e" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>priority_queue</name></member>
+      <member refid="classneforce_1_1priority__queue_1a4a065f7e993c8a2bfe15634c3890655a" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>priority_queue</name></member>
+      <member refid="classneforce_1_1priority__queue_1a26bd9bb6e697be5f2cb0dd4c448c6194" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>priority_queue</name></member>
+      <member refid="classneforce_1_1priority__queue_1a641c6724ba132b90be443f3183404ba7" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>push</name></member>
+      <member refid="classneforce_1_1priority__queue_1acf56127f017d1347d9bcabb752810026" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>push</name></member>
+      <member refid="classneforce_1_1priority__queue_1aa4fa8d7c66b686e5ce408fb5643038f6" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>reference</name></member>
+      <member refid="classneforce_1_1priority__queue_1a8ced163d7f01438d1f9c444ea0848975" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>size</name></member>
+      <member refid="classneforce_1_1priority__queue_1a0fd6e2361eba3c982db5517cb9fcfda4" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>size_type</name></member>
+      <member refid="classneforce_1_1priority__queue_1a1c9cdc2231829ad13cb08086141ec4d6" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>swap</name></member>
+      <member refid="classneforce_1_1priority__queue_1a46f280addd90a6b8a8c49f7c36bfd239" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>top</name></member>
+      <member refid="classneforce_1_1priority__queue_1ab5d1a16a405c590b91c3b45de4e00d8d" prot="public" virt="non-virtual"><scope>neforce::priority_queue</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

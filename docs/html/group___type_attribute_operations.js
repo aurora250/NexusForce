@@ -1,14 +1,14 @@
 var group___type_attribute_operations =
 [
-    [ "decay&lt; T &gt;", "structdecay.html", null ],
-    [ "common_type&lt; Types &gt;", "structcommon__type.html", null ],
-    [ "common_reference&lt; Types &gt;", "structcommon__reference.html", null ],
-    [ "is_specialization&lt; T, Template &gt;", "structis__specialization.html", null ],
-    [ "common_reference_t", "group___type_attribute_operations.html#ga9159a6bfe7317dea917d34d2a9798fde", null ],
-    [ "common_ternary_operator_t", "group___type_attribute_operations.html#ga6f7624c2711c293f19f15c71febeaeb0", null ],
-    [ "common_type_t", "group___type_attribute_operations.html#ga63597ca81f0a3a80001c836bc4cbbb84", null ],
-    [ "decay_t", "group___type_attribute_operations.html#ga80b97e91b05a2ed8b6185bba229f39a8", null ],
-    [ "detected_or", "group___type_attribute_operations.html#ga999daadde7e6033d617ad91266fcfd7c", null ],
-    [ "detected_or_t", "group___type_attribute_operations.html#ga80f94c5a0b73ffc291247f406ee7e3b2", null ],
-    [ "is_specialization_v", "group___type_attribute_operations.html#ga2e81b25ed6afcaf83a4f96dd2ffd3349", null ]
+    [ "neforce::decay&lt; T &gt;", "structneforce_1_1decay.html", null ],
+    [ "neforce::common_type&lt; Types &gt;", "structneforce_1_1common__type.html", null ],
+    [ "neforce::common_reference&lt; Types &gt;", "structneforce_1_1common__reference.html", null ],
+    [ "neforce::is_specialization&lt; T, Template &gt;", "structneforce_1_1is__specialization.html", null ],
+    [ "neforce::common_reference_t", "group___type_attribute_operations.html#ga2ac9907e9b538e8634456db6f6d26eaa", null ],
+    [ "neforce::common_ternary_operator_t", "group___type_attribute_operations.html#ga4288c098c2fc343dee442191b3b2ba15", null ],
+    [ "neforce::common_type_t", "group___type_attribute_operations.html#gadd302feb38cdc0a2f632b46b2b10e981", null ],
+    [ "neforce::decay_t", "group___type_attribute_operations.html#ga63500a8dd0f79ce1c721aebb8023ce89", null ],
+    [ "neforce::detected_or", "group___type_attribute_operations.html#gaf50841fed5d67529a8385b66b8965882", null ],
+    [ "neforce::detected_or_t", "group___type_attribute_operations.html#ga0c33d60739005f536e10c266ceb794cf", null ],
+    [ "neforce::is_specialization_v", "group___type_attribute_operations.html#ga0851fed9930563e04c9f3134bc17c188", null ]
 ];

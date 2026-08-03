@@ -4,16 +4,17 @@
     <compoundname>NumericTypeChecks</compoundname>
     <title>数值类型检查</title>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___numeric_type_checks_1ga6d8ad8618cdf9a7d2e361794495b790e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___numeric_type_checks_1gade368659b311d75d368c14cd4216c191" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!(sizeof(T)==16 &amp;&amp;<ref refid="classnumeric__traits" kindref="compound">numeric_traits</ref>&lt; T &gt;::digits==64), bool &gt;</type>
-        <definition>enable_if_t&lt;!(sizeof(T)==16 &amp;&amp;numeric_traits&lt; T &gt;::digits==64), bool &gt; signbit</definition>
+        <type>enable_if_t&lt;!(sizeof(T)==16 &amp;&amp;numeric_traits&lt; T &gt;::digits==64), bool &gt;</type>
+        <definition>enable_if_t&lt;!(sizeof(T)==16 &amp;&amp;numeric_traits&lt; T &gt;::digits==64), bool &gt; neforce::signbit</definition>
         <argsstring>(const T x) noexcept</argsstring>
         <name>signbit</name>
+        <qualifiedname>neforce::signbit</qualifiedname>
         <param>
           <type>const T</type>
           <declname>x</declname>
@@ -50,20 +51,23 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="34" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="34" bodyend="41"/>
-        <references refid="group___base_type_properties_1ga8a70da46bf8635132fd3757deb2fff94" compoundref="type__traits_8hpp" startline="907">is_floating_point_v</references>
-        <referencedby refid="group___numeric_type_checks_1gabb555602bb02fc29cf58c0baa8092577" compoundref="numeric__types_8hpp" startline="187" endline="189">is_negative</referencedby>
-        <referencedby refid="group___numeric_type_checks_1gaea58560f782df6bb5b2c4be9d38a6173" compoundref="numeric__types_8hpp" startline="172" endline="174">is_positive</referencedby>
+        <references refid="group___base_type_properties_1ga8b5cedfb6bc5a8e7a388a8cbdab82573" compoundref="type__traits_8hpp" startline="907">neforce::is_floating_point_v</references>
+        <references refid="group___numeric_type_checks_1gade368659b311d75d368c14cd4216c191" compoundref="numeric__types_8hpp" startline="34" endline="41">neforce::signbit</references>
+        <referencedby refid="group___numeric_type_checks_1gaae9323b5797e0126f80c158e82487c5e" compoundref="numeric__types_8hpp" startline="187" endline="189">neforce::is_negative</referencedby>
+        <referencedby refid="group___numeric_type_checks_1ga15d35bf99ae78640274f8cd7dcc934b8" compoundref="numeric__types_8hpp" startline="172" endline="174">neforce::is_positive</referencedby>
+        <referencedby refid="group___numeric_type_checks_1gade368659b311d75d368c14cd4216c191" compoundref="numeric__types_8hpp" startline="34" endline="41">neforce::signbit</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___numeric_type_checks_1gab2c227da4229861df95e5c6df99cc700" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___numeric_type_checks_1ga69529551bf1bf78e074bfca6d21dd073" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_nan</definition>
+        <definition>bool neforce::is_nan</definition>
         <argsstring>(const T x) noexcept</argsstring>
         <name>is_nan</name>
+        <qualifiedname>neforce::is_nan</qualifiedname>
         <param>
           <type>const T</type>
           <declname>x</declname>
@@ -97,30 +101,33 @@ NaN的特性：NaN != NaN 总是成立。 </para>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="65" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="65" bodyend="68"/>
-        <references refid="group___base_type_properties_1ga8a70da46bf8635132fd3757deb2fff94" compoundref="type__traits_8hpp" startline="907">is_floating_point_v</references>
-        <referencedby refid="group___math_functions_1ga2262dc12412d07c72325a80d5d02e7c0" compoundref="math_8hpp" startline="1095" endline="1109">arccosine</referencedby>
-        <referencedby refid="group___math_functions_1gaafabd349b97354b207ba83e41c2868fc" compoundref="math_8hpp" startline="1074" endline="1088">arcsine</referencedby>
-        <referencedby refid="group___math_functions_1ga5723c1f8ea9aa2a4eaaeb21e6ae61f5f" compoundref="math_8hpp" startline="1029" endline="1067">arctangent</referencedby>
-        <referencedby refid="group___math_functions_1ga680c3331bc9697279a35689ac8fe5815" compoundref="math_8hpp" startline="949" endline="969">cosine</referencedby>
-        <referencedby refid="group___math_functions_1ga316213d51761356da9ed86312071fe3b" compoundref="math_8hpp" startline="544" endline="566">cube_root</referencedby>
-        <referencedby refid="group___numeric_type_checks_1gabc3f4202a4c893e260ce8b5154845022" compoundref="numeric__types_8hpp" startline="115" endline="117">is_finite</referencedby>
-        <referencedby refid="group___math_functions_1ga4d196a984b7cd0b8bf56aaab3c734245" compoundref="math_8hpp" startline="430" endline="473">logarithm_e</referencedby>
-        <referencedby refid="group___math_functions_1ga1af3558471e357423df0f8171dec0491" compoundref="math_8hpp" startline="358" endline="369">mod</referencedby>
-        <referencedby refid="group___math_functions_1gaff7c9e0e66113479054c2a5d3a00a1d9" compoundref="math_8hpp" startline="821" endline="826">remainder</referencedby>
-        <referencedby refid="group___math_functions_1ga2f22b0e948777d08ec705fdfc4b52168" compoundref="math_8hpp" startline="919" endline="940">sine</referencedby>
-        <referencedby refid="group___math_functions_1ga498a7e743d1082430484d1b821aa6c71" compoundref="math_8hpp" startline="512" endline="533">square_root</referencedby>
-        <referencedby refid="group___math_functions_1ga3f8b47692b7051859e4ca435dbb02c46" compoundref="math_8hpp" startline="977" endline="1012">tangent</referencedby>
+        <references refid="group___base_type_properties_1ga8b5cedfb6bc5a8e7a388a8cbdab82573" compoundref="type__traits_8hpp" startline="907">neforce::is_floating_point_v</references>
+        <references refid="group___numeric_type_checks_1ga69529551bf1bf78e074bfca6d21dd073" compoundref="numeric__types_8hpp" startline="65" endline="68">neforce::is_nan</references>
+        <referencedby refid="group___math_functions_1ga0d945c06ef0dd7045b5afde833afc65b" compoundref="math_8hpp" startline="1095" endline="1109">neforce::arccosine</referencedby>
+        <referencedby refid="group___math_functions_1gabf7eb40ef217388451fceb4103e08d1a" compoundref="math_8hpp" startline="1074" endline="1088">neforce::arcsine</referencedby>
+        <referencedby refid="group___math_functions_1ga5803713f49090eebae89acb404bb5c56" compoundref="math_8hpp" startline="1029" endline="1067">neforce::arctangent</referencedby>
+        <referencedby refid="group___math_functions_1ga85090c85a43393e68dfb9a7d2e6ea886" compoundref="math_8hpp" startline="949" endline="969">neforce::cosine</referencedby>
+        <referencedby refid="group___math_functions_1gab01e95ef610a233c8cd662219e97df05" compoundref="math_8hpp" startline="544" endline="566">neforce::cube_root</referencedby>
+        <referencedby refid="group___numeric_type_checks_1ga1491d2f97daa9bd777e96ddf2289d5f6" compoundref="numeric__types_8hpp" startline="115" endline="117">neforce::is_finite</referencedby>
+        <referencedby refid="group___numeric_type_checks_1ga69529551bf1bf78e074bfca6d21dd073" compoundref="numeric__types_8hpp" startline="65" endline="68">neforce::is_nan</referencedby>
+        <referencedby refid="group___math_functions_1ga0a46a03b39d82b81e8e162795a424ec2" compoundref="math_8hpp" startline="430" endline="473">neforce::logarithm_e</referencedby>
+        <referencedby refid="group___math_functions_1gab94dbdf460bf3c861b16565e98837f1d" compoundref="math_8hpp" startline="358" endline="369">neforce::mod</referencedby>
+        <referencedby refid="group___math_functions_1ga8f4d76dded4266153cdf84129372cc93" compoundref="math_8hpp" startline="821" endline="826">neforce::remainder</referencedby>
+        <referencedby refid="group___math_functions_1ga27da28439abe50446e7a2f853f49352c" compoundref="math_8hpp" startline="919" endline="940">neforce::sine</referencedby>
+        <referencedby refid="group___math_functions_1gaad863b13ce587addf559f7f8edf0d07c" compoundref="math_8hpp" startline="512" endline="533">neforce::square_root</referencedby>
+        <referencedby refid="group___math_functions_1ga51dde13845502632d2479b0b67dde707" compoundref="math_8hpp" startline="977" endline="1012">neforce::tangent</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___numeric_type_checks_1gab5845603e013e4f2057d277e96fb946c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___numeric_type_checks_1gaefa221883d41cc8a1685f80fa4c20215" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_pos_infinity</definition>
+        <definition>bool neforce::is_pos_infinity</definition>
         <argsstring>(const T x) noexcept</argsstring>
         <name>is_pos_infinity</name>
+        <qualifiedname>neforce::is_pos_infinity</qualifiedname>
         <param>
           <type>const T</type>
           <declname>x</declname>
@@ -154,20 +161,23 @@ NaN的特性：NaN != NaN 总是成立。 </para>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="77" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="77" bodyend="80"/>
-        <references refid="classnumeric__traits_1a29b5f24b0176f50e68b0e59e832d849b" compoundref="numeric__traits_8hpp" startline="183" endline="183">numeric_traits&lt; T, Dummy &gt;::infinity</references>
-        <references refid="group___base_type_properties_1ga8a70da46bf8635132fd3757deb2fff94" compoundref="type__traits_8hpp" startline="907">is_floating_point_v</references>
-        <referencedby refid="group___numeric_type_checks_1ga673ecf65f4df0e8731a08ed2a81a483d" compoundref="numeric__types_8hpp" startline="102" endline="104">is_infinity</referencedby>
+        <references refid="classneforce_1_1numeric__traits_1a51b20e681edb410a9897b687663ff3c0" compoundref="numeric__traits_8hpp" startline="183" endline="183">neforce::numeric_traits&lt; T, Dummy &gt;::infinity</references>
+        <references refid="group___base_type_properties_1ga8b5cedfb6bc5a8e7a388a8cbdab82573" compoundref="type__traits_8hpp" startline="907">neforce::is_floating_point_v</references>
+        <references refid="group___numeric_type_checks_1gaefa221883d41cc8a1685f80fa4c20215" compoundref="numeric__types_8hpp" startline="77" endline="80">neforce::is_pos_infinity</references>
+        <referencedby refid="group___numeric_type_checks_1gaa24923d0f821c4ff900bc19a12e0f581" compoundref="numeric__types_8hpp" startline="102" endline="104">neforce::is_infinity</referencedby>
+        <referencedby refid="group___numeric_type_checks_1gaefa221883d41cc8a1685f80fa4c20215" compoundref="numeric__types_8hpp" startline="77" endline="80">neforce::is_pos_infinity</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___numeric_type_checks_1ga912a3bfb0c77cd04b0ff37a0eb57bc16" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___numeric_type_checks_1gacba19c8d1a84f64c7fd94e4da5f66ecb" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_neg_infinity</definition>
+        <definition>bool neforce::is_neg_infinity</definition>
         <argsstring>(const T x) noexcept</argsstring>
         <name>is_neg_infinity</name>
+        <qualifiedname>neforce::is_neg_infinity</qualifiedname>
         <param>
           <type>const T</type>
           <declname>x</declname>
@@ -201,20 +211,23 @@ NaN的特性：NaN != NaN 总是成立。 </para>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="89" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="89" bodyend="92"/>
-        <references refid="classnumeric__traits_1a29b5f24b0176f50e68b0e59e832d849b" compoundref="numeric__traits_8hpp" startline="183" endline="183">numeric_traits&lt; T, Dummy &gt;::infinity</references>
-        <references refid="group___base_type_properties_1ga8a70da46bf8635132fd3757deb2fff94" compoundref="type__traits_8hpp" startline="907">is_floating_point_v</references>
-        <referencedby refid="group___numeric_type_checks_1ga673ecf65f4df0e8731a08ed2a81a483d" compoundref="numeric__types_8hpp" startline="102" endline="104">is_infinity</referencedby>
+        <references refid="classneforce_1_1numeric__traits_1a51b20e681edb410a9897b687663ff3c0" compoundref="numeric__traits_8hpp" startline="183" endline="183">neforce::numeric_traits&lt; T, Dummy &gt;::infinity</references>
+        <references refid="group___base_type_properties_1ga8b5cedfb6bc5a8e7a388a8cbdab82573" compoundref="type__traits_8hpp" startline="907">neforce::is_floating_point_v</references>
+        <references refid="group___numeric_type_checks_1gacba19c8d1a84f64c7fd94e4da5f66ecb" compoundref="numeric__types_8hpp" startline="89" endline="92">neforce::is_neg_infinity</references>
+        <referencedby refid="group___numeric_type_checks_1gaa24923d0f821c4ff900bc19a12e0f581" compoundref="numeric__types_8hpp" startline="102" endline="104">neforce::is_infinity</referencedby>
+        <referencedby refid="group___numeric_type_checks_1gacba19c8d1a84f64c7fd94e4da5f66ecb" compoundref="numeric__types_8hpp" startline="89" endline="92">neforce::is_neg_infinity</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___numeric_type_checks_1ga673ecf65f4df0e8731a08ed2a81a483d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___numeric_type_checks_1gaa24923d0f821c4ff900bc19a12e0f581" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_infinity</definition>
+        <definition>bool neforce::is_infinity</definition>
         <argsstring>(const T x) noexcept</argsstring>
         <name>is_infinity</name>
+        <qualifiedname>neforce::is_infinity</qualifiedname>
         <param>
           <type>const T</type>
           <declname>x</declname>
@@ -250,29 +263,32 @@ NaN的特性：NaN != NaN 总是成立。 </para>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="102" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="102" bodyend="104"/>
-        <references refid="group___numeric_type_checks_1ga912a3bfb0c77cd04b0ff37a0eb57bc16" compoundref="numeric__types_8hpp" startline="89" endline="92">is_neg_infinity</references>
-        <references refid="group___numeric_type_checks_1gab5845603e013e4f2057d277e96fb946c" compoundref="numeric__types_8hpp" startline="77" endline="80">is_pos_infinity</references>
-        <referencedby refid="group___math_functions_1ga5723c1f8ea9aa2a4eaaeb21e6ae61f5f" compoundref="math_8hpp" startline="1029" endline="1067">arctangent</referencedby>
-        <referencedby refid="group___math_functions_1ga680c3331bc9697279a35689ac8fe5815" compoundref="math_8hpp" startline="949" endline="969">cosine</referencedby>
-        <referencedby refid="group___math_functions_1ga316213d51761356da9ed86312071fe3b" compoundref="math_8hpp" startline="544" endline="566">cube_root</referencedby>
-        <referencedby refid="group___numeric_type_checks_1gabc3f4202a4c893e260ce8b5154845022" compoundref="numeric__types_8hpp" startline="115" endline="117">is_finite</referencedby>
-        <referencedby refid="group___math_functions_1ga4d196a984b7cd0b8bf56aaab3c734245" compoundref="math_8hpp" startline="430" endline="473">logarithm_e</referencedby>
-        <referencedby refid="group___math_functions_1ga1af3558471e357423df0f8171dec0491" compoundref="math_8hpp" startline="358" endline="369">mod</referencedby>
-        <referencedby refid="group___math_functions_1gaff7c9e0e66113479054c2a5d3a00a1d9" compoundref="math_8hpp" startline="821" endline="826">remainder</referencedby>
-        <referencedby refid="group___math_functions_1ga2f22b0e948777d08ec705fdfc4b52168" compoundref="math_8hpp" startline="919" endline="940">sine</referencedby>
-        <referencedby refid="group___math_functions_1ga498a7e743d1082430484d1b821aa6c71" compoundref="math_8hpp" startline="512" endline="533">square_root</referencedby>
-        <referencedby refid="group___math_functions_1ga3f8b47692b7051859e4ca435dbb02c46" compoundref="math_8hpp" startline="977" endline="1012">tangent</referencedby>
+        <references refid="group___numeric_type_checks_1gaa24923d0f821c4ff900bc19a12e0f581" compoundref="numeric__types_8hpp" startline="102" endline="104">neforce::is_infinity</references>
+        <references refid="group___numeric_type_checks_1gacba19c8d1a84f64c7fd94e4da5f66ecb" compoundref="numeric__types_8hpp" startline="89" endline="92">neforce::is_neg_infinity</references>
+        <references refid="group___numeric_type_checks_1gaefa221883d41cc8a1685f80fa4c20215" compoundref="numeric__types_8hpp" startline="77" endline="80">neforce::is_pos_infinity</references>
+        <referencedby refid="group___math_functions_1ga5803713f49090eebae89acb404bb5c56" compoundref="math_8hpp" startline="1029" endline="1067">neforce::arctangent</referencedby>
+        <referencedby refid="group___math_functions_1ga85090c85a43393e68dfb9a7d2e6ea886" compoundref="math_8hpp" startline="949" endline="969">neforce::cosine</referencedby>
+        <referencedby refid="group___math_functions_1gab01e95ef610a233c8cd662219e97df05" compoundref="math_8hpp" startline="544" endline="566">neforce::cube_root</referencedby>
+        <referencedby refid="group___numeric_type_checks_1ga1491d2f97daa9bd777e96ddf2289d5f6" compoundref="numeric__types_8hpp" startline="115" endline="117">neforce::is_finite</referencedby>
+        <referencedby refid="group___numeric_type_checks_1gaa24923d0f821c4ff900bc19a12e0f581" compoundref="numeric__types_8hpp" startline="102" endline="104">neforce::is_infinity</referencedby>
+        <referencedby refid="group___math_functions_1ga0a46a03b39d82b81e8e162795a424ec2" compoundref="math_8hpp" startline="430" endline="473">neforce::logarithm_e</referencedby>
+        <referencedby refid="group___math_functions_1gab94dbdf460bf3c861b16565e98837f1d" compoundref="math_8hpp" startline="358" endline="369">neforce::mod</referencedby>
+        <referencedby refid="group___math_functions_1ga8f4d76dded4266153cdf84129372cc93" compoundref="math_8hpp" startline="821" endline="826">neforce::remainder</referencedby>
+        <referencedby refid="group___math_functions_1ga27da28439abe50446e7a2f853f49352c" compoundref="math_8hpp" startline="919" endline="940">neforce::sine</referencedby>
+        <referencedby refid="group___math_functions_1gaad863b13ce587addf559f7f8edf0d07c" compoundref="math_8hpp" startline="512" endline="533">neforce::square_root</referencedby>
+        <referencedby refid="group___math_functions_1ga51dde13845502632d2479b0b67dde707" compoundref="math_8hpp" startline="977" endline="1012">neforce::tangent</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___numeric_type_checks_1gabc3f4202a4c893e260ce8b5154845022" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___numeric_type_checks_1ga1491d2f97daa9bd777e96ddf2289d5f6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_finite</definition>
+        <definition>bool neforce::is_finite</definition>
         <argsstring>(const T x) noexcept</argsstring>
         <name>is_finite</name>
+        <qualifiedname>neforce::is_finite</qualifiedname>
         <param>
           <type>const T</type>
           <declname>x</declname>
@@ -306,25 +322,28 @@ NaN的特性：NaN != NaN 总是成立。 </para>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="115" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="115" bodyend="117"/>
-        <references refid="group___numeric_type_checks_1ga673ecf65f4df0e8731a08ed2a81a483d" compoundref="numeric__types_8hpp" startline="102" endline="104">is_infinity</references>
-        <references refid="group___numeric_type_checks_1gab2c227da4229861df95e5c6df99cc700" compoundref="numeric__types_8hpp" startline="65" endline="68">is_nan</references>
-        <referencedby refid="group___math_functions_1ga4b9ab0ae93aa724d216a640d96979082" compoundref="math_8hpp" startline="632" endline="656">ceil</referencedby>
-        <referencedby refid="group___math_functions_1ga290b6c7868b8a1edde452cb9bb4784ea" compoundref="math_8hpp" startline="586" endline="609">floor</referencedby>
-        <referencedby refid="group___numeric_type_checks_1gacde458cbbb3e5a8a5362511fa7b74057" compoundref="numeric__types_8hpp" startline="129" endline="138">is_normal</referencedby>
-        <referencedby refid="group___numeric_type_checks_1ga218c0ed9ac713534ebb8343c8c494561" compoundref="numeric__types_8hpp" startline="150" endline="159">is_subnormal</referencedby>
-        <referencedby refid="group___math_functions_1gaedd5856ca6e41f0174b5d9bd91b8995c" compoundref="math_8hpp" startline="674" endline="695">round</referencedby>
-        <referencedby refid="group___math_functions_1gad91dc2bacc127a410a6272f8a45d9f84" compoundref="math_8hpp" startline="768" endline="773">truncate</referencedby>
+        <references refid="group___numeric_type_checks_1ga1491d2f97daa9bd777e96ddf2289d5f6" compoundref="numeric__types_8hpp" startline="115" endline="117">neforce::is_finite</references>
+        <references refid="group___numeric_type_checks_1gaa24923d0f821c4ff900bc19a12e0f581" compoundref="numeric__types_8hpp" startline="102" endline="104">neforce::is_infinity</references>
+        <references refid="group___numeric_type_checks_1ga69529551bf1bf78e074bfca6d21dd073" compoundref="numeric__types_8hpp" startline="65" endline="68">neforce::is_nan</references>
+        <referencedby refid="group___math_functions_1ga41e02cdd039ccd8b93a379fcc590b9ad" compoundref="math_8hpp" startline="632" endline="656">neforce::ceil</referencedby>
+        <referencedby refid="group___math_functions_1ga8cf50bd734047468de42681ec383e1d3" compoundref="math_8hpp" startline="586" endline="609">neforce::floor</referencedby>
+        <referencedby refid="group___numeric_type_checks_1ga1491d2f97daa9bd777e96ddf2289d5f6" compoundref="numeric__types_8hpp" startline="115" endline="117">neforce::is_finite</referencedby>
+        <referencedby refid="group___numeric_type_checks_1ga6983e55ddd44297056ef84549fe3502b" compoundref="numeric__types_8hpp" startline="129" endline="138">neforce::is_normal</referencedby>
+        <referencedby refid="group___numeric_type_checks_1gae35f269d77f8309ff0d0c64d68bc0d7e" compoundref="numeric__types_8hpp" startline="150" endline="159">neforce::is_subnormal</referencedby>
+        <referencedby refid="group___math_functions_1ga188aad6947a583fb75024a1a03631d7c" compoundref="math_8hpp" startline="674" endline="695">neforce::round</referencedby>
+        <referencedby refid="group___math_functions_1gafeaacdf9043e86ef5b78814339a11754" compoundref="math_8hpp" startline="768" endline="773">neforce::truncate</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___numeric_type_checks_1gacde458cbbb3e5a8a5362511fa7b74057" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___numeric_type_checks_1ga6983e55ddd44297056ef84549fe3502b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_normal</definition>
+        <definition>bool neforce::is_normal</definition>
         <argsstring>(const T x) noexcept</argsstring>
         <name>is_normal</name>
+        <qualifiedname>neforce::is_normal</qualifiedname>
         <param>
           <type>const T</type>
           <declname>x</declname>
@@ -358,19 +377,22 @@ NaN的特性：NaN != NaN 总是成立。 </para>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="129" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="129" bodyend="138"/>
-        <references refid="group___numeric_type_checks_1gabc3f4202a4c893e260ce8b5154845022" compoundref="numeric__types_8hpp" startline="115" endline="117">is_finite</references>
-        <references refid="classnumeric__traits_1a99eaefc81fd6d3d71d414384b8964511" compoundref="numeric__traits_8hpp" startline="148" endline="148">numeric_traits&lt; T, Dummy &gt;::min</references>
+        <references refid="group___numeric_type_checks_1ga1491d2f97daa9bd777e96ddf2289d5f6" compoundref="numeric__types_8hpp" startline="115" endline="117">neforce::is_finite</references>
+        <references refid="group___numeric_type_checks_1ga6983e55ddd44297056ef84549fe3502b" compoundref="numeric__types_8hpp" startline="129" endline="138">neforce::is_normal</references>
+        <references refid="classneforce_1_1numeric__traits_1a96264fad3b37cb5c88e480d5b282e0e6" compoundref="numeric__traits_8hpp" startline="148" endline="148">neforce::numeric_traits&lt; T, Dummy &gt;::min</references>
+        <referencedby refid="group___numeric_type_checks_1ga6983e55ddd44297056ef84549fe3502b" compoundref="numeric__types_8hpp" startline="129" endline="138">neforce::is_normal</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___numeric_type_checks_1ga218c0ed9ac713534ebb8343c8c494561" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___numeric_type_checks_1gae35f269d77f8309ff0d0c64d68bc0d7e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_subnormal</definition>
+        <definition>bool neforce::is_subnormal</definition>
         <argsstring>(const T x) noexcept</argsstring>
         <name>is_subnormal</name>
+        <qualifiedname>neforce::is_subnormal</qualifiedname>
         <param>
           <type>const T</type>
           <declname>x</declname>
@@ -404,18 +426,21 @@ NaN的特性：NaN != NaN 总是成立。 </para>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="150" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="150" bodyend="159"/>
-        <references refid="group___numeric_type_checks_1gabc3f4202a4c893e260ce8b5154845022" compoundref="numeric__types_8hpp" startline="115" endline="117">is_finite</references>
+        <references refid="group___numeric_type_checks_1ga1491d2f97daa9bd777e96ddf2289d5f6" compoundref="numeric__types_8hpp" startline="115" endline="117">neforce::is_finite</references>
+        <references refid="group___numeric_type_checks_1gae35f269d77f8309ff0d0c64d68bc0d7e" compoundref="numeric__types_8hpp" startline="150" endline="159">neforce::is_subnormal</references>
+        <referencedby refid="group___numeric_type_checks_1gae35f269d77f8309ff0d0c64d68bc0d7e" compoundref="numeric__types_8hpp" startline="150" endline="159">neforce::is_subnormal</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___numeric_type_checks_1gaea58560f782df6bb5b2c4be9d38a6173" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___numeric_type_checks_1ga15d35bf99ae78640274f8cd7dcc934b8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_positive</definition>
+        <definition>bool neforce::is_positive</definition>
         <argsstring>(const T x) noexcept</argsstring>
         <name>is_positive</name>
+        <qualifiedname>neforce::is_positive</qualifiedname>
         <param>
           <type>const T</type>
           <declname>x</declname>
@@ -452,18 +477,21 @@ NaN的特性：NaN != NaN 总是成立。 </para>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="172" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="172" bodyend="174"/>
-        <references refid="group___numeric_type_checks_1ga6d8ad8618cdf9a7d2e361794495b790e" compoundref="numeric__types_8hpp" startline="34" endline="41">signbit</references>
+        <references refid="group___numeric_type_checks_1ga15d35bf99ae78640274f8cd7dcc934b8" compoundref="numeric__types_8hpp" startline="172" endline="174">neforce::is_positive</references>
+        <references refid="group___numeric_type_checks_1gade368659b311d75d368c14cd4216c191" compoundref="numeric__types_8hpp" startline="34" endline="41">neforce::signbit</references>
+        <referencedby refid="group___numeric_type_checks_1ga15d35bf99ae78640274f8cd7dcc934b8" compoundref="numeric__types_8hpp" startline="172" endline="174">neforce::is_positive</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___numeric_type_checks_1gabb555602bb02fc29cf58c0baa8092577" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___numeric_type_checks_1gaae9323b5797e0126f80c158e82487c5e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_negative</definition>
+        <definition>bool neforce::is_negative</definition>
         <argsstring>(const T x) noexcept</argsstring>
         <name>is_negative</name>
+        <qualifiedname>neforce::is_negative</qualifiedname>
         <param>
           <type>const T</type>
           <declname>x</declname>
@@ -500,7 +528,9 @@ NaN的特性：NaN != NaN 总是成立。 </para>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="187" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="187" bodyend="189"/>
-        <references refid="group___numeric_type_checks_1ga6d8ad8618cdf9a7d2e361794495b790e" compoundref="numeric__types_8hpp" startline="34" endline="41">signbit</references>
+        <references refid="group___numeric_type_checks_1gaae9323b5797e0126f80c158e82487c5e" compoundref="numeric__types_8hpp" startline="187" endline="189">neforce::is_negative</references>
+        <references refid="group___numeric_type_checks_1gade368659b311d75d368c14cd4216c191" compoundref="numeric__types_8hpp" startline="34" endline="41">neforce::signbit</references>
+        <referencedby refid="group___numeric_type_checks_1gaae9323b5797e0126f80c158e82487c5e" compoundref="numeric__types_8hpp" startline="187" endline="189">neforce::is_negative</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

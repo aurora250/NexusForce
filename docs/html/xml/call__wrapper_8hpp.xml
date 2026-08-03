@@ -110,11 +110,9 @@
         </childnode>
       </node>
     </invincdepgraph>
-    <innerclass refid="structcall__wrapper" prot="public">call_wrapper</innerclass>
-    <innerclass refid="structcall__wrapper_1_1result__t_3_01___n_e_f_o_r_c_e_01tuple_3_01_func_00_01_args_8_8_8_01_4_01_4" prot="private">call_wrapper::result_t&lt; _NEFORCE tuple&lt; Func, Args... &gt; &gt;</innerclass>
-    <sectiondef kind="func">
-      <member refid="group___call_wrapper_1ga9ec70d12f267e605a88f6fb029c12f90" kind="function"><name>call_wrapper</name></member>
-    </sectiondef>
+    <innerclass refid="structneforce_1_1call__wrapper" prot="public">neforce::call_wrapper</innerclass>
+    <innerclass refid="structneforce_1_1call__wrapper_1_1result__t_3_01___n_e_f_o_r_c_e_01tuple_3_01_func_00_01_args_8_8_8_01_4_01_4" prot="private">neforce::call_wrapper::result_t&lt; _NEFORCE tuple&lt; Func, Args... &gt; &gt;</innerclass>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
     <briefdescription>
 <para>延迟调用包装 </para>
     </briefdescription>
@@ -131,7 +129,7 @@
 <codeline lineno="13"><highlight class="normal"></highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight></codeline>
 <codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Types&gt;</highlight></codeline>
-<codeline lineno="29" refid="structcall__wrapper" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structcall__wrapper_1ad2f83ad37934eec521e51c9faa81a8e7" kindref="member">call_wrapper</ref><sp/>{</highlight></codeline>
+<codeline lineno="29" refid="structneforce_1_1call__wrapper" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structneforce_1_1call__wrapper_1a21302c2891bed4e5f324ed1cc400e5de" kindref="member">call_wrapper</ref><sp/>{</highlight></codeline>
 <codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Tuple&gt;</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">result_t;</highlight></codeline>
@@ -144,24 +142,24 @@
 <codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>Tuple<sp/>tup_;<sp/></highlight></codeline>
 <codeline lineno="40"><highlight class="normal"></highlight></codeline>
 <codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">...<sp/>Index&gt;</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>result_t&lt;Tuple&gt;::type<sp/>__invoke(<ref refid="structindex__tuple" kindref="compound">index_tuple&lt;Index...&gt;</ref><sp/>idx)<sp/>{</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___invoke_function_1ga4c75921ddce62eae2409105dc92d6da5" kindref="member">invoke</ref>(_NEFORCE<sp/><ref refid="group___async_1gac14e5033806977e33886d78a20feffaa" kindref="member">get&lt;Index&gt;</ref>(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(tup_))...);</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>result_t&lt;Tuple&gt;::type<sp/>__invoke(<ref refid="structneforce_1_1index__tuple" kindref="compound">index_tuple&lt;Index...&gt;</ref><sp/>idx)<sp/>{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___invoke_function_1ga29759f8537daace4b5d4ce1f006f8874" kindref="member">invoke</ref>(_NEFORCE<sp/><ref refid="group___async_1ga62fae7780686a01cf8f94a914db3e161" kindref="member">get&lt;Index&gt;</ref>(_NEFORCE<sp/><ref refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" kindref="member">move</ref>(tup_))...);</highlight></codeline>
 <codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="53"><highlight class="normal"></highlight></codeline>
 <codeline lineno="54"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args&gt;</highlight></codeline>
-<codeline lineno="63" refid="structcall__wrapper_1ad2f83ad37934eec521e51c9faa81a8e7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structcall__wrapper_1ad2f83ad37934eec521e51c9faa81a8e7" kindref="member">call_wrapper</ref>(Args&amp;&amp;...<sp/>args)<sp/>:</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>tup_(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward</ref>&lt;Args&gt;(args)...)<sp/>{}</highlight></codeline>
+<codeline lineno="63" refid="structneforce_1_1call__wrapper_1a21302c2891bed4e5f324ed1cc400e5de" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1call__wrapper_1a21302c2891bed4e5f324ed1cc400e5de" kindref="member">call_wrapper</ref>(Args&amp;&amp;...<sp/>args)<sp/>:</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>tup_(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" kindref="member">forward</ref>&lt;Args&gt;(args)...)<sp/>{}</highlight></codeline>
 <codeline lineno="65"><highlight class="normal"></highlight></codeline>
-<codeline lineno="72" refid="structcall__wrapper_1a56e8c877fde6e6815f1ddce6b5e6a0f2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>result_t&lt;Tuple&gt;::type<sp/><ref refid="structcall__wrapper_1a56e8c877fde6e6815f1ddce6b5e6a0f2" kindref="member">operator()</ref>()<sp/>{</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Indices<sp/>=<sp/><ref refid="group___index_tuple_1ga214c85ecd1d3447098af9f454f0ddada" kindref="member">build_index_tuple_t&lt;tuple_size_v&lt;Tuple&gt;</ref>&gt;;</highlight></codeline>
+<codeline lineno="72" refid="structneforce_1_1call__wrapper_1ab1ae1027f849af199d4cc18c19fe2a58" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>result_t&lt;Tuple&gt;::type<sp/><ref refid="structneforce_1_1call__wrapper_1ab1ae1027f849af199d4cc18c19fe2a58" kindref="member">operator()</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Indices<sp/>=<sp/><ref refid="group___index_tuple_1ga89a73a4c0f4b82d7d6ae78748c08e098" kindref="member">build_index_tuple_t&lt;tuple_size_v&lt;Tuple&gt;</ref>&gt;;</highlight></codeline>
 <codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>this-&gt;__invoke(Indices());</highlight></codeline>
 <codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="76"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="77"><highlight class="normal"></highlight></codeline>
 <codeline lineno="78"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="79"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Types&gt;</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"><ref refid="structcall__wrapper" kindref="compound">call_wrapper</ref>(Types...)<sp/>-&gt;<sp/><ref refid="structcall__wrapper" kindref="compound">call_wrapper</ref>&lt;Types...&gt;;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal">call_wrapper(Types...)<sp/>-&gt;<sp/>call_wrapper&lt;Types...&gt;;</highlight></codeline>
 <codeline lineno="81"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="82"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>CallWrapper</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="84"><highlight class="normal"></highlight></codeline>

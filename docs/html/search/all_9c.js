@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['环境变量_0',['环境变量',['../group___environment_variables.html',1,'']]]
+  ['特性_0',['🚀 特性',['../index.html#autotoc_md17',1,'']]],
+  ['特殊值处理_1',['特殊值处理',['../group___math_functions.html#special_values',1,'']]]
 ];

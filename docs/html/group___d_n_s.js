@@ -1,118 +1,118 @@
 var group___d_n_s =
 [
     [ "edns", "namespaceedns.html", null ],
-    [ "dns_client", "classdns__client.html", [
-      [ "config", "structdns__client_1_1config.html", [
-        [ "port", "structdns__client_1_1config.html#aa384fb64dfaca7d0a77b5afd4a4f9a3f", null ],
-        [ "server", "structdns__client_1_1config.html#a73732155d4d146b70fc866a6bfd10eb4", null ],
-        [ "timeout", "structdns__client_1_1config.html#a639baddffaa46d95c4efc6a81ae0dda1", null ]
+    [ "neforce::dns_client", "classneforce_1_1dns__client.html", [
+      [ "config", "structneforce_1_1dns__client_1_1config.html", [
+        [ "port", "structneforce_1_1dns__client_1_1config.html#aac93f77a24f462b40a1b69db5201ffa5", null ],
+        [ "server", "structneforce_1_1dns__client_1_1config.html#a6fca0ccbf1d8f25bd6691e449fbf5972", null ],
+        [ "timeout", "structneforce_1_1dns__client_1_1config.html#a6aeb19007725a41ad5973df393012c4e", null ]
       ] ],
-      [ "dns_client", "classdns__client.html#aa6e8e29444e46be3bbea3b541b6cbff7", null ],
-      [ "dns_client", "classdns__client.html#a8aa4b707d08846a888fba0dbd43d3424", null ],
-      [ "async_query", "classdns__client.html#aaacf77241c9096f915b997ee5a53c12e", null ],
-      [ "async_query", "classdns__client.html#a11168e4296fb4f410ae7a48ebcda814d", null ],
-      [ "async_query", "classdns__client.html#ab570f7754861ea04184a63d13fb9fd51", null ],
-      [ "async_query", "classdns__client.html#a07a3b7a688402f2407969172af8d6c80", null ],
-      [ "async_query", "classdns__client.html#aa13be3e169b8c20441a72683ae44b88d", null ],
-      [ "async_query", "classdns__client.html#a49375f4c02c1f7702c90ca8071114f35", null ],
-      [ "batch_query", "classdns__client.html#a8916c88780f4fff4097d783d17f428a8", null ],
-      [ "clear_cache", "classdns__client.html#a6ebe6d67d0a69e3b60facc24d41ae968", null ],
-      [ "query", "classdns__client.html#ae8f3ba97e2a5c2a3260f8eea9a174525", null ],
-      [ "query_async", "classdns__client.html#a12c1a550173e9a600c4ecaa27ef98d8e", null ],
-      [ "resolve_a", "classdns__client.html#ab1ffb7132c5521d8fc2d63325a3556a2", null ],
-      [ "resolve_aaaa", "classdns__client.html#a0aec8dde61805ee2efcf1d7662dc7bd9", null ],
-      [ "resolve_cname", "classdns__client.html#ad849698d1c498c88ae034fff46776f75", null ],
-      [ "resolve_mx", "classdns__client.html#afb94d5c9b5e963359d20a6dfb3ede162", null ],
-      [ "resolve_soa", "classdns__client.html#a6e27fcc650a0ddf7a5cdb270bc8dc5df", null ],
-      [ "resolve_srv", "classdns__client.html#a31a048f9c5f6f3720bc7f34765dbea57", null ],
-      [ "resolve_txt", "classdns__client.html#a81f5256f98dc39727b4d55a7dbb92e42", null ],
-      [ "reverse_query", "classdns__client.html#a3c24ec3e33330b5d4a6f33a8867ba08f", null ],
-      [ "set_cache_ttl", "classdns__client.html#af0b1c211296f65301e8ae6b5caca05e2", null ],
-      [ "set_config", "classdns__client.html#a537280a1846c09630af1c534a83a2ce2", null ],
-      [ "set_dnssec_ok", "classdns__client.html#aca121d56b87e302c7bca3e736000293a", null ],
-      [ "set_edns_udp_payload", "classdns__client.html#a4ddc884584c0f30de8a7bea7ec4cefec", null ],
-      [ "set_recursion_desired", "classdns__client.html#a223261533df5ad7d30d609db1a205cc5", null ],
-      [ "set_timeout", "classdns__client.html#a5f1384cf1bb9a17c6c1ed57592785513", null ],
-      [ "set_use_tcp", "classdns__client.html#a8798882626c3a891f6d93ff69b5efb3e", null ]
+      [ "dns_client", "classneforce_1_1dns__client.html#a37552d0bc79128014623b55d39885b06", null ],
+      [ "dns_client", "classneforce_1_1dns__client.html#aad97e63aeec223aaa3f0abb81e8aa0a5", null ],
+      [ "async_query", "classneforce_1_1dns__client.html#afa4e30ca07c015f7cd5da7ec6500d257", null ],
+      [ "async_query", "classneforce_1_1dns__client.html#a26afd69f2c5259ea2743d104308cf503", null ],
+      [ "async_query", "classneforce_1_1dns__client.html#ab4385c0e40b83de1e18a35841413ac4c", null ],
+      [ "async_query", "classneforce_1_1dns__client.html#ac84ba5b68123f685bd3147cb8623077e", null ],
+      [ "async_query", "classneforce_1_1dns__client.html#af842d0b9aacbc04fb6c152a550f87e75", null ],
+      [ "async_query", "classneforce_1_1dns__client.html#a1a418e48eb0d72bd4602a4bee094629e", null ],
+      [ "batch_query", "classneforce_1_1dns__client.html#a73b1035c44b85e454e4dfcf70aa4df0b", null ],
+      [ "clear_cache", "classneforce_1_1dns__client.html#a5d1cb10c9735e47fffa7f3551ad2df63", null ],
+      [ "query", "classneforce_1_1dns__client.html#a422f8e67b0c71931ce8672018fcf1bcb", null ],
+      [ "query_async", "classneforce_1_1dns__client.html#ac7d4fe15d3a5ab100d56bfbfd79045ea", null ],
+      [ "resolve_a", "classneforce_1_1dns__client.html#adc9213d89c1ae0a005119b9e8f253280", null ],
+      [ "resolve_aaaa", "classneforce_1_1dns__client.html#a7b1c34df1b88416c521195dc707aa229", null ],
+      [ "resolve_cname", "classneforce_1_1dns__client.html#a8f2266f2ba8ba2f6207e423ba49318ec", null ],
+      [ "resolve_mx", "classneforce_1_1dns__client.html#a5faf760931a3f4d8886d005153ffc281", null ],
+      [ "resolve_soa", "classneforce_1_1dns__client.html#a291633ef4df69b62ece67c3f5d61484f", null ],
+      [ "resolve_srv", "classneforce_1_1dns__client.html#afe9d332819d1ebc6a810495b00fab432", null ],
+      [ "resolve_txt", "classneforce_1_1dns__client.html#ae0d260eb8417d9cb026559657b75635a", null ],
+      [ "reverse_query", "classneforce_1_1dns__client.html#af7f5f65fa61551f7e4b66c896cb1da60", null ],
+      [ "set_cache_ttl", "classneforce_1_1dns__client.html#a6963e80ee5142d1047843f996fa582df", null ],
+      [ "set_config", "classneforce_1_1dns__client.html#ac5fd49d34279bb4b20f434c95a14f916", null ],
+      [ "set_dnssec_ok", "classneforce_1_1dns__client.html#a22b07267f61386dbdb7b3a8293544abb", null ],
+      [ "set_edns_udp_payload", "classneforce_1_1dns__client.html#ae8342d575301db851a5abf44ce21eaee", null ],
+      [ "set_recursion_desired", "classneforce_1_1dns__client.html#adbbe79de1ad6a3833121398054d22655", null ],
+      [ "set_timeout", "classneforce_1_1dns__client.html#aee154a1dac1be1ceeff537fe402c54a6", null ],
+      [ "set_use_tcp", "classneforce_1_1dns__client.html#a5aae0d6c9de5e9a416f2844a3cb81a9d", null ]
     ] ],
-    [ "dns_record", "structdns__record.html", [
-      [ "raw", "structdns__record.html#ace803844a79fd551cc236ca97f8425e8", [
-        [ "A", "structdns__record.html#ace803844a79fd551cc236ca97f8425e8a78120c035ab31453a32af440383defc9", null ],
-        [ "NS", "structdns__record.html#ace803844a79fd551cc236ca97f8425e8aa0859e0465c13a07256b67200b4d6aa9", null ],
-        [ "CNAME", "structdns__record.html#ace803844a79fd551cc236ca97f8425e8a0354aba62feb7f3f1cee206d1c1c43d9", null ],
-        [ "SOA", "structdns__record.html#ace803844a79fd551cc236ca97f8425e8a2331b3cb4496232affbd2ea2ea18d3f6", null ],
-        [ "PTR", "structdns__record.html#ace803844a79fd551cc236ca97f8425e8aac7155c9eb86cc844d6a294f6403ddf7", null ],
-        [ "MX", "structdns__record.html#ace803844a79fd551cc236ca97f8425e8a5a69b683562bdb1a70b5eef64b1fd715", null ],
-        [ "TXT", "structdns__record.html#ace803844a79fd551cc236ca97f8425e8aeee111395b529233f18be5c075163174", null ],
-        [ "AAAA", "structdns__record.html#ace803844a79fd551cc236ca97f8425e8a9aa11d437069f6ff3b810d6bc3f77467", null ],
-        [ "SRV", "structdns__record.html#ace803844a79fd551cc236ca97f8425e8a202e1e93f74afadffc2f099536a978ce", null ]
+    [ "neforce::dns_record", "structneforce_1_1dns__record.html", [
+      [ "raw", "structneforce_1_1dns__record.html#a03c1de9f39f60c8ee0e065f5d10fd435", [
+        [ "A", "structneforce_1_1dns__record.html#a03c1de9f39f60c8ee0e065f5d10fd435a11bd410cd63d9f8323566189cc4af2ee", null ],
+        [ "NS", "structneforce_1_1dns__record.html#a03c1de9f39f60c8ee0e065f5d10fd435a9fd6696cac7c9d4037c2cd61155efc23", null ],
+        [ "CNAME", "structneforce_1_1dns__record.html#a03c1de9f39f60c8ee0e065f5d10fd435a7777541bc446baafd900e56be271dfde", null ],
+        [ "SOA", "structneforce_1_1dns__record.html#a03c1de9f39f60c8ee0e065f5d10fd435a556ecbc1c46f94488afd231e78be0695", null ],
+        [ "PTR", "structneforce_1_1dns__record.html#a03c1de9f39f60c8ee0e065f5d10fd435a92d1e6055a192028d9d483d9b30bdb72", null ],
+        [ "MX", "structneforce_1_1dns__record.html#a03c1de9f39f60c8ee0e065f5d10fd435a3c664fd85387cbca373c05db3e988d05", null ],
+        [ "TXT", "structneforce_1_1dns__record.html#a03c1de9f39f60c8ee0e065f5d10fd435a9a05a2060cdedb3db6fc2e7b12c78cfe", null ],
+        [ "AAAA", "structneforce_1_1dns__record.html#a03c1de9f39f60c8ee0e065f5d10fd435a1bfb5bacebcce15040018f3ccf5d58e3", null ],
+        [ "SRV", "structneforce_1_1dns__record.html#a03c1de9f39f60c8ee0e065f5d10fd435aad8480a7b1c42012aa57e8de759a74b0", null ]
       ] ],
-      [ "dns_record", "structdns__record.html#ada4e684a691e195b704dec1fe2020b18", null ],
-      [ "dns_record", "structdns__record.html#a96754a120aea2919748c6b626274ea63", null ],
-      [ "class_type", "structdns__record.html#a6a0e72633a5787c3da5a12aa97c7599b", null ],
-      [ "data", "structdns__record.html#a58ce6de88c43819be128d7336752d9ed", null ],
-      [ "name", "structdns__record.html#ad21c4f21dcec4c34446903e929b17a50", null ],
-      [ "ttl", "structdns__record.html#adc15bc830564c38b904b792ce4331a57", null ],
-      [ "type", "structdns__record.html#ad71d9704e49d96e8bfac0996454c9bf3", null ]
+      [ "dns_record", "structneforce_1_1dns__record.html#a8c34354dec050aca18e755d1cf621c46", null ],
+      [ "dns_record", "structneforce_1_1dns__record.html#afa067f0d368172495c81d231743a14fb", null ],
+      [ "class_type", "structneforce_1_1dns__record.html#aeac4b605209bdb3a5a70897d15f4e165", null ],
+      [ "data", "structneforce_1_1dns__record.html#a8b8fb17c9fc80622a7005225a7ea867b", null ],
+      [ "name", "structneforce_1_1dns__record.html#ac087666e1c452a42a79960c62a88407a", null ],
+      [ "ttl", "structneforce_1_1dns__record.html#a82660a9363319aaadeec407152f69778", null ],
+      [ "type", "structneforce_1_1dns__record.html#a45e5bd9d30fd495a6825cbe5ef163adf", null ]
     ] ],
-    [ "dns_query_result", "structdns__query__result.html", [
-      [ "full_rcode", "structdns__query__result.html#a5eb20513ed7919a6ab0b2799f32c7121", null ],
-      [ "is_success", "structdns__query__result.html#aac4fafad6e1d0ee8b49baba47ae30217", null ],
-      [ "additional", "structdns__query__result.html#a9beeefa6c0e7822b9a1916b7bd82c18b", null ],
-      [ "answers", "structdns__query__result.html#ace6a20317ab90fc47fec30886b654701", null ],
-      [ "authoritative", "structdns__query__result.html#a89e3ff0d5b84bf1481b0a64788d6af35", null ],
-      [ "authorities", "structdns__query__result.html#a48baecffcfa14836de44df9058039fc4", null ],
-      [ "dnssec_ok", "structdns__query__result.html#a0ffc68c3153c09fb37c40b1f61f71f3f", null ],
-      [ "edns_version", "structdns__query__result.html#aaeef4b8ea9d34cc4759131e3a77ff6e5", null ],
-      [ "extended_rcode", "structdns__query__result.html#a6927b0290565da34b23d6153e0cb8d81", null ],
-      [ "query_time", "structdns__query__result.html#a21c9236b9cc4ee8242ecb639d7a45488", null ],
-      [ "recursive_available", "structdns__query__result.html#a8587f8d8175665904ba91f70d161025e", null ],
-      [ "response_code", "structdns__query__result.html#abe18f5e616b4ee16ed33aa2e73a71fc2", null ],
-      [ "truncated", "structdns__query__result.html#a59916cb58111bdf5191b7a09170411ce", null ],
-      [ "udp_payload_size", "structdns__query__result.html#a2aba114116c25cbbc24b7670fdc3f2ba", null ]
+    [ "neforce::dns_query_result", "structneforce_1_1dns__query__result.html", [
+      [ "full_rcode", "structneforce_1_1dns__query__result.html#a42e56bc914f192aeaa445a13f232ed59", null ],
+      [ "is_success", "structneforce_1_1dns__query__result.html#a5950c518cfb477a6e85e6dfbc8b8099d", null ],
+      [ "additional", "structneforce_1_1dns__query__result.html#a58d193a5b55e2894042c052c00c37048", null ],
+      [ "answers", "structneforce_1_1dns__query__result.html#aa609340381f6c85570708e88e5c788f3", null ],
+      [ "authoritative", "structneforce_1_1dns__query__result.html#a5e0a834a24e8a7b35fab9f62febf0f08", null ],
+      [ "authorities", "structneforce_1_1dns__query__result.html#a569eb77bc9c975574b3e0f84c08f7384", null ],
+      [ "dnssec_ok", "structneforce_1_1dns__query__result.html#a7611a621234fe5a47f68ea4a57466710", null ],
+      [ "edns_version", "structneforce_1_1dns__query__result.html#ae1d55fe7736dea86d9795bba3c408b96", null ],
+      [ "extended_rcode", "structneforce_1_1dns__query__result.html#a415ce29c0b84adf2c5a6a348d5600432", null ],
+      [ "query_time", "structneforce_1_1dns__query__result.html#abbf6641388bbf438c4f418f43a287dac", null ],
+      [ "recursive_available", "structneforce_1_1dns__query__result.html#aa7e7d5ff83bee0ce2e57d7c125fd4d7f", null ],
+      [ "response_code", "structneforce_1_1dns__query__result.html#a3815b6785c525228e466cfd5dabe007d", null ],
+      [ "truncated", "structneforce_1_1dns__query__result.html#aca8128d46dce7882648ef5c0d43ed9df", null ],
+      [ "udp_payload_size", "structneforce_1_1dns__query__result.html#a42d05b1e63adae3229eb703277d7149c", null ]
     ] ],
-    [ "dns_header", "structdns__header.html", [
-      [ "ancount", "structdns__header.html#aca00e490df7ef4c00d2f8dc387c99a5d", null ],
-      [ "arcount", "structdns__header.html#a7b840ee6675cd6935d77f2c89a6f263e", null ],
-      [ "flags", "structdns__header.html#ad3a2139a62129802c538eb699075e7d9", null ],
-      [ "id", "structdns__header.html#a3991d193b0f2a5353c6065d30ad33aa3", null ],
-      [ "nscount", "structdns__header.html#ab59defbc4f2602673c85b1ff32c988c0", null ],
-      [ "qdcount", "structdns__header.html#a4f0ead2328427239ca074b09ae581a55", null ]
+    [ "neforce::dns_header", "structneforce_1_1dns__header.html", [
+      [ "ancount", "structneforce_1_1dns__header.html#a9c6c78e2b0afb1cdc351e93224fa6d09", null ],
+      [ "arcount", "structneforce_1_1dns__header.html#a70630e84567e627c2c785630b6608d5d", null ],
+      [ "flags", "structneforce_1_1dns__header.html#a64d9311dbe32233b848a96440e4a6803", null ],
+      [ "id", "structneforce_1_1dns__header.html#a32d33ce0b1ed5af9003a474643d9ac25", null ],
+      [ "nscount", "structneforce_1_1dns__header.html#a305aa41715ca8c43e94b8a1f84c38e6e", null ],
+      [ "qdcount", "structneforce_1_1dns__header.html#a3411a45a43c513a3d33a4a9b483880a5", null ]
     ] ],
-    [ "dns_srv_record", "structdns__srv__record.html", [
-      [ "port", "structdns__srv__record.html#ab9c9ba9964d85ae0927f950254e49cd6", null ],
-      [ "priority", "structdns__srv__record.html#ae5a171f11857703d97960438cc5cb5e8", null ],
-      [ "target", "structdns__srv__record.html#a89ca3446dcbb0f8e8fa5fafaa1c53863", null ],
-      [ "weight", "structdns__srv__record.html#a631b1d6a26ad420683c24690746d08a3", null ]
+    [ "neforce::dns_srv_record", "structneforce_1_1dns__srv__record.html", [
+      [ "port", "structneforce_1_1dns__srv__record.html#a936899df0f6138e9a06d069cbc8850e8", null ],
+      [ "priority", "structneforce_1_1dns__srv__record.html#a55cc2dc463706ab33abdd79e43cbd03a", null ],
+      [ "target", "structneforce_1_1dns__srv__record.html#ad2fd08f4fba5eb80fa62fd2cc7f698c8", null ],
+      [ "weight", "structneforce_1_1dns__srv__record.html#a0fac2b27b1dfeb027e49f2b29603700a", null ]
     ] ],
-    [ "dns_soa_record", "structdns__soa__record.html", [
-      [ "expire", "structdns__soa__record.html#a3d81b9464f906ddc6e7d946fa0f4844f", null ],
-      [ "minimum", "structdns__soa__record.html#ae58843f45515c99b0698f8b2d86568b7", null ],
-      [ "mname", "structdns__soa__record.html#a017d0a4766dffcdadfad5fc019feb454", null ],
-      [ "refresh", "structdns__soa__record.html#a3f8f3da90760952f84f4ddb1eff5883f", null ],
-      [ "retry", "structdns__soa__record.html#a641fae60f99e0bc846334d734beac422", null ],
-      [ "rname", "structdns__soa__record.html#adae3cc8489f8bda019ad45b88dd577a8", null ],
-      [ "serial", "structdns__soa__record.html#acea9fd13417b4d69c3c4adb3a433d1c5", null ]
+    [ "neforce::dns_soa_record", "structneforce_1_1dns__soa__record.html", [
+      [ "expire", "structneforce_1_1dns__soa__record.html#a05e0b40b775841a4ec954741a296767f", null ],
+      [ "minimum", "structneforce_1_1dns__soa__record.html#afca575fabf9474bc3eab632bf3c982a4", null ],
+      [ "mname", "structneforce_1_1dns__soa__record.html#a94b30b87ffb2883d787130c2306b9b8f", null ],
+      [ "refresh", "structneforce_1_1dns__soa__record.html#a7743a0cae4e2d6289c0891b8b17478a2", null ],
+      [ "retry", "structneforce_1_1dns__soa__record.html#a335abdae0d25b942b22bc81c805beab1", null ],
+      [ "rname", "structneforce_1_1dns__soa__record.html#a93e4db1fabb6aa646d0db2f8a0bf790f", null ],
+      [ "serial", "structneforce_1_1dns__soa__record.html#ab82cb952beaaec953530d5b3065ee34d", null ]
     ] ],
-    [ "dns_class", "group___d_n_s.html#ga6f72845b22666dbf3cce34aeb6d805a0", [
-      [ "dns_class::INTERNET", "group___d_n_s.html#gga6f72845b22666dbf3cce34aeb6d805a0ae43bd933c18b06d29f9c46cce78de0f2", null ],
-      [ "dns_class::CHAOS", "group___d_n_s.html#gga6f72845b22666dbf3cce34aeb6d805a0a7f903fc95c5f6059a3c0d1b22820dbf7", null ],
-      [ "dns_class::HESIOD", "group___d_n_s.html#gga6f72845b22666dbf3cce34aeb6d805a0a968ced8fabc2a848519f87df57607aee", null ],
-      [ "dns_class::ANY", "group___d_n_s.html#gga6f72845b22666dbf3cce34aeb6d805a0a8e1bde3c3d303163521522cf1d62f21f", null ]
+    [ "neforce::dns_class", "group___d_n_s.html#gacf25e2c681fec01ffd7aa44f4fc73b06", [
+      [ "neforce::dns_class::INTERNET", "group___d_n_s.html#ggacf25e2c681fec01ffd7aa44f4fc73b06ae43bd933c18b06d29f9c46cce78de0f2", null ],
+      [ "neforce::dns_class::CHAOS", "group___d_n_s.html#ggacf25e2c681fec01ffd7aa44f4fc73b06a7f903fc95c5f6059a3c0d1b22820dbf7", null ],
+      [ "neforce::dns_class::HESIOD", "group___d_n_s.html#ggacf25e2c681fec01ffd7aa44f4fc73b06a968ced8fabc2a848519f87df57607aee", null ],
+      [ "neforce::dns_class::ANY", "group___d_n_s.html#ggacf25e2c681fec01ffd7aa44f4fc73b06a8e1bde3c3d303163521522cf1d62f21f", null ]
     ] ],
-    [ "dns_opcode", "group___d_n_s.html#ga973c6b85131920f4de96d7db1206a51b", [
-      [ "dns_opcode::QUERY", "group___d_n_s.html#gga973c6b85131920f4de96d7db1206a51ba5662080872eece1e1ceeec5750198283", null ],
-      [ "dns_opcode::IQUERY", "group___d_n_s.html#gga973c6b85131920f4de96d7db1206a51ba418263145671bab1c1942979a2f30355", null ],
-      [ "dns_opcode::STATUS", "group___d_n_s.html#gga973c6b85131920f4de96d7db1206a51ba5f241c8c8f985b3c51e05d39cf030f4c", null ],
-      [ "dns_opcode::NOTIFY", "group___d_n_s.html#gga973c6b85131920f4de96d7db1206a51ba9d087bfb809874e1b3e9adcbae8ca761", null ],
-      [ "dns_opcode::UPDATE", "group___d_n_s.html#gga973c6b85131920f4de96d7db1206a51ba15a8022d0ed9cd9c2a2e756822703eb4", null ]
+    [ "neforce::dns_opcode", "group___d_n_s.html#gaf089145255700aa06c27bd9442ec6a7d", [
+      [ "neforce::dns_opcode::QUERY", "group___d_n_s.html#ggaf089145255700aa06c27bd9442ec6a7da5662080872eece1e1ceeec5750198283", null ],
+      [ "neforce::dns_opcode::IQUERY", "group___d_n_s.html#ggaf089145255700aa06c27bd9442ec6a7da418263145671bab1c1942979a2f30355", null ],
+      [ "neforce::dns_opcode::STATUS", "group___d_n_s.html#ggaf089145255700aa06c27bd9442ec6a7da5f241c8c8f985b3c51e05d39cf030f4c", null ],
+      [ "neforce::dns_opcode::NOTIFY", "group___d_n_s.html#ggaf089145255700aa06c27bd9442ec6a7da9d087bfb809874e1b3e9adcbae8ca761", null ],
+      [ "neforce::dns_opcode::UPDATE", "group___d_n_s.html#ggaf089145255700aa06c27bd9442ec6a7da15a8022d0ed9cd9c2a2e756822703eb4", null ]
     ] ],
-    [ "dns_response", "group___d_n_s.html#ga4512397ee6460c3c286f1220692348c7", [
-      [ "dns_response::NON_ERROR", "group___d_n_s.html#gga4512397ee6460c3c286f1220692348c7a71b596df7cfe9f22486d013e022dab21", null ],
-      [ "dns_response::FORMAT_ERROR", "group___d_n_s.html#gga4512397ee6460c3c286f1220692348c7a57779da5393b24165afff75397dd8862", null ],
-      [ "dns_response::SERVER_FAILURE", "group___d_n_s.html#gga4512397ee6460c3c286f1220692348c7af3be33aa3dbdb9c86e55775e9c67ffb5", null ],
-      [ "dns_response::NAME_ERROR", "group___d_n_s.html#gga4512397ee6460c3c286f1220692348c7af8776b19ae67c635b8a9dff25f1fae8d", null ],
-      [ "dns_response::NOT_IMPLEMENTED", "group___d_n_s.html#gga4512397ee6460c3c286f1220692348c7a3e860a081575fc82cc7b6ed2ca602947", null ],
-      [ "dns_response::REFUSED", "group___d_n_s.html#gga4512397ee6460c3c286f1220692348c7a392253eaea22aafdb199bc238bafc082", null ]
+    [ "neforce::dns_response", "group___d_n_s.html#ga0b9f4bdc924a9cc1e31f3eef0ff95b8a", [
+      [ "neforce::dns_response::NON_ERROR", "group___d_n_s.html#gga0b9f4bdc924a9cc1e31f3eef0ff95b8aa71b596df7cfe9f22486d013e022dab21", null ],
+      [ "neforce::dns_response::FORMAT_ERROR", "group___d_n_s.html#gga0b9f4bdc924a9cc1e31f3eef0ff95b8aa57779da5393b24165afff75397dd8862", null ],
+      [ "neforce::dns_response::SERVER_FAILURE", "group___d_n_s.html#gga0b9f4bdc924a9cc1e31f3eef0ff95b8aaf3be33aa3dbdb9c86e55775e9c67ffb5", null ],
+      [ "neforce::dns_response::NAME_ERROR", "group___d_n_s.html#gga0b9f4bdc924a9cc1e31f3eef0ff95b8aaf8776b19ae67c635b8a9dff25f1fae8d", null ],
+      [ "neforce::dns_response::NOT_IMPLEMENTED", "group___d_n_s.html#gga0b9f4bdc924a9cc1e31f3eef0ff95b8aa3e860a081575fc82cc7b6ed2ca602947", null ],
+      [ "neforce::dns_response::REFUSED", "group___d_n_s.html#gga0b9f4bdc924a9cc1e31f3eef0ff95b8aa392253eaea22aafdb199bc238bafc082", null ]
     ] ]
 ];

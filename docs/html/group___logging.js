@@ -1,80 +1,75 @@
 var group___logging =
 [
-    [ "file_sink", "classfile__sink.html", [
-      [ "file_sink", "classfile__sink.html#a79ac4f4014fcd77cdc9c671ceb0dc535", null ],
-      [ "flush", "classfile__sink.html#a664527322116a172e817afa7b0766fa6", null ],
-      [ "log", "classfile__sink.html#a5852a135e31a2e0d371d2c19729d052a", null ]
+    [ "neforce::file_sink", "classneforce_1_1file__sink.html", [
+      [ "file_sink", "classneforce_1_1file__sink.html#ac55418b0c0973e03bc64a0db7516663b", null ],
+      [ "flush", "classneforce_1_1file__sink.html#a14888eff02c12e08ef8fbac34bac6475", null ],
+      [ "log", "classneforce_1_1file__sink.html#a8e270409f9b5d112a9c4fd36ce1feffd", null ]
     ] ],
-    [ "source_loc", "structsource__loc.html", [
-      [ "file", "structsource__loc.html#a0e2b180f9458975cbec2214ee5376fdc", null ],
-      [ "func", "structsource__loc.html#a8659fcbdd2253994fb5b531377169553", null ],
-      [ "line", "structsource__loc.html#a9a3bc6bf75bbfd9c053ab31ea161e209", null ]
+    [ "neforce::mdc", "classneforce_1_1mdc.html", null ],
+    [ "neforce::log_event", "structneforce_1_1log__event.html", [
+      [ "context", "structneforce_1_1log__event.html#a5b61792963db2ec8f60e54672c6fc1ca", null ],
+      [ "dt", "structneforce_1_1log__event.html#ac0caf595a1ab874ab008a7411523c065", null ],
+      [ "level", "structneforce_1_1log__event.html#a6fc71a9ab6d73ea7edc9dfbd3552420d", null ],
+      [ "loc", "structneforce_1_1log__event.html#a0bb77a3f831060f26027f8671d9187cc", null ],
+      [ "logger_name", "structneforce_1_1log__event.html#a823af509c9207216cd20f8a3d436eb57", null ],
+      [ "message", "structneforce_1_1log__event.html#abaeea5338ba76d82d5c1ce7eeb7549be", null ],
+      [ "thread_id", "structneforce_1_1log__event.html#ab059bb9c0439404439d3023e6fc581e2", null ]
     ] ],
-    [ "mdc", "classmdc.html", null ],
-    [ "log_event", "structlog__event.html", [
-      [ "context", "structlog__event.html#a5a3036b82f77773a741703b553211950", null ],
-      [ "dt", "structlog__event.html#a661ad84d9d08d7873df51f27c398108a", null ],
-      [ "level", "structlog__event.html#a2ee7a1f1c4c3e597cb5993b645eb4819", null ],
-      [ "loc", "structlog__event.html#a7b77dc31e7b2c9c695e2b60aebcd6e2d", null ],
-      [ "logger_name", "structlog__event.html#a045f318c6f2ce11ef902be7326220495", null ],
-      [ "message", "structlog__event.html#a4d92e5e2e9ad9e2cc0c007cd4ba15d7d", null ],
-      [ "thread_id", "structlog__event.html#acc7f525ed9549f109a271a5f9687d01b", null ]
+    [ "neforce::log_formatter", "classneforce_1_1log__formatter.html", [
+      [ "log_formatter", "classneforce_1_1log__formatter.html#a59aa84cb6fd30cdbf6f3eb88a2520308", null ],
+      [ "format", "classneforce_1_1log__formatter.html#aeafc5915786bc3710283a72e8b22d7f2", null ]
     ] ],
-    [ "log_formatter", "classlog__formatter.html", [
-      [ "log_formatter", "classlog__formatter.html#ae4dce333c41dd9e679550198ccd394ce", null ],
-      [ "format", "classlog__formatter.html#ab7f5f5daadf75bae5f382f317b37e8ba", null ]
+    [ "neforce::log_sink", "classneforce_1_1log__sink.html", [
+      [ "flush", "classneforce_1_1log__sink.html#ad75d03906fa55c216cd627aac8c73b65", null ],
+      [ "log", "classneforce_1_1log__sink.html#a1d218dd0300f52850b79fac7bce68c2b", null ],
+      [ "set_flush_interval", "classneforce_1_1log__sink.html#a38e0cb3009f5cb19d39dffb1d318ba04", null ],
+      [ "set_formatter", "classneforce_1_1log__sink.html#af0b4935ff56015fe69ceb1a8fa5e95b3", null ],
+      [ "should_auto_flush", "classneforce_1_1log__sink.html#a40f707cb6305b81f8bc526b3ab02513a", null ],
+      [ "flush_interval_ms_", "classneforce_1_1log__sink.html#a20202837f41ea67c95a482da70dcdf24", null ],
+      [ "formatter_", "classneforce_1_1log__sink.html#aa87bf6d5f55e3913491eb4f90ef54645", null ],
+      [ "last_flush_", "classneforce_1_1log__sink.html#a19e8a905a3619df08d8c0d4f447c3ddb", null ]
     ] ],
-    [ "log_sink", "classlog__sink.html", [
-      [ "flush", "classlog__sink.html#adb79b71ac6d34d43d31a708d9c46f599", null ],
-      [ "log", "classlog__sink.html#a23426545dd75dd433f3d5b7b0407faaf", null ],
-      [ "set_flush_interval", "classlog__sink.html#a7fab32f86c81ae3da1b9c1b8c0935f61", null ],
-      [ "set_formatter", "classlog__sink.html#a354978735401f7f31d9a4c9bcc97f398", null ],
-      [ "should_auto_flush", "classlog__sink.html#afbe5a916c40d83cc131cf80f53d2dbf9", null ],
-      [ "flush_interval_ms_", "classlog__sink.html#a89802d501ccca179cd38b5216a31d3c5", null ],
-      [ "formatter_", "classlog__sink.html#a4ef9a9a7bd511f678816d4654ed1f9b0", null ],
-      [ "last_flush_", "classlog__sink.html#adbe06c9eb43eba4c8e946c5f635c13de", null ]
+    [ "neforce::console_sink", "classneforce_1_1console__sink.html", [
+      [ "flush", "classneforce_1_1console__sink.html#a081522f092c5429036faa4b72dadd711", null ],
+      [ "log", "classneforce_1_1console__sink.html#aef5c912eb4fe0b0f07323685b8934dfc", null ]
     ] ],
-    [ "console_sink", "classconsole__sink.html", [
-      [ "flush", "classconsole__sink.html#a6e2aa384313eaaae970176e5b843688f", null ],
-      [ "log", "classconsole__sink.html#aabfb3e9398b18135386b9deabbc62488", null ]
+    [ "neforce::syslog_sink", "classneforce_1_1syslog__sink.html", [
+      [ "syslog_sink", "classneforce_1_1syslog__sink.html#aa708a273997a49dff506f2520e2b9eef", null ],
+      [ "flush", "classneforce_1_1syslog__sink.html#aa7ee711c390cf4bf44b7cc478c205a17", null ],
+      [ "log", "classneforce_1_1syslog__sink.html#ad26fc37a3f3e21caa33aa25f3c199628", null ]
     ] ],
-    [ "syslog_sink", "classsyslog__sink.html", [
-      [ "syslog_sink", "classsyslog__sink.html#a8ce020d3d29bcbd34c279b2f655bd745", null ],
-      [ "flush", "classsyslog__sink.html#ad29345f21bd6a464cc1a8906bde28ed1", null ],
-      [ "log", "classsyslog__sink.html#a9e8a533f90b698d80b78d2aee0960909", null ]
+    [ "neforce::logger", "classneforce_1_1logger.html", [
+      [ "logger", "classneforce_1_1logger.html#a7c78bd721bc0c1d9e3fded433304b704", null ],
+      [ "add_context", "classneforce_1_1logger.html#a2ba314aaaed3064fa5c57820b8fd5d5f", null ],
+      [ "add_sink", "classneforce_1_1logger.html#a3726e6c50e6906b68feb179928d99603", null ],
+      [ "clear_context", "classneforce_1_1logger.html#ab2ae094e0bd82f4b2879b82dd8aa03b5", null ],
+      [ "clear_sinks", "classneforce_1_1logger.html#ae09aa9cc5bd5d81e92941f4d69293b07", null ],
+      [ "debug", "classneforce_1_1logger.html#ac9600867573df87417ba8e326fec5791", null ],
+      [ "disable_async", "classneforce_1_1logger.html#ae3447d19ddeecfbf28274c3db3748a68", null ],
+      [ "effective_level", "classneforce_1_1logger.html#aa70fe05b7d235cc328a0708fad5f5f56", null ],
+      [ "enable_async", "classneforce_1_1logger.html#a35c8e3c8c4ccee75a8c4a332e4d78e6d", null ],
+      [ "error", "classneforce_1_1logger.html#a4ff01b40b601137ab69a9ba244357dcd", null ],
+      [ "fatal", "classneforce_1_1logger.html#af7a5f195da9b04d762f731b60a517c84", null ],
+      [ "flush", "classneforce_1_1logger.html#a7d51fb9856a7c99a68e22240e7e3df86", null ],
+      [ "info", "classneforce_1_1logger.html#af4bad028743ee60c859551147bc6351f", null ],
+      [ "is_async", "classneforce_1_1logger.html#aef1de33e629444452c772c1575d202a8", null ],
+      [ "level", "classneforce_1_1logger.html#a9b0b91555a373dc80e200cc2cbeaa6bb", null ],
+      [ "log", "classneforce_1_1logger.html#a8169e6e08c8a0de05db59c37b0682c16", null ],
+      [ "name", "classneforce_1_1logger.html#ad2c32e6ce2531a01198001bf9ec323ca", null ],
+      [ "parent", "classneforce_1_1logger.html#aec5191bb161ad0ad4637e4d516d3e800", null ],
+      [ "remove_context", "classneforce_1_1logger.html#a6d8a67952352c8140a6ac2a7632bb9de", null ],
+      [ "set_auto_flush", "classneforce_1_1logger.html#a7ab5ece5ae210ab66caadaa5f0b20609", null ],
+      [ "set_filter", "classneforce_1_1logger.html#aa204e73cf6f06d37cc2f3aded61c57ae", null ],
+      [ "set_level", "classneforce_1_1logger.html#aa5380e8af1d871a8565de99daeacdb2f", null ],
+      [ "should_log", "classneforce_1_1logger.html#a736f977b8d0ee87e1cfdcb1a14c1ec1f", null ],
+      [ "trace", "classneforce_1_1logger.html#a0a39217354bc035b386d595706534ac9", null ],
+      [ "warn", "classneforce_1_1logger.html#ae9e74422c4d9dc8e93cf3360305032d4", null ]
     ] ],
-    [ "logger", "classlogger.html", [
-      [ "logger", "classlogger.html#ad0dc86f63c1ea3fac4c3b45263086051", null ],
-      [ "add_context", "classlogger.html#a362589e68610127e4333750d3fa0cfec", null ],
-      [ "add_sink", "classlogger.html#ae8938cbad141b618717fe8f79975da52", null ],
-      [ "clear_context", "classlogger.html#a5d5089ffd2e6075a5014f23219431106", null ],
-      [ "clear_sinks", "classlogger.html#a54bb5cdfb8301a7c85f49b9cb395677f", null ],
-      [ "debug", "classlogger.html#a9a534c07043a19e5dd4e51bb3f5aa4c1", null ],
-      [ "disable_async", "classlogger.html#a524d8d9abe8dbf80e2cbb5af16fc6362", null ],
-      [ "effective_level", "classlogger.html#af90daa54d800e45fbee7b53a878ed416", null ],
-      [ "enable_async", "classlogger.html#a7896d235f291e173c587e9894d608016", null ],
-      [ "error", "classlogger.html#a26faf81c397355d21a361032039e8584", null ],
-      [ "fatal", "classlogger.html#a32fa9601ac2af01191c26f50b9303e51", null ],
-      [ "flush", "classlogger.html#af026254ee95ac41660de5d9010cd7a49", null ],
-      [ "info", "classlogger.html#a20714991a7e1651edb6c3e90a855849b", null ],
-      [ "is_async", "classlogger.html#ac76d4994cfd1a5930e81384f8bf7cb7c", null ],
-      [ "level", "classlogger.html#a9783b2ab0f6ea63e3adab129217c14cb", null ],
-      [ "log", "classlogger.html#abd2e981aca2688252c453b4dc883a684", null ],
-      [ "name", "classlogger.html#a3f18e1caba92615e7301cf9cf3322539", null ],
-      [ "parent", "classlogger.html#a6960c0ecd4686407fc94203b7109a5c6", null ],
-      [ "remove_context", "classlogger.html#a3585afd24a1d66f0d98b9421c358835c", null ],
-      [ "set_auto_flush", "classlogger.html#ab962f21b5918836ed994faf3222218dc", null ],
-      [ "set_filter", "classlogger.html#a376dadd9adb1d4ad20a8baf4c0eae393", null ],
-      [ "set_level", "classlogger.html#a1a0efc0cff2d99ddccfb1e37cdcb7d49", null ],
-      [ "should_log", "classlogger.html#a47aa0944cfc6a55f26d1e57ef55f473c", null ],
-      [ "trace", "classlogger.html#a00a8c941180c92f2d20380d60b65e9cd", null ],
-      [ "warn", "classlogger.html#a84d18d2799466d994dc0ec2798e1c483", null ]
-    ] ],
-    [ "logger_registry", "classlogger__registry.html", [
-      [ "default_logger", "classlogger__registry.html#a3a81684e88683a1f47d7c9f109c00720", null ],
-      [ "flush_all", "classlogger__registry.html#a208649871e8872d7ba9676e38c076bc5", null ],
-      [ "get_logger", "classlogger__registry.html#afcbe976bbf2a3b04fd9864c1178d8623", null ],
-      [ "root_logger", "classlogger__registry.html#a9f855ef53758d394545ad2028475daa6", null ]
+    [ "neforce::logger_registry", "classneforce_1_1logger__registry.html", [
+      [ "default_logger", "classneforce_1_1logger__registry.html#ae2c8838898edc3c52539834ef540ea5f", null ],
+      [ "flush_all", "classneforce_1_1logger__registry.html#ab6e18c0918ba7ac7d85b898762dd19d2", null ],
+      [ "get_logger", "classneforce_1_1logger__registry.html#ad62c1e5e2d39a8adbdeaa5b1b9cc03cb", null ],
+      [ "root_logger", "classneforce_1_1logger__registry.html#ad9e3f6493c653434e120730f5834c875", null ]
     ] ],
     [ "NEFORCE_ACTIVE_LOG_LEVEL", "group___logging.html#ga64fa989f20a658de5373cb3a1161ae86", null ],
     [ "NEFORCE_GET_LOGGER", "group___logging.html#ga4903ba74c9a8264d6a58f866f9af6505", null ],
@@ -121,42 +116,41 @@ var group___logging =
     [ "NEFORCE_LOGGER_LOGF_TRACE", "group___logging.html#gaf312f5a54971c1fd0cce1f64bf19582b", null ],
     [ "NEFORCE_LOGGER_LOGF_WARN", "group___logging.html#ga65dcf26b7992d37fdb4ca35848085599", null ],
     [ "NEFORCE_ROOT_LOGGER", "group___logging.html#ga2b7f74f87f026b1f9cc26e19fec1eb2c", null ],
-    [ "NEFORCE_SOURCE_LOC", "group___logging.html#gab6a949ee079c653b574be8c2b4deddbc", null ],
-    [ "log_level", "group___logging.html#ga837946c96acd6e9638773176147baba1", [
-      [ "log_level::TRACE", "group___logging.html#gga837946c96acd6e9638773176147baba1a2d3e4144aa384b18849ab9a8abad74d6", null ],
-      [ "log_level::DEBUG", "group___logging.html#gga837946c96acd6e9638773176147baba1adc30ec20708ef7b0f641ef78b7880a15", null ],
-      [ "log_level::INFO", "group___logging.html#gga837946c96acd6e9638773176147baba1a551b723eafd6a31d444fcb2f5920fbd3", null ],
-      [ "log_level::WARN", "group___logging.html#gga837946c96acd6e9638773176147baba1a32bd8a1db2275458673903bdb84cb277", null ],
-      [ "log_level::ERROR", "group___logging.html#gga837946c96acd6e9638773176147baba1abb1ca97ec761fc37101737ba0aa2e7c5", null ],
-      [ "log_level::FATAL", "group___logging.html#gga837946c96acd6e9638773176147baba1a19da7170bea36556dde582519795f3fc", null ],
-      [ "log_level::OFF", "group___logging.html#gga837946c96acd6e9638773176147baba1a88559a0cfd8250c9d65970cc145c92d4", null ]
+    [ "neforce::log_level", "group___logging.html#ga557cc9a846608949719d490774ea6dac", [
+      [ "neforce::log_level::TRACE", "group___logging.html#gga557cc9a846608949719d490774ea6daca2d3e4144aa384b18849ab9a8abad74d6", null ],
+      [ "neforce::log_level::DEBUG", "group___logging.html#gga557cc9a846608949719d490774ea6dacadc30ec20708ef7b0f641ef78b7880a15", null ],
+      [ "neforce::log_level::INFO", "group___logging.html#gga557cc9a846608949719d490774ea6daca551b723eafd6a31d444fcb2f5920fbd3", null ],
+      [ "neforce::log_level::WARN", "group___logging.html#gga557cc9a846608949719d490774ea6daca32bd8a1db2275458673903bdb84cb277", null ],
+      [ "neforce::log_level::ERROR", "group___logging.html#gga557cc9a846608949719d490774ea6dacabb1ca97ec761fc37101737ba0aa2e7c5", null ],
+      [ "neforce::log_level::FATAL", "group___logging.html#gga557cc9a846608949719d490774ea6daca19da7170bea36556dde582519795f3fc", null ],
+      [ "neforce::log_level::OFF", "group___logging.html#gga557cc9a846608949719d490774ea6daca88559a0cfd8250c9d65970cc145c92d4", null ]
     ] ],
-    [ "overflow_policy", "group___logging.html#ga35627212bfd2d281fb917509552af4cf", [
-      [ "overflow_policy::block", "group___logging.html#gga35627212bfd2d281fb917509552af4cfa14511f2f5564650d129ca7cabc333278", null ],
-      [ "overflow_policy::discard", "group___logging.html#gga35627212bfd2d281fb917509552af4cfa70f68bb2f748b85de6526bfe236ea1e9", null ],
-      [ "overflow_policy::overrun_oldest", "group___logging.html#gga35627212bfd2d281fb917509552af4cfa6d09cc54ae10145444aa2f43fe46d9f2", null ]
+    [ "neforce::overflow_policy", "group___logging.html#ga74035bba10d32b5f917afed3aac51aab", [
+      [ "neforce::overflow_policy::block", "group___logging.html#gga74035bba10d32b5f917afed3aac51aaba14511f2f5564650d129ca7cabc333278", null ],
+      [ "neforce::overflow_policy::discard", "group___logging.html#gga74035bba10d32b5f917afed3aac51aaba70f68bb2f748b85de6526bfe236ea1e9", null ],
+      [ "neforce::overflow_policy::overrun_oldest", "group___logging.html#gga74035bba10d32b5f917afed3aac51aaba6d09cc54ae10145444aa2f43fe46d9f2", null ]
     ] ],
-    [ "syslog_facility", "group___logging.html#ga6936a6d4f4329a9a11b45ea194650b43", [
-      [ "syslog_facility::LOG_AUTH", "group___logging.html#gga6936a6d4f4329a9a11b45ea194650b43ac3c25247e1f58da6ac26e5b5b869dad0", null ],
-      [ "syslog_facility::LOG_CRON", "group___logging.html#gga6936a6d4f4329a9a11b45ea194650b43a467eba43a2c97950c5e001f37bb93b6c", null ],
-      [ "syslog_facility::LOG_DAEMON", "group___logging.html#gga6936a6d4f4329a9a11b45ea194650b43adddfb02a9895273131d1c11a65bd87af", null ],
-      [ "syslog_facility::LOG_KERN", "group___logging.html#gga6936a6d4f4329a9a11b45ea194650b43a42f3669d41672b549ed5d14cb6c84950", null ],
-      [ "syslog_facility::LOG_LOCAL0", "group___logging.html#gga6936a6d4f4329a9a11b45ea194650b43a41b5125d8b3fec34749034ccd2d4ee90", null ],
-      [ "syslog_facility::LOG_LOCAL1", "group___logging.html#gga6936a6d4f4329a9a11b45ea194650b43a3608d8201becc662e6f4595be5a356b6", null ],
-      [ "syslog_facility::LOG_LOCAL2", "group___logging.html#gga6936a6d4f4329a9a11b45ea194650b43a1805631215f33f33822540c0d69c20d0", null ],
-      [ "syslog_facility::LOG_LOCAL3", "group___logging.html#gga6936a6d4f4329a9a11b45ea194650b43affe3767d931eb40746e269cf26e3f9a2", null ],
-      [ "syslog_facility::LOG_LOCAL4", "group___logging.html#gga6936a6d4f4329a9a11b45ea194650b43a128040d81ea265c3e817f995ebd02909", null ],
-      [ "syslog_facility::LOG_LOCAL5", "group___logging.html#gga6936a6d4f4329a9a11b45ea194650b43a2a2e6a7178198d71e1463d4f1ed8fd04", null ],
-      [ "syslog_facility::LOG_LOCAL6", "group___logging.html#gga6936a6d4f4329a9a11b45ea194650b43ae6a3079952865c1f34e3ee684b01cbd4", null ],
-      [ "syslog_facility::LOG_LOCAL7", "group___logging.html#gga6936a6d4f4329a9a11b45ea194650b43a855809328e0cdc07b575ab3cb4b3023a", null ],
-      [ "syslog_facility::LOG_LPR", "group___logging.html#gga6936a6d4f4329a9a11b45ea194650b43a99680fbee9fe8fc0c6e3d0f9ea0732b6", null ],
-      [ "syslog_facility::LOG_MAIL", "group___logging.html#gga6936a6d4f4329a9a11b45ea194650b43a9e67adb26f136e1cad33efc7712891d6", null ],
-      [ "syslog_facility::LOG_NEWS", "group___logging.html#gga6936a6d4f4329a9a11b45ea194650b43aefc0221ca8b580d93db90f2a850d0e07", null ],
-      [ "syslog_facility::LOG_SYSLOG", "group___logging.html#gga6936a6d4f4329a9a11b45ea194650b43a5c7bd379a25f9fb8591ce63a5be5ee8c", null ],
-      [ "syslog_facility::LOG_USER", "group___logging.html#gga6936a6d4f4329a9a11b45ea194650b43a36489c5bd64137a0a97d8e0bbd19d351", null ],
-      [ "syslog_facility::LOG_UUCP", "group___logging.html#gga6936a6d4f4329a9a11b45ea194650b43a3f29e6ef6790b2e19a70a44e7afc1b64", null ]
+    [ "neforce::syslog_facility", "group___logging.html#gae1f9af284e3c8dd57f067be57ac0b421", [
+      [ "neforce::syslog_facility::LOG_AUTH", "group___logging.html#ggae1f9af284e3c8dd57f067be57ac0b421ac3c25247e1f58da6ac26e5b5b869dad0", null ],
+      [ "neforce::syslog_facility::LOG_CRON", "group___logging.html#ggae1f9af284e3c8dd57f067be57ac0b421a467eba43a2c97950c5e001f37bb93b6c", null ],
+      [ "neforce::syslog_facility::LOG_DAEMON", "group___logging.html#ggae1f9af284e3c8dd57f067be57ac0b421adddfb02a9895273131d1c11a65bd87af", null ],
+      [ "neforce::syslog_facility::LOG_KERN", "group___logging.html#ggae1f9af284e3c8dd57f067be57ac0b421a42f3669d41672b549ed5d14cb6c84950", null ],
+      [ "neforce::syslog_facility::LOG_LOCAL0", "group___logging.html#ggae1f9af284e3c8dd57f067be57ac0b421a41b5125d8b3fec34749034ccd2d4ee90", null ],
+      [ "neforce::syslog_facility::LOG_LOCAL1", "group___logging.html#ggae1f9af284e3c8dd57f067be57ac0b421a3608d8201becc662e6f4595be5a356b6", null ],
+      [ "neforce::syslog_facility::LOG_LOCAL2", "group___logging.html#ggae1f9af284e3c8dd57f067be57ac0b421a1805631215f33f33822540c0d69c20d0", null ],
+      [ "neforce::syslog_facility::LOG_LOCAL3", "group___logging.html#ggae1f9af284e3c8dd57f067be57ac0b421affe3767d931eb40746e269cf26e3f9a2", null ],
+      [ "neforce::syslog_facility::LOG_LOCAL4", "group___logging.html#ggae1f9af284e3c8dd57f067be57ac0b421a128040d81ea265c3e817f995ebd02909", null ],
+      [ "neforce::syslog_facility::LOG_LOCAL5", "group___logging.html#ggae1f9af284e3c8dd57f067be57ac0b421a2a2e6a7178198d71e1463d4f1ed8fd04", null ],
+      [ "neforce::syslog_facility::LOG_LOCAL6", "group___logging.html#ggae1f9af284e3c8dd57f067be57ac0b421ae6a3079952865c1f34e3ee684b01cbd4", null ],
+      [ "neforce::syslog_facility::LOG_LOCAL7", "group___logging.html#ggae1f9af284e3c8dd57f067be57ac0b421a855809328e0cdc07b575ab3cb4b3023a", null ],
+      [ "neforce::syslog_facility::LOG_LPR", "group___logging.html#ggae1f9af284e3c8dd57f067be57ac0b421a99680fbee9fe8fc0c6e3d0f9ea0732b6", null ],
+      [ "neforce::syslog_facility::LOG_MAIL", "group___logging.html#ggae1f9af284e3c8dd57f067be57ac0b421a9e67adb26f136e1cad33efc7712891d6", null ],
+      [ "neforce::syslog_facility::LOG_NEWS", "group___logging.html#ggae1f9af284e3c8dd57f067be57ac0b421aefc0221ca8b580d93db90f2a850d0e07", null ],
+      [ "neforce::syslog_facility::LOG_SYSLOG", "group___logging.html#ggae1f9af284e3c8dd57f067be57ac0b421a5c7bd379a25f9fb8591ce63a5be5ee8c", null ],
+      [ "neforce::syslog_facility::LOG_USER", "group___logging.html#ggae1f9af284e3c8dd57f067be57ac0b421a36489c5bd64137a0a97d8e0bbd19d351", null ],
+      [ "neforce::syslog_facility::LOG_UUCP", "group___logging.html#ggae1f9af284e3c8dd57f067be57ac0b421a3f29e6ef6790b2e19a70a44e7afc1b64", null ]
     ] ],
-    [ "default_sink_format", "group___logging.html#ga7ba3f1921075bd3adc62d2915630fce7", null ],
-    [ "level_color", "group___logging.html#ga83510b25a05f7aa4f5d200b934da97db", null ],
-    [ "to_string", "group___logging.html#ga22184590803524bd20e45d3d4887e82d", null ]
+    [ "neforce::default_sink_format", "group___logging.html#ga91c817601024d3b815eb4bc44e4c17c4", null ],
+    [ "neforce::level_color", "group___logging.html#ga020ce808f46d11f7641aa01ff81e6c95", null ],
+    [ "neforce::to_string", "group___logging.html#ga26ccc87120faa7840aaae70fcbd1fc27", null ]
 ];

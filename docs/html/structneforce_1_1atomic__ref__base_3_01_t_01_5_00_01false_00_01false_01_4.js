@@ -1,0 +1,27 @@
+var structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4 =
+[
+    [ "difference_type", "structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4.html#a707e0d26031824cc7729f8b9db20cea7", null ],
+    [ "value_type", "structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4.html#ad1cf6b3469c6c1fe018309e30e67d776", null ],
+    [ "atomic_ref_base", "structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4.html#ad5f47b47774a7731f3e7ced79248bd23", null ],
+    [ "compare_exchange_strong", "structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4.html#a362bdcdcea3ef5aadb7fe9de295c8ffa", null ],
+    [ "compare_exchange_strong", "structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4.html#a7291175dee31d54e403a4228414ca384", null ],
+    [ "compare_exchange_weak", "structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4.html#a00a5245bbc33eb7b22c7eefee8c3b2d2", null ],
+    [ "compare_exchange_weak", "structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4.html#aefa5f3f60fb7f71a21c9b6c43c2aa016", null ],
+    [ "exchange", "structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4.html#a53fd01bb37a5f038e15b7f770a10c47d", null ],
+    [ "fetch_add", "structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4.html#a3dbf9df22a5ff6e1fe395d3e35988594", null ],
+    [ "fetch_sub", "structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4.html#abe0d1d4c4d74bd67ece646d41bcb441e", null ],
+    [ "is_lock_free", "structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4.html#a85f1de179c8d185c1fbb12d061bfe938", null ],
+    [ "load", "structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4.html#a64a10c800f589e8f1a078b892eb6e1c2", null ],
+    [ "notify_all", "structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4.html#a9ab9dc56248f271c3e6b6f107b38ca52", null ],
+    [ "notify_one", "structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4.html#ae7e55c0c937dbf36b8de5113d89341c7", null ],
+    [ "operator T*", "structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4.html#a5e286abe9ae79b39965e2aebb0767877", null ],
+    [ "operator++", "structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4.html#a3c8602e4e03fd58f6d1d85fb81b63d6a", null ],
+    [ "operator++", "structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4.html#af5845d28804b581a32bb921923faec2e", null ],
+    [ "operator+=", "structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4.html#a9a8b3387e55ed0972c0ba021d328dabf", null ],
+    [ "operator--", "structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4.html#a8ebe3f9fa3ede0874ae0cff5899d2959", null ],
+    [ "operator--", "structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4.html#a0e9d4dab08dbe6c1cbe7a25c1a4d3ca7", null ],
+    [ "operator-=", "structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4.html#a7afdbb89490d1d127f317cd36d7ceb7d", null ],
+    [ "operator=", "structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4.html#a2977da9bcfbd26df39043cc8361c57b5", null ],
+    [ "store", "structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4.html#ae26e1836f396e8f6fb6cc221e5c18a43", null ],
+    [ "wait", "structneforce_1_1atomic__ref__base_3_01_t_01_5_00_01false_00_01false_01_4.html#a2c3717fa664c60d463bd2ce95d12f3ac", null ]
+];

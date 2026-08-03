@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['颜色分量定义_0',['颜色分量定义',['../group___color.html#color_components',1,'']]]
+  ['部分排序_0',['部分排序',['../group___sort_algorithms.html#partial_sorting',1,'']]]
 ];

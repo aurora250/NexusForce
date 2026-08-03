@@ -3,24 +3,25 @@
   <compounddef id="group___shared_pointer" kind="group">
     <compoundname>SharedPointer</compoundname>
     <title>共享智能指针</title>
-    <innerclass refid="structenable__shared__from__this" prot="public">enable_shared_from_this</innerclass>
-    <innerclass refid="classshared__ptr" prot="public">shared_ptr</innerclass>
-    <innerclass refid="classweak__ptr" prot="public">weak_ptr</innerclass>
-    <innerclass refid="classshared__ptr_3_01_t_0f_0e_4" prot="public">shared_ptr&lt; T[]&gt;</innerclass>
-    <innerclass refid="structis__shared__ptr" prot="public">is_shared_ptr</innerclass>
-    <innerclass refid="structis__shared__ptr_3_01shared__ptr_3_01_t_01_4_01_4" prot="public">is_shared_ptr&lt; shared_ptr&lt; T &gt; &gt;</innerclass>
+    <innerclass refid="structneforce_1_1enable__shared__from__this" prot="public">neforce::enable_shared_from_this</innerclass>
+    <innerclass refid="classneforce_1_1shared__ptr" prot="public">neforce::shared_ptr</innerclass>
+    <innerclass refid="classneforce_1_1weak__ptr" prot="public">neforce::weak_ptr</innerclass>
+    <innerclass refid="classneforce_1_1shared__ptr_3_01_t_0f_0e_4" prot="public">neforce::shared_ptr&lt; T[]&gt;</innerclass>
+    <innerclass refid="structneforce_1_1is__shared__ptr" prot="public">neforce::is_shared_ptr</innerclass>
+    <innerclass refid="structneforce_1_1is__shared__ptr_3_01shared__ptr_3_01_t_01_4_01_4" prot="public">neforce::is_shared_ptr&lt; shared_ptr&lt; T &gt; &gt;</innerclass>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="group___shared_pointer_1ga8d020ec774ed485200b46a82eacbcdb9" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___shared_pointer_1gae26b5e0275d8b5fde967ee063cfd4ef4" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_shared_ptr_v</definition>
+        <definition>bool neforce::is_shared_ptr_v</definition>
         <argsstring></argsstring>
         <name>is_shared_ptr_v</name>
-        <initializer>= <ref refid="structis__shared__ptr" kindref="compound">is_shared_ptr</ref>&lt;T&gt;::value</initializer>
+        <qualifiedname>neforce::is_shared_ptr_v</qualifiedname>
+        <initializer>= is_shared_ptr&lt;T&gt;::value</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -31,7 +32,7 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___shared_pointer_1gaa9b3dc05a5320e47be4d7da2d4d3dec0" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___shared_pointer_1gaa66010c410a759be90caca32fbd42b9f" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -41,15 +42,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator==</definition>
+        <definition>bool neforce::operator==</definition>
         <argsstring>(const shared_ptr&lt; T &gt; &amp;lhs, const shared_ptr&lt; U &gt; &amp;rhs) noexcept</argsstring>
         <name>operator==</name>
+        <qualifiedname>neforce::operator==</qualifiedname>
         <param>
-          <type>const <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; T &gt; &amp;</type>
+          <type>const shared_ptr&lt; T &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type>const <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; U &gt; &amp;</type>
+          <type>const shared_ptr&lt; U &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -60,8 +62,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="643" column="7" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="643" bodyend="645"/>
+        <references refid="group___function_wrapper_1ga6a8b8801c0a30a7e84b4b051aa943b64" compoundref="functional_2function_8hpp" startline="530" endline="532">neforce::operator==</references>
       </memberdef>
-      <memberdef kind="function" id="group___shared_pointer_1gaf195949f9ef9939874a6d82ea47beca8" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___shared_pointer_1ga7022a0e8cacbf6d0fbfd0c0d4badd17d" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -71,15 +74,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator!=</definition>
+        <definition>bool neforce::operator!=</definition>
         <argsstring>(const shared_ptr&lt; T &gt; &amp;lhs, const shared_ptr&lt; U &gt; &amp;rhs) noexcept</argsstring>
         <name>operator!=</name>
+        <qualifiedname>neforce::operator!=</qualifiedname>
         <param>
-          <type>const <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; T &gt; &amp;</type>
+          <type>const shared_ptr&lt; T &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type>const <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; U &gt; &amp;</type>
+          <type>const shared_ptr&lt; U &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -90,8 +94,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="651" column="7" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="651" bodyend="653"/>
+        <references refid="group___function_wrapper_1ga245168fc07a7b8f6d303ddab962e1bea" compoundref="functional_2function_8hpp" startline="556" endline="558">neforce::operator!=</references>
       </memberdef>
-      <memberdef kind="function" id="group___shared_pointer_1gab4ed070b04dcf6b0b7895f164105ab08" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___shared_pointer_1ga4b800654c54b82061a835e8e9993c939" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -101,15 +106,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&lt;</definition>
+        <definition>bool neforce::operator&lt;</definition>
         <argsstring>(const shared_ptr&lt; T &gt; &amp;lhs, const shared_ptr&lt; U &gt; &amp;rhs) noexcept</argsstring>
         <name>operator&lt;</name>
+        <qualifiedname>neforce::operator&lt;</qualifiedname>
         <param>
-          <type>const <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; T &gt; &amp;</type>
+          <type>const shared_ptr&lt; T &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type>const <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; U &gt; &amp;</type>
+          <type>const shared_ptr&lt; U &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -121,7 +127,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="659" column="2" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="659" bodyend="661"/>
       </memberdef>
-      <memberdef kind="function" id="group___shared_pointer_1ga8346079838cccaa1d48931389724d715" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___shared_pointer_1ga13474e5c27184bd3bc01255226634721" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -131,15 +137,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&gt;</definition>
+        <definition>bool neforce::operator&gt;</definition>
         <argsstring>(const shared_ptr&lt; T &gt; &amp;lhs, const shared_ptr&lt; U &gt; &amp;rhs) noexcept</argsstring>
         <name>operator&gt;</name>
+        <qualifiedname>neforce::operator&gt;</qualifiedname>
         <param>
-          <type>const <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; T &gt; &amp;</type>
+          <type>const shared_ptr&lt; T &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type>const <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; U &gt; &amp;</type>
+          <type>const shared_ptr&lt; U &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -151,7 +158,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="667" column="7" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="667" bodyend="669"/>
       </memberdef>
-      <memberdef kind="function" id="group___shared_pointer_1gaa7a55fe5dd89b23e2064020056089e4e" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___shared_pointer_1ga9f8b6d5befe2ce7048b9687d8105e05e" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -161,15 +168,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&lt;=</definition>
+        <definition>bool neforce::operator&lt;=</definition>
         <argsstring>(const shared_ptr&lt; T &gt; &amp;lhs, const shared_ptr&lt; U &gt; &amp;rhs) noexcept</argsstring>
         <name>operator&lt;=</name>
+        <qualifiedname>neforce::operator&lt;=</qualifiedname>
         <param>
-          <type>const <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; T &gt; &amp;</type>
+          <type>const shared_ptr&lt; T &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type>const <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; U &gt; &amp;</type>
+          <type>const shared_ptr&lt; U &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -181,7 +189,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="675" column="2" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="675" bodyend="677"/>
       </memberdef>
-      <memberdef kind="function" id="group___shared_pointer_1ga0bbac79eff6378f04bb1aa3d37d43bdb" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___shared_pointer_1ga18492266c425353198f40756eb9166ff" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -191,15 +199,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&gt;=</definition>
+        <definition>bool neforce::operator&gt;=</definition>
         <argsstring>(const shared_ptr&lt; T &gt; &amp;lhs, const shared_ptr&lt; U &gt; &amp;rhs) noexcept</argsstring>
         <name>operator&gt;=</name>
+        <qualifiedname>neforce::operator&gt;=</qualifiedname>
         <param>
-          <type>const <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; T &gt; &amp;</type>
+          <type>const shared_ptr&lt; T &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type>const <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; U &gt; &amp;</type>
+          <type>const shared_ptr&lt; U &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -211,22 +220,23 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="683" column="7" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="683" bodyend="685"/>
       </memberdef>
-      <memberdef kind="function" id="group___shared_pointer_1gad13b0abfb430b6115bdee6a89d36d314" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___shared_pointer_1gad3a665bd21980cfa824a7c36b4ef5d04" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator==</definition>
+        <definition>bool neforce::operator==</definition>
         <argsstring>(const shared_ptr&lt; T &gt; &amp;lhs, nullptr_t np) noexcept</argsstring>
         <name>operator==</name>
+        <qualifiedname>neforce::operator==</qualifiedname>
         <param>
-          <type>const <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; T &gt; &amp;</type>
+          <type>const shared_ptr&lt; T &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <type>nullptr_t</type>
           <declname>np</declname>
         </param>
         <briefdescription>
@@ -257,23 +267,25 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="694" column="7" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="694" bodyend="696"/>
+        <references refid="group___function_wrapper_1ga6a8b8801c0a30a7e84b4b051aa943b64" compoundref="functional_2function_8hpp" startline="530" endline="532">neforce::operator==</references>
       </memberdef>
-      <memberdef kind="function" id="group___shared_pointer_1gaa3d03c499a1e840e1412e512318a50e8" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___shared_pointer_1ga2dc6895d90b390ced66273c8bab1365a" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator==</definition>
+        <definition>bool neforce::operator==</definition>
         <argsstring>(nullptr_t np, const shared_ptr&lt; T &gt; &amp;rhs) noexcept</argsstring>
         <name>operator==</name>
+        <qualifiedname>neforce::operator==</qualifiedname>
         <param>
-          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <type>nullptr_t</type>
           <declname>np</declname>
         </param>
         <param>
-          <type>const <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; T &gt; &amp;</type>
+          <type>const shared_ptr&lt; T &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -304,23 +316,25 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="705" column="7" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="705" bodyend="707"/>
+        <references refid="group___function_wrapper_1ga6a8b8801c0a30a7e84b4b051aa943b64" compoundref="functional_2function_8hpp" startline="530" endline="532">neforce::operator==</references>
       </memberdef>
-      <memberdef kind="function" id="group___shared_pointer_1gacb61feabacaab7d6c3c035735561830e" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___shared_pointer_1ga50c5deec6a09813e54e3b9b1c4e2ea4c" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator!=</definition>
+        <definition>bool neforce::operator!=</definition>
         <argsstring>(const shared_ptr&lt; T &gt; &amp;lhs, nullptr_t np) noexcept</argsstring>
         <name>operator!=</name>
+        <qualifiedname>neforce::operator!=</qualifiedname>
         <param>
-          <type>const <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; T &gt; &amp;</type>
+          <type>const shared_ptr&lt; T &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <type>nullptr_t</type>
           <declname>np</declname>
         </param>
         <briefdescription>
@@ -351,23 +365,25 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="716" column="7" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="716" bodyend="718"/>
+        <references refid="group___function_wrapper_1ga245168fc07a7b8f6d303ddab962e1bea" compoundref="functional_2function_8hpp" startline="556" endline="558">neforce::operator!=</references>
       </memberdef>
-      <memberdef kind="function" id="group___shared_pointer_1ga122ed9f40ddfba41d9e5b1ca8acfb86a" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___shared_pointer_1gaf9daf4cd7e7c057766f65b87c3c21f50" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator!=</definition>
+        <definition>bool neforce::operator!=</definition>
         <argsstring>(nullptr_t np, const shared_ptr&lt; T &gt; &amp;rhs) noexcept</argsstring>
         <name>operator!=</name>
+        <qualifiedname>neforce::operator!=</qualifiedname>
         <param>
-          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <type>nullptr_t</type>
           <declname>np</declname>
         </param>
         <param>
-          <type>const <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; T &gt; &amp;</type>
+          <type>const shared_ptr&lt; T &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -398,8 +414,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="727" column="7" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="727" bodyend="729"/>
+        <references refid="group___function_wrapper_1ga245168fc07a7b8f6d303ddab962e1bea" compoundref="functional_2function_8hpp" startline="556" endline="558">neforce::operator!=</references>
       </memberdef>
-      <memberdef kind="function" id="group___shared_pointer_1gab47fa86d2917e14f57f68dfa9e83495e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___shared_pointer_1gacdaa04ead5936b6c9e0f024297dcf54f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -410,10 +427,11 @@
             <defname>Args</defname>
           </param>
         </templateparamlist>
-        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___base_type_qualifier_check_1ga687f368c330615460df7f61947e88279" kindref="member">is_unbounded_array_v</ref>&lt; T &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga123009e89543c37bab698abc5f4221a0" kindref="member">is_constructible_v</ref>&lt; T, Args... &gt;, <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; T &gt; &gt;</type>
-        <definition>enable_if_t&lt;!is_unbounded_array_v&lt; T &gt; &amp;&amp;is_constructible_v&lt; T, Args... &gt;, shared_ptr&lt; T &gt; &gt; make_shared</definition>
+        <type>enable_if_t&lt;!is_unbounded_array_v&lt; T &gt; &amp;&amp;is_constructible_v&lt; T, Args... &gt;, shared_ptr&lt; T &gt; &gt;</type>
+        <definition>enable_if_t&lt;!is_unbounded_array_v&lt; T &gt; &amp;&amp;is_constructible_v&lt; T, Args... &gt;, shared_ptr&lt; T &gt; &gt; neforce::make_shared</definition>
         <argsstring>(Args &amp;&amp;... args)</argsstring>
         <name>make_shared</name>
+        <qualifiedname>neforce::make_shared</qualifiedname>
         <param>
           <type>Args &amp;&amp;...</type>
           <declname>args</declname>
@@ -452,7 +470,7 @@
 </simplesect>
 <parameterlist kind="exception"><parameteritem>
 <parameternamelist>
-<parametername><ref refid="structmemory__exception" kindref="compound">memory_exception</ref></parametername>
+<parametername><ref refid="structneforce_1_1memory__exception" kindref="compound">memory_exception</ref></parametername>
 </parameternamelist>
 <parameterdescription>
 <para>如果构造对象时抛出错误</para>
@@ -464,46 +482,50 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="849" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="849" bodyend="877"/>
-        <references refid="group___inplace_memory_function_1ga9e6a0c6da451f33867d11cbea1d0cf12" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
-        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
-        <references refid="group___type_special_member_function_checks_1ga123009e89543c37bab698abc5f4221a0" compoundref="type__traits_8hpp" startline="2374">is_constructible_v</references>
-        <references refid="group___type_special_member_function_checks_1gadf6b378d80292ae38acd1f467e10dd49" compoundref="type__traits_8hpp" startline="2987">is_nothrow_destructible_v</references>
-        <references refid="group___compare_algorithms_1ga01c48c11cc5d3222cb2e3adf0f843f3e" compoundref="algorithm_2compare_8hpp" startline="133" endline="135">max</references>
-        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
-        <references refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
-        <referencedby refid="classtimer__scheduler_1ad7e2861340ab12370ceaec61a82c9129" compoundref="timer_8hpp" startline="188" endline="214">timer_scheduler&lt; Clock &gt;::add_task</referencedby>
-        <referencedby refid="classcancellation__slot_1a5436f157d792c64e9a6056cbce0b25d3" compoundref="cancellation__slot_8hpp" startline="73" endline="83">cancellation_slot::assign</referencedby>
-        <referencedby refid="group___async_1ga4bbf8cf030239a4806813af4dcafec6f" compoundref="async_8hpp" startline="43" endline="56">async</referencedby>
-        <referencedby refid="classawaitable_3_01void_01_4_1acc039a92e18412b4783bc42bcc942be4" compoundref="use__awaitable_8hpp" startline="148" endline="149">awaitable&lt; void &gt;::awaitable</referencedby>
-        <referencedby refid="classconnection_1abf4fbe074e578b5744dc6dc8e595d8e8" compoundref="signals_8hpp" startline="133" endline="134">connection::connection</referencedby>
-        <referencedby refid="classcomponent_1a4534e70ac9076d04afc2f9d01f994203" compoundref="component_8hpp" startline="377" endline="381">component&lt; P &gt;::create_state</referencedby>
-        <referencedby refid="classexecutor_1ade1b82df93959af7939db0cf8a983625" compoundref="executor_8hpp" startline="61" endline="69">executor::executor</referencedby>
-        <referencedby refid="group___thread_pool_1gab0dfe2ffce57ef2437c2bc1060febc71">get_current_task_group</referencedby>
-        <referencedby refid="classpath__tree_1a6b12d9137c8b7d2f75447971a434ad8f" compoundref="path__tree_8hpp" startline="211" endline="212">path_tree::path_tree</referencedby>
-        <referencedby refid="classpromise_1a980a39afa21321c8e9ec5022b0a0123c" compoundref="promise_8hpp" startline="70" endline="72">promise&lt; Res &gt;::promise</referencedby>
-        <referencedby refid="classpromise_3_01_res_01_6_01_4_1a0c9db50baf0d8bad238d066b51ac8b24" compoundref="promise_8hpp" startline="183" endline="185">promise&lt; Res &amp; &gt;::promise</referencedby>
-        <referencedby refid="classpromise_3_01void_01_4_1ac277841e88a39702719d9a90b21e6c57" compoundref="promise_8hpp" startline="287" endline="289">promise&lt; void &gt;::promise</referencedby>
-        <referencedby refid="classcomponent__base_1a1ff6fa5742995ffec8f10320b88d5659" compoundref="component_8hpp" startline="295" endline="297">component_base::provide_context</referencedby>
-        <referencedby refid="classstrand_1ae6476e4acab565747bc4fc103dc45227" compoundref="strand_8hpp" startline="72" endline="73">strand::strand</referencedby>
-        <referencedby refid="classyaml__builder_1af586623b16246c6cf122709408821187" compoundref="yaml__builder_8hpp" startline="242" endline="242">yaml_builder::value</referencedby>
-        <referencedby refid="classyaml__builder_1a0413ca20bbad3235353eaa5b6a26a262" compoundref="yaml__builder_8hpp" startline="263" endline="263">yaml_builder::value</referencedby>
-        <referencedby refid="classyaml__builder_1a6729eda8d53dc059287474267741fc01" compoundref="yaml__builder_8hpp" startline="256" endline="256">yaml_builder::value</referencedby>
-        <referencedby refid="classyaml__builder_1a63ce58f5c5a5ad079de326e003e06d38" compoundref="yaml__builder_8hpp" startline="249" endline="249">yaml_builder::value</referencedby>
-        <referencedby refid="classyaml__builder_1a4721a2a7002baba478a19f0e1addda8f" compoundref="yaml__builder_8hpp" startline="235" endline="235">yaml_builder::value</referencedby>
-        <referencedby refid="classyaml__builder_1aaf3b9351b58c7dbf82d33e4046467be2" compoundref="yaml__builder_8hpp" startline="270" endline="270">yaml_builder::value</referencedby>
+        <references refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" compoundref="type__traits_8hpp" startline="2374">neforce::is_constructible_v</references>
+        <references refid="group___type_special_member_function_checks_1gab65bc375c5b6653c7fccd521711478c5" compoundref="type__traits_8hpp" startline="2987">neforce::is_nothrow_destructible_v</references>
+        <references refid="group___shared_pointer_1gacdaa04ead5936b6c9e0f024297dcf54f" compoundref="shared__ptr_8hpp" startline="849" endline="877">neforce::make_shared</references>
+        <references refid="group___compare_algorithms_1gacc7ec6cd2134fb437b992f481b7e5057" compoundref="algorithm_2compare_8hpp" startline="133" endline="135">neforce::max</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="group___type_erasure_functions_1ga69955a26617401117eaf53fa82162e2b" compoundref="type__erase_8hpp" startline="292" endline="294">neforce::size</references>
+        <referencedby refid="classneforce_1_1timer__scheduler_1a3694eeedc09a5de9fadbbdb4249bd9eb" compoundref="timer_8hpp" startline="188" endline="214">neforce::timer_scheduler&lt; Clock &gt;::add_task</referencedby>
+        <referencedby refid="classneforce_1_1cancellation__slot_1a420baa9a7b4bf2262ba1d1b2a69658a8" compoundref="cancellation__slot_8hpp" startline="73" endline="83">neforce::cancellation_slot::assign</referencedby>
+        <referencedby refid="group___async_1ga3b100cc284ba1351140d99912b389764" compoundref="async_8hpp" startline="43" endline="56">neforce::async</referencedby>
+        <referencedby refid="classneforce_1_1awaitable_3_01void_01_4_1a2861b03cfde6579a11896b3d55c6c727" compoundref="use__awaitable_8hpp" startline="148" endline="149">neforce::awaitable&lt; void &gt;::awaitable</referencedby>
+        <referencedby refid="classneforce_1_1connection_1adadaf271f38e5a17f7a3db9b492f1908" compoundref="signals_8hpp" startline="133" endline="134">neforce::connection::connection</referencedby>
+        <referencedby refid="classneforce_1_1tui_1_1component_1a0540fb1322c8fc3f88111db665a1c255" compoundref="component_8hpp" startline="378" endline="382">neforce::tui::component&lt; P &gt;::create_state</referencedby>
+        <referencedby refid="classneforce_1_1executor_1a19242779e816818c934db0cf20cf525a" compoundref="executor_8hpp" startline="61" endline="69">neforce::executor::executor</referencedby>
+        <referencedby refid="group___thread_pool_1gac0f18cc77f10e8256399e872c945265d">neforce::get_current_task_group</referencedby>
+        <referencedby refid="group___shared_pointer_1gacdaa04ead5936b6c9e0f024297dcf54f" compoundref="shared__ptr_8hpp" startline="849" endline="877">neforce::make_shared</referencedby>
+        <referencedby refid="group___shared_pointer_1gad4c587b912dbadc84d237239630fc303" compoundref="shared__ptr_8hpp" startline="887" endline="898">neforce::make_shared</referencedby>
+        <referencedby refid="classneforce_1_1path__tree_1adfb34df4abda40c1218d4a41860ac3e0" compoundref="path__tree_8hpp" startline="211" endline="212">neforce::path_tree::path_tree</referencedby>
+        <referencedby refid="classneforce_1_1promise_1a5115a090066767ed472714fccc6cc364" compoundref="promise_8hpp" startline="70" endline="72">neforce::promise&lt; Res &gt;::promise</referencedby>
+        <referencedby refid="classneforce_1_1promise_3_01_res_01_6_01_4_1a859ad93856cbf734916d7fdb30d90b75" compoundref="promise_8hpp" startline="183" endline="185">neforce::promise&lt; Res &amp; &gt;::promise</referencedby>
+        <referencedby refid="classneforce_1_1promise_3_01void_01_4_1add1c49c4da27763934ab0220cb6a1083" compoundref="promise_8hpp" startline="287" endline="289">neforce::promise&lt; void &gt;::promise</referencedby>
+        <referencedby refid="classneforce_1_1tui_1_1component__base_1a5e0cd2ed9e7c1ccb0a7360476f66f39a" compoundref="component_8hpp" startline="295" endline="297">neforce::tui::component_base::provide_context</referencedby>
+        <referencedby refid="classneforce_1_1strand_1ace68073b516053cd23186625dae3cfcf" compoundref="strand_8hpp" startline="72" endline="73">neforce::strand::strand</referencedby>
+        <referencedby refid="classneforce_1_1yaml__builder_1afe98fe34b1397959f622f94f489d4495" compoundref="yaml__builder_8hpp" startline="242" endline="242">neforce::yaml_builder::value</referencedby>
+        <referencedby refid="classneforce_1_1yaml__builder_1ab7b3708cdf1c26783b991e72fbdbe19a" compoundref="yaml__builder_8hpp" startline="263" endline="263">neforce::yaml_builder::value</referencedby>
+        <referencedby refid="classneforce_1_1yaml__builder_1aa31fd874128e9c4798bcf772f7111322" compoundref="yaml__builder_8hpp" startline="256" endline="256">neforce::yaml_builder::value</referencedby>
+        <referencedby refid="classneforce_1_1yaml__builder_1acad3f401df749e855a1fa647bcc383e9" compoundref="yaml__builder_8hpp" startline="249" endline="249">neforce::yaml_builder::value</referencedby>
+        <referencedby refid="classneforce_1_1yaml__builder_1ad7eb34eee04fe1341ebb3f7c0405e4f1" compoundref="yaml__builder_8hpp" startline="235" endline="235">neforce::yaml_builder::value</referencedby>
+        <referencedby refid="classneforce_1_1yaml__builder_1a8531dd35a04d9b6b516504ac32f02a2b" compoundref="yaml__builder_8hpp" startline="270" endline="270">neforce::yaml_builder::value</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___shared_pointer_1ga1caeb7d9a2a15936a6bfa478a70f937e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___shared_pointer_1gad4c587b912dbadc84d237239630fc303" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_qualifier_check_1ga687f368c330615460df7f61947e88279" kindref="member">is_unbounded_array_v</ref>&lt; T &gt;, <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; T &gt; &gt;</type>
-        <definition>enable_if_t&lt; is_unbounded_array_v&lt; T &gt;, shared_ptr&lt; T &gt; &gt; make_shared</definition>
+        <type>enable_if_t&lt; is_unbounded_array_v&lt; T &gt;, shared_ptr&lt; T &gt; &gt;</type>
+        <definition>enable_if_t&lt; is_unbounded_array_v&lt; T &gt;, shared_ptr&lt; T &gt; &gt; neforce::make_shared</definition>
         <argsstring>(const size_t len)</argsstring>
         <name>make_shared</name>
+        <qualifiedname>neforce::make_shared</qualifiedname>
         <param>
-          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>const size_t</type>
           <declname>len</declname>
         </param>
         <briefdescription>
@@ -532,7 +554,7 @@
 </simplesect>
 <parameterlist kind="exception"><parameteritem>
 <parameternamelist>
-<parametername><ref refid="structmemory__exception" kindref="compound">memory_exception</ref></parametername>
+<parametername><ref refid="structneforce_1_1memory__exception" kindref="compound">memory_exception</ref></parametername>
 </parameternamelist>
 <parameterdescription>
 <para>如果构造对象时抛出错误 </para>
@@ -544,9 +566,10 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="887" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="887" bodyend="898"/>
-        <references refid="group___debug_breakpoints_and_assertions_1gac03521c2bfd10af260ef787c2f05308d" compoundref="breakpoint_8hpp" startline="68" endline="74">unreachable</references>
+        <references refid="group___shared_pointer_1gacdaa04ead5936b6c9e0f024297dcf54f" compoundref="shared__ptr_8hpp" startline="849" endline="877">neforce::make_shared</references>
+        <references refid="group___debug_and_assertions_1gada10310a069c1ff44c3b724e69421c32" compoundref="debug_8hpp" startline="68" endline="74">neforce::unreachable</references>
       </memberdef>
-      <memberdef kind="function" id="group___shared_pointer_1gac6d23654fe34f82cb9ce90e5402945c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___shared_pointer_1gac6f725779c1020a14ca9faf6f99223cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -560,10 +583,11 @@
             <defname>Args</defname>
           </param>
         </templateparamlist>
-        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___base_type_qualifier_check_1ga8b0e44222b6a1dc103286f3c5225ad93" kindref="member">is_array_v</ref>&lt; T &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga123009e89543c37bab698abc5f4221a0" kindref="member">is_constructible_v</ref>&lt; T, Args... &gt;, <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; T &gt; &gt;</type>
-        <definition>enable_if_t&lt;!is_array_v&lt; T &gt; &amp;&amp;is_constructible_v&lt; T, Args... &gt;, shared_ptr&lt; T &gt; &gt; allocate_shared</definition>
+        <type>enable_if_t&lt;!is_array_v&lt; T &gt; &amp;&amp;is_constructible_v&lt; T, Args... &gt;, shared_ptr&lt; T &gt; &gt;</type>
+        <definition>enable_if_t&lt;!is_array_v&lt; T &gt; &amp;&amp;is_constructible_v&lt; T, Args... &gt;, shared_ptr&lt; T &gt; &gt; neforce::allocate_shared</definition>
         <argsstring>(Alloc &amp;alloc, Args &amp;&amp;... args)</argsstring>
         <name>allocate_shared</name>
+        <qualifiedname>neforce::allocate_shared</qualifiedname>
         <param>
           <type>Alloc &amp;</type>
           <declname>alloc</declname>
@@ -622,7 +646,7 @@
 </simplesect>
 <parameterlist kind="exception"><parameteritem>
 <parameternamelist>
-<parametername><ref refid="structmemory__exception" kindref="compound">memory_exception</ref></parametername>
+<parametername><ref refid="structneforce_1_1memory__exception" kindref="compound">memory_exception</ref></parametername>
 </parameternamelist>
 <parameterdescription>
 <para>如果构造对象或控制块时抛出错误</para>
@@ -634,16 +658,18 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="913" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="913" bodyend="953"/>
-        <references refid="structallocator__traits_1a81f970b02ede75444d97d7b4a4582387" compoundref="allocator__traits_8hpp" startline="180" endline="182">allocator_traits&lt; Alloc &gt;::allocate</references>
-        <references refid="structallocator__traits_1a3aa80bdbcd962e8962a8094a9533038a" compoundref="allocator__traits_8hpp" startline="201" endline="204">allocator_traits&lt; Alloc &gt;::construct</references>
-        <references refid="group___inplace_memory_function_1ga9e6a0c6da451f33867d11cbea1d0cf12" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
-        <references refid="structallocator__traits_1a00fd215e023c4d56e9362b8dcb3c64e3" compoundref="allocator__traits_8hpp" startline="190" endline="190">allocator_traits&lt; Alloc &gt;::deallocate</references>
-        <references refid="structallocator__traits_1a1eab99783f7eb0fea3eec78e00047491" compoundref="allocator__traits_8hpp" startline="213" endline="216">allocator_traits&lt; Alloc &gt;::destroy</references>
-        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
-        <references refid="group___type_special_member_function_checks_1ga123009e89543c37bab698abc5f4221a0" compoundref="type__traits_8hpp" startline="2374">is_constructible_v</references>
-        <references refid="group___compare_algorithms_1ga01c48c11cc5d3222cb2e3adf0f843f3e" compoundref="algorithm_2compare_8hpp" startline="133" endline="135">max</references>
+        <references refid="structneforce_1_1allocator__traits_1af241d4ed428767cf658cff5b45dcbe25" compoundref="allocator__traits_8hpp" startline="180" endline="182">neforce::allocator_traits&lt; Alloc &gt;::allocate</references>
+        <references refid="group___shared_pointer_1gac6f725779c1020a14ca9faf6f99223cc" compoundref="shared__ptr_8hpp" startline="913" endline="953">neforce::allocate_shared</references>
+        <references refid="structneforce_1_1allocator__traits_1a15cea7b34a026726a70d4776d18fe9d0" compoundref="allocator__traits_8hpp" startline="201" endline="204">neforce::allocator_traits&lt; Alloc &gt;::construct</references>
+        <references refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</references>
+        <references refid="structneforce_1_1allocator__traits_1aaad6e0f5cb08164ec4689215385b050d" compoundref="allocator__traits_8hpp" startline="190" endline="190">neforce::allocator_traits&lt; Alloc &gt;::deallocate</references>
+        <references refid="structneforce_1_1allocator__traits_1ad1d99575c2d5728ae8668d640e373b38" compoundref="allocator__traits_8hpp" startline="213" endline="216">neforce::allocator_traits&lt; Alloc &gt;::destroy</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" compoundref="type__traits_8hpp" startline="2374">neforce::is_constructible_v</references>
+        <references refid="group___compare_algorithms_1gacc7ec6cd2134fb437b992f481b7e5057" compoundref="algorithm_2compare_8hpp" startline="133" endline="135">neforce::max</references>
+        <referencedby refid="group___shared_pointer_1gac6f725779c1020a14ca9faf6f99223cc" compoundref="shared__ptr_8hpp" startline="913" endline="953">neforce::allocate_shared</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___shared_pointer_1gacb7f66310db0ae92421a868921f9dc83" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___shared_pointer_1ga7c3dd367b01fe2aeb000251eeee8657f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -652,12 +678,13 @@
             <type>typename U</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; T &gt;</type>
-        <definition>shared_ptr&lt; T &gt; static_pointer_cast</definition>
+        <type>shared_ptr&lt; T &gt;</type>
+        <definition>shared_ptr&lt; T &gt; neforce::static_pointer_cast</definition>
         <argsstring>(const shared_ptr&lt; U &gt; &amp;ptr)</argsstring>
         <name>static_pointer_cast</name>
+        <qualifiedname>neforce::static_pointer_cast</qualifiedname>
         <param>
-          <type>const <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; U &gt; &amp;</type>
+          <type>const shared_ptr&lt; U &gt; &amp;</type>
           <declname>ptr</declname>
         </param>
         <briefdescription>
@@ -697,9 +724,13 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="964" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="964" bodyend="966"/>
-        <references refid="classshared__ptr_1a426ed899db3bcc86ffcdd792330f2251" compoundref="shared__ptr_8hpp" startline="580" endline="580">shared_ptr&lt; T &gt;::get</references>
+        <references refid="classneforce_1_1shared__ptr_1a84357efdbe01a6eb3a2150e026984c61" compoundref="shared__ptr_8hpp" startline="580" endline="580">neforce::shared_ptr&lt; T &gt;::get</references>
+        <references refid="group___shared_pointer_1ga7c3dd367b01fe2aeb000251eeee8657f" compoundref="shared__ptr_8hpp" startline="964" endline="966">neforce::static_pointer_cast</references>
+        <referencedby refid="group___shared_pointer_1ga7c3dd367b01fe2aeb000251eeee8657f" compoundref="shared__ptr_8hpp" startline="964" endline="966">neforce::static_pointer_cast</referencedby>
+        <referencedby refid="group___unique_pointer_1ga626bf49ac327ec287aa2b677dbffbfa8">neforce::static_pointer_cast</referencedby>
+        <referencedby refid="group___unique_pointer_1gac4a4aa9a7b83a9e130d9e6cc06f010cf" compoundref="unique__ptr_8hpp" startline="878" endline="881">neforce::static_pointer_cast</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___shared_pointer_1ga4ef3f2a464d7055ef265b2cb5365a9f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___shared_pointer_1gac30e9844897224b7aa30a38a9bc51f1a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -708,12 +739,13 @@
             <type>typename U</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; T &gt;</type>
-        <definition>shared_ptr&lt; T &gt; const_pointer_cast</definition>
+        <type>shared_ptr&lt; T &gt;</type>
+        <definition>shared_ptr&lt; T &gt; neforce::const_pointer_cast</definition>
         <argsstring>(const shared_ptr&lt; U &gt; &amp;ptr)</argsstring>
         <name>const_pointer_cast</name>
+        <qualifiedname>neforce::const_pointer_cast</qualifiedname>
         <param>
-          <type>const <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; U &gt; &amp;</type>
+          <type>const shared_ptr&lt; U &gt; &amp;</type>
           <declname>ptr</declname>
         </param>
         <briefdescription>
@@ -753,9 +785,13 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="976" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="976" bodyend="978"/>
-        <references refid="classshared__ptr_1a426ed899db3bcc86ffcdd792330f2251" compoundref="shared__ptr_8hpp" startline="580" endline="580">shared_ptr&lt; T &gt;::get</references>
+        <references refid="group___shared_pointer_1gac30e9844897224b7aa30a38a9bc51f1a" compoundref="shared__ptr_8hpp" startline="976" endline="978">neforce::const_pointer_cast</references>
+        <references refid="classneforce_1_1shared__ptr_1a84357efdbe01a6eb3a2150e026984c61" compoundref="shared__ptr_8hpp" startline="580" endline="580">neforce::shared_ptr&lt; T &gt;::get</references>
+        <referencedby refid="group___shared_pointer_1gac30e9844897224b7aa30a38a9bc51f1a" compoundref="shared__ptr_8hpp" startline="976" endline="978">neforce::const_pointer_cast</referencedby>
+        <referencedby refid="group___unique_pointer_1ga30c55b284981feaf524811a4acc244c1">neforce::const_pointer_cast</referencedby>
+        <referencedby refid="group___unique_pointer_1ga6b3ff732628ac0950c5d4c4478910061" compoundref="unique__ptr_8hpp" startline="894" endline="897">neforce::const_pointer_cast</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___shared_pointer_1gaf6d1635df0e9b2fe15abdc3304f34e18" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___shared_pointer_1ga450de0f5cca1b72bd39f63114ff0492b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -764,12 +800,13 @@
             <type>typename U</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; T &gt;</type>
-        <definition>shared_ptr&lt; T &gt; reinterpret_pointer_cast</definition>
+        <type>shared_ptr&lt; T &gt;</type>
+        <definition>shared_ptr&lt; T &gt; neforce::reinterpret_pointer_cast</definition>
         <argsstring>(const shared_ptr&lt; U &gt; &amp;ptr)</argsstring>
         <name>reinterpret_pointer_cast</name>
+        <qualifiedname>neforce::reinterpret_pointer_cast</qualifiedname>
         <param>
-          <type>const <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; U &gt; &amp;</type>
+          <type>const shared_ptr&lt; U &gt; &amp;</type>
           <declname>ptr</declname>
         </param>
         <briefdescription>
@@ -809,9 +846,13 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="988" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="988" bodyend="990"/>
-        <references refid="classshared__ptr_1a426ed899db3bcc86ffcdd792330f2251" compoundref="shared__ptr_8hpp" startline="580" endline="580">shared_ptr&lt; T &gt;::get</references>
+        <references refid="classneforce_1_1shared__ptr_1a84357efdbe01a6eb3a2150e026984c61" compoundref="shared__ptr_8hpp" startline="580" endline="580">neforce::shared_ptr&lt; T &gt;::get</references>
+        <references refid="group___shared_pointer_1ga450de0f5cca1b72bd39f63114ff0492b" compoundref="shared__ptr_8hpp" startline="988" endline="990">neforce::reinterpret_pointer_cast</references>
+        <referencedby refid="group___shared_pointer_1ga450de0f5cca1b72bd39f63114ff0492b" compoundref="shared__ptr_8hpp" startline="988" endline="990">neforce::reinterpret_pointer_cast</referencedby>
+        <referencedby refid="group___unique_pointer_1ga0b1814e7ce4a41ea77cc8d8b099e4ae7">neforce::reinterpret_pointer_cast</referencedby>
+        <referencedby refid="group___unique_pointer_1gaffe5f828c8abac9203f7d4a0d5de7e0e" compoundref="unique__ptr_8hpp" startline="910" endline="913">neforce::reinterpret_pointer_cast</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___shared_pointer_1ga9a104d4a2412bb50c6ea44e89b52836b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___shared_pointer_1ga2da7bb78033d7f73b53617b2d104fb3e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -820,12 +861,13 @@
             <type>typename U</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; T &gt;</type>
-        <definition>shared_ptr&lt; T &gt; dynamic_pointer_cast</definition>
+        <type>shared_ptr&lt; T &gt;</type>
+        <definition>shared_ptr&lt; T &gt; neforce::dynamic_pointer_cast</definition>
         <argsstring>(const shared_ptr&lt; U &gt; &amp;ptr)</argsstring>
         <name>dynamic_pointer_cast</name>
+        <qualifiedname>neforce::dynamic_pointer_cast</qualifiedname>
         <param>
-          <type>const <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; U &gt; &amp;</type>
+          <type>const shared_ptr&lt; U &gt; &amp;</type>
           <declname>ptr</declname>
         </param>
         <briefdescription>
@@ -865,7 +907,11 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="1000" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="1000" bodyend="1006"/>
-        <references refid="classshared__ptr_1a426ed899db3bcc86ffcdd792330f2251" compoundref="shared__ptr_8hpp" startline="580" endline="580">shared_ptr&lt; T &gt;::get</references>
+        <references refid="group___shared_pointer_1ga2da7bb78033d7f73b53617b2d104fb3e" compoundref="shared__ptr_8hpp" startline="1000" endline="1006">neforce::dynamic_pointer_cast</references>
+        <references refid="classneforce_1_1shared__ptr_1a84357efdbe01a6eb3a2150e026984c61" compoundref="shared__ptr_8hpp" startline="580" endline="580">neforce::shared_ptr&lt; T &gt;::get</references>
+        <referencedby refid="group___shared_pointer_1ga2da7bb78033d7f73b53617b2d104fb3e" compoundref="shared__ptr_8hpp" startline="1000" endline="1006">neforce::dynamic_pointer_cast</referencedby>
+        <referencedby refid="group___unique_pointer_1ga9f551d47c8cc9a02ca758cd00ed7cae9">neforce::dynamic_pointer_cast</referencedby>
+        <referencedby refid="group___unique_pointer_1ga3a5ffa7e285def8f8dfb257d502b7bab" compoundref="unique__ptr_8hpp" startline="926" endline="935">neforce::dynamic_pointer_cast</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

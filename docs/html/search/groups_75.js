@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['调试与断言_0',['调试与断言',['../group___debug_breakpoints_and_assertions.html',1,'']]]
+  ['计数算法_0',['计数算法',['../group___counting_algorithms.html',1,'']]],
+  ['计时器_1',['计时器',['../group___click.html',1,'']]]
 ];

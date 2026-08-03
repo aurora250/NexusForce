@@ -1,0 +1,1767 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::socket_base类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1socket__base.html','','classneforce_1_1socket__base-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::socket_base类 参考<div class="ingroups"><a class="el" href="group___socket_base.html">socket基类</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Socket基础类  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a>&gt;</code></p>
+<div class="dynheader">
+类 neforce::socket_base 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classneforce_1_1socket__base__inherit__graph.svg" width="654" height="262"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a322e65239feb4f0d2fa3bf3763f31256" id="r_a322e65239feb4f0d2fa3bf3763f31256"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a322e65239feb4f0d2fa3bf3763f31256">type</a> : int32_t { <br />
+&#160;&#160;<a class="el" href="#a322e65239feb4f0d2fa3bf3763f31256a2f05998d2a71cdc19b7109549bbe2646">STREAM</a> = SOCK_STREAM
+, <a class="el" href="#a322e65239feb4f0d2fa3bf3763f31256a6a8389c72b69aa95f82e3ba835c8e207">DGRAM</a> = SOCK_DGRAM
+, <a class="el" href="#a322e65239feb4f0d2fa3bf3763f31256a633d6abff0a3fc22404347728d195059">RAW</a> = SOCK_RAW
+, <a class="el" href="#a322e65239feb4f0d2fa3bf3763f31256a006795aeeab570e4ca336932c33932f2">RDM</a> = SOCK_RDM
+, <br />
+&#160;&#160;<a class="el" href="#a322e65239feb4f0d2fa3bf3763f31256ab2b74031ec7ab401a06dc71d87906ed2">SEQPACKET</a> = SOCK_SEQPACKET
+, <a class="el" href="#a322e65239feb4f0d2fa3bf3763f31256a009eaa7119fb4c83c5e487874d7e2218">CLOEXEC</a> = SOCK_CLOEXEC
+, <a class="el" href="#a322e65239feb4f0d2fa3bf3763f31256aafc3203b70037086fb9aa7f2ced7a9f0">NONBLOCK</a> = SOCK_NONBLOCK
+, <a class="el" href="#a322e65239feb4f0d2fa3bf3763f31256abf522445105e2f387f205558aadad537">DCCP</a> = SOCK_DCCP
+<br />
+ }</td></tr>
+<tr class="memdesc:a322e65239feb4f0d2fa3bf3763f31256"><td class="mdescLeft">&#160;</td><td class="mdescRight">socket 类型枚举  <a href="#a322e65239feb4f0d2fa3bf3763f31256">更多...</a><br /></td></tr>
+<tr class="memitem:a8cbdda2bb8a0e190c258eb25bb445992" id="r_a8cbdda2bb8a0e190c258eb25bb445992"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992">protocol</a> : int32_t { <br />
+&#160;&#160;<a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992ae1f2d5134ed2543d38a0de9751cf75d9">AUTO</a> = 0
+, <a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992a7d6fe0dd606232f7155fdeae2ea620a9">ICMP</a> = IPPROTO_ICMP
+, <a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992ab136ef5f6a01d816991fe3cf7a6ac763">TCP</a> = IPPROTO_TCP
+, <a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992af5ef036b4d8b630721e51fe23489fbc9">UDP</a> = IPPROTO_UDP
+, <br />
+&#160;&#160;<a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992a74096394e1dbe6f5b2ac4d54d4e88c97">SCTP</a> = IPPROTO_SCTP
+, <a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992a633d6abff0a3fc22404347728d195059">RAW</a> = IPPROTO_RAW
+, <a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992a3e30ce90c5b1d89ae09b7d4c73d8e172">ESP</a> = IPPROTO_ESP
+, <a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992ae99c19dec2b574bc5d4990504f6cf550">AH</a> = IPPROTO_AH
+, <br />
+&#160;&#160;<a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992abf522445105e2f387f205558aadad537">DCCP</a> = IPPROTO_DCCP
+, <a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992aa12a3079e14ced46e69ba52b8a90b21a">IP</a> = ETH_P_IP
+, <a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992ae18712a7bcb07021704b7d53577c8501">ARP</a> = ETH_P_ARP
+, <a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992a3fbcd320695e3a01273994471d09cc36">IPV6</a> = ETH_P_IPV6
+, <br />
+&#160;&#160;<a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992ac4a8afa234be2060691c81928eb1b701">LAT</a> = ETH_P_LAT
+, <a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992a9881f82f0dd89588831f9d1682bd5492">VLAN</a> = ETH_P_8021Q
+, <a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992a2bad208e9a1343317d536d15106834ef">LLDP</a> = ETH_P_LLDP
+, <a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992a32ea4687a585ba359fefb81028f20adb">MPLS</a> = ETH_P_MPLS_UC
+<br />
+ }</td></tr>
+<tr class="memdesc:a8cbdda2bb8a0e190c258eb25bb445992"><td class="mdescLeft">&#160;</td><td class="mdescRight">socket 协议枚举  <a href="#a8cbdda2bb8a0e190c258eb25bb445992">更多...</a><br /></td></tr>
+<tr class="memitem:a4c5f2953bd5b46ee48a334d5c247bc0d" id="r_a4c5f2953bd5b46ee48a334d5c247bc0d"><td class="memItemLeft"><a id="a4c5f2953bd5b46ee48a334d5c247bc0d" name="a4c5f2953bd5b46ee48a334d5c247bc0d"></a>
+using&#160;</td><td class="memItemRight"><b>native_handle_type</b></td></tr>
+<tr class="memdesc:a4c5f2953bd5b46ee48a334d5c247bc0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">平台原生句柄类型 <br /></td></tr>
+<tr class="memitem:a90d93d8cb0d95db21274a08b6d27205a" id="r_a90d93d8cb0d95db21274a08b6d27205a"><td class="memItemLeft"><a id="a90d93d8cb0d95db21274a08b6d27205a" name="a90d93d8cb0d95db21274a08b6d27205a"></a>
+using&#160;</td><td class="memItemRight"><b>family</b> = <a class="el" href="classneforce_1_1ip__address.html#a5632d25a52dfda97486b1aa3b6cc69a8">ip_address::family</a></td></tr>
+<tr class="memdesc:a90d93d8cb0d95db21274a08b6d27205a"><td class="mdescLeft">&#160;</td><td class="mdescRight">网络地址族类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a9b8731a4cb059cf60c43ca97aa688162" id="r_a9b8731a4cb059cf60c43ca97aa688162"><td class="memItemLeft"><a id="a9b8731a4cb059cf60c43ca97aa688162" name="a9b8731a4cb059cf60c43ca97aa688162"></a>
+&#160;</td><td class="memItemRight"><b>socket_base</b> ()</td></tr>
+<tr class="memdesc:a9b8731a4cb059cf60c43ca97aa688162"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数 <br /></td></tr>
+<tr class="memitem:accb5b278a3bc2792f893357f1e7e9812" id="r_accb5b278a3bc2792f893357f1e7e9812"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#accb5b278a3bc2792f893357f1e7e9812">socket_base</a> (const <a class="el" href="#a4c5f2953bd5b46ee48a334d5c247bc0d">native_handle_type</a> fd) noexcept</td></tr>
+<tr class="memdesc:accb5b278a3bc2792f893357f1e7e9812"><td class="mdescLeft">&#160;</td><td class="mdescRight">从原生句柄构造  <br /></td></tr>
+<tr class="memitem:a08db6bdff24ac7930d2010da313fe5f8" id="r_a08db6bdff24ac7930d2010da313fe5f8"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a08db6bdff24ac7930d2010da313fe5f8">socket_base</a> (socket_base &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a08db6bdff24ac7930d2010da313fe5f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造函数  <br /></td></tr>
+<tr class="memitem:a9e86d2bd403dbba7ba100a163ea130d0" id="r_a9e86d2bd403dbba7ba100a163ea130d0"><td class="memItemLeft"><a class="el" href="#a9b8731a4cb059cf60c43ca97aa688162">socket_base</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a9e86d2bd403dbba7ba100a163ea130d0">operator=</a> (<a class="el" href="#a9b8731a4cb059cf60c43ca97aa688162">socket_base</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a9e86d2bd403dbba7ba100a163ea130d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值运算符  <br /></td></tr>
+<tr class="memitem:aef05deba68ee95bf9f5a5e3c408851a3" id="r_aef05deba68ee95bf9f5a5e3c408851a3"><td class="memItemLeft"><a id="aef05deba68ee95bf9f5a5e3c408851a3" name="aef05deba68ee95bf9f5a5e3c408851a3"></a>
+virtual&#160;</td><td class="memItemRight"><b>~socket_base</b> ()</td></tr>
+<tr class="memdesc:aef05deba68ee95bf9f5a5e3c408851a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数 <br /></td></tr>
+<tr class="memitem:a55e7e77823236aaf022990256793783d" id="r_a55e7e77823236aaf022990256793783d"><td class="memItemLeft"><a class="el" href="#a4c5f2953bd5b46ee48a334d5c247bc0d">native_handle_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a55e7e77823236aaf022990256793783d">native_handle</a> () const noexcept</td></tr>
+<tr class="memdesc:a55e7e77823236aaf022990256793783d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取原生句柄  <br /></td></tr>
+<tr class="memitem:a688c59e456551b33a230cb139dbd685a" id="r_a688c59e456551b33a230cb139dbd685a"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a688c59e456551b33a230cb139dbd685a">is_open</a> () const noexcept</td></tr>
+<tr class="memdesc:a688c59e456551b33a230cb139dbd685a"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查socket是否已打开  <br /></td></tr>
+<tr class="memitem:ac4c5240cbfd92f1b31e3f8dc7093987a" id="r_ac4c5240cbfd92f1b31e3f8dc7093987a"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ac4c5240cbfd92f1b31e3f8dc7093987a">operator bool</a> () const noexcept</td></tr>
+<tr class="memdesc:ac4c5240cbfd92f1b31e3f8dc7093987a"><td class="mdescLeft">&#160;</td><td class="mdescRight">布尔转换运算符  <br /></td></tr>
+<tr class="memitem:aa25cb567f6980041f5dc74b91913eb6d" id="r_aa25cb567f6980041f5dc74b91913eb6d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa25cb567f6980041f5dc74b91913eb6d">open</a> (<a class="el" href="classneforce_1_1ip__address.html#a5632d25a52dfda97486b1aa3b6cc69a8">family</a> f, <a class="el" href="#a322e65239feb4f0d2fa3bf3763f31256">type</a> t=<a class="el" href="#a322e65239feb4f0d2fa3bf3763f31256a2f05998d2a71cdc19b7109549bbe2646">type::STREAM</a>, <a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992">protocol</a> p=<a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992ae1f2d5134ed2543d38a0de9751cf75d9">protocol::AUTO</a>)</td></tr>
+<tr class="memdesc:aa25cb567f6980041f5dc74b91913eb6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">打开socket  <br /></td></tr>
+<tr class="memitem:a8de8f78559fccaf6b9ed6da6b89f27c3" id="r_a8de8f78559fccaf6b9ed6da6b89f27c3"><td class="memItemLeft">virtual bool&#160;</td><td class="memItemRight"><a class="el" href="#a8de8f78559fccaf6b9ed6da6b89f27c3">close</a> () noexcept</td></tr>
+<tr class="memdesc:a8de8f78559fccaf6b9ed6da6b89f27c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">关闭socket  <br /></td></tr>
+<tr class="memitem:a6b1c0921703871f28d6903be8f02690e" id="r_a6b1c0921703871f28d6903be8f02690e"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a6b1c0921703871f28d6903be8f02690e">try_open</a> (<a class="el" href="classneforce_1_1ip__address.html#a5632d25a52dfda97486b1aa3b6cc69a8">family</a> f, <a class="el" href="#a322e65239feb4f0d2fa3bf3763f31256">type</a> t=<a class="el" href="#a322e65239feb4f0d2fa3bf3763f31256a2f05998d2a71cdc19b7109549bbe2646">type::STREAM</a>, <a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992">protocol</a> p=<a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992ae1f2d5134ed2543d38a0de9751cf75d9">protocol::AUTO</a>) noexcept</td></tr>
+<tr class="memdesc:a6b1c0921703871f28d6903be8f02690e"><td class="mdescLeft">&#160;</td><td class="mdescRight">尝试打开socket  <br /></td></tr>
+<tr class="memitem:acf76f07c4bb9652e701eb39247850f76" id="r_acf76f07c4bb9652e701eb39247850f76"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#acf76f07c4bb9652e701eb39247850f76">is_nonblocking</a> () const noexcept</td></tr>
+<tr class="memdesc:acf76f07c4bb9652e701eb39247850f76"><td class="mdescLeft">&#160;</td><td class="mdescRight">查询是否为非阻塞模式  <br /></td></tr>
+<tr class="memitem:a9b75e2f51a01febdd29f2fd6941fd2ab" id="r_a9b75e2f51a01febdd29f2fd6941fd2ab"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a9b75e2f51a01febdd29f2fd6941fd2ab">set_nonblocking</a> (bool enable) noexcept</td></tr>
+<tr class="memdesc:a9b75e2f51a01febdd29f2fd6941fd2ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置非阻塞模式  <br /></td></tr>
+<tr class="memitem:ac0d78cde8681391cedca79f28e89119e" id="r_ac0d78cde8681391cedca79f28e89119e"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ac0d78cde8681391cedca79f28e89119e">shutdown_send</a> () noexcept</td></tr>
+<tr class="memdesc:ac0d78cde8681391cedca79f28e89119e"><td class="mdescLeft">&#160;</td><td class="mdescRight">关闭发送方向  <br /></td></tr>
+<tr class="memitem:a852458c313e65acc1e74bc16130e0502" id="r_a852458c313e65acc1e74bc16130e0502"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a852458c313e65acc1e74bc16130e0502">shutdown_receive</a> () noexcept</td></tr>
+<tr class="memdesc:a852458c313e65acc1e74bc16130e0502"><td class="mdescLeft">&#160;</td><td class="mdescRight">关闭接收方向  <br /></td></tr>
+<tr class="memitem:a53d78f352e1c34a1d54f475d6eaf7922" id="r_a53d78f352e1c34a1d54f475d6eaf7922"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a53d78f352e1c34a1d54f475d6eaf7922">shutdown_both</a> () noexcept</td></tr>
+<tr class="memdesc:a53d78f352e1c34a1d54f475d6eaf7922"><td class="mdescLeft">&#160;</td><td class="mdescRight">关闭双向通信  <br /></td></tr>
+<tr class="memitem:aebf9cdaaa399bcbdff7e7a47345d039a" id="r_aebf9cdaaa399bcbdff7e7a47345d039a"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aebf9cdaaa399bcbdff7e7a47345d039a">set_option</a> (int level, int optname, const void *value, ::socklen_t len) noexcept</td></tr>
+<tr class="memdesc:aebf9cdaaa399bcbdff7e7a47345d039a"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置socket选项  <br /></td></tr>
+<tr class="memitem:a17ec17b8a17e3bee456b0048596320a8" id="r_a17ec17b8a17e3bee456b0048596320a8"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a17ec17b8a17e3bee456b0048596320a8">get_option</a> (int level, int optname, void *optval, ::socklen_t *optlen) const noexcept</td></tr>
+<tr class="memdesc:a17ec17b8a17e3bee456b0048596320a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取socket选项  <br /></td></tr>
+<tr class="memitem:a3fe176f51955f4696822063fb30d726a" id="r_a3fe176f51955f4696822063fb30d726a"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a3fe176f51955f4696822063fb30d726a">get_reuse_address</a> () const noexcept</td></tr>
+<tr class="memdesc:a3fe176f51955f4696822063fb30d726a"><td class="mdescLeft">&#160;</td><td class="mdescRight">查询地址重用  <br /></td></tr>
+<tr class="memitem:af311eb5e4b8693da9b1d1e16d0b10d13" id="r_af311eb5e4b8693da9b1d1e16d0b10d13"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#af311eb5e4b8693da9b1d1e16d0b10d13">set_reuse_address</a> (bool enable=true) noexcept</td></tr>
+<tr class="memdesc:af311eb5e4b8693da9b1d1e16d0b10d13"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置地址重用  <br /></td></tr>
+<tr class="memitem:aa5bb48b1079264d9664fe804212faa37" id="r_aa5bb48b1079264d9664fe804212faa37"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aa5bb48b1079264d9664fe804212faa37">get_reuse_port</a> () const noexcept</td></tr>
+<tr class="memdesc:aa5bb48b1079264d9664fe804212faa37"><td class="mdescLeft">&#160;</td><td class="mdescRight">查询端口重用  <br /></td></tr>
+<tr class="memitem:ad2cd6c991e1b7689ecffadc57ec44df5" id="r_ad2cd6c991e1b7689ecffadc57ec44df5"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ad2cd6c991e1b7689ecffadc57ec44df5">set_reuse_port</a> (bool enable=true) noexcept</td></tr>
+<tr class="memdesc:ad2cd6c991e1b7689ecffadc57ec44df5"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置端口重用  <br /></td></tr>
+<tr class="memitem:af49df530dda2a79b2c71300f8288bba7" id="r_af49df530dda2a79b2c71300f8288bba7"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#af49df530dda2a79b2c71300f8288bba7">get_keep_alive</a> () const noexcept</td></tr>
+<tr class="memdesc:af49df530dda2a79b2c71300f8288bba7"><td class="mdescLeft">&#160;</td><td class="mdescRight">查询TCP KeepAlive  <br /></td></tr>
+<tr class="memitem:ab55494ddb7435ace44483bf2a13d1b19" id="r_ab55494ddb7435ace44483bf2a13d1b19"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ab55494ddb7435ace44483bf2a13d1b19">set_keep_alive</a> (bool enable=true) noexcept</td></tr>
+<tr class="memdesc:ab55494ddb7435ace44483bf2a13d1b19"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置TCP KeepAlive  <br /></td></tr>
+<tr class="memitem:a21579daf2fbc2531ab85713ed529e487" id="r_a21579daf2fbc2531ab85713ed529e487"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a21579daf2fbc2531ab85713ed529e487">get_tcp_nodelay</a> () const noexcept</td></tr>
+<tr class="memdesc:a21579daf2fbc2531ab85713ed529e487"><td class="mdescLeft">&#160;</td><td class="mdescRight">查询Nagle算法  <br /></td></tr>
+<tr class="memitem:a82ea11bfa98bbbd2ad2d9feeffd44782" id="r_a82ea11bfa98bbbd2ad2d9feeffd44782"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a82ea11bfa98bbbd2ad2d9feeffd44782">set_tcp_nodelay</a> (bool enable=true) noexcept</td></tr>
+<tr class="memdesc:a82ea11bfa98bbbd2ad2d9feeffd44782"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置禁用Nagle算法  <br /></td></tr>
+<tr class="memitem:a520522c4fdfcdc32ab604032228b959f" id="r_a520522c4fdfcdc32ab604032228b959f"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a520522c4fdfcdc32ab604032228b959f">get_receive_buffer_size</a> () const noexcept</td></tr>
+<tr class="memdesc:a520522c4fdfcdc32ab604032228b959f"><td class="mdescLeft">&#160;</td><td class="mdescRight">查询接收缓冲区大小  <br /></td></tr>
+<tr class="memitem:a2b3e9bc783b3e3469bb213604220deed" id="r_a2b3e9bc783b3e3469bb213604220deed"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a2b3e9bc783b3e3469bb213604220deed">set_receive_buffer_size</a> (int <a class="el" href="group___type_erasure_functions.html#ga69955a26617401117eaf53fa82162e2b">size</a>) noexcept</td></tr>
+<tr class="memdesc:a2b3e9bc783b3e3469bb213604220deed"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置接收缓冲区大小  <br /></td></tr>
+<tr class="memitem:a91af69f055fd07c06ce5e03f7714dfcc" id="r_a91af69f055fd07c06ce5e03f7714dfcc"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a91af69f055fd07c06ce5e03f7714dfcc">get_send_buffer_size</a> () const noexcept</td></tr>
+<tr class="memdesc:a91af69f055fd07c06ce5e03f7714dfcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">查询发送缓冲区大小  <br /></td></tr>
+<tr class="memitem:a5b90babf7b270d141fdeeab138550374" id="r_a5b90babf7b270d141fdeeab138550374"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a5b90babf7b270d141fdeeab138550374">set_send_buffer_size</a> (int <a class="el" href="group___type_erasure_functions.html#ga69955a26617401117eaf53fa82162e2b">size</a>) noexcept</td></tr>
+<tr class="memdesc:a5b90babf7b270d141fdeeab138550374"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置发送缓冲区大小  <br /></td></tr>
+<tr class="memitem:a67995540ea809991a0b57c04be823fc6" id="r_a67995540ea809991a0b57c04be823fc6"><td class="memItemLeft"><a class="el" href="classneforce_1_1optional.html">optional</a>&lt; <a class="el" href="group___duration.html#gaa97729fe53f9bafafb607a9e01cf1fa4">milliseconds</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a67995540ea809991a0b57c04be823fc6">get_send_timeout</a> () const noexcept</td></tr>
+<tr class="memdesc:a67995540ea809991a0b57c04be823fc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取发送超时时间  <br /></td></tr>
+<tr class="memitem:a21e4ba35840c0cc904beaaf005a846b1" id="r_a21e4ba35840c0cc904beaaf005a846b1"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a21e4ba35840c0cc904beaaf005a846b1">set_send_timeout</a> (<a class="el" href="group___duration.html#gaa97729fe53f9bafafb607a9e01cf1fa4">milliseconds</a> timeout) noexcept</td></tr>
+<tr class="memdesc:a21e4ba35840c0cc904beaaf005a846b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置发送超时时间  <br /></td></tr>
+<tr class="memitem:acbd2aa324a89474bde619a624e3c9844" id="r_acbd2aa324a89474bde619a624e3c9844"><td class="memItemLeft"><a class="el" href="classneforce_1_1optional.html">optional</a>&lt; <a class="el" href="group___duration.html#gaa97729fe53f9bafafb607a9e01cf1fa4">milliseconds</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#acbd2aa324a89474bde619a624e3c9844">get_receive_timeout</a> () const noexcept</td></tr>
+<tr class="memdesc:acbd2aa324a89474bde619a624e3c9844"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取接收超时时间  <br /></td></tr>
+<tr class="memitem:a3e028a27cad5bca645c4d8f645751dfa" id="r_a3e028a27cad5bca645c4d8f645751dfa"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a3e028a27cad5bca645c4d8f645751dfa">set_receive_timeout</a> (<a class="el" href="group___duration.html#gaa97729fe53f9bafafb607a9e01cf1fa4">milliseconds</a> timeout) noexcept</td></tr>
+<tr class="memdesc:a3e028a27cad5bca645c4d8f645751dfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置接收超时时间  <br /></td></tr>
+<tr class="memitem:abaa18d7f634b115ad1989ec023c0bf32" id="r_abaa18d7f634b115ad1989ec023c0bf32"><td class="memItemLeft"><a class="el" href="classneforce_1_1optional.html">optional</a>&lt; <a class="el" href="classneforce_1_1ip__address.html">ip_address</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#abaa18d7f634b115ad1989ec023c0bf32">local_endpoint</a> () const</td></tr>
+<tr class="memdesc:abaa18d7f634b115ad1989ec023c0bf32"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取本地端点地址  <br /></td></tr>
+<tr class="memitem:ae1a4b45ff284ba83fac92aa5dc4a9adb" id="r_ae1a4b45ff284ba83fac92aa5dc4a9adb"><td class="memItemLeft"><a class="el" href="classneforce_1_1optional.html">optional</a>&lt; <a class="el" href="classneforce_1_1ip__address.html">ip_address</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ae1a4b45ff284ba83fac92aa5dc4a9adb">remote_endpoint</a> () const</td></tr>
+<tr class="memdesc:ae1a4b45ff284ba83fac92aa5dc4a9adb"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取远程端点地址  <br /></td></tr>
+<tr class="memitem:ae7a4566c2df82eb0ba3fff8b5fc7df46" id="r_ae7a4566c2df82eb0ba3fff8b5fc7df46"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae7a4566c2df82eb0ba3fff8b5fc7df46">bind</a> (const <a class="el" href="classneforce_1_1ip__address.html">ip_address</a> &amp;endpoint)</td></tr>
+<tr class="memdesc:ae7a4566c2df82eb0ba3fff8b5fc7df46"><td class="mdescLeft">&#160;</td><td class="mdescRight">绑定socket到本地地址  <br /></td></tr>
+<tr class="memitem:aada611fdaa46fb9f055ef566be7fbd05" id="r_aada611fdaa46fb9f055ef566be7fbd05"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aada611fdaa46fb9f055ef566be7fbd05">listen</a> (int backlog)</td></tr>
+<tr class="memdesc:aada611fdaa46fb9f055ef566be7fbd05"><td class="mdescLeft">&#160;</td><td class="mdescRight">开始监听连接（TCP）  <br /></td></tr>
+<tr class="memitem:a32f1e147a349925c32839fa1ce3b8fdc" id="r_a32f1e147a349925c32839fa1ce3b8fdc"><td class="memItemLeft"><a class="el" href="#a4c5f2953bd5b46ee48a334d5c247bc0d">native_handle_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a32f1e147a349925c32839fa1ce3b8fdc">release</a> () noexcept</td></tr>
+<tr class="memdesc:a32f1e147a349925c32839fa1ce3b8fdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">释放socket所有权  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+静态 Public 属性</h2></td></tr>
+<tr class="memitem:af49691de702dac3413c30d84bb64f734" id="r_af49691de702dac3413c30d84bb64f734"><td class="memItemLeft">static constexpr <a class="el" href="#a4c5f2953bd5b46ee48a334d5c247bc0d">native_handle_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#af49691de702dac3413c30d84bb64f734">invalid_handle</a></td></tr>
+<tr class="memdesc:af49691de702dac3413c30d84bb64f734"><td class="mdescLeft">&#160;</td><td class="mdescRight">无效句柄常量  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected 属性</h2></td></tr>
+<tr class="memitem:a0d91356affbee30bd1e6f7cc483e508d" id="r_a0d91356affbee30bd1e6f7cc483e508d"><td class="memItemLeft"><a id="a0d91356affbee30bd1e6f7cc483e508d" name="a0d91356affbee30bd1e6f7cc483e508d"></a>
+<a class="el" href="#a4c5f2953bd5b46ee48a334d5c247bc0d">native_handle_type</a>&#160;</td><td class="memItemRight"><b>fd_</b> = <a class="el" href="#af49691de702dac3413c30d84bb64f734">invalid_handle</a></td></tr>
+<tr class="memdesc:a0d91356affbee30bd1e6f7cc483e508d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Socket句柄 <br /></td></tr>
+<tr class="memitem:ad636c7b9448f24dcea9ae92e3b27c263" id="r_ad636c7b9448f24dcea9ae92e3b27c263"><td class="memItemLeft"><a id="ad636c7b9448f24dcea9ae92e3b27c263" name="ad636c7b9448f24dcea9ae92e3b27c263"></a>
+bool&#160;</td><td class="memItemRight"><b>nonblocking_</b> {false}</td></tr>
+<tr class="memdesc:ad636c7b9448f24dcea9ae92e3b27c263"><td class="mdescLeft">&#160;</td><td class="mdescRight">非阻塞模式状态跟踪 <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>Socket基础类 </p>
+<p>提供跨平台的socket基础操作，是所有socket类的基类。 支持移动语义，不支持拷贝。</p>
+<p>主要功能：</p><ul>
+<li>Socket创建和关闭</li>
+<li>阻塞/非阻塞模式设置</li>
+<li>Socket选项配置（地址重用、端口重用、TCP_NODELAY、KeepAlive等）</li>
+<li>收发缓冲区大小设置</li>
+<li>超时设置</li>
+<li>本地/远程端点查询</li>
+<li>绑定和监听</li>
+<li>移动语义支持 </li>
+</ul>
+
+<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00081">81</a> 行定义.</p>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
+<a id="a8cbdda2bb8a0e190c258eb25bb445992" name="a8cbdda2bb8a0e190c258eb25bb445992"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cbdda2bb8a0e190c258eb25bb445992">&#9670;&#160;</a></span>protocol</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992">neforce::socket_base::protocol</a> : <a class="el" href="group___core_types.html#gaa0af497ed9ed410d4c911b409653515a">int32_t</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>socket 协议枚举 </p>
+<p>封装了底层协议标识常量，用于指定套接字使用的网络协议类型。 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a8cbdda2bb8a0e190c258eb25bb445992ae1f2d5134ed2543d38a0de9751cf75d9" name="a8cbdda2bb8a0e190c258eb25bb445992ae1f2d5134ed2543d38a0de9751cf75d9"></a>AUTO&#160;</td><td class="fielddoc"><p>自动选择协议 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a8cbdda2bb8a0e190c258eb25bb445992a7d6fe0dd606232f7155fdeae2ea620a9" name="a8cbdda2bb8a0e190c258eb25bb445992a7d6fe0dd606232f7155fdeae2ea620a9"></a>ICMP&#160;</td><td class="fielddoc"><p>Internet 控制报文协议 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a8cbdda2bb8a0e190c258eb25bb445992ab136ef5f6a01d816991fe3cf7a6ac763" name="a8cbdda2bb8a0e190c258eb25bb445992ab136ef5f6a01d816991fe3cf7a6ac763"></a>TCP&#160;</td><td class="fielddoc"><p>传输控制协议 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a8cbdda2bb8a0e190c258eb25bb445992af5ef036b4d8b630721e51fe23489fbc9" name="a8cbdda2bb8a0e190c258eb25bb445992af5ef036b4d8b630721e51fe23489fbc9"></a>UDP&#160;</td><td class="fielddoc"><p>用户数据报协议 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a8cbdda2bb8a0e190c258eb25bb445992a74096394e1dbe6f5b2ac4d54d4e88c97" name="a8cbdda2bb8a0e190c258eb25bb445992a74096394e1dbe6f5b2ac4d54d4e88c97"></a>SCTP&#160;</td><td class="fielddoc"><p>流控制传输协议 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a8cbdda2bb8a0e190c258eb25bb445992a633d6abff0a3fc22404347728d195059" name="a8cbdda2bb8a0e190c258eb25bb445992a633d6abff0a3fc22404347728d195059"></a>RAW&#160;</td><td class="fielddoc"><p>原始 IP 数据包 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a8cbdda2bb8a0e190c258eb25bb445992a3e30ce90c5b1d89ae09b7d4c73d8e172" name="a8cbdda2bb8a0e190c258eb25bb445992a3e30ce90c5b1d89ae09b7d4c73d8e172"></a>ESP&#160;</td><td class="fielddoc"><p>IPsec 封装安全载荷 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a8cbdda2bb8a0e190c258eb25bb445992ae99c19dec2b574bc5d4990504f6cf550" name="a8cbdda2bb8a0e190c258eb25bb445992ae99c19dec2b574bc5d4990504f6cf550"></a>AH&#160;</td><td class="fielddoc"><p>IPsec 认证头 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a8cbdda2bb8a0e190c258eb25bb445992abf522445105e2f387f205558aadad537" name="a8cbdda2bb8a0e190c258eb25bb445992abf522445105e2f387f205558aadad537"></a>DCCP&#160;</td><td class="fielddoc"><p>数据报拥塞控制协议 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a8cbdda2bb8a0e190c258eb25bb445992aa12a3079e14ced46e69ba52b8a90b21a" name="a8cbdda2bb8a0e190c258eb25bb445992aa12a3079e14ced46e69ba52b8a90b21a"></a>IP&#160;</td><td class="fielddoc"><p>IPv4 以太网帧类型 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a8cbdda2bb8a0e190c258eb25bb445992ae18712a7bcb07021704b7d53577c8501" name="a8cbdda2bb8a0e190c258eb25bb445992ae18712a7bcb07021704b7d53577c8501"></a>ARP&#160;</td><td class="fielddoc"><p>地址解析协议帧类型 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a8cbdda2bb8a0e190c258eb25bb445992a3fbcd320695e3a01273994471d09cc36" name="a8cbdda2bb8a0e190c258eb25bb445992a3fbcd320695e3a01273994471d09cc36"></a>IPV6&#160;</td><td class="fielddoc"><p>IPv6 以太网帧类型 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a8cbdda2bb8a0e190c258eb25bb445992ac4a8afa234be2060691c81928eb1b701" name="a8cbdda2bb8a0e190c258eb25bb445992ac4a8afa234be2060691c81928eb1b701"></a>LAT&#160;</td><td class="fielddoc"><p>局域传输协议 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a8cbdda2bb8a0e190c258eb25bb445992a9881f82f0dd89588831f9d1682bd5492" name="a8cbdda2bb8a0e190c258eb25bb445992a9881f82f0dd89588831f9d1682bd5492"></a>VLAN&#160;</td><td class="fielddoc"><p>IEEE 802.1Q VLAN 标签帧 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a8cbdda2bb8a0e190c258eb25bb445992a2bad208e9a1343317d536d15106834ef" name="a8cbdda2bb8a0e190c258eb25bb445992a2bad208e9a1343317d536d15106834ef"></a>LLDP&#160;</td><td class="fielddoc"><p>链路层发现协议 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a8cbdda2bb8a0e190c258eb25bb445992a32ea4687a585ba359fefb81028f20adb" name="a8cbdda2bb8a0e190c258eb25bb445992a32ea4687a585ba359fefb81028f20adb"></a>MPLS&#160;</td><td class="fielddoc"><p>多协议标签交换单播 </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00123">123</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a322e65239feb4f0d2fa3bf3763f31256" name="a322e65239feb4f0d2fa3bf3763f31256"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a322e65239feb4f0d2fa3bf3763f31256">&#9670;&#160;</a></span>type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a322e65239feb4f0d2fa3bf3763f31256">neforce::socket_base::type</a> : <a class="el" href="group___core_types.html#gaa0af497ed9ed410d4c911b409653515a">int32_t</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>socket 类型枚举 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a322e65239feb4f0d2fa3bf3763f31256a2f05998d2a71cdc19b7109549bbe2646" name="a322e65239feb4f0d2fa3bf3763f31256a2f05998d2a71cdc19b7109549bbe2646"></a>STREAM&#160;</td><td class="fielddoc"><p>流式套接字（TCP） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a322e65239feb4f0d2fa3bf3763f31256a6a8389c72b69aa95f82e3ba835c8e207" name="a322e65239feb4f0d2fa3bf3763f31256a6a8389c72b69aa95f82e3ba835c8e207"></a>DGRAM&#160;</td><td class="fielddoc"><p>数据报套接字（UDP） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a322e65239feb4f0d2fa3bf3763f31256a633d6abff0a3fc22404347728d195059" name="a322e65239feb4f0d2fa3bf3763f31256a633d6abff0a3fc22404347728d195059"></a>RAW&#160;</td><td class="fielddoc"><p>原始套接字 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a322e65239feb4f0d2fa3bf3763f31256a006795aeeab570e4ca336932c33932f2" name="a322e65239feb4f0d2fa3bf3763f31256a006795aeeab570e4ca336932c33932f2"></a>RDM&#160;</td><td class="fielddoc"><p>可靠数据报套接字 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a322e65239feb4f0d2fa3bf3763f31256ab2b74031ec7ab401a06dc71d87906ed2" name="a322e65239feb4f0d2fa3bf3763f31256ab2b74031ec7ab401a06dc71d87906ed2"></a>SEQPACKET&#160;</td><td class="fielddoc"><p>有序分组套接字（SCTP） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a322e65239feb4f0d2fa3bf3763f31256a009eaa7119fb4c83c5e487874d7e2218" name="a322e65239feb4f0d2fa3bf3763f31256a009eaa7119fb4c83c5e487874d7e2218"></a>CLOEXEC&#160;</td><td class="fielddoc"><p>执行时关闭标志 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a322e65239feb4f0d2fa3bf3763f31256aafc3203b70037086fb9aa7f2ced7a9f0" name="a322e65239feb4f0d2fa3bf3763f31256aafc3203b70037086fb9aa7f2ced7a9f0"></a>NONBLOCK&#160;</td><td class="fielddoc"><p>非阻塞标志 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a322e65239feb4f0d2fa3bf3763f31256abf522445105e2f387f205558aadad537" name="a322e65239feb4f0d2fa3bf3763f31256abf522445105e2f387f205558aadad537"></a>DCCP&#160;</td><td class="fielddoc"><p>数据报拥塞控制协议（DCCP） </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00105">105</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="accb5b278a3bc2792f893357f1e7e9812" name="accb5b278a3bc2792f893357f1e7e9812"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accb5b278a3bc2792f893357f1e7e9812">&#9670;&#160;</a></span>socket_base() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">neforce::socket_base::socket_base </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a4c5f2953bd5b46ee48a334d5c247bc0d">native_handle_type</a></td>          <td class="paramname"><span class="paramname"><em>fd</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>从原生句柄构造 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td>原生socket句柄 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00159">159</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="socket__base_8hpp_source.html#l00146">fd_</a>.</p>
+
+</div>
+</div>
+<a id="a08db6bdff24ac7930d2010da313fe5f8" name="a08db6bdff24ac7930d2010da313fe5f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08db6bdff24ac7930d2010da313fe5f8">&#9670;&#160;</a></span>socket_base() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">neforce::socket_base::socket_base </td>
+          <td>(</td>
+          <td class="paramtype">socket_base &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00169">169</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="socket__base_8hpp_source.html#l00146">fd_</a>, <a class="el" href="socket__base_8hpp_source.html#l00093">invalid_handle</a>, <a class="el" href="socket__base_8hpp_source.html#l00147">nonblocking_</a> , 以及 <a class="el" href="#a9b8731a4cb059cf60c43ca97aa688162">socket_base()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="ae7a4566c2df82eb0ba3fff8b5fc7df46" name="ae7a4566c2df82eb0ba3fff8b5fc7df46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7a4566c2df82eb0ba3fff8b5fc7df46">&#9670;&#160;</a></span>bind()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::socket_base::bind </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classneforce_1_1ip__address.html">ip_address</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>endpoint</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>绑定socket到本地地址 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">endpoint</td><td>要绑定的IP地址和端口 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1socket__exception.html" title="Socket操作异常类">socket_exception</a></td><td>绑定失败时抛出 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1value__exception.html" title="变量处理异常">value_exception</a></td><td>socket未打开或端点无效时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#ae7a4566c2df82eb0ba3fff8b5fc7df46">bind()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ae7a4566c2df82eb0ba3fff8b5fc7df46">bind()</a>.</p>
+
+</div>
+</div>
+<a id="a8de8f78559fccaf6b9ed6da6b89f27c3" name="a8de8f78559fccaf6b9ed6da6b89f27c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8de8f78559fccaf6b9ed6da6b89f27c3">&#9670;&#160;</a></span>close()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool neforce::socket_base::close </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel virtual">virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>关闭socket </p>
+<dl class="section return"><dt>返回</dt><dd>关闭成功返回true </dd></dl>
+
+<p>被 <a class="el" href="classneforce_1_1ip__socket.html#ac28c4d988187869d423dd9c881b6c1ad">neforce::ip_socket</a> , 以及 <a class="el" href="classneforce_1_1ssl__socket.html#a0fc857de4ea2f2c4c36f3f78f8e3c4c0">neforce::ssl_socket</a> 重载.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="ip__socket_8hpp_source.html#l00137">neforce::ip_socket::close()</a> , 以及 <a class="el" href="socket__base_8hpp_source.html#l00183">~socket_base()</a>.</p>
+
+</div>
+</div>
+<a id="af49df530dda2a79b2c71300f8288bba7" name="af49df530dda2a79b2c71300f8288bba7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af49df530dda2a79b2c71300f8288bba7">&#9670;&#160;</a></span>get_keep_alive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::socket_base::get_keep_alive </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查询TCP KeepAlive </p>
+<dl class="section return"><dt>返回</dt><dd>已启用返回true，失败返回false </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#af49df530dda2a79b2c71300f8288bba7">get_keep_alive()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#af49df530dda2a79b2c71300f8288bba7">get_keep_alive()</a>.</p>
+
+</div>
+</div>
+<a id="a17ec17b8a17e3bee456b0048596320a8" name="a17ec17b8a17e3bee456b0048596320a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17ec17b8a17e3bee456b0048596320a8">&#9670;&#160;</a></span>get_option()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::socket_base::get_option </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>level</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>optname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>optval</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">::socklen_t *</td>          <td class="paramname"><span class="paramname"><em>optlen</em></span>&#160;) const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取socket选项 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">level</td><td>协议层 </td></tr>
+    <tr><td class="paramname">optname</td><td>选项名 </td></tr>
+    <tr><td class="paramname">optval</td><td>输出缓冲区 </td></tr>
+    <tr><td class="paramname">optlen</td><td>输入输出长度 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>获取成功返回true </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a17ec17b8a17e3bee456b0048596320a8">get_option()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a17ec17b8a17e3bee456b0048596320a8">get_option()</a>.</p>
+
+</div>
+</div>
+<a id="a520522c4fdfcdc32ab604032228b959f" name="a520522c4fdfcdc32ab604032228b959f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a520522c4fdfcdc32ab604032228b959f">&#9670;&#160;</a></span>get_receive_buffer_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int neforce::socket_base::get_receive_buffer_size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查询接收缓冲区大小 </p>
+<dl class="section return"><dt>返回</dt><dd>缓冲区大小（字节），失败返回-1 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a520522c4fdfcdc32ab604032228b959f">get_receive_buffer_size()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a520522c4fdfcdc32ab604032228b959f">get_receive_buffer_size()</a>.</p>
+
+</div>
+</div>
+<a id="acbd2aa324a89474bde619a624e3c9844" name="acbd2aa324a89474bde619a624e3c9844"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbd2aa324a89474bde619a624e3c9844">&#9670;&#160;</a></span>get_receive_timeout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1optional.html">optional</a>&lt; <a class="el" href="group___duration.html#gaa97729fe53f9bafafb607a9e01cf1fa4">milliseconds</a> &gt; neforce::socket_base::get_receive_timeout </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取接收超时时间 </p>
+<dl class="section return"><dt>返回</dt><dd>超时时间，失败返回none </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#acbd2aa324a89474bde619a624e3c9844">get_receive_timeout()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#acbd2aa324a89474bde619a624e3c9844">get_receive_timeout()</a>.</p>
+
+</div>
+</div>
+<a id="a3fe176f51955f4696822063fb30d726a" name="a3fe176f51955f4696822063fb30d726a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fe176f51955f4696822063fb30d726a">&#9670;&#160;</a></span>get_reuse_address()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::socket_base::get_reuse_address </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查询地址重用 </p>
+<dl class="section return"><dt>返回</dt><dd>已启用返回true，失败返回false </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a3fe176f51955f4696822063fb30d726a">get_reuse_address()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a3fe176f51955f4696822063fb30d726a">get_reuse_address()</a>.</p>
+
+</div>
+</div>
+<a id="aa5bb48b1079264d9664fe804212faa37" name="aa5bb48b1079264d9664fe804212faa37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5bb48b1079264d9664fe804212faa37">&#9670;&#160;</a></span>get_reuse_port()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::socket_base::get_reuse_port </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查询端口重用 </p>
+<dl class="section return"><dt>返回</dt><dd>已启用返回true，失败或平台不支持返回false </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#aa5bb48b1079264d9664fe804212faa37">get_reuse_port()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#aa5bb48b1079264d9664fe804212faa37">get_reuse_port()</a>.</p>
+
+</div>
+</div>
+<a id="a91af69f055fd07c06ce5e03f7714dfcc" name="a91af69f055fd07c06ce5e03f7714dfcc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91af69f055fd07c06ce5e03f7714dfcc">&#9670;&#160;</a></span>get_send_buffer_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int neforce::socket_base::get_send_buffer_size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查询发送缓冲区大小 </p>
+<dl class="section return"><dt>返回</dt><dd>缓冲区大小（字节），失败返回-1 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a91af69f055fd07c06ce5e03f7714dfcc">get_send_buffer_size()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a91af69f055fd07c06ce5e03f7714dfcc">get_send_buffer_size()</a>.</p>
+
+</div>
+</div>
+<a id="a67995540ea809991a0b57c04be823fc6" name="a67995540ea809991a0b57c04be823fc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67995540ea809991a0b57c04be823fc6">&#9670;&#160;</a></span>get_send_timeout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1optional.html">optional</a>&lt; <a class="el" href="group___duration.html#gaa97729fe53f9bafafb607a9e01cf1fa4">milliseconds</a> &gt; neforce::socket_base::get_send_timeout </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取发送超时时间 </p>
+<dl class="section return"><dt>返回</dt><dd>超时时间，失败返回none </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a67995540ea809991a0b57c04be823fc6">get_send_timeout()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a67995540ea809991a0b57c04be823fc6">get_send_timeout()</a>.</p>
+
+</div>
+</div>
+<a id="a21579daf2fbc2531ab85713ed529e487" name="a21579daf2fbc2531ab85713ed529e487"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21579daf2fbc2531ab85713ed529e487">&#9670;&#160;</a></span>get_tcp_nodelay()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::socket_base::get_tcp_nodelay </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查询Nagle算法 </p>
+<dl class="section return"><dt>返回</dt><dd>已禁用Nagle返回true，失败返回false </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a21579daf2fbc2531ab85713ed529e487">get_tcp_nodelay()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a21579daf2fbc2531ab85713ed529e487">get_tcp_nodelay()</a>.</p>
+
+</div>
+</div>
+<a id="acf76f07c4bb9652e701eb39247850f76" name="acf76f07c4bb9652e701eb39247850f76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf76f07c4bb9652e701eb39247850f76">&#9670;&#160;</a></span>is_nonblocking()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::socket_base::is_nonblocking </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查询是否为非阻塞模式 </p>
+<dl class="section return"><dt>返回</dt><dd>非阻塞返回true </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#acf76f07c4bb9652e701eb39247850f76">is_nonblocking()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#acf76f07c4bb9652e701eb39247850f76">is_nonblocking()</a>.</p>
+
+</div>
+</div>
+<a id="a688c59e456551b33a230cb139dbd685a" name="a688c59e456551b33a230cb139dbd685a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a688c59e456551b33a230cb139dbd685a">&#9670;&#160;</a></span>is_open()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::socket_base::is_open </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查socket是否已打开 </p>
+<dl class="section return"><dt>返回</dt><dd>已打开返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00195">195</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="socket__base_8hpp_source.html#l00146">fd_</a> , 以及 <a class="el" href="socket__base_8hpp_source.html#l00093">invalid_handle</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="smtp__socket_8hpp_source.html#l00388">neforce::smtp_socket::is_connected()</a> , 以及 <a class="el" href="socket__base_8hpp_source.html#l00201">operator bool()</a>.</p>
+
+</div>
+</div>
+<a id="aada611fdaa46fb9f055ef566be7fbd05" name="aada611fdaa46fb9f055ef566be7fbd05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aada611fdaa46fb9f055ef566be7fbd05">&#9670;&#160;</a></span>listen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::socket_base::listen </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>backlog</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>开始监听连接（TCP） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">backlog</td><td>连接队列大小 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1socket__exception.html" title="Socket操作异常类">socket_exception</a></td><td>监听失败时抛出 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1value__exception.html" title="变量处理异常">value_exception</a></td><td>socket未打开时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#aada611fdaa46fb9f055ef566be7fbd05">listen()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#aada611fdaa46fb9f055ef566be7fbd05">listen()</a>.</p>
+
+</div>
+</div>
+<a id="abaa18d7f634b115ad1989ec023c0bf32" name="abaa18d7f634b115ad1989ec023c0bf32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abaa18d7f634b115ad1989ec023c0bf32">&#9670;&#160;</a></span>local_endpoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1optional.html">optional</a>&lt; <a class="el" href="classneforce_1_1ip__address.html">ip_address</a> &gt; neforce::socket_base::local_endpoint </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取本地端点地址 </p>
+<dl class="section return"><dt>返回</dt><dd>本地IP地址和端口，失败返回none </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#abaa18d7f634b115ad1989ec023c0bf32">local_endpoint()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#abaa18d7f634b115ad1989ec023c0bf32">local_endpoint()</a>.</p>
+
+</div>
+</div>
+<a id="a55e7e77823236aaf022990256793783d" name="a55e7e77823236aaf022990256793783d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55e7e77823236aaf022990256793783d">&#9670;&#160;</a></span>native_handle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a4c5f2953bd5b46ee48a334d5c247bc0d">native_handle_type</a> neforce::socket_base::native_handle </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取原生句柄 </p>
+<dl class="section return"><dt>返回</dt><dd>原生socket句柄 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00189">189</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="socket__base_8hpp_source.html#l00146">fd_</a>.</p>
+
+</div>
+</div>
+<a id="aa25cb567f6980041f5dc74b91913eb6d" name="aa25cb567f6980041f5dc74b91913eb6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa25cb567f6980041f5dc74b91913eb6d">&#9670;&#160;</a></span>open()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::socket_base::open </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1ip__address.html#a5632d25a52dfda97486b1aa3b6cc69a8">family</a></td>          <td class="paramname"><span class="paramname"><em>f</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a322e65239feb4f0d2fa3bf3763f31256">type</a></td>          <td class="paramname"><span class="paramname"><em>t</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a322e65239feb4f0d2fa3bf3763f31256a2f05998d2a71cdc19b7109549bbe2646">type::STREAM</a></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992">protocol</a></td>          <td class="paramname"><span class="paramname"><em>p</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992ae1f2d5134ed2543d38a0de9751cf75d9">protocol::AUTO</a></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>打开socket </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>地址族 </td></tr>
+    <tr><td class="paramname">t</td><td>socket类型 </td></tr>
+    <tr><td class="paramname">p</td><td>协议 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1socket__exception.html" title="Socket操作异常类">socket_exception</a></td><td>创建失败时抛出 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1value__exception.html" title="变量处理异常">value_exception</a></td><td>地址族无效时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="socket__base_8hpp_source.html#l00124">AUTO</a> , 以及 <a class="el" href="socket__base_8hpp_source.html#l00106">STREAM</a>.</p>
+
+</div>
+</div>
+<a id="ac4c5240cbfd92f1b31e3f8dc7093987a" name="ac4c5240cbfd92f1b31e3f8dc7093987a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4c5240cbfd92f1b31e3f8dc7093987a">&#9670;&#160;</a></span>operator bool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">neforce::socket_base::operator bool </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>布尔转换运算符 </p>
+<dl class="section return"><dt>返回</dt><dd>已打开返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00201">201</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="socket__base_8hpp_source.html#l00195">is_open()</a>.</p>
+
+</div>
+</div>
+<a id="a9e86d2bd403dbba7ba100a163ea130d0" name="a9e86d2bd403dbba7ba100a163ea130d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e86d2bd403dbba7ba100a163ea130d0">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a9b8731a4cb059cf60c43ca97aa688162">socket_base</a> &amp; neforce::socket_base::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a9b8731a4cb059cf60c43ca97aa688162">socket_base</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动赋值运算符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a9b8731a4cb059cf60c43ca97aa688162">socket_base()</a>.</p>
+
+</div>
+</div>
+<a id="a32f1e147a349925c32839fa1ce3b8fdc" name="a32f1e147a349925c32839fa1ce3b8fdc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32f1e147a349925c32839fa1ce3b8fdc">&#9670;&#160;</a></span>release()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a4c5f2953bd5b46ee48a334d5c247bc0d">native_handle_type</a> neforce::socket_base::release </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>释放socket所有权 </p>
+<dl class="section return"><dt>返回</dt><dd>原生socket句柄</dd></dl>
+<p>释放后当前对象不再管理该socket，调用者负责关闭。 </p>
+
+<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00417">417</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="group___swap_utility.html#ga547bf8c038c69a1c8d0d83a5c7c3410c">neforce::exchange()</a>, <a class="el" href="socket__base_8hpp_source.html#l00146">fd_</a>, <a class="el" href="socket__base_8hpp_source.html#l00093">invalid_handle</a> , 以及 <a class="el" href="socket__base_8hpp_source.html#l00417">release()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="socket__base_8hpp_source.html#l00417">release()</a>.</p>
+
+</div>
+</div>
+<a id="ae1a4b45ff284ba83fac92aa5dc4a9adb" name="ae1a4b45ff284ba83fac92aa5dc4a9adb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1a4b45ff284ba83fac92aa5dc4a9adb">&#9670;&#160;</a></span>remote_endpoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1optional.html">optional</a>&lt; <a class="el" href="classneforce_1_1ip__address.html">ip_address</a> &gt; neforce::socket_base::remote_endpoint </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取远程端点地址 </p>
+<dl class="section return"><dt>返回</dt><dd>远程IP地址和端口，失败返回none </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#ae1a4b45ff284ba83fac92aa5dc4a9adb">remote_endpoint()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ae1a4b45ff284ba83fac92aa5dc4a9adb">remote_endpoint()</a>.</p>
+
+</div>
+</div>
+<a id="ab55494ddb7435ace44483bf2a13d1b19" name="ab55494ddb7435ace44483bf2a13d1b19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab55494ddb7435ace44483bf2a13d1b19">&#9670;&#160;</a></span>set_keep_alive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::socket_base::set_keep_alive </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>enable</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置TCP KeepAlive </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">enable</td><td>是否启用 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>设置成功返回true </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#ab55494ddb7435ace44483bf2a13d1b19">set_keep_alive()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ab55494ddb7435ace44483bf2a13d1b19">set_keep_alive()</a>.</p>
+
+</div>
+</div>
+<a id="a9b75e2f51a01febdd29f2fd6941fd2ab" name="a9b75e2f51a01febdd29f2fd6941fd2ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b75e2f51a01febdd29f2fd6941fd2ab">&#9670;&#160;</a></span>set_nonblocking()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::socket_base::set_nonblocking </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>enable</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置非阻塞模式 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">enable</td><td>是否启用 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>设置成功返回true </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a9b75e2f51a01febdd29f2fd6941fd2ab">set_nonblocking()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a9b75e2f51a01febdd29f2fd6941fd2ab">set_nonblocking()</a>.</p>
+
+</div>
+</div>
+<a id="aebf9cdaaa399bcbdff7e7a47345d039a" name="aebf9cdaaa399bcbdff7e7a47345d039a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebf9cdaaa399bcbdff7e7a47345d039a">&#9670;&#160;</a></span>set_option()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::socket_base::set_option </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>level</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>optname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *</td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">::socklen_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置socket选项 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">level</td><td>协议层（SOL_SOCKET、IPPROTO_TCP等） </td></tr>
+    <tr><td class="paramname">optname</td><td>选项名 </td></tr>
+    <tr><td class="paramname">value</td><td>选项值指针 </td></tr>
+    <tr><td class="paramname">len</td><td>值长度 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>设置成功返回true </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#aebf9cdaaa399bcbdff7e7a47345d039a">set_option()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#aebf9cdaaa399bcbdff7e7a47345d039a">set_option()</a>.</p>
+
+</div>
+</div>
+<a id="a2b3e9bc783b3e3469bb213604220deed" name="a2b3e9bc783b3e3469bb213604220deed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b3e9bc783b3e3469bb213604220deed">&#9670;&#160;</a></span>set_receive_buffer_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::socket_base::set_receive_buffer_size </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>size</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置接收缓冲区大小 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>缓冲区大小（字节） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>设置成功返回true </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a2b3e9bc783b3e3469bb213604220deed">set_receive_buffer_size()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">neforce::size()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a2b3e9bc783b3e3469bb213604220deed">set_receive_buffer_size()</a>.</p>
+
+</div>
+</div>
+<a id="a3e028a27cad5bca645c4d8f645751dfa" name="a3e028a27cad5bca645c4d8f645751dfa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e028a27cad5bca645c4d8f645751dfa">&#9670;&#160;</a></span>set_receive_timeout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::socket_base::set_receive_timeout </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___duration.html#gaa97729fe53f9bafafb607a9e01cf1fa4">milliseconds</a></td>          <td class="paramname"><span class="paramname"><em>timeout</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置接收超时时间 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timeout</td><td>超时时间 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>设置成功返回true </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a3e028a27cad5bca645c4d8f645751dfa">set_receive_timeout()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a3e028a27cad5bca645c4d8f645751dfa">set_receive_timeout()</a>.</p>
+
+</div>
+</div>
+<a id="af311eb5e4b8693da9b1d1e16d0b10d13" name="af311eb5e4b8693da9b1d1e16d0b10d13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af311eb5e4b8693da9b1d1e16d0b10d13">&#9670;&#160;</a></span>set_reuse_address()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::socket_base::set_reuse_address </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>enable</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置地址重用 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">enable</td><td>是否启用 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>设置成功返回true </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#af311eb5e4b8693da9b1d1e16d0b10d13">set_reuse_address()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#af311eb5e4b8693da9b1d1e16d0b10d13">set_reuse_address()</a>.</p>
+
+</div>
+</div>
+<a id="ad2cd6c991e1b7689ecffadc57ec44df5" name="ad2cd6c991e1b7689ecffadc57ec44df5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2cd6c991e1b7689ecffadc57ec44df5">&#9670;&#160;</a></span>set_reuse_port()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::socket_base::set_reuse_port </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>enable</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置端口重用 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">enable</td><td>是否启用 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>设置成功返回true（Windows不支持） </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#ad2cd6c991e1b7689ecffadc57ec44df5">set_reuse_port()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ad2cd6c991e1b7689ecffadc57ec44df5">set_reuse_port()</a>.</p>
+
+</div>
+</div>
+<a id="a5b90babf7b270d141fdeeab138550374" name="a5b90babf7b270d141fdeeab138550374"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b90babf7b270d141fdeeab138550374">&#9670;&#160;</a></span>set_send_buffer_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::socket_base::set_send_buffer_size </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>size</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置发送缓冲区大小 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>缓冲区大小（字节） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>设置成功返回true </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a5b90babf7b270d141fdeeab138550374">set_send_buffer_size()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">neforce::size()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a5b90babf7b270d141fdeeab138550374">set_send_buffer_size()</a>.</p>
+
+</div>
+</div>
+<a id="a21e4ba35840c0cc904beaaf005a846b1" name="a21e4ba35840c0cc904beaaf005a846b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21e4ba35840c0cc904beaaf005a846b1">&#9670;&#160;</a></span>set_send_timeout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::socket_base::set_send_timeout </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___duration.html#gaa97729fe53f9bafafb607a9e01cf1fa4">milliseconds</a></td>          <td class="paramname"><span class="paramname"><em>timeout</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置发送超时时间 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timeout</td><td>超时时间 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>设置成功返回true </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a21e4ba35840c0cc904beaaf005a846b1">set_send_timeout()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a21e4ba35840c0cc904beaaf005a846b1">set_send_timeout()</a>.</p>
+
+</div>
+</div>
+<a id="a82ea11bfa98bbbd2ad2d9feeffd44782" name="a82ea11bfa98bbbd2ad2d9feeffd44782"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82ea11bfa98bbbd2ad2d9feeffd44782">&#9670;&#160;</a></span>set_tcp_nodelay()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::socket_base::set_tcp_nodelay </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>enable</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置禁用Nagle算法 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">enable</td><td>是否启用 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>设置成功返回true </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a82ea11bfa98bbbd2ad2d9feeffd44782">set_tcp_nodelay()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a82ea11bfa98bbbd2ad2d9feeffd44782">set_tcp_nodelay()</a>.</p>
+
+</div>
+</div>
+<a id="a53d78f352e1c34a1d54f475d6eaf7922" name="a53d78f352e1c34a1d54f475d6eaf7922"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53d78f352e1c34a1d54f475d6eaf7922">&#9670;&#160;</a></span>shutdown_both()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::socket_base::shutdown_both </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>关闭双向通信 </p>
+<dl class="section return"><dt>返回</dt><dd>成功返回true </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a53d78f352e1c34a1d54f475d6eaf7922">shutdown_both()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a53d78f352e1c34a1d54f475d6eaf7922">shutdown_both()</a>.</p>
+
+</div>
+</div>
+<a id="a852458c313e65acc1e74bc16130e0502" name="a852458c313e65acc1e74bc16130e0502"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a852458c313e65acc1e74bc16130e0502">&#9670;&#160;</a></span>shutdown_receive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::socket_base::shutdown_receive </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>关闭接收方向 </p>
+<dl class="section return"><dt>返回</dt><dd>成功返回true </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a852458c313e65acc1e74bc16130e0502">shutdown_receive()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a852458c313e65acc1e74bc16130e0502">shutdown_receive()</a>.</p>
+
+</div>
+</div>
+<a id="ac0d78cde8681391cedca79f28e89119e" name="ac0d78cde8681391cedca79f28e89119e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0d78cde8681391cedca79f28e89119e">&#9670;&#160;</a></span>shutdown_send()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::socket_base::shutdown_send </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>关闭发送方向 </p>
+<dl class="section return"><dt>返回</dt><dd>成功返回true </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#ac0d78cde8681391cedca79f28e89119e">shutdown_send()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ac0d78cde8681391cedca79f28e89119e">shutdown_send()</a>.</p>
+
+</div>
+</div>
+<a id="a6b1c0921703871f28d6903be8f02690e" name="a6b1c0921703871f28d6903be8f02690e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b1c0921703871f28d6903be8f02690e">&#9670;&#160;</a></span>try_open()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::socket_base::try_open </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1ip__address.html#a5632d25a52dfda97486b1aa3b6cc69a8">family</a></td>          <td class="paramname"><span class="paramname"><em>f</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a322e65239feb4f0d2fa3bf3763f31256">type</a></td>          <td class="paramname"><span class="paramname"><em>t</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a322e65239feb4f0d2fa3bf3763f31256a2f05998d2a71cdc19b7109549bbe2646">type::STREAM</a></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992">protocol</a></td>          <td class="paramname"><span class="paramname"><em>p</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a8cbdda2bb8a0e190c258eb25bb445992ae1f2d5134ed2543d38a0de9751cf75d9">protocol::AUTO</a></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>尝试打开socket </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>地址族 </td></tr>
+    <tr><td class="paramname">t</td><td>socket类型 </td></tr>
+    <tr><td class="paramname">p</td><td>协议 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>打开成功返回true </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a6b1c0921703871f28d6903be8f02690e">try_open()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a6b1c0921703871f28d6903be8f02690e">try_open()</a>.</p>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">类成员变量说明</h2>
+<a id="af49691de702dac3413c30d84bb64f734" name="af49691de702dac3413c30d84bb64f734"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af49691de702dac3413c30d84bb64f734">&#9670;&#160;</a></span>invalid_handle</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a4c5f2953bd5b46ee48a334d5c247bc0d">native_handle_type</a> neforce::socket_base::invalid_handle</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>初始值:</b><div class="fragment"><div class="line">                                           =</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_function" href="classneforce_1_1numeric__traits.html#a3a4cc2bdbf7e98a487d29367781db135">numeric_traits&lt;native_handle_type&gt;::max</a>()</div>
+<div class="ttc" id="aclassneforce_1_1numeric__traits_html_a3a4cc2bdbf7e98a487d29367781db135"><div class="ttname"><a href="classneforce_1_1numeric__traits.html#a3a4cc2bdbf7e98a487d29367781db135">neforce::numeric_traits::max</a></div><div class="ttdeci">static constexpr T max() noexcept</div><div class="ttdoc">获取类型的最大值</div><div class="ttdef"><b>定义</b> <a href="numeric__traits_8hpp_source.html#l00153">numeric_traits.hpp:153</a></div></div>
+</div><!-- fragment -->
+<p>无效句柄常量 </p>
+<p>无效句柄 </p>
+
+<p class="definition">在文件 <a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a> 第 <a class="el" href="socket__base_8hpp_source.html#l00093">93</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="socket__base_8hpp_source.html#l00195">is_open()</a>, <a class="el" href="socket__base_8hpp_source.html#l00417">release()</a> , 以及 <a class="el" href="socket__base_8hpp_source.html#l00169">socket_base()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="socket__base_8hpp_source.html">socket_base.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><a href="classneforce_1_1socket__base.html">socket_base</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

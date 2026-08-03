@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['合并算法_0',['合并算法',['../group___merge_algorithms.html',1,'']]],
-  ['合成规则_1',['Alpha 合成规则',['../group___color.html#alpha_compositing',1,'']]]
+  ['可读类型名_0',['可读类型名',['../group___check_type.html',1,'']]],
+  ['可调用函数_1',['可调用函数',['../group___invoke_function.html',1,'']]],
+  ['可转换性检查_2',['可转换性检查',['../group___convertible_checks.html',1,'']]],
+  ['可选值_3',['可选值',['../group___optional.html',1,'']]]
 ];

@@ -3,30 +3,31 @@
   <compounddef id="group___base_type_properties" kind="group">
     <compoundname>BaseTypeProperties</compoundname>
     <title>类型基本属性查询</title>
-    <innerclass refid="structis__void" prot="public">is_void</innerclass>
-    <innerclass refid="structpackage" prot="public">package</innerclass>
-    <innerclass refid="structis__packaged" prot="public">is_packaged</innerclass>
-    <innerclass refid="structunpackage" prot="public">unpackage</innerclass>
-    <innerclass refid="structis__unpackaged" prot="public">is_unpackaged</innerclass>
-    <innerclass refid="structis__character" prot="public">is_character</innerclass>
-    <innerclass refid="structis__boolean" prot="public">is_boolean</innerclass>
-    <innerclass refid="structis__standard__integral" prot="public">is_standard_integral</innerclass>
-    <innerclass refid="structis__integral" prot="public">is_integral</innerclass>
-    <innerclass refid="structis__floating__point" prot="public">is_floating_point</innerclass>
-    <innerclass refid="structis__arithmetic" prot="public">is_arithmetic</innerclass>
-    <innerclass refid="structis__signed" prot="public">is_signed</innerclass>
-    <innerclass refid="structis__unsigned" prot="public">is_unsigned</innerclass>
+    <innerclass refid="structneforce_1_1is__void" prot="public">neforce::is_void</innerclass>
+    <innerclass refid="structneforce_1_1package" prot="public">neforce::package</innerclass>
+    <innerclass refid="structneforce_1_1is__packaged" prot="public">neforce::is_packaged</innerclass>
+    <innerclass refid="structneforce_1_1unpackage" prot="public">neforce::unpackage</innerclass>
+    <innerclass refid="structneforce_1_1is__unpackaged" prot="public">neforce::is_unpackaged</innerclass>
+    <innerclass refid="structneforce_1_1is__character" prot="public">neforce::is_character</innerclass>
+    <innerclass refid="structneforce_1_1is__boolean" prot="public">neforce::is_boolean</innerclass>
+    <innerclass refid="structneforce_1_1is__standard__integral" prot="public">neforce::is_standard_integral</innerclass>
+    <innerclass refid="structneforce_1_1is__integral" prot="public">neforce::is_integral</innerclass>
+    <innerclass refid="structneforce_1_1is__floating__point" prot="public">neforce::is_floating_point</innerclass>
+    <innerclass refid="structneforce_1_1is__arithmetic" prot="public">neforce::is_arithmetic</innerclass>
+    <innerclass refid="structneforce_1_1is__signed" prot="public">neforce::is_signed</innerclass>
+    <innerclass refid="structneforce_1_1is__unsigned" prot="public">neforce::is_unsigned</innerclass>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="group___base_type_properties_1gad3210ef30a41dfbe37f4b0afa11cf9d1" prot="public" static="no">
+      <memberdef kind="typedef" id="group___base_type_properties_1ga9eca205c8a27df00608dfff25ce988c0" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>typename <ref refid="structpackage" kindref="compound">package</ref>&lt; T &gt;::type</type>
-        <definition>using package_t = typename package&lt;T&gt;::type</definition>
+        <type>typename package&lt; T &gt;::type</type>
+        <definition>using neforce::package_t = typename package&lt;T&gt;::type</definition>
         <argsstring></argsstring>
         <name>package_t</name>
+        <qualifiedname>neforce::package_t</qualifiedname>
         <briefdescription>
 <para>package的便捷别名 </para>
         </briefdescription>
@@ -36,16 +37,17 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="748" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="748" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___base_type_properties_1ga0daf8188b889215ad0478918b10089b7" prot="public" static="no">
+      <memberdef kind="typedef" id="group___base_type_properties_1ga0d1890d6f94d75d0c7bc3e5560be74c6" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>typename <ref refid="structunpackage" kindref="compound">unpackage</ref>&lt; T &gt;::type</type>
-        <definition>using unpackage_t = typename unpackage&lt;T&gt;::type</definition>
+        <type>typename unpackage&lt; T &gt;::type</type>
+        <definition>using neforce::unpackage_t = typename unpackage&lt;T&gt;::type</definition>
         <argsstring></argsstring>
         <name>unpackage_t</name>
+        <qualifiedname>neforce::unpackage_t</qualifiedname>
         <briefdescription>
 <para>unpackage的便捷别名 </para>
         </briefdescription>
@@ -55,16 +57,17 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="783" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="783" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___base_type_properties_1ga9e08ce71ba48276662ca90b1d8b2a4a2" prot="public" static="no">
+      <memberdef kind="typedef" id="group___base_type_properties_1gab983bdfe0b33096be18fe91621f12f7d" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type><ref refid="group___base_type_properties_1ga0daf8188b889215ad0478918b10089b7" kindref="member">unpackage_t</ref>&lt; <ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt; T &gt; &gt;</type>
-        <definition>using unpack_remove_cvref_t = unpackage_t&lt;remove_cvref_t&lt;T&gt;&gt;</definition>
+        <type>unpackage_t&lt; remove_cvref_t&lt; T &gt; &gt;</type>
+        <definition>using neforce::unpack_remove_cvref_t = unpackage_t&lt;remove_cvref_t&lt;T&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>unpack_remove_cvref_t</name>
+        <qualifiedname>neforce::unpack_remove_cvref_t</qualifiedname>
         <briefdescription>
 <para>同时解包并移除cv和引用限定符 </para>
         </briefdescription>
@@ -76,17 +79,18 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="group___base_type_properties_1ga4414ccc8655262f0522dc640003d64b7" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___base_type_properties_1gab2bec1334cb4a7c0ffcbf73e88b170e1" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_void_v</definition>
+        <definition>bool neforce::is_void_v</definition>
         <argsstring></argsstring>
         <name>is_void_v</name>
-        <initializer>= <ref refid="structis__void" kindref="compound">is_void</ref>&lt;T&gt;::value</initializer>
+        <qualifiedname>neforce::is_void_v</qualifiedname>
+        <initializer>= is_void&lt;T&gt;::value</initializer>
         <briefdescription>
 <para>is_void的便捷变量模板 </para>
         </briefdescription>
@@ -96,17 +100,18 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="728" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="728" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="group___base_type_properties_1ga8b05ec45a809cf721186814267d41579" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___base_type_properties_1gabda05f85eb9f49982d40dae64b1af1d8" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_packaged_v</definition>
+        <definition>bool neforce::is_packaged_v</definition>
         <argsstring></argsstring>
         <name>is_packaged_v</name>
-        <initializer>= <ref refid="structis__packaged" kindref="compound">is_packaged</ref>&lt;T&gt;::value</initializer>
+        <qualifiedname>neforce::is_packaged_v</qualifiedname>
+        <initializer>= is_packaged&lt;T&gt;::value</initializer>
         <briefdescription>
 <para>is_packaged的便捷变量模板 </para>
         </briefdescription>
@@ -116,17 +121,18 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="764" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="764" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="group___base_type_properties_1gafb08dcfe67d533373f275e9eb97a1678" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___base_type_properties_1ga7d205f6899d44ada7ebf061a341b5f80" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_unpackaged_v</definition>
+        <definition>bool neforce::is_unpackaged_v</definition>
         <argsstring></argsstring>
         <name>is_unpackaged_v</name>
-        <initializer>= <ref refid="structis__unpackaged" kindref="compound">is_unpackaged</ref>&lt;T&gt;::value</initializer>
+        <qualifiedname>neforce::is_unpackaged_v</qualifiedname>
+        <initializer>= is_unpackaged&lt;T&gt;::value</initializer>
         <briefdescription>
 <para>is_unpackaged的便捷变量模板 </para>
         </briefdescription>
@@ -136,17 +142,18 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="806" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="806" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___base_type_properties_1gaf58b1a14e5f65edead887d77305c34f3" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_character_v</definition>
+        <definition>bool neforce::is_character_v</definition>
         <argsstring></argsstring>
         <name>is_character_v</name>
-        <initializer>= <ref refid="structis__character" kindref="compound">is_character</ref>&lt;T&gt;::value</initializer>
+        <qualifiedname>neforce::is_character_v</qualifiedname>
+        <initializer>= is_character&lt;T&gt;::value</initializer>
         <briefdescription>
 <para>is_character的便捷变量模板 </para>
         </briefdescription>
@@ -155,28 +162,29 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="829" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="829" bodyend="-1"/>
-        <referencedby refid="group___char_type_checking_1ga87c396eea7e0b05e684981b3af531272" compoundref="char__types_8hpp" startline="233" endline="240">is_alpha</referencedby>
-        <referencedby refid="group___char_type_checking_1gaa544593194d9a5cfcb4c9fe9063223ca" compoundref="char__types_8hpp" startline="203" endline="207">is_ascii</referencedby>
-        <referencedby refid="group___char_type_checking_1ga22ea4bfb2c30902c812615c48b4b988f" compoundref="char__types_8hpp" startline="175" endline="179">is_blank</referencedby>
-        <referencedby refid="group___char_type_checking_1gab784815a489653e65523e40034c86a8a" compoundref="char__types_8hpp" startline="115" endline="126">is_ctype</referencedby>
-        <referencedby refid="group___char_type_checking_1ga4fc901d6cfb9b3a9de9b6d06f807f49a" compoundref="char__types_8hpp" startline="251" endline="258">is_digit</referencedby>
-        <referencedby refid="group___char_type_checking_1ga35e7919c25a56d355b56386112955f55" compoundref="char__types_8hpp" startline="218" endline="222">is_space</referencedby>
-        <referencedby refid="group___char_type_checking_1gaf329135812f53c1ae2597c6d1ba6fbb4" compoundref="char__types_8hpp" startline="269" endline="279">is_xdigit</referencedby>
-        <referencedby refid="group___string_operations_1ga631599b4dc693de49c735b01e7579124" compoundref="memory_2memory_8hpp" startline="660" endline="670">string_length</referencedby>
-        <referencedby refid="group___char_case_conversion_1ga60868f83d50ae1a9b15e63b0df3e85d7" compoundref="memory_2memory_8hpp" startline="343" endline="351">to_lowercase</referencedby>
-        <referencedby refid="group___char_case_conversion_1ga7ef07b1f70b4539589f7d0ff1eddc003" compoundref="memory_2memory_8hpp" startline="362" endline="370">to_uppercase</referencedby>
+        <referencedby refid="group___char_type_checking_1ga3f1c425b9db4717c192dc42a120f1692" compoundref="char__types_8hpp" startline="233" endline="240">neforce::is_alpha</referencedby>
+        <referencedby refid="group___char_type_checking_1ga4cdc531870c46e3d55719403e5a2e319" compoundref="char__types_8hpp" startline="203" endline="207">neforce::is_ascii</referencedby>
+        <referencedby refid="group___char_type_checking_1ga8dd58df52dc4f67cc69ad918fd255b41" compoundref="char__types_8hpp" startline="175" endline="179">neforce::is_blank</referencedby>
+        <referencedby refid="group___char_type_checking_1ga02c82954f5817c3735a098178f7a49ca" compoundref="char__types_8hpp" startline="115" endline="126">neforce::is_ctype</referencedby>
+        <referencedby refid="group___char_type_checking_1ga3a878d37403ab95f02a8ea85d09ac183" compoundref="char__types_8hpp" startline="251" endline="258">neforce::is_digit</referencedby>
+        <referencedby refid="group___char_type_checking_1gadb31007c1370f42708e3df86f99427c9" compoundref="char__types_8hpp" startline="218" endline="222">neforce::is_space</referencedby>
+        <referencedby refid="group___char_type_checking_1gaca259f68678a1e62bca949379a252180" compoundref="char__types_8hpp" startline="269" endline="279">neforce::is_xdigit</referencedby>
+        <referencedby refid="group___string_operations_1gaf9eef56646ba053a75f4175b18c854bd" compoundref="memory_2memory_8hpp" startline="660" endline="670">neforce::string_length</referencedby>
+        <referencedby refid="group___char_case_conversion_1ga0dd2c6080624be33a9160b84f6f1c0e5" compoundref="memory_2memory_8hpp" startline="343" endline="351">neforce::to_lowercase</referencedby>
+        <referencedby refid="group___char_case_conversion_1gae737571fd3de79857498ef5b8c261142" compoundref="memory_2memory_8hpp" startline="362" endline="370">neforce::to_uppercase</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="group___base_type_properties_1ga437c8a9383e59a9a503d9831ed5139e7" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___base_type_properties_1ga4a955f32b13c291a622f6c4d6d15971e" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_boolean_v</definition>
+        <definition>bool neforce::is_boolean_v</definition>
         <argsstring></argsstring>
         <name>is_boolean_v</name>
-        <initializer>= <ref refid="structis__boolean" kindref="compound">is_boolean</ref>&lt;T&gt;::value</initializer>
+        <qualifiedname>neforce::is_boolean_v</qualifiedname>
+        <initializer>= is_boolean&lt;T&gt;::value</initializer>
         <briefdescription>
 <para>is_boolean的便捷变量模板 </para>
         </briefdescription>
@@ -185,20 +193,21 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="847" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="847" bodyend="-1"/>
-        <referencedby refid="structsignal_1aa9277d30b26d90895c1b47f89be50e3c" compoundref="signals_8hpp" startline="664" endline="676">signal&lt; T &gt;::connect_if</referencedby>
-        <referencedby refid="structsignal_1a8f761800f9a11daf0a1360a176920811" compoundref="signals_8hpp" startline="692" endline="707">signal&lt; T &gt;::connect_if</referencedby>
+        <referencedby refid="structneforce_1_1signal_1aa790770adf6f55f3df2217419cc84d9f" compoundref="signals_8hpp" startline="664" endline="676">neforce::signal&lt; T &gt;::connect_if</referencedby>
+        <referencedby refid="structneforce_1_1signal_1afa161f49d5716ee826f4e08d6719cfcf" compoundref="signals_8hpp" startline="692" endline="707">neforce::signal&lt; T &gt;::connect_if</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="group___base_type_properties_1gadc0c75ebc7797b1fcf082a12cb8be17b" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___base_type_properties_1gad7c29b9d49e3c8e8daef52395ab402fd" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_standard_integral_v</definition>
+        <definition>bool neforce::is_standard_integral_v</definition>
         <argsstring></argsstring>
         <name>is_standard_integral_v</name>
-        <initializer>= <ref refid="structis__standard__integral" kindref="compound">is_standard_integral</ref>&lt;T&gt;::value</initializer>
+        <qualifiedname>neforce::is_standard_integral_v</qualifiedname>
+        <initializer>= is_standard_integral&lt;T&gt;::value</initializer>
         <briefdescription>
 <para>is_standard_integral的便捷变量模板 </para>
         </briefdescription>
@@ -208,17 +217,18 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="869" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="869" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="group___base_type_properties_1ga396e4b8c756441b942c1619de108e56a" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___base_type_properties_1gae89b1cceebf060e6fc2c22b76bc69869" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_integral_v</definition>
+        <definition>bool neforce::is_integral_v</definition>
         <argsstring></argsstring>
         <name>is_integral_v</name>
-        <initializer>= <ref refid="structis__integral" kindref="compound">is_integral</ref>&lt;T&gt;::value</initializer>
+        <qualifiedname>neforce::is_integral_v</qualifiedname>
+        <initializer>= is_integral&lt;T&gt;::value</initializer>
         <briefdescription>
 <para>is_integral的便捷变量模板 </para>
         </briefdescription>
@@ -227,46 +237,47 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="889" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="889" bodyend="-1"/>
-        <referencedby refid="group___atomic_operations_1ga997283224060aabe3abb93501aa18d42" compoundref="atomic__base_8hpp" startline="838" endline="846">atomic_add_fetch</referencedby>
-        <referencedby refid="group___atomic_operations_1gab9b13da068b8edd78f4cf66566c49a95" compoundref="atomic__base_8hpp" startline="878" endline="886">atomic_and_fetch</referencedby>
-        <referencedby refid="group___atomic_operations_1ga256cb2ebf0dd27696aaacdaa7222dd22" compoundref="atomic__base_8hpp" startline="687" endline="710">atomic_cmpexch_strong</referencedby>
-        <referencedby refid="group___atomic_operations_1gaf8d716de35ef450ae5ad2a36daeaa395" compoundref="atomic__base_8hpp" startline="546" endline="672">atomic_cmpexch_weak</referencedby>
-        <referencedby refid="group___atomic_operations_1gac2c6ce30140f303d56d8ba2fd436973b" compoundref="atomic__base_8hpp" startline="519" endline="531">atomic_exchange</referencedby>
-        <referencedby refid="group___atomic_operations_1gafd379e44f03b964183af9b92423f5c96" compoundref="atomic__base_8hpp" startline="722" endline="734">atomic_fetch_add</referencedby>
-        <referencedby refid="group___atomic_operations_1gad91d94c131515208781b255ec5a2d2ab" compoundref="atomic__base_8hpp" startline="766" endline="778">atomic_fetch_and</referencedby>
-        <referencedby refid="group___atomic_operations_1ga182cc4ec32727b206b6bf0404f7d23d0" compoundref="atomic__base_8hpp" startline="790" endline="802">atomic_fetch_or</referencedby>
-        <referencedby refid="group___atomic_operations_1gac61d9fd541d5b9aef14a1067e3538924" compoundref="atomic__base_8hpp" startline="746" endline="754">atomic_fetch_sub</referencedby>
-        <referencedby refid="group___atomic_operations_1gab370fe73a369d618c7810547f71b61c4" compoundref="atomic__base_8hpp" startline="814" endline="826">atomic_fetch_xor</referencedby>
-        <referencedby refid="group___atomic_operations_1gac97fbbd35fc0bf2a6051feefa461a711" compoundref="atomic__base_8hpp" startline="496" endline="507">atomic_load</referencedby>
-        <referencedby refid="group___atomic_operations_1gac7b60e55335293cbc400c9e8c481489c" compoundref="atomic__base_8hpp" startline="898" endline="906">atomic_or_fetch</referencedby>
-        <referencedby refid="group___atomic_operations_1gad653d72ae99e1e5262569ac9028d923d" compoundref="atomic__base_8hpp" startline="474" endline="485">atomic_store</referencedby>
-        <referencedby refid="group___atomic_operations_1ga1a2061210bbb322408eea7178a25f454" compoundref="atomic__base_8hpp" startline="858" endline="866">atomic_sub_fetch</referencedby>
-        <referencedby refid="group___atomic_operations_1ga6c07918d29c54f70597709966d651b49" compoundref="atomic__base_8hpp" startline="918" endline="926">atomic_xor_fetch</referencedby>
-        <referencedby refid="structendian_1a5e265d741e65a6f39ee0708b8613b350" compoundref="endian_8hpp" startline="216" endline="219">endian::be_to_host</referencedby>
-        <referencedby refid="structendian_1adbc7a60b10d5d4ac1682800a257e211c" compoundref="endian_8hpp" startline="202" endline="205">endian::host_to_be</referencedby>
-        <referencedby refid="structendian_1a86780439f75809f5aa30982eff450082" compoundref="endian_8hpp" startline="174" endline="177">endian::host_to_le</referencedby>
-        <referencedby refid="structendian_1a4770af386d457ada27a7686ff76f7d29" compoundref="endian_8hpp" startline="146" endline="149">endian::host_to_network</referencedby>
-        <referencedby refid="structendian_1a362668aafc20310c49b6f4d192970cda" compoundref="endian_8hpp" startline="188" endline="191">endian::le_to_host</referencedby>
-        <referencedby refid="structendian_1a977e07707b1e8a198fca38f7226b0281" compoundref="endian_8hpp" startline="160" endline="163">endian::network_to_host</referencedby>
-        <referencedby refid="classrandom__lcd_1a120c22f0946ee1533dfbaa16e02cb338" compoundref="random_8hpp" startline="166" endline="169">random_lcd::next_int</referencedby>
-        <referencedby refid="classrandom__lcd_1ab7827758610c019138c8ab81e3663d36" compoundref="random_8hpp" startline="135" endline="143">random_lcd::next_int</referencedby>
-        <referencedby refid="classrandom__mt_1aaab18ba803326933c9736f5d04dfa0c6" compoundref="random_8hpp" startline="320" endline="323">random_mt::next_int</referencedby>
-        <referencedby refid="classrandom__mt_1a133d986c3768a4eaaeddb5b2ec29e2f2" compoundref="random_8hpp" startline="289" endline="297">random_mt::next_int</referencedby>
-        <referencedby refid="classsecret_1a4016adb7256ce196b40dc06eddc13b18" compoundref="random_8hpp" startline="452" endline="455">secret::next_int</referencedby>
-        <referencedby refid="classsecret_1a7afdcbb0a82962dd7bf2cecce823827d" compoundref="random_8hpp" startline="418" endline="429">secret::next_int</referencedby>
-        <referencedby refid="structendian_1a5bb14523985a0b874fa6cda425b9e764" compoundref="endian_8hpp" startline="230" endline="233">endian::swap_endian</referencedby>
+        <referencedby refid="group___atomic_operations_1gad5b52adb397a640d5c1ea3d7265ee276" compoundref="atomic__base_8hpp" startline="849" endline="857">neforce::atomic_add_fetch</referencedby>
+        <referencedby refid="group___atomic_operations_1ga3da624c7f6c3e64ff59e03d98dea419c" compoundref="atomic__base_8hpp" startline="889" endline="897">neforce::atomic_and_fetch</referencedby>
+        <referencedby refid="group___atomic_operations_1ga220f1c58eb3de4b40cd0f564b668d722" compoundref="atomic__base_8hpp" startline="698" endline="721">neforce::atomic_cmpexch_strong</referencedby>
+        <referencedby refid="group___atomic_operations_1ga675158fb0b26507d61701769f2140def" compoundref="atomic__base_8hpp" startline="557" endline="683">neforce::atomic_cmpexch_weak</referencedby>
+        <referencedby refid="group___atomic_operations_1gac4c722ee7b31e06003e12f2cbce47a2b" compoundref="atomic__base_8hpp" startline="530" endline="542">neforce::atomic_exchange</referencedby>
+        <referencedby refid="group___atomic_operations_1gaccabd3150a80669efa7545bbf7f0cc92" compoundref="atomic__base_8hpp" startline="733" endline="745">neforce::atomic_fetch_add</referencedby>
+        <referencedby refid="group___atomic_operations_1ga25687c70fb46f42b3edce052a266e15f" compoundref="atomic__base_8hpp" startline="777" endline="789">neforce::atomic_fetch_and</referencedby>
+        <referencedby refid="group___atomic_operations_1ga5bef9fbc65069566766b0687a6f90ad7" compoundref="atomic__base_8hpp" startline="801" endline="813">neforce::atomic_fetch_or</referencedby>
+        <referencedby refid="group___atomic_operations_1ga62f2fffce08ba508062c408e45c584ad" compoundref="atomic__base_8hpp" startline="757" endline="765">neforce::atomic_fetch_sub</referencedby>
+        <referencedby refid="group___atomic_operations_1ga34b95bb9e3b30ea638e41093581f18d1" compoundref="atomic__base_8hpp" startline="825" endline="837">neforce::atomic_fetch_xor</referencedby>
+        <referencedby refid="group___atomic_operations_1gae9de058c5e8b4c3eeeba88b55b655abd" compoundref="atomic__base_8hpp" startline="507" endline="518">neforce::atomic_load</referencedby>
+        <referencedby refid="group___atomic_operations_1ga012dd9ee8be64644d1fb760c16c66307" compoundref="atomic__base_8hpp" startline="909" endline="917">neforce::atomic_or_fetch</referencedby>
+        <referencedby refid="group___atomic_operations_1ga15f6f4dee6e5d0076f3eaa85799bc279" compoundref="atomic__base_8hpp" startline="485" endline="496">neforce::atomic_store</referencedby>
+        <referencedby refid="group___atomic_operations_1gae8d1759cac37bdedeeba1b8742bf94e5" compoundref="atomic__base_8hpp" startline="869" endline="877">neforce::atomic_sub_fetch</referencedby>
+        <referencedby refid="group___atomic_operations_1gacf382af0fb0a7aeb175c145c23936711" compoundref="atomic__base_8hpp" startline="929" endline="937">neforce::atomic_xor_fetch</referencedby>
+        <referencedby refid="structneforce_1_1endian_1ab6475f24751a7143aa1873729806cf61" compoundref="endian_8hpp" startline="216" endline="219">neforce::endian::be_to_host</referencedby>
+        <referencedby refid="structneforce_1_1endian_1a9d4d222a595b1973ad2ebd04f28b1124" compoundref="endian_8hpp" startline="202" endline="205">neforce::endian::host_to_be</referencedby>
+        <referencedby refid="structneforce_1_1endian_1aba9d8fda87a2bb833a802c6ab3c3bf46" compoundref="endian_8hpp" startline="174" endline="177">neforce::endian::host_to_le</referencedby>
+        <referencedby refid="structneforce_1_1endian_1ad3048b1a7482f9935460122227f2ce45" compoundref="endian_8hpp" startline="146" endline="149">neforce::endian::host_to_network</referencedby>
+        <referencedby refid="structneforce_1_1endian_1a6c652d6ae23a659d2f9be866c94d6a2a" compoundref="endian_8hpp" startline="188" endline="191">neforce::endian::le_to_host</referencedby>
+        <referencedby refid="structneforce_1_1endian_1af43bc06a213655d4f211f72af418d442" compoundref="endian_8hpp" startline="160" endline="163">neforce::endian::network_to_host</referencedby>
+        <referencedby refid="classneforce_1_1random__lcd_1ac5ddb3caa68b2b6a8cfaf0bc93825ab6" compoundref="random_8hpp" startline="166" endline="169">neforce::random_lcd::next_int</referencedby>
+        <referencedby refid="classneforce_1_1random__lcd_1a2d1c4295fc24a61f629ea4baedf65685" compoundref="random_8hpp" startline="135" endline="143">neforce::random_lcd::next_int</referencedby>
+        <referencedby refid="classneforce_1_1random__mt_1a0ddd93af785fdf5dda0195c02d6f182f" compoundref="random_8hpp" startline="320" endline="323">neforce::random_mt::next_int</referencedby>
+        <referencedby refid="classneforce_1_1random__mt_1a87cefb8f20899f54ce68e361df7ea75e" compoundref="random_8hpp" startline="289" endline="297">neforce::random_mt::next_int</referencedby>
+        <referencedby refid="classneforce_1_1secret_1a1e7d05c92a8872a7ce9828b49345659d" compoundref="random_8hpp" startline="452" endline="455">neforce::secret::next_int</referencedby>
+        <referencedby refid="classneforce_1_1secret_1a07933bad4ee3de386fbc93c122960c8f" compoundref="random_8hpp" startline="418" endline="429">neforce::secret::next_int</referencedby>
+        <referencedby refid="structneforce_1_1endian_1a0f02ae6b160f14cca9a8cfd6969ce00a" compoundref="endian_8hpp" startline="230" endline="233">neforce::endian::swap_endian</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="group___base_type_properties_1ga8a70da46bf8635132fd3757deb2fff94" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___base_type_properties_1ga8b5cedfb6bc5a8e7a388a8cbdab82573" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_floating_point_v</definition>
+        <definition>bool neforce::is_floating_point_v</definition>
         <argsstring></argsstring>
         <name>is_floating_point_v</name>
-        <initializer>= <ref refid="structis__floating__point" kindref="compound">is_floating_point</ref>&lt;T&gt;::value</initializer>
+        <qualifiedname>neforce::is_floating_point_v</qualifiedname>
+        <initializer>= is_floating_point&lt;T&gt;::value</initializer>
         <briefdescription>
 <para>is_floating_point的便捷变量模板 </para>
         </briefdescription>
@@ -275,27 +286,28 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="907" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="907" bodyend="-1"/>
-        <referencedby refid="group___numeric_type_checks_1gab2c227da4229861df95e5c6df99cc700" compoundref="numeric__types_8hpp" startline="65" endline="68">is_nan</referencedby>
-        <referencedby refid="group___numeric_type_checks_1ga912a3bfb0c77cd04b0ff37a0eb57bc16" compoundref="numeric__types_8hpp" startline="89" endline="92">is_neg_infinity</referencedby>
-        <referencedby refid="group___numeric_type_checks_1gab5845603e013e4f2057d277e96fb946c" compoundref="numeric__types_8hpp" startline="77" endline="80">is_pos_infinity</referencedby>
-        <referencedby refid="classrandom__lcd_1a93b607b6466f1afd05d309258bb4311c" compoundref="random_8hpp" startline="195" endline="200">random_lcd::next_float</referencedby>
-        <referencedby refid="classrandom__mt_1a4ddd979b24a93752c932b939899979ac" compoundref="random_8hpp" startline="349" endline="354">random_mt::next_float</referencedby>
-        <referencedby refid="classsecret_1a7bfb064be88c4c2917cfb0b36ff9be26" compoundref="random_8hpp" startline="481" endline="486">secret::next_float</referencedby>
-        <referencedby refid="classsecret_1a34624116af4eaa6388f563838ea4f299" compoundref="random_8hpp" startline="511" endline="514">secret::next_float</referencedby>
-        <referencedby refid="classsecret_1a4f673d2d70c95778470649162321b429" compoundref="random_8hpp" startline="496" endline="502">secret::next_float</referencedby>
-        <referencedby refid="group___numeric_type_checks_1ga6d8ad8618cdf9a7d2e361794495b790e" compoundref="numeric__types_8hpp" startline="34" endline="41">signbit</referencedby>
+        <referencedby refid="group___numeric_type_checks_1ga69529551bf1bf78e074bfca6d21dd073" compoundref="numeric__types_8hpp" startline="65" endline="68">neforce::is_nan</referencedby>
+        <referencedby refid="group___numeric_type_checks_1gacba19c8d1a84f64c7fd94e4da5f66ecb" compoundref="numeric__types_8hpp" startline="89" endline="92">neforce::is_neg_infinity</referencedby>
+        <referencedby refid="group___numeric_type_checks_1gaefa221883d41cc8a1685f80fa4c20215" compoundref="numeric__types_8hpp" startline="77" endline="80">neforce::is_pos_infinity</referencedby>
+        <referencedby refid="classneforce_1_1random__lcd_1a38a9f7f75782bd569e59a021e64cb48d" compoundref="random_8hpp" startline="195" endline="200">neforce::random_lcd::next_float</referencedby>
+        <referencedby refid="classneforce_1_1random__mt_1a61c7c1ce130ad6cd19e873194d830a38" compoundref="random_8hpp" startline="349" endline="354">neforce::random_mt::next_float</referencedby>
+        <referencedby refid="classneforce_1_1secret_1af260d646685177f6b3d7999b81dd32d4" compoundref="random_8hpp" startline="481" endline="486">neforce::secret::next_float</referencedby>
+        <referencedby refid="classneforce_1_1secret_1aa562b6a34de650cd6b62a0a38ac34a72" compoundref="random_8hpp" startline="511" endline="514">neforce::secret::next_float</referencedby>
+        <referencedby refid="classneforce_1_1secret_1abcd625d204fd44d893c636a36d6cd980" compoundref="random_8hpp" startline="496" endline="502">neforce::secret::next_float</referencedby>
+        <referencedby refid="group___numeric_type_checks_1gade368659b311d75d368c14cd4216c191" compoundref="numeric__types_8hpp" startline="34" endline="41">neforce::signbit</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="group___base_type_properties_1gabf2224be65b8fb8794372d049a1d37d9" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___base_type_properties_1ga6fcb1c62c84e7247c26261bf2b271b56" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_arithmetic_v</definition>
+        <definition>bool neforce::is_arithmetic_v</definition>
         <argsstring></argsstring>
         <name>is_arithmetic_v</name>
-        <initializer>= <ref refid="structis__arithmetic" kindref="compound">is_arithmetic</ref>&lt;T&gt;::value</initializer>
+        <qualifiedname>neforce::is_arithmetic_v</qualifiedname>
+        <initializer>= is_arithmetic&lt;T&gt;::value</initializer>
         <briefdescription>
 <para>is_arithmetic的便捷变量模板 </para>
         </briefdescription>
@@ -304,23 +316,24 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="927" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="927" bodyend="-1"/>
-        <referencedby refid="group___iterator_operation_1ga0ebe1ee99151c272bdedc1a48d148aa2" compoundref="iterator_8hpp" startline="106" endline="129">advance</referencedby>
-        <referencedby refid="group___math_functions_1ga6d1eef00878569c1915becfbab85bb6b" compoundref="math_8hpp" startline="222" endline="225">angular2radian</referencedby>
-        <referencedby refid="group___math_functions_1gabccdceb14df19df976aba7ae15c9560e" compoundref="math_8hpp" startline="397" endline="412">power</referencedby>
-        <referencedby refid="group___math_functions_1ga7f8db26ae0f2ed85ad6fb8bcd280381d" compoundref="math_8hpp" startline="234" endline="237">radian2angular</referencedby>
-        <referencedby refid="group___math_functions_1ga23914db0e0e2f93e6534f4ce4d62ba2d" compoundref="math_8hpp" startline="306" endline="316">sign</referencedby>
+        <referencedby refid="group___iterator_operation_1gab75e73250466cd76e5b49ff5a95a6b2d" compoundref="iterator_8hpp" startline="106" endline="129">neforce::advance</referencedby>
+        <referencedby refid="group___math_functions_1ga7d4f128a01bc3e58a699d67b85ccfe58" compoundref="math_8hpp" startline="222" endline="225">neforce::angular2radian</referencedby>
+        <referencedby refid="group___math_functions_1gafca00f12f0039d13fa803ebcb521848c" compoundref="math_8hpp" startline="397" endline="412">neforce::power</referencedby>
+        <referencedby refid="group___math_functions_1ga197e4970d7957ff20a81fded763716e5" compoundref="math_8hpp" startline="234" endline="237">neforce::radian2angular</referencedby>
+        <referencedby refid="group___math_functions_1gafbeebd881301d8e263f30b2b21f6ce11" compoundref="math_8hpp" startline="306" endline="316">neforce::sign</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="group___base_type_properties_1ga05c78609bb9e06b42e0a4c0c4409b0a1" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___base_type_properties_1ga85ca246ab5313b64a9cfb89fbd2a83b5" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_signed_v</definition>
+        <definition>bool neforce::is_signed_v</definition>
         <argsstring></argsstring>
         <name>is_signed_v</name>
-        <initializer>= <ref refid="structis__signed" kindref="compound">is_signed</ref>&lt;T&gt;::value</initializer>
+        <qualifiedname>neforce::is_signed_v</qualifiedname>
+        <initializer>= is_signed&lt;T&gt;::value</initializer>
         <briefdescription>
 <para>is_signed的便捷变量模板 </para>
         </briefdescription>
@@ -329,19 +342,20 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="961" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="961" bodyend="-1"/>
-        <referencedby refid="group___iterator_operation_1ga0ebe1ee99151c272bdedc1a48d148aa2" compoundref="iterator_8hpp" startline="106" endline="129">advance</referencedby>
+        <referencedby refid="group___iterator_operation_1gab75e73250466cd76e5b49ff5a95a6b2d" compoundref="iterator_8hpp" startline="106" endline="129">neforce::advance</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="group___base_type_properties_1gac22b0b8d8faeebf7b2eb8d80ccdb03ba" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___base_type_properties_1gac9972d3fcdfbd07845ace4d76f7a745f" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_unsigned_v</definition>
+        <definition>bool neforce::is_unsigned_v</definition>
         <argsstring></argsstring>
         <name>is_unsigned_v</name>
-        <initializer>= <ref refid="structis__unsigned" kindref="compound">is_unsigned</ref>&lt;T&gt;::value</initializer>
+        <qualifiedname>neforce::is_unsigned_v</qualifiedname>
+        <initializer>= is_unsigned&lt;T&gt;::value</initializer>
         <briefdescription>
 <para>is_unsigned的便捷变量模板 </para>
         </briefdescription>

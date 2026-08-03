@@ -1,0 +1,880 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::cmdline类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1cmdline.html','','classneforce_1_1cmdline-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::cmdline类 参考<div class="ingroups"><a class="el" href="group___command_line.html">命令行</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>命令行参数解析器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="cmdline_8hpp_source.html">cmdline.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:option" id="r_option"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1cmdline_1_1option.html">option</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">选项定义结构  <a href="structneforce_1_1cmdline_1_1option.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:option_5Fdependency" id="r_option_5Fdependency"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1cmdline_1_1option__dependency.html">option_dependency</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">选项依赖关系  <a href="structneforce_1_1cmdline_1_1option__dependency.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:option_5Fconflict" id="r_option_5Fconflict"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1cmdline_1_1option__conflict.html">option_conflict</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">选项冲突关系  <a href="structneforce_1_1cmdline_1_1option__conflict.html#details">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a753d24dd4144a763b988334957008957" id="r_a753d24dd4144a763b988334957008957"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a753d24dd4144a763b988334957008957">conflict_behavior</a> { <a class="el" href="#a753d24dd4144a763b988334957008957acb5e100e5a9a3e7f6d1fd97512215282">error</a>
+, <a class="el" href="#a753d24dd4144a763b988334957008957a7b83d3f08fa392b79e3f553b585971cd">warning</a>
+, <a class="el" href="#a753d24dd4144a763b988334957008957a567bc1d268f135496de3d5b946b691f3">ignore</a>
+ }</td></tr>
+<tr class="memdesc:a753d24dd4144a763b988334957008957"><td class="mdescLeft">&#160;</td><td class="mdescRight">约束冲突处理行为  <a href="#a753d24dd4144a763b988334957008957">更多...</a><br /></td></tr>
+<tr class="memitem:aa2d35cf490ca49fc2392bf3c454aabfa" id="r_aa2d35cf490ca49fc2392bf3c454aabfa"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#aa2d35cf490ca49fc2392bf3c454aabfa">validator</a> = <a class="el" href="classneforce_1_1function.html">function</a>&lt;<a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a>(const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a>&amp; name, const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a>&amp; value)&gt;</td></tr>
+<tr class="memdesc:aa2d35cf490ca49fc2392bf3c454aabfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">选项值验证器类型  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a9ebd95f1f82b97eb33b8cb3631b9be90" id="r_a9ebd95f1f82b97eb33b8cb3631b9be90"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a9ebd95f1f82b97eb33b8cb3631b9be90">add_option</a> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;long_name, char short_name, const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;description, bool requires_value=false, bool allow_multiple=false, const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;default_value=&quot;&quot;)</td></tr>
+<tr class="memdesc:a9ebd95f1f82b97eb33b8cb3631b9be90"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加选项定义  <br /></td></tr>
+<tr class="memitem:a817dda6a32981d14f46cb4bf3c40241d" id="r_a817dda6a32981d14f46cb4bf3c40241d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a817dda6a32981d14f46cb4bf3c40241d">parse_os_args</a> ()</td></tr>
+<tr class="memdesc:a817dda6a32981d14f46cb4bf3c40241d"><td class="mdescLeft">&#160;</td><td class="mdescRight">解析操作系统提供的命令行参数  <br /></td></tr>
+<tr class="memitem:a3a932ae23da0ad3f263b4bbfa0e0e8e7" id="r_a3a932ae23da0ad3f263b4bbfa0e0e8e7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a3a932ae23da0ad3f263b4bbfa0e0e8e7">parse</a> (int argc, const char *argv[])</td></tr>
+<tr class="memdesc:a3a932ae23da0ad3f263b4bbfa0e0e8e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">解析main函数参数  <br /></td></tr>
+<tr class="memitem:af4abff0e73d4bbbab9fde846d052acfe" id="r_af4abff0e73d4bbbab9fde846d052acfe"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af4abff0e73d4bbbab9fde846d052acfe">parse</a> (const <a class="el" href="classneforce_1_1vector.html">vector</a>&lt; <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &gt; &amp;args)</td></tr>
+<tr class="memdesc:af4abff0e73d4bbbab9fde846d052acfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">解析字符串向量参数  <br /></td></tr>
+<tr class="memitem:a8581970921103c07e511c783afb4beca" id="r_a8581970921103c07e511c783afb4beca"><td class="memItemLeft"><a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#a8581970921103c07e511c783afb4beca">get</a> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;long_name, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> index=0) const</td></tr>
+<tr class="memdesc:a8581970921103c07e511c783afb4beca"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取选项值  <br /></td></tr>
+<tr class="memitem:aa0b5146dc5795670806967fadc766486" id="r_aa0b5146dc5795670806967fadc766486"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aa0b5146dc5795670806967fadc766486">has</a> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;name) const</td></tr>
+<tr class="memdesc:aa0b5146dc5795670806967fadc766486"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查选项是否存在  <br /></td></tr>
+<tr class="memitem:ae861ff52272905d20ddaf26b9cdc8a4b" id="r_ae861ff52272905d20ddaf26b9cdc8a4b"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae861ff52272905d20ddaf26b9cdc8a4b">count</a> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;name) const</td></tr>
+<tr class="memdesc:ae861ff52272905d20ddaf26b9cdc8a4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取选项出现的次数  <br /></td></tr>
+<tr class="memitem:aef0a8508771da78f9ee79f99e8659fc2" id="r_aef0a8508771da78f9ee79f99e8659fc2"><td class="memItemLeft">const <a class="el" href="classneforce_1_1vector.html">vector</a>&lt; <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aef0a8508771da78f9ee79f99e8659fc2">positional_args</a> () const noexcept</td></tr>
+<tr class="memdesc:aef0a8508771da78f9ee79f99e8659fc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取位置参数  <br /></td></tr>
+<tr class="memitem:a3bb54fdd20a0b8bd82a131e55ffbb544" id="r_a3bb54fdd20a0b8bd82a131e55ffbb544"><td class="memItemLeft">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a3bb54fdd20a0b8bd82a131e55ffbb544">program_name</a> () const noexcept</td></tr>
+<tr class="memdesc:a3bb54fdd20a0b8bd82a131e55ffbb544"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取程序名称  <br /></td></tr>
+<tr class="memitem:ad72773cb8c9aaa636fb0f9d184552c6b" id="r_ad72773cb8c9aaa636fb0f9d184552c6b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad72773cb8c9aaa636fb0f9d184552c6b">print_help</a> () const</td></tr>
+<tr class="memdesc:ad72773cb8c9aaa636fb0f9d184552c6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">打印帮助信息  <br /></td></tr>
+<tr class="memitem:a13ec974cc5e19a600a7f9156d3406105" id="r_a13ec974cc5e19a600a7f9156d3406105"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a13ec974cc5e19a600a7f9156d3406105">add_dependency</a> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;present, const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;required)</td></tr>
+<tr class="memdesc:a13ec974cc5e19a600a7f9156d3406105"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加选项依赖关系  <br /></td></tr>
+<tr class="memitem:a8f66b5ff3a0482f399f4075d2d0f5e26" id="r_a8f66b5ff3a0482f399f4075d2d0f5e26"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8f66b5ff3a0482f399f4075d2d0f5e26">add_conflict</a> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;option_a, const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;option_b)</td></tr>
+<tr class="memdesc:a8f66b5ff3a0482f399f4075d2d0f5e26"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加选项冲突关系  <br /></td></tr>
+<tr class="memitem:a7b7168bea3322d37d7d693b47d2a4942" id="r_a7b7168bea3322d37d7d693b47d2a4942"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7b7168bea3322d37d7d693b47d2a4942">set_conflict_behavior</a> (<a class="el" href="#a753d24dd4144a763b988334957008957">conflict_behavior</a> behavior) noexcept</td></tr>
+<tr class="memdesc:a7b7168bea3322d37d7d693b47d2a4942"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置冲突处理行为  <br /></td></tr>
+<tr class="memitem:a6f1dba0d4b859c22fa06236bd435138e" id="r_a6f1dba0d4b859c22fa06236bd435138e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6f1dba0d4b859c22fa06236bd435138e">load_config</a> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;config_path, const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;section=&quot;&quot;)</td></tr>
+<tr class="memdesc:a6f1dba0d4b859c22fa06236bd435138e"><td class="mdescLeft">&#160;</td><td class="mdescRight">从配置文件加载选项值  <br /></td></tr>
+<tr class="memitem:a0d69b322a385ff1f90b68fc5fddc486b" id="r_a0d69b322a385ff1f90b68fc5fddc486b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0d69b322a385ff1f90b68fc5fddc486b">add_validator</a> (<a class="el" href="#aa2d35cf490ca49fc2392bf3c454aabfa">validator</a> v)</td></tr>
+<tr class="memdesc:a0d69b322a385ff1f90b68fc5fddc486b"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加选项验证器  <br /></td></tr>
+<tr class="memitem:a19bf607e8bdc0af3b5326229f028b10d" id="r_a19bf607e8bdc0af3b5326229f028b10d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a19bf607e8bdc0af3b5326229f028b10d">add_range_validator</a> (<a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> long_name, <a class="el" href="group___core_types.html#ga0b098d32ebd9cc922390914e765ca674">int64_t</a> min_val, <a class="el" href="group___core_types.html#ga0b098d32ebd9cc922390914e765ca674">int64_t</a> max_val)</td></tr>
+<tr class="memdesc:a19bf607e8bdc0af3b5326229f028b10d"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加选项值范围验证器（数值范围）  <br /></td></tr>
+<tr class="memitem:a8a3519058c2668783ac2548822c6224b" id="r_a8a3519058c2668783ac2548822c6224b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8a3519058c2668783ac2548822c6224b">add_regex_validator</a> (<a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> long_name, const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;pattern)</td></tr>
+<tr class="memdesc:a8a3519058c2668783ac2548822c6224b"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加选项值正则验证器  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静态 Public 成员函数</h2></td></tr>
+<tr class="memitem:a21285a3068796cd3f930c5c9be285629" id="r_a21285a3068796cd3f930c5c9be285629"><td class="memItemLeft">static <a class="el" href="classneforce_1_1vector.html">vector</a>&lt; <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a21285a3068796cd3f930c5c9be285629">get_os_argv</a> ()</td></tr>
+<tr class="memdesc:a21285a3068796cd3f930c5c9be285629"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取操作系统提供的命令行参数  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>命令行参数解析器 </p>
+<p>支持解析符合POSIX风格和GNU风格扩展的命令行参数。 特性：</p><ul>
+<li>长选项（&ndash;option）和短选项（-o）</li>
+<li>选项值（&ndash;option=value 或 -o value）</li>
+<li>多值选项</li>
+<li>默认值</li>
+<li>位置参数</li>
+<li>自动生成帮助信息 </li>
+</ul>
+
+<p class="definition">在文件 <a class="el" href="cmdline_8hpp_source.html">cmdline.hpp</a> 第 <a class="el" href="cmdline_8hpp_source.html#l00161">161</a> 行定义.</p>
+</div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">成员类型定义说明</h2>
+<a id="aa2d35cf490ca49fc2392bf3c454aabfa" name="aa2d35cf490ca49fc2392bf3c454aabfa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2d35cf490ca49fc2392bf3c454aabfa">&#9670;&#160;</a></span>validator</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#aa2d35cf490ca49fc2392bf3c454aabfa">neforce::cmdline::validator</a> = <a class="el" href="classneforce_1_1function.html">function</a>&lt;<a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a>(const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a>&amp; name, const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a>&amp; value)&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>选项值验证器类型 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>选项名称 </td></tr>
+    <tr><td class="paramname">value</td><td>选项值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>验证通过返回空字符串，失败返回错误信息 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="cmdline_8hpp_source.html">cmdline.hpp</a> 第 <a class="el" href="cmdline_8hpp_source.html#l00231">231</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
+<a id="a753d24dd4144a763b988334957008957" name="a753d24dd4144a763b988334957008957"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a753d24dd4144a763b988334957008957">&#9670;&#160;</a></span>conflict_behavior</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a753d24dd4144a763b988334957008957">neforce::cmdline::conflict_behavior</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>约束冲突处理行为 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a753d24dd4144a763b988334957008957acb5e100e5a9a3e7f6d1fd97512215282" name="a753d24dd4144a763b988334957008957acb5e100e5a9a3e7f6d1fd97512215282"></a>error&#160;</td><td class="fielddoc"><p>冲突时抛出异常 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a753d24dd4144a763b988334957008957a7b83d3f08fa392b79e3f553b585971cd" name="a753d24dd4144a763b988334957008957a7b83d3f08fa392b79e3f553b585971cd"></a>warning&#160;</td><td class="fielddoc"><p>冲突时打印警告 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a753d24dd4144a763b988334957008957a567bc1d268f135496de3d5b946b691f3" name="a753d24dd4144a763b988334957008957a567bc1d268f135496de3d5b946b691f3"></a>ignore&#160;</td><td class="fielddoc"><p>冲突时忽略 </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="cmdline_8hpp_source.html">cmdline.hpp</a> 第 <a class="el" href="cmdline_8hpp_source.html#l00197">197</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a8f66b5ff3a0482f399f4075d2d0f5e26" name="a8f66b5ff3a0482f399f4075d2d0f5e26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f66b5ff3a0482f399f4075d2d0f5e26">&#9670;&#160;</a></span>add_conflict()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::cmdline::add_conflict </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>option_a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>option_b</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加选项冲突关系 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">option_a</td><td>选项A </td></tr>
+    <tr><td class="paramname">option_b</td><td>选项B </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a13ec974cc5e19a600a7f9156d3406105" name="a13ec974cc5e19a600a7f9156d3406105"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13ec974cc5e19a600a7f9156d3406105">&#9670;&#160;</a></span>add_dependency()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::cmdline::add_dependency </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>present</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>required</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加选项依赖关系 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">present</td><td>当此选项出现时 </td></tr>
+    <tr><td class="paramname">required</td><td>此选项也必须出现 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9ebd95f1f82b97eb33b8cb3631b9be90" name="a9ebd95f1f82b97eb33b8cb3631b9be90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ebd95f1f82b97eb33b8cb3631b9be90">&#9670;&#160;</a></span>add_option()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::cmdline::add_option </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>long_name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>short_name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>description</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>requires_value</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>allow_multiple</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>default_value</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加选项定义 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">long_name</td><td>长选项名称 </td></tr>
+    <tr><td class="paramname">short_name</td><td>短选项字符 </td></tr>
+    <tr><td class="paramname">description</td><td>选项描述 </td></tr>
+    <tr><td class="paramname">requires_value</td><td>是否需要值 </td></tr>
+    <tr><td class="paramname">allow_multiple</td><td>是否允许多次出现 </td></tr>
+    <tr><td class="paramname">default_value</td><td>默认值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1cmdline__exception.html" title="命令行解析异常">cmdline_exception</a></td><td>选项名重复时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a19bf607e8bdc0af3b5326229f028b10d" name="a19bf607e8bdc0af3b5326229f028b10d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19bf607e8bdc0af3b5326229f028b10d">&#9670;&#160;</a></span>add_range_validator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::cmdline::add_range_validator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a></td>          <td class="paramname"><span class="paramname"><em>long_name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#ga0b098d32ebd9cc922390914e765ca674">int64_t</a></td>          <td class="paramname"><span class="paramname"><em>min_val</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#ga0b098d32ebd9cc922390914e765ca674">int64_t</a></td>          <td class="paramname"><span class="paramname"><em>max_val</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加选项值范围验证器（数值范围） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">long_name</td><td>选项名称 </td></tr>
+    <tr><td class="paramname">min_val</td><td>最小值（包含） </td></tr>
+    <tr><td class="paramname">max_val</td><td>最大值（包含） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1cmdline__exception.html" title="命令行解析异常">cmdline_exception</a></td><td>选项不存在时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8a3519058c2668783ac2548822c6224b" name="a8a3519058c2668783ac2548822c6224b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a3519058c2668783ac2548822c6224b">&#9670;&#160;</a></span>add_regex_validator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::cmdline::add_regex_validator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a></td>          <td class="paramname"><span class="paramname"><em>long_name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>pattern</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加选项值正则验证器 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">long_name</td><td>选项名称 </td></tr>
+    <tr><td class="paramname">pattern</td><td>正则表达式模式 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1cmdline__exception.html" title="命令行解析异常">cmdline_exception</a></td><td>选项不存在时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0d69b322a385ff1f90b68fc5fddc486b" name="a0d69b322a385ff1f90b68fc5fddc486b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d69b322a385ff1f90b68fc5fddc486b">&#9670;&#160;</a></span>add_validator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::cmdline::add_validator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#aa2d35cf490ca49fc2392bf3c454aabfa">validator</a></td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加选项验证器 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>验证器函数</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>可以多次调用以添加多个验证器，所有验证器都会被依次调用。 验证在 <a class="el" href="#a3a932ae23da0ad3f263b4bbfa0e0e8e7" title="解析main函数参数">parse()</a> 完成后、validate_constraints() 之前执行。 </p>
+
+</div>
+</div>
+<a id="ae861ff52272905d20ddaf26b9cdc8a4b" name="ae861ff52272905d20ddaf26b9cdc8a4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae861ff52272905d20ddaf26b9cdc8a4b">&#9670;&#160;</a></span>count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> neforce::cmdline::count </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取选项出现的次数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>长选项名称 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>选项出现次数 </dd></dl>
+
+</div>
+</div>
+<a id="a8581970921103c07e511c783afb4beca" name="a8581970921103c07e511c783afb4beca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8581970921103c07e511c783afb4beca">&#9670;&#160;</a></span>get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> neforce::cmdline::get </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>long_name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a></td>          <td class="paramname"><span class="paramname"><em>index</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>&#160;) const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取选项值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">long_name</td><td>长选项名称 </td></tr>
+    <tr><td class="paramname">index</td><td>对于多值选项，指定索引 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>选项值 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1cmdline__exception.html" title="命令行解析异常">cmdline_exception</a></td><td>选项不存在或无值时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a21285a3068796cd3f930c5c9be285629" name="a21285a3068796cd3f930c5c9be285629"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21285a3068796cd3f930c5c9be285629">&#9670;&#160;</a></span>get_os_argv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1vector.html">vector</a>&lt; <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &gt; neforce::cmdline::get_os_argv </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取操作系统提供的命令行参数 </p>
+<dl class="section return"><dt>返回</dt><dd>参数字符串向量 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1cmdline__exception.html" title="命令行解析异常">cmdline_exception</a></td><td>获取失败时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa0b5146dc5795670806967fadc766486" name="aa0b5146dc5795670806967fadc766486"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0b5146dc5795670806967fadc766486">&#9670;&#160;</a></span>has()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::cmdline::has </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查选项是否存在 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>长选项名称 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否在命令行中指定了该选项 </dd></dl>
+
+</div>
+</div>
+<a id="a6f1dba0d4b859c22fa06236bd435138e" name="a6f1dba0d4b859c22fa06236bd435138e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f1dba0d4b859c22fa06236bd435138e">&#9670;&#160;</a></span>load_config()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::cmdline::load_config </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>config_path</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>section</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>从配置文件加载选项值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">config_path</td><td>配置文件路径 </td></tr>
+    <tr><td class="paramname">section</td><td>配置节名或嵌套键名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1cmdline__exception.html" title="命令行解析异常">cmdline_exception</a></td><td>文件不存在或解析失败时抛出</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>支持的文件格式：</p><ul>
+<li>.ini：INI 格式，通过 section 参数指定节</li>
+<li>.json：JSON 格式，通过 section 参数指定顶层键导航到嵌套对象</li>
+<li>.toml：TOML 格式，通过 section 参数指定顶层键导航到嵌套表</li>
+<li>.yaml / .yml：YAML 格式，通过 section 参数指定顶层键导航到嵌套映射</li>
+<li>.env：环境变量格式（section 参数忽略）</li>
+</ul>
+<p>配置文件中的值仅填充命令行未指定的选项，命令行参数优先级更高。 </p>
+
+</div>
+</div>
+<a id="af4abff0e73d4bbbab9fde846d052acfe" name="af4abff0e73d4bbbab9fde846d052acfe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4abff0e73d4bbbab9fde846d052acfe">&#9670;&#160;</a></span>parse() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::cmdline::parse </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classneforce_1_1vector.html">vector</a>&lt; <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>解析字符串向量参数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>参数字符串向量 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1cmdline__exception.html" title="命令行解析异常">cmdline_exception</a></td><td>解析失败时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3a932ae23da0ad3f263b4bbfa0e0e8e7" name="a3a932ae23da0ad3f263b4bbfa0e0e8e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a932ae23da0ad3f263b4bbfa0e0e8e7">&#9670;&#160;</a></span>parse() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::cmdline::parse </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>argc</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>argv</em></span>[]&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>解析main函数参数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">argc</td><td>参数个数 </td></tr>
+    <tr><td class="paramname">argv</td><td>参数数组 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1cmdline__exception.html" title="命令行解析异常">cmdline_exception</a></td><td>解析失败时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a817dda6a32981d14f46cb4bf3c40241d" name="a817dda6a32981d14f46cb4bf3c40241d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a817dda6a32981d14f46cb4bf3c40241d">&#9670;&#160;</a></span>parse_os_args()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::cmdline::parse_os_args </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>解析操作系统提供的命令行参数 </p>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1cmdline__exception.html" title="命令行解析异常">cmdline_exception</a></td><td>解析失败时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aef0a8508771da78f9ee79f99e8659fc2" name="aef0a8508771da78f9ee79f99e8659fc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef0a8508771da78f9ee79f99e8659fc2">&#9670;&#160;</a></span>positional_args()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classneforce_1_1vector.html">vector</a>&lt; <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &gt; &amp; neforce::cmdline::positional_args </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取位置参数 </p>
+<dl class="section return"><dt>返回</dt><dd>位置参数向量引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="cmdline_8hpp_source.html">cmdline.hpp</a> 第 <a class="el" href="cmdline_8hpp_source.html#l00355">355</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ad72773cb8c9aaa636fb0f9d184552c6b" name="ad72773cb8c9aaa636fb0f9d184552c6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad72773cb8c9aaa636fb0f9d184552c6b">&#9670;&#160;</a></span>print_help()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::cmdline::print_help </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>打印帮助信息 </p>
+<p>根据所有注册的选项自动生成格式化的帮助文本。 </p>
+
+</div>
+</div>
+<a id="a3bb54fdd20a0b8bd82a131e55ffbb544" name="a3bb54fdd20a0b8bd82a131e55ffbb544"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bb54fdd20a0b8bd82a131e55ffbb544">&#9670;&#160;</a></span>program_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp; neforce::cmdline::program_name </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取程序名称 </p>
+<dl class="section return"><dt>返回</dt><dd>程序名称 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="cmdline_8hpp_source.html">cmdline.hpp</a> 第 <a class="el" href="cmdline_8hpp_source.html#l00361">361</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a7b7168bea3322d37d7d693b47d2a4942" name="a7b7168bea3322d37d7d693b47d2a4942"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b7168bea3322d37d7d693b47d2a4942">&#9670;&#160;</a></span>set_conflict_behavior()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::cmdline::set_conflict_behavior </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a753d24dd4144a763b988334957008957">conflict_behavior</a></td>          <td class="paramname"><span class="paramname"><em>behavior</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置冲突处理行为 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">behavior</td><td>冲突时的处理方式 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="cmdline_8hpp_source.html">cmdline.hpp</a> 第 <a class="el" href="cmdline_8hpp_source.html#l00395">395</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="cmdline_8hpp_source.html">cmdline.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><a href="classneforce_1_1cmdline.html">cmdline</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

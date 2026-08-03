@@ -1,9 +1,9 @@
 var variant_8hpp =
 [
-    [ "variant_alternative_t", "group___variant.html#gac276a03687a0669787a73fafe9ffedef", null ],
-    [ "get", "group___variant.html#gaa9037f2395e93a4a125509ae752e8af6", null ],
-    [ "get", "group___variant.html#ga5748ec585c80ed52247f5701d898b7c6", null ],
-    [ "get", "group___variant.html#gaa1f6fe5d80ff5a430a4e5736d3285860", null ],
-    [ "get", "group___variant.html#ga37f06d84003e496274a4b730d9b7f3e1", null ],
-    [ "variant_index_v", "group___variant.html#ga6a6286e88fa95ee0ae386a322640f6ce", null ]
+    [ "neforce::variant_alternative_t", "group___variant.html#gab08ae7b9478ea726602d976e69f052d8", null ],
+    [ "neforce::get", "group___variant.html#gad57f6075105f72acd80177d46d49fa31", null ],
+    [ "neforce::get", "group___variant.html#gaee7bac36dc5c9cd9721d861e3d073654", null ],
+    [ "neforce::get", "group___variant.html#gaf7e2576ea22fcebd7d4bb037b7feac80", null ],
+    [ "neforce::get", "group___variant.html#ga86798e11bdbb719fc768a409373f22a7", null ],
+    [ "neforce::variant_index_v", "group___variant.html#gad70ec0481cd156611fa1efc095bf5be5", null ]
 ];

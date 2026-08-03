@@ -1,96 +1,96 @@
 var group___json_config =
 [
-    [ "json_builder", "classjson__builder.html", [
-      [ "begin_array", "classjson__builder.html#af7854cbd3be409a911df6570b64ad24b", null ],
-      [ "begin_object", "classjson__builder.html#a736bbd94f6b0c5481d07432662c7d84b", null ],
-      [ "build", "classjson__builder.html#afd9ecd6dcc26bb765290d45b30cd9739", null ],
-      [ "end_array", "classjson__builder.html#ab7534d8d54ab74042688e0f0ba920def", null ],
-      [ "end_object", "classjson__builder.html#a08532efdc612a36ce50446523a64d853", null ],
-      [ "key", "classjson__builder.html#a6365d6639f7a9af43d5c561a4d259087", null ],
-      [ "value", "classjson__builder.html#a4fe5ea7a3f044eff8283e0445c9135bc", null ],
-      [ "value", "classjson__builder.html#a3c97f938b11dcbae62eb957c53ee8a53", null ],
-      [ "value", "classjson__builder.html#a373ac9793050a11087fd203e749a37ee", null ],
-      [ "value", "classjson__builder.html#a70b6826772f8cce0872431dd92cbc74a", null ],
-      [ "value", "classjson__builder.html#af78f88961167305cd359fe1521b11f50", null ],
-      [ "value", "classjson__builder.html#a15a2246641769184910e0eae719abe19", null ],
-      [ "value", "classjson__builder.html#a16cb2e444deed3078fd29c5b5820a457", null ],
-      [ "value", "classjson__builder.html#a08a2dee2721ab807b4b229ff236c0086", null ],
-      [ "value", "classjson__builder.html#a70896afbe5b4768759a4d233eb2db145", null ],
-      [ "value_array", "classjson__builder.html#a690227c3d17d543dca45e275493b36fc", null ],
-      [ "value_object", "classjson__builder.html#aca7679a9dfe53b42792ec6ca136a5feb", null ]
+    [ "neforce::json_builder", "classneforce_1_1json__builder.html", [
+      [ "begin_array", "classneforce_1_1json__builder.html#af8c014ab395dfd4d026d13d360be24d2", null ],
+      [ "begin_object", "classneforce_1_1json__builder.html#a51b7534d23034dab1fd4753ef4f6bb7f", null ],
+      [ "build", "classneforce_1_1json__builder.html#a122a8a70af96abbbc2da4a7dd6178232", null ],
+      [ "end_array", "classneforce_1_1json__builder.html#a55e9e14aa09c64c1644b38696e3c772f", null ],
+      [ "end_object", "classneforce_1_1json__builder.html#aa51361e5ca43d9a2ef1fac4891c2f435", null ],
+      [ "key", "classneforce_1_1json__builder.html#a73288e2e05b6d830b73352b3cb153e55", null ],
+      [ "value", "classneforce_1_1json__builder.html#ae54b6e579ab0983ad177fcaae7d9ac03", null ],
+      [ "value", "classneforce_1_1json__builder.html#a221f679ce7655e6256d6e0667d73c7c8", null ],
+      [ "value", "classneforce_1_1json__builder.html#ae176d651cb1675fa8f268c3806113868", null ],
+      [ "value", "classneforce_1_1json__builder.html#a3e11fc0476cec91cc7a9e5d1ab654915", null ],
+      [ "value", "classneforce_1_1json__builder.html#a9450279a0e4834eaeb75cfacc3a34340", null ],
+      [ "value", "classneforce_1_1json__builder.html#a10cc96d957ff643351b5ee0e8c9b5207", null ],
+      [ "value", "classneforce_1_1json__builder.html#a5459abea50e80fab1585653f8654bb51", null ],
+      [ "value", "classneforce_1_1json__builder.html#a89dce33ffe841f5d1390caca83041a65", null ],
+      [ "value", "classneforce_1_1json__builder.html#a10648264ce0db8410ba139e2168ec3c5", null ],
+      [ "value_array", "classneforce_1_1json__builder.html#ae5ee55c3b0588c466291260903293cbc", null ],
+      [ "value_object", "classneforce_1_1json__builder.html#a16db90471ec6f881f25062e9a3d508cb", null ]
     ] ],
-    [ "json_parser", "classjson__parser.html", [
-      [ "json_parser", "classjson__parser.html#a83d61d739d7729aa59dc7f7ac95e88b7", null ],
-      [ "parse", "classjson__parser.html#ae756473667741ea7716b0d9f6e67adec", null ],
-      [ "try_parse", "classjson__parser.html#a6378ccb1f8c40dc9d1c9a3515aade056", null ]
+    [ "neforce::json_parser", "classneforce_1_1json__parser.html", [
+      [ "json_parser", "classneforce_1_1json__parser.html#a1e7fe19c6cb2533d7ec5cdc0d204c623", null ],
+      [ "parse", "classneforce_1_1json__parser.html#a28e1577cbe516c355a461b8510a31d31", null ],
+      [ "try_parse", "classneforce_1_1json__parser.html#a9a26e287091c165287efacd97c248b6f", null ]
     ] ],
-    [ "json_value", "classjson__value.html", [
-      [ "types", "classjson__value.html#a04fcd4c27b006cfc74a3204774a5805f", [
-        [ "Null", "classjson__value.html#a04fcd4c27b006cfc74a3204774a5805faf3d38d2ee1fb610ab1344aa3910aaf2e", null ],
-        [ "Bool", "classjson__value.html#a04fcd4c27b006cfc74a3204774a5805facacb22ac27555e5c947ae9357071a60a", null ],
-        [ "Number", "classjson__value.html#a04fcd4c27b006cfc74a3204774a5805fa0caaf5439c72e875abb005f577287514", null ],
-        [ "String", "classjson__value.html#a04fcd4c27b006cfc74a3204774a5805fa7d584541a6eb62770239a72c9d8018ed", null ],
-        [ "Object", "classjson__value.html#a04fcd4c27b006cfc74a3204774a5805fa165488bba2a288d3579960130c52b74e", null ],
-        [ "Array", "classjson__value.html#a04fcd4c27b006cfc74a3204774a5805fa2c8079c21c277016efb88e4846e0384f", null ]
+    [ "neforce::json_value", "classneforce_1_1json__value.html", [
+      [ "types", "classneforce_1_1json__value.html#a2d371a5b996a36a7cfefef569935bf5b", [
+        [ "Null", "classneforce_1_1json__value.html#a2d371a5b996a36a7cfefef569935bf5ba0d2e0473887f30604fbf44dd3519dc09", null ],
+        [ "Bool", "classneforce_1_1json__value.html#a2d371a5b996a36a7cfefef569935bf5ba22163022962170ac324393f1c3f4bfc4", null ],
+        [ "Number", "classneforce_1_1json__value.html#a2d371a5b996a36a7cfefef569935bf5ba96b04ce0d1ae70997ea13a4c8706b3d3", null ],
+        [ "String", "classneforce_1_1json__value.html#a2d371a5b996a36a7cfefef569935bf5ba481bfa747d94c62ae5ef7c2c8fcc7737", null ],
+        [ "Object", "classneforce_1_1json__value.html#a2d371a5b996a36a7cfefef569935bf5ba5732fe5562a8b4c6222c4ac63bb9123b", null ],
+        [ "Array", "classneforce_1_1json__value.html#a2d371a5b996a36a7cfefef569935bf5baa7e13f35a92853aad62a913b019c567f", null ]
       ] ],
-      [ "~json_value", "classjson__value.html#a6d8dcba262dc2a77ff0595b97b7dcb1c", null ],
-      [ "as_array", "classjson__value.html#a46f0ddaa177e832ffdf167421007399b", null ],
-      [ "as_bool", "classjson__value.html#a75ee1ea9a6da8626e5a3b8ed003f9dc9", null ],
-      [ "as_null", "classjson__value.html#a2c4c272dacf4725e29b3b07a0c1bd545", null ],
-      [ "as_number", "classjson__value.html#a39721177f47295fdaa1e59e344fedb5c", null ],
-      [ "as_object", "classjson__value.html#a1c9b4fbef78c12dce6829d8b6f8b24ea", null ],
-      [ "as_string", "classjson__value.html#a5150bbf8db2997618719a49af0bb7d38", null ],
-      [ "is_array", "classjson__value.html#a9892607b37490099e7ac23feb4f4462a", null ],
-      [ "is_bool", "classjson__value.html#ab53af81f4ba04bc0e54bade99feb79a6", null ],
-      [ "is_null", "classjson__value.html#a0a2e76a05c10b7e34b149bf49822e75d", null ],
-      [ "is_number", "classjson__value.html#a8f69ba2eed85121bfa40f9590d6b34e4", null ],
-      [ "is_object", "classjson__value.html#a16d71dfc88a68e604133d4bac59877b6", null ],
-      [ "is_string", "classjson__value.html#a4199baca36f7e761a9ed9c075b51a437", null ],
-      [ "to_indent_string", "classjson__value.html#afe337134bc1d6e56509b1a5e880bceea", null ],
-      [ "to_string", "classjson__value.html#a371d7e47182eb4047968e5923113036d", null ],
-      [ "type", "classjson__value.html#aa0f842956ec64a7979608451377534c5", null ]
+      [ "~json_value", "classneforce_1_1json__value.html#a81823b5a309e9557bd3dd03115476735", null ],
+      [ "as_array", "classneforce_1_1json__value.html#a903dcb64981ff86029ff730c9d2193a8", null ],
+      [ "as_bool", "classneforce_1_1json__value.html#a80f1f1cecd0b1e999067eb8d7f3418cf", null ],
+      [ "as_null", "classneforce_1_1json__value.html#aa13e8d932d1401adb426385b7cfa5477", null ],
+      [ "as_number", "classneforce_1_1json__value.html#aa825567db2142a0a2a8776c2e4983136", null ],
+      [ "as_object", "classneforce_1_1json__value.html#a98ec6c685b78021c757e719800280760", null ],
+      [ "as_string", "classneforce_1_1json__value.html#a5171de0d78b29816faf4da87bb285786", null ],
+      [ "is_array", "classneforce_1_1json__value.html#ada8ac54444b05c66ca87a8ffe3c42bcd", null ],
+      [ "is_bool", "classneforce_1_1json__value.html#a02962e407ce22918f27c2ecafb2e23b9", null ],
+      [ "is_null", "classneforce_1_1json__value.html#adde3626795f5af96b93489c1a7de29fc", null ],
+      [ "is_number", "classneforce_1_1json__value.html#a9ec03a65b106ed4882b15c9c56f6291c", null ],
+      [ "is_object", "classneforce_1_1json__value.html#afb12a40def31f6815d349bb135bda675", null ],
+      [ "is_string", "classneforce_1_1json__value.html#a203d40bd4ce96570f83d54ae2d9a11ac", null ],
+      [ "to_indent_string", "classneforce_1_1json__value.html#ae2c77b7db8c471b9bf7e52633e447cea", null ],
+      [ "to_string", "classneforce_1_1json__value.html#a16c0d766a3eee03f39b9c56ea63ecc64", null ],
+      [ "type", "classneforce_1_1json__value.html#a21b62290b69ad4339e7568a1b691a4bf", null ]
     ] ],
-    [ "json_null", "classjson__null.html", [
-      [ "as_null", "classjson__null.html#a7f7fa96b0ef8c3eeb4a372437e5cc479", null ],
-      [ "type", "classjson__null.html#a01a844a133c6288a7c22b2bd1c12b38f", null ]
+    [ "neforce::json_null", "classneforce_1_1json__null.html", [
+      [ "as_null", "classneforce_1_1json__null.html#ac13e36a7f5a270c320f466fb318de503", null ],
+      [ "type", "classneforce_1_1json__null.html#a85b7006426378c89c3fbbc794bdcccdc", null ]
     ] ],
-    [ "json_bool", "classjson__bool.html", [
-      [ "json_bool", "classjson__bool.html#a7ac2201461f7f56f151be5d2b83d3d75", null ],
-      [ "as_bool", "classjson__bool.html#aadee4de416786c1e21578a0cf6f5a8a2", null ],
-      [ "get_value", "classjson__bool.html#a34419b2ae8c94d3aab2eec44c7d89ca3", null ],
-      [ "type", "classjson__bool.html#a825f9186b09d7921cdce43cf3d0fd5a4", null ]
+    [ "neforce::json_bool", "classneforce_1_1json__bool.html", [
+      [ "json_bool", "classneforce_1_1json__bool.html#a22b4e01b84f3787f03fe95d613dad060", null ],
+      [ "as_bool", "classneforce_1_1json__bool.html#a6a294e304d442eb44d64f6af1e7e2e49", null ],
+      [ "get_value", "classneforce_1_1json__bool.html#abfec885c06012c84ec86068f535904e3", null ],
+      [ "type", "classneforce_1_1json__bool.html#ac6a10a88facca0150ed6a0dd3c7eb3fa", null ]
     ] ],
-    [ "json_number", "classjson__number.html", [
-      [ "json_number", "classjson__number.html#a226fb3cc9c07b1f58a3136cd6769af44", null ],
-      [ "as_number", "classjson__number.html#a77fd201c7f5999243c47bd0416838c45", null ],
-      [ "get_value", "classjson__number.html#ac6a4b32e5dddbf4b29f100c61834dabe", null ],
-      [ "type", "classjson__number.html#aa5c9bae8e1f5f83fc5215ae73ce7f489", null ]
+    [ "neforce::json_number", "classneforce_1_1json__number.html", [
+      [ "json_number", "classneforce_1_1json__number.html#aeb8136709b7300da574eb587bfdc3f8f", null ],
+      [ "as_number", "classneforce_1_1json__number.html#af8c02ac494deacd435716b3c234a09eb", null ],
+      [ "get_value", "classneforce_1_1json__number.html#a1ae863b10180174df2f78dfa75025bcc", null ],
+      [ "type", "classneforce_1_1json__number.html#a26d18b88eb082c73b078d862412563c2", null ]
     ] ],
-    [ "json_string", "classjson__string.html", [
-      [ "json_string", "classjson__string.html#aa3e92a19904830b49f9455631a39abdc", null ],
-      [ "as_string", "classjson__string.html#a1a0e139ff17bc8213cd7a6dcfe4f8dde", null ],
-      [ "get_value", "classjson__string.html#a0e41bd989370207e5208e2e49f0b4bcc", null ],
-      [ "type", "classjson__string.html#a913381de4c8e431d68ceae6fac06d010", null ]
+    [ "neforce::json_string", "classneforce_1_1json__string.html", [
+      [ "json_string", "classneforce_1_1json__string.html#af149e15426ae6fb9fb8f70f8545d0ac7", null ],
+      [ "as_string", "classneforce_1_1json__string.html#a41ec730dff5c17938c4f9de18c981eef", null ],
+      [ "get_value", "classneforce_1_1json__string.html#a1000d5b9d92495edc17a7fd21cbe22ef", null ],
+      [ "type", "classneforce_1_1json__string.html#a5ecf1c1c3b9a524e8a9fc858cb3779db", null ]
     ] ],
-    [ "json_object", "classjson__object.html", [
-      [ "json_object", "classjson__object.html#ad9a95a4acf4f5f018fe613ec81dffcfd", null ],
-      [ "json_object", "classjson__object.html#a5882ab3a6155a41d21ceda546d9683a6", null ],
-      [ "add_member", "classjson__object.html#a7a562e502979635d49b219265cc8c014", null ],
-      [ "as_object", "classjson__object.html#ad27bfbb92f2f93aae2921b2b21ce452e", null ],
-      [ "get_member", "classjson__object.html#a803eacf22eea5ab14c8ecc0a18e4be5f", null ],
-      [ "get_members", "classjson__object.html#a69549391d003e96727f884c0a0a84884", null ],
-      [ "operator=", "classjson__object.html#a3f4f465fb0dee1d9d924304f241631bd", null ],
-      [ "type", "classjson__object.html#af2eea38ea8e2433863a9db65ad494fb3", null ]
+    [ "neforce::json_object", "classneforce_1_1json__object.html", [
+      [ "json_object", "classneforce_1_1json__object.html#a1b32c017af9a90c6b60334b642e583d4", null ],
+      [ "json_object", "classneforce_1_1json__object.html#a3c1eb8ef449026e4e4c441323bd25999", null ],
+      [ "add_member", "classneforce_1_1json__object.html#a80c7d66113cb52f8f4044ff3212989fc", null ],
+      [ "as_object", "classneforce_1_1json__object.html#adb33b53021b4a65249fe0c2533169290", null ],
+      [ "get_member", "classneforce_1_1json__object.html#a098959394d0d305f58f3d8f3ac7fc7ab", null ],
+      [ "get_members", "classneforce_1_1json__object.html#a06de8661c3a69381ee4abbfb9211cd5a", null ],
+      [ "operator=", "classneforce_1_1json__object.html#ab24c5815d7cfbc39bd8d2a1e763ccfa9", null ],
+      [ "type", "classneforce_1_1json__object.html#ac6d8b3bdfe65d78042a8ded2781f8de7", null ]
     ] ],
-    [ "json_array", "classjson__array.html", [
-      [ "json_array", "classjson__array.html#afa781e226e432b7f01ddbec58896c3f9", null ],
-      [ "json_array", "classjson__array.html#a18cf8f573c221c9f9d310ba203bd7515", null ],
-      [ "add_element", "classjson__array.html#a88bfc2fd28a6ecf4fadc06f9e1bf959f", null ],
-      [ "as_array", "classjson__array.html#abb006d9c508becdbb8fea9555fe5d9b2", null ],
-      [ "get_element", "classjson__array.html#a029949284e88f7779ca4d0d556b3bcec", null ],
-      [ "get_elements", "classjson__array.html#a303d968640db929c7d840021d69dc98f", null ],
-      [ "operator=", "classjson__array.html#a433dfa660b8d26465deb2921e22ce2fe", null ],
-      [ "size", "classjson__array.html#aa4865bfa2954bbc6ae26a54bc8a1f51c", null ],
-      [ "type", "classjson__array.html#a9301a060cbf5f32526aa24702f0dbf17", null ]
+    [ "neforce::json_array", "classneforce_1_1json__array.html", [
+      [ "json_array", "classneforce_1_1json__array.html#a343a6b45b405ec77fac24fd60346d0ef", null ],
+      [ "json_array", "classneforce_1_1json__array.html#a024d3c3f23f3531fb3751226f285418d", null ],
+      [ "add_element", "classneforce_1_1json__array.html#aca02757d601c37b6e123c15ad8fd9c72", null ],
+      [ "as_array", "classneforce_1_1json__array.html#a0d7aea0c9807595da57e82b5a662a201", null ],
+      [ "get_element", "classneforce_1_1json__array.html#aad0efd08dfe0f00ef16e77be29f2fc7c", null ],
+      [ "get_elements", "classneforce_1_1json__array.html#a21e9588e9fa486d11de1ff19aae8f501", null ],
+      [ "operator=", "classneforce_1_1json__array.html#a66482b8d9cfbab25dbaea5036af53be7", null ],
+      [ "size", "classneforce_1_1json__array.html#abd512f711b4c93d301f760cd32f89518", null ],
+      [ "type", "classneforce_1_1json__array.html#a71d081c73bf3f674709fe4b77f045049", null ]
     ] ]
 ];

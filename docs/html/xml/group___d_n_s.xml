@@ -3,20 +3,22 @@
   <compounddef id="group___d_n_s" kind="group">
     <compoundname>DNS</compoundname>
     <title>DNS</title>
-    <innerclass refid="classdns__client" prot="public">dns_client</innerclass>
-    <innerclass refid="structfuture__handler_3_01error__code_00_01dns__query__result_01_4" prot="public">future_handler&lt; error_code, dns_query_result &gt;</innerclass>
-    <innerclass refid="structasync__result_3_01use__future__t_00_01void_07error__code_00_01dns__query__result_08_4" prot="public">async_result&lt; use_future_t, void(error_code, dns_query_result)&gt;</innerclass>
-    <innerclass refid="structdns__record" prot="public">dns_record</innerclass>
-    <innerclass refid="structdns__query__result" prot="public">dns_query_result</innerclass>
-    <innerclass refid="structdns__header" prot="public">dns_header</innerclass>
-    <innerclass refid="structdns__srv__record" prot="public">dns_srv_record</innerclass>
-    <innerclass refid="structdns__soa__record" prot="public">dns_soa_record</innerclass>
+    <innerclass refid="classneforce_1_1dns__client" prot="public">neforce::dns_client</innerclass>
+    <innerclass refid="structneforce_1_1future__handler_3_01error__code_00_01dns__query__result_01_4" prot="public">neforce::future_handler&lt; error_code, dns_query_result &gt;</innerclass>
+    <innerclass refid="structneforce_1_1async__result_3_01use__future__t_00_01void_07error__code_00_01dns__query__result_08_4" prot="public">neforce::async_result&lt; use_future_t, void(error_code, dns_query_result)&gt;</innerclass>
+    <innerclass refid="structneforce_1_1dns__record" prot="public">neforce::dns_record</innerclass>
+    <innerclass refid="structneforce_1_1dns__query__result" prot="public">neforce::dns_query_result</innerclass>
+    <innerclass refid="structneforce_1_1dns__header" prot="public">neforce::dns_header</innerclass>
+    <innerclass refid="structneforce_1_1dns__srv__record" prot="public">neforce::dns_srv_record</innerclass>
+    <innerclass refid="structneforce_1_1dns__soa__record" prot="public">neforce::dns_soa_record</innerclass>
     <innernamespace refid="namespaceedns">edns</innernamespace>
+    <innernamespace refid="namespaceneforce_1_1edns">neforce::edns</innernamespace>
     <sectiondef kind="enum">
-      <memberdef kind="enum" id="group___d_n_s_1ga973c6b85131920f4de96d7db1206a51b" prot="public" static="no" strong="yes">
-        <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+      <memberdef kind="enum" id="group___d_n_s_1gaf089145255700aa06c27bd9442ec6a7d" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
         <name>dns_opcode</name>
-        <enumvalue id="group___d_n_s_1gga973c6b85131920f4de96d7db1206a51ba5662080872eece1e1ceeec5750198283" prot="public">
+        <qualifiedname>neforce::dns_opcode</qualifiedname>
+        <enumvalue id="group___d_n_s_1ggaf089145255700aa06c27bd9442ec6a7da5662080872eece1e1ceeec5750198283" prot="public">
           <name>QUERY</name>
           <initializer>= 0</initializer>
           <briefdescription>
@@ -25,7 +27,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___d_n_s_1gga973c6b85131920f4de96d7db1206a51ba418263145671bab1c1942979a2f30355" prot="public">
+        <enumvalue id="group___d_n_s_1ggaf089145255700aa06c27bd9442ec6a7da418263145671bab1c1942979a2f30355" prot="public">
           <name>IQUERY</name>
           <initializer>= 1</initializer>
           <briefdescription>
@@ -34,7 +36,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___d_n_s_1gga973c6b85131920f4de96d7db1206a51ba5f241c8c8f985b3c51e05d39cf030f4c" prot="public">
+        <enumvalue id="group___d_n_s_1ggaf089145255700aa06c27bd9442ec6a7da5f241c8c8f985b3c51e05d39cf030f4c" prot="public">
           <name>STATUS</name>
           <initializer>= 2</initializer>
           <briefdescription>
@@ -43,7 +45,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___d_n_s_1gga973c6b85131920f4de96d7db1206a51ba9d087bfb809874e1b3e9adcbae8ca761" prot="public">
+        <enumvalue id="group___d_n_s_1ggaf089145255700aa06c27bd9442ec6a7da9d087bfb809874e1b3e9adcbae8ca761" prot="public">
           <name>NOTIFY</name>
           <initializer>= 4</initializer>
           <briefdescription>
@@ -52,7 +54,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___d_n_s_1gga973c6b85131920f4de96d7db1206a51ba15a8022d0ed9cd9c2a2e756822703eb4" prot="public">
+        <enumvalue id="group___d_n_s_1ggaf089145255700aa06c27bd9442ec6a7da15a8022d0ed9cd9c2a2e756822703eb4" prot="public">
           <name>UPDATE</name>
           <initializer>= 5</initializer>
           <briefdescription>
@@ -71,10 +73,11 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" line="176" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" bodystart="176" bodyend="182"/>
       </memberdef>
-      <memberdef kind="enum" id="group___d_n_s_1ga6f72845b22666dbf3cce34aeb6d805a0" prot="public" static="no" strong="yes">
-        <type><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></type>
+      <memberdef kind="enum" id="group___d_n_s_1gacf25e2c681fec01ffd7aa44f4fc73b06" prot="public" static="no" strong="yes">
+        <type>uint16_t</type>
         <name>dns_class</name>
-        <enumvalue id="group___d_n_s_1gga6f72845b22666dbf3cce34aeb6d805a0ae43bd933c18b06d29f9c46cce78de0f2" prot="public">
+        <qualifiedname>neforce::dns_class</qualifiedname>
+        <enumvalue id="group___d_n_s_1ggacf25e2c681fec01ffd7aa44f4fc73b06ae43bd933c18b06d29f9c46cce78de0f2" prot="public">
           <name>INTERNET</name>
           <initializer>= 1</initializer>
           <briefdescription>
@@ -83,7 +86,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___d_n_s_1gga6f72845b22666dbf3cce34aeb6d805a0a7f903fc95c5f6059a3c0d1b22820dbf7" prot="public">
+        <enumvalue id="group___d_n_s_1ggacf25e2c681fec01ffd7aa44f4fc73b06a7f903fc95c5f6059a3c0d1b22820dbf7" prot="public">
           <name>CHAOS</name>
           <initializer>= 3</initializer>
           <briefdescription>
@@ -92,7 +95,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___d_n_s_1gga6f72845b22666dbf3cce34aeb6d805a0a968ced8fabc2a848519f87df57607aee" prot="public">
+        <enumvalue id="group___d_n_s_1ggacf25e2c681fec01ffd7aa44f4fc73b06a968ced8fabc2a848519f87df57607aee" prot="public">
           <name>HESIOD</name>
           <initializer>= 4</initializer>
           <briefdescription>
@@ -101,7 +104,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___d_n_s_1gga6f72845b22666dbf3cce34aeb6d805a0a8e1bde3c3d303163521522cf1d62f21f" prot="public">
+        <enumvalue id="group___d_n_s_1ggacf25e2c681fec01ffd7aa44f4fc73b06a8e1bde3c3d303163521522cf1d62f21f" prot="public">
           <name>ANY</name>
           <initializer>= 255</initializer>
           <briefdescription>
@@ -120,10 +123,11 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" line="191" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" bodystart="191" bodyend="196"/>
       </memberdef>
-      <memberdef kind="enum" id="group___d_n_s_1ga4512397ee6460c3c286f1220692348c7" prot="public" static="no" strong="yes">
-        <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+      <memberdef kind="enum" id="group___d_n_s_1ga0b9f4bdc924a9cc1e31f3eef0ff95b8a" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
         <name>dns_response</name>
-        <enumvalue id="group___d_n_s_1gga4512397ee6460c3c286f1220692348c7a71b596df7cfe9f22486d013e022dab21" prot="public">
+        <qualifiedname>neforce::dns_response</qualifiedname>
+        <enumvalue id="group___d_n_s_1gga0b9f4bdc924a9cc1e31f3eef0ff95b8aa71b596df7cfe9f22486d013e022dab21" prot="public">
           <name>NON_ERROR</name>
           <initializer>= 0</initializer>
           <briefdescription>
@@ -132,7 +136,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___d_n_s_1gga4512397ee6460c3c286f1220692348c7a57779da5393b24165afff75397dd8862" prot="public">
+        <enumvalue id="group___d_n_s_1gga0b9f4bdc924a9cc1e31f3eef0ff95b8aa57779da5393b24165afff75397dd8862" prot="public">
           <name>FORMAT_ERROR</name>
           <initializer>= 1</initializer>
           <briefdescription>
@@ -141,7 +145,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___d_n_s_1gga4512397ee6460c3c286f1220692348c7af3be33aa3dbdb9c86e55775e9c67ffb5" prot="public">
+        <enumvalue id="group___d_n_s_1gga0b9f4bdc924a9cc1e31f3eef0ff95b8aaf3be33aa3dbdb9c86e55775e9c67ffb5" prot="public">
           <name>SERVER_FAILURE</name>
           <initializer>= 2</initializer>
           <briefdescription>
@@ -150,7 +154,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___d_n_s_1gga4512397ee6460c3c286f1220692348c7af8776b19ae67c635b8a9dff25f1fae8d" prot="public">
+        <enumvalue id="group___d_n_s_1gga0b9f4bdc924a9cc1e31f3eef0ff95b8aaf8776b19ae67c635b8a9dff25f1fae8d" prot="public">
           <name>NAME_ERROR</name>
           <initializer>= 3</initializer>
           <briefdescription>
@@ -159,7 +163,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___d_n_s_1gga4512397ee6460c3c286f1220692348c7a3e860a081575fc82cc7b6ed2ca602947" prot="public">
+        <enumvalue id="group___d_n_s_1gga0b9f4bdc924a9cc1e31f3eef0ff95b8aa3e860a081575fc82cc7b6ed2ca602947" prot="public">
           <name>NOT_IMPLEMENTED</name>
           <initializer>= 4</initializer>
           <briefdescription>
@@ -168,7 +172,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___d_n_s_1gga4512397ee6460c3c286f1220692348c7a392253eaea22aafdb199bc238bafc082" prot="public">
+        <enumvalue id="group___d_n_s_1gga0b9f4bdc924a9cc1e31f3eef0ff95b8aa392253eaea22aafdb199bc238bafc082" prot="public">
           <name>REFUSED</name>
           <initializer>= 5</initializer>
           <briefdescription>

@@ -3,14 +3,15 @@
   <compounddef id="group___web_socket" kind="group">
     <compoundname>WebSocket</compoundname>
     <title>WebSocket</title>
-    <innerclass refid="structwebsocket__frame__header" prot="public">websocket_frame_header</innerclass>
-    <innerclass refid="classwebsocket__server" prot="public">websocket_server</innerclass>
-    <innerclass refid="classwebsocket__session" prot="public">websocket_session</innerclass>
+    <innerclass refid="structneforce_1_1http_1_1websocket__frame__header" prot="public">neforce::http::websocket_frame_header</innerclass>
+    <innerclass refid="classneforce_1_1http_1_1websocket__server" prot="public">neforce::http::websocket_server</innerclass>
+    <innerclass refid="classneforce_1_1http_1_1websocket__session" prot="public">neforce::http::websocket_session</innerclass>
     <sectiondef kind="enum">
-      <memberdef kind="enum" id="group___web_socket_1gab56e001ece32405515a29e0bf0d10c0f" prot="public" static="no" strong="yes">
-        <type><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></type>
+      <memberdef kind="enum" id="group___web_socket_1gabf74590dcea32a891e0afcc69f6edccf" prot="public" static="no" strong="yes">
+        <type>uint16_t</type>
         <name>websocket_status</name>
-        <enumvalue id="group___web_socket_1ggab56e001ece32405515a29e0bf0d10c0fa459901592f44ead38af2f02c74a777d0" prot="public">
+        <qualifiedname>neforce::http::websocket_status</qualifiedname>
+        <enumvalue id="group___web_socket_1ggabf74590dcea32a891e0afcc69f6edccfa459901592f44ead38af2f02c74a777d0" prot="public">
           <name>NORMAL_CLOSURE</name>
           <initializer>= 1000</initializer>
           <briefdescription>
@@ -19,7 +20,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___web_socket_1ggab56e001ece32405515a29e0bf0d10c0faa6e1cb42459297295699e44752d45c14" prot="public">
+        <enumvalue id="group___web_socket_1ggabf74590dcea32a891e0afcc69f6edccfaa6e1cb42459297295699e44752d45c14" prot="public">
           <name>GOING_AWAY</name>
           <initializer>= 1001</initializer>
           <briefdescription>
@@ -28,7 +29,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___web_socket_1ggab56e001ece32405515a29e0bf0d10c0fa23f149f0f9ae9ed9e0119e7209178a5d" prot="public">
+        <enumvalue id="group___web_socket_1ggabf74590dcea32a891e0afcc69f6edccfa23f149f0f9ae9ed9e0119e7209178a5d" prot="public">
           <name>PROTOCOL_ERROR</name>
           <initializer>= 1002</initializer>
           <briefdescription>
@@ -37,7 +38,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___web_socket_1ggab56e001ece32405515a29e0bf0d10c0fa4a3d41a6e9890daf45664a52886157af" prot="public">
+        <enumvalue id="group___web_socket_1ggabf74590dcea32a891e0afcc69f6edccfa4a3d41a6e9890daf45664a52886157af" prot="public">
           <name>UNSUPPORTED_DATA</name>
           <initializer>= 1003</initializer>
           <briefdescription>
@@ -46,7 +47,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___web_socket_1ggab56e001ece32405515a29e0bf0d10c0fa83c7f2aa8c3ac10ed8beb75cad162827" prot="public">
+        <enumvalue id="group___web_socket_1ggabf74590dcea32a891e0afcc69f6edccfa83c7f2aa8c3ac10ed8beb75cad162827" prot="public">
           <name>RESERVED</name>
           <initializer>= 1004</initializer>
           <briefdescription>
@@ -55,7 +56,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___web_socket_1ggab56e001ece32405515a29e0bf0d10c0fa2908ecfb6cd537c33a242db6647e8ddb" prot="public">
+        <enumvalue id="group___web_socket_1ggabf74590dcea32a891e0afcc69f6edccfa2908ecfb6cd537c33a242db6647e8ddb" prot="public">
           <name>NO_STATUS_RCVD</name>
           <initializer>= 1005</initializer>
           <briefdescription>
@@ -64,7 +65,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___web_socket_1ggab56e001ece32405515a29e0bf0d10c0fa8918e2455215a97e6a775c2d70a1ccac" prot="public">
+        <enumvalue id="group___web_socket_1ggabf74590dcea32a891e0afcc69f6edccfa8918e2455215a97e6a775c2d70a1ccac" prot="public">
           <name>ABNORMAL_CLOSURE</name>
           <initializer>= 1006</initializer>
           <briefdescription>
@@ -73,7 +74,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___web_socket_1ggab56e001ece32405515a29e0bf0d10c0fa4555eb133a1b24f82885c2b5d47ea84d" prot="public">
+        <enumvalue id="group___web_socket_1ggabf74590dcea32a891e0afcc69f6edccfa4555eb133a1b24f82885c2b5d47ea84d" prot="public">
           <name>INVALID_FRAME_PAYLOAD_DATA</name>
           <initializer>= 1007</initializer>
           <briefdescription>
@@ -82,7 +83,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___web_socket_1ggab56e001ece32405515a29e0bf0d10c0fa169cb04bda558347b02294770e4b9e0c" prot="public">
+        <enumvalue id="group___web_socket_1ggabf74590dcea32a891e0afcc69f6edccfa169cb04bda558347b02294770e4b9e0c" prot="public">
           <name>POLICY_VIOLATION</name>
           <initializer>= 1008</initializer>
           <briefdescription>
@@ -91,7 +92,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___web_socket_1ggab56e001ece32405515a29e0bf0d10c0fab21fb07b059fe138857da9afbe0d752d" prot="public">
+        <enumvalue id="group___web_socket_1ggabf74590dcea32a891e0afcc69f6edccfab21fb07b059fe138857da9afbe0d752d" prot="public">
           <name>MESSAGE_TOO_BIG</name>
           <initializer>= 1009</initializer>
           <briefdescription>
@@ -100,7 +101,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___web_socket_1ggab56e001ece32405515a29e0bf0d10c0faf0af0115bc1e1cac1043c17037630f33" prot="public">
+        <enumvalue id="group___web_socket_1ggabf74590dcea32a891e0afcc69f6edccfaf0af0115bc1e1cac1043c17037630f33" prot="public">
           <name>MANDATORY_EXT</name>
           <initializer>= 1010</initializer>
           <briefdescription>
@@ -109,7 +110,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___web_socket_1ggab56e001ece32405515a29e0bf0d10c0fae8c0c70879b5895c615677261d64a1ee" prot="public">
+        <enumvalue id="group___web_socket_1ggabf74590dcea32a891e0afcc69f6edccfae8c0c70879b5895c615677261d64a1ee" prot="public">
           <name>INTERNAL_ERROR</name>
           <initializer>= 1011</initializer>
           <briefdescription>
@@ -118,7 +119,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___web_socket_1ggab56e001ece32405515a29e0bf0d10c0fa49968046085b00aafd48d06c649bf7ce" prot="public">
+        <enumvalue id="group___web_socket_1ggabf74590dcea32a891e0afcc69f6edccfa49968046085b00aafd48d06c649bf7ce" prot="public">
           <name>SERVICE_RESTART</name>
           <initializer>= 1012</initializer>
           <briefdescription>
@@ -127,7 +128,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___web_socket_1ggab56e001ece32405515a29e0bf0d10c0fa42fdd70ed4150a7f49cbb5da8954886f" prot="public">
+        <enumvalue id="group___web_socket_1ggabf74590dcea32a891e0afcc69f6edccfa42fdd70ed4150a7f49cbb5da8954886f" prot="public">
           <name>TRY_AGAIN_LATER</name>
           <initializer>= 1013</initializer>
           <briefdescription>
@@ -136,7 +137,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___web_socket_1ggab56e001ece32405515a29e0bf0d10c0fa2a685d68f06ec03e4b658cc0d6ca4e54" prot="public">
+        <enumvalue id="group___web_socket_1ggabf74590dcea32a891e0afcc69f6edccfa2a685d68f06ec03e4b658cc0d6ca4e54" prot="public">
           <name>BAD_GATEWAY</name>
           <initializer>= 1014</initializer>
           <briefdescription>
@@ -145,7 +146,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___web_socket_1ggab56e001ece32405515a29e0bf0d10c0fad0b068973fe9e92ef5ed81d9e1702133" prot="public">
+        <enumvalue id="group___web_socket_1ggabf74590dcea32a891e0afcc69f6edccfad0b068973fe9e92ef5ed81d9e1702133" prot="public">
           <name>TLS_HANDSHAKE</name>
           <initializer>= 1015</initializer>
           <briefdescription>
@@ -164,10 +165,11 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="54" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="54" bodyend="71"/>
       </memberdef>
-      <memberdef kind="enum" id="group___web_socket_1ga6f03b53401c24a4ee83541255774ef0f" prot="public" static="no" strong="yes">
-        <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+      <memberdef kind="enum" id="group___web_socket_1gaa6e6a0ac548957aa24b1aa2c6b55d90c" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
         <name>websocket_opcode</name>
-        <enumvalue id="group___web_socket_1gga6f03b53401c24a4ee83541255774ef0faa912ad8cd8aeb3f2762b4359d4c36583" prot="public">
+        <qualifiedname>neforce::http::websocket_opcode</qualifiedname>
+        <enumvalue id="group___web_socket_1ggaa6e6a0ac548957aa24b1aa2c6b55d90caa912ad8cd8aeb3f2762b4359d4c36583" prot="public">
           <name>CONTINUATION</name>
           <initializer>= 0x0</initializer>
           <briefdescription>
@@ -176,7 +178,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___web_socket_1gga6f03b53401c24a4ee83541255774ef0fa61a96ffcb251bb9bf0abf8fec19d0ea8" prot="public">
+        <enumvalue id="group___web_socket_1ggaa6e6a0ac548957aa24b1aa2c6b55d90ca61a96ffcb251bb9bf0abf8fec19d0ea8" prot="public">
           <name>TEXT</name>
           <initializer>= 0x1</initializer>
           <briefdescription>
@@ -185,7 +187,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___web_socket_1gga6f03b53401c24a4ee83541255774ef0fa98ad0e8750ae10ad556ed7a62affb452" prot="public">
+        <enumvalue id="group___web_socket_1ggaa6e6a0ac548957aa24b1aa2c6b55d90ca98ad0e8750ae10ad556ed7a62affb452" prot="public">
           <name>BINARY</name>
           <initializer>= 0x2</initializer>
           <briefdescription>
@@ -194,7 +196,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___web_socket_1gga6f03b53401c24a4ee83541255774ef0fa7286293c9125ac7d7bace94c190bc16d" prot="public">
+        <enumvalue id="group___web_socket_1ggaa6e6a0ac548957aa24b1aa2c6b55d90ca7286293c9125ac7d7bace94c190bc16d" prot="public">
           <name>CLOSE</name>
           <initializer>= 0x8</initializer>
           <briefdescription>
@@ -203,7 +205,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___web_socket_1gga6f03b53401c24a4ee83541255774ef0fae07ff41a486c27c095a15898dcca34d1" prot="public">
+        <enumvalue id="group___web_socket_1ggaa6e6a0ac548957aa24b1aa2c6b55d90cae07ff41a486c27c095a15898dcca34d1" prot="public">
           <name>PING</name>
           <initializer>= 0x9</initializer>
           <briefdescription>
@@ -212,7 +214,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___web_socket_1gga6f03b53401c24a4ee83541255774ef0fa15c94917c8795679ecb650ed760c27f0" prot="public">
+        <enumvalue id="group___web_socket_1ggaa6e6a0ac548957aa24b1aa2c6b55d90ca15c94917c8795679ecb650ed760c27f0" prot="public">
           <name>PONG</name>
           <initializer>= 0xA</initializer>
           <briefdescription>

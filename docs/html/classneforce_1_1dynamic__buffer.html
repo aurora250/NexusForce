@@ -1,0 +1,426 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::dynamic_buffer类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1dynamic__buffer.html','','classneforce_1_1dynamic__buffer-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::dynamic_buffer类 参考<div class="ingroups"><a class="el" href="group___async_buffers.html">缓冲区</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>自适应扩容的动态缓冲区  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="buffer_8hpp_source.html">buffer.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a76a05dab3e887dde4c13ad43110f8455" id="r_a76a05dab3e887dde4c13ad43110f8455"><td class="memItemLeft"><a class="el" href="classneforce_1_1mutable__buffers.html">mutable_buffers</a>&#160;</td><td class="memItemRight"><a class="el" href="#a76a05dab3e887dde4c13ad43110f8455">prepare</a> (<a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> n)</td></tr>
+<tr class="memdesc:a76a05dab3e887dde4c13ad43110f8455"><td class="mdescLeft">&#160;</td><td class="mdescRight">准备写入区域  <br /></td></tr>
+<tr class="memitem:ad5dc89cecb033895510cb919612c94e6" id="r_ad5dc89cecb033895510cb919612c94e6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad5dc89cecb033895510cb919612c94e6">commit</a> (<a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> n)</td></tr>
+<tr class="memdesc:ad5dc89cecb033895510cb919612c94e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">标记已写入的字节数  <br /></td></tr>
+<tr class="memitem:adf92915f3469913b2562f87bd4584d73" id="r_adf92915f3469913b2562f87bd4584d73"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#adf92915f3469913b2562f87bd4584d73">consume</a> (<a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> n)</td></tr>
+<tr class="memdesc:adf92915f3469913b2562f87bd4584d73"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除已消费的数据  <br /></td></tr>
+<tr class="memitem:ab58f5c16cca8f53a1cdb3975bbef8bb5" id="r_ab58f5c16cca8f53a1cdb3975bbef8bb5"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab58f5c16cca8f53a1cdb3975bbef8bb5">size</a> () const noexcept</td></tr>
+<tr class="memdesc:ab58f5c16cca8f53a1cdb3975bbef8bb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">当前可读数据大小  <br /></td></tr>
+<tr class="memitem:a95dcea8e4f9f2b22f76970b43b52d865" id="r_a95dcea8e4f9f2b22f76970b43b52d865"><td class="memItemLeft">const char *&#160;</td><td class="memItemRight"><a class="el" href="#a95dcea8e4f9f2b22f76970b43b52d865">data</a> () const noexcept</td></tr>
+<tr class="memdesc:a95dcea8e4f9f2b22f76970b43b52d865"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取可读数据的原始指针  <br /></td></tr>
+<tr class="memitem:a92a93d60603ace6c59a0e074eb840059" id="r_a92a93d60603ace6c59a0e074eb840059"><td class="memItemLeft">char *&#160;</td><td class="memItemRight"><a class="el" href="#a92a93d60603ace6c59a0e074eb840059">data</a> () noexcept</td></tr>
+<tr class="memdesc:a92a93d60603ace6c59a0e074eb840059"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取可写数据的原始指针  <br /></td></tr>
+<tr class="memitem:abbb22fc7a6d36fed30c13a71d9a1ed95" id="r_abbb22fc7a6d36fed30c13a71d9a1ed95"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#abbb22fc7a6d36fed30c13a71d9a1ed95">capacity</a> () const noexcept</td></tr>
+<tr class="memdesc:abbb22fc7a6d36fed30c13a71d9a1ed95"><td class="mdescLeft">&#160;</td><td class="mdescRight">内部缓冲区容量  <br /></td></tr>
+<tr class="memitem:a5d2a6219852d5de979bb6b2d18698db4" id="r_a5d2a6219852d5de979bb6b2d18698db4"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5d2a6219852d5de979bb6b2d18698db4">max_size</a> () const noexcept</td></tr>
+<tr class="memdesc:a5d2a6219852d5de979bb6b2d18698db4"><td class="mdescLeft">&#160;</td><td class="mdescRight">最大允许大小  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>自适应扩容的动态缓冲区 </p>
+<p>适用于异步读取场景：prepare() 获取可写区域，commit() 标记已填充， <a class="el" href="#adf92915f3469913b2562f87bd4584d73" title="移除已消费的数据">consume()</a> 移除已处理数据。内部自动扩容。</p>
+<p>使用示例： </p><div class="fragment"><div class="line"><a class="code hl_class" href="classneforce_1_1dynamic__buffer.html">dynamic_buffer</a> buf;</div>
+<div class="line">sock.async_read(ctx, buf.<a class="code hl_function" href="#a76a05dab3e887dde4c13ad43110f8455">prepare</a>(1024), [&amp;](<a class="code hl_class" href="classneforce_1_1error__code.html">error_code</a> ec, <span class="keywordtype">size_t</span> n) {</div>
+<div class="line">    buf.commit(n);</div>
+<div class="line">    process(buf.data(), buf.size());</div>
+<div class="line">    buf.consume(processed);</div>
+<div class="line">});</div>
+<div class="ttc" id="aclassneforce_1_1dynamic__buffer_html"><div class="ttname"><a href="classneforce_1_1dynamic__buffer.html">neforce::dynamic_buffer</a></div><div class="ttdoc">自适应扩容的动态缓冲区</div><div class="ttdef"><b>定义</b> <a href="buffer_8hpp_source.html#l00228">buffer.hpp:228</a></div></div>
+<div class="ttc" id="aclassneforce_1_1dynamic__buffer_html_a76a05dab3e887dde4c13ad43110f8455"><div class="ttname"><a href="#a76a05dab3e887dde4c13ad43110f8455">neforce::dynamic_buffer::prepare</a></div><div class="ttdeci">mutable_buffers prepare(size_t n)</div><div class="ttdoc">准备写入区域</div><div class="ttdef"><b>定义</b> <a href="buffer_8hpp_source.html#l00244">buffer.hpp:244</a></div></div>
+<div class="ttc" id="aclassneforce_1_1error__code_html"><div class="ttname"><a href="classneforce_1_1error__code.html">neforce::error_code</a></div><div class="ttdoc">错误码</div><div class="ttdef"><b>定义</b> <a href="error__code_8hpp_source.html#l00026">error_code.hpp:26</a></div></div>
+</div><!-- fragment --><dl class="section note"><dt>注解</dt><dd>prepare/commit/consume 操作不保证线程安全，调用者负责同步。 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a> 第 <a class="el" href="buffer_8hpp_source.html#l00228">228</a> 行定义.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="abbb22fc7a6d36fed30c13a71d9a1ed95" name="abbb22fc7a6d36fed30c13a71d9a1ed95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbb22fc7a6d36fed30c13a71d9a1ed95">&#9670;&#160;</a></span>capacity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> neforce::dynamic_buffer::capacity </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>内部缓冲区容量 </p>
+<dl class="section return"><dt>返回</dt><dd>已分配的字节数 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a> 第 <a class="el" href="buffer_8hpp_source.html#l00301">301</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ad5dc89cecb033895510cb919612c94e6" name="ad5dc89cecb033895510cb919612c94e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5dc89cecb033895510cb919612c94e6">&#9670;&#160;</a></span>commit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::dynamic_buffer::commit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>标记已写入的字节数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>已写入的字节数</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>将 write_pos_ 前移 n 字节，使已写入数据可通过 <a class="el" href="#a92a93d60603ace6c59a0e074eb840059" title="获取可写数据的原始指针">data()</a>/size() 访问。 必须在 <a class="el" href="#a76a05dab3e887dde4c13ad43110f8455" title="准备写入区域">prepare()</a> 返回的缓冲区被填充后调用。</p>
+<dl class="section note"><dt>注解</dt><dd>commit 在 prepare 之后调用，通常由 I/O 完成回调触发。 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a> 第 <a class="el" href="buffer_8hpp_source.html#l00260">260</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="async__stream_8hpp_source.html#l00204">neforce::async_stream::async_read()</a>.</p>
+
+</div>
+</div>
+<a id="adf92915f3469913b2562f87bd4584d73" name="adf92915f3469913b2562f87bd4584d73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf92915f3469913b2562f87bd4584d73">&#9670;&#160;</a></span>consume()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::dynamic_buffer::consume </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移除已消费的数据 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>已消费的字节数</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>将剩余未消费的数据移到缓冲区开头，释放已消费的空间供后续写入。 通常在处理完部分数据后调用。 </p>
+
+<p class="definition">在文件 <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a> 第 <a class="el" href="buffer_8hpp_source.html#l00269">269</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="memory_2memory_8hpp_source.html#l00169">neforce::memory_move()</a>.</p>
+
+</div>
+</div>
+<a id="a95dcea8e4f9f2b22f76970b43b52d865" name="a95dcea8e4f9f2b22f76970b43b52d865"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95dcea8e4f9f2b22f76970b43b52d865">&#9670;&#160;</a></span>data() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * neforce::dynamic_buffer::data </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取可读数据的原始指针 </p>
+<dl class="section return"><dt>返回</dt><dd>可读数据起始指针 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a> 第 <a class="el" href="buffer_8hpp_source.html#l00289">289</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a92a93d60603ace6c59a0e074eb840059" name="a92a93d60603ace6c59a0e074eb840059"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92a93d60603ace6c59a0e074eb840059">&#9670;&#160;</a></span>data() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * neforce::dynamic_buffer::data </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取可写数据的原始指针 </p>
+<dl class="section return"><dt>返回</dt><dd>可写数据起始指针 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a> 第 <a class="el" href="buffer_8hpp_source.html#l00295">295</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5d2a6219852d5de979bb6b2d18698db4" name="a5d2a6219852d5de979bb6b2d18698db4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d2a6219852d5de979bb6b2d18698db4">&#9670;&#160;</a></span>max_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> neforce::dynamic_buffer::max_size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>最大允许大小 </p>
+<dl class="section return"><dt>返回</dt><dd>最大容量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a> 第 <a class="el" href="buffer_8hpp_source.html#l00307">307</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="numeric__traits_8hpp_source.html#l00153">neforce::numeric_traits&lt; T, Dummy &gt;::max()</a>.</p>
+
+</div>
+</div>
+<a id="a76a05dab3e887dde4c13ad43110f8455" name="a76a05dab3e887dde4c13ad43110f8455"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76a05dab3e887dde4c13ad43110f8455">&#9670;&#160;</a></span>prepare()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1mutable__buffers.html">mutable_buffers</a> neforce::dynamic_buffer::prepare </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>准备写入区域 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>至少需要的字节数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>可写的缓冲区序列</dd></dl>
+<p>保证返回的缓冲区至少 n 字节可用。若内部空间不足则自动扩容。 返回的 <a class="el" href="classneforce_1_1mutable__buffers.html" title="可变缓冲区序列（scatter-gather 读）">mutable_buffers</a> 指向内部存储，在下次 prepare 或对象析构前有效。</p>
+<dl class="section note"><dt>注解</dt><dd>多次 prepare 不重叠——每次 prepare 返回的缓冲区基于当前 write_pos_。 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a> 第 <a class="el" href="buffer_8hpp_source.html#l00244">244</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="async__stream_8hpp_source.html#l00204">neforce::async_stream::async_read()</a>.</p>
+
+</div>
+</div>
+<a id="ab58f5c16cca8f53a1cdb3975bbef8bb5" name="ab58f5c16cca8f53a1cdb3975bbef8bb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab58f5c16cca8f53a1cdb3975bbef8bb5">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> neforce::dynamic_buffer::size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>当前可读数据大小 </p>
+<dl class="section return"><dt>返回</dt><dd>已写入但未消费的字节数 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a> 第 <a class="el" href="buffer_8hpp_source.html#l00283">283</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="buffer_8hpp_source.html">buffer.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><a href="classneforce_1_1dynamic__buffer.html">dynamic_buffer</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1http_1_1http2__data__frame" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::http::http2_data_frame</compoundname>
+    <includes refid="http2__protocol_8hpp" local="no">http2_protocol.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structneforce_1_1http_1_1http2__data__frame_1af0f12bc896f720c292ef5c69ebb8e670" prot="public" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::http::http2_data_frame::stream_id</definition>
+        <argsstring></argsstring>
+        <name>stream_id</name>
+        <qualifiedname>neforce::http::http2_data_frame::stream_id</qualifiedname>
+        <briefdescription>
+<para>流 ID </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="167" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="167" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1http_1_1http2__data__frame_1a2292dc719071515b7117b6de063fb244" prot="public" static="no" mutable="no">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>byte_vector neforce::http::http2_data_frame::data</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <qualifiedname>neforce::http::http2_data_frame::data</qualifiedname>
+        <briefdescription>
+<para>负载数据 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="168" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="168" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1http_1_1http2__data__frame_1a16cdc6e34718ce513c572771098b5c6e" prot="public" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref></type>
+        <definition>uint8_t neforce::http::http2_data_frame::pad_length</definition>
+        <argsstring></argsstring>
+        <name>pad_length</name>
+        <qualifiedname>neforce::http::http2_data_frame::pad_length</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>填充长度 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="169" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="169" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1http_1_1http2__data__frame_1ae2041b25c4395a962796dde22a4d83c2" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::http::http2_data_frame::end_stream</definition>
+        <argsstring></argsstring>
+        <name>end_stream</name>
+        <qualifiedname>neforce::http::http2_data_frame::end_stream</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否结束流 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="170" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="170" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>DATA 帧（RFC 7540 §6.1） </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::http::http2_data_frame</label>
+        <link refid="structneforce_1_1http_1_1http2__data__frame"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>data</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::icollector&lt; T &gt;</label>
+        <link refid="structneforce_1_1icollector"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="2">
+        <label>neforce::vector&lt; byte_t &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="166" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="166" bodyend="171"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1http_1_1http2__data__frame_1a2292dc719071515b7117b6de063fb244" prot="public" virt="non-virtual"><scope>neforce::http::http2_data_frame</scope><name>data</name></member>
+      <member refid="structneforce_1_1http_1_1http2__data__frame_1ae2041b25c4395a962796dde22a4d83c2" prot="public" virt="non-virtual"><scope>neforce::http::http2_data_frame</scope><name>end_stream</name></member>
+      <member refid="structneforce_1_1http_1_1http2__data__frame_1a16cdc6e34718ce513c572771098b5c6e" prot="public" virt="non-virtual"><scope>neforce::http::http2_data_frame</scope><name>pad_length</name></member>
+      <member refid="structneforce_1_1http_1_1http2__data__frame_1af0f12bc896f720c292ef5c69ebb8e670" prot="public" virt="non-virtual"><scope>neforce::http::http2_data_frame</scope><name>stream_id</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

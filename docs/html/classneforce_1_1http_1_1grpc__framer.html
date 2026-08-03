@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::http::grpc_framer类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1http_1_1grpc__framer.html','','classneforce_1_1http_1_1grpc__framer-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::http::grpc_framer类 参考<div class="ingroups"><a class="el" href="group__g_r_p_c.html">gRPC</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>gRPC消息帧编解码器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="grpc_8hpp_source.html">grpc.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a80c590b5899fb9411ae261cedb796569" id="r_a80c590b5899fb9411ae261cedb796569"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a80c590b5899fb9411ae261cedb796569">decode</a> (const <a class="el" href="group___core_types.html#ga146242c39a2b187142d7b3ca35872740">byte_t</a> *<a class="el" href="group___type_erasure_functions.html#ga897be37123f1690ffa096c58a510dbbe">data</a>, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> len, <a class="el" href="classneforce_1_1vector.html">vector</a>&lt; <a class="el" href="structneforce_1_1http_1_1grpc__message.html">grpc_message</a> &gt; &amp;out)</td></tr>
+<tr class="memdesc:a80c590b5899fb9411ae261cedb796569"><td class="mdescLeft">&#160;</td><td class="mdescRight">从字节块解码gRPC帧  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静态 Public 成员函数</h2></td></tr>
+<tr class="memitem:a635f1475d74e645ab5eea594a42197c0" id="r_a635f1475d74e645ab5eea594a42197c0"><td class="memItemLeft"><a id="a635f1475d74e645ab5eea594a42197c0" name="a635f1475d74e645ab5eea594a42197c0"></a>
+static <a class="el" href="group___container.html#ga334b1ea628395ee46f944d7eacc50543">byte_vector</a>&#160;</td><td class="memItemRight"><b>encode</b> (const <a class="el" href="structneforce_1_1http_1_1grpc__message.html">grpc_message</a> &amp;msg)</td></tr>
+<tr class="memdesc:a635f1475d74e645ab5eea594a42197c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">编码消息为gRPC帧格式的字节块 <br /></td></tr>
+<tr class="memitem:afce0aa149f257d3d5f5c902f51d6c32e" id="r_afce0aa149f257d3d5f5c902f51d6c32e"><td class="memItemLeft"><a id="afce0aa149f257d3d5f5c902f51d6c32e" name="afce0aa149f257d3d5f5c902f51d6c32e"></a>
+static <a class="el" href="group___container.html#ga334b1ea628395ee46f944d7eacc50543">byte_vector</a>&#160;</td><td class="memItemRight"><b>encode_messages</b> (const <a class="el" href="classneforce_1_1vector.html">vector</a>&lt; <a class="el" href="structneforce_1_1http_1_1grpc__message.html">grpc_message</a> &gt; &amp;messages)</td></tr>
+<tr class="memdesc:afce0aa149f257d3d5f5c902f51d6c32e"><td class="mdescLeft">&#160;</td><td class="mdescRight">编码多个消息（连续写入同一buffer） <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public 属性</h2></td></tr>
+<tr class="memitem:a62591e610085fc5f7b92ea11c73d3fa5" id="r_a62591e610085fc5f7b92ea11c73d3fa5"><td class="memItemLeft"><a id="a62591e610085fc5f7b92ea11c73d3fa5" name="a62591e610085fc5f7b92ea11c73d3fa5"></a>
+<a class="el" href="classneforce_1_1byte__size.html">byte_size</a>&#160;</td><td class="memItemRight"><b>max_receive_size</b> {4_MB}</td></tr>
+<tr class="memdesc:a62591e610085fc5f7b92ea11c73d3fa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">最大接收消息大小（默认4MB） <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>gRPC消息帧编解码器 </p>
+<p>线程安全的消息帧编码/解码。 </p>
+
+<p class="definition">在文件 <a class="el" href="grpc_8hpp_source.html">grpc.hpp</a> 第 <a class="el" href="grpc_8hpp_source.html#l00104">104</a> 行定义.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a80c590b5899fb9411ae261cedb796569" name="a80c590b5899fb9411ae261cedb796569"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80c590b5899fb9411ae261cedb796569">&#9670;&#160;</a></span>decode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int neforce::http::grpc_framer::decode </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___core_types.html#ga146242c39a2b187142d7b3ca35872740">byte_t</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a></td>          <td class="paramname"><span class="paramname"><em>len</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1vector.html">vector</a>&lt; <a class="el" href="structneforce_1_1http_1_1grpc__message.html">grpc_message</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>out</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>从字节块解码gRPC帧 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>输入字节块 </td></tr>
+    <tr><td class="paramname">len</td><td>输入长度 </td></tr>
+    <tr><td class="paramname">out</td><td>输出消息列表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>成功解码的消息数量，-1表示帧格式错误</dd></dl>
+<p>一次调用可解码多个连续帧。 </p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">neforce::data()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="grpc_8hpp_source.html">grpc.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><b>http</b></li><li class="navelem"><a href="classneforce_1_1http_1_1grpc__framer.html">grpc_framer</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

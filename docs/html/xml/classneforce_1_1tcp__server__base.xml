@@ -1,0 +1,784 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1tcp__server__base" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>neforce::tcp_server_base</compoundname>
+    <derivedcompoundref refid="classneforce_1_1ssl__server" prot="public" virt="non-virtual">neforce::ssl_server</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1tcp__server" prot="public" virt="non-virtual">neforce::tcp_server</derivedcompoundref>
+    <includes refid="tcp__server_8hpp" local="no">tcp_server.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1tcp__server__base_1a10bc603a641b4a938eaca92c935e9738" prot="public" static="no">
+        <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1tcp__socket" kindref="compound">tcp_socket</ref> &gt;)&gt;</type>
+        <definition>using neforce::tcp_server_base::client_handler_t = function&lt;void(unique_ptr&lt;tcp_socket&gt;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>client_handler_t</name>
+        <qualifiedname>neforce::tcp_server_base::client_handler_t</qualifiedname>
+        <briefdescription>
+<para>客户端处理器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="32" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1tcp__server__base_1a078aa172df59799167a6ef20994e8e65" prot="public" static="no">
+        <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(const <ref refid="structneforce_1_1exception" kindref="compound">exception</ref> &amp;)&gt;</type>
+        <definition>using neforce::tcp_server_base::exception_handler_t = function&lt;void(const exception&amp;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>exception_handler_t</name>
+        <qualifiedname>neforce::tcp_server_base::exception_handler_t</qualifiedname>
+        <briefdescription>
+<para>异常处理器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="33" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classneforce_1_1tcp__server__base_1ac0f3ea69f0f8e798f03c58f3df5a29cd" prot="protected" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1tcp__acceptor" kindref="compound">tcp_acceptor</ref> &gt;</type>
+        <definition>unique_ptr&lt;tcp_acceptor&gt; neforce::tcp_server_base::acceptor_</definition>
+        <argsstring></argsstring>
+        <name>acceptor_</name>
+        <qualifiedname>neforce::tcp_server_base::acceptor_</qualifiedname>
+        <briefdescription>
+<para>TCP接受器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="36" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tcp__server__base_1a3cf6cdce8da726945b22c97962a78d88" prot="protected" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+        <definition>io_context&amp; neforce::tcp_server_base::ctx_</definition>
+        <argsstring></argsstring>
+        <name>ctx_</name>
+        <qualifiedname>neforce::tcp_server_base::ctx_</qualifiedname>
+        <briefdescription>
+<para>异步 I/O 执行上下文 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="37" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tcp__server__base_1a746efd7fb63a04e63c7a74867ae6f657" prot="protected" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1io__context_1_1work" kindref="compound">io_context::work</ref> &gt;</type>
+        <definition>unique_ptr&lt;io_context::work&gt; neforce::tcp_server_base::ctx_work_</definition>
+        <argsstring></argsstring>
+        <name>ctx_work_</name>
+        <qualifiedname>neforce::tcp_server_base::ctx_work_</qualifiedname>
+        <briefdescription>
+<para><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> 工作守卫 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="38" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tcp__server__base_1a47267e12bff4bafd32124499e1f94d71" prot="protected" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1ports" kindref="compound">ports</ref></type>
+        <definition>ports neforce::tcp_server_base::port_</definition>
+        <argsstring></argsstring>
+        <name>port_</name>
+        <qualifiedname>neforce::tcp_server_base::port_</qualifiedname>
+        <briefdescription>
+<para>监听端口 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="39" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="39" bodyend="-1"/>
+        <referencedby refid="classneforce_1_1tcp__server__base_1a7abdf6b40285f61f8d4e83e26dc25a66" compoundref="tcp__server_8hpp" startline="156" endline="156">port</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tcp__server__base_1a15b95a7e58d0477e6cea925173f18e5e" prot="protected" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; neforce::tcp_server_base::running_</definition>
+        <argsstring></argsstring>
+        <name>running_</name>
+        <qualifiedname>neforce::tcp_server_base::running_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>运行标志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="40" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="40" bodyend="40"/>
+        <referencedby refid="classneforce_1_1tcp__server__base_1a4fb5ce5c8746e7bd2ab80f2fc53fdf50" compoundref="tcp__server_8hpp" startline="150" endline="150">is_running</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tcp__server__base_1ab096165cb0d343f1bcddab07e94a393e" prot="protected" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="classneforce_1_1thread" kindref="compound">thread</ref> &gt;</type>
+        <definition>vector&lt;thread&gt; neforce::tcp_server_base::worker_threads_</definition>
+        <argsstring></argsstring>
+        <name>worker_threads_</name>
+        <qualifiedname>neforce::tcp_server_base::worker_threads_</qualifiedname>
+        <briefdescription>
+<para>工作线程列表（含 accept 线程） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="41" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tcp__server__base_1a7d71f14af552da9a95b620669861a662" prot="protected" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::tcp_server_base::worker_count_</definition>
+        <argsstring></argsstring>
+        <name>worker_count_</name>
+        <qualifiedname>neforce::tcp_server_base::worker_count_</qualifiedname>
+        <briefdescription>
+<para>工作线程数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="42" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tcp__server__base_1a56937d48c48fc3e10a78f06dad0944dc" prot="protected" static="no" mutable="yes">
+        <type><ref refid="classneforce_1_1shared__mutex" kindref="compound">shared_mutex</ref></type>
+        <definition>shared_mutex neforce::tcp_server_base::handler_mutex_</definition>
+        <argsstring></argsstring>
+        <name>handler_mutex_</name>
+        <qualifiedname>neforce::tcp_server_base::handler_mutex_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="44" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tcp__server__base_1a0a1b5a8e8e6c38e15b69048561bd0bee" prot="protected" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1tcp__server__base_1a10bc603a641b4a938eaca92c935e9738" kindref="member">client_handler_t</ref></type>
+        <definition>client_handler_t neforce::tcp_server_base::client_handler_</definition>
+        <argsstring></argsstring>
+        <name>client_handler_</name>
+        <qualifiedname>neforce::tcp_server_base::client_handler_</qualifiedname>
+        <briefdescription>
+<para>客户端处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="46" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="46" bodyend="-1"/>
+        <referencedby refid="classneforce_1_1tcp__server__base_1af2e4ed0e72115606ebea395f5808b36e" compoundref="tcp__server_8hpp" startline="66" endline="70">handle_client</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tcp__server__base_1a537f7efc2740b8160f887a8ce5453a7c" prot="protected" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1tcp__server__base_1a078aa172df59799167a6ef20994e8e65" kindref="member">exception_handler_t</ref></type>
+        <definition>exception_handler_t neforce::tcp_server_base::exception_handler_</definition>
+        <argsstring></argsstring>
+        <name>exception_handler_</name>
+        <qualifiedname>neforce::tcp_server_base::exception_handler_</qualifiedname>
+        <briefdescription>
+<para>异常处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="47" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tcp__server__base_1ae4fd26d9aad681afaa6f840b454783e3" prot="protected" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1mutex" kindref="compound">mutex</ref></type>
+        <definition>mutex neforce::tcp_server_base::acceptor_mutex_</definition>
+        <argsstring></argsstring>
+        <name>acceptor_mutex_</name>
+        <qualifiedname>neforce::tcp_server_base::acceptor_mutex_</qualifiedname>
+        <briefdescription>
+<para>TCP接受器互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="48" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classneforce_1_1tcp__server__base_1a211fdf9694b267014a39c510b544f237" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::tcp_server_base::accept_loop</definition>
+        <argsstring>()</argsstring>
+        <name>accept_loop</name>
+        <qualifiedname>neforce::tcp_server_base::accept_loop</qualifiedname>
+        <briefdescription>
+<para>接受连接的主循环 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>使用 <ref refid="classneforce_1_1io__context_1ab6de26ff977971973635b8ff701d066d" kindref="member">io_context::add_fd</ref> + run_one() 驱动事件等待， 替代 raw poll/WSAEventSelect。专用线程确保 SSL 握手等阻塞操作 不影响 <ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> 池线程。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="57" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tcp__server__base_1af2e4ed0e72115606ebea395f5808b36e" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void neforce::tcp_server_base::handle_client</definition>
+        <argsstring>(unique_ptr&lt; tcp_socket &gt; client)</argsstring>
+        <name>handle_client</name>
+        <qualifiedname>neforce::tcp_server_base::handle_client</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1tcp__socket" kindref="compound">tcp_socket</ref> &gt;</type>
+          <declname>client</declname>
+        </param>
+        <briefdescription>
+<para>处理单个客户端连接 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>client</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>已建立连接的 socket</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+调用客户端处理器处理连接。 派生类可重写此方法以自定义处理逻辑。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="66" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="66" bodyend="70"/>
+        <references refid="classneforce_1_1tcp__server__base_1a0a1b5a8e8e6c38e15b69048561bd0bee" compoundref="tcp__server_8hpp" startline="46">client_handler_</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tcp__server__base_1a6c04ae1683cd55f6193a3cfcacbcd148" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; <ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1tcp__socket" kindref="compound">tcp_socket</ref> &gt; &gt;</type>
+        <definition>virtual optional&lt; unique_ptr&lt; tcp_socket &gt; &gt; neforce::tcp_server_base::accept_one</definition>
+        <argsstring>()=0</argsstring>
+        <name>accept_one</name>
+        <qualifiedname>neforce::tcp_server_base::accept_one</qualifiedname>
+        <reimplementedby refid="classneforce_1_1ssl__server_1ae6241e678c24fdc018928b8a19237e4c">accept_one</reimplementedby>
+        <reimplementedby refid="classneforce_1_1tcp__server_1a364c35c58fc3358d3c0d418db600cf91">accept_one</reimplementedby>
+        <briefdescription>
+<para>创建一个客户端连接 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>客户端socket，无连接返回none</para>
+</simplesect>
+派生类实现具体的连接接受逻辑。 支持阻塞和非阻塞模式。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="79" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tcp__server__base_1a4ad09b500300f6bad8e859fb1f8dce0e" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void neforce::tcp_server_base::create_acceptor</definition>
+        <argsstring>(const ip_address &amp;endpoint, int backlog)=0</argsstring>
+        <name>create_acceptor</name>
+        <qualifiedname>neforce::tcp_server_base::create_acceptor</qualifiedname>
+        <reimplementedby refid="classneforce_1_1ssl__server_1ac1bde60d52095fcc1562033301ec5262">create_acceptor</reimplementedby>
+        <reimplementedby refid="classneforce_1_1tcp__server_1a25a88400359569b74e58748138014f69">create_acceptor</reimplementedby>
+        <param>
+          <type>const <ref refid="classneforce_1_1ip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>backlog</declname>
+        </param>
+        <briefdescription>
+<para>创建并配置acceptor </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>监听地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>backlog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连接队列大小</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+派生类实现具体的acceptor创建和配置。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="88" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1tcp__server__base_1ae0f869456fc1bbba111fbe19e11c3568" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::tcp_server_base::tcp_server_base</definition>
+        <argsstring>(ports port, io_context &amp;ctx, size_t worker_count=0)</argsstring>
+        <name>tcp_server_base</name>
+        <qualifiedname>neforce::tcp_server_base::tcp_server_base</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1ports" kindref="compound">ports</ref></type>
+          <declname>port</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>worker_count</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>监听端口 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>worker_count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>工作线程数（默认最大） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>worker_count为0时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="98" column="14"/>
+        <references refid="classneforce_1_1tcp__server__base_1a7abdf6b40285f61f8d4e83e26dc25a66" compoundref="tcp__server_8hpp" startline="156" endline="156">port</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tcp__server__base_1aabd99c9fa61ecdb62c23e38e7745bffd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual neforce::tcp_server_base::~tcp_server_base</definition>
+        <argsstring>()</argsstring>
+        <name>~tcp_server_base</name>
+        <qualifiedname>neforce::tcp_server_base::~tcp_server_base</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>自动停止服务器。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="105" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="105" bodyend="105"/>
+        <references refid="classneforce_1_1tcp__server__base_1aa40255225817e61f03cfc45236dab2cd">stop</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tcp__server__base_1a6e675c22180a46ef545668e1970969e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::tcp_server_base::tcp_server_base</definition>
+        <argsstring>(const tcp_server_base &amp;)=delete</argsstring>
+        <name>tcp_server_base</name>
+        <qualifiedname>neforce::tcp_server_base::tcp_server_base</qualifiedname>
+        <param>
+          <type>const tcp_server_base &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="107" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tcp__server__base_1acc2b83b052dcb07f93b8fe5261c5e8de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1tcp__server__base_1ae0f869456fc1bbba111fbe19e11c3568" kindref="member">tcp_server_base</ref> &amp;</type>
+        <definition>tcp_server_base &amp; neforce::tcp_server_base::operator=</definition>
+        <argsstring>(const tcp_server_base &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::tcp_server_base::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1tcp__server__base_1ae0f869456fc1bbba111fbe19e11c3568" kindref="member">tcp_server_base</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="108" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tcp__server__base_1ac5157d23244eea24d0adf45f322784cd" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::tcp_server_base::tcp_server_base</definition>
+        <argsstring>(tcp_server_base &amp;&amp;other) noexcept=delete</argsstring>
+        <name>tcp_server_base</name>
+        <qualifiedname>neforce::tcp_server_base::tcp_server_base</qualifiedname>
+        <param>
+          <type>tcp_server_base &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="110" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tcp__server__base_1ad687457addad0afa2d520b914d5ff94f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1tcp__server__base_1ae0f869456fc1bbba111fbe19e11c3568" kindref="member">tcp_server_base</ref> &amp;</type>
+        <definition>tcp_server_base &amp; neforce::tcp_server_base::operator=</definition>
+        <argsstring>(tcp_server_base &amp;&amp;other) noexcept=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::tcp_server_base::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1tcp__server__base_1ae0f869456fc1bbba111fbe19e11c3568" kindref="member">tcp_server_base</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="111" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tcp__server__base_1a9022e7a54a73d2c325fb35fda5c0406e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::tcp_server_base::set_client_handler</definition>
+        <argsstring>(client_handler_t handler)</argsstring>
+        <name>set_client_handler</name>
+        <qualifiedname>neforce::tcp_server_base::set_client_handler</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1tcp__server__base_1a10bc603a641b4a938eaca92c935e9738" kindref="member">client_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>设置客户端处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>处理器函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置成功返回true</para>
+</simplesect>
+必须在服务器启动前设置。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="120" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tcp__server__base_1a28c05522921c5e044c33cb08840d89aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::tcp_server_base::set_exception_handler</definition>
+        <argsstring>(exception_handler_t handler)</argsstring>
+        <name>set_exception_handler</name>
+        <qualifiedname>neforce::tcp_server_base::set_exception_handler</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1tcp__server__base_1a078aa172df59799167a6ef20994e8e65" kindref="member">exception_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>设置异常处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>处理器函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="127" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tcp__server__base_1a11f1f18ed71e77da01bd2f42adba94e4" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool neforce::tcp_server_base::start</definition>
+        <argsstring>(int backlog=SOMAXCONN) noexcept</argsstring>
+        <name>start</name>
+        <qualifiedname>neforce::tcp_server_base::start</qualifiedname>
+        <reimplementedby refid="classneforce_1_1ssl__server_1a01cff9e879e1ffdf723ba13abed29456">start</reimplementedby>
+        <param>
+          <type>int</type>
+          <declname>backlog</declname>
+          <defval>SOMAXCONN</defval>
+        </param>
+        <briefdescription>
+<para>启动服务器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>backlog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连接队列大小（默认SOMAXCONN） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>启动成功返回true</para>
+</simplesect>
+创建acceptor，开始接受连接。 需要先设置客户端处理器。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="137" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tcp__server__base_1aa40255225817e61f03cfc45236dab2cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::tcp_server_base::stop</definition>
+        <argsstring>()</argsstring>
+        <name>stop</name>
+        <qualifiedname>neforce::tcp_server_base::stop</qualifiedname>
+        <briefdescription>
+<para>停止服务器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>停止接受新连接，等待现有连接处理完成。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="144" column="10"/>
+        <referencedby refid="classneforce_1_1tcp__server__base_1aabd99c9fa61ecdb62c23e38e7745bffd" compoundref="tcp__server_8hpp" startline="105" endline="105">~tcp_server_base</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tcp__server__base_1a4fb5ce5c8746e7bd2ab80f2fc53fdf50" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::tcp_server_base::is_running</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_running</name>
+        <qualifiedname>neforce::tcp_server_base::is_running</qualifiedname>
+        <briefdescription>
+<para>检查服务器是否运行中 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>运行中返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="150" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="150" bodyend="150"/>
+        <references refid="classneforce_1_1tcp__server__base_1a15b95a7e58d0477e6cea925173f18e5e" compoundref="tcp__server_8hpp" startline="40" endline="40">running_</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tcp__server__base_1a7abdf6b40285f61f8d4e83e26dc25a66" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1ports" kindref="compound">ports</ref></type>
+        <definition>ports neforce::tcp_server_base::port</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>port</name>
+        <qualifiedname>neforce::tcp_server_base::port</qualifiedname>
+        <briefdescription>
+<para>获取监听端口 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>端口号 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="156" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="156" bodyend="156"/>
+        <references refid="classneforce_1_1tcp__server__base_1a47267e12bff4bafd32124499e1f94d71" compoundref="tcp__server_8hpp" startline="39">port_</references>
+        <referencedby refid="classneforce_1_1ssl__server_1aa54cd3c629fcb5b136218dafcd6288bd">neforce::ssl_server::ssl_server</referencedby>
+        <referencedby refid="classneforce_1_1tcp__server__base_1ae0f869456fc1bbba111fbe19e11c3568">tcp_server_base</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>TCP服务器基类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供TCP服务器的核心功能，包括连接接受、线程池管理、 客户端处理和异常处理。派生类实现具体的接受器创建。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>neforce::ssl_server</label>
+        <link refid="classneforce_1_1ssl__server"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::tcp_server</label>
+        <link refid="classneforce_1_1tcp__server"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::tcp_server_base</label>
+        <link refid="classneforce_1_1tcp__server__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="8">
+        <label>neforce::atomic&lt; bool &gt;</label>
+        <link refid="structneforce_1_1atomic_3_01bool_01_4"/>
+      </node>
+      <node id="14">
+        <label>neforce::function&lt; void(const exception &amp;)&gt;</label>
+        <link refid="classneforce_1_1function"/>
+      </node>
+      <node id="13">
+        <label>neforce::function&lt; void(unique_ptr&lt; tcp_socket &gt;)&gt;</label>
+        <link refid="classneforce_1_1function"/>
+      </node>
+      <node id="10">
+        <label>neforce::icollector&lt; T &gt;</label>
+        <link refid="structneforce_1_1icollector"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="3">
+        <label>neforce::io_context</label>
+        <link refid="classneforce_1_1io__context"/>
+      </node>
+      <node id="6">
+        <label>neforce::iobject&lt; ports &gt;</label>
+        <link refid="structneforce_1_1iobject"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>neforce::istringify&lt; ports &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+      <node id="15">
+        <label>neforce::mutex</label>
+        <link refid="classneforce_1_1mutex"/>
+      </node>
+      <node id="5">
+        <label>neforce::ports</label>
+        <link refid="structneforce_1_1ports"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>neforce::shared_mutex</label>
+        <link refid="classneforce_1_1shared__mutex"/>
+      </node>
+      <node id="1">
+        <label>neforce::tcp_server_base</label>
+        <link refid="classneforce_1_1tcp__server__base"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>acceptor_</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>ctx_</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>ctx_work_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>port_</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>running_</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>worker_threads_</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
+          <edgelabel>handler_mutex_</edgelabel>
+        </childnode>
+        <childnode refid="13" relation="usage">
+          <edgelabel>client_handler_</edgelabel>
+        </childnode>
+        <childnode refid="14" relation="usage">
+          <edgelabel>exception_handler_</edgelabel>
+        </childnode>
+        <childnode refid="15" relation="usage">
+          <edgelabel>acceptor_mutex_</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::unique_ptr&lt; neforce::io_context::work &gt;</label>
+        <link refid="classneforce_1_1unique__ptr"/>
+      </node>
+      <node id="2">
+        <label>neforce::unique_ptr&lt; neforce::tcp_acceptor &gt;</label>
+        <link refid="classneforce_1_1unique__ptr"/>
+      </node>
+      <node id="9">
+        <label>neforce::vector&lt; neforce::thread &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="30" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="30" bodyend="157"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1tcp__server__base_1a211fdf9694b267014a39c510b544f237" prot="protected" virt="non-virtual"><scope>neforce::tcp_server_base</scope><name>accept_loop</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1a6c04ae1683cd55f6193a3cfcacbcd148" prot="protected" virt="pure-virtual"><scope>neforce::tcp_server_base</scope><name>accept_one</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1ac0f3ea69f0f8e798f03c58f3df5a29cd" prot="protected" virt="non-virtual"><scope>neforce::tcp_server_base</scope><name>acceptor_</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1ae4fd26d9aad681afaa6f840b454783e3" prot="protected" virt="non-virtual"><scope>neforce::tcp_server_base</scope><name>acceptor_mutex_</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1a0a1b5a8e8e6c38e15b69048561bd0bee" prot="protected" virt="non-virtual"><scope>neforce::tcp_server_base</scope><name>client_handler_</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1a10bc603a641b4a938eaca92c935e9738" prot="public" virt="non-virtual"><scope>neforce::tcp_server_base</scope><name>client_handler_t</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1a4ad09b500300f6bad8e859fb1f8dce0e" prot="protected" virt="pure-virtual"><scope>neforce::tcp_server_base</scope><name>create_acceptor</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1a3cf6cdce8da726945b22c97962a78d88" prot="protected" virt="non-virtual"><scope>neforce::tcp_server_base</scope><name>ctx_</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1a746efd7fb63a04e63c7a74867ae6f657" prot="protected" virt="non-virtual"><scope>neforce::tcp_server_base</scope><name>ctx_work_</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1a537f7efc2740b8160f887a8ce5453a7c" prot="protected" virt="non-virtual"><scope>neforce::tcp_server_base</scope><name>exception_handler_</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1a078aa172df59799167a6ef20994e8e65" prot="public" virt="non-virtual"><scope>neforce::tcp_server_base</scope><name>exception_handler_t</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1af2e4ed0e72115606ebea395f5808b36e" prot="protected" virt="virtual"><scope>neforce::tcp_server_base</scope><name>handle_client</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1a56937d48c48fc3e10a78f06dad0944dc" prot="protected" virt="non-virtual"><scope>neforce::tcp_server_base</scope><name>handler_mutex_</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1a4fb5ce5c8746e7bd2ab80f2fc53fdf50" prot="public" virt="non-virtual"><scope>neforce::tcp_server_base</scope><name>is_running</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1acc2b83b052dcb07f93b8fe5261c5e8de" prot="public" virt="non-virtual"><scope>neforce::tcp_server_base</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1ad687457addad0afa2d520b914d5ff94f" prot="public" virt="non-virtual"><scope>neforce::tcp_server_base</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1a7abdf6b40285f61f8d4e83e26dc25a66" prot="public" virt="non-virtual"><scope>neforce::tcp_server_base</scope><name>port</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1a47267e12bff4bafd32124499e1f94d71" prot="protected" virt="non-virtual"><scope>neforce::tcp_server_base</scope><name>port_</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1a15b95a7e58d0477e6cea925173f18e5e" prot="protected" virt="non-virtual"><scope>neforce::tcp_server_base</scope><name>running_</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1a9022e7a54a73d2c325fb35fda5c0406e" prot="public" virt="non-virtual"><scope>neforce::tcp_server_base</scope><name>set_client_handler</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1a28c05522921c5e044c33cb08840d89aa" prot="public" virt="non-virtual"><scope>neforce::tcp_server_base</scope><name>set_exception_handler</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1a11f1f18ed71e77da01bd2f42adba94e4" prot="public" virt="virtual"><scope>neforce::tcp_server_base</scope><name>start</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1aa40255225817e61f03cfc45236dab2cd" prot="public" virt="non-virtual"><scope>neforce::tcp_server_base</scope><name>stop</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1ae0f869456fc1bbba111fbe19e11c3568" prot="public" virt="non-virtual"><scope>neforce::tcp_server_base</scope><name>tcp_server_base</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1a6e675c22180a46ef545668e1970969e3" prot="public" virt="non-virtual"><scope>neforce::tcp_server_base</scope><name>tcp_server_base</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1ac5157d23244eea24d0adf45f322784cd" prot="public" virt="non-virtual"><scope>neforce::tcp_server_base</scope><name>tcp_server_base</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1a7d71f14af552da9a95b620669861a662" prot="protected" virt="non-virtual"><scope>neforce::tcp_server_base</scope><name>worker_count_</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1ab096165cb0d343f1bcddab07e94a393e" prot="protected" virt="non-virtual"><scope>neforce::tcp_server_base</scope><name>worker_threads_</name></member>
+      <member refid="classneforce_1_1tcp__server__base_1aabd99c9fa61ecdb62c23e38e7745bffd" prot="public" virt="virtual"><scope>neforce::tcp_server_base</scope><name>~tcp_server_base</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

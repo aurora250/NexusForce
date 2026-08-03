@@ -1,17 +1,17 @@
 var byte__size_8hpp =
 [
-    [ "operator\"\"_B", "group___user_literals.html#ga8e5daffb2633a881d593f3e77ba5f686", null ],
-    [ "operator\"\"_B", "group___user_literals.html#ga107d0f96d5bd7d34e04061b70620842f", null ],
-    [ "operator\"\"_EB", "group___user_literals.html#ga680a61877810951b12aacafdb064c41e", null ],
-    [ "operator\"\"_EB", "group___user_literals.html#ga02b702c867fb26b0590d52d70fc25049", null ],
-    [ "operator\"\"_GB", "group___user_literals.html#gac07dd22bf31d7fd9926de805a1045cc1", null ],
-    [ "operator\"\"_GB", "group___user_literals.html#ga6fadda0f7a51af94f3919c2e0d3a044d", null ],
-    [ "operator\"\"_KB", "group___user_literals.html#ga0e45e6dd6d94403aac27b4665757ab35", null ],
-    [ "operator\"\"_KB", "group___user_literals.html#ga0a20e9906694996744a210f832c51e7d", null ],
-    [ "operator\"\"_MB", "group___user_literals.html#gac9bd0d19ae8a1b92f19ff29c1b74feb0", null ],
-    [ "operator\"\"_MB", "group___user_literals.html#gaf1f940623168ca8c712f04fa9ea16cb0", null ],
-    [ "operator\"\"_PB", "group___user_literals.html#ga8c738902aa4983c3e2efd4bab9584cd2", null ],
-    [ "operator\"\"_PB", "group___user_literals.html#gad24b44e10e2ca611d77deb158e987abb", null ],
-    [ "operator\"\"_TB", "group___user_literals.html#ga2701ff6c1a80b86cf02a237d9c4d3e96", null ],
-    [ "operator\"\"_TB", "group___user_literals.html#ga5b42317ff4c83e34a9c5889e94247d78", null ]
+    [ "neforce::literals::operator\"\"_B", "group___user_literals.html#gad7a96ffd68b2f29a385f1aeb97c8ddac", null ],
+    [ "neforce::literals::operator\"\"_B", "group___user_literals.html#ga7f6ad4ea5d9448553fe39b3889e5650f", null ],
+    [ "neforce::literals::operator\"\"_EB", "group___user_literals.html#ga432daf27bb5e9f06744e4a2bf11c7fdb", null ],
+    [ "neforce::literals::operator\"\"_EB", "group___user_literals.html#ga35b13bbb6fcfdbf200719522b17f851b", null ],
+    [ "neforce::literals::operator\"\"_GB", "group___user_literals.html#ga9f1aaf67ceab15c5440e0ce963a58ee9", null ],
+    [ "neforce::literals::operator\"\"_GB", "group___user_literals.html#gaf99990918e74179e72b4b633af322fd2", null ],
+    [ "neforce::literals::operator\"\"_KB", "group___user_literals.html#ga338219dff3f22516e79964ccfb976b97", null ],
+    [ "neforce::literals::operator\"\"_KB", "group___user_literals.html#gad44ca9f2988212ea1d0182bd06164ead", null ],
+    [ "neforce::literals::operator\"\"_MB", "group___user_literals.html#gadcd7d71510bfa3275fce89fa675c4f7a", null ],
+    [ "neforce::literals::operator\"\"_MB", "group___user_literals.html#ga87202b8cf3228b774820fcffa7ca9e1a", null ],
+    [ "neforce::literals::operator\"\"_PB", "group___user_literals.html#ga622ffea0c725bde8952b0b049cc1b70e", null ],
+    [ "neforce::literals::operator\"\"_PB", "group___user_literals.html#ga8ced83973cf7483ac5ca060217ba8b33", null ],
+    [ "neforce::literals::operator\"\"_TB", "group___user_literals.html#ga99cb638cbdf6c39d9269df84029e434b", null ],
+    [ "neforce::literals::operator\"\"_TB", "group___user_literals.html#ga764cca74520f67726975388f47e3d6fd", null ]
 ];

@@ -3,41 +3,10 @@
   <compounddef id="group___hash_table" kind="group">
     <compoundname>HashTable</compoundname>
     <title>哈希表</title>
-    <innerclass refid="structhashtable__node" prot="public">hashtable_node</innerclass>
-    <innerclass refid="classhashtable" prot="public">hashtable</innerclass>
-    <innerclass refid="structhashtable__iterator" prot="public">hashtable_iterator</innerclass>
-    <sectiondef kind="var">
-      <memberdef kind="variable" id="group___hash_table_1ga59058b163fcbd66fd78b93c2537c0afc" prot="public" static="no" constexpr="yes" mutable="no">
-        <type>NEFORCE_BEGIN_CONSTANTS__ constexpr <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
-        <definition>NEFORCE_BEGIN_CONSTANTS__ constexpr size_t HASH_PRIME_LIST[]</definition>
-        <argsstring>[]</argsstring>
-        <name>HASH_PRIME_LIST</name>
-        <briefdescription>
-<para>哈希表素数列表（64位系统） </para>
-        </briefdescription>
-        <detaileddescription>
-<para>用于确定哈希表大小的一系列素数，减少哈希冲突。 </para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="274" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="274" bodyend="369"/>
-      </memberdef>
-      <memberdef kind="variable" id="group___hash_table_1ga4db55d85c398c7b4ef5ed0154ed9140b" prot="public" static="no" constexpr="yes" mutable="no">
-        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
-        <definition>size_t HASH_PRIMER_COUNT</definition>
-        <argsstring></argsstring>
-        <name>HASH_PRIMER_COUNT</name>
-        <initializer>= <ref refid="group___array_properties_1ga6f799948c538985a53036489b5108b67" kindref="member">extent_v</ref>&lt;decltype(<ref refid="group___hash_table_1ga59058b163fcbd66fd78b93c2537c0afc" kindref="member">HASH_PRIME_LIST</ref>)&gt;</initializer>
-        <briefdescription>
-<para>素数列表长度 </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="384" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="384" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
+    <innerclass refid="structneforce_1_1hashtable__node" prot="public">neforce::hashtable_node</innerclass>
+    <innerclass refid="classneforce_1_1hashtable" prot="public">neforce::hashtable</innerclass>
+    <innerclass refid="structneforce_1_1hashtable__iterator" prot="public">neforce::hashtable_iterator</innerclass>
+    <innernamespace refid="namespaceneforce_1_1constants">neforce::constants</innernamespace>
     <briefdescription>
 <para>基于哈希表的无序容器实现 </para>
     </briefdescription>
@@ -197,7 +166,7 @@
 </entry></row>
 </table>
 </para>
-<para>其中 n = <ref refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" kindref="member">size()</ref>。</para>
+<para>其中 n = <ref refid="group___type_erasure_functions_1ga69955a26617401117eaf53fa82162e2b" kindref="member">size()</ref>。</para>
 </sect1>
 <sect1 id="group___h_t_t_p_1implementation_details">
 <title>实现细节</title><para><table rows="8" cols="2"><row>

@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1serialize_1_1binary__serializer" kind="class" language="C++" prot="public">
+    <compoundname>neforce::serialize::binary_serializer</compoundname>
+    <includes refid="binary__serializer_8hpp" local="no">binary_serializer.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1serialize_1_1binary__serializer_1a72793bd9fc5cdb4ba176685c775282b0" prot="public" static="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> &gt;</type>
+        <definition>using neforce::serialize::binary_serializer::buffer = vector&lt;byte_t&gt;</definition>
+        <argsstring></argsstring>
+        <name>buffer</name>
+        <qualifiedname>neforce::serialize::binary_serializer::buffer</qualifiedname>
+        <briefdescription>
+<para>二进制缓冲区类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/serialize/binary_serializer.hpp" line="40" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/serialize/binary_serializer.hpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classneforce_1_1serialize_1_1binary__serializer_1a41d7b3c5cd3df56effe6fc409b80ccee" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::serialize::binary_serializer::MAGIC</definition>
+        <argsstring></argsstring>
+        <name>MAGIC</name>
+        <qualifiedname>neforce::serialize::binary_serializer::MAGIC</qualifiedname>
+        <initializer>= 0x4E454246</initializer>
+        <briefdescription>
+<para>二进制格式魔数 &quot;NEBF&quot; </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/serialize/binary_serializer.hpp" line="45" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/serialize/binary_serializer.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1serialize_1_1binary__serializer_1a6ae3f438bdb8712298c5fca4d6c0993e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___core_types_1gabca631c03e4d34e2e77587fc66d05f52" kindref="member">uint16_t</ref></type>
+        <definition>uint16_t neforce::serialize::binary_serializer::VERSION</definition>
+        <argsstring></argsstring>
+        <name>VERSION</name>
+        <qualifiedname>neforce::serialize::binary_serializer::VERSION</qualifiedname>
+        <initializer>= 1</initializer>
+        <briefdescription>
+<para>当前格式版本 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/serialize/binary_serializer.hpp" line="50" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/serialize/binary_serializer.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1serialize_1_1binary__serializer_1aa5c67a34c14b05de236d0fe5bed90975" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1serialize_1_1binary__serializer_1a72793bd9fc5cdb4ba176685c775282b0" kindref="member">buffer</ref></type>
+        <definition>static buffer neforce::serialize::binary_serializer::serialize</definition>
+        <argsstring>(const reflect::meta_any &amp;obj, const serialize_context &amp;ctx={})</argsstring>
+        <name>serialize</name>
+        <qualifiedname>neforce::serialize::binary_serializer::serialize</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1reflect_1_1meta__any" kindref="compound">reflect::meta_any</ref> &amp;</type>
+          <declname>obj</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structneforce_1_1serialize_1_1serialize__context" kindref="compound">serialize_context</ref> &amp;</type>
+          <declname>ctx</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para>将反射对象序列化为二进制 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>obj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要序列化的对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列化上下文 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>二进制数据 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/serialize/binary_serializer.hpp" line="58" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1serialize_1_1binary__serializer_1a37fc73967269b810c30390f3aaf044e9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1reflect_1_1meta__any" kindref="compound">reflect::meta_any</ref></type>
+        <definition>static reflect::meta_any neforce::serialize::binary_serializer::deserialize</definition>
+        <argsstring>(const byte_t *data, size_t size)</argsstring>
+        <name>deserialize</name>
+        <qualifiedname>neforce::serialize::binary_serializer::deserialize</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>从二进制数据反序列化对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>二进制数据起始指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数据长度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>重建的对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/serialize/binary_serializer.hpp" line="66" column="30"/>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+        <references refid="group___type_erasure_functions_1ga69955a26617401117eaf53fa82162e2b" compoundref="type__erase_8hpp" startline="292" endline="294">neforce::size</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>二进制序列化器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>将反射注册的对象序列化为大端字节序的二进制格式， 或从二进制数据重建对象。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/serialize/binary_serializer.hpp" line="38" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/serialize/binary_serializer.hpp" bodystart="38" bodyend="67"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1serialize_1_1binary__serializer_1a72793bd9fc5cdb4ba176685c775282b0" prot="public" virt="non-virtual"><scope>neforce::serialize::binary_serializer</scope><name>buffer</name></member>
+      <member refid="classneforce_1_1serialize_1_1binary__serializer_1a37fc73967269b810c30390f3aaf044e9" prot="public" virt="non-virtual"><scope>neforce::serialize::binary_serializer</scope><name>deserialize</name></member>
+      <member refid="classneforce_1_1serialize_1_1binary__serializer_1a41d7b3c5cd3df56effe6fc409b80ccee" prot="public" virt="non-virtual"><scope>neforce::serialize::binary_serializer</scope><name>MAGIC</name></member>
+      <member refid="classneforce_1_1serialize_1_1binary__serializer_1aa5c67a34c14b05de236d0fe5bed90975" prot="public" virt="non-virtual"><scope>neforce::serialize::binary_serializer</scope><name>serialize</name></member>
+      <member refid="classneforce_1_1serialize_1_1binary__serializer_1a6ae3f438bdb8712298c5fca4d6c0993e" prot="public" virt="non-virtual"><scope>neforce::serialize::binary_serializer</scope><name>VERSION</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

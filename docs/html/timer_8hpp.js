@@ -1,5 +1,5 @@
 var timer_8hpp =
 [
-    [ "steady_timer", "group___async_timer.html#gaf9d29e0fc3082a1789eafb7a8736a00b", null ],
-    [ "system_timer", "group___async_timer.html#ga1a05e758b1b38f82d3cfec4cc3cb55b7", null ]
+    [ "neforce::steady_timer", "group___async_timer.html#ga5d32a2782e2926012296331ed724ed74", null ],
+    [ "neforce::system_timer", "group___async_timer.html#ga06a00661e18fa45f52c1d0c9a39430d8", null ]
 ];

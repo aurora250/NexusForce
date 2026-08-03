@@ -1,33 +1,33 @@
 var group___thread_sync =
 [
-    [ "empty_completion", "structempty__completion.html", null ],
-    [ "tree_barrier&lt; CmplFunc &gt;", "classtree__barrier.html", [
-      [ "arrival_token", "classtree__barrier.html#aa70b32f84d29b9ea643a8fbcc95e2b96", null ],
-      [ "tree_barrier", "classtree__barrier.html#a58cc248b4aeee58f81e06cc34a84bc24", null ],
-      [ "arrive", "classtree__barrier.html#a353f8f805ef18c0e1427b275167a8ada", null ],
-      [ "arrive_and_drop", "classtree__barrier.html#aa5b50d3a3120a3164ca07e9941279418", null ],
-      [ "wait", "classtree__barrier.html#a0cabbf16a0b5532fd54ed41be40babc2", null ]
+    [ "neforce::empty_completion", "structneforce_1_1empty__completion.html", null ],
+    [ "neforce::tree_barrier&lt; CmplFunc &gt;", "classneforce_1_1tree__barrier.html", [
+      [ "arrival_token", "classneforce_1_1tree__barrier.html#adf9a87cf983d66e0d42379ee507d0c77", null ],
+      [ "tree_barrier", "classneforce_1_1tree__barrier.html#a48bcd1224d3f4281ccade6563326af51", null ],
+      [ "arrive", "classneforce_1_1tree__barrier.html#a8e86b8282173c7b192d5925899e94f36", null ],
+      [ "arrive_and_drop", "classneforce_1_1tree__barrier.html#a7937b4b1d8b5be5505a4a2c383eee8e8", null ],
+      [ "wait", "classneforce_1_1tree__barrier.html#ac0602e7b2ca559e91977ab448d5f574c", null ]
     ] ],
-    [ "barrier&lt; CmplFunc &gt;", "classbarrier.html", [
-      [ "arrival_token", "classbarrier_1_1arrival__token.html", [
-        [ "arrival_token", "classbarrier_1_1arrival__token.html#ace47dfce73ebfa98f70bebc7d2b043a0", null ],
-        [ "~arrival_token", "classbarrier_1_1arrival__token.html#a6bcc945f080bca386a1331763b6bd0b4", null ],
-        [ "operator=", "classbarrier_1_1arrival__token.html#a03e69e41c8eacb413b180bfa8b986073", null ]
+    [ "neforce::barrier&lt; CmplFunc &gt;", "classneforce_1_1barrier.html", [
+      [ "arrival_token", "classneforce_1_1barrier_1_1arrival__token.html", [
+        [ "arrival_token", "classneforce_1_1barrier_1_1arrival__token.html#ab19db3a35db45886e9742a90ae9903a0", null ],
+        [ "~arrival_token", "classneforce_1_1barrier_1_1arrival__token.html#acfded8c3b244d4515709e6dea4240f47", null ],
+        [ "operator=", "classneforce_1_1barrier_1_1arrival__token.html#ac5f665ad7b74bfbf29a5ec2b0e007bec", null ]
       ] ],
-      [ "barrier", "classbarrier.html#ae15bef6ea846f718e16a574b368bb90a", null ],
-      [ "arrive", "classbarrier.html#a91e821ad09633c04065f5dd9481a001e", null ],
-      [ "arrive_and_drop", "classbarrier.html#a5a1acbc1c7f02091d597208d20202f51", null ],
-      [ "arrive_and_wait", "classbarrier.html#a6ce0630d80358dac9365a9536213f627", null ],
-      [ "wait", "classbarrier.html#a32a869c7fbe9dde1d551bb86a9d3bc2b", null ]
+      [ "barrier", "classneforce_1_1barrier.html#ab74525ae7951663f66751ba083297f54", null ],
+      [ "arrive", "classneforce_1_1barrier.html#a76ea22a3faafb942926518487ae69203", null ],
+      [ "arrive_and_drop", "classneforce_1_1barrier.html#abdb3b89abcedd1b13b7b83d5a0da63ab", null ],
+      [ "arrive_and_wait", "classneforce_1_1barrier.html#a75630232ffba21546a65276194757a18", null ],
+      [ "wait", "classneforce_1_1barrier.html#acd81798c175d021ac608f2882f6d23d1", null ]
     ] ],
-    [ "latch", "classlatch.html", [
-      [ "latch", "classlatch.html#a50bee6b3588a817ac476fe217741cc67", null ],
-      [ "~latch", "classlatch.html#a65fbf24cb0b126f05d13f8242a4f96bb", null ],
-      [ "latch", "classlatch.html#a00355a36c48695412e0ae6e8634f534f", null ],
-      [ "arrive_and_wait", "classlatch.html#ad9b2bff5008d4d1f690cc852fd232d38", null ],
-      [ "count_down", "classlatch.html#a364c1b21592dadad292e5493ffa5ba24", null ],
-      [ "operator=", "classlatch.html#a33b76e8739418ed6b0ffffc7811b7ccd", null ],
-      [ "try_wait", "classlatch.html#a4ca399a140ec6ad75d2711ec7843bdfc", null ],
-      [ "wait", "classlatch.html#afedb29909d54b1c8c6bf136c2f900da3", null ]
+    [ "neforce::latch", "classneforce_1_1latch.html", [
+      [ "latch", "classneforce_1_1latch.html#a76543147be07fd675cc3d3eca9e08454", null ],
+      [ "~latch", "classneforce_1_1latch.html#ad3961c1df6218c93c83fb7d595745c26", null ],
+      [ "latch", "classneforce_1_1latch.html#afe0f29bd8d042de508c2099e5b44ac8c", null ],
+      [ "arrive_and_wait", "classneforce_1_1latch.html#a4a38f7f9990f93dc80d2e871703949fd", null ],
+      [ "count_down", "classneforce_1_1latch.html#afd1402035622af45e87fd7377fa18615", null ],
+      [ "operator=", "classneforce_1_1latch.html#a6ed8251320fed69c8daf7794b0f8f55b", null ],
+      [ "try_wait", "classneforce_1_1latch.html#a704e8a2341429590cdb7ef266eccbcc2", null ],
+      [ "wait", "classneforce_1_1latch.html#adc1500a9f8b663f255063ede0e956ee8", null ]
     ] ]
 ];

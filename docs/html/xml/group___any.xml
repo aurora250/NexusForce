@@ -3,9 +3,9 @@
   <compounddef id="group___any" kind="group">
     <compoundname>Any</compoundname>
     <title>任意类</title>
-    <innerclass refid="classany" prot="public">any</innerclass>
+    <innerclass refid="classneforce_1_1any" prot="public">neforce::any</innerclass>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___any_1gaa10dc2f937bfc4efbd98234e71af0860" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___any_1gae71c216506963910e1ca7d14cf7a7db1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -16,14 +16,15 @@
             <defname>Args</defname>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga123009e89543c37bab698abc5f4221a0" kindref="member">is_constructible_v</ref>&lt; <ref refid="classany" kindref="compound">any</ref>, <ref refid="structpass__template__construct__tag" kindref="compound">pass_template_construct_tag</ref>&lt; T &gt;, Args... &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_constructible_v&lt; any, pass_template_construct_tag&lt; T &gt;, Args... &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="classany" kindref="compound">any</ref></type>
-        <definition>any make_any</definition>
+        <type>any</type>
+        <definition>any neforce::make_any</definition>
         <argsstring>(Args &amp;&amp;... args)</argsstring>
         <name>make_any</name>
+        <qualifiedname>neforce::make_any</qualifiedname>
         <param>
           <type>Args &amp;&amp;...</type>
           <declname>args</declname>
@@ -65,22 +66,23 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="402" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="402" bodyend="404"/>
-        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
-        <references refid="group___any_1gaa10dc2f937bfc4efbd98234e71af0860" compoundref="utility_2any_8hpp" startline="402" endline="404">make_any</references>
-        <referencedby refid="group___any_1gaa10dc2f937bfc4efbd98234e71af0860" compoundref="utility_2any_8hpp" startline="402" endline="404">make_any</referencedby>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___any_1gae71c216506963910e1ca7d14cf7a7db1" compoundref="utility_2any_8hpp" startline="402" endline="404">neforce::make_any</references>
+        <referencedby refid="group___any_1gae71c216506963910e1ca7d14cf7a7db1" compoundref="utility_2any_8hpp" startline="402" endline="404">neforce::make_any</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___any_1ga435372af463e628eb7e40e293d87c1da" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___any_1gad9cd4e66dc719c71b511c89723a5ea89" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>const T *</type>
-        <definition>const T * any_cast</definition>
+        <definition>const T * neforce::any_cast</definition>
         <argsstring>(const any *value) noexcept</argsstring>
         <name>any_cast</name>
+        <qualifiedname>neforce::any_cast</qualifiedname>
         <param>
-          <type>const <ref refid="classany" kindref="compound">any</ref> *</type>
+          <type>const any *</type>
           <declname>value</declname>
         </param>
         <briefdescription>
@@ -112,21 +114,24 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="452" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="452" bodyend="454"/>
-        <referencedby refid="group___any_1ga5183df05b029494e00a3a6cfedeaeefc" compoundref="utility_2any_8hpp" startline="463" endline="465">any_cast</referencedby>
-        <referencedby refid="group___any_1gac77841c2785c6a7c7cf788160ffa9afb" compoundref="utility_2any_8hpp" startline="475" endline="486">any_cast</referencedby>
+        <references refid="group___any_1gad9cd4e66dc719c71b511c89723a5ea89" compoundref="utility_2any_8hpp" startline="452" endline="454">neforce::any_cast</references>
+        <referencedby refid="group___any_1ga532f7d858a15d915b6c85cfcfa848976" compoundref="utility_2any_8hpp" startline="463" endline="465">neforce::any_cast</referencedby>
+        <referencedby refid="group___any_1gadbcd39ffa874eb2a399e5691539ed384" compoundref="utility_2any_8hpp" startline="475" endline="486">neforce::any_cast</referencedby>
+        <referencedby refid="group___any_1gad9cd4e66dc719c71b511c89723a5ea89" compoundref="utility_2any_8hpp" startline="452" endline="454">neforce::any_cast</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___any_1ga5183df05b029494e00a3a6cfedeaeefc" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___any_1ga532f7d858a15d915b6c85cfcfa848976" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>T *</type>
-        <definition>T * any_cast</definition>
+        <definition>T * neforce::any_cast</definition>
         <argsstring>(any *value) noexcept</argsstring>
         <name>any_cast</name>
+        <qualifiedname>neforce::any_cast</qualifiedname>
         <param>
-          <type><ref refid="classany" kindref="compound">any</ref> *</type>
+          <type>any *</type>
           <declname>value</declname>
         </param>
         <briefdescription>
@@ -158,20 +163,21 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="463" column="3" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="463" bodyend="465"/>
-        <references refid="group___any_1ga435372af463e628eb7e40e293d87c1da" compoundref="utility_2any_8hpp" startline="452" endline="454">any_cast</references>
+        <references refid="group___any_1gad9cd4e66dc719c71b511c89723a5ea89" compoundref="utility_2any_8hpp" startline="452" endline="454">neforce::any_cast</references>
       </memberdef>
-      <memberdef kind="function" id="group___any_1gac77841c2785c6a7c7cf788160ffa9afb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___any_1gadbcd39ffa874eb2a399e5691539ed384" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>T</type>
-        <definition>T any_cast</definition>
+        <definition>T neforce::any_cast</definition>
         <argsstring>(const any &amp;value)</argsstring>
         <name>any_cast</name>
+        <qualifiedname>neforce::any_cast</qualifiedname>
         <param>
-          <type>const <ref refid="classany" kindref="compound">any</ref> &amp;</type>
+          <type>const any &amp;</type>
           <declname>value</declname>
         </param>
         <briefdescription>
@@ -200,7 +206,7 @@
 </simplesect>
 <parameterlist kind="exception"><parameteritem>
 <parameternamelist>
-<parametername><ref refid="structanycast__exception" kindref="compound">anycast_exception</ref></parametername>
+<parametername><ref refid="structneforce_1_1anycast__exception" kindref="compound">anycast_exception</ref></parametername>
 </parameternamelist>
 <parameterdescription>
 <para>如果类型转换失败 </para>
@@ -212,9 +218,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="475" column="3" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="475" bodyend="486"/>
-        <references refid="group___any_1ga435372af463e628eb7e40e293d87c1da" compoundref="utility_2any_8hpp" startline="452" endline="454">any_cast</references>
-        <references refid="group___type_traits_utilities_1gabb3abcd15bf9ea4a0629b7e03498e1e1" compoundref="type__traits_8hpp" startline="282">disjunction_v</references>
-        <references refid="group___debug_breakpoints_and_assertions_1gac03521c2bfd10af260ef787c2f05308d" compoundref="breakpoint_8hpp" startline="68" endline="74">unreachable</references>
+        <references refid="group___any_1gad9cd4e66dc719c71b511c89723a5ea89" compoundref="utility_2any_8hpp" startline="452" endline="454">neforce::any_cast</references>
+        <references refid="group___type_traits_utilities_1gabd5ef1fb902eb72a8a79c7a97543f103" compoundref="type__traits_8hpp" startline="282">neforce::disjunction_v</references>
+        <references refid="group___debug_and_assertions_1gada10310a069c1ff44c3b724e69421c32" compoundref="debug_8hpp" startline="68" endline="74">neforce::unreachable</references>
       </memberdef>
     </sectiondef>
     <briefdescription>

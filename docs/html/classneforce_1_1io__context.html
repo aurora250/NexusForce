@@ -1,0 +1,608 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::io_context类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1io__context.html','','classneforce_1_1io__context-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::io_context类 参考<div class="ingroups"><a class="el" href="group___async_components.html">异步组件</a> &raquo; <a class="el" href="group___i_o_context.html">IO上下文</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>统一异步操作核心  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="io__context_8hpp_source.html">io_context.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:executor" id="r_executor"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classneforce_1_1io__context_1_1executor.html">executor</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classneforce_1_1io__context.html" title="统一异步操作核心">io_context</a> 的执行器句柄  <a href="classneforce_1_1io__context_1_1executor.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:work" id="r_work"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classneforce_1_1io__context_1_1work.html">work</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">阻止 <a class="el" href="#a2d0b05ac1c73237ad2056ef4ed07bc66" title="单线程阻塞驱动事件循环">io_context::run()</a> 提前退出的守卫  <a href="classneforce_1_1io__context_1_1work.html#details">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:ae3989cc621a53bcd366406ab166aecfd" id="r_ae3989cc621a53bcd366406ab166aecfd"><td class="memItemLeft"><a id="ae3989cc621a53bcd366406ab166aecfd" name="ae3989cc621a53bcd366406ab166aecfd"></a>
+using&#160;</td><td class="memItemRight"><b>handler_type</b> = <a class="el" href="classneforce_1_1function.html">function</a>&lt;void()&gt;</td></tr>
+<tr class="memdesc:ae3989cc621a53bcd366406ab166aecfd"><td class="mdescLeft">&#160;</td><td class="mdescRight">通用 handler 类型 <br /></td></tr>
+<tr class="memitem:ad71fd1be41a9c0af2a2f7cba05eb3f1a" id="r_ad71fd1be41a9c0af2a2f7cba05eb3f1a"><td class="memItemLeft"><a id="ad71fd1be41a9c0af2a2f7cba05eb3f1a" name="ad71fd1be41a9c0af2a2f7cba05eb3f1a"></a>
+using&#160;</td><td class="memItemRight"><b>fd_callback</b> = <a class="el" href="classneforce_1_1function.html">function</a>&lt;void(int fd, <a class="el" href="group___core_types.html#ga4d7d3599901e73c7d6bf65a66e80b534">uint32_t</a> events, <a class="el" href="classneforce_1_1error__code.html">error_code</a> ec)&gt;</td></tr>
+<tr class="memdesc:ad71fd1be41a9c0af2a2f7cba05eb3f1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">fd 事件回调，参数为 (fd, events, <a class="el" href="classneforce_1_1error__code.html" title="错误码">error_code</a>) <br /></td></tr>
+<tr class="memitem:a407f8ccdb8d5733aaab3547c0fa4d597" id="r_a407f8ccdb8d5733aaab3547c0fa4d597"><td class="memItemLeft"><a id="a407f8ccdb8d5733aaab3547c0fa4d597" name="a407f8ccdb8d5733aaab3547c0fa4d597"></a>
+using&#160;</td><td class="memItemRight"><b>timer_callback</b> = <a class="el" href="classneforce_1_1function.html">function</a>&lt;void()&gt;</td></tr>
+<tr class="memdesc:a407f8ccdb8d5733aaab3547c0fa4d597"><td class="mdescLeft">&#160;</td><td class="mdescRight">定时器到期回调 <br /></td></tr>
+<tr class="memitem:a4250e0aae18ae538cfaee5ff72c78834" id="r_a4250e0aae18ae538cfaee5ff72c78834"><td class="memItemLeft"><a id="a4250e0aae18ae538cfaee5ff72c78834" name="a4250e0aae18ae538cfaee5ff72c78834"></a>
+using&#160;</td><td class="memItemRight"><b>native_handle_type</b></td></tr>
+<tr class="memdesc:a4250e0aae18ae538cfaee5ff72c78834"><td class="mdescLeft">&#160;</td><td class="mdescRight">平台原生句柄类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a7b201e6487c1cf5965bd5b4fa5d8ccfb" id="r_a7b201e6487c1cf5965bd5b4fa5d8ccfb"><td class="memItemLeft"><a id="a7b201e6487c1cf5965bd5b4fa5d8ccfb" name="a7b201e6487c1cf5965bd5b4fa5d8ccfb"></a>
+&#160;</td><td class="memItemRight"><b>io_context</b> ()</td></tr>
+<tr class="memdesc:a7b201e6487c1cf5965bd5b4fa5d8ccfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造 <a class="el" href="classneforce_1_1io__context.html" title="统一异步操作核心">io_context</a> <br /></td></tr>
+<tr class="memitem:a37826a2313d10c36397776876ba07612" id="r_a37826a2313d10c36397776876ba07612"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a37826a2313d10c36397776876ba07612">~io_context</a> ()</td></tr>
+<tr class="memdesc:a37826a2313d10c36397776876ba07612"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构  <br /></td></tr>
+<tr class="memitem:aee103b6067664ffa4d512c1e905f8918" id="r_aee103b6067664ffa4d512c1e905f8918"><td class="memItemLeft"><a id="aee103b6067664ffa4d512c1e905f8918" name="aee103b6067664ffa4d512c1e905f8918"></a>
+<a class="el" href="classneforce_1_1io__context_1_1executor.html">executor</a>&#160;</td><td class="memItemRight"><b>get_executor</b> () noexcept</td></tr>
+<tr class="memdesc:aee103b6067664ffa4d512c1e905f8918"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取默认执行器 <br /></td></tr>
+<tr class="memitem:a70c36dfdd21b3434439800d56bf4e942" id="r_a70c36dfdd21b3434439800d56bf4e942"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a70c36dfdd21b3434439800d56bf4e942">post</a> (<a class="el" href="#ae3989cc621a53bcd366406ab166aecfd">handler_type</a> handler)</td></tr>
+<tr class="memdesc:a70c36dfdd21b3434439800d56bf4e942"><td class="mdescLeft">&#160;</td><td class="mdescRight">将 handler 投递到队列末尾  <br /></td></tr>
+<tr class="memitem:af408c2026b166e2506ab78abc91b3289" id="r_af408c2026b166e2506ab78abc91b3289"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af408c2026b166e2506ab78abc91b3289">dispatch</a> (<a class="el" href="#ae3989cc621a53bcd366406ab166aecfd">handler_type</a> handler)</td></tr>
+<tr class="memdesc:af408c2026b166e2506ab78abc91b3289"><td class="mdescLeft">&#160;</td><td class="mdescRight">若当前在 <a class="el" href="classneforce_1_1io__context.html" title="统一异步操作核心">io_context</a> 线程上则立即执行 handler，否则 post  <br /></td></tr>
+<tr class="memitem:a2d0b05ac1c73237ad2056ef4ed07bc66" id="r_a2d0b05ac1c73237ad2056ef4ed07bc66"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a2d0b05ac1c73237ad2056ef4ed07bc66">run</a> ()</td></tr>
+<tr class="memdesc:a2d0b05ac1c73237ad2056ef4ed07bc66"><td class="mdescLeft">&#160;</td><td class="mdescRight">单线程阻塞驱动事件循环  <br /></td></tr>
+<tr class="memitem:a17228086cc96db39d915689dcaecc000" id="r_a17228086cc96db39d915689dcaecc000"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a17228086cc96db39d915689dcaecc000">run_pool</a> (<a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> n)</td></tr>
+<tr class="memdesc:a17228086cc96db39d915689dcaecc000"><td class="mdescLeft">&#160;</td><td class="mdescRight">多线程并发驱动事件循环  <br /></td></tr>
+<tr class="memitem:a365b06a14778fdd2b2a56ac84c21ce6c" id="r_a365b06a14778fdd2b2a56ac84c21ce6c"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a365b06a14778fdd2b2a56ac84c21ce6c">run_one</a> (int timeout_ms=-1)</td></tr>
+<tr class="memdesc:a365b06a14778fdd2b2a56ac84c21ce6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待并执行一个就绪的 handler  <br /></td></tr>
+<tr class="memitem:a3af8ec91599d62d1615bd4d19ffc1830" id="r_a3af8ec91599d62d1615bd4d19ffc1830"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3af8ec91599d62d1615bd4d19ffc1830">poll</a> ()</td></tr>
+<tr class="memdesc:a3af8ec91599d62d1615bd4d19ffc1830"><td class="mdescLeft">&#160;</td><td class="mdescRight">执行所有已就绪的 handler 后立即返回  <br /></td></tr>
+<tr class="memitem:a78e0605038679d62adce47b2bf3a49b4" id="r_a78e0605038679d62adce47b2bf3a49b4"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a78e0605038679d62adce47b2bf3a49b4">poll_one</a> ()</td></tr>
+<tr class="memdesc:a78e0605038679d62adce47b2bf3a49b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">非阻塞单次轮询  <br /></td></tr>
+<tr class="memitem:afaae1cb6de5e4fb64158f394ea176edc" id="r_afaae1cb6de5e4fb64158f394ea176edc"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afaae1cb6de5e4fb64158f394ea176edc">stop</a> ()</td></tr>
+<tr class="memdesc:afaae1cb6de5e4fb64158f394ea176edc"><td class="mdescLeft">&#160;</td><td class="mdescRight">停止事件循环  <br /></td></tr>
+<tr class="memitem:afe7e01b9c81432059a2a2ade572e6921" id="r_afe7e01b9c81432059a2a2ade572e6921"><td class="memItemLeft"><a id="afe7e01b9c81432059a2a2ade572e6921" name="afe7e01b9c81432059a2a2ade572e6921"></a>
+bool&#160;</td><td class="memItemRight"><b>stopped</b> () const noexcept</td></tr>
+<tr class="memdesc:afe7e01b9c81432059a2a2ade572e6921"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否已停止 <br /></td></tr>
+<tr class="memitem:aa0a7fd498aac1151d83e9fc49b24629b" id="r_aa0a7fd498aac1151d83e9fc49b24629b"><td class="memItemLeft"><a id="aa0a7fd498aac1151d83e9fc49b24629b" name="aa0a7fd498aac1151d83e9fc49b24629b"></a>
+void&#160;</td><td class="memItemRight"><b>restart</b> ()</td></tr>
+<tr class="memdesc:aa0a7fd498aac1151d83e9fc49b24629b"><td class="mdescLeft">&#160;</td><td class="mdescRight">重置停止标志，允许再次 <a class="el" href="#a2d0b05ac1c73237ad2056ef4ed07bc66" title="单线程阻塞驱动事件循环">run()</a> <br /></td></tr>
+<tr class="memitem:a78052af9b04e2e92a93bc4b8d1967d3c" id="r_a78052af9b04e2e92a93bc4b8d1967d3c"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a78052af9b04e2e92a93bc4b8d1967d3c">schedule_timer</a> (<a class="el" href="group___core_types.html#ga5405672bf9962081e6fcd1448d4bce4a">uint64_t</a> delay_ms, <a class="el" href="#a407f8ccdb8d5733aaab3547c0fa4d597">timer_callback</a> handler)</td></tr>
+<tr class="memdesc:a78052af9b04e2e92a93bc4b8d1967d3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">调度一次性定时器  <br /></td></tr>
+<tr class="memitem:a59965d7c02fbb47ce16dab447d66d524" id="r_a59965d7c02fbb47ce16dab447d66d524"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a59965d7c02fbb47ce16dab447d66d524">cancel_timer</a> (<a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> timer_id)</td></tr>
+<tr class="memdesc:a59965d7c02fbb47ce16dab447d66d524"><td class="mdescLeft">&#160;</td><td class="mdescRight">取消待执行的定时器  <br /></td></tr>
+<tr class="memitem:ab6de26ff977971973635b8ff701d066d" id="r_ab6de26ff977971973635b8ff701d066d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab6de26ff977971973635b8ff701d066d">add_fd</a> (<a class="el" href="#a4250e0aae18ae538cfaee5ff72c78834">native_handle_type</a> fd, <a class="el" href="group___core_types.html#ga4d7d3599901e73c7d6bf65a66e80b534">uint32_t</a> events, <a class="el" href="#ad71fd1be41a9c0af2a2f7cba05eb3f1a">fd_callback</a> cb, bool edge_triggered=true)</td></tr>
+<tr class="memdesc:ab6de26ff977971973635b8ff701d066d"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册 fd 进行事件监控  <br /></td></tr>
+<tr class="memitem:a7455712adcf0c0075e81ba2d17bcdc07" id="r_a7455712adcf0c0075e81ba2d17bcdc07"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7455712adcf0c0075e81ba2d17bcdc07">mod_fd</a> (<a class="el" href="#a4250e0aae18ae538cfaee5ff72c78834">native_handle_type</a> fd, <a class="el" href="group___core_types.html#ga4d7d3599901e73c7d6bf65a66e80b534">uint32_t</a> events, bool edge_triggered=true)</td></tr>
+<tr class="memdesc:a7455712adcf0c0075e81ba2d17bcdc07"><td class="mdescLeft">&#160;</td><td class="mdescRight">修改已注册 fd 的事件掩码  <br /></td></tr>
+<tr class="memitem:a5c99b04f62177b2f63315f50237b47e9" id="r_a5c99b04f62177b2f63315f50237b47e9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a5c99b04f62177b2f63315f50237b47e9">remove_fd</a> (<a class="el" href="#a4250e0aae18ae538cfaee5ff72c78834">native_handle_type</a> fd)</td></tr>
+<tr class="memdesc:a5c99b04f62177b2f63315f50237b47e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">取消 fd 的事件监控  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>统一异步操作核心 </p>
+<p>合并 I/O 多路复用（epoll/IOCP）、定时器管理和工作投递。 所有异步操作以此为调度目标，替代分散的 event_loop 和 <a class="el" href="classneforce_1_1thread__pool.html" title="线程池类">thread_pool</a> 实例。</p>
+<p>使用示例： </p><div class="fragment"><div class="line"><a class="code hl_function" href="#a7b201e6487c1cf5965bd5b4fa5d8ccfb">io_context</a> ctx;</div>
+<div class="line">ctx.<a class="code hl_function" href="#a70c36dfdd21b3434439800d56bf4e942">post</a>([] { <a class="code hl_function" href="group___console_i_o.html#ga9c4e1ac58957b1892c3091006222f66b">println</a>(<span class="stringliteral">&quot;async work&quot;</span>); });</div>
+<div class="line">ctx.<a class="code hl_function" href="#a78052af9b04e2e92a93bc4b8d1967d3c">schedule_timer</a>(1000, [] { <a class="code hl_function" href="group___console_i_o.html#ga9c4e1ac58957b1892c3091006222f66b">println</a>(<span class="stringliteral">&quot;1 second later&quot;</span>); });</div>
+<div class="line">ctx.<a class="code hl_function" href="#a2d0b05ac1c73237ad2056ef4ed07bc66">run</a>(); <span class="comment">// 驱动事件循环</span></div>
+<div class="ttc" id="aclassneforce_1_1io__context_html_a2d0b05ac1c73237ad2056ef4ed07bc66"><div class="ttname"><a href="#a2d0b05ac1c73237ad2056ef4ed07bc66">neforce::io_context::run</a></div><div class="ttdeci">size_t run()</div><div class="ttdoc">单线程阻塞驱动事件循环</div></div>
+<div class="ttc" id="aclassneforce_1_1io__context_html_a70c36dfdd21b3434439800d56bf4e942"><div class="ttname"><a href="#a70c36dfdd21b3434439800d56bf4e942">neforce::io_context::post</a></div><div class="ttdeci">void post(handler_type handler)</div><div class="ttdoc">将 handler 投递到队列末尾</div></div>
+<div class="ttc" id="aclassneforce_1_1io__context_html_a78052af9b04e2e92a93bc4b8d1967d3c"><div class="ttname"><a href="#a78052af9b04e2e92a93bc4b8d1967d3c">neforce::io_context::schedule_timer</a></div><div class="ttdeci">size_t schedule_timer(uint64_t delay_ms, timer_callback handler)</div><div class="ttdoc">调度一次性定时器</div></div>
+<div class="ttc" id="aclassneforce_1_1io__context_html_a7b201e6487c1cf5965bd5b4fa5d8ccfb"><div class="ttname"><a href="#a7b201e6487c1cf5965bd5b4fa5d8ccfb">neforce::io_context::io_context</a></div><div class="ttdeci">io_context()</div><div class="ttdoc">构造 io_context</div></div>
+<div class="ttc" id="agroup___console_i_o_html_ga9c4e1ac58957b1892c3091006222f66b"><div class="ttname"><a href="group___console_i_o.html#ga9c4e1ac58957b1892c3091006222f66b">neforce::println</a></div><div class="ttdeci">void println(Args &amp;&amp;... args)</div><div class="ttdoc">打印多个值并换行</div><div class="ttdef"><b>定义</b> <a href="console_8hpp_source.html#l00699">console.hpp:699</a></div></div>
+</div><!-- fragment --><dl class="section note"><dt>注解</dt><dd>单线程 <a class="el" href="#a2d0b05ac1c73237ad2056ef4ed07bc66" title="单线程阻塞驱动事件循环">run()</a> 时所有 handler 串行执行，无需加锁。多线程 <a class="el" href="#a17228086cc96db39d915689dcaecc000" title="多线程并发驱动事件循环">run_pool()</a> 时需 strand。 </dd></dl>
+<dl class="section warning"><dt>警告</dt><dd>跨线程 <a class="el" href="#a70c36dfdd21b3434439800d56bf4e942" title="将 handler 投递到队列末尾">post()</a> 是线程安全的；add_fd/remove_fd 必须在 <a class="el" href="#a2d0b05ac1c73237ad2056ef4ed07bc66" title="单线程阻塞驱动事件循环">run()</a> 所在线程调用。 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="io__context_8hpp_source.html">io_context.hpp</a> 第 <a class="el" href="io__context_8hpp_source.html#l00064">64</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="a37826a2313d10c36397776876ba07612" name="a37826a2313d10c36397776876ba07612"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37826a2313d10c36397776876ba07612">&#9670;&#160;</a></span>~io_context()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">neforce::io_context::~io_context </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>析构 </p>
+<p>自动 stop 并释放资源 </p>
+
+<p class="reference">引用了 <a class="el" href="#a7b201e6487c1cf5965bd5b4fa5d8ccfb">io_context()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="ab6de26ff977971973635b8ff701d066d" name="ab6de26ff977971973635b8ff701d066d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6de26ff977971973635b8ff701d066d">&#9670;&#160;</a></span>add_fd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::io_context::add_fd </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a4250e0aae18ae538cfaee5ff72c78834">native_handle_type</a></td>          <td class="paramname"><span class="paramname"><em>fd</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#ga4d7d3599901e73c7d6bf65a66e80b534">uint32_t</a></td>          <td class="paramname"><span class="paramname"><em>events</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#ad71fd1be41a9c0af2a2f7cba05eb3f1a">fd_callback</a></td>          <td class="paramname"><span class="paramname"><em>cb</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>edge_triggered</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>注册 fd 进行事件监控 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td>要监控的文件描述符 </td></tr>
+    <tr><td class="paramname">events</td><td>epoll_in / epoll_out 掩码 </td></tr>
+    <tr><td class="paramname">cb</td><td>事件就绪时的回调 </td></tr>
+    <tr><td class="paramname">edge_triggered</td><td>是否使用边缘触发模式，默认 true </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a59965d7c02fbb47ce16dab447d66d524" name="a59965d7c02fbb47ce16dab447d66d524"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59965d7c02fbb47ce16dab447d66d524">&#9670;&#160;</a></span>cancel_timer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::io_context::cancel_timer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a></td>          <td class="paramname"><span class="paramname"><em>timer_id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>取消待执行的定时器 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timer_id</td><td><a class="el" href="#a78052af9b04e2e92a93bc4b8d1967d3c" title="调度一次性定时器">schedule_timer()</a> 返回的 ID </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>找到并取消返回 true </dd></dl>
+
+</div>
+</div>
+<a id="af408c2026b166e2506ab78abc91b3289" name="af408c2026b166e2506ab78abc91b3289"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af408c2026b166e2506ab78abc91b3289">&#9670;&#160;</a></span>dispatch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::io_context::dispatch </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ae3989cc621a53bcd366406ab166aecfd">handler_type</a></td>          <td class="paramname"><span class="paramname"><em>handler</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>若当前在 <a class="el" href="classneforce_1_1io__context.html" title="统一异步操作核心">io_context</a> 线程上则立即执行 handler，否则 post </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>要执行的回调 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#af408c2026b166e2506ab78abc91b3289">dispatch()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#af408c2026b166e2506ab78abc91b3289">dispatch()</a>.</p>
+
+</div>
+</div>
+<a id="a7455712adcf0c0075e81ba2d17bcdc07" name="a7455712adcf0c0075e81ba2d17bcdc07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7455712adcf0c0075e81ba2d17bcdc07">&#9670;&#160;</a></span>mod_fd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::io_context::mod_fd </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a4250e0aae18ae538cfaee5ff72c78834">native_handle_type</a></td>          <td class="paramname"><span class="paramname"><em>fd</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#ga4d7d3599901e73c7d6bf65a66e80b534">uint32_t</a></td>          <td class="paramname"><span class="paramname"><em>events</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>edge_triggered</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>修改已注册 fd 的事件掩码 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td>已注册的文件描述符 </td></tr>
+    <tr><td class="paramname">events</td><td>新的事件掩码 </td></tr>
+    <tr><td class="paramname">edge_triggered</td><td>是否使用边缘触发模式，默认 true </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3af8ec91599d62d1615bd4d19ffc1830" name="a3af8ec91599d62d1615bd4d19ffc1830"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3af8ec91599d62d1615bd4d19ffc1830">&#9670;&#160;</a></span>poll()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> neforce::io_context::poll </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>执行所有已就绪的 handler 后立即返回 </p>
+<dl class="section return"><dt>返回</dt><dd>执行的 handler 数量 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a3af8ec91599d62d1615bd4d19ffc1830">poll()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a3af8ec91599d62d1615bd4d19ffc1830">poll()</a>.</p>
+
+</div>
+</div>
+<a id="a78e0605038679d62adce47b2bf3a49b4" name="a78e0605038679d62adce47b2bf3a49b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78e0605038679d62adce47b2bf3a49b4">&#9670;&#160;</a></span>poll_one()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> neforce::io_context::poll_one </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>非阻塞单次轮询 </p>
+<dl class="section return"><dt>返回</dt><dd>执行的 handler 数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="io__context_8hpp_source.html">io_context.hpp</a> 第 <a class="el" href="io__context_8hpp_source.html#l00149">149</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="io__context_8hpp_source.html#l00149">poll_one()</a> , 以及 <a class="el" href="#a365b06a14778fdd2b2a56ac84c21ce6c">run_one()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="io__context_8hpp_source.html#l00149">poll_one()</a>.</p>
+
+</div>
+</div>
+<a id="a70c36dfdd21b3434439800d56bf4e942" name="a70c36dfdd21b3434439800d56bf4e942"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70c36dfdd21b3434439800d56bf4e942">&#9670;&#160;</a></span>post()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::io_context::post </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ae3989cc621a53bcd366406ab166aecfd">handler_type</a></td>          <td class="paramname"><span class="paramname"><em>handler</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>将 handler 投递到队列末尾 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>要执行的回调 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#a70c36dfdd21b3434439800d56bf4e942">post()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a70c36dfdd21b3434439800d56bf4e942">post()</a>.</p>
+
+</div>
+</div>
+<a id="a5c99b04f62177b2f63315f50237b47e9" name="a5c99b04f62177b2f63315f50237b47e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c99b04f62177b2f63315f50237b47e9">&#9670;&#160;</a></span>remove_fd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::io_context::remove_fd </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a4250e0aae18ae538cfaee5ff72c78834">native_handle_type</a></td>          <td class="paramname"><span class="paramname"><em>fd</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>取消 fd 的事件监控 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td>已注册的文件描述符 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2d0b05ac1c73237ad2056ef4ed07bc66" name="a2d0b05ac1c73237ad2056ef4ed07bc66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d0b05ac1c73237ad2056ef4ed07bc66">&#9670;&#160;</a></span>run()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> neforce::io_context::run </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>单线程阻塞驱动事件循环 </p>
+<dl class="section return"><dt>返回</dt><dd>执行的 handler 数量</dd></dl>
+<p>循环直到 <a class="el" href="#afaae1cb6de5e4fb64158f394ea176edc" title="停止事件循环">stop()</a> 被调用且无待处理工作。 若需防止提前退出，使用 io_context::work。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a2d0b05ac1c73237ad2056ef4ed07bc66">run()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a2d0b05ac1c73237ad2056ef4ed07bc66">run()</a>.</p>
+
+</div>
+</div>
+<a id="a365b06a14778fdd2b2a56ac84c21ce6c" name="a365b06a14778fdd2b2a56ac84c21ce6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a365b06a14778fdd2b2a56ac84c21ce6c">&#9670;&#160;</a></span>run_one()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> neforce::io_context::run_one </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>timeout_ms</em></span><span class="paramdefsep"> = </span><span class="paramdefval">-1</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>等待并执行一个就绪的 handler </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timeout_ms</td><td>最大等待时间（ms），-1 表示无限等待 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>执行的 handler 数量（0 或 1） </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a365b06a14778fdd2b2a56ac84c21ce6c">run_one()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="io__context_8hpp_source.html#l00149">poll_one()</a> , 以及 <a class="el" href="#a365b06a14778fdd2b2a56ac84c21ce6c">run_one()</a>.</p>
+
+</div>
+</div>
+<a id="a17228086cc96db39d915689dcaecc000" name="a17228086cc96db39d915689dcaecc000"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17228086cc96db39d915689dcaecc000">&#9670;&#160;</a></span>run_pool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::io_context::run_pool </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>多线程并发驱动事件循环 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>线程数</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>启动 n 个线程同时调用 <a class="el" href="#a2d0b05ac1c73237ad2056ef4ed07bc66" title="单线程阻塞驱动事件循环">run()</a>。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a17228086cc96db39d915689dcaecc000">run_pool()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a17228086cc96db39d915689dcaecc000">run_pool()</a>.</p>
+
+</div>
+</div>
+<a id="a78052af9b04e2e92a93bc4b8d1967d3c" name="a78052af9b04e2e92a93bc4b8d1967d3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78052af9b04e2e92a93bc4b8d1967d3c">&#9670;&#160;</a></span>schedule_timer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> neforce::io_context::schedule_timer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#ga5405672bf9962081e6fcd1448d4bce4a">uint64_t</a></td>          <td class="paramname"><span class="paramname"><em>delay_ms</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a407f8ccdb8d5733aaab3547c0fa4d597">timer_callback</a></td>          <td class="paramname"><span class="paramname"><em>handler</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>调度一次性定时器 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delay_ms</td><td>延迟毫秒数 </td></tr>
+    <tr><td class="paramname">handler</td><td>到期时执行的回调（在 <a class="el" href="#a2d0b05ac1c73237ad2056ef4ed07bc66" title="单线程阻塞驱动事件循环">run()</a> 线程中执行） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>定时器 ID，可用于 <a class="el" href="#a59965d7c02fbb47ce16dab447d66d524" title="取消待执行的定时器">cancel_timer()</a> </dd></dl>
+
+</div>
+</div>
+<a id="afaae1cb6de5e4fb64158f394ea176edc" name="afaae1cb6de5e4fb64158f394ea176edc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afaae1cb6de5e4fb64158f394ea176edc">&#9670;&#160;</a></span>stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::io_context::stop </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>停止事件循环 </p>
+<p>设置停止标志并唤醒 <a class="el" href="#a2d0b05ac1c73237ad2056ef4ed07bc66" title="单线程阻塞驱动事件循环">run()</a>。正在执行的 handler 会完成，不再启动新的迭代。 </p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="io__context_8hpp_source.html">io_context.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><a href="classneforce_1_1io__context.html">io_context</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

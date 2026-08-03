@@ -1,0 +1,378 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1http_1_1chunked__body__reader" kind="class" language="C++" prot="public">
+    <compoundname>neforce::http::chunked_body_reader</compoundname>
+    <includes refid="chunked__reader_8hpp" local="no">chunked_reader.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1chunked__body__reader_1ac40398c75996637a28d731aa35fead42" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1byte__size" kindref="compound">byte_size</ref></type>
+        <definition>byte_size neforce::http::chunked_body_reader::max_chunk_size</definition>
+        <argsstring></argsstring>
+        <name>max_chunk_size</name>
+        <qualifiedname>neforce::http::chunked_body_reader::max_chunk_size</qualifiedname>
+        <initializer>{1_MB}</initializer>
+        <briefdescription>
+<para>单chunk最大大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" line="40" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1chunked__body__reader_1ab2ac0cbd153fe4ee17d519e1d42ee95b" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1byte__size" kindref="compound">byte_size</ref></type>
+        <definition>byte_size neforce::http::chunked_body_reader::max_total_size</definition>
+        <argsstring></argsstring>
+        <name>max_total_size</name>
+        <qualifiedname>neforce::http::chunked_body_reader::max_total_size</qualifiedname>
+        <initializer>{100_MB}</initializer>
+        <briefdescription>
+<para>总请求体最大大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" line="41" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1chunked__body__reader_1ac0908825cf1bbaabba6dbf56cbe7fa55" prot="public" static="no" mutable="no">
+        <type><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref></type>
+        <definition>milliseconds neforce::http::chunked_body_reader::read_timeout</definition>
+        <argsstring></argsstring>
+        <name>read_timeout</name>
+        <qualifiedname>neforce::http::chunked_body_reader::read_timeout</qualifiedname>
+        <initializer>{30000}</initializer>
+        <briefdescription>
+<para>读取超时 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" line="42" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" bodystart="42" bodyend="42"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1chunked__body__reader_1a3c5fc0d227c2cfd3cae7e5aaaaa8a8e4" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1tcp__socket" kindref="compound">tcp_socket</ref> *</type>
+        <definition>tcp_socket* neforce::http::chunked_body_reader::socket_</definition>
+        <argsstring></argsstring>
+        <name>socket_</name>
+        <qualifiedname>neforce::http::chunked_body_reader::socket_</qualifiedname>
+        <briefdescription>
+<para>底层 TCP socket 指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" line="73" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1chunked__body__reader_1a37b746c498234f50cba79f59a2eb1b1a" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1byte__size" kindref="compound">byte_size</ref></type>
+        <definition>byte_size neforce::http::chunked_body_reader::total_read_</definition>
+        <argsstring></argsstring>
+        <name>total_read_</name>
+        <qualifiedname>neforce::http::chunked_body_reader::total_read_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>已读取的总字节数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" line="75" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1chunked__body__reader_1a954383119c7ae0f1bf1aec3f75cedf97" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::http::chunked_body_reader::complete_</definition>
+        <argsstring></argsstring>
+        <name>complete_</name>
+        <qualifiedname>neforce::http::chunked_body_reader::complete_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>是否已完成所有 chunk 读取 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" line="77" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" bodystart="77" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1chunked__body__reader_1a7b5f5fd5308049e1de87d106856358e6" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::http::chunked_body_reader::trailers_parsed_</definition>
+        <argsstring></argsstring>
+        <name>trailers_parsed_</name>
+        <qualifiedname>neforce::http::chunked_body_reader::trailers_parsed_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>是否已解析 trailer 头部 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" line="79" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" bodystart="79" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1chunked__body__reader_1a2f261be0547558fdbafa93a3e4135a04" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref>, <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt;</type>
+        <definition>unordered_map&lt;string, string&gt; neforce::http::chunked_body_reader::trailers_</definition>
+        <argsstring></argsstring>
+        <name>trailers_</name>
+        <qualifiedname>neforce::http::chunked_body_reader::trailers_</qualifiedname>
+        <briefdescription>
+<para>trailer 头部键值对 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" line="81" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1chunked__body__reader_1aa0e29a68a2680f76b2290504956e4eec" prot="private" static="no" mutable="no">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>byte_vector neforce::http::chunked_body_reader::buffer_</definition>
+        <argsstring></argsstring>
+        <name>buffer_</name>
+        <qualifiedname>neforce::http::chunked_body_reader::buffer_</qualifiedname>
+        <briefdescription>
+<para>内部读取缓冲区 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" line="83" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1chunked__body__reader_1afb829ce28af9399662d6a21c60b3bd10" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::chunked_body_reader::chunked_body_reader</definition>
+        <argsstring>(tcp_socket &amp;socket)</argsstring>
+        <name>chunked_body_reader</name>
+        <qualifiedname>neforce::http::chunked_body_reader::chunked_body_reader</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1tcp__socket" kindref="compound">tcp_socket</ref> &amp;</type>
+          <declname>socket</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" line="44" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" bodystart="44" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1chunked__body__reader_1a6b6137244af9311744f5f827804869e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::http::chunked_body_reader::next_chunk</definition>
+        <argsstring>(byte_vector &amp;out)</argsstring>
+        <name>next_chunk</name>
+        <qualifiedname>neforce::http::chunked_body_reader::next_chunk</qualifiedname>
+        <param>
+          <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref> &amp;</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+<para>读取下一个chunk </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>成功读取chunk返回true，到达末尾返回false </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structhttp__exception" kindref="compound">http_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式错误时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" line="53" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1chunked__body__reader_1a699d30f4167d6feadbc29c4e5c7a4862" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref>, <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt; &amp;</type>
+        <definition>const unordered_map&lt; string, string &gt; &amp; neforce::http::chunked_body_reader::trailers</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>trailers</name>
+        <qualifiedname>neforce::http::chunked_body_reader::trailers</qualifiedname>
+        <briefdescription>
+<para>获取所有trailer头部 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>trailer头部映射 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" line="59" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" bodystart="59" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1chunked__body__reader_1aa92608bdd3cbb1b57c2bed5a323f6e49" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1byte__size" kindref="compound">byte_size</ref></type>
+        <definition>byte_size neforce::http::chunked_body_reader::total_read</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>total_read</name>
+        <qualifiedname>neforce::http::chunked_body_reader::total_read</qualifiedname>
+        <briefdescription>
+<para>获取已读取的总体积 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" line="64" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" bodystart="64" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1chunked__body__reader_1afbb5f8af3492cebafe836f2a544923c3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::http::chunked_body_reader::is_complete</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_complete</name>
+        <qualifiedname>neforce::http::chunked_body_reader::is_complete</qualifiedname>
+        <briefdescription>
+<para>检查是否已完成所有chunk的读取 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" line="69" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" bodystart="69" bodyend="69"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1chunked__body__reader_1a6cbdff46840fced4c5ba8efb725d1f64" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::http::chunked_body_reader::read_line</definition>
+        <argsstring>(string &amp;line)</argsstring>
+        <name>read_line</name>
+        <qualifiedname>neforce::http::chunked_body_reader::read_line</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" line="85" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1chunked__body__reader_1acfc304098f6ea860df51377ecc7db636" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::chunked_body_reader::parse_trailers</definition>
+        <argsstring>()</argsstring>
+        <name>parse_trailers</name>
+        <qualifiedname>neforce::http::chunked_body_reader::parse_trailers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" line="86" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>HTTP Chunked Transfer Encoding 读取器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>按RFC 7230第4.1节实现分块传输解码。 从socket逐块读取数据，处理chunk-size、chunk-data、trailer。</para>
+<para>使用示例： <programlisting><codeline><highlight class="normal">chunked_body_reader<sp/>reader(socket);</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref><sp/>chunk;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(reader.next_chunk(chunk))<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>process(chunk);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>读取trailer</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1http_1_1chunked__body__reader_1a699d30f4167d6feadbc29c4e5c7a4862" kindref="member">trailers</ref><sp/>=<sp/>reader.trailers();</highlight></codeline>
+</programlisting> </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>neforce::byte_size</label>
+        <link refid="classneforce_1_1byte__size"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>neforce::duration&lt; int64_t, milli &gt;</label>
+        <link refid="structneforce_1_1duration"/>
+      </node>
+      <node id="1">
+        <label>neforce::http::chunked_body_reader</label>
+        <link refid="classneforce_1_1http_1_1chunked__body__reader"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>max_chunk_size</edgelabel>
+          <edgelabel>max_total_size</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>read_timeout</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::icommon&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>neforce::icomparable&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="7">
+        <label>neforce::ihashable&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="3">
+        <label>neforce::iobject&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1iobject"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::istringify&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" line="38" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/chunked_reader.hpp" bodystart="38" bodyend="87"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1http_1_1chunked__body__reader_1aa0e29a68a2680f76b2290504956e4eec" prot="private" virt="non-virtual"><scope>neforce::http::chunked_body_reader</scope><name>buffer_</name></member>
+      <member refid="classneforce_1_1http_1_1chunked__body__reader_1afb829ce28af9399662d6a21c60b3bd10" prot="public" virt="non-virtual"><scope>neforce::http::chunked_body_reader</scope><name>chunked_body_reader</name></member>
+      <member refid="classneforce_1_1http_1_1chunked__body__reader_1a954383119c7ae0f1bf1aec3f75cedf97" prot="private" virt="non-virtual"><scope>neforce::http::chunked_body_reader</scope><name>complete_</name></member>
+      <member refid="classneforce_1_1http_1_1chunked__body__reader_1afbb5f8af3492cebafe836f2a544923c3" prot="public" virt="non-virtual"><scope>neforce::http::chunked_body_reader</scope><name>is_complete</name></member>
+      <member refid="classneforce_1_1http_1_1chunked__body__reader_1ac40398c75996637a28d731aa35fead42" prot="public" virt="non-virtual"><scope>neforce::http::chunked_body_reader</scope><name>max_chunk_size</name></member>
+      <member refid="classneforce_1_1http_1_1chunked__body__reader_1ab2ac0cbd153fe4ee17d519e1d42ee95b" prot="public" virt="non-virtual"><scope>neforce::http::chunked_body_reader</scope><name>max_total_size</name></member>
+      <member refid="classneforce_1_1http_1_1chunked__body__reader_1a6b6137244af9311744f5f827804869e3" prot="public" virt="non-virtual"><scope>neforce::http::chunked_body_reader</scope><name>next_chunk</name></member>
+      <member refid="classneforce_1_1http_1_1chunked__body__reader_1acfc304098f6ea860df51377ecc7db636" prot="private" virt="non-virtual"><scope>neforce::http::chunked_body_reader</scope><name>parse_trailers</name></member>
+      <member refid="classneforce_1_1http_1_1chunked__body__reader_1a6cbdff46840fced4c5ba8efb725d1f64" prot="private" virt="non-virtual"><scope>neforce::http::chunked_body_reader</scope><name>read_line</name></member>
+      <member refid="classneforce_1_1http_1_1chunked__body__reader_1ac0908825cf1bbaabba6dbf56cbe7fa55" prot="public" virt="non-virtual"><scope>neforce::http::chunked_body_reader</scope><name>read_timeout</name></member>
+      <member refid="classneforce_1_1http_1_1chunked__body__reader_1a3c5fc0d227c2cfd3cae7e5aaaaa8a8e4" prot="private" virt="non-virtual"><scope>neforce::http::chunked_body_reader</scope><name>socket_</name></member>
+      <member refid="classneforce_1_1http_1_1chunked__body__reader_1aa92608bdd3cbb1b57c2bed5a323f6e49" prot="public" virt="non-virtual"><scope>neforce::http::chunked_body_reader</scope><name>total_read</name></member>
+      <member refid="classneforce_1_1http_1_1chunked__body__reader_1a37b746c498234f50cba79f59a2eb1b1a" prot="private" virt="non-virtual"><scope>neforce::http::chunked_body_reader</scope><name>total_read_</name></member>
+      <member refid="classneforce_1_1http_1_1chunked__body__reader_1a699d30f4167d6feadbc29c4e5c7a4862" prot="public" virt="non-virtual"><scope>neforce::http::chunked_body_reader</scope><name>trailers</name></member>
+      <member refid="classneforce_1_1http_1_1chunked__body__reader_1a2f261be0547558fdbafa93a3e4135a04" prot="private" virt="non-virtual"><scope>neforce::http::chunked_body_reader</scope><name>trailers_</name></member>
+      <member refid="classneforce_1_1http_1_1chunked__body__reader_1a7b5f5fd5308049e1de87d106856358e6" prot="private" virt="non-virtual"><scope>neforce::http::chunked_body_reader</scope><name>trailers_parsed_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

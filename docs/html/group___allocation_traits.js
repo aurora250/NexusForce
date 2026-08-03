@@ -1,10 +1,10 @@
 var group___allocation_traits =
 [
-    [ "allocator_traits&lt; Alloc &gt;", "structallocator__traits.html", [
-      [ "const_pointer", "structallocator__traits.html#a594ad3bfeb22f813a10ed3dd9431748e", null ],
-      [ "difference_type", "structallocator__traits.html#ab06473ee64af5a416dad38d58e624184", null ],
-      [ "rebind_alloc", "structallocator__traits.html#ad05bd883cf1eaef17f2051ad80be2b27", null ],
-      [ "rebind_traits", "structallocator__traits.html#adf1bfd49752245c1acf613983e638504", null ],
-      [ "size_type", "structallocator__traits.html#a28d25351de0ff4f003c00eb4f1b9ad85", null ]
+    [ "neforce::allocator_traits&lt; Alloc &gt;", "structneforce_1_1allocator__traits.html", [
+      [ "const_pointer", "structneforce_1_1allocator__traits.html#a119daef4767936302989a42a75929801", null ],
+      [ "difference_type", "structneforce_1_1allocator__traits.html#a1d48783a8c06900b76c49a6ec27eb0f2", null ],
+      [ "rebind_alloc", "structneforce_1_1allocator__traits.html#af9364bfb159e3d099d6e86afec1fb842", null ],
+      [ "rebind_traits", "structneforce_1_1allocator__traits.html#a0b969fab4c742437bf629212fb521066", null ],
+      [ "size_type", "structneforce_1_1allocator__traits.html#ae1e091594e5e156e2893ef10d50b9e5a", null ]
     ] ]
 ];

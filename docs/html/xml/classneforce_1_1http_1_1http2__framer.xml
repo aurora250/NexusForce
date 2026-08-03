@@ -1,0 +1,305 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1http_1_1http2__framer" kind="class" language="C++" prot="public">
+    <compoundname>neforce::http::http2_framer</compoundname>
+    <includes refid="http2__protocol_8hpp" local="no">http2_protocol.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1http_1_1http2__framer_1a1fb2c8c2580cb02342c5f95f14ad688e" prot="public" static="no">
+        <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="group___h_t_t_p_1gac11d9ecd1a39eb6d5a1988be691ec0d6" kindref="member">http2_frame_type</ref> type, <ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref> flags, <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref> stream_id, const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *payload, <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref> len)&gt;</type>
+        <definition>using neforce::http::http2_framer::frame_callback = 
+function&lt;void(http2_frame_type type, uint8_t flags, uint32_t stream_id, const byte_t* payload, size_t len)&gt;</definition>
+        <argsstring></argsstring>
+        <name>frame_callback</name>
+        <qualifiedname>neforce::http::http2_framer::frame_callback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="343" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="343" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__framer_1ae9c237f61dc60c9c0cdbcd7e3fdbcf4b" prot="private" static="no" mutable="no">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>byte_vector neforce::http::http2_framer::partial_buffer_</definition>
+        <argsstring></argsstring>
+        <name>partial_buffer_</name>
+        <qualifiedname>neforce::http::http2_framer::partial_buffer_</qualifiedname>
+        <briefdescription>
+<para>不完整帧的缓冲数据 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="348" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="348" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__framer_1a93da48db6e1eee7cd316434e894f2d4c" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::http::http2_framer::expected_length_</definition>
+        <argsstring></argsstring>
+        <name>expected_length_</name>
+        <qualifiedname>neforce::http::http2_framer::expected_length_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>当前帧期望的负载长度 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="350" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="350" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__framer_1a1cbe12fcfbe04c4da4409c72f37409b0" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1http_1_1http2__frame__header" kindref="compound">http2_frame_header</ref></type>
+        <definition>http2_frame_header neforce::http::http2_framer::current_header_</definition>
+        <argsstring></argsstring>
+        <name>current_header_</name>
+        <qualifiedname>neforce::http::http2_framer::current_header_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>当前正在解析的帧头 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="352" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="352" bodyend="352"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__framer_1aef005e25917204925fffdbe15036ee17" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::http::http2_framer::reading_header_</definition>
+        <argsstring></argsstring>
+        <name>reading_header_</name>
+        <qualifiedname>neforce::http::http2_framer::reading_header_</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>是否正在读取帧头（9 字节） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="354" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="354" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__framer_1addfa0b09ed4f1744a8c38f16e9ffde45" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector neforce::http::http2_framer::encode_data_frame</definition>
+        <argsstring>(const http2_data_frame &amp;frame)</argsstring>
+        <name>encode_data_frame</name>
+        <qualifiedname>neforce::http::http2_framer::encode_data_frame</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1http_1_1http2__data__frame" kindref="compound">http2_data_frame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="357" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__framer_1a22afca448d0606730701b549db23bb49" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector neforce::http::http2_framer::encode_headers_frame</definition>
+        <argsstring>(const http2_headers_frame &amp;frame)</argsstring>
+        <name>encode_headers_frame</name>
+        <qualifiedname>neforce::http::http2_framer::encode_headers_frame</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1http_1_1http2__headers__frame" kindref="compound">http2_headers_frame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="358" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__framer_1a8306525312fdf9cc95aa5dd32a4b3953" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector neforce::http::http2_framer::encode_push_promise_frame</definition>
+        <argsstring>(const http2_push_promise_frame &amp;frame)</argsstring>
+        <name>encode_push_promise_frame</name>
+        <qualifiedname>neforce::http::http2_framer::encode_push_promise_frame</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1http_1_1http2__push__promise__frame" kindref="compound">http2_push_promise_frame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="359" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__framer_1a5e21643fb993b7839a253ebbd1283f00" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector neforce::http::http2_framer::encode_rst_stream_frame</definition>
+        <argsstring>(const http2_rst_stream_frame &amp;frame)</argsstring>
+        <name>encode_rst_stream_frame</name>
+        <qualifiedname>neforce::http::http2_framer::encode_rst_stream_frame</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1http_1_1http2__rst__stream__frame" kindref="compound">http2_rst_stream_frame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="360" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__framer_1a73550de92340cc59c896e16b39721f36" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector neforce::http::http2_framer::encode_settings_frame</definition>
+        <argsstring>(const http2_settings_frame &amp;frame)</argsstring>
+        <name>encode_settings_frame</name>
+        <qualifiedname>neforce::http::http2_framer::encode_settings_frame</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1http_1_1http2__settings__frame" kindref="compound">http2_settings_frame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="361" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__framer_1a63faa74e2d3d34daca3c052e3484d912" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector neforce::http::http2_framer::encode_ping_frame</definition>
+        <argsstring>(const http2_ping_frame &amp;frame)</argsstring>
+        <name>encode_ping_frame</name>
+        <qualifiedname>neforce::http::http2_framer::encode_ping_frame</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1http_1_1http2__ping__frame" kindref="compound">http2_ping_frame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="362" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__framer_1a1dd95fe4c0b0e0faa31b5d12b57a3721" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector neforce::http::http2_framer::encode_goaway_frame</definition>
+        <argsstring>(const http2_goaway_frame &amp;frame)</argsstring>
+        <name>encode_goaway_frame</name>
+        <qualifiedname>neforce::http::http2_framer::encode_goaway_frame</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1http_1_1http2__goaway__frame" kindref="compound">http2_goaway_frame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="363" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__framer_1a78dcea6e36ccac23877e0eb64dcd54bb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector neforce::http::http2_framer::encode_window_update_frame</definition>
+        <argsstring>(const http2_window_update_frame &amp;frame)</argsstring>
+        <name>encode_window_update_frame</name>
+        <qualifiedname>neforce::http::http2_framer::encode_window_update_frame</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1http_1_1http2__window__update__frame" kindref="compound">http2_window_update_frame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="364" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__framer_1a88b889558d544b6fc20003e6d3cc9740" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector neforce::http::http2_framer::encode_continuation_frame</definition>
+        <argsstring>(const http2_continuation_frame &amp;frame)</argsstring>
+        <name>encode_continuation_frame</name>
+        <qualifiedname>neforce::http::http2_framer::encode_continuation_frame</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1http_1_1http2__continuation__frame" kindref="compound">http2_continuation_frame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="365" column="24"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__framer_1ad1776497f1b169a07bfbe58cf9c8ce35" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_framer::decode_frames</definition>
+        <argsstring>(const byte_t *data, size_t len, frame_callback cb)</argsstring>
+        <name>decode_frames</name>
+        <qualifiedname>neforce::http::http2_framer::decode_frames</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>len</declname>
+        </param>
+        <param>
+          <type>frame_callback</type>
+          <declname>cb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="367" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>HTTP/2 帧编解码器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>负责 HTTP/2 帧的编码和字节流解析。 支持不完整帧的缓冲和回调式解码。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="341" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="341" bodyend="368"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1http_1_1http2__framer_1a1cbe12fcfbe04c4da4409c72f37409b0" prot="private" virt="non-virtual"><scope>neforce::http::http2_framer</scope><name>current_header_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__framer_1ad1776497f1b169a07bfbe58cf9c8ce35" prot="public" virt="non-virtual"><scope>neforce::http::http2_framer</scope><name>decode_frames</name></member>
+      <member refid="classneforce_1_1http_1_1http2__framer_1a88b889558d544b6fc20003e6d3cc9740" prot="public" virt="non-virtual"><scope>neforce::http::http2_framer</scope><name>encode_continuation_frame</name></member>
+      <member refid="classneforce_1_1http_1_1http2__framer_1addfa0b09ed4f1744a8c38f16e9ffde45" prot="public" virt="non-virtual"><scope>neforce::http::http2_framer</scope><name>encode_data_frame</name></member>
+      <member refid="classneforce_1_1http_1_1http2__framer_1a1dd95fe4c0b0e0faa31b5d12b57a3721" prot="public" virt="non-virtual"><scope>neforce::http::http2_framer</scope><name>encode_goaway_frame</name></member>
+      <member refid="classneforce_1_1http_1_1http2__framer_1a22afca448d0606730701b549db23bb49" prot="public" virt="non-virtual"><scope>neforce::http::http2_framer</scope><name>encode_headers_frame</name></member>
+      <member refid="classneforce_1_1http_1_1http2__framer_1a63faa74e2d3d34daca3c052e3484d912" prot="public" virt="non-virtual"><scope>neforce::http::http2_framer</scope><name>encode_ping_frame</name></member>
+      <member refid="classneforce_1_1http_1_1http2__framer_1a8306525312fdf9cc95aa5dd32a4b3953" prot="public" virt="non-virtual"><scope>neforce::http::http2_framer</scope><name>encode_push_promise_frame</name></member>
+      <member refid="classneforce_1_1http_1_1http2__framer_1a5e21643fb993b7839a253ebbd1283f00" prot="public" virt="non-virtual"><scope>neforce::http::http2_framer</scope><name>encode_rst_stream_frame</name></member>
+      <member refid="classneforce_1_1http_1_1http2__framer_1a73550de92340cc59c896e16b39721f36" prot="public" virt="non-virtual"><scope>neforce::http::http2_framer</scope><name>encode_settings_frame</name></member>
+      <member refid="classneforce_1_1http_1_1http2__framer_1a78dcea6e36ccac23877e0eb64dcd54bb" prot="public" virt="non-virtual"><scope>neforce::http::http2_framer</scope><name>encode_window_update_frame</name></member>
+      <member refid="classneforce_1_1http_1_1http2__framer_1a93da48db6e1eee7cd316434e894f2d4c" prot="private" virt="non-virtual"><scope>neforce::http::http2_framer</scope><name>expected_length_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__framer_1a1fb2c8c2580cb02342c5f95f14ad688e" prot="public" virt="non-virtual"><scope>neforce::http::http2_framer</scope><name>frame_callback</name></member>
+      <member refid="classneforce_1_1http_1_1http2__framer_1ae9c237f61dc60c9c0cdbcd7e3fdbcf4b" prot="private" virt="non-virtual"><scope>neforce::http::http2_framer</scope><name>partial_buffer_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__framer_1aef005e25917204925fffdbe15036ee17" prot="private" virt="non-virtual"><scope>neforce::http::http2_framer</scope><name>reading_header_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

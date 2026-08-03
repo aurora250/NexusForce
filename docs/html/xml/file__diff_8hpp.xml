@@ -81,8 +81,8 @@
         </childnode>
       </node>
       <node id="16">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="11" relation="include">
         </childnode>
       </node>
@@ -269,30 +269,44 @@
         </childnode>
         <childnode refid="47" relation="include">
         </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
         <childnode refid="37" relation="include">
         </childnode>
       </node>
-      <node id="48">
+      <node id="50">
         <label>NeForce/core/string/basic_string_view.hpp</label>
         <link refid="basic__string__view_8hpp"/>
         <childnode refid="35" relation="include">
         </childnode>
-        <childnode refid="49" relation="include">
+        <childnode refid="51" relation="include">
         </childnode>
-        <childnode refid="50" relation="include">
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
         </childnode>
       </node>
-      <node id="49">
+      <node id="51">
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="33" relation="include">
         </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
       </node>
-      <node id="50">
+      <node id="48">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>NeForce/core/string/charset.hpp</label>
+        <link refid="charset_8hpp"/>
+        <childnode refid="48" relation="include">
+        </childnode>
         <childnode refid="9" relation="include">
         </childnode>
       </node>
@@ -302,10 +316,10 @@
         <childnode refid="45" relation="include">
         </childnode>
       </node>
-      <node id="47">
+      <node id="49">
         <label>NeForce/core/string/string_view.hpp</label>
         <link refid="string__view_8hpp"/>
-        <childnode refid="48" relation="include">
+        <childnode refid="50" relation="include">
         </childnode>
       </node>
       <node id="17">
@@ -393,8 +407,9 @@
         <link refid="file__sink_8hpp"/>
       </node>
     </invincdepgraph>
-    <innerclass refid="classfile__diff" prot="public">file_diff</innerclass>
-    <innerclass refid="structfile__diff_1_1binary__diff__entry" prot="public">file_diff::binary_diff_entry</innerclass>
+    <innerclass refid="classneforce_1_1file__diff" prot="public">neforce::file_diff</innerclass>
+    <innerclass refid="structneforce_1_1file__diff_1_1binary__diff__entry" prot="public">neforce::file_diff::binary_diff_entry</innerclass>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
     <briefdescription>
 <para>文件比较与差异分析工具 </para>
     </briefdescription>
@@ -411,36 +426,36 @@
 <codeline lineno="14"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight></codeline>
-<codeline lineno="33" refid="classfile__diff" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/>file_diff<sp/>{</highlight></codeline>
+<codeline lineno="33" refid="classneforce_1_1file__diff" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/>file_diff<sp/>{</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>file_diff()<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="36"><highlight class="normal"></highlight></codeline>
-<codeline lineno="37" refid="classfile__diff_1a7b253d00c54788d3a0a8a5b27a188a22" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classfile__diff_1a7b253d00c54788d3a0a8a5b27a188a22" kindref="member">size_type</ref><sp/>=</highlight></codeline>
+<codeline lineno="37" refid="classneforce_1_1file__diff_1a5c93da0f456ca548667710e7ee60d19c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classneforce_1_1file__diff_1a5c93da0f456ca548667710e7ee60d19c" kindref="member">size_type</ref><sp/>=</highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>long;<sp/></highlight></codeline>
 <codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>;<sp/></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref>;<sp/></highlight></codeline>
 <codeline lineno="42"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight></codeline>
-<codeline lineno="44" refid="classfile__diff_1a38950220c36340dce9cab6c7a62f5609" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classfile__diff_1a38950220c36340dce9cab6c7a62f5609" kindref="member">difference_type</ref><sp/>=<sp/><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref>;<sp/></highlight></codeline>
+<codeline lineno="44" refid="classneforce_1_1file__diff_1a27fd908d062a00d6fc456dd4386def66" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classneforce_1_1file__diff_1a27fd908d062a00d6fc456dd4386def66" kindref="member">difference_type</ref><sp/>=<sp/><ref refid="group___core_types_1ga0b098d32ebd9cc922390914e765ca674" kindref="member">int64_t</ref>;<sp/></highlight></codeline>
 <codeline lineno="45"><highlight class="normal"></highlight></codeline>
-<codeline lineno="52" refid="structfile__diff_1_1binary__diff__entry" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structfile__diff_1_1binary__diff__entry" kindref="compound">binary_diff_entry</ref><sp/>{</highlight></codeline>
-<codeline lineno="53" refid="structfile__diff_1_1binary__diff__entry_1a55667f1317a97c81f9e8f05a21897b4b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classfile__diff_1a38950220c36340dce9cab6c7a62f5609" kindref="member">difference_type</ref><sp/><ref refid="structfile__diff_1_1binary__diff__entry_1a55667f1317a97c81f9e8f05a21897b4b" kindref="member">offset</ref><sp/>=<sp/>0;<sp/></highlight></codeline>
-<codeline lineno="54" refid="structfile__diff_1_1binary__diff__entry_1af96102b7d9ae605f77d4ed5b5e9bc3ea" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref><sp/><ref refid="structfile__diff_1_1binary__diff__entry_1af96102b7d9ae605f77d4ed5b5e9bc3ea" kindref="member">byte1</ref><sp/>=<sp/>0;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="55" refid="structfile__diff_1_1binary__diff__entry_1aa8f0ffa20840e7088a5a6859c99fa640" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref><sp/><ref refid="structfile__diff_1_1binary__diff__entry_1aa8f0ffa20840e7088a5a6859c99fa640" kindref="member">byte2</ref><sp/>=<sp/>0;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="56" refid="structfile__diff_1_1binary__diff__entry_1a2605974584d296a7c7ca9366568fdd5e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref><sp/><ref refid="structfile__diff_1_1binary__diff__entry_1a2605974584d296a7c7ca9366568fdd5e" kindref="member">size_diff</ref><sp/>=<sp/>0;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="57" refid="structfile__diff_1_1binary__diff__entry_1aa5fb5dd7c8f5eaf090d637f76edcafe8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structfile__diff_1_1binary__diff__entry_1aa5fb5dd7c8f5eaf090d637f76edcafe8" kindref="member">is_size_diff</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/><sp/></highlight></codeline>
+<codeline lineno="52" refid="structneforce_1_1file__diff_1_1binary__diff__entry" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structneforce_1_1file__diff_1_1binary__diff__entry" kindref="compound">binary_diff_entry</ref><sp/>{</highlight></codeline>
+<codeline lineno="53" refid="structneforce_1_1file__diff_1_1binary__diff__entry_1abce65960d738fe16d2e7bf4d4dd7b069" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1file__diff_1a27fd908d062a00d6fc456dd4386def66" kindref="member">difference_type</ref><sp/><ref refid="structneforce_1_1file__diff_1_1binary__diff__entry_1abce65960d738fe16d2e7bf4d4dd7b069" kindref="member">offset</ref><sp/>=<sp/>0;<sp/></highlight></codeline>
+<codeline lineno="54" refid="structneforce_1_1file__diff_1_1binary__diff__entry_1a7896bbcd1bb70c34fec03e0f171dad8b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref><sp/><ref refid="structneforce_1_1file__diff_1_1binary__diff__entry_1a7896bbcd1bb70c34fec03e0f171dad8b" kindref="member">byte1</ref><sp/>=<sp/>0;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="55" refid="structneforce_1_1file__diff_1_1binary__diff__entry_1a8d4dc520396551c58b8b6849000029de" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref><sp/><ref refid="structneforce_1_1file__diff_1_1binary__diff__entry_1a8d4dc520396551c58b8b6849000029de" kindref="member">byte2</ref><sp/>=<sp/>0;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="56" refid="structneforce_1_1file__diff_1_1binary__diff__entry_1ad4927e074b1512a2c78682d7e2cd6feb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga0b098d32ebd9cc922390914e765ca674" kindref="member">int64_t</ref><sp/><ref refid="structneforce_1_1file__diff_1_1binary__diff__entry_1ad4927e074b1512a2c78682d7e2cd6feb" kindref="member">size_diff</ref><sp/>=<sp/>0;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="57" refid="structneforce_1_1file__diff_1_1binary__diff__entry_1a103b87c7a98009b76ed3ded7148657ad" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1file__diff_1_1binary__diff__entry_1a103b87c7a98009b76ed3ded7148657ad" kindref="member">is_size_diff</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/><sp/></highlight></codeline>
 <codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="59"><highlight class="normal"></highlight></codeline>
-<codeline lineno="69" refid="classfile__diff_1a74fb268762377b116e79c10e8b9a62cc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classfile__diff_1a74fb268762377b116e79c10e8b9a62cc" kindref="member">compare</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classpath" kindref="compound">path</ref>&amp;<sp/>file1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classpath" kindref="compound">path</ref>&amp;<sp/>file2,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>binary<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="69" refid="classneforce_1_1file__diff_1a63f095111bd8c68538dc696237508d28" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1file__diff_1a63f095111bd8c68538dc696237508d28" kindref="member">compare</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1path" kindref="compound">path</ref>&amp;<sp/>file1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1path" kindref="compound">path</ref>&amp;<sp/>file2,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>binary<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="70"><highlight class="normal"></highlight></codeline>
-<codeline lineno="80" refid="classfile__diff_1ab2b574b3b31c54a95c20618f95fa4ce6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classfile__diff_1ab2b574b3b31c54a95c20618f95fa4ce6" kindref="member">compare_binary</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classpath" kindref="compound">path</ref>&amp;<sp/>file1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classpath" kindref="compound">path</ref>&amp;<sp/>file2);</highlight></codeline>
+<codeline lineno="80" refid="classneforce_1_1file__diff_1a99fed0f1ebff7918374fc3cde4f11833" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1file__diff_1a99fed0f1ebff7918374fc3cde4f11833" kindref="member">compare_binary</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1path" kindref="compound">path</ref>&amp;<sp/>file1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1path" kindref="compound">path</ref>&amp;<sp/>file2);</highlight></codeline>
 <codeline lineno="81"><highlight class="normal"></highlight></codeline>
-<codeline lineno="94" refid="classfile__diff_1abaec6f70a93d84b213022e8d4c1a87ab" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classfile__diff_1abaec6f70a93d84b213022e8d4c1a87ab" kindref="member">compare_text</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classpath" kindref="compound">path</ref>&amp;<sp/>file1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classpath" kindref="compound">path</ref>&amp;<sp/>file2,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>ignore_case<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="94" refid="classneforce_1_1file__diff_1a183698bd419e84b9489095997205924c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1file__diff_1a183698bd419e84b9489095997205924c" kindref="member">compare_text</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1path" kindref="compound">path</ref>&amp;<sp/>file1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1path" kindref="compound">path</ref>&amp;<sp/>file2,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>ignore_case<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,</highlight></codeline>
 <codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>ignore_whitespace<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="96"><highlight class="normal"></highlight></codeline>
-<codeline lineno="110" refid="classfile__diff_1af04478577d923448ddb7bc872380952f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;binary_diff_entry&gt;</ref><sp/><ref refid="classfile__diff_1af04478577d923448ddb7bc872380952f" kindref="member">binary_diff</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classpath" kindref="compound">path</ref>&amp;<sp/>file1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classpath" kindref="compound">path</ref>&amp;<sp/>file2,</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classfile__diff_1a7b253d00c54788d3a0a8a5b27a188a22" kindref="member">size_type</ref><sp/>max_diffs<sp/>=<sp/>100);</highlight></codeline>
+<codeline lineno="110" refid="classneforce_1_1file__diff_1add5db2ba3f7997545e9d3f73522d3866" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1vector" kindref="compound">vector&lt;binary_diff_entry&gt;</ref><sp/><ref refid="classneforce_1_1file__diff_1add5db2ba3f7997545e9d3f73522d3866" kindref="member">binary_diff</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1path" kindref="compound">path</ref>&amp;<sp/>file1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1path" kindref="compound">path</ref>&amp;<sp/>file2,</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1file__diff_1a5c93da0f456ca548667710e7ee60d19c" kindref="member">size_type</ref><sp/>max_diffs<sp/>=<sp/>100);</highlight></codeline>
 <codeline lineno="112"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="113"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>File</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="115"><highlight class="normal"></highlight></codeline>

@@ -44,8 +44,8 @@
         <link refid="version_8hpp_source"/>
       </node>
       <node id="11">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
@@ -129,10 +129,6 @@
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
         <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="13" relation="include">
@@ -140,6 +136,8 @@
         <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
@@ -151,6 +149,10 @@
         </childnode>
         <childnode refid="20" relation="include">
         </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
       </node>
       <node id="7">
         <label>containers.hpp</label>
@@ -160,47 +162,47 @@
         <label>dropdown.hpp</label>
         <link refid="dropdown_8hpp"/>
       </node>
-      <node id="9">
+      <node id="12">
         <label>hoverable.hpp</label>
         <link refid="hoverable_8hpp"/>
       </node>
-      <node id="10">
+      <node id="13">
         <label>menu.hpp</label>
         <link refid="menu_8hpp"/>
       </node>
-      <node id="11">
+      <node id="14">
         <label>modal.hpp</label>
         <link refid="modal_8hpp"/>
       </node>
-      <node id="12">
+      <node id="15">
         <label>radiobox.hpp</label>
         <link refid="radiobox_8hpp"/>
       </node>
-      <node id="14">
+      <node id="16">
         <label>renderer.hpp</label>
-        <link refid="renderer_8hpp"/>
+        <link refid="component_2renderer_8hpp"/>
       </node>
-      <node id="15">
+      <node id="17">
         <label>resizable_split.hpp</label>
         <link refid="resizable__split_8hpp"/>
       </node>
-      <node id="16">
+      <node id="18">
         <label>scroll_view.hpp</label>
         <link refid="scroll__view_8hpp"/>
       </node>
-      <node id="17">
+      <node id="19">
         <label>slider.hpp</label>
         <link refid="slider_8hpp"/>
       </node>
-      <node id="18">
+      <node id="20">
         <label>text_input.hpp</label>
         <link refid="text__input_8hpp"/>
       </node>
-      <node id="19">
+      <node id="21">
         <label>toggle.hpp</label>
         <link refid="toggle_8hpp"/>
       </node>
-      <node id="20">
+      <node id="22">
         <label>window.hpp</label>
         <link refid="window_8hpp"/>
       </node>
@@ -210,19 +212,26 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="13">
+      <node id="10">
+        <label>event_dispatcher.hpp</label>
+        <link refid="event__dispatcher_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>focus_manager.hpp</label>
+        <link refid="focus__manager_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
         <label>reconciler.hpp</label>
         <link refid="reconciler_8hpp"/>
       </node>
     </invincdepgraph>
-    <sectiondef kind="func">
-      <member refid="group___remove_algorithms_1ga5962b7908ac4eea784e2872b03294a7e" kind="function"><name>remove_copy</name></member>
-      <member refid="group___remove_algorithms_1gab79933ba60a9e8d48147d15911fef58f" kind="function"><name>remove_copy_if</name></member>
-      <member refid="group___remove_algorithms_1gab60509ebaf6c33a45885638e30e9e9b2" kind="function"><name>remove</name></member>
-      <member refid="group___remove_algorithms_1ga02dd5101700733210a677808983ebfcc" kind="function"><name>remove_if</name></member>
-      <member refid="group___remove_algorithms_1ga80e72b34181ffb739e061b6dbe19a6b6" kind="function"><name>erase</name></member>
-      <member refid="group___remove_algorithms_1ga5d86f8052a2e5759aeab543c23f3c861" kind="function"><name>erase_if</name></member>
-    </sectiondef>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
     <briefdescription>
 <para>删除算法 </para>
     </briefdescription>
@@ -241,8 +250,8 @@
 <codeline lineno="21"><highlight class="normal"></highlight></codeline>
 <codeline lineno="27"><highlight class="normal"></highlight></codeline>
 <codeline lineno="44"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Iterator1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Iterator2,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="45" refid="group___remove_algorithms_1ga5962b7908ac4eea784e2872b03294a7e" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>Iterator2<sp/><ref refid="group___remove_algorithms_1ga5962b7908ac4eea784e2872b03294a7e" kindref="member">remove_copy</ref>(Iterator1<sp/>first,<sp/>Iterator1<sp/>last,<sp/>Iterator2<sp/>result,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>value)<sp/>{</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___iterator_category_checks_1ga3d298019699d72aef974a27a13c65393" kindref="member">is_ranges_fwd_iter_v&lt;Iterator1&gt;</ref><sp/>&amp;&amp;<sp/><ref refid="group___iterator_category_checks_1ga3d298019699d72aef974a27a13c65393" kindref="member">is_ranges_fwd_iter_v&lt;Iterator2&gt;</ref>,</highlight></codeline>
+<codeline lineno="45" refid="group___remove_algorithms_1gaf22dbf71711f571a1e196dcffdf2ab63" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>Iterator2<sp/><ref refid="group___remove_algorithms_1gaf22dbf71711f571a1e196dcffdf2ab63" kindref="member">remove_copy</ref>(Iterator1<sp/>first,<sp/>Iterator1<sp/>last,<sp/>Iterator2<sp/>result,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>value)<sp/>{</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___iterator_category_checks_1gace1b5811f58b26e736680d8234eb5627" kindref="member">is_ranges_fwd_iter_v&lt;Iterator1&gt;</ref><sp/>&amp;&amp;<sp/><ref refid="group___iterator_category_checks_1gace1b5811f58b26e736680d8234eb5627" kindref="member">is_ranges_fwd_iter_v&lt;Iterator2&gt;</ref>,</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Iterator<sp/>must<sp/>be<sp/>forward_iterator&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"></highlight></codeline>
 <codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(;<sp/>first<sp/>!=<sp/>last;<sp/>++first)<sp/>{</highlight></codeline>
@@ -255,8 +264,8 @@
 <codeline lineno="56"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"></highlight></codeline>
 <codeline lineno="72"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Iterator1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Iterator2,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Predicate&gt;</highlight></codeline>
-<codeline lineno="73" refid="group___remove_algorithms_1gab79933ba60a9e8d48147d15911fef58f" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>Iterator2<sp/><ref refid="group___remove_algorithms_1gab79933ba60a9e8d48147d15911fef58f" kindref="member">remove_copy_if</ref>(Iterator1<sp/>first,<sp/>Iterator1<sp/>last,<sp/>Iterator2<sp/>result,<sp/>Predicate<sp/>pred)<sp/>{</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___iterator_category_checks_1ga3d298019699d72aef974a27a13c65393" kindref="member">is_ranges_fwd_iter_v&lt;Iterator1&gt;</ref><sp/>&amp;&amp;<sp/><ref refid="group___iterator_category_checks_1ga3d298019699d72aef974a27a13c65393" kindref="member">is_ranges_fwd_iter_v&lt;Iterator2&gt;</ref>,</highlight></codeline>
+<codeline lineno="73" refid="group___remove_algorithms_1ga7b135817a5ced7418449924032d3c8d9" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>Iterator2<sp/><ref refid="group___remove_algorithms_1ga7b135817a5ced7418449924032d3c8d9" kindref="member">remove_copy_if</ref>(Iterator1<sp/>first,<sp/>Iterator1<sp/>last,<sp/>Iterator2<sp/>result,<sp/>Predicate<sp/>pred)<sp/>{</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___iterator_category_checks_1gace1b5811f58b26e736680d8234eb5627" kindref="member">is_ranges_fwd_iter_v&lt;Iterator1&gt;</ref><sp/>&amp;&amp;<sp/><ref refid="group___iterator_category_checks_1gace1b5811f58b26e736680d8234eb5627" kindref="member">is_ranges_fwd_iter_v&lt;Iterator2&gt;</ref>,</highlight></codeline>
 <codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Iterator<sp/>must<sp/>be<sp/>forward_iterator&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="76"><highlight class="normal"></highlight></codeline>
 <codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(;<sp/>first<sp/>!=<sp/>last;<sp/>++first)<sp/>{</highlight></codeline>
@@ -269,14 +278,14 @@
 <codeline lineno="84"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="85"><highlight class="normal"></highlight></codeline>
 <codeline lineno="101"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Iterator,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="102" refid="group___remove_algorithms_1gab60509ebaf6c33a45885638e30e9e9b2" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>Iterator<sp/><ref refid="group___remove_algorithms_1gab60509ebaf6c33a45885638e30e9e9b2" kindref="member">remove</ref>(Iterator<sp/>first,<sp/>Iterator<sp/>last,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>value)<sp/>{</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___iterator_category_checks_1ga3d298019699d72aef974a27a13c65393" kindref="member">is_ranges_fwd_iter_v&lt;Iterator&gt;</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Iterator<sp/>must<sp/>be<sp/>forward_iterator&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="102" refid="group___remove_algorithms_1gaeed66e3840ca89e8469c9cee5c147987" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>Iterator<sp/><ref refid="group___remove_algorithms_1gaeed66e3840ca89e8469c9cee5c147987" kindref="member">remove</ref>(Iterator<sp/>first,<sp/>Iterator<sp/>last,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>value)<sp/>{</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___iterator_category_checks_1gace1b5811f58b26e736680d8234eb5627" kindref="member">is_ranges_fwd_iter_v&lt;Iterator&gt;</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Iterator<sp/>must<sp/>be<sp/>forward_iterator&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="104"><highlight class="normal"></highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/>first<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___finding_algorithms_1gadf82c3a47d7ebd54e4be179fe380c1cb" kindref="member">find</ref>(first,<sp/>last,<sp/>value);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/>first<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___finding_algorithms_1ga969f0071b4078ce0f8f8fed37a674551" kindref="member">find</ref>(first,<sp/>last,<sp/>value);</highlight></codeline>
 <codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(first<sp/>!=<sp/>last)<sp/>{</highlight></codeline>
 <codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(Iterator<sp/>i<sp/>=<sp/>first;<sp/>++i<sp/>!=<sp/>last;)<sp/>{</highlight></codeline>
 <codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!(*i<sp/>==<sp/>value))<sp/>{</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*first<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(*i);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*first<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" kindref="member">move</ref>(*i);</highlight></codeline>
 <codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>++first;</highlight></codeline>
 <codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
@@ -285,14 +294,14 @@
 <codeline lineno="115"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="116"><highlight class="normal"></highlight></codeline>
 <codeline lineno="132"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Iterator,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Predicate&gt;</highlight></codeline>
-<codeline lineno="133" refid="group___remove_algorithms_1ga02dd5101700733210a677808983ebfcc" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>Iterator<sp/><ref refid="group___remove_algorithms_1ga02dd5101700733210a677808983ebfcc" kindref="member">remove_if</ref>(Iterator<sp/>first,<sp/>Iterator<sp/>last,<sp/>Predicate<sp/>pred)<sp/>{</highlight></codeline>
-<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___iterator_category_checks_1ga3d298019699d72aef974a27a13c65393" kindref="member">is_ranges_fwd_iter_v&lt;Iterator&gt;</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Iterator<sp/>must<sp/>be<sp/>forward_iterator&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="133" refid="group___remove_algorithms_1gafe93cfbcbfba8fccb49c198ad3bbe4b1" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>Iterator<sp/><ref refid="group___remove_algorithms_1gafe93cfbcbfba8fccb49c198ad3bbe4b1" kindref="member">remove_if</ref>(Iterator<sp/>first,<sp/>Iterator<sp/>last,<sp/>Predicate<sp/>pred)<sp/>{</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___iterator_category_checks_1gace1b5811f58b26e736680d8234eb5627" kindref="member">is_ranges_fwd_iter_v&lt;Iterator&gt;</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Iterator<sp/>must<sp/>be<sp/>forward_iterator&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="135"><highlight class="normal"></highlight></codeline>
-<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/>first<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___finding_algorithms_1gac806ea7ce9eb5a1ae1ddf4a34dd8b3b8" kindref="member">find_if</ref>(first,<sp/>last,<sp/>pred);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/>first<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___finding_algorithms_1ga916f45df9d86316096fdf27abacc277e" kindref="member">find_if</ref>(first,<sp/>last,<sp/>pred);</highlight></codeline>
 <codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(first<sp/>!=<sp/>last)<sp/>{</highlight></codeline>
 <codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(Iterator<sp/>i<sp/>=<sp/>first;<sp/>++i<sp/>!=<sp/>last;)<sp/>{</highlight></codeline>
 <codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!pred(*i))<sp/>{</highlight></codeline>
-<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*first<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(*i);</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*first<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" kindref="member">move</ref>(*i);</highlight></codeline>
 <codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>++first;</highlight></codeline>
 <codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
@@ -301,25 +310,25 @@
 <codeline lineno="146"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="147"><highlight class="normal"></highlight></codeline>
 <codeline lineno="161"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Container,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U&gt;</highlight></codeline>
-<codeline lineno="162" refid="group___remove_algorithms_1ga80e72b34181ffb739e061b6dbe19a6b6" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group___remove_algorithms_1ga80e72b34181ffb739e061b6dbe19a6b6" kindref="member">erase</ref>(Container&amp;<sp/>cont,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U&amp;<sp/>value)<sp/>{</highlight></codeline>
+<codeline lineno="162" refid="group___remove_algorithms_1ga146602eb771f779b293fa34bc3c72966" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group___remove_algorithms_1ga146602eb771f779b293fa34bc3c72966" kindref="member">erase</ref>(Container&amp;<sp/>cont,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U&amp;<sp/>value)<sp/>{</highlight></codeline>
 <codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">value_type<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Container::value_type;</highlight></codeline>
 <codeline lineno="164"><highlight class="normal"></highlight></codeline>
 <codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>old_size<sp/>=<sp/>cont.size();</highlight></codeline>
-<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref><sp/>=<sp/>cont.end();</highlight></codeline>
-<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>removed<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___remove_algorithms_1ga02dd5101700733210a677808983ebfcc" kindref="member">remove_if</ref>(cont.begin(),<sp/><ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref>,<sp/>[&amp;value](</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>value_type&amp;<sp/>iter)<sp/>{<sp/>return<sp/>iter<sp/>==<sp/>value;<sp/>});</highlight></codeline>
-<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/>cont.erase(removed,<sp/><ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref>);</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" kindref="member">end</ref><sp/>=<sp/>cont.end();</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>removed<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___remove_algorithms_1gafe93cfbcbfba8fccb49c198ad3bbe4b1" kindref="member">remove_if</ref>(cont.begin(),<sp/><ref refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" kindref="member">end</ref>,<sp/>[&amp;value](</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>value_type&amp;<sp/>iter)<sp/>{<sp/>return<sp/>iter<sp/>==<sp/>value;<sp/>});</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/>cont.erase(removed,<sp/><ref refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" kindref="member">end</ref>);</highlight></codeline>
 <codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>old_size<sp/>-<sp/>cont.size();</highlight></codeline>
 <codeline lineno="170"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="171"><highlight class="normal"></highlight></codeline>
 <codeline lineno="186"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Container,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Predicate&gt;</highlight></codeline>
-<codeline lineno="187" refid="group___remove_algorithms_1ga5d86f8052a2e5759aeab543c23f3c861" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group___remove_algorithms_1ga5d86f8052a2e5759aeab543c23f3c861" kindref="member">erase_if</ref>(Container&amp;<sp/>cont,<sp/>Predicate<sp/>pred)<sp/>{</highlight></codeline>
+<codeline lineno="187" refid="group___remove_algorithms_1gaa3c53ce3df1c6a586f2af5e9debf2828" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group___remove_algorithms_1gaa3c53ce3df1c6a586f2af5e9debf2828" kindref="member">erase_if</ref>(Container&amp;<sp/>cont,<sp/>Predicate<sp/>pred)<sp/>{</highlight></codeline>
 <codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">value_type<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Container::value_type;</highlight></codeline>
 <codeline lineno="189"><highlight class="normal"></highlight></codeline>
 <codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>old_size<sp/>=<sp/>cont.size();</highlight></codeline>
-<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref><sp/>=<sp/>cont.end();</highlight></codeline>
-<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>removed<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___remove_algorithms_1ga02dd5101700733210a677808983ebfcc" kindref="member">remove_if</ref>(</highlight></codeline>
-<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cont.begin(),<sp/><ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref>,<sp/>[ref_pred<sp/>=<sp/>_NEFORCE<sp/><ref refid="classref" kindref="compound">ref</ref>(pred)](</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>value_type&amp;<sp/>iter)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ref_pred(iter);<sp/>});</highlight></codeline>
-<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/>cont.erase(removed,<sp/><ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref>);</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" kindref="member">end</ref><sp/>=<sp/>cont.end();</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>removed<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___remove_algorithms_1gafe93cfbcbfba8fccb49c198ad3bbe4b1" kindref="member">remove_if</ref>(</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cont.begin(),<sp/><ref refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" kindref="member">end</ref>,<sp/>[ref_pred<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___reference_wrapper_1gae07530a0f43e9c46acfc5a1632d57a00" kindref="member">ref</ref>(pred)](</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>value_type&amp;<sp/>iter)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ref_pred(iter);<sp/>});</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/>cont.erase(removed,<sp/><ref refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" kindref="member">end</ref>);</highlight></codeline>
 <codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>old_size<sp/>-<sp/>cont.size();</highlight></codeline>
 <codeline lineno="196"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="197"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>RemoveAlgorithms</highlight><highlight class="normal"></highlight></codeline>

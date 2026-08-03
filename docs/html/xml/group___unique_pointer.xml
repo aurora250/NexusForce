@@ -3,10 +3,10 @@
   <compounddef id="group___unique_pointer" kind="group">
     <compoundname>UniquePointer</compoundname>
     <title>独占智能指针</title>
-    <innerclass refid="classunique__ptr" prot="public">unique_ptr</innerclass>
-    <innerclass refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4" prot="public">unique_ptr&lt; T[], Deleter &gt;</innerclass>
+    <innerclass refid="classneforce_1_1unique__ptr" prot="public">neforce::unique_ptr</innerclass>
+    <innerclass refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4" prot="public">neforce::unique_ptr&lt; T[], Deleter &gt;</innerclass>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___unique_pointer_1ga3def886ee466fc780671110b23c22e0d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1ga12d4a1c5b3027501a31634bd874b515c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -15,20 +15,21 @@
             <type>typename Deleter</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="structis__swappable" kindref="compound">is_swappable</ref>&lt; Deleter &gt;::value &amp;&amp;<ref refid="structis__swappable" kindref="compound">is_swappable</ref>&lt; T &gt;::value, int &gt;</type>
+            <type>enable_if_t&lt; is_swappable&lt; Deleter &gt;::value &amp;&amp;is_swappable&lt; T &gt;::value, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void swap</definition>
+        <definition>void neforce::swap</definition>
         <argsstring>(unique_ptr&lt; T, Deleter &gt; &amp;lhs, unique_ptr&lt; T, Deleter &gt; &amp;rhs) noexcept</argsstring>
         <name>swap</name>
+        <qualifiedname>neforce::swap</qualifiedname>
         <param>
-          <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, Deleter &gt; &amp;</type>
+          <type>unique_ptr&lt; T, Deleter &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, Deleter &gt; &amp;</type>
+          <type>unique_ptr&lt; T, Deleter &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -74,8 +75,15 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="582" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="582" bodyend="584"/>
+        <references refid="group___unique_pointer_1ga12d4a1c5b3027501a31634bd874b515c" compoundref="unique__ptr_8hpp" startline="582" endline="584">neforce::swap</references>
+        <referencedby refid="group___shift_algorithms_1ga323874bfbf5e57e5ad937fa9b02fe0de" compoundref="shift_8hpp" startline="440" endline="444">neforce::iter_swap</referencedby>
+        <referencedby refid="group___r_b_tree_1gaad1ee8b785109af2f86b2289f864d46e" compoundref="rb__tree_8hpp" startline="245" endline="416">neforce::rb_tree_erase_rebalance</referencedby>
+        <referencedby refid="group___swap_utility_1ga71b9da583fb3cb5d5f79ff8cfc663540">neforce::swap</referencedby>
+        <referencedby refid="group___swap_utility_1gab106ef0baa227d25848843acb2326de7">neforce::swap</referencedby>
+        <referencedby refid="group___swap_utility_1gadc7861e1c6a1837f0ada0e85966d9b20">neforce::swap</referencedby>
+        <referencedby refid="group___unique_pointer_1ga12d4a1c5b3027501a31634bd874b515c" compoundref="unique__ptr_8hpp" startline="582" endline="584">neforce::swap</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1ga8aff176def7999aa94fa28605aaa8f0a" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1ga6969cbeee075efa79083a8db4577ac8e" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -91,15 +99,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator==</definition>
+        <definition>bool neforce::operator==</definition>
         <argsstring>(const unique_ptr&lt; T, D &gt; &amp;lhs, const unique_ptr&lt; U, E &gt; &amp;rhs)</argsstring>
         <name>operator==</name>
+        <qualifiedname>neforce::operator==</qualifiedname>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <type>const unique_ptr&lt; T, D &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, E &gt; &amp;</type>
+          <type>const unique_ptr&lt; U, E &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -163,9 +172,10 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="597" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="597" bodyend="599"/>
-        <references refid="classunique__ptr_1a4b44f707540323eb24319b92c242d37a" compoundref="unique__ptr_8hpp" startline="320" endline="320">unique_ptr&lt; T, Deleter &gt;::get</references>
+        <references refid="classneforce_1_1unique__ptr_1aa7fc6ed1afe14156fe05c9a74c9f4508" compoundref="unique__ptr_8hpp" startline="320" endline="320">neforce::unique_ptr&lt; T, Deleter &gt;::get</references>
+        <references refid="group___function_wrapper_1ga6a8b8801c0a30a7e84b4b051aa943b64" compoundref="functional_2function_8hpp" startline="530" endline="532">neforce::operator==</references>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1gab9ea1d3c55282f5776c8e021fc9def33" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1ga00036039c0a65e1c00cfae5194485e9a" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -175,15 +185,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator==</definition>
+        <definition>bool neforce::operator==</definition>
         <argsstring>(const unique_ptr&lt; T, D &gt; &amp;lhs, nullptr_t)</argsstring>
         <name>operator==</name>
+        <qualifiedname>neforce::operator==</qualifiedname>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <type>const unique_ptr&lt; T, D &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <type>nullptr_t</type>
         </param>
         <briefdescription>
 <para>与nullptr的相等比较运算符 </para>
@@ -222,8 +233,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="609" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="609" bodyend="611"/>
+        <references refid="group___function_wrapper_1ga6a8b8801c0a30a7e84b4b051aa943b64" compoundref="functional_2function_8hpp" startline="530" endline="532">neforce::operator==</references>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1gab0ae368bc4587e587dc96a5b73174902" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1ga8adc9b74483b2cae75a726e3716343e3" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -233,14 +245,15 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator==</definition>
+        <definition>bool neforce::operator==</definition>
         <argsstring>(nullptr_t, const unique_ptr&lt; T, D &gt; &amp;rhs)</argsstring>
         <name>operator==</name>
+        <qualifiedname>neforce::operator==</qualifiedname>
         <param>
-          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <type>nullptr_t</type>
         </param>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <type>const unique_ptr&lt; T, D &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -280,8 +293,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="621" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="621" bodyend="623"/>
+        <references refid="group___function_wrapper_1ga6a8b8801c0a30a7e84b4b051aa943b64" compoundref="functional_2function_8hpp" startline="530" endline="532">neforce::operator==</references>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1gafca5b954c5400bb6e414ff038bbc3419" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1ga4fa8fbdf6278ebf5815644bcc74050ff" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -297,15 +311,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator!=</definition>
+        <definition>bool neforce::operator!=</definition>
         <argsstring>(const unique_ptr&lt; T, D &gt; &amp;lhs, const unique_ptr&lt; U, E &gt; &amp;rhs)</argsstring>
         <name>operator!=</name>
+        <qualifiedname>neforce::operator!=</qualifiedname>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <type>const unique_ptr&lt; T, D &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, E &gt; &amp;</type>
+          <type>const unique_ptr&lt; U, E &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -369,9 +384,10 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="636" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="636" bodyend="638"/>
-        <references refid="classunique__ptr_1a4b44f707540323eb24319b92c242d37a" compoundref="unique__ptr_8hpp" startline="320" endline="320">unique_ptr&lt; T, Deleter &gt;::get</references>
+        <references refid="classneforce_1_1unique__ptr_1aa7fc6ed1afe14156fe05c9a74c9f4508" compoundref="unique__ptr_8hpp" startline="320" endline="320">neforce::unique_ptr&lt; T, Deleter &gt;::get</references>
+        <references refid="group___function_wrapper_1ga245168fc07a7b8f6d303ddab962e1bea" compoundref="functional_2function_8hpp" startline="556" endline="558">neforce::operator!=</references>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1ga23b89ec0f80c92de877135e73a884f09" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1gae048aecaa2929eb1b44bb083eabdf6f0" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -381,15 +397,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator!=</definition>
+        <definition>bool neforce::operator!=</definition>
         <argsstring>(const unique_ptr&lt; T, D &gt; &amp;lhs, nullptr_t)</argsstring>
         <name>operator!=</name>
+        <qualifiedname>neforce::operator!=</qualifiedname>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <type>const unique_ptr&lt; T, D &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <type>nullptr_t</type>
         </param>
         <briefdescription>
 <para>与nullptr的不等比较运算符 </para>
@@ -428,8 +445,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="648" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="648" bodyend="650"/>
+        <references refid="group___function_wrapper_1ga245168fc07a7b8f6d303ddab962e1bea" compoundref="functional_2function_8hpp" startline="556" endline="558">neforce::operator!=</references>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1ga19c1a5a620538d3c2c9d25fefab19553" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1ga5f8cadae707862546174840fb4b3169b" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -439,14 +457,15 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator!=</definition>
+        <definition>bool neforce::operator!=</definition>
         <argsstring>(nullptr_t, const unique_ptr&lt; T, D &gt; &amp;rhs)</argsstring>
         <name>operator!=</name>
+        <qualifiedname>neforce::operator!=</qualifiedname>
         <param>
-          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <type>nullptr_t</type>
         </param>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <type>const unique_ptr&lt; T, D &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -486,8 +505,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="660" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="660" bodyend="662"/>
+        <references refid="group___function_wrapper_1ga245168fc07a7b8f6d303ddab962e1bea" compoundref="functional_2function_8hpp" startline="556" endline="558">neforce::operator!=</references>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1gae3429dd5cb3099c6cd8bbd8f92d5f82a" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1ga8286fb5aa6076774ab5b0cb7421583f3" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -503,15 +523,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&lt;</definition>
+        <definition>bool neforce::operator&lt;</definition>
         <argsstring>(const unique_ptr&lt; T, D &gt; &amp;lhs, const unique_ptr&lt; U, E &gt; &amp;rhs)</argsstring>
         <name>operator&lt;</name>
+        <qualifiedname>neforce::operator&lt;</qualifiedname>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <type>const unique_ptr&lt; T, D &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, E &gt; &amp;</type>
+          <type>const unique_ptr&lt; U, E &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -575,9 +596,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="675" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="675" bodyend="678"/>
-        <references refid="classunique__ptr_1a4b44f707540323eb24319b92c242d37a" compoundref="unique__ptr_8hpp" startline="320" endline="320">unique_ptr&lt; T, Deleter &gt;::get</references>
+        <references refid="classneforce_1_1unique__ptr_1aa7fc6ed1afe14156fe05c9a74c9f4508" compoundref="unique__ptr_8hpp" startline="320" endline="320">neforce::unique_ptr&lt; T, Deleter &gt;::get</references>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1gafbf5725f6fce6be2c0dddf9b33590960" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1gaa492dbad2ad5f74777653d73fb321b19" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -587,15 +608,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&lt;</definition>
+        <definition>bool neforce::operator&lt;</definition>
         <argsstring>(const unique_ptr&lt; T, D &gt; &amp;lhs, nullptr_t)</argsstring>
         <name>operator&lt;</name>
+        <qualifiedname>neforce::operator&lt;</qualifiedname>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <type>const unique_ptr&lt; T, D &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <type>nullptr_t</type>
         </param>
         <briefdescription>
 <para>与nullptr的小于比较运算符 </para>
@@ -634,9 +656,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="688" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="688" bodyend="690"/>
-        <references refid="classunique__ptr_1a4b44f707540323eb24319b92c242d37a" compoundref="unique__ptr_8hpp" startline="320" endline="320">unique_ptr&lt; T, Deleter &gt;::get</references>
+        <references refid="classneforce_1_1unique__ptr_1aa7fc6ed1afe14156fe05c9a74c9f4508" compoundref="unique__ptr_8hpp" startline="320" endline="320">neforce::unique_ptr&lt; T, Deleter &gt;::get</references>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1gaeb6d884a8ca5970e0aa3a354d24ca5b4" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1gaf83c15f6199da5dfb2b94bdb29692be0" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -646,14 +668,15 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&lt;</definition>
+        <definition>bool neforce::operator&lt;</definition>
         <argsstring>(nullptr_t, const unique_ptr&lt; T, D &gt; &amp;rhs)</argsstring>
         <name>operator&lt;</name>
+        <qualifiedname>neforce::operator&lt;</qualifiedname>
         <param>
-          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <type>nullptr_t</type>
         </param>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <type>const unique_ptr&lt; T, D &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -693,9 +716,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="700" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="700" bodyend="702"/>
-        <references refid="classunique__ptr_1a4b44f707540323eb24319b92c242d37a" compoundref="unique__ptr_8hpp" startline="320" endline="320">unique_ptr&lt; T, Deleter &gt;::get</references>
+        <references refid="classneforce_1_1unique__ptr_1aa7fc6ed1afe14156fe05c9a74c9f4508" compoundref="unique__ptr_8hpp" startline="320" endline="320">neforce::unique_ptr&lt; T, Deleter &gt;::get</references>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1ga1ae889e1ae847510f99ff51c8d0252e2" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1ga2c3f1c54b22c336d2bf541c1246f77e4" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -711,15 +734,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&gt;</definition>
+        <definition>bool neforce::operator&gt;</definition>
         <argsstring>(const unique_ptr&lt; T, D &gt; &amp;lhs, const unique_ptr&lt; U, E &gt; &amp;rhs)</argsstring>
         <name>operator&gt;</name>
+        <qualifiedname>neforce::operator&gt;</qualifiedname>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <type>const unique_ptr&lt; T, D &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, E &gt; &amp;</type>
+          <type>const unique_ptr&lt; U, E &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -783,9 +807,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="715" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="715" bodyend="717"/>
-        <references refid="classunique__ptr_1a4b44f707540323eb24319b92c242d37a" compoundref="unique__ptr_8hpp" startline="320" endline="320">unique_ptr&lt; T, Deleter &gt;::get</references>
+        <references refid="classneforce_1_1unique__ptr_1aa7fc6ed1afe14156fe05c9a74c9f4508" compoundref="unique__ptr_8hpp" startline="320" endline="320">neforce::unique_ptr&lt; T, Deleter &gt;::get</references>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1ga3c7d5c44b62e8276df1d6f7b072ea2dd" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1ga476e7dedd37c061f44bf94da42abfda9" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -795,15 +819,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&gt;</definition>
+        <definition>bool neforce::operator&gt;</definition>
         <argsstring>(const unique_ptr&lt; T, D &gt; &amp;lhs, nullptr_t)</argsstring>
         <name>operator&gt;</name>
+        <qualifiedname>neforce::operator&gt;</qualifiedname>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <type>const unique_ptr&lt; T, D &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <type>nullptr_t</type>
         </param>
         <briefdescription>
 <para>与nullptr的大于比较运算符 </para>
@@ -842,9 +867,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="727" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="727" bodyend="729"/>
-        <references refid="classunique__ptr_1a4b44f707540323eb24319b92c242d37a" compoundref="unique__ptr_8hpp" startline="320" endline="320">unique_ptr&lt; T, Deleter &gt;::get</references>
+        <references refid="classneforce_1_1unique__ptr_1aa7fc6ed1afe14156fe05c9a74c9f4508" compoundref="unique__ptr_8hpp" startline="320" endline="320">neforce::unique_ptr&lt; T, Deleter &gt;::get</references>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1ga407bb2c7529b21d672476cd833cf5bf0" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1gad679b85e4c1de97d4c6f5eb7f6b42600" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -854,14 +879,15 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&gt;</definition>
+        <definition>bool neforce::operator&gt;</definition>
         <argsstring>(nullptr_t, const unique_ptr&lt; T, D &gt; &amp;rhs)</argsstring>
         <name>operator&gt;</name>
+        <qualifiedname>neforce::operator&gt;</qualifiedname>
         <param>
-          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <type>nullptr_t</type>
         </param>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <type>const unique_ptr&lt; T, D &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -901,9 +927,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="739" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="739" bodyend="741"/>
-        <references refid="classunique__ptr_1a4b44f707540323eb24319b92c242d37a" compoundref="unique__ptr_8hpp" startline="320" endline="320">unique_ptr&lt; T, Deleter &gt;::get</references>
+        <references refid="classneforce_1_1unique__ptr_1aa7fc6ed1afe14156fe05c9a74c9f4508" compoundref="unique__ptr_8hpp" startline="320" endline="320">neforce::unique_ptr&lt; T, Deleter &gt;::get</references>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1ga2f7334d994b001a0d4969541438a4002" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1ga2af56c224797782716a9f55c2ca684ec" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -919,15 +945,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&lt;=</definition>
+        <definition>bool neforce::operator&lt;=</definition>
         <argsstring>(const unique_ptr&lt; T, D &gt; &amp;lhs, const unique_ptr&lt; U, E &gt; &amp;rhs)</argsstring>
         <name>operator&lt;=</name>
+        <qualifiedname>neforce::operator&lt;=</qualifiedname>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <type>const unique_ptr&lt; T, D &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, E &gt; &amp;</type>
+          <type>const unique_ptr&lt; U, E &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -992,7 +1019,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="754" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="754" bodyend="756"/>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1ga7e0a6e7389fd3cba22710e5752ce8a29" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1gaaf69ae5dd90b34765367c1535ddcd0bc" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -1002,15 +1029,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&lt;=</definition>
+        <definition>bool neforce::operator&lt;=</definition>
         <argsstring>(const unique_ptr&lt; T, D &gt; &amp;lhs, nullptr_t)</argsstring>
         <name>operator&lt;=</name>
+        <qualifiedname>neforce::operator&lt;=</qualifiedname>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <type>const unique_ptr&lt; T, D &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <type>nullptr_t</type>
         </param>
         <briefdescription>
 <para>与nullptr的小于等于比较运算符 </para>
@@ -1050,7 +1078,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="766" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="766" bodyend="768"/>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1ga8867df3884b0fdb28aeed9dcee96f43b" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1ga06e196b6e651e1a7f1df826c694576b0" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -1060,14 +1088,15 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&lt;=</definition>
+        <definition>bool neforce::operator&lt;=</definition>
         <argsstring>(nullptr_t, const unique_ptr&lt; T, D &gt; &amp;rhs)</argsstring>
         <name>operator&lt;=</name>
+        <qualifiedname>neforce::operator&lt;=</qualifiedname>
         <param>
-          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <type>nullptr_t</type>
         </param>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <type>const unique_ptr&lt; T, D &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -1108,7 +1137,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="778" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="778" bodyend="780"/>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1ga82f5cc8ff547132750b231b77c6f7389" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1gad1b463d2a87c15b81733fa307e32f1a5" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -1124,15 +1153,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&gt;=</definition>
+        <definition>bool neforce::operator&gt;=</definition>
         <argsstring>(const unique_ptr&lt; T, D &gt; &amp;lhs, const unique_ptr&lt; U, E &gt; &amp;rhs)</argsstring>
         <name>operator&gt;=</name>
+        <qualifiedname>neforce::operator&gt;=</qualifiedname>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <type>const unique_ptr&lt; T, D &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, E &gt; &amp;</type>
+          <type>const unique_ptr&lt; U, E &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -1197,7 +1227,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="793" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="793" bodyend="795"/>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1ga28606c0ca640b287b6c30483935d3934" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1gaa9cd7983ab6cb8e73318b3554553725b" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -1207,15 +1237,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&gt;=</definition>
+        <definition>bool neforce::operator&gt;=</definition>
         <argsstring>(const unique_ptr&lt; T, D &gt; &amp;lhs, nullptr_t)</argsstring>
         <name>operator&gt;=</name>
+        <qualifiedname>neforce::operator&gt;=</qualifiedname>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <type>const unique_ptr&lt; T, D &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <type>nullptr_t</type>
         </param>
         <briefdescription>
 <para>与nullptr的大于等于比较运算符 </para>
@@ -1255,7 +1286,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="805" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="805" bodyend="807"/>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1gaae4b473140d777e41fad99f83c2458f0" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1ga5550ffabdfcb47b5c673ad8c36b28ee8" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -1265,14 +1296,15 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&gt;=</definition>
+        <definition>bool neforce::operator&gt;=</definition>
         <argsstring>(nullptr_t, const unique_ptr&lt; T, D &gt; &amp;rhs)</argsstring>
         <name>operator&gt;=</name>
+        <qualifiedname>neforce::operator&gt;=</qualifiedname>
         <param>
-          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <type>nullptr_t</type>
         </param>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <type>const unique_ptr&lt; T, D &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -1313,7 +1345,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="817" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="817" bodyend="819"/>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1gad594540a669260eea0cca34015b4653c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1ga626bf49ac327ec287aa2b677dbffbfa8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -1325,12 +1357,13 @@
             <type>typename Deleter</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, Deleter &gt;</type>
-        <definition>unique_ptr&lt; T, Deleter &gt; static_pointer_cast</definition>
+        <type>unique_ptr&lt; T, Deleter &gt;</type>
+        <definition>unique_ptr&lt; T, Deleter &gt; neforce::static_pointer_cast</definition>
         <argsstring>(const unique_ptr&lt; U, Deleter &gt; &amp;ptr)=delete</argsstring>
         <name>static_pointer_cast</name>
+        <qualifiedname>neforce::static_pointer_cast</qualifiedname>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, Deleter &gt; &amp;</type>
+          <type>const unique_ptr&lt; U, Deleter &gt; &amp;</type>
           <declname>ptr</declname>
         </param>
         <briefdescription>
@@ -1378,8 +1411,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="831" column="12" declfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" declline="831" declcolumn="12"/>
+        <references refid="group___shared_pointer_1ga7c3dd367b01fe2aeb000251eeee8657f" compoundref="shared__ptr_8hpp" startline="964" endline="966">neforce::static_pointer_cast</references>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1gae2b923cda7dca9d7b9a3d7a0d8c36223" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1ga30c55b284981feaf524811a4acc244c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -1391,12 +1425,13 @@
             <type>typename Deleter</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, Deleter &gt;</type>
-        <definition>unique_ptr&lt; T, Deleter &gt; const_pointer_cast</definition>
+        <type>unique_ptr&lt; T, Deleter &gt;</type>
+        <definition>unique_ptr&lt; T, Deleter &gt; neforce::const_pointer_cast</definition>
         <argsstring>(const unique_ptr&lt; U, Deleter &gt; &amp;ptr)=delete</argsstring>
         <name>const_pointer_cast</name>
+        <qualifiedname>neforce::const_pointer_cast</qualifiedname>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, Deleter &gt; &amp;</type>
+          <type>const unique_ptr&lt; U, Deleter &gt; &amp;</type>
           <declname>ptr</declname>
         </param>
         <briefdescription>
@@ -1444,8 +1479,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="842" column="12" declfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" declline="842" declcolumn="12"/>
+        <references refid="group___shared_pointer_1gac30e9844897224b7aa30a38a9bc51f1a" compoundref="shared__ptr_8hpp" startline="976" endline="978">neforce::const_pointer_cast</references>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1ga76599839c521de4c36c0ab2813670317" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1ga0b1814e7ce4a41ea77cc8d8b099e4ae7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -1457,12 +1493,13 @@
             <type>typename Deleter</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, Deleter &gt;</type>
-        <definition>unique_ptr&lt; T, Deleter &gt; reinterpret_pointer_cast</definition>
+        <type>unique_ptr&lt; T, Deleter &gt;</type>
+        <definition>unique_ptr&lt; T, Deleter &gt; neforce::reinterpret_pointer_cast</definition>
         <argsstring>(const unique_ptr&lt; U, Deleter &gt; &amp;ptr)=delete</argsstring>
         <name>reinterpret_pointer_cast</name>
+        <qualifiedname>neforce::reinterpret_pointer_cast</qualifiedname>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, Deleter &gt; &amp;</type>
+          <type>const unique_ptr&lt; U, Deleter &gt; &amp;</type>
           <declname>ptr</declname>
         </param>
         <briefdescription>
@@ -1510,8 +1547,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="853" column="12" declfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" declline="853" declcolumn="12"/>
+        <references refid="group___shared_pointer_1ga450de0f5cca1b72bd39f63114ff0492b" compoundref="shared__ptr_8hpp" startline="988" endline="990">neforce::reinterpret_pointer_cast</references>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1ga8466e5182516a72b5d5d667434dde851" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1ga9f551d47c8cc9a02ca758cd00ed7cae9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -1523,12 +1561,13 @@
             <type>typename Deleter</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, Deleter &gt;</type>
-        <definition>unique_ptr&lt; T, Deleter &gt; dynamic_pointer_cast</definition>
+        <type>unique_ptr&lt; T, Deleter &gt;</type>
+        <definition>unique_ptr&lt; T, Deleter &gt; neforce::dynamic_pointer_cast</definition>
         <argsstring>(const unique_ptr&lt; U, Deleter &gt; &amp;ptr)=delete</argsstring>
         <name>dynamic_pointer_cast</name>
+        <qualifiedname>neforce::dynamic_pointer_cast</qualifiedname>
         <param>
-          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, Deleter &gt; &amp;</type>
+          <type>const unique_ptr&lt; U, Deleter &gt; &amp;</type>
           <declname>ptr</declname>
         </param>
         <briefdescription>
@@ -1576,8 +1615,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="864" column="12" declfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" declline="864" declcolumn="12"/>
+        <references refid="group___shared_pointer_1ga2da7bb78033d7f73b53617b2d104fb3e" compoundref="shared__ptr_8hpp" startline="1000" endline="1006">neforce::dynamic_pointer_cast</references>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1ga2f296cf8d0dec58e7da85091267540b8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1gac4a4aa9a7b83a9e130d9e6cc06f010cf" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -1592,12 +1632,13 @@
             <type>typename DeleterU</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, DeleterT &gt;</type>
-        <definition>unique_ptr&lt; T, DeleterT &gt; static_pointer_cast</definition>
+        <type>unique_ptr&lt; T, DeleterT &gt;</type>
+        <definition>unique_ptr&lt; T, DeleterT &gt; neforce::static_pointer_cast</definition>
         <argsstring>(unique_ptr&lt; U, DeleterU &gt; &amp;&amp;ptr)</argsstring>
         <name>static_pointer_cast</name>
+        <qualifiedname>neforce::static_pointer_cast</qualifiedname>
         <param>
-          <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, DeleterU &gt; &amp;&amp;</type>
+          <type>unique_ptr&lt; U, DeleterU &gt; &amp;&amp;</type>
           <declname>ptr</declname>
         </param>
         <briefdescription>
@@ -1655,10 +1696,10 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="878" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="878" bodyend="881"/>
-        <references refid="classunique__ptr_1ac9d9d37141c825df8a03e66790c66fcd" compoundref="unique__ptr_8hpp" startline="325" endline="325">unique_ptr&lt; T, Deleter &gt;::get_deleter</references>
-        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="group___shared_pointer_1ga7c3dd367b01fe2aeb000251eeee8657f" compoundref="shared__ptr_8hpp" startline="964" endline="966">neforce::static_pointer_cast</references>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1ga250af33d133e72b913cda9b699908d7a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1ga6b3ff732628ac0950c5d4c4478910061" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -1673,12 +1714,13 @@
             <type>typename DeleterU</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, DeleterT &gt;</type>
-        <definition>unique_ptr&lt; T, DeleterT &gt; const_pointer_cast</definition>
+        <type>unique_ptr&lt; T, DeleterT &gt;</type>
+        <definition>unique_ptr&lt; T, DeleterT &gt; neforce::const_pointer_cast</definition>
         <argsstring>(unique_ptr&lt; U, DeleterU &gt; &amp;&amp;ptr)</argsstring>
         <name>const_pointer_cast</name>
+        <qualifiedname>neforce::const_pointer_cast</qualifiedname>
         <param>
-          <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, DeleterU &gt; &amp;&amp;</type>
+          <type>unique_ptr&lt; U, DeleterU &gt; &amp;&amp;</type>
           <declname>ptr</declname>
         </param>
         <briefdescription>
@@ -1736,10 +1778,10 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="894" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="894" bodyend="897"/>
-        <references refid="classunique__ptr_1ac9d9d37141c825df8a03e66790c66fcd" compoundref="unique__ptr_8hpp" startline="325" endline="325">unique_ptr&lt; T, Deleter &gt;::get_deleter</references>
-        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___shared_pointer_1gac30e9844897224b7aa30a38a9bc51f1a" compoundref="shared__ptr_8hpp" startline="976" endline="978">neforce::const_pointer_cast</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1ga5b7c0b0025c36f71ae411090dab937da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1gaffe5f828c8abac9203f7d4a0d5de7e0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -1754,12 +1796,13 @@
             <type>typename DeleterU</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, DeleterT &gt;</type>
-        <definition>unique_ptr&lt; T, DeleterT &gt; reinterpret_pointer_cast</definition>
+        <type>unique_ptr&lt; T, DeleterT &gt;</type>
+        <definition>unique_ptr&lt; T, DeleterT &gt; neforce::reinterpret_pointer_cast</definition>
         <argsstring>(unique_ptr&lt; U, DeleterU &gt; &amp;&amp;ptr)</argsstring>
         <name>reinterpret_pointer_cast</name>
+        <qualifiedname>neforce::reinterpret_pointer_cast</qualifiedname>
         <param>
-          <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, DeleterU &gt; &amp;&amp;</type>
+          <type>unique_ptr&lt; U, DeleterU &gt; &amp;&amp;</type>
           <declname>ptr</declname>
         </param>
         <briefdescription>
@@ -1817,10 +1860,10 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="910" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="910" bodyend="913"/>
-        <references refid="classunique__ptr_1ac9d9d37141c825df8a03e66790c66fcd" compoundref="unique__ptr_8hpp" startline="325" endline="325">unique_ptr&lt; T, Deleter &gt;::get_deleter</references>
-        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="group___shared_pointer_1ga450de0f5cca1b72bd39f63114ff0492b" compoundref="shared__ptr_8hpp" startline="988" endline="990">neforce::reinterpret_pointer_cast</references>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1ga2d8e39ee27f0bbb613490661597ad679" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1ga3a5ffa7e285def8f8dfb257d502b7bab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -1835,12 +1878,13 @@
             <type>typename DeleterU</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, DeleterT &gt;</type>
-        <definition>unique_ptr&lt; T, DeleterT &gt; dynamic_pointer_cast</definition>
+        <type>unique_ptr&lt; T, DeleterT &gt;</type>
+        <definition>unique_ptr&lt; T, DeleterT &gt; neforce::dynamic_pointer_cast</definition>
         <argsstring>(unique_ptr&lt; U, DeleterU &gt; &amp;&amp;ptr)</argsstring>
         <name>dynamic_pointer_cast</name>
+        <qualifiedname>neforce::dynamic_pointer_cast</qualifiedname>
         <param>
-          <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, DeleterU &gt; &amp;&amp;</type>
+          <type>unique_ptr&lt; U, DeleterU &gt; &amp;&amp;</type>
           <declname>ptr</declname>
         </param>
         <briefdescription>
@@ -1898,10 +1942,10 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="926" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="926" bodyend="935"/>
-        <references refid="classunique__ptr_1ac9d9d37141c825df8a03e66790c66fcd" compoundref="unique__ptr_8hpp" startline="325" endline="325">unique_ptr&lt; T, Deleter &gt;::get_deleter</references>
-        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___shared_pointer_1ga2da7bb78033d7f73b53617b2d104fb3e" compoundref="shared__ptr_8hpp" startline="1000" endline="1006">neforce::dynamic_pointer_cast</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1ga20caa9b68a94ba614667d6ec6585c044" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -1912,14 +1956,15 @@
             <defname>Args</defname>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="structis__array" kindref="compound">is_array</ref>&lt; T &gt;::value, int &gt;</type>
+            <type>enable_if_t&lt;!is_array&lt; T &gt;::value, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T &gt;</type>
-        <definition>unique_ptr&lt; T &gt; make_unique</definition>
+        <type>unique_ptr&lt; T &gt;</type>
+        <definition>unique_ptr&lt; T &gt; neforce::make_unique</definition>
         <argsstring>(Args &amp;&amp;... args)</argsstring>
         <name>make_unique</name>
+        <qualifiedname>neforce::make_unique</qualifiedname>
         <param>
           <type>Args &amp;&amp;...</type>
           <declname>args</declname>
@@ -1961,55 +2006,60 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="973" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="973" bodyend="975"/>
-        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
-        <referencedby refid="classtyped__exception__wrapper_1a2b21449cb5663967e084ac47d06adb3f" compoundref="exception__ptr_8hpp" startline="97" endline="99">typed_exception_wrapper&lt; Ex &gt;::clone</referencedby>
-        <referencedby refid="classssl__client_1a8eb86cc4819094bb2f562bf63e871cc2" compoundref="tcp__client_8hpp" startline="443" endline="443">ssl_client::create_socket</referencedby>
-        <referencedby refid="classtcp__client_1a1c6ad9cebb50df86eb1a086cf9654a04" compoundref="tcp__client_8hpp" startline="394" endline="394">tcp_client::create_socket</referencedby>
-        <referencedby refid="classenv__parser_1a94428993046e76145572b32efb18c7d2" compoundref="env__parser_8hpp" startline="161" endline="165">env_parser::env_parser</referencedby>
-        <referencedby refid="classrepository_1a109f0c64fae6903e6ce096897a7f5128" compoundref="repository_8hpp" startline="177" endline="212">repository&lt; T, Connect &gt;::find_by_id</referencedby>
-        <referencedby refid="classmeta__type_1ad9dcf740d68c29e5e365c11398793476" compoundref="type_8hpp" startline="257" endline="260">meta_type::function</referencedby>
-        <referencedby refid="group___thread_pool_1gab0dfe2ffce57ef2437c2bc1060febc71">get_current_task_group</referencedby>
-        <referencedby refid="classini__document_1a32fd6d1eb003f7a3971d90575f8cd0cc" compoundref="ini__value_8hpp" startline="372" endline="373">ini_document::ini_document</referencedby>
-        <referencedby refid="classini__parser_1a5becbf77ae74b693a87f2c39a1f026ea" compoundref="ini__parser_8hpp" startline="141" endline="146">ini_parser::ini_parser</referencedby>
-        <referencedby refid="classexception__ptr_1ac43ce5d8fc82090c24f3088e37cc2d89" compoundref="exception__ptr_8hpp" startline="325" endline="335">exception_ptr::make_exception_ptr</referencedby>
-        <referencedby refid="classmeta__type_1a8139c742e05aa52ebaca5c8b1c0b75e3" compoundref="type_8hpp" startline="244" endline="249">meta_type::property</referencedby>
-        <referencedby refid="classregistry_1a80b07280b49b0e28ecc3f3a1b6c7cccc" compoundref="registry_8hpp" startline="58" endline="71">registry::register_type</referencedby>
-        <referencedby refid="classini__section_1aff20d7467b26968d562ebb85e2d5be84" compoundref="ini__value_8hpp" startline="265" endline="265">ini_section::set_property</referencedby>
-        <referencedby refid="classenv__document_1a81b7190ea0b57c461429b12ebe628dcb" compoundref="env__value_8hpp" startline="272" endline="275">env_document::set_variable</referencedby>
-        <referencedby refid="classtcp__client__base_1a48f9d25c4dad2f547d4e953af1554f61" compoundref="tcp__client_8hpp" startline="120" endline="121">tcp_client_base::tcp_client_base</referencedby>
-        <referencedby refid="classtcp__client__base_1aad7b4a23c87f3a6bc2c2521d65124517" compoundref="tcp__client_8hpp" startline="111" endline="112">tcp_client_base::tcp_client_base</referencedby>
-        <referencedby refid="classtoml__parser_1a54c1c00efb29395d0ecf30fc5f1916ec" compoundref="toml__parser_8hpp" startline="352" endline="357">toml_parser::toml_parser</referencedby>
-        <referencedby refid="classtree__barrier_1a58cc248b4aeee58f81e06cc34a84bc24" compoundref="barrier_8hpp" startline="135" endline="140">tree_barrier&lt; CmplFunc &gt;::tree_barrier</referencedby>
-        <referencedby refid="classjson__builder_1a4fe5ea7a3f044eff8283e0445c9135bc" compoundref="json__builder_8hpp" startline="275" endline="275">json_builder::value</referencedby>
-        <referencedby refid="classjson__builder_1a373ac9793050a11087fd203e749a37ee" compoundref="json__builder_8hpp" startline="259" endline="259">json_builder::value</referencedby>
-        <referencedby refid="classjson__builder_1a70b6826772f8cce0872431dd92cbc74a" compoundref="json__builder_8hpp" startline="267" endline="267">json_builder::value</referencedby>
-        <referencedby refid="classjson__builder_1a15a2246641769184910e0eae719abe19" compoundref="json__builder_8hpp" startline="235" endline="235">json_builder::value</referencedby>
-        <referencedby refid="classjson__builder_1a08a2dee2721ab807b4b229ff236c0086" compoundref="json__builder_8hpp" startline="227" endline="227">json_builder::value</referencedby>
-        <referencedby refid="classtoml__builder_1a3866f69977ff310570e6c4780ec938a4" compoundref="toml__builder_8hpp" startline="301" endline="301">toml_builder::value</referencedby>
-        <referencedby refid="classtoml__builder_1ad2333a2825f4d46a714913bdbac97290" compoundref="toml__builder_8hpp" startline="325" endline="325">toml_builder::value</referencedby>
-        <referencedby refid="classtoml__builder_1a7a28424a203572063dd4a862581291e8" compoundref="toml__builder_8hpp" startline="309" endline="309">toml_builder::value</referencedby>
-        <referencedby refid="classtoml__builder_1a097b582702cca938c24659f346affa75" compoundref="toml__builder_8hpp" startline="293" endline="293">toml_builder::value</referencedby>
-        <referencedby refid="classtoml__builder_1af5db5e76d289392d22d2b51bc238321f" compoundref="toml__builder_8hpp" startline="333" endline="335">toml_builder::value</referencedby>
-        <referencedby refid="classtoml__builder_1a9cb5cd365b9c93f4654f28795ff6aeef" compoundref="toml__builder_8hpp" startline="379" endline="381">toml_builder::value_datetime</referencedby>
-        <referencedby refid="classtoml__builder_1aad0b21a3709c9ea7c4ffe7630a2090ae" compoundref="toml__builder_8hpp" startline="368" endline="370">toml_builder::value_string</referencedby>
-        <referencedby refid="classapplication_1a7a36bb3104fb5aa180695b7232ab2110" compoundref="app_8hpp" startline="61" endline="64">application::with_component</referencedby>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" compoundref="unique__ptr_8hpp" startline="973" endline="975">neforce::make_unique</references>
+        <referencedby refid="classneforce_1_1typed__exception__wrapper_1a312968685524a955760df8443352ff28" compoundref="exception__ptr_8hpp" startline="97" endline="99">neforce::typed_exception_wrapper&lt; Ex &gt;::clone</referencedby>
+        <referencedby refid="classneforce_1_1ssl__client_1a1de21eac489f2df1852da6483be62749" compoundref="tcp__client_8hpp" startline="443" endline="443">neforce::ssl_client::create_socket</referencedby>
+        <referencedby refid="classneforce_1_1tcp__client_1a0ace134b38aac47f07c34988981b5754" compoundref="tcp__client_8hpp" startline="394" endline="394">neforce::tcp_client::create_socket</referencedby>
+        <referencedby refid="classneforce_1_1env__parser_1ae7b27e098dad4b78414a497f39acfebd" compoundref="env__parser_8hpp" startline="161" endline="165">neforce::env_parser::env_parser</referencedby>
+        <referencedby refid="classneforce_1_1repository_1a09f0a8bf874c099db3b1904f12eaba6a" compoundref="repository_8hpp" startline="177" endline="212">neforce::repository&lt; T, Connect &gt;::find_by_id</referencedby>
+        <referencedby refid="classneforce_1_1reflect_1_1meta__type_1ac202c1b81d75b07e803590c756a5c60c" compoundref="type_8hpp" startline="257" endline="260">neforce::reflect::meta_type::function</referencedby>
+        <referencedby refid="group___thread_pool_1gac0f18cc77f10e8256399e872c945265d">neforce::get_current_task_group</referencedby>
+        <referencedby refid="classneforce_1_1ini__document_1a1055ad75db2b36300e60db4e04d8519e" compoundref="ini__value_8hpp" startline="372" endline="373">neforce::ini_document::ini_document</referencedby>
+        <referencedby refid="classneforce_1_1ini__parser_1abffd5f73503c57ff268b05793e7faa0f" compoundref="ini__parser_8hpp" startline="141" endline="146">neforce::ini_parser::ini_parser</referencedby>
+        <referencedby refid="classneforce_1_1exception__ptr_1ac43ce5d8fc82090c24f3088e37cc2d89" compoundref="exception__ptr_8hpp" startline="325" endline="335">neforce::exception_ptr::make_exception_ptr</referencedby>
+        <referencedby refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" compoundref="unique__ptr_8hpp" startline="973" endline="975">neforce::make_unique</referencedby>
+        <referencedby refid="group___unique_pointer_1ga116a8fe7214c664b095139e5a6b27f70">neforce::make_unique</referencedby>
+        <referencedby refid="group___unique_pointer_1gada6c45265d84a0e2b820e0767e5eefcb" compoundref="unique__ptr_8hpp" startline="984" endline="986">neforce::make_unique</referencedby>
+        <referencedby refid="classneforce_1_1reflect_1_1meta__type_1a7691d721351724cf3b27692dce36a350" compoundref="type_8hpp" startline="244" endline="249">neforce::reflect::meta_type::property</referencedby>
+        <referencedby refid="classneforce_1_1reflect_1_1registry_1a61e51d8b7c9eba9b254f4c58820a7098" compoundref="registry_8hpp" startline="58" endline="71">neforce::reflect::registry::register_type</referencedby>
+        <referencedby refid="classneforce_1_1ini__section_1a1cdbae382db834dfcf6eb641cc28b7a0" compoundref="ini__value_8hpp" startline="265" endline="265">neforce::ini_section::set_property</referencedby>
+        <referencedby refid="classneforce_1_1env__document_1af4bcd88ad4bf63ba05c1d28c48bd6971" compoundref="env__value_8hpp" startline="272" endline="275">neforce::env_document::set_variable</referencedby>
+        <referencedby refid="classneforce_1_1tcp__client__base_1a32693c56dfc073c32cea2d16ef904b18" compoundref="tcp__client_8hpp" startline="120" endline="121">neforce::tcp_client_base::tcp_client_base</referencedby>
+        <referencedby refid="classneforce_1_1tcp__client__base_1ab750b86150ad6ed4fe5ee4033cc4036c" compoundref="tcp__client_8hpp" startline="111" endline="112">neforce::tcp_client_base::tcp_client_base</referencedby>
+        <referencedby refid="classneforce_1_1toml__parser_1a94185c97b9fa6e4429e32f4c48f1cb20" compoundref="toml__parser_8hpp" startline="352" endline="357">neforce::toml_parser::toml_parser</referencedby>
+        <referencedby refid="classneforce_1_1tree__barrier_1a48bcd1224d3f4281ccade6563326af51" compoundref="barrier_8hpp" startline="135" endline="140">neforce::tree_barrier&lt; CmplFunc &gt;::tree_barrier</referencedby>
+        <referencedby refid="classneforce_1_1json__builder_1ae54b6e579ab0983ad177fcaae7d9ac03" compoundref="json__builder_8hpp" startline="275" endline="275">neforce::json_builder::value</referencedby>
+        <referencedby refid="classneforce_1_1json__builder_1ae176d651cb1675fa8f268c3806113868" compoundref="json__builder_8hpp" startline="259" endline="259">neforce::json_builder::value</referencedby>
+        <referencedby refid="classneforce_1_1json__builder_1a3e11fc0476cec91cc7a9e5d1ab654915" compoundref="json__builder_8hpp" startline="267" endline="267">neforce::json_builder::value</referencedby>
+        <referencedby refid="classneforce_1_1json__builder_1a10cc96d957ff643351b5ee0e8c9b5207" compoundref="json__builder_8hpp" startline="235" endline="235">neforce::json_builder::value</referencedby>
+        <referencedby refid="classneforce_1_1json__builder_1a89dce33ffe841f5d1390caca83041a65" compoundref="json__builder_8hpp" startline="227" endline="227">neforce::json_builder::value</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1a115b87dc2da10625323796c9dcf31ace" compoundref="toml__builder_8hpp" startline="301" endline="301">neforce::toml_builder::value</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1a7b23216986ae6ffc7e425510218ec6a5" compoundref="toml__builder_8hpp" startline="325" endline="325">neforce::toml_builder::value</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1ae0179dde7b469059fce1b9a2b4e04d08" compoundref="toml__builder_8hpp" startline="309" endline="309">neforce::toml_builder::value</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1a3680921a0eb563a8ae4521e2e15d858c" compoundref="toml__builder_8hpp" startline="293" endline="293">neforce::toml_builder::value</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1acc0f293ee6cebdb39f8019a545ee0690" compoundref="toml__builder_8hpp" startline="333" endline="335">neforce::toml_builder::value</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1a9a5d7c3f9a40f4278e54c5fe6d00727a" compoundref="toml__builder_8hpp" startline="379" endline="381">neforce::toml_builder::value_datetime</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1ae41d10e48a63e92b4d0372d899970429" compoundref="toml__builder_8hpp" startline="368" endline="370">neforce::toml_builder::value_string</referencedby>
+        <referencedby refid="classneforce_1_1tui_1_1application_1a6fb526c83f93bc502761359af5a02e8a" compoundref="application_8hpp" startline="61" endline="64">neforce::tui::application::with_component</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1gadddc308058c71d81aba9698cc158199c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1gada6c45265d84a0e2b820e0767e5eefcb" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="structis__unbounded__array" kindref="compound">is_unbounded_array</ref>&lt; T &gt;::value, int &gt;</type>
+            <type>enable_if_t&lt; is_unbounded_array&lt; T &gt;::value, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T &gt;</type>
-        <definition>unique_ptr&lt; T &gt; make_unique</definition>
+        <type>unique_ptr&lt; T &gt;</type>
+        <definition>unique_ptr&lt; T &gt; neforce::make_unique</definition>
         <argsstring>(const size_t len)</argsstring>
         <name>make_unique</name>
+        <qualifiedname>neforce::make_unique</qualifiedname>
         <param>
-          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>const size_t</type>
           <declname>len</declname>
         </param>
         <briefdescription>
@@ -2041,8 +2091,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="984" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="984" bodyend="986"/>
+        <references refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" compoundref="unique__ptr_8hpp" startline="973" endline="975">neforce::make_unique</references>
       </memberdef>
-      <memberdef kind="function" id="group___unique_pointer_1gad7eab479e3aa31dc40743c1c0431cd0b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___unique_pointer_1ga116a8fe7214c664b095139e5a6b27f70" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -2053,14 +2104,15 @@
             <defname>Args</defname>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="structis__bounded__array" kindref="compound">is_bounded_array</ref>&lt; T &gt;::value, int &gt;</type>
+            <type>enable_if_t&lt; is_bounded_array&lt; T &gt;::value, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T &gt;</type>
-        <definition>unique_ptr&lt; T &gt; make_unique</definition>
+        <type>unique_ptr&lt; T &gt;</type>
+        <definition>unique_ptr&lt; T &gt; neforce::make_unique</definition>
         <argsstring>(Args &amp;&amp;...)=delete</argsstring>
         <name>make_unique</name>
+        <qualifiedname>neforce::make_unique</qualifiedname>
         <param>
           <type>Args &amp;&amp;</type>
           <declname>...</declname>
@@ -2091,6 +2143,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="994" column="12" declfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" declline="994" declcolumn="12"/>
+        <references refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" compoundref="unique__ptr_8hpp" startline="973" endline="975">neforce::make_unique</references>
       </memberdef>
     </sectiondef>
     <briefdescription>

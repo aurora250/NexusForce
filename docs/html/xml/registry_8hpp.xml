@@ -149,8 +149,8 @@
         </childnode>
       </node>
       <node id="21">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="5" relation="include">
         </childnode>
       </node>
@@ -160,10 +160,12 @@
         <childnode refid="24" relation="include">
         </childnode>
       </node>
-      <node id="63">
+      <node id="64">
         <label>NeForce/core/functional/function.hpp</label>
         <link refid="functional_2function_8hpp"/>
-        <childnode refid="64" relation="include">
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
         </childnode>
         <childnode refid="38" relation="include">
         </childnode>
@@ -226,7 +228,7 @@
         <childnode refid="20" relation="include">
         </childnode>
       </node>
-      <node id="68">
+      <node id="69">
         <label>NeForce/core/memory/allocator_traits.hpp</label>
         <link refid="allocator__traits_8hpp"/>
         <childnode refid="45" relation="include">
@@ -354,22 +356,22 @@
         <childnode refid="57" relation="include">
         </childnode>
       </node>
-      <node id="62">
+      <node id="63">
         <label>NeForce/core/reflect/function.hpp</label>
         <link refid="reflect_2function_8hpp"/>
         <childnode refid="47" relation="include">
         </childnode>
-        <childnode refid="63" relation="include">
+        <childnode refid="64" relation="include">
         </childnode>
         <childnode refid="57" relation="include">
         </childnode>
       </node>
-      <node id="65">
+      <node id="66">
         <label>NeForce/core/reflect/property.hpp</label>
         <link refid="property_8hpp"/>
-        <childnode refid="63" relation="include">
+        <childnode refid="64" relation="include">
         </childnode>
-        <childnode refid="66" relation="include">
+        <childnode refid="67" relation="include">
         </childnode>
         <childnode refid="57" relation="include">
         </childnode>
@@ -391,21 +393,23 @@
         </childnode>
         <childnode refid="56" relation="include">
         </childnode>
-        <childnode refid="62" relation="include">
-        </childnode>
-        <childnode refid="65" relation="include">
+        <childnode refid="63" relation="include">
         </childnode>
         <childnode refid="66" relation="include">
         </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
       </node>
-      <node id="67">
+      <node id="68">
         <label>NeForce/core/string/basic_string.hpp</label>
         <link refid="basic__string_8hpp"/>
         <childnode refid="36" relation="include">
         </childnode>
         <childnode refid="47" relation="include">
         </childnode>
-        <childnode refid="68" relation="include">
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
         </childnode>
         <childnode refid="58" relation="include">
         </childnode>
@@ -419,6 +423,8 @@
         </childnode>
         <childnode refid="60" relation="include">
         </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
         <childnode refid="61" relation="include">
         </childnode>
       </node>
@@ -429,17 +435,27 @@
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
       </node>
-      <node id="61">
+      <node id="62">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="66">
+      <node id="61">
+        <label>NeForce/core/string/charset.hpp</label>
+        <link refid="charset_8hpp"/>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="67">
         <label>NeForce/core/string/string.hpp</label>
         <link refid="string_8hpp"/>
-        <childnode refid="67" relation="include">
+        <childnode refid="68" relation="include">
         </childnode>
       </node>
       <node id="58">
@@ -517,7 +533,7 @@
       <node id="9">
         <label>synchapi.h</label>
       </node>
-      <node id="64">
+      <node id="65">
         <label>typeinfo</label>
       </node>
       <node id="32">
@@ -568,7 +584,9 @@
         </childnode>
       </node>
     </invincdepgraph>
-    <innerclass refid="classregistry" prot="public">registry</innerclass>
+    <innerclass refid="classneforce_1_1reflect_1_1registry" prot="public">neforce::reflect::registry</innerclass>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
+    <innernamespace refid="namespaceneforce_1_1reflect">neforce::reflect</innernamespace>
     <briefdescription>
 <para>反射类型注册表 </para>
     </briefdescription>
@@ -584,40 +602,40 @@
 <codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="type_8hpp" kindref="compound">NeForce/core/reflect/type.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="14"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight></codeline>
-<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classsignal__base" kindref="compound">signal_base</ref>;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">signal_base;</highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight></codeline>
 <codeline lineno="18"><highlight class="normal">NEFORCE_BEGIN_REFLECT__</highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight></codeline>
 <codeline lineno="25"><highlight class="normal"></highlight></codeline>
-<codeline lineno="33" refid="classregistry" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/>registry<sp/>{</highlight></codeline>
+<codeline lineno="33" refid="classneforce_1_1reflect_1_1registry" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/>registry<sp/>{</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmutex" kindref="compound">mutex</ref><sp/>mutex_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunordered__map" kindref="compound">unordered_map&lt;type_id, unique_ptr&lt;meta_type&gt;</ref>&gt;<sp/>types_;<sp/><sp/></highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunordered__map" kindref="compound">unordered_map&lt;type_id, type_id&gt;</ref><sp/>name_hash_to_type_id_;<sp/></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1mutex" kindref="compound">mutex</ref><sp/>mutex_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map&lt;type_id, unique_ptr&lt;meta_type&gt;</ref>&gt;<sp/>types_;<sp/><sp/></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map&lt;type_id, type_id&gt;</ref><sp/>name_hash_to_type_id_;<sp/></highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight></codeline>
 <codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>registry()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="40"><highlight class="normal"></highlight></codeline>
 <codeline lineno="41"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="46" refid="classregistry_1ae3786801b98d932e133778a36eee1d72" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>registry&amp;<sp/><ref refid="classregistry_1ae3786801b98d932e133778a36eee1d72" kindref="member">instance</ref>();</highlight></codeline>
+<codeline lineno="46" refid="classneforce_1_1reflect_1_1registry_1a31671654870ac8859f0f969a935d63cc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>registry&amp;<sp/><ref refid="classneforce_1_1reflect_1_1registry_1a31671654870ac8859f0f969a935d63cc" kindref="member">instance</ref>();</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"></highlight></codeline>
 <codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="58" refid="classregistry_1a80b07280b49b0e28ecc3f3a1b6c7cccc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmeta__type" kindref="compound">meta_type</ref>&amp;<sp/><ref refid="classregistry_1a80b07280b49b0e28ecc3f3a1b6c7cccc" kindref="member">register_type</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" kindref="member">name</ref>)<sp/>{</highlight></codeline>
-<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___reflection_1ga541516a057bbd67d55d02ece107883d9" kindref="member">type_id</ref><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal"><sp/>=<sp/><ref refid="group___reflection_1ga580ac475bed401f28eca8e86b4de57c2" kindref="member">type_id_for&lt;T&gt;</ref>();</highlight></codeline>
+<codeline lineno="58" refid="classneforce_1_1reflect_1_1registry_1a61e51d8b7c9eba9b254f4c58820a7098" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1reflect_1_1meta__type" kindref="compound">meta_type</ref>&amp;<sp/><ref refid="classneforce_1_1reflect_1_1registry_1a61e51d8b7c9eba9b254f4c58820a7098" kindref="member">register_type</ref>(<ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/>name)<sp/>{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___reflection_1ga3680b21ef08e8497fc7255d54c682211" kindref="member">type_id</ref><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal"><sp/>=<sp/><ref refid="group___reflection_1ga44db0edaa0dbe2c60cb04e815b0a498e" kindref="member">type_id_for&lt;T&gt;</ref>();</highlight></codeline>
 <codeline lineno="60"><highlight class="normal"></highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlock" kindref="compound">lock&lt;mutex&gt;</ref><sp/>lk(mutex_);</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1lock" kindref="compound">lock&lt;mutex&gt;</ref><sp/>lk(mutex_);</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>it<sp/>=<sp/>types_.find(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(it<sp/>!=<sp/>types_.end())<sp/>{</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*it-&gt;second;</highlight></codeline>
 <codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="66"><highlight class="normal"></highlight></codeline>
-<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>name_hash<sp/>=<sp/><ref refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" kindref="member">name</ref>.to_hash();</highlight></codeline>
-<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>new_it<sp/>=<sp/>types_.emplace(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/><ref refid="group___unique_pointer_1ga20caa9b68a94ba614667d6ec6585c044" kindref="member">make_unique&lt;meta_type&gt;</ref>(<ref refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" kindref="member">name</ref>,<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(T))).first;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>name_hash<sp/>=<sp/>name.to_hash();</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>new_it<sp/>=<sp/>types_.emplace(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/><ref refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" kindref="member">make_unique&lt;meta_type&gt;</ref>(name,<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(T))).first;</highlight></codeline>
 <codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>name_hash_to_type_id_.emplace(name_hash,<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*new_it-&gt;second;</highlight></codeline>
 <codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="72"><highlight class="normal"></highlight></codeline>
-<codeline lineno="80" refid="classregistry_1a805216ed6126937556df9e322cfb4a32" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmeta__type" kindref="compound">meta_type</ref>*<sp/><ref refid="classregistry_1a805216ed6126937556df9e322cfb4a32" kindref="member">find_unlocked</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" kindref="member">name</ref>)<sp/>{</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>name_hash<sp/>=<sp/><ref refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" kindref="member">name</ref>.to_hash();</highlight></codeline>
+<codeline lineno="80" refid="classneforce_1_1reflect_1_1registry_1ae4e8793591df85bbe4f0a66642b87d46" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1reflect_1_1meta__type" kindref="compound">meta_type</ref>*<sp/><ref refid="classneforce_1_1reflect_1_1registry_1ae4e8793591df85bbe4f0a66642b87d46" kindref="member">find_unlocked</ref>(<ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/>name)<sp/>{</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>name_hash<sp/>=<sp/>name.to_hash();</highlight></codeline>
 <codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>map_it<sp/>=<sp/>name_hash_to_type_id_.find(name_hash);</highlight></codeline>
 <codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(map_it<sp/>==<sp/>name_hash_to_type_id_.end())<sp/>{</highlight></codeline>
 <codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
@@ -626,37 +644,37 @@
 <codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>it<sp/>!=<sp/>types_.end()<sp/>?<sp/>it-&gt;second.get()<sp/>:<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="89"><highlight class="normal"></highlight></codeline>
-<codeline lineno="95" refid="classregistry_1a3bc2f83a283c6aee3e86078aacb2eb2b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmeta__type" kindref="compound">meta_type</ref>*<sp/><ref refid="classregistry_1a3bc2f83a283c6aee3e86078aacb2eb2b" kindref="member">find</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" kindref="member">name</ref>)<sp/>{</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlock" kindref="compound">lock&lt;mutex&gt;</ref><sp/><ref refid="classlock" kindref="compound">lock</ref>(mutex_);</highlight></codeline>
-<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classregistry_1a805216ed6126937556df9e322cfb4a32" kindref="member">find_unlocked</ref>(<ref refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" kindref="member">name</ref>);</highlight></codeline>
+<codeline lineno="95" refid="classneforce_1_1reflect_1_1registry_1a22e80e06445900ae061c502d4769a43b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1reflect_1_1meta__type" kindref="compound">meta_type</ref>*<sp/><ref refid="classneforce_1_1reflect_1_1registry_1a22e80e06445900ae061c502d4769a43b" kindref="member">find</ref>(<ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/>name)<sp/>{</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1lock" kindref="compound">lock&lt;mutex&gt;</ref><sp/><ref refid="classneforce_1_1lock" kindref="compound">lock</ref>(mutex_);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1reflect_1_1registry_1ae4e8793591df85bbe4f0a66642b87d46" kindref="member">find_unlocked</ref>(name);</highlight></codeline>
 <codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="99"><highlight class="normal"></highlight></codeline>
-<codeline lineno="105" refid="classregistry_1ab9aa0e1c8f702d631bfb427f5ee4feeb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmeta__type" kindref="compound">meta_type</ref>*<sp/><ref refid="classregistry_1ab9aa0e1c8f702d631bfb427f5ee4feeb" kindref="member">find</ref>(<ref refid="group___reflection_1ga541516a057bbd67d55d02ece107883d9" kindref="member">type_id</ref><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlock" kindref="compound">lock&lt;mutex&gt;</ref><sp/><ref refid="classlock" kindref="compound">lock</ref>(mutex_);</highlight></codeline>
+<codeline lineno="105" refid="classneforce_1_1reflect_1_1registry_1a11a0ea900d06d1fe6b201ecf7ea3cda0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1reflect_1_1meta__type" kindref="compound">meta_type</ref>*<sp/><ref refid="classneforce_1_1reflect_1_1registry_1a11a0ea900d06d1fe6b201ecf7ea3cda0" kindref="member">find</ref>(<ref refid="group___reflection_1ga3680b21ef08e8497fc7255d54c682211" kindref="member">type_id</ref><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1lock" kindref="compound">lock&lt;mutex&gt;</ref><sp/><ref refid="classneforce_1_1lock" kindref="compound">lock</ref>(mutex_);</highlight></codeline>
 <codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>it<sp/>=<sp/>types_.find(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>it<sp/>!=<sp/>types_.end()<sp/>?<sp/>it-&gt;second.get()<sp/>:<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="110"><highlight class="normal"></highlight></codeline>
 <codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Func&gt;</highlight></codeline>
-<codeline lineno="119" refid="classregistry_1a113a83de57e98c1e6f06a47aff4b5557" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classregistry_1a113a83de57e98c1e6f06a47aff4b5557" kindref="member">for_each</ref>(Func&amp;&amp;<sp/>func)<sp/>{</highlight></codeline>
-<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlock" kindref="compound">lock&lt;mutex&gt;</ref><sp/><ref refid="classlock" kindref="compound">lock</ref>(mutex_);</highlight></codeline>
+<codeline lineno="119" refid="classneforce_1_1reflect_1_1registry_1a00a7deaf144858457e5b94b0a0003772" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1reflect_1_1registry_1a00a7deaf144858457e5b94b0a0003772" kindref="member">for_each</ref>(Func&amp;&amp;<sp/>func)<sp/>{</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1lock" kindref="compound">lock&lt;mutex&gt;</ref><sp/><ref refid="classneforce_1_1lock" kindref="compound">lock</ref>(mutex_);</highlight></codeline>
 <codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>type:<sp/>types_)<sp/>{</highlight></codeline>
 <codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>func(*type.second);</highlight></codeline>
 <codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="125"><highlight class="normal"></highlight></codeline>
-<codeline lineno="132" refid="classregistry_1ad9f2bc1e953093b1492a327fedc7566f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classregistry_1ad9f2bc1e953093b1492a327fedc7566f" kindref="member">resolve_all_bases</ref>()<sp/>{</highlight></codeline>
-<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlock" kindref="compound">lock&lt;mutex&gt;</ref><sp/>lk(mutex_);</highlight></codeline>
+<codeline lineno="132" refid="classneforce_1_1reflect_1_1registry_1a396681128113460f66cb9535eeb026a9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1reflect_1_1registry_1a396681128113460f66cb9535eeb026a9" kindref="member">resolve_all_bases</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1lock" kindref="compound">lock&lt;mutex&gt;</ref><sp/>lk(mutex_);</highlight></codeline>
 <codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>type:<sp/>types_)<sp/>{</highlight></codeline>
 <codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>type.second-&gt;resolve_bases_unlocked(</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="138"><highlight class="normal"></highlight></codeline>
-<codeline lineno="155" refid="classregistry_1aca0c7b035cf07e11b82567a5d42e242d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classregistry_1aca0c7b035cf07e11b82567a5d42e242d" kindref="member">dynamic_connect</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>sender_obj,<sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>sender_type,<sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>signal_name,</highlight></codeline>
-<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>signal_offset,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>receiver_obj,<sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>receiver_type,</highlight></codeline>
-<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>slot_name)<sp/>{</highlight></codeline>
-<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>s_meta<sp/>=<sp/><ref refid="classregistry_1ae3786801b98d932e133778a36eee1d72" kindref="member">instance</ref>().find(sender_type);</highlight></codeline>
-<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>r_meta<sp/>=<sp/><ref refid="classregistry_1ae3786801b98d932e133778a36eee1d72" kindref="member">instance</ref>().find(receiver_type);</highlight></codeline>
+<codeline lineno="155" refid="classneforce_1_1reflect_1_1registry_1a2806fb03c1417a00645e5cd7a9294bd9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1reflect_1_1registry_1a2806fb03c1417a00645e5cd7a9294bd9" kindref="member">dynamic_connect</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>sender_obj,<sp/><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/>sender_type,<sp/><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/>signal_name,</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>signal_offset,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>receiver_obj,<sp/><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/>receiver_type,</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/>slot_name)<sp/>{</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>s_meta<sp/>=<sp/><ref refid="classneforce_1_1reflect_1_1registry_1a31671654870ac8859f0f969a935d63cc" kindref="member">instance</ref>().find(sender_type);</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>r_meta<sp/>=<sp/><ref refid="classneforce_1_1reflect_1_1registry_1a31671654870ac8859f0f969a935d63cc" kindref="member">instance</ref>().find(receiver_type);</highlight></codeline>
 <codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>((s_meta<sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>||<sp/>(r_meta<sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">))<sp/>{</highlight></codeline>
 <codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
@@ -666,15 +684,15 @@
 <codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="168"><highlight class="normal"></highlight></codeline>
-<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>sig_base<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal"><ref refid="classsignal__base" kindref="compound">signal_base</ref>*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(sender_obj)<sp/>+<sp/>signal_offset);</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>sig_base<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal"><ref refid="classneforce_1_1signal__base" kindref="compound">signal_base</ref>*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(sender_obj)<sp/>+<sp/>signal_offset);</highlight></codeline>
 <codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(sig_base<sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
 <codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="173"><highlight class="normal"></highlight></codeline>
-<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classregistry_1a849508186d6632b68e3c0ae299ecd39a" kindref="member">connect_signal_to_slot</ref>(sig_base,<sp/>slot,<sp/>receiver_obj);</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1reflect_1_1registry_1acb8a11b6ba7f99b3bfd21ea7254ab6e8" kindref="member">connect_signal_to_slot</ref>(sig_base,<sp/>slot,<sp/>receiver_obj);</highlight></codeline>
 <codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="176"><highlight class="normal"></highlight></codeline>
-<codeline lineno="186" refid="classregistry_1a849508186d6632b68e3c0ae299ecd39a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classregistry_1a849508186d6632b68e3c0ae299ecd39a" kindref="member">connect_signal_to_slot</ref>(<ref refid="classsignal__base" kindref="compound">signal_base</ref>*<sp/>sig,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classmeta__function" kindref="compound">meta_function</ref>*<sp/>slot,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>receiver);</highlight></codeline>
+<codeline lineno="186" refid="classneforce_1_1reflect_1_1registry_1acb8a11b6ba7f99b3bfd21ea7254ab6e8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1reflect_1_1registry_1acb8a11b6ba7f99b3bfd21ea7254ab6e8" kindref="member">connect_signal_to_slot</ref>(<ref refid="classneforce_1_1signal__base" kindref="compound">signal_base</ref>*<sp/>sig,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1reflect_1_1meta__function" kindref="compound">meta_function</ref>*<sp/>slot,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>receiver);</highlight></codeline>
 <codeline lineno="187"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="188"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Reflection</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="190"><highlight class="normal"></highlight></codeline>

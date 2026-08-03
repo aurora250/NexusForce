@@ -1,4 +1,4 @@
 var menu_8hpp =
 [
-    [ "menu", "group___t_u_i.html#gad531121e5761a10123a375515a47f80a", null ]
+    [ "neforce::tui::components::menu", "group___components.html#gaff8bba91eac67320ae8fe2eec52703d1", null ]
 ];

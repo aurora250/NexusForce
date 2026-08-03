@@ -1,17 +1,17 @@
 var bitwise_8hpp =
 [
-    [ "bit_and", "group___s_i_m_d.html#gad092853c0c4a41c24ca1b739a67a87ea", null ],
-    [ "bit_and", "group___s_i_m_d.html#ga74781f5f355b994b240735a753c20550", null ],
-    [ "bit_and", "group___s_i_m_d.html#ga70c27563e41c776c6762df6a97bbb839", null ],
-    [ "bit_andnot", "group___s_i_m_d.html#gaf8a35dfcf045411e9baea27c8006764a", null ],
-    [ "bit_not", "group___s_i_m_d.html#ga3dc0ca2887e82a71332f861417a69ed7", null ],
-    [ "bit_or", "group___s_i_m_d.html#ga51af3980cfa91ef50e5a137b3ebe38e2", null ],
-    [ "bit_or", "group___s_i_m_d.html#gaff9032ced0fd00a49bf2af4b9fae6ff2", null ],
-    [ "bit_or", "group___s_i_m_d.html#ga84ec00dd40f7ef303c594d4e45f58a5a", null ],
-    [ "bit_xor", "group___s_i_m_d.html#ga3b1d28201f0d97e5c7c91dde3ec898ca", null ],
-    [ "bit_xor", "group___s_i_m_d.html#ga761033db601abacce3c06b075be5cb5d", null ],
-    [ "bit_xor", "group___s_i_m_d.html#ga0ab9e5b96028e8431c412337c9b0d2b3", null ],
-    [ "popcount", "group___s_i_m_d.html#gad1207be405ed3da33e10f4c11d295aa4", null ],
-    [ "shift_left_bytes", "group___s_i_m_d.html#ga6f60ee2efc24411bc623e997a54a1faf", null ],
-    [ "shift_right_bytes", "group___s_i_m_d.html#ga00dc5e61ea445c30f9f20087771250a4", null ]
+    [ "neforce::simd::bit_and", "group___s_i_m_d.html#ga5c8f817bfdd41e91d544a024fb2ce13d", null ],
+    [ "neforce::simd::bit_and", "group___s_i_m_d.html#ga801a6370e1d3b7f021b3615d7a003324", null ],
+    [ "neforce::simd::bit_and", "group___s_i_m_d.html#ga0f71d50cbf63281dfc47e17882d54b68", null ],
+    [ "neforce::simd::bit_andnot", "group___s_i_m_d.html#ga05dabcf3c667e889b84fec87b90cdf62", null ],
+    [ "neforce::simd::bit_not", "group___s_i_m_d.html#ga6cd2bf2dd5a7f6785e7370db545ffef3", null ],
+    [ "neforce::simd::bit_or", "group___s_i_m_d.html#gaa32a9f26b9f22692c768af72a0e9fa70", null ],
+    [ "neforce::simd::bit_or", "group___s_i_m_d.html#gaa59c93aebc97b55bd5c75cf7e3b40f32", null ],
+    [ "neforce::simd::bit_or", "group___s_i_m_d.html#ga14cf129debaa5f853d5b0183a28b073b", null ],
+    [ "neforce::simd::bit_xor", "group___s_i_m_d.html#ga0927cb19883cca7480d7e07e2229334c", null ],
+    [ "neforce::simd::bit_xor", "group___s_i_m_d.html#ga15da014275d097dcf95e28495fb11b3f", null ],
+    [ "neforce::simd::bit_xor", "group___s_i_m_d.html#gaa203c94cf08dd2d05ee3cb27ad08a742", null ],
+    [ "neforce::simd::popcount", "group___s_i_m_d.html#ga203f23f8b33802239e45bc29facd8cb4", null ],
+    [ "neforce::simd::shift_left_bytes", "group___s_i_m_d.html#gac71984a5f6a0da5ef416ae7d18be2b97", null ],
+    [ "neforce::simd::shift_right_bytes", "group___s_i_m_d.html#gae97342fc1ba4ea59cae263ff2263b3d2", null ]
 ];

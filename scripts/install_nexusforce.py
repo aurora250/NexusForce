@@ -10,14 +10,10 @@
     python install_nexusforce.py --clean             # 清空 build 目录后重新构建
     python install_nexusforce.py --config-only       # 仅运行 CMake 配置（不编译）
     python install_nexusforce.py -j 8                # 指定并行编译任务数
-
-依赖:
-    - Python 3.7+
-    - CMake ≥ 3.19（PATH 中可用）
-    - vcpkg（通过 config.json 配置）
 """
 
 import argparse
+import builtins
 import json
 import os
 import platform
@@ -25,6 +21,8 @@ import shlex
 import shutil
 import subprocess
 import sys
+from typing import Any
+
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -38,15 +36,15 @@ CONFIG_FILE = PROJECT_ROOT / "config.json"
 def load_config() -> dict:
     """读取项目 config.json"""
     if not CONFIG_FILE.exists():
-        print(f"[警告] 未找到 {CONFIG_FILE}，使用默认值")
+        builtins.print(f"[警告] 未找到 {CONFIG_FILE}，使用默认值")
         return {}
 
-    with open(CONFIG_FILE, encoding="utf-8") as f:
+    with builtins.open(CONFIG_FILE, encoding="utf-8") as f:
         return json.load(f)
     return None
 
 
-def detect_vcpkg_toolchain(cfg: dict) -> Path:
+def detect_vcpkg_toolchain(cfg: dict) -> Any | None:
     """根据平台从 config.json 或环境变量中解析 vcpkg toolchain 路径"""
     env_root = os.environ.get("VCPKG_ROOT")
     if env_root:
@@ -78,7 +76,7 @@ def get_generator() -> str | None:
 
 def run(cmd: list[str], **kwargs) -> int:
     """运行命令并实时输出"""
-    print(f"\n→ {' '.join(shlex.quote(str(c)) for c in cmd)}")
+    builtins.print(f"\n→ {' '.join(shlex.quote(str(c)) for c in cmd)}")
     return subprocess.call(cmd, **kwargs)
 
 
@@ -143,17 +141,17 @@ def cmake_install(args: argparse.Namespace) -> int:
 
 def print_summary(args: argparse.Namespace, toolchain: Path | None) -> None:
     """打印配置摘要"""
-    print("=" * 64)
-    print("  NexusForce 安装脚本")
-    print("=" * 64)
-    print(f"  项目根目录:   {PROJECT_ROOT}")
-    print(f"  构建目录:     {args.build_dir}")
-    print(f"  安装前缀:     {args.prefix}")
-    print(f"  构建类型:     {args.config}")
-    print(f"  生成器:       {args.generator or get_generator() or '(CMake 默认)'}")
-    print(f"  vcpkg:        {toolchain or '未检测到'}")
-    print(f"  并行任务:     {args.parallel}")
-    print("=" * 64)
+    builtins.print("=" * 64)
+    builtins.print("  NexusForce 安装脚本")
+    builtins.print("=" * 64)
+    builtins.print(f"  项目根目录:   {PROJECT_ROOT}")
+    builtins.print(f"  构建目录:     {args.build_dir}")
+    builtins.print(f"  安装前缀:     {args.prefix}")
+    builtins.print(f"  构建类型:     {args.config}")
+    builtins.print(f"  生成器:       {args.generator or get_generator() or '(CMake 默认)'}")
+    builtins.print(f"  vcpkg:        {toolchain or '未检测到'}")
+    builtins.print(f"  并行任务:     {args.parallel}")
+    builtins.print("=" * 64)
 
 
 def main() -> int:
@@ -238,7 +236,7 @@ def main() -> int:
 
     # ── 清理 ──
     if args.clean and args.build_dir.exists():
-        print(f"[清理] 删除 {args.build_dir} ...")
+        builtins.print(f"[清理] 删除 {args.build_dir} ...")
         shutil.rmtree(args.build_dir)
 
     args.build_dir.mkdir(parents=True, exist_ok=True)
@@ -249,34 +247,34 @@ def main() -> int:
     # ── 配置 ──
     rc = cmake_configure(args, toolchain)
     if rc != 0:
-        print("\n✘ CMake 配置失败", file=sys.stderr)
+        builtins.print("\n✘ CMake 配置失败", file=sys.stderr)
         return rc
 
     if args.config_only:
-        print("\n✓ CMake 配置完成（--config-only，跳过构建）")
+        builtins.print("\n✓ CMake 配置完成（--config-only，跳过构建）")
         return 0
 
     # ── 构建 ──
     rc = cmake_build(args)
     if rc != 0:
-        print("\n✘ 构建失败", file=sys.stderr)
+        builtins.print("\n✘ 构建失败", file=sys.stderr)
         return rc
 
     if args.build_only:
-        print("\n✓ 构建完成（--build-only，跳过安装）")
-        print(f"  产物位于: {args.build_dir}")
+        builtins.print("\n✓ 构建完成（--build-only，跳过安装）")
+        builtins.print(f"  产物位于: {args.build_dir}")
         return 0
 
     # ── 安装 ──
     rc = cmake_install(args)
     if rc != 0:
-        print("\n✘ 安装失败", file=sys.stderr)
+        builtins.print("\n✘ 安装失败", file=sys.stderr)
         return rc
 
-    print(f"\n✓ NexusForce 安装完成 → {args.prefix}")
-    print(f"  ├── bin/  可执行文件与 DLL")
-    print(f"  ├── lib/  cmake 配置与库文件")
-    print(f"  └── include/NeForce/  头文件")
+    builtins.print(f"\n✓ NexusForce 安装完成 → {args.prefix}")
+    builtins.print(f"  ├── bin/  可执行文件与 DLL")
+    builtins.print(f"  ├── lib/  cmake 配置与库文件")
+    builtins.print(f"  └── include/NeForce/  头文件")
     return 0
 
 

@@ -75,7 +75,7 @@
         <link refid="buffer__chain_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="49" relation="include">
+        <childnode refid="50" relation="include">
         </childnode>
       </node>
       <node id="24">
@@ -89,8 +89,8 @@
         </childnode>
       </node>
       <node id="14">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="9" relation="include">
         </childnode>
       </node>
@@ -255,30 +255,44 @@
         </childnode>
         <childnode refid="45" relation="include">
         </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
         <childnode refid="39" relation="include">
         </childnode>
       </node>
-      <node id="46">
+      <node id="48">
         <label>NeForce/core/string/basic_string_view.hpp</label>
         <link refid="basic__string__view_8hpp"/>
         <childnode refid="37" relation="include">
         </childnode>
-        <childnode refid="47" relation="include">
+        <childnode refid="49" relation="include">
         </childnode>
-        <childnode refid="48" relation="include">
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
         </childnode>
       </node>
-      <node id="47">
+      <node id="49">
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="27" relation="include">
         </childnode>
         <childnode refid="23" relation="include">
         </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
       </node>
-      <node id="48">
+      <node id="46">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>NeForce/core/string/charset.hpp</label>
+        <link refid="charset_8hpp"/>
+        <childnode refid="46" relation="include">
+        </childnode>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
@@ -288,10 +302,10 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="45">
+      <node id="47">
         <label>NeForce/core/string/string_view.hpp</label>
         <link refid="string__view_8hpp"/>
-        <childnode refid="46" relation="include">
+        <childnode refid="48" relation="include">
         </childnode>
       </node>
       <node id="15">
@@ -351,7 +365,7 @@
       <node id="41">
         <label>new</label>
       </node>
-      <node id="49">
+      <node id="50">
         <label>sys/uio.h</label>
       </node>
       <node id="35">
@@ -471,8 +485,9 @@
       </node>
     </invincdepgraph>
     <innerclass refid="structiovec" prot="public">iovec</innerclass>
-    <innerclass refid="classbuffer__chain" prot="public">buffer_chain</innerclass>
-    <innerclass refid="structbuffer__chain_1_1segment" prot="public">buffer_chain::segment</innerclass>
+    <innerclass refid="classneforce_1_1buffer__chain" prot="public">neforce::buffer_chain</innerclass>
+    <innerclass refid="structneforce_1_1buffer__chain_1_1segment" prot="public">neforce::buffer_chain::segment</innerclass>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -492,63 +507,63 @@
 <codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="13"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight></codeline>
-<codeline lineno="22" refid="classbuffer__chain" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">buffer_chain<sp/>{</highlight></codeline>
+<codeline lineno="22" refid="classneforce_1_1buffer__chain" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">buffer_chain<sp/>{</highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">segment<sp/>{</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>{</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">};</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" kindref="member">size</ref>{0};</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>{</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga69955a26617401117eaf53fa82162e2b" kindref="member">size</ref>{0};</highlight></codeline>
 <codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="28"><highlight class="normal"></highlight></codeline>
 <codeline lineno="29"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classvector" kindref="compound">vector&lt;segment&gt;</ref><sp/>segments_;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1vector" kindref="compound">vector&lt;segment&gt;</ref><sp/>segments_;</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>total_size_{0};</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer_chain()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight></codeline>
-<codeline lineno="39" refid="classbuffer__chain_1af53b29d0568534ea3b2f365e1adc815b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classbuffer__chain_1af53b29d0568534ea3b2f365e1adc815b" kindref="member">append</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" kindref="member">size</ref>)<sp/>{</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>segments_.push_back({<ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>,<sp/><ref refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" kindref="member">size</ref>});</highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>total_size_<sp/>+=<sp/><ref refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" kindref="member">size</ref>;</highlight></codeline>
+<codeline lineno="39" refid="classneforce_1_1buffer__chain_1aaf5fce02640b3befd8ba4163dc9d197e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1buffer__chain_1aaf5fce02640b3befd8ba4163dc9d197e" kindref="member">append</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga69955a26617401117eaf53fa82162e2b" kindref="member">size</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>segments_.push_back({<ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>,<sp/><ref refid="group___type_erasure_functions_1ga69955a26617401117eaf53fa82162e2b" kindref="member">size</ref>});</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>total_size_<sp/>+=<sp/><ref refid="group___type_erasure_functions_1ga69955a26617401117eaf53fa82162e2b" kindref="member">size</ref>;</highlight></codeline>
 <codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight></codeline>
-<codeline lineno="47" refid="classbuffer__chain_1a2a0ebba8be6e0a824944f81b2eec6230" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classbuffer__chain_1a2a0ebba8be6e0a824944f81b2eec6230" kindref="member">append</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>sv)<sp/>{<sp/><ref refid="classbuffer__chain_1a2a0ebba8be6e0a824944f81b2eec6230" kindref="member">append</ref>(sv.<ref refid="classbasic__string__view_1a333ab8066e73bf2d4bd068f686eeaa24" kindref="member">data</ref>(),<sp/>sv.<ref refid="classbasic__string__view_1a0b5a6546739bc33ecbe750f98ac47b25" kindref="member">size</ref>());<sp/>}</highlight></codeline>
+<codeline lineno="47" refid="classneforce_1_1buffer__chain_1a26605604b5a2f7fc5bae1a0f3735d884" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1buffer__chain_1a26605604b5a2f7fc5bae1a0f3735d884" kindref="member">append</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/>sv)<sp/>{<sp/><ref refid="classneforce_1_1buffer__chain_1a26605604b5a2f7fc5bae1a0f3735d884" kindref="member">append</ref>(sv.<ref refid="classneforce_1_1basic__string__view_1ac2d4daabe8aa423c0c8f3d136988080f" kindref="member">data</ref>(),<sp/>sv.<ref refid="classneforce_1_1basic__string__view_1a5c3cc7bb70d1ce39a7e41c31d66cf1b3" kindref="member">size</ref>());<sp/>}</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"></highlight></codeline>
-<codeline lineno="52" refid="classbuffer__chain_1a829f879c328d6ff84b71e7343cc16ac4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classbuffer__chain_1a829f879c328d6ff84b71e7343cc16ac4" kindref="member">append</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>buffer_chain&amp;<sp/>other)<sp/>{</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>segments_.insert(segments_.end(),<sp/>other.segments_.<ref refid="classvector_1ab78572320afe8abac07e7762afc9d8d3" kindref="member">begin</ref>(),<sp/>other.segments_.<ref refid="classvector_1aba0a5982f80665d2e8a9716fd48c9063" kindref="member">end</ref>());</highlight></codeline>
+<codeline lineno="52" refid="classneforce_1_1buffer__chain_1a800f4d676fe02bb48a5976d2dfb63150" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1buffer__chain_1a800f4d676fe02bb48a5976d2dfb63150" kindref="member">append</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>buffer_chain&amp;<sp/>other)<sp/>{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>segments_.insert(segments_.end(),<sp/>other.segments_.<ref refid="classneforce_1_1vector_1a3287516e5473ede1a2ca09b1d4a567e8" kindref="member">begin</ref>(),<sp/>other.segments_.<ref refid="classneforce_1_1vector_1ad9dd182c63c26cd8b4048a76967eaba9" kindref="member">end</ref>());</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>total_size_<sp/>+=<sp/>other.total_size_;</highlight></codeline>
 <codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="56"><highlight class="normal"></highlight></codeline>
-<codeline lineno="60" refid="classbuffer__chain_1ae89612333d057b3423d798495cb518a9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="classbuffer__chain_1ae89612333d057b3423d798495cb518a9" kindref="member">flatten</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="60" refid="classneforce_1_1buffer__chain_1a86a954598d96966ecfa6f0b88694c2d1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1buffer__chain_1a86a954598d96966ecfa6f0b88694c2d1" kindref="member">flatten</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result.<ref refid="classbasic__string_1aa2527f9b1a17a4b866e3e59e384dc0d8" kindref="member">reserve</ref>(total_size_);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result.<ref refid="classneforce_1_1basic__string_1af873e19bd5a4fa9f7c5353251f83ba48" kindref="member">reserve</ref>(total_size_);</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>seg:<sp/>segments_)<sp/>{</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result.<ref refid="classbasic__string_1a23c524fe4e21ba7bf374b0949786310c" kindref="member">append</ref>(seg.data,<sp/>seg.size);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result.<ref refid="classneforce_1_1basic__string_1a799fde2078859c22faf7554ccbfc5d1f" kindref="member">append</ref>(seg.data,<sp/>seg.size);</highlight></codeline>
 <codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
 <codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="68"><highlight class="normal"></highlight></codeline>
-<codeline lineno="72" refid="classbuffer__chain_1aab9a98bf930d5d22c55cd97d6b552630" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classvector" kindref="compound">vector&lt;::iovec&gt;</ref><sp/><ref refid="classbuffer__chain_1aab9a98bf930d5d22c55cd97d6b552630" kindref="member">to_iovec</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classvector" kindref="compound">vector&lt;::iovec&gt;</ref><sp/>iov;</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>iov.<ref refid="classvector_1a0066a7fca1a744cdb62d5fb96b51a88f" kindref="member">reserve</ref>(segments_.size());</highlight></codeline>
+<codeline lineno="72" refid="classneforce_1_1buffer__chain_1addd535bd0c0c7ee7f1573363f12dea98" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classneforce_1_1vector" kindref="compound">vector&lt;::iovec&gt;</ref><sp/><ref refid="classneforce_1_1buffer__chain_1addd535bd0c0c7ee7f1573363f12dea98" kindref="member">to_iovec</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1vector" kindref="compound">vector&lt;::iovec&gt;</ref><sp/>iov;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>iov.<ref refid="classneforce_1_1vector_1a69c7a4909e935658748ba812e9ff6104" kindref="member">reserve</ref>(segments_.size());</highlight></codeline>
 <codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>seg:<sp/>segments_)<sp/>{</highlight></codeline>
 <codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>::iovec<sp/>v{};</highlight></codeline>
 <codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>v.iov_base<sp/>=<sp/></highlight><highlight class="keyword">const_cast&lt;</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(seg.data);</highlight></codeline>
 <codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>v.iov_len<sp/>=<sp/>seg.size;</highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>iov.<ref refid="classvector_1ac8d8b05ea55e928d9a4ccde8bf9bedcf" kindref="member">push_back</ref>(v);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>iov.<ref refid="classneforce_1_1vector_1aaaf6ef9757003f129c44904ff01cf261" kindref="member">push_back</ref>(v);</highlight></codeline>
 <codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>iov;</highlight></codeline>
 <codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="83"><highlight class="normal"></highlight></codeline>
 <codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>total_size()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>total_size_;<sp/>}</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>segment_count()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>segments_.size();<sp/>}</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>empty()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>total_size_<sp/>==<sp/>0;<sp/>}</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>segment_count()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>segments_.<ref refid="classneforce_1_1vector_1a3b6ecc9f87fa5acf62afbfa70b2d0365" kindref="member">size</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga0d0e3b4ad71e2ddc4fb24ab18b15c3e2" kindref="member">empty</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>total_size_<sp/>==<sp/>0;<sp/>}</highlight></codeline>
 <codeline lineno="87"><highlight class="normal"></highlight></codeline>
 <codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>clear()<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>segments_.clear();</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>segments_.<ref refid="classneforce_1_1vector_1ac7d0ceb24491b666e63dc8ef970eed26" kindref="member">clear</ref>();</highlight></codeline>
 <codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>total_size_<sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="92"><highlight class="normal"></highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>reserve(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" kindref="member">count</ref>)<sp/>{<sp/>segments_.reserve(<ref refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" kindref="member">count</ref>);<sp/>}</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>reserve(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>count)<sp/>{<sp/>segments_.<ref refid="classneforce_1_1vector_1a69c7a4909e935658748ba812e9ff6104" kindref="member">reserve</ref>(count);<sp/>}</highlight></codeline>
 <codeline lineno="94"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="95"><highlight class="normal"></highlight></codeline>
 <codeline lineno="96"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>

@@ -1,16 +1,16 @@
 var group___thread_exit =
 [
-    [ "thread_exit_listener", "structthread__exit__listener.html", [
-      [ "callback", "structthread__exit__listener.html#a27fb524e7304efd82ac1a279febcccc8", null ],
-      [ "chain", "structthread__exit__listener.html#a53bc57261908d7f08dff7444a1b52e89", null ],
-      [ "next", "structthread__exit__listener.html#a2ecfac37122ba062bbfff70979767889", null ],
-      [ "user_data", "structthread__exit__listener.html#a73447e4844d914bc0dbcf373d2f730d1", null ]
+    [ "neforce::thread_exit_listener", "structneforce_1_1thread__exit__listener.html", [
+      [ "callback", "structneforce_1_1thread__exit__listener.html#a90f3e6d64991fd0944f8786813486b50", null ],
+      [ "chain", "structneforce_1_1thread__exit__listener.html#ab7e25e3d6cc432b1f0106192164a8901", null ],
+      [ "next", "structneforce_1_1thread__exit__listener.html#aa12c5a8091d3c48841834cc7a6c2016a", null ],
+      [ "user_data", "structneforce_1_1thread__exit__listener.html#a5abb497f990b0693519866f161bcfef0", null ]
     ] ],
-    [ "thread_exit_notifier", "classthread__exit__notifier.html", null ],
-    [ "thread_exit_elt", "structthread__exit__elt.html", [
-      [ "callback", "structthread__exit__elt.html#a28428e6b9e3da89f6083568b1d113b83", null ],
-      [ "next", "structthread__exit__elt.html#a52b8e6518b6def949705fb5068e6cb88", null ]
+    [ "neforce::thread_exit_notifier", "classneforce_1_1thread__exit__notifier.html", null ],
+    [ "neforce::thread_exit_elt", "structneforce_1_1thread__exit__elt.html", [
+      [ "callback", "structneforce_1_1thread__exit__elt.html#a89d2ef18f4b44370b3f04f4b91fd3290", null ],
+      [ "next", "structneforce_1_1thread__exit__elt.html#aeb451f3d40180bea34ffda326a2150a7", null ]
     ] ],
-    [ "thread_exit_callback_t", "group___thread_exit.html#ga5fc0baa1aebebd461babfb58c9f37c48", null ],
-    [ "thread_exit_register", "group___thread_exit.html#ga61ee52a597905b57d6fa90f45918bdfa", null ]
+    [ "neforce::thread_exit_callback_t", "group___thread_exit.html#ga923436b5fc72c8987a54f9900e01e4a0", null ],
+    [ "neforce::thread_exit_register", "group___thread_exit.html#gab404c2196764167ef4a99fa9ccd7d812", null ]
 ];

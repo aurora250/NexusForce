@@ -1,0 +1,1819 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1yaml__parser" kind="class" language="C++" prot="public">
+    <compoundname>neforce::yaml_parser</compoundname>
+    <includes refid="yaml__parser_8hpp" local="no">yaml_parser.hpp</includes>
+    <innerclass refid="structneforce_1_1yaml__parser_1_1indent__context" prot="private">neforce::yaml_parser::indent_context</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1yaml__parser_1a5327e697200bd40b81ecf17d328a0929" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::yaml_parser::yaml_</definition>
+        <argsstring></argsstring>
+        <name>yaml_</name>
+        <qualifiedname>neforce::yaml_parser::yaml_</qualifiedname>
+        <briefdescription>
+<para>待解析的YAML源文本 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="133" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1yaml__parser_1ae7b9e42da2dd3cb39b9f8d702d4f18f1" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::yaml_parser::len_</definition>
+        <argsstring></argsstring>
+        <name>len_</name>
+        <qualifiedname>neforce::yaml_parser::len_</qualifiedname>
+        <briefdescription>
+<para>源文本长度 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="134" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1yaml__parser_1aa36925c807cfce1c764d37ec018e2c89" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::yaml_parser::pos_</definition>
+        <argsstring></argsstring>
+        <name>pos_</name>
+        <qualifiedname>neforce::yaml_parser::pos_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>当前解析位置 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="135" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1yaml__parser_1a3423df54eb4bd1ed39561bcfc399d5a8" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::yaml_parser::line_</definition>
+        <argsstring></argsstring>
+        <name>line_</name>
+        <qualifiedname>neforce::yaml_parser::line_</qualifiedname>
+        <initializer>= 1</initializer>
+        <briefdescription>
+<para>当前行号（从1开始，用于错误报告） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="136" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" bodystart="136" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1yaml__parser_1ab00d6b5897a450e0c586ef7fb7820fbe" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::yaml_parser::column_</definition>
+        <argsstring></argsstring>
+        <name>column_</name>
+        <qualifiedname>neforce::yaml_parser::column_</qualifiedname>
+        <initializer>= 1</initializer>
+        <briefdescription>
+<para>当前列号（从1开始，用于错误报告） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="137" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1yaml__parser_1ac33212e19f7847d7f2d7c07ebf03bcdf" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; indent_context &gt;</type>
+        <definition>vector&lt;indent_context&gt; neforce::yaml_parser::indent_stack_</definition>
+        <argsstring></argsstring>
+        <name>indent_stack_</name>
+        <qualifiedname>neforce::yaml_parser::indent_stack_</qualifiedname>
+        <briefdescription>
+<para>缩进上下文栈 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="139" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1yaml__parser_1ac218bed6952d492f3afb1acba9e8b209" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__value" kindref="compound">yaml_value</ref> &gt;</type>
+        <definition>shared_ptr&lt;yaml_value&gt; neforce::yaml_parser::root_</definition>
+        <argsstring></argsstring>
+        <name>root_</name>
+        <qualifiedname>neforce::yaml_parser::root_</qualifiedname>
+        <briefdescription>
+<para>解析结果的根节点 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="140" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1yaml__parser_1a912049445dd5e0a79034345f4cd44fc3" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::yaml_parser::current_indent_</definition>
+        <argsstring></argsstring>
+        <name>current_indent_</name>
+        <qualifiedname>neforce::yaml_parser::current_indent_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>当前行的缩进级别 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="141" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1yaml__parser_1a30ccbc994293f0d15286ab94244a1667" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::yaml_parser::in_flow_context_</definition>
+        <argsstring></argsstring>
+        <name>in_flow_context_</name>
+        <qualifiedname>neforce::yaml_parser::in_flow_context_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否处于流样式上下文中 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="142" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1yaml__parser_1ac8292ad270ed17eaabecfcf23b8f4323" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref>, <ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__value" kindref="compound">yaml_value</ref> &gt; &gt;</type>
+        <definition>unordered_map&lt;string, shared_ptr&lt;yaml_value&gt; &gt; neforce::yaml_parser::anchors_</definition>
+        <argsstring></argsstring>
+        <name>anchors_</name>
+        <qualifiedname>neforce::yaml_parser::anchors_</qualifiedname>
+        <briefdescription>
+<para>锚点名到节点的映射表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="144" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" bodystart="144" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1aa3c0a37a9baf42987d25aeebc7b42de0" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>char</type>
+        <definition>char neforce::yaml_parser::current</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>current</name>
+        <qualifiedname>neforce::yaml_parser::current</qualifiedname>
+        <briefdescription>
+<para>获取当前字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前位置的字符 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="150" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1abf2777f774fc4fd7f9dd42b76b713aa8" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>char</type>
+        <definition>char neforce::yaml_parser::peek</definition>
+        <argsstring>(size_t offset=1) const noexcept</argsstring>
+        <name>peek</name>
+        <qualifiedname>neforce::yaml_parser::peek</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>offset</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>预读后续字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>从当前位置的偏移量（默认1） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>目标位置的字符，超出边界返回 &apos;\0&apos; </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="157" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1ad3876bd2f9831c7fcbad960ca05a0b63" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::yaml_parser::eof</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>eof</name>
+        <qualifiedname>neforce::yaml_parser::eof</qualifiedname>
+        <briefdescription>
+<para>检查是否到达文件末尾 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果 pos_ &gt;= len_ 返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="163" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1afdd509c98faf0429f3445dc828832981" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::yaml_parser::advance</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>advance</name>
+        <qualifiedname>neforce::yaml_parser::advance</qualifiedname>
+        <briefdescription>
+<para>前进一个字符并更新行列号 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="168" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a70dc6433cc91c12f741a2a5a089344c8" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::yaml_parser::match</definition>
+        <argsstring>(char ch) noexcept</argsstring>
+        <name>match</name>
+        <qualifiedname>neforce::yaml_parser::match</qualifiedname>
+        <param>
+          <type>char</type>
+          <declname>ch</declname>
+        </param>
+        <briefdescription>
+<para>尝试匹配当前字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望匹配的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>匹配成功返回 true 并前进，否则返回 false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="175" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a9dcba2e1c53a9b441b33b4308f780065" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::yaml_parser::expect</definition>
+        <argsstring>(char ch)</argsstring>
+        <name>expect</name>
+        <qualifiedname>neforce::yaml_parser::expect</qualifiedname>
+        <param>
+          <type>char</type>
+          <declname>ch</declname>
+        </param>
+        <briefdescription>
+<para>期望当前字符匹配，否则抛出解析错误 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>总是返回 true（匹配成功时） </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1yaml__exception" kindref="compound">yaml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="183" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a7e6de7a0f604efd7f6f59600a0e696b4" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::yaml_parser::skip_whitespace_inline</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>skip_whitespace_inline</name>
+        <qualifiedname>neforce::yaml_parser::skip_whitespace_inline</qualifiedname>
+        <briefdescription>
+<para>跳过行内空白字符（空格和制表符），但在换行符处停止 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="188" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a2cf666440b8c5e0962c858d9c0ce7297" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::yaml_parser::skip_comment</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>skip_comment</name>
+        <qualifiedname>neforce::yaml_parser::skip_comment</qualifiedname>
+        <briefdescription>
+<para>跳过从当前位置到行尾的注释内容 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="193" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a9ba818602c288a2a31c42f5b0dfdfb00" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::yaml_parser::skip_to_next_line</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>skip_to_next_line</name>
+        <qualifiedname>neforce::yaml_parser::skip_to_next_line</qualifiedname>
+        <briefdescription>
+<para>跳过当前行剩余内容，前进到下一行行首 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="198" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a25e94c8ebc4729ba38c617abdb72adfc" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::yaml_parser::skip_blank_lines</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>skip_blank_lines</name>
+        <qualifiedname>neforce::yaml_parser::skip_blank_lines</qualifiedname>
+        <briefdescription>
+<para>跳过连续的空白行（仅含空格/制表符/注释的行） </para>
+        </briefdescription>
+        <detaileddescription>
+<para>通过预读判断行是否真正空白后才消费，避免误吞内容行的缩进。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="205" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a0b50de4c7dee5f3394d31f41e175d022" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::yaml_parser::skip_whitespace_and_comments</definition>
+        <argsstring>()</argsstring>
+        <name>skip_whitespace_and_comments</name>
+        <qualifiedname>neforce::yaml_parser::skip_whitespace_and_comments</qualifiedname>
+        <briefdescription>
+<para>跳过空白字符和注释，跨行处理 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="210" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a6f8d5d4cbf9c8e8e89ef2929b79eb8ad" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::yaml_parser::is_whitespace</definition>
+        <argsstring>(char ch) const noexcept</argsstring>
+        <name>is_whitespace</name>
+        <qualifiedname>neforce::yaml_parser::is_whitespace</qualifiedname>
+        <param>
+          <type>char</type>
+          <declname>ch</declname>
+        </param>
+        <briefdescription>
+<para>判断字符是否为YAML空白字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待检查的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果是空格或制表符返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="217" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a6f7fa47e799b2ce82d9eeca109e5163c" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::yaml_parser::is_newline</definition>
+        <argsstring>(char ch) const noexcept</argsstring>
+        <name>is_newline</name>
+        <qualifiedname>neforce::yaml_parser::is_newline</qualifiedname>
+        <param>
+          <type>char</type>
+          <declname>ch</declname>
+        </param>
+        <briefdescription>
+<para>判断字符是否为换行符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待检查的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果是 &apos;\n&apos; 或 &apos;\r&apos; 返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="224" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a019d6f2c17fa813a466d4723bc378a86" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::yaml_parser::peek_indent</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>peek_indent</name>
+        <qualifiedname>neforce::yaml_parser::peek_indent</qualifiedname>
+        <briefdescription>
+<para>预读当前行的缩进级别（空格数） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前行的缩进空格数</para>
+</simplesect>
+不移动解析位置，仅读取。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="232" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a5f03f6c4ae73b750d73cc520a0c1bc0a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::yaml_parser::skip_indent</definition>
+        <argsstring>()</argsstring>
+        <name>skip_indent</name>
+        <qualifiedname>neforce::yaml_parser::skip_indent</qualifiedname>
+        <briefdescription>
+<para>跳过当前行的缩进空格 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>跳过的空格数（即缩进级别） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="238" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a6cfed9ea6dbeed654b88582b5d81d086" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::yaml_parser::handle_indent_change</definition>
+        <argsstring>(size_t new_indent)</argsstring>
+        <name>handle_indent_change</name>
+        <qualifiedname>neforce::yaml_parser::handle_indent_change</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>new_indent</declname>
+        </param>
+        <briefdescription>
+<para>根据缩进变化调整上下文栈 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>new_indent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的缩进级别</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<itemizedlist>
+<listitem><para>缩进增大：压入新的上下文（由调用者处理）</para>
+</listitem><listitem><para>缩进减小：弹出上下文直到找到匹配的缩进级别</para>
+</listitem><listitem><para>缩进相同：保持当前上下文 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="248" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a608b762f5756304812db1f25f542ed67" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::yaml_parser::parse_directive</definition>
+        <argsstring>()</argsstring>
+        <name>parse_directive</name>
+        <qualifiedname>neforce::yaml_parser::parse_directive</qualifiedname>
+        <briefdescription>
+<para>解析YAML指令（YAML 1.2、TAG） </para>
+        </briefdescription>
+        <detaileddescription>
+<para>指令只能出现在文档开始标记之前。 当前实现对 YAML 1.2 验证版本号，对 TAG 跳过处理。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="256" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1af1f5b398ed96289e09dea3a63a05c21d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::yaml_parser::parse_anchor</definition>
+        <argsstring>()</argsstring>
+        <name>parse_anchor</name>
+        <qualifiedname>neforce::yaml_parser::parse_anchor</qualifiedname>
+        <briefdescription>
+<para>解析锚点标记（&amp; 后跟锚点名） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>锚点名字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="262" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1adaf9c6eae5bd3524503bd19768eae53a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::yaml_parser::register_anchor</definition>
+        <argsstring>(const string &amp;anchor, const shared_ptr&lt; yaml_value &gt; &amp;value)</argsstring>
+        <name>register_anchor</name>
+        <qualifiedname>neforce::yaml_parser::register_anchor</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>anchor</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__value" kindref="compound">yaml_value</ref> &gt; &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>将节点注册到锚点表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>anchor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>锚点名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要注册的节点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="269" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1af048e096fed5f7fa2a5c59dcf61647d0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__value" kindref="compound">yaml_value</ref> &gt;</type>
+        <definition>shared_ptr&lt; yaml_value &gt; neforce::yaml_parser::parse_alias</definition>
+        <argsstring>()</argsstring>
+        <name>parse_alias</name>
+        <qualifiedname>neforce::yaml_parser::parse_alias</qualifiedname>
+        <briefdescription>
+<para>解析别名引用（* 后跟锚点名） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>别名引用的目标节点 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1yaml__exception" kindref="compound">yaml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>别名未定义时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="276" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a0ec822074d85dc58513a3b3a3093576e" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::yaml_parser::skip_tag</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>skip_tag</name>
+        <qualifiedname>neforce::yaml_parser::skip_tag</qualifiedname>
+        <briefdescription>
+<para>跳过标签标记（! 标记） </para>
+        </briefdescription>
+        <detaileddescription>
+<para>当不需要标签内容时使用，仅消费标签语法。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="283" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a9959dc1e537c1e9f4f7ccf1fca35026b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::yaml_parser::parse_tag</definition>
+        <argsstring>()</argsstring>
+        <name>parse_tag</name>
+        <qualifiedname>neforce::yaml_parser::parse_tag</qualifiedname>
+        <briefdescription>
+<para>解析标签（!tag、!!type、!&lt;verbatim&gt;、!handle!suffix） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>标签字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="289" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1aa2450828e9188d02ef349fe036fefaab" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::yaml_parser::has_anchor</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>has_anchor</name>
+        <qualifiedname>neforce::yaml_parser::has_anchor</qualifiedname>
+        <briefdescription>
+<para>检查当前位置是否有锚点标记（&amp;） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果当前字符是 &apos;&amp;&apos; 返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="295" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a8ec1004a09726a1c1fe20a58fa502eef" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::yaml_parser::has_alias</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>has_alias</name>
+        <qualifiedname>neforce::yaml_parser::has_alias</qualifiedname>
+        <briefdescription>
+<para>检查当前位置是否有别名标记（*） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果当前字符是 &apos;*&apos; 返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="301" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a06fc53c6be0a31f7b81ea0b9f9c5f1c1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__string" kindref="compound">yaml_string</ref> &gt;</type>
+        <definition>shared_ptr&lt; yaml_string &gt; neforce::yaml_parser::parse_plain_string</definition>
+        <argsstring>()</argsstring>
+        <name>parse_plain_string</name>
+        <qualifiedname>neforce::yaml_parser::parse_plain_string</qualifiedname>
+        <briefdescription>
+<para>解析纯文本字符串（无引号） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析后的字符串值</para>
+</simplesect>
+纯文本字符串不能包含指示符字符，边界由空白或特殊字符决定。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="309" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1afbe766f8004095765df39b5488139725" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__string" kindref="compound">yaml_string</ref> &gt;</type>
+        <definition>shared_ptr&lt; yaml_string &gt; neforce::yaml_parser::parse_single_quoted_string</definition>
+        <argsstring>()</argsstring>
+        <name>parse_single_quoted_string</name>
+        <qualifiedname>neforce::yaml_parser::parse_single_quoted_string</qualifiedname>
+        <briefdescription>
+<para>解析单引号字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析后的字符串值（样式 = SingleQuoted）</para>
+</simplesect>
+单引号字符串中，两个连续单引号 &apos;&apos; 表示一个字面单引号字符。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="317" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1aa324c0c6882e5b04ff2d77c73cc8e035" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__string" kindref="compound">yaml_string</ref> &gt;</type>
+        <definition>shared_ptr&lt; yaml_string &gt; neforce::yaml_parser::parse_double_quoted_string</definition>
+        <argsstring>()</argsstring>
+        <name>parse_double_quoted_string</name>
+        <qualifiedname>neforce::yaml_parser::parse_double_quoted_string</qualifiedname>
+        <briefdescription>
+<para>解析双引号字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析后的字符串值（样式 = DoubleQuoted）</para>
+</simplesect>
+双引号字符串支持完整的转义序列（\n、\t、\uXXXX、\UXXXXXXXX 等）。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="325" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1ab2e3d46319f556359cfd5d51fe188c19" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__string" kindref="compound">yaml_string</ref> &gt;</type>
+        <definition>shared_ptr&lt; yaml_string &gt; neforce::yaml_parser::parse_literal_string</definition>
+        <argsstring>()</argsstring>
+        <name>parse_literal_string</name>
+        <qualifiedname>neforce::yaml_parser::parse_literal_string</qualifiedname>
+        <briefdescription>
+<para>解析字面量块字符串（| 指示符） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析后的字符串值（样式 = Literal）</para>
+</simplesect>
+字面量块保留所有换行符，不进行折叠。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="333" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a7fb75f3a947fb067d24c592f7d165e05" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__string" kindref="compound">yaml_string</ref> &gt;</type>
+        <definition>shared_ptr&lt; yaml_string &gt; neforce::yaml_parser::parse_folded_string</definition>
+        <argsstring>()</argsstring>
+        <name>parse_folded_string</name>
+        <qualifiedname>neforce::yaml_parser::parse_folded_string</qualifiedname>
+        <briefdescription>
+<para>解析折叠块字符串（&gt; 指示符） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析后的字符串值（样式 = Folded）</para>
+</simplesect>
+折叠块将换行符替换为空格，但保留段落之间的空行。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="341" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a81f62f73b4fb468a645d1314052404ef" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::yaml_parser::parse_multiline_string</definition>
+        <argsstring>(bool is_literal)</argsstring>
+        <name>parse_multiline_string</name>
+        <qualifiedname>neforce::yaml_parser::parse_multiline_string</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>is_literal</declname>
+        </param>
+        <briefdescription>
+<para>解析多行字符串的通用实现 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>is_literal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>true为字面量样式(|)，false为折叠样式(&gt;) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解析后的字符串内容</para>
+</simplesect>
+处理块标量的缩进检测、吞食指示符(+/-)和内容提取。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="350" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1ac930d033b92ca09c6c1701d1ebcd4382" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__value" kindref="compound">yaml_value</ref> &gt;</type>
+        <definition>shared_ptr&lt; yaml_value &gt; neforce::yaml_parser::parse_scalar</definition>
+        <argsstring>()</argsstring>
+        <name>parse_scalar</name>
+        <qualifiedname>neforce::yaml_parser::parse_scalar</qualifiedname>
+        <briefdescription>
+<para>解析标量值（自动类型检测） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析后的YAML值</para>
+</simplesect>
+根据内容自动检测并解析为以下类型之一：<itemizedlist>
+<listitem><para>Null：null、~ 等</para>
+</listitem><listitem><para>Boolean：true/false 等</para>
+</listitem><listitem><para>Integer：42、0x2A 等</para>
+</listitem><listitem><para>Float：3.14、.inf 等</para>
+</listitem><listitem><para>Timestamp：2024-01-15T10:30:00Z 等</para>
+</listitem><listitem><para>String：无法匹配以上类型时作为纯文本字符串 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="364" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a4537cbc33dd2338f1920ca2cf66c8418" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__value" kindref="compound">yaml_value</ref> &gt;</type>
+        <definition>shared_ptr&lt; yaml_value &gt; neforce::yaml_parser::parse_number</definition>
+        <argsstring>()</argsstring>
+        <name>parse_number</name>
+        <qualifiedname>neforce::yaml_parser::parse_number</qualifiedname>
+        <briefdescription>
+<para>解析数字（整数或浮点数） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析后的整数值或浮点数值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="370" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a5549e6aff3b1aa38dbe34dcf3e57e2a1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__boolean" kindref="compound">yaml_boolean</ref> &gt;</type>
+        <definition>shared_ptr&lt; yaml_boolean &gt; neforce::yaml_parser::parse_boolean</definition>
+        <argsstring>()</argsstring>
+        <name>parse_boolean</name>
+        <qualifiedname>neforce::yaml_parser::parse_boolean</qualifiedname>
+        <briefdescription>
+<para>解析布尔值（true/false/yes/no/on/off 及其变体） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析后的布尔值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="376" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a106706cff59e7a0248bcb99705c21f00" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__null" kindref="compound">yaml_null</ref> &gt;</type>
+        <definition>shared_ptr&lt; yaml_null &gt; neforce::yaml_parser::parse_null</definition>
+        <argsstring>()</argsstring>
+        <name>parse_null</name>
+        <qualifiedname>neforce::yaml_parser::parse_null</qualifiedname>
+        <briefdescription>
+<para>解析空值（null/Null/NULL/~） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析后的空值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="382" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1ad1c2b3e4e107d256300ed6db405a1513" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__timestamp" kindref="compound">yaml_timestamp</ref> &gt;</type>
+        <definition>shared_ptr&lt; yaml_timestamp &gt; neforce::yaml_parser::parse_timestamp</definition>
+        <argsstring>(string_view str) const</argsstring>
+        <name>parse_timestamp</name>
+        <qualifiedname>neforce::yaml_parser::parse_timestamp</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>将字符串解析为时间戳 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ISO 8601 / RFC 3339 格式的时间戳字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解析后的时间戳值 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1yaml__exception" kindref="compound">yaml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式无效时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="390" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a3de6d6d8d403bd87f6ac8a236e4800b8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__sequence" kindref="compound">yaml_sequence</ref> &gt;</type>
+        <definition>shared_ptr&lt; yaml_sequence &gt; neforce::yaml_parser::parse_flow_sequence</definition>
+        <argsstring>()</argsstring>
+        <name>parse_flow_sequence</name>
+        <qualifiedname>neforce::yaml_parser::parse_flow_sequence</qualifiedname>
+        <briefdescription>
+<para>解析流样式序列（[item1, item2, ...]） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析后的序列值（样式 = Flow） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="396" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a95192e5421f800f8737adb92a68fc94b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__mapping" kindref="compound">yaml_mapping</ref> &gt;</type>
+        <definition>shared_ptr&lt; yaml_mapping &gt; neforce::yaml_parser::parse_flow_mapping</definition>
+        <argsstring>()</argsstring>
+        <name>parse_flow_mapping</name>
+        <qualifiedname>neforce::yaml_parser::parse_flow_mapping</qualifiedname>
+        <briefdescription>
+<para>解析流样式映射（{key: value, ...}） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析后的映射值（样式 = Flow） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="402" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a6a50be8018b5e5969c39bb9c810357bd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__sequence" kindref="compound">yaml_sequence</ref> &gt;</type>
+        <definition>shared_ptr&lt; yaml_sequence &gt; neforce::yaml_parser::parse_block_sequence</definition>
+        <argsstring>()</argsstring>
+        <name>parse_block_sequence</name>
+        <qualifiedname>neforce::yaml_parser::parse_block_sequence</qualifiedname>
+        <briefdescription>
+<para>解析块样式序列（- item 格式） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析后的序列值（样式 = Block）</para>
+</simplesect>
+处理缩进感知的块序列，支持嵌套映射和子序列。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="410" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a0316cd5a14b28a1c9048e0afb90d3c82" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__mapping" kindref="compound">yaml_mapping</ref> &gt;</type>
+        <definition>shared_ptr&lt; yaml_mapping &gt; neforce::yaml_parser::parse_block_mapping</definition>
+        <argsstring>(bool parent_skipped_indent)</argsstring>
+        <name>parse_block_mapping</name>
+        <qualifiedname>neforce::yaml_parser::parse_block_mapping</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>parent_skipped_indent</declname>
+        </param>
+        <briefdescription>
+<para>解析块样式映射（key: value 格式） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>parent_skipped_indent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>父级是否已跳过缩进 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解析后的映射值（样式 = Block）</para>
+</simplesect>
+处理缩进感知的块映射，支持复杂键（? 指示符）、 锚点和标签，以及嵌套的序列和子映射。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="420" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a75e8935e66c61050edb3e4798127d1d4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::yaml_parser::parse_key</definition>
+        <argsstring>()</argsstring>
+        <name>parse_key</name>
+        <qualifiedname>neforce::yaml_parser::parse_key</qualifiedname>
+        <briefdescription>
+<para>解析映射键名（自动检测纯文本或引号样式） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析后的键名字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="426" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a5559585958b99ffc1282b828155a8bf7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::yaml_parser::parse_plain_key</definition>
+        <argsstring>()</argsstring>
+        <name>parse_plain_key</name>
+        <qualifiedname>neforce::yaml_parser::parse_plain_key</qualifiedname>
+        <briefdescription>
+<para>解析纯文本键名（无引号） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>键名字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="432" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1ac6fdd349b1aa20878bd26f8ea8d02b99" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::yaml_parser::parse_quoted_key</definition>
+        <argsstring>()</argsstring>
+        <name>parse_quoted_key</name>
+        <qualifiedname>neforce::yaml_parser::parse_quoted_key</qualifiedname>
+        <briefdescription>
+<para>解析引号键名（单引号或双引号） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>键名字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="438" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1ac60fd7aa1a7a4a35fdcf2748887cb5a5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__value" kindref="compound">yaml_value</ref> &gt;</type>
+        <definition>shared_ptr&lt; yaml_value &gt; neforce::yaml_parser::parse_value</definition>
+        <argsstring>()</argsstring>
+        <name>parse_value</name>
+        <qualifiedname>neforce::yaml_parser::parse_value</qualifiedname>
+        <briefdescription>
+<para>解析任意YAML值（顶层调度器） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析后的YAML值</para>
+</simplesect>
+根据当前字符判断值的类型并分派到对应的解析方法。 处理锚点、标签、别名和复杂键。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="447" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1afd15dfccae2f434c040d0bc5f2416d6e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__value" kindref="compound">yaml_value</ref> &gt;</type>
+        <definition>shared_ptr&lt; yaml_value &gt; neforce::yaml_parser::parse_block_value</definition>
+        <argsstring>()</argsstring>
+        <name>parse_block_value</name>
+        <qualifiedname>neforce::yaml_parser::parse_block_value</qualifiedname>
+        <briefdescription>
+<para>解析块上下文中的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析后的YAML值</para>
+</simplesect>
+用于块样式映射的值位置，处理跨行值和复杂键。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="455" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1aacc3ba8dcc8ea56f71e16f14aacab89b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__value" kindref="compound">yaml_value</ref> &gt;</type>
+        <definition>shared_ptr&lt; yaml_value &gt; neforce::yaml_parser::parse_inline_value</definition>
+        <argsstring>()</argsstring>
+        <name>parse_inline_value</name>
+        <qualifiedname>neforce::yaml_parser::parse_inline_value</qualifiedname>
+        <briefdescription>
+<para>解析行内值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析后的YAML值</para>
+</simplesect>
+用于流样式和内联上下文，不处理跨行情况。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="463" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a4d8974c0f30eb485967b7212496d3c2c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__value" kindref="compound">yaml_value</ref> &gt;</type>
+        <definition>shared_ptr&lt; yaml_value &gt; neforce::yaml_parser::parse_single_document</definition>
+        <argsstring>()</argsstring>
+        <name>parse_single_document</name>
+        <qualifiedname>neforce::yaml_parser::parse_single_document</qualifiedname>
+        <briefdescription>
+<para>解析单个YAML文档 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>文档的根节点</para>
+</simplesect>
+处理文档开始标记(<mdash/>)、指令、注释和文档结束标记(...)。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="471" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1ab6ad95b4b06b33ab473fd1621145537b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::yaml_parser::parse_document_start</definition>
+        <argsstring>()</argsstring>
+        <name>parse_document_start</name>
+        <qualifiedname>neforce::yaml_parser::parse_document_start</qualifiedname>
+        <briefdescription>
+<para>解析文档开始标记（<mdash/>） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="476" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a198fece85018c4cd3ec6e4e6d0faea24" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::yaml_parser::parse_document_end</definition>
+        <argsstring>()</argsstring>
+        <name>parse_document_end</name>
+        <qualifiedname>neforce::yaml_parser::parse_document_end</qualifiedname>
+        <briefdescription>
+<para>解析文档结束标记（...） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="481" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1afb5d920ee4d4dfce277458ab709509ef" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::yaml_parser::is_document_start</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_document_start</name>
+        <qualifiedname>neforce::yaml_parser::is_document_start</qualifiedname>
+        <briefdescription>
+<para>检查当前位置是否为文档开始标记 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果是 <mdash/> 返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="487" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a9ca41a071414bb6f3c8ef04437a881d6" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::yaml_parser::is_document_end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_document_end</name>
+        <qualifiedname>neforce::yaml_parser::is_document_end</qualifiedname>
+        <briefdescription>
+<para>检查当前位置是否为文档结束标记 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果是 ... 返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="493" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1ac2aca1c4ad2aa77adea11f294fac8eb9" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::yaml_parser::is_plain_safe</definition>
+        <argsstring>(char ch) const noexcept</argsstring>
+        <name>is_plain_safe</name>
+        <qualifiedname>neforce::yaml_parser::is_plain_safe</qualifiedname>
+        <param>
+          <type>char</type>
+          <declname>ch</declname>
+        </param>
+        <briefdescription>
+<para>判断字符是否可作为纯文本内容 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待检查的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果是安全字符返回 true</para>
+</simplesect>
+纯文本字符串不能包含指示符（如 :、#、[、] 等）或流指示符。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="502" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a229948ed2d0635652d6c2def295536a7" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::yaml_parser::is_key_char</definition>
+        <argsstring>(char ch) const noexcept</argsstring>
+        <name>is_key_char</name>
+        <qualifiedname>neforce::yaml_parser::is_key_char</qualifiedname>
+        <param>
+          <type>char</type>
+          <declname>ch</declname>
+        </param>
+        <briefdescription>
+<para>判断字符是否可用于键名 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待检查的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果是有效的键名字符返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="509" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a1022d0702b914ec2822145c2bd419d24" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::yaml_parser::is_flow_indicator</definition>
+        <argsstring>(char ch) const noexcept</argsstring>
+        <name>is_flow_indicator</name>
+        <qualifiedname>neforce::yaml_parser::is_flow_indicator</qualifiedname>
+        <param>
+          <type>char</type>
+          <declname>ch</declname>
+        </param>
+        <briefdescription>
+<para>判断字符是否为YAML指示符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待检查的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果是指示符返回 true</para>
+</simplesect>
+指示符包括：-、?、:、,、[、]、{、}、#、&amp;、*、!、|、&gt;、&apos;、"、、@、` */ [[nodiscard]] bool is_indicator(char ch) const noexcept;</para>
+<para>/**</para>
+<para>判断字符是否为流样式指示符 <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待检查的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果是流指示符返回 true</para>
+</simplesect>
+流指示符包括：[、]、{、}、, </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="527" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a3601f36d8e94281a4f13e5282e33e555" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1codepoint" kindref="compound">codepoint</ref></type>
+        <definition>codepoint neforce::yaml_parser::parse_unicode_escape</definition>
+        <argsstring>(size_t digits)</argsstring>
+        <name>parse_unicode_escape</name>
+        <qualifiedname>neforce::yaml_parser::parse_unicode_escape</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>digits</declname>
+        </param>
+        <briefdescription>
+<para>解析Unicode转义序列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>digits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>十六进制数字位数（4用于\u，8用于\U） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>对应的Unicode码点 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1yaml__exception" kindref="compound">yaml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>转义序列无效时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="535" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1ac7ef3f5689f4b5a71bec743e3d08c6c7" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::yaml_parser::unescape_string</definition>
+        <argsstring>(const string &amp;str) const</argsstring>
+        <name>unescape_string</name>
+        <qualifiedname>neforce::yaml_parser::unescape_string</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>反转义字符串中的转义序列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>包含转义序列的原始字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>反转义后的字符串</para>
+</simplesect>
+处理 \\、\"、\n、\t、\r、\b、\f、\/、\uXXXX、\UXXXXXXXX 等转义序列。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="544" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a1574ffa31e825d339b084cad3650f025" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::yaml_parser::throw_parse_error</definition>
+        <argsstring>(const string &amp;message) const</argsstring>
+        <name>throw_parse_error</name>
+        <qualifiedname>neforce::yaml_parser::throw_parse_error</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>message</declname>
+        </param>
+        <briefdescription>
+<para>抛出带位置信息的解析错误 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>message</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>错误描述信息</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+格式：Parse error at line X, column Y: message 此函数标记为 NEFORCE_NORETURN，调用后不会返回。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="553" column="11"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a7d8af689bfd781ea9427cee28502cfbb" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::yaml_parser::yaml_parser</definition>
+        <argsstring>(string yaml_str)</argsstring>
+        <name>yaml_parser</name>
+        <qualifiedname>neforce::yaml_parser::yaml_parser</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>yaml_str</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>yaml_str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待解析的YAML字符串（将被移动）</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+构造后立即可以调用 <ref refid="classneforce_1_1yaml__parser_1ad9b4e4ff4cedcc20a49dd71cfc0f5a97" kindref="member">parse()</ref> 或 <ref refid="classneforce_1_1yaml__parser_1a104b53d61118c810c0f6af399111fbcc" kindref="member">try_parse()</ref> 进行解析。</para>
+<para><simplesect kind="note"><para>解析器获取字符串的所有权，原字符串将被清空。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="564" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" bodystart="564" bodyend="566"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="group___type_erasure_functions_1ga69955a26617401117eaf53fa82162e2b" compoundref="type__erase_8hpp" startline="292" endline="294">neforce::size</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1ad9b4e4ff4cedcc20a49dd71cfc0f5a97" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__value" kindref="compound">yaml_value</ref> &gt;</type>
+        <definition>shared_ptr&lt; yaml_value &gt; neforce::yaml_parser::parse</definition>
+        <argsstring>()</argsstring>
+        <name>parse</name>
+        <qualifiedname>neforce::yaml_parser::parse</qualifiedname>
+        <briefdescription>
+<para>解析YAML文档 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析结果的根节点（yaml_value树） </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1yaml__exception" kindref="compound">yaml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>解析失败时抛出，包含行号和列号信息</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+解析单个YAML文档。如果输入包含多个文档（由 <mdash/> 分隔）， 仅返回第一个文档。使用 <ref refid="classneforce_1_1yaml__parser_1a2513c09d782e0f203382f1fa860e8963" kindref="member">parse_documents()</ref> 解析所有文档。</para>
+<para><simplesect kind="note"><para>每次调用重新解析整个输入。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="578" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a104b53d61118c810c0f6af399111fbcc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; <ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__value" kindref="compound">yaml_value</ref> &gt; &gt;</type>
+        <definition>optional&lt; shared_ptr&lt; yaml_value &gt; &gt; neforce::yaml_parser::try_parse</definition>
+        <argsstring>()</argsstring>
+        <name>try_parse</name>
+        <qualifiedname>neforce::yaml_parser::try_parse</qualifiedname>
+        <briefdescription>
+<para>尝试解析YAML文档（不抛出异常） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>成功时返回包含根节点的 optional，失败时返回空 optional</para>
+</simplesect>
+与 <ref refid="classneforce_1_1yaml__parser_1ad9b4e4ff4cedcc20a49dd71cfc0f5a97" kindref="member">parse()</ref> 功能相同，但解析失败时不抛出异常， 而是返回一个空的 optional 对象。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="587" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a2513c09d782e0f203382f1fa860e8963" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__value" kindref="compound">yaml_value</ref> &gt; &gt;</type>
+        <definition>vector&lt; shared_ptr&lt; yaml_value &gt; &gt; neforce::yaml_parser::parse_documents</definition>
+        <argsstring>()</argsstring>
+        <name>parse_documents</name>
+        <qualifiedname>neforce::yaml_parser::parse_documents</qualifiedname>
+        <briefdescription>
+<para>解析多个YAML文档 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>所有文档的根节点列表 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1yaml__exception" kindref="compound">yaml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>解析失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+解析由 <mdash/> 分隔的多个YAML文档。如果只有单个文档， 返回包含一个元素的vector。</para>
+<para><simplesect kind="see"><para><ref refid="classneforce_1_1yaml__parser_1ad9b4e4ff4cedcc20a49dd71cfc0f5a97" kindref="member">parse()</ref> 单文档解析 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="599" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__parser_1a6c5b2431addc7ff4e826dd928b1a91d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1yaml__value" kindref="compound">yaml_value</ref> &gt; &gt; &gt;</type>
+        <definition>optional&lt; vector&lt; shared_ptr&lt; yaml_value &gt; &gt; &gt; neforce::yaml_parser::try_parse_documents</definition>
+        <argsstring>()</argsstring>
+        <name>try_parse_documents</name>
+        <qualifiedname>neforce::yaml_parser::try_parse_documents</qualifiedname>
+        <briefdescription>
+<para>尝试解析多个YAML文档（不抛出异常） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>成功时返回文档列表，失败时返回空 optional</para>
+</simplesect>
+与 <ref refid="classneforce_1_1yaml__parser_1a2513c09d782e0f203382f1fa860e8963" kindref="member">parse_documents()</ref> 功能相同，但解析失败时不抛出异常。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="607" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>YAML 1.2 递归下降解析器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供完整的YAML 1.2格式解析功能，将YAML文本转换为类型化值树（yaml_value层次结构）。</para>
+<sect1 id="classneforce_1_1yaml__parser_1parser_architecture">
+<title>解析器架构</title><para>本解析器采用**递归下降**（Recursive Descent）算法，通过以下核心机制实现 对YAML 1.2完整语法的解析：</para>
+<para><table rows="6" cols="2"><row>
+<entry thead="yes"><para>机制  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>递归下降  </para>
+</entry><entry thead="no"><para>每个语法结构对应一个解析方法，相互递归调用  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>缩进感知  </para>
+</entry><entry thead="no"><para>通过 indent_stack_ 追踪嵌套层级  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>流上下文标志  </para>
+</entry><entry thead="no"><para>in_flow_context_ 标志区分流样式与块样式  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>锚点注册表  </para>
+</entry><entry thead="no"><para>anchors_ 哈希表存储锚点引用，支持别名解析  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>位置追踪  </para>
+</entry><entry thead="no"><para>line_ / column_ 计数器支持精确定位错误  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="classneforce_1_1yaml__parser_1parser_features">
+<title>支持的YAML 1.2特性</title><para><table rows="16" cols="3"><row>
+<entry thead="yes"><para>特性  </para>
+</entry><entry thead="yes"><para>YAML 1.2 引用  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>空值（Null）  </para>
+</entry><entry thead="no"><para>§10.2  </para>
+</entry><entry thead="no"><para>null、Null、NULL、~  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>布尔值（Boolean）  </para>
+</entry><entry thead="no"><para>§10.3  </para>
+</entry><entry thead="no"><para>true/false 及所有同义词（yes/no、on/off等）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>整数（Integer）  </para>
+</entry><entry thead="no"><para>§10.4.1  </para>
+</entry><entry thead="no"><para>十进制/十六进制(0x)/八进制(0o)/二进制(0b)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>浮点数（Float）  </para>
+</entry><entry thead="no"><para>§10.4.1  </para>
+</entry><entry thead="no"><para>含 .inf、-.inf、.nan 特殊值  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>字符串（String）  </para>
+</entry><entry thead="no"><para>§10.5  </para>
+</entry><entry thead="no"><para>五种样式：Plain、SingleQuoted、DoubleQuoted、Literal、Folded  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>时间戳（Timestamp）  </para>
+</entry><entry thead="no"><para>§10.4.2  </para>
+</entry><entry thead="no"><para>ISO 8601 / RFC 3339 格式  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>序列（Sequence）  </para>
+</entry><entry thead="no"><para>§10.1.1  </para>
+</entry><entry thead="no"><para>块样式（- item）和流样式（[item, ...]）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>映射（Mapping）  </para>
+</entry><entry thead="no"><para>§10.1.2  </para>
+</entry><entry thead="no"><para>块样式（key: value）和流样式（{key: value}）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>锚点与别名  </para>
+</entry><entry thead="no"><para>§3.2.2  </para>
+</entry><entry thead="no"><para>&amp;anchor 和 *alias  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>标签（Tag）  </para>
+</entry><entry thead="no"><para>§3.2.3  </para>
+</entry><entry thead="no"><para>!tag、!!type、!&lt;verbatim&gt;、!handle!suffix  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>复杂键（Complex Key）  </para>
+</entry><entry thead="no"><para>§3.2.1  </para>
+</entry><entry thead="no"><para>? 指示符，键可以是任意YAML节点  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>多文档  </para>
+</entry><entry thead="no"><para>§9.2  </para>
+</entry><entry thead="no"><para><mdash/> 文档分隔符，... 文档结束符  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>指令（Directive）  </para>
+</entry><entry thead="no"><para>§9.1  </para>
+</entry><entry thead="no"><para>YAML 1.2、TAG  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>注释  </para>
+</entry><entry thead="no"><para>§6.8  </para>
+</entry><entry thead="no"><para># 行注释  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>块标量吞食指示符  </para>
+</entry><entry thead="no"><para>§8.2  </para>
+</entry><entry thead="no"><para>保留(+)、剥离(-)换行符  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="classneforce_1_1yaml__parser_1parser_usage">
+<title>使用示例</title><para>基本解析（单文档）： <programlisting><codeline><highlight class="normal"><ref refid="classneforce_1_1yaml__parser_1a7d8af689bfd781ea9427cee28502cfbb" kindref="member">yaml_parser</ref><sp/>parser(</highlight><highlight class="stringliteral">&quot;key:<sp/>value\nlist:<sp/>[1,<sp/>2,<sp/>3]&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>root<sp/>=<sp/>parser.parse();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>map<sp/>=<sp/>root-&gt;as_mapping())<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>val<sp/>=<sp/>map-&gt;get_member(</highlight><highlight class="stringliteral">&quot;key&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para>带错误处理的解析： <programlisting><codeline><highlight class="normal"><ref refid="classneforce_1_1yaml__parser_1a7d8af689bfd781ea9427cee28502cfbb" kindref="member">yaml_parser</ref><sp/>parser(yaml_content);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>parser.try_parse();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(result.has_value())<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>解析成功，使用<sp/>result.value()</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>解析失败</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para>多文档解析： <programlisting><codeline><highlight class="normal"><ref refid="classneforce_1_1yaml__parser_1a7d8af689bfd781ea9427cee28502cfbb" kindref="member">yaml_parser</ref><sp/>parser(</highlight><highlight class="stringliteral">&quot;---\ndoc1:<sp/>value\n---\ndoc2:<sp/>value\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>docs<sp/>=<sp/>parser.parse_documents();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>doc<sp/>:<sp/>docs)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>处理每个文档</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="classneforce_1_1yaml__parser_1parser_implementation">
+<title>实现细节</title><para><table rows="7" cols="2"><row>
+<entry thead="yes"><para>特性  </para>
+</entry><entry thead="yes"><para>规范参数  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>编码  </para>
+</entry><entry thead="no"><para>UTF-8（YAML 1.2 §5.1）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>整数范围  </para>
+</entry><entry thead="no"><para>-2^63 到 2^63-1（YAML 1.2 §10.4.1）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>浮点数精度  </para>
+</entry><entry thead="no"><para>IEEE 754-2019 双精度（YAML 1.2 §10.4.1）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>映射键唯一性  </para>
+</entry><entry thead="no"><para>YAML 1.2 §3.2.1（重复键不报错但行为未定义）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>缩进要求  </para>
+</entry><entry thead="no"><para>仅空格（YAML 1.2 §6.1），制表符不用于缩进  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>最大缩进深度  </para>
+</entry><entry thead="no"><para>受栈大小限制（递归下降）  </para>
+</entry></row>
+</table>
+</para>
+<para><simplesect kind="warning"><para>根据 YAML 1.2 §6.1，制表符（tab）不应用于缩进。 </para>
+</simplesect>
+<simplesect kind="warning"><para>流样式中的重复键名行为未定义，应避免使用。 </para>
+</simplesect>
+<simplesect kind="warning"><para>解析器不验证映射中的键名唯一性（遵循YAML 1.2规范）。</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://yaml.org/">https://yaml.org/</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://yaml.org/spec/1.2.2/">https://yaml.org/spec/1.2.2/</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classneforce_1_1yaml__value" kindref="compound">yaml_value</ref> 解析结果的数据结构 </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classneforce_1_1yaml__builder" kindref="compound">yaml_builder</ref> YAML构建器 </para>
+</simplesect>
+</para>
+</sect1>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="116" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" bodystart="116" bodyend="608"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1yaml__parser_1afdd509c98faf0429f3445dc828832981" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>advance</name></member>
+      <member refid="classneforce_1_1yaml__parser_1ac8292ad270ed17eaabecfcf23b8f4323" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>anchors_</name></member>
+      <member refid="classneforce_1_1yaml__parser_1ab00d6b5897a450e0c586ef7fb7820fbe" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>column_</name></member>
+      <member refid="classneforce_1_1yaml__parser_1aa3c0a37a9baf42987d25aeebc7b42de0" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>current</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a912049445dd5e0a79034345f4cd44fc3" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>current_indent_</name></member>
+      <member refid="classneforce_1_1yaml__parser_1ad3876bd2f9831c7fcbad960ca05a0b63" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>eof</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a9dcba2e1c53a9b441b33b4308f780065" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>expect</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a6cfed9ea6dbeed654b88582b5d81d086" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>handle_indent_change</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a8ec1004a09726a1c1fe20a58fa502eef" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>has_alias</name></member>
+      <member refid="classneforce_1_1yaml__parser_1aa2450828e9188d02ef349fe036fefaab" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>has_anchor</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a30ccbc994293f0d15286ab94244a1667" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>in_flow_context_</name></member>
+      <member refid="classneforce_1_1yaml__parser_1ac33212e19f7847d7f2d7c07ebf03bcdf" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>indent_stack_</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a9ca41a071414bb6f3c8ef04437a881d6" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>is_document_end</name></member>
+      <member refid="classneforce_1_1yaml__parser_1afb5d920ee4d4dfce277458ab709509ef" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>is_document_start</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a1022d0702b914ec2822145c2bd419d24" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>is_flow_indicator</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a229948ed2d0635652d6c2def295536a7" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>is_key_char</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a6f7fa47e799b2ce82d9eeca109e5163c" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>is_newline</name></member>
+      <member refid="classneforce_1_1yaml__parser_1ac2aca1c4ad2aa77adea11f294fac8eb9" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>is_plain_safe</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a6f8d5d4cbf9c8e8e89ef2929b79eb8ad" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>is_whitespace</name></member>
+      <member refid="classneforce_1_1yaml__parser_1ae7b9e42da2dd3cb39b9f8d702d4f18f1" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>len_</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a3423df54eb4bd1ed39561bcfc399d5a8" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>line_</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a70dc6433cc91c12f741a2a5a089344c8" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>match</name></member>
+      <member refid="classneforce_1_1yaml__parser_1ad9b4e4ff4cedcc20a49dd71cfc0f5a97" prot="public" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse</name></member>
+      <member refid="classneforce_1_1yaml__parser_1af048e096fed5f7fa2a5c59dcf61647d0" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_alias</name></member>
+      <member refid="classneforce_1_1yaml__parser_1af1f5b398ed96289e09dea3a63a05c21d" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_anchor</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a0316cd5a14b28a1c9048e0afb90d3c82" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_block_mapping</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a6a50be8018b5e5969c39bb9c810357bd" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_block_sequence</name></member>
+      <member refid="classneforce_1_1yaml__parser_1afd15dfccae2f434c040d0bc5f2416d6e" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_block_value</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a5549e6aff3b1aa38dbe34dcf3e57e2a1" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_boolean</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a608b762f5756304812db1f25f542ed67" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_directive</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a198fece85018c4cd3ec6e4e6d0faea24" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_document_end</name></member>
+      <member refid="classneforce_1_1yaml__parser_1ab6ad95b4b06b33ab473fd1621145537b" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_document_start</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a2513c09d782e0f203382f1fa860e8963" prot="public" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_documents</name></member>
+      <member refid="classneforce_1_1yaml__parser_1aa324c0c6882e5b04ff2d77c73cc8e035" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_double_quoted_string</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a95192e5421f800f8737adb92a68fc94b" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_flow_mapping</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a3de6d6d8d403bd87f6ac8a236e4800b8" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_flow_sequence</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a7fb75f3a947fb067d24c592f7d165e05" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_folded_string</name></member>
+      <member refid="classneforce_1_1yaml__parser_1aacc3ba8dcc8ea56f71e16f14aacab89b" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_inline_value</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a75e8935e66c61050edb3e4798127d1d4" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_key</name></member>
+      <member refid="classneforce_1_1yaml__parser_1ab2e3d46319f556359cfd5d51fe188c19" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_literal_string</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a81f62f73b4fb468a645d1314052404ef" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_multiline_string</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a106706cff59e7a0248bcb99705c21f00" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_null</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a4537cbc33dd2338f1920ca2cf66c8418" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_number</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a5559585958b99ffc1282b828155a8bf7" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_plain_key</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a06fc53c6be0a31f7b81ea0b9f9c5f1c1" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_plain_string</name></member>
+      <member refid="classneforce_1_1yaml__parser_1ac6fdd349b1aa20878bd26f8ea8d02b99" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_quoted_key</name></member>
+      <member refid="classneforce_1_1yaml__parser_1ac930d033b92ca09c6c1701d1ebcd4382" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_scalar</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a4d8974c0f30eb485967b7212496d3c2c" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_single_document</name></member>
+      <member refid="classneforce_1_1yaml__parser_1afbe766f8004095765df39b5488139725" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_single_quoted_string</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a9959dc1e537c1e9f4f7ccf1fca35026b" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_tag</name></member>
+      <member refid="classneforce_1_1yaml__parser_1ad1c2b3e4e107d256300ed6db405a1513" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_timestamp</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a3601f36d8e94281a4f13e5282e33e555" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_unicode_escape</name></member>
+      <member refid="classneforce_1_1yaml__parser_1ac60fd7aa1a7a4a35fdcf2748887cb5a5" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>parse_value</name></member>
+      <member refid="classneforce_1_1yaml__parser_1abf2777f774fc4fd7f9dd42b76b713aa8" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>peek</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a019d6f2c17fa813a466d4723bc378a86" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>peek_indent</name></member>
+      <member refid="classneforce_1_1yaml__parser_1aa36925c807cfce1c764d37ec018e2c89" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>pos_</name></member>
+      <member refid="classneforce_1_1yaml__parser_1adaf9c6eae5bd3524503bd19768eae53a" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>register_anchor</name></member>
+      <member refid="classneforce_1_1yaml__parser_1ac218bed6952d492f3afb1acba9e8b209" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>root_</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a25e94c8ebc4729ba38c617abdb72adfc" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>skip_blank_lines</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a2cf666440b8c5e0962c858d9c0ce7297" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>skip_comment</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a5f03f6c4ae73b750d73cc520a0c1bc0a" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>skip_indent</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a0ec822074d85dc58513a3b3a3093576e" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>skip_tag</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a9ba818602c288a2a31c42f5b0dfdfb00" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>skip_to_next_line</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a0b50de4c7dee5f3394d31f41e175d022" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>skip_whitespace_and_comments</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a7e6de7a0f604efd7f6f59600a0e696b4" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>skip_whitespace_inline</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a1574ffa31e825d339b084cad3650f025" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>throw_parse_error</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a104b53d61118c810c0f6af399111fbcc" prot="public" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>try_parse</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a6c5b2431addc7ff4e826dd928b1a91d2" prot="public" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>try_parse_documents</name></member>
+      <member refid="classneforce_1_1yaml__parser_1ac7ef3f5689f4b5a71bec743e3d08c6c7" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>unescape_string</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a5327e697200bd40b81ecf17d328a0929" prot="private" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>yaml_</name></member>
+      <member refid="classneforce_1_1yaml__parser_1a7d8af689bfd781ea9427cee28502cfbb" prot="public" virt="non-virtual"><scope>neforce::yaml_parser</scope><name>yaml_parser</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -50,8 +50,8 @@
         <link refid="version_8hpp_source"/>
       </node>
       <node id="23">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
@@ -138,6 +138,8 @@
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
         <childnode refid="31" relation="include">
         </childnode>
       </node>
@@ -148,10 +150,20 @@
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
       </node>
-      <node id="31">
+      <node id="32">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>NeForce/core/string/charset.hpp</label>
+        <link refid="charset_8hpp"/>
+        <childnode refid="32" relation="include">
+        </childnode>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
@@ -315,10 +327,6 @@
         </childnode>
         <childnode refid="19" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
         <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="23" relation="include">
@@ -326,6 +334,8 @@
         <childnode refid="24" relation="include">
         </childnode>
         <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
         </childnode>
         <childnode refid="26" relation="include">
         </childnode>
@@ -337,6 +347,10 @@
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
       </node>
       <node id="17">
         <label>containers.hpp</label>
@@ -346,47 +360,47 @@
         <label>dropdown.hpp</label>
         <link refid="dropdown_8hpp"/>
       </node>
-      <node id="19">
+      <node id="22">
         <label>hoverable.hpp</label>
         <link refid="hoverable_8hpp"/>
       </node>
-      <node id="20">
+      <node id="23">
         <label>menu.hpp</label>
         <link refid="menu_8hpp"/>
       </node>
-      <node id="21">
+      <node id="24">
         <label>modal.hpp</label>
         <link refid="modal_8hpp"/>
       </node>
-      <node id="22">
+      <node id="25">
         <label>radiobox.hpp</label>
         <link refid="radiobox_8hpp"/>
       </node>
-      <node id="24">
+      <node id="26">
         <label>renderer.hpp</label>
-        <link refid="renderer_8hpp"/>
+        <link refid="component_2renderer_8hpp"/>
       </node>
-      <node id="25">
+      <node id="27">
         <label>resizable_split.hpp</label>
         <link refid="resizable__split_8hpp"/>
       </node>
-      <node id="26">
+      <node id="28">
         <label>scroll_view.hpp</label>
         <link refid="scroll__view_8hpp"/>
       </node>
-      <node id="27">
+      <node id="29">
         <label>slider.hpp</label>
         <link refid="slider_8hpp"/>
       </node>
-      <node id="28">
+      <node id="30">
         <label>text_input.hpp</label>
         <link refid="text__input_8hpp"/>
       </node>
-      <node id="29">
+      <node id="31">
         <label>toggle.hpp</label>
         <link refid="toggle_8hpp"/>
       </node>
-      <node id="30">
+      <node id="32">
         <label>window.hpp</label>
         <link refid="window_8hpp"/>
       </node>
@@ -396,32 +410,38 @@
         <childnode refid="15" relation="include">
         </childnode>
       </node>
-      <node id="23">
+      <node id="20">
+        <label>event_dispatcher.hpp</label>
+        <link refid="event__dispatcher_8hpp"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>focus_manager.hpp</label>
+        <link refid="focus__manager_8hpp"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
         <label>reconciler.hpp</label>
         <link refid="reconciler_8hpp"/>
       </node>
     </invincdepgraph>
-    <innerclass refid="structtype__name" prot="public">type_name</innerclass>
-    <innerclass refid="classmeta__any" prot="public">meta_any</innerclass>
-    <innerclass refid="unionmeta__any_1_1storage__internal" prot="private">meta_any::storage_internal</innerclass>
-    <innerclass refid="unionmeta__any_1_1arg__t" prot="private">meta_any::arg_t</innerclass>
-    <innerclass refid="structmeta__any_1_1internal__manage" prot="private">meta_any::internal_manage</innerclass>
-    <innerclass refid="structmeta__any_1_1external__manage" prot="private">meta_any::external_manage</innerclass>
-    <sectiondef kind="typedef">
-      <member refid="group___reflection_1ga541516a057bbd67d55d02ece107883d9" kind="typedef"><name>type_id</name></member>
-    </sectiondef>
-    <sectiondef kind="var">
-      <member refid="group___reflection_1ga71a3267b0111c48af4e304d2a756abd1" kind="variable"><name>type_name_v</name></member>
-    </sectiondef>
-    <sectiondef kind="func">
-      <member refid="group___reflection_1ga580ac475bed401f28eca8e86b4de57c2" kind="function"><name>type_id_for</name></member>
-      <member refid="group___reflection_1ga88532337ecb7282cd7543cbc2556e1de" kind="function"><name>swap</name></member>
-    </sectiondef>
+    <innerclass refid="structneforce_1_1reflect_1_1type__name" prot="public">neforce::reflect::type_name</innerclass>
+    <innerclass refid="classneforce_1_1reflect_1_1meta__any" prot="public">neforce::reflect::meta_any</innerclass>
+    <innerclass refid="unionneforce_1_1reflect_1_1meta__any_1_1storage__internal" prot="private">neforce::reflect::meta_any::storage_internal</innerclass>
+    <innerclass refid="unionneforce_1_1reflect_1_1meta__any_1_1arg__t" prot="private">neforce::reflect::meta_any::arg_t</innerclass>
+    <innerclass refid="structneforce_1_1reflect_1_1meta__any_1_1internal__manage" prot="private">neforce::reflect::meta_any::internal_manage</innerclass>
+    <innerclass refid="structneforce_1_1reflect_1_1meta__any_1_1external__manage" prot="private">neforce::reflect::meta_any::external_manage</innerclass>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
+    <innernamespace refid="namespaceneforce_1_1reflect">neforce::reflect</innernamespace>
     <briefdescription>
 <para>类型擦除容器 </para>
     </briefdescription>
     <detaileddescription>
-<para>此文件提供了 <ref refid="classmeta__any" kindref="compound">meta_any</ref> 类型的实现，用于存储任意类型的值， 支持类型安全的存取操作，是反射系统的核心基础。 </para>
+<para>此文件提供了 meta_any 类型的实现，用于存储任意类型的值， 支持类型安全的存取操作，是反射系统的核心基础。 </para>
     </detaileddescription>
     <programlisting>
 <codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NEFORCE_CORE_REFLECT_ANY_HPP__</highlight><highlight class="normal"></highlight></codeline>
@@ -434,16 +454,16 @@
 <codeline lineno="15"><highlight class="normal">NEFORCE_BEGIN_REFLECT__</highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight></codeline>
-<codeline lineno="23" refid="group___reflection_1ga541516a057bbd67d55d02ece107883d9" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="group___reflection_1ga541516a057bbd67d55d02ece107883d9" kindref="member">type_id</ref><sp/>=<sp/><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>;<sp/></highlight></codeline>
+<codeline lineno="23" refid="group___reflection_1ga3680b21ef08e8497fc7255d54c682211" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="group___reflection_1ga3680b21ef08e8497fc7255d54c682211" kindref="member">type_id</ref><sp/>=<sp/><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref>;<sp/></highlight></codeline>
 <codeline lineno="24"><highlight class="normal"></highlight></codeline>
 <codeline lineno="25"><highlight class="normal"></highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="34" refid="structtype__name" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtype__name" kindref="compound">type_name</ref><sp/>{</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>value<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;unknown&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="34" refid="structneforce_1_1reflect_1_1type__name" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structneforce_1_1reflect_1_1type__name" kindref="compound">type_name</ref><sp/>{</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/>value<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;unknown&quot;</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="36"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"></highlight></codeline>
 <codeline lineno="41"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="42" refid="group___reflection_1ga71a3267b0111c48af4e304d2a756abd1" refkind="member"><highlight class="normal">NEFORCE_INLINE17<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="group___reflection_1ga71a3267b0111c48af4e304d2a756abd1" kindref="member">type_name_v</ref><sp/>=<sp/>type_name&lt;T&gt;::value;</highlight></codeline>
+<codeline lineno="42" refid="group___reflection_1gae991e87ac7172215b587ed3916f9e394" refkind="member"><highlight class="normal">NEFORCE_INLINE17<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/><ref refid="group___reflection_1gae991e87ac7172215b587ed3916f9e394" kindref="member">type_name_v</ref><sp/>=<sp/>type_name&lt;T&gt;::value;</highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight></codeline>
 <codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>__NEFORCE_SPECIALIZE_TYPE_NAME(T)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="46"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>template<sp/>&lt;&gt;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
@@ -456,22 +476,22 @@
 <codeline lineno="54"><highlight class="normal"></highlight></codeline>
 <codeline lineno="55"><highlight class="normal"></highlight></codeline>
 <codeline lineno="59"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="60" refid="group___reflection_1ga580ac475bed401f28eca8e86b4de57c2" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___reflection_1ga541516a057bbd67d55d02ece107883d9" kindref="member">type_id</ref><sp/><ref refid="group___reflection_1ga580ac475bed401f28eca8e86b4de57c2" kindref="member">type_id_for</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___reflection_1ga71a3267b0111c48af4e304d2a756abd1" kindref="member">type_name_v&lt;T&gt;</ref>.to_hash()<sp/>!=<sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref>(</highlight><highlight class="stringliteral">&quot;unknown&quot;</highlight><highlight class="normal">).to_hash())<sp/>{</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___reflection_1ga71a3267b0111c48af4e304d2a756abd1" kindref="member">type_name_v&lt;T&gt;</ref>.to_hash();</highlight></codeline>
+<codeline lineno="60" refid="group___reflection_1ga44db0edaa0dbe2c60cb04e815b0a498e" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___reflection_1ga3680b21ef08e8497fc7255d54c682211" kindref="member">type_id</ref><sp/><ref refid="group___reflection_1ga44db0edaa0dbe2c60cb04e815b0a498e" kindref="member">type_id_for</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___reflection_1gae991e87ac7172215b587ed3916f9e394" kindref="member">type_name_v&lt;T&gt;</ref>.to_hash()<sp/>!=<sp/><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref>(</highlight><highlight class="stringliteral">&quot;unknown&quot;</highlight><highlight class="normal">).to_hash())<sp/>{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___reflection_1gae991e87ac7172215b587ed3916f9e394" kindref="member">type_name_v&lt;T&gt;</ref>.to_hash();</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_COMPILER_MSVC</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___hash_primary_1ga83de52434e3b8de687077d3ce6dad4d5" kindref="member">FNV_hash_string</ref>(__FUNCSIG__,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(__FUNCSIG__)<sp/>-<sp/>1);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___hash_primary_1ga0641af5eba18472555c2df4ef07ea48e" kindref="member">FNV_hash_string</ref>(__FUNCSIG__,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(__FUNCSIG__)<sp/>-<sp/>1);</highlight></codeline>
 <codeline lineno="66"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___hash_primary_1ga83de52434e3b8de687077d3ce6dad4d5" kindref="member">FNV_hash_string</ref>(__PRETTY_FUNCTION__,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(__PRETTY_FUNCTION__)<sp/>-<sp/>1);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___hash_primary_1ga0641af5eba18472555c2df4ef07ea48e" kindref="member">FNV_hash_string</ref>(__PRETTY_FUNCTION__,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(__PRETTY_FUNCTION__)<sp/>-<sp/>1);</highlight></codeline>
 <codeline lineno="68"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="70"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="71"><highlight class="normal"></highlight></codeline>
 <codeline lineno="72"><highlight class="normal"></highlight></codeline>
-<codeline lineno="79" refid="classmeta__any" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classmeta__any" kindref="compound">meta_any</ref><sp/>{</highlight></codeline>
+<codeline lineno="79" refid="classneforce_1_1reflect_1_1meta__any" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classneforce_1_1reflect_1_1meta__any" kindref="compound">meta_any</ref><sp/>{</highlight></codeline>
 <codeline lineno="80"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="81" refid="classmeta__any_1a24fa5b7689f675b8268d8ab0da5091be" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="classmeta__any_1a24fa5b7689f675b8268d8ab0da5091be" kindref="member">SBO_SIZE</ref><sp/>=<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*)<sp/>*<sp/>2;<sp/></highlight></codeline>
+<codeline lineno="81" refid="classneforce_1_1reflect_1_1meta__any_1a4a1160e3fdb60dade7550bd57f95e48b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1reflect_1_1meta__any_1a4a1160e3fdb60dade7550bd57f95e48b" kindref="member">SBO_SIZE</ref><sp/>=<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*)<sp/>*<sp/>2;<sp/></highlight></codeline>
 <codeline lineno="82"><highlight class="normal"></highlight></codeline>
 <codeline lineno="83"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">union<sp/></highlight><highlight class="normal">storage_internal<sp/>{</highlight></codeline>
@@ -480,10 +500,10 @@
 <codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>storage_internal&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>storage_internal&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="94"><highlight class="normal"></highlight></codeline>
 <codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>ptr_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___alignment_1gae1bfcd9586bbb9936d7eb2d2ea32bc8e" kindref="member">aligned_storage_t</ref>&lt;<ref refid="classmeta__any_1a24fa5b7689f675b8268d8ab0da5091be" kindref="member">SBO_SIZE</ref>,<sp/></highlight><highlight class="keyword">alignof</highlight><highlight class="normal">(_NEFORCE<sp/><ref refid="group___core_types_1ga682e63d2daefd96d4e75e4239210e233" kindref="member">max_align_t</ref>)&gt;<sp/>buffer_;<sp/></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___alignment_1gaab9e3d84babf7e40da3ee0d071a80135" kindref="member">aligned_storage_t</ref>&lt;<ref refid="classneforce_1_1reflect_1_1meta__any_1a4a1160e3fdb60dade7550bd57f95e48b" kindref="member">SBO_SIZE</ref>,<sp/></highlight><highlight class="keyword">alignof</highlight><highlight class="normal">(_NEFORCE<sp/><ref refid="group___core_types_1ga374640e7d32eff6571056c6908a32ec5" kindref="member">max_align_t</ref>)&gt;<sp/>buffer_;<sp/></highlight></codeline>
 <codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="98"><highlight class="normal"></highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/>operation<sp/>:<sp/><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref><sp/>{</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/>operation<sp/>:<sp/><ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref><sp/>{</highlight></codeline>
 <codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ACCESS,<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GET_TYPE_ID,<sp/></highlight></codeline>
 <codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>COPY,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
@@ -501,12 +521,12 @@
 <codeline lineno="122"><highlight class="normal"></highlight></codeline>
 <codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
 <codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">internal_manage<sp/>{</highlight></codeline>
-<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>reflect::type_id<sp/>type_id_val()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___reflection_1ga580ac475bed401f28eca8e86b4de57c2" kindref="member">type_id_for&lt;T&gt;</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>reflect::type_id<sp/>type_id_val()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>type_id_for&lt;T&gt;();<sp/>}</highlight></codeline>
 <codeline lineno="131"><highlight class="normal"></highlight></codeline>
 <codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args&gt;</highlight></codeline>
 <codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>create(storage_internal&amp;<sp/>storage,<sp/>Args&amp;&amp;...<sp/>args)<sp/>{</highlight></codeline>
 <codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>addr<sp/>=<sp/></highlight><highlight class="keyword">const_cast&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(&amp;storage.buffer_));</highlight></codeline>
-<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>::new<sp/>(addr)<sp/>T(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Args&gt;</ref>(args)...);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>::new<sp/>(addr)<sp/>T(_NEFORCE<sp/>forward&lt;Args&gt;(args)...);</highlight></codeline>
 <codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="137"><highlight class="normal"></highlight></codeline>
 <codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>T*<sp/>access(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>storage_internal&amp;<sp/>storage)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
@@ -528,7 +548,7 @@
 <codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U<sp/>=<sp/>T,<sp/>enable_if_t&lt;is_move_constructible_v&lt;U&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
 <codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>move_op(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>meta_any*<sp/>self,<sp/>arg_t*<sp/>arg)<sp/>{</highlight></codeline>
 <codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>ptr<sp/>=<sp/>access(self-&gt;storage_);</highlight></codeline>
-<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>create(arg-&gt;any_ptr_-&gt;storage_,<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(*ptr));</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>create(arg-&gt;any_ptr_-&gt;storage_,<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" kindref="member">move</ref>(*ptr));</highlight></codeline>
 <codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ptr-&gt;~T();</highlight></codeline>
 <codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>arg-&gt;any_ptr_-&gt;manage_<sp/>=<sp/>&amp;manage;</highlight></codeline>
 <codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>arg-&gt;any_ptr_-&gt;type_id_<sp/>=<sp/>type_id_val();</highlight></codeline>
@@ -566,11 +586,11 @@
 <codeline lineno="192"><highlight class="normal"></highlight></codeline>
 <codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
 <codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">external_manage<sp/>{</highlight></codeline>
-<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>reflect::type_id<sp/>type_id_val()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___reflection_1ga580ac475bed401f28eca8e86b4de57c2" kindref="member">type_id_for&lt;T&gt;</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>reflect::type_id<sp/>type_id_val()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>type_id_for&lt;T&gt;();<sp/>}</highlight></codeline>
 <codeline lineno="201"><highlight class="normal"></highlight></codeline>
 <codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args&gt;</highlight></codeline>
 <codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>create(storage_internal&amp;<sp/>storage,<sp/>Args&amp;&amp;...<sp/>args)<sp/>{</highlight></codeline>
-<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>storage.ptr_<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>T(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Args&gt;</ref>(args)...);</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>storage.ptr_<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>T(_NEFORCE<sp/>forward&lt;Args&gt;(args)...);</highlight></codeline>
 <codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="206"><highlight class="normal"></highlight></codeline>
 <codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>T*<sp/>access(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>storage_internal&amp;<sp/>storage)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(storage.ptr_);<sp/>}</highlight></codeline>
@@ -616,7 +636,7 @@
 <codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="248"><highlight class="normal"></highlight></codeline>
 <codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">use_internal_storage<sp/>:<sp/><ref refid="group___type_traits_utilities_1gaecd67118189edfc6436511ce3f23aef1" kindref="member">bool_constant</ref>&lt;is_nothrow_move_constructible_v&lt;T&gt;<sp/>&amp;&amp;<sp/>sizeof(T)<sp/>&lt;=<sp/>SBO_SIZE<sp/>&amp;&amp;</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">use_internal_storage<sp/>:<sp/><ref refid="group___type_traits_utilities_1ga5a934140c1c872bb6d8ddd869e4bb3d3" kindref="member">bool_constant</ref>&lt;is_nothrow_move_constructible_v&lt;T&gt;<sp/>&amp;&amp;<sp/>sizeof(T)<sp/>&lt;=<sp/>SBO_SIZE<sp/>&amp;&amp;</highlight></codeline>
 <codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>alignof(T)<sp/>&lt;=<sp/>alignof(storage_internal)&gt;<sp/>{};</highlight></codeline>
 <codeline lineno="255"><highlight class="normal"></highlight></codeline>
 <codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/>template<sp/>&lt;typename<sp/>T&gt;</highlight></codeline>
@@ -792,7 +812,7 @@
 <codeline lineno="522"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="523"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="524"><highlight class="normal"></highlight></codeline>
-<codeline lineno="530" refid="group___reflection_1ga88532337ecb7282cd7543cbc2556e1de" refkind="member"><highlight class="normal">inline<sp/>void<sp/>swap(meta_any&amp;<sp/>lhs,<sp/>meta_any&amp;<sp/>rhs)<sp/>noexcept<sp/>{<sp/>lhs.swap(rhs);<sp/>}</highlight></codeline>
+<codeline lineno="530" refid="group___reflection_1gaaab4fcdd7dce594d4232f1f8a7e7441b" refkind="member"><highlight class="normal">inline<sp/>void<sp/>swap(meta_any&amp;<sp/>lhs,<sp/>meta_any&amp;<sp/>rhs)<sp/>noexcept<sp/>{<sp/>lhs.swap(rhs);<sp/>}</highlight></codeline>
 <codeline lineno="531"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Reflection</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="533"><highlight class="normal"></highlight></codeline>
 <codeline lineno="534"><highlight class="normal">NEFORCE_END_REFLECT__</highlight></codeline>

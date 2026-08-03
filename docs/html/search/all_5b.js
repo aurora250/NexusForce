@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['守护进程_0',['守护进程',['../group___daemon.html',1,'']]]
+  ['学术文献与算法来源_0',['学术文献与算法来源',['../group___bloom_filter.html#references',1,'']]]
 ];

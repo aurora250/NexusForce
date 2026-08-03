@@ -1,11 +1,11 @@
 var group___bound_algorithms =
 [
-    [ "binary_search", "group___bound_algorithms.html#ga24ee998b1b95d1568e1c6674215a0159", null ],
-    [ "binary_search", "group___bound_algorithms.html#gab3e48af102f10de7a152727a58aa8cb0", null ],
-    [ "includes", "group___bound_algorithms.html#ga0c529451c3d9d93f8b4f2550519e0285", null ],
-    [ "includes", "group___bound_algorithms.html#gaf298d16e23f7d383c2433077142cd9a8", null ],
-    [ "lower_bound", "group___bound_algorithms.html#gae8fcd0cdd4291f2092fab4f4451bf3c2", null ],
-    [ "lower_bound", "group___bound_algorithms.html#ga752e4da223be382b51f4af020097beab", null ],
-    [ "upper_bound", "group___bound_algorithms.html#ga6f6bb1298a0ac7a415fb627a1ef9d47f", null ],
-    [ "upper_bound", "group___bound_algorithms.html#ga6b8b644144e4b0e5f0258c0b3018385e", null ]
+    [ "neforce::binary_search", "group___bound_algorithms.html#gac9f4d7db36e212d9cad25083bc1ce2c8", null ],
+    [ "neforce::binary_search", "group___bound_algorithms.html#gacd854d8136bd77e78973185e9ff94451", null ],
+    [ "neforce::includes", "group___bound_algorithms.html#ga2be1bd660db2f88473e5c92cbda331ae", null ],
+    [ "neforce::includes", "group___bound_algorithms.html#gafc1e254093256ed2fde5d0f910923ec9", null ],
+    [ "neforce::lower_bound", "group___bound_algorithms.html#ga6fddeaf9b852b07de715cb214b090fd5", null ],
+    [ "neforce::lower_bound", "group___bound_algorithms.html#ga7b3b1a5476a623e135ea53851cdc80bd", null ],
+    [ "neforce::upper_bound", "group___bound_algorithms.html#gafc80a43c073148c2c5c3d63afc5efd6a", null ],
+    [ "neforce::upper_bound", "group___bound_algorithms.html#gac921ba98c610b6c4496a8824e7241c57", null ]
 ];

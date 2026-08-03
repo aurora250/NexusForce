@@ -1,8 +1,8 @@
 var integer__sequence_8hpp =
 [
-    [ "build_index_tuple_t", "group___index_tuple.html#ga214c85ecd1d3447098af9f454f0ddada", null ],
-    [ "index_sequence", "group___integer_sequence.html#ga26720e99f9258f846d2e957f81425b71", null ],
-    [ "index_sequence_for", "group___integer_sequence.html#ga7b762cc05183be4d9e4f4f271add4c1e", null ],
-    [ "make_index_sequence", "group___integer_sequence.html#gaed583aed5d1c7a45292dc4dbc51d6493", null ],
-    [ "make_integer_sequence", "group___integer_sequence.html#gae14972f12d071bc9049d55d724413f32", null ]
+    [ "neforce::build_index_tuple_t", "group___index_tuple.html#ga89a73a4c0f4b82d7d6ae78748c08e098", null ],
+    [ "neforce::index_sequence", "group___integer_sequence.html#ga05100867bd68ca47f2098124ceb69311", null ],
+    [ "neforce::index_sequence_for", "group___integer_sequence.html#ga6bd0f1597ccc9681f8e656794dee4fea", null ],
+    [ "neforce::make_index_sequence", "group___integer_sequence.html#ga772b7d48974acef72320f9e7275143f3", null ],
+    [ "neforce::make_integer_sequence", "group___integer_sequence.html#gae48c478ebc031959e347736d8ae95679", null ]
 ];

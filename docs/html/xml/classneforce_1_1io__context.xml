@@ -1,0 +1,1148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1io__context" kind="class" language="C++" prot="public">
+    <compoundname>neforce::io_context</compoundname>
+    <includes refid="io__context_8hpp" local="no">io_context.hpp</includes>
+    <innerclass refid="structneforce_1_1io__context_1_1timer__entry" prot="private">neforce::io_context::timer_entry</innerclass>
+    <innerclass refid="structneforce_1_1io__context_1_1fd__info" prot="private">neforce::io_context::fd_info</innerclass>
+    <innerclass refid="classneforce_1_1io__context_1_1executor" prot="public">neforce::io_context::executor</innerclass>
+    <innerclass refid="classneforce_1_1io__context_1_1work" prot="public">neforce::io_context::work</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1io__context_1ae3989cc621a53bcd366406ab166aecfd" prot="public" static="no">
+        <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void()&gt;</type>
+        <definition>using neforce::io_context::handler_type = function&lt;void()&gt;</definition>
+        <argsstring></argsstring>
+        <name>handler_type</name>
+        <qualifiedname>neforce::io_context::handler_type</qualifiedname>
+        <briefdescription>
+<para>通用 handler 类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="67" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1io__context_1ad71fd1be41a9c0af2a2f7cba05eb3f1a" prot="public" static="no">
+        <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(int fd, <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref> events, <ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref> ec)&gt;</type>
+        <definition>using neforce::io_context::fd_callback = function&lt;void(int fd, uint32_t events, error_code ec)&gt;</definition>
+        <argsstring></argsstring>
+        <name>fd_callback</name>
+        <qualifiedname>neforce::io_context::fd_callback</qualifiedname>
+        <briefdescription>
+<para>fd 事件回调，参数为 (fd, events, <ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref>) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="69" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1io__context_1a407f8ccdb8d5733aaab3547c0fa4d597" prot="public" static="no">
+        <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void()&gt;</type>
+        <definition>using neforce::io_context::timer_callback = function&lt;void()&gt;</definition>
+        <argsstring></argsstring>
+        <name>timer_callback</name>
+        <qualifiedname>neforce::io_context::timer_callback</qualifiedname>
+        <briefdescription>
+<para>定时器到期回调 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="71" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1io__context_1a4250e0aae18ae538cfaee5ff72c78834" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1gaa03798c82727c805d232ff715aa36c1d" kindref="member">uintptr_t</ref></type>
+        <definition>using neforce::io_context::native_handle_type = 
+
+uintptr_t</definition>
+        <argsstring></argsstring>
+        <name>native_handle_type</name>
+        <qualifiedname>neforce::io_context::native_handle_type</qualifiedname>
+        <briefdescription>
+<para>平台原生句柄类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="73" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classneforce_1_1io__context_1a09063528c58ecb15c968f578270f5953" prot="private" static="no">
+        <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref>, <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref>, void *overlapped)&gt;</type>
+        <definition>using neforce::io_context::file_completion_cb = function&lt;void(error_code, size_t, void* overlapped)&gt;</definition>
+        <argsstring></argsstring>
+        <name>file_completion_cb</name>
+        <qualifiedname>neforce::io_context::file_completion_cb</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="209" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="209" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classneforce_1_1io__context_1afa984747317711c3ee792322ec0366d8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class file_async</definition>
+        <argsstring></argsstring>
+        <name>file_async</name>
+        <qualifiedname>neforce::io_context::file_async</qualifiedname>
+        <param>
+          <type>file_async</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="207" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="207" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1io__context_1ae4d91f32243e549e57024e3eca6cfa20" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; int &gt;</type>
+        <definition>atomic&lt;int&gt; neforce::io_context::running_</definition>
+        <argsstring></argsstring>
+        <name>running_</name>
+        <qualifiedname>neforce::io_context::running_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>正在运行的标志（run() 中的线程数） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="227" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="227" bodyend="227"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1io__context_1a761ca7052dead8e80534d83df4b37e04" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; neforce::io_context::stopped_</definition>
+        <argsstring></argsstring>
+        <name>stopped_</name>
+        <qualifiedname>neforce::io_context::stopped_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>停止标志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="229" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="229" bodyend="229"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1io__context_1ae771ccd047c0a48a2d67dcf91aeb5bb1" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref> &gt;</type>
+        <definition>atomic&lt;size_t&gt; neforce::io_context::outstanding_work_</definition>
+        <argsstring></argsstring>
+        <name>outstanding_work_</name>
+        <qualifiedname>neforce::io_context::outstanding_work_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>待处理工作计数（work 对象 + 未完成操作） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="231" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="231" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1io__context_1ac128a179d99f05ebba3d19ff97035f65" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::io_context::next_timer_id_</definition>
+        <argsstring></argsstring>
+        <name>next_timer_id_</name>
+        <qualifiedname>neforce::io_context::next_timer_id_</qualifiedname>
+        <initializer>{1}</initializer>
+        <briefdescription>
+<para>定时器 ID 计数器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="233" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="233" bodyend="233"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1io__context_1aabe18f082d03aafc84bbce59e550d9db" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1flat__unordered__map" kindref="compound">flat_unordered_map</ref>&lt; <ref refid="classneforce_1_1io__context_1a4250e0aae18ae538cfaee5ff72c78834" kindref="member">native_handle_type</ref>, fd_info &gt;</type>
+        <definition>flat_unordered_map&lt;native_handle_type, fd_info&gt; neforce::io_context::fd_map_</definition>
+        <argsstring></argsstring>
+        <name>fd_map_</name>
+        <qualifiedname>neforce::io_context::fd_map_</qualifiedname>
+        <briefdescription>
+<para>fd → 注册信息映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="236" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="236" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1io__context_1a98902b791ebb4467c8e94a476e5a70b2" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; timer_entry &gt;</type>
+        <definition>vector&lt;timer_entry&gt; neforce::io_context::timer_heap_</definition>
+        <argsstring></argsstring>
+        <name>timer_heap_</name>
+        <qualifiedname>neforce::io_context::timer_heap_</qualifiedname>
+        <briefdescription>
+<para>定时器 min-heap </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="238" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="238" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1io__context_1a96b439732d23348dabda8b41e039c700" prot="private" static="no" mutable="yes">
+        <type><ref refid="classneforce_1_1mutex" kindref="compound">mutex</ref></type>
+        <definition>mutex neforce::io_context::timer_mutex_</definition>
+        <argsstring></argsstring>
+        <name>timer_mutex_</name>
+        <qualifiedname>neforce::io_context::timer_mutex_</qualifiedname>
+        <briefdescription>
+<para>保护 timer_heap_ 的互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="240" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="240" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1io__context_1a0390f8de9e8325aa3856f252af5de660" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1lock__free__queue" kindref="compound">lock_free_queue</ref>&lt; <ref refid="classneforce_1_1io__context_1ae3989cc621a53bcd366406ab166aecfd" kindref="member">handler_type</ref> &gt;</type>
+        <definition>lock_free_queue&lt;handler_type&gt; neforce::io_context::external_queue_</definition>
+        <argsstring></argsstring>
+        <name>external_queue_</name>
+        <qualifiedname>neforce::io_context::external_queue_</qualifiedname>
+        <briefdescription>
+<para>跨线程 post 的 handler 队列 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="243" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="243" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1io__context_1a17f0d1728bc8589db4fd8c3fed0c9781" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref> &gt;</type>
+        <definition>atomic&lt;size_t&gt; neforce::io_context::external_queue_count_</definition>
+        <argsstring></argsstring>
+        <name>external_queue_count_</name>
+        <qualifiedname>neforce::io_context::external_queue_count_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>post 计数器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="245" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="245" bodyend="245"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1io__context_1ab97e5c4c8f6f3814d6c7db06ce43cf7e" prot="private" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* neforce::io_context::iocp_handle_</definition>
+        <argsstring></argsstring>
+        <name>iocp_handle_</name>
+        <qualifiedname>neforce::io_context::iocp_handle_</qualifiedname>
+        <briefdescription>
+<para>IOCP 完成端口句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="249" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="249" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1io__context_1af459fb70119180f92e98b35804188a57" prot="private" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* neforce::io_context::wake_event_</definition>
+        <argsstring></argsstring>
+        <name>wake_event_</name>
+        <qualifiedname>neforce::io_context::wake_event_</qualifiedname>
+        <briefdescription>
+<para>唤醒 monitor 线程的事件 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="251" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="251" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1io__context_1a0bfc088b46ce80941660ba9822e8e7b8" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1flat__unordered__map" kindref="compound">flat_unordered_map</ref>&lt; <ref refid="classneforce_1_1io__context_1a4250e0aae18ae538cfaee5ff72c78834" kindref="member">native_handle_type</ref>, void * &gt;</type>
+        <definition>flat_unordered_map&lt;native_handle_type, void*&gt; neforce::io_context::fd_events_</definition>
+        <argsstring></argsstring>
+        <name>fd_events_</name>
+        <qualifiedname>neforce::io_context::fd_events_</qualifiedname>
+        <briefdescription>
+<para>fd → WSA 事件句柄映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="253" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="253" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1io__context_1a8e4b1ab4903551689efa2d9070e11880" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1mutex" kindref="compound">mutex</ref></type>
+        <definition>mutex neforce::io_context::fd_mutex_</definition>
+        <argsstring></argsstring>
+        <name>fd_mutex_</name>
+        <qualifiedname>neforce::io_context::fd_mutex_</qualifiedname>
+        <briefdescription>
+<para>保护 fd_events_ 的互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="255" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="255" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1io__context_1a252c89ebe4e8acbdfe6667906248db89" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1thread" kindref="compound">thread</ref></type>
+        <definition>thread neforce::io_context::monitor_thread_</definition>
+        <argsstring></argsstring>
+        <name>monitor_thread_</name>
+        <qualifiedname>neforce::io_context::monitor_thread_</qualifiedname>
+        <briefdescription>
+<para>后台 WSA 监控线程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="257" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="257" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1io__context_1a3a25853d3ac0189188db2a0efb4a887a" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; neforce::io_context::monitor_running_</definition>
+        <argsstring></argsstring>
+        <name>monitor_running_</name>
+        <qualifiedname>neforce::io_context::monitor_running_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>监控线程运行标志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="259" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="259" bodyend="259"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1io__context_1af3426638bda561ffb32657e484812900" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1flat__unordered__map" kindref="compound">flat_unordered_map</ref>&lt; <ref refid="group___platform_dependent_types_1gaa03798c82727c805d232ff715aa36c1d" kindref="member">uintptr_t</ref>, file_completion_cb &gt;</type>
+        <definition>flat_unordered_map&lt;uintptr_t, file_completion_cb&gt; neforce::io_context::file_completions_</definition>
+        <argsstring></argsstring>
+        <name>file_completions_</name>
+        <qualifiedname>neforce::io_context::file_completions_</qualifiedname>
+        <briefdescription>
+<para>文件 I/O 完成回调映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="262" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="262" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1io__context_1a6fcbdcb88a2458971c4b4c7c02a8113d" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="classneforce_1_1thread" kindref="compound">thread</ref> &gt;</type>
+        <definition>vector&lt;thread&gt; neforce::io_context::pool_threads_</definition>
+        <argsstring></argsstring>
+        <name>pool_threads_</name>
+        <qualifiedname>neforce::io_context::pool_threads_</qualifiedname>
+        <briefdescription>
+<para>工作线程列表（run_pool 模式） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="276" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="276" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1io__context_1acbed85f51528d7d490ce3bfcd533bf38" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1mutex" kindref="compound">mutex</ref></type>
+        <definition>mutex neforce::io_context::pool_mutex_</definition>
+        <argsstring></argsstring>
+        <name>pool_mutex_</name>
+        <qualifiedname>neforce::io_context::pool_mutex_</qualifiedname>
+        <briefdescription>
+<para>保护线程管理的互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="278" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="278" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1io__context_1a7b201e6487c1cf5965bd5b4fa5d8ccfb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::io_context::io_context</definition>
+        <argsstring>()</argsstring>
+        <name>io_context</name>
+        <qualifiedname>neforce::io_context::io_context</qualifiedname>
+        <briefdescription>
+<para>构造 <ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="86" column="5"/>
+        <referencedby refid="classneforce_1_1io__context_1_1work_1a07cf87c5235b787aef1c98b7f2027e6c" compoundref="io__context_8hpp" startline="354" endline="357">neforce::io_context::work::work</referencedby>
+        <referencedby refid="classneforce_1_1io__context_1a37826a2313d10c36397776876ba07612">~io_context</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1a37826a2313d10c36397776876ba07612" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::io_context::~io_context</definition>
+        <argsstring>()</argsstring>
+        <name>~io_context</name>
+        <qualifiedname>neforce::io_context::~io_context</qualifiedname>
+        <briefdescription>
+<para>析构 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>自动 stop 并释放资源 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="93" column="5"/>
+        <references refid="classneforce_1_1io__context_1a7b201e6487c1cf5965bd5b4fa5d8ccfb">io_context</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1a4ed24d1f366dae566d02db7cf9d7fb4c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::io_context::io_context</definition>
+        <argsstring>(const io_context &amp;)=delete</argsstring>
+        <name>io_context</name>
+        <qualifiedname>neforce::io_context::io_context</qualifiedname>
+        <param>
+          <type>const io_context &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="95" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1ad1e81cc3fea345cfbdb39b62608f1262" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1io__context_1a7b201e6487c1cf5965bd5b4fa5d8ccfb" kindref="member">io_context</ref> &amp;</type>
+        <definition>io_context &amp; neforce::io_context::operator=</definition>
+        <argsstring>(const io_context &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::io_context::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1io__context_1a7b201e6487c1cf5965bd5b4fa5d8ccfb" kindref="member">io_context</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="96" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1aee103b6067664ffa4d512c1e905f8918" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1io__context_1_1executor" kindref="compound">executor</ref></type>
+        <definition>executor neforce::io_context::get_executor</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>get_executor</name>
+        <qualifiedname>neforce::io_context::get_executor</qualifiedname>
+        <briefdescription>
+<para>获取默认执行器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="101" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1a70c36dfdd21b3434439800d56bf4e942" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::io_context::post</definition>
+        <argsstring>(handler_type handler)</argsstring>
+        <name>post</name>
+        <qualifiedname>neforce::io_context::post</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context_1ae3989cc621a53bcd366406ab166aecfd" kindref="member">handler_type</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>将 handler 投递到队列末尾 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要执行的回调 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="107" column="10"/>
+        <references refid="classneforce_1_1io__context_1a70c36dfdd21b3434439800d56bf4e942">post</references>
+        <referencedby refid="classneforce_1_1io__context_1a70c36dfdd21b3434439800d56bf4e942">post</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1af408c2026b166e2506ab78abc91b3289" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::io_context::dispatch</definition>
+        <argsstring>(handler_type handler)</argsstring>
+        <name>dispatch</name>
+        <qualifiedname>neforce::io_context::dispatch</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context_1ae3989cc621a53bcd366406ab166aecfd" kindref="member">handler_type</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>若当前在 <ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> 线程上则立即执行 handler，否则 post </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要执行的回调 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="113" column="10"/>
+        <references refid="classneforce_1_1io__context_1af408c2026b166e2506ab78abc91b3289">dispatch</references>
+        <referencedby refid="classneforce_1_1io__context_1af408c2026b166e2506ab78abc91b3289">dispatch</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1a2d0b05ac1c73237ad2056ef4ed07bc66" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::io_context::run</definition>
+        <argsstring>()</argsstring>
+        <name>run</name>
+        <qualifiedname>neforce::io_context::run</qualifiedname>
+        <briefdescription>
+<para>单线程阻塞驱动事件循环 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>执行的 handler 数量</para>
+</simplesect>
+循环直到 <ref refid="classneforce_1_1io__context_1afaae1cb6de5e4fb64158f394ea176edc" kindref="member">stop()</ref> 被调用且无待处理工作。 若需防止提前退出，使用 io_context::work。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="122" column="12"/>
+        <references refid="classneforce_1_1io__context_1a2d0b05ac1c73237ad2056ef4ed07bc66">run</references>
+        <referencedby refid="classneforce_1_1io__context_1a2d0b05ac1c73237ad2056ef4ed07bc66">run</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1a17228086cc96db39d915689dcaecc000" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::io_context::run_pool</definition>
+        <argsstring>(size_t n)</argsstring>
+        <name>run_pool</name>
+        <qualifiedname>neforce::io_context::run_pool</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>多线程并发驱动事件循环 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>线程数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+启动 n 个线程同时调用 <ref refid="classneforce_1_1io__context_1a2d0b05ac1c73237ad2056ef4ed07bc66" kindref="member">run()</ref>。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="130" column="10"/>
+        <references refid="classneforce_1_1io__context_1a17228086cc96db39d915689dcaecc000">run_pool</references>
+        <referencedby refid="classneforce_1_1io__context_1a17228086cc96db39d915689dcaecc000">run_pool</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1a365b06a14778fdd2b2a56ac84c21ce6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::io_context::run_one</definition>
+        <argsstring>(int timeout_ms=-1)</argsstring>
+        <name>run_one</name>
+        <qualifiedname>neforce::io_context::run_one</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>timeout_ms</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+<para>等待并执行一个就绪的 handler </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timeout_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最大等待时间（ms），-1 表示无限等待 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>执行的 handler 数量（0 或 1） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="137" column="12"/>
+        <references refid="classneforce_1_1io__context_1a365b06a14778fdd2b2a56ac84c21ce6c">run_one</references>
+        <referencedby refid="classneforce_1_1io__context_1a78e0605038679d62adce47b2bf3a49b4" compoundref="io__context_8hpp" startline="149" endline="149">poll_one</referencedby>
+        <referencedby refid="classneforce_1_1io__context_1a365b06a14778fdd2b2a56ac84c21ce6c">run_one</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1a3af8ec91599d62d1615bd4d19ffc1830" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::io_context::poll</definition>
+        <argsstring>()</argsstring>
+        <name>poll</name>
+        <qualifiedname>neforce::io_context::poll</qualifiedname>
+        <briefdescription>
+<para>执行所有已就绪的 handler 后立即返回 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>执行的 handler 数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="143" column="12"/>
+        <references refid="classneforce_1_1io__context_1a3af8ec91599d62d1615bd4d19ffc1830">poll</references>
+        <referencedby refid="classneforce_1_1io__context_1a3af8ec91599d62d1615bd4d19ffc1830">poll</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1a78e0605038679d62adce47b2bf3a49b4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::io_context::poll_one</definition>
+        <argsstring>()</argsstring>
+        <name>poll_one</name>
+        <qualifiedname>neforce::io_context::poll_one</qualifiedname>
+        <briefdescription>
+<para>非阻塞单次轮询 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>执行的 handler 数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="149" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="149" bodyend="149"/>
+        <references refid="classneforce_1_1io__context_1a78e0605038679d62adce47b2bf3a49b4" compoundref="io__context_8hpp" startline="149" endline="149">poll_one</references>
+        <references refid="classneforce_1_1io__context_1a365b06a14778fdd2b2a56ac84c21ce6c">run_one</references>
+        <referencedby refid="classneforce_1_1io__context_1a78e0605038679d62adce47b2bf3a49b4" compoundref="io__context_8hpp" startline="149" endline="149">poll_one</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1afaae1cb6de5e4fb64158f394ea176edc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::io_context::stop</definition>
+        <argsstring>()</argsstring>
+        <name>stop</name>
+        <qualifiedname>neforce::io_context::stop</qualifiedname>
+        <briefdescription>
+<para>停止事件循环 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>设置停止标志并唤醒 <ref refid="classneforce_1_1io__context_1a2d0b05ac1c73237ad2056ef4ed07bc66" kindref="member">run()</ref>。正在执行的 handler 会完成，不再启动新的迭代。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="156" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1afe7e01b9c81432059a2a2ade572e6921" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::io_context::stopped</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>stopped</name>
+        <qualifiedname>neforce::io_context::stopped</qualifiedname>
+        <briefdescription>
+<para>检查是否已停止 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="161" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="161" bodyend="161"/>
+        <references refid="group___memory_order_1ga6367df7d3e137e9b30e17740435d1816" compoundref="memory__order_8hpp" startline="177">neforce::memory_order_acquire</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1aa0a7fd498aac1151d83e9fc49b24629b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::io_context::restart</definition>
+        <argsstring>()</argsstring>
+        <name>restart</name>
+        <qualifiedname>neforce::io_context::restart</qualifiedname>
+        <briefdescription>
+<para>重置停止标志，允许再次 <ref refid="classneforce_1_1io__context_1a2d0b05ac1c73237ad2056ef4ed07bc66" kindref="member">run()</ref> </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="166" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="166" bodyend="166"/>
+        <references refid="group___memory_order_1ga0ecbdbbd5ddbe9eda2820b9cea4826fc" compoundref="memory__order_8hpp" startline="179">neforce::memory_order_release</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1a78052af9b04e2e92a93bc4b8d1967d3c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::io_context::schedule_timer</definition>
+        <argsstring>(uint64_t delay_ms, timer_callback handler)</argsstring>
+        <name>schedule_timer</name>
+        <qualifiedname>neforce::io_context::schedule_timer</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga5405672bf9962081e6fcd1448d4bce4a" kindref="member">uint64_t</ref></type>
+          <declname>delay_ms</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1io__context_1a407f8ccdb8d5733aaab3547c0fa4d597" kindref="member">timer_callback</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>调度一次性定时器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>delay_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>延迟毫秒数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>到期时执行的回调（在 <ref refid="classneforce_1_1io__context_1a2d0b05ac1c73237ad2056ef4ed07bc66" kindref="member">run()</ref> 线程中执行） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>定时器 ID，可用于 <ref refid="classneforce_1_1io__context_1a59965d7c02fbb47ce16dab447d66d524" kindref="member">cancel_timer()</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="174" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1a59965d7c02fbb47ce16dab447d66d524" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::io_context::cancel_timer</definition>
+        <argsstring>(size_t timer_id)</argsstring>
+        <name>cancel_timer</name>
+        <qualifiedname>neforce::io_context::cancel_timer</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>timer_id</declname>
+        </param>
+        <briefdescription>
+<para>取消待执行的定时器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timer_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classneforce_1_1io__context_1a78052af9b04e2e92a93bc4b8d1967d3c" kindref="member">schedule_timer()</ref> 返回的 ID </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>找到并取消返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="181" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1ab6de26ff977971973635b8ff701d066d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::io_context::add_fd</definition>
+        <argsstring>(native_handle_type fd, uint32_t events, fd_callback cb, bool edge_triggered=true)</argsstring>
+        <name>add_fd</name>
+        <qualifiedname>neforce::io_context::add_fd</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context_1a4250e0aae18ae538cfaee5ff72c78834" kindref="member">native_handle_type</ref></type>
+          <declname>fd</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>events</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1io__context_1ad71fd1be41a9c0af2a2f7cba05eb3f1a" kindref="member">fd_callback</ref></type>
+          <declname>cb</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>edge_triggered</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>注册 fd 进行事件监控 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要监控的文件描述符 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>events</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>epoll_in / epoll_out 掩码 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cb</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>事件就绪时的回调 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>edge_triggered</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否使用边缘触发模式，默认 true </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="190" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1a7455712adcf0c0075e81ba2d17bcdc07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::io_context::mod_fd</definition>
+        <argsstring>(native_handle_type fd, uint32_t events, bool edge_triggered=true)</argsstring>
+        <name>mod_fd</name>
+        <qualifiedname>neforce::io_context::mod_fd</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context_1a4250e0aae18ae538cfaee5ff72c78834" kindref="member">native_handle_type</ref></type>
+          <declname>fd</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>events</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>edge_triggered</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>修改已注册 fd 的事件掩码 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>已注册的文件描述符 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>events</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的事件掩码 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>edge_triggered</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否使用边缘触发模式，默认 true </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="198" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1a5c99b04f62177b2f63315f50237b47e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::io_context::remove_fd</definition>
+        <argsstring>(native_handle_type fd)</argsstring>
+        <name>remove_fd</name>
+        <qualifiedname>neforce::io_context::remove_fd</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context_1a4250e0aae18ae538cfaee5ff72c78834" kindref="member">native_handle_type</ref></type>
+          <declname>fd</declname>
+        </param>
+        <briefdescription>
+<para>取消 fd 的事件监控 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>已注册的文件描述符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="204" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1io__context_1add3661ecb017e126495706621d647e61" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::io_context::monitor_loop</definition>
+        <argsstring>()</argsstring>
+        <name>monitor_loop</name>
+        <qualifiedname>neforce::io_context::monitor_loop</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="264" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1a862dcb6b478824b1422dd5f86f35e2a8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::io_context::register_file_completion</definition>
+        <argsstring>(uintptr_t key, file_completion_cb cb)</argsstring>
+        <name>register_file_completion</name>
+        <qualifiedname>neforce::io_context::register_file_completion</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1gaa03798c82727c805d232ff715aa36c1d" kindref="member">uintptr_t</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>file_completion_cb</type>
+          <declname>cb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="266" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1a00922b3b29001925a5d7a0d46330a1e5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::io_context::unregister_file_completion</definition>
+        <argsstring>(uintptr_t key)</argsstring>
+        <name>unregister_file_completion</name>
+        <qualifiedname>neforce::io_context::unregister_file_completion</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1gaa03798c82727c805d232ff715aa36c1d" kindref="member">uintptr_t</ref></type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="267" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1a64fbccd217ae99809d473877fd9316da" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga5405672bf9962081e6fcd1448d4bce4a" kindref="member">uint64_t</ref></type>
+        <definition>uint64_t neforce::io_context::next_timer_deadline</definition>
+        <argsstring>() const</argsstring>
+        <name>next_timer_deadline</name>
+        <qualifiedname>neforce::io_context::next_timer_deadline</qualifiedname>
+        <briefdescription>
+<para>获取最早到期的定时器截止时间（无锁时返回 max） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="281" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1a21bd5e8ff93db37eff03e1400be99b76" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::io_context::process_timers</definition>
+        <argsstring>(size_t max_count=numeric_traits&lt; size_t &gt;::max())</argsstring>
+        <name>process_timers</name>
+        <qualifiedname>neforce::io_context::process_timers</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>max_count</declname>
+          <defval><ref refid="classneforce_1_1numeric__traits" kindref="compound">numeric_traits</ref>&lt; <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref> &gt;<ref refid="group___compare_algorithms_1gacc7ec6cd2134fb437b992f481b7e5057" kindref="member">::max</ref>()</defval>
+        </param>
+        <briefdescription>
+<para>处理到期定时器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>max_count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最多处理的定时器数量（默认无限制） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="285" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1aa52fba93e620f307da32b9aa251a3508" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::io_context::wake</definition>
+        <argsstring>()</argsstring>
+        <name>wake</name>
+        <qualifiedname>neforce::io_context::wake</qualifiedname>
+        <briefdescription>
+<para>唤醒 <ref refid="classneforce_1_1io__context_1a2d0b05ac1c73237ad2056ef4ed07bc66" kindref="member">run()</ref> 循环 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="288" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1io__context_1ab8611186ea95c11cba99a8bcefcce541" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::io_context::drain_handlers</definition>
+        <argsstring>(size_t max_count=256)</argsstring>
+        <name>drain_handlers</name>
+        <qualifiedname>neforce::io_context::drain_handlers</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>max_count</declname>
+          <defval>256</defval>
+        </param>
+        <briefdescription>
+<para>执行队列中就绪的 handler </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>max_count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最多执行的 handler 数量（默认 256） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="292" column="12"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>统一异步操作核心 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>合并 I/O 多路复用（epoll/IOCP）、定时器管理和工作投递。 所有异步操作以此为调度目标，替代分散的 event_loop 和 <ref refid="classneforce_1_1thread__pool" kindref="compound">thread_pool</ref> 实例。</para>
+<para>使用示例： <programlisting><codeline><highlight class="normal"><ref refid="classneforce_1_1io__context_1a7b201e6487c1cf5965bd5b4fa5d8ccfb" kindref="member">io_context</ref><sp/>ctx;</highlight></codeline>
+<codeline><highlight class="normal">ctx.post([]<sp/>{<sp/><ref refid="group___console_i_o_1ga9c4e1ac58957b1892c3091006222f66b" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;async<sp/>work&quot;</highlight><highlight class="normal">);<sp/>});</highlight></codeline>
+<codeline><highlight class="normal">ctx.schedule_timer(1000,<sp/>[]<sp/>{<sp/><ref refid="group___console_i_o_1ga9c4e1ac58957b1892c3091006222f66b" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;1<sp/>second<sp/>later&quot;</highlight><highlight class="normal">);<sp/>});</highlight></codeline>
+<codeline><highlight class="normal">ctx.run();<sp/></highlight><highlight class="comment">//<sp/>驱动事件循环</highlight></codeline>
+</programlisting></para>
+<para><simplesect kind="note"><para>单线程 <ref refid="classneforce_1_1io__context_1a2d0b05ac1c73237ad2056ef4ed07bc66" kindref="member">run()</ref> 时所有 handler 串行执行，无需加锁。多线程 <ref refid="classneforce_1_1io__context_1a17228086cc96db39d915689dcaecc000" kindref="member">run_pool()</ref> 时需 strand。 </para>
+</simplesect>
+<simplesect kind="warning"><para>跨线程 <ref refid="classneforce_1_1io__context_1a70c36dfdd21b3434439800d56bf4e942" kindref="member">post()</ref> 是线程安全的；add_fd/remove_fd 必须在 <ref refid="classneforce_1_1io__context_1a2d0b05ac1c73237ad2056ef4ed07bc66" kindref="member">run()</ref> 所在线程调用。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" line="64" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/io_context.hpp" bodystart="64" bodyend="293"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1io__context_1ab6de26ff977971973635b8ff701d066d" prot="public" virt="non-virtual"><scope>neforce::io_context</scope><name>add_fd</name></member>
+      <member refid="classneforce_1_1io__context_1a59965d7c02fbb47ce16dab447d66d524" prot="public" virt="non-virtual"><scope>neforce::io_context</scope><name>cancel_timer</name></member>
+      <member refid="classneforce_1_1io__context_1af408c2026b166e2506ab78abc91b3289" prot="public" virt="non-virtual"><scope>neforce::io_context</scope><name>dispatch</name></member>
+      <member refid="classneforce_1_1io__context_1ab8611186ea95c11cba99a8bcefcce541" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>drain_handlers</name></member>
+      <member refid="classneforce_1_1io__context_1a0390f8de9e8325aa3856f252af5de660" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>external_queue_</name></member>
+      <member refid="classneforce_1_1io__context_1a17f0d1728bc8589db4fd8c3fed0c9781" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>external_queue_count_</name></member>
+      <member refid="classneforce_1_1io__context_1ad71fd1be41a9c0af2a2f7cba05eb3f1a" prot="public" virt="non-virtual"><scope>neforce::io_context</scope><name>fd_callback</name></member>
+      <member refid="classneforce_1_1io__context_1a0bfc088b46ce80941660ba9822e8e7b8" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>fd_events_</name></member>
+      <member refid="classneforce_1_1io__context_1aabe18f082d03aafc84bbce59e550d9db" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>fd_map_</name></member>
+      <member refid="classneforce_1_1io__context_1a8e4b1ab4903551689efa2d9070e11880" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>fd_mutex_</name></member>
+      <member refid="classneforce_1_1io__context_1a09063528c58ecb15c968f578270f5953" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>file_completion_cb</name></member>
+      <member refid="classneforce_1_1io__context_1af3426638bda561ffb32657e484812900" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>file_completions_</name></member>
+      <member refid="classneforce_1_1io__context_1aee103b6067664ffa4d512c1e905f8918" prot="public" virt="non-virtual"><scope>neforce::io_context</scope><name>get_executor</name></member>
+      <member refid="classneforce_1_1io__context_1ae3989cc621a53bcd366406ab166aecfd" prot="public" virt="non-virtual"><scope>neforce::io_context</scope><name>handler_type</name></member>
+      <member refid="classneforce_1_1io__context_1a7b201e6487c1cf5965bd5b4fa5d8ccfb" prot="public" virt="non-virtual"><scope>neforce::io_context</scope><name>io_context</name></member>
+      <member refid="classneforce_1_1io__context_1a4ed24d1f366dae566d02db7cf9d7fb4c" prot="public" virt="non-virtual"><scope>neforce::io_context</scope><name>io_context</name></member>
+      <member refid="classneforce_1_1io__context_1ab97e5c4c8f6f3814d6c7db06ce43cf7e" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>iocp_handle_</name></member>
+      <member refid="classneforce_1_1io__context_1a7455712adcf0c0075e81ba2d17bcdc07" prot="public" virt="non-virtual"><scope>neforce::io_context</scope><name>mod_fd</name></member>
+      <member refid="classneforce_1_1io__context_1add3661ecb017e126495706621d647e61" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>monitor_loop</name></member>
+      <member refid="classneforce_1_1io__context_1a3a25853d3ac0189188db2a0efb4a887a" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>monitor_running_</name></member>
+      <member refid="classneforce_1_1io__context_1a252c89ebe4e8acbdfe6667906248db89" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>monitor_thread_</name></member>
+      <member refid="classneforce_1_1io__context_1a4250e0aae18ae538cfaee5ff72c78834" prot="public" virt="non-virtual"><scope>neforce::io_context</scope><name>native_handle_type</name></member>
+      <member refid="classneforce_1_1io__context_1a64fbccd217ae99809d473877fd9316da" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>next_timer_deadline</name></member>
+      <member refid="classneforce_1_1io__context_1ac128a179d99f05ebba3d19ff97035f65" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>next_timer_id_</name></member>
+      <member refid="classneforce_1_1io__context_1ad1e81cc3fea345cfbdb39b62608f1262" prot="public" virt="non-virtual"><scope>neforce::io_context</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1io__context_1ae771ccd047c0a48a2d67dcf91aeb5bb1" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>outstanding_work_</name></member>
+      <member refid="classneforce_1_1io__context_1a3af8ec91599d62d1615bd4d19ffc1830" prot="public" virt="non-virtual"><scope>neforce::io_context</scope><name>poll</name></member>
+      <member refid="classneforce_1_1io__context_1a78e0605038679d62adce47b2bf3a49b4" prot="public" virt="non-virtual"><scope>neforce::io_context</scope><name>poll_one</name></member>
+      <member refid="classneforce_1_1io__context_1acbed85f51528d7d490ce3bfcd533bf38" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>pool_mutex_</name></member>
+      <member refid="classneforce_1_1io__context_1a6fcbdcb88a2458971c4b4c7c02a8113d" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>pool_threads_</name></member>
+      <member refid="classneforce_1_1io__context_1a70c36dfdd21b3434439800d56bf4e942" prot="public" virt="non-virtual"><scope>neforce::io_context</scope><name>post</name></member>
+      <member refid="classneforce_1_1io__context_1a21bd5e8ff93db37eff03e1400be99b76" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>process_timers</name></member>
+      <member refid="classneforce_1_1io__context_1a862dcb6b478824b1422dd5f86f35e2a8" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>register_file_completion</name></member>
+      <member refid="classneforce_1_1io__context_1a5c99b04f62177b2f63315f50237b47e9" prot="public" virt="non-virtual"><scope>neforce::io_context</scope><name>remove_fd</name></member>
+      <member refid="classneforce_1_1io__context_1aa0a7fd498aac1151d83e9fc49b24629b" prot="public" virt="non-virtual"><scope>neforce::io_context</scope><name>restart</name></member>
+      <member refid="classneforce_1_1io__context_1a2d0b05ac1c73237ad2056ef4ed07bc66" prot="public" virt="non-virtual"><scope>neforce::io_context</scope><name>run</name></member>
+      <member refid="classneforce_1_1io__context_1a365b06a14778fdd2b2a56ac84c21ce6c" prot="public" virt="non-virtual"><scope>neforce::io_context</scope><name>run_one</name></member>
+      <member refid="classneforce_1_1io__context_1a17228086cc96db39d915689dcaecc000" prot="public" virt="non-virtual"><scope>neforce::io_context</scope><name>run_pool</name></member>
+      <member refid="classneforce_1_1io__context_1ae4d91f32243e549e57024e3eca6cfa20" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>running_</name></member>
+      <member refid="classneforce_1_1io__context_1a78052af9b04e2e92a93bc4b8d1967d3c" prot="public" virt="non-virtual"><scope>neforce::io_context</scope><name>schedule_timer</name></member>
+      <member refid="classneforce_1_1io__context_1afaae1cb6de5e4fb64158f394ea176edc" prot="public" virt="non-virtual"><scope>neforce::io_context</scope><name>stop</name></member>
+      <member refid="classneforce_1_1io__context_1afe7e01b9c81432059a2a2ade572e6921" prot="public" virt="non-virtual"><scope>neforce::io_context</scope><name>stopped</name></member>
+      <member refid="classneforce_1_1io__context_1a761ca7052dead8e80534d83df4b37e04" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>stopped_</name></member>
+      <member refid="classneforce_1_1io__context_1a407f8ccdb8d5733aaab3547c0fa4d597" prot="public" virt="non-virtual"><scope>neforce::io_context</scope><name>timer_callback</name></member>
+      <member refid="classneforce_1_1io__context_1a98902b791ebb4467c8e94a476e5a70b2" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>timer_heap_</name></member>
+      <member refid="classneforce_1_1io__context_1a96b439732d23348dabda8b41e039c700" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>timer_mutex_</name></member>
+      <member refid="classneforce_1_1io__context_1a00922b3b29001925a5d7a0d46330a1e5" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>unregister_file_completion</name></member>
+      <member refid="classneforce_1_1io__context_1aa52fba93e620f307da32b9aa251a3508" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>wake</name></member>
+      <member refid="classneforce_1_1io__context_1af459fb70119180f92e98b35804188a57" prot="private" virt="non-virtual"><scope>neforce::io_context</scope><name>wake_event_</name></member>
+      <member refid="classneforce_1_1io__context_1a37826a2313d10c36397776876ba07612" prot="public" virt="non-virtual"><scope>neforce::io_context</scope><name>~io_context</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

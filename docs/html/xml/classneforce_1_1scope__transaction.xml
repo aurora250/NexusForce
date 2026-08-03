@@ -1,0 +1,261 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1scope__transaction" kind="class" language="C++" prot="public">
+    <compoundname>neforce::scope_transaction</compoundname>
+    <includes refid="scope__transaction_8hpp" local="no">scope_transaction.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Connect</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1scope__transaction_1a799952fa917ea156c8db2d56f3e67119" prot="private" static="no" mutable="no">
+        <type>Connect *</type>
+        <definition>Connect* neforce::scope_transaction&lt; Connect &gt;::conn_</definition>
+        <argsstring></argsstring>
+        <name>conn_</name>
+        <qualifiedname>neforce::scope_transaction::conn_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>数据库连接指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/scope_transaction.hpp" line="47" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/scope_transaction.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1scope__transaction_1a584d90f9bcaa9fba7d9cb3e9d032d855" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::scope_transaction&lt; Connect &gt;::committed_</definition>
+        <argsstring></argsstring>
+        <name>committed_</name>
+        <qualifiedname>neforce::scope_transaction::committed_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否已提交 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/scope_transaction.hpp" line="48" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/scope_transaction.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1scope__transaction_1afc18e7b5d1377ac97329b5bcc7b2d894" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::scope_transaction&lt; Connect &gt;::scope_transaction</definition>
+        <argsstring>(Connect &amp;conn)</argsstring>
+        <name>scope_transaction</name>
+        <qualifiedname>neforce::scope_transaction::scope_transaction</qualifiedname>
+        <param>
+          <type>Connect &amp;</type>
+          <declname>conn</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，开始事务 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>conn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数据库连接引用</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+立即调用 conn.begin() 开始事务。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/scope_transaction.hpp" line="57" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/scope_transaction.hpp" bodystart="57" bodyend="60"/>
+        <referencedby refid="classneforce_1_1scope__transaction_1a44ff57dedaec90cf93308e5b6f267c47" compoundref="scope__transaction_8hpp" startline="102" endline="118">neforce::scope_transaction&lt; Connect &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1scope__transaction_1a36e635edcd1de43e387a899e44cf5f18" compoundref="scope__transaction_8hpp" startline="88" endline="93">neforce::scope_transaction&lt; Connect &gt;::scope_transaction</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1scope__transaction_1a8c06961d72210fb918ad2cccf79b0672" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::scope_transaction&lt; Connect &gt;::~scope_transaction</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>~scope_transaction</name>
+        <qualifiedname>neforce::scope_transaction::~scope_transaction</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>如果事务未提交，自动调用 rollback() 回滚。 如果事务已提交，不做任何操作。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/scope_transaction.hpp" line="68" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/scope_transaction.hpp" bodystart="68" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1scope__transaction_1aceedf34e772c1431e26d111e85e8e151" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::scope_transaction&lt; Connect &gt;::scope_transaction</definition>
+        <argsstring>(const scope_transaction &amp;)=delete</argsstring>
+        <name>scope_transaction</name>
+        <qualifiedname>neforce::scope_transaction::scope_transaction</qualifiedname>
+        <param>
+          <type>const scope_transaction &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/scope_transaction.hpp" line="79" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1scope__transaction_1af95a132f6290867cc1542fec6198fb6d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1scope__transaction_1afc18e7b5d1377ac97329b5bcc7b2d894" kindref="member">scope_transaction</ref> &amp;</type>
+        <definition>scope_transaction &amp; neforce::scope_transaction&lt; Connect &gt;::operator=</definition>
+        <argsstring>(const scope_transaction &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::scope_transaction::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1scope__transaction_1afc18e7b5d1377ac97329b5bcc7b2d894" kindref="member">scope_transaction</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/scope_transaction.hpp" line="80" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1scope__transaction_1a36e635edcd1de43e387a899e44cf5f18" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::scope_transaction&lt; Connect &gt;::scope_transaction</definition>
+        <argsstring>(scope_transaction &amp;&amp;other) noexcept</argsstring>
+        <name>scope_transaction</name>
+        <qualifiedname>neforce::scope_transaction::scope_transaction</qualifiedname>
+        <param>
+          <type>scope_transaction &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+移动后源对象变为无效状态，不再持有连接引用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/scope_transaction.hpp" line="88" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/scope_transaction.hpp" bodystart="88" bodyend="93"/>
+        <references refid="classneforce_1_1scope__transaction_1afc18e7b5d1377ac97329b5bcc7b2d894" compoundref="scope__transaction_8hpp" startline="57" endline="60">neforce::scope_transaction&lt; Connect &gt;::scope_transaction</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1scope__transaction_1a44ff57dedaec90cf93308e5b6f267c47" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1scope__transaction_1afc18e7b5d1377ac97329b5bcc7b2d894" kindref="member">scope_transaction</ref> &amp;</type>
+        <definition>scope_transaction &amp; neforce::scope_transaction&lt; Connect &gt;::operator=</definition>
+        <argsstring>(scope_transaction &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::scope_transaction::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1scope__transaction_1afc18e7b5d1377ac97329b5bcc7b2d894" kindref="member">scope_transaction</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用</para>
+</simplesect>
+如果当前守卫未提交，先回滚当前事务。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/scope_transaction.hpp" line="102" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/scope_transaction.hpp" bodystart="102" bodyend="118"/>
+        <references refid="group___args_forward_functions_1ga57a2cf85645286e20c82caae70cd13dc" compoundref="type__traits_8hpp" startline="3084" endline="3086">neforce::addressof</references>
+        <references refid="classneforce_1_1scope__transaction_1afc18e7b5d1377ac97329b5bcc7b2d894" compoundref="scope__transaction_8hpp" startline="57" endline="60">neforce::scope_transaction&lt; Connect &gt;::scope_transaction</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1scope__transaction_1a592fda88ac0b87b2faff98568507c967" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::scope_transaction&lt; Connect &gt;::commit</definition>
+        <argsstring>()</argsstring>
+        <name>commit</name>
+        <qualifiedname>neforce::scope_transaction::commit</qualifiedname>
+        <briefdescription>
+<para>提交事务 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>调用 conn.commit() 提交事务，并将守卫标记为已提交。 已提交的守卫在析构时不会回滚。 重复调用无效。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/scope_transaction.hpp" line="127" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/scope_transaction.hpp" bodystart="127" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1scope__transaction_1a97bb451b1e43a125c9e286a09d744a84" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::scope_transaction&lt; Connect &gt;::committed</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>committed</name>
+        <qualifiedname>neforce::scope_transaction::committed</qualifiedname>
+        <briefdescription>
+<para>检查事务是否已提交 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>已提交返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/scope_transaction.hpp" line="138" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/scope_transaction.hpp" bodystart="138" bodyend="138"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>RAII事务作用域守卫 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>管理数据库事务的生命周期：<itemizedlist>
+<listitem><para>构造时调用 <ref refid="group___type_erasure_functions_1ga95ec604cbbeaea30e64f01a8790b5a92" kindref="member">begin()</ref></para>
+</listitem><listitem><para><ref refid="classneforce_1_1scope__transaction_1a592fda88ac0b87b2faff98568507c967" kindref="member">commit()</ref> 显式提交事务（仅可调用一次）</para>
+</listitem><listitem><para>析构时若未提交则调用 rollback()</para>
+</listitem></itemizedlist>
+</para>
+<para>不可复制，支持移动语义。</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Connect</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连接类型，需满足 <ref refid="structneforce_1_1idb__connect" kindref="compound">idb_connect</ref> 接口（提供 begin/commit/rollback） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/scope_transaction.hpp" line="45" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/scope_transaction.hpp" bodystart="45" bodyend="139"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1scope__transaction_1a592fda88ac0b87b2faff98568507c967" prot="public" virt="non-virtual"><scope>neforce::scope_transaction</scope><name>commit</name></member>
+      <member refid="classneforce_1_1scope__transaction_1a97bb451b1e43a125c9e286a09d744a84" prot="public" virt="non-virtual"><scope>neforce::scope_transaction</scope><name>committed</name></member>
+      <member refid="classneforce_1_1scope__transaction_1a584d90f9bcaa9fba7d9cb3e9d032d855" prot="private" virt="non-virtual"><scope>neforce::scope_transaction</scope><name>committed_</name></member>
+      <member refid="classneforce_1_1scope__transaction_1a799952fa917ea156c8db2d56f3e67119" prot="private" virt="non-virtual"><scope>neforce::scope_transaction</scope><name>conn_</name></member>
+      <member refid="classneforce_1_1scope__transaction_1af95a132f6290867cc1542fec6198fb6d" prot="public" virt="non-virtual"><scope>neforce::scope_transaction</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1scope__transaction_1a44ff57dedaec90cf93308e5b6f267c47" prot="public" virt="non-virtual"><scope>neforce::scope_transaction</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1scope__transaction_1afc18e7b5d1377ac97329b5bcc7b2d894" prot="public" virt="non-virtual"><scope>neforce::scope_transaction</scope><name>scope_transaction</name></member>
+      <member refid="classneforce_1_1scope__transaction_1aceedf34e772c1431e26d111e85e8e151" prot="public" virt="non-virtual"><scope>neforce::scope_transaction</scope><name>scope_transaction</name></member>
+      <member refid="classneforce_1_1scope__transaction_1a36e635edcd1de43e387a899e44cf5f18" prot="public" virt="non-virtual"><scope>neforce::scope_transaction</scope><name>scope_transaction</name></member>
+      <member refid="classneforce_1_1scope__transaction_1a8c06961d72210fb918ad2cccf79b0672" prot="public" virt="non-virtual"><scope>neforce::scope_transaction</scope><name>~scope_transaction</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

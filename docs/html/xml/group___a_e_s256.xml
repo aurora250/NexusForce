@@ -3,23 +3,24 @@
   <compounddef id="group___a_e_s256" kind="group">
     <compoundname>AES256</compoundname>
     <title>AES-256</title>
-    <innerclass refid="struct_a_e_s256" prot="public">AES256</innerclass>
+    <innerclass refid="structneforce_1_1_a_e_s256" prot="public">neforce::AES256</innerclass>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___a_e_s256_1ga9162704a00e03c5bc37ac825199e134d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
-        <definition>string aes256_encrypt</definition>
+      <memberdef kind="function" id="group___a_e_s256_1ga1c0c02e05d359462086612ad627bff65" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string</type>
+        <definition>string neforce::aes256_encrypt</definition>
         <argsstring>(const string_view data, const string_view key_hex)</argsstring>
         <name>aes256_encrypt</name>
+        <qualifiedname>neforce::aes256_encrypt</qualifiedname>
         <param>
-          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <type>const string_view</type>
           <declname>data</declname>
         </param>
         <param>
-          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <type>const string_view</type>
           <declname>key_hex</declname>
         </param>
         <briefdescription>
-<para>AES-256加密便捷函数 </para>
+<para>AES-256加密函数 </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -46,83 +47,23 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" line="206" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" bodystart="206" bodyend="208"/>
-        <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
-        <references refid="struct_a_e_s256_1a11f36fe7fd451fae910f46e0bca0f5f8">encrypt_ecb_hex</references>
+        <references refid="group___a_e_s256_1ga1c0c02e05d359462086612ad627bff65" compoundref="aes256_8hpp" startline="206" endline="208">neforce::aes256_encrypt</references>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+        <references refid="structneforce_1_1_a_e_s256_1ab4861a3a7f3260c565b17fa48129a1a4">neforce::AES256::encrypt_ecb_hex</references>
+        <referencedby refid="group___a_e_s256_1ga1c0c02e05d359462086612ad627bff65" compoundref="aes256_8hpp" startline="206" endline="208">neforce::aes256_encrypt</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___a_e_s256_1ga27f3a1306eb167352bd0c38fdfb9553b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
-        <definition>string aes256_encrypt</definition>
-        <argsstring>(const string &amp;data, const string_view key_hex)</argsstring>
-        <name>aes256_encrypt</name>
-        <param>
-          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
-          <declname>data</declname>
-        </param>
-        <param>
-          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
-          <declname>key_hex</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" line="210" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" bodystart="210" bodyend="212"/>
-      </memberdef>
-      <memberdef kind="function" id="group___a_e_s256_1ga95a4c0fd5af6288236ee8ce17b65947f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
-        <definition>string aes256_encrypt</definition>
-        <argsstring>(const string_view data, const string &amp;key_hex)</argsstring>
-        <name>aes256_encrypt</name>
-        <param>
-          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
-          <declname>data</declname>
-        </param>
-        <param>
-          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
-          <declname>key_hex</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" line="214" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" bodystart="214" bodyend="216"/>
-      </memberdef>
-      <memberdef kind="function" id="group___a_e_s256_1gaca56e971eee480cd942bc879e760226d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
-        <definition>string aes256_encrypt</definition>
-        <argsstring>(const string &amp;data, const string &amp;key_hex)</argsstring>
-        <name>aes256_encrypt</name>
-        <param>
-          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
-          <declname>data</declname>
-        </param>
-        <param>
-          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
-          <declname>key_hex</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" line="218" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" bodystart="218" bodyend="220"/>
-      </memberdef>
-      <memberdef kind="function" id="group___a_e_s256_1gaf9544c578876806da9b119c0f88e29e5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
-        <definition>string aes256_decrypt</definition>
+      <memberdef kind="function" id="group___a_e_s256_1gac6a85d68fa3d824b2301df77a6006c2a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string</type>
+        <definition>string neforce::aes256_decrypt</definition>
         <argsstring>(const string_view encrypted_hex, const string_view key_hex)</argsstring>
         <name>aes256_decrypt</name>
+        <qualifiedname>neforce::aes256_decrypt</qualifiedname>
         <param>
-          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <type>const string_view</type>
           <declname>encrypted_hex</declname>
         </param>
         <param>
-          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <type>const string_view</type>
           <declname>key_hex</declname>
         </param>
         <briefdescription>
@@ -152,71 +93,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" line="228" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" bodystart="228" bodyend="230"/>
-        <references refid="struct_a_e_s256_1ab9b876bf44e3bcb77a601dedb98b2424">decrypt_ecb_hex</references>
-      </memberdef>
-      <memberdef kind="function" id="group___a_e_s256_1ga4f07b97ad616e2fa6c4aa4d8b96754a0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
-        <definition>string aes256_decrypt</definition>
-        <argsstring>(const string &amp;encrypted_hex, const string_view key_hex)</argsstring>
-        <name>aes256_decrypt</name>
-        <param>
-          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
-          <declname>encrypted_hex</declname>
-        </param>
-        <param>
-          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
-          <declname>key_hex</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" line="232" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" bodystart="232" bodyend="234"/>
-      </memberdef>
-      <memberdef kind="function" id="group___a_e_s256_1gace803e86f8c17a34b562db0b7c36cb85" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
-        <definition>string aes256_decrypt</definition>
-        <argsstring>(const string_view encrypted_hex, const string &amp;key_hex)</argsstring>
-        <name>aes256_decrypt</name>
-        <param>
-          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
-          <declname>encrypted_hex</declname>
-        </param>
-        <param>
-          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
-          <declname>key_hex</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" line="236" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" bodystart="236" bodyend="238"/>
-      </memberdef>
-      <memberdef kind="function" id="group___a_e_s256_1ga764f0a40c92eb22880fa2110abeda2d5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
-        <definition>string aes256_decrypt</definition>
-        <argsstring>(const string &amp;encrypted_hex, const string &amp;key_hex)</argsstring>
-        <name>aes256_decrypt</name>
-        <param>
-          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
-          <declname>encrypted_hex</declname>
-        </param>
-        <param>
-          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
-          <declname>key_hex</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" line="240" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" bodystart="240" bodyend="242"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" line="216" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" bodystart="216" bodyend="218"/>
+        <references refid="group___a_e_s256_1gac6a85d68fa3d824b2301df77a6006c2a" compoundref="aes256_8hpp" startline="216" endline="218">neforce::aes256_decrypt</references>
+        <references refid="structneforce_1_1_a_e_s256_1a494ec37533a666915d3a233af875e835">neforce::AES256::decrypt_ecb_hex</references>
+        <referencedby refid="group___a_e_s256_1gac6a85d68fa3d824b2301df77a6006c2a" compoundref="aes256_8hpp" startline="216" endline="218">neforce::aes256_decrypt</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

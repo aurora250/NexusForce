@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['概念约束_0',['概念约束',['../group___concepts.html',1,'']]]
+  ['核心类型_0',['核心类型',['../group___core_types.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['空状态_0',['空状态',['../group___none.html',1,'']]]
+  ['稀疏向量_0',['稀疏向量',['../group___sparse_vector.html',1,'']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['请求方法_0',['HTTP 请求方法',['../group___h_t_t_p.html#http_methods',1,'']]]
+  ['计数算法_0',['计数算法',['../group___counting_algorithms.html',1,'']]],
+  ['计时器_1',['计时器',['../group___click.html',1,'']]]
 ];

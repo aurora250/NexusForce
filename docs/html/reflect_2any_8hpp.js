@@ -1,7 +1,7 @@
 var reflect_2any_8hpp =
 [
-    [ "type_id", "group___reflection.html#ga541516a057bbd67d55d02ece107883d9", null ],
-    [ "swap", "group___reflection.html#ga88532337ecb7282cd7543cbc2556e1de", null ],
-    [ "type_id_for", "group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2", null ],
-    [ "type_name_v", "group___reflection.html#ga71a3267b0111c48af4e304d2a756abd1", null ]
+    [ "neforce::reflect::type_id", "group___reflection.html#ga3680b21ef08e8497fc7255d54c682211", null ],
+    [ "neforce::reflect::swap", "group___reflection.html#gaaab4fcdd7dce594d4232f1f8a7e7441b", null ],
+    [ "neforce::reflect::type_id_for", "group___reflection.html#ga44db0edaa0dbe2c60cb04e815b0a498e", null ],
+    [ "neforce::reflect::type_name_v", "group___reflection.html#gae991e87ac7172215b587ed3916f9e394", null ]
 ];

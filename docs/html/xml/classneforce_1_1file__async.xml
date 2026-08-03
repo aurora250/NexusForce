@@ -1,0 +1,861 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1file__async" kind="class" language="C++" prot="public">
+    <compoundname>neforce::file_async</compoundname>
+    <includes refid="file__async_8hpp" local="no">file_async.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1file__async_1a02767dfe6c2e3fbce082c91231e2094a" prot="public" static="no">
+        <type>::DWORD</type>
+        <definition>using neforce::file_async::size_type = ::DWORD</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>neforce::file_async::size_type</qualifiedname>
+        <briefdescription>
+<para>大小类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="37" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1file__async_1a0084dffc6d8c044ea6465453afad8c21" prot="public" static="no">
+        <type>::LONGLONG</type>
+        <definition>using neforce::file_async::difference_type = ::LONGLONG</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>neforce::file_async::difference_type</qualifiedname>
+        <briefdescription>
+<para>偏移量类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="38" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1file__async_1a05bb92b1a32893fbcbcfa673b0d46a57" prot="public" static="no">
+        <type>_NEFORCE <ref refid="classneforce_1_1file__async_1a05bb92b1a32893fbcbcfa673b0d46a57" kindref="member">native_handle_type</ref></type>
+        <definition>using neforce::file_async::native_handle_type = _NEFORCE native_handle_type</definition>
+        <argsstring></argsstring>
+        <name>native_handle_type</name>
+        <qualifiedname>neforce::file_async::native_handle_type</qualifiedname>
+        <briefdescription>
+<para>原生文件句柄类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="43" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1file__async_1ae519bfccad7e5255fbc357fdb9afe716" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1file__async_1a05bb92b1a32893fbcbcfa673b0d46a57" kindref="member">native_handle_type</ref></type>
+        <definition>native_handle_type neforce::file_async::handle_</definition>
+        <argsstring></argsstring>
+        <name>handle_</name>
+        <qualifiedname>neforce::file_async::handle_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="46" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1file__async_1a4dd23f0cb8552fef0119ad7eb479a41f" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> *</type>
+        <definition>io_context* neforce::file_async::ctx_</definition>
+        <argsstring></argsstring>
+        <name>ctx_</name>
+        <qualifiedname>neforce::file_async::ctx_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="47" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1file__async_1a5bbb10c6ff2ead68ecce15ff02fca21d" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; uring &gt;</type>
+        <definition>unique_ptr&lt;uring&gt; neforce::file_async::uring_</definition>
+        <argsstring></argsstring>
+        <name>uring_</name>
+        <qualifiedname>neforce::file_async::uring_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="50" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1file__async_1a23057e6b8d9aaa55b362034657ed5689" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref>, <ref refid="classneforce_1_1file__async_1a02767dfe6c2e3fbce082c91231e2094a" kindref="member">size_type</ref>)&gt;</type>
+        <definition>function&lt;void(error_code, size_type)&gt; neforce::file_async::pending_handler_</definition>
+        <argsstring></argsstring>
+        <name>pending_handler_</name>
+        <qualifiedname>neforce::file_async::pending_handler_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="52" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1file__async_1a4f1cc36410d889f46d4240ebfdb3ceeb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::file_async::ensure_iocp</definition>
+        <argsstring>(io_context &amp;ctx)</argsstring>
+        <name>ensure_iocp</name>
+        <qualifiedname>neforce::file_async::ensure_iocp</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="54" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__async_1af1f8c4bd00554d4b92070ae1232d1166" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::file_async::do_async_read</definition>
+        <argsstring>(io_context &amp;ctx, string &amp;buffer, size_type size, difference_type offset, cancellation_slot *slot, function&lt; void(error_code, size_type)&gt; handler)</argsstring>
+        <name>do_async_read</name>
+        <qualifiedname>neforce::file_async::do_async_read</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1file__async_1a02767dfe6c2e3fbce082c91231e2094a" kindref="member">size_type</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1file__async_1a0084dffc6d8c044ea6465453afad8c21" kindref="member">difference_type</ref></type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1cancellation__slot" kindref="compound">cancellation_slot</ref> *</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref>, <ref refid="classneforce_1_1file__async_1a02767dfe6c2e3fbce082c91231e2094a" kindref="member">size_type</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="56" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__async_1a0cb7ea8adbca6eddae29b69f702496a8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::file_async::do_async_write</definition>
+        <argsstring>(io_context &amp;ctx, string data, size_type size, difference_type offset, cancellation_slot *slot, function&lt; void(error_code, size_type)&gt; handler)</argsstring>
+        <name>do_async_write</name>
+        <qualifiedname>neforce::file_async::do_async_write</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1file__async_1a02767dfe6c2e3fbce082c91231e2094a" kindref="member">size_type</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1file__async_1a0084dffc6d8c044ea6465453afad8c21" kindref="member">difference_type</ref></type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1cancellation__slot" kindref="compound">cancellation_slot</ref> *</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref>, <ref refid="classneforce_1_1file__async_1a02767dfe6c2e3fbce082c91231e2094a" kindref="member">size_type</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="59" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1file__async_1a12d369cd25415adfd8c4fe92c675b025" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::file_async::file_async</definition>
+        <argsstring>(native_handle_type handle)</argsstring>
+        <name>file_async</name>
+        <qualifiedname>neforce::file_async::file_async</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1file__async_1a05bb92b1a32893fbcbcfa673b0d46a57" kindref="member">native_handle_type</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>已打开的文件句柄 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="67" column="14"/>
+        <referencedby refid="classneforce_1_1file__async_1af3f35d178979b49aa12cee580dbc28a4">file_async</referencedby>
+        <referencedby refid="classneforce_1_1file__async_1a127bf30a38747083454d8d99a10f7c9e">operator=</referencedby>
+        <referencedby refid="classneforce_1_1file__async_1a4c7cdb286f86503341ce08a845902590">~file_async</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__async_1a4c7cdb286f86503341ce08a845902590" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::file_async::~file_async</definition>
+        <argsstring>()</argsstring>
+        <name>~file_async</name>
+        <qualifiedname>neforce::file_async::~file_async</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="72" column="5"/>
+        <references refid="classneforce_1_1file__async_1a12d369cd25415adfd8c4fe92c675b025">file_async</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__async_1a41924a7ed55d6dd7756cc8f098579a30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::file_async::file_async</definition>
+        <argsstring>(const file_async &amp;)=delete</argsstring>
+        <name>file_async</name>
+        <qualifiedname>neforce::file_async::file_async</qualifiedname>
+        <param>
+          <type>const file_async &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="74" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__async_1a6bf4404d5951a9125196633232fb5425" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1file__async_1a12d369cd25415adfd8c4fe92c675b025" kindref="member">file_async</ref> &amp;</type>
+        <definition>file_async &amp; neforce::file_async::operator=</definition>
+        <argsstring>(const file_async &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::file_async::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1file__async_1a12d369cd25415adfd8c4fe92c675b025" kindref="member">file_async</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="75" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__async_1af3f35d178979b49aa12cee580dbc28a4" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::file_async::file_async</definition>
+        <argsstring>(file_async &amp;&amp;other) noexcept</argsstring>
+        <name>file_async</name>
+        <qualifiedname>neforce::file_async::file_async</qualifiedname>
+        <param>
+          <type>file_async &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="81" column="5"/>
+        <references refid="classneforce_1_1file__async_1a12d369cd25415adfd8c4fe92c675b025">file_async</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__async_1a127bf30a38747083454d8d99a10f7c9e" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1file__async_1a12d369cd25415adfd8c4fe92c675b025" kindref="member">file_async</ref> &amp;</type>
+        <definition>file_async &amp; neforce::file_async::operator=</definition>
+        <argsstring>(file_async &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::file_async::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1file__async_1a12d369cd25415adfd8c4fe92c675b025" kindref="member">file_async</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="88" column="16"/>
+        <references refid="classneforce_1_1file__async_1a12d369cd25415adfd8c4fe92c675b025">file_async</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__async_1a10ed1fff1578c4496f4b8bef044bae8d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::file_async::async_read</definition>
+        <argsstring>(io_context &amp;ctx, string &amp;buffer, size_type size, function&lt; void(error_code, size_type)&gt; handler)</argsstring>
+        <name>async_read</name>
+        <qualifiedname>neforce::file_async::async_read</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1file__async_1a02767dfe6c2e3fbce082c91231e2094a" kindref="member">size_type</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref>, <ref refid="classneforce_1_1file__async_1a02767dfe6c2e3fbce082c91231e2094a" kindref="member">size_type</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步读取数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要读取的字节数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_type bytes_read) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="97" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" bodystart="97" bodyend="99"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="group___type_erasure_functions_1ga69955a26617401117eaf53fa82162e2b" compoundref="type__erase_8hpp" startline="292" endline="294">neforce::size</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__async_1afde960bfefd4d33c60cb21d12302469d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::file_async::async_read</definition>
+        <argsstring>(io_context &amp;ctx, string &amp;buffer, size_type size, difference_type offset, function&lt; void(error_code, size_type)&gt; handler)</argsstring>
+        <name>async_read</name>
+        <qualifiedname>neforce::file_async::async_read</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1file__async_1a02767dfe6c2e3fbce082c91231e2094a" kindref="member">size_type</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1file__async_1a0084dffc6d8c044ea6465453afad8c21" kindref="member">difference_type</ref></type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref>, <ref refid="classneforce_1_1file__async_1a02767dfe6c2e3fbce082c91231e2094a" kindref="member">size_type</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>指定偏移量异步读取数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要读取的字节数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件偏移量，-1 使用当前位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_type bytes_read) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="109" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" bodystart="109" bodyend="112"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="group___type_erasure_functions_1ga69955a26617401117eaf53fa82162e2b" compoundref="type__erase_8hpp" startline="292" endline="294">neforce::size</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__async_1a96b39dd3e53c70c6bf5f8b2c44e46c99" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::file_async::async_read</definition>
+        <argsstring>(io_context &amp;ctx, string &amp;buffer, size_type size, cancellation_slot &amp;slot, function&lt; void(error_code, size_type)&gt; handler)</argsstring>
+        <name>async_read</name>
+        <qualifiedname>neforce::file_async::async_read</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1file__async_1a02767dfe6c2e3fbce082c91231e2094a" kindref="member">size_type</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1cancellation__slot" kindref="compound">cancellation_slot</ref> &amp;</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref>, <ref refid="classneforce_1_1file__async_1a02767dfe6c2e3fbce082c91231e2094a" kindref="member">size_type</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>带取消槽异步读取数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要读取的字节数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>slot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>取消槽 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_type bytes_read) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="122" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" bodystart="122" bodyend="125"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="group___type_erasure_functions_1ga69955a26617401117eaf53fa82162e2b" compoundref="type__erase_8hpp" startline="292" endline="294">neforce::size</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__async_1ab4bb39f88a391b4568c0798b5927762a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::file_async::async_write</definition>
+        <argsstring>(io_context &amp;ctx, string data, size_type size, function&lt; void(error_code, size_type)&gt; handler)</argsstring>
+        <name>async_write</name>
+        <qualifiedname>neforce::file_async::async_write</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1file__async_1a02767dfe6c2e3fbce082c91231e2094a" kindref="member">size_type</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref>, <ref refid="classneforce_1_1file__async_1a02767dfe6c2e3fbce082c91231e2094a" kindref="member">size_type</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步写入数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要写入的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要写入的字节数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_type bytes_written)</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+数据被内部拷贝，调用者可以立即释放。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="136" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" bodystart="136" bodyend="138"/>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="group___type_erasure_functions_1ga69955a26617401117eaf53fa82162e2b" compoundref="type__erase_8hpp" startline="292" endline="294">neforce::size</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__async_1afdb5e5fc4d46133e21c4336b579d6b9f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::file_async::async_write</definition>
+        <argsstring>(io_context &amp;ctx, string data, size_type size, difference_type offset, function&lt; void(error_code, size_type)&gt; handler)</argsstring>
+        <name>async_write</name>
+        <qualifiedname>neforce::file_async::async_write</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1file__async_1a02767dfe6c2e3fbce082c91231e2094a" kindref="member">size_type</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1file__async_1a0084dffc6d8c044ea6465453afad8c21" kindref="member">difference_type</ref></type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref>, <ref refid="classneforce_1_1file__async_1a02767dfe6c2e3fbce082c91231e2094a" kindref="member">size_type</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>指定偏移量异步写入数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要写入的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要写入的字节数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件偏移量，-1 使用当前位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_type bytes_written) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="148" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" bodystart="148" bodyend="151"/>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="group___type_erasure_functions_1ga69955a26617401117eaf53fa82162e2b" compoundref="type__erase_8hpp" startline="292" endline="294">neforce::size</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__async_1a098d3b285704a59e05e9783546472cc8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::file_async::async_write</definition>
+        <argsstring>(io_context &amp;ctx, string data, size_type size, cancellation_slot &amp;slot, function&lt; void(error_code, size_type)&gt; handler)</argsstring>
+        <name>async_write</name>
+        <qualifiedname>neforce::file_async::async_write</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1file__async_1a02767dfe6c2e3fbce082c91231e2094a" kindref="member">size_type</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1cancellation__slot" kindref="compound">cancellation_slot</ref> &amp;</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref>, <ref refid="classneforce_1_1file__async_1a02767dfe6c2e3fbce082c91231e2094a" kindref="member">size_type</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>带取消槽异步写入数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要写入的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要写入的字节数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>slot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>取消槽 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_type bytes_written) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="161" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" bodystart="161" bodyend="164"/>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="group___type_erasure_functions_1ga69955a26617401117eaf53fa82162e2b" compoundref="type__erase_8hpp" startline="292" endline="294">neforce::size</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__async_1abb50c5226af0d707f37b4f6731ed4f80" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1file__async_1a05bb92b1a32893fbcbcfa673b0d46a57" kindref="member">native_handle_type</ref></type>
+        <definition>native_handle_type neforce::file_async::native_handle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>native_handle</name>
+        <qualifiedname>neforce::file_async::native_handle</qualifiedname>
+        <briefdescription>
+<para>获取原生文件句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>原生文件句柄 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="170" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" bodystart="170" bodyend="170"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>文件异步I/O管理类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供对文件句柄的异步读写操作，由 <ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> 事件循环驱动。 handler 在 <ref refid="classneforce_1_1io__context_1a2d0b05ac1c73237ad2056ef4ed07bc66" kindref="member">io_context::run()</ref> 线程中执行。</para>
+<para><simplesect kind="note"><para>不持有文件句柄所有权，句柄生命周期由调用方保证。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="34" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" bodystart="34" bodyend="171"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1file__async_1a10ed1fff1578c4496f4b8bef044bae8d" prot="public" virt="non-virtual"><scope>neforce::file_async</scope><name>async_read</name></member>
+      <member refid="classneforce_1_1file__async_1afde960bfefd4d33c60cb21d12302469d" prot="public" virt="non-virtual"><scope>neforce::file_async</scope><name>async_read</name></member>
+      <member refid="classneforce_1_1file__async_1a96b39dd3e53c70c6bf5f8b2c44e46c99" prot="public" virt="non-virtual"><scope>neforce::file_async</scope><name>async_read</name></member>
+      <member refid="classneforce_1_1file__async_1ab4bb39f88a391b4568c0798b5927762a" prot="public" virt="non-virtual"><scope>neforce::file_async</scope><name>async_write</name></member>
+      <member refid="classneforce_1_1file__async_1afdb5e5fc4d46133e21c4336b579d6b9f" prot="public" virt="non-virtual"><scope>neforce::file_async</scope><name>async_write</name></member>
+      <member refid="classneforce_1_1file__async_1a098d3b285704a59e05e9783546472cc8" prot="public" virt="non-virtual"><scope>neforce::file_async</scope><name>async_write</name></member>
+      <member refid="classneforce_1_1file__async_1a4dd23f0cb8552fef0119ad7eb479a41f" prot="private" virt="non-virtual"><scope>neforce::file_async</scope><name>ctx_</name></member>
+      <member refid="classneforce_1_1file__async_1a0084dffc6d8c044ea6465453afad8c21" prot="public" virt="non-virtual"><scope>neforce::file_async</scope><name>difference_type</name></member>
+      <member refid="classneforce_1_1file__async_1af1f8c4bd00554d4b92070ae1232d1166" prot="private" virt="non-virtual"><scope>neforce::file_async</scope><name>do_async_read</name></member>
+      <member refid="classneforce_1_1file__async_1a0cb7ea8adbca6eddae29b69f702496a8" prot="private" virt="non-virtual"><scope>neforce::file_async</scope><name>do_async_write</name></member>
+      <member refid="classneforce_1_1file__async_1a4f1cc36410d889f46d4240ebfdb3ceeb" prot="private" virt="non-virtual"><scope>neforce::file_async</scope><name>ensure_iocp</name></member>
+      <member refid="classneforce_1_1file__async_1a12d369cd25415adfd8c4fe92c675b025" prot="public" virt="non-virtual"><scope>neforce::file_async</scope><name>file_async</name></member>
+      <member refid="classneforce_1_1file__async_1a41924a7ed55d6dd7756cc8f098579a30" prot="public" virt="non-virtual"><scope>neforce::file_async</scope><name>file_async</name></member>
+      <member refid="classneforce_1_1file__async_1af3f35d178979b49aa12cee580dbc28a4" prot="public" virt="non-virtual"><scope>neforce::file_async</scope><name>file_async</name></member>
+      <member refid="classneforce_1_1file__async_1ae519bfccad7e5255fbc357fdb9afe716" prot="private" virt="non-virtual"><scope>neforce::file_async</scope><name>handle_</name></member>
+      <member refid="classneforce_1_1file__async_1abb50c5226af0d707f37b4f6731ed4f80" prot="public" virt="non-virtual"><scope>neforce::file_async</scope><name>native_handle</name></member>
+      <member refid="classneforce_1_1file__async_1a05bb92b1a32893fbcbcfa673b0d46a57" prot="public" virt="non-virtual"><scope>neforce::file_async</scope><name>native_handle_type</name></member>
+      <member refid="classneforce_1_1file__async_1a6bf4404d5951a9125196633232fb5425" prot="public" virt="non-virtual"><scope>neforce::file_async</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1file__async_1a127bf30a38747083454d8d99a10f7c9e" prot="public" virt="non-virtual"><scope>neforce::file_async</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1file__async_1a23057e6b8d9aaa55b362034657ed5689" prot="private" virt="non-virtual"><scope>neforce::file_async</scope><name>pending_handler_</name></member>
+      <member refid="classneforce_1_1file__async_1a02767dfe6c2e3fbce082c91231e2094a" prot="public" virt="non-virtual"><scope>neforce::file_async</scope><name>size_type</name></member>
+      <member refid="classneforce_1_1file__async_1a5bbb10c6ff2ead68ecce15ff02fca21d" prot="private" virt="non-virtual"><scope>neforce::file_async</scope><name>uring_</name></member>
+      <member refid="classneforce_1_1file__async_1a4c7cdb286f86503341ce08a845902590" prot="public" virt="non-virtual"><scope>neforce::file_async</scope><name>~file_async</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

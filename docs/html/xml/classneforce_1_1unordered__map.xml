@@ -1,0 +1,2226 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1unordered__map" kind="class" language="C++" prot="public">
+    <compoundname>neforce::unordered_map</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">icollector&lt; unordered_map&lt; Key, T, hash&lt; Key &gt;, equal_to&lt; Key &gt;, allocator&lt; hashtable_node&lt; pair&lt; const Key, T &gt; &gt; &gt; &gt; &gt;</basecompoundref>
+    <includes refid="unordered__map_8hpp" local="no">unordered_map.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Key</type>
+      </param>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename HashFcn</type>
+        <defval><ref refid="structneforce_1_1hash" kindref="compound">hash</ref>&lt;Key&gt;</defval>
+      </param>
+      <param>
+        <type>typename EqualKey</type>
+        <defval><ref refid="classneforce_1_1unordered__map_1acca95a7e81dd6f5c5c7efccdc9a3977b" kindref="member">equal_to</ref>&lt;Key&gt;</defval>
+      </param>
+      <param>
+        <type>typename Alloc</type>
+        <defval><ref refid="group___memory_allocator_1gabd6174043c688f04c1d71b9b21148ec1" kindref="member">allocator</ref>&lt;<ref refid="structneforce_1_1hashtable__node" kindref="compound">hashtable_node</ref>&lt;<ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt;const Key, T&gt;&gt;&gt;</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classneforce_1_1unordered__map_1a524bab39921709a4f02f6ef6aed35721" prot="private" static="no">
+        <type><ref refid="classneforce_1_1hashtable" kindref="compound">hashtable</ref>&lt; <ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; const Key, T &gt;, Key, HashFcn, <ref refid="structneforce_1_1select1st" kindref="compound">select1st</ref>&lt; <ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;</type>
+        <definition>using neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::base_type = hashtable&lt;pair&lt;const Key, T&gt;, Key, HashFcn, select1st&lt;pair&lt;const Key, T&gt;&gt;, EqualKey,
+                               Alloc&gt;</definition>
+        <argsstring></argsstring>
+        <name>base_type</name>
+        <qualifiedname>neforce::unordered_map::base_type</qualifiedname>
+        <briefdescription>
+<para>底层哈希表类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="45" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1unordered__map_1a6042f08de02279101e3fcf4fb5fd59fb" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1hashtable_1a7a98dc10f90001eab1bdbdcccabaf3bc" kindref="member">base_type::key_type</ref></type>
+        <definition>using neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::key_type = typename base_type::key_type</definition>
+        <argsstring></argsstring>
+        <name>key_type</name>
+        <qualifiedname>neforce::unordered_map::key_type</qualifiedname>
+        <briefdescription>
+<para>键类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="49" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1unordered__map_1ac1ad4709aa3162b5353149d11639d2ba" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1hashtable_1a36229d31e40396ad7a453f2e7761d633" kindref="member">base_type::value_type</ref></type>
+        <definition>using neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::value_type = typename base_type::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>neforce::unordered_map::value_type</qualifiedname>
+        <briefdescription>
+<para>值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="50" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1unordered__map_1a7ecdbf70afbeba698d4c2a1ca75b8010" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1hashtable_1ad157fb75879f334c6f51fee5c9024901" kindref="member">base_type::hasher</ref></type>
+        <definition>using neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::hasher = typename base_type::hasher</definition>
+        <argsstring></argsstring>
+        <name>hasher</name>
+        <qualifiedname>neforce::unordered_map::hasher</qualifiedname>
+        <briefdescription>
+<para>哈希函数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="51" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1unordered__map_1ada1f3bd5f16ba5e4ffa43214a868b457" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1hashtable_1a244ed6e691bf1b1a789f4e695e1818bd" kindref="member">base_type::key_equal</ref></type>
+        <definition>using neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::key_equal = typename base_type::key_equal</definition>
+        <argsstring></argsstring>
+        <name>key_equal</name>
+        <qualifiedname>neforce::unordered_map::key_equal</qualifiedname>
+        <briefdescription>
+<para>键相等比较函数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="52" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1unordered__map_1a81a44a4d57951784d0e816c0aa790b97" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">base_type::size_type</ref></type>
+        <definition>using neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::size_type = typename base_type::size_type</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>neforce::unordered_map::size_type</qualifiedname>
+        <briefdescription>
+<para>大小类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="54" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1unordered__map_1a823f114d2218fc3bd2105560e8c1a51c" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1hashtable_1aa02fc78affd2f1bf107f8a8313943833" kindref="member">base_type::difference_type</ref></type>
+        <definition>using neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::difference_type = typename base_type::difference_type</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>neforce::unordered_map::difference_type</qualifiedname>
+        <briefdescription>
+<para>差值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="55" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1unordered__map_1a0ca11675660891dfebfef195eb2212f9" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1hashtable_1a008bea1fa7c7965240bdde9ac3bcf689" kindref="member">base_type::pointer</ref></type>
+        <definition>using neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::pointer = typename base_type::pointer</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>neforce::unordered_map::pointer</qualifiedname>
+        <briefdescription>
+<para>指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="56" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1unordered__map_1a0059155835a48d6e394d5ae9c3197ffa" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1hashtable_1abeb4688a4c54eda6fb4ce08c3d87bf26" kindref="member">base_type::const_pointer</ref></type>
+        <definition>using neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::const_pointer = typename base_type::const_pointer</definition>
+        <argsstring></argsstring>
+        <name>const_pointer</name>
+        <qualifiedname>neforce::unordered_map::const_pointer</qualifiedname>
+        <briefdescription>
+<para>常量指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="57" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1unordered__map_1a94cc65ae6a1e06cd75d9ab3ada3eec76" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1hashtable_1a76934e55ea2c65881c3e688aace453cb" kindref="member">base_type::reference</ref></type>
+        <definition>using neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::reference = typename base_type::reference</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>neforce::unordered_map::reference</qualifiedname>
+        <briefdescription>
+<para>引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="58" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1unordered__map_1aee9832730b43b8d23ab16826169d4dc5" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1hashtable_1a6688f3d749cf166d2ecb55924b091afa" kindref="member">base_type::const_reference</ref></type>
+        <definition>using neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::const_reference = typename base_type::const_reference</definition>
+        <argsstring></argsstring>
+        <name>const_reference</name>
+        <qualifiedname>neforce::unordered_map::const_reference</qualifiedname>
+        <briefdescription>
+<para>常量引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="59" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1unordered__map_1a5fab20f508bc282377f3e1a1389dcc65" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1hashtable_1aee447c96dc5ebe31fc8bfe15d62d43fb" kindref="member">base_type::iterator</ref></type>
+        <definition>using neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::iterator = typename base_type::iterator</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>neforce::unordered_map::iterator</qualifiedname>
+        <briefdescription>
+<para>迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="60" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1unordered__map_1a30608b4d0a56b97d0a20c4fa54a45a1d" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1hashtable_1aa0a584c8b3f5f4e645cf841260d81005" kindref="member">base_type::const_iterator</ref></type>
+        <definition>using neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::const_iterator = typename base_type::const_iterator</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <qualifiedname>neforce::unordered_map::const_iterator</qualifiedname>
+        <briefdescription>
+<para>常量迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="61" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1unordered__map_1adb3f026275901f10261fca28504b6e7f" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1hashtable_1a74354ef6e9c5e0360d3aa5dabfdf978d" kindref="member">base_type::allocator_type</ref></type>
+        <definition>using neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::allocator_type = typename base_type::allocator_type</definition>
+        <argsstring></argsstring>
+        <name>allocator_type</name>
+        <qualifiedname>neforce::unordered_map::allocator_type</qualifiedname>
+        <briefdescription>
+<para>分配器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="62" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1unordered__map_1a4367a1d7bc02866c0be32e1fc0759fe2" prot="private" static="no" mutable="no">
+        <type>base_type</type>
+        <definition>base_type neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::ht_</definition>
+        <argsstring></argsstring>
+        <name>ht_</name>
+        <qualifiedname>neforce::unordered_map::ht_</qualifiedname>
+        <initializer>{100}</initializer>
+        <briefdescription>
+<para>底层哈希表实例 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="65" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="65" bodyend="65"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1ace1338e94ead56ad16fc4ff7016f7419" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_map</definition>
+        <argsstring>()=default</argsstring>
+        <name>unordered_map</name>
+        <qualifiedname>neforce::unordered_map::unordered_map</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>构造一个空unordered_map。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="73" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a420799f8f954e6f494ed95e2865f9b46" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_map</definition>
+        <argsstring>(size_type n)</argsstring>
+        <name>unordered_map</name>
+        <qualifiedname>neforce::unordered_map::unordered_map</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unordered__map_1a81a44a4d57951784d0e816c0aa790b97" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定初始桶数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始桶数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="79" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="79" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1ad1a09737eb976dccd3c5ef35af648f16" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_map</definition>
+        <argsstring>(size_type n, const hasher &amp;hf)</argsstring>
+        <name>unordered_map</name>
+        <qualifiedname>neforce::unordered_map::unordered_map</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unordered__map_1a81a44a4d57951784d0e816c0aa790b97" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1unordered__map_1a7ecdbf70afbeba698d4c2a1ca75b8010" kindref="member">hasher</ref> &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定初始桶数和哈希函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始桶数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="87" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="87" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a6bb26f225ea16c0a1d728f331e15b4dc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_map</definition>
+        <argsstring>(size_type n, const hasher &amp;hf, const key_equal &amp;eql)</argsstring>
+        <name>unordered_map</name>
+        <qualifiedname>neforce::unordered_map::unordered_map</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unordered__map_1a81a44a4d57951784d0e816c0aa790b97" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1unordered__map_1a7ecdbf70afbeba698d4c2a1ca75b8010" kindref="member">hasher</ref> &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1unordered__map_1ada1f3bd5f16ba5e4ffa43214a868b457" kindref="member">key_equal</ref> &amp;</type>
+          <declname>eql</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定初始桶数、哈希函数和键相等比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始桶数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键相等比较函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="96" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="96" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a765eb4bd6da0a808445d6725d3854bbf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_map</definition>
+        <argsstring>(const unordered_map &amp;other)</argsstring>
+        <name>unordered_map</name>
+        <qualifiedname>neforce::unordered_map::unordered_map</qualifiedname>
+        <param>
+          <type>const unordered_map &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源unordered_map </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="103" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="103" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a1663b81800529fea0ab79cf8c0840bb6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unordered__map_1ace1338e94ead56ad16fc4ff7016f7419" kindref="member">unordered_map</ref> &amp;</type>
+        <definition>unordered_map &amp; neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::operator=</definition>
+        <argsstring>(const unordered_map &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::unordered_map::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1unordered__map_1ace1338e94ead56ad16fc4ff7016f7419" kindref="member">unordered_map</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源unordered_map </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="111" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="111" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a29f7f9f32acfee58d4cde0c6925f416b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; base_type &gt;" virt="non-virtual">
+        <type></type>
+        <definition>neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_map</definition>
+        <argsstring>(unordered_map &amp;&amp;other)</argsstring>
+        <name>unordered_map</name>
+        <qualifiedname>neforce::unordered_map::unordered_map</qualifiedname>
+        <param>
+          <type>unordered_map &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源unordered_map </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="120" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="120" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a08c75c2332d663471cb994ec48583778" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_assignable_v&lt; base_type &gt;" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unordered__map_1ace1338e94ead56ad16fc4ff7016f7419" kindref="member">unordered_map</ref> &amp;</type>
+        <definition>unordered_map &amp; neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::operator=</definition>
+        <argsstring>(unordered_map &amp;&amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::unordered_map::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unordered__map_1ace1338e94ead56ad16fc4ff7016f7419" kindref="member">unordered_map</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源unordered_map </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="128" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="128" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a86abeadb81b2ff8e2ee62a546f0ed7da" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_map</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>unordered_map</name>
+        <qualifiedname>neforce::unordered_map::unordered_map</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="140" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="140" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a0dbf45df9904fc67b9f942fb785b0ef4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_map</definition>
+        <argsstring>(Iterator first, Iterator list, size_type n)</argsstring>
+        <name>unordered_map</name>
+        <qualifiedname>neforce::unordered_map::unordered_map</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>list</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1unordered__map_1a81a44a4d57951784d0e816c0aa790b97" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数，指定初始桶数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始桶数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="153" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="153" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a9b45f51a519433892c1461f30b82622a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_map</definition>
+        <argsstring>(Iterator first, Iterator last, size_type n, const hasher &amp;hf)</argsstring>
+        <name>unordered_map</name>
+        <qualifiedname>neforce::unordered_map::unordered_map</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1unordered__map_1a81a44a4d57951784d0e816c0aa790b97" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1unordered__map_1a7ecdbf70afbeba698d4c2a1ca75b8010" kindref="member">hasher</ref> &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数，指定初始桶数和哈希函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始桶数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="167" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="167" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a27c8da161a4d9bc05332c762733dbe38" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_map</definition>
+        <argsstring>(Iterator first, Iterator last, size_type n, const hasher &amp;hf, const key_equal &amp;eql)</argsstring>
+        <name>unordered_map</name>
+        <qualifiedname>neforce::unordered_map::unordered_map</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1unordered__map_1a81a44a4d57951784d0e816c0aa790b97" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1unordered__map_1a7ecdbf70afbeba698d4c2a1ca75b8010" kindref="member">hasher</ref> &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1unordered__map_1ada1f3bd5f16ba5e4ffa43214a868b457" kindref="member">key_equal</ref> &amp;</type>
+          <declname>eql</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数，指定初始桶数、哈希函数和键相等比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始桶数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键相等比较函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="182" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="182" bodyend="185"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a89146d98d8b7275bff75b93e5dd04d45" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_map</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist)</argsstring>
+        <name>unordered_map</name>
+        <qualifiedname>neforce::unordered_map::unordered_map</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classneforce_1_1unordered__map_1ac1ad4709aa3162b5353149d11639d2ba" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="191" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="191" bodyend="192"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a214014314bbdb4337424da471e318c11" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_map</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist, size_type n)</argsstring>
+        <name>unordered_map</name>
+        <qualifiedname>neforce::unordered_map::unordered_map</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classneforce_1_1unordered__map_1ac1ad4709aa3162b5353149d11639d2ba" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1unordered__map_1a81a44a4d57951784d0e816c0aa790b97" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数，指定初始桶数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始桶数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="199" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="199" bodyend="200"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a71ce39058c1412ad6beef22cc03f9aa5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_map</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist, size_type n, const hasher &amp;hf)</argsstring>
+        <name>unordered_map</name>
+        <qualifiedname>neforce::unordered_map::unordered_map</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classneforce_1_1unordered__map_1ac1ad4709aa3162b5353149d11639d2ba" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1unordered__map_1a81a44a4d57951784d0e816c0aa790b97" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1unordered__map_1a7ecdbf70afbeba698d4c2a1ca75b8010" kindref="member">hasher</ref> &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数，指定初始桶数和哈希函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始桶数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="208" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="208" bodyend="209"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1ad707eb9876d52e463b866a94f27569ee" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_map</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist, size_type n, const hasher &amp;hf, const key_equal &amp;eql)</argsstring>
+        <name>unordered_map</name>
+        <qualifiedname>neforce::unordered_map::unordered_map</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classneforce_1_1unordered__map_1ac1ad4709aa3162b5353149d11639d2ba" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1unordered__map_1a81a44a4d57951784d0e816c0aa790b97" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1unordered__map_1a7ecdbf70afbeba698d4c2a1ca75b8010" kindref="member">hasher</ref> &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1unordered__map_1ada1f3bd5f16ba5e4ffa43214a868b457" kindref="member">key_equal</ref> &amp;</type>
+          <declname>eql</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数，指定初始桶数、哈希函数和键相等比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始桶数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键相等比较函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="218" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="218" bodyend="219"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1ab92ebf08532fdc6135220cf9db9231a8" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unordered__map_1a5fab20f508bc282377f3e1a1389dcc65" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::begin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>neforce::unordered_map::begin</qualifiedname>
+        <briefdescription>
+<para>获取起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="225" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="225" bodyend="225"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a20ca7004f9ffa62211f4b23879206636" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unordered__map_1a5fab20f508bc282377f3e1a1389dcc65" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::end</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>neforce::unordered_map::end</qualifiedname>
+        <briefdescription>
+<para>获取结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="231" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="231" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a545285f0c9cfa9e1731ed02092a2c254" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unordered__map_1a30608b4d0a56b97d0a20c4fa54a45a1d" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>neforce::unordered_map::begin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="237" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="237" bodyend="237"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1ab715bef488730ab6bc3ef18de60257fb" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unordered__map_1a30608b4d0a56b97d0a20c4fa54a45a1d" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>neforce::unordered_map::end</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="243" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="243" bodyend="243"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a3f28f65ae4b9d3cd65a6a56b2e5164e4" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unordered__map_1a30608b4d0a56b97d0a20c4fa54a45a1d" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::cbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cbegin</name>
+        <qualifiedname>neforce::unordered_map::cbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="249" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="249" bodyend="249"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a5e5e5a496852ddcb9a061831c98ee4b7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unordered__map_1a30608b4d0a56b97d0a20c4fa54a45a1d" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::cend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cend</name>
+        <qualifiedname>neforce::unordered_map::cend</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="255" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="255" bodyend="255"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1ae43e2ded90d86adb5dfe0d86df96438d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unordered__map_1a81a44a4d57951784d0e816c0aa790b97" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>neforce::unordered_map::size</qualifiedname>
+        <briefdescription>
+<para>获取元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>unordered_map中的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="261" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="261" bodyend="261"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1ad18a62a6349499ab21265998d42f7e88" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unordered__map_1a81a44a4d57951784d0e816c0aa790b97" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::max_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>max_size</name>
+        <qualifiedname>neforce::unordered_map::max_size</qualifiedname>
+        <briefdescription>
+<para>获取最大可能大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="267" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="267" bodyend="267"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a78a842b3f84c94791044c69480774231" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>neforce::unordered_map::empty</qualifiedname>
+        <briefdescription>
+<para>检查是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否为空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="273" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="273" bodyend="273"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1af601b1b616b2379542186d1e488c8dcb" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(ht_.count(key))" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unordered__map_1a81a44a4d57951784d0e816c0aa790b97" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::count</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>count</name>
+        <qualifiedname>neforce::unordered_map::count</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1unordered__map_1a6042f08de02279101e3fcf4fb5fd59fb" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>统计具有指定键的元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要统计的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>匹配的元素数量（0或1，因为键唯一） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="280" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="280" bodyend="282"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a0d91750c6dc3ccf55a66176f88b3b7ac" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unordered__map_1a81a44a4d57951784d0e816c0aa790b97" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::buckets_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>buckets_size</name>
+        <qualifiedname>neforce::unordered_map::buckets_size</qualifiedname>
+        <briefdescription>
+<para>获取桶数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>桶数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="288" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="288" bodyend="288"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a589d0edb1b7c952bf271e7d819f8c6ac" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unordered__map_1a81a44a4d57951784d0e816c0aa790b97" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::buckets_max_count</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>buckets_max_count</name>
+        <qualifiedname>neforce::unordered_map::buckets_max_count</qualifiedname>
+        <briefdescription>
+<para>获取最大桶数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大桶数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="294" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="294" bodyend="294"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a2e5f9f7639499db6998f9d8c74ba328c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unordered__map_1a81a44a4d57951784d0e816c0aa790b97" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::bucket_size</definition>
+        <argsstring>(size_type n) const noexcept</argsstring>
+        <name>bucket_size</name>
+        <qualifiedname>neforce::unordered_map::bucket_size</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unordered__map_1a81a44a4d57951784d0e816c0aa790b97" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取指定桶的大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>桶索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>桶中的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="301" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="301" bodyend="301"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a4b97be1ad0d744312512846f869fad50" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(ht_.hash_function())" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unordered__map_1a7ecdbf70afbeba698d4c2a1ca75b8010" kindref="member">hasher</ref></type>
+        <definition>hasher neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::hash_function</definition>
+        <argsstring>() const</argsstring>
+        <name>hash_function</name>
+        <qualifiedname>neforce::unordered_map::hash_function</qualifiedname>
+        <briefdescription>
+<para>获取哈希函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>哈希函数对象的副本 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="307" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="307" bodyend="309"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1ae296d1728526fe89b9cfa6d7e819a4e4" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(ht_.key_eql())" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unordered__map_1ada1f3bd5f16ba5e4ffa43214a868b457" kindref="member">key_equal</ref></type>
+        <definition>key_equal neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::key_eql</definition>
+        <argsstring>() const</argsstring>
+        <name>key_eql</name>
+        <qualifiedname>neforce::unordered_map::key_eql</qualifiedname>
+        <briefdescription>
+<para>获取键相等比较函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>键相等比较函数对象的副本 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="315" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="315" bodyend="315"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a84991d144cbd2b9ef1292c625dc885a2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::load_factor</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>load_factor</name>
+        <qualifiedname>neforce::unordered_map::load_factor</qualifiedname>
+        <briefdescription>
+<para>获取当前负载因子 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>负载因子（元素数量/桶数量） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="321" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="321" bodyend="321"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a5d3d3245fcbea41609f4767ac89f8138" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::max_load_factor</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>max_load_factor</name>
+        <qualifiedname>neforce::unordered_map::max_load_factor</qualifiedname>
+        <briefdescription>
+<para>获取最大负载因子 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大负载因子 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="327" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="327" bodyend="327"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1adef0a6f72d36349db2892f104d053988" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::max_load_factor</definition>
+        <argsstring>(float lf) noexcept</argsstring>
+        <name>max_load_factor</name>
+        <qualifiedname>neforce::unordered_map::max_load_factor</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>lf</declname>
+        </param>
+        <briefdescription>
+<para>设置最大负载因子 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的最大负载因子 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="333" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="333" bodyend="333"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a3cf407af62da29c992846f92a671fbe7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::rehash</definition>
+        <argsstring>(size_type n)</argsstring>
+        <name>rehash</name>
+        <qualifiedname>neforce::unordered_map::rehash</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unordered__map_1a81a44a4d57951784d0e816c0aa790b97" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>重新哈希，调整桶数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标桶数量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="339" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="339" bodyend="339"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a416dee257c7f3484cd9e92545a6e36d7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::reserve</definition>
+        <argsstring>(size_type n)</argsstring>
+        <name>reserve</name>
+        <qualifiedname>neforce::unordered_map::reserve</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unordered__map_1a81a44a4d57951784d0e816c0aa790b97" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>预留空间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望的元素数量</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+确保unordered_map至少能容纳n个元素而不触发rehash。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="347" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="347" bodyend="347"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1ac1e196c08b2113d5c66405d416c634e3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1unordered__map_1a5fab20f508bc282377f3e1a1389dcc65" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::emplace</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace</name>
+        <qualifiedname>neforce::unordered_map::emplace</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在unordered_map中就地构造元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="356" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="356" bodyend="358"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1ae1971ec6caf6f2e9538969c916905e32" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1unordered__map_1a5fab20f508bc282377f3e1a1389dcc65" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::insert</definition>
+        <argsstring>(const value_type &amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::unordered_map::insert</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1unordered__map_1ac1ad4709aa3162b5353149d11639d2ba" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>插入元素（拷贝版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="365" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="365" bodyend="365"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a488a1f5044c915802693609f55e59386" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1unordered__map_1a5fab20f508bc282377f3e1a1389dcc65" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::insert</definition>
+        <argsstring>(value_type &amp;&amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::unordered_map::insert</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unordered__map_1ac1ad4709aa3162b5353149d11639d2ba" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>移动插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="372" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="372" bodyend="372"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a71546f079fd8d48d31d493705e3cd015" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::insert</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::unordered_map::insert</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="381" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="381" bodyend="383"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a81f4b40c6ec5d882a5022aea8f9027d3" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unordered__map_1a81a44a4d57951784d0e816c0aa790b97" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(const key_type &amp;key) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::unordered_map::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1unordered__map_1a6042f08de02279101e3fcf4fb5fd59fb" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>删除所有具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>删除的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="390" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="390" bodyend="390"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a88dea1abe704a1be5a6551e4f1add52d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unordered__map_1a5fab20f508bc282377f3e1a1389dcc65" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(iterator position) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::unordered_map::erase</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unordered__map_1a5fab20f508bc282377f3e1a1389dcc65" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>删除指定位置的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向被删除元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="397" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="397" bodyend="397"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1ae9d67670196f7b4aa4e5aed0b746897c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unordered__map_1a5fab20f508bc282377f3e1a1389dcc65" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(iterator first, iterator last) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::unordered_map::erase</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unordered__map_1a5fab20f508bc282377f3e1a1389dcc65" kindref="member">iterator</ref></type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1unordered__map_1a5fab20f508bc282377f3e1a1389dcc65" kindref="member">iterator</ref></type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除指定范围内的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向最后一个被删除元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="405" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="405" bodyend="405"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1ab36c1e683b1087fea586b166cd4b768d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unordered__map_1a30608b4d0a56b97d0a20c4fa54a45a1d" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(const_iterator position) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::unordered_map::erase</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unordered__map_1a30608b4d0a56b97d0a20c4fa54a45a1d" kindref="member">const_iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>删除指定位置的常量元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向被删除元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="412" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="412" bodyend="412"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a47b6557826da1bc4b07be3ce005b6d0d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unordered__map_1a30608b4d0a56b97d0a20c4fa54a45a1d" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(const_iterator first, const_iterator last) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::unordered_map::erase</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unordered__map_1a30608b4d0a56b97d0a20c4fa54a45a1d" kindref="member">const_iterator</ref></type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1unordered__map_1a30608b4d0a56b97d0a20c4fa54a45a1d" kindref="member">const_iterator</ref></type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除指定范围内的常量元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向最后一个被删除元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="420" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="420" bodyend="420"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a2f0c3a48e0449a93ada46437164f31dd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::clear</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clear</name>
+        <qualifiedname>neforce::unordered_map::clear</qualifiedname>
+        <briefdescription>
+<para>清空unordered_map </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="425" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="425" bodyend="425"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a3e3bddf4a770d45725d63e8614dcebcb" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unordered__map_1a5fab20f508bc282377f3e1a1389dcc65" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>find</name>
+        <qualifiedname>neforce::unordered_map::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1unordered__map_1a6042f08de02279101e3fcf4fb5fd59fb" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的迭代器，未找到则返回end() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="432" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="432" bodyend="432"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a80ec5ab1edae72fc25b061566114e0f8" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unordered__map_1a30608b4d0a56b97d0a20c4fa54a45a1d" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>find</name>
+        <qualifiedname>neforce::unordered_map::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1unordered__map_1a6042f08de02279101e3fcf4fb5fd59fb" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的常量元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的常量迭代器，未找到则返回cend() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="439" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="439" bodyend="439"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a08cbf0956eb468a8647ed67816ac80f4" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1unordered__map_1a5fab20f508bc282377f3e1a1389dcc65" kindref="member">iterator</ref>, <ref refid="classneforce_1_1unordered__map_1a5fab20f508bc282377f3e1a1389dcc65" kindref="member">iterator</ref> &gt;</type>
+        <definition>pair&lt; iterator, iterator &gt; neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>neforce::unordered_map::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1unordered__map_1a6042f08de02279101e3fcf4fb5fd59fb" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的元素范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含范围起始和结束的pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="446" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="446" bodyend="446"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a684a16a18108755c8c85e760330255f6" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1unordered__map_1a30608b4d0a56b97d0a20c4fa54a45a1d" kindref="member">const_iterator</ref>, <ref refid="classneforce_1_1unordered__map_1a30608b4d0a56b97d0a20c4fa54a45a1d" kindref="member">const_iterator</ref> &gt;</type>
+        <definition>pair&lt; const_iterator, const_iterator &gt; neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>neforce::unordered_map::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1unordered__map_1a6042f08de02279101e3fcf4fb5fd59fb" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的常量元素范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含范围起始和结束的pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="453" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="453" bodyend="455"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a50cfbb247a331e9e3caae1b93391c9bf" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::operator[]</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>neforce::unordered_map::operator[]</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1unordered__map_1a6042f08de02279101e3fcf4fb5fd59fb" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>下标访问操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要访问的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>对应键的值的引用</para>
+</simplesect>
+如果键不存在，则插入一个默认构造的值并返回其引用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="464" column="8" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="464" bodyend="470"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1ace20fecc11f9ffdb330739735d4e1a38" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T &amp; neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::at</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>at</name>
+        <qualifiedname>neforce::unordered_map::at</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1unordered__map_1a6042f08de02279101e3fcf4fb5fd59fb" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>带边界检查的常量访问 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要访问的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>对应键的值的常量引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1iterator__exception" kindref="compound">iterator_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果键不存在 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="478" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="478" bodyend="484"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1acd0791251837b1532830c7639c0e3dde" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::at</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>at</name>
+        <qualifiedname>neforce::unordered_map::at</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1unordered__map_1a6042f08de02279101e3fcf4fb5fd59fb" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>带边界检查的访问 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要访问的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>对应键的值的引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1iterator__exception" kindref="compound">iterator_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果键不存在 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="492" column="8" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="492" bodyend="498"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a4955e038ff9270daf22c76c511a810c9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_swappable_v&lt; base_type &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::swap</definition>
+        <argsstring>(unordered_map &amp;other)</argsstring>
+        <name>swap</name>
+        <qualifiedname>neforce::unordered_map::swap</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unordered__map_1ace1338e94ead56ad16fc4ff7016f7419" kindref="member">unordered_map</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个unordered_map的内容 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的另一个unordered_map </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="504" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="504" bodyend="504"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1acca95a7e81dd6f5c5c7efccdc9a3977b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(ht_==rhs.ht_)" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::equal_to</definition>
+        <argsstring>(const unordered_map &amp;rhs) const</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>neforce::unordered_map::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1unordered__map_1ace1338e94ead56ad16fc4ff7016f7419" kindref="member">unordered_map</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧unordered_map </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果两个unordered_map大小相等且对应元素相等返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="511" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="511" bodyend="513"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unordered__map_1a1842b027188ab8740f60fca8237f6060" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(ht_&lt; rhs.ht_)" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::less_than</definition>
+        <argsstring>(const unordered_map &amp;rhs) const</argsstring>
+        <name>less_than</name>
+        <qualifiedname>neforce::unordered_map::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1unordered__map_1ace1338e94ead56ad16fc4ff7016f7419" kindref="member">unordered_map</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧unordered_map </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>按字典序比较结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="520" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="520" bodyend="522"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>无序映射容器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>HashFcn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数类型，默认为hash&lt;Key&gt; </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>EqualKey</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键相等比较函数类型，默认为equal_to&lt;Key&gt; </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>分配器类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+unordered_map是一种关联容器，存储键值对（key-value pairs），每个键在容器中唯一。 元素无序存储，由哈希函数将键映射到桶中。 支持快速的键查找。底层使用哈希表实现。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="38" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" bodystart="38" bodyend="523"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1unordered__map_1adb3f026275901f10261fca28504b6e7f" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>allocator_type</name></member>
+      <member refid="classneforce_1_1unordered__map_1ace20fecc11f9ffdb330739735d4e1a38" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>at</name></member>
+      <member refid="classneforce_1_1unordered__map_1acd0791251837b1532830c7639c0e3dde" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>at</name></member>
+      <member refid="classneforce_1_1unordered__map_1a524bab39921709a4f02f6ef6aed35721" prot="private" virt="non-virtual"><scope>neforce::unordered_map</scope><name>base_type</name></member>
+      <member refid="classneforce_1_1unordered__map_1ab92ebf08532fdc6135220cf9db9231a8" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>begin</name></member>
+      <member refid="classneforce_1_1unordered__map_1a545285f0c9cfa9e1731ed02092a2c254" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>begin</name></member>
+      <member refid="classneforce_1_1unordered__map_1a2e5f9f7639499db6998f9d8c74ba328c" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>bucket_size</name></member>
+      <member refid="classneforce_1_1unordered__map_1a589d0edb1b7c952bf271e7d819f8c6ac" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>buckets_max_count</name></member>
+      <member refid="classneforce_1_1unordered__map_1a0d91750c6dc3ccf55a66176f88b3b7ac" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>buckets_size</name></member>
+      <member refid="classneforce_1_1unordered__map_1a3f28f65ae4b9d3cd65a6a56b2e5164e4" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>cbegin</name></member>
+      <member refid="classneforce_1_1unordered__map_1a5e5e5a496852ddcb9a061831c98ee4b7" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>cend</name></member>
+      <member refid="classneforce_1_1unordered__map_1a2f0c3a48e0449a93ada46437164f31dd" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>clear</name></member>
+      <member refid="classneforce_1_1unordered__map_1a30608b4d0a56b97d0a20c4fa54a45a1d" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>const_iterator</name></member>
+      <member refid="classneforce_1_1unordered__map_1a0059155835a48d6e394d5ae9c3197ffa" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>const_pointer</name></member>
+      <member refid="classneforce_1_1unordered__map_1aee9832730b43b8d23ab16826169d4dc5" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>const_reference</name></member>
+      <member refid="classneforce_1_1unordered__map_1af601b1b616b2379542186d1e488c8dcb" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>count</name></member>
+      <member refid="classneforce_1_1unordered__map_1a823f114d2218fc3bd2105560e8c1a51c" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>difference_type</name></member>
+      <member refid="classneforce_1_1unordered__map_1ac1e196c08b2113d5c66405d416c634e3" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>emplace</name></member>
+      <member refid="classneforce_1_1unordered__map_1a78a842b3f84c94791044c69480774231" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>empty</name></member>
+      <member refid="classneforce_1_1unordered__map_1a20ca7004f9ffa62211f4b23879206636" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>end</name></member>
+      <member refid="classneforce_1_1unordered__map_1ab715bef488730ab6bc3ef18de60257fb" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>end</name></member>
+      <member refid="classneforce_1_1unordered__map_1a08cbf0956eb468a8647ed67816ac80f4" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>equal_range</name></member>
+      <member refid="classneforce_1_1unordered__map_1a684a16a18108755c8c85e760330255f6" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>equal_range</name></member>
+      <member refid="classneforce_1_1unordered__map_1acca95a7e81dd6f5c5c7efccdc9a3977b" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>equal_to</name></member>
+      <member refid="classneforce_1_1unordered__map_1a81f4b40c6ec5d882a5022aea8f9027d3" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>erase</name></member>
+      <member refid="classneforce_1_1unordered__map_1a88dea1abe704a1be5a6551e4f1add52d" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>erase</name></member>
+      <member refid="classneforce_1_1unordered__map_1ae9d67670196f7b4aa4e5aed0b746897c" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>erase</name></member>
+      <member refid="classneforce_1_1unordered__map_1ab36c1e683b1087fea586b166cd4b768d" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>erase</name></member>
+      <member refid="classneforce_1_1unordered__map_1a47b6557826da1bc4b07be3ce005b6d0d" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>erase</name></member>
+      <member refid="classneforce_1_1unordered__map_1a3e3bddf4a770d45725d63e8614dcebcb" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>find</name></member>
+      <member refid="classneforce_1_1unordered__map_1a80ec5ab1edae72fc25b061566114e0f8" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>find</name></member>
+      <member refid="classneforce_1_1unordered__map_1a4b97be1ad0d744312512846f869fad50" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>hash_function</name></member>
+      <member refid="classneforce_1_1unordered__map_1a7ecdbf70afbeba698d4c2a1ca75b8010" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>hasher</name></member>
+      <member refid="classneforce_1_1unordered__map_1a4367a1d7bc02866c0be32e1fc0759fe2" prot="private" virt="non-virtual"><scope>neforce::unordered_map</scope><name>ht_</name></member>
+      <member refid="classneforce_1_1unordered__map_1ae1971ec6caf6f2e9538969c916905e32" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>insert</name></member>
+      <member refid="classneforce_1_1unordered__map_1a488a1f5044c915802693609f55e59386" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>insert</name></member>
+      <member refid="classneforce_1_1unordered__map_1a71546f079fd8d48d31d493705e3cd015" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>insert</name></member>
+      <member refid="classneforce_1_1unordered__map_1a5fab20f508bc282377f3e1a1389dcc65" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>iterator</name></member>
+      <member refid="classneforce_1_1unordered__map_1ae296d1728526fe89b9cfa6d7e819a4e4" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>key_eql</name></member>
+      <member refid="classneforce_1_1unordered__map_1ada1f3bd5f16ba5e4ffa43214a868b457" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>key_equal</name></member>
+      <member refid="classneforce_1_1unordered__map_1a6042f08de02279101e3fcf4fb5fd59fb" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>key_type</name></member>
+      <member refid="classneforce_1_1unordered__map_1a1842b027188ab8740f60fca8237f6060" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>less_than</name></member>
+      <member refid="classneforce_1_1unordered__map_1a84991d144cbd2b9ef1292c625dc885a2" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>load_factor</name></member>
+      <member refid="classneforce_1_1unordered__map_1a5d3d3245fcbea41609f4767ac89f8138" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>max_load_factor</name></member>
+      <member refid="classneforce_1_1unordered__map_1adef0a6f72d36349db2892f104d053988" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>max_load_factor</name></member>
+      <member refid="classneforce_1_1unordered__map_1ad18a62a6349499ab21265998d42f7e88" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>max_size</name></member>
+      <member refid="classneforce_1_1unordered__map_1a1663b81800529fea0ab79cf8c0840bb6" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1unordered__map_1a08c75c2332d663471cb994ec48583778" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1unordered__map_1a50cfbb247a331e9e3caae1b93391c9bf" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>operator[]</name></member>
+      <member refid="classneforce_1_1unordered__map_1a0ca11675660891dfebfef195eb2212f9" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>pointer</name></member>
+      <member refid="classneforce_1_1unordered__map_1a94cc65ae6a1e06cd75d9ab3ada3eec76" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>reference</name></member>
+      <member refid="classneforce_1_1unordered__map_1a3cf407af62da29c992846f92a671fbe7" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>rehash</name></member>
+      <member refid="classneforce_1_1unordered__map_1a416dee257c7f3484cd9e92545a6e36d7" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>reserve</name></member>
+      <member refid="classneforce_1_1unordered__map_1ae43e2ded90d86adb5dfe0d86df96438d" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>size</name></member>
+      <member refid="classneforce_1_1unordered__map_1a81a44a4d57951784d0e816c0aa790b97" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>size_type</name></member>
+      <member refid="classneforce_1_1unordered__map_1a4955e038ff9270daf22c76c511a810c9" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>swap</name></member>
+      <member refid="classneforce_1_1unordered__map_1ace1338e94ead56ad16fc4ff7016f7419" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>unordered_map</name></member>
+      <member refid="classneforce_1_1unordered__map_1a420799f8f954e6f494ed95e2865f9b46" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>unordered_map</name></member>
+      <member refid="classneforce_1_1unordered__map_1ad1a09737eb976dccd3c5ef35af648f16" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>unordered_map</name></member>
+      <member refid="classneforce_1_1unordered__map_1a6bb26f225ea16c0a1d728f331e15b4dc" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>unordered_map</name></member>
+      <member refid="classneforce_1_1unordered__map_1a765eb4bd6da0a808445d6725d3854bbf" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>unordered_map</name></member>
+      <member refid="classneforce_1_1unordered__map_1a29f7f9f32acfee58d4cde0c6925f416b" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>unordered_map</name></member>
+      <member refid="classneforce_1_1unordered__map_1a86abeadb81b2ff8e2ee62a546f0ed7da" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>unordered_map</name></member>
+      <member refid="classneforce_1_1unordered__map_1a0dbf45df9904fc67b9f942fb785b0ef4" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>unordered_map</name></member>
+      <member refid="classneforce_1_1unordered__map_1a9b45f51a519433892c1461f30b82622a" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>unordered_map</name></member>
+      <member refid="classneforce_1_1unordered__map_1a27c8da161a4d9bc05332c762733dbe38" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>unordered_map</name></member>
+      <member refid="classneforce_1_1unordered__map_1a89146d98d8b7275bff75b93e5dd04d45" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>unordered_map</name></member>
+      <member refid="classneforce_1_1unordered__map_1a214014314bbdb4337424da471e318c11" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>unordered_map</name></member>
+      <member refid="classneforce_1_1unordered__map_1a71ce39058c1412ad6beef22cc03f9aa5" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>unordered_map</name></member>
+      <member refid="classneforce_1_1unordered__map_1ad707eb9876d52e463b866a94f27569ee" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>unordered_map</name></member>
+      <member refid="classneforce_1_1unordered__map_1ac1ad4709aa3162b5353149d11639d2ba" prot="public" virt="non-virtual"><scope>neforce::unordered_map</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

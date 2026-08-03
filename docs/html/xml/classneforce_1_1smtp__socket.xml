@@ -1,0 +1,1020 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1smtp__socket" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>neforce::smtp_socket</compoundname>
+    <basecompoundref refid="classneforce_1_1ip__socket" prot="public" virt="non-virtual">neforce::ip_socket</basecompoundref>
+    <includes refid="smtp__socket_8hpp" local="no">smtp_socket.hpp</includes>
+    <innerclass refid="structneforce_1_1smtp__socket_1_1response" prot="public">neforce::smtp_socket::response</innerclass>
+    <innerclass refid="structneforce_1_1smtp__socket_1_1starttls__result" prot="public">neforce::smtp_socket::starttls_result</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classneforce_1_1smtp__socket_1a12fb3c05e73748be054496cdef21f2f3" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>auth_method</name>
+        <qualifiedname>neforce::smtp_socket::auth_method</qualifiedname>
+        <enumvalue id="classneforce_1_1smtp__socket_1a12fb3c05e73748be054496cdef21f2f3a334c4a4c42fdb79d7ebc3e73b517e6f8" prot="public">
+          <name>none</name>
+          <briefdescription>
+<para>无认证 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1smtp__socket_1a12fb3c05e73748be054496cdef21f2f3aac7938d40cfc2307e2bf325d28e7884e" prot="public">
+          <name>plain</name>
+          <briefdescription>
+<para>PLAIN认证 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1smtp__socket_1a12fb3c05e73748be054496cdef21f2f3ad56b699830e77ba53855679cb1d252da" prot="public">
+          <name>login</name>
+          <briefdescription>
+<para>LOGIN认证 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>SMTP认证方式 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="247" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" bodystart="247" bodyend="251"/>
+      </memberdef>
+      <memberdef kind="enum" id="classneforce_1_1smtp__socket_1a1c56b165196193c28697bcddb22523ca" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>tls_mode</name>
+        <qualifiedname>neforce::smtp_socket::tls_mode</qualifiedname>
+        <enumvalue id="classneforce_1_1smtp__socket_1a1c56b165196193c28697bcddb22523caa334c4a4c42fdb79d7ebc3e73b517e6f8" prot="public">
+          <name>none</name>
+          <briefdescription>
+<para>明文连接 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1smtp__socket_1a1c56b165196193c28697bcddb22523caacd1fed5e3277af3a9210b25059d86ff9" prot="public">
+          <name>implicit</name>
+          <briefdescription>
+<para>隐式TLS（直接TLS） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1smtp__socket_1a1c56b165196193c28697bcddb22523caa637dd61b00a5ae25ea8d50639f100e7a" prot="public">
+          <name>starttls</name>
+          <briefdescription>
+<para>STARTTLS（从明文升级到TLS） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>TLS连接模式 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="257" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" bodystart="257" bodyend="261"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1smtp__socket_1a24645764b8035c8f5afd0db5d9a2c57c" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::smtp_socket::server_domain_</definition>
+        <argsstring></argsstring>
+        <name>server_domain_</name>
+        <qualifiedname>neforce::smtp_socket::server_domain_</qualifiedname>
+        <briefdescription>
+<para>服务器域名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="290" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" bodystart="290" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1smtp__socket_1a7aed4d43ac4cb0b846928f42514db9b6" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::smtp_socket::connected_</definition>
+        <argsstring></argsstring>
+        <name>connected_</name>
+        <qualifiedname>neforce::smtp_socket::connected_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否已连接 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="291" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" bodystart="291" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1smtp__socket_1adf352166a33fa23300e48ab58fde4674" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1smtp__socket_1a1c56b165196193c28697bcddb22523ca" kindref="member">tls_mode</ref></type>
+        <definition>tls_mode neforce::smtp_socket::tls_mode_</definition>
+        <argsstring></argsstring>
+        <name>tls_mode_</name>
+        <qualifiedname>neforce::smtp_socket::tls_mode_</qualifiedname>
+        <initializer>= <ref refid="classneforce_1_1smtp__socket_1a1c56b165196193c28697bcddb22523caa334c4a4c42fdb79d7ebc3e73b517e6f8" kindref="member">tls_mode::none</ref></initializer>
+        <briefdescription>
+<para>TLS模式 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="293" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" bodystart="293" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1smtp__socket_1a69b7f82b7c8f9de7ef8b8de8c48ad649" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::smtp_socket::tls_active_</definition>
+        <argsstring></argsstring>
+        <name>tls_active_</name>
+        <qualifiedname>neforce::smtp_socket::tls_active_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>TLS是否已激活 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="294" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" bodystart="294" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1smtp__socket_1a541cb6abab7ae0479b01242b52ea3bf7" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1ssl__stream" kindref="compound">ssl_stream</ref></type>
+        <definition>ssl_stream neforce::smtp_socket::ssl_</definition>
+        <argsstring></argsstring>
+        <name>ssl_</name>
+        <qualifiedname>neforce::smtp_socket::ssl_</qualifiedname>
+        <briefdescription>
+<para>SSL流对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="296" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" bodystart="296" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1smtp__socket_1a3c0be40e1676ac489402ae65c9db5c97" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> *</type>
+        <definition>io_context* neforce::smtp_socket::ctx_</definition>
+        <argsstring></argsstring>
+        <name>ctx_</name>
+        <qualifiedname>neforce::smtp_socket::ctx_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+<para>异步 I/O 执行上下文 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="297" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" bodystart="297" bodyend="297"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1smtp__socket_1ada48bdc36116c174ebdcaa594433bf74" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1gaee9aeee261c91caa424e5eb0ec5bb749" kindref="member">ssize_t</ref></type>
+        <definition>ssize_t neforce::smtp_socket::raw_send</definition>
+        <argsstring>(const char *data, size_t len)</argsstring>
+        <name>raw_send</name>
+        <qualifiedname>neforce::smtp_socket::raw_send</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="299" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1smtp__socket_1af5ae4dae3666e0a0cb1e83a017b60da8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1gaee9aeee261c91caa424e5eb0ec5bb749" kindref="member">ssize_t</ref></type>
+        <definition>ssize_t neforce::smtp_socket::raw_recv</definition>
+        <argsstring>(char *buf, size_t len)</argsstring>
+        <name>raw_recv</name>
+        <qualifiedname>neforce::smtp_socket::raw_recv</qualifiedname>
+        <param>
+          <type>char *</type>
+          <declname>buf</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="300" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1smtp__socket_1a46072c7a460ca42337ad498d36d01bd6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::smtp_socket::read_line</definition>
+        <argsstring>(string &amp;out)</argsstring>
+        <name>read_line</name>
+        <qualifiedname>neforce::smtp_socket::read_line</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="302" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1smtp__socket_1a98bb98f2ce6bfc24d6051ef23200a8af" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1smtp__socket_1_1response" kindref="compound">response</ref></type>
+        <definition>response neforce::smtp_socket::read_response</definition>
+        <argsstring>()</argsstring>
+        <name>read_response</name>
+        <qualifiedname>neforce::smtp_socket::read_response</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="303" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1smtp__socket_1afeb3777879530d1d71a255c95f7abd39" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1smtp__socket_1_1response" kindref="compound">response</ref></type>
+        <definition>response neforce::smtp_socket::send_command</definition>
+        <argsstring>(const string &amp;cmd)</argsstring>
+        <name>send_command</name>
+        <qualifiedname>neforce::smtp_socket::send_command</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>cmd</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="304" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1smtp__socket_1a3271c673f99c54c37ac791ca6b20ba4a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::smtp_socket::expect_code</definition>
+        <argsstring>(int expected, const string &amp;cmd)</argsstring>
+        <name>expect_code</name>
+        <qualifiedname>neforce::smtp_socket::expect_code</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>expected</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>cmd</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="305" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1smtp__socket_1aef9888b96744738eab11a9110b4da01d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt;</type>
+        <definition>vector&lt; string &gt; neforce::smtp_socket::do_ehlo</definition>
+        <argsstring>(const string &amp;domain)</argsstring>
+        <name>do_ehlo</name>
+        <qualifiedname>neforce::smtp_socket::do_ehlo</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>domain</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="307" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1smtp__socket_1acf4c67d7171f6b4769ccfdd891c44f7c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::smtp_socket::do_post_connect</definition>
+        <argsstring>(const string &amp;domain, tls_mode mode, const ssl_context *ctx, const string &amp;sni_hostname)</argsstring>
+        <name>do_post_connect</name>
+        <qualifiedname>neforce::smtp_socket::do_post_connect</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>domain</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1smtp__socket_1a1c56b165196193c28697bcddb22523ca" kindref="member">tls_mode</ref></type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1ssl__context" kindref="compound">ssl_context</ref> *</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>sni_hostname</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="309" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1smtp__socket_1a3c1a5bb476721685a8cb36b9b1b28f51" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::smtp_socket::do_tls_handshake</definition>
+        <argsstring>(const ssl_context &amp;ctx, const string &amp;sni_hostname)</argsstring>
+        <name>do_tls_handshake</name>
+        <qualifiedname>neforce::smtp_socket::do_tls_handshake</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1ssl__context" kindref="compound">ssl_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>sni_hostname</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="311" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1smtp__socket_1ae50c71eb8f2c1ec62cc43f89dcf76327" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::smtp_socket::open_and_connect</definition>
+        <argsstring>(const ip_address &amp;addr)</argsstring>
+        <name>open_and_connect</name>
+        <qualifiedname>neforce::smtp_socket::open_and_connect</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1ip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>addr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="313" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1smtp__socket_1a1fdc23068731f08120a0f283f03f7c07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::smtp_socket::smtp_socket</definition>
+        <argsstring>()=default</argsstring>
+        <name>smtp_socket</name>
+        <qualifiedname>neforce::smtp_socket::smtp_socket</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="319" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1smtp__socket_1aa730a8666b5bec8f8d2d8e24bb8c145a" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::smtp_socket::smtp_socket</definition>
+        <argsstring>(native_handle_type fd) noexcept</argsstring>
+        <name>smtp_socket</name>
+        <qualifiedname>neforce::smtp_socket::smtp_socket</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gaae6b483f5dbd1f5318336f6349ff6a6a" kindref="member">native_handle_type</ref></type>
+          <declname>fd</declname>
+        </param>
+        <briefdescription>
+<para>从原生句柄构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原生socket句柄 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="325" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" bodystart="325" bodyend="326"/>
+        <references refid="classneforce_1_1ip__socket_1a98a70d9b139d26347dce1ec4fac71dd5">neforce::ip_socket::ip_socket</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1smtp__socket_1ab87bf78f45a3da770ef0b67f445e4d5d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::smtp_socket::connect</definition>
+        <argsstring>(const ip_address &amp;addr, const string &amp;domain=&quot;localhost&quot;, tls_mode mode=tls_mode::none, const ssl_context *ctx=nullptr, const string &amp;sni_hostname=&quot;&quot;)</argsstring>
+        <name>connect</name>
+        <qualifiedname>neforce::smtp_socket::connect</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1ip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>addr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>domain</declname>
+          <defval>&quot;localhost&quot;</defval>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1smtp__socket_1a1c56b165196193c28697bcddb22523ca" kindref="member">tls_mode</ref></type>
+          <declname>mode</declname>
+          <defval><ref refid="classneforce_1_1smtp__socket_1a1c56b165196193c28697bcddb22523caa334c4a4c42fdb79d7ebc3e73b517e6f8" kindref="member">tls_mode::none</ref></defval>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1ssl__context" kindref="compound">ssl_context</ref> *</type>
+          <declname>ctx</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>sni_hostname</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+<para>连接SMTP服务器（IP） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>addr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>服务器IP地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>本机EHLO域名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>TLS模式 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL上下文（mode != none时必须提供） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sni_hostname</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SNI主机名（为空则不设置） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="336" column="10"/>
+        <references refid="classneforce_1_1smtp__socket_1a1c56b165196193c28697bcddb22523caa334c4a4c42fdb79d7ebc3e73b517e6f8" compoundref="smtp__socket_8hpp" startline="258">none</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1smtp__socket_1a5acba0c3eb856f7c5eba89d6736fc525" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::smtp_socket::connect</definition>
+        <argsstring>(const string &amp;hostname, ports port, const string &amp;domain=&quot;localhost&quot;, tls_mode mode=tls_mode::none, dns_client *dns=nullptr, const ssl_context *ctx=nullptr, const string &amp;sni_hostname=&quot;&quot;)</argsstring>
+        <name>connect</name>
+        <qualifiedname>neforce::smtp_socket::connect</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>hostname</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1ports" kindref="compound">ports</ref></type>
+          <declname>port</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>domain</declname>
+          <defval>&quot;localhost&quot;</defval>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1smtp__socket_1a1c56b165196193c28697bcddb22523ca" kindref="member">tls_mode</ref></type>
+          <declname>mode</declname>
+          <defval><ref refid="classneforce_1_1smtp__socket_1a1c56b165196193c28697bcddb22523caa334c4a4c42fdb79d7ebc3e73b517e6f8" kindref="member">tls_mode::none</ref></defval>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1dns__client" kindref="compound">dns_client</ref> *</type>
+          <declname>dns</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1ssl__context" kindref="compound">ssl_context</ref> *</type>
+          <declname>ctx</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>sni_hostname</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+<para>连接SMTP服务器（域名） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hostname</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>服务器域名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>端口号 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>EHLO域名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>TLS模式 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dns</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>DNS客户端（为nullptr时使用默认配置） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sni_hostname</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SNI主机名（为空则使用hostname） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="349" column="10"/>
+        <references refid="classneforce_1_1smtp__socket_1a1c56b165196193c28697bcddb22523caa334c4a4c42fdb79d7ebc3e73b517e6f8" compoundref="smtp__socket_8hpp" startline="258">none</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1smtp__socket_1add64cdcf4ec180508ceb1d990502a8e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1smtp__socket_1_1starttls__result" kindref="compound">starttls_result</ref></type>
+        <definition>starttls_result neforce::smtp_socket::starttls</definition>
+        <argsstring>(const ssl_context &amp;ctx, const string &amp;sni_hostname=&quot;&quot;)</argsstring>
+        <name>starttls</name>
+        <qualifiedname>neforce::smtp_socket::starttls</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1ssl__context" kindref="compound">ssl_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>sni_hostname</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+<para>执行STARTTLS升级 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sni_hostname</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SNI主机名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>STARTTLS协商结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="358" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1smtp__socket_1a9b27ee30ab1cf41933f36ac4b47c1c0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::smtp_socket::disconnect</definition>
+        <argsstring>()</argsstring>
+        <name>disconnect</name>
+        <qualifiedname>neforce::smtp_socket::disconnect</qualifiedname>
+        <briefdescription>
+<para>断开连接，发送QUIT命令 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="363" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1smtp__socket_1a3204ed4001533cebcb7c957fcf6b508f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::smtp_socket::authenticate</definition>
+        <argsstring>(const string &amp;username, const string &amp;password, auth_method method=auth_method::plain)</argsstring>
+        <name>authenticate</name>
+        <qualifiedname>neforce::smtp_socket::authenticate</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>username</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>password</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1smtp__socket_1a12fb3c05e73748be054496cdef21f2f3" kindref="member">auth_method</ref></type>
+          <declname>method</declname>
+          <defval><ref refid="classneforce_1_1smtp__socket_1a12fb3c05e73748be054496cdef21f2f3aac7938d40cfc2307e2bf325d28e7884e" kindref="member">auth_method::plain</ref></defval>
+        </param>
+        <briefdescription>
+<para>SMTP认证 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>username</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>用户名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>password</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>密码 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>method</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>认证方式 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="371" column="10"/>
+        <references refid="classneforce_1_1smtp__socket_1a12fb3c05e73748be054496cdef21f2f3aac7938d40cfc2307e2bf325d28e7884e" compoundref="smtp__socket_8hpp" startline="249">plain</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1smtp__socket_1a6762355fe3bf4f7b724e17c6682d3bd0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::smtp_socket::send</definition>
+        <argsstring>(const smtp_message &amp;msg)</argsstring>
+        <name>send</name>
+        <qualifiedname>neforce::smtp_socket::send</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1smtp__message" kindref="compound">smtp_message</ref> &amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+<para>发送邮件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>msg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>邮件消息 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="377" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1smtp__socket_1a9489bafa39fccfc40e7b78f4ffc3e40e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::smtp_socket::noop</definition>
+        <argsstring>()</argsstring>
+        <name>noop</name>
+        <qualifiedname>neforce::smtp_socket::noop</qualifiedname>
+        <briefdescription>
+<para>发送NOOP命令 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="382" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1smtp__socket_1a53df2885f3a67794894beb73f9eef761" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::smtp_socket::is_connected</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_connected</name>
+        <qualifiedname>neforce::smtp_socket::is_connected</qualifiedname>
+        <briefdescription>
+<para>是否已连接 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>已连接返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="388" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" bodystart="388" bodyend="388"/>
+        <references refid="classneforce_1_1socket__base_1a688c59e456551b33a230cb139dbd685a" compoundref="socket__base_8hpp" startline="195" endline="195">neforce::socket_base::is_open</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1smtp__socket_1aa3f84fadb2b61562f2a410d80be6be81" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::smtp_socket::is_tls_active</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_tls_active</name>
+        <qualifiedname>neforce::smtp_socket::is_tls_active</qualifiedname>
+        <briefdescription>
+<para>TLS是否已激活 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>已激活返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="394" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" bodystart="394" bodyend="394"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1smtp__socket_1aa6f3f7d28df5232ef96aaddb7782074b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::smtp_socket::verify_peer</definition>
+        <argsstring>() const</argsstring>
+        <name>verify_peer</name>
+        <qualifiedname>neforce::smtp_socket::verify_peer</qualifiedname>
+        <briefdescription>
+<para>验证服务器证书 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>验证通过返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="400" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" bodystart="400" bodyend="400"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1smtp__socket_1a015a40c3ec33b73f6dcee48033a65681" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::smtp_socket::cipher_name</definition>
+        <argsstring>() const</argsstring>
+        <name>cipher_name</name>
+        <qualifiedname>neforce::smtp_socket::cipher_name</qualifiedname>
+        <briefdescription>
+<para>获取当前TLS密码套件名 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>密码套件名称 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="406" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" bodystart="406" bodyend="406"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1smtp__socket_1aebc059d5f8487f6874c43a182abcce55" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::smtp_socket::tls_version</definition>
+        <argsstring>() const</argsstring>
+        <name>tls_version</name>
+        <qualifiedname>neforce::smtp_socket::tls_version</qualifiedname>
+        <briefdescription>
+<para>获取当前TLS版本 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>TLS版本字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="412" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" bodystart="412" bodyend="412"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>SMTP Socket类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>实现SMTP客户端协议，支持完整的邮件发送流程。 支持多种连接方式和认证机制。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>SMTP服务器连接（支持IP和域名）</para>
+</listitem><listitem><para>TLS/SSL加密（隐式TLS、STARTTLS）</para>
+</listitem><listitem><para>认证（PLAIN、LOGIN）</para>
+</listitem><listitem><para>邮件发送（支持收件人、抄送、密送、HTML邮件）</para>
+</listitem><listitem><para>EHLO/HELO协议协商</para>
+</listitem><listitem><para>DNS解析 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>neforce::ip_socket</label>
+        <link refid="classneforce_1_1ip__socket"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::smtp_socket</label>
+        <link refid="classneforce_1_1smtp__socket"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::socket_base</label>
+        <link refid="classneforce_1_1socket__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>neforce::ip_socket</label>
+        <link refid="classneforce_1_1ip__socket"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::smtp_socket</label>
+        <link refid="classneforce_1_1smtp__socket"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::socket_base</label>
+        <link refid="classneforce_1_1socket__base"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" line="241" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/smtp_socket.hpp" bodystart="241" bodyend="413"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1ip__socket_1a0325c30f0884ea89c03ccb42c4ec4fe8" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>address_family</name></member>
+      <member refid="classneforce_1_1smtp__socket_1a12fb3c05e73748be054496cdef21f2f3" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>auth_method</name></member>
+      <member refid="classneforce_1_1smtp__socket_1a3204ed4001533cebcb7c957fcf6b508f" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>authenticate</name></member>
+      <member refid="classneforce_1_1socket__base_1ae7a4566c2df82eb0ba3fff8b5fc7df46" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>bind</name></member>
+      <member refid="classneforce_1_1smtp__socket_1a015a40c3ec33b73f6dcee48033a65681" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>cipher_name</name></member>
+      <member refid="classneforce_1_1ip__socket_1ac28c4d988187869d423dd9c881b6c1ad" prot="public" virt="virtual"><scope>neforce::smtp_socket</scope><name>close</name></member>
+      <member refid="classneforce_1_1smtp__socket_1ab87bf78f45a3da770ef0b67f445e4d5d" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>connect</name></member>
+      <member refid="classneforce_1_1smtp__socket_1a5acba0c3eb856f7c5eba89d6736fc525" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>connect</name></member>
+      <member refid="classneforce_1_1ip__socket_1a4cdbfc7ec62fb1980c9b432567c544b8" prot="public" virt="virtual" ambiguityscope="neforce::ip_socket::"><scope>neforce::smtp_socket</scope><name>connect</name></member>
+      <member refid="classneforce_1_1smtp__socket_1a7aed4d43ac4cb0b846928f42514db9b6" prot="private" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>connected_</name></member>
+      <member refid="classneforce_1_1smtp__socket_1a3c0be40e1676ac489402ae65c9db5c97" prot="private" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>ctx_</name></member>
+      <member refid="classneforce_1_1smtp__socket_1a9b27ee30ab1cf41933f36ac4b47c1c0e" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>disconnect</name></member>
+      <member refid="classneforce_1_1smtp__socket_1aef9888b96744738eab11a9110b4da01d" prot="private" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>do_ehlo</name></member>
+      <member refid="classneforce_1_1smtp__socket_1acf4c67d7171f6b4769ccfdd891c44f7c" prot="private" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>do_post_connect</name></member>
+      <member refid="classneforce_1_1smtp__socket_1a3c1a5bb476721685a8cb36b9b1b28f51" prot="private" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>do_tls_handshake</name></member>
+      <member refid="classneforce_1_1smtp__socket_1a3271c673f99c54c37ac791ca6b20ba4a" prot="private" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>expect_code</name></member>
+      <member refid="classneforce_1_1socket__base_1a90d93d8cb0d95db21274a08b6d27205a" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>family</name></member>
+      <member refid="classneforce_1_1ip__socket_1a2f3af3f32b5f7b68649ccfda2087b81b" prot="protected" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>family_</name></member>
+      <member refid="classneforce_1_1socket__base_1a0d91356affbee30bd1e6f7cc483e508d" prot="protected" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>fd_</name></member>
+      <member refid="classneforce_1_1socket__base_1af49df530dda2a79b2c71300f8288bba7" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>get_keep_alive</name></member>
+      <member refid="classneforce_1_1socket__base_1a17ec17b8a17e3bee456b0048596320a8" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>get_option</name></member>
+      <member refid="classneforce_1_1socket__base_1a520522c4fdfcdc32ab604032228b959f" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>get_receive_buffer_size</name></member>
+      <member refid="classneforce_1_1socket__base_1acbd2aa324a89474bde619a624e3c9844" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>get_receive_timeout</name></member>
+      <member refid="classneforce_1_1socket__base_1a3fe176f51955f4696822063fb30d726a" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>get_reuse_address</name></member>
+      <member refid="classneforce_1_1socket__base_1aa5bb48b1079264d9664fe804212faa37" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>get_reuse_port</name></member>
+      <member refid="classneforce_1_1socket__base_1a91af69f055fd07c06ce5e03f7714dfcc" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>get_send_buffer_size</name></member>
+      <member refid="classneforce_1_1socket__base_1a67995540ea809991a0b57c04be823fc6" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>get_send_timeout</name></member>
+      <member refid="classneforce_1_1socket__base_1a21579daf2fbc2531ab85713ed529e487" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>get_tcp_nodelay</name></member>
+      <member refid="classneforce_1_1socket__base_1af49691de702dac3413c30d84bb64f734" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>invalid_handle</name></member>
+      <member refid="classneforce_1_1ip__socket_1a98a70d9b139d26347dce1ec4fac71dd5" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>ip_socket</name></member>
+      <member refid="classneforce_1_1ip__socket_1ab903e29e3d12614715fc900e1ea82c8d" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>ip_socket</name></member>
+      <member refid="classneforce_1_1ip__socket_1ac105a1ad0969027342aa7fde2522532b" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>ip_socket</name></member>
+      <member refid="classneforce_1_1ip__socket_1ab00c04d8df1df46dda74dc8d1a43df94" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>ip_socket</name></member>
+      <member refid="classneforce_1_1smtp__socket_1a53df2885f3a67794894beb73f9eef761" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>is_connected</name></member>
+      <member refid="classneforce_1_1ip__socket_1a4931794a3b297db3646a6c8b85e9dec2" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>is_ipv4</name></member>
+      <member refid="classneforce_1_1ip__socket_1ac145bfaba7d2e8640b40ea30e4b64e0c" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>is_ipv6</name></member>
+      <member refid="classneforce_1_1socket__base_1acf76f07c4bb9652e701eb39247850f76" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>is_nonblocking</name></member>
+      <member refid="classneforce_1_1socket__base_1a688c59e456551b33a230cb139dbd685a" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>is_open</name></member>
+      <member refid="classneforce_1_1smtp__socket_1aa3f84fadb2b61562f2a410d80be6be81" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>is_tls_active</name></member>
+      <member refid="classneforce_1_1socket__base_1aada611fdaa46fb9f055ef566be7fbd05" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>listen</name></member>
+      <member refid="classneforce_1_1socket__base_1abaa18d7f634b115ad1989ec023c0bf32" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>local_endpoint</name></member>
+      <member refid="classneforce_1_1socket__base_1a55e7e77823236aaf022990256793783d" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>native_handle</name></member>
+      <member refid="classneforce_1_1socket__base_1a4c5f2953bd5b46ee48a334d5c247bc0d" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>native_handle_type</name></member>
+      <member refid="classneforce_1_1socket__base_1ad636c7b9448f24dcea9ae92e3b27c263" prot="protected" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>nonblocking_</name></member>
+      <member refid="classneforce_1_1smtp__socket_1a9489bafa39fccfc40e7b78f4ffc3e40e" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>noop</name></member>
+      <member refid="classneforce_1_1socket__base_1aa25cb567f6980041f5dc74b91913eb6d" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>open</name></member>
+      <member refid="classneforce_1_1smtp__socket_1ae50c71eb8f2c1ec62cc43f89dcf76327" prot="private" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>open_and_connect</name></member>
+      <member refid="classneforce_1_1ip__socket_1a5f93a507926ec1ddc9a6a4e728644968" prot="protected" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>open_ip</name></member>
+      <member refid="classneforce_1_1socket__base_1ac4c5240cbfd92f1b31e3f8dc7093987a" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>operator bool</name></member>
+      <member refid="classneforce_1_1ip__socket_1aaf616a56b6b0e00194633d59a93e79ae" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1ip__socket_1acd978787ab0a7d3b0123917f8c6b8a96" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1socket__base_1ab20b8caa25bbb8071e4c908691251667" prot="public" virt="non-virtual" ambiguityscope="neforce::socket_base::"><scope>neforce::smtp_socket</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1socket__base_1a9e86d2bd403dbba7ba100a163ea130d0" prot="public" virt="non-virtual" ambiguityscope="neforce::socket_base::"><scope>neforce::smtp_socket</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1socket__base_1a8cbdda2bb8a0e190c258eb25bb445992" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>protocol</name></member>
+      <member refid="classneforce_1_1smtp__socket_1af5ae4dae3666e0a0cb1e83a017b60da8" prot="private" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>raw_recv</name></member>
+      <member refid="classneforce_1_1smtp__socket_1ada48bdc36116c174ebdcaa594433bf74" prot="private" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>raw_send</name></member>
+      <member refid="classneforce_1_1smtp__socket_1a46072c7a460ca42337ad498d36d01bd6" prot="private" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>read_line</name></member>
+      <member refid="classneforce_1_1smtp__socket_1a98bb98f2ce6bfc24d6051ef23200a8af" prot="private" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>read_response</name></member>
+      <member refid="classneforce_1_1socket__base_1a32f1e147a349925c32839fa1ce3b8fdc" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>release</name></member>
+      <member refid="classneforce_1_1socket__base_1ae1a4b45ff284ba83fac92aa5dc4a9adb" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>remote_endpoint</name></member>
+      <member refid="classneforce_1_1smtp__socket_1a6762355fe3bf4f7b724e17c6682d3bd0" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>send</name></member>
+      <member refid="classneforce_1_1smtp__socket_1afeb3777879530d1d71a255c95f7abd39" prot="private" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>send_command</name></member>
+      <member refid="classneforce_1_1smtp__socket_1a24645764b8035c8f5afd0db5d9a2c57c" prot="private" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>server_domain_</name></member>
+      <member refid="classneforce_1_1socket__base_1ab55494ddb7435ace44483bf2a13d1b19" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>set_keep_alive</name></member>
+      <member refid="classneforce_1_1socket__base_1a9b75e2f51a01febdd29f2fd6941fd2ab" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>set_nonblocking</name></member>
+      <member refid="classneforce_1_1socket__base_1aebf9cdaaa399bcbdff7e7a47345d039a" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>set_option</name></member>
+      <member refid="classneforce_1_1socket__base_1a2b3e9bc783b3e3469bb213604220deed" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>set_receive_buffer_size</name></member>
+      <member refid="classneforce_1_1socket__base_1a3e028a27cad5bca645c4d8f645751dfa" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>set_receive_timeout</name></member>
+      <member refid="classneforce_1_1socket__base_1af311eb5e4b8693da9b1d1e16d0b10d13" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>set_reuse_address</name></member>
+      <member refid="classneforce_1_1socket__base_1ad2cd6c991e1b7689ecffadc57ec44df5" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>set_reuse_port</name></member>
+      <member refid="classneforce_1_1socket__base_1a5b90babf7b270d141fdeeab138550374" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>set_send_buffer_size</name></member>
+      <member refid="classneforce_1_1socket__base_1a21e4ba35840c0cc904beaaf005a846b1" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>set_send_timeout</name></member>
+      <member refid="classneforce_1_1socket__base_1a82ea11bfa98bbbd2ad2d9feeffd44782" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>set_tcp_nodelay</name></member>
+      <member refid="classneforce_1_1socket__base_1a53d78f352e1c34a1d54f475d6eaf7922" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>shutdown_both</name></member>
+      <member refid="classneforce_1_1socket__base_1a852458c313e65acc1e74bc16130e0502" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>shutdown_receive</name></member>
+      <member refid="classneforce_1_1socket__base_1ac0d78cde8681391cedca79f28e89119e" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>shutdown_send</name></member>
+      <member refid="classneforce_1_1smtp__socket_1a1fdc23068731f08120a0f283f03f7c07" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>smtp_socket</name></member>
+      <member refid="classneforce_1_1smtp__socket_1aa730a8666b5bec8f8d2d8e24bb8c145a" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>smtp_socket</name></member>
+      <member refid="classneforce_1_1socket__base_1a9b8731a4cb059cf60c43ca97aa688162" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>socket_base</name></member>
+      <member refid="classneforce_1_1socket__base_1accb5b278a3bc2792f893357f1e7e9812" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>socket_base</name></member>
+      <member refid="classneforce_1_1socket__base_1afa79ec1d00e839df5aaf63de31028566" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>socket_base</name></member>
+      <member refid="classneforce_1_1socket__base_1a08db6bdff24ac7930d2010da313fe5f8" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>socket_base</name></member>
+      <member refid="classneforce_1_1smtp__socket_1a541cb6abab7ae0479b01242b52ea3bf7" prot="private" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>ssl_</name></member>
+      <member refid="classneforce_1_1smtp__socket_1add64cdcf4ec180508ceb1d990502a8e3" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>starttls</name></member>
+      <member refid="classneforce_1_1smtp__socket_1a69b7f82b7c8f9de7ef8b8de8c48ad649" prot="private" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>tls_active_</name></member>
+      <member refid="classneforce_1_1smtp__socket_1a1c56b165196193c28697bcddb22523ca" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>tls_mode</name></member>
+      <member refid="classneforce_1_1smtp__socket_1adf352166a33fa23300e48ab58fde4674" prot="private" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>tls_mode_</name></member>
+      <member refid="classneforce_1_1smtp__socket_1aebc059d5f8487f6874c43a182abcce55" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>tls_version</name></member>
+      <member refid="classneforce_1_1socket__base_1a6b1c0921703871f28d6903be8f02690e" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>try_open</name></member>
+      <member refid="classneforce_1_1socket__base_1a322e65239feb4f0d2fa3bf3763f31256" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>type</name></member>
+      <member refid="classneforce_1_1smtp__socket_1aa6f3f7d28df5232ef96aaddb7782074b" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>verify_peer</name></member>
+      <member refid="classneforce_1_1ip__socket_1a40b908afe34460e2d5d890a36913fac1" prot="public" virt="non-virtual"><scope>neforce::smtp_socket</scope><name>~ip_socket</name></member>
+      <member refid="classneforce_1_1socket__base_1aef05deba68ee95bf9f5a5e3c408851a3" prot="public" virt="virtual"><scope>neforce::smtp_socket</scope><name>~socket_base</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

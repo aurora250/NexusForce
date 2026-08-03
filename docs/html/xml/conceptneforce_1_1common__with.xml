@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="conceptneforce_1_1common__with" kind="concept">
+    <compoundname>neforce::common_with</compoundname>
+    <includes refid="concepts_8hpp" local="no">concepts.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T1</type>
+      </param>
+      <param>
+        <type>typename T2</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename T1, typename T2&gt;
+concept <ref refid="conceptneforce_1_1common__with" kindref="compound">neforce::common_with</ref> = 
+        requires {
+            typename <ref refid="group___type_attribute_operations_1gadd302feb38cdc0a2f632b46b2b10e981" kindref="member">common_type_t</ref>&lt;T1, T2&gt;;
+            typename <ref refid="group___type_attribute_operations_1gadd302feb38cdc0a2f632b46b2b10e981" kindref="member">common_type_t</ref>&lt;T2, T1&gt;;
+        } &amp;&amp; same_as&lt;<ref refid="group___type_attribute_operations_1gadd302feb38cdc0a2f632b46b2b10e981" kindref="member">common_type_t</ref>&lt;T1, T2&gt;, <ref refid="group___type_attribute_operations_1gadd302feb38cdc0a2f632b46b2b10e981" kindref="member">common_type_t</ref>&lt;T2, T1&gt;&gt; &amp;&amp;
+        requires {
+            static_cast&lt;<ref refid="group___type_attribute_operations_1gadd302feb38cdc0a2f632b46b2b10e981" kindref="member">common_type_t</ref>&lt;T1, T2&gt;&gt;(_NEFORCE <ref refid="group___declval_tools_1ga7071848a30be73f786711db2ae038447" kindref="member">declval</ref>&lt;T1&gt;());
+            static_cast&lt;<ref refid="group___type_attribute_operations_1gadd302feb38cdc0a2f632b46b2b10e981" kindref="member">common_type_t</ref>&lt;T1, T2&gt;&gt;(_NEFORCE <ref refid="group___declval_tools_1ga7071848a30be73f786711db2ae038447" kindref="member">declval</ref>&lt;T2&gt;());
+        } &amp;&amp; common_reference_with&lt;<ref refid="group___add_qualifiers_1gadface24d2207b24b3037fb644acaf643" kindref="member">add_lvalue_reference_t</ref>&lt;const T1&gt;, <ref refid="group___add_qualifiers_1gadface24d2207b24b3037fb644acaf643" kindref="member">add_lvalue_reference_t</ref>&lt;const T2&gt;&gt; &amp;&amp;
+        common_reference_with&lt;<ref refid="group___add_qualifiers_1gadface24d2207b24b3037fb644acaf643" kindref="member">add_lvalue_reference_t</ref>&lt;<ref refid="group___type_attribute_operations_1gadd302feb38cdc0a2f632b46b2b10e981" kindref="member">common_type_t</ref>&lt;T1, T2&gt;&gt;,
+                              <ref refid="group___type_attribute_operations_1ga2ac9907e9b538e8634456db6f6d26eaa" kindref="member">common_reference_t</ref>&lt;<ref refid="group___add_qualifiers_1gadface24d2207b24b3037fb644acaf643" kindref="member">add_lvalue_reference_t</ref>&lt;const T1&gt;, <ref refid="group___add_qualifiers_1gadface24d2207b24b3037fb644acaf643" kindref="member">add_lvalue_reference_t</ref>&lt;const T2&gt;&gt;&gt;</initializer>
+    <conceptparts>
+      <codepart line="65">    <programlisting>
+<codeline><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T1,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T2&gt;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">concept<sp/></highlight><highlight class="normal">common_with<sp/>=</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>common_type_t&lt;T1,<sp/>T2&gt;;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>common_type_t&lt;T2,<sp/>T1&gt;;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/>&amp;&amp;<sp/>same_as&lt;common_type_t&lt;T1,<sp/>T2&gt;,<sp/>common_type_t&lt;T2,<sp/>T1&gt;&gt;<sp/>&amp;&amp;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">common_type_t&lt;T1,<sp/>T2&gt;</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(_NEFORCE<sp/>declval&lt;T1&gt;());</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">common_type_t&lt;T1,<sp/>T2&gt;</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(_NEFORCE<sp/>declval&lt;T2&gt;());</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/>&amp;&amp;<sp/>common_reference_with&lt;add_lvalue_reference_t&lt;const<sp/>T1&gt;,<sp/>add_lvalue_reference_t&lt;const<sp/>T2&gt;&gt;<sp/>&amp;&amp;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>common_reference_with&lt;add_lvalue_reference_t&lt;common_type_t&lt;T1,<sp/>T2&gt;&gt;,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>common_reference_t&lt;add_lvalue_reference_t&lt;const<sp/>T1&gt;,<sp/>add_lvalue_reference_t&lt;const<sp/>T2&gt;&gt;&gt;</highlight></codeline>
+    </programlisting>
+</codepart>
+    </conceptparts>
+    <briefdescription>
+<para>检查两个类型是否有公共类型 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+要求：<orderedlist>
+<listitem><para>T1和T2有公共类型</para>
+</listitem><listitem><para>公共类型对称</para>
+</listitem><listitem><para>T1和T2都可以转换为公共类型</para>
+</listitem><listitem><para>满足公共引用相关约束 </para>
+</listitem></orderedlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" line="65" column="1"/>
+  </compounddef>
+</doxygen>

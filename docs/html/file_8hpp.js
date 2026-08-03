@@ -1,5 +1,5 @@
 var file_8hpp =
 [
-    [ "file::line_iterator", "classfile_1_1line__iterator.html", "classfile_1_1line__iterator" ],
-    [ "file::chunk_info", "structfile_1_1chunk__info.html", "structfile_1_1chunk__info" ]
+    [ "neforce::file::line_iterator", "classneforce_1_1file_1_1line__iterator.html", "classneforce_1_1file_1_1line__iterator" ],
+    [ "neforce::file::chunk_info", "structneforce_1_1file_1_1chunk__info.html", "structneforce_1_1file_1_1chunk__info" ]
 ];

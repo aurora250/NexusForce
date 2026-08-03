@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🎨_20图形、色彩与数学_0',['🎨 图形、色彩与数学',['../md__m_a_i_n_p_a_g_e.html#autotoc_md15',1,'']]]
+  ['非求值辅助工具_0',['非求值辅助工具',['../group___declval_tools.html',1,'']]]
 ];

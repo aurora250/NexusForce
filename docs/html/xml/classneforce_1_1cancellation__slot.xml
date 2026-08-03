@@ -1,0 +1,217 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1cancellation__slot" kind="class" language="C++" prot="public">
+    <compoundname>neforce::cancellation_slot</compoundname>
+    <includes refid="cancellation__slot_8hpp" local="no">cancellation_slot.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1cancellation__slot_1acf89cefb3438e0b7a3c1b13854936999" prot="public" static="no">
+        <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void()&gt;</type>
+        <definition>using neforce::cancellation_slot::cancel_handler = function&lt;void()&gt;</definition>
+        <argsstring></argsstring>
+        <name>cancel_handler</name>
+        <qualifiedname>neforce::cancellation_slot::cancel_handler</qualifiedname>
+        <briefdescription>
+<para>取消回调类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/cancellation_slot.hpp" line="45" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/cancellation_slot.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1cancellation__slot_1a73c33a36e3f0c8f555c7a20a7657082b" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1stop__token" kindref="compound">stop_token</ref></type>
+        <definition>stop_token neforce::cancellation_slot::token_</definition>
+        <argsstring></argsstring>
+        <name>token_</name>
+        <qualifiedname>neforce::cancellation_slot::token_</qualifiedname>
+        <briefdescription>
+<para>停止令牌 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/cancellation_slot.hpp" line="40" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/cancellation_slot.hpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1cancellation__slot_1aac741c5f51374fe0af3ad8ca8707a9b3" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; void &gt;</type>
+        <definition>shared_ptr&lt;void&gt; neforce::cancellation_slot::callback_</definition>
+        <argsstring></argsstring>
+        <name>callback_</name>
+        <qualifiedname>neforce::cancellation_slot::callback_</qualifiedname>
+        <briefdescription>
+<para>取消回调 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/cancellation_slot.hpp" line="41" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/cancellation_slot.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1cancellation__slot_1a87f0079bd768401e15102fc7d2bef7ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::cancellation_slot::cancellation_slot</definition>
+        <argsstring>()=default</argsstring>
+        <name>cancellation_slot</name>
+        <qualifiedname>neforce::cancellation_slot::cancellation_slot</qualifiedname>
+        <briefdescription>
+<para>默认构造 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/cancellation_slot.hpp" line="50" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1cancellation__slot_1a59d7c6a3c5e9fba889d74dc05ce36af2" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::cancellation_slot::cancellation_slot</definition>
+        <argsstring>(stop_token token)</argsstring>
+        <name>cancellation_slot</name>
+        <qualifiedname>neforce::cancellation_slot::cancellation_slot</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1stop__token" kindref="compound">stop_token</ref></type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+<para>从 <ref refid="classneforce_1_1stop__token" kindref="compound">stop_token</ref> 构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>停止令牌 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/cancellation_slot.hpp" line="56" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/cancellation_slot.hpp" bodystart="56" bodyend="57"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1cancellation__slot_1ac4d78d9908ebd172883ba689369fc7a8" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::cancellation_slot::is_cancelled</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_cancelled</name>
+        <qualifiedname>neforce::cancellation_slot::is_cancelled</qualifiedname>
+        <briefdescription>
+<para>检查是否已请求取消 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/cancellation_slot.hpp" line="62" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/cancellation_slot.hpp" bodystart="62" bodyend="62"/>
+        <referencedby refid="classneforce_1_1cancellation__slot_1a420baa9a7b4bf2262ba1d1b2a69658a8" compoundref="cancellation__slot_8hpp" startline="73" endline="83">assign</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1cancellation__slot_1a420baa9a7b4bf2262ba1d1b2a69658a8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Handler</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool neforce::cancellation_slot::assign</definition>
+        <argsstring>(Handler &amp;&amp;handler)</argsstring>
+        <name>assign</name>
+        <qualifiedname>neforce::cancellation_slot::assign</qualifiedname>
+        <param>
+          <type>Handler &amp;&amp;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>注册取消回调 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>回调类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>取消时执行的回调 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否注册成功（已取消则返回 false 且不注册）</para>
+</simplesect>
+<simplesect kind="note"><para>若注册时已取消，handler 会被立即调用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/cancellation_slot.hpp" line="73" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/cancellation_slot.hpp" bodystart="73" bodyend="83"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="classneforce_1_1cancellation__slot_1ac4d78d9908ebd172883ba689369fc7a8" compoundref="cancellation__slot_8hpp" startline="62" endline="62">is_cancelled</references>
+        <references refid="group___shared_pointer_1gacdaa04ead5936b6c9e0f024297dcf54f" compoundref="shared__ptr_8hpp" startline="849" endline="877">neforce::make_shared</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1cancellation__slot_1a38e00c31a640848a2ed6d1595f9b9b72" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classneforce_1_1stop__token" kindref="compound">stop_token</ref> &amp;</type>
+        <definition>const stop_token &amp; neforce::cancellation_slot::get_token</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_token</name>
+        <qualifiedname>neforce::cancellation_slot::get_token</qualifiedname>
+        <briefdescription>
+<para>获取关联的 <ref refid="classneforce_1_1stop__token" kindref="compound">stop_token</ref> </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/cancellation_slot.hpp" line="88" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/cancellation_slot.hpp" bodystart="88" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1cancellation__slot_1a7b699eedee77d16f28dc3d9ce37a2aad" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::cancellation_slot::has_slot</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>has_slot</name>
+        <qualifiedname>neforce::cancellation_slot::has_slot</qualifiedname>
+        <briefdescription>
+<para>检查是否有取消能力 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/cancellation_slot.hpp" line="93" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/cancellation_slot.hpp" bodystart="93" bodyend="93"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>异步操作取消槽 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>每个异步操作可以绑定一个 cancellation_slot。 当关联的 <ref refid="classneforce_1_1stop__source" kindref="compound">stop_source</ref> 请求停止时，取消回调被触发， 操作会被清理并且 handler 以 operation_aborted 错误码调用。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/cancellation_slot.hpp" line="38" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/cancellation_slot.hpp" bodystart="38" bodyend="94"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1cancellation__slot_1a420baa9a7b4bf2262ba1d1b2a69658a8" prot="public" virt="non-virtual"><scope>neforce::cancellation_slot</scope><name>assign</name></member>
+      <member refid="classneforce_1_1cancellation__slot_1aac741c5f51374fe0af3ad8ca8707a9b3" prot="private" virt="non-virtual"><scope>neforce::cancellation_slot</scope><name>callback_</name></member>
+      <member refid="classneforce_1_1cancellation__slot_1acf89cefb3438e0b7a3c1b13854936999" prot="public" virt="non-virtual"><scope>neforce::cancellation_slot</scope><name>cancel_handler</name></member>
+      <member refid="classneforce_1_1cancellation__slot_1a87f0079bd768401e15102fc7d2bef7ab" prot="public" virt="non-virtual"><scope>neforce::cancellation_slot</scope><name>cancellation_slot</name></member>
+      <member refid="classneforce_1_1cancellation__slot_1a59d7c6a3c5e9fba889d74dc05ce36af2" prot="public" virt="non-virtual"><scope>neforce::cancellation_slot</scope><name>cancellation_slot</name></member>
+      <member refid="classneforce_1_1cancellation__slot_1a38e00c31a640848a2ed6d1595f9b9b72" prot="public" virt="non-virtual"><scope>neforce::cancellation_slot</scope><name>get_token</name></member>
+      <member refid="classneforce_1_1cancellation__slot_1a7b699eedee77d16f28dc3d9ce37a2aad" prot="public" virt="non-virtual"><scope>neforce::cancellation_slot</scope><name>has_slot</name></member>
+      <member refid="classneforce_1_1cancellation__slot_1ac4d78d9908ebd172883ba689369fc7a8" prot="public" virt="non-virtual"><scope>neforce::cancellation_slot</scope><name>is_cancelled</name></member>
+      <member refid="classneforce_1_1cancellation__slot_1a73c33a36e3f0c8f555c7a20a7657082b" prot="private" virt="non-virtual"><scope>neforce::cancellation_slot</scope><name>token_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

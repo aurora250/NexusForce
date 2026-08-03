@@ -1,0 +1,247 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1socket__exception" kind="struct" language="C++" prot="public" final="yes">
+    <compoundname>neforce::socket_exception</compoundname>
+    <basecompoundref refid="structneforce_1_1network__exception" prot="public" virt="non-virtual">neforce::network_exception</basecompoundref>
+    <includes refid="socket__base_8hpp" local="no">socket_base.hpp</includes>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structneforce_1_1socket__exception_1ae813393607a33cffecfc75b95c9e6be4" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>static int neforce::socket_exception::last_error</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>last_error</name>
+        <qualifiedname>neforce::socket_exception::last_error</qualifiedname>
+        <briefdescription>
+<para>获取最后系统Socket错误码 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>错误码 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="35" column="16"/>
+        <referencedby refid="structneforce_1_1socket__exception_1a9d80a91da2a8eaf7da99e104dfd5204f">is_would_block</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1socket__exception_1a9d80a91da2a8eaf7da99e104dfd5204f" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool neforce::socket_exception::is_would_block</definition>
+        <argsstring>(int error) noexcept</argsstring>
+        <name>is_would_block</name>
+        <qualifiedname>neforce::socket_exception::is_would_block</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>error</declname>
+        </param>
+        <briefdescription>
+<para>检查错误码是否表示操作会阻塞 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>错误码 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是会阻塞返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="42" column="17"/>
+        <references refid="structneforce_1_1socket__exception_1a9d80a91da2a8eaf7da99e104dfd5204f">is_would_block</references>
+        <references refid="structneforce_1_1socket__exception_1ae813393607a33cffecfc75b95c9e6be4">last_error</references>
+        <references refid="group___error_code_1ga895e4a66fd0b19a4b685c2963820ec00">neforce::system_category</references>
+        <referencedby refid="structneforce_1_1socket__exception_1a9d80a91da2a8eaf7da99e104dfd5204f">is_would_block</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1socket__exception_1a53ad1741fb44798540b8c4d338384d66" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::socket_exception::socket_exception</definition>
+        <argsstring>(const char *info=&quot;Socket Operation Failed.&quot;, const error_code code=error_code(last_error(), system_category())) noexcept</argsstring>
+        <name>socket_exception</name>
+        <qualifiedname>neforce::socket_exception::socket_exception</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>info</declname>
+          <defval>&quot;Socket Operation Failed.&quot;</defval>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref></type>
+          <declname>code</declname>
+          <defval><ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref>(<ref refid="structneforce_1_1socket__exception_1ae813393607a33cffecfc75b95c9e6be4" kindref="member">last_error</ref>(), <ref refid="group___error_code_1ga895e4a66fd0b19a4b685c2963820ec00" kindref="member">system_category</ref>())</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="44" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/socket_base.hpp" bodystart="44" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1socket__exception_1adaf94c93410022f943029c31543d2600" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::socket_exception::socket_exception</definition>
+        <argsstring>(const exception &amp;e)</argsstring>
+        <name>socket_exception</name>
+        <qualifiedname>neforce::socket_exception::socket_exception</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1exception" kindref="compound">exception</ref> &amp;</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="48" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/socket_base.hpp" bodystart="48" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1socket__exception_1ae58d557f077cfe2aefe73fdd86877d6b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::socket_exception::~socket_exception</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~socket_exception</name>
+        <qualifiedname>neforce::socket_exception::~socket_exception</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="51" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1socket__exception_1a5c1b97cbcdfe219a89e8c2aa33dbb01e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>const char *</type>
+        <definition>const char * neforce::socket_exception::type</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>type</name>
+        <qualifiedname>neforce::socket_exception::type</qualifiedname>
+        <reimplements refid="structneforce_1_1network__exception_1adaa452d850f60ddb05ac7ccaa779894c">type</reimplements>
+        <briefdescription>
+<para>获取异常类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>异常类型字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="53" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/socket_base.hpp" bodystart="53" bodyend="53"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Socket操作异常类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Socket操作失败时抛出的异常，封装了系统错误码。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>neforce::exception</label>
+        <link refid="structneforce_1_1exception"/>
+      </node>
+      <node id="2">
+        <label>neforce::network_exception</label>
+        <link refid="structneforce_1_1network__exception"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::socket_exception</label>
+        <link refid="structneforce_1_1socket__exception"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::system_exception</label>
+        <link refid="structneforce_1_1system__exception"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="5">
+        <label>neforce::error_code</label>
+        <link refid="classneforce_1_1error__code"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::exception</label>
+        <link refid="structneforce_1_1exception"/>
+      </node>
+      <node id="6">
+        <label>neforce::icommon&lt; error_code &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>neforce::icomparable&lt; error_code &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="8">
+        <label>neforce::ihashable&lt; error_code &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="2">
+        <label>neforce::network_exception</label>
+        <link refid="structneforce_1_1network__exception"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::socket_exception</label>
+        <link refid="structneforce_1_1socket__exception"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::system_exception</label>
+        <link refid="structneforce_1_1system__exception"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>code_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="30" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/socket_base.hpp" bodystart="30" bodyend="54"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1system__exception_1ada8397813b9f1f832a2c4556b41084ff" prot="public" virt="virtual"><scope>neforce::socket_exception</scope><name>code</name></member>
+      <member refid="structneforce_1_1system__exception_1af2ce9019b46965c6bcd065f0efae0406" prot="protected" virt="non-virtual"><scope>neforce::socket_exception</scope><name>code_</name></member>
+      <member refid="structneforce_1_1exception_1ae64bcc0873cb85a3b913e43b523ac45c" prot="public" virt="non-virtual"><scope>neforce::socket_exception</scope><name>exception</name></member>
+      <member refid="structneforce_1_1exception_1a9ae6ab2dc5699adfc63ec7571e87ec94" prot="public" virt="non-virtual"><scope>neforce::socket_exception</scope><name>exception</name></member>
+      <member refid="structneforce_1_1exception_1a295286b9d2ce7d9338815964b564e289" prot="public" virt="non-virtual"><scope>neforce::socket_exception</scope><name>exception</name></member>
+      <member refid="structneforce_1_1exception_1ae2992fe5862a76e5fae94c9290aca38e" prot="public" virt="non-virtual"><scope>neforce::socket_exception</scope><name>exception</name></member>
+      <member refid="structneforce_1_1socket__exception_1a9d80a91da2a8eaf7da99e104dfd5204f" prot="public" virt="non-virtual"><scope>neforce::socket_exception</scope><name>is_would_block</name></member>
+      <member refid="structneforce_1_1socket__exception_1ae813393607a33cffecfc75b95c9e6be4" prot="public" virt="non-virtual"><scope>neforce::socket_exception</scope><name>last_error</name></member>
+      <member refid="structneforce_1_1network__exception_1a89e1d9a2788deb1e23f053d698b7f075" prot="public" virt="non-virtual"><scope>neforce::socket_exception</scope><name>network_exception</name></member>
+      <member refid="structneforce_1_1network__exception_1a7591a5dbcf43452127c1a892fa412725" prot="public" virt="non-virtual"><scope>neforce::socket_exception</scope><name>network_exception</name></member>
+      <member refid="structneforce_1_1network__exception_1ad72094cf393509c6e7b407334c533384" prot="public" virt="non-virtual"><scope>neforce::socket_exception</scope><name>network_exception</name></member>
+      <member refid="structneforce_1_1exception_1a159169892770b6020d5ab0bcbf6066e5" prot="public" virt="non-virtual"><scope>neforce::socket_exception</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1exception_1a9e4ddd8f9b01a26777cff21e282511a5" prot="public" virt="non-virtual"><scope>neforce::socket_exception</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1socket__exception_1a53ad1741fb44798540b8c4d338384d66" prot="public" virt="non-virtual"><scope>neforce::socket_exception</scope><name>socket_exception</name></member>
+      <member refid="structneforce_1_1socket__exception_1adaf94c93410022f943029c31543d2600" prot="public" virt="non-virtual"><scope>neforce::socket_exception</scope><name>socket_exception</name></member>
+      <member refid="structneforce_1_1system__exception_1a500e1d408cd16e8086ad3b2ace9be198" prot="public" virt="non-virtual"><scope>neforce::socket_exception</scope><name>system_exception</name></member>
+      <member refid="structneforce_1_1system__exception_1a291b38afbef06d3012c734d098d92816" prot="public" virt="non-virtual"><scope>neforce::socket_exception</scope><name>system_exception</name></member>
+      <member refid="structneforce_1_1system__exception_1a18f794f91a1b3310bc2aa6a38c2dac59" prot="public" virt="non-virtual"><scope>neforce::socket_exception</scope><name>system_exception</name></member>
+      <member refid="structneforce_1_1socket__exception_1a5c1b97cbcdfe219a89e8c2aa33dbb01e" prot="public" virt="virtual"><scope>neforce::socket_exception</scope><name>type</name></member>
+      <member refid="structneforce_1_1exception_1a4c6dcdeed9716bc2d4eed8d28a9a6d14" prot="public" virt="virtual"><scope>neforce::socket_exception</scope><name>what</name></member>
+      <member refid="structneforce_1_1exception_1aaa0545c19e5f71dd3da3ef74e19c190e" prot="public" virt="virtual"><scope>neforce::socket_exception</scope><name>~exception</name></member>
+      <member refid="structneforce_1_1network__exception_1a9f5acd8fe79897090ac74c1892b59650" prot="public" virt="non-virtual"><scope>neforce::socket_exception</scope><name>~network_exception</name></member>
+      <member refid="structneforce_1_1socket__exception_1ae58d557f077cfe2aefe73fdd86877d6b" prot="public" virt="non-virtual"><scope>neforce::socket_exception</scope><name>~socket_exception</name></member>
+      <member refid="structneforce_1_1system__exception_1ac40c2ccd9ed14c2a4446ed96fec6e61f" prot="public" virt="non-virtual"><scope>neforce::socket_exception</scope><name>~system_exception</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

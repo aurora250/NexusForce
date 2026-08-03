@@ -1,0 +1,381 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1idb__prepared__statement" kind="struct" language="C++" prot="public" abstract="yes">
+    <compoundname>neforce::idb_prepared_statement</compoundname>
+    <derivedcompoundref refid="classneforce_1_1mysql__prepared__statement" prot="public" virt="non-virtual">neforce::mysql_prepared_statement</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1pgsql__prepared__statement" prot="public" virt="non-virtual">neforce::pgsql_prepared_statement</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1sqlite__prepared__statement" prot="public" virt="non-virtual">neforce::sqlite_prepared_statement</derivedcompoundref>
+    <includes refid="db__interface_8hpp" local="no">db_interface.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1idb__prepared__statement_1a05ad762ff2dbd5fd42c1c57550cb77fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual neforce::idb_prepared_statement::~idb_prepared_statement</definition>
+        <argsstring>()=default</argsstring>
+        <name>~idb_prepared_statement</name>
+        <qualifiedname>neforce::idb_prepared_statement::~idb_prepared_statement</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="153" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1idb__prepared__statement_1ae3c779c7dd0e64b4b3f04d3abfbf004d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>virtual uint32_t neforce::idb_prepared_statement::param_count</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>param_count</name>
+        <qualifiedname>neforce::idb_prepared_statement::param_count</qualifiedname>
+        <reimplementedby refid="classneforce_1_1mysql__prepared__statement_1a8a5a0c24b4f2b936e09c8c5da59052c7">param_count</reimplementedby>
+        <reimplementedby refid="classneforce_1_1pgsql__prepared__statement_1a0d0c8ba19bd6e4446063752fd82b043b">param_count</reimplementedby>
+        <reimplementedby refid="classneforce_1_1sqlite__prepared__statement_1a2900603371f97d958f81c7717f3e4d3b">param_count</reimplementedby>
+        <briefdescription>
+<para>获取参数数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>占位符数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="159" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1idb__prepared__statement_1a83d5df06b54af73d6a24adfd91e35809" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool neforce::idb_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, const string &amp;value)=0</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::idb_prepared_statement::bind_param</qualifiedname>
+        <reimplementedby refid="classneforce_1_1mysql__prepared__statement_1ae2765b1bc26bfe84a7431df7eb8a1371">bind_param</reimplementedby>
+        <reimplementedby refid="classneforce_1_1pgsql__prepared__statement_1a612e480cd6afc4f02f86bb93df08c91d">bind_param</reimplementedby>
+        <reimplementedby refid="classneforce_1_1sqlite__prepared__statement_1a2e5c48e5c6cfea58ab61c8e5e30ce0b9">bind_param</reimplementedby>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="161" column="18"/>
+        <references refid="structneforce_1_1idb__prepared__statement_1a83d5df06b54af73d6a24adfd91e35809">bind_param</references>
+        <referencedby refid="structneforce_1_1idb__prepared__statement_1ad874d16b23d0ab9bd5d4641c10b109ee">bind_param</referencedby>
+        <referencedby refid="structneforce_1_1idb__prepared__statement_1a57a416197042b24f097827c4c2083fa4">bind_param</referencedby>
+        <referencedby refid="structneforce_1_1idb__prepared__statement_1a83d5df06b54af73d6a24adfd91e35809">bind_param</referencedby>
+        <referencedby refid="structneforce_1_1idb__prepared__statement_1a8ebc3a7a62d00aaf5b4e19cde9581b54">bind_param</referencedby>
+        <referencedby refid="structneforce_1_1idb__prepared__statement_1ad10f3350cf59857aa941288fae75df21">bind_param</referencedby>
+        <referencedby refid="structneforce_1_1idb__prepared__statement_1a1d225748e5d1447d3dbb1a28ef97072e">bind_param</referencedby>
+        <referencedby refid="structneforce_1_1idb__prepared__statement_1a9219ec073f4fe401624fbda187c6a478">bind_param</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1idb__prepared__statement_1a9219ec073f4fe401624fbda187c6a478" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool neforce::idb_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, string_view value)=0</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::idb_prepared_statement::bind_param</qualifiedname>
+        <reimplementedby refid="classneforce_1_1mysql__prepared__statement_1ad5b8d3c39de3f8ed2fbf1dc168a67f12">bind_param</reimplementedby>
+        <reimplementedby refid="classneforce_1_1pgsql__prepared__statement_1ac0932fc52f7f3b6e9d25f348be38ac2a">bind_param</reimplementedby>
+        <reimplementedby refid="classneforce_1_1sqlite__prepared__statement_1a5ab6d1b6f3e968cefb98aae5302583ca">bind_param</reimplementedby>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定字符串视图 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="162" column="18"/>
+        <references refid="structneforce_1_1idb__prepared__statement_1a83d5df06b54af73d6a24adfd91e35809">bind_param</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1idb__prepared__statement_1a57a416197042b24f097827c4c2083fa4" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool neforce::idb_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, const char *value)=0</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::idb_prepared_statement::bind_param</qualifiedname>
+        <reimplementedby refid="classneforce_1_1mysql__prepared__statement_1a1404aaf40e6972e99387b41206f17310">bind_param</reimplementedby>
+        <reimplementedby refid="classneforce_1_1pgsql__prepared__statement_1ad4b8c928f1b78d8aca06fde4c70dd6d8">bind_param</reimplementedby>
+        <reimplementedby refid="classneforce_1_1sqlite__prepared__statement_1a8bf788b43ddde44d3bc6127030df3c4c">bind_param</reimplementedby>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定C字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="163" column="18"/>
+        <references refid="structneforce_1_1idb__prepared__statement_1a83d5df06b54af73d6a24adfd91e35809">bind_param</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1idb__prepared__statement_1ad10f3350cf59857aa941288fae75df21" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool neforce::idb_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, int32_t value)=0</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::idb_prepared_statement::bind_param</qualifiedname>
+        <reimplementedby refid="classneforce_1_1mysql__prepared__statement_1a1d33319e4848936cfaa114f30d1fc96f">bind_param</reimplementedby>
+        <reimplementedby refid="classneforce_1_1pgsql__prepared__statement_1aa73bb8d9f3fb70bfe4764363fa86c5dc">bind_param</reimplementedby>
+        <reimplementedby refid="classneforce_1_1sqlite__prepared__statement_1a125c3dc7d8352f22031d4466bcefc3ee">bind_param</reimplementedby>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gaa0af497ed9ed410d4c911b409653515a" kindref="member">int32_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定32位整数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="164" column="18"/>
+        <references refid="structneforce_1_1idb__prepared__statement_1a83d5df06b54af73d6a24adfd91e35809">bind_param</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1idb__prepared__statement_1a1d225748e5d1447d3dbb1a28ef97072e" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool neforce::idb_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, int64_t value)=0</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::idb_prepared_statement::bind_param</qualifiedname>
+        <reimplementedby refid="classneforce_1_1mysql__prepared__statement_1afe17bd730c7ca1a3dd54e4b6123b79df">bind_param</reimplementedby>
+        <reimplementedby refid="classneforce_1_1pgsql__prepared__statement_1a700bc652a781a6334674609e85842a2b">bind_param</reimplementedby>
+        <reimplementedby refid="classneforce_1_1sqlite__prepared__statement_1a8faa5a072082504ce2d591b8b7fe85a5">bind_param</reimplementedby>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga0b098d32ebd9cc922390914e765ca674" kindref="member">int64_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定64位整数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="165" column="18"/>
+        <references refid="structneforce_1_1idb__prepared__statement_1a83d5df06b54af73d6a24adfd91e35809">bind_param</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1idb__prepared__statement_1a8ebc3a7a62d00aaf5b4e19cde9581b54" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool neforce::idb_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, float64_t value)=0</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::idb_prepared_statement::bind_param</qualifiedname>
+        <reimplementedby refid="classneforce_1_1mysql__prepared__statement_1a8bac9b73982a148e4f881262467442aa">bind_param</reimplementedby>
+        <reimplementedby refid="classneforce_1_1pgsql__prepared__statement_1af332a948784078f1662444b1636fbeeb">bind_param</reimplementedby>
+        <reimplementedby refid="classneforce_1_1sqlite__prepared__statement_1ab8a4ab28822ebdb8e66426fcca562ebc">bind_param</reimplementedby>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gaaa239a2e1903add7d22b684a72e71c9a" kindref="member">float64_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定浮点数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="166" column="18"/>
+        <references refid="structneforce_1_1idb__prepared__statement_1a83d5df06b54af73d6a24adfd91e35809">bind_param</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1idb__prepared__statement_1ad874d16b23d0ab9bd5d4641c10b109ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool neforce::idb_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, cbyte_view value)=0</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::idb_prepared_statement::bind_param</qualifiedname>
+        <reimplementedby refid="classneforce_1_1mysql__prepared__statement_1a97799d1181cab98135ab0673b6bea59d">bind_param</reimplementedby>
+        <reimplementedby refid="classneforce_1_1pgsql__prepared__statement_1a03f70542f44dce8f1eb81dc934cb7ee4">bind_param</reimplementedby>
+        <reimplementedby refid="classneforce_1_1sqlite__prepared__statement_1a4bfd4916f92ba0890e6b3ffd1cdff406">bind_param</reimplementedby>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1ga533a464153c7fc34d3fa5d92854c8613" kindref="member">cbyte_view</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定二进制数据 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="167" column="18"/>
+        <references refid="structneforce_1_1idb__prepared__statement_1a83d5df06b54af73d6a24adfd91e35809">bind_param</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1idb__prepared__statement_1a32eebdb2af37ff60943d591aeb7eb619" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool neforce::idb_prepared_statement::execute</definition>
+        <argsstring>()=0</argsstring>
+        <name>execute</name>
+        <qualifiedname>neforce::idb_prepared_statement::execute</qualifiedname>
+        <reimplementedby refid="classneforce_1_1mysql__prepared__statement_1a45caed2e5189494c6de00d670fa891cb">execute</reimplementedby>
+        <reimplementedby refid="classneforce_1_1pgsql__prepared__statement_1a794d85cbc197775683c18743adb48004">execute</reimplementedby>
+        <reimplementedby refid="classneforce_1_1sqlite__prepared__statement_1a94a598a3e1fd869bccbcdb73ca9851b3">execute</reimplementedby>
+        <briefdescription>
+<para>执行非查询语句（UPDATE/INSERT/DELETE） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>执行成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="173" column="18"/>
+        <references refid="structneforce_1_1idb__prepared__statement_1a32eebdb2af37ff60943d591aeb7eb619">execute</references>
+        <referencedby refid="structneforce_1_1idb__prepared__statement_1a32eebdb2af37ff60943d591aeb7eb619">execute</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1idb__prepared__statement_1ab063e1a59a20303603ce84215a5f52ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structneforce_1_1idb__tb__result" kindref="compound">idb_tb_result</ref> &gt;</type>
+        <definition>virtual unique_ptr&lt; idb_tb_result &gt; neforce::idb_prepared_statement::execute_query</definition>
+        <argsstring>()=0</argsstring>
+        <name>execute_query</name>
+        <qualifiedname>neforce::idb_prepared_statement::execute_query</qualifiedname>
+        <reimplementedby refid="classneforce_1_1mysql__prepared__statement_1a52189d3617967da71cc45deec9b81761">execute_query</reimplementedby>
+        <reimplementedby refid="classneforce_1_1pgsql__prepared__statement_1ac58e89bb4e2065f2465baba1a8555800">execute_query</reimplementedby>
+        <reimplementedby refid="classneforce_1_1sqlite__prepared__statement_1a87b7c29e19f2eedb4c6353cbcd2a5860">execute_query</reimplementedby>
+        <briefdescription>
+<para>执行查询语句（SELECT） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>查询结果集 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="179" column="24"/>
+        <references refid="structneforce_1_1idb__prepared__statement_1ab063e1a59a20303603ce84215a5f52ec">execute_query</references>
+        <referencedby refid="structneforce_1_1idb__prepared__statement_1ab063e1a59a20303603ce84215a5f52ec">execute_query</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1idb__prepared__statement_1ae2fb693e9c62f6733d8a09701427963f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+        <definition>virtual string_view neforce::idb_prepared_statement::get_error</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>get_error</name>
+        <qualifiedname>neforce::idb_prepared_statement::get_error</qualifiedname>
+        <reimplementedby refid="classneforce_1_1mysql__prepared__statement_1a5212ed8b112bcf171491eff02e22ffd0">get_error</reimplementedby>
+        <reimplementedby refid="classneforce_1_1pgsql__prepared__statement_1a38981fbbe74afae367295210c3eebe0f">get_error</reimplementedby>
+        <reimplementedby refid="classneforce_1_1sqlite__prepared__statement_1af30baaa39ca54c16281cb5b5c7b7b23d">get_error</reimplementedby>
+        <briefdescription>
+<para>获取错误信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>错误描述字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="185" column="26"/>
+        <references refid="structneforce_1_1idb__prepared__statement_1ae2fb693e9c62f6733d8a09701427963f">get_error</references>
+        <referencedby refid="structneforce_1_1idb__prepared__statement_1ae2fb693e9c62f6733d8a09701427963f">get_error</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1idb__prepared__statement_1ae4c29021b23c7291739378437e7994c6" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>virtual uint32_t neforce::idb_prepared_statement::get_errno</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>get_errno</name>
+        <qualifiedname>neforce::idb_prepared_statement::get_errno</qualifiedname>
+        <reimplementedby refid="classneforce_1_1mysql__prepared__statement_1a7483b395c841b5c1d09451a0fd30d9ff">get_errno</reimplementedby>
+        <reimplementedby refid="classneforce_1_1pgsql__prepared__statement_1afcb274ad27cfb4fadbf60b59915ece42">get_errno</reimplementedby>
+        <reimplementedby refid="classneforce_1_1sqlite__prepared__statement_1ac255e0134d2d876549c3f94567ada677">get_errno</reimplementedby>
+        <briefdescription>
+<para>获取错误码 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>数据库错误码 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="191" column="23"/>
+        <references refid="structneforce_1_1idb__prepared__statement_1ae4c29021b23c7291739378437e7994c6">get_errno</references>
+        <referencedby refid="structneforce_1_1idb__prepared__statement_1ae4c29021b23c7291739378437e7994c6">get_errno</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>预处理语句抽象基类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供参数绑定和执行的接口，支持SQL注入防护和性能优化。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::idb_prepared_statement</label>
+        <link refid="structneforce_1_1idb__prepared__statement"/>
+      </node>
+      <node id="2">
+        <label>neforce::mysql_prepared_statement</label>
+        <link refid="classneforce_1_1mysql__prepared__statement"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::pgsql_prepared_statement</label>
+        <link refid="classneforce_1_1pgsql__prepared__statement"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::sqlite_prepared_statement</label>
+        <link refid="classneforce_1_1sqlite__prepared__statement"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="152" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="152" bodyend="192"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1idb__prepared__statement_1a83d5df06b54af73d6a24adfd91e35809" prot="public" virt="pure-virtual"><scope>neforce::idb_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="structneforce_1_1idb__prepared__statement_1a9219ec073f4fe401624fbda187c6a478" prot="public" virt="pure-virtual"><scope>neforce::idb_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="structneforce_1_1idb__prepared__statement_1a57a416197042b24f097827c4c2083fa4" prot="public" virt="pure-virtual"><scope>neforce::idb_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="structneforce_1_1idb__prepared__statement_1ad10f3350cf59857aa941288fae75df21" prot="public" virt="pure-virtual"><scope>neforce::idb_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="structneforce_1_1idb__prepared__statement_1a1d225748e5d1447d3dbb1a28ef97072e" prot="public" virt="pure-virtual"><scope>neforce::idb_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="structneforce_1_1idb__prepared__statement_1a8ebc3a7a62d00aaf5b4e19cde9581b54" prot="public" virt="pure-virtual"><scope>neforce::idb_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="structneforce_1_1idb__prepared__statement_1ad874d16b23d0ab9bd5d4641c10b109ee" prot="public" virt="pure-virtual"><scope>neforce::idb_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="structneforce_1_1idb__prepared__statement_1a32eebdb2af37ff60943d591aeb7eb619" prot="public" virt="pure-virtual"><scope>neforce::idb_prepared_statement</scope><name>execute</name></member>
+      <member refid="structneforce_1_1idb__prepared__statement_1ab063e1a59a20303603ce84215a5f52ec" prot="public" virt="pure-virtual"><scope>neforce::idb_prepared_statement</scope><name>execute_query</name></member>
+      <member refid="structneforce_1_1idb__prepared__statement_1ae4c29021b23c7291739378437e7994c6" prot="public" virt="pure-virtual"><scope>neforce::idb_prepared_statement</scope><name>get_errno</name></member>
+      <member refid="structneforce_1_1idb__prepared__statement_1ae2fb693e9c62f6733d8a09701427963f" prot="public" virt="pure-virtual"><scope>neforce::idb_prepared_statement</scope><name>get_error</name></member>
+      <member refid="structneforce_1_1idb__prepared__statement_1ae3c779c7dd0e64b4b3f04d3abfbf004d" prot="public" virt="pure-virtual"><scope>neforce::idb_prepared_statement</scope><name>param_count</name></member>
+      <member refid="structneforce_1_1idb__prepared__statement_1a05ad762ff2dbd5fd42c1c57550cb77fd" prot="public" virt="virtual"><scope>neforce::idb_prepared_statement</scope><name>~idb_prepared_statement</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

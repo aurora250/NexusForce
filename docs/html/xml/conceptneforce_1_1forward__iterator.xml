@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="conceptneforce_1_1forward__iterator" kind="concept">
+    <compoundname>neforce::forward_iterator</compoundname>
+    <includes refid="concepts_8hpp" local="no">concepts.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Iterator</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename Iterator&gt;
+concept <ref refid="conceptneforce_1_1forward__iterator" kindref="compound">neforce::forward_iterator</ref> =  both_ordered_with&lt;Iterator, Iterator&gt; &amp;&amp; semiregular&lt;Iterator&gt; &amp;&amp; input_iterator&lt;Iterator&gt; &amp;&amp;
+                           requires(Iterator it1, Iterator it2) {
+                               { it1 - it2 } -&gt; convertible_to&lt;typename <ref refid="structneforce_1_1iterator__traits" kindref="compound">iterator_traits</ref>&lt;Iterator&gt;::difference_type&gt;;
+                           }</initializer>
+    <conceptparts>
+      <codepart line="330">    <programlisting>
+<codeline><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Iterator&gt;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">concept<sp/></highlight><highlight class="normal">forward_iterator<sp/>=<sp/>both_ordered_with&lt;Iterator,<sp/>Iterator&gt;<sp/>&amp;&amp;<sp/>semiregular&lt;Iterator&gt;<sp/>&amp;&amp;<sp/>input_iterator&lt;Iterator&gt;<sp/>&amp;&amp;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal">(Iterator<sp/>it1,<sp/>Iterator<sp/>it2)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>it1<sp/>-<sp/>it2<sp/>}<sp/>-&gt;<sp/>convertible_to&lt;typename<sp/>iterator_traits&lt;Iterator&gt;::difference_type&gt;;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+    </programlisting>
+</codepart>
+    </conceptparts>
+    <briefdescription>
+<para>检查类型是否为前向迭代器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+在前向迭代器基础上增加：<orderedlist>
+<listitem><para>顺序比较</para>
+</listitem><listitem><para>半常规类型</para>
+</listitem><listitem><para>迭代器差值计算 </para>
+</listitem></orderedlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" line="330" column="1"/>
+  </compounddef>
+</doxygen>

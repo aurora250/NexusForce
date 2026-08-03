@@ -1,0 +1,453 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1lazy__thread" kind="class" language="C++" prot="public">
+    <compoundname>neforce::lazy_thread</compoundname>
+    <includes refid="lazy__thread_8hpp" local="no">lazy_thread.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1lazy__thread_1a0eff890ce92abd4fbd9dbd90c03ed6cc" prot="public" static="no">
+        <type><ref refid="structneforce_1_1thread_1_1id" kindref="compound">thread::id</ref></type>
+        <definition>using neforce::lazy_thread::id = thread::id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <qualifiedname>neforce::lazy_thread::id</qualifiedname>
+        <briefdescription>
+<para>线程ID类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" line="42" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1lazy__thread_1a93a8c6b5d0b94e1319317ba449ca0eff" prot="public" static="no">
+        <type><ref refid="classneforce_1_1thread_1a4ba82f3bf519dd09aa63143b91ffbbec" kindref="member">thread::native_handle_type</ref></type>
+        <definition>using neforce::lazy_thread::native_handle_type = thread::native_handle_type</definition>
+        <argsstring></argsstring>
+        <name>native_handle_type</name>
+        <qualifiedname>neforce::lazy_thread::native_handle_type</qualifiedname>
+        <briefdescription>
+<para>原生句柄类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" line="43" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1lazy__thread_1a3132e5cd54b0e6138daf50602bc95d33" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void()&gt;</type>
+        <definition>function&lt;void()&gt; neforce::lazy_thread::func_</definition>
+        <argsstring></argsstring>
+        <name>func_</name>
+        <qualifiedname>neforce::lazy_thread::func_</qualifiedname>
+        <briefdescription>
+<para>存储的可调用对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" line="46" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1lazy__thread_1a6ce66dfbad4a06872e561f5bbff53630" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1thread" kindref="compound">thread</ref></type>
+        <definition>thread neforce::lazy_thread::thread_</definition>
+        <argsstring></argsstring>
+        <name>thread_</name>
+        <qualifiedname>neforce::lazy_thread::thread_</qualifiedname>
+        <briefdescription>
+<para>实际线程对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" line="47" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1lazy__thread_1af5bf26c61a198870da91b0c8b2368cf9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::lazy_thread::lazy_thread</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>lazy_thread</name>
+        <qualifiedname>neforce::lazy_thread::lazy_thread</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" line="53" column="5"/>
+        <referencedby refid="classneforce_1_1lazy__thread_1a1026de0a0e8c0a552affd0e57c314b72" compoundref="lazy__thread_8hpp" startline="65" endline="69">lazy_thread</referencedby>
+        <referencedby refid="classneforce_1_1lazy__thread_1ac7af43fdfef12fea32d170d15c065eeb">lazy_thread</referencedby>
+        <referencedby refid="classneforce_1_1lazy__thread_1aeb672a18e76719699b47c3edd4268384">operator=</referencedby>
+        <referencedby refid="classneforce_1_1lazy__thread_1a55e65d95bd4f741f1c3bd885e16fc85c" compoundref="lazy__thread_8hpp" startline="139" endline="142">swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lazy__thread_1a1026de0a0e8c0a552affd0e57c314b72" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::lazy_thread::lazy_thread</definition>
+        <argsstring>(F &amp;&amp;f, Args &amp;&amp;... args)</argsstring>
+        <name>lazy_thread</name>
+        <qualifiedname>neforce::lazy_thread::lazy_thread</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要执行的可调用对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>传递给可调用对象的参数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+创建延迟线程对象，存储可调用对象和参数，但不立即启动线程。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" line="65" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" bodystart="65" bodyend="69"/>
+        <references refid="group___tuple_1ga9bdada483ccc40dfa86524d0a621734e" compoundref="apply_8hpp" startline="63" endline="66">neforce::apply</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="classneforce_1_1lazy__thread_1af5bf26c61a198870da91b0c8b2368cf9">lazy_thread</references>
+        <references refid="group___tuple_1gac9c85283cadcb5ea85eb63f853f53f48" compoundref="tuple_8hpp" startline="750" endline="753">neforce::make_tuple</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lazy__thread_1ab28877131cb0e1d6f8c2f8cbe5a7b2c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::lazy_thread::lazy_thread</definition>
+        <argsstring>(const lazy_thread &amp;)=delete</argsstring>
+        <name>lazy_thread</name>
+        <qualifiedname>neforce::lazy_thread::lazy_thread</qualifiedname>
+        <param>
+          <type>const lazy_thread &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" line="71" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lazy__thread_1a83c136c43b4416c58e3b67f25c47be15" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1lazy__thread_1af5bf26c61a198870da91b0c8b2368cf9" kindref="member">lazy_thread</ref> &amp;</type>
+        <definition>lazy_thread &amp; neforce::lazy_thread::operator=</definition>
+        <argsstring>(const lazy_thread &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::lazy_thread::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1lazy__thread_1af5bf26c61a198870da91b0c8b2368cf9" kindref="member">lazy_thread</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" line="72" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lazy__thread_1ac7af43fdfef12fea32d170d15c065eeb" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::lazy_thread::lazy_thread</definition>
+        <argsstring>(lazy_thread &amp;&amp;other) noexcept</argsstring>
+        <name>lazy_thread</name>
+        <qualifiedname>neforce::lazy_thread::lazy_thread</qualifiedname>
+        <param>
+          <type>lazy_thread &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的延迟线程对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+转移任务和线程的所有权，other变为空状态。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" line="80" column="5"/>
+        <references refid="classneforce_1_1lazy__thread_1af5bf26c61a198870da91b0c8b2368cf9">lazy_thread</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lazy__thread_1aeb672a18e76719699b47c3edd4268384" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1lazy__thread_1af5bf26c61a198870da91b0c8b2368cf9" kindref="member">lazy_thread</ref> &amp;</type>
+        <definition>lazy_thread &amp; neforce::lazy_thread::operator=</definition>
+        <argsstring>(lazy_thread &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::lazy_thread::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1lazy__thread_1af5bf26c61a198870da91b0c8b2368cf9" kindref="member">lazy_thread</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的延迟线程对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用</para>
+</simplesect>
+如果当前对象已有线程且可连接，会等待其完成后再转移所有权。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" line="89" column="17"/>
+        <references refid="classneforce_1_1lazy__thread_1af5bf26c61a198870da91b0c8b2368cf9">lazy_thread</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lazy__thread_1afe5cf6f19b8a8499c00af57a9cd6e0d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::lazy_thread::~lazy_thread</definition>
+        <argsstring>()</argsstring>
+        <name>~lazy_thread</name>
+        <qualifiedname>neforce::lazy_thread::~lazy_thread</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>如果线程已启动且仍可连接，会等待其完成。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" line="96" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lazy__thread_1a170a5fa087b09b06833ab0e5b0b68306" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::lazy_thread::start</definition>
+        <argsstring>()</argsstring>
+        <name>start</name>
+        <qualifiedname>neforce::lazy_thread::start</qualifiedname>
+        <briefdescription>
+<para>启动线程 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1thread__exception" kindref="compound">thread_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>没有可调用对象或线程已启动时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+创建实际线程并执行存储的任务。 只能调用一次，调用后线程立即开始执行。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" line="105" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lazy__thread_1af0068238498e4e91841b2199de64da86" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::lazy_thread::joinable</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>joinable</name>
+        <qualifiedname>neforce::lazy_thread::joinable</qualifiedname>
+        <briefdescription>
+<para>检查线程是否可被等待 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>线程已启动且尚未被等待或分离时返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" line="111" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" bodystart="111" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lazy__thread_1a64d8376bfcecc707228023c1402d5b5d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::lazy_thread::join</definition>
+        <argsstring>()</argsstring>
+        <name>join</name>
+        <qualifiedname>neforce::lazy_thread::join</qualifiedname>
+        <briefdescription>
+<para>等待线程结束 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1thread__exception" kindref="compound">thread_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果线程不可被等待或等待失败</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+阻塞当前线程，直到目标线程执行完毕。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" line="119" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" bodystart="119" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lazy__thread_1ac838158d2a791ce186fe565343a5bd55" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::lazy_thread::detach</definition>
+        <argsstring>()</argsstring>
+        <name>detach</name>
+        <qualifiedname>neforce::lazy_thread::detach</qualifiedname>
+        <briefdescription>
+<para>分离线程 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1thread__exception" kindref="compound">thread_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果线程不可被等待或分离失败</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+使线程在后台独立运行，线程结束后自动释放资源。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" line="127" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" bodystart="127" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lazy__thread_1a8e562b44ff59625a76007b4ed66b61bd" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1thread_1_1id" kindref="compound">thread::id</ref></type>
+        <definition>thread::id neforce::lazy_thread::get_id</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_id</name>
+        <qualifiedname>neforce::lazy_thread::get_id</qualifiedname>
+        <briefdescription>
+<para>获取线程标识符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>线程标识符 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" line="133" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" bodystart="133" bodyend="133"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lazy__thread_1a55e65d95bd4f741f1c3bd885e16fc85c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::lazy_thread::swap</definition>
+        <argsstring>(lazy_thread &amp;other) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>neforce::lazy_thread::swap</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1lazy__thread_1af5bf26c61a198870da91b0c8b2368cf9" kindref="member">lazy_thread</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个延迟线程对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" line="139" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" bodystart="139" bodyend="142"/>
+        <references refid="classneforce_1_1lazy__thread_1af5bf26c61a198870da91b0c8b2368cf9">lazy_thread</references>
+        <references refid="classneforce_1_1lazy__thread_1a55e65d95bd4f741f1c3bd885e16fc85c" compoundref="lazy__thread_8hpp" startline="139" endline="142">swap</references>
+        <referencedby refid="classneforce_1_1lazy__thread_1a55e65d95bd4f741f1c3bd885e16fc85c" compoundref="lazy__thread_8hpp" startline="139" endline="142">swap</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>延迟启动线程类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>允许创建线程对象时仅存储可调用对象，而不立即创建和执行线程。 线程的实际创建由start()方法触发。</para>
+<para>使用场景：<itemizedlist>
+<listitem><para>需要将线程作为对象存储，但执行时机未定</para>
+</listitem><listitem><para>需要在不同作用域间传递线程任务</para>
+</listitem><listitem><para>需要在某些条件满足后才启动线程</para>
+</listitem><listitem><para>避免不必要的线程创建开销 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" line="40" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lazy_thread.hpp" bodystart="40" bodyend="143"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1lazy__thread_1ac838158d2a791ce186fe565343a5bd55" prot="public" virt="non-virtual"><scope>neforce::lazy_thread</scope><name>detach</name></member>
+      <member refid="classneforce_1_1lazy__thread_1a3132e5cd54b0e6138daf50602bc95d33" prot="private" virt="non-virtual"><scope>neforce::lazy_thread</scope><name>func_</name></member>
+      <member refid="classneforce_1_1lazy__thread_1a8e562b44ff59625a76007b4ed66b61bd" prot="public" virt="non-virtual"><scope>neforce::lazy_thread</scope><name>get_id</name></member>
+      <member refid="classneforce_1_1lazy__thread_1a0eff890ce92abd4fbd9dbd90c03ed6cc" prot="public" virt="non-virtual"><scope>neforce::lazy_thread</scope><name>id</name></member>
+      <member refid="classneforce_1_1lazy__thread_1a64d8376bfcecc707228023c1402d5b5d" prot="public" virt="non-virtual"><scope>neforce::lazy_thread</scope><name>join</name></member>
+      <member refid="classneforce_1_1lazy__thread_1af0068238498e4e91841b2199de64da86" prot="public" virt="non-virtual"><scope>neforce::lazy_thread</scope><name>joinable</name></member>
+      <member refid="classneforce_1_1lazy__thread_1af5bf26c61a198870da91b0c8b2368cf9" prot="public" virt="non-virtual"><scope>neforce::lazy_thread</scope><name>lazy_thread</name></member>
+      <member refid="classneforce_1_1lazy__thread_1a1026de0a0e8c0a552affd0e57c314b72" prot="public" virt="non-virtual"><scope>neforce::lazy_thread</scope><name>lazy_thread</name></member>
+      <member refid="classneforce_1_1lazy__thread_1ab28877131cb0e1d6f8c2f8cbe5a7b2c7" prot="public" virt="non-virtual"><scope>neforce::lazy_thread</scope><name>lazy_thread</name></member>
+      <member refid="classneforce_1_1lazy__thread_1ac7af43fdfef12fea32d170d15c065eeb" prot="public" virt="non-virtual"><scope>neforce::lazy_thread</scope><name>lazy_thread</name></member>
+      <member refid="classneforce_1_1lazy__thread_1a93a8c6b5d0b94e1319317ba449ca0eff" prot="public" virt="non-virtual"><scope>neforce::lazy_thread</scope><name>native_handle_type</name></member>
+      <member refid="classneforce_1_1lazy__thread_1a83c136c43b4416c58e3b67f25c47be15" prot="public" virt="non-virtual"><scope>neforce::lazy_thread</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1lazy__thread_1aeb672a18e76719699b47c3edd4268384" prot="public" virt="non-virtual"><scope>neforce::lazy_thread</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1lazy__thread_1a170a5fa087b09b06833ab0e5b0b68306" prot="public" virt="non-virtual"><scope>neforce::lazy_thread</scope><name>start</name></member>
+      <member refid="classneforce_1_1lazy__thread_1a55e65d95bd4f741f1c3bd885e16fc85c" prot="public" virt="non-virtual"><scope>neforce::lazy_thread</scope><name>swap</name></member>
+      <member refid="classneforce_1_1lazy__thread_1a6ce66dfbad4a06872e561f5bbff53630" prot="private" virt="non-virtual"><scope>neforce::lazy_thread</scope><name>thread_</name></member>
+      <member refid="classneforce_1_1lazy__thread_1afe5cf6f19b8a8499c00af57a9cd6e0d3" prot="public" virt="non-virtual"><scope>neforce::lazy_thread</scope><name>~lazy_thread</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,4 +1,4 @@
 var radiobox_8hpp =
 [
-    [ "Radiobox", "group___t_u_i.html#ga47d2c255131f13aa75091b9020a8f48b", null ]
+    [ "neforce::tui::components::radiobox", "group___components.html#ga5dc1acd17dd63e8a8a8e4de7554801ea", null ]
 ];

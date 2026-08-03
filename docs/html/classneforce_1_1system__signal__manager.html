@@ -1,0 +1,736 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::system_signal_manager类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1system__signal__manager.html','','classneforce_1_1system__signal__manager-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::system_signal_manager类 参考<div class="ingroups"><a class="el" href="group___system_signal.html">系统信号</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>信号管理器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="signal_8hpp_source.html">signal.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:af0206ae1cb2e7028135dc0077afda6e3" id="r_af0206ae1cb2e7028135dc0077afda6e3"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a> { <br />
+&#160;&#160;<a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3a81b7fe15c43052525db74111aa314cc9">INTERRUPT</a> = CTRL_C_EVENT
+, <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3a9175815a9c51c1fcc8991882eaea42ec">CTRL_BREAK</a> = CTRL_BREAK_EVENT
+, <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3a7286293c9125ac7d7bace94c190bc16d">CLOSE</a> = CTRL_CLOSE_EVENT
+, <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3aa5ddcf1c01f56182e72d5b0183aefb5f">LOGOFF</a> = CTRL_LOGOFF_EVENT
+, <br />
+&#160;&#160;<a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3ab9984206799a7f9fe4bd1b6c18db8112">SHUTDOWN</a> = CTRL_SHUTDOWN_EVENT
+, <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3a1b52d4a7cbbcb87a81515c443453a2d5">TERMINATE</a> = 1000
+, <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3a8d12a2ca7e5a64036d7251a3eda51a38">ABORT</a> = 1001
+, <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3a76c0aa657d92e01e7fa3f00d58358442">ILLEGAL_INSTR</a> = 1002
+, <br />
+&#160;&#160;<a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3a30ccd51223e55d0a8ce2bd253733f579">FLOATING_POINT</a> = 1003
+, <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3a907ea32dba92b4a59a49709afe59e4e3">SEGMENT_FAULT</a> = 1004
+, <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3a57316c450c6d8fc7887052ee0ad78edb">BUS_ERROR</a> = 1005
+, <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3a599897092d5308ab3e843cf959a30b73">PIPE_BROKEN</a> = 1006
+, <br />
+&#160;&#160;<a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3a9de6d0a670ae5a0dee31a6318aa00e8d">ALARM</a> = 1007
+, <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3a435097b29b587b710f5d8fb706588faa">HANGUP</a> = 1008
+, <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3a9f693771ca12c43759045cdf4295e9f5">USER1</a> = 1009
+, <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3a009ab43667ea90b50b741d89cbf76f1b">USER2</a> = 1010
+, <br />
+&#160;&#160;<a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3a070a0fb40f6c308ab544b227660aadff">TIMEOUT</a> = 2000
+, <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3a96b4626bc47f80957508b5ec42ee5f27">CUSTOM_1</a> = 2001
+, <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3ab7654b1a285c20934afe66059eb48cc0">CUSTOM_2</a> = 2002
+, <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3ae0c9af36ecdf6234e3375848ba086f0c">FORCE_EXIT</a> = 9999
+<br />
+ }</td></tr>
+<tr class="memdesc:af0206ae1cb2e7028135dc0077afda6e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">信号事件枚举  <a href="#af0206ae1cb2e7028135dc0077afda6e3">更多...</a><br /></td></tr>
+<tr class="memitem:a621123877b03cfcd16be3f7e5ab58a56" id="r_a621123877b03cfcd16be3f7e5ab58a56"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a621123877b03cfcd16be3f7e5ab58a56">signal_handler</a> = <a class="el" href="classneforce_1_1function.html">function</a>&lt;bool(<a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a>, void*)&gt;</td></tr>
+<tr class="memdesc:a621123877b03cfcd16be3f7e5ab58a56"><td class="mdescLeft">&#160;</td><td class="mdescRight">信号处理函数类型  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:aec14ca1d9e7f70a047f1cd2ccabe7a1d" id="r_aec14ca1d9e7f70a047f1cd2ccabe7a1d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aec14ca1d9e7f70a047f1cd2ccabe7a1d">register_handler</a> (<a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a> <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a>, <a class="el" href="#a621123877b03cfcd16be3f7e5ab58a56">signal_handler</a> handler)</td></tr>
+<tr class="memdesc:aec14ca1d9e7f70a047f1cd2ccabe7a1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册信号处理函数  <br /></td></tr>
+<tr class="memitem:a8e62302348889a029e931f1e5044c70f" id="r_a8e62302348889a029e931f1e5044c70f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8e62302348889a029e931f1e5044c70f">register_handlers</a> (const <a class="el" href="classneforce_1_1vector.html">vector</a>&lt; <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a> &gt; &amp;events, const <a class="el" href="#a621123877b03cfcd16be3f7e5ab58a56">signal_handler</a> &amp;handler)</td></tr>
+<tr class="memdesc:a8e62302348889a029e931f1e5044c70f"><td class="mdescLeft">&#160;</td><td class="mdescRight">批量注册信号处理函数  <br /></td></tr>
+<tr class="memitem:aec236ca8cec1337721f76dcf8ebfe3c2" id="r_aec236ca8cec1337721f76dcf8ebfe3c2"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aec236ca8cec1337721f76dcf8ebfe3c2">remove_handler</a> (<a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a> <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a>)</td></tr>
+<tr class="memdesc:aec236ca8cec1337721f76dcf8ebfe3c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除信号处理函数  <br /></td></tr>
+<tr class="memitem:ae5e0eeac374813c2f41a8bde97577809" id="r_ae5e0eeac374813c2f41a8bde97577809"><td class="memItemLeft"><a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae5e0eeac374813c2f41a8bde97577809">wait_for_signal</a> (int timeout_ms=-1)</td></tr>
+<tr class="memdesc:ae5e0eeac374813c2f41a8bde97577809"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待信号  <br /></td></tr>
+<tr class="memitem:a2caa2ba34c638a321059a4def558fd5e" id="r_a2caa2ba34c638a321059a4def558fd5e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2caa2ba34c638a321059a4def558fd5e">send_signal</a> (<a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a> <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a>, void *context=nullptr)</td></tr>
+<tr class="memdesc:a2caa2ba34c638a321059a4def558fd5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">发送信号  <br /></td></tr>
+<tr class="memitem:ae0c39c5298d909603ad0a17cdccc4fe6" id="r_ae0c39c5298d909603ad0a17cdccc4fe6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae0c39c5298d909603ad0a17cdccc4fe6">set_force_exit_timeout</a> (int timeout_ms)</td></tr>
+<tr class="memdesc:ae0c39c5298d909603ad0a17cdccc4fe6"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置强制退出超时时间  <br /></td></tr>
+<tr class="memitem:a0d0d8ad740582f2a601adfc542ae4b00" id="r_a0d0d8ad740582f2a601adfc542ae4b00"><td class="memItemLeft"><a id="a0d0d8ad740582f2a601adfc542ae4b00" name="a0d0d8ad740582f2a601adfc542ae4b00"></a>
+void&#160;</td><td class="memItemRight"><b>start_monitoring</b> ()</td></tr>
+<tr class="memdesc:a0d0d8ad740582f2a601adfc542ae4b00"><td class="mdescLeft">&#160;</td><td class="mdescRight">启动信号监控 <br /></td></tr>
+<tr class="memitem:aebdc6226f8cc51b40fb67c02514edbb4" id="r_aebdc6226f8cc51b40fb67c02514edbb4"><td class="memItemLeft"><a id="aebdc6226f8cc51b40fb67c02514edbb4" name="aebdc6226f8cc51b40fb67c02514edbb4"></a>
+void&#160;</td><td class="memItemRight"><b>stop_monitoring</b> () noexcept</td></tr>
+<tr class="memdesc:aebdc6226f8cc51b40fb67c02514edbb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">停止信号监控 <br /></td></tr>
+<tr class="memitem:ad7e8e89d9b098339632a575fc6392f48" id="r_ad7e8e89d9b098339632a575fc6392f48"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad7e8e89d9b098339632a575fc6392f48">reset_force</a> ()</td></tr>
+<tr class="memdesc:ad7e8e89d9b098339632a575fc6392f48"><td class="mdescLeft">&#160;</td><td class="mdescRight">强制重置信号管理器状态  <br /></td></tr>
+<tr class="memitem:a265a41719e77bc49ff31b9fd22b4a5af" id="r_a265a41719e77bc49ff31b9fd22b4a5af"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a265a41719e77bc49ff31b9fd22b4a5af">is_running</a> () const</td></tr>
+<tr class="memdesc:a265a41719e77bc49ff31b9fd22b4a5af"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否正在运行  <br /></td></tr>
+<tr class="memitem:a92a3b59f1893d2437f40bfbfe4726774" id="r_a92a3b59f1893d2437f40bfbfe4726774"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a92a3b59f1893d2437f40bfbfe4726774">block_signals</a> (const <a class="el" href="classneforce_1_1vector.html">vector</a>&lt; <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a> &gt; &amp;signals_to_block) const</td></tr>
+<tr class="memdesc:a92a3b59f1893d2437f40bfbfe4726774"><td class="mdescLeft">&#160;</td><td class="mdescRight">阻塞指定信号（仅Linux）  <br /></td></tr>
+<tr class="memitem:a16ad5dd291c59d6149a2b1456ff1a7e2" id="r_a16ad5dd291c59d6149a2b1456ff1a7e2"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a16ad5dd291c59d6149a2b1456ff1a7e2">unblock_signals</a> (const <a class="el" href="classneforce_1_1vector.html">vector</a>&lt; <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a> &gt; &amp;signals_to_unblock) const</td></tr>
+<tr class="memdesc:a16ad5dd291c59d6149a2b1456ff1a7e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">解除阻塞指定信号（仅Linux）  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静态 Public 成员函数</h2></td></tr>
+<tr class="memitem:a6f4ff761a4188101b8e6c271fee366a4" id="r_a6f4ff761a4188101b8e6c271fee366a4"><td class="memItemLeft">static system_signal_manager &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a6f4ff761a4188101b8e6c271fee366a4">instance</a> ()</td></tr>
+<tr class="memdesc:a6f4ff761a4188101b8e6c271fee366a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取单例实例  <br /></td></tr>
+<tr class="memitem:a11d742c7392e025aa9170fd96a8b2d70" id="r_a11d742c7392e025aa9170fd96a8b2d70"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#a11d742c7392e025aa9170fd96a8b2d70">is_platform_signal</a> (<a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a> <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a>)</td></tr>
+<tr class="memdesc:a11d742c7392e025aa9170fd96a8b2d70"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断事件是否为平台原生信号  <br /></td></tr>
+<tr class="memitem:aee880c25ff2f86b4e246755da7ab025b" id="r_aee880c25ff2f86b4e246755da7ab025b"><td class="memItemLeft">static <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a>&#160;</td><td class="memItemRight"><a class="el" href="#aee880c25ff2f86b4e246755da7ab025b">from_native</a> (int native_signal) noexcept</td></tr>
+<tr class="memdesc:aee880c25ff2f86b4e246755da7ab025b"><td class="mdescLeft">&#160;</td><td class="mdescRight">将平台原生信号转换为统一事件  <br /></td></tr>
+<tr class="memitem:a0f3a595d91ba9217cf65431bd935570d" id="r_a0f3a595d91ba9217cf65431bd935570d"><td class="memItemLeft">static int&#160;</td><td class="memItemRight"><a class="el" href="#a0f3a595d91ba9217cf65431bd935570d">to_native</a> (<a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a> e) noexcept</td></tr>
+<tr class="memdesc:a0f3a595d91ba9217cf65431bd935570d"><td class="mdescLeft">&#160;</td><td class="mdescRight">将统一事件转换为平台原生信号  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>信号管理器 </p>
+<p>统一管理跨平台的信号处理，提供异步信号安全的分发机制。</p>
+<p>特性：</p><ul>
+<li>异步信号安全</li>
+<li>线程安全</li>
+<li>信号队列与超时清理</li>
+<li>自定义事件与强制退出 </li>
+</ul>
+
+<p class="definition">在文件 <a class="el" href="signal_8hpp_source.html">signal.hpp</a> 第 <a class="el" href="signal_8hpp_source.html#l00049">49</a> 行定义.</p>
+</div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">成员类型定义说明</h2>
+<a id="a621123877b03cfcd16be3f7e5ab58a56" name="a621123877b03cfcd16be3f7e5ab58a56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a621123877b03cfcd16be3f7e5ab58a56">&#9670;&#160;</a></span>signal_handler</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a621123877b03cfcd16be3f7e5ab58a56">neforce::system_signal_manager::signal_handler</a> = <a class="el" href="classneforce_1_1function.html">function</a>&lt;bool(<a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a>, void*)&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>信号处理函数类型 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">event</td><td>收到的信号事件 </td></tr>
+    <tr><td class="paramname">context</td><td>上下文指针 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>true 继续运行；false 请求退出 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="signal_8hpp_source.html">signal.hpp</a> 第 <a class="el" href="signal_8hpp_source.html#l00113">113</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
+<a id="af0206ae1cb2e7028135dc0077afda6e3" name="af0206ae1cb2e7028135dc0077afda6e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0206ae1cb2e7028135dc0077afda6e3">&#9670;&#160;</a></span>event</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">neforce::system_signal_manager::event</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>信号事件枚举 </p>
+<p>统一的信号事件定义。 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="af0206ae1cb2e7028135dc0077afda6e3a81b7fe15c43052525db74111aa314cc9" name="af0206ae1cb2e7028135dc0077afda6e3a81b7fe15c43052525db74111aa314cc9"></a>INTERRUPT&#160;</td><td class="fielddoc"><p>Ctrl+C中断信号 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af0206ae1cb2e7028135dc0077afda6e3a9175815a9c51c1fcc8991882eaea42ec" name="af0206ae1cb2e7028135dc0077afda6e3a9175815a9c51c1fcc8991882eaea42ec"></a>CTRL_BREAK&#160;</td><td class="fielddoc"><p>Ctrl+Break信号 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af0206ae1cb2e7028135dc0077afda6e3a7286293c9125ac7d7bace94c190bc16d" name="af0206ae1cb2e7028135dc0077afda6e3a7286293c9125ac7d7bace94c190bc16d"></a>CLOSE&#160;</td><td class="fielddoc"><p>关闭控制台窗口 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af0206ae1cb2e7028135dc0077afda6e3aa5ddcf1c01f56182e72d5b0183aefb5f" name="af0206ae1cb2e7028135dc0077afda6e3aa5ddcf1c01f56182e72d5b0183aefb5f"></a>LOGOFF&#160;</td><td class="fielddoc"><p>用户注销 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af0206ae1cb2e7028135dc0077afda6e3ab9984206799a7f9fe4bd1b6c18db8112" name="af0206ae1cb2e7028135dc0077afda6e3ab9984206799a7f9fe4bd1b6c18db8112"></a>SHUTDOWN&#160;</td><td class="fielddoc"><p>系统关机 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af0206ae1cb2e7028135dc0077afda6e3a1b52d4a7cbbcb87a81515c443453a2d5" name="af0206ae1cb2e7028135dc0077afda6e3a1b52d4a7cbbcb87a81515c443453a2d5"></a>TERMINATE&#160;</td><td class="fielddoc"><p>终止信号（模拟SIGTERM） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af0206ae1cb2e7028135dc0077afda6e3a8d12a2ca7e5a64036d7251a3eda51a38" name="af0206ae1cb2e7028135dc0077afda6e3a8d12a2ca7e5a64036d7251a3eda51a38"></a>ABORT&#160;</td><td class="fielddoc"><p>中止信号（模拟SIGABRT） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af0206ae1cb2e7028135dc0077afda6e3a76c0aa657d92e01e7fa3f00d58358442" name="af0206ae1cb2e7028135dc0077afda6e3a76c0aa657d92e01e7fa3f00d58358442"></a>ILLEGAL_INSTR&#160;</td><td class="fielddoc"><p>非法指令（模拟SIGILL） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af0206ae1cb2e7028135dc0077afda6e3a30ccd51223e55d0a8ce2bd253733f579" name="af0206ae1cb2e7028135dc0077afda6e3a30ccd51223e55d0a8ce2bd253733f579"></a>FLOATING_POINT&#160;</td><td class="fielddoc"><p>浮点异常（模拟SIGFPE） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af0206ae1cb2e7028135dc0077afda6e3a907ea32dba92b4a59a49709afe59e4e3" name="af0206ae1cb2e7028135dc0077afda6e3a907ea32dba92b4a59a49709afe59e4e3"></a>SEGMENT_FAULT&#160;</td><td class="fielddoc"><p>段错误（模拟SIGSEGV） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af0206ae1cb2e7028135dc0077afda6e3a57316c450c6d8fc7887052ee0ad78edb" name="af0206ae1cb2e7028135dc0077afda6e3a57316c450c6d8fc7887052ee0ad78edb"></a>BUS_ERROR&#160;</td><td class="fielddoc"><p>总线错误（模拟SIGBUS） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af0206ae1cb2e7028135dc0077afda6e3a599897092d5308ab3e843cf959a30b73" name="af0206ae1cb2e7028135dc0077afda6e3a599897092d5308ab3e843cf959a30b73"></a>PIPE_BROKEN&#160;</td><td class="fielddoc"><p>管道破裂（模拟SIGPIPE） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af0206ae1cb2e7028135dc0077afda6e3a9de6d0a670ae5a0dee31a6318aa00e8d" name="af0206ae1cb2e7028135dc0077afda6e3a9de6d0a670ae5a0dee31a6318aa00e8d"></a>ALARM&#160;</td><td class="fielddoc"><p>定时器信号（模拟SIGALRM） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af0206ae1cb2e7028135dc0077afda6e3a435097b29b587b710f5d8fb706588faa" name="af0206ae1cb2e7028135dc0077afda6e3a435097b29b587b710f5d8fb706588faa"></a>HANGUP&#160;</td><td class="fielddoc"><p>挂起信号（模拟SIGHUP） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af0206ae1cb2e7028135dc0077afda6e3a9f693771ca12c43759045cdf4295e9f5" name="af0206ae1cb2e7028135dc0077afda6e3a9f693771ca12c43759045cdf4295e9f5"></a>USER1&#160;</td><td class="fielddoc"><p>用户自定义信号1（模拟SIGUSR1） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af0206ae1cb2e7028135dc0077afda6e3a009ab43667ea90b50b741d89cbf76f1b" name="af0206ae1cb2e7028135dc0077afda6e3a009ab43667ea90b50b741d89cbf76f1b"></a>USER2&#160;</td><td class="fielddoc"><p>用户自定义信号2（模拟SIGUSR2） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af0206ae1cb2e7028135dc0077afda6e3a070a0fb40f6c308ab544b227660aadff" name="af0206ae1cb2e7028135dc0077afda6e3a070a0fb40f6c308ab544b227660aadff"></a>TIMEOUT&#160;</td><td class="fielddoc"><p>超时事件 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af0206ae1cb2e7028135dc0077afda6e3a96b4626bc47f80957508b5ec42ee5f27" name="af0206ae1cb2e7028135dc0077afda6e3a96b4626bc47f80957508b5ec42ee5f27"></a>CUSTOM_1&#160;</td><td class="fielddoc"><p>自定义事件1 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af0206ae1cb2e7028135dc0077afda6e3ab7654b1a285c20934afe66059eb48cc0" name="af0206ae1cb2e7028135dc0077afda6e3ab7654b1a285c20934afe66059eb48cc0"></a>CUSTOM_2&#160;</td><td class="fielddoc"><p>自定义事件2 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af0206ae1cb2e7028135dc0077afda6e3ae0c9af36ecdf6234e3375848ba086f0c" name="af0206ae1cb2e7028135dc0077afda6e3ae0c9af36ecdf6234e3375848ba086f0c"></a>FORCE_EXIT&#160;</td><td class="fielddoc"><p>强制退出信号 </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="signal_8hpp_source.html">signal.hpp</a> 第 <a class="el" href="signal_8hpp_source.html#l00057">57</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a92a3b59f1893d2437f40bfbfe4726774" name="a92a3b59f1893d2437f40bfbfe4726774"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92a3b59f1893d2437f40bfbfe4726774">&#9670;&#160;</a></span>block_signals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::system_signal_manager::block_signals </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classneforce_1_1vector.html">vector</a>&lt; <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>signals_to_block</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>阻塞指定信号（仅Linux） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">signals_to_block</td><td>要阻塞的信号集合 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否成功 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a92a3b59f1893d2437f40bfbfe4726774">block_signals()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a92a3b59f1893d2437f40bfbfe4726774">block_signals()</a>.</p>
+
+</div>
+</div>
+<a id="aee880c25ff2f86b4e246755da7ab025b" name="aee880c25ff2f86b4e246755da7ab025b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee880c25ff2f86b4e246755da7ab025b">&#9670;&#160;</a></span>from_native()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a> neforce::system_signal_manager::from_native </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>native_signal</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>将平台原生信号转换为统一事件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">native_signal</td><td>平台原生信号值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>对应的统一事件，无法映射时返回原值强转 </dd></dl>
+
+</div>
+</div>
+<a id="a6f4ff761a4188101b8e6c271fee366a4" name="a6f4ff761a4188101b8e6c271fee366a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f4ff761a4188101b8e6c271fee366a4">&#9670;&#160;</a></span>instance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">system_signal_manager &amp; neforce::system_signal_manager::instance </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取单例实例 </p>
+<dl class="section return"><dt>返回</dt><dd>信号管理器实例引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="signal_8hpp_source.html">signal.hpp</a> 第 <a class="el" href="signal_8hpp_source.html#l00200">200</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="signal_8hpp_source.html#l00200">instance()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="signal_8hpp_source.html#l00200">instance()</a>, <a class="el" href="signal_8hpp_source.html#l00328">neforce::signal_guard::signal_guard()</a> , 以及 <a class="el" href="signal_8hpp_source.html#l00335">neforce::signal_guard::~signal_guard()</a>.</p>
+
+</div>
+</div>
+<a id="a11d742c7392e025aa9170fd96a8b2d70" name="a11d742c7392e025aa9170fd96a8b2d70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11d742c7392e025aa9170fd96a8b2d70">&#9670;&#160;</a></span>is_platform_signal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::system_signal_manager::is_platform_signal </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a></td>          <td class="paramname"><span class="paramname"><em>event</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>判断事件是否为平台原生信号 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">event</td><td>事件 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否平台原生信号 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="signal_8hpp_source.html">signal.hpp</a> 第 <a class="el" href="signal_8hpp_source.html#l00291">291</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="signal_8hpp_source.html#l00291">is_platform_signal()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="signal_8hpp_source.html#l00291">is_platform_signal()</a>.</p>
+
+</div>
+</div>
+<a id="a265a41719e77bc49ff31b9fd22b4a5af" name="a265a41719e77bc49ff31b9fd22b4a5af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a265a41719e77bc49ff31b9fd22b4a5af">&#9670;&#160;</a></span>is_running()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::system_signal_manager::is_running </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查是否正在运行 </p>
+<dl class="section return"><dt>返回</dt><dd>正在运行返回true </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a265a41719e77bc49ff31b9fd22b4a5af">is_running()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a265a41719e77bc49ff31b9fd22b4a5af">is_running()</a>.</p>
+
+</div>
+</div>
+<a id="aec14ca1d9e7f70a047f1cd2ccabe7a1d" name="aec14ca1d9e7f70a047f1cd2ccabe7a1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec14ca1d9e7f70a047f1cd2ccabe7a1d">&#9670;&#160;</a></span>register_handler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::system_signal_manager::register_handler </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a></td>          <td class="paramname"><span class="paramname"><em>event</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a621123877b03cfcd16be3f7e5ab58a56">signal_handler</a></td>          <td class="paramname"><span class="paramname"><em>handler</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>注册信号处理函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">event</td><td>信号事件 </td></tr>
+    <tr><td class="paramname">handler</td><td>处理函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1system__exception.html" title="系统访问异常">system_exception</a></td><td>handler为空时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8e62302348889a029e931f1e5044c70f" name="a8e62302348889a029e931f1e5044c70f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e62302348889a029e931f1e5044c70f">&#9670;&#160;</a></span>register_handlers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::system_signal_manager::register_handlers </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classneforce_1_1vector.html">vector</a>&lt; <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>events</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#a621123877b03cfcd16be3f7e5ab58a56">signal_handler</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>handler</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>批量注册信号处理函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">events</td><td>信号事件列表 </td></tr>
+    <tr><td class="paramname">handler</td><td>处理函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aec236ca8cec1337721f76dcf8ebfe3c2" name="aec236ca8cec1337721f76dcf8ebfe3c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec236ca8cec1337721f76dcf8ebfe3c2">&#9670;&#160;</a></span>remove_handler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::system_signal_manager::remove_handler </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a></td>          <td class="paramname"><span class="paramname"><em>event</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>移除信号处理函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">event</td><td>信号事件 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad7e8e89d9b098339632a575fc6392f48" name="ad7e8e89d9b098339632a575fc6392f48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7e8e89d9b098339632a575fc6392f48">&#9670;&#160;</a></span>reset_force()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::system_signal_manager::reset_force </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>强制重置信号管理器状态 </p>
+<dl class="section warning"><dt>警告</dt><dd>生产环境中不应使用此方法。 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#ad7e8e89d9b098339632a575fc6392f48">reset_force()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ad7e8e89d9b098339632a575fc6392f48">reset_force()</a>.</p>
+
+</div>
+</div>
+<a id="a2caa2ba34c638a321059a4def558fd5e" name="a2caa2ba34c638a321059a4def558fd5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2caa2ba34c638a321059a4def558fd5e">&#9670;&#160;</a></span>send_signal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::system_signal_manager::send_signal </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a></td>          <td class="paramname"><span class="paramname"><em>event</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>context</em></span><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>发送信号 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">event</td><td>信号事件 </td></tr>
+    <tr><td class="paramname">context</td><td>上下文数据（可选） </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae0c39c5298d909603ad0a17cdccc4fe6" name="ae0c39c5298d909603ad0a17cdccc4fe6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0c39c5298d909603ad0a17cdccc4fe6">&#9670;&#160;</a></span>set_force_exit_timeout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::system_signal_manager::set_force_exit_timeout </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>timeout_ms</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置强制退出超时时间 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timeout_ms</td><td>超时时间（毫秒）</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>超过此时间未处理的信号将被丢弃。 </p>
+
+</div>
+</div>
+<a id="a0f3a595d91ba9217cf65431bd935570d" name="a0f3a595d91ba9217cf65431bd935570d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f3a595d91ba9217cf65431bd935570d">&#9670;&#160;</a></span>to_native()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int neforce::system_signal_manager::to_native </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a></td>          <td class="paramname"><span class="paramname"><em>e</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>将统一事件转换为平台原生信号 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td>统一事件 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>平台原生信号值，模拟事件返回 -1 </dd></dl>
+
+</div>
+</div>
+<a id="a16ad5dd291c59d6149a2b1456ff1a7e2" name="a16ad5dd291c59d6149a2b1456ff1a7e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16ad5dd291c59d6149a2b1456ff1a7e2">&#9670;&#160;</a></span>unblock_signals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::system_signal_manager::unblock_signals </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classneforce_1_1vector.html">vector</a>&lt; <a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>signals_to_unblock</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>解除阻塞指定信号（仅Linux） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">signals_to_unblock</td><td>要解除的信号集合 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否成功 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a16ad5dd291c59d6149a2b1456ff1a7e2">unblock_signals()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a16ad5dd291c59d6149a2b1456ff1a7e2">unblock_signals()</a>.</p>
+
+</div>
+</div>
+<a id="ae5e0eeac374813c2f41a8bde97577809" name="ae5e0eeac374813c2f41a8bde97577809"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5e0eeac374813c2f41a8bde97577809">&#9670;&#160;</a></span>wait_for_signal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af0206ae1cb2e7028135dc0077afda6e3">event</a> neforce::system_signal_manager::wait_for_signal </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>timeout_ms</em></span><span class="paramdefsep"> = </span><span class="paramdefval">-1</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>等待信号 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timeout_ms</td><td>超时时间（毫秒），-1表示无限等待 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>收到的信号事件</dd></dl>
+<p>阻塞当前线程直到收到信号或超时。 </p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="signal_8hpp_source.html">signal.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><a href="classneforce_1_1system__signal__manager.html">system_signal_manager</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

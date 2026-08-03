@@ -198,25 +198,13 @@ struct NEFORCE_API AES256 {
 
 
 /**
- * @brief AES-256加密便捷函数
+ * @brief AES-256加密函数
  * @param data 要加密的字符串
  * @param key_hex 十六进制密钥
  * @return 加密后的十六进制字符串
  */
 NEFORCE_ALWAYS_INLINE_INLINE string aes256_encrypt(const string_view data, const string_view key_hex) {
     return AES256::encrypt_ecb_hex(data, key_hex);
-}
-
-NEFORCE_ALWAYS_INLINE_INLINE string aes256_encrypt(const string& data, const string_view key_hex) {
-    return AES256::encrypt_ecb_hex(data.view(), key_hex);
-}
-
-NEFORCE_ALWAYS_INLINE_INLINE string aes256_encrypt(const string_view data, const string& key_hex) {
-    return AES256::encrypt_ecb_hex(data, key_hex.view());
-}
-
-NEFORCE_ALWAYS_INLINE_INLINE string aes256_encrypt(const string& data, const string& key_hex) {
-    return AES256::encrypt_ecb_hex(data.view(), key_hex.view());
 }
 
 /**
@@ -227,18 +215,6 @@ NEFORCE_ALWAYS_INLINE_INLINE string aes256_encrypt(const string& data, const str
  */
 NEFORCE_ALWAYS_INLINE_INLINE string aes256_decrypt(const string_view encrypted_hex, const string_view key_hex) {
     return AES256::decrypt_ecb_hex(encrypted_hex, key_hex);
-}
-
-NEFORCE_ALWAYS_INLINE_INLINE string aes256_decrypt(const string& encrypted_hex, const string_view key_hex) {
-    return AES256::decrypt_ecb_hex(encrypted_hex.view(), key_hex);
-}
-
-NEFORCE_ALWAYS_INLINE_INLINE string aes256_decrypt(const string_view encrypted_hex, const string& key_hex) {
-    return AES256::decrypt_ecb_hex(encrypted_hex, key_hex.view());
-}
-
-NEFORCE_ALWAYS_INLINE_INLINE string aes256_decrypt(const string& encrypted_hex, const string& key_hex) {
-    return AES256::decrypt_ecb_hex(encrypted_hex.view(), key_hex.view());
 }
 
 /** @} */ // AES256

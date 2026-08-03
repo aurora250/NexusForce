@@ -3,9 +3,9 @@
   <compounddef id="group___coroutine_spawn" kind="group">
     <compoundname>CoroutineSpawn</compoundname>
     <title>协程启动</title>
-    <innerclass refid="structco__spawn__task" prot="public">co_spawn_task</innerclass>
+    <innerclass refid="structneforce_1_1co__spawn__task" prot="public">neforce::co_spawn_task</innerclass>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___coroutine_spawn_1ga10a82702bdd477d3f11837b52b06a127" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___coroutine_spawn_1ga281be325f4126db51cbab239cda2efb1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Executor</type>
@@ -15,9 +15,10 @@
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void co_spawn</definition>
+        <definition>void neforce::co_spawn</definition>
         <argsstring>(Executor &amp;&amp;exec, Func func)</argsstring>
         <name>co_spawn</name>
+        <qualifiedname>neforce::co_spawn</qualifiedname>
         <param>
           <type>Executor &amp;&amp;</type>
           <declname>exec</declname>
@@ -52,7 +53,7 @@
 <parametername>exec</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>执行器（如 <ref refid="classio__context_1_1executor" kindref="compound">io_context::executor</ref> 或 strand） </para>
+<para>执行器（如 <ref refid="classneforce_1_1io__context_1_1executor" kindref="compound">io_context::executor</ref> 或 strand） </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -64,15 +65,17 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<programlisting><codeline><highlight class="normal">co_spawn(ctx.get_executor(),<sp/>[&amp;]()<sp/>-&gt;<sp/>awaitable&lt;void&gt;<sp/>{</highlight></codeline>
+<programlisting><codeline><highlight class="normal"><ref refid="group___coroutine_spawn_1ga281be325f4126db51cbab239cda2efb1" kindref="member">co_spawn</ref>(ctx.get_executor(),<sp/>[&amp;]()<sp/>-&gt;<sp/><ref refid="classneforce_1_1awaitable" kindref="compound">awaitable&lt;void&gt;</ref><sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto<sp/>n<sp/>=<sp/>co_await<sp/>sock.async_receive(buf,<sp/>use_awaitable);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>println(&quot;read<sp/>&quot;,<sp/>n,<sp/>&quot;<sp/>bytes&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>println(</highlight><highlight class="stringliteral">&quot;read<sp/>&quot;</highlight><highlight class="normal">,<sp/>n,<sp/></highlight><highlight class="stringliteral">&quot;<sp/>bytes&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline><highlight class="normal">});</highlight></codeline>
 </programlisting> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/async/co_spawn.hpp" line="73" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/co_spawn.hpp" bodystart="73" bodyend="77"/>
+        <references refid="group___coroutine_spawn_1ga281be325f4126db51cbab239cda2efb1" compoundref="co__spawn_8hpp" startline="73" endline="77">neforce::co_spawn</references>
+        <referencedby refid="group___coroutine_spawn_1ga281be325f4126db51cbab239cda2efb1" compoundref="co__spawn_8hpp" startline="73" endline="77">neforce::co_spawn</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

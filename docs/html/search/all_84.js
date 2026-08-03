@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['最优参数推导_0',['最优参数推导',['../group___bloom_filter.html#optimal_parameters',1,'']]]
+  ['旧式仿函数基类_0',['旧式仿函数基类',['../group___legacy_function_adapters.html',1,'']]]
 ];

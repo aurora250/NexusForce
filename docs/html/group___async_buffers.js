@@ -1,47 +1,47 @@
 var group___async_buffers =
 [
-    [ "mutable_buffers", "classmutable__buffers.html", [
-      [ "const_iterator", "classmutable__buffers.html#aa5a9a83ba9c4656b5b2eeb14f044cd9b", null ],
-      [ "iterator", "classmutable__buffers.html#aaf191654f4b529df0841df99ddf69773", null ],
-      [ "value_type", "classmutable__buffers.html#a216a36e2b9ee1a8a875ffebdd545fcd3", null ],
-      [ "mutable_buffers", "classmutable__buffers.html#ae495edb68478bddf15d86c96e5ea1a9c", null ],
-      [ "mutable_buffers", "classmutable__buffers.html#a4d89d7097e5e93c749b749b869a0f69f", null ],
-      [ "begin", "classmutable__buffers.html#a49638fca36601a436abd57aa07eaaca1", null ],
-      [ "begin", "classmutable__buffers.html#a83fa722f1b8b075565df454d24930313", null ],
-      [ "empty", "classmutable__buffers.html#a68f593d4f060751125e7dce2d4e74199", null ],
-      [ "end", "classmutable__buffers.html#add6f4c8194e31cdd0d77b852ef8d7476", null ],
-      [ "end", "classmutable__buffers.html#a8bda2e9fcf53d6a92eb4c10ecca0f915", null ],
-      [ "operator[]", "classmutable__buffers.html#a69b77404fe3f8bcb1ef66640756eb1b1", null ],
-      [ "operator[]", "classmutable__buffers.html#a6ffb51fdce4a72302f44750afc3a956c", null ],
-      [ "push_back", "classmutable__buffers.html#ab515f91a7fef6e2ec226614b43d00122", null ],
-      [ "size", "classmutable__buffers.html#a108908c34b0a72c72c258ced8ba590f2", null ]
+    [ "neforce::mutable_buffers", "classneforce_1_1mutable__buffers.html", [
+      [ "const_iterator", "classneforce_1_1mutable__buffers.html#a6859cb32488f0e9ab0ce7a409e225c8f", null ],
+      [ "iterator", "classneforce_1_1mutable__buffers.html#ac22317343a8607f83c34021fb72103c0", null ],
+      [ "value_type", "classneforce_1_1mutable__buffers.html#a70e597e9c36d33d4635c4d154975548e", null ],
+      [ "mutable_buffers", "classneforce_1_1mutable__buffers.html#a031dcfbf9c59811adc2119fecd07d497", null ],
+      [ "mutable_buffers", "classneforce_1_1mutable__buffers.html#a6f2affc6ef076afb11c30cafca319f76", null ],
+      [ "begin", "classneforce_1_1mutable__buffers.html#a2b0a1fe7045957cbfa4d0fed65153751", null ],
+      [ "begin", "classneforce_1_1mutable__buffers.html#a51903576f72091d335783e9229310a95", null ],
+      [ "empty", "classneforce_1_1mutable__buffers.html#a7512de3af65baaa90c4ba462107951b5", null ],
+      [ "end", "classneforce_1_1mutable__buffers.html#a51c8a7242edbb19e694d7d14927cf26c", null ],
+      [ "end", "classneforce_1_1mutable__buffers.html#a856ff72527516c5458cd4f12cbe071e8", null ],
+      [ "operator[]", "classneforce_1_1mutable__buffers.html#a69ecf0e98fbab2e55f019a5b484d4b7c", null ],
+      [ "operator[]", "classneforce_1_1mutable__buffers.html#adbb9eac2793826a046f4f7bfe45d0d92", null ],
+      [ "push_back", "classneforce_1_1mutable__buffers.html#a7213098d1b881362cfb32b280cf04abb", null ],
+      [ "size", "classneforce_1_1mutable__buffers.html#a5671c51aa5fd85f7a7a2a1afffe81183", null ]
     ] ],
-    [ "const_buffers", "classconst__buffers.html", [
-      [ "const_iterator", "classconst__buffers.html#a0f5f6655bbb2f443ebfb29865bb319fb", null ],
-      [ "iterator", "classconst__buffers.html#afbd1abee4d6a2e2ad704f098a509fb18", null ],
-      [ "value_type", "classconst__buffers.html#a4bef6318e7a0ac5d8284e79794942c64", null ],
-      [ "const_buffers", "classconst__buffers.html#a8fb7f0cc34736b2bbec07cf12c86e624", null ],
-      [ "const_buffers", "classconst__buffers.html#a070db67064862b9c936bc5469cb4a2e4", null ],
-      [ "begin", "classconst__buffers.html#a7e383149db75d3c779c47575ac8f8491", null ],
-      [ "begin", "classconst__buffers.html#a78e25866268faf0a12b96fa98dcd7e8e", null ],
-      [ "empty", "classconst__buffers.html#a3837665fbe58341f06883e06c8d38c7a", null ],
-      [ "end", "classconst__buffers.html#ac66c3de52b4a0734bf3a422a3aaac9ce", null ],
-      [ "end", "classconst__buffers.html#a30fda7792e3f29afd653af805b9ad3b8", null ],
-      [ "operator[]", "classconst__buffers.html#a10d6dd03e963d6299bd3867090e5b87a", null ],
-      [ "operator[]", "classconst__buffers.html#a14b81cfccde75560fc666048fd28a96f", null ],
-      [ "push_back", "classconst__buffers.html#a90bcabeaa7b1edba0fe08cc27b2a60c3", null ],
-      [ "size", "classconst__buffers.html#aae2fa5943f0d70f8acce4091ec46a1b1", null ]
+    [ "neforce::const_buffers", "classneforce_1_1const__buffers.html", [
+      [ "const_iterator", "classneforce_1_1const__buffers.html#ab6221ea8ed6b8369d1b6ee1377077604", null ],
+      [ "iterator", "classneforce_1_1const__buffers.html#ad83683873cc39d7b290104ba7b72ba9b", null ],
+      [ "value_type", "classneforce_1_1const__buffers.html#a735c5fb45286d605139baefaab6ddae1", null ],
+      [ "const_buffers", "classneforce_1_1const__buffers.html#a3ab733936cafd5b11680668a02c747cd", null ],
+      [ "const_buffers", "classneforce_1_1const__buffers.html#ae281d6b9bfdcc267e240e9075e96c967", null ],
+      [ "begin", "classneforce_1_1const__buffers.html#a773455e35bd584f8e5375956dbc452ae", null ],
+      [ "begin", "classneforce_1_1const__buffers.html#a5138bcbf77bae595cf269cf8cf2432e1", null ],
+      [ "empty", "classneforce_1_1const__buffers.html#a8b740c338892206d1b4852822e11ce14", null ],
+      [ "end", "classneforce_1_1const__buffers.html#a992d75c7d1e814330ae64c2765bba2ce", null ],
+      [ "end", "classneforce_1_1const__buffers.html#a77deb689a68a57616595db28d11f4b3b", null ],
+      [ "operator[]", "classneforce_1_1const__buffers.html#a83d41414db6484a04397ecc1f733f036", null ],
+      [ "operator[]", "classneforce_1_1const__buffers.html#a4899a702067520a4014538b09e0d851c", null ],
+      [ "push_back", "classneforce_1_1const__buffers.html#a380be82dbbeb8f903002207cc4a8aa23", null ],
+      [ "size", "classneforce_1_1const__buffers.html#aa2bba013ca21777d00ea753bebdfae9a", null ]
     ] ],
-    [ "dynamic_buffer", "classdynamic__buffer.html", [
-      [ "capacity", "classdynamic__buffer.html#af5cbc36311d81f7bd723c385a00b18f8", null ],
-      [ "commit", "classdynamic__buffer.html#ae5bb486e702913b21cb899f9c32d5980", null ],
-      [ "consume", "classdynamic__buffer.html#a27ba6fcc4aeaf27dd964629057c18c32", null ],
-      [ "data", "classdynamic__buffer.html#ac1619f09717f767ad3802138ae8c1502", null ],
-      [ "data", "classdynamic__buffer.html#a22a1fb1f6b1f6eee24b0017b50f6a0ee", null ],
-      [ "max_size", "classdynamic__buffer.html#ac58d2a0472eaa872bd08746225a2502a", null ],
-      [ "prepare", "classdynamic__buffer.html#a5e2f38eaf7fc7350ca912eeda10f9c58", null ],
-      [ "size", "classdynamic__buffer.html#a40f3d9027c77659e9ea275bec7dff3fe", null ]
+    [ "neforce::dynamic_buffer", "classneforce_1_1dynamic__buffer.html", [
+      [ "capacity", "classneforce_1_1dynamic__buffer.html#abbb22fc7a6d36fed30c13a71d9a1ed95", null ],
+      [ "commit", "classneforce_1_1dynamic__buffer.html#ad5dc89cecb033895510cb919612c94e6", null ],
+      [ "consume", "classneforce_1_1dynamic__buffer.html#adf92915f3469913b2562f87bd4584d73", null ],
+      [ "data", "classneforce_1_1dynamic__buffer.html#a95dcea8e4f9f2b22f76970b43b52d865", null ],
+      [ "data", "classneforce_1_1dynamic__buffer.html#a92a93d60603ace6c59a0e074eb840059", null ],
+      [ "max_size", "classneforce_1_1dynamic__buffer.html#a5d2a6219852d5de979bb6b2d18698db4", null ],
+      [ "prepare", "classneforce_1_1dynamic__buffer.html#a76a05dab3e887dde4c13ad43110f8455", null ],
+      [ "size", "classneforce_1_1dynamic__buffer.html#ab58f5c16cca8f53a1cdb3975bbef8bb5", null ]
     ] ],
-    [ "const_buffer", "group___async_buffers.html#gaf3362bf45fb28c11f4efbabf2aa3141c", null ],
-    [ "mutable_buffer", "group___async_buffers.html#ga06c3bb4bf878f75df59e10a15c7a9354", null ]
+    [ "neforce::const_buffer", "group___async_buffers.html#ga29f9bc9d9c116fe91590baac73d515de", null ],
+    [ "neforce::mutable_buffer", "group___async_buffers.html#ga2da8bce3323a3c9a7c9d08c9e441e2b0", null ]
 ];

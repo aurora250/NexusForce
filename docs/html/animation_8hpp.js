@@ -1,4 +1,4 @@
 var animation_8hpp =
 [
-    [ "easing::function", "namespaceeasing.html#a5d1dbed7989c1a4163523c4b2d8e6688", null ]
+    [ "neforce::tui::easing::function", "namespaceneforce_1_1tui_1_1easing.html#a840bc9825bc8317c8ed9b68e074610c7", null ]
 ];

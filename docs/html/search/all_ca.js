@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['量词算法_0',['量词算法',['../group___quantifier_algorithms.html',1,'']]]
+  ['选择运算仿函数_0',['选择运算仿函数',['../group___selection_functors.html',1,'']]],
+  ['选项语法规则_1',['选项语法规则',['../group___command_line.html#option_syntax',1,'']]]
 ];

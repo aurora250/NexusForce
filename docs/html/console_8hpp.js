@@ -1,17 +1,17 @@
 var console_8hpp =
 [
-    [ "sys_console::console_size", "structsys__console_1_1console__size.html", "structsys__console_1_1console__size" ],
-    [ "eprint", "group___console_i_o.html#ga6f478d3770fa7741309600f1b0b26398", null ],
-    [ "eprintf", "group___console_i_o.html#gac1006701abbc2e20e39a3226ff81e72f", null ],
-    [ "eprintfln", "group___console_i_o.html#ga4fbaef464fbfa5110cb301a849c08872", null ],
-    [ "eprintln", "group___console_i_o.html#ga8dd0ae9ad8f5b08a27403c9b3cf9379c", null ],
-    [ "print", "group___console_i_o.html#ga9f7ee8aaf17d6a59f5fce3710fd1dce9", null ],
-    [ "printc", "group___console_i_o.html#ga60055762362801db865b6b02b6d690ae", null ],
-    [ "printcf", "group___console_i_o.html#ga418e291ec9c66c2917331cdb598a94e5", null ],
-    [ "printcfln", "group___console_i_o.html#gab304b4f3d1f37795c26d0db9121a8165", null ],
-    [ "printcln", "group___console_i_o.html#gaea72c83ef34f2c17a4df39bb41308eb9", null ],
-    [ "printf", "group___console_i_o.html#gaa9133c8d4e2b1ea9cc0b8c6e4b915a06", null ],
-    [ "printfln", "group___console_i_o.html#ga448be22c9c28101c7e56b54a6432827c", null ],
-    [ "println", "group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0", null ],
-    [ "console", "group___console_i_o.html#gab80c18dffdb3640ae4a389dd9fb4929e", null ]
+    [ "neforce::sys_console::console_size", "structneforce_1_1sys__console_1_1console__size.html", "structneforce_1_1sys__console_1_1console__size" ],
+    [ "neforce::eprint", "group___console_i_o.html#ga3e6f7f773c274b920ede60b065124d52", null ],
+    [ "neforce::eprintf", "group___console_i_o.html#ga4b72b3af7d79273d61126853be035b8b", null ],
+    [ "neforce::eprintfln", "group___console_i_o.html#ga80e9de3dce78f805bf1dfe58b0af2547", null ],
+    [ "neforce::eprintln", "group___console_i_o.html#ga6a8fe76c19695c8b58735bbd74cc8394", null ],
+    [ "neforce::print", "group___console_i_o.html#ga6a54a4e2e702a171b0ab05cacaa740ec", null ],
+    [ "neforce::printc", "group___console_i_o.html#ga57f4e0aca2ce3a932b39cf6ed595dcb0", null ],
+    [ "neforce::printcf", "group___console_i_o.html#ga378aeba0f56949d1607bc76555c827eb", null ],
+    [ "neforce::printcfln", "group___console_i_o.html#ga71938a4b03b7cb58fb41aec6b6b29d4b", null ],
+    [ "neforce::printcln", "group___console_i_o.html#ga5b2b9c875b9953e41a49e96a35e88ece", null ],
+    [ "neforce::printf", "group___console_i_o.html#ga157f0c3d65c9e029d7b3af5e0ceae5cb", null ],
+    [ "neforce::printfln", "group___console_i_o.html#gae951ccb32ad25dab10c131edc625b55c", null ],
+    [ "neforce::println", "group___console_i_o.html#ga9c4e1ac58957b1892c3091006222f66b", null ],
+    [ "neforce::console", "group___console_i_o.html#ga6e5d10278d37ee985e2fa511123e4b2b", null ]
 ];

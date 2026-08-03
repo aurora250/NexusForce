@@ -4,22 +4,23 @@
     <compoundname>LeonardoHeap</compoundname>
     <title>莱昂纳多堆算法</title>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___leonardo_heap_1gac60b0313c9a99501982d00f52c3017c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___leonardo_heap_1gadab369d42b30db503093fb7710a0c071" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void adjust_leonardo_heap</definition>
+        <definition>void neforce::adjust_leonardo_heap</definition>
         <argsstring>(Iterator first, size_t current_heap, int level_index, vector&lt; int &gt; &amp;levels)</argsstring>
         <name>adjust_leonardo_heap</name>
+        <qualifiedname>neforce::adjust_leonardo_heap</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
         </param>
         <param>
-          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>size_t</type>
           <declname>current_heap</declname>
         </param>
         <param>
@@ -27,7 +28,7 @@
           <declname>level_index</declname>
         </param>
         <param>
-          <type><ref refid="classvector" kindref="compound">vector</ref>&lt; int &gt; &amp;</type>
+          <type>vector&lt; int &gt; &amp;</type>
           <declname>levels</declname>
         </param>
         <briefdescription>
@@ -81,24 +82,27 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp" line="128" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp" bodystart="128" bodyend="178"/>
-        <references refid="group___iterator_category_checks_1ga7e90191894e0224a9597f070cd1dcb79" compoundref="concepts_8hpp" startline="601">is_ranges_rnd_iter_v</references>
-        <references refid="group___shift_algorithms_1gaf24b9918e7d6e917eb59c4c5f9cd613d" compoundref="shift_8hpp" startline="440" endline="444">iter_swap</references>
-        <references refid="group___math_functions_1ga6d17df0d2b138bb205baa9b723c6e7f8" compoundref="math_8hpp" startline="211" endline="213">leonardo</references>
-        <referencedby refid="group___leonardo_heap_1gaeccafcd2bf9df72de2f4a7ec6ff469fa" compoundref="leonardo__heap_8hpp" startline="327" endline="350">make_leonardo_heap</referencedby>
-        <referencedby refid="group___leonardo_heap_1ga136d8080ad6127b70845b45e199e2c5d" compoundref="leonardo__heap_8hpp" startline="236" endline="267">pop_leonardo_heap</referencedby>
-        <referencedby refid="group___leonardo_heap_1ga339f8c175e964064f8d7e8e2676591fa" compoundref="leonardo__heap_8hpp" startline="189" endline="225">push_leonardo_heap</referencedby>
-        <referencedby refid="group___leonardo_heap_1ga30b3db79677a6fbb9e3b71a62b48933f" compoundref="leonardo__heap_8hpp" startline="278" endline="316">sort_leonardo_heap</referencedby>
+        <references refid="group___leonardo_heap_1gadab369d42b30db503093fb7710a0c071" compoundref="leonardo__heap_8hpp" startline="128" endline="178">neforce::adjust_leonardo_heap</references>
+        <references refid="group___iterator_category_checks_1gabca13f6df73a191ea3c980af9121f3c1" compoundref="concepts_8hpp" startline="601">neforce::is_ranges_rnd_iter_v</references>
+        <references refid="group___shift_algorithms_1ga323874bfbf5e57e5ad937fa9b02fe0de" compoundref="shift_8hpp" startline="440" endline="444">neforce::iter_swap</references>
+        <references refid="group___math_functions_1gab7ea136b43b1aa902d69855f34e54a9a" compoundref="math_8hpp" startline="211" endline="213">neforce::leonardo</references>
+        <referencedby refid="group___leonardo_heap_1gadab369d42b30db503093fb7710a0c071" compoundref="leonardo__heap_8hpp" startline="128" endline="178">neforce::adjust_leonardo_heap</referencedby>
+        <referencedby refid="group___leonardo_heap_1ga614eb82010a036730ed102df417c8f42" compoundref="leonardo__heap_8hpp" startline="327" endline="350">neforce::make_leonardo_heap</referencedby>
+        <referencedby refid="group___leonardo_heap_1gae0b8e0d88ab3f099800a507e1c56678c" compoundref="leonardo__heap_8hpp" startline="236" endline="267">neforce::pop_leonardo_heap</referencedby>
+        <referencedby refid="group___leonardo_heap_1gabd7f4744500fb899386b3a971f6bed8a" compoundref="leonardo__heap_8hpp" startline="189" endline="225">neforce::push_leonardo_heap</referencedby>
+        <referencedby refid="group___leonardo_heap_1gac8bc87194be6d7619c0ac6ba70bc8640" compoundref="leonardo__heap_8hpp" startline="278" endline="316">neforce::sort_leonardo_heap</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___leonardo_heap_1ga339f8c175e964064f8d7e8e2676591fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___leonardo_heap_1gabd7f4744500fb899386b3a971f6bed8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void push_leonardo_heap</definition>
+        <definition>void neforce::push_leonardo_heap</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>push_leonardo_heap</name>
+        <qualifiedname>neforce::push_leonardo_heap</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -142,22 +146,25 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp" line="189" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp" bodystart="189" bodyend="225"/>
-        <references refid="group___leonardo_heap_1gac60b0313c9a99501982d00f52c3017c4" compoundref="leonardo__heap_8hpp" startline="128" endline="178">adjust_leonardo_heap</references>
-        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
-        <references refid="group___iterator_category_checks_1ga7e90191894e0224a9597f070cd1dcb79" compoundref="concepts_8hpp" startline="601">is_ranges_rnd_iter_v</references>
-        <references refid="classvector_1ac8d8b05ea55e928d9a4ccde8bf9bedcf" compoundref="vector_8hpp" startline="887" endline="887">vector&lt; T, Alloc &gt;::push_back</references>
-        <references refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+        <references refid="group___leonardo_heap_1gadab369d42b30db503093fb7710a0c071" compoundref="leonardo__heap_8hpp" startline="128" endline="178">neforce::adjust_leonardo_heap</references>
+        <references refid="group___iterator_operation_1ga81cd39ae0fbc7198eef37acc9ff10950" compoundref="iterator_8hpp" startline="201" endline="218">neforce::distance</references>
+        <references refid="group___iterator_category_checks_1gabca13f6df73a191ea3c980af9121f3c1" compoundref="concepts_8hpp" startline="601">neforce::is_ranges_rnd_iter_v</references>
+        <references refid="classneforce_1_1vector_1aaaf6ef9757003f129c44904ff01cf261" compoundref="vector_8hpp" startline="887" endline="887">neforce::vector&lt; T, Alloc &gt;::push_back</references>
+        <references refid="group___leonardo_heap_1gabd7f4744500fb899386b3a971f6bed8a" compoundref="leonardo__heap_8hpp" startline="189" endline="225">neforce::push_leonardo_heap</references>
+        <references refid="group___type_erasure_functions_1ga69955a26617401117eaf53fa82162e2b" compoundref="type__erase_8hpp" startline="292" endline="294">neforce::size</references>
+        <referencedby refid="group___leonardo_heap_1gabd7f4744500fb899386b3a971f6bed8a" compoundref="leonardo__heap_8hpp" startline="189" endline="225">neforce::push_leonardo_heap</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___leonardo_heap_1ga136d8080ad6127b70845b45e199e2c5d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___leonardo_heap_1gae0b8e0d88ab3f099800a507e1c56678c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void pop_leonardo_heap</definition>
+        <definition>void neforce::pop_leonardo_heap</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>pop_leonardo_heap</name>
+        <qualifiedname>neforce::pop_leonardo_heap</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -201,23 +208,26 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp" line="236" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp" bodystart="236" bodyend="267"/>
-        <references refid="group___leonardo_heap_1gac60b0313c9a99501982d00f52c3017c4" compoundref="leonardo__heap_8hpp" startline="128" endline="178">adjust_leonardo_heap</references>
-        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
-        <references refid="group___iterator_category_checks_1ga7e90191894e0224a9597f070cd1dcb79" compoundref="concepts_8hpp" startline="601">is_ranges_rnd_iter_v</references>
-        <references refid="group___math_functions_1ga6d17df0d2b138bb205baa9b723c6e7f8" compoundref="math_8hpp" startline="211" endline="213">leonardo</references>
-        <references refid="classvector_1ac8d8b05ea55e928d9a4ccde8bf9bedcf" compoundref="vector_8hpp" startline="887" endline="887">vector&lt; T, Alloc &gt;::push_back</references>
-        <references refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+        <references refid="group___leonardo_heap_1gadab369d42b30db503093fb7710a0c071" compoundref="leonardo__heap_8hpp" startline="128" endline="178">neforce::adjust_leonardo_heap</references>
+        <references refid="group___iterator_operation_1ga81cd39ae0fbc7198eef37acc9ff10950" compoundref="iterator_8hpp" startline="201" endline="218">neforce::distance</references>
+        <references refid="group___iterator_category_checks_1gabca13f6df73a191ea3c980af9121f3c1" compoundref="concepts_8hpp" startline="601">neforce::is_ranges_rnd_iter_v</references>
+        <references refid="group___math_functions_1gab7ea136b43b1aa902d69855f34e54a9a" compoundref="math_8hpp" startline="211" endline="213">neforce::leonardo</references>
+        <references refid="group___leonardo_heap_1gae0b8e0d88ab3f099800a507e1c56678c" compoundref="leonardo__heap_8hpp" startline="236" endline="267">neforce::pop_leonardo_heap</references>
+        <references refid="classneforce_1_1vector_1aaaf6ef9757003f129c44904ff01cf261" compoundref="vector_8hpp" startline="887" endline="887">neforce::vector&lt; T, Alloc &gt;::push_back</references>
+        <references refid="group___type_erasure_functions_1ga69955a26617401117eaf53fa82162e2b" compoundref="type__erase_8hpp" startline="292" endline="294">neforce::size</references>
+        <referencedby refid="group___leonardo_heap_1gae0b8e0d88ab3f099800a507e1c56678c" compoundref="leonardo__heap_8hpp" startline="236" endline="267">neforce::pop_leonardo_heap</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___leonardo_heap_1ga30b3db79677a6fbb9e3b71a62b48933f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___leonardo_heap_1gac8bc87194be6d7619c0ac6ba70bc8640" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void sort_leonardo_heap</definition>
+        <definition>void neforce::sort_leonardo_heap</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>sort_leonardo_heap</name>
+        <qualifiedname>neforce::sort_leonardo_heap</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -261,24 +271,27 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp" line="278" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp" bodystart="278" bodyend="316"/>
-        <references refid="group___leonardo_heap_1gac60b0313c9a99501982d00f52c3017c4" compoundref="leonardo__heap_8hpp" startline="128" endline="178">adjust_leonardo_heap</references>
-        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
-        <references refid="group___iterator_category_checks_1ga7e90191894e0224a9597f070cd1dcb79" compoundref="concepts_8hpp" startline="601">is_ranges_rnd_iter_v</references>
-        <references refid="group___math_functions_1ga6d17df0d2b138bb205baa9b723c6e7f8" compoundref="math_8hpp" startline="211" endline="213">leonardo</references>
-        <references refid="classvector_1ac8d8b05ea55e928d9a4ccde8bf9bedcf" compoundref="vector_8hpp" startline="887" endline="887">vector&lt; T, Alloc &gt;::push_back</references>
-        <references refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
-        <referencedby refid="group___sort_algorithms_1ga3468b006b2ed983e414f813d988feef8" compoundref="leonardo__heap_8hpp" startline="373" endline="376">smooth_sort</referencedby>
+        <references refid="group___leonardo_heap_1gadab369d42b30db503093fb7710a0c071" compoundref="leonardo__heap_8hpp" startline="128" endline="178">neforce::adjust_leonardo_heap</references>
+        <references refid="group___iterator_operation_1ga81cd39ae0fbc7198eef37acc9ff10950" compoundref="iterator_8hpp" startline="201" endline="218">neforce::distance</references>
+        <references refid="group___iterator_category_checks_1gabca13f6df73a191ea3c980af9121f3c1" compoundref="concepts_8hpp" startline="601">neforce::is_ranges_rnd_iter_v</references>
+        <references refid="group___math_functions_1gab7ea136b43b1aa902d69855f34e54a9a" compoundref="math_8hpp" startline="211" endline="213">neforce::leonardo</references>
+        <references refid="classneforce_1_1vector_1aaaf6ef9757003f129c44904ff01cf261" compoundref="vector_8hpp" startline="887" endline="887">neforce::vector&lt; T, Alloc &gt;::push_back</references>
+        <references refid="group___type_erasure_functions_1ga69955a26617401117eaf53fa82162e2b" compoundref="type__erase_8hpp" startline="292" endline="294">neforce::size</references>
+        <references refid="group___leonardo_heap_1gac8bc87194be6d7619c0ac6ba70bc8640" compoundref="leonardo__heap_8hpp" startline="278" endline="316">neforce::sort_leonardo_heap</references>
+        <referencedby refid="group___sort_algorithms_1gaf5f42876a809dda5703c30384504f0ce" compoundref="leonardo__heap_8hpp" startline="373" endline="376">neforce::smooth_sort</referencedby>
+        <referencedby refid="group___leonardo_heap_1gac8bc87194be6d7619c0ac6ba70bc8640" compoundref="leonardo__heap_8hpp" startline="278" endline="316">neforce::sort_leonardo_heap</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___leonardo_heap_1gaeccafcd2bf9df72de2f4a7ec6ff469fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___leonardo_heap_1ga614eb82010a036730ed102df417c8f42" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void make_leonardo_heap</definition>
+        <definition>void neforce::make_leonardo_heap</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>make_leonardo_heap</name>
+        <qualifiedname>neforce::make_leonardo_heap</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -322,12 +335,14 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp" line="327" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp" bodystart="327" bodyend="350"/>
-        <references refid="group___leonardo_heap_1gac60b0313c9a99501982d00f52c3017c4" compoundref="leonardo__heap_8hpp" startline="128" endline="178">adjust_leonardo_heap</references>
-        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
-        <references refid="group___iterator_category_checks_1ga7e90191894e0224a9597f070cd1dcb79" compoundref="concepts_8hpp" startline="601">is_ranges_rnd_iter_v</references>
-        <references refid="classvector_1ac8d8b05ea55e928d9a4ccde8bf9bedcf" compoundref="vector_8hpp" startline="887" endline="887">vector&lt; T, Alloc &gt;::push_back</references>
-        <references refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
-        <referencedby refid="group___sort_algorithms_1ga3468b006b2ed983e414f813d988feef8" compoundref="leonardo__heap_8hpp" startline="373" endline="376">smooth_sort</referencedby>
+        <references refid="group___leonardo_heap_1gadab369d42b30db503093fb7710a0c071" compoundref="leonardo__heap_8hpp" startline="128" endline="178">neforce::adjust_leonardo_heap</references>
+        <references refid="group___iterator_operation_1ga81cd39ae0fbc7198eef37acc9ff10950" compoundref="iterator_8hpp" startline="201" endline="218">neforce::distance</references>
+        <references refid="group___iterator_category_checks_1gabca13f6df73a191ea3c980af9121f3c1" compoundref="concepts_8hpp" startline="601">neforce::is_ranges_rnd_iter_v</references>
+        <references refid="group___leonardo_heap_1ga614eb82010a036730ed102df417c8f42" compoundref="leonardo__heap_8hpp" startline="327" endline="350">neforce::make_leonardo_heap</references>
+        <references refid="classneforce_1_1vector_1aaaf6ef9757003f129c44904ff01cf261" compoundref="vector_8hpp" startline="887" endline="887">neforce::vector&lt; T, Alloc &gt;::push_back</references>
+        <references refid="group___type_erasure_functions_1ga69955a26617401117eaf53fa82162e2b" compoundref="type__erase_8hpp" startline="292" endline="294">neforce::size</references>
+        <referencedby refid="group___leonardo_heap_1ga614eb82010a036730ed102df417c8f42" compoundref="leonardo__heap_8hpp" startline="327" endline="350">neforce::make_leonardo_heap</referencedby>
+        <referencedby refid="group___sort_algorithms_1gaf5f42876a809dda5703c30384504f0ce" compoundref="leonardo__heap_8hpp" startline="373" endline="376">neforce::smooth_sort</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -464,7 +479,7 @@
 </para>
 <para><simplesect kind="note"><para>平滑排序是 Edsger W. Dijkstra（图灵奖得主，结构化程序设计倡导者） 在 1981 年设计的算法，旨在证明原地排序算法可以具有自适应性。 尽管代码复杂，但其在理论上的优雅性使其成为算法教材中的经典案例。</para>
 </simplesect>
-<simplesect kind="warning"><para>对于大多数应用场景，推荐使用 <computeroutput><ref refid="group___sort_algorithms_1ga3d93e28bad28595d49e09ec5e08a7895" kindref="member">sort</ref></computeroutput>。 平滑排序的常数因子较大，在随机数据上通常慢于快速排序。</para>
+<simplesect kind="warning"><para>对于大多数应用场景，推荐使用 <computeroutput><ref refid="group___sort_algorithms_1ga42f1e7fa192a7c284b6842bb47c5b264" kindref="member">sort</ref></computeroutput>。 平滑排序的常数因子较大，在随机数据上通常慢于快速排序。</para>
 </simplesect>
 <simplesect kind="see"><para><ulink url="https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html">https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html</ulink> </para>
 </simplesect>

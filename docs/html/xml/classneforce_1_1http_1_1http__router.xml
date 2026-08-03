@@ -1,0 +1,1148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1http_1_1http__router" kind="class" language="C++" prot="public">
+    <compoundname>neforce::http::http_router</compoundname>
+    <includes refid="http__router_8hpp" local="no">http_router.hpp</includes>
+    <innerclass refid="structneforce_1_1http_1_1http__router_1_1route__entry" prot="private">neforce::http::http_router::route_entry</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1http_1_1http__router_1a62a39543b8f3beea91a5d22f83dba54b" prot="public" static="no">
+        <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;, <ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref> &amp;)&gt;</type>
+        <definition>using neforce::http::http_router::http_handler_t = function&lt;void(http_request&amp;, http_response&amp;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>http_handler_t</name>
+        <qualifiedname>neforce::http::http_router::http_handler_t</qualifiedname>
+        <briefdescription>
+<para>HTTP处理器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="80" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1http_1_1http__router_1a5d0e43951acf307e92ad5b892604b69d" prot="public" static="no">
+        <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;, <ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref> &amp;, const <ref refid="structneforce_1_1exception" kindref="compound">exception</ref> &amp;)&gt;</type>
+        <definition>using neforce::http::http_router::exception_handler_t = function&lt;void(http_request&amp;, http_response&amp;, const exception&amp;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>exception_handler_t</name>
+        <qualifiedname>neforce::http::http_router::exception_handler_t</qualifiedname>
+        <briefdescription>
+<para>异常处理器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="81" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http__router_1a5a03c21e7473ef7b629e755fdab370bf" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref>, <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; route_entry &gt; &gt;</type>
+        <definition>unordered_map&lt;string, vector&lt;route_entry&gt; &gt; neforce::http::http_router::routes_</definition>
+        <argsstring></argsstring>
+        <name>routes_</name>
+        <qualifiedname>neforce::http::http_router::routes_</qualifiedname>
+        <briefdescription>
+<para>HTTP方法到路由条目的映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="92" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http__router_1aa3eea9fde1ae0430ca3d5ff4d46eacc3" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref>, <ref refid="classneforce_1_1http_1_1route__trie" kindref="compound">route_trie</ref> &gt;</type>
+        <definition>unordered_map&lt;string, route_trie&gt; neforce::http::http_router::tries_</definition>
+        <argsstring></argsstring>
+        <name>tries_</name>
+        <qualifiedname>neforce::http::http_router::tries_</qualifiedname>
+        <briefdescription>
+<para>每方法的路由Trie </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="93" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http__router_1a1eee2d01f8699192269fdfd319f50e90" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1http_1_1http__filter__chain" kindref="compound">http_filter_chain</ref></type>
+        <definition>http_filter_chain neforce::http::http_router::middleware_chain_</definition>
+        <argsstring></argsstring>
+        <name>middleware_chain_</name>
+        <qualifiedname>neforce::http::http_router::middleware_chain_</qualifiedname>
+        <briefdescription>
+<para>中间件链 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="94" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http__router_1a5a0a2349b57b0ad7936462dda44a627e" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1http_1_1http__router_1a62a39543b8f3beea91a5d22f83dba54b" kindref="member">http_handler_t</ref></type>
+        <definition>http_handler_t neforce::http::http_router::not_found_handler_</definition>
+        <argsstring></argsstring>
+        <name>not_found_handler_</name>
+        <qualifiedname>neforce::http::http_router::not_found_handler_</qualifiedname>
+        <briefdescription>
+<para>404处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="96" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http__router_1a0ddf721abb6d4ee94a25be70ef729f28" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1http_1_1http__router_1a62a39543b8f3beea91a5d22f83dba54b" kindref="member">http_handler_t</ref></type>
+        <definition>http_handler_t neforce::http::http_router::method_not_allowed_handler_</definition>
+        <argsstring></argsstring>
+        <name>method_not_allowed_handler_</name>
+        <qualifiedname>neforce::http::http_router::method_not_allowed_handler_</qualifiedname>
+        <briefdescription>
+<para>405处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="97" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http__router_1a7b03905fccf535b0a06d9936799ee725" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1http_1_1http__router_1a5d0e43951acf307e92ad5b892604b69d" kindref="member">exception_handler_t</ref></type>
+        <definition>exception_handler_t neforce::http::http_router::exception_handler_</definition>
+        <argsstring></argsstring>
+        <name>exception_handler_</name>
+        <qualifiedname>neforce::http::http_router::exception_handler_</qualifiedname>
+        <briefdescription>
+<para>异常处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="98" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http__router_1ada4c4d05455f2dc9c9e731508f92746c" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::http::http_router::case_sensitive</definition>
+        <argsstring></argsstring>
+        <name>case_sensitive</name>
+        <qualifiedname>neforce::http::http_router::case_sensitive</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>是否大小写敏感 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="101" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http__router_1a58c8371e919e0b8f409b587b00260f5f" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::http::http_router::strict_routing</definition>
+        <argsstring></argsstring>
+        <name>strict_routing</name>
+        <qualifiedname>neforce::http::http_router::strict_routing</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否严格匹配尾部斜杠 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="102" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="102" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1a51f20f36dc673f6ed26526f0bdf7ab34" prot="private" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1http_1_1http__router_1a62a39543b8f3beea91a5d22f83dba54b" kindref="member">http_handler_t</ref></type>
+        <definition>http_handler_t neforce::http::http_router::find_handler</definition>
+        <argsstring>(const http_method &amp;method, const string &amp;path, http_request &amp;request)</argsstring>
+        <name>find_handler</name>
+        <qualifiedname>neforce::http::http_router::find_handler</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1http_1_1http__method" kindref="compound">http_method</ref> &amp;</type>
+          <declname>method</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="109" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1a9bec4afc9facbe64aaec8435ee9cfcfa" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_router::resolve_handler</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response)</argsstring>
+        <name>resolve_handler</name>
+        <qualifiedname>neforce::http::http_router::resolve_handler</qualifiedname>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="110" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1ae72cb17d55de8510b71a245b65ddd510" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_router::setup_default_handlers</definition>
+        <argsstring>()</argsstring>
+        <name>setup_default_handlers</name>
+        <qualifiedname>neforce::http::http_router::setup_default_handlers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="112" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1a478a2ed8267811a8aee64289fa27e576" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::http_router::http_router</definition>
+        <argsstring>()</argsstring>
+        <name>http_router</name>
+        <qualifiedname>neforce::http::http_router::http_router</qualifiedname>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>初始化默认的404、405和异常处理器。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="120" column="5"/>
+        <references refid="classneforce_1_1http_1_1http__router_1a478a2ed8267811a8aee64289fa27e576">http_router</references>
+        <referencedby refid="classneforce_1_1http_1_1http__router_1a478a2ed8267811a8aee64289fa27e576">http_router</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1a804ebc2499eefe90a663f250f8e9f890" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::http_router::~http_router</definition>
+        <argsstring>()=default</argsstring>
+        <name>~http_router</name>
+        <qualifiedname>neforce::http::http_router::~http_router</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="122" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1aebdeff206018ea1bea18490c3e3a89a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::http_router::http_router</definition>
+        <argsstring>(const http_router &amp;)=delete</argsstring>
+        <name>http_router</name>
+        <qualifiedname>neforce::http::http_router::http_router</qualifiedname>
+        <param>
+          <type>const http_router &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="124" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1ab7145818865050327b368d67f2a9a6cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1http_1_1http__router_1a478a2ed8267811a8aee64289fa27e576" kindref="member">http_router</ref> &amp;</type>
+        <definition>http_router &amp; neforce::http::http_router::operator=</definition>
+        <argsstring>(const http_router &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::http::http_router::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1http_1_1http__router_1a478a2ed8267811a8aee64289fa27e576" kindref="member">http_router</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="125" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1aee3c21a2b129c0e6bc5e7e1909079fb2" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::http_router::http_router</definition>
+        <argsstring>(http_router &amp;&amp;) noexcept=default</argsstring>
+        <name>http_router</name>
+        <qualifiedname>neforce::http::http_router::http_router</qualifiedname>
+        <param>
+          <type>http_router &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="126" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1adbeabd1c2e0684ef8c9f5eccce3e1034" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1http_1_1http__router_1a478a2ed8267811a8aee64289fa27e576" kindref="member">http_router</ref> &amp;</type>
+        <definition>http_router &amp; neforce::http::http_router::operator=</definition>
+        <argsstring>(http_router &amp;&amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::http::http_router::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1http_1_1http__router_1a478a2ed8267811a8aee64289fa27e576" kindref="member">http_router</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="127" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1a5718ab8050665d178b08135275fc9ef5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_router::get</definition>
+        <argsstring>(const string &amp;path, http_handler_t handler)</argsstring>
+        <name>get</name>
+        <qualifiedname>neforce::http::http_router::get</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1http_1_1http__router_1a62a39543b8f3beea91a5d22f83dba54b" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>GET请求 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="129" column="10"/>
+        <references refid="classneforce_1_1http_1_1http__router_1a5718ab8050665d178b08135275fc9ef5">get</references>
+        <referencedby refid="classneforce_1_1http_1_1http__router_1a5718ab8050665d178b08135275fc9ef5">get</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1a26f0f5e0ae98e4ac2e5085c0221bdc29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_router::post</definition>
+        <argsstring>(const string &amp;path, http_handler_t handler)</argsstring>
+        <name>post</name>
+        <qualifiedname>neforce::http::http_router::post</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1http_1_1http__router_1a62a39543b8f3beea91a5d22f83dba54b" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>POST请求 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="130" column="10"/>
+        <references refid="classneforce_1_1http_1_1http__router_1a26f0f5e0ae98e4ac2e5085c0221bdc29">post</references>
+        <referencedby refid="classneforce_1_1http_1_1http__router_1a26f0f5e0ae98e4ac2e5085c0221bdc29">post</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1a9c3a857a5e758dfc83e4f6f587d61bd3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_router::put</definition>
+        <argsstring>(const string &amp;path, http_handler_t handler)</argsstring>
+        <name>put</name>
+        <qualifiedname>neforce::http::http_router::put</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1http_1_1http__router_1a62a39543b8f3beea91a5d22f83dba54b" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>PUT请求 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="131" column="10"/>
+        <references refid="classneforce_1_1http_1_1http__router_1a9c3a857a5e758dfc83e4f6f587d61bd3">put</references>
+        <referencedby refid="classneforce_1_1http_1_1http__router_1a9c3a857a5e758dfc83e4f6f587d61bd3">put</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1ab51dd8e589636a9eb905cf42f3e32a1d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_router::del</definition>
+        <argsstring>(const string &amp;path, http_handler_t handler)</argsstring>
+        <name>del</name>
+        <qualifiedname>neforce::http::http_router::del</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1http_1_1http__router_1a62a39543b8f3beea91a5d22f83dba54b" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>DELETE请求 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="132" column="10"/>
+        <references refid="classneforce_1_1http_1_1http__router_1ab51dd8e589636a9eb905cf42f3e32a1d">del</references>
+        <referencedby refid="classneforce_1_1http_1_1http__router_1ab51dd8e589636a9eb905cf42f3e32a1d">del</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1a4c9c26690147f3dc7f0a5fe33e88fa3c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_router::head</definition>
+        <argsstring>(const string &amp;path, http_handler_t handler)</argsstring>
+        <name>head</name>
+        <qualifiedname>neforce::http::http_router::head</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1http_1_1http__router_1a62a39543b8f3beea91a5d22f83dba54b" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>HEAD请求 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="133" column="10"/>
+        <references refid="classneforce_1_1http_1_1http__router_1a4c9c26690147f3dc7f0a5fe33e88fa3c">head</references>
+        <referencedby refid="classneforce_1_1http_1_1http__router_1a4c9c26690147f3dc7f0a5fe33e88fa3c">head</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1ae6290e1d01d06418beb2dbc1c8ee94d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_router::options</definition>
+        <argsstring>(const string &amp;path, http_handler_t handler)</argsstring>
+        <name>options</name>
+        <qualifiedname>neforce::http::http_router::options</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1http_1_1http__router_1a62a39543b8f3beea91a5d22f83dba54b" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>OPTIONS请求 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="134" column="10"/>
+        <references refid="classneforce_1_1http_1_1http__router_1ae6290e1d01d06418beb2dbc1c8ee94d9">options</references>
+        <referencedby refid="classneforce_1_1http_1_1http__router_1ae6290e1d01d06418beb2dbc1c8ee94d9">options</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1abf5d8608f8861c5610f69a9503382ff6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_router::trace</definition>
+        <argsstring>(const string &amp;path, http_handler_t handler)</argsstring>
+        <name>trace</name>
+        <qualifiedname>neforce::http::http_router::trace</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1http_1_1http__router_1a62a39543b8f3beea91a5d22f83dba54b" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>TRACE请求 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="135" column="10"/>
+        <references refid="classneforce_1_1http_1_1http__router_1abf5d8608f8861c5610f69a9503382ff6">trace</references>
+        <referencedby refid="classneforce_1_1http_1_1http__router_1abf5d8608f8861c5610f69a9503382ff6">trace</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1aa6912a7296e0a6398d9cfeb2333338a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_router::connect</definition>
+        <argsstring>(const string &amp;path, http_handler_t handler)</argsstring>
+        <name>connect</name>
+        <qualifiedname>neforce::http::http_router::connect</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1http_1_1http__router_1a62a39543b8f3beea91a5d22f83dba54b" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>CONNECT请求 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="136" column="10"/>
+        <references refid="classneforce_1_1http_1_1http__router_1aa6912a7296e0a6398d9cfeb2333338a0">connect</references>
+        <referencedby refid="classneforce_1_1http_1_1http__router_1aa6912a7296e0a6398d9cfeb2333338a0">connect</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1a7c8adb288389e2e2b0a34d062102498c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_router::patch</definition>
+        <argsstring>(const string &amp;path, http_handler_t handler)</argsstring>
+        <name>patch</name>
+        <qualifiedname>neforce::http::http_router::patch</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1http_1_1http__router_1a62a39543b8f3beea91a5d22f83dba54b" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>PATCH请求 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="137" column="10"/>
+        <references refid="classneforce_1_1http_1_1http__router_1a7c8adb288389e2e2b0a34d062102498c">patch</references>
+        <referencedby refid="classneforce_1_1http_1_1http__router_1a7c8adb288389e2e2b0a34d062102498c">patch</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1afe2bd99ee13c4ed2f82a7143d1d0d961" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_router::get_post</definition>
+        <argsstring>(const string &amp;path, http_handler_t handler)</argsstring>
+        <name>get_post</name>
+        <qualifiedname>neforce::http::http_router::get_post</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1http_1_1http__router_1a62a39543b8f3beea91a5d22f83dba54b" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>同时注册GET和POST </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>路由路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>处理器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="144" column="10"/>
+        <references refid="classneforce_1_1http_1_1http__router_1afe2bd99ee13c4ed2f82a7143d1d0d961">get_post</references>
+        <referencedby refid="classneforce_1_1http_1_1http__router_1afe2bd99ee13c4ed2f82a7143d1d0d961">get_post</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1a50ece815c82f65e53a2373672c4e718e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_router::post_delete</definition>
+        <argsstring>(const string &amp;path, http_handler_t handler)</argsstring>
+        <name>post_delete</name>
+        <qualifiedname>neforce::http::http_router::post_delete</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1http_1_1http__router_1a62a39543b8f3beea91a5d22f83dba54b" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>同时注册POST和DELETE </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>路由路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>处理器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="151" column="10"/>
+        <references refid="classneforce_1_1http_1_1http__router_1a50ece815c82f65e53a2373672c4e718e">post_delete</references>
+        <referencedby refid="classneforce_1_1http_1_1http__router_1a50ece815c82f65e53a2373672c4e718e">post_delete</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1a6f68fb6fb54d9c2df07bb5fc63fab060" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_router::all</definition>
+        <argsstring>(const string &amp;path, http_handler_t handler)</argsstring>
+        <name>all</name>
+        <qualifiedname>neforce::http::http_router::all</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1http_1_1http__router_1a62a39543b8f3beea91a5d22f83dba54b" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>注册所有HTTP方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>路由路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>处理器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="158" column="10"/>
+        <references refid="classneforce_1_1http_1_1http__router_1a6f68fb6fb54d9c2df07bb5fc63fab060">all</references>
+        <referencedby refid="classneforce_1_1http_1_1http__router_1a6f68fb6fb54d9c2df07bb5fc63fab060">all</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1ad31ad6ffec62e3b025e40ce27bba371a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_router::route</definition>
+        <argsstring>(const http_method &amp;method, const string &amp;path, const http_handler_t &amp;handler)</argsstring>
+        <name>route</name>
+        <qualifiedname>neforce::http::http_router::route</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1http_1_1http__method" kindref="compound">http_method</ref> &amp;</type>
+          <declname>method</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1http_1_1http__router_1a62a39543b8f3beea91a5d22f83dba54b" kindref="member">http_handler_t</ref> &amp;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>通用路由注册 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>method</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP方法 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>路由路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>处理器</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+路由模式语法：<itemizedlist>
+<listitem><para><computeroutput>/users/:id</computeroutput> - 路径参数，匹配<computeroutput>/users/123</computeroutput>，提取id=123</para>
+</listitem><listitem><para><computeroutput>/files/ *</computeroutput> - 通配符，匹配<computeroutput>/files/a/b/c</computeroutput>，提取*=a/b/c</para>
+</listitem><listitem><para><computeroutput>/user/([0-9]+)</computeroutput> - 正则表达式，匹配数字ID </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="171" column="10"/>
+        <references refid="classneforce_1_1http_1_1http__router_1ad31ad6ffec62e3b025e40ce27bba371a">route</references>
+        <referencedby refid="classneforce_1_1http_1_1http__router_1ad31ad6ffec62e3b025e40ce27bba371a">route</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1ae7ea6e6e805fa9c1eada5f9e45f7ee70" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_router::use</definition>
+        <argsstring>(unique_ptr&lt; http_filter &gt; middleware)</argsstring>
+        <name>use</name>
+        <qualifiedname>neforce::http::http_router::use</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1http_1_1http__filter" kindref="compound">http_filter</ref> &gt;</type>
+          <declname>middleware</declname>
+        </param>
+        <briefdescription>
+<para>添加中间件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>middleware</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>中间件对象（转移所有权） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="177" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="177" bodyend="177"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1http_1_1http__router_1ae7ea6e6e805fa9c1eada5f9e45f7ee70" compoundref="http__router_8hpp" startline="177" endline="177">use</references>
+        <referencedby refid="classneforce_1_1http_1_1http__router_1ae7ea6e6e805fa9c1eada5f9e45f7ee70" compoundref="http__router_8hpp" startline="177" endline="177">use</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1abf3e2a26988e69309d20f46897bba9db" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1http_1_1http__filter__chain" kindref="compound">http_filter_chain</ref> &amp;</type>
+        <definition>http_filter_chain &amp; neforce::http::http_router::middleware_chain</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>middleware_chain</name>
+        <qualifiedname>neforce::http::http_router::middleware_chain</qualifiedname>
+        <briefdescription>
+<para>获取中间件链引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>中间件链引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="183" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="183" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1ac46c02f06116ce8818919e5eb9159f38" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_router::set_not_found_handler</definition>
+        <argsstring>(http_handler_t handler)</argsstring>
+        <name>set_not_found_handler</name>
+        <qualifiedname>neforce::http::http_router::set_not_found_handler</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1http_1_1http__router_1a62a39543b8f3beea91a5d22f83dba54b" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>设置404处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>处理器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="189" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="189" bodyend="189"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1a343ee861790efd698bbb0f1ed5343f96" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_router::set_method_not_allowed_handler</definition>
+        <argsstring>(http_handler_t handler)</argsstring>
+        <name>set_method_not_allowed_handler</name>
+        <qualifiedname>neforce::http::http_router::set_method_not_allowed_handler</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1http_1_1http__router_1a62a39543b8f3beea91a5d22f83dba54b" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>设置405处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>处理器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="195" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="195" bodyend="197"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1a2c1e549b57861c57d607043d33c24b3d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_router::set_exception_handler</definition>
+        <argsstring>(exception_handler_t handler)</argsstring>
+        <name>set_exception_handler</name>
+        <qualifiedname>neforce::http::http_router::set_exception_handler</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1http_1_1http__router_1a5d0e43951acf307e92ad5b892604b69d" kindref="member">exception_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>设置异常处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>处理器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="203" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="203" bodyend="203"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1a80ba4a4d7b470d69ee8e574ae9558d82" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref></type>
+        <definition>http_response neforce::http::http_router::handle_request</definition>
+        <argsstring>(http_request &amp;request)</argsstring>
+        <name>handle_request</name>
+        <qualifiedname>neforce::http::http_router::handle_request</qualifiedname>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <briefdescription>
+<para>处理HTTP请求 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>HTTP响应对象</para>
+</simplesect>
+处理流程：<orderedlist>
+<listitem><para>执行预过滤器</para>
+</listitem><listitem><para>执行核心过滤器</para>
+</listitem><listitem><para>查找匹配的路由处理器</para>
+</listitem><listitem><para>执行处理器</para>
+</listitem><listitem><para>执行后过滤器</para>
+</listitem><listitem><para>返回响应 </para>
+</listitem></orderedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="218" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1a0d4029cb509fae76c34b9711f1409a91" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_router::handle_request_async</definition>
+        <argsstring>(http_request request, function&lt; void(http_response)&gt; cb)</argsstring>
+        <name>handle_request_async</name>
+        <qualifiedname>neforce::http::http_router::handle_request_async</qualifiedname>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref></type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref>)&gt;</type>
+          <declname>cb</declname>
+        </param>
+        <briefdescription>
+<para>异步处理HTTP请求（回调模式） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cb</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>处理完成回调，接收响应对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+与 handle_request 等效，但支持 <ref refid="classneforce_1_1http_1_1async__filter" kindref="compound">async_filter</ref> 中间件。 若无 async_filter，内部直接调用同步路径（零开销）。 适用于 HTTP/2 和事件驱动模式下的请求分发。</para>
+<para>处理流程：<orderedlist>
+<listitem><para>执行异步预过滤器链</para>
+</listitem><listitem><para>查找匹配的路由处理器并执行</para>
+</listitem><listitem><para>执行异步后过滤器链</para>
+</listitem><listitem><para>调用 cb(response) </para>
+</listitem></orderedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="235" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1a831e6206e17c75947c7fe358797973e9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::http::http_router::has_route</definition>
+        <argsstring>(const http_method &amp;method, const string &amp;path) const</argsstring>
+        <name>has_route</name>
+        <qualifiedname>neforce::http::http_router::has_route</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1http_1_1http__method" kindref="compound">http_method</ref> &amp;</type>
+          <declname>method</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>检查是否存在指定路由 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>method</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP方法 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>路由路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>存在返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="243" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1a32cec63e409c7956983743b0bf23e27b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::http::http_router::route_count</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>route_count</name>
+        <qualifiedname>neforce::http::http_router::route_count</qualifiedname>
+        <briefdescription>
+<para>获取路由总数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>路由数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="249" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__router_1a4eb9123e2c0d70b6a20f03c18632e466" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_router::clear_routes</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clear_routes</name>
+        <qualifiedname>neforce::http::http_router::clear_routes</qualifiedname>
+        <briefdescription>
+<para>清空所有路由 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="254" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="254" bodyend="257"/>
+        <references refid="classneforce_1_1http_1_1http__router_1a4eb9123e2c0d70b6a20f03c18632e466" compoundref="http__router_8hpp" startline="254" endline="257">clear_routes</references>
+        <referencedby refid="classneforce_1_1http_1_1http__router_1a4eb9123e2c0d70b6a20f03c18632e466" compoundref="http__router_8hpp" startline="254" endline="257">clear_routes</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>HTTP路由器类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供HTTP请求路由功能，将请求分发到对应的处理函数。 支持路径参数、正则表达式匹配和中间件链。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>RESTful风格路由注册</para>
+</listitem><listitem><para>路径参数提取</para>
+</listitem><listitem><para>通配符匹配</para>
+</listitem><listitem><para>正则表达式路由支持</para>
+</listitem><listitem><para>中间件链支持</para>
+</listitem><listitem><para>自定义异常处理器</para>
+</listitem><listitem><para>大小写敏感/不敏感路由</para>
+</listitem></itemizedlist>
+</para>
+<para>使用示例： <programlisting><codeline><highlight class="normal"><ref refid="classneforce_1_1http_1_1http__router_1a478a2ed8267811a8aee64289fa27e576" kindref="member">http_router</ref><sp/>router;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>静态路由</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">router.get(</highlight><highlight class="stringliteral">&quot;/&quot;</highlight><highlight class="normal">,<sp/>[](<ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref>&amp;<sp/>req,<sp/><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref>&amp;<sp/>res)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>res.body<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Hello<sp/>World&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline><highlight class="normal">});</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>路径参数</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">router.get(</highlight><highlight class="stringliteral">&quot;/users/:id&quot;</highlight><highlight class="normal">,<sp/>[](<ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref>&amp;<sp/>req,<sp/><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref>&amp;<sp/>res)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal"><sp/>=<sp/>req.parameter(</highlight><highlight class="stringliteral">&quot;id&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>res.body<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;User<sp/>ID:<sp/>&quot;</highlight><highlight class="normal"><sp/>+<sp/><ref refid="group___thread_1ga3c2969f91e75bf621e2a3a1437f0bc46" kindref="member">id</ref>;</highlight></codeline>
+<codeline><highlight class="normal">});</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>通配符</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">router.get(</highlight><highlight class="stringliteral">&quot;/files\<sp/>*&quot;</highlight><highlight class="normal">,<sp/>[](<ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref>&amp;<sp/>req,<sp/><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref>&amp;<sp/>res)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>path<sp/>=<sp/>req.parameter(</highlight><highlight class="stringliteral">&quot;*&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>处理文件请求</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">});</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>正则表达式路由</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">router.route(</highlight><highlight class="stringliteral">&quot;GET&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;/user/([0-9]+)&quot;</highlight><highlight class="normal">,<sp/>[](<ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref>&amp;<sp/>req,<sp/><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref>&amp;<sp/>res)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal"><sp/>=<sp/>req.parameter(</highlight><highlight class="stringliteral">&quot;0&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal">});</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>添加中间件</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">router.use(<ref refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" kindref="member">make_unique&lt;logging_filter&gt;</ref>());</highlight></codeline>
+<codeline><highlight class="normal">router.use(<ref refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" kindref="member">make_unique&lt;cors_filter&gt;</ref>());</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>自定义404处理器</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">router.set_not_found_handler([](<ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref>&amp;<sp/>req,<sp/><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref>&amp;<sp/>res)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>res.body<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Custom<sp/>404<sp/>Page&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline><highlight class="normal">});</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>处理请求</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>response<sp/>=<sp/>router.handle_request(request);</highlight></codeline>
+</programlisting> </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="78" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="78" bodyend="258"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1http_1_1http__router_1a6f68fb6fb54d9c2df07bb5fc63fab060" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>all</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1ada4c4d05455f2dc9c9e731508f92746c" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>case_sensitive</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a4eb9123e2c0d70b6a20f03c18632e466" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>clear_routes</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1aa6912a7296e0a6398d9cfeb2333338a0" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>connect</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1ab51dd8e589636a9eb905cf42f3e32a1d" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>del</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a7b03905fccf535b0a06d9936799ee725" prot="private" virt="non-virtual"><scope>neforce::http::http_router</scope><name>exception_handler_</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a5d0e43951acf307e92ad5b892604b69d" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>exception_handler_t</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a51f20f36dc673f6ed26526f0bdf7ab34" prot="private" virt="non-virtual"><scope>neforce::http::http_router</scope><name>find_handler</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a5718ab8050665d178b08135275fc9ef5" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>get</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1afe2bd99ee13c4ed2f82a7143d1d0d961" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>get_post</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a80ba4a4d7b470d69ee8e574ae9558d82" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>handle_request</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a0d4029cb509fae76c34b9711f1409a91" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>handle_request_async</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a831e6206e17c75947c7fe358797973e9" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>has_route</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a4c9c26690147f3dc7f0a5fe33e88fa3c" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>head</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a62a39543b8f3beea91a5d22f83dba54b" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>http_handler_t</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a478a2ed8267811a8aee64289fa27e576" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>http_router</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1aebdeff206018ea1bea18490c3e3a89a2" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>http_router</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1aee3c21a2b129c0e6bc5e7e1909079fb2" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>http_router</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a0ddf721abb6d4ee94a25be70ef729f28" prot="private" virt="non-virtual"><scope>neforce::http::http_router</scope><name>method_not_allowed_handler_</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1abf3e2a26988e69309d20f46897bba9db" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>middleware_chain</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a1eee2d01f8699192269fdfd319f50e90" prot="private" virt="non-virtual"><scope>neforce::http::http_router</scope><name>middleware_chain_</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a5a0a2349b57b0ad7936462dda44a627e" prot="private" virt="non-virtual"><scope>neforce::http::http_router</scope><name>not_found_handler_</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1ab7145818865050327b368d67f2a9a6cf" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1adbeabd1c2e0684ef8c9f5eccce3e1034" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1ae6290e1d01d06418beb2dbc1c8ee94d9" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>options</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a7c8adb288389e2e2b0a34d062102498c" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>patch</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a26f0f5e0ae98e4ac2e5085c0221bdc29" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>post</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a50ece815c82f65e53a2373672c4e718e" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>post_delete</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a9c3a857a5e758dfc83e4f6f587d61bd3" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>put</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a9bec4afc9facbe64aaec8435ee9cfcfa" prot="private" virt="non-virtual"><scope>neforce::http::http_router</scope><name>resolve_handler</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1ad31ad6ffec62e3b025e40ce27bba371a" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>route</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a32cec63e409c7956983743b0bf23e27b" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>route_count</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a5a03c21e7473ef7b629e755fdab370bf" prot="private" virt="non-virtual"><scope>neforce::http::http_router</scope><name>routes_</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a2c1e549b57861c57d607043d33c24b3d" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>set_exception_handler</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a343ee861790efd698bbb0f1ed5343f96" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>set_method_not_allowed_handler</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1ac46c02f06116ce8818919e5eb9159f38" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>set_not_found_handler</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1ae72cb17d55de8510b71a245b65ddd510" prot="private" virt="non-virtual"><scope>neforce::http::http_router</scope><name>setup_default_handlers</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a58c8371e919e0b8f409b587b00260f5f" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>strict_routing</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1abf5d8608f8861c5610f69a9503382ff6" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>trace</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1aa3eea9fde1ae0430ca3d5ff4d46eacc3" prot="private" virt="non-virtual"><scope>neforce::http::http_router</scope><name>tries_</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1ae7ea6e6e805fa9c1eada5f9e45f7ee70" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>use</name></member>
+      <member refid="classneforce_1_1http_1_1http__router_1a804ebc2499eefe90a663f250f8e9f890" prot="public" virt="non-virtual"><scope>neforce::http::http_router</scope><name>~http_router</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

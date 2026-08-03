@@ -1,0 +1,363 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1bounded__queue" kind="class" language="C++" prot="public">
+    <compoundname>neforce::bounded_queue</compoundname>
+    <includes refid="bounded__queue_8hpp" local="no">bounded_queue.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1bounded__queue_1a5d359e95d48840286d646eb7ebcec8df" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; T &gt;</type>
+        <definition>vector&lt;T&gt; neforce::bounded_queue&lt; T &gt;::buffer_</definition>
+        <argsstring></argsstring>
+        <name>buffer_</name>
+        <qualifiedname>neforce::bounded_queue::buffer_</qualifiedname>
+        <briefdescription>
+<para>环形缓冲区 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" line="17" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1bounded__queue_1a26dfbac1d12c0b4eb7ca05a0e6524508" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::bounded_queue&lt; T &gt;::head_</definition>
+        <argsstring></argsstring>
+        <name>head_</name>
+        <qualifiedname>neforce::bounded_queue::head_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>队首索引 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" line="18" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" bodystart="18" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1bounded__queue_1a13ccaf93a0887d8e02827e4d67ebf461" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::bounded_queue&lt; T &gt;::tail_</definition>
+        <argsstring></argsstring>
+        <name>tail_</name>
+        <qualifiedname>neforce::bounded_queue::tail_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>队尾索引 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" line="19" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" bodystart="19" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1bounded__queue_1aa8aeb186836dbfa9d67152e9ce6c45ae" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::bounded_queue&lt; T &gt;::count_</definition>
+        <argsstring></argsstring>
+        <name>count_</name>
+        <qualifiedname>neforce::bounded_queue::count_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>当前元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" line="20" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" bodystart="20" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1bounded__queue_1ab07f5d100b816388cd67f3fdd7d3fc42" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::bounded_queue&lt; T &gt;::capacity_</definition>
+        <argsstring></argsstring>
+        <name>capacity_</name>
+        <qualifiedname>neforce::bounded_queue::capacity_</qualifiedname>
+        <briefdescription>
+<para>最大容量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" line="21" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1bounded__queue_1a9f6c9f726b749cd055cb565190e4c271" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::bounded_queue&lt; T &gt;::bounded_queue</definition>
+        <argsstring>(const size_t cap)</argsstring>
+        <name>bounded_queue</name>
+        <qualifiedname>neforce::bounded_queue::bounded_queue</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>cap</declname>
+        </param>
+        <briefdescription>
+<para>构造指定容量的队列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最大容量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" line="28" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" bodystart="28" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bounded__queue_1aaa1fe6ab032a458d1ff29ba38683de9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::bounded_queue&lt; T &gt;::bounded_queue</definition>
+        <argsstring>(const bounded_queue &amp;)=default</argsstring>
+        <name>bounded_queue</name>
+        <qualifiedname>neforce::bounded_queue::bounded_queue</qualifiedname>
+        <param>
+          <type>const bounded_queue &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" line="32" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bounded__queue_1aadf1a85a494ce3b1c2bbbf7ab2699d3f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bounded__queue_1a9f6c9f726b749cd055cb565190e4c271" kindref="member">bounded_queue</ref> &amp;</type>
+        <definition>bounded_queue &amp; neforce::bounded_queue&lt; T &gt;::operator=</definition>
+        <argsstring>(const bounded_queue &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::bounded_queue::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1bounded__queue_1a9f6c9f726b749cd055cb565190e4c271" kindref="member">bounded_queue</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" line="33" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bounded__queue_1a22850b05c47027404e257835c9a11411" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::bounded_queue&lt; T &gt;::bounded_queue</definition>
+        <argsstring>(bounded_queue &amp;&amp;) noexcept=default</argsstring>
+        <name>bounded_queue</name>
+        <qualifiedname>neforce::bounded_queue::bounded_queue</qualifiedname>
+        <param>
+          <type>bounded_queue &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" line="34" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bounded__queue_1a91f02430f4da60aac0e2555a1a8f5f30" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bounded__queue_1a9f6c9f726b749cd055cb565190e4c271" kindref="member">bounded_queue</ref> &amp;</type>
+        <definition>bounded_queue &amp; neforce::bounded_queue&lt; T &gt;::operator=</definition>
+        <argsstring>(bounded_queue &amp;&amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::bounded_queue::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1bounded__queue_1a9f6c9f726b749cd055cb565190e4c271" kindref="member">bounded_queue</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" line="35" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bounded__queue_1a4c3cf75b9b0ca5255f30e144fbe7215b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::bounded_queue&lt; T &gt;::full</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>full</name>
+        <qualifiedname>neforce::bounded_queue::full</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>队列是否已满 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" line="38" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" bodystart="38" bodyend="38"/>
+        <references refid="classneforce_1_1bounded__queue_1a4c3cf75b9b0ca5255f30e144fbe7215b" compoundref="bounded__queue_8hpp" startline="38" endline="38">neforce::bounded_queue&lt; T &gt;::full</references>
+        <referencedby refid="classneforce_1_1bounded__queue_1a4c3cf75b9b0ca5255f30e144fbe7215b" compoundref="bounded__queue_8hpp" startline="38" endline="38">neforce::bounded_queue&lt; T &gt;::full</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bounded__queue_1a4e0c062f35fb7e274c17fe5dccadd13d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::bounded_queue&lt; T &gt;::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>neforce::bounded_queue::empty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>队列是否为空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" line="41" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bounded__queue_1a03d8cfa621b3d99078a11abe6e3ed455" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::bounded_queue&lt; T &gt;::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>neforce::bounded_queue::size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" line="44" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bounded__queue_1a94986345105508969be4da70e1428fd2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::bounded_queue&lt; T &gt;::capacity</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>capacity</name>
+        <qualifiedname>neforce::bounded_queue::capacity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大容量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" line="47" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bounded__queue_1ad7b60349391a6caccb6d54a9e938cacc" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::bounded_queue&lt; T &gt;::push</definition>
+        <argsstring>(T &amp;&amp;item) noexcept</argsstring>
+        <name>push</name>
+        <qualifiedname>neforce::bounded_queue::push</qualifiedname>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>item</declname>
+        </param>
+        <briefdescription>
+<para>向队尾压入元素（调用者需确保队列未满） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>item</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要压入的元素 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" line="53" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" bodystart="53" bodyend="57"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bounded__queue_1a67bfcd223a9cca5279bbd54a2e74e04a" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>T neforce::bounded_queue&lt; T &gt;::pop</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>pop</name>
+        <qualifiedname>neforce::bounded_queue::pop</qualifiedname>
+        <briefdescription>
+<para>从队首弹出元素（调用者需确保队列非空） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>弹出的元素 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" line="63" column="8" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" bodystart="63" bodyend="68"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bounded__queue_1a578ddf00446ee60658f06caaadc898c2" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; neforce::bounded_queue&lt; T &gt;::front</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>front</name>
+        <qualifiedname>neforce::bounded_queue::front</qualifiedname>
+        <briefdescription>
+<para>访问队首元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>队首元素的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" line="74" column="8" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" bodystart="74" bodyend="74"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>线程安全的有界环形队列（非阻塞） </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+基于环形缓冲区实现，push/pop 为 O(1) 操作。 调用者需自行处理满队列时的溢出策略。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" line="15" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/bounded_queue.hpp" bodystart="15" bodyend="75"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1bounded__queue_1a9f6c9f726b749cd055cb565190e4c271" prot="public" virt="non-virtual"><scope>neforce::bounded_queue</scope><name>bounded_queue</name></member>
+      <member refid="classneforce_1_1bounded__queue_1aaa1fe6ab032a458d1ff29ba38683de9d" prot="public" virt="non-virtual"><scope>neforce::bounded_queue</scope><name>bounded_queue</name></member>
+      <member refid="classneforce_1_1bounded__queue_1a22850b05c47027404e257835c9a11411" prot="public" virt="non-virtual"><scope>neforce::bounded_queue</scope><name>bounded_queue</name></member>
+      <member refid="classneforce_1_1bounded__queue_1a5d359e95d48840286d646eb7ebcec8df" prot="private" virt="non-virtual"><scope>neforce::bounded_queue</scope><name>buffer_</name></member>
+      <member refid="classneforce_1_1bounded__queue_1a94986345105508969be4da70e1428fd2" prot="public" virt="non-virtual"><scope>neforce::bounded_queue</scope><name>capacity</name></member>
+      <member refid="classneforce_1_1bounded__queue_1ab07f5d100b816388cd67f3fdd7d3fc42" prot="private" virt="non-virtual"><scope>neforce::bounded_queue</scope><name>capacity_</name></member>
+      <member refid="classneforce_1_1bounded__queue_1aa8aeb186836dbfa9d67152e9ce6c45ae" prot="private" virt="non-virtual"><scope>neforce::bounded_queue</scope><name>count_</name></member>
+      <member refid="classneforce_1_1bounded__queue_1a4e0c062f35fb7e274c17fe5dccadd13d" prot="public" virt="non-virtual"><scope>neforce::bounded_queue</scope><name>empty</name></member>
+      <member refid="classneforce_1_1bounded__queue_1a578ddf00446ee60658f06caaadc898c2" prot="public" virt="non-virtual"><scope>neforce::bounded_queue</scope><name>front</name></member>
+      <member refid="classneforce_1_1bounded__queue_1a4c3cf75b9b0ca5255f30e144fbe7215b" prot="public" virt="non-virtual"><scope>neforce::bounded_queue</scope><name>full</name></member>
+      <member refid="classneforce_1_1bounded__queue_1a26dfbac1d12c0b4eb7ca05a0e6524508" prot="private" virt="non-virtual"><scope>neforce::bounded_queue</scope><name>head_</name></member>
+      <member refid="classneforce_1_1bounded__queue_1aadf1a85a494ce3b1c2bbbf7ab2699d3f" prot="public" virt="non-virtual"><scope>neforce::bounded_queue</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1bounded__queue_1a91f02430f4da60aac0e2555a1a8f5f30" prot="public" virt="non-virtual"><scope>neforce::bounded_queue</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1bounded__queue_1a67bfcd223a9cca5279bbd54a2e74e04a" prot="public" virt="non-virtual"><scope>neforce::bounded_queue</scope><name>pop</name></member>
+      <member refid="classneforce_1_1bounded__queue_1ad7b60349391a6caccb6d54a9e938cacc" prot="public" virt="non-virtual"><scope>neforce::bounded_queue</scope><name>push</name></member>
+      <member refid="classneforce_1_1bounded__queue_1a03d8cfa621b3d99078a11abe6e3ed455" prot="public" virt="non-virtual"><scope>neforce::bounded_queue</scope><name>size</name></member>
+      <member refid="classneforce_1_1bounded__queue_1a13ccaf93a0887d8e02827e4d67ebf461" prot="private" virt="non-virtual"><scope>neforce::bounded_queue</scope><name>tail_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

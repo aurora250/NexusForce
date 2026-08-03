@@ -1,0 +1,384 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1ranges_1_1join__iterator" kind="class" language="C++" prot="public">
+    <compoundname>neforce::ranges::join_iterator</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename OuterIter</type>
+      </param>
+      <param>
+        <type>typename OuterSentinel</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classneforce_1_1ranges_1_1join__iterator_1a16e5bf8826e20fe8b652d362c71d848e" prot="private" static="no">
+        <type><ref refid="group___iterator_traits_1ga40e6d1c7cc7b8dad6c787116a34245da" kindref="member">iter_reference_t</ref>&lt; OuterIter &gt;</type>
+        <definition>using neforce::ranges::join_iterator&lt; OuterIter, OuterSentinel &gt;::outer_reference = iter_reference_t&lt;OuterIter&gt;</definition>
+        <argsstring></argsstring>
+        <name>outer_reference</name>
+        <qualifiedname>neforce::ranges::join_iterator::outer_reference</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1253" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1253" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1ranges_1_1join__iterator_1afd64a795610fb3eb2e2f32bd4701afa0" prot="private" static="no">
+        <type><ref refid="group___remove_qualifiers_1ga878454a8799ed6276098016ab4bd5975" kindref="member">remove_cvref_t</ref>&lt; outer_reference &gt;</type>
+        <definition>using neforce::ranges::join_iterator&lt; OuterIter, OuterSentinel &gt;::inner_range = remove_cvref_t&lt;outer_reference&gt;</definition>
+        <argsstring></argsstring>
+        <name>inner_range</name>
+        <qualifiedname>neforce::ranges::join_iterator::inner_range</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1254" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1254" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1ranges_1_1join__iterator_1afa0e092b44341e409e2eefafa4a768a8" prot="private" static="no">
+        <type>decltype(_NEFORCE <ref refid="group___declval_tools_1ga7071848a30be73f786711db2ae038447" kindref="member">declval</ref>&lt; inner_range &gt;().<ref refid="group___type_erasure_functions_1ga95ec604cbbeaea30e64f01a8790b5a92" kindref="member">begin</ref>())</type>
+        <definition>using neforce::ranges::join_iterator&lt; OuterIter, OuterSentinel &gt;::inner_iterator = decltype(_NEFORCE declval&lt;inner_range&gt;().begin())</definition>
+        <argsstring></argsstring>
+        <name>inner_iterator</name>
+        <qualifiedname>neforce::ranges::join_iterator::inner_iterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1255" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1255" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1ranges_1_1join__iterator_1acc15798407ddaba9b52076ab11105b71" prot="private" static="no">
+        <type>decltype(_NEFORCE <ref refid="group___declval_tools_1ga7071848a30be73f786711db2ae038447" kindref="member">declval</ref>&lt; inner_range &gt;().<ref refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" kindref="member">end</ref>())</type>
+        <definition>using neforce::ranges::join_iterator&lt; OuterIter, OuterSentinel &gt;::inner_sentinel = decltype(_NEFORCE declval&lt;inner_range&gt;().end())</definition>
+        <argsstring></argsstring>
+        <name>inner_sentinel</name>
+        <qualifiedname>neforce::ranges::join_iterator::inner_sentinel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1256" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1256" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1ranges_1_1join__iterator_1a97aaa1f23dcce93709f34cb286fa3389" prot="public" static="no">
+        <type><ref refid="structneforce_1_1forward__iterator__tag" kindref="compound">forward_iterator_tag</ref></type>
+        <definition>using neforce::ranges::join_iterator&lt; OuterIter, OuterSentinel &gt;::iterator_category = forward_iterator_tag</definition>
+        <argsstring></argsstring>
+        <name>iterator_category</name>
+        <qualifiedname>neforce::ranges::join_iterator::iterator_category</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1259" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1259" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1ranges_1_1join__iterator_1ac71bc9503f3ebd81b0c0bd81061dab20" prot="public" static="no">
+        <type><ref refid="group___iterator_traits_1gadebbdd6357946ad5a66768c738e48cd2" kindref="member">iter_value_t</ref>&lt; inner_iterator &gt;</type>
+        <definition>using neforce::ranges::join_iterator&lt; OuterIter, OuterSentinel &gt;::value_type = iter_value_t&lt;inner_iterator&gt;</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>neforce::ranges::join_iterator::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1260" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1260" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1ranges_1_1join__iterator_1a8805a40ad0ce4cff8b94506aece2818b" prot="public" static="no">
+        <type><ref refid="group___iterator_traits_1ga739b740baa4f6bb946b91b875c5c345b" kindref="member">iter_difference_t</ref>&lt; inner_iterator &gt;</type>
+        <definition>using neforce::ranges::join_iterator&lt; OuterIter, OuterSentinel &gt;::difference_type = iter_difference_t&lt;inner_iterator&gt;</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>neforce::ranges::join_iterator::difference_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1261" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1261" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1ranges_1_1join__iterator_1a8606add9ff9e090f817ae6af64f2c717" prot="public" static="no">
+        <type><ref refid="group___add_qualifiers_1gab4d2cbd7cac0f4a80793735d015674f5" kindref="member">add_pointer_t</ref>&lt; <ref refid="group___iterator_traits_1ga40e6d1c7cc7b8dad6c787116a34245da" kindref="member">iter_reference_t</ref>&lt; inner_iterator &gt; &gt;</type>
+        <definition>using neforce::ranges::join_iterator&lt; OuterIter, OuterSentinel &gt;::pointer = add_pointer_t&lt;iter_reference_t&lt;inner_iterator&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>neforce::ranges::join_iterator::pointer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1262" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1262" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1ranges_1_1join__iterator_1a4a1b82d53cb75d5f4bc4465286c2678d" prot="public" static="no">
+        <type><ref refid="group___iterator_traits_1ga40e6d1c7cc7b8dad6c787116a34245da" kindref="member">iter_reference_t</ref>&lt; inner_iterator &gt;</type>
+        <definition>using neforce::ranges::join_iterator&lt; OuterIter, OuterSentinel &gt;::reference = iter_reference_t&lt;inner_iterator&gt;</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>neforce::ranges::join_iterator::reference</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1263" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1263" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1ranges_1_1join__iterator_1aaad6dbcd3d307dff97ff3073cc0e5c5a" prot="private" static="no" mutable="no">
+        <type>OuterIter</type>
+        <definition>OuterIter neforce::ranges::join_iterator&lt; OuterIter, OuterSentinel &gt;::outer_current_</definition>
+        <argsstring></argsstring>
+        <name>outer_current_</name>
+        <qualifiedname>neforce::ranges::join_iterator::outer_current_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1309" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1309" bodyend="1309"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ranges_1_1join__iterator_1a272eda875e7d69bf4833b97b97a98585" prot="private" static="no" mutable="no">
+        <type>OuterSentinel</type>
+        <definition>OuterSentinel neforce::ranges::join_iterator&lt; OuterIter, OuterSentinel &gt;::outer_end_</definition>
+        <argsstring></argsstring>
+        <name>outer_end_</name>
+        <qualifiedname>neforce::ranges::join_iterator::outer_end_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1310" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1310" bodyend="1310"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ranges_1_1join__iterator_1a82d143c12b5a8c31376dfbeec4915bd4" prot="private" static="no" mutable="no">
+        <type>inner_iterator</type>
+        <definition>inner_iterator neforce::ranges::join_iterator&lt; OuterIter, OuterSentinel &gt;::inner_current_</definition>
+        <argsstring></argsstring>
+        <name>inner_current_</name>
+        <qualifiedname>neforce::ranges::join_iterator::inner_current_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1311" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1311" bodyend="1311"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ranges_1_1join__iterator_1a1a67a8ce3578beaef4f57b639afcb1aa" prot="private" static="no" mutable="no">
+        <type>inner_sentinel</type>
+        <definition>inner_sentinel neforce::ranges::join_iterator&lt; OuterIter, OuterSentinel &gt;::inner_end_</definition>
+        <argsstring></argsstring>
+        <name>inner_end_</name>
+        <qualifiedname>neforce::ranges::join_iterator::inner_end_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1312" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1312" bodyend="1312"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1join__iterator_1a1bac9582f20e93b095af4bd8f5dab661" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::ranges::join_iterator&lt; OuterIter, OuterSentinel &gt;::join_iterator</definition>
+        <argsstring>()=default</argsstring>
+        <name>join_iterator</name>
+        <qualifiedname>neforce::ranges::join_iterator::join_iterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1265" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1join__iterator_1ab91e9bd09b76cce77797489e70e4d9c4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::ranges::join_iterator&lt; OuterIter, OuterSentinel &gt;::join_iterator</definition>
+        <argsstring>(OuterIter outer_current, OuterSentinel outer_end)</argsstring>
+        <name>join_iterator</name>
+        <qualifiedname>neforce::ranges::join_iterator::join_iterator</qualifiedname>
+        <param>
+          <type>OuterIter</type>
+          <declname>outer_current</declname>
+        </param>
+        <param>
+          <type>OuterSentinel</type>
+          <declname>outer_end</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1267" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1267" bodyend="1275"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1join__iterator_1add174b06195e442038acf1d60cbc87a6" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>reference</type>
+        <definition>reference neforce::ranges::join_iterator&lt; OuterIter, OuterSentinel &gt;::operator*</definition>
+        <argsstring>() const</argsstring>
+        <name>operator*</name>
+        <qualifiedname>neforce::ranges::join_iterator::operator*</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1277" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1277" bodyend="1277"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1join__iterator_1ac3462531b207020a6c39c7cf36144ad2" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>pointer</type>
+        <definition>pointer neforce::ranges::join_iterator&lt; OuterIter, OuterSentinel &gt;::operator-&gt;</definition>
+        <argsstring>() const</argsstring>
+        <name>operator-&gt;</name>
+        <qualifiedname>neforce::ranges::join_iterator::operator-&gt;</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1278" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1278" bodyend="1278"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1join__iterator_1ad196d3193dcae9e0f17b6d7c2f652aff" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>join_iterator &amp;</type>
+        <definition>join_iterator &amp; neforce::ranges::join_iterator&lt; OuterIter, OuterSentinel &gt;::operator++</definition>
+        <argsstring>()</argsstring>
+        <name>operator++</name>
+        <qualifiedname>neforce::ranges::join_iterator::operator++</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1280" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1280" bodyend="1284"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1join__iterator_1a14b187d24dedc1a94b8e7d6c0a3167ed" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>join_iterator</type>
+        <definition>join_iterator neforce::ranges::join_iterator&lt; OuterIter, OuterSentinel &gt;::operator++</definition>
+        <argsstring>(int)</argsstring>
+        <name>operator++</name>
+        <qualifiedname>neforce::ranges::join_iterator::operator++</qualifiedname>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1286" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1286" bodyend="1290"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1join__iterator_1a3b1090e1bae57f74c6c381679a460498" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::ranges::join_iterator&lt; OuterIter, OuterSentinel &gt;::operator==</definition>
+        <argsstring>(const join_iterator &amp;other) const</argsstring>
+        <name>operator==</name>
+        <qualifiedname>neforce::ranges::join_iterator::operator==</qualifiedname>
+        <param>
+          <type>const join_iterator &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1292" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1292" bodyend="1295"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1join__iterator_1a16d9f420a36e2b3900d673930101ab0e" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::ranges::join_iterator&lt; OuterIter, OuterSentinel &gt;::operator!=</definition>
+        <argsstring>(const join_iterator &amp;other) const</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>neforce::ranges::join_iterator::operator!=</qualifiedname>
+        <param>
+          <type>const join_iterator &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1296" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1296" bodyend="1296"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1join__iterator_1abe7a5dd534622dba4dbca3961dfbdab0" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::ranges::join_iterator&lt; OuterIter, OuterSentinel &gt;::satisfy</definition>
+        <argsstring>()</argsstring>
+        <name>satisfy</name>
+        <qualifiedname>neforce::ranges::join_iterator::satisfy</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1299" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1299" bodyend="1307"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1251" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1251" bodyend="1313"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1ranges_1_1join__iterator_1a8805a40ad0ce4cff8b94506aece2818b" prot="public" virt="non-virtual"><scope>neforce::ranges::join_iterator</scope><name>difference_type</name></member>
+      <member refid="classneforce_1_1ranges_1_1join__iterator_1a82d143c12b5a8c31376dfbeec4915bd4" prot="private" virt="non-virtual"><scope>neforce::ranges::join_iterator</scope><name>inner_current_</name></member>
+      <member refid="classneforce_1_1ranges_1_1join__iterator_1a1a67a8ce3578beaef4f57b639afcb1aa" prot="private" virt="non-virtual"><scope>neforce::ranges::join_iterator</scope><name>inner_end_</name></member>
+      <member refid="classneforce_1_1ranges_1_1join__iterator_1afa0e092b44341e409e2eefafa4a768a8" prot="private" virt="non-virtual"><scope>neforce::ranges::join_iterator</scope><name>inner_iterator</name></member>
+      <member refid="classneforce_1_1ranges_1_1join__iterator_1afd64a795610fb3eb2e2f32bd4701afa0" prot="private" virt="non-virtual"><scope>neforce::ranges::join_iterator</scope><name>inner_range</name></member>
+      <member refid="classneforce_1_1ranges_1_1join__iterator_1acc15798407ddaba9b52076ab11105b71" prot="private" virt="non-virtual"><scope>neforce::ranges::join_iterator</scope><name>inner_sentinel</name></member>
+      <member refid="classneforce_1_1ranges_1_1join__iterator_1a97aaa1f23dcce93709f34cb286fa3389" prot="public" virt="non-virtual"><scope>neforce::ranges::join_iterator</scope><name>iterator_category</name></member>
+      <member refid="classneforce_1_1ranges_1_1join__iterator_1a1bac9582f20e93b095af4bd8f5dab661" prot="public" virt="non-virtual"><scope>neforce::ranges::join_iterator</scope><name>join_iterator</name></member>
+      <member refid="classneforce_1_1ranges_1_1join__iterator_1ab91e9bd09b76cce77797489e70e4d9c4" prot="public" virt="non-virtual"><scope>neforce::ranges::join_iterator</scope><name>join_iterator</name></member>
+      <member refid="classneforce_1_1ranges_1_1join__iterator_1a16d9f420a36e2b3900d673930101ab0e" prot="public" virt="non-virtual"><scope>neforce::ranges::join_iterator</scope><name>operator!=</name></member>
+      <member refid="classneforce_1_1ranges_1_1join__iterator_1add174b06195e442038acf1d60cbc87a6" prot="public" virt="non-virtual"><scope>neforce::ranges::join_iterator</scope><name>operator*</name></member>
+      <member refid="classneforce_1_1ranges_1_1join__iterator_1ad196d3193dcae9e0f17b6d7c2f652aff" prot="public" virt="non-virtual"><scope>neforce::ranges::join_iterator</scope><name>operator++</name></member>
+      <member refid="classneforce_1_1ranges_1_1join__iterator_1a14b187d24dedc1a94b8e7d6c0a3167ed" prot="public" virt="non-virtual"><scope>neforce::ranges::join_iterator</scope><name>operator++</name></member>
+      <member refid="classneforce_1_1ranges_1_1join__iterator_1ac3462531b207020a6c39c7cf36144ad2" prot="public" virt="non-virtual"><scope>neforce::ranges::join_iterator</scope><name>operator-&gt;</name></member>
+      <member refid="classneforce_1_1ranges_1_1join__iterator_1a3b1090e1bae57f74c6c381679a460498" prot="public" virt="non-virtual"><scope>neforce::ranges::join_iterator</scope><name>operator==</name></member>
+      <member refid="classneforce_1_1ranges_1_1join__iterator_1aaad6dbcd3d307dff97ff3073cc0e5c5a" prot="private" virt="non-virtual"><scope>neforce::ranges::join_iterator</scope><name>outer_current_</name></member>
+      <member refid="classneforce_1_1ranges_1_1join__iterator_1a272eda875e7d69bf4833b97b97a98585" prot="private" virt="non-virtual"><scope>neforce::ranges::join_iterator</scope><name>outer_end_</name></member>
+      <member refid="classneforce_1_1ranges_1_1join__iterator_1a16e5bf8826e20fe8b652d362c71d848e" prot="private" virt="non-virtual"><scope>neforce::ranges::join_iterator</scope><name>outer_reference</name></member>
+      <member refid="classneforce_1_1ranges_1_1join__iterator_1a8606add9ff9e090f817ae6af64f2c717" prot="public" virt="non-virtual"><scope>neforce::ranges::join_iterator</scope><name>pointer</name></member>
+      <member refid="classneforce_1_1ranges_1_1join__iterator_1a4a1b82d53cb75d5f4bc4465286c2678d" prot="public" virt="non-virtual"><scope>neforce::ranges::join_iterator</scope><name>reference</name></member>
+      <member refid="classneforce_1_1ranges_1_1join__iterator_1abe7a5dd534622dba4dbca3961dfbdab0" prot="private" virt="non-virtual"><scope>neforce::ranges::join_iterator</scope><name>satisfy</name></member>
+      <member refid="classneforce_1_1ranges_1_1join__iterator_1ac71bc9503f3ebd81b0c0bd81061dab20" prot="public" virt="non-virtual"><scope>neforce::ranges::join_iterator</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

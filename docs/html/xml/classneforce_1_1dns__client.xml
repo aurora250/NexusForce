@@ -1,0 +1,1894 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1dns__client" kind="class" language="C++" prot="public">
+    <compoundname>neforce::dns_client</compoundname>
+    <includes refid="dns__client_8hpp" local="no">dns_client.hpp</includes>
+    <innerclass refid="structneforce_1_1dns__client_1_1config" prot="public">neforce::dns_client::config</innerclass>
+    <innerclass refid="structneforce_1_1dns__client_1_1dns__query__op" prot="private">neforce::dns_client::dns_query_op</innerclass>
+    <innerclass refid="structneforce_1_1dns__client_1_1pending__entry" prot="private">neforce::dns_client::pending_entry</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1dns__client_1a5115e3a131f17b33b688129bac20d6c6" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1dns__client_1_1config" kindref="compound">config</ref></type>
+        <definition>config neforce::dns_client::config_</definition>
+        <argsstring></argsstring>
+        <name>config_</name>
+        <qualifiedname>neforce::dns_client::config_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>客户端配置 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="91" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="91" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1dns__client_1aeb564f1a5f067b0c77c4bf3df2fe3318" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref>, <ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="structneforce_1_1dns__query__result" kindref="compound">dns_query_result</ref>, <ref refid="structneforce_1_1steady__clock_1a571235516977f769fec5e0eaaf49e077" kindref="member">steady_clock::time_point</ref> &gt; &gt;</type>
+        <definition>unordered_map&lt;string, pair&lt;dns_query_result, steady_clock::time_point&gt; &gt; neforce::dns_client::cache_</definition>
+        <argsstring></argsstring>
+        <name>cache_</name>
+        <qualifiedname>neforce::dns_client::cache_</qualifiedname>
+        <briefdescription>
+<para>DNS缓存 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="92" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1dns__client_1a55a33d48a7d8b9aa2e0dbf31aebd3b4c" prot="private" static="no" mutable="yes">
+        <type><ref refid="classneforce_1_1shared__mutex" kindref="compound">shared_mutex</ref></type>
+        <definition>shared_mutex neforce::dns_client::cache_mutex_</definition>
+        <argsstring></argsstring>
+        <name>cache_mutex_</name>
+        <qualifiedname>neforce::dns_client::cache_mutex_</qualifiedname>
+        <briefdescription>
+<para>缓存互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="93" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1dns__client_1af0b27b6f298f6650a6bfb68a07401cee" prot="private" static="no" mutable="no">
+        <type><ref refid="group___duration_1ga8254730759b00eba24c4a01b0c8e10c3" kindref="member">seconds</ref></type>
+        <definition>seconds neforce::dns_client::cache_ttl_</definition>
+        <argsstring></argsstring>
+        <name>cache_ttl_</name>
+        <qualifiedname>neforce::dns_client::cache_ttl_</qualifiedname>
+        <initializer>{300}</initializer>
+        <briefdescription>
+<para>缓存TTL </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="94" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="94" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1dns__client_1a3425a45e48820036f0101eb6ee7b061c" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::dns_client::use_tcp_</definition>
+        <argsstring></argsstring>
+        <name>use_tcp_</name>
+        <qualifiedname>neforce::dns_client::use_tcp_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否强制使用TCP </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="95" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1dns__client_1af3313daba7528d2325b23bd02c607282" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::dns_client::recursion_desired_</definition>
+        <argsstring></argsstring>
+        <name>recursion_desired_</name>
+        <qualifiedname>neforce::dns_client::recursion_desired_</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>是否期望递归查询（RD） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="97" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1dns__client_1a763a17fcd8a77ed293d9aca426dac7ea" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1gabca631c03e4d34e2e77587fc66d05f52" kindref="member">uint16_t</ref></type>
+        <definition>uint16_t neforce::dns_client::edns_udp_payload_</definition>
+        <argsstring></argsstring>
+        <name>edns_udp_payload_</name>
+        <qualifiedname>neforce::dns_client::edns_udp_payload_</qualifiedname>
+        <initializer>{<ref refid="dns__message_8hpp_1a380134df5f2541d77088ae4daa710ace" kindref="member">edns::DEFAULT_UDP_PAYLOAD</ref>}</initializer>
+        <briefdescription>
+<para>EDNS0 UDP载荷大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="98" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="98" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1dns__client_1ae64c6765aaae37bf6b68ee58236d191b" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::dns_client::dnssec_ok_</definition>
+        <argsstring></argsstring>
+        <name>dnssec_ok_</name>
+        <qualifiedname>neforce::dns_client::dnssec_ok_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否请求DNSSEC（DO） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="99" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1dns__client_1addfc54888dc852e7bb43f17e00ad3aee" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1udp__socket" kindref="compound">udp_socket</ref></type>
+        <definition>udp_socket neforce::dns_client::shared_socket_</definition>
+        <argsstring></argsstring>
+        <name>shared_socket_</name>
+        <qualifiedname>neforce::dns_client::shared_socket_</qualifiedname>
+        <briefdescription>
+<para>共享UDP socket </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="101" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1dns__client_1adb118e7c4cf5bc9fd0329b99503e0baa" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___core_types_1gabca631c03e4d34e2e77587fc66d05f52" kindref="member">uint16_t</ref>, pending_entry &gt;</type>
+        <definition>unordered_map&lt;uint16_t, pending_entry&gt; neforce::dns_client::pending_queries_</definition>
+        <argsstring></argsstring>
+        <name>pending_queries_</name>
+        <qualifiedname>neforce::dns_client::pending_queries_</qualifiedname>
+        <briefdescription>
+<para>待处理查询（ID索引） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="102" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1dns__client_1a60557e0a845795d30465a100c00d466a" prot="private" static="no" mutable="yes">
+        <type><ref refid="classneforce_1_1mutex" kindref="compound">mutex</ref></type>
+        <definition>mutex neforce::dns_client::pending_mutex_</definition>
+        <argsstring></argsstring>
+        <name>pending_mutex_</name>
+        <qualifiedname>neforce::dns_client::pending_mutex_</qualifiedname>
+        <briefdescription>
+<para>待处理查询互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="103" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1dns__client_1a6283b3f3a537b6b20f1c95f77838fed1" prot="private" static="no" mutable="yes">
+        <type><ref refid="classneforce_1_1mutex" kindref="compound">mutex</ref></type>
+        <definition>mutex neforce::dns_client::send_mutex_</definition>
+        <argsstring></argsstring>
+        <name>send_mutex_</name>
+        <qualifiedname>neforce::dns_client::send_mutex_</qualifiedname>
+        <briefdescription>
+<para>发送互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="104" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1dns__client_1a13d41250804e27ef70b732c13e0eec53" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> *</type>
+        <definition>io_context* neforce::dns_client::ctx_</definition>
+        <argsstring></argsstring>
+        <name>ctx_</name>
+        <qualifiedname>neforce::dns_client::ctx_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+<para>异步 I/O 执行上下文 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="105" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="105" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1dns__client_1a89e105cdba3b88680e129861133efe9e" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; neforce::dns_client::io_running_</definition>
+        <argsstring></argsstring>
+        <name>io_running_</name>
+        <qualifiedname>neforce::dns_client::io_running_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>I/O循环运行标志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="106" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="106" bodyend="106"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1dns__client_1a00261e705ac86bd5408327afcecd2a4b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::dns_client::ensure_io_started</definition>
+        <argsstring>()</argsstring>
+        <name>ensure_io_started</name>
+        <qualifiedname>neforce::dns_client::ensure_io_started</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="109" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1aa4039f6569d10b9d2ca9ed80e42f840b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::dns_client::start_io</definition>
+        <argsstring>()</argsstring>
+        <name>start_io</name>
+        <qualifiedname>neforce::dns_client::start_io</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="110" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1a6e313df0b1afa3ef94f58750fd28554e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::dns_client::stop_io</definition>
+        <argsstring>()</argsstring>
+        <name>stop_io</name>
+        <qualifiedname>neforce::dns_client::stop_io</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="111" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1a5a986efd9d2b4bd38dc8a823a990a719" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::dns_client::register_shared_receive</definition>
+        <argsstring>()</argsstring>
+        <name>register_shared_receive</name>
+        <qualifiedname>neforce::dns_client::register_shared_receive</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="112" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1acab1929ddbcce49acdf371cb51ec5208" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::dns_client::on_udp_readable</definition>
+        <argsstring>(error_code ec)</argsstring>
+        <name>on_udp_readable</name>
+        <qualifiedname>neforce::dns_client::on_udp_readable</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref></type>
+          <declname>ec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="113" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1ae980fc2f2c55dac962d53f66ff6b4e18" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::dns_client::process_udp_receive</definition>
+        <argsstring>()</argsstring>
+        <name>process_udp_receive</name>
+        <qualifiedname>neforce::dns_client::process_udp_receive</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="114" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1abf678b8a6bb003ee8d160838fa4a6803" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::dns_client::dispatch_to_op</definition>
+        <argsstring>(uint16_t txid, byte_vector response)</argsstring>
+        <name>dispatch_to_op</name>
+        <qualifiedname>neforce::dns_client::dispatch_to_op</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gabca631c03e4d34e2e77587fc66d05f52" kindref="member">uint16_t</ref></type>
+          <declname>txid</declname>
+        </param>
+        <param>
+          <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="115" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1a7bccc77294a9ff6f967044cfa9b9ceaf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::dns_client::unregister_query</definition>
+        <argsstring>(uint16_t txid)</argsstring>
+        <name>unregister_query</name>
+        <qualifiedname>neforce::dns_client::unregister_query</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gabca631c03e4d34e2e77587fc66d05f52" kindref="member">uint16_t</ref></type>
+          <declname>txid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="116" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1ab69276a6606558482781aa14aa56c515" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::dns_client::send_query</definition>
+        <argsstring>(const byte_vector &amp;query)</argsstring>
+        <name>send_query</name>
+        <qualifiedname>neforce::dns_client::send_query</qualifiedname>
+        <param>
+          <type>const <ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref> &amp;</type>
+          <declname>query</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="118" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1afdc79ef95f7ec43f238a3748cc6d263c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>byte_vector neforce::dns_client::send_tcp_query</definition>
+        <argsstring>(const byte_vector &amp;query)</argsstring>
+        <name>send_tcp_query</name>
+        <qualifiedname>neforce::dns_client::send_tcp_query</qualifiedname>
+        <param>
+          <type>const <ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref> &amp;</type>
+          <declname>query</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="119" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1a06570347d9327c69ea5366f6771f06f5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; <ref refid="structneforce_1_1dns__query__result" kindref="compound">dns_query_result</ref> &gt;</type>
+        <definition>optional&lt; dns_query_result &gt; neforce::dns_client::check_cache</definition>
+        <argsstring>(const string &amp;key)</argsstring>
+        <name>check_cache</name>
+        <qualifiedname>neforce::dns_client::check_cache</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="121" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1a602ea7c0d4309bb2d14391b110daeaec" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::dns_client::update_cache</definition>
+        <argsstring>(const string &amp;key, const dns_query_result &amp;result)</argsstring>
+        <name>update_cache</name>
+        <qualifiedname>neforce::dns_client::update_cache</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structneforce_1_1dns__query__result" kindref="compound">dns_query_result</ref> &amp;</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="122" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1dns__client_1a37552d0bc79128014623b55d39885b06" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::dns_client::dns_client</definition>
+        <argsstring>()=default</argsstring>
+        <name>dns_client</name>
+        <qualifiedname>neforce::dns_client::dns_client</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>使用默认配置创建DNS客户端。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="130" column="5"/>
+        <referencedby refid="classneforce_1_1dns__client_1aad97e63aeec223aaa3f0abb81e8aa0a5">dns_client</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1aad97e63aeec223aaa3f0abb81e8aa0a5" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::dns_client::dns_client</definition>
+        <argsstring>(config cfg, io_context &amp;ctx, bool use_tcp=false)</argsstring>
+        <name>dns_client</name>
+        <qualifiedname>neforce::dns_client::dns_client</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1dns__client_1_1config" kindref="compound">config</ref></type>
+          <declname>cfg</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>use_tcp</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cfg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>客户端配置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>use_tcp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否强制使用TCP </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classneforce_1_1dns__exception" kindref="compound">dns_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>配置无效时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="139" column="14"/>
+        <references refid="classneforce_1_1dns__client_1a37552d0bc79128014623b55d39885b06">dns_client</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1a16bd927b59cfa6e756ab47e2fc0fa837" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::dns_client::~dns_client</definition>
+        <argsstring>()</argsstring>
+        <name>~dns_client</name>
+        <qualifiedname>neforce::dns_client::~dns_client</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="141" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1a518506663992584e79b6969c14789e90" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::dns_client::dns_client</definition>
+        <argsstring>(const dns_client &amp;)=delete</argsstring>
+        <name>dns_client</name>
+        <qualifiedname>neforce::dns_client::dns_client</qualifiedname>
+        <param>
+          <type>const dns_client &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="143" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1ab09b1a0374c4d0d425c3dce82bd95342" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1dns__client_1a37552d0bc79128014623b55d39885b06" kindref="member">dns_client</ref> &amp;</type>
+        <definition>dns_client &amp; neforce::dns_client::operator=</definition>
+        <argsstring>(const dns_client &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::dns_client::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1dns__client_1a37552d0bc79128014623b55d39885b06" kindref="member">dns_client</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="144" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1aa190973a6a783b694cc46c6ae293b8ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::dns_client::dns_client</definition>
+        <argsstring>(dns_client &amp;&amp;)=delete</argsstring>
+        <name>dns_client</name>
+        <qualifiedname>neforce::dns_client::dns_client</qualifiedname>
+        <param>
+          <type>dns_client &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="145" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1a530b563683c507339f4d4d32275c99d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1dns__client_1a37552d0bc79128014623b55d39885b06" kindref="member">dns_client</ref> &amp;</type>
+        <definition>dns_client &amp; neforce::dns_client::operator=</definition>
+        <argsstring>(dns_client &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::dns_client::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1dns__client_1a37552d0bc79128014623b55d39885b06" kindref="member">dns_client</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="146" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1ac5fd49d34279bb4b20f434c95a14f916" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::dns_client::set_config</definition>
+        <argsstring>(config cfg) noexcept</argsstring>
+        <name>set_config</name>
+        <qualifiedname>neforce::dns_client::set_config</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1dns__client_1_1config" kindref="compound">config</ref></type>
+          <declname>cfg</declname>
+        </param>
+        <briefdescription>
+<para>设置客户端配置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cfg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新配置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="152" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="152" bodyend="152"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1aee154a1dac1be1ceeff537fe402c54a6" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::dns_client::set_timeout</definition>
+        <argsstring>(const milliseconds timeout) noexcept</argsstring>
+        <name>set_timeout</name>
+        <qualifiedname>neforce::dns_client::set_timeout</qualifiedname>
+        <param>
+          <type>const <ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref></type>
+          <declname>timeout</declname>
+        </param>
+        <briefdescription>
+<para>设置超时时间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超时时间 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="158" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="158" bodyend="158"/>
+        <references refid="group___condition_variables_1gga7042881af869b8f1ddb32322ab46a9ffa90272dda245ae1fb3cf197e91a8689dc" compoundref="condition__variable_8hpp" startline="35">timeout</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1a5aae0d6c9de5e9a416f2844a3cb81a9d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::dns_client::set_use_tcp</definition>
+        <argsstring>(const bool use_tcp) noexcept</argsstring>
+        <name>set_use_tcp</name>
+        <qualifiedname>neforce::dns_client::set_use_tcp</qualifiedname>
+        <param>
+          <type>const bool</type>
+          <declname>use_tcp</declname>
+        </param>
+        <briefdescription>
+<para>设置是否使用TCP </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>use_tcp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否使用TCP </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="164" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="164" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1a6963e80ee5142d1047843f996fa582df" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::dns_client::set_cache_ttl</definition>
+        <argsstring>(const seconds ttl) noexcept</argsstring>
+        <name>set_cache_ttl</name>
+        <qualifiedname>neforce::dns_client::set_cache_ttl</qualifiedname>
+        <param>
+          <type>const <ref refid="group___duration_1ga8254730759b00eba24c4a01b0c8e10c3" kindref="member">seconds</ref></type>
+          <declname>ttl</declname>
+        </param>
+        <briefdescription>
+<para>设置缓存TTL </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ttl</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>缓存生存时间 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="170" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="170" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1adbbe79de1ad6a3833121398054d22655" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::dns_client::set_recursion_desired</definition>
+        <argsstring>(const bool rd)</argsstring>
+        <name>set_recursion_desired</name>
+        <qualifiedname>neforce::dns_client::set_recursion_desired</qualifiedname>
+        <param>
+          <type>const bool</type>
+          <declname>rd</declname>
+        </param>
+        <briefdescription>
+<para>设置是否期望递归查询（RD） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否期望递归 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="176" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="176" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1ae8342d575301db851a5abf44ce21eaee" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::dns_client::set_edns_udp_payload</definition>
+        <argsstring>(const uint16_t payload_size) noexcept</argsstring>
+        <name>set_edns_udp_payload</name>
+        <qualifiedname>neforce::dns_client::set_edns_udp_payload</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1gabca631c03e4d34e2e77587fc66d05f52" kindref="member">uint16_t</ref></type>
+          <declname>payload_size</declname>
+        </param>
+        <briefdescription>
+<para>设置EDNS0 UDP载荷大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>payload_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>UDP载荷大小（字节） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="182" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="182" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1a22b07267f61386dbdb7b3a8293544abb" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::dns_client::set_dnssec_ok</definition>
+        <argsstring>(const bool ok) noexcept</argsstring>
+        <name>set_dnssec_ok</name>
+        <qualifiedname>neforce::dns_client::set_dnssec_ok</qualifiedname>
+        <param>
+          <type>const bool</type>
+          <declname>ok</declname>
+        </param>
+        <briefdescription>
+<para>设置是否请求DNSSEC（DO） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ok</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否启用DNSSEC </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="188" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="188" bodyend="188"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1a5d1cb10c9735e47fffa7f3551ad2df63" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::dns_client::clear_cache</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clear_cache</name>
+        <qualifiedname>neforce::dns_client::clear_cache</qualifiedname>
+        <briefdescription>
+<para>清空缓存 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="193" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="193" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1a422f8e67b0c71931ce8672018fcf1bcb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1dns__query__result" kindref="compound">dns_query_result</ref></type>
+        <definition>dns_query_result neforce::dns_client::query</definition>
+        <argsstring>(string_view domain, dns_record::raw type=dns_record::A, dns_class qclass=dns_class::INTERNET)</argsstring>
+        <name>query</name>
+        <qualifiedname>neforce::dns_client::query</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>domain</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435" kindref="member">dns_record::raw</ref></type>
+          <declname>type</declname>
+          <defval><ref refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a11bd410cd63d9f8323566189cc4af2ee" kindref="member">dns_record::A</ref></defval>
+        </param>
+        <param>
+          <type><ref refid="group___d_n_s_1gacf25e2c681fec01ffd7aa44f4fc73b06" kindref="member">dns_class</ref></type>
+          <declname>qclass</declname>
+          <defval><ref refid="group___d_n_s_1ggacf25e2c681fec01ffd7aa44f4fc73b06ae43bd933c18b06d29f9c46cce78de0f2" kindref="member">dns_class::INTERNET</ref></defval>
+        </param>
+        <briefdescription>
+<para>执行DNS查询 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>记录类型（默认A记录） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>qclass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>查询类（默认INTERNET） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>查询结果 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classneforce_1_1dns__exception" kindref="compound">dns_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>查询失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="203" column="22"/>
+        <references refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a11bd410cd63d9f8323566189cc4af2ee" compoundref="dns__message_8hpp" startline="294">neforce::dns_record::A</references>
+        <references refid="group___d_n_s_1ggacf25e2c681fec01ffd7aa44f4fc73b06ae43bd933c18b06d29f9c46cce78de0f2" compoundref="dns__message_8hpp" startline="192">INTERNET</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1ac7d4fe15d3a5ab100d56bfbfd79045ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1future" kindref="compound">future</ref>&lt; <ref refid="structneforce_1_1dns__query__result" kindref="compound">dns_query_result</ref> &gt;</type>
+        <definition>future&lt; dns_query_result &gt; neforce::dns_client::query_async</definition>
+        <argsstring>(const string &amp;domain, dns_record::raw type=dns_record::A, dns_class qclass=dns_class::INTERNET)</argsstring>
+        <name>query_async</name>
+        <qualifiedname>neforce::dns_client::query_async</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>domain</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435" kindref="member">dns_record::raw</ref></type>
+          <declname>type</declname>
+          <defval><ref refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a11bd410cd63d9f8323566189cc4af2ee" kindref="member">dns_record::A</ref></defval>
+        </param>
+        <param>
+          <type><ref refid="group___d_n_s_1gacf25e2c681fec01ffd7aa44f4fc73b06" kindref="member">dns_class</ref></type>
+          <declname>qclass</declname>
+          <defval><ref refid="group___d_n_s_1ggacf25e2c681fec01ffd7aa44f4fc73b06ae43bd933c18b06d29f9c46cce78de0f2" kindref="member">dns_class::INTERNET</ref></defval>
+        </param>
+        <briefdescription>
+<para>异步DNS查询（遗留 API——返回 future） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>记录类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>qclass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>查询类 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>future对象，可等待查询结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="213" column="12"/>
+        <references refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a11bd410cd63d9f8323566189cc4af2ee" compoundref="dns__message_8hpp" startline="294">neforce::dns_record::A</references>
+        <references refid="group___d_n_s_1ggacf25e2c681fec01ffd7aa44f4fc73b06ae43bd933c18b06d29f9c46cce78de0f2" compoundref="dns__message_8hpp" startline="192">INTERNET</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1ab4385c0e40b83de1e18a35841413ac4c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::dns_client::async_query</definition>
+        <argsstring>(string_view domain, dns_record::raw type, dns_class qclass, function&lt; void(error_code, dns_query_result)&gt; handler)</argsstring>
+        <name>async_query</name>
+        <qualifiedname>neforce::dns_client::async_query</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>domain</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435" kindref="member">dns_record::raw</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type><ref refid="group___d_n_s_1gacf25e2c681fec01ffd7aa44f4fc73b06" kindref="member">dns_class</ref></type>
+          <declname>qclass</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref>, <ref refid="structneforce_1_1dns__query__result" kindref="compound">dns_query_result</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步DNS查询——回调完成 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>记录类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>qclass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>查询类 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, dns_query_result) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="223" column="10"/>
+        <referencedby refid="classneforce_1_1dns__client_1ac84ba5b68123f685bd3147cb8623077e" compoundref="dns__client_8hpp" startline="247" endline="249">async_query</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1afa4e30ca07c015f7cd5da7ec6500d257" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::dns_client::async_query</definition>
+        <argsstring>(string_view domain, dns_record::raw type, dns_class qclass, cancellation_slot &amp;slot, function&lt; void(error_code, dns_query_result)&gt; handler)</argsstring>
+        <name>async_query</name>
+        <qualifiedname>neforce::dns_client::async_query</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>domain</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435" kindref="member">dns_record::raw</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type><ref refid="group___d_n_s_1gacf25e2c681fec01ffd7aa44f4fc73b06" kindref="member">dns_class</ref></type>
+          <declname>qclass</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1cancellation__slot" kindref="compound">cancellation_slot</ref> &amp;</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref>, <ref refid="structneforce_1_1dns__query__result" kindref="compound">dns_query_result</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步DNS查询——回调完成 + 取消槽 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>记录类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>qclass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>查询类 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>slot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>取消槽 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, dns_query_result) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="234" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1ac84ba5b68123f685bd3147cb8623077e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Token</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt; <ref refid="group___type_attribute_operations_1ga63500a8dd0f79ce1c721aebb8023ce89" kindref="member">decay_t</ref>&lt; Token &gt;, <ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref>, <ref refid="structneforce_1_1dns__query__result" kindref="compound">dns_query_result</ref>)&gt; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::dns_client::async_query</definition>
+        <argsstring>(string_view domain, dns_record::raw type, dns_class qclass, Token &amp;&amp;token)</argsstring>
+        <name>async_query</name>
+        <qualifiedname>neforce::dns_client::async_query</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>domain</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435" kindref="member">dns_record::raw</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type><ref refid="group___d_n_s_1gacf25e2c681fec01ffd7aa44f4fc73b06" kindref="member">dns_class</ref></type>
+          <declname>qclass</declname>
+        </param>
+        <param>
+          <type>Token &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+<para>异步DNS查询——任意完成令牌 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成令牌类型（use_future / detached / use_awaitable / 任意可调用对象） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>记录类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>qclass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>查询类 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成令牌 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="247" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="247" bodyend="249"/>
+        <references refid="classneforce_1_1dns__client_1ab4385c0e40b83de1e18a35841413ac4c">async_query</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1a1a418e48eb0d72bd4602a4bee094629e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto neforce::dns_client::async_query</definition>
+        <argsstring>(string_view domain, dns_record::raw type, dns_class qclass, use_future_t)</argsstring>
+        <name>async_query</name>
+        <qualifiedname>neforce::dns_client::async_query</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>domain</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435" kindref="member">dns_record::raw</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type><ref refid="group___d_n_s_1gacf25e2c681fec01ffd7aa44f4fc73b06" kindref="member">dns_class</ref></type>
+          <declname>qclass</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1use__future__t" kindref="compound">use_future_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步DNS查询——use_future </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>记录类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>qclass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>查询类 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classneforce_1_1future" kindref="compound">future&lt;dns_query_result&gt;</ref> 异步查询结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="258" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1a26afd69f2c5259ea2743d104308cf503" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::dns_client::async_query</definition>
+        <argsstring>(string_view domain, dns_record::raw type, dns_class qclass, detached_t)</argsstring>
+        <name>async_query</name>
+        <qualifiedname>neforce::dns_client::async_query</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>domain</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435" kindref="member">dns_record::raw</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type><ref refid="group___d_n_s_1gacf25e2c681fec01ffd7aa44f4fc73b06" kindref="member">dns_class</ref></type>
+          <declname>qclass</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1detached__t" kindref="compound">detached_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步DNS查询——detached（即发即忘） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>记录类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>qclass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>查询类 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="266" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1af842d0b9aacbc04fb6c152a550f87e75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto neforce::dns_client::async_query</definition>
+        <argsstring>(string_view domain, dns_record::raw type, dns_class qclass, use_awaitable_t)</argsstring>
+        <name>async_query</name>
+        <qualifiedname>neforce::dns_client::async_query</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>domain</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435" kindref="member">dns_record::raw</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type><ref refid="group___d_n_s_1gacf25e2c681fec01ffd7aa44f4fc73b06" kindref="member">dns_class</ref></type>
+          <declname>qclass</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1use__awaitable__t" kindref="compound">use_awaitable_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步DNS查询——use_awaitable </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>记录类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>qclass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>查询类 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classneforce_1_1awaitable" kindref="compound">awaitable&lt;dns_query_result&gt;</ref> 可协程等待的结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="276" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1adc9213d89c1ae0a005119b9e8f253280" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt;</type>
+        <definition>vector&lt; string &gt; neforce::dns_client::resolve_a</definition>
+        <argsstring>(string_view domain)</argsstring>
+        <name>resolve_a</name>
+        <qualifiedname>neforce::dns_client::resolve_a</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>domain</declname>
+        </param>
+        <briefdescription>
+<para>解析A记录（IPv4地址） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>IPv4地址列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="284" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1a7b1c34df1b88416c521195dc707aa229" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt;</type>
+        <definition>vector&lt; string &gt; neforce::dns_client::resolve_aaaa</definition>
+        <argsstring>(string_view domain)</argsstring>
+        <name>resolve_aaaa</name>
+        <qualifiedname>neforce::dns_client::resolve_aaaa</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>domain</declname>
+        </param>
+        <briefdescription>
+<para>解析AAAA记录（IPv6地址） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>IPv6地址列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="291" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1a8f2266f2ba8ba2f6207e423ba49318ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt;</type>
+        <definition>vector&lt; string &gt; neforce::dns_client::resolve_cname</definition>
+        <argsstring>(string_view domain)</argsstring>
+        <name>resolve_cname</name>
+        <qualifiedname>neforce::dns_client::resolve_cname</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>domain</declname>
+        </param>
+        <briefdescription>
+<para>解析CNAME记录（别名） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>别名列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="298" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1a5faf760931a3f4d8886d005153ffc281" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt;</type>
+        <definition>vector&lt; string &gt; neforce::dns_client::resolve_mx</definition>
+        <argsstring>(string_view domain)</argsstring>
+        <name>resolve_mx</name>
+        <qualifiedname>neforce::dns_client::resolve_mx</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>domain</declname>
+        </param>
+        <briefdescription>
+<para>解析MX记录（邮件交换器） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>MX记录列表（格式：&quot;优先级 域名&quot;） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="305" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1ae0d260eb8417d9cb026559657b75635a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt;</type>
+        <definition>vector&lt; string &gt; neforce::dns_client::resolve_txt</definition>
+        <argsstring>(string_view domain)</argsstring>
+        <name>resolve_txt</name>
+        <qualifiedname>neforce::dns_client::resolve_txt</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>domain</declname>
+        </param>
+        <briefdescription>
+<para>解析TXT记录（文本记录） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>文本记录列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="312" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1afe9d332819d1ebc6a810495b00fab432" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1dns__srv__record" kindref="compound">dns_srv_record</ref> &gt;</type>
+        <definition>vector&lt; dns_srv_record &gt; neforce::dns_client::resolve_srv</definition>
+        <argsstring>(string_view domain)</argsstring>
+        <name>resolve_srv</name>
+        <qualifiedname>neforce::dns_client::resolve_srv</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>domain</declname>
+        </param>
+        <briefdescription>
+<para>解析SRV记录（服务定位器） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>SRV记录列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="319" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1a291633ef4df69b62ece67c3f5d61484f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; <ref refid="structneforce_1_1dns__soa__record" kindref="compound">dns_soa_record</ref> &gt;</type>
+        <definition>optional&lt; dns_soa_record &gt; neforce::dns_client::resolve_soa</definition>
+        <argsstring>(string_view domain)</argsstring>
+        <name>resolve_soa</name>
+        <qualifiedname>neforce::dns_client::resolve_soa</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>domain</declname>
+        </param>
+        <briefdescription>
+<para>解析SOA记录（授权区域起始） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>SOA记录，失败返回空optional </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="326" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1af7f5f65fa61551f7e4b66c896cb1da60" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::dns_client::reverse_query</definition>
+        <argsstring>(string_view ip)</argsstring>
+        <name>reverse_query</name>
+        <qualifiedname>neforce::dns_client::reverse_query</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>ip</declname>
+        </param>
+        <briefdescription>
+<para>反向查询（从IP获取域名） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ip</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>IPv4地址 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>域名，失败返回空字符串 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classneforce_1_1dns__exception" kindref="compound">dns_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>IP地址无效时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+执行PTR记录查询，将IP地址转换为域名。 支持IPv4地址，IPv6支持有限。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="337" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1a73b1035c44b85e454e4dfcf70aa4df0b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1dns__query__result" kindref="compound">dns_query_result</ref> &gt;</type>
+        <definition>vector&lt; dns_query_result &gt; neforce::dns_client::batch_query</definition>
+        <argsstring>(const vector&lt; string &gt; &amp;domains, dns_record::raw type=dns_record::A)</argsstring>
+        <name>batch_query</name>
+        <qualifiedname>neforce::dns_client::batch_query</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt; &amp;</type>
+          <declname>domains</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435" kindref="member">dns_record::raw</ref></type>
+          <declname>type</declname>
+          <defval><ref refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a11bd410cd63d9f8323566189cc4af2ee" kindref="member">dns_record::A</ref></defval>
+        </param>
+        <briefdescription>
+<para>批量查询 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>domains</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>记录类型（默认A记录） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>查询结果列表</para>
+</simplesect>
+并发执行多个DNS查询，提高批量查询效率。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="347" column="12"/>
+        <references refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a11bd410cd63d9f8323566189cc4af2ee" compoundref="dns__message_8hpp" startline="294">neforce::dns_record::A</references>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1dns__client_1a7c2282e5f1dae5a3380ae2a61f70a38b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector neforce::dns_client::build_query</definition>
+        <argsstring>(string_view domain, dns_record::raw type=dns_record::A, dns_class qclass=dns_class::INTERNET, bool rd=true, bool edns_enable=true, bool dnssec_ok=false, uint16_t edns_payload=edns::DEFAULT_UDP_PAYLOAD)</argsstring>
+        <name>build_query</name>
+        <qualifiedname>neforce::dns_client::build_query</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>domain</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435" kindref="member">dns_record::raw</ref></type>
+          <declname>type</declname>
+          <defval><ref refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a11bd410cd63d9f8323566189cc4af2ee" kindref="member">dns_record::A</ref></defval>
+        </param>
+        <param>
+          <type><ref refid="group___d_n_s_1gacf25e2c681fec01ffd7aa44f4fc73b06" kindref="member">dns_class</ref></type>
+          <declname>qclass</declname>
+          <defval><ref refid="group___d_n_s_1ggacf25e2c681fec01ffd7aa44f4fc73b06ae43bd933c18b06d29f9c46cce78de0f2" kindref="member">dns_class::INTERNET</ref></defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>rd</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>edns_enable</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>dnssec_ok</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gabca631c03e4d34e2e77587fc66d05f52" kindref="member">uint16_t</ref></type>
+          <declname>edns_payload</declname>
+          <defval><ref refid="dns__message_8hpp_1a380134df5f2541d77088ae4daa710ace" kindref="member">edns::DEFAULT_UDP_PAYLOAD</ref></defval>
+        </param>
+        <briefdescription>
+<para>构建DNS查询消息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>记录类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>qclass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>查询类 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否期望递归 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>edns_enable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否启用EDNS0 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dnssec_ok</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否请求DNSSEC </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>edns_payload</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>EDNS0 UDP载荷大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>编码后的DNS查询消息 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="360" column="24"/>
+        <references refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a11bd410cd63d9f8323566189cc4af2ee" compoundref="dns__message_8hpp" startline="294">neforce::dns_record::A</references>
+        <references refid="group___d_n_s_1ggacf25e2c681fec01ffd7aa44f4fc73b06ae43bd933c18b06d29f9c46cce78de0f2" compoundref="dns__message_8hpp" startline="192">INTERNET</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1dns__client_1a4d437e7653c2b1cd03d09b35f14bc0d6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1dns__query__result" kindref="compound">dns_query_result</ref></type>
+        <definition>static dns_query_result neforce::dns_client::parse_response</definition>
+        <argsstring>(const byte_vector &amp;response, uint16_t expected_id=0)</argsstring>
+        <name>parse_response</name>
+        <qualifiedname>neforce::dns_client::parse_response</qualifiedname>
+        <param>
+          <type>const <ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gabca631c03e4d34e2e77587fc66d05f52" kindref="member">uint16_t</ref></type>
+          <declname>expected_id</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>解析DNS响应消息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原始响应数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>expected_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望的查询ID（0表示不校验） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解析后的查询结果 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classneforce_1_1dns__exception" kindref="compound">dns_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>解析或校验失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="371" column="29"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>DNS客户端类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供DNS查询服务的完整实现，支持缓存、超时控制和多种查询类型。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>DNS查询（支持A、AAAA、CNAME、MX、TXT等记录类型）</para>
+</listitem><listitem><para>DNS缓存（减少重复查询）</para>
+</listitem><listitem><para>同步/异步查询</para>
+</listitem><listitem><para>批量查询</para>
+</listitem><listitem><para>反向查询（PTR记录）</para>
+</listitem><listitem><para>TCP/UDP协议自动切换（响应截断时自动切换TCP） </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="46" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="46" bodyend="372"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1dns__client_1ab4385c0e40b83de1e18a35841413ac4c" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>async_query</name></member>
+      <member refid="classneforce_1_1dns__client_1afa4e30ca07c015f7cd5da7ec6500d257" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>async_query</name></member>
+      <member refid="classneforce_1_1dns__client_1ac84ba5b68123f685bd3147cb8623077e" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>async_query</name></member>
+      <member refid="classneforce_1_1dns__client_1a1a418e48eb0d72bd4602a4bee094629e" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>async_query</name></member>
+      <member refid="classneforce_1_1dns__client_1a26afd69f2c5259ea2743d104308cf503" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>async_query</name></member>
+      <member refid="classneforce_1_1dns__client_1af842d0b9aacbc04fb6c152a550f87e75" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>async_query</name></member>
+      <member refid="classneforce_1_1dns__client_1a73b1035c44b85e454e4dfcf70aa4df0b" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>batch_query</name></member>
+      <member refid="classneforce_1_1dns__client_1a7c2282e5f1dae5a3380ae2a61f70a38b" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>build_query</name></member>
+      <member refid="classneforce_1_1dns__client_1aeb564f1a5f067b0c77c4bf3df2fe3318" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>cache_</name></member>
+      <member refid="classneforce_1_1dns__client_1a55a33d48a7d8b9aa2e0dbf31aebd3b4c" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>cache_mutex_</name></member>
+      <member refid="classneforce_1_1dns__client_1af0b27b6f298f6650a6bfb68a07401cee" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>cache_ttl_</name></member>
+      <member refid="classneforce_1_1dns__client_1a06570347d9327c69ea5366f6771f06f5" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>check_cache</name></member>
+      <member refid="classneforce_1_1dns__client_1a5d1cb10c9735e47fffa7f3551ad2df63" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>clear_cache</name></member>
+      <member refid="classneforce_1_1dns__client_1a5115e3a131f17b33b688129bac20d6c6" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>config_</name></member>
+      <member refid="classneforce_1_1dns__client_1a13d41250804e27ef70b732c13e0eec53" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>ctx_</name></member>
+      <member refid="classneforce_1_1dns__client_1abf678b8a6bb003ee8d160838fa4a6803" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>dispatch_to_op</name></member>
+      <member refid="classneforce_1_1dns__client_1a37552d0bc79128014623b55d39885b06" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>dns_client</name></member>
+      <member refid="classneforce_1_1dns__client_1aad97e63aeec223aaa3f0abb81e8aa0a5" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>dns_client</name></member>
+      <member refid="classneforce_1_1dns__client_1a518506663992584e79b6969c14789e90" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>dns_client</name></member>
+      <member refid="classneforce_1_1dns__client_1aa190973a6a783b694cc46c6ae293b8ff" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>dns_client</name></member>
+      <member refid="classneforce_1_1dns__client_1ae64c6765aaae37bf6b68ee58236d191b" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>dnssec_ok_</name></member>
+      <member refid="classneforce_1_1dns__client_1a763a17fcd8a77ed293d9aca426dac7ea" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>edns_udp_payload_</name></member>
+      <member refid="classneforce_1_1dns__client_1a00261e705ac86bd5408327afcecd2a4b" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>ensure_io_started</name></member>
+      <member refid="classneforce_1_1dns__client_1a89e105cdba3b88680e129861133efe9e" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>io_running_</name></member>
+      <member refid="classneforce_1_1dns__client_1acab1929ddbcce49acdf371cb51ec5208" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>on_udp_readable</name></member>
+      <member refid="classneforce_1_1dns__client_1ab09b1a0374c4d0d425c3dce82bd95342" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1dns__client_1a530b563683c507339f4d4d32275c99d7" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1dns__client_1a4d437e7653c2b1cd03d09b35f14bc0d6" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>parse_response</name></member>
+      <member refid="classneforce_1_1dns__client_1a60557e0a845795d30465a100c00d466a" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>pending_mutex_</name></member>
+      <member refid="classneforce_1_1dns__client_1adb118e7c4cf5bc9fd0329b99503e0baa" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>pending_queries_</name></member>
+      <member refid="classneforce_1_1dns__client_1ae980fc2f2c55dac962d53f66ff6b4e18" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>process_udp_receive</name></member>
+      <member refid="classneforce_1_1dns__client_1a422f8e67b0c71931ce8672018fcf1bcb" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>query</name></member>
+      <member refid="classneforce_1_1dns__client_1ac7d4fe15d3a5ab100d56bfbfd79045ea" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>query_async</name></member>
+      <member refid="classneforce_1_1dns__client_1af3313daba7528d2325b23bd02c607282" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>recursion_desired_</name></member>
+      <member refid="classneforce_1_1dns__client_1a5a986efd9d2b4bd38dc8a823a990a719" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>register_shared_receive</name></member>
+      <member refid="classneforce_1_1dns__client_1adc9213d89c1ae0a005119b9e8f253280" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>resolve_a</name></member>
+      <member refid="classneforce_1_1dns__client_1a7b1c34df1b88416c521195dc707aa229" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>resolve_aaaa</name></member>
+      <member refid="classneforce_1_1dns__client_1a8f2266f2ba8ba2f6207e423ba49318ec" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>resolve_cname</name></member>
+      <member refid="classneforce_1_1dns__client_1a5faf760931a3f4d8886d005153ffc281" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>resolve_mx</name></member>
+      <member refid="classneforce_1_1dns__client_1a291633ef4df69b62ece67c3f5d61484f" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>resolve_soa</name></member>
+      <member refid="classneforce_1_1dns__client_1afe9d332819d1ebc6a810495b00fab432" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>resolve_srv</name></member>
+      <member refid="classneforce_1_1dns__client_1ae0d260eb8417d9cb026559657b75635a" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>resolve_txt</name></member>
+      <member refid="classneforce_1_1dns__client_1af7f5f65fa61551f7e4b66c896cb1da60" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>reverse_query</name></member>
+      <member refid="classneforce_1_1dns__client_1a6283b3f3a537b6b20f1c95f77838fed1" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>send_mutex_</name></member>
+      <member refid="classneforce_1_1dns__client_1ab69276a6606558482781aa14aa56c515" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>send_query</name></member>
+      <member refid="classneforce_1_1dns__client_1afdc79ef95f7ec43f238a3748cc6d263c" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>send_tcp_query</name></member>
+      <member refid="classneforce_1_1dns__client_1a6963e80ee5142d1047843f996fa582df" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>set_cache_ttl</name></member>
+      <member refid="classneforce_1_1dns__client_1ac5fd49d34279bb4b20f434c95a14f916" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>set_config</name></member>
+      <member refid="classneforce_1_1dns__client_1a22b07267f61386dbdb7b3a8293544abb" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>set_dnssec_ok</name></member>
+      <member refid="classneforce_1_1dns__client_1ae8342d575301db851a5abf44ce21eaee" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>set_edns_udp_payload</name></member>
+      <member refid="classneforce_1_1dns__client_1adbbe79de1ad6a3833121398054d22655" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>set_recursion_desired</name></member>
+      <member refid="classneforce_1_1dns__client_1aee154a1dac1be1ceeff537fe402c54a6" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>set_timeout</name></member>
+      <member refid="classneforce_1_1dns__client_1a5aae0d6c9de5e9a416f2844a3cb81a9d" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>set_use_tcp</name></member>
+      <member refid="classneforce_1_1dns__client_1addfc54888dc852e7bb43f17e00ad3aee" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>shared_socket_</name></member>
+      <member refid="classneforce_1_1dns__client_1aa4039f6569d10b9d2ca9ed80e42f840b" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>start_io</name></member>
+      <member refid="classneforce_1_1dns__client_1a6e313df0b1afa3ef94f58750fd28554e" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>stop_io</name></member>
+      <member refid="classneforce_1_1dns__client_1a7bccc77294a9ff6f967044cfa9b9ceaf" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>unregister_query</name></member>
+      <member refid="classneforce_1_1dns__client_1a602ea7c0d4309bb2d14391b110daeaec" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>update_cache</name></member>
+      <member refid="classneforce_1_1dns__client_1a3425a45e48820036f0101eb6ee7b061c" prot="private" virt="non-virtual"><scope>neforce::dns_client</scope><name>use_tcp_</name></member>
+      <member refid="classneforce_1_1dns__client_1a16bd927b59cfa6e756ab47e2fc0fa837" prot="public" virt="non-virtual"><scope>neforce::dns_client</scope><name>~dns_client</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

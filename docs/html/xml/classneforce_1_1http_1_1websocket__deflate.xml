@@ -1,0 +1,367 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1http_1_1websocket__deflate" kind="class" language="C++" prot="public">
+    <compoundname>neforce::http::websocket_deflate</compoundname>
+    <includes refid="websocket__deflate_8hpp" local="no">websocket_deflate.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1websocket__deflate_1a6b7f221b73351fb81f6f7e9cf113e69f" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::http::websocket_deflate::compress_mode_</definition>
+        <argsstring></argsstring>
+        <name>compress_mode_</name>
+        <qualifiedname>neforce::http::websocket_deflate::compress_mode_</qualifiedname>
+        <briefdescription>
+<para>true=压缩模式，false=解压模式 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" line="75" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1websocket__deflate_1ab4dcd79f7aa088fad5b8be377c250cc5" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int neforce::http::websocket_deflate::window_bits_</definition>
+        <argsstring></argsstring>
+        <name>window_bits_</name>
+        <qualifiedname>neforce::http::websocket_deflate::window_bits_</qualifiedname>
+        <briefdescription>
+<para>LZ77 窗口比特位（8-15） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" line="77" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1websocket__deflate_1afa3f171322119e68999a12a0ab2adf9a" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::http::websocket_deflate::no_context_takeover_</definition>
+        <argsstring></argsstring>
+        <name>no_context_takeover_</name>
+        <qualifiedname>neforce::http::websocket_deflate::no_context_takeover_</qualifiedname>
+        <briefdescription>
+<para>每条消息后是否重置上下文 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" line="79" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1websocket__deflate_1a83cb1d2cd2d74cc1713d825920410d33" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::http::websocket_deflate::initialized_</definition>
+        <argsstring></argsstring>
+        <name>initialized_</name>
+        <qualifiedname>neforce::http::websocket_deflate::initialized_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否已初始化 zlib 流 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" line="81" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1websocket__deflate_1ab66cebeead78a294dc8eb5e7347a238e" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::http::websocket_deflate::stream_finished_</definition>
+        <argsstring></argsstring>
+        <name>stream_finished_</name>
+        <qualifiedname>neforce::http::websocket_deflate::stream_finished_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>流是否已完成（final 帧之后） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" line="83" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1websocket__deflate_1a2fd4ae574782a9f3e5459a35053b8bef" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1zlib__compressor_1_1stream__compressor" kindref="compound">zlib_compressor::stream_compressor</ref> &gt;</type>
+        <definition>unique_ptr&lt;zlib_compressor::stream_compressor&gt; neforce::http::websocket_deflate::compressor_</definition>
+        <argsstring></argsstring>
+        <name>compressor_</name>
+        <qualifiedname>neforce::http::websocket_deflate::compressor_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" line="85" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1websocket__deflate_1a21a85d65e45e250d1a4f5ebe95af5e55" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1zlib__compressor_1_1stream__decompressor" kindref="compound">zlib_compressor::stream_decompressor</ref> &gt;</type>
+        <definition>unique_ptr&lt;zlib_compressor::stream_decompressor&gt; neforce::http::websocket_deflate::decompressor_</definition>
+        <argsstring></argsstring>
+        <name>decompressor_</name>
+        <qualifiedname>neforce::http::websocket_deflate::decompressor_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" line="86" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" bodystart="86" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1websocket__deflate_1a7a25dd4809a3d4f6903e67a126894d11" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::websocket_deflate::ensure_initialized</definition>
+        <argsstring>()</argsstring>
+        <name>ensure_initialized</name>
+        <qualifiedname>neforce::http::websocket_deflate::ensure_initialized</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" line="88" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1websocket__deflate_1a7da2fbbd36cd8ccdddcf9dafb82433d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::websocket_deflate::websocket_deflate</definition>
+        <argsstring>(bool compress, int window_bits, bool no_context_takeover)</argsstring>
+        <name>websocket_deflate</name>
+        <qualifiedname>neforce::http::websocket_deflate::websocket_deflate</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>compress</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>window_bits</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>no_context_takeover</declname>
+        </param>
+        <briefdescription>
+<para>构造压缩/解压器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>compress</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>true=压缩模式, false=解压模式 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>window_bits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>窗口比特位 (8-15) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>no_context_takeover</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>每消息结束后是否重置上下文 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" line="97" column="5"/>
+        <references refid="classneforce_1_1http_1_1websocket__deflate_1a7da2fbbd36cd8ccdddcf9dafb82433d6">websocket_deflate</references>
+        <referencedby refid="classneforce_1_1http_1_1websocket__deflate_1a82cfdbd83c9ce2fb89d61afe11a1dd32">reset_context</referencedby>
+        <referencedby refid="classneforce_1_1http_1_1websocket__deflate_1a7da2fbbd36cd8ccdddcf9dafb82433d6">websocket_deflate</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1websocket__deflate_1ade89c79888aaf9226d80ed74f8aed4a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::websocket_deflate::~websocket_deflate</definition>
+        <argsstring>()=default</argsstring>
+        <name>~websocket_deflate</name>
+        <qualifiedname>neforce::http::websocket_deflate::~websocket_deflate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" line="99" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1websocket__deflate_1a7e3d768b28366516c871be45d7eb10d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::websocket_deflate::websocket_deflate</definition>
+        <argsstring>(const websocket_deflate &amp;)=delete</argsstring>
+        <name>websocket_deflate</name>
+        <qualifiedname>neforce::http::websocket_deflate::websocket_deflate</qualifiedname>
+        <param>
+          <type>const websocket_deflate &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" line="101" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1websocket__deflate_1ab37d19b583c4cc81e9f24ec734f05aa4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1http_1_1websocket__deflate_1a7da2fbbd36cd8ccdddcf9dafb82433d6" kindref="member">websocket_deflate</ref> &amp;</type>
+        <definition>websocket_deflate &amp; neforce::http::websocket_deflate::operator=</definition>
+        <argsstring>(const websocket_deflate &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::http::websocket_deflate::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1http_1_1websocket__deflate_1a7da2fbbd36cd8ccdddcf9dafb82433d6" kindref="member">websocket_deflate</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" line="102" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1websocket__deflate_1a034335ef808f30c4c54634ec01893935" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::websocket_deflate::websocket_deflate</definition>
+        <argsstring>(websocket_deflate &amp;&amp;) noexcept</argsstring>
+        <name>websocket_deflate</name>
+        <qualifiedname>neforce::http::websocket_deflate::websocket_deflate</qualifiedname>
+        <param>
+          <type>websocket_deflate &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" line="103" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1websocket__deflate_1a6ec6701f39fa8a7469feb1d7cd1a978a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1http_1_1websocket__deflate_1a7da2fbbd36cd8ccdddcf9dafb82433d6" kindref="member">websocket_deflate</ref> &amp;</type>
+        <definition>websocket_deflate &amp; neforce::http::websocket_deflate::operator=</definition>
+        <argsstring>(websocket_deflate &amp;&amp;) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::http::websocket_deflate::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1http_1_1websocket__deflate_1a7da2fbbd36cd8ccdddcf9dafb82433d6" kindref="member">websocket_deflate</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" line="104" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1websocket__deflate_1a3ea5ebd952aa4e8f957c5b4425077b06" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::http::websocket_deflate::process</definition>
+        <argsstring>(string_view data, bool is_final)</argsstring>
+        <name>process</name>
+        <qualifiedname>neforce::http::websocket_deflate::process</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>is_final</declname>
+        </param>
+        <briefdescription>
+<para>处理消息（压缩或解压） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1is__final" kindref="compound">is_final</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否最终片段 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>处理后的数据 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" line="112" column="12"/>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+        <references refid="classneforce_1_1http_1_1websocket__deflate_1a3ea5ebd952aa4e8f957c5b4425077b06">process</references>
+        <referencedby refid="classneforce_1_1http_1_1websocket__deflate_1a3ea5ebd952aa4e8f957c5b4425077b06">process</referencedby>
+        <referencedby refid="classneforce_1_1http_1_1websocket__deflate_1a82cfdbd83c9ce2fb89d61afe11a1dd32">reset_context</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1websocket__deflate_1a82cfdbd83c9ce2fb89d61afe11a1dd32" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::websocket_deflate::reset_context</definition>
+        <argsstring>()</argsstring>
+        <name>reset_context</name>
+        <qualifiedname>neforce::http::websocket_deflate::reset_context</qualifiedname>
+        <briefdescription>
+<para>重置上下文（新消息开始时调用） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" line="117" column="10"/>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+        <references refid="classneforce_1_1http_1_1websocket__deflate_1a3ea5ebd952aa4e8f957c5b4425077b06">process</references>
+        <references refid="classneforce_1_1http_1_1websocket__deflate_1a82cfdbd83c9ce2fb89d61afe11a1dd32">reset_context</references>
+        <references refid="classneforce_1_1http_1_1websocket__deflate_1a7da2fbbd36cd8ccdddcf9dafb82433d6">websocket_deflate</references>
+        <referencedby refid="classneforce_1_1http_1_1websocket__deflate_1a82cfdbd83c9ce2fb89d61afe11a1dd32">reset_context</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>per-message deflate 压缩/解压器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>每个 WebSocket 会话持有两个实例：<itemizedlist>
+<listitem><para>一个用于发送方向（压缩）</para>
+</listitem><listitem><para>一个用于接收方向（解压）</para>
+</listitem></itemizedlist>
+</para>
+<para>支持上下文接管优化（跨消息复用 zlib 流状态）。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" line="72" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket_deflate.hpp" bodystart="72" bodyend="118"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1http_1_1websocket__deflate_1a6b7f221b73351fb81f6f7e9cf113e69f" prot="private" virt="non-virtual"><scope>neforce::http::websocket_deflate</scope><name>compress_mode_</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__deflate_1a2fd4ae574782a9f3e5459a35053b8bef" prot="private" virt="non-virtual"><scope>neforce::http::websocket_deflate</scope><name>compressor_</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__deflate_1a21a85d65e45e250d1a4f5ebe95af5e55" prot="private" virt="non-virtual"><scope>neforce::http::websocket_deflate</scope><name>decompressor_</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__deflate_1a7a25dd4809a3d4f6903e67a126894d11" prot="private" virt="non-virtual"><scope>neforce::http::websocket_deflate</scope><name>ensure_initialized</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__deflate_1a83cb1d2cd2d74cc1713d825920410d33" prot="private" virt="non-virtual"><scope>neforce::http::websocket_deflate</scope><name>initialized_</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__deflate_1afa3f171322119e68999a12a0ab2adf9a" prot="private" virt="non-virtual"><scope>neforce::http::websocket_deflate</scope><name>no_context_takeover_</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__deflate_1ab37d19b583c4cc81e9f24ec734f05aa4" prot="public" virt="non-virtual"><scope>neforce::http::websocket_deflate</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__deflate_1a6ec6701f39fa8a7469feb1d7cd1a978a" prot="public" virt="non-virtual"><scope>neforce::http::websocket_deflate</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__deflate_1a3ea5ebd952aa4e8f957c5b4425077b06" prot="public" virt="non-virtual"><scope>neforce::http::websocket_deflate</scope><name>process</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__deflate_1a82cfdbd83c9ce2fb89d61afe11a1dd32" prot="public" virt="non-virtual"><scope>neforce::http::websocket_deflate</scope><name>reset_context</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__deflate_1ab66cebeead78a294dc8eb5e7347a238e" prot="private" virt="non-virtual"><scope>neforce::http::websocket_deflate</scope><name>stream_finished_</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__deflate_1a7da2fbbd36cd8ccdddcf9dafb82433d6" prot="public" virt="non-virtual"><scope>neforce::http::websocket_deflate</scope><name>websocket_deflate</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__deflate_1a7e3d768b28366516c871be45d7eb10d7" prot="public" virt="non-virtual"><scope>neforce::http::websocket_deflate</scope><name>websocket_deflate</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__deflate_1a034335ef808f30c4c54634ec01893935" prot="public" virt="non-virtual"><scope>neforce::http::websocket_deflate</scope><name>websocket_deflate</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__deflate_1ab4dcd79f7aa088fad5b8be377c250cc5" prot="private" virt="non-virtual"><scope>neforce::http::websocket_deflate</scope><name>window_bits_</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__deflate_1ade89c79888aaf9226d80ed74f8aed4a9" prot="public" virt="non-virtual"><scope>neforce::http::websocket_deflate</scope><name>~websocket_deflate</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

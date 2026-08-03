@@ -150,8 +150,8 @@
         </childnode>
       </node>
       <node id="20">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="5" relation="include">
         </childnode>
       </node>
@@ -331,7 +331,7 @@
         <childnode refid="44" relation="include">
         </childnode>
       </node>
-      <node id="69">
+      <node id="70">
         <label>NeForce/core/memory/unique_ptr.hpp</label>
         <link refid="unique__ptr_8hpp"/>
         <childnode refid="17" relation="include">
@@ -340,7 +340,7 @@
         </childnode>
         <childnode refid="52" relation="include">
         </childnode>
-        <childnode refid="70" relation="include">
+        <childnode refid="71" relation="include">
         </childnode>
       </node>
       <node id="36">
@@ -376,30 +376,44 @@
         </childnode>
         <childnode refid="63" relation="include">
         </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
         <childnode refid="52" relation="include">
         </childnode>
       </node>
-      <node id="64">
+      <node id="66">
         <label>NeForce/core/string/basic_string_view.hpp</label>
         <link refid="basic__string__view_8hpp"/>
         <childnode refid="50" relation="include">
         </childnode>
-        <childnode refid="65" relation="include">
+        <childnode refid="67" relation="include">
         </childnode>
-        <childnode refid="66" relation="include">
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
         </childnode>
       </node>
-      <node id="65">
+      <node id="67">
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="39" relation="include">
         </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
       </node>
-      <node id="66">
+      <node id="64">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="63">
+        <label>NeForce/core/string/charset.hpp</label>
+        <link refid="charset_8hpp"/>
+        <childnode refid="64" relation="include">
+        </childnode>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
@@ -409,10 +423,10 @@
         <childnode refid="61" relation="include">
         </childnode>
       </node>
-      <node id="63">
+      <node id="65">
         <label>NeForce/core/string/string_view.hpp</label>
         <link refid="string__view_8hpp"/>
-        <childnode refid="64" relation="include">
+        <childnode refid="66" relation="include">
         </childnode>
       </node>
       <node id="53">
@@ -445,7 +459,7 @@
         <childnode refid="25" relation="include">
         </childnode>
       </node>
-      <node id="70">
+      <node id="71">
         <label>NeForce/core/utility/deleter.hpp</label>
         <link refid="deleter_8hpp"/>
         <childnode refid="3" relation="include">
@@ -475,18 +489,18 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="68">
+      <node id="69">
         <label>NeForce/plugin/iplugin.hpp</label>
         <link refid="iplugin_8hpp"/>
-        <childnode refid="69" relation="include">
+        <childnode refid="70" relation="include">
         </childnode>
         <childnode refid="60" relation="include">
         </childnode>
       </node>
-      <node id="67">
+      <node id="68">
         <label>NeForce/plugin/plugin_entry.hpp</label>
         <link refid="plugin__entry_8hpp"/>
-        <childnode refid="68" relation="include">
+        <childnode refid="69" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -498,7 +512,7 @@
         </childnode>
         <childnode refid="53" relation="include">
         </childnode>
-        <childnode refid="67" relation="include">
+        <childnode refid="68" relation="include">
         </childnode>
       </node>
       <node id="6">
@@ -523,7 +537,8 @@
         <label>utility</label>
       </node>
     </incdepgraph>
-    <innerclass refid="classplugin__manager" prot="public">plugin_manager</innerclass>
+    <innerclass refid="classneforce_1_1plugin__manager" prot="public">neforce::plugin_manager</innerclass>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
     <briefdescription>
 <para>插件管理器 </para>
     </briefdescription>
@@ -542,15 +557,15 @@
 <codeline lineno="16"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight></codeline>
-<codeline lineno="31" refid="classplugin__manager" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/>plugin_manager<sp/>{</highlight></codeline>
+<codeline lineno="31" refid="classneforce_1_1plugin__manager" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/>plugin_manager<sp/>{</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="33" refid="classplugin__manager_1a0814c10a16076c9d160da50950074b6a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classplugin__manager_1a0814c10a16076c9d160da50950074b6a" kindref="member">library_ptr</ref><sp/>=<sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;dynamic_library&gt;</ref>;<sp/></highlight></codeline>
+<codeline lineno="33" refid="classneforce_1_1plugin__manager_1a92d54616f33daceb2fce2606ed42c93a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classneforce_1_1plugin__manager_1a92d54616f33daceb2fce2606ed42c93a" kindref="member">library_ptr</ref><sp/>=<sp/><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr&lt;dynamic_library&gt;</ref>;<sp/></highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/><ref refid="classmutex" kindref="compound">mutex</ref><sp/>mutex_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunordered__map" kindref="compound">unordered_map&lt;string, plugin_ptr&gt;</ref><sp/>plugins_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunordered__map" kindref="compound">unordered_map&lt;string, library_ptr&gt;</ref><sp/>libraries_;<sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunordered__map" kindref="compound">unordered_map&lt;string, string&gt;</ref><sp/>plugin_to_library_;<sp/></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1mutex" kindref="compound">mutex</ref><sp/>mutex_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map&lt;string, plugin_ptr&gt;</ref><sp/>plugins_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map&lt;string, library_ptr&gt;</ref><sp/>libraries_;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map&lt;string, string&gt;</ref><sp/>plugin_to_library_;<sp/></highlight></codeline>
 <codeline lineno="40"><highlight class="normal"></highlight></codeline>
 <codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>plugin_manager()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="45"><highlight class="normal"></highlight></codeline>
@@ -560,26 +575,26 @@
 <codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>plugin_manager(plugin_manager&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>plugin_manager&amp;<sp/>operator=(plugin_manager&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight></codeline>
-<codeline lineno="55" refid="classplugin__manager_1a531cd15ddab97272ca891f2b5bc748fb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classplugin__manager_1a531cd15ddab97272ca891f2b5bc748fb" kindref="member">~plugin_manager</ref>();</highlight></codeline>
+<codeline lineno="55" refid="classneforce_1_1plugin__manager_1a5e3beba62d73e7d58973766fa295cc3e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1plugin__manager_1a5e3beba62d73e7d58973766fa295cc3e" kindref="member">~plugin_manager</ref>();</highlight></codeline>
 <codeline lineno="56"><highlight class="normal"></highlight></codeline>
-<codeline lineno="61" refid="classplugin__manager_1a737ae3ae9b83dea4f53e54d9c5232626" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>plugin_manager&amp;<sp/><ref refid="classplugin__manager_1a737ae3ae9b83dea4f53e54d9c5232626" kindref="member">instance</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="61" refid="classneforce_1_1plugin__manager_1a0ea377045aeb2da648381ecaf459269b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>plugin_manager&amp;<sp/><ref refid="classneforce_1_1plugin__manager_1a0ea377045aeb2da648381ecaf459269b" kindref="member">instance</ref>()<sp/>{</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>plugin_manager<sp/>manager;</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>manager;</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="65"><highlight class="normal"></highlight></codeline>
-<codeline lineno="75" refid="classplugin__manager_1a051225a7c34fc2d4dc5a94f1e14207d9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="classplugin__manager_1a051225a7c34fc2d4dc5a94f1e14207d9" kindref="member">load_plugins</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>pth);</highlight></codeline>
+<codeline lineno="75" refid="classneforce_1_1plugin__manager_1a82d13a894d76d17c040a49a1ece28b81" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1plugin__manager_1a82d13a894d76d17c040a49a1ece28b81" kindref="member">load_plugins</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>pth);</highlight></codeline>
 <codeline lineno="76"><highlight class="normal"></highlight></codeline>
-<codeline lineno="85" refid="classplugin__manager_1a6739effe7939146b9c9bcb196748f01d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classplugin__manager_1a6739effe7939146b9c9bcb196748f01d" kindref="member">load_plugin</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>pth);</highlight></codeline>
+<codeline lineno="85" refid="classneforce_1_1plugin__manager_1a3c3c05b184fdf5f3be6ec1703f879a2e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1plugin__manager_1a3c3c05b184fdf5f3be6ec1703f879a2e" kindref="member">load_plugin</ref>(<ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/>pth);</highlight></codeline>
 <codeline lineno="86"><highlight class="normal"></highlight></codeline>
-<codeline lineno="94" refid="classplugin__manager_1a9beb1072652ecc2f9080f8a545a781ae" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classplugin__manager_1a9beb1072652ecc2f9080f8a545a781ae" kindref="member">unload_plugin</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" kindref="member">name</ref>);</highlight></codeline>
+<codeline lineno="94" refid="classneforce_1_1plugin__manager_1a8243cfcd7bc9aabf76e3d6d9287dc6c1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1plugin__manager_1a8243cfcd7bc9aabf76e3d6d9287dc6c1" kindref="member">unload_plugin</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>name);</highlight></codeline>
 <codeline lineno="95"><highlight class="normal"></highlight></codeline>
-<codeline lineno="101" refid="classplugin__manager_1a6803ab9ba11d94193b89574309e7eea6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="structiplugin" kindref="compound">iplugin</ref>*<sp/><ref refid="classplugin__manager_1a6803ab9ba11d94193b89574309e7eea6" kindref="member">get_plugin</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" kindref="member">name</ref>);</highlight></codeline>
+<codeline lineno="101" refid="classneforce_1_1plugin__manager_1a65ada228e8b4c3d9e289f4f48885b8ae" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="structneforce_1_1iplugin" kindref="compound">iplugin</ref>*<sp/><ref refid="classneforce_1_1plugin__manager_1a65ada228e8b4c3d9e289f4f48885b8ae" kindref="member">get_plugin</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>name);</highlight></codeline>
 <codeline lineno="102"><highlight class="normal"></highlight></codeline>
-<codeline lineno="107" refid="classplugin__manager_1aeedccefd356402794b61119b1efe64b9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classvector" kindref="compound">vector&lt;string&gt;</ref><sp/><ref refid="classplugin__manager_1aeedccefd356402794b61119b1efe64b9" kindref="member">list_plugins</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="107" refid="classneforce_1_1plugin__manager_1a35c7381dcf1a26b8741e3c48a93f9d49" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classneforce_1_1vector" kindref="compound">vector&lt;string&gt;</ref><sp/><ref refid="classneforce_1_1plugin__manager_1a35c7381dcf1a26b8741e3c48a93f9d49" kindref="member">list_plugins</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="108"><highlight class="normal"></highlight></codeline>
-<codeline lineno="114" refid="classplugin__manager_1a448552a566139683700bd74ddc8c303c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classplugin__manager_1a448552a566139683700bd74ddc8c303c" kindref="member">initialize_all</ref>();</highlight></codeline>
+<codeline lineno="114" refid="classneforce_1_1plugin__manager_1aff734fd5ede68e4e2c876152b3944646" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1plugin__manager_1aff734fd5ede68e4e2c876152b3944646" kindref="member">initialize_all</ref>();</highlight></codeline>
 <codeline lineno="115"><highlight class="normal"></highlight></codeline>
-<codeline lineno="122" refid="classplugin__manager_1a1130feb332d99fa333e02f278c015789" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classplugin__manager_1a1130feb332d99fa333e02f278c015789" kindref="member">shutdown_all</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="122" refid="classneforce_1_1plugin__manager_1a324e8ba0dbc3be2af3a89a66e4edf879" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1plugin__manager_1a324e8ba0dbc3be2af3a89a66e4edf879" kindref="member">shutdown_all</ref>()<sp/>noexcept;</highlight></codeline>
 <codeline lineno="123"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="124"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Plugin</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="126"><highlight class="normal"></highlight></codeline>

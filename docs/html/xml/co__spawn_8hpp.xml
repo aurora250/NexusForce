@@ -100,8 +100,8 @@
         </childnode>
       </node>
       <node id="26">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
@@ -229,11 +229,9 @@
         <label>typeinfo</label>
       </node>
     </incdepgraph>
-    <innerclass refid="structco__spawn__task" prot="public">co_spawn_task</innerclass>
-    <innerclass refid="structco__spawn__task_1_1promise__type" prot="public">co_spawn_task::promise_type</innerclass>
-    <sectiondef kind="func">
-      <member refid="group___coroutine_spawn_1ga10a82702bdd477d3f11837b52b06a127" kind="function"><name>co_spawn</name></member>
-    </sectiondef>
+    <innerclass refid="structneforce_1_1co__spawn__task" prot="public">neforce::co_spawn_task</innerclass>
+    <innerclass refid="structneforce_1_1co__spawn__task_1_1promise__type" prot="public">neforce::co_spawn_task::promise_type</innerclass>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
     <briefdescription>
 <para>协程启动器 </para>
     </briefdescription>
@@ -251,40 +249,40 @@
 <codeline lineno="15"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight></codeline>
-<codeline lineno="29" refid="structco__spawn__task" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">co_spawn_task<sp/>{</highlight></codeline>
+<codeline lineno="29" refid="structneforce_1_1co__spawn__task" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">co_spawn_task<sp/>{</highlight></codeline>
 <codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">promise_type<sp/>{</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classexception__ptr" kindref="compound">exception_ptr</ref><sp/>exception_;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1exception__ptr" kindref="compound">exception_ptr</ref><sp/>exception_;</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>co_spawn_task<sp/>get_return_object()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>co_spawn_task{<ref refid="group___coroutine_1ga6b28debebaa0f1d57331130e5ccb6181" kindref="member">coroutine_handle&lt;promise_type&gt;::from_promise</ref>(*</highlight><highlight class="keyword">this</highlight><highlight class="normal">)};<sp/>}</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structsuspend__always" kindref="compound">suspend_always</ref><sp/>initial_suspend()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{};<sp/>}</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>co_spawn_task<sp/>get_return_object()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>co_spawn_task{<ref refid="group___coroutine_1gaeab1ef2c1054244fa37d634f805cf95d" kindref="member">coroutine_handle&lt;promise_type&gt;::from_promise</ref>(*</highlight><highlight class="keyword">this</highlight><highlight class="normal">)};<sp/>}</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structneforce_1_1suspend__always" kindref="compound">suspend_always</ref><sp/>initial_suspend()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{};<sp/>}</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>final_suspend()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">final_awaiter<sp/>{</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>await_ready()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>await_suspend(<ref refid="group___coroutine_1ga6b28debebaa0f1d57331130e5ccb6181" kindref="member">coroutine_handle&lt;promise_type&gt;</ref><sp/>h)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>h.destroy();<sp/>}</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>await_suspend(<ref refid="group___coroutine_1gaeab1ef2c1054244fa37d634f805cf95d" kindref="member">coroutine_handle&lt;promise_type&gt;</ref><sp/>h)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>h.destroy();<sp/>}</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>await_resume()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{}</highlight></codeline>
 <codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>final_awaiter{};</highlight></codeline>
 <codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>return_void()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{}</highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>unhandled_exception()<sp/>{<sp/>exception_<sp/>=<sp/><ref refid="group___exception_handling_1ga71f0549a1cdf5c7742d5172b7bda6a14" kindref="member">current_exception</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>unhandled_exception()<sp/>{<sp/>exception_<sp/>=<sp/><ref refid="group___exception_handling_1gaf0efe4ba1751e45e66d3311a3fd348c2" kindref="member">current_exception</ref>();<sp/>}</highlight></codeline>
 <codeline lineno="45"><highlight class="normal"></highlight></codeline>
 <codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U&gt;</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>await_transform(U&amp;&amp;<sp/>u)<sp/>{</highlight></codeline>
-<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;U&gt;</ref>(u);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" kindref="member">forward&lt;U&gt;</ref>(u);</highlight></codeline>
 <codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___coroutine_1ga6b28debebaa0f1d57331130e5ccb6181" kindref="member">coroutine_handle&lt;promise_type&gt;</ref><sp/>handle_;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___coroutine_1gaeab1ef2c1054244fa37d634f805cf95d" kindref="member">coroutine_handle&lt;promise_type&gt;</ref><sp/>handle_;</highlight></codeline>
 <codeline lineno="53"><highlight class="normal"></highlight></codeline>
-<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>co_spawn_task(<ref refid="group___coroutine_1ga6b28debebaa0f1d57331130e5ccb6181" kindref="member">coroutine_handle&lt;promise_type&gt;</ref><sp/>h)<sp/>:</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>co_spawn_task(<ref refid="group___coroutine_1gaeab1ef2c1054244fa37d634f805cf95d" kindref="member">coroutine_handle&lt;promise_type&gt;</ref><sp/>h)<sp/>:</highlight></codeline>
 <codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>handle_(h)<sp/>{}</highlight></codeline>
 <codeline lineno="56"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"></highlight></codeline>
 <codeline lineno="72"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Executor,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Func&gt;</highlight></codeline>
-<codeline lineno="73" refid="group___coroutine_spawn_1ga10a82702bdd477d3f11837b52b06a127" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group___coroutine_spawn_1ga10a82702bdd477d3f11837b52b06a127" kindref="member">co_spawn</ref>(Executor&amp;&amp;<sp/>exec,<sp/>Func<sp/>func)<sp/>{</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>inner<sp/>=<sp/>[](Func<sp/>f)<sp/>-&gt;<sp/><ref refid="structco__spawn__task" kindref="compound">co_spawn_task</ref><sp/>{<sp/></highlight><highlight class="keyword">co_await</highlight><highlight class="normal"><sp/>f();<sp/>};</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classtask" kindref="compound">task</ref><sp/>=<sp/>inner(func);</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>exec.execute([h<sp/>=<sp/><ref refid="classtask" kindref="compound">task</ref>.handle_]()<sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/>{<sp/>h.resume();<sp/>});</highlight></codeline>
+<codeline lineno="73" refid="group___coroutine_spawn_1ga281be325f4126db51cbab239cda2efb1" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group___coroutine_spawn_1ga281be325f4126db51cbab239cda2efb1" kindref="member">co_spawn</ref>(Executor&amp;&amp;<sp/>exec,<sp/>Func<sp/>func)<sp/>{</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>inner<sp/>=<sp/>[](Func<sp/>f)<sp/>-&gt;<sp/><ref refid="structneforce_1_1co__spawn__task" kindref="compound">co_spawn_task</ref><sp/>{<sp/></highlight><highlight class="keyword">co_await</highlight><highlight class="normal"><sp/>f();<sp/>};</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1task" kindref="compound">task</ref><sp/>=<sp/>inner(func);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>exec.execute([h<sp/>=<sp/><ref refid="classneforce_1_1task" kindref="compound">task</ref>.handle_]()<sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/>{<sp/>h.resume();<sp/>});</highlight></codeline>
 <codeline lineno="77"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="78"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>CoroutineSpawn</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="80"><highlight class="normal"></highlight></codeline>

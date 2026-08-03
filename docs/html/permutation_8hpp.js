@@ -1,9 +1,9 @@
 var permutation_8hpp =
 [
-    [ "is_permutation", "group___permutation_algorithms.html#gad196703828d2af85b374f0a22b3e5655", null ],
-    [ "is_permutation", "group___permutation_algorithms.html#gaced496fe68773549c067c785b18d0991", null ],
-    [ "next_permutation", "group___permutation_algorithms.html#ga237dadd6af1f38d13e4d8d79792c6138", null ],
-    [ "next_permutation", "group___permutation_algorithms.html#gaf560848588f7231ccb6f7b7e418c8364", null ],
-    [ "prev_permutation", "group___permutation_algorithms.html#ga024669302fed44f85d03f9040eff30c0", null ],
-    [ "prev_permutation", "group___permutation_algorithms.html#ga9ebc19acb4e093d3117f45942d689a8c", null ]
+    [ "neforce::is_permutation", "group___permutation_algorithms.html#ga7f0a96b6e19c0a25afd3e7b9761c8b5f", null ],
+    [ "neforce::is_permutation", "group___permutation_algorithms.html#gad0359cf7b9f183a673faef0a32168558", null ],
+    [ "neforce::next_permutation", "group___permutation_algorithms.html#ga3b2a1c5f9903adf04d9ead71982c224c", null ],
+    [ "neforce::next_permutation", "group___permutation_algorithms.html#gafaa5fe1166637049230ea3978a354094", null ],
+    [ "neforce::prev_permutation", "group___permutation_algorithms.html#gae3565581d740d1d3f174eeefc8e26878", null ],
+    [ "neforce::prev_permutation", "group___permutation_algorithms.html#ga013670acb3050e5a4b838661220305fb", null ]
 ];

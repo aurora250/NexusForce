@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
   </td>
  </tr>
  </tbody>
@@ -99,14 +99,16 @@ $(function(){initNavTree('dynamic__library__import_8hpp.html','',''); });
 </div><div class="textblock"><div class="dynheader">
 dynamic_library_import.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dynamic__library__import_8hpp__incl.svg" width="1495" height="1670"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dynamic__library__import_8hpp__incl.svg" width="1598" height="1670"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="dynamic__library__import_8hpp_source.html">浏览该文件的源代码.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 宏定义</h2></td></tr>
-<tr class="memitem:ab8358fbfba7e2b86707ea8024e76f45e" id="r_ab8358fbfba7e2b86707ea8024e76f45e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ab8358fbfba7e2b86707ea8024e76f45e">NEFORCE_DLL_IMPORT_OR</a>(ret,  <a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>,  lib,  sym,  default_val)</td></tr>
+<tr class="memitem:a41849a134bff91d342678d8b1e4f9b5e" id="r_a41849a134bff91d342678d8b1e4f9b5e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a41849a134bff91d342678d8b1e4f9b5e">NEFORCE_DLL_IMPORT</a>(ret,  name,  lib,  sym)</td></tr>
+<tr class="memdesc:a41849a134bff91d342678d8b1e4f9b5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">从动态库导入函数符号  <br /></td></tr>
+<tr class="memitem:ab8358fbfba7e2b86707ea8024e76f45e" id="r_ab8358fbfba7e2b86707ea8024e76f45e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ab8358fbfba7e2b86707ea8024e76f45e">NEFORCE_DLL_IMPORT_OR</a>(ret,  name,  lib,  sym,  default_val)</td></tr>
 <tr class="memdesc:ab8358fbfba7e2b86707ea8024e76f45e"><td class="mdescLeft">&#160;</td><td class="mdescRight">从动态库导入函数符号，失败时返回默认值  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
@@ -115,6 +117,55 @@ dynamic_library_import.hpp 的引用(Include)关系图:</div>
 
 <p class="definition">在文件 <a class="el" href="dynamic__library__import_8hpp_source.html">dynamic_library_import.hpp</a> 中定义.</p>
 </div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">宏定义说明</h2>
+<a id="a41849a134bff91d342678d8b1e4f9b5e" name="a41849a134bff91d342678d8b1e4f9b5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41849a134bff91d342678d8b1e4f9b5e">&#9670;&#160;</a></span>NEFORCE_DLL_IMPORT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEFORCE_DLL_IMPORT</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>ret</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>lib</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>sym</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>值:</b><div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> name = (lib).<span class="keyword">template</span> to_symbol&lt;ret&gt;(sym)</div>
+</div><!-- fragment -->
+<p>从动态库导入函数符号 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ret</td><td>返回类型 </td></tr>
+    <tr><td class="paramname">name</td><td>变量名（作为符号在代码中的名称） </td></tr>
+    <tr><td class="paramname">lib</td><td>动态库引用 </td></tr>
+    <tr><td class="paramname">sym</td><td>符号名称（动态库中的实际符号名）</td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line">dynamic_library dll(<span class="stringliteral">&quot;myplugin.so&quot;</span>);</div>
+<div class="line"><a class="code hl_define" href="#a41849a134bff91d342678d8b1e4f9b5e">NEFORCE_DLL_IMPORT</a>(<span class="keywordtype">int</span>, my_func, dll, <span class="stringliteral">&quot;my_function&quot;</span>);</div>
+<div class="line"><span class="keywordtype">int</span> result = my_func(42);</div>
+<div class="ttc" id="adynamic__library__import_8hpp_html_a41849a134bff91d342678d8b1e4f9b5e"><div class="ttname"><a href="#a41849a134bff91d342678d8b1e4f9b5e">NEFORCE_DLL_IMPORT</a></div><div class="ttdeci">#define NEFORCE_DLL_IMPORT(ret, name, lib, sym)</div><div class="ttdoc">从动态库导入函数符号</div><div class="ttdef"><b>定义</b> <a href="dynamic__library__import_8hpp_source.html#l00028">dynamic_library_import.hpp:28</a></div></div>
+</div><!-- fragment --> 
+<p class="definition">在文件 <a class="el" href="dynamic__library__import_8hpp_source.html">dynamic_library_import.hpp</a> 第 <a class="el" href="dynamic__library__import_8hpp_source.html#l00028">28</a> 行定义.</p>
+
+</div>
+</div>
 <a id="ab8358fbfba7e2b86707ea8024e76f45e" name="ab8358fbfba7e2b86707ea8024e76f45e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab8358fbfba7e2b86707ea8024e76f45e">&#9670;&#160;</a></span>NEFORCE_DLL_IMPORT_OR</h2>
 
@@ -129,7 +180,7 @@ dynamic_library_import.hpp 的引用(Include)关系图:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em><a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a></em></span>, </td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>name</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -148,8 +199,7 @@ dynamic_library_import.hpp 的引用(Include)关系图:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>值:</b><div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> <a class="code hl_function" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a> = (lib).has_symbol(sym) ? (lib).<span class="keyword">template</span> to_symbol&lt;ret&gt;(sym) : (default_val)</div>
-<div class="ttc" id="agroup___thread_html_ga19c672503697d8f9c7dfb3306b9583b1"><div class="ttname"><a href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a></div><div class="ttdeci">bool name(char *buffer, size_t size)</div><div class="ttdoc">获取当前线程名称</div><div class="ttdef"><b>定义</b> <a href="thread_8hpp_source.html#l00475">thread.hpp:475</a></div></div>
+<b>值:</b><div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> name = (lib).has_symbol(sym) ? (lib).<span class="keyword">template</span> to_symbol&lt;ret&gt;(sym) : (default_val)</div>
 </div><!-- fragment -->
 <p>从动态库导入函数符号，失败时返回默认值 </p>
 <dl class="params"><dt>参数</dt><dd>

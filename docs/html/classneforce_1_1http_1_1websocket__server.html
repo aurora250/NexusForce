@@ -1,0 +1,373 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::http::websocket_server类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1http_1_1websocket__server.html','','classneforce_1_1http_1_1websocket__server-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::http::websocket_server类 参考<div class="ingroups"><a class="el" href="group___h_t_t_p.html">HTTP</a> &raquo; <a class="el" href="group___web_socket.html">WebSocket</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>WebSocket服务器类  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="websocket_8hpp_source.html">websocket.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a5ee206306dfad4614c541ac19f5e6bcc" id="r_a5ee206306dfad4614c541ac19f5e6bcc"><td class="memItemLeft"><a id="a5ee206306dfad4614c541ac19f5e6bcc" name="a5ee206306dfad4614c541ac19f5e6bcc"></a>
+using&#160;</td><td class="memItemRight"><b>session_ptr</b> = <a class="el" href="classneforce_1_1shared__ptr.html">shared_ptr</a>&lt;<a class="el" href="classneforce_1_1http_1_1websocket__session.html">websocket_session</a>&gt;</td></tr>
+<tr class="memdesc:a5ee206306dfad4614c541ac19f5e6bcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">会话智能指针类型 <br /></td></tr>
+<tr class="memitem:a00d071d536523b2ba0472376868f6507" id="r_a00d071d536523b2ba0472376868f6507"><td class="memItemLeft"><a id="a00d071d536523b2ba0472376868f6507" name="a00d071d536523b2ba0472376868f6507"></a>
+using&#160;</td><td class="memItemRight"><b>session_handler</b> = <a class="el" href="classneforce_1_1function.html">function</a>&lt;void(<a class="el" href="#a5ee206306dfad4614c541ac19f5e6bcc">session_ptr</a>)&gt;</td></tr>
+<tr class="memdesc:a00d071d536523b2ba0472376868f6507"><td class="mdescLeft">&#160;</td><td class="mdescRight">会话处理器类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a0219e536d292b17ebb069ace9579ffbe" id="r_a0219e536d292b17ebb069ace9579ffbe"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0219e536d292b17ebb069ace9579ffbe">set_io_context</a> (<a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;ctx) noexcept</td></tr>
+<tr class="memdesc:a0219e536d292b17ebb069ace9579ffbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置异步 I/O 执行上下文  <br /></td></tr>
+<tr class="memitem:ac4a82e5b67c27bd1bcb21395142365d2" id="r_ac4a82e5b67c27bd1bcb21395142365d2"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac4a82e5b67c27bd1bcb21395142365d2">route</a> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;<a class="el" href="classneforce_1_1path.html">path</a>, <a class="el" href="#a00d071d536523b2ba0472376868f6507">session_handler</a> handler)</td></tr>
+<tr class="memdesc:ac4a82e5b67c27bd1bcb21395142365d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册WebSocket路由  <br /></td></tr>
+<tr class="memitem:a0fac1c23e244eba53566812b05f5160f" id="r_a0fac1c23e244eba53566812b05f5160f"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a0fac1c23e244eba53566812b05f5160f">handle_upgrade</a> (const <a class="el" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a> &amp;request, <a class="el" href="classneforce_1_1unique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classneforce_1_1tcp__socket.html">tcp_socket</a> &gt; sock)</td></tr>
+<tr class="memdesc:a0fac1c23e244eba53566812b05f5160f"><td class="mdescLeft">&#160;</td><td class="mdescRight">处理WebSocket升级请求  <br /></td></tr>
+<tr class="memitem:a7f5490f1a06a8e92d35e86f51f7601f3" id="r_a7f5490f1a06a8e92d35e86f51f7601f3"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7f5490f1a06a8e92d35e86f51f7601f3">remove_session</a> (const <a class="el" href="#a5ee206306dfad4614c541ac19f5e6bcc">session_ptr</a> &amp;session)</td></tr>
+<tr class="memdesc:a7f5490f1a06a8e92d35e86f51f7601f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除会话  <br /></td></tr>
+<tr class="memitem:a79e68333eb0e7f340799481024abaab1" id="r_a79e68333eb0e7f340799481024abaab1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a79e68333eb0e7f340799481024abaab1">broadcast</a> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;<a class="el" href="group___type_erasure_functions.html#ga897be37123f1690ffa096c58a510dbbe">data</a>, <a class="el" href="group___web_socket.html#gaa6e6a0ac548957aa24b1aa2c6b55d90c">websocket_opcode</a> opcode=<a class="el" href="group___web_socket.html#ggaa6e6a0ac548957aa24b1aa2c6b55d90ca61a96ffcb251bb9bf0abf8fec19d0ea8">websocket_opcode::TEXT</a>)</td></tr>
+<tr class="memdesc:a79e68333eb0e7f340799481024abaab1"><td class="mdescLeft">&#160;</td><td class="mdescRight">向所有会话广播消息  <br /></td></tr>
+<tr class="memitem:a51f4031f6258e833a0c67baec5b3aa76" id="r_a51f4031f6258e833a0c67baec5b3aa76"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a51f4031f6258e833a0c67baec5b3aa76">session_count</a> () const noexcept</td></tr>
+<tr class="memdesc:a51f4031f6258e833a0c67baec5b3aa76"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取活动会话数量  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>WebSocket服务器类 </p>
+<p>管理WebSocket路由和会话，处理协议升级请求。</p>
+<p>使用示例： </p><div class="fragment"><div class="line">websocket_server ws_server;</div>
+<div class="line">ws_server.<a class="code hl_function" href="#ac4a82e5b67c27bd1bcb21395142365d2">route</a>(<span class="stringliteral">&quot;/chat&quot;</span>, [](<a class="code hl_typedef" href="#a5ee206306dfad4614c541ac19f5e6bcc">websocket_server::session_ptr</a> session) {</div>
+<div class="line">    session-&gt;set_message_handler([](<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; msg, <a class="code hl_enumeration" href="group___web_socket.html#gaa6e6a0ac548957aa24b1aa2c6b55d90c">websocket_opcode</a> opcode) {</div>
+<div class="line">        <a class="code hl_function" href="group___console_i_o.html#ga9c4e1ac58957b1892c3091006222f66b">println</a>(<span class="stringliteral">&quot;Received: &quot;</span>, msg);</div>
+<div class="line">        session-&gt;send(<span class="stringliteral">&quot;Echo: &quot;</span> + msg);</div>
+<div class="line">    });</div>
+<div class="line">});</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 在HTTP服务器中处理升级请求</span></div>
+<div class="line"><span class="keywordflow">if</span> (request.method == <a class="code hl_function" href="structneforce_1_1http_1_1http__method.html#aaf85f2c258aaacaab7ca82a9ef103919">http_method::GET</a>() &amp;&amp; request.header(<span class="stringliteral">&quot;Upgrade&quot;</span>) == <span class="stringliteral">&quot;websocket&quot;</span>) {</div>
+<div class="line">    <span class="keywordflow">if</span> (ws_server.<a class="code hl_function" href="#a0fac1c23e244eba53566812b05f5160f">handle_upgrade</a>(request, <a class="code hl_function" href="group___shift_algorithms.html#gae346eba5fb576da65e097b60463d3790">move</a>(socket))) {</div>
+<div class="line">        <span class="keywordflow">return</span>; <span class="comment">// 连接已升级为WebSocket</span></div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="ttc" id="aclassneforce_1_1http_1_1websocket__server_html_a0fac1c23e244eba53566812b05f5160f"><div class="ttname"><a href="#a0fac1c23e244eba53566812b05f5160f">neforce::http::websocket_server::handle_upgrade</a></div><div class="ttdeci">bool handle_upgrade(const http_request &amp;request, unique_ptr&lt; tcp_socket &gt; sock)</div><div class="ttdoc">处理WebSocket升级请求</div></div>
+<div class="ttc" id="aclassneforce_1_1http_1_1websocket__server_html_a5ee206306dfad4614c541ac19f5e6bcc"><div class="ttname"><a href="#a5ee206306dfad4614c541ac19f5e6bcc">neforce::http::websocket_server::session_ptr</a></div><div class="ttdeci">shared_ptr&lt; websocket_session &gt; session_ptr</div><div class="ttdoc">会话智能指针类型</div><div class="ttdef"><b>定义</b> <a href="websocket_8hpp_source.html#l00137">websocket.hpp:137</a></div></div>
+<div class="ttc" id="aclassneforce_1_1http_1_1websocket__server_html_ac4a82e5b67c27bd1bcb21395142365d2"><div class="ttname"><a href="#ac4a82e5b67c27bd1bcb21395142365d2">neforce::http::websocket_server::route</a></div><div class="ttdeci">void route(const string &amp;path, session_handler handler)</div><div class="ttdoc">注册WebSocket路由</div><div class="ttdef"><b>定义</b> <a href="websocket_8hpp_source.html#l00170">websocket.hpp:170</a></div></div>
+<div class="ttc" id="agroup___console_i_o_html_ga9c4e1ac58957b1892c3091006222f66b"><div class="ttname"><a href="group___console_i_o.html#ga9c4e1ac58957b1892c3091006222f66b">neforce::println</a></div><div class="ttdeci">void println(Args &amp;&amp;... args)</div><div class="ttdoc">打印多个值并换行</div><div class="ttdef"><b>定义</b> <a href="console_8hpp_source.html#l00699">console.hpp:699</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_gae346eba5fb576da65e097b60463d3790"><div class="ttname"><a href="group___shift_algorithms.html#gae346eba5fb576da65e097b60463d3790">neforce::move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00312">shift.hpp:312</a></div></div>
+<div class="ttc" id="agroup___web_socket_html_gaa6e6a0ac548957aa24b1aa2c6b55d90c"><div class="ttname"><a href="group___web_socket.html#gaa6e6a0ac548957aa24b1aa2c6b55d90c">neforce::http::websocket_opcode</a></div><div class="ttdeci">websocket_opcode</div><div class="ttdoc">WebSocket帧操作码</div><div class="ttdef"><b>定义</b> <a href="websocket_8hpp_source.html#l00079">websocket.hpp:79</a></div></div>
+<div class="ttc" id="astructneforce_1_1http_1_1http__method_html_aaf85f2c258aaacaab7ca82a9ef103919"><div class="ttname"><a href="structneforce_1_1http_1_1http__method.html#aaf85f2c258aaacaab7ca82a9ef103919">neforce::http::http_method::GET</a></div><div class="ttdeci">static const http_method &amp; GET()</div><div class="ttdoc">GET方法</div></div>
+</div><!-- fragment --> 
+<p class="definition">在文件 <a class="el" href="websocket_8hpp_source.html">websocket.hpp</a> 第 <a class="el" href="websocket_8hpp_source.html#l00135">135</a> 行定义.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a79e68333eb0e7f340799481024abaab1" name="a79e68333eb0e7f340799481024abaab1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79e68333eb0e7f340799481024abaab1">&#9670;&#160;</a></span>broadcast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::http::websocket_server::broadcast </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___web_socket.html#gaa6e6a0ac548957aa24b1aa2c6b55d90c">websocket_opcode</a></td>          <td class="paramname"><span class="paramname"><em>opcode</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___web_socket.html#ggaa6e6a0ac548957aa24b1aa2c6b55d90ca61a96ffcb251bb9bf0abf8fec19d0ea8">websocket_opcode::TEXT</a></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>向所有会话广播消息 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>消息数据 </td></tr>
+    <tr><td class="paramname">opcode</td><td>操作码（默认TEXT） </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">neforce::data()</a> , 以及 <a class="el" href="websocket_8hpp_source.html#l00081">TEXT</a>.</p>
+
+</div>
+</div>
+<a id="a0fac1c23e244eba53566812b05f5160f" name="a0fac1c23e244eba53566812b05f5160f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fac1c23e244eba53566812b05f5160f">&#9670;&#160;</a></span>handle_upgrade()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::http::websocket_server::handle_upgrade </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>request</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1unique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classneforce_1_1tcp__socket.html">tcp_socket</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>sock</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>处理WebSocket升级请求 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>HTTP升级请求 </td></tr>
+    <tr><td class="paramname">sock</td><td>已建立的TCP/SSL socket </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>成功创建会话返回true，未找到对应路由返回false </dd></dl>
+
+</div>
+</div>
+<a id="a7f5490f1a06a8e92d35e86f51f7601f3" name="a7f5490f1a06a8e92d35e86f51f7601f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f5490f1a06a8e92d35e86f51f7601f3">&#9670;&#160;</a></span>remove_session()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::http::websocket_server::remove_session </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a5ee206306dfad4614c541ac19f5e6bcc">session_ptr</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>session</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>移除会话 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">session</td><td>要移除的会话 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac4a82e5b67c27bd1bcb21395142365d2" name="ac4a82e5b67c27bd1bcb21395142365d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4a82e5b67c27bd1bcb21395142365d2">&#9670;&#160;</a></span>route()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::http::websocket_server::route </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>path</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a00d071d536523b2ba0472376868f6507">session_handler</a></td>          <td class="paramname"><span class="paramname"><em>handler</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>注册WebSocket路由 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>路由路径 </td></tr>
+    <tr><td class="paramname">handler</td><td>会话处理器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="websocket_8hpp_source.html">websocket.hpp</a> 第 <a class="el" href="websocket_8hpp_source.html#l00170">170</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">neforce::move()</a>.</p>
+
+</div>
+</div>
+<a id="a51f4031f6258e833a0c67baec5b3aa76" name="a51f4031f6258e833a0c67baec5b3aa76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51f4031f6258e833a0c67baec5b3aa76">&#9670;&#160;</a></span>session_count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> neforce::http::websocket_server::session_count </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取活动会话数量 </p>
+<dl class="section return"><dt>返回</dt><dd>会话数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="websocket_8hpp_source.html">websocket.hpp</a> 第 <a class="el" href="websocket_8hpp_source.html#l00198">198</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a0219e536d292b17ebb069ace9579ffbe" name="a0219e536d292b17ebb069ace9579ffbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0219e536d292b17ebb069ace9579ffbe">&#9670;&#160;</a></span>set_io_context()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::http::websocket_server::set_io_context </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置异步 I/O 执行上下文 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td><a class="el" href="classneforce_1_1io__context.html" title="统一异步操作核心">io_context</a> 引用</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>设置后，新创建的 WebSocket 会话将使用 <a class="el" href="classneforce_1_1io__context.html" title="统一异步操作核心">io_context</a> 驱动 I/O 替代默认的线程模式。 </p>
+
+<p class="definition">在文件 <a class="el" href="websocket_8hpp_source.html">websocket.hpp</a> 第 <a class="el" href="websocket_8hpp_source.html#l00163">163</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="websocket_8hpp_source.html#l00163">set_io_context()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="websocket_8hpp_source.html#l00163">set_io_context()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="websocket_8hpp_source.html">websocket.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><b>http</b></li><li class="navelem"><a href="classneforce_1_1http_1_1websocket__server.html">websocket_server</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

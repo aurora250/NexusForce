@@ -1,0 +1,649 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1sysinfo" kind="class" language="C++" prot="public">
+    <compoundname>neforce::sysinfo</compoundname>
+    <includes refid="sysinfo_8hpp" local="no">sysinfo.hpp</includes>
+    <innerclass refid="structneforce_1_1sysinfo_1_1system__info" prot="public">neforce::sysinfo::system_info</innerclass>
+    <innerclass refid="structneforce_1_1sysinfo_1_1memory__info" prot="public">neforce::sysinfo::memory_info</innerclass>
+    <innerclass refid="structneforce_1_1sysinfo_1_1disk__info" prot="public">neforce::sysinfo::disk_info</innerclass>
+    <innerclass refid="structneforce_1_1sysinfo_1_1_c_p_u__info" prot="public">neforce::sysinfo::CPU_info</innerclass>
+    <innerclass refid="structneforce_1_1sysinfo_1_1os__version__info" prot="public">neforce::sysinfo::os_version_info</innerclass>
+    <innerclass refid="structneforce_1_1sysinfo_1_1network__interface" prot="public">neforce::sysinfo::network_interface</innerclass>
+    <innerclass refid="structneforce_1_1sysinfo_1_1numa__node__info" prot="public">neforce::sysinfo::numa_node_info</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classneforce_1_1sysinfo_1a27105d97f90ef552c74ab1dd05f02b19" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>architecture</name>
+        <qualifiedname>neforce::sysinfo::architecture</qualifiedname>
+        <enumvalue id="classneforce_1_1sysinfo_1a27105d97f90ef552c74ab1dd05f02b19a696b031073e74bf2cb98e5ef201d4aa3" prot="public">
+          <name>UNKNOWN</name>
+          <briefdescription>
+<para>未知架构 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1sysinfo_1a27105d97f90ef552c74ab1dd05f02b19afd1a4608b5b463bc7a41d86a1662d3b7" prot="public">
+          <name>X86</name>
+          <briefdescription>
+<para>32位x86 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1sysinfo_1a27105d97f90ef552c74ab1dd05f02b19af0851da0e02bf22830828822f578dc8f" prot="public">
+          <name>X64</name>
+          <briefdescription>
+<para>64位x86_64 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1sysinfo_1a27105d97f90ef552c74ab1dd05f02b19a47f45e65244c17ec9fa8771a5c6d60e1" prot="public">
+          <name>ARM</name>
+          <briefdescription>
+<para>32位ARM </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1sysinfo_1a27105d97f90ef552c74ab1dd05f02b19ab9b55c80d095761ac7757ced0fedadc4" prot="public">
+          <name>ARM64</name>
+          <briefdescription>
+<para>64位ARM </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1sysinfo_1a27105d97f90ef552c74ab1dd05f02b19a9fe8c36311da48049559d1e1f119f8ad" prot="public">
+          <name>RISCV32</name>
+          <briefdescription>
+<para>32位RISC-V </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1sysinfo_1a27105d97f90ef552c74ab1dd05f02b19aafaf0bad004e6a71e15785a0e5089263" prot="public">
+          <name>RISCV64</name>
+          <briefdescription>
+<para>64位RISC-V </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1sysinfo_1a27105d97f90ef552c74ab1dd05f02b19a444899381b9d044c3d148a9e99a3ec9f" prot="public">
+          <name>LOONGARCH64</name>
+          <briefdescription>
+<para>64位LoongArch </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1sysinfo_1a27105d97f90ef552c74ab1dd05f02b19a3a91efc2ac870d790cd3e6fc9b7c7f9a" prot="public">
+          <name>LOONGARCH32</name>
+          <briefdescription>
+<para>32位LoongArch </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>系统架构枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="167" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" bodystart="167" bodyend="177"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1sysinfo_1a597ca39f995bf313f6773c66c8c35dfb" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1sysinfo_1_1system__info" kindref="compound">system_info</ref></type>
+        <definition>system_info neforce::sysinfo::system_info_</definition>
+        <argsstring></argsstring>
+        <name>system_info_</name>
+        <qualifiedname>neforce::sysinfo::system_info_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>系统信息 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="194" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" bodystart="194" bodyend="194"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sysinfo_1aac6a873c5de143e892f8905bc73bf65d" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1sysinfo_1_1memory__info" kindref="compound">memory_info</ref></type>
+        <definition>memory_info neforce::sysinfo::memory_info_</definition>
+        <argsstring></argsstring>
+        <name>memory_info_</name>
+        <qualifiedname>neforce::sysinfo::memory_info_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>内存信息 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="195" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" bodystart="195" bodyend="195"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sysinfo_1a6132adeee809c93126c9aa4d35348531" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1sysinfo_1_1_c_p_u__info" kindref="compound">CPU_info</ref></type>
+        <definition>CPU_info neforce::sysinfo::cpu_info_</definition>
+        <argsstring></argsstring>
+        <name>cpu_info_</name>
+        <qualifiedname>neforce::sysinfo::cpu_info_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>CPU信息 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="196" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" bodystart="196" bodyend="196"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sysinfo_1aa80038db1c5b6af05eaf31b11331f888" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1sysinfo_1_1os__version__info" kindref="compound">os_version_info</ref></type>
+        <definition>os_version_info neforce::sysinfo::os_version_info_</definition>
+        <argsstring></argsstring>
+        <name>os_version_info_</name>
+        <qualifiedname>neforce::sysinfo::os_version_info_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>操作系统信息 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="197" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" bodystart="197" bodyend="197"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sysinfo_1a4f80057cd05ecf6cee4dcce853505ea8" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1sysinfo_1a27105d97f90ef552c74ab1dd05f02b19" kindref="member">architecture</ref></type>
+        <definition>architecture neforce::sysinfo::architecture_</definition>
+        <argsstring></argsstring>
+        <name>architecture_</name>
+        <qualifiedname>neforce::sysinfo::architecture_</qualifiedname>
+        <initializer>{<ref refid="classneforce_1_1sysinfo_1a27105d97f90ef552c74ab1dd05f02b19a696b031073e74bf2cb98e5ef201d4aa3" kindref="member">architecture::UNKNOWN</ref>}</initializer>
+        <briefdescription>
+<para>系统架构 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="198" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" bodystart="198" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sysinfo_1a953c234899ea182488555b8b5d68a817" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1sysinfo_1_1numa__node__info" kindref="compound">numa_node_info</ref> &gt;</type>
+        <definition>vector&lt;numa_node_info&gt; neforce::sysinfo::numa_nodes_</definition>
+        <argsstring></argsstring>
+        <name>numa_nodes_</name>
+        <qualifiedname>neforce::sysinfo::numa_nodes_</qualifiedname>
+        <briefdescription>
+<para>NUMA 节点信息列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="199" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" bodystart="199" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sysinfo_1ad089c7be29eeeee52b6d2084ad29b5e4" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; neforce::sysinfo::initialized_</definition>
+        <argsstring></argsstring>
+        <name>initialized_</name>
+        <qualifiedname>neforce::sysinfo::initialized_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>初始化标志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="200" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" bodystart="200" bodyend="200"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1sysinfo_1a445cbdfe30ac0274da0c86810a8332fa" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sysinfo::sysinfo</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>sysinfo</name>
+        <qualifiedname>neforce::sysinfo::sysinfo</qualifiedname>
+        <briefdescription>
+<para>私有构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="205" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sysinfo_1a0bd79345d2a9e82ccb353827db9b7154" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sysinfo::~sysinfo</definition>
+        <argsstring>()=default</argsstring>
+        <name>~sysinfo</name>
+        <qualifiedname>neforce::sysinfo::~sysinfo</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="210" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sysinfo_1a9c669bc979dc50901c0d83199085c951" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sysinfo::init</definition>
+        <argsstring>()</argsstring>
+        <name>init</name>
+        <qualifiedname>neforce::sysinfo::init</qualifiedname>
+        <briefdescription>
+<para>初始化系统信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>实际执行信息收集操作，可能抛出异常。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="217" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1sysinfo_1a9fe4f316abb7819b9f646e7f094036b7" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>sysinfo &amp;</type>
+        <definition>static sysinfo &amp; neforce::sysinfo::instance</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>instance</name>
+        <qualifiedname>neforce::sysinfo::instance</qualifiedname>
+        <briefdescription>
+<para>获取单例实例 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>系统信息实例引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="224" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" bodystart="224" bodyend="227"/>
+        <references refid="classneforce_1_1sysinfo_1a9fe4f316abb7819b9f646e7f094036b7" compoundref="sysinfo_8hpp" startline="224" endline="227">instance</references>
+        <referencedby refid="classneforce_1_1sysinfo_1a9fe4f316abb7819b9f646e7f094036b7" compoundref="sysinfo_8hpp" startline="224" endline="227">instance</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sysinfo_1aab54c121846d53dd9029016cc3ef38c4" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___core_types_1gaaa239a2e1903add7d22b684a72e71c9a" kindref="member">float64_t</ref></type>
+        <definition>static float64_t neforce::sysinfo::cpu_usage</definition>
+        <argsstring>()</argsstring>
+        <name>cpu_usage</name>
+        <qualifiedname>neforce::sysinfo::cpu_usage</qualifiedname>
+        <briefdescription>
+<para>获取当前CPU使用率 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>CPU使用百分比（0.0-100.0） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="290" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sysinfo_1aad2b6acea7191e491ad91edd75839a93" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>static uint32_t neforce::sysinfo::process_count</definition>
+        <argsstring>()</argsstring>
+        <name>process_count</name>
+        <qualifiedname>neforce::sysinfo::process_count</qualifiedname>
+        <briefdescription>
+<para>获取当前运行的进程数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>进程数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="296" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sysinfo_1a4c6c3cb353bb9d5bab0ea3829a834abb" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1sysinfo_1_1disk__info" kindref="compound">disk_info</ref></type>
+        <definition>static disk_info neforce::sysinfo::get_disk_info</definition>
+        <argsstring>(const char *path=nullptr)</argsstring>
+        <name>get_disk_info</name>
+        <qualifiedname>neforce::sysinfo::get_disk_info</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>path</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>获取指定路径的磁盘空间信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件系统路径，若为 nullptr 则自动获取当前工作目录所在磁盘或根目录 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>磁盘信息 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="303" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sysinfo_1aa984141595afae06ddec5754ea8db0fe" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1sysinfo_1_1network__interface" kindref="compound">network_interface</ref> &gt;</type>
+        <definition>static vector&lt; network_interface &gt; neforce::sysinfo::network_interfaces</definition>
+        <argsstring>()</argsstring>
+        <name>network_interfaces</name>
+        <qualifiedname>neforce::sysinfo::network_interfaces</qualifiedname>
+        <briefdescription>
+<para>枚举所有网络接口 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>网络接口信息列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="309" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sysinfo_1a1c8d3513840f589e42701aab4cd8af05" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga5405672bf9962081e6fcd1448d4bce4a" kindref="member">uint64_t</ref></type>
+        <definition>static uint64_t neforce::sysinfo::uptime_seconds</definition>
+        <argsstring>()</argsstring>
+        <name>uptime_seconds</name>
+        <qualifiedname>neforce::sysinfo::uptime_seconds</qualifiedname>
+        <briefdescription>
+<para>获取系统运行时间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>系统启动以来的秒数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="315" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1sysinfo_1a7cfe2d6a6567ad49aadc02b60b8ffdfb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sysinfo::sysinfo</definition>
+        <argsstring>(const sysinfo &amp;)=delete</argsstring>
+        <name>sysinfo</name>
+        <qualifiedname>neforce::sysinfo::sysinfo</qualifiedname>
+        <param>
+          <type>const sysinfo &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="229" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sysinfo_1a444cc7658c0abe9b60d1e60ed9044581" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>sysinfo &amp;</type>
+        <definition>sysinfo &amp; neforce::sysinfo::operator=</definition>
+        <argsstring>(const sysinfo &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::sysinfo::operator=</qualifiedname>
+        <param>
+          <type>const sysinfo &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="230" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sysinfo_1a0b31d002ba0fac3621db1fe2467aac8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sysinfo::sysinfo</definition>
+        <argsstring>(sysinfo &amp;&amp;)=delete</argsstring>
+        <name>sysinfo</name>
+        <qualifiedname>neforce::sysinfo::sysinfo</qualifiedname>
+        <param>
+          <type>sysinfo &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="231" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sysinfo_1a51320378339ccfebe55042079ab3eb26" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>sysinfo &amp;</type>
+        <definition>sysinfo &amp; neforce::sysinfo::operator=</definition>
+        <argsstring>(sysinfo &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::sysinfo::operator=</qualifiedname>
+        <param>
+          <type>sysinfo &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="232" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sysinfo_1aa65ba66521c5b1eb70ad5a38572167d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sysinfo::refresh</definition>
+        <argsstring>()</argsstring>
+        <name>refresh</name>
+        <qualifiedname>neforce::sysinfo::refresh</qualifiedname>
+        <briefdescription>
+<para>刷新系统信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>重新收集所有系统信息，更新缓存的数据。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="239" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sysinfo_1ae5628f88773c1da5aca39d76113632df" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="structneforce_1_1sysinfo_1_1system__info" kindref="compound">system_info</ref> &amp;</type>
+        <definition>const system_info &amp; neforce::sysinfo::get_system_info</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_system_info</name>
+        <qualifiedname>neforce::sysinfo::get_system_info</qualifiedname>
+        <briefdescription>
+<para>获取系统底层信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>系统信息结构引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="245" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" bodystart="245" bodyend="245"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sysinfo_1af2314d3b9f307b64a139e6f3e8e89395" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="structneforce_1_1sysinfo_1_1memory__info" kindref="compound">memory_info</ref> &amp;</type>
+        <definition>const memory_info &amp; neforce::sysinfo::get_memory_info</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_memory_info</name>
+        <qualifiedname>neforce::sysinfo::get_memory_info</qualifiedname>
+        <briefdescription>
+<para>获取内存信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>内存信息结构引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="251" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" bodystart="251" bodyend="251"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sysinfo_1a95bc7bf201f959fdaedbdaab982b7a6e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="structneforce_1_1sysinfo_1_1_c_p_u__info" kindref="compound">CPU_info</ref> &amp;</type>
+        <definition>const CPU_info &amp; neforce::sysinfo::get_CPU_info</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_CPU_info</name>
+        <qualifiedname>neforce::sysinfo::get_CPU_info</qualifiedname>
+        <briefdescription>
+<para>获取CPU信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>CPU信息结构引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="257" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" bodystart="257" bodyend="257"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sysinfo_1aede07f3032b920adbea4769a376213cf" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="structneforce_1_1sysinfo_1_1os__version__info" kindref="compound">os_version_info</ref> &amp;</type>
+        <definition>const os_version_info &amp; neforce::sysinfo::get_os_version_info</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_os_version_info</name>
+        <qualifiedname>neforce::sysinfo::get_os_version_info</qualifiedname>
+        <briefdescription>
+<para>获取操作系统版本信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>操作系统版本信息结构引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="263" column="28" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" bodystart="263" bodyend="263"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sysinfo_1aa6d8fd8ab117b12b2986450a56ff2383" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sysinfo_1a27105d97f90ef552c74ab1dd05f02b19" kindref="member">architecture</ref></type>
+        <definition>architecture neforce::sysinfo::get_architecture</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_architecture</name>
+        <qualifiedname>neforce::sysinfo::get_architecture</qualifiedname>
+        <briefdescription>
+<para>获取系统架构 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>架构枚举值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="269" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" bodystart="269" bodyend="269"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sysinfo_1a3d9c3709d1e248dbd24d94728ceda25d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1sysinfo_1_1numa__node__info" kindref="compound">numa_node_info</ref> &gt; &amp;</type>
+        <definition>const vector&lt; numa_node_info &gt; &amp; neforce::sysinfo::get_numa_info</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_numa_info</name>
+        <qualifiedname>neforce::sysinfo::get_numa_info</qualifiedname>
+        <briefdescription>
+<para>获取 NUMA 节点拓扑信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>NUMA 节点信息列表</para>
+</simplesect>
+在支持 NUMA 的系统中返回所有 NUMA 节点的拓扑信息。 不支持 NUMA 的系统返回空列表。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="278" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" bodystart="278" bodyend="278"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sysinfo_1a1418893ac721e5769ff0f19749af785a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::sysinfo::is_initialized</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_initialized</name>
+        <qualifiedname>neforce::sysinfo::is_initialized</qualifiedname>
+        <briefdescription>
+<para>检查是否已初始化 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否已成功初始化 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="284" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" bodystart="284" bodyend="284"/>
+        <references refid="group___memory_order_1ga6367df7d3e137e9b30e17740435d1816" compoundref="memory__order_8hpp" startline="177">neforce::memory_order_acquire</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>系统信息单例类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供系统信息的查询功能，包括：<itemizedlist>
+<listitem><para>CPU信息（型号、频率、核心数）</para>
+</listitem><listitem><para>内存信息（物理内存、虚拟内存、使用率）</para>
+</listitem><listitem><para>操作系统版本</para>
+</listitem><listitem><para>系统架构</para>
+</listitem><listitem><para>系统页面大小、分配粒度等底层信息</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>全局保持唯一的系统信息实例。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" line="35" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp" bodystart="35" bodyend="316"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1sysinfo_1a27105d97f90ef552c74ab1dd05f02b19" prot="public" virt="non-virtual"><scope>neforce::sysinfo</scope><name>architecture</name></member>
+      <member refid="classneforce_1_1sysinfo_1a4f80057cd05ecf6cee4dcce853505ea8" prot="private" virt="non-virtual"><scope>neforce::sysinfo</scope><name>architecture_</name></member>
+      <member refid="classneforce_1_1sysinfo_1a6132adeee809c93126c9aa4d35348531" prot="private" virt="non-virtual"><scope>neforce::sysinfo</scope><name>cpu_info_</name></member>
+      <member refid="classneforce_1_1sysinfo_1aab54c121846d53dd9029016cc3ef38c4" prot="public" virt="non-virtual"><scope>neforce::sysinfo</scope><name>cpu_usage</name></member>
+      <member refid="classneforce_1_1sysinfo_1aa6d8fd8ab117b12b2986450a56ff2383" prot="public" virt="non-virtual"><scope>neforce::sysinfo</scope><name>get_architecture</name></member>
+      <member refid="classneforce_1_1sysinfo_1a95bc7bf201f959fdaedbdaab982b7a6e" prot="public" virt="non-virtual"><scope>neforce::sysinfo</scope><name>get_CPU_info</name></member>
+      <member refid="classneforce_1_1sysinfo_1a4c6c3cb353bb9d5bab0ea3829a834abb" prot="public" virt="non-virtual"><scope>neforce::sysinfo</scope><name>get_disk_info</name></member>
+      <member refid="classneforce_1_1sysinfo_1af2314d3b9f307b64a139e6f3e8e89395" prot="public" virt="non-virtual"><scope>neforce::sysinfo</scope><name>get_memory_info</name></member>
+      <member refid="classneforce_1_1sysinfo_1a3d9c3709d1e248dbd24d94728ceda25d" prot="public" virt="non-virtual"><scope>neforce::sysinfo</scope><name>get_numa_info</name></member>
+      <member refid="classneforce_1_1sysinfo_1aede07f3032b920adbea4769a376213cf" prot="public" virt="non-virtual"><scope>neforce::sysinfo</scope><name>get_os_version_info</name></member>
+      <member refid="classneforce_1_1sysinfo_1ae5628f88773c1da5aca39d76113632df" prot="public" virt="non-virtual"><scope>neforce::sysinfo</scope><name>get_system_info</name></member>
+      <member refid="classneforce_1_1sysinfo_1a9c669bc979dc50901c0d83199085c951" prot="private" virt="non-virtual"><scope>neforce::sysinfo</scope><name>init</name></member>
+      <member refid="classneforce_1_1sysinfo_1ad089c7be29eeeee52b6d2084ad29b5e4" prot="private" virt="non-virtual"><scope>neforce::sysinfo</scope><name>initialized_</name></member>
+      <member refid="classneforce_1_1sysinfo_1a9fe4f316abb7819b9f646e7f094036b7" prot="public" virt="non-virtual"><scope>neforce::sysinfo</scope><name>instance</name></member>
+      <member refid="classneforce_1_1sysinfo_1a1418893ac721e5769ff0f19749af785a" prot="public" virt="non-virtual"><scope>neforce::sysinfo</scope><name>is_initialized</name></member>
+      <member refid="classneforce_1_1sysinfo_1aac6a873c5de143e892f8905bc73bf65d" prot="private" virt="non-virtual"><scope>neforce::sysinfo</scope><name>memory_info_</name></member>
+      <member refid="classneforce_1_1sysinfo_1aa984141595afae06ddec5754ea8db0fe" prot="public" virt="non-virtual"><scope>neforce::sysinfo</scope><name>network_interfaces</name></member>
+      <member refid="classneforce_1_1sysinfo_1a953c234899ea182488555b8b5d68a817" prot="private" virt="non-virtual"><scope>neforce::sysinfo</scope><name>numa_nodes_</name></member>
+      <member refid="classneforce_1_1sysinfo_1a444cc7658c0abe9b60d1e60ed9044581" prot="public" virt="non-virtual"><scope>neforce::sysinfo</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1sysinfo_1a51320378339ccfebe55042079ab3eb26" prot="public" virt="non-virtual"><scope>neforce::sysinfo</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1sysinfo_1aa80038db1c5b6af05eaf31b11331f888" prot="private" virt="non-virtual"><scope>neforce::sysinfo</scope><name>os_version_info_</name></member>
+      <member refid="classneforce_1_1sysinfo_1aad2b6acea7191e491ad91edd75839a93" prot="public" virt="non-virtual"><scope>neforce::sysinfo</scope><name>process_count</name></member>
+      <member refid="classneforce_1_1sysinfo_1aa65ba66521c5b1eb70ad5a38572167d2" prot="public" virt="non-virtual"><scope>neforce::sysinfo</scope><name>refresh</name></member>
+      <member refid="classneforce_1_1sysinfo_1a445cbdfe30ac0274da0c86810a8332fa" prot="private" virt="non-virtual"><scope>neforce::sysinfo</scope><name>sysinfo</name></member>
+      <member refid="classneforce_1_1sysinfo_1a7cfe2d6a6567ad49aadc02b60b8ffdfb" prot="public" virt="non-virtual"><scope>neforce::sysinfo</scope><name>sysinfo</name></member>
+      <member refid="classneforce_1_1sysinfo_1a0b31d002ba0fac3621db1fe2467aac8e" prot="public" virt="non-virtual"><scope>neforce::sysinfo</scope><name>sysinfo</name></member>
+      <member refid="classneforce_1_1sysinfo_1a597ca39f995bf313f6773c66c8c35dfb" prot="private" virt="non-virtual"><scope>neforce::sysinfo</scope><name>system_info_</name></member>
+      <member refid="classneforce_1_1sysinfo_1a1c8d3513840f589e42701aab4cd8af05" prot="public" virt="non-virtual"><scope>neforce::sysinfo</scope><name>uptime_seconds</name></member>
+      <member refid="classneforce_1_1sysinfo_1a0bd79345d2a9e82ccb353827db9b7154" prot="private" virt="non-virtual"><scope>neforce::sysinfo</scope><name>~sysinfo</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -4,7 +4,7 @@
     <compoundname>ParallelAlgorithms</compoundname>
     <title>并行算法</title>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___parallel_algorithms_1gad447586eb3e4c5bd99c06300195deeba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___parallel_algorithms_1ga4a0fb7d4107998892fcf525763602f4b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
@@ -16,16 +16,17 @@
             <type>typename Result</type>
           </param>
           <param>
-            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <type>size_t</type>
             <declname>Threshhold</declname>
             <defname>Threshhold</defname>
             <defval>10</defval>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void reduce</definition>
+        <definition>void neforce::reduce</definition>
         <argsstring>(Iterator first, Iterator last, BinaryOperation op, Result &amp;res)</argsstring>
         <name>reduce</name>
+        <qualifiedname>neforce::reduce</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -117,15 +118,15 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/parallel.hpp" line="42" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/parallel.hpp" bodystart="42" bodyend="59"/>
-        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
-        <references refid="group___iterator_category_checks_1ga599d2f4fe13322580e70e5959b69778d" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
-        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
-        <references refid="group___parallel_algorithms_1gad447586eb3e4c5bd99c06300195deeba" compoundref="parallel_8hpp" startline="42" endline="59">reduce</references>
-        <references refid="group___reference_wrapper_1ga25754a3cc3c12b294f51a704b7d93d0c" compoundref="reference__wrapper_8hpp" startline="132" endline="134">ref</references>
-        <referencedby refid="group___parallel_algorithms_1gad447586eb3e4c5bd99c06300195deeba" compoundref="parallel_8hpp" startline="42" endline="59">reduce</referencedby>
-        <referencedby refid="group___parallel_algorithms_1ga9c84b149470430f99e5bb9f2de2a03dd" compoundref="parallel_8hpp" startline="78" endline="95">transform_reduce</referencedby>
+        <references refid="group___iterator_operation_1ga81cd39ae0fbc7198eef37acc9ff10950" compoundref="iterator_8hpp" startline="201" endline="218">neforce::distance</references>
+        <references refid="group___iterator_category_checks_1gad4ad20a0181ba7c28b10d7f297497fe9" compoundref="concepts_8hpp" startline="540">neforce::is_ranges_input_iter_v</references>
+        <references refid="group___iterator_operation_1gaec610c752e80ab2196ab3377eb84e06b" compoundref="iterator_8hpp" startline="157" endline="161">neforce::next</references>
+        <references refid="group___parallel_algorithms_1ga4a0fb7d4107998892fcf525763602f4b" compoundref="parallel_8hpp" startline="42" endline="59">neforce::reduce</references>
+        <references refid="group___reference_wrapper_1gae07530a0f43e9c46acfc5a1632d57a00" compoundref="reference__wrapper_8hpp" startline="132" endline="134">neforce::ref</references>
+        <referencedby refid="group___parallel_algorithms_1ga4a0fb7d4107998892fcf525763602f4b" compoundref="parallel_8hpp" startline="42" endline="59">neforce::reduce</referencedby>
+        <referencedby refid="group___parallel_algorithms_1ga093aa3ddac9a6cd37fcf464c7c577426" compoundref="parallel_8hpp" startline="78" endline="95">neforce::transform_reduce</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___parallel_algorithms_1ga9c84b149470430f99e5bb9f2de2a03dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___parallel_algorithms_1ga093aa3ddac9a6cd37fcf464c7c577426" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
@@ -140,16 +141,17 @@
             <type>typename Result</type>
           </param>
           <param>
-            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <type>size_t</type>
             <declname>Threshhold</declname>
             <defname>Threshhold</defname>
             <defval>10</defval>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void transform_reduce</definition>
+        <definition>void neforce::transform_reduce</definition>
         <argsstring>(Iterator first, Iterator last, UnaryOperation transform, BinaryOp reduce, Result &amp;res)</argsstring>
         <name>transform_reduce</name>
+        <qualifiedname>neforce::transform_reduce</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -261,14 +263,15 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/parallel.hpp" line="78" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/parallel.hpp" bodystart="78" bodyend="95"/>
-        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
-        <references refid="group___type_initialize_function_1ga1278f68876e9220819c733bc1b3a93c1" compoundref="type__traits_8hpp" startline="4339" endline="4342">initialize</references>
-        <references refid="group___iterator_category_checks_1ga599d2f4fe13322580e70e5959b69778d" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
-        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
-        <references refid="group___parallel_algorithms_1gad447586eb3e4c5bd99c06300195deeba" compoundref="parallel_8hpp" startline="42" endline="59">reduce</references>
-        <references refid="group___reference_wrapper_1ga25754a3cc3c12b294f51a704b7d93d0c" compoundref="reference__wrapper_8hpp" startline="132" endline="134">ref</references>
-        <references refid="group___parallel_algorithms_1ga9c84b149470430f99e5bb9f2de2a03dd" compoundref="parallel_8hpp" startline="78" endline="95">transform_reduce</references>
-        <referencedby refid="group___parallel_algorithms_1ga9c84b149470430f99e5bb9f2de2a03dd" compoundref="parallel_8hpp" startline="78" endline="95">transform_reduce</referencedby>
+        <references refid="group___iterator_operation_1ga81cd39ae0fbc7198eef37acc9ff10950" compoundref="iterator_8hpp" startline="201" endline="218">neforce::distance</references>
+        <references refid="group___type_initialize_function_1gaf8945649f323b427327df549f3c42f9e" compoundref="type__traits_8hpp" startline="4339" endline="4342">neforce::initialize</references>
+        <references refid="group___iterator_category_checks_1gad4ad20a0181ba7c28b10d7f297497fe9" compoundref="concepts_8hpp" startline="540">neforce::is_ranges_input_iter_v</references>
+        <references refid="group___iterator_operation_1gaec610c752e80ab2196ab3377eb84e06b" compoundref="iterator_8hpp" startline="157" endline="161">neforce::next</references>
+        <references refid="group___parallel_algorithms_1ga4a0fb7d4107998892fcf525763602f4b" compoundref="parallel_8hpp" startline="42" endline="59">neforce::reduce</references>
+        <references refid="group___reference_wrapper_1gae07530a0f43e9c46acfc5a1632d57a00" compoundref="reference__wrapper_8hpp" startline="132" endline="134">neforce::ref</references>
+        <references refid="group___shift_algorithms_1gabe4fe08cdf85064e0deae1194b9bc6f3" compoundref="shift_8hpp" startline="947" endline="960">neforce::transform</references>
+        <references refid="group___parallel_algorithms_1ga093aa3ddac9a6cd37fcf464c7c577426" compoundref="parallel_8hpp" startline="78" endline="95">neforce::transform_reduce</references>
+        <referencedby refid="group___parallel_algorithms_1ga093aa3ddac9a6cd37fcf464c7c577426" compoundref="parallel_8hpp" startline="78" endline="95">neforce::transform_reduce</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

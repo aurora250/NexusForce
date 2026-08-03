@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: string_builder.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('string__builder_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">string_builder.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="string__builder_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_STRING_STRING_BUILDER_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_STRING_STRING_BUILDER_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="istringify_8hpp.html">NeForce/core/interface/istringify.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>NEFORCE_BEGIN_NAMESPACE__</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span></div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="};">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classneforce_1_1string__builder.html">   27</a></span><span class="keyword">class </span><a class="code hl_function" href="classneforce_1_1string__builder.html#acefa28ed19cba59cc700b97907a1be06">string_builder</a> {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classneforce_1_1string__builder.html#acefa28ed19cba59cc700b97907a1be06">   32</a></span>    <a class="code hl_function" href="classneforce_1_1string__builder.html#acefa28ed19cba59cc700b97907a1be06">string_builder</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classneforce_1_1string__builder.html#a4c53ae4708c5f415931537c5a62f453c">   38</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classneforce_1_1string__builder.html#a4c53ae4708c5f415931537c5a62f453c">reserve_pieces</a>(<span class="keyword">const</span> <span class="keywordtype">size_t</span> n) { pieces_.reserve(n); }</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classneforce_1_1string__builder.html#a327fe2c5124a92100bf0e97ccaa25f82">   44</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classneforce_1_1string__builder.html#a327fe2c5124a92100bf0e97ccaa25f82">reserve</a>(<span class="keyword">const</span> <span class="keywordtype">size_t</span> n) { reserved_size_ = n; }</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span></div>
+<div class="foldopen" id="foldopen00051" data-start="{" data-end="}">
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classneforce_1_1string__builder.html#a316ef1f5eedafa132349e6d8021ac2ab">   51</a></span>    <a class="code hl_function" href="classneforce_1_1string__builder.html#acefa28ed19cba59cc700b97907a1be06">string_builder</a>&amp; <a class="code hl_function" href="classneforce_1_1string__builder.html#a316ef1f5eedafa132349e6d8021ac2ab">append</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group___string_view.html#ga5a6e8b9da034ce8d4818231c4e005eff">string_view</a> sv) {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        pieces_.push_back(sv);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        total_size_ += sv.<a class="code hl_function" href="classneforce_1_1basic__string__view.html#a5c3cc7bb70d1ce39a7e41c31d66cf1b3">size</a>();</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    }</div>
+</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="classneforce_1_1string__builder.html#ac04f9fd90fabcd46f3f97918060511fd">   62</a></span>    <a class="code hl_function" href="classneforce_1_1string__builder.html#acefa28ed19cba59cc700b97907a1be06">string_builder</a>&amp; <a class="code hl_function" href="classneforce_1_1string__builder.html#ac04f9fd90fabcd46f3f97918060511fd">append</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str) { <span class="keywordflow">return</span> <a class="code hl_function" href="classneforce_1_1string__builder.html#ac04f9fd90fabcd46f3f97918060511fd">append</a>(str.<a class="code hl_function" href="classneforce_1_1basic__string.html#a0049fbf44e36f4c7f57ebc85a2b0a376">view</a>()); }</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="classneforce_1_1string__builder.html#a688da96329bbea1b1f769b0966422215">   69</a></span>    <a class="code hl_function" href="classneforce_1_1string__builder.html#acefa28ed19cba59cc700b97907a1be06">string_builder</a>&amp; <a class="code hl_function" href="classneforce_1_1string__builder.html#a688da96329bbea1b1f769b0966422215">append</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* str) { <span class="keywordflow">return</span> <a class="code hl_function" href="classneforce_1_1string__builder.html#a688da96329bbea1b1f769b0966422215">append</a>(<a class="code hl_typedef" href="group___string_view.html#ga5a6e8b9da034ce8d4818231c4e005eff">string_view</a>(str)); }</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span></div>
+<div class="foldopen" id="foldopen00076" data-start="{" data-end="}">
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="classneforce_1_1string__builder.html#a992b3ba5d4af777b572bd4bbae771a63">   76</a></span>    <a class="code hl_function" href="classneforce_1_1string__builder.html#acefa28ed19cba59cc700b97907a1be06">string_builder</a>&amp; <a class="code hl_function" href="classneforce_1_1string__builder.html#a992b3ba5d4af777b572bd4bbae771a63">append</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> c) {</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        owned_pieces_.emplace_back(1, c);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        pieces_.push_back(owned_pieces_.back().view());</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        total_size_ += 1;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    }</div>
+</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> P = package_t&lt;T&gt;,</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>              enable_if_t&lt;is_packaged_v&lt;T&gt; &amp;&amp; is_base_of_v&lt;i<span class="keywordtype">string</span>ify&lt;P&gt;, P&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00091" data-start="{" data-end="}">
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="classneforce_1_1string__builder.html#ac71bbfab438dc427f846e7d5837b202d">   91</a></span>    <a class="code hl_function" href="classneforce_1_1string__builder.html#acefa28ed19cba59cc700b97907a1be06">string_builder</a>&amp; <a class="code hl_function" href="classneforce_1_1string__builder.html#ac71bbfab438dc427f846e7d5837b202d">append</a>(<span class="keyword">const</span> T&amp; value) {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        owned_pieces_.push_back(P(value).<a class="code hl_function" href="group___u_t_f_converts.html#gab37042647bf269d5f84844a00bc70fc4">to_string</a>());</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        pieces_.push_back(owned_pieces_.back().view());</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        total_size_ += owned_pieces_.back().<a class="code hl_function" href="classneforce_1_1string__builder.html#a25364b4aa3a74f49a4473cfb0afe2d2c">size</a>();</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    }</div>
+</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, enable_if_t&lt;is_base_of_v&lt;i<span class="keywordtype">string</span>ify&lt;T&gt;, T&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00105" data-start="{" data-end="}">
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="classneforce_1_1string__builder.html#a35780c315e205f5a2e075eb96785464b">  105</a></span>    <a class="code hl_function" href="classneforce_1_1string__builder.html#acefa28ed19cba59cc700b97907a1be06">string_builder</a>&amp; <a class="code hl_function" href="classneforce_1_1string__builder.html#a35780c315e205f5a2e075eb96785464b">append</a>(<span class="keyword">const</span> T&amp; value) {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        owned_pieces_.push_back(value.to_string());</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        pieces_.push_back(owned_pieces_.back().view());</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        total_size_ += owned_pieces_.back().<a class="code hl_function" href="classneforce_1_1string__builder.html#a25364b4aa3a74f49a4473cfb0afe2d2c">size</a>();</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    }</div>
+</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span></div>
+<div class="foldopen" id="foldopen00116" data-start="{" data-end="}">
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="classneforce_1_1string__builder.html#ae5210141aec2ffa6d94a78d7a31d5b9f">  116</a></span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> <a class="code hl_function" href="classneforce_1_1string__builder.html#ae5210141aec2ffa6d94a78d7a31d5b9f">build</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="keywordtype">string</span> result;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        <span class="keyword">const</span> <span class="keywordtype">size_t</span> alloc_size = <a class="code hl_function" href="group___compare_algorithms.html#gacc7ec6cd2134fb437b992f481b7e5057">max</a>(reserved_size_, total_size_);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        result.<a class="code hl_function" href="classneforce_1_1basic__string.html#af873e19bd5a4fa9f7c5353251f83ba48">reserve</a>(alloc_size);</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; piece: pieces_) {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            result.<a class="code hl_function" href="classneforce_1_1basic__string.html#a799fde2078859c22faf7554ccbfc5d1f">append</a>(piece.data(), piece.size());</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        }</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    }</div>
+</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="classneforce_1_1string__builder.html#a4447939dd959ca09a24a05339c1ebd26">  130</a></span>    NEFORCE_NODISCARD <span class="keyword">operator</span> <a class="code hl_typedef" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code hl_function" href="classneforce_1_1string__builder.html#ae5210141aec2ffa6d94a78d7a31d5b9f">build</a>(); }</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno"><a class="line" href="classneforce_1_1string__builder.html#a25364b4aa3a74f49a4473cfb0afe2d2c">  136</a></span>    NEFORCE_NODISCARD <span class="keywordtype">size_t</span> <a class="code hl_function" href="classneforce_1_1string__builder.html#a25364b4aa3a74f49a4473cfb0afe2d2c">size</a>() const noexcept { <span class="keywordflow">return</span> total_size_; }</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno"><a class="line" href="classneforce_1_1string__builder.html#a8d225746933e9c55111edca692aa5120">  142</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classneforce_1_1string__builder.html#a8d225746933e9c55111edca692aa5120">empty</a>() const noexcept { <span class="keywordflow">return</span> total_size_ == 0; }</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span></div>
+<div class="foldopen" id="foldopen00147" data-start="{" data-end="}">
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno"><a class="line" href="classneforce_1_1string__builder.html#a1329d4020745daad8fe08e484949d55e">  147</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classneforce_1_1string__builder.html#a1329d4020745daad8fe08e484949d55e">clear</a>() noexcept {</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        pieces_.clear();</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        owned_pieces_.clear();</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        total_size_ = 0;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        reserved_size_ = 0;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    }</div>
+</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <a class="code hl_class" href="classneforce_1_1vector.html">vector&lt;string_view&gt;</a> pieces_;  </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <a class="code hl_class" href="classneforce_1_1vector.html">vector&lt;string&gt;</a> owned_pieces_; </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="keywordtype">size_t</span> total_size_ = 0;       </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <span class="keywordtype">size_t</span> reserved_size_ = 0;    </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>};</div>
+</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>NEFORCE_BEGIN_INNER__</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="preprocessor">#ifdef NEFORCE_STANDARD_17</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="keywordtype">void</span> __concat_append(string_builder&amp; sb, Args&amp;&amp;... args) {</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    (sb.append(_NEFORCE forward&lt;Args&gt;(args)), ...);</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>}</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> First, <span class="keyword">typename</span>... Rest&gt;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="keywordtype">void</span> __concat_append(string_builder&amp; sb, First&amp;&amp; first, Rest&amp;&amp;... rest) {</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    sb.append(_NEFORCE forward&lt;First&gt;(first));</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    __concat_append(sb, _NEFORCE forward&lt;Rest&gt;(rest)...);</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>}</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Last&gt;</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="keywordtype">void</span> __concat_append(string_builder&amp; sb, Last&amp;&amp; last) {</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    sb.append(_NEFORCE forward&lt;Last&gt;(last));</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>}</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>NEFORCE_END_INNER__</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span></div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args, <a class="code hl_typedef" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt;(<span class="keyword">sizeof</span>...(Args) &gt; 0), <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00191" data-start="{" data-end="}">
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno"><a class="line" href="group___string.html#ga7e7ac025ac6df3d18c9ecaa30753896c">  191</a></span>NEFORCE_NODISCARD <span class="keywordtype">string</span> <a class="code hl_function" href="group___string.html#ga7e7ac025ac6df3d18c9ecaa30753896c">concatenate</a>(Args&amp;&amp;... args) {</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <a class="code hl_class" href="classneforce_1_1string__builder.html">string_builder</a> sb;</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    inner::__concat_append(sb, _NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#gaae3d0159afe42df987e129188261b635">forward&lt;Args&gt;</a>(args)...);</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="keywordflow">return</span> sb.<a class="code hl_function" href="classneforce_1_1string__builder.html#ae5210141aec2ffa6d94a78d7a31d5b9f">build</a>();</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>}</div>
+</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> <span class="comment">// String</span></div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span> </div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_STRING_STRING_BUILDER_HPP__</span></div>
+<div class="ttc" id="aclassneforce_1_1basic__string__view_html_a5c3cc7bb70d1ce39a7e41c31d66cf1b3"><div class="ttname"><a href="classneforce_1_1basic__string__view.html#a5c3cc7bb70d1ce39a7e41c31d66cf1b3">neforce::basic_string_view::size</a></div><div class="ttdeci">constexpr size_type size() const noexcept</div><div class="ttdoc">获取字符串长度</div><div class="ttdef"><b>定义</b> <a href="basic__string__view_8hpp_source.html#l00306">basic_string_view.hpp:306</a></div></div>
+<div class="ttc" id="aclassneforce_1_1basic__string_html_a0049fbf44e36f4c7f57ebc85a2b0a376"><div class="ttname"><a href="classneforce_1_1basic__string.html#a0049fbf44e36f4c7f57ebc85a2b0a376">neforce::basic_string::view</a></div><div class="ttdeci">constexpr view_type view() const noexcept</div><div class="ttdoc">获取字符串视图</div><div class="ttdef"><b>定义</b> <a href="basic__string_8hpp_source.html#l02147">basic_string.hpp:2147</a></div></div>
+<div class="ttc" id="aclassneforce_1_1basic__string_html_a799fde2078859c22faf7554ccbfc5d1f"><div class="ttname"><a href="classneforce_1_1basic__string.html#a799fde2078859c22faf7554ccbfc5d1f">neforce::basic_string::append</a></div><div class="ttdeci">constexpr basic_string &amp; append(size_type n, value_type value)</div><div class="ttdoc">追加多个相同字符</div><div class="ttdef"><b>定义</b> <a href="basic__string_8hpp_source.html#l01573">basic_string.hpp:1573</a></div></div>
+<div class="ttc" id="aclassneforce_1_1basic__string_html_af873e19bd5a4fa9f7c5353251f83ba48"><div class="ttname"><a href="classneforce_1_1basic__string.html#af873e19bd5a4fa9f7c5353251f83ba48">neforce::basic_string::reserve</a></div><div class="ttdeci">constexpr void reserve(const size_type n)</div><div class="ttdoc">预留容量</div><div class="ttdef"><b>定义</b> <a href="basic__string_8hpp_source.html#l01275">basic_string.hpp:1275</a></div></div>
+<div class="ttc" id="aclassneforce_1_1string__builder_html"><div class="ttname"><a href="classneforce_1_1string__builder.html">neforce::string_builder</a></div><div class="ttdoc">延迟拼接的字符串构建器</div><div class="ttdef"><b>定义</b> <a href="#l00027">string_builder.hpp:27</a></div></div>
+<div class="ttc" id="aclassneforce_1_1string__builder_html_a1329d4020745daad8fe08e484949d55e"><div class="ttname"><a href="classneforce_1_1string__builder.html#a1329d4020745daad8fe08e484949d55e">neforce::string_builder::clear</a></div><div class="ttdeci">void clear() noexcept</div><div class="ttdoc">清空所有已收集的片段</div><div class="ttdef"><b>定义</b> <a href="#l00147">string_builder.hpp:147</a></div></div>
+<div class="ttc" id="aclassneforce_1_1string__builder_html_a25364b4aa3a74f49a4473cfb0afe2d2c"><div class="ttname"><a href="classneforce_1_1string__builder.html#a25364b4aa3a74f49a4473cfb0afe2d2c">neforce::string_builder::size</a></div><div class="ttdeci">size_t size() const noexcept</div><div class="ttdoc">当前总字符数</div><div class="ttdef"><b>定义</b> <a href="#l00136">string_builder.hpp:136</a></div></div>
+<div class="ttc" id="aclassneforce_1_1string__builder_html_a316ef1f5eedafa132349e6d8021ac2ab"><div class="ttname"><a href="classneforce_1_1string__builder.html#a316ef1f5eedafa132349e6d8021ac2ab">neforce::string_builder::append</a></div><div class="ttdeci">string_builder &amp; append(const string_view sv)</div><div class="ttdoc">追加字符串视图</div><div class="ttdef"><b>定义</b> <a href="#l00051">string_builder.hpp:51</a></div></div>
+<div class="ttc" id="aclassneforce_1_1string__builder_html_a327fe2c5124a92100bf0e97ccaa25f82"><div class="ttname"><a href="classneforce_1_1string__builder.html#a327fe2c5124a92100bf0e97ccaa25f82">neforce::string_builder::reserve</a></div><div class="ttdeci">void reserve(const size_t n)</div><div class="ttdoc">预留输出总大小</div><div class="ttdef"><b>定义</b> <a href="#l00044">string_builder.hpp:44</a></div></div>
+<div class="ttc" id="aclassneforce_1_1string__builder_html_a35780c315e205f5a2e075eb96785464b"><div class="ttname"><a href="classneforce_1_1string__builder.html#a35780c315e205f5a2e075eb96785464b">neforce::string_builder::append</a></div><div class="ttdeci">string_builder &amp; append(const T &amp;value)</div><div class="ttdoc">追加任意可转为字符串的值</div><div class="ttdef"><b>定义</b> <a href="#l00105">string_builder.hpp:105</a></div></div>
+<div class="ttc" id="aclassneforce_1_1string__builder_html_a4c53ae4708c5f415931537c5a62f453c"><div class="ttname"><a href="classneforce_1_1string__builder.html#a4c53ae4708c5f415931537c5a62f453c">neforce::string_builder::reserve_pieces</a></div><div class="ttdeci">void reserve_pieces(const size_t n)</div><div class="ttdoc">预留片段容量</div><div class="ttdef"><b>定义</b> <a href="#l00038">string_builder.hpp:38</a></div></div>
+<div class="ttc" id="aclassneforce_1_1string__builder_html_a688da96329bbea1b1f769b0966422215"><div class="ttname"><a href="classneforce_1_1string__builder.html#a688da96329bbea1b1f769b0966422215">neforce::string_builder::append</a></div><div class="ttdeci">string_builder &amp; append(const char *str)</div><div class="ttdoc">追加 C 风格字符串</div><div class="ttdef"><b>定义</b> <a href="#l00069">string_builder.hpp:69</a></div></div>
+<div class="ttc" id="aclassneforce_1_1string__builder_html_a8d225746933e9c55111edca692aa5120"><div class="ttname"><a href="classneforce_1_1string__builder.html#a8d225746933e9c55111edca692aa5120">neforce::string_builder::empty</a></div><div class="ttdeci">bool empty() const noexcept</div><div class="ttdoc">是否为空</div><div class="ttdef"><b>定义</b> <a href="#l00142">string_builder.hpp:142</a></div></div>
+<div class="ttc" id="aclassneforce_1_1string__builder_html_a992b3ba5d4af777b572bd4bbae771a63"><div class="ttname"><a href="classneforce_1_1string__builder.html#a992b3ba5d4af777b572bd4bbae771a63">neforce::string_builder::append</a></div><div class="ttdeci">string_builder &amp; append(const char c)</div><div class="ttdoc">追加单个字符</div><div class="ttdef"><b>定义</b> <a href="#l00076">string_builder.hpp:76</a></div></div>
+<div class="ttc" id="aclassneforce_1_1string__builder_html_ac04f9fd90fabcd46f3f97918060511fd"><div class="ttname"><a href="classneforce_1_1string__builder.html#ac04f9fd90fabcd46f3f97918060511fd">neforce::string_builder::append</a></div><div class="ttdeci">string_builder &amp; append(const string &amp;str)</div><div class="ttdoc">追加字符串</div><div class="ttdef"><b>定义</b> <a href="#l00062">string_builder.hpp:62</a></div></div>
+<div class="ttc" id="aclassneforce_1_1string__builder_html_ac71bbfab438dc427f846e7d5837b202d"><div class="ttname"><a href="classneforce_1_1string__builder.html#ac71bbfab438dc427f846e7d5837b202d">neforce::string_builder::append</a></div><div class="ttdeci">string_builder &amp; append(const T &amp;value)</div><div class="ttdoc">追加任意可转为字符串的值</div><div class="ttdef"><b>定义</b> <a href="#l00091">string_builder.hpp:91</a></div></div>
+<div class="ttc" id="aclassneforce_1_1string__builder_html_acefa28ed19cba59cc700b97907a1be06"><div class="ttname"><a href="classneforce_1_1string__builder.html#acefa28ed19cba59cc700b97907a1be06">neforce::string_builder::string_builder</a></div><div class="ttdeci">string_builder()=default</div><div class="ttdoc">默认构造函数</div></div>
+<div class="ttc" id="aclassneforce_1_1string__builder_html_ae5210141aec2ffa6d94a78d7a31d5b9f"><div class="ttname"><a href="classneforce_1_1string__builder.html#ae5210141aec2ffa6d94a78d7a31d5b9f">neforce::string_builder::build</a></div><div class="ttdeci">string build() const</div><div class="ttdoc">构建字符串</div><div class="ttdef"><b>定义</b> <a href="#l00116">string_builder.hpp:116</a></div></div>
+<div class="ttc" id="aclassneforce_1_1vector_html"><div class="ttname"><a href="classneforce_1_1vector.html">neforce::vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00167">vector.hpp:167</a></div></div>
+<div class="ttc" id="agroup___args_forward_functions_html_gaae3d0159afe42df987e129188261b635"><div class="ttname"><a href="group___args_forward_functions.html#gaae3d0159afe42df987e129188261b635">neforce::forward</a></div><div class="ttdeci">constexpr T &amp;&amp; forward(remove_reference_t&lt; T &gt; &amp;x) noexcept</div><div class="ttdoc">完美转发左值</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03028">type_traits.hpp:3028</a></div></div>
+<div class="ttc" id="agroup___compare_algorithms_html_gacc7ec6cd2134fb437b992f481b7e5057"><div class="ttname"><a href="group___compare_algorithms.html#gacc7ec6cd2134fb437b992f481b7e5057">neforce::max</a></div><div class="ttdeci">constexpr const T &amp; max(const T &amp;a, const T &amp;b, Compare comp) noexcept(noexcept(comp(a, b)))</div><div class="ttdoc">返回两个值中的较大者</div><div class="ttdef"><b>定义</b> <a href="algorithm_2compare_8hpp_source.html#l00133">algorithm/compare.hpp:133</a></div></div>
+<div class="ttc" id="agroup___string_html_ga2c7973e279b318f9dca5bbf87ca7705f"><div class="ttname"><a href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">neforce::string</a></div><div class="ttdeci">basic_string&lt; char &gt; string</div><div class="ttdoc">字符字符串</div><div class="ttdef"><b>定义</b> <a href="string_8hpp_source.html#l00022">string.hpp:22</a></div></div>
+<div class="ttc" id="agroup___string_html_ga7e7ac025ac6df3d18c9ecaa30753896c"><div class="ttname"><a href="group___string.html#ga7e7ac025ac6df3d18c9ecaa30753896c">neforce::concatenate</a></div><div class="ttdeci">string concatenate(Args &amp;&amp;... args)</div><div class="ttdoc">拼接参数</div><div class="ttdef"><b>定义</b> <a href="#l00191">string_builder.hpp:191</a></div></div>
+<div class="ttc" id="agroup___string_view_html_ga5a6e8b9da034ce8d4818231c4e005eff"><div class="ttname"><a href="group___string_view.html#ga5a6e8b9da034ce8d4818231c4e005eff">neforce::string_view</a></div><div class="ttdeci">basic_string_view&lt; char &gt; string_view</div><div class="ttdoc">字符字符串视图</div><div class="ttdef"><b>定义</b> <a href="string__view_8hpp_source.html#l00022">string_view.hpp:22</a></div></div>
+<div class="ttc" id="agroup___type_traits_utilities_html_ga92c50bf8e7847d7337041d7de81c3336"><div class="ttname"><a href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">neforce::enable_if_t</a></div><div class="ttdeci">typename enable_if&lt; Test, T &gt;::type enable_if_t</div><div class="ttdoc">enable_if的便捷别名</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00118">type_traits.hpp:118</a></div></div>
+<div class="ttc" id="agroup___u_t_f_converts_html_gab37042647bf269d5f84844a00bc70fc4"><div class="ttname"><a href="group___u_t_f_converts.html#gab37042647bf269d5f84844a00bc70fc4">neforce::to_string</a></div><div class="ttdeci">constexpr string to_string(const CharT &amp;c)</div><div class="ttdoc">将字符转换为普通字符串</div><div class="ttdef"><b>定义</b> <a href="icharacter_8hpp_source.html#l00115">icharacter.hpp:115</a></div></div>
+<div class="ttc" id="aistringify_8hpp_html"><div class="ttname"><a href="istringify_8hpp.html">istringify.hpp</a></div><div class="ttdoc">可字符串化接口</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>string</b></li><li class="navelem"><a href="string__builder_8hpp.html">string_builder.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

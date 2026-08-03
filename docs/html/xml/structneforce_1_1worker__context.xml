@@ -1,0 +1,248 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1worker__context" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::worker_context</compoundname>
+    <includes refid="thread__pool_8hpp" local="no">thread_pool.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structneforce_1_1worker__context_1a9ede3b869f184ae3360960add5efd1c3" prot="public" static="no">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>using neforce::worker_context::id_type = uint32_t</definition>
+        <argsstring></argsstring>
+        <name>id_type</name>
+        <qualifiedname>neforce::worker_context::id_type</qualifiedname>
+        <briefdescription>
+<para>线程ID类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="205" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="205" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structneforce_1_1worker__context_1a188406fc526908f5c154303f8579c4b8" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1local__queue" kindref="compound">local_queue</ref></type>
+        <definition>local_queue neforce::worker_context::queue</definition>
+        <argsstring></argsstring>
+        <name>queue</name>
+        <qualifiedname>neforce::worker_context::queue</qualifiedname>
+        <briefdescription>
+<para>本地任务队列 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="207" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="207" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1worker__context_1ab484cdb6fa55a364da7f6f5069c71be3" prot="public" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1worker__context_1a9ede3b869f184ae3360960add5efd1c3" kindref="member">id_type</ref></type>
+        <definition>id_type neforce::worker_context::id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <qualifiedname>neforce::worker_context::id</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>线程ID </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="208" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="208" bodyend="208"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1worker__context_1a53be8e18071d8b9ac70cf75e3519eab0" prot="public" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; neforce::worker_context::is_stealing</definition>
+        <argsstring></argsstring>
+        <name>is_stealing</name>
+        <qualifiedname>neforce::worker_context::is_stealing</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>是否正在执行窃取操作 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="209" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="209" bodyend="209"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1worker__context_1a7f585ac5d5861c07fddc941896b315e6" prot="public" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::worker_context::consecutive_idle_count</definition>
+        <argsstring></argsstring>
+        <name>consecutive_idle_count</name>
+        <qualifiedname>neforce::worker_context::consecutive_idle_count</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>连续空闲次数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="210" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="210" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1worker__context_1aed43d15bf43100891ced63a4a8a21801" prot="public" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::worker_context::cpu_core</definition>
+        <argsstring></argsstring>
+        <name>cpu_core</name>
+        <qualifiedname>neforce::worker_context::cpu_core</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>绑定的 CPU 核心编号 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="211" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="211" bodyend="211"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1worker__context_1ab5a4e8e3472d136cec90caf562561f0e" prot="public" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::worker_context::numa_node</definition>
+        <argsstring></argsstring>
+        <name>numa_node</name>
+        <qualifiedname>neforce::worker_context::numa_node</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>所属 NUMA 节点编号 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="212" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="212" bodyend="212"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1worker__context_1a60cc99bc7aed15116dc671321a9b8885" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::worker_context::worker_context</definition>
+        <argsstring>()=default</argsstring>
+        <name>worker_context</name>
+        <qualifiedname>neforce::worker_context::worker_context</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="214" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1worker__context_1a914edd3d29446d5ab0c4ba027d4aba0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::worker_context::worker_context</definition>
+        <argsstring>(const worker_context &amp;)=delete</argsstring>
+        <name>worker_context</name>
+        <qualifiedname>neforce::worker_context::worker_context</qualifiedname>
+        <param>
+          <type>const worker_context &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="215" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1worker__context_1a2325e87c7ed74e832adc698fa356f665" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>worker_context &amp;</type>
+        <definition>worker_context &amp; neforce::worker_context::operator=</definition>
+        <argsstring>(const worker_context &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::worker_context::operator=</qualifiedname>
+        <param>
+          <type>const worker_context &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="216" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1worker__context_1a96fc358a930e153c8d7543525b84b4d3" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::worker_context::worker_context</definition>
+        <argsstring>(worker_context &amp;&amp;other) noexcept</argsstring>
+        <name>worker_context</name>
+        <qualifiedname>neforce::worker_context::worker_context</qualifiedname>
+        <param>
+          <type>worker_context &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="217" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1worker__context_1ae424a8957d918860f82314b270820652" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>worker_context &amp;</type>
+        <definition>worker_context &amp; neforce::worker_context::operator=</definition>
+        <argsstring>(worker_context &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::worker_context::operator=</qualifiedname>
+        <param>
+          <type>worker_context &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="218" column="20"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>工作线程上下文 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>存储每个工作线程的本地状态信息。 </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>neforce::atomic&lt; bool &gt;</label>
+        <link refid="structneforce_1_1atomic_3_01bool_01_4"/>
+      </node>
+      <node id="2">
+        <label>neforce::local_queue</label>
+        <link refid="classneforce_1_1local__queue"/>
+      </node>
+      <node id="1">
+        <label>neforce::worker_context</label>
+        <link refid="structneforce_1_1worker__context"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>queue</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>is_stealing</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="204" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="204" bodyend="219"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1worker__context_1a7f585ac5d5861c07fddc941896b315e6" prot="public" virt="non-virtual"><scope>neforce::worker_context</scope><name>consecutive_idle_count</name></member>
+      <member refid="structneforce_1_1worker__context_1aed43d15bf43100891ced63a4a8a21801" prot="public" virt="non-virtual"><scope>neforce::worker_context</scope><name>cpu_core</name></member>
+      <member refid="structneforce_1_1worker__context_1ab484cdb6fa55a364da7f6f5069c71be3" prot="public" virt="non-virtual"><scope>neforce::worker_context</scope><name>id</name></member>
+      <member refid="structneforce_1_1worker__context_1a9ede3b869f184ae3360960add5efd1c3" prot="public" virt="non-virtual"><scope>neforce::worker_context</scope><name>id_type</name></member>
+      <member refid="structneforce_1_1worker__context_1a53be8e18071d8b9ac70cf75e3519eab0" prot="public" virt="non-virtual"><scope>neforce::worker_context</scope><name>is_stealing</name></member>
+      <member refid="structneforce_1_1worker__context_1ab5a4e8e3472d136cec90caf562561f0e" prot="public" virt="non-virtual"><scope>neforce::worker_context</scope><name>numa_node</name></member>
+      <member refid="structneforce_1_1worker__context_1a2325e87c7ed74e832adc698fa356f665" prot="public" virt="non-virtual"><scope>neforce::worker_context</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1worker__context_1ae424a8957d918860f82314b270820652" prot="public" virt="non-virtual"><scope>neforce::worker_context</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1worker__context_1a188406fc526908f5c154303f8579c4b8" prot="public" virt="non-virtual"><scope>neforce::worker_context</scope><name>queue</name></member>
+      <member refid="structneforce_1_1worker__context_1a60cc99bc7aed15116dc671321a9b8885" prot="public" virt="non-virtual"><scope>neforce::worker_context</scope><name>worker_context</name></member>
+      <member refid="structneforce_1_1worker__context_1a914edd3d29446d5ab0c4ba027d4aba0e" prot="public" virt="non-virtual"><scope>neforce::worker_context</scope><name>worker_context</name></member>
+      <member refid="structneforce_1_1worker__context_1a96fc358a930e153c8d7543525b84b4d3" prot="public" virt="non-virtual"><scope>neforce::worker_context</scope><name>worker_context</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

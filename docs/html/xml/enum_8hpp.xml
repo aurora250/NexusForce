@@ -81,8 +81,8 @@
         </childnode>
       </node>
       <node id="16">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="11" relation="include">
         </childnode>
       </node>
@@ -251,6 +251,8 @@
         </childnode>
         <childnode refid="45" relation="include">
         </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
         <childnode refid="46" relation="include">
         </childnode>
       </node>
@@ -261,10 +263,20 @@
         </childnode>
         <childnode refid="33" relation="include">
         </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
       </node>
-      <node id="46">
+      <node id="47">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>NeForce/core/string/charset.hpp</label>
+        <link refid="charset_8hpp"/>
+        <childnode refid="47" relation="include">
+        </childnode>
         <childnode refid="9" relation="include">
         </childnode>
       </node>
@@ -391,8 +403,10 @@
         </childnode>
       </node>
     </invincdepgraph>
-    <innerclass refid="structenum__entry" prot="public">enum_entry</innerclass>
-    <innerclass refid="classmeta__enum" prot="public">meta_enum</innerclass>
+    <innerclass refid="structneforce_1_1reflect_1_1enum__entry" prot="public">neforce::reflect::enum_entry</innerclass>
+    <innerclass refid="classneforce_1_1reflect_1_1meta__enum" prot="public">neforce::reflect::meta_enum</innerclass>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
+    <innernamespace refid="namespaceneforce_1_1reflect">neforce::reflect</innernamespace>
     <briefdescription>
 <para>枚举反射元数据 </para>
     </briefdescription>
@@ -410,31 +424,31 @@
 <codeline lineno="15"><highlight class="normal">NEFORCE_BEGIN_REFLECT__</highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight></codeline>
-<codeline lineno="27" refid="structenum__entry" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structenum__entry" kindref="compound">enum_entry</ref><sp/>{</highlight></codeline>
-<codeline lineno="28" refid="structenum__entry_1a0a7e598f2e347d2675efa428e82c9fdb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="structenum__entry_1a0a7e598f2e347d2675efa428e82c9fdb" kindref="member">name</ref>;<sp/></highlight></codeline>
-<codeline lineno="29" refid="structenum__entry_1ae18d7bce95ae58717af49ae54b4cee17" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref><sp/><ref refid="structenum__entry_1ae18d7bce95ae58717af49ae54b4cee17" kindref="member">value</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="27" refid="structneforce_1_1reflect_1_1enum__entry" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structneforce_1_1reflect_1_1enum__entry" kindref="compound">enum_entry</ref><sp/>{</highlight></codeline>
+<codeline lineno="28" refid="structneforce_1_1reflect_1_1enum__entry_1addbf56e9dacdf639b3e48a66a35fe319" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/><ref refid="structneforce_1_1reflect_1_1enum__entry_1addbf56e9dacdf639b3e48a66a35fe319" kindref="member">name</ref>;<sp/></highlight></codeline>
+<codeline lineno="29" refid="structneforce_1_1reflect_1_1enum__entry_1a65005e9a94f138363746c8222a7856e0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga0b098d32ebd9cc922390914e765ca674" kindref="member">int64_t</ref><sp/><ref refid="structneforce_1_1reflect_1_1enum__entry_1a65005e9a94f138363746c8222a7856e0" kindref="member">value</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="30"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight></codeline>
-<codeline lineno="38" refid="classmeta__enum" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classmeta__enum_1ae8f6c792a057d21f268e8664dce1dcfe" kindref="member">meta_enum</ref><sp/>{</highlight></codeline>
+<codeline lineno="38" refid="classneforce_1_1reflect_1_1meta__enum" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classneforce_1_1reflect_1_1meta__enum_1ad7d00f7d70fa4ea12edc79f3c33c0f0f" kindref="member">meta_enum</ref><sp/>{</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>name_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___reflection_1ga541516a057bbd67d55d02ece107883d9" kindref="member">type_id</ref><sp/>underlying_type_id_;<sp/></highlight></codeline>
-<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classvector" kindref="compound">vector&lt;enum_entry&gt;</ref><sp/>entries_;<sp/></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/>name_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___reflection_1ga3680b21ef08e8497fc7255d54c682211" kindref="member">type_id</ref><sp/>underlying_type_id_;<sp/></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1vector" kindref="compound">vector&lt;enum_entry&gt;</ref><sp/>entries_;<sp/></highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight></codeline>
 <codeline lineno="44"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="50" refid="classmeta__enum_1ae8f6c792a057d21f268e8664dce1dcfe" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmeta__enum_1ae8f6c792a057d21f268e8664dce1dcfe" kindref="member">meta_enum</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="classmeta__enum_1adae955d4355c9362254504ef5c6e3fb4" kindref="member">name</ref>,<sp/><ref refid="group___reflection_1ga541516a057bbd67d55d02ece107883d9" kindref="member">type_id</ref><sp/>underlying_id)<sp/>:</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>name_(<ref refid="classmeta__enum_1adae955d4355c9362254504ef5c6e3fb4" kindref="member">name</ref>),</highlight></codeline>
+<codeline lineno="50" refid="classneforce_1_1reflect_1_1meta__enum_1ad7d00f7d70fa4ea12edc79f3c33c0f0f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1reflect_1_1meta__enum_1ad7d00f7d70fa4ea12edc79f3c33c0f0f" kindref="member">meta_enum</ref>(<ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/><ref refid="classneforce_1_1reflect_1_1meta__enum_1acdc49cdf40f3812c84c04eb6e1056fc1" kindref="member">name</ref>,<sp/><ref refid="group___reflection_1ga3680b21ef08e8497fc7255d54c682211" kindref="member">type_id</ref><sp/>underlying_id)<sp/>:</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>name_(<ref refid="classneforce_1_1reflect_1_1meta__enum_1acdc49cdf40f3812c84c04eb6e1056fc1" kindref="member">name</ref>),</highlight></codeline>
 <codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>underlying_type_id_(underlying_id)<sp/>{}</highlight></codeline>
 <codeline lineno="53"><highlight class="normal"></highlight></codeline>
-<codeline lineno="59" refid="classmeta__enum_1a5d017beb719d33e8fb1520eb5874256d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmeta__enum_1a5d017beb719d33e8fb1520eb5874256d" kindref="member">add_entry</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>entry_name,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref><sp/>entry_value)<sp/>{<sp/>entries_.push_back({entry_name,<sp/>entry_value});<sp/>}</highlight></codeline>
+<codeline lineno="59" refid="classneforce_1_1reflect_1_1meta__enum_1a013d55267bfc9996bd80aa1d2288de3a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1reflect_1_1meta__enum_1a013d55267bfc9996bd80aa1d2288de3a" kindref="member">add_entry</ref>(<ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/>entry_name,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga0b098d32ebd9cc922390914e765ca674" kindref="member">int64_t</ref><sp/>entry_value)<sp/>{<sp/>entries_.push_back({entry_name,<sp/>entry_value});<sp/>}</highlight></codeline>
 <codeline lineno="60"><highlight class="normal"></highlight></codeline>
-<codeline lineno="64" refid="classmeta__enum_1adae955d4355c9362254504ef5c6e3fb4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="classmeta__enum_1adae955d4355c9362254504ef5c6e3fb4" kindref="member">name</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>name_;<sp/>}</highlight></codeline>
+<codeline lineno="64" refid="classneforce_1_1reflect_1_1meta__enum_1acdc49cdf40f3812c84c04eb6e1056fc1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/><ref refid="classneforce_1_1reflect_1_1meta__enum_1acdc49cdf40f3812c84c04eb6e1056fc1" kindref="member">name</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>name_;<sp/>}</highlight></codeline>
 <codeline lineno="65"><highlight class="normal"></highlight></codeline>
-<codeline lineno="69" refid="classmeta__enum_1a03554b99cf4fa31e4b172c3595b164b3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="group___reflection_1ga541516a057bbd67d55d02ece107883d9" kindref="member">type_id</ref><sp/><ref refid="classmeta__enum_1a03554b99cf4fa31e4b172c3595b164b3" kindref="member">underlying_type_id</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>underlying_type_id_;<sp/>}</highlight></codeline>
+<codeline lineno="69" refid="classneforce_1_1reflect_1_1meta__enum_1a5e4425b5499fd019f44f6cf88d7ff3ff" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="group___reflection_1ga3680b21ef08e8497fc7255d54c682211" kindref="member">type_id</ref><sp/><ref refid="classneforce_1_1reflect_1_1meta__enum_1a5e4425b5499fd019f44f6cf88d7ff3ff" kindref="member">underlying_type_id</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>underlying_type_id_;<sp/>}</highlight></codeline>
 <codeline lineno="70"><highlight class="normal"></highlight></codeline>
-<codeline lineno="74" refid="classmeta__enum_1a32795151c9d2c41d9d4a008f131ecfde" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;enum_entry&gt;</ref>&amp;<sp/><ref refid="classmeta__enum_1a32795151c9d2c41d9d4a008f131ecfde" kindref="member">entries</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>entries_;<sp/>}</highlight></codeline>
+<codeline lineno="74" refid="classneforce_1_1reflect_1_1meta__enum_1ace541095795d8869a1ba7b0f9070a7bf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1vector" kindref="compound">vector&lt;enum_entry&gt;</ref>&amp;<sp/><ref refid="classneforce_1_1reflect_1_1meta__enum_1ace541095795d8869a1ba7b0f9070a7bf" kindref="member">entries</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>entries_;<sp/>}</highlight></codeline>
 <codeline lineno="75"><highlight class="normal"></highlight></codeline>
-<codeline lineno="82" refid="classmeta__enum_1a275150dcb24264f2dcfbef4b8a81bd56" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classmeta__enum_1a275150dcb24264f2dcfbef4b8a81bd56" kindref="member">value_of</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>entry_name,<sp/><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref>&amp;<sp/>out_value)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="82" refid="classneforce_1_1reflect_1_1meta__enum_1ab98ca8978db54709f25295eccebb6997" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1reflect_1_1meta__enum_1ab98ca8978db54709f25295eccebb6997" kindref="member">value_of</ref>(<ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/>entry_name,<sp/><ref refid="group___core_types_1ga0b098d32ebd9cc922390914e765ca674" kindref="member">int64_t</ref>&amp;<sp/>out_value)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>entry:<sp/>entries_)<sp/>{</highlight></codeline>
 <codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(entry.name<sp/>==<sp/>entry_name)<sp/>{</highlight></codeline>
 <codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>out_value<sp/>=<sp/>entry.value;</highlight></codeline>
@@ -444,7 +458,7 @@
 <codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="91"><highlight class="normal"></highlight></codeline>
-<codeline lineno="97" refid="classmeta__enum_1ae05c82a58b5a8592c641ba5084118b4f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="classmeta__enum_1ae05c82a58b5a8592c641ba5084118b4f" kindref="member">name_of</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref><sp/>entry_value)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="97" refid="classneforce_1_1reflect_1_1meta__enum_1a6ea08524bd9b3a579861eee77933f96d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/><ref refid="classneforce_1_1reflect_1_1meta__enum_1a6ea08524bd9b3a579861eee77933f96d" kindref="member">name_of</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga0b098d32ebd9cc922390914e765ca674" kindref="member">int64_t</ref><sp/>entry_value)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>entry:<sp/>entries_)<sp/>{</highlight></codeline>
 <codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(entry.value<sp/>==<sp/>entry_value)<sp/>{</highlight></codeline>
 <codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>entry.name;</highlight></codeline>

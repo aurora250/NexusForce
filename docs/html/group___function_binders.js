@@ -1,43 +1,43 @@
 var group___function_binders =
 [
-    [ "binder&lt; Sign &gt;", "classbinder.html", null ],
-    [ "binder&lt; Func(BoundArgs...)&gt;", "classbinder_3_01_func_07_bound_args_8_8_8_08_4.html", [
-      [ "binder", "classbinder_3_01_func_07_bound_args_8_8_8_08_4.html#a5d5e0e04c691bc56b95d9e7705ba9189", null ],
-      [ "binder", "classbinder_3_01_func_07_bound_args_8_8_8_08_4.html#ab2beb6d02f0dfb44c226ff3f0c83e12e", null ],
-      [ "binder", "classbinder_3_01_func_07_bound_args_8_8_8_08_4.html#af4553a79833cf454a9d30dafd98335d9", null ],
-      [ "operator()", "classbinder_3_01_func_07_bound_args_8_8_8_08_4.html#a23a5ee9d90c6199210c5761d90ad315f", null ],
-      [ "operator()", "classbinder_3_01_func_07_bound_args_8_8_8_08_4.html#afafff168919cd070c83c170e2b7f7202", null ]
+    [ "neforce::binder&lt; Sign &gt;", "classneforce_1_1binder.html", null ],
+    [ "neforce::binder&lt; Func(BoundArgs...)&gt;", "classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4.html", [
+      [ "binder", "classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4.html#a743b9e69e9cf03533df2870209041c4d", null ],
+      [ "binder", "classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4.html#a70e6ec6e938d8fd49fb373fc1c33b426", null ],
+      [ "binder", "classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4.html#adfb72dd149677a384386b4390417e8d3", null ],
+      [ "operator()", "classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4.html#ad7d4234c5c44b883a312920b67b7ab38", null ],
+      [ "operator()", "classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4.html#aee727a2ed05925331d914b6859215b58", null ]
     ] ],
-    [ "bindrer&lt; Res, Sign &gt;", "classbindrer.html", null ],
-    [ "bindrer&lt; Res, Func(BoundArgs...)&gt;", "classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html", [
-      [ "result_type", "classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html#a3224136943f76f1417f3be4108c07965", null ],
-      [ "bindrer", "classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html#ac6e3eb6e103560c591f60c0bef2f1d8d", null ],
-      [ "bindrer", "classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html#a76d766d50c3731014425e7a93a1e3c50", null ],
-      [ "bindrer", "classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html#a7184a66838077130cf8045e1d99b878d", null ],
-      [ "operator()", "classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html#a58b4207fbd4562c99ccbea1ef49cfc85", null ],
-      [ "operator()", "classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html#ac75a60a5d35a7c24455519e9137a6b41", null ]
+    [ "neforce::bindrer&lt; Res, Sign &gt;", "classneforce_1_1bindrer.html", null ],
+    [ "neforce::bindrer&lt; Res, Func(BoundArgs...)&gt;", "classneforce_1_1bindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html", [
+      [ "result_type", "classneforce_1_1bindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html#ad23bab33b38e1ba1834fe419ab3a11dd", null ],
+      [ "bindrer", "classneforce_1_1bindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html#aaab28d28b7b2330caad3e14438ed91fa", null ],
+      [ "bindrer", "classneforce_1_1bindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html#a4ff4a7b23c319b443cab2af248277b90", null ],
+      [ "bindrer", "classneforce_1_1bindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html#ac3b4e0f1d106fb91c0fd160640714dc6", null ],
+      [ "operator()", "classneforce_1_1bindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html#ab4aaff48cf4ebe85667486daff632c49", null ],
+      [ "operator()", "classneforce_1_1bindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html#a5d7abec8777da369632e049b6120e820", null ]
     ] ],
-    [ "bind_helper&lt; IntLike, Func, BoundArgs &gt;", "structbind__helper.html", [
-      [ "func_type", "structbind__helper.html#ad694d535b2d8a646b893890612aaa007", null ],
-      [ "type", "structbind__helper.html#af5b7b1d7ac24ca95ba3280072622d935", null ]
+    [ "neforce::bind_helper&lt; IntLike, Func, BoundArgs &gt;", "structneforce_1_1bind__helper.html", [
+      [ "func_type", "structneforce_1_1bind__helper.html#a47594ae4fdb34d3294f380ec6e075137", null ],
+      [ "type", "structneforce_1_1bind__helper.html#a77aa1533c8921832f4982a188c7ac3c0", null ]
     ] ],
-    [ "bindr_helper&lt; Res, Func, BoundArgs &gt;", "structbindr__helper.html", null ],
-    [ "binder_front&lt; Func, BoundArgs &gt;", "structbinder__front.html", [
-      [ "binder_front", "structbinder__front.html#ac2fd8cffb820530e3afacb78fe357a9f", null ],
-      [ "binder_front", "structbinder__front.html#a5b6257be0ee0f7bd0229c8797d3a0770", null ],
-      [ "binder_front", "structbinder__front.html#a72761db519e1aba41ba3bd925e7cb1d2", null ],
-      [ "~binder_front", "structbinder__front.html#a7f335321fbfe7769d3b9c8081d3d5b3b", null ],
-      [ "operator()", "structbinder__front.html#a4a3b59d14733820d5bc9bdd35a5587b7", null ],
-      [ "operator()", "structbinder__front.html#a5bc180c34aa584a508726829bf172718", null ],
-      [ "operator()", "structbinder__front.html#af0ce7ca469c35179e0d35ec0059f17ad", null ],
-      [ "operator()", "structbinder__front.html#ab4631f7b9f886a14d4cc6a44bd0d0868", null ],
-      [ "operator=", "structbinder__front.html#a7426beffbd146432db5a63ed3a521df9", null ],
-      [ "operator=", "structbinder__front.html#ae20b375fa6f90a47db09c9b636cc44af", null ]
+    [ "neforce::bindr_helper&lt; Res, Func, BoundArgs &gt;", "structneforce_1_1bindr__helper.html", null ],
+    [ "neforce::binder_front&lt; Func, BoundArgs &gt;", "structneforce_1_1binder__front.html", [
+      [ "binder_front", "structneforce_1_1binder__front.html#a3f28ca9f6c367f55b1c5bca505ff3f41", null ],
+      [ "binder_front", "structneforce_1_1binder__front.html#a6719fe4f87d152a3083230d6693efecf", null ],
+      [ "binder_front", "structneforce_1_1binder__front.html#a13255eebbf1d51a0765dbaf5f16ba4d1", null ],
+      [ "~binder_front", "structneforce_1_1binder__front.html#a919c27de913f092003ebf41be16339dc", null ],
+      [ "operator()", "structneforce_1_1binder__front.html#a45af2e60ecc1b503b2f9c3af4c696684", null ],
+      [ "operator()", "structneforce_1_1binder__front.html#a3cf12d257dad9fd96edfac5589427c5b", null ],
+      [ "operator()", "structneforce_1_1binder__front.html#aa1ae8f964833f8242ea469af0a70174c", null ],
+      [ "operator()", "structneforce_1_1binder__front.html#a968f547ce53f552b107fe57bd2e3779f", null ],
+      [ "operator=", "structneforce_1_1binder__front.html#a0028c85cf16db127a1111ad26379bb55", null ],
+      [ "operator=", "structneforce_1_1binder__front.html#a4dcf2827dd5bc0db9c5fcbf82b0b2782", null ]
     ] ],
-    [ "bind_helper_t", "group___function_binders.html#gaaf0fa7c3eafa3f876acbc6be2279a9f9", null ],
-    [ "binder_front_type", "group___function_binders.html#gaa8edf673d24f0a45eb8ce43d4071e8a8", null ],
-    [ "bindr_helper_t", "group___function_binders.html#gaa5a92e90a3ca473839441b27e57ca6ac", null ],
-    [ "bind_front", "group___function_binders.html#ga66bfcbcd5b6bb9cb6df055b38d1a5f17", null ],
-    [ "NEFORCE_DEPRECATED_FOR", "group___function_binders.html#ga735d7a66a48afa25064e760a02effb9d", null ],
-    [ "NEFORCE_DEPRECATED_FOR", "group___function_binders.html#ga2bd8c60e21f8f039828d61ee454822a9", null ]
+    [ "neforce::bind_helper_t", "group___function_binders.html#ga0ad4b5ae810daf9c83c7afe71719aa52", null ],
+    [ "neforce::binder_front_type", "group___function_binders.html#gacb57e911807b370168fa88364773c4b3", null ],
+    [ "neforce::bindr_helper_t", "group___function_binders.html#gab72476a6545e0b26a1d3a4b5a12f46c0", null ],
+    [ "neforce::bind", "group___function_binders.html#ga11206fd9af48d466a8dc3c3d13d42e3a", null ],
+    [ "neforce::bind", "group___function_binders.html#ga7d545effd5c29c85f733bdf64a7cf8f4", null ],
+    [ "neforce::bind_front", "group___function_binders.html#ga5adb9c96259605477518e606595e1413", null ]
 ];

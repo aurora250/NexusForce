@@ -1,0 +1,364 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1atomic__semaphore" kind="class" language="C++" prot="public">
+    <compoundname>neforce::atomic_semaphore</compoundname>
+    <includes refid="semaphore_8hpp" local="no">semaphore.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type><ref refid="group___futex_1ga6f85f98f5266663425a7c56be8ecda52" kindref="member">platform_wait_t</ref></type>
+        <declname>LeastMaxValue</declname>
+        <defname>LeastMaxValue</defname>
+        <defval><ref refid="classneforce_1_1numeric__traits" kindref="compound">numeric_traits</ref>&lt;<ref refid="group___futex_1ga6f85f98f5266663425a7c56be8ecda52" kindref="member">platform_wait_t</ref>&gt;<ref refid="classneforce_1_1atomic__semaphore_1a10cf5f118dea17483e31553def9a1c20" kindref="member">::max</ref>()</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1atomic__semaphore_1aafe8793cf1ad5a340d3bb580822908c5" prot="private" static="no" mutable="no">
+        <type><ref refid="group___futex_1ga6f85f98f5266663425a7c56be8ecda52" kindref="member">platform_wait_t</ref></type>
+        <definition>platform_wait_t neforce::atomic_semaphore&lt; LeastMaxValue &gt;::counter_</definition>
+        <argsstring></argsstring>
+        <name>counter_</name>
+        <qualifiedname>neforce::atomic_semaphore::counter_</qualifiedname>
+        <briefdescription>
+<para>信号量计数器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp" line="51" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1atomic__semaphore_1ab743715b202f144be8dcbda931cfcf24" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::atomic_semaphore&lt; LeastMaxValue &gt;::do_try_acquire</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>do_try_acquire</name>
+        <qualifiedname>neforce::atomic_semaphore::do_try_acquire</qualifiedname>
+        <briefdescription>
+<para>尝试获取信号量的内部实现 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否成功获取</para>
+</simplesect>
+使用原子操作尝试减少计数器值。如果计数器为0，则返回false。 使用CAS操作确保线程安全，避免ABA问题。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp" line="60" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp" bodystart="60" bodyend="67"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1atomic__semaphore_1a7f4b6fa8a97d3b80648fb1c037fbf5df" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::atomic_semaphore&lt; LeastMaxValue &gt;::atomic_semaphore</definition>
+        <argsstring>(const platform_wait_t desired) noexcept</argsstring>
+        <name>atomic_semaphore</name>
+        <qualifiedname>neforce::atomic_semaphore::atomic_semaphore</qualifiedname>
+        <param>
+          <type>const <ref refid="group___futex_1ga6f85f98f5266663425a7c56be8ecda52" kindref="member">platform_wait_t</ref></type>
+          <declname>desired</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>desired</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>信号量的初始计数值</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+创建计数信号量并设置初始计数值。 <simplesect kind="note"><para>desired不能为负数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp" line="77" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp" bodystart="77" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1atomic__semaphore_1a7494000b4fe9dc994e8a643eac162d9f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::atomic_semaphore&lt; LeastMaxValue &gt;::~atomic_semaphore</definition>
+        <argsstring>()=default</argsstring>
+        <name>~atomic_semaphore</name>
+        <qualifiedname>neforce::atomic_semaphore::~atomic_semaphore</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp" line="82" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1atomic__semaphore_1ad6660521daa4d597444fa56814a371bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::atomic_semaphore&lt; LeastMaxValue &gt;::atomic_semaphore</definition>
+        <argsstring>(const atomic_semaphore &amp;)=delete</argsstring>
+        <name>atomic_semaphore</name>
+        <qualifiedname>neforce::atomic_semaphore::atomic_semaphore</qualifiedname>
+        <param>
+          <type>const atomic_semaphore &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp" line="84" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1atomic__semaphore_1ac3bf4c1b4aae08c1e4a31f1e2497bb0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1atomic__semaphore_1a7f4b6fa8a97d3b80648fb1c037fbf5df" kindref="member">atomic_semaphore</ref> &amp;</type>
+        <definition>atomic_semaphore &amp; neforce::atomic_semaphore&lt; LeastMaxValue &gt;::operator=</definition>
+        <argsstring>(const atomic_semaphore &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::atomic_semaphore::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1atomic__semaphore_1a7f4b6fa8a97d3b80648fb1c037fbf5df" kindref="member">atomic_semaphore</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp" line="85" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1atomic__semaphore_1a6e9f215c8e084092af1432309b6d3e22" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::atomic_semaphore&lt; LeastMaxValue &gt;::release</definition>
+        <argsstring>(const platform_wait_t update=1) noexcept</argsstring>
+        <name>release</name>
+        <qualifiedname>neforce::atomic_semaphore::release</qualifiedname>
+        <param>
+          <type>const <ref refid="group___futex_1ga6f85f98f5266663425a7c56be8ecda52" kindref="member">platform_wait_t</ref></type>
+          <declname>update</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>释放信号量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>update</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>释放的数量，默认为1</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+增加信号量的计数值，并通知等待的线程。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp" line="99" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp" bodystart="99" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1atomic__semaphore_1a0225a982d20eb9dfe745eb3de5a9b4ea" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::atomic_semaphore&lt; LeastMaxValue &gt;::acquire</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>acquire</name>
+        <qualifiedname>neforce::atomic_semaphore::acquire</qualifiedname>
+        <briefdescription>
+<para>获取信号量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>阻塞当前线程，直到成功获取信号量。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp" line="111" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp" bodystart="111" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1atomic__semaphore_1af0af21c85d7c13009299c400613a1b9b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::atomic_semaphore&lt; LeastMaxValue &gt;::try_acquire</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>try_acquire</name>
+        <qualifiedname>neforce::atomic_semaphore::try_acquire</qualifiedname>
+        <briefdescription>
+<para>尝试获取信号量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否成功获取</para>
+</simplesect>
+非阻塞地尝试获取信号量。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp" line="122" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp" bodystart="122" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1atomic__semaphore_1a209b8417286209d48db80fcf249cfccd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Rep</type>
+          </param>
+          <param>
+            <type>typename Period</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool neforce::atomic_semaphore&lt; LeastMaxValue &gt;::try_acquire_for</definition>
+        <argsstring>(const duration&lt; Rep, Period &gt; &amp;relative) noexcept</argsstring>
+        <name>try_acquire_for</name>
+        <qualifiedname>neforce::atomic_semaphore::try_acquire_for</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1duration" kindref="compound">duration</ref>&lt; Rep, Period &gt; &amp;</type>
+          <declname>relative</declname>
+        </param>
+        <briefdescription>
+<para>在指定时间内尝试获取信号量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Rep</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>时间表示类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Period</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>时间单位比例 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>relative</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>相对超时时间 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否在超时前成功获取</para>
+</simplesect>
+阻塞当前线程，直到成功获取信号量或超时。 超时时间从调用开始计算。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp" line="138" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp" bodystart="138" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1atomic__semaphore_1a2e1320a1c469a2563000e81eabff406c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Clock</type>
+          </param>
+          <param>
+            <type>typename Dur</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool neforce::atomic_semaphore&lt; LeastMaxValue &gt;::try_acquire_until</definition>
+        <argsstring>(const time_point&lt; Clock, Dur &gt; &amp;timeout) noexcept</argsstring>
+        <name>try_acquire_until</name>
+        <qualifiedname>neforce::atomic_semaphore::try_acquire_until</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1time__point" kindref="compound">time_point</ref>&lt; Clock, Dur &gt; &amp;</type>
+          <declname>timeout</declname>
+        </param>
+        <briefdescription>
+<para>在指定时间点前尝试获取信号量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Clock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>时钟类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Dur</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>持续时间类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>绝对超时时间点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否在超时前成功获取</para>
+</simplesect>
+阻塞当前线程，直到成功获取信号量或到达指定时间点。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp" line="153" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp" bodystart="153" bodyend="156"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1atomic__semaphore_1a10cf5f118dea17483e31553def9a1c20" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___futex_1ga6f85f98f5266663425a7c56be8ecda52" kindref="member">platform_wait_t</ref></type>
+        <definition>static constexpr platform_wait_t neforce::atomic_semaphore&lt; LeastMaxValue &gt;::max</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>max</name>
+        <qualifiedname>neforce::atomic_semaphore::max</qualifiedname>
+        <briefdescription>
+<para>获取信号量的最大可能值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>信号量的最大计数值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp" line="91" column="38" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp" bodystart="91" bodyend="91"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>原子信号量类模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>LeastMaxValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>信号量的最小最大值</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+原子信号量是一个轻量级的同步原语，用于控制对共享资源的访问。 基于原子操作和平台无关的等待机制实现，适用于用户态同步场景。</para>
+<para>LeastMaxValue指定了信号量计数器的最小最大值，实际值可以小于此值。 这个模板参数主要用于静态检查，确保信号量的合理使用。</para>
+<para><simplesect kind="note"><para>此信号量不支持递归获取 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp" line="48" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp" bodystart="48" bodyend="157"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1atomic__semaphore_1a0225a982d20eb9dfe745eb3de5a9b4ea" prot="public" virt="non-virtual"><scope>neforce::atomic_semaphore</scope><name>acquire</name></member>
+      <member refid="classneforce_1_1atomic__semaphore_1a7f4b6fa8a97d3b80648fb1c037fbf5df" prot="public" virt="non-virtual"><scope>neforce::atomic_semaphore</scope><name>atomic_semaphore</name></member>
+      <member refid="classneforce_1_1atomic__semaphore_1ad6660521daa4d597444fa56814a371bd" prot="public" virt="non-virtual"><scope>neforce::atomic_semaphore</scope><name>atomic_semaphore</name></member>
+      <member refid="classneforce_1_1atomic__semaphore_1aafe8793cf1ad5a340d3bb580822908c5" prot="private" virt="non-virtual"><scope>neforce::atomic_semaphore</scope><name>counter_</name></member>
+      <member refid="classneforce_1_1atomic__semaphore_1ab743715b202f144be8dcbda931cfcf24" prot="private" virt="non-virtual"><scope>neforce::atomic_semaphore</scope><name>do_try_acquire</name></member>
+      <member refid="classneforce_1_1atomic__semaphore_1a10cf5f118dea17483e31553def9a1c20" prot="public" virt="non-virtual"><scope>neforce::atomic_semaphore</scope><name>max</name></member>
+      <member refid="classneforce_1_1atomic__semaphore_1ac3bf4c1b4aae08c1e4a31f1e2497bb0e" prot="public" virt="non-virtual"><scope>neforce::atomic_semaphore</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1atomic__semaphore_1a6e9f215c8e084092af1432309b6d3e22" prot="public" virt="non-virtual"><scope>neforce::atomic_semaphore</scope><name>release</name></member>
+      <member refid="classneforce_1_1atomic__semaphore_1af0af21c85d7c13009299c400613a1b9b" prot="public" virt="non-virtual"><scope>neforce::atomic_semaphore</scope><name>try_acquire</name></member>
+      <member refid="classneforce_1_1atomic__semaphore_1a209b8417286209d48db80fcf249cfccd" prot="public" virt="non-virtual"><scope>neforce::atomic_semaphore</scope><name>try_acquire_for</name></member>
+      <member refid="classneforce_1_1atomic__semaphore_1a2e1320a1c469a2563000e81eabff406c" prot="public" virt="non-virtual"><scope>neforce::atomic_semaphore</scope><name>try_acquire_until</name></member>
+      <member refid="classneforce_1_1atomic__semaphore_1a7494000b4fe9dc994e8a643eac162d9f" prot="public" virt="non-virtual"><scope>neforce::atomic_semaphore</scope><name>~atomic_semaphore</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

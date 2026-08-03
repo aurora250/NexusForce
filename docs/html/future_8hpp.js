@@ -1,24 +1,24 @@
 var future_8hpp =
 [
-    [ "async_result_t", "group___async.html#ga80164f406d773811b831fdf90e9c411f", null ],
-    [ "future_result_t", "group___async.html#gaf0f72d6a56a7e2c518eca56a51ff014f", null ],
-    [ "future_errc", "group___async.html#ga197afef4e181c466a1c01ca7c7b4b1e6", [
-      [ "future_already_retrieved", "group___async.html#gga197afef4e181c466a1c01ca7c7b4b1e6a829037befd349f04ff71ddea385bdb9a", null ],
-      [ "promise_already_satisfied", "group___async.html#gga197afef4e181c466a1c01ca7c7b4b1e6a9327d6f7b9aca59b62b436696fd17a00", null ],
-      [ "no_state", "group___async.html#gga197afef4e181c466a1c01ca7c7b4b1e6ac537dcef56fd6ff75592c0220fd3dae1", null ],
-      [ "broken_promise", "group___async.html#gga197afef4e181c466a1c01ca7c7b4b1e6a2c6bc6062e72db1c0915032943cb6452", null ]
+    [ "neforce::async_result_t", "group___async.html#gac8262c6cb66019c2802377e25ab562ab", null ],
+    [ "neforce::future_result_t", "group___async.html#gae41bda7414d7dca6209c6c2c024871eb", null ],
+    [ "neforce::future_errc", "group___async.html#ga1dce1bf12e0792df3298c9988d0c9994", [
+      [ "future_already_retrieved", "future_8hpp.html#gga1dce1bf12e0792df3298c9988d0c9994a829037befd349f04ff71ddea385bdb9a", null ],
+      [ "promise_already_satisfied", "future_8hpp.html#gga1dce1bf12e0792df3298c9988d0c9994a9327d6f7b9aca59b62b436696fd17a00", null ],
+      [ "no_state", "future_8hpp.html#gga1dce1bf12e0792df3298c9988d0c9994ac537dcef56fd6ff75592c0220fd3dae1", null ],
+      [ "broken_promise", "future_8hpp.html#gga1dce1bf12e0792df3298c9988d0c9994a2c6bc6062e72db1c0915032943cb6452", null ]
     ] ],
-    [ "future_status", "group___async.html#gaeaacbde3b6cc8e4622e1aae2beacd4f3", [
-      [ "ready", "group___async.html#ggaeaacbde3b6cc8e4622e1aae2beacd4f3ab2fdab230a2c39f3595a947861863cb7", null ],
-      [ "timeout", "group___async.html#ggaeaacbde3b6cc8e4622e1aae2beacd4f3a90272dda245ae1fb3cf197e91a8689dc", null ],
-      [ "deferred", "group___async.html#ggaeaacbde3b6cc8e4622e1aae2beacd4f3a43fff3df3fc0b3417c86dc3040fb2d86", null ]
+    [ "neforce::future_status", "group___async.html#gaf9cba7882097ae4b1058450190d9dd8d", [
+      [ "ready", "future_8hpp.html#ggaf9cba7882097ae4b1058450190d9dd8dab2fdab230a2c39f3595a947861863cb7", null ],
+      [ "timeout", "future_8hpp.html#ggaf9cba7882097ae4b1058450190d9dd8da90272dda245ae1fb3cf197e91a8689dc", null ],
+      [ "deferred", "future_8hpp.html#ggaf9cba7882097ae4b1058450190d9dd8da43fff3df3fc0b3417c86dc3040fb2d86", null ]
     ] ],
-    [ "launch", "group___async.html#ga9b3224d19f20667b3b24145a7b395a33", [
-      [ "async", "group___async.html#gga9b3224d19f20667b3b24145a7b395a33a0df93e34273b367bb63bad28c94c78d5", null ],
-      [ "deferred", "group___async.html#gga9b3224d19f20667b3b24145a7b395a33a43fff3df3fc0b3417c86dc3040fb2d86", null ]
+    [ "neforce::launch", "group___async.html#ga5cb3a59f429bfc428307430ce64f8e5f", [
+      [ "async", "future_8hpp.html#gga5cb3a59f429bfc428307430ce64f8e5fa0df93e34273b367bb63bad28c94c78d5", null ],
+      [ "deferred", "future_8hpp.html#gga5cb3a59f429bfc428307430ce64f8e5fa43fff3df3fc0b3417c86dc3040fb2d86", null ]
     ] ],
-    [ "async", "group___async.html#gadb2e4929c373d071c43f75182fda1239", null ],
-    [ "async", "group___async.html#ga4bbf8cf030239a4806813af4dcafec6f", null ],
-    [ "get", "future_8hpp.html#gac14e5033806977e33886d78a20feffaa", null ],
-    [ "get", "group___async.html#gac14e5033806977e33886d78a20feffaa", null ]
+    [ "neforce::async", "group___async.html#ga1e0319f6a6950bfda67d4a1eb2e31ebb", null ],
+    [ "neforce::async", "group___async.html#ga3b100cc284ba1351140d99912b389764", null ],
+    [ "neforce::get", "future_8hpp.html#ga62fae7780686a01cf8f94a914db3e161", null ],
+    [ "neforce::get", "group___async.html#ga62fae7780686a01cf8f94a914db3e161", null ]
 ];

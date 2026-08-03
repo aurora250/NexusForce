@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['会话流程_0',['SMTP 会话流程',['../group___s_m_t_p.html#smtp_session',1,'']]]
+  ['仿函数_0',['仿函数',['../group___functor.html',1,'']]]
 ];

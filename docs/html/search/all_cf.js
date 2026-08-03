@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['集合样式_0',['集合样式',['../group___yaml_config.html#collection_styles',1,'']]],
-  ['集合算法_1',['集合算法',['../group___set_algorithms.html',1,'']]]
+  ['量词算法_0',['量词算法',['../group___quantifier_algorithms.html',1,'']]]
 ];

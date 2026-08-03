@@ -1,0 +1,2753 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1rb__tree" kind="class" language="C++" prot="public">
+    <compoundname>neforce::rb_tree</compoundname>
+    <basecompoundref prot="private" virt="non-virtual">icollector&lt; rb_tree&lt; Key, Value, KeyOfValue, Compare, allocator&lt; rb_tree_node&lt; Value &gt; &gt; &gt; &gt;</basecompoundref>
+    <includes refid="rb__tree_8hpp" local="no">rb_tree.hpp</includes>
+    <innerclass refid="structneforce_1_1rb__tree_1_1node__guard" prot="private">neforce::rb_tree::node_guard</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename Key</type>
+      </param>
+      <param>
+        <type>typename Value</type>
+      </param>
+      <param>
+        <type>typename KeyOfValue</type>
+      </param>
+      <param>
+        <type>typename Compare</type>
+      </param>
+      <param>
+        <type>typename Alloc</type>
+        <defval><ref refid="group___memory_allocator_1gabd6174043c688f04c1d71b9b21148ec1" kindref="member">allocator</ref>&lt;<ref refid="structneforce_1_1rb__tree__node" kindref="compound">rb_tree_node</ref>&lt;Value&gt;&gt;</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1rb__tree_1aef573fbbd32a98cc2c93218f6e8563ec" prot="public" static="no">
+        <type>Key</type>
+        <definition>using neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::key_type = Key</definition>
+        <argsstring></argsstring>
+        <name>key_type</name>
+        <qualifiedname>neforce::rb_tree::key_type</qualifiedname>
+        <briefdescription>
+<para>键类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="625" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="625" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1rb__tree_1a3b191fe21287eb1c892ed2d2566a3e19" prot="public" static="no">
+        <type>bool</type>
+        <definition>using neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::color_type = bool</definition>
+        <argsstring></argsstring>
+        <name>color_type</name>
+        <qualifiedname>neforce::rb_tree::color_type</qualifiedname>
+        <briefdescription>
+<para>颜色类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="626" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="626" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1rb__tree_1a1ecd040a4c5b440e7ab4806944faf762" prot="public" static="no">
+        <type>Value</type>
+        <definition>using neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::value_type = Value</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>neforce::rb_tree::value_type</qualifiedname>
+        <briefdescription>
+<para>值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="628" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="628" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1rb__tree_1af6c3b2665bd3d05e517f2100c64c71a2" prot="public" static="no">
+        <type>Value *</type>
+        <definition>using neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::pointer = Value*</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>neforce::rb_tree::pointer</qualifiedname>
+        <briefdescription>
+<para>指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="629" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="629" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1rb__tree_1ae152128b6c105bbd0f4e5391b19ba178" prot="public" static="no">
+        <type>Value &amp;</type>
+        <definition>using neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::reference = Value&amp;</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>neforce::rb_tree::reference</qualifiedname>
+        <briefdescription>
+<para>引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="630" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="630" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1rb__tree_1a15c1a16c2d21d48427080dff135de068" prot="public" static="no">
+        <type>const Value *</type>
+        <definition>using neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::const_pointer = const Value*</definition>
+        <argsstring></argsstring>
+        <name>const_pointer</name>
+        <qualifiedname>neforce::rb_tree::const_pointer</qualifiedname>
+        <briefdescription>
+<para>常量指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="631" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="631" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1rb__tree_1a110c8048f3bcd304a538fe7b028ce946" prot="public" static="no">
+        <type>const Value &amp;</type>
+        <definition>using neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::const_reference = const Value&amp;</definition>
+        <argsstring></argsstring>
+        <name>const_reference</name>
+        <qualifiedname>neforce::rb_tree::const_reference</qualifiedname>
+        <briefdescription>
+<para>常量引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="632" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="632" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1rb__tree_1a6642b9ebad3a6eb4b54bc88f78331cf5" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>using neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::size_type = size_t</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>neforce::rb_tree::size_type</qualifiedname>
+        <briefdescription>
+<para>大小类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="633" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="633" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1rb__tree_1aa255645addc4c8947a65b19b25957b6a" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1gab2c4bc5144496796ce8a7feed7b8ad58" kindref="member">ptrdiff_t</ref></type>
+        <definition>using neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::difference_type = ptrdiff_t</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>neforce::rb_tree::difference_type</qualifiedname>
+        <briefdescription>
+<para>差值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="634" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="634" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" prot="public" static="no">
+        <type>rb_tree_iterator&lt; false, <ref refid="classneforce_1_1rb__tree_1a69ce1829edc7504ab9d25285f337918a" kindref="member">rb_tree</ref> &gt;</type>
+        <definition>using neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::iterator = rb_tree_iterator&lt;false, rb_tree&gt;</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>neforce::rb_tree::iterator</qualifiedname>
+        <briefdescription>
+<para>迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="635" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="635" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1rb__tree_1ad1c913568b5fe36333f6a5f0339301f1" prot="public" static="no">
+        <type>rb_tree_iterator&lt; true, <ref refid="classneforce_1_1rb__tree_1a69ce1829edc7504ab9d25285f337918a" kindref="member">rb_tree</ref> &gt;</type>
+        <definition>using neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::const_iterator = rb_tree_iterator&lt;true, rb_tree&gt;</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <qualifiedname>neforce::rb_tree::const_iterator</qualifiedname>
+        <briefdescription>
+<para>常量迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="636" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="636" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1rb__tree_1a29d32bad63b07606647d87b536e15f57" prot="public" static="no">
+        <type>_NEFORCE <ref refid="classneforce_1_1rb__tree_1a29d32bad63b07606647d87b536e15f57" kindref="member">reverse_iterator</ref>&lt; <ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref> &gt;</type>
+        <definition>using neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::reverse_iterator = _NEFORCE reverse_iterator&lt;iterator&gt;</definition>
+        <argsstring></argsstring>
+        <name>reverse_iterator</name>
+        <qualifiedname>neforce::rb_tree::reverse_iterator</qualifiedname>
+        <briefdescription>
+<para>反向迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="637" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="637" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1rb__tree_1a3bc2bc4c2ec35806801bc7fc4a79bf1f" prot="public" static="no">
+        <type>_NEFORCE <ref refid="classneforce_1_1rb__tree_1a29d32bad63b07606647d87b536e15f57" kindref="member">reverse_iterator</ref>&lt; <ref refid="classneforce_1_1rb__tree_1ad1c913568b5fe36333f6a5f0339301f1" kindref="member">const_iterator</ref> &gt;</type>
+        <definition>using neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::const_reverse_iterator = _NEFORCE reverse_iterator&lt;const_iterator&gt;</definition>
+        <argsstring></argsstring>
+        <name>const_reverse_iterator</name>
+        <qualifiedname>neforce::rb_tree::const_reverse_iterator</qualifiedname>
+        <briefdescription>
+<para>常量反向迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="638" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="638" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1rb__tree_1a1120f099bdc6d0bea47b8fc634f09fd5" prot="public" static="no">
+        <type>Alloc</type>
+        <definition>using neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::allocator_type = Alloc</definition>
+        <argsstring></argsstring>
+        <name>allocator_type</name>
+        <qualifiedname>neforce::rb_tree::allocator_type</qualifiedname>
+        <briefdescription>
+<para>分配器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="639" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="639" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classneforce_1_1rb__tree_1ac2f8e429551bc1229729a65e4e4afa40" prot="private" static="no">
+        <type><ref refid="structneforce_1_1rb__tree__node__base" kindref="compound">rb_tree_node_base</ref></type>
+        <definition>using neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::base_node = rb_tree_node_base</definition>
+        <argsstring></argsstring>
+        <name>base_node</name>
+        <qualifiedname>neforce::rb_tree::base_node</qualifiedname>
+        <briefdescription>
+<para>节点基类类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="642" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="642" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1rb__tree_1aa23365f78d9d5c5fa9d3bde8fc2c08b5" prot="private" static="no">
+        <type><ref refid="structneforce_1_1rb__tree__node" kindref="compound">rb_tree_node</ref>&lt; Value &gt;</type>
+        <definition>using neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::link_node = rb_tree_node&lt;Value&gt;</definition>
+        <argsstring></argsstring>
+        <name>link_node</name>
+        <qualifiedname>neforce::rb_tree::link_node</qualifiedname>
+        <briefdescription>
+<para>数据节点类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="643" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="643" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1rb__tree_1a805b43ea1e74ae6b10cebb0997c389dc" prot="private" static="no">
+        <type>base_node *</type>
+        <definition>using neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::base_ptr = base_node*</definition>
+        <argsstring></argsstring>
+        <name>base_ptr</name>
+        <qualifiedname>neforce::rb_tree::base_ptr</qualifiedname>
+        <briefdescription>
+<para>基类指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="644" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="644" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1rb__tree_1a7764a6452b1717d03a3b8ca0f594b63e" prot="private" static="no">
+        <type>link_node *</type>
+        <definition>using neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::link_type = link_node*</definition>
+        <argsstring></argsstring>
+        <name>link_type</name>
+        <qualifiedname>neforce::rb_tree::link_type</qualifiedname>
+        <briefdescription>
+<para>数据节点指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="645" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="645" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1rb__tree_1a65cf5d377f4fd54fd6baad1dcff6fca1" prot="private" static="no" mutable="no">
+        <type>link_type</type>
+        <definition>link_type neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::header_</definition>
+        <argsstring></argsstring>
+        <name>header_</name>
+        <qualifiedname>neforce::rb_tree::header_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>头节点 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="647" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="647" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1rb__tree_1a3947797cb46fdfc5cd51330543f2e748" prot="private" static="no" mutable="no">
+        <type>Compare</type>
+        <definition>Compare neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::key_compare_</definition>
+        <argsstring></argsstring>
+        <name>key_compare_</name>
+        <qualifiedname>neforce::rb_tree::key_compare_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>键比较函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="648" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="648" bodyend="648"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1rb__tree_1ac44c2710750deb34e6129372be6751b0" prot="private" static="no" mutable="no">
+        <type>KeyOfValue</type>
+        <definition>KeyOfValue neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::extracter_</definition>
+        <argsstring></argsstring>
+        <name>extracter_</name>
+        <qualifiedname>neforce::rb_tree::extracter_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>值提取键函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="649" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="649" bodyend="649"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1rb__tree_1adf0d7ed479cec20c3cb4e9ae46b1e4ad" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1compressed__pair" kindref="compound">compressed_pair</ref>&lt; <ref refid="classneforce_1_1rb__tree_1a1120f099bdc6d0bea47b8fc634f09fd5" kindref="member">allocator_type</ref>, <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref> &gt;</type>
+        <definition>compressed_pair&lt;allocator_type, size_t&gt; neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::size_pair_</definition>
+        <argsstring></argsstring>
+        <name>size_pair_</name>
+        <qualifiedname>neforce::rb_tree::size_pair_</qualifiedname>
+        <initializer>{<ref refid="structneforce_1_1default__construct__tag" kindref="compound">default_construct_tag</ref>{}, 0}</initializer>
+        <briefdescription>
+<para>压缩存储分配器和大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="650" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="650" bodyend="650"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classneforce_1_1rb__tree_1a8a8537a37bd8ea794d47cc1ba300daec" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>struct</type>
+        <definition>friend struct rb_tree_iterator</definition>
+        <argsstring></argsstring>
+        <name>rb_tree_iterator</name>
+        <qualifiedname>neforce::rb_tree::rb_tree_iterator</qualifiedname>
+        <param>
+          <type>rb_tree_iterator</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="653" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="653" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a3fc5597622d86565a3bbdcc63a248281" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>link_type &amp;</type>
+        <definition>link_type &amp; neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::root</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>root</name>
+        <qualifiedname>neforce::rb_tree::root</qualifiedname>
+        <briefdescription>
+<para>获取根节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>根节点引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="683" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="683" bodyend="683"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a3bd7d5a236af79d735e03ae65d51d3c0" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>link_type &amp;</type>
+        <definition>link_type &amp; neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::leftmost</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>leftmost</name>
+        <qualifiedname>neforce::rb_tree::leftmost</qualifiedname>
+        <briefdescription>
+<para>获取最左节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最左节点引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="689" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="689" bodyend="689"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a433c5a438037e8562b1a24c36c93bd2b" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>link_type &amp;</type>
+        <definition>link_type &amp; neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rightmost</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rightmost</name>
+        <qualifiedname>neforce::rb_tree::rightmost</qualifiedname>
+        <briefdescription>
+<para>获取最右节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最右节点引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="695" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="695" bodyend="695"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a90b3cccdeec5bccd8b121145092fa265" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>link_type</type>
+        <definition>link_type neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::create_node</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>create_node</name>
+        <qualifiedname>neforce::rb_tree::create_node</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>创建节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>新创建的节点指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="753" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="753" bodyend="762"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1ac9fc0dd52b0e932f2c6403ba61850ecb" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>link_type</type>
+        <definition>link_type neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::copy_node</definition>
+        <argsstring>(link_type ptr)</argsstring>
+        <name>copy_node</name>
+        <qualifiedname>neforce::rb_tree::copy_node</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>拷贝节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源节点指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>新拷贝的节点指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="769" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="769" bodyend="775"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1af54fe8edb640dd6021983e9c21b8c9df" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; link_node &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::destroy_node</definition>
+        <argsstring>(link_type ptr)</argsstring>
+        <name>destroy_node</name>
+        <qualifiedname>neforce::rb_tree::destroy_node</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>销毁节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要销毁的节点指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="781" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="781" bodyend="787"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1af9c154c4ca2bf82ba1cfa7bb3822a737" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_into</definition>
+        <argsstring>(base_ptr child, base_ptr parent, link_type ptr)</argsstring>
+        <name>insert_into</name>
+        <qualifiedname>neforce::rb_tree::insert_into</qualifiedname>
+        <param>
+          <type>base_ptr</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>base_ptr</type>
+          <declname>parent</declname>
+        </param>
+        <param>
+          <type>link_type</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>将节点插入到指定位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>child</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置的子节点 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>parent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置的父节点 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的节点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="796" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="796" bodyend="820"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a7e7c65f9ef4316166436cab27fdb1bfe" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>link_type</type>
+        <definition>link_type neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::copy_under</definition>
+        <argsstring>(link_type src_root, link_type parent)</argsstring>
+        <name>copy_under</name>
+        <qualifiedname>neforce::rb_tree::copy_under</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>src_root</declname>
+        </param>
+        <param>
+          <type>link_type</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>递归拷贝子树 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>src_root</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源子树根节点 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>parent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>父节点指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>拷贝得到的子树根节点 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="828" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="828" bodyend="852"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a71ff211174a51062df7461df87702ea2" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; link_node &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::erase_under</definition>
+        <argsstring>(link_type root)</argsstring>
+        <name>erase_under</name>
+        <qualifiedname>neforce::rb_tree::erase_under</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+<para>递归销毁子树 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>root</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子树根节点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="858" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="858" bodyend="865"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a9806fc9410195f42e1eb331245081d27" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::header_init</definition>
+        <argsstring>()</argsstring>
+        <name>header_init</name>
+        <qualifiedname>neforce::rb_tree::header_init</qualifiedname>
+        <briefdescription>
+<para>初始化头节点 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="870" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="870" bodyend="876"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a87680e0da9b9ee53896cd59411e70f38" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::copy_from</definition>
+        <argsstring>(const rb_tree &amp;other)</argsstring>
+        <name>copy_from</name>
+        <qualifiedname>neforce::rb_tree::copy_from</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1rb__tree_1a69ce1829edc7504ab9d25285f337918a" kindref="member">rb_tree</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>从另一个红黑树拷贝 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源红黑树 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="882" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="882" bodyend="899"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1afe0857eb6db0e2982a29741959361fe8" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_unique</definition>
+        <argsstring>(link_type node)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>neforce::rb_tree::insert_unique</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+<para>插入唯一键节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>node</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的节点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="906" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="906" bodyend="929"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a27fae8c89691457b8e03e8fabee5eb69" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_equal</definition>
+        <argsstring>(link_type node)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>neforce::rb_tree::insert_equal</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+<para>插入允许重复键的节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>node</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的节点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="936" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="936" bodyend="944"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a0c33ec409d4d0c81a133b5c34476afe6" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>link_type &amp;</type>
+        <definition>static link_type &amp; neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::left</definition>
+        <argsstring>(link_type ptr) noexcept</argsstring>
+        <name>left</name>
+        <qualifiedname>neforce::rb_tree::left</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>获取节点的左子节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节点指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>左子节点引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="702" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="702" bodyend="702"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a949e65f567c873285d054260996ea738" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>link_type &amp;</type>
+        <definition>static link_type &amp; neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::right</definition>
+        <argsstring>(link_type ptr) noexcept</argsstring>
+        <name>right</name>
+        <qualifiedname>neforce::rb_tree::right</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>获取节点的右子节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节点指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>右子节点引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="709" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="709" bodyend="709"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1af581113465160e20bec2ee0afb8f260f" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>link_type &amp;</type>
+        <definition>static link_type &amp; neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::parent</definition>
+        <argsstring>(link_type ptr) noexcept</argsstring>
+        <name>parent</name>
+        <qualifiedname>neforce::rb_tree::parent</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>获取节点的父节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节点指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>父节点引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="716" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="716" bodyend="716"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a34302f7547f04a3f31f662d5921977ab" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const Key &amp;</type>
+        <definition>static const Key &amp; neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::key</definition>
+        <argsstring>(link_type ptr) noexcept</argsstring>
+        <name>key</name>
+        <qualifiedname>neforce::rb_tree::key</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>从节点提取键 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节点指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>节点的键 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="723" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="723" bodyend="723"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a1999085447e148f22d2254af9cadd3b4" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const Key &amp;</type>
+        <definition>static const Key &amp; neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::key</definition>
+        <argsstring>(base_ptr ptr) noexcept</argsstring>
+        <name>key</name>
+        <qualifiedname>neforce::rb_tree::key</qualifiedname>
+        <param>
+          <type>base_ptr</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>从基类指针节点提取键 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>基类指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>节点的键 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="730" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="730" bodyend="730"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a81ebf377a78a6481e423164b3b958888" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>link_type</type>
+        <definition>static link_type neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::minimum</definition>
+        <argsstring>(link_type ptr) noexcept</argsstring>
+        <name>minimum</name>
+        <qualifiedname>neforce::rb_tree::minimum</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>获取子树的最小节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子树根节点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>最小节点指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="737" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="737" bodyend="737"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a7b46d980f2f51986bdcfd28fbbd1f4bb" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>link_type</type>
+        <definition>static link_type neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::maximum</definition>
+        <argsstring>(link_type ptr) noexcept</argsstring>
+        <name>maximum</name>
+        <qualifiedname>neforce::rb_tree::maximum</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>获取子树的最大节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子树根节点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>最大节点指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="744" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="744" bodyend="744"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a69ce1829edc7504ab9d25285f337918a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rb_tree</definition>
+        <argsstring>()</argsstring>
+        <name>rb_tree</name>
+        <qualifiedname>neforce::rb_tree::rb_tree</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="950" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="950" bodyend="950"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1afc602582245c74384ce65e1325ac41b7" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rb_tree</definition>
+        <argsstring>(const Compare &amp;comp)</argsstring>
+        <name>rb_tree</name>
+        <qualifiedname>neforce::rb_tree::rb_tree</qualifiedname>
+        <param>
+          <type>const Compare &amp;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="956" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="956" bodyend="959"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a66c2120457475bdc20334cbe1086c9b2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rb_tree</definition>
+        <argsstring>(const rb_tree &amp;other)</argsstring>
+        <name>rb_tree</name>
+        <qualifiedname>neforce::rb_tree::rb_tree</qualifiedname>
+        <param>
+          <type>const rb_tree &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源红黑树 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="965" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="965" bodyend="971"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a69014bca7cf2ad3e0b9d60b2a5a04f4f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1a69ce1829edc7504ab9d25285f337918a" kindref="member">rb_tree</ref> &amp;</type>
+        <definition>rb_tree &amp; neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::operator=</definition>
+        <argsstring>(const rb_tree &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::rb_tree::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1rb__tree_1a69ce1829edc7504ab9d25285f337918a" kindref="member">rb_tree</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源红黑树 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="978" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="978" bodyend="985"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1ac1927c342a8c2e63520554778bc326d1" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; Compare &gt; &amp;&amp;is_nothrow_move_constructible_v&lt; KeyOfValue &gt; &amp;&amp;is_nothrow_move_constructible_v&lt; allocator_type &gt;" virt="non-virtual">
+        <type></type>
+        <definition>neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rb_tree</definition>
+        <argsstring>(rb_tree &amp;&amp;other)</argsstring>
+        <name>rb_tree</name>
+        <qualifiedname>neforce::rb_tree::rb_tree</qualifiedname>
+        <param>
+          <type>rb_tree &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源红黑树 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="991" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="991" bodyend="1000"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1acaad202db23cf9a42e0e6179434a7bf7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; rb_tree &gt;" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1a69ce1829edc7504ab9d25285f337918a" kindref="member">rb_tree</ref> &amp;</type>
+        <definition>rb_tree &amp; neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::operator=</definition>
+        <argsstring>(rb_tree &amp;&amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::rb_tree::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1rb__tree_1a69ce1829edc7504ab9d25285f337918a" kindref="member">rb_tree</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源红黑树 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1007" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1007" bodyend="1014"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a6c3b721e138b8affd3dfeb1ce5f44c6f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::~rb_tree</definition>
+        <argsstring>()</argsstring>
+        <name>~rb_tree</name>
+        <qualifiedname>neforce::rb_tree::~rb_tree</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1019" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1019" bodyend="1024"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a6b7578a1ee364a3ad803e2ca4c97144b" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::begin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>neforce::rb_tree::begin</qualifiedname>
+        <briefdescription>
+<para>获取起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1030" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1030" bodyend="1030"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1aec647db908ecddb146a2af582376cd2e" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::end</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>neforce::rb_tree::end</qualifiedname>
+        <briefdescription>
+<para>获取结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向头节点的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1036" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1036" bodyend="1036"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1ac6aab720770afe44834f2cdd72bbd9fa" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1ad1c913568b5fe36333f6a5f0339301f1" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>neforce::rb_tree::begin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1042" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1042" bodyend="1042"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a1e4bb1000e669da039b1eb74f092fbf7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1ad1c913568b5fe36333f6a5f0339301f1" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>neforce::rb_tree::end</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向头节点的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1048" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1048" bodyend="1048"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a7db374e90fd932bdfdb2e986c053794f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1ad1c913568b5fe36333f6a5f0339301f1" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::cbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cbegin</name>
+        <qualifiedname>neforce::rb_tree::cbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1054" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1054" bodyend="1054"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1aa8b97efc43856c9923817efc73f7e523" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1ad1c913568b5fe36333f6a5f0339301f1" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::cend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cend</name>
+        <qualifiedname>neforce::rb_tree::cend</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向头节点的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1060" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1060" bodyend="1060"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a290d805b5b856c87da5f7ea4d5bfc172" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1a29d32bad63b07606647d87b536e15f57" kindref="member">reverse_iterator</ref></type>
+        <definition>reverse_iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rbegin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>rbegin</name>
+        <qualifiedname>neforce::rb_tree::rbegin</qualifiedname>
+        <briefdescription>
+<para>获取反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最大元素的反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1066" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1066" bodyend="1066"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a5198f5ae6708c630b78ee3ffc37827cc" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1a29d32bad63b07606647d87b536e15f57" kindref="member">reverse_iterator</ref></type>
+        <definition>reverse_iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rend</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>rend</name>
+        <qualifiedname>neforce::rb_tree::rend</qualifiedname>
+        <briefdescription>
+<para>获取反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素之前位置的反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1072" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1072" bodyend="1072"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1afa110d0fe7530119655f5c7ea5fa2de9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1a3bc2bc4c2ec35806801bc7fc4a79bf1f" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rbegin</name>
+        <qualifiedname>neforce::rb_tree::rbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最大元素的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1078" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1078" bodyend="1078"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1aa666ec5daba75401f452e48e1ad3f131" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1a3bc2bc4c2ec35806801bc7fc4a79bf1f" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rend</name>
+        <qualifiedname>neforce::rb_tree::rend</qualifiedname>
+        <briefdescription>
+<para>获取常量反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素之前位置的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1084" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1084" bodyend="1084"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a0bf6ca32609430d607650bb1057c73ad" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1a3bc2bc4c2ec35806801bc7fc4a79bf1f" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::crbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>crbegin</name>
+        <qualifiedname>neforce::rb_tree::crbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最大元素的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1090" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1090" bodyend="1090"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a32fe63eb2ddd1903a5f4c21a316c1e76" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1a3bc2bc4c2ec35806801bc7fc4a79bf1f" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::crend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>crend</name>
+        <qualifiedname>neforce::rb_tree::crend</qualifiedname>
+        <briefdescription>
+<para>获取常量反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素之前位置的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1096" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1096" bodyend="1096"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1ad932d590f332feb06f1152bcf972ef60" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1a6642b9ebad3a6eb4b54bc88f78331cf5" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>neforce::rb_tree::size</qualifiedname>
+        <briefdescription>
+<para>获取元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>树中元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1102" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1102" bodyend="1102"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a73acedbb5779315c947115bd139b2d53" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1a6642b9ebad3a6eb4b54bc88f78331cf5" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::max_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>max_size</name>
+        <qualifiedname>neforce::rb_tree::max_size</qualifiedname>
+        <briefdescription>
+<para>获取最大可能大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1108" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1108" bodyend="1108"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1ae28d9f45dbf57190270992a3824e5f98" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>neforce::rb_tree::empty</qualifiedname>
+        <briefdescription>
+<para>检查是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否为空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1114" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1114" bodyend="1114"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a302a2912b6a682b57e804e14ec1493ca" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_copy_constructible_v&lt; Compare &gt;" virt="non-virtual">
+        <type>Compare</type>
+        <definition>Compare neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::key_compare</definition>
+        <argsstring>() const</argsstring>
+        <name>key_compare</name>
+        <qualifiedname>neforce::rb_tree::key_compare</qualifiedname>
+        <briefdescription>
+<para>获取键比较函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>键比较函数对象的副本 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1120" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1120" bodyend="1122"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1aed03d31fd6d5aa07cb703c3b04102eff" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::emplace_unique</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace_unique</name>
+        <qualifiedname>neforce::rb_tree::emplace_unique</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在树中构造元素（唯一键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1131" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1131" bodyend="1134"/>
+        <referencedby refid="classneforce_1_1rb__tree_1a0da71fde949cb8b13e51acd828e6e7cb" compoundref="rb__tree_8hpp" startline="1141" endline="1141">neforce::rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_unique</referencedby>
+        <referencedby refid="classneforce_1_1rb__tree_1a6f0736558fca0ecd53c48a7276f2a38e" compoundref="rb__tree_8hpp" startline="1148" endline="1148">neforce::rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_unique</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a0da71fde949cb8b13e51acd828e6e7cb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_unique</definition>
+        <argsstring>(const value_type &amp;value)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>neforce::rb_tree::insert_unique</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1rb__tree_1a1ecd040a4c5b440e7ab4806944faf762" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>插入元素（唯一键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1141" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1141" bodyend="1141"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a6f0736558fca0ecd53c48a7276f2a38e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_unique</definition>
+        <argsstring>(value_type &amp;&amp;value)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>neforce::rb_tree::insert_unique</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1rb__tree_1a1ecd040a4c5b440e7ab4806944faf762" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>移动插入元素（唯一键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1148" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1148" bodyend="1148"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1afcc6dcb669ba16db13c565d6c8e32b95" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::emplace_unique_hint</definition>
+        <argsstring>(iterator position, Args &amp;&amp;... args)</argsstring>
+        <name>emplace_unique_hint</name>
+        <qualifiedname>neforce::rb_tree::emplace_unique_hint</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近构造元素（唯一键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1158" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1158" bodyend="1197"/>
+        <referencedby refid="classneforce_1_1rb__tree_1a78e244108a023667b2e47ec201577d24" compoundref="rb__tree_8hpp" startline="1205" endline="1207">neforce::rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_unique</referencedby>
+        <referencedby refid="classneforce_1_1rb__tree_1a673e6b7c0e5502d5b955aa41353dc6e9" compoundref="rb__tree_8hpp" startline="1215" endline="1217">neforce::rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_unique</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a78e244108a023667b2e47ec201577d24" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_unique</definition>
+        <argsstring>(iterator position, const value_type &amp;value)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>neforce::rb_tree::insert_unique</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1rb__tree_1a1ecd040a4c5b440e7ab4806944faf762" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近插入元素（唯一键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1205" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1205" bodyend="1207"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a673e6b7c0e5502d5b955aa41353dc6e9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_unique</definition>
+        <argsstring>(iterator position, value_type &amp;&amp;value)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>neforce::rb_tree::insert_unique</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1rb__tree_1a1ecd040a4c5b440e7ab4806944faf762" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近移动插入元素（唯一键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1215" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1215" bodyend="1217"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1ad15c9cd154c04b0bd0567d6dd286fdae" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga4f7b2f70ba1539ec3326d52e89698f13" kindref="member">is_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_unique</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>neforce::rb_tree::insert_unique</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入元素（唯一键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1226" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1226" bodyend="1230"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1aed342b9b46db4fa273e59ba051cb6a58" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::emplace_equal</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace_equal</name>
+        <qualifiedname>neforce::rb_tree::emplace_equal</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在树中构造元素（允许重复键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1239" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1239" bodyend="1242"/>
+        <referencedby refid="classneforce_1_1rb__tree_1a9fcf3dba70da313c9e2c7b8da2d0c800" compoundref="rb__tree_8hpp" startline="1249" endline="1249">neforce::rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_equal</referencedby>
+        <referencedby refid="classneforce_1_1rb__tree_1a7285e904177378119aaa365f58be9132" compoundref="rb__tree_8hpp" startline="1256" endline="1256">neforce::rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_equal</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a9fcf3dba70da313c9e2c7b8da2d0c800" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_equal</definition>
+        <argsstring>(const value_type &amp;value)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>neforce::rb_tree::insert_equal</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1rb__tree_1a1ecd040a4c5b440e7ab4806944faf762" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>插入元素（允许重复键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1249" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1249" bodyend="1249"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a7285e904177378119aaa365f58be9132" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_equal</definition>
+        <argsstring>(value_type &amp;&amp;value)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>neforce::rb_tree::insert_equal</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1rb__tree_1a1ecd040a4c5b440e7ab4806944faf762" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>移动插入元素（允许重复键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1256" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1256" bodyend="1256"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1abbadb3f5ceb9147319ad432139328168" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::emplace_equal_hint</definition>
+        <argsstring>(iterator position, Args &amp;&amp;... args)</argsstring>
+        <name>emplace_equal_hint</name>
+        <qualifiedname>neforce::rb_tree::emplace_equal_hint</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近构造元素（允许重复键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1266" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1266" bodyend="1303"/>
+        <referencedby refid="classneforce_1_1rb__tree_1a49c833047639e7ee2605b638b788a1d0" compoundref="rb__tree_8hpp" startline="1311" endline="1313">neforce::rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_equal</referencedby>
+        <referencedby refid="classneforce_1_1rb__tree_1aa7df39a2a48094319b253866fd79e4fa" compoundref="rb__tree_8hpp" startline="1321" endline="1323">neforce::rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_equal</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a49c833047639e7ee2605b638b788a1d0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_equal</definition>
+        <argsstring>(iterator position, const value_type &amp;value)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>neforce::rb_tree::insert_equal</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1rb__tree_1a1ecd040a4c5b440e7ab4806944faf762" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近插入元素（允许重复键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1311" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1311" bodyend="1313"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1aa7df39a2a48094319b253866fd79e4fa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_equal</definition>
+        <argsstring>(iterator position, value_type &amp;&amp;value)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>neforce::rb_tree::insert_equal</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1rb__tree_1a1ecd040a4c5b440e7ab4806944faf762" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近移动插入元素（允许重复键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1321" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1321" bodyend="1323"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a3f3389d3b7691aef8536219682b3a499" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga4f7b2f70ba1539ec3326d52e89698f13" kindref="member">is_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_equal</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>neforce::rb_tree::insert_equal</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入元素（允许重复键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1332" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1332" bodyend="1336"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a7d076bc33fc8ca1efa002a2a700088e9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; link_node &gt;" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1a6642b9ebad3a6eb4b54bc88f78331cf5" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::erase</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::rb_tree::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1rb__tree_1aef573fbbd32a98cc2c93218f6e8563ec" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>删除所有具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>删除的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1343" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1343" bodyend="1348"/>
+        <referencedby refid="classneforce_1_1rb__tree_1a7d076bc33fc8ca1efa002a2a700088e9" compoundref="rb__tree_8hpp" startline="1343" endline="1348">neforce::rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classneforce_1_1rb__tree_1a3a93f6cb60b22748156aa4871bd143cb" compoundref="rb__tree_8hpp" startline="1366" endline="1374">neforce::rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1aaaf4331bba2846ab3aeda6f76d25bec8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; link_node &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::erase</definition>
+        <argsstring>(iterator position)</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::rb_tree::erase</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>删除指定位置的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1354" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1354" bodyend="1359"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a3a93f6cb60b22748156aa4871bd143cb" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; link_node &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::erase</definition>
+        <argsstring>(iterator first, iterator last)</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::rb_tree::erase</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除指定范围内的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1366" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1366" bodyend="1374"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a41482cd94feadebd510f64277145294d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; link_node &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>neforce::rb_tree::clear</qualifiedname>
+        <briefdescription>
+<para>清空树 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1379" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1379" bodyend="1391"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1ab08d2fb0f42341fdd2eb1986e74504da" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>find</name>
+        <qualifiedname>neforce::rb_tree::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1rb__tree_1aef573fbbd32a98cc2c93218f6e8563ec" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的迭代器，未找到则返回end() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1398" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1398" bodyend="1416"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a6c2550f93807ca5f2c2e3cf0e38759fc" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1ad1c913568b5fe36333f6a5f0339301f1" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>find</name>
+        <qualifiedname>neforce::rb_tree::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1rb__tree_1aef573fbbd32a98cc2c93218f6e8563ec" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的元素（常量版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的常量迭代器，未找到则返回cend() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1423" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1423" bodyend="1441"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a95c568c142c3dd79bf9f8b0b8a86baca" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1a6642b9ebad3a6eb4b54bc88f78331cf5" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::count</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>count</name>
+        <qualifiedname>neforce::rb_tree::count</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1rb__tree_1aef573fbbd32a98cc2c93218f6e8563ec" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>统计具有指定键的元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要统计的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>匹配的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1448" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1448" bodyend="1452"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a432ac6d552cccd598088eb071cbdf8ae" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::lower_bound</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>lower_bound</name>
+        <qualifiedname>neforce::rb_tree::lower_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1rb__tree_1aef573fbbd32a98cc2c93218f6e8563ec" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个不小于指定键的元素位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个不小于key的元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1459" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1459" bodyend="1473"/>
+        <referencedby refid="classneforce_1_1rb__tree_1a964581621a38a7abbf10fae07120cb4a" compoundref="rb__tree_8hpp" startline="1543" endline="1545">neforce::rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_range</referencedby>
+        <referencedby refid="classneforce_1_1rb__tree_1a99f8c1a31f0fa63e2ff3b2010aef7192" compoundref="rb__tree_8hpp" startline="1552" endline="1554">neforce::rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_range</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a943021003dc3764482e8009a04194fba" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1ad1c913568b5fe36333f6a5f0339301f1" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::lower_bound</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>lower_bound</name>
+        <qualifiedname>neforce::rb_tree::lower_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1rb__tree_1aef573fbbd32a98cc2c93218f6e8563ec" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个不小于指定键的元素位置（常量版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个不小于key的元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1480" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1480" bodyend="1494"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a238a5393afb5585379c5e1919a23f4e0" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::upper_bound</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>upper_bound</name>
+        <qualifiedname>neforce::rb_tree::upper_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1rb__tree_1aef573fbbd32a98cc2c93218f6e8563ec" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个大于指定键的元素位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个大于key的元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1501" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1501" bodyend="1515"/>
+        <referencedby refid="classneforce_1_1rb__tree_1a964581621a38a7abbf10fae07120cb4a" compoundref="rb__tree_8hpp" startline="1543" endline="1545">neforce::rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_range</referencedby>
+        <referencedby refid="classneforce_1_1rb__tree_1a99f8c1a31f0fa63e2ff3b2010aef7192" compoundref="rb__tree_8hpp" startline="1552" endline="1554">neforce::rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_range</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a3a64e7a36e9321e69c8b3c149f1bad3b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1rb__tree_1ad1c913568b5fe36333f6a5f0339301f1" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::upper_bound</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>upper_bound</name>
+        <qualifiedname>neforce::rb_tree::upper_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1rb__tree_1aef573fbbd32a98cc2c93218f6e8563ec" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个大于指定键的元素位置（常量版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个大于key的元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1522" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1522" bodyend="1536"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a964581621a38a7abbf10fae07120cb4a" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref>, <ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">iterator</ref> &gt;</type>
+        <definition>pair&lt; iterator, iterator &gt; neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>neforce::rb_tree::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1rb__tree_1aef573fbbd32a98cc2c93218f6e8563ec" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的元素范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含lower_bound和upper_bound的pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1543" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1543" bodyend="1545"/>
+        <referencedby refid="classneforce_1_1rb__tree_1a95c568c142c3dd79bf9f8b0b8a86baca" compoundref="rb__tree_8hpp" startline="1448" endline="1452">neforce::rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::count</referencedby>
+        <referencedby refid="classneforce_1_1rb__tree_1a7d076bc33fc8ca1efa002a2a700088e9" compoundref="rb__tree_8hpp" startline="1343" endline="1348">neforce::rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a99f8c1a31f0fa63e2ff3b2010aef7192" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1rb__tree_1ad1c913568b5fe36333f6a5f0339301f1" kindref="member">const_iterator</ref>, <ref refid="classneforce_1_1rb__tree_1ad1c913568b5fe36333f6a5f0339301f1" kindref="member">const_iterator</ref> &gt;</type>
+        <definition>pair&lt; const_iterator, const_iterator &gt; neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>neforce::rb_tree::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1rb__tree_1aef573fbbd32a98cc2c93218f6e8563ec" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的元素范围（常量版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含lower_bound和upper_bound的pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1552" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1552" bodyend="1554"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a63c93c9783f9d88aafd77dd7ca90f378" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_swappable_v&lt; Compare &gt; &amp;&amp;is_nothrow_swappable_v&lt; KeyOfValue &gt; &amp;&amp;is_nothrow_swappable_v&lt; allocator_type &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::swap</definition>
+        <argsstring>(rb_tree &amp;other)</argsstring>
+        <name>swap</name>
+        <qualifiedname>neforce::rb_tree::swap</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1rb__tree_1a69ce1829edc7504ab9d25285f337918a" kindref="member">rb_tree</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个红黑树的内容 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的另一个红黑树 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1560" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1560" bodyend="1566"/>
+        <referencedby refid="classneforce_1_1rb__tree_1a69014bca7cf2ad3e0b9d60b2a5a04f4f" compoundref="rb__tree_8hpp" startline="978" endline="985">neforce::rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1rb__tree_1acaad202db23cf9a42e0e6179434a7bf7" compoundref="rb__tree_8hpp" startline="1007" endline="1014">neforce::rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1a9b3a608e707a506cd631f19a6641731f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(_NEFORCE equal(cbegin(), cend(), rhs.cbegin()))" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::equal_to</definition>
+        <argsstring>(const rb_tree &amp;rhs) const</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>neforce::rb_tree::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1rb__tree_1a69ce1829edc7504ab9d25285f337918a" kindref="member">rb_tree</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧红黑树 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果两个红黑树大小相等且对应元素相等返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1573" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1573" bodyend="1576"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1rb__tree_1ab702e77ff909214031cffbe84e29d9b7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(_NEFORCE lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend()))" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::less_than</definition>
+        <argsstring>(const rb_tree &amp;rhs) const</argsstring>
+        <name>less_than</name>
+        <qualifiedname>neforce::rb_tree::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1rb__tree_1a69ce1829edc7504ab9d25285f337918a" kindref="member">rb_tree</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧红黑树 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>按字典序比较结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1583" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1583" bodyend="1586"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>红黑树容器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>KeyOfValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>从值中提取键的函数对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>分配器类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+红黑树是一种自平衡二叉搜索树，作为关联式容器的底层实现。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="619" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="619" bodyend="1587"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1rb__tree_1a1120f099bdc6d0bea47b8fc634f09fd5" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>allocator_type</name></member>
+      <member refid="classneforce_1_1rb__tree_1ac2f8e429551bc1229729a65e4e4afa40" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>base_node</name></member>
+      <member refid="classneforce_1_1rb__tree_1a805b43ea1e74ae6b10cebb0997c389dc" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>base_ptr</name></member>
+      <member refid="classneforce_1_1rb__tree_1a6b7578a1ee364a3ad803e2ca4c97144b" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>begin</name></member>
+      <member refid="classneforce_1_1rb__tree_1ac6aab720770afe44834f2cdd72bbd9fa" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>begin</name></member>
+      <member refid="classneforce_1_1rb__tree_1a7db374e90fd932bdfdb2e986c053794f" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>cbegin</name></member>
+      <member refid="classneforce_1_1rb__tree_1aa8b97efc43856c9923817efc73f7e523" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>cend</name></member>
+      <member refid="classneforce_1_1rb__tree_1a41482cd94feadebd510f64277145294d" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>clear</name></member>
+      <member refid="classneforce_1_1rb__tree_1a3b191fe21287eb1c892ed2d2566a3e19" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>color_type</name></member>
+      <member refid="classneforce_1_1rb__tree_1ad1c913568b5fe36333f6a5f0339301f1" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>const_iterator</name></member>
+      <member refid="classneforce_1_1rb__tree_1a15c1a16c2d21d48427080dff135de068" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>const_pointer</name></member>
+      <member refid="classneforce_1_1rb__tree_1a110c8048f3bcd304a538fe7b028ce946" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>const_reference</name></member>
+      <member refid="classneforce_1_1rb__tree_1a3bc2bc4c2ec35806801bc7fc4a79bf1f" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>const_reverse_iterator</name></member>
+      <member refid="classneforce_1_1rb__tree_1a87680e0da9b9ee53896cd59411e70f38" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>copy_from</name></member>
+      <member refid="classneforce_1_1rb__tree_1ac9fc0dd52b0e932f2c6403ba61850ecb" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>copy_node</name></member>
+      <member refid="classneforce_1_1rb__tree_1a7e7c65f9ef4316166436cab27fdb1bfe" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>copy_under</name></member>
+      <member refid="classneforce_1_1rb__tree_1a95c568c142c3dd79bf9f8b0b8a86baca" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>count</name></member>
+      <member refid="classneforce_1_1rb__tree_1a0bf6ca32609430d607650bb1057c73ad" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>crbegin</name></member>
+      <member refid="classneforce_1_1rb__tree_1a90b3cccdeec5bccd8b121145092fa265" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>create_node</name></member>
+      <member refid="classneforce_1_1rb__tree_1a32fe63eb2ddd1903a5f4c21a316c1e76" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>crend</name></member>
+      <member refid="classneforce_1_1rb__tree_1af54fe8edb640dd6021983e9c21b8c9df" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>destroy_node</name></member>
+      <member refid="classneforce_1_1rb__tree_1aa255645addc4c8947a65b19b25957b6a" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>difference_type</name></member>
+      <member refid="classneforce_1_1rb__tree_1aed342b9b46db4fa273e59ba051cb6a58" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>emplace_equal</name></member>
+      <member refid="classneforce_1_1rb__tree_1abbadb3f5ceb9147319ad432139328168" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>emplace_equal_hint</name></member>
+      <member refid="classneforce_1_1rb__tree_1aed03d31fd6d5aa07cb703c3b04102eff" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>emplace_unique</name></member>
+      <member refid="classneforce_1_1rb__tree_1afcc6dcb669ba16db13c565d6c8e32b95" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>emplace_unique_hint</name></member>
+      <member refid="classneforce_1_1rb__tree_1ae28d9f45dbf57190270992a3824e5f98" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>empty</name></member>
+      <member refid="classneforce_1_1rb__tree_1aec647db908ecddb146a2af582376cd2e" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>end</name></member>
+      <member refid="classneforce_1_1rb__tree_1a1e4bb1000e669da039b1eb74f092fbf7" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>end</name></member>
+      <member refid="classneforce_1_1rb__tree_1a964581621a38a7abbf10fae07120cb4a" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>equal_range</name></member>
+      <member refid="classneforce_1_1rb__tree_1a99f8c1a31f0fa63e2ff3b2010aef7192" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>equal_range</name></member>
+      <member refid="classneforce_1_1rb__tree_1a9b3a608e707a506cd631f19a6641731f" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>equal_to</name></member>
+      <member refid="classneforce_1_1rb__tree_1a7d076bc33fc8ca1efa002a2a700088e9" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>erase</name></member>
+      <member refid="classneforce_1_1rb__tree_1aaaf4331bba2846ab3aeda6f76d25bec8" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>erase</name></member>
+      <member refid="classneforce_1_1rb__tree_1a3a93f6cb60b22748156aa4871bd143cb" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>erase</name></member>
+      <member refid="classneforce_1_1rb__tree_1a71ff211174a51062df7461df87702ea2" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>erase_under</name></member>
+      <member refid="classneforce_1_1rb__tree_1ac44c2710750deb34e6129372be6751b0" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>extracter_</name></member>
+      <member refid="classneforce_1_1rb__tree_1ab08d2fb0f42341fdd2eb1986e74504da" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>find</name></member>
+      <member refid="classneforce_1_1rb__tree_1a6c2550f93807ca5f2c2e3cf0e38759fc" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>find</name></member>
+      <member refid="classneforce_1_1rb__tree_1a65cf5d377f4fd54fd6baad1dcff6fca1" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>header_</name></member>
+      <member refid="classneforce_1_1rb__tree_1a9806fc9410195f42e1eb331245081d27" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>header_init</name></member>
+      <member refid="classneforce_1_1rb__tree_1a27fae8c89691457b8e03e8fabee5eb69" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>insert_equal</name></member>
+      <member refid="classneforce_1_1rb__tree_1a9fcf3dba70da313c9e2c7b8da2d0c800" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>insert_equal</name></member>
+      <member refid="classneforce_1_1rb__tree_1a7285e904177378119aaa365f58be9132" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>insert_equal</name></member>
+      <member refid="classneforce_1_1rb__tree_1a49c833047639e7ee2605b638b788a1d0" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>insert_equal</name></member>
+      <member refid="classneforce_1_1rb__tree_1aa7df39a2a48094319b253866fd79e4fa" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>insert_equal</name></member>
+      <member refid="classneforce_1_1rb__tree_1a3f3389d3b7691aef8536219682b3a499" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>insert_equal</name></member>
+      <member refid="classneforce_1_1rb__tree_1af9c154c4ca2bf82ba1cfa7bb3822a737" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>insert_into</name></member>
+      <member refid="classneforce_1_1rb__tree_1afe0857eb6db0e2982a29741959361fe8" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>insert_unique</name></member>
+      <member refid="classneforce_1_1rb__tree_1a0da71fde949cb8b13e51acd828e6e7cb" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>insert_unique</name></member>
+      <member refid="classneforce_1_1rb__tree_1a6f0736558fca0ecd53c48a7276f2a38e" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>insert_unique</name></member>
+      <member refid="classneforce_1_1rb__tree_1a78e244108a023667b2e47ec201577d24" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>insert_unique</name></member>
+      <member refid="classneforce_1_1rb__tree_1a673e6b7c0e5502d5b955aa41353dc6e9" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>insert_unique</name></member>
+      <member refid="classneforce_1_1rb__tree_1ad15c9cd154c04b0bd0567d6dd286fdae" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>insert_unique</name></member>
+      <member refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>iterator</name></member>
+      <member refid="classneforce_1_1rb__tree_1a34302f7547f04a3f31f662d5921977ab" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>key</name></member>
+      <member refid="classneforce_1_1rb__tree_1a1999085447e148f22d2254af9cadd3b4" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>key</name></member>
+      <member refid="classneforce_1_1rb__tree_1a302a2912b6a682b57e804e14ec1493ca" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>key_compare</name></member>
+      <member refid="classneforce_1_1rb__tree_1a3947797cb46fdfc5cd51330543f2e748" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>key_compare_</name></member>
+      <member refid="classneforce_1_1rb__tree_1aef573fbbd32a98cc2c93218f6e8563ec" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>key_type</name></member>
+      <member refid="classneforce_1_1rb__tree_1a0c33ec409d4d0c81a133b5c34476afe6" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>left</name></member>
+      <member refid="classneforce_1_1rb__tree_1a3bd7d5a236af79d735e03ae65d51d3c0" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>leftmost</name></member>
+      <member refid="classneforce_1_1rb__tree_1ab702e77ff909214031cffbe84e29d9b7" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>less_than</name></member>
+      <member refid="classneforce_1_1rb__tree_1aa23365f78d9d5c5fa9d3bde8fc2c08b5" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>link_node</name></member>
+      <member refid="classneforce_1_1rb__tree_1a7764a6452b1717d03a3b8ca0f594b63e" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>link_type</name></member>
+      <member refid="classneforce_1_1rb__tree_1a432ac6d552cccd598088eb071cbdf8ae" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>lower_bound</name></member>
+      <member refid="classneforce_1_1rb__tree_1a943021003dc3764482e8009a04194fba" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>lower_bound</name></member>
+      <member refid="classneforce_1_1rb__tree_1a73acedbb5779315c947115bd139b2d53" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>max_size</name></member>
+      <member refid="classneforce_1_1rb__tree_1a7b46d980f2f51986bdcfd28fbbd1f4bb" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>maximum</name></member>
+      <member refid="classneforce_1_1rb__tree_1a81ebf377a78a6481e423164b3b958888" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>minimum</name></member>
+      <member refid="classneforce_1_1rb__tree_1a69014bca7cf2ad3e0b9d60b2a5a04f4f" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1rb__tree_1acaad202db23cf9a42e0e6179434a7bf7" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1rb__tree_1af581113465160e20bec2ee0afb8f260f" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>parent</name></member>
+      <member refid="classneforce_1_1rb__tree_1af6c3b2665bd3d05e517f2100c64c71a2" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>pointer</name></member>
+      <member refid="classneforce_1_1rb__tree_1a69ce1829edc7504ab9d25285f337918a" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>rb_tree</name></member>
+      <member refid="classneforce_1_1rb__tree_1afc602582245c74384ce65e1325ac41b7" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>rb_tree</name></member>
+      <member refid="classneforce_1_1rb__tree_1a66c2120457475bdc20334cbe1086c9b2" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>rb_tree</name></member>
+      <member refid="classneforce_1_1rb__tree_1ac1927c342a8c2e63520554778bc326d1" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>rb_tree</name></member>
+      <member refid="classneforce_1_1rb__tree_1a290d805b5b856c87da5f7ea4d5bfc172" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>rbegin</name></member>
+      <member refid="classneforce_1_1rb__tree_1afa110d0fe7530119655f5c7ea5fa2de9" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>rbegin</name></member>
+      <member refid="classneforce_1_1rb__tree_1ae152128b6c105bbd0f4e5391b19ba178" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>reference</name></member>
+      <member refid="classneforce_1_1rb__tree_1a5198f5ae6708c630b78ee3ffc37827cc" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>rend</name></member>
+      <member refid="classneforce_1_1rb__tree_1aa666ec5daba75401f452e48e1ad3f131" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>rend</name></member>
+      <member refid="classneforce_1_1rb__tree_1a29d32bad63b07606647d87b536e15f57" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>reverse_iterator</name></member>
+      <member refid="classneforce_1_1rb__tree_1a949e65f567c873285d054260996ea738" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>right</name></member>
+      <member refid="classneforce_1_1rb__tree_1a433c5a438037e8562b1a24c36c93bd2b" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>rightmost</name></member>
+      <member refid="classneforce_1_1rb__tree_1a3fc5597622d86565a3bbdcc63a248281" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>root</name></member>
+      <member refid="classneforce_1_1rb__tree_1ad932d590f332feb06f1152bcf972ef60" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>size</name></member>
+      <member refid="classneforce_1_1rb__tree_1adf0d7ed479cec20c3cb4e9ae46b1e4ad" prot="private" virt="non-virtual"><scope>neforce::rb_tree</scope><name>size_pair_</name></member>
+      <member refid="classneforce_1_1rb__tree_1a6642b9ebad3a6eb4b54bc88f78331cf5" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>size_type</name></member>
+      <member refid="classneforce_1_1rb__tree_1a63c93c9783f9d88aafd77dd7ca90f378" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>swap</name></member>
+      <member refid="classneforce_1_1rb__tree_1a238a5393afb5585379c5e1919a23f4e0" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>upper_bound</name></member>
+      <member refid="classneforce_1_1rb__tree_1a3a64e7a36e9321e69c8b3c149f1bad3b" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>upper_bound</name></member>
+      <member refid="classneforce_1_1rb__tree_1a1ecd040a4c5b440e7ab4806944faf762" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>value_type</name></member>
+      <member refid="classneforce_1_1rb__tree_1a6c3b721e138b8affd3dfeb1ce5f44c6f" prot="public" virt="non-virtual"><scope>neforce::rb_tree</scope><name>~rb_tree</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

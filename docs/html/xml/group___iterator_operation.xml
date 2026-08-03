@@ -4,16 +4,17 @@
     <compoundname>IteratorOperation</compoundname>
     <title>迭代器操作</title>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___iterator_operation_1ga720710ba0a6ddb8ac7aa954b0ee25b31" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___iterator_operation_1ga367d15a3e0b0a95902be14fcd2df4214" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
-        <type><ref refid="group___iterator_traits_1gaf6942166677058c886c9f50e90b2e44a" kindref="member">iter_pointer_t</ref>&lt; Iterator &gt;</type>
-        <definition>iter_pointer_t&lt; Iterator &gt; to_pointer</definition>
+        <type>iter_pointer_t&lt; Iterator &gt;</type>
+        <definition>iter_pointer_t&lt; Iterator &gt; neforce::to_pointer</definition>
         <argsstring>(Iterator iter)</argsstring>
         <name>to_pointer</name>
+        <qualifiedname>neforce::to_pointer</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>iter</declname>
@@ -47,9 +48,11 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/iterator.hpp" line="47" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/iterator.hpp" bodystart="47" bodyend="57"/>
-        <references refid="group___base_type_qualifier_check_1ga60d8a43ca3d5d473f1651ef5114c2628" compoundref="type__traits_8hpp" startline="1565">is_pointer_v</references>
+        <references refid="group___base_type_qualifier_check_1gaa86104a58ef8a3d169d5561f25d42c36" compoundref="type__traits_8hpp" startline="1565">neforce::is_pointer_v</references>
+        <references refid="group___iterator_operation_1ga367d15a3e0b0a95902be14fcd2df4214" compoundref="iterator_8hpp" startline="47" endline="57">neforce::to_pointer</references>
+        <referencedby refid="group___iterator_operation_1ga367d15a3e0b0a95902be14fcd2df4214" compoundref="iterator_8hpp" startline="47" endline="57">neforce::to_pointer</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___iterator_operation_1ga0ebe1ee99151c272bdedc1a48d148aa2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___iterator_operation_1gab75e73250466cd76e5b49ff5a95a6b2d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
@@ -59,9 +62,10 @@
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void advance</definition>
+        <definition>void neforce::advance</definition>
         <argsstring>(Iterator &amp;i, Distance n)</argsstring>
         <name>advance</name>
+        <qualifiedname>neforce::advance</qualifiedname>
         <param>
           <type>Iterator &amp;</type>
           <declname>i</declname>
@@ -118,33 +122,36 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/iterator.hpp" line="106" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/iterator.hpp" bodystart="106" bodyend="129"/>
-        <references refid="group___base_type_properties_1gabf2224be65b8fb8794372d049a1d37d9" compoundref="type__traits_8hpp" startline="927">is_arithmetic_v</references>
-        <references refid="group___iterator_category_checks_1ga706391f7411dd3fcce16948cdd980372" compoundref="concepts_8hpp" startline="589">is_bid_iter_v</references>
-        <references refid="group___iterator_category_checks_1ga82451b532c89a512421a6d0d783bbb20" compoundref="concepts_8hpp" startline="525">is_iter_v</references>
-        <references refid="group___iterator_category_checks_1ga0d4d8785612dccf04285b9295e225eac" compoundref="concepts_8hpp" startline="609">is_rnd_iter_v</references>
-        <references refid="group___base_type_properties_1ga05c78609bb9e06b42e0a4c0c4409b0a1" compoundref="type__traits_8hpp" startline="961">is_signed_v</references>
-        <referencedby refid="group___pattern_matching_algorithms_1ga9997e6a5ac3609fc198d306e328229f4" compoundref="search_8hpp" startline="666" endline="703">find_end</referencedby>
-        <referencedby refid="group___bound_algorithms_1ga752e4da223be382b51f4af020097beab" compoundref="search_8hpp" startline="43" endline="63">lower_bound</referencedby>
-        <referencedby refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</referencedby>
-        <referencedby refid="group___iterator_operation_1gaf4cd040af11ff6b9b0fc0f4d70a7eb5e" compoundref="iterator_8hpp" startline="141" endline="145">prev</referencedby>
-        <referencedby refid="group___bound_algorithms_1ga6b8b644144e4b0e5f0258c0b3018385e" compoundref="search_8hpp" startline="96" endline="116">upper_bound</referencedby>
+        <references refid="group___iterator_operation_1gab75e73250466cd76e5b49ff5a95a6b2d" compoundref="iterator_8hpp" startline="106" endline="129">neforce::advance</references>
+        <references refid="group___base_type_properties_1ga6fcb1c62c84e7247c26261bf2b271b56" compoundref="type__traits_8hpp" startline="927">neforce::is_arithmetic_v</references>
+        <references refid="group___iterator_category_checks_1ga7b4f61a999410416cb40513edf9b7c66" compoundref="concepts_8hpp" startline="589">neforce::is_bid_iter_v</references>
+        <references refid="group___iterator_category_checks_1ga4f7b2f70ba1539ec3326d52e89698f13" compoundref="concepts_8hpp" startline="525">neforce::is_iter_v</references>
+        <references refid="group___iterator_category_checks_1gaada72ef8fb353a03d9170ae44af31744" compoundref="concepts_8hpp" startline="609">neforce::is_rnd_iter_v</references>
+        <references refid="group___base_type_properties_1ga85ca246ab5313b64a9cfb89fbd2a83b5" compoundref="type__traits_8hpp" startline="961">neforce::is_signed_v</references>
+        <referencedby refid="group___iterator_operation_1gab75e73250466cd76e5b49ff5a95a6b2d" compoundref="iterator_8hpp" startline="106" endline="129">neforce::advance</referencedby>
+        <referencedby refid="group___pattern_matching_algorithms_1ga9a9070e956472cac1622b61b0a688c23" compoundref="search_8hpp" startline="666" endline="703">neforce::find_end</referencedby>
+        <referencedby refid="group___bound_algorithms_1ga7b3b1a5476a623e135ea53851cdc80bd" compoundref="search_8hpp" startline="43" endline="63">neforce::lower_bound</referencedby>
+        <referencedby refid="group___iterator_operation_1gaec610c752e80ab2196ab3377eb84e06b" compoundref="iterator_8hpp" startline="157" endline="161">neforce::next</referencedby>
+        <referencedby refid="group___iterator_operation_1gac6b661a80c5a42d3f9e8349a0dc6d181" compoundref="iterator_8hpp" startline="141" endline="145">neforce::prev</referencedby>
+        <referencedby refid="group___bound_algorithms_1gac921ba98c610b6c4496a8824e7241c57" compoundref="search_8hpp" startline="96" endline="116">neforce::upper_bound</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___iterator_operation_1gaf4cd040af11ff6b9b0fc0f4d70a7eb5e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___iterator_operation_1gac6b661a80c5a42d3f9e8349a0dc6d181" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>Iterator</type>
-        <definition>Iterator prev</definition>
+        <definition>Iterator neforce::prev</definition>
         <argsstring>(Iterator iter, iter_difference_t&lt; Iterator &gt; n=1)</argsstring>
         <name>prev</name>
+        <qualifiedname>neforce::prev</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>iter</declname>
         </param>
         <param>
-          <type><ref refid="group___iterator_traits_1gaf61f58aa2abc24434e0b77340ddf2cfa" kindref="member">iter_difference_t</ref>&lt; Iterator &gt;</type>
+          <type>iter_difference_t&lt; Iterator &gt;</type>
           <declname>n</declname>
           <defval>1</defval>
         </param>
@@ -185,34 +192,37 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/iterator.hpp" line="141" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/iterator.hpp" bodystart="141" bodyend="145"/>
-        <references refid="group___iterator_operation_1ga0ebe1ee99151c272bdedc1a48d148aa2" compoundref="iterator_8hpp" startline="106" endline="129">advance</references>
-        <referencedby refid="classscreen_1a1976049e8632cfb8030cfd8f1256c195">screen::clear</referencedby>
-        <referencedby refid="group___sort_algorithms_1ga897ea2a00ea276fcc6f16d9dcae7deda" compoundref="sort_8hpp" startline="273" endline="309">cocktail_sort</referencedby>
-        <referencedby refid="group___math_functions_1ga316213d51761356da9ed86312071fe3b" compoundref="math_8hpp" startline="544" endline="566">cube_root</referencedby>
-        <referencedby refid="classhashtable_1a69cb3ef1f09f278a837e3e8e758d6369" compoundref="hashtable_8hpp" startline="1284" endline="1323">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
-        <referencedby refid="classdeque_1a6cebdf61a3a9f2448f679ed3fd8da6e0" compoundref="deque_8hpp" startline="1217" endline="1227">deque&lt; T, Alloc, BufSize &gt;::insert</referencedby>
-        <referencedby refid="classdeque_1a57f96fda19136ccb3e5ee50afac92711" compoundref="deque_8hpp" startline="1235" endline="1245">deque&lt; T, Alloc, BufSize &gt;::insert</referencedby>
-        <referencedby refid="classlist_1a5a46842fe82e376dd66b5b9cf63bf110" compoundref="list_8hpp" startline="993" endline="1008">list&lt; pair&lt; Key, Value &gt; &gt;::sort_if</referencedby>
-        <referencedby refid="group___math_functions_1ga498a7e743d1082430484d1b821aa6c71" compoundref="math_8hpp" startline="512" endline="533">square_root</referencedby>
-        <referencedby refid="classscreen_1a2714ae922fcc2edcd221a075709efe16">screen::to_string</referencedby>
-        <referencedby refid="classlock__free__queue_1ad694f5f11345581b7cdced27bf9b7c91" compoundref="lock__free__queue_8hpp" startline="732" endline="763">lock_free_queue&lt; T &gt;::~lock_free_queue</referencedby>
+        <references refid="group___iterator_operation_1gab75e73250466cd76e5b49ff5a95a6b2d" compoundref="iterator_8hpp" startline="106" endline="129">neforce::advance</references>
+        <references refid="group___iterator_operation_1gac6b661a80c5a42d3f9e8349a0dc6d181" compoundref="iterator_8hpp" startline="141" endline="145">neforce::prev</references>
+        <referencedby refid="classneforce_1_1tui_1_1screen_1af0609b48c139c1577750545cda5a60a9">neforce::tui::screen::clear</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga8be648c40f5bde49757d4f18aa1e2dc6" compoundref="sort_8hpp" startline="273" endline="309">neforce::cocktail_sort</referencedby>
+        <referencedby refid="group___math_functions_1gab01e95ef610a233c8cd662219e97df05" compoundref="math_8hpp" startline="544" endline="566">neforce::cube_root</referencedby>
+        <referencedby refid="classneforce_1_1hashtable_1a799119ba67274882f189c59643aaf891" compoundref="hashtable_8hpp" startline="1284" endline="1323">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classneforce_1_1deque_1ad38cdca9869a01cc84ae919cb1001faf" compoundref="deque_8hpp" startline="1217" endline="1227">neforce::deque&lt; T, Alloc, BufSize &gt;::insert</referencedby>
+        <referencedby refid="classneforce_1_1deque_1abcb896d50f4c6e6df0a9ecfbe4ac6e37" compoundref="deque_8hpp" startline="1235" endline="1245">neforce::deque&lt; T, Alloc, BufSize &gt;::insert</referencedby>
+        <referencedby refid="group___iterator_operation_1gac6b661a80c5a42d3f9e8349a0dc6d181" compoundref="iterator_8hpp" startline="141" endline="145">neforce::prev</referencedby>
+        <referencedby refid="classneforce_1_1list_1afcadc2a3d3110be487dea9e41ab89d16" compoundref="list_8hpp" startline="993" endline="1008">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::sort_if</referencedby>
+        <referencedby refid="group___math_functions_1gaad863b13ce587addf559f7f8edf0d07c" compoundref="math_8hpp" startline="512" endline="533">neforce::square_root</referencedby>
+        <referencedby refid="classneforce_1_1tui_1_1screen_1a52e82b2472b59a6f84162be14053914f">neforce::tui::screen::to_string</referencedby>
+        <referencedby refid="classneforce_1_1lock__free__queue_1ad2f8d7e56fd68ceec5e6f36445afd6a6" compoundref="lock__free__queue_8hpp" startline="732" endline="763">neforce::lock_free_queue&lt; T &gt;::~lock_free_queue</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___iterator_operation_1gaec610c752e80ab2196ab3377eb84e06b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>Iterator</type>
-        <definition>Iterator next</definition>
+        <definition>Iterator neforce::next</definition>
         <argsstring>(Iterator iter, iter_difference_t&lt; Iterator &gt; n=1)</argsstring>
         <name>next</name>
+        <qualifiedname>neforce::next</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>iter</declname>
         </param>
         <param>
-          <type><ref refid="group___iterator_traits_1gaf61f58aa2abc24434e0b77340ddf2cfa" kindref="member">iter_difference_t</ref>&lt; Iterator &gt;</type>
+          <type>iter_difference_t&lt; Iterator &gt;</type>
           <declname>n</declname>
           <defval>1</defval>
         </param>
@@ -253,49 +263,52 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/iterator.hpp" line="157" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/iterator.hpp" bodystart="157" bodyend="161"/>
-        <references refid="group___iterator_operation_1ga0ebe1ee99151c272bdedc1a48d148aa2" compoundref="iterator_8hpp" startline="106" endline="129">advance</references>
-        <referencedby refid="group___adjacent_algorithms_1ga13ada6eb80186e1a77c9c378a3e917be" compoundref="search_8hpp" startline="300" endline="314">adjacent_find</referencedby>
-        <referencedby refid="group___sort_algorithms_1ga821b14fdc1e7d63404b0d376f1c53d19" compoundref="sort_8hpp" startline="220" endline="245">bubble_sort</referencedby>
-        <referencedby refid="classhashtable_1a79d33043e3271488652bd33f49277885" compoundref="hashtable_8hpp" startline="1380" endline="1391">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::clear</referencedby>
-        <referencedby refid="structretire__list_1a661fc02d5203c1a70776d49173813cc9" compoundref="hazard__ptr_8hpp" startline="182" endline="190">retire_list::clear</referencedby>
-        <referencedby refid="classscreen_1a1976049e8632cfb8030cfd8f1256c195">screen::clear</referencedby>
-        <referencedby refid="group___sort_algorithms_1ga897ea2a00ea276fcc6f16d9dcae7deda" compoundref="sort_8hpp" startline="273" endline="309">cocktail_sort</referencedby>
-        <referencedby refid="classdeque_1a52338e7ad6f3a127e8f7baeb4d80246a" compoundref="deque_8hpp" startline="1295" endline="1306">deque&lt; T, Alloc, BufSize &gt;::erase</referencedby>
-        <referencedby refid="classflat__hashtable_1a76a68cf3a97cf416de5f57eb420cc993" compoundref="flat__hashtable_8hpp" startline="1164" endline="1186">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
-        <referencedby refid="classhashtable_1a98fde6b1f065ecae67b668f67e5f288f" compoundref="hashtable_8hpp" startline="1246" endline="1277">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
-        <referencedby refid="classhttp__filter__chain_1a5a04500fb579c84799510e9d759c5c80">http_filter_chain::execute_post_filters_async</referencedby>
-        <referencedby refid="classhttp__filter__chain_1ae6f3c78f4eaac17c8c0f4b3029963a86">http_filter_chain::execute_pre_filters_async</referencedby>
-        <referencedby refid="classlist_1ab62eb469b1e5e62faab2a31471dc8fc8" compoundref="list_8hpp" startline="647" endline="684">list&lt; pair&lt; Key, Value &gt; &gt;::insert</referencedby>
-        <referencedby refid="classlist_1a65342632ed9bbf501cc3d856b9e9c610" compoundref="list_8hpp" startline="703" endline="739">list&lt; pair&lt; Key, Value &gt; &gt;::insert</referencedby>
-        <referencedby refid="group___sort_algorithms_1ga0b0349f7dec1fb2baa425eab3e0ea498" compoundref="sort_8hpp" startline="137" endline="151">is_sorted</referencedby>
-        <referencedby refid="group___sort_algorithms_1ga402909e515a44301eba22c4a98dc9e9a" compoundref="sort_8hpp" startline="177" endline="191">is_sorted_until</referencedby>
-        <referencedby refid="group___compare_algorithms_1gaafcb422504addb63d771b9061f7533a9" compoundref="algorithm_2compare_8hpp" startline="337" endline="376">minmax_element</referencedby>
-        <referencedby refid="classasync__filter_1ae8709a34d9ae5687d03c46a5d80f8ede" compoundref="async__filter_8hpp" startline="66" endline="70">async_filter::post_filter_async</referencedby>
-        <referencedby refid="classasync__filter_1a930a6987d62ee544189522d30f9c1537" compoundref="async__filter_8hpp" startline="48" endline="55">async_filter::pre_filter_async</referencedby>
-        <referencedby refid="group___parallel_algorithms_1gad447586eb3e4c5bd99c06300195deeba" compoundref="parallel_8hpp" startline="42" endline="59">reduce</referencedby>
-        <referencedby refid="classhashtable_1af78667277f9f62e843dcc636c5f39cfb" compoundref="hashtable_8hpp" startline="1092" endline="1124">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::rehash</referencedby>
-        <referencedby refid="group___shift_algorithms_1ga3011e9c1ea124cbb3dfed724ee9e7624" compoundref="shift_8hpp" startline="838" endline="851">rotate</referencedby>
-        <referencedby refid="group___shift_algorithms_1gac89d00221baafa7cde725ffcfe292aeb" compoundref="shift_8hpp" startline="884" endline="899">shift_left</referencedby>
-        <referencedby refid="group___shift_algorithms_1ga0c7b083fbce6e6870933f3fceb8519e4" compoundref="shift_8hpp" startline="915" endline="930">shift_right</referencedby>
-        <referencedby refid="group___shuffle_algorithms_1ga3bcbde813bd43737ddaf4c106caac469" compoundref="shuffle_8hpp" startline="41" endline="53">shuffle</referencedby>
-        <referencedby refid="group___shuffle_algorithms_1ga7d0bd6e732e8ea782985610e8276d3ce" compoundref="shuffle_8hpp" startline="74" endline="84">shuffle</referencedby>
-        <referencedby refid="group___sort_algorithms_1gaca897ca5f6f1015b57ef38709af2a2c4" compoundref="sort_8hpp" startline="833" endline="867">tim_sort</referencedby>
-        <referencedby refid="group___parallel_algorithms_1ga9c84b149470430f99e5bb9f2de2a03dd" compoundref="parallel_8hpp" startline="78" endline="95">transform_reduce</referencedby>
-        <referencedby refid="classlist_1a55cecb0fb1888610ccc826d589845c66" compoundref="list_8hpp" startline="964" endline="978">list&lt; pair&lt; Key, Value &gt; &gt;::unique_if</referencedby>
-        <referencedby refid="classvector_1adb45b298d904e9ea05ea5579287ec75a" compoundref="vector_8hpp" startline="535" endline="536">vector&lt; Value, Alloc &gt;::vector</referencedby>
-        <referencedby refid="classhazard__pointer__domain_1a96cda2b40cbab07f17120547422f77a9" compoundref="hazard__ptr_8hpp" startline="284" endline="291">hazard_pointer_domain::~hazard_pointer_domain</referencedby>
-        <referencedby refid="classlock__free__queue_1ad694f5f11345581b7cdced27bf9b7c91" compoundref="lock__free__queue_8hpp" startline="732" endline="763">lock_free_queue&lt; T &gt;::~lock_free_queue</referencedby>
+        <references refid="group___iterator_operation_1gab75e73250466cd76e5b49ff5a95a6b2d" compoundref="iterator_8hpp" startline="106" endline="129">neforce::advance</references>
+        <references refid="group___iterator_operation_1gaec610c752e80ab2196ab3377eb84e06b" compoundref="iterator_8hpp" startline="157" endline="161">neforce::next</references>
+        <referencedby refid="group___adjacent_algorithms_1ga373549745645ee36a1567427315da8da" compoundref="search_8hpp" startline="300" endline="314">neforce::adjacent_find</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga34fd3492d3de0dc84d289cb08a705715" compoundref="sort_8hpp" startline="220" endline="245">neforce::bubble_sort</referencedby>
+        <referencedby refid="classneforce_1_1hashtable_1adda1e2662e898164613d0377762c2e18" compoundref="hashtable_8hpp" startline="1380" endline="1391">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::clear</referencedby>
+        <referencedby refid="structneforce_1_1retire__list_1af68c493338764a3b4aac2754bdf41d90" compoundref="hazard__ptr_8hpp" startline="182" endline="190">neforce::retire_list::clear</referencedby>
+        <referencedby refid="classneforce_1_1tui_1_1screen_1af0609b48c139c1577750545cda5a60a9">neforce::tui::screen::clear</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga8be648c40f5bde49757d4f18aa1e2dc6" compoundref="sort_8hpp" startline="273" endline="309">neforce::cocktail_sort</referencedby>
+        <referencedby refid="classneforce_1_1deque_1a01e8552dea322ceb95174a68a8c242ae" compoundref="deque_8hpp" startline="1295" endline="1306">neforce::deque&lt; T, Alloc, BufSize &gt;::erase</referencedby>
+        <referencedby refid="classneforce_1_1flat__hashtable_1a3ca31ade45759ce91bede838a46a89d7" compoundref="flat__hashtable_8hpp" startline="1164" endline="1186">neforce::flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classneforce_1_1hashtable_1a234eb2157731ca53f2e7af0ed42f1a5e" compoundref="hashtable_8hpp" startline="1246" endline="1277">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classneforce_1_1http_1_1http__filter__chain_1a18e26a719180644c6d4e480412798d5f">neforce::http::http_filter_chain::execute_post_filters_async</referencedby>
+        <referencedby refid="classneforce_1_1http_1_1http__filter__chain_1ab25a6680e5a63dd8eff756b1b84455db">neforce::http::http_filter_chain::execute_pre_filters_async</referencedby>
+        <referencedby refid="classneforce_1_1list_1ab8778e60c0fb0b55e1215274447407ff" compoundref="list_8hpp" startline="647" endline="684">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::insert</referencedby>
+        <referencedby refid="classneforce_1_1list_1a753a383edb60238e84701be51c6cde48" compoundref="list_8hpp" startline="703" endline="739">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::insert</referencedby>
+        <referencedby refid="group___sort_algorithms_1gad33b8ce780e1ad19c5c44b279f6c8c05" compoundref="sort_8hpp" startline="137" endline="151">neforce::is_sorted</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga3fe47e859e839627f980a8286884a5bd" compoundref="sort_8hpp" startline="177" endline="191">neforce::is_sorted_until</referencedby>
+        <referencedby refid="group___compare_algorithms_1ga01cef81098318a2152246c3d836c1545" compoundref="algorithm_2compare_8hpp" startline="337" endline="376">neforce::minmax_element</referencedby>
+        <referencedby refid="group___iterator_operation_1gaec610c752e80ab2196ab3377eb84e06b" compoundref="iterator_8hpp" startline="157" endline="161">neforce::next</referencedby>
+        <referencedby refid="classneforce_1_1http_1_1async__filter_1a70b9cd8f4d576f9345208e4b1bc9ced2" compoundref="async__filter_8hpp" startline="66" endline="70">neforce::http::async_filter::post_filter_async</referencedby>
+        <referencedby refid="classneforce_1_1http_1_1async__filter_1a0720e78d3018aadf2e65bc65e1d2fa21" compoundref="async__filter_8hpp" startline="48" endline="55">neforce::http::async_filter::pre_filter_async</referencedby>
+        <referencedby refid="group___parallel_algorithms_1ga4a0fb7d4107998892fcf525763602f4b" compoundref="parallel_8hpp" startline="42" endline="59">neforce::reduce</referencedby>
+        <referencedby refid="classneforce_1_1hashtable_1af7d98df17fd541fd4f59d308181f8951" compoundref="hashtable_8hpp" startline="1092" endline="1124">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::rehash</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga0e6dc27cfb9b7250e71cf9487dda2161" compoundref="shift_8hpp" startline="838" endline="851">neforce::rotate</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga9a749abba22867e4b0579a945d4ef5d2" compoundref="shift_8hpp" startline="884" endline="899">neforce::shift_left</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga086167d7bdd5716a5cf3c679a4406fe1" compoundref="shift_8hpp" startline="915" endline="930">neforce::shift_right</referencedby>
+        <referencedby refid="group___shuffle_algorithms_1ga1923fb855d707c657d666fc6ea2c1228" compoundref="shuffle_8hpp" startline="41" endline="53">neforce::shuffle</referencedby>
+        <referencedby refid="group___shuffle_algorithms_1gab95287909b94bdae1092f2d0f28181c9" compoundref="shuffle_8hpp" startline="74" endline="84">neforce::shuffle</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga41c9e2e012bc01ae98ff36334e3a02b5" compoundref="sort_8hpp" startline="833" endline="867">neforce::tim_sort</referencedby>
+        <referencedby refid="group___parallel_algorithms_1ga093aa3ddac9a6cd37fcf464c7c577426" compoundref="parallel_8hpp" startline="78" endline="95">neforce::transform_reduce</referencedby>
+        <referencedby refid="classneforce_1_1list_1a2de4f47023b192fdb75297668f10e264" compoundref="list_8hpp" startline="964" endline="978">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::unique_if</referencedby>
+        <referencedby refid="classneforce_1_1vector_1aaf76f30e7a625f4cc1542c8af26e87ce" compoundref="vector_8hpp" startline="535" endline="536">neforce::vector&lt; Value, Alloc &gt;::vector</referencedby>
+        <referencedby refid="classneforce_1_1hazard__pointer__domain_1a33a99f3683d91a609b098c69d03d43d8" compoundref="hazard__ptr_8hpp" startline="284" endline="291">neforce::hazard_pointer_domain::~hazard_pointer_domain</referencedby>
+        <referencedby refid="classneforce_1_1lock__free__queue_1ad2f8d7e56fd68ceec5e6f36445afd6a6" compoundref="lock__free__queue_8hpp" startline="732" endline="763">neforce::lock_free_queue&lt; T &gt;::~lock_free_queue</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___iterator_operation_1ga81cd39ae0fbc7198eef37acc9ff10950" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
-        <type><ref refid="group___iterator_traits_1gaf61f58aa2abc24434e0b77340ddf2cfa" kindref="member">iter_difference_t</ref>&lt; Iterator &gt;</type>
-        <definition>iter_difference_t&lt; Iterator &gt; distance</definition>
+        <type>iter_difference_t&lt; Iterator &gt;</type>
+        <definition>iter_difference_t&lt; Iterator &gt; neforce::distance</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>distance</name>
+        <qualifiedname>neforce::distance</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -345,42 +358,44 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/iterator.hpp" line="201" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/iterator.hpp" bodystart="201" bodyend="218"/>
-        <references refid="group___iterator_category_checks_1ga82451b532c89a512421a6d0d783bbb20" compoundref="concepts_8hpp" startline="525">is_iter_v</references>
-        <references refid="group___iterator_category_checks_1ga7e90191894e0224a9597f070cd1dcb79" compoundref="concepts_8hpp" startline="601">is_ranges_rnd_iter_v</references>
-        <referencedby refid="classbasic__string_1a7ca4a06ec31c7ed89c8128f9f45b2e71" compoundref="basic__string_8hpp" startline="1766" endline="1811">basic_string&lt; char &gt;::append</referencedby>
-        <referencedby refid="classbasic__string__view_1ab59f37849746f070f005c5f9b1aa3b8b" compoundref="basic__string__view_8hpp" startline="244" endline="246">basic_string_view&lt; typename Traits::char_type, Traits &gt;::basic_string_view</referencedby>
+        <references refid="group___iterator_operation_1ga81cd39ae0fbc7198eef37acc9ff10950" compoundref="iterator_8hpp" startline="201" endline="218">neforce::distance</references>
+        <references refid="group___iterator_category_checks_1ga4f7b2f70ba1539ec3326d52e89698f13" compoundref="concepts_8hpp" startline="525">neforce::is_iter_v</references>
+        <references refid="group___iterator_category_checks_1gabca13f6df73a191ea3c980af9121f3c1" compoundref="concepts_8hpp" startline="601">neforce::is_ranges_rnd_iter_v</references>
+        <referencedby refid="classneforce_1_1basic__string_1a436f8c016b13358612be56652044d1c1" compoundref="basic__string_8hpp" startline="1767" endline="1812">neforce::basic_string&lt; char &gt;::append</referencedby>
+        <referencedby refid="classneforce_1_1basic__string__view_1a46c0b8438cf6238fca88575e4d84360b" compoundref="basic__string__view_8hpp" startline="245" endline="247">neforce::basic_string_view&lt; typename Traits::char_type, Traits &gt;::basic_string_view</referencedby>
         <referencedby refid="classneforce_1_1lz4__compressor_1ab19465f76cfd0c241e03e3f5653a4d16" compoundref="lz4__compress_8hpp" startline="107" endline="114">neforce::lz4_compressor::compress</referencedby>
-        <referencedby refid="classzlib__compressor_1af998a7dcb0438ecb7e24aea2f5efb858" compoundref="zlib__compress_8hpp" startline="169" endline="178">zlib_compressor::compress</referencedby>
-        <referencedby refid="classrb__tree_1abeb1e733137d582f1ad6e8edfeac072a" compoundref="rb__tree_8hpp" startline="1448" endline="1452">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::count</referencedby>
+        <referencedby refid="classneforce_1_1zlib__compressor_1a44aa5ed18e33cf8d565a6ca560ea1862" compoundref="zlib__compress_8hpp" startline="169" endline="178">neforce::zlib_compressor::compress</referencedby>
+        <referencedby refid="classneforce_1_1rb__tree_1a95c568c142c3dd79bf9f8b0b8a86baca" compoundref="rb__tree_8hpp" startline="1448" endline="1452">neforce::rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::count</referencedby>
         <referencedby refid="classneforce_1_1lz4__compressor_1ac31054bb53e1fd078116038cc58f8180" compoundref="lz4__compress_8hpp" startline="164" endline="172">neforce::lz4_compressor::decompress</referencedby>
-        <referencedby refid="classzlib__compressor_1a27c509c99056483ab1a3201a0fdeb251" compoundref="zlib__compress_8hpp" startline="231" endline="242">zlib_compressor::decompress</referencedby>
-        <referencedby refid="classrb__tree_1a79de846348690d31fcd35c4624e04a05" compoundref="rb__tree_8hpp" startline="1343" endline="1348">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase</referencedby>
-        <referencedby refid="classvector_1abd1eca2676ab66bf64b847568469519f" compoundref="vector_8hpp" startline="1071" endline="1085">vector&lt; Value, Alloc &gt;::erase</referencedby>
-        <referencedby refid="classmemory__view_1a68fed76926f521a04a14a5644a8d87e7">memory_view&lt; char &gt;::explicit</referencedby>
-        <referencedby refid="group___pattern_matching_algorithms_1ga9997e6a5ac3609fc198d306e328229f4" compoundref="search_8hpp" startline="666" endline="703">find_end</referencedby>
-        <referencedby refid="group___merge_algorithms_1ga6715ef726249eda60e6460a96678138f" compoundref="merge_8hpp" startline="294" endline="303">inplace_merge</referencedby>
-        <referencedby refid="classbasic__string_1a96b9931e670cafb12b35cae11db3220d" compoundref="basic__string_8hpp" startline="1498" endline="1538">basic_string&lt; char &gt;::insert</referencedby>
-        <referencedby refid="classbitmap_1aece9d46b7c20412279a22b2da0b59aeb" compoundref="bitmap_8hpp" startline="1038" endline="1050">bitmap::insert</referencedby>
-        <referencedby refid="classflat__hashtable_1ab21f2efc787233cc12113ebd1998af21" compoundref="flat__hashtable_8hpp" startline="1099" endline="1107">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal</referencedby>
-        <referencedby refid="classflat__hashtable_1aff06d3c7277cd8e15949f16388e56f5a" compoundref="flat__hashtable_8hpp" startline="1063" endline="1071">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique</referencedby>
-        <referencedby refid="group___bound_algorithms_1ga752e4da223be382b51f4af020097beab" compoundref="search_8hpp" startline="43" endline="63">lower_bound</referencedby>
-        <referencedby refid="group___leonardo_heap_1gaeccafcd2bf9df72de2f4a7ec6ff469fa" compoundref="leonardo__heap_8hpp" startline="327" endline="350">make_leonardo_heap</referencedby>
-        <referencedby refid="group___sort_algorithms_1gac4e6fa13122e50c09e865328c3ab7af2" compoundref="sort_8hpp" startline="432" endline="443">merge_sort</referencedby>
-        <referencedby refid="group___leonardo_heap_1ga136d8080ad6127b70845b45e199e2c5d" compoundref="leonardo__heap_8hpp" startline="236" endline="267">pop_leonardo_heap</referencedby>
-        <referencedby refid="group___leonardo_heap_1ga339f8c175e964064f8d7e8e2676591fa" compoundref="leonardo__heap_8hpp" startline="189" endline="225">push_leonardo_heap</referencedby>
-        <referencedby refid="group___parallel_algorithms_1gad447586eb3e4c5bd99c06300195deeba" compoundref="parallel_8hpp" startline="42" endline="59">reduce</referencedby>
-        <referencedby refid="group___shift_algorithms_1ga3011e9c1ea124cbb3dfed724ee9e7624" compoundref="shift_8hpp" startline="838" endline="851">rotate</referencedby>
-        <referencedby refid="group___pattern_matching_algorithms_1ga07db4eea0c988d493904052c4839973e" compoundref="search_8hpp" startline="481" endline="511">search</referencedby>
-        <referencedby refid="classfile_1adbb78cd98c4493065c03cb0d059723f5">file::seek</referencedby>
-        <referencedby refid="group___sort_algorithms_1ga5460a64be141e4d5b5e0eb165cbfc170" compoundref="sort_8hpp" startline="383" endline="401">shell_sort</referencedby>
-        <referencedby refid="group___shift_algorithms_1gac89d00221baafa7cde725ffcfe292aeb" compoundref="shift_8hpp" startline="884" endline="899">shift_left</referencedby>
-        <referencedby refid="group___shift_algorithms_1ga0c7b083fbce6e6870933f3fceb8519e4" compoundref="shift_8hpp" startline="915" endline="930">shift_right</referencedby>
-        <referencedby refid="group___shuffle_algorithms_1ga3bcbde813bd43737ddaf4c106caac469" compoundref="shuffle_8hpp" startline="41" endline="53">shuffle</referencedby>
-        <referencedby refid="group___leonardo_heap_1ga30b3db79677a6fbb9e3b71a62b48933f" compoundref="leonardo__heap_8hpp" startline="278" endline="316">sort_leonardo_heap</referencedby>
-        <referencedby refid="structtemporary__buffer_1a8f40b4b40ba5071f0f9b6c7157d9127a" compoundref="temporary__buffer_8hpp" startline="113" endline="128">temporary_buffer&lt; Iterator &gt;::temporary_buffer</referencedby>
-        <referencedby refid="group___sort_algorithms_1gaca897ca5f6f1015b57ef38709af2a2c4" compoundref="sort_8hpp" startline="833" endline="867">tim_sort</referencedby>
-        <referencedby refid="group___parallel_algorithms_1ga9c84b149470430f99e5bb9f2de2a03dd" compoundref="parallel_8hpp" startline="78" endline="95">transform_reduce</referencedby>
-        <referencedby refid="group___bound_algorithms_1ga6b8b644144e4b0e5f0258c0b3018385e" compoundref="search_8hpp" startline="96" endline="116">upper_bound</referencedby>
+        <referencedby refid="classneforce_1_1zlib__compressor_1ac0bc7c8d01716c947bd9c784d44756bc" compoundref="zlib__compress_8hpp" startline="231" endline="242">neforce::zlib_compressor::decompress</referencedby>
+        <referencedby refid="group___iterator_operation_1ga81cd39ae0fbc7198eef37acc9ff10950" compoundref="iterator_8hpp" startline="201" endline="218">neforce::distance</referencedby>
+        <referencedby refid="classneforce_1_1rb__tree_1a7d076bc33fc8ca1efa002a2a700088e9" compoundref="rb__tree_8hpp" startline="1343" endline="1348">neforce::rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classneforce_1_1vector_1a501fe6b93579ebba4439df887515661c" compoundref="vector_8hpp" startline="1071" endline="1085">neforce::vector&lt; Value, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classneforce_1_1memory__view_1af2c1f93eb5a232c820ded179af35aa24">neforce::memory_view&lt; char &gt;::explicit</referencedby>
+        <referencedby refid="group___pattern_matching_algorithms_1ga9a9070e956472cac1622b61b0a688c23" compoundref="search_8hpp" startline="666" endline="703">neforce::find_end</referencedby>
+        <referencedby refid="group___merge_algorithms_1ga7643d4dfc6ec0f239e9a905d3de7da47" compoundref="merge_8hpp" startline="294" endline="303">neforce::inplace_merge</referencedby>
+        <referencedby refid="classneforce_1_1basic__string_1a3245a0bef419a304236ff82d5ab80d79" compoundref="basic__string_8hpp" startline="1499" endline="1539">neforce::basic_string&lt; char &gt;::insert</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a52256f90af1a02dc434a18a4a6e2a7a4" compoundref="bitmap_8hpp" startline="1038" endline="1050">neforce::bitmap::insert</referencedby>
+        <referencedby refid="classneforce_1_1flat__hashtable_1a41b184c78dbb0fafccf68145b8ebe008" compoundref="flat__hashtable_8hpp" startline="1099" endline="1107">neforce::flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal</referencedby>
+        <referencedby refid="classneforce_1_1flat__hashtable_1a44bca0b0bd9d4ee67a2d9a7a141c9b8e" compoundref="flat__hashtable_8hpp" startline="1063" endline="1071">neforce::flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique</referencedby>
+        <referencedby refid="group___bound_algorithms_1ga7b3b1a5476a623e135ea53851cdc80bd" compoundref="search_8hpp" startline="43" endline="63">neforce::lower_bound</referencedby>
+        <referencedby refid="group___leonardo_heap_1ga614eb82010a036730ed102df417c8f42" compoundref="leonardo__heap_8hpp" startline="327" endline="350">neforce::make_leonardo_heap</referencedby>
+        <referencedby refid="group___sort_algorithms_1gaac38a2038e8508eba8e2949ccbb77227" compoundref="sort_8hpp" startline="432" endline="443">neforce::merge_sort</referencedby>
+        <referencedby refid="group___leonardo_heap_1gae0b8e0d88ab3f099800a507e1c56678c" compoundref="leonardo__heap_8hpp" startline="236" endline="267">neforce::pop_leonardo_heap</referencedby>
+        <referencedby refid="group___leonardo_heap_1gabd7f4744500fb899386b3a971f6bed8a" compoundref="leonardo__heap_8hpp" startline="189" endline="225">neforce::push_leonardo_heap</referencedby>
+        <referencedby refid="group___parallel_algorithms_1ga4a0fb7d4107998892fcf525763602f4b" compoundref="parallel_8hpp" startline="42" endline="59">neforce::reduce</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga0e6dc27cfb9b7250e71cf9487dda2161" compoundref="shift_8hpp" startline="838" endline="851">neforce::rotate</referencedby>
+        <referencedby refid="group___pattern_matching_algorithms_1ga18f6cb26bacb2dd883721adf03af4ff7" compoundref="search_8hpp" startline="481" endline="511">neforce::search</referencedby>
+        <referencedby refid="classneforce_1_1file_1a51433e5e833412d2b0f371b10a569cd9">neforce::file::seek</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga25d3caf235639ba184620b374bde3e86" compoundref="sort_8hpp" startline="383" endline="401">neforce::shell_sort</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga9a749abba22867e4b0579a945d4ef5d2" compoundref="shift_8hpp" startline="884" endline="899">neforce::shift_left</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga086167d7bdd5716a5cf3c679a4406fe1" compoundref="shift_8hpp" startline="915" endline="930">neforce::shift_right</referencedby>
+        <referencedby refid="group___shuffle_algorithms_1ga1923fb855d707c657d666fc6ea2c1228" compoundref="shuffle_8hpp" startline="41" endline="53">neforce::shuffle</referencedby>
+        <referencedby refid="group___leonardo_heap_1gac8bc87194be6d7619c0ac6ba70bc8640" compoundref="leonardo__heap_8hpp" startline="278" endline="316">neforce::sort_leonardo_heap</referencedby>
+        <referencedby refid="structneforce_1_1temporary__buffer_1a8fa9153c1ad36cfc6472bae0334e97d9" compoundref="temporary__buffer_8hpp" startline="113" endline="128">neforce::temporary_buffer&lt; Iterator &gt;::temporary_buffer</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga41c9e2e012bc01ae98ff36334e3a02b5" compoundref="sort_8hpp" startline="833" endline="867">neforce::tim_sort</referencedby>
+        <referencedby refid="group___parallel_algorithms_1ga093aa3ddac9a6cd37fcf464c7c577426" compoundref="parallel_8hpp" startline="78" endline="95">neforce::transform_reduce</referencedby>
+        <referencedby refid="group___bound_algorithms_1gac921ba98c610b6c4496a8824e7241c57" compoundref="search_8hpp" startline="96" endline="116">neforce::upper_bound</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

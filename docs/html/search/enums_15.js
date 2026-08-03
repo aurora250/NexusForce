@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['value_5ftype_0',['value_type',['../classregistry__key.html#a257871e0b2a75bc616d2b83d6ff96477',1,'registry_key']]],
-  ['variant_1',['variant',['../structstyle.html#a50690ce0051edce19b935936e2cf7797',1,'style']]],
-  ['visit_5fresult_2',['visit_result',['../classpath__tree.html#a72bff3b00bc168622626ff7be33e7258',1,'path_tree']]]
+  ['value_5ftype_0',['value_type',['../classneforce_1_1registry__key.html#ae380b49bb4e1922bf90fd553cb9af357',1,'neforce::registry_key']]],
+  ['variant_1',['variant',['../structneforce_1_1tui_1_1style.html#a69e17ecb9916e10ebeebeed2140eed0d',1,'neforce::tui::style']]],
+  ['visit_5fresult_2',['visit_result',['../classneforce_1_1path__tree.html#affc45f7889a0fcbb701a61d5465ff880',1,'neforce::path_tree']]]
 ];

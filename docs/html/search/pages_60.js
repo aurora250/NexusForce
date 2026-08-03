@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['比较交换失败顺序规则_0',['比较交换失败顺序规则',['../group___memory_order.html#cmpexch_failure_order',1,'']]],
-  ['比较器的严格弱序要求_1',['比较器的严格弱序要求',['../group___heap_algorithms.html#comparison_strictness',1,'']]]
+  ['校验和算法_0',['校验和算法',['../group___i_c_m_p.html#checksum_algorithm',1,'']]]
 ];

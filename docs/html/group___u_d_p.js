@@ -1,23 +1,23 @@
 var group___u_d_p =
 [
-    [ "udp_socket", "classudp__socket.html", [
-      [ "udp_socket", "classudp__socket.html#a328c2c1a4f87834a2f7648274d9eb77c", null ],
-      [ "async_receive_from", "classudp__socket.html#a5466ba6d4305728307bdf42dae6780e1", null ],
-      [ "async_receive_from", "classudp__socket.html#a0d69e463cee5e01d5ac25b84c21329de", null ],
-      [ "async_receive_from", "classudp__socket.html#a2de912b8dad9a9fdec8fc95dd4cd3287", null ],
-      [ "async_receive_from", "classudp__socket.html#aa520745638351e780427127552d018b0", null ],
-      [ "async_receive_from", "classudp__socket.html#a781b25265c38c777ae04f3b3a4c192e0", null ],
-      [ "async_receive_from", "classudp__socket.html#a6990a71f2fcecde502aff1faf7ae3a1c", null ],
-      [ "async_send_to", "classudp__socket.html#abb09735e5d50f6856336905a83abf9f7", null ],
-      [ "async_send_to", "classudp__socket.html#a235b1e02496976cb4f2b1383f6f337f8", null ],
-      [ "async_send_to", "classudp__socket.html#a955290882ddd4236d5519bae69d4b98f", null ],
-      [ "async_send_to", "classudp__socket.html#a4696eb096705c2b1216423dd5dfa27c6", null ],
-      [ "async_send_to", "classudp__socket.html#a94c9fb8ae49b882ce0ee11e314e38a03", null ],
-      [ "async_send_to", "classudp__socket.html#a2fd7988d72f98bcbf7ab4a48a8b8001a", null ],
-      [ "open", "classudp__socket.html#a7ca045fda3399c34667f31de840e7683", null ],
-      [ "receive", "classudp__socket.html#a4410530e9e9c734eff53bc64617eeefb", null ],
-      [ "receive_from", "classudp__socket.html#a37b55826566b881ef590f3e80c24bcb5", null ],
-      [ "send", "classudp__socket.html#ab322f003a3a5ffaa2bf3e07fcbf8e79c", null ],
-      [ "send_to", "classudp__socket.html#a1c4454c1ec0b9d3038cce20e6f308c2e", null ]
+    [ "neforce::udp_socket", "classneforce_1_1udp__socket.html", [
+      [ "udp_socket", "classneforce_1_1udp__socket.html#aede8596ce80e03cce3de4b177115054c", null ],
+      [ "async_receive_from", "classneforce_1_1udp__socket.html#a07e022c578eece0fac6cbc04871fe0cb", null ],
+      [ "async_receive_from", "classneforce_1_1udp__socket.html#ac3bb31dfe24aa313a46e66233163c133", null ],
+      [ "async_receive_from", "classneforce_1_1udp__socket.html#a0026f2246e08ca432c4f0f75fdfc92af", null ],
+      [ "async_receive_from", "classneforce_1_1udp__socket.html#ac7c7927343dc12448fd15975eeba2fe1", null ],
+      [ "async_receive_from", "classneforce_1_1udp__socket.html#a2922f967dd7d769d85c221fee45063ca", null ],
+      [ "async_receive_from", "classneforce_1_1udp__socket.html#a29fe4bb2d85d7d363cd2b487bf80b32f", null ],
+      [ "async_send_to", "classneforce_1_1udp__socket.html#af7209f69cd08b70083989580d4c08625", null ],
+      [ "async_send_to", "classneforce_1_1udp__socket.html#aa50decce583047daa870cdaa408d2b68", null ],
+      [ "async_send_to", "classneforce_1_1udp__socket.html#ad8a1afc742bf3113f1c501dfa8bc58ab", null ],
+      [ "async_send_to", "classneforce_1_1udp__socket.html#ad7f35a618160142ead73dd37db74ee82", null ],
+      [ "async_send_to", "classneforce_1_1udp__socket.html#a065ec066109b0f13991f0c0ac4c80ee2", null ],
+      [ "async_send_to", "classneforce_1_1udp__socket.html#aaaaf938a27aa7dabca67eda025201bc7", null ],
+      [ "open", "classneforce_1_1udp__socket.html#a735836afc6b50a0a170651aeb6441eef", null ],
+      [ "receive", "classneforce_1_1udp__socket.html#a5f692ef0b58822717eab554384abb882", null ],
+      [ "receive_from", "classneforce_1_1udp__socket.html#a5625d560f8424a88f42f1815a1a41ad8", null ],
+      [ "send", "classneforce_1_1udp__socket.html#a1bb5119f523c4faa0494f5ed1716bf7b", null ],
+      [ "send_to", "classneforce_1_1udp__socket.html#a184161a1ac875d20fb01b8fc8e84feec", null ]
     ] ]
 ];

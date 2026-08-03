@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
   </td>
  </tr>
  </tbody>
@@ -99,20 +99,20 @@ $(function(){initNavTree('ftp__protocol_8hpp_source.html','',''); });
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>NEFORCE_BEGIN_NAMESPACE__</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span></div>
 <div class="foldopen" id="foldopen00011" data-start="{" data-end="};">
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="structftp__exception.html">   11</a></span><span class="keyword">struct </span>ftp_exception final : network_exception {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="structneforce_1_1ftp__exception.html">   11</a></span><span class="keyword">struct </span>ftp_exception final : network_exception {</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keyword">explicit</span> ftp_exception(<span class="keyword">const</span> <span class="keywordtype">char</span>* info = <span class="stringliteral">&quot;FTP Operation Failed.&quot;</span>) noexcept :</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    network_exception(info) {}</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">explicit</span> ftp_exception(<span class="keyword">const</span> <a class="code hl_function" href="structexception.html#ab5edb0e5cd38ed6c450413eb52d95fed">exception</a>&amp; e) :</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">explicit</span> ftp_exception(<span class="keyword">const</span> <a class="code hl_struct" href="structneforce_1_1exception.html">exception</a>&amp; e) :</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    network_exception(e) {}</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    ~ftp_exception() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="structftp__exception.html#a27348679b58eedc656b13e6fe060ef84">   20</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="structftp__exception.html#a27348679b58eedc656b13e6fe060ef84">type</a>() const noexcept<span class="keyword"> override </span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;ftp_exception&quot;</span>; }</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="structneforce_1_1ftp__exception.html#a357aeee8cf872cba95b97b94d4222abc">   20</a></span>    NEFORCE_NODISCARD <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="structneforce_1_1ftp__exception.html#a357aeee8cf872cba95b97b94d4222abc">type</a>() const noexcept<span class="keyword"> override </span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;ftp_exception&quot;</span>; }</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>};</div>
 </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">class </span>NEFORCE_API ftp_protocol : <span class="keyword">public</span> <a class="code hl_class" href="classip__socket.html">ip_socket</a> {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">class </span>NEFORCE_API ftp_protocol : <span class="keyword">public</span> ip_socket {</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">enum class</span> transfer_mode {</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        ascii,</div>
@@ -125,7 +125,7 @@ $(function(){initNavTree('ftp__protocol_8hpp_source.html','',''); });
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    };</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">enum class</span> tls_mode {</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <a class="code hl_variable" href="group___none.html#gab3f528d10c290b48a6035929470622c0">none</a>,</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <a class="code hl_variable" href="group___none.html#gae83f5d6b9256e35bb2781ebb286996d3">none</a>,</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        implicit_,</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        explicit_</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    };</div>
@@ -163,15 +163,15 @@ $(function(){initNavTree('ftp__protocol_8hpp_source.html','',''); });
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    ftp_protocol(ftp_protocol&amp;&amp; other) <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    ftp_protocol&amp; operator=(ftp_protocol&amp;&amp; other) <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keyword">explicit</span> ftp_protocol(<a class="code hl_typedef" href="group___core_types.html#gae7d45d137d006d241206598ec95eb28b">native_handle_type</a> fd) :</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keyword">explicit</span> ftp_protocol(native_handle_type fd) :</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    ip_socket(fd) {}</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    ~ftp_protocol() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <a class="code hl_typedef" href="group___platform_dependent_types.html#ga2f30f05ade8bbe5bda5e59d2698af9f5">ssize_t</a> ctrl_send(<span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a>, <span class="keywordtype">size_t</span> len);</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <a class="code hl_typedef" href="group___platform_dependent_types.html#ga2f30f05ade8bbe5bda5e59d2698af9f5">ssize_t</a> ctrl_recv(<span class="keywordtype">char</span>* buf, <span class="keywordtype">size_t</span> len);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <a class="code hl_typedef" href="group___platform_dependent_types.html#gaee9aeee261c91caa424e5eb0ec5bb749">ssize_t</a> ctrl_send(<span class="keyword">const</span> <span class="keywordtype">char</span>* data, <span class="keywordtype">size_t</span> len);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <a class="code hl_typedef" href="group___platform_dependent_types.html#gaee9aeee261c91caa424e5eb0ec5bb749">ssize_t</a> ctrl_recv(<span class="keywordtype">char</span>* buf, <span class="keywordtype">size_t</span> len);</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordtype">bool</span> ctrl_read_line(<span class="keywordtype">string</span>&amp; out);</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    response read_response();</div>
@@ -186,15 +186,12 @@ $(function(){initNavTree('ftp__protocol_8hpp_source.html','',''); });
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>NEFORCE_END_NAMESPACE__</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_NETWORK_FTP_FTP_PROTOCOL_HPP__</span></div>
-<div class="ttc" id="aclassip__socket_html"><div class="ttname"><a href="classip__socket.html">ip_socket</a></div><div class="ttdoc">IP协议族Socket基类</div><div class="ttdef"><b>定义</b> <a href="ip__socket_8hpp_source.html#l00073">ip_socket.hpp:73</a></div></div>
-<div class="ttc" id="agroup___core_types_html_gae7d45d137d006d241206598ec95eb28b"><div class="ttname"><a href="group___core_types.html#gae7d45d137d006d241206598ec95eb28b">native_handle_type</a></div><div class="ttdeci">void * native_handle_type</div><div class="ttdoc">系统句柄类型</div><div class="ttdef"><b>定义</b> <a href="typeinfo_2types_8hpp_source.html#l00054">typeinfo/types.hpp:54</a></div></div>
-<div class="ttc" id="agroup___none_html_gab3f528d10c290b48a6035929470622c0"><div class="ttname"><a href="group___none.html#gab3f528d10c290b48a6035929470622c0">none</a></div><div class="ttdeci">constexpr none_t none</div><div class="ttdoc">默认空表示</div><div class="ttdef"><b>定义</b> <a href="none_8hpp_source.html#l00073">none.hpp:73</a></div></div>
-<div class="ttc" id="agroup___platform_dependent_types_html_ga2f30f05ade8bbe5bda5e59d2698af9f5"><div class="ttname"><a href="group___platform_dependent_types.html#ga2f30f05ade8bbe5bda5e59d2698af9f5">ssize_t</a></div><div class="ttdeci">int64_t ssize_t</div><div class="ttdoc">有符号大小类型</div><div class="ttdef"><b>定义</b> <a href="typeinfo_2types_8hpp_source.html#l00169">typeinfo/types.hpp:169</a></div></div>
-<div class="ttc" id="agroup___type_erasure_functions_html_gaeed8bfb4510a906e04808100528dd9b8"><div class="ttname"><a href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a></div><div class="ttdeci">constexpr decltype(auto) data(Container &amp;cont) noexcept(noexcept(cont.data()))</div><div class="ttdoc">获取容器的底层数据指针</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00395">type_erase.hpp:395</a></div></div>
+<div class="ttc" id="agroup___none_html_gae83f5d6b9256e35bb2781ebb286996d3"><div class="ttname"><a href="group___none.html#gae83f5d6b9256e35bb2781ebb286996d3">neforce::none</a></div><div class="ttdeci">constexpr none_t none</div><div class="ttdoc">默认空表示</div><div class="ttdef"><b>定义</b> <a href="none_8hpp_source.html#l00073">none.hpp:73</a></div></div>
+<div class="ttc" id="agroup___platform_dependent_types_html_gaee9aeee261c91caa424e5eb0ec5bb749"><div class="ttname"><a href="group___platform_dependent_types.html#gaee9aeee261c91caa424e5eb0ec5bb749">neforce::ssize_t</a></div><div class="ttdeci">int64_t ssize_t</div><div class="ttdoc">有符号大小类型</div><div class="ttdef"><b>定义</b> <a href="typeinfo_2types_8hpp_source.html#l00169">typeinfo/types.hpp:169</a></div></div>
 <div class="ttc" id="aip__socket_8hpp_html"><div class="ttname"><a href="ip__socket_8hpp.html">ip_socket.hpp</a></div><div class="ttdoc">IP协议族Socket基类</div></div>
 <div class="ttc" id="assl__stream_8hpp_html"><div class="ttname"><a href="ssl__stream_8hpp.html">ssl_stream.hpp</a></div><div class="ttdoc">SSL/TLS流封装</div></div>
-<div class="ttc" id="astructexception_html_ab5edb0e5cd38ed6c450413eb52d95fed"><div class="ttname"><a href="structexception.html#ab5edb0e5cd38ed6c450413eb52d95fed">exception::exception</a></div><div class="ttdeci">exception(const char *info=&quot;&quot;)</div><div class="ttdoc">构造函数</div><div class="ttdef"><b>定义</b> <a href="exception_8hpp_source.html#l00088">exception.hpp:88</a></div></div>
-<div class="ttc" id="astructftp__exception_html_a27348679b58eedc656b13e6fe060ef84"><div class="ttname"><a href="structftp__exception.html#a27348679b58eedc656b13e6fe060ef84">ftp_exception::type</a></div><div class="ttdeci">const char * type() const noexcept override</div><div class="ttdoc">获取异常类型</div><div class="ttdef"><b>定义</b> <a href="#l00020">ftp_protocol.hpp:20</a></div></div>
+<div class="ttc" id="astructneforce_1_1exception_html"><div class="ttname"><a href="structneforce_1_1exception.html">neforce::exception</a></div><div class="ttdoc">异常基类</div><div class="ttdef"><b>定义</b> <a href="exception_8hpp_source.html#l00077">exception.hpp:77</a></div></div>
+<div class="ttc" id="astructneforce_1_1ftp__exception_html_a357aeee8cf872cba95b97b94d4222abc"><div class="ttname"><a href="structneforce_1_1ftp__exception.html#a357aeee8cf872cba95b97b94d4222abc">neforce::ftp_exception::type</a></div><div class="ttdeci">const char * type() const noexcept override</div><div class="ttdoc">获取异常类型</div><div class="ttdef"><b>定义</b> <a href="#l00020">ftp_protocol.hpp:20</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

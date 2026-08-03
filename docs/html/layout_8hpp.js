@@ -1,4 +1,4 @@
 var layout_8hpp =
 [
-    [ "compute_layout", "group___t_u_i.html#ga604e3f2c4740ea9d70244c41f09a4ff9", null ]
+    [ "neforce::tui::compute_layout", "group___t_u_i.html#ga4c548071d658b6b267b69bc9cc629099", null ]
 ];

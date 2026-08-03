@@ -106,8 +106,8 @@
         </childnode>
       </node>
       <node id="18">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="5" relation="include">
         </childnode>
       </node>
@@ -272,30 +272,44 @@
         </childnode>
         <childnode refid="49" relation="include">
         </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
         <childnode refid="43" relation="include">
         </childnode>
       </node>
-      <node id="50">
+      <node id="52">
         <label>NeForce/core/string/basic_string_view.hpp</label>
         <link refid="basic__string__view_8hpp"/>
         <childnode refid="41" relation="include">
         </childnode>
-        <childnode refid="51" relation="include">
+        <childnode refid="53" relation="include">
         </childnode>
-        <childnode refid="52" relation="include">
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
         </childnode>
       </node>
-      <node id="51">
+      <node id="53">
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="31" relation="include">
         </childnode>
         <childnode refid="27" relation="include">
         </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
       </node>
-      <node id="52">
+      <node id="50">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>NeForce/core/string/charset.hpp</label>
+        <link refid="charset_8hpp"/>
+        <childnode refid="50" relation="include">
+        </childnode>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
@@ -305,10 +319,10 @@
         <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="49">
+      <node id="51">
         <label>NeForce/core/string/string_view.hpp</label>
         <link refid="string__view_8hpp"/>
-        <childnode refid="50" relation="include">
+        <childnode refid="52" relation="include">
         </childnode>
       </node>
       <node id="19">
@@ -378,7 +392,8 @@
         <label>utility</label>
       </node>
     </incdepgraph>
-    <innerclass refid="classnamed__mutex" prot="public">named_mutex</innerclass>
+    <innerclass refid="classneforce_1_1named__mutex" prot="public">neforce::named_mutex</innerclass>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
     <briefdescription>
 <para>命名互斥锁 </para>
     </briefdescription>
@@ -396,7 +411,7 @@
 <codeline lineno="14"><highlight class="normal"></highlight></codeline>
 <codeline lineno="20"><highlight class="normal"></highlight></codeline>
 <codeline lineno="26"><highlight class="normal"></highlight></codeline>
-<codeline lineno="33" refid="classnamed__mutex" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classnamed__mutex_1a7a5fc7abc42ae86bc8458fe850f1b5b3" kindref="member">named_mutex</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>mutex_base<sp/>{</highlight></codeline>
+<codeline lineno="33" refid="classneforce_1_1named__mutex" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classneforce_1_1named__mutex_1aadf730083b09e7ee20e152562f320143" kindref="member">named_mutex</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>mutex_base<sp/>{</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">native_handle_type<sp/>=<sp/>_NEFORCE<sp/>native_handle_type;</highlight></codeline>
 <codeline lineno="36"><highlight class="normal"></highlight></codeline>
@@ -412,30 +427,30 @@
 <codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>name_;</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"></highlight></codeline>
 <codeline lineno="48"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="52" refid="classnamed__mutex_1a7a5fc7abc42ae86bc8458fe850f1b5b3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classnamed__mutex_1a7a5fc7abc42ae86bc8458fe850f1b5b3" kindref="member">named_mutex</ref>()<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="52" refid="classneforce_1_1named__mutex_1aadf730083b09e7ee20e152562f320143" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1named__mutex_1aadf730083b09e7ee20e152562f320143" kindref="member">named_mutex</ref>()<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
 <codeline lineno="53"><highlight class="normal"></highlight></codeline>
-<codeline lineno="60" refid="classnamed__mutex_1a31f4759538b277751365f4ee77eb8496" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>explicit<sp/><ref refid="classnamed__mutex_1a7a5fc7abc42ae86bc8458fe850f1b5b3" kindref="member">named_mutex</ref>(const<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="classnamed__mutex_1af436480d6b4344ce9c4d0f2a7e1b418e" kindref="member">name</ref>,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>create<sp/>=<sp/>false);</highlight></codeline>
+<codeline lineno="60" refid="classneforce_1_1named__mutex_1a4cfa7deed4f1b9e7c76efe22c3d22c0f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>explicit<sp/><ref refid="classneforce_1_1named__mutex_1aadf730083b09e7ee20e152562f320143" kindref="member">named_mutex</ref>(const<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="classneforce_1_1named__mutex_1a70524de253c2e95b2594e3d86a10bb7a" kindref="member">name</ref>,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>create<sp/>=<sp/>false);</highlight></codeline>
 <codeline lineno="61"><highlight class="normal"></highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>~<ref refid="classnamed__mutex_1a7a5fc7abc42ae86bc8458fe850f1b5b3" kindref="member">named_mutex</ref>();</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>~<ref refid="classneforce_1_1named__mutex_1aadf730083b09e7ee20e152562f320143" kindref="member">named_mutex</ref>();</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"></highlight></codeline>
-<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classnamed__mutex_1a7a5fc7abc42ae86bc8458fe850f1b5b3" kindref="member">named_mutex</ref>(const<sp/><ref refid="classnamed__mutex_1a7a5fc7abc42ae86bc8458fe850f1b5b3" kindref="member">named_mutex</ref>&amp;)<sp/>=<sp/>delete;</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classnamed__mutex_1a7a5fc7abc42ae86bc8458fe850f1b5b3" kindref="member">named_mutex</ref>&amp;<sp/>operator=(const<sp/><ref refid="classnamed__mutex_1a7a5fc7abc42ae86bc8458fe850f1b5b3" kindref="member">named_mutex</ref>&amp;)<sp/>=<sp/>delete;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1named__mutex_1aadf730083b09e7ee20e152562f320143" kindref="member">named_mutex</ref>(const<sp/><ref refid="classneforce_1_1named__mutex_1aadf730083b09e7ee20e152562f320143" kindref="member">named_mutex</ref>&amp;)<sp/>=<sp/>delete;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1named__mutex_1aadf730083b09e7ee20e152562f320143" kindref="member">named_mutex</ref>&amp;<sp/>operator=(const<sp/><ref refid="classneforce_1_1named__mutex_1aadf730083b09e7ee20e152562f320143" kindref="member">named_mutex</ref>&amp;)<sp/>=<sp/>delete;</highlight></codeline>
 <codeline lineno="66"><highlight class="normal"></highlight></codeline>
-<codeline lineno="70" refid="classnamed__mutex_1a6f3cece3d375cc72ac282c6be4e5f318" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classnamed__mutex_1a7a5fc7abc42ae86bc8458fe850f1b5b3" kindref="member">named_mutex</ref>(<ref refid="classnamed__mutex_1a7a5fc7abc42ae86bc8458fe850f1b5b3" kindref="member">named_mutex</ref>&amp;&amp;<sp/>other)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="70" refid="classneforce_1_1named__mutex_1acaff27b4cc2f844ba25aff38ca40a424" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1named__mutex_1aadf730083b09e7ee20e152562f320143" kindref="member">named_mutex</ref>(<ref refid="classneforce_1_1named__mutex_1aadf730083b09e7ee20e152562f320143" kindref="member">named_mutex</ref>&amp;&amp;<sp/>other)<sp/>noexcept;</highlight></codeline>
 <codeline lineno="71"><highlight class="normal"></highlight></codeline>
-<codeline lineno="75" refid="classnamed__mutex_1abca8c6afc8129fd5ea226e75db213d0b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classnamed__mutex_1a7a5fc7abc42ae86bc8458fe850f1b5b3" kindref="member">named_mutex</ref>&amp;<sp/>operator=(<ref refid="classnamed__mutex_1a7a5fc7abc42ae86bc8458fe850f1b5b3" kindref="member">named_mutex</ref>&amp;&amp;<sp/>other)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="75" refid="classneforce_1_1named__mutex_1a4bdeaaf699fe9d9c986b4d038ccffe0c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1named__mutex_1aadf730083b09e7ee20e152562f320143" kindref="member">named_mutex</ref>&amp;<sp/>operator=(<ref refid="classneforce_1_1named__mutex_1aadf730083b09e7ee20e152562f320143" kindref="member">named_mutex</ref>&amp;&amp;<sp/>other)<sp/>noexcept;</highlight></codeline>
 <codeline lineno="76"><highlight class="normal"></highlight></codeline>
-<codeline lineno="82" refid="classnamed__mutex_1aff3a5e6a6ca22bcdf41966e2b5565ea8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classnamed__mutex_1aff3a5e6a6ca22bcdf41966e2b5565ea8" kindref="member">lock</ref>();</highlight></codeline>
+<codeline lineno="82" refid="classneforce_1_1named__mutex_1afa8074013e536f7e619ed73a80a6d84e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1named__mutex_1afa8074013e536f7e619ed73a80a6d84e" kindref="member">lock</ref>();</highlight></codeline>
 <codeline lineno="83"><highlight class="normal"></highlight></codeline>
-<codeline lineno="88" refid="classnamed__mutex_1a218b646ddd511ec7a9a632e796c0f9a8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classnamed__mutex_1a218b646ddd511ec7a9a632e796c0f9a8" kindref="member">try_lock</ref>();</highlight></codeline>
+<codeline lineno="88" refid="classneforce_1_1named__mutex_1a8c47f60e873ba302e34440733454e919" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1named__mutex_1a8c47f60e873ba302e34440733454e919" kindref="member">try_lock</ref>();</highlight></codeline>
 <codeline lineno="89"><highlight class="normal"></highlight></codeline>
-<codeline lineno="93" refid="classnamed__mutex_1aa9c1403421cb78e1bb5700d2109be86f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classnamed__mutex_1aa9c1403421cb78e1bb5700d2109be86f" kindref="member">unlock</ref>();</highlight></codeline>
+<codeline lineno="93" refid="classneforce_1_1named__mutex_1aa775c75b992f5cd3ff6e46c06542458b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1named__mutex_1aa775c75b992f5cd3ff6e46c06542458b" kindref="member">unlock</ref>();</highlight></codeline>
 <codeline lineno="94"><highlight class="normal"></highlight></codeline>
-<codeline lineno="99" refid="classnamed__mutex_1af436480d6b4344ce9c4d0f2a7e1b418e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/>const<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="classnamed__mutex_1af436480d6b4344ce9c4d0f2a7e1b418e" kindref="member">name</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>name_;<sp/>}</highlight></codeline>
+<codeline lineno="99" refid="classneforce_1_1named__mutex_1a70524de253c2e95b2594e3d86a10bb7a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/>const<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="classneforce_1_1named__mutex_1a70524de253c2e95b2594e3d86a10bb7a" kindref="member">name</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>name_;<sp/>}</highlight></codeline>
 <codeline lineno="100"><highlight class="normal"></highlight></codeline>
-<codeline lineno="105" refid="classnamed__mutex_1ac964927f8b19a68eacb1b8bcc6c25500" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classnamed__mutex_1ac964927f8b19a68eacb1b8bcc6c25500" kindref="member">is_valid</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
+<codeline lineno="105" refid="classneforce_1_1named__mutex_1ac655e3716681cf8428194a6002d88b27" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1named__mutex_1ac655e3716681cf8428194a6002d88b27" kindref="member">is_valid</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
 <codeline lineno="106"><highlight class="normal"></highlight></codeline>
-<codeline lineno="112" refid="classnamed__mutex_1a4e333c541516271e603c89dc7a28a9d9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>static<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classnamed__mutex_1a4e333c541516271e603c89dc7a28a9d9" kindref="member">remove</ref>(const<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="classnamed__mutex_1af436480d6b4344ce9c4d0f2a7e1b418e" kindref="member">name</ref>);</highlight></codeline>
+<codeline lineno="112" refid="classneforce_1_1named__mutex_1af07164dc9fb3375d7654bb54cbe12a60" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>static<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1named__mutex_1af07164dc9fb3375d7654bb54cbe12a60" kindref="member">remove</ref>(const<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="classneforce_1_1named__mutex_1a70524de253c2e95b2594e3d86a10bb7a" kindref="member">name</ref>);</highlight></codeline>
 <codeline lineno="113"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="114"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Mutex</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="116"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>AsyncComponents</highlight><highlight class="normal"></highlight></codeline>

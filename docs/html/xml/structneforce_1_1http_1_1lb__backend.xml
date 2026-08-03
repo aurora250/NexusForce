@@ -1,0 +1,258 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1http_1_1lb__backend" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::http::lb_backend</compoundname>
+    <includes refid="load__balancer_8hpp" local="no">load_balancer.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structneforce_1_1http_1_1lb__backend_1a720c36d406fb3cf85412d6d08447e05c" prot="public" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::http::lb_backend::host</definition>
+        <argsstring></argsstring>
+        <name>host</name>
+        <qualifiedname>neforce::http::lb_backend::host</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="40" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1http_1_1lb__backend_1af83c842ab9725b9c898a6c26477697ff" prot="public" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1ports" kindref="compound">ports</ref></type>
+        <definition>ports neforce::http::lb_backend::port</definition>
+        <argsstring></argsstring>
+        <name>port</name>
+        <qualifiedname>neforce::http::lb_backend::port</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="41" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1http_1_1lb__backend_1a28a6c0486ded6b40604c8baef59cec7d" prot="public" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::http::lb_backend::scheme</definition>
+        <argsstring></argsstring>
+        <name>scheme</name>
+        <qualifiedname>neforce::http::lb_backend::scheme</qualifiedname>
+        <initializer>{&quot;http&quot;}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="42" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1http_1_1lb__backend_1aa2fc8cb936fe13e192adb9fff3d4eb19" prot="public" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::http::lb_backend::weight</definition>
+        <argsstring></argsstring>
+        <name>weight</name>
+        <qualifiedname>neforce::http::lb_backend::weight</qualifiedname>
+        <initializer>{1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="43" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1http_1_1lb__backend_1a86ed665d4d25478d5e568b639b6ba84a" prot="public" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref> &gt;</type>
+        <definition>atomic&lt;size_t&gt; neforce::http::lb_backend::active_connections</definition>
+        <argsstring></argsstring>
+        <name>active_connections</name>
+        <qualifiedname>neforce::http::lb_backend::active_connections</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="44" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1http_1_1lb__backend_1a03ee1ffab601d76df5a3eb93939d9df4" prot="public" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; neforce::http::lb_backend::healthy</definition>
+        <argsstring></argsstring>
+        <name>healthy</name>
+        <qualifiedname>neforce::http::lb_backend::healthy</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="45" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1http_1_1lb__backend_1a0eded1e3fc38761b9cd5eca5583a57bb" prot="public" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga5405672bf9962081e6fcd1448d4bce4a" kindref="member">uint64_t</ref></type>
+        <definition>uint64_t neforce::http::lb_backend::last_health_check_ms</definition>
+        <argsstring></argsstring>
+        <name>last_health_check_ms</name>
+        <qualifiedname>neforce::http::lb_backend::last_health_check_ms</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="46" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1http_1_1lb__backend_1a63f55787af33c69204145b964c754989" prot="public" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::http::lb_backend::consecutive_failures</definition>
+        <argsstring></argsstring>
+        <name>consecutive_failures</name>
+        <qualifiedname>neforce::http::lb_backend::consecutive_failures</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="47" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="47" bodyend="47"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1http_1_1lb__backend_1abd0392ef821a0fcf838c2f9cf1e3b789" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::lb_backend::lb_backend</definition>
+        <argsstring>()=default</argsstring>
+        <name>lb_backend</name>
+        <qualifiedname>neforce::http::lb_backend::lb_backend</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="49" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1http_1_1lb__backend_1a4070e889892f6eb22ee8d60caee1519e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::lb_backend::lb_backend</definition>
+        <argsstring>(string h, ports p, string s=&quot;http&quot;, size_t w=1)</argsstring>
+        <name>lb_backend</name>
+        <qualifiedname>neforce::http::lb_backend::lb_backend</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>h</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1ports" kindref="compound">ports</ref></type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>s</declname>
+          <defval>&quot;http&quot;</defval>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>w</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="50" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="50" bodyend="54"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>负载均衡后端节点 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="10">
+        <label>neforce::atomic&lt; bool &gt;</label>
+        <link refid="structneforce_1_1atomic_3_01bool_01_4"/>
+      </node>
+      <node id="9">
+        <label>neforce::atomic&lt; size_t &gt;</label>
+        <link refid="structneforce_1_1atomic"/>
+      </node>
+      <node id="2">
+        <label>neforce::basic_string&lt; char &gt;</label>
+        <link refid="classneforce_1_1basic__string"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::http::lb_backend</label>
+        <link refid="structneforce_1_1http_1_1lb__backend"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>host</edgelabel>
+          <edgelabel>scheme</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>port</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>active_connections</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>healthy</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::icommon&lt; T &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="5">
+        <label>neforce::ihashable&lt; T &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="7">
+        <label>neforce::iobject&lt; ports &gt;</label>
+        <link refid="structneforce_1_1iobject"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>neforce::istringify&lt; ports &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+      <node id="6">
+        <label>neforce::ports</label>
+        <link refid="structneforce_1_1ports"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="39" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="39" bodyend="55"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1http_1_1lb__backend_1a86ed665d4d25478d5e568b639b6ba84a" prot="public" virt="non-virtual"><scope>neforce::http::lb_backend</scope><name>active_connections</name></member>
+      <member refid="structneforce_1_1http_1_1lb__backend_1a63f55787af33c69204145b964c754989" prot="public" virt="non-virtual"><scope>neforce::http::lb_backend</scope><name>consecutive_failures</name></member>
+      <member refid="structneforce_1_1http_1_1lb__backend_1a03ee1ffab601d76df5a3eb93939d9df4" prot="public" virt="non-virtual"><scope>neforce::http::lb_backend</scope><name>healthy</name></member>
+      <member refid="structneforce_1_1http_1_1lb__backend_1a720c36d406fb3cf85412d6d08447e05c" prot="public" virt="non-virtual"><scope>neforce::http::lb_backend</scope><name>host</name></member>
+      <member refid="structneforce_1_1http_1_1lb__backend_1a0eded1e3fc38761b9cd5eca5583a57bb" prot="public" virt="non-virtual"><scope>neforce::http::lb_backend</scope><name>last_health_check_ms</name></member>
+      <member refid="structneforce_1_1http_1_1lb__backend_1abd0392ef821a0fcf838c2f9cf1e3b789" prot="public" virt="non-virtual"><scope>neforce::http::lb_backend</scope><name>lb_backend</name></member>
+      <member refid="structneforce_1_1http_1_1lb__backend_1a4070e889892f6eb22ee8d60caee1519e" prot="public" virt="non-virtual"><scope>neforce::http::lb_backend</scope><name>lb_backend</name></member>
+      <member refid="structneforce_1_1http_1_1lb__backend_1af83c842ab9725b9c898a6c26477697ff" prot="public" virt="non-virtual"><scope>neforce::http::lb_backend</scope><name>port</name></member>
+      <member refid="structneforce_1_1http_1_1lb__backend_1a28a6c0486ded6b40604c8baef59cec7d" prot="public" virt="non-virtual"><scope>neforce::http::lb_backend</scope><name>scheme</name></member>
+      <member refid="structneforce_1_1http_1_1lb__backend_1aa2fc8cb936fe13e192adb9fff3d4eb19" prot="public" virt="non-virtual"><scope>neforce::http::lb_backend</scope><name>weight</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

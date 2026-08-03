@@ -1,15 +1,15 @@
 var group___math_constants =
 [
-    [ "CIRCLE", "group___math_constants.html#ga2f24a976ecaccac77559e13d11407ac4", null ],
-    [ "DEFAULT_TOLERANCE", "group___math_constants.html#gad62cb98b78e83330e55e9b9ce87af8ae", null ],
-    [ "EULER", "group___math_constants.html#ga04abdad245d9076f5c7f1beb9990bbfc", null ],
-    [ "FIBONACCI_COUNT", "group___math_constants.html#ga10850b42184c0f592329342db3f54b6b", null ],
-    [ "FIBONACCI_LIST", "group___math_constants.html#ga5046a1fd51f0ccb6073b46f20a4e3854", null ],
-    [ "LOOSE_TOLERANCE", "group___math_constants.html#ga0d0621f7c05efa7d863b3975a077808e", null ],
-    [ "MACHINE_EPSILON", "group___math_constants.html#ga436d4865ec4bdbf73b5e26ea32899b30", null ],
-    [ "PHI", "group___math_constants.html#ga41da4d603e01069e89df85d03d53c902", null ],
-    [ "PI", "group___math_constants.html#gadd2e444a6312250332e136102e811a67", null ],
-    [ "SEMI_CIRCLE", "group___math_constants.html#ga3ef3cf695ad52bca5bfb054f08fa05ec", null ],
-    [ "TWO_PI_HI", "group___math_constants.html#ga53b26ca5f91c4a9e66c38f4c3cf1adbe", null ],
-    [ "TWO_PI_LO", "group___math_constants.html#gae54a95063af151b525a8dec63e6faf35", null ]
+    [ "neforce::constants::CIRCLE", "group___math_constants.html#gaa3919fd6c1b9c6659194707fdc875703", null ],
+    [ "neforce::constants::DEFAULT_TOLERANCE", "group___math_constants.html#ga4941b41cd281b5a5da16c1a4bda67dee", null ],
+    [ "neforce::constants::EULER", "group___math_constants.html#gabc0180af76e928c95b713b386cabc5fe", null ],
+    [ "neforce::constants::FIBONACCI_COUNT", "group___math_constants.html#ga214efcd05bdec2a7890ca44e03ac5cdc", null ],
+    [ "neforce::constants::FIBONACCI_LIST", "group___math_constants.html#ga47424f27742041be5f1675c5239f7fbd", null ],
+    [ "neforce::constants::LOOSE_TOLERANCE", "group___math_constants.html#ga628a1a9dc3ee8e6672dd5cb1e51699bd", null ],
+    [ "neforce::constants::MACHINE_EPSILON", "group___math_constants.html#ga7091c52270e3d84044528fcb5c99f9ea", null ],
+    [ "neforce::constants::PHI", "group___math_constants.html#ga3e74b0abd6602caee7dbdfa9568449f1", null ],
+    [ "neforce::constants::PI", "group___math_constants.html#ga0b8083f84702c7b4a6e2029fd6ff31bc", null ],
+    [ "neforce::constants::SEMI_CIRCLE", "group___math_constants.html#ga01421da451c281b0925aa91e96778eee", null ],
+    [ "neforce::constants::TWO_PI_HI", "group___math_constants.html#ga48acde106c0267bf6446f26649e49214", null ],
+    [ "neforce::constants::TWO_PI_LO", "group___math_constants.html#ga8a80b907f18a6a1ba38fb1b1818adc6d", null ]
 ];

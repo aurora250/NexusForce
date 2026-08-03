@@ -1,0 +1,2202 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1flat__unordered__multiset" kind="class" language="C++" prot="public">
+    <compoundname>neforce::flat_unordered_multiset</compoundname>
+    <basecompoundref refid="structneforce_1_1icollector" prot="public" virt="non-virtual">neforce::icollector&lt; flat_unordered_multiset&lt; Value, hash&lt; Value &gt;, equal_to&lt; Value &gt;, allocator&lt; Value &gt; &gt; &gt;</basecompoundref>
+    <includes refid="flat__unordered__multiset_8hpp" local="no">flat_unordered_multiset.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Value</type>
+      </param>
+      <param>
+        <type>typename HashFcn</type>
+        <defval><ref refid="structneforce_1_1hash" kindref="compound">hash</ref>&lt;Value&gt;</defval>
+      </param>
+      <param>
+        <type>typename EqualKey</type>
+        <defval><ref refid="classneforce_1_1flat__unordered__multiset_1a7145108d2d8870d51b214ea4f93209a0" kindref="member">equal_to</ref>&lt;Value&gt;</defval>
+      </param>
+      <param>
+        <type>typename Alloc</type>
+        <defval><ref refid="group___memory_allocator_1gabd6174043c688f04c1d71b9b21148ec1" kindref="member">allocator</ref>&lt;Value&gt;</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classneforce_1_1flat__unordered__multiset_1a23ef1a964937b2f56dd666c9fb4368ae" prot="private" static="no">
+        <type><ref refid="classneforce_1_1flat__hashtable" kindref="compound">flat_hashtable</ref>&lt; Value, Value, HashFcn, <ref refid="structneforce_1_1identity" kindref="compound">identity</ref>&lt; Value &gt;, EqualKey, Alloc &gt;</type>
+        <definition>using neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::base_type = flat_hashtable&lt;Value, Value, HashFcn, identity&lt;Value&gt;, EqualKey,
+                                    Alloc&gt;</definition>
+        <argsstring></argsstring>
+        <name>base_type</name>
+        <qualifiedname>neforce::flat_unordered_multiset::base_type</qualifiedname>
+        <briefdescription>
+<para>底层平坦哈希表类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="43" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1flat__unordered__multiset_1aea27cc88a0bb58e87791ecd5a6a98de3" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1flat__hashtable_1aaddbde1409dc372771b2318b97f1ef31" kindref="member">base_type::key_type</ref></type>
+        <definition>using neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::key_type = typename base_type::key_type</definition>
+        <argsstring></argsstring>
+        <name>key_type</name>
+        <qualifiedname>neforce::flat_unordered_multiset::key_type</qualifiedname>
+        <briefdescription>
+<para>键类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="47" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1flat__unordered__multiset_1a124e0c6cad78819a3c9d85e2a18fc1c5" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1flat__hashtable_1afb699c9370e4411e76743720dcbbdf6f" kindref="member">base_type::value_type</ref></type>
+        <definition>using neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::value_type = typename base_type::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>neforce::flat_unordered_multiset::value_type</qualifiedname>
+        <briefdescription>
+<para>值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="48" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1flat__unordered__multiset_1a059218bca88fd34ce265c847c3bfd3aa" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1flat__hashtable_1a2b84a35a2d700d6bd89cb49eed9abd26" kindref="member">base_type::hasher</ref></type>
+        <definition>using neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::hasher = typename base_type::hasher</definition>
+        <argsstring></argsstring>
+        <name>hasher</name>
+        <qualifiedname>neforce::flat_unordered_multiset::hasher</qualifiedname>
+        <briefdescription>
+<para>哈希函数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="49" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1flat__unordered__multiset_1ace296316e47d7a880b42684139da1d14" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1flat__hashtable_1a52bd74b08690462bee02eb14963da42f" kindref="member">base_type::key_equal</ref></type>
+        <definition>using neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::key_equal = typename base_type::key_equal</definition>
+        <argsstring></argsstring>
+        <name>key_equal</name>
+        <qualifiedname>neforce::flat_unordered_multiset::key_equal</qualifiedname>
+        <briefdescription>
+<para>键相等比较函数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="50" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1flat__unordered__multiset_1a02dfc37badd6dc30d05733d984f48835" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1flat__hashtable_1a95f3b53c706f059014fac7959b9d1cb9" kindref="member">base_type::size_type</ref></type>
+        <definition>using neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::size_type = typename base_type::size_type</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>neforce::flat_unordered_multiset::size_type</qualifiedname>
+        <briefdescription>
+<para>大小类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="52" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1flat__unordered__multiset_1a2356ca25f89e4b8a65598ba8d8085c81" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1flat__hashtable_1a96b10b8d69ed57a98f772c8f1a609212" kindref="member">base_type::difference_type</ref></type>
+        <definition>using neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::difference_type = typename base_type::difference_type</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>neforce::flat_unordered_multiset::difference_type</qualifiedname>
+        <briefdescription>
+<para>差值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="53" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1flat__unordered__multiset_1ac8c9374eb779b6eabcf505101346119b" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1flat__hashtable_1afa0b9f7c7374e11990aeede5d08eb0e5" kindref="member">base_type::const_pointer</ref></type>
+        <definition>using neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::pointer = typename base_type::const_pointer</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>neforce::flat_unordered_multiset::pointer</qualifiedname>
+        <briefdescription>
+<para>指针类型（键即值，不可修改） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="54" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1flat__unordered__multiset_1a214fd9138f3796cefc032f890fb7d7fe" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1flat__hashtable_1afa0b9f7c7374e11990aeede5d08eb0e5" kindref="member">base_type::const_pointer</ref></type>
+        <definition>using neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::const_pointer = typename base_type::const_pointer</definition>
+        <argsstring></argsstring>
+        <name>const_pointer</name>
+        <qualifiedname>neforce::flat_unordered_multiset::const_pointer</qualifiedname>
+        <briefdescription>
+<para>常量指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="55" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1flat__unordered__multiset_1aca53c60d757fa886511ff4811acf6fc7" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1flat__hashtable_1adaf9791d203557c01990d19c67e546af" kindref="member">base_type::const_reference</ref></type>
+        <definition>using neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::reference = typename base_type::const_reference</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>neforce::flat_unordered_multiset::reference</qualifiedname>
+        <briefdescription>
+<para>引用类型（键即值，不可修改） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="56" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1flat__unordered__multiset_1aaadeaffda91a06b8f47c528d162c7427" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1flat__hashtable_1adaf9791d203557c01990d19c67e546af" kindref="member">base_type::const_reference</ref></type>
+        <definition>using neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::const_reference = typename base_type::const_reference</definition>
+        <argsstring></argsstring>
+        <name>const_reference</name>
+        <qualifiedname>neforce::flat_unordered_multiset::const_reference</qualifiedname>
+        <briefdescription>
+<para>常量引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="57" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1flat__unordered__multiset_1ae59bb1ba5d6f4c82ace26405bcd9e6eb" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1flat__hashtable_1ad865e090e1e39a824201aefbad2a53b1" kindref="member">base_type::iterator</ref></type>
+        <definition>using neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::iterator = typename base_type::iterator</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>neforce::flat_unordered_multiset::iterator</qualifiedname>
+        <briefdescription>
+<para>迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="58" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1flat__unordered__multiset_1a84e487f58f661d76ea4f1b880b09d887" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1flat__hashtable_1a448903ac9560ae181d1eb5657051891b" kindref="member">base_type::const_iterator</ref></type>
+        <definition>using neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::const_iterator = typename base_type::const_iterator</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <qualifiedname>neforce::flat_unordered_multiset::const_iterator</qualifiedname>
+        <briefdescription>
+<para>常量迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="59" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1flat__unordered__multiset_1a19baf9ad9516341ef6ea45391d8f2c6e" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1flat__hashtable_1a04f935609e52e3c424590806b89e2021" kindref="member">base_type::allocator_type</ref></type>
+        <definition>using neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::allocator_type = typename base_type::allocator_type</definition>
+        <argsstring></argsstring>
+        <name>allocator_type</name>
+        <qualifiedname>neforce::flat_unordered_multiset::allocator_type</qualifiedname>
+        <briefdescription>
+<para>分配器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="60" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1flat__unordered__multiset_1a122180b482d9a9a82f76bd38b0ff9538" prot="private" static="no" mutable="no">
+        <type>base_type</type>
+        <definition>base_type neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::ht_</definition>
+        <argsstring></argsstring>
+        <name>ht_</name>
+        <qualifiedname>neforce::flat_unordered_multiset::ht_</qualifiedname>
+        <briefdescription>
+<para>底层平坦哈希表实例 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="63" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a65271090b39c1d1f80244f540a9e5edd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</definition>
+        <argsstring>()=default</argsstring>
+        <name>flat_unordered_multiset</name>
+        <qualifiedname>neforce::flat_unordered_multiset::flat_unordered_multiset</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>构造一个空 flat_unordered_multiset。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="71" column="5"/>
+        <referencedby refid="classneforce_1_1flat__unordered__multiset_1a7145108d2d8870d51b214ea4f93209a0" compoundref="flat__unordered__multiset_8hpp" startline="472" endline="474">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::equal_to</referencedby>
+        <referencedby refid="classneforce_1_1flat__unordered__multiset_1a9bf04f4643297110eddfa6d5801415de" compoundref="flat__unordered__multiset_8hpp" startline="101" endline="102">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</referencedby>
+        <referencedby refid="classneforce_1_1flat__unordered__multiset_1ad359d581237233b3456a3b2594c83e70" compoundref="flat__unordered__multiset_8hpp" startline="118" endline="119">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</referencedby>
+        <referencedby refid="classneforce_1_1flat__unordered__multiset_1a7a14eb9fbb891ae3c1533514c6097116" compoundref="flat__unordered__multiset_8hpp" startline="190" endline="191">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</referencedby>
+        <referencedby refid="classneforce_1_1flat__unordered__multiset_1ad576d5e8bcf4877f835f0c5d9f193dec" compoundref="flat__unordered__multiset_8hpp" startline="198" endline="199">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</referencedby>
+        <referencedby refid="classneforce_1_1flat__unordered__multiset_1a3b51172cc2810654f6b0c9dc33b68af5" compoundref="flat__unordered__multiset_8hpp" startline="207" endline="208">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</referencedby>
+        <referencedby refid="classneforce_1_1flat__unordered__multiset_1ab8d5972944cf2a3e0e19a83832ac605a" compoundref="flat__unordered__multiset_8hpp" startline="217" endline="219">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</referencedby>
+        <referencedby refid="classneforce_1_1flat__unordered__multiset_1a5091a7b9d756fe20d795e51b4177d764" compoundref="flat__unordered__multiset_8hpp" startline="481" endline="483">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::less_than</referencedby>
+        <referencedby refid="classneforce_1_1flat__unordered__multiset_1ab54e1e3bb9a10dcb8879f227a8af99ad" compoundref="flat__unordered__multiset_8hpp" startline="109" endline="112">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1flat__unordered__multiset_1a4f723e010198b7951b3e591443da16d2" compoundref="flat__unordered__multiset_8hpp" startline="127" endline="130">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1flat__unordered__multiset_1aa1939af9634c93a2ce1c3340580a0113" compoundref="flat__unordered__multiset_8hpp" startline="465" endline="465">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a54125f1c5659a2241a901c0eb779a75b" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</definition>
+        <argsstring>(const size_type n)</argsstring>
+        <name>flat_unordered_multiset</name>
+        <qualifiedname>neforce::flat_unordered_multiset::flat_unordered_multiset</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1a02dfc37badd6dc30d05733d984f48835" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定初始容量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始容量提示 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="77" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="77" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1ac990efa4ece731ca2b3d6c0fa34b5178" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</definition>
+        <argsstring>(const size_type n, const hasher &amp;hf)</argsstring>
+        <name>flat_unordered_multiset</name>
+        <qualifiedname>neforce::flat_unordered_multiset::flat_unordered_multiset</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1a02dfc37badd6dc30d05733d984f48835" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1a059218bca88fd34ce265c847c3bfd3aa" kindref="member">hasher</ref> &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定初始容量和哈希函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始容量提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="85" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="85" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1aa3bca060a365e0313959898da35644db" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</definition>
+        <argsstring>(const size_type n, const hasher &amp;hf, const key_equal &amp;eql)</argsstring>
+        <name>flat_unordered_multiset</name>
+        <qualifiedname>neforce::flat_unordered_multiset::flat_unordered_multiset</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1a02dfc37badd6dc30d05733d984f48835" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1a059218bca88fd34ce265c847c3bfd3aa" kindref="member">hasher</ref> &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1ace296316e47d7a880b42684139da1d14" kindref="member">key_equal</ref> &amp;</type>
+          <declname>eql</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定初始容量、哈希函数和键相等比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始容量提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键相等比较函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="94" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="94" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a9bf04f4643297110eddfa6d5801415de" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</definition>
+        <argsstring>(const flat_unordered_multiset &amp;other)</argsstring>
+        <name>flat_unordered_multiset</name>
+        <qualifiedname>neforce::flat_unordered_multiset::flat_unordered_multiset</qualifiedname>
+        <param>
+          <type>const flat_unordered_multiset &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源 <ref refid="classneforce_1_1flat__unordered__multiset" kindref="compound">flat_unordered_multiset</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="101" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="101" bodyend="102"/>
+        <references refid="classneforce_1_1flat__unordered__multiset_1a65271090b39c1d1f80244f540a9e5edd">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1ab54e1e3bb9a10dcb8879f227a8af99ad" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1flat__unordered__multiset_1a65271090b39c1d1f80244f540a9e5edd" kindref="member">flat_unordered_multiset</ref> &amp;</type>
+        <definition>flat_unordered_multiset &amp; neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::operator=</definition>
+        <argsstring>(const flat_unordered_multiset &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::flat_unordered_multiset::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1a65271090b39c1d1f80244f540a9e5edd" kindref="member">flat_unordered_multiset</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源 <ref refid="classneforce_1_1flat__unordered__multiset" kindref="compound">flat_unordered_multiset</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="109" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="109" bodyend="112"/>
+        <references refid="classneforce_1_1flat__unordered__multiset_1a65271090b39c1d1f80244f540a9e5edd">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1ad359d581237233b3456a3b2594c83e70" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; base_type &gt;" virt="non-virtual">
+        <type></type>
+        <definition>neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</definition>
+        <argsstring>(flat_unordered_multiset &amp;&amp;other)</argsstring>
+        <name>flat_unordered_multiset</name>
+        <qualifiedname>neforce::flat_unordered_multiset::flat_unordered_multiset</qualifiedname>
+        <param>
+          <type>flat_unordered_multiset &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源 <ref refid="classneforce_1_1flat__unordered__multiset" kindref="compound">flat_unordered_multiset</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="118" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="118" bodyend="119"/>
+        <references refid="classneforce_1_1flat__unordered__multiset_1a65271090b39c1d1f80244f540a9e5edd">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</references>
+        <references refid="group___type_special_member_function_checks_1gae20ac6ad74f8179d6959c23cbda15965" compoundref="type__traits_8hpp" startline="2862">neforce::is_nothrow_move_constructible_v</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a4f723e010198b7951b3e591443da16d2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_assignable_v&lt; base_type &gt;" virt="non-virtual">
+        <type><ref refid="classneforce_1_1flat__unordered__multiset_1a65271090b39c1d1f80244f540a9e5edd" kindref="member">flat_unordered_multiset</ref> &amp;</type>
+        <definition>flat_unordered_multiset &amp; neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::operator=</definition>
+        <argsstring>(flat_unordered_multiset &amp;&amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::flat_unordered_multiset::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1flat__unordered__multiset_1a65271090b39c1d1f80244f540a9e5edd" kindref="member">flat_unordered_multiset</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源 <ref refid="classneforce_1_1flat__unordered__multiset" kindref="compound">flat_unordered_multiset</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="127" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="127" bodyend="130"/>
+        <references refid="classneforce_1_1flat__unordered__multiset_1a65271090b39c1d1f80244f540a9e5edd">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</references>
+        <references refid="group___type_special_member_function_checks_1ga4e478e886bb3f1dba6b5b2033f6b4702" compoundref="type__traits_8hpp" startline="2923">neforce::is_nothrow_move_assignable_v</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a2e08a213d4459f47fe1fa28254936c95" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>flat_unordered_multiset</name>
+        <qualifiedname>neforce::flat_unordered_multiset::flat_unordered_multiset</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="139" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="139" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a0495b9319777322167d4acbce287f5a3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</definition>
+        <argsstring>(Iterator first, Iterator last, const size_type n)</argsstring>
+        <name>flat_unordered_multiset</name>
+        <qualifiedname>neforce::flat_unordered_multiset::flat_unordered_multiset</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1a02dfc37badd6dc30d05733d984f48835" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数，指定初始容量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始容量提示 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="152" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="152" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a0b8101f2fb680ade9191b3abf7592e35" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</definition>
+        <argsstring>(Iterator first, Iterator last, const size_type n, const hasher &amp;hf)</argsstring>
+        <name>flat_unordered_multiset</name>
+        <qualifiedname>neforce::flat_unordered_multiset::flat_unordered_multiset</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1a02dfc37badd6dc30d05733d984f48835" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1a059218bca88fd34ce265c847c3bfd3aa" kindref="member">hasher</ref> &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数，指定初始容量和哈希函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始容量提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="166" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="166" bodyend="169"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a8bdfff7c872e6467f0b9c93e628c0d4e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</definition>
+        <argsstring>(Iterator first, Iterator last, const size_type n, const hasher &amp;hf, const key_equal &amp;eql)</argsstring>
+        <name>flat_unordered_multiset</name>
+        <qualifiedname>neforce::flat_unordered_multiset::flat_unordered_multiset</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1a02dfc37badd6dc30d05733d984f48835" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1a059218bca88fd34ce265c847c3bfd3aa" kindref="member">hasher</ref> &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1ace296316e47d7a880b42684139da1d14" kindref="member">key_equal</ref> &amp;</type>
+          <declname>eql</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数，指定初始容量、哈希函数和键相等比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始容量提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键相等比较函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="181" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="181" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a7a14eb9fbb891ae3c1533514c6097116" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist)</argsstring>
+        <name>flat_unordered_multiset</name>
+        <qualifiedname>neforce::flat_unordered_multiset::flat_unordered_multiset</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classneforce_1_1flat__unordered__multiset_1a124e0c6cad78819a3c9d85e2a18fc1c5" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="190" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="190" bodyend="191"/>
+        <references refid="classneforce_1_1flat__unordered__multiset_1a74e53d6cc3fa42737f517011c65881db" compoundref="flat__unordered__multiset_8hpp" startline="225" endline="225">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::begin</references>
+        <references refid="classneforce_1_1flat__unordered__multiset_1a969594d5c114c66d7e51d703c5a550ea" compoundref="flat__unordered__multiset_8hpp" startline="231" endline="231">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::end</references>
+        <references refid="classneforce_1_1flat__unordered__multiset_1a65271090b39c1d1f80244f540a9e5edd">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1ad576d5e8bcf4877f835f0c5d9f193dec" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist, const size_type n)</argsstring>
+        <name>flat_unordered_multiset</name>
+        <qualifiedname>neforce::flat_unordered_multiset::flat_unordered_multiset</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classneforce_1_1flat__unordered__multiset_1a124e0c6cad78819a3c9d85e2a18fc1c5" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1a02dfc37badd6dc30d05733d984f48835" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数，指定初始容量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始容量提示 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="198" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="198" bodyend="199"/>
+        <references refid="classneforce_1_1flat__unordered__multiset_1a74e53d6cc3fa42737f517011c65881db" compoundref="flat__unordered__multiset_8hpp" startline="225" endline="225">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::begin</references>
+        <references refid="classneforce_1_1flat__unordered__multiset_1a969594d5c114c66d7e51d703c5a550ea" compoundref="flat__unordered__multiset_8hpp" startline="231" endline="231">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::end</references>
+        <references refid="classneforce_1_1flat__unordered__multiset_1a65271090b39c1d1f80244f540a9e5edd">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a3b51172cc2810654f6b0c9dc33b68af5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist, const size_type n, const hasher &amp;hf)</argsstring>
+        <name>flat_unordered_multiset</name>
+        <qualifiedname>neforce::flat_unordered_multiset::flat_unordered_multiset</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classneforce_1_1flat__unordered__multiset_1a124e0c6cad78819a3c9d85e2a18fc1c5" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1a02dfc37badd6dc30d05733d984f48835" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1a059218bca88fd34ce265c847c3bfd3aa" kindref="member">hasher</ref> &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数，指定初始容量和哈希函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始容量提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="207" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="207" bodyend="208"/>
+        <references refid="classneforce_1_1flat__unordered__multiset_1a74e53d6cc3fa42737f517011c65881db" compoundref="flat__unordered__multiset_8hpp" startline="225" endline="225">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::begin</references>
+        <references refid="classneforce_1_1flat__unordered__multiset_1a969594d5c114c66d7e51d703c5a550ea" compoundref="flat__unordered__multiset_8hpp" startline="231" endline="231">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::end</references>
+        <references refid="classneforce_1_1flat__unordered__multiset_1a65271090b39c1d1f80244f540a9e5edd">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1ab8d5972944cf2a3e0e19a83832ac605a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist, const size_type n, const hasher &amp;hf, const key_equal &amp;eql)</argsstring>
+        <name>flat_unordered_multiset</name>
+        <qualifiedname>neforce::flat_unordered_multiset::flat_unordered_multiset</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classneforce_1_1flat__unordered__multiset_1a124e0c6cad78819a3c9d85e2a18fc1c5" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1a02dfc37badd6dc30d05733d984f48835" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1a059218bca88fd34ce265c847c3bfd3aa" kindref="member">hasher</ref> &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1ace296316e47d7a880b42684139da1d14" kindref="member">key_equal</ref> &amp;</type>
+          <declname>eql</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数，指定初始容量、哈希函数和键相等比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始容量提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键相等比较函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="217" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="217" bodyend="219"/>
+        <references refid="classneforce_1_1flat__unordered__multiset_1a74e53d6cc3fa42737f517011c65881db" compoundref="flat__unordered__multiset_8hpp" startline="225" endline="225">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::begin</references>
+        <references refid="classneforce_1_1flat__unordered__multiset_1a969594d5c114c66d7e51d703c5a550ea" compoundref="flat__unordered__multiset_8hpp" startline="231" endline="231">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::end</references>
+        <references refid="classneforce_1_1flat__unordered__multiset_1a65271090b39c1d1f80244f540a9e5edd">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a74e53d6cc3fa42737f517011c65881db" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1flat__unordered__multiset_1ae59bb1ba5d6f4c82ace26405bcd9e6eb" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::begin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>neforce::flat_unordered_multiset::begin</qualifiedname>
+        <briefdescription>
+<para>获取起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="225" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="225" bodyend="225"/>
+        <referencedby refid="classneforce_1_1flat__unordered__multiset_1a7a14eb9fbb891ae3c1533514c6097116" compoundref="flat__unordered__multiset_8hpp" startline="190" endline="191">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</referencedby>
+        <referencedby refid="classneforce_1_1flat__unordered__multiset_1ad576d5e8bcf4877f835f0c5d9f193dec" compoundref="flat__unordered__multiset_8hpp" startline="198" endline="199">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</referencedby>
+        <referencedby refid="classneforce_1_1flat__unordered__multiset_1a3b51172cc2810654f6b0c9dc33b68af5" compoundref="flat__unordered__multiset_8hpp" startline="207" endline="208">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</referencedby>
+        <referencedby refid="classneforce_1_1flat__unordered__multiset_1ab8d5972944cf2a3e0e19a83832ac605a" compoundref="flat__unordered__multiset_8hpp" startline="217" endline="219">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a969594d5c114c66d7e51d703c5a550ea" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1flat__unordered__multiset_1ae59bb1ba5d6f4c82ace26405bcd9e6eb" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::end</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>neforce::flat_unordered_multiset::end</qualifiedname>
+        <briefdescription>
+<para>获取结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向末尾的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="231" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="231" bodyend="231"/>
+        <referencedby refid="classneforce_1_1flat__unordered__multiset_1a7a14eb9fbb891ae3c1533514c6097116" compoundref="flat__unordered__multiset_8hpp" startline="190" endline="191">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</referencedby>
+        <referencedby refid="classneforce_1_1flat__unordered__multiset_1ad576d5e8bcf4877f835f0c5d9f193dec" compoundref="flat__unordered__multiset_8hpp" startline="198" endline="199">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</referencedby>
+        <referencedby refid="classneforce_1_1flat__unordered__multiset_1a3b51172cc2810654f6b0c9dc33b68af5" compoundref="flat__unordered__multiset_8hpp" startline="207" endline="208">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</referencedby>
+        <referencedby refid="classneforce_1_1flat__unordered__multiset_1ab8d5972944cf2a3e0e19a83832ac605a" compoundref="flat__unordered__multiset_8hpp" startline="217" endline="219">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a9c1e6aa5b7aafc002b4fa35e73b0fe2d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1flat__unordered__multiset_1a84e487f58f661d76ea4f1b880b09d887" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>neforce::flat_unordered_multiset::begin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="237" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="237" bodyend="237"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a149de2701d711c11abe020cc024ac63f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1flat__unordered__multiset_1a84e487f58f661d76ea4f1b880b09d887" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>neforce::flat_unordered_multiset::end</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向末尾的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="243" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="243" bodyend="243"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a91a7a05b60387165931e8a2670e5e832" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1flat__unordered__multiset_1a84e487f58f661d76ea4f1b880b09d887" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::cbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cbegin</name>
+        <qualifiedname>neforce::flat_unordered_multiset::cbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="249" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="249" bodyend="249"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a55eb8c0ee89ef5a7c9b0d346300ef5c8" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1flat__unordered__multiset_1a84e487f58f661d76ea4f1b880b09d887" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::cend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cend</name>
+        <qualifiedname>neforce::flat_unordered_multiset::cend</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向末尾的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="255" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="255" bodyend="255"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a57970f7a240f3b81702f501f8d22a0c7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1flat__unordered__multiset_1a02dfc37badd6dc30d05733d984f48835" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>neforce::flat_unordered_multiset::size</qualifiedname>
+        <briefdescription>
+<para>获取元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="261" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="261" bodyend="261"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1ad9248cf7c3f6bd1eb1a1a3e4afeaaef4" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1flat__unordered__multiset_1a02dfc37badd6dc30d05733d984f48835" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::max_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>max_size</name>
+        <qualifiedname>neforce::flat_unordered_multiset::max_size</qualifiedname>
+        <briefdescription>
+<para>获取最大可能大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="267" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="267" bodyend="267"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a2a16f49737b2cb96a8087118b0bea475" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>neforce::flat_unordered_multiset::empty</qualifiedname>
+        <briefdescription>
+<para>检查是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否为空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="273" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="273" bodyend="273"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1ab5badb79ed371e551024fbfb97df505d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1flat__unordered__multiset_1a02dfc37badd6dc30d05733d984f48835" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::capacity</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>capacity</name>
+        <qualifiedname>neforce::flat_unordered_multiset::capacity</qualifiedname>
+        <briefdescription>
+<para>获取容量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>slot 总数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="279" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="279" bodyend="279"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a5102cc77666af2aa613fe19e87cae699" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(ht_.count(key))" virt="non-virtual">
+        <type><ref refid="classneforce_1_1flat__unordered__multiset_1a02dfc37badd6dc30d05733d984f48835" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::count</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>count</name>
+        <qualifiedname>neforce::flat_unordered_multiset::count</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1aea27cc88a0bb58e87791ecd5a6a98de3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>统计具有指定键的元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要统计的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>匹配的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="286" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="286" bodyend="288"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a04970763dfff59e615faa12e250e1f49" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(ht_.contains(key))" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::contains</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>contains</name>
+        <qualifiedname>neforce::flat_unordered_multiset::contains</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1aea27cc88a0bb58e87791ecd5a6a98de3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>检查是否包含指定键 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否包含 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="295" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="295" bodyend="297"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a96d3b29f62f3a48c3e7326a5b0e599ef" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(ht_.hash_function())" virt="non-virtual">
+        <type><ref refid="classneforce_1_1flat__unordered__multiset_1a059218bca88fd34ce265c847c3bfd3aa" kindref="member">hasher</ref></type>
+        <definition>hasher neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::hash_function</definition>
+        <argsstring>() const</argsstring>
+        <name>hash_function</name>
+        <qualifiedname>neforce::flat_unordered_multiset::hash_function</qualifiedname>
+        <briefdescription>
+<para>获取哈希函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>哈希函数对象的副本 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="303" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="303" bodyend="305"/>
+        <references refid="classneforce_1_1flat__unordered__multiset_1a96d3b29f62f3a48c3e7326a5b0e599ef" compoundref="flat__unordered__multiset_8hpp" startline="303" endline="305">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::hash_function</references>
+        <referencedby refid="classneforce_1_1flat__unordered__multiset_1a96d3b29f62f3a48c3e7326a5b0e599ef" compoundref="flat__unordered__multiset_8hpp" startline="303" endline="305">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::hash_function</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a5048086c6ba7cdf9c442815f238d3e72" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(ht_.key_eql())" virt="non-virtual">
+        <type><ref refid="classneforce_1_1flat__unordered__multiset_1ace296316e47d7a880b42684139da1d14" kindref="member">key_equal</ref></type>
+        <definition>key_equal neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::key_eql</definition>
+        <argsstring>() const</argsstring>
+        <name>key_eql</name>
+        <qualifiedname>neforce::flat_unordered_multiset::key_eql</qualifiedname>
+        <briefdescription>
+<para>获取键相等比较函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>键相等比较函数对象的副本 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="311" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="311" bodyend="311"/>
+        <references refid="classneforce_1_1flat__unordered__multiset_1a5048086c6ba7cdf9c442815f238d3e72" compoundref="flat__unordered__multiset_8hpp" startline="311" endline="311">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::key_eql</references>
+        <referencedby refid="classneforce_1_1flat__unordered__multiset_1a5048086c6ba7cdf9c442815f238d3e72" compoundref="flat__unordered__multiset_8hpp" startline="311" endline="311">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::key_eql</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1ae849cb2d7a3738831e2ab2622aae1d91" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::load_factor</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>load_factor</name>
+        <qualifiedname>neforce::flat_unordered_multiset::load_factor</qualifiedname>
+        <briefdescription>
+<para>获取当前负载因子 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>负载因子 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="317" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="317" bodyend="317"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a27c9d9a725c2fa29320dd8727466c73d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::max_load_factor</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>max_load_factor</name>
+        <qualifiedname>neforce::flat_unordered_multiset::max_load_factor</qualifiedname>
+        <briefdescription>
+<para>获取最大负载因子 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大负载因子 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="323" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="323" bodyend="323"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1aeb5303c8151d466a8a5c88c2e674d747" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::max_load_factor</definition>
+        <argsstring>(const float lf) noexcept</argsstring>
+        <name>max_load_factor</name>
+        <qualifiedname>neforce::flat_unordered_multiset::max_load_factor</qualifiedname>
+        <param>
+          <type>const float</type>
+          <declname>lf</declname>
+        </param>
+        <briefdescription>
+<para>设置最大负载因子 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的最大负载因子 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="329" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="329" bodyend="329"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a9319012c8cea0da4dc5c70b1c3e8e040" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::rehash</definition>
+        <argsstring>(const size_type n)</argsstring>
+        <name>rehash</name>
+        <qualifiedname>neforce::flat_unordered_multiset::rehash</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1a02dfc37badd6dc30d05733d984f48835" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>重新哈希，调整容量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标容量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="335" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="335" bodyend="335"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a7a66ba0d046e1763c0a810caf0bc0ce3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::reserve</definition>
+        <argsstring>(const size_type n)</argsstring>
+        <name>reserve</name>
+        <qualifiedname>neforce::flat_unordered_multiset::reserve</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1a02dfc37badd6dc30d05733d984f48835" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>预留空间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望的元素数量</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+确保容器至少能容纳 n 个元素而不触发 rehash。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="343" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="343" bodyend="343"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a98a6f72b0ae47d03df1ba0f9452842a2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1flat__unordered__multiset_1ae59bb1ba5d6f4c82ace26405bcd9e6eb" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::emplace</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace</name>
+        <qualifiedname>neforce::flat_unordered_multiset::emplace</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在容器中就地构造元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="352" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="352" bodyend="354"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1af04f146099c546939d1096f952d6be3a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1flat__unordered__multiset_1ae59bb1ba5d6f4c82ace26405bcd9e6eb" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::insert</definition>
+        <argsstring>(const value_type &amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::flat_unordered_multiset::insert</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1a124e0c6cad78819a3c9d85e2a18fc1c5" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>插入元素（拷贝版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="361" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="361" bodyend="361"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1af6c838630c9998d696f50cba20433fe4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1flat__unordered__multiset_1ae59bb1ba5d6f4c82ace26405bcd9e6eb" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::insert</definition>
+        <argsstring>(value_type &amp;&amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::flat_unordered_multiset::insert</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1flat__unordered__multiset_1a124e0c6cad78819a3c9d85e2a18fc1c5" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>移动插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="368" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="368" bodyend="368"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a316a36f41f07875c1a4bcc00320119bb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::insert</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::flat_unordered_multiset::insert</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="377" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="377" bodyend="379"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a22d65b5f28d94f4c69aa2e737b775a03" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::insert</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::flat_unordered_multiset::insert</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classneforce_1_1flat__unordered__multiset_1a124e0c6cad78819a3c9d85e2a18fc1c5" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="385" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="385" bodyend="385"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a5f2285610b4126443e2a9f3a565b73f5" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1flat__unordered__multiset_1a02dfc37badd6dc30d05733d984f48835" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(const key_type &amp;key) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::flat_unordered_multiset::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1aea27cc88a0bb58e87791ecd5a6a98de3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>删除所有具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>删除的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="392" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="392" bodyend="392"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a7c41b2a42828cd345fe04b301d39475b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1flat__unordered__multiset_1ae59bb1ba5d6f4c82ace26405bcd9e6eb" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(const iterator position) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::flat_unordered_multiset::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1ae59bb1ba5d6f4c82ace26405bcd9e6eb" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>删除指定位置的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向被删除元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="399" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="399" bodyend="399"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a2bba9d68ba9f8c3fc7f07eba855048d6" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1flat__unordered__multiset_1ae59bb1ba5d6f4c82ace26405bcd9e6eb" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(const iterator first, const iterator last) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::flat_unordered_multiset::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1ae59bb1ba5d6f4c82ace26405bcd9e6eb" kindref="member">iterator</ref></type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1ae59bb1ba5d6f4c82ace26405bcd9e6eb" kindref="member">iterator</ref></type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除指定范围内的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向最后一个被删除元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="407" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="407" bodyend="407"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1ad8269f9d7eb5abb336cec45a47a310a2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1flat__unordered__multiset_1a84e487f58f661d76ea4f1b880b09d887" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(const const_iterator position) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::flat_unordered_multiset::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1a84e487f58f661d76ea4f1b880b09d887" kindref="member">const_iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>删除指定位置的常量元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向被删除元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="414" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="414" bodyend="414"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a3534269d6ec95e902d72b628faa087c8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1flat__unordered__multiset_1a84e487f58f661d76ea4f1b880b09d887" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(const const_iterator first, const const_iterator last) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::flat_unordered_multiset::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1a84e487f58f661d76ea4f1b880b09d887" kindref="member">const_iterator</ref></type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1a84e487f58f661d76ea4f1b880b09d887" kindref="member">const_iterator</ref></type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除指定范围内的常量元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向最后一个被删除元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="422" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="422" bodyend="424"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a4a7572a330f6b703b1107fe4176d8ce0" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::clear</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clear</name>
+        <qualifiedname>neforce::flat_unordered_multiset::clear</qualifiedname>
+        <briefdescription>
+<para>清空容器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="429" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="429" bodyend="429"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1af7757b86f4ead2ab6cada09f1e5c794b" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1flat__unordered__multiset_1ae59bb1ba5d6f4c82ace26405bcd9e6eb" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>find</name>
+        <qualifiedname>neforce::flat_unordered_multiset::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1aea27cc88a0bb58e87791ecd5a6a98de3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的迭代器，未找到则返回 <ref refid="classneforce_1_1flat__unordered__multiset_1a969594d5c114c66d7e51d703c5a550ea" kindref="member">end()</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="436" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="436" bodyend="436"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a013a86adeffd27bc6a944e9e47eefa9d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1flat__unordered__multiset_1a84e487f58f661d76ea4f1b880b09d887" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>find</name>
+        <qualifiedname>neforce::flat_unordered_multiset::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1aea27cc88a0bb58e87791ecd5a6a98de3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的常量元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的常量迭代器，未找到则返回 <ref refid="classneforce_1_1flat__unordered__multiset_1a55eb8c0ee89ef5a7c9b0d346300ef5c8" kindref="member">cend()</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="443" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="443" bodyend="443"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1aa2b61bfd81ebc4daa00d15e2731d50f5" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1flat__unordered__multiset_1ae59bb1ba5d6f4c82ace26405bcd9e6eb" kindref="member">iterator</ref>, <ref refid="classneforce_1_1flat__unordered__multiset_1ae59bb1ba5d6f4c82ace26405bcd9e6eb" kindref="member">iterator</ref> &gt;</type>
+        <definition>pair&lt; iterator, iterator &gt; neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>neforce::flat_unordered_multiset::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1aea27cc88a0bb58e87791ecd5a6a98de3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的元素范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含范围起始和结束的 pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="450" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="450" bodyend="450"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a028296ba6a2f9908dc4c190ed6e7e779" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1flat__unordered__multiset_1a84e487f58f661d76ea4f1b880b09d887" kindref="member">const_iterator</ref>, <ref refid="classneforce_1_1flat__unordered__multiset_1a84e487f58f661d76ea4f1b880b09d887" kindref="member">const_iterator</ref> &gt;</type>
+        <definition>pair&lt; const_iterator, const_iterator &gt; neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>neforce::flat_unordered_multiset::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1aea27cc88a0bb58e87791ecd5a6a98de3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的常量元素范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含范围起始和结束的 pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="457" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="457" bodyend="459"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1aa1939af9634c93a2ce1c3340580a0113" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_swappable_v&lt; base_type &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::swap</definition>
+        <argsstring>(flat_unordered_multiset &amp;other)</argsstring>
+        <name>swap</name>
+        <qualifiedname>neforce::flat_unordered_multiset::swap</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1flat__unordered__multiset_1a65271090b39c1d1f80244f540a9e5edd" kindref="member">flat_unordered_multiset</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个容器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的容器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="465" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="465" bodyend="465"/>
+        <references refid="classneforce_1_1flat__unordered__multiset_1a65271090b39c1d1f80244f540a9e5edd">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</references>
+        <references refid="group___swap_utility_1gafcc46bf052d9d5c47c99d6a20dadd5bc" compoundref="type__traits_8hpp" startline="3967">neforce::is_nothrow_swappable_v</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a7145108d2d8870d51b214ea4f93209a0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(ht_==rhs.ht_)" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::equal_to</definition>
+        <argsstring>(const flat_unordered_multiset &amp;rhs) const</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>neforce::flat_unordered_multiset::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1a65271090b39c1d1f80244f540a9e5edd" kindref="member">flat_unordered_multiset</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧容器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否相等 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="472" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="472" bodyend="474"/>
+        <references refid="classneforce_1_1flat__unordered__multiset_1a65271090b39c1d1f80244f540a9e5edd">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1flat__unordered__multiset_1a5091a7b9d756fe20d795e51b4177d764" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(ht_&lt; rhs.ht_)" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::less_than</definition>
+        <argsstring>(const flat_unordered_multiset &amp;rhs) const</argsstring>
+        <name>less_than</name>
+        <qualifiedname>neforce::flat_unordered_multiset::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1flat__unordered__multiset_1a65271090b39c1d1f80244f540a9e5edd" kindref="member">flat_unordered_multiset</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧容器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>按字典序比较结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="481" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="481" bodyend="483"/>
+        <references refid="classneforce_1_1flat__unordered__multiset_1a65271090b39c1d1f80244f540a9e5edd">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::flat_unordered_multiset</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>平坦无序多重集合容器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>HashFcn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数类型，默认为 <ref refid="structneforce_1_1hash" kindref="compound">hash&lt;Value&gt;</ref> </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>EqualKey</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键相等比较函数类型，默认为 <ref refid="structneforce_1_1equal__to" kindref="compound">equal_to&lt;Value&gt;</ref> </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>分配器类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<ref refid="classneforce_1_1flat__unordered__multiset" kindref="compound">flat_unordered_multiset</ref> 是一种关联容器，存储键值，允许重复键。 元素无序存储，由哈希函数将键映射到槽位。 底层使用开放寻址平坦哈希表，提供优于链地址法的缓存局部性。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;</label>
+        <link refid="classneforce_1_1flat__unordered__multiset"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::icollector&lt; T &gt;</label>
+        <link refid="structneforce_1_1icollector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;</label>
+        <link refid="classneforce_1_1flat__unordered__multiset"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::icollector&lt; T &gt;</label>
+        <link refid="structneforce_1_1icollector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" line="37" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/flat_unordered_multiset.hpp" bodystart="37" bodyend="484"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a19baf9ad9516341ef6ea45391d8f2c6e" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>allocator_type</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a23ef1a964937b2f56dd666c9fb4368ae" prot="private" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>base_type</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a74e53d6cc3fa42737f517011c65881db" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>begin</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a9c1e6aa5b7aafc002b4fa35e73b0fe2d" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>begin</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1ab5badb79ed371e551024fbfb97df505d" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>capacity</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a91a7a05b60387165931e8a2670e5e832" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>cbegin</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a55eb8c0ee89ef5a7c9b0d346300ef5c8" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>cend</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a4a7572a330f6b703b1107fe4176d8ce0" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>clear</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a84e487f58f661d76ea4f1b880b09d887" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>const_iterator</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a214fd9138f3796cefc032f890fb7d7fe" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>const_pointer</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1aaadeaffda91a06b8f47c528d162c7427" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>const_reference</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a04970763dfff59e615faa12e250e1f49" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>contains</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a5102cc77666af2aa613fe19e87cae699" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>count</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a2356ca25f89e4b8a65598ba8d8085c81" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>difference_type</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a98a6f72b0ae47d03df1ba0f9452842a2" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>emplace</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a2a16f49737b2cb96a8087118b0bea475" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>empty</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a969594d5c114c66d7e51d703c5a550ea" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>end</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a149de2701d711c11abe020cc024ac63f" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>end</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1aa2b61bfd81ebc4daa00d15e2731d50f5" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>equal_range</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a028296ba6a2f9908dc4c190ed6e7e779" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>equal_range</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a7145108d2d8870d51b214ea4f93209a0" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>equal_to</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a5f2285610b4126443e2a9f3a565b73f5" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>erase</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a7c41b2a42828cd345fe04b301d39475b" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>erase</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a2bba9d68ba9f8c3fc7f07eba855048d6" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>erase</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1ad8269f9d7eb5abb336cec45a47a310a2" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>erase</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a3534269d6ec95e902d72b628faa087c8" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>erase</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1af7757b86f4ead2ab6cada09f1e5c794b" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>find</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a013a86adeffd27bc6a944e9e47eefa9d" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>find</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a65271090b39c1d1f80244f540a9e5edd" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>flat_unordered_multiset</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a54125f1c5659a2241a901c0eb779a75b" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>flat_unordered_multiset</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1ac990efa4ece731ca2b3d6c0fa34b5178" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>flat_unordered_multiset</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1aa3bca060a365e0313959898da35644db" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>flat_unordered_multiset</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a9bf04f4643297110eddfa6d5801415de" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>flat_unordered_multiset</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1ad359d581237233b3456a3b2594c83e70" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>flat_unordered_multiset</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a2e08a213d4459f47fe1fa28254936c95" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>flat_unordered_multiset</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a0495b9319777322167d4acbce287f5a3" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>flat_unordered_multiset</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a0b8101f2fb680ade9191b3abf7592e35" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>flat_unordered_multiset</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a8bdfff7c872e6467f0b9c93e628c0d4e" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>flat_unordered_multiset</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a7a14eb9fbb891ae3c1533514c6097116" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>flat_unordered_multiset</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1ad576d5e8bcf4877f835f0c5d9f193dec" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>flat_unordered_multiset</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a3b51172cc2810654f6b0c9dc33b68af5" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>flat_unordered_multiset</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1ab8d5972944cf2a3e0e19a83832ac605a" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>flat_unordered_multiset</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a96d3b29f62f3a48c3e7326a5b0e599ef" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>hash_function</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a059218bca88fd34ce265c847c3bfd3aa" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>hasher</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a122180b482d9a9a82f76bd38b0ff9538" prot="private" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>ht_</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1af04f146099c546939d1096f952d6be3a" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>insert</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1af6c838630c9998d696f50cba20433fe4" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>insert</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a316a36f41f07875c1a4bcc00320119bb" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>insert</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a22d65b5f28d94f4c69aa2e737b775a03" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>insert</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1ae59bb1ba5d6f4c82ace26405bcd9e6eb" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>iterator</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a5048086c6ba7cdf9c442815f238d3e72" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>key_eql</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1ace296316e47d7a880b42684139da1d14" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>key_equal</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1aea27cc88a0bb58e87791ecd5a6a98de3" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>key_type</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a5091a7b9d756fe20d795e51b4177d764" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>less_than</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1ae849cb2d7a3738831e2ab2622aae1d91" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>load_factor</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a27c9d9a725c2fa29320dd8727466c73d" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>max_load_factor</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1aeb5303c8151d466a8a5c88c2e674d747" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>max_load_factor</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1ad9248cf7c3f6bd1eb1a1a3e4afeaaef4" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>max_size</name></member>
+      <member refid="structneforce_1_1icomparable_1aa385e40eb8ac8bdae736966ad0cf568f" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>operator!=</name></member>
+      <member refid="structneforce_1_1icomparable_1a0641b58de65d6a0d5b87c2bcb47496a4" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>operator&lt;</name></member>
+      <member refid="structneforce_1_1icomparable_1a313fba4bce20aced1ff0e6173ad6aab2" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>operator&lt;=</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1ab54e1e3bb9a10dcb8879f227a8af99ad" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a4f723e010198b7951b3e591443da16d2" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1icomparable_1ab9b06f7293eb15299f8c7d5341bfbc83" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>operator==</name></member>
+      <member refid="structneforce_1_1icomparable_1ab8de930acec5c0261656b787f576f08d" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>operator&gt;</name></member>
+      <member refid="structneforce_1_1icomparable_1a644c6002f703eb487427daadfec8fb16" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>operator&gt;=</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1ac8c9374eb779b6eabcf505101346119b" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>pointer</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1aca53c60d757fa886511ff4811acf6fc7" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>reference</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a9319012c8cea0da4dc5c70b1c3e8e040" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>rehash</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a7a66ba0d046e1763c0a810caf0bc0ce3" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>reserve</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a57970f7a240f3b81702f501f8d22a0c7" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>size</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a02dfc37badd6dc30d05733d984f48835" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>size_type</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1aa1939af9634c93a2ce1c3340580a0113" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>swap</name></member>
+      <member refid="classneforce_1_1flat__unordered__multiset_1a124e0c6cad78819a3c9d85e2a18fc1c5" prot="public" virt="non-virtual"><scope>neforce::flat_unordered_multiset</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

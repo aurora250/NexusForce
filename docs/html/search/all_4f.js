@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['命令行_0',['命令行',['../group___command_line.html',1,'']]]
+  ['同步模式_0',['同步模式',['../group___memory_order.html#synchronization_patterns',1,'']]]
 ];

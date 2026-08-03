@@ -3,10 +3,10 @@
   <compounddef id="group___pointer_traits" kind="group">
     <compoundname>PointerTraits</compoundname>
     <title>指针萃取</title>
-    <innerclass refid="structpointer__traits" prot="public">pointer_traits</innerclass>
-    <innerclass refid="structpointer__traits_3_01_t_01_5_01_4" prot="public">pointer_traits&lt; T * &gt;</innerclass>
+    <innerclass refid="structneforce_1_1pointer__traits" prot="public">neforce::pointer_traits</innerclass>
+    <innerclass refid="structneforce_1_1pointer__traits_3_01_t_01_5_01_4" prot="public">neforce::pointer_traits&lt; T * &gt;</innerclass>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="group___pointer_traits_1gaad81bc9519e268839715728fedfea51e" prot="public" static="no">
+      <memberdef kind="typedef" id="group___pointer_traits_1ga03b5d677db3a62cd2585e2174ec07c1e" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename Ptr</type>
@@ -15,10 +15,11 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>typename <ref refid="structpointer__traits" kindref="compound">pointer_traits</ref>&lt; Ptr &gt;::template rebind&lt; T &gt;</type>
-        <definition>using pointer_rebind = typename pointer_traits&lt;Ptr&gt;::template rebind&lt;T&gt;</definition>
+        <type>typename pointer_traits&lt; Ptr &gt;::template rebind&lt; T &gt;</type>
+        <definition>using neforce::pointer_rebind = typename pointer_traits&lt;Ptr&gt;::template rebind&lt;T&gt;</definition>
         <argsstring></argsstring>
         <name>pointer_rebind</name>
+        <qualifiedname>neforce::pointer_rebind</qualifiedname>
         <briefdescription>
 <para>指针重新绑定的便捷别名 </para>
         </briefdescription>
@@ -48,16 +49,17 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___pointer_traits_1gac0004e8b2ceae8ef1ca7f782adc45122" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___pointer_traits_1gab6faf73bd5155f1958e18c32d7c905b2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Ptr</type>
           </param>
         </templateparamlist>
         <type>decltype(auto)</type>
-        <definition>decltype(auto) ptr_const_cast</definition>
+        <definition>decltype(auto) neforce::ptr_const_cast</definition>
         <argsstring>(Ptr ptr) noexcept</argsstring>
         <name>ptr_const_cast</name>
+        <qualifiedname>neforce::ptr_const_cast</qualifiedname>
         <param>
           <type>Ptr</type>
           <declname>ptr</declname>
@@ -91,17 +93,21 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/iterator_traits.hpp" line="309" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/iterator_traits.hpp" bodystart="309" bodyend="315"/>
+        <references refid="group___pointer_traits_1gab6faf73bd5155f1958e18c32d7c905b2" compoundref="iterator__traits_8hpp" startline="309" endline="315">neforce::ptr_const_cast</references>
+        <referencedby refid="group___pointer_traits_1gab6faf73bd5155f1958e18c32d7c905b2" compoundref="iterator__traits_8hpp" startline="309" endline="315">neforce::ptr_const_cast</referencedby>
+        <referencedby refid="group___pointer_traits_1gae1f557e474f408e8617022761e4e534e" compoundref="iterator__traits_8hpp" startline="324" endline="326">neforce::ptr_const_cast</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___pointer_traits_1gae5389a2c211913bf9c5700224a7eb73e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___pointer_traits_1gae1f557e474f408e8617022761e4e534e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>decltype(auto)</type>
-        <definition>decltype(auto) ptr_const_cast</definition>
+        <definition>decltype(auto) neforce::ptr_const_cast</definition>
         <argsstring>(T *ptr) noexcept</argsstring>
         <name>ptr_const_cast</name>
+        <qualifiedname>neforce::ptr_const_cast</qualifiedname>
         <param>
           <type>T *</type>
           <declname>ptr</declname>
@@ -135,17 +141,19 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/iterator_traits.hpp" line="324" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/iterator_traits.hpp" bodystart="324" bodyend="326"/>
+        <references refid="group___pointer_traits_1gab6faf73bd5155f1958e18c32d7c905b2" compoundref="iterator__traits_8hpp" startline="309" endline="315">neforce::ptr_const_cast</references>
       </memberdef>
-      <memberdef kind="function" id="group___pointer_traits_1ga27751f364a156df0d2465257f9cac040" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___pointer_traits_1ga6c2383b7209e26ab3feaa1d52bb34638" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Ptr</type>
           </param>
         </templateparamlist>
         <type>decltype(auto)</type>
-        <definition>decltype(auto) to_address</definition>
+        <definition>decltype(auto) neforce::to_address</definition>
         <argsstring>(const Ptr &amp;ptr) noexcept</argsstring>
         <name>to_address</name>
+        <qualifiedname>neforce::to_address</qualifiedname>
         <param>
           <type>const Ptr &amp;</type>
           <declname>ptr</declname>
@@ -179,8 +187,10 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/iterator_traits.hpp" line="335" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/iterator_traits.hpp" bodystart="335" bodyend="337"/>
-        <references refid="structpointer__traits_1a7f21d4449fd8acded575e91d86aea822" compoundref="iterator__traits_8hpp" startline="254" endline="256">pointer_traits&lt; T &gt;::to_address</references>
-        <referencedby refid="structallocated__ptr_1a0242cf61cc7b0e1a10683e90f8686e57" compoundref="allocated__ptr_8hpp" startline="99" endline="99">allocated_ptr&lt; Alloc &gt;::get</referencedby>
+        <references refid="structneforce_1_1pointer__traits_1a1db17d5ac2d89ab6754a9018d5be0c5e" compoundref="iterator__traits_8hpp" startline="254" endline="256">neforce::pointer_traits&lt; T &gt;::to_address</references>
+        <references refid="group___pointer_traits_1ga6c2383b7209e26ab3feaa1d52bb34638" compoundref="iterator__traits_8hpp" startline="335" endline="337">neforce::to_address</references>
+        <referencedby refid="structneforce_1_1allocated__ptr_1a4629e79b71167a34e0338225b10ddfe8" compoundref="allocated__ptr_8hpp" startline="99" endline="99">neforce::allocated_ptr&lt; Alloc &gt;::get</referencedby>
+        <referencedby refid="group___pointer_traits_1ga6c2383b7209e26ab3feaa1d52bb34638" compoundref="iterator__traits_8hpp" startline="335" endline="337">neforce::to_address</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

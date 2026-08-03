@@ -1,14 +1,14 @@
 var group___channel =
 [
-    [ "channel&lt; T &gt;", "classchannel.html", [
-      [ "channel", "classchannel.html#adb5b7f3bb996bc69a5ae2e58d4ca6e70", null ],
-      [ "close", "classchannel.html#a3edf2203b498691a931b92546d15cb05", null ],
-      [ "empty", "classchannel.html#ac79d74439bd8d77b1ff4c41bd03bcb9d", null ],
-      [ "is_closed", "classchannel.html#a5dd6e65bc0b3a2c0c2ee8ec43df7555a", null ],
-      [ "read", "classchannel.html#a6c20eb8b50e7d4d6445b06483e9f6b83", null ],
-      [ "size", "classchannel.html#afd47c417028666c9ee1d42e38db3e6c0", null ],
-      [ "try_read", "classchannel.html#abf50e25fc91a073500d958af7c906cbe", null ],
-      [ "try_write", "classchannel.html#a463a8a394d62add8f038774283ed61b8", null ],
-      [ "write", "classchannel.html#a57978eeb34d19f1f475eb6aecabac435", null ]
+    [ "neforce::channel&lt; T &gt;", "classneforce_1_1channel.html", [
+      [ "channel", "classneforce_1_1channel.html#a598d731e1bd7c13fac998f9f3d1c53fa", null ],
+      [ "close", "classneforce_1_1channel.html#ad339ddd5118594bf8710e7a0049aea4c", null ],
+      [ "empty", "classneforce_1_1channel.html#aac2bc4d6d65fe46a6b1092e0edb69d61", null ],
+      [ "is_closed", "classneforce_1_1channel.html#a38b396a73521135ecc7b636f2d2ee7e3", null ],
+      [ "read", "classneforce_1_1channel.html#a096c8dde9767ab01c4bdc83213bd9130", null ],
+      [ "size", "classneforce_1_1channel.html#af140a5871fc486ef653dd96b5680ab6a", null ],
+      [ "try_read", "classneforce_1_1channel.html#a7adaaf6ab1ccbe48b3d7dc1172dfaf0f", null ],
+      [ "try_write", "classneforce_1_1channel.html#a7b8ecd5e83a5799f654e6a9719ba7832", null ],
+      [ "write", "classneforce_1_1channel.html#ac20990ae649359037c3d42c58a2b5ca9", null ]
     ] ]
 ];

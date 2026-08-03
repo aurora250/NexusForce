@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
   </td>
  </tr>
  </tbody>
@@ -104,12 +104,12 @@ $(function(){initNavTree('session__store_8hpp_source.html','',''); });
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span></div>
 <div class="foldopen" id="foldopen00026" data-start="{" data-end="};">
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classsession__store.html">   26</a></span><span class="keyword">class </span><a class="code hl_class" href="classsession__store.html">session_store</a> {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classneforce_1_1http_1_1session__store.html">   26</a></span><span class="keyword">class </span><a class="code hl_class" href="classneforce_1_1http_1_1session__store.html">session_store</a> {</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">virtual</span> <a class="code hl_class" href="classsession__store.html">~session_store</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">virtual</span> <a class="code hl_class" href="classneforce_1_1http_1_1session__store.html">~session_store</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">virtual</span> <a class="code hl_class" href="classoptional.html">optional&lt;http_session&gt;</a> load(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <span class="keywordtype">id</span>) = 0;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> save(<span class="keyword">const</span> <a class="code hl_struct" href="structhttp__session.html">http_session</a>&amp; session) = 0;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">virtual</span> <a class="code hl_class" href="classneforce_1_1optional.html">optional&lt;http_session&gt;</a> load(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <span class="keywordtype">id</span>) = 0;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> save(<span class="keyword">const</span> <a class="code hl_struct" href="structneforce_1_1http_1_1http__session.html">http_session</a>&amp; session) = 0;</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> remove(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <span class="keywordtype">id</span>) = 0;</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    NEFORCE_NODISCARD <span class="keyword">virtual</span> <span class="keywordtype">bool</span> exists(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <span class="keywordtype">id</span>) <span class="keyword">const</span> = 0;</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> cleanup() = 0;</div>
@@ -122,41 +122,41 @@ $(function(){initNavTree('session__store_8hpp_source.html','',''); });
 </div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span></div>
 <div class="foldopen" id="foldopen00046" data-start="{" data-end="};">
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classmemory__session__store.html">   46</a></span><span class="keyword">class </span>memory_session_store final : <span class="keyword">public</span> <a class="code hl_class" href="classsession__store.html">session_store</a> {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classneforce_1_1http_1_1memory__session__store.html">   46</a></span><span class="keyword">class </span>memory_session_store final : <span class="keyword">public</span> <a class="code hl_class" href="classneforce_1_1http_1_1session__store.html">session_store</a> {</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keyword">mutable</span> <a class="code hl_class" href="classshared__mutex.html">shared_mutex</a> mutex_;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;string, http_session&gt;</a> sessions_;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keyword">mutable</span> <a class="code hl_class" href="classneforce_1_1shared__mutex.html">shared_mutex</a> mutex_;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_class" href="classneforce_1_1unordered__map.html">unordered_map&lt;string, http_session&gt;</a> sessions_;</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    memory_session_store() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_class" href="classoptional.html">optional&lt;http_session&gt;</a> load(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <span class="keywordtype">id</span>)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <a class="code hl_class" href="classshared__lock.html">shared_lock&lt;shared_mutex&gt;</a> lk(mutex_);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_class" href="classneforce_1_1optional.html">optional&lt;http_session&gt;</a> load(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <span class="keywordtype">id</span>)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <a class="code hl_class" href="classneforce_1_1shared__lock.html">shared_lock&lt;shared_mutex&gt;</a> lk(mutex_);</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keyword">auto</span> it = sessions_.find(<span class="keywordtype">id</span>);</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordflow">if</span> (it != sessions_.end() &amp;&amp; it-&gt;second.is_valid()) {</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="keywordflow">return</span> <a class="code hl_class" href="classoptional.html">optional&lt;http_session&gt;</a>{it-&gt;second};</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="keywordflow">return</span> <a class="code hl_class" href="classneforce_1_1optional.html">optional&lt;http_session&gt;</a>{it-&gt;second};</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        }</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="group___none.html#gab3f528d10c290b48a6035929470622c0">none</a>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="group___none.html#gae83f5d6b9256e35bb2781ebb286996d3">none</a>;</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    }</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordtype">void</span> save(<span class="keyword">const</span> <a class="code hl_struct" href="structhttp__session.html">http_session</a>&amp; session)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <a class="code hl_class" href="classlock.html">lock&lt;shared_mutex&gt;</a> lk(mutex_);</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        sessions_[session.<a class="code hl_variable" href="structhttp__session.html#a5f5bf966c9610b51662de2516f29cb78">id</a>] = session;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordtype">void</span> save(<span class="keyword">const</span> <a class="code hl_struct" href="structneforce_1_1http_1_1http__session.html">http_session</a>&amp; session)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <a class="code hl_class" href="classneforce_1_1lock.html">lock&lt;shared_mutex&gt;</a> lk(mutex_);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        sessions_[session.<a class="code hl_variable" href="structneforce_1_1http_1_1http__session.html#a71bdeb650916b1d0743aa89b7bb2004b">id</a>] = session;</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    }</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordtype">void</span> remove(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <span class="keywordtype">id</span>)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <a class="code hl_class" href="classlock.html">lock&lt;shared_mutex&gt;</a> lk(mutex_);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <a class="code hl_class" href="classneforce_1_1lock.html">lock&lt;shared_mutex&gt;</a> lk(mutex_);</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        sessions_.erase(<span class="keywordtype">id</span>);</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    }</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordtype">bool</span> exists(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <span class="keywordtype">id</span>)<span class="keyword"> const override </span>{</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <a class="code hl_class" href="classshared__lock.html">shared_lock&lt;shared_mutex&gt;</a> lk(mutex_);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <a class="code hl_class" href="classneforce_1_1shared__lock.html">shared_lock&lt;shared_mutex&gt;</a> lk(mutex_);</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keyword">auto</span> it = sessions_.find(<span class="keywordtype">id</span>);</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keywordflow">return</span> it != sessions_.end() &amp;&amp; it-&gt;second.is_valid();</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    }</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordtype">void</span> cleanup()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <a class="code hl_class" href="classlock.html">lock&lt;shared_mutex&gt;</a> lk(mutex_);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <a class="code hl_class" href="classneforce_1_1lock.html">lock&lt;shared_mutex&gt;</a> lk(mutex_);</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = sessions_.begin(); it != sessions_.end();) {</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            <span class="keywordflow">if</span> (!it-&gt;second.is_valid() || it-&gt;second.expired()) {</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                it = sessions_.erase(it);</div>
@@ -167,7 +167,7 @@ $(function(){initNavTree('session__store_8hpp_source.html','',''); });
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    }</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordtype">size_t</span> count()<span class="keyword"> const override </span>{</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <a class="code hl_class" href="classshared__lock.html">shared_lock&lt;shared_mutex&gt;</a> lk(mutex_);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <a class="code hl_class" href="classneforce_1_1shared__lock.html">shared_lock&lt;shared_mutex&gt;</a> lk(mutex_);</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <span class="keywordflow">return</span> sessions_.size();</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    }</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>};</div>
@@ -177,18 +177,18 @@ $(function(){initNavTree('session__store_8hpp_source.html','',''); });
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>NEFORCE_END_HTTP__</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>NEFORCE_END_NAMESPACE__</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_NETWORK_HTTP_SESSION_STORE_HPP__</span></div>
-<div class="ttc" id="aclasslock_html"><div class="ttname"><a href="classlock.html">lock</a></div><div class="ttdoc">锁管理器模板</div><div class="ttdef"><b>定义</b> <a href="mutex_8hpp_source.html#l00191">mutex.hpp:191</a></div></div>
-<div class="ttc" id="aclassoptional_html"><div class="ttname"><a href="classoptional.html">optional</a></div><div class="ttdoc">可选值类</div><div class="ttdef"><b>定义</b> <a href="optional_8hpp_source.html#l00071">optional.hpp:71</a></div></div>
-<div class="ttc" id="aclasssession__store_html"><div class="ttname"><a href="classsession__store.html">session_store</a></div><div class="ttdoc">会话存储抽象接口</div><div class="ttdef"><b>定义</b> <a href="#l00026">session_store.hpp:26</a></div></div>
-<div class="ttc" id="aclassshared__lock_html"><div class="ttname"><a href="classshared__lock.html">shared_lock</a></div><div class="ttdoc">共享锁类模板</div><div class="ttdef"><b>定义</b> <a href="shared__mutex_8hpp_source.html#l00135">shared_mutex.hpp:135</a></div></div>
-<div class="ttc" id="aclassshared__mutex_html"><div class="ttname"><a href="classshared__mutex.html">shared_mutex</a></div><div class="ttdoc">共享互斥锁类</div><div class="ttdef"><b>定义</b> <a href="shared__mutex_8hpp_source.html#l00036">shared_mutex.hpp:36</a></div></div>
-<div class="ttc" id="aclassunordered__map_html"><div class="ttname"><a href="classunordered__map.html">unordered_map</a></div><div class="ttdoc">无序映射容器</div><div class="ttdef"><b>定义</b> <a href="unordered__map_8hpp_source.html#l00038">unordered_map.hpp:38</a></div></div>
-<div class="ttc" id="agroup___none_html_gab3f528d10c290b48a6035929470622c0"><div class="ttname"><a href="group___none.html#gab3f528d10c290b48a6035929470622c0">none</a></div><div class="ttdeci">constexpr none_t none</div><div class="ttdoc">默认空表示</div><div class="ttdef"><b>定义</b> <a href="none_8hpp_source.html#l00073">none.hpp:73</a></div></div>
+<div class="ttc" id="aclassneforce_1_1http_1_1session__store_html"><div class="ttname"><a href="classneforce_1_1http_1_1session__store.html">neforce::http::session_store</a></div><div class="ttdoc">会话存储抽象接口</div><div class="ttdef"><b>定义</b> <a href="#l00026">session_store.hpp:26</a></div></div>
+<div class="ttc" id="aclassneforce_1_1lock_html"><div class="ttname"><a href="classneforce_1_1lock.html">neforce::lock</a></div><div class="ttdoc">锁管理器模板</div><div class="ttdef"><b>定义</b> <a href="mutex_8hpp_source.html#l00191">mutex.hpp:191</a></div></div>
+<div class="ttc" id="aclassneforce_1_1optional_html"><div class="ttname"><a href="classneforce_1_1optional.html">neforce::optional</a></div><div class="ttdoc">可选值类</div><div class="ttdef"><b>定义</b> <a href="optional_8hpp_source.html#l00071">optional.hpp:71</a></div></div>
+<div class="ttc" id="aclassneforce_1_1shared__lock_html"><div class="ttname"><a href="classneforce_1_1shared__lock.html">neforce::shared_lock</a></div><div class="ttdoc">共享锁类模板</div><div class="ttdef"><b>定义</b> <a href="shared__mutex_8hpp_source.html#l00135">shared_mutex.hpp:135</a></div></div>
+<div class="ttc" id="aclassneforce_1_1shared__mutex_html"><div class="ttname"><a href="classneforce_1_1shared__mutex.html">neforce::shared_mutex</a></div><div class="ttdoc">共享互斥锁类</div><div class="ttdef"><b>定义</b> <a href="shared__mutex_8hpp_source.html#l00036">shared_mutex.hpp:36</a></div></div>
+<div class="ttc" id="aclassneforce_1_1unordered__map_html"><div class="ttname"><a href="classneforce_1_1unordered__map.html">neforce::unordered_map</a></div><div class="ttdoc">无序映射容器</div><div class="ttdef"><b>定义</b> <a href="unordered__map_8hpp_source.html#l00038">unordered_map.hpp:38</a></div></div>
+<div class="ttc" id="agroup___none_html_gae83f5d6b9256e35bb2781ebb286996d3"><div class="ttname"><a href="group___none.html#gae83f5d6b9256e35bb2781ebb286996d3">neforce::none</a></div><div class="ttdeci">constexpr none_t none</div><div class="ttdoc">默认空表示</div><div class="ttdef"><b>定义</b> <a href="none_8hpp_source.html#l00073">none.hpp:73</a></div></div>
 <div class="ttc" id="ahttp__session_8hpp_html"><div class="ttname"><a href="http__session_8hpp.html">http_session.hpp</a></div><div class="ttdoc">HTTP Cookie和会话管理</div></div>
 <div class="ttc" id="aoptional_8hpp_html"><div class="ttname"><a href="optional_8hpp.html">optional.hpp</a></div><div class="ttdoc">可选值类型</div></div>
 <div class="ttc" id="ashared__mutex_8hpp_html"><div class="ttname"><a href="shared__mutex_8hpp.html">shared_mutex.hpp</a></div><div class="ttdoc">共享互斥锁支持</div></div>
-<div class="ttc" id="astructhttp__session_html"><div class="ttname"><a href="structhttp__session.html">http_session</a></div><div class="ttdoc">HTTP会话结构</div><div class="ttdef"><b>定义</b> <a href="http__session_8hpp_source.html#l00165">http_session.hpp:165</a></div></div>
-<div class="ttc" id="astructhttp__session_html_a5f5bf966c9610b51662de2516f29cb78"><div class="ttname"><a href="structhttp__session.html#a5f5bf966c9610b51662de2516f29cb78">http_session::id</a></div><div class="ttdeci">string id</div><div class="ttdoc">会话唯一标识符</div><div class="ttdef"><b>定义</b> <a href="http__session_8hpp_source.html#l00166">http_session.hpp:166</a></div></div>
+<div class="ttc" id="astructneforce_1_1http_1_1http__session_html"><div class="ttname"><a href="structneforce_1_1http_1_1http__session.html">neforce::http::http_session</a></div><div class="ttdoc">HTTP会话结构</div><div class="ttdef"><b>定义</b> <a href="http__session_8hpp_source.html#l00165">http_session.hpp:165</a></div></div>
+<div class="ttc" id="astructneforce_1_1http_1_1http__session_html_a71bdeb650916b1d0743aa89b7bb2004b"><div class="ttname"><a href="structneforce_1_1http_1_1http__session.html#a71bdeb650916b1d0743aa89b7bb2004b">neforce::http::http_session::id</a></div><div class="ttdeci">string id</div><div class="ttdoc">会话唯一标识符</div><div class="ttdef"><b>定义</b> <a href="http__session_8hpp_source.html#l00166">http_session.hpp:166</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

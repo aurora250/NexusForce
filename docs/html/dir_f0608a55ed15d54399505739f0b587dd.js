@@ -4,6 +4,7 @@ var dir_f0608a55ed15d54399505739f0b587dd =
     [ "gauge.hpp", "gauge_8hpp.html", "gauge_8hpp" ],
     [ "graph.hpp", "graph_8hpp.html", "graph_8hpp" ],
     [ "layout.hpp", "layout_8hpp.html", "layout_8hpp" ],
+    [ "layout_types.hpp", "layout__types_8hpp.html", null ],
     [ "linear_gradient.hpp", "linear__gradient_8hpp.html", null ],
     [ "paragraph.hpp", "paragraph_8hpp.html", "paragraph_8hpp" ],
     [ "ref.hpp", "ref_8hpp.html", null ],

@@ -1,0 +1,247 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1tui_1_1focus__manager" kind="class" language="C++" prot="public">
+    <compoundname>neforce::tui::focus_manager</compoundname>
+    <includes refid="focus__manager_8hpp" local="no">focus_manager.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1focus__manager_1a9064ddf03e083c8ebf7edb94e6decf86" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1tui_1_1component__base" kindref="compound">component_base</ref> *</type>
+        <definition>component_base* neforce::tui::focus_manager::focused_</definition>
+        <argsstring></argsstring>
+        <name>focused_</name>
+        <qualifiedname>neforce::tui::focus_manager::focused_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="76" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1focus__manager_1a3ccaa475abe8c30197dba6c12f394a12" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="classneforce_1_1tui_1_1component__base" kindref="compound">component_base</ref> * &gt;</type>
+        <definition>vector&lt;component_base*&gt; neforce::tui::focus_manager::focus_chain_</definition>
+        <argsstring></argsstring>
+        <name>focus_chain_</name>
+        <qualifiedname>neforce::tui::focus_manager::focus_chain_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="77" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1focus__manager_1a9ad2a4ee7bfbf741c3ff500918fd4ee3" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::tui::focus_manager::chain_dirty_</definition>
+        <argsstring></argsstring>
+        <name>chain_dirty_</name>
+        <qualifiedname>neforce::tui::focus_manager::chain_dirty_</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="78" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1tui_1_1focus__manager_1a446b7744e467443d1c6437225e40af19" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::tui::focus_manager::focus_manager</definition>
+        <argsstring>()=default</argsstring>
+        <name>focus_manager</name>
+        <qualifiedname>neforce::tui::focus_manager::focus_manager</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="28" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1focus__manager_1a7900b2d99d93d2f65515136b98b45087" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::tui::focus_manager::rebuild_chain</definition>
+        <argsstring>(component_base *root)</argsstring>
+        <name>rebuild_chain</name>
+        <qualifiedname>neforce::tui::focus_manager::rebuild_chain</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1tui_1_1component__base" kindref="compound">component_base</ref> *</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+<para>从组件树重建焦点链 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>root</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>根组件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="34" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1focus__manager_1a5caa05376a594e0b66a0d7bc84adec55" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::tui::focus_manager::set_focus</definition>
+        <argsstring>(component_base *comp)</argsstring>
+        <name>set_focus</name>
+        <qualifiedname>neforce::tui::focus_manager::set_focus</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1tui_1_1component__base" kindref="compound">component_base</ref> *</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>设置焦点组件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标组件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="40" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1focus__manager_1a6c4bb480df97a1403b02451442b271ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::tui::focus_manager::focus_next</definition>
+        <argsstring>()</argsstring>
+        <name>focus_next</name>
+        <qualifiedname>neforce::tui::focus_manager::focus_next</qualifiedname>
+        <briefdescription>
+<para>焦点移动到下一个可聚焦组件 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="45" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1focus__manager_1ac573040f84d193145a3035f1b2dab08f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::tui::focus_manager::focus_prev</definition>
+        <argsstring>()</argsstring>
+        <name>focus_prev</name>
+        <qualifiedname>neforce::tui::focus_manager::focus_prev</qualifiedname>
+        <briefdescription>
+<para>焦点移动到上一个可聚焦组件 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="50" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1focus__manager_1ae830dc7062602e466c888a3683040253" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1tui_1_1component__base" kindref="compound">component_base</ref> *</type>
+        <definition>component_base * neforce::tui::focus_manager::focused</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>focused</name>
+        <qualifiedname>neforce::tui::focus_manager::focused</qualifiedname>
+        <briefdescription>
+<para>获取当前焦点组件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>焦点组件指针，无可聚焦组件时返回 nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="56" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1focus__manager_1a016c38d22264224093e5a50c27b6c79f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="classneforce_1_1tui_1_1component__base" kindref="compound">component_base</ref> * &gt; &amp;</type>
+        <definition>const vector&lt; component_base * &gt; &amp; neforce::tui::focus_manager::chain</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>chain</name>
+        <qualifiedname>neforce::tui::focus_manager::chain</qualifiedname>
+        <briefdescription>
+<para>获取焦点链 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>可聚焦组件列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="62" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" bodystart="62" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1focus__manager_1ab8b629c74ed57900ef0a895c715e844e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::tui::focus_manager::mark_chain_dirty</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>mark_chain_dirty</name>
+        <qualifiedname>neforce::tui::focus_manager::mark_chain_dirty</qualifiedname>
+        <briefdescription>
+<para>标记焦点链需要重建 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="67" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1focus__manager_1a8ac7cad604775904109213d764933aed" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::tui::focus_manager::is_chain_dirty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_chain_dirty</name>
+        <qualifiedname>neforce::tui::focus_manager::is_chain_dirty</qualifiedname>
+        <briefdescription>
+<para>焦点链是否需要重建 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true 表示需要重建 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="73" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" bodystart="73" bodyend="73"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>焦点管理器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>维护焦点链，管理当前焦点组件的设置与导航。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="26" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" bodystart="26" bodyend="79"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1tui_1_1focus__manager_1a016c38d22264224093e5a50c27b6c79f" prot="public" virt="non-virtual"><scope>neforce::tui::focus_manager</scope><name>chain</name></member>
+      <member refid="classneforce_1_1tui_1_1focus__manager_1a9ad2a4ee7bfbf741c3ff500918fd4ee3" prot="private" virt="non-virtual"><scope>neforce::tui::focus_manager</scope><name>chain_dirty_</name></member>
+      <member refid="classneforce_1_1tui_1_1focus__manager_1a3ccaa475abe8c30197dba6c12f394a12" prot="private" virt="non-virtual"><scope>neforce::tui::focus_manager</scope><name>focus_chain_</name></member>
+      <member refid="classneforce_1_1tui_1_1focus__manager_1a446b7744e467443d1c6437225e40af19" prot="public" virt="non-virtual"><scope>neforce::tui::focus_manager</scope><name>focus_manager</name></member>
+      <member refid="classneforce_1_1tui_1_1focus__manager_1a6c4bb480df97a1403b02451442b271ea" prot="public" virt="non-virtual"><scope>neforce::tui::focus_manager</scope><name>focus_next</name></member>
+      <member refid="classneforce_1_1tui_1_1focus__manager_1ac573040f84d193145a3035f1b2dab08f" prot="public" virt="non-virtual"><scope>neforce::tui::focus_manager</scope><name>focus_prev</name></member>
+      <member refid="classneforce_1_1tui_1_1focus__manager_1ae830dc7062602e466c888a3683040253" prot="public" virt="non-virtual"><scope>neforce::tui::focus_manager</scope><name>focused</name></member>
+      <member refid="classneforce_1_1tui_1_1focus__manager_1a9064ddf03e083c8ebf7edb94e6decf86" prot="private" virt="non-virtual"><scope>neforce::tui::focus_manager</scope><name>focused_</name></member>
+      <member refid="classneforce_1_1tui_1_1focus__manager_1a8ac7cad604775904109213d764933aed" prot="public" virt="non-virtual"><scope>neforce::tui::focus_manager</scope><name>is_chain_dirty</name></member>
+      <member refid="classneforce_1_1tui_1_1focus__manager_1ab8b629c74ed57900ef0a895c715e844e" prot="public" virt="non-virtual"><scope>neforce::tui::focus_manager</scope><name>mark_chain_dirty</name></member>
+      <member refid="classneforce_1_1tui_1_1focus__manager_1a7900b2d99d93d2f65515136b98b45087" prot="public" virt="non-virtual"><scope>neforce::tui::focus_manager</scope><name>rebuild_chain</name></member>
+      <member refid="classneforce_1_1tui_1_1focus__manager_1a5caa05376a594e0b66a0d7bc84adec55" prot="public" virt="non-virtual"><scope>neforce::tui::focus_manager</scope><name>set_focus</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

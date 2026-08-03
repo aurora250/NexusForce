@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['符号操作_0',['符号操作',['../group___sign_manipulation.html',1,'']]]
+  ['稀疏向量_0',['稀疏向量',['../group___sparse_vector.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var grpc_8hpp =
 [
-    [ "grpc_status", "group__g_r_p_c.html#ga78dd0ac29767da3b985d742d1e927a56", null ]
+    [ "neforce::http::grpc_status", "group__g_r_p_c.html#ga378303fcd24ae4ab20722b9fc6ba3e94", null ]
 ];

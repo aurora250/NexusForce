@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['正则表达式_0',['正则表达式',['../group___regex.html',1,'']]]
+  ['桶大小策略_0',['桶大小策略',['../group___hash_table.html#bucket_size_strategy',1,'']]]
 ];

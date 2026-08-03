@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['树的合并规则_0',['树的合并规则',['../group___leonardo_heap.html#tree_merging',1,'']]]
+  ['架构检测_0',['架构检测',['../group___architecture_detection.html',1,'']]]
 ];

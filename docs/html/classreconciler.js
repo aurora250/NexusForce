@@ -9,5 +9,5 @@ var classreconciler =
     [ "mount", "classreconciler.html#a55c2ed670e6af6d920186180ea088ee3", null ],
     [ "schedule_render_callback", "classreconciler.html#a34781e50b934f49b56d6b251b9c0dde6", null ],
     [ "schedule_update", "classreconciler.html#a4f7fa222cb99ce3535f9625523213fe8", null ],
-    [ "set_theme", "classreconciler.html#a1916a6e1372ade536f539f5534cdcf30", null ]
+    [ "set_theme", "classreconciler.html#a0227166edc2de46136b5b37df0af7841", null ]
 ];

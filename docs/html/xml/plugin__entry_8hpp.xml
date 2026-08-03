@@ -80,8 +80,8 @@
         </childnode>
       </node>
       <node id="24">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
@@ -258,30 +258,44 @@
         </childnode>
         <childnode refid="48" relation="include">
         </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
         <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="49">
+      <node id="51">
         <label>NeForce/core/string/basic_string_view.hpp</label>
         <link refid="basic__string__view_8hpp"/>
         <childnode refid="41" relation="include">
         </childnode>
-        <childnode refid="50" relation="include">
+        <childnode refid="52" relation="include">
         </childnode>
-        <childnode refid="51" relation="include">
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
         </childnode>
       </node>
-      <node id="50">
+      <node id="52">
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="35" relation="include">
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
       </node>
-      <node id="51">
+      <node id="49">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>NeForce/core/string/charset.hpp</label>
+        <link refid="charset_8hpp"/>
+        <childnode refid="49" relation="include">
+        </childnode>
         <childnode refid="5" relation="include">
         </childnode>
       </node>
@@ -291,10 +305,10 @@
         <childnode refid="19" relation="include">
         </childnode>
       </node>
-      <node id="48">
+      <node id="50">
         <label>NeForce/core/string/string_view.hpp</label>
         <link refid="string__view_8hpp"/>
-        <childnode refid="49" relation="include">
+        <childnode refid="51" relation="include">
         </childnode>
       </node>
       <node id="25">
@@ -390,13 +404,10 @@
         <link refid="plugin__manager_8hpp"/>
       </node>
     </invincdepgraph>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
     <sectiondef kind="define">
       <member refid="group___plugin_1gaf25d3a0e4b54927bc59ad58466f31dcc" kind="define"><name>NEFORCE_PLUGIN_CREATE_FUNC</name></member>
       <member refid="group___plugin_1gad609af93bddb00f7c05edb56b9dc08bf" kind="define"><name>NEFORCE_PLUGIN_DESTROY_FUNC</name></member>
-    </sectiondef>
-    <sectiondef kind="func">
-      <member refid="group___plugin_1ga410e53efc8f03f530c6794d60818d504" kind="function"><name>create_plugin</name></member>
-      <member refid="group___plugin_1ga74771a48a81e35febe1026112c62e1f8" kind="function"><name>destroy_plugin</name></member>
     </sectiondef>
     <briefdescription>
 <para>插件入口点定义 </para>
@@ -417,9 +428,9 @@
 <codeline lineno="29"><highlight class="normal"></highlight></codeline>
 <codeline lineno="36" refid="group___plugin_1gad609af93bddb00f7c05edb56b9dc08bf" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NEFORCE_PLUGIN_DESTROY_FUNC<sp/>&quot;destroy_plugin&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="37"><highlight class="normal"></highlight></codeline>
-<codeline lineno="45" refid="group___plugin_1ga410e53efc8f03f530c6794d60818d504" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/><ref refid="structiplugin" kindref="compound">iplugin</ref>*<sp/><ref refid="group___plugin_1ga410e53efc8f03f530c6794d60818d504" kindref="member">create_plugin</ref>();</highlight></codeline>
+<codeline lineno="45" refid="group___plugin_1gacc30f46adda4b5fce81a8ed81ca292e6" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1iplugin" kindref="compound">iplugin</ref>*<sp/><ref refid="group___plugin_1gacc30f46adda4b5fce81a8ed81ca292e6" kindref="member">create_plugin</ref>();</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"></highlight></codeline>
-<codeline lineno="54" refid="group___plugin_1ga74771a48a81e35febe1026112c62e1f8" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group___plugin_1ga74771a48a81e35febe1026112c62e1f8" kindref="member">destroy_plugin</ref>(<ref refid="structiplugin" kindref="compound">iplugin</ref>*<sp/>p);</highlight></codeline>
+<codeline lineno="54" refid="group___plugin_1gad7adaf72e0a7e6ae7dfd0eba89279952" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group___plugin_1gad7adaf72e0a7e6ae7dfd0eba89279952" kindref="member">destroy_plugin</ref>(<ref refid="structneforce_1_1iplugin" kindref="compound">iplugin</ref>*<sp/>p);</highlight></codeline>
 <codeline lineno="55"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Plugin</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="57"><highlight class="normal"></highlight></codeline>
 <codeline lineno="58"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>

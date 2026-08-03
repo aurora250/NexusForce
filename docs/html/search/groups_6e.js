@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['缓冲区格式化_0',['缓冲区格式化',['../group___buffer_format.html',1,'']]],
-  ['缓冲区_1',['缓冲区',['../group___async_buffers.html',1,'']]],
-  ['缓存_2',['缓存',['../group___cache.html',1,'']]]
+  ['绑定函数_0',['绑定函数',['../group___function_binders.html',1,'']]],
+  ['绑定特性_1',['绑定特性',['../group___bind_traits.html',1,'']]]
 ];

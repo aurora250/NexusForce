@@ -3,9 +3,9 @@
   <compounddef id="group___time_point" kind="group">
     <compoundname>TimePoint</compoundname>
     <title>时间点</title>
-    <innerclass refid="structtime__point" prot="public">time_point</innerclass>
+    <innerclass refid="structneforce_1_1time__point" prot="public">neforce::time_point</innerclass>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___time_point_1gabe2c247aba14578a6a1ba5c2477ed6cf" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___time_point_1ga3e4e77b0f8de52bf943f3d35c81b84c0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename ToDur</type>
@@ -17,16 +17,17 @@
             <type>typename Dur</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___duration_1ga76d927168c448763c60ed9b80e310429" kindref="member">is_duration_v</ref>&lt; ToDur &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_duration_v&lt; ToDur &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
-        <type><ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, ToDur &gt;</type>
-        <definition>time_point&lt; Clock, ToDur &gt; time_cast</definition>
+        <type>time_point&lt; Clock, ToDur &gt;</type>
+        <definition>time_point&lt; Clock, ToDur &gt; neforce::time_cast</definition>
         <argsstring>(const time_point&lt; Clock, Dur &gt; &amp;time_point_value)</argsstring>
         <name>time_cast</name>
+        <qualifiedname>neforce::time_cast</qualifiedname>
         <param>
-          <type>const <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, Dur &gt; &amp;</type>
+          <type>const time_point&lt; Clock, Dur &gt; &amp;</type>
           <declname>time_point_value</declname>
         </param>
         <briefdescription>
@@ -74,10 +75,10 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="71" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="71" bodyend="73"/>
-        <references refid="structtime__point_1aae4a3cc188324fca1339a16089fc3570" compoundref="time__point_8hpp" startline="174" endline="174">time_point&lt; Clock, Dur &gt;::since_epoch</references>
-        <references refid="group___duration_1gafaba32c48d91da85098ecb115cea65ed" compoundref="duration_8hpp" startline="144" endline="152">time_cast</references>
+        <references refid="structneforce_1_1time__point_1abf935471104df1dd06fa58e6a127ad1a" compoundref="time__point_8hpp" startline="174" endline="174">neforce::time_point&lt; Clock, Dur &gt;::since_epoch</references>
+        <references refid="group___duration_1ga89d9c0e7540c0ac580481c7de279ad3b" compoundref="duration_8hpp" startline="144" endline="152">neforce::time_cast</references>
       </memberdef>
-      <memberdef kind="function" id="group___time_point_1gacc1b6615cddd0954c5fb964b47f1afe7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___time_point_1gad589f0feecd6d0b3058fa4f5cc21a87e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Clock</type>
@@ -92,16 +93,17 @@
             <type>typename Period2</type>
           </param>
         </templateparamlist>
-        <type><ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, <ref refid="group___type_attribute_operations_1ga63597ca81f0a3a80001c836bc4cbbb84" kindref="member">common_type_t</ref>&lt; Dur1, <ref refid="structduration" kindref="compound">duration</ref>&lt; Rep2, Period2 &gt; &gt; &gt;</type>
-        <definition>time_point&lt; Clock, common_type_t&lt; Dur1, duration&lt; Rep2, Period2 &gt; &gt; &gt; operator+</definition>
+        <type>time_point&lt; Clock, common_type_t&lt; Dur1, duration&lt; Rep2, Period2 &gt; &gt; &gt;</type>
+        <definition>time_point&lt; Clock, common_type_t&lt; Dur1, duration&lt; Rep2, Period2 &gt; &gt; &gt; neforce::operator+</definition>
         <argsstring>(const time_point&lt; Clock, Dur1 &gt; &amp;lhs, const duration&lt; Rep2, Period2 &gt; &amp;rhs)</argsstring>
         <name>operator+</name>
+        <qualifiedname>neforce::operator+</qualifiedname>
         <param>
-          <type>const <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, Dur1 &gt; &amp;</type>
+          <type>const time_point&lt; Clock, Dur1 &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type>const <ref refid="structduration" kindref="compound">duration</ref>&lt; Rep2, Period2 &gt; &amp;</type>
+          <type>const duration&lt; Rep2, Period2 &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -165,9 +167,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="223" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="223" bodyend="228"/>
-        <references refid="structtime__point_1aae4a3cc188324fca1339a16089fc3570" compoundref="time__point_8hpp" startline="174" endline="174">time_point&lt; Clock, Dur &gt;::since_epoch</references>
+        <references refid="structneforce_1_1time__point_1abf935471104df1dd06fa58e6a127ad1a" compoundref="time__point_8hpp" startline="174" endline="174">neforce::time_point&lt; Clock, Dur &gt;::since_epoch</references>
       </memberdef>
-      <memberdef kind="function" id="group___time_point_1ga46cab9ec3aaf10b1ee32ffcedc69e8a4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___time_point_1ga0d9208f4bb5f9a1014e090c4696bcbae" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Rep1</type>
@@ -182,16 +184,17 @@
             <type>typename Dur2</type>
           </param>
         </templateparamlist>
-        <type><ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, <ref refid="group___type_attribute_operations_1ga63597ca81f0a3a80001c836bc4cbbb84" kindref="member">common_type_t</ref>&lt; <ref refid="structduration" kindref="compound">duration</ref>&lt; Rep1, Period1 &gt;, Dur2 &gt; &gt;</type>
-        <definition>time_point&lt; Clock, common_type_t&lt; duration&lt; Rep1, Period1 &gt;, Dur2 &gt; &gt; operator+</definition>
+        <type>time_point&lt; Clock, common_type_t&lt; duration&lt; Rep1, Period1 &gt;, Dur2 &gt; &gt;</type>
+        <definition>time_point&lt; Clock, common_type_t&lt; duration&lt; Rep1, Period1 &gt;, Dur2 &gt; &gt; neforce::operator+</definition>
         <argsstring>(const duration&lt; Rep1, Period1 &gt; &amp;lhs, const time_point&lt; Clock, Dur2 &gt; &amp;rhs)</argsstring>
         <name>operator+</name>
+        <qualifiedname>neforce::operator+</qualifiedname>
         <param>
-          <type>const <ref refid="structduration" kindref="compound">duration</ref>&lt; Rep1, Period1 &gt; &amp;</type>
+          <type>const duration&lt; Rep1, Period1 &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type>const <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, Dur2 &gt; &amp;</type>
+          <type>const time_point&lt; Clock, Dur2 &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -255,9 +258,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="242" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="242" bodyend="247"/>
-        <references refid="structtime__point_1aae4a3cc188324fca1339a16089fc3570" compoundref="time__point_8hpp" startline="174" endline="174">time_point&lt; Clock, Dur &gt;::since_epoch</references>
+        <references refid="structneforce_1_1time__point_1abf935471104df1dd06fa58e6a127ad1a" compoundref="time__point_8hpp" startline="174" endline="174">neforce::time_point&lt; Clock, Dur &gt;::since_epoch</references>
       </memberdef>
-      <memberdef kind="function" id="group___time_point_1gaba11e56f965e713fe1b9735ea24fe9dd" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___time_point_1gadd33b05f7960943f2a165a0636ffb56b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Clock</type>
@@ -272,16 +275,17 @@
             <type>typename Period2</type>
           </param>
         </templateparamlist>
-        <type><ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, <ref refid="group___type_attribute_operations_1ga63597ca81f0a3a80001c836bc4cbbb84" kindref="member">common_type_t</ref>&lt; Dur1, <ref refid="structduration" kindref="compound">duration</ref>&lt; Rep2, Period2 &gt; &gt; &gt;</type>
-        <definition>time_point&lt; Clock, common_type_t&lt; Dur1, duration&lt; Rep2, Period2 &gt; &gt; &gt; operator-</definition>
+        <type>time_point&lt; Clock, common_type_t&lt; Dur1, duration&lt; Rep2, Period2 &gt; &gt; &gt;</type>
+        <definition>time_point&lt; Clock, common_type_t&lt; Dur1, duration&lt; Rep2, Period2 &gt; &gt; &gt; neforce::operator-</definition>
         <argsstring>(const time_point&lt; Clock, Dur1 &gt; &amp;lhs, const duration&lt; Rep2, Period2 &gt; &amp;rhs)</argsstring>
         <name>operator-</name>
+        <qualifiedname>neforce::operator-</qualifiedname>
         <param>
-          <type>const <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, Dur1 &gt; &amp;</type>
+          <type>const time_point&lt; Clock, Dur1 &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type>const <ref refid="structduration" kindref="compound">duration</ref>&lt; Rep2, Period2 &gt; &amp;</type>
+          <type>const duration&lt; Rep2, Period2 &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -345,9 +349,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="261" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="261" bodyend="266"/>
-        <references refid="structtime__point_1aae4a3cc188324fca1339a16089fc3570" compoundref="time__point_8hpp" startline="174" endline="174">time_point&lt; Clock, Dur &gt;::since_epoch</references>
+        <references refid="structneforce_1_1time__point_1abf935471104df1dd06fa58e6a127ad1a" compoundref="time__point_8hpp" startline="174" endline="174">neforce::time_point&lt; Clock, Dur &gt;::since_epoch</references>
       </memberdef>
-      <memberdef kind="function" id="group___time_point_1ga57ede95c3942c5d64768e77ea259660f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___time_point_1ga08ce7e3eb478bee758f4e1ce5a1b682e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Clock</type>
@@ -359,16 +363,17 @@
             <type>typename Dur2</type>
           </param>
         </templateparamlist>
-        <type><ref refid="group___type_attribute_operations_1ga63597ca81f0a3a80001c836bc4cbbb84" kindref="member">common_type_t</ref>&lt; Dur1, Dur2 &gt;</type>
-        <definition>common_type_t&lt; Dur1, Dur2 &gt; operator-</definition>
+        <type>common_type_t&lt; Dur1, Dur2 &gt;</type>
+        <definition>common_type_t&lt; Dur1, Dur2 &gt; neforce::operator-</definition>
         <argsstring>(const time_point&lt; Clock, Dur1 &gt; &amp;lhs, const time_point&lt; Clock, Dur2 &gt; &amp;rhs)</argsstring>
         <name>operator-</name>
+        <qualifiedname>neforce::operator-</qualifiedname>
         <param>
-          <type>const <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, Dur1 &gt; &amp;</type>
+          <type>const time_point&lt; Clock, Dur1 &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type>const <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, Dur2 &gt; &amp;</type>
+          <type>const time_point&lt; Clock, Dur2 &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -424,9 +429,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="278" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="278" bodyend="280"/>
-        <references refid="structtime__point_1aae4a3cc188324fca1339a16089fc3570" compoundref="time__point_8hpp" startline="174" endline="174">time_point&lt; Clock, Dur &gt;::since_epoch</references>
+        <references refid="structneforce_1_1time__point_1abf935471104df1dd06fa58e6a127ad1a" compoundref="time__point_8hpp" startline="174" endline="174">neforce::time_point&lt; Clock, Dur &gt;::since_epoch</references>
       </memberdef>
-      <memberdef kind="function" id="group___time_point_1gaf55901d15e19a30b9303835c29252cc3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___time_point_1ga927f729b7d103359b597a6c0a0397bf1" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Clock</type>
@@ -439,15 +444,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator==</definition>
+        <definition>bool neforce::operator==</definition>
         <argsstring>(const time_point&lt; Clock, Dur1 &gt; &amp;lhs, const time_point&lt; Clock, Dur2 &gt; &amp;rhs)</argsstring>
         <name>operator==</name>
+        <qualifiedname>neforce::operator==</qualifiedname>
         <param>
-          <type>const <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, Dur1 &gt; &amp;</type>
+          <type>const time_point&lt; Clock, Dur1 &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type>const <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, Dur2 &gt; &amp;</type>
+          <type>const time_point&lt; Clock, Dur2 &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -503,9 +509,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="292" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="292" bodyend="294"/>
-        <references refid="structtime__point_1aae4a3cc188324fca1339a16089fc3570" compoundref="time__point_8hpp" startline="174" endline="174">time_point&lt; Clock, Dur &gt;::since_epoch</references>
+        <references refid="structneforce_1_1time__point_1abf935471104df1dd06fa58e6a127ad1a" compoundref="time__point_8hpp" startline="174" endline="174">neforce::time_point&lt; Clock, Dur &gt;::since_epoch</references>
       </memberdef>
-      <memberdef kind="function" id="group___time_point_1ga7ae5de8974816c1eb191cac073c07ab7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___time_point_1ga5431af541dab5f89a4e244877235cf60" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Clock</type>
@@ -518,15 +524,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator!=</definition>
+        <definition>bool neforce::operator!=</definition>
         <argsstring>(const time_point&lt; Clock, Dur1 &gt; &amp;lhs, const time_point&lt; Clock, Dur2 &gt; &amp;rhs)</argsstring>
         <name>operator!=</name>
+        <qualifiedname>neforce::operator!=</qualifiedname>
         <param>
-          <type>const <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, Dur1 &gt; &amp;</type>
+          <type>const time_point&lt; Clock, Dur1 &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type>const <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, Dur2 &gt; &amp;</type>
+          <type>const time_point&lt; Clock, Dur2 &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -583,7 +590,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="306" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="306" bodyend="308"/>
       </memberdef>
-      <memberdef kind="function" id="group___time_point_1gad4a03446628f64e1da77ecaaecd80535" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___time_point_1ga5dd2b5f86b178aeb4b71c88d929bc538" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Clock</type>
@@ -596,15 +603,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&lt;</definition>
+        <definition>bool neforce::operator&lt;</definition>
         <argsstring>(const time_point&lt; Clock, Dur1 &gt; &amp;lhs, const time_point&lt; Clock, Dur2 &gt; &amp;rhs)</argsstring>
         <name>operator&lt;</name>
+        <qualifiedname>neforce::operator&lt;</qualifiedname>
         <param>
-          <type>const <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, Dur1 &gt; &amp;</type>
+          <type>const time_point&lt; Clock, Dur1 &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type>const <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, Dur2 &gt; &amp;</type>
+          <type>const time_point&lt; Clock, Dur2 &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -660,9 +668,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="320" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="320" bodyend="322"/>
-        <references refid="structtime__point_1aae4a3cc188324fca1339a16089fc3570" compoundref="time__point_8hpp" startline="174" endline="174">time_point&lt; Clock, Dur &gt;::since_epoch</references>
+        <references refid="structneforce_1_1time__point_1abf935471104df1dd06fa58e6a127ad1a" compoundref="time__point_8hpp" startline="174" endline="174">neforce::time_point&lt; Clock, Dur &gt;::since_epoch</references>
       </memberdef>
-      <memberdef kind="function" id="group___time_point_1gad0be3cb0ecff52590edf2be17d77aee8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___time_point_1ga09d863f9932c58a52fcf7134138e5192" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Clock</type>
@@ -675,15 +683,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&lt;=</definition>
+        <definition>bool neforce::operator&lt;=</definition>
         <argsstring>(const time_point&lt; Clock, Dur1 &gt; &amp;lhs, const time_point&lt; Clock, Dur2 &gt; &amp;rhs)</argsstring>
         <name>operator&lt;=</name>
+        <qualifiedname>neforce::operator&lt;=</qualifiedname>
         <param>
-          <type>const <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, Dur1 &gt; &amp;</type>
+          <type>const time_point&lt; Clock, Dur1 &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type>const <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, Dur2 &gt; &amp;</type>
+          <type>const time_point&lt; Clock, Dur2 &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -740,7 +749,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="334" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="334" bodyend="336"/>
       </memberdef>
-      <memberdef kind="function" id="group___time_point_1gac561c4a2a2db8f26f1e0d52960911347" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___time_point_1gae32526454c4b6fcfde0ce1adb5c64239" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Clock</type>
@@ -753,15 +762,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&gt;</definition>
+        <definition>bool neforce::operator&gt;</definition>
         <argsstring>(const time_point&lt; Clock, Dur1 &gt; &amp;lhs, const time_point&lt; Clock, Dur2 &gt; &amp;rhs)</argsstring>
         <name>operator&gt;</name>
+        <qualifiedname>neforce::operator&gt;</qualifiedname>
         <param>
-          <type>const <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, Dur1 &gt; &amp;</type>
+          <type>const time_point&lt; Clock, Dur1 &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type>const <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, Dur2 &gt; &amp;</type>
+          <type>const time_point&lt; Clock, Dur2 &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -818,7 +828,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="348" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="348" bodyend="350"/>
       </memberdef>
-      <memberdef kind="function" id="group___time_point_1ga097eef5fe3c7b40e0faebd720a81f9b3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___time_point_1ga8d64d219c52a031196cc78449098c5dd" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Clock</type>
@@ -831,15 +841,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&gt;=</definition>
+        <definition>bool neforce::operator&gt;=</definition>
         <argsstring>(const time_point&lt; Clock, Dur1 &gt; &amp;lhs, const time_point&lt; Clock, Dur2 &gt; &amp;rhs)</argsstring>
         <name>operator&gt;=</name>
+        <qualifiedname>neforce::operator&gt;=</qualifiedname>
         <param>
-          <type>const <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, Dur1 &gt; &amp;</type>
+          <type>const time_point&lt; Clock, Dur1 &gt; &amp;</type>
           <declname>lhs</declname>
         </param>
         <param>
-          <type>const <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, Dur2 &gt; &amp;</type>
+          <type>const time_point&lt; Clock, Dur2 &gt; &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -896,7 +907,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="362" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="362" bodyend="364"/>
       </memberdef>
-      <memberdef kind="function" id="group___time_point_1gaeb19717e2329f809d58d4b20c372e6be" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___time_point_1gabd89e5a8fb583cff79555dd36150b0f1" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Clock</type>
@@ -906,16 +917,16 @@
           </param>
           <param>
             <type>typename Dummy</type>
-            <defval><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;<ref refid="group___duration_1ga76d927168c448763c60ed9b80e310429" kindref="member">is_duration_v</ref>&lt;Dur&gt;&gt;</defval>
+            <defval><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;<ref refid="group___duration_1gaa617e1783a20152a1bd44dee1be8a9fb" kindref="member">is_duration_v</ref>&lt;Dur&gt;&gt;</defval>
           </param>
         </templateparamlist>
         <type>constexpr</type>
-        <definition>duration&lt; Rep, Period &gt;::duration</definition>
+        <definition>neforce::duration&lt; Rep, Period &gt;::duration</definition>
         <argsstring>(time_point&lt; Clock, Dur &gt; tp)</argsstring>
         <name>duration</name>
-        <qualifiedname>duration::duration</qualifiedname>
+        <qualifiedname>neforce::duration::duration</qualifiedname>
         <param>
-          <type><ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, Dur &gt;</type>
+          <type>time_point&lt; Clock, Dur &gt;</type>
           <declname>tp</declname>
         </param>
         <briefdescription>
@@ -952,8 +963,8 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="259" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="208" bodyend="209"/>
-        <references refid="structduration_1a21a0b1f199c8d9c2f7e43fc93bac66be">duration&lt; Rep, Period &gt;::duration</references>
-        <references refid="group___duration_1gafaba32c48d91da85098ecb115cea65ed" compoundref="duration_8hpp" startline="144" endline="152">time_cast</references>
+        <references refid="structneforce_1_1duration_1ac26dff29aa72df7b14da665aa87f1611">neforce::duration&lt; Rep, Period &gt;::duration</references>
+        <references refid="group___duration_1ga89d9c0e7540c0ac580481c7de279ad3b" compoundref="duration_8hpp" startline="144" endline="152">neforce::time_cast</references>
       </memberdef>
     </sectiondef>
     <briefdescription>

@@ -1,5 +1,5 @@
 var group___adjacent_algorithms =
 [
-    [ "adjacent_find", "group___adjacent_algorithms.html#ga66044ecc5c63afc5e3fc716e74cb9b68", null ],
-    [ "adjacent_find", "group___adjacent_algorithms.html#ga13ada6eb80186e1a77c9c378a3e917be", null ]
+    [ "neforce::adjacent_find", "group___adjacent_algorithms.html#ga6d532ac87011932ea2632d8430ac0704", null ],
+    [ "neforce::adjacent_find", "group___adjacent_algorithms.html#ga373549745645ee36a1567427315da8da", null ]
 ];

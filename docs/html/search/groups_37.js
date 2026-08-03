@@ -8,7 +8,8 @@ var searchData=
   ['字符特征_5',['字符特征',['../group___char_traits.html',1,'']]],
   ['字符类型检查_6',['字符类型检查',['../group___char_type_checking.html',1,'']]],
   ['字符转换_7',['字符转换',['../group___char_case_conversion.html',1,'']]],
-  ['字节大小_8',['字节大小',['../group___byte_size.html',1,'']]],
-  ['字节游标_9',['字节游标',['../group___byte_cursor.html',1,'']]],
-  ['字面量_10',['字面量',['../group___user_literals.html',1,'']]]
+  ['字符集_8',['字符集',['../group___charset.html',1,'']]],
+  ['字节大小_9',['字节大小',['../group___byte_size.html',1,'']]],
+  ['字节游标_10',['字节游标',['../group___byte_cursor.html',1,'']]],
+  ['字面量_11',['字面量',['../group___user_literals.html',1,'']]]
 ];

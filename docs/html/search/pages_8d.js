@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📊_20数学库_20math_0',['📊 数学库 (Math)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md36',1,'']]]
+  ['颜色分量定义_0',['颜色分量定义',['../group___color.html#color_components',1,'']]]
 ];

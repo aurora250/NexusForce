@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
   </td>
  </tr>
  </tbody>
@@ -96,34 +96,44 @@ $(function(){initNavTree('simd_2types_8hpp.html','',''); });
 <p>SIMD 向量类型定义  
 <a href="#details">更多...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="typeinfo_2types_8hpp_source.html">NeForce/core/typeinfo/types.hpp</a>&quot;</code><br />
+<code>#include &lt;immintrin.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 simd/types.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="simd_2types_8hpp__incl.svg" width="238" height="310"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="simd_2types_8hpp__incl.svg" width="290" height="310"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="simd_2types_8hpp_source.html">浏览该文件的源代码.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-类</h2></td></tr>
-<tr class="memitem:vec128_5Ft" id="r_vec128_5Ft"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structvec128__t.html">vec128_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">128-bit 整型向量（标量回退）  <a href="structvec128__t.html#details">更多...</a><br /></td></tr>
-<tr class="memitem:vec128f_5Ft" id="r_vec128f_5Ft"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structvec128f__t.html">vec128f_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">128-bit 单精度浮点向量（标量回退）  <a href="structvec128f__t.html#details">更多...</a><br /></td></tr>
-<tr class="memitem:vec128d_5Ft" id="r_vec128d_5Ft"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structvec128d__t.html">vec128d_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">128-bit 双精度浮点向量（标量回退）  <a href="structvec128d__t.html#details">更多...</a><br /></td></tr>
-<tr class="memitem:vec256_5Ft" id="r_vec256_5Ft"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structvec256__t.html">vec256_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">256-bit 整型向量（标量回退）  <a href="structvec256__t.html#details">更多...</a><br /></td></tr>
-<tr class="memitem:vec256f_5Ft" id="r_vec256f_5Ft"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structvec256f__t.html">vec256f_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">256-bit 单精度浮点向量（标量回退）  <a href="structvec256f__t.html#details">更多...</a><br /></td></tr>
-<tr class="memitem:vec256d_5Ft" id="r_vec256d_5Ft"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structvec256d__t.html">vec256d_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">256-bit 双精度浮点向量（标量回退）  <a href="structvec256d__t.html#details">更多...</a><br /></td></tr>
-<tr class="memitem:vec512_5Ft" id="r_vec512_5Ft"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structvec512__t.html">vec512_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">512-bit 整型向量（标量回退）  <a href="structvec512__t.html#details">更多...</a><br /></td></tr>
-<tr class="memitem:vec512f_5Ft" id="r_vec512f_5Ft"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structvec512f__t.html">vec512f_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">512-bit 单精度浮点向量（标量回退）  <a href="structvec512f__t.html#details">更多...</a><br /></td></tr>
-<tr class="memitem:vec512d_5Ft" id="r_vec512d_5Ft"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structvec512d__t.html">vec512d_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">512-bit 双精度浮点向量（标量回退）  <a href="structvec512d__t.html#details">更多...</a><br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+类型定义</h2></td></tr>
+<tr class="memitem:ga0ebf766978a7e2e91cd299bad0fd8c18" id="r_ga0ebf766978a7e2e91cd299bad0fd8c18"><td class="memItemLeft">
+using&#160;</td><td class="memItemRight"><b>neforce::simd::vec128_t</b> = ::__m128i</td></tr>
+<tr class="memdesc:ga0ebf766978a7e2e91cd299bad0fd8c18"><td class="mdescLeft">&#160;</td><td class="mdescRight">128-bit 整型向量（16×i8 / 8×i16 / 4×i32 / 2×i64） <br /></td></tr>
+<tr class="memitem:ga1681da5853ce1ba8d9ce275cafba4090" id="r_ga1681da5853ce1ba8d9ce275cafba4090"><td class="memItemLeft">
+using&#160;</td><td class="memItemRight"><b>neforce::simd::vec128f_t</b> = ::__m128</td></tr>
+<tr class="memdesc:ga1681da5853ce1ba8d9ce275cafba4090"><td class="mdescLeft">&#160;</td><td class="mdescRight">128-bit 单精度浮点向量（4×f32） <br /></td></tr>
+<tr class="memitem:ga2f96202fcf0f211c17663e817baaee94" id="r_ga2f96202fcf0f211c17663e817baaee94"><td class="memItemLeft">
+using&#160;</td><td class="memItemRight"><b>neforce::simd::vec128d_t</b> = ::__m128d</td></tr>
+<tr class="memdesc:ga2f96202fcf0f211c17663e817baaee94"><td class="mdescLeft">&#160;</td><td class="mdescRight">128-bit 双精度浮点向量（2×f64） <br /></td></tr>
+<tr class="memitem:ga36ddb548398ae3dc5477eabc7c4facf6" id="r_ga36ddb548398ae3dc5477eabc7c4facf6"><td class="memItemLeft">
+using&#160;</td><td class="memItemRight"><b>neforce::simd::vec256_t</b> = ::__m256i</td></tr>
+<tr class="memdesc:ga36ddb548398ae3dc5477eabc7c4facf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">256-bit 整型向量（32×i8 / 16×i16 / 8×i32 / 4×i64，需 AVX2） <br /></td></tr>
+<tr class="memitem:gafb400e9954d0ba594b1d37858abd2d03" id="r_gafb400e9954d0ba594b1d37858abd2d03"><td class="memItemLeft">
+using&#160;</td><td class="memItemRight"><b>neforce::simd::vec256f_t</b> = ::__m256</td></tr>
+<tr class="memdesc:gafb400e9954d0ba594b1d37858abd2d03"><td class="mdescLeft">&#160;</td><td class="mdescRight">256-bit 单精度浮点向量（8×f32） <br /></td></tr>
+<tr class="memitem:ga6b9f22e3dbf1e9db54301a3f468a70b4" id="r_ga6b9f22e3dbf1e9db54301a3f468a70b4"><td class="memItemLeft">
+using&#160;</td><td class="memItemRight"><b>neforce::simd::vec256d_t</b> = ::__m256d</td></tr>
+<tr class="memdesc:ga6b9f22e3dbf1e9db54301a3f468a70b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">256-bit 双精度浮点向量（4×f64） <br /></td></tr>
+<tr class="memitem:ga544eea78d226cbd1b5ce43ca5101cbcc" id="r_ga544eea78d226cbd1b5ce43ca5101cbcc"><td class="memItemLeft">
+using&#160;</td><td class="memItemRight"><b>neforce::simd::vec512_t</b> = ::__m512i</td></tr>
+<tr class="memdesc:ga544eea78d226cbd1b5ce43ca5101cbcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">512-bit 整型向量（64×i8 / 32×i16 / 16×i32 / 8×i64） <br /></td></tr>
+<tr class="memitem:ga559ab92dd59a43a08c7708d5da252166" id="r_ga559ab92dd59a43a08c7708d5da252166"><td class="memItemLeft">
+using&#160;</td><td class="memItemRight"><b>neforce::simd::vec512f_t</b> = ::__m512</td></tr>
+<tr class="memdesc:ga559ab92dd59a43a08c7708d5da252166"><td class="mdescLeft">&#160;</td><td class="mdescRight">512-bit 单精度浮点向量（16×f32） <br /></td></tr>
+<tr class="memitem:gace5093ccdaaf7c55f600d4ffd04e6cb7" id="r_gace5093ccdaaf7c55f600d4ffd04e6cb7"><td class="memItemLeft">
+using&#160;</td><td class="memItemRight"><b>neforce::simd::vec512d_t</b> = ::__m512d</td></tr>
+<tr class="memdesc:gace5093ccdaaf7c55f600d4ffd04e6cb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">512-bit 双精度浮点向量（8×f64） <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>SIMD 向量类型定义 </p>

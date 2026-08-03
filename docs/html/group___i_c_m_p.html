@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
   </td>
  </tr>
  </tbody>
@@ -98,10 +98,10 @@ $(function(){initNavTree('group___i_c_m_p.html','',''); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 类</h2></td></tr>
-<tr class="memitem:icmp_5Fheader" id="r_icmp_5Fheader"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structicmp__header.html">icmp_header</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ICMP头部结构定义  <a href="structicmp__header.html#details">更多...</a><br /></td></tr>
-<tr class="memitem:icmp_5Fsocket" id="r_icmp_5Fsocket"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classicmp__socket.html">icmp_socket</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ICMP Socket类  <a href="classicmp__socket.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:neforce_3A_3Aicmp_5Fheader" id="r_neforce_3A_3Aicmp_5Fheader"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1icmp__header.html">neforce::icmp_header</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ICMP头部结构定义  <a href="structneforce_1_1icmp__header.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:neforce_3A_3Aicmp_5Fsocket" id="r_neforce_3A_3Aicmp_5Fsocket"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classneforce_1_1icmp__socket.html">neforce::icmp_socket</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ICMP Socket类  <a href="classneforce_1_1icmp__socket.html#details">更多...</a><br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>ICMP协议实现 </p>
@@ -221,30 +221,26 @@ Traceroute 操作原理</h1>
 </table>
 <h1 class="doxsection"><a class="anchor" id="usage_examples"></a>
 使用示例</h1>
-<p>Ping 操作： </p><div class="fragment"><div class="line"><a class="code hl_class" href="classicmp__socket.html">icmp_socket</a> sock;</div>
-<div class="line">sock.<a class="code hl_function" href="classicmp__socket.html#a5e22d67c0aa794d751b4bee655c762af">open</a>();</div>
-<div class="line"><span class="keyword">auto</span> dest = <a class="code hl_function" href="classip__address.html#add2ce58669f6042593d6970743e7311a">ip_address::parse</a>(<span class="stringliteral">&quot;8.8.8.8&quot;</span>);</div>
+<p>Ping 操作： </p><div class="fragment"><div class="line">icmp_socket sock;</div>
+<div class="line">sock.open();</div>
+<div class="line"><span class="keyword">auto</span> dest = <a class="code hl_function" href="classneforce_1_1ip__address.html#a97ab60c5c74caa7679adc3220a206044">ip_address::parse</a>(<span class="stringliteral">&quot;8.8.8.8&quot;</span>);</div>
 <div class="line"><span class="keywordflow">if</span> (dest) {</div>
-<div class="line">    <span class="keyword">auto</span> result = sock.<a class="code hl_function" href="classicmp__socket.html#a2635f1da346bb2d7473d692cd960497f">ping</a>(*dest, <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>(2000));</div>
+<div class="line">    <span class="keyword">auto</span> result = sock.ping(*dest, <a class="code hl_typedef" href="group___duration.html#gaa97729fe53f9bafafb607a9e01cf1fa4">milliseconds</a>(2000));</div>
 <div class="line">    <span class="keywordflow">if</span> (result.success) {</div>
-<div class="line">        <a class="code hl_function" href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a>(<span class="stringliteral">&quot;{}: bytes={} time={}ms TTL={}&quot;</span>,</div>
+<div class="line">        <a class="code hl_function" href="group___console_i_o.html#ga9c4e1ac58957b1892c3091006222f66b">println</a>(<span class="stringliteral">&quot;{}: bytes={} time={}ms TTL={}&quot;</span>,</div>
 <div class="line">                dest-&gt;to_string(), result.reply_size,</div>
 <div class="line">                result.rtt.count(), result.reply_ttl);</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassicmp__socket_html"><div class="ttname"><a href="classicmp__socket.html">icmp_socket</a></div><div class="ttdoc">ICMP Socket类</div><div class="ttdef"><b>定义</b> <a href="icmp__socket_8hpp_source.html#l00203">icmp_socket.hpp:203</a></div></div>
-<div class="ttc" id="aclassicmp__socket_html_a2635f1da346bb2d7473d692cd960497f"><div class="ttname"><a href="classicmp__socket.html#a2635f1da346bb2d7473d692cd960497f">icmp_socket::ping</a></div><div class="ttdeci">ping_result ping(const ip_address &amp;dest, milliseconds timeout, uint16_t sequence=0, const void *data=nullptr, size_t data_len=0)</div><div class="ttdoc">执行Ping操作</div></div>
-<div class="ttc" id="aclassicmp__socket_html_a5e22d67c0aa794d751b4bee655c762af"><div class="ttname"><a href="classicmp__socket.html#a5e22d67c0aa794d751b4bee655c762af">icmp_socket::open</a></div><div class="ttdeci">void open()</div><div class="ttdoc">打开ICMP socket</div></div>
-<div class="ttc" id="aclassip__address_html_add2ce58669f6042593d6970743e7311a"><div class="ttname"><a href="classip__address.html#add2ce58669f6042593d6970743e7311a">ip_address::parse</a></div><div class="ttdeci">static optional&lt; ip_address &gt; parse(const string &amp;host, ports port=ports{}) noexcept</div><div class="ttdoc">从字符串解析IP地址</div></div>
-<div class="ttc" id="agroup___console_i_o_html_gadd269b1d24f35618e1eb0ea848dbf6a0"><div class="ttname"><a href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a></div><div class="ttdeci">void println(Args &amp;&amp;... args)</div><div class="ttdoc">打印多个值并换行</div><div class="ttdef"><b>定义</b> <a href="console_8hpp_source.html#l00698">console.hpp:698</a></div></div>
-<div class="ttc" id="agroup___duration_html_ga0c9e480a0040ed5977448019fb74cd55"><div class="ttname"><a href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a></div><div class="ttdeci">duration&lt; int64_t, milli &gt; milliseconds</div><div class="ttdoc">毫秒持续时间</div><div class="ttdef"><b>定义</b> <a href="duration_8hpp_source.html#l00157">duration.hpp:157</a></div></div>
-</div><!-- fragment --><p>Traceroute 操作： </p><div class="fragment"><div class="line"><span class="keyword">auto</span> hops = sock.<a class="code hl_function" href="classicmp__socket.html#a5d7a7d636558ba6fb91d5d4e1ff2811d">traceroute</a>(*dest, 30, <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>(1000), 3);</div>
+<div class="ttc" id="aclassneforce_1_1ip__address_html_a97ab60c5c74caa7679adc3220a206044"><div class="ttname"><a href="classneforce_1_1ip__address.html#a97ab60c5c74caa7679adc3220a206044">neforce::ip_address::parse</a></div><div class="ttdeci">static optional&lt; ip_address &gt; parse(const string &amp;host, ports port=ports{}) noexcept</div><div class="ttdoc">从字符串解析IP地址</div></div>
+<div class="ttc" id="agroup___console_i_o_html_ga9c4e1ac58957b1892c3091006222f66b"><div class="ttname"><a href="group___console_i_o.html#ga9c4e1ac58957b1892c3091006222f66b">neforce::println</a></div><div class="ttdeci">void println(Args &amp;&amp;... args)</div><div class="ttdoc">打印多个值并换行</div><div class="ttdef"><b>定义</b> <a href="console_8hpp_source.html#l00699">console.hpp:699</a></div></div>
+<div class="ttc" id="agroup___duration_html_gaa97729fe53f9bafafb607a9e01cf1fa4"><div class="ttname"><a href="group___duration.html#gaa97729fe53f9bafafb607a9e01cf1fa4">neforce::milliseconds</a></div><div class="ttdeci">duration&lt; int64_t, milli &gt; milliseconds</div><div class="ttdoc">毫秒持续时间</div><div class="ttdef"><b>定义</b> <a href="duration_8hpp_source.html#l00157">duration.hpp:157</a></div></div>
+</div><!-- fragment --><p>Traceroute 操作： </p><div class="fragment"><div class="line"><span class="keyword">auto</span> hops = sock.traceroute(*dest, 30, <a class="code hl_typedef" href="group___duration.html#gaa97729fe53f9bafafb607a9e01cf1fa4">milliseconds</a>(1000), 3);</div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; hops.size(); ++i) {</div>
-<div class="line">    <a class="code hl_function" href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a>(<span class="stringliteral">&quot;{}: {} (reached={})&quot;</span>, i + 1,</div>
+<div class="line">    <a class="code hl_function" href="group___console_i_o.html#ga9c4e1ac58957b1892c3091006222f66b">println</a>(<span class="stringliteral">&quot;{}: {} (reached={})&quot;</span>, i + 1,</div>
 <div class="line">            hops[i].address.is_valid() ? hops[i].address.to_string() : <span class="stringliteral">&quot;*&quot;</span>,</div>
 <div class="line">            hops[i].reached);</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassicmp__socket_html_a5d7a7d636558ba6fb91d5d4e1ff2811d"><div class="ttname"><a href="classicmp__socket.html#a5d7a7d636558ba6fb91d5d4e1ff2811d">icmp_socket::traceroute</a></div><div class="ttdeci">vector&lt; traceroute_hop &gt; traceroute(const ip_address &amp;dest, int max_hops=30, milliseconds probe_timeout=milliseconds(1000), int probes_per_hop=3)</div><div class="ttdoc">执行Traceroute操作</div></div>
 </div><!-- fragment --><dl class="section note"><dt>注解</dt><dd>Ping 和 Traceroute 是网络诊断中最常用的工具， Ping 用于测试连通性和延迟，Traceroute 用于分析网络路径。</dd></dl>
 <dl class="section warning"><dt>警告</dt><dd>原始套接字操作需要 root/管理员权限。 某些网络环境可能过滤 ICMP 数据包，导致 Ping/Traceroute 结果不准确。 Traceroute 的中间路由器可能不响应 ICMP Time Exceeded（显示为 *）。</dd></dl>
 <dl class="section see"><dt>参见</dt><dd><a href="https://www.rfc-editor.org/rfc/rfc792.html">https://www.rfc-editor.org/rfc/rfc792.html</a> </dd>

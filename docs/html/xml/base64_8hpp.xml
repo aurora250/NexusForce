@@ -88,8 +88,8 @@
         </childnode>
       </node>
       <node id="16">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="11" relation="include">
         </childnode>
       </node>
@@ -254,30 +254,44 @@
         </childnode>
         <childnode refid="45" relation="include">
         </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
         <childnode refid="37" relation="include">
         </childnode>
       </node>
-      <node id="46">
+      <node id="48">
         <label>NeForce/core/string/basic_string_view.hpp</label>
         <link refid="basic__string__view_8hpp"/>
         <childnode refid="35" relation="include">
         </childnode>
-        <childnode refid="47" relation="include">
+        <childnode refid="49" relation="include">
         </childnode>
-        <childnode refid="48" relation="include">
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
         </childnode>
       </node>
-      <node id="47">
+      <node id="49">
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="33" relation="include">
         </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
       </node>
-      <node id="48">
+      <node id="46">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>NeForce/core/string/charset.hpp</label>
+        <link refid="charset_8hpp"/>
+        <childnode refid="46" relation="include">
+        </childnode>
         <childnode refid="9" relation="include">
         </childnode>
       </node>
@@ -287,10 +301,10 @@
         <childnode refid="43" relation="include">
         </childnode>
       </node>
-      <node id="45">
+      <node id="47">
         <label>NeForce/core/string/string_view.hpp</label>
         <link refid="string__view_8hpp"/>
-        <childnode refid="46" relation="include">
+        <childnode refid="48" relation="include">
         </childnode>
       </node>
       <node id="17">
@@ -354,15 +368,8 @@
         <label>utility</label>
       </node>
     </incdepgraph>
-    <innerclass refid="structbase64" prot="public">base64</innerclass>
-    <sectiondef kind="func">
-      <member refid="group___base64_1gab791494d06a802226894388b03dd0040" kind="function"><name>base64_encode</name></member>
-      <member refid="group___base64_1ga75e9f71aa09d012f0bfd17868e66de5f" kind="function"><name>base64_encode</name></member>
-      <member refid="group___base64_1ga9040e48b2b409cc43a8e533d736b6812" kind="function"><name>base64_encode</name></member>
-      <member refid="group___base64_1ga270ee9981a58ba8ec0ec8741535aff64" kind="function"><name>base64_decode</name></member>
-      <member refid="group___base64_1ga3ee824186319ab613c096ca41a1560f7" kind="function"><name>base64_decode</name></member>
-      <member refid="group___base64_1gad48a532f910d74500bc13d82a23c4fe1" kind="function"><name>base64_decode</name></member>
-    </sectiondef>
+    <innerclass refid="structneforce_1_1base64" prot="public">neforce::base64</innerclass>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
     <briefdescription>
 <para>Base64编解码实现 </para>
     </briefdescription>
@@ -380,60 +387,60 @@
 <codeline lineno="16"><highlight class="normal"></highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight></codeline>
 <codeline lineno="69"><highlight class="normal"></highlight></codeline>
-<codeline lineno="77" refid="structbase64" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="structbase64" kindref="compound">base64</ref><sp/>{</highlight></codeline>
-<codeline lineno="83" refid="structbase64_1a8047e752ee89f690f3859400912eab6a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structbase64_1a8047e752ee89f690f3859400912eab6a" kindref="member">encode</ref>(<ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref><sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>);</highlight></codeline>
+<codeline lineno="77" refid="structneforce_1_1base64" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="structneforce_1_1base64" kindref="compound">base64</ref><sp/>{</highlight></codeline>
+<codeline lineno="83" refid="structneforce_1_1base64_1a81f193d68001a7a5edfc841524a7fbc3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1base64_1a81f193d68001a7a5edfc841524a7fbc3" kindref="member">encode</ref>(<ref refid="group___memory_view_1ga533a464153c7fc34d3fa5d92854c8613" kindref="member">cbyte_view</ref><sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>);</highlight></codeline>
 <codeline lineno="84"><highlight class="normal"></highlight></codeline>
-<codeline lineno="91" refid="structbase64_1a5705d9bdb878a07ee58ff6adf8b49b20" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref><sp/><ref refid="structbase64_1a5705d9bdb878a07ee58ff6adf8b49b20" kindref="member">decode</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>);</highlight></codeline>
+<codeline lineno="91" refid="structneforce_1_1base64_1a45484312ed37472fa5a9448f540102d5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref><sp/><ref refid="structneforce_1_1base64_1a45484312ed37472fa5a9448f540102d5" kindref="member">decode</ref>(<ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>);</highlight></codeline>
 <codeline lineno="92"><highlight class="normal"></highlight></codeline>
-<codeline lineno="99" refid="structbase64_1a1823de59c73938e0b786dd29cb646bcd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structbase64_1a1823de59c73938e0b786dd29cb646bcd" kindref="member">encode_url</ref>(<ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref><sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>padding<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="99" refid="structneforce_1_1base64_1afd89e2dc3081618072ad8816b1713bfc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1base64_1afd89e2dc3081618072ad8816b1713bfc" kindref="member">encode_url</ref>(<ref refid="group___memory_view_1ga533a464153c7fc34d3fa5d92854c8613" kindref="member">cbyte_view</ref><sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>padding<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="100"><highlight class="normal"></highlight></codeline>
-<codeline lineno="107" refid="structbase64_1aa903a659224c78ca23e198cea37494c7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref><sp/><ref refid="structbase64_1aa903a659224c78ca23e198cea37494c7" kindref="member">decode_url</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>);</highlight></codeline>
+<codeline lineno="107" refid="structneforce_1_1base64_1a74702843033666ddf0847610111ae281" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref><sp/><ref refid="structneforce_1_1base64_1a74702843033666ddf0847610111ae281" kindref="member">decode_url</ref>(<ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>);</highlight></codeline>
 <codeline lineno="108"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="109"><highlight class="normal"></highlight></codeline>
 <codeline lineno="110"><highlight class="normal"></highlight></codeline>
-<codeline lineno="116" refid="group___base64_1gab791494d06a802226894388b03dd0040" refkind="member"><highlight class="normal">NEFORCE_ALWAYS_INLINE_INLINE<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="group___base64_1gab791494d06a802226894388b03dd0040" kindref="member">base64_encode</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref><sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>)<sp/>{</highlight></codeline>
-<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.empty())<sp/>{</highlight></codeline>
+<codeline lineno="116" refid="group___base64_1ga8fa6d51944226dcda5fe57cf62845efe" refkind="member"><highlight class="normal">NEFORCE_ALWAYS_INLINE_INLINE<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="group___base64_1ga8fa6d51944226dcda5fe57cf62845efe" kindref="member">base64_encode</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___memory_view_1ga533a464153c7fc34d3fa5d92854c8613" kindref="member">cbyte_view</ref><sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.empty())<sp/>{</highlight></codeline>
 <codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{};</highlight></codeline>
 <codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structbase64_1a8047e752ee89f690f3859400912eab6a" kindref="member">base64::encode</ref>(<ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1base64_1a81f193d68001a7a5edfc841524a7fbc3" kindref="member">base64::encode</ref>(<ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>);</highlight></codeline>
 <codeline lineno="121"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="122"><highlight class="normal"></highlight></codeline>
-<codeline lineno="128" refid="group___base64_1ga75e9f71aa09d012f0bfd17868e66de5f" refkind="member"><highlight class="normal">NEFORCE_ALWAYS_INLINE_INLINE<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="group___base64_1gab791494d06a802226894388b03dd0040" kindref="member">base64_encode</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref>&amp;<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>)<sp/>{</highlight></codeline>
-<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.empty())<sp/>{</highlight></codeline>
+<codeline lineno="128" refid="group___base64_1gacb6eb625540e695b2e0020d7fa689c51" refkind="member"><highlight class="normal">NEFORCE_ALWAYS_INLINE_INLINE<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="group___base64_1ga8fa6d51944226dcda5fe57cf62845efe" kindref="member">base64_encode</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref>&amp;<sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.empty())<sp/>{</highlight></codeline>
 <codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{};</highlight></codeline>
 <codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structbase64_1a8047e752ee89f690f3859400912eab6a" kindref="member">base64::encode</ref>(<ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.view());</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1base64_1a81f193d68001a7a5edfc841524a7fbc3" kindref="member">base64::encode</ref>(<ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.view());</highlight></codeline>
 <codeline lineno="133"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="134"><highlight class="normal"></highlight></codeline>
-<codeline lineno="140" refid="group___base64_1ga9040e48b2b409cc43a8e533d736b6812" refkind="member"><highlight class="normal">NEFORCE_ALWAYS_INLINE_INLINE<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="group___base64_1gab791494d06a802226894388b03dd0040" kindref="member">base64_encode</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>)<sp/>{</highlight></codeline>
-<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.empty())<sp/>{</highlight></codeline>
+<codeline lineno="140" refid="group___base64_1gabbaf63f23670c045194bbb5b314caf55" refkind="member"><highlight class="normal">NEFORCE_ALWAYS_INLINE_INLINE<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="group___base64_1ga8fa6d51944226dcda5fe57cf62845efe" kindref="member">base64_encode</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.empty())<sp/>{</highlight></codeline>
 <codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{};</highlight></codeline>
 <codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structbase64_1a8047e752ee89f690f3859400912eab6a" kindref="member">base64::encode</ref>(<ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref>{</highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="normal"><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref>*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(<ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.data()),<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.size()});</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1base64_1a81f193d68001a7a5edfc841524a7fbc3" kindref="member">base64::encode</ref>(<ref refid="group___memory_view_1ga533a464153c7fc34d3fa5d92854c8613" kindref="member">cbyte_view</ref>{</highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="normal"><ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref>*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(<ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.data()),<sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.size()});</highlight></codeline>
 <codeline lineno="145"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="146"><highlight class="normal"></highlight></codeline>
 <codeline lineno="147"><highlight class="normal"></highlight></codeline>
-<codeline lineno="153" refid="group___base64_1ga270ee9981a58ba8ec0ec8741535aff64" refkind="member"><highlight class="normal">NEFORCE_ALWAYS_INLINE_INLINE<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="group___base64_1ga270ee9981a58ba8ec0ec8741535aff64" kindref="member">base64_decode</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>)<sp/>{</highlight></codeline>
-<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.empty())<sp/>{</highlight></codeline>
+<codeline lineno="153" refid="group___base64_1ga0eba8cff9f8cc2c1d7bf0304768dc255" refkind="member"><highlight class="normal">NEFORCE_ALWAYS_INLINE_INLINE<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="group___base64_1ga0eba8cff9f8cc2c1d7bf0304768dc255" kindref="member">base64_decode</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.empty())<sp/>{</highlight></codeline>
 <codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{};</highlight></codeline>
 <codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref><sp/>d<sp/>=<sp/><ref refid="structbase64_1a5705d9bdb878a07ee58ff6adf8b49b20" kindref="member">base64::decode</ref>(<ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>);</highlight></codeline>
-<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">{</highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(d.<ref refid="classvector_1a1300c349b91977d6ee52560beda7a06d" kindref="member">data</ref>()),<sp/>d.<ref refid="classvector_1acb504d0053283e805da9c4fe5827b018" kindref="member">size</ref>()};</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref><sp/>d<sp/>=<sp/><ref refid="structneforce_1_1base64_1a45484312ed37472fa5a9448f540102d5" kindref="member">base64::decode</ref>(<ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>);</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">{</highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(d.<ref refid="classneforce_1_1vector_1a4592e5d1e7d162d109a1682b209fb62f" kindref="member">data</ref>()),<sp/>d.<ref refid="classneforce_1_1vector_1a3b6ecc9f87fa5acf62afbfa70b2d0365" kindref="member">size</ref>()};</highlight></codeline>
 <codeline lineno="159"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="160"><highlight class="normal"></highlight></codeline>
-<codeline lineno="166" refid="group___base64_1ga3ee824186319ab613c096ca41a1560f7" refkind="member"><highlight class="normal">NEFORCE_ALWAYS_INLINE_INLINE<sp/><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref><sp/><ref refid="group___base64_1ga270ee9981a58ba8ec0ec8741535aff64" kindref="member">base64_decode</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref>&amp;<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>)<sp/>{</highlight></codeline>
-<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.empty())<sp/>{</highlight></codeline>
+<codeline lineno="166" refid="group___base64_1ga0c91fcc9ee1eb2142395d5342a9a4805" refkind="member"><highlight class="normal">NEFORCE_ALWAYS_INLINE_INLINE<sp/><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref><sp/><ref refid="group___base64_1ga0eba8cff9f8cc2c1d7bf0304768dc255" kindref="member">base64_decode</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref>&amp;<sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.empty())<sp/>{</highlight></codeline>
 <codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{};</highlight></codeline>
 <codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>view{</highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(<ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.data()),<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.size()};</highlight></codeline>
-<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structbase64_1a5705d9bdb878a07ee58ff6adf8b49b20" kindref="member">base64::decode</ref>(view);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/>view{</highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(<ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.data()),<sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.size()};</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1base64_1a45484312ed37472fa5a9448f540102d5" kindref="member">base64::decode</ref>(view);</highlight></codeline>
 <codeline lineno="172"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="173"><highlight class="normal"></highlight></codeline>
-<codeline lineno="179" refid="group___base64_1gad48a532f910d74500bc13d82a23c4fe1" refkind="member"><highlight class="normal">NEFORCE_ALWAYS_INLINE_INLINE<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="group___base64_1ga270ee9981a58ba8ec0ec8741535aff64" kindref="member">base64_decode</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>)<sp/>{</highlight></codeline>
-<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.empty())<sp/>{</highlight></codeline>
+<codeline lineno="179" refid="group___base64_1gae0826273569c4bd2f7948701eb439391" refkind="member"><highlight class="normal">NEFORCE_ALWAYS_INLINE_INLINE<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="group___base64_1ga0eba8cff9f8cc2c1d7bf0304768dc255" kindref="member">base64_decode</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.empty())<sp/>{</highlight></codeline>
 <codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___base64_1ga270ee9981a58ba8ec0ec8741535aff64" kindref="member">base64_decode</ref>(<ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.view());</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___base64_1ga0eba8cff9f8cc2c1d7bf0304768dc255" kindref="member">base64_decode</ref>(<ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.view());</highlight></codeline>
 <codeline lineno="184"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="185"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Base64</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="187"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Encryption</highlight><highlight class="normal"></highlight></codeline>

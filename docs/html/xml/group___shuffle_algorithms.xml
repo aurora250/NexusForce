@@ -4,16 +4,17 @@
     <compoundname>ShuffleAlgorithms</compoundname>
     <title>随机重排算法</title>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___shuffle_algorithms_1ga3bcbde813bd43737ddaf4c106caac469" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___shuffle_algorithms_1ga1923fb855d707c657d666fc6ea2c1228" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void shuffle</definition>
+        <definition>void neforce::shuffle</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>shuffle</name>
+        <qualifiedname>neforce::shuffle</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -55,20 +56,23 @@
 使用Fisher-Yates洗牌算法（Knuth洗牌）将范围 [first, last) 中的元素随机重排。 算法对每个位置 i（从第二个元素开始），在 [first, i] 范围内随机选择一个位置 j， 然后交换位置 i 和 j 的元素。</para>
 <para><simplesect kind="note"><para>要求 Iterator 满足随机访问迭代器概念 </para>
 </simplesect>
-<simplesect kind="note"><para>使用默认的 <ref refid="classrandom__lcd" kindref="compound">random_lcd</ref> 线性同余随机数生成器 </para>
+<simplesect kind="note"><para>使用默认的 <ref refid="classneforce_1_1random__lcd" kindref="compound">random_lcd</ref> 线性同余随机数生成器 </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/shuffle.hpp" line="41" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/shuffle.hpp" bodystart="41" bodyend="53"/>
-        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
-        <references refid="group___iterator_category_checks_1ga7e90191894e0224a9597f070cd1dcb79" compoundref="concepts_8hpp" startline="601">is_ranges_rnd_iter_v</references>
-        <references refid="group___shift_algorithms_1gaf24b9918e7d6e917eb59c4c5f9cd613d" compoundref="shift_8hpp" startline="440" endline="444">iter_swap</references>
-        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
-        <references refid="classrandom__lcd_1ab7827758610c019138c8ab81e3663d36" compoundref="random_8hpp" startline="135" endline="143">random_lcd::next_int</references>
+        <references refid="group___iterator_operation_1ga81cd39ae0fbc7198eef37acc9ff10950" compoundref="iterator_8hpp" startline="201" endline="218">neforce::distance</references>
+        <references refid="group___iterator_category_checks_1gabca13f6df73a191ea3c980af9121f3c1" compoundref="concepts_8hpp" startline="601">neforce::is_ranges_rnd_iter_v</references>
+        <references refid="group___shift_algorithms_1ga323874bfbf5e57e5ad937fa9b02fe0de" compoundref="shift_8hpp" startline="440" endline="444">neforce::iter_swap</references>
+        <references refid="group___iterator_operation_1gaec610c752e80ab2196ab3377eb84e06b" compoundref="iterator_8hpp" startline="157" endline="161">neforce::next</references>
+        <references refid="classneforce_1_1random__lcd_1a2d1c4295fc24a61f629ea4baedf65685" compoundref="random_8hpp" startline="135" endline="143">neforce::random_lcd::next_int</references>
+        <references refid="group___shuffle_algorithms_1ga1923fb855d707c657d666fc6ea2c1228" compoundref="shuffle_8hpp" startline="41" endline="53">neforce::shuffle</references>
+        <referencedby refid="group___shuffle_algorithms_1ga1923fb855d707c657d666fc6ea2c1228" compoundref="shuffle_8hpp" startline="41" endline="53">neforce::shuffle</referencedby>
+        <referencedby refid="group___shuffle_algorithms_1gab95287909b94bdae1092f2d0f28181c9" compoundref="shuffle_8hpp" startline="74" endline="84">neforce::shuffle</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___shuffle_algorithms_1ga7d0bd6e732e8ea782985610e8276d3ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___shuffle_algorithms_1gab95287909b94bdae1092f2d0f28181c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
@@ -78,9 +82,10 @@
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void shuffle</definition>
+        <definition>void neforce::shuffle</definition>
         <argsstring>(Iterator first, Iterator last, Generator &amp;rand)</argsstring>
         <name>shuffle</name>
+        <qualifiedname>neforce::shuffle</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -154,9 +159,10 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/shuffle.hpp" line="74" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/shuffle.hpp" bodystart="74" bodyend="84"/>
-        <references refid="group___iterator_category_checks_1ga7e90191894e0224a9597f070cd1dcb79" compoundref="concepts_8hpp" startline="601">is_ranges_rnd_iter_v</references>
-        <references refid="group___shift_algorithms_1gaf24b9918e7d6e917eb59c4c5f9cd613d" compoundref="shift_8hpp" startline="440" endline="444">iter_swap</references>
-        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
+        <references refid="group___iterator_category_checks_1gabca13f6df73a191ea3c980af9121f3c1" compoundref="concepts_8hpp" startline="601">neforce::is_ranges_rnd_iter_v</references>
+        <references refid="group___shift_algorithms_1ga323874bfbf5e57e5ad937fa9b02fe0de" compoundref="shift_8hpp" startline="440" endline="444">neforce::iter_swap</references>
+        <references refid="group___iterator_operation_1gaec610c752e80ab2196ab3377eb84e06b" compoundref="iterator_8hpp" startline="157" endline="161">neforce::next</references>
+        <references refid="group___shuffle_algorithms_1ga1923fb855d707c657d666fc6ea2c1228" compoundref="shuffle_8hpp" startline="41" endline="53">neforce::shuffle</references>
       </memberdef>
     </sectiondef>
     <briefdescription>

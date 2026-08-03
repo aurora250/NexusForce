@@ -1,0 +1,1245 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1udp__socket" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>neforce::udp_socket</compoundname>
+    <basecompoundref refid="classneforce_1_1ip__socket" prot="public" virt="non-virtual">neforce::ip_socket</basecompoundref>
+    <includes refid="udp__socket_8hpp" local="no">udp_socket.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1udp__socket_1aede8596ce80e03cce3de4b177115054c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::udp_socket::udp_socket</definition>
+        <argsstring>()=default</argsstring>
+        <name>udp_socket</name>
+        <qualifiedname>neforce::udp_socket::udp_socket</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="46" column="5"/>
+        <references refid="classneforce_1_1udp__socket_1aede8596ce80e03cce3de4b177115054c">udp_socket</references>
+        <referencedby refid="classneforce_1_1udp__socket_1aede8596ce80e03cce3de4b177115054c">udp_socket</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1udp__socket_1a90b66dee0e54fffb796fa8c4c0b9e95d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::udp_socket::udp_socket</definition>
+        <argsstring>(udp_socket &amp;&amp;)=default</argsstring>
+        <name>udp_socket</name>
+        <qualifiedname>neforce::udp_socket::udp_socket</qualifiedname>
+        <param>
+          <type>udp_socket &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="48" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1udp__socket_1ad108faf077a3c323e3b192818e4c978d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1udp__socket_1aede8596ce80e03cce3de4b177115054c" kindref="member">udp_socket</ref> &amp;</type>
+        <definition>udp_socket &amp; neforce::udp_socket::operator=</definition>
+        <argsstring>(udp_socket &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::udp_socket::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1udp__socket_1aede8596ce80e03cce3de4b177115054c" kindref="member">udp_socket</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="49" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1udp__socket_1a735836afc6b50a0a170651aeb6441eef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::udp_socket::open</definition>
+        <argsstring>(family f=family::INET4)</argsstring>
+        <name>open</name>
+        <qualifiedname>neforce::udp_socket::open</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1ip__address_1a5632d25a52dfda97486b1aa3b6cc69a8" kindref="member">family</ref></type>
+          <declname>f</declname>
+          <defval>family::INET4</defval>
+        </param>
+        <briefdescription>
+<para>打开UDP socket </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>地址族，默认IPv4 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1socket__exception" kindref="compound">socket_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>创建失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+创建UDP协议的socket，使用SOCK_DGRAM类型和IPPROTO_UDP协议。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="58" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1udp__socket_1a184161a1ac875d20fb01b8fc8e84feec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1gaee9aeee261c91caa424e5eb0ec5bb749" kindref="member">ssize_t</ref></type>
+        <definition>ssize_t neforce::udp_socket::send_to</definition>
+        <argsstring>(memory_view&lt; const char &gt; data, const ip_address &amp;endpoint, int flags=0)</argsstring>
+        <name>send_to</name>
+        <qualifiedname>neforce::udp_socket::send_to</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1memory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1ip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>向指定端点发送数据报 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要发送的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标端点地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>flags</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>发送标志（通常为0） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>实际发送的字节数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1socket__exception" kindref="compound">socket_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>发送失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>socket未打开或端点无效时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+向指定的远程端点发送UDP数据报，不需要socket处于连接状态。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="71" column="13"/>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1udp__socket_1a1bb5119f523c4faa0494f5ed1716bf7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1gaee9aeee261c91caa424e5eb0ec5bb749" kindref="member">ssize_t</ref></type>
+        <definition>ssize_t neforce::udp_socket::send</definition>
+        <argsstring>(memory_view&lt; const char &gt; data, int flags=0)</argsstring>
+        <name>send</name>
+        <qualifiedname>neforce::udp_socket::send</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1memory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>向已连接的端点发送数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要发送的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>flags</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>发送标志（通常为0） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>实际发送的字节数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1socket__exception" kindref="compound">socket_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>发送失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>socket未打开时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+向connect()关联的远程端点发送数据，需要先调用connect()。 性能优于send_to()，因为不需要每次指定目标地址。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="84" column="13"/>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1udp__socket_1a5625d560f8424a88f42f1815a1a41ad8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="group___platform_dependent_types_1gaee9aeee261c91caa424e5eb0ec5bb749" kindref="member">ssize_t</ref>, <ref refid="classneforce_1_1ip__address" kindref="compound">ip_address</ref> &gt;</type>
+        <definition>pair&lt; ssize_t, ip_address &gt; neforce::udp_socket::receive_from</definition>
+        <argsstring>(memory_view&lt; char &gt; buffer, int flags=0)</argsstring>
+        <name>receive_from</name>
+        <qualifiedname>neforce::udp_socket::receive_from</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1memory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>接收数据报并获取发送方地址 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>flags</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收标志（通常为0） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>接收的字节数和发送方地址的pair </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1socket__exception" kindref="compound">socket_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>socket未打开或缓冲区为空时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+接收UDP数据报，同时返回发送方的IP地址和端口。 适用于无连接模式的UDP服务器。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="97" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1udp__socket_1a5f692ef0b58822717eab554384abb882" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1gaee9aeee261c91caa424e5eb0ec5bb749" kindref="member">ssize_t</ref></type>
+        <definition>ssize_t neforce::udp_socket::receive</definition>
+        <argsstring>(memory_view&lt; char &gt; buffer, int flags=0)</argsstring>
+        <name>receive</name>
+        <qualifiedname>neforce::udp_socket::receive</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1memory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>从已连接的端点接收数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>flags</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收标志（通常为0） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>实际接收的字节数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1socket__exception" kindref="compound">socket_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>socket未打开或缓冲区为空时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+从connect()关联的远程端点接收数据，需要先调用connect()。 只能接收来自该端点的数据。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="110" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1udp__socket_1a0026f2246e08ca432c4f0f75fdfc92af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::udp_socket::async_receive_from</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; char &gt; buffer, function&lt; void(error_code, size_t, ip_address)&gt; handler)</argsstring>
+        <name>async_receive_from</name>
+        <qualifiedname>neforce::udp_socket::async_receive_from</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1memory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref>, <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref>, <ref refid="classneforce_1_1ip__address" kindref="compound">ip_address</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步接收数据报 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t bytes, ip_address sender)</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+异步等待接收UDP数据报，返回发送方地址。 handler 在 <ref refid="classneforce_1_1io__context_1a2d0b05ac1c73237ad2056ef4ed07bc66" kindref="member">io_context::run()</ref> 线程中执行。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="121" column="10"/>
+        <referencedby refid="classneforce_1_1udp__socket_1ac3bb31dfe24aa313a46e66233163c133" compoundref="udp__socket_8hpp" startline="188" endline="191">async_receive_from</referencedby>
+        <referencedby refid="classneforce_1_1udp__socket_1ac7c7927343dc12448fd15975eeba2fe1" compoundref="udp__socket_8hpp" startline="167" endline="169">async_receive_from</referencedby>
+        <referencedby refid="classneforce_1_1udp__socket_1a2922f967dd7d769d85c221fee45063ca" compoundref="udp__socket_8hpp" startline="200" endline="204">async_receive_from</referencedby>
+        <referencedby refid="classneforce_1_1udp__socket_1a29fe4bb2d85d7d363cd2b487bf80b32f" compoundref="udp__socket_8hpp" startline="177" endline="181">async_receive_from</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1udp__socket_1a07e022c578eece0fac6cbc04871fe0cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::udp_socket::async_receive_from</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; char &gt; buffer, cancellation_slot &amp;slot, function&lt; void(error_code, size_t, ip_address)&gt; handler)</argsstring>
+        <name>async_receive_from</name>
+        <qualifiedname>neforce::udp_socket::async_receive_from</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1memory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1cancellation__slot" kindref="compound">cancellation_slot</ref> &amp;</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref>, <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref>, <ref refid="classneforce_1_1ip__address" kindref="compound">ip_address</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步接收数据报（带取消槽） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>slot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>取消槽 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t bytes, ip_address sender) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="131" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1udp__socket_1ad8a1afc742bf3113f1c501dfa8bc58ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::udp_socket::async_send_to</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; const char &gt; data, const ip_address &amp;endpoint, function&lt; void(error_code, size_t)&gt; handler)</argsstring>
+        <name>async_send_to</name>
+        <qualifiedname>neforce::udp_socket::async_send_to</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1memory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1ip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref>, <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步发送数据报 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要发送的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标端点地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t bytes_sent)</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+异步向指定端点发送UDP数据报。 handler 在 <ref refid="classneforce_1_1io__context_1a2d0b05ac1c73237ad2056ef4ed07bc66" kindref="member">io_context::run()</ref> 线程中执行。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="144" column="10"/>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+        <referencedby refid="classneforce_1_1udp__socket_1aa50decce583047daa870cdaa408d2b68" compoundref="udp__socket_8hpp" startline="240" endline="243">async_send_to</referencedby>
+        <referencedby refid="classneforce_1_1udp__socket_1ad7f35a618160142ead73dd37db74ee82" compoundref="udp__socket_8hpp" startline="216" endline="218">async_send_to</referencedby>
+        <referencedby refid="classneforce_1_1udp__socket_1a065ec066109b0f13991f0c0ac4c80ee2" compoundref="udp__socket_8hpp" startline="253" endline="258">async_send_to</referencedby>
+        <referencedby refid="classneforce_1_1udp__socket_1aaaaf938a27aa7dabca67eda025201bc7" compoundref="udp__socket_8hpp" startline="227" endline="232">async_send_to</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1udp__socket_1af7209f69cd08b70083989580d4c08625" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::udp_socket::async_send_to</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; const char &gt; data, const ip_address &amp;endpoint, cancellation_slot &amp;slot, function&lt; void(error_code, size_t)&gt; handler)</argsstring>
+        <name>async_send_to</name>
+        <qualifiedname>neforce::udp_socket::async_send_to</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1memory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1ip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1cancellation__slot" kindref="compound">cancellation_slot</ref> &amp;</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref>, <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref>)&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>异步发送数据报（带取消槽） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要发送的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标端点地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>slot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>取消槽 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成回调 void(error_code, size_t bytes_sent) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="155" column="10"/>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1udp__socket_1ac7c7927343dc12448fd15975eeba2fe1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Token</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt; <ref refid="group___type_attribute_operations_1ga63500a8dd0f79ce1c721aebb8023ce89" kindref="member">decay_t</ref>&lt; Token &gt;, <ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref>, <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref>, <ref refid="classneforce_1_1ip__address" kindref="compound">ip_address</ref>)&gt; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::udp_socket::async_receive_from</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; char &gt; buffer, Token &amp;&amp;token)</argsstring>
+        <name>async_receive_from</name>
+        <qualifiedname>neforce::udp_socket::async_receive_from</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1memory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>Token &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+<para>异步接收数据报—任意可调用对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型，需满足 void(error_code, size_t, ip_address) 签名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成令牌 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="167" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" bodystart="167" bodyend="169"/>
+        <references refid="classneforce_1_1udp__socket_1a0026f2246e08ca432c4f0f75fdfc92af">async_receive_from</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1udp__socket_1a29fe4bb2d85d7d363cd2b487bf80b32f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto neforce::udp_socket::async_receive_from</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; char &gt; buffer, use_future_t)</argsstring>
+        <name>async_receive_from</name>
+        <qualifiedname>neforce::udp_socket::async_receive_from</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1memory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1use__future__t" kindref="compound">use_future_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步接收数据报—use_future </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classneforce_1_1future" kindref="compound">future&lt;pair&lt;size_t, ip_address&gt;&gt;</ref> 接收字节数和发送方地址 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="177" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" bodystart="177" bodyend="181"/>
+        <references refid="classneforce_1_1udp__socket_1a0026f2246e08ca432c4f0f75fdfc92af">async_receive_from</references>
+        <references refid="group___completion_tokens_1gaafbc7286fd3f854ce9cd93be9ade5a0f" compoundref="async__result_8hpp" startline="37" endline="37">neforce::use_future</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1udp__socket_1ac3bb31dfe24aa313a46e66233163c133" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::udp_socket::async_receive_from</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; char &gt; buffer, detached_t)</argsstring>
+        <name>async_receive_from</name>
+        <qualifiedname>neforce::udp_socket::async_receive_from</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1memory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1detached__t" kindref="compound">detached_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步接收数据报—detached（即发即忘） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="188" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" bodystart="188" bodyend="191"/>
+        <references refid="classneforce_1_1udp__socket_1a0026f2246e08ca432c4f0f75fdfc92af">async_receive_from</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1udp__socket_1a2922f967dd7d769d85c221fee45063ca" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto neforce::udp_socket::async_receive_from</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; char &gt; buffer, use_awaitable_t)</argsstring>
+        <name>async_receive_from</name>
+        <qualifiedname>neforce::udp_socket::async_receive_from</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1memory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1use__awaitable__t" kindref="compound">use_awaitable_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步接收数据报—use_awaitable </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classneforce_1_1awaitable" kindref="compound">awaitable&lt;pair&lt;size_t, ip_address&gt;&gt;</ref> 可协程等待的结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="200" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" bodystart="200" bodyend="204"/>
+        <references refid="classneforce_1_1udp__socket_1a0026f2246e08ca432c4f0f75fdfc92af">async_receive_from</references>
+        <references refid="group___completion_tokens_1ga0bccacf234e02a99dde8373671701a74" compoundref="use__awaitable_8hpp" startline="27" endline="27">neforce::use_awaitable</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1udp__socket_1ad7f35a618160142ead73dd37db74ee82" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Token</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt; <ref refid="group___type_attribute_operations_1ga63500a8dd0f79ce1c721aebb8023ce89" kindref="member">decay_t</ref>&lt; Token &gt;, <ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref>, <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref>)&gt; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::udp_socket::async_send_to</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; const char &gt; data, const ip_address &amp;endpoint, Token &amp;&amp;token)</argsstring>
+        <name>async_send_to</name>
+        <qualifiedname>neforce::udp_socket::async_send_to</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1memory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1ip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <param>
+          <type>Token &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+<para>异步发送数据报—任意可调用对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型，需满足 void(error_code, size_t) 签名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要发送的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标端点地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成令牌 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="216" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" bodystart="216" bodyend="218"/>
+        <references refid="classneforce_1_1udp__socket_1ad8a1afc742bf3113f1c501dfa8bc58ab">async_send_to</references>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1udp__socket_1aaaaf938a27aa7dabca67eda025201bc7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto neforce::udp_socket::async_send_to</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; const char &gt; data, const ip_address &amp;endpoint, use_future_t)</argsstring>
+        <name>async_send_to</name>
+        <qualifiedname>neforce::udp_socket::async_send_to</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1memory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1ip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1use__future__t" kindref="compound">use_future_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步发送数据报—use_future </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要发送的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标端点地址 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classneforce_1_1future" kindref="compound">future&lt;size_t&gt;</ref> 发送字节数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="227" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" bodystart="227" bodyend="232"/>
+        <references refid="classneforce_1_1udp__socket_1ad8a1afc742bf3113f1c501dfa8bc58ab">async_send_to</references>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+        <references refid="group___completion_tokens_1gaafbc7286fd3f854ce9cd93be9ade5a0f" compoundref="async__result_8hpp" startline="37" endline="37">neforce::use_future</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1udp__socket_1aa50decce583047daa870cdaa408d2b68" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::udp_socket::async_send_to</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; const char &gt; data, const ip_address &amp;endpoint, detached_t)</argsstring>
+        <name>async_send_to</name>
+        <qualifiedname>neforce::udp_socket::async_send_to</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1memory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1ip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1detached__t" kindref="compound">detached_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步发送数据报—detached（即发即忘） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要发送的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标端点地址 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="240" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" bodystart="240" bodyend="243"/>
+        <references refid="classneforce_1_1udp__socket_1ad8a1afc742bf3113f1c501dfa8bc58ab">async_send_to</references>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1udp__socket_1a065ec066109b0f13991f0c0ac4c80ee2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto neforce::udp_socket::async_send_to</definition>
+        <argsstring>(io_context &amp;ctx, memory_view&lt; const char &gt; data, const ip_address &amp;endpoint, use_awaitable_t)</argsstring>
+        <name>async_send_to</name>
+        <qualifiedname>neforce::udp_socket::async_send_to</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1memory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1ip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1use__awaitable__t" kindref="compound">use_awaitable_t</ref></type>
+        </param>
+        <briefdescription>
+<para>异步发送数据报—use_awaitable </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步 I/O 执行上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要发送的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标端点地址 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classneforce_1_1awaitable" kindref="compound">awaitable&lt;size_t&gt;</ref> 可协程等待的结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="253" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" bodystart="253" bodyend="258"/>
+        <references refid="classneforce_1_1udp__socket_1ad8a1afc742bf3113f1c501dfa8bc58ab">async_send_to</references>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+        <references refid="group___completion_tokens_1ga0bccacf234e02a99dde8373671701a74" compoundref="use__awaitable_8hpp" startline="27" endline="27">neforce::use_awaitable</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>UDP Socket类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>实现UDP协议的数据报socket，支持无连接和已连接两种模式。 UDP是面向数据报的协议，提供不可靠、无连接的服务。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>UDP socket创建和打开</para>
+</listitem><listitem><para>向指定端点发送数据报（send_to）</para>
+</listitem><listitem><para>从任意端点接收数据报（receive_from）</para>
+</listitem><listitem><para>已连接UDP socket的发送（send）和接收（receive）</para>
+</listitem><listitem><para>获取发送方地址信息</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>数据报大小受MTU限制，通常建议不超过65507字节。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>neforce::ip_socket</label>
+        <link refid="classneforce_1_1ip__socket"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::socket_base</label>
+        <link refid="classneforce_1_1socket__base"/>
+      </node>
+      <node id="1">
+        <label>neforce::udp_socket</label>
+        <link refid="classneforce_1_1udp__socket"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>neforce::ip_socket</label>
+        <link refid="classneforce_1_1ip__socket"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::socket_base</label>
+        <link refid="classneforce_1_1socket__base"/>
+      </node>
+      <node id="1">
+        <label>neforce::udp_socket</label>
+        <link refid="classneforce_1_1udp__socket"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="41" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" bodystart="41" bodyend="260"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1ip__socket_1a0325c30f0884ea89c03ccb42c4ec4fe8" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>address_family</name></member>
+      <member refid="classneforce_1_1udp__socket_1a0026f2246e08ca432c4f0f75fdfc92af" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>async_receive_from</name></member>
+      <member refid="classneforce_1_1udp__socket_1a07e022c578eece0fac6cbc04871fe0cb" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>async_receive_from</name></member>
+      <member refid="classneforce_1_1udp__socket_1ac7c7927343dc12448fd15975eeba2fe1" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>async_receive_from</name></member>
+      <member refid="classneforce_1_1udp__socket_1a29fe4bb2d85d7d363cd2b487bf80b32f" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>async_receive_from</name></member>
+      <member refid="classneforce_1_1udp__socket_1ac3bb31dfe24aa313a46e66233163c133" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>async_receive_from</name></member>
+      <member refid="classneforce_1_1udp__socket_1a2922f967dd7d769d85c221fee45063ca" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>async_receive_from</name></member>
+      <member refid="classneforce_1_1udp__socket_1ad8a1afc742bf3113f1c501dfa8bc58ab" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>async_send_to</name></member>
+      <member refid="classneforce_1_1udp__socket_1af7209f69cd08b70083989580d4c08625" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>async_send_to</name></member>
+      <member refid="classneforce_1_1udp__socket_1ad7f35a618160142ead73dd37db74ee82" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>async_send_to</name></member>
+      <member refid="classneforce_1_1udp__socket_1aaaaf938a27aa7dabca67eda025201bc7" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>async_send_to</name></member>
+      <member refid="classneforce_1_1udp__socket_1aa50decce583047daa870cdaa408d2b68" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>async_send_to</name></member>
+      <member refid="classneforce_1_1udp__socket_1a065ec066109b0f13991f0c0ac4c80ee2" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>async_send_to</name></member>
+      <member refid="classneforce_1_1socket__base_1ae7a4566c2df82eb0ba3fff8b5fc7df46" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>bind</name></member>
+      <member refid="classneforce_1_1ip__socket_1ac28c4d988187869d423dd9c881b6c1ad" prot="public" virt="virtual"><scope>neforce::udp_socket</scope><name>close</name></member>
+      <member refid="classneforce_1_1ip__socket_1a4cdbfc7ec62fb1980c9b432567c544b8" prot="public" virt="virtual"><scope>neforce::udp_socket</scope><name>connect</name></member>
+      <member refid="classneforce_1_1socket__base_1a90d93d8cb0d95db21274a08b6d27205a" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>family</name></member>
+      <member refid="classneforce_1_1ip__socket_1a2f3af3f32b5f7b68649ccfda2087b81b" prot="protected" virt="non-virtual"><scope>neforce::udp_socket</scope><name>family_</name></member>
+      <member refid="classneforce_1_1socket__base_1a0d91356affbee30bd1e6f7cc483e508d" prot="protected" virt="non-virtual"><scope>neforce::udp_socket</scope><name>fd_</name></member>
+      <member refid="classneforce_1_1socket__base_1af49df530dda2a79b2c71300f8288bba7" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>get_keep_alive</name></member>
+      <member refid="classneforce_1_1socket__base_1a17ec17b8a17e3bee456b0048596320a8" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>get_option</name></member>
+      <member refid="classneforce_1_1socket__base_1a520522c4fdfcdc32ab604032228b959f" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>get_receive_buffer_size</name></member>
+      <member refid="classneforce_1_1socket__base_1acbd2aa324a89474bde619a624e3c9844" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>get_receive_timeout</name></member>
+      <member refid="classneforce_1_1socket__base_1a3fe176f51955f4696822063fb30d726a" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>get_reuse_address</name></member>
+      <member refid="classneforce_1_1socket__base_1aa5bb48b1079264d9664fe804212faa37" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>get_reuse_port</name></member>
+      <member refid="classneforce_1_1socket__base_1a91af69f055fd07c06ce5e03f7714dfcc" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>get_send_buffer_size</name></member>
+      <member refid="classneforce_1_1socket__base_1a67995540ea809991a0b57c04be823fc6" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>get_send_timeout</name></member>
+      <member refid="classneforce_1_1socket__base_1a21579daf2fbc2531ab85713ed529e487" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>get_tcp_nodelay</name></member>
+      <member refid="classneforce_1_1socket__base_1af49691de702dac3413c30d84bb64f734" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>invalid_handle</name></member>
+      <member refid="classneforce_1_1ip__socket_1a98a70d9b139d26347dce1ec4fac71dd5" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>ip_socket</name></member>
+      <member refid="classneforce_1_1ip__socket_1ab903e29e3d12614715fc900e1ea82c8d" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>ip_socket</name></member>
+      <member refid="classneforce_1_1ip__socket_1ac105a1ad0969027342aa7fde2522532b" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>ip_socket</name></member>
+      <member refid="classneforce_1_1ip__socket_1ab00c04d8df1df46dda74dc8d1a43df94" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>ip_socket</name></member>
+      <member refid="classneforce_1_1ip__socket_1a4931794a3b297db3646a6c8b85e9dec2" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>is_ipv4</name></member>
+      <member refid="classneforce_1_1ip__socket_1ac145bfaba7d2e8640b40ea30e4b64e0c" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>is_ipv6</name></member>
+      <member refid="classneforce_1_1socket__base_1acf76f07c4bb9652e701eb39247850f76" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>is_nonblocking</name></member>
+      <member refid="classneforce_1_1socket__base_1a688c59e456551b33a230cb139dbd685a" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>is_open</name></member>
+      <member refid="classneforce_1_1socket__base_1aada611fdaa46fb9f055ef566be7fbd05" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>listen</name></member>
+      <member refid="classneforce_1_1socket__base_1abaa18d7f634b115ad1989ec023c0bf32" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>local_endpoint</name></member>
+      <member refid="classneforce_1_1socket__base_1a55e7e77823236aaf022990256793783d" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>native_handle</name></member>
+      <member refid="classneforce_1_1socket__base_1a4c5f2953bd5b46ee48a334d5c247bc0d" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>native_handle_type</name></member>
+      <member refid="classneforce_1_1socket__base_1ad636c7b9448f24dcea9ae92e3b27c263" prot="protected" virt="non-virtual"><scope>neforce::udp_socket</scope><name>nonblocking_</name></member>
+      <member refid="classneforce_1_1udp__socket_1a735836afc6b50a0a170651aeb6441eef" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>open</name></member>
+      <member refid="classneforce_1_1socket__base_1aa25cb567f6980041f5dc74b91913eb6d" prot="public" virt="non-virtual" ambiguityscope="neforce::ip_socket::"><scope>neforce::udp_socket</scope><name>open</name></member>
+      <member refid="classneforce_1_1ip__socket_1a5f93a507926ec1ddc9a6a4e728644968" prot="protected" virt="non-virtual"><scope>neforce::udp_socket</scope><name>open_ip</name></member>
+      <member refid="classneforce_1_1socket__base_1ac4c5240cbfd92f1b31e3f8dc7093987a" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>operator bool</name></member>
+      <member refid="classneforce_1_1udp__socket_1ad108faf077a3c323e3b192818e4c978d" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1ip__socket_1aaf616a56b6b0e00194633d59a93e79ae" prot="public" virt="non-virtual" ambiguityscope="neforce::ip_socket::"><scope>neforce::udp_socket</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1ip__socket_1acd978787ab0a7d3b0123917f8c6b8a96" prot="public" virt="non-virtual" ambiguityscope="neforce::ip_socket::"><scope>neforce::udp_socket</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1socket__base_1ab20b8caa25bbb8071e4c908691251667" prot="public" virt="non-virtual" ambiguityscope="neforce::socket_base::"><scope>neforce::udp_socket</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1socket__base_1a9e86d2bd403dbba7ba100a163ea130d0" prot="public" virt="non-virtual" ambiguityscope="neforce::socket_base::"><scope>neforce::udp_socket</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1socket__base_1a8cbdda2bb8a0e190c258eb25bb445992" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>protocol</name></member>
+      <member refid="classneforce_1_1udp__socket_1a5f692ef0b58822717eab554384abb882" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>receive</name></member>
+      <member refid="classneforce_1_1udp__socket_1a5625d560f8424a88f42f1815a1a41ad8" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>receive_from</name></member>
+      <member refid="classneforce_1_1socket__base_1a32f1e147a349925c32839fa1ce3b8fdc" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>release</name></member>
+      <member refid="classneforce_1_1socket__base_1ae1a4b45ff284ba83fac92aa5dc4a9adb" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>remote_endpoint</name></member>
+      <member refid="classneforce_1_1udp__socket_1a1bb5119f523c4faa0494f5ed1716bf7b" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>send</name></member>
+      <member refid="classneforce_1_1udp__socket_1a184161a1ac875d20fb01b8fc8e84feec" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>send_to</name></member>
+      <member refid="classneforce_1_1socket__base_1ab55494ddb7435ace44483bf2a13d1b19" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>set_keep_alive</name></member>
+      <member refid="classneforce_1_1socket__base_1a9b75e2f51a01febdd29f2fd6941fd2ab" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>set_nonblocking</name></member>
+      <member refid="classneforce_1_1socket__base_1aebf9cdaaa399bcbdff7e7a47345d039a" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>set_option</name></member>
+      <member refid="classneforce_1_1socket__base_1a2b3e9bc783b3e3469bb213604220deed" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>set_receive_buffer_size</name></member>
+      <member refid="classneforce_1_1socket__base_1a3e028a27cad5bca645c4d8f645751dfa" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>set_receive_timeout</name></member>
+      <member refid="classneforce_1_1socket__base_1af311eb5e4b8693da9b1d1e16d0b10d13" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>set_reuse_address</name></member>
+      <member refid="classneforce_1_1socket__base_1ad2cd6c991e1b7689ecffadc57ec44df5" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>set_reuse_port</name></member>
+      <member refid="classneforce_1_1socket__base_1a5b90babf7b270d141fdeeab138550374" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>set_send_buffer_size</name></member>
+      <member refid="classneforce_1_1socket__base_1a21e4ba35840c0cc904beaaf005a846b1" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>set_send_timeout</name></member>
+      <member refid="classneforce_1_1socket__base_1a82ea11bfa98bbbd2ad2d9feeffd44782" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>set_tcp_nodelay</name></member>
+      <member refid="classneforce_1_1socket__base_1a53d78f352e1c34a1d54f475d6eaf7922" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>shutdown_both</name></member>
+      <member refid="classneforce_1_1socket__base_1a852458c313e65acc1e74bc16130e0502" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>shutdown_receive</name></member>
+      <member refid="classneforce_1_1socket__base_1ac0d78cde8681391cedca79f28e89119e" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>shutdown_send</name></member>
+      <member refid="classneforce_1_1socket__base_1a9b8731a4cb059cf60c43ca97aa688162" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>socket_base</name></member>
+      <member refid="classneforce_1_1socket__base_1accb5b278a3bc2792f893357f1e7e9812" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>socket_base</name></member>
+      <member refid="classneforce_1_1socket__base_1afa79ec1d00e839df5aaf63de31028566" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>socket_base</name></member>
+      <member refid="classneforce_1_1socket__base_1a08db6bdff24ac7930d2010da313fe5f8" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>socket_base</name></member>
+      <member refid="classneforce_1_1socket__base_1a6b1c0921703871f28d6903be8f02690e" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>try_open</name></member>
+      <member refid="classneforce_1_1socket__base_1a322e65239feb4f0d2fa3bf3763f31256" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>type</name></member>
+      <member refid="classneforce_1_1udp__socket_1aede8596ce80e03cce3de4b177115054c" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>udp_socket</name></member>
+      <member refid="classneforce_1_1udp__socket_1a90b66dee0e54fffb796fa8c4c0b9e95d" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>udp_socket</name></member>
+      <member refid="classneforce_1_1ip__socket_1a40b908afe34460e2d5d890a36913fac1" prot="public" virt="non-virtual"><scope>neforce::udp_socket</scope><name>~ip_socket</name></member>
+      <member refid="classneforce_1_1socket__base_1aef05deba68ee95bf9f5a5e3c408851a3" prot="public" virt="virtual"><scope>neforce::udp_socket</scope><name>~socket_base</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

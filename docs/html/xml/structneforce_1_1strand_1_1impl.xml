@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1strand_1_1impl" kind="struct" language="C++" prot="private">
+    <compoundname>neforce::strand::impl</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structneforce_1_1strand_1_1impl_1a3e2ff2f9a2210286464b41841dcf13fe" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> *</type>
+        <definition>io_context* neforce::strand::impl::ctx</definition>
+        <argsstring></argsstring>
+        <name>ctx</name>
+        <qualifiedname>neforce::strand::impl::ctx</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" line="37" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1strand_1_1impl_1aa632e23684faa79344cb12d15e588c60" prot="public" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; neforce::strand::impl::locked_</definition>
+        <argsstring></argsstring>
+        <name>locked_</name>
+        <qualifiedname>neforce::strand::impl::locked_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" line="38" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1strand_1_1impl_1a2ff5dc7b9581fd35ac8ef68e5350f709" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1lock__free__queue" kindref="compound">lock_free_queue</ref>&lt; <ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void()&gt; &gt;</type>
+        <definition>lock_free_queue&lt;function&lt;void()&gt; &gt; neforce::strand::impl::queue_</definition>
+        <argsstring></argsstring>
+        <name>queue_</name>
+        <qualifiedname>neforce::strand::impl::queue_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" line="39" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1strand_1_1impl_1ae93b19238d21aafa48664469a8e69158" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::strand::impl::impl</definition>
+        <argsstring>(io_context &amp;c)</argsstring>
+        <name>impl</name>
+        <qualifiedname>neforce::strand::impl::impl</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" line="41" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" bodystart="41" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1strand_1_1impl_1ac7e1f2accc78dd921c01ee032e167aa7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::strand::impl::drain_one</definition>
+        <argsstring>(const shared_ptr&lt; impl &gt; &amp;self)</argsstring>
+        <name>drain_one</name>
+        <qualifiedname>neforce::strand::impl::drain_one</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; impl &gt; &amp;</type>
+          <declname>self</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" line="44" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" bodystart="44" bodyend="60"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>neforce::atomic&lt; bool &gt;</label>
+        <link refid="structneforce_1_1atomic_3_01bool_01_4"/>
+      </node>
+      <node id="2">
+        <label>neforce::io_context</label>
+        <link refid="classneforce_1_1io__context"/>
+      </node>
+      <node id="4">
+        <label>neforce::lock_free_queue&lt; neforce::function&lt; void()&gt; &gt;</label>
+        <link refid="classneforce_1_1lock__free__queue"/>
+      </node>
+      <node id="1">
+        <label>neforce::strand::impl</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>ctx</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>locked_</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>queue_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" line="36" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/strand.hpp" bodystart="36" bodyend="61"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1strand_1_1impl_1a3e2ff2f9a2210286464b41841dcf13fe" prot="public" virt="non-virtual"><scope>neforce::strand::impl</scope><name>ctx</name></member>
+      <member refid="structneforce_1_1strand_1_1impl_1ac7e1f2accc78dd921c01ee032e167aa7" prot="public" virt="non-virtual"><scope>neforce::strand::impl</scope><name>drain_one</name></member>
+      <member refid="structneforce_1_1strand_1_1impl_1ae93b19238d21aafa48664469a8e69158" prot="public" virt="non-virtual"><scope>neforce::strand::impl</scope><name>impl</name></member>
+      <member refid="structneforce_1_1strand_1_1impl_1aa632e23684faa79344cb12d15e588c60" prot="public" virt="non-virtual"><scope>neforce::strand::impl</scope><name>locked_</name></member>
+      <member refid="structneforce_1_1strand_1_1impl_1a2ff5dc7b9581fd35ac8ef68e5350f709" prot="public" virt="non-virtual"><scope>neforce::strand::impl</scope><name>queue_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

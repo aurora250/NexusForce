@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::http::response_cache类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1http_1_1response__cache.html','','classneforce_1_1http_1_1response__cache-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::http::response_cache类 参考<div class="ingroups"><a class="el" href="group___h_t_t_p.html">HTTP</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>HTTP响应缓存  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="http__cache_8hpp_source.html">http_cache.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a65fcbace3e4d1bc5dc7750846e203889" id="r_a65fcbace3e4d1bc5dc7750846e203889"><td class="memItemLeft"><a class="el" href="classneforce_1_1optional.html">optional</a>&lt; <a class="el" href="structneforce_1_1http_1_1cached__response.html">cached_response</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a65fcbace3e4d1bc5dc7750846e203889">get</a> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;key)</td></tr>
+<tr class="memdesc:a65fcbace3e4d1bc5dc7750846e203889"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取缓存的响应  <br /></td></tr>
+<tr class="memitem:a29acba3421a3dc1ddef7d45d73974c72" id="r_a29acba3421a3dc1ddef7d45d73974c72"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a29acba3421a3dc1ddef7d45d73974c72">put</a> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;key, const <a class="el" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a> &amp;response, <a class="el" href="group___duration.html#ga8254730759b00eba24c4a01b0c8e10c3">seconds</a> max_age=-1_s)</td></tr>
+<tr class="memdesc:a29acba3421a3dc1ddef7d45d73974c72"><td class="mdescLeft">&#160;</td><td class="mdescRight">存入缓存  <br /></td></tr>
+<tr class="memitem:ab4fd6921147b3e556db47cc75b5db574" id="r_ab4fd6921147b3e556db47cc75b5db574"><td class="memItemLeft"><a id="ab4fd6921147b3e556db47cc75b5db574" name="ab4fd6921147b3e556db47cc75b5db574"></a>
+void&#160;</td><td class="memItemRight"><b>remove</b> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;key)</td></tr>
+<tr class="memdesc:ab4fd6921147b3e556db47cc75b5db574"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除缓存条目 <br /></td></tr>
+<tr class="memitem:ae293132d128736006f898797443a8d06" id="r_ae293132d128736006f898797443a8d06"><td class="memItemLeft"><a id="ae293132d128736006f898797443a8d06" name="ae293132d128736006f898797443a8d06"></a>
+void&#160;</td><td class="memItemRight"><b>cleanup</b> ()</td></tr>
+<tr class="memdesc:ae293132d128736006f898797443a8d06"><td class="mdescLeft">&#160;</td><td class="mdescRight">清理过期条目 <br /></td></tr>
+<tr class="memitem:a6a610d8ece2149133f4d2adbfaa49aa8" id="r_a6a610d8ece2149133f4d2adbfaa49aa8"><td class="memItemLeft"><a id="a6a610d8ece2149133f4d2adbfaa49aa8" name="a6a610d8ece2149133f4d2adbfaa49aa8"></a>
+void&#160;</td><td class="memItemRight"><b>clear</b> ()</td></tr>
+<tr class="memdesc:a6a610d8ece2149133f4d2adbfaa49aa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">清空所有缓存 <br /></td></tr>
+<tr class="memitem:ab009c535eec91bd7580bdc01e5ca380d" id="r_ab009c535eec91bd7580bdc01e5ca380d"><td class="memItemLeft"><a id="ab009c535eec91bd7580bdc01e5ca380d" name="ab009c535eec91bd7580bdc01e5ca380d"></a>
+<a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>&#160;</td><td class="memItemRight"><b>size</b> () const</td></tr>
+<tr class="memdesc:ab009c535eec91bd7580bdc01e5ca380d"><td class="mdescLeft">&#160;</td><td class="mdescRight">缓存条目数 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静态 Public 成员函数</h2></td></tr>
+<tr class="memitem:a68692cc3094dd520c2c3e9994d26027e" id="r_a68692cc3094dd520c2c3e9994d26027e"><td class="memItemLeft"><a id="a68692cc3094dd520c2c3e9994d26027e" name="a68692cc3094dd520c2c3e9994d26027e"></a>
+static <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a>&#160;</td><td class="memItemRight"><b>generate_etag</b> (<a class="el" href="group___string_view.html#ga5a6e8b9da034ce8d4818231c4e005eff">string_view</a> body)</td></tr>
+<tr class="memdesc:a68692cc3094dd520c2c3e9994d26027e"><td class="mdescLeft">&#160;</td><td class="mdescRight">生成ETag值 <br /></td></tr>
+<tr class="memitem:a1fda99d9d4dcc80f1edf748b411d50b2" id="r_a1fda99d9d4dcc80f1edf748b411d50b2"><td class="memItemLeft"><a id="a1fda99d9d4dcc80f1edf748b411d50b2" name="a1fda99d9d4dcc80f1edf748b411d50b2"></a>
+static <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a>&#160;</td><td class="memItemRight"><b>build_key</b> (const <a class="el" href="structneforce_1_1http_1_1http__method.html">http_method</a> &amp;method, <a class="el" href="group___string_view.html#ga5a6e8b9da034ce8d4818231c4e005eff">string_view</a> <a class="el" href="structneforce_1_1url.html">url</a>)</td></tr>
+<tr class="memdesc:a1fda99d9d4dcc80f1edf748b411d50b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">构建缓存键 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public 属性</h2></td></tr>
+<tr class="memitem:a45e756b0917989cfae08407f9ee87aaf" id="r_a45e756b0917989cfae08407f9ee87aaf"><td class="memItemLeft"><a id="a45e756b0917989cfae08407f9ee87aaf" name="a45e756b0917989cfae08407f9ee87aaf"></a>
+<a class="el" href="group___duration.html#ga8254730759b00eba24c4a01b0c8e10c3">seconds</a>&#160;</td><td class="memItemRight"><b>default_max_age</b> {60}</td></tr>
+<tr class="memdesc:a45e756b0917989cfae08407f9ee87aaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认缓存时间 <br /></td></tr>
+<tr class="memitem:ac699f4b16233fb5366b62597e10093fe" id="r_ac699f4b16233fb5366b62597e10093fe"><td class="memItemLeft"><a id="ac699f4b16233fb5366b62597e10093fe" name="ac699f4b16233fb5366b62597e10093fe"></a>
+<a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>&#160;</td><td class="memItemRight"><b>max_entries</b> {10000}</td></tr>
+<tr class="memdesc:ac699f4b16233fb5366b62597e10093fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">最大缓存条目数 <br /></td></tr>
+<tr class="memitem:a53b176a9e1397e5b672209bb27492374" id="r_a53b176a9e1397e5b672209bb27492374"><td class="memItemLeft"><a id="a53b176a9e1397e5b672209bb27492374" name="a53b176a9e1397e5b672209bb27492374"></a>
+<a class="el" href="classneforce_1_1byte__size.html">byte_size</a>&#160;</td><td class="memItemRight"><b>max_body_size</b> {1_MB}</td></tr>
+<tr class="memdesc:a53b176a9e1397e5b672209bb27492374"><td class="mdescLeft">&#160;</td><td class="mdescRight">最大缓存响应体大小 <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>HTTP响应缓存 </p>
+<p>基于URL的响应缓存，支持ETag和Cache-Control。 线程安全，支持LRU淘汰。 </p>
+
+<p class="definition">在文件 <a class="el" href="http__cache_8hpp_source.html">http_cache.hpp</a> 第 <a class="el" href="http__cache_8hpp_source.html#l00040">40</a> 行定义.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a65fcbace3e4d1bc5dc7750846e203889" name="a65fcbace3e4d1bc5dc7750846e203889"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65fcbace3e4d1bc5dc7750846e203889">&#9670;&#160;</a></span>get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1optional.html">optional</a>&lt; <a class="el" href="structneforce_1_1http_1_1cached__response.html">cached_response</a> &gt; neforce::http::response_cache::get </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>获取缓存的响应 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>缓存键（通常为 method+url） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>缓存的响应，不存在返回none </dd></dl>
+
+</div>
+</div>
+<a id="a29acba3421a3dc1ddef7d45d73974c72" name="a29acba3421a3dc1ddef7d45d73974c72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29acba3421a3dc1ddef7d45d73974c72">&#9670;&#160;</a></span>put()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::http::response_cache::put </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>response</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___duration.html#ga8254730759b00eba24c4a01b0c8e10c3">seconds</a></td>          <td class="paramname"><span class="paramname"><em>max_age</em></span><span class="paramdefsep"> = </span><span class="paramdefval">-1_s</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>存入缓存 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>缓存键 </td></tr>
+    <tr><td class="paramname">response</td><td>响应对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="http__cache_8hpp_source.html">http_cache.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><b>http</b></li><li class="navelem"><a href="classneforce_1_1http_1_1response__cache.html">response_cache</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['稳定性说明_0',['稳定性说明',['../group___sort_algorithms.html#stability_notes',1,'']]]
+  ['相邻元素算法_0',['相邻元素算法',['../group___adjacent_algorithms.html',1,'']]]
 ];

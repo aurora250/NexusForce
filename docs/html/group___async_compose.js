@@ -1,5 +1,5 @@
 var group___async_compose =
 [
-    [ "async_read", "group___async_compose.html#gaa3a471689038b117d43614e9ac8f5618", null ],
-    [ "async_write", "group___async_compose.html#ga180357bbe23447c41b8492b51a1be1fa", null ]
+    [ "neforce::async_read", "group___async_compose.html#ga057b957f1fc1294b8b79eb183bf8b38b", null ],
+    [ "neforce::async_write", "group___async_compose.html#gaae57e29a9389dd0e038800992eed6252", null ]
 ];

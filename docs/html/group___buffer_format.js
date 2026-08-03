@@ -1,8 +1,8 @@
 var group___buffer_format =
 [
-    [ "scprintf", "group___buffer_format.html#ga372a5c03c825ff2bdec76da87b6fb905", null ],
-    [ "snprintf", "group___buffer_format.html#gac22e2f7e8989bfa8e363db57a208bc19", null ],
-    [ "sprintf", "group___buffer_format.html#ga7b7242261123103fbfb106a2fd8226ab", null ],
-    [ "vsnprintf", "group___buffer_format.html#gad6a3e7178ae37bda9e6556d2d3d28776", null ],
-    [ "vsprintf", "group___buffer_format.html#ga3ec7ac4151bff0f8dbe8fb827edee41c", null ]
+    [ "neforce::scprintf", "group___buffer_format.html#ga1eeeb6bc7e8f70274700abe5caa26f4b", null ],
+    [ "neforce::snprintf", "group___buffer_format.html#gaaf1014f5b8b3d477c68ce029e11f9437", null ],
+    [ "neforce::sprintf", "group___buffer_format.html#ga97e90eaea9e085da570eaf91bbf0f613", null ],
+    [ "neforce::vsnprintf", "group___buffer_format.html#ga19a529055f0ce8bdc2c2c1f7e051d497", null ],
+    [ "neforce::vsprintf", "group___buffer_format.html#gaec1d933201d44b3817a029e4f05f8b33", null ]
 ];

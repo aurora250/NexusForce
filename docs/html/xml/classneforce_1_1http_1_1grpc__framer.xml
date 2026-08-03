@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1http_1_1grpc__framer" kind="class" language="C++" prot="public">
+    <compoundname>neforce::http::grpc_framer</compoundname>
+    <includes refid="grpc_8hpp" local="no">grpc.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1grpc__framer_1a62591e610085fc5f7b92ea11c73d3fa5" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1byte__size" kindref="compound">byte_size</ref></type>
+        <definition>byte_size neforce::http::grpc_framer::max_receive_size</definition>
+        <argsstring></argsstring>
+        <name>max_receive_size</name>
+        <qualifiedname>neforce::http::grpc_framer::max_receive_size</qualifiedname>
+        <initializer>{4_MB}</initializer>
+        <briefdescription>
+<para>最大接收消息大小（默认4MB） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="107" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" bodystart="107" bodyend="107"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1grpc__framer_1a4442366e37395f430a3e08066417c2e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::grpc_framer::grpc_framer</definition>
+        <argsstring>()=default</argsstring>
+        <name>grpc_framer</name>
+        <qualifiedname>neforce::http::grpc_framer::grpc_framer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="109" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1grpc__framer_1a80c590b5899fb9411ae261cedb796569" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int neforce::http::grpc_framer::decode</definition>
+        <argsstring>(const byte_t *data, size_t len, vector&lt; grpc_message &gt; &amp;out)</argsstring>
+        <name>decode</name>
+        <qualifiedname>neforce::http::grpc_framer::decode</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>len</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1http_1_1grpc__message" kindref="compound">grpc_message</ref> &gt; &amp;</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+<para>从字节块解码gRPC帧 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入字节块 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入长度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出消息列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>成功解码的消息数量，-1表示帧格式错误</para>
+</simplesect>
+一次调用可解码多个连续帧。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="130" column="9"/>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1grpc__framer_1a635f1475d74e645ab5eea594a42197c0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector neforce::http::grpc_framer::encode</definition>
+        <argsstring>(const grpc_message &amp;msg)</argsstring>
+        <name>encode</name>
+        <qualifiedname>neforce::http::grpc_framer::encode</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1http_1_1grpc__message" kindref="compound">grpc_message</ref> &amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+<para>编码消息为gRPC帧格式的字节块 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="114" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1grpc__framer_1afce0aa149f257d3d5f5c902f51d6c32e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector neforce::http::grpc_framer::encode_messages</definition>
+        <argsstring>(const vector&lt; grpc_message &gt; &amp;messages)</argsstring>
+        <name>encode_messages</name>
+        <qualifiedname>neforce::http::grpc_framer::encode_messages</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1http_1_1grpc__message" kindref="compound">grpc_message</ref> &gt; &amp;</type>
+          <declname>messages</declname>
+        </param>
+        <briefdescription>
+<para>编码多个消息（连续写入同一buffer） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="119" column="24"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>gRPC消息帧编解码器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>线程安全的消息帧编码/解码。 </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>neforce::byte_size</label>
+        <link refid="classneforce_1_1byte__size"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::http::grpc_framer</label>
+        <link refid="classneforce_1_1http_1_1grpc__framer"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>max_receive_size</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::icommon&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>neforce::icomparable&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="7">
+        <label>neforce::ihashable&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="3">
+        <label>neforce::iobject&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1iobject"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::istringify&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="104" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" bodystart="104" bodyend="131"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1http_1_1grpc__framer_1a80c590b5899fb9411ae261cedb796569" prot="public" virt="non-virtual"><scope>neforce::http::grpc_framer</scope><name>decode</name></member>
+      <member refid="classneforce_1_1http_1_1grpc__framer_1a635f1475d74e645ab5eea594a42197c0" prot="public" virt="non-virtual"><scope>neforce::http::grpc_framer</scope><name>encode</name></member>
+      <member refid="classneforce_1_1http_1_1grpc__framer_1afce0aa149f257d3d5f5c902f51d6c32e" prot="public" virt="non-virtual"><scope>neforce::http::grpc_framer</scope><name>encode_messages</name></member>
+      <member refid="classneforce_1_1http_1_1grpc__framer_1a4442366e37395f430a3e08066417c2e9" prot="public" virt="non-virtual"><scope>neforce::http::grpc_framer</scope><name>grpc_framer</name></member>
+      <member refid="classneforce_1_1http_1_1grpc__framer_1a62591e610085fc5f7b92ea11c73d3fa5" prot="public" virt="non-virtual"><scope>neforce::http::grpc_framer</scope><name>max_receive_size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

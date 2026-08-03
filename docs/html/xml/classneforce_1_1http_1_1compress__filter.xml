@@ -1,0 +1,239 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1http_1_1compress__filter" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>neforce::http::compress_filter</compoundname>
+    <basecompoundref refid="classneforce_1_1http_1_1http__filter" prot="public" virt="non-virtual">neforce::http::http_filter</basecompoundref>
+    <includes refid="http__compress_8hpp" local="no">http_compress.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1compress__filter_1add50c1b7407fa48cb93ae671d655a7e9" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::http::compress_filter::enabled</definition>
+        <argsstring></argsstring>
+        <name>enabled</name>
+        <qualifiedname>neforce::http::compress_filter::enabled</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>是否启用压缩 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_compress.hpp" line="30" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_compress.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1compress__filter_1a28bf0fd8ff0bfeb283dcf5a0e3195f4c" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1byte__size" kindref="compound">byte_size</ref></type>
+        <definition>byte_size neforce::http::compress_filter::min_size</definition>
+        <argsstring></argsstring>
+        <name>min_size</name>
+        <qualifiedname>neforce::http::compress_filter::min_size</qualifiedname>
+        <initializer>{1_KB}</initializer>
+        <briefdescription>
+<para>最小压缩阈值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_compress.hpp" line="31" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_compress.hpp" bodystart="31" bodyend="31"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1compress__filter_1a29e2b7ec54dbc4e15dff300a823bd2ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::compress_filter::compress_filter</definition>
+        <argsstring>()=default</argsstring>
+        <name>compress_filter</name>
+        <qualifiedname>neforce::http::compress_filter::compress_filter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_compress.hpp" line="33" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1compress__filter_1a33e575cfebb2a74762449e3681aba837" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void neforce::http::compress_filter::do_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response) override</argsstring>
+        <name>do_filter</name>
+        <qualifiedname>neforce::http::compress_filter::do_filter</qualifiedname>
+        <reimplements refid="classneforce_1_1http_1_1http__filter_1a354b28748f728effc3a651e7c9fa96a6">do_filter</reimplements>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>核心过滤方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+执行实际的过滤逻辑。通常由具体处理器实现， 中间件过滤器可能不实现此方法。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_compress.hpp" line="35" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_compress.hpp" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1compress__filter_1ab7578d6060c49b8e3d0be2031efebd39" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void neforce::http::compress_filter::post_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response) override</argsstring>
+        <name>post_filter</name>
+        <qualifiedname>neforce::http::compress_filter::post_filter</qualifiedname>
+        <reimplements refid="classneforce_1_1http_1_1http__filter_1a14ac82a85eee7e20c9d912f97b50535f">post_filter</reimplements>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>后处理方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+在响应发送前调用，可以修改响应头或正文。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_compress.hpp" line="36" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1compress__filter_1a33408713076b98491edeb80afddc48cc" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::http::compress_filter::name</definition>
+        <argsstring>() const override</argsstring>
+        <name>name</name>
+        <qualifiedname>neforce::http::compress_filter::name</qualifiedname>
+        <reimplements refid="classneforce_1_1http_1_1http__filter_1a16dc9ccb76e7dccf41f4ae732ea01afe">name</reimplements>
+        <briefdescription>
+<para>获取过滤器名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>过滤器名称 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_compress.hpp" line="37" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_compress.hpp" bodystart="37" bodyend="37"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>HTTP响应压缩过滤器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>根据请求的Accept-Encoding头部，自动压缩响应体。 支持gzip和deflate编码。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::http::compress_filter</label>
+        <link refid="classneforce_1_1http_1_1compress__filter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::http::http_filter</label>
+        <link refid="classneforce_1_1http_1_1http__filter"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>neforce::byte_size</label>
+        <link refid="classneforce_1_1byte__size"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::http::compress_filter</label>
+        <link refid="classneforce_1_1http_1_1compress__filter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>min_size</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::http::http_filter</label>
+        <link refid="classneforce_1_1http_1_1http__filter"/>
+      </node>
+      <node id="6">
+        <label>neforce::icommon&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>neforce::icomparable&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="8">
+        <label>neforce::ihashable&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="4">
+        <label>neforce::iobject&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1iobject"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::istringify&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_compress.hpp" line="28" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_compress.hpp" bodystart="28" bodyend="40"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1http_1_1compress__filter_1a29e2b7ec54dbc4e15dff300a823bd2ae" prot="public" virt="non-virtual"><scope>neforce::http::compress_filter</scope><name>compress_filter</name></member>
+      <member refid="classneforce_1_1http_1_1compress__filter_1a33e575cfebb2a74762449e3681aba837" prot="public" virt="virtual"><scope>neforce::http::compress_filter</scope><name>do_filter</name></member>
+      <member refid="classneforce_1_1http_1_1compress__filter_1add50c1b7407fa48cb93ae671d655a7e9" prot="public" virt="non-virtual"><scope>neforce::http::compress_filter</scope><name>enabled</name></member>
+      <member refid="classneforce_1_1http_1_1compress__filter_1a28bf0fd8ff0bfeb283dcf5a0e3195f4c" prot="public" virt="non-virtual"><scope>neforce::http::compress_filter</scope><name>min_size</name></member>
+      <member refid="classneforce_1_1http_1_1compress__filter_1a33408713076b98491edeb80afddc48cc" prot="public" virt="virtual"><scope>neforce::http::compress_filter</scope><name>name</name></member>
+      <member refid="classneforce_1_1http_1_1compress__filter_1ab7578d6060c49b8e3d0be2031efebd39" prot="public" virt="virtual"><scope>neforce::http::compress_filter</scope><name>post_filter</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter_1a66c5af31a812075314a85ef38b9d55eb" prot="public" virt="virtual"><scope>neforce::http::compress_filter</scope><name>pre_filter</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter_1a157ba2513278a823db4ea1b36be341f0" prot="public" virt="virtual"><scope>neforce::http::compress_filter</scope><name>~http_filter</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

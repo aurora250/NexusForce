@@ -1,6 +1,6 @@
 var partition_8hpp =
 [
-    [ "lomuto_partition", "group___partition_algorithms.html#ga5f1b9f359ef3ff97439435a54b26f0e5", null ],
-    [ "lomuto_partition", "group___partition_algorithms.html#ga09ca7889019a50556c6f23810bf2de1d", null ],
-    [ "partition", "group___partition_algorithms.html#ga165394317b9b3996c7a9b5cd4fdc32c8", null ]
+    [ "neforce::lomuto_partition", "group___partition_algorithms.html#ga3fa83f8a6c6ac1de630ec84062c42364", null ],
+    [ "neforce::lomuto_partition", "group___partition_algorithms.html#gae80adb4f9cc2c99cdce991beba5bd6be", null ],
+    [ "neforce::partition", "group___partition_algorithms.html#ga76dbe5632406a166ef1258a0a9e25615", null ]
 ];

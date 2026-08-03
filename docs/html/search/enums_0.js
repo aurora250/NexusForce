@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['access_5fmode_0',['access_mode',['../classshare__memory.html#a6f5e04ae4be89e5497ad4b6fd11cca35',1,'share_memory']]],
-  ['align_1',['align',['../structstyle.html#a8492e9695f7d43b85efe1f3f215b3336',1,'style']]],
-  ['architecture_2',['architecture',['../classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63',1,'sysinfo']]],
-  ['auth_5fmethod_3',['auth_method',['../classsmtp__socket.html#ac7a4dad72a3278c790807d7ab64efc95',1,'smtp_socket']]]
+  ['access_5fmode_0',['access_mode',['../classneforce_1_1share__memory.html#a67640720ecd3c83125ec8e2f56b0c7f0',1,'neforce::share_memory']]],
+  ['align_1',['align',['../structneforce_1_1tui_1_1style.html#a1748e1bc1c7db9d9fe5a2678d0825f61',1,'neforce::tui::style']]],
+  ['architecture_2',['architecture',['../classneforce_1_1sysinfo.html#a27105d97f90ef552c74ab1dd05f02b19',1,'neforce::sysinfo']]],
+  ['auth_5fmethod_3',['auth_method',['../classneforce_1_1smtp__socket.html#a12fb3c05e73748be054496cdef21f2f3',1,'neforce::smtp_socket']]]
 ];

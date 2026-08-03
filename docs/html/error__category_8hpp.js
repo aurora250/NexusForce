@@ -1,7 +1,7 @@
 var error__category_8hpp =
 [
-    [ "generic_category", "group___error_code.html#ga44686197784a7bc703b8eb62ba7cb064", null ],
-    [ "make_error_code", "group___error_code.html#ga93e09becd8af3be0dc0fa5711a338861", null ],
-    [ "make_error_condition", "group___error_code.html#gacb51295502c634e06aa45c9dfdc302f9", null ],
-    [ "system_category", "group___error_code.html#ga0a43b58885d603f4ee012cee3debd9f9", null ]
+    [ "neforce::generic_category", "group___error_code.html#ga309a6ebbc58242dc5e090f91d55387d4", null ],
+    [ "neforce::make_error_code", "group___error_code.html#gaeb55d836475c295566662760af609ea3", null ],
+    [ "neforce::make_error_condition", "group___error_code.html#ga70fff5872dd8e94ebd771535e0a95c3e", null ],
+    [ "neforce::system_category", "group___error_code.html#ga895e4a66fd0b19a4b685c2963820ec00", null ]
 ];

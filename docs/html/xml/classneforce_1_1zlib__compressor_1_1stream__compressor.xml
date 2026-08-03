@@ -1,0 +1,572 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1zlib__compressor_1_1stream__compressor" kind="class" language="C++" prot="public">
+    <compoundname>neforce::zlib_compressor::stream_compressor</compoundname>
+    <includes refid="zlib__compress_8hpp" local="no">zlib_compress.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1zlib__compressor_1_1stream__compressor_1ac3bfcd29a27c5c9b3d666f7d2eef6820" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt;::z_stream, compressor_stream_deleter &gt;</type>
+        <definition>unique_ptr&lt;::z_stream, compressor_stream_deleter&gt; neforce::zlib_compressor::stream_compressor::stream_</definition>
+        <argsstring></argsstring>
+        <name>stream_</name>
+        <qualifiedname>neforce::zlib_compressor::stream_compressor::stream_</qualifiedname>
+        <briefdescription>
+<para>zlib流对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="266" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="266" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1zlib__compressor_1_1stream__compressor_1a0ad13f23bd282a7a560d0e2ae995852c" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::zlib_compressor::stream_compressor::initialized_</definition>
+        <argsstring></argsstring>
+        <name>initialized_</name>
+        <qualifiedname>neforce::zlib_compressor::stream_compressor::initialized_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否已初始化 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="268" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="268" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1zlib__compressor_1_1stream__compressor_1a9fe4290c2e2570295fd6145230cf900a" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::zlib_compressor::stream_compressor::bytes_input_</definition>
+        <argsstring></argsstring>
+        <name>bytes_input_</name>
+        <qualifiedname>neforce::zlib_compressor::stream_compressor::bytes_input_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>输入字节计数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="269" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="269" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1zlib__compressor_1_1stream__compressor_1a794c1e6b42417d30b25a8e40fdd25b00" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::zlib_compressor::stream_compressor::bytes_output_</definition>
+        <argsstring></argsstring>
+        <name>bytes_output_</name>
+        <qualifiedname>neforce::zlib_compressor::stream_compressor::bytes_output_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>输出字节计数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="270" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="270" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1zlib__compressor_1_1stream__compressor_1a15f628cfeef18be4e1310e882a437abf" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::zlib_compressor::stream_compressor::stream_compressor</definition>
+        <argsstring>(compress_level level=compress_level::default_level, compress_strategy strategy=compress_strategy::default_strategy, compress_format format=compress_format::zlib)</argsstring>
+        <name>stream_compressor</name>
+        <qualifiedname>neforce::zlib_compressor::stream_compressor::stream_compressor</qualifiedname>
+        <param>
+          <type><ref refid="group___compression_1gad65e73e47b2159d5e7dbab0bf7af8e70" kindref="member">compress_level</ref></type>
+          <declname>level</declname>
+          <defval><ref refid="group___compression_1ggad65e73e47b2159d5e7dbab0bf7af8e70a6637b88286cba926cc1bb0ef49f9d2e8" kindref="member">compress_level::default_level</ref></defval>
+        </param>
+        <param>
+          <type><ref refid="group___compression_1ga41c5646f4cd8aa1f2670dc479d44ecfb" kindref="member">compress_strategy</ref></type>
+          <declname>strategy</declname>
+          <defval><ref refid="group___compression_1gga41c5646f4cd8aa1f2670dc479d44ecfba631738167a29f3283fb2afb8be36482d" kindref="member">compress_strategy::default_strategy</ref></defval>
+        </param>
+        <param>
+          <type><ref refid="group___compression_1ga1de2655b7d87272a330ca4f143da4f32" kindref="member">compress_format</ref></type>
+          <declname>format</declname>
+          <defval><ref refid="group___compression_1gga1de2655b7d87272a330ca4f143da4f32a7a990d405d2c6fb93aa8fbb0ec1a3b23" kindref="member">compress_format::zlib</ref></defval>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>压缩级别，默认为default_level </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>strategy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>压缩策略，默认为default_strategy </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>format</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>压缩格式，默认为zlib </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1zlib__exception" kindref="compound">zlib_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当重置失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="280" column="18"/>
+        <references refid="group___compression_1ggad65e73e47b2159d5e7dbab0bf7af8e70a6637b88286cba926cc1bb0ef49f9d2e8" compoundref="zlib__compress_8hpp" startline="64">default_level</references>
+        <references refid="group___compression_1gga41c5646f4cd8aa1f2670dc479d44ecfba631738167a29f3283fb2afb8be36482d" compoundref="zlib__compress_8hpp" startline="75">default_strategy</references>
+        <references refid="group___format_1ga0f7c7c59376bf75f938eb88185d5fa5e" compoundref="format_8hpp" startline="805" endline="813">neforce::format</references>
+        <references refid="group___compression_1gga1de2655b7d87272a330ca4f143da4f32a7a990d405d2c6fb93aa8fbb0ec1a3b23" compoundref="zlib__compress_8hpp" startline="89">zlib</references>
+        <referencedby refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1a6684b3990f84d1899c67c824d994b622">operator=</referencedby>
+        <referencedby refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1a46c1fc77a2e3209d063944f83944a60d">stream_compressor</referencedby>
+        <referencedby refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1a08156b3929cd314b65ce1f4fe9080690">~stream_compressor</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1zlib__compressor_1_1stream__compressor_1a08156b3929cd314b65ce1f4fe9080690" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::zlib_compressor::stream_compressor::~stream_compressor</definition>
+        <argsstring>()=default</argsstring>
+        <name>~stream_compressor</name>
+        <qualifiedname>neforce::zlib_compressor::stream_compressor::~stream_compressor</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="287" column="9"/>
+        <references refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1a15f628cfeef18be4e1310e882a437abf">stream_compressor</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1zlib__compressor_1_1stream__compressor_1a710a3233b4110818cc8ed2c96280a0cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::zlib_compressor::stream_compressor::stream_compressor</definition>
+        <argsstring>(const stream_compressor &amp;)=delete</argsstring>
+        <name>stream_compressor</name>
+        <qualifiedname>neforce::zlib_compressor::stream_compressor::stream_compressor</qualifiedname>
+        <param>
+          <type>const stream_compressor &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="289" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1zlib__compressor_1_1stream__compressor_1a500c6ab7544e00374b1eb0b71d084d0f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1a15f628cfeef18be4e1310e882a437abf" kindref="member">stream_compressor</ref> &amp;</type>
+        <definition>stream_compressor &amp; neforce::zlib_compressor::stream_compressor::operator=</definition>
+        <argsstring>(const stream_compressor &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::zlib_compressor::stream_compressor::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1a15f628cfeef18be4e1310e882a437abf" kindref="member">stream_compressor</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="290" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1zlib__compressor_1_1stream__compressor_1a46c1fc77a2e3209d063944f83944a60d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::zlib_compressor::stream_compressor::stream_compressor</definition>
+        <argsstring>(stream_compressor &amp;&amp;other) noexcept</argsstring>
+        <name>stream_compressor</name>
+        <qualifiedname>neforce::zlib_compressor::stream_compressor::stream_compressor</qualifiedname>
+        <param>
+          <type>stream_compressor &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="296" column="9"/>
+        <references refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1a15f628cfeef18be4e1310e882a437abf">stream_compressor</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1zlib__compressor_1_1stream__compressor_1a6684b3990f84d1899c67c824d994b622" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1a15f628cfeef18be4e1310e882a437abf" kindref="member">stream_compressor</ref> &amp;</type>
+        <definition>stream_compressor &amp; neforce::zlib_compressor::stream_compressor::operator=</definition>
+        <argsstring>(stream_compressor &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::zlib_compressor::stream_compressor::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1a15f628cfeef18be4e1310e882a437abf" kindref="member">stream_compressor</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="303" column="27"/>
+        <references refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1a15f628cfeef18be4e1310e882a437abf">stream_compressor</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1zlib__compressor_1_1stream__compressor_1addd58e4f9307d71c819721dc33b22ee4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>byte_vector neforce::zlib_compressor::stream_compressor::compress</definition>
+        <argsstring>(const cbyte_view &amp;data, bool finish=false)</argsstring>
+        <name>compress</name>
+        <qualifiedname>neforce::zlib_compressor::stream_compressor::compress</qualifiedname>
+        <param>
+          <type>const <ref refid="group___memory_view_1ga533a464153c7fc34d3fa5d92854c8613" kindref="member">cbyte_view</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>finish</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>压缩数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入数据视图 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>finish</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否完成（最后一块数据） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>压缩后的数据块 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1zlib__exception" kindref="compound">zlib_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当未初始化或压缩失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="312" column="21"/>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+        <references refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1aad4c1fd35c2df1e17cdc6974e6b20620">finish</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1zlib__compressor_1_1stream__compressor_1a1831804b80b94dd7186b5f747eb95287" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>byte_vector neforce::zlib_compressor::stream_compressor::compress</definition>
+        <argsstring>(string_view data, bool finish=false)</argsstring>
+        <name>compress</name>
+        <qualifiedname>neforce::zlib_compressor::stream_compressor::compress</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>finish</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>压缩字符串视图 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>finish</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否完成 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>压缩后的数据块 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1zlib__exception" kindref="compound">zlib_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当未初始化或压缩失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="321" column="21"/>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+        <references refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1aad4c1fd35c2df1e17cdc6974e6b20620">finish</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1zlib__compressor_1_1stream__compressor_1aad4c1fd35c2df1e17cdc6974e6b20620" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>byte_vector neforce::zlib_compressor::stream_compressor::finish</definition>
+        <argsstring>()</argsstring>
+        <name>finish</name>
+        <qualifiedname>neforce::zlib_compressor::stream_compressor::finish</qualifiedname>
+        <briefdescription>
+<para>完成压缩并返回剩余数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最后的压缩数据块 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1zlib__exception" kindref="compound">zlib_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当未初始化或压缩失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="328" column="21"/>
+        <referencedby refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1addd58e4f9307d71c819721dc33b22ee4">compress</referencedby>
+        <referencedby refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1a1831804b80b94dd7186b5f747eb95287">compress</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1zlib__compressor_1_1stream__compressor_1ac7612b50161b5ee8dbf2902ae4b463e7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::zlib_compressor::stream_compressor::reset</definition>
+        <argsstring>(compress_level level=compress_level::default_level, compress_strategy strategy=compress_strategy::default_strategy, compress_format format=compress_format::zlib)</argsstring>
+        <name>reset</name>
+        <qualifiedname>neforce::zlib_compressor::stream_compressor::reset</qualifiedname>
+        <param>
+          <type><ref refid="group___compression_1gad65e73e47b2159d5e7dbab0bf7af8e70" kindref="member">compress_level</ref></type>
+          <declname>level</declname>
+          <defval><ref refid="group___compression_1ggad65e73e47b2159d5e7dbab0bf7af8e70a6637b88286cba926cc1bb0ef49f9d2e8" kindref="member">compress_level::default_level</ref></defval>
+        </param>
+        <param>
+          <type><ref refid="group___compression_1ga41c5646f4cd8aa1f2670dc479d44ecfb" kindref="member">compress_strategy</ref></type>
+          <declname>strategy</declname>
+          <defval><ref refid="group___compression_1gga41c5646f4cd8aa1f2670dc479d44ecfba631738167a29f3283fb2afb8be36482d" kindref="member">compress_strategy::default_strategy</ref></defval>
+        </param>
+        <param>
+          <type><ref refid="group___compression_1ga1de2655b7d87272a330ca4f143da4f32" kindref="member">compress_format</ref></type>
+          <declname>format</declname>
+          <defval><ref refid="group___compression_1gga1de2655b7d87272a330ca4f143da4f32a7a990d405d2c6fb93aa8fbb0ec1a3b23" kindref="member">compress_format::zlib</ref></defval>
+        </param>
+        <briefdescription>
+<para>重置压缩器状态 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新压缩级别，默认为default_level </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>strategy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新压缩策略，默认为default_strategy </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>format</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新压缩格式，默认为zlib </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1zlib__exception" kindref="compound">zlib_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当重置失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="337" column="14"/>
+        <references refid="group___compression_1ggad65e73e47b2159d5e7dbab0bf7af8e70a6637b88286cba926cc1bb0ef49f9d2e8" compoundref="zlib__compress_8hpp" startline="64">default_level</references>
+        <references refid="group___compression_1gga41c5646f4cd8aa1f2670dc479d44ecfba631738167a29f3283fb2afb8be36482d" compoundref="zlib__compress_8hpp" startline="75">default_strategy</references>
+        <references refid="group___format_1ga0f7c7c59376bf75f938eb88185d5fa5e" compoundref="format_8hpp" startline="805" endline="813">neforce::format</references>
+        <references refid="group___compression_1gga1de2655b7d87272a330ca4f143da4f32a7a990d405d2c6fb93aa8fbb0ec1a3b23" compoundref="zlib__compress_8hpp" startline="89">zlib</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1zlib__compressor_1_1stream__compressor_1a1d15e7b41f40ae8307633be05df73d79" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::zlib_compressor::stream_compressor::soft_reset</definition>
+        <argsstring>()</argsstring>
+        <name>soft_reset</name>
+        <qualifiedname>neforce::zlib_compressor::stream_compressor::soft_reset</qualifiedname>
+        <briefdescription>
+<para>软重置压缩器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1zlib__exception" kindref="compound">zlib_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当重置失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+保留已建立的 LZ77 字典以便后续消息复用上下文。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="347" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1zlib__compressor_1_1stream__compressor_1a4258a0349e40291e41dfe4fdb4f6e69f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::zlib_compressor::stream_compressor::bytes_input</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>bytes_input</name>
+        <qualifiedname>neforce::zlib_compressor::stream_compressor::bytes_input</qualifiedname>
+        <briefdescription>
+<para>获取输入字节数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>已处理的输入字节数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="353" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="353" bodyend="353"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1zlib__compressor_1_1stream__compressor_1a29a7699262b31e05808c085693272d6e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::zlib_compressor::stream_compressor::bytes_output</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>bytes_output</name>
+        <qualifiedname>neforce::zlib_compressor::stream_compressor::bytes_output</qualifiedname>
+        <briefdescription>
+<para>获取输出字节数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>已产生的输出字节数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="359" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="359" bodyend="359"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1zlib__compressor_1_1stream__compressor_1ac83349767a2b246ae103fb4383378ce3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double neforce::zlib_compressor::stream_compressor::compression_ratio</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>compression_ratio</name>
+        <qualifiedname>neforce::zlib_compressor::stream_compressor::compression_ratio</qualifiedname>
+        <briefdescription>
+<para>获取压缩率 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>输出/输入字节比率 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="365" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="365" bodyend="367"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>流式压缩器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>支持分块压缩数据，适用于大文件或网络传输场景。 维护压缩状态，可以多次添加数据并最终完成压缩。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="264" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="264" bodyend="368"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1a4258a0349e40291e41dfe4fdb4f6e69f" prot="public" virt="non-virtual"><scope>neforce::zlib_compressor::stream_compressor</scope><name>bytes_input</name></member>
+      <member refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1a9fe4290c2e2570295fd6145230cf900a" prot="private" virt="non-virtual"><scope>neforce::zlib_compressor::stream_compressor</scope><name>bytes_input_</name></member>
+      <member refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1a29a7699262b31e05808c085693272d6e" prot="public" virt="non-virtual"><scope>neforce::zlib_compressor::stream_compressor</scope><name>bytes_output</name></member>
+      <member refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1a794c1e6b42417d30b25a8e40fdd25b00" prot="private" virt="non-virtual"><scope>neforce::zlib_compressor::stream_compressor</scope><name>bytes_output_</name></member>
+      <member refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1addd58e4f9307d71c819721dc33b22ee4" prot="public" virt="non-virtual"><scope>neforce::zlib_compressor::stream_compressor</scope><name>compress</name></member>
+      <member refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1a1831804b80b94dd7186b5f747eb95287" prot="public" virt="non-virtual"><scope>neforce::zlib_compressor::stream_compressor</scope><name>compress</name></member>
+      <member refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1ac83349767a2b246ae103fb4383378ce3" prot="public" virt="non-virtual"><scope>neforce::zlib_compressor::stream_compressor</scope><name>compression_ratio</name></member>
+      <member refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1aad4c1fd35c2df1e17cdc6974e6b20620" prot="public" virt="non-virtual"><scope>neforce::zlib_compressor::stream_compressor</scope><name>finish</name></member>
+      <member refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1a0ad13f23bd282a7a560d0e2ae995852c" prot="private" virt="non-virtual"><scope>neforce::zlib_compressor::stream_compressor</scope><name>initialized_</name></member>
+      <member refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1a500c6ab7544e00374b1eb0b71d084d0f" prot="public" virt="non-virtual"><scope>neforce::zlib_compressor::stream_compressor</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1a6684b3990f84d1899c67c824d994b622" prot="public" virt="non-virtual"><scope>neforce::zlib_compressor::stream_compressor</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1ac7612b50161b5ee8dbf2902ae4b463e7" prot="public" virt="non-virtual"><scope>neforce::zlib_compressor::stream_compressor</scope><name>reset</name></member>
+      <member refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1a1d15e7b41f40ae8307633be05df73d79" prot="public" virt="non-virtual"><scope>neforce::zlib_compressor::stream_compressor</scope><name>soft_reset</name></member>
+      <member refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1ac3bfcd29a27c5c9b3d666f7d2eef6820" prot="private" virt="non-virtual"><scope>neforce::zlib_compressor::stream_compressor</scope><name>stream_</name></member>
+      <member refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1a15f628cfeef18be4e1310e882a437abf" prot="public" virt="non-virtual"><scope>neforce::zlib_compressor::stream_compressor</scope><name>stream_compressor</name></member>
+      <member refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1a710a3233b4110818cc8ed2c96280a0cf" prot="public" virt="non-virtual"><scope>neforce::zlib_compressor::stream_compressor</scope><name>stream_compressor</name></member>
+      <member refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1a46c1fc77a2e3209d063944f83944a60d" prot="public" virt="non-virtual"><scope>neforce::zlib_compressor::stream_compressor</scope><name>stream_compressor</name></member>
+      <member refid="classneforce_1_1zlib__compressor_1_1stream__compressor_1a08156b3929cd314b65ce1f4fe9080690" prot="public" virt="non-virtual"><scope>neforce::zlib_compressor::stream_compressor</scope><name>~stream_compressor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

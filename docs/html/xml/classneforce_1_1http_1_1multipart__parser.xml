@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1http_1_1multipart__parser" kind="class" language="C++" prot="public">
+    <compoundname>neforce::http::multipart_parser</compoundname>
+    <includes refid="multipart__parser_8hpp" local="no">multipart_parser.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1multipart__parser_1a6ca30de399171b61e3a86ded2341f382" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1byte__size" kindref="compound">byte_size</ref></type>
+        <definition>byte_size neforce::http::multipart_parser::max_field_size</definition>
+        <argsstring></argsstring>
+        <name>max_field_size</name>
+        <qualifiedname>neforce::http::multipart_parser::max_field_size</qualifiedname>
+        <initializer>{10_MB}</initializer>
+        <briefdescription>
+<para>最大单字段大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/multipart_parser.hpp" line="44" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/multipart_parser.hpp" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1multipart__parser_1aeccc3b961e2d3cc3481cbdba85e0d807" prot="public" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::http::multipart_parser::max_fields</definition>
+        <argsstring></argsstring>
+        <name>max_fields</name>
+        <qualifiedname>neforce::http::multipart_parser::max_fields</qualifiedname>
+        <initializer>{256}</initializer>
+        <briefdescription>
+<para>最大字段数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/multipart_parser.hpp" line="46" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/multipart_parser.hpp" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1multipart__parser_1a8107e14e70184ae0135fea725839e240" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1byte__size" kindref="compound">byte_size</ref></type>
+        <definition>byte_size neforce::http::multipart_parser::max_total_size</definition>
+        <argsstring></argsstring>
+        <name>max_total_size</name>
+        <qualifiedname>neforce::http::multipart_parser::max_total_size</qualifiedname>
+        <initializer>{100_MB}</initializer>
+        <briefdescription>
+<para>最大总请求体大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/multipart_parser.hpp" line="48" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/multipart_parser.hpp" bodystart="48" bodyend="48"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1multipart__parser_1a94d7347276c9f63e96213c7389e21126" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::multipart_parser::multipart_parser</definition>
+        <argsstring>()=default</argsstring>
+        <name>multipart_parser</name>
+        <qualifiedname>neforce::http::multipart_parser::multipart_parser</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/multipart_parser.hpp" line="50" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1multipart__parser_1af889d800f8237469d8593f9ba586e634" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1http_1_1multipart__field" kindref="compound">multipart_field</ref> &gt;</type>
+        <definition>vector&lt; multipart_field &gt; neforce::http::multipart_parser::parse</definition>
+        <argsstring>(string_view body, string_view boundary)</argsstring>
+        <name>parse</name>
+        <qualifiedname>neforce::http::multipart_parser::parse</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>body</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>boundary</declname>
+        </param>
+        <briefdescription>
+<para>解析multipart请求体 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>body</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原始请求体 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>boundary</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Content-Type中的boundary值（不含&quot;--&quot;前缀） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解析出的字段列表，解析失败返回空vector </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/multipart_parser.hpp" line="58" column="12"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1multipart__parser_1aa0d9ce1595c7ccedfc965264a8f8e72e" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+        <definition>static string_view neforce::http::multipart_parser::extract_boundary</definition>
+        <argsstring>(string_view content_type)</argsstring>
+        <name>extract_boundary</name>
+        <qualifiedname>neforce::http::multipart_parser::extract_boundary</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>content_type</declname>
+        </param>
+        <briefdescription>
+<para>从Content-Type头提取boundary </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>content_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Content-Type头值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>boundary值，不存在返回空string_view </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/multipart_parser.hpp" line="65" column="25"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>multipart/form-data 解析器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>解析 HTTP multipart/form-data 请求体。 支持文件上传字段和普通表单字段。 </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>neforce::byte_size</label>
+        <link refid="classneforce_1_1byte__size"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::http::multipart_parser</label>
+        <link refid="classneforce_1_1http_1_1multipart__parser"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>max_field_size</edgelabel>
+          <edgelabel>max_total_size</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::icommon&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>neforce::icomparable&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="7">
+        <label>neforce::ihashable&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="3">
+        <label>neforce::iobject&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1iobject"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::istringify&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/multipart_parser.hpp" line="41" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/multipart_parser.hpp" bodystart="41" bodyend="66"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1http_1_1multipart__parser_1aa0d9ce1595c7ccedfc965264a8f8e72e" prot="public" virt="non-virtual"><scope>neforce::http::multipart_parser</scope><name>extract_boundary</name></member>
+      <member refid="classneforce_1_1http_1_1multipart__parser_1a6ca30de399171b61e3a86ded2341f382" prot="public" virt="non-virtual"><scope>neforce::http::multipart_parser</scope><name>max_field_size</name></member>
+      <member refid="classneforce_1_1http_1_1multipart__parser_1aeccc3b961e2d3cc3481cbdba85e0d807" prot="public" virt="non-virtual"><scope>neforce::http::multipart_parser</scope><name>max_fields</name></member>
+      <member refid="classneforce_1_1http_1_1multipart__parser_1a8107e14e70184ae0135fea725839e240" prot="public" virt="non-virtual"><scope>neforce::http::multipart_parser</scope><name>max_total_size</name></member>
+      <member refid="classneforce_1_1http_1_1multipart__parser_1a94d7347276c9f63e96213c7389e21126" prot="public" virt="non-virtual"><scope>neforce::http::multipart_parser</scope><name>multipart_parser</name></member>
+      <member refid="classneforce_1_1http_1_1multipart__parser_1af889d800f8237469d8593f9ba586e634" prot="public" virt="non-virtual"><scope>neforce::http::multipart_parser</scope><name>parse</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

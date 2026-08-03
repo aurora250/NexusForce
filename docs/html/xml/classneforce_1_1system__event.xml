@@ -1,0 +1,432 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1system__event" kind="class" language="C++" prot="public">
+    <compoundname>neforce::system_event</compoundname>
+    <includes refid="system__event_8hpp" local="no">system_event.hpp</includes>
+    <innerclass refid="structneforce_1_1system__event_1_1mutex__deleter" prot="private">neforce::system_event::mutex_deleter</innerclass>
+    <innerclass refid="structneforce_1_1system__event_1_1cond__deleter" prot="private">neforce::system_event::cond_deleter</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classneforce_1_1system__event_1a7b748072e69e14dcd3d0604b9f119b50" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>type</name>
+        <qualifiedname>neforce::system_event::type</qualifiedname>
+        <enumvalue id="classneforce_1_1system__event_1a7b748072e69e14dcd3d0604b9f119b50ae24e926926861449731fb9418399a53d" prot="public">
+          <name>manual_reset</name>
+          <briefdescription>
+<para>手动重置，多个等待线程都会被唤醒，需要手动reset </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1system__event_1a7b748072e69e14dcd3d0604b9f119b50ad15df6f4bb58577e7078575bd2924794" prot="public">
+          <name>auto_reset</name>
+          <briefdescription>
+<para>自动重置，只唤醒一个等待线程，之后自动重置为无信号 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>事件类型枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="39" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" bodystart="39" bodyend="42"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1system__event_1a281ae06ab52efc51df93245d65b98b0f" prot="private" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* neforce::system_event::handle_</definition>
+        <argsstring></argsstring>
+        <name>handle_</name>
+        <qualifiedname>neforce::system_event::handle_</qualifiedname>
+        <briefdescription>
+<para>事件句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="62" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1system__event_1a67286213164495232ef315f9f103c4da" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::system_event::signaled_</definition>
+        <argsstring></argsstring>
+        <name>signaled_</name>
+        <qualifiedname>neforce::system_event::signaled_</qualifiedname>
+        <briefdescription>
+<para>信号状态 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="67" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1system__event_1a2099d7f9457cc9739dd8ee0acd0b7555" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1system__event_1a7b748072e69e14dcd3d0604b9f119b50" kindref="member">type</ref></type>
+        <definition>type neforce::system_event::type_</definition>
+        <argsstring></argsstring>
+        <name>type_</name>
+        <qualifiedname>neforce::system_event::type_</qualifiedname>
+        <briefdescription>
+<para>事件类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="68" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1system__event_1ad173c8079798b627c0d63c927903016b" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::system_event::system_event</definition>
+        <argsstring>(bool initial_state=false, type t=type::auto_reset)</argsstring>
+        <name>system_event</name>
+        <qualifiedname>neforce::system_event::system_event</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>initial_state</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1system__event_1a7b748072e69e14dcd3d0604b9f119b50" kindref="member">type</ref></type>
+          <declname>t</declname>
+          <defval><ref refid="classneforce_1_1system__event_1a7b748072e69e14dcd3d0604b9f119b50ad15df6f4bb58577e7078575bd2924794" kindref="member">type::auto_reset</ref></defval>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>initial_state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始信号状态 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>事件类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1system__exception" kindref="compound">system_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>创建失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="77" column="14"/>
+        <references refid="classneforce_1_1system__event_1a7b748072e69e14dcd3d0604b9f119b50ad15df6f4bb58577e7078575bd2924794" compoundref="system__event_8hpp" startline="41">auto_reset</references>
+        <referencedby refid="classneforce_1_1system__event_1a9cd917e6f8af93c21374b75b6207788c">operator=</referencedby>
+        <referencedby refid="classneforce_1_1system__event_1ae476c49aad1e4f22d36b0c6fcdc31355">system_event</referencedby>
+        <referencedby refid="classneforce_1_1system__event_1a9c649ebfc5fb305d65d0bfcbef2796b6">~system_event</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1system__event_1a9c649ebfc5fb305d65d0bfcbef2796b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::system_event::~system_event</definition>
+        <argsstring>()</argsstring>
+        <name>~system_event</name>
+        <qualifiedname>neforce::system_event::~system_event</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="82" column="5"/>
+        <references refid="classneforce_1_1system__event_1ad173c8079798b627c0d63c927903016b">system_event</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1system__event_1ab80c1e49df626229674d444de04bf997" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::system_event::system_event</definition>
+        <argsstring>(const system_event &amp;)=delete</argsstring>
+        <name>system_event</name>
+        <qualifiedname>neforce::system_event::system_event</qualifiedname>
+        <param>
+          <type>const system_event &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="84" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1system__event_1a323411c350e1735de907be95304d706a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1system__event_1ad173c8079798b627c0d63c927903016b" kindref="member">system_event</ref> &amp;</type>
+        <definition>system_event &amp; neforce::system_event::operator=</definition>
+        <argsstring>(const system_event &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::system_event::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1system__event_1ad173c8079798b627c0d63c927903016b" kindref="member">system_event</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="85" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1system__event_1ae476c49aad1e4f22d36b0c6fcdc31355" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::system_event::system_event</definition>
+        <argsstring>(system_event &amp;&amp;other) noexcept</argsstring>
+        <name>system_event</name>
+        <qualifiedname>neforce::system_event::system_event</qualifiedname>
+        <param>
+          <type>system_event &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="91" column="5"/>
+        <references refid="classneforce_1_1system__event_1ad173c8079798b627c0d63c927903016b">system_event</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1system__event_1a9cd917e6f8af93c21374b75b6207788c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1system__event_1ad173c8079798b627c0d63c927903016b" kindref="member">system_event</ref> &amp;</type>
+        <definition>system_event &amp; neforce::system_event::operator=</definition>
+        <argsstring>(system_event &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::system_event::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1system__event_1ad173c8079798b627c0d63c927903016b" kindref="member">system_event</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="98" column="18"/>
+        <references refid="classneforce_1_1system__event_1ad173c8079798b627c0d63c927903016b">system_event</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1system__event_1ae6f03cd6067a029a8c8c1b0f8a45e0f7" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::system_event::set</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>set</name>
+        <qualifiedname>neforce::system_event::set</qualifiedname>
+        <briefdescription>
+<para>设置事件为有信号状态 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>唤醒等待该事件的线程。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="105" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1system__event_1a17b7ae6856625ad8181d233dea98068d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::system_event::reset</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>reset</name>
+        <qualifiedname>neforce::system_event::reset</qualifiedname>
+        <briefdescription>
+<para>重置事件为无信号状态 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="110" column="10"/>
+        <references refid="classneforce_1_1system__event_1a17b7ae6856625ad8181d233dea98068d">reset</references>
+        <referencedby refid="classneforce_1_1system__event_1a17b7ae6856625ad8181d233dea98068d">reset</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1system__event_1a2f9d871c6f4e30bc9f497189d293130a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::system_event::wait</definition>
+        <argsstring>(uint32_t timeout_ms=numeric_traits&lt; uint32_t &gt;::max()) noexcept</argsstring>
+        <name>wait</name>
+        <qualifiedname>neforce::system_event::wait</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>timeout_ms</declname>
+          <defval><ref refid="classneforce_1_1numeric__traits" kindref="compound">numeric_traits</ref>&lt; <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref> &gt;<ref refid="group___compare_algorithms_1gacc7ec6cd2134fb437b992f481b7e5057" kindref="member">::max</ref>()</defval>
+        </param>
+        <briefdescription>
+<para>等待事件变为有信号状态 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timeout_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超时时间（毫秒），默认无限等待 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>等待是否成功</para>
+</simplesect>
+阻塞当前线程直到事件被设置或超时。 对于自动重置事件，唤醒后事件自动重置。 对于手动重置事件，唤醒后事件保持有信号状态。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="121" column="10"/>
+        <references refid="group___compare_algorithms_1gacc7ec6cd2134fb437b992f481b7e5057" compoundref="algorithm_2compare_8hpp" startline="133" endline="135">neforce::max</references>
+        <references refid="classneforce_1_1system__event_1a2f9d871c6f4e30bc9f497189d293130a">wait</references>
+        <referencedby refid="classneforce_1_1system__event_1a2f9d871c6f4e30bc9f497189d293130a">wait</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1system__event_1aa101d4f73f1ace42977cb8ec87b7ec5f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::system_event::try_wait</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>try_wait</name>
+        <qualifiedname>neforce::system_event::try_wait</qualifiedname>
+        <briefdescription>
+<para>尝试获取事件（非阻塞） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>事件是否已处于有信号状态</para>
+</simplesect>
+对于自动重置事件，成功时自动重置为无信号状态。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="129" column="10"/>
+        <references refid="classneforce_1_1system__event_1aa101d4f73f1ace42977cb8ec87b7ec5f">try_wait</references>
+        <referencedby refid="classneforce_1_1system__event_1aa101d4f73f1ace42977cb8ec87b7ec5f">try_wait</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1system__event_1ab6252e351742ce6eeaf6bfe9eccd779a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::system_event::is_set</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_set</name>
+        <qualifiedname>neforce::system_event::is_set</qualifiedname>
+        <briefdescription>
+<para>查询事件是否处于有信号状态 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否已设置 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="135" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" bodystart="135" bodyend="135"/>
+        <references refid="classneforce_1_1system__event_1ab6252e351742ce6eeaf6bfe9eccd779a" compoundref="system__event_8hpp" startline="135" endline="135">is_set</references>
+        <referencedby refid="classneforce_1_1system__event_1ab6252e351742ce6eeaf6bfe9eccd779a" compoundref="system__event_8hpp" startline="135" endline="135">is_set</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1system__event_1a11e95c871ae59d89ebef92b81b08f7ed" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1system__event_1a7b748072e69e14dcd3d0604b9f119b50" kindref="member">type</ref></type>
+        <definition>type neforce::system_event::event_type</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>event_type</name>
+        <qualifiedname>neforce::system_event::event_type</qualifiedname>
+        <briefdescription>
+<para>获取事件类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>事件类型 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="141" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" bodystart="141" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1system__event_1adcd17938030482672140cc5b35f3b7a5" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void *</type>
+        <definition>void * neforce::system_event::native_handle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>native_handle</name>
+        <qualifiedname>neforce::system_event::native_handle</qualifiedname>
+        <briefdescription>
+<para>获取原生事件句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>原生句柄 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="148" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" bodystart="148" bodyend="148"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>系统事件类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供线程同步的事件对象，使用场景：<itemizedlist>
+<listitem><para>线程间通知</para>
+</listitem><listitem><para>生产者-消费者模式</para>
+</listitem><listitem><para>工作队列通知 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="33" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" bodystart="33" bodyend="150"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1system__event_1a11e95c871ae59d89ebef92b81b08f7ed" prot="public" virt="non-virtual"><scope>neforce::system_event</scope><name>event_type</name></member>
+      <member refid="classneforce_1_1system__event_1a281ae06ab52efc51df93245d65b98b0f" prot="private" virt="non-virtual"><scope>neforce::system_event</scope><name>handle_</name></member>
+      <member refid="classneforce_1_1system__event_1ab6252e351742ce6eeaf6bfe9eccd779a" prot="public" virt="non-virtual"><scope>neforce::system_event</scope><name>is_set</name></member>
+      <member refid="classneforce_1_1system__event_1adcd17938030482672140cc5b35f3b7a5" prot="public" virt="non-virtual"><scope>neforce::system_event</scope><name>native_handle</name></member>
+      <member refid="classneforce_1_1system__event_1a323411c350e1735de907be95304d706a" prot="public" virt="non-virtual"><scope>neforce::system_event</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1system__event_1a9cd917e6f8af93c21374b75b6207788c" prot="public" virt="non-virtual"><scope>neforce::system_event</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1system__event_1a17b7ae6856625ad8181d233dea98068d" prot="public" virt="non-virtual"><scope>neforce::system_event</scope><name>reset</name></member>
+      <member refid="classneforce_1_1system__event_1ae6f03cd6067a029a8c8c1b0f8a45e0f7" prot="public" virt="non-virtual"><scope>neforce::system_event</scope><name>set</name></member>
+      <member refid="classneforce_1_1system__event_1a67286213164495232ef315f9f103c4da" prot="private" virt="non-virtual"><scope>neforce::system_event</scope><name>signaled_</name></member>
+      <member refid="classneforce_1_1system__event_1ad173c8079798b627c0d63c927903016b" prot="public" virt="non-virtual"><scope>neforce::system_event</scope><name>system_event</name></member>
+      <member refid="classneforce_1_1system__event_1ab80c1e49df626229674d444de04bf997" prot="public" virt="non-virtual"><scope>neforce::system_event</scope><name>system_event</name></member>
+      <member refid="classneforce_1_1system__event_1ae476c49aad1e4f22d36b0c6fcdc31355" prot="public" virt="non-virtual"><scope>neforce::system_event</scope><name>system_event</name></member>
+      <member refid="classneforce_1_1system__event_1aa101d4f73f1ace42977cb8ec87b7ec5f" prot="public" virt="non-virtual"><scope>neforce::system_event</scope><name>try_wait</name></member>
+      <member refid="classneforce_1_1system__event_1a7b748072e69e14dcd3d0604b9f119b50" prot="public" virt="non-virtual"><scope>neforce::system_event</scope><name>type</name></member>
+      <member refid="classneforce_1_1system__event_1a2099d7f9457cc9739dd8ee0acd0b7555" prot="private" virt="non-virtual"><scope>neforce::system_event</scope><name>type_</name></member>
+      <member refid="classneforce_1_1system__event_1a2f9d871c6f4e30bc9f497189d293130a" prot="public" virt="non-virtual"><scope>neforce::system_event</scope><name>wait</name></member>
+      <member refid="classneforce_1_1system__event_1a9c649ebfc5fb305d65d0bfcbef2796b6" prot="public" virt="non-virtual"><scope>neforce::system_event</scope><name>~system_event</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

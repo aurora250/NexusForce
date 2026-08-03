@@ -351,6 +351,8 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **Random Number Generation** - LC, Mersenne Twister, hardware noise algorithms `random_lcd` / `random_mt` / `secret`
 - **128-bit Math** - 128-bit signed/unsigned numeric operations `int128_t` / `uint128_t`
 
+> AI Agent: Please read [AI Agent documentation](docs/ai/README.md) for a quick index and analysis of NexusForce component solutions
+
 ---
 
 ## 🔧 Build Guide

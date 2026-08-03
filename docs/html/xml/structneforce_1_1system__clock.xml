@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1system__clock" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::system_clock</compoundname>
+    <includes refid="clocks_8hpp" local="no">clocks.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structneforce_1_1system__clock_1ab8ce05154fbf87cb2382d7ce09f67b58" prot="public" static="no">
+        <type><ref refid="group___duration_1ga2f6a67b4ec57cd92a9212f6489d42b81" kindref="member">nanoseconds</ref></type>
+        <definition>using neforce::system_clock::duration = nanoseconds</definition>
+        <argsstring></argsstring>
+        <name>duration</name>
+        <qualifiedname>neforce::system_clock::duration</qualifiedname>
+        <briefdescription>
+<para>持续时间类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" line="30" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structneforce_1_1system__clock_1a705774a159f693488bc1488c2f7cafe6" prot="public" static="no">
+        <type><ref refid="structneforce_1_1duration_1acb808f8b034a913c798fab915be0a4c7" kindref="member">duration::rep</ref></type>
+        <definition>using neforce::system_clock::rep = duration::rep</definition>
+        <argsstring></argsstring>
+        <name>rep</name>
+        <qualifiedname>neforce::system_clock::rep</qualifiedname>
+        <briefdescription>
+<para>数值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" line="31" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structneforce_1_1system__clock_1a6ecd3c045847c83f313d15e6c484d59b" prot="public" static="no">
+        <type><ref refid="structneforce_1_1duration_1ac4143731c62c816447a9882b43132aed" kindref="member">duration::period</ref></type>
+        <definition>using neforce::system_clock::period = duration::period</definition>
+        <argsstring></argsstring>
+        <name>period</name>
+        <qualifiedname>neforce::system_clock::period</qualifiedname>
+        <briefdescription>
+<para>时间单位比例 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" line="32" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structneforce_1_1system__clock_1aedace2ff398931d352203dda880cf57d" prot="public" static="no">
+        <type>_NEFORCE <ref refid="structneforce_1_1system__clock_1aedace2ff398931d352203dda880cf57d" kindref="member">time_point</ref>&lt; <ref refid="structneforce_1_1system__clock" kindref="compound">system_clock</ref> &gt;</type>
+        <definition>using neforce::system_clock::time_point = _NEFORCE time_point&lt;system_clock&gt;</definition>
+        <argsstring></argsstring>
+        <name>time_point</name>
+        <qualifiedname>neforce::system_clock::time_point</qualifiedname>
+        <briefdescription>
+<para>时间点类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" line="33" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structneforce_1_1system__clock_1ae89ab087613176e95961fa7d140bb1ce" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::system_clock::is_steady</definition>
+        <argsstring></argsstring>
+        <name>is_steady</name>
+        <qualifiedname>neforce::system_clock::is_steady</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>时钟稳定性标识 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>系统时钟不是稳定的，可能受系统时间调整影响。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" line="42" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structneforce_1_1system__clock_1a6ec41371ab7c4b29358f7fbb43431d09" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1system__clock_1aedace2ff398931d352203dda880cf57d" kindref="member">time_point</ref></type>
+        <definition>static time_point neforce::system_clock::now</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>now</name>
+        <qualifiedname>neforce::system_clock::now</qualifiedname>
+        <briefdescription>
+<para>获取当前时间点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前系统时间的时间点</para>
+</simplesect>
+返回系统当前时间的时间点表示。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" line="50" column="23"/>
+        <referencedby refid="structneforce_1_1click_1aa5bc616d9140652d39485c95cdf068cc" compoundref="click_8hpp" startline="40" endline="44">neforce::click::start</referencedby>
+        <referencedby refid="structneforce_1_1click_1a769868c35d908474f4f3b893c6f10cee" compoundref="click_8hpp" startline="58" endline="61">neforce::click::stop</referencedby>
+        <referencedby refid="structneforce_1_1steady__clock_1a9d4e2993abe871b321d8ba641b0b99f2" compoundref="clocks_8hpp" startline="105" endline="111">neforce::steady_clock::to_system</referencedby>
+        <referencedby refid="structneforce_1_1click_1ae56cb9983951de57364422c220ea3494" compoundref="click_8hpp" startline="51" endline="51">neforce::click::update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1system__clock_1ae073d51686375f84cfe449ce3fb72b7b" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___duration_1ga8254730759b00eba24c4a01b0c8e10c3" kindref="member">seconds</ref></type>
+        <definition>static seconds neforce::system_clock::to_seconds</definition>
+        <argsstring>(const time_point &amp;time_point_value) noexcept</argsstring>
+        <name>to_seconds</name>
+        <qualifiedname>neforce::system_clock::to_seconds</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1system__clock_1aedace2ff398931d352203dda880cf57d" kindref="member">time_point</ref> &amp;</type>
+          <declname>time_point_value</declname>
+        </param>
+        <briefdescription>
+<para>将时间点转换为时间值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>time_point_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的时间点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>对应的时间值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" line="57" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" bodystart="57" bodyend="59"/>
+        <references refid="structneforce_1_1system__clock_1ae073d51686375f84cfe449ce3fb72b7b" compoundref="clocks_8hpp" startline="57" endline="59">to_seconds</references>
+        <referencedby refid="structneforce_1_1system__clock_1ae073d51686375f84cfe449ce3fb72b7b" compoundref="clocks_8hpp" startline="57" endline="59">to_seconds</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1system__clock_1ac332a06740fb40d728194c575f327824" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1system__clock_1aedace2ff398931d352203dda880cf57d" kindref="member">time_point</ref></type>
+        <definition>static time_point neforce::system_clock::from_seconds</definition>
+        <argsstring>(const seconds time_value) noexcept</argsstring>
+        <name>from_seconds</name>
+        <qualifiedname>neforce::system_clock::from_seconds</qualifiedname>
+        <param>
+          <type>const <ref refid="group___duration_1ga8254730759b00eba24c4a01b0c8e10c3" kindref="member">seconds</ref></type>
+          <declname>time_value</declname>
+        </param>
+        <briefdescription>
+<para>从时间值创建时间点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>time_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的时间值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>对应的时间点 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" line="66" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" bodystart="66" bodyend="69"/>
+        <references refid="group___duration_1ga89d9c0e7540c0ac580481c7de279ad3b" compoundref="duration_8hpp" startline="144" endline="152">neforce::time_cast</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>系统时钟 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>表示系统范围的实时时钟，系统时钟的时间点可以转换为日历时间。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" line="29" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" bodystart="29" bodyend="70"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1system__clock_1ab8ce05154fbf87cb2382d7ce09f67b58" prot="public" virt="non-virtual"><scope>neforce::system_clock</scope><name>duration</name></member>
+      <member refid="structneforce_1_1system__clock_1ac332a06740fb40d728194c575f327824" prot="public" virt="non-virtual"><scope>neforce::system_clock</scope><name>from_seconds</name></member>
+      <member refid="structneforce_1_1system__clock_1ae89ab087613176e95961fa7d140bb1ce" prot="public" virt="non-virtual"><scope>neforce::system_clock</scope><name>is_steady</name></member>
+      <member refid="structneforce_1_1system__clock_1a6ec41371ab7c4b29358f7fbb43431d09" prot="public" virt="non-virtual"><scope>neforce::system_clock</scope><name>now</name></member>
+      <member refid="structneforce_1_1system__clock_1a6ecd3c045847c83f313d15e6c484d59b" prot="public" virt="non-virtual"><scope>neforce::system_clock</scope><name>period</name></member>
+      <member refid="structneforce_1_1system__clock_1a705774a159f693488bc1488c2f7cafe6" prot="public" virt="non-virtual"><scope>neforce::system_clock</scope><name>rep</name></member>
+      <member refid="structneforce_1_1system__clock_1aedace2ff398931d352203dda880cf57d" prot="public" virt="non-virtual"><scope>neforce::system_clock</scope><name>time_point</name></member>
+      <member refid="structneforce_1_1system__clock_1ae073d51686375f84cfe449ce3fb72b7b" prot="public" virt="non-virtual"><scope>neforce::system_clock</scope><name>to_seconds</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

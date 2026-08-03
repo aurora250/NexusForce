@@ -1,0 +1,610 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::string_builder类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1string__builder.html','','classneforce_1_1string__builder-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::string_builder类 参考<div class="ingroups"><a class="el" href="group___string.html">字符串</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>延迟拼接的字符串构建器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="string__builder_8hpp_source.html">string_builder.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:acefa28ed19cba59cc700b97907a1be06" id="r_acefa28ed19cba59cc700b97907a1be06"><td class="memItemLeft"><a id="acefa28ed19cba59cc700b97907a1be06" name="acefa28ed19cba59cc700b97907a1be06"></a>
+&#160;</td><td class="memItemRight"><b>string_builder</b> ()=default</td></tr>
+<tr class="memdesc:acefa28ed19cba59cc700b97907a1be06"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数 <br /></td></tr>
+<tr class="memitem:a4c53ae4708c5f415931537c5a62f453c" id="r_a4c53ae4708c5f415931537c5a62f453c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4c53ae4708c5f415931537c5a62f453c">reserve_pieces</a> (const <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> n)</td></tr>
+<tr class="memdesc:a4c53ae4708c5f415931537c5a62f453c"><td class="mdescLeft">&#160;</td><td class="mdescRight">预留片段容量  <br /></td></tr>
+<tr class="memitem:a327fe2c5124a92100bf0e97ccaa25f82" id="r_a327fe2c5124a92100bf0e97ccaa25f82"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a327fe2c5124a92100bf0e97ccaa25f82">reserve</a> (const <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> n)</td></tr>
+<tr class="memdesc:a327fe2c5124a92100bf0e97ccaa25f82"><td class="mdescLeft">&#160;</td><td class="mdescRight">预留输出总大小  <br /></td></tr>
+<tr class="memitem:a316ef1f5eedafa132349e6d8021ac2ab" id="r_a316ef1f5eedafa132349e6d8021ac2ab"><td class="memItemLeft"><a class="el" href="#acefa28ed19cba59cc700b97907a1be06">string_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a316ef1f5eedafa132349e6d8021ac2ab">append</a> (const <a class="el" href="group___string_view.html#ga5a6e8b9da034ce8d4818231c4e005eff">string_view</a> sv)</td></tr>
+<tr class="memdesc:a316ef1f5eedafa132349e6d8021ac2ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">追加字符串视图  <br /></td></tr>
+<tr class="memitem:ac04f9fd90fabcd46f3f97918060511fd" id="r_ac04f9fd90fabcd46f3f97918060511fd"><td class="memItemLeft"><a class="el" href="#acefa28ed19cba59cc700b97907a1be06">string_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ac04f9fd90fabcd46f3f97918060511fd">append</a> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;str)</td></tr>
+<tr class="memdesc:ac04f9fd90fabcd46f3f97918060511fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">追加字符串  <br /></td></tr>
+<tr class="memitem:a688da96329bbea1b1f769b0966422215" id="r_a688da96329bbea1b1f769b0966422215"><td class="memItemLeft"><a class="el" href="#acefa28ed19cba59cc700b97907a1be06">string_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a688da96329bbea1b1f769b0966422215">append</a> (const char *str)</td></tr>
+<tr class="memdesc:a688da96329bbea1b1f769b0966422215"><td class="mdescLeft">&#160;</td><td class="mdescRight">追加 C 风格字符串  <br /></td></tr>
+<tr class="memitem:a992b3ba5d4af777b572bd4bbae771a63" id="r_a992b3ba5d4af777b572bd4bbae771a63"><td class="memItemLeft"><a class="el" href="#acefa28ed19cba59cc700b97907a1be06">string_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a992b3ba5d4af777b572bd4bbae771a63">append</a> (const char c)</td></tr>
+<tr class="memdesc:a992b3ba5d4af777b572bd4bbae771a63"><td class="mdescLeft">&#160;</td><td class="mdescRight">追加单个字符  <br /></td></tr>
+<tr class="memitem:ac71bbfab438dc427f846e7d5837b202d" id="r_ac71bbfab438dc427f846e7d5837b202d"><td class="memTemplParams" colspan="2">template&lt;typename T, typename P = package_t&lt;T&gt;, <a class="el" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#gabda05f85eb9f49982d40dae64b1af1d8">is_packaged_v</a>&lt; T &gt; &amp;&amp;<a class="el" href="group___base_type_qualifier_check.html#gaf587c525b5f808c49df5c82b74e7400c">is_base_of_v</a>&lt; <a class="el" href="structneforce_1_1istringify.html">istringify</a>&lt; P &gt;, P &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ac71bbfab438dc427f846e7d5837b202d template"><td class="memItemLeft"><a class="el" href="#acefa28ed19cba59cc700b97907a1be06">string_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ac71bbfab438dc427f846e7d5837b202d">append</a> (const T &amp;value)</td></tr>
+<tr class="memdesc:ac71bbfab438dc427f846e7d5837b202d"><td class="mdescLeft">&#160;</td><td class="mdescRight">追加任意可转为字符串的值  <br /></td></tr>
+<tr class="memitem:a35780c315e205f5a2e075eb96785464b" id="r_a35780c315e205f5a2e075eb96785464b"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt; <a class="el" href="group___base_type_qualifier_check.html#gaf587c525b5f808c49df5c82b74e7400c">is_base_of_v</a>&lt; <a class="el" href="structneforce_1_1istringify.html">istringify</a>&lt; T &gt;, T &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a35780c315e205f5a2e075eb96785464b template"><td class="memItemLeft"><a class="el" href="#acefa28ed19cba59cc700b97907a1be06">string_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a35780c315e205f5a2e075eb96785464b">append</a> (const T &amp;value)</td></tr>
+<tr class="memdesc:a35780c315e205f5a2e075eb96785464b"><td class="mdescLeft">&#160;</td><td class="mdescRight">追加任意可转为字符串的值  <br /></td></tr>
+<tr class="memitem:ae5210141aec2ffa6d94a78d7a31d5b9f" id="r_ae5210141aec2ffa6d94a78d7a31d5b9f"><td class="memItemLeft"><a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae5210141aec2ffa6d94a78d7a31d5b9f">build</a> () const</td></tr>
+<tr class="memdesc:ae5210141aec2ffa6d94a78d7a31d5b9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">构建字符串  <br /></td></tr>
+<tr class="memitem:a4447939dd959ca09a24a05339c1ebd26" id="r_a4447939dd959ca09a24a05339c1ebd26"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a4447939dd959ca09a24a05339c1ebd26">operator string</a> () const</td></tr>
+<tr class="memdesc:a4447939dd959ca09a24a05339c1ebd26"><td class="mdescLeft">&#160;</td><td class="mdescRight">隐式转换为字符串  <br /></td></tr>
+<tr class="memitem:a25364b4aa3a74f49a4473cfb0afe2d2c" id="r_a25364b4aa3a74f49a4473cfb0afe2d2c"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a25364b4aa3a74f49a4473cfb0afe2d2c">size</a> () const noexcept</td></tr>
+<tr class="memdesc:a25364b4aa3a74f49a4473cfb0afe2d2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">当前总字符数  <br /></td></tr>
+<tr class="memitem:a8d225746933e9c55111edca692aa5120" id="r_a8d225746933e9c55111edca692aa5120"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a8d225746933e9c55111edca692aa5120">empty</a> () const noexcept</td></tr>
+<tr class="memdesc:a8d225746933e9c55111edca692aa5120"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否为空  <br /></td></tr>
+<tr class="memitem:a1329d4020745daad8fe08e484949d55e" id="r_a1329d4020745daad8fe08e484949d55e"><td class="memItemLeft"><a id="a1329d4020745daad8fe08e484949d55e" name="a1329d4020745daad8fe08e484949d55e"></a>
+void&#160;</td><td class="memItemRight"><b>clear</b> () noexcept</td></tr>
+<tr class="memdesc:a1329d4020745daad8fe08e484949d55e"><td class="mdescLeft">&#160;</td><td class="mdescRight">清空所有已收集的片段 <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>延迟拼接的字符串构建器 </p>
+<p>收集字符串片段，在调用 <a class="el" href="#ae5210141aec2ffa6d94a78d7a31d5b9f" title="构建字符串">build()</a> 时一次性分配内存并拼接。</p>
+<dl class="section warning"><dt>警告</dt><dd>调用者必须保证传入的 <a class="el" href="group___string_view.html#ga5a6e8b9da034ce8d4818231c4e005eff" title="字符字符串视图">string_view</a> 和 const char* 参数在 <a class="el" href="#ae5210141aec2ffa6d94a78d7a31d5b9f" title="构建字符串">build()</a> 调用之前保持有效。 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="string__builder_8hpp_source.html">string_builder.hpp</a> 第 <a class="el" href="string__builder_8hpp_source.html#l00027">27</a> 行定义.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a688da96329bbea1b1f769b0966422215" name="a688da96329bbea1b1f769b0966422215"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a688da96329bbea1b1f769b0966422215">&#9670;&#160;</a></span>append() <span class="overload">[1/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#acefa28ed19cba59cc700b97907a1be06">string_builder</a> &amp; neforce::string_builder::append </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>str</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>追加 C 风格字符串 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>C 风格字符串 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="string__builder_8hpp_source.html">string_builder.hpp</a> 第 <a class="el" href="string__builder_8hpp_source.html#l00069">69</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="string__builder_8hpp_source.html#l00069">append()</a> , 以及 <a class="el" href="#acefa28ed19cba59cc700b97907a1be06">string_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="string__builder_8hpp_source.html#l00069">append()</a>.</p>
+
+</div>
+</div>
+<a id="a992b3ba5d4af777b572bd4bbae771a63" name="a992b3ba5d4af777b572bd4bbae771a63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a992b3ba5d4af777b572bd4bbae771a63">&#9670;&#160;</a></span>append() <span class="overload">[2/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#acefa28ed19cba59cc700b97907a1be06">string_builder</a> &amp; neforce::string_builder::append </td>
+          <td>(</td>
+          <td class="paramtype">const char</td>          <td class="paramname"><span class="paramname"><em>c</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>追加单个字符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>字符 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="string__builder_8hpp_source.html">string_builder.hpp</a> 第 <a class="el" href="string__builder_8hpp_source.html#l00076">76</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#acefa28ed19cba59cc700b97907a1be06">string_builder()</a>.</p>
+
+</div>
+</div>
+<a id="ac04f9fd90fabcd46f3f97918060511fd" name="ac04f9fd90fabcd46f3f97918060511fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac04f9fd90fabcd46f3f97918060511fd">&#9670;&#160;</a></span>append() <span class="overload">[3/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#acefa28ed19cba59cc700b97907a1be06">string_builder</a> &amp; neforce::string_builder::append </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>str</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>追加字符串 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>字符串 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="string__builder_8hpp_source.html">string_builder.hpp</a> 第 <a class="el" href="string__builder_8hpp_source.html#l00062">62</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="string__builder_8hpp_source.html#l00062">append()</a>, <a class="el" href="#acefa28ed19cba59cc700b97907a1be06">string_builder()</a> , 以及 <a class="el" href="basic__string_8hpp_source.html#l02147">neforce::basic_string&lt; CharT, Traits, Alloc &gt;::view()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="string__builder_8hpp_source.html#l00062">append()</a>.</p>
+
+</div>
+</div>
+<a id="a316ef1f5eedafa132349e6d8021ac2ab" name="a316ef1f5eedafa132349e6d8021ac2ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a316ef1f5eedafa132349e6d8021ac2ab">&#9670;&#160;</a></span>append() <span class="overload">[4/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#acefa28ed19cba59cc700b97907a1be06">string_builder</a> &amp; neforce::string_builder::append </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string_view.html#ga5a6e8b9da034ce8d4818231c4e005eff">string_view</a></td>          <td class="paramname"><span class="paramname"><em>sv</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>追加字符串视图 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sv</td><td>字符串视图 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="string__builder_8hpp_source.html">string_builder.hpp</a> 第 <a class="el" href="string__builder_8hpp_source.html#l00051">51</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="basic__string__view_8hpp_source.html#l00306">neforce::basic_string_view&lt; CharT, Traits &gt;::size()</a> , 以及 <a class="el" href="#acefa28ed19cba59cc700b97907a1be06">string_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a35780c315e205f5a2e075eb96785464b" name="a35780c315e205f5a2e075eb96785464b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35780c315e205f5a2e075eb96785464b">&#9670;&#160;</a></span>append() <span class="overload">[5/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt; <a class="el" href="group___base_type_qualifier_check.html#gaf587c525b5f808c49df5c82b74e7400c">is_base_of_v</a>&lt; <a class="el" href="structneforce_1_1istringify.html">istringify</a>&lt; T &gt;, T &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#acefa28ed19cba59cc700b97907a1be06">string_builder</a> &amp; neforce::string_builder::append </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>追加任意可转为字符串的值 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td><a class="el" href="structneforce_1_1istringify.html" title="可字符串化接口">istringify&lt;T&gt;</a> 子类类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要追加的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="string__builder_8hpp_source.html">string_builder.hpp</a> 第 <a class="el" href="string__builder_8hpp_source.html#l00105">105</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="string__builder_8hpp_source.html#l00136">size()</a> , 以及 <a class="el" href="#acefa28ed19cba59cc700b97907a1be06">string_builder()</a>.</p>
+
+</div>
+</div>
+<a id="ac71bbfab438dc427f846e7d5837b202d" name="ac71bbfab438dc427f846e7d5837b202d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac71bbfab438dc427f846e7d5837b202d">&#9670;&#160;</a></span>append() <span class="overload">[6/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename P = package_t&lt;T&gt;, <a class="el" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#gabda05f85eb9f49982d40dae64b1af1d8">is_packaged_v</a>&lt; T &gt; &amp;&amp;<a class="el" href="group___base_type_qualifier_check.html#gaf587c525b5f808c49df5c82b74e7400c">is_base_of_v</a>&lt; <a class="el" href="structneforce_1_1istringify.html">istringify</a>&lt; P &gt;, P &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#acefa28ed19cba59cc700b97907a1be06">string_builder</a> &amp; neforce::string_builder::append </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>追加任意可转为字符串的值 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>支持包装类型的基本类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要追加的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="string__builder_8hpp_source.html">string_builder.hpp</a> 第 <a class="el" href="string__builder_8hpp_source.html#l00091">91</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="string__builder_8hpp_source.html#l00136">size()</a>, <a class="el" href="#acefa28ed19cba59cc700b97907a1be06">string_builder()</a> , 以及 <a class="el" href="icharacter_8hpp_source.html#l00115">neforce::to_string()</a>.</p>
+
+</div>
+</div>
+<a id="ae5210141aec2ffa6d94a78d7a31d5b9f" name="ae5210141aec2ffa6d94a78d7a31d5b9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5210141aec2ffa6d94a78d7a31d5b9f">&#9670;&#160;</a></span>build()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> neforce::string_builder::build </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构建字符串 </p>
+<dl class="section return"><dt>返回</dt><dd>拼接后的字符串 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="string__builder_8hpp_source.html">string_builder.hpp</a> 第 <a class="el" href="string__builder_8hpp_source.html#l00116">116</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="basic__string_8hpp_source.html#l01573">neforce::basic_string&lt; CharT, Traits, Alloc &gt;::append()</a>, <a class="el" href="algorithm_2compare_8hpp_source.html#l00133">neforce::max()</a> , 以及 <a class="el" href="basic__string_8hpp_source.html#l01275">neforce::basic_string&lt; CharT, Traits, Alloc &gt;::reserve()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="string__builder_8hpp_source.html#l00191">neforce::concatenate()</a> , 以及 <a class="el" href="string__builder_8hpp_source.html#l00130">operator string()</a>.</p>
+
+</div>
+</div>
+<a id="a8d225746933e9c55111edca692aa5120" name="a8d225746933e9c55111edca692aa5120"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d225746933e9c55111edca692aa5120">&#9670;&#160;</a></span>empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::string_builder::empty </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>是否为空 </p>
+<dl class="section return"><dt>返回</dt><dd>无任何片段时返回 true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="string__builder_8hpp_source.html">string_builder.hpp</a> 第 <a class="el" href="string__builder_8hpp_source.html#l00142">142</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a4447939dd959ca09a24a05339c1ebd26" name="a4447939dd959ca09a24a05339c1ebd26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4447939dd959ca09a24a05339c1ebd26">&#9670;&#160;</a></span>operator string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">neforce::string_builder::operator <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>隐式转换为字符串 </p>
+<dl class="section return"><dt>返回</dt><dd>拼接后的字符串 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="string__builder_8hpp_source.html">string_builder.hpp</a> 第 <a class="el" href="string__builder_8hpp_source.html#l00130">130</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="string__builder_8hpp_source.html#l00116">build()</a>.</p>
+
+</div>
+</div>
+<a id="a327fe2c5124a92100bf0e97ccaa25f82" name="a327fe2c5124a92100bf0e97ccaa25f82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a327fe2c5124a92100bf0e97ccaa25f82">&#9670;&#160;</a></span>reserve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::string_builder::reserve </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>预留输出总大小 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>预计的总字符数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="string__builder_8hpp_source.html">string_builder.hpp</a> 第 <a class="el" href="string__builder_8hpp_source.html#l00044">44</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a4c53ae4708c5f415931537c5a62f453c" name="a4c53ae4708c5f415931537c5a62f453c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c53ae4708c5f415931537c5a62f453c">&#9670;&#160;</a></span>reserve_pieces()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::string_builder::reserve_pieces </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>预留片段容量 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>预计的片段数量 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="string__builder_8hpp_source.html">string_builder.hpp</a> 第 <a class="el" href="string__builder_8hpp_source.html#l00038">38</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a25364b4aa3a74f49a4473cfb0afe2d2c" name="a25364b4aa3a74f49a4473cfb0afe2d2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25364b4aa3a74f49a4473cfb0afe2d2c">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> neforce::string_builder::size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>当前总字符数 </p>
+<dl class="section return"><dt>返回</dt><dd>已收集片段的总长度 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="string__builder_8hpp_source.html">string_builder.hpp</a> 第 <a class="el" href="string__builder_8hpp_source.html#l00136">136</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="string__builder_8hpp_source.html#l00091">append()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="string__builder_8hpp_source.html">string_builder.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><a href="classneforce_1_1string__builder.html">string_builder</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

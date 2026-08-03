@@ -1699,7 +1699,7 @@ TEST_F(AES256Test, ConvenienceAes256EncryptDecryptRoundTrip) {
     string_view original = "Test convenience functions";
 
     auto encrypted = aes256_encrypt(original, key_hex);
-    auto decrypted = aes256_decrypt(encrypted, key_hex);
+    auto decrypted = aes256_decrypt(encrypted.view(), key_hex);
     EXPECT_EQ(decrypted, original);
 }
 
@@ -1709,8 +1709,8 @@ TEST_F(AES256Test, MultipleEncryptDecryptOperationsConsistent) {
 
     auto encrypted1 = aes256_encrypt(original, key_hex);
     auto encrypted2 = aes256_encrypt(original, key_hex);
-    auto decrypted1 = aes256_decrypt(encrypted1, key_hex);
-    auto decrypted2 = aes256_decrypt(encrypted2, key_hex);
+    auto decrypted1 = aes256_decrypt(encrypted1.view(), key_hex);
+    auto decrypted2 = aes256_decrypt(encrypted2.view(), key_hex);
 
     EXPECT_EQ(encrypted1, encrypted2);
     EXPECT_EQ(decrypted1, original);

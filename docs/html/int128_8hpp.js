@@ -1,5 +1,5 @@
 var int128_8hpp =
 [
-    [ "operator\"\"_i128", "group___user_literals.html#ga05bd1975c8fd3ecbe41e9f2765e29f59", null ],
-    [ "operator\"\"_u128", "group___user_literals.html#gadab16538b261dc3a37900167c487c24c", null ]
+    [ "neforce::literals::operator\"\"_i128", "group___user_literals.html#ga103ce6caeb52bf859ee8a1e4d49ed4ed", null ],
+    [ "neforce::literals::operator\"\"_u128", "group___user_literals.html#gaf1c151a1b1c63031a9b88e5b9f2374cc", null ]
 ];

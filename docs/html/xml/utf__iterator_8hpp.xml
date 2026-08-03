@@ -79,8 +79,8 @@
         </childnode>
       </node>
       <node id="16">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
@@ -245,30 +245,44 @@
         </childnode>
         <childnode refid="46" relation="include">
         </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
         <childnode refid="40" relation="include">
         </childnode>
       </node>
-      <node id="47">
+      <node id="49">
         <label>NeForce/core/string/basic_string_view.hpp</label>
         <link refid="basic__string__view_8hpp"/>
         <childnode refid="38" relation="include">
         </childnode>
-        <childnode refid="48" relation="include">
+        <childnode refid="50" relation="include">
         </childnode>
-        <childnode refid="49" relation="include">
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
         </childnode>
       </node>
-      <node id="48">
+      <node id="50">
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="29" relation="include">
         </childnode>
         <childnode refid="25" relation="include">
         </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
       </node>
-      <node id="49">
+      <node id="47">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>NeForce/core/string/charset.hpp</label>
+        <link refid="charset_8hpp"/>
+        <childnode refid="47" relation="include">
+        </childnode>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
@@ -286,10 +300,10 @@
         <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="46">
+      <node id="48">
         <label>NeForce/core/string/string_view.hpp</label>
         <link refid="string__view_8hpp"/>
-        <childnode refid="47" relation="include">
+        <childnode refid="49" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -359,8 +373,9 @@
         <label>utility</label>
       </node>
     </incdepgraph>
-    <innerclass refid="classutf8__iterator" prot="public">utf8_iterator</innerclass>
-    <innerclass refid="classutf8__range" prot="public">utf8_range</innerclass>
+    <innerclass refid="classneforce_1_1utf8__iterator" prot="public">neforce::utf8_iterator</innerclass>
+    <innerclass refid="classneforce_1_1utf8__range" prot="public">neforce::utf8_range</innerclass>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
     <briefdescription>
 <para>UTF-8 码点迭代器 </para>
     </briefdescription>
@@ -376,85 +391,85 @@
 <codeline lineno="13"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight></codeline>
 <codeline lineno="20"><highlight class="normal"></highlight></codeline>
-<codeline lineno="31" refid="classutf8__iterator" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classutf8__iterator_1ae9b656ea9e951569adc33f6a62a01889" kindref="member">utf8_iterator</ref><sp/>{</highlight></codeline>
+<codeline lineno="31" refid="classneforce_1_1utf8__iterator" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classneforce_1_1utf8__iterator_1add9883f63ae8daa66ddb267f35fb9f81" kindref="member">utf8_iterator</ref><sp/>{</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="33" refid="classutf8__iterator_1aac04f2a148a131205a13621dddbe5d6d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classutf8__iterator_1aac04f2a148a131205a13621dddbe5d6d" kindref="member">value_type</ref><sp/>=<sp/><ref refid="classcodepoint" kindref="compound">codepoint</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="34" refid="classutf8__iterator_1a779e3cf0089b900eed1a2640e3f89b47" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classutf8__iterator_1a779e3cf0089b900eed1a2640e3f89b47" kindref="member">reference</ref><sp/>=<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classcodepoint" kindref="compound">codepoint</ref>&amp;;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="35" refid="classutf8__iterator_1ab8d42eb839e0cf5f5a02fcff7a3cc9c8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classutf8__iterator_1ab8d42eb839e0cf5f5a02fcff7a3cc9c8" kindref="member">pointer</ref><sp/>=<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classcodepoint" kindref="compound">codepoint</ref>*;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="36" refid="classutf8__iterator_1ae612fa22c67064b022f7fcf01d8eda44" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classutf8__iterator_1ae612fa22c67064b022f7fcf01d8eda44" kindref="member">difference_type</ref><sp/>=<sp/><ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="37" refid="classutf8__iterator_1a8cc0a5275f8cc18732deb7733880f900" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classutf8__iterator_1a8cc0a5275f8cc18732deb7733880f900" kindref="member">iterator_category</ref><sp/>=<sp/><ref refid="structforward__iterator__tag" kindref="compound">forward_iterator_tag</ref>;<sp/></highlight></codeline>
+<codeline lineno="33" refid="classneforce_1_1utf8__iterator_1a20efe0fe477cc39cb7b47eb0df5b5e20" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classneforce_1_1utf8__iterator_1a20efe0fe477cc39cb7b47eb0df5b5e20" kindref="member">value_type</ref><sp/>=<sp/><ref refid="classneforce_1_1codepoint" kindref="compound">codepoint</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="34" refid="classneforce_1_1utf8__iterator_1a4baa2d4374cbe8c9a5a8fe10751c2b66" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classneforce_1_1utf8__iterator_1a4baa2d4374cbe8c9a5a8fe10751c2b66" kindref="member">reference</ref><sp/>=<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1codepoint" kindref="compound">codepoint</ref>&amp;;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="35" refid="classneforce_1_1utf8__iterator_1a7dbdc93bd06f777d943e49f7c32dd7f2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classneforce_1_1utf8__iterator_1a7dbdc93bd06f777d943e49f7c32dd7f2" kindref="member">pointer</ref><sp/>=<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1codepoint" kindref="compound">codepoint</ref>*;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="36" refid="classneforce_1_1utf8__iterator_1a59fa98affc9d6cba41294e24b741a73e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classneforce_1_1utf8__iterator_1a59fa98affc9d6cba41294e24b741a73e" kindref="member">difference_type</ref><sp/>=<sp/><ref refid="group___platform_dependent_types_1gab2c4bc5144496796ce8a7feed7b8ad58" kindref="member">ptrdiff_t</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="37" refid="classneforce_1_1utf8__iterator_1a041f57cf46f86f9f2ca5d3e7a19efda9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classneforce_1_1utf8__iterator_1a041f57cf46f86f9f2ca5d3e7a19efda9" kindref="member">iterator_category</ref><sp/>=<sp/><ref refid="structneforce_1_1forward__iterator__tag" kindref="compound">forward_iterator_tag</ref>;<sp/></highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref>*<sp/>data_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref>*<sp/>data_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>remaining_<sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>consumed_<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classcodepoint" kindref="compound">codepoint</ref><sp/>current_;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1codepoint" kindref="compound">codepoint</ref><sp/>current_;</highlight></codeline>
 <codeline lineno="44"><highlight class="normal"></highlight></codeline>
 <codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>decode_current()<sp/>noexcept<sp/>{</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>((data_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>&amp;&amp;<sp/>remaining_<sp/>&gt;<sp/>0)<sp/>{</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>pos<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_<sp/>=<sp/><ref refid="classcodepoint_1adf083ce51482394f0364326c9a85b4d7" kindref="member">codepoint::decode_utf8</ref>(data_,<sp/>pos,<sp/>remaining_);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_<sp/>=<sp/><ref refid="classneforce_1_1codepoint_1ab43cd2fd4c85db812bcb15fda1ead72d" kindref="member">codepoint::decode_utf8</ref>(data_,<sp/>pos,<sp/>remaining_);</highlight></codeline>
 <codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>consumed_<sp/>=<sp/>pos;</highlight></codeline>
 <codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_<sp/>=<sp/><ref refid="classcodepoint_1a279a0abba71583cab5b26e5e6760c491" kindref="member">codepoint::null</ref>();</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_<sp/>=<sp/><ref refid="classneforce_1_1codepoint_1af2a971f6c1348037af2f51c6aeb6820b" kindref="member">codepoint::null</ref>();</highlight></codeline>
 <codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>consumed_<sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="55"><highlight class="normal"></highlight></codeline>
 <codeline lineno="56"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="60" refid="classutf8__iterator_1ae9b656ea9e951569adc33f6a62a01889" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classutf8__iterator_1ae9b656ea9e951569adc33f6a62a01889" kindref="member">utf8_iterator</ref>()<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="60" refid="classneforce_1_1utf8__iterator_1add9883f63ae8daa66ddb267f35fb9f81" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1utf8__iterator_1add9883f63ae8daa66ddb267f35fb9f81" kindref="member">utf8_iterator</ref>()<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
 <codeline lineno="61"><highlight class="normal"></highlight></codeline>
-<codeline lineno="67" refid="classutf8__iterator_1ac8188f8cc74aedde496b185ee1b219a4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classutf8__iterator_1ae9b656ea9e951569adc33f6a62a01889" kindref="member">utf8_iterator</ref>(const<sp/><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref>*<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>remaining)<sp/>noexcept<sp/>:</highlight></codeline>
-<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>data_(<ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>),</highlight></codeline>
+<codeline lineno="67" refid="classneforce_1_1utf8__iterator_1a1b126da9a3db41bf856394fdf0eaf45f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1utf8__iterator_1add9883f63ae8daa66ddb267f35fb9f81" kindref="member">utf8_iterator</ref>(const<sp/><ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref>*<sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>remaining)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>data_(<ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>),</highlight></codeline>
 <codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>remaining_(remaining)<sp/>{</highlight></codeline>
 <codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>decode_current();</highlight></codeline>
 <codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="72"><highlight class="normal"></highlight></codeline>
-<codeline lineno="77" refid="classutf8__iterator_1a37ab825268d8ec51fc9d75de0c0db451" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classutf8__iterator_1a779e3cf0089b900eed1a2640e3f89b47" kindref="member">reference</ref><sp/><ref refid="classutf8__iterator_1a37ab825268d8ec51fc9d75de0c0db451" kindref="member">operator*</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>current_;<sp/>}</highlight></codeline>
+<codeline lineno="77" refid="classneforce_1_1utf8__iterator_1aa11330bd87dc4e7d09242cee3700eb65" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classneforce_1_1utf8__iterator_1a4baa2d4374cbe8c9a5a8fe10751c2b66" kindref="member">reference</ref><sp/><ref refid="classneforce_1_1utf8__iterator_1aa11330bd87dc4e7d09242cee3700eb65" kindref="member">operator*</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>current_;<sp/>}</highlight></codeline>
 <codeline lineno="78"><highlight class="normal"></highlight></codeline>
-<codeline lineno="83" refid="classutf8__iterator_1a9805550991b5d387dc8e893823b0a025" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classutf8__iterator_1ab8d42eb839e0cf5f5a02fcff7a3cc9c8" kindref="member">pointer</ref><sp/><ref refid="classutf8__iterator_1a9805550991b5d387dc8e893823b0a025" kindref="member">operator-&gt;</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>&amp;current_;<sp/>}</highlight></codeline>
+<codeline lineno="83" refid="classneforce_1_1utf8__iterator_1a66ce68f65666c5719fb15712468c863c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classneforce_1_1utf8__iterator_1a7dbdc93bd06f777d943e49f7c32dd7f2" kindref="member">pointer</ref><sp/><ref refid="classneforce_1_1utf8__iterator_1a66ce68f65666c5719fb15712468c863c" kindref="member">operator-&gt;</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>&amp;current_;<sp/>}</highlight></codeline>
 <codeline lineno="84"><highlight class="normal"></highlight></codeline>
-<codeline lineno="89" refid="classutf8__iterator_1a34a08c3e49aaa87cac92b8b1c8a31283" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classutf8__iterator_1ae9b656ea9e951569adc33f6a62a01889" kindref="member">utf8_iterator</ref>&amp;<sp/><ref refid="classutf8__iterator_1a34a08c3e49aaa87cac92b8b1c8a31283" kindref="member">operator++</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="89" refid="classneforce_1_1utf8__iterator_1ae086b875be3bac1029c9433709d8284c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1utf8__iterator_1add9883f63ae8daa66ddb267f35fb9f81" kindref="member">utf8_iterator</ref>&amp;<sp/><ref refid="classneforce_1_1utf8__iterator_1ae086b875be3bac1029c9433709d8284c" kindref="member">operator++</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
 <codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>((data_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>&amp;&amp;<sp/>remaining_<sp/>&gt;<sp/>0)<sp/>{</highlight></codeline>
 <codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data_<sp/>+=<sp/>consumed_;</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>remaining_<sp/>-=<sp/>_NEFORCE<sp/><ref refid="group___compare_algorithms_1gabf4803a4eaf181e17a6893b2aea9a4c5" kindref="member">min</ref>(remaining_,<sp/>consumed_);</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>remaining_<sp/>-=<sp/>_NEFORCE<sp/><ref refid="group___compare_algorithms_1ga7bddcf59f3f004edc5551486bdbf5595" kindref="member">min</ref>(remaining_,<sp/>consumed_);</highlight></codeline>
 <codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>decode_current();</highlight></codeline>
 <codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="97"><highlight class="normal"></highlight></codeline>
-<codeline lineno="102" refid="classutf8__iterator_1aabebff8180127fb5061116ecfa471535" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classutf8__iterator_1ae9b656ea9e951569adc33f6a62a01889" kindref="member">utf8_iterator</ref><sp/><ref refid="classutf8__iterator_1aabebff8180127fb5061116ecfa471535" kindref="member">operator++</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classutf8__iterator_1ae9b656ea9e951569adc33f6a62a01889" kindref="member">utf8_iterator</ref><sp/>tmp<sp/>=<sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="102" refid="classneforce_1_1utf8__iterator_1a0a206bbe15c2caae1492dc0a32dce5fe" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1utf8__iterator_1add9883f63ae8daa66ddb267f35fb9f81" kindref="member">utf8_iterator</ref><sp/><ref refid="classneforce_1_1utf8__iterator_1a0a206bbe15c2caae1492dc0a32dce5fe" kindref="member">operator++</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1utf8__iterator_1add9883f63ae8daa66ddb267f35fb9f81" kindref="member">utf8_iterator</ref><sp/>tmp<sp/>=<sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>++*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(tmp);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" kindref="member">move</ref>(tmp);</highlight></codeline>
 <codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="107"><highlight class="normal"></highlight></codeline>
-<codeline lineno="113" refid="classutf8__iterator_1a2dd92b407510a5e403ac4690d1a26e9f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classutf8__iterator_1a2dd92b407510a5e403ac4690d1a26e9f" kindref="member">operator==</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classutf8__iterator_1ae9b656ea9e951569adc33f6a62a01889" kindref="member">utf8_iterator</ref>&amp;<sp/>other)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="113" refid="classneforce_1_1utf8__iterator_1aa986fac0ad5d56e40958ba58453992c5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1utf8__iterator_1aa986fac0ad5d56e40958ba58453992c5" kindref="member">operator==</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1utf8__iterator_1add9883f63ae8daa66ddb267f35fb9f81" kindref="member">utf8_iterator</ref>&amp;<sp/>other)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(remaining_<sp/>==<sp/>0<sp/>&amp;&amp;<sp/>other.remaining_<sp/>==<sp/>0)<sp/>{</highlight></codeline>
 <codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>data_<sp/>==<sp/>other.data_<sp/>&amp;&amp;<sp/>remaining_<sp/>==<sp/>other.remaining_;</highlight></codeline>
 <codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="119"><highlight class="normal"></highlight></codeline>
-<codeline lineno="125" refid="classutf8__iterator_1aa995261e03439b16ee8c5d89023c2474" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classutf8__iterator_1aa995261e03439b16ee8c5d89023c2474" kindref="member">operator!=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classutf8__iterator_1ae9b656ea9e951569adc33f6a62a01889" kindref="member">utf8_iterator</ref>&amp;<sp/>other)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!(*</highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>==<sp/>other);<sp/>}</highlight></codeline>
+<codeline lineno="125" refid="classneforce_1_1utf8__iterator_1a57aa5a34ac79221e0ce0ae79da487120" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1utf8__iterator_1a57aa5a34ac79221e0ce0ae79da487120" kindref="member">operator!=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1utf8__iterator_1add9883f63ae8daa66ddb267f35fb9f81" kindref="member">utf8_iterator</ref>&amp;<sp/>other)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!(*</highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>==<sp/>other);<sp/>}</highlight></codeline>
 <codeline lineno="126"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="127"><highlight class="normal"></highlight></codeline>
-<codeline lineno="134" refid="classutf8__range" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classutf8__range_1a50800f8933c2ebee4818869575e7eba3" kindref="member">utf8_range</ref><sp/>{</highlight></codeline>
-<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref>*<sp/>data_;<sp/></highlight></codeline>
+<codeline lineno="134" refid="classneforce_1_1utf8__range" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classneforce_1_1utf8__range_1a3284109fa2a88ca5d7df5b57cc0f4386" kindref="member">utf8_range</ref><sp/>{</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref>*<sp/>data_;<sp/></highlight></codeline>
 <codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>size_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="137"><highlight class="normal"></highlight></codeline>
 <codeline lineno="138"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="143" refid="classutf8__range_1a50800f8933c2ebee4818869575e7eba3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classutf8__range_1a50800f8933c2ebee4818869575e7eba3" kindref="member">utf8_range</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>sv)<sp/>noexcept<sp/>:</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>data_(</highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="normal"><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref>*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(sv.data())),</highlight></codeline>
+<codeline lineno="143" refid="classneforce_1_1utf8__range_1a3284109fa2a88ca5d7df5b57cc0f4386" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1utf8__range_1a3284109fa2a88ca5d7df5b57cc0f4386" kindref="member">utf8_range</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/>sv)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>data_(</highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="normal"><ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref>*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(sv.data())),</highlight></codeline>
 <codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/>size_(sv.size())<sp/>{}</highlight></codeline>
 <codeline lineno="146"><highlight class="normal"></highlight></codeline>
-<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classutf8__range_1a50800f8933c2ebee4818869575e7eba3" kindref="member">utf8_range</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref>*<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" kindref="member">size</ref>)<sp/>noexcept<sp/>:</highlight></codeline>
-<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/>data_(<ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>),</highlight></codeline>
-<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/>size_(<ref refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" kindref="member">size</ref>)<sp/>{}</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1utf8__range" kindref="compound">utf8_range</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref>*<sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga69955a26617401117eaf53fa82162e2b" kindref="member">size</ref>)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/>data_(<ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>),</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/>size_(<ref refid="group___type_erasure_functions_1ga69955a26617401117eaf53fa82162e2b" kindref="member">size</ref>)<sp/>{}</highlight></codeline>
 <codeline lineno="150"><highlight class="normal"></highlight></codeline>
-<codeline lineno="155" refid="classutf8__range_1affb37a6b0ff5749969a880ac42cc905d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classutf8__iterator" kindref="compound">utf8_iterator</ref><sp/><ref refid="classutf8__range_1affb37a6b0ff5749969a880ac42cc905d" kindref="member">begin</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{data_,<sp/>size_};<sp/>}</highlight></codeline>
+<codeline lineno="155" refid="classneforce_1_1utf8__range_1a3b22c70c911c877d3a6aed29a7096d3a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classneforce_1_1utf8__iterator" kindref="compound">utf8_iterator</ref><sp/><ref refid="classneforce_1_1utf8__range_1a3b22c70c911c877d3a6aed29a7096d3a" kindref="member">begin</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{data_,<sp/>size_};<sp/>}</highlight></codeline>
 <codeline lineno="156"><highlight class="normal"></highlight></codeline>
-<codeline lineno="161" refid="classutf8__range_1aa7c61754656ffaf7a4fd2e1b3d80dd05" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classutf8__iterator" kindref="compound">utf8_iterator</ref><sp/><ref refid="classutf8__range_1aa7c61754656ffaf7a4fd2e1b3d80dd05" kindref="member">end</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/>0};<sp/>}</highlight></codeline>
+<codeline lineno="161" refid="classneforce_1_1utf8__range_1a327d7ca765c38234351c0000992f9a7c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classneforce_1_1utf8__iterator" kindref="compound">utf8_iterator</ref><sp/><ref refid="classneforce_1_1utf8__range_1a327d7ca765c38234351c0000992f9a7c" kindref="member">end</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/>0};<sp/>}</highlight></codeline>
 <codeline lineno="162"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="163"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>UtfIterator</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="165"><highlight class="normal"></highlight></codeline>

@@ -1,6 +1,6 @@
 var insert__iterator_8hpp =
 [
-    [ "make_back_inserter", "group___insert_iterators.html#ga1e7fa8109047aa53259c909f1f66d748", null ],
-    [ "make_front_inserter", "group___insert_iterators.html#ga9b0b198c86e314ff822fb9c062f73214", null ],
-    [ "make_inserter", "group___insert_iterators.html#ga4ab2f0dc34dfc1125c55a25aa9ec7163", null ]
+    [ "neforce::make_back_inserter", "group___insert_iterators.html#gadef0f0ee22d31868b6ef5c2f2a2e6d76", null ],
+    [ "neforce::make_front_inserter", "group___insert_iterators.html#gadd4ff1fb111d41e5e51c5255ad249725", null ],
+    [ "neforce::make_inserter", "group___insert_iterators.html#gaadce87bd0f43d9f9d308d8abda7c732e", null ]
 ];

@@ -1,0 +1,819 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::share_memory类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1share__memory.html','','classneforce_1_1share__memory-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::share_memory类 参考<div class="ingroups"><a class="el" href="group___share_memory.html">共享内存</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>共享内存管理类  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a67640720ecd3c83125ec8e2f56b0c7f0" id="r_a67640720ecd3c83125ec8e2f56b0c7f0"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a67640720ecd3c83125ec8e2f56b0c7f0">access_mode</a> { <a class="el" href="#a67640720ecd3c83125ec8e2f56b0c7f0abefe72871b2de8f4f0e20108517e31fe">read_only</a> = 0x01
+, <a class="el" href="#a67640720ecd3c83125ec8e2f56b0c7f0a06ad287ea83b37a6f9db3d8d10d72c8f">read_write</a> = 0x02
+ }</td></tr>
+<tr class="memdesc:a67640720ecd3c83125ec8e2f56b0c7f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">访问模式枚举  <a href="#a67640720ecd3c83125ec8e2f56b0c7f0">更多...</a><br /></td></tr>
+<tr class="memitem:af5d07dfc9c0b67ef83b4f32850f8e4c4" id="r_af5d07dfc9c0b67ef83b4f32850f8e4c4"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#af5d07dfc9c0b67ef83b4f32850f8e4c4">open_mode</a> { <a class="el" href="#af5d07dfc9c0b67ef83b4f32850f8e4c4a1740b9b2eb7d1bfb828b321c41524e12">create_only</a>
+, <a class="el" href="#af5d07dfc9c0b67ef83b4f32850f8e4c4a3cd050e22f6601441356cc4578b66999">open_only</a>
+, <a class="el" href="#af5d07dfc9c0b67ef83b4f32850f8e4c4af7a6e5d182e5d5a2e09302a5c3671daf">open_or_create</a>
+ }</td></tr>
+<tr class="memdesc:af5d07dfc9c0b67ef83b4f32850f8e4c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">打开模式枚举  <a href="#af5d07dfc9c0b67ef83b4f32850f8e4c4">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:ad05fc0e3debafa5932122f12d7088314" id="r_ad05fc0e3debafa5932122f12d7088314"><td class="memItemLeft"><a id="ad05fc0e3debafa5932122f12d7088314" name="ad05fc0e3debafa5932122f12d7088314"></a>
+&#160;</td><td class="memItemRight"><b>share_memory</b> () noexcept</td></tr>
+<tr class="memdesc:ad05fc0e3debafa5932122f12d7088314"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数 <br /></td></tr>
+<tr class="memitem:a5cfeac85f7e1e112e4a04800e5d0c56c" id="r_a5cfeac85f7e1e112e4a04800e5d0c56c"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a5cfeac85f7e1e112e4a04800e5d0c56c">share_memory</a> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;<a class="el" href="#ac54d5432d877ea78c21b6d553f56fa39">name</a>, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> <a class="el" href="#a7bf11bf6afcbc7fa9fd7d48034b9ca68">size</a>, <a class="el" href="#af5d07dfc9c0b67ef83b4f32850f8e4c4">open_mode</a> mode=<a class="el" href="#af5d07dfc9c0b67ef83b4f32850f8e4c4af7a6e5d182e5d5a2e09302a5c3671daf">open_mode::open_or_create</a>, <a class="el" href="#a67640720ecd3c83125ec8e2f56b0c7f0">access_mode</a> access=<a class="el" href="#a67640720ecd3c83125ec8e2f56b0c7f0a06ad287ea83b37a6f9db3d8d10d72c8f">access_mode::read_write</a>)</td></tr>
+<tr class="memdesc:a5cfeac85f7e1e112e4a04800e5d0c56c"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:aea3235a76aa71f20d7c1f65147bb1ecd" id="r_aea3235a76aa71f20d7c1f65147bb1ecd"><td class="memItemLeft"><a id="aea3235a76aa71f20d7c1f65147bb1ecd" name="aea3235a76aa71f20d7c1f65147bb1ecd"></a>
+&#160;</td><td class="memItemRight"><b>share_memory</b> (share_memory &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:aea3235a76aa71f20d7c1f65147bb1ecd"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造函数 <br /></td></tr>
+<tr class="memitem:a0b664b721f7314c7616b24efdddb258c" id="r_a0b664b721f7314c7616b24efdddb258c"><td class="memItemLeft"><a id="a0b664b721f7314c7616b24efdddb258c" name="a0b664b721f7314c7616b24efdddb258c"></a>
+<a class="el" href="#ad05fc0e3debafa5932122f12d7088314">share_memory</a> &amp;&#160;</td><td class="memItemRight"><b>operator=</b> (<a class="el" href="#ad05fc0e3debafa5932122f12d7088314">share_memory</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a0b664b721f7314c7616b24efdddb258c"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值运算符 <br /></td></tr>
+<tr class="memitem:aef11a5beb8a3d157937e104a28fc71d2" id="r_aef11a5beb8a3d157937e104a28fc71d2"><td class="memItemLeft"><a id="aef11a5beb8a3d157937e104a28fc71d2" name="aef11a5beb8a3d157937e104a28fc71d2"></a>
+&#160;</td><td class="memItemRight"><b>~share_memory</b> ()</td></tr>
+<tr class="memdesc:aef11a5beb8a3d157937e104a28fc71d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数 <br /></td></tr>
+<tr class="memitem:ad60451343027d6eb23933ad62c834bc9" id="r_ad60451343027d6eb23933ad62c834bc9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad60451343027d6eb23933ad62c834bc9">open</a> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;<a class="el" href="#ac54d5432d877ea78c21b6d553f56fa39">name</a>, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> <a class="el" href="#a7bf11bf6afcbc7fa9fd7d48034b9ca68">size</a>, <a class="el" href="#af5d07dfc9c0b67ef83b4f32850f8e4c4">open_mode</a> mode=<a class="el" href="#af5d07dfc9c0b67ef83b4f32850f8e4c4af7a6e5d182e5d5a2e09302a5c3671daf">open_mode::open_or_create</a>, <a class="el" href="#a67640720ecd3c83125ec8e2f56b0c7f0">access_mode</a> access=<a class="el" href="#a67640720ecd3c83125ec8e2f56b0c7f0a06ad287ea83b37a6f9db3d8d10d72c8f">access_mode::read_write</a>)</td></tr>
+<tr class="memdesc:ad60451343027d6eb23933ad62c834bc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">打开或创建共享内存  <br /></td></tr>
+<tr class="memitem:a333ba5b71d374da61e27fe4898325d2c" id="r_a333ba5b71d374da61e27fe4898325d2c"><td class="memItemLeft"><a id="a333ba5b71d374da61e27fe4898325d2c" name="a333ba5b71d374da61e27fe4898325d2c"></a>
+void&#160;</td><td class="memItemRight"><b>close</b> () noexcept</td></tr>
+<tr class="memdesc:a333ba5b71d374da61e27fe4898325d2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">关闭共享内存 <br /></td></tr>
+<tr class="memitem:a6644183ac4f64cc29c191c7c0e5c394e" id="r_a6644183ac4f64cc29c191c7c0e5c394e"><td class="memItemLeft">void *&#160;</td><td class="memItemRight"><a class="el" href="#a6644183ac4f64cc29c191c7c0e5c394e">map</a> (<a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> offset=0, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> length=0)</td></tr>
+<tr class="memdesc:a6644183ac4f64cc29c191c7c0e5c394e"><td class="mdescLeft">&#160;</td><td class="mdescRight">映射共享内存到进程地址空间  <br /></td></tr>
+<tr class="memitem:a9eb9aecdbd1007ec6d7a1a6d1fc2ed56" id="r_a9eb9aecdbd1007ec6d7a1a6d1fc2ed56"><td class="memItemLeft"><a id="a9eb9aecdbd1007ec6d7a1a6d1fc2ed56" name="a9eb9aecdbd1007ec6d7a1a6d1fc2ed56"></a>
+void&#160;</td><td class="memItemRight"><b>unmap</b> () noexcept</td></tr>
+<tr class="memdesc:a9eb9aecdbd1007ec6d7a1a6d1fc2ed56"><td class="mdescLeft">&#160;</td><td class="mdescRight">取消映射 <br /></td></tr>
+<tr class="memitem:a576ece2746dd3fb268419678b2848c1d" id="r_a576ece2746dd3fb268419678b2848c1d"><td class="memItemLeft">void *&#160;</td><td class="memItemRight"><a class="el" href="#a576ece2746dd3fb268419678b2848c1d">data</a> () const noexcept</td></tr>
+<tr class="memdesc:a576ece2746dd3fb268419678b2848c1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取映射地址  <br /></td></tr>
+<tr class="memitem:a67d5d92f02bf912b2158756475b62502" id="r_a67d5d92f02bf912b2158756475b62502"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a67d5d92f02bf912b2158756475b62502 template"><td class="memItemLeft">T *&#160;</td><td class="memItemRight"><a class="el" href="#a67d5d92f02bf912b2158756475b62502">data</a> () const noexcept</td></tr>
+<tr class="memdesc:a67d5d92f02bf912b2158756475b62502"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取映射地址（类型转换版本）  <br /></td></tr>
+<tr class="memitem:a7bf11bf6afcbc7fa9fd7d48034b9ca68" id="r_a7bf11bf6afcbc7fa9fd7d48034b9ca68"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7bf11bf6afcbc7fa9fd7d48034b9ca68">size</a> () const noexcept</td></tr>
+<tr class="memdesc:a7bf11bf6afcbc7fa9fd7d48034b9ca68"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取共享内存大小  <br /></td></tr>
+<tr class="memitem:aaffdf2cd826dfd546a577ff6f94cd40d" id="r_aaffdf2cd826dfd546a577ff6f94cd40d"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#aaffdf2cd826dfd546a577ff6f94cd40d">mapped_size</a> () const noexcept</td></tr>
+<tr class="memdesc:aaffdf2cd826dfd546a577ff6f94cd40d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取映射大小  <br /></td></tr>
+<tr class="memitem:ac54d5432d877ea78c21b6d553f56fa39" id="r_ac54d5432d877ea78c21b6d553f56fa39"><td class="memItemLeft">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ac54d5432d877ea78c21b6d553f56fa39">name</a> () const noexcept</td></tr>
+<tr class="memdesc:ac54d5432d877ea78c21b6d553f56fa39"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取共享内存名称  <br /></td></tr>
+<tr class="memitem:a2354371eeea5bd49d33fc5c3bc6b833f" id="r_a2354371eeea5bd49d33fc5c3bc6b833f"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a2354371eeea5bd49d33fc5c3bc6b833f">is_open</a> () const noexcept</td></tr>
+<tr class="memdesc:a2354371eeea5bd49d33fc5c3bc6b833f"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否已打开  <br /></td></tr>
+<tr class="memitem:ac41ef4dfe382f0bd5b84373f3e222217" id="r_ac41ef4dfe382f0bd5b84373f3e222217"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ac41ef4dfe382f0bd5b84373f3e222217">is_mapped</a> () const noexcept</td></tr>
+<tr class="memdesc:ac41ef4dfe382f0bd5b84373f3e222217"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否已映射  <br /></td></tr>
+<tr class="memitem:a1a7c5e3784804e0d181a79f7ce93be06" id="r_a1a7c5e3784804e0d181a79f7ce93be06"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a1a7c5e3784804e0d181a79f7ce93be06">flush</a> (bool <a class="el" href="group___async.html#ga3b100cc284ba1351140d99912b389764">async</a>=false)</td></tr>
+<tr class="memdesc:a1a7c5e3784804e0d181a79f7ce93be06"><td class="mdescLeft">&#160;</td><td class="mdescRight">刷新共享内存到磁盘  <br /></td></tr>
+<tr class="memitem:a3af70c9f106ca517abcfc2063ca6a4fe" id="r_a3af70c9f106ca517abcfc2063ca6a4fe"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a3af70c9f106ca517abcfc2063ca6a4fe">grow</a> (<a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> new_size)</td></tr>
+<tr class="memdesc:a3af70c9f106ca517abcfc2063ca6a4fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">扩增共享内存大小  <br /></td></tr>
+<tr class="memitem:a9160f3de9869b7f039c593dfee0970ad" id="r_a9160f3de9869b7f039c593dfee0970ad"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a9160f3de9869b7f039c593dfee0970ad">lock</a> ()</td></tr>
+<tr class="memdesc:a9160f3de9869b7f039c593dfee0970ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取进程间互斥锁  <br /></td></tr>
+<tr class="memitem:ae9914aa7212b4c707308c400ccc5d0f9" id="r_ae9914aa7212b4c707308c400ccc5d0f9"><td class="memItemLeft"><a id="ae9914aa7212b4c707308c400ccc5d0f9" name="ae9914aa7212b4c707308c400ccc5d0f9"></a>
+void&#160;</td><td class="memItemRight"><b>unlock</b> ()</td></tr>
+<tr class="memdesc:ae9914aa7212b4c707308c400ccc5d0f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">释放进程间互斥锁 <br /></td></tr>
+<tr class="memitem:a2058281efe107029fedbf5441d72d0b9" id="r_a2058281efe107029fedbf5441d72d0b9"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a2058281efe107029fedbf5441d72d0b9">try_lock</a> ()</td></tr>
+<tr class="memdesc:a2058281efe107029fedbf5441d72d0b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">尝试获取进程间互斥锁  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静态 Public 成员函数</h2></td></tr>
+<tr class="memitem:a76203cda05c5e53cf8f8dd0152692e5e" id="r_a76203cda05c5e53cf8f8dd0152692e5e"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#a76203cda05c5e53cf8f8dd0152692e5e">remove</a> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;<a class="el" href="#ac54d5432d877ea78c21b6d553f56fa39">name</a>)</td></tr>
+<tr class="memdesc:a76203cda05c5e53cf8f8dd0152692e5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除共享内存对象  <br /></td></tr>
+<tr class="memitem:ad517f8a9284aedbe76678c0e93a8c605" id="r_ad517f8a9284aedbe76678c0e93a8c605"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#ad517f8a9284aedbe76678c0e93a8c605">exists</a> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;<a class="el" href="#ac54d5432d877ea78c21b6d553f56fa39">name</a>)</td></tr>
+<tr class="memdesc:ad517f8a9284aedbe76678c0e93a8c605"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查共享内存是否存在  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>共享内存管理类 </p>
+<p>提供跨进程的共享内存创建、映射和访问功能。 </p>
+
+<p class="definition">在文件 <a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a> 第 <a class="el" href="share__memory_8hpp_source.html#l00051">51</a> 行定义.</p>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
+<a id="a67640720ecd3c83125ec8e2f56b0c7f0" name="a67640720ecd3c83125ec8e2f56b0c7f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67640720ecd3c83125ec8e2f56b0c7f0">&#9670;&#160;</a></span>access_mode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a67640720ecd3c83125ec8e2f56b0c7f0">neforce::share_memory::access_mode</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>访问模式枚举 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a67640720ecd3c83125ec8e2f56b0c7f0abefe72871b2de8f4f0e20108517e31fe" name="a67640720ecd3c83125ec8e2f56b0c7f0abefe72871b2de8f4f0e20108517e31fe"></a>read_only&#160;</td><td class="fielddoc"><p>只读模式 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a67640720ecd3c83125ec8e2f56b0c7f0a06ad287ea83b37a6f9db3d8d10d72c8f" name="a67640720ecd3c83125ec8e2f56b0c7f0a06ad287ea83b37a6f9db3d8d10d72c8f"></a>read_write&#160;</td><td class="fielddoc"><p>读写模式 </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a> 第 <a class="el" href="share__memory_8hpp_source.html#l00057">57</a> 行定义.</p>
+
+</div>
+</div>
+<a id="af5d07dfc9c0b67ef83b4f32850f8e4c4" name="af5d07dfc9c0b67ef83b4f32850f8e4c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5d07dfc9c0b67ef83b4f32850f8e4c4">&#9670;&#160;</a></span>open_mode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#af5d07dfc9c0b67ef83b4f32850f8e4c4">neforce::share_memory::open_mode</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>打开模式枚举 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="af5d07dfc9c0b67ef83b4f32850f8e4c4a1740b9b2eb7d1bfb828b321c41524e12" name="af5d07dfc9c0b67ef83b4f32850f8e4c4a1740b9b2eb7d1bfb828b321c41524e12"></a>create_only&#160;</td><td class="fielddoc"><p>仅创建（已存在则失败） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af5d07dfc9c0b67ef83b4f32850f8e4c4a3cd050e22f6601441356cc4578b66999" name="af5d07dfc9c0b67ef83b4f32850f8e4c4a3cd050e22f6601441356cc4578b66999"></a>open_only&#160;</td><td class="fielddoc"><p>仅打开（不存在则失败） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af5d07dfc9c0b67ef83b4f32850f8e4c4af7a6e5d182e5d5a2e09302a5c3671daf" name="af5d07dfc9c0b67ef83b4f32850f8e4c4af7a6e5d182e5d5a2e09302a5c3671daf"></a>open_or_create&#160;</td><td class="fielddoc"><p>打开或创建 </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a> 第 <a class="el" href="share__memory_8hpp_source.html#l00066">66</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="a5cfeac85f7e1e112e4a04800e5d0c56c" name="a5cfeac85f7e1e112e4a04800e5d0c56c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cfeac85f7e1e112e4a04800e5d0c56c">&#9670;&#160;</a></span>share_memory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">neforce::share_memory::share_memory </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a></td>          <td class="paramname"><span class="paramname"><em>size</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#af5d07dfc9c0b67ef83b4f32850f8e4c4">open_mode</a></td>          <td class="paramname"><span class="paramname"><em>mode</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#af5d07dfc9c0b67ef83b4f32850f8e4c4af7a6e5d182e5d5a2e09302a5c3671daf">open_mode::open_or_create</a></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a67640720ecd3c83125ec8e2f56b0c7f0">access_mode</a></td>          <td class="paramname"><span class="paramname"><em>access</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a67640720ecd3c83125ec8e2f56b0c7f0a06ad287ea83b37a6f9db3d8d10d72c8f">access_mode::read_write</a></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel explicit">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>共享内存名称 </td></tr>
+    <tr><td class="paramname">size</td><td>共享内存大小（字节） </td></tr>
+    <tr><td class="paramname">mode</td><td>打开模式 </td></tr>
+    <tr><td class="paramname">access</td><td>访问模式 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1share__memory__exception.html" title="共享内存操作异常">share_memory_exception</a></td><td>创建或打开失败时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="share__memory_8hpp_source.html#l00187">name()</a>, <a class="el" href="#ad05fc0e3debafa5932122f12d7088314">share_memory()</a> , 以及 <a class="el" href="share__memory_8hpp_source.html#l00175">size()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a67d5d92f02bf912b2158756475b62502" name="a67d5d92f02bf912b2158756475b62502"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67d5d92f02bf912b2158756475b62502">&#9670;&#160;</a></span>data() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T * neforce::share_memory::data </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取映射地址（类型转换版本） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>目标类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>类型转换后的地址 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a> 第 <a class="el" href="share__memory_8hpp_source.html#l00167">167</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a576ece2746dd3fb268419678b2848c1d" name="a576ece2746dd3fb268419678b2848c1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a576ece2746dd3fb268419678b2848c1d">&#9670;&#160;</a></span>data() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * neforce::share_memory::data </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取映射地址 </p>
+<dl class="section return"><dt>返回</dt><dd>映射地址，未映射则返回nullptr </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a> 第 <a class="el" href="share__memory_8hpp_source.html#l00159">159</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="share__memory_8hpp_source.html#l00159">data()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="share__memory_8hpp_source.html#l00159">data()</a>.</p>
+
+</div>
+</div>
+<a id="ad517f8a9284aedbe76678c0e93a8c605" name="ad517f8a9284aedbe76678c0e93a8c605"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad517f8a9284aedbe76678c0e93a8c605">&#9670;&#160;</a></span>exists()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::share_memory::exists </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查共享内存是否存在 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>共享内存名称 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否存在 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="share__memory_8hpp_source.html#l00187">name()</a>.</p>
+
+</div>
+</div>
+<a id="a1a7c5e3784804e0d181a79f7ce93be06" name="a1a7c5e3784804e0d181a79f7ce93be06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a7c5e3784804e0d181a79f7ce93be06">&#9670;&#160;</a></span>flush()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::share_memory::flush </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>async</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>刷新共享内存到磁盘 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">async</td><td>是否异步刷新 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否成功 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="async_8hpp_source.html#l00043">neforce::async()</a>.</p>
+
+</div>
+</div>
+<a id="a3af70c9f106ca517abcfc2063ca6a4fe" name="a3af70c9f106ca517abcfc2063ca6a4fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3af70c9f106ca517abcfc2063ca6a4fe">&#9670;&#160;</a></span>grow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::share_memory::grow </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a></td>          <td class="paramname"><span class="paramname"><em>new_size</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>扩增共享内存大小 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">new_size</td><td>新的大小（字节），必须大于当前大小 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1share__memory__exception.html" title="共享内存操作异常">share_memory_exception</a></td><td>扩增失败时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section warning"><dt>警告</dt><dd>调用前必须先 <a class="el" href="#a6644183ac4f64cc29c191c7c0e5c394e" title="映射共享内存到进程地址空间">map()</a> </dd></dl>
+
+</div>
+</div>
+<a id="ac41ef4dfe382f0bd5b84373f3e222217" name="ac41ef4dfe382f0bd5b84373f3e222217"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac41ef4dfe382f0bd5b84373f3e222217">&#9670;&#160;</a></span>is_mapped()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::share_memory::is_mapped </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查是否已映射 </p>
+<dl class="section return"><dt>返回</dt><dd>是否已映射 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a> 第 <a class="el" href="share__memory_8hpp_source.html#l00199">199</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2354371eeea5bd49d33fc5c3bc6b833f" name="a2354371eeea5bd49d33fc5c3bc6b833f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2354371eeea5bd49d33fc5c3bc6b833f">&#9670;&#160;</a></span>is_open()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::share_memory::is_open </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查是否已打开 </p>
+<dl class="section return"><dt>返回</dt><dd>是否已打开 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a> 第 <a class="el" href="share__memory_8hpp_source.html#l00193">193</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a9160f3de9869b7f039c593dfee0970ad" name="a9160f3de9869b7f039c593dfee0970ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9160f3de9869b7f039c593dfee0970ad">&#9670;&#160;</a></span>lock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::share_memory::lock </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>获取进程间互斥锁 </p>
+<dl class="section warning"><dt>警告</dt><dd>调用前必须先 <a class="el" href="#a6644183ac4f64cc29c191c7c0e5c394e" title="映射共享内存到进程地址空间">map()</a></dd></dl>
+<p>阻塞直到锁可用，支持跨进程同步。 </p>
+
+</div>
+</div>
+<a id="a6644183ac4f64cc29c191c7c0e5c394e" name="a6644183ac4f64cc29c191c7c0e5c394e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6644183ac4f64cc29c191c7c0e5c394e">&#9670;&#160;</a></span>map()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * neforce::share_memory::map </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a></td>          <td class="paramname"><span class="paramname"><em>offset</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a></td>          <td class="paramname"><span class="paramname"><em>length</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>映射共享内存到进程地址空间 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">offset</td><td>映射偏移量（字节） </td></tr>
+    <tr><td class="paramname">length</td><td>映射长度（字节，0表示全部） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>映射地址 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1share__memory__exception.html" title="共享内存操作异常">share_memory_exception</a></td><td>映射失败时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#a6644183ac4f64cc29c191c7c0e5c394e">map()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a6644183ac4f64cc29c191c7c0e5c394e">map()</a>.</p>
+
+</div>
+</div>
+<a id="aaffdf2cd826dfd546a577ff6f94cd40d" name="aaffdf2cd826dfd546a577ff6f94cd40d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaffdf2cd826dfd546a577ff6f94cd40d">&#9670;&#160;</a></span>mapped_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> neforce::share_memory::mapped_size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取映射大小 </p>
+<dl class="section return"><dt>返回</dt><dd>映射大小（字节） </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a> 第 <a class="el" href="share__memory_8hpp_source.html#l00181">181</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ac54d5432d877ea78c21b6d553f56fa39" name="ac54d5432d877ea78c21b6d553f56fa39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac54d5432d877ea78c21b6d553f56fa39">&#9670;&#160;</a></span>name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp; neforce::share_memory::name </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取共享内存名称 </p>
+<dl class="section return"><dt>返回</dt><dd>共享内存名称 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a> 第 <a class="el" href="share__memory_8hpp_source.html#l00187">187</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ad517f8a9284aedbe76678c0e93a8c605">exists()</a>, <a class="el" href="#ad60451343027d6eb23933ad62c834bc9">open()</a>, <a class="el" href="#a76203cda05c5e53cf8f8dd0152692e5e">remove()</a> , 以及 <a class="el" href="#a5cfeac85f7e1e112e4a04800e5d0c56c">share_memory()</a>.</p>
+
+</div>
+</div>
+<a id="ad60451343027d6eb23933ad62c834bc9" name="ad60451343027d6eb23933ad62c834bc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad60451343027d6eb23933ad62c834bc9">&#9670;&#160;</a></span>open()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::share_memory::open </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a></td>          <td class="paramname"><span class="paramname"><em>size</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#af5d07dfc9c0b67ef83b4f32850f8e4c4">open_mode</a></td>          <td class="paramname"><span class="paramname"><em>mode</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#af5d07dfc9c0b67ef83b4f32850f8e4c4af7a6e5d182e5d5a2e09302a5c3671daf">open_mode::open_or_create</a></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a67640720ecd3c83125ec8e2f56b0c7f0">access_mode</a></td>          <td class="paramname"><span class="paramname"><em>access</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a67640720ecd3c83125ec8e2f56b0c7f0a06ad287ea83b37a6f9db3d8d10d72c8f">access_mode::read_write</a></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>打开或创建共享内存 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>共享内存名称 </td></tr>
+    <tr><td class="paramname">size</td><td>共享内存大小（字节） </td></tr>
+    <tr><td class="paramname">mode</td><td>打开模式 </td></tr>
+    <tr><td class="paramname">access</td><td>访问模式 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1share__memory__exception.html" title="共享内存操作异常">share_memory_exception</a></td><td>操作失败时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="share__memory_8hpp_source.html#l00187">name()</a>, <a class="el" href="#ad60451343027d6eb23933ad62c834bc9">open()</a> , 以及 <a class="el" href="share__memory_8hpp_source.html#l00175">size()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ad60451343027d6eb23933ad62c834bc9">open()</a>.</p>
+
+</div>
+</div>
+<a id="a76203cda05c5e53cf8f8dd0152692e5e" name="a76203cda05c5e53cf8f8dd0152692e5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76203cda05c5e53cf8f8dd0152692e5e">&#9670;&#160;</a></span>remove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::share_memory::remove </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除共享内存对象 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>共享内存名称 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否成功删除 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>即使关闭句柄，如果还有其他进程持有句柄，对象仍会存在 可以尝试打开以检查是否真的被移除 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="share__memory_8hpp_source.html#l00187">name()</a>.</p>
+
+</div>
+</div>
+<a id="a7bf11bf6afcbc7fa9fd7d48034b9ca68" name="a7bf11bf6afcbc7fa9fd7d48034b9ca68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bf11bf6afcbc7fa9fd7d48034b9ca68">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> neforce::share_memory::size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取共享内存大小 </p>
+<dl class="section return"><dt>返回</dt><dd>共享内存大小（字节） </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a> 第 <a class="el" href="share__memory_8hpp_source.html#l00175">175</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ad60451343027d6eb23933ad62c834bc9">open()</a> , 以及 <a class="el" href="#a5cfeac85f7e1e112e4a04800e5d0c56c">share_memory()</a>.</p>
+
+</div>
+</div>
+<a id="a2058281efe107029fedbf5441d72d0b9" name="a2058281efe107029fedbf5441d72d0b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2058281efe107029fedbf5441d72d0b9">&#9670;&#160;</a></span>try_lock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::share_memory::try_lock </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>尝试获取进程间互斥锁 </p>
+<dl class="section return"><dt>返回</dt><dd>是否成功获取锁 </dd></dl>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><a href="classneforce_1_1share__memory.html">share_memory</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

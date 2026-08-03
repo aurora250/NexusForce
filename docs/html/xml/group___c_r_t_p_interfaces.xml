@@ -3,32 +3,33 @@
   <compounddef id="group___c_r_t_p_interfaces" kind="group">
     <compoundname>CRTPInterfaces</compoundname>
     <title>CRTP接口</title>
-    <innerclass refid="structicharacter" prot="public">icharacter</innerclass>
-    <innerclass refid="structicollector" prot="public">icollector</innerclass>
-    <innerclass refid="structihashable" prot="public">ihashable</innerclass>
-    <innerclass refid="structicomparable" prot="public">icomparable</innerclass>
-    <innerclass refid="structicommon" prot="public">icommon</innerclass>
-    <innerclass refid="structiiterator" prot="public">iiterator</innerclass>
-    <innerclass refid="structiarithmetic" prot="public">iarithmetic</innerclass>
-    <innerclass refid="structibinary" prot="public">ibinary</innerclass>
-    <innerclass refid="structiobject" prot="public">iobject</innerclass>
-    <innerclass refid="structipackage" prot="public">ipackage</innerclass>
-    <innerclass refid="structistringify" prot="public">istringify</innerclass>
+    <innerclass refid="structneforce_1_1icharacter" prot="public">neforce::icharacter</innerclass>
+    <innerclass refid="structneforce_1_1icollector" prot="public">neforce::icollector</innerclass>
+    <innerclass refid="structneforce_1_1ihashable" prot="public">neforce::ihashable</innerclass>
+    <innerclass refid="structneforce_1_1icomparable" prot="public">neforce::icomparable</innerclass>
+    <innerclass refid="structneforce_1_1icommon" prot="public">neforce::icommon</innerclass>
+    <innerclass refid="structneforce_1_1iiterator" prot="public">neforce::iiterator</innerclass>
+    <innerclass refid="structneforce_1_1iarithmetic" prot="public">neforce::iarithmetic</innerclass>
+    <innerclass refid="structneforce_1_1ibinary" prot="public">neforce::ibinary</innerclass>
+    <innerclass refid="structneforce_1_1iobject" prot="public">neforce::iobject</innerclass>
+    <innerclass refid="structneforce_1_1ipackage" prot="public">neforce::ipackage</innerclass>
+    <innerclass refid="structneforce_1_1istringify" prot="public">neforce::istringify</innerclass>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___c_r_t_p_interfaces_1gadcd3f41949c26bf1293c530a44b5a407" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___c_r_t_p_interfaces_1ga61ed81e7f02bcb3ffb3270a22cd0d0da" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_qualifier_check_1ga096bf5b121d9f427c8027f2949e8198e" kindref="member">is_base_of_v</ref>&lt; <ref refid="structicomparable" kindref="compound">icomparable</ref>&lt; T &gt;, T &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_base_of_v&lt; icomparable&lt; T &gt;, T &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator==</definition>
+        <definition>bool neforce::operator==</definition>
         <argsstring>(const T &amp;lhs, const T &amp;rhs)</argsstring>
         <name>operator==</name>
+        <qualifiedname>neforce::operator==</qualifiedname>
         <param>
           <type>const T &amp;</type>
           <declname>lhs</declname>
@@ -45,20 +46,21 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" line="153" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" bodystart="153" bodyend="155"/>
       </memberdef>
-      <memberdef kind="function" id="group___c_r_t_p_interfaces_1ga254f1bd6ef4e0e7ac2f496de8b5d288a" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___c_r_t_p_interfaces_1gab2cd7cdcfeed59981cbc29bc5a5a11f3" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_qualifier_check_1ga096bf5b121d9f427c8027f2949e8198e" kindref="member">is_base_of_v</ref>&lt; <ref refid="structicomparable" kindref="compound">icomparable</ref>&lt; T &gt;, T &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_base_of_v&lt; icomparable&lt; T &gt;, T &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator!=</definition>
+        <definition>bool neforce::operator!=</definition>
         <argsstring>(const T &amp;lhs, const T &amp;rhs)</argsstring>
         <name>operator!=</name>
+        <qualifiedname>neforce::operator!=</qualifiedname>
         <param>
           <type>const T &amp;</type>
           <declname>lhs</declname>
@@ -75,20 +77,21 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" line="158" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" bodystart="158" bodyend="160"/>
       </memberdef>
-      <memberdef kind="function" id="group___c_r_t_p_interfaces_1gab6c75228cf0950252ec94ffabd1e0bb1" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___c_r_t_p_interfaces_1ga3a972810b7cdb4d55afadc5820890184" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_qualifier_check_1ga096bf5b121d9f427c8027f2949e8198e" kindref="member">is_base_of_v</ref>&lt; <ref refid="structicomparable" kindref="compound">icomparable</ref>&lt; T &gt;, T &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_base_of_v&lt; icomparable&lt; T &gt;, T &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&lt;</definition>
+        <definition>bool neforce::operator&lt;</definition>
         <argsstring>(const T &amp;lhs, const T &amp;rhs)</argsstring>
         <name>operator&lt;</name>
+        <qualifiedname>neforce::operator&lt;</qualifiedname>
         <param>
           <type>const T &amp;</type>
           <declname>lhs</declname>
@@ -105,20 +108,21 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" line="163" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" bodystart="163" bodyend="165"/>
       </memberdef>
-      <memberdef kind="function" id="group___c_r_t_p_interfaces_1ga990bca2e6405216929ef8446650df533" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___c_r_t_p_interfaces_1ga44f282fd7183a37f561b1b78cc9c4a2c" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_qualifier_check_1ga096bf5b121d9f427c8027f2949e8198e" kindref="member">is_base_of_v</ref>&lt; <ref refid="structicomparable" kindref="compound">icomparable</ref>&lt; T &gt;, T &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_base_of_v&lt; icomparable&lt; T &gt;, T &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&gt;</definition>
+        <definition>bool neforce::operator&gt;</definition>
         <argsstring>(const T &amp;lhs, const T &amp;rhs)</argsstring>
         <name>operator&gt;</name>
+        <qualifiedname>neforce::operator&gt;</qualifiedname>
         <param>
           <type>const T &amp;</type>
           <declname>lhs</declname>
@@ -135,20 +139,21 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" line="168" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" bodystart="168" bodyend="170"/>
       </memberdef>
-      <memberdef kind="function" id="group___c_r_t_p_interfaces_1gae5ce426cad759e1629580c71635a6ed0" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___c_r_t_p_interfaces_1ga2418a08057d84d4501ecbf11a45cac4a" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_qualifier_check_1ga096bf5b121d9f427c8027f2949e8198e" kindref="member">is_base_of_v</ref>&lt; <ref refid="structicomparable" kindref="compound">icomparable</ref>&lt; T &gt;, T &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_base_of_v&lt; icomparable&lt; T &gt;, T &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&lt;=</definition>
+        <definition>bool neforce::operator&lt;=</definition>
         <argsstring>(const T &amp;lhs, const T &amp;rhs)</argsstring>
         <name>operator&lt;=</name>
+        <qualifiedname>neforce::operator&lt;=</qualifiedname>
         <param>
           <type>const T &amp;</type>
           <declname>lhs</declname>
@@ -165,20 +170,21 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" line="173" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" bodystart="173" bodyend="175"/>
       </memberdef>
-      <memberdef kind="function" id="group___c_r_t_p_interfaces_1gaef63ab8662e94dca1a790715f5e4b721" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___c_r_t_p_interfaces_1ga42cf293c51aa040415da4e830f978aa7" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_qualifier_check_1ga096bf5b121d9f427c8027f2949e8198e" kindref="member">is_base_of_v</ref>&lt; <ref refid="structicomparable" kindref="compound">icomparable</ref>&lt; T &gt;, T &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_base_of_v&lt; icomparable&lt; T &gt;, T &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&gt;=</definition>
+        <definition>bool neforce::operator&gt;=</definition>
         <argsstring>(const T &amp;lhs, const T &amp;rhs)</argsstring>
         <name>operator&gt;=</name>
+        <qualifiedname>neforce::operator&gt;=</qualifiedname>
         <param>
           <type>const T &amp;</type>
           <declname>lhs</declname>

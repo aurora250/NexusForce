@@ -1,0 +1,560 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1repository" kind="class" language="C++" prot="public">
+    <compoundname>neforce::repository</compoundname>
+    <includes refid="repository_8hpp" local="no">repository.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename Connect</type>
+        <defval><ref refid="structneforce_1_1idb__tb__connect" kindref="compound">idb_tb_connect</ref></defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1repository_1a994b13f5e9fe9d74c7ce0842a833ac4e" prot="private" static="no" mutable="no">
+        <type>Connect &amp;</type>
+        <definition>Connect&amp; neforce::repository&lt; T, Connect &gt;::conn_</definition>
+        <argsstring></argsstring>
+        <name>conn_</name>
+        <qualifiedname>neforce::repository::conn_</qualifiedname>
+        <briefdescription>
+<para>数据库连接引用 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" line="50" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classneforce_1_1repository_1aee020d6e5d6e233b287176278dc3e20d" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>static string neforce::repository&lt; T, Connect &gt;::build_insert_with_values</definition>
+        <argsstring>(const T &amp;entity)</argsstring>
+        <name>build_insert_with_values</name>
+        <qualifiedname>neforce::repository::build_insert_with_values</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>entity</declname>
+        </param>
+        <briefdescription>
+<para>使用实际值生成 INSERT SQL </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" line="55" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" bodystart="55" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1repository_1aa499c40c06cc5964dffc600dae107c8c" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>static string neforce::repository&lt; T, Connect &gt;::build_update_with_values</definition>
+        <argsstring>(const T &amp;entity)</argsstring>
+        <name>build_update_with_values</name>
+        <qualifiedname>neforce::repository::build_update_with_values</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>entity</declname>
+        </param>
+        <briefdescription>
+<para>使用实际值生成 UPDATE SQL </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" line="81" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" bodystart="81" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1repository_1a1df3a775e13f8f160cced8db3ed6da72" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>static string neforce::repository&lt; T, Connect &gt;::build_delete_with_pk</definition>
+        <argsstring>(const T &amp;entity)</argsstring>
+        <name>build_delete_with_pk</name>
+        <qualifiedname>neforce::repository::build_delete_with_pk</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>entity</declname>
+        </param>
+        <briefdescription>
+<para>使用实际 PK 值生成 DELETE SQL </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" line="116" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" bodystart="116" bodyend="136"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1repository_1a6465a25dec7ba8cbf321994db8b9013c" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::repository&lt; T, Connect &gt;::repository</definition>
+        <argsstring>(Connect &amp;conn) noexcept</argsstring>
+        <name>repository</name>
+        <qualifiedname>neforce::repository::repository</qualifiedname>
+        <param>
+          <type>Connect &amp;</type>
+          <declname>conn</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>conn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数据库连接引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" line="143" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" bodystart="143" bodyend="144"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1repository_1afa88258f2faf824a3d1e7fac4f589805" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>Connect &amp;</type>
+        <definition>Connect &amp; neforce::repository&lt; T, Connect &gt;::connection</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>connection</name>
+        <qualifiedname>neforce::repository::connection</qualifiedname>
+        <briefdescription>
+<para>获取内部连接引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>连接引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" line="150" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" bodystart="150" bodyend="150"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1repository_1a6fdfd1c98ab5f0652ccad71a146e9fb5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::repository&lt; T, Connect &gt;::create_table</definition>
+        <argsstring>(string_view table_override=&quot;&quot;)</argsstring>
+        <name>create_table</name>
+        <qualifiedname>neforce::repository::create_table</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>table_override</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+<para>创建数据库表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>table_override</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选表名覆盖 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>执行成功返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" line="157" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" bodystart="157" bodyend="160"/>
+        <references refid="classneforce_1_1sql__mapper_1a3be722a1b14ea8e3d5e87d4a88416cb3" compoundref="sql__mapper_8hpp" startline="238" endline="267">neforce::sql_mapper&lt; T &gt;::create_table_sql</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1repository_1a93b3e9b6cdd840a0a6170efdd80038a4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::repository&lt; T, Connect &gt;::drop_table</definition>
+        <argsstring>(string_view table_override=&quot;&quot;)</argsstring>
+        <name>drop_table</name>
+        <qualifiedname>neforce::repository::drop_table</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>table_override</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+<para>删除数据库表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>table_override</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选表名覆盖 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>执行成功返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" line="167" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" bodystart="167" bodyend="170"/>
+        <references refid="classneforce_1_1sql__mapper_1abea742a785cf5135ec4ca6cd97681805" compoundref="sql__mapper_8hpp" startline="274" endline="279">neforce::sql_mapper&lt; T &gt;::drop_table_sql</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1repository_1a09f0a8bf874c099db3b1904f12eaba6a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; T &gt;</type>
+        <definition>unique_ptr&lt; T &gt; neforce::repository&lt; T, Connect &gt;::find_by_id</definition>
+        <argsstring>(const reflect::meta_any &amp;id)</argsstring>
+        <name>find_by_id</name>
+        <qualifiedname>neforce::repository::find_by_id</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1reflect_1_1meta__any" kindref="compound">reflect::meta_any</ref> &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+<para>按主键查找实体 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主键值（包装为 meta_any） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>找到的实体，未找到返回空 <ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" line="177" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" bodystart="177" bodyend="212"/>
+        <references refid="classneforce_1_1sql__builder_1aa21cb083ed93bd777b7e0ca3e57ce983">neforce::sql_builder::build</references>
+        <references refid="classneforce_1_1sql__builder_1a0718737b88d5b899750f0b7058f26fc9">neforce::sql_builder::from</references>
+        <references refid="classneforce_1_1sql__mapper_1a5386d61e75737b69645fc2170f57c20e" compoundref="sql__mapper_8hpp" startline="412" endline="446">neforce::sql_mapper&lt; T &gt;::from_row</references>
+        <references refid="classneforce_1_1reflect_1_1registry_1a31671654870ac8859f0f969a935d63cc">neforce::reflect::registry::instance</references>
+        <references refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" compoundref="unique__ptr_8hpp" startline="973" endline="975">neforce::make_unique</references>
+        <references refid="group___s_q_l_mapper_1gac850bc3d11ed21b2e553ef99fb71effd" compoundref="sql__mapper_8hpp" startline="126" endline="162">neforce::meta_any_to_sql_literal</references>
+        <references refid="classneforce_1_1reflect_1_1meta__property_1a9d9532c019da029ede9fe4fb722ca7de" compoundref="property_8hpp" startline="97" endline="97">neforce::reflect::meta_property::name</references>
+        <references refid="classneforce_1_1sql__builder_1ab418d44cdddaef9874640123b2a35914">neforce::sql_builder::select</references>
+        <references refid="classneforce_1_1sql__mapper_1aca1ba60d14eaf2512828dc9be34ef5a3" compoundref="sql__mapper_8hpp" startline="231" endline="231">neforce::sql_mapper&lt; T &gt;::table_name</references>
+        <references refid="group___reflection_1ga44db0edaa0dbe2c60cb04e815b0a498e" compoundref="reflect_2any_8hpp" startline="60" endline="70">neforce::reflect::type_id_for</references>
+        <references refid="classneforce_1_1sql__builder_1a03f6ecb3f1a0ca37993a3e3778264075">neforce::sql_builder::where_eq</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1repository_1a6ff637ae99146b64b1232083741cec0b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; T &gt;</type>
+        <definition>vector&lt; T &gt; neforce::repository&lt; T, Connect &gt;::find_all</definition>
+        <argsstring>()</argsstring>
+        <name>find_all</name>
+        <qualifiedname>neforce::repository::find_all</qualifiedname>
+        <briefdescription>
+<para>查询全部实体 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>实体列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" line="218" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" bodystart="218" bodyend="233"/>
+        <references refid="classneforce_1_1sql__builder_1aa21cb083ed93bd777b7e0ca3e57ce983">neforce::sql_builder::build</references>
+        <references refid="classneforce_1_1sql__builder_1a0718737b88d5b899750f0b7058f26fc9">neforce::sql_builder::from</references>
+        <references refid="classneforce_1_1sql__mapper_1ab8149b8130e1cb3edfa2b6999ae86203" compoundref="sql__mapper_8hpp" startline="453" endline="469">neforce::sql_mapper&lt; T &gt;::from_result</references>
+        <references refid="classneforce_1_1reflect_1_1registry_1a31671654870ac8859f0f969a935d63cc">neforce::reflect::registry::instance</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1sql__builder_1ab418d44cdddaef9874640123b2a35914">neforce::sql_builder::select</references>
+        <references refid="classneforce_1_1sql__mapper_1aca1ba60d14eaf2512828dc9be34ef5a3" compoundref="sql__mapper_8hpp" startline="231" endline="231">neforce::sql_mapper&lt; T &gt;::table_name</references>
+        <references refid="group___reflection_1ga44db0edaa0dbe2c60cb04e815b0a498e" compoundref="reflect_2any_8hpp" startline="60" endline="70">neforce::reflect::type_id_for</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1repository_1a40bf5aab09a10cf2c4e83b49871db763" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; T &gt;</type>
+        <definition>vector&lt; T &gt; neforce::repository&lt; T, Connect &gt;::find_where</definition>
+        <argsstring>(const string &amp;where_clause)</argsstring>
+        <name>find_where</name>
+        <qualifiedname>neforce::repository::find_where</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>where_clause</declname>
+        </param>
+        <briefdescription>
+<para>按 WHERE 条件查询实体 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>where_clause</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原始 WHERE 子句（不含 &quot;WHERE&quot; 关键字） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>实体列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" line="240" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" bodystart="240" bodyend="256"/>
+        <references refid="classneforce_1_1sql__builder_1aa21cb083ed93bd777b7e0ca3e57ce983">neforce::sql_builder::build</references>
+        <references refid="classneforce_1_1sql__builder_1a0718737b88d5b899750f0b7058f26fc9">neforce::sql_builder::from</references>
+        <references refid="classneforce_1_1sql__mapper_1ab8149b8130e1cb3edfa2b6999ae86203" compoundref="sql__mapper_8hpp" startline="453" endline="469">neforce::sql_mapper&lt; T &gt;::from_result</references>
+        <references refid="classneforce_1_1reflect_1_1registry_1a31671654870ac8859f0f969a935d63cc">neforce::reflect::registry::instance</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1sql__builder_1ab418d44cdddaef9874640123b2a35914">neforce::sql_builder::select</references>
+        <references refid="classneforce_1_1sql__mapper_1aca1ba60d14eaf2512828dc9be34ef5a3" compoundref="sql__mapper_8hpp" startline="231" endline="231">neforce::sql_mapper&lt; T &gt;::table_name</references>
+        <references refid="group___reflection_1ga44db0edaa0dbe2c60cb04e815b0a498e" compoundref="reflect_2any_8hpp" startline="60" endline="70">neforce::reflect::type_id_for</references>
+        <references refid="classneforce_1_1sql__builder_1a9e5096a8155300e9de266524df2f802e">neforce::sql_builder::where</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1repository_1a4f3828ed8a07aec91bd8786c468135aa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; T &gt;</type>
+        <definition>vector&lt; T &gt; neforce::repository&lt; T, Connect &gt;::find_page</definition>
+        <argsstring>(const size_t page_num, const size_t page_size, string_view order_by=&quot;&quot;)</argsstring>
+        <name>find_page</name>
+        <qualifiedname>neforce::repository::find_page</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>page_num</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>page_size</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>order_by</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+<para>分页查询实体 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>page_num</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>页码（从 1 开始） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>page_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>每页大小 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>order_by</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>排序字段（为空则不排序） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>实体列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" line="265" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" bodystart="265" bodyend="286"/>
+        <references refid="classneforce_1_1sql__builder_1aa21cb083ed93bd777b7e0ca3e57ce983">neforce::sql_builder::build</references>
+        <references refid="classneforce_1_1sql__builder_1a0718737b88d5b899750f0b7058f26fc9">neforce::sql_builder::from</references>
+        <references refid="classneforce_1_1sql__mapper_1ab8149b8130e1cb3edfa2b6999ae86203" compoundref="sql__mapper_8hpp" startline="453" endline="469">neforce::sql_mapper&lt; T &gt;::from_result</references>
+        <references refid="classneforce_1_1reflect_1_1registry_1a31671654870ac8859f0f969a935d63cc">neforce::reflect::registry::instance</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1sql__builder_1a202f15a26121de6967f568468eb677e9">neforce::sql_builder::order_by_asc</references>
+        <references refid="classneforce_1_1sql__builder_1a3ff35e70de1a1f1743135062a6741c02">neforce::sql_builder::page</references>
+        <references refid="classneforce_1_1sql__builder_1ab418d44cdddaef9874640123b2a35914">neforce::sql_builder::select</references>
+        <references refid="classneforce_1_1sql__mapper_1aca1ba60d14eaf2512828dc9be34ef5a3" compoundref="sql__mapper_8hpp" startline="231" endline="231">neforce::sql_mapper&lt; T &gt;::table_name</references>
+        <references refid="group___reflection_1ga44db0edaa0dbe2c60cb04e815b0a498e" compoundref="reflect_2any_8hpp" startline="60" endline="70">neforce::reflect::type_id_for</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1repository_1a3cceac3585696375f9906a84a6d99381" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::repository&lt; T, Connect &gt;::insert</definition>
+        <argsstring>(T &amp;entity)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::repository::insert</qualifiedname>
+        <param>
+          <type>T &amp;</type>
+          <declname>entity</declname>
+        </param>
+        <briefdescription>
+<para>插入实体 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>entity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>实体对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>执行成功返回 true</para>
+</simplesect>
+<simplesect kind="note"><para>自增主键字段在 INSERT 时被跳过，值由数据库自动生成。 如需获取自增主键值，可在此方法返回后执行 SELECT LAST_INSERT_ID()。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" line="296" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" bodystart="296" bodyend="299"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1repository_1aaeb268077d25d06219dee76c33445e36" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::repository&lt; T, Connect &gt;::update</definition>
+        <argsstring>(const T &amp;entity)</argsstring>
+        <name>update</name>
+        <qualifiedname>neforce::repository::update</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>entity</declname>
+        </param>
+        <briefdescription>
+<para>更新实体（按主键） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>entity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>实体对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>执行成功返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" line="306" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" bodystart="306" bodyend="309"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1repository_1a561dfc69c2eaaa19ec8e29e68e4f0ad6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::repository&lt; T, Connect &gt;::remove</definition>
+        <argsstring>(const T &amp;entity)</argsstring>
+        <name>remove</name>
+        <qualifiedname>neforce::repository::remove</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>entity</declname>
+        </param>
+        <briefdescription>
+<para>删除实体（按主键） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>entity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>实体对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>执行成功返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" line="316" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" bodystart="316" bodyend="319"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1repository_1a6994fb129859e3e7e354524cb157a868" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::repository&lt; T, Connect &gt;::count</definition>
+        <argsstring>()</argsstring>
+        <name>count</name>
+        <qualifiedname>neforce::repository::count</qualifiedname>
+        <briefdescription>
+<para>获取实体总数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>行数，查询失败返回 0 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" line="325" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" bodystart="325" bodyend="339"/>
+        <references refid="classneforce_1_1sql__builder_1aa21cb083ed93bd777b7e0ca3e57ce983">neforce::sql_builder::build</references>
+        <references refid="classneforce_1_1sql__builder_1a0718737b88d5b899750f0b7058f26fc9">neforce::sql_builder::from</references>
+        <references refid="classneforce_1_1sql__builder_1a37be3dbcbdf9bfeddf7719b901a428f8">neforce::sql_builder::select_count</references>
+        <references refid="classneforce_1_1sql__mapper_1aca1ba60d14eaf2512828dc9be34ef5a3" compoundref="sql__mapper_8hpp" startline="231" endline="231">neforce::sql_mapper&lt; T &gt;::table_name</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1repository_1a3bacd6e3490ee0fc347867fc6a4239e0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::repository&lt; T, Connect &gt;::table_exists</definition>
+        <argsstring>()</argsstring>
+        <name>table_exists</name>
+        <qualifiedname>neforce::repository::table_exists</qualifiedname>
+        <briefdescription>
+<para>检查表是否存在 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>存在返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" line="345" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" bodystart="345" bodyend="345"/>
+        <references refid="classneforce_1_1sql__mapper_1aca1ba60d14eaf2512828dc9be34ef5a3" compoundref="sql__mapper_8hpp" startline="231" endline="231">neforce::sql_mapper&lt; T &gt;::table_name</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>泛型 Repository </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>实体类型（需已通过反射注册） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Connect</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连接类型，默认为 <ref refid="structneforce_1_1idb__tb__connect" kindref="compound">idb_tb_connect</ref></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+封装常见的数据访问操作，通过 <ref refid="classneforce_1_1sql__mapper" kindref="compound">sql_mapper</ref> 自动生成 SQL。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" line="47" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/repository.hpp" bodystart="47" bodyend="346"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1repository_1a1df3a775e13f8f160cced8db3ed6da72" prot="private" virt="non-virtual"><scope>neforce::repository</scope><name>build_delete_with_pk</name></member>
+      <member refid="classneforce_1_1repository_1aee020d6e5d6e233b287176278dc3e20d" prot="private" virt="non-virtual"><scope>neforce::repository</scope><name>build_insert_with_values</name></member>
+      <member refid="classneforce_1_1repository_1aa499c40c06cc5964dffc600dae107c8c" prot="private" virt="non-virtual"><scope>neforce::repository</scope><name>build_update_with_values</name></member>
+      <member refid="classneforce_1_1repository_1a994b13f5e9fe9d74c7ce0842a833ac4e" prot="private" virt="non-virtual"><scope>neforce::repository</scope><name>conn_</name></member>
+      <member refid="classneforce_1_1repository_1afa88258f2faf824a3d1e7fac4f589805" prot="public" virt="non-virtual"><scope>neforce::repository</scope><name>connection</name></member>
+      <member refid="classneforce_1_1repository_1a6994fb129859e3e7e354524cb157a868" prot="public" virt="non-virtual"><scope>neforce::repository</scope><name>count</name></member>
+      <member refid="classneforce_1_1repository_1a6fdfd1c98ab5f0652ccad71a146e9fb5" prot="public" virt="non-virtual"><scope>neforce::repository</scope><name>create_table</name></member>
+      <member refid="classneforce_1_1repository_1a93b3e9b6cdd840a0a6170efdd80038a4" prot="public" virt="non-virtual"><scope>neforce::repository</scope><name>drop_table</name></member>
+      <member refid="classneforce_1_1repository_1a6ff637ae99146b64b1232083741cec0b" prot="public" virt="non-virtual"><scope>neforce::repository</scope><name>find_all</name></member>
+      <member refid="classneforce_1_1repository_1a09f0a8bf874c099db3b1904f12eaba6a" prot="public" virt="non-virtual"><scope>neforce::repository</scope><name>find_by_id</name></member>
+      <member refid="classneforce_1_1repository_1a4f3828ed8a07aec91bd8786c468135aa" prot="public" virt="non-virtual"><scope>neforce::repository</scope><name>find_page</name></member>
+      <member refid="classneforce_1_1repository_1a40bf5aab09a10cf2c4e83b49871db763" prot="public" virt="non-virtual"><scope>neforce::repository</scope><name>find_where</name></member>
+      <member refid="classneforce_1_1repository_1a3cceac3585696375f9906a84a6d99381" prot="public" virt="non-virtual"><scope>neforce::repository</scope><name>insert</name></member>
+      <member refid="classneforce_1_1repository_1a561dfc69c2eaaa19ec8e29e68e4f0ad6" prot="public" virt="non-virtual"><scope>neforce::repository</scope><name>remove</name></member>
+      <member refid="classneforce_1_1repository_1a6465a25dec7ba8cbf321994db8b9013c" prot="public" virt="non-virtual"><scope>neforce::repository</scope><name>repository</name></member>
+      <member refid="classneforce_1_1repository_1a3bacd6e3490ee0fc347867fc6a4239e0" prot="public" virt="non-virtual"><scope>neforce::repository</scope><name>table_exists</name></member>
+      <member refid="classneforce_1_1repository_1aaeb268077d25d06219dee76c33445e36" prot="public" virt="non-virtual"><scope>neforce::repository</scope><name>update</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

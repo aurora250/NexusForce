@@ -3,22 +3,23 @@
   <compounddef id="group___hash_primary" kind="group">
     <compoundname>HashPrimary</compoundname>
     <title>哈希算法</title>
-    <innerclass refid="structhash_3_01coroutine__handle_3_01_promise_01_4_01_4" prot="public">hash&lt; coroutine_handle&lt; Promise &gt; &gt;</innerclass>
-    <innerclass refid="structhash" prot="public">hash</innerclass>
-    <innerclass refid="structhash_3_01_t_01_5_01_4" prot="public">hash&lt; T * &gt;</innerclass>
-    <innerclass refid="structhash_3_01_t_00_01enable__if__t_3_01is__enum__v_3_01_t_01_4_01_4_01_4" prot="public">hash&lt; T, enable_if_t&lt; is_enum_v&lt; T &gt; &gt; &gt;</innerclass>
-    <innerclass refid="structmurmur__hash" prot="public">murmur_hash</innerclass>
-    <innerclass refid="structis__nothrow__hashable" prot="public">is_nothrow_hashable</innerclass>
-    <innerclass refid="structis__hash" prot="public">is_hash</innerclass>
-    <innerclass refid="structhash_3_01_t_00_01enable__if__t_3_01is__base__of_3_01ihashable_3_01_t_01_4_00_01_t_01_4_1_1value_01_4_01_4" prot="public">hash&lt; T, enable_if_t&lt; is_base_of&lt; ihashable&lt; T &gt;, T &gt;::value &gt; &gt;</innerclass>
-    <innerclass refid="structhash_3_01shared__ptr_3_01_t_01_4_01_4" prot="public">hash&lt; shared_ptr&lt; T &gt; &gt;</innerclass>
-    <innerclass refid="structhash_3_01unique__ptr_3_01_t_00_01_deleter_01_4_01_4" prot="public">hash&lt; unique_ptr&lt; T, Deleter &gt; &gt;</innerclass>
+    <innerclass refid="structneforce_1_1hash_3_01coroutine__handle_3_01_promise_01_4_01_4" prot="public">neforce::hash&lt; coroutine_handle&lt; Promise &gt; &gt;</innerclass>
+    <innerclass refid="structneforce_1_1hash" prot="public">neforce::hash</innerclass>
+    <innerclass refid="structneforce_1_1hash_3_01_t_01_5_01_4" prot="public">neforce::hash&lt; T * &gt;</innerclass>
+    <innerclass refid="structneforce_1_1hash_3_01_t_00_01enable__if__t_3_01is__enum__v_3_01_t_01_4_01_4_01_4" prot="public">neforce::hash&lt; T, enable_if_t&lt; is_enum_v&lt; T &gt; &gt; &gt;</innerclass>
+    <innerclass refid="structneforce_1_1murmur__hash" prot="public">neforce::murmur_hash</innerclass>
+    <innerclass refid="structneforce_1_1is__nothrow__hashable" prot="public">neforce::is_nothrow_hashable</innerclass>
+    <innerclass refid="structneforce_1_1is__hash" prot="public">neforce::is_hash</innerclass>
+    <innerclass refid="structneforce_1_1hash_3_01_t_00_01enable__if__t_3_01is__base__of_3_01ihashable_3_01_t_01_4_00_01_t_01_4_1_1value_01_4_01_4" prot="public">neforce::hash&lt; T, enable_if_t&lt; is_base_of&lt; ihashable&lt; T &gt;, T &gt;::value &gt; &gt;</innerclass>
+    <innerclass refid="structneforce_1_1hash_3_01shared__ptr_3_01_t_01_4_01_4" prot="public">neforce::hash&lt; shared_ptr&lt; T &gt; &gt;</innerclass>
+    <innerclass refid="structneforce_1_1hash_3_01unique__ptr_3_01_t_00_01_deleter_01_4_01_4" prot="public">neforce::hash&lt; unique_ptr&lt; T, Deleter &gt; &gt;</innerclass>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="group___hash_primary_1ga54df2408dfe16bfaa7a5da4e5cd2cbc7" prot="public" static="no" constexpr="yes" mutable="no">
-        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
-        <definition>size_t FNV_OFFSET_BASIS</definition>
+      <memberdef kind="variable" id="group___hash_primary_1ga1b0e6d502da5248efd1c6290a1b915ce" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>size_t</type>
+        <definition>size_t neforce::constants::FNV_OFFSET_BASIS</definition>
         <argsstring></argsstring>
         <name>FNV_OFFSET_BASIS</name>
+        <qualifiedname>neforce::constants::FNV_OFFSET_BASIS</qualifiedname>
         <initializer>                                 =
 
 14695981039346656037ULL</initializer>
@@ -33,12 +34,20 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="122" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" bodystart="122" bodyend="-1"/>
+        <referencedby refid="group___hash_primary_1ga52a95943fda4d4d12dd657d3f61ace21" compoundref="hash_8hpp" startline="163" endline="170">neforce::FNV_hash</referencedby>
+        <referencedby refid="group___hash_primary_1ga7703a4ef6704533910c7def0a9191458" compoundref="hash_8hpp" startline="179" endline="189">neforce::FNV_hash_integer</referencedby>
+        <referencedby refid="group___hash_primary_1ga0641af5eba18472555c2df4ef07ea48e" compoundref="hash_8hpp" startline="199" endline="208">neforce::FNV_hash_string</referencedby>
+        <referencedby refid="structneforce_1_1none__t_1a3d8fcf695e0657329ad90afebca80960" compoundref="none_8hpp" startline="58" endline="58">neforce::none_t::to_hash</referencedby>
+        <referencedby refid="classneforce_1_1optional_1ade972d88778d7258bb5159a15a043b31" compoundref="optional_8hpp" startline="785" endline="787">neforce::optional&lt; T &gt;::to_hash</referencedby>
+        <referencedby refid="classneforce_1_1optional_3_01_t_01_6_01_4_1ac4a1620e4287ae505711e540e6c17df7" compoundref="optional_8hpp" startline="1290" endline="1292">neforce::optional&lt; T &amp; &gt;::to_hash</referencedby>
+        <referencedby refid="structneforce_1_1tuple_3_4_1a78796e43ef613e5a318d90a1de8ae317" compoundref="tuple_8hpp" startline="206" endline="208">neforce::tuple&lt;&gt;::to_hash</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="group___hash_primary_1ga4a78309712618f56d496f7e622a2152f" prot="public" static="no" constexpr="yes" mutable="no">
-        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
-        <definition>size_t FNV_PRIME</definition>
+      <memberdef kind="variable" id="group___hash_primary_1gaff8f076d3a6ebcc6156bc85ef76ad716" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>size_t</type>
+        <definition>size_t neforce::constants::FNV_PRIME</definition>
         <argsstring></argsstring>
         <name>FNV_PRIME</name>
+        <qualifiedname>neforce::constants::FNV_PRIME</qualifiedname>
         <initializer>= 1099511628211ULL</initializer>
         <briefdescription>
 <para>FNV哈希算法的质数乘数 </para>
@@ -51,18 +60,22 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="134" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" bodystart="136" bodyend="-1"/>
+        <referencedby refid="group___hash_primary_1ga52a95943fda4d4d12dd657d3f61ace21" compoundref="hash_8hpp" startline="163" endline="170">neforce::FNV_hash</referencedby>
+        <referencedby refid="group___hash_primary_1ga7703a4ef6704533910c7def0a9191458" compoundref="hash_8hpp" startline="179" endline="189">neforce::FNV_hash_integer</referencedby>
+        <referencedby refid="group___hash_primary_1ga0641af5eba18472555c2df4ef07ea48e" compoundref="hash_8hpp" startline="199" endline="208">neforce::FNV_hash_string</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="group___hash_primary_1ga95fd644e80e46e0658511836b0270388" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___hash_primary_1ga7ea8f115ab6d04bdf9dfee8147e64920" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename Key</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_nothrow_hashable_v</definition>
+        <definition>bool neforce::is_nothrow_hashable_v</definition>
         <argsstring></argsstring>
         <name>is_nothrow_hashable_v</name>
-        <initializer>= <ref refid="structis__nothrow__hashable" kindref="compound">is_nothrow_hashable</ref>&lt;Key&gt;::value</initializer>
+        <qualifiedname>neforce::is_nothrow_hashable_v</qualifiedname>
+        <initializer>= is_nothrow_hashable&lt;Key&gt;::value</initializer>
         <briefdescription>
 <para>is_nothrow_hashable的便捷变量模板 </para>
         </briefdescription>
@@ -71,18 +84,18 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="641" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" bodystart="641" bodyend="-1"/>
-        <referencedby refid="classhashtable_1ae09d3623d57fac2e6616eac7d9589e85" compoundref="hashtable_8hpp" startline="1036" endline="1038">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::bucket_index</referencedby>
-        <referencedby refid="classhashtable_1a46d44567e4d83e549bf824fa66a129ab" compoundref="hashtable_8hpp" startline="1455" endline="1457">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::contains</referencedby>
-        <referencedby refid="classhashtable_1affb28cf15a9d4201371030127d46d86d" compoundref="hashtable_8hpp" startline="1436" endline="1448">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::count</referencedby>
-        <referencedby refid="classhashtable_1ab24b6e166f249620e76d79147fe949e5" compoundref="hashtable_8hpp" startline="1362" endline="1364">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
-        <referencedby refid="classhashtable_1a69cb3ef1f09f278a837e3e8e758d6369" compoundref="hashtable_8hpp" startline="1284" endline="1323">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
-        <referencedby refid="classhashtable_1a98fde6b1f065ecae67b668f67e5f288f" compoundref="hashtable_8hpp" startline="1246" endline="1277">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
-        <referencedby refid="classhashtable_1ac25e9855ad371a73729e2c970d594880" compoundref="hashtable_8hpp" startline="1372" endline="1375">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
-        <referencedby refid="classhashtable_1a33185aeb2ea3ef8b694919568fd03705" compoundref="hashtable_8hpp" startline="1331" endline="1355">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
-        <referencedby refid="classhashtable_1a5601c4779b8f98c1c8c5bd6f2432368b" compoundref="hashtable_8hpp" startline="1417" endline="1429">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::find</referencedby>
-        <referencedby refid="classhashtable_1acbce53f2593135ac86f624327aca6ea0" compoundref="hashtable_8hpp" startline="1398" endline="1410">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::find</referencedby>
+        <referencedby refid="classneforce_1_1hashtable_1afa24d6c5f6ed16baba9e97651f051cd2" compoundref="hashtable_8hpp" startline="1036" endline="1038">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::bucket_index</referencedby>
+        <referencedby refid="classneforce_1_1hashtable_1afaca751e5df91ea5f9eb33bfe5f3acd7" compoundref="hashtable_8hpp" startline="1455" endline="1457">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::contains</referencedby>
+        <referencedby refid="classneforce_1_1hashtable_1a379bb40cdd2b84010bb7f57f395cbe76" compoundref="hashtable_8hpp" startline="1436" endline="1448">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::count</referencedby>
+        <referencedby refid="classneforce_1_1hashtable_1aeb38963838854c714756ec915681de28" compoundref="hashtable_8hpp" startline="1362" endline="1364">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classneforce_1_1hashtable_1a799119ba67274882f189c59643aaf891" compoundref="hashtable_8hpp" startline="1284" endline="1323">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classneforce_1_1hashtable_1a234eb2157731ca53f2e7af0ed42f1a5e" compoundref="hashtable_8hpp" startline="1246" endline="1277">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classneforce_1_1hashtable_1a65cdc6fa5b9c363cbd2af3f82a957d2c" compoundref="hashtable_8hpp" startline="1372" endline="1375">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classneforce_1_1hashtable_1a2a1c2e3c31005b8c125fdcc74a5ff234" compoundref="hashtable_8hpp" startline="1331" endline="1355">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classneforce_1_1hashtable_1a926e62481251dd424a2f24a2ae27f3db" compoundref="hashtable_8hpp" startline="1417" endline="1429">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::find</referencedby>
+        <referencedby refid="classneforce_1_1hashtable_1a7b1c7657a926eb20ddc7903834fcf520" compoundref="hashtable_8hpp" startline="1398" endline="1410">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::find</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="group___hash_primary_1ga017f9314c0e8086c45cbb406983476de" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___hash_primary_1gad62b756a7e689b3a64960d0c17684c53" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename Func</type>
@@ -92,10 +105,11 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_hash_v</definition>
+        <definition>bool neforce::is_hash_v</definition>
         <argsstring></argsstring>
         <name>is_hash_v</name>
-        <initializer>= <ref refid="structis__hash" kindref="compound">is_hash</ref>&lt;Func, Arg&gt;::value</initializer>
+        <qualifiedname>neforce::is_hash_v</qualifiedname>
+        <initializer>= is_hash&lt;Func, Arg&gt;::value</initializer>
         <briefdescription>
 <para>is_hash的便捷变量模板 </para>
         </briefdescription>
@@ -107,17 +121,18 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___hash_primary_1ga4ed3eee51919fef3671574ecda03f33f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
-        <definition>size_t FNV_hash</definition>
+      <memberdef kind="function" id="group___hash_primary_1ga52a95943fda4d4d12dd657d3f61ace21" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t neforce::FNV_hash</definition>
         <argsstring>(const byte_t *first, const size_t count) noexcept</argsstring>
         <name>FNV_hash</name>
+        <qualifiedname>neforce::FNV_hash</qualifiedname>
         <param>
-          <type>const <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> *</type>
+          <type>const byte_t *</type>
           <declname>first</declname>
         </param>
         <param>
-          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>const size_t</type>
           <declname>count</declname>
         </param>
         <briefdescription>
@@ -154,20 +169,25 @@ FNV（Fowler-Noll-Vo）是一种非加密哈希算法，具有：<orderedlist>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="163" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" bodystart="163" bodyend="170"/>
-        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
-        <referencedby refid="structthread_1_1id_1ab1331db9207784a3d27c91eb02d9a74c" compoundref="thread_8hpp" startline="112" endline="114">thread::id::to_hash</referencedby>
-        <referencedby refid="classuuid_1a7664699bea951feb280cbcb34533a212">uuid::v7</referencedby>
+        <references refid="group___counting_algorithms_1ga74557c5cb91a609183df695efc54ba60" compoundref="search_8hpp" startline="391" endline="393">neforce::count</references>
+        <references refid="group___hash_primary_1ga52a95943fda4d4d12dd657d3f61ace21" compoundref="hash_8hpp" startline="163" endline="170">neforce::FNV_hash</references>
+        <references refid="group___hash_primary_1ga1b0e6d502da5248efd1c6290a1b915ce" compoundref="hash_8hpp" startline="122">neforce::constants::FNV_OFFSET_BASIS</references>
+        <references refid="group___hash_primary_1gaff8f076d3a6ebcc6156bc85ef76ad716" compoundref="hash_8hpp" startline="136">neforce::constants::FNV_PRIME</references>
+        <referencedby refid="group___hash_primary_1ga52a95943fda4d4d12dd657d3f61ace21" compoundref="hash_8hpp" startline="163" endline="170">neforce::FNV_hash</referencedby>
+        <referencedby refid="structneforce_1_1thread_1_1id_1ac8c58fb5166f4ab695f3099e65dc14a8" compoundref="thread_8hpp" startline="112" endline="114">neforce::thread::id::to_hash</referencedby>
+        <referencedby refid="classneforce_1_1uuid_1acbbfea5c00c6327c2919e1fc9094eb00">neforce::uuid::v7</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___hash_primary_1ga305f4553907f307381d8bb9096bb066c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___hash_primary_1ga7703a4ef6704533910c7def0a9191458" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
-        <definition>size_t FNV_hash_integer</definition>
+        <type>size_t</type>
+        <definition>size_t neforce::FNV_hash_integer</definition>
         <argsstring>(const T value) noexcept</argsstring>
         <name>FNV_hash_integer</name>
+        <qualifiedname>neforce::FNV_hash_integer</qualifiedname>
         <param>
           <type>const T</type>
           <declname>value</declname>
@@ -201,24 +221,29 @@ FNV（Fowler-Noll-Vo）是一种非加密哈希算法，具有：<orderedlist>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="179" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" bodystart="179" bodyend="189"/>
-        <references refid="structintegral__constant_1acb06165dd4022817b14af1688a5c36f1" compoundref="type__traits_8hpp" startline="37">integral_constant&lt; bool, Value &gt;::value</references>
+        <references refid="group___hash_primary_1ga7703a4ef6704533910c7def0a9191458" compoundref="hash_8hpp" startline="179" endline="189">neforce::FNV_hash_integer</references>
+        <references refid="group___hash_primary_1ga1b0e6d502da5248efd1c6290a1b915ce" compoundref="hash_8hpp" startline="122">neforce::constants::FNV_OFFSET_BASIS</references>
+        <references refid="group___hash_primary_1gaff8f076d3a6ebcc6156bc85ef76ad716" compoundref="hash_8hpp" startline="136">neforce::constants::FNV_PRIME</references>
+        <references refid="structneforce_1_1integral__constant_1a5fb6f7e2680d2dcc85a47a2cf067dbad" compoundref="type__traits_8hpp" startline="37">neforce::integral_constant&lt; bool, Value &gt;::value</references>
+        <referencedby refid="group___hash_primary_1ga7703a4ef6704533910c7def0a9191458" compoundref="hash_8hpp" startline="179" endline="189">neforce::FNV_hash_integer</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___hash_primary_1ga83de52434e3b8de687077d3ce6dad4d5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___hash_primary_1ga0641af5eba18472555c2df4ef07ea48e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
         </templateparamlist>
-        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
-        <definition>size_t FNV_hash_string</definition>
+        <type>size_t</type>
+        <definition>size_t neforce::FNV_hash_string</definition>
         <argsstring>(const CharT *str, const size_t len) noexcept</argsstring>
         <name>FNV_hash_string</name>
+        <qualifiedname>neforce::FNV_hash_string</qualifiedname>
         <param>
           <type>const CharT *</type>
           <declname>str</declname>
         </param>
         <param>
-          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>const size_t</type>
           <declname>len</declname>
         </param>
         <briefdescription>
@@ -258,16 +283,21 @@ FNV（Fowler-Noll-Vo）是一种非加密哈希算法，具有：<orderedlist>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="199" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" bodystart="199" bodyend="208"/>
-        <references refid="structintegral__constant_1acb06165dd4022817b14af1688a5c36f1" compoundref="type__traits_8hpp" startline="37">integral_constant&lt; bool, Value &gt;::value</references>
-        <referencedby refid="group___reflection_1ga580ac475bed401f28eca8e86b4de57c2" compoundref="reflect_2any_8hpp" startline="60" endline="70">type_id_for</referencedby>
+        <references refid="group___hash_primary_1ga0641af5eba18472555c2df4ef07ea48e" compoundref="hash_8hpp" startline="199" endline="208">neforce::FNV_hash_string</references>
+        <references refid="group___hash_primary_1ga1b0e6d502da5248efd1c6290a1b915ce" compoundref="hash_8hpp" startline="122">neforce::constants::FNV_OFFSET_BASIS</references>
+        <references refid="group___hash_primary_1gaff8f076d3a6ebcc6156bc85ef76ad716" compoundref="hash_8hpp" startline="136">neforce::constants::FNV_PRIME</references>
+        <references refid="structneforce_1_1integral__constant_1a5fb6f7e2680d2dcc85a47a2cf067dbad" compoundref="type__traits_8hpp" startline="37">neforce::integral_constant&lt; bool, Value &gt;::value</references>
+        <referencedby refid="group___hash_primary_1ga0641af5eba18472555c2df4ef07ea48e" compoundref="hash_8hpp" startline="199" endline="208">neforce::FNV_hash_string</referencedby>
+        <referencedby refid="group___reflection_1ga44db0edaa0dbe2c60cb04e815b0a498e" compoundref="reflect_2any_8hpp" startline="60" endline="70">neforce::reflect::type_id_for</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___hash_primary_1ga4da6b19e717ee7d2414e9527c5ac2035" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
-        <definition>size_t low_level_hash</definition>
+      <memberdef kind="function" id="group___hash_primary_1gafbc53cc698747c7d2e94e2e1b435ed88" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t neforce::low_level_hash</definition>
         <argsstring>(size_t x) noexcept</argsstring>
         <name>low_level_hash</name>
+        <qualifiedname>neforce::low_level_hash</qualifiedname>
         <param>
-          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>size_t</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -285,7 +315,7 @@ FNV（Fowler-Noll-Vo）是一种非加密哈希算法，具有：<orderedlist>
 </parameterlist>
 <simplesect kind="return"><para>混合后的哈希值</para>
 </simplesect>
-将一个 <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> 值通过位混合操作扩散到整个输出空间。</para>
+将一个 <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref> 值通过位混合操作扩散到整个输出空间。</para>
 <para><simplesect kind="note"><para>64 位平台使用 MurmurHash3 fmix64 风格混合器，32 位平台使用 fmix32 风格混合器 </para>
 </simplesect>
 </para>
@@ -293,18 +323,21 @@ FNV（Fowler-Noll-Vo）是一种非加密哈希算法，具有：<orderedlist>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="219" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" bodystart="219" bodyend="237"/>
+        <references refid="group___hash_primary_1gafbc53cc698747c7d2e94e2e1b435ed88" compoundref="hash_8hpp" startline="219" endline="237">neforce::low_level_hash</references>
+        <referencedby refid="group___hash_primary_1gafbc53cc698747c7d2e94e2e1b435ed88" compoundref="hash_8hpp" startline="219" endline="237">neforce::low_level_hash</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___hash_primary_1ga983e9cb75acc41d0934bc2d39c7061b0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
-        <definition>size_t DJB2_hash</definition>
+      <memberdef kind="function" id="group___hash_primary_1gae074a95c95df505bfe3cdaeaf794bebe" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t neforce::DJB2_hash</definition>
         <argsstring>(const char *str, const size_t len) noexcept</argsstring>
         <name>DJB2_hash</name>
+        <qualifiedname>neforce::DJB2_hash</qualifiedname>
         <param>
           <type>const char *</type>
           <declname>str</declname>
         </param>
         <param>
-          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>const size_t</type>
           <declname>len</declname>
         </param>
         <briefdescription>
@@ -341,22 +374,25 @@ DJB2是一种非加密哈希算法，具有以下特点：<orderedlist>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="345" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" bodystart="345" bodyend="351"/>
+        <references refid="group___hash_primary_1gae074a95c95df505bfe3cdaeaf794bebe" compoundref="hash_8hpp" startline="345" endline="351">neforce::DJB2_hash</references>
+        <referencedby refid="group___hash_primary_1gae074a95c95df505bfe3cdaeaf794bebe" compoundref="hash_8hpp" startline="345" endline="351">neforce::DJB2_hash</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___hash_primary_1gaed77778c989838675dbac669182224ed" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="structmurmur__hash" kindref="compound">murmur_hash</ref></type>
-        <definition>murmur_hash murmur_hash64</definition>
+      <memberdef kind="function" id="group___hash_primary_1ga5e4acc54f98ff804f234bf2051f4f4de" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>murmur_hash</type>
+        <definition>murmur_hash neforce::murmur_hash64</definition>
         <argsstring>(const void *key, size_t len, uint32_t seed) noexcept</argsstring>
         <name>murmur_hash64</name>
+        <qualifiedname>neforce::murmur_hash64</qualifiedname>
         <param>
           <type>const void *</type>
           <declname>key</declname>
         </param>
         <param>
-          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>size_t</type>
           <declname>len</declname>
         </param>
         <param>
-          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <type>uint32_t</type>
           <declname>seed</declname>
         </param>
         <briefdescription>
@@ -404,22 +440,25 @@ MurmurHash是一种非加密哈希算法，具有：<orderedlist>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="395" column="14" declfile="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" declline="395" declcolumn="14"/>
+        <references refid="group___hash_primary_1ga5e4acc54f98ff804f234bf2051f4f4de">neforce::murmur_hash64</references>
+        <referencedby refid="group___hash_primary_1ga5e4acc54f98ff804f234bf2051f4f4de">neforce::murmur_hash64</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___hash_primary_1ga13a2b422a2f1564803720bdc2bd23bb5" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
-        <definition>uint32_t murmur_hash32</definition>
+      <memberdef kind="function" id="group___hash_primary_1ga59ff6b12908ad9f7638c7714cd9507a3" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t neforce::murmur_hash32</definition>
         <argsstring>(const void *key, size_t len, uint32_t seed) noexcept</argsstring>
         <name>murmur_hash32</name>
+        <qualifiedname>neforce::murmur_hash32</qualifiedname>
         <param>
           <type>const void *</type>
           <declname>key</declname>
         </param>
         <param>
-          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>size_t</type>
           <declname>len</declname>
         </param>
         <param>
-          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <type>uint32_t</type>
           <declname>seed</declname>
         </param>
         <briefdescription>
@@ -458,22 +497,25 @@ MurmurHash3的32位版本，产生32位哈希值。 适用于32位系统或需�
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="408" column="11" declfile="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" declline="408" declcolumn="11"/>
+        <references refid="group___hash_primary_1ga59ff6b12908ad9f7638c7714cd9507a3">neforce::murmur_hash32</references>
+        <referencedby refid="group___hash_primary_1ga59ff6b12908ad9f7638c7714cd9507a3">neforce::murmur_hash32</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___hash_primary_1ga3d5fa91f6502da8e961238261d9d7256" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
-        <definition>uint32_t XXH32</definition>
+      <memberdef kind="function" id="group___hash_primary_1ga654eebd13fac3d583c859c20f79cac1c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t neforce::XXH32</definition>
         <argsstring>(const void *input, size_t len, uint32_t seed=0) noexcept</argsstring>
         <name>XXH32</name>
+        <qualifiedname>neforce::XXH32</qualifiedname>
         <param>
           <type>const void *</type>
           <declname>input</declname>
         </param>
         <param>
-          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>size_t</type>
           <declname>len</declname>
         </param>
         <param>
-          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <type>uint32_t</type>
           <declname>seed</declname>
           <defval>0</defval>
         </param>
@@ -513,27 +555,30 @@ xxHash 是一种极速非加密哈希算法，XXH32 是其 32 位版本。 适�
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="428" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" bodystart="428" bodyend="485"/>
-        <references refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" compoundref="type__erase_8hpp" startline="41" endline="43">end</references>
-        <references refid="structendian_1a509ea1fc5587ada5b356d0cf6dd86a13" compoundref="endian_8hpp" startline="249" endline="252">endian::read_le32</references>
-        <references refid="group___bit_manipulation_1ga72e632697db08599344b35a79d612465" compoundref="bit_8hpp" startline="315" endline="318">rotate_l32</references>
-        <referencedby refid="classbasic__string_1a888915fb4fa1e9437b2da0bae242c8f3" compoundref="basic__string_8hpp" startline="2935" endline="2942">basic_string&lt; char &gt;::to_hash</referencedby>
-        <referencedby refid="classbasic__string__view_1a2df83c604c383ed42dda922fb1019b58" compoundref="basic__string__view_8hpp" startline="1033" endline="1040">basic_string_view&lt; typename Traits::char_type, Traits &gt;::to_hash</referencedby>
+        <references refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" compoundref="type__erase_8hpp" startline="41" endline="43">neforce::end</references>
+        <references refid="structneforce_1_1endian_1a6f47f08acca23efd32c3d6c454f80b27" compoundref="endian_8hpp" startline="249" endline="252">neforce::endian::read_le32</references>
+        <references refid="group___bit_manipulation_1ga55811835c3923cc960cdbe67444f9746" compoundref="bit_8hpp" startline="315" endline="318">neforce::rotate_l32</references>
+        <references refid="group___hash_primary_1ga654eebd13fac3d583c859c20f79cac1c" compoundref="hash_8hpp" startline="428" endline="485">neforce::XXH32</references>
+        <referencedby refid="classneforce_1_1basic__string_1a12e922432c8b15c3a9702d93df44467e" compoundref="basic__string_8hpp" startline="3050" endline="3057">neforce::basic_string&lt; char &gt;::to_hash</referencedby>
+        <referencedby refid="classneforce_1_1basic__string__view_1a33a70f2c9b7c44979ed383551a0e7b4d" compoundref="basic__string__view_8hpp" startline="1126" endline="1133">neforce::basic_string_view&lt; typename Traits::char_type, Traits &gt;::to_hash</referencedby>
+        <referencedby refid="group___hash_primary_1ga654eebd13fac3d583c859c20f79cac1c" compoundref="hash_8hpp" startline="428" endline="485">neforce::XXH32</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___hash_primary_1ga783f7ef365d047acb06e34079ee3f664" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
-        <definition>uint64_t XXH64</definition>
+      <memberdef kind="function" id="group___hash_primary_1ga78fcbfa4542424810750fc62137a3579" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t neforce::XXH64</definition>
         <argsstring>(const void *input, size_t len, uint64_t seed=0) noexcept</argsstring>
         <name>XXH64</name>
+        <qualifiedname>neforce::XXH64</qualifiedname>
         <param>
           <type>const void *</type>
           <declname>input</declname>
         </param>
         <param>
-          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>size_t</type>
           <declname>len</declname>
         </param>
         <param>
-          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <type>uint64_t</type>
           <declname>seed</declname>
           <defval>0</defval>
         </param>
@@ -573,28 +618,31 @@ xxHash 的 64 位版本，适合中等到大型数据的哈希。 在 64 位平�
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="499" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" bodystart="499" bodyend="573"/>
-        <references refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" compoundref="type__erase_8hpp" startline="41" endline="43">end</references>
-        <references refid="structendian_1a509ea1fc5587ada5b356d0cf6dd86a13" compoundref="endian_8hpp" startline="249" endline="252">endian::read_le32</references>
-        <references refid="structendian_1a9d431545beb8ae553f1641172196b61c" compoundref="endian_8hpp" startline="259" endline="264">endian::read_le64</references>
-        <references refid="group___bit_manipulation_1ga510378a028af4919c386cd0226405fba" compoundref="bit_8hpp" startline="334" endline="337">rotate_l64</references>
-        <referencedby refid="classbasic__string_1a888915fb4fa1e9437b2da0bae242c8f3" compoundref="basic__string_8hpp" startline="2935" endline="2942">basic_string&lt; char &gt;::to_hash</referencedby>
-        <referencedby refid="classbasic__string__view_1a2df83c604c383ed42dda922fb1019b58" compoundref="basic__string__view_8hpp" startline="1033" endline="1040">basic_string_view&lt; typename Traits::char_type, Traits &gt;::to_hash</referencedby>
+        <references refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" compoundref="type__erase_8hpp" startline="41" endline="43">neforce::end</references>
+        <references refid="structneforce_1_1endian_1a6f47f08acca23efd32c3d6c454f80b27" compoundref="endian_8hpp" startline="249" endline="252">neforce::endian::read_le32</references>
+        <references refid="structneforce_1_1endian_1ad1a2570c272b9276d906f5a349dc4638" compoundref="endian_8hpp" startline="259" endline="264">neforce::endian::read_le64</references>
+        <references refid="group___bit_manipulation_1ga801b9709bdb7fe95fb94af00cd12e01e" compoundref="bit_8hpp" startline="334" endline="337">neforce::rotate_l64</references>
+        <references refid="group___hash_primary_1ga78fcbfa4542424810750fc62137a3579" compoundref="hash_8hpp" startline="499" endline="573">neforce::XXH64</references>
+        <referencedby refid="classneforce_1_1basic__string_1a12e922432c8b15c3a9702d93df44467e" compoundref="basic__string_8hpp" startline="3050" endline="3057">neforce::basic_string&lt; char &gt;::to_hash</referencedby>
+        <referencedby refid="classneforce_1_1basic__string__view_1a33a70f2c9b7c44979ed383551a0e7b4d" compoundref="basic__string__view_8hpp" startline="1126" endline="1133">neforce::basic_string_view&lt; typename Traits::char_type, Traits &gt;::to_hash</referencedby>
+        <referencedby refid="group___hash_primary_1ga78fcbfa4542424810750fc62137a3579" compoundref="hash_8hpp" startline="499" endline="573">neforce::XXH64</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___hash_primary_1ga735504626407442e0b3de37f796866d2" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
-        <definition>uint64_t wyhash</definition>
+      <memberdef kind="function" id="group___hash_primary_1ga8520304aa6d2212625d2f80bf3c83fc7" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t neforce::wyhash</definition>
         <argsstring>(const void *key, size_t len, uint64_t seed) noexcept</argsstring>
         <name>wyhash</name>
+        <qualifiedname>neforce::wyhash</qualifiedname>
         <param>
           <type>const void *</type>
           <declname>key</declname>
         </param>
         <param>
-          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>size_t</type>
           <declname>len</declname>
         </param>
         <param>
-          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <type>uint64_t</type>
           <declname>seed</declname>
         </param>
         <briefdescription>
@@ -633,18 +681,21 @@ wyhash（Wang Yi&apos;s hash）是一种现代非加密哈希算法， 在 SMHas
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="591" column="11" declfile="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" declline="591" declcolumn="11"/>
+        <references refid="group___hash_primary_1ga8520304aa6d2212625d2f80bf3c83fc7">neforce::wyhash</references>
+        <referencedby refid="group___hash_primary_1ga8520304aa6d2212625d2f80bf3c83fc7">neforce::wyhash</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___hash_primary_1ga5142495b01a1ff214568a68bc7c31428" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
-        <definition>size_t city_hash64</definition>
+      <memberdef kind="function" id="group___hash_primary_1ga389cf9300b3eddfe51d334119871d8b9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t neforce::city_hash64</definition>
         <argsstring>(const void *key, size_t len) noexcept</argsstring>
         <name>city_hash64</name>
+        <qualifiedname>neforce::city_hash64</qualifiedname>
         <param>
           <type>const void *</type>
           <declname>key</declname>
         </param>
         <param>
-          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>size_t</type>
           <declname>len</declname>
         </param>
         <briefdescription>
@@ -675,18 +726,21 @@ Google CityHash 是一种非加密哈希算法，专为字符串哈希优化。 
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="605" column="9" declfile="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" declline="605" declcolumn="9"/>
+        <references refid="group___hash_primary_1ga389cf9300b3eddfe51d334119871d8b9">neforce::city_hash64</references>
+        <referencedby refid="group___hash_primary_1ga389cf9300b3eddfe51d334119871d8b9">neforce::city_hash64</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___hash_primary_1ga9c3b2b7ee04c32a7667f5377fb597378" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
-        <definition>uint64_t XXH3_64</definition>
+      <memberdef kind="function" id="group___hash_primary_1gadea5654d5b5c346a1c3169534a62941f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t neforce::XXH3_64</definition>
         <argsstring>(const void *data, size_t len) noexcept</argsstring>
         <name>XXH3_64</name>
+        <qualifiedname>neforce::XXH3_64</qualifiedname>
         <param>
           <type>const void *</type>
           <declname>data</declname>
         </param>
         <param>
-          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>size_t</type>
           <declname>len</declname>
         </param>
         <briefdescription>
@@ -717,7 +771,9 @@ XXH3 是 xxHash 系列的最新版本，在 64 位平台上速度极快。 使�
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="617" column="11" declfile="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" declline="617" declcolumn="11"/>
-        <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+        <references refid="group___hash_primary_1gadea5654d5b5c346a1c3169534a62941f">neforce::XXH3_64</references>
+        <referencedby refid="group___hash_primary_1gadea5654d5b5c346a1c3169534a62941f">neforce::XXH3_64</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -802,13 +858,13 @@ XXH3 是 xxHash 系列的最新版本，在 64 位平台上速度极快。 使�
 </entry></row>
 <row>
 <entry thead="no"><para>low_level_hash  </para>
-</entry><entry thead="no"><para><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>  </para>
+</entry><entry thead="no"><para><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref>  </para>
 </entry><entry thead="no"><para>单值位混合、零值安全  </para>
 </entry><entry thead="no"><para>基本类型 hash 特化的内部基础  </para>
 </entry></row>
 <row>
 <entry thead="no"><para>hash_combine  </para>
-</entry><entry thead="no"><para><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>  </para>
+</entry><entry thead="no"><para><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref>  </para>
 </entry><entry thead="no"><para>组合多个哈希值  </para>
 </entry><entry thead="no"><para>自定义结构体哈希  </para>
 </entry></row>
@@ -817,8 +873,8 @@ XXH3 是 xxHash 系列的最新版本，在 64 位平台上速度极快。 使�
 </sect1>
 <sect1 id="group___hash_primary_1hash_requirements">
 <title>哈希函数要求</title><para>根据 ISO/IEC 14882:2020 §16.4.4，C++ 标准库哈希函数应满足：<itemizedlist>
-<listitem><para>可调用类型：接受 Key 类型参数，返回 <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></para>
-</listitem><listitem><para>相等性：若 k1 == k2，则 <ref refid="structhash" kindref="compound">hash(k1)</ref> == <ref refid="structhash" kindref="compound">hash(k2)</ref></para>
+<listitem><para>可调用类型：接受 Key 类型参数，返回 <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></para>
+</listitem><listitem><para>相等性：若 k1 == k2，则 hash(k1) == hash(k2)</para>
 </listitem><listitem><para>不抛出异常（推荐）：哈希计算不抛出异常</para>
 </listitem></itemizedlist>
 </para>

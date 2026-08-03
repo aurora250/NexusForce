@@ -1,0 +1,516 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classstring__builder" kind="class" language="C++" prot="public">
+    <compoundname>string_builder</compoundname>
+    <includes refid="string__builder_8hpp" local="no">string_builder.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classstring__builder_1a181d9c8906b50f291bf04e19545dbc25" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref> &gt;</type>
+        <definition>vector&lt;string_view&gt; string_builder::pieces_</definition>
+        <argsstring></argsstring>
+        <name>pieces_</name>
+        <qualifiedname>string_builder::pieces_</qualifiedname>
+        <briefdescription>
+<para>字符串片段视图 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" line="155" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classstring__builder_1aec55669d0385ddd506c1b4889cb74b41" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt;</type>
+        <definition>vector&lt;string&gt; string_builder::owned_pieces_</definition>
+        <argsstring></argsstring>
+        <name>owned_pieces_</name>
+        <qualifiedname>string_builder::owned_pieces_</qualifiedname>
+        <briefdescription>
+<para>内部持有的字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" line="156" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" bodystart="156" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classstring__builder_1a71308a41dcb18e364962058eb9d8e0ae" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t string_builder::total_size_</definition>
+        <argsstring></argsstring>
+        <name>total_size_</name>
+        <qualifiedname>string_builder::total_size_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>已收集片段总长度 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" line="157" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" bodystart="157" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classstring__builder_1a7c7dba5b7d1c18ee62aa156e128205e9" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t string_builder::reserved_size_</definition>
+        <argsstring></argsstring>
+        <name>reserved_size_</name>
+        <qualifiedname>string_builder::reserved_size_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>预设输出容量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" line="158" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" bodystart="158" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classstring__builder_1a74102f2ec95f9b1f4f5d264816cb86c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>string_builder::string_builder</definition>
+        <argsstring>()=default</argsstring>
+        <name>string_builder</name>
+        <qualifiedname>string_builder::string_builder</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" line="32" column="5"/>
+        <referencedby refid="classstring__builder_1a41bcea666f74abc62c00e95089ad55e9" compoundref="string__builder_8hpp" startline="69" endline="69">append</referencedby>
+        <referencedby refid="classstring__builder_1ad743b2891d65b7357eb1cd513824dcbf" compoundref="string__builder_8hpp" startline="76" endline="81">append</referencedby>
+        <referencedby refid="classstring__builder_1ae8573ff7b9ff4075c1fbe92bcfbb1a9d" compoundref="string__builder_8hpp" startline="62" endline="62">append</referencedby>
+        <referencedby refid="classstring__builder_1acd82a88643d799424ae74cc596c8e600" compoundref="string__builder_8hpp" startline="51" endline="55">append</referencedby>
+        <referencedby refid="classstring__builder_1a0540d15d2817f9a0a0f887fdcc5ae23e" compoundref="string__builder_8hpp" startline="91" endline="96">append</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classstring__builder_1a8297b4d3d027edd09087cb3ad5de7ab7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void string_builder::reserve_pieces</definition>
+        <argsstring>(const size_t n)</argsstring>
+        <name>reserve_pieces</name>
+        <qualifiedname>string_builder::reserve_pieces</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>预留片段容量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>预计的片段数量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" line="38" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classstring__builder_1abdb042421fb612e47189874eb3138ca7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void string_builder::reserve</definition>
+        <argsstring>(const size_t n)</argsstring>
+        <name>reserve</name>
+        <qualifiedname>string_builder::reserve</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>预留输出总大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>预计的总字符数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" line="44" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classstring__builder_1acd82a88643d799424ae74cc596c8e600" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classstring__builder" kindref="compound">string_builder</ref> &amp;</type>
+        <definition>string_builder &amp; string_builder::append</definition>
+        <argsstring>(const string_view sv)</argsstring>
+        <name>append</name>
+        <qualifiedname>string_builder::append</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>sv</declname>
+        </param>
+        <briefdescription>
+<para>追加字符串视图 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" line="51" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" bodystart="51" bodyend="55"/>
+        <references refid="classbasic__string__view_1a0b5a6546739bc33ecbe750f98ac47b25" compoundref="basic__string__view_8hpp" startline="306" endline="306">basic_string_view&lt; CharT, Traits &gt;::size</references>
+        <references refid="classstring__builder_1a74102f2ec95f9b1f4f5d264816cb86c5">string_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classstring__builder_1ae8573ff7b9ff4075c1fbe92bcfbb1a9d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classstring__builder" kindref="compound">string_builder</ref> &amp;</type>
+        <definition>string_builder &amp; string_builder::append</definition>
+        <argsstring>(const string &amp;str)</argsstring>
+        <name>append</name>
+        <qualifiedname>string_builder::append</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>追加字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" line="62" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" bodystart="62" bodyend="62"/>
+        <references refid="classstring__builder_1ae8573ff7b9ff4075c1fbe92bcfbb1a9d" compoundref="string__builder_8hpp" startline="62" endline="62">append</references>
+        <references refid="classstring__builder_1a74102f2ec95f9b1f4f5d264816cb86c5">string_builder</references>
+        <references refid="classbasic__string_1ad5aafd7e8c50ae4762af6e22069b90d7" compoundref="basic__string_8hpp" startline="2147" endline="2147">basic_string&lt; CharT, Traits, Alloc &gt;::view</references>
+        <referencedby refid="classstring__builder_1ae8573ff7b9ff4075c1fbe92bcfbb1a9d" compoundref="string__builder_8hpp" startline="62" endline="62">append</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classstring__builder_1a41bcea666f74abc62c00e95089ad55e9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classstring__builder" kindref="compound">string_builder</ref> &amp;</type>
+        <definition>string_builder &amp; string_builder::append</definition>
+        <argsstring>(const char *str)</argsstring>
+        <name>append</name>
+        <qualifiedname>string_builder::append</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>追加 C 风格字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>C 风格字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" line="69" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" bodystart="69" bodyend="69"/>
+        <references refid="classstring__builder_1a41bcea666f74abc62c00e95089ad55e9" compoundref="string__builder_8hpp" startline="69" endline="69">append</references>
+        <references refid="classstring__builder_1a74102f2ec95f9b1f4f5d264816cb86c5">string_builder</references>
+        <referencedby refid="classstring__builder_1a41bcea666f74abc62c00e95089ad55e9" compoundref="string__builder_8hpp" startline="69" endline="69">append</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classstring__builder_1ad743b2891d65b7357eb1cd513824dcbf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classstring__builder" kindref="compound">string_builder</ref> &amp;</type>
+        <definition>string_builder &amp; string_builder::append</definition>
+        <argsstring>(const char c)</argsstring>
+        <name>append</name>
+        <qualifiedname>string_builder::append</qualifiedname>
+        <param>
+          <type>const char</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>追加单个字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" line="76" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" bodystart="76" bodyend="81"/>
+        <references refid="classstring__builder_1a74102f2ec95f9b1f4f5d264816cb86c5">string_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classstring__builder_1a0540d15d2817f9a0a0f887fdcc5ae23e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename P</type>
+            <defval><ref refid="group___base_type_properties_1gad3210ef30a41dfbe37f4b0afa11cf9d1" kindref="member">package_t</ref>&lt;T&gt;</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga8b05ec45a809cf721186814267d41579" kindref="member">is_packaged_v</ref>&lt; T &gt; &amp;&amp;<ref refid="group___base_type_qualifier_check_1ga096bf5b121d9f427c8027f2949e8198e" kindref="member">is_base_of_v</ref>&lt; <ref refid="structistringify" kindref="compound">istringify</ref>&lt; P &gt;, P &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classstring__builder" kindref="compound">string_builder</ref> &amp;</type>
+        <definition>string_builder &amp; string_builder::append</definition>
+        <argsstring>(const T &amp;value)</argsstring>
+        <name>append</name>
+        <qualifiedname>string_builder::append</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>追加任意可转为字符串的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>支持包装类型的基本类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要追加的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" line="91" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" bodystart="91" bodyend="96"/>
+        <references refid="classstring__builder_1a19f03dc6c669d589575b8b7ab7a2cbeb" compoundref="string__builder_8hpp" startline="136" endline="136">size</references>
+        <references refid="classstring__builder_1a74102f2ec95f9b1f4f5d264816cb86c5">string_builder</references>
+        <references refid="group___u_t_f_converts_1ga64a58369986078d7a0ef24ca1a53c920" compoundref="icharacter_8hpp" startline="115" endline="117">to_string</references>
+      </memberdef>
+      <memberdef kind="function" id="classstring__builder_1abe0ab8506404ed506fd3490dbfd52a9b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_qualifier_check_1ga096bf5b121d9f427c8027f2949e8198e" kindref="member">is_base_of_v</ref>&lt; <ref refid="structistringify" kindref="compound">istringify</ref>&lt; T &gt;, T &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classstring__builder" kindref="compound">string_builder</ref> &amp;</type>
+        <definition>string_builder &amp; string_builder::append</definition>
+        <argsstring>(const T &amp;value)</argsstring>
+        <name>append</name>
+        <qualifiedname>string_builder::append</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>追加任意可转为字符串的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structistringify" kindref="compound">istringify&lt;T&gt;</ref> 子类类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要追加的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" line="105" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" bodystart="105" bodyend="110"/>
+        <references refid="classstring__builder_1a19f03dc6c669d589575b8b7ab7a2cbeb" compoundref="string__builder_8hpp" startline="136" endline="136">size</references>
+        <references refid="classstring__builder_1a74102f2ec95f9b1f4f5d264816cb86c5">string_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classstring__builder_1a1a1fd7cc32add5f8140403fab4b62a7a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string string_builder::build</definition>
+        <argsstring>() const</argsstring>
+        <name>build</name>
+        <qualifiedname>string_builder::build</qualifiedname>
+        <briefdescription>
+<para>构建字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>拼接后的字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" line="116" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" bodystart="116" bodyend="124"/>
+        <references refid="classbasic__string_1a23c524fe4e21ba7bf374b0949786310c" compoundref="basic__string_8hpp" startline="1573" endline="1611">basic_string&lt; CharT, Traits, Alloc &gt;::append</references>
+        <references refid="group___compare_algorithms_1ga01c48c11cc5d3222cb2e3adf0f843f3e" compoundref="algorithm_2compare_8hpp" startline="133" endline="135">max</references>
+        <references refid="classbasic__string_1aa2527f9b1a17a4b866e3e59e384dc0d8" compoundref="basic__string_8hpp" startline="1275" endline="1302">basic_string&lt; CharT, Traits, Alloc &gt;::reserve</references>
+        <referencedby refid="group___string_1ga9317e3c78441e21af0b4202df91c02e6" compoundref="string__builder_8hpp" startline="191" endline="195">concatenate</referencedby>
+        <referencedby refid="classstring__builder_1a6da34bf70f0fd77a43b2a9ab62f8030e" compoundref="string__builder_8hpp" startline="130" endline="130">operator string</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classstring__builder_1a6da34bf70f0fd77a43b2a9ab62f8030e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>string_builder::operator string</definition>
+        <argsstring>() const</argsstring>
+        <name>operator string</name>
+        <qualifiedname>string_builder::operator string</qualifiedname>
+        <briefdescription>
+<para>隐式转换为字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>拼接后的字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" line="130" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" bodystart="130" bodyend="130"/>
+        <references refid="classstring__builder_1a1a1fd7cc32add5f8140403fab4b62a7a" compoundref="string__builder_8hpp" startline="116" endline="124">build</references>
+      </memberdef>
+      <memberdef kind="function" id="classstring__builder_1a19f03dc6c669d589575b8b7ab7a2cbeb" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t string_builder::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>string_builder::size</qualifiedname>
+        <briefdescription>
+<para>当前总字符数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>已收集片段的总长度 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" line="136" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" bodystart="136" bodyend="136"/>
+        <referencedby refid="classstring__builder_1a0540d15d2817f9a0a0f887fdcc5ae23e" compoundref="string__builder_8hpp" startline="91" endline="96">append</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classstring__builder_1a71cf637b08b821b24a36183ec5e1ac8a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool string_builder::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>string_builder::empty</qualifiedname>
+        <briefdescription>
+<para>是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>无任何片段时返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" line="142" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" bodystart="142" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="classstring__builder_1a383c32c9de9ab5059ff10ca6bdb4d4e9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void string_builder::clear</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clear</name>
+        <qualifiedname>string_builder::clear</qualifiedname>
+        <briefdescription>
+<para>清空所有已收集的片段 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" line="147" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" bodystart="147" bodyend="152"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>延迟拼接的字符串构建器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>收集字符串片段，在调用 <ref refid="classstring__builder_1a1a1fd7cc32add5f8140403fab4b62a7a" kindref="member">build()</ref> 时一次性分配内存并拼接。</para>
+<para><simplesect kind="warning"><para>调用者必须保证传入的 <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref> 和 const char* 参数在 <ref refid="classstring__builder_1a1a1fd7cc32add5f8140403fab4b62a7a" kindref="member">build()</ref> 调用之前保持有效。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" line="27" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/string_builder.hpp" bodystart="27" bodyend="159"/>
+    <listofallmembers>
+      <member refid="classstring__builder_1acd82a88643d799424ae74cc596c8e600" prot="public" virt="non-virtual"><scope>string_builder</scope><name>append</name></member>
+      <member refid="classstring__builder_1ae8573ff7b9ff4075c1fbe92bcfbb1a9d" prot="public" virt="non-virtual"><scope>string_builder</scope><name>append</name></member>
+      <member refid="classstring__builder_1a41bcea666f74abc62c00e95089ad55e9" prot="public" virt="non-virtual"><scope>string_builder</scope><name>append</name></member>
+      <member refid="classstring__builder_1ad743b2891d65b7357eb1cd513824dcbf" prot="public" virt="non-virtual"><scope>string_builder</scope><name>append</name></member>
+      <member refid="classstring__builder_1a0540d15d2817f9a0a0f887fdcc5ae23e" prot="public" virt="non-virtual"><scope>string_builder</scope><name>append</name></member>
+      <member refid="classstring__builder_1abe0ab8506404ed506fd3490dbfd52a9b" prot="public" virt="non-virtual"><scope>string_builder</scope><name>append</name></member>
+      <member refid="classstring__builder_1a1a1fd7cc32add5f8140403fab4b62a7a" prot="public" virt="non-virtual"><scope>string_builder</scope><name>build</name></member>
+      <member refid="classstring__builder_1a383c32c9de9ab5059ff10ca6bdb4d4e9" prot="public" virt="non-virtual"><scope>string_builder</scope><name>clear</name></member>
+      <member refid="classstring__builder_1a71cf637b08b821b24a36183ec5e1ac8a" prot="public" virt="non-virtual"><scope>string_builder</scope><name>empty</name></member>
+      <member refid="classstring__builder_1a6da34bf70f0fd77a43b2a9ab62f8030e" prot="public" virt="non-virtual"><scope>string_builder</scope><name>operator string</name></member>
+      <member refid="classstring__builder_1aec55669d0385ddd506c1b4889cb74b41" prot="private" virt="non-virtual"><scope>string_builder</scope><name>owned_pieces_</name></member>
+      <member refid="classstring__builder_1a181d9c8906b50f291bf04e19545dbc25" prot="private" virt="non-virtual"><scope>string_builder</scope><name>pieces_</name></member>
+      <member refid="classstring__builder_1abdb042421fb612e47189874eb3138ca7" prot="public" virt="non-virtual"><scope>string_builder</scope><name>reserve</name></member>
+      <member refid="classstring__builder_1a8297b4d3d027edd09087cb3ad5de7ab7" prot="public" virt="non-virtual"><scope>string_builder</scope><name>reserve_pieces</name></member>
+      <member refid="classstring__builder_1a7c7dba5b7d1c18ee62aa156e128205e9" prot="private" virt="non-virtual"><scope>string_builder</scope><name>reserved_size_</name></member>
+      <member refid="classstring__builder_1a19f03dc6c669d589575b8b7ab7a2cbeb" prot="public" virt="non-virtual"><scope>string_builder</scope><name>size</name></member>
+      <member refid="classstring__builder_1a74102f2ec95f9b1f4f5d264816cb86c5" prot="public" virt="non-virtual"><scope>string_builder</scope><name>string_builder</name></member>
+      <member refid="classstring__builder_1a71308a41dcb18e364962058eb9d8e0ae" prot="private" virt="non-virtual"><scope>string_builder</scope><name>total_size_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

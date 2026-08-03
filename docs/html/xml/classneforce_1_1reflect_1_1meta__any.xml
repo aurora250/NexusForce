@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1reflect_1_1meta__any" kind="class" language="C++" prot="public">
+    <compoundname>neforce::reflect::meta_any</compoundname>
+    <includes refid="reflect_2any_8hpp" local="no">any.hpp</includes>
+    <innerclass refid="unionneforce_1_1reflect_1_1meta__any_1_1storage__internal" prot="private">neforce::reflect::meta_any::storage_internal</innerclass>
+    <innerclass refid="unionneforce_1_1reflect_1_1meta__any_1_1arg__t" prot="private">neforce::reflect::meta_any::arg_t</innerclass>
+    <innerclass refid="structneforce_1_1reflect_1_1meta__any_1_1internal__manage" prot="private">neforce::reflect::meta_any::internal_manage</innerclass>
+    <innerclass refid="structneforce_1_1reflect_1_1meta__any_1_1external__manage" prot="private">neforce::reflect::meta_any::external_manage</innerclass>
+    <sectiondef kind="private-type">
+      <memberdef kind="enum" id="classneforce_1_1reflect_1_1meta__any_1a9e45879f9799638215becd968ced3541" prot="private" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref></type>
+        <name>operation</name>
+        <qualifiedname>neforce::reflect::meta_any::operation</qualifiedname>
+        <enumvalue id="classneforce_1_1reflect_1_1meta__any_1a9e45879f9799638215becd968ced3541a0a3f43b00ddd148f64178deb155a9f45" prot="private">
+          <name>ACCESS</name>
+          <briefdescription>
+<para>获取值指针 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1reflect_1_1meta__any_1a9e45879f9799638215becd968ced3541acac637be20f73f2a8f91a855d31345ad" prot="private">
+          <name>GET_TYPE_ID</name>
+          <briefdescription>
+<para>获取类型 ID </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1reflect_1_1meta__any_1a9e45879f9799638215becd968ced3541ae8606d021da140a92c7eba8d9b8af84f" prot="private">
+          <name>COPY</name>
+          <briefdescription>
+<para>深拷贝到另一个 <ref refid="classneforce_1_1reflect_1_1meta__any" kindref="compound">meta_any</ref> </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1reflect_1_1meta__any_1a9e45879f9799638215becd968ced3541ac39aa6dbe619bb8ef8187b00b686df6a" prot="private">
+          <name>DESTROY</name>
+          <briefdescription>
+<para>销毁存储的值 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1reflect_1_1meta__any_1a9e45879f9799638215becd968ced3541af7f93635f8e193a924ae4a691bb66b8f" prot="private">
+          <name>MOVE</name>
+          <briefdescription>
+<para>移动构造到另一个 <ref refid="classneforce_1_1reflect_1_1meta__any" kindref="compound">meta_any</ref> </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>管理器操作类型枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="103" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="103" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1reflect_1_1meta__any_1ad57a35896fd202550bcd05fda37bdcb5" prot="private" static="no">
+        <type>void(*)(operation, const <ref refid="classneforce_1_1reflect_1_1meta__any" kindref="compound">meta_any</ref> *, arg_t *)</type>
+        <definition>using neforce::reflect::meta_any::manage_func = void (*)(operation, const meta_any*, arg_t*)</definition>
+        <argsstring></argsstring>
+        <name>manage_func</name>
+        <qualifiedname>neforce::reflect::meta_any::manage_func</qualifiedname>
+        <briefdescription>
+<para>管理器函数指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="121" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="121" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classneforce_1_1reflect_1_1meta__any_1a4a1160e3fdb60dade7550bd57f95e48b" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::reflect::meta_any::SBO_SIZE</definition>
+        <argsstring></argsstring>
+        <name>SBO_SIZE</name>
+        <qualifiedname>neforce::reflect::meta_any::SBO_SIZE</qualifiedname>
+        <initializer>= sizeof(void*) * 2</initializer>
+        <briefdescription>
+<para>SBO 缓冲区大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="81" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>类型擦除容器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>可以存储任意类型的值，并提供类型安全的存取接口。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="79" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="79" bodyend="523"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1reflect_1_1meta__any_1ad57a35896fd202550bcd05fda37bdcb5" prot="private" virt="non-virtual"><scope>neforce::reflect::meta_any</scope><name>manage_func</name></member>
+      <member refid="classneforce_1_1reflect_1_1meta__any_1a9e45879f9799638215becd968ced3541" prot="private" virt="non-virtual"><scope>neforce::reflect::meta_any</scope><name>operation</name></member>
+      <member refid="classneforce_1_1reflect_1_1meta__any_1a4a1160e3fdb60dade7550bd57f95e48b" prot="public" virt="non-virtual"><scope>neforce::reflect::meta_any</scope><name>SBO_SIZE</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

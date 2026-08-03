@@ -80,8 +80,8 @@
         </childnode>
       </node>
       <node id="17">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="12" relation="include">
         </childnode>
       </node>
@@ -258,30 +258,44 @@
         </childnode>
         <childnode refid="48" relation="include">
         </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
         <childnode refid="42" relation="include">
         </childnode>
       </node>
-      <node id="49">
+      <node id="51">
         <label>NeForce/core/string/basic_string_view.hpp</label>
         <link refid="basic__string__view_8hpp"/>
         <childnode refid="40" relation="include">
         </childnode>
-        <childnode refid="50" relation="include">
+        <childnode refid="52" relation="include">
         </childnode>
-        <childnode refid="51" relation="include">
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
         </childnode>
       </node>
-      <node id="50">
+      <node id="52">
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="30" relation="include">
         </childnode>
         <childnode refid="26" relation="include">
         </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
       </node>
-      <node id="51">
+      <node id="49">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>NeForce/core/string/charset.hpp</label>
+        <link refid="charset_8hpp"/>
+        <childnode refid="49" relation="include">
+        </childnode>
         <childnode refid="10" relation="include">
         </childnode>
       </node>
@@ -291,10 +305,10 @@
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="48">
+      <node id="50">
         <label>NeForce/core/string/string_view.hpp</label>
         <link refid="string__view_8hpp"/>
-        <childnode refid="49" relation="include">
+        <childnode refid="51" relation="include">
         </childnode>
       </node>
       <node id="18">
@@ -492,12 +506,10 @@
         <link refid="session__store__redis_8hpp"/>
       </node>
     </invincdepgraph>
-    <innerclass refid="structdatabase__typecast__exception" prot="public">database_typecast_exception</innerclass>
-    <innerclass refid="structdatabase__stmt__exception" prot="public">database_stmt_exception</innerclass>
-    <innerclass refid="structdb__config" prot="public">db_config</innerclass>
-    <sectiondef kind="enum">
-      <member refid="group___database_1ga80fcb4d728eaac384a3edc19d9ad20c6" kind="enum"><name>db_type</name></member>
-    </sectiondef>
+    <innerclass refid="structneforce_1_1database__typecast__exception" prot="public">neforce::database_typecast_exception</innerclass>
+    <innerclass refid="structneforce_1_1database__stmt__exception" prot="public">neforce::database_stmt_exception</innerclass>
+    <innerclass refid="structneforce_1_1db__config" prot="public">neforce::db_config</innerclass>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
     <briefdescription>
 <para>数据库配置定义 </para>
     </briefdescription>
@@ -513,69 +525,69 @@
 <codeline lineno="14"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight></codeline>
-<codeline lineno="26" refid="structdatabase__typecast__exception" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">database_typecast_exception<sp/>final<sp/>:<sp/>database_exception<sp/>{</highlight></codeline>
+<codeline lineno="26" refid="structneforce_1_1database__typecast__exception" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">database_typecast_exception<sp/>final<sp/>:<sp/>database_exception<sp/>{</highlight></codeline>
 <codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>database_typecast_exception(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>info<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Database<sp/>Type<sp/>Mismatch.&quot;</highlight><highlight class="normal">)<sp/>noexcept<sp/>:</highlight></codeline>
 <codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>database_exception(info)<sp/>{}</highlight></codeline>
 <codeline lineno="29"><highlight class="normal"></highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>database_typecast_exception(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structexception_1ab5edb0e5cd38ed6c450413eb52d95fed" kindref="member">exception</ref>&amp;<sp/>e)<sp/>:</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>database_typecast_exception(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1exception" kindref="compound">exception</ref>&amp;<sp/>e)<sp/>:</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>database_exception(e)<sp/>{}</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight></codeline>
 <codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>~database_typecast_exception()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight></codeline>
-<codeline lineno="35" refid="structdatabase__typecast__exception_1a9021de15f405c07c1c5cd86b346d0b69" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="structdatabase__typecast__exception_1a9021de15f405c07c1c5cd86b346d0b69" kindref="member">type</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;database_typecast_exception&quot;</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="35" refid="structneforce_1_1database__typecast__exception_1ae6eb0507201f23a08e3a0c31975a11df" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="structneforce_1_1database__typecast__exception_1ae6eb0507201f23a08e3a0c31975a11df" kindref="member">type</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;database_typecast_exception&quot;</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
 <codeline lineno="36"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"></highlight></codeline>
-<codeline lineno="42" refid="structdatabase__stmt__exception" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">database_stmt_exception<sp/>final<sp/>:<sp/>database_exception<sp/>{</highlight></codeline>
+<codeline lineno="42" refid="structneforce_1_1database__stmt__exception" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">database_stmt_exception<sp/>final<sp/>:<sp/>database_exception<sp/>{</highlight></codeline>
 <codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>database_stmt_exception(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>info<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Database<sp/>Statement<sp/>Operations<sp/>Error.&quot;</highlight><highlight class="normal">)<sp/>noexcept<sp/>:</highlight></codeline>
 <codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>database_exception(info)<sp/>{}</highlight></codeline>
 <codeline lineno="45"><highlight class="normal"></highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>database_stmt_exception(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structexception_1ab5edb0e5cd38ed6c450413eb52d95fed" kindref="member">exception</ref>&amp;<sp/>e)<sp/>:</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>database_stmt_exception(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1exception" kindref="compound">exception</ref>&amp;<sp/>e)<sp/>:</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>database_exception(e)<sp/>{}</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"></highlight></codeline>
 <codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>~database_stmt_exception()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="50"><highlight class="normal"></highlight></codeline>
-<codeline lineno="51" refid="structdatabase__stmt__exception_1ae53547cfe9c1129b28dda6c1e22357e7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="structdatabase__stmt__exception_1ae53547cfe9c1129b28dda6c1e22357e7" kindref="member">type</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;database_prepared_stmt_exception&quot;</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="51" refid="structneforce_1_1database__stmt__exception_1ad52e6559ffa20a86c8f6f3d3a8795711" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="structneforce_1_1database__stmt__exception_1ad52e6559ffa20a86c8f6f3d3a8795711" kindref="member">type</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;database_prepared_stmt_exception&quot;</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
 <codeline lineno="52"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="53"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Exceptions</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="55"><highlight class="normal"></highlight></codeline>
 <codeline lineno="61"><highlight class="normal"></highlight></codeline>
-<codeline lineno="69" refid="group___database_1ga80fcb4d728eaac384a3edc19d9ad20c6" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="group___database_1ga80fcb4d728eaac384a3edc19d9ad20c6" kindref="member">db_type</ref><sp/>:<sp/><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref><sp/>{</highlight></codeline>
+<codeline lineno="69" refid="group___database_1ga7451fab9155dbad9bd8877f7761573f1" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="group___database_1ga7451fab9155dbad9bd8877f7761573f1" kindref="member">db_type</ref><sp/>:<sp/><ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref><sp/>{</highlight></codeline>
 <codeline lineno="70"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_SUPPORT_MYSQL</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="71" refid="group___database_1gga80fcb4d728eaac384a3edc19d9ad20c6a14498b83dd1667a0c78f4fdaf5afbf4b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___database_1gga80fcb4d728eaac384a3edc19d9ad20c6a14498b83dd1667a0c78f4fdaf5afbf4b" kindref="member">MYSQL</ref><sp/>=<sp/>1,<sp/></highlight></codeline>
+<codeline lineno="71" refid="group___database_1gga7451fab9155dbad9bd8877f7761573f1a14498b83dd1667a0c78f4fdaf5afbf4b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___database_1gga7451fab9155dbad9bd8877f7761573f1a14498b83dd1667a0c78f4fdaf5afbf4b" kindref="member">MYSQL</ref><sp/>=<sp/>1,<sp/></highlight></codeline>
 <codeline lineno="72"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="73"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_SUPPORT_SQLITE3</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="74" refid="group___database_1gga80fcb4d728eaac384a3edc19d9ad20c6ab776ca42daf1c2920f5952c8b78c9fff" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___database_1gga80fcb4d728eaac384a3edc19d9ad20c6ab776ca42daf1c2920f5952c8b78c9fff" kindref="member">SQLITE3</ref>,<sp/></highlight></codeline>
+<codeline lineno="74" refid="group___database_1gga7451fab9155dbad9bd8877f7761573f1ab776ca42daf1c2920f5952c8b78c9fff" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___database_1gga7451fab9155dbad9bd8877f7761573f1ab776ca42daf1c2920f5952c8b78c9fff" kindref="member">SQLITE3</ref>,<sp/></highlight></codeline>
 <codeline lineno="75"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="76"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_SUPPORT_HIREDIS</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="77" refid="group___database_1gga80fcb4d728eaac384a3edc19d9ad20c6a5fae8295948da8c244681d7128882023" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___database_1gga80fcb4d728eaac384a3edc19d9ad20c6a5fae8295948da8c244681d7128882023" kindref="member">REDIS</ref>,<sp/></highlight></codeline>
+<codeline lineno="77" refid="group___database_1gga7451fab9155dbad9bd8877f7761573f1a5fae8295948da8c244681d7128882023" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___database_1gga7451fab9155dbad9bd8877f7761573f1a5fae8295948da8c244681d7128882023" kindref="member">REDIS</ref>,<sp/></highlight></codeline>
 <codeline lineno="78"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="79"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_SUPPORT_POSTGRESQL</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="80" refid="group___database_1gga80fcb4d728eaac384a3edc19d9ad20c6a3efccad6e4b6b2044be88d6b86505a5b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___database_1gga80fcb4d728eaac384a3edc19d9ad20c6a3efccad6e4b6b2044be88d6b86505a5b" kindref="member">POSTGRESQL</ref><sp/></highlight></codeline>
+<codeline lineno="80" refid="group___database_1gga7451fab9155dbad9bd8877f7761573f1a3efccad6e4b6b2044be88d6b86505a5b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___database_1gga7451fab9155dbad9bd8877f7761573f1a3efccad6e4b6b2044be88d6b86505a5b" kindref="member">POSTGRESQL</ref><sp/></highlight></codeline>
 <codeline lineno="81"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="82"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="83"><highlight class="normal"></highlight></codeline>
-<codeline lineno="91" refid="structdb__config" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="structdb__config" kindref="compound">db_config</ref><sp/>{</highlight></codeline>
-<codeline lineno="92" refid="structdb__config_1a71f0501128c40e7b169d86d824859d48" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structdb__config_1a71f0501128c40e7b169d86d824859d48" kindref="member">username</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="93" refid="structdb__config_1a334400b6c2e9e50088f859ea4d2bd343" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structdb__config_1a334400b6c2e9e50088f859ea4d2bd343" kindref="member">password</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="94" refid="structdb__config_1ac0135b65bcd3df5dafad475de17dab13" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structdb__config_1ac0135b65bcd3df5dafad475de17dab13" kindref="member">database</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="95" refid="structdb__config_1aa97419dbe5968aca02bd2a52e30dd266" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structdb__config_1aa97419dbe5968aca02bd2a52e30dd266" kindref="member">host</ref>{</highlight><highlight class="stringliteral">&quot;127.0.0.1&quot;</highlight><highlight class="normal">};<sp/></highlight></codeline>
-<codeline lineno="96" refid="structdb__config_1a88dc296a39f44a47646f002e67e9d391" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structdb__config_1a88dc296a39f44a47646f002e67e9d391" kindref="member">charset</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="97" refid="structdb__config_1a9f9f6d6f720e4a6ddeb37739e45a2696" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structports" kindref="compound">ports</ref><sp/><ref refid="structdb__config_1a9f9f6d6f720e4a6ddeb37739e45a2696" kindref="member">port</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="91" refid="structneforce_1_1db__config" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="structneforce_1_1db__config" kindref="compound">db_config</ref><sp/>{</highlight></codeline>
+<codeline lineno="92" refid="structneforce_1_1db__config_1a8781662c28f11e5906ccdde7175a5082" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1db__config_1a8781662c28f11e5906ccdde7175a5082" kindref="member">username</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="93" refid="structneforce_1_1db__config_1a761273f6da6bbd00616105d2ee9b6ff9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1db__config_1a761273f6da6bbd00616105d2ee9b6ff9" kindref="member">password</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="94" refid="structneforce_1_1db__config_1a0d4f9aa8e25bb2c3629f2c7b6659d503" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1db__config_1a0d4f9aa8e25bb2c3629f2c7b6659d503" kindref="member">database</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="95" refid="structneforce_1_1db__config_1a57a0d8ac21e4097f011ed321a2bbb83e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1db__config_1a57a0d8ac21e4097f011ed321a2bbb83e" kindref="member">host</ref>{</highlight><highlight class="stringliteral">&quot;127.0.0.1&quot;</highlight><highlight class="normal">};<sp/></highlight></codeline>
+<codeline lineno="96" refid="structneforce_1_1db__config_1a0a19da6b2d819df9c2b533d30f150756" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1db__config_1a0a19da6b2d819df9c2b533d30f150756" kindref="member">charset</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="97" refid="structneforce_1_1db__config_1a673442012c89c523ae340bedf88438c3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structneforce_1_1ports" kindref="compound">ports</ref><sp/><ref refid="structneforce_1_1db__config_1a673442012c89c523ae340bedf88438c3" kindref="member">port</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="98"><highlight class="normal"></highlight></codeline>
 <codeline lineno="99"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_SUPPORT_POSTGRESQL</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="110" refid="structdb__config_1a559b4f647fd3c9dfe398583a9b061d84" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structdb__config" kindref="compound">db_config</ref><sp/><ref refid="structdb__config_1a559b4f647fd3c9dfe398583a9b061d84" kindref="member">for_postgresql</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>db<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;postgres&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="110" refid="structneforce_1_1db__config_1a409ba983b3f1dc80ad329032d8046525" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1db__config" kindref="compound">db_config</ref><sp/><ref refid="structneforce_1_1db__config_1a409ba983b3f1dc80ad329032d8046525" kindref="member">for_postgresql</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>db<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;postgres&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="111"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="112"><highlight class="normal"></highlight></codeline>
 <codeline lineno="113"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_SUPPORT_MYSQL</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="124" refid="structdb__config_1abf7eae05de070b69b005b3fcef81e74e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structdb__config" kindref="compound">db_config</ref><sp/><ref refid="structdb__config_1abf7eae05de070b69b005b3fcef81e74e" kindref="member">for_mysql</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>db);</highlight></codeline>
+<codeline lineno="124" refid="structneforce_1_1db__config_1a80d13b37b3e98921dd041bbc095e797f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1db__config" kindref="compound">db_config</ref><sp/><ref refid="structneforce_1_1db__config_1a80d13b37b3e98921dd041bbc095e797f" kindref="member">for_mysql</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>db);</highlight></codeline>
 <codeline lineno="125"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="126"><highlight class="normal"></highlight></codeline>
 <codeline lineno="127"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_SUPPORT_SQLITE3</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="136" refid="structdb__config_1a56c5c8eed8ded8deb3c9c9d4bbb8ae20" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structdb__config" kindref="compound">db_config</ref><sp/><ref refid="structdb__config_1a56c5c8eed8ded8deb3c9c9d4bbb8ae20" kindref="member">for_sqlite</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="classfile" kindref="compound">file</ref>);</highlight></codeline>
+<codeline lineno="136" refid="structneforce_1_1db__config_1a3c18bb02024160dcd70a8334806f0cb9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1db__config" kindref="compound">db_config</ref><sp/><ref refid="structneforce_1_1db__config_1a3c18bb02024160dcd70a8334806f0cb9" kindref="member">for_sqlite</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="classneforce_1_1file" kindref="compound">file</ref>);</highlight></codeline>
 <codeline lineno="137"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="138"><highlight class="normal"></highlight></codeline>
 <codeline lineno="139"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_SUPPORT_HIREDIS</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="149" refid="structdb__config_1abfa300eaf914dc1aa4dd3bda1b924ccd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structdb__config" kindref="compound">db_config</ref><sp/><ref refid="structdb__config_1abfa300eaf914dc1aa4dd3bda1b924ccd" kindref="member">for_redis</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>db);</highlight></codeline>
+<codeline lineno="149" refid="structneforce_1_1db__config_1ab403e0de6c21b306207f734b8bf23cfb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1db__config" kindref="compound">db_config</ref><sp/><ref refid="structneforce_1_1db__config_1ab403e0de6c21b306207f734b8bf23cfb" kindref="member">for_redis</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>db);</highlight></codeline>
 <codeline lineno="150"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="151"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="152"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Database</highlight><highlight class="normal"></highlight></codeline>

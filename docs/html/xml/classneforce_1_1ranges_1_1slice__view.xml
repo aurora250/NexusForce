@@ -1,0 +1,307 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1ranges_1_1slice__view" kind="class" language="C++" prot="public">
+    <compoundname>neforce::ranges::slice_view</compoundname>
+    <basecompoundref refid="structneforce_1_1ranges_1_1view__base" prot="public" virt="non-virtual">neforce::ranges::view_base&lt; slice_view&lt; V &gt; &gt;</basecompoundref>
+    <innerclass refid="structneforce_1_1ranges_1_1slice__view_1_1cache__t" prot="private">neforce::ranges::slice_view::cache_t</innerclass>
+    <templateparamlist>
+      <param>
+        <type>View</type>
+        <declname>V</declname>
+        <defname>V</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classneforce_1_1ranges_1_1slice__view_1a1be4b67d0a79346e6286311d20490abe" prot="private" static="no">
+        <type>decltype(_NEFORCE <ref refid="group___declval_tools_1ga7071848a30be73f786711db2ae038447" kindref="member">declval</ref>&lt; <ref refid="group___remove_qualifiers_1gadd1089c72d20cd28c493bf637f0bfc68" kindref="member">remove_const_t</ref>&lt; V &gt; &gt;().begin())</type>
+        <definition>using neforce::ranges::slice_view&lt; V &gt;::base_iterator = decltype(_NEFORCE declval&lt;remove_const_t&lt;V&gt;&gt;().begin())</definition>
+        <argsstring></argsstring>
+        <name>base_iterator</name>
+        <qualifiedname>neforce::ranges::slice_view::base_iterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1764" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1764" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1ranges_1_1slice__view_1a2150ea5afb4c176eb70f0140bd93d049" prot="private" static="no">
+        <type>decltype(_NEFORCE <ref refid="group___declval_tools_1ga7071848a30be73f786711db2ae038447" kindref="member">declval</ref>&lt; <ref refid="group___add_qualifiers_1ga9c01bc825fba47d2a71ca3fdb897288f" kindref="member">add_const_t</ref>&lt; V &gt; &gt;().begin())</type>
+        <definition>using neforce::ranges::slice_view&lt; V &gt;::const_base_iterator = decltype(_NEFORCE declval&lt;add_const_t&lt;V&gt;&gt;().begin())</definition>
+        <argsstring></argsstring>
+        <name>const_base_iterator</name>
+        <qualifiedname>neforce::ranges::slice_view::const_base_iterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1765" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1765" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1ranges_1_1slice__view_1a51c118a2a08895ce3e1f97e161477d98" prot="private" static="no">
+        <type><ref refid="group___type_traits_utilities_1gaa9ea3c80d957cac4f923264b29fddb54" kindref="member">conditional_t</ref>&lt; <ref refid="group___base_type_qualifier_check_1ga7008d8e60d2bf1eb2123cb0a641b37ef" kindref="member">is_const_v</ref>&lt; V &gt;, const_base_iterator, base_iterator &gt;</type>
+        <definition>using neforce::ranges::slice_view&lt; V &gt;::iterator = conditional_t&lt;is_const_v&lt;V&gt;, const_base_iterator, base_iterator&gt;</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>neforce::ranges::slice_view::iterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1766" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1766" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1ranges_1_1slice__view_1a5b3bdaa38486b2700b1634a7ba6d8ce2" prot="private" static="no">
+        <type><ref refid="group___iterator_traits_1ga739b740baa4f6bb946b91b875c5c345b" kindref="member">iter_difference_t</ref>&lt; base_iterator &gt;</type>
+        <definition>using neforce::ranges::slice_view&lt; V &gt;::difference_type = iter_difference_t&lt;base_iterator&gt;</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>neforce::ranges::slice_view::difference_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1767" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1767" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1ranges_1_1slice__view_1a4b122c6aa5ad7d5c8fe4c570baff3a7e" prot="private" static="no" mutable="no">
+        <type>V</type>
+        <definition>V neforce::ranges::slice_view&lt; V &gt;::base_</definition>
+        <argsstring></argsstring>
+        <name>base_</name>
+        <qualifiedname>neforce::ranges::slice_view::base_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1774" column="7" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1774" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ranges_1_1slice__view_1ad2282c9d7d605e7c8a41a05a0f2eaf4a" prot="private" static="no" mutable="no">
+        <type>difference_type</type>
+        <definition>difference_type neforce::ranges::slice_view&lt; V &gt;::start_</definition>
+        <argsstring></argsstring>
+        <name>start_</name>
+        <qualifiedname>neforce::ranges::slice_view::start_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1775" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1775" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ranges_1_1slice__view_1a0f5557b407492ecd28c396b20cd87e92" prot="private" static="no" mutable="no">
+        <type>difference_type</type>
+        <definition>difference_type neforce::ranges::slice_view&lt; V &gt;::end_</definition>
+        <argsstring></argsstring>
+        <name>end_</name>
+        <qualifiedname>neforce::ranges::slice_view::end_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1776" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1776" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ranges_1_1slice__view_1a9a45b858e0b924476540523f7ea5bff0" prot="private" static="no" mutable="yes">
+        <type>cache_t</type>
+        <definition>cache_t neforce::ranges::slice_view&lt; V &gt;::cache_</definition>
+        <argsstring></argsstring>
+        <name>cache_</name>
+        <qualifiedname>neforce::ranges::slice_view::cache_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1777" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1777" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ranges_1_1slice__view_1a48a91e18c41a982544365d395f28a594" prot="private" static="no" mutable="yes">
+        <type>bool</type>
+        <definition>bool neforce::ranges::slice_view&lt; V &gt;::has_value_</definition>
+        <argsstring></argsstring>
+        <name>has_value_</name>
+        <qualifiedname>neforce::ranges::slice_view::has_value_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1778" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1778" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1slice__view_1af65d37c4c48290f3b5d121f89065e0ae" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::ranges::slice_view&lt; V &gt;::ensure_cache</definition>
+        <argsstring>() const</argsstring>
+        <name>ensure_cache</name>
+        <qualifiedname>neforce::ranges::slice_view::ensure_cache</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1780" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1780" bodyend="1799"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1slice__view_1ac3b29ef7ad2f9f85b95631cb1a5d3045" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::ranges::slice_view&lt; V &gt;::slice_view</definition>
+        <argsstring>()=default</argsstring>
+        <name>slice_view</name>
+        <qualifiedname>neforce::ranges::slice_view::slice_view</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1802" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1slice__view_1aab09fd020acf8b41ff46657b76f13957" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::ranges::slice_view&lt; V &gt;::slice_view</definition>
+        <argsstring>(V base, difference_type start, difference_type end)</argsstring>
+        <name>slice_view</name>
+        <qualifiedname>neforce::ranges::slice_view::slice_view</qualifiedname>
+        <param>
+          <type>V</type>
+          <declname>base</declname>
+        </param>
+        <param>
+          <type>difference_type</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>difference_type</type>
+          <declname>end</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1804" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1804" bodyend="1807"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1slice__view_1a8052b90f7db273851326ec9e4221d120" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>iterator</type>
+        <definition>iterator neforce::ranges::slice_view&lt; V &gt;::begin</definition>
+        <argsstring>()</argsstring>
+        <name>begin</name>
+        <qualifiedname>neforce::ranges::slice_view::begin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1809" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1809" bodyend="1812"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1slice__view_1ae8856fda7afc052bb671909612739246" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>iterator</type>
+        <definition>iterator neforce::ranges::slice_view&lt; V &gt;::end</definition>
+        <argsstring>()</argsstring>
+        <name>end</name>
+        <qualifiedname>neforce::ranges::slice_view::end</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1813" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1813" bodyend="1816"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1slice__view_1a4e25f48c282efdb1f3b88690f03c2831" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>iterator</type>
+        <definition>iterator neforce::ranges::slice_view&lt; V &gt;::begin</definition>
+        <argsstring>() const</argsstring>
+        <name>begin</name>
+        <qualifiedname>neforce::ranges::slice_view::begin</qualifiedname>
+    <requiresclause>Range&lt;const V&gt;    </requiresclause>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1818" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1818" bodyend="1823"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1slice__view_1a77a67b0ef91a115a6f34809e8ddeb2e0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>iterator</type>
+        <definition>iterator neforce::ranges::slice_view&lt; V &gt;::end</definition>
+        <argsstring>() const</argsstring>
+        <name>end</name>
+        <qualifiedname>neforce::ranges::slice_view::end</qualifiedname>
+    <requiresclause>Range&lt;const V&gt;    </requiresclause>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1824" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1824" bodyend="1829"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::ranges::slice_view&lt; V &gt;</label>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::ranges::view_base&lt; slice_view&lt; V &gt; &gt;</label>
+        <link refid="structneforce_1_1ranges_1_1view__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::ranges::slice_view&lt; V &gt;</label>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::ranges::view_base&lt; slice_view&lt; V &gt; &gt;</label>
+        <link refid="structneforce_1_1ranges_1_1view__base"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1763" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1763" bodyend="1830"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1ranges_1_1slice__view_1a4b122c6aa5ad7d5c8fe4c570baff3a7e" prot="private" virt="non-virtual"><scope>neforce::ranges::slice_view</scope><name>base_</name></member>
+      <member refid="classneforce_1_1ranges_1_1slice__view_1a1be4b67d0a79346e6286311d20490abe" prot="private" virt="non-virtual"><scope>neforce::ranges::slice_view</scope><name>base_iterator</name></member>
+      <member refid="classneforce_1_1ranges_1_1slice__view_1a8052b90f7db273851326ec9e4221d120" prot="public" virt="non-virtual"><scope>neforce::ranges::slice_view</scope><name>begin</name></member>
+      <member refid="classneforce_1_1ranges_1_1slice__view_1a4e25f48c282efdb1f3b88690f03c2831" prot="public" virt="non-virtual"><scope>neforce::ranges::slice_view</scope><name>begin</name></member>
+      <member refid="classneforce_1_1ranges_1_1slice__view_1a9a45b858e0b924476540523f7ea5bff0" prot="private" virt="non-virtual"><scope>neforce::ranges::slice_view</scope><name>cache_</name></member>
+      <member refid="classneforce_1_1ranges_1_1slice__view_1a2150ea5afb4c176eb70f0140bd93d049" prot="private" virt="non-virtual"><scope>neforce::ranges::slice_view</scope><name>const_base_iterator</name></member>
+      <member refid="classneforce_1_1ranges_1_1slice__view_1a5b3bdaa38486b2700b1634a7ba6d8ce2" prot="private" virt="non-virtual"><scope>neforce::ranges::slice_view</scope><name>difference_type</name></member>
+      <member refid="classneforce_1_1ranges_1_1slice__view_1ae8856fda7afc052bb671909612739246" prot="public" virt="non-virtual"><scope>neforce::ranges::slice_view</scope><name>end</name></member>
+      <member refid="classneforce_1_1ranges_1_1slice__view_1a77a67b0ef91a115a6f34809e8ddeb2e0" prot="public" virt="non-virtual"><scope>neforce::ranges::slice_view</scope><name>end</name></member>
+      <member refid="classneforce_1_1ranges_1_1slice__view_1a0f5557b407492ecd28c396b20cd87e92" prot="private" virt="non-virtual"><scope>neforce::ranges::slice_view</scope><name>end_</name></member>
+      <member refid="classneforce_1_1ranges_1_1slice__view_1af65d37c4c48290f3b5d121f89065e0ae" prot="private" virt="non-virtual"><scope>neforce::ranges::slice_view</scope><name>ensure_cache</name></member>
+      <member refid="classneforce_1_1ranges_1_1slice__view_1a48a91e18c41a982544365d395f28a594" prot="private" virt="non-virtual"><scope>neforce::ranges::slice_view</scope><name>has_value_</name></member>
+      <member refid="classneforce_1_1ranges_1_1slice__view_1a51c118a2a08895ce3e1f97e161477d98" prot="private" virt="non-virtual"><scope>neforce::ranges::slice_view</scope><name>iterator</name></member>
+      <member refid="classneforce_1_1ranges_1_1slice__view_1ac3b29ef7ad2f9f85b95631cb1a5d3045" prot="public" virt="non-virtual"><scope>neforce::ranges::slice_view</scope><name>slice_view</name></member>
+      <member refid="classneforce_1_1ranges_1_1slice__view_1aab09fd020acf8b41ff46657b76f13957" prot="public" virt="non-virtual"><scope>neforce::ranges::slice_view</scope><name>slice_view</name></member>
+      <member refid="classneforce_1_1ranges_1_1slice__view_1ad2282c9d7d605e7c8a41a05a0f2eaf4a" prot="private" virt="non-virtual"><scope>neforce::ranges::slice_view</scope><name>start_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,9 +1,9 @@
 var group___construction_tags =
 [
-    [ "allocator_arg_tag", "structallocator__arg__tag.html", null ],
-    [ "default_construct_tag", "structdefault__construct__tag.html", null ],
-    [ "exact_arg_construct_tag", "structexact__arg__construct__tag.html", null ],
-    [ "inplace_construct_tag", "structinplace__construct__tag.html", null ],
-    [ "pass_template_construct_tag&lt; Args &gt;", "structpass__template__construct__tag.html", null ],
-    [ "unpack_utility_construct_tag", "structunpack__utility__construct__tag.html", null ]
+    [ "neforce::allocator_arg_tag", "structneforce_1_1allocator__arg__tag.html", null ],
+    [ "neforce::default_construct_tag", "structneforce_1_1default__construct__tag.html", null ],
+    [ "neforce::exact_arg_construct_tag", "structneforce_1_1exact__arg__construct__tag.html", null ],
+    [ "neforce::inplace_construct_tag", "structneforce_1_1inplace__construct__tag.html", null ],
+    [ "neforce::pass_template_construct_tag&lt; Args &gt;", "structneforce_1_1pass__template__construct__tag.html", null ],
+    [ "neforce::unpack_utility_construct_tag", "structneforce_1_1unpack__utility__construct__tag.html", null ]
 ];

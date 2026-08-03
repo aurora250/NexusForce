@@ -1,4 +1,4 @@
 var scroll__view_8hpp =
 [
-    [ "scroll_view", "group___t_u_i.html#ga6aa3563b2500c8a4dff967839b785b7c", null ]
+    [ "neforce::tui::components::scroll_view", "group___components.html#ga347e5de96df5f4ed92ffa7d07a9e798e", null ]
 ];

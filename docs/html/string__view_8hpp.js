@@ -1,15 +1,15 @@
 var string__view_8hpp =
 [
-    [ "string_view", "group___string_view.html#ga204ca715c2febee035464fa53dfc50c4", null ],
-    [ "u16string_view", "group___string_view.html#gaa46d88d8bca7469fb6f4ec68a1f7b10c", null ],
-    [ "u32string_view", "group___string_view.html#gaf8ee1ef31dc1f2a852cc038331c996d0", null ],
-    [ "u8string_view", "group___string_view.html#gac8fa8b03f678dc2c40b0c3ceb754cc4f", null ],
-    [ "wstring_view", "group___string_view.html#ga5164ea4aed26e7700ce4a006d1d32475", null ],
-    [ "getline", "group___string_view.html#ga9c1e1b92448d4a5d87c922c39b2b30a2", null ],
-    [ "getline", "group___string_view.html#gaa9e8a1cad4d3bcde8020e46ec3a16c39", null ],
-    [ "operator\"\"_sv", "group___user_literals.html#ga1c398a5a4a481b8049b1c0bd3f8221e3", null ],
-    [ "operator\"\"_sv", "group___user_literals.html#gac39d51f7050b45394146de2a3b1aa227", null ],
-    [ "operator\"\"_sv", "group___user_literals.html#ga2a3304a275d566493dbf4f7d4163cb3d", null ],
-    [ "operator\"\"_sv", "group___user_literals.html#gac12608b928727ff733ccd09cf83db748", null ],
-    [ "operator\"\"_sv", "group___user_literals.html#gaaae35a2572a53a1e0289d9bf56dac73b", null ]
+    [ "neforce::string_view", "group___string_view.html#ga5a6e8b9da034ce8d4818231c4e005eff", null ],
+    [ "neforce::u16string_view", "group___string_view.html#ga008ee4f3a31dc827e9c02fefc66170bb", null ],
+    [ "neforce::u32string_view", "group___string_view.html#ga292724c19306e7eb504a3fde3d5150bf", null ],
+    [ "neforce::u8string_view", "group___string_view.html#ga0f6360889accaac507d84e2ee3b80881", null ],
+    [ "neforce::wstring_view", "group___string_view.html#gae327d05eead799648a7279d1b14a5bbb", null ],
+    [ "neforce::getline", "group___string_view.html#ga40340f61ecc6d756ebeb46a3b58a52ac", null ],
+    [ "neforce::getline", "group___string_view.html#ga200953c0c8e0c5a4b41978fd2785707f", null ],
+    [ "neforce::literals::operator\"\"_sv", "group___user_literals.html#ga95559ab66c332f147dd52509edeccfd3", null ],
+    [ "neforce::literals::operator\"\"_sv", "group___user_literals.html#ga051f1ca6d65406ee0d1c8e5c14994120", null ],
+    [ "neforce::literals::operator\"\"_sv", "group___user_literals.html#ga7a9b596677585e3ceca16b30466e3b29", null ],
+    [ "neforce::literals::operator\"\"_sv", "group___user_literals.html#gac4022a6bcb1736191bcada99407ad6e0", null ],
+    [ "neforce::literals::operator\"\"_sv", "group___user_literals.html#ga6880e8ac9d6dbc4ce2839ab2aa8c37bf", null ]
 ];

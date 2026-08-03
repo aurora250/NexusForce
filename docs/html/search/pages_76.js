@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['表单编码规则_0',['表单编码规则',['../structurl.html#form_encoding',1,'']]]
+  ['编码规则_0',['UTF-8 编码规则',['../group___code_point.html#utf8_encoding',1,'']]]
 ];

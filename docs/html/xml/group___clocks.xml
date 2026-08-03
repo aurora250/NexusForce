@@ -3,23 +3,24 @@
   <compounddef id="group___clocks" kind="group">
     <compoundname>Clocks</compoundname>
     <title>时钟</title>
-    <innerclass refid="structsystem__clock" prot="public">system_clock</innerclass>
-    <innerclass refid="structsteady__clock" prot="public">steady_clock</innerclass>
-    <innerclass refid="structis__clock" prot="public">is_clock</innerclass>
-    <innerclass refid="structis__clock_3_01system__clock_01_4" prot="public">is_clock&lt; system_clock &gt;</innerclass>
-    <innerclass refid="structis__clock_3_01steady__clock_01_4" prot="public">is_clock&lt; steady_clock &gt;</innerclass>
+    <innerclass refid="structneforce_1_1system__clock" prot="public">neforce::system_clock</innerclass>
+    <innerclass refid="structneforce_1_1steady__clock" prot="public">neforce::steady_clock</innerclass>
+    <innerclass refid="structneforce_1_1is__clock" prot="public">neforce::is_clock</innerclass>
+    <innerclass refid="structneforce_1_1is__clock_3_01system__clock_01_4" prot="public">neforce::is_clock&lt; system_clock &gt;</innerclass>
+    <innerclass refid="structneforce_1_1is__clock_3_01steady__clock_01_4" prot="public">neforce::is_clock&lt; steady_clock &gt;</innerclass>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="group___clocks_1ga2682b90c2f4b1ec7ccc3fb6b74a4fee8" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___clocks_1ga15cfac8e362ab2f652fb77cdaa1f8f39" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_clock_v</definition>
+        <definition>bool neforce::is_clock_v</definition>
         <argsstring></argsstring>
         <name>is_clock_v</name>
-        <initializer>= <ref refid="structis__clock" kindref="compound">is_clock</ref>&lt;T&gt;::value</initializer>
+        <qualifiedname>neforce::is_clock_v</qualifiedname>
+        <initializer>= is_clock&lt;T&gt;::value</initializer>
         <briefdescription>
 <para>is_clock的便捷变量模板 </para>
         </briefdescription>
@@ -31,17 +32,18 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___clocks_1gaae0be53bf21934dcac0e3165034ca8dd" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref></type>
-        <definition>milliseconds relative_time</definition>
+      <memberdef kind="function" id="group___clocks_1gaf24e87912844f7efd27378f0f6f79cec" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>milliseconds</type>
+        <definition>milliseconds neforce::relative_time</definition>
         <argsstring>(int64_t sec, int64_t nsec, bool is_monotonic=false) noexcept</argsstring>
         <name>relative_time</name>
+        <qualifiedname>neforce::relative_time</qualifiedname>
         <param>
-          <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+          <type>int64_t</type>
           <declname>sec</declname>
         </param>
         <param>
-          <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+          <type>int64_t</type>
           <declname>nsec</declname>
         </param>
         <param>
@@ -88,6 +90,8 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" line="129" column="15" declfile="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" declline="129" declcolumn="15"/>
+        <references refid="group___clocks_1gaf24e87912844f7efd27378f0f6f79cec">neforce::relative_time</references>
+        <referencedby refid="group___clocks_1gaf24e87912844f7efd27378f0f6f79cec">neforce::relative_time</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

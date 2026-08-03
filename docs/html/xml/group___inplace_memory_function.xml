@@ -3,9 +3,9 @@
   <compounddef id="group___inplace_memory_function" kind="group">
     <compoundname>InplaceMemoryFunction</compoundname>
     <title>内存就地操作函数</title>
-    <innerclass refid="structtemporary__guard" prot="public">temporary_guard</innerclass>
+    <innerclass refid="structneforce_1_1temporary__guard" prot="public">neforce::temporary_guard</innerclass>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___inplace_memory_function_1ga9e6a0c6da451f33867d11cbea1d0cf12" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, Args... &gt;" virt="non-virtual">
+      <memberdef kind="function" id="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, Args... &gt;" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -17,9 +17,10 @@
           </param>
         </templateparamlist>
         <type>T *</type>
-        <definition>T * construct</definition>
+        <definition>T * neforce::construct</definition>
         <argsstring>(T *ptr, Args &amp;&amp;... args)</argsstring>
         <name>construct</name>
+        <qualifiedname>neforce::construct</qualifiedname>
         <param>
           <type>T *</type>
           <declname>ptr</declname>
@@ -73,46 +74,49 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/construct.hpp" line="33" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/construct.hpp" bodystart="33" bodyend="36"/>
-        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
-        <references refid="group___type_special_member_function_checks_1ga123009e89543c37bab698abc5f4221a0" compoundref="type__traits_8hpp" startline="2374">is_constructible_v</references>
-        <references refid="group___type_special_member_function_checks_1gac00c953e4e3f962b130f431bc25d6101" compoundref="type__traits_8hpp" startline="2807">is_nothrow_constructible_v</references>
-        <referencedby refid="group___shared_pointer_1gac6d23654fe34f82cb9ce90e5402945c2" compoundref="shared__ptr_8hpp" startline="913" endline="953">allocate_shared</referencedby>
-        <referencedby refid="classoptional_1a87440308a8edf4b48f750fe86f034c61" compoundref="optional_8hpp" startline="463" endline="468">optional&lt; T &gt;::emplace</referencedby>
-        <referencedby refid="classoptional_1a3d7c520ac6f2cd19c691da6da6e018c7" compoundref="optional_8hpp" startline="447" endline="451">optional&lt; T &gt;::emplace</referencedby>
-        <referencedby refid="classvector_1ab47efdba81e2bd130018669ab777d1a6" compoundref="vector_8hpp" startline="829" endline="866">vector&lt; Value, Alloc &gt;::emplace</referencedby>
-        <referencedby refid="classdeque_1a5100707179dde9adc98257e8124a89ae" compoundref="deque_8hpp" startline="1099" endline="1108">deque&lt; T, Alloc, BufSize &gt;::emplace_back</referencedby>
-        <referencedby refid="classvector_1afdfb7eeb08d6479be6125db1ce2b0060" compoundref="vector_8hpp" startline="874" endline="881">vector&lt; Value, Alloc &gt;::emplace_back</referencedby>
-        <referencedby refid="classdeque_1adf16fcef6659022e90368edfa08c5309" compoundref="deque_8hpp" startline="1116" endline="1125">deque&lt; T, Alloc, BufSize &gt;::emplace_front</referencedby>
-        <referencedby refid="classflat__hashtable_1a439073b59350c68d8803d5224385d64c" compoundref="flat__hashtable_8hpp" startline="935" endline="962">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_unique</referencedby>
-        <referencedby refid="group___shared_pointer_1gab47fa86d2917e14f57f68dfa9e83495e" compoundref="shared__ptr_8hpp" startline="849" endline="877">make_shared</referencedby>
-        <referencedby refid="classoptional_1a93a78e86c5412d5a4b217f2424645b22" compoundref="optional_8hpp" startline="265" endline="280">optional&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classoptional_1ab83cc3f234e1fad4e090c64827ce7fb0" compoundref="optional_8hpp" startline="394" endline="406">optional&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classoptional_1aa0297f03002f8172034e1c2b0398e004" compoundref="optional_8hpp" startline="234" endline="247">optional&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classoptional_1a7bdb21471e17d42870e0e9b49677940e" compoundref="optional_8hpp" startline="354" endline="372">optional&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classoptional_1aaea0bd8e4d596b65bf2d0015d2fa4262" compoundref="optional_8hpp" startline="322" endline="335">optional&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classoptional_1aedc3f10e666cfb8019f9e21bde8c8345" compoundref="optional_8hpp" startline="180" endline="190">optional&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classoptional_1a6b785fab5d4be1678797729c200a3c7f" compoundref="optional_8hpp" startline="253" endline="258">optional&lt; T &gt;::optional</referencedby>
-        <referencedby refid="classoptional_1a5149a2b0e04fded77b8cef05b4a149b7" compoundref="optional_8hpp" startline="380" endline="385">optional&lt; T &gt;::optional</referencedby>
-        <referencedby refid="classoptional_1a7ede04530718c1fa004354e4f26a7eb5" compoundref="optional_8hpp" startline="200" endline="205">optional&lt; T &gt;::optional</referencedby>
-        <referencedby refid="classoptional_1a558e9fe386b3d263d8a6528b4f758774" compoundref="optional_8hpp" startline="156" endline="159">optional&lt; T &gt;::optional</referencedby>
-        <referencedby refid="classoptional_1a367f3dcab5d414d45b159f4a8d3bb8c1" compoundref="optional_8hpp" startline="429" endline="434">optional&lt; T &gt;::optional</referencedby>
-        <referencedby refid="classoptional_1aa3a97d2669c23714f449b9f25c3ba2fd" compoundref="optional_8hpp" startline="414" endline="418">optional&lt; T &gt;::optional</referencedby>
-        <referencedby refid="classoptional_1afec68e13603a5f09d86ae5afa6a65497" compoundref="optional_8hpp" startline="341" endline="347">optional&lt; T &gt;::optional</referencedby>
-        <referencedby refid="classoptional_1a7335825238f1b9b85700f6a36af8c7d0" compoundref="optional_8hpp" startline="290" endline="295">optional&lt; T &gt;::optional</referencedby>
-        <referencedby refid="classoptional_1acbf62cc039f245a4492081f72527d0d2" compoundref="optional_8hpp" startline="165" endline="168">optional&lt; T &gt;::optional</referencedby>
-        <referencedby refid="classoptional_1a561bd099e03ae8fe48321b49613c7eba" compoundref="optional_8hpp" startline="134" endline="137">optional&lt; T &gt;::optional</referencedby>
-        <referencedby refid="classvector_1abde6dcc88dcb319bcbcab23f98219974" compoundref="vector_8hpp" startline="428" endline="442">vector&lt; Value, Alloc &gt;::vector</referencedby>
+        <references refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" compoundref="type__traits_8hpp" startline="2374">neforce::is_constructible_v</references>
+        <references refid="group___type_special_member_function_checks_1ga910040e0e7eedac28b597a7cbd403314" compoundref="type__traits_8hpp" startline="2807">neforce::is_nothrow_constructible_v</references>
+        <referencedby refid="group___shared_pointer_1gac6f725779c1020a14ca9faf6f99223cc" compoundref="shared__ptr_8hpp" startline="913" endline="953">neforce::allocate_shared</referencedby>
+        <referencedby refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</referencedby>
+        <referencedby refid="classneforce_1_1optional_1aee48339bb289eb4225ed654710507f95" compoundref="optional_8hpp" startline="463" endline="468">neforce::optional&lt; T &gt;::emplace</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a6ec9d71801be4f0accc79aee568cf59c" compoundref="optional_8hpp" startline="447" endline="451">neforce::optional&lt; T &gt;::emplace</referencedby>
+        <referencedby refid="classneforce_1_1vector_1ac306f8b6b702e1f41817ee6d87b923bb" compoundref="vector_8hpp" startline="829" endline="866">neforce::vector&lt; Value, Alloc &gt;::emplace</referencedby>
+        <referencedby refid="classneforce_1_1deque_1ac37f1ffaf0da37d58537a1db614f557f" compoundref="deque_8hpp" startline="1099" endline="1108">neforce::deque&lt; T, Alloc, BufSize &gt;::emplace_back</referencedby>
+        <referencedby refid="classneforce_1_1vector_1a0b48bc51d02d014d603727463629781d" compoundref="vector_8hpp" startline="874" endline="881">neforce::vector&lt; Value, Alloc &gt;::emplace_back</referencedby>
+        <referencedby refid="classneforce_1_1deque_1a8ff9977db09aa3fd9f304de90e2fac6e" compoundref="deque_8hpp" startline="1116" endline="1125">neforce::deque&lt; T, Alloc, BufSize &gt;::emplace_front</referencedby>
+        <referencedby refid="classneforce_1_1flat__hashtable_1a5250c24d4865251b5b68aa6325b93524" compoundref="flat__hashtable_8hpp" startline="935" endline="962">neforce::flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_unique</referencedby>
+        <referencedby refid="group___shared_pointer_1gacdaa04ead5936b6c9e0f024297dcf54f" compoundref="shared__ptr_8hpp" startline="849" endline="877">neforce::make_shared</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a0146cbe25ed45d60da3f61db1fc5363a" compoundref="optional_8hpp" startline="265" endline="280">neforce::optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a63917ed503377ae0b5d1628c29051e1a" compoundref="optional_8hpp" startline="394" endline="406">neforce::optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1optional_1ad8babf6c38058fd9b75d7450391d59ec" compoundref="optional_8hpp" startline="234" endline="247">neforce::optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a0dae177ec3997b2fd067cad8ba4a32b1" compoundref="optional_8hpp" startline="354" endline="372">neforce::optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1optional_1ad959bc40b14c91ae9ab1269e7c35acfe" compoundref="optional_8hpp" startline="322" endline="335">neforce::optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1optional_1add710dc4bc0e534fabb48b62ff3e3acd" compoundref="optional_8hpp" startline="180" endline="190">neforce::optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a50b828075a0070054e7ddfc66bdf8856" compoundref="optional_8hpp" startline="253" endline="258">neforce::optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a96eca4e1f3cf8f2280ecf6cb9dcb5285" compoundref="optional_8hpp" startline="380" endline="385">neforce::optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a47344a49e1314761a192025ae9425141" compoundref="optional_8hpp" startline="200" endline="205">neforce::optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classneforce_1_1optional_1ab39e227b1057aded06bd28e55fd68c4d" compoundref="optional_8hpp" startline="156" endline="159">neforce::optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a39eee7f19b555f923db7969d917cf8bc" compoundref="optional_8hpp" startline="429" endline="434">neforce::optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a27d163d4322f67baf9ab56a0aa055966" compoundref="optional_8hpp" startline="414" endline="418">neforce::optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classneforce_1_1optional_1acfbdee35b589e48d15efb3a63324f864" compoundref="optional_8hpp" startline="341" endline="347">neforce::optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a4df326e420fc57e8a25b51c36629dfb3" compoundref="optional_8hpp" startline="290" endline="295">neforce::optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classneforce_1_1optional_1aaa36bdf4ceca2b5724615098c2fb3540" compoundref="optional_8hpp" startline="165" endline="168">neforce::optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a31e833b6e9ea5fecfbddc4da7b7836ce" compoundref="optional_8hpp" startline="134" endline="137">neforce::optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classneforce_1_1vector_1a8693d287ccbf820d0f5a864725924891" compoundref="vector_8hpp" startline="428" endline="442">neforce::vector&lt; Value, Alloc &gt;::vector</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___inplace_memory_function_1ga0d7b6e1476664ca8b85b124f487ae342" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; T &gt;" virt="non-virtual">
+      <memberdef kind="function" id="group___inplace_memory_function_1ga331a75759198aa8083265b23c0b3b913" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; T &gt;" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void destroy</definition>
+        <definition>void neforce::destroy</definition>
         <argsstring>(T *pointer)</argsstring>
         <name>destroy</name>
+        <qualifiedname>neforce::destroy</qualifiedname>
         <param>
           <type>T *</type>
           <declname>pointer</declname>
@@ -144,40 +148,44 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/construct.hpp" line="46" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/construct.hpp" bodystart="46" bodyend="48"/>
-        <references refid="group___type_special_member_function_checks_1gadf6b378d80292ae38acd1f467e10dd49" compoundref="type__traits_8hpp" startline="2987">is_nothrow_destructible_v</references>
-        <referencedby refid="classvector_1a9cc368b8111cf70e9a91367d2cefcbd8" compoundref="vector_8hpp" startline="921" endline="947">vector&lt; Value, Alloc &gt;::assign</referencedby>
-        <referencedby refid="classflat__hashtable_1a9a52179a3d869dd5be9c3379f08e1da0" compoundref="flat__hashtable_8hpp" startline="1235" endline="1244">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::clear</referencedby>
-        <referencedby refid="classvector_1a0db5bb054ae7bdc71ffe888e3d400db7" compoundref="vector_8hpp" startline="1142" endline="1149">vector&lt; Value, Alloc &gt;::clear</referencedby>
-        <referencedby refid="group___inplace_memory_function_1gaf6d29acd514e82a97c7809f66079f300" compoundref="construct_8hpp" startline="61" endline="66">destroy</referencedby>
-        <referencedby refid="classvector_1ab47efdba81e2bd130018669ab777d1a6" compoundref="vector_8hpp" startline="829" endline="866">vector&lt; Value, Alloc &gt;::emplace</referencedby>
-        <referencedby refid="classdeque_1a94792822506120513940582f2ac1ec10" compoundref="deque_8hpp" startline="1314" endline="1334">deque&lt; T, Alloc, BufSize &gt;::erase</referencedby>
-        <referencedby refid="classflat__hashtable_1a76a68cf3a97cf416de5f57eb420cc993" compoundref="flat__hashtable_8hpp" startline="1164" endline="1186">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
-        <referencedby refid="classflat__hashtable_1af622d43d66e9d76cf0b04751ba2c84b7" compoundref="flat__hashtable_8hpp" startline="1133" endline="1157">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
-        <referencedby refid="classflat__hashtable_1a220837676e2e6aef18144840731ab307" compoundref="flat__hashtable_8hpp" startline="1194" endline="1211">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
-        <referencedby refid="classvector_1abd1eca2676ab66bf64b847568469519f" compoundref="vector_8hpp" startline="1071" endline="1085">vector&lt; Value, Alloc &gt;::erase</referencedby>
-        <referencedby refid="classvector_1a2eec75d082180b8f03cd29577cff7dde" compoundref="vector_8hpp" startline="1092" endline="1100">vector&lt; Value, Alloc &gt;::erase</referencedby>
-        <referencedby refid="classvector_1a2b66ef497dacca36effd4c6763d1a77e" compoundref="vector_8hpp" startline="1026" endline="1063">vector&lt; Value, Alloc &gt;::insert</referencedby>
-        <referencedby refid="classvector_1aa881433e352995ffb44260d42d6bbe84" compoundref="vector_8hpp" startline="557" endline="574">vector&lt; Value, Alloc &gt;::operator=</referencedby>
-        <referencedby refid="classdeque_1a43206d200267af194dc0c6836740c996" compoundref="deque_8hpp" startline="1154" endline="1167">deque&lt; T, Alloc, BufSize &gt;::pop_back</referencedby>
-        <referencedby refid="classvector_1a44ccb57e731d3559ec4031b7f6e31368" compoundref="vector_8hpp" startline="898" endline="902">vector&lt; Value, Alloc &gt;::pop_back</referencedby>
-        <referencedby refid="classvector_1a56fd936875689108cbedda4b0d1fa357" compoundref="vector_8hpp" startline="908" endline="914">vector&lt; Value, Alloc &gt;::pop_back_v</referencedby>
-        <referencedby refid="classdeque_1acd9396712c8f5d8a1fce913a0be67052" compoundref="deque_8hpp" startline="1172" endline="1185">deque&lt; T, Alloc, BufSize &gt;::pop_front</referencedby>
-        <referencedby refid="classvector_1a0066a7fca1a744cdb62d5fb96b51a88f" compoundref="vector_8hpp" startline="775" endline="798">vector&lt; Value, Alloc &gt;::reserve</referencedby>
-        <referencedby refid="classoptional_1a7ae576b1859557158d160941c2b55bf7" compoundref="optional_8hpp" startline="473" endline="478">optional&lt; T &gt;::reset</referencedby>
-        <referencedby refid="classvector_1a8a76aacfe632435f1977dc3297c73cfc" compoundref="vector_8hpp" startline="1107" endline="1135">vector&lt; Value, Alloc &gt;::shrink_to_fit</referencedby>
-        <referencedby refid="classvector_1abde6dcc88dcb319bcbcab23f98219974" compoundref="vector_8hpp" startline="428" endline="442">vector&lt; Value, Alloc &gt;::vector</referencedby>
-        <referencedby refid="structtemporary__buffer_1a74fbea06adc23bd97b1c09ee0ef8eea6" compoundref="temporary__buffer_8hpp" startline="135" endline="140">temporary_buffer&lt; Iterator &gt;::~temporary_buffer</referencedby>
+        <references refid="group___inplace_memory_function_1ga331a75759198aa8083265b23c0b3b913" compoundref="construct_8hpp" startline="46" endline="48">neforce::destroy</references>
+        <references refid="group___type_special_member_function_checks_1gab65bc375c5b6653c7fccd521711478c5" compoundref="type__traits_8hpp" startline="2987">neforce::is_nothrow_destructible_v</references>
+        <referencedby refid="classneforce_1_1vector_1a1addaafdf4da6b366935a461eb6bf4be" compoundref="vector_8hpp" startline="921" endline="947">neforce::vector&lt; Value, Alloc &gt;::assign</referencedby>
+        <referencedby refid="classneforce_1_1flat__hashtable_1a14861c4e500c08844edd3064a8bc2fb7" compoundref="flat__hashtable_8hpp" startline="1235" endline="1244">neforce::flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::clear</referencedby>
+        <referencedby refid="classneforce_1_1vector_1ac7d0ceb24491b666e63dc8ef970eed26" compoundref="vector_8hpp" startline="1142" endline="1149">neforce::vector&lt; Value, Alloc &gt;::clear</referencedby>
+        <referencedby refid="construct_8hpp_1ga93ffba256aa0e8e86a2dc5f043082b1d" compoundref="construct_8hpp" startline="79" endline="81">neforce::destroy</referencedby>
+        <referencedby refid="group___inplace_memory_function_1ga93ffba256aa0e8e86a2dc5f043082b1d" compoundref="construct_8hpp" startline="61" endline="66">neforce::destroy</referencedby>
+        <referencedby refid="group___inplace_memory_function_1ga331a75759198aa8083265b23c0b3b913" compoundref="construct_8hpp" startline="46" endline="48">neforce::destroy</referencedby>
+        <referencedby refid="classneforce_1_1vector_1ac306f8b6b702e1f41817ee6d87b923bb" compoundref="vector_8hpp" startline="829" endline="866">neforce::vector&lt; Value, Alloc &gt;::emplace</referencedby>
+        <referencedby refid="classneforce_1_1deque_1a48536d5b556b428fdf8839f11abcfc54" compoundref="deque_8hpp" startline="1314" endline="1334">neforce::deque&lt; T, Alloc, BufSize &gt;::erase</referencedby>
+        <referencedby refid="classneforce_1_1flat__hashtable_1a3ca31ade45759ce91bede838a46a89d7" compoundref="flat__hashtable_8hpp" startline="1164" endline="1186">neforce::flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classneforce_1_1flat__hashtable_1a4c02e7bce69046e58da0e73880821832" compoundref="flat__hashtable_8hpp" startline="1133" endline="1157">neforce::flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classneforce_1_1flat__hashtable_1ac4a8fbaba7796bb9f40353c4cc30c678" compoundref="flat__hashtable_8hpp" startline="1194" endline="1211">neforce::flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classneforce_1_1vector_1a501fe6b93579ebba4439df887515661c" compoundref="vector_8hpp" startline="1071" endline="1085">neforce::vector&lt; Value, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classneforce_1_1vector_1a1e429ac841c21e30e52aa24dc9e02bf7" compoundref="vector_8hpp" startline="1092" endline="1100">neforce::vector&lt; Value, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classneforce_1_1vector_1ad0cacb702cb3a02dd720991c5c813c48" compoundref="vector_8hpp" startline="1026" endline="1063">neforce::vector&lt; Value, Alloc &gt;::insert</referencedby>
+        <referencedby refid="classneforce_1_1vector_1ae7b42354efddc2f226b7d4e40f9afdb9" compoundref="vector_8hpp" startline="557" endline="574">neforce::vector&lt; Value, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1deque_1a1b9855240ab91e7862580f2700c13064" compoundref="deque_8hpp" startline="1154" endline="1167">neforce::deque&lt; T, Alloc, BufSize &gt;::pop_back</referencedby>
+        <referencedby refid="classneforce_1_1vector_1aefa4d8789bd9e5b4734d8cbe7133adf5" compoundref="vector_8hpp" startline="898" endline="902">neforce::vector&lt; Value, Alloc &gt;::pop_back</referencedby>
+        <referencedby refid="classneforce_1_1vector_1a35f0e81f7324def9e0d0c586496efab1" compoundref="vector_8hpp" startline="908" endline="914">neforce::vector&lt; Value, Alloc &gt;::pop_back_v</referencedby>
+        <referencedby refid="classneforce_1_1deque_1a368429928f489becd8cd8e7840b82880" compoundref="deque_8hpp" startline="1172" endline="1185">neforce::deque&lt; T, Alloc, BufSize &gt;::pop_front</referencedby>
+        <referencedby refid="classneforce_1_1vector_1a69c7a4909e935658748ba812e9ff6104" compoundref="vector_8hpp" startline="775" endline="798">neforce::vector&lt; Value, Alloc &gt;::reserve</referencedby>
+        <referencedby refid="classneforce_1_1optional_1aab0a7905eb191dc71e8e8c3208a58a6e" compoundref="optional_8hpp" startline="473" endline="478">neforce::optional&lt; T &gt;::reset</referencedby>
+        <referencedby refid="classneforce_1_1vector_1a427135ec17014082493b2436dec6a84d" compoundref="vector_8hpp" startline="1107" endline="1135">neforce::vector&lt; Value, Alloc &gt;::shrink_to_fit</referencedby>
+        <referencedby refid="classneforce_1_1vector_1a8693d287ccbf820d0f5a864725924891" compoundref="vector_8hpp" startline="428" endline="442">neforce::vector&lt; Value, Alloc &gt;::vector</referencedby>
+        <referencedby refid="structneforce_1_1temporary__buffer_1a1b6ab27596b9a357991bc3c43da0bd73" compoundref="temporary__buffer_8hpp" startline="135" endline="140">neforce::temporary_buffer&lt; Iterator &gt;::~temporary_buffer</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___inplace_memory_function_1gaf6d29acd514e82a97c7809f66079f300" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; iter_value_t&lt; Iterator &gt; &gt;" virt="non-virtual">
+      <memberdef kind="function" id="group___inplace_memory_function_1ga93ffba256aa0e8e86a2dc5f043082b1d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; iter_value_t&lt; Iterator &gt; &gt;" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
-        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga82451b532c89a512421a6d0d783bbb20" kindref="member">is_iter_v</ref>&lt; Iterator &gt; &amp;&amp;!<ref refid="group___type_special_member_function_checks_1ga63c5a91c590beb77cbc056cb9327956f" kindref="member">is_trivially_destructible_v</ref>&lt; <ref refid="group___iterator_traits_1gad620992f7bf5c8c7b5dfae7a3dd55781" kindref="member">iter_value_t</ref>&lt; Iterator &gt; &gt; &gt;</type>
-        <definition>enable_if_t&lt; is_iter_v&lt; Iterator &gt; &amp;&amp;!is_trivially_destructible_v&lt; iter_value_t&lt; Iterator &gt; &gt; &gt; destroy</definition>
+        <type>enable_if_t&lt; is_iter_v&lt; Iterator &gt; &amp;&amp;!is_trivially_destructible_v&lt; iter_value_t&lt; Iterator &gt; &gt; &gt;</type>
+        <definition>enable_if_t&lt; is_iter_v&lt; Iterator &gt; &amp;&amp;!is_trivially_destructible_v&lt; iter_value_t&lt; Iterator &gt; &gt; &gt; neforce::destroy</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>destroy</name>
+        <qualifiedname>neforce::destroy</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -221,10 +229,10 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/construct.hpp" line="61" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/construct.hpp" bodystart="61" bodyend="66"/>
-        <references refid="group___inplace_memory_function_1ga0d7b6e1476664ca8b85b124f487ae342" compoundref="construct_8hpp" startline="46" endline="48">destroy</references>
-        <references refid="group___type_special_member_function_checks_1gadf6b378d80292ae38acd1f467e10dd49" compoundref="type__traits_8hpp" startline="2987">is_nothrow_destructible_v</references>
+        <references refid="group___inplace_memory_function_1ga331a75759198aa8083265b23c0b3b913" compoundref="construct_8hpp" startline="46" endline="48">neforce::destroy</references>
+        <references refid="group___type_special_member_function_checks_1gab65bc375c5b6653c7fccd521711478c5" compoundref="type__traits_8hpp" startline="2987">neforce::is_nothrow_destructible_v</references>
       </memberdef>
-      <memberdef kind="function" id="group___inplace_memory_function_1gaffee9f0631bd0b9d8f081ed19a4df46f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; NT, Arg &gt;" virt="non-virtual">
+      <memberdef kind="function" id="group___inplace_memory_function_1ga1cdc3891a9ab74c7f88660951a673c87" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; NT, Arg &gt;" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename NT</type>
@@ -236,10 +244,11 @@
             <type>typename Arg</type>
           </param>
         </templateparamlist>
-        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1gac00c953e4e3f962b130f431bc25d6101" kindref="member">is_nothrow_constructible_v</ref>&lt; NT, Arg &gt; &gt;</type>
-        <definition>enable_if_t&lt; is_nothrow_constructible_v&lt; NT, Arg &gt; &gt; reinitialize</definition>
+        <type>enable_if_t&lt; is_nothrow_constructible_v&lt; NT, Arg &gt; &gt;</type>
+        <definition>enable_if_t&lt; is_nothrow_constructible_v&lt; NT, Arg &gt; &gt; neforce::reinitialize</definition>
         <argsstring>(NT *new_val, OT *old_val, Arg &amp;&amp;arg)</argsstring>
         <name>reinitialize</name>
+        <qualifiedname>neforce::reinitialize</qualifiedname>
         <param>
           <type>NT *</type>
           <declname>new_val</declname>

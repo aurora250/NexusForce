@@ -1,4 +1,4 @@
 var bitset_8hpp =
 [
-    [ "bitset&lt; N &gt;::reference", "classbitset_1_1reference.html", "classbitset_1_1reference" ]
+    [ "neforce::bitset&lt; N &gt;::reference", "classneforce_1_1bitset_1_1reference.html", "classneforce_1_1bitset_1_1reference" ]
 ];

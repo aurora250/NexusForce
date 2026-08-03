@@ -1,4 +1,4 @@
 var path_8hpp =
 [
-    [ "path::split_iterator", "classpath_1_1split__iterator.html", "classpath_1_1split__iterator" ]
+    [ "neforce::path::split_iterator", "classneforce_1_1path_1_1split__iterator.html", "classneforce_1_1path_1_1split__iterator" ]
 ];

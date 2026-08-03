@@ -1,0 +1,735 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4" kind="class" language="C++" prot="public">
+    <compoundname>neforce::function&lt; Res(Args...)&gt;</compoundname>
+    <basecompoundref prot="private" virt="non-virtual">inner::__function_base</basecompoundref>
+    <includes refid="functional_2function_8hpp" local="no">function.hpp</includes>
+    <innerclass refid="structneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1_1callable__t" prot="private">neforce::function&lt; Res(Args...)&gt;::callable_t</innerclass>
+    <innerclass refid="structneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1_1callable__t_3_01_f_00_01enable__if__t_3c8c09c6ef203e13997cbb6d5d61fc7e5" prot="private">neforce::function&lt; Res(Args...)&gt;::callable_t&lt; F, enable_if_t&lt;!is_same_v&lt; remove_cvref_t&lt; F &gt;, function &gt; &amp;&amp;is_invocable_r_v&lt; Res, decay_t&lt; F &gt; &amp;, Args... &gt; &gt; &gt;</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename Res</type>
+      </param>
+      <param>
+        <type>typename...</type>
+        <declname>Args</declname>
+        <defname>Args</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a24f2619af6428b6958f9d1184b5308e0" prot="private" static="no">
+        <type>Res(*)(const inner::storage_data &amp;, Args...)</type>
+        <definition>using neforce::function&lt; Res(Args...)&gt;::invoker_type = Res (*)(const inner::storage_data&amp;, Args...)</definition>
+        <argsstring></argsstring>
+        <name>invoker_type</name>
+        <qualifiedname>neforce::function&lt; Res(Args...)&gt;::invoker_type</qualifiedname>
+        <briefdescription>
+<para>调用器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="282" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="282" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1aaeefe755246fe35f3dda0a0a18306436" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+          <param>
+            <type>bool</type>
+            <declname>IsSelf</declname>
+            <defname>IsSelf</defname>
+            <defval><ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt;<ref refid="group___remove_qualifiers_1ga878454a8799ed6276098016ab4bd5975" kindref="member">remove_cvref_t</ref>&lt;F&gt;, <ref refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a37f5618342d9434336def560d4a27c0a" kindref="member">function</ref>&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!IsSelf, <ref refid="structneforce_1_1decay" kindref="compound">decay</ref>&lt; F &gt; &gt;::type</type>
+        <definition>using neforce::function&lt; Res(Args...)&gt;::enable_decay_t = typename enable_if_t&lt;!IsSelf, decay&lt;F&gt;&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>enable_decay_t</name>
+        <qualifiedname>neforce::function&lt; Res(Args...)&gt;::enable_decay_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="289" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="289" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a7eaed647981001e91e9290ccdbf15abf" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type>inner::__function_manage_handler&lt; Res(Args...), <ref refid="group___type_attribute_operations_1ga63500a8dd0f79ce1c721aebb8023ce89" kindref="member">decay_t</ref>&lt; F &gt; &gt;</type>
+        <definition>using neforce::function&lt; Res(Args...)&gt;::handler_t = inner::__function_manage_handler&lt;Res(Args...), decay_t&lt;F&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>handler_t</name>
+        <qualifiedname>neforce::function&lt; Res(Args...)&gt;::handler_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="300" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="300" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1acadc9ffb59d741f238fdaaeb3e96d9e3" prot="public" static="no">
+        <type>Res</type>
+        <definition>using neforce::function&lt; Res(Args...)&gt;::result_type = Res</definition>
+        <argsstring></argsstring>
+        <name>result_type</name>
+        <qualifiedname>neforce::function&lt; Res(Args...)&gt;::result_type</qualifiedname>
+        <briefdescription>
+<para>返回类型别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="318" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="318" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a843109cea5d12235c93966947137a431" prot="private" static="no" mutable="no">
+        <type>invoker_type</type>
+        <definition>invoker_type neforce::function&lt; Res(Args...)&gt;::invoker_</definition>
+        <argsstring></argsstring>
+        <name>invoker_</name>
+        <qualifiedname>neforce::function&lt; Res(Args...)&gt;::invoker_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>调用器函数指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="285" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="285" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a798b72d75f3487429a74f6fca5002d66" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_qualifier_check_1gabfd40c35527e6ca3735849cb800d0b8c" kindref="member">is_object_v</ref>&lt; F &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>const F *</type>
+        <definition>const F * neforce::function&lt; Res(Args...)&gt;::__target_impl</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>__target_impl</name>
+        <qualifiedname>neforce::function&lt; Res(Args...)&gt;::__target_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="303" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="303" bodyend="310"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a798b72d75f3487429a74f6fca5002d66" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___base_type_qualifier_check_1gabfd40c35527e6ca3735849cb800d0b8c" kindref="member">is_object_v</ref>&lt; F &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>const F *</type>
+        <definition>const F * neforce::function&lt; Res(Args...)&gt;::__target_impl</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>__target_impl</name>
+        <qualifiedname>neforce::function&lt; Res(Args...)&gt;::__target_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="313" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="313" bodyend="315"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a37f5618342d9434336def560d4a27c0a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::function&lt; Res(Args...)&gt;::function</definition>
+        <argsstring>(nullptr_t np=nullptr) noexcept</argsstring>
+        <name>function</name>
+        <qualifiedname>neforce::function&lt; Res(Args...)&gt;::function</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gacb98a47b9e384b2934a9c2dbd3c2d598" kindref="member">nullptr_t</ref></type>
+          <declname>np</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>np</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>空指针字面量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="324" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="324" bodyend="325"/>
+        <referencedby refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1ab5f8153cae8408a110e6efe14204a761" compoundref="functional_2function_8hpp" startline="331" endline="338">function</referencedby>
+        <referencedby refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a10db05374f8ca6f0d032e9edf0fb4222" compoundref="functional_2function_8hpp" startline="344" endline="351">function</referencedby>
+        <referencedby refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a11338121ae3aaa52cae78bfd319b14af" compoundref="functional_2function_8hpp" startline="377" endline="380">operator=</referencedby>
+        <referencedby refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1af4762fd047889011d152c14e9bb47cbe" compoundref="functional_2function_8hpp" startline="413" endline="416">operator=</referencedby>
+        <referencedby refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a22ed7dfeecdedf917daa7b6be6347167" compoundref="functional_2function_8hpp" startline="387" endline="390">operator=</referencedby>
+        <referencedby refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a8a57efe7acdc066947808203709556d4" compoundref="functional_2function_8hpp" startline="397" endline="404">operator=</referencedby>
+        <referencedby refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a3a997320892453c6184ec2054a60f48a" compoundref="functional_2function_8hpp" startline="425" endline="428">operator=</referencedby>
+        <referencedby refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a9eaa12ee3167920ae3efbb830a21c49f" compoundref="functional_2function_8hpp" startline="434" endline="438">swap</referencedby>
+        <referencedby refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a79f3364c82fd2449ef596d3f2893b199" compoundref="functional_2function_8hpp" startline="490" endline="493">target</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1ab5f8153cae8408a110e6efe14204a761" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::function&lt; Res(Args...)&gt;::function</definition>
+        <argsstring>(const function &amp;other)</argsstring>
+        <name>function</name>
+        <qualifiedname>neforce::function&lt; Res(Args...)&gt;::function</qualifiedname>
+        <param>
+          <type>const function &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>复制构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要复制的function对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="331" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="331" bodyend="338"/>
+        <references refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a37f5618342d9434336def560d4a27c0a" compoundref="functional_2function_8hpp" startline="324" endline="325">function</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a10db05374f8ca6f0d032e9edf0fb4222" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::function&lt; Res(Args...)&gt;::function</definition>
+        <argsstring>(function &amp;&amp;other) noexcept</argsstring>
+        <name>function</name>
+        <qualifiedname>neforce::function&lt; Res(Args...)&gt;::function</qualifiedname>
+        <param>
+          <type>function &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的function对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="344" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="344" bodyend="351"/>
+        <references refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a37f5618342d9434336def560d4a27c0a" compoundref="functional_2function_8hpp" startline="324" endline="325">function</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a78f27874c38a1855a2628fb00d46342d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="handler_t&lt; F &gt;::template nothrow_init&lt; F &gt;()" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; callable_t&lt; F &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::function&lt; Res(Args...)&gt;::function</definition>
+        <argsstring>(F &amp;&amp;callable)</argsstring>
+        <name>function</name>
+        <qualifiedname>neforce::function&lt; Res(Args...)&gt;::function</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>callable</declname>
+        </param>
+        <briefdescription>
+<para>从任意可调用对象构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>callable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="359" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="359" bodyend="370"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" compoundref="type__traits_8hpp" startline="2374">neforce::is_constructible_v</references>
+        <references refid="group___type_special_member_function_checks_1ga69f65e60be3587bd4cac30425301c8b8" compoundref="type__traits_8hpp" startline="2392">neforce::is_copy_constructible_v</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a11338121ae3aaa52cae78bfd319b14af" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a37f5618342d9434336def560d4a27c0a" kindref="member">function</ref> &amp;</type>
+        <definition>function &amp; neforce::function&lt; Res(Args...)&gt;::operator=</definition>
+        <argsstring>(const function &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::function&lt; Res(Args...)&gt;::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a37f5618342d9434336def560d4a27c0a" kindref="member">function</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>复制赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要赋值的function对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="377" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="377" bodyend="380"/>
+        <references refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a37f5618342d9434336def560d4a27c0a" compoundref="functional_2function_8hpp" startline="324" endline="325">function</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a22ed7dfeecdedf917daa7b6be6347167" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a37f5618342d9434336def560d4a27c0a" kindref="member">function</ref> &amp;</type>
+        <definition>function &amp; neforce::function&lt; Res(Args...)&gt;::operator=</definition>
+        <argsstring>(function &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::function&lt; Res(Args...)&gt;::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a37f5618342d9434336def560d4a27c0a" kindref="member">function</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的function对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="387" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="387" bodyend="390"/>
+        <references refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a37f5618342d9434336def560d4a27c0a" compoundref="functional_2function_8hpp" startline="324" endline="325">function</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a8a57efe7acdc066947808203709556d4" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a37f5618342d9434336def560d4a27c0a" kindref="member">function</ref> &amp;</type>
+        <definition>function &amp; neforce::function&lt; Res(Args...)&gt;::operator=</definition>
+        <argsstring>(nullptr_t np) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::function&lt; Res(Args...)&gt;::operator=</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gacb98a47b9e384b2934a9c2dbd3c2d598" kindref="member">nullptr_t</ref></type>
+          <declname>np</declname>
+        </param>
+        <briefdescription>
+<para>空指针赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>np</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>空指针字面量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="397" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="397" bodyend="404"/>
+        <references refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a37f5618342d9434336def560d4a27c0a" compoundref="functional_2function_8hpp" startline="324" endline="325">function</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1af4762fd047889011d152c14e9bb47cbe" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="handler_t&lt; F &gt;::template nothrow_init&lt; F &gt;()" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; callable_t&lt; F &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a37f5618342d9434336def560d4a27c0a" kindref="member">function</ref> &amp;</type>
+        <definition>function &amp; neforce::function&lt; Res(Args...)&gt;::operator=</definition>
+        <argsstring>(F &amp;&amp;callable)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::function&lt; Res(Args...)&gt;::operator=</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>callable</declname>
+        </param>
+        <briefdescription>
+<para>从任意可调用对象赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>callable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="413" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="413" bodyend="416"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a37f5618342d9434336def560d4a27c0a" compoundref="functional_2function_8hpp" startline="324" endline="325">function</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a3a997320892453c6184ec2054a60f48a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a37f5618342d9434336def560d4a27c0a" kindref="member">function</ref> &amp;</type>
+        <definition>function &amp; neforce::function&lt; Res(Args...)&gt;::operator=</definition>
+        <argsstring>(reference_wrapper&lt; F &gt; wrapper) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::function&lt; Res(Args...)&gt;::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1reference__wrapper" kindref="compound">reference_wrapper</ref>&lt; F &gt;</type>
+          <declname>wrapper</declname>
+        </param>
+        <briefdescription>
+<para>从引用包装器赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>wrapper</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>引用包装器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="425" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="425" bodyend="428"/>
+        <references refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a37f5618342d9434336def560d4a27c0a" compoundref="functional_2function_8hpp" startline="324" endline="325">function</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a9eaa12ee3167920ae3efbb830a21c49f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::function&lt; Res(Args...)&gt;::swap</definition>
+        <argsstring>(function &amp;other) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>neforce::function&lt; Res(Args...)&gt;::swap</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a37f5618342d9434336def560d4a27c0a" kindref="member">function</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个function对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的function对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="434" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="434" bodyend="438"/>
+        <references refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a37f5618342d9434336def560d4a27c0a" compoundref="functional_2function_8hpp" startline="324" endline="325">function</references>
+        <references refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a9eaa12ee3167920ae3efbb830a21c49f" compoundref="functional_2function_8hpp" startline="434" endline="438">swap</references>
+        <referencedby refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a9eaa12ee3167920ae3efbb830a21c49f" compoundref="functional_2function_8hpp" startline="434" endline="438">swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a9b326b1e25a858be4bc8a6568a9a4ee9" prot="public" static="no" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::function&lt; Res(Args...)&gt;::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>neforce::function&lt; Res(Args...)&gt;::operator bool</qualifiedname>
+        <briefdescription>
+<para>转换为布尔值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否非空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="444" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="444" bodyend="444"/>
+        <references refid="group___type_erasure_functions_1ga0d0e3b4ad71e2ddc4fb24ab18b15c3e2" compoundref="type__erase_8hpp" startline="362" endline="364">neforce::empty</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a7939838de0602c3124cfd7f61278b5b5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Res</type>
+        <definition>Res neforce::function&lt; Res(Args...)&gt;::operator()</definition>
+        <argsstring>(Args... args) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>neforce::function&lt; Res(Args...)&gt;::operator()</qualifiedname>
+        <param>
+          <type>Args...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>函数调用运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>调用参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>调用结果 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1memory__exception" kindref="compound">memory_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果function为空 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="452" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="452" bodyend="457"/>
+        <references refid="group___type_erasure_functions_1ga0d0e3b4ad71e2ddc4fb24ab18b15c3e2" compoundref="type__erase_8hpp" startline="362" endline="364">neforce::empty</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a448851acb338c709840f830e94d539e5" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::type_info &amp;</type>
+        <definition>const std::type_info &amp; neforce::function&lt; Res(Args...)&gt;::target_type</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>target_type</name>
+        <qualifiedname>neforce::function&lt; Res(Args...)&gt;::target_type</qualifiedname>
+        <briefdescription>
+<para>获取目标类型信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>目标类型信息 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="463" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="463" bodyend="472"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1ad784dd6f79d4bca484839a79fb05851b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type>const F *</type>
+        <definition>const F * neforce::function&lt; Res(Args...)&gt;::target</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>target</name>
+        <qualifiedname>neforce::function&lt; Res(Args...)&gt;::target</qualifiedname>
+        <briefdescription>
+<para>获取目标对象的常量指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>目标对象的常量指针，如果类型不匹配则返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="480" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="480" bodyend="482"/>
+        <referencedby refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a79f3364c82fd2449ef596d3f2893b199" compoundref="functional_2function_8hpp" startline="490" endline="493">target</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a79f3364c82fd2449ef596d3f2893b199" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type>F *</type>
+        <definition>F * neforce::function&lt; Res(Args...)&gt;::target</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>target</name>
+        <qualifiedname>neforce::function&lt; Res(Args...)&gt;::target</qualifiedname>
+        <briefdescription>
+<para>获取目标对象的指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>目标对象的指针，如果类型不匹配则返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="490" column="7" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="490" bodyend="493"/>
+        <references refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a37f5618342d9434336def560d4a27c0a" compoundref="functional_2function_8hpp" startline="324" endline="325">function</references>
+        <references refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1ad784dd6f79d4bca484839a79fb05851b" compoundref="functional_2function_8hpp" startline="480" endline="482">target</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>通用函数包装器类模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Res</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>返回类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+提供类型安全的函数包装，支持存储、复制和调用任意可调用对象。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="280" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="280" bodyend="494"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a798b72d75f3487429a74f6fca5002d66" prot="private" virt="non-virtual"><scope>neforce::function&lt; Res(Args...)&gt;</scope><name>__target_impl</name></member>
+      <member refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a798b72d75f3487429a74f6fca5002d66" prot="private" virt="non-virtual"><scope>neforce::function&lt; Res(Args...)&gt;</scope><name>__target_impl</name></member>
+      <member refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1aaeefe755246fe35f3dda0a0a18306436" prot="private" virt="non-virtual"><scope>neforce::function&lt; Res(Args...)&gt;</scope><name>enable_decay_t</name></member>
+      <member refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a37f5618342d9434336def560d4a27c0a" prot="public" virt="non-virtual"><scope>neforce::function&lt; Res(Args...)&gt;</scope><name>function</name></member>
+      <member refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1ab5f8153cae8408a110e6efe14204a761" prot="public" virt="non-virtual"><scope>neforce::function&lt; Res(Args...)&gt;</scope><name>function</name></member>
+      <member refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a10db05374f8ca6f0d032e9edf0fb4222" prot="public" virt="non-virtual"><scope>neforce::function&lt; Res(Args...)&gt;</scope><name>function</name></member>
+      <member refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a78f27874c38a1855a2628fb00d46342d" prot="public" virt="non-virtual"><scope>neforce::function&lt; Res(Args...)&gt;</scope><name>function</name></member>
+      <member refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a7eaed647981001e91e9290ccdbf15abf" prot="private" virt="non-virtual"><scope>neforce::function&lt; Res(Args...)&gt;</scope><name>handler_t</name></member>
+      <member refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a843109cea5d12235c93966947137a431" prot="private" virt="non-virtual"><scope>neforce::function&lt; Res(Args...)&gt;</scope><name>invoker_</name></member>
+      <member refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a24f2619af6428b6958f9d1184b5308e0" prot="private" virt="non-virtual"><scope>neforce::function&lt; Res(Args...)&gt;</scope><name>invoker_type</name></member>
+      <member refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a9b326b1e25a858be4bc8a6568a9a4ee9" prot="public" virt="non-virtual"><scope>neforce::function&lt; Res(Args...)&gt;</scope><name>operator bool</name></member>
+      <member refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a7939838de0602c3124cfd7f61278b5b5" prot="public" virt="non-virtual"><scope>neforce::function&lt; Res(Args...)&gt;</scope><name>operator()</name></member>
+      <member refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a11338121ae3aaa52cae78bfd319b14af" prot="public" virt="non-virtual"><scope>neforce::function&lt; Res(Args...)&gt;</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a22ed7dfeecdedf917daa7b6be6347167" prot="public" virt="non-virtual"><scope>neforce::function&lt; Res(Args...)&gt;</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a8a57efe7acdc066947808203709556d4" prot="public" virt="non-virtual"><scope>neforce::function&lt; Res(Args...)&gt;</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1af4762fd047889011d152c14e9bb47cbe" prot="public" virt="non-virtual"><scope>neforce::function&lt; Res(Args...)&gt;</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a3a997320892453c6184ec2054a60f48a" prot="public" virt="non-virtual"><scope>neforce::function&lt; Res(Args...)&gt;</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1acadc9ffb59d741f238fdaaeb3e96d9e3" prot="public" virt="non-virtual"><scope>neforce::function&lt; Res(Args...)&gt;</scope><name>result_type</name></member>
+      <member refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a9eaa12ee3167920ae3efbb830a21c49f" prot="public" virt="non-virtual"><scope>neforce::function&lt; Res(Args...)&gt;</scope><name>swap</name></member>
+      <member refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1ad784dd6f79d4bca484839a79fb05851b" prot="public" virt="non-virtual"><scope>neforce::function&lt; Res(Args...)&gt;</scope><name>target</name></member>
+      <member refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a79f3364c82fd2449ef596d3f2893b199" prot="public" virt="non-virtual"><scope>neforce::function&lt; Res(Args...)&gt;</scope><name>target</name></member>
+      <member refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4_1a448851acb338c709840f830e94d539e5" prot="public" virt="non-virtual"><scope>neforce::function&lt; Res(Args...)&gt;</scope><name>target_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

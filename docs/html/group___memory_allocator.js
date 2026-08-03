@@ -1,18 +1,18 @@
 var group___memory_allocator =
 [
-    [ "standard_allocator&lt; T &gt;", "classstandard__allocator.html", [
-      [ "rebind", "structstandard__allocator_1_1rebind.html", null ],
-      [ "pointer", "classstandard__allocator.html#afc904b1c0247278fb86c21525f66b7ae", null ],
-      [ "size_type", "classstandard__allocator.html#a77bee0971a57c64b5f5d2c28f618b03c", null ],
-      [ "value_type", "classstandard__allocator.html#acc6f596422997bf646cc9341539c7d70", null ],
-      [ "standard_allocator", "classstandard__allocator.html#ae06725532d7a45c17727f10d47afdfa1", null ],
-      [ "standard_allocator", "classstandard__allocator.html#a4ba5b3811dc23e7ceab06740bffd943c", null ],
-      [ "~standard_allocator", "classstandard__allocator.html#a739bad0ae87388c0a5b78066b4ae0ca3", null ],
-      [ "operator=", "classstandard__allocator.html#a305ab7eb16945ffdb6c1eb74971dbce0", null ]
+    [ "neforce::standard_allocator&lt; T &gt;", "classneforce_1_1standard__allocator.html", [
+      [ "rebind", "structneforce_1_1standard__allocator_1_1rebind.html", null ],
+      [ "pointer", "classneforce_1_1standard__allocator.html#a05812add2d79e1cb9a3254294a7e10b0", null ],
+      [ "size_type", "classneforce_1_1standard__allocator.html#a4c5e741b8da3b4962053213ade69cf49", null ],
+      [ "value_type", "classneforce_1_1standard__allocator.html#a9535a18e4f5b2e8d17a2dbef02862d2c", null ],
+      [ "standard_allocator", "classneforce_1_1standard__allocator.html#a0b9d92fa8de15ca7f2464d41387d2172", null ],
+      [ "standard_allocator", "classneforce_1_1standard__allocator.html#a59b08a449539269cb7e6bfc1977e12da", null ],
+      [ "~standard_allocator", "classneforce_1_1standard__allocator.html#aaacc41e88d8550309aa65bb552b888b6", null ],
+      [ "operator=", "classneforce_1_1standard__allocator.html#ae6eaf7d4f447e956a5197b5b267cf4f0", null ]
     ] ],
-    [ "allocator", "group___memory_allocator.html#ga3dfc367f99e4622b5a17628bb6777e54", null ],
-    [ "allocate", "group___memory_allocator.html#ga5bd1018148e9e5aa7b7981b202946768", null ],
-    [ "deallocate", "group___memory_allocator.html#ga30246595f5c256a00e3fb9241ab5c957", null ],
-    [ "operator!=", "group___memory_allocator.html#gaa42c11dc1654f67bc9ae35be296ea81e", null ],
-    [ "operator==", "group___memory_allocator.html#ga6940c38e975f238e7e8458ea1d5cdd30", null ]
+    [ "neforce::allocator", "group___memory_allocator.html#gabd6174043c688f04c1d71b9b21148ec1", null ],
+    [ "neforce::allocate", "group___memory_allocator.html#ga0ab55333431b15a376d8315da2e6977f", null ],
+    [ "neforce::deallocate", "group___memory_allocator.html#ga10afb006af757ddac0612f95343e7d23", null ],
+    [ "neforce::operator!=", "group___memory_allocator.html#ga2a3ed6eacbc5ae92ab5cea8669b3a57f", null ],
+    [ "neforce::operator==", "group___memory_allocator.html#gabade10418f7f309f4399393630c146e5", null ]
 ];

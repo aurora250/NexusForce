@@ -1,0 +1,2001 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1expected" kind="class" language="C++" prot="public">
+    <compoundname>neforce::expected</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename ErrorT</type>
+      </param>
+      <param>
+        <type>typename Dummy</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classneforce_1_1expected_1a6ccc41a6dddf410843dd45ca91fe0ed2" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename Err</type>
+          </param>
+          <param>
+            <type>typename UE</type>
+            <defval>unexpected&lt;ErrorT&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structneforce_1_1disjunction" kindref="compound">disjunction</ref>&lt; <ref refid="structneforce_1_1is__constructible" kindref="compound">is_constructible</ref>&lt; T, expected&lt; U, Err &gt; &amp; &gt;, <ref refid="structneforce_1_1is__constructible" kindref="compound">is_constructible</ref>&lt; T, expected&lt; U, Err &gt; &gt;, <ref refid="structneforce_1_1is__constructible" kindref="compound">is_constructible</ref>&lt; T, const expected&lt; U, Err &gt; &amp; &gt;, <ref refid="structneforce_1_1is__constructible" kindref="compound">is_constructible</ref>&lt; T, const expected&lt; U, Err &gt; &gt;, <ref refid="structneforce_1_1is__convertible" kindref="compound">is_convertible</ref>&lt; expected&lt; U, Err &gt; &amp;, T &gt;, <ref refid="structneforce_1_1is__convertible" kindref="compound">is_convertible</ref>&lt; expected&lt; U, Err &gt;, T &gt;, <ref refid="structneforce_1_1is__convertible" kindref="compound">is_convertible</ref>&lt; const expected&lt; U, Err &gt; &amp;, T &gt;, <ref refid="structneforce_1_1is__convertible" kindref="compound">is_convertible</ref>&lt; const expected&lt; U, Err &gt;, T &gt;, <ref refid="structneforce_1_1is__constructible" kindref="compound">is_constructible</ref>&lt; UE, expected&lt; U, Err &gt; &amp; &gt;, <ref refid="structneforce_1_1is__constructible" kindref="compound">is_constructible</ref>&lt; UE, expected&lt; U, Err &gt; &gt;, <ref refid="structneforce_1_1is__constructible" kindref="compound">is_constructible</ref>&lt; UE, const expected&lt; U, Err &gt; &amp; &gt;, <ref refid="structneforce_1_1is__constructible" kindref="compound">is_constructible</ref>&lt; UE, const expected&lt; U, Err &gt; &gt; &gt;</type>
+        <definition>using neforce::expected&lt; T, ErrorT, Dummy &gt;::constructible_from_expected = 
+disjunction&lt;is_constructible&lt;T, expected&lt;U, Err&gt;&amp;&gt;, is_constructible&lt;T, expected&lt;U, Err&gt;&gt;,
+            is_constructible&lt;T, const expected&lt;U, Err&gt;&amp;&gt;, is_constructible&lt;T, const expected&lt;U, Err&gt;&gt;,
+            is_convertible&lt;expected&lt;U, Err&gt;&amp;, T&gt;, is_convertible&lt;expected&lt;U, Err&gt;, T&gt;,
+            is_convertible&lt;const expected&lt;U, Err&gt;&amp;, T&gt;, is_convertible&lt;const expected&lt;U, Err&gt;, T&gt;,
+            is_constructible&lt;UE, expected&lt;U, Err&gt;&amp;&gt;, is_constructible&lt;UE, expected&lt;U, Err&gt;&gt;,
+            is_constructible&lt;UE, const expected&lt;U, Err&gt;&amp;&gt;, is_constructible&lt;UE, const expected&lt;U, Err&gt;&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>constructible_from_expected</name>
+        <qualifiedname>neforce::expected::constructible_from_expected</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="140" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="140" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1expected_1a84f09a109674a3ebcb1cafd9df241552" prot="public" static="no">
+        <type>T</type>
+        <definition>using neforce::expected&lt; T, ErrorT, Dummy &gt;::value_type = T</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>neforce::expected::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="159" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="159" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1expected_1ad6bd57be307e14a126c726b6e76c1e40" prot="public" static="no">
+        <type>ErrorT</type>
+        <definition>using neforce::expected&lt; T, ErrorT, Dummy &gt;::error_type = ErrorT</definition>
+        <argsstring></argsstring>
+        <name>error_type</name>
+        <qualifiedname>neforce::expected::error_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="160" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="160" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1expected_1a58bb1d9c33667c9707f510250b917214" prot="public" static="no">
+        <type>unexpected&lt; ErrorT &gt;</type>
+        <definition>using neforce::expected&lt; T, ErrorT, Dummy &gt;::unexpected_type = unexpected&lt;ErrorT&gt;</definition>
+        <argsstring></argsstring>
+        <name>unexpected_type</name>
+        <qualifiedname>neforce::expected::unexpected_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="161" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="161" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1expected_1a044df78f029d79fc06bf6b769038f054" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>expected&lt; U, error_type &gt;</type>
+        <definition>using neforce::expected&lt; T, ErrorT, Dummy &gt;::rebind = expected&lt;U, error_type&gt;</definition>
+        <argsstring></argsstring>
+        <name>rebind</name>
+        <qualifiedname>neforce::expected::rebind</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="164" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="164" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classneforce_1_1expected_1a003e107df3e19666be23b1af81c24b42" prot="private" static="yes" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename Err</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool neforce::expected&lt; T, ErrorT, Dummy &gt;::explicit_conversion</definition>
+        <argsstring></argsstring>
+        <name>explicit_conversion</name>
+        <qualifiedname>neforce::expected::explicit_conversion</qualifiedname>
+        <initializer>                                  =
+<ref refid="group___type_traits_utilities_1gabd5ef1fb902eb72a8a79c7a97543f103" kindref="member">disjunction_v</ref>&lt;<ref refid="structneforce_1_1negation" kindref="compound">negation</ref>&lt;<ref refid="structneforce_1_1is__convertible" kindref="compound">is_convertible</ref>&lt;U, T&gt;&gt;, <ref refid="structneforce_1_1negation" kindref="compound">negation</ref>&lt;<ref refid="structneforce_1_1is__convertible" kindref="compound">is_convertible</ref>&lt;Err, ErrorT&gt;&gt;&gt;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="149" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1expected_1ae724b6410b7eb8e1cca731c9a4c37a9d" prot="private" static="yes" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool neforce::expected&lt; T, ErrorT, Dummy &gt;::same_value</definition>
+        <argsstring></argsstring>
+        <name>same_value</name>
+        <qualifiedname>neforce::expected::same_value</qualifiedname>
+        <initializer>= <ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt;typename U::value_type, T&gt;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="153" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1expected_1a3c9ea10f06f092008d57e3a0e95f9427" prot="private" static="yes" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool neforce::expected&lt; T, ErrorT, Dummy &gt;::same_error</definition>
+        <argsstring></argsstring>
+        <name>same_error</name>
+        <qualifiedname>neforce::expected::same_error</qualifiedname>
+        <initializer>= <ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt;typename U::error_type, ErrorT&gt;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="156" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="156" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classneforce_1_1expected_1ace1f40939a6ce21cb5b2357814d00288" prot="public" static="no" mutable="no">
+        <type>T</type>
+        <definition>T neforce::expected&lt; T, ErrorT, Dummy &gt;::value_</definition>
+        <argsstring></argsstring>
+        <name>value_</name>
+        <qualifiedname>neforce::expected::value_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="168" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="168" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1expected_1a7a3f8b95918a2aa2004e6b4c83884bc9" prot="public" static="no" mutable="no">
+        <type>ErrorT</type>
+        <definition>ErrorT neforce::expected&lt; T, ErrorT, Dummy &gt;::error_</definition>
+        <argsstring></argsstring>
+        <name>error_</name>
+        <qualifiedname>neforce::expected::error_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="169" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="169" bodyend="169"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1expected_1a3fee142edd3b384f11875843d6f7ed64" prot="private" static="no" mutable="no">
+        <type>union neforce::expected::@043376275327000102046200130211310142230144031023</type>
+        <definition>union neforce::expected::@043376275327000102046200130211310142230144031023 neforce::expected&lt; T, ErrorT, Dummy &gt;::@243324256263064136233221330076342144311054362301</definition>
+        <argsstring></argsstring>
+        <name>@243324256263064136233221330076342144311054362301</name>
+        <qualifiedname>neforce::expected::@243324256263064136233221330076342144311054362301</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="170" column="5"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1expected_1a700ac3eee5168095a9d525d8741babd3" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::expected&lt; T, ErrorT, Dummy &gt;::has_value_</definition>
+        <argsstring></argsstring>
+        <name>has_value_</name>
+        <qualifiedname>neforce::expected::has_value_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="172" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="172" bodyend="172"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classneforce_1_1expected_1ac4339e4d0736162f31457ea7b1a995ff" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>class</type>
+        <definition>friend class expected</definition>
+        <argsstring></argsstring>
+        <name>expected</name>
+        <qualifiedname>neforce::expected::expected</qualifiedname>
+        <param>
+          <type>expected</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="175" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="175" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1expected_1a4a8414bc3cd2b5919390e36f3b5f7140" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::expected&lt; T, ErrorT, Dummy &gt;::assign_value</definition>
+        <argsstring>(U &amp;&amp;val)</argsstring>
+        <name>assign_value</name>
+        <qualifiedname>neforce::expected::assign_value</qualifiedname>
+        <param>
+          <type>U &amp;&amp;</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="179" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="179" bodyend="186"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1ac1fcaccae1ebb6ca2b6d5459144f8346" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::expected&lt; T, ErrorT, Dummy &gt;::assign_error</definition>
+        <argsstring>(U &amp;&amp;err)</argsstring>
+        <name>assign_error</name>
+        <qualifiedname>neforce::expected::assign_error</qualifiedname>
+        <param>
+          <type>U &amp;&amp;</type>
+          <declname>err</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="189" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="189" bodyend="196"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a5e682f050a17a96a44d49801984ab3cb" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="conjunction_v&lt; is_nothrow_move_constructible&lt; ErrorT &gt;, is_nothrow_move_constructible&lt; T &gt; &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::expected&lt; T, ErrorT, Dummy &gt;::swap_value_error</definition>
+        <argsstring>(expected &amp;other)</argsstring>
+        <name>swap_value_error</name>
+        <qualifiedname>neforce::expected::swap_value_error</qualifiedname>
+        <param>
+          <type>expected &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="198" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="198" bodyend="216"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1adb10701ba7e5cac7ef9423ea092a02ad" prot="private" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::expected&lt; T, ErrorT, Dummy &gt;::expected</definition>
+        <argsstring>(inplace_invoke_tag, Func &amp;&amp;func)</argsstring>
+        <name>expected</name>
+        <qualifiedname>neforce::expected::expected</qualifiedname>
+        <param>
+          <type>inplace_invoke_tag</type>
+        </param>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="219" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="219" bodyend="221"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a8639079744be2cf61e565f12d8343f96" prot="private" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::expected&lt; T, ErrorT, Dummy &gt;::expected</definition>
+        <argsstring>(unexpect_invoke_tag, Func &amp;&amp;func)</argsstring>
+        <name>expected</name>
+        <qualifiedname>neforce::expected::expected</qualifiedname>
+        <param>
+          <type>unexpect_invoke_tag</type>
+        </param>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="224" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="224" bodyend="225"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1expected_1a62c691e290037632ced37ab558408c04" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_default_constructible_v&lt; T &gt;" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::expected&lt; T, ErrorT, Dummy &gt;::expected</definition>
+        <argsstring>()</argsstring>
+        <name>expected</name>
+        <qualifiedname>neforce::expected::expected</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="228" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="228" bodyend="230"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a2e8476f99c0489580c573e1fdb0ee53a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="conjunction_v&lt; is_nothrow_copy_constructible&lt; T &gt;, is_nothrow_copy_constructible&lt; ErrorT &gt; &gt;" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::expected&lt; T, ErrorT, Dummy &gt;::expected</definition>
+        <argsstring>(const expected &amp;other)</argsstring>
+        <name>expected</name>
+        <qualifiedname>neforce::expected::expected</qualifiedname>
+        <param>
+          <type>const expected &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="232" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="232" bodyend="240"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1ac00713e720e95eb52fab1d007c9e31f3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="conjunction_v&lt; is_nothrow_move_constructible&lt; T &gt;, is_nothrow_move_constructible&lt; ErrorT &gt; &gt;" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::expected&lt; T, ErrorT, Dummy &gt;::expected</definition>
+        <argsstring>(expected &amp;&amp;other)</argsstring>
+        <name>expected</name>
+        <qualifiedname>neforce::expected::expected</qualifiedname>
+        <param>
+          <type>expected &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="242" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="242" bodyend="250"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1aac4bb6cbfe08ac506d4bb5fc0d1b4e1f" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="conjunction_v&lt; is_nothrow_constructible&lt; T, const U &amp; &gt;, is_nothrow_constructible&lt; ErrorT, const Gr &amp; &gt; &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename Gr</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;(<ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, const U &amp; &gt;) &amp;&amp;(<ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; ErrorT, const Gr &amp; &gt;) &amp;&amp;(!constructible_from_expected&lt; U, Gr &gt;::value) &amp;&amp;explicit_conversion&lt; const U &amp;, const Gr &amp; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::expected&lt; T, ErrorT, Dummy &gt;::expected</definition>
+        <argsstring>(const expected&lt; U, Gr &gt; &amp;other)</argsstring>
+        <name>expected</name>
+        <qualifiedname>neforce::expected::expected</qualifiedname>
+        <param>
+          <type>const expected&lt; U, Gr &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="257" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="257" bodyend="265"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1aac4bb6cbfe08ac506d4bb5fc0d1b4e1f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="conjunction_v&lt; is_nothrow_constructible&lt; T, const U &amp; &gt;, is_nothrow_constructible&lt; ErrorT, const Gr &amp; &gt; &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename Gr</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;(<ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, const U &amp; &gt;) &amp;&amp;(<ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; ErrorT, const Gr &amp; &gt;) &amp;&amp;(!constructible_from_expected&lt; U, Gr &gt;::value) &amp;&amp;!explicit_conversion&lt; const U &amp;, const Gr &amp; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::expected&lt; T, ErrorT, Dummy &gt;::expected</definition>
+        <argsstring>(const expected&lt; U, Gr &gt; &amp;other)</argsstring>
+        <name>expected</name>
+        <qualifiedname>neforce::expected::expected</qualifiedname>
+        <param>
+          <type>const expected&lt; U, Gr &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="272" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="272" bodyend="280"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a7bcc78998e850336e5d62612ce8aed27" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="conjunction_v&lt; is_nothrow_constructible&lt; T, U &gt;, is_nothrow_constructible&lt; ErrorT, Gr &gt; &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename Gr</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, U &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; ErrorT, Gr &gt; &amp;&amp;(!constructible_from_expected&lt; U, Gr &gt;::value) &amp;&amp;explicit_conversion&lt; U, Gr &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::expected&lt; T, ErrorT, Dummy &gt;::expected</definition>
+        <argsstring>(expected&lt; U, Gr &gt; &amp;&amp;other)</argsstring>
+        <name>expected</name>
+        <qualifiedname>neforce::expected::expected</qualifiedname>
+        <param>
+          <type>expected&lt; U, Gr &gt; &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="286" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="286" bodyend="294"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a7bcc78998e850336e5d62612ce8aed27" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="conjunction_v&lt; is_nothrow_constructible&lt; T, U &gt;, is_nothrow_constructible&lt; ErrorT, Gr &gt; &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename Gr</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, U &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; ErrorT, Gr &gt; &amp;&amp;(!constructible_from_expected&lt; U, Gr &gt;::value) &amp;&amp;!explicit_conversion&lt; U, Gr &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::expected&lt; T, ErrorT, Dummy &gt;::expected</definition>
+        <argsstring>(expected&lt; U, Gr &gt; &amp;&amp;other)</argsstring>
+        <name>expected</name>
+        <qualifiedname>neforce::expected::expected</qualifiedname>
+        <param>
+          <type>expected&lt; U, Gr &gt; &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="300" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="300" bodyend="308"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a8b6b39a7d7da938bdc9d46bbfc56bad4" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, U &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+            <defval>T</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;(!<ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt; <ref refid="group___remove_qualifiers_1ga878454a8799ed6276098016ab4bd5975" kindref="member">remove_cvref_t</ref>&lt; U &gt;, expected &gt;) &amp;&amp;(!<ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt; <ref refid="group___remove_qualifiers_1ga878454a8799ed6276098016ab4bd5975" kindref="member">remove_cvref_t</ref>&lt; U &gt;, <ref refid="structneforce_1_1inplace__construct__tag" kindref="compound">inplace_construct_tag</ref> &gt;) &amp;&amp;(!is_unexpected&lt; <ref refid="group___remove_qualifiers_1ga878454a8799ed6276098016ab4bd5975" kindref="member">remove_cvref_t</ref>&lt; U &gt; &gt;) &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, U &gt; &amp;&amp;!<ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; U, T &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::expected&lt; T, ErrorT, Dummy &gt;::expected</definition>
+        <argsstring>(U &amp;&amp;value)</argsstring>
+        <name>expected</name>
+        <qualifiedname>neforce::expected::expected</qualifiedname>
+        <param>
+          <type>U &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="315" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="315" bodyend="317"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a8b6b39a7d7da938bdc9d46bbfc56bad4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, U &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+            <defval>T</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;(!<ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt; <ref refid="group___remove_qualifiers_1ga878454a8799ed6276098016ab4bd5975" kindref="member">remove_cvref_t</ref>&lt; U &gt;, expected &gt;) &amp;&amp;(!<ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt; <ref refid="group___remove_qualifiers_1ga878454a8799ed6276098016ab4bd5975" kindref="member">remove_cvref_t</ref>&lt; U &gt;, <ref refid="structneforce_1_1inplace__construct__tag" kindref="compound">inplace_construct_tag</ref> &gt;) &amp;&amp;(!is_unexpected&lt; <ref refid="group___remove_qualifiers_1ga878454a8799ed6276098016ab4bd5975" kindref="member">remove_cvref_t</ref>&lt; U &gt; &gt;) &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, U &gt; &amp;&amp;<ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; U, T &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::expected&lt; T, ErrorT, Dummy &gt;::expected</definition>
+        <argsstring>(U &amp;&amp;value)</argsstring>
+        <name>expected</name>
+        <qualifiedname>neforce::expected::expected</qualifiedname>
+        <param>
+          <type>U &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="324" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="324" bodyend="326"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a4c9d88135074f766a665b8420c9939b5" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; ErrorT, const Gr &amp; &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Gr</type>
+            <defval>ErrorT</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; ErrorT, const Gr &amp; &gt; &amp;&amp;!<ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; const Gr &amp;, ErrorT &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::expected&lt; T, ErrorT, Dummy &gt;::expected</definition>
+        <argsstring>(const unexpected&lt; Gr &gt; &amp;unex)</argsstring>
+        <name>expected</name>
+        <qualifiedname>neforce::expected::expected</qualifiedname>
+        <param>
+          <type>const unexpected&lt; Gr &gt; &amp;</type>
+          <declname>unex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="330" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="330" bodyend="331"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a4c9d88135074f766a665b8420c9939b5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; ErrorT, const Gr &amp; &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Gr</type>
+            <defval>ErrorT</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; ErrorT, const Gr &amp; &gt; &amp;&amp;<ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; const Gr &amp;, ErrorT &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::expected&lt; T, ErrorT, Dummy &gt;::expected</definition>
+        <argsstring>(const unexpected&lt; Gr &gt; &amp;unex)</argsstring>
+        <name>expected</name>
+        <qualifiedname>neforce::expected::expected</qualifiedname>
+        <param>
+          <type>const unexpected&lt; Gr &gt; &amp;</type>
+          <declname>unex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="335" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="335" bodyend="336"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a7edb5b5b10f953ac0fdcbaf5dc889da1" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; ErrorT, Gr &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Gr</type>
+            <defval>ErrorT</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; ErrorT, Gr &gt; &amp;&amp;!<ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; Gr, ErrorT &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::expected&lt; T, ErrorT, Dummy &gt;::expected</definition>
+        <argsstring>(unexpected&lt; Gr &gt; &amp;&amp;unex)</argsstring>
+        <name>expected</name>
+        <qualifiedname>neforce::expected::expected</qualifiedname>
+        <param>
+          <type>unexpected&lt; Gr &gt; &amp;&amp;</type>
+          <declname>unex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="340" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="340" bodyend="341"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a7edb5b5b10f953ac0fdcbaf5dc889da1" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; ErrorT, Gr &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Gr</type>
+            <defval>ErrorT</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; ErrorT, Gr &gt; &amp;&amp;<ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; Gr, ErrorT &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::expected&lt; T, ErrorT, Dummy &gt;::expected</definition>
+        <argsstring>(unexpected&lt; Gr &gt; &amp;&amp;unex)</argsstring>
+        <name>expected</name>
+        <qualifiedname>neforce::expected::expected</qualifiedname>
+        <param>
+          <type>unexpected&lt; Gr &gt; &amp;&amp;</type>
+          <declname>unex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="345" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="345" bodyend="346"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a519ecf51a90dc0af904e9fa99fa3676c" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, Args... &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, Args... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::expected&lt; T, ErrorT, Dummy &gt;::expected</definition>
+        <argsstring>(inplace_construct_tag, Args &amp;&amp;... args)</argsstring>
+        <name>expected</name>
+        <qualifiedname>neforce::expected::expected</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1inplace__construct__tag" kindref="compound">inplace_construct_tag</ref></type>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="349" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="349" bodyend="352"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a9aa5b27de12ec0b8088b65d54fb00348" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, std::initializer_list&lt; U &gt; &amp;, Args... &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, std::initializer_list&lt; U &gt; &amp;, Args... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::expected&lt; T, ErrorT, Dummy &gt;::expected</definition>
+        <argsstring>(inplace_construct_tag, std::initializer_list&lt; U &gt; list, Args &amp;&amp;... args)</argsstring>
+        <name>expected</name>
+        <qualifiedname>neforce::expected::expected</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1inplace__construct__tag" kindref="compound">inplace_construct_tag</ref></type>
+        </param>
+        <param>
+          <type>std::initializer_list&lt; U &gt;</type>
+          <declname>list</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="356" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="356" bodyend="360"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a6002b2c9f32137bf9c9996a6645bdfb6" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; ErrorT, Args... &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; ErrorT, Args... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::expected&lt; T, ErrorT, Dummy &gt;::expected</definition>
+        <argsstring>(unexpect_t, Args &amp;&amp;... args)</argsstring>
+        <name>expected</name>
+        <qualifiedname>neforce::expected::expected</qualifiedname>
+        <param>
+          <type>unexpect_t</type>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="363" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="363" bodyend="365"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1af6dddbf33da928c4c5ab2cde91e79bf4" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; ErrorT, std::initializer_list&lt; U &gt; &amp;, Args... &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; ErrorT, std::initializer_list&lt; U &gt; &amp;, Args... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::expected&lt; T, ErrorT, Dummy &gt;::expected</definition>
+        <argsstring>(unexpect_t, std::initializer_list&lt; U &gt; list, Args &amp;&amp;... args)</argsstring>
+        <name>expected</name>
+        <qualifiedname>neforce::expected::expected</qualifiedname>
+        <param>
+          <type>unexpect_t</type>
+        </param>
+        <param>
+          <type>std::initializer_list&lt; U &gt;</type>
+          <declname>list</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="369" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="369" bodyend="371"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a552314aecf3c1ecca9fdbcb358389400" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::expected&lt; T, ErrorT, Dummy &gt;::~expected</definition>
+        <argsstring>()</argsstring>
+        <name>~expected</name>
+        <qualifiedname>neforce::expected::~expected</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="373" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="373" bodyend="379"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1aa932ab794ff5d09a3f7acd8c33c845c2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="conjunction_v&lt; is_nothrow_copy_constructible&lt; T &gt;, is_nothrow_copy_constructible&lt; ErrorT &gt;, is_nothrow_copy_assignable&lt; T &gt;, is_nothrow_copy_assignable&lt; ErrorT &gt; &gt;" virt="non-virtual">
+        <type>expected &amp;</type>
+        <definition>expected &amp; neforce::expected&lt; T, ErrorT, Dummy &gt;::operator=</definition>
+        <argsstring>(const expected &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::expected::operator=</qualifiedname>
+        <param>
+          <type>const expected &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="381" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="381" bodyend="390"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1af32fe2dc6d6e9f4fdfdca18ed89ca28d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="conjunction_v&lt; is_nothrow_move_constructible&lt; T &gt;, is_nothrow_move_constructible&lt; ErrorT &gt;, is_nothrow_move_assignable&lt; T &gt;, is_nothrow_move_assignable&lt; ErrorT &gt; &gt;" virt="non-virtual">
+        <type>expected &amp;</type>
+        <definition>expected &amp; neforce::expected&lt; T, ErrorT, Dummy &gt;::operator=</definition>
+        <argsstring>(expected &amp;&amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::expected::operator=</qualifiedname>
+        <param>
+          <type>expected &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="392" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="392" bodyend="401"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1af533cab8e4167d4d5b3485221ca24194" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+            <defval>T</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;(!<ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt; expected, <ref refid="group___remove_qualifiers_1ga878454a8799ed6276098016ab4bd5975" kindref="member">remove_cvref_t</ref>&lt; U &gt; &gt;) &amp;&amp;(!is_unexpected&lt; <ref refid="group___remove_qualifiers_1ga878454a8799ed6276098016ab4bd5975" kindref="member">remove_cvref_t</ref>&lt; U &gt; &gt;) &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, U &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga020ccefa04f1f7ad5525fd6a18fea8c0" kindref="member">is_assignable_v</ref>&lt; T &amp;, U &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>expected &amp;</type>
+        <definition>expected &amp; neforce::expected&lt; T, ErrorT, Dummy &gt;::operator=</definition>
+        <argsstring>(U &amp;&amp;value)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::expected::operator=</qualifiedname>
+        <param>
+          <type>U &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="407" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="407" bodyend="410"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1ac0d755bfe266447f2912dbe7835eb335" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Gr</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; ErrorT, const Gr &amp; &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga020ccefa04f1f7ad5525fd6a18fea8c0" kindref="member">is_assignable_v</ref>&lt; ErrorT &amp;, const Gr &amp; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>expected &amp;</type>
+        <definition>expected &amp; neforce::expected&lt; T, ErrorT, Dummy &gt;::operator=</definition>
+        <argsstring>(const unexpected&lt; Gr &gt; &amp;unex)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::expected::operator=</qualifiedname>
+        <param>
+          <type>const unexpected&lt; Gr &gt; &amp;</type>
+          <declname>unex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="414" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="414" bodyend="417"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a4140bd7cf2633b263c9843c5e9418de9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Gr</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; ErrorT, const Gr &amp; &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga020ccefa04f1f7ad5525fd6a18fea8c0" kindref="member">is_assignable_v</ref>&lt; ErrorT &amp;, const Gr &amp; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>expected &amp;</type>
+        <definition>expected &amp; neforce::expected&lt; T, ErrorT, Dummy &gt;::operator=</definition>
+        <argsstring>(unexpected&lt; Gr &gt; &amp;&amp;unex)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::expected::operator=</qualifiedname>
+        <param>
+          <type>unexpected&lt; Gr &gt; &amp;&amp;</type>
+          <declname>unex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="421" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="421" bodyend="424"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a1cfc73c7baf7dad7877aed582cb66f3f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga910040e0e7eedac28b597a7cbd403314" kindref="member">is_nothrow_constructible_v</ref>&lt; T, Args... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>T &amp;</type>
+        <definition>T &amp; neforce::expected&lt; T, ErrorT, Dummy &gt;::emplace</definition>
+        <argsstring>(Args &amp;&amp;... args) noexcept</argsstring>
+        <name>emplace</name>
+        <qualifiedname>neforce::expected::emplace</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="427" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="427" bodyend="436"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a79896267cf463e5366b5f0ad17c23025" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga910040e0e7eedac28b597a7cbd403314" kindref="member">is_nothrow_constructible_v</ref>&lt; T, std::initializer_list&lt; U &gt; &amp;, Args... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>T &amp;</type>
+        <definition>T &amp; neforce::expected&lt; T, ErrorT, Dummy &gt;::emplace</definition>
+        <argsstring>(std::initializer_list&lt; U &gt; list, Args &amp;&amp;... args) noexcept</argsstring>
+        <name>emplace</name>
+        <qualifiedname>neforce::expected::emplace</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; U &gt;</type>
+          <declname>list</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="440" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="440" bodyend="449"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a023cb844fd97cd67e3bbf29df32f7385" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="conjunction_v&lt; is_nothrow_move_constructible&lt; T &gt;, is_nothrow_move_constructible&lt; ErrorT &gt;, is_nothrow_swappable&lt; T &amp; &gt;, is_nothrow_swappable&lt; ErrorT &amp; &gt; &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::expected&lt; T, ErrorT, Dummy &gt;::swap</definition>
+        <argsstring>(expected &amp;other)</argsstring>
+        <name>swap</name>
+        <qualifiedname>neforce::expected::swap</qualifiedname>
+        <param>
+          <type>expected &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="451" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="451" bodyend="467"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a00f81ec2731c3063b5822996a85a3038" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const T *</type>
+        <definition>const T * neforce::expected&lt; T, ErrorT, Dummy &gt;::operator-&gt;</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator-&gt;</name>
+        <qualifiedname>neforce::expected::operator-&gt;</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="469" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="469" bodyend="472"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a22d929c44d8bd7dae379311b0b3b6179" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>T *</type>
+        <definition>T * neforce::expected&lt; T, ErrorT, Dummy &gt;::operator-&gt;</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>operator-&gt;</name>
+        <qualifiedname>neforce::expected::operator-&gt;</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="474" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="474" bodyend="477"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1add6ee06f7b4cfb04abaab341aad5ebc1" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="lvalue" noexcept="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T &amp; neforce::expected&lt; T, ErrorT, Dummy &gt;::operator*</definition>
+        <argsstring>() const &amp;noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>neforce::expected::operator*</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="479" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="479" bodyend="482"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1af1f564399b1c179d26ffbf883bd0a2db" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" refqual="lvalue" noexcept="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; neforce::expected&lt; T, ErrorT, Dummy &gt;::operator*</definition>
+        <argsstring>() &amp;noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>neforce::expected::operator*</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="484" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="484" bodyend="487"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1aae5777a87559435104130d20f1b4cfb3" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="rvalue" noexcept="yes" virt="non-virtual">
+        <type>const T &amp;&amp;</type>
+        <definition>const T &amp;&amp; neforce::expected&lt; T, ErrorT, Dummy &gt;::operator*</definition>
+        <argsstring>() const &amp;&amp;noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>neforce::expected::operator*</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="489" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="489" bodyend="492"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a190ffa3ebd9e26b5833362caead31289" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" refqual="rvalue" noexcept="yes" virt="non-virtual">
+        <type>T &amp;&amp;</type>
+        <definition>T &amp;&amp; neforce::expected&lt; T, ErrorT, Dummy &gt;::operator*</definition>
+        <argsstring>() &amp;&amp;noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>neforce::expected::operator*</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="494" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="494" bodyend="497"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a202058b6befb1bffdd677ebcc4244f06" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::expected&lt; T, ErrorT, Dummy &gt;::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>neforce::expected::operator bool</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="499" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="499" bodyend="499"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a51b15d9d25190ed6a28035ba11506c50" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::expected&lt; T, ErrorT, Dummy &gt;::has_value</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>has_value</name>
+        <qualifiedname>neforce::expected::has_value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="501" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="501" bodyend="501"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a7aecd07082f6fabb8f1826c02e9dc465" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T &amp; neforce::expected&lt; T, ErrorT, Dummy &gt;::value</definition>
+        <argsstring>() const &amp;</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::expected::value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="503" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="503" bodyend="508"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a0fdb30758de06d9378156cee08c5fb65" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; neforce::expected&lt; T, ErrorT, Dummy &gt;::value</definition>
+        <argsstring>() &amp;</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::expected::value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="510" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="510" bodyend="515"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a9d1b6201d0a4a38ce289d2a04e25a946" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <type>const T &amp;&amp;</type>
+        <definition>const T &amp;&amp; neforce::expected&lt; T, ErrorT, Dummy &gt;::value</definition>
+        <argsstring>() const &amp;&amp;</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::expected::value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="517" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="517" bodyend="522"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a281fc40dd3bace5566f3e64c2923606d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <type>T &amp;&amp;</type>
+        <definition>T &amp;&amp; neforce::expected&lt; T, ErrorT, Dummy &gt;::value</definition>
+        <argsstring>() &amp;&amp;</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::expected::value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="524" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="524" bodyend="529"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1ab4a2de2a73bad7cc54a3c9cc462ffd72" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="lvalue" noexcept="yes" virt="non-virtual">
+        <type>const ErrorT &amp;</type>
+        <definition>const ErrorT &amp; neforce::expected&lt; T, ErrorT, Dummy &gt;::error</definition>
+        <argsstring>() const &amp;noexcept</argsstring>
+        <name>error</name>
+        <qualifiedname>neforce::expected::error</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="531" column="28" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="531" bodyend="534"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a2a185bd8853002e02921871c0ba21ba2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="lvalue" noexcept="yes" virt="non-virtual">
+        <type>ErrorT &amp;</type>
+        <definition>ErrorT &amp; neforce::expected&lt; T, ErrorT, Dummy &gt;::error</definition>
+        <argsstring>() &amp;noexcept</argsstring>
+        <name>error</name>
+        <qualifiedname>neforce::expected::error</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="536" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="536" bodyend="539"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1ae9751c62c19ac6146470e193de896ada" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="rvalue" noexcept="yes" virt="non-virtual">
+        <type>const ErrorT &amp;&amp;</type>
+        <definition>const ErrorT &amp;&amp; neforce::expected&lt; T, ErrorT, Dummy &gt;::error</definition>
+        <argsstring>() const &amp;&amp;noexcept</argsstring>
+        <name>error</name>
+        <qualifiedname>neforce::expected::error</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="541" column="28" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="541" bodyend="544"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1ab4fd1e61ea08abd1a3456aef45505b62" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="rvalue" noexcept="yes" virt="non-virtual">
+        <type>ErrorT &amp;&amp;</type>
+        <definition>ErrorT &amp;&amp; neforce::expected&lt; T, ErrorT, Dummy &gt;::error</definition>
+        <argsstring>() &amp;&amp;noexcept</argsstring>
+        <name>error</name>
+        <qualifiedname>neforce::expected::error</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="546" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="546" bodyend="549"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1ab551fef10f279dd69de21b3c3638a6ce" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="lvalue" noexcept="yes" noexceptexpression="conjunction_v&lt; is_nothrow_copy_constructible&lt; T &gt;, is_nothrow_convertible&lt; U, T &gt; &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T neforce::expected&lt; T, ErrorT, Dummy &gt;::value_or</definition>
+        <argsstring>(U &amp;&amp;alt) const &amp;</argsstring>
+        <name>value_or</name>
+        <qualifiedname>neforce::expected::value_or</qualifiedname>
+        <param>
+          <type>U &amp;&amp;</type>
+          <declname>alt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="553" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="553" bodyend="561"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a72b6dcd81088aa37ca79018890dafcea" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="rvalue" noexcept="yes" noexceptexpression="conjunction_v&lt; is_nothrow_move_constructible&lt; T &gt;, is_nothrow_convertible&lt; U, T &gt; &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T neforce::expected&lt; T, ErrorT, Dummy &gt;::value_or</definition>
+        <argsstring>(U &amp;&amp;alt) &amp;&amp;</argsstring>
+        <name>value_or</name>
+        <qualifiedname>neforce::expected::value_or</qualifiedname>
+        <param>
+          <type>U &amp;&amp;</type>
+          <declname>alt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="565" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="565" bodyend="573"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a278794548b313331235c6d6b8cc20e32" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Gr</type>
+            <defval>ErrorT</defval>
+          </param>
+        </templateparamlist>
+        <type>ErrorT</type>
+        <definition>ErrorT neforce::expected&lt; T, ErrorT, Dummy &gt;::error_or</definition>
+        <argsstring>(Gr &amp;&amp;alt) const &amp;</argsstring>
+        <name>error_or</name>
+        <qualifiedname>neforce::expected::error_or</qualifiedname>
+        <param>
+          <type>Gr &amp;&amp;</type>
+          <declname>alt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="576" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="576" bodyend="584"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1ae6183f92c7389a3792d66c52d76d4a2d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Gr</type>
+            <defval>ErrorT</defval>
+          </param>
+        </templateparamlist>
+        <type>ErrorT</type>
+        <definition>ErrorT neforce::expected&lt; T, ErrorT, Dummy &gt;::error_or</definition>
+        <argsstring>(Gr &amp;&amp;alt) &amp;&amp;</argsstring>
+        <name>error_or</name>
+        <qualifiedname>neforce::expected::error_or</qualifiedname>
+        <param>
+          <type>Gr &amp;&amp;</type>
+          <declname>alt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="587" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="587" bodyend="595"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1adc1a90bbf52d1e878a7efd138c8643fb" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; ErrorT, ErrorT &amp; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto neforce::expected&lt; T, ErrorT, Dummy &gt;::and_then</definition>
+        <argsstring>(Func &amp;&amp;func) &amp;</argsstring>
+        <name>and_then</name>
+        <qualifiedname>neforce::expected::and_then</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="598" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="598" bodyend="608"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a8bf5486d512cc4f220a6ae270934d473" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; ErrorT, const ErrorT &amp; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto neforce::expected&lt; T, ErrorT, Dummy &gt;::and_then</definition>
+        <argsstring>(Func &amp;&amp;func) const &amp;</argsstring>
+        <name>and_then</name>
+        <qualifiedname>neforce::expected::and_then</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="611" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="611" bodyend="621"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1ae7fde7f63cdde9503f927f2fd5387322" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; ErrorT, ErrorT &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto neforce::expected&lt; T, ErrorT, Dummy &gt;::and_then</definition>
+        <argsstring>(Func &amp;&amp;func) &amp;&amp;</argsstring>
+        <name>and_then</name>
+        <qualifiedname>neforce::expected::and_then</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="624" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="624" bodyend="634"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1ad562e16e9b0113b7563895429b80ddfe" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; ErrorT, const ErrorT &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto neforce::expected&lt; T, ErrorT, Dummy &gt;::and_then</definition>
+        <argsstring>(Func &amp;&amp;func) const &amp;&amp;</argsstring>
+        <name>and_then</name>
+        <qualifiedname>neforce::expected::and_then</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="637" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="637" bodyend="647"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a82cb1ba0a131d8d85b9c0695956ac7e1" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, T &amp; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto neforce::expected&lt; T, ErrorT, Dummy &gt;::or_else</definition>
+        <argsstring>(Func &amp;&amp;func) &amp;</argsstring>
+        <name>or_else</name>
+        <qualifiedname>neforce::expected::or_else</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="650" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="650" bodyend="660"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1acc7f0f016d37773c39b52f03fc8643b7" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, const T &amp; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto neforce::expected&lt; T, ErrorT, Dummy &gt;::or_else</definition>
+        <argsstring>(Func &amp;&amp;func) const &amp;</argsstring>
+        <name>or_else</name>
+        <qualifiedname>neforce::expected::or_else</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="663" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="663" bodyend="673"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1ac3c8ecb96cf1f205feb3b56dc97b5a9d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, T &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto neforce::expected&lt; T, ErrorT, Dummy &gt;::or_else</definition>
+        <argsstring>(Func &amp;&amp;func) &amp;&amp;</argsstring>
+        <name>or_else</name>
+        <qualifiedname>neforce::expected::or_else</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="676" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="676" bodyend="686"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a87eb8c3f9145676dc35bc27fced49086" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, const T &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto neforce::expected&lt; T, ErrorT, Dummy &gt;::or_else</definition>
+        <argsstring>(Func &amp;&amp;func) const &amp;&amp;</argsstring>
+        <name>or_else</name>
+        <qualifiedname>neforce::expected::or_else</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="689" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="689" bodyend="699"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1ac55a3981073467cc691da9ffb0fee5db" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; ErrorT, ErrorT &amp; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto neforce::expected&lt; T, ErrorT, Dummy &gt;::transform</definition>
+        <argsstring>(Func &amp;&amp;func) &amp;</argsstring>
+        <name>transform</name>
+        <qualifiedname>neforce::expected::transform</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="702" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="702" bodyend="711"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a6f6bdd45de1a51b892eca0bbefa321a3" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; ErrorT, const ErrorT &amp; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto neforce::expected&lt; T, ErrorT, Dummy &gt;::transform</definition>
+        <argsstring>(Func &amp;&amp;func) const &amp;</argsstring>
+        <name>transform</name>
+        <qualifiedname>neforce::expected::transform</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="714" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="714" bodyend="723"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a2f3d9aebe4b4614fa21fc9a8fd520ab3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; ErrorT, ErrorT &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto neforce::expected&lt; T, ErrorT, Dummy &gt;::transform</definition>
+        <argsstring>(Func &amp;&amp;func) &amp;&amp;</argsstring>
+        <name>transform</name>
+        <qualifiedname>neforce::expected::transform</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="726" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="726" bodyend="736"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a4dc23ddb0920176bc57f79cb3f55261a" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; ErrorT, const ErrorT &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto neforce::expected&lt; T, ErrorT, Dummy &gt;::transform</definition>
+        <argsstring>(Func &amp;&amp;func) const &amp;&amp;</argsstring>
+        <name>transform</name>
+        <qualifiedname>neforce::expected::transform</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="739" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="739" bodyend="749"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a00821ec24dc8a431c172579d7cf1edb7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, T &amp; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto neforce::expected&lt; T, ErrorT, Dummy &gt;::transform_error</definition>
+        <argsstring>(Func &amp;&amp;func) &amp;</argsstring>
+        <name>transform_error</name>
+        <qualifiedname>neforce::expected::transform_error</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="752" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="752" bodyend="761"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a1af805381544446fbbca881f7edc2ca0" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, const T &amp; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto neforce::expected&lt; T, ErrorT, Dummy &gt;::transform_error</definition>
+        <argsstring>(Func &amp;&amp;func) const &amp;</argsstring>
+        <name>transform_error</name>
+        <qualifiedname>neforce::expected::transform_error</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="764" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="764" bodyend="773"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a4904e0014d4e3fa0982bb0cdc7a8b5f0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, T &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto neforce::expected&lt; T, ErrorT, Dummy &gt;::transform_error</definition>
+        <argsstring>(Func &amp;&amp;func) &amp;&amp;</argsstring>
+        <name>transform_error</name>
+        <qualifiedname>neforce::expected::transform_error</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="776" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="776" bodyend="786"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1ae8beba8384af43d233fb4419df413add" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, const T &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto neforce::expected&lt; T, ErrorT, Dummy &gt;::transform_error</definition>
+        <argsstring>(Func &amp;&amp;func) const &amp;&amp;</argsstring>
+        <name>transform_error</name>
+        <qualifiedname>neforce::expected::transform_error</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="789" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="789" bodyend="799"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1afcc7bc832dc2c6233586c8e4f3bbe90b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename Err2</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___base_type_properties_1gab2bec1334cb4a7c0ffcbf73e88b170e1" kindref="member">is_void_v</ref>&lt; U &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool neforce::expected&lt; T, ErrorT, Dummy &gt;::operator==</definition>
+        <argsstring>(const expected&lt; U, Err2 &gt; &amp;rhs)</argsstring>
+        <name>operator==</name>
+        <qualifiedname>neforce::expected::operator==</qualifiedname>
+        <param>
+          <type>const expected&lt; U, Err2 &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="802" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="802" bodyend="808"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a7623222a2caad6520007f7a26ad6ffce" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool neforce::expected&lt; T, ErrorT, Dummy &gt;::operator==</definition>
+        <argsstring>(const U &amp;value)</argsstring>
+        <name>operator==</name>
+        <qualifiedname>neforce::expected::operator==</qualifiedname>
+        <param>
+          <type>const U &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="811" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="811" bodyend="813"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1expected_1a5e428ba9db09a5540d37e9c0b0823472" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Err2</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool neforce::expected&lt; T, ErrorT, Dummy &gt;::operator==</definition>
+        <argsstring>(const unexpected&lt; Err2 &gt; &amp;unex)</argsstring>
+        <name>operator==</name>
+        <qualifiedname>neforce::expected::operator==</qualifiedname>
+        <param>
+          <type>const unexpected&lt; Err2 &gt; &amp;</type>
+          <declname>unex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="816" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="816" bodyend="818"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" line="131" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/expected.hpp" bodystart="131" bodyend="819"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1expected_1adc1a90bbf52d1e878a7efd138c8643fb" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>and_then</name></member>
+      <member refid="classneforce_1_1expected_1a8bf5486d512cc4f220a6ae270934d473" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>and_then</name></member>
+      <member refid="classneforce_1_1expected_1ae7fde7f63cdde9503f927f2fd5387322" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>and_then</name></member>
+      <member refid="classneforce_1_1expected_1ad562e16e9b0113b7563895429b80ddfe" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>and_then</name></member>
+      <member refid="classneforce_1_1expected_1ac1fcaccae1ebb6ca2b6d5459144f8346" prot="private" virt="non-virtual"><scope>neforce::expected</scope><name>assign_error</name></member>
+      <member refid="classneforce_1_1expected_1a4a8414bc3cd2b5919390e36f3b5f7140" prot="private" virt="non-virtual"><scope>neforce::expected</scope><name>assign_value</name></member>
+      <member refid="classneforce_1_1expected_1a6ccc41a6dddf410843dd45ca91fe0ed2" prot="private" virt="non-virtual"><scope>neforce::expected</scope><name>constructible_from_expected</name></member>
+      <member refid="classneforce_1_1expected_1a1cfc73c7baf7dad7877aed582cb66f3f" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>emplace</name></member>
+      <member refid="classneforce_1_1expected_1a79896267cf463e5366b5f0ad17c23025" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>emplace</name></member>
+      <member refid="classneforce_1_1expected_1ab4a2de2a73bad7cc54a3c9cc462ffd72" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>error</name></member>
+      <member refid="classneforce_1_1expected_1a2a185bd8853002e02921871c0ba21ba2" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>error</name></member>
+      <member refid="classneforce_1_1expected_1ae9751c62c19ac6146470e193de896ada" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>error</name></member>
+      <member refid="classneforce_1_1expected_1ab4fd1e61ea08abd1a3456aef45505b62" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>error</name></member>
+      <member refid="classneforce_1_1expected_1a7a3f8b95918a2aa2004e6b4c83884bc9" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>error_</name></member>
+      <member refid="classneforce_1_1expected_1a278794548b313331235c6d6b8cc20e32" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>error_or</name></member>
+      <member refid="classneforce_1_1expected_1ae6183f92c7389a3792d66c52d76d4a2d" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>error_or</name></member>
+      <member refid="classneforce_1_1expected_1ad6bd57be307e14a126c726b6e76c1e40" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>error_type</name></member>
+      <member refid="classneforce_1_1expected_1adb10701ba7e5cac7ef9423ea092a02ad" prot="private" virt="non-virtual"><scope>neforce::expected</scope><name>expected</name></member>
+      <member refid="classneforce_1_1expected_1a8639079744be2cf61e565f12d8343f96" prot="private" virt="non-virtual"><scope>neforce::expected</scope><name>expected</name></member>
+      <member refid="classneforce_1_1expected_1a62c691e290037632ced37ab558408c04" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>expected</name></member>
+      <member refid="classneforce_1_1expected_1a2e8476f99c0489580c573e1fdb0ee53a" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>expected</name></member>
+      <member refid="classneforce_1_1expected_1ac00713e720e95eb52fab1d007c9e31f3" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>expected</name></member>
+      <member refid="classneforce_1_1expected_1aac4bb6cbfe08ac506d4bb5fc0d1b4e1f" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>expected</name></member>
+      <member refid="classneforce_1_1expected_1aac4bb6cbfe08ac506d4bb5fc0d1b4e1f" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>expected</name></member>
+      <member refid="classneforce_1_1expected_1a7bcc78998e850336e5d62612ce8aed27" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>expected</name></member>
+      <member refid="classneforce_1_1expected_1a7bcc78998e850336e5d62612ce8aed27" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>expected</name></member>
+      <member refid="classneforce_1_1expected_1a8b6b39a7d7da938bdc9d46bbfc56bad4" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>expected</name></member>
+      <member refid="classneforce_1_1expected_1a8b6b39a7d7da938bdc9d46bbfc56bad4" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>expected</name></member>
+      <member refid="classneforce_1_1expected_1a4c9d88135074f766a665b8420c9939b5" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>expected</name></member>
+      <member refid="classneforce_1_1expected_1a4c9d88135074f766a665b8420c9939b5" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>expected</name></member>
+      <member refid="classneforce_1_1expected_1a7edb5b5b10f953ac0fdcbaf5dc889da1" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>expected</name></member>
+      <member refid="classneforce_1_1expected_1a7edb5b5b10f953ac0fdcbaf5dc889da1" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>expected</name></member>
+      <member refid="classneforce_1_1expected_1a519ecf51a90dc0af904e9fa99fa3676c" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>expected</name></member>
+      <member refid="classneforce_1_1expected_1a9aa5b27de12ec0b8088b65d54fb00348" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>expected</name></member>
+      <member refid="classneforce_1_1expected_1a6002b2c9f32137bf9c9996a6645bdfb6" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>expected</name></member>
+      <member refid="classneforce_1_1expected_1af6dddbf33da928c4c5ab2cde91e79bf4" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>expected</name></member>
+      <member refid="classneforce_1_1expected_1a003e107df3e19666be23b1af81c24b42" prot="private" virt="non-virtual"><scope>neforce::expected</scope><name>explicit_conversion</name></member>
+      <member refid="classneforce_1_1expected_1a51b15d9d25190ed6a28035ba11506c50" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>has_value</name></member>
+      <member refid="classneforce_1_1expected_1a700ac3eee5168095a9d525d8741babd3" prot="private" virt="non-virtual"><scope>neforce::expected</scope><name>has_value_</name></member>
+      <member refid="classneforce_1_1expected_1a202058b6befb1bffdd677ebcc4244f06" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>operator bool</name></member>
+      <member refid="classneforce_1_1expected_1add6ee06f7b4cfb04abaab341aad5ebc1" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>operator*</name></member>
+      <member refid="classneforce_1_1expected_1af1f564399b1c179d26ffbf883bd0a2db" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>operator*</name></member>
+      <member refid="classneforce_1_1expected_1aae5777a87559435104130d20f1b4cfb3" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>operator*</name></member>
+      <member refid="classneforce_1_1expected_1a190ffa3ebd9e26b5833362caead31289" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>operator*</name></member>
+      <member refid="classneforce_1_1expected_1a00f81ec2731c3063b5822996a85a3038" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>operator-&gt;</name></member>
+      <member refid="classneforce_1_1expected_1a22d929c44d8bd7dae379311b0b3b6179" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>operator-&gt;</name></member>
+      <member refid="classneforce_1_1expected_1aa932ab794ff5d09a3f7acd8c33c845c2" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1expected_1af32fe2dc6d6e9f4fdfdca18ed89ca28d" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1expected_1af533cab8e4167d4d5b3485221ca24194" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1expected_1ac0d755bfe266447f2912dbe7835eb335" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1expected_1a4140bd7cf2633b263c9843c5e9418de9" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1expected_1afcc7bc832dc2c6233586c8e4f3bbe90b" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>operator==</name></member>
+      <member refid="classneforce_1_1expected_1a7623222a2caad6520007f7a26ad6ffce" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>operator==</name></member>
+      <member refid="classneforce_1_1expected_1a5e428ba9db09a5540d37e9c0b0823472" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>operator==</name></member>
+      <member refid="classneforce_1_1expected_1a82cb1ba0a131d8d85b9c0695956ac7e1" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>or_else</name></member>
+      <member refid="classneforce_1_1expected_1acc7f0f016d37773c39b52f03fc8643b7" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>or_else</name></member>
+      <member refid="classneforce_1_1expected_1ac3c8ecb96cf1f205feb3b56dc97b5a9d" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>or_else</name></member>
+      <member refid="classneforce_1_1expected_1a87eb8c3f9145676dc35bc27fced49086" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>or_else</name></member>
+      <member refid="classneforce_1_1expected_1a044df78f029d79fc06bf6b769038f054" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>rebind</name></member>
+      <member refid="classneforce_1_1expected_1a3c9ea10f06f092008d57e3a0e95f9427" prot="private" virt="non-virtual"><scope>neforce::expected</scope><name>same_error</name></member>
+      <member refid="classneforce_1_1expected_1ae724b6410b7eb8e1cca731c9a4c37a9d" prot="private" virt="non-virtual"><scope>neforce::expected</scope><name>same_value</name></member>
+      <member refid="classneforce_1_1expected_1a023cb844fd97cd67e3bbf29df32f7385" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>swap</name></member>
+      <member refid="classneforce_1_1expected_1a5e682f050a17a96a44d49801984ab3cb" prot="private" virt="non-virtual"><scope>neforce::expected</scope><name>swap_value_error</name></member>
+      <member refid="classneforce_1_1expected_1ac55a3981073467cc691da9ffb0fee5db" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>transform</name></member>
+      <member refid="classneforce_1_1expected_1a6f6bdd45de1a51b892eca0bbefa321a3" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>transform</name></member>
+      <member refid="classneforce_1_1expected_1a2f3d9aebe4b4614fa21fc9a8fd520ab3" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>transform</name></member>
+      <member refid="classneforce_1_1expected_1a4dc23ddb0920176bc57f79cb3f55261a" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>transform</name></member>
+      <member refid="classneforce_1_1expected_1a00821ec24dc8a431c172579d7cf1edb7" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>transform_error</name></member>
+      <member refid="classneforce_1_1expected_1a1af805381544446fbbca881f7edc2ca0" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>transform_error</name></member>
+      <member refid="classneforce_1_1expected_1a4904e0014d4e3fa0982bb0cdc7a8b5f0" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>transform_error</name></member>
+      <member refid="classneforce_1_1expected_1ae8beba8384af43d233fb4419df413add" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>transform_error</name></member>
+      <member refid="classneforce_1_1expected_1a58bb1d9c33667c9707f510250b917214" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>unexpected_type</name></member>
+      <member refid="classneforce_1_1expected_1a7aecd07082f6fabb8f1826c02e9dc465" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>value</name></member>
+      <member refid="classneforce_1_1expected_1a0fdb30758de06d9378156cee08c5fb65" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>value</name></member>
+      <member refid="classneforce_1_1expected_1a9d1b6201d0a4a38ce289d2a04e25a946" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>value</name></member>
+      <member refid="classneforce_1_1expected_1a281fc40dd3bace5566f3e64c2923606d" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>value</name></member>
+      <member refid="classneforce_1_1expected_1ace1f40939a6ce21cb5b2357814d00288" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>value_</name></member>
+      <member refid="classneforce_1_1expected_1ab551fef10f279dd69de21b3c3638a6ce" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>value_or</name></member>
+      <member refid="classneforce_1_1expected_1a72b6dcd81088aa37ca79018890dafcea" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>value_or</name></member>
+      <member refid="classneforce_1_1expected_1a84f09a109674a3ebcb1cafd9df241552" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>value_type</name></member>
+      <member refid="classneforce_1_1expected_1a552314aecf3c1ecca9fdbcb358389400" prot="public" virt="non-virtual"><scope>neforce::expected</scope><name>~expected</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

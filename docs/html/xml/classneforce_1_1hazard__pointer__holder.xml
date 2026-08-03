@@ -1,0 +1,236 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1hazard__pointer__holder" kind="class" language="C++" prot="public">
+    <compoundname>neforce::hazard_pointer_holder</compoundname>
+    <includes refid="hazard__ptr_8hpp" local="no">hazard_ptr.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1hazard__pointer__holder_1acba542550733c4f7aff4392f6ac5c743" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1hazard__pointer" kindref="compound">hazard_pointer</ref></type>
+        <definition>hazard_pointer neforce::hazard_pointer_holder&lt; T &gt;::hp_</definition>
+        <argsstring></argsstring>
+        <name>hp_</name>
+        <qualifiedname>neforce::hazard_pointer_holder::hp_</qualifiedname>
+        <briefdescription>
+<para>险象指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="522" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="522" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1hazard__pointer__holder_1a55e0b7ff2c38a64f7457e5613208fd7f" prot="private" static="no" mutable="no">
+        <type>T *</type>
+        <definition>T* neforce::hazard_pointer_holder&lt; T &gt;::ptr_</definition>
+        <argsstring></argsstring>
+        <name>ptr_</name>
+        <qualifiedname>neforce::hazard_pointer_holder::ptr_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+<para>受保护的指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="523" column="7" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="523" bodyend="523"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1hazard__pointer__holder_1a907745ef65fb8e98b58e9c3dddc343ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::hazard_pointer_holder&lt; T &gt;::hazard_pointer_holder</definition>
+        <argsstring>()=default</argsstring>
+        <name>hazard_pointer_holder</name>
+        <qualifiedname>neforce::hazard_pointer_holder::hazard_pointer_holder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="526" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hazard__pointer__holder_1af87c07147cb32f3187b46f58ef1d9183" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::hazard_pointer_holder&lt; T &gt;::hazard_pointer_holder</definition>
+        <argsstring>(hazard_pointer_domain &amp;domain)</argsstring>
+        <name>hazard_pointer_holder</name>
+        <qualifiedname>neforce::hazard_pointer_holder::hazard_pointer_holder</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1hazard__pointer__domain" kindref="compound">hazard_pointer_domain</ref> &amp;</type>
+          <declname>domain</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>险象指针域 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="532" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="532" bodyend="533"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hazard__pointer__holder_1aff4760ba75ac5e913e459d060863bde0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T *</type>
+        <definition>T * neforce::hazard_pointer_holder&lt; T &gt;::protect</definition>
+        <argsstring>(const atomic&lt; T * &gt; &amp;src)</argsstring>
+        <name>protect</name>
+        <qualifiedname>neforce::hazard_pointer_holder::protect</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; T * &gt; &amp;</type>
+          <declname>src</declname>
+        </param>
+        <briefdescription>
+<para>保护原子指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>src</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原子指针源 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>受保护的指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="540" column="7" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="540" bodyend="543"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hazard__pointer__holder_1af8265d8b75044c9967f4485ed8ea3d53" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>T *</type>
+        <definition>T * neforce::hazard_pointer_holder&lt; T &gt;::get</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get</name>
+        <qualifiedname>neforce::hazard_pointer_holder::get</qualifiedname>
+        <briefdescription>
+<para>获取当前保护的指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="549" column="7" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="549" bodyend="549"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hazard__pointer__holder_1a9938527b659503fa9f9c10027c204929" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; neforce::hazard_pointer_holder&lt; T &gt;::operator*</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>neforce::hazard_pointer_holder::operator*</qualifiedname>
+        <briefdescription>
+<para>解引用操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="555" column="7" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="555" bodyend="555"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hazard__pointer__holder_1a6ef9b1d5c8937606f6b776f173b2ae6e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>T *</type>
+        <definition>T * neforce::hazard_pointer_holder&lt; T &gt;::operator-&gt;</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator-&gt;</name>
+        <qualifiedname>neforce::hazard_pointer_holder::operator-&gt;</qualifiedname>
+        <briefdescription>
+<para>箭头操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="561" column="7" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="561" bodyend="561"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hazard__pointer__holder_1ac8f0a2256efc2f4fa138ed490516848e" prot="public" static="no" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::hazard_pointer_holder&lt; T &gt;::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>neforce::hazard_pointer_holder::operator bool</qualifiedname>
+        <briefdescription>
+<para>检查是否持有有效指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否有效 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="567" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="567" bodyend="567"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hazard__pointer__holder_1aedac3784f7e6f6a49e987b39f85d6ff9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::hazard_pointer_holder&lt; T &gt;::reset</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>reset</name>
+        <qualifiedname>neforce::hazard_pointer_holder::reset</qualifiedname>
+        <briefdescription>
+<para>重置持有的指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="572" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="572" bodyend="575"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>持有特定类型指针的险象指针包装 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指针类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将险象指针与一个特定类型的指针绑定，提供类型安全的访问。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="520" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="520" bodyend="576"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1hazard__pointer__holder_1af8265d8b75044c9967f4485ed8ea3d53" prot="public" virt="non-virtual"><scope>neforce::hazard_pointer_holder</scope><name>get</name></member>
+      <member refid="classneforce_1_1hazard__pointer__holder_1a907745ef65fb8e98b58e9c3dddc343ff" prot="public" virt="non-virtual"><scope>neforce::hazard_pointer_holder</scope><name>hazard_pointer_holder</name></member>
+      <member refid="classneforce_1_1hazard__pointer__holder_1af87c07147cb32f3187b46f58ef1d9183" prot="public" virt="non-virtual"><scope>neforce::hazard_pointer_holder</scope><name>hazard_pointer_holder</name></member>
+      <member refid="classneforce_1_1hazard__pointer__holder_1acba542550733c4f7aff4392f6ac5c743" prot="private" virt="non-virtual"><scope>neforce::hazard_pointer_holder</scope><name>hp_</name></member>
+      <member refid="classneforce_1_1hazard__pointer__holder_1ac8f0a2256efc2f4fa138ed490516848e" prot="public" virt="non-virtual"><scope>neforce::hazard_pointer_holder</scope><name>operator bool</name></member>
+      <member refid="classneforce_1_1hazard__pointer__holder_1a9938527b659503fa9f9c10027c204929" prot="public" virt="non-virtual"><scope>neforce::hazard_pointer_holder</scope><name>operator*</name></member>
+      <member refid="classneforce_1_1hazard__pointer__holder_1a6ef9b1d5c8937606f6b776f173b2ae6e" prot="public" virt="non-virtual"><scope>neforce::hazard_pointer_holder</scope><name>operator-&gt;</name></member>
+      <member refid="classneforce_1_1hazard__pointer__holder_1aff4760ba75ac5e913e459d060863bde0" prot="public" virt="non-virtual"><scope>neforce::hazard_pointer_holder</scope><name>protect</name></member>
+      <member refid="classneforce_1_1hazard__pointer__holder_1a55e0b7ff2c38a64f7457e5613208fd7f" prot="private" virt="non-virtual"><scope>neforce::hazard_pointer_holder</scope><name>ptr_</name></member>
+      <member refid="classneforce_1_1hazard__pointer__holder_1aedac3784f7e6f6a49e987b39f85d6ff9" prot="public" virt="non-virtual"><scope>neforce::hazard_pointer_holder</scope><name>reset</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

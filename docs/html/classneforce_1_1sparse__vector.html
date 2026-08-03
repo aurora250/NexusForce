@@ -1,0 +1,2274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt; 模板类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1sparse__vector.html','','classneforce_1_1sparse__vector-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___sparse_vector.html">稀疏向量</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>稀疏向量容器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a>&gt;</code></p>
+<div class="dynheader">
+类 neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt; 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classneforce_1_1sparse__vector__inherit__graph.svg" width="187" height="219"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a094827ba8598c87dbe9b964e70ea09b7" id="r_a094827ba8598c87dbe9b964e70ea09b7"><td class="memItemLeft"><a id="a094827ba8598c87dbe9b964e70ea09b7" name="a094827ba8598c87dbe9b964e70ea09b7"></a>
+using&#160;</td><td class="memItemRight"><b>key_type</b> = Key</td></tr>
+<tr class="memdesc:a094827ba8598c87dbe9b964e70ea09b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">键类型 <br /></td></tr>
+<tr class="memitem:acaffafabe4866e0e9a35cc227abe23ce" id="r_acaffafabe4866e0e9a35cc227abe23ce"><td class="memItemLeft"><a id="acaffafabe4866e0e9a35cc227abe23ce" name="acaffafabe4866e0e9a35cc227abe23ce"></a>
+using&#160;</td><td class="memItemRight"><b>value_type</b> = Value</td></tr>
+<tr class="memdesc:acaffafabe4866e0e9a35cc227abe23ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">值类型 <br /></td></tr>
+<tr class="memitem:ae1a278e7762bea8a9146b91b4bf79aed" id="r_ae1a278e7762bea8a9146b91b4bf79aed"><td class="memItemLeft"><a id="ae1a278e7762bea8a9146b91b4bf79aed" name="ae1a278e7762bea8a9146b91b4bf79aed"></a>
+using&#160;</td><td class="memItemRight"><b>pointer</b> = Value*</td></tr>
+<tr class="memdesc:ae1a278e7762bea8a9146b91b4bf79aed"><td class="mdescLeft">&#160;</td><td class="mdescRight">指针类型 <br /></td></tr>
+<tr class="memitem:adadc469352d34a63d4969c8721466a73" id="r_adadc469352d34a63d4969c8721466a73"><td class="memItemLeft"><a id="adadc469352d34a63d4969c8721466a73" name="adadc469352d34a63d4969c8721466a73"></a>
+using&#160;</td><td class="memItemRight"><b>reference</b> = Value&amp;</td></tr>
+<tr class="memdesc:adadc469352d34a63d4969c8721466a73"><td class="mdescLeft">&#160;</td><td class="mdescRight">引用类型 <br /></td></tr>
+<tr class="memitem:a9839f270c50bd5060756de0d021aed51" id="r_a9839f270c50bd5060756de0d021aed51"><td class="memItemLeft"><a id="a9839f270c50bd5060756de0d021aed51" name="a9839f270c50bd5060756de0d021aed51"></a>
+using&#160;</td><td class="memItemRight"><b>const_pointer</b> = const Value*</td></tr>
+<tr class="memdesc:a9839f270c50bd5060756de0d021aed51"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量指针类型 <br /></td></tr>
+<tr class="memitem:a2b4dea79f2674d990e30947714d6b7ae" id="r_a2b4dea79f2674d990e30947714d6b7ae"><td class="memItemLeft"><a id="a2b4dea79f2674d990e30947714d6b7ae" name="a2b4dea79f2674d990e30947714d6b7ae"></a>
+using&#160;</td><td class="memItemRight"><b>const_reference</b> = const Value&amp;</td></tr>
+<tr class="memdesc:a2b4dea79f2674d990e30947714d6b7ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量引用类型 <br /></td></tr>
+<tr class="memitem:a5ed5f24476fd91ebc55343f2d07c8e02" id="r_a5ed5f24476fd91ebc55343f2d07c8e02"><td class="memItemLeft"><a id="a5ed5f24476fd91ebc55343f2d07c8e02" name="a5ed5f24476fd91ebc55343f2d07c8e02"></a>
+using&#160;</td><td class="memItemRight"><b>size_type</b> = <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a></td></tr>
+<tr class="memdesc:a5ed5f24476fd91ebc55343f2d07c8e02"><td class="mdescLeft">&#160;</td><td class="mdescRight">大小类型 <br /></td></tr>
+<tr class="memitem:adbe98dcccaebd24e191c8fa863170b6e" id="r_adbe98dcccaebd24e191c8fa863170b6e"><td class="memItemLeft"><a id="adbe98dcccaebd24e191c8fa863170b6e" name="adbe98dcccaebd24e191c8fa863170b6e"></a>
+using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" href="group___platform_dependent_types.html#gab2c4bc5144496796ce8a7feed7b8ad58">ptrdiff_t</a></td></tr>
+<tr class="memdesc:adbe98dcccaebd24e191c8fa863170b6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">差值类型 <br /></td></tr>
+<tr class="memitem:a49eda8d02df678b99b7f6ad678ccbb6a" id="r_a49eda8d02df678b99b7f6ad678ccbb6a"><td class="memItemLeft"><a id="a49eda8d02df678b99b7f6ad678ccbb6a" name="a49eda8d02df678b99b7f6ad678ccbb6a"></a>
+using&#160;</td><td class="memItemRight"><b>compare_type</b> = Compare</td></tr>
+<tr class="memdesc:a49eda8d02df678b99b7f6ad678ccbb6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">比较器类型 <br /></td></tr>
+<tr class="memitem:a1fb96ba60c4aee5b96dc7b9bfc47baaa" id="r_a1fb96ba60c4aee5b96dc7b9bfc47baaa"><td class="memItemLeft"><a id="a1fb96ba60c4aee5b96dc7b9bfc47baaa" name="a1fb96ba60c4aee5b96dc7b9bfc47baaa"></a>
+using&#160;</td><td class="memItemRight"><b>iterator</b> = sparse_vector_iterator&lt;false, <a class="el" href="#a3b77ecbf233b0114ed54a33a3b2b4ae8">sparse_vector</a>&gt;</td></tr>
+<tr class="memdesc:a1fb96ba60c4aee5b96dc7b9bfc47baaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">迭代器类型 <br /></td></tr>
+<tr class="memitem:a1adbda548b885a17f86944ef965f0028" id="r_a1adbda548b885a17f86944ef965f0028"><td class="memItemLeft"><a id="a1adbda548b885a17f86944ef965f0028" name="a1adbda548b885a17f86944ef965f0028"></a>
+using&#160;</td><td class="memItemRight"><b>const_iterator</b> = sparse_vector_iterator&lt;true, <a class="el" href="#a3b77ecbf233b0114ed54a33a3b2b4ae8">sparse_vector</a>&gt;</td></tr>
+<tr class="memdesc:a1adbda548b885a17f86944ef965f0028"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量迭代器类型 <br /></td></tr>
+<tr class="memitem:a2d323da9710ba783db29c4c1cfe2fe8a" id="r_a2d323da9710ba783db29c4c1cfe2fe8a"><td class="memItemLeft"><a id="a2d323da9710ba783db29c4c1cfe2fe8a" name="a2d323da9710ba783db29c4c1cfe2fe8a"></a>
+using&#160;</td><td class="memItemRight"><b>reverse_iterator</b> = _NEFORCE <a class="el" href="#a2d323da9710ba783db29c4c1cfe2fe8a">reverse_iterator</a>&lt;<a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a>&gt;</td></tr>
+<tr class="memdesc:a2d323da9710ba783db29c4c1cfe2fe8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">反向迭代器类型 <br /></td></tr>
+<tr class="memitem:ad3fb0b6f9841c4ba7bbad27eb42287f5" id="r_ad3fb0b6f9841c4ba7bbad27eb42287f5"><td class="memItemLeft"><a id="ad3fb0b6f9841c4ba7bbad27eb42287f5" name="ad3fb0b6f9841c4ba7bbad27eb42287f5"></a>
+using&#160;</td><td class="memItemRight"><b>const_reverse_iterator</b> = _NEFORCE <a class="el" href="#a2d323da9710ba783db29c4c1cfe2fe8a">reverse_iterator</a>&lt;<a class="el" href="#a1adbda548b885a17f86944ef965f0028">const_iterator</a>&gt;</td></tr>
+<tr class="memdesc:ad3fb0b6f9841c4ba7bbad27eb42287f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量反向迭代器类型 <br /></td></tr>
+<tr class="memitem:acd0cef68b122229811defc920e6a3eec" id="r_acd0cef68b122229811defc920e6a3eec"><td class="memItemLeft"><a id="acd0cef68b122229811defc920e6a3eec" name="acd0cef68b122229811defc920e6a3eec"></a>
+using&#160;</td><td class="memItemRight"><b>allocator_type</b> = Alloc</td></tr>
+<tr class="memdesc:acd0cef68b122229811defc920e6a3eec"><td class="mdescLeft">&#160;</td><td class="mdescRight">分配器类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a3b77ecbf233b0114ed54a33a3b2b4ae8" id="r_a3b77ecbf233b0114ed54a33a3b2b4ae8"><td class="memItemLeft"><a id="a3b77ecbf233b0114ed54a33a3b2b4ae8" name="a3b77ecbf233b0114ed54a33a3b2b4ae8"></a>
+&#160;</td><td class="memItemRight"><b>sparse_vector</b> ()=default</td></tr>
+<tr class="memdesc:a3b77ecbf233b0114ed54a33a3b2b4ae8"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数 <br /></td></tr>
+<tr class="memitem:ae5d831198a7da5e0e233acfb19b3fb1a" id="r_ae5d831198a7da5e0e233acfb19b3fb1a"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ae5d831198a7da5e0e233acfb19b3fb1a">sparse_vector</a> (const Compare &amp;comp)</td></tr>
+<tr class="memdesc:ae5d831198a7da5e0e233acfb19b3fb1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数，指定比较函数  <br /></td></tr>
+<tr class="memitem:a48691703627e143c542e5d0d75a1aa4c" id="r_a48691703627e143c542e5d0d75a1aa4c"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a48691703627e143c542e5d0d75a1aa4c">sparse_vector</a> (const sparse_vector &amp;other)</td></tr>
+<tr class="memdesc:a48691703627e143c542e5d0d75a1aa4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝构造函数  <br /></td></tr>
+<tr class="memitem:a3c878d302be39625472032270558015b" id="r_a3c878d302be39625472032270558015b"><td class="memItemLeft"><a class="el" href="#a3b77ecbf233b0114ed54a33a3b2b4ae8">sparse_vector</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a3c878d302be39625472032270558015b">operator=</a> (const <a class="el" href="#a3b77ecbf233b0114ed54a33a3b2b4ae8">sparse_vector</a> &amp;other)</td></tr>
+<tr class="memdesc:a3c878d302be39625472032270558015b"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝赋值运算符  <br /></td></tr>
+<tr class="memitem:a8a03ee00e94cc1c9a4637b8ed2ef6c11" id="r_a8a03ee00e94cc1c9a4637b8ed2ef6c11"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a8a03ee00e94cc1c9a4637b8ed2ef6c11">sparse_vector</a> (sparse_vector &amp;&amp;other) noexcept(<a class="el" href="group___type_special_member_function_checks.html#gae20ac6ad74f8179d6959c23cbda15965">is_nothrow_move_constructible_v</a>&lt; container_type &gt; &amp;&amp;<a class="el" href="group___type_special_member_function_checks.html#gae20ac6ad74f8179d6959c23cbda15965">is_nothrow_move_constructible_v</a>&lt; Compare &gt; &amp;&amp;<a class="el" href="group___type_special_member_function_checks.html#gae20ac6ad74f8179d6959c23cbda15965">is_nothrow_move_constructible_v</a>&lt; KeyOfValue &gt;)</td></tr>
+<tr class="memdesc:a8a03ee00e94cc1c9a4637b8ed2ef6c11"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造函数  <br /></td></tr>
+<tr class="memitem:aefe27abf70f83fad4ce9d70edc54cff8" id="r_aefe27abf70f83fad4ce9d70edc54cff8"><td class="memItemLeft"><a class="el" href="#a3b77ecbf233b0114ed54a33a3b2b4ae8">sparse_vector</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aefe27abf70f83fad4ce9d70edc54cff8">operator=</a> (<a class="el" href="#a3b77ecbf233b0114ed54a33a3b2b4ae8">sparse_vector</a> &amp;&amp;other) noexcept(<a class="el" href="group___type_special_member_function_checks.html#ga4e478e886bb3f1dba6b5b2033f6b4702">is_nothrow_move_assignable_v</a>&lt; container_type &gt;)</td></tr>
+<tr class="memdesc:aefe27abf70f83fad4ce9d70edc54cff8"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值运算符  <br /></td></tr>
+<tr class="memitem:ae2e9b10fee956dd604b492acadc085e0" id="r_ae2e9b10fee956dd604b492acadc085e0"><td class="memItemLeft"><a id="ae2e9b10fee956dd604b492acadc085e0" name="ae2e9b10fee956dd604b492acadc085e0"></a>
+&#160;</td><td class="memItemRight"><b>~sparse_vector</b> ()=default</td></tr>
+<tr class="memdesc:ae2e9b10fee956dd604b492acadc085e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数 <br /></td></tr>
+<tr class="memitem:a178629ac76160c036fb09f70f267d58c" id="r_a178629ac76160c036fb09f70f267d58c"><td class="memItemLeft"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a178629ac76160c036fb09f70f267d58c">begin</a> () noexcept</td></tr>
+<tr class="memdesc:a178629ac76160c036fb09f70f267d58c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取起始迭代器  <br /></td></tr>
+<tr class="memitem:a8afe87040df4b26c812702f572c8e26e" id="r_a8afe87040df4b26c812702f572c8e26e"><td class="memItemLeft"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a8afe87040df4b26c812702f572c8e26e">end</a> () noexcept</td></tr>
+<tr class="memdesc:a8afe87040df4b26c812702f572c8e26e"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取结束迭代器  <br /></td></tr>
+<tr class="memitem:a7aac7a6ab5d1c5e43bddf5cac6134d10" id="r_a7aac7a6ab5d1c5e43bddf5cac6134d10"><td class="memItemLeft"><a class="el" href="#a1adbda548b885a17f86944ef965f0028">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7aac7a6ab5d1c5e43bddf5cac6134d10">begin</a> () const noexcept</td></tr>
+<tr class="memdesc:a7aac7a6ab5d1c5e43bddf5cac6134d10"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量起始迭代器  <br /></td></tr>
+<tr class="memitem:aba4f8be7a88f1a81085972bd2cff62bc" id="r_aba4f8be7a88f1a81085972bd2cff62bc"><td class="memItemLeft"><a class="el" href="#a1adbda548b885a17f86944ef965f0028">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#aba4f8be7a88f1a81085972bd2cff62bc">end</a> () const noexcept</td></tr>
+<tr class="memdesc:aba4f8be7a88f1a81085972bd2cff62bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量结束迭代器  <br /></td></tr>
+<tr class="memitem:ae8a412cc299fbf4259c929cd9f74ed24" id="r_ae8a412cc299fbf4259c929cd9f74ed24"><td class="memItemLeft"><a class="el" href="#a1adbda548b885a17f86944ef965f0028">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae8a412cc299fbf4259c929cd9f74ed24">cbegin</a> () const noexcept</td></tr>
+<tr class="memdesc:ae8a412cc299fbf4259c929cd9f74ed24"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量起始迭代器  <br /></td></tr>
+<tr class="memitem:a18564b70ed14d443e37c93143212a18d" id="r_a18564b70ed14d443e37c93143212a18d"><td class="memItemLeft"><a class="el" href="#a1adbda548b885a17f86944ef965f0028">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a18564b70ed14d443e37c93143212a18d">cend</a> () const noexcept</td></tr>
+<tr class="memdesc:a18564b70ed14d443e37c93143212a18d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量结束迭代器  <br /></td></tr>
+<tr class="memitem:adc1f99103e1326a9980a69bb5343973b" id="r_adc1f99103e1326a9980a69bb5343973b"><td class="memItemLeft"><a class="el" href="#a2d323da9710ba783db29c4c1cfe2fe8a">reverse_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#adc1f99103e1326a9980a69bb5343973b">rbegin</a> () noexcept</td></tr>
+<tr class="memdesc:adc1f99103e1326a9980a69bb5343973b"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取反向起始迭代器  <br /></td></tr>
+<tr class="memitem:a1a770aeb02023438bfaf9059d6a944b4" id="r_a1a770aeb02023438bfaf9059d6a944b4"><td class="memItemLeft"><a class="el" href="#a2d323da9710ba783db29c4c1cfe2fe8a">reverse_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a1a770aeb02023438bfaf9059d6a944b4">rend</a> () noexcept</td></tr>
+<tr class="memdesc:a1a770aeb02023438bfaf9059d6a944b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取反向结束迭代器  <br /></td></tr>
+<tr class="memitem:a0f383c8d0a171c8cd33482422ed94da2" id="r_a0f383c8d0a171c8cd33482422ed94da2"><td class="memItemLeft"><a class="el" href="#ad3fb0b6f9841c4ba7bbad27eb42287f5">const_reverse_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0f383c8d0a171c8cd33482422ed94da2">rbegin</a> () const noexcept</td></tr>
+<tr class="memdesc:a0f383c8d0a171c8cd33482422ed94da2"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量反向起始迭代器  <br /></td></tr>
+<tr class="memitem:a3d2ad7a3c50945208cb5da7d75162714" id="r_a3d2ad7a3c50945208cb5da7d75162714"><td class="memItemLeft"><a class="el" href="#ad3fb0b6f9841c4ba7bbad27eb42287f5">const_reverse_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3d2ad7a3c50945208cb5da7d75162714">rend</a> () const noexcept</td></tr>
+<tr class="memdesc:a3d2ad7a3c50945208cb5da7d75162714"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量反向结束迭代器  <br /></td></tr>
+<tr class="memitem:a5c3bcb376c5eda261f6777f08a515005" id="r_a5c3bcb376c5eda261f6777f08a515005"><td class="memItemLeft"><a class="el" href="#ad3fb0b6f9841c4ba7bbad27eb42287f5">const_reverse_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5c3bcb376c5eda261f6777f08a515005">crbegin</a> () const noexcept</td></tr>
+<tr class="memdesc:a5c3bcb376c5eda261f6777f08a515005"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量反向起始迭代器  <br /></td></tr>
+<tr class="memitem:a6ee689e9d3471382a19296efb2ed11eb" id="r_a6ee689e9d3471382a19296efb2ed11eb"><td class="memItemLeft"><a class="el" href="#ad3fb0b6f9841c4ba7bbad27eb42287f5">const_reverse_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a6ee689e9d3471382a19296efb2ed11eb">crend</a> () const noexcept</td></tr>
+<tr class="memdesc:a6ee689e9d3471382a19296efb2ed11eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量反向结束迭代器  <br /></td></tr>
+<tr class="memitem:a8c5e04c5819fea4a82e40a1b4e9f6e9a" id="r_a8c5e04c5819fea4a82e40a1b4e9f6e9a"><td class="memItemLeft"><a class="el" href="#a5ed5f24476fd91ebc55343f2d07c8e02">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a8c5e04c5819fea4a82e40a1b4e9f6e9a">size</a> () const noexcept</td></tr>
+<tr class="memdesc:a8c5e04c5819fea4a82e40a1b4e9f6e9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取元素数量  <br /></td></tr>
+<tr class="memitem:ad43c5e035eda5dbcfcad08904946eb8c" id="r_ad43c5e035eda5dbcfcad08904946eb8c"><td class="memItemLeft"><a class="el" href="#a5ed5f24476fd91ebc55343f2d07c8e02">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad43c5e035eda5dbcfcad08904946eb8c">max_size</a> () const noexcept</td></tr>
+<tr class="memdesc:ad43c5e035eda5dbcfcad08904946eb8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取最大可能大小  <br /></td></tr>
+<tr class="memitem:a97f9b6a97779ce218d88b95c43a4ae88" id="r_a97f9b6a97779ce218d88b95c43a4ae88"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a97f9b6a97779ce218d88b95c43a4ae88">empty</a> () const noexcept</td></tr>
+<tr class="memdesc:a97f9b6a97779ce218d88b95c43a4ae88"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否为空  <br /></td></tr>
+<tr class="memitem:a5305a36ccb92fd00f392ea078b308f7e" id="r_a5305a36ccb92fd00f392ea078b308f7e"><td class="memItemLeft">Compare&#160;</td><td class="memItemRight"><a class="el" href="#a5305a36ccb92fd00f392ea078b308f7e">key_compare</a> () const noexcept(<a class="el" href="group___type_special_member_function_checks.html#gac2ccc147b2ba5ce7bccbbda00d6f9fda">is_nothrow_copy_constructible_v</a>&lt; Compare &gt;)</td></tr>
+<tr class="memdesc:a5305a36ccb92fd00f392ea078b308f7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取键比较函数对象  <br /></td></tr>
+<tr class="memitem:a8af871ed345b0a517241e828d0c0a0d8" id="r_a8af871ed345b0a517241e828d0c0a0d8"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a8af871ed345b0a517241e828d0c0a0d8 template"><td class="memItemLeft"><a class="el" href="structneforce_1_1pair.html">pair</a>&lt; <a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a>, bool &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a8af871ed345b0a517241e828d0c0a0d8">emplace_unique</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a8af871ed345b0a517241e828d0c0a0d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">插入唯一键元素  <br /></td></tr>
+<tr class="memitem:a30de301b6a7d1fd3ff75dbd0cbfe2923" id="r_a30de301b6a7d1fd3ff75dbd0cbfe2923"><td class="memItemLeft"><a class="el" href="structneforce_1_1pair.html">pair</a>&lt; <a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a>, bool &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a30de301b6a7d1fd3ff75dbd0cbfe2923">insert_unique</a> (const <a class="el" href="#acaffafabe4866e0e9a35cc227abe23ce">value_type</a> &amp;value)</td></tr>
+<tr class="memdesc:a30de301b6a7d1fd3ff75dbd0cbfe2923"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝插入唯一键元素  <br /></td></tr>
+<tr class="memitem:aafab70f192c48c329b7db5495386cee9" id="r_aafab70f192c48c329b7db5495386cee9"><td class="memItemLeft"><a class="el" href="structneforce_1_1pair.html">pair</a>&lt; <a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a>, bool &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aafab70f192c48c329b7db5495386cee9">insert_unique</a> (<a class="el" href="#acaffafabe4866e0e9a35cc227abe23ce">value_type</a> &amp;&amp;value)</td></tr>
+<tr class="memdesc:aafab70f192c48c329b7db5495386cee9"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动插入唯一键元素  <br /></td></tr>
+<tr class="memitem:ab4b0672cdb81e656094d20ff8b609489" id="r_ab4b0672cdb81e656094d20ff8b609489"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:ab4b0672cdb81e656094d20ff8b609489 template"><td class="memItemLeft"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab4b0672cdb81e656094d20ff8b609489">emplace_unique_hint</a> (<a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> position, Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:ab4b0672cdb81e656094d20ff8b609489"><td class="mdescLeft">&#160;</td><td class="mdescRight">在提示位置附近构造唯一键元素  <br /></td></tr>
+<tr class="memitem:a251a3eb424a704ee8dc3d1fad0180239" id="r_a251a3eb424a704ee8dc3d1fad0180239"><td class="memItemLeft"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a251a3eb424a704ee8dc3d1fad0180239">insert_unique</a> (<a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> position, const <a class="el" href="#acaffafabe4866e0e9a35cc227abe23ce">value_type</a> &amp;value)</td></tr>
+<tr class="memdesc:a251a3eb424a704ee8dc3d1fad0180239"><td class="mdescLeft">&#160;</td><td class="mdescRight">在提示位置附近拷贝插入唯一键元素  <br /></td></tr>
+<tr class="memitem:a956acb923fb7a8761a0f77471d4e1519" id="r_a956acb923fb7a8761a0f77471d4e1519"><td class="memItemLeft"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a956acb923fb7a8761a0f77471d4e1519">insert_unique</a> (<a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> position, <a class="el" href="#acaffafabe4866e0e9a35cc227abe23ce">value_type</a> &amp;&amp;value)</td></tr>
+<tr class="memdesc:a956acb923fb7a8761a0f77471d4e1519"><td class="mdescLeft">&#160;</td><td class="mdescRight">在提示位置附近移动插入唯一键元素  <br /></td></tr>
+<tr class="memitem:af34094ab6f5912fbb4a042a926ef66a8" id="r_af34094ab6f5912fbb4a042a926ef66a8"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga4f7b2f70ba1539ec3326d52e89698f13">is_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:af34094ab6f5912fbb4a042a926ef66a8 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af34094ab6f5912fbb4a042a926ef66a8">insert_unique</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:af34094ab6f5912fbb4a042a926ef66a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">范围插入唯一键元素  <br /></td></tr>
+<tr class="memitem:a9503832c0c0ea6ed00f043df4e0392a9" id="r_a9503832c0c0ea6ed00f043df4e0392a9"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a9503832c0c0ea6ed00f043df4e0392a9 template"><td class="memItemLeft"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9503832c0c0ea6ed00f043df4e0392a9">emplace_equal</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a9503832c0c0ea6ed00f043df4e0392a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">插入允许重复键元素  <br /></td></tr>
+<tr class="memitem:ab103a38ac7b6eba2db47acb94985d57a" id="r_ab103a38ac7b6eba2db47acb94985d57a"><td class="memItemLeft"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab103a38ac7b6eba2db47acb94985d57a">insert_equal</a> (const <a class="el" href="#acaffafabe4866e0e9a35cc227abe23ce">value_type</a> &amp;value)</td></tr>
+<tr class="memdesc:ab103a38ac7b6eba2db47acb94985d57a"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝插入允许重复键元素  <br /></td></tr>
+<tr class="memitem:ae0d94c42fb66a67926b01789d6c32174" id="r_ae0d94c42fb66a67926b01789d6c32174"><td class="memItemLeft"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae0d94c42fb66a67926b01789d6c32174">insert_equal</a> (<a class="el" href="#acaffafabe4866e0e9a35cc227abe23ce">value_type</a> &amp;&amp;value)</td></tr>
+<tr class="memdesc:ae0d94c42fb66a67926b01789d6c32174"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动插入允许重复键元素  <br /></td></tr>
+<tr class="memitem:a4d16db30de12a8f7d5dbe894bc43f504" id="r_a4d16db30de12a8f7d5dbe894bc43f504"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a4d16db30de12a8f7d5dbe894bc43f504 template"><td class="memItemLeft"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a4d16db30de12a8f7d5dbe894bc43f504">emplace_equal_hint</a> (<a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> position, Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a4d16db30de12a8f7d5dbe894bc43f504"><td class="mdescLeft">&#160;</td><td class="mdescRight">在提示位置附近构造允许重复键元素  <br /></td></tr>
+<tr class="memitem:a0f40f7a786a7127ff060c60cc644d087" id="r_a0f40f7a786a7127ff060c60cc644d087"><td class="memItemLeft"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0f40f7a786a7127ff060c60cc644d087">insert_equal</a> (<a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> position, const <a class="el" href="#acaffafabe4866e0e9a35cc227abe23ce">value_type</a> &amp;value)</td></tr>
+<tr class="memdesc:a0f40f7a786a7127ff060c60cc644d087"><td class="mdescLeft">&#160;</td><td class="mdescRight">在提示位置附近拷贝插入允许重复键元素  <br /></td></tr>
+<tr class="memitem:aaa6b9122cbb54c1809e103a3e1ea3071" id="r_aaa6b9122cbb54c1809e103a3e1ea3071"><td class="memItemLeft"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#aaa6b9122cbb54c1809e103a3e1ea3071">insert_equal</a> (<a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> position, <a class="el" href="#acaffafabe4866e0e9a35cc227abe23ce">value_type</a> &amp;&amp;value)</td></tr>
+<tr class="memdesc:aaa6b9122cbb54c1809e103a3e1ea3071"><td class="mdescLeft">&#160;</td><td class="mdescRight">在提示位置附近移动插入允许重复键元素  <br /></td></tr>
+<tr class="memitem:a59451d47aaaaf5feca534e63cc352a49" id="r_a59451d47aaaaf5feca534e63cc352a49"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga4f7b2f70ba1539ec3326d52e89698f13">is_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a59451d47aaaaf5feca534e63cc352a49 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a59451d47aaaaf5feca534e63cc352a49">insert_equal</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:a59451d47aaaaf5feca534e63cc352a49"><td class="mdescLeft">&#160;</td><td class="mdescRight">范围插入允许重复键元素  <br /></td></tr>
+<tr class="memitem:a6f0af781e771f1455c4d1ae51cec1ded" id="r_a6f0af781e771f1455c4d1ae51cec1ded"><td class="memItemLeft"><a class="el" href="#a5ed5f24476fd91ebc55343f2d07c8e02">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a6f0af781e771f1455c4d1ae51cec1ded">erase</a> (const <a class="el" href="#a094827ba8598c87dbe9b964e70ea09b7">key_type</a> &amp;key)</td></tr>
+<tr class="memdesc:a6f0af781e771f1455c4d1ae51cec1ded"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除所有具有指定键的元素  <br /></td></tr>
+<tr class="memitem:a479cb43386d859fe5e634388899cbe8c" id="r_a479cb43386d859fe5e634388899cbe8c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a479cb43386d859fe5e634388899cbe8c">erase</a> (<a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> position)</td></tr>
+<tr class="memdesc:a479cb43386d859fe5e634388899cbe8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除指定位置的元素  <br /></td></tr>
+<tr class="memitem:aba75ed6a9696ac5610d0f726c807ba35" id="r_aba75ed6a9696ac5610d0f726c807ba35"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aba75ed6a9696ac5610d0f726c807ba35">erase</a> (<a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> first, <a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> last)</td></tr>
+<tr class="memdesc:aba75ed6a9696ac5610d0f726c807ba35"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除指定范围内的元素  <br /></td></tr>
+<tr class="memitem:a144e9533b976df03b612d03169831f2e" id="r_a144e9533b976df03b612d03169831f2e"><td class="memItemLeft"><a id="a144e9533b976df03b612d03169831f2e" name="a144e9533b976df03b612d03169831f2e"></a>
+void&#160;</td><td class="memItemRight"><b>clear</b> ()</td></tr>
+<tr class="memdesc:a144e9533b976df03b612d03169831f2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">清空 <br /></td></tr>
+<tr class="memitem:a44e6ad694253dfcdc846cac0b82cd12d" id="r_a44e6ad694253dfcdc846cac0b82cd12d"><td class="memItemLeft"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a44e6ad694253dfcdc846cac0b82cd12d">find</a> (const <a class="el" href="#a094827ba8598c87dbe9b964e70ea09b7">key_type</a> &amp;key)</td></tr>
+<tr class="memdesc:a44e6ad694253dfcdc846cac0b82cd12d"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找具有指定键的元素  <br /></td></tr>
+<tr class="memitem:a9212d5c0eda3f7bb3f4447fd0ad95345" id="r_a9212d5c0eda3f7bb3f4447fd0ad95345"><td class="memItemLeft"><a class="el" href="#a1adbda548b885a17f86944ef965f0028">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9212d5c0eda3f7bb3f4447fd0ad95345">find</a> (const <a class="el" href="#a094827ba8598c87dbe9b964e70ea09b7">key_type</a> &amp;key) const</td></tr>
+<tr class="memdesc:a9212d5c0eda3f7bb3f4447fd0ad95345"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找具有指定键的元素（常量版本）  <br /></td></tr>
+<tr class="memitem:a15aa8ab301470b3c78ca9ab629f4128a" id="r_a15aa8ab301470b3c78ca9ab629f4128a"><td class="memItemLeft"><a class="el" href="#a5ed5f24476fd91ebc55343f2d07c8e02">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a15aa8ab301470b3c78ca9ab629f4128a">count</a> (const <a class="el" href="#a094827ba8598c87dbe9b964e70ea09b7">key_type</a> &amp;key) const</td></tr>
+<tr class="memdesc:a15aa8ab301470b3c78ca9ab629f4128a"><td class="mdescLeft">&#160;</td><td class="mdescRight">统计具有指定键的元素数量  <br /></td></tr>
+<tr class="memitem:a0a9eff3cd11c1a5eebb8d7070a70658b" id="r_a0a9eff3cd11c1a5eebb8d7070a70658b"><td class="memItemLeft"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0a9eff3cd11c1a5eebb8d7070a70658b">lower_bound</a> (const <a class="el" href="#a094827ba8598c87dbe9b964e70ea09b7">key_type</a> &amp;key)</td></tr>
+<tr class="memdesc:a0a9eff3cd11c1a5eebb8d7070a70658b"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取第一个不小于指定键的元素位置  <br /></td></tr>
+<tr class="memitem:a6e6f8868f4bca2a0df6c5c7ee690c7d6" id="r_a6e6f8868f4bca2a0df6c5c7ee690c7d6"><td class="memItemLeft"><a class="el" href="#a1adbda548b885a17f86944ef965f0028">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a6e6f8868f4bca2a0df6c5c7ee690c7d6">lower_bound</a> (const <a class="el" href="#a094827ba8598c87dbe9b964e70ea09b7">key_type</a> &amp;key) const</td></tr>
+<tr class="memdesc:a6e6f8868f4bca2a0df6c5c7ee690c7d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取第一个不小于指定键的元素位置（常量版本）  <br /></td></tr>
+<tr class="memitem:ad2d42a24e2aedd0cfcf9c177ddb130ff" id="r_ad2d42a24e2aedd0cfcf9c177ddb130ff"><td class="memItemLeft"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad2d42a24e2aedd0cfcf9c177ddb130ff">upper_bound</a> (const <a class="el" href="#a094827ba8598c87dbe9b964e70ea09b7">key_type</a> &amp;key)</td></tr>
+<tr class="memdesc:ad2d42a24e2aedd0cfcf9c177ddb130ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取第一个大于指定键的元素位置  <br /></td></tr>
+<tr class="memitem:a897159fc845868f4f2a312c6cfe199ae" id="r_a897159fc845868f4f2a312c6cfe199ae"><td class="memItemLeft"><a class="el" href="#a1adbda548b885a17f86944ef965f0028">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a897159fc845868f4f2a312c6cfe199ae">upper_bound</a> (const <a class="el" href="#a094827ba8598c87dbe9b964e70ea09b7">key_type</a> &amp;key) const</td></tr>
+<tr class="memdesc:a897159fc845868f4f2a312c6cfe199ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取第一个大于指定键的元素位置（常量版本）  <br /></td></tr>
+<tr class="memitem:a5e267f3d0db7996d02b67432f4cbad01" id="r_a5e267f3d0db7996d02b67432f4cbad01"><td class="memItemLeft"><a class="el" href="structneforce_1_1pair.html">pair</a>&lt; <a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a>, <a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a5e267f3d0db7996d02b67432f4cbad01">equal_range</a> (const <a class="el" href="#a094827ba8598c87dbe9b964e70ea09b7">key_type</a> &amp;key)</td></tr>
+<tr class="memdesc:a5e267f3d0db7996d02b67432f4cbad01"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取等于指定键的元素范围  <br /></td></tr>
+<tr class="memitem:a341f2e2c28a6c6ba99e50d752ed77e2b" id="r_a341f2e2c28a6c6ba99e50d752ed77e2b"><td class="memItemLeft"><a class="el" href="structneforce_1_1pair.html">pair</a>&lt; <a class="el" href="#a1adbda548b885a17f86944ef965f0028">const_iterator</a>, <a class="el" href="#a1adbda548b885a17f86944ef965f0028">const_iterator</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a341f2e2c28a6c6ba99e50d752ed77e2b">equal_range</a> (const <a class="el" href="#a094827ba8598c87dbe9b964e70ea09b7">key_type</a> &amp;key) const</td></tr>
+<tr class="memdesc:a341f2e2c28a6c6ba99e50d752ed77e2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取等于指定键的元素范围（常量版本）  <br /></td></tr>
+<tr class="memitem:a957e1131d382d123012f75316aa6e1ab" id="r_a957e1131d382d123012f75316aa6e1ab"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a957e1131d382d123012f75316aa6e1ab">reserve</a> (<a class="el" href="#a5ed5f24476fd91ebc55343f2d07c8e02">size_type</a> n)</td></tr>
+<tr class="memdesc:a957e1131d382d123012f75316aa6e1ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">预留容量  <br /></td></tr>
+<tr class="memitem:adba52c60dd4e2eabb61108d11cb7ab2b" id="r_adba52c60dd4e2eabb61108d11cb7ab2b"><td class="memItemLeft"><a class="el" href="#a5ed5f24476fd91ebc55343f2d07c8e02">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#adba52c60dd4e2eabb61108d11cb7ab2b">capacity</a> () const noexcept</td></tr>
+<tr class="memdesc:adba52c60dd4e2eabb61108d11cb7ab2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前容量  <br /></td></tr>
+<tr class="memitem:a2839b62dfa4df155329942aad30d947b" id="r_a2839b62dfa4df155329942aad30d947b"><td class="memItemLeft"><a id="a2839b62dfa4df155329942aad30d947b" name="a2839b62dfa4df155329942aad30d947b"></a>
+void&#160;</td><td class="memItemRight"><b>shrink_to_fit</b> ()</td></tr>
+<tr class="memdesc:a2839b62dfa4df155329942aad30d947b"><td class="mdescLeft">&#160;</td><td class="mdescRight">收缩容量以适应实际大小 <br /></td></tr>
+<tr class="memitem:afba65bf6a2ddac79c9d6ad1194defc50" id="r_afba65bf6a2ddac79c9d6ad1194defc50"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afba65bf6a2ddac79c9d6ad1194defc50">swap</a> (<a class="el" href="#a3b77ecbf233b0114ed54a33a3b2b4ae8">sparse_vector</a> &amp;other) noexcept(<a class="el" href="group___swap_utility.html#gafcc46bf052d9d5c47c99d6a20dadd5bc">is_nothrow_swappable_v</a>&lt; container_type &gt; &amp;&amp;<a class="el" href="group___swap_utility.html#gafcc46bf052d9d5c47c99d6a20dadd5bc">is_nothrow_swappable_v</a>&lt; Compare &gt; &amp;&amp;<a class="el" href="group___swap_utility.html#gafcc46bf052d9d5c47c99d6a20dadd5bc">is_nothrow_swappable_v</a>&lt; KeyOfValue &gt;)</td></tr>
+<tr class="memdesc:afba65bf6a2ddac79c9d6ad1194defc50"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个稀疏向量的内容  <br /></td></tr>
+<tr class="memitem:a4fe93ad471ba71bba9b2ebad9049a897" id="r_a4fe93ad471ba71bba9b2ebad9049a897"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a4fe93ad471ba71bba9b2ebad9049a897">equal_to</a> (const <a class="el" href="#a3b77ecbf233b0114ed54a33a3b2b4ae8">sparse_vector</a> &amp;rhs) const noexcept(noexcept(_NEFORCE <a class="el" href="group___compare_algorithms.html#ga4d20d5f9031c99a84a45fe39db9fbb78">equal</a>(<a class="el" href="#ae8a412cc299fbf4259c929cd9f74ed24">cbegin</a>(), <a class="el" href="#a18564b70ed14d443e37c93143212a18d">cend</a>(), rhs.cbegin())))</td></tr>
+<tr class="memdesc:a4fe93ad471ba71bba9b2ebad9049a897"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较  <br /></td></tr>
+<tr class="memitem:a788cbe1b781c2068edd4d4eef53104bb" id="r_a788cbe1b781c2068edd4d4eef53104bb"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a788cbe1b781c2068edd4d4eef53104bb">less_than</a> (const <a class="el" href="#a3b77ecbf233b0114ed54a33a3b2b4ae8">sparse_vector</a> &amp;rhs) const noexcept(noexcept(_NEFORCE <a class="el" href="group___compare_algorithms.html#ga7ec7e4cc2238e4a9f86b2d646d7cd032">lexicographical_compare</a>(<a class="el" href="#ae8a412cc299fbf4259c929cd9f74ed24">cbegin</a>(), <a class="el" href="#a18564b70ed14d443e37c93143212a18d">cend</a>(), rhs.cbegin(), rhs.cend())))</td></tr>
+<tr class="memdesc:a788cbe1b781c2068edd4d4eef53104bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt;<br />
+class neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;</div><p>稀疏向量容器 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Key</td><td>键类型 </td></tr>
+    <tr><td class="paramname">Value</td><td>值类型 </td></tr>
+    <tr><td class="paramname">KeyOfValue</td><td>从值中提取键的函数对象 </td></tr>
+    <tr><td class="paramname">Compare</td><td>键比较函数对象 </td></tr>
+    <tr><td class="paramname">Alloc</td><td>分配器类型</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>稀疏向量是一种基于有序平坦数组的关联容器底层实现。 使用二分查找提供对数时间复杂度的查找操作。</p>
+<dl class="section note"><dt>注解</dt><dd>稀疏向量在插入/删除时需要移动元素，但迭代性能优异，缓存友好，适用于查找频繁、修改较少且需要有序遍历的场景。 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00191">191</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="ae5d831198a7da5e0e233acfb19b3fb1a" name="ae5d831198a7da5e0e233acfb19b3fb1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5d831198a7da5e0e233acfb19b3fb1a">&#9670;&#160;</a></span>sparse_vector() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::sparse_vector </td>
+          <td>(</td>
+          <td class="paramtype">const Compare &amp;</td>          <td class="paramname"><span class="paramname"><em>comp</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数，指定比较函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00301">301</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a48691703627e143c542e5d0d75a1aa4c" name="a48691703627e143c542e5d0d75a1aa4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48691703627e143c542e5d0d75a1aa4c">&#9670;&#160;</a></span>sparse_vector() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::sparse_vector </td>
+          <td>(</td>
+          <td class="paramtype">const sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拷贝构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源稀疏向量 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00308">308</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a8a03ee00e94cc1c9a4637b8ed2ef6c11" name="a8a03ee00e94cc1c9a4637b8ed2ef6c11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a03ee00e94cc1c9a4637b8ed2ef6c11">&#9670;&#160;</a></span>sparse_vector() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::sparse_vector </td>
+          <td>(</td>
+          <td class="paramtype">sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源稀疏向量 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00332">332</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a7aac7a6ab5d1c5e43bddf5cac6134d10" name="a7aac7a6ab5d1c5e43bddf5cac6134d10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7aac7a6ab5d1c5e43bddf5cac6134d10">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a1adbda548b885a17f86944ef965f0028">const_iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向第一个元素的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00375">375</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a178629ac76160c036fb09f70f267d58c" name="a178629ac76160c036fb09f70f267d58c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a178629ac76160c036fb09f70f267d58c">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向第一个元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00363">363</a> 行定义.</p>
+
+</div>
+</div>
+<a id="adba52c60dd4e2eabb61108d11cb7ab2b" name="adba52c60dd4e2eabb61108d11cb7ab2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adba52c60dd4e2eabb61108d11cb7ab2b">&#9670;&#160;</a></span>capacity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a5ed5f24476fd91ebc55343f2d07c8e02">size_type</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::capacity </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取当前容量 </p>
+<dl class="section return"><dt>返回</dt><dd>当前分配的容量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00790">790</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ae8a412cc299fbf4259c929cd9f74ed24" name="ae8a412cc299fbf4259c929cd9f74ed24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8a412cc299fbf4259c929cd9f74ed24">&#9670;&#160;</a></span>cbegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a1adbda548b885a17f86944ef965f0028">const_iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::cbegin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向第一个元素的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00387">387</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a18564b70ed14d443e37c93143212a18d" name="a18564b70ed14d443e37c93143212a18d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18564b70ed14d443e37c93143212a18d">&#9670;&#160;</a></span>cend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a1adbda548b885a17f86944ef965f0028">const_iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::cend </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最后一个元素之后位置的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00393">393</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a15aa8ab301470b3c78ca9ab629f4128a" name="a15aa8ab301470b3c78ca9ab629f4128a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15aa8ab301470b3c78ca9ab629f4128a">&#9670;&#160;</a></span>count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a5ed5f24476fd91ebc55343f2d07c8e02">size_type</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::count </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a094827ba8598c87dbe9b964e70ea09b7">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>统计具有指定键的元素数量 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>要统计的键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>匹配的元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00726">726</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5c3bcb376c5eda261f6777f08a515005" name="a5c3bcb376c5eda261f6777f08a515005"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c3bcb376c5eda261f6777f08a515005">&#9670;&#160;</a></span>crbegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ad3fb0b6f9841c4ba7bbad27eb42287f5">const_reverse_iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::crbegin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量反向起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最后一个元素的常量反向迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00423">423</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a6ee689e9d3471382a19296efb2ed11eb" name="a6ee689e9d3471382a19296efb2ed11eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ee689e9d3471382a19296efb2ed11eb">&#9670;&#160;</a></span>crend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ad3fb0b6f9841c4ba7bbad27eb42287f5">const_reverse_iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::crend </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量反向结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向第一个元素之前位置的常量反向迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00429">429</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a9503832c0c0ea6ed00f043df4e0392a9" name="a9503832c0c0ea6ed00f043df4e0392a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9503832c0c0ea6ed00f043df4e0392a9">&#9670;&#160;</a></span>emplace_equal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::emplace_equal </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>插入允许重复键元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Args</td><td>构造参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>构造参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00564">564</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a4d16db30de12a8f7d5dbe894bc43f504" name="a4d16db30de12a8f7d5dbe894bc43f504"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d16db30de12a8f7d5dbe894bc43f504">&#9670;&#160;</a></span>emplace_equal_hint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::emplace_equal_hint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在提示位置附近构造允许重复键元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Args</td><td>构造参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>插入位置提示 </td></tr>
+    <tr><td class="paramname">args</td><td>构造参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00592">592</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a8af871ed345b0a517241e828d0c0a0d8" name="a8af871ed345b0a517241e828d0c0a0d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8af871ed345b0a517241e828d0c0a0d8">&#9670;&#160;</a></span>emplace_unique()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structneforce_1_1pair.html">pair</a>&lt; <a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a>, bool &gt; <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::emplace_unique </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>插入唯一键元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Args</td><td>构造参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>构造参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>插入结果（迭代器和是否成功） </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00464">464</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ab4b0672cdb81e656094d20ff8b609489" name="ab4b0672cdb81e656094d20ff8b609489"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4b0672cdb81e656094d20ff8b609489">&#9670;&#160;</a></span>emplace_unique_hint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::emplace_unique_hint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在提示位置附近构造唯一键元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Args</td><td>构造参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>插入位置提示 </td></tr>
+    <tr><td class="paramname">args</td><td>构造参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00495">495</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a97f9b6a97779ce218d88b95c43a4ae88" name="a97f9b6a97779ce218d88b95c43a4ae88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97f9b6a97779ce218d88b95c43a4ae88">&#9670;&#160;</a></span>empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::empty </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查是否为空 </p>
+<dl class="section return"><dt>返回</dt><dd>是否为空 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00447">447</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aba4f8be7a88f1a81085972bd2cff62bc" name="aba4f8be7a88f1a81085972bd2cff62bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba4f8be7a88f1a81085972bd2cff62bc">&#9670;&#160;</a></span>end() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a1adbda548b885a17f86944ef965f0028">const_iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最后一个元素之后位置的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00381">381</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a8afe87040df4b26c812702f572c8e26e" name="a8afe87040df4b26c812702f572c8e26e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8afe87040df4b26c812702f572c8e26e">&#9670;&#160;</a></span>end() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最后一个元素之后位置的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00369">369</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5e267f3d0db7996d02b67432f4cbad01" name="a5e267f3d0db7996d02b67432f4cbad01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e267f3d0db7996d02b67432f4cbad01">&#9670;&#160;</a></span>equal_range() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structneforce_1_1pair.html">pair</a>&lt; <a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a>, <a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> &gt; <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::equal_range </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a094827ba8598c87dbe9b964e70ea09b7">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取等于指定键的元素范围 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含lower_bound和upper_bound的pair </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00767">767</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a341f2e2c28a6c6ba99e50d752ed77e2b" name="a341f2e2c28a6c6ba99e50d752ed77e2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a341f2e2c28a6c6ba99e50d752ed77e2b">&#9670;&#160;</a></span>equal_range() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structneforce_1_1pair.html">pair</a>&lt; <a class="el" href="#a1adbda548b885a17f86944ef965f0028">const_iterator</a>, <a class="el" href="#a1adbda548b885a17f86944ef965f0028">const_iterator</a> &gt; <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::equal_range </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a094827ba8598c87dbe9b964e70ea09b7">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取等于指定键的元素范围（常量版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含lower_bound和upper_bound的pair </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00776">776</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a4fe93ad471ba71bba9b2ebad9049a897" name="a4fe93ad471ba71bba9b2ebad9049a897"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fe93ad471ba71bba9b2ebad9049a897">&#9670;&#160;</a></span>equal_to()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::equal_to </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a3b77ecbf233b0114ed54a33a3b2b4ae8">sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>相等比较 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧稀疏向量 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>大小相等且对应元素相等返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00813">813</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a6f0af781e771f1455c4d1ae51cec1ded" name="a6f0af781e771f1455c4d1ae51cec1ded"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f0af781e771f1455c4d1ae51cec1ded">&#9670;&#160;</a></span>erase() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a5ed5f24476fd91ebc55343f2d07c8e02">size_type</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a094827ba8598c87dbe9b964e70ea09b7">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除所有具有指定键的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>要删除的键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>删除的元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00653">653</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aba75ed6a9696ac5610d0f726c807ba35" name="aba75ed6a9696ac5610d0f726c807ba35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba75ed6a9696ac5610d0f726c807ba35">&#9670;&#160;</a></span>erase() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a></td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a></td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除指定范围内的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00679">679</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a479cb43386d859fe5e634388899cbe8c" name="a479cb43386d859fe5e634388899cbe8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a479cb43386d859fe5e634388899cbe8c">&#9670;&#160;</a></span>erase() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除指定位置的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>要删除的位置 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00668">668</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a44e6ad694253dfcdc846cac0b82cd12d" name="a44e6ad694253dfcdc846cac0b82cd12d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44e6ad694253dfcdc846cac0b82cd12d">&#9670;&#160;</a></span>find() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::find </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a094827ba8598c87dbe9b964e70ea09b7">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查找具有指定键的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>要查找的键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向第一个匹配元素的迭代器，未找到则返回end() </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00700">700</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a9212d5c0eda3f7bb3f4447fd0ad95345" name="a9212d5c0eda3f7bb3f4447fd0ad95345"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9212d5c0eda3f7bb3f4447fd0ad95345">&#9670;&#160;</a></span>find() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a1adbda548b885a17f86944ef965f0028">const_iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::find </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a094827ba8598c87dbe9b964e70ea09b7">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查找具有指定键的元素（常量版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>要查找的键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向第一个匹配元素的常量迭代器，未找到则返回cend() </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00713">713</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ab103a38ac7b6eba2db47acb94985d57a" name="ab103a38ac7b6eba2db47acb94985d57a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab103a38ac7b6eba2db47acb94985d57a">&#9670;&#160;</a></span>insert_equal() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_equal </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#acaffafabe4866e0e9a35cc227abe23ce">value_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拷贝插入允许重复键元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00575">575</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a59451d47aaaaf5feca534e63cc352a49" name="a59451d47aaaaf5feca534e63cc352a49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59451d47aaaaf5feca534e63cc352a49">&#9670;&#160;</a></span>insert_equal() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga4f7b2f70ba1539ec3326d52e89698f13">is_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_equal </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>范围插入允许重复键元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00642">642</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a0f40f7a786a7127ff060c60cc644d087" name="a0f40f7a786a7127ff060c60cc644d087"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f40f7a786a7127ff060c60cc644d087">&#9670;&#160;</a></span>insert_equal() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_equal </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#acaffafabe4866e0e9a35cc227abe23ce">value_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在提示位置附近拷贝插入允许重复键元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>插入位置提示 </td></tr>
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00623">623</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aaa6b9122cbb54c1809e103a3e1ea3071" name="aaa6b9122cbb54c1809e103a3e1ea3071"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa6b9122cbb54c1809e103a3e1ea3071">&#9670;&#160;</a></span>insert_equal() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_equal </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#acaffafabe4866e0e9a35cc227abe23ce">value_type</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在提示位置附近移动插入允许重复键元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>插入位置提示 </td></tr>
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00631">631</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ae0d94c42fb66a67926b01789d6c32174" name="ae0d94c42fb66a67926b01789d6c32174"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0d94c42fb66a67926b01789d6c32174">&#9670;&#160;</a></span>insert_equal() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_equal </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#acaffafabe4866e0e9a35cc227abe23ce">value_type</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动插入允许重复键元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00582">582</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a30de301b6a7d1fd3ff75dbd0cbfe2923" name="a30de301b6a7d1fd3ff75dbd0cbfe2923"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30de301b6a7d1fd3ff75dbd0cbfe2923">&#9670;&#160;</a></span>insert_unique() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structneforce_1_1pair.html">pair</a>&lt; <a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a>, bool &gt; <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_unique </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#acaffafabe4866e0e9a35cc227abe23ce">value_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拷贝插入唯一键元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>插入结果（迭代器和是否成功） </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00478">478</a> 行定义.</p>
+
+</div>
+</div>
+<a id="af34094ab6f5912fbb4a042a926ef66a8" name="af34094ab6f5912fbb4a042a926ef66a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af34094ab6f5912fbb4a042a926ef66a8">&#9670;&#160;</a></span>insert_unique() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga4f7b2f70ba1539ec3326d52e89698f13">is_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_unique </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>范围插入唯一键元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00551">551</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a251a3eb424a704ee8dc3d1fad0180239" name="a251a3eb424a704ee8dc3d1fad0180239"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a251a3eb424a704ee8dc3d1fad0180239">&#9670;&#160;</a></span>insert_unique() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_unique </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#acaffafabe4866e0e9a35cc227abe23ce">value_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在提示位置附近拷贝插入唯一键元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>插入位置提示 </td></tr>
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00532">532</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a956acb923fb7a8761a0f77471d4e1519" name="a956acb923fb7a8761a0f77471d4e1519"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a956acb923fb7a8761a0f77471d4e1519">&#9670;&#160;</a></span>insert_unique() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_unique </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#acaffafabe4866e0e9a35cc227abe23ce">value_type</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在提示位置附近移动插入唯一键元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>插入位置提示 </td></tr>
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00540">540</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aafab70f192c48c329b7db5495386cee9" name="aafab70f192c48c329b7db5495386cee9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafab70f192c48c329b7db5495386cee9">&#9670;&#160;</a></span>insert_unique() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structneforce_1_1pair.html">pair</a>&lt; <a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a>, bool &gt; <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_unique </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#acaffafabe4866e0e9a35cc227abe23ce">value_type</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动插入唯一键元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>插入结果（迭代器和是否成功） </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00485">485</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5305a36ccb92fd00f392ea078b308f7e" name="a5305a36ccb92fd00f392ea078b308f7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5305a36ccb92fd00f392ea078b308f7e">&#9670;&#160;</a></span>key_compare()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Compare <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::key_compare </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取键比较函数对象 </p>
+<dl class="section return"><dt>返回</dt><dd>键比较函数对象的副本 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00453">453</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a788cbe1b781c2068edd4d4eef53104bb" name="a788cbe1b781c2068edd4d4eef53104bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a788cbe1b781c2068edd4d4eef53104bb">&#9670;&#160;</a></span>less_than()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::less_than </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a3b77ecbf233b0114ed54a33a3b2b4ae8">sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>小于比较 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧稀疏向量 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>按字典序比较结果 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00823">823</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a0a9eff3cd11c1a5eebb8d7070a70658b" name="a0a9eff3cd11c1a5eebb8d7070a70658b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a9eff3cd11c1a5eebb8d7070a70658b">&#9670;&#160;</a></span>lower_bound() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::lower_bound </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a094827ba8598c87dbe9b964e70ea09b7">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取第一个不小于指定键的元素位置 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向第一个不小于key的元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00735">735</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a6e6f8868f4bca2a0df6c5c7ee690c7d6" name="a6e6f8868f4bca2a0df6c5c7ee690c7d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e6f8868f4bca2a0df6c5c7ee690c7d6">&#9670;&#160;</a></span>lower_bound() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a1adbda548b885a17f86944ef965f0028">const_iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::lower_bound </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a094827ba8598c87dbe9b964e70ea09b7">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取第一个不小于指定键的元素位置（常量版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向第一个不小于key的元素的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00742">742</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ad43c5e035eda5dbcfcad08904946eb8c" name="ad43c5e035eda5dbcfcad08904946eb8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad43c5e035eda5dbcfcad08904946eb8c">&#9670;&#160;</a></span>max_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a5ed5f24476fd91ebc55343f2d07c8e02">size_type</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::max_size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取最大可能大小 </p>
+<dl class="section return"><dt>返回</dt><dd>最大元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00441">441</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a3c878d302be39625472032270558015b" name="a3c878d302be39625472032270558015b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c878d302be39625472032270558015b">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a3b77ecbf233b0114ed54a33a3b2b4ae8">sparse_vector</a> &amp; <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a3b77ecbf233b0114ed54a33a3b2b4ae8">sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拷贝赋值运算符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源稀疏向量 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00318">318</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aefe27abf70f83fad4ce9d70edc54cff8" name="aefe27abf70f83fad4ce9d70edc54cff8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefe27abf70f83fad4ce9d70edc54cff8">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a3b77ecbf233b0114ed54a33a3b2b4ae8">sparse_vector</a> &amp; <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a3b77ecbf233b0114ed54a33a3b2b4ae8">sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动赋值运算符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源稀疏向量 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00344">344</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a0f383c8d0a171c8cd33482422ed94da2" name="a0f383c8d0a171c8cd33482422ed94da2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f383c8d0a171c8cd33482422ed94da2">&#9670;&#160;</a></span>rbegin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ad3fb0b6f9841c4ba7bbad27eb42287f5">const_reverse_iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rbegin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量反向起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最后一个元素的常量反向迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00411">411</a> 行定义.</p>
+
+</div>
+</div>
+<a id="adc1f99103e1326a9980a69bb5343973b" name="adc1f99103e1326a9980a69bb5343973b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc1f99103e1326a9980a69bb5343973b">&#9670;&#160;</a></span>rbegin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a2d323da9710ba783db29c4c1cfe2fe8a">reverse_iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rbegin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取反向起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最后一个元素的反向迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00399">399</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a3d2ad7a3c50945208cb5da7d75162714" name="a3d2ad7a3c50945208cb5da7d75162714"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d2ad7a3c50945208cb5da7d75162714">&#9670;&#160;</a></span>rend() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ad3fb0b6f9841c4ba7bbad27eb42287f5">const_reverse_iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rend </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量反向结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向第一个元素之前位置的常量反向迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00417">417</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a1a770aeb02023438bfaf9059d6a944b4" name="a1a770aeb02023438bfaf9059d6a944b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a770aeb02023438bfaf9059d6a944b4">&#9670;&#160;</a></span>rend() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a2d323da9710ba783db29c4c1cfe2fe8a">reverse_iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rend </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取反向结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向第一个元素之前位置的反向迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00405">405</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a957e1131d382d123012f75316aa6e1ab" name="a957e1131d382d123012f75316aa6e1ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a957e1131d382d123012f75316aa6e1ab">&#9670;&#160;</a></span>reserve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::reserve </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a5ed5f24476fd91ebc55343f2d07c8e02">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>预留容量 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>预留的元素数量 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00784">784</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a8c5e04c5819fea4a82e40a1b4e9f6e9a" name="a8c5e04c5819fea4a82e40a1b4e9f6e9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c5e04c5819fea4a82e40a1b4e9f6e9a">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a5ed5f24476fd91ebc55343f2d07c8e02">size_type</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取元素数量 </p>
+<dl class="section return"><dt>返回</dt><dd>元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00435">435</a> 行定义.</p>
+
+</div>
+</div>
+<a id="afba65bf6a2ddac79c9d6ad1194defc50" name="afba65bf6a2ddac79c9d6ad1194defc50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afba65bf6a2ddac79c9d6ad1194defc50">&#9670;&#160;</a></span>swap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::swap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a3b77ecbf233b0114ed54a33a3b2b4ae8">sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>交换两个稀疏向量的内容 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>要交换的另一个稀疏向量 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00801">801</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ad2d42a24e2aedd0cfcf9c177ddb130ff" name="ad2d42a24e2aedd0cfcf9c177ddb130ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2d42a24e2aedd0cfcf9c177ddb130ff">&#9670;&#160;</a></span>upper_bound() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a1fb96ba60c4aee5b96dc7b9bfc47baaa">iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::upper_bound </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a094827ba8598c87dbe9b964e70ea09b7">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取第一个大于指定键的元素位置 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向第一个大于key的元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00751">751</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a897159fc845868f4f2a312c6cfe199ae" name="a897159fc845868f4f2a312c6cfe199ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a897159fc845868f4f2a312c6cfe199ae">&#9670;&#160;</a></span>upper_bound() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;Value&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a1adbda548b885a17f86944ef965f0028">const_iterator</a> <a class="el" href="classneforce_1_1sparse__vector.html">neforce::sparse_vector</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::upper_bound </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a094827ba8598c87dbe9b964e70ea09b7">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取第一个大于指定键的元素位置（常量版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向第一个大于key的元素的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a> 第 <a class="el" href="sparse__vector_8hpp_source.html#l00758">758</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="sparse__vector_8hpp_source.html">sparse_vector.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><a href="classneforce_1_1sparse__vector.html">sparse_vector</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

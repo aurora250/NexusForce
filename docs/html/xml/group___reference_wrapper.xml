@@ -3,21 +3,22 @@
   <compounddef id="group___reference_wrapper" kind="group">
     <compoundname>ReferenceWrapper</compoundname>
     <title>引用包装</title>
-    <innerclass refid="classreference__wrapper" prot="public">reference_wrapper</innerclass>
-    <innerclass refid="structunwrap__reference" prot="public">unwrap_reference</innerclass>
-    <innerclass refid="structunwrap__reference_3_01reference__wrapper_3_01_t_01_4_01_4" prot="public">unwrap_reference&lt; reference_wrapper&lt; T &gt; &gt;</innerclass>
-    <innerclass refid="structunwrap__ref__decay" prot="public">unwrap_ref_decay</innerclass>
+    <innerclass refid="classneforce_1_1reference__wrapper" prot="public">neforce::reference_wrapper</innerclass>
+    <innerclass refid="structneforce_1_1unwrap__reference" prot="public">neforce::unwrap_reference</innerclass>
+    <innerclass refid="structneforce_1_1unwrap__reference_3_01reference__wrapper_3_01_t_01_4_01_4" prot="public">neforce::unwrap_reference&lt; reference_wrapper&lt; T &gt; &gt;</innerclass>
+    <innerclass refid="structneforce_1_1unwrap__ref__decay" prot="public">neforce::unwrap_ref_decay</innerclass>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="group___reference_wrapper_1ga27b1c76a744b6271a4733a39e4717bda" prot="public" static="no">
+      <memberdef kind="typedef" id="group___reference_wrapper_1ga865199b4578c1b6d7c7614894108925d" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>typename <ref refid="structunwrap__reference" kindref="compound">unwrap_reference</ref>&lt; T &gt;::type</type>
-        <definition>using unwrap_reference_t = typename unwrap_reference&lt;T&gt;::type</definition>
+        <type>typename unwrap_reference&lt; T &gt;::type</type>
+        <definition>using neforce::unwrap_reference_t = typename unwrap_reference&lt;T&gt;::type</definition>
         <argsstring></argsstring>
         <name>unwrap_reference_t</name>
+        <qualifiedname>neforce::unwrap_reference_t</qualifiedname>
         <briefdescription>
 <para>unwrap_reference的便捷别名 </para>
         </briefdescription>
@@ -27,16 +28,17 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" line="215" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" bodystart="215" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___reference_wrapper_1gab50d469d33ed56a0ce32f87d03ac5f10" prot="public" static="no">
+      <memberdef kind="typedef" id="group___reference_wrapper_1ga956c157e4c8b4f329dbc718f411ac82d" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>typename <ref refid="structunwrap__ref__decay" kindref="compound">unwrap_ref_decay</ref>&lt; T &gt;::type</type>
-        <definition>using unwrap_ref_decay_t = typename unwrap_ref_decay&lt;T&gt;::type</definition>
+        <type>typename unwrap_ref_decay&lt; T &gt;::type</type>
+        <definition>using neforce::unwrap_ref_decay_t = typename unwrap_ref_decay&lt;T&gt;::type</definition>
         <argsstring></argsstring>
         <name>unwrap_ref_decay_t</name>
+        <qualifiedname>neforce::unwrap_ref_decay_t</qualifiedname>
         <briefdescription>
 <para>unwrap_ref_decay的便捷别名 </para>
         </briefdescription>
@@ -48,16 +50,17 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___reference_wrapper_1ga1ffcd97e84a642fa9f9f3297692d128e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___reference_wrapper_1ga3afd6d868b5c991df20509b299924200" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type></type>
-        <definition>reference_wrapper</definition>
+        <definition>neforce::reference_wrapper</definition>
         <argsstring>(T &amp;) -&gt; reference_wrapper&lt; T &gt;</argsstring>
         <name>reference_wrapper</name>
+        <qualifiedname>neforce::reference_wrapper</qualifiedname>
         <param>
           <type>T &amp;</type>
         </param>
@@ -69,16 +72,17 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" line="120" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" declline="120" declcolumn="1"/>
       </memberdef>
-      <memberdef kind="function" id="group___reference_wrapper_1ga25754a3cc3c12b294f51a704b7d93d0c" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___reference_wrapper_1gae07530a0f43e9c46acfc5a1632d57a00" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classreference__wrapper" kindref="compound">reference_wrapper</ref>&lt; T &gt;</type>
-        <definition>reference_wrapper&lt; T &gt; ref</definition>
+        <type>reference_wrapper&lt; T &gt;</type>
+        <definition>reference_wrapper&lt; T &gt; neforce::ref</definition>
         <argsstring>(T &amp;val) noexcept</argsstring>
         <name>ref</name>
+        <qualifiedname>neforce::ref</qualifiedname>
         <param>
           <type>T &amp;</type>
           <declname>val</declname>
@@ -105,7 +109,7 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para><ref refid="classreference__wrapper" kindref="compound">reference_wrapper&lt;T&gt;</ref>包装器 </para>
+<simplesect kind="return"><para><ref refid="classneforce_1_1reference__wrapper" kindref="compound">reference_wrapper&lt;T&gt;</ref>包装器 </para>
 </simplesect>
 <simplesect kind="note"><para>禁止对右值使用 </para>
 </simplesect>
@@ -114,20 +118,27 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" line="132" column="30" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" bodystart="132" bodyend="134"/>
-        <referencedby refid="group___parallel_algorithms_1gad447586eb3e4c5bd99c06300195deeba" compoundref="parallel_8hpp" startline="42" endline="59">reduce</referencedby>
-        <referencedby refid="classreference__wrapper_1a2443e31f5a7f29bf3173a8ba0a221a92" compoundref="reference__wrapper_8hpp" startline="84" endline="87">reference_wrapper&lt; T &gt;::reference_wrapper</referencedby>
-        <referencedby refid="group___parallel_algorithms_1ga9c84b149470430f99e5bb9f2de2a03dd" compoundref="parallel_8hpp" startline="78" endline="95">transform_reduce</referencedby>
+        <references refid="group___reference_wrapper_1gae07530a0f43e9c46acfc5a1632d57a00" compoundref="reference__wrapper_8hpp" startline="132" endline="134">neforce::ref</references>
+        <referencedby refid="group___remove_algorithms_1gaa3c53ce3df1c6a586f2af5e9debf2828" compoundref="remove_8hpp" startline="187" endline="196">neforce::erase_if</referencedby>
+        <referencedby refid="structneforce_1_1pointer__traits_3_01_t_01_5_01_4_1aff1885b33dddadbec2d97397900a2ba7" compoundref="iterator__traits_8hpp" startline="283" endline="283">neforce::pointer_traits&lt; T * &gt;::pointer_to</referencedby>
+        <referencedby refid="group___parallel_algorithms_1ga4a0fb7d4107998892fcf525763602f4b" compoundref="parallel_8hpp" startline="42" endline="59">neforce::reduce</referencedby>
+        <referencedby refid="group___reference_wrapper_1ga343f48b639fd2c418e987b3d3dd4c515">neforce::ref</referencedby>
+        <referencedby refid="group___reference_wrapper_1gadd34c64430a280c6c19e17a64e7fd08c" compoundref="reference__wrapper_8hpp" startline="151" endline="153">neforce::ref</referencedby>
+        <referencedby refid="group___reference_wrapper_1gae07530a0f43e9c46acfc5a1632d57a00" compoundref="reference__wrapper_8hpp" startline="132" endline="134">neforce::ref</referencedby>
+        <referencedby refid="classneforce_1_1reference__wrapper_1a43983de4877986a4bafe6388f2d972f5" compoundref="reference__wrapper_8hpp" startline="84" endline="87">neforce::reference_wrapper&lt; T &gt;::reference_wrapper</referencedby>
+        <referencedby refid="group___parallel_algorithms_1ga093aa3ddac9a6cd37fcf464c7c577426" compoundref="parallel_8hpp" startline="78" endline="95">neforce::transform_reduce</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___reference_wrapper_1ga12d1119fac701ece51a17517244bfb60" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___reference_wrapper_1ga343f48b639fd2c418e987b3d3dd4c515" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void ref</definition>
+        <definition>void neforce::ref</definition>
         <argsstring>(const T &amp;&amp;)=delete</argsstring>
         <name>ref</name>
+        <qualifiedname>neforce::ref</qualifiedname>
         <param>
           <type>const T &amp;&amp;</type>
         </param>
@@ -151,19 +162,21 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" line="142" column="6" declfile="D:/Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" declline="142" declcolumn="6"/>
+        <references refid="group___reference_wrapper_1gae07530a0f43e9c46acfc5a1632d57a00" compoundref="reference__wrapper_8hpp" startline="132" endline="134">neforce::ref</references>
       </memberdef>
-      <memberdef kind="function" id="group___reference_wrapper_1ga9390caa30dca0820fa2cdff369d3c25d" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___reference_wrapper_1gadd34c64430a280c6c19e17a64e7fd08c" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classreference__wrapper" kindref="compound">reference_wrapper</ref>&lt; T &gt;</type>
-        <definition>reference_wrapper&lt; T &gt; ref</definition>
+        <type>reference_wrapper&lt; T &gt;</type>
+        <definition>reference_wrapper&lt; T &gt; neforce::ref</definition>
         <argsstring>(reference_wrapper&lt; T &gt; wrapper) noexcept</argsstring>
         <name>ref</name>
+        <qualifiedname>neforce::ref</qualifiedname>
         <param>
-          <type><ref refid="classreference__wrapper" kindref="compound">reference_wrapper</ref>&lt; T &gt;</type>
+          <type>reference_wrapper&lt; T &gt;</type>
           <declname>wrapper</declname>
         </param>
         <briefdescription>
@@ -195,17 +208,19 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" line="151" column="30" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" bodystart="151" bodyend="153"/>
+        <references refid="group___reference_wrapper_1gae07530a0f43e9c46acfc5a1632d57a00" compoundref="reference__wrapper_8hpp" startline="132" endline="134">neforce::ref</references>
       </memberdef>
-      <memberdef kind="function" id="group___reference_wrapper_1ga2e15f0d85bb2b2e2216f442df1cf2901" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___reference_wrapper_1ga08ce27e4d2a03efd6fde0dd6203d3d82" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classreference__wrapper" kindref="compound">reference_wrapper</ref>&lt; const T &gt;</type>
-        <definition>reference_wrapper&lt; const T &gt; cref</definition>
+        <type>reference_wrapper&lt; const T &gt;</type>
+        <definition>reference_wrapper&lt; const T &gt; neforce::cref</definition>
         <argsstring>(const T &amp;val) noexcept</argsstring>
         <name>cref</name>
+        <qualifiedname>neforce::cref</qualifiedname>
         <param>
           <type>const T &amp;</type>
           <declname>val</declname>
@@ -232,7 +247,7 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para><ref refid="classreference__wrapper" kindref="compound">reference_wrapper&lt;const T&gt;</ref>包装器 </para>
+<simplesect kind="return"><para><ref refid="classneforce_1_1reference__wrapper" kindref="compound">reference_wrapper&lt;const T&gt;</ref>包装器 </para>
 </simplesect>
 <simplesect kind="note"><para>禁止对右值使用</para>
 </simplesect>
@@ -241,17 +256,22 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" line="165" column="30" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" bodystart="165" bodyend="167"/>
+        <references refid="group___reference_wrapper_1ga08ce27e4d2a03efd6fde0dd6203d3d82" compoundref="reference__wrapper_8hpp" startline="165" endline="167">neforce::cref</references>
+        <referencedby refid="group___reference_wrapper_1ga957fdc0a4a14786f2a9218e2d81fc338">neforce::cref</referencedby>
+        <referencedby refid="group___reference_wrapper_1ga08ce27e4d2a03efd6fde0dd6203d3d82" compoundref="reference__wrapper_8hpp" startline="165" endline="167">neforce::cref</referencedby>
+        <referencedby refid="group___reference_wrapper_1gac0b1269d98e895872060c6cebae85025" compoundref="reference__wrapper_8hpp" startline="186" endline="188">neforce::cref</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___reference_wrapper_1ga4d14f03ea79098b6ea528ecb151ee661" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___reference_wrapper_1ga957fdc0a4a14786f2a9218e2d81fc338" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void cref</definition>
+        <definition>void neforce::cref</definition>
         <argsstring>(const T &amp;&amp;)=delete</argsstring>
         <name>cref</name>
+        <qualifiedname>neforce::cref</qualifiedname>
         <param>
           <type>const T &amp;&amp;</type>
         </param>
@@ -275,19 +295,21 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" line="175" column="6" declfile="D:/Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" declline="175" declcolumn="6"/>
+        <references refid="group___reference_wrapper_1ga08ce27e4d2a03efd6fde0dd6203d3d82" compoundref="reference__wrapper_8hpp" startline="165" endline="167">neforce::cref</references>
       </memberdef>
-      <memberdef kind="function" id="group___reference_wrapper_1ga1a17400f3274ed51b539c32ca6e85755" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___reference_wrapper_1gac0b1269d98e895872060c6cebae85025" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classreference__wrapper" kindref="compound">reference_wrapper</ref>&lt; const T &gt;</type>
-        <definition>reference_wrapper&lt; const T &gt; cref</definition>
+        <type>reference_wrapper&lt; const T &gt;</type>
+        <definition>reference_wrapper&lt; const T &gt; neforce::cref</definition>
         <argsstring>(reference_wrapper&lt; T &gt; wrapper) noexcept</argsstring>
         <name>cref</name>
+        <qualifiedname>neforce::cref</qualifiedname>
         <param>
-          <type><ref refid="classreference__wrapper" kindref="compound">reference_wrapper</ref>&lt; T &gt;</type>
+          <type>reference_wrapper&lt; T &gt;</type>
           <declname>wrapper</declname>
         </param>
         <briefdescription>
@@ -319,6 +341,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" line="186" column="30" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" bodystart="186" bodyend="188"/>
+        <references refid="group___reference_wrapper_1ga08ce27e4d2a03efd6fde0dd6203d3d82" compoundref="reference__wrapper_8hpp" startline="165" endline="167">neforce::cref</references>
       </memberdef>
     </sectiondef>
     <briefdescription>

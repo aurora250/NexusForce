@@ -1,9 +1,9 @@
 var thread_8hpp =
 [
-    [ "thread::id", "structthread_1_1id.html", "structthread_1_1id" ],
-    [ "thread::hook", "structthread_1_1hook.html", "structthread_1_1hook" ],
-    [ "handle", "group___thread.html#ga3b4d8e35a1675a3e99ed89c2ffe7d4f2", null ],
-    [ "id", "group___thread.html#gaab371a4a36c3866d2f8bdd3e2be27f11", null ],
-    [ "name", "group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1", null ],
-    [ "set_name", "group___thread.html#ga2abb5ec8a5551d27cbbef28396e1bdc7", null ]
+    [ "neforce::thread::id", "structneforce_1_1thread_1_1id.html", "structneforce_1_1thread_1_1id" ],
+    [ "neforce::thread::hook", "structneforce_1_1thread_1_1hook.html", "structneforce_1_1thread_1_1hook" ],
+    [ "neforce::this_thread::handle", "group___thread.html#gab48dfcd9fbacf6954f0263d088d8f43c", null ],
+    [ "neforce::this_thread::id", "group___thread.html#ga3c2969f91e75bf621e2a3a1437f0bc46", null ],
+    [ "neforce::this_thread::name", "group___thread.html#gae22491028626239a3fd9b668cbe8fcae", null ],
+    [ "neforce::this_thread::set_name", "group___thread.html#ga58f1d95d1ae38407d4286c076002ff77", null ]
 ];

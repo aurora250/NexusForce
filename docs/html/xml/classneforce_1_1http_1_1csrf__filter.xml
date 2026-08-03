@@ -1,0 +1,295 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1http_1_1csrf__filter" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>neforce::http::csrf_filter</compoundname>
+    <basecompoundref refid="classneforce_1_1http_1_1http__filter" prot="public" virt="non-virtual">neforce::http::http_filter</basecompoundref>
+    <includes refid="csrf__filter_8hpp" local="no">csrf_filter.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1csrf__filter_1a0e7385e0efd21f67c42f3121dfe4f6a4" prot="public" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::http::csrf_filter::cookie_name</definition>
+        <argsstring></argsstring>
+        <name>cookie_name</name>
+        <qualifiedname>neforce::http::csrf_filter::cookie_name</qualifiedname>
+        <initializer>{&quot;XSRF-TOKEN&quot;}</initializer>
+        <briefdescription>
+<para>CSRF Cookie名称 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/csrf_filter.hpp" line="33" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/csrf_filter.hpp" bodystart="33" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1csrf__filter_1a331949ffbacc7c6539029e718d17246b" prot="public" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::http::csrf_filter::header_name</definition>
+        <argsstring></argsstring>
+        <name>header_name</name>
+        <qualifiedname>neforce::http::csrf_filter::header_name</qualifiedname>
+        <initializer>{&quot;X-CSRF-Token&quot;}</initializer>
+        <briefdescription>
+<para>CSRF Header名称 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/csrf_filter.hpp" line="34" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/csrf_filter.hpp" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1csrf__filter_1a3d7b656731c62f763653f9a0fb058d6e" prot="public" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::http::csrf_filter::form_field_name</definition>
+        <argsstring></argsstring>
+        <name>form_field_name</name>
+        <qualifiedname>neforce::http::csrf_filter::form_field_name</qualifiedname>
+        <initializer>{&quot;_csrf&quot;}</initializer>
+        <briefdescription>
+<para>CSRF表单字段名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/csrf_filter.hpp" line="35" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/csrf_filter.hpp" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1csrf__filter_1adc210a2388ea7e0fd7e897e1f148a7ef" prot="public" static="no" mutable="no">
+        <type><ref refid="group___duration_1ga8254730759b00eba24c4a01b0c8e10c3" kindref="member">seconds</ref></type>
+        <definition>seconds neforce::http::csrf_filter::token_max_age</definition>
+        <argsstring></argsstring>
+        <name>token_max_age</name>
+        <qualifiedname>neforce::http::csrf_filter::token_max_age</qualifiedname>
+        <initializer>{3600}</initializer>
+        <briefdescription>
+<para>Token有效期 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/csrf_filter.hpp" line="36" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/csrf_filter.hpp" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1csrf__filter_1a733136d63b46aa5f6ece0ee7df2d27a9" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::http::csrf_filter::enabled</definition>
+        <argsstring></argsstring>
+        <name>enabled</name>
+        <qualifiedname>neforce::http::csrf_filter::enabled</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+<para>是否启用 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/csrf_filter.hpp" line="37" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/csrf_filter.hpp" bodystart="37" bodyend="37"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1csrf__filter_1a3ce111ec6b4b71a9408a0e9c16e223f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::csrf_filter::csrf_filter</definition>
+        <argsstring>()=default</argsstring>
+        <name>csrf_filter</name>
+        <qualifiedname>neforce::http::csrf_filter::csrf_filter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/csrf_filter.hpp" line="39" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1csrf__filter_1aed31e7b25c76eb609f53c9b5fcd03197" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::http::csrf_filter::pre_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response) override</argsstring>
+        <name>pre_filter</name>
+        <qualifiedname>neforce::http::csrf_filter::pre_filter</qualifiedname>
+        <reimplements refid="classneforce_1_1http_1_1http__filter_1a66c5af31a812075314a85ef38b9d55eb">pre_filter</reimplements>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>预处理方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>返回false表示中断后续处理</para>
+</simplesect>
+在请求处理前调用，可以检查请求、修改请求或提前返回响应。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/csrf_filter.hpp" line="41" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1csrf__filter_1a2faa52fd315a4f73b688052d8981dc39" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void neforce::http::csrf_filter::do_filter</definition>
+        <argsstring>(http_request &amp;, http_response &amp;) override</argsstring>
+        <name>do_filter</name>
+        <qualifiedname>neforce::http::csrf_filter::do_filter</qualifiedname>
+        <reimplements refid="classneforce_1_1http_1_1http__filter_1a354b28748f728effc3a651e7c9fa96a6">do_filter</reimplements>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>核心过滤方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+执行实际的过滤逻辑。通常由具体处理器实现， 中间件过滤器可能不实现此方法。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/csrf_filter.hpp" line="42" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/csrf_filter.hpp" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1csrf__filter_1ae7ea5a3eab8b806f554d003c61d09362" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::http::csrf_filter::name</definition>
+        <argsstring>() const override</argsstring>
+        <name>name</name>
+        <qualifiedname>neforce::http::csrf_filter::name</qualifiedname>
+        <reimplements refid="classneforce_1_1http_1_1http__filter_1a16dc9ccb76e7dccf41f4ae732ea01afe">name</reimplements>
+        <briefdescription>
+<para>获取过滤器名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>过滤器名称 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/csrf_filter.hpp" line="44" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/csrf_filter.hpp" bodystart="44" bodyend="44"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>CSRF防护过滤器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Double-Submit Cookie模式：<orderedlist>
+<listitem><para>首次请求时生成随机CSRF token，存入session + Set-Cookie</para>
+</listitem><listitem><para>后续状态变更请求需在header(X-CSRF-Token)或body(_csrf)中携带token</para>
+</listitem><listitem><para>比对cookie中的token与请求中的token，不匹配则拒绝(403)</para>
+</listitem></orderedlist>
+</para>
+<para>仅验证状态变更方法：POST、PUT、PATCH、DELETE </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::http::csrf_filter</label>
+        <link refid="classneforce_1_1http_1_1csrf__filter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::http::http_filter</label>
+        <link refid="classneforce_1_1http_1_1http__filter"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>neforce::basic_string&lt; char &gt;</label>
+        <link refid="classneforce_1_1basic__string"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>neforce::duration&lt; int64_t &gt;</label>
+        <link refid="structneforce_1_1duration"/>
+      </node>
+      <node id="1">
+        <label>neforce::http::csrf_filter</label>
+        <link refid="classneforce_1_1http_1_1csrf__filter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>cookie_name</edgelabel>
+          <edgelabel>form_field_name</edgelabel>
+          <edgelabel>header_name</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>token_max_age</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::http::http_filter</label>
+        <link refid="classneforce_1_1http_1_1http__filter"/>
+      </node>
+      <node id="4">
+        <label>neforce::icommon&lt; T &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="6">
+        <label>neforce::ihashable&lt; T &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/csrf_filter.hpp" line="31" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/csrf_filter.hpp" bodystart="31" bodyend="47"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1http_1_1csrf__filter_1a0e7385e0efd21f67c42f3121dfe4f6a4" prot="public" virt="non-virtual"><scope>neforce::http::csrf_filter</scope><name>cookie_name</name></member>
+      <member refid="classneforce_1_1http_1_1csrf__filter_1a3ce111ec6b4b71a9408a0e9c16e223f3" prot="public" virt="non-virtual"><scope>neforce::http::csrf_filter</scope><name>csrf_filter</name></member>
+      <member refid="classneforce_1_1http_1_1csrf__filter_1a2faa52fd315a4f73b688052d8981dc39" prot="public" virt="virtual"><scope>neforce::http::csrf_filter</scope><name>do_filter</name></member>
+      <member refid="classneforce_1_1http_1_1csrf__filter_1a733136d63b46aa5f6ece0ee7df2d27a9" prot="public" virt="non-virtual"><scope>neforce::http::csrf_filter</scope><name>enabled</name></member>
+      <member refid="classneforce_1_1http_1_1csrf__filter_1a3d7b656731c62f763653f9a0fb058d6e" prot="public" virt="non-virtual"><scope>neforce::http::csrf_filter</scope><name>form_field_name</name></member>
+      <member refid="classneforce_1_1http_1_1csrf__filter_1a331949ffbacc7c6539029e718d17246b" prot="public" virt="non-virtual"><scope>neforce::http::csrf_filter</scope><name>header_name</name></member>
+      <member refid="classneforce_1_1http_1_1csrf__filter_1ae7ea5a3eab8b806f554d003c61d09362" prot="public" virt="virtual"><scope>neforce::http::csrf_filter</scope><name>name</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter_1a14ac82a85eee7e20c9d912f97b50535f" prot="public" virt="virtual"><scope>neforce::http::csrf_filter</scope><name>post_filter</name></member>
+      <member refid="classneforce_1_1http_1_1csrf__filter_1aed31e7b25c76eb609f53c9b5fcd03197" prot="public" virt="virtual"><scope>neforce::http::csrf_filter</scope><name>pre_filter</name></member>
+      <member refid="classneforce_1_1http_1_1csrf__filter_1adc210a2388ea7e0fd7e897e1f148a7ef" prot="public" virt="non-virtual"><scope>neforce::http::csrf_filter</scope><name>token_max_age</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter_1a157ba2513278a823db4ea1b36be341f0" prot="public" virt="virtual"><scope>neforce::http::csrf_filter</scope><name>~http_filter</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

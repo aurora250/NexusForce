@@ -1,0 +1,866 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1charset" kind="class" language="C++" prot="public">
+    <compoundname>neforce::charset</compoundname>
+    <includes refid="charset_8hpp" local="no">charset.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1charset_1a413a06dc7429f0d04f092dcb356e2f00" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga5405672bf9962081e6fcd1448d4bce4a" kindref="member">uint64_t</ref></type>
+        <definition>uint64_t neforce::charset::bits_[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>bits_</name>
+        <qualifiedname>neforce::charset::bits_</qualifiedname>
+        <initializer>= {}</initializer>
+        <briefdescription>
+<para>256-bit 位图 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="328" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="328" bodyend="328"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::charset::charset</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>charset</name>
+        <qualifiedname>neforce::charset::charset</qualifiedname>
+        <briefdescription>
+<para>默认构造函数，构造空字符集 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="33" column="15"/>
+        <referencedby refid="classneforce_1_1charset_1af56762d3c7e946504901be8c27cabe62" compoundref="charset_8hpp" startline="263" endline="263">ascii_alnum</referencedby>
+        <referencedby refid="classneforce_1_1charset_1a149c6ecedfe5a896a6373c19c6896586" compoundref="charset_8hpp" startline="249" endline="251">ascii_alpha</referencedby>
+        <referencedby refid="classneforce_1_1charset_1ac5d6e99d6e1094a2678d648b51038469" compoundref="charset_8hpp" startline="237" endline="237">ascii_alpha_lower</referencedby>
+        <referencedby refid="classneforce_1_1charset_1aa9899763eb5add6bbaadcfbb6cfa439e" compoundref="charset_8hpp" startline="243" endline="243">ascii_alpha_upper</referencedby>
+        <referencedby refid="classneforce_1_1charset_1a8aa538b89321a33a9611139ab6e58568" compoundref="charset_8hpp" startline="277" endline="281">ascii_blank</referencedby>
+        <referencedby refid="classneforce_1_1charset_1a82dbb8be177edda0c61131a80f829d33" compoundref="charset_8hpp" startline="308" endline="313">ascii_cntrl</referencedby>
+        <referencedby refid="classneforce_1_1charset_1a0050fab30c862fe4ee524289ce104723" compoundref="charset_8hpp" startline="257" endline="257">ascii_digit</referencedby>
+        <referencedby refid="classneforce_1_1charset_1a9fe3a32040901360c288a795613479f6" compoundref="charset_8hpp" startline="325" endline="325">ascii_graph</referencedby>
+        <referencedby refid="classneforce_1_1charset_1a0e6cd3642c2cde9d5fcaa79d64dcef84" compoundref="charset_8hpp" startline="269" endline="271">ascii_hex_digit</referencedby>
+        <referencedby refid="classneforce_1_1charset_1a0f71701edf23297f9ad0e40b70baba3b" compoundref="charset_8hpp" startline="319" endline="319">ascii_print</referencedby>
+        <referencedby refid="classneforce_1_1charset_1a6d5302bf5df171f81458e549d6e5086b" compoundref="charset_8hpp" startline="297" endline="302">ascii_punct</referencedby>
+        <referencedby refid="classneforce_1_1charset_1ad577eb798e8037325fc605b31a2ab46f" compoundref="charset_8hpp" startline="287" endline="291">ascii_space</referencedby>
+        <referencedby refid="classneforce_1_1charset_1ab40822c72ce855d47ac2c73822fef9cf" compoundref="charset_8hpp" startline="218" endline="218">empty_set</referencedby>
+        <referencedby refid="classneforce_1_1charset_1abec173ee34c73a7b34972b68b687e4c5" compoundref="charset_8hpp" startline="40" endline="44">from_char</referencedby>
+        <referencedby refid="classneforce_1_1charset_1a029a833dce8447d9ad85adfadb585076" compoundref="charset_8hpp" startline="212" endline="212">operator!=</referencedby>
+        <referencedby refid="classneforce_1_1charset_1a496ff2dd8e278976d4641ed1c222052c" compoundref="charset_8hpp" startline="129" endline="136">operator&amp;</referencedby>
+        <referencedby refid="classneforce_1_1charset_1a2bd758befc01bf8955b0508f8f9722d2" compoundref="charset_8hpp" startline="176" endline="182">operator&amp;=</referencedby>
+        <referencedby refid="classneforce_1_1charset_1a38c661b9470df5a364c043de49d8f743" compoundref="charset_8hpp" startline="156" endline="156">operator-</referencedby>
+        <referencedby refid="classneforce_1_1charset_1a7660bd221246107d2e326de1a81f22c5" compoundref="charset_8hpp" startline="189" endline="195">operator-=</referencedby>
+        <referencedby refid="classneforce_1_1charset_1aa7b360496795a9a3ceed66b4e432b6fc" compoundref="charset_8hpp" startline="202" endline="205">operator==</referencedby>
+        <referencedby refid="classneforce_1_1charset_1aa11c1ea39e5dd28c08d502b8c32f8f09" compoundref="charset_8hpp" startline="115" endline="122">operator|</referencedby>
+        <referencedby refid="classneforce_1_1charset_1ab3beb9289166f261a980b55dab073911" compoundref="charset_8hpp" startline="163" endline="169">operator|=</referencedby>
+        <referencedby refid="classneforce_1_1charset_1ac84e1d27c6533c5b96d39d8ca858abce" compoundref="charset_8hpp" startline="142" endline="149">operator~</referencedby>
+        <referencedby refid="classneforce_1_1charset_1a22298f02ef0443db76921a4102656e53" compoundref="charset_8hpp" startline="54" endline="74">range</referencedby>
+        <referencedby refid="classneforce_1_1charset_1a559864cabccf285dad5f4b088299accf" compoundref="charset_8hpp" startline="224" endline="231">universe</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1ae15648e361f22bfabe9c08b08a3258cd" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::charset::insert</definition>
+        <argsstring>(const char c) noexcept</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::charset::insert</qualifiedname>
+        <param>
+          <type>const char</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>插入字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="80" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="80" bodyend="83"/>
+        <referencedby refid="classneforce_1_1charset_1abec173ee34c73a7b34972b68b687e4c5" compoundref="charset_8hpp" startline="40" endline="44">from_char</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1a0a05b9dca151cda9d0fa951935ae98b8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::charset::erase</definition>
+        <argsstring>(const char c) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::charset::erase</qualifiedname>
+        <param>
+          <type>const char</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>移除字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移除的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="89" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="89" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1a1b264ae27b8db22764b5cee8f808f9f5" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::charset::contains</definition>
+        <argsstring>(const char c) const noexcept</argsstring>
+        <name>contains</name>
+        <qualifiedname>neforce::charset::contains</qualifiedname>
+        <param>
+          <type>const char</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>检查字符是否在集合中 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>存在则返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="99" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="99" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1ae93a6b0333b0723b746ee0002428c5ea" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::charset::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>neforce::charset::empty</qualifiedname>
+        <briefdescription>
+<para>检查字符集是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>空集返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="108" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="108" bodyend="108"/>
+        <referencedby refid="classneforce_1_1basic__string_1a8a086286a6aa1a5135e158ae0a25d4f7" compoundref="basic__string_8hpp" startline="2861" endline="2895">neforce::basic_string&lt; char &gt;::split</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1aa11c1ea39e5dd28c08d502b8c32f8f09" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+        <definition>charset neforce::charset::operator|</definition>
+        <argsstring>(const charset other) const noexcept</argsstring>
+        <name>operator|</name>
+        <qualifiedname>neforce::charset::operator|</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>并集 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个字符集 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含两集合所有字符的新字符集 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="115" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="115" bodyend="122"/>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1a496ff2dd8e278976d4641ed1c222052c" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+        <definition>charset neforce::charset::operator&amp;</definition>
+        <argsstring>(const charset other) const noexcept</argsstring>
+        <name>operator&amp;</name>
+        <qualifiedname>neforce::charset::operator&amp;</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交集 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个字符集 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含两集合共有字符的新字符集 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="129" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="129" bodyend="136"/>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1ac84e1d27c6533c5b96d39d8ca858abce" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+        <definition>charset neforce::charset::operator~</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator~</name>
+        <qualifiedname>neforce::charset::operator~</qualifiedname>
+        <briefdescription>
+<para>补集 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>包含所有不在当前集合中字符的新字符集 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="142" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="142" bodyend="149"/>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1a38c661b9470df5a364c043de49d8f743" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+        <definition>charset neforce::charset::operator-</definition>
+        <argsstring>(const charset other) const noexcept</argsstring>
+        <name>operator-</name>
+        <qualifiedname>neforce::charset::operator-</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>差集 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个字符集 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含在当前集合但不在 other 中字符的新字符集 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="156" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="156" bodyend="156"/>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1ab3beb9289166f261a980b55dab073911" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref> &amp;</type>
+        <definition>charset &amp; neforce::charset::operator|=</definition>
+        <argsstring>(const charset other) noexcept</argsstring>
+        <name>operator|=</name>
+        <qualifiedname>neforce::charset::operator|=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>并集 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个字符集 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="163" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="163" bodyend="169"/>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1a2bd758befc01bf8955b0508f8f9722d2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref> &amp;</type>
+        <definition>charset &amp; neforce::charset::operator&amp;=</definition>
+        <argsstring>(const charset other) noexcept</argsstring>
+        <name>operator&amp;=</name>
+        <qualifiedname>neforce::charset::operator&amp;=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交集 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个字符集 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="176" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="176" bodyend="182"/>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1a7660bd221246107d2e326de1a81f22c5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref> &amp;</type>
+        <definition>charset &amp; neforce::charset::operator-=</definition>
+        <argsstring>(const charset other) noexcept</argsstring>
+        <name>operator-=</name>
+        <qualifiedname>neforce::charset::operator-=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>差集 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个字符集 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="189" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="189" bodyend="195"/>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1aa7b360496795a9a3ceed66b4e432b6fc" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::charset::operator==</definition>
+        <argsstring>(const charset other) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>neforce::charset::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>相等比较 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个字符集 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>相等返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="202" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="202" bodyend="205"/>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1a029a833dce8447d9ad85adfadb585076" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::charset::operator!=</definition>
+        <argsstring>(const charset other) const noexcept</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>neforce::charset::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>不等比较 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个字符集 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>不等返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="212" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="212" bodyend="212"/>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1charset_1abec173ee34c73a7b34972b68b687e4c5" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+        <definition>static constexpr charset neforce::charset::from_char</definition>
+        <argsstring>(const char c) noexcept</argsstring>
+        <name>from_char</name>
+        <qualifiedname>neforce::charset::from_char</qualifiedname>
+        <param>
+          <type>const char</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>从单个字符构造字符集 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>仅包含该字符的字符集 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="40" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="40" bodyend="44"/>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+        <references refid="classneforce_1_1charset_1abec173ee34c73a7b34972b68b687e4c5" compoundref="charset_8hpp" startline="40" endline="44">from_char</references>
+        <references refid="classneforce_1_1charset_1ae15648e361f22bfabe9c08b08a3258cd" compoundref="charset_8hpp" startline="80" endline="83">insert</references>
+        <referencedby refid="classneforce_1_1charset_1abec173ee34c73a7b34972b68b687e4c5" compoundref="charset_8hpp" startline="40" endline="44">from_char</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1a22298f02ef0443db76921a4102656e53" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+        <definition>static constexpr charset neforce::charset::range</definition>
+        <argsstring>(const char lo, const char hi) noexcept</argsstring>
+        <name>range</name>
+        <qualifiedname>neforce::charset::range</qualifiedname>
+        <param>
+          <type>const char</type>
+          <declname>lo</declname>
+        </param>
+        <param>
+          <type>const char</type>
+          <declname>hi</declname>
+        </param>
+        <briefdescription>
+<para>从字符范围构造字符集 [lo, hi] </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始字符 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hi</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含范围内所有字符的字符集</para>
+</simplesect>
+若 lo &gt; hi，返回空集。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="54" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="54" bodyend="74"/>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+        <referencedby refid="classneforce_1_1charset_1ac5d6e99d6e1094a2678d648b51038469" compoundref="charset_8hpp" startline="237" endline="237">ascii_alpha_lower</referencedby>
+        <referencedby refid="classneforce_1_1charset_1aa9899763eb5add6bbaadcfbb6cfa439e" compoundref="charset_8hpp" startline="243" endline="243">ascii_alpha_upper</referencedby>
+        <referencedby refid="classneforce_1_1charset_1a0050fab30c862fe4ee524289ce104723" compoundref="charset_8hpp" startline="257" endline="257">ascii_digit</referencedby>
+        <referencedby refid="classneforce_1_1charset_1a0e6cd3642c2cde9d5fcaa79d64dcef84" compoundref="charset_8hpp" startline="269" endline="271">ascii_hex_digit</referencedby>
+        <referencedby refid="classneforce_1_1charset_1a0f71701edf23297f9ad0e40b70baba3b" compoundref="charset_8hpp" startline="319" endline="319">ascii_print</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1ab40822c72ce855d47ac2c73822fef9cf" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+        <definition>static constexpr charset neforce::charset::empty_set</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>empty_set</name>
+        <qualifiedname>neforce::charset::empty_set</qualifiedname>
+        <briefdescription>
+<para>空集 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>空字符集 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="218" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="218" bodyend="218"/>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1a559864cabccf285dad5f4b088299accf" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+        <definition>static constexpr charset neforce::charset::universe</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>universe</name>
+        <qualifiedname>neforce::charset::universe</qualifiedname>
+        <briefdescription>
+<para>全集 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>包含所有 256 个字节值的字符集 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="224" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="224" bodyend="231"/>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1ac5d6e99d6e1094a2678d648b51038469" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+        <definition>static constexpr charset neforce::charset::ascii_alpha_lower</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>ascii_alpha_lower</name>
+        <qualifiedname>neforce::charset::ascii_alpha_lower</qualifiedname>
+        <briefdescription>
+<para>ASCII 小写字母 &apos;a&apos;~&apos;z&apos; </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>字符集 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="237" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="237" bodyend="237"/>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+        <references refid="classneforce_1_1charset_1a22298f02ef0443db76921a4102656e53" compoundref="charset_8hpp" startline="54" endline="74">range</references>
+        <referencedby refid="classneforce_1_1charset_1a149c6ecedfe5a896a6373c19c6896586" compoundref="charset_8hpp" startline="249" endline="251">ascii_alpha</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1aa9899763eb5add6bbaadcfbb6cfa439e" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+        <definition>static constexpr charset neforce::charset::ascii_alpha_upper</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>ascii_alpha_upper</name>
+        <qualifiedname>neforce::charset::ascii_alpha_upper</qualifiedname>
+        <briefdescription>
+<para>ASCII 大写字母 &apos;A&apos;~&apos;Z&apos; </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>字符集 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="243" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="243" bodyend="243"/>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+        <references refid="classneforce_1_1charset_1a22298f02ef0443db76921a4102656e53" compoundref="charset_8hpp" startline="54" endline="74">range</references>
+        <referencedby refid="classneforce_1_1charset_1a149c6ecedfe5a896a6373c19c6896586" compoundref="charset_8hpp" startline="249" endline="251">ascii_alpha</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1a149c6ecedfe5a896a6373c19c6896586" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+        <definition>static constexpr charset neforce::charset::ascii_alpha</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>ascii_alpha</name>
+        <qualifiedname>neforce::charset::ascii_alpha</qualifiedname>
+        <briefdescription>
+<para>ASCII 字母 &apos;a&apos;~&apos;z&apos; | &apos;A&apos;~&apos;Z&apos; </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>字符集 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="249" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="249" bodyend="251"/>
+        <references refid="classneforce_1_1charset_1ac5d6e99d6e1094a2678d648b51038469" compoundref="charset_8hpp" startline="237" endline="237">ascii_alpha_lower</references>
+        <references refid="classneforce_1_1charset_1aa9899763eb5add6bbaadcfbb6cfa439e" compoundref="charset_8hpp" startline="243" endline="243">ascii_alpha_upper</references>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+        <referencedby refid="classneforce_1_1charset_1af56762d3c7e946504901be8c27cabe62" compoundref="charset_8hpp" startline="263" endline="263">ascii_alnum</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1a0050fab30c862fe4ee524289ce104723" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+        <definition>static constexpr charset neforce::charset::ascii_digit</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>ascii_digit</name>
+        <qualifiedname>neforce::charset::ascii_digit</qualifiedname>
+        <briefdescription>
+<para>ASCII 数字 &apos;0&apos;~&apos;9&apos; </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>字符集 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="257" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="257" bodyend="257"/>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+        <references refid="classneforce_1_1charset_1a22298f02ef0443db76921a4102656e53" compoundref="charset_8hpp" startline="54" endline="74">range</references>
+        <referencedby refid="classneforce_1_1charset_1af56762d3c7e946504901be8c27cabe62" compoundref="charset_8hpp" startline="263" endline="263">ascii_alnum</referencedby>
+        <referencedby refid="classneforce_1_1charset_1a0e6cd3642c2cde9d5fcaa79d64dcef84" compoundref="charset_8hpp" startline="269" endline="271">ascii_hex_digit</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1af56762d3c7e946504901be8c27cabe62" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+        <definition>static constexpr charset neforce::charset::ascii_alnum</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>ascii_alnum</name>
+        <qualifiedname>neforce::charset::ascii_alnum</qualifiedname>
+        <briefdescription>
+<para>ASCII 字母与数字 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>字符集 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="263" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="263" bodyend="263"/>
+        <references refid="classneforce_1_1charset_1a149c6ecedfe5a896a6373c19c6896586" compoundref="charset_8hpp" startline="249" endline="251">ascii_alpha</references>
+        <references refid="classneforce_1_1charset_1a0050fab30c862fe4ee524289ce104723" compoundref="charset_8hpp" startline="257" endline="257">ascii_digit</references>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1a0e6cd3642c2cde9d5fcaa79d64dcef84" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+        <definition>static constexpr charset neforce::charset::ascii_hex_digit</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>ascii_hex_digit</name>
+        <qualifiedname>neforce::charset::ascii_hex_digit</qualifiedname>
+        <briefdescription>
+<para>ASCII 十六进制数字 0~9, A~F, a~f </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>字符集 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="269" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="269" bodyend="271"/>
+        <references refid="classneforce_1_1charset_1a0050fab30c862fe4ee524289ce104723" compoundref="charset_8hpp" startline="257" endline="257">ascii_digit</references>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+        <references refid="classneforce_1_1charset_1a22298f02ef0443db76921a4102656e53" compoundref="charset_8hpp" startline="54" endline="74">range</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1a8aa538b89321a33a9611139ab6e58568" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+        <definition>static constexpr charset neforce::charset::ascii_blank</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>ascii_blank</name>
+        <qualifiedname>neforce::charset::ascii_blank</qualifiedname>
+        <briefdescription>
+<para>ASCII 空白字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>字符集 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="277" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="277" bodyend="281"/>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+        <referencedby refid="classneforce_1_1charset_1a9fe3a32040901360c288a795613479f6" compoundref="charset_8hpp" startline="325" endline="325">ascii_graph</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1ad577eb798e8037325fc605b31a2ab46f" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+        <definition>static constexpr charset neforce::charset::ascii_space</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>ascii_space</name>
+        <qualifiedname>neforce::charset::ascii_space</qualifiedname>
+        <briefdescription>
+<para>ASCII 空白字符集 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>字符集 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="287" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="287" bodyend="291"/>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+        <referencedby refid="classneforce_1_1basic__string_1a614fec21d4fba18d4a031860f9413968" compoundref="basic__string_8hpp" startline="2691" endline="2691">neforce::basic_string&lt; char &gt;::trim_left</referencedby>
+        <referencedby refid="classneforce_1_1basic__string__view_1a36b7e0e06d406f784bd7ab907aa857fa" compoundref="basic__string__view_8hpp" startline="952" endline="954">neforce::basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_left</referencedby>
+        <referencedby refid="classneforce_1_1basic__string_1a21621eab562314b23192c4b6b564be20" compoundref="basic__string_8hpp" startline="2697" endline="2697">neforce::basic_string&lt; char &gt;::trim_right</referencedby>
+        <referencedby refid="classneforce_1_1basic__string__view_1a385e0b44d3602d68455babe401cf2a21" compoundref="basic__string__view_8hpp" startline="960" endline="962">neforce::basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_right</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1a6d5302bf5df171f81458e549d6e5086b" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+        <definition>static constexpr charset neforce::charset::ascii_punct</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>ascii_punct</name>
+        <qualifiedname>neforce::charset::ascii_punct</qualifiedname>
+        <briefdescription>
+<para>ASCII 标点符号 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>字符集 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="297" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="297" bodyend="302"/>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1a82dbb8be177edda0c61131a80f829d33" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+        <definition>static constexpr charset neforce::charset::ascii_cntrl</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>ascii_cntrl</name>
+        <qualifiedname>neforce::charset::ascii_cntrl</qualifiedname>
+        <briefdescription>
+<para>ASCII 控制字符 0~31 与 127 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>字符集 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="308" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="308" bodyend="313"/>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1a0f71701edf23297f9ad0e40b70baba3b" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+        <definition>static constexpr charset neforce::charset::ascii_print</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>ascii_print</name>
+        <qualifiedname>neforce::charset::ascii_print</qualifiedname>
+        <briefdescription>
+<para>ASCII 可打印字符 32~126 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>字符集 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="319" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="319" bodyend="319"/>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+        <references refid="classneforce_1_1charset_1a22298f02ef0443db76921a4102656e53" compoundref="charset_8hpp" startline="54" endline="74">range</references>
+        <referencedby refid="classneforce_1_1charset_1a9fe3a32040901360c288a795613479f6" compoundref="charset_8hpp" startline="325" endline="325">ascii_graph</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1charset_1a9fe3a32040901360c288a795613479f6" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" kindref="member">charset</ref></type>
+        <definition>static constexpr charset neforce::charset::ascii_graph</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>ascii_graph</name>
+        <qualifiedname>neforce::charset::ascii_graph</qualifiedname>
+        <briefdescription>
+<para>ASCII 图形字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>字符集 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="325" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="325" bodyend="325"/>
+        <references refid="classneforce_1_1charset_1a8aa538b89321a33a9611139ab6e58568" compoundref="charset_8hpp" startline="277" endline="281">ascii_blank</references>
+        <references refid="classneforce_1_1charset_1a0f71701edf23297f9ad0e40b70baba3b" compoundref="charset_8hpp" startline="319" endline="319">ascii_print</references>
+        <references refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d">charset</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>字符集 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>支持集合运算（并、交、补、差）与字符归属测试。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" line="28" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/charset.hpp" bodystart="28" bodyend="329"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1charset_1af56762d3c7e946504901be8c27cabe62" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>ascii_alnum</name></member>
+      <member refid="classneforce_1_1charset_1a149c6ecedfe5a896a6373c19c6896586" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>ascii_alpha</name></member>
+      <member refid="classneforce_1_1charset_1ac5d6e99d6e1094a2678d648b51038469" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>ascii_alpha_lower</name></member>
+      <member refid="classneforce_1_1charset_1aa9899763eb5add6bbaadcfbb6cfa439e" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>ascii_alpha_upper</name></member>
+      <member refid="classneforce_1_1charset_1a8aa538b89321a33a9611139ab6e58568" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>ascii_blank</name></member>
+      <member refid="classneforce_1_1charset_1a82dbb8be177edda0c61131a80f829d33" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>ascii_cntrl</name></member>
+      <member refid="classneforce_1_1charset_1a0050fab30c862fe4ee524289ce104723" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>ascii_digit</name></member>
+      <member refid="classneforce_1_1charset_1a9fe3a32040901360c288a795613479f6" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>ascii_graph</name></member>
+      <member refid="classneforce_1_1charset_1a0e6cd3642c2cde9d5fcaa79d64dcef84" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>ascii_hex_digit</name></member>
+      <member refid="classneforce_1_1charset_1a0f71701edf23297f9ad0e40b70baba3b" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>ascii_print</name></member>
+      <member refid="classneforce_1_1charset_1a6d5302bf5df171f81458e549d6e5086b" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>ascii_punct</name></member>
+      <member refid="classneforce_1_1charset_1ad577eb798e8037325fc605b31a2ab46f" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>ascii_space</name></member>
+      <member refid="classneforce_1_1charset_1a413a06dc7429f0d04f092dcb356e2f00" prot="private" virt="non-virtual"><scope>neforce::charset</scope><name>bits_</name></member>
+      <member refid="classneforce_1_1charset_1aff81ee224fbe76569313d44c9187d56d" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>charset</name></member>
+      <member refid="classneforce_1_1charset_1a1b264ae27b8db22764b5cee8f808f9f5" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>contains</name></member>
+      <member refid="classneforce_1_1charset_1ae93a6b0333b0723b746ee0002428c5ea" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>empty</name></member>
+      <member refid="classneforce_1_1charset_1ab40822c72ce855d47ac2c73822fef9cf" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>empty_set</name></member>
+      <member refid="classneforce_1_1charset_1a0a05b9dca151cda9d0fa951935ae98b8" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>erase</name></member>
+      <member refid="classneforce_1_1charset_1abec173ee34c73a7b34972b68b687e4c5" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>from_char</name></member>
+      <member refid="classneforce_1_1charset_1ae15648e361f22bfabe9c08b08a3258cd" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>insert</name></member>
+      <member refid="classneforce_1_1charset_1a029a833dce8447d9ad85adfadb585076" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>operator!=</name></member>
+      <member refid="classneforce_1_1charset_1a496ff2dd8e278976d4641ed1c222052c" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>operator&amp;</name></member>
+      <member refid="classneforce_1_1charset_1a2bd758befc01bf8955b0508f8f9722d2" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>operator&amp;=</name></member>
+      <member refid="classneforce_1_1charset_1a38c661b9470df5a364c043de49d8f743" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>operator-</name></member>
+      <member refid="classneforce_1_1charset_1a7660bd221246107d2e326de1a81f22c5" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>operator-=</name></member>
+      <member refid="classneforce_1_1charset_1aa7b360496795a9a3ceed66b4e432b6fc" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>operator==</name></member>
+      <member refid="classneforce_1_1charset_1aa11c1ea39e5dd28c08d502b8c32f8f09" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>operator|</name></member>
+      <member refid="classneforce_1_1charset_1ab3beb9289166f261a980b55dab073911" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>operator|=</name></member>
+      <member refid="classneforce_1_1charset_1ac84e1d27c6533c5b96d39d8ca858abce" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>operator~</name></member>
+      <member refid="classneforce_1_1charset_1a22298f02ef0443db76921a4102656e53" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>range</name></member>
+      <member refid="classneforce_1_1charset_1a559864cabccf285dad5f4b088299accf" prot="public" virt="non-virtual"><scope>neforce::charset</scope><name>universe</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

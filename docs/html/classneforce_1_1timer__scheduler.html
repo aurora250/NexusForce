@@ -1,0 +1,333 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::timer_scheduler&lt; Clock &gt; 模板类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1timer__scheduler.html','','classneforce_1_1timer__scheduler-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::timer_scheduler&lt; Clock &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___async_components.html">异步组件</a> &raquo; <a class="el" href="group___async_timer.html">定时调度器</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>定时任务调度器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="timer_8hpp_source.html">timer.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a1d9a4730d260662044deb61dc9f7e06b" id="r_a1d9a4730d260662044deb61dc9f7e06b"><td class="memItemLeft"><a id="a1d9a4730d260662044deb61dc9f7e06b" name="a1d9a4730d260662044deb61dc9f7e06b"></a>
+using&#160;</td><td class="memItemRight"><b>clock_type</b> = Clock</td></tr>
+<tr class="memdesc:a1d9a4730d260662044deb61dc9f7e06b"><td class="mdescLeft">&#160;</td><td class="mdescRight">时钟类型 <br /></td></tr>
+<tr class="memitem:ad750513d39f30c1903ddb134f2ab37af" id="r_ad750513d39f30c1903ddb134f2ab37af"><td class="memItemLeft"><a id="ad750513d39f30c1903ddb134f2ab37af" name="ad750513d39f30c1903ddb134f2ab37af"></a>
+using&#160;</td><td class="memItemRight"><b>time_point</b> = typename clock_type::time_point</td></tr>
+<tr class="memdesc:ad750513d39f30c1903ddb134f2ab37af"><td class="mdescLeft">&#160;</td><td class="mdescRight">时间点类型 <br /></td></tr>
+<tr class="memitem:a3bb0d53e65a973440b4a5f36fa980b9f" id="r_a3bb0d53e65a973440b4a5f36fa980b9f"><td class="memItemLeft"><a id="a3bb0d53e65a973440b4a5f36fa980b9f" name="a3bb0d53e65a973440b4a5f36fa980b9f"></a>
+using&#160;</td><td class="memItemRight"><b>duration</b> = typename clock_type::duration</td></tr>
+<tr class="memdesc:a3bb0d53e65a973440b4a5f36fa980b9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">时长类型 <br /></td></tr>
+<tr class="memitem:a97335334060b83bc3c6aa015983d14ae" id="r_a97335334060b83bc3c6aa015983d14ae"><td class="memItemLeft"><a id="a97335334060b83bc3c6aa015983d14ae" name="a97335334060b83bc3c6aa015983d14ae"></a>
+using&#160;</td><td class="memItemRight"><b>token</b> = <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a></td></tr>
+<tr class="memdesc:a97335334060b83bc3c6aa015983d14ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">任务标识符类型 <br /></td></tr>
+<tr class="memitem:abc7ce1bdaf883c5c894041fb42e714c6" id="r_abc7ce1bdaf883c5c894041fb42e714c6"><td class="memItemLeft"><a id="abc7ce1bdaf883c5c894041fb42e714c6" name="abc7ce1bdaf883c5c894041fb42e714c6"></a>
+using&#160;</td><td class="memItemRight"><b>handler_type</b> = <a class="el" href="classneforce_1_1function.html">function</a>&lt;void()&gt;</td></tr>
+<tr class="memdesc:abc7ce1bdaf883c5c894041fb42e714c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">回调函数类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a9966ebf479c11c4d4c4e8606fe0d841f" id="r_a9966ebf479c11c4d4c4e8606fe0d841f"><td class="memItemLeft"><a id="a9966ebf479c11c4d4c4e8606fe0d841f" name="a9966ebf479c11c4d4c4e8606fe0d841f"></a>
+&#160;</td><td class="memItemRight"><b>timer_scheduler</b> ()</td></tr>
+<tr class="memdesc:a9966ebf479c11c4d4c4e8606fe0d841f"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数，启动调度线程 <br /></td></tr>
+<tr class="memitem:a61d890b902bef85c1dd7ec121b5f0aa3" id="r_a61d890b902bef85c1dd7ec121b5f0aa3"><td class="memItemLeft"><a id="a61d890b902bef85c1dd7ec121b5f0aa3" name="a61d890b902bef85c1dd7ec121b5f0aa3"></a>
+&#160;</td><td class="memItemRight"><b>~timer_scheduler</b> ()</td></tr>
+<tr class="memdesc:a61d890b902bef85c1dd7ec121b5f0aa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数，停止调度线程并等待其结束 <br /></td></tr>
+<tr class="memitem:a19256877ae85a87ef5d629b31484ff67" id="r_a19256877ae85a87ef5d629b31484ff67"><td class="memItemLeft"><a id="a19256877ae85a87ef5d629b31484ff67" name="a19256877ae85a87ef5d629b31484ff67"></a>
+void&#160;</td><td class="memItemRight"><b>stop</b> ()</td></tr>
+<tr class="memdesc:a19256877ae85a87ef5d629b31484ff67"><td class="mdescLeft">&#160;</td><td class="mdescRight">停止调度线程并等待其结束 <br /></td></tr>
+<tr class="memitem:a3694eeedc09a5de9fadbbdb4249bd9eb" id="r_a3694eeedc09a5de9fadbbdb4249bd9eb"><td class="memItemLeft"><a class="el" href="#a97335334060b83bc3c6aa015983d14ae">token</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3694eeedc09a5de9fadbbdb4249bd9eb">add_task</a> (<a class="el" href="#ad750513d39f30c1903ddb134f2ab37af">time_point</a> expire, <a class="el" href="#abc7ce1bdaf883c5c894041fb42e714c6">handler_type</a> &amp;&amp;handler)</td></tr>
+<tr class="memdesc:a3694eeedc09a5de9fadbbdb4249bd9eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加定时任务  <br /></td></tr>
+<tr class="memitem:ad423b4129b0c27e750bd7148a1f04176" id="r_ad423b4129b0c27e750bd7148a1f04176"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ad423b4129b0c27e750bd7148a1f04176">cancel</a> (<a class="el" href="#a97335334060b83bc3c6aa015983d14ae">token</a> id)</td></tr>
+<tr class="memdesc:ad423b4129b0c27e750bd7148a1f04176"><td class="mdescLeft">&#160;</td><td class="mdescRight">取消定时任务  <br /></td></tr>
+<tr class="memitem:a25c551949474b0ab40af1796c145a34a" id="r_a25c551949474b0ab40af1796c145a34a"><td class="memItemLeft"><a id="a25c551949474b0ab40af1796c145a34a" name="a25c551949474b0ab40af1796c145a34a"></a>
+void&#160;</td><td class="memItemRight"><b>cancel_all</b> ()</td></tr>
+<tr class="memdesc:a25c551949474b0ab40af1796c145a34a"><td class="mdescLeft">&#160;</td><td class="mdescRight">取消所有定时任务 <br /></td></tr>
+<tr class="memitem:a550cb22c81cfd0cfd4f880d75f460530" id="r_a550cb22c81cfd0cfd4f880d75f460530"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a550cb22c81cfd0cfd4f880d75f460530">size</a> () const</td></tr>
+<tr class="memdesc:a550cb22c81cfd0cfd4f880d75f460530"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前待处理的任务数量  <br /></td></tr>
+<tr class="memitem:ab3a42eed857700873a209c044c7db66f" id="r_ab3a42eed857700873a209c044c7db66f"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ab3a42eed857700873a209c044c7db66f">is_pending</a> (<a class="el" href="#a97335334060b83bc3c6aa015983d14ae">token</a> id) const</td></tr>
+<tr class="memdesc:ab3a42eed857700873a209c044c7db66f"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查任务是否仍在等待或执行中  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename Clock&gt;<br />
+class neforce::timer_scheduler&lt; Clock &gt;</div><p>定时任务调度器 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Clock</td><td>时钟类型</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>管理所有定时任务的调度和执行。使用独立的线程运行调度循环， 基于时间点对任务进行排序，并在任务到期时执行回调函数。 </p>
+
+<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00043">43</a> 行定义.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a3694eeedc09a5de9fadbbdb4249bd9eb" name="a3694eeedc09a5de9fadbbdb4249bd9eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3694eeedc09a5de9fadbbdb4249bd9eb">&#9670;&#160;</a></span>add_task()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Clock&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a97335334060b83bc3c6aa015983d14ae">token</a> <a class="el" href="classneforce_1_1timer__scheduler.html">neforce::timer_scheduler</a>&lt; Clock &gt;::add_task </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ad750513d39f30c1903ddb134f2ab37af">time_point</a></td>          <td class="paramname"><span class="paramname"><em>expire</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#abc7ce1bdaf883c5c894041fb42e714c6">handler_type</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>handler</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>添加定时任务 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">expire</td><td>任务到期时间点 </td></tr>
+    <tr><td class="paramname">handler</td><td>任务回调函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>任务标识符，可用于取消任务</dd></dl>
+<p>如果新任务的到期时间早于当前最早的任务，会唤醒调度线程。 </p>
+
+<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00188">188</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shared__ptr_8hpp_source.html#l00849">neforce::make_shared()</a>, <a class="el" href="memory__order_8hpp_source.html#l00177">neforce::memory_order_acquire</a>, <a class="el" href="shift_8hpp_source.html#l00312">neforce::move()</a> , 以及 <a class="el" href="promise_8hpp_source.html#l00127">neforce::promise&lt; Res &gt;::set_value()</a>.</p>
+
+</div>
+</div>
+<a id="ad423b4129b0c27e750bd7148a1f04176" name="ad423b4129b0c27e750bd7148a1f04176"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad423b4129b0c27e750bd7148a1f04176">&#9670;&#160;</a></span>cancel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Clock&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classneforce_1_1timer__scheduler.html">neforce::timer_scheduler</a>&lt; Clock &gt;::cancel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a97335334060b83bc3c6aa015983d14ae">token</a></td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>取消定时任务 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>任务标识符 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否成功取消</dd></dl>
+<p>如果取消的是当前最早的任务，会唤醒调度线程重新计算等待时间。 </p>
+
+<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00223">223</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00179">neforce::memory_order_release</a>.</p>
+
+</div>
+</div>
+<a id="ab3a42eed857700873a209c044c7db66f" name="ab3a42eed857700873a209c044c7db66f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3a42eed857700873a209c044c7db66f">&#9670;&#160;</a></span>is_pending()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Clock&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classneforce_1_1timer__scheduler.html">neforce::timer_scheduler</a>&lt; Clock &gt;::is_pending </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a97335334060b83bc3c6aa015983d14ae">token</a></td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查任务是否仍在等待或执行中 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>任务标识符 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>任务是否未完成 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00290">290</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a550cb22c81cfd0cfd4f880d75f460530" name="a550cb22c81cfd0cfd4f880d75f460530"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a550cb22c81cfd0cfd4f880d75f460530">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Clock&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> <a class="el" href="classneforce_1_1timer__scheduler.html">neforce::timer_scheduler</a>&lt; Clock &gt;::size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取当前待处理的任务数量 </p>
+<dl class="section return"><dt>返回</dt><dd>任务数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00280">280</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="timer_8hpp_source.html">timer.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><a href="classneforce_1_1timer__scheduler.html">timer_scheduler</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1awaitable" kind="class" language="C++" prot="public">
+    <compoundname>neforce::awaitable</compoundname>
+    <includes refid="use__awaitable_8hpp" local="no">use_awaitable.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename...</type>
+        <declname>Args</declname>
+        <defname>Args</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1awaitable_1ab69af5310afda40b278707adc1526513" prot="private" static="no" mutable="no">
+        <type>tuple&lt; Args... &gt;</type>
+        <definition>tuple&lt;Args...&gt; neforce::awaitable&lt; Args &gt;::data_</definition>
+        <argsstring></argsstring>
+        <name>data_</name>
+        <qualifiedname>neforce::awaitable::data_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/use_awaitable.hpp" line="83" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/use_awaitable.hpp" bodystart="83" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1awaitable_1a8289e4ab437a0cdd66c30af633c4529d" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::awaitable&lt; Args &gt;::ready_</definition>
+        <argsstring></argsstring>
+        <name>ready_</name>
+        <qualifiedname>neforce::awaitable::ready_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/use_awaitable.hpp" line="84" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/use_awaitable.hpp" bodystart="84" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1awaitable_1a736a519dda7de841ba7a7cb07f1e65cf" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1exception__ptr" kindref="compound">exception_ptr</ref></type>
+        <definition>exception_ptr neforce::awaitable&lt; Args &gt;::exception_</definition>
+        <argsstring></argsstring>
+        <name>exception_</name>
+        <qualifiedname>neforce::awaitable::exception_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/use_awaitable.hpp" line="85" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/use_awaitable.hpp" bodystart="85" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1awaitable_1afc7ab9838f4dde5eaf42733d17404be6" prot="private" static="no" mutable="no">
+        <type><ref refid="group___coroutine_1gaeab1ef2c1054244fa37d634f805cf95d" kindref="member">coroutine_handle</ref></type>
+        <definition>coroutine_handle neforce::awaitable&lt; Args &gt;::continuation_</definition>
+        <argsstring></argsstring>
+        <name>continuation_</name>
+        <qualifiedname>neforce::awaitable::continuation_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/use_awaitable.hpp" line="86" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/use_awaitable.hpp" bodystart="86" bodyend="86"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1awaitable_1a2d6dded88426dc389a0c86eecf40816a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::awaitable&lt; Args &gt;::awaitable</definition>
+        <argsstring>()=default</argsstring>
+        <name>awaitable</name>
+        <qualifiedname>neforce::awaitable::awaitable</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/use_awaitable.hpp" line="40" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1awaitable_1a30f01958b120acc4f48da5e5f5889094" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::awaitable&lt; Args &gt;::set_value</definition>
+        <argsstring>(Args... args)</argsstring>
+        <name>set_value</name>
+        <qualifiedname>neforce::awaitable::set_value</qualifiedname>
+        <param>
+          <type>Args...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>设置完成值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步操作的结果参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/use_awaitable.hpp" line="46" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/use_awaitable.hpp" bodystart="46" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1awaitable_1ad04e67b1d87727a5c2bca82ba1fe1346" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::awaitable&lt; Args &gt;::set_exception</definition>
+        <argsstring>(exception_ptr e)</argsstring>
+        <name>set_exception</name>
+        <qualifiedname>neforce::awaitable::set_exception</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1exception__ptr" kindref="compound">exception_ptr</ref></type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+<para>设置异常 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/use_awaitable.hpp" line="57" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/use_awaitable.hpp" bodystart="57" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1awaitable_1af6ce4499dccb537578eb7b98059c2ab4" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::awaitable&lt; Args &gt;::await_ready</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>await_ready</name>
+        <qualifiedname>neforce::awaitable::await_ready</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/use_awaitable.hpp" line="65" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/use_awaitable.hpp" bodystart="65" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1awaitable_1a0f26f005168fc4a09cc8d777b25348bc" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::awaitable&lt; Args &gt;::await_suspend</definition>
+        <argsstring>(coroutine_handle&lt;&gt; h) noexcept</argsstring>
+        <name>await_suspend</name>
+        <qualifiedname>neforce::awaitable::await_suspend</qualifiedname>
+        <param>
+          <type><ref refid="group___coroutine_1gaeab1ef2c1054244fa37d634f805cf95d" kindref="member">coroutine_handle</ref>&lt;&gt;</type>
+          <declname>h</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/use_awaitable.hpp" line="67" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/use_awaitable.hpp" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1awaitable_1a55155af0ebed3d36b60a77cce52b07fc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto neforce::awaitable&lt; Args &gt;::await_resume</definition>
+        <argsstring>()</argsstring>
+        <name>await_resume</name>
+        <qualifiedname>neforce::awaitable::await_resume</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/use_awaitable.hpp" line="69" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/use_awaitable.hpp" bodystart="69" bodyend="80"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>可被 co_await 的异步操作结果 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步操作的参数类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+包装了一个 <ref refid="structneforce_1_1async__result" kindref="compound">async_result</ref> 的 handler，使其可以作为协程的 awaiter。 当异步操作完成时，恢复挂起的协程。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/use_awaitable.hpp" line="38" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/use_awaitable.hpp" bodystart="38" bodyend="87"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1awaitable_1af6ce4499dccb537578eb7b98059c2ab4" prot="public" virt="non-virtual"><scope>neforce::awaitable</scope><name>await_ready</name></member>
+      <member refid="classneforce_1_1awaitable_1a55155af0ebed3d36b60a77cce52b07fc" prot="public" virt="non-virtual"><scope>neforce::awaitable</scope><name>await_resume</name></member>
+      <member refid="classneforce_1_1awaitable_1a0f26f005168fc4a09cc8d777b25348bc" prot="public" virt="non-virtual"><scope>neforce::awaitable</scope><name>await_suspend</name></member>
+      <member refid="classneforce_1_1awaitable_1a2d6dded88426dc389a0c86eecf40816a" prot="public" virt="non-virtual"><scope>neforce::awaitable</scope><name>awaitable</name></member>
+      <member refid="classneforce_1_1awaitable_1afc7ab9838f4dde5eaf42733d17404be6" prot="private" virt="non-virtual"><scope>neforce::awaitable</scope><name>continuation_</name></member>
+      <member refid="classneforce_1_1awaitable_1ab69af5310afda40b278707adc1526513" prot="private" virt="non-virtual"><scope>neforce::awaitable</scope><name>data_</name></member>
+      <member refid="classneforce_1_1awaitable_1a736a519dda7de841ba7a7cb07f1e65cf" prot="private" virt="non-virtual"><scope>neforce::awaitable</scope><name>exception_</name></member>
+      <member refid="classneforce_1_1awaitable_1a8289e4ab437a0cdd66c30af633c4529d" prot="private" virt="non-virtual"><scope>neforce::awaitable</scope><name>ready_</name></member>
+      <member refid="classneforce_1_1awaitable_1ad04e67b1d87727a5c2bca82ba1fe1346" prot="public" virt="non-virtual"><scope>neforce::awaitable</scope><name>set_exception</name></member>
+      <member refid="classneforce_1_1awaitable_1a30f01958b120acc4f48da5e5f5889094" prot="public" virt="non-virtual"><scope>neforce::awaitable</scope><name>set_value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

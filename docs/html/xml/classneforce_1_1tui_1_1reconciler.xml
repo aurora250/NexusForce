@@ -1,0 +1,702 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1tui_1_1reconciler" kind="class" language="C++" prot="public">
+    <compoundname>neforce::tui::reconciler</compoundname>
+    <includes refid="reconciler_8hpp" local="no">reconciler.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1reconciler_1a291cedff002822813ce8296ed2f2fcd3" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1sys__console" kindref="compound">sys_console</ref> &amp;</type>
+        <definition>sys_console&amp; neforce::tui::reconciler::console_</definition>
+        <argsstring></argsstring>
+        <name>console_</name>
+        <qualifiedname>neforce::tui::reconciler::console_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="107" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1reconciler_1a36dd809ef4133da02db781f96d855ce8" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1strand" kindref="compound">strand</ref> &amp;</type>
+        <definition>strand&amp; neforce::tui::reconciler::strand_</definition>
+        <argsstring></argsstring>
+        <name>strand_</name>
+        <qualifiedname>neforce::tui::reconciler::strand_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="108" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1reconciler_1a358a9f6e57a5c5ebdff086aef5805b21" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+        <definition>io_context&amp; neforce::tui::reconciler::ctx_</definition>
+        <argsstring></argsstring>
+        <name>ctx_</name>
+        <qualifiedname>neforce::tui::reconciler::ctx_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="109" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1reconciler_1a282c453c667b624362bc9cc67a487d18" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1tui_1_1component__base" kindref="compound">component_base</ref> *</type>
+        <definition>component_base* neforce::tui::reconciler::root_</definition>
+        <argsstring></argsstring>
+        <name>root_</name>
+        <qualifiedname>neforce::tui::reconciler::root_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="110" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1reconciler_1a5ef98c9cbe5d1681c0bf94b47f0a8a33" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int neforce::tui::reconciler::term_w_</definition>
+        <argsstring></argsstring>
+        <name>term_w_</name>
+        <qualifiedname>neforce::tui::reconciler::term_w_</qualifiedname>
+        <initializer>= 80</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="112" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1reconciler_1aee84da7b01776ad8a5c09ca0f5fdd63f" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int neforce::tui::reconciler::term_h_</definition>
+        <argsstring></argsstring>
+        <name>term_h_</name>
+        <qualifiedname>neforce::tui::reconciler::term_h_</qualifiedname>
+        <initializer>= 24</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="113" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1reconciler_1abcb263eef6b7f2a9e379db14e1277b62" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1tui_1_1theme" kindref="compound">theme</ref></type>
+        <definition>theme neforce::tui::reconciler::theme_</definition>
+        <argsstring></argsstring>
+        <name>theme_</name>
+        <qualifiedname>neforce::tui::reconciler::theme_</qualifiedname>
+        <initializer>{<ref refid="group___t_u_i_1ga41217bfd0af3992bd574656d88835808" kindref="member">dark_theme</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="114" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" bodystart="114" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1reconciler_1a4deff5cb5a3afae5f414bde0a9eaf4a8" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1tui_1_1screen" kindref="compound">screen</ref></type>
+        <definition>screen neforce::tui::reconciler::current_screen_</definition>
+        <argsstring></argsstring>
+        <name>current_screen_</name>
+        <qualifiedname>neforce::tui::reconciler::current_screen_</qualifiedname>
+        <initializer>{80, 24}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="116" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" bodystart="116" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1reconciler_1a994922d7dc9feb71fb4c32325da116e0" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1tui_1_1screen" kindref="compound">screen</ref></type>
+        <definition>screen neforce::tui::reconciler::prev_screen_</definition>
+        <argsstring></argsstring>
+        <name>prev_screen_</name>
+        <qualifiedname>neforce::tui::reconciler::prev_screen_</qualifiedname>
+        <initializer>{80, 24}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="117" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" bodystart="117" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1reconciler_1aefbee6a4230fcfaabb91a3d8cb3e2f91" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1tui_1_1focus__manager" kindref="compound">focus_manager</ref></type>
+        <definition>focus_manager neforce::tui::reconciler::focus_mgr_</definition>
+        <argsstring></argsstring>
+        <name>focus_mgr_</name>
+        <qualifiedname>neforce::tui::reconciler::focus_mgr_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="119" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1reconciler_1a00cbb8c77fe546ef28b7030ad334c0b0" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1tui_1_1event__dispatcher" kindref="compound">event_dispatcher</ref></type>
+        <definition>event_dispatcher neforce::tui::reconciler::event_dispatcher_</definition>
+        <argsstring></argsstring>
+        <name>event_dispatcher_</name>
+        <qualifiedname>neforce::tui::reconciler::event_dispatcher_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="120" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1reconciler_1a8663509e5f1cef92160dbf05f9731250" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1tui_1_1renderer" kindref="compound">renderer</ref></type>
+        <definition>renderer neforce::tui::reconciler::renderer_</definition>
+        <argsstring></argsstring>
+        <name>renderer_</name>
+        <qualifiedname>neforce::tui::reconciler::renderer_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="121" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1reconciler_1a4d677bd9e0facb5bf021123d290c218b" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1tui_1_1element" kindref="compound">element</ref></type>
+        <definition>element neforce::tui::reconciler::prev_tree_</definition>
+        <argsstring></argsstring>
+        <name>prev_tree_</name>
+        <qualifiedname>neforce::tui::reconciler::prev_tree_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="123" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1reconciler_1a4eedb996c3eb39621a6b07741c904f8c" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1tui_1_1layout__rect" kindref="compound">layout_rect</ref> &gt;</type>
+        <definition>vector&lt;layout_rect&gt; neforce::tui::reconciler::prev_layout_</definition>
+        <argsstring></argsstring>
+        <name>prev_layout_</name>
+        <qualifiedname>neforce::tui::reconciler::prev_layout_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="124" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1reconciler_1acb917c7183400d65afa48eeff78b3fbd" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::tui::reconciler::dirty_</definition>
+        <argsstring></argsstring>
+        <name>dirty_</name>
+        <qualifiedname>neforce::tui::reconciler::dirty_</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="125" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1reconciler_1aa931ed110e456348ac7a55fc5b27682e" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::tui::reconciler::mounted_</definition>
+        <argsstring></argsstring>
+        <name>mounted_</name>
+        <qualifiedname>neforce::tui::reconciler::mounted_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="126" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1reconciler_1a65bc0d55ec58b4f2b90dbb8a36195c4b" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::tui::reconciler::update_pending_</definition>
+        <argsstring></argsstring>
+        <name>update_pending_</name>
+        <qualifiedname>neforce::tui::reconciler::update_pending_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="127" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1reconciler_1ae0c8c0749d3cba2b39feab5ba8642472" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::tui::reconciler::rendering_</definition>
+        <argsstring></argsstring>
+        <name>rendering_</name>
+        <qualifiedname>neforce::tui::reconciler::rendering_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="128" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" bodystart="128" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1tui_1_1reconciler_1a2dbcb5ff39adea1cf196997bc986fc54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::tui::reconciler::reconciler</definition>
+        <argsstring>(sys_console &amp;console, strand &amp;s, io_context &amp;ctx)</argsstring>
+        <name>reconciler</name>
+        <qualifiedname>neforce::tui::reconciler::reconciler</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sys__console" kindref="compound">sys_console</ref> &amp;</type>
+          <declname>console</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1strand" kindref="compound">strand</ref> &amp;</type>
+          <declname>s</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>console</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>控制台渲染后端 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>串行执行器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>事件循环上下文 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="42" column="5"/>
+        <references refid="group___console_i_o_1ga6e5d10278d37ee985e2fa511123e4b2b">neforce::console</references>
+        <references refid="classneforce_1_1tui_1_1reconciler_1a2dbcb5ff39adea1cf196997bc986fc54">reconciler</references>
+        <referencedby refid="classneforce_1_1tui_1_1reconciler_1a2dbcb5ff39adea1cf196997bc986fc54">reconciler</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1reconciler_1ae838f826a4cd58c6d8be3c319d041bd4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::tui::reconciler::~reconciler</definition>
+        <argsstring>()</argsstring>
+        <name>~reconciler</name>
+        <qualifiedname>neforce::tui::reconciler::~reconciler</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="44" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1reconciler_1ac4e9f1bf72367690090ff00c0424761d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::tui::reconciler::reconciler</definition>
+        <argsstring>(const reconciler &amp;)=delete</argsstring>
+        <name>reconciler</name>
+        <qualifiedname>neforce::tui::reconciler::reconciler</qualifiedname>
+        <param>
+          <type>const reconciler &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="46" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1reconciler_1af9549213b2782f894db53139a443a82e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1tui_1_1reconciler_1a2dbcb5ff39adea1cf196997bc986fc54" kindref="member">reconciler</ref> &amp;</type>
+        <definition>reconciler &amp; neforce::tui::reconciler::operator=</definition>
+        <argsstring>(const reconciler &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::tui::reconciler::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1tui_1_1reconciler_1a2dbcb5ff39adea1cf196997bc986fc54" kindref="member">reconciler</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="47" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1reconciler_1af8a868db86e4a6c5dc2881cd23e31a70" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::tui::reconciler::reconciler</definition>
+        <argsstring>(reconciler &amp;&amp;)=delete</argsstring>
+        <name>reconciler</name>
+        <qualifiedname>neforce::tui::reconciler::reconciler</qualifiedname>
+        <param>
+          <type>reconciler &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="48" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1reconciler_1a19ebc4113e8e66cedfce68628cc51527" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1tui_1_1reconciler_1a2dbcb5ff39adea1cf196997bc986fc54" kindref="member">reconciler</ref> &amp;</type>
+        <definition>reconciler &amp; neforce::tui::reconciler::operator=</definition>
+        <argsstring>(reconciler &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::tui::reconciler::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1tui_1_1reconciler_1a2dbcb5ff39adea1cf196997bc986fc54" kindref="member">reconciler</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="49" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1reconciler_1a9d9af27a1906926e73642b9fdb53186c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::tui::reconciler::mount</definition>
+        <argsstring>(component_base *root)</argsstring>
+        <name>mount</name>
+        <qualifiedname>neforce::tui::reconciler::mount</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1tui_1_1component__base" kindref="compound">component_base</ref> *</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+<para>挂载根组件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>root</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>根组件指针</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+注入 schedule_render 回调，调用 setup()，标记全量渲染。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="57" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1reconciler_1ad996d2d8c1f45c1275290d9bc1208e8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::tui::reconciler::schedule_update</definition>
+        <argsstring>(component_base *comp)</argsstring>
+        <name>schedule_update</name>
+        <qualifiedname>neforce::tui::reconciler::schedule_update</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1tui_1_1component__base" kindref="compound">component_base</ref> *</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>调度组件更新 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>需要重渲染的组件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="63" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1reconciler_1a91e5c1bdd87abf2b6f9bbd02c858dbc7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::tui::reconciler::mark_dirty</definition>
+        <argsstring>()</argsstring>
+        <name>mark_dirty</name>
+        <qualifiedname>neforce::tui::reconciler::mark_dirty</qualifiedname>
+        <briefdescription>
+<para>强制全量重绘 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="68" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1reconciler_1a997e324ab4fa40ed1594a9fda7681791" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::tui::reconciler::dispatch_key</definition>
+        <argsstring>(const key_event &amp;e)</argsstring>
+        <name>dispatch_key</name>
+        <qualifiedname>neforce::tui::reconciler::dispatch_key</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1tui_1_1key__event" kindref="compound">key_event</ref> &amp;</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+<para>分发键盘事件到焦点组件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>e</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键盘事件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true 表示事件已被处理 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="75" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1reconciler_1a14b77cd8ae9c1b1f79e236d3036843c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::tui::reconciler::dispatch_mouse</definition>
+        <argsstring>(const mouse_event &amp;e)</argsstring>
+        <name>dispatch_mouse</name>
+        <qualifiedname>neforce::tui::reconciler::dispatch_mouse</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1tui_1_1mouse__event" kindref="compound">mouse_event</ref> &amp;</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+<para>分发鼠标事件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>e</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>鼠标事件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true 表示事件已被处理 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="82" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1reconciler_1a1b6541a04c83a716841c91f3bf7304d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::tui::reconciler::flush</definition>
+        <argsstring>()</argsstring>
+        <name>flush</name>
+        <qualifiedname>neforce::tui::reconciler::flush</qualifiedname>
+        <briefdescription>
+<para>有脏标记则执行渲染管线 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="87" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1reconciler_1a1915226612587a15571dfb7cd8ee5b81" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::tui::reconciler::is_dirty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_dirty</name>
+        <qualifiedname>neforce::tui::reconciler::is_dirty</qualifiedname>
+        <briefdescription>
+<para>是否有待渲染的脏标记 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否有脏标记 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="93" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" bodystart="93" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1reconciler_1a42adc9b1551a8dafa55075d11b35cc5e" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1tui_1_1component__base" kindref="compound">component_base</ref> *)&gt;</type>
+        <definition>function&lt; void(component_base *)&gt; neforce::tui::reconciler::schedule_render_callback</definition>
+        <argsstring>()</argsstring>
+        <name>schedule_render_callback</name>
+        <qualifiedname>neforce::tui::reconciler::schedule_render_callback</qualifiedname>
+        <briefdescription>
+<para>获取组件调度回调 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="98" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1reconciler_1afe8660fb11f27965d65d62dcf13cae4d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::tui::reconciler::set_theme</definition>
+        <argsstring>(const theme &amp;t)</argsstring>
+        <name>set_theme</name>
+        <qualifiedname>neforce::tui::reconciler::set_theme</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1tui_1_1theme" kindref="compound">theme</ref> &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+<para>应用主题 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主题 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="104" column="10"/>
+        <references refid="group___t_u_i_1ga41217bfd0af3992bd574656d88835808" compoundref="style_8hpp" startline="215" endline="225">neforce::tui::dark_theme</references>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1tui_1_1reconciler_1aae8d406aa1220b2755efa0c440a9c08c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::tui::reconciler::refresh_term_size</definition>
+        <argsstring>()</argsstring>
+        <name>refresh_term_size</name>
+        <qualifiedname>neforce::tui::reconciler::refresh_term_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="130" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1reconciler_1a9c8a9612d519c7462fbff425760ebaf6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::tui::reconciler::setup_tree</definition>
+        <argsstring>(component_base *comp)</argsstring>
+        <name>setup_tree</name>
+        <qualifiedname>neforce::tui::reconciler::setup_tree</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1tui_1_1component__base" kindref="compound">component_base</ref> *</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="131" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>差分渲染引擎 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>编排渲染管线：组件树 → 元素树 → 布局 → 屏幕渲染 → ANSI 输出。 最小化 ANSI 写入操作，仅更新变化区域。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" line="34" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/reconciler.hpp" bodystart="34" bodyend="132"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1tui_1_1reconciler_1a291cedff002822813ce8296ed2f2fcd3" prot="private" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>console_</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1a358a9f6e57a5c5ebdff086aef5805b21" prot="private" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>ctx_</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1a4deff5cb5a3afae5f414bde0a9eaf4a8" prot="private" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>current_screen_</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1acb917c7183400d65afa48eeff78b3fbd" prot="private" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>dirty_</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1a997e324ab4fa40ed1594a9fda7681791" prot="public" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>dispatch_key</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1a14b77cd8ae9c1b1f79e236d3036843c4" prot="public" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>dispatch_mouse</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1a00cbb8c77fe546ef28b7030ad334c0b0" prot="private" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>event_dispatcher_</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1a1b6541a04c83a716841c91f3bf7304d5" prot="public" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>flush</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1aefbee6a4230fcfaabb91a3d8cb3e2f91" prot="private" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>focus_mgr_</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1a1915226612587a15571dfb7cd8ee5b81" prot="public" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>is_dirty</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1a91e5c1bdd87abf2b6f9bbd02c858dbc7" prot="public" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>mark_dirty</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1a9d9af27a1906926e73642b9fdb53186c" prot="public" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>mount</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1aa931ed110e456348ac7a55fc5b27682e" prot="private" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>mounted_</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1af9549213b2782f894db53139a443a82e" prot="public" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1a19ebc4113e8e66cedfce68628cc51527" prot="public" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1a4eedb996c3eb39621a6b07741c904f8c" prot="private" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>prev_layout_</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1a994922d7dc9feb71fb4c32325da116e0" prot="private" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>prev_screen_</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1a4d677bd9e0facb5bf021123d290c218b" prot="private" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>prev_tree_</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1a2dbcb5ff39adea1cf196997bc986fc54" prot="public" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>reconciler</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1ac4e9f1bf72367690090ff00c0424761d" prot="public" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>reconciler</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1af8a868db86e4a6c5dc2881cd23e31a70" prot="public" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>reconciler</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1aae8d406aa1220b2755efa0c440a9c08c" prot="private" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>refresh_term_size</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1a8663509e5f1cef92160dbf05f9731250" prot="private" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>renderer_</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1ae0c8c0749d3cba2b39feab5ba8642472" prot="private" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>rendering_</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1a282c453c667b624362bc9cc67a487d18" prot="private" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>root_</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1a42adc9b1551a8dafa55075d11b35cc5e" prot="public" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>schedule_render_callback</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1ad996d2d8c1f45c1275290d9bc1208e8a" prot="public" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>schedule_update</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1afe8660fb11f27965d65d62dcf13cae4d" prot="public" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>set_theme</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1a9c8a9612d519c7462fbff425760ebaf6" prot="private" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>setup_tree</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1a36dd809ef4133da02db781f96d855ce8" prot="private" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>strand_</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1aee84da7b01776ad8a5c09ca0f5fdd63f" prot="private" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>term_h_</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1a5ef98c9cbe5d1681c0bf94b47f0a8a33" prot="private" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>term_w_</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1abcb263eef6b7f2a9e379db14e1277b62" prot="private" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>theme_</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1a65bc0d55ec58b4f2b90dbb8a36195c4b" prot="private" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>update_pending_</name></member>
+      <member refid="classneforce_1_1tui_1_1reconciler_1ae838f826a4cd58c6d8be3c319d041bd4" prot="public" virt="non-virtual"><scope>neforce::tui::reconciler</scope><name>~reconciler</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

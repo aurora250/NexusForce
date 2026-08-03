@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['🌐_20网络协议与互联网标准_0',['🌐 网络协议与互联网标准',['../md__m_a_i_n_p_a_g_e.html#autotoc_md9',1,'']]],
-  ['🌐_20网络库_20network_1',['🌐 网络库 (Network)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md22',1,'']]]
+  ['静态字符数字操作_0',['静态字符数字操作',['../group___static_char_digit.html',1,'']]],
+  ['静态算术运算_1',['静态算术运算',['../group___static_arithmetic.html',1,'']]]
 ];

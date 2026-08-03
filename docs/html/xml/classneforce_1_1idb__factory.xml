@@ -1,0 +1,318 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1idb__factory" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>neforce::idb_factory</compoundname>
+    <derivedcompoundref refid="classneforce_1_1mysql__factory" prot="public" virt="non-virtual">neforce::mysql_factory</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1pgsql__factory" prot="public" virt="non-virtual">neforce::pgsql_factory</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1redis__factory" prot="public" virt="non-virtual">neforce::redis_factory</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1sqlite__factory" prot="public" virt="non-virtual">neforce::sqlite_factory</derivedcompoundref>
+    <includes refid="db__interface_8hpp" local="no">db_interface.hpp</includes>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classneforce_1_1idb__factory_1a4a4b0a2535301e684720a784c7aa3713" prot="protected" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1db__config" kindref="compound">db_config</ref></type>
+        <definition>db_config neforce::idb_factory::config_</definition>
+        <argsstring></argsstring>
+        <name>config_</name>
+        <qualifiedname>neforce::idb_factory::config_</qualifiedname>
+        <briefdescription>
+<para>数据库配置 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="364" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="364" bodyend="-1"/>
+        <referencedby refid="classneforce_1_1idb__factory_1ac2d0b0dd016c27abaf402cc1ffdd4f5e" compoundref="db__interface_8hpp" startline="371" endline="372">idb_factory</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1idb__factory_1ac2d0b0dd016c27abaf402cc1ffdd4f5e" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::idb_factory::idb_factory</definition>
+        <argsstring>(db_config config) noexcept</argsstring>
+        <name>idb_factory</name>
+        <qualifiedname>neforce::idb_factory::idb_factory</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1db__config" kindref="compound">db_config</ref></type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数据库配置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="371" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="371" bodyend="372"/>
+        <references refid="classneforce_1_1idb__factory_1a4a4b0a2535301e684720a784c7aa3713" compoundref="db__interface_8hpp" startline="364">config_</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <referencedby refid="classneforce_1_1mysql__factory_1abcc63aa1d945a9d93e93eb7bbe89ffa6" compoundref="mysql__connect_8hpp" startline="177" endline="178">neforce::mysql_factory::mysql_factory</referencedby>
+        <referencedby refid="classneforce_1_1pgsql__factory_1abdfc24cc43f6f88ad8d129f86f5d2ba2" compoundref="pgsql__connect_8hpp" startline="176" endline="177">neforce::pgsql_factory::pgsql_factory</referencedby>
+        <referencedby refid="classneforce_1_1redis__factory_1a9e7ff35f79995773317801b445a880e7" compoundref="redis__connect_8hpp" startline="176" endline="177">neforce::redis_factory::redis_factory</referencedby>
+        <referencedby refid="classneforce_1_1sqlite__factory_1aa545cce1f134286d19772fb83d5c5544" compoundref="sqlite__connect_8hpp" startline="243" endline="244">neforce::sqlite_factory::sqlite_factory</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1idb__factory_1a8c46d9007b98c94943901f077735351d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type></type>
+        <definition>virtual neforce::idb_factory::~idb_factory</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>~idb_factory</name>
+        <qualifiedname>neforce::idb_factory::~idb_factory</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="374" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1idb__factory_1a28550f3aad06f54b4b226f9ea60d746f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::idb_factory::idb_factory</definition>
+        <argsstring>(const idb_factory &amp;)=delete</argsstring>
+        <name>idb_factory</name>
+        <qualifiedname>neforce::idb_factory::idb_factory</qualifiedname>
+        <param>
+          <type>const idb_factory &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="376" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1idb__factory_1af301eed52d8bf0769639a6dc32ca2122" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1idb__factory_1ac2d0b0dd016c27abaf402cc1ffdd4f5e" kindref="member">idb_factory</ref> &amp;</type>
+        <definition>idb_factory &amp; neforce::idb_factory::operator=</definition>
+        <argsstring>(const idb_factory &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::idb_factory::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1idb__factory_1ac2d0b0dd016c27abaf402cc1ffdd4f5e" kindref="member">idb_factory</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="377" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1idb__factory_1a4e441f1fc1be97b2a7f43dd6b2776ed7" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::idb_factory::idb_factory</definition>
+        <argsstring>(idb_factory &amp;&amp;) noexcept=default</argsstring>
+        <name>idb_factory</name>
+        <qualifiedname>neforce::idb_factory::idb_factory</qualifiedname>
+        <param>
+          <type>idb_factory &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="379" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1idb__factory_1a016176544ab84947d00292423be101dc" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1idb__factory_1ac2d0b0dd016c27abaf402cc1ffdd4f5e" kindref="member">idb_factory</ref> &amp;</type>
+        <definition>idb_factory &amp; neforce::idb_factory::operator=</definition>
+        <argsstring>(idb_factory &amp;&amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::idb_factory::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1idb__factory_1ac2d0b0dd016c27abaf402cc1ffdd4f5e" kindref="member">idb_factory</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="380" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1idb__factory_1a3e731cc51c812ff48912b5952cdaa397" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="structneforce_1_1idb__connect" kindref="compound">idb_connect</ref> *</type>
+        <definition>virtual idb_connect * neforce::idb_factory::create_connect</definition>
+        <argsstring>()=0</argsstring>
+        <name>create_connect</name>
+        <qualifiedname>neforce::idb_factory::create_connect</qualifiedname>
+        <reimplementedby refid="classneforce_1_1mysql__factory_1a0811748305347de2865420176b1f74fa">create_connect</reimplementedby>
+        <reimplementedby refid="classneforce_1_1pgsql__factory_1a491d2aeb367d9bf6d00dbdbc8a08955d">create_connect</reimplementedby>
+        <reimplementedby refid="classneforce_1_1redis__factory_1adb78adfe619a9c66312a5d1033794e89">create_connect</reimplementedby>
+        <reimplementedby refid="classneforce_1_1sqlite__factory_1aa87f4315b156e1f31440095a9a26aa98">create_connect</reimplementedby>
+        <briefdescription>
+<para>创建数据库连接对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>连接对象指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="386" column="25"/>
+        <references refid="classneforce_1_1idb__factory_1a3e731cc51c812ff48912b5952cdaa397">create_connect</references>
+        <referencedby refid="classneforce_1_1idb__factory_1a3e731cc51c812ff48912b5952cdaa397">create_connect</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1idb__factory_1adf967dc27dd2074fa1f596118d03e8e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="structneforce_1_1idb__result" kindref="compound">idb_result</ref> *</type>
+        <definition>virtual idb_result * neforce::idb_factory::create_result</definition>
+        <argsstring>(void *native_result)=0</argsstring>
+        <name>create_result</name>
+        <qualifiedname>neforce::idb_factory::create_result</qualifiedname>
+        <reimplementedby refid="classneforce_1_1mysql__factory_1ab7fcaad69ce07ee020fd44d7545ada31">create_result</reimplementedby>
+        <reimplementedby refid="classneforce_1_1pgsql__factory_1a3918ccf74395e7922f3cf2ac526e6df8">create_result</reimplementedby>
+        <reimplementedby refid="classneforce_1_1redis__factory_1aaa682b987bc007b2f6727e6cd5c72c76">create_result</reimplementedby>
+        <reimplementedby refid="classneforce_1_1sqlite__factory_1a79f5ff45c2040e27d4713a6c3f099d26">create_result</reimplementedby>
+        <param>
+          <type>void *</type>
+          <declname>native_result</declname>
+        </param>
+        <briefdescription>
+<para>创建结果集对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>native_result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原生数据库结果集句柄 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>结果集对象指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="393" column="24"/>
+        <references refid="classneforce_1_1idb__factory_1adf967dc27dd2074fa1f596118d03e8e2">create_result</references>
+        <referencedby refid="classneforce_1_1idb__factory_1adf967dc27dd2074fa1f596118d03e8e2">create_result</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>数据库连接工厂抽象基类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>使用工厂模式创建具体的数据库连接和结果集对象。 每种数据库实现需要提供对应的工厂子类。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::idb_factory</label>
+        <link refid="classneforce_1_1idb__factory"/>
+      </node>
+      <node id="2">
+        <label>neforce::mysql_factory</label>
+        <link refid="classneforce_1_1mysql__factory"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::pgsql_factory</label>
+        <link refid="classneforce_1_1pgsql__factory"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::redis_factory</label>
+        <link refid="classneforce_1_1redis__factory"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::sqlite_factory</label>
+        <link refid="classneforce_1_1sqlite__factory"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>neforce::basic_string&lt; char &gt;</label>
+        <link refid="classneforce_1_1basic__string"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::db_config</label>
+        <link refid="structneforce_1_1db__config"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>charset</edgelabel>
+          <edgelabel>database</edgelabel>
+          <edgelabel>host</edgelabel>
+          <edgelabel>password</edgelabel>
+          <edgelabel>username</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>port</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::icommon&lt; T &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="1">
+        <label>neforce::idb_factory</label>
+        <link refid="classneforce_1_1idb__factory"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>config_</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>neforce::ihashable&lt; T &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="8">
+        <label>neforce::iobject&lt; ports &gt;</label>
+        <link refid="structneforce_1_1iobject"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>neforce::istringify&lt; ports &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+      <node id="7">
+        <label>neforce::ports</label>
+        <link refid="structneforce_1_1ports"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="362" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="362" bodyend="394"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1idb__factory_1a4a4b0a2535301e684720a784c7aa3713" prot="protected" virt="non-virtual"><scope>neforce::idb_factory</scope><name>config_</name></member>
+      <member refid="classneforce_1_1idb__factory_1a3e731cc51c812ff48912b5952cdaa397" prot="public" virt="pure-virtual"><scope>neforce::idb_factory</scope><name>create_connect</name></member>
+      <member refid="classneforce_1_1idb__factory_1adf967dc27dd2074fa1f596118d03e8e2" prot="public" virt="pure-virtual"><scope>neforce::idb_factory</scope><name>create_result</name></member>
+      <member refid="classneforce_1_1idb__factory_1ac2d0b0dd016c27abaf402cc1ffdd4f5e" prot="public" virt="non-virtual"><scope>neforce::idb_factory</scope><name>idb_factory</name></member>
+      <member refid="classneforce_1_1idb__factory_1a28550f3aad06f54b4b226f9ea60d746f" prot="public" virt="non-virtual"><scope>neforce::idb_factory</scope><name>idb_factory</name></member>
+      <member refid="classneforce_1_1idb__factory_1a4e441f1fc1be97b2a7f43dd6b2776ed7" prot="public" virt="non-virtual"><scope>neforce::idb_factory</scope><name>idb_factory</name></member>
+      <member refid="classneforce_1_1idb__factory_1af301eed52d8bf0769639a6dc32ca2122" prot="public" virt="non-virtual"><scope>neforce::idb_factory</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1idb__factory_1a016176544ab84947d00292423be101dc" prot="public" virt="non-virtual"><scope>neforce::idb_factory</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1idb__factory_1a8c46d9007b98c94943901f077735351d" prot="public" virt="virtual"><scope>neforce::idb_factory</scope><name>~idb_factory</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,1372 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1http_1_1http2__connection" kind="class" language="C++" prot="public">
+    <compoundname>neforce::http::http2_connection</compoundname>
+    <basecompoundref refid="structneforce_1_1enable__shared__from__this" prot="public" virt="non-virtual">neforce::enable_shared_from_this&lt; http2_connection &gt;</basecompoundref>
+    <includes refid="http2__connection_8hpp" local="no">http2_connection.hpp</includes>
+    <innerclass refid="structneforce_1_1http_1_1http2__connection_1_1pending__stream" prot="private">neforce::http::http2_connection::pending_stream</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1http_1_1http2__connection_1a657c758703281fb984232dff1a48cc5d" prot="public" static="no">
+        <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref> stream_id, const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1http_1_1hpack__header__field" kindref="compound">hpack_header_field</ref> &gt; &amp;headers, const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *<ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>, <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref> data_len, bool end_stream)&gt;</type>
+        <definition>using neforce::http::http2_connection::stream_handler = function&lt;void(uint32_t stream_id, const vector&lt;hpack_header_field&gt;&amp; headers,
+                                        const byte_t* data, size_t data_len, bool end_stream)&gt;</definition>
+        <argsstring></argsstring>
+        <name>stream_handler</name>
+        <qualifiedname>neforce::http::http2_connection::stream_handler</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="48" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1http_1_1http2__connection_1add93375c71c23735ab9a7498d5260933" prot="public" static="no">
+        <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref> <ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref>)&gt;</type>
+        <definition>using neforce::http::http2_connection::close_handler = function&lt;void(uint32_t error_code)&gt;</definition>
+        <argsstring></argsstring>
+        <name>close_handler</name>
+        <qualifiedname>neforce::http::http2_connection::close_handler</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="50" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__connection_1abb10fea5499fe56b13c87545f67e338f" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1tcp__socket" kindref="compound">tcp_socket</ref> &gt;</type>
+        <definition>unique_ptr&lt;tcp_socket&gt; neforce::http::http2_connection::socket_</definition>
+        <argsstring></argsstring>
+        <name>socket_</name>
+        <qualifiedname>neforce::http::http2_connection::socket_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="53" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__connection_1ae1e33af10e24bcf1c912502422511c62" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> *</type>
+        <definition>io_context* neforce::http::http2_connection::ctx_</definition>
+        <argsstring></argsstring>
+        <name>ctx_</name>
+        <qualifiedname>neforce::http::http2_connection::ctx_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="54" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__connection_1a8dbb3d29220c74bd9abe1c9fde84f465" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1http_1_1http2__framer" kindref="compound">http2_framer</ref></type>
+        <definition>http2_framer neforce::http::http2_connection::framer_</definition>
+        <argsstring></argsstring>
+        <name>framer_</name>
+        <qualifiedname>neforce::http::http2_connection::framer_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="56" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__connection_1a1039d6c3cda69dba734dbd1ede08bb49" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1http_1_1http2__settings" kindref="compound">http2_settings</ref></type>
+        <definition>http2_settings neforce::http::http2_connection::local_settings_</definition>
+        <argsstring></argsstring>
+        <name>local_settings_</name>
+        <qualifiedname>neforce::http::http2_connection::local_settings_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="57" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__connection_1adf5f119636186aea0df5dd32e8853357" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1http_1_1http2__settings" kindref="compound">http2_settings</ref></type>
+        <definition>http2_settings neforce::http::http2_connection::remote_settings_</definition>
+        <argsstring></argsstring>
+        <name>remote_settings_</name>
+        <qualifiedname>neforce::http::http2_connection::remote_settings_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="58" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__connection_1ac42b95986377a43868aacecaf3a4a34b" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1http_1_1hpack__encoder" kindref="compound">hpack_encoder</ref></type>
+        <definition>hpack_encoder neforce::http::http2_connection::encoder_</definition>
+        <argsstring></argsstring>
+        <name>encoder_</name>
+        <qualifiedname>neforce::http::http2_connection::encoder_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="59" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__connection_1af92559d5337d8efd50106eb4cec6152b" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1http_1_1hpack__decoder" kindref="compound">hpack_decoder</ref></type>
+        <definition>hpack_decoder neforce::http::http2_connection::decoder_</definition>
+        <argsstring></argsstring>
+        <name>decoder_</name>
+        <qualifiedname>neforce::http::http2_connection::decoder_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="60" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__connection_1a5236a673d67bb0beb0cd0428defc6da1" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1http_1_1http2__flow__control" kindref="compound">http2_flow_control</ref></type>
+        <definition>http2_flow_control neforce::http::http2_connection::flow_control_</definition>
+        <argsstring></argsstring>
+        <name>flow_control_</name>
+        <qualifiedname>neforce::http::http2_connection::flow_control_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="61" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__connection_1a6d12768c6cc2c6b58c9ed9212095b8f5" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref>, <ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1http_1_1http2__stream" kindref="compound">http2_stream</ref> &gt; &gt;</type>
+        <definition>unordered_map&lt;uint32_t, unique_ptr&lt;http2_stream&gt; &gt; neforce::http::http2_connection::streams_</definition>
+        <argsstring></argsstring>
+        <name>streams_</name>
+        <qualifiedname>neforce::http::http2_connection::streams_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="63" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__connection_1ac96086a15c4563da97caf3036de8f619" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::http::http2_connection::last_stream_id_</definition>
+        <argsstring></argsstring>
+        <name>last_stream_id_</name>
+        <qualifiedname>neforce::http::http2_connection::last_stream_id_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="64" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__connection_1a8298dcc690c4419125256e050942bf93" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; neforce::http::http2_connection::closed_</definition>
+        <argsstring></argsstring>
+        <name>closed_</name>
+        <qualifiedname>neforce::http::http2_connection::closed_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="65" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="65" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__connection_1a868ed757b9f23f93833f040df8d44405" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::http::http2_connection::preface_received_</definition>
+        <argsstring></argsstring>
+        <name>preface_received_</name>
+        <qualifiedname>neforce::http::http2_connection::preface_received_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="66" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__connection_1ab7cd3aaef9c194b5e14314a74006b745" prot="private" static="no" mutable="no">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>byte_vector neforce::http::http2_connection::read_buffer_</definition>
+        <argsstring></argsstring>
+        <name>read_buffer_</name>
+        <qualifiedname>neforce::http::http2_connection::read_buffer_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="68" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__connection_1a11a492e6cbbe4960747c28785a8bdad6" prot="private" static="no" mutable="no">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>byte_vector neforce::http::http2_connection::write_buffer_</definition>
+        <argsstring></argsstring>
+        <name>write_buffer_</name>
+        <qualifiedname>neforce::http::http2_connection::write_buffer_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="69" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__connection_1a2b428f22b230dfb00426610c88bae9b3" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1mutex" kindref="compound">mutex</ref></type>
+        <definition>mutex neforce::http::http2_connection::write_mutex_</definition>
+        <argsstring></argsstring>
+        <name>write_mutex_</name>
+        <qualifiedname>neforce::http::http2_connection::write_mutex_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="70" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__connection_1a7ce58eec26d009ea10ddda29fcdf75a4" prot="private" static="no" mutable="yes">
+        <type><ref refid="classneforce_1_1recursive__mutex" kindref="compound">recursive_mutex</ref></type>
+        <definition>recursive_mutex neforce::http::http2_connection::stream_mutex_</definition>
+        <argsstring></argsstring>
+        <name>stream_mutex_</name>
+        <qualifiedname>neforce::http::http2_connection::stream_mutex_</qualifiedname>
+        <briefdescription>
+<para>保护 streams_/pending_/stream_priorities_ 等流状态 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="71" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__connection_1ad3857655d54ec3eea6f3b8455c92a71f" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::http::http2_connection::connection_consumed_</definition>
+        <argsstring></argsstring>
+        <name>connection_consumed_</name>
+        <qualifiedname>neforce::http::http2_connection::connection_consumed_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>连接级已消费窗口（用于 WINDOW_UPDATE 批量发送） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="73" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__connection_1a933af2c2fd975271ea1183b9e753d398" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref>, <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref> &gt;</type>
+        <definition>unordered_map&lt;uint32_t, uint32_t&gt; neforce::http::http2_connection::stream_consumed_</definition>
+        <argsstring></argsstring>
+        <name>stream_consumed_</name>
+        <qualifiedname>neforce::http::http2_connection::stream_consumed_</qualifiedname>
+        <briefdescription>
+<para>每流已消费窗口 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="74" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__connection_1a431673873ab4ffa43605bba914cb2ed2" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref>, <ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref> &gt;</type>
+        <definition>unordered_map&lt;uint32_t, uint8_t&gt; neforce::http::http2_connection::stream_priorities_</definition>
+        <argsstring></argsstring>
+        <name>stream_priorities_</name>
+        <qualifiedname>neforce::http::http2_connection::stream_priorities_</qualifiedname>
+        <briefdescription>
+<para>每流优先级权重 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="75" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__connection_1a6ecaf45a008544469b23929dc4eca8a3" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::http::http2_connection::local_stream_window_</definition>
+        <argsstring></argsstring>
+        <name>local_stream_window_</name>
+        <qualifiedname>neforce::http::http2_connection::local_stream_window_</qualifiedname>
+        <initializer>= 65535</initializer>
+        <briefdescription>
+<para>本地流初始窗口 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="76" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__connection_1a87411c22d096a994299fbcbbdec7e189" prot="private" static="no" mutable="no">
+        <type>stream_handler</type>
+        <definition>stream_handler neforce::http::http2_connection::stream_handler_</definition>
+        <argsstring></argsstring>
+        <name>stream_handler_</name>
+        <qualifiedname>neforce::http::http2_connection::stream_handler_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="78" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__connection_1a53fe033ef4e1ac804516cf84861056c4" prot="private" static="no" mutable="no">
+        <type>close_handler</type>
+        <definition>close_handler neforce::http::http2_connection::close_handler_</definition>
+        <argsstring></argsstring>
+        <name>close_handler_</name>
+        <qualifiedname>neforce::http::http2_connection::close_handler_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="79" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__connection_1ad948b526e26d1841389827b2ac9023dd" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1http_1_1http__router" kindref="compound">http_router</ref> *</type>
+        <definition>http_router* neforce::http::http2_connection::router_</definition>
+        <argsstring></argsstring>
+        <name>router_</name>
+        <qualifiedname>neforce::http::http2_connection::router_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="80" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__connection_1a00f25d980b2c7856b1617f4074d617ef" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref>, pending_stream &gt;</type>
+        <definition>unordered_map&lt;uint32_t, pending_stream&gt; neforce::http::http2_connection::pending_</definition>
+        <argsstring></argsstring>
+        <name>pending_</name>
+        <qualifiedname>neforce::http::http2_connection::pending_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="90" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1a7382946d7bfbcd76cf31df1cce29aa22" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::route_stream</definition>
+        <argsstring>(uint32_t stream_id, const vector&lt; hpack_header_field &gt; &amp;headers, const byte_t *data, size_t data_len, bool end_stream)</argsstring>
+        <name>route_stream</name>
+        <qualifiedname>neforce::http::http2_connection::route_stream</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>stream_id</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1http_1_1hpack__header__field" kindref="compound">hpack_header_field</ref> &gt; &amp;</type>
+          <declname>headers</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>data_len</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>end_stream</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="92" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1ab40c5257651ca12adcec544691d7e47d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::on_readable</definition>
+        <argsstring>(int fd, uint32_t events, error_code ec)</argsstring>
+        <name>on_readable</name>
+        <qualifiedname>neforce::http::http2_connection::on_readable</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>fd</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>events</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref></type>
+          <declname>ec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="95" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1ac857d6b982f37ba4fd552846ca2fad55" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::on_writable</definition>
+        <argsstring>(int fd, uint32_t events, error_code ec)</argsstring>
+        <name>on_writable</name>
+        <qualifiedname>neforce::http::http2_connection::on_writable</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>fd</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>events</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref></type>
+          <declname>ec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="96" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1a5364c282f67336ad8a9160f2a60a27e3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::handle_frame</definition>
+        <argsstring>(http2_frame_type type, uint8_t flags, uint32_t stream_id, const byte_t *payload, size_t len)</argsstring>
+        <name>handle_frame</name>
+        <qualifiedname>neforce::http::http2_connection::handle_frame</qualifiedname>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gac11d9ecd1a39eb6d5a1988be691ec0d6" kindref="member">http2_frame_type</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref></type>
+          <declname>flags</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>stream_id</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>payload</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="98" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1a133709e360bb94c1c11d88b66de0e5f9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::handle_data_frame</definition>
+        <argsstring>(uint8_t flags, uint32_t stream_id, const byte_t *payload, size_t len)</argsstring>
+        <name>handle_data_frame</name>
+        <qualifiedname>neforce::http::http2_connection::handle_data_frame</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref></type>
+          <declname>flags</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>stream_id</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>payload</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="100" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1aef1028b41e1c81144d82ada50858ebf9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::handle_headers_frame</definition>
+        <argsstring>(uint8_t flags, uint32_t stream_id, const byte_t *payload, size_t len)</argsstring>
+        <name>handle_headers_frame</name>
+        <qualifiedname>neforce::http::http2_connection::handle_headers_frame</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref></type>
+          <declname>flags</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>stream_id</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>payload</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="101" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1ae10f8d3c7875afbe61ea654f9eb8b4b2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::handle_continuation_frame</definition>
+        <argsstring>(uint8_t flags, uint32_t stream_id, const byte_t *payload, size_t len)</argsstring>
+        <name>handle_continuation_frame</name>
+        <qualifiedname>neforce::http::http2_connection::handle_continuation_frame</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref></type>
+          <declname>flags</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>stream_id</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>payload</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="102" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1ab23b5ff5493891f574f1ddbaf6995dfc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::handle_priority_frame</definition>
+        <argsstring>(uint32_t stream_id, const byte_t *payload, size_t len)</argsstring>
+        <name>handle_priority_frame</name>
+        <qualifiedname>neforce::http::http2_connection::handle_priority_frame</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>stream_id</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>payload</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="103" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1a243fee10c3e1251d98a0aa0fa2fd505c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::handle_push_promise_frame</definition>
+        <argsstring>(uint32_t stream_id, const byte_t *payload, size_t len)</argsstring>
+        <name>handle_push_promise_frame</name>
+        <qualifiedname>neforce::http::http2_connection::handle_push_promise_frame</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>stream_id</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>payload</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="104" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1a4daa8c5b54bbf69d8bd16ebbfe4117c8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::handle_settings_frame</definition>
+        <argsstring>(uint8_t flags, const byte_t *payload, size_t len)</argsstring>
+        <name>handle_settings_frame</name>
+        <qualifiedname>neforce::http::http2_connection::handle_settings_frame</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref></type>
+          <declname>flags</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>payload</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="105" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1ab2e5eee7da4bdd5ac3267dc85658a051" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::handle_ping_frame</definition>
+        <argsstring>(uint8_t flags, const byte_t *payload, size_t len)</argsstring>
+        <name>handle_ping_frame</name>
+        <qualifiedname>neforce::http::http2_connection::handle_ping_frame</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref></type>
+          <declname>flags</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>payload</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="106" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1a11e7f943170815dd35025490fc57abfd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::handle_goaway_frame</definition>
+        <argsstring>(const byte_t *payload, size_t len)</argsstring>
+        <name>handle_goaway_frame</name>
+        <qualifiedname>neforce::http::http2_connection::handle_goaway_frame</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>payload</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="107" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1a0b0599eb9a403202e0c0c1a22b672d21" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::handle_rst_stream_frame</definition>
+        <argsstring>(uint32_t stream_id, const byte_t *payload)</argsstring>
+        <name>handle_rst_stream_frame</name>
+        <qualifiedname>neforce::http::http2_connection::handle_rst_stream_frame</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>stream_id</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>payload</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="108" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1a3d0bcac9b69b0547a949a41d6dc90973" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::handle_window_update_frame</definition>
+        <argsstring>(uint32_t stream_id, const byte_t *payload)</argsstring>
+        <name>handle_window_update_frame</name>
+        <qualifiedname>neforce::http::http2_connection::handle_window_update_frame</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>stream_id</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>payload</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="109" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1ad4fd1e653182888abcc7253fd3c30388" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::send_window_update</definition>
+        <argsstring>(uint32_t stream_id, uint32_t increment)</argsstring>
+        <name>send_window_update</name>
+        <qualifiedname>neforce::http::http2_connection::send_window_update</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>stream_id</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>increment</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="110" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1a5c49bef0ce81fc314e89179a0cae3a10" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::write_frame</definition>
+        <argsstring>(const byte_vector &amp;frame)</argsstring>
+        <name>write_frame</name>
+        <qualifiedname>neforce::http::http2_connection::write_frame</qualifiedname>
+        <param>
+          <type>const <ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="112" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1ab62971e6f34a81f5f4ec280dedc785e9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::flush_writes</definition>
+        <argsstring>()</argsstring>
+        <name>flush_writes</name>
+        <qualifiedname>neforce::http::http2_connection::flush_writes</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="113" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1ab6b6114fbaca9a4dc22ca2d9e40b435a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::close_connection</definition>
+        <argsstring>(http2_error error=http2_error::NO_ERROR)</argsstring>
+        <name>close_connection</name>
+        <qualifiedname>neforce::http::http2_connection::close_connection</qualifiedname>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gada225e3a5ddc9a71fc7af99daeaebfcf" kindref="member">http2_error</ref></type>
+          <declname>error</declname>
+          <defval><ref refid="group___h_t_t_p_1ggada225e3a5ddc9a71fc7af99daeaebfcfad306b6fdee05fe87455110ddf6501e6c" kindref="member">http2_error::NO_ERROR</ref></defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="114" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1a838bb4dcaadce3358315d661590487f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::http2_connection::http2_connection</definition>
+        <argsstring>(unique_ptr&lt; tcp_socket &gt; socket, io_context &amp;ctx)</argsstring>
+        <name>http2_connection</name>
+        <qualifiedname>neforce::http::http2_connection::http2_connection</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1tcp__socket" kindref="compound">tcp_socket</ref> &gt;</type>
+          <declname>socket</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="117" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1ab901961e986ed252cc05b91ae02b3eff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::http2_connection::~http2_connection</definition>
+        <argsstring>()</argsstring>
+        <name>~http2_connection</name>
+        <qualifiedname>neforce::http::http2_connection::~http2_connection</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="118" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1af5dcfbf03006b16e793e5161e4352996" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::http2_connection::http2_connection</definition>
+        <argsstring>(const http2_connection &amp;)=delete</argsstring>
+        <name>http2_connection</name>
+        <qualifiedname>neforce::http::http2_connection::http2_connection</qualifiedname>
+        <param>
+          <type>const http2_connection &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="120" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1a164ec86b124eed9420db62f483ae421c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>http2_connection &amp;</type>
+        <definition>http2_connection &amp; neforce::http::http2_connection::operator=</definition>
+        <argsstring>(const http2_connection &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::http::http2_connection::operator=</qualifiedname>
+        <param>
+          <type>const http2_connection &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="121" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1a84244c644f9ab2a6e0babda9a3d84020" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::start</definition>
+        <argsstring>()</argsstring>
+        <name>start</name>
+        <qualifiedname>neforce::http::http2_connection::start</qualifiedname>
+        <briefdescription>
+<para>启动连接处理 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>发送初始 SETTINGS 帧并开始读取客户端帧。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="128" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1a868d171bbc541cd02827486f9de98d1b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::send_response</definition>
+        <argsstring>(uint32_t stream_id, const vector&lt; hpack_header_field &gt; &amp;headers, const string &amp;body={}, bool end_stream=true)</argsstring>
+        <name>send_response</name>
+        <qualifiedname>neforce::http::http2_connection::send_response</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>stream_id</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1http_1_1hpack__header__field" kindref="compound">hpack_header_field</ref> &gt; &amp;</type>
+          <declname>headers</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>body</declname>
+          <defval>{}</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>end_stream</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>发送 HTTP 响应（HEADERS + DATA） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stream_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>流ID </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>headers</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>响应头部 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>body</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>响应体（可选） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>end_stream</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否结束流 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="137" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1acd015e0aba6f73b7fe4e40e0571671d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::send_push_promise</definition>
+        <argsstring>(uint32_t stream_id, uint32_t promised_stream_id, const vector&lt; hpack_header_field &gt; &amp;request_headers)</argsstring>
+        <name>send_push_promise</name>
+        <qualifiedname>neforce::http::http2_connection::send_push_promise</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>stream_id</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>promised_stream_id</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1http_1_1hpack__header__field" kindref="compound">hpack_header_field</ref> &gt; &amp;</type>
+          <declname>request_headers</declname>
+        </param>
+        <briefdescription>
+<para>发送 PUSH_PROMISE（Server Push） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stream_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>父流ID </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>promised_stream_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新承诺的流ID（必须为偶数，服务器发起） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>request_headers</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>承诺的请求头部</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+向客户端承诺将推送指定资源，客户端可以选择接受或通过 RST_STREAM 拒绝。 必须在发送任何可能触发新资源请求的响应数据之前调用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="149" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1a7ff78916849ac62eafa94cb245eae3e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::send_rst_stream</definition>
+        <argsstring>(uint32_t stream_id, http2_error error)</argsstring>
+        <name>send_rst_stream</name>
+        <qualifiedname>neforce::http::http2_connection::send_rst_stream</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>stream_id</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gada225e3a5ddc9a71fc7af99daeaebfcf" kindref="member">http2_error</ref></type>
+          <declname>error</declname>
+        </param>
+        <briefdescription>
+<para>发送 RST_STREAM </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="155" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1af8112c0749870e0fd099a9e974ffeb5d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::send_goaway</definition>
+        <argsstring>(http2_error error=http2_error::NO_ERROR)</argsstring>
+        <name>send_goaway</name>
+        <qualifiedname>neforce::http::http2_connection::send_goaway</qualifiedname>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gada225e3a5ddc9a71fc7af99daeaebfcf" kindref="member">http2_error</ref></type>
+          <declname>error</declname>
+          <defval><ref refid="group___h_t_t_p_1ggada225e3a5ddc9a71fc7af99daeaebfcfad306b6fdee05fe87455110ddf6501e6c" kindref="member">http2_error::NO_ERROR</ref></defval>
+        </param>
+        <briefdescription>
+<para>发送 GOAWAY 并关闭连接 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="160" column="10"/>
+        <references refid="group___h_t_t_p_1ggada225e3a5ddc9a71fc7af99daeaebfcfad306b6fdee05fe87455110ddf6501e6c" compoundref="http2__protocol_8hpp" startline="64">NO_ERROR</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1ab1c49205e3834d561d6732fb4a7af54c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::handle_upgrade_request</definition>
+        <argsstring>(uint32_t stream_id, const vector&lt; hpack_header_field &gt; &amp;headers, const byte_t *data, size_t data_len, bool end_stream)</argsstring>
+        <name>handle_upgrade_request</name>
+        <qualifiedname>neforce::http::http2_connection::handle_upgrade_request</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>stream_id</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1http_1_1hpack__header__field" kindref="compound">hpack_header_field</ref> &gt; &amp;</type>
+          <declname>headers</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>data_len</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>end_stream</declname>
+        </param>
+        <briefdescription>
+<para>h2c 升级请求注入（RFC 7540 §3.2） </para>
+        </briefdescription>
+        <detaileddescription>
+<para>将 HTTP/1.1 Upgrade 前的原始请求作为 HTTP/2 stream 1 注入路由器。 必须在 <ref refid="classneforce_1_1http_1_1http2__connection_1a84244c644f9ab2a6e0babda9a3d84020" kindref="member">start()</ref> 之后、事件循环启动前调用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="168" column="10"/>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1a885ce0248d25d4d3ce2dfb696f9a2ac0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::set_stream_handler</definition>
+        <argsstring>(stream_handler handler)</argsstring>
+        <name>set_stream_handler</name>
+        <qualifiedname>neforce::http::http2_connection::set_stream_handler</qualifiedname>
+        <param>
+          <type>stream_handler</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>设置流处理器（收到完整请求时回调） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="174" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="174" bodyend="174"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1a5fadb57d550cabe9c572cb685cb8401d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::set_router</definition>
+        <argsstring>(http_router *router)</argsstring>
+        <name>set_router</name>
+        <qualifiedname>neforce::http::http2_connection::set_router</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1http_1_1http__router" kindref="compound">http_router</ref> *</type>
+          <declname>router</declname>
+        </param>
+        <briefdescription>
+<para>设置路由器（启用自动请求分发） </para>
+        </briefdescription>
+        <detaileddescription>
+<para>设置后，收到 HTTP/2 请求时将自动转换为 http_request， 通过路由器分发，并将响应转回 HTTP/2 帧发送。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="182" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="182" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1ad81b3bf66732c2c3ca24b120dab02163" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::set_close_handler</definition>
+        <argsstring>(close_handler handler)</argsstring>
+        <name>set_close_handler</name>
+        <qualifiedname>neforce::http::http2_connection::set_close_handler</qualifiedname>
+        <param>
+          <type>close_handler</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>设置关闭回调 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="187" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="187" bodyend="187"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1a3a49cb9e5a28f62c850ab608a53d3631" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1http_1_1http2__settings" kindref="compound">http2_settings</ref> &amp;</type>
+        <definition>http2_settings &amp; neforce::http::http2_connection::local_settings</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>local_settings</name>
+        <qualifiedname>neforce::http::http2_connection::local_settings</qualifiedname>
+        <briefdescription>
+<para>获取本地设置 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="192" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="192" bodyend="192"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1a14a9f874edd4cfa7a8b12127ac172d3a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classneforce_1_1http_1_1http2__settings" kindref="compound">http2_settings</ref> &amp;</type>
+        <definition>const http2_settings &amp; neforce::http::http2_connection::remote_settings</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>remote_settings</name>
+        <qualifiedname>neforce::http::http2_connection::remote_settings</qualifiedname>
+        <briefdescription>
+<para>获取远程设置 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="197" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="197" bodyend="197"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1a0de38ce2c60928290bbf2b4dbb944bdf" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::http::http2_connection::is_closed</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_closed</name>
+        <qualifiedname>neforce::http::http2_connection::is_closed</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="199" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="199" bodyend="199"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1afd19c61b0017007fdf09e2840d902d43" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::http::http2_connection::last_stream_id</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>last_stream_id</name>
+        <qualifiedname>neforce::http::http2_connection::last_stream_id</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="200" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="200" bodyend="200"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__connection_1a65895902e328a57736806d8bed2960f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_connection::stop</definition>
+        <argsstring>()</argsstring>
+        <name>stop</name>
+        <qualifiedname>neforce::http::http2_connection::stop</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="202" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>HTTP/2 连接管理器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>管理单个 HTTP/2 连接的生命周期：<itemizedlist>
+<listitem><para>Frame I/O（通过 tcp_socket）</para>
+</listitem><listitem><para>HPACK 编码/解码</para>
+</listitem><listitem><para>Stream 状态管理</para>
+</listitem><listitem><para>Flow Control</para>
+</listitem><listitem><para>与 <ref refid="classneforce_1_1http_1_1http__router" kindref="compound">http_router</ref> 集成</para>
+</listitem></itemizedlist>
+</para>
+<para>使用 <ref refid="classneforce_1_1io__context" kindref="compound">io_context</ref> 驱动异步 I/O。 继承 <ref refid="structneforce_1_1enable__shared__from__this" kindref="compound">enable_shared_from_this</ref> 以支持异步回调生命周期安全。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>neforce::enable_shared_from_this&lt; http2_connection &gt;</label>
+        <link refid="structneforce_1_1enable__shared__from__this"/>
+      </node>
+      <node id="1">
+        <label>neforce::http::http2_connection</label>
+        <link refid="classneforce_1_1http_1_1http2__connection"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>neforce::enable_shared_from_this&lt; http2_connection &gt;</label>
+        <link refid="structneforce_1_1enable__shared__from__this"/>
+      </node>
+      <node id="1">
+        <label>neforce::http::http2_connection</label>
+        <link refid="classneforce_1_1http_1_1http2__connection"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" line="46" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_connection.hpp" bodystart="46" bodyend="203"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1http_1_1http2__connection_1ab6b6114fbaca9a4dc22ca2d9e40b435a" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>close_connection</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1add93375c71c23735ab9a7498d5260933" prot="public" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>close_handler</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a53fe033ef4e1ac804516cf84861056c4" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>close_handler_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a8298dcc690c4419125256e050942bf93" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>closed_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1ad3857655d54ec3eea6f3b8455c92a71f" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>connection_consumed_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1ae1e33af10e24bcf1c912502422511c62" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>ctx_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1af92559d5337d8efd50106eb4cec6152b" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>decoder_</name></member>
+      <member refid="structneforce_1_1enable__shared__from__this_1a2cdd3072a65afa33373b1fe93e91b832" prot="protected" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>enable_shared_from_this</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1ac42b95986377a43868aacecaf3a4a34b" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>encoder_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a5236a673d67bb0beb0cd0428defc6da1" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>flow_control_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1ab62971e6f34a81f5f4ec280dedc785e9" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>flush_writes</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a8dbb3d29220c74bd9abe1c9fde84f465" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>framer_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1ae10f8d3c7875afbe61ea654f9eb8b4b2" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>handle_continuation_frame</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a133709e360bb94c1c11d88b66de0e5f9" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>handle_data_frame</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a5364c282f67336ad8a9160f2a60a27e3" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>handle_frame</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a11e7f943170815dd35025490fc57abfd" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>handle_goaway_frame</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1aef1028b41e1c81144d82ada50858ebf9" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>handle_headers_frame</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1ab2e5eee7da4bdd5ac3267dc85658a051" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>handle_ping_frame</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1ab23b5ff5493891f574f1ddbaf6995dfc" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>handle_priority_frame</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a243fee10c3e1251d98a0aa0fa2fd505c" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>handle_push_promise_frame</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a0b0599eb9a403202e0c0c1a22b672d21" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>handle_rst_stream_frame</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a4daa8c5b54bbf69d8bd16ebbfe4117c8" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>handle_settings_frame</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1ab1c49205e3834d561d6732fb4a7af54c" prot="public" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>handle_upgrade_request</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a3d0bcac9b69b0547a949a41d6dc90973" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>handle_window_update_frame</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a838bb4dcaadce3358315d661590487f8" prot="public" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>http2_connection</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1af5dcfbf03006b16e793e5161e4352996" prot="public" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>http2_connection</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a0de38ce2c60928290bbf2b4dbb944bdf" prot="public" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>is_closed</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1afd19c61b0017007fdf09e2840d902d43" prot="public" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>last_stream_id</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1ac96086a15c4563da97caf3036de8f619" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>last_stream_id_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a3a49cb9e5a28f62c850ab608a53d3631" prot="public" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>local_settings</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a1039d6c3cda69dba734dbd1ede08bb49" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>local_settings_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a6ecaf45a008544469b23929dc4eca8a3" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>local_stream_window_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1ab40c5257651ca12adcec544691d7e47d" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>on_readable</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1ac857d6b982f37ba4fd552846ca2fad55" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>on_writable</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a164ec86b124eed9420db62f483ae421c" prot="public" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a00f25d980b2c7856b1617f4074d617ef" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>pending_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a868ed757b9f23f93833f040df8d44405" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>preface_received_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1ab7cd3aaef9c194b5e14314a74006b745" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>read_buffer_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a14a9f874edd4cfa7a8b12127ac172d3a" prot="public" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>remote_settings</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1adf5f119636186aea0df5dd32e8853357" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>remote_settings_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a7382946d7bfbcd76cf31df1cce29aa22" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>route_stream</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1ad948b526e26d1841389827b2ac9023dd" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>router_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1af8112c0749870e0fd099a9e974ffeb5d" prot="public" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>send_goaway</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1acd015e0aba6f73b7fe4e40e0571671d3" prot="public" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>send_push_promise</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a868d171bbc541cd02827486f9de98d1b" prot="public" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>send_response</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a7ff78916849ac62eafa94cb245eae3e9" prot="public" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>send_rst_stream</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1ad4fd1e653182888abcc7253fd3c30388" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>send_window_update</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1ad81b3bf66732c2c3ca24b120dab02163" prot="public" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>set_close_handler</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a5fadb57d550cabe9c572cb685cb8401d" prot="public" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>set_router</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a885ce0248d25d4d3ce2dfb696f9a2ac0" prot="public" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>set_stream_handler</name></member>
+      <member refid="structneforce_1_1enable__shared__from__this_1a096dfe4d7edc85a3dc2571947a08b45d" prot="public" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>shared_from_this</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1abb10fea5499fe56b13c87545f67e338f" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>socket_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a84244c644f9ab2a6e0babda9a3d84020" prot="public" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>start</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a65895902e328a57736806d8bed2960f0" prot="public" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>stop</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a933af2c2fd975271ea1183b9e753d398" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>stream_consumed_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a657c758703281fb984232dff1a48cc5d" prot="public" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>stream_handler</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a87411c22d096a994299fbcbbdec7e189" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>stream_handler_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a7ce58eec26d009ea10ddda29fcdf75a4" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>stream_mutex_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a431673873ab4ffa43605bba914cb2ed2" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>stream_priorities_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a6d12768c6cc2c6b58c9ed9212095b8f5" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>streams_</name></member>
+      <member refid="group___weak_pointer_1ga236e99bbc94cebedf0e903f2488b5b86" prot="public" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>weak_from_this</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a11a492e6cbbe4960747c28785a8bdad6" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>write_buffer_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a5c49bef0ce81fc314e89179a0cae3a10" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>write_frame</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1a2b428f22b230dfb00426610c88bae9b3" prot="private" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>write_mutex_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__connection_1ab901961e986ed252cc05b91ae02b3eff" prot="public" virt="non-virtual"><scope>neforce::http::http2_connection</scope><name>~http2_connection</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

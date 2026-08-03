@@ -1,0 +1,2202 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1process" kind="class" language="C++" prot="public">
+    <compoundname>neforce::process</compoundname>
+    <includes refid="process_8hpp" local="no">process.hpp</includes>
+    <innerclass refid="structneforce_1_1process_1_1memory__info" prot="public">neforce::process::memory_info</innerclass>
+    <innerclass refid="structneforce_1_1process_1_1time__info" prot="public">neforce::process::time_info</innerclass>
+    <innerclass refid="structneforce_1_1process_1_1shell__result" prot="public">neforce::process::shell_result</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classneforce_1_1process_1aa57e810b41adea1b286d218cae6d0f75" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>std_stream</name>
+        <qualifiedname>neforce::process::std_stream</qualifiedname>
+        <enumvalue id="classneforce_1_1process_1aa57e810b41adea1b286d218cae6d0f75a3c6c257ed29622500badf6cc7741375c" prot="public">
+          <name>stdin</name>
+          <briefdescription>
+<para>标准输入 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1process_1aa57e810b41adea1b286d218cae6d0f75a64322f5f3ff7f9f717279e1b017a997e" prot="public">
+          <name>stdout</name>
+          <briefdescription>
+<para>标准输出 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1process_1aa57e810b41adea1b286d218cae6d0f75a41be535153c4b535bc9d0a610d3bd66b" prot="public">
+          <name>stderr</name>
+          <briefdescription>
+<para>标准错误 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>标准流标识 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="81" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="81" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="enum" id="classneforce_1_1process_1a6ae943e6045070fa7d677fdd8b36085e" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>state</name>
+        <qualifiedname>neforce::process::state</qualifiedname>
+        <enumvalue id="classneforce_1_1process_1a6ae943e6045070fa7d677fdd8b36085ea75101dcdfc88455bcafc9e53e0b06689" prot="public">
+          <name>running</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>进程正在运行 </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1process_1a6ae943e6045070fa7d677fdd8b36085ea735fda5d72b5c650f3f0435195a211bd" prot="public">
+          <name>suspended</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>进程已被挂起 </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1process_1a6ae943e6045070fa7d677fdd8b36085eaf0a0bfe6bc7d2c58d2989034f83183e0" prot="public">
+          <name>stopped</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>进程已停止 </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1process_1a6ae943e6045070fa7d677fdd8b36085eab854d4deac1316c8d36e519393f3f2ae" prot="public">
+          <name>exited</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>进程已退出 </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1process_1a6ae943e6045070fa7d677fdd8b36085eaad921d60486366258809553a3db49a4a" prot="public">
+          <name>unknown</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>进程状态未知 </para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>进程状态枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="116" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="116" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="enum" id="classneforce_1_1process_1aa0da38c64dc220002e7c0e9fabb9f165" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>permission</name>
+        <qualifiedname>neforce::process::permission</qualifiedname>
+        <enumvalue id="classneforce_1_1process_1aa0da38c64dc220002e7c0e9fabb9f165aecae13117d6f0584c25a9da6c8f8415e" prot="public">
+          <name>read</name>
+          <initializer>= 0x01</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>读取权限 </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1process_1aa0da38c64dc220002e7c0e9fabb9f165aefb2a684e4afb7d55e6147fbe5a332ee" prot="public">
+          <name>write</name>
+          <initializer>= 0x02</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>写入权限 </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1process_1aa0da38c64dc220002e7c0e9fabb9f165aec0cd3cb91fe82b9501f62a528eb07a9" prot="public">
+          <name>execute</name>
+          <initializer>= 0x04</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>执行权限 </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1process_1aa0da38c64dc220002e7c0e9fabb9f165a1459e53d3fbaa95cebaf90860dd7a259" prot="public">
+          <name>terminate</name>
+          <initializer>= 0x08</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>终止权限 </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1process_1aa0da38c64dc220002e7c0e9fabb9f165ae62cad8f38445bfffefe4b944d257350" prot="public">
+          <name>query_info</name>
+          <initializer>= 0x10</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>查询信息权限 </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1process_1aa0da38c64dc220002e7c0e9fabb9f165aa181a603769c1f98ad927e7367c7aa51" prot="public">
+          <name>all</name>
+          <initializer>= 0xFF</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>所有权限 </para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>进程权限枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="128" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="128" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="enum" id="classneforce_1_1process_1a45062b22aa3b468cab2417085c16e3ca" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>privilege_level</name>
+        <qualifiedname>neforce::process::privilege_level</qualifiedname>
+        <enumvalue id="classneforce_1_1process_1a45062b22aa3b468cab2417085c16e3caabd638b36d2814f488c1497cfe49eceea" prot="public">
+          <name>privileged</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>具有管理员/root 权限 </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1process_1a45062b22aa3b468cab2417085c16e3caa28770b882ab896ee0d7539ef7e4681ee" prot="public">
+          <name>not_privileged</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>普通权限 </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1process_1a45062b22aa3b468cab2417085c16e3caaad921d60486366258809553a3db49a4a" prot="public">
+          <name>unknown</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>无法确定权限级别 </para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>进程特权级别 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="141" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="141" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="enum" id="classneforce_1_1process_1acbcb411eaf4a7a01da4bdc64f6f8e7e1" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>elevation_tool</name>
+        <qualifiedname>neforce::process::elevation_tool</qualifiedname>
+        <enumvalue id="classneforce_1_1process_1acbcb411eaf4a7a01da4bdc64f6f8e7e1ae271e2d9f011df547b9b98db5a3f287a" prot="public">
+          <name>auto_</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Windows 忽略此选项；Linux 自动尝试 pkexec，回退至 sudo </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1process_1acbcb411eaf4a7a01da4bdc64f6f8e7e1ad338b3f0f405eb5e51c8cc1e5ca66f02" prot="public">
+          <name>sudo</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Linux 强制使用 sudo 提权 </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1process_1acbcb411eaf4a7a01da4bdc64f6f8e7e1a823735810c73ae1ef92c4985e0222a32" prot="public">
+          <name>pkexec</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Linux 强制使用 pkexec 提权 </para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>提权工具选择 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="150" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="150" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1process_1a3f81f828393255a71df39c27dcffbb56" prot="public" static="no">
+        <type>unsigned long</type>
+        <definition>using neforce::process::native_id_type = 
+
+unsigned long</definition>
+        <argsstring></argsstring>
+        <name>native_id_type</name>
+        <qualifiedname>neforce::process::native_id_type</qualifiedname>
+        <briefdescription>
+<para>进程ID类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="70" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1process_1a3be5afe73e4058fb692bbfbc9dd860f4" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1process_1a3f81f828393255a71df39c27dcffbb56" kindref="member">native_id_type</ref></type>
+        <definition>native_id_type neforce::process::process_id_</definition>
+        <argsstring></argsstring>
+        <name>process_id_</name>
+        <qualifiedname>neforce::process::process_id_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>子进程 ID </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="175" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="175" bodyend="175"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1process_1ad4e59e8a4815725e3d04e550ccf665f6" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int neforce::process::exit_code_</definition>
+        <argsstring></argsstring>
+        <name>exit_code_</name>
+        <qualifiedname>neforce::process::exit_code_</qualifiedname>
+        <initializer>{-1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>子进程退出码，-1 表示尚未退出 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="176" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="176" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1process_1af650eea6ba5a9215b83e36d30b6921a0" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::process::started_</definition>
+        <argsstring></argsstring>
+        <name>started_</name>
+        <qualifiedname>neforce::process::started_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>子进程是否已启动 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="177" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="177" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1process_1af99ab1d15b64984df703fb5573dd89dc" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::process::finished_</definition>
+        <argsstring></argsstring>
+        <name>finished_</name>
+        <qualifiedname>neforce::process::finished_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>子进程是否已完成 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="178" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="178" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1process_1a562db8504561a6e7bc8813292dce8a5e" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::process::work_dir_</definition>
+        <argsstring></argsstring>
+        <name>work_dir_</name>
+        <qualifiedname>neforce::process::work_dir_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>子进程工作目录 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="180" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="180" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1process_1aa3646ab262b012f5329a900ecd75fe82" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref>, <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt; &gt;</type>
+        <definition>vector&lt;pair&lt;string, string&gt; &gt; neforce::process::env_vars_</definition>
+        <argsstring></argsstring>
+        <name>env_vars_</name>
+        <qualifiedname>neforce::process::env_vars_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>子进程环境变量列表 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="181" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="181" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1process_1a8b8decacc072103605c83220941b01b3" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::process::capture_stdout_</definition>
+        <argsstring></argsstring>
+        <name>capture_stdout_</name>
+        <qualifiedname>neforce::process::capture_stdout_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>是否捕获标准输出 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="182" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="182" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1process_1a54dc2fadf91764dee43de84db15b6a58" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::process::capture_stderr_</definition>
+        <argsstring></argsstring>
+        <name>capture_stderr_</name>
+        <qualifiedname>neforce::process::capture_stderr_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>是否捕获标准错误 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="183" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="183" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1process_1a64d6a414c6d2b307f69f0842768639f5" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::process::stdin_data_</definition>
+        <argsstring></argsstring>
+        <name>stdin_data_</name>
+        <qualifiedname>neforce::process::stdin_data_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>预设的 stdin 输入数据 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="184" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="184" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1process_1af525819c49eef3c96eca120b5c7a2c6c" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::process::stdout_file_</definition>
+        <argsstring></argsstring>
+        <name>stdout_file_</name>
+        <qualifiedname>neforce::process::stdout_file_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>stdout 重定向文件路径 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="186" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="186" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1process_1ad920a632381e1598ebb72cd826c15dca" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::process::stderr_file_</definition>
+        <argsstring></argsstring>
+        <name>stderr_file_</name>
+        <qualifiedname>neforce::process::stderr_file_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>stderr 重定向文件路径 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="187" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="187" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1process_1a9de64884341867bd3bf1588995e53167" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1pipe" kindref="compound">pipe</ref> *</type>
+        <definition>pipe* neforce::process::external_stdin_pipe_</definition>
+        <argsstring></argsstring>
+        <name>external_stdin_pipe_</name>
+        <qualifiedname>neforce::process::external_stdin_pipe_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>外部提供的 stdin 管道（不拥有所有权） </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="189" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="189" bodyend="189"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1process_1af6054cc2bc019571a53318f45a0deb5e" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1pipe" kindref="compound">pipe</ref> *</type>
+        <definition>pipe* neforce::process::external_stdout_pipe_</definition>
+        <argsstring></argsstring>
+        <name>external_stdout_pipe_</name>
+        <qualifiedname>neforce::process::external_stdout_pipe_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>外部提供的 stdout 管道（不拥有所有权） </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="190" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="190" bodyend="190"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1process_1a7eae5660d33520c662cebf836ea68601" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1pipe" kindref="compound">pipe</ref> *</type>
+        <definition>pipe* neforce::process::external_stderr_pipe_</definition>
+        <argsstring></argsstring>
+        <name>external_stderr_pipe_</name>
+        <qualifiedname>neforce::process::external_stderr_pipe_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>外部提供的 stderr 管道（不拥有所有权） </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="191" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="191" bodyend="191"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1process_1a84c79e0dc120184a0813f13366b3cb38" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::process::detached_</definition>
+        <argsstring></argsstring>
+        <name>detached_</name>
+        <qualifiedname>neforce::process::detached_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>是否已与子进程分离（分离后析构不终止子进程） </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="193" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="193" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1process_1a89b0e896953f1019ab7356fb91dc60c5" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1pipe" kindref="compound">pipe</ref></type>
+        <definition>pipe neforce::process::stdout_pipe_</definition>
+        <argsstring></argsstring>
+        <name>stdout_pipe_</name>
+        <qualifiedname>neforce::process::stdout_pipe_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>stdout 管道 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="195" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="195" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1process_1a91e2401302f4cbf1383ac87479922111" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1pipe" kindref="compound">pipe</ref></type>
+        <definition>pipe neforce::process::stderr_pipe_</definition>
+        <argsstring></argsstring>
+        <name>stderr_pipe_</name>
+        <qualifiedname>neforce::process::stderr_pipe_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>stderr 管道 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="196" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="196" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1process_1afbe7fba715d21102f1c7a82fca2558ae" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1pipe" kindref="compound">pipe</ref></type>
+        <definition>pipe neforce::process::stdin_pipe_</definition>
+        <argsstring></argsstring>
+        <name>stdin_pipe_</name>
+        <qualifiedname>neforce::process::stdin_pipe_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>stdin 管道 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="197" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="197" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1process_1aae347b6b17710c26b18d4225ac6bda34" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::process::stdout_buf_</definition>
+        <argsstring></argsstring>
+        <name>stdout_buf_</name>
+        <qualifiedname>neforce::process::stdout_buf_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>stdout 数据缓冲区 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="199" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="199" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1process_1aff1f250e8574ac6f4c5875b272a49680" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::process::stderr_buf_</definition>
+        <argsstring></argsstring>
+        <name>stderr_buf_</name>
+        <qualifiedname>neforce::process::stderr_buf_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>stderr 数据缓冲区 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="200" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="200" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1process_1acb9a23d1e232a39af9ae5ef7d67a2ae0" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1thread" kindref="compound">thread</ref></type>
+        <definition>thread neforce::process::reader_thread_</definition>
+        <argsstring></argsstring>
+        <name>reader_thread_</name>
+        <qualifiedname>neforce::process::reader_thread_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>异步读取线程 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="202" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="202" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1process_1a68197ded93013e31beca6c1225eb9909" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; neforce::process::reader_running_</definition>
+        <argsstring></argsstring>
+        <name>reader_running_</name>
+        <qualifiedname>neforce::process::reader_running_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>读取线程运行标志 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="203" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="203" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1process_1a25cd0e104924d6d2fae935d339d3df0c" prot="private" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* neforce::process::process_handle_</definition>
+        <argsstring></argsstring>
+        <name>process_handle_</name>
+        <qualifiedname>neforce::process::process_handle_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Windows 进程句柄 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="206" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="206" bodyend="206"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1process_1ab06b76112771e3707c3429db78e2f15b" prot="private" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* neforce::process::thread_handle_</definition>
+        <argsstring></argsstring>
+        <name>thread_handle_</name>
+        <qualifiedname>neforce::process::thread_handle_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Windows 主线程句柄 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="207" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="207" bodyend="207"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1process_1a6474f57bc7cc9f56a371be8ca9b6467f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::process::reader_loop</definition>
+        <argsstring>()</argsstring>
+        <name>reader_loop</name>
+        <qualifiedname>neforce::process::reader_loop</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="166" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1aa1e2b6a811af5a2fc878218baa2cb434" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::process::close_handles</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>close_handles</name>
+        <qualifiedname>neforce::process::close_handles</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="168" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1acbef6f0db001ff6be1f6a34b9573d3c1" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::process::detach_handles</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>detach_handles</name>
+        <qualifiedname>neforce::process::detach_handles</qualifiedname>
+        <briefdescription>
+<para>分离进程句柄，使子进程生命周期不再受 process 对象控制 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="173" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::process::process</definition>
+        <argsstring>()=default</argsstring>
+        <name>process</name>
+        <qualifiedname>neforce::process::process</qualifiedname>
+        <briefdescription>
+<para>默认构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>不启动任何进程 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="216" column="5"/>
+        <referencedby refid="classneforce_1_1process_1a7af2eddcc69ed93d8fec3a7b4326984f">chain</referencedby>
+        <referencedby refid="classneforce_1_1process_1a5a2efbe63ef307675a238a1cc832c420">operator=</referencedby>
+        <referencedby refid="classneforce_1_1process_1ae892f2e67e9a68d8217e76c5aa5c5bf0">process</referencedby>
+        <referencedby refid="classneforce_1_1process_1a04c61de2cacd77b0c2e177fbcfb690d5">set_capture_stderr</referencedby>
+        <referencedby refid="classneforce_1_1process_1a4eadcc6594c0fc184e7f933033609dc5">set_capture_stdout</referencedby>
+        <referencedby refid="classneforce_1_1process_1a7ecd74721f0ae2be26438b6bb07e7a09">set_env</referencedby>
+        <referencedby refid="classneforce_1_1process_1a76657ad27452cd0c6023a56326deac69">set_external_stderr</referencedby>
+        <referencedby refid="classneforce_1_1process_1ac24c841585d3379bd6205f5a173533c1">set_external_stdin</referencedby>
+        <referencedby refid="classneforce_1_1process_1ac796c51d8b927fd73008f32b31339a87">set_external_stdout</referencedby>
+        <referencedby refid="classneforce_1_1process_1ac3ec8b7b8ef11a11434f929aed59a37d">set_stderr_file</referencedby>
+        <referencedby refid="classneforce_1_1process_1a62cc9ec622cb39aae8f798a32940ae75">set_stdin_data</referencedby>
+        <referencedby refid="classneforce_1_1process_1a36231fdc6c6394e33d7485adf782f715">set_stdout_file</referencedby>
+        <referencedby refid="classneforce_1_1process_1abfbe9ff2732d04b673f76ece15cc40ed">set_work_dir</referencedby>
+        <referencedby refid="classneforce_1_1process_1a9ce97919511fa2d2226c4f09554964f4">~process</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a9ce97919511fa2d2226c4f09554964f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::process::~process</definition>
+        <argsstring>()</argsstring>
+        <name>~process</name>
+        <qualifiedname>neforce::process::~process</qualifiedname>
+        <briefdescription>
+<para>析构 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>自动终止未退出的子进程并清理资源 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="223" column="5"/>
+        <references refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611">process</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1adc325676f0e86dd633b83ae0003ec98d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::process::process</definition>
+        <argsstring>(const process &amp;)=delete</argsstring>
+        <name>process</name>
+        <qualifiedname>neforce::process::process</qualifiedname>
+        <param>
+          <type>const process &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="225" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a3601a586477dddc98705e1d1d50059e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611" kindref="member">process</ref> &amp;</type>
+        <definition>process &amp; neforce::process::operator=</definition>
+        <argsstring>(const process &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::process::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611" kindref="member">process</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="226" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1ae892f2e67e9a68d8217e76c5aa5c5bf0" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::process::process</definition>
+        <argsstring>(process &amp;&amp;other) noexcept</argsstring>
+        <name>process</name>
+        <qualifiedname>neforce::process::process</qualifiedname>
+        <param>
+          <type>process &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="231" column="5"/>
+        <references refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611">process</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a5a2efbe63ef307675a238a1cc832c420" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611" kindref="member">process</ref> &amp;</type>
+        <definition>process &amp; neforce::process::operator=</definition>
+        <argsstring>(process &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::process::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611" kindref="member">process</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="236" column="13"/>
+        <references refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611">process</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1abfbe9ff2732d04b673f76ece15cc40ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611" kindref="member">process</ref> &amp;</type>
+        <definition>process &amp; neforce::process::set_work_dir</definition>
+        <argsstring>(const string &amp;dir)</argsstring>
+        <name>set_work_dir</name>
+        <qualifiedname>neforce::process::set_work_dir</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>dir</declname>
+        </param>
+        <briefdescription>
+<para>设置子进程工作目录 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>工作目录路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="242" column="13"/>
+        <references refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611">process</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a7ecd74721f0ae2be26438b6bb07e7a09" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611" kindref="member">process</ref> &amp;</type>
+        <definition>process &amp; neforce::process::set_env</definition>
+        <argsstring>(const string &amp;key, const string &amp;value)</argsstring>
+        <name>set_env</name>
+        <qualifiedname>neforce::process::set_env</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置子进程环境变量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>变量名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>变量值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="249" column="13"/>
+        <references refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611">process</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a4eadcc6594c0fc184e7f933033609dc5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611" kindref="member">process</ref> &amp;</type>
+        <definition>process &amp; neforce::process::set_capture_stdout</definition>
+        <argsstring>(bool v=true)</argsstring>
+        <name>set_capture_stdout</name>
+        <qualifiedname>neforce::process::set_capture_stdout</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>v</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>捕获标准输出 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否捕获 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="255" column="13"/>
+        <references refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611">process</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a04c61de2cacd77b0c2e177fbcfb690d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611" kindref="member">process</ref> &amp;</type>
+        <definition>process &amp; neforce::process::set_capture_stderr</definition>
+        <argsstring>(bool v=true)</argsstring>
+        <name>set_capture_stderr</name>
+        <qualifiedname>neforce::process::set_capture_stderr</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>v</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>捕获标准错误 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否捕获，为 true 时 stderr 写入独立缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="261" column="13"/>
+        <references refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611">process</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a62cc9ec622cb39aae8f798a32940ae75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611" kindref="member">process</ref> &amp;</type>
+        <definition>process &amp; neforce::process::set_stdin_data</definition>
+        <argsstring>(const string &amp;data)</argsstring>
+        <name>set_stdin_data</name>
+        <qualifiedname>neforce::process::set_stdin_data</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>预设要写入子进程 stdin 的数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数据内容，在子进程启动后自动写入并关闭 stdin </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="267" column="13"/>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+        <references refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611">process</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a36231fdc6c6394e33d7485adf782f715" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611" kindref="member">process</ref> &amp;</type>
+        <definition>process &amp; neforce::process::set_stdout_file</definition>
+        <argsstring>(const string &amp;file_path)</argsstring>
+        <name>set_stdout_file</name>
+        <qualifiedname>neforce::process::set_stdout_file</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>file_path</declname>
+        </param>
+        <briefdescription>
+<para>将 stdout 重定向到文件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>file_path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="274" column="13"/>
+        <references refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611">process</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1ac3ec8b7b8ef11a11434f929aed59a37d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611" kindref="member">process</ref> &amp;</type>
+        <definition>process &amp; neforce::process::set_stderr_file</definition>
+        <argsstring>(const string &amp;file_path)</argsstring>
+        <name>set_stderr_file</name>
+        <qualifiedname>neforce::process::set_stderr_file</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>file_path</declname>
+        </param>
+        <briefdescription>
+<para>将 stderr 重定向到文件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>file_path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="281" column="13"/>
+        <references refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611">process</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1ac24c841585d3379bd6205f5a173533c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611" kindref="member">process</ref> &amp;</type>
+        <definition>process &amp; neforce::process::set_external_stdin</definition>
+        <argsstring>(pipe &amp;external_pipe)</argsstring>
+        <name>set_external_stdin</name>
+        <qualifiedname>neforce::process::set_external_stdin</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1pipe" kindref="compound">pipe</ref> &amp;</type>
+          <declname>external_pipe</declname>
+        </param>
+        <briefdescription>
+<para>设置外部管道作为 stdin（用于进程链） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>external_pipe</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>上游进程的 stdout 连接的管道 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+<simplesect kind="note"><para>该管道生命周期由调用者管理，process 不拥有所有权 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="289" column="13"/>
+        <references refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611">process</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1ac796c51d8b927fd73008f32b31339a87" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611" kindref="member">process</ref> &amp;</type>
+        <definition>process &amp; neforce::process::set_external_stdout</definition>
+        <argsstring>(pipe &amp;external_pipe)</argsstring>
+        <name>set_external_stdout</name>
+        <qualifiedname>neforce::process::set_external_stdout</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1pipe" kindref="compound">pipe</ref> &amp;</type>
+          <declname>external_pipe</declname>
+        </param>
+        <briefdescription>
+<para>将 stdout 连接到外部管道（供下游进程读取） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>external_pipe</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>外部管道对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+<simplesect kind="note"><para>该管道生命周期由调用者管理 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="297" column="13"/>
+        <references refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611">process</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a76657ad27452cd0c6023a56326deac69" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611" kindref="member">process</ref> &amp;</type>
+        <definition>process &amp; neforce::process::set_external_stderr</definition>
+        <argsstring>(pipe &amp;external_pipe)</argsstring>
+        <name>set_external_stderr</name>
+        <qualifiedname>neforce::process::set_external_stderr</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1pipe" kindref="compound">pipe</ref> &amp;</type>
+          <declname>external_pipe</declname>
+        </param>
+        <briefdescription>
+<para>将 stderr 连接到外部管道（供下游进程读取） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>external_pipe</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>外部管道对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+<simplesect kind="note"><para>该管道生命周期由调用者管理 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="305" column="13"/>
+        <references refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611">process</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1aacf4f2a9ebada86e4da05915c80928d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::process::start</definition>
+        <argsstring>(const string &amp;executable, const vector&lt; string &gt; &amp;args={})</argsstring>
+        <name>start</name>
+        <qualifiedname>neforce::process::start</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>executable</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt; &amp;</type>
+          <declname>args</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para>启动子进程 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>executable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可执行文件路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>命令行参数列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1process__exception" kindref="compound">process_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>启动失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="333" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1aaf73584f1f1b9772007a9d5b501ea9b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::process::start_elevated</definition>
+        <argsstring>(const string &amp;executable, const vector&lt; string &gt; &amp;args={}, elevation_tool tool=elevation_tool::auto_)</argsstring>
+        <name>start_elevated</name>
+        <qualifiedname>neforce::process::start_elevated</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>executable</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt; &amp;</type>
+          <declname>args</declname>
+          <defval>{}</defval>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1process_1acbcb411eaf4a7a01da4bdc64f6f8e7e1" kindref="member">elevation_tool</ref></type>
+          <declname>tool</declname>
+          <defval><ref refid="classneforce_1_1process_1acbcb411eaf4a7a01da4bdc64f6f8e7e1ae271e2d9f011df547b9b98db5a3f287a" kindref="member">elevation_tool::auto_</ref></defval>
+        </param>
+        <briefdescription>
+<para>以管理员/root 权限启动子进程 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>executable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可执行文件路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>命令行参数列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tool</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>提权工具 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1process__exception" kindref="compound">process_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>启动失败或已设置了管道捕获时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>不捕获输出 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="343" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1aaf663e8e9cd35b830070997d96972e1d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int neforce::process::wait</definition>
+        <argsstring>(int timeout_ms=-1)</argsstring>
+        <name>wait</name>
+        <qualifiedname>neforce::process::wait</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>timeout_ms</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+<para>等待子进程退出 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timeout_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超时毫秒数，-1 表示无限等待 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>退出码，-1 超时 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1process__exception" kindref="compound">process_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>等待失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="352" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a0da9b12e0234a3bafd44de1c866b5f6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::process::terminate</definition>
+        <argsstring>()</argsstring>
+        <name>terminate</name>
+        <qualifiedname>neforce::process::terminate</qualifiedname>
+        <briefdescription>
+<para>终止子进程（SIGTERM → 短暂等待 → SIGKILL） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="355" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a783ed100e6e24d4ca1f90c8a0df1cb4c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::process::suspend</definition>
+        <argsstring>()</argsstring>
+        <name>suspend</name>
+        <qualifiedname>neforce::process::suspend</qualifiedname>
+        <briefdescription>
+<para>挂起子进程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="358" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a9e13f64ffb32874772a12d3b85ac062e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::process::resume</definition>
+        <argsstring>()</argsstring>
+        <name>resume</name>
+        <qualifiedname>neforce::process::resume</qualifiedname>
+        <briefdescription>
+<para>恢复子进程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="361" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a9c138a35060b5ad1a33e62669cee73fd" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::process::close</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>close</name>
+        <qualifiedname>neforce::process::close</qualifiedname>
+        <briefdescription>
+<para>显式关闭进程句柄并清理资源 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="364" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a95d830725d346293cd6b45be1bb249b8" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::process::is_running</definition>
+        <argsstring>() const</argsstring>
+        <name>is_running</name>
+        <qualifiedname>neforce::process::is_running</qualifiedname>
+        <briefdescription>
+<para>子进程是否正在运行 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="367" column="11"/>
+        <references refid="classneforce_1_1process_1a95d830725d346293cd6b45be1bb249b8">is_running</references>
+        <referencedby refid="classneforce_1_1process_1a95d830725d346293cd6b45be1bb249b8">is_running</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1aff230f3f23648825c2ce0664552488ba" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1process_1a6ae943e6045070fa7d677fdd8b36085e" kindref="member">state</ref></type>
+        <definition>state neforce::process::get_state</definition>
+        <argsstring>() const</argsstring>
+        <name>get_state</name>
+        <qualifiedname>neforce::process::get_state</qualifiedname>
+        <briefdescription>
+<para>获取子进程状态 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="370" column="12"/>
+        <references refid="classneforce_1_1process_1aff230f3f23648825c2ce0664552488ba">get_state</references>
+        <referencedby refid="classneforce_1_1process_1aff230f3f23648825c2ce0664552488ba">get_state</referencedby>
+        <referencedby refid="classneforce_1_1process_1aa979ac720ce99cc676a2f13a142d80ab">get_state</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1aa1416bed855878717a11f54b44ccca2f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1process_1_1memory__info" kindref="compound">memory_info</ref></type>
+        <definition>memory_info neforce::process::get_memory_info</definition>
+        <argsstring>() const</argsstring>
+        <name>get_memory_info</name>
+        <qualifiedname>neforce::process::get_memory_info</qualifiedname>
+        <briefdescription>
+<para>获取子进程内存信息 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="373" column="18"/>
+        <references refid="classneforce_1_1process_1aa1416bed855878717a11f54b44ccca2f">get_memory_info</references>
+        <referencedby refid="classneforce_1_1process_1aa1416bed855878717a11f54b44ccca2f">get_memory_info</referencedby>
+        <referencedby refid="classneforce_1_1process_1a320402b50d48a09cd270cf6f44de8b5b">get_memory_info</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1aa58a500788a6dd8d2ad39badb4f4f853" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1process_1a3f81f828393255a71df39c27dcffbb56" kindref="member">native_id_type</ref></type>
+        <definition>native_id_type neforce::process::id</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>id</name>
+        <qualifiedname>neforce::process::id</qualifiedname>
+        <briefdescription>
+<para>子进程 ID </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="376" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="376" bodyend="376"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1afaddb7d39c17a54324a6e0764496040c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int neforce::process::exit_code</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>exit_code</name>
+        <qualifiedname>neforce::process::exit_code</qualifiedname>
+        <briefdescription>
+<para>子进程退出码（仅在 <ref refid="classneforce_1_1process_1aaf663e8e9cd35b830070997d96972e1d" kindref="member">wait()</ref> 返回后有效） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="379" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="379" bodyend="379"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1ae6456eb3024f4854b9e93dbc4caff480" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+        <definition>const string &amp; neforce::process::stdout_output</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>stdout_output</name>
+        <qualifiedname>neforce::process::stdout_output</qualifiedname>
+        <briefdescription>
+<para>获取捕获的标准输出 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="382" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="382" bodyend="382"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a8cc374b0360dad3ea78c4c26d16dbbfa" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+        <definition>const string &amp; neforce::process::stderr_output</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>stderr_output</name>
+        <qualifiedname>neforce::process::stderr_output</qualifiedname>
+        <briefdescription>
+<para>获取捕获的标准错误 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="385" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="385" bodyend="385"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a1dbd00d29efa4e9c482744d4626ec27d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::process::write_stdin</definition>
+        <argsstring>(const string &amp;data)</argsstring>
+        <name>write_stdin</name>
+        <qualifiedname>neforce::process::write_stdin</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>向子进程的 stdin 写入数据 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="388" column="10"/>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1aa301f46c5aeb2369a42bfbd91ca805e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::process::close_stdin</definition>
+        <argsstring>()</argsstring>
+        <name>close_stdin</name>
+        <qualifiedname>neforce::process::close_stdin</qualifiedname>
+        <briefdescription>
+<para>关闭子进程的 stdin </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="391" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1process_1a7af2eddcc69ed93d8fec3a7b4326984f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void neforce::process::chain</definition>
+        <argsstring>(process &amp;first, process &amp;second)</argsstring>
+        <name>chain</name>
+        <qualifiedname>neforce::process::chain</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611" kindref="member">process</ref> &amp;</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611" kindref="member">process</ref> &amp;</type>
+          <declname>second</declname>
+        </param>
+        <briefdescription>
+<para>管道连接两个进程（A 的 stdout -&gt; B 的 stdin） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>上游进程（已配置但未启动） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>second</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>下游进程（已配置但未启动）</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+内部创建管道并将 first 的 stdout 连接到 second 的 stdin。 管道生命周期由下游进程管理。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="315" column="17"/>
+        <references refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611">process</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a3b24879af59cd54e7c52742861c9395a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void neforce::process::chain</definition>
+        <argsstring>(vector&lt; process * &gt; &amp;processes)</argsstring>
+        <name>chain</name>
+        <qualifiedname>neforce::process::chain</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611" kindref="member">process</ref> * &gt; &amp;</type>
+          <declname>processes</declname>
+        </param>
+        <briefdescription>
+<para>管道连接多个进程 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>processes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要连接的进程列表（已配置但未启动）</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将进程列表中的进程按顺序用管道串联： processes[0] stdout -&gt; processes[1] stdin, processes[1] stdout -&gt; processes[2] stdin, ... </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="325" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a2b7658ad625ff46bf3c96baab890f9bd" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1process_1_1shell__result" kindref="compound">shell_result</ref></type>
+        <definition>static shell_result neforce::process::execute_shell</definition>
+        <argsstring>(const string &amp;command, int timeout_ms=-1)</argsstring>
+        <name>execute_shell</name>
+        <qualifiedname>neforce::process::execute_shell</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>timeout_ms</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+<para>执行 shell 命令并获取输出 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>command</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>命令字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timeout_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超时毫秒，-1 无限等待 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含退出码和合并的 stdout+stderr 的 <ref refid="structneforce_1_1process_1_1shell__result" kindref="compound">shell_result</ref> </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1process__exception" kindref="compound">process_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>执行失败或超时 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="400" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1ab399b7783b5b3ced4b67716b99684ec2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1process_1_1shell__result" kindref="compound">shell_result</ref></type>
+        <definition>static shell_result neforce::process::execute_elevated_shell</definition>
+        <argsstring>(const string &amp;command, int timeout_ms=-1, elevation_tool tool=elevation_tool::auto_)</argsstring>
+        <name>execute_elevated_shell</name>
+        <qualifiedname>neforce::process::execute_elevated_shell</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>timeout_ms</declname>
+          <defval>-1</defval>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1process_1acbcb411eaf4a7a01da4bdc64f6f8e7e1" kindref="member">elevation_tool</ref></type>
+          <declname>tool</declname>
+          <defval><ref refid="classneforce_1_1process_1acbcb411eaf4a7a01da4bdc64f6f8e7e1ae271e2d9f011df547b9b98db5a3f287a" kindref="member">elevation_tool::auto_</ref></defval>
+        </param>
+        <briefdescription>
+<para>以管理员/root 权限执行 shell 命令 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>command</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>命令字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timeout_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超时毫秒，-1 无限等待 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tool</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>提权工具选择 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含退出码和空输出的 <ref refid="structneforce_1_1process_1_1shell__result" kindref="compound">shell_result</ref> </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1process__exception" kindref="compound">process_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>执行失败或超时 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>不捕获输出 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="411" column="25"/>
+        <references refid="classneforce_1_1process_1acbcb411eaf4a7a01da4bdc64f6f8e7e1ae271e2d9f011df547b9b98db5a3f287a" compoundref="process_8hpp" startline="151">auto_</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1ad8f812aad1810ff7cc81dc1296d97f17" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1process_1a3f81f828393255a71df39c27dcffbb56" kindref="member">native_id_type</ref></type>
+        <definition>static native_id_type neforce::process::spawn</definition>
+        <argsstring>(const string &amp;executable, const vector&lt; string &gt; &amp;args={})</argsstring>
+        <name>spawn</name>
+        <qualifiedname>neforce::process::spawn</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>executable</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt; &amp;</type>
+          <declname>args</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para>启动子进程并分离（fire-and-forget） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>executable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可执行文件路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>命令行参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>子进程 ID</para>
+</simplesect>
+启动后立即分离，不等待。进程在后台运行。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="422" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a633a80ce58fa0844ed25d2fa14f0b0f7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int neforce::process::system</definition>
+        <argsstring>(const string &amp;executable, const vector&lt; string &gt; &amp;args={}, int timeout_ms=-1)</argsstring>
+        <name>system</name>
+        <qualifiedname>neforce::process::system</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>executable</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt; &amp;</type>
+          <declname>args</declname>
+          <defval>{}</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>timeout_ms</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+<para>同步运行进程并返回退出码 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>executable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可执行文件路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>命令行参数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timeout_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超时毫秒，-1 无限等待 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>退出码 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1process__exception" kindref="compound">process_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超时或执行失败 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="432" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a825d0941dc484f9ebd2f54ea108f4338" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>static string neforce::process::capture</definition>
+        <argsstring>(const string &amp;executable, const vector&lt; string &gt; &amp;args={}, int timeout_ms=-1)</argsstring>
+        <name>capture</name>
+        <qualifiedname>neforce::process::capture</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>executable</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt; &amp;</type>
+          <declname>args</declname>
+          <defval>{}</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>timeout_ms</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+<para>执行进程并捕获 stdout 输出 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>executable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可执行文件路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>命令行参数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timeout_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超时毫秒，-1 无限等待 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>标准输出字符串 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1process__exception" kindref="compound">process_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超时或执行失败 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="442" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1ad013106f3de0c79128b6902b8befe193" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1process_1a3f81f828393255a71df39c27dcffbb56" kindref="member">native_id_type</ref></type>
+        <definition>static native_id_type neforce::process::current_id</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>current_id</name>
+        <qualifiedname>neforce::process::current_id</qualifiedname>
+        <briefdescription>
+<para>获取当前进程 ID </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="445" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a416d3c541b26cd6406336ce4ef8240f3" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1process_1a45062b22aa3b468cab2417085c16e3ca" kindref="member">privilege_level</ref></type>
+        <definition>static privilege_level neforce::process::current_privilege_level</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>current_privilege_level</name>
+        <qualifiedname>neforce::process::current_privilege_level</qualifiedname>
+        <briefdescription>
+<para>获取当前进程的特权级别 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="448" column="29"/>
+        <references refid="classneforce_1_1process_1a416d3c541b26cd6406336ce4ef8240f3">current_privilege_level</references>
+        <referencedby refid="classneforce_1_1process_1a416d3c541b26cd6406336ce4ef8240f3">current_privilege_level</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a17afe97c3b5735eae58f0326ba2978a6" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>static string neforce::process::name</definition>
+        <argsstring>(native_id_type process_id)</argsstring>
+        <name>name</name>
+        <qualifiedname>neforce::process::name</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1process_1a3f81f828393255a71df39c27dcffbb56" kindref="member">native_id_type</ref></type>
+          <declname>process_id</declname>
+        </param>
+        <briefdescription>
+<para>根据进程 ID 获取进程名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>process_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标进程 ID </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>进程名称，失败返回空字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="455" column="20"/>
+        <references refid="classneforce_1_1process_1a17afe97c3b5735eae58f0326ba2978a6">name</references>
+        <referencedby refid="classneforce_1_1process_1a17afe97c3b5735eae58f0326ba2978a6">name</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a320402b50d48a09cd270cf6f44de8b5b" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1process_1_1memory__info" kindref="compound">memory_info</ref></type>
+        <definition>static memory_info neforce::process::get_memory_info</definition>
+        <argsstring>(native_id_type process_id)</argsstring>
+        <name>get_memory_info</name>
+        <qualifiedname>neforce::process::get_memory_info</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1process_1a3f81f828393255a71df39c27dcffbb56" kindref="member">native_id_type</ref></type>
+          <declname>process_id</declname>
+        </param>
+        <briefdescription>
+<para>查询任意进程的内存信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>process_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标进程 ID </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="461" column="25"/>
+        <references refid="classneforce_1_1process_1aa1416bed855878717a11f54b44ccca2f">get_memory_info</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1aa979ac720ce99cc676a2f13a142d80ab" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1process_1a6ae943e6045070fa7d677fdd8b36085e" kindref="member">state</ref></type>
+        <definition>static state neforce::process::get_state</definition>
+        <argsstring>(native_id_type process_id)</argsstring>
+        <name>get_state</name>
+        <qualifiedname>neforce::process::get_state</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1process_1a3f81f828393255a71df39c27dcffbb56" kindref="member">native_id_type</ref></type>
+          <declname>process_id</declname>
+        </param>
+        <briefdescription>
+<para>查询任意进程的运行状态 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>process_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标进程 ID </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="467" column="19"/>
+        <references refid="classneforce_1_1process_1aff230f3f23648825c2ce0664552488ba">get_state</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a1f34ef8c7bc0dcd551f1874e4d4930e9" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1process_1a45062b22aa3b468cab2417085c16e3ca" kindref="member">privilege_level</ref></type>
+        <definition>static privilege_level neforce::process::get_privilege_level</definition>
+        <argsstring>(native_id_type process_id)</argsstring>
+        <name>get_privilege_level</name>
+        <qualifiedname>neforce::process::get_privilege_level</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1process_1a3f81f828393255a71df39c27dcffbb56" kindref="member">native_id_type</ref></type>
+          <declname>process_id</declname>
+        </param>
+        <briefdescription>
+<para>获取指定进程的特权级别 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>process_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标进程 ID </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="473" column="29"/>
+        <references refid="classneforce_1_1process_1a1f34ef8c7bc0dcd551f1874e4d4930e9">get_privilege_level</references>
+        <referencedby refid="classneforce_1_1process_1a1f34ef8c7bc0dcd551f1874e4d4930e9">get_privilege_level</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a43504571af5f348661c86a940eeab651" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool neforce::process::check_permission</definition>
+        <argsstring>(native_id_type process_id, permission permission)</argsstring>
+        <name>check_permission</name>
+        <qualifiedname>neforce::process::check_permission</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1process_1a3f81f828393255a71df39c27dcffbb56" kindref="member">native_id_type</ref></type>
+          <declname>process_id</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1process_1aa0da38c64dc220002e7c0e9fabb9f165" kindref="member">permission</ref></type>
+          <declname>permission</declname>
+        </param>
+        <briefdescription>
+<para>检查对指定进程的访问权限 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>process_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标进程 ID </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>permission</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的权限 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否拥有该权限 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="481" column="18"/>
+        <references refid="classneforce_1_1process_1a43504571af5f348661c86a940eeab651">check_permission</references>
+        <referencedby refid="classneforce_1_1process_1a43504571af5f348661c86a940eeab651">check_permission</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1process_1a19be4f0d722cb4bc7e89472c35586711" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>static string neforce::process::search_path</definition>
+        <argsstring>(const string &amp;executable)</argsstring>
+        <name>search_path</name>
+        <qualifiedname>neforce::process::search_path</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>executable</declname>
+        </param>
+        <briefdescription>
+<para>在 PATH 环境变量中搜索可执行文件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>executable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可执行文件名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>可执行文件完整路径，未找到返回空字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="488" column="20"/>
+        <references refid="classneforce_1_1process_1a19be4f0d722cb4bc7e89472c35586711">search_path</references>
+        <referencedby refid="classneforce_1_1process_1a19be4f0d722cb4bc7e89472c35586711">search_path</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>进程管理类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>支持 stdout/stderr 分离捕获、stdin 写入、工作目录和环境变量设置， 外部管道连接、文件重定向和进程链。</para>
+<para><programlisting><codeline><highlight class="normal"><ref refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611" kindref="member">process</ref><sp/>p;</highlight></codeline>
+<codeline><highlight class="normal">p.set_capture_stdout(</highlight><highlight class="keyword">true</highlight><highlight class="normal">)</highlight></codeline>
+<codeline><highlight class="normal"><sp/>.set_capture_stderr(</highlight><highlight class="keyword">true</highlight><highlight class="normal">)</highlight></codeline>
+<codeline><highlight class="normal"><sp/>.set_work_dir(</highlight><highlight class="stringliteral">&quot;/tmp&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal">p.start(</highlight><highlight class="stringliteral">&quot;/bin/ls&quot;</highlight><highlight class="normal">,<sp/>{</highlight><highlight class="stringliteral">&quot;-la&quot;</highlight><highlight class="normal">});</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rc<sp/>=<sp/>p.wait(5000);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>out<sp/>=<sp/>p.stdout_output();</highlight></codeline>
+</programlisting> </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="65" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="65" bodyend="489"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1process_1a825d0941dc484f9ebd2f54ea108f4338" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>capture</name></member>
+      <member refid="classneforce_1_1process_1a54dc2fadf91764dee43de84db15b6a58" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>capture_stderr_</name></member>
+      <member refid="classneforce_1_1process_1a8b8decacc072103605c83220941b01b3" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>capture_stdout_</name></member>
+      <member refid="classneforce_1_1process_1a7af2eddcc69ed93d8fec3a7b4326984f" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>chain</name></member>
+      <member refid="classneforce_1_1process_1a3b24879af59cd54e7c52742861c9395a" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>chain</name></member>
+      <member refid="classneforce_1_1process_1a43504571af5f348661c86a940eeab651" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>check_permission</name></member>
+      <member refid="classneforce_1_1process_1a9c138a35060b5ad1a33e62669cee73fd" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>close</name></member>
+      <member refid="classneforce_1_1process_1aa1e2b6a811af5a2fc878218baa2cb434" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>close_handles</name></member>
+      <member refid="classneforce_1_1process_1aa301f46c5aeb2369a42bfbd91ca805e9" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>close_stdin</name></member>
+      <member refid="classneforce_1_1process_1ad013106f3de0c79128b6902b8befe193" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>current_id</name></member>
+      <member refid="classneforce_1_1process_1a416d3c541b26cd6406336ce4ef8240f3" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>current_privilege_level</name></member>
+      <member refid="classneforce_1_1process_1acbef6f0db001ff6be1f6a34b9573d3c1" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>detach_handles</name></member>
+      <member refid="classneforce_1_1process_1a84c79e0dc120184a0813f13366b3cb38" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>detached_</name></member>
+      <member refid="classneforce_1_1process_1acbcb411eaf4a7a01da4bdc64f6f8e7e1" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>elevation_tool</name></member>
+      <member refid="classneforce_1_1process_1aa3646ab262b012f5329a900ecd75fe82" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>env_vars_</name></member>
+      <member refid="classneforce_1_1process_1ab399b7783b5b3ced4b67716b99684ec2" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>execute_elevated_shell</name></member>
+      <member refid="classneforce_1_1process_1a2b7658ad625ff46bf3c96baab890f9bd" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>execute_shell</name></member>
+      <member refid="classneforce_1_1process_1afaddb7d39c17a54324a6e0764496040c" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>exit_code</name></member>
+      <member refid="classneforce_1_1process_1ad4e59e8a4815725e3d04e550ccf665f6" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>exit_code_</name></member>
+      <member refid="classneforce_1_1process_1a7eae5660d33520c662cebf836ea68601" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>external_stderr_pipe_</name></member>
+      <member refid="classneforce_1_1process_1a9de64884341867bd3bf1588995e53167" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>external_stdin_pipe_</name></member>
+      <member refid="classneforce_1_1process_1af6054cc2bc019571a53318f45a0deb5e" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>external_stdout_pipe_</name></member>
+      <member refid="classneforce_1_1process_1af99ab1d15b64984df703fb5573dd89dc" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>finished_</name></member>
+      <member refid="classneforce_1_1process_1aa1416bed855878717a11f54b44ccca2f" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>get_memory_info</name></member>
+      <member refid="classneforce_1_1process_1a320402b50d48a09cd270cf6f44de8b5b" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>get_memory_info</name></member>
+      <member refid="classneforce_1_1process_1a1f34ef8c7bc0dcd551f1874e4d4930e9" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>get_privilege_level</name></member>
+      <member refid="classneforce_1_1process_1aff230f3f23648825c2ce0664552488ba" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>get_state</name></member>
+      <member refid="classneforce_1_1process_1aa979ac720ce99cc676a2f13a142d80ab" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>get_state</name></member>
+      <member refid="classneforce_1_1process_1aa58a500788a6dd8d2ad39badb4f4f853" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>id</name></member>
+      <member refid="classneforce_1_1process_1a95d830725d346293cd6b45be1bb249b8" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>is_running</name></member>
+      <member refid="classneforce_1_1process_1a17afe97c3b5735eae58f0326ba2978a6" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>name</name></member>
+      <member refid="classneforce_1_1process_1a3f81f828393255a71df39c27dcffbb56" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>native_id_type</name></member>
+      <member refid="classneforce_1_1process_1a3601a586477dddc98705e1d1d50059e6" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1process_1a5a2efbe63ef307675a238a1cc832c420" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1process_1aa0da38c64dc220002e7c0e9fabb9f165" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>permission</name></member>
+      <member refid="classneforce_1_1process_1a45062b22aa3b468cab2417085c16e3ca" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>privilege_level</name></member>
+      <member refid="classneforce_1_1process_1ad52e50d1cc707ab2cf95d7304bd21611" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>process</name></member>
+      <member refid="classneforce_1_1process_1adc325676f0e86dd633b83ae0003ec98d" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>process</name></member>
+      <member refid="classneforce_1_1process_1ae892f2e67e9a68d8217e76c5aa5c5bf0" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>process</name></member>
+      <member refid="classneforce_1_1process_1a25cd0e104924d6d2fae935d339d3df0c" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>process_handle_</name></member>
+      <member refid="classneforce_1_1process_1a3be5afe73e4058fb692bbfbc9dd860f4" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>process_id_</name></member>
+      <member refid="classneforce_1_1process_1a6474f57bc7cc9f56a371be8ca9b6467f" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>reader_loop</name></member>
+      <member refid="classneforce_1_1process_1a68197ded93013e31beca6c1225eb9909" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>reader_running_</name></member>
+      <member refid="classneforce_1_1process_1acb9a23d1e232a39af9ae5ef7d67a2ae0" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>reader_thread_</name></member>
+      <member refid="classneforce_1_1process_1a9e13f64ffb32874772a12d3b85ac062e" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>resume</name></member>
+      <member refid="classneforce_1_1process_1a19be4f0d722cb4bc7e89472c35586711" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>search_path</name></member>
+      <member refid="classneforce_1_1process_1a04c61de2cacd77b0c2e177fbcfb690d5" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>set_capture_stderr</name></member>
+      <member refid="classneforce_1_1process_1a4eadcc6594c0fc184e7f933033609dc5" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>set_capture_stdout</name></member>
+      <member refid="classneforce_1_1process_1a7ecd74721f0ae2be26438b6bb07e7a09" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>set_env</name></member>
+      <member refid="classneforce_1_1process_1a76657ad27452cd0c6023a56326deac69" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>set_external_stderr</name></member>
+      <member refid="classneforce_1_1process_1ac24c841585d3379bd6205f5a173533c1" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>set_external_stdin</name></member>
+      <member refid="classneforce_1_1process_1ac796c51d8b927fd73008f32b31339a87" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>set_external_stdout</name></member>
+      <member refid="classneforce_1_1process_1ac3ec8b7b8ef11a11434f929aed59a37d" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>set_stderr_file</name></member>
+      <member refid="classneforce_1_1process_1a62cc9ec622cb39aae8f798a32940ae75" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>set_stdin_data</name></member>
+      <member refid="classneforce_1_1process_1a36231fdc6c6394e33d7485adf782f715" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>set_stdout_file</name></member>
+      <member refid="classneforce_1_1process_1abfbe9ff2732d04b673f76ece15cc40ed" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>set_work_dir</name></member>
+      <member refid="classneforce_1_1process_1ad8f812aad1810ff7cc81dc1296d97f17" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>spawn</name></member>
+      <member refid="classneforce_1_1process_1aacf4f2a9ebada86e4da05915c80928d0" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>start</name></member>
+      <member refid="classneforce_1_1process_1aaf73584f1f1b9772007a9d5b501ea9b1" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>start_elevated</name></member>
+      <member refid="classneforce_1_1process_1af650eea6ba5a9215b83e36d30b6921a0" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>started_</name></member>
+      <member refid="classneforce_1_1process_1a6ae943e6045070fa7d677fdd8b36085e" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>state</name></member>
+      <member refid="classneforce_1_1process_1aa57e810b41adea1b286d218cae6d0f75" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>std_stream</name></member>
+      <member refid="classneforce_1_1process_1aff1f250e8574ac6f4c5875b272a49680" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>stderr_buf_</name></member>
+      <member refid="classneforce_1_1process_1ad920a632381e1598ebb72cd826c15dca" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>stderr_file_</name></member>
+      <member refid="classneforce_1_1process_1a8cc374b0360dad3ea78c4c26d16dbbfa" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>stderr_output</name></member>
+      <member refid="classneforce_1_1process_1a91e2401302f4cbf1383ac87479922111" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>stderr_pipe_</name></member>
+      <member refid="classneforce_1_1process_1a64d6a414c6d2b307f69f0842768639f5" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>stdin_data_</name></member>
+      <member refid="classneforce_1_1process_1afbe7fba715d21102f1c7a82fca2558ae" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>stdin_pipe_</name></member>
+      <member refid="classneforce_1_1process_1aae347b6b17710c26b18d4225ac6bda34" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>stdout_buf_</name></member>
+      <member refid="classneforce_1_1process_1af525819c49eef3c96eca120b5c7a2c6c" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>stdout_file_</name></member>
+      <member refid="classneforce_1_1process_1ae6456eb3024f4854b9e93dbc4caff480" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>stdout_output</name></member>
+      <member refid="classneforce_1_1process_1a89b0e896953f1019ab7356fb91dc60c5" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>stdout_pipe_</name></member>
+      <member refid="classneforce_1_1process_1a783ed100e6e24d4ca1f90c8a0df1cb4c" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>suspend</name></member>
+      <member refid="classneforce_1_1process_1a633a80ce58fa0844ed25d2fa14f0b0f7" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>system</name></member>
+      <member refid="classneforce_1_1process_1a0da9b12e0234a3bafd44de1c866b5f6a" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>terminate</name></member>
+      <member refid="classneforce_1_1process_1ab06b76112771e3707c3429db78e2f15b" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>thread_handle_</name></member>
+      <member refid="classneforce_1_1process_1aaf663e8e9cd35b830070997d96972e1d" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>wait</name></member>
+      <member refid="classneforce_1_1process_1a562db8504561a6e7bc8813292dce8a5e" prot="private" virt="non-virtual"><scope>neforce::process</scope><name>work_dir_</name></member>
+      <member refid="classneforce_1_1process_1a1dbd00d29efa4e9c482744d4626ec27d" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>write_stdin</name></member>
+      <member refid="classneforce_1_1process_1a9ce97919511fa2d2226c4f09554964f4" prot="public" virt="non-virtual"><scope>neforce::process</scope><name>~process</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

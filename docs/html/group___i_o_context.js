@@ -1,40 +1,40 @@
 var group___i_o_context =
 [
-    [ "io_context", "classio__context.html", [
-      [ "fd_callback", "classio__context.html#a22c6e7f6dd490bb02ce70b8ca1bbc5cc", null ],
-      [ "handler_type", "classio__context.html#a765e5fcf407110e43f638f86f88e1df4", null ],
-      [ "native_handle_type", "classio__context.html#a60774b72db6ac24a510f6a9efd9d48f1", null ],
-      [ "timer_callback", "classio__context.html#a4f20af47b680f51770aaed19a8056454", null ],
-      [ "io_context", "classio__context.html#a74a07d27876dfa43e2178db0c1d7f111", null ],
-      [ "~io_context", "classio__context.html#a2a6d77636076fab811f814eefba101b5", null ],
-      [ "add_fd", "classio__context.html#ac408f8abdf19b28a5440687229a56afc", null ],
-      [ "cancel_timer", "classio__context.html#a576815ac9ca0ade395453fe796a8f7a4", null ],
-      [ "dispatch", "classio__context.html#ac09e564c45661d2de47d3cc6ba7e322c", null ],
-      [ "get_executor", "classio__context.html#add3cbf5e58710f2dd3715a2475c469c8", null ],
-      [ "mod_fd", "classio__context.html#aef151e2dd765f4bf7a802a7146a18079", null ],
-      [ "poll", "classio__context.html#acc06fcf05bcd790ec5fb0d8a573d93b5", null ],
-      [ "poll_one", "classio__context.html#a82a2e08e28bc23f4188efd0fb7f6b9fd", null ],
-      [ "post", "classio__context.html#a78177b98552775f041bfff91abf84f35", null ],
-      [ "remove_fd", "classio__context.html#a4ce72df7eb9cfc15e429ddcd7cff4899", null ],
-      [ "restart", "classio__context.html#a248991bc5a8c16b429f26a369434e327", null ],
-      [ "run", "classio__context.html#a495e72fb34e3758f161fbedf6a805c76", null ],
-      [ "run_one", "classio__context.html#aa65d0b8a516d3c5f5df894c013dc1e1f", null ],
-      [ "run_pool", "classio__context.html#a699df267f2bcb068a1a68daf2970439a", null ],
-      [ "schedule_timer", "classio__context.html#afca39a74d8a33916fd0b75682d7bc749", null ],
-      [ "stop", "classio__context.html#a36ddac78469b9994bc890b2446405fda", null ],
-      [ "stopped", "classio__context.html#a198bf029cbd4d0aeccb8d919fc5b213c", null ]
+    [ "neforce::io_context", "classneforce_1_1io__context.html", [
+      [ "fd_callback", "classneforce_1_1io__context.html#ad71fd1be41a9c0af2a2f7cba05eb3f1a", null ],
+      [ "handler_type", "classneforce_1_1io__context.html#ae3989cc621a53bcd366406ab166aecfd", null ],
+      [ "native_handle_type", "classneforce_1_1io__context.html#a4250e0aae18ae538cfaee5ff72c78834", null ],
+      [ "timer_callback", "classneforce_1_1io__context.html#a407f8ccdb8d5733aaab3547c0fa4d597", null ],
+      [ "io_context", "classneforce_1_1io__context.html#a7b201e6487c1cf5965bd5b4fa5d8ccfb", null ],
+      [ "~io_context", "classneforce_1_1io__context.html#a37826a2313d10c36397776876ba07612", null ],
+      [ "add_fd", "classneforce_1_1io__context.html#ab6de26ff977971973635b8ff701d066d", null ],
+      [ "cancel_timer", "classneforce_1_1io__context.html#a59965d7c02fbb47ce16dab447d66d524", null ],
+      [ "dispatch", "classneforce_1_1io__context.html#af408c2026b166e2506ab78abc91b3289", null ],
+      [ "get_executor", "classneforce_1_1io__context.html#aee103b6067664ffa4d512c1e905f8918", null ],
+      [ "mod_fd", "classneforce_1_1io__context.html#a7455712adcf0c0075e81ba2d17bcdc07", null ],
+      [ "poll", "classneforce_1_1io__context.html#a3af8ec91599d62d1615bd4d19ffc1830", null ],
+      [ "poll_one", "classneforce_1_1io__context.html#a78e0605038679d62adce47b2bf3a49b4", null ],
+      [ "post", "classneforce_1_1io__context.html#a70c36dfdd21b3434439800d56bf4e942", null ],
+      [ "remove_fd", "classneforce_1_1io__context.html#a5c99b04f62177b2f63315f50237b47e9", null ],
+      [ "restart", "classneforce_1_1io__context.html#aa0a7fd498aac1151d83e9fc49b24629b", null ],
+      [ "run", "classneforce_1_1io__context.html#a2d0b05ac1c73237ad2056ef4ed07bc66", null ],
+      [ "run_one", "classneforce_1_1io__context.html#a365b06a14778fdd2b2a56ac84c21ce6c", null ],
+      [ "run_pool", "classneforce_1_1io__context.html#a17228086cc96db39d915689dcaecc000", null ],
+      [ "schedule_timer", "classneforce_1_1io__context.html#a78052af9b04e2e92a93bc4b8d1967d3c", null ],
+      [ "stop", "classneforce_1_1io__context.html#afaae1cb6de5e4fb64158f394ea176edc", null ],
+      [ "stopped", "classneforce_1_1io__context.html#afe7e01b9c81432059a2a2ade572e6921", null ]
     ] ],
-    [ "io_context::executor", "classio__context_1_1executor.html", [
-      [ "context", "classio__context_1_1executor.html#a9de4829a909f3f0c678eb67d0e4519d7", null ],
-      [ "execute", "classio__context_1_1executor.html#a58514ad1aa500d7d53da3805afef20ca", null ],
-      [ "operator!=", "classio__context_1_1executor.html#aeddb6b7b3a12244b45352ef4d723d756", null ],
-      [ "operator==", "classio__context_1_1executor.html#ac3dc3384d59a45cc43c71b07af167b6e", null ]
+    [ "neforce::io_context::executor", "classneforce_1_1io__context_1_1executor.html", [
+      [ "context", "classneforce_1_1io__context_1_1executor.html#aa7a8e7c054e3818aa4bf7d439145f8e3", null ],
+      [ "execute", "classneforce_1_1io__context_1_1executor.html#a97a139f492b655b3cadaddc8eb5216aa", null ],
+      [ "operator!=", "classneforce_1_1io__context_1_1executor.html#af235d9f253c30bed9f07e50341245e20", null ],
+      [ "operator==", "classneforce_1_1io__context_1_1executor.html#afc14d294b19cda43480aede9006f4919", null ]
     ] ],
-    [ "io_context::work", "classio__context_1_1work.html", [
-      [ "work", "classio__context_1_1work.html#a2d0a2326abe907a3683c43c3b6e22b1e", null ],
-      [ "~work", "classio__context_1_1work.html#a44fb9e18317ef1b3fd48bb7877ce5cc3", null ]
+    [ "neforce::io_context::work", "classneforce_1_1io__context_1_1work.html", [
+      [ "work", "classneforce_1_1io__context_1_1work.html#a07cf87c5235b787aef1c98b7f2027e6c", null ],
+      [ "~work", "classneforce_1_1io__context_1_1work.html#ad4c5ea2cbb3639a7ce980032f6c56b13", null ]
     ] ],
-    [ "epoll_et", "group___i_o_context.html#ga6cc93a94e5033c39c7ca6d92a10ee34a", null ],
-    [ "epoll_in", "group___i_o_context.html#ga3df986734fa33a82d4b3fa86565598f4", null ],
-    [ "epoll_out", "group___i_o_context.html#gae38d49eda1fb12817352be8229f841a2", null ]
+    [ "neforce::epoll_et", "group___i_o_context.html#ga855c6e27e51758dd78ba0b7d0770298d", null ],
+    [ "neforce::epoll_in", "group___i_o_context.html#gabf9d3ba48f9eb984f8497d28d91b5e5b", null ],
+    [ "neforce::epoll_out", "group___i_o_context.html#ga029f0e6192efd86189a3018383881615", null ]
 ];

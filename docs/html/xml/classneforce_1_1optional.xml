@@ -1,0 +1,2692 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1optional" kind="class" language="C++" prot="public">
+    <compoundname>neforce::optional</compoundname>
+    <basecompoundref refid="structneforce_1_1icommon" prot="public" virt="non-virtual">neforce::icommon&lt; optional&lt; T &gt; &gt;</basecompoundref>
+    <includes refid="optional_8hpp" local="no">optional.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1optional_1aa37367c7f0e34edb2c8539de3e1d1532" prot="public" static="no">
+        <type>T</type>
+        <definition>using neforce::optional&lt; T &gt;::value_type = T</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>neforce::optional::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="78" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1optional_1a937e3e27968d55a9ff09fd155da788db" prot="public" static="no">
+        <type>T *</type>
+        <definition>using neforce::optional&lt; T &gt;::pointer = T*</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>neforce::optional::pointer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="79" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1optional_1af386bb904d316a8e09a6bd45ec548287" prot="public" static="no">
+        <type>T &amp;</type>
+        <definition>using neforce::optional&lt; T &gt;::reference = T&amp;</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>neforce::optional::reference</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="80" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1optional_1a869438cd305161a764795778812bb59b" prot="public" static="no">
+        <type>const T *</type>
+        <definition>using neforce::optional&lt; T &gt;::const_pointer = const T*</definition>
+        <argsstring></argsstring>
+        <name>const_pointer</name>
+        <qualifiedname>neforce::optional::const_pointer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="81" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1optional_1a83102ea29ed04f1ebc1af42627a389d4" prot="public" static="no">
+        <type>const T &amp;</type>
+        <definition>using neforce::optional&lt; T &gt;::const_reference = const T&amp;</definition>
+        <argsstring></argsstring>
+        <name>const_reference</name>
+        <qualifiedname>neforce::optional::const_reference</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="82" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classneforce_1_1optional_1a622c33c4231d9972c6f97af02119a2b5" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga5a934140c1c872bb6d8ddd869e4bb3d3" kindref="member">bool_constant</ref>&lt;!<ref refid="group___type_traits_utilities_1ga55121889a2ca92a98b4610ee05dd1fac" kindref="member">is_any_of_v</ref>&lt; <ref refid="group___remove_qualifiers_1gae1cc8683a631b48e3c17e0740c4463b1" kindref="member">remove_cv_t</ref>&lt; U &gt;, <ref refid="structneforce_1_1none__t" kindref="compound">none_t</ref>, <ref refid="structneforce_1_1inplace__construct__tag" kindref="compound">inplace_construct_tag</ref> &gt; &amp;&amp; <ref refid="group___base_type_qualifier_check_1gabfd40c35527e6ca3735849cb800d0b8c" kindref="member">is_object_v</ref>&lt; U &gt; &amp;&amp;!<ref refid="group___base_type_qualifier_check_1gadb7549069d9c2c3522c7dbf74547d4db" kindref="member">is_array_v</ref>&lt; U &gt; &gt;</type>
+        <definition>using neforce::optional&lt; T &gt;::is_valid_optional = bool_constant&lt;!is_any_of_v&lt;remove_cv_t&lt;U&gt;, none_t, inplace_construct_tag&gt; &amp;&amp;
+                                           is_object_v&lt;U&gt; &amp;&amp; !is_array_v&lt;U&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>is_valid_optional</name>
+        <qualifiedname>neforce::optional::is_valid_optional</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="86" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1optional_1ac2e30d330425eaa17112ca9fe23acc15" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structneforce_1_1disjunction" kindref="compound">disjunction</ref>&lt; <ref refid="structneforce_1_1is__constructible" kindref="compound">is_constructible</ref>&lt; T, const <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref>&lt; U &gt; &amp; &gt;, <ref refid="structneforce_1_1is__constructible" kindref="compound">is_constructible</ref>&lt; T, <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref>&lt; U &gt; &amp; &gt;, <ref refid="structneforce_1_1is__constructible" kindref="compound">is_constructible</ref>&lt; T, const <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref>&lt; U &gt; &amp;&amp; &gt;, <ref refid="structneforce_1_1is__constructible" kindref="compound">is_constructible</ref>&lt; T, <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref>&lt; U &gt; &amp;&amp; &gt;, <ref refid="structneforce_1_1is__convertible" kindref="compound">is_convertible</ref>&lt; const <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref>&lt; U &gt; &amp;, T &gt;, <ref refid="structneforce_1_1is__convertible" kindref="compound">is_convertible</ref>&lt; <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref>&lt; U &gt; &amp;, T &gt;, <ref refid="structneforce_1_1is__convertible" kindref="compound">is_convertible</ref>&lt; const <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref>&lt; U &gt; &amp;&amp;, T &gt;, <ref refid="structneforce_1_1is__convertible" kindref="compound">is_convertible</ref>&lt; <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref>&lt; U &gt; &amp;&amp;, T &gt; &gt;</type>
+        <definition>using neforce::optional&lt; T &gt;::convertible_from_optional = 
+disjunction&lt;is_constructible&lt;T, const optional&lt;U&gt;&amp;&gt;, is_constructible&lt;T, optional&lt;U&gt;&amp;&gt;,
+            is_constructible&lt;T, const optional&lt;U&gt;&amp;&amp;&gt;, is_constructible&lt;T, optional&lt;U&gt;&amp;&amp;&gt;,
+            is_convertible&lt;const optional&lt;U&gt;&amp;, T&gt;, is_convertible&lt;optional&lt;U&gt;&amp;, T&gt;,
+            is_convertible&lt;const optional&lt;U&gt;&amp;&amp;, T&gt;, is_convertible&lt;optional&lt;U&gt;&amp;&amp;, T&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>convertible_from_optional</name>
+        <qualifiedname>neforce::optional::convertible_from_optional</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="90" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1optional_1ad26c9d56ff0b5360e1360e3d4cb7292a" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structneforce_1_1disjunction" kindref="compound">disjunction</ref>&lt; <ref refid="structneforce_1_1is__assignable" kindref="compound">is_assignable</ref>&lt; T &amp;, const <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref>&lt; U &gt; &amp; &gt;, <ref refid="structneforce_1_1is__assignable" kindref="compound">is_assignable</ref>&lt; T &amp;, <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref>&lt; U &gt; &amp; &gt;, <ref refid="structneforce_1_1is__assignable" kindref="compound">is_assignable</ref>&lt; T &amp;, const <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref>&lt; U &gt; &amp;&amp; &gt;, <ref refid="structneforce_1_1is__assignable" kindref="compound">is_assignable</ref>&lt; T &amp;, <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref>&lt; U &gt; &amp;&amp; &gt; &gt;</type>
+        <definition>using neforce::optional&lt; T &gt;::assignable_from_optional = 
+disjunction&lt;is_assignable&lt;T&amp;, const optional&lt;U&gt;&amp;&gt;, is_assignable&lt;T&amp;, optional&lt;U&gt;&amp;&gt;,
+            is_assignable&lt;T&amp;, const optional&lt;U&gt;&amp;&amp;&gt;, is_assignable&lt;T&amp;, optional&lt;U&gt;&amp;&amp;&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>assignable_from_optional</name>
+        <qualifiedname>neforce::optional::assignable_from_optional</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="97" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="97" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1optional_1ab478e726f04f16c23598964b4ffaac35" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::optional&lt; T &gt;::have_value_</definition>
+        <argsstring></argsstring>
+        <name>have_value_</name>
+        <qualifiedname>neforce::optional::have_value_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="101" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1optional_1aac8c9e8afa81b156cf17541a0461d240" prot="private" static="no" mutable="no">
+        <type><ref refid="group___alignment_1gaab9e3d84babf7e40da3ee0d071a80135" kindref="member">aligned_storage_t</ref>&lt; sizeof(T), alignof(T)&gt;</type>
+        <definition>aligned_storage_t&lt;sizeof(T), alignof(T)&gt; neforce::optional&lt; T &gt;::storage_</definition>
+        <argsstring></argsstring>
+        <name>storage_</name>
+        <qualifiedname>neforce::optional::storage_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="102" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="102" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1optional_1a17cc0fe664d835e327d8a222647bc05f" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>T *</type>
+        <definition>T * neforce::optional&lt; T &gt;::get_ptr</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>get_ptr</name>
+        <qualifiedname>neforce::optional::get_ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="104" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="104" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1acb734476fd8aa86b0b11be5a88e3a146" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const T *</type>
+        <definition>const T * neforce::optional&lt; T &gt;::get_ptr</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_ptr</name>
+        <qualifiedname>neforce::optional::get_ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="105" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="105" bodyend="105"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::optional&lt; T &gt;::optional</definition>
+        <argsstring>(none_t n=none) noexcept</argsstring>
+        <name>optional</name>
+        <qualifiedname>neforce::optional::optional</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1none__t" kindref="compound">none_t</ref></type>
+          <declname>n</declname>
+          <defval><ref refid="group___none_1gae83f5d6b9256e35bb2781ebb286996d3" kindref="member">none</ref></defval>
+        </param>
+        <briefdescription>
+<para>从空值构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>空值</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+构造一个空的可选值。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="114" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="114" bodyend="114"/>
+        <references refid="group___none_1gae83f5d6b9256e35bb2781ebb286996d3" compoundref="none_8hpp" startline="73" endline="73">neforce::none</references>
+        <referencedby refid="classneforce_1_1optional_1ab4b63080e884ecc63ef0196db1ba1e11" compoundref="optional_8hpp" startline="745" endline="753">neforce::optional&lt; T &gt;::equal_to</referencedby>
+        <referencedby refid="classneforce_1_1optional_1ace1da906e2a5388a84a23b2f3e10dddc" compoundref="optional_8hpp" startline="760" endline="765">neforce::optional&lt; T &gt;::less_than</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a0146cbe25ed45d60da3f61db1fc5363a" compoundref="optional_8hpp" startline="265" endline="280">neforce::optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a63917ed503377ae0b5d1628c29051e1a" compoundref="optional_8hpp" startline="394" endline="406">neforce::optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1optional_1ad8babf6c38058fd9b75d7450391d59ec" compoundref="optional_8hpp" startline="234" endline="247">neforce::optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a9d802550d4ab5e6635a054f3c5f81091" compoundref="optional_8hpp" startline="121" endline="124">neforce::optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a0dae177ec3997b2fd067cad8ba4a32b1" compoundref="optional_8hpp" startline="354" endline="372">neforce::optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1optional_1ad959bc40b14c91ae9ab1269e7c35acfe" compoundref="optional_8hpp" startline="322" endline="335">neforce::optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1optional_1add710dc4bc0e534fabb48b62ff3e3acd" compoundref="optional_8hpp" startline="180" endline="190">neforce::optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a50b828075a0070054e7ddfc66bdf8856" compoundref="optional_8hpp" startline="253" endline="258">neforce::optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a96eca4e1f3cf8f2280ecf6cb9dcb5285" compoundref="optional_8hpp" startline="380" endline="385">neforce::optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a47344a49e1314761a192025ae9425141" compoundref="optional_8hpp" startline="200" endline="205">neforce::optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classneforce_1_1optional_1acfbdee35b589e48d15efb3a63324f864" compoundref="optional_8hpp" startline="341" endline="347">neforce::optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a4df326e420fc57e8a25b51c36629dfb3" compoundref="optional_8hpp" startline="290" endline="295">neforce::optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classneforce_1_1optional_1ac2db29dca3ef07cc5f017e0ea87c7dc1" compoundref="optional_8hpp" startline="585" endline="590">neforce::optional&lt; T &gt;::or_else</referencedby>
+        <referencedby refid="classneforce_1_1optional_1acb06845158a3c6454f354c182a992824" compoundref="optional_8hpp" startline="571" endline="576">neforce::optional&lt; T &gt;::or_else</referencedby>
+        <referencedby refid="classneforce_1_1optional_1ae41c15b0fd33450d99fbb9a3a1194953" compoundref="optional_8hpp" startline="793" endline="807">neforce::optional&lt; T &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1optional_1af183c42ff9db2196358306003d95f672" compoundref="optional_8hpp" startline="697" endline="702">neforce::optional&lt; T &gt;::transform</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a5eafbf7873e62683c2e5510ec121ae06" compoundref="optional_8hpp" startline="669" endline="674">neforce::optional&lt; T &gt;::transform</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a0429b38802d42383e3450601d1e4f458" compoundref="optional_8hpp" startline="683" endline="688">neforce::optional&lt; T &gt;::transform</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a78cd13eb2e54b11427e1d68dd3c53dc0" compoundref="optional_8hpp" startline="655" endline="660">neforce::optional&lt; T &gt;::transform</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a9d802550d4ab5e6635a054f3c5f81091" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref> &amp;</type>
+        <definition>optional &amp; neforce::optional&lt; T &gt;::operator=</definition>
+        <argsstring>(none_t n) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::optional::operator=</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1none__t" kindref="compound">none_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>空值赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>空值标签 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="121" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="121" bodyend="124"/>
+        <references refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" compoundref="optional_8hpp" startline="114" endline="114">neforce::optional&lt; T &gt;::optional</references>
+        <references refid="classneforce_1_1optional_1aab0a7905eb191dc71e8e8c3208a58a6e" compoundref="optional_8hpp" startline="473" endline="478">neforce::optional&lt; T &gt;::reset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a31e833b6e9ea5fecfbddc4da7b7836ce" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, U &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; is_valid_optional&lt; U &gt;<ref refid="classneforce_1_1optional_1a0aec6d3cfc90fbe9f5066b11002c215f" kindref="member">::value</ref> &amp;&amp;!<ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt; <ref refid="group___remove_qualifiers_1ga878454a8799ed6276098016ab4bd5975" kindref="member">remove_cvref_t</ref>&lt; U &gt;, <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref> &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, U &gt; &amp;&amp;<ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; U, T &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::optional&lt; T &gt;::optional</definition>
+        <argsstring>(U &amp;&amp;value)</argsstring>
+        <name>optional</name>
+        <qualifiedname>neforce::optional::optional</qualifiedname>
+        <param>
+          <type>U &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从值隐式转换构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="134" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="134" bodyend="137"/>
+        <references refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___type_special_member_function_checks_1ga910040e0e7eedac28b597a7cbd403314" compoundref="type__traits_8hpp" startline="2807">neforce::is_nothrow_constructible_v</references>
+        <references refid="classneforce_1_1optional_1a0aec6d3cfc90fbe9f5066b11002c215f" compoundref="optional_8hpp" startline="497" endline="502">neforce::optional&lt; T &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a31e833b6e9ea5fecfbddc4da7b7836ce" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, U &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; is_valid_optional&lt; U &gt;<ref refid="classneforce_1_1optional_1a0aec6d3cfc90fbe9f5066b11002c215f" kindref="member">::value</ref> &amp;&amp;!<ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt; <ref refid="group___remove_qualifiers_1ga878454a8799ed6276098016ab4bd5975" kindref="member">remove_cvref_t</ref>&lt; U &gt;, <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref> &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, U &gt; &amp;&amp;!<ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; U, T &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::optional&lt; T &gt;::optional</definition>
+        <argsstring>(U &amp;&amp;value)</argsstring>
+        <name>optional</name>
+        <qualifiedname>neforce::optional::optional</qualifiedname>
+        <param>
+          <type>U &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从值显式转换构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="147" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="147" bodyend="150"/>
+        <references refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___type_special_member_function_checks_1ga910040e0e7eedac28b597a7cbd403314" compoundref="type__traits_8hpp" startline="2807">neforce::is_nothrow_constructible_v</references>
+        <references refid="classneforce_1_1optional_1a0aec6d3cfc90fbe9f5066b11002c215f" compoundref="optional_8hpp" startline="497" endline="502">neforce::optional&lt; T &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1ab39e227b1057aded06bd28e55fd68c4d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_copy_constructible_v&lt; T &gt;" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::optional&lt; T &gt;::optional</definition>
+        <argsstring>(const T &amp;value)</argsstring>
+        <name>optional</name>
+        <qualifiedname>neforce::optional::optional</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从值拷贝构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="156" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="156" bodyend="159"/>
+        <references refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</references>
+        <references refid="group___type_special_member_function_checks_1gac2ccc147b2ba5ce7bccbbda00d6f9fda" compoundref="type__traits_8hpp" startline="2826">neforce::is_nothrow_copy_constructible_v</references>
+        <references refid="classneforce_1_1optional_1a0aec6d3cfc90fbe9f5066b11002c215f" compoundref="optional_8hpp" startline="497" endline="502">neforce::optional&lt; T &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1aaa36bdf4ceca2b5724615098c2fb3540" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; T &gt;" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::optional&lt; T &gt;::optional</definition>
+        <argsstring>(T &amp;&amp;value)</argsstring>
+        <name>optional</name>
+        <qualifiedname>neforce::optional::optional</qualifiedname>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从值移动构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="165" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="165" bodyend="168"/>
+        <references refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</references>
+        <references refid="group___type_special_member_function_checks_1gae20ac6ad74f8179d6959c23cbda15965" compoundref="type__traits_8hpp" startline="2862">neforce::is_nothrow_move_constructible_v</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1optional_1a0aec6d3cfc90fbe9f5066b11002c215f" compoundref="optional_8hpp" startline="497" endline="502">neforce::optional&lt; T &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1add710dc4bc0e534fabb48b62ff3e3acd" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, U &gt; &amp;&amp;is_nothrow_assignable_v&lt; T &amp;, U &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+            <defval>T</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt; <ref refid="group___remove_qualifiers_1ga878454a8799ed6276098016ab4bd5975" kindref="member">remove_cvref_t</ref>&lt; U &gt;, <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref> &gt; &amp;&amp;<ref refid="group___type_traits_utilities_1ga4e8c1f7e8febf1ded2a8bb82ecade18b" kindref="member">negation_v</ref>&lt; <ref refid="structneforce_1_1conjunction" kindref="compound">conjunction</ref>&lt; <ref refid="structneforce_1_1is__scalar" kindref="compound">is_scalar</ref>&lt; T &gt;, <ref refid="structneforce_1_1is__same" kindref="compound">is_same</ref>&lt; T, <ref refid="group___type_attribute_operations_1ga63500a8dd0f79ce1c721aebb8023ce89" kindref="member">decay_t</ref>&lt; U &gt; &gt; &gt; &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, U &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga020ccefa04f1f7ad5525fd6a18fea8c0" kindref="member">is_assignable_v</ref>&lt; T &amp;, U &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref> &amp;</type>
+        <definition>optional &amp; neforce::optional&lt; T &gt;::operator=</definition>
+        <argsstring>(U &amp;&amp;value)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::optional::operator=</qualifiedname>
+        <param>
+          <type>U &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从值赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="180" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="180" bodyend="190"/>
+        <references refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___type_special_member_function_checks_1ga67e9f187eb2f58f528b18833dc75a7f8" compoundref="type__traits_8hpp" startline="2886">neforce::is_nothrow_assignable_v</references>
+        <references refid="group___type_special_member_function_checks_1ga910040e0e7eedac28b597a7cbd403314" compoundref="type__traits_8hpp" startline="2807">neforce::is_nothrow_constructible_v</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" compoundref="optional_8hpp" startline="114" endline="114">neforce::optional&lt; T &gt;::optional</references>
+        <references refid="classneforce_1_1optional_1a0aec6d3cfc90fbe9f5066b11002c215f" compoundref="optional_8hpp" startline="497" endline="502">neforce::optional&lt; T &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a47344a49e1314761a192025ae9425141" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, const U &amp; &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt; T, U &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, const U &amp; &gt; &amp;&amp;<ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; const U &amp;, T &gt; &amp;&amp;!convertible_from_optional&lt; U &gt;<ref refid="classneforce_1_1optional_1a0aec6d3cfc90fbe9f5066b11002c215f" kindref="member">::value</ref>, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::optional&lt; T &gt;::optional</definition>
+        <argsstring>(const optional&lt; U &gt; &amp;other)</argsstring>
+        <name>optional</name>
+        <qualifiedname>neforce::optional::optional</qualifiedname>
+        <param>
+          <type>const optional&lt; U &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>从可选值隐式转换复制构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="200" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="200" bodyend="205"/>
+        <references refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</references>
+        <references refid="group___type_special_member_function_checks_1ga910040e0e7eedac28b597a7cbd403314" compoundref="type__traits_8hpp" startline="2807">neforce::is_nothrow_constructible_v</references>
+        <references refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" compoundref="optional_8hpp" startline="114" endline="114">neforce::optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a47344a49e1314761a192025ae9425141" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, const U &amp; &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt; T, U &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, const U &amp; &gt; &amp;&amp;!<ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; const U &amp;, T &gt; &amp;&amp;!convertible_from_optional&lt; U &gt;<ref refid="classneforce_1_1optional_1a0aec6d3cfc90fbe9f5066b11002c215f" kindref="member">::value</ref>, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::optional&lt; T &gt;::optional</definition>
+        <argsstring>(const optional&lt; U &gt; &amp;other)</argsstring>
+        <name>optional</name>
+        <qualifiedname>neforce::optional::optional</qualifiedname>
+        <param>
+          <type>const optional&lt; U &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>从可选值显式转换复制构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="215" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="215" bodyend="220"/>
+        <references refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</references>
+        <references refid="group___type_special_member_function_checks_1ga910040e0e7eedac28b597a7cbd403314" compoundref="type__traits_8hpp" startline="2807">neforce::is_nothrow_constructible_v</references>
+        <references refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" compoundref="optional_8hpp" startline="114" endline="114">neforce::optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1ad8babf6c38058fd9b75d7450391d59ec" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, const U &amp; &gt; &amp;&amp;is_nothrow_assignable_v&lt; T &amp;, const U &amp; &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+            <defval>T</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt; <ref refid="group___remove_qualifiers_1ga878454a8799ed6276098016ab4bd5975" kindref="member">remove_cvref_t</ref>&lt; U &gt;, <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref> &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, const U &amp; &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga020ccefa04f1f7ad5525fd6a18fea8c0" kindref="member">is_assignable_v</ref>&lt; T &amp;, const U &amp; &gt; &amp;&amp;!convertible_from_optional&lt; U &gt;<ref refid="classneforce_1_1optional_1a0aec6d3cfc90fbe9f5066b11002c215f" kindref="member">::value</ref> &amp;&amp;!assignable_from_optional&lt; U &gt;<ref refid="classneforce_1_1optional_1a0aec6d3cfc90fbe9f5066b11002c215f" kindref="member">::value</ref>, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref> &amp;</type>
+        <definition>optional &amp; neforce::optional&lt; T &gt;::operator=</definition>
+        <argsstring>(const optional&lt; U &gt; &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::optional::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref>&lt; U &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>从可选值复制赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="234" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="234" bodyend="247"/>
+        <references refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</references>
+        <references refid="group___type_special_member_function_checks_1ga67e9f187eb2f58f528b18833dc75a7f8" compoundref="type__traits_8hpp" startline="2886">neforce::is_nothrow_assignable_v</references>
+        <references refid="group___type_special_member_function_checks_1ga910040e0e7eedac28b597a7cbd403314" compoundref="type__traits_8hpp" startline="2807">neforce::is_nothrow_constructible_v</references>
+        <references refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" compoundref="optional_8hpp" startline="114" endline="114">neforce::optional&lt; T &gt;::optional</references>
+        <references refid="classneforce_1_1optional_1aab0a7905eb191dc71e8e8c3208a58a6e" compoundref="optional_8hpp" startline="473" endline="478">neforce::optional&lt; T &gt;::reset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a50b828075a0070054e7ddfc66bdf8856" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::optional&lt; T &gt;::optional</definition>
+        <argsstring>(const optional &amp;other)</argsstring>
+        <name>optional</name>
+        <qualifiedname>neforce::optional::optional</qualifiedname>
+        <param>
+          <type>const optional &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>复制构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="253" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="253" bodyend="258"/>
+        <references refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</references>
+        <references refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" compoundref="optional_8hpp" startline="114" endline="114">neforce::optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a0146cbe25ed45d60da3f61db1fc5363a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref> &amp;</type>
+        <definition>optional &amp; neforce::optional&lt; T &gt;::operator=</definition>
+        <argsstring>(const optional &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::optional::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>复制赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="265" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="265" bodyend="280"/>
+        <references refid="group___args_forward_functions_1ga57a2cf85645286e20c82caae70cd13dc" compoundref="type__traits_8hpp" startline="3084" endline="3086">neforce::addressof</references>
+        <references refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</references>
+        <references refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" compoundref="optional_8hpp" startline="114" endline="114">neforce::optional&lt; T &gt;::optional</references>
+        <references refid="classneforce_1_1optional_1aab0a7905eb191dc71e8e8c3208a58a6e" compoundref="optional_8hpp" startline="473" endline="478">neforce::optional&lt; T &gt;::reset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a4df326e420fc57e8a25b51c36629dfb3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, U &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt; T, U &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, U &gt; &amp;&amp;<ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; U, T &gt; &amp;&amp;!convertible_from_optional&lt; U &gt;<ref refid="classneforce_1_1optional_1a0aec6d3cfc90fbe9f5066b11002c215f" kindref="member">::value</ref>, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::optional&lt; T &gt;::optional</definition>
+        <argsstring>(optional&lt; U &gt; &amp;&amp;other)</argsstring>
+        <name>optional</name>
+        <qualifiedname>neforce::optional::optional</qualifiedname>
+        <param>
+          <type>optional&lt; U &gt; &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>从可选值隐式转换移动构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="290" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="290" bodyend="295"/>
+        <references refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</references>
+        <references refid="group___type_special_member_function_checks_1ga910040e0e7eedac28b597a7cbd403314" compoundref="type__traits_8hpp" startline="2807">neforce::is_nothrow_constructible_v</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" compoundref="optional_8hpp" startline="114" endline="114">neforce::optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a4df326e420fc57e8a25b51c36629dfb3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, U &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt; T, U &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, U &gt; &amp;&amp;!<ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; U, T &gt; &amp;&amp;!convertible_from_optional&lt; U &gt;<ref refid="classneforce_1_1optional_1a0aec6d3cfc90fbe9f5066b11002c215f" kindref="member">::value</ref>, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::optional&lt; T &gt;::optional</definition>
+        <argsstring>(optional&lt; U &gt; &amp;&amp;other)</argsstring>
+        <name>optional</name>
+        <qualifiedname>neforce::optional::optional</qualifiedname>
+        <param>
+          <type>optional&lt; U &gt; &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>从可选值显式转换移动构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="305" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="305" bodyend="310"/>
+        <references refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</references>
+        <references refid="group___type_special_member_function_checks_1ga910040e0e7eedac28b597a7cbd403314" compoundref="type__traits_8hpp" startline="2807">neforce::is_nothrow_constructible_v</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" compoundref="optional_8hpp" startline="114" endline="114">neforce::optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1ad959bc40b14c91ae9ab1269e7c35acfe" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, U &gt; &amp;&amp;is_nothrow_assignable_v&lt; T &amp;, U &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+            <defval>T</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt; <ref refid="group___remove_qualifiers_1ga878454a8799ed6276098016ab4bd5975" kindref="member">remove_cvref_t</ref>&lt; U &gt;, <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref> &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, U &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga020ccefa04f1f7ad5525fd6a18fea8c0" kindref="member">is_assignable_v</ref>&lt; T &amp;, U &gt; &amp;&amp;!convertible_from_optional&lt; U &gt;<ref refid="classneforce_1_1optional_1a0aec6d3cfc90fbe9f5066b11002c215f" kindref="member">::value</ref> &amp;&amp;!assignable_from_optional&lt; U &gt;<ref refid="classneforce_1_1optional_1a0aec6d3cfc90fbe9f5066b11002c215f" kindref="member">::value</ref>, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref> &amp;</type>
+        <definition>optional &amp; neforce::optional&lt; T &gt;::operator=</definition>
+        <argsstring>(optional&lt; U &gt; &amp;&amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::optional::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref>&lt; U &gt; &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>从可选值移动赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="322" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="322" bodyend="335"/>
+        <references refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</references>
+        <references refid="group___type_special_member_function_checks_1ga67e9f187eb2f58f528b18833dc75a7f8" compoundref="type__traits_8hpp" startline="2886">neforce::is_nothrow_assignable_v</references>
+        <references refid="group___type_special_member_function_checks_1ga910040e0e7eedac28b597a7cbd403314" compoundref="type__traits_8hpp" startline="2807">neforce::is_nothrow_constructible_v</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" compoundref="optional_8hpp" startline="114" endline="114">neforce::optional&lt; T &gt;::optional</references>
+        <references refid="classneforce_1_1optional_1aab0a7905eb191dc71e8e8c3208a58a6e" compoundref="optional_8hpp" startline="473" endline="478">neforce::optional&lt; T &gt;::reset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1acfbdee35b589e48d15efb3a63324f864" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::optional&lt; T &gt;::optional</definition>
+        <argsstring>(optional &amp;&amp;other) noexcept</argsstring>
+        <name>optional</name>
+        <qualifiedname>neforce::optional::optional</qualifiedname>
+        <param>
+          <type>optional &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="341" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="341" bodyend="347"/>
+        <references refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" compoundref="optional_8hpp" startline="114" endline="114">neforce::optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a0dae177ec3997b2fd067cad8ba4a32b1" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref> &amp;</type>
+        <definition>optional &amp; neforce::optional&lt; T &gt;::operator=</definition>
+        <argsstring>(optional &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::optional::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="354" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="354" bodyend="372"/>
+        <references refid="group___args_forward_functions_1ga57a2cf85645286e20c82caae70cd13dc" compoundref="type__traits_8hpp" startline="3084" endline="3086">neforce::addressof</references>
+        <references refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" compoundref="optional_8hpp" startline="114" endline="114">neforce::optional&lt; T &gt;::optional</references>
+        <references refid="classneforce_1_1optional_1aab0a7905eb191dc71e8e8c3208a58a6e" compoundref="optional_8hpp" startline="473" endline="478">neforce::optional&lt; T &gt;::reset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a96eca4e1f3cf8f2280ecf6cb9dcb5285" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, U &amp; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::optional&lt; T &gt;::optional</definition>
+        <argsstring>(const optional&lt; U &amp; &gt; &amp;other)</argsstring>
+        <name>optional</name>
+        <qualifiedname>neforce::optional::optional</qualifiedname>
+        <param>
+          <type>const optional&lt; U &amp; &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>从引用可选值赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源引用类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="380" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="380" bodyend="385"/>
+        <references refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</references>
+        <references refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" compoundref="optional_8hpp" startline="114" endline="114">neforce::optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a63917ed503377ae0b5d1628c29051e1a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga020ccefa04f1f7ad5525fd6a18fea8c0" kindref="member">is_assignable_v</ref>&lt; T &amp;, U &amp; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref> &amp;</type>
+        <definition>optional &amp; neforce::optional&lt; T &gt;::operator=</definition>
+        <argsstring>(const optional&lt; U &amp; &gt; &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::optional::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref>&lt; U &amp; &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>从引用可选值赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源引用类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="394" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="394" bodyend="406"/>
+        <references refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</references>
+        <references refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" compoundref="optional_8hpp" startline="114" endline="114">neforce::optional&lt; T &gt;::optional</references>
+        <references refid="classneforce_1_1optional_1aab0a7905eb191dc71e8e8c3208a58a6e" compoundref="optional_8hpp" startline="473" endline="478">neforce::optional&lt; T &gt;::reset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a27d163d4322f67baf9ab56a0aa055966" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, Types... &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Types</declname>
+            <defname>Types</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, Types... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::optional&lt; T &gt;::optional</definition>
+        <argsstring>(inplace_construct_tag, Types &amp;&amp;... args)</argsstring>
+        <name>optional</name>
+        <qualifiedname>neforce::optional::optional</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1inplace__construct__tag" kindref="compound">inplace_construct_tag</ref></type>
+        </param>
+        <param>
+          <type>Types &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>原位构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="414" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="414" bodyend="418"/>
+        <references refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___type_special_member_function_checks_1ga910040e0e7eedac28b597a7cbd403314" compoundref="type__traits_8hpp" startline="2807">neforce::is_nothrow_constructible_v</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a39eee7f19b555f923db7969d917cf8bc" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, std::initializer_list&lt; U &gt; &amp;, Types... &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Types</declname>
+            <defname>Types</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, std::initializer_list&lt; U &gt; &amp;, Types... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::optional&lt; T &gt;::optional</definition>
+        <argsstring>(inplace_construct_tag, std::initializer_list&lt; U &gt; ilist, Types &amp;&amp;... args)</argsstring>
+        <name>optional</name>
+        <qualifiedname>neforce::optional::optional</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1inplace__construct__tag" kindref="compound">inplace_construct_tag</ref></type>
+        </param>
+        <param>
+          <type>std::initializer_list&lt; U &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type>Types &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>使用初始化列表原位构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="429" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="429" bodyend="434"/>
+        <references refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___type_special_member_function_checks_1ga910040e0e7eedac28b597a7cbd403314" compoundref="type__traits_8hpp" startline="2807">neforce::is_nothrow_constructible_v</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a08b65e3c293d78afb5307179e5997f41" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::optional&lt; T &gt;::~optional</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>~optional</name>
+        <qualifiedname>neforce::optional::~optional</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="439" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="439" bodyend="439"/>
+        <references refid="classneforce_1_1optional_1aab0a7905eb191dc71e8e8c3208a58a6e" compoundref="optional_8hpp" startline="473" endline="478">neforce::optional&lt; T &gt;::reset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a6ec9d71801be4f0accc79aee568cf59c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, Types... &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Types</declname>
+            <defname>Types</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, Types... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::optional&lt; T &gt;::emplace</definition>
+        <argsstring>(Types &amp;&amp;... args)</argsstring>
+        <name>emplace</name>
+        <qualifiedname>neforce::optional::emplace</qualifiedname>
+        <param>
+          <type>Types &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>原位构造值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="447" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="447" bodyend="451"/>
+        <references refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___type_special_member_function_checks_1ga910040e0e7eedac28b597a7cbd403314" compoundref="type__traits_8hpp" startline="2807">neforce::is_nothrow_constructible_v</references>
+        <references refid="classneforce_1_1optional_1aab0a7905eb191dc71e8e8c3208a58a6e" compoundref="optional_8hpp" startline="473" endline="478">neforce::optional&lt; T &gt;::reset</references>
+        <referencedby refid="classneforce_1_1optional_1ae41c15b0fd33450d99fbb9a3a1194953" compoundref="optional_8hpp" startline="793" endline="807">neforce::optional&lt; T &gt;::swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1aee48339bb289eb4225ed654710507f95" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, std::initializer_list&lt; U &gt; &amp;, Types... &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Types</declname>
+            <defname>Types</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; T, std::initializer_list&lt; U &gt; &amp;, Types... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::optional&lt; T &gt;::emplace</definition>
+        <argsstring>(std::initializer_list&lt; U &gt; ilist, Types &amp;&amp;... args)</argsstring>
+        <name>emplace</name>
+        <qualifiedname>neforce::optional::emplace</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; U &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type>Types &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>使用初始化列表原位构造值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="463" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="463" bodyend="468"/>
+        <references refid="group___inplace_memory_function_1ga209897e20022ce0e7c15c49e20901720" compoundref="construct_8hpp" startline="33" endline="36">neforce::construct</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___type_special_member_function_checks_1ga910040e0e7eedac28b597a7cbd403314" compoundref="type__traits_8hpp" startline="2807">neforce::is_nothrow_constructible_v</references>
+        <references refid="classneforce_1_1optional_1aab0a7905eb191dc71e8e8c3208a58a6e" compoundref="optional_8hpp" startline="473" endline="478">neforce::optional&lt; T &gt;::reset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1aab0a7905eb191dc71e8e8c3208a58a6e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::optional&lt; T &gt;::reset</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>reset</name>
+        <qualifiedname>neforce::optional::reset</qualifiedname>
+        <briefdescription>
+<para>重置可选值为空 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="473" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="473" bodyend="478"/>
+        <references refid="group___inplace_memory_function_1ga331a75759198aa8083265b23c0b3b913" compoundref="construct_8hpp" startline="46" endline="48">neforce::destroy</references>
+        <referencedby refid="classneforce_1_1optional_1aee48339bb289eb4225ed654710507f95" compoundref="optional_8hpp" startline="463" endline="468">neforce::optional&lt; T &gt;::emplace</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a6ec9d71801be4f0accc79aee568cf59c" compoundref="optional_8hpp" startline="447" endline="451">neforce::optional&lt; T &gt;::emplace</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a0146cbe25ed45d60da3f61db1fc5363a" compoundref="optional_8hpp" startline="265" endline="280">neforce::optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a63917ed503377ae0b5d1628c29051e1a" compoundref="optional_8hpp" startline="394" endline="406">neforce::optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1optional_1ad8babf6c38058fd9b75d7450391d59ec" compoundref="optional_8hpp" startline="234" endline="247">neforce::optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a9d802550d4ab5e6635a054f3c5f81091" compoundref="optional_8hpp" startline="121" endline="124">neforce::optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a0dae177ec3997b2fd067cad8ba4a32b1" compoundref="optional_8hpp" startline="354" endline="372">neforce::optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1optional_1ad959bc40b14c91ae9ab1269e7c35acfe" compoundref="optional_8hpp" startline="322" endline="335">neforce::optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1optional_1ae41c15b0fd33450d99fbb9a3a1194953" compoundref="optional_8hpp" startline="793" endline="807">neforce::optional&lt; T &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a08b65e3c293d78afb5307179e5997f41" compoundref="optional_8hpp" startline="439" endline="439">neforce::optional&lt; T &gt;::~optional</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a96e209c242abe7ed27535b794261fd25" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::optional&lt; T &gt;::has_value</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>has_value</name>
+        <qualifiedname>neforce::optional::has_value</qualifiedname>
+        <briefdescription>
+<para>检查是否包含值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否包含值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="484" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="484" bodyend="484"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a0c8f5738af6f5850dae531cd995b6f14" prot="public" static="no" constexpr="yes" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::optional&lt; T &gt;::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>neforce::optional::operator bool</qualifiedname>
+        <briefdescription>
+<para>转换为布尔值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否包含值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="490" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="490" bodyend="490"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a0aec6d3cfc90fbe9f5066b11002c215f" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <type>const_reference</type>
+        <definition>const_reference neforce::optional&lt; T &gt;::value</definition>
+        <argsstring>() const &amp;</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::optional::value</qualifiedname>
+        <briefdescription>
+<para>取出存储的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>存储的值的常量左值引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1optional__exception" kindref="compound">optional_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果值未存储 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="497" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="497" bodyend="502"/>
+        <referencedby refid="group___optional_1ga7fde79ad529fc3ddf95c97a843143975" compoundref="optional_8hpp" startline="1368" endline="1370">neforce::get</referencedby>
+        <referencedby refid="group___optional_1ga69a5e2e89cb193e3bd5517ec73af14e3" compoundref="optional_8hpp" startline="1344" endline="1346">neforce::get</referencedby>
+        <referencedby refid="group___optional_1gade0e018d212837331d1da8c1ae7695b6" compoundref="optional_8hpp" startline="1380" endline="1382">neforce::get</referencedby>
+        <referencedby refid="group___optional_1ga61bbfe27826c42fccd6e1e89c72a08ca" compoundref="optional_8hpp" startline="1356" endline="1358">neforce::get</referencedby>
+        <referencedby refid="classneforce_1_1optional_1add710dc4bc0e534fabb48b62ff3e3acd" compoundref="optional_8hpp" startline="180" endline="190">neforce::optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1optional_1ab39e227b1057aded06bd28e55fd68c4d" compoundref="optional_8hpp" startline="156" endline="159">neforce::optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classneforce_1_1optional_1aaa36bdf4ceca2b5724615098c2fb3540" compoundref="optional_8hpp" startline="165" endline="168">neforce::optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a31e833b6e9ea5fecfbddc4da7b7836ce" compoundref="optional_8hpp" startline="134" endline="137">neforce::optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classneforce_1_1optional_1a824b322abced5f38841d5ae37df73e89" compoundref="optional_8hpp" startline="557" endline="562">neforce::optional&lt; T &gt;::value_or</referencedby>
+        <referencedby refid="classneforce_1_1optional_1acd91dfb42420087a4370f1147b3181e6" compoundref="optional_8hpp" startline="545" endline="550">neforce::optional&lt; T &gt;::value_or</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a61592ad4a593aa849c5f79498adc17a4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <type>reference</type>
+        <definition>reference neforce::optional&lt; T &gt;::value</definition>
+        <argsstring>() &amp;</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::optional::value</qualifiedname>
+        <briefdescription>
+<para>取出存储的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>存储的值的左值引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1optional__exception" kindref="compound">optional_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果值未存储 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="509" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="509" bodyend="514"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1af0fef2cbb9599bd76e0c8d4e5d8b72cc" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <type>const value_type &amp;&amp;</type>
+        <definition>const value_type &amp;&amp; neforce::optional&lt; T &gt;::value</definition>
+        <argsstring>() const &amp;&amp;</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::optional::value</qualifiedname>
+        <briefdescription>
+<para>取出存储的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>存储的值的常量右值引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1optional__exception" kindref="compound">optional_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果值未存储 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="521" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="521" bodyend="526"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a4f1b96413fde3d73b86e345eafd83218" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <type>value_type &amp;&amp;</type>
+        <definition>value_type &amp;&amp; neforce::optional&lt; T &gt;::value</definition>
+        <argsstring>() &amp;&amp;</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::optional::value</qualifiedname>
+        <briefdescription>
+<para>取出存储的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>存储的值的右值引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1optional__exception" kindref="compound">optional_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果值未存储 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="533" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="533" bodyend="538"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1acd91dfb42420087a4370f1147b3181e6" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="lvalue" noexcept="yes" noexceptexpression="is_nothrow_copy_constructible_v&lt; value_type &gt;" virt="non-virtual">
+        <type>value_type</type>
+        <definition>value_type neforce::optional&lt; T &gt;::value_or</definition>
+        <argsstring>(value_type value) const &amp;</argsstring>
+        <name>value_or</name>
+        <qualifiedname>neforce::optional::value_or</qualifiedname>
+        <param>
+          <type>value_type</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>取出存储的值的拷贝值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值不存在时返回的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>值存在时返回其值的拷贝，不存在时返回参数value </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="545" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="545" bodyend="550"/>
+        <references refid="group___type_special_member_function_checks_1gac2ccc147b2ba5ce7bccbbda00d6f9fda" compoundref="type__traits_8hpp" startline="2826">neforce::is_nothrow_copy_constructible_v</references>
+        <references refid="classneforce_1_1optional_1a0aec6d3cfc90fbe9f5066b11002c215f" compoundref="optional_8hpp" startline="497" endline="502">neforce::optional&lt; T &gt;::value</references>
+        <referencedby refid="structneforce_1_1tui_1_1linear__gradient_1aab109a2d388d1783c58ac061985ccace" compoundref="linear__gradient_8hpp" startline="95" endline="121">neforce::tui::linear_gradient::sample</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a824b322abced5f38841d5ae37df73e89" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="rvalue" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; value_type &gt;" virt="non-virtual">
+        <type>value_type</type>
+        <definition>value_type neforce::optional&lt; T &gt;::value_or</definition>
+        <argsstring>(value_type value) &amp;&amp;</argsstring>
+        <name>value_or</name>
+        <qualifiedname>neforce::optional::value_or</qualifiedname>
+        <param>
+          <type>value_type</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>取出存储的值的移出值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值不存在时返回的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>值存在时返回其值的引用，不存在时返回参数value </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="557" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="557" bodyend="562"/>
+        <references refid="group___type_special_member_function_checks_1gae20ac6ad74f8179d6959c23cbda15965" compoundref="type__traits_8hpp" startline="2862">neforce::is_nothrow_move_constructible_v</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1optional_1a0aec6d3cfc90fbe9f5066b11002c215f" compoundref="optional_8hpp" startline="497" endline="502">neforce::optional&lt; T &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1acb06845158a3c6454f354c182a992824" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___invoke_function_1gaa3688183bfd2e86a0a9073acc02f3c2d" kindref="member">is_invocable_v</ref>&lt; F &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga69f65e60be3587bd4cac30425301c8b8" kindref="member">is_copy_constructible_v</ref>&lt; T &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref></type>
+        <definition>optional neforce::optional&lt; T &gt;::or_else</definition>
+        <argsstring>(F &amp;&amp;f) const &amp;</argsstring>
+        <name>or_else</name>
+        <qualifiedname>neforce::optional::or_else</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>常量左值否则操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>值存在时返回自身的拷贝，不存在时调用函数并返回结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="571" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="571" bodyend="576"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" compoundref="optional_8hpp" startline="114" endline="114">neforce::optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1ac2db29dca3ef07cc5f017e0ea87c7dc1" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___invoke_function_1gaa3688183bfd2e86a0a9073acc02f3c2d" kindref="member">is_invocable_v</ref>&lt; F &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga0ee4ae6e2e0ff6479559b97ff899cf4c" kindref="member">is_move_constructible_v</ref>&lt; T &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref></type>
+        <definition>optional neforce::optional&lt; T &gt;::or_else</definition>
+        <argsstring>(F &amp;&amp;f) &amp;&amp;</argsstring>
+        <name>or_else</name>
+        <qualifiedname>neforce::optional::or_else</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>右值否则操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>值存在时返回自身的移动，不存在时调用函数并返回结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="585" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="585" bodyend="590"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" compoundref="optional_8hpp" startline="114" endline="114">neforce::optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a60b71d5045c01f179485e3892832510b" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) neforce::optional&lt; T &gt;::and_then</definition>
+        <argsstring>(F &amp;&amp;f) const &amp;</argsstring>
+        <name>and_then</name>
+        <qualifiedname>neforce::optional::and_then</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>常量左值然后操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>函数处理存储的值并返回函数结果，或返回函数返回类型的默认构造类型 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="599" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="599" bodyend="604"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a3959483ded777ec2bb66d8d6488f22c4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) neforce::optional&lt; T &gt;::and_then</definition>
+        <argsstring>(F &amp;&amp;f) &amp;</argsstring>
+        <name>and_then</name>
+        <qualifiedname>neforce::optional::and_then</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>左值然后操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>函数处理存储的值并返回函数结果，或返回函数返回类型的默认构造类型 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="613" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="613" bodyend="618"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1ab1b126753444a68a5f41e6baf83f3631" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) neforce::optional&lt; T &gt;::and_then</definition>
+        <argsstring>(F &amp;&amp;f) const &amp;&amp;</argsstring>
+        <name>and_then</name>
+        <qualifiedname>neforce::optional::and_then</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>常量右值然后操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>函数处理存储的值并返回函数结果，或返回函数返回类型的默认构造类型 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="627" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="627" bodyend="632"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a4f85210f524def0ee3aca6eae5fdb5e6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) neforce::optional&lt; T &gt;::and_then</definition>
+        <argsstring>(F &amp;&amp;f) &amp;&amp;</argsstring>
+        <name>and_then</name>
+        <qualifiedname>neforce::optional::and_then</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>右值然后操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>函数处理存储的值并返回函数结果，或返回函数返回类型的默认构造类型 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="641" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="641" bodyend="646"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a78cd13eb2e54b11427e1d68dd3c53dc0" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref>&lt; <ref refid="group___remove_qualifiers_1ga878454a8799ed6276098016ab4bd5975" kindref="member">remove_cvref_t</ref>&lt; decltype(f(*get_ptr()))&gt; &gt;</type>
+        <definition>optional&lt; remove_cvref_t&lt; decltype(f(*get_ptr()))&gt; &gt; neforce::optional&lt; T &gt;::transform</definition>
+        <argsstring>(F &amp;&amp;f) const &amp;</argsstring>
+        <name>transform</name>
+        <qualifiedname>neforce::optional::transform</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>常量左值转换操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>函数处理存储的值并返回新的optional，或返回none的optional </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="655" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="655" bodyend="660"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___none_1gae83f5d6b9256e35bb2781ebb286996d3" compoundref="none_8hpp" startline="73" endline="73">neforce::none</references>
+        <references refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" compoundref="optional_8hpp" startline="114" endline="114">neforce::optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a5eafbf7873e62683c2e5510ec121ae06" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref>&lt; <ref refid="group___remove_qualifiers_1ga878454a8799ed6276098016ab4bd5975" kindref="member">remove_cvref_t</ref>&lt; decltype(f(*get_ptr()))&gt; &gt;</type>
+        <definition>optional&lt; remove_cvref_t&lt; decltype(f(*get_ptr()))&gt; &gt; neforce::optional&lt; T &gt;::transform</definition>
+        <argsstring>(F &amp;&amp;f) &amp;</argsstring>
+        <name>transform</name>
+        <qualifiedname>neforce::optional::transform</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>左值转换操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>函数处理存储的值并返回新的optional，或返回none的optional </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="669" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="669" bodyend="674"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___none_1gae83f5d6b9256e35bb2781ebb286996d3" compoundref="none_8hpp" startline="73" endline="73">neforce::none</references>
+        <references refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" compoundref="optional_8hpp" startline="114" endline="114">neforce::optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a0429b38802d42383e3450601d1e4f458" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref>&lt; <ref refid="group___remove_qualifiers_1ga878454a8799ed6276098016ab4bd5975" kindref="member">remove_cvref_t</ref>&lt; decltype(f(_NEFORCE <ref refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" kindref="member">move</ref>(*get_ptr())))&gt; &gt;</type>
+        <definition>optional&lt; remove_cvref_t&lt; decltype(f(_NEFORCE move(*get_ptr())))&gt; &gt; neforce::optional&lt; T &gt;::transform</definition>
+        <argsstring>(F &amp;&amp;f) const &amp;&amp;</argsstring>
+        <name>transform</name>
+        <qualifiedname>neforce::optional::transform</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>右值转换操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>函数处理存储的值的移动并返回新的optional，或返回none的optional </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="683" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="683" bodyend="688"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="group___none_1gae83f5d6b9256e35bb2781ebb286996d3" compoundref="none_8hpp" startline="73" endline="73">neforce::none</references>
+        <references refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" compoundref="optional_8hpp" startline="114" endline="114">neforce::optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1af183c42ff9db2196358306003d95f672" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref>&lt; <ref refid="group___remove_qualifiers_1ga878454a8799ed6276098016ab4bd5975" kindref="member">remove_cvref_t</ref>&lt; decltype(f(_NEFORCE <ref refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" kindref="member">move</ref>(*get_ptr())))&gt; &gt;</type>
+        <definition>optional&lt; remove_cvref_t&lt; decltype(f(_NEFORCE move(*get_ptr())))&gt; &gt; neforce::optional&lt; T &gt;::transform</definition>
+        <argsstring>(F &amp;&amp;f) &amp;&amp;</argsstring>
+        <name>transform</name>
+        <qualifiedname>neforce::optional::transform</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>常量右值转换操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>函数处理存储的值的移动并返回新的optional，或返回none的optional </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="697" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="697" bodyend="702"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="group___none_1gae83f5d6b9256e35bb2781ebb286996d3" compoundref="none_8hpp" startline="73" endline="73">neforce::none</references>
+        <references refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" compoundref="optional_8hpp" startline="114" endline="114">neforce::optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a1172af0777535661654852da05143576" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const_pointer</type>
+        <definition>const_pointer neforce::optional&lt; T &gt;::operator-&gt;</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator-&gt;</name>
+        <qualifiedname>neforce::optional::operator-&gt;</qualifiedname>
+        <briefdescription>
+<para>常量箭头运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向值的常量指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="708" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="708" bodyend="708"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1ac55f3f13fc08c703059e8ae7d0da27ba" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>pointer</type>
+        <definition>pointer neforce::optional&lt; T &gt;::operator-&gt;</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>operator-&gt;</name>
+        <qualifiedname>neforce::optional::operator-&gt;</qualifiedname>
+        <briefdescription>
+<para>箭头运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向值的常量指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="714" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="714" bodyend="714"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1af26e39020d5b1ba8615c311647d01c44" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="lvalue" noexcept="yes" virt="non-virtual">
+        <type>const_reference</type>
+        <definition>const_reference neforce::optional&lt; T &gt;::operator*</definition>
+        <argsstring>() const &amp;noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>neforce::optional::operator*</qualifiedname>
+        <briefdescription>
+<para>常量左值解引用运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>值的常量左值引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="720" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="720" bodyend="720"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a552c6504a57b36b5e5d215dbd4e690e2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="lvalue" noexcept="yes" virt="non-virtual">
+        <type>reference</type>
+        <definition>reference neforce::optional&lt; T &gt;::operator*</definition>
+        <argsstring>() &amp;noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>neforce::optional::operator*</qualifiedname>
+        <briefdescription>
+<para>左值解引用运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>值的左值引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="726" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="726" bodyend="726"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a9d5131e6833a5fce5e1411e9692918b0" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="rvalue" noexcept="yes" virt="non-virtual">
+        <type>const value_type &amp;&amp;</type>
+        <definition>const value_type &amp;&amp; neforce::optional&lt; T &gt;::operator*</definition>
+        <argsstring>() const &amp;&amp;noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>neforce::optional::operator*</qualifiedname>
+        <briefdescription>
+<para>常量右值解引用运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>值的常量右值引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="732" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="732" bodyend="732"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a4652c685392bd6f2780d2e6de4bc75d2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="rvalue" noexcept="yes" virt="non-virtual">
+        <type>value_type &amp;&amp;</type>
+        <definition>value_type &amp;&amp; neforce::optional&lt; T &gt;::operator*</definition>
+        <argsstring>() &amp;&amp;noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>neforce::optional::operator*</qualifiedname>
+        <briefdescription>
+<para>右值解引用运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>值的右值引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="738" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="738" bodyend="738"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1ab4b63080e884ecc63ef0196db1ba1e11" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::optional&lt; T &gt;::equal_to</definition>
+        <argsstring>(const optional &amp;rhs) const noexcept</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>neforce::optional::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>等于比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>两个可选值是否相等 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="745" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="745" bodyend="753"/>
+        <references refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" compoundref="optional_8hpp" startline="114" endline="114">neforce::optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1ace1da906e2a5388a84a23b2f3e10dddc" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::optional&lt; T &gt;::less_than</definition>
+        <argsstring>(const optional &amp;rhs) const noexcept</argsstring>
+        <name>less_than</name>
+        <qualifiedname>neforce::optional::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前值是否小于右操作数值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="760" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="760" bodyend="765"/>
+        <references refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" compoundref="optional_8hpp" startline="114" endline="114">neforce::optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a78953515bc23564031ab629e2aaecd86" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::optional&lt; T &gt;::operator==</definition>
+        <argsstring>(none_t) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>neforce::optional::operator==</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1none__t" kindref="compound">none_t</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="767" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="767" bodyend="767"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a3e163ed7ab1b7f224f8132f6f0da1fee" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::optional&lt; T &gt;::operator!=</definition>
+        <argsstring>(none_t) const noexcept</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>neforce::optional::operator!=</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1none__t" kindref="compound">none_t</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="768" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="768" bodyend="768"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a5d781d3c02db6837d90b560da42a937e" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::optional&lt; T &gt;::operator&gt;</definition>
+        <argsstring>(none_t) const noexcept</argsstring>
+        <name>operator&gt;</name>
+        <qualifiedname>neforce::optional::operator&gt;</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1none__t" kindref="compound">none_t</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="769" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="769" bodyend="769"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a83c766e1503a2aee24b5e6599d589453" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::optional&lt; T &gt;::operator&lt;</definition>
+        <argsstring>(none_t) const noexcept</argsstring>
+        <name>operator&lt;</name>
+        <qualifiedname>neforce::optional::operator&lt;</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1none__t" kindref="compound">none_t</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="770" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="770" bodyend="770"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1a71980e04a493b02bc2a0f103aee30087" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::optional&lt; T &gt;::operator&gt;=</definition>
+        <argsstring>(none_t) const noexcept</argsstring>
+        <name>operator&gt;=</name>
+        <qualifiedname>neforce::optional::operator&gt;=</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1none__t" kindref="compound">none_t</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="771" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="771" bodyend="771"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1aa3cebd2129e2e16467f94dd71d59a1b7" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::optional&lt; T &gt;::operator&lt;=</definition>
+        <argsstring>(none_t) const noexcept</argsstring>
+        <name>operator&lt;=</name>
+        <qualifiedname>neforce::optional::operator&lt;=</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1none__t" kindref="compound">none_t</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="772" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="772" bodyend="772"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1ade972d88778d7258bb5159a15a043b31" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::optional&lt; T &gt;::to_hash</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>to_hash</name>
+        <qualifiedname>neforce::optional::to_hash</qualifiedname>
+        <briefdescription>
+<para>计算哈希值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>哈希值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="785" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="785" bodyend="787"/>
+        <references refid="group___hash_primary_1ga1b0e6d502da5248efd1c6290a1b915ce" compoundref="hash_8hpp" startline="122">neforce::constants::FNV_OFFSET_BASIS</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1optional_1ae41c15b0fd33450d99fbb9a3a1194953" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; T &gt; &amp;&amp;is_nothrow_swappable_v&lt; T &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::optional&lt; T &gt;::swap</definition>
+        <argsstring>(optional &amp;other)</argsstring>
+        <name>swap</name>
+        <qualifiedname>neforce::optional::swap</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个可选值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="793" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="793" bodyend="807"/>
+        <references refid="group___args_forward_functions_1ga57a2cf85645286e20c82caae70cd13dc" compoundref="type__traits_8hpp" startline="3084" endline="3086">neforce::addressof</references>
+        <references refid="classneforce_1_1optional_1a6ec9d71801be4f0accc79aee568cf59c" compoundref="optional_8hpp" startline="447" endline="451">neforce::optional&lt; T &gt;::emplace</references>
+        <references refid="group___type_special_member_function_checks_1gae20ac6ad74f8179d6959c23cbda15965" compoundref="type__traits_8hpp" startline="2862">neforce::is_nothrow_move_constructible_v</references>
+        <references refid="group___swap_utility_1gafcc46bf052d9d5c47c99d6a20dadd5bc" compoundref="type__traits_8hpp" startline="3967">neforce::is_nothrow_swappable_v</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" compoundref="optional_8hpp" startline="114" endline="114">neforce::optional&lt; T &gt;::optional</references>
+        <references refid="classneforce_1_1optional_1aab0a7905eb191dc71e8e8c3208a58a6e" compoundref="optional_8hpp" startline="473" endline="478">neforce::optional&lt; T &gt;::reset</references>
+        <references refid="classneforce_1_1optional_1ae41c15b0fd33450d99fbb9a3a1194953" compoundref="optional_8hpp" startline="793" endline="807">neforce::optional&lt; T &gt;::swap</references>
+        <referencedby refid="classneforce_1_1optional_1ae41c15b0fd33450d99fbb9a3a1194953" compoundref="optional_8hpp" startline="793" endline="807">neforce::optional&lt; T &gt;::swap</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classneforce_1_1optional_1a9549c89a7a56840b093065be907fe39b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator==</definition>
+        <argsstring>(none_t, const optional &amp;rhs) noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>neforce::optional::operator==</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1none__t" kindref="compound">none_t</ref></type>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="774" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="774" bodyend="774"/>
+      </memberdef>
+      <memberdef kind="friend" id="classneforce_1_1optional_1a74e048607b928504d0edc4397da8cd82" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator!=</definition>
+        <argsstring>(none_t, const optional &amp;rhs) noexcept</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>neforce::optional::operator!=</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1none__t" kindref="compound">none_t</ref></type>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="775" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="775" bodyend="775"/>
+      </memberdef>
+      <memberdef kind="friend" id="classneforce_1_1optional_1adcb42b28e69b9c77a95f339e314cd5ad" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator&gt;</definition>
+        <argsstring>(none_t, const optional &amp;) noexcept</argsstring>
+        <name>operator&gt;</name>
+        <qualifiedname>neforce::optional::operator&gt;</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1none__t" kindref="compound">none_t</ref></type>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="776" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="776" bodyend="776"/>
+      </memberdef>
+      <memberdef kind="friend" id="classneforce_1_1optional_1a4854eacfc120bb2ae18aac027874f9b2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator&lt;</definition>
+        <argsstring>(none_t, const optional &amp;rhs) noexcept</argsstring>
+        <name>operator&lt;</name>
+        <qualifiedname>neforce::optional::operator&lt;</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1none__t" kindref="compound">none_t</ref></type>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="777" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="777" bodyend="777"/>
+      </memberdef>
+      <memberdef kind="friend" id="classneforce_1_1optional_1a22ad4eb07b73d4a0101199a0d509d775" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator&gt;=</definition>
+        <argsstring>(none_t, const optional &amp;rhs) noexcept</argsstring>
+        <name>operator&gt;=</name>
+        <qualifiedname>neforce::optional::operator&gt;=</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1none__t" kindref="compound">none_t</ref></type>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="778" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="778" bodyend="778"/>
+      </memberdef>
+      <memberdef kind="friend" id="classneforce_1_1optional_1a9f04210b1048fc5ba751e790ece638ff" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator&lt;=</definition>
+        <argsstring>(none_t, const optional &amp;) noexcept</argsstring>
+        <name>operator&lt;=</name>
+        <qualifiedname>neforce::optional::operator&lt;=</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1none__t" kindref="compound">none_t</ref></type>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" kindref="member">optional</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="779" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="779" bodyend="779"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>可选值类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>存储值的类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+表示一个可能包含值也可能为空的对象。类似于指针，但拥有值语义。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>neforce::icommon&lt; optional&lt; T &gt; &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="4">
+        <label>neforce::ihashable&lt; T &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="1">
+        <label>neforce::optional&lt; T &gt;</label>
+        <link refid="classneforce_1_1optional"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>neforce::icommon&lt; optional&lt; T &gt; &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="4">
+        <label>neforce::ihashable&lt; T &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="1">
+        <label>neforce::optional&lt; T &gt;</label>
+        <link refid="classneforce_1_1optional"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="64" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="71" bodyend="808"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1optional_1a60b71d5045c01f179485e3892832510b" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>and_then</name></member>
+      <member refid="classneforce_1_1optional_1a3959483ded777ec2bb66d8d6488f22c4" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>and_then</name></member>
+      <member refid="classneforce_1_1optional_1ab1b126753444a68a5f41e6baf83f3631" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>and_then</name></member>
+      <member refid="classneforce_1_1optional_1a4f85210f524def0ee3aca6eae5fdb5e6" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>and_then</name></member>
+      <member refid="classneforce_1_1optional_1ad26c9d56ff0b5360e1360e3d4cb7292a" prot="private" virt="non-virtual"><scope>neforce::optional</scope><name>assignable_from_optional</name></member>
+      <member refid="classneforce_1_1optional_1a869438cd305161a764795778812bb59b" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>const_pointer</name></member>
+      <member refid="classneforce_1_1optional_1a83102ea29ed04f1ebc1af42627a389d4" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>const_reference</name></member>
+      <member refid="classneforce_1_1optional_1ac2e30d330425eaa17112ca9fe23acc15" prot="private" virt="non-virtual"><scope>neforce::optional</scope><name>convertible_from_optional</name></member>
+      <member refid="classneforce_1_1optional_1a6ec9d71801be4f0accc79aee568cf59c" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>emplace</name></member>
+      <member refid="classneforce_1_1optional_1aee48339bb289eb4225ed654710507f95" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>emplace</name></member>
+      <member refid="classneforce_1_1optional_1ab4b63080e884ecc63ef0196db1ba1e11" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>equal_to</name></member>
+      <member refid="classneforce_1_1optional_1a17cc0fe664d835e327d8a222647bc05f" prot="private" virt="non-virtual"><scope>neforce::optional</scope><name>get_ptr</name></member>
+      <member refid="classneforce_1_1optional_1acb734476fd8aa86b0b11be5a88e3a146" prot="private" virt="non-virtual"><scope>neforce::optional</scope><name>get_ptr</name></member>
+      <member refid="classneforce_1_1optional_1a96e209c242abe7ed27535b794261fd25" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>has_value</name></member>
+      <member refid="classneforce_1_1optional_1ab478e726f04f16c23598964b4ffaac35" prot="private" virt="non-virtual"><scope>neforce::optional</scope><name>have_value_</name></member>
+      <member refid="classneforce_1_1optional_1a622c33c4231d9972c6f97af02119a2b5" prot="private" virt="non-virtual"><scope>neforce::optional</scope><name>is_valid_optional</name></member>
+      <member refid="classneforce_1_1optional_1ace1da906e2a5388a84a23b2f3e10dddc" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>less_than</name></member>
+      <member refid="classneforce_1_1optional_1a0c8f5738af6f5850dae531cd995b6f14" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator bool</name></member>
+      <member refid="classneforce_1_1optional_1a3e163ed7ab1b7f224f8132f6f0da1fee" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator!=</name></member>
+      <member refid="classneforce_1_1optional_1a74e048607b928504d0edc4397da8cd82" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator!=</name></member>
+      <member refid="structneforce_1_1icomparable_1aa385e40eb8ac8bdae736966ad0cf568f" prot="public" virt="non-virtual" ambiguityscope="neforce::icommon&lt; optional&lt; T &gt; &gt;::"><scope>neforce::optional</scope><name>operator!=</name></member>
+      <member refid="classneforce_1_1optional_1af26e39020d5b1ba8615c311647d01c44" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator*</name></member>
+      <member refid="classneforce_1_1optional_1a552c6504a57b36b5e5d215dbd4e690e2" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator*</name></member>
+      <member refid="classneforce_1_1optional_1a9d5131e6833a5fce5e1411e9692918b0" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator*</name></member>
+      <member refid="classneforce_1_1optional_1a4652c685392bd6f2780d2e6de4bc75d2" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator*</name></member>
+      <member refid="classneforce_1_1optional_1a1172af0777535661654852da05143576" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator-&gt;</name></member>
+      <member refid="classneforce_1_1optional_1ac55f3f13fc08c703059e8ae7d0da27ba" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator-&gt;</name></member>
+      <member refid="classneforce_1_1optional_1a83c766e1503a2aee24b5e6599d589453" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator&lt;</name></member>
+      <member refid="classneforce_1_1optional_1a4854eacfc120bb2ae18aac027874f9b2" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator&lt;</name></member>
+      <member refid="structneforce_1_1icomparable_1a0641b58de65d6a0d5b87c2bcb47496a4" prot="public" virt="non-virtual" ambiguityscope="neforce::icommon&lt; optional&lt; T &gt; &gt;::"><scope>neforce::optional</scope><name>operator&lt;</name></member>
+      <member refid="classneforce_1_1optional_1aa3cebd2129e2e16467f94dd71d59a1b7" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator&lt;=</name></member>
+      <member refid="classneforce_1_1optional_1a9f04210b1048fc5ba751e790ece638ff" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator&lt;=</name></member>
+      <member refid="structneforce_1_1icomparable_1a313fba4bce20aced1ff0e6173ad6aab2" prot="public" virt="non-virtual" ambiguityscope="neforce::icommon&lt; optional&lt; T &gt; &gt;::"><scope>neforce::optional</scope><name>operator&lt;=</name></member>
+      <member refid="classneforce_1_1optional_1a9d802550d4ab5e6635a054f3c5f81091" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1optional_1add710dc4bc0e534fabb48b62ff3e3acd" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1optional_1ad8babf6c38058fd9b75d7450391d59ec" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1optional_1a0146cbe25ed45d60da3f61db1fc5363a" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1optional_1ad959bc40b14c91ae9ab1269e7c35acfe" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1optional_1a0dae177ec3997b2fd067cad8ba4a32b1" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1optional_1a63917ed503377ae0b5d1628c29051e1a" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1optional_1a78953515bc23564031ab629e2aaecd86" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator==</name></member>
+      <member refid="classneforce_1_1optional_1a9549c89a7a56840b093065be907fe39b" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator==</name></member>
+      <member refid="structneforce_1_1icomparable_1ab9b06f7293eb15299f8c7d5341bfbc83" prot="public" virt="non-virtual" ambiguityscope="neforce::icommon&lt; optional&lt; T &gt; &gt;::"><scope>neforce::optional</scope><name>operator==</name></member>
+      <member refid="classneforce_1_1optional_1a5d781d3c02db6837d90b560da42a937e" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator&gt;</name></member>
+      <member refid="classneforce_1_1optional_1adcb42b28e69b9c77a95f339e314cd5ad" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator&gt;</name></member>
+      <member refid="structneforce_1_1icomparable_1ab8de930acec5c0261656b787f576f08d" prot="public" virt="non-virtual" ambiguityscope="neforce::icommon&lt; optional&lt; T &gt; &gt;::"><scope>neforce::optional</scope><name>operator&gt;</name></member>
+      <member refid="classneforce_1_1optional_1a71980e04a493b02bc2a0f103aee30087" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator&gt;=</name></member>
+      <member refid="classneforce_1_1optional_1a22ad4eb07b73d4a0101199a0d509d775" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>operator&gt;=</name></member>
+      <member refid="structneforce_1_1icomparable_1a644c6002f703eb487427daadfec8fb16" prot="public" virt="non-virtual" ambiguityscope="neforce::icommon&lt; optional&lt; T &gt; &gt;::"><scope>neforce::optional</scope><name>operator&gt;=</name></member>
+      <member refid="classneforce_1_1optional_1a6cfbe6e403a57e2d0040601cf8d897e0" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>optional</name></member>
+      <member refid="classneforce_1_1optional_1a31e833b6e9ea5fecfbddc4da7b7836ce" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>optional</name></member>
+      <member refid="classneforce_1_1optional_1a31e833b6e9ea5fecfbddc4da7b7836ce" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>optional</name></member>
+      <member refid="classneforce_1_1optional_1ab39e227b1057aded06bd28e55fd68c4d" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>optional</name></member>
+      <member refid="classneforce_1_1optional_1aaa36bdf4ceca2b5724615098c2fb3540" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>optional</name></member>
+      <member refid="classneforce_1_1optional_1a47344a49e1314761a192025ae9425141" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>optional</name></member>
+      <member refid="classneforce_1_1optional_1a47344a49e1314761a192025ae9425141" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>optional</name></member>
+      <member refid="classneforce_1_1optional_1a50b828075a0070054e7ddfc66bdf8856" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>optional</name></member>
+      <member refid="classneforce_1_1optional_1a4df326e420fc57e8a25b51c36629dfb3" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>optional</name></member>
+      <member refid="classneforce_1_1optional_1a4df326e420fc57e8a25b51c36629dfb3" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>optional</name></member>
+      <member refid="classneforce_1_1optional_1acfbdee35b589e48d15efb3a63324f864" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>optional</name></member>
+      <member refid="classneforce_1_1optional_1a96eca4e1f3cf8f2280ecf6cb9dcb5285" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>optional</name></member>
+      <member refid="classneforce_1_1optional_1a27d163d4322f67baf9ab56a0aa055966" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>optional</name></member>
+      <member refid="classneforce_1_1optional_1a39eee7f19b555f923db7969d917cf8bc" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>optional</name></member>
+      <member refid="classneforce_1_1optional_1acb06845158a3c6454f354c182a992824" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>or_else</name></member>
+      <member refid="classneforce_1_1optional_1ac2db29dca3ef07cc5f017e0ea87c7dc1" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>or_else</name></member>
+      <member refid="classneforce_1_1optional_1a937e3e27968d55a9ff09fd155da788db" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>pointer</name></member>
+      <member refid="classneforce_1_1optional_1af386bb904d316a8e09a6bd45ec548287" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>reference</name></member>
+      <member refid="classneforce_1_1optional_1aab0a7905eb191dc71e8e8c3208a58a6e" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>reset</name></member>
+      <member refid="classneforce_1_1optional_1aac8c9e8afa81b156cf17541a0461d240" prot="private" virt="non-virtual"><scope>neforce::optional</scope><name>storage_</name></member>
+      <member refid="classneforce_1_1optional_1ae41c15b0fd33450d99fbb9a3a1194953" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>swap</name></member>
+      <member refid="classneforce_1_1optional_1ade972d88778d7258bb5159a15a043b31" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>to_hash</name></member>
+      <member refid="structneforce_1_1ihashable_1a3bedfaa42740465ea8b6e58309c1f67e" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>to_ihash</name></member>
+      <member refid="classneforce_1_1optional_1a78cd13eb2e54b11427e1d68dd3c53dc0" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>transform</name></member>
+      <member refid="classneforce_1_1optional_1a5eafbf7873e62683c2e5510ec121ae06" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>transform</name></member>
+      <member refid="classneforce_1_1optional_1a0429b38802d42383e3450601d1e4f458" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>transform</name></member>
+      <member refid="classneforce_1_1optional_1af183c42ff9db2196358306003d95f672" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>transform</name></member>
+      <member refid="classneforce_1_1optional_1a0aec6d3cfc90fbe9f5066b11002c215f" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>value</name></member>
+      <member refid="classneforce_1_1optional_1a61592ad4a593aa849c5f79498adc17a4" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>value</name></member>
+      <member refid="classneforce_1_1optional_1af0fef2cbb9599bd76e0c8d4e5d8b72cc" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>value</name></member>
+      <member refid="classneforce_1_1optional_1a4f1b96413fde3d73b86e345eafd83218" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>value</name></member>
+      <member refid="classneforce_1_1optional_1acd91dfb42420087a4370f1147b3181e6" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>value_or</name></member>
+      <member refid="classneforce_1_1optional_1a824b322abced5f38841d5ae37df73e89" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>value_or</name></member>
+      <member refid="classneforce_1_1optional_1aa37367c7f0e34edb2c8539de3e1d1532" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>value_type</name></member>
+      <member refid="classneforce_1_1optional_1a08b65e3c293d78afb5307179e5997f41" prot="public" virt="non-virtual"><scope>neforce::optional</scope><name>~optional</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,2323 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1sparse__vector" kind="class" language="C++" prot="public">
+    <compoundname>neforce::sparse_vector</compoundname>
+    <basecompoundref refid="structneforce_1_1icollector" prot="private" virt="non-virtual">neforce::icollector&lt; sparse_vector&lt; Key, Value, KeyOfValue, Compare, allocator&lt; Value &gt; &gt; &gt;</basecompoundref>
+    <includes refid="sparse__vector_8hpp" local="no">sparse_vector.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Key</type>
+      </param>
+      <param>
+        <type>typename Value</type>
+      </param>
+      <param>
+        <type>typename KeyOfValue</type>
+      </param>
+      <param>
+        <type>typename Compare</type>
+      </param>
+      <param>
+        <type>typename Alloc</type>
+        <defval><ref refid="group___memory_allocator_1gabd6174043c688f04c1d71b9b21148ec1" kindref="member">allocator</ref>&lt;Value&gt;</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1sparse__vector_1a094827ba8598c87dbe9b964e70ea09b7" prot="public" static="no">
+        <type>Key</type>
+        <definition>using neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::key_type = Key</definition>
+        <argsstring></argsstring>
+        <name>key_type</name>
+        <qualifiedname>neforce::sparse_vector::key_type</qualifiedname>
+        <briefdescription>
+<para>键类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="197" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="197" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__vector_1acaffafabe4866e0e9a35cc227abe23ce" prot="public" static="no">
+        <type>Value</type>
+        <definition>using neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::value_type = Value</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>neforce::sparse_vector::value_type</qualifiedname>
+        <briefdescription>
+<para>值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="199" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="199" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__vector_1ae1a278e7762bea8a9146b91b4bf79aed" prot="public" static="no">
+        <type>Value *</type>
+        <definition>using neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::pointer = Value*</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>neforce::sparse_vector::pointer</qualifiedname>
+        <briefdescription>
+<para>指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="200" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="200" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__vector_1adadc469352d34a63d4969c8721466a73" prot="public" static="no">
+        <type>Value &amp;</type>
+        <definition>using neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::reference = Value&amp;</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>neforce::sparse_vector::reference</qualifiedname>
+        <briefdescription>
+<para>引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="201" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="201" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__vector_1a9839f270c50bd5060756de0d021aed51" prot="public" static="no">
+        <type>const Value *</type>
+        <definition>using neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::const_pointer = const Value*</definition>
+        <argsstring></argsstring>
+        <name>const_pointer</name>
+        <qualifiedname>neforce::sparse_vector::const_pointer</qualifiedname>
+        <briefdescription>
+<para>常量指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="202" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="202" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__vector_1a2b4dea79f2674d990e30947714d6b7ae" prot="public" static="no">
+        <type>const Value &amp;</type>
+        <definition>using neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::const_reference = const Value&amp;</definition>
+        <argsstring></argsstring>
+        <name>const_reference</name>
+        <qualifiedname>neforce::sparse_vector::const_reference</qualifiedname>
+        <briefdescription>
+<para>常量引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="203" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="203" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__vector_1a5ed5f24476fd91ebc55343f2d07c8e02" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>using neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::size_type = size_t</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>neforce::sparse_vector::size_type</qualifiedname>
+        <briefdescription>
+<para>大小类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="204" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="204" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__vector_1adbe98dcccaebd24e191c8fa863170b6e" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1gab2c4bc5144496796ce8a7feed7b8ad58" kindref="member">ptrdiff_t</ref></type>
+        <definition>using neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::difference_type = ptrdiff_t</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>neforce::sparse_vector::difference_type</qualifiedname>
+        <briefdescription>
+<para>差值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="205" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="205" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__vector_1a49eda8d02df678b99b7f6ad678ccbb6a" prot="public" static="no">
+        <type>Compare</type>
+        <definition>using neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::compare_type = Compare</definition>
+        <argsstring></argsstring>
+        <name>compare_type</name>
+        <qualifiedname>neforce::sparse_vector::compare_type</qualifiedname>
+        <briefdescription>
+<para>比较器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="206" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="206" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" prot="public" static="no">
+        <type>sparse_vector_iterator&lt; false, <ref refid="classneforce_1_1sparse__vector_1a3b77ecbf233b0114ed54a33a3b2b4ae8" kindref="member">sparse_vector</ref> &gt;</type>
+        <definition>using neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::iterator = sparse_vector_iterator&lt;false, sparse_vector&gt;</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>neforce::sparse_vector::iterator</qualifiedname>
+        <briefdescription>
+<para>迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="208" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="208" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__vector_1a1adbda548b885a17f86944ef965f0028" prot="public" static="no">
+        <type>sparse_vector_iterator&lt; true, <ref refid="classneforce_1_1sparse__vector_1a3b77ecbf233b0114ed54a33a3b2b4ae8" kindref="member">sparse_vector</ref> &gt;</type>
+        <definition>using neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::const_iterator = sparse_vector_iterator&lt;true, sparse_vector&gt;</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <qualifiedname>neforce::sparse_vector::const_iterator</qualifiedname>
+        <briefdescription>
+<para>常量迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="209" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="209" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__vector_1a2d323da9710ba783db29c4c1cfe2fe8a" prot="public" static="no">
+        <type>_NEFORCE <ref refid="classneforce_1_1sparse__vector_1a2d323da9710ba783db29c4c1cfe2fe8a" kindref="member">reverse_iterator</ref>&lt; <ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref> &gt;</type>
+        <definition>using neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::reverse_iterator = _NEFORCE reverse_iterator&lt;iterator&gt;</definition>
+        <argsstring></argsstring>
+        <name>reverse_iterator</name>
+        <qualifiedname>neforce::sparse_vector::reverse_iterator</qualifiedname>
+        <briefdescription>
+<para>反向迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="210" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="210" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__vector_1ad3fb0b6f9841c4ba7bbad27eb42287f5" prot="public" static="no">
+        <type>_NEFORCE <ref refid="classneforce_1_1sparse__vector_1a2d323da9710ba783db29c4c1cfe2fe8a" kindref="member">reverse_iterator</ref>&lt; <ref refid="classneforce_1_1sparse__vector_1a1adbda548b885a17f86944ef965f0028" kindref="member">const_iterator</ref> &gt;</type>
+        <definition>using neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::const_reverse_iterator = _NEFORCE reverse_iterator&lt;const_iterator&gt;</definition>
+        <argsstring></argsstring>
+        <name>const_reverse_iterator</name>
+        <qualifiedname>neforce::sparse_vector::const_reverse_iterator</qualifiedname>
+        <briefdescription>
+<para>常量反向迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="211" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="211" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__vector_1acd0cef68b122229811defc920e6a3eec" prot="public" static="no">
+        <type>Alloc</type>
+        <definition>using neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::allocator_type = Alloc</definition>
+        <argsstring></argsstring>
+        <name>allocator_type</name>
+        <qualifiedname>neforce::sparse_vector::allocator_type</qualifiedname>
+        <briefdescription>
+<para>分配器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="212" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="212" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classneforce_1_1sparse__vector_1ac991e212f597cf6d35e1ce9e2a70c040" prot="private" static="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; Value, Alloc &gt;</type>
+        <definition>using neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::container_type = vector&lt;Value, Alloc&gt;</definition>
+        <argsstring></argsstring>
+        <name>container_type</name>
+        <qualifiedname>neforce::sparse_vector::container_type</qualifiedname>
+        <briefdescription>
+<para>底层容器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="215" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="215" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1sparse__vector_1a1827781119fe13f4ab1c96b9f4caf1a3" prot="private" static="no" mutable="no">
+        <type>container_type</type>
+        <definition>container_type neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::data_</definition>
+        <argsstring></argsstring>
+        <name>data_</name>
+        <qualifiedname>neforce::sparse_vector::data_</qualifiedname>
+        <briefdescription>
+<para>底层数据存储 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="217" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="217" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sparse__vector_1a02e62f792ffa90a9d28b68897a306051" prot="private" static="no" mutable="no">
+        <type>Compare</type>
+        <definition>Compare neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::key_compare_</definition>
+        <argsstring></argsstring>
+        <name>key_compare_</name>
+        <qualifiedname>neforce::sparse_vector::key_compare_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>键比较函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="218" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="218" bodyend="218"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sparse__vector_1ab17d8b01881af4e3c0545985fe741a38" prot="private" static="no" mutable="no">
+        <type>KeyOfValue</type>
+        <definition>KeyOfValue neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::extracter_</definition>
+        <argsstring></argsstring>
+        <name>extracter_</name>
+        <qualifiedname>neforce::sparse_vector::extracter_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>值提取键函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="219" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="219" bodyend="219"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classneforce_1_1sparse__vector_1a157704122d805a1d246f995bc73a7b60" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>struct</type>
+        <definition>friend struct sparse_vector_iterator</definition>
+        <argsstring></argsstring>
+        <name>sparse_vector_iterator</name>
+        <qualifiedname>neforce::sparse_vector::sparse_vector_iterator</qualifiedname>
+        <param>
+          <type>sparse_vector_iterator</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="222" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="222" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1ae2566b02f457bf78f7e3b5f34d585fca" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const Key &amp;</type>
+        <definition>const Key &amp; neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::key_of</definition>
+        <argsstring>(const value_type &amp;value) const noexcept</argsstring>
+        <name>key_of</name>
+        <qualifiedname>neforce::sparse_vector::key_of</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__vector_1acaffafabe4866e0e9a35cc227abe23ce" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从值提取键 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>键 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="229" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="229" bodyend="229"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a25c7b7331c72e2913c81ea88495c4ccc" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a5ed5f24476fd91ebc55343f2d07c8e02" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::lower_bound_index</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>lower_bound_index</name>
+        <qualifiedname>neforce::sparse_vector::lower_bound_index</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__vector_1a094827ba8598c87dbe9b964e70ea09b7" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>二分查找——不小于指定键的首个位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>位置索引 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="236" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="236" bodyend="248"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a4a37e962679e07f016ee5afad456af96" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a5ed5f24476fd91ebc55343f2d07c8e02" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::upper_bound_index</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>upper_bound_index</name>
+        <qualifiedname>neforce::sparse_vector::upper_bound_index</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__vector_1a094827ba8598c87dbe9b964e70ea09b7" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>二分查找——大于指定键的首个位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>位置索引 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="255" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="255" bodyend="267"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a935454487a14df71d34a353fcd9b8805" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_at</definition>
+        <argsstring>(size_type pos, value_type &amp;&amp;value)</argsstring>
+        <name>insert_at</name>
+        <qualifiedname>neforce::sparse_vector::insert_at</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__vector_1a5ed5f24476fd91ebc55343f2d07c8e02" kindref="member">size_type</ref></type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__vector_1acaffafabe4866e0e9a35cc227abe23ce" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在指定位置插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="275" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="275" bodyend="278"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a87057e3ebd076c1b6fa178420fc2f4be" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_at</definition>
+        <argsstring>(size_type pos, const value_type &amp;value)</argsstring>
+        <name>insert_at</name>
+        <qualifiedname>neforce::sparse_vector::insert_at</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__vector_1a5ed5f24476fd91ebc55343f2d07c8e02" kindref="member">size_type</ref></type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__vector_1acaffafabe4866e0e9a35cc227abe23ce" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在指定位置插入元素（拷贝版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="286" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="286" bodyend="289"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a3b77ecbf233b0114ed54a33a3b2b4ae8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::sparse_vector</definition>
+        <argsstring>()=default</argsstring>
+        <name>sparse_vector</name>
+        <qualifiedname>neforce::sparse_vector::sparse_vector</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="295" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1ae5d831198a7da5e0e233acfb19b3fb1a" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::sparse_vector</definition>
+        <argsstring>(const Compare &amp;comp)</argsstring>
+        <name>sparse_vector</name>
+        <qualifiedname>neforce::sparse_vector::sparse_vector</qualifiedname>
+        <param>
+          <type>const Compare &amp;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="301" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="301" bodyend="302"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a48691703627e143c542e5d0d75a1aa4c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::sparse_vector</definition>
+        <argsstring>(const sparse_vector &amp;other)</argsstring>
+        <name>sparse_vector</name>
+        <qualifiedname>neforce::sparse_vector::sparse_vector</qualifiedname>
+        <param>
+          <type>const sparse_vector &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源稀疏向量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="308" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="308" bodyend="311"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a3c878d302be39625472032270558015b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a3b77ecbf233b0114ed54a33a3b2b4ae8" kindref="member">sparse_vector</ref> &amp;</type>
+        <definition>sparse_vector &amp; neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::operator=</definition>
+        <argsstring>(const sparse_vector &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::sparse_vector::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__vector_1a3b77ecbf233b0114ed54a33a3b2b4ae8" kindref="member">sparse_vector</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源稀疏向量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="318" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="318" bodyend="326"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a8a03ee00e94cc1c9a4637b8ed2ef6c11" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; container_type &gt; &amp;&amp;is_nothrow_move_constructible_v&lt; Compare &gt; &amp;&amp;is_nothrow_move_constructible_v&lt; KeyOfValue &gt;" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::sparse_vector</definition>
+        <argsstring>(sparse_vector &amp;&amp;other)</argsstring>
+        <name>sparse_vector</name>
+        <qualifiedname>neforce::sparse_vector::sparse_vector</qualifiedname>
+        <param>
+          <type>sparse_vector &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源稀疏向量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="332" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="332" bodyend="337"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1aefe27abf70f83fad4ce9d70edc54cff8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_assignable_v&lt; container_type &gt;" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a3b77ecbf233b0114ed54a33a3b2b4ae8" kindref="member">sparse_vector</ref> &amp;</type>
+        <definition>sparse_vector &amp; neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::operator=</definition>
+        <argsstring>(sparse_vector &amp;&amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::sparse_vector::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__vector_1a3b77ecbf233b0114ed54a33a3b2b4ae8" kindref="member">sparse_vector</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源稀疏向量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="344" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="344" bodyend="352"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1ae2e9b10fee956dd604b492acadc085e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::~sparse_vector</definition>
+        <argsstring>()=default</argsstring>
+        <name>~sparse_vector</name>
+        <qualifiedname>neforce::sparse_vector::~sparse_vector</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="357" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a178629ac76160c036fb09f70f267d58c" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::begin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>neforce::sparse_vector::begin</qualifiedname>
+        <briefdescription>
+<para>获取起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="363" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="363" bodyend="363"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a8afe87040df4b26c812702f572c8e26e" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::end</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>neforce::sparse_vector::end</qualifiedname>
+        <briefdescription>
+<para>获取结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="369" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="369" bodyend="369"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a7aac7a6ab5d1c5e43bddf5cac6134d10" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a1adbda548b885a17f86944ef965f0028" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>neforce::sparse_vector::begin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="375" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="375" bodyend="375"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1aba4f8be7a88f1a81085972bd2cff62bc" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a1adbda548b885a17f86944ef965f0028" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>neforce::sparse_vector::end</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="381" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="381" bodyend="381"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1ae8a412cc299fbf4259c929cd9f74ed24" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a1adbda548b885a17f86944ef965f0028" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::cbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cbegin</name>
+        <qualifiedname>neforce::sparse_vector::cbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="387" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="387" bodyend="387"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a18564b70ed14d443e37c93143212a18d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a1adbda548b885a17f86944ef965f0028" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::cend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cend</name>
+        <qualifiedname>neforce::sparse_vector::cend</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="393" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="393" bodyend="393"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1adc1f99103e1326a9980a69bb5343973b" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a2d323da9710ba783db29c4c1cfe2fe8a" kindref="member">reverse_iterator</ref></type>
+        <definition>reverse_iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rbegin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>rbegin</name>
+        <qualifiedname>neforce::sparse_vector::rbegin</qualifiedname>
+        <briefdescription>
+<para>获取反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素的反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="399" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="399" bodyend="399"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a1a770aeb02023438bfaf9059d6a944b4" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a2d323da9710ba783db29c4c1cfe2fe8a" kindref="member">reverse_iterator</ref></type>
+        <definition>reverse_iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rend</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>rend</name>
+        <qualifiedname>neforce::sparse_vector::rend</qualifiedname>
+        <briefdescription>
+<para>获取反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素之前位置的反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="405" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="405" bodyend="405"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a0f383c8d0a171c8cd33482422ed94da2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1ad3fb0b6f9841c4ba7bbad27eb42287f5" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rbegin</name>
+        <qualifiedname>neforce::sparse_vector::rbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="411" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="411" bodyend="411"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a3d2ad7a3c50945208cb5da7d75162714" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1ad3fb0b6f9841c4ba7bbad27eb42287f5" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rend</name>
+        <qualifiedname>neforce::sparse_vector::rend</qualifiedname>
+        <briefdescription>
+<para>获取常量反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素之前位置的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="417" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="417" bodyend="417"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a5c3bcb376c5eda261f6777f08a515005" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1ad3fb0b6f9841c4ba7bbad27eb42287f5" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::crbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>crbegin</name>
+        <qualifiedname>neforce::sparse_vector::crbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="423" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="423" bodyend="423"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a6ee689e9d3471382a19296efb2ed11eb" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1ad3fb0b6f9841c4ba7bbad27eb42287f5" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::crend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>crend</name>
+        <qualifiedname>neforce::sparse_vector::crend</qualifiedname>
+        <briefdescription>
+<para>获取常量反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素之前位置的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="429" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="429" bodyend="429"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a8c5e04c5819fea4a82e40a1b4e9f6e9a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a5ed5f24476fd91ebc55343f2d07c8e02" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>neforce::sparse_vector::size</qualifiedname>
+        <briefdescription>
+<para>获取元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="435" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="435" bodyend="435"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1ad43c5e035eda5dbcfcad08904946eb8c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a5ed5f24476fd91ebc55343f2d07c8e02" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::max_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>max_size</name>
+        <qualifiedname>neforce::sparse_vector::max_size</qualifiedname>
+        <briefdescription>
+<para>获取最大可能大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="441" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="441" bodyend="441"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a97f9b6a97779ce218d88b95c43a4ae88" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>neforce::sparse_vector::empty</qualifiedname>
+        <briefdescription>
+<para>检查是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否为空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="447" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="447" bodyend="447"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a5305a36ccb92fd00f392ea078b308f7e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_copy_constructible_v&lt; Compare &gt;" virt="non-virtual">
+        <type>Compare</type>
+        <definition>Compare neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::key_compare</definition>
+        <argsstring>() const</argsstring>
+        <name>key_compare</name>
+        <qualifiedname>neforce::sparse_vector::key_compare</qualifiedname>
+        <briefdescription>
+<para>获取键比较函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>键比较函数对象的副本 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="453" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="453" bodyend="455"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a8af871ed345b0a517241e828d0c0a0d8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::emplace_unique</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace_unique</name>
+        <qualifiedname>neforce::sparse_vector::emplace_unique</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>插入唯一键元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="464" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="464" bodyend="471"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a30de301b6a7d1fd3ff75dbd0cbfe2923" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_unique</definition>
+        <argsstring>(const value_type &amp;value)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>neforce::sparse_vector::insert_unique</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__vector_1acaffafabe4866e0e9a35cc227abe23ce" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>拷贝插入唯一键元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="478" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="478" bodyend="478"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1aafab70f192c48c329b7db5495386cee9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_unique</definition>
+        <argsstring>(value_type &amp;&amp;value)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>neforce::sparse_vector::insert_unique</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__vector_1acaffafabe4866e0e9a35cc227abe23ce" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>移动插入唯一键元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="485" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="485" bodyend="485"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1ab4b0672cdb81e656094d20ff8b609489" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::emplace_unique_hint</definition>
+        <argsstring>(iterator position, Args &amp;&amp;... args)</argsstring>
+        <name>emplace_unique_hint</name>
+        <qualifiedname>neforce::sparse_vector::emplace_unique_hint</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近构造唯一键元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="495" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="495" bodyend="524"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a251a3eb424a704ee8dc3d1fad0180239" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_unique</definition>
+        <argsstring>(iterator position, const value_type &amp;value)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>neforce::sparse_vector::insert_unique</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__vector_1acaffafabe4866e0e9a35cc227abe23ce" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近拷贝插入唯一键元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="532" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="532" bodyend="532"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a956acb923fb7a8761a0f77471d4e1519" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_unique</definition>
+        <argsstring>(iterator position, value_type &amp;&amp;value)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>neforce::sparse_vector::insert_unique</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__vector_1acaffafabe4866e0e9a35cc227abe23ce" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近移动插入唯一键元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="540" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="540" bodyend="542"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1af34094ab6f5912fbb4a042a926ef66a8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga4f7b2f70ba1539ec3326d52e89698f13" kindref="member">is_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_unique</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>neforce::sparse_vector::insert_unique</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入唯一键元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="551" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="551" bodyend="555"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a9503832c0c0ea6ed00f043df4e0392a9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::emplace_equal</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace_equal</name>
+        <qualifiedname>neforce::sparse_vector::emplace_equal</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>插入允许重复键元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="564" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="564" bodyend="568"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1ab103a38ac7b6eba2db47acb94985d57a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_equal</definition>
+        <argsstring>(const value_type &amp;value)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>neforce::sparse_vector::insert_equal</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__vector_1acaffafabe4866e0e9a35cc227abe23ce" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>拷贝插入允许重复键元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="575" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="575" bodyend="575"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1ae0d94c42fb66a67926b01789d6c32174" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_equal</definition>
+        <argsstring>(value_type &amp;&amp;value)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>neforce::sparse_vector::insert_equal</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__vector_1acaffafabe4866e0e9a35cc227abe23ce" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>移动插入允许重复键元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="582" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="582" bodyend="582"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a4d16db30de12a8f7d5dbe894bc43f504" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::emplace_equal_hint</definition>
+        <argsstring>(iterator position, Args &amp;&amp;... args)</argsstring>
+        <name>emplace_equal_hint</name>
+        <qualifiedname>neforce::sparse_vector::emplace_equal_hint</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近构造允许重复键元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="592" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="592" bodyend="615"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a0f40f7a786a7127ff060c60cc644d087" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_equal</definition>
+        <argsstring>(iterator position, const value_type &amp;value)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>neforce::sparse_vector::insert_equal</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__vector_1acaffafabe4866e0e9a35cc227abe23ce" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近拷贝插入允许重复键元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="623" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="623" bodyend="623"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1aaa6b9122cbb54c1809e103a3e1ea3071" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_equal</definition>
+        <argsstring>(iterator position, value_type &amp;&amp;value)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>neforce::sparse_vector::insert_equal</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__vector_1acaffafabe4866e0e9a35cc227abe23ce" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近移动插入允许重复键元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="631" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="631" bodyend="633"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a59451d47aaaaf5feca534e63cc352a49" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga4f7b2f70ba1539ec3326d52e89698f13" kindref="member">is_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_equal</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>neforce::sparse_vector::insert_equal</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入允许重复键元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="642" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="642" bodyend="646"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a6f0af781e771f1455c4d1ae51cec1ded" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a5ed5f24476fd91ebc55343f2d07c8e02" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::erase</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::sparse_vector::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__vector_1a094827ba8598c87dbe9b964e70ea09b7" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>删除所有具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>删除的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="653" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="653" bodyend="662"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a479cb43386d859fe5e634388899cbe8c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::erase</definition>
+        <argsstring>(iterator position)</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::sparse_vector::erase</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>删除指定位置的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="668" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="668" bodyend="672"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1aba75ed6a9696ac5610d0f726c807ba35" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::erase</definition>
+        <argsstring>(iterator first, iterator last)</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::sparse_vector::erase</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除指定范围内的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="679" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="679" bodyend="688"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a144e9533b976df03b612d03169831f2e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>neforce::sparse_vector::clear</qualifiedname>
+        <briefdescription>
+<para>清空 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="693" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="693" bodyend="693"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a44e6ad694253dfcdc846cac0b82cd12d" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>find</name>
+        <qualifiedname>neforce::sparse_vector::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__vector_1a094827ba8598c87dbe9b964e70ea09b7" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的迭代器，未找到则返回end() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="700" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="700" bodyend="706"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a9212d5c0eda3f7bb3f4447fd0ad95345" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a1adbda548b885a17f86944ef965f0028" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>find</name>
+        <qualifiedname>neforce::sparse_vector::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__vector_1a094827ba8598c87dbe9b964e70ea09b7" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的元素（常量版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的常量迭代器，未找到则返回cend() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="713" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="713" bodyend="719"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a15aa8ab301470b3c78ca9ab629f4128a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a5ed5f24476fd91ebc55343f2d07c8e02" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::count</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>count</name>
+        <qualifiedname>neforce::sparse_vector::count</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__vector_1a094827ba8598c87dbe9b964e70ea09b7" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>统计具有指定键的元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要统计的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>匹配的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="726" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="726" bodyend="728"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a0a9eff3cd11c1a5eebb8d7070a70658b" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::lower_bound</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>lower_bound</name>
+        <qualifiedname>neforce::sparse_vector::lower_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__vector_1a094827ba8598c87dbe9b964e70ea09b7" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个不小于指定键的元素位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个不小于key的元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="735" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="735" bodyend="735"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a6e6f8868f4bca2a0df6c5c7ee690c7d6" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a1adbda548b885a17f86944ef965f0028" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::lower_bound</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>lower_bound</name>
+        <qualifiedname>neforce::sparse_vector::lower_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__vector_1a094827ba8598c87dbe9b964e70ea09b7" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个不小于指定键的元素位置（常量版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个不小于key的元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="742" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="742" bodyend="744"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1ad2d42a24e2aedd0cfcf9c177ddb130ff" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::upper_bound</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>upper_bound</name>
+        <qualifiedname>neforce::sparse_vector::upper_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__vector_1a094827ba8598c87dbe9b964e70ea09b7" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个大于指定键的元素位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个大于key的元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="751" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="751" bodyend="751"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a897159fc845868f4f2a312c6cfe199ae" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a1adbda548b885a17f86944ef965f0028" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::upper_bound</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>upper_bound</name>
+        <qualifiedname>neforce::sparse_vector::upper_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__vector_1a094827ba8598c87dbe9b964e70ea09b7" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个大于指定键的元素位置（常量版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个大于key的元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="758" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="758" bodyend="760"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a5e267f3d0db7996d02b67432f4cbad01" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref>, <ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">iterator</ref> &gt;</type>
+        <definition>pair&lt; iterator, iterator &gt; neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>neforce::sparse_vector::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__vector_1a094827ba8598c87dbe9b964e70ea09b7" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的元素范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含lower_bound和upper_bound的pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="767" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="767" bodyend="769"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a341f2e2c28a6c6ba99e50d752ed77e2b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1sparse__vector_1a1adbda548b885a17f86944ef965f0028" kindref="member">const_iterator</ref>, <ref refid="classneforce_1_1sparse__vector_1a1adbda548b885a17f86944ef965f0028" kindref="member">const_iterator</ref> &gt;</type>
+        <definition>pair&lt; const_iterator, const_iterator &gt; neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>neforce::sparse_vector::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__vector_1a094827ba8598c87dbe9b964e70ea09b7" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的元素范围（常量版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含lower_bound和upper_bound的pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="776" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="776" bodyend="778"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a957e1131d382d123012f75316aa6e1ab" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::reserve</definition>
+        <argsstring>(size_type n)</argsstring>
+        <name>reserve</name>
+        <qualifiedname>neforce::sparse_vector::reserve</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__vector_1a5ed5f24476fd91ebc55343f2d07c8e02" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>预留容量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>预留的元素数量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="784" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="784" bodyend="784"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1adba52c60dd4e2eabb61108d11cb7ab2b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__vector_1a5ed5f24476fd91ebc55343f2d07c8e02" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::capacity</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>capacity</name>
+        <qualifiedname>neforce::sparse_vector::capacity</qualifiedname>
+        <briefdescription>
+<para>获取当前容量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前分配的容量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="790" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="790" bodyend="790"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a2839b62dfa4df155329942aad30d947b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::shrink_to_fit</definition>
+        <argsstring>()</argsstring>
+        <name>shrink_to_fit</name>
+        <qualifiedname>neforce::sparse_vector::shrink_to_fit</qualifiedname>
+        <briefdescription>
+<para>收缩容量以适应实际大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="795" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="795" bodyend="795"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1afba65bf6a2ddac79c9d6ad1194defc50" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_swappable_v&lt; container_type &gt; &amp;&amp;is_nothrow_swappable_v&lt; Compare &gt; &amp;&amp;is_nothrow_swappable_v&lt; KeyOfValue &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::swap</definition>
+        <argsstring>(sparse_vector &amp;other)</argsstring>
+        <name>swap</name>
+        <qualifiedname>neforce::sparse_vector::swap</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__vector_1a3b77ecbf233b0114ed54a33a3b2b4ae8" kindref="member">sparse_vector</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个稀疏向量的内容 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的另一个稀疏向量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="801" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="801" bodyend="806"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a4fe93ad471ba71bba9b2ebad9049a897" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(_NEFORCE equal(cbegin(), cend(), rhs.cbegin()))" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::equal_to</definition>
+        <argsstring>(const sparse_vector &amp;rhs) const</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>neforce::sparse_vector::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__vector_1a3b77ecbf233b0114ed54a33a3b2b4ae8" kindref="member">sparse_vector</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧稀疏向量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>大小相等且对应元素相等返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="813" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="813" bodyend="816"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__vector_1a788cbe1b781c2068edd4d4eef53104bb" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(_NEFORCE lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend()))" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::less_than</definition>
+        <argsstring>(const sparse_vector &amp;rhs) const</argsstring>
+        <name>less_than</name>
+        <qualifiedname>neforce::sparse_vector::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__vector_1a3b77ecbf233b0114ed54a33a3b2b4ae8" kindref="member">sparse_vector</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧稀疏向量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>按字典序比较结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="823" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="823" bodyend="826"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>稀疏向量容器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>KeyOfValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>从值中提取键的函数对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>分配器类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+稀疏向量是一种基于有序平坦数组的关联容器底层实现。 使用二分查找提供对数时间复杂度的查找操作。</para>
+<para><simplesect kind="note"><para>稀疏向量在插入/删除时需要移动元素，但迭代性能优异，缓存友好，适用于查找频繁、修改较少且需要有序遍历的场景。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>neforce::icollector&lt; T &gt;</label>
+        <link refid="structneforce_1_1icollector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="1">
+        <label>neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;</label>
+        <link refid="classneforce_1_1sparse__vector"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>neforce::icollector&lt; T &gt;</label>
+        <link refid="structneforce_1_1icollector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="1">
+        <label>neforce::sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;</label>
+        <link refid="classneforce_1_1sparse__vector"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" line="191" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp" bodystart="191" bodyend="827"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1sparse__vector_1acd0cef68b122229811defc920e6a3eec" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>allocator_type</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a178629ac76160c036fb09f70f267d58c" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>begin</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a7aac7a6ab5d1c5e43bddf5cac6134d10" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>begin</name></member>
+      <member refid="classneforce_1_1sparse__vector_1adba52c60dd4e2eabb61108d11cb7ab2b" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>capacity</name></member>
+      <member refid="classneforce_1_1sparse__vector_1ae8a412cc299fbf4259c929cd9f74ed24" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>cbegin</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a18564b70ed14d443e37c93143212a18d" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>cend</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a144e9533b976df03b612d03169831f2e" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>clear</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a49eda8d02df678b99b7f6ad678ccbb6a" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>compare_type</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a1adbda548b885a17f86944ef965f0028" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>const_iterator</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a9839f270c50bd5060756de0d021aed51" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>const_pointer</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a2b4dea79f2674d990e30947714d6b7ae" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>const_reference</name></member>
+      <member refid="classneforce_1_1sparse__vector_1ad3fb0b6f9841c4ba7bbad27eb42287f5" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>const_reverse_iterator</name></member>
+      <member refid="classneforce_1_1sparse__vector_1ac991e212f597cf6d35e1ce9e2a70c040" prot="private" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>container_type</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a15aa8ab301470b3c78ca9ab629f4128a" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>count</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a5c3bcb376c5eda261f6777f08a515005" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>crbegin</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a6ee689e9d3471382a19296efb2ed11eb" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>crend</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a1827781119fe13f4ab1c96b9f4caf1a3" prot="private" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>data_</name></member>
+      <member refid="classneforce_1_1sparse__vector_1adbe98dcccaebd24e191c8fa863170b6e" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>difference_type</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a9503832c0c0ea6ed00f043df4e0392a9" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>emplace_equal</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a4d16db30de12a8f7d5dbe894bc43f504" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>emplace_equal_hint</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a8af871ed345b0a517241e828d0c0a0d8" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>emplace_unique</name></member>
+      <member refid="classneforce_1_1sparse__vector_1ab4b0672cdb81e656094d20ff8b609489" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>emplace_unique_hint</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a97f9b6a97779ce218d88b95c43a4ae88" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>empty</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a8afe87040df4b26c812702f572c8e26e" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>end</name></member>
+      <member refid="classneforce_1_1sparse__vector_1aba4f8be7a88f1a81085972bd2cff62bc" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>end</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a5e267f3d0db7996d02b67432f4cbad01" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>equal_range</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a341f2e2c28a6c6ba99e50d752ed77e2b" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>equal_range</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a4fe93ad471ba71bba9b2ebad9049a897" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>equal_to</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a6f0af781e771f1455c4d1ae51cec1ded" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>erase</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a479cb43386d859fe5e634388899cbe8c" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>erase</name></member>
+      <member refid="classneforce_1_1sparse__vector_1aba75ed6a9696ac5610d0f726c807ba35" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>erase</name></member>
+      <member refid="classneforce_1_1sparse__vector_1ab17d8b01881af4e3c0545985fe741a38" prot="private" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>extracter_</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a44e6ad694253dfcdc846cac0b82cd12d" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>find</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a9212d5c0eda3f7bb3f4447fd0ad95345" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>find</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a935454487a14df71d34a353fcd9b8805" prot="private" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>insert_at</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a87057e3ebd076c1b6fa178420fc2f4be" prot="private" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>insert_at</name></member>
+      <member refid="classneforce_1_1sparse__vector_1ab103a38ac7b6eba2db47acb94985d57a" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>insert_equal</name></member>
+      <member refid="classneforce_1_1sparse__vector_1ae0d94c42fb66a67926b01789d6c32174" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>insert_equal</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a0f40f7a786a7127ff060c60cc644d087" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>insert_equal</name></member>
+      <member refid="classneforce_1_1sparse__vector_1aaa6b9122cbb54c1809e103a3e1ea3071" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>insert_equal</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a59451d47aaaaf5feca534e63cc352a49" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>insert_equal</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a30de301b6a7d1fd3ff75dbd0cbfe2923" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>insert_unique</name></member>
+      <member refid="classneforce_1_1sparse__vector_1aafab70f192c48c329b7db5495386cee9" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>insert_unique</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a251a3eb424a704ee8dc3d1fad0180239" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>insert_unique</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a956acb923fb7a8761a0f77471d4e1519" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>insert_unique</name></member>
+      <member refid="classneforce_1_1sparse__vector_1af34094ab6f5912fbb4a042a926ef66a8" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>insert_unique</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>iterator</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a5305a36ccb92fd00f392ea078b308f7e" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>key_compare</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a02e62f792ffa90a9d28b68897a306051" prot="private" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>key_compare_</name></member>
+      <member refid="classneforce_1_1sparse__vector_1ae2566b02f457bf78f7e3b5f34d585fca" prot="private" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>key_of</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a094827ba8598c87dbe9b964e70ea09b7" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>key_type</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a788cbe1b781c2068edd4d4eef53104bb" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>less_than</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a0a9eff3cd11c1a5eebb8d7070a70658b" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>lower_bound</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a6e6f8868f4bca2a0df6c5c7ee690c7d6" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>lower_bound</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a25c7b7331c72e2913c81ea88495c4ccc" prot="private" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>lower_bound_index</name></member>
+      <member refid="classneforce_1_1sparse__vector_1ad43c5e035eda5dbcfcad08904946eb8c" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>max_size</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a3c878d302be39625472032270558015b" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1sparse__vector_1aefe27abf70f83fad4ce9d70edc54cff8" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1sparse__vector_1ae1a278e7762bea8a9146b91b4bf79aed" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>pointer</name></member>
+      <member refid="classneforce_1_1sparse__vector_1adc1f99103e1326a9980a69bb5343973b" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>rbegin</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a0f383c8d0a171c8cd33482422ed94da2" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>rbegin</name></member>
+      <member refid="classneforce_1_1sparse__vector_1adadc469352d34a63d4969c8721466a73" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>reference</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a1a770aeb02023438bfaf9059d6a944b4" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>rend</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a3d2ad7a3c50945208cb5da7d75162714" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>rend</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a957e1131d382d123012f75316aa6e1ab" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>reserve</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a2d323da9710ba783db29c4c1cfe2fe8a" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>reverse_iterator</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a2839b62dfa4df155329942aad30d947b" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>shrink_to_fit</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a8c5e04c5819fea4a82e40a1b4e9f6e9a" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>size</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a5ed5f24476fd91ebc55343f2d07c8e02" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>size_type</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a3b77ecbf233b0114ed54a33a3b2b4ae8" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>sparse_vector</name></member>
+      <member refid="classneforce_1_1sparse__vector_1ae5d831198a7da5e0e233acfb19b3fb1a" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>sparse_vector</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a48691703627e143c542e5d0d75a1aa4c" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>sparse_vector</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a8a03ee00e94cc1c9a4637b8ed2ef6c11" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>sparse_vector</name></member>
+      <member refid="classneforce_1_1sparse__vector_1afba65bf6a2ddac79c9d6ad1194defc50" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>swap</name></member>
+      <member refid="classneforce_1_1sparse__vector_1ad2d42a24e2aedd0cfcf9c177ddb130ff" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>upper_bound</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a897159fc845868f4f2a312c6cfe199ae" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>upper_bound</name></member>
+      <member refid="classneforce_1_1sparse__vector_1a4a37e962679e07f016ee5afad456af96" prot="private" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>upper_bound_index</name></member>
+      <member refid="classneforce_1_1sparse__vector_1acaffafabe4866e0e9a35cc227abe23ce" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>value_type</name></member>
+      <member refid="classneforce_1_1sparse__vector_1ae2e9b10fee956dd604b492acadc085e0" prot="public" virt="non-virtual"><scope>neforce::sparse_vector</scope><name>~sparse_vector</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

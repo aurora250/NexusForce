@@ -1,0 +1,1271 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::yaml_builder类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1yaml__builder.html','','classneforce_1_1yaml__builder-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::yaml_builder类 参考<div class="ingroups"><a class="el" href="group___config_format.html">配置格式操作</a> &raquo; <a class="el" href="group___yaml_config.html">YAML配置</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>YAML配置构建器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a77bfd65abd7931d5f22868b8bbaa3193" id="r_a77bfd65abd7931d5f22868b8bbaa3193"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> ()</td></tr>
+<tr class="memdesc:a77bfd65abd7931d5f22868b8bbaa3193"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:a23b81ad4463654ffa4bb0fac6547a1df" id="r_a23b81ad4463654ffa4bb0fac6547a1df"><td class="memItemLeft"><a id="a23b81ad4463654ffa4bb0fac6547a1df" name="a23b81ad4463654ffa4bb0fac6547a1df"></a>
+&#160;</td><td class="memItemRight"><b>yaml_builder</b> (yaml_builder &amp;&amp;other)=default</td></tr>
+<tr class="memdesc:a23b81ad4463654ffa4bb0fac6547a1df"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造函数 <br /></td></tr>
+<tr class="memitem:a35304477bea63e5f05cd4079b4aab444" id="r_a35304477bea63e5f05cd4079b4aab444"><td class="memItemLeft"><a id="a35304477bea63e5f05cd4079b4aab444" name="a35304477bea63e5f05cd4079b4aab444"></a>
+<a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><b>operator=</b> (<a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&amp;other)=default</td></tr>
+<tr class="memdesc:a35304477bea63e5f05cd4079b4aab444"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值运算符 <br /></td></tr>
+<tr class="memitem:adc93efa4d6b4b80b83467415cf090b07" id="r_adc93efa4d6b4b80b83467415cf090b07"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#adc93efa4d6b4b80b83467415cf090b07">key</a> (<a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> key)</td></tr>
+<tr class="memdesc:adc93efa4d6b4b80b83467415cf090b07"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置当前键名  <br /></td></tr>
+<tr class="memitem:a48419496c4c6c6a89ac32348b5721955" id="r_a48419496c4c6c6a89ac32348b5721955"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a48419496c4c6c6a89ac32348b5721955">begin_mapping</a> ()</td></tr>
+<tr class="memdesc:a48419496c4c6c6a89ac32348b5721955"><td class="mdescLeft">&#160;</td><td class="mdescRight">开始一个映射（块样式）  <br /></td></tr>
+<tr class="memitem:a2cc4c63a3091c5a5538d7d651648cca7" id="r_a2cc4c63a3091c5a5538d7d651648cca7"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a2cc4c63a3091c5a5538d7d651648cca7">begin_block_mapping</a> ()</td></tr>
+<tr class="memdesc:a2cc4c63a3091c5a5538d7d651648cca7"><td class="mdescLeft">&#160;</td><td class="mdescRight">开始一个块样式映射  <br /></td></tr>
+<tr class="memitem:a1175fad6461bbfdf8a8fbaf8f3f57769" id="r_a1175fad6461bbfdf8a8fbaf8f3f57769"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a1175fad6461bbfdf8a8fbaf8f3f57769">begin_flow_mapping</a> ()</td></tr>
+<tr class="memdesc:a1175fad6461bbfdf8a8fbaf8f3f57769"><td class="mdescLeft">&#160;</td><td class="mdescRight">开始一个流样式映射  <br /></td></tr>
+<tr class="memitem:a4b93388fa5f335d5ffa113b5d98168e7" id="r_a4b93388fa5f335d5ffa113b5d98168e7"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a4b93388fa5f335d5ffa113b5d98168e7">end_mapping</a> ()</td></tr>
+<tr class="memdesc:a4b93388fa5f335d5ffa113b5d98168e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">结束当前映射  <br /></td></tr>
+<tr class="memitem:a717c2340a45b919b2060b57b37dbfddb" id="r_a717c2340a45b919b2060b57b37dbfddb"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a717c2340a45b919b2060b57b37dbfddb">begin_sequence</a> ()</td></tr>
+<tr class="memdesc:a717c2340a45b919b2060b57b37dbfddb"><td class="mdescLeft">&#160;</td><td class="mdescRight">开始一个序列（块样式）  <br /></td></tr>
+<tr class="memitem:a9ba40e20aa1557fe0361d0ece353de61" id="r_a9ba40e20aa1557fe0361d0ece353de61"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a9ba40e20aa1557fe0361d0ece353de61">begin_block_sequence</a> ()</td></tr>
+<tr class="memdesc:a9ba40e20aa1557fe0361d0ece353de61"><td class="mdescLeft">&#160;</td><td class="mdescRight">开始一个块样式序列  <br /></td></tr>
+<tr class="memitem:a766a7262d07a637e0ea39cb0ed546fb8" id="r_a766a7262d07a637e0ea39cb0ed546fb8"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a766a7262d07a637e0ea39cb0ed546fb8">begin_flow_sequence</a> ()</td></tr>
+<tr class="memdesc:a766a7262d07a637e0ea39cb0ed546fb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">开始一个流样式序列  <br /></td></tr>
+<tr class="memitem:a61f24ccc5b7164e45fc05dbebbb0eb90" id="r_a61f24ccc5b7164e45fc05dbebbb0eb90"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a61f24ccc5b7164e45fc05dbebbb0eb90">end_sequence</a> ()</td></tr>
+<tr class="memdesc:a61f24ccc5b7164e45fc05dbebbb0eb90"><td class="mdescLeft">&#160;</td><td class="mdescRight">结束当前序列  <br /></td></tr>
+<tr class="memitem:ad7eb34eee04fe1341ebb3f7c0405e4f1" id="r_ad7eb34eee04fe1341ebb3f7c0405e4f1"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ad7eb34eee04fe1341ebb3f7c0405e4f1">value</a> (<a class="el" href="group___core_types.html#gacb98a47b9e384b2934a9c2dbd3c2d598">nullptr_t</a> np)</td></tr>
+<tr class="memdesc:ad7eb34eee04fe1341ebb3f7c0405e4f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置null值  <br /></td></tr>
+<tr class="memitem:afe98fe34b1397959f622f94f489d4495" id="r_afe98fe34b1397959f622f94f489d4495"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#afe98fe34b1397959f622f94f489d4495">value</a> (const bool v)</td></tr>
+<tr class="memdesc:afe98fe34b1397959f622f94f489d4495"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置布尔值  <br /></td></tr>
+<tr class="memitem:acad3f401df749e855a1fa647bcc383e9" id="r_acad3f401df749e855a1fa647bcc383e9"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#acad3f401df749e855a1fa647bcc383e9">value</a> (const <a class="el" href="group___core_types.html#ga0b098d32ebd9cc922390914e765ca674">int64_t</a> v)</td></tr>
+<tr class="memdesc:acad3f401df749e855a1fa647bcc383e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置64位整数值  <br /></td></tr>
+<tr class="memitem:aa31fd874128e9c4798bcf772f7111322" id="r_aa31fd874128e9c4798bcf772f7111322"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aa31fd874128e9c4798bcf772f7111322">value</a> (const int v)</td></tr>
+<tr class="memdesc:aa31fd874128e9c4798bcf772f7111322"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置整数值  <br /></td></tr>
+<tr class="memitem:ab7b3708cdf1c26783b991e72fbdbe19a" id="r_ab7b3708cdf1c26783b991e72fbdbe19a"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ab7b3708cdf1c26783b991e72fbdbe19a">value</a> (const double v)</td></tr>
+<tr class="memdesc:ab7b3708cdf1c26783b991e72fbdbe19a"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置双精度浮点数值  <br /></td></tr>
+<tr class="memitem:a8531dd35a04d9b6b516504ac32f02a2b" id="r_a8531dd35a04d9b6b516504ac32f02a2b"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a8531dd35a04d9b6b516504ac32f02a2b">value</a> (<a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> v)</td></tr>
+<tr class="memdesc:a8531dd35a04d9b6b516504ac32f02a2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置字符串值（纯文本样式）  <br /></td></tr>
+<tr class="memitem:a3f0685325c9f39172220490a248eea74" id="r_a3f0685325c9f39172220490a248eea74"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a3f0685325c9f39172220490a248eea74">value</a> (const char *v)</td></tr>
+<tr class="memdesc:a3f0685325c9f39172220490a248eea74"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置C字符串值  <br /></td></tr>
+<tr class="memitem:a03ae773a5ce30ed1c05ef4f76f6edfec" id="r_a03ae773a5ce30ed1c05ef4f76f6edfec"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a03ae773a5ce30ed1c05ef4f76f6edfec">value</a> (const <a class="el" href="group___string_view.html#ga5a6e8b9da034ce8d4818231c4e005eff">string_view</a> v)</td></tr>
+<tr class="memdesc:a03ae773a5ce30ed1c05ef4f76f6edfec"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置字符串视图值  <br /></td></tr>
+<tr class="memitem:a6fcb7ebfeaca62539b8af931ee3d263f" id="r_a6fcb7ebfeaca62539b8af931ee3d263f"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a6fcb7ebfeaca62539b8af931ee3d263f">value</a> (<a class="el" href="classneforce_1_1shared__ptr.html">shared_ptr</a>&lt; <a class="el" href="classneforce_1_1yaml__value.html">yaml_value</a> &gt; v)</td></tr>
+<tr class="memdesc:a6fcb7ebfeaca62539b8af931ee3d263f"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置已构建的YAML值  <br /></td></tr>
+<tr class="memitem:a3c53a37234e64cf1804d5259ce4fafd3" id="r_a3c53a37234e64cf1804d5259ce4fafd3"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a3c53a37234e64cf1804d5259ce4fafd3">value_datetime</a> (const <a class="el" href="classneforce_1_1datetime.html">datetime</a> &amp;dt)</td></tr>
+<tr class="memdesc:a3c53a37234e64cf1804d5259ce4fafd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置时间戳值  <br /></td></tr>
+<tr class="memitem:a954db000a297006503249375e6740f02" id="r_a954db000a297006503249375e6740f02"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a954db000a297006503249375e6740f02">value_string</a> (<a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> v, <a class="el" href="classneforce_1_1yaml__string.html#a0146a4bc49ed2d13598acb41c634df74">yaml_string::string_style</a> style)</td></tr>
+<tr class="memdesc:a954db000a297006503249375e6740f02"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置指定类型的字符串值  <br /></td></tr>
+<tr class="memitem:a9c777d6914e3aeec6d6a1f2022721fd9" id="r_a9c777d6914e3aeec6d6a1f2022721fd9"><td class="memTemplParams" colspan="2">template&lt;typename Iterable, <a class="el" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt; <a class="el" href="group___type_action_check.html#ga868b703506f6bb0ed800378058e2df7c">is_iterable_v</a>&lt; Iterable &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a9c777d6914e3aeec6d6a1f2022721fd9 template"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a9c777d6914e3aeec6d6a1f2022721fd9">value_iterable</a> (const Iterable &amp;iterable)</td></tr>
+<tr class="memdesc:a9c777d6914e3aeec6d6a1f2022721fd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置可迭代对象的值  <br /></td></tr>
+<tr class="memitem:adc8186ade1e91d58699ada2bd1a13ef6" id="r_adc8186ade1e91d58699ada2bd1a13ef6"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#adc8186ade1e91d58699ada2bd1a13ef6">value_mapping</a> (const <a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;)&gt; &amp;build_func)</td></tr>
+<tr class="memdesc:adc8186ade1e91d58699ada2bd1a13ef6"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用函数式方式构建映射值  <br /></td></tr>
+<tr class="memitem:a1bfa9bbde156578ae8f1631378f32553" id="r_a1bfa9bbde156578ae8f1631378f32553"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a1bfa9bbde156578ae8f1631378f32553">value_block_mapping</a> (const <a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;)&gt; &amp;build_func)</td></tr>
+<tr class="memdesc:a1bfa9bbde156578ae8f1631378f32553"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用函数式方式构建块样式映射值  <br /></td></tr>
+<tr class="memitem:a870820f87db086e4919f390b1e631a09" id="r_a870820f87db086e4919f390b1e631a09"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a870820f87db086e4919f390b1e631a09">value_flow_mapping</a> (const <a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;)&gt; &amp;build_func)</td></tr>
+<tr class="memdesc:a870820f87db086e4919f390b1e631a09"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用函数式方式构建流样式映射值  <br /></td></tr>
+<tr class="memitem:ae4d93db3798a99ef77fe2fccb1789d69" id="r_ae4d93db3798a99ef77fe2fccb1789d69"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ae4d93db3798a99ef77fe2fccb1789d69">value_sequence</a> (const <a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;)&gt; &amp;build_func)</td></tr>
+<tr class="memdesc:ae4d93db3798a99ef77fe2fccb1789d69"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用函数式方式构建序列值  <br /></td></tr>
+<tr class="memitem:ab09b1bd278c2d83001e7228849c043e5" id="r_ab09b1bd278c2d83001e7228849c043e5"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ab09b1bd278c2d83001e7228849c043e5">value_block_sequence</a> (const <a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;)&gt; &amp;build_func)</td></tr>
+<tr class="memdesc:ab09b1bd278c2d83001e7228849c043e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用函数式方式构建块样式序列值  <br /></td></tr>
+<tr class="memitem:a949f49bd1dad142dbd180a2879f96cf8" id="r_a949f49bd1dad142dbd180a2879f96cf8"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a949f49bd1dad142dbd180a2879f96cf8">value_flow_sequence</a> (const <a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;)&gt; &amp;build_func)</td></tr>
+<tr class="memdesc:a949f49bd1dad142dbd180a2879f96cf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用函数式方式构建流样式序列值  <br /></td></tr>
+<tr class="memitem:a7302beaa85b7441f820d677ff544c709" id="r_a7302beaa85b7441f820d677ff544c709"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a7302beaa85b7441f820d677ff544c709">anchor</a> (<a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> name)</td></tr>
+<tr class="memdesc:a7302beaa85b7441f820d677ff544c709"><td class="mdescLeft">&#160;</td><td class="mdescRight">为下一个值设置锚点  <br /></td></tr>
+<tr class="memitem:ae2d02990b7a43e5f04804c7cc1cdf233" id="r_ae2d02990b7a43e5f04804c7cc1cdf233"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ae2d02990b7a43e5f04804c7cc1cdf233">tag</a> (<a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> t)</td></tr>
+<tr class="memdesc:ae2d02990b7a43e5f04804c7cc1cdf233"><td class="mdescLeft">&#160;</td><td class="mdescRight">为下一个值设置标签  <br /></td></tr>
+<tr class="memitem:afa79760fc441b332f97defd4b5dcc026" id="r_afa79760fc441b332f97defd4b5dcc026"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#afa79760fc441b332f97defd4b5dcc026">alias</a> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;name)</td></tr>
+<tr class="memdesc:afa79760fc441b332f97defd4b5dcc026"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加一个别名引用  <br /></td></tr>
+<tr class="memitem:af377033181a740e689f1073d152f3be7" id="r_af377033181a740e689f1073d152f3be7"><td class="memItemLeft"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#af377033181a740e689f1073d152f3be7">begin_document</a> ()</td></tr>
+<tr class="memdesc:af377033181a740e689f1073d152f3be7"><td class="mdescLeft">&#160;</td><td class="mdescRight">开始新文档（多文档模式）  <br /></td></tr>
+<tr class="memitem:ac0925a3bf7ad64616e76dc3b18bba3c3" id="r_ac0925a3bf7ad64616e76dc3b18bba3c3"><td class="memItemLeft"><a class="el" href="classneforce_1_1shared__ptr.html">shared_ptr</a>&lt; <a class="el" href="classneforce_1_1yaml__value.html">yaml_value</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ac0925a3bf7ad64616e76dc3b18bba3c3">build</a> ()</td></tr>
+<tr class="memdesc:ac0925a3bf7ad64616e76dc3b18bba3c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">构建YAML文档树  <br /></td></tr>
+<tr class="memitem:abac4eb349870b2bddc3482f1e0788543" id="r_abac4eb349870b2bddc3482f1e0788543"><td class="memItemLeft"><a class="el" href="classneforce_1_1vector.html">vector</a>&lt; <a class="el" href="classneforce_1_1shared__ptr.html">shared_ptr</a>&lt; <a class="el" href="classneforce_1_1yaml__value.html">yaml_value</a> &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#abac4eb349870b2bddc3482f1e0788543">build_documents</a> ()</td></tr>
+<tr class="memdesc:abac4eb349870b2bddc3482f1e0788543"><td class="mdescLeft">&#160;</td><td class="mdescRight">构建多文档YAML文档树  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>YAML配置构建器 </p>
+<p>提供流式接口构建YAML配置格式，支持以下特性：</p><ul>
+<li>链式调用构建映射和序列</li>
+<li>自动类型转换（整数、浮点数、布尔值、字符串）</li>
+<li>函数式构建嵌套结构</li>
+<li>集合类型自动转换（可迭代对象、映射表）</li>
+<li>上下文管理（自动维护当前映射/序列状态）</li>
+<li>支持所有YAML字符串类型（Plain, SingleQuoted, DoubleQuoted, Literal, Folded）</li>
+<li>支持时间戳类型</li>
+<li>支持锚点、别名和标签</li>
+<li>支持块样式和流样式</li>
+<li>支持多文档 </li>
+</ul>
+
+<p class="definition">在文件 <a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a> 第 <a class="el" href="yaml__builder_8hpp_source.html#l00044">44</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="a77bfd65abd7931d5f22868b8bbaa3193" name="a77bfd65abd7931d5f22868b8bbaa3193"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77bfd65abd7931d5f22868b8bbaa3193">&#9670;&#160;</a></span>yaml_builder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">neforce::yaml_builder::yaml_builder </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<p>创建一个新的构建器实例。默认根为块样式映射。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#afa79760fc441b332f97defd4b5dcc026">alias()</a>, <a class="el" href="#a7302beaa85b7441f820d677ff544c709">anchor()</a>, <a class="el" href="#a2cc4c63a3091c5a5538d7d651648cca7">begin_block_mapping()</a>, <a class="el" href="#a9ba40e20aa1557fe0361d0ece353de61">begin_block_sequence()</a>, <a class="el" href="#af377033181a740e689f1073d152f3be7">begin_document()</a>, <a class="el" href="#a1175fad6461bbfdf8a8fbaf8f3f57769">begin_flow_mapping()</a>, <a class="el" href="#a766a7262d07a637e0ea39cb0ed546fb8">begin_flow_sequence()</a>, <a class="el" href="#a48419496c4c6c6a89ac32348b5721955">begin_mapping()</a>, <a class="el" href="#a717c2340a45b919b2060b57b37dbfddb">begin_sequence()</a>, <a class="el" href="#a4b93388fa5f335d5ffa113b5d98168e7">end_mapping()</a>, <a class="el" href="#a61f24ccc5b7164e45fc05dbebbb0eb90">end_sequence()</a>, <a class="el" href="#adc93efa4d6b4b80b83467415cf090b07">key()</a>, <a class="el" href="#a35304477bea63e5f05cd4079b4aab444">operator=()</a>, <a class="el" href="#ae2d02990b7a43e5f04804c7cc1cdf233">tag()</a>, <a class="el" href="yaml__builder_8hpp_source.html#l00242">value()</a>, <a class="el" href="yaml__builder_8hpp_source.html#l00277">value()</a>, <a class="el" href="yaml__builder_8hpp_source.html#l00263">value()</a>, <a class="el" href="yaml__builder_8hpp_source.html#l00256">value()</a>, <a class="el" href="yaml__builder_8hpp_source.html#l00249">value()</a>, <a class="el" href="yaml__builder_8hpp_source.html#l00284">value()</a>, <a class="el" href="yaml__builder_8hpp_source.html#l00235">value()</a>, <a class="el" href="yaml__builder_8hpp_source.html#l00291">value()</a>, <a class="el" href="yaml__builder_8hpp_source.html#l00270">value()</a>, <a class="el" href="#a1bfa9bbde156578ae8f1631378f32553">value_block_mapping()</a>, <a class="el" href="#ab09b1bd278c2d83001e7228849c043e5">value_block_sequence()</a>, <a class="el" href="#a3c53a37234e64cf1804d5259ce4fafd3">value_datetime()</a>, <a class="el" href="#a870820f87db086e4919f390b1e631a09">value_flow_mapping()</a>, <a class="el" href="#a949f49bd1dad142dbd180a2879f96cf8">value_flow_sequence()</a>, <a class="el" href="yaml__builder_8hpp_source.html#l00319">value_iterable()</a>, <a class="el" href="#adc8186ade1e91d58699ada2bd1a13ef6">value_mapping()</a>, <a class="el" href="#ae4d93db3798a99ef77fe2fccb1789d69">value_sequence()</a>, <a class="el" href="#a954db000a297006503249375e6740f02">value_string()</a>, <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a> , 以及 <a class="el" href="#a23b81ad4463654ffa4bb0fac6547a1df">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="afa79760fc441b332f97defd4b5dcc026" name="afa79760fc441b332f97defd4b5dcc026"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa79760fc441b332f97defd4b5dcc026">&#9670;&#160;</a></span>alias()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::alias </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加一个别名引用 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>锚点名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1yaml__exception.html" title="YAML格式操作失败">yaml_exception</a></td><td>当锚点不存在时抛出</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>引用之前通过anchor()设置的同名节点。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a7302beaa85b7441f820d677ff544c709" name="a7302beaa85b7441f820d677ff544c709"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7302beaa85b7441f820d677ff544c709">&#9670;&#160;</a></span>anchor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::anchor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a></td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>为下一个值设置锚点 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>锚点名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用</dd></dl>
+<p>锚点将应用到下一个通过value()或begin_*添加的值上。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a2cc4c63a3091c5a5538d7d651648cca7" name="a2cc4c63a3091c5a5538d7d651648cca7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cc4c63a3091c5a5538d7d651648cca7">&#9670;&#160;</a></span>begin_block_mapping()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::begin_block_mapping </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>开始一个块样式映射 </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a9ba40e20aa1557fe0361d0ece353de61" name="a9ba40e20aa1557fe0361d0ece353de61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ba40e20aa1557fe0361d0ece353de61">&#9670;&#160;</a></span>begin_block_sequence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::begin_block_sequence </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>开始一个块样式序列 </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="af377033181a740e689f1073d152f3be7" name="af377033181a740e689f1073d152f3be7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af377033181a740e689f1073d152f3be7">&#9670;&#160;</a></span>begin_document()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::begin_document </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>开始新文档（多文档模式） </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用</dd></dl>
+<p>保存当前文档并开始新文档。新文档的根默认为块样式映射。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a1175fad6461bbfdf8a8fbaf8f3f57769" name="a1175fad6461bbfdf8a8fbaf8f3f57769"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1175fad6461bbfdf8a8fbaf8f3f57769">&#9670;&#160;</a></span>begin_flow_mapping()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::begin_flow_mapping </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>开始一个流样式映射 </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a766a7262d07a637e0ea39cb0ed546fb8" name="a766a7262d07a637e0ea39cb0ed546fb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a766a7262d07a637e0ea39cb0ed546fb8">&#9670;&#160;</a></span>begin_flow_sequence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::begin_flow_sequence </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>开始一个流样式序列 </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a48419496c4c6c6a89ac32348b5721955" name="a48419496c4c6c6a89ac32348b5721955"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48419496c4c6c6a89ac32348b5721955">&#9670;&#160;</a></span>begin_mapping()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::begin_mapping </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>开始一个映射（块样式） </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1yaml__exception.html" title="YAML格式操作失败">yaml_exception</a></td><td>当上下文无效或键名缺失时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a717c2340a45b919b2060b57b37dbfddb" name="a717c2340a45b919b2060b57b37dbfddb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a717c2340a45b919b2060b57b37dbfddb">&#9670;&#160;</a></span>begin_sequence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::begin_sequence </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>开始一个序列（块样式） </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1yaml__exception.html" title="YAML格式操作失败">yaml_exception</a></td><td>当上下文无效或键名缺失时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="ac0925a3bf7ad64616e76dc3b18bba3c3" name="ac0925a3bf7ad64616e76dc3b18bba3c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0925a3bf7ad64616e76dc3b18bba3c3">&#9670;&#160;</a></span>build()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1shared__ptr.html">shared_ptr</a>&lt; <a class="el" href="classneforce_1_1yaml__value.html">yaml_value</a> &gt; neforce::yaml_builder::build </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>构建YAML文档树 </p>
+<dl class="section return"><dt>返回</dt><dd>构建完成的根值 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1yaml__exception.html" title="YAML格式操作失败">yaml_exception</a></td><td>当存在未闭合的上下文时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abac4eb349870b2bddc3482f1e0788543" name="abac4eb349870b2bddc3482f1e0788543"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abac4eb349870b2bddc3482f1e0788543">&#9670;&#160;</a></span>build_documents()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1vector.html">vector</a>&lt; <a class="el" href="classneforce_1_1shared__ptr.html">shared_ptr</a>&lt; <a class="el" href="classneforce_1_1yaml__value.html">yaml_value</a> &gt; &gt; neforce::yaml_builder::build_documents </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>构建多文档YAML文档树 </p>
+<dl class="section return"><dt>返回</dt><dd>所有文档的根值列表 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1yaml__exception.html" title="YAML格式操作失败">yaml_exception</a></td><td>当存在未闭合的上下文时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4b93388fa5f335d5ffa113b5d98168e7" name="a4b93388fa5f335d5ffa113b5d98168e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b93388fa5f335d5ffa113b5d98168e7">&#9670;&#160;</a></span>end_mapping()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::end_mapping </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>结束当前映射 </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1yaml__exception.html" title="YAML格式操作失败">yaml_exception</a></td><td>当不在映射上下文中时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a61f24ccc5b7164e45fc05dbebbb0eb90" name="a61f24ccc5b7164e45fc05dbebbb0eb90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61f24ccc5b7164e45fc05dbebbb0eb90">&#9670;&#160;</a></span>end_sequence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::end_sequence </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>结束当前序列 </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1yaml__exception.html" title="YAML格式操作失败">yaml_exception</a></td><td>当不在序列上下文中时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="adc93efa4d6b4b80b83467415cf090b07" name="adc93efa4d6b4b80b83467415cf090b07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc93efa4d6b4b80b83467415cf090b07">&#9670;&#160;</a></span>key()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::key </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a></td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置当前键名 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键名字符串 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structneforce_1_1yaml__exception.html" title="YAML格式操作失败">yaml_exception</a></td><td>当不在映射上下文中时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#adc93efa4d6b4b80b83467415cf090b07">key()</a> , 以及 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#adc93efa4d6b4b80b83467415cf090b07">key()</a>.</p>
+
+</div>
+</div>
+<a id="ae2d02990b7a43e5f04804c7cc1cdf233" name="ae2d02990b7a43e5f04804c7cc1cdf233"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2d02990b7a43e5f04804c7cc1cdf233">&#9670;&#160;</a></span>tag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::tag </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a></td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>为下一个值设置标签 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>标签字符串（如"!mytag"、"!!str"） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用</dd></dl>
+<p>标签将应用到下一个通过value()或begin_*添加的值上。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="afe98fe34b1397959f622f94f489d4495" name="afe98fe34b1397959f622f94f489d4495"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe98fe34b1397959f622f94f489d4495">&#9670;&#160;</a></span>value() <span class="overload">[1/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::value </td>
+          <td>(</td>
+          <td class="paramtype">const bool</td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置布尔值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>布尔值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a> 第 <a class="el" href="yaml__builder_8hpp_source.html#l00242">242</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shared__ptr_8hpp_source.html#l00849">neforce::make_shared()</a> , 以及 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a3f0685325c9f39172220490a248eea74" name="a3f0685325c9f39172220490a248eea74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f0685325c9f39172220490a248eea74">&#9670;&#160;</a></span>value() <span class="overload">[2/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::value </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置C字符串值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>C字符串 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a> 第 <a class="el" href="yaml__builder_8hpp_source.html#l00277">277</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="yaml__builder_8hpp_source.html#l00277">value()</a> , 以及 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="yaml__builder_8hpp_source.html#l00277">value()</a>.</p>
+
+</div>
+</div>
+<a id="ab7b3708cdf1c26783b991e72fbdbe19a" name="ab7b3708cdf1c26783b991e72fbdbe19a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7b3708cdf1c26783b991e72fbdbe19a">&#9670;&#160;</a></span>value() <span class="overload">[3/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::value </td>
+          <td>(</td>
+          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置双精度浮点数值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>双精度浮点数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a> 第 <a class="el" href="yaml__builder_8hpp_source.html#l00263">263</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shared__ptr_8hpp_source.html#l00849">neforce::make_shared()</a> , 以及 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="aa31fd874128e9c4798bcf772f7111322" name="aa31fd874128e9c4798bcf772f7111322"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa31fd874128e9c4798bcf772f7111322">&#9670;&#160;</a></span>value() <span class="overload">[4/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::value </td>
+          <td>(</td>
+          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置整数值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>整数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a> 第 <a class="el" href="yaml__builder_8hpp_source.html#l00256">256</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shared__ptr_8hpp_source.html#l00849">neforce::make_shared()</a> , 以及 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="acad3f401df749e855a1fa647bcc383e9" name="acad3f401df749e855a1fa647bcc383e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acad3f401df749e855a1fa647bcc383e9">&#9670;&#160;</a></span>value() <span class="overload">[5/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::value </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___core_types.html#ga0b098d32ebd9cc922390914e765ca674">int64_t</a></td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置64位整数值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>64位整数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a> 第 <a class="el" href="yaml__builder_8hpp_source.html#l00249">249</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shared__ptr_8hpp_source.html#l00849">neforce::make_shared()</a> , 以及 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a03ae773a5ce30ed1c05ef4f76f6edfec" name="a03ae773a5ce30ed1c05ef4f76f6edfec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03ae773a5ce30ed1c05ef4f76f6edfec">&#9670;&#160;</a></span>value() <span class="overload">[6/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::value </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string_view.html#ga5a6e8b9da034ce8d4818231c4e005eff">string_view</a></td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置字符串视图值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>字符串视图 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a> 第 <a class="el" href="yaml__builder_8hpp_source.html#l00284">284</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="yaml__builder_8hpp_source.html#l00284">value()</a> , 以及 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="yaml__builder_8hpp_source.html#l00284">value()</a>.</p>
+
+</div>
+</div>
+<a id="ad7eb34eee04fe1341ebb3f7c0405e4f1" name="ad7eb34eee04fe1341ebb3f7c0405e4f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7eb34eee04fe1341ebb3f7c0405e4f1">&#9670;&#160;</a></span>value() <span class="overload">[7/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::value </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#gacb98a47b9e384b2934a9c2dbd3c2d598">nullptr_t</a></td>          <td class="paramname"><span class="paramname"><em>np</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置null值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">np</td><td>空指针标记 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a> 第 <a class="el" href="yaml__builder_8hpp_source.html#l00235">235</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shared__ptr_8hpp_source.html#l00849">neforce::make_shared()</a> , 以及 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a6fcb7ebfeaca62539b8af931ee3d263f" name="a6fcb7ebfeaca62539b8af931ee3d263f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fcb7ebfeaca62539b8af931ee3d263f">&#9670;&#160;</a></span>value() <span class="overload">[8/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::value </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1shared__ptr.html">shared_ptr</a>&lt; <a class="el" href="classneforce_1_1yaml__value.html">yaml_value</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置已构建的YAML值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>YAML值指针 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a> 第 <a class="el" href="yaml__builder_8hpp_source.html#l00291">291</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">neforce::move()</a> , 以及 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a8531dd35a04d9b6b516504ac32f02a2b" name="a8531dd35a04d9b6b516504ac32f02a2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8531dd35a04d9b6b516504ac32f02a2b">&#9670;&#160;</a></span>value() <span class="overload">[9/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::value </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a></td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置字符串值（纯文本样式） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>字符串值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a> 第 <a class="el" href="yaml__builder_8hpp_source.html#l00270">270</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shared__ptr_8hpp_source.html#l00849">neforce::make_shared()</a>, <a class="el" href="shift_8hpp_source.html#l00312">neforce::move()</a>, <a class="el" href="yaml__value_8hpp_source.html#l00462">neforce::yaml_string::Plain</a> , 以及 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a1bfa9bbde156578ae8f1631378f32553" name="a1bfa9bbde156578ae8f1631378f32553"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bfa9bbde156578ae8f1631378f32553">&#9670;&#160;</a></span>value_block_mapping()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::value_block_mapping </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;)&gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>build_func</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>使用函数式方式构建块样式映射值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">build_func</td><td>构建函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="ab09b1bd278c2d83001e7228849c043e5" name="ab09b1bd278c2d83001e7228849c043e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab09b1bd278c2d83001e7228849c043e5">&#9670;&#160;</a></span>value_block_sequence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::value_block_sequence </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;)&gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>build_func</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>使用函数式方式构建块样式序列值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">build_func</td><td>构建函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a3c53a37234e64cf1804d5259ce4fafd3" name="a3c53a37234e64cf1804d5259ce4fafd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c53a37234e64cf1804d5259ce4fafd3">&#9670;&#160;</a></span>value_datetime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::value_datetime </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classneforce_1_1datetime.html">datetime</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>dt</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置时间戳值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dt</td><td>日期时间对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a870820f87db086e4919f390b1e631a09" name="a870820f87db086e4919f390b1e631a09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a870820f87db086e4919f390b1e631a09">&#9670;&#160;</a></span>value_flow_mapping()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::value_flow_mapping </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;)&gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>build_func</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>使用函数式方式构建流样式映射值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">build_func</td><td>构建函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a949f49bd1dad142dbd180a2879f96cf8" name="a949f49bd1dad142dbd180a2879f96cf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a949f49bd1dad142dbd180a2879f96cf8">&#9670;&#160;</a></span>value_flow_sequence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::value_flow_sequence </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;)&gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>build_func</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>使用函数式方式构建流样式序列值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">build_func</td><td>构建函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a9c777d6914e3aeec6d6a1f2022721fd9" name="a9c777d6914e3aeec6d6a1f2022721fd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c777d6914e3aeec6d6a1f2022721fd9">&#9670;&#160;</a></span>value_iterable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterable, <a class="el" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt; <a class="el" href="group___type_action_check.html#ga868b703506f6bb0ed800378058e2df7c">is_iterable_v</a>&lt; Iterable &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::value_iterable </td>
+          <td>(</td>
+          <td class="paramtype">const Iterable &amp;</td>          <td class="paramname"><span class="paramname"><em>iterable</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置可迭代对象的值 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterable</td><td>可迭代类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">iterable</td><td>可迭代对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用</dd></dl>
+<p>根据类型自动转换为序列或内联映射：</p><ul>
+<li>映射表类型转换为流样式映射</li>
+<li>其他可迭代类型转换为序列 </li>
+</ul>
+
+<p class="definition">在文件 <a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a> 第 <a class="el" href="yaml__builder_8hpp_source.html#l00319">319</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="adc8186ade1e91d58699ada2bd1a13ef6" name="adc8186ade1e91d58699ada2bd1a13ef6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc8186ade1e91d58699ada2bd1a13ef6">&#9670;&#160;</a></span>value_mapping()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::value_mapping </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;)&gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>build_func</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>使用函数式方式构建映射值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">build_func</td><td>构建函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="ae4d93db3798a99ef77fe2fccb1789d69" name="ae4d93db3798a99ef77fe2fccb1789d69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4d93db3798a99ef77fe2fccb1789d69">&#9670;&#160;</a></span>value_sequence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::value_sequence </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp;)&gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>build_func</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>使用函数式方式构建序列值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">build_func</td><td>构建函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a954db000a297006503249375e6740f02" name="a954db000a297006503249375e6740f02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a954db000a297006503249375e6740f02">&#9670;&#160;</a></span>value_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder</a> &amp; neforce::yaml_builder::value_string </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a></td>          <td class="paramname"><span class="paramname"><em>v</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1yaml__string.html#a0146a4bc49ed2d13598acb41c634df74">yaml_string::string_style</a></td>          <td class="paramname"><span class="paramname"><em>style</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置指定类型的字符串值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>字符串值 </td></tr>
+    <tr><td class="paramname">style</td><td>字符串样式 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a77bfd65abd7931d5f22868b8bbaa3193">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><a href="classneforce_1_1yaml__builder.html">yaml_builder</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

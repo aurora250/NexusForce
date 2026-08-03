@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['选项语法规则_0',['选项语法规则',['../group___command_line.html#option_syntax',1,'']]]
+  ['负载因子管理_0',['负载因子管理',['../group___hash_table.html#load_factor_management',1,'']]]
 ];

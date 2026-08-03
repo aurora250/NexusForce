@@ -148,8 +148,8 @@
         </childnode>
       </node>
       <node id="16">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="11" relation="include">
         </childnode>
       </node>
@@ -159,10 +159,12 @@
         <childnode refid="19" relation="include">
         </childnode>
       </node>
-      <node id="66">
+      <node id="67">
         <label>NeForce/core/functional/function.hpp</label>
         <link refid="functional_2function_8hpp"/>
-        <childnode refid="67" relation="include">
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>
@@ -225,7 +227,7 @@
         <childnode refid="15" relation="include">
         </childnode>
       </node>
-      <node id="71">
+      <node id="72">
         <label>NeForce/core/memory/allocator_traits.hpp</label>
         <link refid="allocator__traits_8hpp"/>
         <childnode refid="41" relation="include">
@@ -353,22 +355,22 @@
         <childnode refid="60" relation="include">
         </childnode>
       </node>
-      <node id="65">
+      <node id="66">
         <label>NeForce/core/reflect/function.hpp</label>
         <link refid="reflect_2function_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="66" relation="include">
+        <childnode refid="67" relation="include">
         </childnode>
         <childnode refid="60" relation="include">
         </childnode>
       </node>
-      <node id="68">
+      <node id="69">
         <label>NeForce/core/reflect/property.hpp</label>
         <link refid="property_8hpp"/>
-        <childnode refid="66" relation="include">
+        <childnode refid="67" relation="include">
         </childnode>
-        <childnode refid="69" relation="include">
+        <childnode refid="70" relation="include">
         </childnode>
         <childnode refid="60" relation="include">
         </childnode>
@@ -378,7 +380,7 @@
         <link refid="reflect_8hpp"/>
         <childnode refid="44" relation="include">
         </childnode>
-        <childnode refid="65" relation="include">
+        <childnode refid="66" relation="include">
         </childnode>
       </node>
       <node id="44">
@@ -398,11 +400,11 @@
         </childnode>
         <childnode refid="59" relation="include">
         </childnode>
-        <childnode refid="65" relation="include">
-        </childnode>
-        <childnode refid="68" relation="include">
+        <childnode refid="66" relation="include">
         </childnode>
         <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -419,14 +421,16 @@
         <childnode refid="43" relation="include">
         </childnode>
       </node>
-      <node id="70">
+      <node id="71">
         <label>NeForce/core/string/basic_string.hpp</label>
         <link refid="basic__string_8hpp"/>
         <childnode refid="28" relation="include">
         </childnode>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="71" relation="include">
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
         </childnode>
         <childnode refid="61" relation="include">
         </childnode>
@@ -440,6 +444,8 @@
         </childnode>
         <childnode refid="63" relation="include">
         </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
         <childnode refid="64" relation="include">
         </childnode>
       </node>
@@ -450,17 +456,27 @@
         </childnode>
         <childnode refid="33" relation="include">
         </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
       </node>
-      <node id="64">
+      <node id="65">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
         <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="69">
+      <node id="64">
+        <label>NeForce/core/string/charset.hpp</label>
+        <link refid="charset_8hpp"/>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="70">
         <label>NeForce/core/string/string.hpp</label>
         <link refid="string_8hpp"/>
-        <childnode refid="70" relation="include">
+        <childnode refid="71" relation="include">
         </childnode>
       </node>
       <node id="61">
@@ -538,14 +554,16 @@
       <node id="47">
         <label>synchapi.h</label>
       </node>
-      <node id="67">
+      <node id="68">
         <label>typeinfo</label>
       </node>
       <node id="27">
         <label>utility</label>
       </node>
     </incdepgraph>
-    <innerclass refid="classbinary__serializer" prot="public">binary_serializer</innerclass>
+    <innerclass refid="classneforce_1_1serialize_1_1binary__serializer" prot="public">neforce::serialize::binary_serializer</innerclass>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
+    <innernamespace refid="namespaceneforce_1_1serialize">neforce::serialize</innernamespace>
     <briefdescription>
 <para>二进制序列化器 </para>
     </briefdescription>
@@ -564,17 +582,17 @@
 <codeline lineno="24"><highlight class="normal">NEFORCE_BEGIN_SERIALIZE__</highlight></codeline>
 <codeline lineno="25"><highlight class="normal"></highlight></codeline>
 <codeline lineno="30"><highlight class="normal"></highlight></codeline>
-<codeline lineno="38" refid="classbinary__serializer" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classbinary__serializer" kindref="compound">binary_serializer</ref><sp/>{</highlight></codeline>
+<codeline lineno="38" refid="classneforce_1_1serialize_1_1binary__serializer" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classneforce_1_1serialize_1_1binary__serializer" kindref="compound">binary_serializer</ref><sp/>{</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="40" refid="classbinary__serializer_1af193d1cbeda444de78792c99760c043b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classbinary__serializer_1af193d1cbeda444de78792c99760c043b" kindref="member">buffer</ref><sp/>=<sp/><ref refid="classvector" kindref="compound">vector&lt;byte_t&gt;</ref>;<sp/></highlight></codeline>
+<codeline lineno="40" refid="classneforce_1_1serialize_1_1binary__serializer_1a72793bd9fc5cdb4ba176685c775282b0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classneforce_1_1serialize_1_1binary__serializer_1a72793bd9fc5cdb4ba176685c775282b0" kindref="member">buffer</ref><sp/>=<sp/><ref refid="classneforce_1_1vector" kindref="compound">vector&lt;byte_t&gt;</ref>;<sp/></highlight></codeline>
 <codeline lineno="41"><highlight class="normal"></highlight></codeline>
-<codeline lineno="45" refid="classbinary__serializer_1a8a58f8475e2adfe449abb0dc84c5bb08" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="classbinary__serializer_1a8a58f8475e2adfe449abb0dc84c5bb08" kindref="member">MAGIC</ref><sp/>=<sp/>0x4E454246;</highlight></codeline>
+<codeline lineno="45" refid="classneforce_1_1serialize_1_1binary__serializer_1a41d7b3c5cd3df56effe6fc409b80ccee" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref><sp/><ref refid="classneforce_1_1serialize_1_1binary__serializer_1a41d7b3c5cd3df56effe6fc409b80ccee" kindref="member">MAGIC</ref><sp/>=<sp/>0x4E454246;</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"></highlight></codeline>
-<codeline lineno="50" refid="classbinary__serializer_1a074959b9f5635c4ce3ec4301f51abb50" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref><sp/><ref refid="classbinary__serializer_1a074959b9f5635c4ce3ec4301f51abb50" kindref="member">VERSION</ref><sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="50" refid="classneforce_1_1serialize_1_1binary__serializer_1a6ae3f438bdb8712298c5fca4d6c0993e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1gabca631c03e4d34e2e77587fc66d05f52" kindref="member">uint16_t</ref><sp/><ref refid="classneforce_1_1serialize_1_1binary__serializer_1a6ae3f438bdb8712298c5fca4d6c0993e" kindref="member">VERSION</ref><sp/>=<sp/>1;</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight></codeline>
-<codeline lineno="58" refid="classbinary__serializer_1afb09daba5d0ee9251605227136c34519" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classbinary__serializer_1af193d1cbeda444de78792c99760c043b" kindref="member">buffer</ref><sp/><ref refid="classbinary__serializer_1afb09daba5d0ee9251605227136c34519" kindref="member">serialize</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>reflect::meta_any&amp;<sp/>obj,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structserialize__context" kindref="compound">serialize_context</ref>&amp;<sp/>ctx<sp/>=<sp/>{});</highlight></codeline>
+<codeline lineno="58" refid="classneforce_1_1serialize_1_1binary__serializer_1aa5c67a34c14b05de236d0fe5bed90975" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1serialize_1_1binary__serializer_1a72793bd9fc5cdb4ba176685c775282b0" kindref="member">buffer</ref><sp/><ref refid="classneforce_1_1serialize_1_1binary__serializer_1aa5c67a34c14b05de236d0fe5bed90975" kindref="member">serialize</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1reflect_1_1meta__any" kindref="compound">reflect::meta_any</ref>&amp;<sp/>obj,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1serialize_1_1serialize__context" kindref="compound">serialize_context</ref>&amp;<sp/>ctx<sp/>=<sp/>{});</highlight></codeline>
 <codeline lineno="59"><highlight class="normal"></highlight></codeline>
-<codeline lineno="66" refid="classbinary__serializer_1abfb1ff96b144e2073fae4876bd629a24" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>reflect::meta_any<sp/><ref refid="classbinary__serializer_1abfb1ff96b144e2073fae4876bd629a24" kindref="member">deserialize</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref>*<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" kindref="member">size</ref>);</highlight></codeline>
+<codeline lineno="66" refid="classneforce_1_1serialize_1_1binary__serializer_1a37fc73967269b810c30390f3aaf044e9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1reflect_1_1meta__any" kindref="compound">reflect::meta_any</ref><sp/><ref refid="classneforce_1_1serialize_1_1binary__serializer_1a37fc73967269b810c30390f3aaf044e9" kindref="member">deserialize</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref>*<sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga69955a26617401117eaf53fa82162e2b" kindref="member">size</ref>);</highlight></codeline>
 <codeline lineno="67"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="68"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Serializer</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="70"><highlight class="normal"></highlight></codeline>

@@ -79,8 +79,8 @@
         </childnode>
       </node>
       <node id="23">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
@@ -281,30 +281,44 @@
         </childnode>
         <childnode refid="52" relation="include">
         </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
         <childnode refid="46" relation="include">
         </childnode>
       </node>
-      <node id="53">
+      <node id="55">
         <label>NeForce/core/string/basic_string_view.hpp</label>
         <link refid="basic__string__view_8hpp"/>
         <childnode refid="44" relation="include">
         </childnode>
-        <childnode refid="54" relation="include">
+        <childnode refid="56" relation="include">
         </childnode>
-        <childnode refid="55" relation="include">
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
         </childnode>
       </node>
-      <node id="54">
+      <node id="56">
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="34" relation="include">
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
       </node>
-      <node id="55">
+      <node id="53">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="52">
+        <label>NeForce/core/string/charset.hpp</label>
+        <link refid="charset_8hpp"/>
+        <childnode refid="53" relation="include">
+        </childnode>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
@@ -314,10 +328,10 @@
         <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="52">
+      <node id="54">
         <label>NeForce/core/string/string_view.hpp</label>
         <link refid="string__view_8hpp"/>
-        <childnode refid="53" relation="include">
+        <childnode refid="55" relation="include">
         </childnode>
       </node>
       <node id="2">
@@ -396,6 +410,7 @@
         <label>utility</label>
       </node>
     </incdepgraph>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
     <sectiondef kind="define">
       <memberdef kind="define" id="dynamic__library__import_8hpp_1a41849a134bff91d342678d8b1e4f9b5e" prot="public" static="no">
         <name>NEFORCE_DLL_IMPORT</name>
@@ -403,10 +418,48 @@
         <param><defname>name</defname></param>
         <param><defname>lib</defname></param>
         <param><defname>sym</defname></param>
-        <initializer>const auto <ref refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" kindref="member">name</ref> = (lib).template to_symbol&lt;ret&gt;(sym)</initializer>
+        <initializer>const auto name = (lib).template to_symbol&lt;ret&gt;(sym)</initializer>
         <briefdescription>
+<para>从动态库导入函数符号 </para>
         </briefdescription>
         <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ret</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>返回类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>变量名（作为符号在代码中的名称） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lib</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>动态库引用 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sym</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>符号名称（动态库中的实际符号名）</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<programlisting><codeline><highlight class="normal">dynamic_library<sp/>dll(&quot;myplugin.so&quot;);</highlight></codeline>
+<codeline><highlight class="normal">NEFORCE_DLL_IMPORT(int,<sp/>my_func,<sp/>dll,<sp/>&quot;my_function&quot;);</highlight></codeline>
+<codeline><highlight class="normal">int<sp/>result<sp/>=<sp/>my_func(42);</highlight></codeline>
+</programlisting> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -419,7 +472,7 @@
         <param><defname>lib</defname></param>
         <param><defname>sym</defname></param>
         <param><defname>default_val</defname></param>
-        <initializer>const auto <ref refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" kindref="member">name</ref> = (lib).has_symbol(sym) ? (lib).template to_symbol&lt;ret&gt;(sym) : (default_val)</initializer>
+        <initializer>const auto name = (lib).has_symbol(sym) ? (lib).template to_symbol&lt;ret&gt;(sym) : (default_val)</initializer>
         <briefdescription>
 <para>从动态库导入函数符号，失败时返回默认值 </para>
         </briefdescription>
@@ -486,7 +539,7 @@
 <codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="dynamic__library_8hpp" kindref="compound">NeForce/core/system/dynamic_library.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="12"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight></codeline>
-<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NEFORCE_DLL_IMPORT(ret,<sp/>name,<sp/>lib,<sp/>sym)<sp/>const<sp/>auto<sp/>name<sp/>=<sp/>(lib).template<sp/>to_symbol&lt;ret&gt;(sym)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28" refid="dynamic__library__import_8hpp_1a41849a134bff91d342678d8b1e4f9b5e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NEFORCE_DLL_IMPORT(ret,<sp/>name,<sp/>lib,<sp/>sym)<sp/>const<sp/>auto<sp/>name<sp/>=<sp/>(lib).template<sp/>to_symbol&lt;ret&gt;(sym)</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="29"><highlight class="normal"></highlight></codeline>
 <codeline lineno="39" refid="dynamic__library__import_8hpp_1ab8358fbfba7e2b86707ea8024e76f45e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NEFORCE_DLL_IMPORT_OR(ret,<sp/>name,<sp/>lib,<sp/>sym,<sp/>default_val)<sp/>\</highlight></codeline>
 <codeline lineno="40"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>const<sp/>auto<sp/>name<sp/>=<sp/>(lib).has_symbol(sym)<sp/>?<sp/>(lib).template<sp/>to_symbol&lt;ret&gt;(sym)<sp/>:<sp/>(default_val)</highlight><highlight class="normal"></highlight></codeline>

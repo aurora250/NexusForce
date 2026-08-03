@@ -1,0 +1,777 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1lock__free__queue" kind="class" language="C++" prot="public">
+    <compoundname>neforce::lock_free_queue</compoundname>
+    <includes refid="lock__free__queue_8hpp" local="no">lock_free_queue.hpp</includes>
+    <innerclass refid="structneforce_1_1lock__free__queue_1_1free__list" prot="private">neforce::lock_free_queue::free_list</innerclass>
+    <innerclass refid="structneforce_1_1lock__free__queue_1_1block" prot="private">neforce::lock_free_queue::block</innerclass>
+    <innerclass refid="structneforce_1_1lock__free__queue_1_1block__index__entry" prot="private">neforce::lock_free_queue::block_index_entry</innerclass>
+    <innerclass refid="structneforce_1_1lock__free__queue_1_1block__index__header" prot="private">neforce::lock_free_queue::block_index_header</innerclass>
+    <innerclass refid="structneforce_1_1lock__free__queue_1_1implicit__producer__kvp" prot="private">neforce::lock_free_queue::implicit_producer_kvp</innerclass>
+    <innerclass refid="structneforce_1_1lock__free__queue_1_1implicit__producer__hash" prot="private">neforce::lock_free_queue::implicit_producer_hash</innerclass>
+    <innerclass refid="structneforce_1_1lock__free__queue_1_1implicit__producer" prot="private">neforce::lock_free_queue::implicit_producer</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classneforce_1_1lock__free__queue_1a5efc24926d865351196cb6bf23cbe392" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::lock_free_queue&lt; T &gt;::BLOCK_SIZE</definition>
+        <argsstring></argsstring>
+        <name>BLOCK_SIZE</name>
+        <qualifiedname>neforce::lock_free_queue::BLOCK_SIZE</qualifiedname>
+        <initializer>= 32</initializer>
+        <briefdescription>
+<para>每个 block 存储的元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="76" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="76" bodyend="-1"/>
+        <referencedby refid="classneforce_1_1lock__free__queue_1a1ad4fee33d192832a72c2298547238e2" compoundref="lock__free__queue_8hpp" startline="719" endline="723">neforce::lock_free_queue&lt; T &gt;::lock_free_queue</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1lock__free__queue_1a3347de2ff28f696fbdbeb09dc4e4a2a8" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::lock_free_queue&lt; T &gt;::INITIAL_IMPLICIT_PRODUCER_HASH_SIZE</definition>
+        <argsstring></argsstring>
+        <name>INITIAL_IMPLICIT_PRODUCER_HASH_SIZE</name>
+        <qualifiedname>neforce::lock_free_queue::INITIAL_IMPLICIT_PRODUCER_HASH_SIZE</qualifiedname>
+        <initializer>= 32</initializer>
+        <briefdescription>
+<para>隐式生产者哈希表初始大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="78" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1lock__free__queue_1a1bd3c4a7c58aa003d5d07b84f91e10cb" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::lock_free_queue&lt; T &gt;::IMPLICIT_INITIAL_INDEX_SIZE</definition>
+        <argsstring></argsstring>
+        <name>IMPLICIT_INITIAL_INDEX_SIZE</name>
+        <qualifiedname>neforce::lock_free_queue::IMPLICIT_INITIAL_INDEX_SIZE</qualifiedname>
+        <initializer>= 32</initializer>
+        <briefdescription>
+<para>block 索引初始容量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="80" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classneforce_1_1lock__free__queue_1ac6a8aa118de56d68fe2dad029ed12577" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::lock_free_queue&lt; T &gt;::REFS_MASK</definition>
+        <argsstring></argsstring>
+        <name>REFS_MASK</name>
+        <qualifiedname>neforce::lock_free_queue::REFS_MASK</qualifiedname>
+        <initializer>= 0x7FFFFFFF</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="88" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1lock__free__queue_1a5433175bb9c83e35374c9fe562b2016a" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::lock_free_queue&lt; T &gt;::SHOULD_BE_ON_FREELIST</definition>
+        <argsstring></argsstring>
+        <name>SHOULD_BE_ON_FREELIST</name>
+        <qualifiedname>neforce::lock_free_queue::SHOULD_BE_ON_FREELIST</qualifiedname>
+        <initializer>= 0x80000000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="89" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1lock__free__queue_1ae1d4df0592537850753ac5900bc21475" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::lock_free_queue&lt; T &gt;::INVALID_BLOCK_BASE</definition>
+        <argsstring></argsstring>
+        <name>INVALID_BLOCK_BASE</name>
+        <qualifiedname>neforce::lock_free_queue::INVALID_BLOCK_BASE</qualifiedname>
+        <initializer>= 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="189" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="189" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1lock__free__queue_1a88a9abc73a7122e686a0ee79c141bb4e" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; implicit_producer * &gt;</type>
+        <definition>atomic&lt;implicit_producer*&gt; neforce::lock_free_queue&lt; T &gt;::producer_list_tail_</definition>
+        <argsstring></argsstring>
+        <name>producer_list_tail_</name>
+        <qualifiedname>neforce::lock_free_queue::producer_list_tail_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="458" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="458" bodyend="458"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1lock__free__queue_1a3e0869b0eaba18492a65723d3fedd7bc" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref> &gt;</type>
+        <definition>atomic&lt;uint32_t&gt; neforce::lock_free_queue&lt; T &gt;::producer_count_</definition>
+        <argsstring></argsstring>
+        <name>producer_count_</name>
+        <qualifiedname>neforce::lock_free_queue::producer_count_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="459" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="459" bodyend="459"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1lock__free__queue_1a4f8716c09a2f348865091090075e5f8f" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; implicit_producer_hash * &gt;</type>
+        <definition>atomic&lt;implicit_producer_hash*&gt; neforce::lock_free_queue&lt; T &gt;::implicit_producer_hash_</definition>
+        <argsstring></argsstring>
+        <name>implicit_producer_hash_</name>
+        <qualifiedname>neforce::lock_free_queue::implicit_producer_hash_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="461" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="461" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1lock__free__queue_1a5e8e6c7f5f060c9e70821bc40aeaa4aa" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref> &gt;</type>
+        <definition>atomic&lt;size_t&gt; neforce::lock_free_queue&lt; T &gt;::implicit_producer_hash_count_</definition>
+        <argsstring></argsstring>
+        <name>implicit_producer_hash_count_</name>
+        <qualifiedname>neforce::lock_free_queue::implicit_producer_hash_count_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="462" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="462" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1lock__free__queue_1a529f6514033ea3b0a12a8e4376f652ef" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic__flag" kindref="compound">atomic_flag</ref></type>
+        <definition>atomic_flag neforce::lock_free_queue&lt; T &gt;::implicit_producer_hash_resize_in_progress_</definition>
+        <argsstring></argsstring>
+        <name>implicit_producer_hash_resize_in_progress_</name>
+        <qualifiedname>neforce::lock_free_queue::implicit_producer_hash_resize_in_progress_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="463" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="463" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1lock__free__queue_1a856ec36cbcae513726975bd367670881" prot="private" static="no" mutable="no">
+        <type>implicit_producer_hash</type>
+        <definition>implicit_producer_hash neforce::lock_free_queue&lt; T &gt;::initial_implicit_producer_hash_</definition>
+        <argsstring></argsstring>
+        <name>initial_implicit_producer_hash_</name>
+        <qualifiedname>neforce::lock_free_queue::initial_implicit_producer_hash_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="464" column="28" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="464" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1lock__free__queue_1a06326945200153c9bff290a051ab0fe7" prot="private" static="no" mutable="no">
+        <type>implicit_producer_kvp</type>
+        <definition>implicit_producer_kvp neforce::lock_free_queue&lt; T &gt;::initial_implicit_producer_hash_entries_[INITIAL_IMPLICIT_PRODUCER_HASH_SIZE]</definition>
+        <argsstring>[INITIAL_IMPLICIT_PRODUCER_HASH_SIZE]</argsstring>
+        <name>initial_implicit_producer_hash_entries_</name>
+        <qualifiedname>neforce::lock_free_queue::initial_implicit_producer_hash_entries_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="465" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="465" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1lock__free__queue_1a8df621bb56a37e99ade3aa0a95e87a71" prot="private" static="no" mutable="no">
+        <type>free_list</type>
+        <definition>free_list neforce::lock_free_queue&lt; T &gt;::free_list_</definition>
+        <argsstring></argsstring>
+        <name>free_list_</name>
+        <qualifiedname>neforce::lock_free_queue::free_list_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="467" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="467" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1lock__free__queue_1a5cf60c599f273c1ffc32ef2579bfb985" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref> &gt;</type>
+        <definition>atomic&lt;size_t&gt; neforce::lock_free_queue&lt; T &gt;::initial_block_pool_index_</definition>
+        <argsstring></argsstring>
+        <name>initial_block_pool_index_</name>
+        <qualifiedname>neforce::lock_free_queue::initial_block_pool_index_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="468" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="468" bodyend="468"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1lock__free__queue_1aa714c4f203fa81022214a9a7eed0443c" prot="private" static="no" mutable="no">
+        <type>block *</type>
+        <definition>block* neforce::lock_free_queue&lt; T &gt;::initial_block_pool_</definition>
+        <argsstring></argsstring>
+        <name>initial_block_pool_</name>
+        <qualifiedname>neforce::lock_free_queue::initial_block_pool_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="469" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="469" bodyend="469"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1lock__free__queue_1ade4941a4f072f7f26feb4583b0cd57f4" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::lock_free_queue&lt; T &gt;::initial_block_pool_size_</definition>
+        <argsstring></argsstring>
+        <name>initial_block_pool_size_</name>
+        <qualifiedname>neforce::lock_free_queue::initial_block_pool_size_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="470" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="470" bodyend="470"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1lock__free__queue_1a5b7da8188016d00c617c1973c22f028d" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::lock_free_queue&lt; T &gt;::populate_initial_implicit_producer_hash</definition>
+        <argsstring>()</argsstring>
+        <name>populate_initial_implicit_producer_hash</name>
+        <qualifiedname>neforce::lock_free_queue::populate_initial_implicit_producer_hash</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="472" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="472" bodyend="482"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lock__free__queue_1a82e14b342335b048e7fc325b3bd58210" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::lock_free_queue&lt; T &gt;::populate_initial_block_list</definition>
+        <argsstring>(size_t block_count)</argsstring>
+        <name>populate_initial_block_list</name>
+        <qualifiedname>neforce::lock_free_queue::populate_initial_block_list</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>block_count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="484" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="484" bodyend="494"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lock__free__queue_1acb83a71e05d27469a0f330393ca4a3ec" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>block *</type>
+        <definition>block * neforce::lock_free_queue&lt; T &gt;::try_get_block_from_initial_pool</definition>
+        <argsstring>()</argsstring>
+        <name>try_get_block_from_initial_pool</name>
+        <qualifiedname>neforce::lock_free_queue::try_get_block_from_initial_pool</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="496" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="496" bodyend="502"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lock__free__queue_1aa727fc830fe2e3cb0b3fbd81122dc3cf" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>block *</type>
+        <definition>block * neforce::lock_free_queue&lt; T &gt;::try_get_block_from_free_list</definition>
+        <argsstring>()</argsstring>
+        <name>try_get_block_from_free_list</name>
+        <qualifiedname>neforce::lock_free_queue::try_get_block_from_free_list</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="504" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="504" bodyend="504"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lock__free__queue_1aaf3d10352fd159d206d8aee45df14bae" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>block *</type>
+        <definition>block * neforce::lock_free_queue&lt; T &gt;::requisition_block</definition>
+        <argsstring>()</argsstring>
+        <name>requisition_block</name>
+        <qualifiedname>neforce::lock_free_queue::requisition_block</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="506" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="506" bodyend="516"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lock__free__queue_1adb3c627737334c62424ed051bbfff2b5" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::lock_free_queue&lt; T &gt;::add_block_to_free_list</definition>
+        <argsstring>(block *block)</argsstring>
+        <name>add_block_to_free_list</name>
+        <qualifiedname>neforce::lock_free_queue::add_block_to_free_list</qualifiedname>
+        <param>
+          <type>block *</type>
+          <declname>block</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="518" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="518" bodyend="518"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lock__free__queue_1a9114753846cb412907ce2105dee8f5dc" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::lock_free_queue&lt; T &gt;::add_blocks_to_free_list</definition>
+        <argsstring>(block *block)</argsstring>
+        <name>add_blocks_to_free_list</name>
+        <qualifiedname>neforce::lock_free_queue::add_blocks_to_free_list</qualifiedname>
+        <param>
+          <type>block *</type>
+          <declname>block</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="520" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="520" bodyend="526"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lock__free__queue_1af9be30e5aed10ada1426b7d3fee41970" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>implicit_producer *</type>
+        <definition>implicit_producer * neforce::lock_free_queue&lt; T &gt;::recycle_or_create_producer</definition>
+        <argsstring>()</argsstring>
+        <name>recycle_or_create_producer</name>
+        <qualifiedname>neforce::lock_free_queue::recycle_or_create_producer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="528" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="528" bodyend="539"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lock__free__queue_1ab43658490acc2a93dfa3ea90b19036d8" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>implicit_producer *</type>
+        <definition>implicit_producer * neforce::lock_free_queue&lt; T &gt;::add_producer</definition>
+        <argsstring>(implicit_producer *producer)</argsstring>
+        <name>add_producer</name>
+        <qualifiedname>neforce::lock_free_queue::add_producer</qualifiedname>
+        <param>
+          <type>implicit_producer *</type>
+          <declname>producer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="541" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="541" bodyend="553"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lock__free__queue_1a73a1764a6e6dc7a4e35326d33d559be2" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>implicit_producer *</type>
+        <definition>implicit_producer * neforce::lock_free_queue&lt; T &gt;::get_or_add_implicit_producer</definition>
+        <argsstring>()</argsstring>
+        <name>get_or_add_implicit_producer</name>
+        <qualifiedname>neforce::lock_free_queue::get_or_add_implicit_producer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="555" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="555" bodyend="673"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lock__free__queue_1a1c3ff207ae47804e491ebfa0e9c1b326" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::lock_free_queue&lt; T &gt;::implicit_producer_thread_exited</definition>
+        <argsstring>(implicit_producer *producer)</argsstring>
+        <name>implicit_producer_thread_exited</name>
+        <qualifiedname>neforce::lock_free_queue::implicit_producer_thread_exited</qualifiedname>
+        <param>
+          <type>implicit_producer *</type>
+          <declname>producer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="675" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="675" bodyend="702"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lock__free__queue_1a92f3555c4c7f8ba3cd857b8d2b8feec9" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::lock_free_queue&lt; T &gt;::ceil_to_pow_2_size_t</definition>
+        <argsstring>(size_t x)</argsstring>
+        <name>ceil_to_pow_2_size_t</name>
+        <qualifiedname>neforce::lock_free_queue::ceil_to_pow_2_size_t</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="709" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="709" bodyend="709"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classneforce_1_1lock__free__queue_1a91a197ca2712989ad899a980864e6929" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void neforce::lock_free_queue&lt; T &gt;::implicit_producer_thread_exited_callback</definition>
+        <argsstring>(void *user_data)</argsstring>
+        <name>implicit_producer_thread_exited_callback</name>
+        <qualifiedname>neforce::lock_free_queue::implicit_producer_thread_exited_callback</qualifiedname>
+        <param>
+          <type>void *</type>
+          <declname>user_data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="704" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="704" bodyend="707"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1lock__free__queue_1a1ad4fee33d192832a72c2298547238e2" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::lock_free_queue&lt; T &gt;::lock_free_queue</definition>
+        <argsstring>(size_t capacity=32 *BLOCK_SIZE)</argsstring>
+        <name>lock_free_queue</name>
+        <qualifiedname>neforce::lock_free_queue::lock_free_queue</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>capacity</declname>
+          <defval>32 *<ref refid="classneforce_1_1lock__free__queue_1a5efc24926d865351196cb6bf23cbe392" kindref="member">BLOCK_SIZE</ref></defval>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>capacity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>预分配的元素容量</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+预分配指定容量的 block 池，减少运行时堆分配。 容量按 BLOCK_SIZE 向上取整。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="719" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="719" bodyend="723"/>
+        <references refid="classneforce_1_1lock__free__queue_1a5efc24926d865351196cb6bf23cbe392" compoundref="lock__free__queue_8hpp" startline="76">neforce::lock_free_queue&lt; T &gt;::BLOCK_SIZE</references>
+        <references refid="group___memory_order_1gaf2fa121cd3849278f261b2c04fdf90a8" compoundref="memory__order_8hpp" startline="173">neforce::memory_order_relaxed</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lock__free__queue_1ad2f8d7e56fd68ceec5e6f36445afd6a6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::lock_free_queue&lt; T &gt;::~lock_free_queue</definition>
+        <argsstring>()</argsstring>
+        <name>~lock_free_queue</name>
+        <qualifiedname>neforce::lock_free_queue::~lock_free_queue</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>销毁所有生产者、哈希表、回收池中的 block 和初始 block 池。</para>
+<para><simplesect kind="warning"><para>析构时不能有并发操作 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="732" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="732" bodyend="763"/>
+        <references refid="group___memory_order_1gaf2fa121cd3849278f261b2c04fdf90a8" compoundref="memory__order_8hpp" startline="173">neforce::memory_order_relaxed</references>
+        <references refid="group___iterator_operation_1gaec610c752e80ab2196ab3377eb84e06b" compoundref="iterator_8hpp" startline="157" endline="161">neforce::next</references>
+        <references refid="group___iterator_operation_1gac6b661a80c5a42d3f9e8349a0dc6d181" compoundref="iterator_8hpp" startline="141" endline="145">neforce::prev</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lock__free__queue_1a7c68fec35c3630e13227dfe4338fb9aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::lock_free_queue&lt; T &gt;::lock_free_queue</definition>
+        <argsstring>(const lock_free_queue &amp;)=delete</argsstring>
+        <name>lock_free_queue</name>
+        <qualifiedname>neforce::lock_free_queue::lock_free_queue</qualifiedname>
+        <param>
+          <type>const lock_free_queue &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="765" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lock__free__queue_1ae7997ea9a1230583dbc951acc1cadc45" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1lock__free__queue_1a1ad4fee33d192832a72c2298547238e2" kindref="member">lock_free_queue</ref> &amp;</type>
+        <definition>lock_free_queue &amp; neforce::lock_free_queue&lt; T &gt;::operator=</definition>
+        <argsstring>(const lock_free_queue &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::lock_free_queue::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1lock__free__queue_1a1ad4fee33d192832a72c2298547238e2" kindref="member">lock_free_queue</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="766" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lock__free__queue_1a0cf1483c2b0838090d8329250c20abef" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::lock_free_queue&lt; T &gt;::push</definition>
+        <argsstring>(T new_value)</argsstring>
+        <name>push</name>
+        <qualifiedname>neforce::lock_free_queue::push</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>new_value</declname>
+        </param>
+        <briefdescription>
+<para>入队操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>new_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要入队的元素</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+为当前线程自动创建隐式生产者。</para>
+<para><simplesect kind="note"><para>如果内存分配失败，入队操作会静默失败 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="776" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="776" bodyend="781"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lock__free__queue_1a293fe7ba4a32e78dc3ad20511bd67949" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; T &gt;</type>
+        <definition>unique_ptr&lt; T &gt; neforce::lock_free_queue&lt; T &gt;::try_pop</definition>
+        <argsstring>()</argsstring>
+        <name>try_pop</name>
+        <qualifiedname>neforce::lock_free_queue::try_pop</qualifiedname>
+        <briefdescription>
+<para>非阻塞出队操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>出队元素的 unique_ptr，队列为空则返回空指针</para>
+</simplesect>
+使用启发式扫描生产者链表，选择元素最多的生产者优先出队。 最多扫描 3 个非空生产者。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="790" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="790" bodyend="820"/>
+        <references refid="group___memory_order_1ga6367df7d3e137e9b30e17740435d1816" compoundref="memory__order_8hpp" startline="177">neforce::memory_order_acquire</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <referencedby refid="classneforce_1_1lock__free__queue_1a58c91946d1a2f292c5a9f55e10ad06f8" compoundref="lock__free__queue_8hpp" startline="867" endline="871">neforce::lock_free_queue&lt; T &gt;::clear</referencedby>
+        <referencedby refid="classneforce_1_1lock__free__queue_1a275837ae20f9953448cfdb1672410595" compoundref="lock__free__queue_8hpp" startline="826" endline="834">neforce::lock_free_queue&lt; T &gt;::pop</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lock__free__queue_1a275837ae20f9953448cfdb1672410595" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; T &gt;</type>
+        <definition>unique_ptr&lt; T &gt; neforce::lock_free_queue&lt; T &gt;::pop</definition>
+        <argsstring>()</argsstring>
+        <name>pop</name>
+        <qualifiedname>neforce::lock_free_queue::pop</qualifiedname>
+        <briefdescription>
+<para>阻塞出队操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>出队元素的 <ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="826" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="826" bodyend="834"/>
+        <references refid="group___thread_1ga904c3132c439386f7bf28897b7893f7b" compoundref="this__thread_8hpp" startline="87" endline="111">neforce::this_thread::relax</references>
+        <references refid="classneforce_1_1lock__free__queue_1a293fe7ba4a32e78dc3ad20511bd67949" compoundref="lock__free__queue_8hpp" startline="790" endline="820">neforce::lock_free_queue&lt; T &gt;::try_pop</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lock__free__queue_1ad5a9a9d125950b922bf74014b505ece2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::lock_free_queue&lt; T &gt;::empty</definition>
+        <argsstring>() const</argsstring>
+        <name>empty</name>
+        <qualifiedname>neforce::lock_free_queue::empty</qualifiedname>
+        <briefdescription>
+<para>检查队列是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>队列为空返回 true </para>
+</simplesect>
+<simplesect kind="note"><para>由于并发特性，返回值可能瞬间失效 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="841" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="841" bodyend="848"/>
+        <references refid="group___memory_order_1ga6367df7d3e137e9b30e17740435d1816" compoundref="memory__order_8hpp" startline="177">neforce::memory_order_acquire</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lock__free__queue_1aec1f4b4b3201c5ca8b43deae86f1779a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::lock_free_queue&lt; T &gt;::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <qualifiedname>neforce::lock_free_queue::size</qualifiedname>
+        <briefdescription>
+<para>获取队列中元素的近似数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>元素数量的近似值 </para>
+</simplesect>
+<simplesect kind="note"><para>由于并发特性，返回值可能瞬间失效 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="855" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="855" bodyend="861"/>
+        <references refid="group___memory_order_1ga6367df7d3e137e9b30e17740435d1816" compoundref="memory__order_8hpp" startline="177">neforce::memory_order_acquire</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1lock__free__queue_1a58c91946d1a2f292c5a9f55e10ad06f8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::lock_free_queue&lt; T &gt;::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>neforce::lock_free_queue::clear</qualifiedname>
+        <briefdescription>
+<para>清空队列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>此方法不是线程安全的，调用者需保证无并发操作 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="867" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="867" bodyend="871"/>
+        <references refid="group___thread_1ga904c3132c439386f7bf28897b7893f7b" compoundref="this__thread_8hpp" startline="87" endline="111">neforce::this_thread::relax</references>
+        <references refid="classneforce_1_1lock__free__queue_1a293fe7ba4a32e78dc3ad20511bd67949" compoundref="lock__free__queue_8hpp" startline="790" endline="820">neforce::lock_free_queue&lt; T &gt;::try_pop</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>无锁队列类模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+基于 per-producer SPSC 子队列架构实现的无锁队列。 每个生产者线程拥有独立的 block-based SPSC 内队列，block 通过无锁 free_list 回收利用。 支持多生产者多消费者并发 push/try_pop 操作。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="73" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="73" bodyend="872"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1lock__free__queue_1adb3c627737334c62424ed051bbfff2b5" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>add_block_to_free_list</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a9114753846cb412907ce2105dee8f5dc" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>add_blocks_to_free_list</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1ab43658490acc2a93dfa3ea90b19036d8" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>add_producer</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a5efc24926d865351196cb6bf23cbe392" prot="public" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>BLOCK_SIZE</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a92f3555c4c7f8ba3cd857b8d2b8feec9" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>ceil_to_pow_2_size_t</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a58c91946d1a2f292c5a9f55e10ad06f8" prot="public" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>clear</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1ad5a9a9d125950b922bf74014b505ece2" prot="public" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>empty</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a8df621bb56a37e99ade3aa0a95e87a71" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>free_list_</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a73a1764a6e6dc7a4e35326d33d559be2" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>get_or_add_implicit_producer</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a1bd3c4a7c58aa003d5d07b84f91e10cb" prot="public" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>IMPLICIT_INITIAL_INDEX_SIZE</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a4f8716c09a2f348865091090075e5f8f" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>implicit_producer_hash_</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a5e8e6c7f5f060c9e70821bc40aeaa4aa" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>implicit_producer_hash_count_</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a529f6514033ea3b0a12a8e4376f652ef" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>implicit_producer_hash_resize_in_progress_</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a1c3ff207ae47804e491ebfa0e9c1b326" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>implicit_producer_thread_exited</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a91a197ca2712989ad899a980864e6929" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>implicit_producer_thread_exited_callback</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1aa714c4f203fa81022214a9a7eed0443c" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>initial_block_pool_</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a5cf60c599f273c1ffc32ef2579bfb985" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>initial_block_pool_index_</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1ade4941a4f072f7f26feb4583b0cd57f4" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>initial_block_pool_size_</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a856ec36cbcae513726975bd367670881" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>initial_implicit_producer_hash_</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a06326945200153c9bff290a051ab0fe7" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>initial_implicit_producer_hash_entries_</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a3347de2ff28f696fbdbeb09dc4e4a2a8" prot="public" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>INITIAL_IMPLICIT_PRODUCER_HASH_SIZE</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1ae1d4df0592537850753ac5900bc21475" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>INVALID_BLOCK_BASE</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a1ad4fee33d192832a72c2298547238e2" prot="public" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>lock_free_queue</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a7c68fec35c3630e13227dfe4338fb9aa" prot="public" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>lock_free_queue</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1ae7997ea9a1230583dbc951acc1cadc45" prot="public" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a275837ae20f9953448cfdb1672410595" prot="public" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>pop</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a82e14b342335b048e7fc325b3bd58210" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>populate_initial_block_list</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a5b7da8188016d00c617c1973c22f028d" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>populate_initial_implicit_producer_hash</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a3e0869b0eaba18492a65723d3fedd7bc" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>producer_count_</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a88a9abc73a7122e686a0ee79c141bb4e" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>producer_list_tail_</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a0cf1483c2b0838090d8329250c20abef" prot="public" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>push</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1af9be30e5aed10ada1426b7d3fee41970" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>recycle_or_create_producer</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1ac6a8aa118de56d68fe2dad029ed12577" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>REFS_MASK</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1aaf3d10352fd159d206d8aee45df14bae" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>requisition_block</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a5433175bb9c83e35374c9fe562b2016a" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>SHOULD_BE_ON_FREELIST</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1aec1f4b4b3201c5ca8b43deae86f1779a" prot="public" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>size</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1aa727fc830fe2e3cb0b3fbd81122dc3cf" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>try_get_block_from_free_list</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1acb83a71e05d27469a0f330393ca4a3ec" prot="private" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>try_get_block_from_initial_pool</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1a293fe7ba4a32e78dc3ad20511bd67949" prot="public" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>try_pop</name></member>
+      <member refid="classneforce_1_1lock__free__queue_1ad2f8d7e56fd68ceec5e6f36445afd6a6" prot="public" virt="non-virtual"><scope>neforce::lock_free_queue</scope><name>~lock_free_queue</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

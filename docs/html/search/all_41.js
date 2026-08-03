@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['动态库_0',['动态库',['../group___dynamic_library.html',1,'']]]
+  ['加密与安全_20encrypt_0',['🔐 加密与安全 (Encrypt)',['../index.html#autotoc_md20',1,'']]],
+  ['加密算法_1',['加密算法',['../group___encryption.html',1,'']]]
 ];

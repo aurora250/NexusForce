@@ -48,8 +48,8 @@
         <link refid="version_8hpp_source"/>
       </node>
       <node id="20">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
@@ -122,6 +122,8 @@
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
         <childnode refid="29" relation="include">
         </childnode>
       </node>
@@ -132,10 +134,20 @@
         </childnode>
         <childnode refid="28" relation="include">
         </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
       </node>
-      <node id="29">
+      <node id="30">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>NeForce/core/string/charset.hpp</label>
+        <link refid="charset_8hpp"/>
+        <childnode refid="30" relation="include">
+        </childnode>
         <childnode refid="12" relation="include">
         </childnode>
       </node>
@@ -198,83 +210,83 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="196">
+      <node id="200">
         <label>lz4_compress.hpp</label>
         <link refid="lz4__compress_8hpp"/>
       </node>
-      <node id="207">
+      <node id="211">
         <label>zlib_compress.hpp</label>
         <link refid="zlib__compress_8hpp"/>
-        <childnode refid="44" relation="include">
+        <childnode refid="46" relation="include">
         </childnode>
-        <childnode refid="205" relation="include">
+        <childnode refid="209" relation="include">
         </childnode>
       </node>
-      <node id="132">
+      <node id="135">
         <label>async_compose.hpp</label>
         <link refid="async__compose_8hpp"/>
       </node>
-      <node id="151">
+      <node id="154">
         <label>async_result.hpp</label>
         <link refid="async__result_8hpp"/>
-        <childnode refid="152" relation="include">
+        <childnode refid="155" relation="include">
         </childnode>
-        <childnode refid="158" relation="include">
+        <childnode refid="161" relation="include">
         </childnode>
       </node>
-      <node id="134">
+      <node id="137">
         <label>async_stream.hpp</label>
         <link refid="async__stream_8hpp"/>
-        <childnode refid="132" relation="include">
-        </childnode>
         <childnode refid="135" relation="include">
         </childnode>
-        <childnode refid="141" relation="include">
-        </childnode>
-      </node>
-      <node id="133">
-        <label>cancellation_slot.hpp</label>
-        <link refid="cancellation__slot_8hpp"/>
-        <childnode refid="134" relation="include">
-        </childnode>
-        <childnode refid="124" relation="include">
-        </childnode>
-        <childnode refid="143" relation="include">
-        </childnode>
-        <childnode refid="135" relation="include">
-        </childnode>
-        <childnode refid="141" relation="include">
+        <childnode refid="138" relation="include">
         </childnode>
         <childnode refid="144" relation="include">
         </childnode>
       </node>
-      <node id="145">
-        <label>io_context.hpp</label>
-        <link refid="io__context_8hpp"/>
-        <childnode refid="134" relation="include">
+      <node id="136">
+        <label>cancellation_slot.hpp</label>
+        <link refid="cancellation__slot_8hpp"/>
+        <childnode refid="137" relation="include">
         </childnode>
-        <childnode refid="124" relation="include">
-        </childnode>
-        <childnode refid="143" relation="include">
-        </childnode>
-        <childnode refid="46" relation="include">
-        </childnode>
-        <childnode refid="47" relation="include">
-        </childnode>
-        <childnode refid="135" relation="include">
+        <childnode refid="127" relation="include">
         </childnode>
         <childnode refid="146" relation="include">
         </childnode>
-        <childnode refid="140" relation="include">
-        </childnode>
-        <childnode refid="141" relation="include">
+        <childnode refid="138" relation="include">
         </childnode>
         <childnode refid="144" relation="include">
         </childnode>
-        <childnode refid="53" relation="include">
+        <childnode refid="147" relation="include">
         </childnode>
       </node>
-      <node id="198">
+      <node id="148">
+        <label>io_context.hpp</label>
+        <link refid="io__context_8hpp"/>
+        <childnode refid="137" relation="include">
+        </childnode>
+        <childnode refid="127" relation="include">
+        </childnode>
+        <childnode refid="146" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="138" relation="include">
+        </childnode>
+        <childnode refid="149" relation="include">
+        </childnode>
+        <childnode refid="143" relation="include">
+        </childnode>
+        <childnode refid="144" relation="include">
+        </childnode>
+        <childnode refid="147" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+      </node>
+      <node id="202">
         <label>named_mutex.hpp</label>
         <link refid="named__mutex_8hpp"/>
       </node>
@@ -284,323 +296,325 @@
         <childnode refid="15" relation="include">
         </childnode>
       </node>
-      <node id="146">
+      <node id="149">
         <label>strand.hpp</label>
         <link refid="strand_8hpp"/>
-        <childnode refid="71" relation="include">
+        <childnode refid="73" relation="include">
         </childnode>
-        <childnode refid="57" relation="include">
+        <childnode refid="59" relation="include">
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
       </node>
-      <node id="115">
+      <node id="118">
         <label>thread_pool.hpp</label>
         <link refid="thread__pool_8hpp"/>
-        <childnode refid="76" relation="include">
+        <childnode refid="78" relation="include">
         </childnode>
       </node>
-      <node id="158">
+      <node id="161">
         <label>use_awaitable.hpp</label>
         <link refid="use__awaitable_8hpp"/>
-        <childnode refid="134" relation="include">
+        <childnode refid="137" relation="include">
         </childnode>
-        <childnode refid="124" relation="include">
+        <childnode refid="127" relation="include">
         </childnode>
-        <childnode refid="135" relation="include">
-        </childnode>
-        <childnode refid="141" relation="include">
+        <childnode refid="138" relation="include">
         </childnode>
         <childnode refid="144" relation="include">
         </childnode>
-      </node>
-      <node id="175">
-        <label>bitmap.hpp</label>
-        <link refid="bitmap_8hpp"/>
-        <childnode refid="176" relation="include">
+        <childnode refid="147" relation="include">
         </childnode>
       </node>
-      <node id="177">
+      <node id="178">
+        <label>bitmap.hpp</label>
+        <link refid="bitmap_8hpp"/>
+        <childnode refid="179" relation="include">
+        </childnode>
+      </node>
+      <node id="180">
         <label>bitset.hpp</label>
         <link refid="bitset_8hpp"/>
       </node>
-      <node id="176">
+      <node id="179">
         <label>bloom_filter.hpp</label>
         <link refid="bloom__filter_8hpp"/>
       </node>
-      <node id="36">
+      <node id="38">
         <label>buffer_chain.hpp</label>
         <link refid="buffer__chain_8hpp_source"/>
-        <childnode refid="37" relation="include">
+        <childnode refid="39" relation="include">
         </childnode>
       </node>
-      <node id="34">
+      <node id="36">
         <label>aes256.hpp</label>
         <link refid="aes256_8hpp"/>
       </node>
-      <node id="35">
+      <node id="37">
         <label>base64.hpp</label>
         <link refid="base64_8hpp"/>
       </node>
-      <node id="197">
+      <node id="201">
         <label>md5.hpp</label>
         <link refid="md5_8hpp"/>
       </node>
-      <node id="201">
+      <node id="205">
         <label>sha1.hpp</label>
         <link refid="sha1_8hpp"/>
       </node>
-      <node id="202">
+      <node id="206">
         <label>sha256.hpp</label>
         <link refid="sha256_8hpp"/>
       </node>
-      <node id="206">
+      <node id="210">
         <label>xor.hpp</label>
         <link refid="xor_8hpp"/>
       </node>
-      <node id="129">
+      <node id="132">
         <label>error_category.hpp</label>
         <link refid="error__category_8hpp"/>
-        <childnode refid="130" relation="include">
-        </childnode>
-      </node>
-      <node id="131">
-        <label>error_code.hpp</label>
-        <link refid="error__code_8hpp"/>
-        <childnode refid="132" relation="include">
-        </childnode>
         <childnode refid="133" relation="include">
         </childnode>
-        <childnode refid="108" relation="include">
+      </node>
+      <node id="134">
+        <label>error_code.hpp</label>
+        <link refid="error__code_8hpp"/>
+        <childnode refid="135" relation="include">
         </childnode>
-        <childnode refid="143" relation="include">
+        <childnode refid="136" relation="include">
         </childnode>
-        <childnode refid="145" relation="include">
+        <childnode refid="111" relation="include">
         </childnode>
-        <childnode refid="147" relation="include">
+        <childnode refid="146" relation="include">
+        </childnode>
+        <childnode refid="148" relation="include">
         </childnode>
         <childnode refid="150" relation="include">
         </childnode>
+        <childnode refid="153" relation="include">
+        </childnode>
       </node>
-      <node id="130">
+      <node id="133">
         <label>error_condition.hpp</label>
         <link refid="error__condition_8hpp"/>
-        <childnode refid="131" relation="include">
+        <childnode refid="134" relation="include">
         </childnode>
       </node>
-      <node id="150">
+      <node id="153">
         <label>system_exception.hpp</label>
         <link refid="system__exception_8hpp_source"/>
-        <childnode refid="151" relation="include">
+        <childnode refid="154" relation="include">
         </childnode>
-        <childnode refid="70" relation="include">
+        <childnode refid="72" relation="include">
         </childnode>
-        <childnode refid="123" relation="include">
-        </childnode>
-        <childnode refid="159" relation="include">
+        <childnode refid="126" relation="include">
         </childnode>
         <childnode refid="162" relation="include">
         </childnode>
-        <childnode refid="163" relation="include">
-        </childnode>
-        <childnode refid="164" relation="include">
-        </childnode>
         <childnode refid="165" relation="include">
+        </childnode>
+        <childnode refid="166" relation="include">
+        </childnode>
+        <childnode refid="167" relation="include">
         </childnode>
         <childnode refid="168" relation="include">
         </childnode>
-        <childnode refid="169" relation="include">
+        <childnode refid="171" relation="include">
         </childnode>
-        <childnode refid="155" relation="include">
+        <childnode refid="172" relation="include">
+        </childnode>
+        <childnode refid="158" relation="include">
         </childnode>
       </node>
-      <node id="179">
+      <node id="182">
         <label>env_builder.hpp</label>
         <link refid="env__builder_8hpp"/>
       </node>
-      <node id="180">
+      <node id="183">
         <label>env_parser.hpp</label>
         <link refid="env__parser_8hpp"/>
       </node>
-      <node id="178">
+      <node id="181">
         <label>env_value.hpp</label>
         <link refid="env__value_8hpp"/>
-        <childnode refid="179" relation="include">
-        </childnode>
-        <childnode refid="180" relation="include">
-        </childnode>
-      </node>
-      <node id="108">
-        <label>file.hpp</label>
-        <link refid="file_8hpp"/>
-        <childnode refid="75" relation="include">
-        </childnode>
-        <childnode refid="109" relation="include">
-        </childnode>
-      </node>
-      <node id="143">
-        <label>file_async.hpp</label>
-        <link refid="file__async_8hpp"/>
-        <childnode refid="108" relation="include">
-        </childnode>
-      </node>
-      <node id="192">
-        <label>file_diff.hpp</label>
-        <link refid="file__diff_8hpp"/>
-        <childnode refid="108" relation="include">
-        </childnode>
-      </node>
-      <node id="107">
-        <label>file_info.hpp</label>
-        <link refid="file__info_8hpp"/>
-        <childnode refid="108" relation="include">
-        </childnode>
-      </node>
-      <node id="162">
-        <label>file_watcher.hpp</label>
-        <link refid="file__watcher_8hpp"/>
-      </node>
-      <node id="65">
-        <label>filesystem.hpp</label>
-        <link refid="filesystem_8hpp"/>
-      </node>
-      <node id="182">
-        <label>ini_builder.hpp</label>
-        <link refid="ini__builder_8hpp"/>
-      </node>
-      <node id="183">
-        <label>ini_parser.hpp</label>
-        <link refid="ini__parser_8hpp"/>
-      </node>
-      <node id="181">
-        <label>ini_value.hpp</label>
-        <link refid="ini__value_8hpp"/>
         <childnode refid="182" relation="include">
         </childnode>
         <childnode refid="183" relation="include">
         </childnode>
       </node>
-      <node id="189">
+      <node id="111">
+        <label>file.hpp</label>
+        <link refid="file_8hpp"/>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="112" relation="include">
+        </childnode>
+      </node>
+      <node id="146">
+        <label>file_async.hpp</label>
+        <link refid="file__async_8hpp"/>
+        <childnode refid="111" relation="include">
+        </childnode>
+      </node>
+      <node id="195">
+        <label>file_diff.hpp</label>
+        <link refid="file__diff_8hpp"/>
+        <childnode refid="111" relation="include">
+        </childnode>
+      </node>
+      <node id="110">
+        <label>file_info.hpp</label>
+        <link refid="file__info_8hpp"/>
+        <childnode refid="111" relation="include">
+        </childnode>
+      </node>
+      <node id="165">
+        <label>file_watcher.hpp</label>
+        <link refid="file__watcher_8hpp"/>
+      </node>
+      <node id="67">
+        <label>filesystem.hpp</label>
+        <link refid="filesystem_8hpp"/>
+      </node>
+      <node id="185">
+        <label>ini_builder.hpp</label>
+        <link refid="ini__builder_8hpp"/>
+      </node>
+      <node id="186">
+        <label>ini_parser.hpp</label>
+        <link refid="ini__parser_8hpp"/>
+      </node>
+      <node id="184">
+        <label>ini_value.hpp</label>
+        <link refid="ini__value_8hpp"/>
+        <childnode refid="185" relation="include">
+        </childnode>
+        <childnode refid="186" relation="include">
+        </childnode>
+      </node>
+      <node id="192">
         <label>json_builder.hpp</label>
         <link refid="json__builder_8hpp"/>
         <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="190">
+      <node id="193">
         <label>json_parser.hpp</label>
         <link refid="json__parser_8hpp"/>
       </node>
-      <node id="188">
+      <node id="191">
         <label>json_value.hpp</label>
         <link refid="json__value_8hpp"/>
-        <childnode refid="189" relation="include">
-        </childnode>
-        <childnode refid="190" relation="include">
-        </childnode>
-      </node>
-      <node id="191">
-        <label>path.hpp</label>
-        <link refid="path_8hpp"/>
-        <childnode refid="108" relation="include">
-        </childnode>
         <childnode refid="192" relation="include">
-        </childnode>
-        <childnode refid="162" relation="include">
-        </childnode>
-        <childnode refid="65" relation="include">
-        </childnode>
-        <childnode refid="66" relation="include">
         </childnode>
         <childnode refid="193" relation="include">
         </childnode>
       </node>
-      <node id="193">
+      <node id="194">
+        <label>path.hpp</label>
+        <link refid="path_8hpp"/>
+        <childnode refid="111" relation="include">
+        </childnode>
+        <childnode refid="195" relation="include">
+        </childnode>
+        <childnode refid="165" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="196" relation="include">
+        </childnode>
+      </node>
+      <node id="196">
         <label>path_tree.hpp</label>
         <link refid="path__tree_8hpp"/>
       </node>
-      <node id="109">
+      <node id="112">
         <label>temp_file.hpp</label>
         <link refid="temp__file_8hpp"/>
       </node>
-      <node id="117">
+      <node id="120">
         <label>toml_builder.hpp</label>
         <link refid="toml__builder_8hpp"/>
       </node>
-      <node id="58">
+      <node id="60">
         <label>toml_parser.hpp</label>
         <link refid="toml__parser_8hpp"/>
       </node>
-      <node id="116">
+      <node id="119">
         <label>toml_value.hpp</label>
         <link refid="toml__value_8hpp"/>
-        <childnode refid="117" relation="include">
+        <childnode refid="120" relation="include">
         </childnode>
-        <childnode refid="58" relation="include">
+        <childnode refid="60" relation="include">
         </childnode>
       </node>
-      <node id="119">
+      <node id="122">
         <label>yaml_builder.hpp</label>
         <link refid="yaml__builder_8hpp"/>
       </node>
-      <node id="120">
+      <node id="123">
         <label>yaml_parser.hpp</label>
         <link refid="yaml__parser_8hpp"/>
       </node>
-      <node id="118">
+      <node id="121">
         <label>yaml_value.hpp</label>
         <link refid="yaml__value_8hpp"/>
-        <childnode refid="119" relation="include">
+        <childnode refid="122" relation="include">
         </childnode>
-        <childnode refid="120" relation="include">
-        </childnode>
-      </node>
-      <node id="171">
-        <label>icharacter.hpp</label>
-        <link refid="icharacter_8hpp"/>
-        <childnode refid="59" relation="include">
-        </childnode>
-      </node>
-      <node id="184">
-        <label>iobject.hpp</label>
-        <link refid="iobject_8hpp"/>
-        <childnode refid="68" relation="include">
-        </childnode>
-        <childnode refid="87" relation="include">
-        </childnode>
-        <childnode refid="185" relation="include">
+        <childnode refid="123" relation="include">
         </childnode>
       </node>
       <node id="174">
+        <label>icharacter.hpp</label>
+        <link refid="icharacter_8hpp"/>
+        <childnode refid="61" relation="include">
+        </childnode>
+      </node>
+      <node id="187">
+        <label>iobject.hpp</label>
+        <link refid="iobject_8hpp"/>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
+        <childnode refid="188" relation="include">
+        </childnode>
+      </node>
+      <node id="177">
         <label>istringify.hpp</label>
         <link refid="istringify_8hpp"/>
-        <childnode refid="175" relation="include">
-        </childnode>
-        <childnode refid="177" relation="include">
-        </childnode>
         <childnode refid="178" relation="include">
         </childnode>
-        <childnode refid="163" relation="include">
+        <childnode refid="180" relation="include">
         </childnode>
         <childnode refid="181" relation="include">
         </childnode>
+        <childnode refid="166" relation="include">
+        </childnode>
         <childnode refid="184" relation="include">
         </childnode>
-        <childnode refid="152" relation="include">
+        <childnode refid="187" relation="include">
         </childnode>
-        <childnode refid="188" relation="include">
+        <childnode refid="155" relation="include">
         </childnode>
         <childnode refid="191" relation="include">
         </childnode>
         <childnode refid="194" relation="include">
         </childnode>
-        <childnode refid="61" relation="include">
+        <childnode refid="197" relation="include">
         </childnode>
-        <childnode refid="195" relation="include">
+        <childnode refid="198" relation="include">
         </childnode>
-        <childnode refid="118" relation="include">
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="199" relation="include">
+        </childnode>
+        <childnode refid="121" relation="include">
         </childnode>
       </node>
-      <node id="72">
+      <node id="74">
         <label>trace_memory.hpp</label>
         <link refid="trace__memory_8hpp"/>
       </node>
@@ -666,7 +680,7 @@
         <label>json_serializer.hpp</label>
         <link refid="json__serializer_8hpp"/>
       </node>
-      <node id="200">
+      <node id="204">
         <label>serialize_exception.hpp</label>
         <link refid="serialize__exception_8hpp"/>
         <childnode refid="10" relation="include">
@@ -680,98 +694,84 @@
         <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="32">
+      <node id="34">
         <label>basic_string.hpp</label>
         <link refid="basic__string_8hpp"/>
-        <childnode refid="33" relation="include">
-        </childnode>
-      </node>
-      <node id="55">
-        <label>codepoint.hpp</label>
-        <link refid="codepoint_8hpp"/>
-        <childnode refid="56" relation="include">
-        </childnode>
-        <childnode refid="58" relation="include">
-        </childnode>
-        <childnode refid="59" relation="include">
-        </childnode>
-        <childnode refid="122" relation="include">
-        </childnode>
-        <childnode refid="120" relation="include">
-        </childnode>
-      </node>
-      <node id="62">
-        <label>format.hpp</label>
-        <link refid="format_8hpp"/>
-        <childnode refid="63" relation="include">
-        </childnode>
-        <childnode refid="68" relation="include">
-        </childnode>
-        <childnode refid="87" relation="include">
-        </childnode>
-      </node>
-      <node id="199">
-        <label>regex.hpp</label>
-        <link refid="regex_8hpp"/>
-        <childnode refid="45" relation="include">
-        </childnode>
-      </node>
-      <node id="33">
-        <label>string.hpp</label>
-        <link refid="string_8hpp"/>
-        <childnode refid="34" relation="include">
-        </childnode>
         <childnode refid="35" relation="include">
         </childnode>
-        <childnode refid="36" relation="include">
+      </node>
+      <node id="57">
+        <label>codepoint.hpp</label>
+        <link refid="codepoint_8hpp"/>
+        <childnode refid="58" relation="include">
         </childnode>
-        <childnode refid="54" relation="include">
+        <childnode refid="60" relation="include">
         </childnode>
-        <childnode refid="55" relation="include">
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="125" relation="include">
         </childnode>
         <childnode refid="123" relation="include">
         </childnode>
-        <childnode refid="128" relation="include">
+      </node>
+      <node id="64">
+        <label>format.hpp</label>
+        <link refid="format_8hpp"/>
+        <childnode refid="65" relation="include">
         </childnode>
-        <childnode refid="129" relation="include">
+        <childnode refid="70" relation="include">
         </childnode>
-        <childnode refid="143" relation="include">
+        <childnode refid="90" relation="include">
         </childnode>
-        <childnode refid="170" relation="include">
+      </node>
+      <node id="203">
+        <label>regex.hpp</label>
+        <link refid="regex_8hpp"/>
+        <childnode refid="47" relation="include">
         </childnode>
-        <childnode refid="171" relation="include">
+      </node>
+      <node id="35">
+        <label>string.hpp</label>
+        <link refid="string_8hpp"/>
+        <childnode refid="36" relation="include">
         </childnode>
-        <childnode refid="172" relation="include">
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="126" relation="include">
+        </childnode>
+        <childnode refid="131" relation="include">
+        </childnode>
+        <childnode refid="132" relation="include">
+        </childnode>
+        <childnode refid="146" relation="include">
+        </childnode>
+        <childnode refid="173" relation="include">
         </childnode>
         <childnode refid="174" relation="include">
         </childnode>
-        <childnode refid="196" relation="include">
+        <childnode refid="175" relation="include">
         </childnode>
-        <childnode refid="197" relation="include">
-        </childnode>
-        <childnode refid="67" relation="include">
-        </childnode>
-        <childnode refid="198" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="199" relation="include">
+        <childnode refid="177" relation="include">
         </childnode>
         <childnode refid="200" relation="include">
         </childnode>
         <childnode refid="201" relation="include">
         </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
         <childnode refid="202" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="203" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="148" relation="include">
-        </childnode>
         <childnode refid="204" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="205" relation="include">
         </childnode>
@@ -779,218 +779,232 @@
         </childnode>
         <childnode refid="207" relation="include">
         </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="151" relation="include">
+        </childnode>
+        <childnode refid="208" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="209" relation="include">
+        </childnode>
+        <childnode refid="210" relation="include">
+        </childnode>
+        <childnode refid="211" relation="include">
+        </childnode>
+      </node>
+      <node id="198">
+        <label>string_builder.hpp</label>
+        <link refid="string__builder_8hpp"/>
+        <childnode refid="72" relation="include">
+        </childnode>
       </node>
       <node id="1">
         <label>string_view.hpp</label>
         <link refid="string__view_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="32" relation="include">
+        <childnode refid="34" relation="include">
         </childnode>
-        <childnode refid="208" relation="include">
+        <childnode refid="212" relation="include">
         </childnode>
       </node>
-      <node id="208">
+      <node id="212">
         <label>to_numerics.hpp</label>
         <link refid="to__numerics_8hpp"/>
-        <childnode refid="63" relation="include">
+        <childnode refid="65" relation="include">
         </childnode>
-        <childnode refid="87" relation="include">
+        <childnode refid="90" relation="include">
+        </childnode>
+      </node>
+      <node id="63">
+        <label>to_string.hpp</label>
+        <link refid="to__string_8hpp"/>
+        <childnode refid="64" relation="include">
         </childnode>
       </node>
       <node id="61">
-        <label>to_string.hpp</label>
-        <link refid="to__string_8hpp"/>
-        <childnode refid="62" relation="include">
-        </childnode>
-      </node>
-      <node id="59">
         <label>utf.hpp</label>
         <link refid="utf_8hpp"/>
-        <childnode refid="60" relation="include">
+        <childnode refid="62" relation="include">
         </childnode>
-        <childnode refid="61" relation="include">
+        <childnode refid="63" relation="include">
         </childnode>
       </node>
-      <node id="122">
+      <node id="125">
         <label>utf_iterator.hpp</label>
         <link refid="utf__iterator_8hpp"/>
       </node>
-      <node id="54">
+      <node id="56">
         <label>cmdline.hpp</label>
         <link refid="cmdline_8hpp"/>
       </node>
-      <node id="70">
+      <node id="72">
         <label>console.hpp</label>
         <link refid="console_8hpp"/>
-        <childnode refid="71" relation="include">
+        <childnode refid="73" relation="include">
         </childnode>
-        <childnode refid="57" relation="include">
+        <childnode refid="59" relation="include">
         </childnode>
-        <childnode refid="24" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
-        <childnode refid="72" relation="include">
+        <childnode refid="74" relation="include">
         </childnode>
       </node>
-      <node id="167">
+      <node id="170">
         <label>daemon.hpp</label>
         <link refid="daemon_8hpp"/>
       </node>
-      <node id="159">
+      <node id="162">
         <label>dynamic_library.hpp</label>
         <link refid="dynamic__library_8hpp"/>
-        <childnode refid="160" relation="include">
+        <childnode refid="163" relation="include">
         </childnode>
-        <childnode refid="161" relation="include">
+        <childnode refid="164" relation="include">
         </childnode>
       </node>
-      <node id="160">
+      <node id="163">
         <label>dynamic_library_import.hpp</label>
         <link refid="dynamic__library__import_8hpp"/>
       </node>
-      <node id="128">
+      <node id="131">
         <label>environment.hpp</label>
         <link refid="environment_8hpp"/>
       </node>
-      <node id="164">
+      <node id="167">
         <label>locale.hpp</label>
         <link refid="locale_8hpp"/>
-        <childnode refid="62" relation="include">
-        </childnode>
-      </node>
-      <node id="165">
-        <label>pipe.hpp</label>
-        <link refid="pipe_8hpp"/>
-        <childnode refid="166" relation="include">
-        </childnode>
-      </node>
-      <node id="166">
-        <label>process.hpp</label>
-        <link refid="process_8hpp"/>
-        <childnode refid="167" relation="include">
+        <childnode refid="64" relation="include">
         </childnode>
       </node>
       <node id="168">
+        <label>pipe.hpp</label>
+        <link refid="pipe_8hpp"/>
+        <childnode refid="169" relation="include">
+        </childnode>
+      </node>
+      <node id="169">
+        <label>process.hpp</label>
+        <link refid="process_8hpp"/>
+        <childnode refid="170" relation="include">
+        </childnode>
+      </node>
+      <node id="171">
         <label>registry_key.hpp</label>
         <link refid="registry__key_8hpp"/>
       </node>
-      <node id="169">
+      <node id="172">
         <label>share_memory.hpp</label>
         <link refid="share__memory_8hpp"/>
       </node>
-      <node id="194">
+      <node id="197">
         <label>stacktrace.hpp</label>
         <link refid="stacktrace_8hpp"/>
-        <childnode refid="72" relation="include">
+        <childnode refid="74" relation="include">
         </childnode>
       </node>
-      <node id="204">
+      <node id="208">
         <label>sysinfo.hpp</label>
         <link refid="sysinfo_8hpp"/>
-        <childnode refid="140" relation="include">
+        <childnode refid="143" relation="include">
         </childnode>
-        <childnode refid="115" relation="include">
+        <childnode refid="118" relation="include">
         </childnode>
       </node>
-      <node id="89">
+      <node id="92">
         <label>datetime.hpp</label>
         <link refid="datetime_8hpp"/>
-        <childnode refid="90" relation="include">
-        </childnode>
-        <childnode refid="107" relation="include">
+        <childnode refid="93" relation="include">
         </childnode>
         <childnode refid="110" relation="include">
         </childnode>
         <childnode refid="113" relation="include">
         </childnode>
-        <childnode refid="74" relation="include">
-        </childnode>
-        <childnode refid="115" relation="include">
-        </childnode>
         <childnode refid="116" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
         </childnode>
         <childnode refid="118" relation="include">
         </childnode>
-      </node>
-      <node id="88">
-        <label>check_type.hpp</label>
-        <link refid="check__type_8hpp"/>
-      </node>
-      <node id="63">
-        <label>byte_size.hpp</label>
-        <link refid="byte__size_8hpp"/>
-        <childnode refid="64" relation="include">
-        </childnode>
-        <childnode refid="65" relation="include">
-        </childnode>
-        <childnode refid="38" relation="include">
-        </childnode>
-        <childnode refid="66" relation="include">
-        </childnode>
-        <childnode refid="44" relation="include">
-        </childnode>
-        <childnode refid="39" relation="include">
-        </childnode>
-        <childnode refid="67" relation="include">
-        </childnode>
-      </node>
-      <node id="69">
-        <label>color.hpp</label>
-        <link refid="color_8hpp"/>
-        <childnode refid="70" relation="include">
-        </childnode>
-        <childnode refid="73" relation="include">
-        </childnode>
-        <childnode refid="74" relation="include">
-        </childnode>
-        <childnode refid="77" relation="include">
-        </childnode>
-        <childnode refid="78" relation="include">
-        </childnode>
-      </node>
-      <node id="68">
-        <label>hexadecimal.hpp</label>
-        <link refid="hexadecimal_8hpp"/>
-        <childnode refid="69" relation="include">
-        </childnode>
-      </node>
-      <node id="87">
-        <label>packages.hpp</label>
-        <link refid="packages_8hpp"/>
-        <childnode refid="63" relation="include">
-        </childnode>
-        <childnode refid="88" relation="include">
-        </childnode>
-        <childnode refid="69" relation="include">
-        </childnode>
-        <childnode refid="89" relation="include">
+        <childnode refid="119" relation="include">
         </childnode>
         <childnode refid="121" relation="include">
         </childnode>
       </node>
-      <node id="195">
-        <label>uuid.hpp</label>
-        <link refid="uuid_8hpp"/>
-      </node>
       <node id="91">
-        <label>database_pool.hpp</label>
-        <link refid="database__pool_8hpp"/>
+        <label>check_type.hpp</label>
+        <link refid="check__type_8hpp"/>
       </node>
-      <node id="186">
-        <label>db_config.hpp</label>
-        <link refid="db__config_8hpp"/>
-        <childnode refid="90" relation="include">
+      <node id="65">
+        <label>byte_size.hpp</label>
+        <link refid="byte__size_8hpp"/>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+      </node>
+      <node id="71">
+        <label>color.hpp</label>
+        <link refid="color_8hpp"/>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
+        </childnode>
+      </node>
+      <node id="70">
+        <label>hexadecimal.hpp</label>
+        <link refid="hexadecimal_8hpp"/>
+        <childnode refid="71" relation="include">
         </childnode>
       </node>
       <node id="90">
-        <label>db_interface.hpp</label>
-        <link refid="db__interface_8hpp"/>
+        <label>packages.hpp</label>
+        <link refid="packages_8hpp"/>
+        <childnode refid="65" relation="include">
+        </childnode>
         <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
         </childnode>
         <childnode refid="92" relation="include">
         </childnode>
+        <childnode refid="124" relation="include">
+        </childnode>
+      </node>
+      <node id="199">
+        <label>uuid.hpp</label>
+        <link refid="uuid_8hpp"/>
+      </node>
+      <node id="94">
+        <label>database_pool.hpp</label>
+        <link refid="database__pool_8hpp"/>
+      </node>
+      <node id="189">
+        <label>db_config.hpp</label>
+        <link refid="db__config_8hpp"/>
         <childnode refid="93" relation="include">
         </childnode>
+      </node>
+      <node id="93">
+        <label>db_interface.hpp</label>
+        <link refid="db__interface_8hpp"/>
         <childnode refid="94" relation="include">
         </childnode>
         <childnode refid="95" relation="include">
@@ -999,56 +1013,62 @@
         </childnode>
         <childnode refid="97" relation="include">
         </childnode>
-        <childnode refid="99" relation="include">
+        <childnode refid="98" relation="include">
         </childnode>
-        <childnode refid="7" relation="include">
+        <childnode refid="99" relation="include">
         </childnode>
         <childnode refid="100" relation="include">
         </childnode>
-        <childnode refid="101" relation="include">
+        <childnode refid="102" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="103" relation="include">
+        </childnode>
+        <childnode refid="104" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="105" relation="include">
+        <childnode refid="108" relation="include">
         </childnode>
-        <childnode refid="106" relation="include">
+        <childnode refid="109" relation="include">
         </childnode>
       </node>
-      <node id="102">
+      <node id="105">
         <label>mysql_connect.hpp</label>
         <link refid="mysql__connect_8hpp"/>
       </node>
-      <node id="92">
+      <node id="95">
         <label>mysql_prepared_result.hpp</label>
         <link refid="mysql__prepared__result_8hpp"/>
       </node>
-      <node id="93">
+      <node id="96">
         <label>mysql_prepared_statement.hpp</label>
         <link refid="mysql__prepared__statement_8hpp"/>
       </node>
-      <node id="94">
+      <node id="97">
         <label>mysql_result.hpp</label>
         <link refid="mysql__result_8hpp"/>
       </node>
-      <node id="103">
+      <node id="106">
         <label>pgsql_connect.hpp</label>
         <link refid="pgsql__connect_8hpp"/>
       </node>
-      <node id="95">
+      <node id="98">
         <label>pgsql_prepared_statement.hpp</label>
         <link refid="pgsql__prepared__statement_8hpp"/>
       </node>
-      <node id="96">
+      <node id="99">
         <label>pgsql_result.hpp</label>
         <link refid="pgsql__result_8hpp"/>
       </node>
-      <node id="97">
+      <node id="100">
         <label>redis_connect.hpp</label>
         <link refid="redis__connect_8hpp"/>
-        <childnode refid="98" relation="include">
+        <childnode refid="101" relation="include">
         </childnode>
       </node>
-      <node id="99">
+      <node id="102">
         <label>redis_result.hpp</label>
         <link refid="redis__result_8hpp"/>
       </node>
@@ -1056,11 +1076,11 @@
         <label>repository.hpp</label>
         <link refid="repository_8hpp"/>
       </node>
-      <node id="100">
+      <node id="103">
         <label>scope_transaction.hpp</label>
         <link refid="scope__transaction_8hpp"/>
       </node>
-      <node id="203">
+      <node id="207">
         <label>sql_builder.hpp</label>
         <link refid="sql__builder_8hpp"/>
         <childnode refid="7" relation="include">
@@ -1068,14 +1088,14 @@
         <childnode refid="11" relation="include">
         </childnode>
       </node>
-      <node id="101">
+      <node id="104">
         <label>sql_connect_base.hpp</label>
         <link refid="sql__connect__base_8hpp"/>
-        <childnode refid="102" relation="include">
+        <childnode refid="105" relation="include">
         </childnode>
-        <childnode refid="103" relation="include">
+        <childnode refid="106" relation="include">
         </childnode>
-        <childnode refid="104" relation="include">
+        <childnode refid="107" relation="include">
         </childnode>
       </node>
       <node id="11">
@@ -1084,143 +1104,139 @@
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="104">
+      <node id="107">
         <label>sqlite_connect.hpp</label>
         <link refid="sqlite__connect_8hpp"/>
       </node>
-      <node id="105">
+      <node id="108">
         <label>sqlite_prepared_statement.hpp</label>
         <link refid="sqlite__prepared__statement_8hpp"/>
       </node>
-      <node id="106">
+      <node id="109">
         <label>sqlite_result.hpp</label>
         <link refid="sqlite__result_8hpp"/>
       </node>
-      <node id="75">
+      <node id="77">
         <label>file_sink.hpp</label>
         <link refid="file__sink_8hpp"/>
       </node>
-      <node id="113">
+      <node id="116">
         <label>log_event.hpp</label>
         <link refid="log__event_8hpp"/>
-        <childnode refid="114" relation="include">
-        </childnode>
-        <childnode refid="74" relation="include">
-        </childnode>
-      </node>
-      <node id="114">
-        <label>log_formatter.hpp</label>
-        <link refid="log__formatter_8hpp"/>
-        <childnode refid="74" relation="include">
-        </childnode>
-      </node>
-      <node id="74">
-        <label>log_sink.hpp</label>
-        <link refid="log__sink_8hpp"/>
-        <childnode refid="75" relation="include">
+        <childnode refid="117" relation="include">
         </childnode>
         <childnode refid="76" relation="include">
         </childnode>
       </node>
+      <node id="117">
+        <label>log_formatter.hpp</label>
+        <link refid="log__formatter_8hpp"/>
+        <childnode refid="76" relation="include">
+        </childnode>
+      </node>
       <node id="76">
+        <label>log_sink.hpp</label>
+        <link refid="log__sink_8hpp"/>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
+      </node>
+      <node id="78">
         <label>logger.hpp</label>
         <link refid="logger_8hpp"/>
       </node>
-      <node id="124">
+      <node id="127">
         <label>dns_client.hpp</label>
         <link refid="dns__client_8hpp"/>
-        <childnode refid="125" relation="include">
+        <childnode refid="128" relation="include">
         </childnode>
-        <childnode refid="126" relation="include">
+        <childnode refid="129" relation="include">
         </childnode>
+        <childnode refid="130" relation="include">
+        </childnode>
+      </node>
+      <node id="126">
+        <label>dns_message.hpp</label>
+        <link refid="dns__message_8hpp"/>
         <childnode refid="127" relation="include">
         </childnode>
       </node>
-      <node id="123">
-        <label>dns_message.hpp</label>
-        <link refid="dns__message_8hpp"/>
-        <childnode refid="124" relation="include">
-        </childnode>
-      </node>
-      <node id="125">
+      <node id="128">
         <label>ftp_client.hpp</label>
         <link refid="ftp__client_8hpp_source"/>
       </node>
-      <node id="136">
+      <node id="139">
         <label>ftp_protocol.hpp</label>
         <link refid="ftp__protocol_8hpp_source"/>
-        <childnode refid="125" relation="include">
+        <childnode refid="128" relation="include">
         </childnode>
-        <childnode refid="137" relation="include">
+        <childnode refid="140" relation="include">
         </childnode>
       </node>
-      <node id="137">
+      <node id="140">
         <label>ftp_server.hpp</label>
         <link refid="ftp__server_8hpp_source"/>
       </node>
-      <node id="40">
+      <node id="42">
         <label>async_filter.hpp</label>
         <link refid="async__filter_8hpp"/>
       </node>
-      <node id="64">
+      <node id="66">
         <label>chunked_reader.hpp</label>
         <link refid="chunked__reader_8hpp"/>
       </node>
-      <node id="41">
+      <node id="43">
         <label>csrf_filter.hpp</label>
         <link refid="csrf__filter_8hpp"/>
       </node>
-      <node id="38">
+      <node id="40">
         <label>grpc.hpp</label>
         <link refid="grpc_8hpp"/>
       </node>
-      <node id="42">
+      <node id="44">
         <label>health_check.hpp</label>
         <link refid="health__check_8hpp"/>
       </node>
-      <node id="46">
+      <node id="48">
         <label>http2_connection.hpp</label>
         <link refid="http2__connection_8hpp"/>
       </node>
-      <node id="170">
+      <node id="173">
         <label>http2_protocol.hpp</label>
         <link refid="http2__protocol_8hpp"/>
-        <childnode refid="46" relation="include">
+        <childnode refid="48" relation="include">
         </childnode>
       </node>
-      <node id="43">
+      <node id="45">
         <label>http_cache.hpp</label>
         <link refid="http__cache_8hpp"/>
       </node>
-      <node id="66">
+      <node id="68">
         <label>http_client.hpp</label>
         <link refid="http__client_8hpp"/>
-        <childnode refid="50" relation="include">
+        <childnode refid="52" relation="include">
         </childnode>
       </node>
-      <node id="111">
+      <node id="114">
         <label>http_client_message.hpp</label>
         <link refid="http__client__message_8hpp"/>
-        <childnode refid="66" relation="include">
+        <childnode refid="68" relation="include">
         </childnode>
       </node>
-      <node id="44">
+      <node id="46">
         <label>http_compress.hpp</label>
         <link refid="http__compress_8hpp"/>
       </node>
-      <node id="163">
+      <node id="166">
         <label>http_constants.hpp</label>
         <link refid="http__constants_8hpp"/>
-        <childnode refid="110" relation="include">
+        <childnode refid="113" relation="include">
         </childnode>
       </node>
-      <node id="39">
+      <node id="41">
         <label>http_filter.hpp</label>
         <link refid="http__filter_8hpp"/>
-        <childnode refid="40" relation="include">
-        </childnode>
-        <childnode refid="41" relation="include">
-        </childnode>
         <childnode refid="42" relation="include">
         </childnode>
         <childnode refid="43" relation="include">
@@ -1229,282 +1245,286 @@
         </childnode>
         <childnode refid="45" relation="include">
         </childnode>
-        <childnode refid="48" relation="include">
-        </childnode>
-        <childnode refid="49" relation="include">
-        </childnode>
-        <childnode refid="50" relation="include">
-        </childnode>
-      </node>
-      <node id="51">
-        <label>http_range.hpp</label>
-        <link refid="http__range_8hpp"/>
-      </node>
-      <node id="45">
-        <label>http_router.hpp</label>
-        <link refid="http__router_8hpp"/>
         <childnode refid="46" relation="include">
         </childnode>
         <childnode refid="47" relation="include">
         </childnode>
-      </node>
-      <node id="48">
-        <label>http_security.hpp</label>
-        <link refid="http__security_8hpp"/>
-      </node>
-      <node id="47">
-        <label>http_server.hpp</label>
-        <link refid="http__server_8hpp"/>
-      </node>
-      <node id="37">
-        <label>http_server_message.hpp</label>
-        <link refid="http__server__message_8hpp"/>
-        <childnode refid="38" relation="include">
-        </childnode>
-        <childnode refid="39" relation="include">
+        <childnode refid="50" relation="include">
         </childnode>
         <childnode refid="51" relation="include">
         </childnode>
         <childnode refid="52" relation="include">
         </childnode>
-        <childnode refid="53" relation="include">
+      </node>
+      <node id="53">
+        <label>http_range.hpp</label>
+        <link refid="http__range_8hpp"/>
+      </node>
+      <node id="47">
+        <label>http_router.hpp</label>
+        <link refid="http__router_8hpp"/>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
         </childnode>
       </node>
-      <node id="110">
-        <label>http_session.hpp</label>
-        <link refid="http__session_8hpp"/>
+      <node id="50">
+        <label>http_security.hpp</label>
+        <link refid="http__security_8hpp"/>
+      </node>
+      <node id="49">
+        <label>http_server.hpp</label>
+        <link refid="http__server_8hpp"/>
+      </node>
+      <node id="39">
+        <label>http_server_message.hpp</label>
+        <link refid="http__server__message_8hpp"/>
+        <childnode refid="40" relation="include">
+        </childnode>
         <childnode refid="41" relation="include">
         </childnode>
-        <childnode refid="111" relation="include">
+        <childnode refid="53" relation="include">
         </childnode>
-        <childnode refid="37" relation="include">
+        <childnode refid="54" relation="include">
         </childnode>
-        <childnode refid="112" relation="include">
+        <childnode refid="55" relation="include">
         </childnode>
       </node>
-      <node id="121">
+      <node id="113">
+        <label>http_session.hpp</label>
+        <link refid="http__session_8hpp"/>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="114" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="115" relation="include">
+        </childnode>
+      </node>
+      <node id="124">
         <label>load_balancer.hpp</label>
         <link refid="load__balancer_8hpp"/>
       </node>
-      <node id="67">
+      <node id="69">
         <label>multipart_parser.hpp</label>
         <link refid="multipart__parser_8hpp"/>
       </node>
-      <node id="52">
+      <node id="54">
         <label>radix_router.hpp</label>
         <link refid="radix__router_8hpp"/>
-        <childnode refid="45" relation="include">
+        <childnode refid="47" relation="include">
         </childnode>
       </node>
-      <node id="49">
+      <node id="51">
         <label>rate_limiter.hpp</label>
         <link refid="rate__limiter_8hpp"/>
       </node>
-      <node id="50">
+      <node id="52">
         <label>reverse_proxy.hpp</label>
         <link refid="reverse__proxy_8hpp"/>
       </node>
-      <node id="112">
+      <node id="115">
         <label>session_store.hpp</label>
         <link refid="session__store_8hpp"/>
-        <childnode refid="47" relation="include">
+        <childnode refid="49" relation="include">
         </childnode>
-        <childnode refid="98" relation="include">
+        <childnode refid="101" relation="include">
         </childnode>
       </node>
-      <node id="98">
+      <node id="101">
         <label>session_store_redis.hpp</label>
         <link refid="session__store__redis_8hpp"/>
       </node>
-      <node id="53">
+      <node id="55">
         <label>websocket.hpp</label>
         <link refid="websocket_8hpp"/>
-        <childnode refid="47" relation="include">
+        <childnode refid="49" relation="include">
         </childnode>
       </node>
-      <node id="205">
+      <node id="209">
         <label>websocket_deflate.hpp</label>
         <link refid="websocket__deflate_8hpp"/>
-        <childnode refid="53" relation="include">
+        <childnode refid="55" relation="include">
         </childnode>
       </node>
-      <node id="156">
+      <node id="159">
         <label>icmp_socket.hpp</label>
         <link refid="icmp__socket_8hpp"/>
       </node>
-      <node id="157">
+      <node id="160">
         <label>ip_socket.hpp</label>
         <link refid="ip__socket_8hpp"/>
-        <childnode refid="136" relation="include">
+        <childnode refid="139" relation="include">
         </childnode>
-        <childnode refid="126" relation="include">
-        </childnode>
-        <childnode refid="141" relation="include">
+        <childnode refid="129" relation="include">
         </childnode>
         <childnode refid="144" relation="include">
         </childnode>
+        <childnode refid="147" relation="include">
+        </childnode>
       </node>
-      <node id="126">
+      <node id="129">
         <label>smtp_socket.hpp</label>
         <link refid="smtp__socket_8hpp"/>
       </node>
-      <node id="155">
+      <node id="158">
         <label>socket_base.hpp</label>
         <link refid="socket__base_8hpp"/>
-        <childnode refid="154" relation="include">
-        </childnode>
-        <childnode refid="156" relation="include">
-        </childnode>
         <childnode refid="157" relation="include">
         </childnode>
+        <childnode refid="159" relation="include">
+        </childnode>
+        <childnode refid="160" relation="include">
+        </childnode>
       </node>
-      <node id="149">
+      <node id="152">
         <label>sni_manager.hpp</label>
         <link refid="sni__manager_8hpp"/>
-        <childnode refid="47" relation="include">
-        </childnode>
-      </node>
-      <node id="139">
-        <label>ssl_acceptor.hpp</label>
-        <link refid="ssl__acceptor_8hpp"/>
-        <childnode refid="140" relation="include">
-        </childnode>
-      </node>
-      <node id="148">
-        <label>ssl_context.hpp</label>
-        <link refid="ssl__context_8hpp"/>
-        <childnode refid="149" relation="include">
-        </childnode>
-        <childnode refid="135" relation="include">
-        </childnode>
-      </node>
-      <node id="147">
-        <label>ssl_exception.hpp</label>
-        <link refid="ssl__exception_8hpp"/>
-        <childnode refid="148" relation="include">
-        </childnode>
-        <childnode refid="138" relation="include">
-        </childnode>
-      </node>
-      <node id="138">
-        <label>ssl_socket.hpp</label>
-        <link refid="ssl__socket_8hpp"/>
-        <childnode refid="139" relation="include">
-        </childnode>
-        <childnode refid="127" relation="include">
-        </childnode>
-        <childnode refid="53" relation="include">
-        </childnode>
-      </node>
-      <node id="135">
-        <label>ssl_stream.hpp</label>
-        <link refid="ssl__stream_8hpp"/>
-        <childnode refid="136" relation="include">
-        </childnode>
-        <childnode refid="126" relation="include">
-        </childnode>
-        <childnode refid="138" relation="include">
+        <childnode refid="49" relation="include">
         </childnode>
       </node>
       <node id="142">
-        <label>tcp_acceptor.hpp</label>
-        <link refid="tcp__acceptor_8hpp"/>
-        <childnode refid="137" relation="include">
-        </childnode>
-        <childnode refid="139" relation="include">
+        <label>ssl_acceptor.hpp</label>
+        <link refid="ssl__acceptor_8hpp"/>
+        <childnode refid="143" relation="include">
         </childnode>
       </node>
-      <node id="127">
-        <label>tcp_client.hpp</label>
-        <link refid="tcp__client_8hpp"/>
-        <childnode refid="66" relation="include">
+      <node id="151">
+        <label>ssl_context.hpp</label>
+        <link refid="ssl__context_8hpp"/>
+        <childnode refid="152" relation="include">
+        </childnode>
+        <childnode refid="138" relation="include">
         </childnode>
       </node>
-      <node id="140">
-        <label>tcp_server.hpp</label>
-        <link refid="tcp__server_8hpp"/>
-        <childnode refid="47" relation="include">
+      <node id="150">
+        <label>ssl_exception.hpp</label>
+        <link refid="ssl__exception_8hpp"/>
+        <childnode refid="151" relation="include">
+        </childnode>
+        <childnode refid="141" relation="include">
         </childnode>
       </node>
       <node id="141">
-        <label>tcp_socket.hpp</label>
-        <link refid="tcp__socket_8hpp"/>
-        <childnode refid="64" relation="include">
+        <label>ssl_socket.hpp</label>
+        <link refid="ssl__socket_8hpp"/>
+        <childnode refid="142" relation="include">
         </childnode>
-        <childnode refid="125" relation="include">
+        <childnode refid="130" relation="include">
         </childnode>
-        <childnode refid="46" relation="include">
+        <childnode refid="55" relation="include">
         </childnode>
-        <childnode refid="138" relation="include">
+      </node>
+      <node id="138">
+        <label>ssl_stream.hpp</label>
+        <link refid="ssl__stream_8hpp"/>
+        <childnode refid="139" relation="include">
+        </childnode>
+        <childnode refid="129" relation="include">
+        </childnode>
+        <childnode refid="141" relation="include">
+        </childnode>
+      </node>
+      <node id="145">
+        <label>tcp_acceptor.hpp</label>
+        <link refid="tcp__acceptor_8hpp"/>
+        <childnode refid="140" relation="include">
         </childnode>
         <childnode refid="142" relation="include">
         </childnode>
       </node>
-      <node id="144">
-        <label>udp_socket.hpp</label>
-        <link refid="udp__socket_8hpp"/>
-        <childnode refid="124" relation="include">
+      <node id="130">
+        <label>tcp_client.hpp</label>
+        <link refid="tcp__client_8hpp"/>
+        <childnode refid="68" relation="include">
         </childnode>
       </node>
-      <node id="154">
+      <node id="143">
+        <label>tcp_server.hpp</label>
+        <link refid="tcp__server_8hpp"/>
+        <childnode refid="49" relation="include">
+        </childnode>
+      </node>
+      <node id="144">
+        <label>tcp_socket.hpp</label>
+        <link refid="tcp__socket_8hpp"/>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="128" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="141" relation="include">
+        </childnode>
+        <childnode refid="145" relation="include">
+        </childnode>
+      </node>
+      <node id="147">
+        <label>udp_socket.hpp</label>
+        <link refid="udp__socket_8hpp"/>
+        <childnode refid="127" relation="include">
+        </childnode>
+      </node>
+      <node id="157">
         <label>arp.hpp</label>
         <link refid="arp_8hpp"/>
       </node>
-      <node id="152">
+      <node id="155">
         <label>ip_address.hpp</label>
         <link refid="ip__address_8hpp"/>
-        <childnode refid="153" relation="include">
+        <childnode refid="156" relation="include">
+        </childnode>
+        <childnode refid="158" relation="include">
+        </childnode>
+      </node>
+      <node id="156">
+        <label>mac_address.hpp</label>
+        <link refid="mac__address_8hpp"/>
+        <childnode refid="157" relation="include">
+        </childnode>
+      </node>
+      <node id="188">
+        <label>ports.hpp</label>
+        <link refid="ports_8hpp"/>
+        <childnode refid="189" relation="include">
+        </childnode>
+        <childnode refid="127" relation="include">
+        </childnode>
+        <childnode refid="114" relation="include">
         </childnode>
         <childnode refid="155" relation="include">
         </childnode>
-      </node>
-      <node id="153">
-        <label>mac_address.hpp</label>
-        <link refid="mac__address_8hpp"/>
-        <childnode refid="154" relation="include">
-        </childnode>
-      </node>
-      <node id="185">
-        <label>ports.hpp</label>
-        <link refid="ports_8hpp"/>
-        <childnode refid="186" relation="include">
-        </childnode>
         <childnode refid="124" relation="include">
         </childnode>
-        <childnode refid="111" relation="include">
-        </childnode>
-        <childnode refid="152" relation="include">
-        </childnode>
-        <childnode refid="121" relation="include">
-        </childnode>
-        <childnode refid="187" relation="include">
+        <childnode refid="190" relation="include">
         </childnode>
       </node>
-      <node id="187">
+      <node id="190">
         <label>url.hpp</label>
         <link refid="url_8hpp"/>
-        <childnode refid="66" relation="include">
+        <childnode refid="68" relation="include">
         </childnode>
       </node>
-      <node id="172">
+      <node id="175">
         <label>iplugin.hpp</label>
         <link refid="iplugin_8hpp"/>
-        <childnode refid="173" relation="include">
+        <childnode refid="176" relation="include">
         </childnode>
       </node>
-      <node id="173">
+      <node id="176">
         <label>plugin_entry.hpp</label>
         <link refid="plugin__entry_8hpp"/>
-        <childnode refid="161" relation="include">
+        <childnode refid="164" relation="include">
         </childnode>
       </node>
-      <node id="161">
+      <node id="164">
         <label>plugin_manager.hpp</label>
         <link refid="plugin__manager_8hpp"/>
       </node>
-      <node id="71">
-        <label>app.hpp</label>
-        <link refid="app_8hpp"/>
+      <node id="73">
+        <label>application.hpp</label>
+        <link refid="application_8hpp"/>
       </node>
       <node id="17">
         <label>collapsible.hpp</label>
@@ -1521,10 +1541,6 @@
         </childnode>
         <childnode refid="20" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
         <childnode refid="23" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
@@ -1532,6 +1548,8 @@
         <childnode refid="25" relation="include">
         </childnode>
         <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="27" relation="include">
         </childnode>
@@ -1543,6 +1561,10 @@
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
       </node>
       <node id="18">
         <label>containers.hpp</label>
@@ -1552,60 +1574,54 @@
         <label>dropdown.hpp</label>
         <link refid="dropdown_8hpp"/>
       </node>
-      <node id="20">
+      <node id="23">
         <label>hoverable.hpp</label>
         <link refid="hoverable_8hpp"/>
       </node>
-      <node id="21">
+      <node id="24">
         <label>menu.hpp</label>
         <link refid="menu_8hpp"/>
       </node>
-      <node id="22">
+      <node id="25">
         <label>modal.hpp</label>
         <link refid="modal_8hpp"/>
       </node>
-      <node id="23">
+      <node id="26">
         <label>radiobox.hpp</label>
         <link refid="radiobox_8hpp"/>
       </node>
-      <node id="25">
+      <node id="27">
         <label>renderer.hpp</label>
-        <link refid="renderer_8hpp"/>
+        <link refid="component_2renderer_8hpp"/>
       </node>
-      <node id="26">
+      <node id="28">
         <label>resizable_split.hpp</label>
         <link refid="resizable__split_8hpp"/>
       </node>
-      <node id="27">
+      <node id="29">
         <label>scroll_view.hpp</label>
         <link refid="scroll__view_8hpp"/>
       </node>
-      <node id="28">
+      <node id="30">
         <label>slider.hpp</label>
         <link refid="slider_8hpp"/>
       </node>
-      <node id="29">
+      <node id="31">
         <label>text_input.hpp</label>
         <link refid="text__input_8hpp"/>
       </node>
-      <node id="30">
+      <node id="32">
         <label>toggle.hpp</label>
         <link refid="toggle_8hpp"/>
       </node>
-      <node id="31">
+      <node id="33">
         <label>window.hpp</label>
         <link refid="window_8hpp"/>
       </node>
-      <node id="79">
+      <node id="82">
         <label>element.hpp</label>
         <link refid="element_8hpp"/>
         <childnode refid="16" relation="include">
-        </childnode>
-        <childnode refid="80" relation="include">
-        </childnode>
-        <childnode refid="81" relation="include">
-        </childnode>
-        <childnode refid="82" relation="include">
         </childnode>
         <childnode refid="83" relation="include">
         </childnode>
@@ -1615,44 +1631,52 @@
         </childnode>
         <childnode refid="86" relation="include">
         </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
       </node>
-      <node id="80">
+      <node id="83">
         <label>gauge.hpp</label>
         <link refid="gauge_8hpp"/>
       </node>
-      <node id="81">
+      <node id="84">
         <label>graph.hpp</label>
         <link refid="graph_8hpp"/>
       </node>
-      <node id="82">
+      <node id="85">
         <label>layout.hpp</label>
         <link refid="layout_8hpp"/>
-        <childnode refid="24" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
       </node>
-      <node id="73">
+      <node id="75">
         <label>linear_gradient.hpp</label>
         <link refid="linear__gradient_8hpp"/>
       </node>
-      <node id="83">
+      <node id="86">
         <label>paragraph.hpp</label>
         <link refid="paragraph_8hpp"/>
       </node>
-      <node id="60">
+      <node id="62">
         <label>ref.hpp</label>
         <link refid="ref_8hpp"/>
         <childnode refid="19" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="24" relation="include">
         </childnode>
-        <childnode refid="28" relation="include">
+        <childnode refid="30" relation="include">
         </childnode>
       </node>
-      <node id="84">
+      <node id="87">
         <label>scroll_indicator.hpp</label>
         <link refid="scroll__indicator_8hpp"/>
       </node>
-      <node id="85">
+      <node id="88">
         <label>spinner.hpp</label>
         <link refid="spinner_8hpp"/>
       </node>
@@ -1662,57 +1686,71 @@
         <childnode refid="16" relation="include">
         </childnode>
       </node>
-      <node id="78">
+      <node id="81">
         <label>style.hpp</label>
         <link refid="style_8hpp"/>
-        <childnode refid="71" relation="include">
+        <childnode refid="73" relation="include">
         </childnode>
-        <childnode refid="79" relation="include">
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
         </childnode>
       </node>
-      <node id="86">
+      <node id="89">
         <label>table.hpp</label>
         <link refid="table_8hpp"/>
       </node>
-      <node id="56">
+      <node id="21">
+        <label>event_dispatcher.hpp</label>
+        <link refid="event__dispatcher_8hpp"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="58">
         <label>events.hpp</label>
         <link refid="events_8hpp"/>
         <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="57" relation="include">
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
         </childnode>
       </node>
-      <node id="57">
+      <node id="20">
+        <label>focus_manager.hpp</label>
+        <link refid="focus__manager_8hpp"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="59">
         <label>input.hpp</label>
         <link refid="input_8hpp"/>
       </node>
-      <node id="24">
+      <node id="22">
         <label>reconciler.hpp</label>
         <link refid="reconciler_8hpp"/>
       </node>
-      <node id="77">
+      <node id="80">
+        <label>renderer.hpp</label>
+        <link refid="renderer_8hpp"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="79">
         <label>screen.hpp</label>
         <link refid="screen_8hpp"/>
-        <childnode refid="24" relation="include">
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
-    <sectiondef kind="typedef">
-      <member refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kind="typedef"><name>string_view</name></member>
-      <member refid="group___string_view_1ga5164ea4aed26e7700ce4a006d1d32475" kind="typedef"><name>wstring_view</name></member>
-      <member refid="group___string_view_1gac8fa8b03f678dc2c40b0c3ceb754cc4f" kind="typedef"><name>u8string_view</name></member>
-      <member refid="group___string_view_1gaa46d88d8bca7469fb6f4ec68a1f7b10c" kind="typedef"><name>u16string_view</name></member>
-      <member refid="group___string_view_1gaf8ee1ef31dc1f2a852cc038331c996d0" kind="typedef"><name>u32string_view</name></member>
-    </sectiondef>
-    <sectiondef kind="func">
-      <member refid="group___user_literals_1ga1c398a5a4a481b8049b1c0bd3f8221e3" kind="function"><name>operator&quot;&quot;_sv</name></member>
-      <member refid="group___user_literals_1gaaae35a2572a53a1e0289d9bf56dac73b" kind="function"><name>operator&quot;&quot;_sv</name></member>
-      <member refid="group___user_literals_1gac12608b928727ff733ccd09cf83db748" kind="function"><name>operator&quot;&quot;_sv</name></member>
-      <member refid="group___user_literals_1gac39d51f7050b45394146de2a3b1aa227" kind="function"><name>operator&quot;&quot;_sv</name></member>
-      <member refid="group___user_literals_1ga2a3304a275d566493dbf4f7d4163cb3d" kind="function"><name>operator&quot;&quot;_sv</name></member>
-      <member refid="group___string_view_1ga9c1e1b92448d4a5d87c922c39b2b30a2" kind="function"><name>getline</name></member>
-      <member refid="group___string_view_1gaa9e8a1cad4d3bcde8020e46ec3a16c39" kind="function"><name>getline</name></member>
-    </sectiondef>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
+    <innernamespace refid="namespaceneforce_1_1literals" inline="yes">neforce::literals</innernamespace>
     <briefdescription>
 <para>字符串视图类型别名和实用函数 </para>
     </briefdescription>
@@ -1728,36 +1766,36 @@
 <codeline lineno="13"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight></codeline>
 <codeline lineno="20"><highlight class="normal"></highlight></codeline>
-<codeline lineno="22" refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>=<sp/><ref refid="classbasic__string__view" kindref="compound">basic_string_view&lt;char&gt;</ref>;</highlight></codeline>
+<codeline lineno="22" refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/>=<sp/><ref refid="classneforce_1_1basic__string__view" kindref="compound">basic_string_view&lt;char&gt;</ref>;</highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight></codeline>
-<codeline lineno="25" refid="group___string_view_1ga5164ea4aed26e7700ce4a006d1d32475" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="group___string_view_1ga5164ea4aed26e7700ce4a006d1d32475" kindref="member">wstring_view</ref><sp/>=<sp/><ref refid="classbasic__string__view" kindref="compound">basic_string_view&lt;wchar_t&gt;</ref>;</highlight></codeline>
+<codeline lineno="25" refid="group___string_view_1gae327d05eead799648a7279d1b14a5bbb" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="group___string_view_1gae327d05eead799648a7279d1b14a5bbb" kindref="member">wstring_view</ref><sp/>=<sp/><ref refid="classneforce_1_1basic__string__view" kindref="compound">basic_string_view&lt;wchar_t&gt;</ref>;</highlight></codeline>
 <codeline lineno="26"><highlight class="normal"></highlight></codeline>
 <codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_STANDARD_20</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="29" refid="group___string_view_1gac8fa8b03f678dc2c40b0c3ceb754cc4f" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="group___string_view_1gac8fa8b03f678dc2c40b0c3ceb754cc4f" kindref="member">u8string_view</ref><sp/>=<sp/><ref refid="classbasic__string__view" kindref="compound">basic_string_view&lt;char8_t&gt;</ref>;</highlight></codeline>
+<codeline lineno="29" refid="group___string_view_1ga0f6360889accaac507d84e2ee3b80881" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="group___string_view_1ga0f6360889accaac507d84e2ee3b80881" kindref="member">u8string_view</ref><sp/>=<sp/><ref refid="classneforce_1_1basic__string__view" kindref="compound">basic_string_view&lt;char8_t&gt;</ref>;</highlight></codeline>
 <codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight></codeline>
-<codeline lineno="33" refid="group___string_view_1gaa46d88d8bca7469fb6f4ec68a1f7b10c" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="group___string_view_1gaa46d88d8bca7469fb6f4ec68a1f7b10c" kindref="member">u16string_view</ref><sp/>=<sp/><ref refid="classbasic__string__view" kindref="compound">basic_string_view&lt;char16_t&gt;</ref>;</highlight></codeline>
+<codeline lineno="33" refid="group___string_view_1ga008ee4f3a31dc827e9c02fefc66170bb" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="group___string_view_1ga008ee4f3a31dc827e9c02fefc66170bb" kindref="member">u16string_view</ref><sp/>=<sp/><ref refid="classneforce_1_1basic__string__view" kindref="compound">basic_string_view&lt;char16_t&gt;</ref>;</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight></codeline>
-<codeline lineno="36" refid="group___string_view_1gaf8ee1ef31dc1f2a852cc038331c996d0" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="group___string_view_1gaf8ee1ef31dc1f2a852cc038331c996d0" kindref="member">u32string_view</ref><sp/>=<sp/><ref refid="classbasic__string__view" kindref="compound">basic_string_view&lt;char32_t&gt;</ref>;</highlight></codeline>
+<codeline lineno="36" refid="group___string_view_1ga292724c19306e7eb504a3fde3d5150bf" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="group___string_view_1ga292724c19306e7eb504a3fde3d5150bf" kindref="member">u32string_view</ref><sp/>=<sp/><ref refid="classneforce_1_1basic__string__view" kindref="compound">basic_string_view&lt;char32_t&gt;</ref>;</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>StringView</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight></codeline>
 <codeline lineno="40"><highlight class="normal"></highlight></codeline>
 <codeline lineno="41"><highlight class="normal">NEFORCE_BEGIN_LITERALS__</highlight></codeline>
 <codeline lineno="42"><highlight class="normal"></highlight></codeline>
 <codeline lineno="48"><highlight class="normal"></highlight></codeline>
-<codeline lineno="55" refid="group___user_literals_1ga1c398a5a4a481b8049b1c0bd3f8221e3" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">_sv(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>str,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>len)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{str,<sp/>len};<sp/>}</highlight></codeline>
+<codeline lineno="55" refid="group___user_literals_1ga95559ab66c332f147dd52509edeccfd3" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">_sv(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>str,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>len)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{str,<sp/>len};<sp/>}</highlight></codeline>
 <codeline lineno="56"><highlight class="normal"></highlight></codeline>
-<codeline lineno="63" refid="group___user_literals_1gaaae35a2572a53a1e0289d9bf56dac73b" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga5164ea4aed26e7700ce4a006d1d32475" kindref="member">wstring_view</ref><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">_sv(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">wchar_t</highlight><highlight class="normal">*<sp/>str,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>len)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{str,<sp/>len};<sp/>}</highlight></codeline>
+<codeline lineno="63" refid="group___user_literals_1ga6880e8ac9d6dbc4ce2839ab2aa8c37bf" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1gae327d05eead799648a7279d1b14a5bbb" kindref="member">wstring_view</ref><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">_sv(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">wchar_t</highlight><highlight class="normal">*<sp/>str,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>len)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{str,<sp/>len};<sp/>}</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"></highlight></codeline>
 <codeline lineno="65"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_STANDARD_20</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="72" refid="group___user_literals_1gac12608b928727ff733ccd09cf83db748" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1gac8fa8b03f678dc2c40b0c3ceb754cc4f" kindref="member">u8string_view</ref><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">_sv(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char8_t</highlight><highlight class="normal">*<sp/>str,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>len)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{str,<sp/>len};<sp/>}</highlight></codeline>
+<codeline lineno="72" refid="group___user_literals_1gac4022a6bcb1736191bcada99407ad6e0" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga0f6360889accaac507d84e2ee3b80881" kindref="member">u8string_view</ref><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">_sv(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char8_t</highlight><highlight class="normal">*<sp/>str,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>len)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{str,<sp/>len};<sp/>}</highlight></codeline>
 <codeline lineno="73"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="74"><highlight class="normal"></highlight></codeline>
-<codeline lineno="81" refid="group___user_literals_1gac39d51f7050b45394146de2a3b1aa227" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1gaa46d88d8bca7469fb6f4ec68a1f7b10c" kindref="member">u16string_view</ref><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">_sv(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char16_t</highlight><highlight class="normal">*<sp/>str,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>len)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="81" refid="group___user_literals_1ga051f1ca6d65406ee0d1c8e5c14994120" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga008ee4f3a31dc827e9c02fefc66170bb" kindref="member">u16string_view</ref><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">_sv(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char16_t</highlight><highlight class="normal">*<sp/>str,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>len)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{str,<sp/>len};</highlight></codeline>
 <codeline lineno="83"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="84"><highlight class="normal"></highlight></codeline>
-<codeline lineno="91" refid="group___user_literals_1ga2a3304a275d566493dbf4f7d4163cb3d" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1gaf8ee1ef31dc1f2a852cc038331c996d0" kindref="member">u32string_view</ref><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">_sv(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char32_t</highlight><highlight class="normal">*<sp/>str,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>len)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="91" refid="group___user_literals_1ga7a9b596677585e3ceca16b30466e3b29" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga292724c19306e7eb504a3fde3d5150bf" kindref="member">u32string_view</ref><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">_sv(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char32_t</highlight><highlight class="normal">*<sp/>str,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>len)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{str,<sp/>len};</highlight></codeline>
 <codeline lineno="93"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="94"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>UserLiterals</highlight><highlight class="normal"></highlight></codeline>
@@ -1767,42 +1805,42 @@
 <codeline lineno="99"><highlight class="normal"></highlight></codeline>
 <codeline lineno="105"><highlight class="normal"></highlight></codeline>
 <codeline lineno="115"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>CharT&gt;</highlight></codeline>
-<codeline lineno="116" refid="group___string_view_1ga9c1e1b92448d4a5d87c922c39b2b30a2" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga9c1e1b92448d4a5d87c922c39b2b30a2" kindref="member">getline</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classbasic__string__view" kindref="compound">basic_string_view&lt;CharT&gt;</ref><sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">&amp;<sp/>pos,<sp/><ref refid="classbasic__string__view" kindref="compound">basic_string_view&lt;CharT&gt;</ref>&amp;<sp/>str,</highlight></codeline>
+<codeline lineno="116" refid="group___string_view_1ga40340f61ecc6d756ebeb46a3b58a52ac" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___string_1ga0a45b9b9509e75258d83358c538509ca" kindref="member">getline</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1basic__string__view" kindref="compound">basic_string_view&lt;CharT&gt;</ref><sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">&amp;<sp/>pos,<sp/><ref refid="classneforce_1_1basic__string__view" kindref="compound">basic_string_view&lt;CharT&gt;</ref>&amp;<sp/>str,</highlight></codeline>
 <codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CharT<sp/>delim<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">CharT</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(</highlight><highlight class="charliteral">&apos;\n&apos;</highlight><highlight class="normal">))<sp/>{</highlight></codeline>
 <codeline lineno="118"><highlight class="normal"></highlight></codeline>
-<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(pos<sp/>&gt;=<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.size())<sp/>{</highlight></codeline>
-<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>str<sp/>=<sp/><ref refid="classbasic__string__view" kindref="compound">basic_string_view&lt;CharT&gt;</ref>();</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(pos<sp/>&gt;=<sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.size())<sp/>{</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>str<sp/>=<sp/><ref refid="classneforce_1_1basic__string__view" kindref="compound">basic_string_view&lt;CharT&gt;</ref>();</highlight></codeline>
 <codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="123"><highlight class="normal"></highlight></codeline>
 <codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>start<sp/>=<sp/>pos;</highlight></codeline>
-<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref><sp/>=<sp/>pos;</highlight></codeline>
-<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(<ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref><sp/>&lt;<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.size()<sp/>&amp;&amp;<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>[<ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref>]<sp/>!=<sp/>delim)<sp/>{</highlight></codeline>
-<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>++<ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref>;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" kindref="member">end</ref><sp/>=<sp/>pos;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(<ref refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" kindref="member">end</ref><sp/>&lt;<sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.size()<sp/>&amp;&amp;<sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>[<ref refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" kindref="member">end</ref>]<sp/>!=<sp/>delim)<sp/>{</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>++<ref refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" kindref="member">end</ref>;</highlight></codeline>
 <codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/>str<sp/>=<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.substr(start,<sp/><ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref><sp/>-<sp/>start);</highlight></codeline>
-<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>pos<sp/>=<sp/>(<ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref><sp/>&lt;<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.size())<sp/>?<sp/><ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref><sp/>+<sp/>1<sp/>:<sp/><ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref>;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/>str<sp/>=<sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.substr(start,<sp/><ref refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" kindref="member">end</ref><sp/>-<sp/>start);</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>pos<sp/>=<sp/>(<ref refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" kindref="member">end</ref><sp/>&lt;<sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.size())<sp/>?<sp/><ref refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" kindref="member">end</ref><sp/>+<sp/>1<sp/>:<sp/><ref refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" kindref="member">end</ref>;</highlight></codeline>
 <codeline lineno="131"><highlight class="normal"></highlight></codeline>
 <codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="133"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="134"><highlight class="normal"></highlight></codeline>
 <codeline lineno="147"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>CharT,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Pred&gt;</highlight></codeline>
-<codeline lineno="148" refid="group___string_view_1gaa9e8a1cad4d3bcde8020e46ec3a16c39" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga9c1e1b92448d4a5d87c922c39b2b30a2" kindref="member">getline</ref>(</highlight></codeline>
-<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classbasic__string__view" kindref="compound">basic_string_view&lt;CharT&gt;</ref><sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">&amp;<sp/>pos,<sp/><ref refid="classbasic__string__view" kindref="compound">basic_string_view&lt;CharT&gt;</ref>&amp;<sp/>str,</highlight></codeline>
+<codeline lineno="148" refid="group___string_view_1ga200953c0c8e0c5a4b41978fd2785707f" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___string_1ga0a45b9b9509e75258d83358c538509ca" kindref="member">getline</ref>(</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1basic__string__view" kindref="compound">basic_string_view&lt;CharT&gt;</ref><sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">&amp;<sp/>pos,<sp/><ref refid="classneforce_1_1basic__string__view" kindref="compound">basic_string_view&lt;CharT&gt;</ref>&amp;<sp/>str,</highlight></codeline>
 <codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Pred<sp/>split<sp/>=<sp/>[](</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>CharT<sp/>ch)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ch<sp/>==<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">CharT</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(</highlight><highlight class="charliteral">&apos;\n&apos;</highlight><highlight class="normal">);<sp/>})<sp/>{</highlight></codeline>
 <codeline lineno="151"><highlight class="normal"></highlight></codeline>
-<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(pos<sp/>&gt;=<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.size())<sp/>{</highlight></codeline>
-<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>str<sp/>=<sp/><ref refid="classbasic__string__view" kindref="compound">basic_string_view&lt;CharT&gt;</ref>();</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(pos<sp/>&gt;=<sp/>data.size())<sp/>{</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>str<sp/>=<sp/>basic_string_view&lt;CharT&gt;();</highlight></codeline>
 <codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="156"><highlight class="normal"></highlight></codeline>
 <codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>start<sp/>=<sp/>pos;</highlight></codeline>
-<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref><sp/>=<sp/>pos;</highlight></codeline>
-<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(<ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref><sp/>&lt;<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.size()<sp/>&amp;&amp;<sp/>!split(<ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>[<ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref>]))<sp/>{</highlight></codeline>
-<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>++<ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref>;</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" kindref="member">end</ref><sp/>=<sp/>pos;</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(end<sp/>&lt;<sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.size()<sp/>&amp;&amp;<sp/>!split(data[end]))<sp/>{</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>++<ref refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" kindref="member">end</ref>;</highlight></codeline>
 <codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/>str<sp/>=<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.substr(start,<sp/><ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref><sp/>-<sp/>start);</highlight></codeline>
-<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/>pos<sp/>=<sp/>(<ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref><sp/>&lt;<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.size())<sp/>?<sp/><ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref><sp/>+<sp/>1<sp/>:<sp/><ref refid="group___type_erasure_functions_1ga9905e63b663b6c2ce2c63810c5bb9214" kindref="member">end</ref>;</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/>str<sp/>=<sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.substr(start,<sp/>end<sp/>-<sp/>start);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/>pos<sp/>=<sp/>(<ref refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" kindref="member">end</ref><sp/>&lt;<sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.size())<sp/>?<sp/><ref refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" kindref="member">end</ref><sp/>+<sp/>1<sp/>:<sp/><ref refid="group___type_erasure_functions_1ga79793088dcb7b92aa900ebaef2c77aad" kindref="member">end</ref>;</highlight></codeline>
 <codeline lineno="164"><highlight class="normal"></highlight></codeline>
 <codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="166"><highlight class="normal">}</highlight></codeline>

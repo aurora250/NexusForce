@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
   </td>
  </tr>
  </tbody>
@@ -104,14 +104,14 @@ $(function(){initNavTree('toml__parser_8hpp_source.html','',''); });
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span></div>
 <div class="foldopen" id="foldopen00046" data-start="{" data-end="};">
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classtoml__parser.html">   46</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_function" href="classtoml__parser.html#a54c1c00efb29395d0ecf30fc5f1916ec">toml_parser</a> {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classneforce_1_1toml__parser.html">   46</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_function" href="classneforce_1_1toml__parser.html#a94185c97b9fa6e4429e32f4c48f1cb20">toml_parser</a> {</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">struct </span>context {</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <a class="code hl_class" href="classtoml__table.html">toml_table</a>* <a class="code hl_class" href="classtable.html">table</a>;   </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a> <a class="code hl_class" href="classpath.html">path</a>; </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <a class="code hl_class" href="classneforce_1_1toml__table.html">toml_table</a>* table;   </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <a class="code hl_class" href="classneforce_1_1vector.html">vector&lt;string&gt;</a> <a class="code hl_class" href="classneforce_1_1path.html">path</a>; </div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    };</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <a class="code hl_class" href="classvector.html">vector&lt;context&gt;</a> context_stack_;  </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <a class="code hl_class" href="classneforce_1_1vector.html">vector&lt;context&gt;</a> context_stack_;  </div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordtype">bool</span> is_in_array_table_ = <span class="keyword">false</span>; </div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordtype">string</span> text_;       </div>
@@ -120,9 +120,9 @@ $(function(){initNavTree('toml__parser_8hpp_source.html','',''); });
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordtype">size_t</span> line_ = 1;   </div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordtype">size_t</span> column_ = 1; </div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;toml_table&gt;</a> root_; </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <a class="code hl_class" href="classtoml__table.html">toml_table</a>* ctb_ = <span class="keyword">nullptr</span>;   </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a> ctp_;          </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <a class="code hl_class" href="classneforce_1_1unique__ptr.html">unique_ptr&lt;toml_table&gt;</a> root_; </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <a class="code hl_class" href="classneforce_1_1toml__table.html">toml_table</a>* ctb_ = <span class="keyword">nullptr</span>;   </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <a class="code hl_class" href="classneforce_1_1vector.html">vector&lt;string&gt;</a> ctp_;          </div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span></div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordtype">void</span> skip_whitespace() <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span></div>
@@ -140,7 +140,7 @@ $(function(){initNavTree('toml__parser_8hpp_source.html','',''); });
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span></div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> eof() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span></div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="group___iterator_operation.html#ga0ebe1ee99151c272bdedc1a48d148aa2">advance</a>() <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keywordtype">void</span> advance() <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span></div>
 <div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="keywordtype">bool</span> expect(<span class="keywordtype">char</span> ch);</div>
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span></div>
@@ -148,29 +148,29 @@ $(function(){initNavTree('toml__parser_8hpp_source.html','',''); });
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span></div>
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keywordtype">void</span> throw_parse_error(<span class="keywordtype">string</span> message) <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span></div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    <a class="code hl_class" href="classcodepoint.html">codepoint</a> parse_unicode_escape(<span class="keywordtype">size_t</span> digits);</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    <a class="code hl_class" href="classneforce_1_1codepoint.html">codepoint</a> parse_unicode_escape(<span class="keywordtype">size_t</span> digits);</div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span></div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;toml_string&gt;</a> parse_string();</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <a class="code hl_class" href="classneforce_1_1unique__ptr.html">unique_ptr&lt;toml_string&gt;</a> parse_string();</div>
 <div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span></div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;toml_string&gt;</a> parse_basic_string();</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    <a class="code hl_class" href="classneforce_1_1unique__ptr.html">unique_ptr&lt;toml_string&gt;</a> parse_basic_string();</div>
 <div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span></div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;toml_string&gt;</a> parse_literal_string();</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <a class="code hl_class" href="classneforce_1_1unique__ptr.html">unique_ptr&lt;toml_string&gt;</a> parse_literal_string();</div>
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span></div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;toml_string&gt;</a> parse_multiline_basic_string();</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <a class="code hl_class" href="classneforce_1_1unique__ptr.html">unique_ptr&lt;toml_string&gt;</a> parse_multiline_basic_string();</div>
 <div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span></div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;toml_string&gt;</a> parse_multiline_literal_string();</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    <a class="code hl_class" href="classneforce_1_1unique__ptr.html">unique_ptr&lt;toml_string&gt;</a> parse_multiline_literal_string();</div>
 <div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span></div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;toml_value&gt;</a> parse_number();</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    <a class="code hl_class" href="classneforce_1_1unique__ptr.html">unique_ptr&lt;toml_value&gt;</a> parse_number();</div>
 <div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span></div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;toml_integer&gt;</a> parse_integer(<span class="keywordtype">int</span> base = 10);</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <a class="code hl_class" href="classneforce_1_1unique__ptr.html">unique_ptr&lt;toml_integer&gt;</a> parse_integer(<span class="keywordtype">int</span> base = 10);</div>
 <div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span></div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;toml_boolean&gt;</a> parse_boolean();</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <a class="code hl_class" href="classneforce_1_1unique__ptr.html">unique_ptr&lt;toml_boolean&gt;</a> parse_boolean();</div>
 <div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span></div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;toml_datetime&gt;</a> parse_datetime();</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    <a class="code hl_class" href="classneforce_1_1unique__ptr.html">unique_ptr&lt;toml_datetime&gt;</a> parse_datetime();</div>
 <div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span></div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;toml_array&gt;</a> parse_array();</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    <a class="code hl_class" href="classneforce_1_1unique__ptr.html">unique_ptr&lt;toml_array&gt;</a> parse_array();</div>
 <div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span></div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;toml_table&gt;</a> parse_inline_table();</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    <a class="code hl_class" href="classneforce_1_1unique__ptr.html">unique_ptr&lt;toml_table&gt;</a> parse_inline_table();</div>
 <div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span></div>
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    <span class="keywordtype">string</span> parse_key();</div>
 <div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span></div>
@@ -178,9 +178,9 @@ $(function(){initNavTree('toml__parser_8hpp_source.html','',''); });
 <div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span></div>
 <div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    <span class="keywordtype">string</span> parse_quoted_key();</div>
 <div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span></div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a> parse_dotted_key();</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    <a class="code hl_class" href="classneforce_1_1vector.html">vector&lt;string&gt;</a> parse_dotted_key();</div>
 <div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span></div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;toml_value&gt;</a> parse_value();</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    <a class="code hl_class" href="classneforce_1_1unique__ptr.html">unique_ptr&lt;toml_value&gt;</a> parse_value();</div>
 <div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span></div>
 <div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    <span class="keywordtype">void</span> parse_key_value();</div>
 <div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span></div>
@@ -188,25 +188,25 @@ $(function(){initNavTree('toml__parser_8hpp_source.html','',''); });
 <div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span></div>
 <div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    <span class="keywordtype">void</span> parse_array_table_header();</div>
 <div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span></div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    NEFORCE_NODISCARD <a class="code hl_class" href="classtoml__table.html">toml_table</a>* get_or_create_table(<span class="keyword">const</span> <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a>&amp; <a class="code hl_class" href="classpath.html">path</a>) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    NEFORCE_NODISCARD <a class="code hl_class" href="classneforce_1_1toml__table.html">toml_table</a>* get_or_create_table(<span class="keyword">const</span> <a class="code hl_class" href="classneforce_1_1vector.html">vector&lt;string&gt;</a>&amp; <a class="code hl_class" href="classneforce_1_1path.html">path</a>) <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span></div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    NEFORCE_NODISCARD <a class="code hl_class" href="classtoml__table.html">toml_table</a>* navigate_to_table(<span class="keyword">const</span> <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a>&amp; <a class="code hl_class" href="classpath.html">path</a>) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    NEFORCE_NODISCARD <a class="code hl_class" href="classneforce_1_1toml__table.html">toml_table</a>* navigate_to_table(<span class="keyword">const</span> <a class="code hl_class" href="classneforce_1_1vector.html">vector&lt;string&gt;</a>&amp; <a class="code hl_class" href="classneforce_1_1path.html">path</a>) <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span></div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>    <span class="keywordtype">void</span> set_current_table(<span class="keyword">const</span> <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a>&amp; <a class="code hl_class" href="classpath.html">path</a>);</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>    <span class="keywordtype">void</span> set_current_table(<span class="keyword">const</span> <a class="code hl_class" href="classneforce_1_1vector.html">vector&lt;string&gt;</a>&amp; <a class="code hl_class" href="classneforce_1_1path.html">path</a>);</div>
 <div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span> </div>
 <div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span><span class="keyword">public</span>:</div>
 <div class="foldopen" id="foldopen00352" data-start="{" data-end="}">
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno"><a class="line" href="classtoml__parser.html#a54c1c00efb29395d0ecf30fc5f1916ec">  352</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classtoml__parser.html#a54c1c00efb29395d0ecf30fc5f1916ec">toml_parser</a>(<span class="keywordtype">string</span> text) :</div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    text_(_NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(text)),</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    len_(text_.<a class="code hl_function" href="group___type_erasure_functions.html#ga630d7b0d77515784d2391b3725ac6df0">size</a>()) {</div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>        root_ = <a class="code hl_function" href="group___unique_pointer.html#ga20caa9b68a94ba614667d6ec6585c044">make_unique&lt;toml_table&gt;</a>();</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno"><a class="line" href="classneforce_1_1toml__parser.html#a94185c97b9fa6e4429e32f4c48f1cb20">  352</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classneforce_1_1toml__parser.html#a94185c97b9fa6e4429e32f4c48f1cb20">toml_parser</a>(<span class="keywordtype">string</span> text) :</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    text_(_NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#gae346eba5fb576da65e097b60463d3790">move</a>(text)),</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    len_(text_.<a class="code hl_function" href="group___type_erasure_functions.html#ga69955a26617401117eaf53fa82162e2b">size</a>()) {</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>        root_ = <a class="code hl_function" href="group___unique_pointer.html#ga86ab9db93326b3badc11a15d1c0e3007">make_unique&lt;toml_table&gt;</a>();</div>
 <div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>        ctb_ = root_.get();</div>
 <div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>    }</div>
 </div>
 <div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span></div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno"><a class="line" href="classtoml__parser.html#a4b704c54f777bcf04f9eeee374e1c58e">  366</a></span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;toml_table&gt;</a> <a class="code hl_function" href="classtoml__parser.html#a4b704c54f777bcf04f9eeee374e1c58e">parse</a>();</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno"><a class="line" href="classneforce_1_1toml__parser.html#aaf04fb90b00907f28f44e4fb1f2514cc">  366</a></span>    <a class="code hl_class" href="classneforce_1_1unique__ptr.html">unique_ptr&lt;toml_table&gt;</a> <a class="code hl_function" href="classneforce_1_1toml__parser.html#aaf04fb90b00907f28f44e4fb1f2514cc">parse</a>();</div>
 <div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span></div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno"><a class="line" href="classtoml__parser.html#afbdb18ee2bfd5d7bb16c61d478b958e0">  375</a></span>    <a class="code hl_class" href="classoptional.html">optional&lt;unique_ptr&lt;toml_table&gt;</a>&gt; <a class="code hl_function" href="classtoml__parser.html#afbdb18ee2bfd5d7bb16c61d478b958e0">try_parse</a>();</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno"><a class="line" href="classneforce_1_1toml__parser.html#a54990158e8dabcbdc4a1e9850e0b234b">  375</a></span>    <a class="code hl_class" href="classneforce_1_1optional.html">optional&lt;unique_ptr&lt;toml_table&gt;</a>&gt; <a class="code hl_function" href="classneforce_1_1toml__parser.html#a54990158e8dabcbdc4a1e9850e0b234b">try_parse</a>();</div>
 <div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>};</div>
 </div>
 <div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span> <span class="comment">// TomlConfig</span></div>
@@ -214,21 +214,19 @@ $(function(){initNavTree('toml__parser_8hpp_source.html','',''); });
 <div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span> </div>
 <div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>NEFORCE_END_NAMESPACE__</div>
 <div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_FILE_TOML_TOML_PARSER_HPP__</span></div>
-<div class="ttc" id="aclasscodepoint_html"><div class="ttname"><a href="classcodepoint.html">codepoint</a></div><div class="ttdoc">Unicode码点包装类</div><div class="ttdef"><b>定义</b> <a href="codepoint_8hpp_source.html#l00126">codepoint.hpp:126</a></div></div>
-<div class="ttc" id="aclassoptional_html"><div class="ttname"><a href="classoptional.html">optional</a></div><div class="ttdoc">可选值类</div><div class="ttdef"><b>定义</b> <a href="optional_8hpp_source.html#l00071">optional.hpp:71</a></div></div>
-<div class="ttc" id="aclasspath_html"><div class="ttname"><a href="classpath.html">path</a></div><div class="ttdoc">文件路径类</div><div class="ttdef"><b>定义</b> <a href="path_8hpp_source.html#l00036">path.hpp:36</a></div></div>
-<div class="ttc" id="aclasstable_html"><div class="ttname"><a href="classtable.html">table</a></div><div class="ttdoc">声明式表格构建器</div><div class="ttdef"><b>定义</b> <a href="table_8hpp_source.html#l00033">table.hpp:33</a></div></div>
-<div class="ttc" id="aclasstoml__parser_html_a4b704c54f777bcf04f9eeee374e1c58e"><div class="ttname"><a href="classtoml__parser.html#a4b704c54f777bcf04f9eeee374e1c58e">toml_parser::parse</a></div><div class="ttdeci">unique_ptr&lt; toml_table &gt; parse()</div><div class="ttdoc">执行解析</div></div>
-<div class="ttc" id="aclasstoml__parser_html_a54c1c00efb29395d0ecf30fc5f1916ec"><div class="ttname"><a href="classtoml__parser.html#a54c1c00efb29395d0ecf30fc5f1916ec">toml_parser::toml_parser</a></div><div class="ttdeci">toml_parser(string text)</div><div class="ttdoc">构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00352">toml_parser.hpp:352</a></div></div>
-<div class="ttc" id="aclasstoml__parser_html_afbdb18ee2bfd5d7bb16c61d478b958e0"><div class="ttname"><a href="classtoml__parser.html#afbdb18ee2bfd5d7bb16c61d478b958e0">toml_parser::try_parse</a></div><div class="ttdeci">optional&lt; unique_ptr&lt; toml_table &gt; &gt; try_parse()</div><div class="ttdoc">尝试执行解析</div></div>
-<div class="ttc" id="aclasstoml__table_html"><div class="ttname"><a href="classtoml__table.html">toml_table</a></div><div class="ttdoc">TOML表格类</div><div class="ttdef"><b>定义</b> <a href="toml__value_8hpp_source.html#l00670">toml_value.hpp:670</a></div></div>
-<div class="ttc" id="aclassunique__ptr_html"><div class="ttname"><a href="classunique__ptr.html">unique_ptr</a></div><div class="ttdoc">独占智能指针</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00206">unique_ptr.hpp:206</a></div></div>
-<div class="ttc" id="aclassvector_html"><div class="ttname"><a href="classvector.html">vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00167">vector.hpp:167</a></div></div>
+<div class="ttc" id="aclassneforce_1_1codepoint_html"><div class="ttname"><a href="classneforce_1_1codepoint.html">neforce::codepoint</a></div><div class="ttdoc">Unicode码点包装类</div><div class="ttdef"><b>定义</b> <a href="codepoint_8hpp_source.html#l00126">codepoint.hpp:126</a></div></div>
+<div class="ttc" id="aclassneforce_1_1optional_html"><div class="ttname"><a href="classneforce_1_1optional.html">neforce::optional</a></div><div class="ttdoc">可选值类</div><div class="ttdef"><b>定义</b> <a href="optional_8hpp_source.html#l00071">optional.hpp:71</a></div></div>
+<div class="ttc" id="aclassneforce_1_1path_html"><div class="ttname"><a href="classneforce_1_1path.html">neforce::path</a></div><div class="ttdoc">文件路径类</div><div class="ttdef"><b>定义</b> <a href="path_8hpp_source.html#l00036">path.hpp:36</a></div></div>
+<div class="ttc" id="aclassneforce_1_1toml__parser_html_a54990158e8dabcbdc4a1e9850e0b234b"><div class="ttname"><a href="classneforce_1_1toml__parser.html#a54990158e8dabcbdc4a1e9850e0b234b">neforce::toml_parser::try_parse</a></div><div class="ttdeci">optional&lt; unique_ptr&lt; toml_table &gt; &gt; try_parse()</div><div class="ttdoc">尝试执行解析</div></div>
+<div class="ttc" id="aclassneforce_1_1toml__parser_html_a94185c97b9fa6e4429e32f4c48f1cb20"><div class="ttname"><a href="classneforce_1_1toml__parser.html#a94185c97b9fa6e4429e32f4c48f1cb20">neforce::toml_parser::toml_parser</a></div><div class="ttdeci">toml_parser(string text)</div><div class="ttdoc">构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00352">toml_parser.hpp:352</a></div></div>
+<div class="ttc" id="aclassneforce_1_1toml__parser_html_aaf04fb90b00907f28f44e4fb1f2514cc"><div class="ttname"><a href="classneforce_1_1toml__parser.html#aaf04fb90b00907f28f44e4fb1f2514cc">neforce::toml_parser::parse</a></div><div class="ttdeci">unique_ptr&lt; toml_table &gt; parse()</div><div class="ttdoc">执行解析</div></div>
+<div class="ttc" id="aclassneforce_1_1toml__table_html"><div class="ttname"><a href="classneforce_1_1toml__table.html">neforce::toml_table</a></div><div class="ttdoc">TOML表格类</div><div class="ttdef"><b>定义</b> <a href="toml__value_8hpp_source.html#l00670">toml_value.hpp:670</a></div></div>
+<div class="ttc" id="aclassneforce_1_1unique__ptr_html"><div class="ttname"><a href="classneforce_1_1unique__ptr.html">neforce::unique_ptr</a></div><div class="ttdoc">独占智能指针</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00206">unique_ptr.hpp:206</a></div></div>
+<div class="ttc" id="aclassneforce_1_1vector_html"><div class="ttname"><a href="classneforce_1_1vector.html">neforce::vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00167">vector.hpp:167</a></div></div>
 <div class="ttc" id="acodepoint_8hpp_html"><div class="ttname"><a href="codepoint_8hpp.html">codepoint.hpp</a></div><div class="ttdoc">Unicode码点处理类</div></div>
-<div class="ttc" id="agroup___iterator_operation_html_ga0ebe1ee99151c272bdedc1a48d148aa2"><div class="ttname"><a href="group___iterator_operation.html#ga0ebe1ee99151c272bdedc1a48d148aa2">advance</a></div><div class="ttdeci">constexpr void advance(Iterator &amp;i, Distance n)</div><div class="ttdoc">将迭代器前进指定距离</div><div class="ttdef"><b>定义</b> <a href="iterator_8hpp_source.html#l00106">iterator.hpp:106</a></div></div>
-<div class="ttc" id="agroup___shift_algorithms_html_ga5cf63a30ac8a14718fe8e9a65e1267ac"><div class="ttname"><a href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00312">shift.hpp:312</a></div></div>
-<div class="ttc" id="agroup___type_erasure_functions_html_ga630d7b0d77515784d2391b3725ac6df0"><div class="ttname"><a href="group___type_erasure_functions.html#ga630d7b0d77515784d2391b3725ac6df0">size</a></div><div class="ttdeci">constexpr decltype(auto) size(const Container &amp;cont) noexcept(noexcept(cont.size()))</div><div class="ttdoc">获取容器的大小</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00292">type_erase.hpp:292</a></div></div>
-<div class="ttc" id="agroup___unique_pointer_html_ga20caa9b68a94ba614667d6ec6585c044"><div class="ttname"><a href="group___unique_pointer.html#ga20caa9b68a94ba614667d6ec6585c044">make_unique</a></div><div class="ttdeci">constexpr unique_ptr&lt; T &gt; make_unique(Args &amp;&amp;... args)</div><div class="ttdoc">创建unique_ptr</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00973">unique_ptr.hpp:973</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_gae346eba5fb576da65e097b60463d3790"><div class="ttname"><a href="group___shift_algorithms.html#gae346eba5fb576da65e097b60463d3790">neforce::move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00312">shift.hpp:312</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_ga69955a26617401117eaf53fa82162e2b"><div class="ttname"><a href="group___type_erasure_functions.html#ga69955a26617401117eaf53fa82162e2b">neforce::size</a></div><div class="ttdeci">constexpr decltype(auto) size(const Container &amp;cont) noexcept(noexcept(cont.size()))</div><div class="ttdoc">获取容器的大小</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00292">type_erase.hpp:292</a></div></div>
+<div class="ttc" id="agroup___unique_pointer_html_ga86ab9db93326b3badc11a15d1c0e3007"><div class="ttname"><a href="group___unique_pointer.html#ga86ab9db93326b3badc11a15d1c0e3007">neforce::make_unique</a></div><div class="ttdeci">constexpr unique_ptr&lt; T &gt; make_unique(Args &amp;&amp;... args)</div><div class="ttdoc">创建unique_ptr</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00973">unique_ptr.hpp:973</a></div></div>
 <div class="ttc" id="aoptional_8hpp_html"><div class="ttname"><a href="optional_8hpp.html">optional.hpp</a></div><div class="ttdoc">可选值类型</div></div>
 <div class="ttc" id="atoml__value_8hpp_html"><div class="ttname"><a href="toml__value_8hpp.html">toml_value.hpp</a></div><div class="ttdoc">TOML配置格式变量</div></div>
 </div><!-- fragment --></div><!-- contents -->

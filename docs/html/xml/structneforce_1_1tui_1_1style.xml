@@ -1,0 +1,913 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1tui_1_1style" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::tui::style</compoundname>
+    <includes refid="style_8hpp" local="no">style.hpp</includes>
+    <innerclass refid="structneforce_1_1tui_1_1style_1_1padding" prot="public">neforce::tui::style::padding</innerclass>
+    <innerclass refid="structneforce_1_1tui_1_1style_1_1margin" prot="public">neforce::tui::style::margin</innerclass>
+    <innerclass refid="structneforce_1_1tui_1_1style_1_1size__hint" prot="public">neforce::tui::style::size_hint</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="structneforce_1_1tui_1_1style_1ae5c8f68a549e01b1532413beb6969b41" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref></type>
+        <name>border</name>
+        <qualifiedname>neforce::tui::style::border</qualifiedname>
+        <enumvalue id="structneforce_1_1tui_1_1style_1ae5c8f68a549e01b1532413beb6969b41a334c4a4c42fdb79d7ebc3e73b517e6f8" prot="public">
+          <name>none</name>
+          <briefdescription>
+<para>无边框 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1tui_1_1style_1ae5c8f68a549e01b1532413beb6969b41add5c07036f2975ff4bce568b6511d3bc" prot="public">
+          <name>single</name>
+          <briefdescription>
+<para>单线边框 ┌─┐│└─┘ </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1tui_1_1style_1ae5c8f68a549e01b1532413beb6969b41a9ff848d203d671e297c98886f9fc0bd9" prot="public">
+          <name>double_</name>
+          <briefdescription>
+<para>双线边框 ╔═╗║╚═╝ </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1tui_1_1style_1ae5c8f68a549e01b1532413beb6969b41a990fcd0ba3c5c9e322c930c83a93be48" prot="public">
+          <name>rounded</name>
+          <briefdescription>
+<para>圆角边框 ╭─╮│╰─╯ </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>边框样式 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="49" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="49" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="enum" id="structneforce_1_1tui_1_1style_1a1748e1bc1c7db9d9fe5a2678d0825f61" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref></type>
+        <name>align</name>
+        <qualifiedname>neforce::tui::style::align</qualifiedname>
+        <enumvalue id="structneforce_1_1tui_1_1style_1a1748e1bc1c7db9d9fe5a2678d0825f61aea2b2676c28c0db26d39331a336c6b92" prot="public">
+          <name>start</name>
+          <briefdescription>
+<para>起始对齐 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1tui_1_1style_1a1748e1bc1c7db9d9fe5a2678d0825f61aadb115059e28d960fa8badfac5516667" prot="public">
+          <name>center</name>
+          <briefdescription>
+<para>居中对齐 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1tui_1_1style_1a1748e1bc1c7db9d9fe5a2678d0825f61a7f021a1415b86f2d013b2618fb31ae53" prot="public">
+          <name>end</name>
+          <briefdescription>
+<para>末尾对齐 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1tui_1_1style_1a1748e1bc1c7db9d9fe5a2678d0825f61a7e84944493e379c33782eb1c9ecb82c3" prot="public">
+          <name>stretch</name>
+          <briefdescription>
+<para>拉伸填充 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>对齐方式 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="59" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="59" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="enum" id="structneforce_1_1tui_1_1style_1a63c373a51366fa91ac11cd9c65d101e4" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref></type>
+        <name>justify</name>
+        <qualifiedname>neforce::tui::style::justify</qualifiedname>
+        <enumvalue id="structneforce_1_1tui_1_1style_1a63c373a51366fa91ac11cd9c65d101e4aea2b2676c28c0db26d39331a336c6b92" prot="public">
+          <name>start</name>
+          <briefdescription>
+<para>起始对齐 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1tui_1_1style_1a63c373a51366fa91ac11cd9c65d101e4aadb115059e28d960fa8badfac5516667" prot="public">
+          <name>center</name>
+          <briefdescription>
+<para>居中对齐 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1tui_1_1style_1a63c373a51366fa91ac11cd9c65d101e4a7f021a1415b86f2d013b2618fb31ae53" prot="public">
+          <name>end</name>
+          <briefdescription>
+<para>末尾对齐 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1tui_1_1style_1a63c373a51366fa91ac11cd9c65d101e4ac216eee7ecaa1719d5030289ab864826" prot="public">
+          <name>space_between</name>
+          <briefdescription>
+<para>两端对齐，元素之间均匀分布 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1tui_1_1style_1a63c373a51366fa91ac11cd9c65d101e4aa859ffca3c0e583c05a2bf0bd61c50db" prot="public">
+          <name>space_around</name>
+          <briefdescription>
+<para>环绕对齐，每个元素两侧有相等间距 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>主轴对齐方式 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="69" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="69" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="enum" id="structneforce_1_1tui_1_1style_1a194151bb3049cfbbf7db04d1320395d2" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref></type>
+        <name>direction</name>
+        <qualifiedname>neforce::tui::style::direction</qualifiedname>
+        <enumvalue id="structneforce_1_1tui_1_1style_1a194151bb3049cfbbf7db04d1320395d2af1965a857bc285d26fe22023aa5ab50d" prot="public">
+          <name>row</name>
+          <briefdescription>
+<para>水平排列 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1tui_1_1style_1a194151bb3049cfbbf7db04d1320395d2a1afd32818d1c9525f82aff4c09efd254" prot="public">
+          <name>column</name>
+          <briefdescription>
+<para>垂直排列 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>布局方向 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="80" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="80" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="enum" id="structneforce_1_1tui_1_1style_1a69e17ecb9916e10ebeebeed2140eed0d" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref></type>
+        <name>variant</name>
+        <qualifiedname>neforce::tui::style::variant</qualifiedname>
+        <enumvalue id="structneforce_1_1tui_1_1style_1a69e17ecb9916e10ebeebeed2140eed0da172b03053216c6158fe380805998ad6c" prot="public">
+          <name>default_</name>
+          <briefdescription>
+<para>默认样式 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1tui_1_1style_1a69e17ecb9916e10ebeebeed2140eed0da386bba5a5dc4fac215c9cf0b9a29b352" prot="public">
+          <name>primary</name>
+          <briefdescription>
+<para>主要操作 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1tui_1_1style_1a69e17ecb9916e10ebeebeed2140eed0da1f7ba58706f9d405023da32864d059c8" prot="public">
+          <name>secondary</name>
+          <briefdescription>
+<para>次要操作 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1tui_1_1style_1a69e17ecb9916e10ebeebeed2140eed0dab136ee6c797c1a851260b9c1ab5ff414" prot="public">
+          <name>danger</name>
+          <briefdescription>
+<para>危险操作 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1tui_1_1style_1a69e17ecb9916e10ebeebeed2140eed0da260ca9dd8a4577fc00b7bd5810298076" prot="public">
+          <name>success</name>
+          <briefdescription>
+<para>成功/确认操作 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>组件语义变体 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="88" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="88" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="enum" id="structneforce_1_1tui_1_1style_1aa500f23e2f8cfb586733561897fe2ad4" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref></type>
+        <name>wrap_mode</name>
+        <qualifiedname>neforce::tui::style::wrap_mode</qualifiedname>
+        <enumvalue id="structneforce_1_1tui_1_1style_1aa500f23e2f8cfb586733561897fe2ad4a334c4a4c42fdb79d7ebc3e73b517e6f8" prot="public">
+          <name>none</name>
+          <briefdescription>
+<para>不换行，超出截断 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1tui_1_1style_1aa500f23e2f8cfb586733561897fe2ad4ac47d187067c6cf953245f128b5fde62a" prot="public">
+          <name>word</name>
+          <briefdescription>
+<para>按单词边界换行 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1tui_1_1style_1aa500f23e2f8cfb586733561897fe2ad4aa956161a69928cd130a889b88082fb6e" prot="public">
+          <name>character</name>
+          <briefdescription>
+<para>按字符边界换行 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>文本换行模式 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="99" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="99" bodyend="103"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structneforce_1_1tui_1_1style_1a0f3ff8ee959b106e18f811819524afe8" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; <ref refid="group___t_u_i_1ga5a6710b179fd24c551c9b1c8c1719f0d" kindref="member">color</ref> &gt;</type>
+        <definition>optional&lt;color&gt; neforce::tui::style::fg</definition>
+        <argsstring></argsstring>
+        <name>fg</name>
+        <qualifiedname>neforce::tui::style::fg</qualifiedname>
+        <briefdescription>
+<para>前景色 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="125" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="125" bodyend="-1"/>
+        <referencedby refid="group___t_u_i_1ga5a6710b179fd24c551c9b1c8c1719f0d" compoundref="element_8hpp" startline="329" endline="335">neforce::tui::color</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1tui_1_1style_1afd988254fa3779ea686794cebec64e52" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; <ref refid="group___t_u_i_1ga5a6710b179fd24c551c9b1c8c1719f0d" kindref="member">color</ref> &gt;</type>
+        <definition>optional&lt;color&gt; neforce::tui::style::bg</definition>
+        <argsstring></argsstring>
+        <name>bg</name>
+        <qualifiedname>neforce::tui::style::bg</qualifiedname>
+        <briefdescription>
+<para>背景色 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="126" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="126" bodyend="-1"/>
+        <referencedby refid="group___t_u_i_1ga30575c5ee613bf29d32fcdf21411ad9b" compoundref="element_8hpp" startline="339" endline="345">neforce::tui::bgcolor</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1tui_1_1style_1afe18b79d3a4bd1ddd58a05e16d94ab39" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; bool &gt;</type>
+        <definition>optional&lt;bool&gt; neforce::tui::style::bold</definition>
+        <argsstring></argsstring>
+        <name>bold</name>
+        <qualifiedname>neforce::tui::style::bold</qualifiedname>
+        <briefdescription>
+<para>粗体 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="128" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="128" bodyend="-1"/>
+        <referencedby refid="group___t_u_i_1ga16ce65d36fbcb291f4349a4ac00bf672" compoundref="element_8hpp" startline="256" endline="262">neforce::tui::bold</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1tui_1_1style_1aa16dec6136add1fc5b39b3e79a87160a" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; bool &gt;</type>
+        <definition>optional&lt;bool&gt; neforce::tui::style::dim</definition>
+        <argsstring></argsstring>
+        <name>dim</name>
+        <qualifiedname>neforce::tui::style::dim</qualifiedname>
+        <briefdescription>
+<para>暗色 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="129" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="129" bodyend="-1"/>
+        <referencedby refid="group___t_u_i_1ga90e7dc6567524f889b2ce7db0ddd7fb8" compoundref="element_8hpp" startline="265" endline="271">neforce::tui::dim</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1tui_1_1style_1a0cf16846f050dab752e60e34e71c3169" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; bool &gt;</type>
+        <definition>optional&lt;bool&gt; neforce::tui::style::underline</definition>
+        <argsstring></argsstring>
+        <name>underline</name>
+        <qualifiedname>neforce::tui::style::underline</qualifiedname>
+        <briefdescription>
+<para>单下划线 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="130" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="130" bodyend="-1"/>
+        <referencedby refid="group___t_u_i_1gaa83ea4874d3c6511ce59be46964e0939" compoundref="element_8hpp" startline="283" endline="289">neforce::tui::underlined</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1tui_1_1style_1a55ee92f4c8c9c15fcfeb403f82a25e19" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; bool &gt;</type>
+        <definition>optional&lt;bool&gt; neforce::tui::style::underlined_double</definition>
+        <argsstring></argsstring>
+        <name>underlined_double</name>
+        <qualifiedname>neforce::tui::style::underlined_double</qualifiedname>
+        <briefdescription>
+<para>双下划线 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="131" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="131" bodyend="-1"/>
+        <referencedby refid="group___t_u_i_1ga69a196e074b14a70b17c2c3b451bcab4" compoundref="element_8hpp" startline="292" endline="298">neforce::tui::underlined_double</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1tui_1_1style_1aefd4fd37ce40a9192898a34185bd9650" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; bool &gt;</type>
+        <definition>optional&lt;bool&gt; neforce::tui::style::italic</definition>
+        <argsstring></argsstring>
+        <name>italic</name>
+        <qualifiedname>neforce::tui::style::italic</qualifiedname>
+        <briefdescription>
+<para>斜体 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="132" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="132" bodyend="-1"/>
+        <referencedby refid="group___t_u_i_1ga10fe7efc13a67e5dbd5d7e170d7be8d8" compoundref="element_8hpp" startline="274" endline="280">neforce::tui::italic</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1tui_1_1style_1aa1c48aac16670631b698a4d2a16f192c" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; bool &gt;</type>
+        <definition>optional&lt;bool&gt; neforce::tui::style::reverse</definition>
+        <argsstring></argsstring>
+        <name>reverse</name>
+        <qualifiedname>neforce::tui::style::reverse</qualifiedname>
+        <briefdescription>
+<para>反色 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="133" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="133" bodyend="-1"/>
+        <referencedby refid="group___t_u_i_1gaa01832cd26c963800adb481e75cfe7eb" compoundref="element_8hpp" startline="319" endline="325">neforce::tui::inverted</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1tui_1_1style_1a8d3863af28c51f57fd7cdd83fb506a8d" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; bool &gt;</type>
+        <definition>optional&lt;bool&gt; neforce::tui::style::blink</definition>
+        <argsstring></argsstring>
+        <name>blink</name>
+        <qualifiedname>neforce::tui::style::blink</qualifiedname>
+        <briefdescription>
+<para>闪烁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="134" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="134" bodyend="-1"/>
+        <referencedby refid="group___t_u_i_1ga4827ebce9ae89c56c8f064dfce7ff624" compoundref="element_8hpp" startline="301" endline="307">neforce::tui::blink</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1tui_1_1style_1ad7969e2792d0c5d9b73b6afdcb5777db" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; bool &gt;</type>
+        <definition>optional&lt;bool&gt; neforce::tui::style::strikethrough</definition>
+        <argsstring></argsstring>
+        <name>strikethrough</name>
+        <qualifiedname>neforce::tui::style::strikethrough</qualifiedname>
+        <briefdescription>
+<para>删除线 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="135" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="135" bodyend="-1"/>
+        <referencedby refid="group___t_u_i_1ga4451883450bbf0855acb67f3a9d971df" compoundref="element_8hpp" startline="310" endline="316">neforce::tui::strikethrough</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1tui_1_1style_1aa894165160cf38aa13412025c8bbc541" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; padding &gt;</type>
+        <definition>optional&lt;padding&gt; neforce::tui::style::padding</definition>
+        <argsstring></argsstring>
+        <name>padding</name>
+        <qualifiedname>neforce::tui::style::padding</qualifiedname>
+        <briefdescription>
+<para>内边距 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="137" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1tui_1_1style_1a805bf9e26c36b782c19ffdc9b2c51429" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; margin &gt;</type>
+        <definition>optional&lt;margin&gt; neforce::tui::style::margin</definition>
+        <argsstring></argsstring>
+        <name>margin</name>
+        <qualifiedname>neforce::tui::style::margin</qualifiedname>
+        <briefdescription>
+<para>外边距 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="138" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="138" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1tui_1_1style_1a3b6af2ee5c9604b4f91c530c9b93d060" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; <ref refid="structneforce_1_1tui_1_1style_1ae5c8f68a549e01b1532413beb6969b41" kindref="member">border</ref> &gt;</type>
+        <definition>optional&lt;border&gt; neforce::tui::style::border</definition>
+        <argsstring></argsstring>
+        <name>border</name>
+        <qualifiedname>neforce::tui::style::border</qualifiedname>
+        <briefdescription>
+<para>边框样式 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="139" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1tui_1_1style_1a7f3896a132849b032e53c1eb7e179b78" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; <ref refid="group___t_u_i_1ga5a6710b179fd24c551c9b1c8c1719f0d" kindref="member">color</ref> &gt;</type>
+        <definition>optional&lt;color&gt; neforce::tui::style::borderColor</definition>
+        <argsstring></argsstring>
+        <name>borderColor</name>
+        <qualifiedname>neforce::tui::style::borderColor</qualifiedname>
+        <briefdescription>
+<para>边框颜色 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="140" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1tui_1_1style_1a76793c57b4c0ac6a0c3f86e92ded5e14" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; <ref refid="structneforce_1_1tui_1_1style_1_1size__hint" kindref="compound">size_hint</ref> &gt;</type>
+        <definition>optional&lt;size_hint&gt; neforce::tui::style::width</definition>
+        <argsstring></argsstring>
+        <name>width</name>
+        <qualifiedname>neforce::tui::style::width</qualifiedname>
+        <briefdescription>
+<para>宽度约束 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="141" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1tui_1_1style_1af22fcd420f46657084dd00110f864e61" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; <ref refid="structneforce_1_1tui_1_1style_1_1size__hint" kindref="compound">size_hint</ref> &gt;</type>
+        <definition>optional&lt;size_hint&gt; neforce::tui::style::height</definition>
+        <argsstring></argsstring>
+        <name>height</name>
+        <qualifiedname>neforce::tui::style::height</qualifiedname>
+        <briefdescription>
+<para>高度约束 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="142" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1tui_1_1style_1aac52cc335ba18a70fb9a95bf90a72281" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; <ref refid="structneforce_1_1tui_1_1style_1a1748e1bc1c7db9d9fe5a2678d0825f61" kindref="member">align</ref> &gt;</type>
+        <definition>optional&lt;align&gt; neforce::tui::style::align</definition>
+        <argsstring></argsstring>
+        <name>align</name>
+        <qualifiedname>neforce::tui::style::align</qualifiedname>
+        <briefdescription>
+<para>默认对齐方式 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="143" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1tui_1_1style_1a4316cac1da67b335ba206191eec89739" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; float &gt;</type>
+        <definition>optional&lt;float&gt; neforce::tui::style::flex_grow</definition>
+        <argsstring></argsstring>
+        <name>flex_grow</name>
+        <qualifiedname>neforce::tui::style::flex_grow</qualifiedname>
+        <briefdescription>
+<para>弹性增长权重 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="144" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="144" bodyend="-1"/>
+        <referencedby refid="group___t_u_i_1gabe4c0690cf478e4f2daabbd2dec127da" compoundref="element_8hpp" startline="380" endline="387">neforce::tui::flex_el</referencedby>
+        <referencedby refid="group___t_u_i_1ga09b14da9bd2fce236c6ad7eae5d0f150" compoundref="element_8hpp" startline="359" endline="365">neforce::tui::flex_grow_el</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1tui_1_1style_1abb0cdc29c8f8e6df272da968093bd364" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; float &gt;</type>
+        <definition>optional&lt;float&gt; neforce::tui::style::flex_shrink</definition>
+        <argsstring></argsstring>
+        <name>flex_shrink</name>
+        <qualifiedname>neforce::tui::style::flex_shrink</qualifiedname>
+        <briefdescription>
+<para>弹性收缩权重 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="145" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="145" bodyend="-1"/>
+        <referencedby refid="group___t_u_i_1gabe4c0690cf478e4f2daabbd2dec127da" compoundref="element_8hpp" startline="380" endline="387">neforce::tui::flex_el</referencedby>
+        <referencedby refid="group___t_u_i_1gaab2299244a504409fc743623883cd2a9" compoundref="element_8hpp" startline="369" endline="375">neforce::tui::flex_shrink_el</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1tui_1_1style_1ad0499b5c6836cc173830a8bdce56f6a7" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; <ref refid="structneforce_1_1tui_1_1style_1aa500f23e2f8cfb586733561897fe2ad4" kindref="member">wrap_mode</ref> &gt;</type>
+        <definition>optional&lt;wrap_mode&gt; neforce::tui::style::text_wrap</definition>
+        <argsstring></argsstring>
+        <name>text_wrap</name>
+        <qualifiedname>neforce::tui::style::text_wrap</qualifiedname>
+        <briefdescription>
+<para>文本换行模式 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="146" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="146" bodyend="-1"/>
+        <referencedby refid="group___t_u_i_1gaa5c37868d6050af442a23b2ac63b876f" compoundref="element_8hpp" startline="391" endline="397">neforce::tui::text_wrap</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structneforce_1_1tui_1_1style_1ada995faa9d1d87a81f5dabbb51df3a36" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1tui_1_1style" kindref="compound">style</ref></type>
+        <definition>static style neforce::tui::style::merge</definition>
+        <argsstring>(const style &amp;base, const style &amp;over)</argsstring>
+        <name>merge</name>
+        <qualifiedname>neforce::tui::style::merge</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1tui_1_1style" kindref="compound">style</ref> &amp;</type>
+          <declname>base</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structneforce_1_1tui_1_1style" kindref="compound">style</ref> &amp;</type>
+          <declname>over</declname>
+        </param>
+        <briefdescription>
+<para>合并两个样式 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>基础样式 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>over</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>覆盖样式 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>合并后的样式 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="154" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>样式 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="7">
+        <label>neforce::icommon&lt; optional&lt; align &gt; &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>neforce::icommon&lt; optional&lt; bool &gt; &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+        <childnode refid="17" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::icommon&lt; optional&lt; border &gt; &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>neforce::icommon&lt; optional&lt; float &gt; &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="32" relation="public-inheritance">
+        </childnode>
+        <childnode refid="33" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>neforce::icommon&lt; optional&lt; neforce::color &gt; &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+        <childnode refid="13" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>neforce::icommon&lt; optional&lt; neforce::tui::style::margin &gt; &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+        <childnode refid="25" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>neforce::icommon&lt; optional&lt; neforce::tui::style::padding &gt; &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="20" relation="public-inheritance">
+        </childnode>
+        <childnode refid="21" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>neforce::icommon&lt; optional&lt; neforce::tui::style::size_hint &gt; &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="28" relation="public-inheritance">
+        </childnode>
+        <childnode refid="29" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>neforce::icommon&lt; optional&lt; wrap_mode &gt; &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="36" relation="public-inheritance">
+        </childnode>
+        <childnode refid="37" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>neforce::icomparable&lt; optional&lt; align &gt; &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="16">
+        <label>neforce::icomparable&lt; optional&lt; bool &gt; &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="4">
+        <label>neforce::icomparable&lt; optional&lt; border &gt; &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="32">
+        <label>neforce::icomparable&lt; optional&lt; float &gt; &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="12">
+        <label>neforce::icomparable&lt; optional&lt; neforce::color &gt; &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="24">
+        <label>neforce::icomparable&lt; optional&lt; neforce::tui::style::margin &gt; &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="20">
+        <label>neforce::icomparable&lt; optional&lt; neforce::tui::style::padding &gt; &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="28">
+        <label>neforce::icomparable&lt; optional&lt; neforce::tui::style::size_hint &gt; &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="36">
+        <label>neforce::icomparable&lt; optional&lt; wrap_mode &gt; &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="9">
+        <label>neforce::ihashable&lt; optional&lt; align &gt; &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="17">
+        <label>neforce::ihashable&lt; optional&lt; bool &gt; &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="5">
+        <label>neforce::ihashable&lt; optional&lt; border &gt; &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="33">
+        <label>neforce::ihashable&lt; optional&lt; float &gt; &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="13">
+        <label>neforce::ihashable&lt; optional&lt; neforce::color &gt; &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="25">
+        <label>neforce::ihashable&lt; optional&lt; neforce::tui::style::margin &gt; &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="21">
+        <label>neforce::ihashable&lt; optional&lt; neforce::tui::style::padding &gt; &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="29">
+        <label>neforce::ihashable&lt; optional&lt; neforce::tui::style::size_hint &gt; &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="37">
+        <label>neforce::ihashable&lt; optional&lt; wrap_mode &gt; &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="6">
+        <label>neforce::optional&lt; align &gt;</label>
+        <link refid="classneforce_1_1optional"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>neforce::optional&lt; bool &gt;</label>
+        <link refid="classneforce_1_1optional"/>
+        <childnode refid="15" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::optional&lt; border &gt;</label>
+        <link refid="classneforce_1_1optional"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>neforce::optional&lt; float &gt;</label>
+        <link refid="classneforce_1_1optional"/>
+        <childnode refid="31" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>neforce::optional&lt; neforce::color &gt;</label>
+        <link refid="classneforce_1_1optional"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>neforce::optional&lt; neforce::tui::style::margin &gt;</label>
+        <link refid="classneforce_1_1optional"/>
+        <childnode refid="23" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>neforce::optional&lt; neforce::tui::style::padding &gt;</label>
+        <link refid="classneforce_1_1optional"/>
+        <childnode refid="19" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>neforce::optional&lt; neforce::tui::style::size_hint &gt;</label>
+        <link refid="classneforce_1_1optional"/>
+        <childnode refid="27" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>neforce::optional&lt; wrap_mode &gt;</label>
+        <link refid="classneforce_1_1optional"/>
+        <childnode refid="35" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::tui::style</label>
+        <link refid="structneforce_1_1tui_1_1style"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>border</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>align</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>bg</edgelabel>
+          <edgelabel>borderColor</edgelabel>
+          <edgelabel>fg</edgelabel>
+        </childnode>
+        <childnode refid="14" relation="usage">
+          <edgelabel>blink</edgelabel>
+          <edgelabel>bold</edgelabel>
+          <edgelabel>dim</edgelabel>
+          <edgelabel>italic</edgelabel>
+          <edgelabel>reverse</edgelabel>
+          <edgelabel>strikethrough</edgelabel>
+          <edgelabel>underline</edgelabel>
+          <edgelabel>underlined_double</edgelabel>
+        </childnode>
+        <childnode refid="18" relation="usage">
+          <edgelabel>padding</edgelabel>
+        </childnode>
+        <childnode refid="22" relation="usage">
+          <edgelabel>margin</edgelabel>
+        </childnode>
+        <childnode refid="26" relation="usage">
+          <edgelabel>height</edgelabel>
+          <edgelabel>width</edgelabel>
+        </childnode>
+        <childnode refid="30" relation="usage">
+          <edgelabel>flex_grow</edgelabel>
+          <edgelabel>flex_shrink</edgelabel>
+        </childnode>
+        <childnode refid="34" relation="usage">
+          <edgelabel>text_wrap</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" line="25" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/dom/style.hpp" bodystart="25" bodyend="155"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1tui_1_1style_1a1748e1bc1c7db9d9fe5a2678d0825f61" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>align</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1aac52cc335ba18a70fb9a95bf90a72281" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>align</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1afd988254fa3779ea686794cebec64e52" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>bg</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1a8d3863af28c51f57fd7cdd83fb506a8d" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>blink</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1afe18b79d3a4bd1ddd58a05e16d94ab39" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>bold</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1ae5c8f68a549e01b1532413beb6969b41" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>border</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1a3b6af2ee5c9604b4f91c530c9b93d060" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>border</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1a7f3896a132849b032e53c1eb7e179b78" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>borderColor</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1aa16dec6136add1fc5b39b3e79a87160a" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>dim</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1a194151bb3049cfbbf7db04d1320395d2" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>direction</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1a0f3ff8ee959b106e18f811819524afe8" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>fg</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1a4316cac1da67b335ba206191eec89739" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>flex_grow</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1abb0cdc29c8f8e6df272da968093bd364" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>flex_shrink</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1af22fcd420f46657084dd00110f864e61" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>height</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1aefd4fd37ce40a9192898a34185bd9650" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>italic</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1a63c373a51366fa91ac11cd9c65d101e4" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>justify</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1a805bf9e26c36b782c19ffdc9b2c51429" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>margin</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1ada995faa9d1d87a81f5dabbb51df3a36" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>merge</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1aa894165160cf38aa13412025c8bbc541" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>padding</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1aa1c48aac16670631b698a4d2a16f192c" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>reverse</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1ad7969e2792d0c5d9b73b6afdcb5777db" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>strikethrough</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1ad0499b5c6836cc173830a8bdce56f6a7" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>text_wrap</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1a0cf16846f050dab752e60e34e71c3169" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>underline</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1a55ee92f4c8c9c15fcfeb403f82a25e19" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>underlined_double</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1a69e17ecb9916e10ebeebeed2140eed0d" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>variant</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1a76793c57b4c0ac6a0c3f86e92ded5e14" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>width</name></member>
+      <member refid="structneforce_1_1tui_1_1style_1aa500f23e2f8cfb586733561897fe2ad4" prot="public" virt="non-virtual"><scope>neforce::tui::style</scope><name>wrap_mode</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

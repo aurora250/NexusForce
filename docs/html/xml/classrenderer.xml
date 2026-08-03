@@ -1,0 +1,1132 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classrenderer" kind="class" language="C++" prot="public">
+    <compoundname>renderer</compoundname>
+    <includes refid="renderer_8hpp" local="no">renderer.hpp</includes>
+    <innerclass refid="structrenderer_1_1clip__rect" prot="private">renderer::clip_rect</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrenderer_1aeb5d1725ba1236e60d67cef7a48c6f29" prot="private" static="no" mutable="no">
+        <type><ref refid="classscreen" kindref="compound">screen</ref> &amp;</type>
+        <definition>screen&amp; renderer::screen_</definition>
+        <argsstring></argsstring>
+        <name>screen_</name>
+        <qualifiedname>renderer::screen_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" line="194" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" bodystart="194" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrenderer_1a4b26363222ad7d90143326dd7ae630dd" prot="private" static="no" mutable="no">
+        <type>const <ref refid="structtheme" kindref="compound">theme</ref> &amp;</type>
+        <definition>const theme&amp; renderer::theme_</definition>
+        <argsstring></argsstring>
+        <name>theme_</name>
+        <qualifiedname>renderer::theme_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" line="195" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" bodystart="195" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrenderer_1a56b31b316e0843a3de30bffe369fb968" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int renderer::term_w_</definition>
+        <argsstring></argsstring>
+        <name>term_w_</name>
+        <qualifiedname>renderer::term_w_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" line="196" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" bodystart="196" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrenderer_1ac2c81c1975644fad4d5462c39efcee16" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int renderer::term_h_</definition>
+        <argsstring></argsstring>
+        <name>term_h_</name>
+        <qualifiedname>renderer::term_h_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" line="197" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" bodystart="197" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrenderer_1a43d06885f7917854625803054c4ef0f3" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; clip_rect &gt;</type>
+        <definition>vector&lt;clip_rect&gt; renderer::clip_stack_</definition>
+        <argsstring></argsstring>
+        <name>clip_stack_</name>
+        <qualifiedname>renderer::clip_stack_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" line="198" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" bodystart="198" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrenderer_1a916c06b0e5a9f1afa5007d4d28f3f961" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="structscrollbar__hit" kindref="compound">scrollbar_hit</ref> &gt;</type>
+        <definition>vector&lt;scrollbar_hit&gt; renderer::scrollbar_hits_</definition>
+        <argsstring></argsstring>
+        <name>scrollbar_hits_</name>
+        <qualifiedname>renderer::scrollbar_hits_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" line="199" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" bodystart="199" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrenderer_1ac0dfb1044109fb6415c4616014f78cf1" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool renderer::has_focus_</definition>
+        <argsstring></argsstring>
+        <name>has_focus_</name>
+        <qualifiedname>renderer::has_focus_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" line="200" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" bodystart="200" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrenderer_1ab7acd1499764851d914ccb6d94c62482" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>renderer::renderer</definition>
+        <argsstring>(screen &amp;target, const theme &amp;t, int term_w, int term_h)</argsstring>
+        <name>renderer</name>
+        <qualifiedname>renderer::renderer</qualifiedname>
+        <param>
+          <type><ref refid="classscreen" kindref="compound">screen</ref> &amp;</type>
+          <declname>target</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structtheme" kindref="compound">theme</ref> &amp;</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>term_w</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>term_h</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>target</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>渲染目标 screen </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主题 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>term_w</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>终端宽度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>term_h</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>终端高度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" line="60" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classrenderer_1ae605cecf04bef6e8e55b65de64a1ff39" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void renderer::render</definition>
+        <argsstring>(const element &amp;tree, const vector&lt; layout_rect &gt; &amp;layout, bool has_focus)</argsstring>
+        <name>render</name>
+        <qualifiedname>renderer::render</qualifiedname>
+        <param>
+          <type>const <ref refid="classelement" kindref="compound">element</ref> &amp;</type>
+          <declname>tree</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="structlayout__rect" kindref="compound">layout_rect</ref> &gt; &amp;</type>
+          <declname>layout</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>has_focus</declname>
+        </param>
+        <briefdescription>
+<para>渲染元素树 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tree</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素树根节点 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>layout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>布局结果 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>has_focus</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当前是否有焦点组件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" line="68" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classrenderer_1a7a261da5db098fca2e0664f33c8dfb26" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void renderer::set_term_size</definition>
+        <argsstring>(int w, int h)</argsstring>
+        <name>set_term_size</name>
+        <qualifiedname>renderer::set_term_size</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>w</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>h</declname>
+        </param>
+        <briefdescription>
+<para>更新终端尺寸 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>w</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新宽度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>h</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新高度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" line="75" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" bodystart="75" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="classrenderer_1a45d0b53073a565d5d8968e282d76fd9f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="structscrollbar__hit" kindref="compound">scrollbar_hit</ref> &gt; &amp;</type>
+        <definition>const vector&lt; scrollbar_hit &gt; &amp; renderer::scrollbar_hits</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>scrollbar_hits</name>
+        <qualifiedname>renderer::scrollbar_hits</qualifiedname>
+        <briefdescription>
+<para>获取本次渲染收集的滚动条命中信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>滚动条命中列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" line="84" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" bodystart="84" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="classrenderer_1a549a3e4cc76b6b0d3cbc14e1af2cf80e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void renderer::render_text_block</definition>
+        <argsstring>(int x, int y, int w, int h, const string &amp;text, const tui::style &amp;style, style::wrap_mode wm, int *out_end_x=nullptr, int *out_end_y=nullptr)</argsstring>
+        <name>render_text_block</name>
+        <qualifiedname>renderer::render_text_block</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>w</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>h</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type>const tui::style &amp;</type>
+          <declname>style</declname>
+        </param>
+        <param>
+          <type><ref refid="structstyle_1a8c62373eef9123ce93b67f9b57a9c77e" kindref="member">style::wrap_mode</ref></type>
+          <declname>wm</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>out_end_x</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>out_end_y</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>渲染文本块 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始行 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>w</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>宽度约束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>h</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>高度约束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文本内容 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>样式 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>wm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>换行模式 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>out_end_x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出结束列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>out_end_y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出结束行 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" line="98" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classrenderer_1a2c3f5f3d73b71b9ca67f718805a7a076" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void renderer::apply_border</definition>
+        <argsstring>(int x, int y, int w, int h, enum style::border border, const _NEFORCE color &amp;c)</argsstring>
+        <name>apply_border</name>
+        <qualifiedname>renderer::apply_border</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>w</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>h</declname>
+        </param>
+        <param>
+          <type>enum <ref refid="structstyle_1ae88cb9941be72e4e00568ad4da72e921" kindref="member">style::border</ref></type>
+          <declname>border</declname>
+        </param>
+        <param>
+          <type>const _NEFORCE <ref refid="classcolor" kindref="compound">color</ref> &amp;</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>绘制边框 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始行 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>w</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>宽度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>h</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>高度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>border</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>边框样式 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>边框颜色 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" line="110" column="10"/>
+        <references refid="group___t_u_i_1ga996d09ad43032b0cdbab45ef5de0f391" compoundref="element_8hpp" startline="349" endline="355">border</references>
+      </memberdef>
+      <memberdef kind="function" id="classrenderer_1ab0bfb85dedbf6eeae4fc8ca1d6517a9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void renderer::apply_style_to_cell</definition>
+        <argsstring>(cell &amp;cell, const style &amp;style)</argsstring>
+        <name>apply_style_to_cell</name>
+        <qualifiedname>renderer::apply_style_to_cell</qualifiedname>
+        <param>
+          <type><ref refid="structcell" kindref="compound">cell</ref> &amp;</type>
+          <declname>cell</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structstyle" kindref="compound">style</ref> &amp;</type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+<para>将样式字段应用到 cell </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cell</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标 cell </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>样式 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" line="117" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classrenderer_1ac9b2a51b89102b2e7741490a3b4542c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void renderer::render_button</definition>
+        <argsstring>(int x, int y, int w, int h, const string &amp;label, const style &amp;style, const tui::theme &amp;theme, style::variant variant)</argsstring>
+        <name>render_button</name>
+        <qualifiedname>renderer::render_button</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>w</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>h</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>label</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structstyle" kindref="compound">style</ref> &amp;</type>
+          <declname>style</declname>
+        </param>
+        <param>
+          <type>const tui::theme &amp;</type>
+          <declname>theme</declname>
+        </param>
+        <param>
+          <type><ref refid="structstyle_1a50690ce0051edce19b935936e2cf7797" kindref="member">style::variant</ref></type>
+          <declname>variant</declname>
+        </param>
+        <briefdescription>
+<para>渲染按钮 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始行 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>w</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>宽度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>h</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>高度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>label</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>按钮文本 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>样式 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>theme</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主题 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>variant</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>按钮变体 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" line="130" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classrenderer_1a8cdc27a5fbb45b3802ede88b978a3689" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void renderer::render_checkbox</definition>
+        <argsstring>(int x, int y, int w, int h, const string &amp;label, bool checked, const style &amp;style)</argsstring>
+        <name>render_checkbox</name>
+        <qualifiedname>renderer::render_checkbox</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>w</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>h</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>label</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>checked</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structstyle" kindref="compound">style</ref> &amp;</type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+<para>渲染复选框 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始行 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>w</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>宽度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>h</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>高度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>label</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>标签文本 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>checked</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否选中 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>样式 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" line="143" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classrenderer_1a8970dd5032c00e6c3478d9b3f8289d12" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void renderer::render_separator</definition>
+        <argsstring>(int x, int y, int w)</argsstring>
+        <name>render_separator</name>
+        <qualifiedname>renderer::render_separator</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>w</declname>
+        </param>
+        <briefdescription>
+<para>渲染分隔线 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>行 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>w</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>宽度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" line="151" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classrenderer_1accfae11e88f63e3dd8c0e328d7eab045" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void renderer::apply_clear</definition>
+        <argsstring>(int x, int y, int w, int h)</argsstring>
+        <name>apply_clear</name>
+        <qualifiedname>renderer::apply_clear</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>w</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>h</declname>
+        </param>
+        <briefdescription>
+<para>清除指定区域 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始行 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>w</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>宽度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>h</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>高度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" line="160" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classrenderer_1ac27e30968c0bbf612fd582e6cef61d0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void renderer::apply_text</definition>
+        <argsstring>(int x, int y, const string &amp;text, const style &amp;style)</argsstring>
+        <name>apply_text</name>
+        <qualifiedname>renderer::apply_text</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structstyle" kindref="compound">style</ref> &amp;</type>
+          <declname>style</declname>
+        </param>
+        <briefdescription>
+<para>写入文本 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>行 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文本 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>样式 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" line="169" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classrenderer_1a26abdeadb62f6eb88667b2e9d0c83553" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void renderer::apply_text</definition>
+        <argsstring>(int x, int y, const string &amp;text, const style &amp;style, int max_x)</argsstring>
+        <name>apply_text</name>
+        <qualifiedname>renderer::apply_text</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structstyle" kindref="compound">style</ref> &amp;</type>
+          <declname>style</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>max_x</declname>
+        </param>
+        <briefdescription>
+<para>写入文本 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>行 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文本 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>style</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>样式 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最大列（超出则截断） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" line="179" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classrenderer_1ad5e7d8279e4aa033a92780e0fd9084ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void renderer::clear_element_area</definition>
+        <argsstring>(const element &amp;el, const vector&lt; layout_rect &gt; &amp;layout, int &amp;idx)</argsstring>
+        <name>clear_element_area</name>
+        <qualifiedname>renderer::clear_element_area</qualifiedname>
+        <param>
+          <type>const <ref refid="classelement" kindref="compound">element</ref> &amp;</type>
+          <declname>el</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="structlayout__rect" kindref="compound">layout_rect</ref> &gt; &amp;</type>
+          <declname>layout</declname>
+        </param>
+        <param>
+          <type>int &amp;</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>清除元素树中所有叶子元素区域 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>el</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素树根 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>layout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>布局结果 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当前布局索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" line="187" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classrenderer_1a8b445e6a8559e052bb9ac2d8b8dc5f6c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void renderer::render_subtree</definition>
+        <argsstring>(const element &amp;el, const vector&lt; layout_rect &gt; &amp;layout, int &amp;idx)</argsstring>
+        <name>render_subtree</name>
+        <qualifiedname>renderer::render_subtree</qualifiedname>
+        <param>
+          <type>const <ref refid="classelement" kindref="compound">element</ref> &amp;</type>
+          <declname>el</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="structlayout__rect" kindref="compound">layout_rect</ref> &gt; &amp;</type>
+          <declname>layout</declname>
+        </param>
+        <param>
+          <type>int &amp;</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" line="202" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>元素树渲染器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>将元素树与布局结果渲染到 screen 帧缓冲区。 负责文本换行、边框绘制、样式应用、滚动条绘制等。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" line="51" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/renderer.hpp" bodystart="51" bodyend="203"/>
+    <listofallmembers>
+      <member refid="classrenderer_1a2c3f5f3d73b71b9ca67f718805a7a076" prot="public" virt="non-virtual"><scope>renderer</scope><name>apply_border</name></member>
+      <member refid="classrenderer_1accfae11e88f63e3dd8c0e328d7eab045" prot="public" virt="non-virtual"><scope>renderer</scope><name>apply_clear</name></member>
+      <member refid="classrenderer_1ab0bfb85dedbf6eeae4fc8ca1d6517a9e" prot="public" virt="non-virtual"><scope>renderer</scope><name>apply_style_to_cell</name></member>
+      <member refid="classrenderer_1ac27e30968c0bbf612fd582e6cef61d0e" prot="public" virt="non-virtual"><scope>renderer</scope><name>apply_text</name></member>
+      <member refid="classrenderer_1a26abdeadb62f6eb88667b2e9d0c83553" prot="public" virt="non-virtual"><scope>renderer</scope><name>apply_text</name></member>
+      <member refid="classrenderer_1ad5e7d8279e4aa033a92780e0fd9084ea" prot="public" virt="non-virtual"><scope>renderer</scope><name>clear_element_area</name></member>
+      <member refid="classrenderer_1a43d06885f7917854625803054c4ef0f3" prot="private" virt="non-virtual"><scope>renderer</scope><name>clip_stack_</name></member>
+      <member refid="classrenderer_1ac0dfb1044109fb6415c4616014f78cf1" prot="private" virt="non-virtual"><scope>renderer</scope><name>has_focus_</name></member>
+      <member refid="classrenderer_1ae605cecf04bef6e8e55b65de64a1ff39" prot="public" virt="non-virtual"><scope>renderer</scope><name>render</name></member>
+      <member refid="classrenderer_1ac9b2a51b89102b2e7741490a3b4542c8" prot="public" virt="non-virtual"><scope>renderer</scope><name>render_button</name></member>
+      <member refid="classrenderer_1a8cdc27a5fbb45b3802ede88b978a3689" prot="public" virt="non-virtual"><scope>renderer</scope><name>render_checkbox</name></member>
+      <member refid="classrenderer_1a8970dd5032c00e6c3478d9b3f8289d12" prot="public" virt="non-virtual"><scope>renderer</scope><name>render_separator</name></member>
+      <member refid="classrenderer_1a8b445e6a8559e052bb9ac2d8b8dc5f6c" prot="private" virt="non-virtual"><scope>renderer</scope><name>render_subtree</name></member>
+      <member refid="classrenderer_1a549a3e4cc76b6b0d3cbc14e1af2cf80e" prot="public" virt="non-virtual"><scope>renderer</scope><name>render_text_block</name></member>
+      <member refid="classrenderer_1ab7acd1499764851d914ccb6d94c62482" prot="public" virt="non-virtual"><scope>renderer</scope><name>renderer</name></member>
+      <member refid="classrenderer_1aeb5d1725ba1236e60d67cef7a48c6f29" prot="private" virt="non-virtual"><scope>renderer</scope><name>screen_</name></member>
+      <member refid="classrenderer_1a45d0b53073a565d5d8968e282d76fd9f" prot="public" virt="non-virtual"><scope>renderer</scope><name>scrollbar_hits</name></member>
+      <member refid="classrenderer_1a916c06b0e5a9f1afa5007d4d28f3f961" prot="private" virt="non-virtual"><scope>renderer</scope><name>scrollbar_hits_</name></member>
+      <member refid="classrenderer_1a7a261da5db098fca2e0664f33c8dfb26" prot="public" virt="non-virtual"><scope>renderer</scope><name>set_term_size</name></member>
+      <member refid="classrenderer_1ac2c81c1975644fad4d5462c39efcee16" prot="private" virt="non-virtual"><scope>renderer</scope><name>term_h_</name></member>
+      <member refid="classrenderer_1a56b31b316e0843a3de30bffe369fb968" prot="private" virt="non-virtual"><scope>renderer</scope><name>term_w_</name></member>
+      <member refid="classrenderer_1a4b26363222ad7d90143326dd7ae630dd" prot="private" virt="non-virtual"><scope>renderer</scope><name>theme_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

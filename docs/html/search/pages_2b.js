@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['单位后缀说明_0',['单位后缀说明',['../group___byte_size.html#unit_suffixes',1,'']]]
+  ['协议细节_0',['WebSocket 协议细节',['../group___h_t_t_p.html#websocket_protocol',1,'']]],
+  ['协议_1',['⚖️ 协议',['../index.html#autotoc_md41',1,'']]]
 ];

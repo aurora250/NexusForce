@@ -81,8 +81,8 @@
         </childnode>
       </node>
       <node id="23">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
@@ -259,30 +259,44 @@
         </childnode>
         <childnode refid="47" relation="include">
         </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
         <childnode refid="11" relation="include">
         </childnode>
       </node>
-      <node id="48">
+      <node id="50">
         <label>NeForce/core/string/basic_string_view.hpp</label>
         <link refid="basic__string__view_8hpp"/>
         <childnode refid="40" relation="include">
         </childnode>
-        <childnode refid="49" relation="include">
+        <childnode refid="51" relation="include">
         </childnode>
-        <childnode refid="50" relation="include">
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
         </childnode>
       </node>
-      <node id="49">
+      <node id="51">
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="34" relation="include">
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
       </node>
-      <node id="50">
+      <node id="48">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>NeForce/core/string/charset.hpp</label>
+        <link refid="charset_8hpp"/>
+        <childnode refid="48" relation="include">
+        </childnode>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
@@ -292,10 +306,10 @@
         <childnode refid="18" relation="include">
         </childnode>
       </node>
-      <node id="47">
+      <node id="49">
         <label>NeForce/core/string/string_view.hpp</label>
         <link refid="string__view_8hpp"/>
-        <childnode refid="48" relation="include">
+        <childnode refid="50" relation="include">
         </childnode>
       </node>
       <node id="24">
@@ -391,12 +405,10 @@
         <link refid="plugin__manager_8hpp"/>
       </node>
     </invincdepgraph>
-    <innerclass refid="structplugin__info" prot="public">plugin_info</innerclass>
-    <innerclass refid="structiplugin" prot="public">iplugin</innerclass>
-    <innerclass refid="structplugin__deleter" prot="public">plugin_deleter</innerclass>
-    <sectiondef kind="typedef">
-      <member refid="group___plugin_1gaf947f049a3822c8b84313e907b0ebb58" kind="typedef"><name>plugin_ptr</name></member>
-    </sectiondef>
+    <innerclass refid="structneforce_1_1plugin__info" prot="public">neforce::plugin_info</innerclass>
+    <innerclass refid="structneforce_1_1iplugin" prot="public">neforce::iplugin</innerclass>
+    <innerclass refid="structneforce_1_1plugin__deleter" prot="public">neforce::plugin_deleter</innerclass>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
     <briefdescription>
 <para>插件接口定义 </para>
     </briefdescription>
@@ -413,66 +425,66 @@
 <codeline lineno="14"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight></codeline>
-<codeline lineno="28" refid="structplugin__info" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structplugin__info" kindref="compound">plugin_info</ref><sp/>{</highlight></codeline>
-<codeline lineno="29" refid="structplugin__info_1a5808cef84f5064e059009a108108c7f0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structplugin__info_1a5808cef84f5064e059009a108108c7f0" kindref="member">name</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="30" refid="structplugin__info_1a899b491fc4007aeae0431f4d030e904a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structplugin__info_1a899b491fc4007aeae0431f4d030e904a" kindref="member">version</ref>;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="31" refid="structplugin__info_1ac9c48c117b3400890a4e83dfd9fc31cd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structplugin__info_1ac9c48c117b3400890a4e83dfd9fc31cd" kindref="member">author</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="32" refid="structplugin__info_1a23f446a01701d7d0f86e3d1e0b672811" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structplugin__info_1a23f446a01701d7d0f86e3d1e0b672811" kindref="member">description</ref>;<sp/><sp/></highlight></codeline>
-<codeline lineno="33" refid="structplugin__info_1abc39f8b5799194f35cd5827f3faa564a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structplugin__info_1abc39f8b5799194f35cd5827f3faa564a" kindref="member">library_path</ref>;<sp/></highlight></codeline>
+<codeline lineno="28" refid="structneforce_1_1plugin__info" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structneforce_1_1plugin__info" kindref="compound">plugin_info</ref><sp/>{</highlight></codeline>
+<codeline lineno="29" refid="structneforce_1_1plugin__info_1a429c72f6312fec21d469a499f50d3488" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1plugin__info_1a429c72f6312fec21d469a499f50d3488" kindref="member">name</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="30" refid="structneforce_1_1plugin__info_1a16d86d294774b2c9a60b7083be5649c4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1plugin__info_1a16d86d294774b2c9a60b7083be5649c4" kindref="member">version</ref>;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="31" refid="structneforce_1_1plugin__info_1a48c11eca4354c7f1ae2a4f5ea33f1925" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1plugin__info_1a48c11eca4354c7f1ae2a4f5ea33f1925" kindref="member">author</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="32" refid="structneforce_1_1plugin__info_1aefd71f295582c6c84a0c35405dd0a404" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1plugin__info_1aefd71f295582c6c84a0c35405dd0a404" kindref="member">description</ref>;<sp/><sp/></highlight></codeline>
+<codeline lineno="33" refid="structneforce_1_1plugin__info_1ad8dc3e05fec9a6b03b5bf6596989ee0b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1plugin__info_1ad8dc3e05fec9a6b03b5bf6596989ee0b" kindref="member">library_path</ref>;<sp/></highlight></codeline>
 <codeline lineno="34"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight></codeline>
 <codeline lineno="36"><highlight class="normal"></highlight></codeline>
-<codeline lineno="44" refid="structiplugin" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structiplugin" kindref="compound">iplugin</ref><sp/>{</highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="structiplugin" kindref="compound">~iplugin</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="44" refid="structneforce_1_1iplugin" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structneforce_1_1iplugin" kindref="compound">iplugin</ref><sp/>{</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1iplugin" kindref="compound">~iplugin</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"></highlight></codeline>
-<codeline lineno="51" refid="structiplugin_1a23d6085a2e63cbf778e215d44490ebd4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structplugin__info" kindref="compound">plugin_info</ref>&amp;<sp/><ref refid="structiplugin_1a23d6085a2e63cbf778e215d44490ebd4" kindref="member">get_info</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="51" refid="structneforce_1_1iplugin_1a608f5a923d224938a16fb720c7b66b09" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1plugin__info" kindref="compound">plugin_info</ref>&amp;<sp/><ref refid="structneforce_1_1iplugin_1a608f5a923d224938a16fb720c7b66b09" kindref="member">get_info</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="52"><highlight class="normal"></highlight></codeline>
-<codeline lineno="58" refid="structiplugin_1a470ea9b8c6b7058e8a2bb69ffe364e02" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structiplugin_1a470ea9b8c6b7058e8a2bb69ffe364e02" kindref="member">initialize</ref>()<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="58" refid="structneforce_1_1iplugin_1ae897024d9966d9dae1be14ecdf10009e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1iplugin_1ae897024d9966d9dae1be14ecdf10009e" kindref="member">initialize</ref>()<sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="59"><highlight class="normal"></highlight></codeline>
-<codeline lineno="63" refid="structiplugin_1a5b1f48287bf155612ce014811215da5c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structiplugin_1a5b1f48287bf155612ce014811215da5c" kindref="member">execute</ref>()<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="63" refid="structneforce_1_1iplugin_1ab74fe58ab9943a6ef8f8dff2f45d01b0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1iplugin_1ab74fe58ab9943a6ef8f8dff2f45d01b0" kindref="member">execute</ref>()<sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"></highlight></codeline>
-<codeline lineno="70" refid="structiplugin_1ae5d9267f0a284319b9df78496ae6c8b3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structiplugin_1ae5d9267f0a284319b9df78496ae6c8b3" kindref="member">shutdown</ref>()<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="70" refid="structneforce_1_1iplugin_1a24ea52256942af5dcd1402671a963ee1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1iplugin_1a24ea52256942af5dcd1402671a963ee1" kindref="member">shutdown</ref>()<sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="71"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="72"><highlight class="normal"></highlight></codeline>
-<codeline lineno="80" refid="structplugin__deleter" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structplugin__deleter_1a057a1491b7a95e65738daefe599b113a" kindref="member">plugin_deleter</ref><sp/>{</highlight></codeline>
+<codeline lineno="80" refid="structneforce_1_1plugin__deleter" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structneforce_1_1plugin__deleter_1a96f13391c2207de96b0cab16ac466774" kindref="member">plugin_deleter</ref><sp/>{</highlight></codeline>
 <codeline lineno="81"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="82" refid="structplugin__deleter_1a1971c84fb464e400807c9fcde1cb8611" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structplugin__deleter_1a1971c84fb464e400807c9fcde1cb8611" kindref="member">deleter_type</ref><sp/>=<sp/>void<sp/>(*)(<ref refid="structiplugin" kindref="compound">iplugin</ref>*);<sp/></highlight></codeline>
+<codeline lineno="82" refid="structneforce_1_1plugin__deleter_1a48acce3dc30b72cd529d43359ce5302d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structneforce_1_1plugin__deleter_1a48acce3dc30b72cd529d43359ce5302d" kindref="member">deleter_type</ref><sp/>=<sp/>void<sp/>(*)(<ref refid="structneforce_1_1iplugin" kindref="compound">iplugin</ref>*);<sp/></highlight></codeline>
 <codeline lineno="83"><highlight class="normal"></highlight></codeline>
 <codeline lineno="84"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structplugin__deleter_1a1971c84fb464e400807c9fcde1cb8611" kindref="member">deleter_type</ref><sp/>func_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;<sp/></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structneforce_1_1plugin__deleter_1a48acce3dc30b72cd529d43359ce5302d" kindref="member">deleter_type</ref><sp/>func_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;<sp/></highlight></codeline>
 <codeline lineno="86"><highlight class="normal"></highlight></codeline>
 <codeline lineno="87"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="91" refid="structplugin__deleter_1a057a1491b7a95e65738daefe599b113a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structplugin__deleter_1a057a1491b7a95e65738daefe599b113a" kindref="member">plugin_deleter</ref>()<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="91" refid="structneforce_1_1plugin__deleter_1a96f13391c2207de96b0cab16ac466774" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structneforce_1_1plugin__deleter_1a96f13391c2207de96b0cab16ac466774" kindref="member">plugin_deleter</ref>()<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
 <codeline lineno="92"><highlight class="normal"></highlight></codeline>
-<codeline lineno="96" refid="structplugin__deleter_1a2c7aac329f10395b5c36bbce38dec815" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>~<ref refid="structplugin__deleter_1a057a1491b7a95e65738daefe599b113a" kindref="member">plugin_deleter</ref>()<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="96" refid="structneforce_1_1plugin__deleter_1a719c4ec518d859953310ee650e13ffe2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>~<ref refid="structneforce_1_1plugin__deleter_1a96f13391c2207de96b0cab16ac466774" kindref="member">plugin_deleter</ref>()<sp/>=<sp/>default;</highlight></codeline>
 <codeline lineno="97"><highlight class="normal"></highlight></codeline>
-<codeline lineno="102" refid="structplugin__deleter_1a03fbca2183006f758b8a204211ba1a4a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>explicit<sp/><ref refid="structplugin__deleter_1a057a1491b7a95e65738daefe599b113a" kindref="member">plugin_deleter</ref>(<ref refid="structplugin__deleter_1a1971c84fb464e400807c9fcde1cb8611" kindref="member">deleter_type</ref><sp/>func)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="102" refid="structneforce_1_1plugin__deleter_1a5fa7b40d274b6cc08d5caceda937b822" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>explicit<sp/><ref refid="structneforce_1_1plugin__deleter_1a96f13391c2207de96b0cab16ac466774" kindref="member">plugin_deleter</ref>(<ref refid="structneforce_1_1plugin__deleter_1a48acce3dc30b72cd529d43359ce5302d" kindref="member">deleter_type</ref><sp/>func)<sp/>noexcept<sp/>:</highlight></codeline>
 <codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/>func_(func)<sp/>{}</highlight></codeline>
 <codeline lineno="104"><highlight class="normal"></highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structplugin__deleter_1a057a1491b7a95e65738daefe599b113a" kindref="member">plugin_deleter</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structplugin__deleter" kindref="compound">plugin_deleter</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structplugin__deleter" kindref="compound">plugin_deleter</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structplugin__deleter" kindref="compound">plugin_deleter</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structneforce_1_1plugin__deleter" kindref="compound">plugin_deleter</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1plugin__deleter" kindref="compound">plugin_deleter</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structneforce_1_1plugin__deleter" kindref="compound">plugin_deleter</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1plugin__deleter" kindref="compound">plugin_deleter</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="107"><highlight class="normal"></highlight></codeline>
-<codeline lineno="112" refid="structplugin__deleter_1a197e3056079c0f53fbb92666edb102ca" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structplugin__deleter_1a197e3056079c0f53fbb92666edb102ca" kindref="member">plugin_deleter</ref>(<ref refid="structplugin__deleter_1a057a1491b7a95e65738daefe599b113a" kindref="member">plugin_deleter</ref>&amp;&amp;<sp/>other)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="112" refid="structneforce_1_1plugin__deleter_1a82d49dc3b4903ad55a20329c710432da" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structneforce_1_1plugin__deleter_1a82d49dc3b4903ad55a20329c710432da" kindref="member">plugin_deleter</ref>(<ref refid="structneforce_1_1plugin__deleter_1a96f13391c2207de96b0cab16ac466774" kindref="member">plugin_deleter</ref>&amp;&amp;<sp/>other)<sp/>noexcept<sp/>:</highlight></codeline>
 <codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/>func_(other.func_)<sp/>{</highlight></codeline>
 <codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.func_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="116"><highlight class="normal"></highlight></codeline>
-<codeline lineno="122" refid="structplugin__deleter_1a254543f507a3e2553e27e592203c8392" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structplugin__deleter_1a057a1491b7a95e65738daefe599b113a" kindref="member">plugin_deleter</ref>&amp;<sp/><ref refid="structplugin__deleter_1a254543f507a3e2553e27e592203c8392" kindref="member">operator=</ref>(<ref refid="structplugin__deleter_1a057a1491b7a95e65738daefe599b113a" kindref="member">plugin_deleter</ref>&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="122" refid="structneforce_1_1plugin__deleter_1aa2931c0c271c17fef7ad4e1f221ea475" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structneforce_1_1plugin__deleter_1a96f13391c2207de96b0cab16ac466774" kindref="member">plugin_deleter</ref>&amp;<sp/><ref refid="structneforce_1_1plugin__deleter_1aa2931c0c271c17fef7ad4e1f221ea475" kindref="member">operator=</ref>(<ref refid="structneforce_1_1plugin__deleter_1a96f13391c2207de96b0cab16ac466774" kindref="member">plugin_deleter</ref>&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>func_<sp/>=<sp/>other.func_;</highlight></codeline>
 <codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.func_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="127"><highlight class="normal"></highlight></codeline>
-<codeline lineno="134" refid="structplugin__deleter_1a187bdbd4fd32319ac32cd8d1227814b2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structplugin__deleter_1a187bdbd4fd32319ac32cd8d1227814b2" kindref="member">operator()</ref>(<ref refid="structiplugin" kindref="compound">iplugin</ref>*<sp/>plugin)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">(<ref refid="group___invoke_function_1gafdceccc521c88df3849b9e1acf2b153e" kindref="member">is_nothrow_invocable_v&lt;deleter_type, iplugin*&gt;</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="134" refid="structneforce_1_1plugin__deleter_1a03a58ba1d0e637902d926d1efe725ccf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1plugin__deleter_1a03a58ba1d0e637902d926d1efe725ccf" kindref="member">operator()</ref>(<ref refid="structneforce_1_1iplugin" kindref="compound">iplugin</ref>*<sp/>plugin)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">(<ref refid="group___invoke_function_1ga2aa28e8abceaddb1cccbda03fd82671c" kindref="member">is_nothrow_invocable_v&lt;deleter_type, iplugin*&gt;</ref>)<sp/>{</highlight></codeline>
 <codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(plugin<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
 <codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>func_(plugin);</highlight></codeline>
 <codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="139"><highlight class="normal"></highlight></codeline>
-<codeline lineno="146" refid="structplugin__deleter_1a41b7c48f4f89afe74821e7d3106576be" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structplugin__deleter_1a057a1491b7a95e65738daefe599b113a" kindref="member">plugin_deleter</ref><sp/><ref refid="structplugin__deleter_1a41b7c48f4f89afe74821e7d3106576be" kindref="member">rebind</ref>()<sp/>&amp;&amp;<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);<sp/>}</highlight></codeline>
+<codeline lineno="146" refid="structneforce_1_1plugin__deleter_1aadd07c6f5b4ace46b959605778e37ba0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structneforce_1_1plugin__deleter_1a96f13391c2207de96b0cab16ac466774" kindref="member">plugin_deleter</ref><sp/><ref refid="structneforce_1_1plugin__deleter_1aadd07c6f5b4ace46b959605778e37ba0" kindref="member">rebind</ref>()<sp/>&amp;&amp;<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" kindref="member">move</ref>(*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);<sp/>}</highlight></codeline>
 <codeline lineno="147"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="148"><highlight class="normal"></highlight></codeline>
-<codeline lineno="155" refid="group___plugin_1gaf947f049a3822c8b84313e907b0ebb58" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="group___plugin_1gaf947f049a3822c8b84313e907b0ebb58" kindref="member">plugin_ptr</ref><sp/>=<sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;iplugin, plugin_deleter&gt;</ref>;</highlight></codeline>
+<codeline lineno="155" refid="group___plugin_1gabd8ce662d9b26e04d67499473f021442" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="group___plugin_1gabd8ce662d9b26e04d67499473f021442" kindref="member">plugin_ptr</ref><sp/>=<sp/><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr&lt;iplugin, plugin_deleter&gt;</ref>;</highlight></codeline>
 <codeline lineno="156"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Plugin</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="158"><highlight class="normal"></highlight></codeline>
 <codeline lineno="159"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>

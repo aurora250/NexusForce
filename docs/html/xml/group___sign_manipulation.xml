@@ -3,21 +3,22 @@
   <compounddef id="group___sign_manipulation" kind="group">
     <compoundname>SignManipulation</compoundname>
     <title>符号操作</title>
-    <innerclass refid="structmake__signed" prot="public">make_signed</innerclass>
-    <innerclass refid="structmake__unsigned" prot="public">make_unsigned</innerclass>
-    <innerclass refid="structmake__integer" prot="public">make_integer</innerclass>
-    <innerclass refid="structmax__value" prot="public">max_value</innerclass>
+    <innerclass refid="structneforce_1_1make__signed" prot="public">neforce::make_signed</innerclass>
+    <innerclass refid="structneforce_1_1make__unsigned" prot="public">neforce::make_unsigned</innerclass>
+    <innerclass refid="structneforce_1_1make__integer" prot="public">neforce::make_integer</innerclass>
+    <innerclass refid="structneforce_1_1max__value" prot="public">neforce::max_value</innerclass>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="group___sign_manipulation_1gaafd5f69b53391404e954cf610afa6c54" prot="public" static="no">
+      <memberdef kind="typedef" id="group___sign_manipulation_1ga71d6c2b127e50d1e18644b5e0bda7a08" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>typename <ref refid="structmake__signed" kindref="compound">make_signed</ref>&lt; T &gt;::type</type>
-        <definition>using make_signed_t = typename make_signed&lt;T&gt;::type</definition>
+        <type>typename make_signed&lt; T &gt;::type</type>
+        <definition>using neforce::make_signed_t = typename make_signed&lt;T&gt;::type</definition>
         <argsstring></argsstring>
         <name>make_signed_t</name>
+        <qualifiedname>neforce::make_signed_t</qualifiedname>
         <briefdescription>
 <para>make_signed的便捷别名 </para>
         </briefdescription>
@@ -27,16 +28,17 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3340" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3340" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___sign_manipulation_1gaabeda2fce2dea6fa29533488400dd386" prot="public" static="no">
+      <memberdef kind="typedef" id="group___sign_manipulation_1gadd371defe4a049b1c18e77be0a6b9fe7" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>typename <ref refid="structmake__unsigned" kindref="compound">make_unsigned</ref>&lt; T &gt;::type</type>
-        <definition>using make_unsigned_t = typename make_unsigned&lt;T&gt;::type</definition>
+        <type>typename make_unsigned&lt; T &gt;::type</type>
+        <definition>using neforce::make_unsigned_t = typename make_unsigned&lt;T&gt;::type</definition>
         <argsstring></argsstring>
         <name>make_unsigned_t</name>
+        <qualifiedname>neforce::make_unsigned_t</qualifiedname>
         <briefdescription>
 <para>make_unsigned的便捷别名 </para>
         </briefdescription>
@@ -46,10 +48,10 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3359" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3359" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___sign_manipulation_1ga51d97772a87f38fe037b211f10d3e021" prot="public" static="no">
+      <memberdef kind="typedef" id="group___sign_manipulation_1ga0a9fcea8be051bf85d4625e7c1e81136" prot="public" static="no">
         <templateparamlist>
           <param>
-            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <type>size_t</type>
             <declname>Size</declname>
             <defname>Size</defname>
           </param>
@@ -60,10 +62,11 @@
             <defval>true</defval>
           </param>
         </templateparamlist>
-        <type>typename <ref refid="structmake__integer" kindref="compound">make_integer</ref>&lt; Size, IsSigned &gt;::type</type>
-        <definition>using make_integer_t = typename make_integer&lt;Size, IsSigned&gt;::type</definition>
+        <type>typename make_integer&lt; Size, IsSigned &gt;::type</type>
+        <definition>using neforce::make_integer_t = typename make_integer&lt;Size, IsSigned&gt;::type</definition>
         <argsstring></argsstring>
         <name>make_integer_t</name>
+        <qualifiedname>neforce::make_integer_t</qualifiedname>
         <briefdescription>
 <para>make_integer的便捷别名 </para>
         </briefdescription>
@@ -75,7 +78,7 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="group___sign_manipulation_1ga24c4c498e7addc623750a7532cd7334a" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___sign_manipulation_1ga668b3d94eae81967d910fbc85d40c2a2" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>size_t...</type>
@@ -83,11 +86,12 @@
             <defname>Values</defname>
           </param>
         </templateparamlist>
-        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
-        <definition>size_t max_value_v</definition>
+        <type>size_t</type>
+        <definition>size_t neforce::max_value_v</definition>
         <argsstring></argsstring>
         <name>max_value_v</name>
-        <initializer>= <ref refid="structmax__value" kindref="compound">max_value</ref>&lt;Values...&gt;::value</initializer>
+        <qualifiedname>neforce::max_value_v</qualifiedname>
+        <initializer>= max_value&lt;Values...&gt;::value</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>

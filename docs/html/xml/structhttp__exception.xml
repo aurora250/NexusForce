@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
   <compounddef id="structhttp__exception" kind="struct" language="C++" prot="public">
     <compoundname>http_exception</compoundname>
-    <basecompoundref refid="structnetwork__exception" prot="public" virt="non-virtual">network_exception</basecompoundref>
+    <basecompoundref refid="structneforce_1_1network__exception" prot="public" virt="non-virtual">neforce::network_exception</basecompoundref>
     <includes refid="http__constants_8hpp" local="no">http_constants.hpp</includes>
     <briefdescription>
 <para>HTTP操作异常 </para>
@@ -10,71 +10,71 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="4">
-        <label>exception</label>
-        <link refid="structexception"/>
-      </node>
       <node id="1">
         <label>http_exception</label>
         <link refid="structhttp__exception"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
+      <node id="4">
+        <label>neforce::exception</label>
+        <link refid="structneforce_1_1exception"/>
+      </node>
       <node id="2">
-        <label>network_exception</label>
-        <link refid="structnetwork__exception"/>
+        <label>neforce::network_exception</label>
+        <link refid="structneforce_1_1network__exception"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
-        <label>system_exception</label>
-        <link refid="structsystem__exception"/>
+        <label>neforce::system_exception</label>
+        <link refid="structneforce_1_1system__exception"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="5">
-        <label>error_code</label>
-        <link refid="classerror__code"/>
-        <childnode refid="6" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
-        <label>exception</label>
-        <link refid="structexception"/>
-      </node>
       <node id="1">
         <label>http_exception</label>
         <link refid="structhttp__exception"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
+      <node id="5">
+        <label>neforce::error_code</label>
+        <link refid="classneforce_1_1error__code"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::exception</label>
+        <link refid="structneforce_1_1exception"/>
+      </node>
       <node id="6">
-        <label>icommon&lt; error_code &gt;</label>
-        <link refid="structicommon"/>
+        <label>neforce::icommon&lt; error_code &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
         <childnode refid="7" relation="public-inheritance">
         </childnode>
         <childnode refid="8" relation="public-inheritance">
         </childnode>
       </node>
       <node id="7">
-        <label>icomparable&lt; error_code &gt;</label>
-        <link refid="structicomparable"/>
+        <label>neforce::icomparable&lt; error_code &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
       </node>
       <node id="8">
-        <label>ihashable&lt; error_code &gt;</label>
-        <link refid="structihashable"/>
+        <label>neforce::ihashable&lt; error_code &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
       </node>
       <node id="2">
-        <label>network_exception</label>
-        <link refid="structnetwork__exception"/>
+        <label>neforce::network_exception</label>
+        <link refid="structneforce_1_1network__exception"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
-        <label>system_exception</label>
-        <link refid="structsystem__exception"/>
+        <label>neforce::system_exception</label>
+        <link refid="structneforce_1_1system__exception"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
         <childnode refid="5" relation="usage">
@@ -84,25 +84,25 @@
     </collaborationgraph>
     <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_constants.hpp" line="27" column="1"/>
     <listofallmembers>
-      <member refid="structsystem__exception_1af69c032fcd6d9bb66a14ae52a3566977" prot="public" virt="virtual"><scope>http_exception</scope><name>code</name></member>
-      <member refid="structsystem__exception_1af985d25515bd806e9e05ca75ac0aa559" prot="protected" virt="non-virtual"><scope>http_exception</scope><name>code_</name></member>
-      <member refid="structexception_1ab5edb0e5cd38ed6c450413eb52d95fed" prot="public" virt="non-virtual"><scope>http_exception</scope><name>exception</name></member>
-      <member refid="structexception_1ad53654133be61ac0d671b96eea49a2c3" prot="public" virt="non-virtual"><scope>http_exception</scope><name>exception</name></member>
-      <member refid="structexception_1af7e2ec88aedbf1ac46326caa556ce434" prot="public" virt="non-virtual"><scope>http_exception</scope><name>exception</name></member>
-      <member refid="structexception_1abae6850b5707d91a23d8b8f78b99e7c7" prot="public" virt="non-virtual"><scope>http_exception</scope><name>exception</name></member>
-      <member refid="structnetwork__exception_1a66ee989b6949597bd44de5a744e71e36" prot="public" virt="non-virtual"><scope>http_exception</scope><name>network_exception</name></member>
-      <member refid="structnetwork__exception_1a0761824a079985f5f4409c1fb865a185" prot="public" virt="non-virtual"><scope>http_exception</scope><name>network_exception</name></member>
-      <member refid="structnetwork__exception_1ad506a4b8a7174eacd12e4b1ea79bcc23" prot="public" virt="non-virtual"><scope>http_exception</scope><name>network_exception</name></member>
-      <member refid="structexception_1a1a1667b7354203e2aa5a89d211ca3a6b" prot="public" virt="non-virtual"><scope>http_exception</scope><name>operator=</name></member>
-      <member refid="structexception_1a709d705f97cbad7d531dfb5023107536" prot="public" virt="non-virtual"><scope>http_exception</scope><name>operator=</name></member>
-      <member refid="structsystem__exception_1a40cdfe9b12f818d7632abc6e2696b3ea" prot="public" virt="non-virtual"><scope>http_exception</scope><name>system_exception</name></member>
-      <member refid="structsystem__exception_1acdb31c0077759cae3ccd8f1f2e892606" prot="public" virt="non-virtual"><scope>http_exception</scope><name>system_exception</name></member>
-      <member refid="structsystem__exception_1aa4eb872d3a9680bc738f6358db79989f" prot="public" virt="non-virtual"><scope>http_exception</scope><name>system_exception</name></member>
-      <member refid="structnetwork__exception_1adcb36910c235605c7ce30cad58c95273" prot="public" virt="virtual"><scope>http_exception</scope><name>type</name></member>
-      <member refid="structexception_1ae5dc04391190559c19adcf269cab48e2" prot="public" virt="virtual"><scope>http_exception</scope><name>what</name></member>
-      <member refid="structexception_1a80249b2b108c9b913dc7144839092a2b" prot="public" virt="virtual"><scope>http_exception</scope><name>~exception</name></member>
-      <member refid="structnetwork__exception_1a188cf0c9087d0319e7608f95389f5905" prot="public" virt="non-virtual"><scope>http_exception</scope><name>~network_exception</name></member>
-      <member refid="structsystem__exception_1a7b61682a3e3db92b6e91087792444955" prot="public" virt="non-virtual"><scope>http_exception</scope><name>~system_exception</name></member>
+      <member refid="structneforce_1_1system__exception_1ada8397813b9f1f832a2c4556b41084ff" prot="public" virt="virtual"><scope>http_exception</scope><name>code</name></member>
+      <member refid="structneforce_1_1system__exception_1af2ce9019b46965c6bcd065f0efae0406" prot="protected" virt="non-virtual"><scope>http_exception</scope><name>code_</name></member>
+      <member refid="structneforce_1_1exception_1ae64bcc0873cb85a3b913e43b523ac45c" prot="public" virt="non-virtual"><scope>http_exception</scope><name>exception</name></member>
+      <member refid="structneforce_1_1exception_1a9ae6ab2dc5699adfc63ec7571e87ec94" prot="public" virt="non-virtual"><scope>http_exception</scope><name>exception</name></member>
+      <member refid="structneforce_1_1exception_1a295286b9d2ce7d9338815964b564e289" prot="public" virt="non-virtual"><scope>http_exception</scope><name>exception</name></member>
+      <member refid="structneforce_1_1exception_1ae2992fe5862a76e5fae94c9290aca38e" prot="public" virt="non-virtual"><scope>http_exception</scope><name>exception</name></member>
+      <member refid="structneforce_1_1network__exception_1a89e1d9a2788deb1e23f053d698b7f075" prot="public" virt="non-virtual"><scope>http_exception</scope><name>network_exception</name></member>
+      <member refid="structneforce_1_1network__exception_1a7591a5dbcf43452127c1a892fa412725" prot="public" virt="non-virtual"><scope>http_exception</scope><name>network_exception</name></member>
+      <member refid="structneforce_1_1network__exception_1ad72094cf393509c6e7b407334c533384" prot="public" virt="non-virtual"><scope>http_exception</scope><name>network_exception</name></member>
+      <member refid="structneforce_1_1exception_1a159169892770b6020d5ab0bcbf6066e5" prot="public" virt="non-virtual"><scope>http_exception</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1exception_1a9e4ddd8f9b01a26777cff21e282511a5" prot="public" virt="non-virtual"><scope>http_exception</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1system__exception_1a500e1d408cd16e8086ad3b2ace9be198" prot="public" virt="non-virtual"><scope>http_exception</scope><name>system_exception</name></member>
+      <member refid="structneforce_1_1system__exception_1a291b38afbef06d3012c734d098d92816" prot="public" virt="non-virtual"><scope>http_exception</scope><name>system_exception</name></member>
+      <member refid="structneforce_1_1system__exception_1a18f794f91a1b3310bc2aa6a38c2dac59" prot="public" virt="non-virtual"><scope>http_exception</scope><name>system_exception</name></member>
+      <member refid="structneforce_1_1network__exception_1adaa452d850f60ddb05ac7ccaa779894c" prot="public" virt="virtual"><scope>http_exception</scope><name>type</name></member>
+      <member refid="structneforce_1_1exception_1a4c6dcdeed9716bc2d4eed8d28a9a6d14" prot="public" virt="virtual"><scope>http_exception</scope><name>what</name></member>
+      <member refid="structneforce_1_1exception_1aaa0545c19e5f71dd3da3ef74e19c190e" prot="public" virt="virtual"><scope>http_exception</scope><name>~exception</name></member>
+      <member refid="structneforce_1_1network__exception_1a9f5acd8fe79897090ac74c1892b59650" prot="public" virt="non-virtual"><scope>http_exception</scope><name>~network_exception</name></member>
+      <member refid="structneforce_1_1system__exception_1ac40c2ccd9ed14c2a4446ed96fec6e61f" prot="public" virt="non-virtual"><scope>http_exception</scope><name>~system_exception</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

@@ -1,5 +1,5 @@
 var hashtable_8hpp =
 [
-    [ "HASH_PRIME_LIST", "group___hash_table.html#ga59058b163fcbd66fd78b93c2537c0afc", null ],
-    [ "HASH_PRIMER_COUNT", "group___hash_table.html#ga4db55d85c398c7b4ef5ed0154ed9140b", null ]
+    [ "neforce::constants::HASH_PRIME_LIST", "hashtable_8hpp.html#a399ac710030fa6a592cf33dc6aafdb88", null ],
+    [ "neforce::constants::HASH_PRIMER_COUNT", "hashtable_8hpp.html#a333c9fbccd58dd05921530a06866bbcc", null ]
 ];

@@ -1,4 +1,4 @@
 var ssl__exception_8hpp =
 [
-    [ "ssl_category", "group___error_code.html#gaaacfb67aaf96e9281c59499eeb838522", null ]
+    [ "neforce::ssl_category", "group___error_code.html#ga21291bf64d44470ffbd9d85fc8340fe5", null ]
 ];

@@ -1,0 +1,518 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1regex__iterator" kind="class" language="C++" prot="public">
+    <compoundname>neforce::regex_iterator</compoundname>
+    <includes refid="regex_8hpp" local="no">regex.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1regex__iterator_1a0db10bb1c3238edd7f99daa15d6d7737" prot="public" static="no">
+        <type><ref refid="structneforce_1_1forward__iterator__tag" kindref="compound">forward_iterator_tag</ref></type>
+        <definition>using neforce::regex_iterator::iterator_category = forward_iterator_tag</definition>
+        <argsstring></argsstring>
+        <name>iterator_category</name>
+        <qualifiedname>neforce::regex_iterator::iterator_category</qualifiedname>
+        <briefdescription>
+<para>迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="343" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="343" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1regex__iterator_1a33d238895abf909486aed159cdc83c7e" prot="public" static="no">
+        <type><ref refid="classneforce_1_1match__result" kindref="compound">match_result</ref></type>
+        <definition>using neforce::regex_iterator::value_type = match_result</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>neforce::regex_iterator::value_type</qualifiedname>
+        <briefdescription>
+<para>元素类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="344" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="344" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1regex__iterator_1a2307a9ef91bf755080f6ee660b009195" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1gab2c4bc5144496796ce8a7feed7b8ad58" kindref="member">ptrdiff_t</ref></type>
+        <definition>using neforce::regex_iterator::difference_type = ptrdiff_t</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>neforce::regex_iterator::difference_type</qualifiedname>
+        <briefdescription>
+<para>差值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="345" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="345" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1regex__iterator_1a22f9846d33a0bc0664fdf8b6cc030440" prot="public" static="no">
+        <type>const <ref refid="classneforce_1_1match__result" kindref="compound">match_result</ref> *</type>
+        <definition>using neforce::regex_iterator::pointer = const match_result*</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>neforce::regex_iterator::pointer</qualifiedname>
+        <briefdescription>
+<para>指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="346" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="346" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1regex__iterator_1a3dcf2dbbbb91697cbef54beca0e090c3" prot="public" static="no">
+        <type>const <ref refid="classneforce_1_1match__result" kindref="compound">match_result</ref> &amp;</type>
+        <definition>using neforce::regex_iterator::reference = const match_result&amp;</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>neforce::regex_iterator::reference</qualifiedname>
+        <briefdescription>
+<para>引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="347" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="347" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1regex__iterator_1a0c955a2d6412016961b54cc4076a1190" prot="private" static="no" mutable="no">
+        <type>const <ref refid="classneforce_1_1regex" kindref="compound">regex</ref> *</type>
+        <definition>const regex* neforce::regex_iterator::regex_</definition>
+        <argsstring></argsstring>
+        <name>regex_</name>
+        <qualifiedname>neforce::regex_iterator::regex_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>关联的正则表达式 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="350" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="350" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1regex__iterator_1af1b03d681f559e950c5b8bd1e660dc8e" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::regex_iterator::subject_</definition>
+        <argsstring></argsstring>
+        <name>subject_</name>
+        <qualifiedname>neforce::regex_iterator::subject_</qualifiedname>
+        <briefdescription>
+<para>待遍历的字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="351" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="351" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1regex__iterator_1a3d6db48996ea89105cb0805fdc5f3931" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1match__result" kindref="compound">match_result</ref></type>
+        <definition>match_result neforce::regex_iterator::current_</definition>
+        <argsstring></argsstring>
+        <name>current_</name>
+        <qualifiedname>neforce::regex_iterator::current_</qualifiedname>
+        <briefdescription>
+<para>当前匹配结果 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="353" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="353" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1regex__iterator_1a578fac06c9e86117a813711250231e91" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::regex_iterator::next_pos_</definition>
+        <argsstring></argsstring>
+        <name>next_pos_</name>
+        <qualifiedname>neforce::regex_iterator::next_pos_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>下一次搜索的起始位置 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="354" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="354" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1regex__iterator_1a5fb0c7efd91f591ff710c32822045b53" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::regex_iterator::done_</definition>
+        <argsstring></argsstring>
+        <name>done_</name>
+        <qualifiedname>neforce::regex_iterator::done_</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>是否已到达末尾 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="355" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="355" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1regex__iterator_1a1d693efb67b437a25c959c7af5e6ff67" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::regex_iterator::find_next</definition>
+        <argsstring>()</argsstring>
+        <name>find_next</name>
+        <qualifiedname>neforce::regex_iterator::find_next</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="357" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1regex__iterator_1a70b230aae39f40e07a504b5abe0626af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::regex_iterator::regex_iterator</definition>
+        <argsstring>()=default</argsstring>
+        <name>regex_iterator</name>
+        <qualifiedname>neforce::regex_iterator::regex_iterator</qualifiedname>
+        <briefdescription>
+<para>默认构造函数，构造结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="363" column="5"/>
+        <referencedby refid="classneforce_1_1regex__iterator_1ad536b090a94d31cc1c70bda8d58d084d" compoundref="regex_8hpp" startline="421" endline="421">begin</referencedby>
+        <referencedby refid="classneforce_1_1regex__iterator_1a7368f24fa3fee5302973486cb84f3cf5" compoundref="regex_8hpp" startline="429" endline="435">end</referencedby>
+        <referencedby refid="classneforce_1_1regex__iterator_1ae63524c4f7a33aa828b5dd6ff592f035" compoundref="regex_8hpp" startline="413" endline="413">operator!=</referencedby>
+        <referencedby refid="classneforce_1_1regex__iterator_1adea33a531ce8dd9f3d84787b346580d2">operator++</referencedby>
+        <referencedby refid="classneforce_1_1regex__iterator_1a5269de7130a5ac98ff8d99e9446a622e" compoundref="regex_8hpp" startline="395" endline="399">operator++</referencedby>
+        <referencedby refid="classneforce_1_1regex__iterator_1a9764ccff54b268f78f31f37ad7fb89c5">operator==</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1regex__iterator_1a0df01093b9e3dfd4a8b263c9b965d5ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::regex_iterator::regex_iterator</definition>
+        <argsstring>(const regex *re, string str, size_t pos=0)</argsstring>
+        <name>regex_iterator</name>
+        <qualifiedname>neforce::regex_iterator::regex_iterator</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1regex" kindref="compound">regex</ref> *</type>
+          <declname>re</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>pos</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>re</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>正则表达式对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待遍历的字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="371" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1regex__iterator_1afd682e8c1aee85e3c06a884eab310d33" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1regex__iterator_1a3dcf2dbbbb91697cbef54beca0e090c3" kindref="member">reference</ref></type>
+        <definition>reference neforce::regex_iterator::operator*</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>neforce::regex_iterator::operator*</qualifiedname>
+        <briefdescription>
+<para>解引用操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前匹配结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="377" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="377" bodyend="377"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1regex__iterator_1a3b7d47160725285e30c0f037d58a3ec2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1regex__iterator_1a22f9846d33a0bc0664fdf8b6cc030440" kindref="member">pointer</ref></type>
+        <definition>pointer neforce::regex_iterator::operator-&gt;</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator-&gt;</name>
+        <qualifiedname>neforce::regex_iterator::operator-&gt;</qualifiedname>
+        <briefdescription>
+<para>成员访问操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前匹配结果指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="383" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="383" bodyend="383"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1regex__iterator_1adea33a531ce8dd9f3d84787b346580d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1regex__iterator_1a70b230aae39f40e07a504b5abe0626af" kindref="member">regex_iterator</ref> &amp;</type>
+        <definition>regex_iterator &amp; neforce::regex_iterator::operator++</definition>
+        <argsstring>()</argsstring>
+        <name>operator++</name>
+        <qualifiedname>neforce::regex_iterator::operator++</qualifiedname>
+        <briefdescription>
+<para>前置递增操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>递增后的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="389" column="20"/>
+        <references refid="classneforce_1_1regex__iterator_1a70b230aae39f40e07a504b5abe0626af">regex_iterator</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1regex__iterator_1a5269de7130a5ac98ff8d99e9446a622e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1regex__iterator_1a70b230aae39f40e07a504b5abe0626af" kindref="member">regex_iterator</ref></type>
+        <definition>regex_iterator neforce::regex_iterator::operator++</definition>
+        <argsstring>(int)</argsstring>
+        <name>operator++</name>
+        <qualifiedname>neforce::regex_iterator::operator++</qualifiedname>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+<para>后置递增操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>递增前的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="395" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="395" bodyend="399"/>
+        <references refid="classneforce_1_1regex__iterator_1a70b230aae39f40e07a504b5abe0626af">regex_iterator</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1regex__iterator_1a9764ccff54b268f78f31f37ad7fb89c5" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::regex_iterator::operator==</definition>
+        <argsstring>(const regex_iterator &amp;other) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>neforce::regex_iterator::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1regex__iterator_1a70b230aae39f40e07a504b5abe0626af" kindref="member">regex_iterator</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>相等比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>相等返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="406" column="11"/>
+        <references refid="classneforce_1_1regex__iterator_1a70b230aae39f40e07a504b5abe0626af">regex_iterator</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1regex__iterator_1ae63524c4f7a33aa828b5dd6ff592f035" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::regex_iterator::operator!=</definition>
+        <argsstring>(const regex_iterator &amp;other) const noexcept</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>neforce::regex_iterator::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1regex__iterator_1a70b230aae39f40e07a504b5abe0626af" kindref="member">regex_iterator</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>不等比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>不等返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="413" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="413" bodyend="413"/>
+        <references refid="classneforce_1_1regex__iterator_1a70b230aae39f40e07a504b5abe0626af">regex_iterator</references>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1regex__iterator_1ad536b090a94d31cc1c70bda8d58d084d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1regex__iterator_1a70b230aae39f40e07a504b5abe0626af" kindref="member">regex_iterator</ref></type>
+        <definition>static regex_iterator neforce::regex_iterator::begin</definition>
+        <argsstring>(const regex *re, const string &amp;str)</argsstring>
+        <name>begin</name>
+        <qualifiedname>neforce::regex_iterator::begin</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1regex" kindref="compound">regex</ref> *</type>
+          <declname>re</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>获取起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>re</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>正则表达式对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待遍历的字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>起始迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="421" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="421" bodyend="421"/>
+        <references refid="classneforce_1_1regex__iterator_1a70b230aae39f40e07a504b5abe0626af">regex_iterator</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1regex__iterator_1a7368f24fa3fee5302973486cb84f3cf5" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1regex__iterator_1a70b230aae39f40e07a504b5abe0626af" kindref="member">regex_iterator</ref></type>
+        <definition>static regex_iterator neforce::regex_iterator::end</definition>
+        <argsstring>(const regex *re, const string &amp;str)</argsstring>
+        <name>end</name>
+        <qualifiedname>neforce::regex_iterator::end</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1regex" kindref="compound">regex</ref> *</type>
+          <declname>re</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>获取结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>re</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>正则表达式对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待遍历的字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>结束迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="429" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="429" bodyend="435"/>
+        <references refid="classneforce_1_1regex__iterator_1a70b230aae39f40e07a504b5abe0626af">regex_iterator</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>正则表达式匹配迭代器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>前向迭代器，惰性遍历字符串中的匹配结果。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="341" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="341" bodyend="436"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1regex__iterator_1ad536b090a94d31cc1c70bda8d58d084d" prot="public" virt="non-virtual"><scope>neforce::regex_iterator</scope><name>begin</name></member>
+      <member refid="classneforce_1_1regex__iterator_1a3d6db48996ea89105cb0805fdc5f3931" prot="private" virt="non-virtual"><scope>neforce::regex_iterator</scope><name>current_</name></member>
+      <member refid="classneforce_1_1regex__iterator_1a2307a9ef91bf755080f6ee660b009195" prot="public" virt="non-virtual"><scope>neforce::regex_iterator</scope><name>difference_type</name></member>
+      <member refid="classneforce_1_1regex__iterator_1a5fb0c7efd91f591ff710c32822045b53" prot="private" virt="non-virtual"><scope>neforce::regex_iterator</scope><name>done_</name></member>
+      <member refid="classneforce_1_1regex__iterator_1a7368f24fa3fee5302973486cb84f3cf5" prot="public" virt="non-virtual"><scope>neforce::regex_iterator</scope><name>end</name></member>
+      <member refid="classneforce_1_1regex__iterator_1a1d693efb67b437a25c959c7af5e6ff67" prot="private" virt="non-virtual"><scope>neforce::regex_iterator</scope><name>find_next</name></member>
+      <member refid="classneforce_1_1regex__iterator_1a0db10bb1c3238edd7f99daa15d6d7737" prot="public" virt="non-virtual"><scope>neforce::regex_iterator</scope><name>iterator_category</name></member>
+      <member refid="classneforce_1_1regex__iterator_1a578fac06c9e86117a813711250231e91" prot="private" virt="non-virtual"><scope>neforce::regex_iterator</scope><name>next_pos_</name></member>
+      <member refid="classneforce_1_1regex__iterator_1ae63524c4f7a33aa828b5dd6ff592f035" prot="public" virt="non-virtual"><scope>neforce::regex_iterator</scope><name>operator!=</name></member>
+      <member refid="classneforce_1_1regex__iterator_1afd682e8c1aee85e3c06a884eab310d33" prot="public" virt="non-virtual"><scope>neforce::regex_iterator</scope><name>operator*</name></member>
+      <member refid="classneforce_1_1regex__iterator_1adea33a531ce8dd9f3d84787b346580d2" prot="public" virt="non-virtual"><scope>neforce::regex_iterator</scope><name>operator++</name></member>
+      <member refid="classneforce_1_1regex__iterator_1a5269de7130a5ac98ff8d99e9446a622e" prot="public" virt="non-virtual"><scope>neforce::regex_iterator</scope><name>operator++</name></member>
+      <member refid="classneforce_1_1regex__iterator_1a3b7d47160725285e30c0f037d58a3ec2" prot="public" virt="non-virtual"><scope>neforce::regex_iterator</scope><name>operator-&gt;</name></member>
+      <member refid="classneforce_1_1regex__iterator_1a9764ccff54b268f78f31f37ad7fb89c5" prot="public" virt="non-virtual"><scope>neforce::regex_iterator</scope><name>operator==</name></member>
+      <member refid="classneforce_1_1regex__iterator_1a22f9846d33a0bc0664fdf8b6cc030440" prot="public" virt="non-virtual"><scope>neforce::regex_iterator</scope><name>pointer</name></member>
+      <member refid="classneforce_1_1regex__iterator_1a3dcf2dbbbb91697cbef54beca0e090c3" prot="public" virt="non-virtual"><scope>neforce::regex_iterator</scope><name>reference</name></member>
+      <member refid="classneforce_1_1regex__iterator_1a0c955a2d6412016961b54cc4076a1190" prot="private" virt="non-virtual"><scope>neforce::regex_iterator</scope><name>regex_</name></member>
+      <member refid="classneforce_1_1regex__iterator_1a70b230aae39f40e07a504b5abe0626af" prot="public" virt="non-virtual"><scope>neforce::regex_iterator</scope><name>regex_iterator</name></member>
+      <member refid="classneforce_1_1regex__iterator_1a0df01093b9e3dfd4a8b263c9b965d5ef" prot="public" virt="non-virtual"><scope>neforce::regex_iterator</scope><name>regex_iterator</name></member>
+      <member refid="classneforce_1_1regex__iterator_1af1b03d681f559e950c5b8bd1e660dc8e" prot="private" virt="non-virtual"><scope>neforce::regex_iterator</scope><name>subject_</name></member>
+      <member refid="classneforce_1_1regex__iterator_1a33d238895abf909486aed159cdc83c7e" prot="public" virt="non-virtual"><scope>neforce::regex_iterator</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

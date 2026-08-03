@@ -1,83 +1,83 @@
 var group___system_info =
 [
-    [ "sysinfo", "classsysinfo.html", [
-      [ "system_info", "structsysinfo_1_1system__info.html", [
-        [ "active_processor_mask", "structsysinfo_1_1system__info.html#ab4cccf7a5a08e7b3fd531e4013e4e9a5", null ],
-        [ "allocation_granularity", "structsysinfo_1_1system__info.html#a0b813b3fa50d3c8fcc3838f808069013", null ],
-        [ "max_app_address", "structsysinfo_1_1system__info.html#a3de0dd16d5a0437550cd0a18ded29c99", null ],
-        [ "min_app_address", "structsysinfo_1_1system__info.html#a44d42c84ecc1eba388c1a87134517b41", null ],
-        [ "page_size", "structsysinfo_1_1system__info.html#a7ec79ae14223229f474ddca0e4c75023", null ],
-        [ "processor_level", "structsysinfo_1_1system__info.html#a52684dbb07828a82036b3858050b6947", null ],
-        [ "processor_numbers", "structsysinfo_1_1system__info.html#a89824b325e7a16edf0e1c776ed1cfd5e", null ],
-        [ "processor_revision", "structsysinfo_1_1system__info.html#a89038a3ebb1bdaebff488872f57e8557", null ]
+    [ "neforce::sysinfo", "classneforce_1_1sysinfo.html", [
+      [ "system_info", "structneforce_1_1sysinfo_1_1system__info.html", [
+        [ "active_processor_mask", "structneforce_1_1sysinfo_1_1system__info.html#a04a1feb36d6a1598e4a42105eaa7b7f9", null ],
+        [ "allocation_granularity", "structneforce_1_1sysinfo_1_1system__info.html#a2d8fd549ecc94e1bfcaf81622158c7fb", null ],
+        [ "max_app_address", "structneforce_1_1sysinfo_1_1system__info.html#a15ce55a69db683e0c5853fddd3535ba3", null ],
+        [ "min_app_address", "structneforce_1_1sysinfo_1_1system__info.html#a3893c2f30884f4901dd0e083cd065189", null ],
+        [ "page_size", "structneforce_1_1sysinfo_1_1system__info.html#a4dfbe0c594989e8ba4c93ff9146ac86b", null ],
+        [ "processor_level", "structneforce_1_1sysinfo_1_1system__info.html#adcfc4a806f425bd4df310290116b7154", null ],
+        [ "processor_numbers", "structneforce_1_1sysinfo_1_1system__info.html#a32968d8a1d3a447804297a5b4112add9", null ],
+        [ "processor_revision", "structneforce_1_1sysinfo_1_1system__info.html#aa1857900cf9b9633ef9f4d3056fe5628", null ]
       ] ],
-      [ "memory_info", "structsysinfo_1_1memory__info.html", [
-        [ "available_memory", "structsysinfo_1_1memory__info.html#a5b09a82d68c13254c114100775f79e7d", null ],
-        [ "physical_memory_usage", "structsysinfo_1_1memory__info.html#a4ebfbcae263f478553c366d62a798204", null ],
-        [ "available_page_file", "structsysinfo_1_1memory__info.html#a4c5e4ce8d790deca09645139ea1710ff", null ],
-        [ "available_physical", "structsysinfo_1_1memory__info.html#a21a729921aebe562a2cf6ff03b02fe35", null ],
-        [ "available_virtual", "structsysinfo_1_1memory__info.html#a1092f6344f1cb17952196fce0f494ca2", null ],
-        [ "total_page_file", "structsysinfo_1_1memory__info.html#ab819612aaac6f40253537d938978b5c5", null ],
-        [ "total_physical", "structsysinfo_1_1memory__info.html#a04be20191bbc0dc8ab34a2b24b471c0c", null ],
-        [ "total_virtual", "structsysinfo_1_1memory__info.html#afe2a7222ee4f088e014338f60e9a70e0", null ]
+      [ "memory_info", "structneforce_1_1sysinfo_1_1memory__info.html", [
+        [ "available_memory", "structneforce_1_1sysinfo_1_1memory__info.html#a9003d0771a3cdf0685754b5d00b4983f", null ],
+        [ "physical_memory_usage", "structneforce_1_1sysinfo_1_1memory__info.html#a770f3c9fdd1c05ced6c3a75c3df03032", null ],
+        [ "available_page_file", "structneforce_1_1sysinfo_1_1memory__info.html#a19e0b5c71084e895aaa6cba2eee76265", null ],
+        [ "available_physical", "structneforce_1_1sysinfo_1_1memory__info.html#a3a3d8f41ddd798651acecaeb397bac79", null ],
+        [ "available_virtual", "structneforce_1_1sysinfo_1_1memory__info.html#abf124da0e45e64fc9a701649229db0df", null ],
+        [ "total_page_file", "structneforce_1_1sysinfo_1_1memory__info.html#a916531d5556c26f3666fb62b111f3e54", null ],
+        [ "total_physical", "structneforce_1_1sysinfo_1_1memory__info.html#a78a18c5316fa02ab49cb7aff6852307e", null ],
+        [ "total_virtual", "structneforce_1_1sysinfo_1_1memory__info.html#afff49abbcf6d0d12e1fb8f81548652f1", null ]
       ] ],
-      [ "disk_info", "structsysinfo_1_1disk__info.html", [
-        [ "usage_percent", "structsysinfo_1_1disk__info.html#a6fc75b3ae4046c7a635bd60e234fbffa", null ],
-        [ "free_bytes", "structsysinfo_1_1disk__info.html#a47d9aadf1bf2462a1517cb235ac6600a", null ],
-        [ "path", "structsysinfo_1_1disk__info.html#abc221442adf3f3f8445d8053a9c479d2", null ],
-        [ "total_bytes", "structsysinfo_1_1disk__info.html#a51d85e699513da91899e1d5a80ab0a12", null ],
-        [ "used_bytes", "structsysinfo_1_1disk__info.html#a2fafc06b3ec9f99e70985d6c0a36ce05", null ]
+      [ "disk_info", "structneforce_1_1sysinfo_1_1disk__info.html", [
+        [ "usage_percent", "structneforce_1_1sysinfo_1_1disk__info.html#a3a59684dbf1310ba04621d97002b13d6", null ],
+        [ "free_bytes", "structneforce_1_1sysinfo_1_1disk__info.html#ac63b34cff59d36190895d1b6150ce37f", null ],
+        [ "path", "structneforce_1_1sysinfo_1_1disk__info.html#a01c2a82b367e4bfd4ad03324655b6c8e", null ],
+        [ "total_bytes", "structneforce_1_1sysinfo_1_1disk__info.html#ab0f67a84b7d44fe00584e2bf199c2095", null ],
+        [ "used_bytes", "structneforce_1_1sysinfo_1_1disk__info.html#a5fd3677bcc760682a5d6e08a7b6fa762", null ]
       ] ],
-      [ "CPU_info", "structsysinfo_1_1_c_p_u__info.html", [
-        [ "hyperthreading", "structsysinfo_1_1_c_p_u__info.html#a14eec4a7e08ee652775f5127cab015af", null ],
-        [ "brand", "structsysinfo_1_1_c_p_u__info.html#ac444585514c69df4fb285d73905c8b11", null ],
-        [ "cores", "structsysinfo_1_1_c_p_u__info.html#a72950152b1295f64fbae6363e0a91215", null ],
-        [ "current_MHz", "structsysinfo_1_1_c_p_u__info.html#a1b737fae9977a80fdbcd3b5476d2c1ec", null ],
-        [ "features", "structsysinfo_1_1_c_p_u__info.html#a13f2d5ac60ff53dfb5415c8a4c55ee49", null ],
-        [ "logical_processors", "structsysinfo_1_1_c_p_u__info.html#af1ecda498492da2dd5ad938d5096a530", null ],
-        [ "max_MHz", "structsysinfo_1_1_c_p_u__info.html#aad2f7f4d8b6e92bf324e7dfbc6011705", null ],
-        [ "vendor", "structsysinfo_1_1_c_p_u__info.html#ad92712b7ebb0f39a392fa9b79c6d591b", null ]
+      [ "CPU_info", "structneforce_1_1sysinfo_1_1_c_p_u__info.html", [
+        [ "hyperthreading", "structneforce_1_1sysinfo_1_1_c_p_u__info.html#a7d7c8f24a8f9d8453447266583d310f0", null ],
+        [ "brand", "structneforce_1_1sysinfo_1_1_c_p_u__info.html#ace266418d8f1508039fd9c632020fc5d", null ],
+        [ "cores", "structneforce_1_1sysinfo_1_1_c_p_u__info.html#a0a2954fbae77bc4bdf50ff4407b64dca", null ],
+        [ "current_MHz", "structneforce_1_1sysinfo_1_1_c_p_u__info.html#aaa52b734b1fe9baff589fb6bacf18248", null ],
+        [ "features", "structneforce_1_1sysinfo_1_1_c_p_u__info.html#a09fb1d17fe61024bd28ecef0653206a3", null ],
+        [ "logical_processors", "structneforce_1_1sysinfo_1_1_c_p_u__info.html#adb4fe3208e1e2bcfb93136b9e4eba1e2", null ],
+        [ "max_MHz", "structneforce_1_1sysinfo_1_1_c_p_u__info.html#aafa49284a91b3708f631ca4a8179fc85", null ],
+        [ "vendor", "structneforce_1_1sysinfo_1_1_c_p_u__info.html#a8b6df279acd2b48dfbae28ba82ddca5a", null ]
       ] ],
-      [ "os_version_info", "structsysinfo_1_1os__version__info.html", [
-        [ "version", "structsysinfo_1_1os__version__info.html#aa471b825701252b9e5f399187132c395", null ],
-        [ "build", "structsysinfo_1_1os__version__info.html#a201fa2fa0bd48266b2fc5b51d2adffe6", null ],
-        [ "csd_version", "structsysinfo_1_1os__version__info.html#a89f969c3030593ee73ee26fa9a09b55c", null ],
-        [ "major", "structsysinfo_1_1os__version__info.html#a4bc0bcb61957f45421e727cabcf43de8", null ],
-        [ "minor", "structsysinfo_1_1os__version__info.html#a8c7e7dd389d78e4994a8432e60306767", null ],
-        [ "platform_id", "structsysinfo_1_1os__version__info.html#a340ac2d32b3d93b475587aab92695c5f", null ],
-        [ "product_name", "structsysinfo_1_1os__version__info.html#a38e874b972252277bf6b51d499755f62", null ]
+      [ "os_version_info", "structneforce_1_1sysinfo_1_1os__version__info.html", [
+        [ "version", "structneforce_1_1sysinfo_1_1os__version__info.html#a98f76e53ccf82563926f623b27a49d59", null ],
+        [ "build", "structneforce_1_1sysinfo_1_1os__version__info.html#a8af7afb66e8339fc0f4b3f8bd20aaaa1", null ],
+        [ "csd_version", "structneforce_1_1sysinfo_1_1os__version__info.html#ad43f46f50c61c48b13ecf70000affc2e", null ],
+        [ "major", "structneforce_1_1sysinfo_1_1os__version__info.html#a11aa6cb3de3be9ad35a604d83ccc8ed4", null ],
+        [ "minor", "structneforce_1_1sysinfo_1_1os__version__info.html#a0ac53e79ba6a7d661ce8753fb89b9daf", null ],
+        [ "platform_id", "structneforce_1_1sysinfo_1_1os__version__info.html#a420579ffdde5e70a359a3208b4373d19", null ],
+        [ "product_name", "structneforce_1_1sysinfo_1_1os__version__info.html#afc915aa23a54345b498d6c1e124d41e5", null ]
       ] ],
-      [ "network_interface", "structsysinfo_1_1network__interface.html", [
-        [ "address", "structsysinfo_1_1network__interface.html#a20136b55fc52f8ab6d6bd8aeac7edca1", null ],
-        [ "is_up", "structsysinfo_1_1network__interface.html#a3bc405ed38db6f9102bccec9a689f2bd", null ],
-        [ "mac", "structsysinfo_1_1network__interface.html#aa4350c4fce058e26db0b0dbc95dd7277", null ],
-        [ "name", "structsysinfo_1_1network__interface.html#a7dbdfd7b18468aefe2981ba6ee3484ee", null ],
-        [ "netmask", "structsysinfo_1_1network__interface.html#a0083c64f3f71c1d1308d6113e48a4a6b", null ]
+      [ "network_interface", "structneforce_1_1sysinfo_1_1network__interface.html", [
+        [ "address", "structneforce_1_1sysinfo_1_1network__interface.html#a9c6450e72f83be82f0a8411d4094ed0f", null ],
+        [ "is_up", "structneforce_1_1sysinfo_1_1network__interface.html#ae8d45a7da58955e50bc8dad4b0d2b37e", null ],
+        [ "mac", "structneforce_1_1sysinfo_1_1network__interface.html#ae759042abecfa5eac6744a6b60bf8cfe", null ],
+        [ "name", "structneforce_1_1sysinfo_1_1network__interface.html#a0158c2d2aa1d2c17811519713f00837c", null ],
+        [ "netmask", "structneforce_1_1sysinfo_1_1network__interface.html#a542b4054a29c080c2e313bc06277c600", null ]
       ] ],
-      [ "numa_node_info", "structsysinfo_1_1numa__node__info.html", [
-        [ "core_count", "structsysinfo_1_1numa__node__info.html#ac94db0463939ad51937796759d751fd7", null ],
-        [ "core_list", "structsysinfo_1_1numa__node__info.html#ad0fb7ee185a45c33d65f3f5340f6e1ab", null ],
-        [ "core_mask", "structsysinfo_1_1numa__node__info.html#ade6ecad47efed59efccdfb8f9d54ecb9", null ],
-        [ "node_id", "structsysinfo_1_1numa__node__info.html#af0c493c1bb00aa7d9a6b284668f6cadd", null ]
+      [ "numa_node_info", "structneforce_1_1sysinfo_1_1numa__node__info.html", [
+        [ "core_count", "structneforce_1_1sysinfo_1_1numa__node__info.html#ac25a7a4d05791f6a444cd3d878655acd", null ],
+        [ "core_list", "structneforce_1_1sysinfo_1_1numa__node__info.html#a89ff21622a5a3df6cc65be24ef83ef18", null ],
+        [ "core_mask", "structneforce_1_1sysinfo_1_1numa__node__info.html#aedecd7e033d5189522bc1820b2a8f6f0", null ],
+        [ "node_id", "structneforce_1_1sysinfo_1_1numa__node__info.html#a0e3d9f0bd0d381e031d1c7f3865b9d90", null ]
       ] ],
-      [ "architecture", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63", [
-        [ "UNKNOWN", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63a696b031073e74bf2cb98e5ef201d4aa3", null ],
-        [ "X86", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63afd1a4608b5b463bc7a41d86a1662d3b7", null ],
-        [ "X64", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63af0851da0e02bf22830828822f578dc8f", null ],
-        [ "ARM", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63a47f45e65244c17ec9fa8771a5c6d60e1", null ],
-        [ "ARM64", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63ab9b55c80d095761ac7757ced0fedadc4", null ],
-        [ "RISCV32", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63a9fe8c36311da48049559d1e1f119f8ad", null ],
-        [ "RISCV64", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63aafaf0bad004e6a71e15785a0e5089263", null ],
-        [ "LOONGARCH64", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63a444899381b9d044c3d148a9e99a3ec9f", null ],
-        [ "LOONGARCH32", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63a3a91efc2ac870d790cd3e6fc9b7c7f9a", null ]
+      [ "architecture", "classneforce_1_1sysinfo.html#a27105d97f90ef552c74ab1dd05f02b19", [
+        [ "UNKNOWN", "classneforce_1_1sysinfo.html#a27105d97f90ef552c74ab1dd05f02b19a696b031073e74bf2cb98e5ef201d4aa3", null ],
+        [ "X86", "classneforce_1_1sysinfo.html#a27105d97f90ef552c74ab1dd05f02b19afd1a4608b5b463bc7a41d86a1662d3b7", null ],
+        [ "X64", "classneforce_1_1sysinfo.html#a27105d97f90ef552c74ab1dd05f02b19af0851da0e02bf22830828822f578dc8f", null ],
+        [ "ARM", "classneforce_1_1sysinfo.html#a27105d97f90ef552c74ab1dd05f02b19a47f45e65244c17ec9fa8771a5c6d60e1", null ],
+        [ "ARM64", "classneforce_1_1sysinfo.html#a27105d97f90ef552c74ab1dd05f02b19ab9b55c80d095761ac7757ced0fedadc4", null ],
+        [ "RISCV32", "classneforce_1_1sysinfo.html#a27105d97f90ef552c74ab1dd05f02b19a9fe8c36311da48049559d1e1f119f8ad", null ],
+        [ "RISCV64", "classneforce_1_1sysinfo.html#a27105d97f90ef552c74ab1dd05f02b19aafaf0bad004e6a71e15785a0e5089263", null ],
+        [ "LOONGARCH64", "classneforce_1_1sysinfo.html#a27105d97f90ef552c74ab1dd05f02b19a444899381b9d044c3d148a9e99a3ec9f", null ],
+        [ "LOONGARCH32", "classneforce_1_1sysinfo.html#a27105d97f90ef552c74ab1dd05f02b19a3a91efc2ac870d790cd3e6fc9b7c7f9a", null ]
       ] ],
-      [ "get_architecture", "classsysinfo.html#a263fc148efdf13bbca1b9923aba436a9", null ],
-      [ "get_CPU_info", "classsysinfo.html#a12cd20c6d4ac8029b5c12430d8508ed5", null ],
-      [ "get_memory_info", "classsysinfo.html#a6f58a437df985dfc5817a76dbfe967e6", null ],
-      [ "get_numa_info", "classsysinfo.html#a49edb3a8460ced595fe82684f179fe8e", null ],
-      [ "get_os_version_info", "classsysinfo.html#a38b1558f84e3d0dec584ba243ee27d6f", null ],
-      [ "get_system_info", "classsysinfo.html#a683ee1cdfdb503e7e36a3348bfa81602", null ],
-      [ "is_initialized", "classsysinfo.html#ae4bc26b756f0201340e586d61ec1321f", null ],
-      [ "refresh", "classsysinfo.html#aa59d27a7571c3ccfa6fff2c833f6efeb", null ]
+      [ "get_architecture", "classneforce_1_1sysinfo.html#aa6d8fd8ab117b12b2986450a56ff2383", null ],
+      [ "get_CPU_info", "classneforce_1_1sysinfo.html#a95bc7bf201f959fdaedbdaab982b7a6e", null ],
+      [ "get_memory_info", "classneforce_1_1sysinfo.html#af2314d3b9f307b64a139e6f3e8e89395", null ],
+      [ "get_numa_info", "classneforce_1_1sysinfo.html#a3d9c3709d1e248dbd24d94728ceda25d", null ],
+      [ "get_os_version_info", "classneforce_1_1sysinfo.html#aede07f3032b920adbea4769a376213cf", null ],
+      [ "get_system_info", "classneforce_1_1sysinfo.html#ae5628f88773c1da5aca39d76113632df", null ],
+      [ "is_initialized", "classneforce_1_1sysinfo.html#a1418893ac721e5769ff0f19749af785a", null ],
+      [ "refresh", "classneforce_1_1sysinfo.html#aa65ba66521c5b1eb70ad5a38572167d2", null ]
     ] ]
 ];

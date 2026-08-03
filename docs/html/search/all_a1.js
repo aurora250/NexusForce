@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['稀疏向量_0',['稀疏向量',['../group___sparse_vector.html',1,'']]]
+  ['百分号编码规则_0',['百分号编码规则',['../structneforce_1_1url.html#percent_encoding',1,'']]]
 ];

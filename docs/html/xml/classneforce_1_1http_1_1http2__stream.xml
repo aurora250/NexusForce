@@ -1,0 +1,423 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1http_1_1http2__stream" kind="class" language="C++" prot="public">
+    <compoundname>neforce::http::http2_stream</compoundname>
+    <includes refid="http2__protocol_8hpp" local="no">http2_protocol.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__stream_1a252f2a784702791aa560e1f5e68fc5b7" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::http::http2_stream::stream_id_</definition>
+        <argsstring></argsstring>
+        <name>stream_id_</name>
+        <qualifiedname>neforce::http::http2_stream::stream_id_</qualifiedname>
+        <briefdescription>
+<para>流 ID </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="419" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="419" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__stream_1a52392c1804328de90c8dbf4daf4adda3" prot="private" static="no" mutable="no">
+        <type><ref refid="group___h_t_t_p_1gaadc69c9550350c47c775873440200c15" kindref="member">http2_stream_state</ref></type>
+        <definition>http2_stream_state neforce::http::http2_stream::state_</definition>
+        <argsstring></argsstring>
+        <name>state_</name>
+        <qualifiedname>neforce::http::http2_stream::state_</qualifiedname>
+        <initializer>= http2_stream_state::IDLE</initializer>
+        <briefdescription>
+<para>当前流状态 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="421" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="421" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__stream_1a40bf4f7252316d2fa29114956644355b" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::http::http2_stream::local_window_</definition>
+        <argsstring></argsstring>
+        <name>local_window_</name>
+        <qualifiedname>neforce::http::http2_stream::local_window_</qualifiedname>
+        <initializer>= <ref refid="group___h_t_t_p_1ga305a6fad2740872d6fdda25132f7a134" kindref="member">HTTP2_DEFAULT_INITIAL_WINDOW_SIZE</ref></initializer>
+        <briefdescription>
+<para>本地流控窗口 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="423" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="423" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http2__stream_1aa072ac45f44871c8d36e090cf46de8f6" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::http::http2_stream::remote_window_</definition>
+        <argsstring></argsstring>
+        <name>remote_window_</name>
+        <qualifiedname>neforce::http::http2_stream::remote_window_</qualifiedname>
+        <initializer>= <ref refid="group___h_t_t_p_1ga305a6fad2740872d6fdda25132f7a134" kindref="member">HTTP2_DEFAULT_INITIAL_WINDOW_SIZE</ref></initializer>
+        <briefdescription>
+<para>远端流控窗口 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="425" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="425" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__stream_1ae2ac553764dee744e7d38afac24495a4" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::http2_stream::http2_stream</definition>
+        <argsstring>(uint32_t stream_id)</argsstring>
+        <name>http2_stream</name>
+        <qualifiedname>neforce::http::http2_stream::http2_stream</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>stream_id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="392" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__stream_1a45605e91b960d3e9f631ee988c54095d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::http::http2_stream::id</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>id</name>
+        <qualifiedname>neforce::http::http2_stream::id</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="394" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="394" bodyend="394"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__stream_1a4345a4b00f21391d89e51cd5abd0d075" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___h_t_t_p_1gaadc69c9550350c47c775873440200c15" kindref="member">http2_stream_state</ref></type>
+        <definition>http2_stream_state neforce::http::http2_stream::state</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>state</name>
+        <qualifiedname>neforce::http::http2_stream::state</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="395" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="395" bodyend="395"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__stream_1a469ae1967927d36bf0594fe893f4fcdf" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::http::http2_stream::can_send_headers</definition>
+        <argsstring>() const</argsstring>
+        <name>can_send_headers</name>
+        <qualifiedname>neforce::http::http2_stream::can_send_headers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="397" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__stream_1ad1b37a7d52ffe386bc0d071a7a5aad3c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::http::http2_stream::can_send_data</definition>
+        <argsstring>() const</argsstring>
+        <name>can_send_data</name>
+        <qualifiedname>neforce::http::http2_stream::can_send_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="398" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__stream_1af242688f5db6dd52b5be05cc3864d5fa" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::http::http2_stream::can_receive</definition>
+        <argsstring>() const</argsstring>
+        <name>can_receive</name>
+        <qualifiedname>neforce::http::http2_stream::can_receive</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="399" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__stream_1a31f83898bf47415c4ca82102b8dbea46" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::http::http2_stream::is_closed</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_closed</name>
+        <qualifiedname>neforce::http::http2_stream::is_closed</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="400" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="400" bodyend="400"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__stream_1ac5eb9385700caa729e59d203179c5d7f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_stream::on_send_headers</definition>
+        <argsstring>(bool end_stream)</argsstring>
+        <name>on_send_headers</name>
+        <qualifiedname>neforce::http::http2_stream::on_send_headers</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>end_stream</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="402" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__stream_1a5c9bbef82819471f316b3d2dfeb58ae3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_stream::on_send_data</definition>
+        <argsstring>(bool end_stream)</argsstring>
+        <name>on_send_data</name>
+        <qualifiedname>neforce::http::http2_stream::on_send_data</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>end_stream</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="403" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__stream_1af058dd5930dddf691ab19c2766df8797" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_stream::on_receive_headers</definition>
+        <argsstring>(bool end_stream)</argsstring>
+        <name>on_receive_headers</name>
+        <qualifiedname>neforce::http::http2_stream::on_receive_headers</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>end_stream</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="404" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__stream_1a305b9ec48e63083ef42b1d9323b706f1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_stream::on_receive_data</definition>
+        <argsstring>(bool end_stream)</argsstring>
+        <name>on_receive_data</name>
+        <qualifiedname>neforce::http::http2_stream::on_receive_data</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>end_stream</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="405" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__stream_1ade777736605de00e2798ee930695c3d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_stream::on_send_rst_stream</definition>
+        <argsstring>()</argsstring>
+        <name>on_send_rst_stream</name>
+        <qualifiedname>neforce::http::http2_stream::on_send_rst_stream</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="406" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__stream_1abf4f9794f231cb110d5143596714c89e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_stream::on_receive_rst_stream</definition>
+        <argsstring>()</argsstring>
+        <name>on_receive_rst_stream</name>
+        <qualifiedname>neforce::http::http2_stream::on_receive_rst_stream</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="407" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__stream_1a0cf86de2f4123ce40ba05e70b9e44af5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_stream::close</definition>
+        <argsstring>()</argsstring>
+        <name>close</name>
+        <qualifiedname>neforce::http::http2_stream::close</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="408" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__stream_1a9908ee6cdc6071dba6816b617b5aded7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::http::http2_stream::local_window</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>local_window</name>
+        <qualifiedname>neforce::http::http2_stream::local_window</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="410" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="410" bodyend="410"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__stream_1aab68fcba37b0eb937790e785731ba65d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::http::http2_stream::remote_window</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>remote_window</name>
+        <qualifiedname>neforce::http::http2_stream::remote_window</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="411" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="411" bodyend="411"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__stream_1a4736a415aff74fb76326f2f9c6075d97" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_stream::consume_local_window</definition>
+        <argsstring>(uint32_t amount)</argsstring>
+        <name>consume_local_window</name>
+        <qualifiedname>neforce::http::http2_stream::consume_local_window</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>amount</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="412" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__stream_1a29f0b4c0bbd3a0f1c817688d20ea18ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_stream::consume_remote_window</definition>
+        <argsstring>(uint32_t amount)</argsstring>
+        <name>consume_remote_window</name>
+        <qualifiedname>neforce::http::http2_stream::consume_remote_window</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>amount</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="413" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__stream_1ac5d264cac6571ca706f846a98184c148" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_stream::add_local_window</definition>
+        <argsstring>(uint32_t amount)</argsstring>
+        <name>add_local_window</name>
+        <qualifiedname>neforce::http::http2_stream::add_local_window</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>amount</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="414" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http2__stream_1ac75ee41c08db98a40a43b73992c2fc6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http2_stream::add_remote_window</definition>
+        <argsstring>(uint32_t amount)</argsstring>
+        <name>add_remote_window</name>
+        <qualifiedname>neforce::http::http2_stream::add_remote_window</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>amount</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="415" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>HTTP/2 流状态机 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>追踪单个 HTTP/2 流的生命周期状态和流控窗口。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="390" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="390" bodyend="426"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1http_1_1http2__stream_1ac5d264cac6571ca706f846a98184c148" prot="public" virt="non-virtual"><scope>neforce::http::http2_stream</scope><name>add_local_window</name></member>
+      <member refid="classneforce_1_1http_1_1http2__stream_1ac75ee41c08db98a40a43b73992c2fc6c" prot="public" virt="non-virtual"><scope>neforce::http::http2_stream</scope><name>add_remote_window</name></member>
+      <member refid="classneforce_1_1http_1_1http2__stream_1af242688f5db6dd52b5be05cc3864d5fa" prot="public" virt="non-virtual"><scope>neforce::http::http2_stream</scope><name>can_receive</name></member>
+      <member refid="classneforce_1_1http_1_1http2__stream_1ad1b37a7d52ffe386bc0d071a7a5aad3c" prot="public" virt="non-virtual"><scope>neforce::http::http2_stream</scope><name>can_send_data</name></member>
+      <member refid="classneforce_1_1http_1_1http2__stream_1a469ae1967927d36bf0594fe893f4fcdf" prot="public" virt="non-virtual"><scope>neforce::http::http2_stream</scope><name>can_send_headers</name></member>
+      <member refid="classneforce_1_1http_1_1http2__stream_1a0cf86de2f4123ce40ba05e70b9e44af5" prot="public" virt="non-virtual"><scope>neforce::http::http2_stream</scope><name>close</name></member>
+      <member refid="classneforce_1_1http_1_1http2__stream_1a4736a415aff74fb76326f2f9c6075d97" prot="public" virt="non-virtual"><scope>neforce::http::http2_stream</scope><name>consume_local_window</name></member>
+      <member refid="classneforce_1_1http_1_1http2__stream_1a29f0b4c0bbd3a0f1c817688d20ea18ee" prot="public" virt="non-virtual"><scope>neforce::http::http2_stream</scope><name>consume_remote_window</name></member>
+      <member refid="classneforce_1_1http_1_1http2__stream_1ae2ac553764dee744e7d38afac24495a4" prot="public" virt="non-virtual"><scope>neforce::http::http2_stream</scope><name>http2_stream</name></member>
+      <member refid="classneforce_1_1http_1_1http2__stream_1a45605e91b960d3e9f631ee988c54095d" prot="public" virt="non-virtual"><scope>neforce::http::http2_stream</scope><name>id</name></member>
+      <member refid="classneforce_1_1http_1_1http2__stream_1a31f83898bf47415c4ca82102b8dbea46" prot="public" virt="non-virtual"><scope>neforce::http::http2_stream</scope><name>is_closed</name></member>
+      <member refid="classneforce_1_1http_1_1http2__stream_1a9908ee6cdc6071dba6816b617b5aded7" prot="public" virt="non-virtual"><scope>neforce::http::http2_stream</scope><name>local_window</name></member>
+      <member refid="classneforce_1_1http_1_1http2__stream_1a40bf4f7252316d2fa29114956644355b" prot="private" virt="non-virtual"><scope>neforce::http::http2_stream</scope><name>local_window_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__stream_1a305b9ec48e63083ef42b1d9323b706f1" prot="public" virt="non-virtual"><scope>neforce::http::http2_stream</scope><name>on_receive_data</name></member>
+      <member refid="classneforce_1_1http_1_1http2__stream_1af058dd5930dddf691ab19c2766df8797" prot="public" virt="non-virtual"><scope>neforce::http::http2_stream</scope><name>on_receive_headers</name></member>
+      <member refid="classneforce_1_1http_1_1http2__stream_1abf4f9794f231cb110d5143596714c89e" prot="public" virt="non-virtual"><scope>neforce::http::http2_stream</scope><name>on_receive_rst_stream</name></member>
+      <member refid="classneforce_1_1http_1_1http2__stream_1a5c9bbef82819471f316b3d2dfeb58ae3" prot="public" virt="non-virtual"><scope>neforce::http::http2_stream</scope><name>on_send_data</name></member>
+      <member refid="classneforce_1_1http_1_1http2__stream_1ac5eb9385700caa729e59d203179c5d7f" prot="public" virt="non-virtual"><scope>neforce::http::http2_stream</scope><name>on_send_headers</name></member>
+      <member refid="classneforce_1_1http_1_1http2__stream_1ade777736605de00e2798ee930695c3d1" prot="public" virt="non-virtual"><scope>neforce::http::http2_stream</scope><name>on_send_rst_stream</name></member>
+      <member refid="classneforce_1_1http_1_1http2__stream_1aab68fcba37b0eb937790e785731ba65d" prot="public" virt="non-virtual"><scope>neforce::http::http2_stream</scope><name>remote_window</name></member>
+      <member refid="classneforce_1_1http_1_1http2__stream_1aa072ac45f44871c8d36e090cf46de8f6" prot="private" virt="non-virtual"><scope>neforce::http::http2_stream</scope><name>remote_window_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__stream_1a4345a4b00f21391d89e51cd5abd0d075" prot="public" virt="non-virtual"><scope>neforce::http::http2_stream</scope><name>state</name></member>
+      <member refid="classneforce_1_1http_1_1http2__stream_1a52392c1804328de90c8dbf4daf4adda3" prot="private" virt="non-virtual"><scope>neforce::http::http2_stream</scope><name>state_</name></member>
+      <member refid="classneforce_1_1http_1_1http2__stream_1a252f2a784702791aa560e1f5e68fc5b7" prot="private" virt="non-virtual"><scope>neforce::http::http2_stream</scope><name>stream_id_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

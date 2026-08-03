@@ -1,0 +1,643 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::bitmap_iterator&lt; IsConst, BitMap &gt; 模板结构体 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('structneforce_1_1bitmap__iterator.html','','structneforce_1_1bitmap__iterator-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::bitmap_iterator&lt; IsConst, BitMap &gt; 模板结构体 参考<div class="ingroups"><a class="el" href="group___bit_manipulation.html">位操作</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>位图迭代器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="bitmap_8hpp_source.html">bitmap.hpp</a>&gt;</code></p>
+<div class="dynheader">
+类 neforce::bitmap_iterator&lt; IsConst, BitMap &gt; 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structneforce_1_1bitmap__iterator__inherit__graph.svg" width="192" height="267"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a997bfecbe9656815bdb2534e857ca530" id="r_a997bfecbe9656815bdb2534e857ca530"><td class="memItemLeft"><a id="a997bfecbe9656815bdb2534e857ca530" name="a997bfecbe9656815bdb2534e857ca530"></a>
+using&#160;</td><td class="memItemRight"><b>container_type</b> = BitMap</td></tr>
+<tr class="memdesc:a997bfecbe9656815bdb2534e857ca530"><td class="mdescLeft">&#160;</td><td class="mdescRight">容器类型 <br /></td></tr>
+<tr class="memitem:a293b2c2a53a44c15f52c6b8cc19de58f" id="r_a293b2c2a53a44c15f52c6b8cc19de58f"><td class="memItemLeft"><a id="a293b2c2a53a44c15f52c6b8cc19de58f" name="a293b2c2a53a44c15f52c6b8cc19de58f"></a>
+using&#160;</td><td class="memItemRight"><b>value_type</b> = typename container_type::value_type</td></tr>
+<tr class="memdesc:a293b2c2a53a44c15f52c6b8cc19de58f"><td class="mdescLeft">&#160;</td><td class="mdescRight">值类型 <br /></td></tr>
+<tr class="memitem:ad9a971f7c7d72d73056407dc65169a0f" id="r_ad9a971f7c7d72d73056407dc65169a0f"><td class="memItemLeft"><a id="ad9a971f7c7d72d73056407dc65169a0f" name="ad9a971f7c7d72d73056407dc65169a0f"></a>
+using&#160;</td><td class="memItemRight"><b>size_type</b> = typename container_type::size_type</td></tr>
+<tr class="memdesc:ad9a971f7c7d72d73056407dc65169a0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">大小类型 <br /></td></tr>
+<tr class="memitem:a4bdf84955875394035af27ba7f0fd4ab" id="r_a4bdf84955875394035af27ba7f0fd4ab"><td class="memItemLeft"><a id="a4bdf84955875394035af27ba7f0fd4ab" name="a4bdf84955875394035af27ba7f0fd4ab"></a>
+using&#160;</td><td class="memItemRight"><b>difference_type</b> = typename container_type::difference_type</td></tr>
+<tr class="memdesc:a4bdf84955875394035af27ba7f0fd4ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">差值类型 <br /></td></tr>
+<tr class="memitem:a579cc90e3cf1dbfb37c98f5fd041a537" id="r_a579cc90e3cf1dbfb37c98f5fd041a537"><td class="memItemLeft"><a id="a579cc90e3cf1dbfb37c98f5fd041a537" name="a579cc90e3cf1dbfb37c98f5fd041a537"></a>
+using&#160;</td><td class="memItemRight"><b>iterator_category</b> = <a class="el" href="structneforce_1_1random__access__iterator__tag.html">random_access_iterator_tag</a></td></tr>
+<tr class="memdesc:a579cc90e3cf1dbfb37c98f5fd041a537"><td class="mdescLeft">&#160;</td><td class="mdescRight">迭代器类别 <br /></td></tr>
+<tr class="memitem:a0013b03f992cd27d824af36f8aa99318" id="r_a0013b03f992cd27d824af36f8aa99318"><td class="memItemLeft"><a id="a0013b03f992cd27d824af36f8aa99318" name="a0013b03f992cd27d824af36f8aa99318"></a>
+using&#160;</td><td class="memItemRight"><b>reference</b></td></tr>
+<tr class="memdesc:a0013b03f992cd27d824af36f8aa99318"><td class="mdescLeft">&#160;</td><td class="mdescRight">引用类型 <br /></td></tr>
+<tr class="memitem:a0c5bca3a2f017a252e5e630a7068a2cf" id="r_a0c5bca3a2f017a252e5e630a7068a2cf"><td class="memItemLeft"><a id="a0c5bca3a2f017a252e5e630a7068a2cf" name="a0c5bca3a2f017a252e5e630a7068a2cf"></a>
+using&#160;</td><td class="memItemRight"><b>pointer</b></td></tr>
+<tr class="memdesc:a0c5bca3a2f017a252e5e630a7068a2cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">指针类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a0e7e4d063352a0d73f00863fd556b80e" id="r_a0e7e4d063352a0d73f00863fd556b80e"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a0e7e4d063352a0d73f00863fd556b80e">bitmap_iterator</a> (const <a class="el" href="#a997bfecbe9656815bdb2534e857ca530">container_type</a> *bm) noexcept</td></tr>
+<tr class="memdesc:a0e7e4d063352a0d73f00863fd556b80e"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:a22482b9170cdff03924d03a03ca1ee4c" id="r_a22482b9170cdff03924d03a03ca1ee4c"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a22482b9170cdff03924d03a03ca1ee4c">bitmap_iterator</a> (<a class="el" href="group___core_types.html#ga4d7d3599901e73c7d6bf65a66e80b534">uint32_t</a> *ptr, const <a class="el" href="group___core_types.html#ga4d7d3599901e73c7d6bf65a66e80b534">uint32_t</a> offset, const <a class="el" href="#a997bfecbe9656815bdb2534e857ca530">container_type</a> *bm) noexcept</td></tr>
+<tr class="memdesc:a22482b9170cdff03924d03a03ca1ee4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:a2c29099ac010875d83dcc8c616e0c449" id="r_a2c29099ac010875d83dcc8c616e0c449"><td class="memTemplParams" colspan="2">template&lt;bool IsConst2&gt; </td></tr>
+<tr class="memitem:a2c29099ac010875d83dcc8c616e0c449 template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a2c29099ac010875d83dcc8c616e0c449">bitmap_iterator</a> (const bitmap_iterator&lt; IsConst2, BitMap &gt; &amp;other) noexcept</td></tr>
+<tr class="memdesc:a2c29099ac010875d83dcc8c616e0c449"><td class="mdescLeft">&#160;</td><td class="mdescRight">从另一个迭代器转换构造  <br /></td></tr>
+<tr class="memitem:ac2b805e54c8d3d939b5990430d0d8755" id="r_ac2b805e54c8d3d939b5990430d0d8755"><td class="memItemLeft">constexpr <a class="el" href="#a0013b03f992cd27d824af36f8aa99318">reference</a>&#160;</td><td class="memItemRight"><a class="el" href="#ac2b805e54c8d3d939b5990430d0d8755">dereference</a> () const noexcept</td></tr>
+<tr class="memdesc:ac2b805e54c8d3d939b5990430d0d8755"><td class="mdescLeft">&#160;</td><td class="mdescRight">解引用操作  <br /></td></tr>
+<tr class="memitem:af2ffb05dbccb65214ba08272b8413aea" id="r_af2ffb05dbccb65214ba08272b8413aea"><td class="memItemLeft"><a id="af2ffb05dbccb65214ba08272b8413aea" name="af2ffb05dbccb65214ba08272b8413aea"></a>
+constexpr void&#160;</td><td class="memItemRight"><b>increment</b> () noexcept</td></tr>
+<tr class="memdesc:af2ffb05dbccb65214ba08272b8413aea"><td class="mdescLeft">&#160;</td><td class="mdescRight">递增操作 <br /></td></tr>
+<tr class="memitem:ab85ffe7c18fdd38cbcc72992cd04bc11" id="r_ab85ffe7c18fdd38cbcc72992cd04bc11"><td class="memItemLeft"><a id="ab85ffe7c18fdd38cbcc72992cd04bc11" name="ab85ffe7c18fdd38cbcc72992cd04bc11"></a>
+constexpr void&#160;</td><td class="memItemRight"><b>decrement</b> () noexcept</td></tr>
+<tr class="memdesc:ab85ffe7c18fdd38cbcc72992cd04bc11"><td class="mdescLeft">&#160;</td><td class="mdescRight">递减操作 <br /></td></tr>
+<tr class="memitem:a9fa5bc6cdfdfe4d481a75d12f9bc15af" id="r_a9fa5bc6cdfdfe4d481a75d12f9bc15af"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a9fa5bc6cdfdfe4d481a75d12f9bc15af">advance</a> (<a class="el" href="#a4bdf84955875394035af27ba7f0fd4ab">difference_type</a> off) noexcept</td></tr>
+<tr class="memdesc:a9fa5bc6cdfdfe4d481a75d12f9bc15af"><td class="mdescLeft">&#160;</td><td class="mdescRight">前进操作  <br /></td></tr>
+<tr class="memitem:a16c6f4f44887bd1a28d096612cd1fad4" id="r_a16c6f4f44887bd1a28d096612cd1fad4"><td class="memItemLeft">constexpr <a class="el" href="#a4bdf84955875394035af27ba7f0fd4ab">difference_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a16c6f4f44887bd1a28d096612cd1fad4">distance_to</a> (const bitmap_iterator &amp;other) const noexcept</td></tr>
+<tr class="memdesc:a16c6f4f44887bd1a28d096612cd1fad4"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算距离操作  <br /></td></tr>
+<tr class="memitem:a74864b9bf19b04fea67fb5529a4492fa" id="r_a74864b9bf19b04fea67fb5529a4492fa"><td class="memItemLeft">constexpr <a class="el" href="#a0013b03f992cd27d824af36f8aa99318">reference</a>&#160;</td><td class="memItemRight"><a class="el" href="#a74864b9bf19b04fea67fb5529a4492fa">operator[]</a> (const <a class="el" href="#a4bdf84955875394035af27ba7f0fd4ab">difference_type</a> n) const noexcept</td></tr>
+<tr class="memdesc:a74864b9bf19b04fea67fb5529a4492fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">下标访问操作符  <br /></td></tr>
+<tr class="memitem:a1270e152fdb3272ed336decdc4ad1b95" id="r_a1270e152fdb3272ed336decdc4ad1b95"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a1270e152fdb3272ed336decdc4ad1b95">equal_to</a> (const bitmap_iterator &amp;rhs) const noexcept</td></tr>
+<tr class="memdesc:a1270e152fdb3272ed336decdc4ad1b95"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较  <br /></td></tr>
+<tr class="memitem:a755746e3911a86cbc07f5c9c410e420a" id="r_a755746e3911a86cbc07f5c9c410e420a"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a755746e3911a86cbc07f5c9c410e420a">less_than</a> (const bitmap_iterator &amp;rhs) const noexcept</td></tr>
+<tr class="memdesc:a755746e3911a86cbc07f5c9c410e420a"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较  <br /></td></tr>
+<tr class="memitem:abc015dc33749aaede754a32f959d7254" id="r_abc015dc33749aaede754a32f959d7254"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="#abc015dc33749aaede754a32f959d7254">base</a> () const noexcept</td></tr>
+<tr class="memdesc:abc015dc33749aaede754a32f959d7254"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取底层指针  <br /></td></tr>
+<tr class="memitem:a5571036a1ec1fb15efc2f1be427c26ea" id="r_a5571036a1ec1fb15efc2f1be427c26ea"><td class="memItemLeft">constexpr const <a class="el" href="#a997bfecbe9656815bdb2534e857ca530">container_type</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a5571036a1ec1fb15efc2f1be427c26ea">container</a> () const noexcept</td></tr>
+<tr class="memdesc:a5571036a1ec1fb15efc2f1be427c26ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取关联容器  <br /></td></tr>
+<tr class="inherit_header pub_methods_structneforce_1_1iiterator"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_structneforce_1_1iiterator')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="structneforce_1_1iiterator.html">neforce::iiterator&lt; bitmap_iterator&lt; IsConst, BitMap &gt; &gt;</a></td></tr>
+<tr class="memitem:a95994513c3cdd0ac0f6fb140d1970fc0 inherit pub_methods_structneforce_1_1iiterator" id="r_a95994513c3cdd0ac0f6fb140d1970fc0"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1iiterator.html#a95994513c3cdd0ac0f6fb140d1970fc0">operator*</a> () const noexcept</td></tr>
+<tr class="memdesc:a95994513c3cdd0ac0f6fb140d1970fc0 inherit pub_methods_structneforce_1_1iiterator"><td class="mdescLeft">&#160;</td><td class="mdescRight">解引用操作符  <br /></td></tr>
+<tr class="memitem:a7def9474b28799a483024599c9329327 inherit pub_methods_structneforce_1_1iiterator" id="r_a7def9474b28799a483024599c9329327"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1iiterator.html#a7def9474b28799a483024599c9329327">operator-&gt;</a> () const noexcept</td></tr>
+<tr class="memdesc:a7def9474b28799a483024599c9329327 inherit pub_methods_structneforce_1_1iiterator"><td class="mdescLeft">&#160;</td><td class="mdescRight">成员访问操作符  <br /></td></tr>
+<tr class="memitem:aa8987a9f90cd7859268813b309b977e1 inherit pub_methods_structneforce_1_1iiterator" id="r_aa8987a9f90cd7859268813b309b977e1"><td class="memItemLeft">constexpr <a class="el" href="structneforce_1_1bitmap__iterator.html">bitmap_iterator</a>&lt; IsConst, BitMap &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1iiterator.html#aa8987a9f90cd7859268813b309b977e1">operator++</a> () noexcept</td></tr>
+<tr class="memdesc:aa8987a9f90cd7859268813b309b977e1 inherit pub_methods_structneforce_1_1iiterator"><td class="mdescLeft">&#160;</td><td class="mdescRight">前置递增操作符  <br /></td></tr>
+<tr class="memitem:a044b517010979c5dd346ca32435097f6 inherit pub_methods_structneforce_1_1iiterator" id="r_a044b517010979c5dd346ca32435097f6"><td class="memItemLeft">constexpr <a class="el" href="structneforce_1_1bitmap__iterator.html">bitmap_iterator</a>&lt; IsConst, BitMap &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1iiterator.html#a044b517010979c5dd346ca32435097f6">operator--</a> () noexcept</td></tr>
+<tr class="memdesc:a044b517010979c5dd346ca32435097f6 inherit pub_methods_structneforce_1_1iiterator"><td class="mdescLeft">&#160;</td><td class="mdescRight">前置递减操作符  <br /></td></tr>
+<tr class="memitem:a45026d73ba84c83a85fb404704c3e11b inherit pub_methods_structneforce_1_1iiterator" id="r_a45026d73ba84c83a85fb404704c3e11b"><td class="memItemLeft">constexpr <a class="el" href="structneforce_1_1bitmap__iterator.html">bitmap_iterator</a>&lt; IsConst, BitMap &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1iiterator.html#a45026d73ba84c83a85fb404704c3e11b">operator+=</a> (Distance n) noexcept</td></tr>
+<tr class="memdesc:a45026d73ba84c83a85fb404704c3e11b inherit pub_methods_structneforce_1_1iiterator"><td class="mdescLeft">&#160;</td><td class="mdescRight">复合加法赋值操作符  <br /></td></tr>
+<tr class="memitem:a1547244d7b905c1e3c2bf671c198deb5 inherit pub_methods_structneforce_1_1iiterator" id="r_a1547244d7b905c1e3c2bf671c198deb5"><td class="memItemLeft">constexpr <a class="el" href="structneforce_1_1bitmap__iterator.html">bitmap_iterator</a>&lt; IsConst, BitMap &gt;&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1iiterator.html#a1547244d7b905c1e3c2bf671c198deb5">operator+</a> (Distance n) const noexcept</td></tr>
+<tr class="memdesc:a1547244d7b905c1e3c2bf671c198deb5 inherit pub_methods_structneforce_1_1iiterator"><td class="mdescLeft">&#160;</td><td class="mdescRight">加法操作符  <br /></td></tr>
+<tr class="memitem:a2eefe176a21535fd96cef31a30fdbf14 inherit pub_methods_structneforce_1_1iiterator" id="r_a2eefe176a21535fd96cef31a30fdbf14"><td class="memItemLeft">constexpr <a class="el" href="structneforce_1_1bitmap__iterator.html">bitmap_iterator</a>&lt; IsConst, BitMap &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1iiterator.html#a2eefe176a21535fd96cef31a30fdbf14">operator-=</a> (Distance n) noexcept</td></tr>
+<tr class="memdesc:a2eefe176a21535fd96cef31a30fdbf14 inherit pub_methods_structneforce_1_1iiterator"><td class="mdescLeft">&#160;</td><td class="mdescRight">复合减法赋值操作符  <br /></td></tr>
+<tr class="memitem:ac60f1cd43390e5429e8d240825573132 inherit pub_methods_structneforce_1_1iiterator" id="r_ac60f1cd43390e5429e8d240825573132"><td class="memItemLeft">constexpr <a class="el" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt;!<a class="el" href="group___type_traits_utilities.html#gaa8a9c7168b974b877ec67d99e9bf5d8c">is_same_v</a>&lt; T, <a class="el" href="structneforce_1_1bitmap__iterator.html">bitmap_iterator</a>&lt; IsConst, BitMap &gt; &gt;, <a class="el" href="structneforce_1_1bitmap__iterator.html">bitmap_iterator</a>&lt; IsConst, BitMap &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1iiterator.html#ac60f1cd43390e5429e8d240825573132">operator-</a> (const T n) const noexcept</td></tr>
+<tr class="memdesc:ac60f1cd43390e5429e8d240825573132 inherit pub_methods_structneforce_1_1iiterator"><td class="mdescLeft">&#160;</td><td class="mdescRight">减法操作符  <br /></td></tr>
+<tr class="inherit_header pub_methods_structneforce_1_1icomparable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_structneforce_1_1icomparable')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="structneforce_1_1icomparable.html">neforce::icomparable&lt; bitmap_iterator&lt; IsConst, BitMap &gt; &gt;</a></td></tr>
+<tr class="memitem:ab9b06f7293eb15299f8c7d5341bfbc83 inherit pub_methods_structneforce_1_1icomparable" id="r_ab9b06f7293eb15299f8c7d5341bfbc83"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1icomparable.html#ab9b06f7293eb15299f8c7d5341bfbc83">operator==</a> (const <a class="el" href="structneforce_1_1bitmap__iterator.html">bitmap_iterator</a>&lt; IsConst, BitMap &gt; &amp;rhs) const noexcept(noexcept(derived().<a class="el" href="structneforce_1_1equal__to.html">equal_to</a>(rhs)))</td></tr>
+<tr class="memdesc:ab9b06f7293eb15299f8c7d5341bfbc83 inherit pub_methods_structneforce_1_1icomparable"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较运算符  <br /></td></tr>
+<tr class="memitem:aa385e40eb8ac8bdae736966ad0cf568f inherit pub_methods_structneforce_1_1icomparable" id="r_aa385e40eb8ac8bdae736966ad0cf568f"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1icomparable.html#aa385e40eb8ac8bdae736966ad0cf568f">operator!=</a> (const <a class="el" href="structneforce_1_1bitmap__iterator.html">bitmap_iterator</a>&lt; IsConst, BitMap &gt; &amp;rhs) const noexcept(noexcept(!(derived().<a class="el" href="structneforce_1_1equal__to.html">equal_to</a>(rhs))))</td></tr>
+<tr class="memdesc:aa385e40eb8ac8bdae736966ad0cf568f inherit pub_methods_structneforce_1_1icomparable"><td class="mdescLeft">&#160;</td><td class="mdescRight">不等比较运算符  <br /></td></tr>
+<tr class="memitem:a0641b58de65d6a0d5b87c2bcb47496a4 inherit pub_methods_structneforce_1_1icomparable" id="r_a0641b58de65d6a0d5b87c2bcb47496a4"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1icomparable.html#a0641b58de65d6a0d5b87c2bcb47496a4">operator&lt;</a> (const <a class="el" href="structneforce_1_1bitmap__iterator.html">bitmap_iterator</a>&lt; IsConst, BitMap &gt; &amp;rhs) const noexcept(noexcept(derived().less_than(rhs)))</td></tr>
+<tr class="memdesc:a0641b58de65d6a0d5b87c2bcb47496a4 inherit pub_methods_structneforce_1_1icomparable"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较运算符  <br /></td></tr>
+<tr class="memitem:ab8de930acec5c0261656b787f576f08d inherit pub_methods_structneforce_1_1icomparable" id="r_ab8de930acec5c0261656b787f576f08d"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1icomparable.html#ab8de930acec5c0261656b787f576f08d">operator&gt;</a> (const <a class="el" href="structneforce_1_1bitmap__iterator.html">bitmap_iterator</a>&lt; IsConst, BitMap &gt; &amp;rhs) const noexcept(noexcept(rhs.less_than(derived())))</td></tr>
+<tr class="memdesc:ab8de930acec5c0261656b787f576f08d inherit pub_methods_structneforce_1_1icomparable"><td class="mdescLeft">&#160;</td><td class="mdescRight">大于比较运算符  <br /></td></tr>
+<tr class="memitem:a313fba4bce20aced1ff0e6173ad6aab2 inherit pub_methods_structneforce_1_1icomparable" id="r_a313fba4bce20aced1ff0e6173ad6aab2"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1icomparable.html#a313fba4bce20aced1ff0e6173ad6aab2">operator&lt;=</a> (const <a class="el" href="structneforce_1_1bitmap__iterator.html">bitmap_iterator</a>&lt; IsConst, BitMap &gt; &amp;rhs) const noexcept(noexcept(!(rhs.less_than(derived()))))</td></tr>
+<tr class="memdesc:a313fba4bce20aced1ff0e6173ad6aab2 inherit pub_methods_structneforce_1_1icomparable"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于等于比较运算符  <br /></td></tr>
+<tr class="memitem:a644c6002f703eb487427daadfec8fb16 inherit pub_methods_structneforce_1_1icomparable" id="r_a644c6002f703eb487427daadfec8fb16"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1icomparable.html#a644c6002f703eb487427daadfec8fb16">operator&gt;=</a> (const <a class="el" href="structneforce_1_1bitmap__iterator.html">bitmap_iterator</a>&lt; IsConst, BitMap &gt; &amp;rhs) const noexcept(noexcept(!(derived().less_than(rhs))))</td></tr>
+<tr class="memdesc:a644c6002f703eb487427daadfec8fb16 inherit pub_methods_structneforce_1_1icomparable"><td class="mdescLeft">&#160;</td><td class="mdescRight">大于等于比较运算符  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;bool IsConst, typename BitMap&gt;<br />
+struct neforce::bitmap_iterator&lt; IsConst, BitMap &gt;</div><p>位图迭代器 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IsConst</td><td>是否常量迭代器 </td></tr>
+    <tr><td class="paramname">BitMap</td><td>位图类型</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>提供对位图元素的随机访问迭代器支持。 </p>
+
+<p class="definition">在文件 <a class="el" href="bitmap_8hpp_source.html">bitmap.hpp</a> 第 <a class="el" href="bitmap_8hpp_source.html#l00187">187</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="a0e7e4d063352a0d73f00863fd556b80e" name="a0e7e4d063352a0d73f00863fd556b80e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e7e4d063352a0d73f00863fd556b80e">&#9670;&#160;</a></span>bitmap_iterator() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;bool IsConst, typename BitMap&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structneforce_1_1bitmap__iterator.html">neforce::bitmap_iterator</a>&lt; IsConst, BitMap &gt;::bitmap_iterator </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a997bfecbe9656815bdb2534e857ca530">container_type</a> *</td>          <td class="paramname"><span class="paramname"><em>bm</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bm</td><td>位图指针 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="bitmap_8hpp_source.html">bitmap.hpp</a> 第 <a class="el" href="bitmap_8hpp_source.html#l00232">232</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a22482b9170cdff03924d03a03ca1ee4c" name="a22482b9170cdff03924d03a03ca1ee4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22482b9170cdff03924d03a03ca1ee4c">&#9670;&#160;</a></span>bitmap_iterator() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;bool IsConst, typename BitMap&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structneforce_1_1bitmap__iterator.html">neforce::bitmap_iterator</a>&lt; IsConst, BitMap &gt;::bitmap_iterator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#ga4d7d3599901e73c7d6bf65a66e80b534">uint32_t</a> *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___core_types.html#ga4d7d3599901e73c7d6bf65a66e80b534">uint32_t</a></td>          <td class="paramname"><span class="paramname"><em>offset</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#a997bfecbe9656815bdb2534e857ca530">container_type</a> *</td>          <td class="paramname"><span class="paramname"><em>bm</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ptr</td><td>指向字的指针 </td></tr>
+    <tr><td class="paramname">offset</td><td>位偏移 </td></tr>
+    <tr><td class="paramname">bm</td><td>位图指针 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="bitmap_8hpp_source.html">bitmap.hpp</a> 第 <a class="el" href="bitmap_8hpp_source.html#l00241">241</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2c29099ac010875d83dcc8c616e0c449" name="a2c29099ac010875d83dcc8c616e0c449"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c29099ac010875d83dcc8c616e0c449">&#9670;&#160;</a></span>bitmap_iterator() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;bool IsConst, typename BitMap&gt; </div>
+<div class="memtemplate">
+template&lt;bool IsConst2&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structneforce_1_1bitmap__iterator.html">neforce::bitmap_iterator</a>&lt; IsConst, BitMap &gt;::bitmap_iterator </td>
+          <td>(</td>
+          <td class="paramtype">const bitmap_iterator&lt; IsConst2, BitMap &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>从另一个迭代器转换构造 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IsConst2</td><td>源迭代器的常量性 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="bitmap_8hpp_source.html">bitmap.hpp</a> 第 <a class="el" href="bitmap_8hpp_source.html#l00252">252</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a9fa5bc6cdfdfe4d481a75d12f9bc15af" name="a9fa5bc6cdfdfe4d481a75d12f9bc15af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fa5bc6cdfdfe4d481a75d12f9bc15af">&#9670;&#160;</a></span>advance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;bool IsConst, typename BitMap&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="structneforce_1_1bitmap__iterator.html">neforce::bitmap_iterator</a>&lt; IsConst, BitMap &gt;::advance </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a4bdf84955875394035af27ba7f0fd4ab">difference_type</a></td>          <td class="paramname"><span class="paramname"><em>off</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>前进操作 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">off</td><td>前进距离 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="bitmap_8hpp_source.html">bitmap.hpp</a> 第 <a class="el" href="bitmap_8hpp_source.html#l00292">292</a> 行定义.</p>
+
+</div>
+</div>
+<a id="abc015dc33749aaede754a32f959d7254" name="abc015dc33749aaede754a32f959d7254"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc015dc33749aaede754a32f959d7254">&#9670;&#160;</a></span>base()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;bool IsConst, typename BitMap&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) <a class="el" href="structneforce_1_1bitmap__iterator.html">neforce::bitmap_iterator</a>&lt; IsConst, BitMap &gt;::base </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取底层指针 </p>
+<dl class="section return"><dt>返回</dt><dd>当前字的指针 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="bitmap_8hpp_source.html">bitmap.hpp</a> 第 <a class="el" href="bitmap_8hpp_source.html#l00348">348</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5571036a1ec1fb15efc2f1be427c26ea" name="a5571036a1ec1fb15efc2f1be427c26ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5571036a1ec1fb15efc2f1be427c26ea">&#9670;&#160;</a></span>container()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;bool IsConst, typename BitMap&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="#a997bfecbe9656815bdb2534e857ca530">container_type</a> * <a class="el" href="structneforce_1_1bitmap__iterator.html">neforce::bitmap_iterator</a>&lt; IsConst, BitMap &gt;::container </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取关联容器 </p>
+<dl class="section return"><dt>返回</dt><dd>关联容器指针 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="bitmap_8hpp_source.html">bitmap.hpp</a> 第 <a class="el" href="bitmap_8hpp_source.html#l00354">354</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ac2b805e54c8d3d939b5990430d0d8755" name="ac2b805e54c8d3d939b5990430d0d8755"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2b805e54c8d3d939b5990430d0d8755">&#9670;&#160;</a></span>dereference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;bool IsConst, typename BitMap&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a0013b03f992cd27d824af36f8aa99318">reference</a> <a class="el" href="structneforce_1_1bitmap__iterator.html">neforce::bitmap_iterator</a>&lt; IsConst, BitMap &gt;::dereference </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>解引用操作 </p>
+<dl class="section return"><dt>返回</dt><dd>当前位的引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="bitmap_8hpp_source.html">bitmap.hpp</a> 第 <a class="el" href="bitmap_8hpp_source.html#l00261">261</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a16c6f4f44887bd1a28d096612cd1fad4" name="a16c6f4f44887bd1a28d096612cd1fad4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16c6f4f44887bd1a28d096612cd1fad4">&#9670;&#160;</a></span>distance_to()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;bool IsConst, typename BitMap&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a4bdf84955875394035af27ba7f0fd4ab">difference_type</a> <a class="el" href="structneforce_1_1bitmap__iterator.html">neforce::bitmap_iterator</a>&lt; IsConst, BitMap &gt;::distance_to </td>
+          <td>(</td>
+          <td class="paramtype">const bitmap_iterator&lt; IsConst, BitMap &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>计算距离操作 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>另一个迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>两个迭代器之间的距离 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="bitmap_8hpp_source.html">bitmap.hpp</a> 第 <a class="el" href="bitmap_8hpp_source.html#l00311">311</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a1270e152fdb3272ed336decdc4ad1b95" name="a1270e152fdb3272ed336decdc4ad1b95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1270e152fdb3272ed336decdc4ad1b95">&#9670;&#160;</a></span>equal_to()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;bool IsConst, typename BitMap&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="structneforce_1_1bitmap__iterator.html">neforce::bitmap_iterator</a>&lt; IsConst, BitMap &gt;::equal_to </td>
+          <td>(</td>
+          <td class="paramtype">const bitmap_iterator&lt; IsConst, BitMap &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>相等比较 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否相等 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="bitmap_8hpp_source.html">bitmap.hpp</a> 第 <a class="el" href="bitmap_8hpp_source.html#l00329">329</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a755746e3911a86cbc07f5c9c410e420a" name="a755746e3911a86cbc07f5c9c410e420a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a755746e3911a86cbc07f5c9c410e420a">&#9670;&#160;</a></span>less_than()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;bool IsConst, typename BitMap&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="structneforce_1_1bitmap__iterator.html">neforce::bitmap_iterator</a>&lt; IsConst, BitMap &gt;::less_than </td>
+          <td>(</td>
+          <td class="paramtype">const bitmap_iterator&lt; IsConst, BitMap &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>小于比较 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>当前迭代器是否在rhs之前 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="bitmap_8hpp_source.html">bitmap.hpp</a> 第 <a class="el" href="bitmap_8hpp_source.html#l00339">339</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a74864b9bf19b04fea67fb5529a4492fa" name="a74864b9bf19b04fea67fb5529a4492fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74864b9bf19b04fea67fb5529a4492fa">&#9670;&#160;</a></span>operator[]()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;bool IsConst, typename BitMap&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a0013b03f992cd27d824af36f8aa99318">reference</a> <a class="el" href="structneforce_1_1bitmap__iterator.html">neforce::bitmap_iterator</a>&lt; IsConst, BitMap &gt;::operator[] </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a4bdf84955875394035af27ba7f0fd4ab">difference_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>下标访问操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>偏移量 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>偏移位置元素的引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="bitmap_8hpp_source.html">bitmap.hpp</a> 第 <a class="el" href="bitmap_8hpp_source.html#l00322">322</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该结构体的文档由以下文件生成:<ul>
+<li><a class="el" href="bitmap_8hpp_source.html">bitmap.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><a href="structneforce_1_1bitmap__iterator.html">bitmap_iterator</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

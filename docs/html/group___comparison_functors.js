@@ -1,15 +1,15 @@
 var group___comparison_functors =
 [
-    [ "equal_to&lt; T &gt;", "structequal__to.html", null ],
-    [ "equal_to&lt; void &gt;", "structequal__to_3_01void_01_4.html", null ],
-    [ "not_equal_to&lt; T &gt;", "structnot__equal__to.html", null ],
-    [ "not_equal_to&lt; void &gt;", "structnot__equal__to_3_01void_01_4.html", null ],
-    [ "greater&lt; T &gt;", "structgreater.html", null ],
-    [ "greater&lt; void &gt;", "structgreater_3_01void_01_4.html", null ],
-    [ "less&lt; T &gt;", "structless.html", null ],
-    [ "less&lt; void &gt;", "structless_3_01void_01_4.html", null ],
-    [ "greater_equal&lt; T &gt;", "structgreater__equal.html", null ],
-    [ "greater_equal&lt; void &gt;", "structgreater__equal_3_01void_01_4.html", null ],
-    [ "less_equal&lt; T &gt;", "structless__equal.html", null ],
-    [ "less_equal&lt; void &gt;", "structless__equal_3_01void_01_4.html", null ]
+    [ "neforce::equal_to&lt; T &gt;", "structneforce_1_1equal__to.html", null ],
+    [ "neforce::equal_to&lt; void &gt;", "structneforce_1_1equal__to_3_01void_01_4.html", null ],
+    [ "neforce::not_equal_to&lt; T &gt;", "structneforce_1_1not__equal__to.html", null ],
+    [ "neforce::not_equal_to&lt; void &gt;", "structneforce_1_1not__equal__to_3_01void_01_4.html", null ],
+    [ "neforce::greater&lt; T &gt;", "structneforce_1_1greater.html", null ],
+    [ "neforce::greater&lt; void &gt;", "structneforce_1_1greater_3_01void_01_4.html", null ],
+    [ "neforce::less&lt; T &gt;", "structneforce_1_1less.html", null ],
+    [ "neforce::less&lt; void &gt;", "structneforce_1_1less_3_01void_01_4.html", null ],
+    [ "neforce::greater_equal&lt; T &gt;", "structneforce_1_1greater__equal.html", null ],
+    [ "neforce::greater_equal&lt; void &gt;", "structneforce_1_1greater__equal_3_01void_01_4.html", null ],
+    [ "neforce::less_equal&lt; T &gt;", "structneforce_1_1less__equal.html", null ],
+    [ "neforce::less_equal&lt; void &gt;", "structneforce_1_1less__equal_3_01void_01_4.html", null ]
 ];

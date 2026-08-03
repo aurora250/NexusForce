@@ -1,0 +1,709 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1ttl__cache" kind="class" language="C++" prot="public">
+    <compoundname>neforce::ttl_cache</compoundname>
+    <includes refid="ttl__cache_8hpp" local="no">ttl_cache.hpp</includes>
+    <innerclass refid="structneforce_1_1ttl__cache_1_1entry" prot="private">neforce::ttl_cache::entry</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename Key</type>
+      </param>
+      <param>
+        <type>typename Value</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classneforce_1_1ttl__cache_1a975ef437fc384b3a168bc87ba9f590da" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref></type>
+        <name>refresh_policy</name>
+        <qualifiedname>neforce::ttl_cache::refresh_policy</qualifiedname>
+        <enumvalue id="classneforce_1_1ttl__cache_1a975ef437fc384b3a168bc87ba9f590daac7561db7a418dd39b2201dfe110ab4a4" prot="public">
+          <name>never</name>
+          <briefdescription>
+<para>不刷新，保持原始过期时间 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1ttl__cache_1a975ef437fc384b3a168bc87ba9f590daa2f4ac8b5829664cbdfbb154b2f003cbd" prot="public">
+          <name>on_access</name>
+          <briefdescription>
+<para>访问时刷新，每次访问都重置过期时间 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1ttl__cache_1a975ef437fc384b3a168bc87ba9f590daad1f82d8c5e5a93e50244c13e3500a070" prot="public">
+          <name>sliding_window</name>
+          <briefdescription>
+<para>滑动窗口，每次访问延长TTL </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>过期时间刷新策略 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="56" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="56" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1ttl__cache_1ad34ee15a831ea0079dcb33cc2add201c" prot="public" static="no">
+        <type><ref refid="structneforce_1_1steady__clock" kindref="compound">steady_clock</ref></type>
+        <definition>using neforce::ttl_cache&lt; Key, Value &gt;::clock = steady_clock</definition>
+        <argsstring></argsstring>
+        <name>clock</name>
+        <qualifiedname>neforce::ttl_cache::clock</qualifiedname>
+        <briefdescription>
+<para>时钟类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="47" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1ttl__cache_1ac9e564f67b079459413dad72d2eda6bc" prot="public" static="no">
+        <type><ref refid="structneforce_1_1steady__clock_1a571235516977f769fec5e0eaaf49e077" kindref="member">clock::time_point</ref></type>
+        <definition>using neforce::ttl_cache&lt; Key, Value &gt;::time_point = clock::time_point</definition>
+        <argsstring></argsstring>
+        <name>time_point</name>
+        <qualifiedname>neforce::ttl_cache::time_point</qualifiedname>
+        <briefdescription>
+<para>时间点类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="48" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1ttl__cache_1a132d034b211e7ef0e5f71ca32646afc1" prot="public" static="no">
+        <type><ref refid="structneforce_1_1steady__clock_1ada904e5c4376b5d153ad18c53d85b563" kindref="member">clock::duration</ref></type>
+        <definition>using neforce::ttl_cache&lt; Key, Value &gt;::duration = clock::duration</definition>
+        <argsstring></argsstring>
+        <name>duration</name>
+        <qualifiedname>neforce::ttl_cache::duration</qualifiedname>
+        <briefdescription>
+<para>持续时间类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="49" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1ttl__cache_1ac1647b63a1964acfc44543bd395a4a1e" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>using neforce::ttl_cache&lt; Key, Value &gt;::size_type = size_t</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>neforce::ttl_cache::size_type</qualifiedname>
+        <briefdescription>
+<para>大小类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="50" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1ttl__cache_1afc6cc4c3a090aa7611e180d42ddd1879" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1lru__cache" kindref="compound">lru_cache</ref>&lt; Key, entry &gt;</type>
+        <definition>lru_cache&lt;Key, entry&gt; neforce::ttl_cache&lt; Key, Value &gt;::cache_</definition>
+        <argsstring></argsstring>
+        <name>cache_</name>
+        <qualifiedname>neforce::ttl_cache::cache_</qualifiedname>
+        <briefdescription>
+<para>底层LRU缓存 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="74" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ttl__cache_1a2f5ffef2334bbba661fc57fe70ad08f0" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1ttl__cache_1a132d034b211e7ef0e5f71ca32646afc1" kindref="member">duration</ref></type>
+        <definition>duration neforce::ttl_cache&lt; Key, Value &gt;::default_ttl_</definition>
+        <argsstring></argsstring>
+        <name>default_ttl_</name>
+        <qualifiedname>neforce::ttl_cache::default_ttl_</qualifiedname>
+        <briefdescription>
+<para>默认生存时间 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="75" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ttl__cache_1a5e5457d8d83d93348f479f1b71731680" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; neforce::ttl_cache&lt; Key, Value &gt;::running_</definition>
+        <argsstring></argsstring>
+        <name>running_</name>
+        <qualifiedname>neforce::ttl_cache::running_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>清理线程运行标志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="77" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="77" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ttl__cache_1a720ef8b60b6eedd8ba52d1d0577143ca" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1ttl__cache_1a975ef437fc384b3a168bc87ba9f590da" kindref="member">refresh_policy</ref></type>
+        <definition>refresh_policy neforce::ttl_cache&lt; Key, Value &gt;::refresh_policy_</definition>
+        <argsstring></argsstring>
+        <name>refresh_policy_</name>
+        <qualifiedname>neforce::ttl_cache::refresh_policy_</qualifiedname>
+        <initializer>{<ref refid="classneforce_1_1ttl__cache_1a975ef437fc384b3a168bc87ba9f590daac7561db7a418dd39b2201dfe110ab4a4" kindref="member">refresh_policy::never</ref>}</initializer>
+        <briefdescription>
+<para>刷新策略 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="78" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="78" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ttl__cache_1a40fac473c1e0b8a1cead3aae13b23a81" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1ttl__cache_1a132d034b211e7ef0e5f71ca32646afc1" kindref="member">duration</ref></type>
+        <definition>duration neforce::ttl_cache&lt; Key, Value &gt;::cleanup_interval_</definition>
+        <argsstring></argsstring>
+        <name>cleanup_interval_</name>
+        <qualifiedname>neforce::ttl_cache::cleanup_interval_</qualifiedname>
+        <initializer>{<ref refid="group___duration_1ga8254730759b00eba24c4a01b0c8e10c3" kindref="member">seconds</ref>(1)}</initializer>
+        <briefdescription>
+<para>清理间隔 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="79" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="79" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ttl__cache_1a72ad9f33ebeac3be008d9203db03652b" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1thread" kindref="compound">thread</ref></type>
+        <definition>thread neforce::ttl_cache&lt; Key, Value &gt;::cleanup_thread_</definition>
+        <argsstring></argsstring>
+        <name>cleanup_thread_</name>
+        <qualifiedname>neforce::ttl_cache::cleanup_thread_</qualifiedname>
+        <briefdescription>
+<para>后台清理线程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="80" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ttl__cache_1ae14db3bbf6ee1830a00fa7222df11db4" prot="private" static="no" mutable="yes">
+        <type><ref refid="classneforce_1_1mutex" kindref="compound">mutex</ref></type>
+        <definition>mutex neforce::ttl_cache&lt; Key, Value &gt;::cv_mutex_</definition>
+        <argsstring></argsstring>
+        <name>cv_mutex_</name>
+        <qualifiedname>neforce::ttl_cache::cv_mutex_</qualifiedname>
+        <briefdescription>
+<para>条件变量互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="81" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ttl__cache_1a27a9d1a87dba37b1f65c3a37d06f1979" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1condition__variable" kindref="compound">condition_variable</ref></type>
+        <definition>condition_variable neforce::ttl_cache&lt; Key, Value &gt;::cv_</definition>
+        <argsstring></argsstring>
+        <name>cv_</name>
+        <qualifiedname>neforce::ttl_cache::cv_</qualifiedname>
+        <briefdescription>
+<para>条件变量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="82" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1ttl__cache_1a28f64ab731fea03826b6314104984c44" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::ttl_cache&lt; Key, Value &gt;::ttl_cache</definition>
+        <argsstring>(size_type capacity, duration default_ttl=seconds(60))</argsstring>
+        <name>ttl_cache</name>
+        <qualifiedname>neforce::ttl_cache::ttl_cache</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1ttl__cache_1ac1647b63a1964acfc44543bd395a4a1e" kindref="member">size_type</ref></type>
+          <declname>capacity</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1ttl__cache_1a132d034b211e7ef0e5f71ca32646afc1" kindref="member">duration</ref></type>
+          <declname>default_ttl</declname>
+          <defval><ref refid="group___duration_1ga8254730759b00eba24c4a01b0c8e10c3" kindref="member">seconds</ref>(60)</defval>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>capacity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>缓存容量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>default_ttl</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>默认生存时间，默认为60秒</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+创建一个指定容量和默认TTL的缓存。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="92" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="92" bodyend="94"/>
+        <references refid="classneforce_1_1ttl__cache_1a48e1afe656dc1aaf2b2c08683785673c" compoundref="ttl__cache_8hpp" startline="245" endline="245">neforce::ttl_cache&lt; Key, Value &gt;::capacity</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ttl__cache_1a353656281e131d8098013427fdab3a6d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::ttl_cache&lt; Key, Value &gt;::~ttl_cache</definition>
+        <argsstring>()</argsstring>
+        <name>~ttl_cache</name>
+        <qualifiedname>neforce::ttl_cache::~ttl_cache</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>自动停止并等待清理线程结束。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="101" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="101" bodyend="101"/>
+        <references refid="classneforce_1_1ttl__cache_1a968ce1484e5822e9521755b12dd9277b" compoundref="ttl__cache_8hpp" startline="134" endline="140">neforce::ttl_cache&lt; Key, Value &gt;::disable_cleanup</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ttl__cache_1a4a4e595316da3f80cae9ca244e64e198" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::ttl_cache&lt; Key, Value &gt;::enable_cleanup</definition>
+        <argsstring>(duration interval=seconds(1))</argsstring>
+        <name>enable_cleanup</name>
+        <qualifiedname>neforce::ttl_cache::enable_cleanup</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1ttl__cache_1a132d034b211e7ef0e5f71ca32646afc1" kindref="member">duration</ref></type>
+          <declname>interval</declname>
+          <defval><ref refid="group___duration_1ga8254730759b00eba24c4a01b0c8e10c3" kindref="member">seconds</ref>(1)</defval>
+        </param>
+        <briefdescription>
+<para>启用后台清理线程 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>interval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>清理间隔，默认为1秒</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+启动后台线程定期清理过期的缓存项。 如果清理线程已运行，此操作无效。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="110" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="110" bodyend="126"/>
+        <references refid="classneforce_1_1ttl__cache_1ad14b0e8f88545e66d155bbf51f3a2399" compoundref="ttl__cache_8hpp" startline="253" endline="256">neforce::ttl_cache&lt; Key, Value &gt;::cleanup</references>
+        <references refid="group___condition_variables_1gga7042881af869b8f1ddb32322ab46a9ffa90272dda245ae1fb3cf197e91a8689dc" compoundref="condition__variable_8hpp" startline="35">timeout</references>
+        <references refid="classneforce_1_1unique__lock_1a90fc8a57f1b9cc437a7f0e6cf6909bc3" compoundref="mutex_8hpp" startline="401" endline="410">neforce::unique_lock&lt; Mutex &gt;::unlock_quiet</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ttl__cache_1a968ce1484e5822e9521755b12dd9277b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::ttl_cache&lt; Key, Value &gt;::disable_cleanup</definition>
+        <argsstring>()</argsstring>
+        <name>disable_cleanup</name>
+        <qualifiedname>neforce::ttl_cache::disable_cleanup</qualifiedname>
+        <briefdescription>
+<para>禁用后台清理线程 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>停止后台清理线程并等待其结束。 不会清空已有缓存项，只是停止自动清理。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="134" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="134" bodyend="140"/>
+        <referencedby refid="classneforce_1_1ttl__cache_1a353656281e131d8098013427fdab3a6d" compoundref="ttl__cache_8hpp" startline="101" endline="101">neforce::ttl_cache&lt; Key, Value &gt;::~ttl_cache</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ttl__cache_1a85b7861e5fd49ce4006776e97cc49b60" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::ttl_cache&lt; Key, Value &gt;::set_refresh_policy</definition>
+        <argsstring>(refresh_policy policy)</argsstring>
+        <name>set_refresh_policy</name>
+        <qualifiedname>neforce::ttl_cache::set_refresh_policy</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1ttl__cache_1a975ef437fc384b3a168bc87ba9f590da" kindref="member">refresh_policy</ref></type>
+          <declname>policy</declname>
+        </param>
+        <briefdescription>
+<para>设置刷新策略 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>policy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的刷新策略</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+决定访问缓存项时如何影响其过期时间。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="148" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="148" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ttl__cache_1a3c08bfa27db3e3e12ff777adbe22b3b9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::ttl_cache&lt; Key, Value &gt;::put</definition>
+        <argsstring>(const Key &amp;key, const Value &amp;value)</argsstring>
+        <name>put</name>
+        <qualifiedname>neforce::ttl_cache::put</qualifiedname>
+        <param>
+          <type>const Key &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const Value &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>插入缓存项（使用默认TTL） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+使用默认TTL插入或更新缓存项。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="157" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="157" bodyend="160"/>
+        <references refid="structneforce_1_1steady__clock_1a21d376e7630c7c35cde610180e214a1d">neforce::steady_clock::now</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ttl__cache_1a54ecfcb1251ffe4dcd7401bd95a9c077" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::ttl_cache&lt; Key, Value &gt;::put</definition>
+        <argsstring>(const Key &amp;key, const Value &amp;value, duration ttl)</argsstring>
+        <name>put</name>
+        <qualifiedname>neforce::ttl_cache::put</qualifiedname>
+        <param>
+          <type>const Key &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const Value &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1ttl__cache_1a132d034b211e7ef0e5f71ca32646afc1" kindref="member">duration</ref></type>
+          <declname>ttl</declname>
+        </param>
+        <briefdescription>
+<para>插入缓存项（指定TTL） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ttl</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>生存时间</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+使用指定的TTL插入或更新缓存项。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="170" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="170" bodyend="173"/>
+        <references refid="structneforce_1_1steady__clock_1a21d376e7630c7c35cde610180e214a1d">neforce::steady_clock::now</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ttl__cache_1ad21b2abcaf44332a77d20642110c47bc" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; Value &gt;</type>
+        <definition>optional&lt; Value &gt; neforce::ttl_cache&lt; Key, Value &gt;::get</definition>
+        <argsstring>(const Key &amp;key)</argsstring>
+        <name>get</name>
+        <qualifiedname>neforce::ttl_cache::get</qualifiedname>
+        <param>
+          <type>const Key &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取缓存项 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含值的optional，如果键不存在或已过期返回none</para>
+</simplesect>
+根据刷新策略决定是否更新过期时间。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="182" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="182" bodyend="201"/>
+        <references refid="group___none_1gae83f5d6b9256e35bb2781ebb286996d3" compoundref="none_8hpp" startline="73" endline="73">neforce::none</references>
+        <references refid="structneforce_1_1steady__clock_1a21d376e7630c7c35cde610180e214a1d">neforce::steady_clock::now</references>
+        <references refid="classneforce_1_1ttl__cache_1a975ef437fc384b3a168bc87ba9f590daa2f4ac8b5829664cbdfbb154b2f003cbd" compoundref="ttl__cache_8hpp" startline="58">neforce::ttl_cache&lt; Key, Value &gt;::on_access</references>
+        <references refid="classneforce_1_1ttl__cache_1a975ef437fc384b3a168bc87ba9f590daad1f82d8c5e5a93e50244c13e3500a070" compoundref="ttl__cache_8hpp" startline="59">neforce::ttl_cache&lt; Key, Value &gt;::sliding_window</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ttl__cache_1adcc445ff144f708f66eb20269d478810" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::ttl_cache&lt; Key, Value &gt;::contains</definition>
+        <argsstring>(const Key &amp;key)</argsstring>
+        <name>contains</name>
+        <qualifiedname>neforce::ttl_cache::contains</qualifiedname>
+        <param>
+          <type>const Key &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>检查缓存是否包含指定键 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果键存在且未过期返回true，否则返回false</para>
+</simplesect>
+此方法会检查过期时间，如果键已过期则自动删除。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="210" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="210" bodyend="221"/>
+        <references refid="structneforce_1_1steady__clock_1a21d376e7630c7c35cde610180e214a1d">neforce::steady_clock::now</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ttl__cache_1aaf211f0158dd23b5052b70ff489f90fa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::ttl_cache&lt; Key, Value &gt;::erase</definition>
+        <argsstring>(const Key &amp;key)</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::ttl_cache::erase</qualifiedname>
+        <param>
+          <type>const Key &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>删除缓存项 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果键存在并成功删除返回true，否则返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="228" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="228" bodyend="228"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ttl__cache_1ac2bfe6f76fb09b2af94f21a7a17989b0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::ttl_cache&lt; Key, Value &gt;::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>neforce::ttl_cache::clear</qualifiedname>
+        <briefdescription>
+<para>清空所有缓存项 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="233" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="233" bodyend="233"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ttl__cache_1a06b87994a4609eeed7196b8765499760" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1ttl__cache_1ac1647b63a1964acfc44543bd395a4a1e" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::ttl_cache&lt; Key, Value &gt;::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>neforce::ttl_cache::size</qualifiedname>
+        <briefdescription>
+<para>获取当前缓存大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>缓存中的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="239" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="239" bodyend="239"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ttl__cache_1a48e1afe656dc1aaf2b2c08683785673c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1ttl__cache_1ac1647b63a1964acfc44543bd395a4a1e" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::ttl_cache&lt; Key, Value &gt;::capacity</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>capacity</name>
+        <qualifiedname>neforce::ttl_cache::capacity</qualifiedname>
+        <briefdescription>
+<para>获取缓存容量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>缓存的最大容量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="245" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="245" bodyend="245"/>
+        <referencedby refid="classneforce_1_1ttl__cache_1a28f64ab731fea03826b6314104984c44" compoundref="ttl__cache_8hpp" startline="92" endline="94">neforce::ttl_cache&lt; Key, Value &gt;::ttl_cache</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ttl__cache_1ad14b0e8f88545e66d155bbf51f3a2399" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::ttl_cache&lt; Key, Value &gt;::cleanup</definition>
+        <argsstring>()</argsstring>
+        <name>cleanup</name>
+        <qualifiedname>neforce::ttl_cache::cleanup</qualifiedname>
+        <briefdescription>
+<para>手动清理过期项 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>遍历所有缓存项，删除已过期的项。 此方法在启用后台清理线程时会自动定期调用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="253" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="253" bodyend="256"/>
+        <references refid="structneforce_1_1steady__clock_1a21d376e7630c7c35cde610180e214a1d">neforce::steady_clock::now</references>
+        <references refid="structneforce_1_1pair_1ab20bdba61e909b6e26c0b94c54bc88df" compoundref="pair_8hpp" startline="101">neforce::pair&lt; T1, T2 &gt;::second</references>
+        <referencedby refid="classneforce_1_1ttl__cache_1a4a4e595316da3f80cae9ca244e64e198" compoundref="ttl__cache_8hpp" startline="110" endline="126">neforce::ttl_cache&lt; Key, Value &gt;::enable_cleanup</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>TTL缓存类模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+实现带有生存时间（TTL）的缓存容器，基于LRU缓存实现。 每个缓存项都有独立的过期时间，过期后自动失效。 支持可选的自动清理线程，定时清理过期项。</para>
+<para>特性：<itemizedlist>
+<listitem><para>自动过期：每个缓存项有独立的TTL</para>
+</listitem><listitem><para>过期清理：支持后台线程自动清理过期项</para>
+</listitem><listitem><para>刷新策略：支持多种过期时间刷新策略</para>
+</listitem><listitem><para>继承LRU特性：满容量时淘汰最久未使用的项</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>此类不是线程安全的，多线程环境下需要外部同步 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" line="45" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/ttl_cache.hpp" bodystart="45" bodyend="257"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1ttl__cache_1afc6cc4c3a090aa7611e180d42ddd1879" prot="private" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>cache_</name></member>
+      <member refid="classneforce_1_1ttl__cache_1a48e1afe656dc1aaf2b2c08683785673c" prot="public" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>capacity</name></member>
+      <member refid="classneforce_1_1ttl__cache_1ad14b0e8f88545e66d155bbf51f3a2399" prot="public" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>cleanup</name></member>
+      <member refid="classneforce_1_1ttl__cache_1a40fac473c1e0b8a1cead3aae13b23a81" prot="private" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>cleanup_interval_</name></member>
+      <member refid="classneforce_1_1ttl__cache_1a72ad9f33ebeac3be008d9203db03652b" prot="private" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>cleanup_thread_</name></member>
+      <member refid="classneforce_1_1ttl__cache_1ac2bfe6f76fb09b2af94f21a7a17989b0" prot="public" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>clear</name></member>
+      <member refid="classneforce_1_1ttl__cache_1ad34ee15a831ea0079dcb33cc2add201c" prot="public" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>clock</name></member>
+      <member refid="classneforce_1_1ttl__cache_1adcc445ff144f708f66eb20269d478810" prot="public" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>contains</name></member>
+      <member refid="classneforce_1_1ttl__cache_1a27a9d1a87dba37b1f65c3a37d06f1979" prot="private" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>cv_</name></member>
+      <member refid="classneforce_1_1ttl__cache_1ae14db3bbf6ee1830a00fa7222df11db4" prot="private" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>cv_mutex_</name></member>
+      <member refid="classneforce_1_1ttl__cache_1a2f5ffef2334bbba661fc57fe70ad08f0" prot="private" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>default_ttl_</name></member>
+      <member refid="classneforce_1_1ttl__cache_1a968ce1484e5822e9521755b12dd9277b" prot="public" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>disable_cleanup</name></member>
+      <member refid="classneforce_1_1ttl__cache_1a132d034b211e7ef0e5f71ca32646afc1" prot="public" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>duration</name></member>
+      <member refid="classneforce_1_1ttl__cache_1a4a4e595316da3f80cae9ca244e64e198" prot="public" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>enable_cleanup</name></member>
+      <member refid="classneforce_1_1ttl__cache_1aaf211f0158dd23b5052b70ff489f90fa" prot="public" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>erase</name></member>
+      <member refid="classneforce_1_1ttl__cache_1ad21b2abcaf44332a77d20642110c47bc" prot="public" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>get</name></member>
+      <member refid="classneforce_1_1ttl__cache_1a3c08bfa27db3e3e12ff777adbe22b3b9" prot="public" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>put</name></member>
+      <member refid="classneforce_1_1ttl__cache_1a54ecfcb1251ffe4dcd7401bd95a9c077" prot="public" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>put</name></member>
+      <member refid="classneforce_1_1ttl__cache_1a975ef437fc384b3a168bc87ba9f590da" prot="public" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>refresh_policy</name></member>
+      <member refid="classneforce_1_1ttl__cache_1a720ef8b60b6eedd8ba52d1d0577143ca" prot="private" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>refresh_policy_</name></member>
+      <member refid="classneforce_1_1ttl__cache_1a5e5457d8d83d93348f479f1b71731680" prot="private" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>running_</name></member>
+      <member refid="classneforce_1_1ttl__cache_1a85b7861e5fd49ce4006776e97cc49b60" prot="public" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>set_refresh_policy</name></member>
+      <member refid="classneforce_1_1ttl__cache_1a06b87994a4609eeed7196b8765499760" prot="public" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>size</name></member>
+      <member refid="classneforce_1_1ttl__cache_1ac1647b63a1964acfc44543bd395a4a1e" prot="public" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>size_type</name></member>
+      <member refid="classneforce_1_1ttl__cache_1ac9e564f67b079459413dad72d2eda6bc" prot="public" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>time_point</name></member>
+      <member refid="classneforce_1_1ttl__cache_1a28f64ab731fea03826b6314104984c44" prot="public" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>ttl_cache</name></member>
+      <member refid="classneforce_1_1ttl__cache_1a353656281e131d8098013427fdab3a6d" prot="public" virt="non-virtual"><scope>neforce::ttl_cache</scope><name>~ttl_cache</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

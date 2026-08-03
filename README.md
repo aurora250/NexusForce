@@ -349,6 +349,8 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **随机数生成** - LC、梅森旋转、硬件噪声算法 `random_lcd` / `random_mt` / `secret`
 - **128位数学计算** - 128位有符号/无符号数值操作 `int128_t` / `uint128_t`
 
+> AI Agent 请阅读 [AI Agent 文档](docs/ai/README.md) 获取快速索引并分析 NexusForce 组件的方案
+
 ---
 
 ## 🔧 编译指南

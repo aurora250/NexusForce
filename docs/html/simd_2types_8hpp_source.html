@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
   </td>
  </tr>
  </tbody>
@@ -109,108 +109,84 @@ $(function(){initNavTree('simd_2types_8hpp_source.html','',''); });
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#ifdef NEFORCE_SIMD_SSE2</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">using </span><a class="code hl_struct" href="structvec128__t.html">vec128_t</a> = ::__m128i;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">using </span><a class="code hl_struct" href="structvec128f__t.html">vec128f_t</a> = ::__m128;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">using </span><a class="code hl_struct" href="structvec128d__t.html">vec128d_t</a> = ::__m128d;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#ga0ebf766978a7e2e91cd299bad0fd8c18">   31</a></span><span class="keyword">using </span><a class="code hl_typedef" href="group___s_i_m_d.html#ga0ebf766978a7e2e91cd299bad0fd8c18">vec128_t</a> = ::__m128i;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#ga1681da5853ce1ba8d9ce275cafba4090">   33</a></span><span class="keyword">using </span><a class="code hl_typedef" href="group___s_i_m_d.html#ga1681da5853ce1ba8d9ce275cafba4090">vec128f_t</a> = ::__m128;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#ga2f96202fcf0f211c17663e817baaee94">   35</a></span><span class="keyword">using </span><a class="code hl_typedef" href="group___s_i_m_d.html#ga2f96202fcf0f211c17663e817baaee94">vec128d_t</a> = ::__m128d;</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#elif defined(NEFORCE_SIMD_NEON)</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">using </span><a class="code hl_struct" href="structvec128__t.html">vec128_t</a> = ::uint8x16_t;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">using </span><a class="code hl_struct" href="structvec128f__t.html">vec128f_t</a> = ::float32x4_t;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">using </span><a class="code hl_typedef" href="group___s_i_m_d.html#ga0ebf766978a7e2e91cd299bad0fd8c18">vec128_t</a> = ::uint8x16_t;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">using </span><a class="code hl_typedef" href="group___s_i_m_d.html#ga1681da5853ce1ba8d9ce275cafba4090">vec128f_t</a> = ::float32x4_t;</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#    ifdef __aarch64__</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">using </span><a class="code hl_struct" href="structvec128d__t.html">vec128d_t</a> = ::float64x2_t;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">using </span><a class="code hl_typedef" href="group___s_i_m_d.html#ga2f96202fcf0f211c17663e817baaee94">vec128d_t</a> = ::float64x2_t;</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#    else</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keyword">struct </span><a class="code hl_struct" href="structvec128d__t.html">vec128d_t</a> {</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">double</span> data[2];</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keyword">struct </span><a class="code hl_typedef" href="group___s_i_m_d.html#ga2f96202fcf0f211c17663e817baaee94">vec128d_t</a> {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">double</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga897be37123f1690ffa096c58a510dbbe">data</a>[2];</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>};</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#    endif</span></div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#else</span></div>
-<div class="foldopen" id="foldopen00052" data-start="{" data-end="};">
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="structvec128__t.html">   52</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structvec128__t.html">vec128_t</a> {</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <a class="code hl_typedef" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a> data[16];</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="keyword">struct </span>vec128_t {</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <a class="code hl_typedef" href="group___core_types.html#ga146242c39a2b187142d7b3ca35872740">byte_t</a> <a class="code hl_function" href="group___type_erasure_functions.html#ga897be37123f1690ffa096c58a510dbbe">data</a>[16];</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>};</div>
-</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span></div>
-<div class="foldopen" id="foldopen00056" data-start="{" data-end="};">
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="structvec128f__t.html">   56</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structvec128f__t.html">vec128f_t</a> {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="keyword">struct </span>vec128f_t {</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordtype">float</span> data[4];</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>};</div>
-</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span></div>
-<div class="foldopen" id="foldopen00060" data-start="{" data-end="};">
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="structvec128d__t.html">   60</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structvec128d__t.html">vec128d_t</a> {</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">double</span> data[2];</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="keyword">struct </span><a class="code hl_typedef" href="group___s_i_m_d.html#ga2f96202fcf0f211c17663e817baaee94">vec128d_t</a> {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">double</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga897be37123f1690ffa096c58a510dbbe">data</a>[2];</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>};</div>
-</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="preprocessor">#if defined(NEFORCE_SIMD_AVX2) || defined(NEFORCE_SIMD_AVX)</span></div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="preprocessor">#    ifdef NEFORCE_SIMD_AVX2</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="keyword">using </span><a class="code hl_struct" href="structvec256__t.html">vec256_t</a> = ::__m256i;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#ga36ddb548398ae3dc5477eabc7c4facf6">   68</a></span><span class="keyword">using </span><a class="code hl_typedef" href="group___s_i_m_d.html#ga36ddb548398ae3dc5477eabc7c4facf6">vec256_t</a> = ::__m256i;</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="preprocessor">#    else</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="keyword">struct </span><a class="code hl_struct" href="structvec256__t.html">vec256_t</a> {</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <a class="code hl_typedef" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a> <a class="code hl_function" href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a>[32];</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="keyword">struct </span><a class="code hl_typedef" href="group___s_i_m_d.html#ga36ddb548398ae3dc5477eabc7c4facf6">vec256_t</a> {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <a class="code hl_typedef" href="group___core_types.html#ga146242c39a2b187142d7b3ca35872740">byte_t</a> <a class="code hl_function" href="group___type_erasure_functions.html#ga897be37123f1690ffa096c58a510dbbe">data</a>[32];</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>};</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="preprocessor">#    endif</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="keyword">using </span><a class="code hl_struct" href="structvec256f__t.html">vec256f_t</a> = ::__m256;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="keyword">using </span><a class="code hl_struct" href="structvec256d__t.html">vec256d_t</a> = ::__m256d;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#gafb400e9954d0ba594b1d37858abd2d03">   76</a></span><span class="keyword">using </span><a class="code hl_typedef" href="group___s_i_m_d.html#gafb400e9954d0ba594b1d37858abd2d03">vec256f_t</a> = ::__m256;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#ga6b9f22e3dbf1e9db54301a3f468a70b4">   78</a></span><span class="keyword">using </span><a class="code hl_typedef" href="group___s_i_m_d.html#ga6b9f22e3dbf1e9db54301a3f468a70b4">vec256d_t</a> = ::__m256d;</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="preprocessor">#else</span></div>
-<div class="foldopen" id="foldopen00081" data-start="{" data-end="};">
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="structvec256__t.html">   81</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structvec256__t.html">vec256_t</a> {</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <a class="code hl_typedef" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a> data[32];</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="keyword">struct </span><a class="code hl_typedef" href="group___s_i_m_d.html#ga36ddb548398ae3dc5477eabc7c4facf6">vec256_t</a> {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <a class="code hl_typedef" href="group___core_types.html#ga146242c39a2b187142d7b3ca35872740">byte_t</a> <a class="code hl_function" href="group___type_erasure_functions.html#ga897be37123f1690ffa096c58a510dbbe">data</a>[32];</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>};</div>
-</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span></div>
-<div class="foldopen" id="foldopen00085" data-start="{" data-end="};">
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="structvec256f__t.html">   85</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structvec256f__t.html">vec256f_t</a> {</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordtype">float</span> data[8];</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="keyword">struct </span>vec256f_t {</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordtype">float</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga897be37123f1690ffa096c58a510dbbe">data</a>[8];</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>};</div>
-</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span></div>
-<div class="foldopen" id="foldopen00089" data-start="{" data-end="};">
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="structvec256d__t.html">   89</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structvec256d__t.html">vec256d_t</a> {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="keyword">struct </span>vec256d_t {</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordtype">double</span> data[4];</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>};</div>
-</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">#ifdef NEFORCE_SIMD_AVX512F</span></div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="keyword">using </span><a class="code hl_struct" href="structvec512__t.html">vec512_t</a> = ::__m512i;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="keyword">using </span><a class="code hl_struct" href="structvec512f__t.html">vec512f_t</a> = ::__m512;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="keyword">using </span><a class="code hl_struct" href="structvec512d__t.html">vec512d_t</a> = ::__m512d;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#ga544eea78d226cbd1b5ce43ca5101cbcc">   96</a></span><span class="keyword">using </span><a class="code hl_typedef" href="group___s_i_m_d.html#ga544eea78d226cbd1b5ce43ca5101cbcc">vec512_t</a> = ::__m512i;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#ga559ab92dd59a43a08c7708d5da252166">   98</a></span><span class="keyword">using </span><a class="code hl_typedef" href="group___s_i_m_d.html#ga559ab92dd59a43a08c7708d5da252166">vec512f_t</a> = ::__m512;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="group___s_i_m_d.html#gace5093ccdaaf7c55f600d4ffd04e6cb7">  100</a></span><span class="keyword">using </span><a class="code hl_typedef" href="group___s_i_m_d.html#gace5093ccdaaf7c55f600d4ffd04e6cb7">vec512d_t</a> = ::__m512d;</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="preprocessor">#else</span></div>
-<div class="foldopen" id="foldopen00103" data-start="{" data-end="};">
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="structvec512__t.html">  103</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structvec512__t.html">vec512_t</a> {</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <a class="code hl_typedef" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a> data[64];</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="keyword">struct </span><a class="code hl_typedef" href="group___s_i_m_d.html#ga544eea78d226cbd1b5ce43ca5101cbcc">vec512_t</a> {</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <a class="code hl_typedef" href="group___core_types.html#ga146242c39a2b187142d7b3ca35872740">byte_t</a> <a class="code hl_function" href="group___type_erasure_functions.html#ga897be37123f1690ffa096c58a510dbbe">data</a>[64];</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>};</div>
-</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span></div>
-<div class="foldopen" id="foldopen00107" data-start="{" data-end="};">
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="structvec512f__t.html">  107</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structvec512f__t.html">vec512f_t</a> {</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keywordtype">float</span> data[16];</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="keyword">struct </span>vec512f_t {</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keywordtype">float</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga897be37123f1690ffa096c58a510dbbe">data</a>[16];</div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>};</div>
-</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span></div>
-<div class="foldopen" id="foldopen00111" data-start="{" data-end="};">
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno"><a class="line" href="structvec512d__t.html">  111</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structvec512d__t.html">vec512d_t</a> {</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="keyword">struct </span>vec512d_t {</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordtype">double</span> data[8];</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>};</div>
-</div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> <span class="comment">// SIMD</span></div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>NEFORCE_END_SIMD__</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>NEFORCE_END_NAMESPACE__</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_SIMD_TYPES_HPP__</span></div>
-<div class="ttc" id="agroup___core_types_html_ga18a5de45c0adec9c9e545674cc14755f"><div class="ttname"><a href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a></div><div class="ttdeci">unsigned char byte_t</div><div class="ttdoc">字节类型，定义为无符号字符</div><div class="ttdef"><b>定义</b> <a href="typeinfo_2types_8hpp_source.html#l00036">typeinfo/types.hpp:36</a></div></div>
-<div class="ttc" id="agroup___type_erasure_functions_html_gaeed8bfb4510a906e04808100528dd9b8"><div class="ttname"><a href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a></div><div class="ttdeci">constexpr decltype(auto) data(Container &amp;cont) noexcept(noexcept(cont.data()))</div><div class="ttdoc">获取容器的底层数据指针</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00395">type_erase.hpp:395</a></div></div>
-<div class="ttc" id="astructvec128__t_html"><div class="ttname"><a href="structvec128__t.html">vec128_t</a></div><div class="ttdoc">128-bit 整型向量（标量回退）</div><div class="ttdef"><b>定义</b> <a href="#l00052">simd/types.hpp:52</a></div></div>
-<div class="ttc" id="astructvec128d__t_html"><div class="ttname"><a href="structvec128d__t.html">vec128d_t</a></div><div class="ttdoc">128-bit 双精度浮点向量（标量回退）</div><div class="ttdef"><b>定义</b> <a href="#l00060">simd/types.hpp:60</a></div></div>
-<div class="ttc" id="astructvec128f__t_html"><div class="ttname"><a href="structvec128f__t.html">vec128f_t</a></div><div class="ttdoc">128-bit 单精度浮点向量（标量回退）</div><div class="ttdef"><b>定义</b> <a href="#l00056">simd/types.hpp:56</a></div></div>
-<div class="ttc" id="astructvec256__t_html"><div class="ttname"><a href="structvec256__t.html">vec256_t</a></div><div class="ttdoc">256-bit 整型向量（标量回退）</div><div class="ttdef"><b>定义</b> <a href="#l00081">simd/types.hpp:81</a></div></div>
-<div class="ttc" id="astructvec256d__t_html"><div class="ttname"><a href="structvec256d__t.html">vec256d_t</a></div><div class="ttdoc">256-bit 双精度浮点向量（标量回退）</div><div class="ttdef"><b>定义</b> <a href="#l00089">simd/types.hpp:89</a></div></div>
-<div class="ttc" id="astructvec256f__t_html"><div class="ttname"><a href="structvec256f__t.html">vec256f_t</a></div><div class="ttdoc">256-bit 单精度浮点向量（标量回退）</div><div class="ttdef"><b>定义</b> <a href="#l00085">simd/types.hpp:85</a></div></div>
-<div class="ttc" id="astructvec512__t_html"><div class="ttname"><a href="structvec512__t.html">vec512_t</a></div><div class="ttdoc">512-bit 整型向量（标量回退）</div><div class="ttdef"><b>定义</b> <a href="#l00103">simd/types.hpp:103</a></div></div>
-<div class="ttc" id="astructvec512d__t_html"><div class="ttname"><a href="structvec512d__t.html">vec512d_t</a></div><div class="ttdoc">512-bit 双精度浮点向量（标量回退）</div><div class="ttdef"><b>定义</b> <a href="#l00111">simd/types.hpp:111</a></div></div>
-<div class="ttc" id="astructvec512f__t_html"><div class="ttname"><a href="structvec512f__t.html">vec512f_t</a></div><div class="ttdoc">512-bit 单精度浮点向量（标量回退）</div><div class="ttdef"><b>定义</b> <a href="#l00107">simd/types.hpp:107</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga146242c39a2b187142d7b3ca35872740"><div class="ttname"><a href="group___core_types.html#ga146242c39a2b187142d7b3ca35872740">neforce::byte_t</a></div><div class="ttdeci">unsigned char byte_t</div><div class="ttdoc">字节类型，定义为无符号字符</div><div class="ttdef"><b>定义</b> <a href="typeinfo_2types_8hpp_source.html#l00036">typeinfo/types.hpp:36</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_ga0ebf766978a7e2e91cd299bad0fd8c18"><div class="ttname"><a href="group___s_i_m_d.html#ga0ebf766978a7e2e91cd299bad0fd8c18">neforce::simd::vec128_t</a></div><div class="ttdeci">::__m128i vec128_t</div><div class="ttdoc">128-bit 整型向量（16×i8 / 8×i16 / 4×i32 / 2×i64）</div><div class="ttdef"><b>定义</b> <a href="#l00031">simd/types.hpp:31</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_ga1681da5853ce1ba8d9ce275cafba4090"><div class="ttname"><a href="group___s_i_m_d.html#ga1681da5853ce1ba8d9ce275cafba4090">neforce::simd::vec128f_t</a></div><div class="ttdeci">::__m128 vec128f_t</div><div class="ttdoc">128-bit 单精度浮点向量（4×f32）</div><div class="ttdef"><b>定义</b> <a href="#l00033">simd/types.hpp:33</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_ga2f96202fcf0f211c17663e817baaee94"><div class="ttname"><a href="group___s_i_m_d.html#ga2f96202fcf0f211c17663e817baaee94">neforce::simd::vec128d_t</a></div><div class="ttdeci">::__m128d vec128d_t</div><div class="ttdoc">128-bit 双精度浮点向量（2×f64）</div><div class="ttdef"><b>定义</b> <a href="#l00035">simd/types.hpp:35</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_ga36ddb548398ae3dc5477eabc7c4facf6"><div class="ttname"><a href="group___s_i_m_d.html#ga36ddb548398ae3dc5477eabc7c4facf6">neforce::simd::vec256_t</a></div><div class="ttdeci">::__m256i vec256_t</div><div class="ttdoc">256-bit 整型向量（32×i8 / 16×i16 / 8×i32 / 4×i64，需 AVX2）</div><div class="ttdef"><b>定义</b> <a href="#l00068">simd/types.hpp:68</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_ga544eea78d226cbd1b5ce43ca5101cbcc"><div class="ttname"><a href="group___s_i_m_d.html#ga544eea78d226cbd1b5ce43ca5101cbcc">neforce::simd::vec512_t</a></div><div class="ttdeci">::__m512i vec512_t</div><div class="ttdoc">512-bit 整型向量（64×i8 / 32×i16 / 16×i32 / 8×i64）</div><div class="ttdef"><b>定义</b> <a href="#l00096">simd/types.hpp:96</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_ga559ab92dd59a43a08c7708d5da252166"><div class="ttname"><a href="group___s_i_m_d.html#ga559ab92dd59a43a08c7708d5da252166">neforce::simd::vec512f_t</a></div><div class="ttdeci">::__m512 vec512f_t</div><div class="ttdoc">512-bit 单精度浮点向量（16×f32）</div><div class="ttdef"><b>定义</b> <a href="#l00098">simd/types.hpp:98</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_ga6b9f22e3dbf1e9db54301a3f468a70b4"><div class="ttname"><a href="group___s_i_m_d.html#ga6b9f22e3dbf1e9db54301a3f468a70b4">neforce::simd::vec256d_t</a></div><div class="ttdeci">::__m256d vec256d_t</div><div class="ttdoc">256-bit 双精度浮点向量（4×f64）</div><div class="ttdef"><b>定义</b> <a href="#l00078">simd/types.hpp:78</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_gace5093ccdaaf7c55f600d4ffd04e6cb7"><div class="ttname"><a href="group___s_i_m_d.html#gace5093ccdaaf7c55f600d4ffd04e6cb7">neforce::simd::vec512d_t</a></div><div class="ttdeci">::__m512d vec512d_t</div><div class="ttdoc">512-bit 双精度浮点向量（8×f64）</div><div class="ttdef"><b>定义</b> <a href="#l00100">simd/types.hpp:100</a></div></div>
+<div class="ttc" id="agroup___s_i_m_d_html_gafb400e9954d0ba594b1d37858abd2d03"><div class="ttname"><a href="group___s_i_m_d.html#gafb400e9954d0ba594b1d37858abd2d03">neforce::simd::vec256f_t</a></div><div class="ttdeci">::__m256 vec256f_t</div><div class="ttdoc">256-bit 单精度浮点向量（8×f32）</div><div class="ttdef"><b>定义</b> <a href="#l00076">simd/types.hpp:76</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_ga897be37123f1690ffa096c58a510dbbe"><div class="ttname"><a href="group___type_erasure_functions.html#ga897be37123f1690ffa096c58a510dbbe">neforce::data</a></div><div class="ttdeci">constexpr decltype(auto) data(Container &amp;cont) noexcept(noexcept(cont.data()))</div><div class="ttdoc">获取容器的底层数据指针</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00395">type_erase.hpp:395</a></div></div>
 <div class="ttc" id="atypeinfo_2types_8hpp_html"><div class="ttname"><a href="typeinfo_2types_8hpp.html">types.hpp</a></div><div class="ttdoc">基本类型别名</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

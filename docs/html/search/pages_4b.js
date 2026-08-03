@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['弃用列表_0',['弃用列表',['../deprecated.html',1,'']]]
+  ['建议_0',['IEEE 1541-2021 建议',['../group___byte_size.html#ieee_1541',1,'']]]
 ];

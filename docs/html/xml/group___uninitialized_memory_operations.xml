@@ -4,7 +4,7 @@
     <compoundname>UninitializedMemoryOperations</compoundname>
     <title>未初始化内存操作</title>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___uninitialized_memory_operations_1ga598be7e509d166c415d1abf5551c4aa8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___uninitialized_memory_operations_1ga558721989d2882d4a249504023496dc1" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator1</type>
@@ -13,14 +13,15 @@
             <type>typename Iterator2</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga3d298019699d72aef974a27a13c65393" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator2 &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_ranges_fwd_iter_v&lt; Iterator2 &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
         <type>Iterator2</type>
-        <definition>Iterator2 uninitialized_copy</definition>
+        <definition>Iterator2 neforce::uninitialized_copy</definition>
         <argsstring>(Iterator1 first, Iterator1 last, Iterator2 result)</argsstring>
         <name>uninitialized_copy</name>
+        <qualifiedname>neforce::uninitialized_copy</qualifiedname>
         <param>
           <type>Iterator1</type>
           <declname>first</declname>
@@ -83,7 +84,7 @@
 </simplesect>
 <parameterlist kind="exception"><parameteritem>
 <parameternamelist>
-<parametername><ref refid="structmemory__exception" kindref="compound">memory_exception</ref></parametername>
+<parametername><ref refid="structneforce_1_1memory__exception" kindref="compound">memory_exception</ref></parametername>
 </parameternamelist>
 <parameterdescription>
 <para>当值类型为非平凡类型时，如果构造过程中发生异常</para>
@@ -95,10 +96,12 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/uninitialized.hpp" line="90" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/uninitialized.hpp" bodystart="90" bodyend="95"/>
-        <referencedby refid="classvector_1a2b66ef497dacca36effd4c6763d1a77e" compoundref="vector_8hpp" startline="1026" endline="1063">vector&lt; Value, Alloc &gt;::insert</referencedby>
-        <referencedby refid="classvector_1aa881433e352995ffb44260d42d6bbe84" compoundref="vector_8hpp" startline="557" endline="574">vector&lt; Value, Alloc &gt;::operator=</referencedby>
+        <references refid="group___uninitialized_memory_operations_1ga558721989d2882d4a249504023496dc1" compoundref="uninitialized_8hpp" startline="90" endline="95">neforce::uninitialized_copy</references>
+        <referencedby refid="classneforce_1_1vector_1ad0cacb702cb3a02dd720991c5c813c48" compoundref="vector_8hpp" startline="1026" endline="1063">neforce::vector&lt; Value, Alloc &gt;::insert</referencedby>
+        <referencedby refid="classneforce_1_1vector_1ae7b42354efddc2f226b7d4e40f9afdb9" compoundref="vector_8hpp" startline="557" endline="574">neforce::vector&lt; Value, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="group___uninitialized_memory_operations_1ga558721989d2882d4a249504023496dc1" compoundref="uninitialized_8hpp" startline="90" endline="95">neforce::uninitialized_copy</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___uninitialized_memory_operations_1ga61b86f74d639032ac387eb9c61bdb5a1" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___uninitialized_memory_operations_1ga3b91af6fb196e075a20b3cb29bc6f435" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator1</type>
@@ -107,20 +110,21 @@
             <type>typename Iterator2</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga3d298019699d72aef974a27a13c65393" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator2 &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_ranges_fwd_iter_v&lt; Iterator2 &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
         <type>Iterator2</type>
-        <definition>Iterator2 uninitialized_copy_n</definition>
+        <definition>Iterator2 neforce::uninitialized_copy_n</definition>
         <argsstring>(Iterator1 first, size_t count, Iterator2 result)</argsstring>
         <name>uninitialized_copy_n</name>
+        <qualifiedname>neforce::uninitialized_copy_n</qualifiedname>
         <param>
           <type>Iterator1</type>
           <declname>first</declname>
         </param>
         <param>
-          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>size_t</type>
           <declname>count</declname>
         </param>
         <param>
@@ -177,7 +181,7 @@
 </simplesect>
 <parameterlist kind="exception"><parameteritem>
 <parameternamelist>
-<parametername><ref refid="structmemory__exception" kindref="compound">memory_exception</ref></parametername>
+<parametername><ref refid="structneforce_1_1memory__exception" kindref="compound">memory_exception</ref></parametername>
 </parameternamelist>
 <parameterdescription>
 <para>当值类型为非平凡类型时，如果构造过程中发生异常</para>
@@ -189,10 +193,12 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/uninitialized.hpp" line="156" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/uninitialized.hpp" bodystart="156" bodyend="158"/>
-        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
-        <referencedby refid="classbasic__string_1a7ca4a06ec31c7ed89c8128f9f45b2e71" compoundref="basic__string_8hpp" startline="1766" endline="1811">basic_string&lt; char &gt;::append</referencedby>
+        <references refid="group___counting_algorithms_1ga74557c5cb91a609183df695efc54ba60" compoundref="search_8hpp" startline="391" endline="393">neforce::count</references>
+        <references refid="group___uninitialized_memory_operations_1ga3b91af6fb196e075a20b3cb29bc6f435" compoundref="uninitialized_8hpp" startline="156" endline="158">neforce::uninitialized_copy_n</references>
+        <referencedby refid="classneforce_1_1basic__string_1a436f8c016b13358612be56652044d1c1" compoundref="basic__string_8hpp" startline="1767" endline="1812">neforce::basic_string&lt; char &gt;::append</referencedby>
+        <referencedby refid="group___uninitialized_memory_operations_1ga3b91af6fb196e075a20b3cb29bc6f435" compoundref="uninitialized_8hpp" startline="156" endline="158">neforce::uninitialized_copy_n</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___uninitialized_memory_operations_1ga45be008622fca8de5154c02b99877756" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___uninitialized_memory_operations_1ga8ec4e7780422fbc8497a677fa36c6907" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
@@ -201,14 +207,15 @@
             <type>typename T</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga3d298019699d72aef974a27a13c65393" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_ranges_fwd_iter_v&lt; Iterator &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void uninitialized_fill</definition>
+        <definition>void neforce::uninitialized_fill</definition>
         <argsstring>(Iterator first, Iterator last, const T &amp;x)</argsstring>
         <name>uninitialized_fill</name>
+        <qualifiedname>neforce::uninitialized_fill</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
@@ -269,7 +276,7 @@
 </parameterlist>
 <parameterlist kind="exception"><parameteritem>
 <parameternamelist>
-<parametername><ref refid="structmemory__exception" kindref="compound">memory_exception</ref></parametername>
+<parametername><ref refid="structneforce_1_1memory__exception" kindref="compound">memory_exception</ref></parametername>
 </parameternamelist>
 <parameterdescription>
 <para>当值类型为非平凡类型时，如果构造过程中发生异常</para>
@@ -281,8 +288,10 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/uninitialized.hpp" line="218" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/uninitialized.hpp" bodystart="218" bodyend="223"/>
+        <references refid="group___uninitialized_memory_operations_1ga8ec4e7780422fbc8497a677fa36c6907" compoundref="uninitialized_8hpp" startline="218" endline="223">neforce::uninitialized_fill</references>
+        <referencedby refid="group___uninitialized_memory_operations_1ga8ec4e7780422fbc8497a677fa36c6907" compoundref="uninitialized_8hpp" startline="218" endline="223">neforce::uninitialized_fill</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___uninitialized_memory_operations_1ga9769bb076ca4386e691b0a034e211d15" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___uninitialized_memory_operations_1ga00d14ed76cb04066ebc876035058a87d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
@@ -291,20 +300,21 @@
             <type>typename T</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga3d298019699d72aef974a27a13c65393" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_ranges_fwd_iter_v&lt; Iterator &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
         <type>Iterator</type>
-        <definition>Iterator uninitialized_fill_n</definition>
+        <definition>Iterator neforce::uninitialized_fill_n</definition>
         <argsstring>(Iterator first, size_t n, const T &amp;x)</argsstring>
         <name>uninitialized_fill_n</name>
+        <qualifiedname>neforce::uninitialized_fill_n</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>first</declname>
         </param>
         <param>
-          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>size_t</type>
           <declname>n</declname>
         </param>
         <param>
@@ -361,23 +371,25 @@
 </simplesect>
 <parameterlist kind="exception"><parameteritem>
 <parameternamelist>
-<parametername><ref refid="structmemory__exception" kindref="compound">memory_exception</ref></parametername>
+<parametername><ref refid="structneforce_1_1memory__exception" kindref="compound">memory_exception</ref></parametername>
 </parameternamelist>
 <parameterdescription>
 <para>当值类型为非平凡类型时，如果构造过程中发生异常</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-类似于 <ref refid="group___shift_algorithms_1gaf7073d1fd2edd9c564d1b7859f096194" kindref="member">fill_n()</ref>，但在未初始化内存上操作。 </para>
+类似于 <ref refid="group___shift_algorithms_1ga390400a23909193701477d93522be5e9" kindref="member">fill_n()</ref>，但在未初始化内存上操作。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/uninitialized.hpp" line="288" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/uninitialized.hpp" bodystart="288" bodyend="290"/>
-        <referencedby refid="classvector_1a9cc368b8111cf70e9a91367d2cefcbd8" compoundref="vector_8hpp" startline="921" endline="947">vector&lt; Value, Alloc &gt;::assign</referencedby>
-        <referencedby refid="classdeque_1aaafb1c5f8fad779fdc5360a3197b6a87" compoundref="deque_8hpp" startline="1274" endline="1288">deque&lt; T, Alloc, BufSize &gt;::insert</referencedby>
-        <referencedby refid="classvector_1a2b66ef497dacca36effd4c6763d1a77e" compoundref="vector_8hpp" startline="1026" endline="1063">vector&lt; Value, Alloc &gt;::insert</referencedby>
+        <references refid="group___uninitialized_memory_operations_1ga00d14ed76cb04066ebc876035058a87d" compoundref="uninitialized_8hpp" startline="288" endline="290">neforce::uninitialized_fill_n</references>
+        <referencedby refid="classneforce_1_1vector_1a1addaafdf4da6b366935a461eb6bf4be" compoundref="vector_8hpp" startline="921" endline="947">neforce::vector&lt; Value, Alloc &gt;::assign</referencedby>
+        <referencedby refid="classneforce_1_1deque_1ab6d5fa07c17f333ad6f06b9a0c76eb9d" compoundref="deque_8hpp" startline="1274" endline="1288">neforce::deque&lt; T, Alloc, BufSize &gt;::insert</referencedby>
+        <referencedby refid="classneforce_1_1vector_1ad0cacb702cb3a02dd720991c5c813c48" compoundref="vector_8hpp" startline="1026" endline="1063">neforce::vector&lt; Value, Alloc &gt;::insert</referencedby>
+        <referencedby refid="group___uninitialized_memory_operations_1ga00d14ed76cb04066ebc876035058a87d" compoundref="uninitialized_8hpp" startline="288" endline="290">neforce::uninitialized_fill_n</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___uninitialized_memory_operations_1ga786fad1efc254e8f484f1d9a04eaf87a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___uninitialized_memory_operations_1gaeedf6716dc46277faec64e65cb1d23eb" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator1</type>
@@ -386,14 +398,15 @@
             <type>typename Iterator2</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga599d2f4fe13322580e70e5959b69778d" kindref="member">is_ranges_input_iter_v</ref>&lt; Iterator1 &gt; &amp;&amp;<ref refid="group___iterator_category_checks_1ga3d298019699d72aef974a27a13c65393" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator2 &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_ranges_input_iter_v&lt; Iterator1 &gt; &amp;&amp;is_ranges_fwd_iter_v&lt; Iterator2 &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
         <type>Iterator2</type>
-        <definition>Iterator2 uninitialized_move</definition>
+        <definition>Iterator2 neforce::uninitialized_move</definition>
         <argsstring>(Iterator1 first, Iterator1 last, Iterator2 result)</argsstring>
         <name>uninitialized_move</name>
+        <qualifiedname>neforce::uninitialized_move</qualifiedname>
         <param>
           <type>Iterator1</type>
           <declname>first</declname>
@@ -456,7 +469,7 @@
 </simplesect>
 <parameterlist kind="exception"><parameteritem>
 <parameternamelist>
-<parametername><ref refid="structmemory__exception" kindref="compound">memory_exception</ref></parametername>
+<parametername><ref refid="structneforce_1_1memory__exception" kindref="compound">memory_exception</ref></parametername>
 </parameternamelist>
 <parameterdescription>
 <para>当值类型为非平凡类型时，如果构造过程中发生异常</para>
@@ -468,12 +481,14 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/uninitialized.hpp" line="359" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/uninitialized.hpp" bodystart="359" bodyend="364"/>
-        <referencedby refid="classvector_1ab47efdba81e2bd130018669ab777d1a6" compoundref="vector_8hpp" startline="829" endline="866">vector&lt; Value, Alloc &gt;::emplace</referencedby>
-        <referencedby refid="classvector_1a2b66ef497dacca36effd4c6763d1a77e" compoundref="vector_8hpp" startline="1026" endline="1063">vector&lt; Value, Alloc &gt;::insert</referencedby>
-        <referencedby refid="classvector_1a0066a7fca1a744cdb62d5fb96b51a88f" compoundref="vector_8hpp" startline="775" endline="798">vector&lt; Value, Alloc &gt;::reserve</referencedby>
-        <referencedby refid="classvector_1a8a76aacfe632435f1977dc3297c73cfc" compoundref="vector_8hpp" startline="1107" endline="1135">vector&lt; Value, Alloc &gt;::shrink_to_fit</referencedby>
+        <references refid="group___uninitialized_memory_operations_1gaeedf6716dc46277faec64e65cb1d23eb" compoundref="uninitialized_8hpp" startline="359" endline="364">neforce::uninitialized_move</references>
+        <referencedby refid="classneforce_1_1vector_1ac306f8b6b702e1f41817ee6d87b923bb" compoundref="vector_8hpp" startline="829" endline="866">neforce::vector&lt; Value, Alloc &gt;::emplace</referencedby>
+        <referencedby refid="classneforce_1_1vector_1ad0cacb702cb3a02dd720991c5c813c48" compoundref="vector_8hpp" startline="1026" endline="1063">neforce::vector&lt; Value, Alloc &gt;::insert</referencedby>
+        <referencedby refid="classneforce_1_1vector_1a69c7a4909e935658748ba812e9ff6104" compoundref="vector_8hpp" startline="775" endline="798">neforce::vector&lt; Value, Alloc &gt;::reserve</referencedby>
+        <referencedby refid="classneforce_1_1vector_1a427135ec17014082493b2436dec6a84d" compoundref="vector_8hpp" startline="1107" endline="1135">neforce::vector&lt; Value, Alloc &gt;::shrink_to_fit</referencedby>
+        <referencedby refid="group___uninitialized_memory_operations_1gaeedf6716dc46277faec64e65cb1d23eb" compoundref="uninitialized_8hpp" startline="359" endline="364">neforce::uninitialized_move</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___uninitialized_memory_operations_1ga8342a44b11578932bd3b92814a116e31" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___uninitialized_memory_operations_1ga8308fd5193389e2dc306341ea3ad94d0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator1</type>
@@ -482,20 +497,21 @@
             <type>typename Iterator2</type>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga599d2f4fe13322580e70e5959b69778d" kindref="member">is_ranges_input_iter_v</ref>&lt; Iterator1 &gt; &amp;&amp;<ref refid="group___iterator_category_checks_1ga3d298019699d72aef974a27a13c65393" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator2 &gt;, int &gt;</type>
+            <type>enable_if_t&lt; is_ranges_input_iter_v&lt; Iterator1 &gt; &amp;&amp;is_ranges_fwd_iter_v&lt; Iterator2 &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
         <type>Iterator2</type>
-        <definition>Iterator2 uninitialized_move_n</definition>
+        <definition>Iterator2 neforce::uninitialized_move_n</definition>
         <argsstring>(Iterator1 first, size_t count, Iterator2 result)</argsstring>
         <name>uninitialized_move_n</name>
+        <qualifiedname>neforce::uninitialized_move_n</qualifiedname>
         <param>
           <type>Iterator1</type>
           <declname>first</declname>
         </param>
         <param>
-          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>size_t</type>
           <declname>count</declname>
         </param>
         <param>
@@ -552,7 +568,7 @@
 </simplesect>
 <parameterlist kind="exception"><parameteritem>
 <parameternamelist>
-<parametername><ref refid="structmemory__exception" kindref="compound">memory_exception</ref></parametername>
+<parametername><ref refid="structneforce_1_1memory__exception" kindref="compound">memory_exception</ref></parametername>
 </parameternamelist>
 <parameterdescription>
 <para>当值类型为非平凡类型时，如果构造过程中发生异常 </para>
@@ -564,7 +580,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/uninitialized.hpp" line="424" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/uninitialized.hpp" bodystart="424" bodyend="426"/>
-        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
+        <references refid="group___counting_algorithms_1ga74557c5cb91a609183df695efc54ba60" compoundref="search_8hpp" startline="391" endline="393">neforce::count</references>
+        <references refid="group___uninitialized_memory_operations_1ga8308fd5193389e2dc306341ea3ad94d0" compoundref="uninitialized_8hpp" startline="424" endline="426">neforce::uninitialized_move_n</references>
+        <referencedby refid="group___uninitialized_memory_operations_1ga8308fd5193389e2dc306341ea3ad94d0" compoundref="uninitialized_8hpp" startline="424" endline="426">neforce::uninitialized_move_n</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

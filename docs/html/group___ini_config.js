@@ -1,86 +1,86 @@
 var group___ini_config =
 [
-    [ "ini_builder", "classini__builder.html", [
-      [ "ini_builder", "classini__builder.html#afa27f3ea82d3b0a156667c231fca7af8", null ],
-      [ "ini_builder", "classini__builder.html#a7492177a96534afdb9211bcb0a06e8c7", null ],
-      [ "begin_section", "classini__builder.html#a44b845c6e271597ff3777dfb5ad79384", null ],
-      [ "build", "classini__builder.html#a4370a91dbf524a84823e72510cb39ac2", null ],
-      [ "end_section", "classini__builder.html#a91ce1b6ebe2327cd2d9bfd2abb6ec06c", null ],
-      [ "key", "classini__builder.html#ae6ec40c1674af57e665cc76a396bb767", null ],
-      [ "operator=", "classini__builder.html#a5b510ceb6d7b7209e0ccf3a4de43a974", null ],
-      [ "value", "classini__builder.html#a5c3dd9ce22280984d8bd7d3f69da70ae", null ],
-      [ "value", "classini__builder.html#afc06392c5a3748f6a1c2ebb72a53f28f", null ],
-      [ "value", "classini__builder.html#a4db23b4aee582ad4bd453b55d48c0433", null ],
-      [ "value", "classini__builder.html#a3157be364ab0321ada26356be193f641", null ],
-      [ "value", "classini__builder.html#a3165ddf148f06f35a7a7b49e774af646", null ],
-      [ "value", "classini__builder.html#a071e60c05ccc86710d27480398d32b4f", null ],
-      [ "value", "classini__builder.html#a9009d53d2d348912fb2bf40f56da982e", null ],
-      [ "value", "classini__builder.html#a09330734c323b5fb5de6be2ab390f68f", null ],
-      [ "value_section", "classini__builder.html#adba2bba2f7102d2581704291ed3390d0", null ]
+    [ "neforce::ini_builder", "classneforce_1_1ini__builder.html", [
+      [ "ini_builder", "classneforce_1_1ini__builder.html#a7db8f0ef8e7b5759245ecd478fde1c9e", null ],
+      [ "ini_builder", "classneforce_1_1ini__builder.html#a235d07c9dbf13bf0a91750859ace1c0c", null ],
+      [ "begin_section", "classneforce_1_1ini__builder.html#ae502f406a5f4eb9067a13a1c6c0aaeeb", null ],
+      [ "build", "classneforce_1_1ini__builder.html#a8eafc547dcc54b1c0bd9b0266ea19fd9", null ],
+      [ "end_section", "classneforce_1_1ini__builder.html#ab55275a012eb726e691e560c5b84b1c2", null ],
+      [ "key", "classneforce_1_1ini__builder.html#abd9acddb83f68f65424a1bdeeb458d94", null ],
+      [ "operator=", "classneforce_1_1ini__builder.html#ad3ea4509dc1d6572da5872a8e8591d76", null ],
+      [ "value", "classneforce_1_1ini__builder.html#a366614b6315a7217ebe8faba81aeea83", null ],
+      [ "value", "classneforce_1_1ini__builder.html#a1be5c13d5b9ddd3273f401b8731ae933", null ],
+      [ "value", "classneforce_1_1ini__builder.html#ad7e609f82eb27d41e4bc448ca0fcefa6", null ],
+      [ "value", "classneforce_1_1ini__builder.html#a90b4955dbce5ae73216ee928e9de86e9", null ],
+      [ "value", "classneforce_1_1ini__builder.html#afddb876789046448291bcb26a76a37a8", null ],
+      [ "value", "classneforce_1_1ini__builder.html#aabee63c7dc66a14a4818e6f69cb41456", null ],
+      [ "value", "classneforce_1_1ini__builder.html#a2b811b2b77c74057fdfd1c65d0ceb36f", null ],
+      [ "value", "classneforce_1_1ini__builder.html#a91d9e23e97672b7bbf2e01e8b378c249", null ],
+      [ "value_section", "classneforce_1_1ini__builder.html#a6720fe41c155c32a394656a03f5ae271", null ]
     ] ],
-    [ "ini_parser", "classini__parser.html", [
-      [ "ini_parser", "classini__parser.html#a5becbf77ae74b693a87f2c39a1f026ea", null ],
-      [ "parse", "classini__parser.html#abf0b263236c2d1d68bc601b475d8139e", null ],
-      [ "try_parse", "classini__parser.html#a4f77d056af4d36af88f416f87ea10c0d", null ]
+    [ "neforce::ini_parser", "classneforce_1_1ini__parser.html", [
+      [ "ini_parser", "classneforce_1_1ini__parser.html#abffd5f73503c57ff268b05793e7faa0f", null ],
+      [ "parse", "classneforce_1_1ini__parser.html#ab0a0e3d00893940a4746a11c3d7773ab", null ],
+      [ "try_parse", "classneforce_1_1ini__parser.html#a628c7af5acbd7157f4edc1e7d0448705", null ]
     ] ],
-    [ "ini_value", "classini__value.html", [
-      [ "types", "classini__value.html#a6a636deb4a29b4f18255a0ede3dca2f0", [
-        [ "Section", "classini__value.html#a6a636deb4a29b4f18255a0ede3dca2f0af61a8412ef0d86235eed6b53c6000b86", null ],
-        [ "Property", "classini__value.html#a6a636deb4a29b4f18255a0ede3dca2f0a76f68469f0a909646a3e6a2ab3c51562", null ]
+    [ "neforce::ini_value", "classneforce_1_1ini__value.html", [
+      [ "types", "classneforce_1_1ini__value.html#a0cd5292495240abdc9d27ddd2f087e3b", [
+        [ "Section", "classneforce_1_1ini__value.html#a0cd5292495240abdc9d27ddd2f087e3bade8ae0a84b5de78408a856b9aa529dff", null ],
+        [ "Property", "classneforce_1_1ini__value.html#a0cd5292495240abdc9d27ddd2f087e3baf20e0ab6c46b46966df9cb0aed96c01a", null ]
       ] ],
-      [ "~ini_value", "classini__value.html#ac1f79723f0630c412b8c15deb2b60725", null ],
-      [ "as_property", "classini__value.html#a2847ccc305d28610a11fdb92b5125217", null ],
-      [ "as_section", "classini__value.html#a8cedfeea09dade908535ee60be37d016", null ],
-      [ "is_property", "classini__value.html#a2b2f81a95c25840b5a4f5ca083144a7c", null ],
-      [ "is_section", "classini__value.html#a8c9fcd2ff9944387eacb94a17dfb83fa", null ],
-      [ "to_document", "classini__value.html#a99c9cce066d53aa9b52ee43a7dd2f9fb", null ],
-      [ "to_string", "classini__value.html#aa001958a7b70b58628ad40e60a86ec9f", null ],
-      [ "type", "classini__value.html#a4c5ed96e8b6eb1dac795bf3b5b55f4a5", null ]
+      [ "~ini_value", "classneforce_1_1ini__value.html#a6ca61cb5a991c14f3eed5b284fbf3e69", null ],
+      [ "as_property", "classneforce_1_1ini__value.html#a09f83aa2d1e27079fef69575f246a020", null ],
+      [ "as_section", "classneforce_1_1ini__value.html#a46b24444b51607168b94f7fbcbff0435", null ],
+      [ "is_property", "classneforce_1_1ini__value.html#a1d2cb3ed21044445ef631ad834cb7da2", null ],
+      [ "is_section", "classneforce_1_1ini__value.html#a465ecd7befdfcf598447b6edb9e329f0", null ],
+      [ "to_document", "classneforce_1_1ini__value.html#a5681c9f3c8e9e365ac092ccadb79925c", null ],
+      [ "to_string", "classneforce_1_1ini__value.html#ae05ad08b51bc97b1dfcba05ce8a90d54", null ],
+      [ "type", "classneforce_1_1ini__value.html#a0ae22355b19ab5dd609822e511076476", null ]
     ] ],
-    [ "ini_property", "classini__property.html", [
-      [ "ini_property", "classini__property.html#a52d5c591bffd50853791709083e96abc", null ],
-      [ "as_property", "classini__property.html#a033df87b7707f8ae69f2ea95a3b54cb3", null ],
-      [ "get_bool", "classini__property.html#a77e8425544ddb3ae7dd60d6e3373d796", null ],
-      [ "get_double", "classini__property.html#aa88220c19d37fd5c6a3db1ae03241feb", null ],
-      [ "get_int", "classini__property.html#a8afb54b681e67cd9db526a3cd0431219", null ],
-      [ "get_value", "classini__property.html#add92a273a200627d71ae23edeb2fb37c", null ],
-      [ "set_value", "classini__property.html#abd2d7fd6a4392725d6572047132fcf60", null ],
-      [ "type", "classini__property.html#a5b274ec66ca966bdd0851cb102dbbdaf", null ]
+    [ "neforce::ini_property", "classneforce_1_1ini__property.html", [
+      [ "ini_property", "classneforce_1_1ini__property.html#add6b0edd35b24b35ce224a5ae9c16100", null ],
+      [ "as_property", "classneforce_1_1ini__property.html#a7dc6c0e480607305237afc252cefd24b", null ],
+      [ "get_bool", "classneforce_1_1ini__property.html#a968e7ecf814dd45acb04f40c035159d4", null ],
+      [ "get_double", "classneforce_1_1ini__property.html#add64e4d027bf13a6461698125b856f98", null ],
+      [ "get_int", "classneforce_1_1ini__property.html#ad0d53a940f30bf645efeaf964d3a6df7", null ],
+      [ "get_value", "classneforce_1_1ini__property.html#a56b6dba2f7416b5aa34347f86e1a7511", null ],
+      [ "set_value", "classneforce_1_1ini__property.html#ac17cd3d46e0f424ec396519a5b646d18", null ],
+      [ "type", "classneforce_1_1ini__property.html#a97dfbab7fc1af545b0e275289d534355", null ]
     ] ],
-    [ "ini_section", "classini__section.html", [
-      [ "ini_section", "classini__section.html#afe1303c17cd6ed09ccb5f166c15bae90", null ],
-      [ "ini_section", "classini__section.html#a7af51ac11e4a14f4bbe9431a738594d4", null ],
-      [ "add_property", "classini__section.html#afe373c9c751b4810ffaff7e2d2412dd8", null ],
-      [ "as_section", "classini__section.html#a0d5929bec41da65236dd41ac9c28a4f3", null ],
-      [ "get_bool", "classini__section.html#a6246f2a47d2aa9f26b15d54523739569", null ],
-      [ "get_double", "classini__section.html#a5922816e7aa68fd395b06b0d53f3179b", null ],
-      [ "get_int", "classini__section.html#a06836e9ca9255040ccb93037b95fea6a", null ],
-      [ "get_name", "classini__section.html#aced5aa92584c501a37c0c4700009c3fe", null ],
-      [ "get_properties", "classini__section.html#afded3de2518dc699c782f4e5f8ab6bfa", null ],
-      [ "get_property", "classini__section.html#afbbf3d0aaacb9c1a60fe94e88bc76321", null ],
-      [ "get_property", "classini__section.html#ad59432090b58f7fed04ef6a18037ad55", null ],
-      [ "get_string", "classini__section.html#acbb937e10be5fb8d1cdae1b06c3c7c82", null ],
-      [ "has_property", "classini__section.html#a62dd8287811c8e0af180a8c78422685e", null ],
-      [ "operator=", "classini__section.html#acc341158b740c4cedc0fba41c3e19eaf", null ],
-      [ "set_name", "classini__section.html#a4e0fd26ecdb47cf9d234c97765297193", null ],
-      [ "set_property", "classini__section.html#aff20d7467b26968d562ebb85e2d5be84", null ],
-      [ "type", "classini__section.html#a4f5fff5055f8550817eddf02001dc4cc", null ]
+    [ "neforce::ini_section", "classneforce_1_1ini__section.html", [
+      [ "ini_section", "classneforce_1_1ini__section.html#a409c30dc8e0a7fbd474b0f25da009551", null ],
+      [ "ini_section", "classneforce_1_1ini__section.html#abbb3da2e6a6062195637ab9ac65cfb23", null ],
+      [ "add_property", "classneforce_1_1ini__section.html#a7dec436f663244cb7776d0969dbafb8c", null ],
+      [ "as_section", "classneforce_1_1ini__section.html#af7b15bb3dfb974362409a89b9821a321", null ],
+      [ "get_bool", "classneforce_1_1ini__section.html#aa462120f74bf4cf5b81b540712ce99ec", null ],
+      [ "get_double", "classneforce_1_1ini__section.html#af3f69f55c2b7386bb61ae63c35917156", null ],
+      [ "get_int", "classneforce_1_1ini__section.html#ade6e3d47999c2e341479c715f09b29ec", null ],
+      [ "get_name", "classneforce_1_1ini__section.html#a732580f28e1ef1337d90cb33b251a752", null ],
+      [ "get_properties", "classneforce_1_1ini__section.html#a54b4c702f381a441a85e252c7ebb3407", null ],
+      [ "get_property", "classneforce_1_1ini__section.html#a80ebd30f7b00108f36697b2ac0bcbd8b", null ],
+      [ "get_property", "classneforce_1_1ini__section.html#a10af201f3c54e56538a16485ecb133f3", null ],
+      [ "get_string", "classneforce_1_1ini__section.html#a0ae3849e54457d5d9dc5e986855cdf66", null ],
+      [ "has_property", "classneforce_1_1ini__section.html#a26f029f9ea4fbeec7aa5f565aeab0c0a", null ],
+      [ "operator=", "classneforce_1_1ini__section.html#ad3660121271bec851677973172641247", null ],
+      [ "set_name", "classneforce_1_1ini__section.html#afc53afe53a01e2835f6fd59ef36f70c2", null ],
+      [ "set_property", "classneforce_1_1ini__section.html#a1cdbae382db834dfcf6eb641cc28b7a0", null ],
+      [ "type", "classneforce_1_1ini__section.html#a9ca29011adfed359a09a7c0c212df253", null ]
     ] ],
-    [ "ini_document", "classini__document.html", [
-      [ "ini_document", "classini__document.html#a32fd6d1eb003f7a3971d90575f8cd0cc", null ],
-      [ "ini_document", "classini__document.html#af47f33d45370ff9f9d58b9c5ed5a36b6", null ],
-      [ "add_section", "classini__document.html#adf0d69636ff1a6c09b8191eda8164ddf", null ],
-      [ "get_bool", "classini__document.html#a60cba0d8030e883d1ecd8d6fcf0a9744", null ],
-      [ "get_double", "classini__document.html#a7ee08ac078f537ebb4bc732469dc5bcf", null ],
-      [ "get_global_section", "classini__document.html#a7d2221dc183c9ae188ad4acc4d15ea1a", null ],
-      [ "get_global_section", "classini__document.html#a2c223f09116ca7bc25a694e073ddb60d", null ],
-      [ "get_int", "classini__document.html#a71e53a197157f1d6502074cf8597c65a", null ],
-      [ "get_section", "classini__document.html#aaab663a3d05813d7869d565baf82566c", null ],
-      [ "get_section", "classini__document.html#a0ce6a0227710136e3a33b6c45ae315d1", null ],
-      [ "get_sections", "classini__document.html#a66718cb0a0f93e60dcff3101db67cb2c", null ],
-      [ "get_string", "classini__document.html#ad3a55169a6201d4094278a153d5a3075", null ],
-      [ "has_section", "classini__document.html#a483931ecbda7e430029d04f4d0e86401", null ],
-      [ "operator=", "classini__document.html#af54adac8913fa4335850f5ea41c05530", null ],
-      [ "to_string", "classini__document.html#abffabc43319729330bab37c14b5b9e16", null ]
+    [ "neforce::ini_document", "classneforce_1_1ini__document.html", [
+      [ "ini_document", "classneforce_1_1ini__document.html#a1055ad75db2b36300e60db4e04d8519e", null ],
+      [ "ini_document", "classneforce_1_1ini__document.html#a41058d3be76e573bea961c273d63525e", null ],
+      [ "add_section", "classneforce_1_1ini__document.html#add88340bf25341e33468b4cda0da9601", null ],
+      [ "get_bool", "classneforce_1_1ini__document.html#ab64ba2450da6eeaa913c6a4a381c1a43", null ],
+      [ "get_double", "classneforce_1_1ini__document.html#a20980afa3507b23cc960d987b829898c", null ],
+      [ "get_global_section", "classneforce_1_1ini__document.html#a418ab23a2c2cd7d5b043be799a105eeb", null ],
+      [ "get_global_section", "classneforce_1_1ini__document.html#a6ac9bbb797f87e9ad993a167b5b622df", null ],
+      [ "get_int", "classneforce_1_1ini__document.html#a8d608dc2e06fdfc67ad095623e21c22d", null ],
+      [ "get_section", "classneforce_1_1ini__document.html#a56982f8c992b832c9f92f2f30abcc961", null ],
+      [ "get_section", "classneforce_1_1ini__document.html#a5f45a1e8dd57664949501eddfe74840d", null ],
+      [ "get_sections", "classneforce_1_1ini__document.html#a9eed03dd4863b3b081cb49b377ffaf3a", null ],
+      [ "get_string", "classneforce_1_1ini__document.html#a06e9f9316beda6a47c797609d88b9454", null ],
+      [ "has_section", "classneforce_1_1ini__document.html#a624a28a344001e137b72256fa1ab417a", null ],
+      [ "operator=", "classneforce_1_1ini__document.html#aad44b3f02645a1fce364a35f8aec61e8", null ],
+      [ "to_string", "classneforce_1_1ini__document.html#a558262b3e264ddf6365cd5a6491049e4", null ]
     ] ]
 ];

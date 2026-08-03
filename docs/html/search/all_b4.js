@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['莱昂纳多堆算法_0',['莱昂纳多堆算法',['../group___leonardo_heap.html',1,'']]],
-  ['莱昂纳多堆结构_1',['莱昂纳多堆结构',['../group___leonardo_heap.html#heap_structure',1,'']]],
-  ['莱昂纳多数列_2',['莱昂纳多数列',['../group___leonardo_heap.html#leonardo_numbers',1,'']]]
+  ['缓冲区格式化_0',['缓冲区格式化',['../group___buffer_format.html',1,'']]],
+  ['缓冲区_1',['缓冲区',['../group___async_buffers.html',1,'']]],
+  ['缓存机制_2',['DNS 缓存机制',['../group___d_n_s.html#dns_caching',1,'']]],
+  ['缓存_3',['缓存',['../group___cache.html',1,'']]]
 ];

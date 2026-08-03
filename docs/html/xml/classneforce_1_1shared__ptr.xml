@@ -1,0 +1,1307 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1shared__ptr" kind="class" language="C++" prot="public">
+    <compoundname>neforce::shared_ptr</compoundname>
+    <derivedcompoundref refid="classneforce_1_1shared__ptr_3_01_t_0f_0e_4" prot="private" virt="non-virtual">neforce::shared_ptr&lt; T[]&gt;</derivedcompoundref>
+    <includes refid="shared__ptr_8hpp" local="no">shared_ptr.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1shared__ptr_1ad5b6c157b3c257e2042b5d0f6e1de0c3" prot="public" static="no">
+        <type>T</type>
+        <definition>using neforce::shared_ptr&lt; T &gt;::element_type = T</definition>
+        <argsstring></argsstring>
+        <name>element_type</name>
+        <qualifiedname>neforce::shared_ptr::element_type</qualifiedname>
+        <briefdescription>
+<para>元素类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="272" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="272" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classneforce_1_1shared__ptr_1ae20cf0ef82ce70614e4c19a69665623e" prot="private" static="no">
+        <type>inner::__smart_ptr_counter</type>
+        <definition>using neforce::shared_ptr&lt; T &gt;::owner_type = inner::__smart_ptr_counter</definition>
+        <argsstring></argsstring>
+        <name>owner_type</name>
+        <qualifiedname>neforce::shared_ptr::owner_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="275" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="275" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1shared__ptr_1abe211436f0ea3c03d4d2503f7d8eb588" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename Deleter</type>
+          </param>
+        </templateparamlist>
+        <type>inner::__smart_ptr_counter_impl&lt; U, Deleter &gt;</type>
+        <definition>using neforce::shared_ptr&lt; T &gt;::owner_deleter = inner::__smart_ptr_counter_impl&lt;U, Deleter&gt;</definition>
+        <argsstring></argsstring>
+        <name>owner_deleter</name>
+        <qualifiedname>neforce::shared_ptr::owner_deleter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="278" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="278" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1shared__ptr_1a0edc60e204023dec36cf437d24b70fdc" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>inner::__smart_ptr_counter_impl&lt; U, <ref refid="structneforce_1_1default__deleter" kindref="compound">default_deleter</ref>&lt; U &gt; &gt;</type>
+        <definition>using neforce::shared_ptr&lt; T &gt;::owner_default = inner::__smart_ptr_counter_impl&lt;U, default_deleter&lt;U&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>owner_default</name>
+        <qualifiedname>neforce::shared_ptr::owner_default</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="281" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="281" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1shared__ptr_1a2f6db53fa5745859c0f8539afd3aa648" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1shared__ptr_1ad5b6c157b3c257e2042b5d0f6e1de0c3" kindref="member">element_type</ref> *</type>
+        <definition>element_type* neforce::shared_ptr&lt; T &gt;::ptr_</definition>
+        <argsstring></argsstring>
+        <name>ptr_</name>
+        <qualifiedname>neforce::shared_ptr::ptr_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>管理的对象指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="283" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="283" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1shared__ptr_1a8bb92a629721aec61bf14156e9ef4d63" prot="private" static="no" mutable="no">
+        <type>owner_type *</type>
+        <definition>owner_type* neforce::shared_ptr&lt; T &gt;::owner_</definition>
+        <argsstring></argsstring>
+        <name>owner_</name>
+        <qualifiedname>neforce::shared_ptr::owner_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>控制块指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="284" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="284" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classneforce_1_1shared__ptr_1ab2104fa6e839672da3c30400e8325e52" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>class</type>
+        <definition>friend class shared_ptr</definition>
+        <argsstring></argsstring>
+        <name>shared_ptr</name>
+        <qualifiedname>neforce::shared_ptr::shared_ptr</qualifiedname>
+        <param>
+          <type>shared_ptr</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="296" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="296" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classneforce_1_1shared__ptr_1a27df6e2a1650d985bdeda33f0303c83f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>class</type>
+        <definition>friend class weak_ptr</definition>
+        <argsstring></argsstring>
+        <name>weak_ptr</name>
+        <qualifiedname>neforce::shared_ptr::weak_ptr</qualifiedname>
+        <param>
+          <type>weak_ptr</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="299" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="299" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classneforce_1_1shared__ptr_1aed96c692d7820b2c6d2f211055e8b449" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>class</type>
+        <definition>friend class inner::smart_pointer_atomic</definition>
+        <argsstring></argsstring>
+        <name>inner::smart_pointer_atomic</name>
+        <qualifiedname>neforce::shared_ptr::smart_pointer_atomic</qualifiedname>
+        <param>
+          <type>inner::smart_pointer_atomic</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="302" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="302" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classneforce_1_1shared__ptr_1a9b0476a9fee76473ff0beee5309d8fbe" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>shared_ptr&lt; U &gt;</type>
+        <definition>shared_ptr&lt; U &gt; inner::__make_shared_fused</definition>
+        <argsstring>(U *, inner::__smart_ptr_counter *) noexcept</argsstring>
+        <name>inner::__make_shared_fused</name>
+        <qualifiedname>neforce::shared_ptr::__make_shared_fused</qualifiedname>
+        <param>
+          <type>U *</type>
+        </param>
+        <param>
+          <type>inner::__smart_ptr_counter *</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="305" column="23"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1aa4709ec3ec66a35b54237e19a3e808a0" prot="private" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::shared_ptr&lt; T &gt;::shared_ptr</definition>
+        <argsstring>(T *ptr, owner_type *owner) noexcept</argsstring>
+        <name>shared_ptr</name>
+        <qualifiedname>neforce::shared_ptr::shared_ptr</qualifiedname>
+        <param>
+          <type>T *</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>owner_type *</type>
+          <declname>owner</declname>
+        </param>
+        <briefdescription>
+<para>私有构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>对象指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>owner</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>控制块指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="291" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="291" bodyend="293"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1ac1d5ba6d5f2ea2c568d9c717ecb05704" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::shared_ptr&lt; T &gt;::shared_ptr</definition>
+        <argsstring>(nullptr_t np=nullptr) noexcept</argsstring>
+        <name>shared_ptr</name>
+        <qualifiedname>neforce::shared_ptr::shared_ptr</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gacb98a47b9e384b2934a9c2dbd3c2d598" kindref="member">nullptr_t</ref></type>
+          <declname>np</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>np</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>空指针字面量</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+创建空的共享指针，不管理任何对象。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="314" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="314" bodyend="314"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1acf7f3e4068f972e0adc0bde8a9fd7339" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; U *, T * &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::shared_ptr&lt; T &gt;::shared_ptr</definition>
+        <argsstring>(U *ptr)</argsstring>
+        <name>shared_ptr</name>
+        <qualifiedname>neforce::shared_ptr::shared_ptr</qualifiedname>
+        <param>
+          <type>U *</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>从原始指针构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可转换为T*的类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原始指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="322" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="322" bodyend="326"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1a6f0b2815b803870def4519f62958f19e" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename Deleter</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; U *, T * &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::shared_ptr&lt; T &gt;::shared_ptr</definition>
+        <argsstring>(U *ptr, Deleter &amp;&amp;deleter)</argsstring>
+        <name>shared_ptr</name>
+        <qualifiedname>neforce::shared_ptr::shared_ptr</qualifiedname>
+        <param>
+          <type>U *</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>Deleter &amp;&amp;</type>
+          <declname>deleter</declname>
+        </param>
+        <briefdescription>
+<para>从原始指针和自定义删除器构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可转换为T*的类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Deleter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原始指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>deleter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="336" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="336" bodyend="340"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1af817c08bf131904b55149840e1e874a6" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename Deleter</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; U *, T * &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::shared_ptr&lt; T &gt;::shared_ptr</definition>
+        <argsstring>(unique_ptr&lt; U, Deleter &gt; &amp;&amp;unique)</argsstring>
+        <name>shared_ptr</name>
+        <qualifiedname>neforce::shared_ptr::shared_ptr</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; U, Deleter &gt; &amp;&amp;</type>
+          <declname>unique</declname>
+        </param>
+        <briefdescription>
+<para>独享智能指针构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可转换为T*的类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Deleter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>unique</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>独享智能指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="349" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="349" bodyend="350"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1a6da98e144419776fd8b36c6b9f7af73b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::shared_ptr&lt; T &gt;::shared_ptr</definition>
+        <argsstring>(const shared_ptr &amp;other) noexcept</argsstring>
+        <name>shared_ptr</name>
+        <qualifiedname>neforce::shared_ptr::shared_ptr</qualifiedname>
+        <param>
+          <type>const shared_ptr &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要拷贝的共享指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="356" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="356" bodyend="362"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1a1dd4faa1e722963b5696ec2cf2d0855c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>shared_ptr &amp;</type>
+        <definition>shared_ptr &amp; neforce::shared_ptr&lt; T &gt;::operator=</definition>
+        <argsstring>(const shared_ptr &amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::shared_ptr::operator=</qualifiedname>
+        <param>
+          <type>const shared_ptr &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要拷贝的共享指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前共享指针的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="369" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="369" bodyend="382"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1a94c3e1874bf3138d939f8f767dae5e8d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; U *, T * &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::shared_ptr&lt; T &gt;::shared_ptr</definition>
+        <argsstring>(const shared_ptr&lt; U &gt; &amp;other) noexcept</argsstring>
+        <name>shared_ptr</name>
+        <qualifiedname>neforce::shared_ptr::shared_ptr</qualifiedname>
+        <param>
+          <type>const shared_ptr&lt; U &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>类型转换拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可转换为T*的类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要拷贝的共享指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="390" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="390" bodyend="396"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1a6937189ae504a5d63c2bd6303ad82f40" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::shared_ptr&lt; T &gt;::shared_ptr</definition>
+        <argsstring>(shared_ptr &amp;&amp;other) noexcept</argsstring>
+        <name>shared_ptr</name>
+        <qualifiedname>neforce::shared_ptr::shared_ptr</qualifiedname>
+        <param>
+          <type>shared_ptr &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的共享指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="402" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="402" bodyend="407"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1a4d0e24c57ee10abe3e25b6bef7c42d5d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>shared_ptr &amp;</type>
+        <definition>shared_ptr &amp; neforce::shared_ptr&lt; T &gt;::operator=</definition>
+        <argsstring>(shared_ptr &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::shared_ptr::operator=</qualifiedname>
+        <param>
+          <type>shared_ptr &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的共享指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前共享指针的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="414" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="414" bodyend="426"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1a6fd55cf88c815b9a69091a9746fd6d7e" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; U *, T * &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::shared_ptr&lt; T &gt;::shared_ptr</definition>
+        <argsstring>(shared_ptr&lt; U &gt; &amp;&amp;other) noexcept</argsstring>
+        <name>shared_ptr</name>
+        <qualifiedname>neforce::shared_ptr::shared_ptr</qualifiedname>
+        <param>
+          <type>shared_ptr&lt; U &gt; &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>类型转换移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可转换为T*的类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的共享指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="434" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="434" bodyend="439"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1aff7f87621eb212b4bee8a3db67a673d6" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::shared_ptr&lt; T &gt;::shared_ptr</definition>
+        <argsstring>(const shared_ptr&lt; U &gt; &amp;other, T *ptr) noexcept</argsstring>
+        <name>shared_ptr</name>
+        <qualifiedname>neforce::shared_ptr::shared_ptr</qualifiedname>
+        <param>
+          <type>const shared_ptr&lt; U &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>从共享指针和别名指针别名构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原始共享指针的类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原始共享指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>别名指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>创建的共享指针与参数共享智能指针共享所有权，但指向不同的对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="449" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="449" bodyend="455"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1a7659cf76cb8d451ca36cfc2170b84224" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::shared_ptr&lt; T &gt;::shared_ptr</definition>
+        <argsstring>(shared_ptr&lt; U &gt; &amp;&amp;other, T *ptr) noexcept</argsstring>
+        <name>shared_ptr</name>
+        <qualifiedname>neforce::shared_ptr::shared_ptr</qualifiedname>
+        <param>
+          <type>shared_ptr&lt; U &gt; &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>移动别名构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="461" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="461" bodyend="466"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1a3fad6d375c3b5841777edd5fc4057d5d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; U *, T * &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>shared_ptr &amp;</type>
+        <definition>shared_ptr &amp; neforce::shared_ptr&lt; T &gt;::operator=</definition>
+        <argsstring>(const shared_ptr&lt; U &gt; &amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::shared_ptr::operator=</qualifiedname>
+        <param>
+          <type>const shared_ptr&lt; U &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>类型转换拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="472" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="472" bodyend="482"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1ab0e8351b43d09ac154b996be18ca9377" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; U *, T * &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>shared_ptr &amp;</type>
+        <definition>shared_ptr &amp; neforce::shared_ptr&lt; T &gt;::operator=</definition>
+        <argsstring>(shared_ptr&lt; U &gt; &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::shared_ptr::operator=</qualifiedname>
+        <param>
+          <type>shared_ptr&lt; U &gt; &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>类型转换移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="488" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="488" bodyend="497"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1a6a4eec82fe20f442b4ecd1193443e739" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::shared_ptr&lt; T &gt;::~shared_ptr</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>~shared_ptr</name>
+        <qualifiedname>neforce::shared_ptr::~shared_ptr</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>减少强引用计数，当计数为0时删除对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="503" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="503" bodyend="503"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1a41b064c73ce1ae4c52c6ac29a5af9a46" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::shared_ptr&lt; T &gt;::reset</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>reset</name>
+        <qualifiedname>neforce::shared_ptr::reset</qualifiedname>
+        <briefdescription>
+<para>重置共享指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="508" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="508" bodyend="514"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1a1233f5e77d2d5a919a6d74ea35da6de8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::shared_ptr&lt; T &gt;::reset</definition>
+        <argsstring>(U *ptr)</argsstring>
+        <name>reset</name>
+        <qualifiedname>neforce::shared_ptr::reset</qualifiedname>
+        <param>
+          <type>U *</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>重置共享指针并管理新对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可转换为T*的类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的原始指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="522" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="522" bodyend="531"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1ab3e238fa3a54872d63c7301916138ce7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename Deleter</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::shared_ptr&lt; T &gt;::reset</definition>
+        <argsstring>(U *ptr, Deleter deleter)</argsstring>
+        <name>reset</name>
+        <qualifiedname>neforce::shared_ptr::reset</qualifiedname>
+        <param>
+          <type>U *</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>Deleter</type>
+          <declname>deleter</declname>
+        </param>
+        <briefdescription>
+<para>带自定义删除器重置共享指针并管理新对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可转换为T*的类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Deleter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的原始指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>deleter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="541" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="541" bodyend="550"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1a1f2d60e49bc85b5e2c1ae282710f0dff" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>long</type>
+        <definition>long neforce::shared_ptr&lt; T &gt;::use_count</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>use_count</name>
+        <qualifiedname>neforce::shared_ptr::use_count</qualifiedname>
+        <briefdescription>
+<para>获取引用计数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>强引用计数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="556" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="556" bodyend="556"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1af4dfb82900232d251b22f04d8f1ad05b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::shared_ptr&lt; T &gt;::unique</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>unique</name>
+        <qualifiedname>neforce::shared_ptr::unique</qualifiedname>
+        <briefdescription>
+<para>检查是否独占所有权 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否只有当前共享指针引用对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="562" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="562" bodyend="562"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1a2a49036078d750ed780ecce3b5906076" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::shared_ptr&lt; T &gt;::swap</definition>
+        <argsstring>(shared_ptr &amp;other) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>neforce::shared_ptr::swap</qualifiedname>
+        <param>
+          <type>shared_ptr &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个共享指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的共享指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="568" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="568" bodyend="574"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1a84357efdbe01a6eb3a2150e026984c61" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>T *</type>
+        <definition>T * neforce::shared_ptr&lt; T &gt;::get</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get</name>
+        <qualifiedname>neforce::shared_ptr::get</qualifiedname>
+        <briefdescription>
+<para>获取原始指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>管理的对象指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="580" column="8" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="580" bodyend="580"/>
+        <referencedby refid="group___shared_pointer_1gac30e9844897224b7aa30a38a9bc51f1a" compoundref="shared__ptr_8hpp" startline="976" endline="978">neforce::const_pointer_cast</referencedby>
+        <referencedby refid="group___shared_pointer_1ga2da7bb78033d7f73b53617b2d104fb3e" compoundref="shared__ptr_8hpp" startline="1000" endline="1006">neforce::dynamic_pointer_cast</referencedby>
+        <referencedby refid="group___shared_pointer_1ga450de0f5cca1b72bd39f63114ff0492b" compoundref="shared__ptr_8hpp" startline="988" endline="990">neforce::reinterpret_pointer_cast</referencedby>
+        <referencedby refid="group___shared_pointer_1ga7c3dd367b01fe2aeb000251eeee8657f" compoundref="shared__ptr_8hpp" startline="964" endline="966">neforce::static_pointer_cast</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1a1608f65c04d7884720c4f9dceaf78d3d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>T *</type>
+        <definition>T * neforce::shared_ptr&lt; T &gt;::operator-&gt;</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator-&gt;</name>
+        <qualifiedname>neforce::shared_ptr::operator-&gt;</qualifiedname>
+        <briefdescription>
+<para>指针解引用运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>管理的对象指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="586" column="8" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="586" bodyend="586"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1ab2f37bce8bdb9f8b888aeef323c3bb32" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___add_qualifiers_1gadface24d2207b24b3037fb644acaf643" kindref="member">add_lvalue_reference_t</ref>&lt; T &gt;</type>
+        <definition>add_lvalue_reference_t&lt; T &gt; neforce::shared_ptr&lt; T &gt;::operator*</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>neforce::shared_ptr::operator*</qualifiedname>
+        <briefdescription>
+<para>解引用运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>对象的左值引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="592" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="592" bodyend="592"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1abf3870778711197cb95e222699a7e4cf" prot="public" static="no" nodiscard="yes" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::shared_ptr&lt; T &gt;::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>neforce::shared_ptr::operator bool</qualifiedname>
+        <briefdescription>
+<para>布尔转换运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否管理对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="598" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="598" bodyend="598"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1a55c11b33fad387b2d4fb867b81ac7456" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool neforce::shared_ptr&lt; T &gt;::owner_equal</definition>
+        <argsstring>(const shared_ptr&lt; U &gt; &amp;rhs) const noexcept</argsstring>
+        <name>owner_equal</name>
+        <qualifiedname>neforce::shared_ptr::owner_equal</qualifiedname>
+        <param>
+          <type>const shared_ptr&lt; U &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>检查所有权是否相等 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较的共享指针类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要比较的共享指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否共享同一控制块 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="607" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="607" bodyend="609"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1ab523924d473af471a9f7bb1f58d6ab8f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool neforce::shared_ptr&lt; T &gt;::owner_equal</definition>
+        <argsstring>(const weak_ptr&lt; U &gt; &amp;rhs) const noexcept</argsstring>
+        <name>owner_equal</name>
+        <qualifiedname>neforce::shared_ptr::owner_equal</qualifiedname>
+        <param>
+          <type>const weak_ptr&lt; U &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>与弱指针检查所有权是否相等 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="615" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="615" bodyend="617"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1aa19b71bc4d87cd8b0cfb5f20cc8dfdf3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool neforce::shared_ptr&lt; T &gt;::owner_before</definition>
+        <argsstring>(const shared_ptr&lt; U &gt; &amp;rhs) const noexcept</argsstring>
+        <name>owner_before</name>
+        <qualifiedname>neforce::shared_ptr::owner_before</qualifiedname>
+        <param>
+          <type>const shared_ptr&lt; U &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>比较所有权顺序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较的共享指针类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要比较的共享指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前控制块地址是否小于rhs的控制块地址 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="626" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="626" bodyend="628"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1shared__ptr_1ade3d19aed0956151bbe5c25de6422aee" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool neforce::shared_ptr&lt; T &gt;::owner_before</definition>
+        <argsstring>(const weak_ptr&lt; U &gt; &amp;rhs) const noexcept</argsstring>
+        <name>owner_before</name>
+        <qualifiedname>neforce::shared_ptr::owner_before</qualifiedname>
+        <param>
+          <type>const weak_ptr&lt; U &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>与弱指针比较所有权顺序 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="634" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="634" bodyend="636"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>共享智能指针类模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>对象类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+实现引用计数的智能指针，多个实例可以共享同一对象的所有权。 当最后一个共享智能指针被销毁时，对象会被自动删除。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::shared_ptr&lt; T &gt;</label>
+        <link refid="classneforce_1_1shared__ptr"/>
+      </node>
+      <node id="2">
+        <label>neforce::shared_ptr&lt; T[]&gt;</label>
+        <link refid="classneforce_1_1shared__ptr_3_01_t_0f_0e_4"/>
+        <childnode refid="1" relation="private-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="262" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="270" bodyend="637"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1shared__ptr_1ad5b6c157b3c257e2042b5d0f6e1de0c3" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>element_type</name></member>
+      <member refid="classneforce_1_1shared__ptr_1a84357efdbe01a6eb3a2150e026984c61" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>get</name></member>
+      <member refid="classneforce_1_1shared__ptr_1a9b0476a9fee76473ff0beee5309d8fbe" prot="private" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>inner::__make_shared_fused</name></member>
+      <member refid="classneforce_1_1shared__ptr_1abf3870778711197cb95e222699a7e4cf" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>operator bool</name></member>
+      <member refid="classneforce_1_1shared__ptr_1ab2f37bce8bdb9f8b888aeef323c3bb32" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>operator*</name></member>
+      <member refid="classneforce_1_1shared__ptr_1a1608f65c04d7884720c4f9dceaf78d3d" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>operator-&gt;</name></member>
+      <member refid="classneforce_1_1shared__ptr_1a1dd4faa1e722963b5696ec2cf2d0855c" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1shared__ptr_1a4d0e24c57ee10abe3e25b6bef7c42d5d" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1shared__ptr_1a3fad6d375c3b5841777edd5fc4057d5d" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1shared__ptr_1ab0e8351b43d09ac154b996be18ca9377" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1shared__ptr_1a8bb92a629721aec61bf14156e9ef4d63" prot="private" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>owner_</name></member>
+      <member refid="classneforce_1_1shared__ptr_1aa19b71bc4d87cd8b0cfb5f20cc8dfdf3" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>owner_before</name></member>
+      <member refid="classneforce_1_1shared__ptr_1ade3d19aed0956151bbe5c25de6422aee" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>owner_before</name></member>
+      <member refid="classneforce_1_1shared__ptr_1a0edc60e204023dec36cf437d24b70fdc" prot="private" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>owner_default</name></member>
+      <member refid="classneforce_1_1shared__ptr_1abe211436f0ea3c03d4d2503f7d8eb588" prot="private" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>owner_deleter</name></member>
+      <member refid="classneforce_1_1shared__ptr_1a55c11b33fad387b2d4fb867b81ac7456" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>owner_equal</name></member>
+      <member refid="classneforce_1_1shared__ptr_1ab523924d473af471a9f7bb1f58d6ab8f" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>owner_equal</name></member>
+      <member refid="classneforce_1_1shared__ptr_1ae20cf0ef82ce70614e4c19a69665623e" prot="private" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>owner_type</name></member>
+      <member refid="classneforce_1_1shared__ptr_1a2f6db53fa5745859c0f8539afd3aa648" prot="private" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>ptr_</name></member>
+      <member refid="classneforce_1_1shared__ptr_1a41b064c73ce1ae4c52c6ac29a5af9a46" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>reset</name></member>
+      <member refid="classneforce_1_1shared__ptr_1a1233f5e77d2d5a919a6d74ea35da6de8" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>reset</name></member>
+      <member refid="classneforce_1_1shared__ptr_1ab3e238fa3a54872d63c7301916138ce7" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>reset</name></member>
+      <member refid="classneforce_1_1shared__ptr_1aa4709ec3ec66a35b54237e19a3e808a0" prot="private" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>shared_ptr</name></member>
+      <member refid="classneforce_1_1shared__ptr_1ac1d5ba6d5f2ea2c568d9c717ecb05704" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>shared_ptr</name></member>
+      <member refid="classneforce_1_1shared__ptr_1acf7f3e4068f972e0adc0bde8a9fd7339" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>shared_ptr</name></member>
+      <member refid="classneforce_1_1shared__ptr_1a6f0b2815b803870def4519f62958f19e" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>shared_ptr</name></member>
+      <member refid="classneforce_1_1shared__ptr_1af817c08bf131904b55149840e1e874a6" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>shared_ptr</name></member>
+      <member refid="classneforce_1_1shared__ptr_1a6da98e144419776fd8b36c6b9f7af73b" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>shared_ptr</name></member>
+      <member refid="classneforce_1_1shared__ptr_1a94c3e1874bf3138d939f8f767dae5e8d" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>shared_ptr</name></member>
+      <member refid="classneforce_1_1shared__ptr_1a6937189ae504a5d63c2bd6303ad82f40" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>shared_ptr</name></member>
+      <member refid="classneforce_1_1shared__ptr_1a6fd55cf88c815b9a69091a9746fd6d7e" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>shared_ptr</name></member>
+      <member refid="classneforce_1_1shared__ptr_1aff7f87621eb212b4bee8a3db67a673d6" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>shared_ptr</name></member>
+      <member refid="classneforce_1_1shared__ptr_1a7659cf76cb8d451ca36cfc2170b84224" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>shared_ptr</name></member>
+      <member refid="classneforce_1_1shared__ptr_1a2a49036078d750ed780ecce3b5906076" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>swap</name></member>
+      <member refid="classneforce_1_1shared__ptr_1af4dfb82900232d251b22f04d8f1ad05b" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>unique</name></member>
+      <member refid="classneforce_1_1shared__ptr_1a1f2d60e49bc85b5e2c1ae282710f0dff" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>use_count</name></member>
+      <member refid="classneforce_1_1shared__ptr_1a6a4eec82fe20f442b4ecd1193443e739" prot="public" virt="non-virtual"><scope>neforce::shared_ptr</scope><name>~shared_ptr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

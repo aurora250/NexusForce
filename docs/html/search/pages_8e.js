@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['📐_20数据结构与算法_0',['📐 数据结构与算法',['../md__m_a_i_n_p_a_g_e.html#autotoc_md13',1,'']]],
-  ['📐_20算法库_20algorithm_1',['📐 算法库 (Algorithm)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md35',1,'']]]
+  ['🌐_20网络协议与互联网标准_0',['🌐 网络协议与互联网标准',['../index.html#autotoc_md9',1,'']]],
+  ['🌐_20网络库_20network_1',['🌐 网络库 (Network)',['../index.html#autotoc_md22',1,'']]]
 ];

@@ -115,20 +115,20 @@ void&#160;</td><td class="memItemRight"><b>mark_dirty</b> ()</td></tr>
 <tr class="memdesc:a2d30a0383ccaa7408e0bf0f7d84e3aae"><td class="mdescLeft">&#160;</td><td class="mdescRight">分发鼠标事件  <br /></td></tr>
 <tr class="memitem:acfe04783fbf5e41b1c7aea125d8a50b0" id="r_acfe04783fbf5e41b1c7aea125d8a50b0"><td class="memItemLeft"><a id="acfe04783fbf5e41b1c7aea125d8a50b0" name="acfe04783fbf5e41b1c7aea125d8a50b0"></a>
 void&#160;</td><td class="memItemRight"><b>flush</b> ()</td></tr>
-<tr class="memdesc:acfe04783fbf5e41b1c7aea125d8a50b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">有脏标记则执行 diff + 渲染 <br /></td></tr>
+<tr class="memdesc:acfe04783fbf5e41b1c7aea125d8a50b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">有脏标记则执行渲染管线 <br /></td></tr>
 <tr class="memitem:a5731e5de48eb66053781024d9c3c82a6" id="r_a5731e5de48eb66053781024d9c3c82a6"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a5731e5de48eb66053781024d9c3c82a6">is_dirty</a> () const noexcept</td></tr>
 <tr class="memdesc:a5731e5de48eb66053781024d9c3c82a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否有待渲染的脏标记  <br /></td></tr>
 <tr class="memitem:a34781e50b934f49b56d6b251b9c0dde6" id="r_a34781e50b934f49b56d6b251b9c0dde6"><td class="memItemLeft"><a id="a34781e50b934f49b56d6b251b9c0dde6" name="a34781e50b934f49b56d6b251b9c0dde6"></a>
 <a class="el" href="classfunction.html">function</a>&lt; void(<a class="el" href="classcomponent__base.html">component_base</a> *)&gt;&#160;</td><td class="memItemRight"><b>schedule_render_callback</b> ()</td></tr>
 <tr class="memdesc:a34781e50b934f49b56d6b251b9c0dde6"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取组件调度回调 <br /></td></tr>
-<tr class="memitem:a1916a6e1372ade536f539f5534cdcf30" id="r_a1916a6e1372ade536f539f5534cdcf30"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1916a6e1372ade536f539f5534cdcf30">set_theme</a> (const <a class="el" href="structtheme.html">theme</a> &amp;<a class="el" href="structtheme.html">theme</a>)</td></tr>
-<tr class="memdesc:a1916a6e1372ade536f539f5534cdcf30"><td class="mdescLeft">&#160;</td><td class="mdescRight">应用主题  <br /></td></tr>
+<tr class="memitem:a0227166edc2de46136b5b37df0af7841" id="r_a0227166edc2de46136b5b37df0af7841"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0227166edc2de46136b5b37df0af7841">set_theme</a> (const <a class="el" href="structtheme.html">theme</a> &amp;t)</td></tr>
+<tr class="memdesc:a0227166edc2de46136b5b37df0af7841"><td class="mdescLeft">&#160;</td><td class="mdescRight">应用主题  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>差分渲染引擎 </p>
-<p>最小化 ANSI 写入操作，仅更新变化区域。 </p>
+<p>编排渲染管线：组件树 → 元素树 → 布局 → 屏幕渲染 → ANSI 输出。 最小化 ANSI 写入操作，仅更新变化区域。 </p>
 
-<p class="definition">在文件 <a class="el" href="reconciler_8hpp_source.html">reconciler.hpp</a> 第 <a class="el" href="reconciler_8hpp_source.html#l00029">29</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="reconciler_8hpp_source.html">reconciler.hpp</a> 第 <a class="el" href="reconciler_8hpp_source.html#l00034">34</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="afc8ba4115dbd286e79c89fd48696041c" name="afc8ba4115dbd286e79c89fd48696041c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afc8ba4115dbd286e79c89fd48696041c">&#9670;&#160;</a></span>reconciler()</h2>
@@ -249,7 +249,7 @@ void&#160;</td><td class="memItemRight"><b>flush</b> ()</td></tr>
 <p>是否有待渲染的脏标记 </p>
 <dl class="section return"><dt>返回</dt><dd>是否有脏标记 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="reconciler_8hpp_source.html">reconciler.hpp</a> 第 <a class="el" href="reconciler_8hpp_source.html#l00088">88</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="reconciler_8hpp_source.html">reconciler.hpp</a> 第 <a class="el" href="reconciler_8hpp_source.html#l00093">93</a> 行定义.</p>
 
 </div>
 </div>
@@ -304,38 +304,30 @@ void&#160;</td><td class="memItemRight"><b>flush</b> ()</td></tr>
 
 </div>
 </div>
-<a id="a1916a6e1372ade536f539f5534cdcf30" name="a1916a6e1372ade536f539f5534cdcf30"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1916a6e1372ade536f539f5534cdcf30">&#9670;&#160;</a></span>set_theme()</h2>
+<a id="a0227166edc2de46136b5b37df0af7841" name="a0227166edc2de46136b5b37df0af7841"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0227166edc2de46136b5b37df0af7841">&#9670;&#160;</a></span>set_theme()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void reconciler::set_theme </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structtheme.html">theme</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>theme</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="structtheme.html">theme</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>应用主题 </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">theme</td><td>主题 </td></tr>
+    <tr><td class="paramname">t</td><td>主题 </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="reconciler_8hpp_source.html">reconciler.hpp</a> 第 <a class="el" href="reconciler_8hpp_source.html#l00099">99</a> 行定义.</p>
+<p class="reference">引用了 <a class="el" href="style_8hpp_source.html#l00215">dark_theme</a>.</p>
 
 </div>
 </div>

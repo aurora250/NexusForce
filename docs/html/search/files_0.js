@@ -8,7 +8,7 @@ var searchData=
   ['allocated_5fptr_2ehpp_5',['allocated_ptr.hpp',['../allocated__ptr_8hpp.html',1,'']]],
   ['allocator_5ftraits_2ehpp_6',['allocator_traits.hpp',['../allocator__traits_8hpp.html',1,'']]],
   ['animation_2ehpp_7',['animation.hpp',['../animation_8hpp.html',1,'']]],
-  ['app_2ehpp_8',['app.hpp',['../app_8hpp.html',1,'']]],
+  ['application_2ehpp_8',['application.hpp',['../application_8hpp.html',1,'']]],
   ['apply_2ehpp_9',['apply.hpp',['../apply_8hpp.html',1,'']]],
   ['arithmetic_2ehpp_10',['arithmetic.hpp',['../arithmetic_8hpp.html',1,'']]],
   ['arp_2ehpp_11',['arp.hpp',['../arp_8hpp.html',1,'']]],

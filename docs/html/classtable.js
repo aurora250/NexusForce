@@ -2,7 +2,7 @@ var classtable =
 [
     [ "table", "classtable.html#ac6db7481032cba66b5ff70bef0de41c8", null ],
     [ "table", "classtable.html#a5a5c8de199f6d617ae16707b35d14d46", null ],
-    [ "border", "classtable.html#acb5b6e7779e066e2869e8ce82ed9edd2", null ],
+    [ "border", "classtable.html#a715cd52a73a21f6069a5958127d89ca7", null ],
     [ "decorate", "classtable.html#aea1cbd1862d37a020ec97508ff0917c6", null ],
     [ "decorate_alternate_row", "classtable.html#ab4faf5b1516c850e602ec358b4a8f8dd", null ],
     [ "render", "classtable.html#a7d5a9768844af8d611fa852608a4c5e6", null ],

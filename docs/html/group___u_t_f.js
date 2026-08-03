@@ -1,23 +1,23 @@
 var group___u_t_f =
 [
-    [ "character", "structcharacter.html", [
-      [ "base", "structcharacter.html#a3afb643e4011813fad5c42e2260370c4", null ],
-      [ "value_type", "structcharacter.html#a715311c744f14a34fd93e7a67caa642c", null ]
+    [ "neforce::character", "structneforce_1_1character.html", [
+      [ "base", "structneforce_1_1character.html#a189a8d6f7ec29b3c3c8f1f625b1fca07", null ],
+      [ "value_type", "structneforce_1_1character.html#ad9de7b87ad8de059c86e33d8de576ded", null ]
     ] ],
-    [ "wcharacter", "structwcharacter.html", [
-      [ "base", "structwcharacter.html#af1f8b77d8c9be4203546b3af0503c514", null ],
-      [ "value_type", "structwcharacter.html#a458dd2338d78dc874f0c47dbabadd37d", null ]
+    [ "neforce::wcharacter", "structneforce_1_1wcharacter.html", [
+      [ "base", "structneforce_1_1wcharacter.html#a8badb24cb900c9e2c3c5dcd32c363e1e", null ],
+      [ "value_type", "structneforce_1_1wcharacter.html#a40b4b6c4b8147ef8fac1447c79884e81", null ]
     ] ],
-    [ "u8character", "structu8character.html", [
-      [ "base", "structu8character.html#a5c44db880e1961695b8022ffe448527d", null ],
-      [ "value_type", "structu8character.html#a60bbd0a386bd8f04a8726ab181b8ecf3", null ]
+    [ "neforce::u8character", "structneforce_1_1u8character.html", [
+      [ "base", "structneforce_1_1u8character.html#aaf910cd5f5dc043c83c7f011060435ea", null ],
+      [ "value_type", "structneforce_1_1u8character.html#af27bc4f5ea8c047366849daea222be04", null ]
     ] ],
-    [ "u16character", "structu16character.html", [
-      [ "base", "structu16character.html#adcdf91a473a79e80e06f34fc1ad78518", null ],
-      [ "value_type", "structu16character.html#ae8b77c9966fab4c3abc074873a3d751b", null ]
+    [ "neforce::u16character", "structneforce_1_1u16character.html", [
+      [ "base", "structneforce_1_1u16character.html#abf459dd6f017dfa6a8f03f49139ce68a", null ],
+      [ "value_type", "structneforce_1_1u16character.html#a663f4fa63ca24adb7959559241090f8e", null ]
     ] ],
-    [ "u32character", "structu32character.html", [
-      [ "base", "structu32character.html#acebc70a8d3fb0465f34ec790c5eda7ee", null ],
-      [ "value_type", "structu32character.html#ab206a39f926b264388c4e418ab2ffa5f", null ]
+    [ "neforce::u32character", "structneforce_1_1u32character.html", [
+      [ "base", "structneforce_1_1u32character.html#a98242184f519b264e8256531f6909f39", null ],
+      [ "value_type", "structneforce_1_1u32character.html#a2fbeb17edb489fb730e7ca9c458d0663", null ]
     ] ]
 ];

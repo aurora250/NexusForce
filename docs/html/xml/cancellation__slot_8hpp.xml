@@ -96,9 +96,9 @@
         </childnode>
         <childnode refid="54" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="85" relation="include">
         </childnode>
-        <childnode refid="86" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
       </node>
       <node id="6">
@@ -210,8 +210,8 @@
         </childnode>
       </node>
       <node id="20">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="9" relation="include">
         </childnode>
       </node>
@@ -257,10 +257,12 @@
         <childnode refid="41" relation="include">
         </childnode>
       </node>
-      <node id="84">
+      <node id="85">
         <label>NeForce/core/functional/function.hpp</label>
         <link refid="functional_2function_8hpp"/>
-        <childnode refid="85" relation="include">
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
@@ -371,7 +373,7 @@
         <childnode refid="50" relation="include">
         </childnode>
       </node>
-      <node id="86">
+      <node id="87">
         <label>NeForce/core/memory/shared_ptr.hpp</label>
         <link refid="shared__ptr_8hpp"/>
         <childnode refid="76" relation="include">
@@ -466,30 +468,44 @@
         </childnode>
         <childnode refid="80" relation="include">
         </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
         <childnode refid="50" relation="include">
         </childnode>
       </node>
-      <node id="81">
+      <node id="83">
         <label>NeForce/core/string/basic_string_view.hpp</label>
         <link refid="basic__string__view_8hpp"/>
         <childnode refid="73" relation="include">
         </childnode>
-        <childnode refid="82" relation="include">
+        <childnode refid="84" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
         </childnode>
       </node>
-      <node id="82">
+      <node id="84">
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="70" relation="include">
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
       </node>
-      <node id="83">
+      <node id="81">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="80">
+        <label>NeForce/core/string/charset.hpp</label>
+        <link refid="charset_8hpp"/>
+        <childnode refid="81" relation="include">
+        </childnode>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
@@ -499,10 +515,10 @@
         <childnode refid="60" relation="include">
         </childnode>
       </node>
-      <node id="80">
+      <node id="82">
         <label>NeForce/core/string/string_view.hpp</label>
         <link refid="string__view_8hpp"/>
-        <childnode refid="81" relation="include">
+        <childnode refid="83" relation="include">
         </childnode>
       </node>
       <node id="25">
@@ -630,7 +646,7 @@
       <node id="15">
         <label>synchapi.h</label>
       </node>
-      <node id="85">
+      <node id="86">
         <label>typeinfo</label>
       </node>
       <node id="47">
@@ -815,15 +831,13 @@
         </childnode>
       </node>
     </invincdepgraph>
-    <innerclass refid="classcancellation__slot" prot="public">cancellation_slot</innerclass>
-    <sectiondef kind="func">
-      <member refid="group___cancellation_1ga3a179486651d3a45f216cf216c6fe628" kind="function"><name>make_operation_aborted</name></member>
-    </sectiondef>
+    <innerclass refid="classneforce_1_1cancellation__slot" prot="public">neforce::cancellation_slot</innerclass>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
     <briefdescription>
 <para>异步操作取消槽 </para>
     </briefdescription>
     <detaileddescription>
-<para><ref refid="classcancellation__slot" kindref="compound">cancellation_slot</ref> 将 <ref refid="classstop__token" kindref="compound">stop_token</ref> 集成到异步操作中。 当 <ref refid="classstop__source_1aefa6485a1a6def586c41a2652a2f3388" kindref="member">stop_source::request_stop()</ref> 被调用时，关联的异步操作的 fd 注册将被清理， handler 被调用，error_code = operation_aborted。 </para>
+<para>cancellation_slot 将 stop_token 集成到异步操作中。 当 stop_source::request_stop() 被调用时，关联的异步操作的 fd 注册将被清理， handler 被调用，error_code = operation_aborted。 </para>
     </detaileddescription>
     <programlisting>
 <codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NEFORCE_CORE_ASYNC_CANCELLATION_SLOT_HPP__</highlight><highlight class="normal"></highlight></codeline>
@@ -837,41 +851,41 @@
 <codeline lineno="17"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
 <codeline lineno="18"><highlight class="normal"></highlight></codeline>
 <codeline lineno="24"><highlight class="normal"></highlight></codeline>
-<codeline lineno="26" refid="group___cancellation_1ga3a179486651d3a45f216cf216c6fe628" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="classerror__code" kindref="compound">error_code</ref><sp/><ref refid="group___cancellation_1ga3a179486651d3a45f216cf216c6fe628" kindref="member">make_operation_aborted</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classerror__code" kindref="compound">error_code</ref>(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">int</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(<ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6afd3d0bdcc9eb9e68534b7d055c5fe586" kindref="member">errc::operation_canceled</ref>),<sp/><ref refid="group___error_code_1gaf683d20ab9b827279a2c044a78ae5fbf" kindref="member">error_category::system</ref>());</highlight></codeline>
+<codeline lineno="26" refid="group___cancellation_1ga3fab4f928868bece7c1d174d6d3d5de5" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref><sp/><ref refid="group___cancellation_1ga3fab4f928868bece7c1d174d6d3d5de5" kindref="member">make_operation_aborted</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1error__code" kindref="compound">error_code</ref>(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">int</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(<ref refid="group___error_code_1gga38f004367057c8366c3e941dd4070681afd3d0bdcc9eb9e68534b7d055c5fe586" kindref="member">errc::operation_canceled</ref>),<sp/><ref refid="group___error_code_1gadbaaf9541588fa4235c8e0972ee09e6f" kindref="member">error_category::system</ref>());</highlight></codeline>
 <codeline lineno="28"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="29"><highlight class="normal"></highlight></codeline>
-<codeline lineno="38" refid="classcancellation__slot" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classcancellation__slot_1aca52141ba2808336bae938d87d104b44" kindref="member">cancellation_slot</ref><sp/>{</highlight></codeline>
+<codeline lineno="38" refid="classneforce_1_1cancellation__slot" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classneforce_1_1cancellation__slot_1a87f0079bd768401e15102fc7d2bef7ab" kindref="member">cancellation_slot</ref><sp/>{</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classstop__token" kindref="compound">stop_token</ref><sp/>token_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;void&gt;</ref><sp/>callback_;<sp/></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1stop__token" kindref="compound">stop_token</ref><sp/>token_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr&lt;void&gt;</ref><sp/>callback_;<sp/></highlight></codeline>
 <codeline lineno="42"><highlight class="normal"></highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="45" refid="classcancellation__slot_1adbf1215555d877c79188e373710a65f2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classcancellation__slot_1adbf1215555d877c79188e373710a65f2" kindref="member">cancel_handler</ref><sp/>=<sp/><ref refid="classfunction" kindref="compound">function</ref>&lt;void()&gt;;</highlight></codeline>
+<codeline lineno="45" refid="classneforce_1_1cancellation__slot_1acf89cefb3438e0b7a3c1b13854936999" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classneforce_1_1cancellation__slot_1acf89cefb3438e0b7a3c1b13854936999" kindref="member">cancel_handler</ref><sp/>=<sp/><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt;void()&gt;;</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"></highlight></codeline>
-<codeline lineno="50" refid="classcancellation__slot_1aca52141ba2808336bae938d87d104b44" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classcancellation__slot_1aca52141ba2808336bae938d87d104b44" kindref="member">cancellation_slot</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="50" refid="classneforce_1_1cancellation__slot_1a87f0079bd768401e15102fc7d2bef7ab" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1cancellation__slot_1a87f0079bd768401e15102fc7d2bef7ab" kindref="member">cancellation_slot</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight></codeline>
-<codeline lineno="56" refid="classcancellation__slot_1afa5ab2d15f3d0bc20f0af3d9951f4456" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classcancellation__slot_1afa5ab2d15f3d0bc20f0af3d9951f4456" kindref="member">cancellation_slot</ref>(<ref refid="classstop__token" kindref="compound">stop_token</ref><sp/>token)<sp/>:</highlight></codeline>
-<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>token_(<ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(token))<sp/>{}</highlight></codeline>
+<codeline lineno="56" refid="classneforce_1_1cancellation__slot_1a59d7c6a3c5e9fba889d74dc05ce36af2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1cancellation__slot_1a59d7c6a3c5e9fba889d74dc05ce36af2" kindref="member">cancellation_slot</ref>(<ref refid="classneforce_1_1stop__token" kindref="compound">stop_token</ref><sp/>token)<sp/>:</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>token_(<ref refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" kindref="member">move</ref>(token))<sp/>{}</highlight></codeline>
 <codeline lineno="58"><highlight class="normal"></highlight></codeline>
-<codeline lineno="62" refid="classcancellation__slot_1a7b726bc6bd162aa7018c6c1d1b1b8a56" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classcancellation__slot_1a7b726bc6bd162aa7018c6c1d1b1b8a56" kindref="member">is_cancelled</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>token_.stop_requested();<sp/>}</highlight></codeline>
+<codeline lineno="62" refid="classneforce_1_1cancellation__slot_1ac4d78d9908ebd172883ba689369fc7a8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1cancellation__slot_1ac4d78d9908ebd172883ba689369fc7a8" kindref="member">is_cancelled</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>token_.stop_requested();<sp/>}</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"></highlight></codeline>
 <codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Handler&gt;</highlight></codeline>
-<codeline lineno="73" refid="classcancellation__slot_1a5436f157d792c64e9a6056cbce0b25d3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classcancellation__slot_1a5436f157d792c64e9a6056cbce0b25d3" kindref="member">assign</ref>(Handler&amp;&amp;<sp/>handler)<sp/>{</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="classcancellation__slot_1a7b726bc6bd162aa7018c6c1d1b1b8a56" kindref="member">is_cancelled</ref>())<sp/>{</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Handler&gt;</ref>(handler)();</highlight></codeline>
+<codeline lineno="73" refid="classneforce_1_1cancellation__slot_1a420baa9a7b4bf2262ba1d1b2a69658a8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1cancellation__slot_1a420baa9a7b4bf2262ba1d1b2a69658a8" kindref="member">assign</ref>(Handler&amp;&amp;<sp/>handler)<sp/>{</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="classneforce_1_1cancellation__slot_1ac4d78d9908ebd172883ba689369fc7a8" kindref="member">is_cancelled</ref>())<sp/>{</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" kindref="member">forward&lt;Handler&gt;</ref>(handler)();</highlight></codeline>
 <codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!token_.stop_possible())<sp/>{</highlight></codeline>
 <codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>callback_<sp/>=<sp/><ref refid="group___shared_pointer_1gab47fa86d2917e14f57f68dfa9e83495e" kindref="member">make_shared&lt;stop_callback&lt;Handler&gt;</ref>&gt;(token_,<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Handler&gt;</ref>(handler));</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>callback_<sp/>=<sp/><ref refid="group___shared_pointer_1gacdaa04ead5936b6c9e0f024297dcf54f" kindref="member">make_shared&lt;stop_callback&lt;Handler&gt;</ref>&gt;(token_,<sp/><ref refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" kindref="member">forward&lt;Handler&gt;</ref>(handler));</highlight></codeline>
 <codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="84"><highlight class="normal"></highlight></codeline>
-<codeline lineno="88" refid="classcancellation__slot_1a0f2b9407c5d7a0dd41a180eb25bc3872" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classstop__token" kindref="compound">stop_token</ref>&amp;<sp/><ref refid="classcancellation__slot_1a0f2b9407c5d7a0dd41a180eb25bc3872" kindref="member">get_token</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>token_;<sp/>}</highlight></codeline>
+<codeline lineno="88" refid="classneforce_1_1cancellation__slot_1a38e00c31a640848a2ed6d1595f9b9b72" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1stop__token" kindref="compound">stop_token</ref>&amp;<sp/><ref refid="classneforce_1_1cancellation__slot_1a38e00c31a640848a2ed6d1595f9b9b72" kindref="member">get_token</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>token_;<sp/>}</highlight></codeline>
 <codeline lineno="89"><highlight class="normal"></highlight></codeline>
-<codeline lineno="93" refid="classcancellation__slot_1a86685adffcfa5b84349ee9dc595060a3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classcancellation__slot_1a86685adffcfa5b84349ee9dc595060a3" kindref="member">has_slot</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>token_.stop_possible();<sp/>}</highlight></codeline>
+<codeline lineno="93" refid="classneforce_1_1cancellation__slot_1a7b699eedee77d16f28dc3d9ce37a2aad" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1cancellation__slot_1a7b699eedee77d16f28dc3d9ce37a2aad" kindref="member">has_slot</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>token_.stop_possible();<sp/>}</highlight></codeline>
 <codeline lineno="94"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="95"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Cancellation</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="97"><highlight class="normal"></highlight></codeline>

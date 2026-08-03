@@ -130,8 +130,8 @@
         </childnode>
       </node>
       <node id="16">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="11" relation="include">
         </childnode>
       </node>
@@ -308,30 +308,44 @@
         </childnode>
         <childnode refid="52" relation="include">
         </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
         <childnode refid="48" relation="include">
         </childnode>
       </node>
-      <node id="53">
+      <node id="55">
         <label>NeForce/core/string/basic_string_view.hpp</label>
         <link refid="basic__string__view_8hpp"/>
         <childnode refid="46" relation="include">
         </childnode>
-        <childnode refid="54" relation="include">
+        <childnode refid="56" relation="include">
         </childnode>
-        <childnode refid="55" relation="include">
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
         </childnode>
       </node>
-      <node id="54">
+      <node id="56">
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="35" relation="include">
         </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
       </node>
-      <node id="55">
+      <node id="53">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="52">
+        <label>NeForce/core/string/charset.hpp</label>
+        <link refid="charset_8hpp"/>
+        <childnode refid="53" relation="include">
+        </childnode>
         <childnode refid="9" relation="include">
         </childnode>
       </node>
@@ -341,10 +355,10 @@
         <childnode refid="50" relation="include">
         </childnode>
       </node>
-      <node id="52">
+      <node id="54">
         <label>NeForce/core/string/string_view.hpp</label>
         <link refid="string__view_8hpp"/>
-        <childnode refid="53" relation="include">
+        <childnode refid="55" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -416,7 +430,8 @@
         <label>utility</label>
       </node>
     </incdepgraph>
-    <innerclass refid="structenvironment" prot="public">environment</innerclass>
+    <innerclass refid="structneforce_1_1environment" prot="public">neforce::environment</innerclass>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
     <briefdescription>
 <para>环境变量管理工具 </para>
     </briefdescription>
@@ -433,39 +448,39 @@
 <codeline lineno="14"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight></codeline>
-<codeline lineno="28" refid="structenvironment" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="structenvironment" kindref="compound">environment</ref><sp/>{</highlight></codeline>
-<codeline lineno="32" refid="structenvironment_1aeda4c85dfd8e57007ca391fa315e4065" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/><ref refid="structenvironment_1aeda4c85dfd8e57007ca391fa315e4065" kindref="member">delimiter</ref><sp/>=</highlight></codeline>
+<codeline lineno="28" refid="structneforce_1_1environment" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="structneforce_1_1environment" kindref="compound">environment</ref><sp/>{</highlight></codeline>
+<codeline lineno="32" refid="structneforce_1_1environment_1a65eaa95bba4ad77e077462fdb9bf5e28" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1environment_1a65eaa95bba4ad77e077462fdb9bf5e28" kindref="member">delimiter</ref><sp/>=</highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="charliteral">&apos;;&apos;</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="charliteral">&apos;:&apos;</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight></codeline>
-<codeline lineno="44" refid="structenvironment_1a9dcaf983add1110407167a43beb96207" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structenvironment_1a9dcaf983add1110407167a43beb96207" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" kindref="member">name</ref>);</highlight></codeline>
+<codeline lineno="44" refid="structneforce_1_1environment_1aa4850c58e821df65accc4a5fac97c174" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1environment_1aa4850c58e821df65accc4a5fac97c174" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>name);</highlight></codeline>
 <codeline lineno="45"><highlight class="normal"></highlight></codeline>
-<codeline lineno="53" refid="structenvironment_1a6a5a4531f8ec5310d84c067fcfb6c388" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structenvironment_1a6a5a4531f8ec5310d84c067fcfb6c388" kindref="member">set</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" kindref="member">name</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>value,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>overwrite<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="53" refid="structneforce_1_1environment_1ab76f0311f0fd5b82bf4eda48a9ea4395" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1environment_1ab76f0311f0fd5b82bf4eda48a9ea4395" kindref="member">set</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>name,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>value,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>overwrite<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"></highlight></codeline>
-<codeline lineno="60" refid="structenvironment_1af1d2eff32051b0a9ecb3a3c0a08078eb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structenvironment_1af1d2eff32051b0a9ecb3a3c0a08078eb" kindref="member">unset</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" kindref="member">name</ref>);</highlight></codeline>
+<codeline lineno="60" refid="structneforce_1_1environment_1a89db33129443326459f91c3f45cb28b3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1environment_1a89db33129443326459f91c3f45cb28b3" kindref="member">unset</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>name);</highlight></codeline>
 <codeline lineno="61"><highlight class="normal"></highlight></codeline>
-<codeline lineno="67" refid="structenvironment_1a2cb6fddbbc74d714d891aa35991013c8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structenvironment_1a2cb6fddbbc74d714d891aa35991013c8" kindref="member">exists</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" kindref="member">name</ref>);</highlight></codeline>
+<codeline lineno="67" refid="structneforce_1_1environment_1a65f3615bc678a8c72f6db4271a3ea765" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1environment_1a65f3615bc678a8c72f6db4271a3ea765" kindref="member">exists</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>name);</highlight></codeline>
 <codeline lineno="68"><highlight class="normal"></highlight></codeline>
-<codeline lineno="73" refid="structenvironment_1a8a148beaeec88e375fa5eb368bab6ba6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classunordered__map" kindref="compound">unordered_map&lt;string, string&gt;</ref><sp/><ref refid="structenvironment_1a8a148beaeec88e375fa5eb368bab6ba6" kindref="member">all_envs</ref>();</highlight></codeline>
+<codeline lineno="73" refid="structneforce_1_1environment_1a8e1cf9d695213d63aeb2a0598f49b260" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map&lt;string, string&gt;</ref><sp/><ref refid="structneforce_1_1environment_1a8e1cf9d695213d63aeb2a0598f49b260" kindref="member">all_envs</ref>();</highlight></codeline>
 <codeline lineno="74"><highlight class="normal"></highlight></codeline>
-<codeline lineno="79" refid="structenvironment_1a8d5b773eb639d261d77c41f5d31ff7e8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;string&gt;</ref><sp/><ref refid="structenvironment_1a8d5b773eb639d261d77c41f5d31ff7e8" kindref="member">path_list</ref>();</highlight></codeline>
+<codeline lineno="79" refid="structneforce_1_1environment_1a74645029a87f6d231603961af95d8319" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1vector" kindref="compound">vector&lt;string&gt;</ref><sp/><ref refid="structneforce_1_1environment_1a74645029a87f6d231603961af95d8319" kindref="member">path_list</ref>();</highlight></codeline>
 <codeline lineno="80"><highlight class="normal"></highlight></codeline>
-<codeline lineno="87" refid="structenvironment_1adf119ec3b8bc7c841cb0f7b4c16de664" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structenvironment_1adf119ec3b8bc7c841cb0f7b4c16de664" kindref="member">add_to_path</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="classpath" kindref="compound">path</ref>,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>position<sp/>=<sp/>1);</highlight></codeline>
+<codeline lineno="87" refid="structneforce_1_1environment_1aecb317566917f2282929ddf5c49b0771" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1environment_1aecb317566917f2282929ddf5c49b0771" kindref="member">add_to_path</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="classneforce_1_1path" kindref="compound">path</ref>,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>position<sp/>=<sp/>1);</highlight></codeline>
 <codeline lineno="88"><highlight class="normal"></highlight></codeline>
-<codeline lineno="94" refid="structenvironment_1ad50a541f94071be83bd3127f8d6eb624" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structenvironment_1ad50a541f94071be83bd3127f8d6eb624" kindref="member">current_directory</ref>();</highlight></codeline>
+<codeline lineno="94" refid="structneforce_1_1environment_1a3171db154f3ac43e1a2d21de6a99dac1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1environment_1a3171db154f3ac43e1a2d21de6a99dac1" kindref="member">current_directory</ref>();</highlight></codeline>
 <codeline lineno="95"><highlight class="normal"></highlight></codeline>
-<codeline lineno="100" refid="structenvironment_1a288bbcaac0bbb2560b5d06f323073c42" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structenvironment_1a288bbcaac0bbb2560b5d06f323073c42" kindref="member">current_user</ref>();</highlight></codeline>
+<codeline lineno="100" refid="structneforce_1_1environment_1a38b359f1443931bda61ee64770e77200" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1environment_1a38b359f1443931bda61ee64770e77200" kindref="member">current_user</ref>();</highlight></codeline>
 <codeline lineno="101"><highlight class="normal"></highlight></codeline>
-<codeline lineno="106" refid="structenvironment_1a24bb83f98cd472ce7e06ad27d7056106" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structenvironment_1a24bb83f98cd472ce7e06ad27d7056106" kindref="member">temp_directory</ref>();</highlight></codeline>
+<codeline lineno="106" refid="structneforce_1_1environment_1a6d62bc003912b2547f61142e94c03752" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1environment_1a6d62bc003912b2547f61142e94c03752" kindref="member">temp_directory</ref>();</highlight></codeline>
 <codeline lineno="107"><highlight class="normal"></highlight></codeline>
-<codeline lineno="112" refid="structenvironment_1af597bbc6288d71e29d5693ac718b933f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structenvironment_1af597bbc6288d71e29d5693ac718b933f" kindref="member">home_directory</ref>();</highlight></codeline>
+<codeline lineno="112" refid="structneforce_1_1environment_1a590d5f0dab2f84ed053eb66e58c6c9b5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1environment_1a590d5f0dab2f84ed053eb66e58c6c9b5" kindref="member">home_directory</ref>();</highlight></codeline>
 <codeline lineno="113"><highlight class="normal"></highlight></codeline>
-<codeline lineno="118" refid="structenvironment_1a354659e5eb063adeeca8e0971a7ed625" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structenvironment_1a354659e5eb063adeeca8e0971a7ed625" kindref="member">app_data_directory</ref>();</highlight></codeline>
+<codeline lineno="118" refid="structneforce_1_1environment_1ad852ab7a04f9878d2ef97ae223ae88e2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1environment_1ad852ab7a04f9878d2ef97ae223ae88e2" kindref="member">app_data_directory</ref>();</highlight></codeline>
 <codeline lineno="119"><highlight class="normal"></highlight></codeline>
-<codeline lineno="124" refid="structenvironment_1ae884b84b9d294e0357a38047409c8a25" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structenvironment_1ae884b84b9d294e0357a38047409c8a25" kindref="member">config_directory</ref>();</highlight></codeline>
+<codeline lineno="124" refid="structneforce_1_1environment_1a82bf1f2c343fbee3be25aa16b823634a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1environment_1a82bf1f2c343fbee3be25aa16b823634a" kindref="member">config_directory</ref>();</highlight></codeline>
 <codeline lineno="125"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="126"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>EnvironmentVariables</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="128"><highlight class="normal"></highlight></codeline>

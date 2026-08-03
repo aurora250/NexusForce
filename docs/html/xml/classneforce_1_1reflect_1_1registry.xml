@@ -1,0 +1,487 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1reflect_1_1registry" kind="class" language="C++" prot="public">
+    <compoundname>neforce::reflect::registry</compoundname>
+    <includes refid="registry_8hpp" local="no">registry.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1reflect_1_1registry_1a820f5d5567927ca45341566df85ddb33" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1mutex" kindref="compound">mutex</ref></type>
+        <definition>mutex neforce::reflect::registry::mutex_</definition>
+        <argsstring></argsstring>
+        <name>mutex_</name>
+        <qualifiedname>neforce::reflect::registry::mutex_</qualifiedname>
+        <briefdescription>
+<para>保护类型映射的互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="35" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1reflect_1_1registry_1aea88aa5237c2d685c5dfb7be45bffe41" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___reflection_1ga3680b21ef08e8497fc7255d54c682211" kindref="member">type_id</ref>, <ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1reflect_1_1meta__type" kindref="compound">meta_type</ref> &gt; &gt;</type>
+        <definition>unordered_map&lt;type_id, unique_ptr&lt;meta_type&gt; &gt; neforce::reflect::registry::types_</definition>
+        <argsstring></argsstring>
+        <name>types_</name>
+        <qualifiedname>neforce::reflect::registry::types_</qualifiedname>
+        <briefdescription>
+<para>类型ID到元数据的映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="36" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1reflect_1_1registry_1aa64c8bbbe35295e5a6fdf44210724a5f" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___reflection_1ga3680b21ef08e8497fc7255d54c682211" kindref="member">type_id</ref>, <ref refid="group___reflection_1ga3680b21ef08e8497fc7255d54c682211" kindref="member">type_id</ref> &gt;</type>
+        <definition>unordered_map&lt;type_id, type_id&gt; neforce::reflect::registry::name_hash_to_type_id_</definition>
+        <argsstring></argsstring>
+        <name>name_hash_to_type_id_</name>
+        <qualifiedname>neforce::reflect::registry::name_hash_to_type_id_</qualifiedname>
+        <briefdescription>
+<para>名称hash到类型ID的辅助映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="37" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1registry_1a3b9c9d4937ffef099da0e5c85bee0ed9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::reflect::registry::registry</definition>
+        <argsstring>()=default</argsstring>
+        <name>registry</name>
+        <qualifiedname>neforce::reflect::registry::registry</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="39" column="5"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1registry_1a31671654870ac8859f0f969a935d63cc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>registry &amp;</type>
+        <definition>static registry &amp; neforce::reflect::registry::instance</definition>
+        <argsstring>()</argsstring>
+        <name>instance</name>
+        <qualifiedname>neforce::reflect::registry::instance</qualifiedname>
+        <briefdescription>
+<para>获取单例实例 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>注册表实例引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="46" column="21"/>
+        <referencedby refid="classneforce_1_1reflect_1_1type__builder_1ad4fa8eca10cc22ed0148e2167cdaebe3" compoundref="reflect_8hpp" startline="55" endline="58">neforce::reflect::type_builder&lt; T &gt;::base</referencedby>
+        <referencedby refid="classneforce_1_1reflect_1_1registry_1a2806fb03c1417a00645e5cd7a9294bd9" compoundref="registry_8hpp" startline="155" endline="175">dynamic_connect</referencedby>
+        <referencedby refid="classneforce_1_1repository_1a6ff637ae99146b64b1232083741cec0b" compoundref="repository_8hpp" startline="218" endline="233">neforce::repository&lt; T, Connect &gt;::find_all</referencedby>
+        <referencedby refid="classneforce_1_1repository_1a09f0a8bf874c099db3b1904f12eaba6a" compoundref="repository_8hpp" startline="177" endline="212">neforce::repository&lt; T, Connect &gt;::find_by_id</referencedby>
+        <referencedby refid="classneforce_1_1repository_1a4f3828ed8a07aec91bd8786c468135aa" compoundref="repository_8hpp" startline="265" endline="286">neforce::repository&lt; T, Connect &gt;::find_page</referencedby>
+        <referencedby refid="classneforce_1_1repository_1a40bf5aab09a10cf2c4e83b49871db763" compoundref="repository_8hpp" startline="240" endline="256">neforce::repository&lt; T, Connect &gt;::find_where</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1registry_1a2806fb03c1417a00645e5cd7a9294bd9" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool neforce::reflect::registry::dynamic_connect</definition>
+        <argsstring>(void *sender_obj, string_view sender_type, string_view signal_name, size_t signal_offset, void *receiver_obj, string_view receiver_type, string_view slot_name)</argsstring>
+        <name>dynamic_connect</name>
+        <qualifiedname>neforce::reflect::registry::dynamic_connect</qualifiedname>
+        <param>
+          <type>void *</type>
+          <declname>sender_obj</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>sender_type</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>signal_name</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>signal_offset</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>receiver_obj</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>receiver_type</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>slot_name</declname>
+        </param>
+        <briefdescription>
+<para>查找信号并连接到槽函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sender_obj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>发送者对象指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sender_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>发送者类型名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>signal_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>信号名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>signal_offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>信号成员在类中的字节偏移 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>receiver_obj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收者对象指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>receiver_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收者类型名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>slot_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>槽函数名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>连接成功返回 true</para>
+</simplesect>
+通过类型和名称在注册表中查找对应的信号和槽， 利用信号基类 <ref refid="classneforce_1_1signal__base" kindref="compound">signal_base</ref> 和 <ref refid="classneforce_1_1reflect_1_1meta__function" kindref="compound">meta_function</ref> 实现运行时动态连接。</para>
+<para><simplesect kind="note"><para>signal_offset 可通过 type_builder::signal_with_offset() 设置 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="155" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" bodystart="155" bodyend="175"/>
+        <references refid="classneforce_1_1reflect_1_1registry_1acb8a11b6ba7f99b3bfd21ea7254ab6e8">connect_signal_to_slot</references>
+        <references refid="classneforce_1_1reflect_1_1registry_1a31671654870ac8859f0f969a935d63cc">instance</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1registry_1acb8a11b6ba7f99b3bfd21ea7254ab6e8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool neforce::reflect::registry::connect_signal_to_slot</definition>
+        <argsstring>(signal_base *sig, const meta_function *slot, void *receiver)</argsstring>
+        <name>connect_signal_to_slot</name>
+        <qualifiedname>neforce::reflect::registry::connect_signal_to_slot</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1signal__base" kindref="compound">signal_base</ref> *</type>
+          <declname>sig</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1reflect_1_1meta__function" kindref="compound">meta_function</ref> *</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>receiver</declname>
+        </param>
+        <briefdescription>
+<para>将信号连接至反射槽函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sig</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>信号基类指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>slot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>槽函数元数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>receiver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收者对象指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>总是返回 true（连接通过 <ref refid="structneforce_1_1signal_1a131d77a25624bf98ae0f268e4a4f1090" kindref="member">signal::connect</ref> 维持）</para>
+</simplesect>
+通过 emit_dynamic 在信号触发时将参数转发至槽函数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="186" column="17"/>
+        <referencedby refid="classneforce_1_1reflect_1_1registry_1a2806fb03c1417a00645e5cd7a9294bd9" compoundref="registry_8hpp" startline="155" endline="175">dynamic_connect</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1registry_1a61e51d8b7c9eba9b254f4c58820a7098" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1reflect_1_1meta__type" kindref="compound">meta_type</ref> &amp;</type>
+        <definition>meta_type &amp; neforce::reflect::registry::register_type</definition>
+        <argsstring>(string_view name)</argsstring>
+        <name>register_type</name>
+        <qualifiedname>neforce::reflect::registry::register_type</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>注册类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要注册的类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>类型元数据引用</para>
+</simplesect>
+如果类型已注册，返回现有元数据；否则创建新的元数据。 使用 <ref refid="group___reflection_1ga44db0edaa0dbe2c60cb04e815b0a498e" kindref="member">type_id_for&lt;T&gt;()</ref> 作为主键以与 <ref refid="classneforce_1_1reflect_1_1meta__any" kindref="compound">meta_any</ref> 的类型 ID 保持一致。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="58" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" bodystart="58" bodyend="71"/>
+        <references refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" compoundref="unique__ptr_8hpp" startline="973" endline="975">neforce::make_unique</references>
+        <references refid="group___reflection_1ga44db0edaa0dbe2c60cb04e815b0a498e" compoundref="reflect_2any_8hpp" startline="60" endline="70">neforce::reflect::type_id_for</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1registry_1ae4e8793591df85bbe4f0a66642b87d46" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1reflect_1_1meta__type" kindref="compound">meta_type</ref> *</type>
+        <definition>meta_type * neforce::reflect::registry::find_unlocked</definition>
+        <argsstring>(string_view name)</argsstring>
+        <name>find_unlocked</name>
+        <qualifiedname>neforce::reflect::registry::find_unlocked</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>查找类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>类型元数据指针，不存在返回nullptr</para>
+</simplesect>
+<simplesect kind="note"><para>调用前需已持有互斥锁 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="80" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" bodystart="80" bodyend="88"/>
+        <referencedby refid="classneforce_1_1reflect_1_1registry_1a22e80e06445900ae061c502d4769a43b" compoundref="registry_8hpp" startline="95" endline="98">find</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1registry_1a22e80e06445900ae061c502d4769a43b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1reflect_1_1meta__type" kindref="compound">meta_type</ref> *</type>
+        <definition>meta_type * neforce::reflect::registry::find</definition>
+        <argsstring>(string_view name)</argsstring>
+        <name>find</name>
+        <qualifiedname>neforce::reflect::registry::find</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>查找类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>类型元数据指针，不存在返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="95" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" bodystart="95" bodyend="98"/>
+        <references refid="classneforce_1_1reflect_1_1registry_1ae4e8793591df85bbe4f0a66642b87d46" compoundref="registry_8hpp" startline="80" endline="88">find_unlocked</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1registry_1a11a0ea900d06d1fe6b201ecf7ea3cda0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1reflect_1_1meta__type" kindref="compound">meta_type</ref> *</type>
+        <definition>meta_type * neforce::reflect::registry::find</definition>
+        <argsstring>(type_id id)</argsstring>
+        <name>find</name>
+        <qualifiedname>neforce::reflect::registry::find</qualifiedname>
+        <param>
+          <type><ref refid="group___reflection_1ga3680b21ef08e8497fc7255d54c682211" kindref="member">type_id</ref></type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+<para>查找类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型ID </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>类型元数据指针，不存在返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="105" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" bodystart="105" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1registry_1a00a7deaf144858457e5b94b0a0003772" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::reflect::registry::for_each</definition>
+        <argsstring>(Func &amp;&amp;func)</argsstring>
+        <name>for_each</name>
+        <qualifiedname>neforce::reflect::registry::for_each</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+<para>遍历所有注册的类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>回调函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>回调函数，接收meta_type&amp;参数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+对每个注册的类型调用回调函数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="119" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" bodystart="119" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1registry_1a396681128113460f66cb9535eeb026a9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::reflect::registry::resolve_all_bases</definition>
+        <argsstring>()</argsstring>
+        <name>resolve_all_bases</name>
+        <qualifiedname>neforce::reflect::registry::resolve_all_bases</qualifiedname>
+        <briefdescription>
+<para>解析所有类型的基类关系 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>遍历所有类型，解析其待解析的基类名称。 应在所有类型注册完成后调用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="132" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" bodystart="132" bodyend="137"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>反射类型注册表 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>全局唯一的类型注册表，存储所有已注册的反射类型元数据。 提供类型查找、遍历和基类解析功能。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="33" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" bodystart="33" bodyend="187"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1reflect_1_1registry_1acb8a11b6ba7f99b3bfd21ea7254ab6e8" prot="public" virt="non-virtual"><scope>neforce::reflect::registry</scope><name>connect_signal_to_slot</name></member>
+      <member refid="classneforce_1_1reflect_1_1registry_1a2806fb03c1417a00645e5cd7a9294bd9" prot="public" virt="non-virtual"><scope>neforce::reflect::registry</scope><name>dynamic_connect</name></member>
+      <member refid="classneforce_1_1reflect_1_1registry_1a22e80e06445900ae061c502d4769a43b" prot="public" virt="non-virtual"><scope>neforce::reflect::registry</scope><name>find</name></member>
+      <member refid="classneforce_1_1reflect_1_1registry_1a11a0ea900d06d1fe6b201ecf7ea3cda0" prot="public" virt="non-virtual"><scope>neforce::reflect::registry</scope><name>find</name></member>
+      <member refid="classneforce_1_1reflect_1_1registry_1ae4e8793591df85bbe4f0a66642b87d46" prot="public" virt="non-virtual"><scope>neforce::reflect::registry</scope><name>find_unlocked</name></member>
+      <member refid="classneforce_1_1reflect_1_1registry_1a00a7deaf144858457e5b94b0a0003772" prot="public" virt="non-virtual"><scope>neforce::reflect::registry</scope><name>for_each</name></member>
+      <member refid="classneforce_1_1reflect_1_1registry_1a31671654870ac8859f0f969a935d63cc" prot="public" virt="non-virtual"><scope>neforce::reflect::registry</scope><name>instance</name></member>
+      <member refid="classneforce_1_1reflect_1_1registry_1a820f5d5567927ca45341566df85ddb33" prot="private" virt="non-virtual"><scope>neforce::reflect::registry</scope><name>mutex_</name></member>
+      <member refid="classneforce_1_1reflect_1_1registry_1aa64c8bbbe35295e5a6fdf44210724a5f" prot="private" virt="non-virtual"><scope>neforce::reflect::registry</scope><name>name_hash_to_type_id_</name></member>
+      <member refid="classneforce_1_1reflect_1_1registry_1a61e51d8b7c9eba9b254f4c58820a7098" prot="public" virt="non-virtual"><scope>neforce::reflect::registry</scope><name>register_type</name></member>
+      <member refid="classneforce_1_1reflect_1_1registry_1a3b9c9d4937ffef099da0e5c85bee0ed9" prot="private" virt="non-virtual"><scope>neforce::reflect::registry</scope><name>registry</name></member>
+      <member refid="classneforce_1_1reflect_1_1registry_1a396681128113460f66cb9535eeb026a9" prot="public" virt="non-virtual"><scope>neforce::reflect::registry</scope><name>resolve_all_bases</name></member>
+      <member refid="classneforce_1_1reflect_1_1registry_1aea88aa5237c2d685c5dfb7be45bffe41" prot="private" virt="non-virtual"><scope>neforce::reflect::registry</scope><name>types_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

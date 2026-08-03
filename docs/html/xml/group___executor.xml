@@ -3,25 +3,26 @@
   <compounddef id="group___executor" kind="group">
     <compoundname>Executor</compoundname>
     <title>执行器</title>
-    <innerclass refid="classexecutor" prot="public">executor</innerclass>
-    <innerclass refid="structthread__pool__executor" prot="public">thread_pool_executor</innerclass>
+    <innerclass refid="classneforce_1_1executor" prot="public">neforce::executor</innerclass>
+    <innerclass refid="structneforce_1_1thread__pool__executor" prot="public">neforce::thread_pool_executor</innerclass>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___executor_1ga90251abe6bcc372cac0d502b478eded6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___executor_1gaeed212374a5b8ed0d2cdda90e7bbb4f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Executor</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void post</definition>
+        <definition>void neforce::post</definition>
         <argsstring>(Executor &amp;ex, function&lt; void()&gt; handler)</argsstring>
         <name>post</name>
+        <qualifiedname>neforce::post</qualifiedname>
         <param>
           <type>Executor &amp;</type>
           <declname>ex</declname>
         </param>
         <param>
-          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void()&gt;</type>
+          <type>function&lt; void()&gt;</type>
           <declname>handler</declname>
         </param>
         <briefdescription>
@@ -59,7 +60,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/async/executor.hpp" line="112" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/executor.hpp" bodystart="112" bodyend="114"/>
-        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="group___executor_1gaeed212374a5b8ed0d2cdda90e7bbb4f9" compoundref="executor_8hpp" startline="112" endline="114">neforce::post</references>
+        <referencedby refid="group___executor_1gaeed212374a5b8ed0d2cdda90e7bbb4f9" compoundref="executor_8hpp" startline="112" endline="114">neforce::post</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

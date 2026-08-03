@@ -1,13 +1,13 @@
 var group___lock_free_queue =
 [
-    [ "lock_free_queue&lt; T &gt;", "classlock__free__queue.html", [
-      [ "lock_free_queue", "classlock__free__queue.html#ae5b987f438df7419acd38e92fec94062", null ],
-      [ "~lock_free_queue", "classlock__free__queue.html#ad694f5f11345581b7cdced27bf9b7c91", null ],
-      [ "clear", "classlock__free__queue.html#aea072bf54bf6f6418b30f57209a844bc", null ],
-      [ "empty", "classlock__free__queue.html#aaec84e98289bda32bf10f17d0d48fd59", null ],
-      [ "pop", "classlock__free__queue.html#af4d602957128b5cd5e8f0edb30c48c09", null ],
-      [ "push", "classlock__free__queue.html#a36f8cf27a02025a0e0bfbd3d24c6fbd0", null ],
-      [ "size", "classlock__free__queue.html#a67570e8ef548edc7a672e521a0ed8adf", null ],
-      [ "try_pop", "classlock__free__queue.html#a24c20d863075bbbcedc192df5625d1e3", null ]
+    [ "neforce::lock_free_queue&lt; T &gt;", "classneforce_1_1lock__free__queue.html", [
+      [ "lock_free_queue", "classneforce_1_1lock__free__queue.html#a1ad4fee33d192832a72c2298547238e2", null ],
+      [ "~lock_free_queue", "classneforce_1_1lock__free__queue.html#ad2f8d7e56fd68ceec5e6f36445afd6a6", null ],
+      [ "clear", "classneforce_1_1lock__free__queue.html#a58c91946d1a2f292c5a9f55e10ad06f8", null ],
+      [ "empty", "classneforce_1_1lock__free__queue.html#ad5a9a9d125950b922bf74014b505ece2", null ],
+      [ "pop", "classneforce_1_1lock__free__queue.html#a275837ae20f9953448cfdb1672410595", null ],
+      [ "push", "classneforce_1_1lock__free__queue.html#a0cf1483c2b0838090d8329250c20abef", null ],
+      [ "size", "classneforce_1_1lock__free__queue.html#aec1f4b4b3201c5ca8b43deae86f1779a", null ],
+      [ "try_pop", "classneforce_1_1lock__free__queue.html#a293fe7ba4a32e78dc3ad20511bd67949", null ]
     ] ]
 ];

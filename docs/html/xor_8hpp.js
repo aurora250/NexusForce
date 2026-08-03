@@ -1,9 +1,9 @@
 var xor_8hpp =
 [
-    [ "XOR_decrypt", "group___x_o_r.html#ga2ffcae3b1cb528181a8c3d3fc93d43a5", null ],
-    [ "XOR_decrypt", "group___x_o_r.html#ga69df10d7ab8000e678e2edf1221afa99", null ],
-    [ "XOR_decrypt", "group___x_o_r.html#gaea653b9f3d096301bd30f9aaa7ea5710", null ],
-    [ "XOR_encrypt", "group___x_o_r.html#ga70718b669ca5528364c434202f51c92c", null ],
-    [ "XOR_encrypt", "group___x_o_r.html#ga11ed95e3094fbb91cd843a74c003131b", null ],
-    [ "XOR_encrypt", "group___x_o_r.html#ga2bc3224daaeacadfa16e6bb68caa01e3", null ]
+    [ "neforce::XOR_decrypt", "group___x_o_r.html#gace9440483af9670a748d4e369da1e564", null ],
+    [ "neforce::XOR_decrypt", "group___x_o_r.html#ga77497fd2ecd10ffb875ee0ae9fae2989", null ],
+    [ "neforce::XOR_decrypt", "group___x_o_r.html#gaf660a4ff81ecd5ba543ccd412278b636", null ],
+    [ "neforce::XOR_encrypt", "group___x_o_r.html#ga989ebea3e2073476dac15a5ca95ea568", null ],
+    [ "neforce::XOR_encrypt", "group___x_o_r.html#gae9455e9ad71e59d2a37c6dfa2dfe43ab", null ],
+    [ "neforce::XOR_encrypt", "group___x_o_r.html#gafa3ebc92b6fdcade9f7f29d72da2ddac", null ]
 ];

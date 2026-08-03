@@ -3,7 +3,7 @@
   <option  id='DOXYFILE_ENCODING' default='yes' type='string'><value><![CDATA[UTF-8]]></value></option>
   <option  id='PROJECT_NAME' default='no' type='string'><value><![CDATA[NexusForce]]></value></option>
   <option  id='PROJECT_NUMBER' default='no' type='string'><value><![CDATA[1.0.0]]></value></option>
-  <option  id='PROJECT_BRIEF' default='no' type='string'><value><![CDATA["A Modern C++ Library with extended functionality, web components, and utility libraries"]]></value></option>
+  <option  id='PROJECT_BRIEF' default='no' type='string'><value><![CDATA["A rigorously engineered full-stack C++ backend library."]]></value></option>
   <option  id='PROJECT_LOGO' default='yes' type='string'><value><![CDATA[]]></value></option>
   <option  id='PROJECT_ICON' default='yes' type='string'><value><![CDATA[]]></value></option>
   <option  id='OUTPUT_DIRECTORY' default='no' type='string'><value><![CDATA[D:/Workspace/NexusForce/cmake-build-release-msvc-x64/doxygen_output]]></value></option>
@@ -165,7 +165,7 @@
   <option  id='FILTER_SOURCE_FILES' default='yes' type='bool'><value>NO</value></option>
   <option  id='FILTER_SOURCE_PATTERNS' default='yes' type='stringlist'>
   </option>
-  <option  id='USE_MDFILE_AS_MAINPAGE' default='no' type='string'><value><![CDATA[D:/Workspace/NexusForce/README.md]]></value></option>
+  <option  id='USE_MDFILE_AS_MAINPAGE' default='no' type='string'><value><![CDATA[D:/Workspace/NexusForce/docs/MAINPAGE.md]]></value></option>
   <option  id='IMPLICIT_DIR_DOCS' default='yes' type='bool'><value>YES</value></option>
   <option  id='FORTRAN_COMMENT_AFTER' default='yes' type='int'><value>72</value></option>
   <option  id='SOURCE_BROWSER' default='no' type='bool'><value>YES</value></option>
@@ -316,18 +316,29 @@
     <value><![CDATA[NEXUSFORCE_ENABLE_DOXYGEN=1]]></value>
     <value><![CDATA[NEFORCE_USING_SSO]]></value>
     <value><![CDATA[NEFORCE_USING_INTEL_TSX]]></value>
+    <value><![CDATA[NEFORCE_USING_IO_URING]]></value>
     <value><![CDATA[NEFORCE_SUPPORT_POSTGRESQL]]></value>
     <value><![CDATA[NEFORCE_SUPPORT_MYSQL]]></value>
     <value><![CDATA[NEFORCE_SUPPORT_SQLITE3]]></value>
     <value><![CDATA[NEFORCE_SUPPORT_HIREDIS]]></value>
     <value><![CDATA[NEFORCE_SUPPORT_ZLIB]]></value>
     <value><![CDATA[NEFORCE_SUPPORT_LZ4]]></value>
+    <value><![CDATA[NEFORCE_SUPPORT_OPENSSL]]></value>
+    <value><![CDATA[NEFORCE_SUPPORT_PCRE2]]></value>
+    <value><![CDATA[NEFORCE_SUPPORT_ICU]]></value>
+    <value><![CDATA[NEFORCE_SUPPORT_SIMD]]></value>
+    <value><![CDATA[NEFORCE_SUPPORT_INTEL_TSX]]></value>
+    <value><![CDATA[NEFORCE_SUPPORT_INTRINSIC_INT128]]></value>
     <value><![CDATA[NEFORCE_STANDARD_23]]></value>
     <value><![CDATA[NEFORCE_STANDARD_20]]></value>
     <value><![CDATA[NEFORCE_STANDARD_17]]></value>
     <value><![CDATA[NEFORCE_STANDARD_14]]></value>
     <value><![CDATA[NEFORCE_PLATFORM_WINDOWS]]></value>
+    <value><![CDATA[NEFORCE_PLATFORM_WINDOWS32]]></value>
+    <value><![CDATA[NEFORCE_PLATFORM_WINDOWS64]]></value>
     <value><![CDATA[NEFORCE_PLATFORM_LINUX]]></value>
+    <value><![CDATA[NEFORCE_PLATFORM_LINUX32]]></value>
+    <value><![CDATA[NEFORCE_PLATFORM_LINUX64]]></value>
     <value><![CDATA[NEFORCE_COMPILER_GNUC]]></value>
     <value><![CDATA[NEFORCE_COMPILER_CLANG]]></value>
     <value><![CDATA[NEFORCE_COMPILER_MINGW]]></value>
@@ -336,9 +347,25 @@
     <value><![CDATA[NEFORCE_COMPILER_LLVM_MINGW]]></value>
     <value><![CDATA[NEFORCE_COMPILER_CLANG_CL]]></value>
     <value><![CDATA[NEFORCE_ARCH_X86]]></value>
+    <value><![CDATA[NEFORCE_ARCH_X86_32]]></value>
+    <value><![CDATA[NEFORCE_ARCH_X86_64]]></value>
     <value><![CDATA[NEFORCE_ARCH_ARM]]></value>
+    <value><![CDATA[NEFORCE_ARCH_ARM32]]></value>
+    <value><![CDATA[NEFORCE_ARCH_AARCH64]]></value>
     <value><![CDATA[NEFORCE_ARCH_RISCV]]></value>
+    <value><![CDATA[NEFORCE_ARCH_RISCV32]]></value>
+    <value><![CDATA[NEFORCE_ARCH_RISCV64]]></value>
     <value><![CDATA[NEFORCE_ARCH_LOONGARCH]]></value>
+    <value><![CDATA[NEFORCE_ARCH_LOONGARCH32]]></value>
+    <value><![CDATA[NEFORCE_ARCH_LOONGARCH64]]></value>
+    <value><![CDATA[NEFORCE_SIMD_SSE2]]></value>
+    <value><![CDATA[NEFORCE_SIMD_AVX]]></value>
+    <value><![CDATA[NEFORCE_SIMD_AVX2]]></value>
+    <value><![CDATA[NEFORCE_SIMD_AVX512F]]></value>
+    <value><![CDATA[NEFORCE_SIMD_SSSE3]]></value>
+    <value><![CDATA[NEFORCE_SIMD_NEON]]></value>
+    <value><![CDATA[NEFORCE_SIMD_AES_NI]]></value>
+    <value><![CDATA[NEFORCE_SIMD_AES_ARM]]></value>
     <value><![CDATA[NEFORCE_ARCH_BITS_64]]></value>
     <value><![CDATA[NEFORCE_ARCH_BITS_32]]></value>
     <value><![CDATA[NEFORCE_API]]></value>
@@ -346,6 +373,8 @@
     <value><![CDATA[NEFORCE_CONSTEXPR17=constexpr]]></value>
     <value><![CDATA[NEFORCE_INLINE17=inline]]></value>
     <value><![CDATA[NEFORCE_CONSTEXPR20=constexpr]]></value>
+    <value><![CDATA[NEFORCE_CONSTEVAL20=consteval]]></value>
+    <value><![CDATA[NEFORCE_CONSTEXPR23=constexpr]]></value>
     <value><![CDATA[NEFORCE_PURE_FUNCTION]]></value>
     <value><![CDATA[NEFORCE_CONST_FUNCTION]]></value>
     <value><![CDATA[NEFORCE_ALLOC_OPTIMIZE]]></value>
@@ -353,6 +382,34 @@
     <value><![CDATA[NEFORCE_ALWAYS_INLINE_INLINE=inline]]></value>
     <value><![CDATA[NEFORCE_NODISCARD=[[nodiscard]]]]></value>
     <value><![CDATA[NEFORCE_ALLOC_NODISCARD=[[nodiscard]]]]></value>
+    <value><![CDATA[NEFORCE_NORETURN=[[noreturn]]]]></value>
+    <value><![CDATA[NEFORCE_DEPRECATED=[[deprecated]]]]></value>
+    <value><![CDATA[NEFORCE_DEPRECATED_FOR(MSG)=[[deprecated(MSG)]]]]></value>
+    <value><![CDATA[NEFORCE_RESTRICT=__restrict]]></value>
+    <value><![CDATA["NEFORCE_BEGIN_NAMESPACE__=namespace neforce {"]]></value>
+    <value><![CDATA[NEFORCE_END_NAMESPACE__=}]]></value>
+    <value><![CDATA["NEFORCE_BEGIN_SIMD__=namespace simd {"]]></value>
+    <value><![CDATA["NEFORCE_BEGIN_CONSTANTS__=namespace constants {"]]></value>
+    <value><![CDATA["NEFORCE_BEGIN_THIS_THREAD__=namespace this_thread {"]]></value>
+    <value><![CDATA["NEFORCE_BEGIN_RANGES__=namespace ranges {"]]></value>
+    <value><![CDATA["NEFORCE_BEGIN_RANGES_VIEWS__=namespace views {"]]></value>
+    <value><![CDATA["NEFORCE_BEGIN_LITERALS__=inline namespace literals {"]]></value>
+    <value><![CDATA["NEFORCE_BEGIN_REFLECT__=namespace reflect {"]]></value>
+    <value><![CDATA["NEFORCE_BEGIN_SERIALIZE__=namespace serialize {"]]></value>
+    <value><![CDATA["NEFORCE_BEGIN_HTTP__=namespace http {"]]></value>
+    <value><![CDATA["NEFORCE_BEGIN_TUI__=namespace tui {"]]></value>
+    <value><![CDATA["NEFORCE_BEGIN_COMPONENTS__=namespace components {"]]></value>
+    <value><![CDATA[NEFORCE_END_SIMD__=}]]></value>
+    <value><![CDATA[NEFORCE_END_CONSTANTS__=}]]></value>
+    <value><![CDATA[NEFORCE_END_THIS_THREAD__=}]]></value>
+    <value><![CDATA[NEFORCE_END_RANGES__=}]]></value>
+    <value><![CDATA[NEFORCE_END_RANGES_VIEWS__=}]]></value>
+    <value><![CDATA[NEFORCE_END_LITERALS__=}]]></value>
+    <value><![CDATA[NEFORCE_END_REFLECT__=}]]></value>
+    <value><![CDATA[NEFORCE_END_SERIALIZE__=}]]></value>
+    <value><![CDATA[NEFORCE_END_HTTP__=}]]></value>
+    <value><![CDATA[NEFORCE_END_TUI__=}]]></value>
+    <value><![CDATA[NEFORCE_END_COMPONENTS__=}]]></value>
   </option>
   <option  id='EXPAND_AS_DEFINED' default='yes' type='stringlist'>
   </option>

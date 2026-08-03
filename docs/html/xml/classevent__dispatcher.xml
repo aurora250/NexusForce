@@ -1,0 +1,285 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classevent__dispatcher" kind="class" language="C++" prot="public">
+    <compoundname>event_dispatcher</compoundname>
+    <includes refid="event__dispatcher_8hpp" local="no">event_dispatcher.hpp</includes>
+    <innerclass refid="structevent__dispatcher_1_1scroll__drag__state" prot="private">event_dispatcher::scroll_drag_state</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classevent__dispatcher_1a4fdeb08fe5e34c77079cfef45d1037ec" prot="private" static="no" mutable="no">
+        <type><ref refid="classfocus__manager" kindref="compound">focus_manager</ref> &amp;</type>
+        <definition>focus_manager&amp; event_dispatcher::focus_mgr_</definition>
+        <argsstring></argsstring>
+        <name>focus_mgr_</name>
+        <qualifiedname>event_dispatcher::focus_mgr_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/event_dispatcher.hpp" line="74" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/event_dispatcher.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classevent__dispatcher_1a135b8ff346c5e59762fdc120d32de0b4" prot="private" static="no" mutable="no">
+        <type><ref refid="classcomponent__base" kindref="compound">component_base</ref> *</type>
+        <definition>component_base* event_dispatcher::last_mouse_target_</definition>
+        <argsstring></argsstring>
+        <name>last_mouse_target_</name>
+        <qualifiedname>event_dispatcher::last_mouse_target_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/event_dispatcher.hpp" line="75" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/event_dispatcher.hpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classevent__dispatcher_1a7b15753cdc0470823d4b68cfa64b5dae" prot="private" static="no" mutable="no">
+        <type>scroll_drag_state</type>
+        <definition>scroll_drag_state event_dispatcher::drag_state_storage_</definition>
+        <argsstring></argsstring>
+        <name>drag_state_storage_</name>
+        <qualifiedname>event_dispatcher::drag_state_storage_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/event_dispatcher.hpp" line="76" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/event_dispatcher.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classevent__dispatcher_1a1eb3850ca9d9f5f9922be5187af86628" prot="private" static="no" mutable="no">
+        <type>scroll_drag_state *</type>
+        <definition>scroll_drag_state* event_dispatcher::drag_state_</definition>
+        <argsstring></argsstring>
+        <name>drag_state_</name>
+        <qualifiedname>event_dispatcher::drag_state_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/event_dispatcher.hpp" line="77" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/event_dispatcher.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classevent__dispatcher_1a8215f4ab3211797f943a53594a20342c" prot="private" static="no" mutable="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void()&gt;</type>
+        <definition>function&lt;void()&gt; event_dispatcher::mark_dirty_</definition>
+        <argsstring></argsstring>
+        <name>mark_dirty_</name>
+        <qualifiedname>event_dispatcher::mark_dirty_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/event_dispatcher.hpp" line="78" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/event_dispatcher.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classevent__dispatcher_1aa72ab34eefe51fcbe1f88fb432eb15d1" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>event_dispatcher::event_dispatcher</definition>
+        <argsstring>(focus_manager &amp;fm)</argsstring>
+        <name>event_dispatcher</name>
+        <qualifiedname>event_dispatcher::event_dispatcher</qualifiedname>
+        <param>
+          <type><ref refid="classfocus__manager" kindref="compound">focus_manager</ref> &amp;</type>
+          <declname>fm</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>焦点管理器引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/event_dispatcher.hpp" line="37" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classevent__dispatcher_1a91b996c04adfaeab4ded3de695ca4e15" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool event_dispatcher::dispatch_key</definition>
+        <argsstring>(const key_event &amp;e, component_base *root)</argsstring>
+        <name>dispatch_key</name>
+        <qualifiedname>event_dispatcher::dispatch_key</qualifiedname>
+        <param>
+          <type>const <ref refid="structkey__event" kindref="compound">key_event</ref> &amp;</type>
+          <declname>e</declname>
+        </param>
+        <param>
+          <type><ref refid="classcomponent__base" kindref="compound">component_base</ref> *</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+<para>分发键盘事件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>e</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键盘事件 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>root</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>根组件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true 表示事件已被处理 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/event_dispatcher.hpp" line="45" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classevent__dispatcher_1aca45a11147fd00224028a3af8bf88755" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool event_dispatcher::dispatch_mouse</definition>
+        <argsstring>(const mouse_event &amp;e, component_base *root, const vector&lt; layout_rect &gt; &amp;layout, const element &amp;tree, const vector&lt; scrollbar_hit &gt; &amp;hits)</argsstring>
+        <name>dispatch_mouse</name>
+        <qualifiedname>event_dispatcher::dispatch_mouse</qualifiedname>
+        <param>
+          <type>const <ref refid="structmouse__event" kindref="compound">mouse_event</ref> &amp;</type>
+          <declname>e</declname>
+        </param>
+        <param>
+          <type><ref refid="classcomponent__base" kindref="compound">component_base</ref> *</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="structlayout__rect" kindref="compound">layout_rect</ref> &gt; &amp;</type>
+          <declname>layout</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classelement" kindref="compound">element</ref> &amp;</type>
+          <declname>tree</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="structscrollbar__hit" kindref="compound">scrollbar_hit</ref> &gt; &amp;</type>
+          <declname>hits</declname>
+        </param>
+        <briefdescription>
+<para>分发鼠标事件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>e</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>鼠标事件 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>root</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>根组件 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>layout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>布局结果 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tree</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当前元素树 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>滚动条命中信息列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true 表示事件已被处理 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/event_dispatcher.hpp" line="56" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classevent__dispatcher_1a7eba3b9ba528d50eb72348da3f9331bd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void event_dispatcher::set_dirty_callback</definition>
+        <argsstring>(function&lt; void()&gt; cb)</argsstring>
+        <name>set_dirty_callback</name>
+        <qualifiedname>event_dispatcher::set_dirty_callback</qualifiedname>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void()&gt;</type>
+          <declname>cb</declname>
+        </param>
+        <briefdescription>
+<para>设置脏标记回调 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cb</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>回调函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>由 reconciler 注入 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/event_dispatcher.hpp" line="64" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/event_dispatcher.hpp" bodystart="64" bodyend="64"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>事件分发器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>管理键盘/鼠标事件的完整分发流程，包括焦点导航、 滚动条交互状态机、元素点击检测和悬停追踪。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/tui/event_dispatcher.hpp" line="31" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/event_dispatcher.hpp" bodystart="31" bodyend="79"/>
+    <listofallmembers>
+      <member refid="classevent__dispatcher_1a91b996c04adfaeab4ded3de695ca4e15" prot="public" virt="non-virtual"><scope>event_dispatcher</scope><name>dispatch_key</name></member>
+      <member refid="classevent__dispatcher_1aca45a11147fd00224028a3af8bf88755" prot="public" virt="non-virtual"><scope>event_dispatcher</scope><name>dispatch_mouse</name></member>
+      <member refid="classevent__dispatcher_1a1eb3850ca9d9f5f9922be5187af86628" prot="private" virt="non-virtual"><scope>event_dispatcher</scope><name>drag_state_</name></member>
+      <member refid="classevent__dispatcher_1a7b15753cdc0470823d4b68cfa64b5dae" prot="private" virt="non-virtual"><scope>event_dispatcher</scope><name>drag_state_storage_</name></member>
+      <member refid="classevent__dispatcher_1aa72ab34eefe51fcbe1f88fb432eb15d1" prot="public" virt="non-virtual"><scope>event_dispatcher</scope><name>event_dispatcher</name></member>
+      <member refid="classevent__dispatcher_1a4fdeb08fe5e34c77079cfef45d1037ec" prot="private" virt="non-virtual"><scope>event_dispatcher</scope><name>focus_mgr_</name></member>
+      <member refid="classevent__dispatcher_1a135b8ff346c5e59762fdc120d32de0b4" prot="private" virt="non-virtual"><scope>event_dispatcher</scope><name>last_mouse_target_</name></member>
+      <member refid="classevent__dispatcher_1a8215f4ab3211797f943a53594a20342c" prot="private" virt="non-virtual"><scope>event_dispatcher</scope><name>mark_dirty_</name></member>
+      <member refid="classevent__dispatcher_1a7eba3b9ba528d50eb72348da3f9331bd" prot="public" virt="non-virtual"><scope>event_dispatcher</scope><name>set_dirty_callback</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['并发与异步_20async_0',['🔄 并发与异步 (Async)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md18',1,'']]],
-  ['并行算法_1',['并行算法',['../group___parallel_algorithms.html',1,'']]]
+  ['常见问题_0',['❓ 常见问题',['../index.html#autotoc_md39',1,'']]]
 ];

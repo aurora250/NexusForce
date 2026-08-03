@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1system__signal__manager_1_1pending__signal" kind="struct" language="C++" prot="private">
+    <compoundname>neforce::system_signal_manager::pending_signal</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structneforce_1_1system__signal__manager_1_1pending__signal_1a67a32060e6beb92c544966a7979c3208" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1system__signal__manager_1af0206ae1cb2e7028135dc0077afda6e3" kindref="member">event</ref></type>
+        <definition>event neforce::system_signal_manager::pending_signal::signal_event</definition>
+        <argsstring></argsstring>
+        <name>signal_event</name>
+        <qualifiedname>neforce::system_signal_manager::pending_signal::signal_event</qualifiedname>
+        <briefdescription>
+<para>信号事件 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="130" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1system__signal__manager_1_1pending__signal_1af8516a1799fea1b3b0ac50b0f6325a2b" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* neforce::system_signal_manager::pending_signal::context</definition>
+        <argsstring></argsstring>
+        <name>context</name>
+        <qualifiedname>neforce::system_signal_manager::pending_signal::context</qualifiedname>
+        <briefdescription>
+<para>上下文数据 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="131" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1system__signal__manager_1_1pending__signal_1af1e39c0ea10018e420e5cffd77284509" prot="public" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1steady__clock_1a571235516977f769fec5e0eaaf49e077" kindref="member">steady_clock::time_point</ref></type>
+        <definition>steady_clock::time_point neforce::system_signal_manager::pending_signal::timestamp</definition>
+        <argsstring></argsstring>
+        <name>timestamp</name>
+        <qualifiedname>neforce::system_signal_manager::pending_signal::timestamp</qualifiedname>
+        <briefdescription>
+<para>时间戳 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="132" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="132" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1system__signal__manager_1_1pending__signal_1a1f1707adfe526d47267357085ca1c874" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::system_signal_manager::pending_signal::pending_signal</definition>
+        <argsstring>(const event event, void *context, const steady_clock::time_point timestamp)</argsstring>
+        <name>pending_signal</name>
+        <qualifiedname>neforce::system_signal_manager::pending_signal::pending_signal</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1system__signal__manager_1af0206ae1cb2e7028135dc0077afda6e3" kindref="member">event</ref></type>
+          <declname>event</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>context</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structneforce_1_1steady__clock_1a571235516977f769fec5e0eaaf49e077" kindref="member">steady_clock::time_point</ref></type>
+          <declname>timestamp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="134" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="134" bodyend="137"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>待处理信号 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::system_signal_manager::pending_signal</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>timestamp</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::time_point&lt; steady_clock &gt;</label>
+        <link refid="structneforce_1_1time__point"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="129" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="129" bodyend="138"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1system__signal__manager_1_1pending__signal_1af8516a1799fea1b3b0ac50b0f6325a2b" prot="public" virt="non-virtual"><scope>neforce::system_signal_manager::pending_signal</scope><name>context</name></member>
+      <member refid="structneforce_1_1system__signal__manager_1_1pending__signal_1a1f1707adfe526d47267357085ca1c874" prot="public" virt="non-virtual"><scope>neforce::system_signal_manager::pending_signal</scope><name>pending_signal</name></member>
+      <member refid="structneforce_1_1system__signal__manager_1_1pending__signal_1a67a32060e6beb92c544966a7979c3208" prot="public" virt="non-virtual"><scope>neforce::system_signal_manager::pending_signal</scope><name>signal_event</name></member>
+      <member refid="structneforce_1_1system__signal__manager_1_1pending__signal_1af1e39c0ea10018e420e5cffd77284509" prot="public" virt="non-virtual"><scope>neforce::system_signal_manager::pending_signal</scope><name>timestamp</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

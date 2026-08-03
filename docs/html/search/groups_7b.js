@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['量词算法_0',['量词算法',['../group___quantifier_algorithms.html',1,'']]]
+  ['配置格式操作_0',['配置格式操作',['../group___config_format.html',1,'']]]
 ];

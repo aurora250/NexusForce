@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['记录类型_0',['DNS 记录类型',['../group___d_n_s.html#dns_record_types',1,'']]]
+  ['莱昂纳多堆结构_0',['莱昂纳多堆结构',['../group___leonardo_heap.html#heap_structure',1,'']]],
+  ['莱昂纳多数列_1',['莱昂纳多数列',['../group___leonardo_heap.html#leonardo_numbers',1,'']]]
 ];

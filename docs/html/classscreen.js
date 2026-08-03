@@ -8,5 +8,6 @@ var classscreen =
     [ "reset_position", "classscreen.html#a2d37e80bbb623e6d22d00d9f2c64406a", null ],
     [ "resize", "classscreen.html#a3b0b2b33a8ffd8757987e4629be921ce", null ],
     [ "set_cursor", "classscreen.html#a33778befc1fd3aa696177743819eea38", null ],
+    [ "to_plaintext", "classscreen.html#abe073177a4504bcf6b271a9a13367b10", null ],
     [ "to_string", "classscreen.html#a2714ae922fcc2edcd221a075709efe16", null ]
 ];

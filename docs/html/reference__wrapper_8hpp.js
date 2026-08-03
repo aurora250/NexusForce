@@ -1,12 +1,12 @@
 var reference__wrapper_8hpp =
 [
-    [ "unwrap_ref_decay_t", "group___reference_wrapper.html#gab50d469d33ed56a0ce32f87d03ac5f10", null ],
-    [ "unwrap_reference_t", "group___reference_wrapper.html#ga27b1c76a744b6271a4733a39e4717bda", null ],
-    [ "cref", "group___reference_wrapper.html#ga4d14f03ea79098b6ea528ecb151ee661", null ],
-    [ "cref", "group___reference_wrapper.html#ga2e15f0d85bb2b2e2216f442df1cf2901", null ],
-    [ "cref", "group___reference_wrapper.html#ga1a17400f3274ed51b539c32ca6e85755", null ],
-    [ "invoke", "group___invoke_function.html#ga4c75921ddce62eae2409105dc92d6da5", null ],
-    [ "ref", "group___reference_wrapper.html#ga12d1119fac701ece51a17517244bfb60", null ],
-    [ "ref", "group___reference_wrapper.html#ga9390caa30dca0820fa2cdff369d3c25d", null ],
-    [ "ref", "group___reference_wrapper.html#ga25754a3cc3c12b294f51a704b7d93d0c", null ]
+    [ "neforce::unwrap_ref_decay_t", "group___reference_wrapper.html#ga956c157e4c8b4f329dbc718f411ac82d", null ],
+    [ "neforce::unwrap_reference_t", "group___reference_wrapper.html#ga865199b4578c1b6d7c7614894108925d", null ],
+    [ "neforce::cref", "group___reference_wrapper.html#ga957fdc0a4a14786f2a9218e2d81fc338", null ],
+    [ "neforce::cref", "group___reference_wrapper.html#ga08ce27e4d2a03efd6fde0dd6203d3d82", null ],
+    [ "neforce::cref", "group___reference_wrapper.html#gac0b1269d98e895872060c6cebae85025", null ],
+    [ "neforce::invoke", "group___invoke_function.html#ga29759f8537daace4b5d4ce1f006f8874", null ],
+    [ "neforce::ref", "group___reference_wrapper.html#ga343f48b639fd2c418e987b3d3dd4c515", null ],
+    [ "neforce::ref", "group___reference_wrapper.html#gadd34c64430a280c6c19e17a64e7fd08c", null ],
+    [ "neforce::ref", "group___reference_wrapper.html#gae07530a0f43e9c46acfc5a1632d57a00", null ]
 ];

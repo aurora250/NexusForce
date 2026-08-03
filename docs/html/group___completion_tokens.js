@@ -1,25 +1,25 @@
 var group___completion_tokens =
 [
-    [ "use_future_t", "structuse__future__t.html", null ],
-    [ "detached_t", "structdetached__t.html", null ],
-    [ "deferred_t", "structdeferred__t.html", null ],
-    [ "async_result&lt; Token, Signature &gt;", "structasync__result.html", [
-      [ "handler_type", "structasync__result.html#a10cf588678d880b45d0229f1a3cbeb54", null ],
-      [ "return_type", "structasync__result.html#a1b9c5a1b4cd118e9263ce2f754dca272", null ],
-      [ "token_", "structasync__result.html#a24cdc4e6c5fd1787c02dd7b3bb09fe37", null ]
+    [ "neforce::use_future_t", "structneforce_1_1use__future__t.html", null ],
+    [ "neforce::detached_t", "structneforce_1_1detached__t.html", null ],
+    [ "neforce::deferred_t", "structneforce_1_1deferred__t.html", null ],
+    [ "neforce::async_result&lt; Token, Signature &gt;", "structneforce_1_1async__result.html", [
+      [ "handler_type", "structneforce_1_1async__result.html#a52f7b7bb52fb22b2122df530b9a73019", null ],
+      [ "return_type", "structneforce_1_1async__result.html#a0276d5c9534db4cfc01dddcfce33ed0a", null ],
+      [ "token_", "structneforce_1_1async__result.html#a750c562982c4dd8e1ca8bae94107a293", null ]
     ] ],
-    [ "use_awaitable_t", "structuse__awaitable__t.html", null ],
-    [ "awaitable&lt; Args &gt;", "classawaitable.html", [
-      [ "set_exception", "classawaitable.html#af8fedf5418f529a4457a5208485e93a7", null ],
-      [ "set_value", "classawaitable.html#a7430ca980264a24196604fded0f787bd", null ]
+    [ "neforce::use_awaitable_t", "structneforce_1_1use__awaitable__t.html", null ],
+    [ "neforce::awaitable&lt; Args &gt;", "classneforce_1_1awaitable.html", [
+      [ "set_exception", "classneforce_1_1awaitable.html#ad04e67b1d87727a5c2bca82ba1fe1346", null ],
+      [ "set_value", "classneforce_1_1awaitable.html#a30f01958b120acc4f48da5e5f5889094", null ]
     ] ],
-    [ "awaitable&lt; void &gt;", "classawaitable_3_01void_01_4.html", [
-      [ "awaitable", "classawaitable_3_01void_01_4.html#acc039a92e18412b4783bc42bcc942be4", null ],
-      [ "set_exception", "classawaitable_3_01void_01_4.html#a10ae2ba4fac43bdd82ce60e1845fe52a", null ],
-      [ "set_value", "classawaitable_3_01void_01_4.html#a34e7c2cf22221e39e2658518f16b881f", null ]
+    [ "neforce::awaitable&lt; void &gt;", "classneforce_1_1awaitable_3_01void_01_4.html", [
+      [ "awaitable", "classneforce_1_1awaitable_3_01void_01_4.html#a2861b03cfde6579a11896b3d55c6c727", null ],
+      [ "set_exception", "classneforce_1_1awaitable_3_01void_01_4.html#a7cf9c3416739719cecfac60c9c5fb46e", null ],
+      [ "set_value", "classneforce_1_1awaitable_3_01void_01_4.html#aa9a54fe055911883ae8a7e5077dcee28", null ]
     ] ],
-    [ "deferred", "group___completion_tokens.html#ga3a84461f0e214abe42af54652d8e673c", null ],
-    [ "detached", "group___completion_tokens.html#ga36b5eae8858e84a4ebbe1f7a9739c256", null ],
-    [ "use_awaitable", "group___completion_tokens.html#ga9fe3f0a59b8db368024b61ce6215b3b4", null ],
-    [ "use_future", "group___completion_tokens.html#ga1e645f41f2c2ddff978c87c8c91b18c6", null ]
+    [ "neforce::deferred", "group___completion_tokens.html#ga02902d04f0a6b05e5c96e2315dd6213a", null ],
+    [ "neforce::detached", "group___completion_tokens.html#ga6864edc0be63ca95b28fc5118a4dd9fb", null ],
+    [ "neforce::use_awaitable", "group___completion_tokens.html#ga0bccacf234e02a99dde8373671701a74", null ],
+    [ "neforce::use_future", "group___completion_tokens.html#gaafbc7286fd3f854ce9cd93be9ade5a0f", null ]
 ];

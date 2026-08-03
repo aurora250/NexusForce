@@ -1,4 +1,4 @@
 var group___environment_variables =
 [
-    [ "environment", "structenvironment.html", null ]
+    [ "neforce::environment", "structneforce_1_1environment.html", null ]
 ];

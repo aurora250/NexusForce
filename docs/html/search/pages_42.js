@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['对数函数实现_0',['对数函数实现',['../group___math_functions.html#logarithm_implementation',1,'']]]
+  ['密码学与安全算法_0',['🔐 密码学与安全算法',['../index.html#autotoc_md11',1,'']]]
 ];

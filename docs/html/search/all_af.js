@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['绑定函数_0',['绑定函数',['../group___function_binders.html',1,'']]],
-  ['绑定特性_1',['绑定特性',['../group___bind_traits.html',1,'']]]
+  ['红黑树性质_0',['红黑树性质',['../group___r_b_tree.html#rb_tree_properties',1,'']]],
+  ['红黑树_1',['红黑树',['../group___r_b_tree.html',1,'']]]
 ];

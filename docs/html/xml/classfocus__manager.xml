@@ -1,0 +1,247 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classfocus__manager" kind="class" language="C++" prot="public">
+    <compoundname>focus_manager</compoundname>
+    <includes refid="focus__manager_8hpp" local="no">focus_manager.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfocus__manager_1a8b965e4d7d94a741de600385ad4306c2" prot="private" static="no" mutable="no">
+        <type><ref refid="classcomponent__base" kindref="compound">component_base</ref> *</type>
+        <definition>component_base* focus_manager::focused_</definition>
+        <argsstring></argsstring>
+        <name>focused_</name>
+        <qualifiedname>focus_manager::focused_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="76" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfocus__manager_1af6b08101b89b454c6adab9e381b30eb3" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classcomponent__base" kindref="compound">component_base</ref> * &gt;</type>
+        <definition>vector&lt;component_base*&gt; focus_manager::focus_chain_</definition>
+        <argsstring></argsstring>
+        <name>focus_chain_</name>
+        <qualifiedname>focus_manager::focus_chain_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="77" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfocus__manager_1aed7942433c5420c4ff869d08bf35556a" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool focus_manager::chain_dirty_</definition>
+        <argsstring></argsstring>
+        <name>chain_dirty_</name>
+        <qualifiedname>focus_manager::chain_dirty_</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="78" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfocus__manager_1a76d508631bf275ac30d7d6d1f2d208f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>focus_manager::focus_manager</definition>
+        <argsstring>()=default</argsstring>
+        <name>focus_manager</name>
+        <qualifiedname>focus_manager::focus_manager</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="28" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classfocus__manager_1a88d73a1481d47adba5ea030b89856c08" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void focus_manager::rebuild_chain</definition>
+        <argsstring>(component_base *root)</argsstring>
+        <name>rebuild_chain</name>
+        <qualifiedname>focus_manager::rebuild_chain</qualifiedname>
+        <param>
+          <type><ref refid="classcomponent__base" kindref="compound">component_base</ref> *</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+<para>从组件树重建焦点链 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>root</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>根组件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="34" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classfocus__manager_1a844e94018329e3a321374e1479c96f94" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void focus_manager::set_focus</definition>
+        <argsstring>(component_base *comp)</argsstring>
+        <name>set_focus</name>
+        <qualifiedname>focus_manager::set_focus</qualifiedname>
+        <param>
+          <type><ref refid="classcomponent__base" kindref="compound">component_base</ref> *</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>设置焦点组件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标组件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="40" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classfocus__manager_1a658b03ac16354a1d71e5fe710f380cbd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void focus_manager::focus_next</definition>
+        <argsstring>()</argsstring>
+        <name>focus_next</name>
+        <qualifiedname>focus_manager::focus_next</qualifiedname>
+        <briefdescription>
+<para>焦点移动到下一个可聚焦组件 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="45" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classfocus__manager_1a336537a49f96a1cfa47e269dc76a482a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void focus_manager::focus_prev</definition>
+        <argsstring>()</argsstring>
+        <name>focus_prev</name>
+        <qualifiedname>focus_manager::focus_prev</qualifiedname>
+        <briefdescription>
+<para>焦点移动到上一个可聚焦组件 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="50" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classfocus__manager_1aa6c005372ebd16573b16a1f2f2d5da4a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classcomponent__base" kindref="compound">component_base</ref> *</type>
+        <definition>component_base * focus_manager::focused</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>focused</name>
+        <qualifiedname>focus_manager::focused</qualifiedname>
+        <briefdescription>
+<para>获取当前焦点组件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>焦点组件指针，无可聚焦组件时返回 nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="56" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classfocus__manager_1aed4a25b3727105dc9e13a7eb6d4792e1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classcomponent__base" kindref="compound">component_base</ref> * &gt; &amp;</type>
+        <definition>const vector&lt; component_base * &gt; &amp; focus_manager::chain</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>chain</name>
+        <qualifiedname>focus_manager::chain</qualifiedname>
+        <briefdescription>
+<para>获取焦点链 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>可聚焦组件列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="62" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" bodystart="62" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classfocus__manager_1ab04a14c593bc3f4b9ffcc713e6f4086e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void focus_manager::mark_chain_dirty</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>mark_chain_dirty</name>
+        <qualifiedname>focus_manager::mark_chain_dirty</qualifiedname>
+        <briefdescription>
+<para>标记焦点链需要重建 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="67" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classfocus__manager_1ac5d6bd6620e8aed1f0d63b126d085f9a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool focus_manager::is_chain_dirty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_chain_dirty</name>
+        <qualifiedname>focus_manager::is_chain_dirty</qualifiedname>
+        <briefdescription>
+<para>焦点链是否需要重建 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true 表示需要重建 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="73" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" bodystart="73" bodyend="73"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>焦点管理器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>维护焦点链，管理当前焦点组件的设置与导航。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" line="26" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/focus_manager.hpp" bodystart="26" bodyend="79"/>
+    <listofallmembers>
+      <member refid="classfocus__manager_1aed4a25b3727105dc9e13a7eb6d4792e1" prot="public" virt="non-virtual"><scope>focus_manager</scope><name>chain</name></member>
+      <member refid="classfocus__manager_1aed7942433c5420c4ff869d08bf35556a" prot="private" virt="non-virtual"><scope>focus_manager</scope><name>chain_dirty_</name></member>
+      <member refid="classfocus__manager_1af6b08101b89b454c6adab9e381b30eb3" prot="private" virt="non-virtual"><scope>focus_manager</scope><name>focus_chain_</name></member>
+      <member refid="classfocus__manager_1a76d508631bf275ac30d7d6d1f2d208f7" prot="public" virt="non-virtual"><scope>focus_manager</scope><name>focus_manager</name></member>
+      <member refid="classfocus__manager_1a658b03ac16354a1d71e5fe710f380cbd" prot="public" virt="non-virtual"><scope>focus_manager</scope><name>focus_next</name></member>
+      <member refid="classfocus__manager_1a336537a49f96a1cfa47e269dc76a482a" prot="public" virt="non-virtual"><scope>focus_manager</scope><name>focus_prev</name></member>
+      <member refid="classfocus__manager_1aa6c005372ebd16573b16a1f2f2d5da4a" prot="public" virt="non-virtual"><scope>focus_manager</scope><name>focused</name></member>
+      <member refid="classfocus__manager_1a8b965e4d7d94a741de600385ad4306c2" prot="private" virt="non-virtual"><scope>focus_manager</scope><name>focused_</name></member>
+      <member refid="classfocus__manager_1ac5d6bd6620e8aed1f0d63b126d085f9a" prot="public" virt="non-virtual"><scope>focus_manager</scope><name>is_chain_dirty</name></member>
+      <member refid="classfocus__manager_1ab04a14c593bc3f4b9ffcc713e6f4086e" prot="public" virt="non-virtual"><scope>focus_manager</scope><name>mark_chain_dirty</name></member>
+      <member refid="classfocus__manager_1a88d73a1481d47adba5ea030b89856c08" prot="public" virt="non-virtual"><scope>focus_manager</scope><name>rebuild_chain</name></member>
+      <member refid="classfocus__manager_1a844e94018329e3a321374e1479c96f94" prot="public" virt="non-virtual"><scope>focus_manager</scope><name>set_focus</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

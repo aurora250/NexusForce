@@ -130,8 +130,8 @@
         </childnode>
       </node>
       <node id="17">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="12" relation="include">
         </childnode>
       </node>
@@ -146,7 +146,7 @@
         <link refid="ini__builder_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="60" relation="include">
+        <childnode refid="61" relation="include">
         </childnode>
       </node>
       <node id="2">
@@ -156,13 +156,15 @@
         </childnode>
         <childnode refid="50" relation="include">
         </childnode>
-        <childnode refid="58" relation="include">
+        <childnode refid="59" relation="include">
         </childnode>
       </node>
-      <node id="60">
+      <node id="61">
         <label>NeForce/core/functional/function.hpp</label>
         <link refid="functional_2function_8hpp"/>
-        <childnode refid="61" relation="include">
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
@@ -309,7 +311,7 @@
         <childnode refid="41" relation="include">
         </childnode>
       </node>
-      <node id="58">
+      <node id="59">
         <label>NeForce/core/memory/unique_ptr.hpp</label>
         <link refid="unique__ptr_8hpp"/>
         <childnode refid="9" relation="include">
@@ -318,7 +320,7 @@
         </childnode>
         <childnode refid="49" relation="include">
         </childnode>
-        <childnode refid="59" relation="include">
+        <childnode refid="60" relation="include">
         </childnode>
       </node>
       <node id="33">
@@ -354,30 +356,44 @@
         </childnode>
         <childnode refid="54" relation="include">
         </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
         <childnode refid="49" relation="include">
         </childnode>
       </node>
-      <node id="55">
+      <node id="57">
         <label>NeForce/core/string/basic_string_view.hpp</label>
         <link refid="basic__string__view_8hpp"/>
         <childnode refid="47" relation="include">
         </childnode>
-        <childnode refid="56" relation="include">
+        <childnode refid="58" relation="include">
         </childnode>
-        <childnode refid="57" relation="include">
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
         </childnode>
       </node>
-      <node id="56">
+      <node id="58">
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="36" relation="include">
         </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
       </node>
-      <node id="57">
+      <node id="55">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>NeForce/core/string/charset.hpp</label>
+        <link refid="charset_8hpp"/>
+        <childnode refid="55" relation="include">
+        </childnode>
         <childnode refid="10" relation="include">
         </childnode>
       </node>
@@ -387,10 +403,10 @@
         <childnode refid="52" relation="include">
         </childnode>
       </node>
-      <node id="54">
+      <node id="56">
         <label>NeForce/core/string/string_view.hpp</label>
         <link refid="string__view_8hpp"/>
-        <childnode refid="55" relation="include">
+        <childnode refid="57" relation="include">
         </childnode>
       </node>
       <node id="18">
@@ -417,7 +433,7 @@
         <childnode refid="22" relation="include">
         </childnode>
       </node>
-      <node id="59">
+      <node id="60">
         <label>NeForce/core/utility/deleter.hpp</label>
         <link refid="deleter_8hpp"/>
         <childnode refid="10" relation="include">
@@ -456,14 +472,15 @@
       <node id="39">
         <label>new</label>
       </node>
-      <node id="61">
+      <node id="62">
         <label>typeinfo</label>
       </node>
       <node id="28">
         <label>utility</label>
       </node>
     </incdepgraph>
-    <innerclass refid="classini__builder" prot="public">ini_builder</innerclass>
+    <innerclass refid="classneforce_1_1ini__builder" prot="public">neforce::ini_builder</innerclass>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
     <briefdescription>
 <para>INI配置格式构建器 </para>
     </briefdescription>
@@ -481,49 +498,49 @@
 <codeline lineno="16"><highlight class="normal"></highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight></codeline>
 <codeline lineno="26"><highlight class="normal"></highlight></codeline>
-<codeline lineno="38" refid="classini__builder" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classini__builder_1afa27f3ea82d3b0a156667c231fca7af8" kindref="member">ini_builder</ref><sp/>{</highlight></codeline>
+<codeline lineno="38" refid="classneforce_1_1ini__builder" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref><sp/>{</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;ini_document&gt;</ref><sp/>root_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classini__section" kindref="compound">ini_section</ref>*<sp/>current_section_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;<sp/></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr&lt;ini_document&gt;</ref><sp/>root_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1ini__section" kindref="compound">ini_section</ref>*<sp/>current_section_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;<sp/></highlight></codeline>
 <codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>current_key_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight></codeline>
 <codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>test_exception()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="52"><highlight class="normal"></highlight></codeline>
 <codeline lineno="53"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="60" refid="classini__builder_1afa27f3ea82d3b0a156667c231fca7af8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classini__builder_1afa27f3ea82d3b0a156667c231fca7af8" kindref="member">ini_builder</ref>();</highlight></codeline>
+<codeline lineno="60" refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref>();</highlight></codeline>
 <codeline lineno="61"><highlight class="normal"></highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classini__builder_1afa27f3ea82d3b0a156667c231fca7af8" kindref="member">ini_builder</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classini__builder_1afa27f3ea82d3b0a156667c231fca7af8" kindref="member">ini_builder</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classini__builder_1afa27f3ea82d3b0a156667c231fca7af8" kindref="member">ini_builder</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classini__builder_1afa27f3ea82d3b0a156667c231fca7af8" kindref="member">ini_builder</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"></highlight></codeline>
-<codeline lineno="69" refid="classini__builder_1a7492177a96534afdb9211bcb0a06e8c7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classini__builder_1a7492177a96534afdb9211bcb0a06e8c7" kindref="member">ini_builder</ref>(<ref refid="classini__builder_1afa27f3ea82d3b0a156667c231fca7af8" kindref="member">ini_builder</ref>&amp;&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="69" refid="classneforce_1_1ini__builder_1a235d07c9dbf13bf0a91750859ace1c0c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1ini__builder_1a235d07c9dbf13bf0a91750859ace1c0c" kindref="member">ini_builder</ref>(<ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref>&amp;&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="70"><highlight class="normal"></highlight></codeline>
-<codeline lineno="76" refid="classini__builder_1a5b510ceb6d7b7209e0ccf3a4de43a974" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classini__builder_1afa27f3ea82d3b0a156667c231fca7af8" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classini__builder_1a5b510ceb6d7b7209e0ccf3a4de43a974" kindref="member">operator=</ref>(<ref refid="classini__builder_1afa27f3ea82d3b0a156667c231fca7af8" kindref="member">ini_builder</ref>&amp;&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="76" refid="classneforce_1_1ini__builder_1ad3ea4509dc1d6572da5872a8e8591d76" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classneforce_1_1ini__builder_1ad3ea4509dc1d6572da5872a8e8591d76" kindref="member">operator=</ref>(<ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref>&amp;&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="77"><highlight class="normal"></highlight></codeline>
-<codeline lineno="86" refid="classini__builder_1a44b845c6e271597ff3777dfb5ad79384" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classini__builder_1afa27f3ea82d3b0a156667c231fca7af8" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classini__builder_1a44b845c6e271597ff3777dfb5ad79384" kindref="member">begin_section</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" kindref="member">name</ref>);</highlight></codeline>
+<codeline lineno="86" refid="classneforce_1_1ini__builder_1ae502f406a5f4eb9067a13a1c6c0aaeeb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classneforce_1_1ini__builder_1ae502f406a5f4eb9067a13a1c6c0aaeeb" kindref="member">begin_section</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>name);</highlight></codeline>
 <codeline lineno="87"><highlight class="normal"></highlight></codeline>
-<codeline lineno="94" refid="classini__builder_1a91ce1b6ebe2327cd2d9bfd2abb6ec06c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classini__builder_1afa27f3ea82d3b0a156667c231fca7af8" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classini__builder_1a91ce1b6ebe2327cd2d9bfd2abb6ec06c" kindref="member">end_section</ref>();</highlight></codeline>
+<codeline lineno="94" refid="classneforce_1_1ini__builder_1ab55275a012eb726e691e560c5b84b1c2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classneforce_1_1ini__builder_1ab55275a012eb726e691e560c5b84b1c2" kindref="member">end_section</ref>();</highlight></codeline>
 <codeline lineno="95"><highlight class="normal"></highlight></codeline>
-<codeline lineno="104" refid="classini__builder_1ae6ec40c1674af57e665cc76a396bb767" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classini__builder_1afa27f3ea82d3b0a156667c231fca7af8" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classini__builder_1ae6ec40c1674af57e665cc76a396bb767" kindref="member">key</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="classini__builder_1ae6ec40c1674af57e665cc76a396bb767" kindref="member">key</ref>);</highlight></codeline>
+<codeline lineno="104" refid="classneforce_1_1ini__builder_1abd9acddb83f68f65424a1bdeeb458d94" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classneforce_1_1ini__builder_1abd9acddb83f68f65424a1bdeeb458d94" kindref="member">key</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="classneforce_1_1ini__builder_1abd9acddb83f68f65424a1bdeeb458d94" kindref="member">key</ref>);</highlight></codeline>
 <codeline lineno="105"><highlight class="normal"></highlight></codeline>
-<codeline lineno="112" refid="classini__builder_1a09330734c323b5fb5de6be2ab390f68f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classini__builder_1afa27f3ea82d3b0a156667c231fca7af8" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classini__builder_1a09330734c323b5fb5de6be2ab390f68f" kindref="member">value</ref>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="classini__builder_1a09330734c323b5fb5de6be2ab390f68f" kindref="member">value</ref>);</highlight></codeline>
+<codeline lineno="112" refid="classneforce_1_1ini__builder_1a91d9e23e97672b7bbf2e01e8b378c249" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classneforce_1_1ini__builder_1a91d9e23e97672b7bbf2e01e8b378c249" kindref="member">value</ref>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1ini__builder_1a91d9e23e97672b7bbf2e01e8b378c249" kindref="member">value</ref>);</highlight></codeline>
 <codeline lineno="113"><highlight class="normal"></highlight></codeline>
-<codeline lineno="120" refid="classini__builder_1afc06392c5a3748f6a1c2ebb72a53f28f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classini__builder_1afa27f3ea82d3b0a156667c231fca7af8" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classini__builder_1afc06392c5a3748f6a1c2ebb72a53f28f" kindref="member">value</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="classini__builder_1a09330734c323b5fb5de6be2ab390f68f" kindref="member">value</ref>)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>this-&gt;<ref refid="classini__builder_1afc06392c5a3748f6a1c2ebb72a53f28f" kindref="member">value</ref>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal">(value));<sp/>}</highlight></codeline>
+<codeline lineno="120" refid="classneforce_1_1ini__builder_1a1be5c13d5b9ddd3273f401b8731ae933" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classneforce_1_1ini__builder_1a1be5c13d5b9ddd3273f401b8731ae933" kindref="member">value</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="classneforce_1_1ini__builder_1a91d9e23e97672b7bbf2e01e8b378c249" kindref="member">value</ref>)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>this-&gt;<ref refid="classneforce_1_1ini__builder_1a1be5c13d5b9ddd3273f401b8731ae933" kindref="member">value</ref>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal">(value));<sp/>}</highlight></codeline>
 <codeline lineno="121"><highlight class="normal"></highlight></codeline>
-<codeline lineno="128" refid="classini__builder_1a4db23b4aee582ad4bd453b55d48c0433" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classini__builder_1afa27f3ea82d3b0a156667c231fca7af8" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classini__builder_1a4db23b4aee582ad4bd453b55d48c0433" kindref="member">value</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="classini__builder_1a09330734c323b5fb5de6be2ab390f68f" kindref="member">value</ref>)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>this-&gt;<ref refid="classini__builder_1a4db23b4aee582ad4bd453b55d48c0433" kindref="member">value</ref>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal">(value));<sp/>}</highlight></codeline>
+<codeline lineno="128" refid="classneforce_1_1ini__builder_1ad7e609f82eb27d41e4bc448ca0fcefa6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classneforce_1_1ini__builder_1ad7e609f82eb27d41e4bc448ca0fcefa6" kindref="member">value</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/><ref refid="classneforce_1_1ini__builder_1a91d9e23e97672b7bbf2e01e8b378c249" kindref="member">value</ref>)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>this-&gt;<ref refid="classneforce_1_1ini__builder_1ad7e609f82eb27d41e4bc448ca0fcefa6" kindref="member">value</ref>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal">(value));<sp/>}</highlight></codeline>
 <codeline lineno="129"><highlight class="normal"></highlight></codeline>
-<codeline lineno="136" refid="classini__builder_1a071e60c05ccc86710d27480398d32b4f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classini__builder_1afa27f3ea82d3b0a156667c231fca7af8" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classini__builder_1a071e60c05ccc86710d27480398d32b4f" kindref="member">value</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classini__builder_1a09330734c323b5fb5de6be2ab390f68f" kindref="member">value</ref>);</highlight></codeline>
+<codeline lineno="136" refid="classneforce_1_1ini__builder_1aabee63c7dc66a14a4818e6f69cb41456" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classneforce_1_1ini__builder_1aabee63c7dc66a14a4818e6f69cb41456" kindref="member">value</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1ini__builder_1a91d9e23e97672b7bbf2e01e8b378c249" kindref="member">value</ref>);</highlight></codeline>
 <codeline lineno="137"><highlight class="normal"></highlight></codeline>
-<codeline lineno="144" refid="classini__builder_1a9009d53d2d348912fb2bf40f56da982e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classini__builder_1afa27f3ea82d3b0a156667c231fca7af8" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classini__builder_1a9009d53d2d348912fb2bf40f56da982e" kindref="member">value</ref>(<ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref><sp/><ref refid="classini__builder_1a09330734c323b5fb5de6be2ab390f68f" kindref="member">value</ref>);</highlight></codeline>
+<codeline lineno="144" refid="classneforce_1_1ini__builder_1a2b811b2b77c74057fdfd1c65d0ceb36f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classneforce_1_1ini__builder_1a2b811b2b77c74057fdfd1c65d0ceb36f" kindref="member">value</ref>(<ref refid="group___core_types_1ga0b098d32ebd9cc922390914e765ca674" kindref="member">int64_t</ref><sp/><ref refid="classneforce_1_1ini__builder_1a91d9e23e97672b7bbf2e01e8b378c249" kindref="member">value</ref>);</highlight></codeline>
 <codeline lineno="145"><highlight class="normal"></highlight></codeline>
-<codeline lineno="152" refid="classini__builder_1a3157be364ab0321ada26356be193f641" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classini__builder_1afa27f3ea82d3b0a156667c231fca7af8" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classini__builder_1a3157be364ab0321ada26356be193f641" kindref="member">value</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classini__builder_1a09330734c323b5fb5de6be2ab390f68f" kindref="member">value</ref>);</highlight></codeline>
+<codeline lineno="152" refid="classneforce_1_1ini__builder_1a90b4955dbce5ae73216ee928e9de86e9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classneforce_1_1ini__builder_1a90b4955dbce5ae73216ee928e9de86e9" kindref="member">value</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1ini__builder_1a91d9e23e97672b7bbf2e01e8b378c249" kindref="member">value</ref>);</highlight></codeline>
 <codeline lineno="153"><highlight class="normal"></highlight></codeline>
-<codeline lineno="160" refid="classini__builder_1a5c3dd9ce22280984d8bd7d3f69da70ae" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classini__builder_1afa27f3ea82d3b0a156667c231fca7af8" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classini__builder_1a5c3dd9ce22280984d8bd7d3f69da70ae" kindref="member">value</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classini__builder_1a09330734c323b5fb5de6be2ab390f68f" kindref="member">value</ref>);</highlight></codeline>
+<codeline lineno="160" refid="classneforce_1_1ini__builder_1a366614b6315a7217ebe8faba81aeea83" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classneforce_1_1ini__builder_1a366614b6315a7217ebe8faba81aeea83" kindref="member">value</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1ini__builder_1a91d9e23e97672b7bbf2e01e8b378c249" kindref="member">value</ref>);</highlight></codeline>
 <codeline lineno="161"><highlight class="normal"></highlight></codeline>
-<codeline lineno="169" refid="classini__builder_1a3165ddf148f06f35a7a7b49e774af646" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classini__builder_1afa27f3ea82d3b0a156667c231fca7af8" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classini__builder_1a3165ddf148f06f35a7a7b49e774af646" kindref="member">value</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classini__builder_1a09330734c323b5fb5de6be2ab390f68f" kindref="member">value</ref>,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>precision);</highlight></codeline>
+<codeline lineno="169" refid="classneforce_1_1ini__builder_1afddb876789046448291bcb26a76a37a8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classneforce_1_1ini__builder_1afddb876789046448291bcb26a76a37a8" kindref="member">value</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1ini__builder_1a91d9e23e97672b7bbf2e01e8b378c249" kindref="member">value</ref>,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>precision);</highlight></codeline>
 <codeline lineno="170"><highlight class="normal"></highlight></codeline>
-<codeline lineno="181" refid="classini__builder_1adba2bba2f7102d2581704291ed3390d0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classini__builder_1afa27f3ea82d3b0a156667c231fca7af8" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classini__builder_1adba2bba2f7102d2581704291ed3390d0" kindref="member">value_section</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" kindref="member">name</ref>,<sp/><ref refid="classfunction" kindref="compound">function</ref>&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">(<ref refid="classini__builder_1afa27f3ea82d3b0a156667c231fca7af8" kindref="member">ini_builder</ref>&amp;)&gt;<sp/>func);</highlight></codeline>
+<codeline lineno="181" refid="classneforce_1_1ini__builder_1a6720fe41c155c32a394656a03f5ae271" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref>&amp;<sp/><ref refid="classneforce_1_1ini__builder_1a6720fe41c155c32a394656a03f5ae271" kindref="member">value_section</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>name,<sp/><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">(<ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref>&amp;)&gt;<sp/>func);</highlight></codeline>
 <codeline lineno="182"><highlight class="normal"></highlight></codeline>
-<codeline lineno="190" refid="classini__builder_1a4370a91dbf524a84823e72510cb39ac2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;ini_document&gt;</ref><sp/><ref refid="classini__builder_1a4370a91dbf524a84823e72510cb39ac2" kindref="member">build</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="190" refid="classneforce_1_1ini__builder_1a8eafc547dcc54b1c0bd9b0266ea19fd9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr&lt;ini_document&gt;</ref><sp/><ref refid="classneforce_1_1ini__builder_1a8eafc547dcc54b1c0bd9b0266ea19fd9" kindref="member">build</ref>()<sp/>noexcept;</highlight></codeline>
 <codeline lineno="191"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="192"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>IniConfig</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="194"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>ConfigFormat</highlight><highlight class="normal"></highlight></codeline>

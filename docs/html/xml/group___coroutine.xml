@@ -3,17 +3,17 @@
   <compounddef id="group___coroutine" kind="group">
     <compoundname>Coroutine</compoundname>
     <title>协程</title>
-    <innerclass refid="structcoroutine__traits" prot="public">coroutine_traits</innerclass>
-    <innerclass refid="structcoroutine__traits__impl" prot="public">coroutine_traits_impl</innerclass>
-    <innerclass refid="structcoroutine__traits__impl_3_01_res_00_01void__t_3_01typename_01_res_1_1promise__type_01_4_01_4" prot="public">coroutine_traits_impl&lt; Res, void_t&lt; typename Res::promise_type &gt; &gt;</innerclass>
-    <innerclass refid="structsuspend__always" prot="public">suspend_always</innerclass>
-    <innerclass refid="structsuspend__never" prot="public">suspend_never</innerclass>
-    <innerclass refid="classcancellation__token" prot="public">cancellation_token</innerclass>
-    <innerclass refid="classgenerator" prot="public">generator</innerclass>
-    <innerclass refid="classtask" prot="public">task</innerclass>
-    <innerclass refid="classtask_3_01void_01_4" prot="public">task&lt; void &gt;</innerclass>
+    <innerclass refid="structneforce_1_1coroutine__traits" prot="public">neforce::coroutine_traits</innerclass>
+    <innerclass refid="structneforce_1_1coroutine__traits__impl" prot="public">neforce::coroutine_traits_impl</innerclass>
+    <innerclass refid="structneforce_1_1coroutine__traits__impl_3_01_res_00_01void__t_3_01typename_01_res_1_1promise__type_01_4_01_4" prot="public">neforce::coroutine_traits_impl&lt; Res, void_t&lt; typename Res::promise_type &gt; &gt;</innerclass>
+    <innerclass refid="structneforce_1_1suspend__always" prot="public">neforce::suspend_always</innerclass>
+    <innerclass refid="structneforce_1_1suspend__never" prot="public">neforce::suspend_never</innerclass>
+    <innerclass refid="classneforce_1_1cancellation__token" prot="public">neforce::cancellation_token</innerclass>
+    <innerclass refid="classneforce_1_1generator" prot="public">neforce::generator</innerclass>
+    <innerclass refid="classneforce_1_1task" prot="public">neforce::task</innerclass>
+    <innerclass refid="classneforce_1_1task_3_01void_01_4" prot="public">neforce::task&lt; void &gt;</innerclass>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="group___coroutine_1ga6b28debebaa0f1d57331130e5ccb6181" prot="public" static="no">
+      <memberdef kind="typedef" id="group___coroutine_1gaeab1ef2c1054244fa37d634f805cf95d" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename Promise</type>
@@ -21,9 +21,10 @@
           </param>
         </templateparamlist>
         <type>std::coroutine_handle&lt; Promise &gt;</type>
-        <definition>using coroutine_handle = std::coroutine_handle&lt;Promise&gt;</definition>
+        <definition>using neforce::coroutine_handle = std::coroutine_handle&lt;Promise&gt;</definition>
         <argsstring></argsstring>
         <name>coroutine_handle</name>
+        <qualifiedname>neforce::coroutine_handle</qualifiedname>
         <briefdescription>
 <para>协程句柄 </para>
         </briefdescription>
@@ -43,11 +44,12 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" line="65" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" bodystart="65" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___coroutine_1ga703e941b1a9f15e23513daa24ed4d587" prot="public" static="no">
-        <type><ref refid="group___coroutine_1ga8688aa61087dce3a6914a4d6c7f7b55a" kindref="member">std::noop_coroutine_handle</ref></type>
-        <definition>using noop_coroutine_promise = std::noop_coroutine_handle</definition>
+      <memberdef kind="typedef" id="group___coroutine_1gac292f20982d43773fc9cb6c9d3050478" prot="public" static="no">
+        <type>std::noop_coroutine_handle</type>
+        <definition>using neforce::noop_coroutine_promise = std::noop_coroutine_handle</definition>
         <argsstring></argsstring>
         <name>noop_coroutine_promise</name>
+        <qualifiedname>neforce::noop_coroutine_promise</qualifiedname>
         <briefdescription>
 <para>空操作协程的promise类型别名 </para>
         </briefdescription>
@@ -57,11 +59,12 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" line="96" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" bodystart="96" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___coroutine_1ga8688aa61087dce3a6914a4d6c7f7b55a" prot="public" static="no">
-        <type><ref refid="group___coroutine_1ga6b28debebaa0f1d57331130e5ccb6181" kindref="member">coroutine_handle</ref>&lt; <ref refid="group___coroutine_1ga703e941b1a9f15e23513daa24ed4d587" kindref="member">noop_coroutine_promise</ref> &gt;</type>
-        <definition>using noop_coroutine_handle = coroutine_handle&lt;noop_coroutine_promise&gt;</definition>
+      <memberdef kind="typedef" id="group___coroutine_1gad965f68ae41ad4d85bebc654c68ba00f" prot="public" static="no">
+        <type>coroutine_handle&lt; noop_coroutine_promise &gt;</type>
+        <definition>using neforce::noop_coroutine_handle = coroutine_handle&lt;noop_coroutine_promise&gt;</definition>
         <argsstring></argsstring>
         <name>noop_coroutine_handle</name>
+        <qualifiedname>neforce::noop_coroutine_handle</qualifiedname>
         <briefdescription>
 <para>空操作协程句柄类型别名 </para>
         </briefdescription>
@@ -73,11 +76,12 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___coroutine_1ga43aa77a087a863d0064283cc5871fde7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type><ref refid="group___coroutine_1ga8688aa61087dce3a6914a4d6c7f7b55a" kindref="member">noop_coroutine_handle</ref></type>
-        <definition>noop_coroutine_handle noop_coroutine</definition>
+      <memberdef kind="function" id="group___coroutine_1ga24db9cf2e6018ed5df886af0e687a506" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>noop_coroutine_handle</type>
+        <definition>noop_coroutine_handle neforce::noop_coroutine</definition>
         <argsstring>() noexcept</argsstring>
         <name>noop_coroutine</name>
+        <qualifiedname>neforce::noop_coroutine</qualifiedname>
         <briefdescription>
 <para>获取空操作协程句柄 </para>
         </briefdescription>
@@ -89,8 +93,10 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" line="110" column="30" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" bodystart="110" bodyend="110"/>
+        <references refid="group___coroutine_1ga24db9cf2e6018ed5df886af0e687a506" compoundref="coroutine_8hpp" startline="110" endline="110">neforce::noop_coroutine</references>
+        <referencedby refid="group___coroutine_1ga24db9cf2e6018ed5df886af0e687a506" compoundref="coroutine_8hpp" startline="110" endline="110">neforce::noop_coroutine</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___coroutine_1gaf1931de6c9023a80830659338702aed7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___coroutine_1ga23afab5fba3438cba469a2e3582e9691" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename...</type>
@@ -98,10 +104,11 @@
             <defname>Tasks</defname>
           </param>
         </templateparamlist>
-        <type><ref refid="classtask" kindref="compound">task</ref>&lt; tuple&lt; typename Tasks::promise_type::value_type... &gt; &gt;</type>
-        <definition>task&lt; tuple&lt; typename Tasks::promise_type::value_type... &gt; &gt; when_all</definition>
+        <type>task&lt; tuple&lt; typename Tasks::promise_type::value_type... &gt; &gt;</type>
+        <definition>task&lt; tuple&lt; typename Tasks::promise_type::value_type... &gt; &gt; neforce::when_all</definition>
         <argsstring>(Tasks... tasks)</argsstring>
         <name>when_all</name>
+        <qualifiedname>neforce::when_all</qualifiedname>
         <param>
           <type>Tasks...</type>
           <declname>tasks</declname>
@@ -135,11 +142,13 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="875" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="875" bodyend="882"/>
-        <references refid="group___async_1gac14e5033806977e33886d78a20feffaa" compoundref="future_8hpp" startline="1189" endline="1192">get</references>
-        <references refid="group___tuple_1ga32d396f9e5ab1598f5a790bd2264c7f3" compoundref="tuple_8hpp" startline="750" endline="753">make_tuple</references>
-        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___async_1ga62fae7780686a01cf8f94a914db3e161" compoundref="future_8hpp" startline="1189" endline="1192">neforce::get</references>
+        <references refid="group___tuple_1gac9c85283cadcb5ea85eb63f853f53f48" compoundref="tuple_8hpp" startline="750" endline="753">neforce::make_tuple</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="group___coroutine_1ga23afab5fba3438cba469a2e3582e9691" compoundref="generator_8hpp" startline="875" endline="882">neforce::when_all</references>
+        <referencedby refid="group___coroutine_1ga23afab5fba3438cba469a2e3582e9691" compoundref="generator_8hpp" startline="875" endline="882">neforce::when_all</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___coroutine_1gaeeb129739f934bdf8c9e19059ba3ee29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___coroutine_1gacd16f093dc3ec261bf6e2fe846e40d5d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -148,20 +157,21 @@
             <type>typename Factory</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classtask" kindref="compound">task</ref>&lt; T &gt;</type>
-        <definition>task&lt; T &gt; retry</definition>
+        <type>task&lt; T &gt;</type>
+        <definition>task&lt; T &gt; neforce::retry</definition>
         <argsstring>(Factory factory, const size_t max_attempts, const function&lt; bool(const exception_ptr &amp;)&gt; &amp;should_retry={})</argsstring>
         <name>retry</name>
+        <qualifiedname>neforce::retry</qualifiedname>
         <param>
           <type>Factory</type>
           <declname>factory</declname>
         </param>
         <param>
-          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>const size_t</type>
           <declname>max_attempts</declname>
         </param>
         <param>
-          <type>const <ref refid="classfunction" kindref="compound">function</ref>&lt; bool(const <ref refid="classexception__ptr" kindref="compound">exception_ptr</ref> &amp;)&gt; &amp;</type>
+          <type>const function&lt; bool(const exception_ptr &amp;)&gt; &amp;</type>
           <declname>should_retry</declname>
           <defval>{}</defval>
         </param>
@@ -218,6 +228,8 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="897" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="897" bodyend="919"/>
+        <references refid="group___coroutine_1gacd16f093dc3ec261bf6e2fe846e40d5d" compoundref="generator_8hpp" startline="897" endline="919">neforce::retry</references>
+        <referencedby refid="group___coroutine_1gacd16f093dc3ec261bf6e2fe846e40d5d" compoundref="generator_8hpp" startline="897" endline="919">neforce::retry</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

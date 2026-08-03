@@ -3,26 +3,27 @@
   <compounddef id="group___swap_utility" kind="group">
     <compoundname>SwapUtility</compoundname>
     <title>交换性工具</title>
-    <innerclass refid="structis__swappable" prot="public">is_swappable</innerclass>
-    <innerclass refid="structis__nothrow__swappable" prot="public">is_nothrow_swappable</innerclass>
-    <innerclass refid="structis__swappable__from" prot="public">is_swappable_from</innerclass>
-    <innerclass refid="structis__swappable__with" prot="public">is_swappable_with</innerclass>
-    <innerclass refid="structis__nothrow__swappable__from" prot="public">is_nothrow_swappable_from</innerclass>
-    <innerclass refid="structis__nothrow__swappable__with" prot="public">is_nothrow_swappable_with</innerclass>
-    <innerclass refid="structis___a_d_l__swappable" prot="public">is_ADL_swappable</innerclass>
-    <innerclass refid="structis__trivially__swappable" prot="public">is_trivially_swappable</innerclass>
+    <innerclass refid="structneforce_1_1is__swappable" prot="public">neforce::is_swappable</innerclass>
+    <innerclass refid="structneforce_1_1is__nothrow__swappable" prot="public">neforce::is_nothrow_swappable</innerclass>
+    <innerclass refid="structneforce_1_1is__swappable__from" prot="public">neforce::is_swappable_from</innerclass>
+    <innerclass refid="structneforce_1_1is__swappable__with" prot="public">neforce::is_swappable_with</innerclass>
+    <innerclass refid="structneforce_1_1is__nothrow__swappable__from" prot="public">neforce::is_nothrow_swappable_from</innerclass>
+    <innerclass refid="structneforce_1_1is__nothrow__swappable__with" prot="public">neforce::is_nothrow_swappable_with</innerclass>
+    <innerclass refid="structneforce_1_1is___a_d_l__swappable" prot="public">neforce::is_ADL_swappable</innerclass>
+    <innerclass refid="structneforce_1_1is__trivially__swappable" prot="public">neforce::is_trivially_swappable</innerclass>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="group___swap_utility_1ga6a08681ad0c17b00662bfd185a081335" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___swap_utility_1ga7eca0ea572a4920d34729ba48b45ca82" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_swappable_v</definition>
+        <definition>bool neforce::is_swappable_v</definition>
         <argsstring></argsstring>
         <name>is_swappable_v</name>
-        <initializer>= <ref refid="structis__swappable" kindref="compound">is_swappable</ref>&lt;T&gt;::value</initializer>
+        <qualifiedname>neforce::is_swappable_v</qualifiedname>
+        <initializer>= is_swappable&lt;T&gt;::value</initializer>
         <briefdescription>
 <para>is_swappable的便捷变量模板 </para>
         </briefdescription>
@@ -32,17 +33,18 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3925" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3925" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="group___swap_utility_1gaf740a9b650d7a3063e9414c3c50ffdb5" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___swap_utility_1gafcc46bf052d9d5c47c99d6a20dadd5bc" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_nothrow_swappable_v</definition>
+        <definition>bool neforce::is_nothrow_swappable_v</definition>
         <argsstring></argsstring>
         <name>is_nothrow_swappable_v</name>
-        <initializer>= <ref refid="structis__nothrow__swappable" kindref="compound">is_nothrow_swappable</ref>&lt;T&gt;::value</initializer>
+        <qualifiedname>neforce::is_nothrow_swappable_v</qualifiedname>
+        <initializer>= is_nothrow_swappable&lt;T&gt;::value</initializer>
         <briefdescription>
 <para>is_nothrow_swappable的便捷变量模板 </para>
         </briefdescription>
@@ -51,48 +53,49 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3967" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3967" bodyend="-1"/>
-        <referencedby refid="classlist_1aacbe0fc64dc761fbdfdb352f16aab53d" compoundref="list_8hpp" startline="357" endline="360">list&lt; pair&lt; Key, Value &gt; &gt;::list</referencedby>
-        <referencedby refid="classlist_1a2b5b7c9b7c38fe95b546a8d0427add7b" compoundref="list_8hpp" startline="367" endline="375">list&lt; pair&lt; Key, Value &gt; &gt;::operator=</referencedby>
-        <referencedby refid="classset_1aa88cfdc2731f7a0b0f034cc90c7bd58d" compoundref="container_2set_8hpp" startline="110" endline="114">set&lt; Key, Compare, Alloc &gt;::operator=</referencedby>
-        <referencedby refid="classsparse__set_1a1b08af04e3873815051283d9d0072c21" compoundref="sparse__set_8hpp" startline="113" endline="117">sparse_set&lt; Key, Compare, Alloc &gt;::operator=</referencedby>
-        <referencedby refid="classvector_1ac428305220c8324bbd4e6fa1a073365b" compoundref="vector_8hpp" startline="506" endline="515">vector&lt; Value, Alloc &gt;::operator=</referencedby>
-        <referencedby refid="classarray_1ac66ab59f1e082b018e1dd19345271215" compoundref="array_8hpp" startline="390" endline="390">array&lt; byte_t, MAC_LEN &gt;::swap</referencedby>
-        <referencedby refid="structcompressed__pair_1a04ab8d4b0d667c02ea67b5901fd429b6" compoundref="compressed__pair_8hpp" startline="136" endline="136">compressed_pair&lt; IfEmpty, T, Compressed &gt;::swap</referencedby>
-        <referencedby refid="classdeque_1a2bc9e5114adc88054d962dd466a18920" compoundref="deque_8hpp" startline="1411" endline="1420">deque&lt; T, Alloc, BufSize &gt;::swap</referencedby>
-        <referencedby refid="classflat__unordered__map_1a71114de86b99b2b33c6d76b28da09912" compoundref="flat__unordered__map_8hpp" startline="511" endline="511">flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::swap</referencedby>
-        <referencedby refid="classflat__unordered__multimap_1a23f68436b25eddbd872880eb680a9b03" compoundref="flat__unordered__multimap_8hpp" startline="470" endline="470">flat_unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::swap</referencedby>
-        <referencedby refid="classflat__unordered__multiset_1a24bab5e8b847d54ad0cddef6eff13da3" compoundref="flat__unordered__multiset_8hpp" startline="465" endline="465">flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::swap</referencedby>
-        <referencedby refid="classflat__unordered__set_1acaefd33ba6761b7c3e52e388cad1e847" compoundref="flat__unordered__set_8hpp" startline="463" endline="463">flat_unordered_set&lt; Value, HashFcn, EqualKey, Alloc &gt;::swap</referencedby>
-        <referencedby refid="classhashtable_1ad4653c3ae73acfeb1f22cee7b8796691" compoundref="hashtable_8hpp" startline="1551" endline="1562">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::swap</referencedby>
-        <referencedby refid="classlist_1a0fd9945f22438820e69f95b2218ce019" compoundref="list_8hpp" startline="792" endline="795">list&lt; pair&lt; Key, Value &gt; &gt;::swap</referencedby>
-        <referencedby refid="classmultimap_1afffcff4cad1b5f690b1019ea607a87b4" compoundref="multimap_8hpp" startline="463" endline="463">multimap&lt; Key, T, Compare, Alloc &gt;::swap</referencedby>
-        <referencedby refid="classmultiset_1a725d9e1b58995fc9c52b1329e46ed86a" compoundref="multiset_8hpp" startline="433" endline="433">multiset&lt; Key, Compare, Alloc &gt;::swap</referencedby>
-        <referencedby refid="classoptional_1a3f7813ad250922eb4f3b267d25cdc191" compoundref="optional_8hpp" startline="793" endline="807">optional&lt; T &gt;::swap</referencedby>
-        <referencedby refid="classpriority__queue_1a1c4626a2521164be8007106c44c4d59a" compoundref="priority__queue_8hpp" startline="240" endline="242">priority_queue&lt; T, Sequence, Compare &gt;::swap</referencedby>
-        <referencedby refid="classqueue_1ae27e3606a47a29de4d4c0554fbf03c82" compoundref="queue_8hpp" startline="189" endline="189">queue&lt; T, Sequence &gt;::swap</referencedby>
-        <referencedby refid="classrb__tree_1ad580954ee75f0f3484d40a58407061bc" compoundref="rb__tree_8hpp" startline="1560" endline="1566">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::swap</referencedby>
-        <referencedby refid="classsparse__multimap_1a0c928f06bfcda273407c4a6126a49069" compoundref="sparse__multimap_8hpp" startline="483" endline="483">sparse_multimap&lt; Key, T, Compare, Alloc &gt;::swap</referencedby>
-        <referencedby refid="classsparse__multiset_1a62bfc48b8c09e588a40428df990dc8db" compoundref="sparse__multiset_8hpp" startline="453" endline="453">sparse_multiset&lt; Key, Compare, Alloc &gt;::swap</referencedby>
-        <referencedby refid="classsparse__vector_1ac3528eb4cbe68ba718e21254bda9a446" compoundref="sparse__vector_8hpp" startline="801" endline="806">sparse_vector&lt; Key, pair&lt; Key, T &gt;, select1st&lt; pair&lt; Key, T &gt; &gt;, Compare, Alloc &gt;::swap</referencedby>
-        <referencedby refid="classstack_1aa044696ece684e671034971e462cba7d" compoundref="stack_8hpp" startline="134" endline="134">stack&lt; T, Sequence &gt;::swap</referencedby>
-        <referencedby refid="classunordered__map_1ad934b7ae487b45cd290c13fbf87c909f" compoundref="unordered__map_8hpp" startline="504" endline="504">unordered_map&lt; string, any &gt;::swap</referencedby>
-        <referencedby refid="classunordered__multimap_1a6c4a7ced9a0f2d1e906343a1d6621e3f" compoundref="unordered__multimap_8hpp" startline="462" endline="462">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::swap</referencedby>
-        <referencedby refid="classunordered__multiset_1a672d778caa363664c77c7b2a8ed8c927" compoundref="unordered__multiset_8hpp" startline="413" endline="413">unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::swap</referencedby>
-        <referencedby refid="classunordered__set_1aad14720d10e563bbe9233c16bb23e314" compoundref="unordered__set_8hpp" startline="443" endline="443">unordered_set&lt; Value, HashFcn, EqualKey, Alloc &gt;::swap</referencedby>
-        <referencedby refid="classvector_1a1d17cda4f34b49cb366eeaccca3e98c4" compoundref="vector_8hpp" startline="1193" endline="1201">vector&lt; Value, Alloc &gt;::swap</referencedby>
-        <referencedby refid="classvector_1a254f91b260f04d056c06bb0a01cbb915" compoundref="vector_8hpp" startline="496" endline="498">vector&lt; Value, Alloc &gt;::vector</referencedby>
+        <referencedby refid="classneforce_1_1list_1a1689a7e8ebd085100876080997ce1736" compoundref="list_8hpp" startline="357" endline="360">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::list</referencedby>
+        <referencedby refid="classneforce_1_1list_1a9dd56edd6208b374e59b99a2f19551db" compoundref="list_8hpp" startline="367" endline="375">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1set_1aef95b7884425c9d775d4fb943cbc553f" compoundref="container_2set_8hpp" startline="110" endline="114">neforce::set&lt; Key, Compare, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1sparse__set_1a88e6787954da0cb73fa1798dc8ca49d1" compoundref="sparse__set_8hpp" startline="113" endline="117">neforce::sparse_set&lt; Key, Compare, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1vector_1a7d6c41fc98179ef1c1eb5be036429c61" compoundref="vector_8hpp" startline="506" endline="515">neforce::vector&lt; Value, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1array_1a2887bdae8bc7a5dd2de245a2738075a7" compoundref="array_8hpp" startline="390" endline="390">neforce::array&lt; byte_t, MAC_LEN &gt;::swap</referencedby>
+        <referencedby refid="structneforce_1_1compressed__pair_1a7b23cbddee5c09cbe8e9b343e8313886" compoundref="compressed__pair_8hpp" startline="136" endline="136">neforce::compressed_pair&lt; IfEmpty, T, Compressed &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1deque_1a077989e7eb2888c738b2d4169af55094" compoundref="deque_8hpp" startline="1411" endline="1420">neforce::deque&lt; T, Alloc, BufSize &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1flat__unordered__map_1aaef7a038284b7e5f922eb44d5dd6f38e" compoundref="flat__unordered__map_8hpp" startline="511" endline="511">neforce::flat_unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1flat__unordered__multimap_1ade94fb517eea978d8afcdc86be72ef10" compoundref="flat__unordered__multimap_8hpp" startline="470" endline="470">neforce::flat_unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1flat__unordered__multiset_1aa1939af9634c93a2ce1c3340580a0113" compoundref="flat__unordered__multiset_8hpp" startline="465" endline="465">neforce::flat_unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1flat__unordered__set_1a50fffb987d7cbd066a864d03527c1d8a" compoundref="flat__unordered__set_8hpp" startline="463" endline="463">neforce::flat_unordered_set&lt; Value, HashFcn, EqualKey, Alloc &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1hashtable_1a6ad7b84bc8808117c1d3ca458c88a835" compoundref="hashtable_8hpp" startline="1551" endline="1562">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1list_1afc01e1bd6f9388aa8e505b2131b9566a" compoundref="list_8hpp" startline="792" endline="795">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1multimap_1a713cdb8d784d525326b222ad2751d329" compoundref="multimap_8hpp" startline="463" endline="463">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1multiset_1abedff08e694afe8c3407a9a46c79340d" compoundref="multiset_8hpp" startline="433" endline="433">neforce::multiset&lt; Key, Compare, Alloc &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1optional_1ae41c15b0fd33450d99fbb9a3a1194953" compoundref="optional_8hpp" startline="793" endline="807">neforce::optional&lt; T &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1priority__queue_1a1c9cdc2231829ad13cb08086141ec4d6" compoundref="priority__queue_8hpp" startline="240" endline="242">neforce::priority_queue&lt; T, Sequence, Compare &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1queue_1a7fe4948e89791f0fb8d9c019c7de54d1" compoundref="queue_8hpp" startline="189" endline="189">neforce::queue&lt; T, Sequence &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1rb__tree_1a63c93c9783f9d88aafd77dd7ca90f378" compoundref="rb__tree_8hpp" startline="1560" endline="1566">neforce::rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1sparse__multimap_1ab1a04f8f055abd5a5b54309fb6e32c19" compoundref="sparse__multimap_8hpp" startline="483" endline="483">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1sparse__multiset_1a450e55e6da64ac99c4df20f9a9a4de00" compoundref="sparse__multiset_8hpp" startline="453" endline="453">neforce::sparse_multiset&lt; Key, Compare, Alloc &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1sparse__vector_1afba65bf6a2ddac79c9d6ad1194defc50" compoundref="sparse__vector_8hpp" startline="801" endline="806">neforce::sparse_vector&lt; Key, pair&lt; Key, T &gt;, select1st&lt; pair&lt; Key, T &gt; &gt;, Compare, Alloc &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1stack_1a6bc7a7bac8729840549d206c6cc1892a" compoundref="stack_8hpp" startline="134" endline="134">neforce::stack&lt; T, Sequence &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1unordered__map_1a4955e038ff9270daf22c76c511a810c9" compoundref="unordered__map_8hpp" startline="504" endline="504">neforce::unordered_map&lt; string, any &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1unordered__multimap_1a94b634db96200e088d494dffcc623ef4" compoundref="unordered__multimap_8hpp" startline="462" endline="462">neforce::unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1unordered__multiset_1a9a56bd3c75790ccb387cb2e56a4aab97" compoundref="unordered__multiset_8hpp" startline="413" endline="413">neforce::unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1unordered__set_1a7ef2a01a1335dc4347a24e4de58a5b2b" compoundref="unordered__set_8hpp" startline="443" endline="443">neforce::unordered_set&lt; Value, HashFcn, EqualKey, Alloc &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1vector_1a34029f65d5a10d1af2d644850cc911a1" compoundref="vector_8hpp" startline="1193" endline="1201">neforce::vector&lt; Value, Alloc &gt;::swap</referencedby>
+        <referencedby refid="classneforce_1_1vector_1a74cd96d939fb82c7e3a7ec994df9e757" compoundref="vector_8hpp" startline="496" endline="498">neforce::vector&lt; Value, Alloc &gt;::vector</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="group___swap_utility_1gadf4c73dc1c3cdd29e6c3efae3cd9d97d" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___swap_utility_1gab32e484a2d5fe6f972af5e524832bd83" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_trivially_swappable_v</definition>
+        <definition>bool neforce::is_trivially_swappable_v</definition>
         <argsstring></argsstring>
         <name>is_trivially_swappable_v</name>
-        <initializer>= <ref refid="structis__trivially__swappable" kindref="compound">is_trivially_swappable</ref>&lt;T&gt;::value</initializer>
+        <qualifiedname>neforce::is_trivially_swappable_v</qualifiedname>
+        <initializer>= is_trivially_swappable&lt;T&gt;::value</initializer>
         <briefdescription>
 <para>is_trivially_swappable的便捷变量模板 </para>
         </briefdescription>
@@ -104,16 +107,17 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___swap_utility_1gab5828684676860ed80d0357a0be4b656" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; T &gt; &amp;&amp;is_nothrow_move_assignable_v&lt; T &gt;" virt="non-virtual">
+      <memberdef kind="function" id="group___swap_utility_1gab106ef0baa227d25848843acb2326de7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; T &gt; &amp;&amp;is_nothrow_move_assignable_v&lt; T &gt;" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga5181d927278f40a6a97e90944d673c0a" kindref="member">is_move_constructible_v</ref>&lt; T &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1gafbf52ca54b0d508bfc6b9bbe916faf18" kindref="member">is_move_assignable_v</ref>&lt; T &gt; &gt;</type>
-        <definition>enable_if_t&lt; is_move_constructible_v&lt; T &gt; &amp;&amp;is_move_assignable_v&lt; T &gt; &gt; swap</definition>
+        <type>enable_if_t&lt; is_move_constructible_v&lt; T &gt; &amp;&amp;is_move_assignable_v&lt; T &gt; &gt;</type>
+        <definition>enable_if_t&lt; is_move_constructible_v&lt; T &gt; &amp;&amp;is_move_assignable_v&lt; T &gt; &gt; neforce::swap</definition>
         <argsstring>(T &amp;lhs, T &amp;rhs)</argsstring>
         <name>swap</name>
+        <qualifiedname>neforce::swap</qualifiedname>
         <param>
           <type>T &amp;</type>
           <declname>lhs</declname>
@@ -157,24 +161,26 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3851" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" declline="3851" declcolumn="1"/>
-        <references refid="group___type_special_member_function_checks_1gad26f59ba1b8a873f9d8374f72a4002c4" compoundref="type__traits_8hpp" startline="2923">is_nothrow_move_assignable_v</references>
-        <references refid="group___type_special_member_function_checks_1ga34e3584e54b63fd9e6a35fffd41080bd" compoundref="type__traits_8hpp" startline="2862">is_nothrow_move_constructible_v</references>
+        <references refid="group___type_special_member_function_checks_1ga4e478e886bb3f1dba6b5b2033f6b4702" compoundref="type__traits_8hpp" startline="2923">neforce::is_nothrow_move_assignable_v</references>
+        <references refid="group___type_special_member_function_checks_1gae20ac6ad74f8179d6959c23cbda15965" compoundref="type__traits_8hpp" startline="2862">neforce::is_nothrow_move_constructible_v</references>
+        <references refid="group___unique_pointer_1ga12d4a1c5b3027501a31634bd874b515c" compoundref="unique__ptr_8hpp" startline="582" endline="584">neforce::swap</references>
       </memberdef>
-      <memberdef kind="function" id="group___swap_utility_1ga6f112005dfeca47e6423a7e332296429" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_swappable&lt; T &gt;::value" virt="non-virtual">
+      <memberdef kind="function" id="group___swap_utility_1gadc7861e1c6a1837f0ada0e85966d9b20" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_swappable&lt; T &gt;::value" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
           <param>
-            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <type>size_t</type>
             <declname>Size</declname>
             <defname>Size</defname>
           </param>
         </templateparamlist>
-        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="structis__swappable" kindref="compound">is_swappable</ref>&lt; T &gt;::value &gt;</type>
-        <definition>enable_if_t&lt; is_swappable&lt; T &gt;::value &gt; swap</definition>
+        <type>enable_if_t&lt; is_swappable&lt; T &gt;::value &gt;</type>
+        <definition>enable_if_t&lt; is_swappable&lt; T &gt;::value &gt; neforce::swap</definition>
         <argsstring>(T(&amp;lhs)[Size], T(&amp;rhs)[Size])</argsstring>
         <name>swap</name>
+        <qualifiedname>neforce::swap</qualifiedname>
         <param>
           <type>T(&amp;)</type>
           <declname>lhs</declname>
@@ -228,13 +234,15 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3861" column="24" declfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" declline="3861" declcolumn="24"/>
-        <references refid="structintegral__constant_1acb06165dd4022817b14af1688a5c36f1" compoundref="type__traits_8hpp" startline="37">integral_constant&lt; bool, Value &gt;::value</references>
+        <references refid="group___unique_pointer_1ga12d4a1c5b3027501a31634bd874b515c" compoundref="unique__ptr_8hpp" startline="582" endline="584">neforce::swap</references>
+        <references refid="structneforce_1_1integral__constant_1a5fb6f7e2680d2dcc85a47a2cf067dbad" compoundref="type__traits_8hpp" startline="37">neforce::integral_constant&lt; bool, Value &gt;::value</references>
       </memberdef>
-      <memberdef kind="function" id="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___swap_utility_1ga71b9da583fb3cb5d5f79ff8cfc663540" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
-        <definition>void swap</definition>
+        <definition>void neforce::swap</definition>
         <argsstring>()=delete</argsstring>
         <name>swap</name>
+        <qualifiedname>neforce::swap</qualifiedname>
         <briefdescription>
 <para>删除无参数的swap重载 </para>
         </briefdescription>
@@ -243,40 +251,15 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3867" column="6" declfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" declline="3867" declcolumn="6"/>
-        <referencedby refid="group___shift_algorithms_1gaf24b9918e7d6e917eb59c4c5f9cd613d" compoundref="shift_8hpp" startline="440" endline="444">iter_swap</referencedby>
-        <referencedby refid="classexception__ptr_1a6285f3410fcac0e871ed0b061719ba3b" compoundref="exception__ptr_8hpp" startline="225" endline="232">exception_ptr::operator=</referencedby>
-        <referencedby refid="classexception__ptr_1ace99322177809035a72b74ef9fb9411a" compoundref="exception__ptr_8hpp" startline="239" endline="246">exception_ptr::operator=</referencedby>
-        <referencedby refid="classflat__hashtable_1a716b8d5cf397cb025d6f49e5f92ffe1b" compoundref="flat__hashtable_8hpp" startline="783" endline="790">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::operator=</referencedby>
-        <referencedby refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a78e3200ea269e7f873e946b362315ff8" compoundref="packaged__task_8hpp" startline="79" endline="79">packaged_task&lt; Res(Args...)&gt;::packaged_task</referencedby>
-        <referencedby refid="group___r_b_tree_1ga7d47ad64a5effc47d497d99f76889206" compoundref="rb__tree_8hpp" startline="245" endline="416">rb_tree_erase_rebalance</referencedby>
-        <referencedby refid="classlist_1a5bf8d543a917e2ad5f6e541d80f62b36" compoundref="list_8hpp" startline="945" endline="954">list&lt; pair&lt; Key, Value &gt; &gt;::reverse</referencedby>
-        <referencedby refid="classbasic__string_1aeba1ffe60d3b5270cd828983da073c94" compoundref="basic__string_8hpp" startline="2915" endline="2927">basic_string&lt; char &gt;::swap</referencedby>
-        <referencedby refid="classbitmap_1a926acfb2d2c80455dde5f9dcdd38e425" compoundref="bitmap_8hpp" startline="1142" endline="1153">bitmap::swap</referencedby>
-        <referencedby refid="structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4_1a54b4845b7902cf40b3fd4720a42385f5" compoundref="compressed__pair_8hpp" startline="281" endline="284">compressed_pair&lt; IfEmpty, T, false &gt;::swap</referencedby>
-        <referencedby refid="classdate_1a88d8ae28e2103f1757579793737d32a6" compoundref="datetime_8hpp" startline="440" endline="444">date::swap</referencedby>
-        <referencedby refid="classdatetime_1af6f1db1c74c8742963d206a0b75fe652" compoundref="datetime_8hpp" startline="1447" endline="1452">datetime::swap</referencedby>
-        <referencedby refid="classdeque_1a2bc9e5114adc88054d962dd466a18920" compoundref="deque_8hpp" startline="1411" endline="1420">deque&lt; T, Alloc, BufSize &gt;::swap</referencedby>
-        <referencedby refid="classflat__hashtable_1a893f08ecfe8d460d9fd456a30089a9cd" compoundref="flat__hashtable_8hpp" startline="1434" endline="1447">flat_hashtable&lt; pair&lt; Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; Key, T &gt; &gt;, EqualKey, Alloc &gt;::swap</referencedby>
-        <referencedby refid="classfunction_3_01_res_07_args_8_8_8_08_4_1a1dd1e66ea2513b1b20722101ef909e03" compoundref="functional_2function_8hpp" startline="433" endline="437">function&lt; Res(Args...)&gt;::swap</referencedby>
-        <referencedby refid="classhashtable_1ad4653c3ae73acfeb1f22cee7b8796691" compoundref="hashtable_8hpp" startline="1551" endline="1562">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::swap</referencedby>
-        <referencedby refid="classhazard__pointer_1a263dfea498663d2f2b7f8d3688733e26" compoundref="hazard__ptr_8hpp" startline="490" endline="493">hazard_pointer::swap</referencedby>
-        <referencedby refid="classlazy__thread_1a8991c84dc19cf83aeabb25c397fe8bbc" compoundref="lazy__thread_8hpp" startline="139" endline="142">lazy_thread::swap</referencedby>
-        <referencedby refid="classlist_1a0fd9945f22438820e69f95b2218ce019" compoundref="list_8hpp" startline="792" endline="795">list&lt; pair&lt; Key, Value &gt; &gt;::swap</referencedby>
-        <referencedby refid="classoptional_1a3f7813ad250922eb4f3b267d25cdc191" compoundref="optional_8hpp" startline="793" endline="807">optional&lt; T &gt;::swap</referencedby>
-        <referencedby refid="structpair_1acac4d296cf22d094158ff60a298c5dad" compoundref="pair_8hpp" startline="447" endline="450">pair&lt; Key, T &gt;::swap</referencedby>
-        <referencedby refid="classrb__tree_1ad580954ee75f0f3484d40a58407061bc" compoundref="rb__tree_8hpp" startline="1560" endline="1566">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::swap</referencedby>
-        <referencedby refid="classscope__thread_1a97c2556107ea53c6f529d49a2fb25851" compoundref="scope__thread_8hpp" startline="129" endline="132">scope_thread::swap</referencedby>
-        <referencedby refid="classshared__ptr_1ace405e1a458c9e2a95c60b3626fcd20d" compoundref="shared__ptr_8hpp" startline="568" endline="574">shared_ptr&lt; periodic_task_state &gt;::swap</referencedby>
-        <referencedby refid="classsparse__vector_1ac3528eb4cbe68ba718e21254bda9a446" compoundref="sparse__vector_8hpp" startline="801" endline="806">sparse_vector&lt; Key, pair&lt; Key, T &gt;, select1st&lt; pair&lt; Key, T &gt; &gt;, Compare, Alloc &gt;::swap</referencedby>
-        <referencedby refid="classtime_1ae56dab67eeb6f521f84ac4ae04fd3b54" compoundref="datetime_8hpp" startline="715" endline="719">time::swap</referencedby>
-        <referencedby refid="structtuple_3_01_this_00_01_rest_8_8_8_01_4_1aee7d9bbb8111acbfc59ce44395c8616e" compoundref="tuple_8hpp" startline="648" endline="651">tuple&lt; This, Rest... &gt;::swap</referencedby>
-        <referencedby refid="classvector_1a1d17cda4f34b49cb366eeaccca3e98c4" compoundref="vector_8hpp" startline="1193" endline="1201">vector&lt; Value, Alloc &gt;::swap</referencedby>
-        <referencedby refid="classweak__ptr_1ab6ce65d0fac958b888c5d52c029efbc2" compoundref="weak__ptr_8hpp" startline="267" endline="273">weak_ptr&lt; T &gt;::swap</referencedby>
-        <referencedby refid="classdatetime_1a8a28c02a4dc5932470ece7dd7cb15b49" compoundref="datetime_8hpp" startline="1402" endline="1410">datetime::try_parse_ISO8601</referencedby>
-        <referencedby refid="classdatetime_1ad13bfd49652c56eade0cd420b75d5daf" compoundref="datetime_8hpp" startline="1360" endline="1368">datetime::try_parse_RFC1123</referencedby>
-        <referencedby refid="classdatetime_1af166e76ed260e5bdd15ca2d43eb03fed" compoundref="datetime_8hpp" startline="1281" endline="1289">datetime::try_parse_RFC3339</referencedby>
+        <references refid="group___unique_pointer_1ga12d4a1c5b3027501a31634bd874b515c" compoundref="unique__ptr_8hpp" startline="582" endline="584">neforce::swap</references>
+        <referencedby refid="classneforce_1_1date_1a990cb2591f0c9a520ad06ea1cbc739da" compoundref="datetime_8hpp" startline="440" endline="444">neforce::date::swap</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a787493e6fc0ff3e71a9fe92f520db5fb" compoundref="datetime_8hpp" startline="1447" endline="1452">neforce::datetime::swap</referencedby>
+        <referencedby refid="classneforce_1_1time_1a6d10427de8d1d62c2a839eb39dadea73" compoundref="datetime_8hpp" startline="715" endline="719">neforce::time::swap</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a1d416c8ca2e8661eda83972d66e25411" compoundref="datetime_8hpp" startline="1402" endline="1410">neforce::datetime::try_parse_ISO8601</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a4aa5808c1717a46e58c821a9901219ad" compoundref="datetime_8hpp" startline="1360" endline="1368">neforce::datetime::try_parse_RFC1123</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1aa7a5b0028943b8b82d1ead1beb7b6f3c" compoundref="datetime_8hpp" startline="1281" endline="1289">neforce::datetime::try_parse_RFC3339</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___swap_utility_1gab81413ba62b31319104a958da78b9bb2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; T &gt; &amp;&amp;is_nothrow_assignable_v&lt; T &amp;, U &gt;" virt="non-virtual">
+      <memberdef kind="function" id="group___swap_utility_1ga547bf8c038c69a1c8d0d83a5c7c3410c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; T &gt; &amp;&amp;is_nothrow_assignable_v&lt; T &amp;, U &gt;" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -287,9 +270,10 @@
           </param>
         </templateparamlist>
         <type>T</type>
-        <definition>T exchange</definition>
+        <definition>T neforce::exchange</definition>
         <argsstring>(T &amp;val, U &amp;&amp;new_val)</argsstring>
         <name>exchange</name>
+        <qualifiedname>neforce::exchange</qualifiedname>
         <param>
           <type>T &amp;</type>
           <declname>val</declname>
@@ -343,11 +327,15 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3878" column="13" declfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" declline="3878" declcolumn="13"/>
-        <references refid="group___type_special_member_function_checks_1gac0c249b3afd84019ec11170a1e06d267" compoundref="type__traits_8hpp" startline="2886">is_nothrow_assignable_v</references>
-        <references refid="group___type_special_member_function_checks_1ga34e3584e54b63fd9e6a35fffd41080bd" compoundref="type__traits_8hpp" startline="2862">is_nothrow_move_constructible_v</references>
-        <referencedby refid="structvirtual__thread__task_1abb78fcc28e8a4c41563a876076d6b9da" compoundref="virtual__thread_8hpp" startline="708" endline="725">virtual_thread_task&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="structvirtual__thread__task_3_01void_01_4_1a1c53ba115283cd6a1dfe672c25e1300c" compoundref="virtual__thread_8hpp" startline="422" endline="439">virtual_thread_task&lt; void &gt;::operator=</referencedby>
-        <referencedby refid="classsocket__base_1a940df24ee538694021cc7350ba790524" compoundref="socket__base_8hpp" startline="417" endline="417">socket_base::release</referencedby>
+        <references refid="group___swap_utility_1ga547bf8c038c69a1c8d0d83a5c7c3410c">neforce::exchange</references>
+        <references refid="group___type_special_member_function_checks_1ga67e9f187eb2f58f528b18833dc75a7f8" compoundref="type__traits_8hpp" startline="2886">neforce::is_nothrow_assignable_v</references>
+        <references refid="group___type_special_member_function_checks_1gae20ac6ad74f8179d6959c23cbda15965" compoundref="type__traits_8hpp" startline="2862">neforce::is_nothrow_move_constructible_v</references>
+        <referencedby refid="group___swap_utility_1ga547bf8c038c69a1c8d0d83a5c7c3410c">neforce::exchange</referencedby>
+        <referencedby refid="structneforce_1_1virtual__thread__task_1aaca57193c45ba69bdda1453ff6c6e1c2" compoundref="virtual__thread_8hpp" startline="708" endline="725">neforce::virtual_thread_task&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="structneforce_1_1virtual__thread__task_3_01void_01_4_1a17524588bdde154bebfe9016e53dadb2" compoundref="virtual__thread_8hpp" startline="422" endline="439">neforce::virtual_thread_task&lt; void &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1socket__base_1a32f1e147a349925c32839fa1ce3b8fdc" compoundref="socket__base_8hpp" startline="417" endline="417">neforce::socket_base::release</referencedby>
+        <referencedby refid="structneforce_1_1virtual__thread__task_1aab811398b9e4f1e1e4012aefc52f2a48" compoundref="virtual__thread_8hpp" startline="701" endline="703">neforce::virtual_thread_task&lt; T &gt;::virtual_thread_task</referencedby>
+        <referencedby refid="structneforce_1_1virtual__thread__task_3_01void_01_4_1a2b7d6ba0722d45f15d04b36d1fd88103" compoundref="virtual__thread_8hpp" startline="415" endline="417">neforce::virtual_thread_task&lt; void &gt;::virtual_thread_task</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

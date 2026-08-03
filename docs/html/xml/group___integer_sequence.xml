@@ -3,9 +3,9 @@
   <compounddef id="group___integer_sequence" kind="group">
     <compoundname>IntegerSequence</compoundname>
     <title>整数序列</title>
-    <innerclass refid="structinteger__sequence" prot="public">integer_sequence</innerclass>
+    <innerclass refid="structneforce_1_1integer__sequence" prot="public">neforce::integer_sequence</innerclass>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="group___integer_sequence_1gae14972f12d071bc9049d55d724413f32" prot="public" static="no">
+      <memberdef kind="typedef" id="group___integer_sequence_1gae48c478ebc031959e347736d8ae95679" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -16,12 +16,13 @@
             <defname>Size</defname>
           </param>
         </templateparamlist>
-        <type>__make_integer_seq&lt; <ref refid="structinteger__sequence" kindref="compound">integer_sequence</ref>, T, Size &gt;</type>
-        <definition>using make_integer_sequence = 
+        <type>__make_integer_seq&lt; integer_sequence, T, Size &gt;</type>
+        <definition>using neforce::make_integer_sequence = 
 
 __make_integer_seq&lt;integer_sequence, T, Size&gt;</definition>
         <argsstring></argsstring>
         <name>make_integer_sequence</name>
+        <qualifiedname>neforce::make_integer_sequence</qualifiedname>
         <briefdescription>
 <para>生成指定长度的整数序列 </para>
         </briefdescription>
@@ -49,7 +50,7 @@ __make_integer_seq&lt;integer_sequence, T, Size&gt;</definition>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/integer_sequence.hpp" line="53" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/integer_sequence.hpp" bodystart="53" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___integer_sequence_1ga26720e99f9258f846d2e957f81425b71" prot="public" static="no">
+      <memberdef kind="typedef" id="group___integer_sequence_1ga05100867bd68ca47f2098124ceb69311" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>size_t...</type>
@@ -57,10 +58,11 @@ __make_integer_seq&lt;integer_sequence, T, Size&gt;</definition>
             <defname>Values</defname>
           </param>
         </templateparamlist>
-        <type><ref refid="structinteger__sequence" kindref="compound">integer_sequence</ref>&lt; <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>, Values... &gt;</type>
-        <definition>using index_sequence = integer_sequence&lt;size_t, Values...&gt;</definition>
+        <type>integer_sequence&lt; size_t, Values... &gt;</type>
+        <definition>using neforce::index_sequence = integer_sequence&lt;size_t, Values...&gt;</definition>
         <argsstring></argsstring>
         <name>index_sequence</name>
+        <qualifiedname>neforce::index_sequence</qualifiedname>
         <briefdescription>
 <para>索引序列 </para>
         </briefdescription>
@@ -80,18 +82,19 @@ __make_integer_seq&lt;integer_sequence, T, Size&gt;</definition>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/integer_sequence.hpp" line="68" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/integer_sequence.hpp" bodystart="68" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___integer_sequence_1gaed583aed5d1c7a45292dc4dbc51d6493" prot="public" static="no">
+      <memberdef kind="typedef" id="group___integer_sequence_1ga772b7d48974acef72320f9e7275143f3" prot="public" static="no">
         <templateparamlist>
           <param>
-            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <type>size_t</type>
             <declname>Size</declname>
             <defname>Size</defname>
           </param>
         </templateparamlist>
-        <type><ref refid="group___integer_sequence_1gae14972f12d071bc9049d55d724413f32" kindref="member">make_integer_sequence</ref>&lt; <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>, Size &gt;</type>
-        <definition>using make_index_sequence = make_integer_sequence&lt;size_t, Size&gt;</definition>
+        <type>make_integer_sequence&lt; size_t, Size &gt;</type>
+        <definition>using neforce::make_index_sequence = make_integer_sequence&lt;size_t, Size&gt;</definition>
         <argsstring></argsstring>
         <name>make_index_sequence</name>
+        <qualifiedname>neforce::make_index_sequence</qualifiedname>
         <briefdescription>
 <para>生成指定长度的索引序列 </para>
         </briefdescription>
@@ -111,7 +114,7 @@ __make_integer_seq&lt;integer_sequence, T, Size&gt;</definition>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/integer_sequence.hpp" line="78" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/integer_sequence.hpp" bodystart="78" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___integer_sequence_1ga7b762cc05183be4d9e4f4f271add4c1e" prot="public" static="no">
+      <memberdef kind="typedef" id="group___integer_sequence_1ga6bd0f1597ccc9681f8e656794dee4fea" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename...</type>
@@ -119,10 +122,11 @@ __make_integer_seq&lt;integer_sequence, T, Size&gt;</definition>
             <defname>Types</defname>
           </param>
         </templateparamlist>
-        <type><ref refid="group___integer_sequence_1gaed583aed5d1c7a45292dc4dbc51d6493" kindref="member">make_index_sequence</ref>&lt; sizeof...(Types)&gt;</type>
-        <definition>using index_sequence_for = make_index_sequence&lt;sizeof...(Types)&gt;</definition>
+        <type>make_index_sequence&lt; sizeof...(Types)&gt;</type>
+        <definition>using neforce::index_sequence_for = make_index_sequence&lt;sizeof...(Types)&gt;</definition>
         <argsstring></argsstring>
         <name>index_sequence_for</name>
+        <qualifiedname>neforce::index_sequence_for</qualifiedname>
         <briefdescription>
 <para>根据类型参数包生成索引序列 </para>
         </briefdescription>

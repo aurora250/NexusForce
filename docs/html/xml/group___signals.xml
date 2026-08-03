@@ -3,17 +3,18 @@
   <compounddef id="group___signals" kind="group">
     <compoundname>Signals</compoundname>
     <title>信号槽</title>
-    <innerclass refid="classsignal__base" prot="public">signal_base</innerclass>
-    <innerclass refid="structoneshot__t" prot="public">oneshot_t</innerclass>
-    <innerclass refid="classconnection" prot="public">connection</innerclass>
-    <innerclass refid="classscope__connection" prot="public">scope_connection</innerclass>
-    <innerclass refid="structsignal" prot="public">signal</innerclass>
-    <innerclass refid="classsignal__blocker" prot="public">signal_blocker</innerclass>
+    <innerclass refid="classneforce_1_1signal__base" prot="public">neforce::signal_base</innerclass>
+    <innerclass refid="structneforce_1_1oneshot__t" prot="public">neforce::oneshot_t</innerclass>
+    <innerclass refid="classneforce_1_1connection" prot="public">neforce::connection</innerclass>
+    <innerclass refid="classneforce_1_1scope__connection" prot="public">neforce::scope_connection</innerclass>
+    <innerclass refid="structneforce_1_1signal" prot="public">neforce::signal</innerclass>
+    <innerclass refid="classneforce_1_1signal__blocker" prot="public">neforce::signal_blocker</innerclass>
     <sectiondef kind="enum">
-      <memberdef kind="enum" id="group___signals_1ga79d73e96ba6552cf687c25ccf19516ff" prot="public" static="no" strong="yes">
+      <memberdef kind="enum" id="group___signals_1ga1fd16db4b1ba97d66aab90c0e91bb6c4" prot="public" static="no" strong="yes">
         <type></type>
         <name>callback_result</name>
-        <enumvalue id="group___signals_1gga79d73e96ba6552cf687c25ccf19516ffa18ccf61d533b600bbf5a963359223fe4" prot="public">
+        <qualifiedname>neforce::callback_result</qualifiedname>
+        <enumvalue id="group___signals_1gga1fd16db4b1ba97d66aab90c0e91bb6c4a18ccf61d533b600bbf5a963359223fe4" prot="public">
           <name>keep</name>
           <briefdescription>
 <para>保留回调 </para>
@@ -21,7 +22,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___signals_1gga79d73e96ba6552cf687c25ccf19516ffa26eb25b14d930f9d5f59b2c50798a9a4" prot="public">
+        <enumvalue id="group___signals_1gga1fd16db4b1ba97d66aab90c0e91bb6c4a26eb25b14d930f9d5f59b2c50798a9a4" prot="public">
           <name>erase</name>
           <briefdescription>
 <para>调用后自动删除 </para>
@@ -39,9 +40,10 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="87" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/signals.hpp" bodystart="87" bodyend="90"/>
       </memberdef>
-      <memberdef kind="enum" id="group___signals_1ga176c99514aae7bf12e34cb1b65e085c7" prot="public" static="no" strong="yes">
-        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+      <memberdef kind="enum" id="group___signals_1ga5bbd15408fa35c83e93e86e44cabe849" prot="public" static="no" strong="yes">
+        <type>size_t</type>
         <name>nshot_t</name>
+        <qualifiedname>neforce::nshot_t</qualifiedname>
         <briefdescription>
 <para>多次连接标签 </para>
         </briefdescription>
@@ -54,11 +56,12 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="group___signals_1gad225dff83ab3b2a154bc713fad3ca113" prot="public" static="no" constexpr="yes" mutable="no">
-        <type><ref refid="structoneshot__t" kindref="compound">oneshot_t</ref></type>
-        <definition>oneshot_t oneshot</definition>
+      <memberdef kind="variable" id="group___signals_1ga25bad782bb7c435ea687bba02aebeb69" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>oneshot_t</type>
+        <definition>oneshot_t neforce::oneshot</definition>
         <argsstring></argsstring>
         <name>oneshot</name>
+        <qualifiedname>neforce::oneshot</qualifiedname>
         <initializer>{}</initializer>
         <briefdescription>
 <para>一次性连接标签实例 </para>

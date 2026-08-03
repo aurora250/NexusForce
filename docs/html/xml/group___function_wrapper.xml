@@ -3,10 +3,10 @@
   <compounddef id="group___function_wrapper" kind="group">
     <compoundname>FunctionWrapper</compoundname>
     <title>函数包装器</title>
-    <innerclass refid="classfunction" prot="public">function</innerclass>
-    <innerclass refid="classfunction_3_01_res_07_args_8_8_8_08_4" prot="public">function&lt; Res(Args...)&gt;</innerclass>
+    <innerclass refid="classneforce_1_1function" prot="public">neforce::function</innerclass>
+    <innerclass refid="classneforce_1_1function_3_01_res_07_args_8_8_8_08_4" prot="public">neforce::function&lt; Res(Args...)&gt;</innerclass>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___function_wrapper_1gac6bc0d82ca94ea1f44a03692a83dfcf2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___function_wrapper_1gaf64e9261d9a68c16cc1e6a9edf991944" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Res</type>
@@ -18,9 +18,10 @@
           </param>
         </templateparamlist>
         <type></type>
-        <definition>function</definition>
+        <definition>neforce::function</definition>
         <argsstring>(Res(*)(Args...)) -&gt; function&lt; Res(Args...)&gt;</argsstring>
         <name>function</name>
+        <qualifiedname>neforce::function</qualifiedname>
         <param>
           <type>Res(*)(Args...)</type>
         </param>
@@ -30,22 +31,23 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="511" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" declline="511" declcolumn="1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="512" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" declline="512" declcolumn="1"/>
       </memberdef>
-      <memberdef kind="function" id="group___function_wrapper_1ga1292560a50b2bb59447a0f48bc605bba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___function_wrapper_1gaf23a9fc1aca02c0594144315f128eaa6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Func</type>
           </param>
           <param>
             <type>typename Sign</type>
-            <defval>typename inner::__function_guide_helper&lt;                                 <ref refid="group___remove_qualifiers_1ga37d7d9f34cc72f8e04c82c3c8c6f9db8" kindref="member">remove_function_qualifiers_t</ref>&lt;decltype(&amp;Func::operator())&gt;&gt;::type</defval>
+            <defval>typename inner::__function_guide_helper&lt;                                 remove_function_qualifiers_t&lt;decltype(&amp;Func::operator())&gt;&gt;::type</defval>
           </param>
         </templateparamlist>
         <type></type>
-        <definition>function</definition>
+        <definition>neforce::function</definition>
         <argsstring>(Func) -&gt; function&lt; Sign &gt;</argsstring>
         <name>function</name>
+        <qualifiedname>neforce::function</qualifiedname>
         <param>
           <type>Func</type>
         </param>
@@ -55,9 +57,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="515" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" declline="515" declcolumn="1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="516" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" declline="516" declcolumn="1"/>
       </memberdef>
-      <memberdef kind="function" id="group___function_wrapper_1ga445cf4ef6b33e97b2e24b538f3efcd33" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___function_wrapper_1ga6a8b8801c0a30a7e84b4b051aa943b64" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Res</type>
@@ -69,15 +71,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator==</definition>
+        <definition>bool neforce::operator==</definition>
         <argsstring>(const function&lt; Res(Args...)&gt; &amp;f, nullptr_t np) noexcept</argsstring>
         <name>operator==</name>
+        <qualifiedname>neforce::operator==</qualifiedname>
         <param>
-          <type>const <ref refid="classfunction" kindref="compound">function</ref>&lt; Res(Args...)&gt; &amp;</type>
+          <type>const function&lt; Res(Args...)&gt; &amp;</type>
           <declname>f</declname>
         </param>
         <param>
-          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <type>nullptr_t</type>
           <declname>np</declname>
         </param>
         <briefdescription>
@@ -124,9 +127,24 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="529" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="529" bodyend="531"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="530" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="530" bodyend="532"/>
+        <references refid="group___function_wrapper_1ga6a8b8801c0a30a7e84b4b051aa943b64" compoundref="functional_2function_8hpp" startline="530" endline="532">neforce::operator==</references>
+        <referencedby refid="group___duration_1gabee631c362a8ccca1855ff6b065405bf" compoundref="duration_8hpp" startline="593" endline="598">neforce::operator==</referencedby>
+        <referencedby refid="group___function_wrapper_1ga6a8b8801c0a30a7e84b4b051aa943b64" compoundref="functional_2function_8hpp" startline="530" endline="532">neforce::operator==</referencedby>
+        <referencedby refid="group___normal_iterators_1gacacc4c0989a810253729753140713d35" compoundref="normal__iterator_8hpp" startline="172" endline="175">neforce::operator==</referencedby>
+        <referencedby refid="group___normal_iterators_1ga064d63b1ca495c76cf1318b76969ae5a" compoundref="normal__iterator_8hpp" startline="162" endline="165">neforce::operator==</referencedby>
+        <referencedby refid="group___reverse_iterator_1ga6b4d81530eaf7e9a4b640b9b14d6981d" compoundref="reverse__iterator_8hpp" startline="234" endline="243">neforce::operator==</referencedby>
+        <referencedby refid="group___shared_pointer_1gaa66010c410a759be90caca32fbd42b9f" compoundref="shared__ptr_8hpp" startline="643" endline="645">neforce::operator==</referencedby>
+        <referencedby refid="group___shared_pointer_1gad3a665bd21980cfa824a7c36b4ef5d04" compoundref="shared__ptr_8hpp" startline="694" endline="696">neforce::operator==</referencedby>
+        <referencedby refid="group___memory_allocator_1gabade10418f7f309f4399393630c146e5" compoundref="standard__allocator_8hpp" startline="405" endline="408">neforce::operator==</referencedby>
+        <referencedby refid="group___stacktrace_1gad78eaa30a3df7643ae4987cd245baeef" compoundref="trace__memory_8hpp" startline="171" endline="173">neforce::operator==</referencedby>
+        <referencedby refid="group___unique_pointer_1ga6969cbeee075efa79083a8db4577ac8e" compoundref="unique__ptr_8hpp" startline="597" endline="599">neforce::operator==</referencedby>
+        <referencedby refid="group___unique_pointer_1ga00036039c0a65e1c00cfae5194485e9a" compoundref="unique__ptr_8hpp" startline="609" endline="611">neforce::operator==</referencedby>
+        <referencedby refid="group___function_wrapper_1ga75b7c5554deb46fc449709e4056fd532" compoundref="functional_2function_8hpp" startline="543" endline="545">neforce::operator==</referencedby>
+        <referencedby refid="group___shared_pointer_1ga2dc6895d90b390ced66273c8bab1365a" compoundref="shared__ptr_8hpp" startline="705" endline="707">neforce::operator==</referencedby>
+        <referencedby refid="group___unique_pointer_1ga8adc9b74483b2cae75a726e3716343e3" compoundref="unique__ptr_8hpp" startline="621" endline="623">neforce::operator==</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___function_wrapper_1gab557b6e8c7df87a69252d9d346e9affd" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___function_wrapper_1ga75b7c5554deb46fc449709e4056fd532" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Res</type>
@@ -138,15 +156,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator==</definition>
+        <definition>bool neforce::operator==</definition>
         <argsstring>(nullptr_t np, const function&lt; Res(Args...)&gt; &amp;f) noexcept</argsstring>
         <name>operator==</name>
+        <qualifiedname>neforce::operator==</qualifiedname>
         <param>
-          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <type>nullptr_t</type>
           <declname>np</declname>
         </param>
         <param>
-          <type>const <ref refid="classfunction" kindref="compound">function</ref>&lt; Res(Args...)&gt; &amp;</type>
+          <type>const function&lt; Res(Args...)&gt; &amp;</type>
           <declname>f</declname>
         </param>
         <briefdescription>
@@ -193,9 +212,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="542" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="542" bodyend="544"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="543" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="543" bodyend="545"/>
+        <references refid="group___function_wrapper_1ga6a8b8801c0a30a7e84b4b051aa943b64" compoundref="functional_2function_8hpp" startline="530" endline="532">neforce::operator==</references>
       </memberdef>
-      <memberdef kind="function" id="group___function_wrapper_1ga4063e745b1da8e2d0122514512f9a9a1" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___function_wrapper_1ga245168fc07a7b8f6d303ddab962e1bea" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Res</type>
@@ -207,15 +227,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator!=</definition>
+        <definition>bool neforce::operator!=</definition>
         <argsstring>(const function&lt; Res(Args...)&gt; &amp;f, nullptr_t np) noexcept</argsstring>
         <name>operator!=</name>
+        <qualifiedname>neforce::operator!=</qualifiedname>
         <param>
-          <type>const <ref refid="classfunction" kindref="compound">function</ref>&lt; Res(Args...)&gt; &amp;</type>
+          <type>const function&lt; Res(Args...)&gt; &amp;</type>
           <declname>f</declname>
         </param>
         <param>
-          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <type>nullptr_t</type>
           <declname>np</declname>
         </param>
         <briefdescription>
@@ -262,9 +283,24 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="555" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="555" bodyend="557"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="556" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="556" bodyend="558"/>
+        <references refid="group___function_wrapper_1ga245168fc07a7b8f6d303ddab962e1bea" compoundref="functional_2function_8hpp" startline="556" endline="558">neforce::operator!=</references>
+        <referencedby refid="group___duration_1gab0d923c47f792de7f855a488a2aafb3c" compoundref="duration_8hpp" startline="611" endline="613">neforce::operator!=</referencedby>
+        <referencedby refid="group___function_wrapper_1ga245168fc07a7b8f6d303ddab962e1bea" compoundref="functional_2function_8hpp" startline="556" endline="558">neforce::operator!=</referencedby>
+        <referencedby refid="group___normal_iterators_1gad6bdfc69c1f021393e7c4d064acf52a7" compoundref="normal__iterator_8hpp" startline="193" endline="196">neforce::operator!=</referencedby>
+        <referencedby refid="group___normal_iterators_1gac481adb310a99443fc4d282cda69aecc" compoundref="normal__iterator_8hpp" startline="183" endline="186">neforce::operator!=</referencedby>
+        <referencedby refid="group___reverse_iterator_1gaa05ef302dbe13f38bc233a60e8572ff3" compoundref="reverse__iterator_8hpp" startline="255" endline="264">neforce::operator!=</referencedby>
+        <referencedby refid="group___shared_pointer_1ga7022a0e8cacbf6d0fbfd0c0d4badd17d" compoundref="shared__ptr_8hpp" startline="651" endline="653">neforce::operator!=</referencedby>
+        <referencedby refid="group___shared_pointer_1ga50c5deec6a09813e54e3b9b1c4e2ea4c" compoundref="shared__ptr_8hpp" startline="716" endline="718">neforce::operator!=</referencedby>
+        <referencedby refid="group___memory_allocator_1ga2a3ed6eacbc5ae92ab5cea8669b3a57f" compoundref="standard__allocator_8hpp" startline="417" endline="420">neforce::operator!=</referencedby>
+        <referencedby refid="group___stacktrace_1ga446c3e332d415505e697d2a4b4e2b698" compoundref="trace__memory_8hpp" startline="184" endline="186">neforce::operator!=</referencedby>
+        <referencedby refid="group___unique_pointer_1ga4fa8fbdf6278ebf5815644bcc74050ff" compoundref="unique__ptr_8hpp" startline="636" endline="638">neforce::operator!=</referencedby>
+        <referencedby refid="group___unique_pointer_1gae048aecaa2929eb1b44bb083eabdf6f0" compoundref="unique__ptr_8hpp" startline="648" endline="650">neforce::operator!=</referencedby>
+        <referencedby refid="group___function_wrapper_1ga7bb69a0a40e2189178d51c2346e82ec7" compoundref="functional_2function_8hpp" startline="569" endline="571">neforce::operator!=</referencedby>
+        <referencedby refid="group___shared_pointer_1gaf9daf4cd7e7c057766f65b87c3c21f50" compoundref="shared__ptr_8hpp" startline="727" endline="729">neforce::operator!=</referencedby>
+        <referencedby refid="group___unique_pointer_1ga5f8cadae707862546174840fb4b3169b" compoundref="unique__ptr_8hpp" startline="660" endline="662">neforce::operator!=</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___function_wrapper_1ga77dad6408d409bf0a4b99d9c589a5f1a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___function_wrapper_1ga7bb69a0a40e2189178d51c2346e82ec7" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Res</type>
@@ -276,15 +312,16 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator!=</definition>
+        <definition>bool neforce::operator!=</definition>
         <argsstring>(nullptr_t np, const function&lt; Res(Args...)&gt; &amp;f) noexcept</argsstring>
         <name>operator!=</name>
+        <qualifiedname>neforce::operator!=</qualifiedname>
         <param>
-          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <type>nullptr_t</type>
           <declname>np</declname>
         </param>
         <param>
-          <type>const <ref refid="classfunction" kindref="compound">function</ref>&lt; Res(Args...)&gt; &amp;</type>
+          <type>const function&lt; Res(Args...)&gt; &amp;</type>
           <declname>f</declname>
         </param>
         <briefdescription>
@@ -331,7 +368,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="568" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="568" bodyend="570"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="569" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="569" bodyend="571"/>
+        <references refid="group___function_wrapper_1ga245168fc07a7b8f6d303ddab962e1bea" compoundref="functional_2function_8hpp" startline="556" endline="558">neforce::operator!=</references>
       </memberdef>
     </sectiondef>
     <briefdescription>

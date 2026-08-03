@@ -3254,6 +3254,10 @@ public:
 #    pragma clang diagnostic ignored "-Watomic-alignment"
 #endif
 
+/**
+ * @brief 指针类型的原子引用特化
+ * @tparam T 原始类型
+ */
 template <typename T>
 struct atomic_ref_base<T*, false, false> {
 public:

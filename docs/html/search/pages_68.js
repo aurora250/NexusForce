@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['码点范围定义_0',['Unicode 码点范围定义',['../group___code_point.html#unicode_ranges',1,'']]],
-  ['码点验证规则_1',['码点验证规则',['../group___code_point.html#validation_rules',1,'']]]
+  ['特性_0',['🚀 特性',['../index.html#autotoc_md17',1,'']]],
+  ['特殊值处理_1',['特殊值处理',['../group___math_functions.html#special_values',1,'']]]
 ];

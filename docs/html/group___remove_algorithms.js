@@ -1,9 +1,9 @@
 var group___remove_algorithms =
 [
-    [ "erase", "group___remove_algorithms.html#ga80e72b34181ffb739e061b6dbe19a6b6", null ],
-    [ "erase_if", "group___remove_algorithms.html#ga5d86f8052a2e5759aeab543c23f3c861", null ],
-    [ "remove", "group___remove_algorithms.html#gab60509ebaf6c33a45885638e30e9e9b2", null ],
-    [ "remove_copy", "group___remove_algorithms.html#ga5962b7908ac4eea784e2872b03294a7e", null ],
-    [ "remove_copy_if", "group___remove_algorithms.html#gab79933ba60a9e8d48147d15911fef58f", null ],
-    [ "remove_if", "group___remove_algorithms.html#ga02dd5101700733210a677808983ebfcc", null ]
+    [ "neforce::erase", "group___remove_algorithms.html#ga146602eb771f779b293fa34bc3c72966", null ],
+    [ "neforce::erase_if", "group___remove_algorithms.html#gaa3c53ce3df1c6a586f2af5e9debf2828", null ],
+    [ "neforce::remove", "group___remove_algorithms.html#gaeed66e3840ca89e8469c9cee5c147987", null ],
+    [ "neforce::remove_copy", "group___remove_algorithms.html#gaf22dbf71711f571a1e196dcffdf2ab63", null ],
+    [ "neforce::remove_copy_if", "group___remove_algorithms.html#ga7b135817a5ced7418449924032d3c8d9", null ],
+    [ "neforce::remove_if", "group___remove_algorithms.html#gafe93cfbcbfba8fccb49c198ad3bbe4b1", null ]
 ];

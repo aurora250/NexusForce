@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['适用场景_0',['适用场景',['../group___s_h_a256.html#usage',1,'']]]
+  ['请求方法_0',['HTTP 请求方法',['../group___h_t_t_p.html#http_methods',1,'']]]
 ];

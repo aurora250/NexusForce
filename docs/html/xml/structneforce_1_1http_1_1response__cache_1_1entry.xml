@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1http_1_1response__cache_1_1entry" kind="struct" language="C++" prot="private">
+    <compoundname>neforce::http::response_cache::entry</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structneforce_1_1http_1_1response__cache_1_1entry_1a16293b340e3b964ce4477f49c79f277e" prot="public" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1http_1_1cached__response" kindref="compound">cached_response</ref></type>
+        <definition>cached_response neforce::http::response_cache::entry::response</definition>
+        <argsstring></argsstring>
+        <name>response</name>
+        <qualifiedname>neforce::http::response_cache::entry::response</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="97" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1http_1_1response__cache_1_1entry_1aca3442b6b33a1ba2dcf17059dfae25be" prot="public" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga5405672bf9962081e6fcd1448d4bce4a" kindref="member">uint64_t</ref></type>
+        <definition>uint64_t neforce::http::response_cache::entry::last_access_ms</definition>
+        <argsstring></argsstring>
+        <name>last_access_ms</name>
+        <qualifiedname>neforce::http::response_cache::entry::last_access_ms</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="98" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>neforce::basic_string&lt; char &gt;</label>
+        <link refid="classneforce_1_1basic__string"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>neforce::datetime</label>
+        <link refid="classneforce_1_1datetime"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>neforce::duration&lt; int64_t &gt;</label>
+        <link refid="structneforce_1_1duration"/>
+      </node>
+      <node id="2">
+        <label>neforce::http::cached_response</label>
+        <link refid="structneforce_1_1http_1_1cached__response"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>body</edgelabel>
+          <edgelabel>etag</edgelabel>
+          <edgelabel>status_message</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>headers</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>cached_at</edgelabel>
+        </childnode>
+        <childnode refid="14" relation="usage">
+          <edgelabel>max_age</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::http::response_cache::entry</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>response</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::icommon&lt; T &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>neforce::icommon&lt; datetime &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+        <childnode refid="13" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="12">
+        <label>neforce::icomparable&lt; datetime &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="6">
+        <label>neforce::ihashable&lt; T &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="13">
+        <label>neforce::ihashable&lt; datetime &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="9">
+        <label>neforce::iobject&lt; datetime &gt;</label>
+        <link refid="structneforce_1_1iobject"/>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>neforce::istringify&lt; datetime &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+      <node id="7">
+        <label>neforce::unordered_map&lt; neforce::basic_string&lt; char &gt;, neforce::basic_string&lt; char &gt; &gt;</label>
+        <link refid="classneforce_1_1unordered__map"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="96" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" bodystart="96" bodyend="99"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1http_1_1response__cache_1_1entry_1aca3442b6b33a1ba2dcf17059dfae25be" prot="public" virt="non-virtual"><scope>neforce::http::response_cache::entry</scope><name>last_access_ms</name></member>
+      <member refid="structneforce_1_1http_1_1response__cache_1_1entry_1a16293b340e3b964ce4477f49c79f277e" prot="public" virt="non-virtual"><scope>neforce::http::response_cache::entry</scope><name>response</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

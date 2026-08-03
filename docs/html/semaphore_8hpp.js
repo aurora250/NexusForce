@@ -1,4 +1,4 @@
 var semaphore_8hpp =
 [
-    [ "binary_semaphore", "group___semaphores.html#gab2a6957724f0f8a6acdf255f36329235", null ]
+    [ "neforce::binary_semaphore", "group___semaphores.html#ga97d0ee9a1b16f218fdca62f7230c2d4d", null ]
 ];

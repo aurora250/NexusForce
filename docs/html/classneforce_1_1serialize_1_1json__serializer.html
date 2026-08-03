@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::serialize::json_serializer类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1serialize_1_1json__serializer.html','','classneforce_1_1serialize_1_1json__serializer-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::serialize::json_serializer类 参考<div class="ingroups"><a class="el" href="group___serializer.html">序列化</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>JSON 序列化器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="json__serializer_8hpp_source.html">json_serializer.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静态 Public 成员函数</h2></td></tr>
+<tr class="memitem:ae9aaf921ac20c79b2c9efd0dd9e1e1b8" id="r_ae9aaf921ac20c79b2c9efd0dd9e1e1b8"><td class="memItemLeft">static <a class="el" href="classneforce_1_1unique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classneforce_1_1json__value.html">json_value</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ae9aaf921ac20c79b2c9efd0dd9e1e1b8">serialize</a> (const <a class="el" href="classneforce_1_1reflect_1_1meta__any.html">reflect::meta_any</a> &amp;obj, const <a class="el" href="structneforce_1_1serialize_1_1serialize__context.html">serialize_context</a> &amp;ctx={})</td></tr>
+<tr class="memdesc:ae9aaf921ac20c79b2c9efd0dd9e1e1b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">将反射对象序列化为 JSON 值树  <br /></td></tr>
+<tr class="memitem:acbdd0614f730ec8a5732651854bb876f" id="r_acbdd0614f730ec8a5732651854bb876f"><td class="memItemLeft">static <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#acbdd0614f730ec8a5732651854bb876f">to_string</a> (const <a class="el" href="classneforce_1_1reflect_1_1meta__any.html">reflect::meta_any</a> &amp;obj, const <a class="el" href="structneforce_1_1serialize_1_1serialize__context.html">serialize_context</a> &amp;ctx={})</td></tr>
+<tr class="memdesc:acbdd0614f730ec8a5732651854bb876f"><td class="mdescLeft">&#160;</td><td class="mdescRight">将反射对象序列化为 JSON 字符串  <br /></td></tr>
+<tr class="memitem:a57ebb75e13758db7ebca21bb6d8f9afc" id="r_a57ebb75e13758db7ebca21bb6d8f9afc"><td class="memItemLeft">static <a class="el" href="classneforce_1_1reflect_1_1meta__any.html">reflect::meta_any</a>&#160;</td><td class="memItemRight"><a class="el" href="#a57ebb75e13758db7ebca21bb6d8f9afc">deserialize</a> (const <a class="el" href="classneforce_1_1json__value.html">json_value</a> &amp;value, const <a class="el" href="classneforce_1_1reflect_1_1meta__type.html">reflect::meta_type</a> &amp;type, const <a class="el" href="structneforce_1_1serialize_1_1serialize__context.html">serialize_context</a> &amp;ctx={})</td></tr>
+<tr class="memdesc:a57ebb75e13758db7ebca21bb6d8f9afc"><td class="mdescLeft">&#160;</td><td class="mdescRight">从 JSON 值树反序列化对象  <br /></td></tr>
+<tr class="memitem:a34cbe1e978936d12053df2832a006d9b" id="r_a34cbe1e978936d12053df2832a006d9b"><td class="memItemLeft">static <a class="el" href="classneforce_1_1reflect_1_1meta__any.html">reflect::meta_any</a>&#160;</td><td class="memItemRight"><a class="el" href="#a34cbe1e978936d12053df2832a006d9b">from_string</a> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;json_str, const <a class="el" href="classneforce_1_1reflect_1_1meta__type.html">reflect::meta_type</a> &amp;type, const <a class="el" href="structneforce_1_1serialize_1_1serialize__context.html">serialize_context</a> &amp;ctx={})</td></tr>
+<tr class="memdesc:a34cbe1e978936d12053df2832a006d9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">从 JSON 字符串反序列化对象  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>JSON 序列化器 </p>
+<p>将反射注册的对象转换为 JSON 表示，或从 JSON 重建对象。 自动遍历 meta_type 的属性列表，跳过暂态属性。 </p>
+
+<p class="definition">在文件 <a class="el" href="json__serializer_8hpp_source.html">json_serializer.hpp</a> 第 <a class="el" href="json__serializer_8hpp_source.html#l00030">30</a> 行定义.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a57ebb75e13758db7ebca21bb6d8f9afc" name="a57ebb75e13758db7ebca21bb6d8f9afc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57ebb75e13758db7ebca21bb6d8f9afc">&#9670;&#160;</a></span>deserialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1reflect_1_1meta__any.html">reflect::meta_any</a> neforce::serialize::json_serializer::deserialize </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classneforce_1_1json__value.html">json_value</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classneforce_1_1reflect_1_1meta__type.html">reflect::meta_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>type</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structneforce_1_1serialize_1_1serialize__context.html">serialize_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>从 JSON 值树反序列化对象 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>JSON 值树 </td></tr>
+    <tr><td class="paramname">type</td><td>目标类型元数据 </td></tr>
+    <tr><td class="paramname">ctx</td><td>序列化上下文 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>重建的对象 </dd></dl>
+
+</div>
+</div>
+<a id="a34cbe1e978936d12053df2832a006d9b" name="a34cbe1e978936d12053df2832a006d9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34cbe1e978936d12053df2832a006d9b">&#9670;&#160;</a></span>from_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1reflect_1_1meta__any.html">reflect::meta_any</a> neforce::serialize::json_serializer::from_string </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>json_str</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classneforce_1_1reflect_1_1meta__type.html">reflect::meta_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>type</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structneforce_1_1serialize_1_1serialize__context.html">serialize_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>从 JSON 字符串反序列化对象 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">json_str</td><td>JSON 字符串 </td></tr>
+    <tr><td class="paramname">type</td><td>目标类型元数据 </td></tr>
+    <tr><td class="paramname">ctx</td><td>序列化上下文 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>重建的对象 </dd></dl>
+
+</div>
+</div>
+<a id="ae9aaf921ac20c79b2c9efd0dd9e1e1b8" name="ae9aaf921ac20c79b2c9efd0dd9e1e1b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9aaf921ac20c79b2c9efd0dd9e1e1b8">&#9670;&#160;</a></span>serialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1unique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classneforce_1_1json__value.html">json_value</a> &gt; neforce::serialize::json_serializer::serialize </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classneforce_1_1reflect_1_1meta__any.html">reflect::meta_any</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>obj</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structneforce_1_1serialize_1_1serialize__context.html">serialize_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>将反射对象序列化为 JSON 值树 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">obj</td><td>要序列化的对象 </td></tr>
+    <tr><td class="paramname">ctx</td><td>序列化上下文 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>JSON 值树的根节点 </dd></dl>
+
+</div>
+</div>
+<a id="acbdd0614f730ec8a5732651854bb876f" name="acbdd0614f730ec8a5732651854bb876f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbdd0614f730ec8a5732651854bb876f">&#9670;&#160;</a></span>to_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> neforce::serialize::json_serializer::to_string </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classneforce_1_1reflect_1_1meta__any.html">reflect::meta_any</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>obj</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structneforce_1_1serialize_1_1serialize__context.html">serialize_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>将反射对象序列化为 JSON 字符串 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">obj</td><td>要序列化的对象 </td></tr>
+    <tr><td class="paramname">ctx</td><td>序列化上下文 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>JSON 字符串 </dd></dl>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="json__serializer_8hpp_source.html">json_serializer.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><b>serialize</b></li><li class="navelem"><a href="classneforce_1_1serialize_1_1json__serializer.html">json_serializer</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

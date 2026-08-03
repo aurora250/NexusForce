@@ -1,0 +1,3010 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1hashtable" kind="class" language="C++" prot="public">
+    <compoundname>neforce::hashtable</compoundname>
+    <basecompoundref refid="structneforce_1_1icollector" prot="public" virt="non-virtual">neforce::icollector&lt; hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &gt;</basecompoundref>
+    <includes refid="hashtable_8hpp" local="no">hashtable.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Value</type>
+      </param>
+      <param>
+        <type>typename Key</type>
+      </param>
+      <param>
+        <type>typename HashFcn</type>
+      </param>
+      <param>
+        <type>typename ExtractKey</type>
+      </param>
+      <param>
+        <type>typename EqualKey</type>
+      </param>
+      <param>
+        <type>typename Alloc</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1hashtable_1a7a98dc10f90001eab1bdbdcccabaf3bc" prot="public" static="no">
+        <type>Key</type>
+        <definition>using neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::key_type = Key</definition>
+        <argsstring></argsstring>
+        <name>key_type</name>
+        <qualifiedname>neforce::hashtable::key_type</qualifiedname>
+        <briefdescription>
+<para>键类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="405" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="405" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1hashtable_1ad157fb75879f334c6f51fee5c9024901" prot="public" static="no">
+        <type>HashFcn</type>
+        <definition>using neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::hasher = HashFcn</definition>
+        <argsstring></argsstring>
+        <name>hasher</name>
+        <qualifiedname>neforce::hashtable::hasher</qualifiedname>
+        <briefdescription>
+<para>哈希函数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="406" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="406" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1hashtable_1a244ed6e691bf1b1a789f4e695e1818bd" prot="public" static="no">
+        <type>EqualKey</type>
+        <definition>using neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::key_equal = EqualKey</definition>
+        <argsstring></argsstring>
+        <name>key_equal</name>
+        <qualifiedname>neforce::hashtable::key_equal</qualifiedname>
+        <briefdescription>
+<para>键相等比较函数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="407" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="407" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1hashtable_1a36229d31e40396ad7a453f2e7761d633" prot="public" static="no">
+        <type>Value</type>
+        <definition>using neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::value_type = Value</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>neforce::hashtable::value_type</qualifiedname>
+        <briefdescription>
+<para>值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="409" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="409" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1hashtable_1a008bea1fa7c7965240bdde9ac3bcf689" prot="public" static="no">
+        <type>Value *</type>
+        <definition>using neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::pointer = Value*</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>neforce::hashtable::pointer</qualifiedname>
+        <briefdescription>
+<para>指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="410" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="410" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1hashtable_1a76934e55ea2c65881c3e688aace453cb" prot="public" static="no">
+        <type>Value &amp;</type>
+        <definition>using neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::reference = Value&amp;</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>neforce::hashtable::reference</qualifiedname>
+        <briefdescription>
+<para>引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="411" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="411" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1hashtable_1abeb4688a4c54eda6fb4ce08c3d87bf26" prot="public" static="no">
+        <type>const Value *</type>
+        <definition>using neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::const_pointer = const Value*</definition>
+        <argsstring></argsstring>
+        <name>const_pointer</name>
+        <qualifiedname>neforce::hashtable::const_pointer</qualifiedname>
+        <briefdescription>
+<para>常量指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="412" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="412" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1hashtable_1a6688f3d749cf166d2ecb55924b091afa" prot="public" static="no">
+        <type>const Value &amp;</type>
+        <definition>using neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::const_reference = const Value&amp;</definition>
+        <argsstring></argsstring>
+        <name>const_reference</name>
+        <qualifiedname>neforce::hashtable::const_reference</qualifiedname>
+        <briefdescription>
+<para>常量引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="413" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="413" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>using neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::size_type = size_t</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>neforce::hashtable::size_type</qualifiedname>
+        <briefdescription>
+<para>大小类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="414" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="414" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1hashtable_1aa02fc78affd2f1bf107f8a8313943833" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1gab2c4bc5144496796ce8a7feed7b8ad58" kindref="member">ptrdiff_t</ref></type>
+        <definition>using neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::difference_type = ptrdiff_t</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>neforce::hashtable::difference_type</qualifiedname>
+        <briefdescription>
+<para>差值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="415" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="415" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1hashtable_1aee447c96dc5ebe31fc8bfe15d62d43fb" prot="public" static="no">
+        <type>hashtable_iterator&lt; false, <ref refid="classneforce_1_1hashtable_1aec04f4dc6432fecebe18764488ae665d" kindref="member">hashtable</ref> &gt;</type>
+        <definition>using neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::iterator = hashtable_iterator&lt;false, hashtable&gt;</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>neforce::hashtable::iterator</qualifiedname>
+        <briefdescription>
+<para>迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="416" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="416" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1hashtable_1aa0a584c8b3f5f4e645cf841260d81005" prot="public" static="no">
+        <type>hashtable_iterator&lt; true, <ref refid="classneforce_1_1hashtable_1aec04f4dc6432fecebe18764488ae665d" kindref="member">hashtable</ref> &gt;</type>
+        <definition>using neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::const_iterator = hashtable_iterator&lt;true, hashtable&gt;</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <qualifiedname>neforce::hashtable::const_iterator</qualifiedname>
+        <briefdescription>
+<para>常量迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="417" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="417" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1hashtable_1a74354ef6e9c5e0360d3aa5dabfdf978d" prot="public" static="no">
+        <type>Alloc</type>
+        <definition>using neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::allocator_type = Alloc</definition>
+        <argsstring></argsstring>
+        <name>allocator_type</name>
+        <qualifiedname>neforce::hashtable::allocator_type</qualifiedname>
+        <briefdescription>
+<para>分配器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="418" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="418" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classneforce_1_1hashtable_1ad6db4c1795b213312497a3294513dff1" prot="private" static="no">
+        <type><ref refid="structneforce_1_1hashtable__node" kindref="compound">hashtable_node</ref>&lt; Value &gt;</type>
+        <definition>using neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::node_type = hashtable_node&lt;Value&gt;</definition>
+        <argsstring></argsstring>
+        <name>node_type</name>
+        <qualifiedname>neforce::hashtable::node_type</qualifiedname>
+        <briefdescription>
+<para>节点类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="421" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="421" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1hashtable_1ad376448b7dbe9cb04b6427d3f8ec3d09" prot="private" static="no">
+        <type>node_type *</type>
+        <definition>using neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::link_type = node_type*</definition>
+        <argsstring></argsstring>
+        <name>link_type</name>
+        <qualifiedname>neforce::hashtable::link_type</qualifiedname>
+        <briefdescription>
+<para>节点指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="422" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="422" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1hashtable_1a8e260dad999426c332062ae1cb17760b" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; link_type &gt;</type>
+        <definition>vector&lt;link_type&gt; neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::buckets_</definition>
+        <argsstring></argsstring>
+        <name>buckets_</name>
+        <qualifiedname>neforce::hashtable::buckets_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>桶数组 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="424" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="424" bodyend="424"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1hashtable_1a6da90759b447c63bc6869f45f33264f9" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::size_</definition>
+        <argsstring></argsstring>
+        <name>size_</name>
+        <qualifiedname>neforce::hashtable::size_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="425" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="425" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1hashtable_1a58507d08e54a0fa22a21ffe967780930" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1hashtable_1ad157fb75879f334c6f51fee5c9024901" kindref="member">hasher</ref></type>
+        <definition>hasher neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::hasher_</definition>
+        <argsstring></argsstring>
+        <name>hasher_</name>
+        <qualifiedname>neforce::hashtable::hasher_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>哈希函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="426" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="426" bodyend="426"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1hashtable_1a859559f7af725e8865ea41c0b62b3dc1" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1hashtable_1a244ed6e691bf1b1a789f4e695e1818bd" kindref="member">key_equal</ref></type>
+        <definition>key_equal neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::equals_</definition>
+        <argsstring></argsstring>
+        <name>equals_</name>
+        <qualifiedname>neforce::hashtable::equals_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>键相等比较对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="427" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="427" bodyend="427"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1hashtable_1abc061287cddea42c4611d6e068b5b05c" prot="private" static="no" mutable="no">
+        <type>ExtractKey</type>
+        <definition>ExtractKey neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::extracter_</definition>
+        <argsstring></argsstring>
+        <name>extracter_</name>
+        <qualifiedname>neforce::hashtable::extracter_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>值提取键对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="428" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="428" bodyend="428"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1hashtable_1a49aae2aaebf2129416ba6feaa3344ee4" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1compressed__pair" kindref="compound">compressed_pair</ref>&lt; <ref refid="classneforce_1_1hashtable_1a74354ef6e9c5e0360d3aa5dabfdf978d" kindref="member">allocator_type</ref>, float &gt;</type>
+        <definition>compressed_pair&lt;allocator_type, float&gt; neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::pair_</definition>
+        <argsstring></argsstring>
+        <name>pair_</name>
+        <qualifiedname>neforce::hashtable::pair_</qualifiedname>
+        <initializer>{<ref refid="structneforce_1_1default__construct__tag" kindref="compound">default_construct_tag</ref>{}, 1.0F}</initializer>
+        <briefdescription>
+<para>压缩存储分配器和最大负载因子 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="429" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="429" bodyend="429"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classneforce_1_1hashtable_1a9d874f5b0916c12191375432977eac78" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>struct</type>
+        <definition>friend struct hashtable_iterator</definition>
+        <argsstring></argsstring>
+        <name>hashtable_iterator</name>
+        <qualifiedname>neforce::hashtable::hashtable_iterator</qualifiedname>
+        <param>
+          <type>hashtable_iterator</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="432" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="432" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a378774ad022c9051ac145e36ef0b9571" prot="private" static="yes" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+        <definition>static size_type neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::next_size</definition>
+        <argsstring>(const size_type n) noexcept</argsstring>
+        <name>next_size</name>
+        <qualifiedname>neforce::hashtable::next_size</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取不小于n的下一个素数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参考值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>素数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="440" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="440" bodyend="445"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1ac9ca14e3807fece92d3fda3f2056b3ef" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1aee447c96dc5ebe31fc8bfe15d62d43fb" kindref="member">iterator</ref></type>
+        <definition>static iterator neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::to_iterator</definition>
+        <argsstring>(const const_iterator &amp;iter) noexcept</argsstring>
+        <name>to_iterator</name>
+        <qualifiedname>neforce::hashtable::to_iterator</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1aa0a584c8b3f5f4e645cf841260d81005" kindref="member">const_iterator</ref> &amp;</type>
+          <declname>iter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="830" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="830" bodyend="832"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a958fa8f59fcb884c46a07e0545d63aea" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1aa0a584c8b3f5f4e645cf841260d81005" kindref="member">const_iterator</ref></type>
+        <definition>static const_iterator neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::to_const_iterator</definition>
+        <argsstring>(const iterator &amp;iter) noexcept</argsstring>
+        <name>to_const_iterator</name>
+        <qualifiedname>neforce::hashtable::to_const_iterator</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1aee447c96dc5ebe31fc8bfe15d62d43fb" kindref="member">iterator</ref> &amp;</type>
+          <declname>iter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="834" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="834" bodyend="836"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1hashtable_1aa21d08982ace5358af9337c4f7c968b6" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::initialize_buckets</definition>
+        <argsstring>(const size_type n)</argsstring>
+        <name>initialize_buckets</name>
+        <qualifiedname>neforce::hashtable::initialize_buckets</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>初始化桶数组 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望的桶数量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="451" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="451" bodyend="454"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a5920078c70b3d3f078ac48677668dbf0" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_hashable_v&lt; key_type &gt;" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::bucket_index_key</definition>
+        <argsstring>(const key_type &amp;key, const size_t n) const</argsstring>
+        <name>bucket_index_key</name>
+        <qualifiedname>neforce::hashtable::bucket_index_key</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1a7a98dc10f90001eab1bdbdcccabaf3bc" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>计算键的桶索引 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>桶数量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>桶索引 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="462" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="462" bodyend="467"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a1cb0086ee72125426fded95e9758cd3a" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_hashable_v&lt; key_type &gt;" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::bucket_index_value</definition>
+        <argsstring>(const value_type &amp;value, const size_t n) const</argsstring>
+        <name>bucket_index_value</name>
+        <qualifiedname>neforce::hashtable::bucket_index_value</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1a36229d31e40396ad7a453f2e7761d633" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>计算值的桶索引 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>桶数量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>桶索引 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="475" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="475" bodyend="478"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1adad68cb944144e4bec5b0c7c97ca6ecf" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>link_type</type>
+        <definition>link_type neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::new_node</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>new_node</name>
+        <qualifiedname>neforce::hashtable::new_node</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>创建新节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>新节点指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="487" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="487" bodyend="497"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a8b199f19311c824a242ae94955bbe13b" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::delete_node</definition>
+        <argsstring>(link_type n) noexcept</argsstring>
+        <name>delete_node</name>
+        <qualifiedname>neforce::hashtable::delete_node</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>删除节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的节点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="503" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="503" bodyend="506"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a25bc79a06bbe89339e6a82282393704f" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::copy_from</definition>
+        <argsstring>(const hashtable &amp;other)</argsstring>
+        <name>copy_from</name>
+        <qualifiedname>neforce::hashtable::copy_from</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1aec04f4dc6432fecebe18764488ae665d" kindref="member">hashtable</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>从另一个哈希表拷贝 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源哈希表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="512" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="512" bodyend="532"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a508f96d002adc66e7e9c275870c4930d" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1hashtable_1aee447c96dc5ebe31fc8bfe15d62d43fb" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_unique_noresize</definition>
+        <argsstring>(link_type ptr)</argsstring>
+        <name>insert_unique_noresize</name>
+        <qualifiedname>neforce::hashtable::insert_unique_noresize</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>插入唯一键节点（不触发rehash） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的节点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="539" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="539" bodyend="556"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1ac3b4ede1a749fa9ec42ed9a8eb8e92fc" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1aee447c96dc5ebe31fc8bfe15d62d43fb" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_equal_noresize</definition>
+        <argsstring>(link_type ptr)</argsstring>
+        <name>insert_equal_noresize</name>
+        <qualifiedname>neforce::hashtable::insert_equal_noresize</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>插入允许重复键节点（不触发rehash） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的节点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="563" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="563" bodyend="584"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1ab35a9904e453c4cc445f690f3543b431" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___iterator_category_checks_1gace1b5811f58b26e736680d8234eb5627" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <definition>enable_if_t&lt;!is_ranges_fwd_iter_v&lt; Iterator &gt; &gt; neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_unique_aux</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insert_unique_aux</name>
+        <qualifiedname>neforce::hashtable::insert_unique_aux</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入唯一键（非前向迭代器版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="593" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="593" bodyend="598"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a00b2dd6324aded0951c0fa1216b8e35d" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1gace1b5811f58b26e736680d8234eb5627" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <definition>enable_if_t&lt; is_ranges_fwd_iter_v&lt; Iterator &gt; &gt; neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_unique_aux</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insert_unique_aux</name>
+        <qualifiedname>neforce::hashtable::insert_unique_aux</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入唯一键（前向迭代器版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="607" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="607" bodyend="619"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1af18168471eb0bf907d2d887288412a13" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___iterator_category_checks_1gace1b5811f58b26e736680d8234eb5627" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <definition>enable_if_t&lt;!is_ranges_fwd_iter_v&lt; Iterator &gt; &gt; neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_equal_aux</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insert_equal_aux</name>
+        <qualifiedname>neforce::hashtable::insert_equal_aux</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入允许重复键（非前向迭代器版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="628" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="628" bodyend="633"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a2a8417d1e3c44767cf3e7e918812574f" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1gace1b5811f58b26e736680d8234eb5627" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <definition>enable_if_t&lt; is_ranges_fwd_iter_v&lt; Iterator &gt; &gt; neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_equal_aux</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insert_equal_aux</name>
+        <qualifiedname>neforce::hashtable::insert_equal_aux</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入允许重复键（前向迭代器版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="642" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="642" bodyend="654"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a6853d54dfb119d6220132a09120dd303" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::erase_bucket_to_node</definition>
+        <argsstring>(size_type bucket, link_type last) noexcept</argsstring>
+        <name>erase_bucket_to_node</name>
+        <qualifiedname>neforce::hashtable::erase_bucket_to_node</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+          <declname>bucket</declname>
+        </param>
+        <param>
+          <type>link_type</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除桶中从开头到指定节点的节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bucket</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>桶索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束节点（不删除） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>删除的节点数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="662" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="662" bodyend="673"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a5b0fb5967ff4afe28eef174a745238ba" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::erase_bucket_range</definition>
+        <argsstring>(size_type bucket, link_type first, link_type last) noexcept</argsstring>
+        <name>erase_bucket_range</name>
+        <qualifiedname>neforce::hashtable::erase_bucket_range</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+          <declname>bucket</declname>
+        </param>
+        <param>
+          <type>link_type</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>link_type</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除桶中指定范围内的节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bucket</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>桶索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始节点 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束节点（不删除） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>删除的节点数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="682" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="682" bodyend="709"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a738fff103d82ff3baf5788ad6293fd86" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::erase_bucket_completely</definition>
+        <argsstring>(size_type bucket) noexcept</argsstring>
+        <name>erase_bucket_completely</name>
+        <qualifiedname>neforce::hashtable::erase_bucket_completely</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+          <declname>bucket</declname>
+        </param>
+        <briefdescription>
+<para>删除桶中的所有节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bucket</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>桶索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>删除的节点数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="716" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="716" bodyend="727"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1ae558c2c1970e334ea5af81cf6c6802b1" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::equal_small</definition>
+        <argsstring>(const hashtable &amp;rhs) const</argsstring>
+        <name>equal_small</name>
+        <qualifiedname>neforce::hashtable::equal_small</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1aec04f4dc6432fecebe18764488ae665d" kindref="member">hashtable</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较辅助函数（小数据量） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧哈希表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否相等 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="734" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="734" bodyend="749"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1aa515fcb7fed419c271d402d5ca6ebc08" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::equal_large</definition>
+        <argsstring>(const hashtable &amp;rhs) const</argsstring>
+        <name>equal_large</name>
+        <qualifiedname>neforce::hashtable::equal_large</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1aec04f4dc6432fecebe18764488ae665d" kindref="member">hashtable</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较辅助函数（大数据量） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧哈希表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否相等 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="756" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="756" bodyend="828"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1hashtable_1aec04f4dc6432fecebe18764488ae665d" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::hashtable</definition>
+        <argsstring>(const size_type n, float max_lf=1.0F)</argsstring>
+        <name>hashtable</name>
+        <qualifiedname>neforce::hashtable::hashtable</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>max_lf</declname>
+          <defval>1.0F</defval>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始桶数量提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_lf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最大负载因子 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="844" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="844" bodyend="846"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a11668cdbbcf3866091e3cce919e0d9d5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::hashtable</definition>
+        <argsstring>(const size_type n, const HashFcn &amp;hf, float max_lf=1.0F)</argsstring>
+        <name>hashtable</name>
+        <qualifiedname>neforce::hashtable::hashtable</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const HashFcn &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>max_lf</declname>
+          <defval>1.0F</defval>
+        </param>
+        <briefdescription>
+<para>构造函数，指定哈希函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始桶数量提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_lf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最大负载因子 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="854" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="854" bodyend="857"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1ae3fa4ba8ef85713ee60113515a00b366" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::hashtable</definition>
+        <argsstring>(const size_type n, const HashFcn &amp;hf, const EqualKey &amp;eql, float max_lf=1.0F)</argsstring>
+        <name>hashtable</name>
+        <qualifiedname>neforce::hashtable::hashtable</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const HashFcn &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <param>
+          <type>const EqualKey &amp;</type>
+          <declname>eql</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>max_lf</declname>
+          <defval>1.0F</defval>
+        </param>
+        <briefdescription>
+<para>构造函数，指定哈希函数和相等比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始桶数量提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>相等比较函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_lf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最大负载因子 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="866" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="866" bodyend="870"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a8304b71160c459760f0b2cd989b628ab" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::hashtable</definition>
+        <argsstring>(const size_type n, const HashFcn &amp;hf, const EqualKey &amp;eql, const ExtractKey &amp;ext, float max_lf=1.0F)</argsstring>
+        <name>hashtable</name>
+        <qualifiedname>neforce::hashtable::hashtable</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const HashFcn &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <param>
+          <type>const EqualKey &amp;</type>
+          <declname>eql</declname>
+        </param>
+        <param>
+          <type>const ExtractKey &amp;</type>
+          <declname>ext</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>max_lf</declname>
+          <defval>1.0F</defval>
+        </param>
+        <briefdescription>
+<para>构造函数，指定所有函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始桶数量提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>相等比较函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值提取函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_lf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最大负载因子 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="880" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="880" bodyend="885"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1ab8b823f946222c46b0d0f1e911c940b6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::hashtable</definition>
+        <argsstring>(const hashtable &amp;other)</argsstring>
+        <name>hashtable</name>
+        <qualifiedname>neforce::hashtable::hashtable</qualifiedname>
+        <param>
+          <type>const hashtable &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源哈希表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="891" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="891" bodyend="897"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a427d8a0597f923c2f6b045f8650775db" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1aec04f4dc6432fecebe18764488ae665d" kindref="member">hashtable</ref> &amp;</type>
+        <definition>hashtable &amp; neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::operator=</definition>
+        <argsstring>(const hashtable &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::hashtable::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1aec04f4dc6432fecebe18764488ae665d" kindref="member">hashtable</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源哈希表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="904" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="904" bodyend="914"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a8f4cca1b5ba7dc37ab49481811570e2a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(hashtable::swap(other))" virt="non-virtual">
+        <type></type>
+        <definition>neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::hashtable</definition>
+        <argsstring>(hashtable &amp;&amp;other)</argsstring>
+        <name>hashtable</name>
+        <qualifiedname>neforce::hashtable::hashtable</qualifiedname>
+        <param>
+          <type>hashtable &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源哈希表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="920" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="920" bodyend="928"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1adc88ebd9cf1e06499792d95c23cf5bcf" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(hashtable::swap(other))" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1aec04f4dc6432fecebe18764488ae665d" kindref="member">hashtable</ref> &amp;</type>
+        <definition>hashtable &amp; neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::operator=</definition>
+        <argsstring>(hashtable &amp;&amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::hashtable::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1hashtable_1aec04f4dc6432fecebe18764488ae665d" kindref="member">hashtable</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源哈希表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="935" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="935" bodyend="942"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a91b0be6eaebbdc15513e210ef7fc2a61" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::~hashtable</definition>
+        <argsstring>()</argsstring>
+        <name>~hashtable</name>
+        <qualifiedname>neforce::hashtable::~hashtable</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="947" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="947" bodyend="947"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a4f11be1a655c50445e1fff885b0d41b0" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1aee447c96dc5ebe31fc8bfe15d62d43fb" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::begin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>neforce::hashtable::begin</qualifiedname>
+        <briefdescription>
+<para>获取起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="953" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="953" bodyend="960"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a82487dba65f0cafa48285c593539cb7a" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1aee447c96dc5ebe31fc8bfe15d62d43fb" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::end</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>neforce::hashtable::end</qualifiedname>
+        <briefdescription>
+<para>获取结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向末尾的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="966" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="966" bodyend="966"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1ae6b82ca0384256ba4189c7d85dd37ad2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1aa0a584c8b3f5f4e645cf841260d81005" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>neforce::hashtable::begin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="972" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="972" bodyend="972"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1ac3f5a864332f3baa4f32a1fa605c9da1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1aa0a584c8b3f5f4e645cf841260d81005" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>neforce::hashtable::end</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向末尾的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="978" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="978" bodyend="978"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a7c3b077d61ba0000e448e9e0e3318c62" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1aa0a584c8b3f5f4e645cf841260d81005" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::cbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cbegin</name>
+        <qualifiedname>neforce::hashtable::cbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="984" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="984" bodyend="991"/>
+        <referencedby refid="classneforce_1_1hashtable_1a42aeebbb4baf0c303d0e8de04ec8f57a" compoundref="hashtable_8hpp" startline="1591" endline="1595">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::less_than</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a357b27f169b59955cee43763c38273ac" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1aa0a584c8b3f5f4e645cf841260d81005" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::cend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cend</name>
+        <qualifiedname>neforce::hashtable::cend</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向末尾的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="997" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="997" bodyend="997"/>
+        <referencedby refid="classneforce_1_1hashtable_1a42aeebbb4baf0c303d0e8de04ec8f57a" compoundref="hashtable_8hpp" startline="1591" endline="1595">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::less_than</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a92b6d88f95faabf2eb9b31b556d1f2ec" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>neforce::hashtable::size</qualifiedname>
+        <briefdescription>
+<para>获取元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1003" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1003" bodyend="1003"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a90e6b08bc69bc10f63f571d1bf17b241" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::max_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>max_size</name>
+        <qualifiedname>neforce::hashtable::max_size</qualifiedname>
+        <briefdescription>
+<para>获取最大可能大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1009" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1009" bodyend="1009"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a53bc5d35a1b5618d69ddf8a5847f5a37" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>neforce::hashtable::empty</qualifiedname>
+        <briefdescription>
+<para>检查是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否为空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1015" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1015" bodyend="1015"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1ac822c2998929890edc93ba7b3fdb8217" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::buckets_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>buckets_size</name>
+        <qualifiedname>neforce::hashtable::buckets_size</qualifiedname>
+        <briefdescription>
+<para>获取桶数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>桶数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1021" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1021" bodyend="1021"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1afa24d6c5f6ed16baba9e97651f051cd2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_hashable_v&lt; key_type &gt;" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::bucket_index</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>bucket_index</name>
+        <qualifiedname>neforce::hashtable::bucket_index</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1a7a98dc10f90001eab1bdbdcccabaf3bc" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取键的桶索引 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>桶索引 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1036" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1036" bodyend="1038"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1aeee639be09f1045705a5c177d35e198d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::bucket_size</definition>
+        <argsstring>(size_type index) const noexcept</argsstring>
+        <name>bucket_size</name>
+        <qualifiedname>neforce::hashtable::bucket_size</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>获取指定桶的大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>桶索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>桶中的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1045" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1045" bodyend="1051"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a580c7fb17368ab8128fdc719da6eeb19" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_copy_constructible_v&lt; hasher &gt;" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1ad157fb75879f334c6f51fee5c9024901" kindref="member">hasher</ref></type>
+        <definition>hasher neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::hash_function</definition>
+        <argsstring>() const</argsstring>
+        <name>hash_function</name>
+        <qualifiedname>neforce::hashtable::hash_function</qualifiedname>
+        <briefdescription>
+<para>获取哈希函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>哈希函数对象的副本 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1057" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1057" bodyend="1057"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a563b860892b963d53cc4f24b2c1f5042" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_copy_constructible_v&lt; key_equal &gt;" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1a244ed6e691bf1b1a789f4e695e1818bd" kindref="member">key_equal</ref></type>
+        <definition>key_equal neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::key_eql</definition>
+        <argsstring>() const</argsstring>
+        <name>key_eql</name>
+        <qualifiedname>neforce::hashtable::key_eql</qualifiedname>
+        <briefdescription>
+<para>获取键相等比较函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>键相等比较函数对象的副本 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1063" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1063" bodyend="1063"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1ab481fdeec184b7f7e495d97d215563fb" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::load_factor</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>load_factor</name>
+        <qualifiedname>neforce::hashtable::load_factor</qualifiedname>
+        <briefdescription>
+<para>获取当前负载因子 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>负载因子（元素数量/桶数量） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1069" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1069" bodyend="1071"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1ac435b5150d8d64d1cd571ecbcb18f176" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::max_load_factor</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>max_load_factor</name>
+        <qualifiedname>neforce::hashtable::max_load_factor</qualifiedname>
+        <briefdescription>
+<para>获取最大负载因子 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大负载因子 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1077" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1077" bodyend="1077"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a2969698d0a5a42e2c1c286567d1f4850" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::max_load_factor</definition>
+        <argsstring>(const float lf) noexcept</argsstring>
+        <name>max_load_factor</name>
+        <qualifiedname>neforce::hashtable::max_load_factor</qualifiedname>
+        <param>
+          <type>const float</type>
+          <declname>lf</declname>
+        </param>
+        <briefdescription>
+<para>设置最大负载因子 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的最大负载因子 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1083" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1083" bodyend="1086"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1af7d98df17fd541fd4f59d308181f8951" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::rehash</definition>
+        <argsstring>(const size_type new_size)</argsstring>
+        <name>rehash</name>
+        <qualifiedname>neforce::hashtable::rehash</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+          <declname>new_size</declname>
+        </param>
+        <briefdescription>
+<para>重新哈希，调整桶数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>new_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标桶数量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1092" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1092" bodyend="1124"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1ac37b4b36ec82f0ed42949dc774c19dca" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::reserve</definition>
+        <argsstring>(const size_type n)</argsstring>
+        <name>reserve</name>
+        <qualifiedname>neforce::hashtable::reserve</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>预留空间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望的元素数量</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+确保哈希表至少能容纳n个元素而不触发rehash。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1132" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1132" bodyend="1143"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a7e8898fba6caacf28d013e846bc3f515" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1hashtable_1aee447c96dc5ebe31fc8bfe15d62d43fb" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::emplace_unique</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace_unique</name>
+        <qualifiedname>neforce::hashtable::emplace_unique</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>构造元素（唯一键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1152" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1152" bodyend="1158"/>
+        <referencedby refid="classneforce_1_1hashtable_1a2251afe56159d2f319a7a7096495eca1" compoundref="hashtable_8hpp" startline="1180" endline="1180">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique</referencedby>
+        <referencedby refid="classneforce_1_1hashtable_1a956e56c0242bf72e496c4b512536bf89" compoundref="hashtable_8hpp" startline="1187" endline="1187">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a97fb6b87e1c0ed7aa4c18a298fc9efb0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1hashtable_1aee447c96dc5ebe31fc8bfe15d62d43fb" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::emplace_equal</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace_equal</name>
+        <qualifiedname>neforce::hashtable::emplace_equal</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>构造元素（允许重复键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1167" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1167" bodyend="1173"/>
+        <referencedby refid="classneforce_1_1hashtable_1af65b7b70294a029fe651b0024aaaeea0" compoundref="hashtable_8hpp" startline="1194" endline="1194">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal</referencedby>
+        <referencedby refid="classneforce_1_1hashtable_1a8e7c70864632133d2594a45ad32834b3" compoundref="hashtable_8hpp" startline="1201" endline="1201">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a2251afe56159d2f319a7a7096495eca1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1hashtable_1aee447c96dc5ebe31fc8bfe15d62d43fb" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_unique</definition>
+        <argsstring>(const value_type &amp;value)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>neforce::hashtable::insert_unique</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1a36229d31e40396ad7a453f2e7761d633" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>插入元素（唯一键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1180" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1180" bodyend="1180"/>
+        <referencedby refid="classneforce_1_1hashtable_1a5a59545b845f2089925540c38c68a3e8" compoundref="hashtable_8hpp" startline="1219" endline="1221">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a956e56c0242bf72e496c4b512536bf89" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1hashtable_1aee447c96dc5ebe31fc8bfe15d62d43fb" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_unique</definition>
+        <argsstring>(value_type &amp;&amp;value)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>neforce::hashtable::insert_unique</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1hashtable_1a36229d31e40396ad7a453f2e7761d633" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>移动插入元素（唯一键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1187" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1187" bodyend="1187"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1af65b7b70294a029fe651b0024aaaeea0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1aee447c96dc5ebe31fc8bfe15d62d43fb" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_equal</definition>
+        <argsstring>(const value_type &amp;value)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>neforce::hashtable::insert_equal</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1a36229d31e40396ad7a453f2e7761d633" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>插入元素（允许重复键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1194" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1194" bodyend="1194"/>
+        <referencedby refid="classneforce_1_1hashtable_1ac11f57ecf03c4499e41ae80f179ecca8" compoundref="hashtable_8hpp" startline="1239" endline="1239">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a8e7c70864632133d2594a45ad32834b3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1aee447c96dc5ebe31fc8bfe15d62d43fb" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_equal</definition>
+        <argsstring>(value_type &amp;&amp;value)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>neforce::hashtable::insert_equal</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1hashtable_1a36229d31e40396ad7a453f2e7761d633" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>移动插入元素（允许重复键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1201" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1201" bodyend="1201"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a0bbe338c002b6a3bb0f21e855c97d2d6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga4f7b2f70ba1539ec3326d52e89698f13" kindref="member">is_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <definition>enable_if_t&lt; is_iter_v&lt; Iterator &gt; &gt; neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_unique</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>neforce::hashtable::insert_unique</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入元素（唯一键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1210" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1210" bodyend="1213"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a5a59545b845f2089925540c38c68a3e8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_unique</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>neforce::hashtable::insert_unique</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classneforce_1_1hashtable_1a36229d31e40396ad7a453f2e7761d633" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表插入元素（唯一键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1219" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1219" bodyend="1221"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a1377cea328b80f121e4e7fd90d7ae19a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga4f7b2f70ba1539ec3326d52e89698f13" kindref="member">is_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <definition>enable_if_t&lt; is_iter_v&lt; Iterator &gt; &gt; neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_equal</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>neforce::hashtable::insert_equal</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入元素（允许重复键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1230" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1230" bodyend="1233"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1ac11f57ecf03c4499e41ae80f179ecca8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_equal</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>neforce::hashtable::insert_equal</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classneforce_1_1hashtable_1a36229d31e40396ad7a453f2e7761d633" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表插入元素（允许重复键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1239" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1239" bodyend="1239"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a234eb2157731ca53f2e7af0ed42f1a5e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_hashable_v&lt; key_type &gt;" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::hashtable::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1a7a98dc10f90001eab1bdbdcccabaf3bc" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>删除所有具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>删除的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1246" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1246" bodyend="1277"/>
+        <referencedby refid="classneforce_1_1hashtable_1aeb38963838854c714756ec915681de28" compoundref="hashtable_8hpp" startline="1362" endline="1364">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classneforce_1_1hashtable_1a65cdc6fa5b9c363cbd2af3f82a957d2c" compoundref="hashtable_8hpp" startline="1372" endline="1375">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a799119ba67274882f189c59643aaf891" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_hashable_v&lt; key_type &gt;" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1aee447c96dc5ebe31fc8bfe15d62d43fb" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(const iterator &amp;position)</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::hashtable::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1aee447c96dc5ebe31fc8bfe15d62d43fb" kindref="member">iterator</ref> &amp;</type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>删除指定位置的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向被删除元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1284" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1284" bodyend="1323"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a2a1c2e3c31005b8c125fdcc74a5ff234" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_hashable_v&lt; key_type &gt;" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1aee447c96dc5ebe31fc8bfe15d62d43fb" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(iterator first, iterator last)</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::hashtable::erase</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1hashtable_1aee447c96dc5ebe31fc8bfe15d62d43fb" kindref="member">iterator</ref></type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1hashtable_1aee447c96dc5ebe31fc8bfe15d62d43fb" kindref="member">iterator</ref></type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除指定范围内的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向最后一个被删除元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1331" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1331" bodyend="1355"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1aeb38963838854c714756ec915681de28" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_hashable_v&lt; key_type &gt;" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1aa0a584c8b3f5f4e645cf841260d81005" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(const const_iterator &amp;position)</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::hashtable::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1aa0a584c8b3f5f4e645cf841260d81005" kindref="member">const_iterator</ref> &amp;</type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>删除指定位置的元素（常量迭代器版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向被删除元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1362" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1362" bodyend="1364"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a65cdc6fa5b9c363cbd2af3f82a957d2c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_hashable_v&lt; key_type &gt;" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1aa0a584c8b3f5f4e645cf841260d81005" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(const_iterator first, const_iterator last)</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::hashtable::erase</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1hashtable_1aa0a584c8b3f5f4e645cf841260d81005" kindref="member">const_iterator</ref></type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1hashtable_1aa0a584c8b3f5f4e645cf841260d81005" kindref="member">const_iterator</ref></type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除指定范围内的元素（常量迭代器版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向最后一个被删除元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1372" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1372" bodyend="1375"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1adda1e2662e898164613d0377762c2e18" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::clear</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clear</name>
+        <qualifiedname>neforce::hashtable::clear</qualifiedname>
+        <briefdescription>
+<para>清空哈希表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1380" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1380" bodyend="1391"/>
+        <referencedby refid="classneforce_1_1hashtable_1a427d8a0597f923c2f6b045f8650775db" compoundref="hashtable_8hpp" startline="904" endline="914">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a7b1c7657a926eb20ddc7903834fcf520" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_hashable_v&lt; key_type &gt;" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1aee447c96dc5ebe31fc8bfe15d62d43fb" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>find</name>
+        <qualifiedname>neforce::hashtable::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1a7a98dc10f90001eab1bdbdcccabaf3bc" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的迭代器，未找到则返回end() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1398" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1398" bodyend="1410"/>
+        <referencedby refid="classneforce_1_1hashtable_1afaca751e5df91ea5f9eb33bfe5f3acd7" compoundref="hashtable_8hpp" startline="1455" endline="1457">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::contains</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a926e62481251dd424a2f24a2ae27f3db" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_hashable_v&lt; key_type &gt;" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1aa0a584c8b3f5f4e645cf841260d81005" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>find</name>
+        <qualifiedname>neforce::hashtable::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1a7a98dc10f90001eab1bdbdcccabaf3bc" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的元素（常量版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的常量迭代器，未找到则返回cend() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1417" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1417" bodyend="1429"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a379bb40cdd2b84010bb7f57f395cbe76" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_hashable_v&lt; key_type &gt;" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::count</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>count</name>
+        <qualifiedname>neforce::hashtable::count</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1a7a98dc10f90001eab1bdbdcccabaf3bc" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>统计具有指定键的元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要统计的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>匹配的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1436" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1436" bodyend="1448"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1afaca751e5df91ea5f9eb33bfe5f3acd7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_hashable_v&lt; key_type &gt;" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::contains</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>contains</name>
+        <qualifiedname>neforce::hashtable::contains</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1a7a98dc10f90001eab1bdbdcccabaf3bc" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>检查是否包含指定键 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否包含 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1455" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1455" bodyend="1457"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a739adcd76730b47c3ea48ff07b820427" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1hashtable_1aee447c96dc5ebe31fc8bfe15d62d43fb" kindref="member">iterator</ref>, <ref refid="classneforce_1_1hashtable_1aee447c96dc5ebe31fc8bfe15d62d43fb" kindref="member">iterator</ref> &gt;</type>
+        <definition>pair&lt; iterator, iterator &gt; neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>neforce::hashtable::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1a7a98dc10f90001eab1bdbdcccabaf3bc" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的元素范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含范围起始和结束的pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1464" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1464" bodyend="1501"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a8c68e8d8789fc9ecfb84157aa7642cfa" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1hashtable_1aa0a584c8b3f5f4e645cf841260d81005" kindref="member">const_iterator</ref>, <ref refid="classneforce_1_1hashtable_1aa0a584c8b3f5f4e645cf841260d81005" kindref="member">const_iterator</ref> &gt;</type>
+        <definition>pair&lt; const_iterator, const_iterator &gt; neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>neforce::hashtable::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1a7a98dc10f90001eab1bdbdcccabaf3bc" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的元素范围（常量版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含范围起始和结束的pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1508" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1508" bodyend="1545"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a6ad7b84bc8808117c1d3ca458c88a835" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_swappable_v&lt; HashFcn &gt; &amp;&amp;is_nothrow_swappable_v&lt; EqualKey &gt; &amp;&amp;is_nothrow_swappable_v&lt; allocator_type &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::swap</definition>
+        <argsstring>(hashtable &amp;other)</argsstring>
+        <name>swap</name>
+        <qualifiedname>neforce::hashtable::swap</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1hashtable_1aec04f4dc6432fecebe18764488ae665d" kindref="member">hashtable</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个哈希表的内容 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的另一个哈希表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1551" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1551" bodyend="1562"/>
+        <referencedby refid="classneforce_1_1hashtable_1a8f4cca1b5ba7dc37ab49481811570e2a" compoundref="hashtable_8hpp" startline="920" endline="928">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::hashtable</referencedby>
+        <referencedby refid="classneforce_1_1hashtable_1adc88ebd9cf1e06499792d95c23cf5bcf" compoundref="hashtable_8hpp" startline="935" endline="942">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a50b222916387b6d59fc83077b78c44f4" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::equal_to</definition>
+        <argsstring>(const hashtable &amp;rhs) const</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>neforce::hashtable::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1aec04f4dc6432fecebe18764488ae665d" kindref="member">hashtable</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧哈希表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果两个哈希表大小相等且对应元素相等返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1569" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1569" bodyend="1584"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a42aeebbb4baf0c303d0e8de04ec8f57a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(_NEFORCE lexicographical_compare(hashtable::cbegin(), hashtable::cend(), rhs.cbegin(), rhs.cend()))" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::less_than</definition>
+        <argsstring>(const hashtable &amp;rhs) const</argsstring>
+        <name>less_than</name>
+        <qualifiedname>neforce::hashtable::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1hashtable_1aec04f4dc6432fecebe18764488ae665d" kindref="member">hashtable</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧哈希表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>按字典序比较结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1591" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1591" bodyend="1595"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1hashtable_1a15c8e094fc3c5155886d8f8360c32a63" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" kindref="member">size_type</ref></type>
+        <definition>static size_type neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::buckets_max_size</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>buckets_max_size</name>
+        <qualifiedname>neforce::hashtable::buckets_max_size</qualifiedname>
+        <briefdescription>
+<para>获取最大桶数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大桶数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1027" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1027" bodyend="1029"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>哈希表容器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>HashFcn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ExtractKey</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>从值中提取键的函数对象类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>EqualKey</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键相等比较函数对象类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>分配器类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+哈希表使用链地址法处理冲突，采用素数表确定桶数量，提供平均常数时间复杂度的 插入、删除和查找操作。支持唯一键和允许重复键两种模式。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;</label>
+        <link refid="classneforce_1_1hashtable"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::icollector&lt; hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &gt;</label>
+        <link refid="structneforce_1_1icollector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::icomparable&lt; hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;</label>
+        <link refid="classneforce_1_1hashtable"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::icollector&lt; hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &gt;</label>
+        <link refid="structneforce_1_1icollector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::icomparable&lt; hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt; &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="390" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="403" bodyend="1596"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1hashtable_1a74354ef6e9c5e0360d3aa5dabfdf978d" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>allocator_type</name></member>
+      <member refid="classneforce_1_1hashtable_1a4f11be1a655c50445e1fff885b0d41b0" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>begin</name></member>
+      <member refid="classneforce_1_1hashtable_1ae6b82ca0384256ba4189c7d85dd37ad2" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>begin</name></member>
+      <member refid="classneforce_1_1hashtable_1afa24d6c5f6ed16baba9e97651f051cd2" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>bucket_index</name></member>
+      <member refid="classneforce_1_1hashtable_1a5920078c70b3d3f078ac48677668dbf0" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>bucket_index_key</name></member>
+      <member refid="classneforce_1_1hashtable_1a1cb0086ee72125426fded95e9758cd3a" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>bucket_index_value</name></member>
+      <member refid="classneforce_1_1hashtable_1aeee639be09f1045705a5c177d35e198d" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>bucket_size</name></member>
+      <member refid="classneforce_1_1hashtable_1a8e260dad999426c332062ae1cb17760b" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>buckets_</name></member>
+      <member refid="classneforce_1_1hashtable_1a15c8e094fc3c5155886d8f8360c32a63" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>buckets_max_size</name></member>
+      <member refid="classneforce_1_1hashtable_1ac822c2998929890edc93ba7b3fdb8217" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>buckets_size</name></member>
+      <member refid="classneforce_1_1hashtable_1a7c3b077d61ba0000e448e9e0e3318c62" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>cbegin</name></member>
+      <member refid="classneforce_1_1hashtable_1a357b27f169b59955cee43763c38273ac" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>cend</name></member>
+      <member refid="classneforce_1_1hashtable_1adda1e2662e898164613d0377762c2e18" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>clear</name></member>
+      <member refid="classneforce_1_1hashtable_1aa0a584c8b3f5f4e645cf841260d81005" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>const_iterator</name></member>
+      <member refid="classneforce_1_1hashtable_1abeb4688a4c54eda6fb4ce08c3d87bf26" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>const_pointer</name></member>
+      <member refid="classneforce_1_1hashtable_1a6688f3d749cf166d2ecb55924b091afa" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>const_reference</name></member>
+      <member refid="classneforce_1_1hashtable_1afaca751e5df91ea5f9eb33bfe5f3acd7" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>contains</name></member>
+      <member refid="classneforce_1_1hashtable_1a25bc79a06bbe89339e6a82282393704f" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>copy_from</name></member>
+      <member refid="classneforce_1_1hashtable_1a379bb40cdd2b84010bb7f57f395cbe76" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>count</name></member>
+      <member refid="classneforce_1_1hashtable_1a8b199f19311c824a242ae94955bbe13b" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>delete_node</name></member>
+      <member refid="classneforce_1_1hashtable_1aa02fc78affd2f1bf107f8a8313943833" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>difference_type</name></member>
+      <member refid="classneforce_1_1hashtable_1a97fb6b87e1c0ed7aa4c18a298fc9efb0" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>emplace_equal</name></member>
+      <member refid="classneforce_1_1hashtable_1a7e8898fba6caacf28d013e846bc3f515" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>emplace_unique</name></member>
+      <member refid="classneforce_1_1hashtable_1a53bc5d35a1b5618d69ddf8a5847f5a37" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>empty</name></member>
+      <member refid="classneforce_1_1hashtable_1a82487dba65f0cafa48285c593539cb7a" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>end</name></member>
+      <member refid="classneforce_1_1hashtable_1ac3f5a864332f3baa4f32a1fa605c9da1" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>end</name></member>
+      <member refid="classneforce_1_1hashtable_1aa515fcb7fed419c271d402d5ca6ebc08" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>equal_large</name></member>
+      <member refid="classneforce_1_1hashtable_1a739adcd76730b47c3ea48ff07b820427" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>equal_range</name></member>
+      <member refid="classneforce_1_1hashtable_1a8c68e8d8789fc9ecfb84157aa7642cfa" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>equal_range</name></member>
+      <member refid="classneforce_1_1hashtable_1ae558c2c1970e334ea5af81cf6c6802b1" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>equal_small</name></member>
+      <member refid="classneforce_1_1hashtable_1a50b222916387b6d59fc83077b78c44f4" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>equal_to</name></member>
+      <member refid="classneforce_1_1hashtable_1a859559f7af725e8865ea41c0b62b3dc1" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>equals_</name></member>
+      <member refid="classneforce_1_1hashtable_1a234eb2157731ca53f2e7af0ed42f1a5e" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>erase</name></member>
+      <member refid="classneforce_1_1hashtable_1a799119ba67274882f189c59643aaf891" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>erase</name></member>
+      <member refid="classneforce_1_1hashtable_1a2a1c2e3c31005b8c125fdcc74a5ff234" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>erase</name></member>
+      <member refid="classneforce_1_1hashtable_1aeb38963838854c714756ec915681de28" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>erase</name></member>
+      <member refid="classneforce_1_1hashtable_1a65cdc6fa5b9c363cbd2af3f82a957d2c" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>erase</name></member>
+      <member refid="classneforce_1_1hashtable_1a738fff103d82ff3baf5788ad6293fd86" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>erase_bucket_completely</name></member>
+      <member refid="classneforce_1_1hashtable_1a5b0fb5967ff4afe28eef174a745238ba" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>erase_bucket_range</name></member>
+      <member refid="classneforce_1_1hashtable_1a6853d54dfb119d6220132a09120dd303" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>erase_bucket_to_node</name></member>
+      <member refid="classneforce_1_1hashtable_1abc061287cddea42c4611d6e068b5b05c" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>extracter_</name></member>
+      <member refid="classneforce_1_1hashtable_1a7b1c7657a926eb20ddc7903834fcf520" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>find</name></member>
+      <member refid="classneforce_1_1hashtable_1a926e62481251dd424a2f24a2ae27f3db" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>find</name></member>
+      <member refid="classneforce_1_1hashtable_1a580c7fb17368ab8128fdc719da6eeb19" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>hash_function</name></member>
+      <member refid="classneforce_1_1hashtable_1ad157fb75879f334c6f51fee5c9024901" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>hasher</name></member>
+      <member refid="classneforce_1_1hashtable_1a58507d08e54a0fa22a21ffe967780930" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>hasher_</name></member>
+      <member refid="classneforce_1_1hashtable_1aec04f4dc6432fecebe18764488ae665d" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>hashtable</name></member>
+      <member refid="classneforce_1_1hashtable_1a11668cdbbcf3866091e3cce919e0d9d5" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>hashtable</name></member>
+      <member refid="classneforce_1_1hashtable_1ae3fa4ba8ef85713ee60113515a00b366" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>hashtable</name></member>
+      <member refid="classneforce_1_1hashtable_1a8304b71160c459760f0b2cd989b628ab" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>hashtable</name></member>
+      <member refid="classneforce_1_1hashtable_1ab8b823f946222c46b0d0f1e911c940b6" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>hashtable</name></member>
+      <member refid="classneforce_1_1hashtable_1a8f4cca1b5ba7dc37ab49481811570e2a" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>hashtable</name></member>
+      <member refid="classneforce_1_1hashtable_1aa21d08982ace5358af9337c4f7c968b6" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>initialize_buckets</name></member>
+      <member refid="classneforce_1_1hashtable_1af65b7b70294a029fe651b0024aaaeea0" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>insert_equal</name></member>
+      <member refid="classneforce_1_1hashtable_1a8e7c70864632133d2594a45ad32834b3" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>insert_equal</name></member>
+      <member refid="classneforce_1_1hashtable_1a1377cea328b80f121e4e7fd90d7ae19a" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>insert_equal</name></member>
+      <member refid="classneforce_1_1hashtable_1ac11f57ecf03c4499e41ae80f179ecca8" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>insert_equal</name></member>
+      <member refid="classneforce_1_1hashtable_1af18168471eb0bf907d2d887288412a13" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>insert_equal_aux</name></member>
+      <member refid="classneforce_1_1hashtable_1a2a8417d1e3c44767cf3e7e918812574f" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>insert_equal_aux</name></member>
+      <member refid="classneforce_1_1hashtable_1ac3b4ede1a749fa9ec42ed9a8eb8e92fc" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>insert_equal_noresize</name></member>
+      <member refid="classneforce_1_1hashtable_1a2251afe56159d2f319a7a7096495eca1" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>insert_unique</name></member>
+      <member refid="classneforce_1_1hashtable_1a956e56c0242bf72e496c4b512536bf89" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>insert_unique</name></member>
+      <member refid="classneforce_1_1hashtable_1a0bbe338c002b6a3bb0f21e855c97d2d6" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>insert_unique</name></member>
+      <member refid="classneforce_1_1hashtable_1a5a59545b845f2089925540c38c68a3e8" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>insert_unique</name></member>
+      <member refid="classneforce_1_1hashtable_1ab35a9904e453c4cc445f690f3543b431" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>insert_unique_aux</name></member>
+      <member refid="classneforce_1_1hashtable_1a00b2dd6324aded0951c0fa1216b8e35d" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>insert_unique_aux</name></member>
+      <member refid="classneforce_1_1hashtable_1a508f96d002adc66e7e9c275870c4930d" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>insert_unique_noresize</name></member>
+      <member refid="classneforce_1_1hashtable_1aee447c96dc5ebe31fc8bfe15d62d43fb" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>iterator</name></member>
+      <member refid="classneforce_1_1hashtable_1a563b860892b963d53cc4f24b2c1f5042" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>key_eql</name></member>
+      <member refid="classneforce_1_1hashtable_1a244ed6e691bf1b1a789f4e695e1818bd" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>key_equal</name></member>
+      <member refid="classneforce_1_1hashtable_1a7a98dc10f90001eab1bdbdcccabaf3bc" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>key_type</name></member>
+      <member refid="classneforce_1_1hashtable_1a42aeebbb4baf0c303d0e8de04ec8f57a" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>less_than</name></member>
+      <member refid="classneforce_1_1hashtable_1ad376448b7dbe9cb04b6427d3f8ec3d09" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>link_type</name></member>
+      <member refid="classneforce_1_1hashtable_1ab481fdeec184b7f7e495d97d215563fb" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>load_factor</name></member>
+      <member refid="classneforce_1_1hashtable_1ac435b5150d8d64d1cd571ecbcb18f176" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>max_load_factor</name></member>
+      <member refid="classneforce_1_1hashtable_1a2969698d0a5a42e2c1c286567d1f4850" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>max_load_factor</name></member>
+      <member refid="classneforce_1_1hashtable_1a90e6b08bc69bc10f63f571d1bf17b241" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>max_size</name></member>
+      <member refid="classneforce_1_1hashtable_1adad68cb944144e4bec5b0c7c97ca6ecf" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>new_node</name></member>
+      <member refid="classneforce_1_1hashtable_1a378774ad022c9051ac145e36ef0b9571" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>next_size</name></member>
+      <member refid="classneforce_1_1hashtable_1ad6db4c1795b213312497a3294513dff1" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>node_type</name></member>
+      <member refid="structneforce_1_1icomparable_1aa385e40eb8ac8bdae736966ad0cf568f" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>operator!=</name></member>
+      <member refid="structneforce_1_1icomparable_1a0641b58de65d6a0d5b87c2bcb47496a4" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>operator&lt;</name></member>
+      <member refid="structneforce_1_1icomparable_1a313fba4bce20aced1ff0e6173ad6aab2" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>operator&lt;=</name></member>
+      <member refid="classneforce_1_1hashtable_1a427d8a0597f923c2f6b045f8650775db" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1hashtable_1adc88ebd9cf1e06499792d95c23cf5bcf" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1icomparable_1ab9b06f7293eb15299f8c7d5341bfbc83" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>operator==</name></member>
+      <member refid="structneforce_1_1icomparable_1ab8de930acec5c0261656b787f576f08d" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>operator&gt;</name></member>
+      <member refid="structneforce_1_1icomparable_1a644c6002f703eb487427daadfec8fb16" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>operator&gt;=</name></member>
+      <member refid="classneforce_1_1hashtable_1a49aae2aaebf2129416ba6feaa3344ee4" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>pair_</name></member>
+      <member refid="classneforce_1_1hashtable_1a008bea1fa7c7965240bdde9ac3bcf689" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>pointer</name></member>
+      <member refid="classneforce_1_1hashtable_1a76934e55ea2c65881c3e688aace453cb" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>reference</name></member>
+      <member refid="classneforce_1_1hashtable_1af7d98df17fd541fd4f59d308181f8951" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>rehash</name></member>
+      <member refid="classneforce_1_1hashtable_1ac37b4b36ec82f0ed42949dc774c19dca" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>reserve</name></member>
+      <member refid="classneforce_1_1hashtable_1a92b6d88f95faabf2eb9b31b556d1f2ec" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>size</name></member>
+      <member refid="classneforce_1_1hashtable_1a6da90759b447c63bc6869f45f33264f9" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>size_</name></member>
+      <member refid="classneforce_1_1hashtable_1ad6a89b2717b7877f9160bd3b6f3d2043" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>size_type</name></member>
+      <member refid="classneforce_1_1hashtable_1a6ad7b84bc8808117c1d3ca458c88a835" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>swap</name></member>
+      <member refid="classneforce_1_1hashtable_1a958fa8f59fcb884c46a07e0545d63aea" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>to_const_iterator</name></member>
+      <member refid="classneforce_1_1hashtable_1ac9ca14e3807fece92d3fda3f2056b3ef" prot="private" virt="non-virtual"><scope>neforce::hashtable</scope><name>to_iterator</name></member>
+      <member refid="classneforce_1_1hashtable_1a36229d31e40396ad7a453f2e7761d633" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>value_type</name></member>
+      <member refid="classneforce_1_1hashtable_1a91b0be6eaebbdc15513e210ef7fc2a61" prot="public" virt="non-virtual"><scope>neforce::hashtable</scope><name>~hashtable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

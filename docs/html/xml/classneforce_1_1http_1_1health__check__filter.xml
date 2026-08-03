@@ -1,0 +1,379 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1http_1_1health__check__filter" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>neforce::http::health_check_filter</compoundname>
+    <basecompoundref refid="classneforce_1_1http_1_1http__filter" prot="public" virt="non-virtual">neforce::http::http_filter</basecompoundref>
+    <includes refid="health__check_8hpp" local="no">health_check.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1http_1_1health__check__filter_1a2b0abc0ddd7a4261b5ac9a9f533ede79" prot="public" static="no">
+        <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; bool()&gt;</type>
+        <definition>using neforce::http::health_check_filter::check_callback = function&lt;bool()&gt;</definition>
+        <argsstring></argsstring>
+        <name>check_callback</name>
+        <qualifiedname>neforce::http::health_check_filter::check_callback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" line="35" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1health__check__filter_1ac5936201d2291a0e76e511f603810530" prot="public" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::http::health_check_filter::path</definition>
+        <argsstring></argsstring>
+        <name>path</name>
+        <qualifiedname>neforce::http::health_check_filter::path</qualifiedname>
+        <initializer>{&quot;/healthz&quot;}</initializer>
+        <briefdescription>
+<para>健康检查路径 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" line="31" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" bodystart="31" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1health__check__filter_1aa65a4ccc12d9212c9ccc8c2dbcfac6a2" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::http::health_check_filter::show_details</definition>
+        <argsstring></argsstring>
+        <name>show_details</name>
+        <qualifiedname>neforce::http::health_check_filter::show_details</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+<para>是否展示详细检查结果 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" line="32" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" bodystart="32" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1health__check__filter_1a2fbd5926495dc2baee3c7c1fd7f910b6" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::http::health_check_filter::enabled</definition>
+        <argsstring></argsstring>
+        <name>enabled</name>
+        <qualifiedname>neforce::http::health_check_filter::enabled</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+<para>是否启用 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" line="33" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" bodystart="33" bodyend="33"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1health__check__filter_1aa2211346a79564638a27813eff62864f" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref>, check_callback &gt;</type>
+        <definition>unordered_map&lt;string, check_callback&gt; neforce::http::health_check_filter::checks_</definition>
+        <argsstring></argsstring>
+        <name>checks_</name>
+        <qualifiedname>neforce::http::health_check_filter::checks_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" line="53" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1health__check__filter_1a29b1a665810c6f97b69c4e4b7e316d25" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga0b098d32ebd9cc922390914e765ca674" kindref="member">int64_t</ref></type>
+        <definition>int64_t neforce::http::health_check_filter::start_time_ms_</definition>
+        <argsstring></argsstring>
+        <name>start_time_ms_</name>
+        <qualifiedname>neforce::http::health_check_filter::start_time_ms_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>在首次请求时惰性设置 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" line="54" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" bodystart="54" bodyend="54"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1health__check__filter_1abb58fbe90ba87819776806c76ca62368" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::health_check_filter::health_check_filter</definition>
+        <argsstring>()=default</argsstring>
+        <name>health_check_filter</name>
+        <qualifiedname>neforce::http::health_check_filter::health_check_filter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" line="37" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1health__check__filter_1a860892463eda42d95ae4b6e48185538d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::health_check_filter::add_check</definition>
+        <argsstring>(const string &amp;name, check_callback check)</argsstring>
+        <name>add_check</name>
+        <qualifiedname>neforce::http::health_check_filter::add_check</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>check_callback</type>
+          <declname>check</declname>
+        </param>
+        <briefdescription>
+<para>注册一个健康检查组件的回调 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>组件名（如 &quot;db&quot;, &quot;redis&quot;） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>check</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>返回true表示健康 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" line="44" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" bodystart="44" bodyend="44"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1http_1_1health__check__filter_1aa05b3ca933da33749399482227e985e6" compoundref="health__check_8hpp" startline="50" endline="50">name</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1health__check__filter_1ad233709ad59e19948a6fb32c948bba10" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::health_check_filter::remove_check</definition>
+        <argsstring>(const string &amp;name)</argsstring>
+        <name>remove_check</name>
+        <qualifiedname>neforce::http::health_check_filter::remove_check</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" line="46" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1health__check__filter_1a7c92b5708bf5dd37e61818dd7b1e5085" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::http::health_check_filter::pre_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response) override</argsstring>
+        <name>pre_filter</name>
+        <qualifiedname>neforce::http::health_check_filter::pre_filter</qualifiedname>
+        <reimplements refid="classneforce_1_1http_1_1http__filter_1a66c5af31a812075314a85ef38b9d55eb">pre_filter</reimplements>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>预处理方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>返回false表示中断后续处理</para>
+</simplesect>
+在请求处理前调用，可以检查请求、修改请求或提前返回响应。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" line="48" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1health__check__filter_1ae14477ed30a1b1ceadf15a77cd0609d7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void neforce::http::health_check_filter::do_filter</definition>
+        <argsstring>(http_request &amp;, http_response &amp;) override</argsstring>
+        <name>do_filter</name>
+        <qualifiedname>neforce::http::health_check_filter::do_filter</qualifiedname>
+        <reimplements refid="classneforce_1_1http_1_1http__filter_1a354b28748f728effc3a651e7c9fa96a6">do_filter</reimplements>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>核心过滤方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+执行实际的过滤逻辑。通常由具体处理器实现， 中间件过滤器可能不实现此方法。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" line="49" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1health__check__filter_1aa05b3ca933da33749399482227e985e6" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::http::health_check_filter::name</definition>
+        <argsstring>() const override</argsstring>
+        <name>name</name>
+        <qualifiedname>neforce::http::health_check_filter::name</qualifiedname>
+        <reimplements refid="classneforce_1_1http_1_1http__filter_1a16dc9ccb76e7dccf41f4ae732ea01afe">name</reimplements>
+        <briefdescription>
+<para>获取过滤器名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>过滤器名称 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" line="50" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" bodystart="50" bodyend="50"/>
+        <referencedby refid="classneforce_1_1http_1_1health__check__filter_1a860892463eda42d95ae4b6e48185538d" compoundref="health__check_8hpp" startline="44" endline="44">add_check</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1health__check__filter_1a54f56178e2b5ec8a3c2f1e5d7a3adbf2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref>, bool &gt;</type>
+        <definition>pair&lt; string, bool &gt; neforce::http::health_check_filter::build_health_json</definition>
+        <argsstring>()</argsstring>
+        <name>build_health_json</name>
+        <qualifiedname>neforce::http::health_check_filter::build_health_json</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" line="56" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>健康检查端点过滤器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>拦截预配置路径的 GET 请求，返回 JSON 格式的健康状态。 支持自定义健康检查回调（如数据库连接、Redis可达性等）。</para>
+<para>响应格式： {&quot;status&quot;:&quot;ok&quot;,&quot;uptime&quot;:12345,&quot;checks&quot;:{&quot;db&quot;:&quot;ok&quot;,&quot;redis&quot;:&quot;ok&quot;}} 非健康状态返回 503。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::http::health_check_filter</label>
+        <link refid="classneforce_1_1http_1_1health__check__filter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::http::http_filter</label>
+        <link refid="classneforce_1_1http_1_1http__filter"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>neforce::basic_string&lt; char &gt;</label>
+        <link refid="classneforce_1_1basic__string"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::http::health_check_filter</label>
+        <link refid="classneforce_1_1http_1_1health__check__filter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>path</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::http::http_filter</label>
+        <link refid="classneforce_1_1http_1_1http__filter"/>
+      </node>
+      <node id="4">
+        <label>neforce::icommon&lt; T &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="6">
+        <label>neforce::ihashable&lt; T &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" line="29" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/health_check.hpp" bodystart="29" bodyend="57"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1http_1_1health__check__filter_1a860892463eda42d95ae4b6e48185538d" prot="public" virt="non-virtual"><scope>neforce::http::health_check_filter</scope><name>add_check</name></member>
+      <member refid="classneforce_1_1http_1_1health__check__filter_1a54f56178e2b5ec8a3c2f1e5d7a3adbf2" prot="private" virt="non-virtual"><scope>neforce::http::health_check_filter</scope><name>build_health_json</name></member>
+      <member refid="classneforce_1_1http_1_1health__check__filter_1a2b0abc0ddd7a4261b5ac9a9f533ede79" prot="public" virt="non-virtual"><scope>neforce::http::health_check_filter</scope><name>check_callback</name></member>
+      <member refid="classneforce_1_1http_1_1health__check__filter_1aa2211346a79564638a27813eff62864f" prot="private" virt="non-virtual"><scope>neforce::http::health_check_filter</scope><name>checks_</name></member>
+      <member refid="classneforce_1_1http_1_1health__check__filter_1ae14477ed30a1b1ceadf15a77cd0609d7" prot="public" virt="virtual"><scope>neforce::http::health_check_filter</scope><name>do_filter</name></member>
+      <member refid="classneforce_1_1http_1_1health__check__filter_1a2fbd5926495dc2baee3c7c1fd7f910b6" prot="public" virt="non-virtual"><scope>neforce::http::health_check_filter</scope><name>enabled</name></member>
+      <member refid="classneforce_1_1http_1_1health__check__filter_1abb58fbe90ba87819776806c76ca62368" prot="public" virt="non-virtual"><scope>neforce::http::health_check_filter</scope><name>health_check_filter</name></member>
+      <member refid="classneforce_1_1http_1_1health__check__filter_1aa05b3ca933da33749399482227e985e6" prot="public" virt="virtual"><scope>neforce::http::health_check_filter</scope><name>name</name></member>
+      <member refid="classneforce_1_1http_1_1health__check__filter_1ac5936201d2291a0e76e511f603810530" prot="public" virt="non-virtual"><scope>neforce::http::health_check_filter</scope><name>path</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter_1a14ac82a85eee7e20c9d912f97b50535f" prot="public" virt="virtual"><scope>neforce::http::health_check_filter</scope><name>post_filter</name></member>
+      <member refid="classneforce_1_1http_1_1health__check__filter_1a7c92b5708bf5dd37e61818dd7b1e5085" prot="public" virt="virtual"><scope>neforce::http::health_check_filter</scope><name>pre_filter</name></member>
+      <member refid="classneforce_1_1http_1_1health__check__filter_1ad233709ad59e19948a6fb32c948bba10" prot="public" virt="non-virtual"><scope>neforce::http::health_check_filter</scope><name>remove_check</name></member>
+      <member refid="classneforce_1_1http_1_1health__check__filter_1aa65a4ccc12d9212c9ccc8c2dbcfac6a2" prot="public" virt="non-virtual"><scope>neforce::http::health_check_filter</scope><name>show_details</name></member>
+      <member refid="classneforce_1_1http_1_1health__check__filter_1a29b1a665810c6f97b69c4e4b7e316d25" prot="private" virt="non-virtual"><scope>neforce::http::health_check_filter</scope><name>start_time_ms_</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter_1a157ba2513278a823db4ea1b36be341f0" prot="public" virt="virtual"><scope>neforce::http::health_check_filter</scope><name>~http_filter</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

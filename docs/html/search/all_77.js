@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['探测策略_0',['探测策略',['../group___flat_hash_table.html#flat_hash_probe',1,'']]]
+  ['指令集检测_0',['SIMD 指令集检测',['../group___simd_detection.html',1,'']]],
+  ['指针萃取_1',['指针萃取',['../group___pointer_traits.html',1,'']]]
 ];

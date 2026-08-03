@@ -3,13 +3,14 @@
   <compounddef id="group___memory_view" kind="group">
     <compoundname>MemoryView</compoundname>
     <title>内存视图</title>
-    <innerclass refid="classmemory__view" prot="public">memory_view</innerclass>
+    <innerclass refid="classneforce_1_1memory__view" prot="public">neforce::memory_view</innerclass>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="group___memory_view_1gac2b1e8e6cd00e9f7ac78db16ea075063" prot="public" static="no">
-        <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> &gt;</type>
-        <definition>using byte_view = memory_view&lt;byte_t&gt;</definition>
+      <memberdef kind="typedef" id="group___memory_view_1ga2221fcc874b427ef59ef81278d2ee8e7" prot="public" static="no">
+        <type>memory_view&lt; byte_t &gt;</type>
+        <definition>using neforce::byte_view = memory_view&lt;byte_t&gt;</definition>
         <argsstring></argsstring>
         <name>byte_view</name>
+        <qualifiedname>neforce::byte_view</qualifiedname>
         <briefdescription>
 <para>字节视图类型别名 </para>
         </briefdescription>
@@ -19,11 +20,12 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="468" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="468" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" prot="public" static="no">
-        <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; const <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> &gt;</type>
-        <definition>using cbyte_view = memory_view&lt;const byte_t&gt;</definition>
+      <memberdef kind="typedef" id="group___memory_view_1ga533a464153c7fc34d3fa5d92854c8613" prot="public" static="no">
+        <type>memory_view&lt; const byte_t &gt;</type>
+        <definition>using neforce::cbyte_view = memory_view&lt;const byte_t&gt;</definition>
         <argsstring></argsstring>
         <name>cbyte_view</name>
+        <qualifiedname>neforce::cbyte_view</qualifiedname>
         <briefdescription>
 <para>常量字节视图类型别名 </para>
         </briefdescription>
@@ -35,12 +37,13 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="group___memory_view_1gae948792a33f05cf1eb8bfed242c38056" prot="public" static="no" constexpr="yes" mutable="no">
-        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
-        <definition>size_t dynamic_extent</definition>
+      <memberdef kind="variable" id="group___memory_view_1gae4ad69318a337b06a9c000cacbdd9905" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>size_t</type>
+        <definition>size_t neforce::dynamic_extent</definition>
         <argsstring></argsstring>
         <name>dynamic_extent</name>
-        <initializer>= <ref refid="classnumeric__traits" kindref="compound">numeric_traits</ref>&lt;<ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>&gt;<ref refid="group___compare_algorithms_1ga01c48c11cc5d3222cb2e3adf0f843f3e" kindref="member">::max</ref>()</initializer>
+        <qualifiedname>neforce::dynamic_extent</qualifiedname>
+        <initializer>= numeric_traits&lt;size_t&gt;::max()</initializer>
         <briefdescription>
 <para>动态范围标记，表示大小在运行时确定 </para>
         </briefdescription>
@@ -49,28 +52,29 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="28" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="28" bodyend="-1"/>
-        <referencedby refid="classmemory__view_1afaf401e17d6d6b4dbba3250fd53727e4">memory_view&lt; char &gt;::explicit</referencedby>
-        <referencedby refid="classmemory__view_1a68fed76926f521a04a14a5644a8d87e7">memory_view&lt; char &gt;::explicit</referencedby>
-        <referencedby refid="classmemory__view_1a7eb1bd51c6a73fd238b61576361493cb">memory_view&lt; char &gt;::memory_view</referencedby>
-        <referencedby refid="classmemory__view_1a513349466fb9936118cefed9178fe1d0" compoundref="memory__view_8hpp" startline="437" endline="446">memory_view&lt; char &gt;::view</referencedby>
+        <referencedby refid="classneforce_1_1memory__view_1a91f62e341c3fe709a3ce2213242a5fa8">neforce::memory_view&lt; char &gt;::explicit</referencedby>
+        <referencedby refid="classneforce_1_1memory__view_1af2c1f93eb5a232c820ded179af35aa24">neforce::memory_view&lt; char &gt;::explicit</referencedby>
+        <referencedby refid="classneforce_1_1memory__view_1a61443f4e9ae317d77bd801d9791a63ae">neforce::memory_view&lt; char &gt;::memory_view</referencedby>
+        <referencedby refid="classneforce_1_1memory__view_1a03a62d7864952e7ad43d244634166da7" compoundref="memory__view_8hpp" startline="437" endline="446">neforce::memory_view&lt; char &gt;::view</referencedby>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___memory_view_1ga14ceac8bbf6b4d7d3a473c7a21e7c56b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___memory_view_1ga5632dacaa3194701c8fc840fff8ea8d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
           <param>
-            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <type>size_t</type>
             <declname>ArrayExtent</declname>
             <defname>ArrayExtent</defname>
           </param>
         </templateparamlist>
         <type></type>
-        <definition>memory_view</definition>
+        <definition>neforce::memory_view</definition>
         <argsstring>(T(&amp;)[ArrayExtent]) -&gt; memory_view&lt; T, ArrayExtent &gt;</argsstring>
         <name>memory_view</name>
+        <qualifiedname>neforce::memory_view</qualifiedname>
         <param>
           <type>T(&amp;)</type>
           <array>[ArrayExtent]</array>
@@ -83,23 +87,24 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="451" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" declline="451" declcolumn="1"/>
       </memberdef>
-      <memberdef kind="function" id="group___memory_view_1ga9c885eabdc7bd07abd80b7eed318f976" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___memory_view_1ga3601ad894280cb83527c3793dcdccb9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
           <param>
-            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <type>size_t</type>
             <declname>ArrayExtent</declname>
             <defname>ArrayExtent</defname>
           </param>
         </templateparamlist>
         <type></type>
-        <definition>memory_view</definition>
+        <definition>neforce::memory_view</definition>
         <argsstring>(array&lt; T, ArrayExtent &gt; &amp;) -&gt; memory_view&lt; T, ArrayExtent &gt;</argsstring>
         <name>memory_view</name>
+        <qualifiedname>neforce::memory_view</qualifiedname>
         <param>
-          <type><ref refid="classarray" kindref="compound">array</ref>&lt; T, ArrayExtent &gt; &amp;</type>
+          <type>array&lt; T, ArrayExtent &gt; &amp;</type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -109,23 +114,24 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="454" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" declline="454" declcolumn="1"/>
       </memberdef>
-      <memberdef kind="function" id="group___memory_view_1gab1ac4a27b222e2edff55cf80d966a683" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___memory_view_1ga1c48945597bda63f2c4304de5e6a5ce9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
           <param>
-            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <type>size_t</type>
             <declname>ArrayExtent</declname>
             <defname>ArrayExtent</defname>
           </param>
         </templateparamlist>
         <type></type>
-        <definition>memory_view</definition>
+        <definition>neforce::memory_view</definition>
         <argsstring>(const array&lt; T, ArrayExtent &gt; &amp;) -&gt; memory_view&lt; const T, ArrayExtent &gt;</argsstring>
         <name>memory_view</name>
+        <qualifiedname>neforce::memory_view</qualifiedname>
         <param>
-          <type>const <ref refid="classarray" kindref="compound">array</ref>&lt; T, ArrayExtent &gt; &amp;</type>
+          <type>const array&lt; T, ArrayExtent &gt; &amp;</type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -135,10 +141,10 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="457" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" declline="457" declcolumn="1"/>
       </memberdef>
-      <memberdef kind="function" id="group___memory_view_1gaa735d26387b1826e55ac7b6dfbc6d776" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___memory_view_1ga2c2e73107a5dc06c1ca9bc9335469a9f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type><ref refid="conceptcontiguous__iterator" kindref="compound">contiguous_iterator</ref></type>
+            <type>contiguous_iterator</type>
             <declname>Iter</declname>
             <defname>Iter</defname>
           </param>
@@ -147,9 +153,10 @@
           </param>
         </templateparamlist>
         <type></type>
-        <definition>memory_view</definition>
+        <definition>neforce::memory_view</definition>
         <argsstring>(Iter, End) -&gt; memory_view&lt; remove_reference_t&lt; iter_reference_t&lt; Iter &gt; &gt; &gt;</argsstring>
         <name>memory_view</name>
+        <qualifiedname>neforce::memory_view</qualifiedname>
         <param>
           <type>Iter</type>
         </param>
@@ -164,7 +171,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="464" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" declline="464" declcolumn="1"/>
       </memberdef>
-      <memberdef kind="function" id="group___memory_view_1ga39145c55cc84b31a5f6601a1c4d3a122" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___memory_view_1ga5122ad3a28d48add15ca6ad9ac01dd93" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename To</type>
@@ -173,17 +180,18 @@
             <type>typename From</type>
           </param>
           <param>
-            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <type>size_t</type>
             <declname>Extent</declname>
             <defname>Extent</defname>
           </param>
         </templateparamlist>
-        <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; To, Extent &gt;</type>
-        <definition>memory_view&lt; To, Extent &gt; dynamic_view_cast</definition>
+        <type>memory_view&lt; To, Extent &gt;</type>
+        <definition>memory_view&lt; To, Extent &gt; neforce::dynamic_view_cast</definition>
         <argsstring>(const memory_view&lt; From, Extent &gt; &amp;view) noexcept</argsstring>
         <name>dynamic_view_cast</name>
+        <qualifiedname>neforce::dynamic_view_cast</qualifiedname>
         <param>
-          <type>const <ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; From, Extent &gt; &amp;</type>
+          <type>const memory_view&lt; From, Extent &gt; &amp;</type>
           <declname>view</declname>
         </param>
         <briefdescription>

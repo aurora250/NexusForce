@@ -1,0 +1,262 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1file__lock__guard" kind="class" language="C++" prot="public">
+    <compoundname>neforce::file_lock_guard</compoundname>
+    <includes refid="file__locker_8hpp" local="no">file_locker.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1file__lock__guard_1ae2fe243dd56e5915d6c8c40c4d228963" prot="public" static="no">
+        <type><ref refid="classneforce_1_1file__locker_1a133990b287a0573e1dada9cbea2ec250" kindref="member">file_locker::difference_type</ref></type>
+        <definition>using neforce::file_lock_guard::difference_type = file_locker::difference_type</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>neforce::file_lock_guard::difference_type</qualifiedname>
+        <briefdescription>
+<para>偏移量类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="137" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" bodystart="137" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1file__lock__guard_1a1f229c7efee1261cb8fe754d88916f35" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1file__locker" kindref="compound">file_locker</ref> &amp;</type>
+        <definition>file_locker&amp; neforce::file_lock_guard::locker_</definition>
+        <argsstring></argsstring>
+        <name>locker_</name>
+        <qualifiedname>neforce::file_lock_guard::locker_</qualifiedname>
+        <briefdescription>
+<para>文件锁管理器引用 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="140" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1file__lock__guard_1a70ce1d1d167da23822edfd4117d3e87f" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1file__lock__guard_1ae2fe243dd56e5915d6c8c40c4d228963" kindref="member">difference_type</ref></type>
+        <definition>difference_type neforce::file_lock_guard::offset_</definition>
+        <argsstring></argsstring>
+        <name>offset_</name>
+        <qualifiedname>neforce::file_lock_guard::offset_</qualifiedname>
+        <briefdescription>
+<para>锁定的起始偏移 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="141" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1file__lock__guard_1a8e82b313c8f874fc312326393536bc0d" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1file__lock__guard_1ae2fe243dd56e5915d6c8c40c4d228963" kindref="member">difference_type</ref></type>
+        <definition>difference_type neforce::file_lock_guard::length_</definition>
+        <argsstring></argsstring>
+        <name>length_</name>
+        <qualifiedname>neforce::file_lock_guard::length_</qualifiedname>
+        <briefdescription>
+<para>锁定的长度 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="142" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1file__lock__guard_1ac5fe00a7d97dbb363c527cf5a6f1af96" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::file_lock_guard::locked_</definition>
+        <argsstring></argsstring>
+        <name>locked_</name>
+        <qualifiedname>neforce::file_lock_guard::locked_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否持有锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="143" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" bodystart="143" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1file__lock__guard_1a7e341840f26a9a1b79c96d4218808183" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::file_lock_guard::file_lock_guard</definition>
+        <argsstring>(file_locker &amp;locker, difference_type offset, difference_type length, file_lock mode)</argsstring>
+        <name>file_lock_guard</name>
+        <qualifiedname>neforce::file_lock_guard::file_lock_guard</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1file__locker" kindref="compound">file_locker</ref> &amp;</type>
+          <declname>locker</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1file__lock__guard_1ae2fe243dd56e5915d6c8c40c4d228963" kindref="member">difference_type</ref></type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1file__lock__guard_1ae2fe243dd56e5915d6c8c40c4d228963" kindref="member">difference_type</ref></type>
+          <declname>length</declname>
+        </param>
+        <param>
+          <type><ref refid="group___file_1ga60ace78d3bd4c2b6a496d97310bf4ddc" kindref="member">file_lock</ref></type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，立即获取锁 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>locker</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件锁管理器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>锁定起始偏移 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>锁定长度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>锁定模式</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+在构造时尝试获取锁。如果获取失败，locked_标志为false。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="155" column="5"/>
+        <referencedby refid="classneforce_1_1file__lock__guard_1a5e117324ae6fbe45301a1913180a0b0e">~file_lock_guard</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__lock__guard_1a5e117324ae6fbe45301a1913180a0b0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::file_lock_guard::~file_lock_guard</definition>
+        <argsstring>()</argsstring>
+        <name>~file_lock_guard</name>
+        <qualifiedname>neforce::file_lock_guard::~file_lock_guard</qualifiedname>
+        <briefdescription>
+<para>析构函数，自动释放锁 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>如果当前持有锁，自动释放。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="162" column="5"/>
+        <references refid="classneforce_1_1file__lock__guard_1a7e341840f26a9a1b79c96d4218808183">file_lock_guard</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__lock__guard_1a23cf2a6093e4c28b8886a6e44a75fde2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::file_lock_guard::file_lock_guard</definition>
+        <argsstring>(const file_lock_guard &amp;)=delete</argsstring>
+        <name>file_lock_guard</name>
+        <qualifiedname>neforce::file_lock_guard::file_lock_guard</qualifiedname>
+        <param>
+          <type>const file_lock_guard &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="164" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__lock__guard_1a450335d09ba8fb73269edf85cb5f1bda" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1file__lock__guard_1a7e341840f26a9a1b79c96d4218808183" kindref="member">file_lock_guard</ref> &amp;</type>
+        <definition>file_lock_guard &amp; neforce::file_lock_guard::operator=</definition>
+        <argsstring>(const file_lock_guard &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::file_lock_guard::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1file__lock__guard_1a7e341840f26a9a1b79c96d4218808183" kindref="member">file_lock_guard</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="165" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__lock__guard_1a13b3ba7035dc9c402d318cef3aeefa45" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::file_lock_guard::is_locked</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_locked</name>
+        <qualifiedname>neforce::file_lock_guard::is_locked</qualifiedname>
+        <briefdescription>
+<para>检查是否持有锁 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>持有锁返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="171" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" bodystart="171" bodyend="171"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__lock__guard_1a297b363c8f84d7bc569446816c0b53cc" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::file_lock_guard::unlock</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>unlock</name>
+        <qualifiedname>neforce::file_lock_guard::unlock</qualifiedname>
+        <briefdescription>
+<para>手动释放锁 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>释放成功返回true</para>
+</simplesect>
+提前释放锁，之后析构函数不会再尝试释放。 释放后is_locked()返回false。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="180" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>文件区域锁守卫 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>自动管理文件锁的生命周期， 在构造时获取锁，在析构时自动释放锁。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="135" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" bodystart="135" bodyend="181"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1file__lock__guard_1ae2fe243dd56e5915d6c8c40c4d228963" prot="public" virt="non-virtual"><scope>neforce::file_lock_guard</scope><name>difference_type</name></member>
+      <member refid="classneforce_1_1file__lock__guard_1a7e341840f26a9a1b79c96d4218808183" prot="public" virt="non-virtual"><scope>neforce::file_lock_guard</scope><name>file_lock_guard</name></member>
+      <member refid="classneforce_1_1file__lock__guard_1a23cf2a6093e4c28b8886a6e44a75fde2" prot="public" virt="non-virtual"><scope>neforce::file_lock_guard</scope><name>file_lock_guard</name></member>
+      <member refid="classneforce_1_1file__lock__guard_1a13b3ba7035dc9c402d318cef3aeefa45" prot="public" virt="non-virtual"><scope>neforce::file_lock_guard</scope><name>is_locked</name></member>
+      <member refid="classneforce_1_1file__lock__guard_1a8e82b313c8f874fc312326393536bc0d" prot="private" virt="non-virtual"><scope>neforce::file_lock_guard</scope><name>length_</name></member>
+      <member refid="classneforce_1_1file__lock__guard_1ac5fe00a7d97dbb363c527cf5a6f1af96" prot="private" virt="non-virtual"><scope>neforce::file_lock_guard</scope><name>locked_</name></member>
+      <member refid="classneforce_1_1file__lock__guard_1a1f229c7efee1261cb8fe754d88916f35" prot="private" virt="non-virtual"><scope>neforce::file_lock_guard</scope><name>locker_</name></member>
+      <member refid="classneforce_1_1file__lock__guard_1a70ce1d1d167da23822edfd4117d3e87f" prot="private" virt="non-virtual"><scope>neforce::file_lock_guard</scope><name>offset_</name></member>
+      <member refid="classneforce_1_1file__lock__guard_1a450335d09ba8fb73269edf85cb5f1bda" prot="public" virt="non-virtual"><scope>neforce::file_lock_guard</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1file__lock__guard_1a297b363c8f84d7bc569446816c0b53cc" prot="public" virt="non-virtual"><scope>neforce::file_lock_guard</scope><name>unlock</name></member>
+      <member refid="classneforce_1_1file__lock__guard_1a5e117324ae6fbe45301a1913180a0b0e" prot="public" virt="non-virtual"><scope>neforce::file_lock_guard</scope><name>~file_lock_guard</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

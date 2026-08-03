@@ -1,4 +1,4 @@
 var group___endian =
 [
-    [ "endian", "structendian.html", null ]
+    [ "neforce::endian", "structneforce_1_1endian.html", null ]
 ];

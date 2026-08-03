@@ -3,17 +3,17 @@
   <compounddef id="group___type_traits_utilities" kind="group">
     <compoundname>TypeTraitsUtilities</compoundname>
     <title>类型推导辅助工具</title>
-    <innerclass refid="structintegral__constant" prot="public">integral_constant</innerclass>
-    <innerclass refid="structenable__if" prot="public">enable_if</innerclass>
-    <innerclass refid="structconditional" prot="public">conditional</innerclass>
-    <innerclass refid="structnegation" prot="public">negation</innerclass>
-    <innerclass refid="structis__same" prot="public">is_same</innerclass>
-    <innerclass refid="structtype__identity" prot="public">type_identity</innerclass>
-    <innerclass refid="structis__any__of" prot="public">is_any_of</innerclass>
-    <innerclass refid="structdisjunction" prot="public">disjunction</innerclass>
-    <innerclass refid="structconjunction" prot="public">conjunction</innerclass>
+    <innerclass refid="structneforce_1_1integral__constant" prot="public">neforce::integral_constant</innerclass>
+    <innerclass refid="structneforce_1_1enable__if" prot="public">neforce::enable_if</innerclass>
+    <innerclass refid="structneforce_1_1conditional" prot="public">neforce::conditional</innerclass>
+    <innerclass refid="structneforce_1_1negation" prot="public">neforce::negation</innerclass>
+    <innerclass refid="structneforce_1_1is__same" prot="public">neforce::is_same</innerclass>
+    <innerclass refid="structneforce_1_1type__identity" prot="public">neforce::type_identity</innerclass>
+    <innerclass refid="structneforce_1_1is__any__of" prot="public">neforce::is_any_of</innerclass>
+    <innerclass refid="structneforce_1_1disjunction" prot="public">neforce::disjunction</innerclass>
+    <innerclass refid="structneforce_1_1conjunction" prot="public">neforce::conjunction</innerclass>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="group___type_traits_utilities_1gaecd67118189edfc6436511ce3f23aef1" prot="public" static="no">
+      <memberdef kind="typedef" id="group___type_traits_utilities_1ga5a934140c1c872bb6d8ddd869e4bb3d3" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>bool</type>
@@ -21,10 +21,11 @@
             <defname>Value</defname>
           </param>
         </templateparamlist>
-        <type><ref refid="structintegral__constant" kindref="compound">integral_constant</ref>&lt; bool, Value &gt;</type>
-        <definition>using bool_constant = integral_constant&lt;bool, Value&gt;</definition>
+        <type>integral_constant&lt; bool, Value &gt;</type>
+        <definition>using neforce::bool_constant = integral_constant&lt;bool, Value&gt;</definition>
         <argsstring></argsstring>
         <name>bool_constant</name>
+        <qualifiedname>neforce::bool_constant</qualifiedname>
         <briefdescription>
 <para>布尔常量包装器 </para>
         </briefdescription>
@@ -44,11 +45,12 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="62" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="62" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___type_traits_utilities_1gaa4e9c28fa52ab73ef48e5cbed20c66fd" prot="public" static="no">
-        <type><ref refid="group___type_traits_utilities_1gaecd67118189edfc6436511ce3f23aef1" kindref="member">bool_constant</ref>&lt; true &gt;</type>
-        <definition>using true_type = bool_constant&lt;true&gt;</definition>
+      <memberdef kind="typedef" id="group___type_traits_utilities_1gae47fc6ae1d8cb18a3fcaadec249cb299" prot="public" static="no">
+        <type>bool_constant&lt; true &gt;</type>
+        <definition>using neforce::true_type = bool_constant&lt;true&gt;</definition>
         <argsstring></argsstring>
         <name>true_type</name>
+        <qualifiedname>neforce::true_type</qualifiedname>
         <briefdescription>
 <para>表示true的类型 </para>
         </briefdescription>
@@ -58,11 +60,12 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="64" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="64" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___type_traits_utilities_1gad15d3ff5d80b8c8c22e9ce862353ba55" prot="public" static="no">
-        <type><ref refid="group___type_traits_utilities_1gaecd67118189edfc6436511ce3f23aef1" kindref="member">bool_constant</ref>&lt; false &gt;</type>
-        <definition>using false_type = bool_constant&lt;false&gt;</definition>
+      <memberdef kind="typedef" id="group___type_traits_utilities_1gabe23a8513afb2a33b34d814dea498c1f" prot="public" static="no">
+        <type>bool_constant&lt; false &gt;</type>
+        <definition>using neforce::false_type = bool_constant&lt;false&gt;</definition>
         <argsstring></argsstring>
         <name>false_type</name>
+        <qualifiedname>neforce::false_type</qualifiedname>
         <briefdescription>
 <para>表示false的类型 </para>
         </briefdescription>
@@ -72,18 +75,19 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="65" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="65" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___type_traits_utilities_1ga99d0f13212900f3166c091716cf02e79" prot="public" static="no">
+      <memberdef kind="typedef" id="group___type_traits_utilities_1ga4b7cdf4aaccdddc185ac1cce451d2e19" prot="public" static="no">
         <templateparamlist>
           <param>
-            <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+            <type>uint32_t</type>
             <declname>Value</declname>
             <defname>Value</defname>
           </param>
         </templateparamlist>
-        <type><ref refid="structintegral__constant" kindref="compound">integral_constant</ref>&lt; <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref>, Value &gt;</type>
-        <definition>using uint32_constant = integral_constant&lt;uint32_t, Value&gt;</definition>
+        <type>integral_constant&lt; uint32_t, Value &gt;</type>
+        <definition>using neforce::uint32_constant = integral_constant&lt;uint32_t, Value&gt;</definition>
         <argsstring></argsstring>
         <name>uint32_constant</name>
+        <qualifiedname>neforce::uint32_constant</qualifiedname>
         <briefdescription>
 <para>32位无符号整数常量包装器 </para>
         </briefdescription>
@@ -103,18 +107,19 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="73" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="73" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___type_traits_utilities_1ga22c6a829369b68d4cce75ec06f938e16" prot="public" static="no">
+      <memberdef kind="typedef" id="group___type_traits_utilities_1ga2a9987ea5599e9fb7046c771d08932bf" prot="public" static="no">
         <templateparamlist>
           <param>
-            <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+            <type>uint64_t</type>
             <declname>Value</declname>
             <defname>Value</defname>
           </param>
         </templateparamlist>
-        <type><ref refid="structintegral__constant" kindref="compound">integral_constant</ref>&lt; <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref>, Value &gt;</type>
-        <definition>using uint64_constant = integral_constant&lt;uint64_t, Value&gt;</definition>
+        <type>integral_constant&lt; uint64_t, Value &gt;</type>
+        <definition>using neforce::uint64_constant = integral_constant&lt;uint64_t, Value&gt;</definition>
         <argsstring></argsstring>
         <name>uint64_constant</name>
+        <qualifiedname>neforce::uint64_constant</qualifiedname>
         <briefdescription>
 <para>64位无符号整数常量包装器 </para>
         </briefdescription>
@@ -134,7 +139,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="81" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="81" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___type_traits_utilities_1gab8ddf9531fc4ac7ce28574db20c8f20e" prot="public" static="no">
+      <memberdef kind="typedef" id="group___type_traits_utilities_1ga4eaf51a67b0ec2007e0d15956d0cff65" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename...</type>
@@ -143,9 +148,10 @@
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>using void_t = void</definition>
+        <definition>using neforce::void_t = void</definition>
         <argsstring></argsstring>
         <name>void_t</name>
+        <qualifiedname>neforce::void_t</qualifiedname>
         <briefdescription>
 <para>将任意类型映射为void </para>
         </briefdescription>
@@ -165,7 +171,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="92" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="92" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" prot="public" static="no">
+      <memberdef kind="typedef" id="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>bool</type>
@@ -177,10 +183,11 @@
             <defval>void</defval>
           </param>
         </templateparamlist>
-        <type>typename <ref refid="structenable__if" kindref="compound">enable_if</ref>&lt; Test, T &gt;::type</type>
-        <definition>using enable_if_t = typename enable_if&lt;Test, T&gt;::type</definition>
+        <type>typename enable_if&lt; Test, T &gt;::type</type>
+        <definition>using neforce::enable_if_t = typename enable_if&lt;Test, T&gt;::type</definition>
         <argsstring></argsstring>
         <name>enable_if_t</name>
+        <qualifiedname>neforce::enable_if_t</qualifiedname>
         <briefdescription>
 <para>enable_if的便捷别名 </para>
         </briefdescription>
@@ -190,7 +197,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="118" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="118" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___type_traits_utilities_1ga8e4e19e025d27abb3cd4cb306262f568" prot="public" static="no">
+      <memberdef kind="typedef" id="group___type_traits_utilities_1gaa9ea3c80d957cac4f923264b29fddb54" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>bool</type>
@@ -204,10 +211,11 @@
             <type>typename T2</type>
           </param>
         </templateparamlist>
-        <type>typename <ref refid="structconditional" kindref="compound">conditional</ref>&lt; Test, T1, T2 &gt;::type</type>
-        <definition>using conditional_t = typename conditional&lt;Test, T1, T2&gt;::type</definition>
+        <type>typename conditional&lt; Test, T1, T2 &gt;::type</type>
+        <definition>using neforce::conditional_t = typename conditional&lt;Test, T1, T2&gt;::type</definition>
         <argsstring></argsstring>
         <name>conditional_t</name>
+        <qualifiedname>neforce::conditional_t</qualifiedname>
         <briefdescription>
 <para>conditional的便捷别名 </para>
         </briefdescription>
@@ -217,16 +225,17 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="145" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="145" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___type_traits_utilities_1gaca42c1976d1b12998afcabf8f39e8c23" prot="public" static="no">
+      <memberdef kind="typedef" id="group___type_traits_utilities_1gae016f5f8d9f3c0cda56c990b5499aa99" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>typename <ref refid="structtype__identity" kindref="compound">type_identity</ref>&lt; T &gt;::type</type>
-        <definition>using type_identity_t = typename type_identity&lt;T&gt;::type</definition>
+        <type>typename type_identity&lt; T &gt;::type</type>
+        <definition>using neforce::type_identity_t = typename type_identity&lt;T&gt;::type</definition>
         <argsstring></argsstring>
         <name>type_identity_t</name>
+        <qualifiedname>neforce::type_identity_t</qualifiedname>
         <briefdescription>
 <para>type_identity的便捷别名 </para>
         </briefdescription>
@@ -238,17 +247,18 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="group___type_traits_utilities_1ga3bef7b75bd1375e11a158bc94cbc4fa3" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___type_traits_utilities_1ga4e8c1f7e8febf1ded2a8bb82ecade18b" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool negation_v</definition>
+        <definition>bool neforce::negation_v</definition>
         <argsstring></argsstring>
         <name>negation_v</name>
-        <initializer>= <ref refid="structnegation" kindref="compound">negation</ref>&lt;T&gt;::value</initializer>
+        <qualifiedname>neforce::negation_v</qualifiedname>
+        <initializer>= negation&lt;T&gt;::value</initializer>
         <briefdescription>
 <para>negation的便捷变量模板 </para>
         </briefdescription>
@@ -258,7 +268,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="164" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="164" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="group___type_traits_utilities_1gaa6c6bde5fd020a928e6d7b5fe8db7bb0" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T1</type>
@@ -268,10 +278,11 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_same_v</definition>
+        <definition>bool neforce::is_same_v</definition>
         <argsstring></argsstring>
         <name>is_same_v</name>
-        <initializer>= <ref refid="structis__same" kindref="compound">is_same</ref>&lt;T1, T2&gt;::value</initializer>
+        <qualifiedname>neforce::is_same_v</qualifiedname>
+        <initializer>= is_same&lt;T1, T2&gt;::value</initializer>
         <briefdescription>
 <para>is_same的便捷变量模板 </para>
         </briefdescription>
@@ -280,11 +291,11 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="188" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="188" bodyend="-1"/>
-        <referencedby refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a2218a03e808dbb4eb171fcb1c7f9881a">packaged_task&lt; Res(Args...)&gt;::packaged_task</referencedby>
-        <referencedby refid="classscope__thread_1aeec38bd68e45cea1c6cf28e67cd642f9">scope_thread::scope_thread</referencedby>
-        <referencedby refid="classthread_1a1dde16c1af24bfef1e4484d5d805cb1d">thread::thread</referencedby>
+        <referencedby refid="classneforce_1_1packaged__task_3_01_res_07_args_8_8_8_08_4_1a91026059c1a3803b7da092be65aef383">neforce::packaged_task&lt; Res(Args...)&gt;::packaged_task</referencedby>
+        <referencedby refid="classneforce_1_1scope__thread_1a4ce654bc68b9f731c6d6c853e2c07f69">neforce::scope_thread::scope_thread</referencedby>
+        <referencedby refid="classneforce_1_1thread_1abd008fb811a2eaf1ce86eca9a9eea514">neforce::thread::thread</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="group___type_traits_utilities_1ga97300837e35e483d3cf7b20dd724250b" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___type_traits_utilities_1ga55121889a2ca92a98b4610ee05dd1fac" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -296,10 +307,11 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_any_of_v</definition>
+        <definition>bool neforce::is_any_of_v</definition>
         <argsstring></argsstring>
         <name>is_any_of_v</name>
-        <initializer>= <ref refid="structis__any__of" kindref="compound">is_any_of</ref>&lt;T, Types...&gt;::value</initializer>
+        <qualifiedname>neforce::is_any_of_v</qualifiedname>
+        <initializer>= is_any_of&lt;T, Types...&gt;::value</initializer>
         <briefdescription>
 <para>is_any_of的便捷变量模板 </para>
         </briefdescription>
@@ -309,7 +321,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="243" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="243" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="group___type_traits_utilities_1gabb3abcd15bf9ea4a0629b7e03498e1e1" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___type_traits_utilities_1gabd5ef1fb902eb72a8a79c7a97543f103" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename...</type>
@@ -318,10 +330,11 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool disjunction_v</definition>
+        <definition>bool neforce::disjunction_v</definition>
         <argsstring></argsstring>
         <name>disjunction_v</name>
-        <initializer>= <ref refid="structdisjunction" kindref="compound">disjunction</ref>&lt;Args...&gt;::value</initializer>
+        <qualifiedname>neforce::disjunction_v</qualifiedname>
+        <initializer>= disjunction&lt;Args...&gt;::value</initializer>
         <briefdescription>
 <para>disjunction的便捷变量模板 </para>
         </briefdescription>
@@ -330,9 +343,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="282" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="282" bodyend="-1"/>
-        <referencedby refid="group___any_1gac77841c2785c6a7c7cf788160ffa9afb" compoundref="utility_2any_8hpp" startline="475" endline="486">any_cast</referencedby>
+        <referencedby refid="group___any_1gadbcd39ffa874eb2a399e5691539ed384" compoundref="utility_2any_8hpp" startline="475" endline="486">neforce::any_cast</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="group___type_traits_utilities_1ga5672914b2f1f9c1c4c50ded53a8db2e3" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___type_traits_utilities_1ga8f016dc0792f4b698f38abb48c34c25b" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename...</type>
@@ -341,10 +354,11 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool conjunction_v</definition>
+        <definition>bool neforce::conjunction_v</definition>
         <argsstring></argsstring>
         <name>conjunction_v</name>
-        <initializer>= <ref refid="structconjunction" kindref="compound">conjunction</ref>&lt;Args...&gt;::value</initializer>
+        <qualifiedname>neforce::conjunction_v</qualifiedname>
+        <initializer>= conjunction&lt;Args...&gt;::value</initializer>
         <briefdescription>
 <para>conjunction的便捷变量模板 </para>
         </briefdescription>
@@ -353,25 +367,25 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="321" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="321" bodyend="-1"/>
-        <referencedby refid="structcompressed__pair_1a2ba7ac68c7608add03bf06884137d025" compoundref="compressed__pair_8hpp" startline="87" endline="90">compressed_pair&lt; IfEmpty, T, Compressed &gt;::compressed_pair</referencedby>
-        <referencedby refid="structcompressed__pair_1ab85d19125753bd46848488e994d3c87f" compoundref="compressed__pair_8hpp" startline="103" endline="106">compressed_pair&lt; IfEmpty, T, Compressed &gt;::compressed_pair</referencedby>
-        <referencedby refid="structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4_1a2ae4f79010eee05979d52865807fec50" compoundref="compressed__pair_8hpp" startline="181" endline="184">compressed_pair&lt; IfEmpty, T, false &gt;::compressed_pair</referencedby>
-        <referencedby refid="structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4_1a7946014fbf11ea355936e2d13b0cdea5" compoundref="compressed__pair_8hpp" startline="211" endline="214">compressed_pair&lt; IfEmpty, T, false &gt;::compressed_pair</referencedby>
-        <referencedby refid="structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4_1a577b6131fb49fb807b08cefd5e17a1aa" compoundref="compressed__pair_8hpp" startline="190" endline="193">compressed_pair&lt; IfEmpty, T, false &gt;::compressed_pair</referencedby>
-        <referencedby refid="structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4_1a5c8db83ab8883642c2865e9be2c4f6b6" compoundref="compressed__pair_8hpp" startline="234" endline="237">compressed_pair&lt; IfEmpty, T, false &gt;::compressed_pair</referencedby>
-        <referencedby refid="structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4_1a8ffb35c6ff6379021776b3983787f372" compoundref="compressed__pair_8hpp" startline="247" endline="250">compressed_pair&lt; IfEmpty, T, false &gt;::compressed_pair</referencedby>
-        <referencedby refid="structpair_1a2a54da78ca8f14cfc372f46ee6cd23be">pair&lt; Key, T &gt;::explicit</referencedby>
-        <referencedby refid="structpair_1aaf9e4dfad34ca8333651e2991931eb81">pair&lt; Key, T &gt;::explicit</referencedby>
-        <referencedby refid="structpair_1aa65af58e68bbce68442ec36a51507123">pair&lt; Key, T &gt;::explicit</referencedby>
-        <referencedby refid="structpair_1ac327bc1e8450f3b3f54eb8b5d18f1875">pair&lt; Key, T &gt;::explicit</referencedby>
-        <referencedby refid="structpair_1a5fc8fdee8d793958cc55b507f85eaafe" compoundref="pair_8hpp" startline="113" endline="116">pair&lt; Key, T &gt;::explicit</referencedby>
-        <referencedby refid="structtuple_3_01_this_00_01_rest_8_8_8_01_4_1ad35acc656ff3865bc1562f71939b8e3f" compoundref="tuple_8hpp" startline="287" endline="292">tuple&lt; This, Rest... &gt;::explicit</referencedby>
-        <referencedby refid="structtuple_3_01_this_00_01_rest_8_8_8_01_4_1aa69264836f92d23aed26e79d8b7f6e32">tuple&lt; This, Rest... &gt;::explicit</referencedby>
-        <referencedby refid="structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4_1aa99537d612cec11a835e219e26b3d683" compoundref="compressed__pair_8hpp" startline="221" endline="226">compressed_pair&lt; IfEmpty, T, false &gt;::operator=</referencedby>
-        <referencedby refid="structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4_1ad443e7e02d86f483eb1a9ffd00202b58" compoundref="compressed__pair_8hpp" startline="200" endline="205">compressed_pair&lt; IfEmpty, T, false &gt;::operator=</referencedby>
-        <referencedby refid="structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4_1a54b4845b7902cf40b3fd4720a42385f5" compoundref="compressed__pair_8hpp" startline="281" endline="284">compressed_pair&lt; IfEmpty, T, false &gt;::swap</referencedby>
-        <referencedby refid="structvariant_1a7b981db13907d6f58cb88f200a547088" compoundref="variant_8hpp" startline="425" endline="428">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::visit</referencedby>
-        <referencedby refid="structvariant_1a590137848848e41c96271096432997fa" compoundref="variant_8hpp" startline="412" endline="414">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::visit</referencedby>
+        <referencedby refid="structneforce_1_1compressed__pair_1a35ebd48d3897409ec20ac1475a9b2104" compoundref="compressed__pair_8hpp" startline="87" endline="90">neforce::compressed_pair&lt; IfEmpty, T, Compressed &gt;::compressed_pair</referencedby>
+        <referencedby refid="structneforce_1_1compressed__pair_1a804c4381c02144b7a23d068ef68dbe3f" compoundref="compressed__pair_8hpp" startline="103" endline="106">neforce::compressed_pair&lt; IfEmpty, T, Compressed &gt;::compressed_pair</referencedby>
+        <referencedby refid="structneforce_1_1compressed__pair_3_01_if_empty_00_01_t_00_01false_01_4_1a846a16153616456abe8d4edd95b04969" compoundref="compressed__pair_8hpp" startline="181" endline="184">neforce::compressed_pair&lt; IfEmpty, T, false &gt;::compressed_pair</referencedby>
+        <referencedby refid="structneforce_1_1compressed__pair_3_01_if_empty_00_01_t_00_01false_01_4_1ae084869567b927278f55f11cf51adcb9" compoundref="compressed__pair_8hpp" startline="211" endline="214">neforce::compressed_pair&lt; IfEmpty, T, false &gt;::compressed_pair</referencedby>
+        <referencedby refid="structneforce_1_1compressed__pair_3_01_if_empty_00_01_t_00_01false_01_4_1ae2d4601c9174876afe56c563d5f0c9fc" compoundref="compressed__pair_8hpp" startline="190" endline="193">neforce::compressed_pair&lt; IfEmpty, T, false &gt;::compressed_pair</referencedby>
+        <referencedby refid="structneforce_1_1compressed__pair_3_01_if_empty_00_01_t_00_01false_01_4_1a6be3dedb4524e137cb0de1547cc757fc" compoundref="compressed__pair_8hpp" startline="234" endline="237">neforce::compressed_pair&lt; IfEmpty, T, false &gt;::compressed_pair</referencedby>
+        <referencedby refid="structneforce_1_1compressed__pair_3_01_if_empty_00_01_t_00_01false_01_4_1a739c2e44b81905b819fca4602089f260" compoundref="compressed__pair_8hpp" startline="247" endline="250">neforce::compressed_pair&lt; IfEmpty, T, false &gt;::compressed_pair</referencedby>
+        <referencedby refid="structneforce_1_1pair_1a7827323fca1282f297ada54728b94382">neforce::pair&lt; Key, T &gt;::explicit</referencedby>
+        <referencedby refid="structneforce_1_1pair_1a0be0b5b39aa7cbae8c5ebf3b881369ab">neforce::pair&lt; Key, T &gt;::explicit</referencedby>
+        <referencedby refid="structneforce_1_1pair_1a359de8d4ca182ff3d48ff65eb00865ba">neforce::pair&lt; Key, T &gt;::explicit</referencedby>
+        <referencedby refid="structneforce_1_1pair_1afab0dc3dce79f577d50ccd0302ecc1ff">neforce::pair&lt; Key, T &gt;::explicit</referencedby>
+        <referencedby refid="structneforce_1_1pair_1a54b8404730ae48b8ddb8fee5d0463b1b" compoundref="pair_8hpp" startline="113" endline="116">neforce::pair&lt; Key, T &gt;::explicit</referencedby>
+        <referencedby refid="structneforce_1_1tuple_3_01_this_00_01_rest_8_8_8_01_4_1a99b6f040d43b50ffd750ff2a2f3dd8e3" compoundref="tuple_8hpp" startline="287" endline="292">neforce::tuple&lt; This, Rest... &gt;::explicit</referencedby>
+        <referencedby refid="structneforce_1_1tuple_3_01_this_00_01_rest_8_8_8_01_4_1acfae80149d612f467b9ca556a4cf76e6">neforce::tuple&lt; This, Rest... &gt;::explicit</referencedby>
+        <referencedby refid="structneforce_1_1compressed__pair_3_01_if_empty_00_01_t_00_01false_01_4_1a70c2a3d470dc90ea21faa77abf5d0fb9" compoundref="compressed__pair_8hpp" startline="221" endline="226">neforce::compressed_pair&lt; IfEmpty, T, false &gt;::operator=</referencedby>
+        <referencedby refid="structneforce_1_1compressed__pair_3_01_if_empty_00_01_t_00_01false_01_4_1a5fdbccc20675e8238f278a076d2a3c10" compoundref="compressed__pair_8hpp" startline="200" endline="205">neforce::compressed_pair&lt; IfEmpty, T, false &gt;::operator=</referencedby>
+        <referencedby refid="structneforce_1_1compressed__pair_3_01_if_empty_00_01_t_00_01false_01_4_1a2a1639e1722f971c8bf0efe2b29bf4fb" compoundref="compressed__pair_8hpp" startline="281" endline="284">neforce::compressed_pair&lt; IfEmpty, T, false &gt;::swap</referencedby>
+        <referencedby refid="structneforce_1_1variant_1a33c44d3d63958937e25f59af1309a007" compoundref="variant_8hpp" startline="425" endline="428">neforce::variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::visit</referencedby>
+        <referencedby refid="structneforce_1_1variant_1a7e1aaa9d7ad8b9db6f4b91f9dddfac7d" compoundref="variant_8hpp" startline="412" endline="414">neforce::variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::visit</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

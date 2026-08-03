@@ -1,23 +1,23 @@
 var group___utf_iterator =
 [
-    [ "utf8_iterator", "classutf8__iterator.html", [
-      [ "difference_type", "classutf8__iterator.html#ae612fa22c67064b022f7fcf01d8eda44", null ],
-      [ "iterator_category", "classutf8__iterator.html#a8cc0a5275f8cc18732deb7733880f900", null ],
-      [ "pointer", "classutf8__iterator.html#ab8d42eb839e0cf5f5a02fcff7a3cc9c8", null ],
-      [ "reference", "classutf8__iterator.html#a779e3cf0089b900eed1a2640e3f89b47", null ],
-      [ "value_type", "classutf8__iterator.html#aac04f2a148a131205a13621dddbe5d6d", null ],
-      [ "utf8_iterator", "classutf8__iterator.html#ae9b656ea9e951569adc33f6a62a01889", null ],
-      [ "utf8_iterator", "classutf8__iterator.html#ac8188f8cc74aedde496b185ee1b219a4", null ],
-      [ "operator!=", "classutf8__iterator.html#aa995261e03439b16ee8c5d89023c2474", null ],
-      [ "operator*", "classutf8__iterator.html#a37ab825268d8ec51fc9d75de0c0db451", null ],
-      [ "operator++", "classutf8__iterator.html#a34a08c3e49aaa87cac92b8b1c8a31283", null ],
-      [ "operator++", "classutf8__iterator.html#aabebff8180127fb5061116ecfa471535", null ],
-      [ "operator->", "classutf8__iterator.html#a9805550991b5d387dc8e893823b0a025", null ],
-      [ "operator==", "classutf8__iterator.html#a2dd92b407510a5e403ac4690d1a26e9f", null ]
+    [ "neforce::utf8_iterator", "classneforce_1_1utf8__iterator.html", [
+      [ "difference_type", "classneforce_1_1utf8__iterator.html#a59fa98affc9d6cba41294e24b741a73e", null ],
+      [ "iterator_category", "classneforce_1_1utf8__iterator.html#a041f57cf46f86f9f2ca5d3e7a19efda9", null ],
+      [ "pointer", "classneforce_1_1utf8__iterator.html#a7dbdc93bd06f777d943e49f7c32dd7f2", null ],
+      [ "reference", "classneforce_1_1utf8__iterator.html#a4baa2d4374cbe8c9a5a8fe10751c2b66", null ],
+      [ "value_type", "classneforce_1_1utf8__iterator.html#a20efe0fe477cc39cb7b47eb0df5b5e20", null ],
+      [ "utf8_iterator", "classneforce_1_1utf8__iterator.html#add9883f63ae8daa66ddb267f35fb9f81", null ],
+      [ "utf8_iterator", "classneforce_1_1utf8__iterator.html#a1b126da9a3db41bf856394fdf0eaf45f", null ],
+      [ "operator!=", "classneforce_1_1utf8__iterator.html#a57aa5a34ac79221e0ce0ae79da487120", null ],
+      [ "operator*", "classneforce_1_1utf8__iterator.html#aa11330bd87dc4e7d09242cee3700eb65", null ],
+      [ "operator++", "classneforce_1_1utf8__iterator.html#ae086b875be3bac1029c9433709d8284c", null ],
+      [ "operator++", "classneforce_1_1utf8__iterator.html#a0a206bbe15c2caae1492dc0a32dce5fe", null ],
+      [ "operator->", "classneforce_1_1utf8__iterator.html#a66ce68f65666c5719fb15712468c863c", null ],
+      [ "operator==", "classneforce_1_1utf8__iterator.html#aa986fac0ad5d56e40958ba58453992c5", null ]
     ] ],
-    [ "utf8_range", "classutf8__range.html", [
-      [ "utf8_range", "classutf8__range.html#a50800f8933c2ebee4818869575e7eba3", null ],
-      [ "begin", "classutf8__range.html#affb37a6b0ff5749969a880ac42cc905d", null ],
-      [ "end", "classutf8__range.html#aa7c61754656ffaf7a4fd2e1b3d80dd05", null ]
+    [ "neforce::utf8_range", "classneforce_1_1utf8__range.html", [
+      [ "utf8_range", "classneforce_1_1utf8__range.html#a3284109fa2a88ca5d7df5b57cc0f4386", null ],
+      [ "begin", "classneforce_1_1utf8__range.html#a3b22c70c911c877d3a6aed29a7096d3a", null ],
+      [ "end", "classneforce_1_1utf8__range.html#a327d7ca765c38234351c0000992f9a7c", null ]
     ] ]
 ];

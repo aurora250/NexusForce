@@ -1,10 +1,10 @@
 var atomic__timed__wait_8hpp =
 [
-    [ "atomic_wait_address_for", "group___atomic_operations.html#gae9386498e2864cd60268d3adb34f5e35", null ],
-    [ "atomic_wait_address_for", "group___atomic_operations.html#gad5aedfd049782c417969272c6b486b40", null ],
-    [ "atomic_wait_address_for_v", "group___atomic_operations.html#gac591f316f66a21b85032d6adee5c0031", null ],
-    [ "atomic_wait_address_until", "group___atomic_operations.html#ga24828a1269aa6f3ba157e283df55530f", null ],
-    [ "atomic_wait_address_until", "group___atomic_operations.html#ga681f430806c0f5f197523c0d03d13e8c", null ],
-    [ "atomic_wait_address_until_v", "group___atomic_operations.html#ga4ea9991a1e00b98f7bfbb4717f63d5ec", null ],
-    [ "futex_wait_until", "group___futex.html#ga7045b616751b8d5fec67f1a27f9c60e4", null ]
+    [ "neforce::atomic_wait_address_for", "group___atomic_operations.html#gac49a1625baa9640fb90ac87ff0eaeec7", null ],
+    [ "neforce::atomic_wait_address_for", "group___atomic_operations.html#gac9f52487596a451ce2a985a48c987d0a", null ],
+    [ "neforce::atomic_wait_address_for_v", "group___atomic_operations.html#gab202446704f6c4c3c5e92e5ec10f6ec9", null ],
+    [ "neforce::atomic_wait_address_until", "group___atomic_operations.html#ga1639e70079fe19d6c45f1c60c7622967", null ],
+    [ "neforce::atomic_wait_address_until", "group___atomic_operations.html#ga21d583622ad036d2c733519f26c4b45d", null ],
+    [ "neforce::atomic_wait_address_until_v", "group___atomic_operations.html#gab3bf77ee5c59d6197641d6f7837cfc64", null ],
+    [ "neforce::futex_wait_until", "group___futex.html#ga808568f40e3fc3cb6d3a13512fc51393", null ]
 ];

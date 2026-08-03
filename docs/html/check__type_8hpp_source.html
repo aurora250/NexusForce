@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
   </td>
  </tr>
  </tbody>
@@ -122,7 +122,7 @@ $(function(){initNavTree('check__type_8hpp_source.html','',''); });
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordflow">if</span> (!this-&gt;is_compact_) {</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            str_ += <span class="stringliteral">&quot; &quot;</span>;</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        }</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        this-&gt;str_ += <a class="code hl_function" href="group___u_t_f_converts.html#ga64a58369986078d7a0ef24ca1a53c920">to_string</a>(value);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        this-&gt;str_ += <a class="code hl_function" href="group___u_t_f_converts.html#gab37042647bf269d5f84844a00bc70fc4">to_string</a>(value);</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        this-&gt;is_compact_ = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    }</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
@@ -172,13 +172,13 @@ $(function(){initNavTree('check__type_8hpp_source.html','',''); });
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="keyword">struct </span>bound {</div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keyword">template</span> &lt;<span class="keywordtype">size_t</span> NN&gt;</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;NN == 0&gt;</a> __bound_dispatch()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    NEFORCE_CONSTEXPR20 enable_if_t&lt;NN == 0&gt; __bound_dispatch()<span class="keyword"> const </span>{</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        out_(<span class="stringliteral">&quot;[]&quot;</span>);</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    }</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="keyword">template</span> &lt;<span class="keywordtype">size_t</span> NN&gt;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    NEFORCE_CONSTEXPR20 <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;NN != 0&gt;</a> __bound_dispatch()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    NEFORCE_CONSTEXPR20 enable_if_t&lt;NN != 0&gt; __bound_dispatch()<span class="keyword"> const </span>{</div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        out_(<span class="stringliteral">&quot;[&quot;</span>).compact()(NN).compact()(<span class="stringliteral">&quot;]&quot;</span>);</div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    }</div>
@@ -215,7 +215,7 @@ $(function(){initNavTree('check__type_8hpp_source.html','',''); });
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="preprocessor">#ifdef NEFORCE_COMPILER_GNUC</span></div>
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span></div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="keywordtype">string</span> NEFORCE_API real_symbol_name(<span class="keywordtype">string</span> <a class="code hl_function" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>);</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="keywordtype">string</span> NEFORCE_API real_symbol_name(<span class="keywordtype">string</span> name);</div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
@@ -227,10 +227,10 @@ $(function(){initNavTree('check__type_8hpp_source.html','',''); });
 <div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    NEFORCE_CONSTEXPR20 check(<span class="keyword">const</span> output&amp; out) :</div>
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    out_(out) {</div>
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="preprocessor">#ifdef NEFORCE_COMPILER_GNUC</span></div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        <span class="keyword">using </span>FinT = <a class="code hl_typedef" href="group___remove_qualifiers.html#ga37d7d9f34cc72f8e04c82c3c8c6f9db8">remove_function_qualifiers_t&lt;T&gt;</a>;</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        out_(real_symbol_name(<span class="keyword">typeid</span>(FinT).<a class="code hl_function" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>()));</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        <span class="keyword">using </span>FinT = remove_function_qualifiers_t&lt;T&gt;;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        out_(real_symbol_name(<span class="keyword">typeid</span>(FinT).<a class="code hl_function" href="group___thread.html#gae22491028626239a3fd9b668cbe8fcae">name</a>()));</div>
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        out_(<span class="keyword">typeid</span>(T).<a class="code hl_function" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>());</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        out_(<span class="keyword">typeid</span>(T).<a class="code hl_function" href="group___thread.html#gae22491028626239a3fd9b668cbe8fcae">name</a>());</div>
 <div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    }</div>
 <div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>};</div>
@@ -395,22 +395,20 @@ $(function(){initNavTree('check__type_8hpp_source.html','',''); });
 <div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span></div>
 <div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="foldopen" id="foldopen00404" data-start="{" data-end="}">
-<div class="line"><a id="l00404" name="l00404"></a><span class="lineno"><a class="line" href="group___check_type.html#ga7e90527205f3307fe18b7e752b537a1c">  404</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">string</span> <a class="code hl_function" href="group___check_type.html#ga7e90527205f3307fe18b7e752b537a1c">check_type</a>() {</div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno"><a class="line" href="group___check_type.html#gaf7d2fc3f951fc502d306f010d38f605b">  404</a></span>NEFORCE_CONSTEXPR20 <span class="keywordtype">string</span> <a class="code hl_function" href="group___check_type.html#gaf7d2fc3f951fc502d306f010d38f605b">check_type</a>() {</div>
 <div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>    <span class="keywordtype">string</span> str;</div>
 <div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>    inner::check&lt;T&gt;{str};</div>
-<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>    <span class="keywordflow">return</span> _NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(str);</div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>    <span class="keywordflow">return</span> _NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#gae346eba5fb576da65e097b60463d3790">move</a>(str);</div>
 <div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>}</div>
 </div>
 <div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span> <span class="comment">// CheckType</span></div>
 <div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span> </div>
 <div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>NEFORCE_END_NAMESPACE__</div>
 <div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_TYPEINFO_CHECK_TYPE_HPP__</span></div>
-<div class="ttc" id="agroup___check_type_html_ga7e90527205f3307fe18b7e752b537a1c"><div class="ttname"><a href="group___check_type.html#ga7e90527205f3307fe18b7e752b537a1c">check_type</a></div><div class="ttdeci">constexpr string check_type()</div><div class="ttdoc">检查类型并返回可读字符串</div><div class="ttdef"><b>定义</b> <a href="#l00404">check_type.hpp:404</a></div></div>
-<div class="ttc" id="agroup___remove_qualifiers_html_ga37d7d9f34cc72f8e04c82c3c8c6f9db8"><div class="ttname"><a href="group___remove_qualifiers.html#ga37d7d9f34cc72f8e04c82c3c8c6f9db8">remove_function_qualifiers_t</a></div><div class="ttdeci">typename remove_function_qualifiers&lt; T &gt;::type remove_function_qualifiers_t</div><div class="ttdoc">remove_function_qualifiers的便捷别名</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00692">type_traits.hpp:692</a></div></div>
-<div class="ttc" id="agroup___shift_algorithms_html_ga5cf63a30ac8a14718fe8e9a65e1267ac"><div class="ttname"><a href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00312">shift.hpp:312</a></div></div>
-<div class="ttc" id="agroup___thread_html_ga19c672503697d8f9c7dfb3306b9583b1"><div class="ttname"><a href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a></div><div class="ttdeci">bool name(char *buffer, size_t size)</div><div class="ttdoc">获取当前线程名称</div><div class="ttdef"><b>定义</b> <a href="thread_8hpp_source.html#l00475">thread.hpp:475</a></div></div>
-<div class="ttc" id="agroup___type_traits_utilities_html_gafd80b775b0bd95747206fc628ad065f0"><div class="ttname"><a href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a></div><div class="ttdeci">typename enable_if&lt; Test, T &gt;::type enable_if_t</div><div class="ttdoc">enable_if的便捷别名</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00118">type_traits.hpp:118</a></div></div>
-<div class="ttc" id="agroup___u_t_f_converts_html_ga64a58369986078d7a0ef24ca1a53c920"><div class="ttname"><a href="group___u_t_f_converts.html#ga64a58369986078d7a0ef24ca1a53c920">to_string</a></div><div class="ttdeci">constexpr string to_string(const CharT &amp;c)</div><div class="ttdoc">将字符转换为普通字符串</div><div class="ttdef"><b>定义</b> <a href="icharacter_8hpp_source.html#l00115">icharacter.hpp:115</a></div></div>
+<div class="ttc" id="agroup___check_type_html_gaf7d2fc3f951fc502d306f010d38f605b"><div class="ttname"><a href="group___check_type.html#gaf7d2fc3f951fc502d306f010d38f605b">neforce::check_type</a></div><div class="ttdeci">constexpr string check_type()</div><div class="ttdoc">检查类型并返回可读字符串</div><div class="ttdef"><b>定义</b> <a href="#l00404">check_type.hpp:404</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_gae346eba5fb576da65e097b60463d3790"><div class="ttname"><a href="group___shift_algorithms.html#gae346eba5fb576da65e097b60463d3790">neforce::move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00312">shift.hpp:312</a></div></div>
+<div class="ttc" id="agroup___thread_html_gae22491028626239a3fd9b668cbe8fcae"><div class="ttname"><a href="group___thread.html#gae22491028626239a3fd9b668cbe8fcae">neforce::this_thread::name</a></div><div class="ttdeci">bool name(char *buffer, size_t size)</div><div class="ttdoc">获取当前线程名称</div><div class="ttdef"><b>定义</b> <a href="thread_8hpp_source.html#l00475">thread.hpp:475</a></div></div>
+<div class="ttc" id="agroup___u_t_f_converts_html_gab37042647bf269d5f84844a00bc70fc4"><div class="ttname"><a href="group___u_t_f_converts.html#gab37042647bf269d5f84844a00bc70fc4">neforce::to_string</a></div><div class="ttdeci">constexpr string to_string(const CharT &amp;c)</div><div class="ttdoc">将字符转换为普通字符串</div><div class="ttdef"><b>定义</b> <a href="icharacter_8hpp_source.html#l00115">icharacter.hpp:115</a></div></div>
 <div class="ttc" id="apackages_8hpp_html"><div class="ttname"><a href="packages_8hpp.html">packages.hpp</a></div><div class="ttdoc">数值类型包装类</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

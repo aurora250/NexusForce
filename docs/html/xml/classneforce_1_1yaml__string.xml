@@ -1,0 +1,457 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1yaml__string" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>neforce::yaml_string</compoundname>
+    <basecompoundref refid="classneforce_1_1yaml__value" prot="public" virt="non-virtual">neforce::yaml_value</basecompoundref>
+    <includes refid="yaml__value_8hpp" local="no">yaml_value.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classneforce_1_1yaml__string_1a0146a4bc49ed2d13598acb41c634df74" prot="public" static="no" strong="no">
+        <type></type>
+        <name>string_style</name>
+        <qualifiedname>neforce::yaml_string::string_style</qualifiedname>
+        <enumvalue id="classneforce_1_1yaml__string_1a0146a4bc49ed2d13598acb41c634df74a383eb4a92768ca7a2eddd1254809f1d8" prot="public">
+          <name>Plain</name>
+          <briefdescription>
+<para>纯文本样式（无引号） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1yaml__string_1a0146a4bc49ed2d13598acb41c634df74a24081d94ed40a4b09eb0060c88a66a5c" prot="public">
+          <name>SingleQuoted</name>
+          <briefdescription>
+<para>单引号样式（&apos;string&apos;） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1yaml__string_1a0146a4bc49ed2d13598acb41c634df74ad2eef22ba405984c02bfa0a353097433" prot="public">
+          <name>DoubleQuoted</name>
+          <briefdescription>
+<para>双引号样式（&quot;string&quot;，支持转义） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1yaml__string_1a0146a4bc49ed2d13598acb41c634df74ae161c59ffccba17238a79c40da73e123" prot="public">
+          <name>Literal</name>
+          <briefdescription>
+<para>块字面量样式（|，保留换行） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1yaml__string_1a0146a4bc49ed2d13598acb41c634df74a37cb0ffda58014e08a61039e51cd998d" prot="public">
+          <name>Folded</name>
+          <briefdescription>
+<para>块折叠样式（&gt;，换行转空格） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>字符串标量样式枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="461" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="461" bodyend="467"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1yaml__string_1a46571ddf95f770257458a240ae59abc8" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::yaml_string::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::yaml_string::value</qualifiedname>
+        <briefdescription>
+<para>字符串内容 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="470" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="470" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1yaml__string_1a944935ab58e72ba9a866fef571f11acf" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1yaml__string_1a0146a4bc49ed2d13598acb41c634df74" kindref="member">string_style</ref></type>
+        <definition>string_style neforce::yaml_string::style</definition>
+        <argsstring></argsstring>
+        <name>style</name>
+        <qualifiedname>neforce::yaml_string::style</qualifiedname>
+        <briefdescription>
+<para>标量样式 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="471" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="471" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1yaml__string_1a532196b20de24e23b4c8b47f899c179d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::yaml_string::~yaml_string</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~yaml_string</name>
+        <qualifiedname>neforce::yaml_string::~yaml_string</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="474" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__string_1aa555f2d3a3391684407db89ce4d4a613" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::yaml_string::yaml_string</definition>
+        <argsstring>(const yaml_string &amp;)=default</argsstring>
+        <name>yaml_string</name>
+        <qualifiedname>neforce::yaml_string::yaml_string</qualifiedname>
+        <param>
+          <type>const yaml_string &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="476" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__string_1afcda89f51394516825d638c95c18f4e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>yaml_string &amp;</type>
+        <definition>yaml_string &amp; neforce::yaml_string::operator=</definition>
+        <argsstring>(const yaml_string &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::yaml_string::operator=</qualifiedname>
+        <param>
+          <type>const yaml_string &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="477" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__string_1ac0b635f0e5a997b13c137ff09c4d4d0b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::yaml_string::yaml_string</definition>
+        <argsstring>(yaml_string &amp;&amp;) noexcept=default</argsstring>
+        <name>yaml_string</name>
+        <qualifiedname>neforce::yaml_string::yaml_string</qualifiedname>
+        <param>
+          <type>yaml_string &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="478" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__string_1acf65fef6abb33afd339fb18e4449addb" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>yaml_string &amp;</type>
+        <definition>yaml_string &amp; neforce::yaml_string::operator=</definition>
+        <argsstring>(yaml_string &amp;&amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::yaml_string::operator=</qualifiedname>
+        <param>
+          <type>yaml_string &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="479" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__string_1a22fd6ea4e023ac670e9f1c8c5b766d83" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::yaml_string::yaml_string</definition>
+        <argsstring>(string v, const string_style s=Plain)</argsstring>
+        <name>yaml_string</name>
+        <qualifiedname>neforce::yaml_string::yaml_string</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1yaml__string_1a0146a4bc49ed2d13598acb41c634df74" kindref="member">string_style</ref></type>
+          <declname>s</declname>
+          <defval><ref refid="classneforce_1_1yaml__string_1a0146a4bc49ed2d13598acb41c634df74a383eb4a92768ca7a2eddd1254809f1d8" kindref="member">Plain</ref></defval>
+        </param>
+        <briefdescription>
+<para>构造字符串值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串内容 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>标量样式，默认为纯文本 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="486" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="486" bodyend="488"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1yaml__string_1a0146a4bc49ed2d13598acb41c634df74a383eb4a92768ca7a2eddd1254809f1d8" compoundref="yaml__value_8hpp" startline="462">Plain</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__string_1a54b3bdcfab31016f8c917613a7551c1f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type><ref refid="classneforce_1_1yaml__value_1a401cb78bb19c1189f01d35527b6a046d" kindref="member">types</ref></type>
+        <definition>types neforce::yaml_string::type</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>type</name>
+        <qualifiedname>neforce::yaml_string::type</qualifiedname>
+        <reimplements refid="classneforce_1_1yaml__value_1ae7f289c9fe5be7ff0ab9364a183bcb4c">type</reimplements>
+        <briefdescription>
+<para>获取值的具体类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>类型枚举值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="490" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="490" bodyend="490"/>
+        <references refid="classneforce_1_1yaml__value_1a401cb78bb19c1189f01d35527b6a046da341808e11ba1196f57fbdda20dc3ef98" compoundref="yaml__value_8hpp" startline="230">neforce::yaml_value::String</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__string_1a9c2b682104f1bf2c943423032d96c999" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>const yaml_string *</type>
+        <definition>const yaml_string * neforce::yaml_string::as_string</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>as_string</name>
+        <qualifiedname>neforce::yaml_string::as_string</qualifiedname>
+        <reimplements refid="classneforce_1_1yaml__value_1a4ee9cb8d8b96c8b5e8ecbab675f2672a">as_string</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="491" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="491" bodyend="491"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__string_1aa18fc99f9a9bc722fa3b61b7b7011ac2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+        <definition>const string &amp; neforce::yaml_string::get_value</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_value</name>
+        <qualifiedname>neforce::yaml_string::get_value</qualifiedname>
+        <briefdescription>
+<para>获取字符串内容 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>字符串常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="497" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="497" bodyend="497"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1yaml__string_1a93f6129d08f786550e3da6274038f32a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1yaml__string_1a0146a4bc49ed2d13598acb41c634df74" kindref="member">string_style</ref></type>
+        <definition>string_style neforce::yaml_string::get_style</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_style</name>
+        <qualifiedname>neforce::yaml_string::get_style</qualifiedname>
+        <briefdescription>
+<para>获取标量样式 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>字符串样式枚举值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="503" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="503" bodyend="503"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>YAML字符串值类型 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>表示YAML中的字符串值。支持YAML 1.2定义的五种标量样式：</para>
+<para><table rows="6" cols="4"><row>
+<entry thead="yes"><para>样式  </para>
+</entry><entry thead="yes"><para>枚举值  </para>
+</entry><entry thead="yes"><para>语法示例  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Plain  </para>
+</entry><entry thead="no"><para>Plain  </para>
+</entry><entry thead="no"><para>hello world  </para>
+</entry><entry thead="no"><para>无引号纯文本  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>SingleQuoted  </para>
+</entry><entry thead="no"><para>SingleQuoted  </para>
+</entry><entry thead="no"><para>&apos;hello world&apos;  </para>
+</entry><entry thead="no"><para>单引号，&apos;&apos; 表示字面引号  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>DoubleQuoted  </para>
+</entry><entry thead="no"><para>DoubleQuoted  </para>
+</entry><entry thead="no"><para>&quot;hello\\nworld&quot;  </para>
+</entry><entry thead="no"><para>双引号，支持转义序列  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Literal  </para>
+</entry><entry thead="no"><para>Literal  </para>
+</entry><entry thead="no"><para>\|\n line1\n line2  </para>
+</entry><entry thead="no"><para>块字面量，保留换行  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Folded  </para>
+</entry><entry thead="no"><para>Folded  </para>
+</entry><entry thead="no"><para>&gt;\n line1\n line2  </para>
+</entry><entry thead="no"><para>块折叠，换行转空格  </para>
+</entry></row>
+</table>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>neforce::istringify&lt; yaml_value &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+      <node id="1">
+        <label>neforce::yaml_string</label>
+        <link refid="classneforce_1_1yaml__string"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::yaml_value</label>
+        <link refid="classneforce_1_1yaml__value"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>neforce::basic_string&lt; char &gt;</label>
+        <link refid="classneforce_1_1basic__string"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::icommon&lt; T &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="7">
+        <label>neforce::ihashable&lt; T &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="3">
+        <label>neforce::istringify&lt; yaml_value &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+      <node id="1">
+        <label>neforce::yaml_string</label>
+        <link refid="classneforce_1_1yaml__string"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::yaml_value</label>
+        <link refid="classneforce_1_1yaml__value"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>anchor</edgelabel>
+          <edgelabel>tag</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="455" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="455" bodyend="504"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1yaml__value_1a1fe2d4f8ad791c660dc48e7597169cf6" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>anchor</name></member>
+      <member refid="classneforce_1_1yaml__value_1a2a21e92ef912f1d53be73b0e1dc9ca34" prot="public" virt="virtual"><scope>neforce::yaml_string</scope><name>as_boolean</name></member>
+      <member refid="classneforce_1_1yaml__value_1a04b2056f898432355d98fa79927a4b50" prot="public" virt="virtual"><scope>neforce::yaml_string</scope><name>as_float</name></member>
+      <member refid="classneforce_1_1yaml__value_1a63719e1a45d8ea1a68db3b1f0eabc0ac" prot="public" virt="virtual"><scope>neforce::yaml_string</scope><name>as_integer</name></member>
+      <member refid="classneforce_1_1yaml__value_1a52fdef07006a7e07f81353b5b073c6cd" prot="public" virt="virtual"><scope>neforce::yaml_string</scope><name>as_mapping</name></member>
+      <member refid="classneforce_1_1yaml__value_1a17ab13014b9f501f18bd85f6ce628729" prot="public" virt="virtual"><scope>neforce::yaml_string</scope><name>as_null</name></member>
+      <member refid="classneforce_1_1yaml__value_1a013f4b995f62b7d98363a2f578581cc8" prot="public" virt="virtual"><scope>neforce::yaml_string</scope><name>as_sequence</name></member>
+      <member refid="classneforce_1_1yaml__string_1a9c2b682104f1bf2c943423032d96c999" prot="public" virt="virtual"><scope>neforce::yaml_string</scope><name>as_string</name></member>
+      <member refid="classneforce_1_1yaml__value_1a329913ccd7026f2e0ef3f246c58f1a07" prot="public" virt="virtual"><scope>neforce::yaml_string</scope><name>as_timestamp</name></member>
+      <member refid="classneforce_1_1yaml__value_1a401cb78bb19c1189f01d35527b6a046da665399ca61b66e78aca2dcba11d4d408" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>Boolean</name></member>
+      <member refid="classneforce_1_1yaml__string_1a0146a4bc49ed2d13598acb41c634df74ad2eef22ba405984c02bfa0a353097433" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>DoubleQuoted</name></member>
+      <member refid="classneforce_1_1yaml__value_1a401cb78bb19c1189f01d35527b6a046daef87c63d3ebb70f5b549980ab7e967b3" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>Float</name></member>
+      <member refid="classneforce_1_1yaml__string_1a0146a4bc49ed2d13598acb41c634df74a37cb0ffda58014e08a61039e51cd998d" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>Folded</name></member>
+      <member refid="classneforce_1_1yaml__string_1a93f6129d08f786550e3da6274038f32a" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>get_style</name></member>
+      <member refid="classneforce_1_1yaml__string_1aa18fc99f9a9bc722fa3b61b7b7011ac2" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>get_value</name></member>
+      <member refid="classneforce_1_1yaml__value_1a401cb78bb19c1189f01d35527b6a046da7d84ed12cefebff9ac1365017b371046" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>Integer</name></member>
+      <member refid="classneforce_1_1yaml__value_1a797624501ded5a699d33c1bf1856577e" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>is_boolean</name></member>
+      <member refid="classneforce_1_1yaml__value_1a18ba855f13b5f93b7af59c79444259be" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>is_float</name></member>
+      <member refid="classneforce_1_1yaml__value_1a064de0fcec9d9c4e5847389550c67f83" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>is_integer</name></member>
+      <member refid="classneforce_1_1yaml__value_1a9ebf6d016ab9bf33c853985af66142b6" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>is_mapping</name></member>
+      <member refid="classneforce_1_1yaml__value_1aea9ae1f2018f880cb9f432d23a3415a9" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>is_null</name></member>
+      <member refid="classneforce_1_1yaml__value_1a4e5f1e68502c4984245174a5b0b19f92" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>is_sequence</name></member>
+      <member refid="classneforce_1_1yaml__value_1a2804146be12e5e605d168fd760846ab5" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>is_string</name></member>
+      <member refid="classneforce_1_1yaml__value_1aeca2d39286f9f05dca428d09db5a69f1" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>is_timestamp</name></member>
+      <member refid="classneforce_1_1yaml__string_1a0146a4bc49ed2d13598acb41c634df74ae161c59ffccba17238a79c40da73e123" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>Literal</name></member>
+      <member refid="classneforce_1_1yaml__value_1a401cb78bb19c1189f01d35527b6a046da78d5c58757c2a8a223c6ef69359a5bda" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>Mapping</name></member>
+      <member refid="classneforce_1_1yaml__value_1a401cb78bb19c1189f01d35527b6a046daf44b9f30f6002d054d617619d2cf30b9" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>Null</name></member>
+      <member refid="classneforce_1_1yaml__string_1afcda89f51394516825d638c95c18f4e9" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1yaml__string_1acf65fef6abb33afd339fb18e4449addb" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1yaml__value_1adddedf83e54d01170bac7216c7346b88" prot="public" virt="non-virtual" ambiguityscope="neforce::yaml_value::"><scope>neforce::yaml_string</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1yaml__value_1a6d12f7009c8cb3a4d804a4db43fff852" prot="public" virt="non-virtual" ambiguityscope="neforce::yaml_value::"><scope>neforce::yaml_string</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1yaml__string_1a0146a4bc49ed2d13598acb41c634df74a383eb4a92768ca7a2eddd1254809f1d8" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>Plain</name></member>
+      <member refid="classneforce_1_1yaml__value_1a401cb78bb19c1189f01d35527b6a046da76d6ac6ab82afdaaf8c482b34f432d2e" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>Sequence</name></member>
+      <member refid="classneforce_1_1yaml__value_1a5a50e929c520b734e8d4443b324eba39" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>set_anchor</name></member>
+      <member refid="classneforce_1_1yaml__value_1a620dd626dd338c517a9fa4b660c4fd63" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>set_tag</name></member>
+      <member refid="classneforce_1_1yaml__string_1a0146a4bc49ed2d13598acb41c634df74a24081d94ed40a4b09eb0060c88a66a5c" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>SingleQuoted</name></member>
+      <member refid="classneforce_1_1yaml__value_1a401cb78bb19c1189f01d35527b6a046da341808e11ba1196f57fbdda20dc3ef98" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>String</name></member>
+      <member refid="classneforce_1_1yaml__string_1a0146a4bc49ed2d13598acb41c634df74" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>string_style</name></member>
+      <member refid="classneforce_1_1yaml__string_1a944935ab58e72ba9a866fef571f11acf" prot="private" virt="non-virtual"><scope>neforce::yaml_string</scope><name>style</name></member>
+      <member refid="classneforce_1_1yaml__value_1a78cac1dcb3ccf1163a9f81da5fdce7dc" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>tag</name></member>
+      <member refid="classneforce_1_1yaml__value_1a401cb78bb19c1189f01d35527b6a046da1006b2e09e0b3aaaecadda7718f594e7" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>Timestamp</name></member>
+      <member refid="classneforce_1_1yaml__value_1adf4d284006754796892b677e63e2fe49" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>to_document</name></member>
+      <member refid="classneforce_1_1yaml__value_1a201ff4a1bed5cff0727112a24a963e0d" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>to_string</name></member>
+      <member refid="classneforce_1_1yaml__string_1a54b3bdcfab31016f8c917613a7551c1f" prot="public" virt="virtual"><scope>neforce::yaml_string</scope><name>type</name></member>
+      <member refid="classneforce_1_1yaml__value_1a401cb78bb19c1189f01d35527b6a046d" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>types</name></member>
+      <member refid="classneforce_1_1yaml__string_1a46571ddf95f770257458a240ae59abc8" prot="private" virt="non-virtual"><scope>neforce::yaml_string</scope><name>value</name></member>
+      <member refid="classneforce_1_1yaml__string_1aa555f2d3a3391684407db89ce4d4a613" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>yaml_string</name></member>
+      <member refid="classneforce_1_1yaml__string_1ac0b635f0e5a997b13c137ff09c4d4d0b" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>yaml_string</name></member>
+      <member refid="classneforce_1_1yaml__string_1a22fd6ea4e023ac670e9f1c8c5b766d83" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>yaml_string</name></member>
+      <member refid="classneforce_1_1yaml__value_1ad44cb74e918ce7db74100fd7f969b479" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>yaml_value</name></member>
+      <member refid="classneforce_1_1yaml__value_1af56112fb91f6f58eb00d85d05948798f" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>yaml_value</name></member>
+      <member refid="classneforce_1_1yaml__value_1a33f36c2faf11e323378b156f66acaf58" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>yaml_value</name></member>
+      <member refid="classneforce_1_1yaml__string_1a532196b20de24e23b4c8b47f899c179d" prot="public" virt="non-virtual"><scope>neforce::yaml_string</scope><name>~yaml_string</name></member>
+      <member refid="classneforce_1_1yaml__value_1a1392ce5a5aabc73074b6840e2c138cb6" prot="public" virt="virtual"><scope>neforce::yaml_string</scope><name>~yaml_value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

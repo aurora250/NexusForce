@@ -1,18 +1,18 @@
 var to__numerics_8hpp =
 [
-    [ "operator\"\"_i128", "group___user_literals.html#gaa437921a519a6a246a539dc02ec81ba6", null ],
-    [ "operator\"\"_u128", "group___user_literals.html#gaa40d57935d274a75859089b3f959cebf", null ],
-    [ "to_decimal", "group___string_converts.html#ga2e4ce025d09685beadde1f58d4b35d3b", null ],
-    [ "to_float32", "group___string_converts.html#gaa1f68db77c97cbc3d24338ff12fcff6d", null ],
-    [ "to_float64", "group___string_converts.html#ga40976a040eb582de9dbf0f62f3142e5b", null ],
-    [ "to_int128", "group___string_converts.html#gafde0106c7b3946708cbc9a6ecfb70607", null ],
-    [ "to_int16", "group___string_converts.html#ga2175c6ed7018faf56f36c6546ea4e839", null ],
-    [ "to_int32", "group___string_converts.html#ga7a8e36ad94481517ba622c58f8b889c2", null ],
-    [ "to_int64", "group___string_converts.html#gae3c7ad350b2eb68272c0c675ee08e407", null ],
-    [ "to_int8", "group___string_converts.html#gaadf6a1509fb317e4ae5ea0a3d4ae3304", null ],
-    [ "to_uint128", "group___string_converts.html#ga00110fd2113bf3df11fe4fd12c7f4843", null ],
-    [ "to_uint16", "group___string_converts.html#gadb486964bb86e1d9a09107c38bb99237", null ],
-    [ "to_uint32", "group___string_converts.html#ga95817e742b1adc1ce899d377ea72154b", null ],
-    [ "to_uint64", "group___string_converts.html#ga90ef149c10ceb59efd1c49976fd10cd1", null ],
-    [ "to_uint8", "group___string_converts.html#gaeb63c00ebfec192aaadccdd92cb62fee", null ]
+    [ "neforce::literals::operator\"\"_i128", "group___user_literals.html#gaefd64234837f92141af64ac7dc15facc", null ],
+    [ "neforce::literals::operator\"\"_u128", "group___user_literals.html#ga1991d87d953e1866af9997562769b075", null ],
+    [ "neforce::to_decimal", "group___string_converts.html#gac5f096f2aef6794ccf21d88c31ed5b0a", null ],
+    [ "neforce::to_float32", "group___string_converts.html#ga141538a1444721bb77e5c6b718825fa3", null ],
+    [ "neforce::to_float64", "group___string_converts.html#ga2af00ddb50d85f89f9a6a7a95bb68bf5", null ],
+    [ "neforce::to_int128", "group___string_converts.html#ga5a57f1923b2d94798fa725d53c786119", null ],
+    [ "neforce::to_int16", "group___string_converts.html#gaebff5af4dc2a494a986f0a89187c1a15", null ],
+    [ "neforce::to_int32", "group___string_converts.html#ga081bff6f8919b89a419cd33ec5df2c8e", null ],
+    [ "neforce::to_int64", "group___string_converts.html#ga9342e74294843357e40ab2f0bdb08650", null ],
+    [ "neforce::to_int8", "group___string_converts.html#gab62bb893d506b443f843429f998f9708", null ],
+    [ "neforce::to_uint128", "group___string_converts.html#gaaff36ae675ef62856730749bdd4ed783", null ],
+    [ "neforce::to_uint16", "group___string_converts.html#ga1f8dcb810456058a814da2522875d1fe", null ],
+    [ "neforce::to_uint32", "group___string_converts.html#ga749955188e7f6dc19e6a64a217f27fe0", null ],
+    [ "neforce::to_uint64", "group___string_converts.html#gabd28f88d0c2d487858bd5ad0b97fb361", null ],
+    [ "neforce::to_uint8", "group___string_converts.html#gade251f5df5f9ad1749e475c4ad902cdf", null ]
 ];

@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1http_1_1http2__continuation__frame" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::http::http2_continuation_frame</compoundname>
+    <includes refid="http2__protocol_8hpp" local="no">http2_protocol.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structneforce_1_1http_1_1http2__continuation__frame_1ac4b9eadb2cf2343c1d1c695990dd2ccf" prot="public" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::http::http2_continuation_frame::stream_id</definition>
+        <argsstring></argsstring>
+        <name>stream_id</name>
+        <qualifiedname>neforce::http::http2_continuation_frame::stream_id</qualifiedname>
+        <briefdescription>
+<para>流 ID </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="242" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="242" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1http_1_1http2__continuation__frame_1ab31722f7d626a82f598c40a84bc3adb0" prot="public" static="no" mutable="no">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>byte_vector neforce::http::http2_continuation_frame::header_block</definition>
+        <argsstring></argsstring>
+        <name>header_block</name>
+        <qualifiedname>neforce::http::http2_continuation_frame::header_block</qualifiedname>
+        <briefdescription>
+<para>HPACK 编码的续帧头部块 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="243" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="243" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1http_1_1http2__continuation__frame_1a303bf33405b8e8f9b7ba3b633d6c7571" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::http::http2_continuation_frame::end_headers</definition>
+        <argsstring></argsstring>
+        <name>end_headers</name>
+        <qualifiedname>neforce::http::http2_continuation_frame::end_headers</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否结束头部块 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="244" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="244" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>CONTINUATION 帧（RFC 7540 §6.10） </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::http::http2_continuation_frame</label>
+        <link refid="structneforce_1_1http_1_1http2__continuation__frame"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>header_block</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::icollector&lt; T &gt;</label>
+        <link refid="structneforce_1_1icollector"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="2">
+        <label>neforce::vector&lt; byte_t &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="241" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="241" bodyend="245"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1http_1_1http2__continuation__frame_1a303bf33405b8e8f9b7ba3b633d6c7571" prot="public" virt="non-virtual"><scope>neforce::http::http2_continuation_frame</scope><name>end_headers</name></member>
+      <member refid="structneforce_1_1http_1_1http2__continuation__frame_1ab31722f7d626a82f598c40a84bc3adb0" prot="public" virt="non-virtual"><scope>neforce::http::http2_continuation_frame</scope><name>header_block</name></member>
+      <member refid="structneforce_1_1http_1_1http2__continuation__frame_1ac4b9eadb2cf2343c1d1c695990dd2ccf" prot="public" virt="non-virtual"><scope>neforce::http::http2_continuation_frame</scope><name>stream_id</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

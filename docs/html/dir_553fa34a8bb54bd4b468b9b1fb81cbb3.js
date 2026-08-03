@@ -9,7 +9,7 @@ var dir_553fa34a8bb54bd4b468b9b1fb81cbb3 =
     [ "menu.hpp", "menu_8hpp.html", "menu_8hpp" ],
     [ "modal.hpp", "modal_8hpp.html", "modal_8hpp" ],
     [ "radiobox.hpp", "radiobox_8hpp.html", "radiobox_8hpp" ],
-    [ "renderer.hpp", "renderer_8hpp.html", "renderer_8hpp" ],
+    [ "renderer.hpp", "component_2renderer_8hpp.html", "component_2renderer_8hpp" ],
     [ "resizable_split.hpp", "resizable__split_8hpp.html", "resizable__split_8hpp" ],
     [ "scroll_view.hpp", "scroll__view_8hpp.html", "scroll__view_8hpp" ],
     [ "slider.hpp", "slider_8hpp.html", "slider_8hpp" ],

@@ -4,26 +4,27 @@
     <compoundname>CharTypeChecking</compoundname>
     <title>字符类型检查</title>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___char_type_checking_1gab784815a489653e65523e40034c86a8a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___char_type_checking_1ga02c82954f5817c3735a098178f7a49ca" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_ctype</definition>
+        <definition>bool neforce::is_ctype</definition>
         <argsstring>(const CharT c, uint64_t mask_low, uint64_t mask_high) noexcept</argsstring>
         <name>is_ctype</name>
+        <qualifiedname>neforce::is_ctype</qualifiedname>
         <param>
           <type>const CharT</type>
           <declname>c</declname>
         </param>
         <param>
-          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <type>uint64_t</type>
           <declname>mask_low</declname>
         </param>
         <param>
-          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <type>uint64_t</type>
           <declname>mask_high</declname>
         </param>
         <briefdescription>
@@ -71,20 +72,23 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="115" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="115" bodyend="126"/>
-        <references refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" compoundref="type__traits_8hpp" startline="829">is_character_v</references>
-        <referencedby refid="group___char_type_checking_1gac0dbf0f20ada409bef5c1faa4b81fcf3" compoundref="char__types_8hpp" startline="148" endline="150">is_cntrl</referencedby>
-        <referencedby refid="group___char_type_checking_1ga3b668ccff91efa798d3b1cc487e5591c" compoundref="char__types_8hpp" startline="135" endline="137">is_punct</referencedby>
+        <references refid="group___base_type_properties_1gaf58b1a14e5f65edead887d77305c34f3" compoundref="type__traits_8hpp" startline="829">neforce::is_character_v</references>
+        <references refid="group___char_type_checking_1ga02c82954f5817c3735a098178f7a49ca" compoundref="char__types_8hpp" startline="115" endline="126">neforce::is_ctype</references>
+        <referencedby refid="group___char_type_checking_1gac3a1aad1b5fd6141e4052b05cf658c88" compoundref="char__types_8hpp" startline="148" endline="150">neforce::is_cntrl</referencedby>
+        <referencedby refid="group___char_type_checking_1ga02c82954f5817c3735a098178f7a49ca" compoundref="char__types_8hpp" startline="115" endline="126">neforce::is_ctype</referencedby>
+        <referencedby refid="group___char_type_checking_1ga6f50b9fd7ee17c4166e062349f5bb3b2" compoundref="char__types_8hpp" startline="135" endline="137">neforce::is_punct</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___char_type_checking_1ga3b668ccff91efa798d3b1cc487e5591c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___char_type_checking_1ga6f50b9fd7ee17c4166e062349f5bb3b2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_punct</definition>
+        <definition>bool neforce::is_punct</definition>
         <argsstring>(const CharT c) noexcept</argsstring>
         <name>is_punct</name>
+        <qualifiedname>neforce::is_punct</qualifiedname>
         <param>
           <type>const CharT</type>
           <declname>c</declname>
@@ -118,18 +122,21 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="135" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="135" bodyend="137"/>
-        <references refid="group___char_type_checking_1gab784815a489653e65523e40034c86a8a" compoundref="char__types_8hpp" startline="115" endline="126">is_ctype</references>
+        <references refid="group___char_type_checking_1ga02c82954f5817c3735a098178f7a49ca" compoundref="char__types_8hpp" startline="115" endline="126">neforce::is_ctype</references>
+        <references refid="group___char_type_checking_1ga6f50b9fd7ee17c4166e062349f5bb3b2" compoundref="char__types_8hpp" startline="135" endline="137">neforce::is_punct</references>
+        <referencedby refid="group___char_type_checking_1ga6f50b9fd7ee17c4166e062349f5bb3b2" compoundref="char__types_8hpp" startline="135" endline="137">neforce::is_punct</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___char_type_checking_1gac0dbf0f20ada409bef5c1faa4b81fcf3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___char_type_checking_1gac3a1aad1b5fd6141e4052b05cf658c88" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_cntrl</definition>
+        <definition>bool neforce::is_cntrl</definition>
         <argsstring>(const CharT c) noexcept</argsstring>
         <name>is_cntrl</name>
+        <qualifiedname>neforce::is_cntrl</qualifiedname>
         <param>
           <type>const CharT</type>
           <declname>c</declname>
@@ -163,19 +170,22 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="148" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="148" bodyend="150"/>
-        <references refid="group___char_type_checking_1gab784815a489653e65523e40034c86a8a" compoundref="char__types_8hpp" startline="115" endline="126">is_ctype</references>
-        <referencedby refid="group___char_type_checking_1ga153007f4708ade96ce9bd03d7d7af944" compoundref="char__types_8hpp" startline="161" endline="164">is_print</referencedby>
+        <references refid="group___char_type_checking_1gac3a1aad1b5fd6141e4052b05cf658c88" compoundref="char__types_8hpp" startline="148" endline="150">neforce::is_cntrl</references>
+        <references refid="group___char_type_checking_1ga02c82954f5817c3735a098178f7a49ca" compoundref="char__types_8hpp" startline="115" endline="126">neforce::is_ctype</references>
+        <referencedby refid="group___char_type_checking_1gac3a1aad1b5fd6141e4052b05cf658c88" compoundref="char__types_8hpp" startline="148" endline="150">neforce::is_cntrl</referencedby>
+        <referencedby refid="group___char_type_checking_1ga2e89ed0eb9bf0d83a7cb56ee7c34deb0" compoundref="char__types_8hpp" startline="161" endline="164">neforce::is_print</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___char_type_checking_1ga153007f4708ade96ce9bd03d7d7af944" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___char_type_checking_1ga2e89ed0eb9bf0d83a7cb56ee7c34deb0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_print</definition>
+        <definition>bool neforce::is_print</definition>
         <argsstring>(const CharT c) noexcept</argsstring>
         <name>is_print</name>
+        <qualifiedname>neforce::is_print</qualifiedname>
         <param>
           <type>const CharT</type>
           <declname>c</declname>
@@ -209,19 +219,22 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="161" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="161" bodyend="164"/>
-        <references refid="group___char_type_checking_1gac0dbf0f20ada409bef5c1faa4b81fcf3" compoundref="char__types_8hpp" startline="148" endline="150">is_cntrl</references>
-        <referencedby refid="group___char_type_checking_1ga05ef53d719082d560832160573933cd0" compoundref="char__types_8hpp" startline="190" endline="192">is_graph</referencedby>
+        <references refid="group___char_type_checking_1gac3a1aad1b5fd6141e4052b05cf658c88" compoundref="char__types_8hpp" startline="148" endline="150">neforce::is_cntrl</references>
+        <references refid="group___char_type_checking_1ga2e89ed0eb9bf0d83a7cb56ee7c34deb0" compoundref="char__types_8hpp" startline="161" endline="164">neforce::is_print</references>
+        <referencedby refid="group___char_type_checking_1ga510bce0efc9cb8397524c33d2d6eb59a" compoundref="char__types_8hpp" startline="190" endline="192">neforce::is_graph</referencedby>
+        <referencedby refid="group___char_type_checking_1ga2e89ed0eb9bf0d83a7cb56ee7c34deb0" compoundref="char__types_8hpp" startline="161" endline="164">neforce::is_print</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___char_type_checking_1ga22ea4bfb2c30902c812615c48b4b988f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___char_type_checking_1ga8dd58df52dc4f67cc69ad918fd255b41" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_blank</definition>
+        <definition>bool neforce::is_blank</definition>
         <argsstring>(const CharT c) noexcept</argsstring>
         <name>is_blank</name>
+        <qualifiedname>neforce::is_blank</qualifiedname>
         <param>
           <type>const CharT</type>
           <declname>c</declname>
@@ -255,19 +268,22 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="175" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="175" bodyend="179"/>
-        <references refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" compoundref="type__traits_8hpp" startline="829">is_character_v</references>
-        <referencedby refid="group___char_type_checking_1ga05ef53d719082d560832160573933cd0" compoundref="char__types_8hpp" startline="190" endline="192">is_graph</referencedby>
+        <references refid="group___char_type_checking_1ga8dd58df52dc4f67cc69ad918fd255b41" compoundref="char__types_8hpp" startline="175" endline="179">neforce::is_blank</references>
+        <references refid="group___base_type_properties_1gaf58b1a14e5f65edead887d77305c34f3" compoundref="type__traits_8hpp" startline="829">neforce::is_character_v</references>
+        <referencedby refid="group___char_type_checking_1ga8dd58df52dc4f67cc69ad918fd255b41" compoundref="char__types_8hpp" startline="175" endline="179">neforce::is_blank</referencedby>
+        <referencedby refid="group___char_type_checking_1ga510bce0efc9cb8397524c33d2d6eb59a" compoundref="char__types_8hpp" startline="190" endline="192">neforce::is_graph</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___char_type_checking_1ga05ef53d719082d560832160573933cd0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___char_type_checking_1ga510bce0efc9cb8397524c33d2d6eb59a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_graph</definition>
+        <definition>bool neforce::is_graph</definition>
         <argsstring>(const CharT c) noexcept</argsstring>
         <name>is_graph</name>
+        <qualifiedname>neforce::is_graph</qualifiedname>
         <param>
           <type>const CharT</type>
           <declname>c</declname>
@@ -301,19 +317,22 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="190" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="190" bodyend="192"/>
-        <references refid="group___char_type_checking_1ga22ea4bfb2c30902c812615c48b4b988f" compoundref="char__types_8hpp" startline="175" endline="179">is_blank</references>
-        <references refid="group___char_type_checking_1ga153007f4708ade96ce9bd03d7d7af944" compoundref="char__types_8hpp" startline="161" endline="164">is_print</references>
+        <references refid="group___char_type_checking_1ga8dd58df52dc4f67cc69ad918fd255b41" compoundref="char__types_8hpp" startline="175" endline="179">neforce::is_blank</references>
+        <references refid="group___char_type_checking_1ga510bce0efc9cb8397524c33d2d6eb59a" compoundref="char__types_8hpp" startline="190" endline="192">neforce::is_graph</references>
+        <references refid="group___char_type_checking_1ga2e89ed0eb9bf0d83a7cb56ee7c34deb0" compoundref="char__types_8hpp" startline="161" endline="164">neforce::is_print</references>
+        <referencedby refid="group___char_type_checking_1ga510bce0efc9cb8397524c33d2d6eb59a" compoundref="char__types_8hpp" startline="190" endline="192">neforce::is_graph</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___char_type_checking_1gaa544593194d9a5cfcb4c9fe9063223ca" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___char_type_checking_1ga4cdc531870c46e3d55719403e5a2e319" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_ascii</definition>
+        <definition>bool neforce::is_ascii</definition>
         <argsstring>(const CharT c) noexcept</argsstring>
         <name>is_ascii</name>
+        <qualifiedname>neforce::is_ascii</qualifiedname>
         <param>
           <type>const CharT</type>
           <declname>c</declname>
@@ -347,18 +366,21 @@ ASCII字符的编码在0-127范围内。 </para>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="203" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="203" bodyend="207"/>
-        <references refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" compoundref="type__traits_8hpp" startline="829">is_character_v</references>
+        <references refid="group___char_type_checking_1ga4cdc531870c46e3d55719403e5a2e319" compoundref="char__types_8hpp" startline="203" endline="207">neforce::is_ascii</references>
+        <references refid="group___base_type_properties_1gaf58b1a14e5f65edead887d77305c34f3" compoundref="type__traits_8hpp" startline="829">neforce::is_character_v</references>
+        <referencedby refid="group___char_type_checking_1ga4cdc531870c46e3d55719403e5a2e319" compoundref="char__types_8hpp" startline="203" endline="207">neforce::is_ascii</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___char_type_checking_1ga35e7919c25a56d355b56386112955f55" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___char_type_checking_1gadb31007c1370f42708e3df86f99427c9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_space</definition>
+        <definition>bool neforce::is_space</definition>
         <argsstring>(const CharT c) noexcept</argsstring>
         <name>is_space</name>
+        <qualifiedname>neforce::is_space</qualifiedname>
         <param>
           <type>const CharT</type>
           <declname>c</declname>
@@ -392,22 +414,21 @@ ASCII字符的编码在0-127范围内。 </para>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="218" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="218" bodyend="222"/>
-        <references refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" compoundref="type__traits_8hpp" startline="829">is_character_v</references>
-        <referencedby refid="classbasic__string_1a1b628e9c770735d28f8a21f86b6dae5d" compoundref="basic__string_8hpp" startline="2666" endline="2668">basic_string&lt; char &gt;::trim_left</referencedby>
-        <referencedby refid="classbasic__string__view_1a13e8118cc7ba4a01893c7e73c02763a4" compoundref="basic__string__view_8hpp" startline="910" endline="912">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_left</referencedby>
-        <referencedby refid="classbasic__string_1a2e4866fdebac41129c89ba2773dd4014" compoundref="basic__string_8hpp" startline="2674" endline="2676">basic_string&lt; char &gt;::trim_right</referencedby>
-        <referencedby refid="classbasic__string__view_1a0c03cc33b929b5c301fcfa63494cad80" compoundref="basic__string__view_8hpp" startline="918" endline="920">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_right</referencedby>
+        <references refid="group___base_type_properties_1gaf58b1a14e5f65edead887d77305c34f3" compoundref="type__traits_8hpp" startline="829">neforce::is_character_v</references>
+        <references refid="group___char_type_checking_1gadb31007c1370f42708e3df86f99427c9" compoundref="char__types_8hpp" startline="218" endline="222">neforce::is_space</references>
+        <referencedby refid="group___char_type_checking_1gadb31007c1370f42708e3df86f99427c9" compoundref="char__types_8hpp" startline="218" endline="222">neforce::is_space</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___char_type_checking_1ga87c396eea7e0b05e684981b3af531272" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___char_type_checking_1ga3f1c425b9db4717c192dc42a120f1692" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_alpha</definition>
+        <definition>bool neforce::is_alpha</definition>
         <argsstring>(const CharT c) noexcept</argsstring>
         <name>is_alpha</name>
+        <qualifiedname>neforce::is_alpha</qualifiedname>
         <param>
           <type>const CharT</type>
           <declname>c</declname>
@@ -441,20 +462,23 @@ ASCII字符的编码在0-127范围内。 </para>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="233" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="233" bodyend="240"/>
-        <references refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" compoundref="type__traits_8hpp" startline="829">is_character_v</references>
-        <referencedby refid="group___char_type_checking_1ga3282a701fa1f810f23b93c8b03b0b58b" compoundref="char__types_8hpp" startline="288" endline="290">is_alpha_or_digit</referencedby>
-        <referencedby refid="group___char_type_checking_1gae0ab4bcd8dc21effa425279ac7e4f9ef" compoundref="char__types_8hpp" startline="299" endline="301">is_digit_or_alpha</referencedby>
+        <references refid="group___char_type_checking_1ga3f1c425b9db4717c192dc42a120f1692" compoundref="char__types_8hpp" startline="233" endline="240">neforce::is_alpha</references>
+        <references refid="group___base_type_properties_1gaf58b1a14e5f65edead887d77305c34f3" compoundref="type__traits_8hpp" startline="829">neforce::is_character_v</references>
+        <referencedby refid="group___char_type_checking_1ga3f1c425b9db4717c192dc42a120f1692" compoundref="char__types_8hpp" startline="233" endline="240">neforce::is_alpha</referencedby>
+        <referencedby refid="group___char_type_checking_1ga38d0526ee29a1d48d3826ad676f52917" compoundref="char__types_8hpp" startline="288" endline="290">neforce::is_alpha_or_digit</referencedby>
+        <referencedby refid="group___char_type_checking_1ga500f18540cec93e4e22ad292a7d3fdf1" compoundref="char__types_8hpp" startline="299" endline="301">neforce::is_digit_or_alpha</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___char_type_checking_1ga4fc901d6cfb9b3a9de9b6d06f807f49a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___char_type_checking_1ga3a878d37403ab95f02a8ea85d09ac183" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_digit</definition>
+        <definition>bool neforce::is_digit</definition>
         <argsstring>(const CharT c) noexcept</argsstring>
         <name>is_digit</name>
+        <qualifiedname>neforce::is_digit</qualifiedname>
         <param>
           <type>const CharT</type>
           <declname>c</declname>
@@ -488,20 +512,23 @@ ASCII字符的编码在0-127范围内。 </para>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="251" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="251" bodyend="258"/>
-        <references refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" compoundref="type__traits_8hpp" startline="829">is_character_v</references>
-        <referencedby refid="group___char_type_checking_1ga3282a701fa1f810f23b93c8b03b0b58b" compoundref="char__types_8hpp" startline="288" endline="290">is_alpha_or_digit</referencedby>
-        <referencedby refid="group___char_type_checking_1gae0ab4bcd8dc21effa425279ac7e4f9ef" compoundref="char__types_8hpp" startline="299" endline="301">is_digit_or_alpha</referencedby>
+        <references refid="group___base_type_properties_1gaf58b1a14e5f65edead887d77305c34f3" compoundref="type__traits_8hpp" startline="829">neforce::is_character_v</references>
+        <references refid="group___char_type_checking_1ga3a878d37403ab95f02a8ea85d09ac183" compoundref="char__types_8hpp" startline="251" endline="258">neforce::is_digit</references>
+        <referencedby refid="group___char_type_checking_1ga38d0526ee29a1d48d3826ad676f52917" compoundref="char__types_8hpp" startline="288" endline="290">neforce::is_alpha_or_digit</referencedby>
+        <referencedby refid="group___char_type_checking_1ga3a878d37403ab95f02a8ea85d09ac183" compoundref="char__types_8hpp" startline="251" endline="258">neforce::is_digit</referencedby>
+        <referencedby refid="group___char_type_checking_1ga500f18540cec93e4e22ad292a7d3fdf1" compoundref="char__types_8hpp" startline="299" endline="301">neforce::is_digit_or_alpha</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___char_type_checking_1gaf329135812f53c1ae2597c6d1ba6fbb4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___char_type_checking_1gaca259f68678a1e62bca949379a252180" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_xdigit</definition>
+        <definition>bool neforce::is_xdigit</definition>
         <argsstring>(const CharT c) noexcept</argsstring>
         <name>is_xdigit</name>
+        <qualifiedname>neforce::is_xdigit</qualifiedname>
         <param>
           <type>const CharT</type>
           <declname>c</declname>
@@ -535,18 +562,21 @@ ASCII字符的编码在0-127范围内。 </para>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="269" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="269" bodyend="279"/>
-        <references refid="group___base_type_properties_1ga0fe502141bf47236cbb04461a6c61364" compoundref="type__traits_8hpp" startline="829">is_character_v</references>
+        <references refid="group___base_type_properties_1gaf58b1a14e5f65edead887d77305c34f3" compoundref="type__traits_8hpp" startline="829">neforce::is_character_v</references>
+        <references refid="group___char_type_checking_1gaca259f68678a1e62bca949379a252180" compoundref="char__types_8hpp" startline="269" endline="279">neforce::is_xdigit</references>
+        <referencedby refid="group___char_type_checking_1gaca259f68678a1e62bca949379a252180" compoundref="char__types_8hpp" startline="269" endline="279">neforce::is_xdigit</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___char_type_checking_1ga3282a701fa1f810f23b93c8b03b0b58b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___char_type_checking_1ga38d0526ee29a1d48d3826ad676f52917" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_alpha_or_digit</definition>
+        <definition>bool neforce::is_alpha_or_digit</definition>
         <argsstring>(const CharT c) noexcept</argsstring>
         <name>is_alpha_or_digit</name>
+        <qualifiedname>neforce::is_alpha_or_digit</qualifiedname>
         <param>
           <type>const CharT</type>
           <declname>c</declname>
@@ -580,19 +610,22 @@ ASCII字符的编码在0-127范围内。 </para>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="288" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="288" bodyend="290"/>
-        <references refid="group___char_type_checking_1ga87c396eea7e0b05e684981b3af531272" compoundref="char__types_8hpp" startline="233" endline="240">is_alpha</references>
-        <references refid="group___char_type_checking_1ga4fc901d6cfb9b3a9de9b6d06f807f49a" compoundref="char__types_8hpp" startline="251" endline="258">is_digit</references>
+        <references refid="group___char_type_checking_1ga3f1c425b9db4717c192dc42a120f1692" compoundref="char__types_8hpp" startline="233" endline="240">neforce::is_alpha</references>
+        <references refid="group___char_type_checking_1ga38d0526ee29a1d48d3826ad676f52917" compoundref="char__types_8hpp" startline="288" endline="290">neforce::is_alpha_or_digit</references>
+        <references refid="group___char_type_checking_1ga3a878d37403ab95f02a8ea85d09ac183" compoundref="char__types_8hpp" startline="251" endline="258">neforce::is_digit</references>
+        <referencedby refid="group___char_type_checking_1ga38d0526ee29a1d48d3826ad676f52917" compoundref="char__types_8hpp" startline="288" endline="290">neforce::is_alpha_or_digit</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___char_type_checking_1gae0ab4bcd8dc21effa425279ac7e4f9ef" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___char_type_checking_1ga500f18540cec93e4e22ad292a7d3fdf1" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename CharT</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_digit_or_alpha</definition>
+        <definition>bool neforce::is_digit_or_alpha</definition>
         <argsstring>(const CharT c) noexcept</argsstring>
         <name>is_digit_or_alpha</name>
+        <qualifiedname>neforce::is_digit_or_alpha</qualifiedname>
         <param>
           <type>const CharT</type>
           <declname>c</declname>
@@ -626,8 +659,10 @@ ASCII字符的编码在0-127范围内。 </para>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="299" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="299" bodyend="301"/>
-        <references refid="group___char_type_checking_1ga87c396eea7e0b05e684981b3af531272" compoundref="char__types_8hpp" startline="233" endline="240">is_alpha</references>
-        <references refid="group___char_type_checking_1ga4fc901d6cfb9b3a9de9b6d06f807f49a" compoundref="char__types_8hpp" startline="251" endline="258">is_digit</references>
+        <references refid="group___char_type_checking_1ga3f1c425b9db4717c192dc42a120f1692" compoundref="char__types_8hpp" startline="233" endline="240">neforce::is_alpha</references>
+        <references refid="group___char_type_checking_1ga3a878d37403ab95f02a8ea85d09ac183" compoundref="char__types_8hpp" startline="251" endline="258">neforce::is_digit</references>
+        <references refid="group___char_type_checking_1ga500f18540cec93e4e22ad292a7d3fdf1" compoundref="char__types_8hpp" startline="299" endline="301">neforce::is_digit_or_alpha</references>
+        <referencedby refid="group___char_type_checking_1ga500f18540cec93e4e22ad292a7d3fdf1" compoundref="char__types_8hpp" startline="299" endline="301">neforce::is_digit_or_alpha</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

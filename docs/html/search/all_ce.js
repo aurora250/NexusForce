@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['随机数生成器_0',['随机数生成器',['../group___random_generators.html',1,'']]],
-  ['随机重排算法_1',['随机重排算法',['../group___shuffle_algorithms.html',1,'']]]
+  ['配置文件格式_0',['📁 配置文件格式',['../index.html#autotoc_md10',1,'']]],
+  ['配置格式操作_1',['配置格式操作',['../group___config_format.html',1,'']]]
 ];

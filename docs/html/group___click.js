@@ -1,22 +1,22 @@
 var group___click =
 [
-    [ "click", "structclick.html", [
-      [ "time_point", "structclick.html#a898892c0a9d6bccaa9476683f1830f05", null ],
-      [ "during", "structclick.html#a21a9b640963dbf73211bcbe56e23360d", null ],
-      [ "during_s", "structclick.html#aeebcc51061c5c9b56df22f5761b8aa79", null ],
-      [ "reset", "structclick.html#acd46b1dc82b74166b5a9c55a2633a323", null ],
-      [ "start", "structclick.html#a6acf0c124695fa5f0cc3a7584c0687b6", null ],
-      [ "stop", "structclick.html#a478f23b91102313a96c4e2e9b9bbfca4", null ],
-      [ "update", "structclick.html#ab5d9e26e6771c55584936c85c407951f", null ],
-      [ "last_time", "structclick.html#a4713c06c976969ede7b42f42e05829dd", null ],
-      [ "start_time", "structclick.html#a11b3d1779cb59165ade637b132ad61b1", null ],
-      [ "started", "structclick.html#a408ee0a1d7de299a9dd91a9f40092e93", null ],
-      [ "stopped", "structclick.html#abeb2d17d3ef03e3f0e25467f93617e9a", null ]
+    [ "neforce::click", "structneforce_1_1click.html", [
+      [ "time_point", "structneforce_1_1click.html#ab1ee785dd1bfda5066b79912c00503f3", null ],
+      [ "during", "structneforce_1_1click.html#aa1e2140d6ffd3a9a6e1ea89e928a51db", null ],
+      [ "during_s", "structneforce_1_1click.html#a816406842f01ce275f92e3ec9bf48f6d", null ],
+      [ "reset", "structneforce_1_1click.html#a7c15d3ca735d06d75a04e87b653779f1", null ],
+      [ "start", "structneforce_1_1click.html#aa5bc616d9140652d39485c95cdf068cc", null ],
+      [ "stop", "structneforce_1_1click.html#a769868c35d908474f4f3b893c6f10cee", null ],
+      [ "update", "structneforce_1_1click.html#ae56cb9983951de57364422c220ea3494", null ],
+      [ "last_time", "structneforce_1_1click.html#a794d96da4348461d28adba982b27d5a7", null ],
+      [ "start_time", "structneforce_1_1click.html#a0be2f7f234175c839dc857e0ec225036", null ],
+      [ "started", "structneforce_1_1click.html#a8377d5965437a86666c6e10d13c24970", null ],
+      [ "stopped", "structneforce_1_1click.html#a67c81d64b6964cecb98fcd6e3c1cad16", null ]
     ] ],
-    [ "scoped_click", "classscoped__click.html", [
-      [ "scoped_click", "classscoped__click.html#a8bd8f0552c2b3ea9cb9d716cb2227b3d", null ],
-      [ "scoped_click", "classscoped__click.html#a3083662e31bccc44205c05937090ebe2", null ],
-      [ "~scoped_click", "classscoped__click.html#ad91adc07b76bd12c1494ad5165faab9e", null ],
-      [ "operator=", "classscoped__click.html#aa8112b556549d90968089615d74ae429", null ]
+    [ "neforce::scoped_click", "classneforce_1_1scoped__click.html", [
+      [ "scoped_click", "classneforce_1_1scoped__click.html#a99f28d77c446f2a2cfd564542b7f32fb", null ],
+      [ "scoped_click", "classneforce_1_1scoped__click.html#a46ae52e789fb516c4ba058efd4725992", null ],
+      [ "~scoped_click", "classneforce_1_1scoped__click.html#a4592caecca43db531a6c7aa23fdca3ce", null ],
+      [ "operator=", "classneforce_1_1scoped__click.html#a362f2ecd1ab477c9d42c21f22d7a2969", null ]
     ] ]
 ];

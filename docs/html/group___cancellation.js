@@ -1,13 +1,13 @@
 var group___cancellation =
 [
-    [ "cancellation_slot", "classcancellation__slot.html", [
-      [ "cancel_handler", "classcancellation__slot.html#adbf1215555d877c79188e373710a65f2", null ],
-      [ "cancellation_slot", "classcancellation__slot.html#aca52141ba2808336bae938d87d104b44", null ],
-      [ "cancellation_slot", "classcancellation__slot.html#afa5ab2d15f3d0bc20f0af3d9951f4456", null ],
-      [ "assign", "classcancellation__slot.html#a5436f157d792c64e9a6056cbce0b25d3", null ],
-      [ "get_token", "classcancellation__slot.html#a0f2b9407c5d7a0dd41a180eb25bc3872", null ],
-      [ "has_slot", "classcancellation__slot.html#a86685adffcfa5b84349ee9dc595060a3", null ],
-      [ "is_cancelled", "classcancellation__slot.html#a7b726bc6bd162aa7018c6c1d1b1b8a56", null ]
+    [ "neforce::cancellation_slot", "classneforce_1_1cancellation__slot.html", [
+      [ "cancel_handler", "classneforce_1_1cancellation__slot.html#acf89cefb3438e0b7a3c1b13854936999", null ],
+      [ "cancellation_slot", "classneforce_1_1cancellation__slot.html#a87f0079bd768401e15102fc7d2bef7ab", null ],
+      [ "cancellation_slot", "classneforce_1_1cancellation__slot.html#a59d7c6a3c5e9fba889d74dc05ce36af2", null ],
+      [ "assign", "classneforce_1_1cancellation__slot.html#a420baa9a7b4bf2262ba1d1b2a69658a8", null ],
+      [ "get_token", "classneforce_1_1cancellation__slot.html#a38e00c31a640848a2ed6d1595f9b9b72", null ],
+      [ "has_slot", "classneforce_1_1cancellation__slot.html#a7b699eedee77d16f28dc3d9ce37a2aad", null ],
+      [ "is_cancelled", "classneforce_1_1cancellation__slot.html#ac4d78d9908ebd172883ba689369fc7a8", null ]
     ] ],
-    [ "make_operation_aborted", "group___cancellation.html#ga3a179486651d3a45f216cf216c6fe628", null ]
+    [ "neforce::make_operation_aborted", "group___cancellation.html#ga3fab4f928868bece7c1d174d6d3d5de5", null ]
 ];

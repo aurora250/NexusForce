@@ -1,24 +1,24 @@
 var group___any =
 [
-    [ "any", "classany.html", [
-      [ "any", "classany.html#a718d15823be6e8590a24d12d981ab6fe", null ],
-      [ "any", "classany.html#a34a926505ba320df0e4ae2f001ed858f", null ],
-      [ "any", "classany.html#a901fcf91bdb368a4b722f87193d60661", null ],
-      [ "any", "classany.html#a3b2824e36b53a37792fc67315c866273", null ],
-      [ "any", "classany.html#af419c43ef848b665f2a381cdfa41e93a", null ],
-      [ "~any", "classany.html#a2984bd733b273daa0a9ad72df9af4b21", null ],
-      [ "emplace", "classany.html#a18e5610d000fc424d1a3f83dd2bd619c", null ],
-      [ "emplace", "classany.html#aea9b89f1c3bc553cfd72245f42b9cf39", null ],
-      [ "has_value", "classany.html#aee1aabbbe7c8e3197605c0f8055e5e5a", null ],
-      [ "operator=", "classany.html#a3fbaed230373554a33d116ab11b15dc9", null ],
-      [ "operator=", "classany.html#a63ad8674eef8435b4e3a13cb065f4c79", null ],
-      [ "operator=", "classany.html#ad804fa85a2aa3246403e58906a8c0e63", null ],
-      [ "reset", "classany.html#a6c4a11253f803d135685e115cf7054d8", null ],
-      [ "swap", "classany.html#a7b22cb0a30ac185ccc24bdc819497088", null ],
-      [ "type", "classany.html#aa2ae58660b9ac895e1dfff84b0c417ea", null ]
+    [ "neforce::any", "classneforce_1_1any.html", [
+      [ "any", "classneforce_1_1any.html#a5ac229992e00dc213ae162b1ff6acc49", null ],
+      [ "any", "classneforce_1_1any.html#a4613c4d96998e825a769d5595b134718", null ],
+      [ "any", "classneforce_1_1any.html#a9d02b2dcf765fa197868cba593d69897", null ],
+      [ "any", "classneforce_1_1any.html#a7fdd26ead3f77e7408bd0d64df01cdde", null ],
+      [ "any", "classneforce_1_1any.html#aa075e0549f8cea750111a6e5aa4a1271", null ],
+      [ "~any", "classneforce_1_1any.html#a66f269a84314acc797bce3b01234c72a", null ],
+      [ "emplace", "classneforce_1_1any.html#ae4ad758138967a254e8a7415deb03763", null ],
+      [ "emplace", "classneforce_1_1any.html#a0b1e9b25521e57cd8a52f96a109b43ee", null ],
+      [ "has_value", "classneforce_1_1any.html#a40cce4c9b99329321328a3a8f8b07631", null ],
+      [ "operator=", "classneforce_1_1any.html#a12a8b121ecde91c04b54446becb53c08", null ],
+      [ "operator=", "classneforce_1_1any.html#a94794b044765240c812cab2e848dc50e", null ],
+      [ "operator=", "classneforce_1_1any.html#a57013c61b59bba6ef97d244fa0d920c2", null ],
+      [ "reset", "classneforce_1_1any.html#a14c89d3dda4b0d27f82b7e66536d926e", null ],
+      [ "swap", "classneforce_1_1any.html#a81e8ede7d8c6753b9273db5981c99017", null ],
+      [ "type", "classneforce_1_1any.html#a1e3bffee2496e8d13ca716aa2a8c5ef9", null ]
     ] ],
-    [ "any_cast", "group___any.html#ga5183df05b029494e00a3a6cfedeaeefc", null ],
-    [ "any_cast", "group___any.html#gac77841c2785c6a7c7cf788160ffa9afb", null ],
-    [ "any_cast", "group___any.html#ga435372af463e628eb7e40e293d87c1da", null ],
-    [ "make_any", "group___any.html#gaa10dc2f937bfc4efbd98234e71af0860", null ]
+    [ "neforce::any_cast", "group___any.html#ga532f7d858a15d915b6c85cfcfa848976", null ],
+    [ "neforce::any_cast", "group___any.html#gadbcd39ffa874eb2a399e5691539ed384", null ],
+    [ "neforce::any_cast", "group___any.html#gad9cd4e66dc719c71b511c89723a5ea89", null ],
+    [ "neforce::make_any", "group___any.html#gae71c216506963910e1ca7d14cf7a7db1", null ]
 ];

@@ -1,0 +1,590 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::reflect::meta_property类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1reflect_1_1meta__property.html','','classneforce_1_1reflect_1_1meta__property-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::reflect::meta_property类 参考<div class="ingroups"><a class="el" href="group___reflection.html">反射系统</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>属性反射元数据类  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="property_8hpp_source.html">property.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:ae90102b9f549f789cc1bfcab984c2075" id="r_ae90102b9f549f789cc1bfcab984c2075"><td class="memItemLeft"><a id="ae90102b9f549f789cc1bfcab984c2075" name="ae90102b9f549f789cc1bfcab984c2075"></a>
+using&#160;</td><td class="memItemRight"><b>getter</b> = <a class="el" href="classneforce_1_1function.html">function</a>&lt;<a class="el" href="classneforce_1_1reflect_1_1meta__any.html">meta_any</a>(const void*)&gt;</td></tr>
+<tr class="memdesc:ae90102b9f549f789cc1bfcab984c2075"><td class="mdescLeft">&#160;</td><td class="mdescRight">属性读取器类型 <br /></td></tr>
+<tr class="memitem:a8c14bb464d5c6b86a49c02e209f5184e" id="r_a8c14bb464d5c6b86a49c02e209f5184e"><td class="memItemLeft"><a id="a8c14bb464d5c6b86a49c02e209f5184e" name="a8c14bb464d5c6b86a49c02e209f5184e"></a>
+using&#160;</td><td class="memItemRight"><b>setter</b> = <a class="el" href="classneforce_1_1function.html">function</a>&lt;void(void*, const <a class="el" href="classneforce_1_1reflect_1_1meta__any.html">meta_any</a>&amp;)&gt;</td></tr>
+<tr class="memdesc:a8c14bb464d5c6b86a49c02e209f5184e"><td class="mdescLeft">&#160;</td><td class="mdescRight">属性写入器类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a7d057374b8394cacc9164db9a5f70d12" id="r_a7d057374b8394cacc9164db9a5f70d12"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a7d057374b8394cacc9164db9a5f70d12">meta_property</a> (<a class="el" href="group___string_view.html#ga5a6e8b9da034ce8d4818231c4e005eff">string_view</a> <a class="el" href="#a9d9532c019da029ede9fe4fb722ca7de">name</a>, <a class="el" href="group___reflection.html#ga3680b21ef08e8497fc7255d54c682211">reflect::type_id</a> <a class="el" href="group___reflection.html#ga3680b21ef08e8497fc7255d54c682211">type_id</a>, <a class="el" href="#ae90102b9f549f789cc1bfcab984c2075">getter</a> <a class="el" href="#ae90102b9f549f789cc1bfcab984c2075">getter</a>, <a class="el" href="#a8c14bb464d5c6b86a49c02e209f5184e">setter</a> <a class="el" href="#a8c14bb464d5c6b86a49c02e209f5184e">setter</a>, const <a class="el" href="group___core_types.html#gabca631c03e4d34e2e77587fc66d05f52">uint16_t</a> attrs=<a class="el" href="group___reflection.html#ggacfd281350aa0483eb8a728fc611b37f1ae9705a0fd32ac4d25704064710d5af6d">PROP_NONE</a>)</td></tr>
+<tr class="memdesc:a7d057374b8394cacc9164db9a5f70d12"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:a9d9532c019da029ede9fe4fb722ca7de" id="r_a9d9532c019da029ede9fe4fb722ca7de"><td class="memItemLeft"><a class="el" href="group___string_view.html#ga5a6e8b9da034ce8d4818231c4e005eff">string_view</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9d9532c019da029ede9fe4fb722ca7de">name</a> () const noexcept</td></tr>
+<tr class="memdesc:a9d9532c019da029ede9fe4fb722ca7de"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取属性名称  <br /></td></tr>
+<tr class="memitem:af42510577c4bf3b5db26dd7d6f959265" id="r_af42510577c4bf3b5db26dd7d6f959265"><td class="memItemLeft"><a class="el" href="group___reflection.html#ga3680b21ef08e8497fc7255d54c682211">reflect::type_id</a>&#160;</td><td class="memItemRight"><a class="el" href="#af42510577c4bf3b5db26dd7d6f959265">type_id</a> () const noexcept</td></tr>
+<tr class="memdesc:af42510577c4bf3b5db26dd7d6f959265"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取属性类型ID  <br /></td></tr>
+<tr class="memitem:ada76ba164c30e3a71f8566769419d2d5" id="r_ada76ba164c30e3a71f8566769419d2d5"><td class="memItemLeft"><a class="el" href="group___core_types.html#gabca631c03e4d34e2e77587fc66d05f52">uint16_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ada76ba164c30e3a71f8566769419d2d5">attributes</a> () const noexcept</td></tr>
+<tr class="memdesc:ada76ba164c30e3a71f8566769419d2d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取属性注解  <br /></td></tr>
+<tr class="memitem:a92e4a36807eab847fd3258fb84f37f95" id="r_a92e4a36807eab847fd3258fb84f37f95"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a92e4a36807eab847fd3258fb84f37f95">set_attributes</a> (const <a class="el" href="group___core_types.html#gabca631c03e4d34e2e77587fc66d05f52">uint16_t</a> attrs) noexcept</td></tr>
+<tr class="memdesc:a92e4a36807eab847fd3258fb84f37f95"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置属性注解  <br /></td></tr>
+<tr class="memitem:a6e53c90491760f09b06f94ebea25a73c" id="r_a6e53c90491760f09b06f94ebea25a73c"><td class="memItemLeft"><a id="a6e53c90491760f09b06f94ebea25a73c" name="a6e53c90491760f09b06f94ebea25a73c"></a>
+bool&#160;</td><td class="memItemRight"><b>is_transient</b> () const noexcept</td></tr>
+<tr class="memdesc:a6e53c90491760f09b06f94ebea25a73c"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否为暂态属性（不参与序列化） <br /></td></tr>
+<tr class="memitem:adec9a026fe990e68803758554cbb3910" id="r_adec9a026fe990e68803758554cbb3910"><td class="memItemLeft"><a id="adec9a026fe990e68803758554cbb3910" name="adec9a026fe990e68803758554cbb3910"></a>
+bool&#160;</td><td class="memItemRight"><b>is_required</b> () const noexcept</td></tr>
+<tr class="memdesc:adec9a026fe990e68803758554cbb3910"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否为必填属性（反序列化时必须存在） <br /></td></tr>
+<tr class="memitem:a1c793b39cb23e0ffac0e78d4aa001ffe" id="r_a1c793b39cb23e0ffac0e78d4aa001ffe"><td class="memItemLeft"><a id="a1c793b39cb23e0ffac0e78d4aa001ffe" name="a1c793b39cb23e0ffac0e78d4aa001ffe"></a>
+bool&#160;</td><td class="memItemRight"><b>is_readonly</b> () const noexcept</td></tr>
+<tr class="memdesc:a1c793b39cb23e0ffac0e78d4aa001ffe"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否为只读属性 <br /></td></tr>
+<tr class="memitem:a8a0c79eec0172da247084360b06ed968" id="r_a8a0c79eec0172da247084360b06ed968"><td class="memItemLeft"><a id="a8a0c79eec0172da247084360b06ed968" name="a8a0c79eec0172da247084360b06ed968"></a>
+bool&#160;</td><td class="memItemRight"><b>is_optional</b> () const noexcept</td></tr>
+<tr class="memdesc:a8a0c79eec0172da247084360b06ed968"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否为可选属性 <br /></td></tr>
+<tr class="memitem:a63c87a18aabcd7bd953240b19ffa8f26" id="r_a63c87a18aabcd7bd953240b19ffa8f26"><td class="memItemLeft"><a id="a63c87a18aabcd7bd953240b19ffa8f26" name="a63c87a18aabcd7bd953240b19ffa8f26"></a>
+bool&#160;</td><td class="memItemRight"><b>is_versioned</b> () const noexcept</td></tr>
+<tr class="memdesc:a63c87a18aabcd7bd953240b19ffa8f26"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否启用版本追踪 <br /></td></tr>
+<tr class="memitem:a3fbd8d6a66c64af7fa17e1055c639ab3" id="r_a3fbd8d6a66c64af7fa17e1055c639ab3"><td class="memItemLeft"><a id="a3fbd8d6a66c64af7fa17e1055c639ab3" name="a3fbd8d6a66c64af7fa17e1055c639ab3"></a>
+bool&#160;</td><td class="memItemRight"><b>is_primary_key</b> () const noexcept</td></tr>
+<tr class="memdesc:a3fbd8d6a66c64af7fa17e1055c639ab3"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否为主键列 <br /></td></tr>
+<tr class="memitem:a81296a3f1a039a18ff8c9428d1393ea6" id="r_a81296a3f1a039a18ff8c9428d1393ea6"><td class="memItemLeft"><a id="a81296a3f1a039a18ff8c9428d1393ea6" name="a81296a3f1a039a18ff8c9428d1393ea6"></a>
+bool&#160;</td><td class="memItemRight"><b>is_auto_increment</b> () const noexcept</td></tr>
+<tr class="memdesc:a81296a3f1a039a18ff8c9428d1393ea6"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否为自增列 <br /></td></tr>
+<tr class="memitem:af72c7d8c0de9dd9359ca6e1035fc6829" id="r_af72c7d8c0de9dd9359ca6e1035fc6829"><td class="memItemLeft"><a id="af72c7d8c0de9dd9359ca6e1035fc6829" name="af72c7d8c0de9dd9359ca6e1035fc6829"></a>
+bool&#160;</td><td class="memItemRight"><b>is_unique</b> () const noexcept</td></tr>
+<tr class="memdesc:af72c7d8c0de9dd9359ca6e1035fc6829"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否有唯一约束 <br /></td></tr>
+<tr class="memitem:aa4357b3c9edec1885e79960bfa06f9cc" id="r_aa4357b3c9edec1885e79960bfa06f9cc"><td class="memItemLeft"><a id="aa4357b3c9edec1885e79960bfa06f9cc" name="aa4357b3c9edec1885e79960bfa06f9cc"></a>
+bool&#160;</td><td class="memItemRight"><b>is_index</b> () const noexcept</td></tr>
+<tr class="memdesc:aa4357b3c9edec1885e79960bfa06f9cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否有索引 <br /></td></tr>
+<tr class="memitem:aae0ed173cedd98664b508689b0074df5" id="r_aae0ed173cedd98664b508689b0074df5"><td class="memItemLeft"><a id="aae0ed173cedd98664b508689b0074df5" name="aae0ed173cedd98664b508689b0074df5"></a>
+bool&#160;</td><td class="memItemRight"><b>is_foreign_key</b> () const noexcept</td></tr>
+<tr class="memdesc:aae0ed173cedd98664b508689b0074df5"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否为外键列 <br /></td></tr>
+<tr class="memitem:acfb01632504f19d602e3701cb4fedc6c" id="r_acfb01632504f19d602e3701cb4fedc6c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#acfb01632504f19d602e3701cb4fedc6c">set_notify_signal</a> (<a class="el" href="group___string_view.html#ga5a6e8b9da034ce8d4818231c4e005eff">string_view</a> signal_name)</td></tr>
+<tr class="memdesc:acfb01632504f19d602e3701cb4fedc6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置变更通知信号名称  <br /></td></tr>
+<tr class="memitem:a4e46ebb39447d51eab3117b7c376a7b3" id="r_a4e46ebb39447d51eab3117b7c376a7b3"><td class="memItemLeft"><a id="a4e46ebb39447d51eab3117b7c376a7b3" name="a4e46ebb39447d51eab3117b7c376a7b3"></a>
+<a class="el" href="group___string_view.html#ga5a6e8b9da034ce8d4818231c4e005eff">string_view</a>&#160;</td><td class="memItemRight"><b>notify_signal</b> () const noexcept</td></tr>
+<tr class="memdesc:a4e46ebb39447d51eab3117b7c376a7b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取变更通知信号名称 <br /></td></tr>
+<tr class="memitem:acb5549a4a73e891646c7891f6dd6ba51" id="r_acb5549a4a73e891646c7891f6dd6ba51"><td class="memItemLeft"><a id="acb5549a4a73e891646c7891f6dd6ba51" name="acb5549a4a73e891646c7891f6dd6ba51"></a>
+bool&#160;</td><td class="memItemRight"><b>has_notify_signal</b> () const noexcept</td></tr>
+<tr class="memdesc:acb5549a4a73e891646c7891f6dd6ba51"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否有变更通知信号 <br /></td></tr>
+<tr class="memitem:aaeaad8147228228c463eaa134d16f34d" id="r_aaeaad8147228228c463eaa134d16f34d"><td class="memItemLeft"><a id="aaeaad8147228228c463eaa134d16f34d" name="aaeaad8147228228c463eaa134d16f34d"></a>
+<a class="el" href="group___core_types.html#ga4d7d3599901e73c7d6bf65a66e80b534">uint32_t</a>&#160;</td><td class="memItemRight"><b>version</b> () const noexcept</td></tr>
+<tr class="memdesc:aaeaad8147228228c463eaa134d16f34d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取版本号 <br /></td></tr>
+<tr class="memitem:a4c684ed722acc03c313e39c6009eecfa" id="r_a4c684ed722acc03c313e39c6009eecfa"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4c684ed722acc03c313e39c6009eecfa">set_version</a> (const <a class="el" href="group___core_types.html#ga4d7d3599901e73c7d6bf65a66e80b534">uint32_t</a> ver) noexcept</td></tr>
+<tr class="memdesc:a4c684ed722acc03c313e39c6009eecfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置版本号  <br /></td></tr>
+<tr class="memitem:acafb191a4e88882ed74fc1347c10da84" id="r_acafb191a4e88882ed74fc1347c10da84"><td class="memItemLeft"><a class="el" href="classneforce_1_1reflect_1_1meta__any.html">meta_any</a>&#160;</td><td class="memItemRight"><a class="el" href="#acafb191a4e88882ed74fc1347c10da84">get</a> (const void *obj) const</td></tr>
+<tr class="memdesc:acafb191a4e88882ed74fc1347c10da84"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取属性值  <br /></td></tr>
+<tr class="memitem:a7cabab6a37e9161d9b272bab58d3d282" id="r_a7cabab6a37e9161d9b272bab58d3d282"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a7cabab6a37e9161d9b272bab58d3d282">set</a> (void *obj, const <a class="el" href="classneforce_1_1reflect_1_1meta__any.html">meta_any</a> &amp;value) const</td></tr>
+<tr class="memdesc:a7cabab6a37e9161d9b272bab58d3d282"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置属性值  <br /></td></tr>
+<tr class="memitem:a76a121579936d0478209b43f914f55a7" id="r_a76a121579936d0478209b43f914f55a7"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt;!<a class="el" href="group___type_traits_utilities.html#gaa8a9c7168b974b877ec67d99e9bf5d8c">is_same_v</a>&lt; <a class="el" href="classneforce_1_1reflect_1_1meta__any.html">meta_any</a>, <a class="el" href="group___type_attribute_operations.html#ga63500a8dd0f79ce1c721aebb8023ce89">decay_t</a>&lt; T &gt; &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a76a121579936d0478209b43f914f55a7 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a76a121579936d0478209b43f914f55a7">set</a> (void *obj, T &amp;&amp;value) const</td></tr>
+<tr class="memdesc:a76a121579936d0478209b43f914f55a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置属性值（直接值版本）  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>属性反射元数据类 </p>
+<p>描述一个成员变量的元信息，支持通过反射读写属性值。 </p>
+
+<p class="definition">在文件 <a class="el" href="property_8hpp_source.html">property.hpp</a> 第 <a class="el" href="property_8hpp_source.html#l00062">62</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="a7d057374b8394cacc9164db9a5f70d12" name="a7d057374b8394cacc9164db9a5f70d12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d057374b8394cacc9164db9a5f70d12">&#9670;&#160;</a></span>meta_property()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">neforce::reflect::meta_property::meta_property </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string_view.html#ga5a6e8b9da034ce8d4818231c4e005eff">string_view</a></td>          <td class="paramname"><span class="paramname"><em>name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___reflection.html#ga3680b21ef08e8497fc7255d54c682211">reflect::type_id</a></td>          <td class="paramname"><span class="paramname"><em>type_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#ae90102b9f549f789cc1bfcab984c2075">getter</a></td>          <td class="paramname"><span class="paramname"><em>getter</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a8c14bb464d5c6b86a49c02e209f5184e">setter</a></td>          <td class="paramname"><span class="paramname"><em>setter</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___core_types.html#gabca631c03e4d34e2e77587fc66d05f52">uint16_t</a></td>          <td class="paramname"><span class="paramname"><em>attrs</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___reflection.html#ggacfd281350aa0483eb8a728fc611b37f1ae9705a0fd32ac4d25704064710d5af6d">PROP_NONE</a></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>属性名称 </td></tr>
+    <tr><td class="paramname">type_id</td><td>属性类型ID </td></tr>
+    <tr><td class="paramname">getter</td><td>读取器 </td></tr>
+    <tr><td class="paramname">setter</td><td>写入器 </td></tr>
+    <tr><td class="paramname">attrs</td><td>属性注解 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="property_8hpp_source.html">property.hpp</a> 第 <a class="el" href="property_8hpp_source.html#l00085">85</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">neforce::move()</a>, <a class="el" href="property_8hpp_source.html#l00097">name()</a>, <a class="el" href="property_8hpp_source.html#l00032">neforce::reflect::PROP_NONE</a> , 以及 <a class="el" href="property_8hpp_source.html#l00103">type_id()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="ada76ba164c30e3a71f8566769419d2d5" name="ada76ba164c30e3a71f8566769419d2d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada76ba164c30e3a71f8566769419d2d5">&#9670;&#160;</a></span>attributes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___core_types.html#gabca631c03e4d34e2e77587fc66d05f52">uint16_t</a> neforce::reflect::meta_property::attributes </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取属性注解 </p>
+<dl class="section return"><dt>返回</dt><dd>注解标志组合 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="property_8hpp_source.html">property.hpp</a> 第 <a class="el" href="property_8hpp_source.html#l00109">109</a> 行定义.</p>
+
+</div>
+</div>
+<a id="acafb191a4e88882ed74fc1347c10da84" name="acafb191a4e88882ed74fc1347c10da84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acafb191a4e88882ed74fc1347c10da84">&#9670;&#160;</a></span>get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1reflect_1_1meta__any.html">meta_any</a> neforce::reflect::meta_property::get </td>
+          <td>(</td>
+          <td class="paramtype">const void *</td>          <td class="paramname"><span class="paramname"><em>obj</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取属性值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">obj</td><td>对象指针 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>属性值（包装为any） </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="property_8hpp_source.html">property.hpp</a> 第 <a class="el" href="property_8hpp_source.html#l00199">199</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a9d9532c019da029ede9fe4fb722ca7de" name="a9d9532c019da029ede9fe4fb722ca7de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d9532c019da029ede9fe4fb722ca7de">&#9670;&#160;</a></span>name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___string_view.html#ga5a6e8b9da034ce8d4818231c4e005eff">string_view</a> neforce::reflect::meta_property::name </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取属性名称 </p>
+<dl class="section return"><dt>返回</dt><dd>名称视图 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="property_8hpp_source.html">property.hpp</a> 第 <a class="el" href="property_8hpp_source.html#l00097">97</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="repository_8hpp_source.html#l00177">neforce::repository&lt; T, Connect &gt;::find_by_id()</a> , 以及 <a class="el" href="property_8hpp_source.html#l00085">meta_property()</a>.</p>
+
+</div>
+</div>
+<a id="a7cabab6a37e9161d9b272bab58d3d282" name="a7cabab6a37e9161d9b272bab58d3d282"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cabab6a37e9161d9b272bab58d3d282">&#9670;&#160;</a></span>set() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::reflect::meta_property::set </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>obj</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classneforce_1_1reflect_1_1meta__any.html">meta_any</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;) const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置属性值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">obj</td><td>对象指针 </td></tr>
+    <tr><td class="paramname">value</td><td>要设置的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>设置成功返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="property_8hpp_source.html">property.hpp</a> 第 <a class="el" href="property_8hpp_source.html#l00212">212</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="property_8hpp_source.html#l00232">set()</a>.</p>
+
+</div>
+</div>
+<a id="a76a121579936d0478209b43f914f55a7" name="a76a121579936d0478209b43f914f55a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76a121579936d0478209b43f914f55a7">&#9670;&#160;</a></span>set() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt;!<a class="el" href="group___type_traits_utilities.html#gaa8a9c7168b974b877ec67d99e9bf5d8c">is_same_v</a>&lt; <a class="el" href="classneforce_1_1reflect_1_1meta__any.html">meta_any</a>, <a class="el" href="group___type_attribute_operations.html#ga63500a8dd0f79ce1c721aebb8023ce89">decay_t</a>&lt; T &gt; &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::reflect::meta_property::set </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>obj</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;) const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置属性值（直接值版本） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">obj</td><td>对象指针 </td></tr>
+    <tr><td class="paramname">value</td><td>要设置的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>设置成功返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="property_8hpp_source.html">property.hpp</a> 第 <a class="el" href="property_8hpp_source.html#l00232">232</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03028">neforce::forward()</a> , 以及 <a class="el" href="property_8hpp_source.html#l00212">set()</a>.</p>
+
+</div>
+</div>
+<a id="a92e4a36807eab847fd3258fb84f37f95" name="a92e4a36807eab847fd3258fb84f37f95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92e4a36807eab847fd3258fb84f37f95">&#9670;&#160;</a></span>set_attributes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::reflect::meta_property::set_attributes </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___core_types.html#gabca631c03e4d34e2e77587fc66d05f52">uint16_t</a></td>          <td class="paramname"><span class="paramname"><em>attrs</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置属性注解 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">attrs</td><td>注解标志组合 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="property_8hpp_source.html">property.hpp</a> 第 <a class="el" href="property_8hpp_source.html#l00115">115</a> 行定义.</p>
+
+</div>
+</div>
+<a id="acfb01632504f19d602e3701cb4fedc6c" name="acfb01632504f19d602e3701cb4fedc6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfb01632504f19d602e3701cb4fedc6c">&#9670;&#160;</a></span>set_notify_signal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::reflect::meta_property::set_notify_signal </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string_view.html#ga5a6e8b9da034ce8d4818231c4e005eff">string_view</a></td>          <td class="paramname"><span class="paramname"><em>signal_name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置变更通知信号名称 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">signal_name</td><td>信号名称 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="property_8hpp_source.html">property.hpp</a> 第 <a class="el" href="property_8hpp_source.html#l00171">171</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a4c684ed722acc03c313e39c6009eecfa" name="a4c684ed722acc03c313e39c6009eecfa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c684ed722acc03c313e39c6009eecfa">&#9670;&#160;</a></span>set_version()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::reflect::meta_property::set_version </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___core_types.html#ga4d7d3599901e73c7d6bf65a66e80b534">uint32_t</a></td>          <td class="paramname"><span class="paramname"><em>ver</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置版本号 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ver</td><td>版本号 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="property_8hpp_source.html">property.hpp</a> 第 <a class="el" href="property_8hpp_source.html#l00192">192</a> 行定义.</p>
+
+</div>
+</div>
+<a id="af42510577c4bf3b5db26dd7d6f959265" name="af42510577c4bf3b5db26dd7d6f959265"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af42510577c4bf3b5db26dd7d6f959265">&#9670;&#160;</a></span>type_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___reflection.html#ga3680b21ef08e8497fc7255d54c682211">reflect::type_id</a> neforce::reflect::meta_property::type_id </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取属性类型ID </p>
+<dl class="section return"><dt>返回</dt><dd>类型ID </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="property_8hpp_source.html">property.hpp</a> 第 <a class="el" href="property_8hpp_source.html#l00103">103</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="property_8hpp_source.html#l00085">meta_property()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="property_8hpp_source.html">property.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><b>reflect</b></li><li class="navelem"><a href="classneforce_1_1reflect_1_1meta__property.html">meta_property</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,31 +1,35 @@
 var group___char_traits =
 [
-    [ "base_char_traits&lt; CharT, IntT &gt;", "structbase__char__traits.html", [
-      [ "char_type", "structbase__char__traits.html#a2ac1b1346a0cb20eee00b5eb9a4886f9", null ],
-      [ "int_type", "structbase__char__traits.html#ad37652a0feb8b8bfb61c8884ebd1a07a", null ]
+    [ "neforce::base_char_traits&lt; CharT, IntT &gt;", "structneforce_1_1base__char__traits.html", [
+      [ "char_type", "structneforce_1_1base__char__traits.html#a405c3aad50102ecf6549f423f23481fc", null ],
+      [ "int_type", "structneforce_1_1base__char__traits.html#a0aa40bde87ca0cb5cad5f7f7f4b895ef", null ]
     ] ],
-    [ "narrow_char_traits&lt; CharT, IntT &gt;", "structnarrow__char__traits.html", [
-      [ "char_type", "structnarrow__char__traits.html#a3c59eb90ff0c14bfcfd03c0149ac237c", null ],
-      [ "int_type", "structnarrow__char__traits.html#af2e705b8a7c3c7c096ebe0d2dd6341f5", null ]
+    [ "neforce::narrow_char_traits&lt; CharT, IntT &gt;", "structneforce_1_1narrow__char__traits.html", [
+      [ "char_type", "structneforce_1_1narrow__char__traits.html#a2484e7dd017c6df92050411d98fe9c01", null ],
+      [ "int_type", "structneforce_1_1narrow__char__traits.html#a0e723af6ac8fd430e0b2a3062308f893", null ]
     ] ],
-    [ "char_traits&lt; CharT &gt;", "structchar__traits.html", null ],
-    [ "char_traits&lt; char &gt;", "structchar__traits_3_01char_01_4.html", null ],
-    [ "char_traits&lt; wchar_t &gt;", "structchar__traits_3_01wchar__t_01_4.html", null ],
-    [ "char_traits&lt; char8_t &gt;", "structchar__traits_3_01char8__t_01_4.html", null ],
-    [ "char_traits&lt; char16_t &gt;", "structchar__traits_3_01char16__t_01_4.html", null ],
-    [ "char_traits&lt; char32_t &gt;", "structchar__traits_3_01char32__t_01_4.html", null ],
-    [ "char_traits_char_t", "group___char_traits.html#ga2cf769a14029d485dcf792d82d53d889", null ],
-    [ "char_traits_ptr_t", "group___char_traits.html#ga288b36ae3d6183f3db9d626b46c748e1", null ],
-    [ "char_traits_compare", "group___char_traits.html#ga8f847c8aaf0df378c0a3b9a962313fcc", null ],
-    [ "char_traits_equal", "group___char_traits.html#gaf865a3fe4fe8218ff4494e669b767131", null ],
-    [ "char_traits_find", "group___char_traits.html#ga9f6288d62cd9c734de8042499b513e23", null ],
-    [ "char_traits_find_char", "group___char_traits.html#gae4ffceb0cd69590535adddf92fff19cc", null ],
-    [ "char_traits_find_first_not_of", "group___char_traits.html#gab1ce06699fd4682d598a72eb58721241", null ],
-    [ "char_traits_find_first_of", "group___char_traits.html#ga3a847048bdbab3079456c1adca643054", null ],
-    [ "char_traits_find_last_not_of", "group___char_traits.html#ga5ae883e1bfc078b9a88b7fcb2191de18", null ],
-    [ "char_traits_find_last_of", "group___char_traits.html#ga4d643fe454e18581a72f36456aaa0dd4", null ],
-    [ "char_traits_find_not_char", "group___char_traits.html#gaafc847a2dba13c3bc138b4e53dabea5e", null ],
-    [ "char_traits_rfind", "group___char_traits.html#ga3eb4093dc3b5bcc794105372bb1aa71f", null ],
-    [ "char_traits_rfind_char", "group___char_traits.html#ga6efdfa9709d06abac30062175a99820b", null ],
-    [ "char_traits_rfind_not_char", "group___char_traits.html#ga82ee877d8600c7c19db0058081b1fca9", null ]
+    [ "neforce::char_traits&lt; CharT &gt;", "structneforce_1_1char__traits.html", null ],
+    [ "neforce::char_traits&lt; char &gt;", "structneforce_1_1char__traits_3_01char_01_4.html", null ],
+    [ "neforce::char_traits&lt; wchar_t &gt;", "structneforce_1_1char__traits_3_01wchar__t_01_4.html", null ],
+    [ "neforce::char_traits&lt; char8_t &gt;", "structneforce_1_1char__traits_3_01char8__t_01_4.html", null ],
+    [ "neforce::char_traits&lt; char16_t &gt;", "structneforce_1_1char__traits_3_01char16__t_01_4.html", null ],
+    [ "neforce::char_traits&lt; char32_t &gt;", "structneforce_1_1char__traits_3_01char32__t_01_4.html", null ],
+    [ "neforce::char_traits_char_t", "group___char_traits.html#gac4e1764316a94903ed7839fb97577b4a", null ],
+    [ "neforce::char_traits_ptr_t", "group___char_traits.html#gaff58873b7494df8190196a64b2eeb99c", null ],
+    [ "neforce::char_traits_compare", "group___char_traits.html#ga17d9c4d836a41cd4b493632fbe2c102a", null ],
+    [ "neforce::char_traits_equal", "group___char_traits.html#gaa60ae51b7c7917a422be53617d541a49", null ],
+    [ "neforce::char_traits_find", "group___char_traits.html#ga569406a1cd93e7ea439f5fccd6e88e3d", null ],
+    [ "neforce::char_traits_find_char", "group___char_traits.html#ga18d43e7c540be6b8811c3d17abe1e3ef", null ],
+    [ "neforce::char_traits_find_first_not_of", "group___char_traits.html#ga2c8c76a5eabd74e437f15f83353b8d65", null ],
+    [ "neforce::char_traits_find_first_not_of", "group___char_traits.html#ga1b8f21ba47868270a306c1dcf689f856", null ],
+    [ "neforce::char_traits_find_first_of", "group___char_traits.html#gaa7bdb20ea6d5536c6438134e9236a693", null ],
+    [ "neforce::char_traits_find_first_of", "group___char_traits.html#ga3f8cca91e793bac4c90165c3d4aa1343", null ],
+    [ "neforce::char_traits_find_last_not_of", "group___char_traits.html#ga75d503fa34b05835de9d182f765f1037", null ],
+    [ "neforce::char_traits_find_last_not_of", "group___char_traits.html#ga1e367083301c6871a014f0f208ded736", null ],
+    [ "neforce::char_traits_find_last_of", "group___char_traits.html#gaaefb96bcbf133df498add9f4ba77d6a3", null ],
+    [ "neforce::char_traits_find_last_of", "group___char_traits.html#ga05844482a76d25806b9571ba48f3416f", null ],
+    [ "neforce::char_traits_find_not_char", "group___char_traits.html#ga0e66954f305bda88b6212b6b5c785cd7", null ],
+    [ "neforce::char_traits_rfind", "group___char_traits.html#ga0d74b233495dd623d71620f6528e0e1b", null ],
+    [ "neforce::char_traits_rfind_char", "group___char_traits.html#gaf89b566cc35b020de271129acd0b36f3", null ],
+    [ "neforce::char_traits_rfind_not_char", "group___char_traits.html#gacf01af14e6a0cf4d4c40a3d6ca201ad2", null ]
 ];

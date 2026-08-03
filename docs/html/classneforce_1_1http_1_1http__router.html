@@ -1,0 +1,753 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::http::http_router类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1http_1_1http__router.html','','classneforce_1_1http_1_1http__router-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::http::http_router类 参考<div class="ingroups"><a class="el" href="group___h_t_t_p.html">HTTP</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>HTTP路由器类  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="http__router_8hpp_source.html">http_router.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a62a39543b8f3beea91a5d22f83dba54b" id="r_a62a39543b8f3beea91a5d22f83dba54b"><td class="memItemLeft"><a id="a62a39543b8f3beea91a5d22f83dba54b" name="a62a39543b8f3beea91a5d22f83dba54b"></a>
+using&#160;</td><td class="memItemRight"><b>http_handler_t</b> = <a class="el" href="classneforce_1_1function.html">function</a>&lt;void(<a class="el" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a>&amp;, <a class="el" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a>&amp;)&gt;</td></tr>
+<tr class="memdesc:a62a39543b8f3beea91a5d22f83dba54b"><td class="mdescLeft">&#160;</td><td class="mdescRight">HTTP处理器类型 <br /></td></tr>
+<tr class="memitem:a5d0e43951acf307e92ad5b892604b69d" id="r_a5d0e43951acf307e92ad5b892604b69d"><td class="memItemLeft"><a id="a5d0e43951acf307e92ad5b892604b69d" name="a5d0e43951acf307e92ad5b892604b69d"></a>
+using&#160;</td><td class="memItemRight"><b>exception_handler_t</b> = <a class="el" href="classneforce_1_1function.html">function</a>&lt;void(<a class="el" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a>&amp;, <a class="el" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a>&amp;, const <a class="el" href="structneforce_1_1exception.html">exception</a>&amp;)&gt;</td></tr>
+<tr class="memdesc:a5d0e43951acf307e92ad5b892604b69d"><td class="mdescLeft">&#160;</td><td class="mdescRight">异常处理器类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a478a2ed8267811a8aee64289fa27e576" id="r_a478a2ed8267811a8aee64289fa27e576"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a478a2ed8267811a8aee64289fa27e576">http_router</a> ()</td></tr>
+<tr class="memdesc:a478a2ed8267811a8aee64289fa27e576"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:a5718ab8050665d178b08135275fc9ef5" id="r_a5718ab8050665d178b08135275fc9ef5"><td class="memItemLeft"><a id="a5718ab8050665d178b08135275fc9ef5" name="a5718ab8050665d178b08135275fc9ef5"></a>
+void&#160;</td><td class="memItemRight"><b>get</b> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;<a class="el" href="classneforce_1_1path.html">path</a>, <a class="el" href="#a62a39543b8f3beea91a5d22f83dba54b">http_handler_t</a> handler)</td></tr>
+<tr class="memdesc:a5718ab8050665d178b08135275fc9ef5"><td class="mdescLeft">&#160;</td><td class="mdescRight">GET请求 <br /></td></tr>
+<tr class="memitem:a26f0f5e0ae98e4ac2e5085c0221bdc29" id="r_a26f0f5e0ae98e4ac2e5085c0221bdc29"><td class="memItemLeft"><a id="a26f0f5e0ae98e4ac2e5085c0221bdc29" name="a26f0f5e0ae98e4ac2e5085c0221bdc29"></a>
+void&#160;</td><td class="memItemRight"><b>post</b> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;<a class="el" href="classneforce_1_1path.html">path</a>, <a class="el" href="#a62a39543b8f3beea91a5d22f83dba54b">http_handler_t</a> handler)</td></tr>
+<tr class="memdesc:a26f0f5e0ae98e4ac2e5085c0221bdc29"><td class="mdescLeft">&#160;</td><td class="mdescRight">POST请求 <br /></td></tr>
+<tr class="memitem:a9c3a857a5e758dfc83e4f6f587d61bd3" id="r_a9c3a857a5e758dfc83e4f6f587d61bd3"><td class="memItemLeft"><a id="a9c3a857a5e758dfc83e4f6f587d61bd3" name="a9c3a857a5e758dfc83e4f6f587d61bd3"></a>
+void&#160;</td><td class="memItemRight"><b>put</b> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;<a class="el" href="classneforce_1_1path.html">path</a>, <a class="el" href="#a62a39543b8f3beea91a5d22f83dba54b">http_handler_t</a> handler)</td></tr>
+<tr class="memdesc:a9c3a857a5e758dfc83e4f6f587d61bd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">PUT请求 <br /></td></tr>
+<tr class="memitem:ab51dd8e589636a9eb905cf42f3e32a1d" id="r_ab51dd8e589636a9eb905cf42f3e32a1d"><td class="memItemLeft"><a id="ab51dd8e589636a9eb905cf42f3e32a1d" name="ab51dd8e589636a9eb905cf42f3e32a1d"></a>
+void&#160;</td><td class="memItemRight"><b>del</b> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;<a class="el" href="classneforce_1_1path.html">path</a>, <a class="el" href="#a62a39543b8f3beea91a5d22f83dba54b">http_handler_t</a> handler)</td></tr>
+<tr class="memdesc:ab51dd8e589636a9eb905cf42f3e32a1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">DELETE请求 <br /></td></tr>
+<tr class="memitem:a4c9c26690147f3dc7f0a5fe33e88fa3c" id="r_a4c9c26690147f3dc7f0a5fe33e88fa3c"><td class="memItemLeft"><a id="a4c9c26690147f3dc7f0a5fe33e88fa3c" name="a4c9c26690147f3dc7f0a5fe33e88fa3c"></a>
+void&#160;</td><td class="memItemRight"><b>head</b> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;<a class="el" href="classneforce_1_1path.html">path</a>, <a class="el" href="#a62a39543b8f3beea91a5d22f83dba54b">http_handler_t</a> handler)</td></tr>
+<tr class="memdesc:a4c9c26690147f3dc7f0a5fe33e88fa3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">HEAD请求 <br /></td></tr>
+<tr class="memitem:ae6290e1d01d06418beb2dbc1c8ee94d9" id="r_ae6290e1d01d06418beb2dbc1c8ee94d9"><td class="memItemLeft"><a id="ae6290e1d01d06418beb2dbc1c8ee94d9" name="ae6290e1d01d06418beb2dbc1c8ee94d9"></a>
+void&#160;</td><td class="memItemRight"><b>options</b> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;<a class="el" href="classneforce_1_1path.html">path</a>, <a class="el" href="#a62a39543b8f3beea91a5d22f83dba54b">http_handler_t</a> handler)</td></tr>
+<tr class="memdesc:ae6290e1d01d06418beb2dbc1c8ee94d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">OPTIONS请求 <br /></td></tr>
+<tr class="memitem:abf5d8608f8861c5610f69a9503382ff6" id="r_abf5d8608f8861c5610f69a9503382ff6"><td class="memItemLeft"><a id="abf5d8608f8861c5610f69a9503382ff6" name="abf5d8608f8861c5610f69a9503382ff6"></a>
+void&#160;</td><td class="memItemRight"><b>trace</b> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;<a class="el" href="classneforce_1_1path.html">path</a>, <a class="el" href="#a62a39543b8f3beea91a5d22f83dba54b">http_handler_t</a> handler)</td></tr>
+<tr class="memdesc:abf5d8608f8861c5610f69a9503382ff6"><td class="mdescLeft">&#160;</td><td class="mdescRight">TRACE请求 <br /></td></tr>
+<tr class="memitem:aa6912a7296e0a6398d9cfeb2333338a0" id="r_aa6912a7296e0a6398d9cfeb2333338a0"><td class="memItemLeft"><a id="aa6912a7296e0a6398d9cfeb2333338a0" name="aa6912a7296e0a6398d9cfeb2333338a0"></a>
+void&#160;</td><td class="memItemRight"><b>connect</b> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;<a class="el" href="classneforce_1_1path.html">path</a>, <a class="el" href="#a62a39543b8f3beea91a5d22f83dba54b">http_handler_t</a> handler)</td></tr>
+<tr class="memdesc:aa6912a7296e0a6398d9cfeb2333338a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">CONNECT请求 <br /></td></tr>
+<tr class="memitem:a7c8adb288389e2e2b0a34d062102498c" id="r_a7c8adb288389e2e2b0a34d062102498c"><td class="memItemLeft"><a id="a7c8adb288389e2e2b0a34d062102498c" name="a7c8adb288389e2e2b0a34d062102498c"></a>
+void&#160;</td><td class="memItemRight"><b>patch</b> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;<a class="el" href="classneforce_1_1path.html">path</a>, <a class="el" href="#a62a39543b8f3beea91a5d22f83dba54b">http_handler_t</a> handler)</td></tr>
+<tr class="memdesc:a7c8adb288389e2e2b0a34d062102498c"><td class="mdescLeft">&#160;</td><td class="mdescRight">PATCH请求 <br /></td></tr>
+<tr class="memitem:afe2bd99ee13c4ed2f82a7143d1d0d961" id="r_afe2bd99ee13c4ed2f82a7143d1d0d961"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afe2bd99ee13c4ed2f82a7143d1d0d961">get_post</a> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;<a class="el" href="classneforce_1_1path.html">path</a>, <a class="el" href="#a62a39543b8f3beea91a5d22f83dba54b">http_handler_t</a> handler)</td></tr>
+<tr class="memdesc:afe2bd99ee13c4ed2f82a7143d1d0d961"><td class="mdescLeft">&#160;</td><td class="mdescRight">同时注册GET和POST  <br /></td></tr>
+<tr class="memitem:a50ece815c82f65e53a2373672c4e718e" id="r_a50ece815c82f65e53a2373672c4e718e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a50ece815c82f65e53a2373672c4e718e">post_delete</a> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;<a class="el" href="classneforce_1_1path.html">path</a>, <a class="el" href="#a62a39543b8f3beea91a5d22f83dba54b">http_handler_t</a> handler)</td></tr>
+<tr class="memdesc:a50ece815c82f65e53a2373672c4e718e"><td class="mdescLeft">&#160;</td><td class="mdescRight">同时注册POST和DELETE  <br /></td></tr>
+<tr class="memitem:a6f68fb6fb54d9c2df07bb5fc63fab060" id="r_a6f68fb6fb54d9c2df07bb5fc63fab060"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6f68fb6fb54d9c2df07bb5fc63fab060">all</a> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;<a class="el" href="classneforce_1_1path.html">path</a>, <a class="el" href="#a62a39543b8f3beea91a5d22f83dba54b">http_handler_t</a> handler)</td></tr>
+<tr class="memdesc:a6f68fb6fb54d9c2df07bb5fc63fab060"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册所有HTTP方法  <br /></td></tr>
+<tr class="memitem:ad31ad6ffec62e3b025e40ce27bba371a" id="r_ad31ad6ffec62e3b025e40ce27bba371a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad31ad6ffec62e3b025e40ce27bba371a">route</a> (const <a class="el" href="structneforce_1_1http_1_1http__method.html">http_method</a> &amp;method, const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;<a class="el" href="classneforce_1_1path.html">path</a>, const <a class="el" href="#a62a39543b8f3beea91a5d22f83dba54b">http_handler_t</a> &amp;handler)</td></tr>
+<tr class="memdesc:ad31ad6ffec62e3b025e40ce27bba371a"><td class="mdescLeft">&#160;</td><td class="mdescRight">通用路由注册  <br /></td></tr>
+<tr class="memitem:ae7ea6e6e805fa9c1eada5f9e45f7ee70" id="r_ae7ea6e6e805fa9c1eada5f9e45f7ee70"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae7ea6e6e805fa9c1eada5f9e45f7ee70">use</a> (<a class="el" href="classneforce_1_1unique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classneforce_1_1http_1_1http__filter.html">http_filter</a> &gt; middleware)</td></tr>
+<tr class="memdesc:ae7ea6e6e805fa9c1eada5f9e45f7ee70"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加中间件  <br /></td></tr>
+<tr class="memitem:abf3e2a26988e69309d20f46897bba9db" id="r_abf3e2a26988e69309d20f46897bba9db"><td class="memItemLeft"><a class="el" href="classneforce_1_1http_1_1http__filter__chain.html">http_filter_chain</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#abf3e2a26988e69309d20f46897bba9db">middleware_chain</a> () noexcept</td></tr>
+<tr class="memdesc:abf3e2a26988e69309d20f46897bba9db"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取中间件链引用  <br /></td></tr>
+<tr class="memitem:ac46c02f06116ce8818919e5eb9159f38" id="r_ac46c02f06116ce8818919e5eb9159f38"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac46c02f06116ce8818919e5eb9159f38">set_not_found_handler</a> (<a class="el" href="#a62a39543b8f3beea91a5d22f83dba54b">http_handler_t</a> handler)</td></tr>
+<tr class="memdesc:ac46c02f06116ce8818919e5eb9159f38"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置404处理器  <br /></td></tr>
+<tr class="memitem:a343ee861790efd698bbb0f1ed5343f96" id="r_a343ee861790efd698bbb0f1ed5343f96"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a343ee861790efd698bbb0f1ed5343f96">set_method_not_allowed_handler</a> (<a class="el" href="#a62a39543b8f3beea91a5d22f83dba54b">http_handler_t</a> handler)</td></tr>
+<tr class="memdesc:a343ee861790efd698bbb0f1ed5343f96"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置405处理器  <br /></td></tr>
+<tr class="memitem:a2c1e549b57861c57d607043d33c24b3d" id="r_a2c1e549b57861c57d607043d33c24b3d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2c1e549b57861c57d607043d33c24b3d">set_exception_handler</a> (<a class="el" href="#a5d0e43951acf307e92ad5b892604b69d">exception_handler_t</a> handler)</td></tr>
+<tr class="memdesc:a2c1e549b57861c57d607043d33c24b3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置异常处理器  <br /></td></tr>
+<tr class="memitem:a80ba4a4d7b470d69ee8e574ae9558d82" id="r_a80ba4a4d7b470d69ee8e574ae9558d82"><td class="memItemLeft"><a class="el" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a>&#160;</td><td class="memItemRight"><a class="el" href="#a80ba4a4d7b470d69ee8e574ae9558d82">handle_request</a> (<a class="el" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a> &amp;request)</td></tr>
+<tr class="memdesc:a80ba4a4d7b470d69ee8e574ae9558d82"><td class="mdescLeft">&#160;</td><td class="mdescRight">处理HTTP请求  <br /></td></tr>
+<tr class="memitem:a0d4029cb509fae76c34b9711f1409a91" id="r_a0d4029cb509fae76c34b9711f1409a91"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0d4029cb509fae76c34b9711f1409a91">handle_request_async</a> (<a class="el" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a> request, <a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a>)&gt; cb)</td></tr>
+<tr class="memdesc:a0d4029cb509fae76c34b9711f1409a91"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步处理HTTP请求（回调模式）  <br /></td></tr>
+<tr class="memitem:a831e6206e17c75947c7fe358797973e9" id="r_a831e6206e17c75947c7fe358797973e9"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a831e6206e17c75947c7fe358797973e9">has_route</a> (const <a class="el" href="structneforce_1_1http_1_1http__method.html">http_method</a> &amp;method, const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;<a class="el" href="classneforce_1_1path.html">path</a>) const</td></tr>
+<tr class="memdesc:a831e6206e17c75947c7fe358797973e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否存在指定路由  <br /></td></tr>
+<tr class="memitem:a32cec63e409c7956983743b0bf23e27b" id="r_a32cec63e409c7956983743b0bf23e27b"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a32cec63e409c7956983743b0bf23e27b">route_count</a> () const noexcept</td></tr>
+<tr class="memdesc:a32cec63e409c7956983743b0bf23e27b"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取路由总数  <br /></td></tr>
+<tr class="memitem:a4eb9123e2c0d70b6a20f03c18632e466" id="r_a4eb9123e2c0d70b6a20f03c18632e466"><td class="memItemLeft"><a id="a4eb9123e2c0d70b6a20f03c18632e466" name="a4eb9123e2c0d70b6a20f03c18632e466"></a>
+void&#160;</td><td class="memItemRight"><b>clear_routes</b> () noexcept</td></tr>
+<tr class="memdesc:a4eb9123e2c0d70b6a20f03c18632e466"><td class="mdescLeft">&#160;</td><td class="mdescRight">清空所有路由 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public 属性</h2></td></tr>
+<tr class="memitem:ada4c4d05455f2dc9c9e731508f92746c" id="r_ada4c4d05455f2dc9c9e731508f92746c"><td class="memItemLeft"><a id="ada4c4d05455f2dc9c9e731508f92746c" name="ada4c4d05455f2dc9c9e731508f92746c"></a>
+bool&#160;</td><td class="memItemRight"><b>case_sensitive</b> = true</td></tr>
+<tr class="memdesc:ada4c4d05455f2dc9c9e731508f92746c"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否大小写敏感 <br /></td></tr>
+<tr class="memitem:a58c8371e919e0b8f409b587b00260f5f" id="r_a58c8371e919e0b8f409b587b00260f5f"><td class="memItemLeft"><a id="a58c8371e919e0b8f409b587b00260f5f" name="a58c8371e919e0b8f409b587b00260f5f"></a>
+bool&#160;</td><td class="memItemRight"><b>strict_routing</b> = false</td></tr>
+<tr class="memdesc:a58c8371e919e0b8f409b587b00260f5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否严格匹配尾部斜杠 <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>HTTP路由器类 </p>
+<p>提供HTTP请求路由功能，将请求分发到对应的处理函数。 支持路径参数、正则表达式匹配和中间件链。</p>
+<p>主要功能：</p><ul>
+<li>RESTful风格路由注册</li>
+<li>路径参数提取</li>
+<li>通配符匹配</li>
+<li>正则表达式路由支持</li>
+<li>中间件链支持</li>
+<li>自定义异常处理器</li>
+<li>大小写敏感/不敏感路由</li>
+</ul>
+<p>使用示例： </p><div class="fragment"><div class="line"><a class="code hl_function" href="#a478a2ed8267811a8aee64289fa27e576">http_router</a> router;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 静态路由</span></div>
+<div class="line">router.<a class="code hl_function" href="#a5718ab8050665d178b08135275fc9ef5">get</a>(<span class="stringliteral">&quot;/&quot;</span>, [](<a class="code hl_typedef" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a>&amp; req, <a class="code hl_typedef" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a>&amp; res) {</div>
+<div class="line">    res.<a class="code hl_variable" href="structneforce_1_1http_1_1http__server__response.html#a7bbb67af3a10e70b5f15104ab27ec1c3">body</a> = <span class="stringliteral">&quot;Hello World&quot;</span>;</div>
+<div class="line">});</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 路径参数</span></div>
+<div class="line">router.<a class="code hl_function" href="#a5718ab8050665d178b08135275fc9ef5">get</a>(<span class="stringliteral">&quot;/users/:id&quot;</span>, [](<a class="code hl_typedef" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a>&amp; req, <a class="code hl_typedef" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a>&amp; res) {</div>
+<div class="line">    <span class="keywordtype">string</span> <span class="keywordtype">id</span> = req.<a class="code hl_function" href="structneforce_1_1http_1_1http__server__request.html#a889e0ccfc25ed6a4ea1f0548f49320ea">parameter</a>(<span class="stringliteral">&quot;id&quot;</span>);</div>
+<div class="line">    res.<a class="code hl_variable" href="structneforce_1_1http_1_1http__server__response.html#a7bbb67af3a10e70b5f15104ab27ec1c3">body</a> = <span class="stringliteral">&quot;User ID: &quot;</span> + id;</div>
+<div class="line">});</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 通配符</span></div>
+<div class="line">router.<a class="code hl_function" href="#a5718ab8050665d178b08135275fc9ef5">get</a>(<span class="stringliteral">&quot;/files\ *&quot;</span>, [](<a class="code hl_typedef" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a>&amp; req, <a class="code hl_typedef" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a>&amp; res) {</div>
+<div class="line">    <span class="keywordtype">string</span> <a class="code hl_class" href="classneforce_1_1path.html">path</a> = req.parameter(<span class="stringliteral">&quot;*&quot;</span>);</div>
+<div class="line">    <span class="comment">// 处理文件请求</span></div>
+<div class="line">});</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 正则表达式路由</span></div>
+<div class="line">router.<a class="code hl_function" href="#ad31ad6ffec62e3b025e40ce27bba371a">route</a>(<span class="stringliteral">&quot;GET&quot;</span>, <span class="stringliteral">&quot;/user/([0-9]+)&quot;</span>, [](<a class="code hl_typedef" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a>&amp; req, <a class="code hl_typedef" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a>&amp; res) {</div>
+<div class="line">    <span class="keywordtype">string</span> <span class="keywordtype">id</span> = req.parameter(<span class="stringliteral">&quot;0&quot;</span>);</div>
+<div class="line">});</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 添加中间件</span></div>
+<div class="line">router.<a class="code hl_function" href="#ae7ea6e6e805fa9c1eada5f9e45f7ee70">use</a>(<a class="code hl_function" href="group___unique_pointer.html#ga86ab9db93326b3badc11a15d1c0e3007">make_unique&lt;logging_filter&gt;</a>());</div>
+<div class="line">router.<a class="code hl_function" href="#ae7ea6e6e805fa9c1eada5f9e45f7ee70">use</a>(<a class="code hl_function" href="group___unique_pointer.html#ga86ab9db93326b3badc11a15d1c0e3007">make_unique&lt;cors_filter&gt;</a>());</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 自定义404处理器</span></div>
+<div class="line">router.<a class="code hl_function" href="#ac46c02f06116ce8818919e5eb9159f38">set_not_found_handler</a>([](<a class="code hl_typedef" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a>&amp; req, <a class="code hl_typedef" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a>&amp; res) {</div>
+<div class="line">    res.body = <span class="stringliteral">&quot;Custom 404 Page&quot;</span>;</div>
+<div class="line">});</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 处理请求</span></div>
+<div class="line"><span class="keyword">auto</span> response = router.<a class="code hl_function" href="#a80ba4a4d7b470d69ee8e574ae9558d82">handle_request</a>(request);</div>
+<div class="ttc" id="aclassneforce_1_1http_1_1http__router_html_a478a2ed8267811a8aee64289fa27e576"><div class="ttname"><a href="#a478a2ed8267811a8aee64289fa27e576">neforce::http::http_router::http_router</a></div><div class="ttdeci">http_router()</div><div class="ttdoc">构造函数</div></div>
+<div class="ttc" id="aclassneforce_1_1http_1_1http__router_html_a5718ab8050665d178b08135275fc9ef5"><div class="ttname"><a href="#a5718ab8050665d178b08135275fc9ef5">neforce::http::http_router::get</a></div><div class="ttdeci">void get(const string &amp;path, http_handler_t handler)</div><div class="ttdoc">GET请求</div></div>
+<div class="ttc" id="aclassneforce_1_1http_1_1http__router_html_a80ba4a4d7b470d69ee8e574ae9558d82"><div class="ttname"><a href="#a80ba4a4d7b470d69ee8e574ae9558d82">neforce::http::http_router::handle_request</a></div><div class="ttdeci">http_response handle_request(http_request &amp;request)</div><div class="ttdoc">处理HTTP请求</div></div>
+<div class="ttc" id="aclassneforce_1_1http_1_1http__router_html_ac46c02f06116ce8818919e5eb9159f38"><div class="ttname"><a href="#ac46c02f06116ce8818919e5eb9159f38">neforce::http::http_router::set_not_found_handler</a></div><div class="ttdeci">void set_not_found_handler(http_handler_t handler)</div><div class="ttdoc">设置404处理器</div><div class="ttdef"><b>定义</b> <a href="http__router_8hpp_source.html#l00189">http_router.hpp:189</a></div></div>
+<div class="ttc" id="aclassneforce_1_1http_1_1http__router_html_ad31ad6ffec62e3b025e40ce27bba371a"><div class="ttname"><a href="#ad31ad6ffec62e3b025e40ce27bba371a">neforce::http::http_router::route</a></div><div class="ttdeci">void route(const http_method &amp;method, const string &amp;path, const http_handler_t &amp;handler)</div><div class="ttdoc">通用路由注册</div></div>
+<div class="ttc" id="aclassneforce_1_1http_1_1http__router_html_ae7ea6e6e805fa9c1eada5f9e45f7ee70"><div class="ttname"><a href="#ae7ea6e6e805fa9c1eada5f9e45f7ee70">neforce::http::http_router::use</a></div><div class="ttdeci">void use(unique_ptr&lt; http_filter &gt; middleware)</div><div class="ttdoc">添加中间件</div><div class="ttdef"><b>定义</b> <a href="http__router_8hpp_source.html#l00177">http_router.hpp:177</a></div></div>
+<div class="ttc" id="aclassneforce_1_1path_html"><div class="ttname"><a href="classneforce_1_1path.html">neforce::path</a></div><div class="ttdoc">文件路径类</div><div class="ttdef"><b>定义</b> <a href="path_8hpp_source.html#l00036">path.hpp:36</a></div></div>
+<div class="ttc" id="agroup___h_t_t_p_html_ga7430ee17f3275c4a16eec508c2bf7ff3"><div class="ttname"><a href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">neforce::http::http_response</a></div><div class="ttdeci">http_server_response http_response</div><div class="ttdoc">HTTP响应类型别名</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00369">http_server_message.hpp:369</a></div></div>
+<div class="ttc" id="agroup___h_t_t_p_html_gaf5206366b9367d7f118365ad62b26ff5"><div class="ttname"><a href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">neforce::http::http_request</a></div><div class="ttdeci">http_server_request http_request</div><div class="ttdoc">HTTP请求类型别名</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00363">http_server_message.hpp:363</a></div></div>
+<div class="ttc" id="agroup___unique_pointer_html_ga86ab9db93326b3badc11a15d1c0e3007"><div class="ttname"><a href="group___unique_pointer.html#ga86ab9db93326b3badc11a15d1c0e3007">neforce::make_unique</a></div><div class="ttdeci">constexpr unique_ptr&lt; T &gt; make_unique(Args &amp;&amp;... args)</div><div class="ttdoc">创建unique_ptr</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00973">unique_ptr.hpp:973</a></div></div>
+<div class="ttc" id="astructneforce_1_1http_1_1http__server__request_html_a889e0ccfc25ed6a4ea1f0548f49320ea"><div class="ttname"><a href="structneforce_1_1http_1_1http__server__request.html#a889e0ccfc25ed6a4ea1f0548f49320ea">neforce::http::http_server_request::parameter</a></div><div class="ttdeci">string_view parameter(const string &amp;name) const</div><div class="ttdoc">获取参数值</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00101">http_server_message.hpp:101</a></div></div>
+<div class="ttc" id="astructneforce_1_1http_1_1http__server__response_html_a7bbb67af3a10e70b5f15104ab27ec1c3"><div class="ttname"><a href="structneforce_1_1http_1_1http__server__response.html#a7bbb67af3a10e70b5f15104ab27ec1c3">neforce::http::http_server_response::body</a></div><div class="ttdeci">string body</div><div class="ttdoc">响应正文</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00290">http_server_message.hpp:290</a></div></div>
+</div><!-- fragment --> 
+<p class="definition">在文件 <a class="el" href="http__router_8hpp_source.html">http_router.hpp</a> 第 <a class="el" href="http__router_8hpp_source.html#l00078">78</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="a478a2ed8267811a8aee64289fa27e576" name="a478a2ed8267811a8aee64289fa27e576"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a478a2ed8267811a8aee64289fa27e576">&#9670;&#160;</a></span>http_router()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">neforce::http::http_router::http_router </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<p>初始化默认的404、405和异常处理器。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a478a2ed8267811a8aee64289fa27e576">http_router()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a478a2ed8267811a8aee64289fa27e576">http_router()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a6f68fb6fb54d9c2df07bb5fc63fab060" name="a6f68fb6fb54d9c2df07bb5fc63fab060"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f68fb6fb54d9c2df07bb5fc63fab060">&#9670;&#160;</a></span>all()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::http::http_router::all </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>path</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a62a39543b8f3beea91a5d22f83dba54b">http_handler_t</a></td>          <td class="paramname"><span class="paramname"><em>handler</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>注册所有HTTP方法 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>路由路径 </td></tr>
+    <tr><td class="paramname">handler</td><td>处理器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#a6f68fb6fb54d9c2df07bb5fc63fab060">all()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a6f68fb6fb54d9c2df07bb5fc63fab060">all()</a>.</p>
+
+</div>
+</div>
+<a id="afe2bd99ee13c4ed2f82a7143d1d0d961" name="afe2bd99ee13c4ed2f82a7143d1d0d961"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe2bd99ee13c4ed2f82a7143d1d0d961">&#9670;&#160;</a></span>get_post()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::http::http_router::get_post </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>path</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a62a39543b8f3beea91a5d22f83dba54b">http_handler_t</a></td>          <td class="paramname"><span class="paramname"><em>handler</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>同时注册GET和POST </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>路由路径 </td></tr>
+    <tr><td class="paramname">handler</td><td>处理器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#afe2bd99ee13c4ed2f82a7143d1d0d961">get_post()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#afe2bd99ee13c4ed2f82a7143d1d0d961">get_post()</a>.</p>
+
+</div>
+</div>
+<a id="a80ba4a4d7b470d69ee8e574ae9558d82" name="a80ba4a4d7b470d69ee8e574ae9558d82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80ba4a4d7b470d69ee8e574ae9558d82">&#9670;&#160;</a></span>handle_request()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a> neforce::http::http_router::handle_request </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>request</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>处理HTTP请求 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>HTTP请求对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>HTTP响应对象</dd></dl>
+<p>处理流程：</p><ol type="1">
+<li>执行预过滤器</li>
+<li>执行核心过滤器</li>
+<li>查找匹配的路由处理器</li>
+<li>执行处理器</li>
+<li>执行后过滤器</li>
+<li>返回响应 </li>
+</ol>
+
+</div>
+</div>
+<a id="a0d4029cb509fae76c34b9711f1409a91" name="a0d4029cb509fae76c34b9711f1409a91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d4029cb509fae76c34b9711f1409a91">&#9670;&#160;</a></span>handle_request_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::http::http_router::handle_request_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a></td>          <td class="paramname"><span class="paramname"><em>request</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a>)&gt;</td>          <td class="paramname"><span class="paramname"><em>cb</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>异步处理HTTP请求（回调模式） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>HTTP请求对象 </td></tr>
+    <tr><td class="paramname">cb</td><td>处理完成回调，接收响应对象</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>与 handle_request 等效，但支持 <a class="el" href="classneforce_1_1http_1_1async__filter.html" title="异步过滤器基类（回调模式）">async_filter</a> 中间件。 若无 async_filter，内部直接调用同步路径（零开销）。 适用于 HTTP/2 和事件驱动模式下的请求分发。</p>
+<p>处理流程：</p><ol type="1">
+<li>执行异步预过滤器链</li>
+<li>查找匹配的路由处理器并执行</li>
+<li>执行异步后过滤器链</li>
+<li>调用 cb(response) </li>
+</ol>
+
+</div>
+</div>
+<a id="a831e6206e17c75947c7fe358797973e9" name="a831e6206e17c75947c7fe358797973e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a831e6206e17c75947c7fe358797973e9">&#9670;&#160;</a></span>has_route()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::http::http_router::has_route </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structneforce_1_1http_1_1http__method.html">http_method</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>method</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>path</em></span>&#160;) const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查是否存在指定路由 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">method</td><td>HTTP方法 </td></tr>
+    <tr><td class="paramname">path</td><td>路由路径 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>存在返回true </dd></dl>
+
+</div>
+</div>
+<a id="abf3e2a26988e69309d20f46897bba9db" name="abf3e2a26988e69309d20f46897bba9db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf3e2a26988e69309d20f46897bba9db">&#9670;&#160;</a></span>middleware_chain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1http_1_1http__filter__chain.html">http_filter_chain</a> &amp; neforce::http::http_router::middleware_chain </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取中间件链引用 </p>
+<dl class="section return"><dt>返回</dt><dd>中间件链引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="http__router_8hpp_source.html">http_router.hpp</a> 第 <a class="el" href="http__router_8hpp_source.html#l00183">183</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a50ece815c82f65e53a2373672c4e718e" name="a50ece815c82f65e53a2373672c4e718e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50ece815c82f65e53a2373672c4e718e">&#9670;&#160;</a></span>post_delete()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::http::http_router::post_delete </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>path</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a62a39543b8f3beea91a5d22f83dba54b">http_handler_t</a></td>          <td class="paramname"><span class="paramname"><em>handler</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>同时注册POST和DELETE </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>路由路径 </td></tr>
+    <tr><td class="paramname">handler</td><td>处理器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#a50ece815c82f65e53a2373672c4e718e">post_delete()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a50ece815c82f65e53a2373672c4e718e">post_delete()</a>.</p>
+
+</div>
+</div>
+<a id="ad31ad6ffec62e3b025e40ce27bba371a" name="ad31ad6ffec62e3b025e40ce27bba371a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad31ad6ffec62e3b025e40ce27bba371a">&#9670;&#160;</a></span>route()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::http::http_router::route </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structneforce_1_1http_1_1http__method.html">http_method</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>method</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>path</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#a62a39543b8f3beea91a5d22f83dba54b">http_handler_t</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>handler</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>通用路由注册 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">method</td><td>HTTP方法 </td></tr>
+    <tr><td class="paramname">path</td><td>路由路径 </td></tr>
+    <tr><td class="paramname">handler</td><td>处理器</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>路由模式语法：</p><ul>
+<li><span class="tt">/users/:id</span> - 路径参数，匹配<span class="tt">/users/123</span>，提取id=123</li>
+<li><span class="tt">/files/ *</span> - 通配符，匹配<span class="tt">/files/a/b/c</span>，提取*=a/b/c</li>
+<li><span class="tt">/user/([0-9]+)</span> - 正则表达式，匹配数字ID </li>
+</ul>
+
+<p class="reference">引用了 <a class="el" href="#ad31ad6ffec62e3b025e40ce27bba371a">route()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ad31ad6ffec62e3b025e40ce27bba371a">route()</a>.</p>
+
+</div>
+</div>
+<a id="a32cec63e409c7956983743b0bf23e27b" name="a32cec63e409c7956983743b0bf23e27b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32cec63e409c7956983743b0bf23e27b">&#9670;&#160;</a></span>route_count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> neforce::http::http_router::route_count </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取路由总数 </p>
+<dl class="section return"><dt>返回</dt><dd>路由数量 </dd></dl>
+
+</div>
+</div>
+<a id="a2c1e549b57861c57d607043d33c24b3d" name="a2c1e549b57861c57d607043d33c24b3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c1e549b57861c57d607043d33c24b3d">&#9670;&#160;</a></span>set_exception_handler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::http::http_router::set_exception_handler </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a5d0e43951acf307e92ad5b892604b69d">exception_handler_t</a></td>          <td class="paramname"><span class="paramname"><em>handler</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置异常处理器 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>处理器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="http__router_8hpp_source.html">http_router.hpp</a> 第 <a class="el" href="http__router_8hpp_source.html#l00203">203</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">neforce::move()</a>.</p>
+
+</div>
+</div>
+<a id="a343ee861790efd698bbb0f1ed5343f96" name="a343ee861790efd698bbb0f1ed5343f96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a343ee861790efd698bbb0f1ed5343f96">&#9670;&#160;</a></span>set_method_not_allowed_handler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::http::http_router::set_method_not_allowed_handler </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a62a39543b8f3beea91a5d22f83dba54b">http_handler_t</a></td>          <td class="paramname"><span class="paramname"><em>handler</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置405处理器 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>处理器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="http__router_8hpp_source.html">http_router.hpp</a> 第 <a class="el" href="http__router_8hpp_source.html#l00195">195</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">neforce::move()</a>.</p>
+
+</div>
+</div>
+<a id="ac46c02f06116ce8818919e5eb9159f38" name="ac46c02f06116ce8818919e5eb9159f38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac46c02f06116ce8818919e5eb9159f38">&#9670;&#160;</a></span>set_not_found_handler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::http::http_router::set_not_found_handler </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a62a39543b8f3beea91a5d22f83dba54b">http_handler_t</a></td>          <td class="paramname"><span class="paramname"><em>handler</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置404处理器 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handler</td><td>处理器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="http__router_8hpp_source.html">http_router.hpp</a> 第 <a class="el" href="http__router_8hpp_source.html#l00189">189</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">neforce::move()</a>.</p>
+
+</div>
+</div>
+<a id="ae7ea6e6e805fa9c1eada5f9e45f7ee70" name="ae7ea6e6e805fa9c1eada5f9e45f7ee70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7ea6e6e805fa9c1eada5f9e45f7ee70">&#9670;&#160;</a></span>use()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::http::http_router::use </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1unique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classneforce_1_1http_1_1http__filter.html">http_filter</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>middleware</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>添加中间件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">middleware</td><td>中间件对象（转移所有权） </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="http__router_8hpp_source.html">http_router.hpp</a> 第 <a class="el" href="http__router_8hpp_source.html#l00177">177</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">neforce::move()</a> , 以及 <a class="el" href="http__router_8hpp_source.html#l00177">use()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="http__router_8hpp_source.html#l00177">use()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="http__router_8hpp_source.html">http_router.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><b>http</b></li><li class="navelem"><a href="classneforce_1_1http_1_1http__router.html">http_router</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

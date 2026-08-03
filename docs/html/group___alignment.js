@@ -1,18 +1,18 @@
 var group___alignment =
 [
-    [ "alignment_of&lt; T &gt;", "structalignment__of.html", null ],
-    [ "aligned_storage&lt; Len, Align &gt;", "structaligned__storage.html", [
-      [ "type", "structaligned__storage_1_1type.html", [
-        [ "data", "structaligned__storage_1_1type.html#a4ac3e6218a0c4cf311dd153c04363170", null ]
+    [ "neforce::alignment_of&lt; T &gt;", "structneforce_1_1alignment__of.html", null ],
+    [ "neforce::aligned_storage&lt; Len, Align &gt;", "structneforce_1_1aligned__storage.html", [
+      [ "type", "structneforce_1_1aligned__storage_1_1type.html", [
+        [ "data", "structneforce_1_1aligned__storage_1_1type.html#ad036c2fbc914d77954c7142686ce4780", null ]
       ] ]
     ] ],
-    [ "aligned_union&lt; Len, Types &gt;", "structaligned__union.html", [
-      [ "type", "structaligned__union_1_1type.html", [
-        [ "data", "structaligned__union_1_1type.html#a13ecce1c95e209ef76484dd470a9df3b", null ]
+    [ "neforce::aligned_union&lt; Len, Types &gt;", "structneforce_1_1aligned__union.html", [
+      [ "type", "structneforce_1_1aligned__union_1_1type.html", [
+        [ "data", "structneforce_1_1aligned__union_1_1type.html#aa3ba469e3a56c6a892a59de2ebaf84dd", null ]
       ] ]
     ] ],
-    [ "aligned_storage_t", "group___alignment.html#gae1bfcd9586bbb9936d7eb2d2ea32bc8e", null ],
-    [ "aligned_union_t", "group___alignment.html#gaaf5f392ace63d0a89352f050a2104edc", null ],
-    [ "aligned_union_v", "group___alignment.html#ga76c6f8991a30f9a97fc11ec55cdb8887", null ],
-    [ "alignment_of_v", "group___alignment.html#gae7fde4c1b709be147fc5d8f4efc0c605", null ]
+    [ "neforce::aligned_storage_t", "group___alignment.html#gaab9e3d84babf7e40da3ee0d071a80135", null ],
+    [ "neforce::aligned_union_t", "group___alignment.html#ga92185ff186b8c08d6e40b4361e97a434", null ],
+    [ "neforce::aligned_union_v", "group___alignment.html#gaf61f3f232c5f859e616d8de8e43877ec", null ],
+    [ "neforce::alignment_of_v", "group___alignment.html#ga10e5d38da57946f317a7838a294e55d7", null ]
 ];

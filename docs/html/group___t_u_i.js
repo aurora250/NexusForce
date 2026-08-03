@@ -1,529 +1,501 @@
 var group___t_u_i =
 [
-    [ "easing", "namespaceeasing.html", null ],
-    [ "application", "classapplication.html", [
-      [ "quit", "classapplication.html#abf996be03856043c049a7217dde7fe25", null ],
-      [ "run", "classapplication.html#ac2f322c15c3ba05577cf5b8115a24a47", null ],
-      [ "with_component", "classapplication.html#a7a36bb3104fb5aa180695b7232ab2110", null ],
-      [ "with_fps", "classapplication.html#a8f56e6068ffc56da441e541252edf834", null ],
-      [ "with_theme", "classapplication.html#ad180bc91f9f5069cd056df4b98f32687", null ],
-      [ "with_title", "classapplication.html#a6ca026876273df948c83005223ab16f8", null ]
+    [ "用户组件", "group___components.html", "group___components" ],
+    [ "neforce::tui::easing", "namespaceneforce_1_1tui_1_1easing.html", null ],
+    [ "neforce::tui::application", "classneforce_1_1tui_1_1application.html", [
+      [ "quit", "classneforce_1_1tui_1_1application.html#acdff5e50f87c30dde16ae3f498f92eac", null ],
+      [ "run", "classneforce_1_1tui_1_1application.html#a8b420a217c571504c4e51f8c0b3df01e", null ],
+      [ "with_component", "classneforce_1_1tui_1_1application.html#a6fb526c83f93bc502761359af5a02e8a", null ],
+      [ "with_fps", "classneforce_1_1tui_1_1application.html#a81a2968450333214f259d5fadb591cf9", null ],
+      [ "with_theme", "classneforce_1_1tui_1_1application.html#a9c0a172996c7d1954ae3d13ab6c4c46c", null ],
+      [ "with_title", "classneforce_1_1tui_1_1application.html#a59b8657370c7bd71b59a85616a72e5f6", null ]
     ] ],
-    [ "animator", "classanimator.html", [
-      [ "animator", "classanimator.html#a3bbb018c090853d3edf90f6f16e80edd", null ],
-      [ "is_done", "classanimator.html#ab6aa59a2c2f5a75e19524594f159041a", null ],
-      [ "on_animation", "classanimator.html#a8215980735a193ecbb6d533c53628910", null ],
-      [ "reset", "classanimator.html#a5c02351cb06cc1257da2c037c7f7e278", null ],
-      [ "to", "classanimator.html#a4c0f4d5d5ad9ec4422d6e0d1f2228b65", null ]
+    [ "neforce::tui::animator", "classneforce_1_1tui_1_1animator.html", [
+      [ "animator", "classneforce_1_1tui_1_1animator.html#a0e1665971afa4ff939623f3a8b1b9054", null ],
+      [ "is_done", "classneforce_1_1tui_1_1animator.html#a913a626b7a6568acfab8d0c8bae97904", null ],
+      [ "on_animation", "classneforce_1_1tui_1_1animator.html#aa58074ca22f7940e3aa8e7eef25b2656", null ],
+      [ "reset", "classneforce_1_1tui_1_1animator.html#ae3787091c0b0b09fdc142ae0977263a1", null ],
+      [ "to", "classneforce_1_1tui_1_1animator.html#aad4601a8f375124e2572d4a1f99fa584", null ]
     ] ],
-    [ "empty_props", "structempty__props.html", null ],
-    [ "component_base", "classcomponent__base.html", [
-      [ "active", "classcomponent__base.html#a7a7bdc7bad126172b463155647e0e22a", null ],
-      [ "active_child", "classcomponent__base.html#ac772f2b3d153fd6a6679b7c77d22575d", null ],
-      [ "active_child", "classcomponent__base.html#a195ee0177f21046fef06bcae92303453", null ],
-      [ "add_child", "classcomponent__base.html#a6a9c513b610f4be12181b6b1ce2d610d", null ],
-      [ "child_at", "classcomponent__base.html#a153c76f2bf589f144c9328581185b30f", null ],
-      [ "child_count", "classcomponent__base.html#a1b3605dc876fa0d9915ac51562dbd7b0", null ],
-      [ "cleanup", "classcomponent__base.html#afbdc2cbd4a3d5596e4892d975daa7a8a", null ],
-      [ "context", "classcomponent__base.html#a866c4fa7c4a1ec77ce352ce9d0c76972", null ],
-      [ "detach", "classcomponent__base.html#aa86a55df3800279a87339a4a4e4fd47b", null ],
-      [ "detach_all_children", "classcomponent__base.html#ac6edc771dfac13ccf9a720d592419750", null ],
-      [ "focusable", "classcomponent__base.html#a813932efdd23d3f0b4667dd2106d7f68", null ],
-      [ "focused", "classcomponent__base.html#ae6eb5b681d73b91d0051e3d4114cfdfe", null ],
-      [ "has_focus", "classcomponent__base.html#a555684eb928f1b4457e86707c952340c", null ],
-      [ "index", "classcomponent__base.html#a60a958ec661e4a397ef584146fdf58c2", null ],
-      [ "on_animation", "classcomponent__base.html#a87f67c7eaba25f3c0a43ae24e16059fa", null ],
-      [ "on_key", "classcomponent__base.html#a00c288170716843e7cbf3b5690b74066", null ],
-      [ "on_mouse", "classcomponent__base.html#acb6549b214ae4c2bd980ecfd0f6d68c2", null ],
-      [ "on_mouse_leave", "classcomponent__base.html#ab2a4fd9f25a5dad4e792e2a6d9e95612", null ],
-      [ "parent", "classcomponent__base.html#a05d4ea71f561b9bb9ac27a8ef4b2636a", null ],
-      [ "pass_through", "classcomponent__base.html#ab3c6d3cc591f9336052a7c2c869fa2b7", null ],
-      [ "provide_context", "classcomponent__base.html#a1ff6fa5742995ffec8f10320b88d5659", null ],
-      [ "remove_child", "classcomponent__base.html#a2519cb1438917458b809302bb1b07726", null ],
-      [ "render", "classcomponent__base.html#a0f1d98a9ad1c325b085ff1e5cc39a4e6", null ],
-      [ "schedule_render", "classcomponent__base.html#a04e501f80aa495c4c10dcdd386f01725", null ],
-      [ "set_active_child", "classcomponent__base.html#a094410db57386b7a90cd9221e014a574", null ],
-      [ "set_has_focus", "classcomponent__base.html#aa84c4b4a99055cc660e347c0e6597909", null ],
-      [ "set_pass_through", "classcomponent__base.html#acd6c4af519a8239ffa518a4df07ce11d", null ],
-      [ "setup", "classcomponent__base.html#a9655dfc0c17dedb5cb7ea552df1b468d", null ],
-      [ "should_update", "classcomponent__base.html#ab3397de0e56c2f0ddf3c54bab9c74eed", null ],
-      [ "take_focus", "classcomponent__base.html#a1d0d9707b7b7158151bbe2083567ff92", null ],
-      [ "active_child_", "classcomponent__base.html#aaed311b7f5eb65add4663f503ff1f1d9", null ],
-      [ "children_", "classcomponent__base.html#a8626471799671bbbdcaf87ed486b8715", null ],
-      [ "ctx_", "classcomponent__base.html#a262ae55cca348a979c3de5124d023b84", null ],
-      [ "has_focus_", "classcomponent__base.html#af411e78d447212477ff9a33bccf9dd3e", null ],
-      [ "parent_", "classcomponent__base.html#af9e779640d660bd18d4facd4cf8afeaa", null ],
-      [ "pass_through_", "classcomponent__base.html#a106cc49fc9d8fc949318bb0dcfbdd94c", null ],
-      [ "strand_", "classcomponent__base.html#a869c80ee7ba78d370c447eeabdc4aee8", null ]
+    [ "neforce::tui::empty_props", "structneforce_1_1tui_1_1empty__props.html", null ],
+    [ "neforce::tui::component_base", "classneforce_1_1tui_1_1component__base.html", [
+      [ "active", "classneforce_1_1tui_1_1component__base.html#a31855b9fb899bf783ed3d12f17a53940", null ],
+      [ "active_child", "classneforce_1_1tui_1_1component__base.html#a40dd5704371529d5a3080807b2ff927d", null ],
+      [ "active_child", "classneforce_1_1tui_1_1component__base.html#a1417df6a96170278ccae50d47c86db57", null ],
+      [ "add_child", "classneforce_1_1tui_1_1component__base.html#a0226d7a0b3784f2cbff7e6ec8f87e4fe", null ],
+      [ "child_at", "classneforce_1_1tui_1_1component__base.html#ac2d0059d4d48b0522fd7c1ffde7b9b66", null ],
+      [ "child_count", "classneforce_1_1tui_1_1component__base.html#ac00c6d3259dceb08c4dc4e6aaa0a1ef0", null ],
+      [ "cleanup", "classneforce_1_1tui_1_1component__base.html#ae75c976b0eec61ec50ae985cc8656aff", null ],
+      [ "context", "classneforce_1_1tui_1_1component__base.html#abb6caddef954ff9b2998cd9562a85490", null ],
+      [ "detach", "classneforce_1_1tui_1_1component__base.html#acca399f5c1e6fe6c3135db87b8ae71c2", null ],
+      [ "detach_all_children", "classneforce_1_1tui_1_1component__base.html#acc6779e6eb699d9287b3ab1d2275e289", null ],
+      [ "focusable", "classneforce_1_1tui_1_1component__base.html#a80de146cd35df1c867722d78eb0fae4d", null ],
+      [ "focused", "classneforce_1_1tui_1_1component__base.html#a963e0c1e213b62414651c6b3c3b3fc88", null ],
+      [ "has_focus", "classneforce_1_1tui_1_1component__base.html#a5a41bc0181e5ad936a1390c1ff2ffd03", null ],
+      [ "index", "classneforce_1_1tui_1_1component__base.html#a5342dbc7ef88ce2d6de50086b0e5db6f", null ],
+      [ "on_animation", "classneforce_1_1tui_1_1component__base.html#a81fa01cfe5b19e0b72b99393e4bd147c", null ],
+      [ "on_key", "classneforce_1_1tui_1_1component__base.html#a0b25da364ce75e255497611c8cf02f92", null ],
+      [ "on_mouse", "classneforce_1_1tui_1_1component__base.html#af4bfaddd53a497fb4e64367c01eecb63", null ],
+      [ "on_mouse_leave", "classneforce_1_1tui_1_1component__base.html#a82ce416c23877065fa4c353f76c8b935", null ],
+      [ "parent", "classneforce_1_1tui_1_1component__base.html#ac948e4367be25aa197105e4972760922", null ],
+      [ "pass_through", "classneforce_1_1tui_1_1component__base.html#a296c0a23e06b886a60e78af7ea3aaf35", null ],
+      [ "provide_context", "classneforce_1_1tui_1_1component__base.html#a5e0cd2ed9e7c1ccb0a7360476f66f39a", null ],
+      [ "remove_child", "classneforce_1_1tui_1_1component__base.html#aa99564aa3133a592d13e3e7751b229c7", null ],
+      [ "render", "classneforce_1_1tui_1_1component__base.html#a2041f66a3c35966be31037e991abd5fb", null ],
+      [ "schedule_render", "classneforce_1_1tui_1_1component__base.html#a8768fd357a3ebc8e3a113fa6168be502", null ],
+      [ "set_active_child", "classneforce_1_1tui_1_1component__base.html#a1fc6ce924b5303ac76813806c1da6760", null ],
+      [ "set_has_focus", "classneforce_1_1tui_1_1component__base.html#ad7e2f2c27c22aea35c6c57d8e5456588", null ],
+      [ "set_pass_through", "classneforce_1_1tui_1_1component__base.html#a44b29970061a6bb03ce1b0146fb16826", null ],
+      [ "setup", "classneforce_1_1tui_1_1component__base.html#a736db56c7d8740e70b2be1d8bfef8636", null ],
+      [ "should_update", "classneforce_1_1tui_1_1component__base.html#af5053f5d794fbe69c00b543050ab1130", null ],
+      [ "take_focus", "classneforce_1_1tui_1_1component__base.html#a22adbe654da678fcea385b372d3bcd97", null ],
+      [ "active_child_", "classneforce_1_1tui_1_1component__base.html#a80aebfa7eef650cacfe5d0e61af1a9f1", null ],
+      [ "children_", "classneforce_1_1tui_1_1component__base.html#aefbcc973f77793bd823ec79c300dc5df", null ],
+      [ "ctx_", "classneforce_1_1tui_1_1component__base.html#aa810dd5d278dc8c9a1e2cb152dd87372", null ],
+      [ "has_focus_", "classneforce_1_1tui_1_1component__base.html#a876201a2059b279844047e8944bb5a61", null ],
+      [ "parent_", "classneforce_1_1tui_1_1component__base.html#a2ad426ec8797c7ab855840eda6991ae3", null ],
+      [ "pass_through_", "classneforce_1_1tui_1_1component__base.html#a676128402c69a9488e3f52193d70534d", null ],
+      [ "strand_", "classneforce_1_1tui_1_1component__base.html#a08878b052b4c79a6ac0e12b2dfb23230", null ]
     ] ],
-    [ "component&lt; P &gt;", "classcomponent.html", [
-      [ "create_state", "classcomponent.html#a4534e70ac9076d04afc2f9d01f994203", null ],
-      [ "props", "classcomponent.html#a7e3457b57a085cb1f633c56962fefdf4", null ],
-      [ "set_props", "classcomponent.html#a49013b0b3a1c81d97eeaff3bf5882fc2", null ]
+    [ "neforce::tui::component&lt; P &gt;", "classneforce_1_1tui_1_1component.html", [
+      [ "create_state", "classneforce_1_1tui_1_1component.html#a0540fb1322c8fc3f88111db665a1c255", null ],
+      [ "props", "classneforce_1_1tui_1_1component.html#ae4ed9f892a8068578594bfdfe8459c06", null ],
+      [ "set_props", "classneforce_1_1tui_1_1component.html#abfd67f5702ea0df954421251f6be3041", null ]
     ] ],
-    [ "container", "structcontainer.html", null ],
-    [ "dropdown_option", "structdropdown__option.html", [
-      [ "entries", "structdropdown__option.html#a4dd46f444809d7d9b21e909fa39b0d37", null ],
-      [ "on_change", "structdropdown__option.html#afc5df7509f811702e6a2030c3f3dba33", null ],
-      [ "open", "structdropdown__option.html#ad77154d4b70060a0a474069599b78a30", null ],
-      [ "selected", "structdropdown__option.html#ad68c198266cd315e9462e979e4fd33ec", null ]
-    ] ],
-    [ "menu_option", "structmenu__option.html", [
-      [ "entries", "structmenu__option.html#ad4040639862ab1e62ddc76ea5841e49e", null ],
-      [ "focused_style", "structmenu__option.html#a8f01bbc6c3587df738920dbc3c440d87", null ],
-      [ "horizontal", "structmenu__option.html#aed1ba7dab2ce5ccfeccd6e6d3262c910", null ],
-      [ "normal_style", "structmenu__option.html#a1a5af0b473972a3b44131ddea18b6e3b", null ],
-      [ "on_change", "structmenu__option.html#aeb3ba8920a00c4b3f5edd78157632e24", null ],
-      [ "on_enter", "structmenu__option.html#a0fcf072430962152068515591f27cf6b", null ],
-      [ "selected", "structmenu__option.html#aea8c38e33cb7dfe279f385a0fe763dc3", null ]
-    ] ],
-    [ "radiobox_option", "structradiobox__option.html", [
-      [ "entries", "structradiobox__option.html#a659520fae6d7f19ed8e677df7fb5233d", null ],
-      [ "on_change", "structradiobox__option.html#aa7156a1a401cc0d0f9623dae3fcc32be", null ],
-      [ "selected", "structradiobox__option.html#a9f62182a9a1858047b8c42b2cdab7f83", null ]
-    ] ],
-    [ "scroll_view_option", "structscroll__view__option.html", [
-      [ "content", "structscroll__view__option.html#a5846104e2a831fb48e7f74cac96c58c6", null ],
-      [ "style", "structscroll__view__option.html#a6cb416f9f3950322fe36cc870f436f9a", null ]
-    ] ],
-    [ "slider_options", "structslider__options.html", null ],
-    [ "text_input_option", "structtext__input__option.html", [
-      [ "on_enter", "structtext__input__option.html#a515b303d1c6de596ad9523fa6f271b6c", null ],
-      [ "placeholder", "structtext__input__option.html#aea3dacf80dfd7b0205080555f06e3a53", null ],
-      [ "style", "structtext__input__option.html#a4889526028203044139aef64751a522b", null ],
-      [ "text", "structtext__input__option.html#a859b7efad69e87e69cf2cbfe492ddaa4", null ],
-      [ "wrap", "structtext__input__option.html#a2eb20953bfce10faecb8b7b1c5598357", null ]
-    ] ],
-    [ "toggle_option", "structtoggle__option.html", [
-      [ "entries", "structtoggle__option.html#ac603d1d0ca9d2e0866343e6c7d6c54c8", null ],
-      [ "horizontal", "structtoggle__option.html#a57550ff3606ebbb15c59ed63a990dfdb", null ],
-      [ "on_change", "structtoggle__option.html#a25aa5c84df6da5b2406792479ef6912f", null ],
-      [ "selected", "structtoggle__option.html#a2459a4a513f2c9d452898bb15eb605aa", null ]
-    ] ],
-    [ "window_options", "structwindow__options.html", [
-      [ "render_state", "structwindow__options_1_1render__state.html", [
-        [ "active", "structwindow__options_1_1render__state.html#ab56517657293a288eb0cc79d446619d8", null ],
-        [ "drag", "structwindow__options_1_1render__state.html#aa84e0cb5de4883a93f6b8d7cab26e032", null ],
-        [ "inner", "structwindow__options_1_1render__state.html#a67224ac1debade386c7819f2ef745bd1", null ],
-        [ "resize", "structwindow__options_1_1render__state.html#aeb793f71f29c2c89752af39631035a7a", null ],
-        [ "title", "structwindow__options_1_1render__state.html#a10d2828819951faf63de4fe8e55bd440", null ]
+    [ "neforce::tui::element", "classneforce_1_1tui_1_1element.html", [
+      [ "kind", "classneforce_1_1tui_1_1element.html#a8b48d9af775337c0a2b1ff24f82b9242", [
+        [ "empty", "classneforce_1_1tui_1_1element.html#a8b48d9af775337c0a2b1ff24f82b9242aa2e4822a98337283e39f7b60acf85ec9", null ],
+        [ "vbox", "classneforce_1_1tui_1_1element.html#a8b48d9af775337c0a2b1ff24f82b9242afad9b4ea6fda50ab90f21ab8d4b6b70c", null ],
+        [ "hbox", "classneforce_1_1tui_1_1element.html#a8b48d9af775337c0a2b1ff24f82b9242a3d85a8c42a57d5fc2496061270e2352d", null ],
+        [ "zstack", "classneforce_1_1tui_1_1element.html#a8b48d9af775337c0a2b1ff24f82b9242a0c137be244ebcbb621ab70cf2990ac15", null ],
+        [ "text", "classneforce_1_1tui_1_1element.html#a8b48d9af775337c0a2b1ff24f82b9242a1cb251ec0d568de6a929b520c4aed8d1", null ],
+        [ "spacer", "classneforce_1_1tui_1_1element.html#a8b48d9af775337c0a2b1ff24f82b9242adddd37dfc736f0674611c500f7f82bbd", null ],
+        [ "separator", "classneforce_1_1tui_1_1element.html#a8b48d9af775337c0a2b1ff24f82b9242aa0f0bc95016c862498bbad29d1f4d9d4", null ],
+        [ "button", "classneforce_1_1tui_1_1element.html#a8b48d9af775337c0a2b1ff24f82b9242ace50a09343724eb82df11390e2c1de18", null ],
+        [ "text_input", "classneforce_1_1tui_1_1element.html#a8b48d9af775337c0a2b1ff24f82b9242ae1ba83437c55caa1b29b1d3228f2591a", null ],
+        [ "checkbox", "classneforce_1_1tui_1_1element.html#a8b48d9af775337c0a2b1ff24f82b9242a9fced129522f128b2445a41fb0b6ef9f", null ],
+        [ "scroll_view", "classneforce_1_1tui_1_1element.html#a8b48d9af775337c0a2b1ff24f82b9242acbe37624b189158daf38db177cd53324", null ],
+        [ "canvas", "classneforce_1_1tui_1_1element.html#a8b48d9af775337c0a2b1ff24f82b9242afcc790c72a86190de1b549d0ddc6f55c", null ],
+        [ "when", "classneforce_1_1tui_1_1element.html#a8b48d9af775337c0a2b1ff24f82b9242adf491a4de50739fa9cffdbd4e3f4b4bb", null ],
+        [ "each", "classneforce_1_1tui_1_1element.html#a8b48d9af775337c0a2b1ff24f82b9242a933dd8674c563081260867dfa95b5e74", null ],
+        [ "flexbox", "classneforce_1_1tui_1_1element.html#a8b48d9af775337c0a2b1ff24f82b9242a7f3d565c67f89f27a31d03d795b41530", null ],
+        [ "gridbox", "classneforce_1_1tui_1_1element.html#a8b48d9af775337c0a2b1ff24f82b9242a695c8ad88359bae9ccfa9053c2f122cb", null ]
       ] ],
-      [ "height", "structwindow__options.html#a2eebd72767f6d58796acd4d35bd545f1", null ],
-      [ "inner", "structwindow__options.html#a3269bcfb2c735532b1ca2896c92b972e", null ],
-      [ "left", "structwindow__options.html#aca02a26763d1ec1e3145b1552d5b808f", null ],
-      [ "render", "structwindow__options.html#ad345b9dc98022fbea2b77c2d59ad376d", null ],
-      [ "title", "structwindow__options.html#ae484b708a5d03819ea51e2b5c77978b7", null ],
-      [ "top", "structwindow__options.html#ac4eccb7dc20e9206dcfa36554711996c", null ],
-      [ "width", "structwindow__options.html#a93f24046f7bd2cb50d92c0fdf8d0c16c", null ]
+      [ "with_key", "classneforce_1_1tui_1_1element.html#a994dd8ff3a64faa523bb5291d3439cb4", null ],
+      [ "with_style", "classneforce_1_1tui_1_1element.html#a249f15c943fb257ddb8bf23b41c0b631", null ]
     ] ],
-    [ "element", "classelement.html", [
-      [ "kind", "classelement.html#ae3b4aaf2c62b324301af48441ecf07bc", [
-        [ "empty", "classelement.html#ae3b4aaf2c62b324301af48441ecf07bcaa2e4822a98337283e39f7b60acf85ec9", null ],
-        [ "vbox", "classelement.html#ae3b4aaf2c62b324301af48441ecf07bcafad9b4ea6fda50ab90f21ab8d4b6b70c", null ],
-        [ "hbox", "classelement.html#ae3b4aaf2c62b324301af48441ecf07bca3d85a8c42a57d5fc2496061270e2352d", null ],
-        [ "zstack", "classelement.html#ae3b4aaf2c62b324301af48441ecf07bca0c137be244ebcbb621ab70cf2990ac15", null ],
-        [ "text", "classelement.html#ae3b4aaf2c62b324301af48441ecf07bca1cb251ec0d568de6a929b520c4aed8d1", null ],
-        [ "spacer", "classelement.html#ae3b4aaf2c62b324301af48441ecf07bcadddd37dfc736f0674611c500f7f82bbd", null ],
-        [ "separator", "classelement.html#ae3b4aaf2c62b324301af48441ecf07bcaa0f0bc95016c862498bbad29d1f4d9d4", null ],
-        [ "button", "classelement.html#ae3b4aaf2c62b324301af48441ecf07bcace50a09343724eb82df11390e2c1de18", null ],
-        [ "text_input", "classelement.html#ae3b4aaf2c62b324301af48441ecf07bcae1ba83437c55caa1b29b1d3228f2591a", null ],
-        [ "checkbox", "classelement.html#ae3b4aaf2c62b324301af48441ecf07bca9fced129522f128b2445a41fb0b6ef9f", null ],
-        [ "scroll_view", "classelement.html#ae3b4aaf2c62b324301af48441ecf07bcacbe37624b189158daf38db177cd53324", null ],
-        [ "canvas", "classelement.html#ae3b4aaf2c62b324301af48441ecf07bcafcc790c72a86190de1b549d0ddc6f55c", null ],
-        [ "when", "classelement.html#ae3b4aaf2c62b324301af48441ecf07bcadf491a4de50739fa9cffdbd4e3f4b4bb", null ],
-        [ "each", "classelement.html#ae3b4aaf2c62b324301af48441ecf07bca933dd8674c563081260867dfa95b5e74", null ],
-        [ "flexbox", "classelement.html#ae3b4aaf2c62b324301af48441ecf07bca7f3d565c67f89f27a31d03d795b41530", null ],
-        [ "gridbox", "classelement.html#ae3b4aaf2c62b324301af48441ecf07bca695c8ad88359bae9ccfa9053c2f122cb", null ]
+    [ "neforce::tui::layout_rect", "structneforce_1_1tui_1_1layout__rect.html", [
+      [ "h", "structneforce_1_1tui_1_1layout__rect.html#affa90a8ee5888e8f0ae35b043abbc0e7", null ],
+      [ "w", "structneforce_1_1tui_1_1layout__rect.html#ab6100b7573df2e840d70d956c1a15beb", null ],
+      [ "x", "structneforce_1_1tui_1_1layout__rect.html#a1f6cc7d6cf61a70f5d536b31a75a9b00", null ],
+      [ "y", "structneforce_1_1tui_1_1layout__rect.html#a5b45886ee3e1ee6ab0f291683744b384", null ]
+    ] ],
+    [ "neforce::tui::linear_gradient", "structneforce_1_1tui_1_1linear__gradient.html", [
+      [ "linear_gradient", "structneforce_1_1tui_1_1linear__gradient.html#a820858ddee37bab8131c9b6557b7d25e", null ],
+      [ "linear_gradient", "structneforce_1_1tui_1_1linear__gradient.html#a5e4fc68a47cbe9113ceb0b0b29a4ab39", null ],
+      [ "add_stop", "structneforce_1_1tui_1_1linear__gradient.html#a2fda38009b435b0b7377427e4cf90dca", null ],
+      [ "angle", "structneforce_1_1tui_1_1linear__gradient.html#a8074b6856a65e56085f463a321fb357d", null ],
+      [ "sample", "structneforce_1_1tui_1_1linear__gradient.html#aab109a2d388d1783c58ac061985ccace", null ]
+    ] ],
+    [ "neforce::tui::ref&lt; T &gt;", "classneforce_1_1tui_1_1ref.html", [
+      [ "ref", "classneforce_1_1tui_1_1ref.html#a1272276ab26e3f8ecb02b4d1a954827d", null ],
+      [ "ref", "classneforce_1_1tui_1_1ref.html#a2bd73c0a8e5cf4711251b25443b58893", null ],
+      [ "ref", "classneforce_1_1tui_1_1ref.html#a28836b6528be92ffac81b6df48d2e978", null ],
+      [ "holds_pointer", "classneforce_1_1tui_1_1ref.html#a9cee0e6339bd3f1105aaf4a05ac185b1", null ],
+      [ "operator*", "classneforce_1_1tui_1_1ref.html#aa94bbab1b9f45a9f561c890ca671f6a3", null ],
+      [ "operator*", "classneforce_1_1tui_1_1ref.html#a63287b5b7d1201774e0f0db4ee862ce3", null ],
+      [ "operator->", "classneforce_1_1tui_1_1ref.html#a9fc8fe3a307ef56138f13c84b8060a90", null ],
+      [ "operator->", "classneforce_1_1tui_1_1ref.html#a65f4eb05b917b6da51ef690d06383ba9", null ],
+      [ "operator=", "classneforce_1_1tui_1_1ref.html#a85e23f87ff5aeb40fe213179cc586684", null ]
+    ] ],
+    [ "neforce::tui::const_ref&lt; T &gt;", "classneforce_1_1tui_1_1const__ref.html", [
+      [ "const_ref", "classneforce_1_1tui_1_1const__ref.html#a0d8735eac205fddba57802d487913d8c", null ],
+      [ "const_ref", "classneforce_1_1tui_1_1const__ref.html#a4ce922ffe892d43ef10bf413e0979ec5", null ],
+      [ "const_ref", "classneforce_1_1tui_1_1const__ref.html#af82a8c7de43496228269efd34bfe4c95", null ],
+      [ "holds_pointer", "classneforce_1_1tui_1_1const__ref.html#a785b319780678cdc6397e038fa5e0479", null ],
+      [ "operator()", "classneforce_1_1tui_1_1const__ref.html#a8082ae42758560e7d88fe06e150a8dea", null ],
+      [ "operator*", "classneforce_1_1tui_1_1const__ref.html#a2439864bcd590fe4ec537043f13ed8fc", null ],
+      [ "operator->", "classneforce_1_1tui_1_1const__ref.html#a549a625975792cc9ebbcffe214319050", null ]
+    ] ],
+    [ "neforce::tui::string_ref", "classneforce_1_1tui_1_1string__ref.html", [
+      [ "string_ref", "classneforce_1_1tui_1_1string__ref.html#a9012fc729b8d62c25c91470f532ea2e9", null ],
+      [ "string_ref", "classneforce_1_1tui_1_1string__ref.html#afa0159be6be893d951dde192461f392f", null ],
+      [ "string_ref", "classneforce_1_1tui_1_1string__ref.html#a8c5eca480d0c62afa8aa0cc0701f736a", null ]
+    ] ],
+    [ "neforce::tui::const_string_ref", "classneforce_1_1tui_1_1const__string__ref.html", [
+      [ "const_string_ref", "classneforce_1_1tui_1_1const__string__ref.html#a70771127ed0f1842dc31ecedee71f446", null ],
+      [ "const_string_ref", "classneforce_1_1tui_1_1const__string__ref.html#a59dcc8c0e29e3e95387eab4fbf74ca0a", null ]
+    ] ],
+    [ "neforce::tui::state&lt; T &gt;", "classneforce_1_1tui_1_1state.html", [
+      [ "changed_signal", "classneforce_1_1tui_1_1state.html#aa1cc59eb60bf17a577c88556254bcb51", null ],
+      [ "state", "classneforce_1_1tui_1_1state.html#ad56513dd4b154384f7682bb231519d9d", null ],
+      [ "modify", "classneforce_1_1tui_1_1state.html#ac05bea4d70173264afb175af4f67e8c9", null ],
+      [ "notify", "classneforce_1_1tui_1_1state.html#afa3ee274572ebe8bd4920877a69a9e14", null ],
+      [ "on_change", "classneforce_1_1tui_1_1state.html#a29ca0b1cb2e43a530b232a0f1ec1a4f0", null ],
+      [ "operator*", "classneforce_1_1tui_1_1state.html#a7b1273602302a585f64bacafe8f414e1", null ],
+      [ "operator->", "classneforce_1_1tui_1_1state.html#a90d2ab3bb8a7a07a0b114628cc34988d", null ],
+      [ "operator=", "classneforce_1_1tui_1_1state.html#a340e5d495eb55c7b1c63d185aa665ebd", null ],
+      [ "set_quiet", "classneforce_1_1tui_1_1state.html#ab646b6a660395abafd71b2d9f9c584c6", null ],
+      [ "value", "classneforce_1_1tui_1_1state.html#aa5be2401ab365c9115092b9af58b1bc4", null ]
+    ] ],
+    [ "neforce::tui::style", "structneforce_1_1tui_1_1style.html", [
+      [ "padding", "structneforce_1_1tui_1_1style_1_1padding.html", [
+        [ "bottom", "structneforce_1_1tui_1_1style_1_1padding.html#a2e27ea9b05294ecb6e660a3e73fe7a8f", null ],
+        [ "left", "structneforce_1_1tui_1_1style_1_1padding.html#a6fdba96e6964c6335cd9932d963fc649", null ],
+        [ "right", "structneforce_1_1tui_1_1style_1_1padding.html#afd55bd0c7de6930b5a8e5282a57619c1", null ],
+        [ "top", "structneforce_1_1tui_1_1style_1_1padding.html#afc5810469fbeaaaba4bfd22622ebb6a9", null ]
       ] ],
-      [ "with_key", "classelement.html#a264d8ba88bfdaeab07f717750bfc796a", null ],
-      [ "with_style", "classelement.html#ac51f0415ffa363f443e9edba266172d9", null ]
-    ] ],
-    [ "layout_rect", "structlayout__rect.html", [
-      [ "h", "structlayout__rect.html#a03e2edc82194f2a424b8bd428f8cbdbe", null ],
-      [ "w", "structlayout__rect.html#a59162184b978e1a5ce5b366da21b61a7", null ],
-      [ "x", "structlayout__rect.html#aa8c128b212f9d38e780bb6af834faefa", null ],
-      [ "y", "structlayout__rect.html#aad863296d1efc048c79123d4fdcb66ac", null ]
-    ] ],
-    [ "linear_gradient", "structlinear__gradient.html", [
-      [ "linear_gradient", "structlinear__gradient.html#a222b8ee3273585de66200398950088f9", null ],
-      [ "linear_gradient", "structlinear__gradient.html#a76ce7632d3fd0e14d393274de514a861", null ],
-      [ "add_stop", "structlinear__gradient.html#ae22cfe3c9e5f87299d52bffb8ca89544", null ],
-      [ "angle", "structlinear__gradient.html#aecbd494065ad5a0d357048e75f30ffd0", null ],
-      [ "sample", "structlinear__gradient.html#a5f11aa0b6add170fecd52c2f159004dc", null ]
-    ] ],
-    [ "ref&lt; T &gt;", "classref.html", [
-      [ "ref", "classref.html#a32c2f3c2bde5b57e6ef0a80254773854", null ],
-      [ "ref", "classref.html#ac905b2a0632b2e114c36d7c962e7caf1", null ],
-      [ "ref", "classref.html#ac593e903c13a8dfe520978053ac4b319", null ],
-      [ "holds_pointer", "classref.html#a22d79c5bddda3b24f7169753689468cf", null ],
-      [ "operator*", "classref.html#a307c496c6ac82c4132582dfc9d545349", null ],
-      [ "operator*", "classref.html#a5d485bbaee57e7887060c7d19ae2064f", null ],
-      [ "operator->", "classref.html#aeb97180bc4398ac46a312689a14bf216", null ],
-      [ "operator->", "classref.html#a1ebcbe6d3266d5c74e85287f04930fda", null ],
-      [ "operator=", "classref.html#a4c36de029b3474683f9cbdda6c4115e2", null ]
-    ] ],
-    [ "const_ref&lt; T &gt;", "classconst__ref.html", [
-      [ "const_ref", "classconst__ref.html#a3e171185d315531ff378bffcb1748d69", null ],
-      [ "const_ref", "classconst__ref.html#a8c620219fe683f03443c258a23cfbb5a", null ],
-      [ "const_ref", "classconst__ref.html#aa16b04ef02208825b141b2901ec26ce0", null ],
-      [ "holds_pointer", "classconst__ref.html#a4623a76979a7a2e7cb16f1cdcffbffc9", null ],
-      [ "operator()", "classconst__ref.html#a2509312978e10b7e2fd6fbc1f34e50c9", null ],
-      [ "operator*", "classconst__ref.html#abe2e6ae1f6956458d5e7921d156b8309", null ],
-      [ "operator->", "classconst__ref.html#a8afe19f12471c48a44ceb80b07564154", null ]
-    ] ],
-    [ "string_ref", "classstring__ref.html", [
-      [ "string_ref", "classstring__ref.html#ac6b1164bf89662d5079fb3a243c0e226", null ],
-      [ "string_ref", "classstring__ref.html#a5d63026100400f29e7acacf15c0026bb", null ],
-      [ "string_ref", "classstring__ref.html#ad8ce0d241d04c64cefde696793ef6d46", null ]
-    ] ],
-    [ "const_string_ref", "classconst__string__ref.html", [
-      [ "const_string_ref", "classconst__string__ref.html#a37fb18f879e1ceabc8481bef285d77ef", null ],
-      [ "const_string_ref", "classconst__string__ref.html#a59d9d4a824dd372327f5ac1c3f1d020b", null ]
-    ] ],
-    [ "state&lt; T &gt;", "classstate.html", [
-      [ "changed_signal", "classstate.html#a3f8e61cbd9d16e28ccb19d4c93b6d5fd", null ],
-      [ "state", "classstate.html#a3226671639d654fc1cd77a7affba6f59", null ],
-      [ "modify", "classstate.html#aaba8ecf986464ac7fad35767fb7cf080", null ],
-      [ "notify", "classstate.html#ac2d076a9aec39c8f371185475df3965d", null ],
-      [ "on_change", "classstate.html#a7178235c90a19d868b7be6726e6af218", null ],
-      [ "operator*", "classstate.html#aeed3b323b8656d82015b97055c8eb30f", null ],
-      [ "operator->", "classstate.html#a7e309dba55b1332ce04c313cc42b1b12", null ],
-      [ "operator=", "classstate.html#a6e0fd6bab772ac3c9528ebd536f753e6", null ],
-      [ "set_quiet", "classstate.html#a5b85ecf5af4eb288977d8e911a34b6c4", null ],
-      [ "value", "classstate.html#adbbb129cd3257b53ff932dddefb1a5fc", null ]
-    ] ],
-    [ "style", "structstyle.html", [
-      [ "padding", "structstyle_1_1padding.html", [
-        [ "bottom", "structstyle_1_1padding.html#a9d8db930cc368ad6b0c51c16dc8edf8d", null ],
-        [ "left", "structstyle_1_1padding.html#acce22cda74f0c466ccc5eb69e933aa27", null ],
-        [ "right", "structstyle_1_1padding.html#ae4116961109c96c4400b176c4629875a", null ],
-        [ "top", "structstyle_1_1padding.html#a2a843f2c18f7c709439406eb0fdc35d1", null ]
+      [ "margin", "structneforce_1_1tui_1_1style_1_1margin.html", [
+        [ "bottom", "structneforce_1_1tui_1_1style_1_1margin.html#a693115bad3a1145002da03e8b7b7df03", null ],
+        [ "left", "structneforce_1_1tui_1_1style_1_1margin.html#a7902a5a92f1ef82b640a50f7e6da58b4", null ],
+        [ "right", "structneforce_1_1tui_1_1style_1_1margin.html#ae5f9c8f583e51020168072460181ac86", null ],
+        [ "top", "structneforce_1_1tui_1_1style_1_1margin.html#a8cfc24f5667c43f56a56df55b72f7bd4", null ]
       ] ],
-      [ "margin", "structstyle_1_1margin.html", [
-        [ "bottom", "structstyle_1_1margin.html#a9bd7748467e6cfa7eb4e007d43b45fad", null ],
-        [ "left", "structstyle_1_1margin.html#a510e493ded516e03093ae5874a2bd006", null ],
-        [ "right", "structstyle_1_1margin.html#adb1db38f2e2e164ea3cd189f90c25171", null ],
-        [ "top", "structstyle_1_1margin.html#a9d9515a9a47abc91d2fdc300b1569980", null ]
-      ] ],
-      [ "size_hint", "structstyle_1_1size__hint.html", [
-        [ "size_mode", "structstyle_1_1size__hint.html#afc341841b118eebd23bb9c3043831473", [
-          [ "auto_", "structstyle_1_1size__hint.html#afc341841b118eebd23bb9c3043831473aeea39ab1d397e54b802e72ea52657dab", null ],
-          [ "fixed", "structstyle_1_1size__hint.html#afc341841b118eebd23bb9c3043831473a55c630fdebc00c8efcfa7db21b148665", null ],
-          [ "fill", "structstyle_1_1size__hint.html#afc341841b118eebd23bb9c3043831473a4b400660b463aa677ec80925fe0b25e9", null ],
-          [ "percent", "structstyle_1_1size__hint.html#afc341841b118eebd23bb9c3043831473a1af13c736a039ab9ac73b14eeaa339e9", null ]
+      [ "size_hint", "structneforce_1_1tui_1_1style_1_1size__hint.html", [
+        [ "size_mode", "structneforce_1_1tui_1_1style_1_1size__hint.html#abd41635e003e1afd1da262c9dc5406e6", [
+          [ "auto_", "structneforce_1_1tui_1_1style_1_1size__hint.html#abd41635e003e1afd1da262c9dc5406e6a64ffa032e7e161fdedf56a37c392ce1d", null ],
+          [ "fixed", "structneforce_1_1tui_1_1style_1_1size__hint.html#abd41635e003e1afd1da262c9dc5406e6a9cb5846e310a102d282026e9ca784433", null ],
+          [ "fill", "structneforce_1_1tui_1_1style_1_1size__hint.html#abd41635e003e1afd1da262c9dc5406e6acd8533d47ac24d9f9bfd839e7d7c91be", null ],
+          [ "percent", "structneforce_1_1tui_1_1style_1_1size__hint.html#abd41635e003e1afd1da262c9dc5406e6ab4535b1c93e227473d18f23fedf56efa", null ]
         ] ],
-        [ "mode", "structstyle_1_1size__hint.html#a909955885733750d29253affc50596e5", null ],
-        [ "value", "structstyle_1_1size__hint.html#aaae209ecb30206dc5ac561001d0b1be1", null ]
+        [ "mode", "structneforce_1_1tui_1_1style_1_1size__hint.html#a01948d129bbe86edbaf34777aa3e16b6", null ],
+        [ "value", "structneforce_1_1tui_1_1style_1_1size__hint.html#af7fe9e8268b1976f6f8291c5c4712560", null ]
       ] ],
-      [ "align", "structstyle.html#a8492e9695f7d43b85efe1f3f215b3336", [
-        [ "start", "structstyle.html#a8492e9695f7d43b85efe1f3f215b3336aea2b2676c28c0db26d39331a336c6b92", null ],
-        [ "center", "structstyle.html#a8492e9695f7d43b85efe1f3f215b3336aadb115059e28d960fa8badfac5516667", null ],
-        [ "end", "structstyle.html#a8492e9695f7d43b85efe1f3f215b3336a7f021a1415b86f2d013b2618fb31ae53", null ],
-        [ "stretch", "structstyle.html#a8492e9695f7d43b85efe1f3f215b3336a7e84944493e379c33782eb1c9ecb82c3", null ]
+      [ "align", "structneforce_1_1tui_1_1style.html#a1748e1bc1c7db9d9fe5a2678d0825f61", [
+        [ "start", "structneforce_1_1tui_1_1style.html#a1748e1bc1c7db9d9fe5a2678d0825f61aea2b2676c28c0db26d39331a336c6b92", null ],
+        [ "center", "structneforce_1_1tui_1_1style.html#a1748e1bc1c7db9d9fe5a2678d0825f61aadb115059e28d960fa8badfac5516667", null ],
+        [ "end", "structneforce_1_1tui_1_1style.html#a1748e1bc1c7db9d9fe5a2678d0825f61a7f021a1415b86f2d013b2618fb31ae53", null ],
+        [ "stretch", "structneforce_1_1tui_1_1style.html#a1748e1bc1c7db9d9fe5a2678d0825f61a7e84944493e379c33782eb1c9ecb82c3", null ]
       ] ],
-      [ "border", "structstyle.html#ae88cb9941be72e4e00568ad4da72e921", [
-        [ "none", "structstyle.html#ae88cb9941be72e4e00568ad4da72e921a334c4a4c42fdb79d7ebc3e73b517e6f8", null ],
-        [ "single", "structstyle.html#ae88cb9941be72e4e00568ad4da72e921add5c07036f2975ff4bce568b6511d3bc", null ],
-        [ "double_", "structstyle.html#ae88cb9941be72e4e00568ad4da72e921a9ff848d203d671e297c98886f9fc0bd9", null ],
-        [ "rounded", "structstyle.html#ae88cb9941be72e4e00568ad4da72e921a990fcd0ba3c5c9e322c930c83a93be48", null ]
+      [ "border", "structneforce_1_1tui_1_1style.html#ae5c8f68a549e01b1532413beb6969b41", [
+        [ "none", "structneforce_1_1tui_1_1style.html#ae5c8f68a549e01b1532413beb6969b41a334c4a4c42fdb79d7ebc3e73b517e6f8", null ],
+        [ "single", "structneforce_1_1tui_1_1style.html#ae5c8f68a549e01b1532413beb6969b41add5c07036f2975ff4bce568b6511d3bc", null ],
+        [ "double_", "structneforce_1_1tui_1_1style.html#ae5c8f68a549e01b1532413beb6969b41a9ff848d203d671e297c98886f9fc0bd9", null ],
+        [ "rounded", "structneforce_1_1tui_1_1style.html#ae5c8f68a549e01b1532413beb6969b41a990fcd0ba3c5c9e322c930c83a93be48", null ]
       ] ],
-      [ "direction", "structstyle.html#a8c4d980eea41354804370994c1cb70da", [
-        [ "row", "structstyle.html#a8c4d980eea41354804370994c1cb70daaf1965a857bc285d26fe22023aa5ab50d", null ],
-        [ "column", "structstyle.html#a8c4d980eea41354804370994c1cb70daa1afd32818d1c9525f82aff4c09efd254", null ]
+      [ "direction", "structneforce_1_1tui_1_1style.html#a194151bb3049cfbbf7db04d1320395d2", [
+        [ "row", "structneforce_1_1tui_1_1style.html#a194151bb3049cfbbf7db04d1320395d2af1965a857bc285d26fe22023aa5ab50d", null ],
+        [ "column", "structneforce_1_1tui_1_1style.html#a194151bb3049cfbbf7db04d1320395d2a1afd32818d1c9525f82aff4c09efd254", null ]
       ] ],
-      [ "justify", "structstyle.html#a88aecb781cfd4f95f62a4ae92f6e0e30", [
-        [ "start", "structstyle.html#a88aecb781cfd4f95f62a4ae92f6e0e30aea2b2676c28c0db26d39331a336c6b92", null ],
-        [ "center", "structstyle.html#a88aecb781cfd4f95f62a4ae92f6e0e30aadb115059e28d960fa8badfac5516667", null ],
-        [ "end", "structstyle.html#a88aecb781cfd4f95f62a4ae92f6e0e30a7f021a1415b86f2d013b2618fb31ae53", null ],
-        [ "space_between", "structstyle.html#a88aecb781cfd4f95f62a4ae92f6e0e30ac216eee7ecaa1719d5030289ab864826", null ],
-        [ "space_around", "structstyle.html#a88aecb781cfd4f95f62a4ae92f6e0e30aa859ffca3c0e583c05a2bf0bd61c50db", null ]
+      [ "justify", "structneforce_1_1tui_1_1style.html#a63c373a51366fa91ac11cd9c65d101e4", [
+        [ "start", "structneforce_1_1tui_1_1style.html#a63c373a51366fa91ac11cd9c65d101e4aea2b2676c28c0db26d39331a336c6b92", null ],
+        [ "center", "structneforce_1_1tui_1_1style.html#a63c373a51366fa91ac11cd9c65d101e4aadb115059e28d960fa8badfac5516667", null ],
+        [ "end", "structneforce_1_1tui_1_1style.html#a63c373a51366fa91ac11cd9c65d101e4a7f021a1415b86f2d013b2618fb31ae53", null ],
+        [ "space_between", "structneforce_1_1tui_1_1style.html#a63c373a51366fa91ac11cd9c65d101e4ac216eee7ecaa1719d5030289ab864826", null ],
+        [ "space_around", "structneforce_1_1tui_1_1style.html#a63c373a51366fa91ac11cd9c65d101e4aa859ffca3c0e583c05a2bf0bd61c50db", null ]
       ] ],
-      [ "variant", "structstyle.html#a50690ce0051edce19b935936e2cf7797", [
-        [ "default_", "structstyle.html#a50690ce0051edce19b935936e2cf7797a172b03053216c6158fe380805998ad6c", null ],
-        [ "primary", "structstyle.html#a50690ce0051edce19b935936e2cf7797a386bba5a5dc4fac215c9cf0b9a29b352", null ],
-        [ "secondary", "structstyle.html#a50690ce0051edce19b935936e2cf7797a1f7ba58706f9d405023da32864d059c8", null ],
-        [ "danger", "structstyle.html#a50690ce0051edce19b935936e2cf7797ab136ee6c797c1a851260b9c1ab5ff414", null ],
-        [ "success", "structstyle.html#a50690ce0051edce19b935936e2cf7797a260ca9dd8a4577fc00b7bd5810298076", null ]
+      [ "variant", "structneforce_1_1tui_1_1style.html#a69e17ecb9916e10ebeebeed2140eed0d", [
+        [ "default_", "structneforce_1_1tui_1_1style.html#a69e17ecb9916e10ebeebeed2140eed0da172b03053216c6158fe380805998ad6c", null ],
+        [ "primary", "structneforce_1_1tui_1_1style.html#a69e17ecb9916e10ebeebeed2140eed0da386bba5a5dc4fac215c9cf0b9a29b352", null ],
+        [ "secondary", "structneforce_1_1tui_1_1style.html#a69e17ecb9916e10ebeebeed2140eed0da1f7ba58706f9d405023da32864d059c8", null ],
+        [ "danger", "structneforce_1_1tui_1_1style.html#a69e17ecb9916e10ebeebeed2140eed0dab136ee6c797c1a851260b9c1ab5ff414", null ],
+        [ "success", "structneforce_1_1tui_1_1style.html#a69e17ecb9916e10ebeebeed2140eed0da260ca9dd8a4577fc00b7bd5810298076", null ]
       ] ],
-      [ "wrap_mode", "structstyle.html#a8c62373eef9123ce93b67f9b57a9c77e", [
-        [ "none", "structstyle.html#a8c62373eef9123ce93b67f9b57a9c77ea334c4a4c42fdb79d7ebc3e73b517e6f8", null ],
-        [ "word", "structstyle.html#a8c62373eef9123ce93b67f9b57a9c77eac47d187067c6cf953245f128b5fde62a", null ],
-        [ "character", "structstyle.html#a8c62373eef9123ce93b67f9b57a9c77eaa956161a69928cd130a889b88082fb6e", null ]
+      [ "wrap_mode", "structneforce_1_1tui_1_1style.html#aa500f23e2f8cfb586733561897fe2ad4", [
+        [ "none", "structneforce_1_1tui_1_1style.html#aa500f23e2f8cfb586733561897fe2ad4a334c4a4c42fdb79d7ebc3e73b517e6f8", null ],
+        [ "word", "structneforce_1_1tui_1_1style.html#aa500f23e2f8cfb586733561897fe2ad4ac47d187067c6cf953245f128b5fde62a", null ],
+        [ "character", "structneforce_1_1tui_1_1style.html#aa500f23e2f8cfb586733561897fe2ad4aa956161a69928cd130a889b88082fb6e", null ]
       ] ],
-      [ "align", "structstyle.html#a9dedb629fe7b9687b19a7b8e8b04b785", null ],
-      [ "bg", "structstyle.html#a5a17e31f5911fb302ebe66f5352207fd", null ],
-      [ "blink", "structstyle.html#ad9bacdc75b0992bac52a04731993dbf7", null ],
-      [ "bold", "structstyle.html#a89fb265ee3576d14652576cc7f602097", null ],
-      [ "border", "structstyle.html#a7fb869cb29d9d4e727be15726dd98946", null ],
-      [ "borderColor", "structstyle.html#a8f3ca15201ba5e528d1d4ce700dd3aef", null ],
-      [ "dim", "structstyle.html#a083171652d3b61318674a3a92fb142f1", null ],
-      [ "fg", "structstyle.html#a41c4bacdc5cd26e6d5872921bc1fe134", null ],
-      [ "flex_grow", "structstyle.html#ad57fb6e5561597015dba8ab6f0dc3089", null ],
-      [ "flex_shrink", "structstyle.html#a94ed48c49c6cbecb814cb37968005aa5", null ],
-      [ "height", "structstyle.html#a14d647ddf4235b7ef454a5a63e567942", null ],
-      [ "italic", "structstyle.html#a3fdca7c1a7cd7de5f12df9656a707fe9", null ],
-      [ "margin", "structstyle.html#a611e53b0990ab06228f19f8f89bfb556", null ],
-      [ "padding", "structstyle.html#a88778576ecfc5c61ad3d82f3c19ecd1a", null ],
-      [ "reverse", "structstyle.html#aa2e3d251b7429828eefc0ee260fc689a", null ],
-      [ "strikethrough", "structstyle.html#a60ac8061594b5aa41a008ee77770ec6b", null ],
-      [ "text_wrap", "structstyle.html#acc3848db0d65cd707ab9ad712fcf2b40", null ],
-      [ "underline", "structstyle.html#ab3eb66c289287632c10fdc21b9e2ef75", null ],
-      [ "underlined_double", "structstyle.html#af9be445cbe2b1b03905ec91cae8a3101", null ],
-      [ "width", "structstyle.html#a2b077c4a7687b80d62d7e588de7919d0", null ]
+      [ "align", "structneforce_1_1tui_1_1style.html#aac52cc335ba18a70fb9a95bf90a72281", null ],
+      [ "bg", "structneforce_1_1tui_1_1style.html#afd988254fa3779ea686794cebec64e52", null ],
+      [ "blink", "structneforce_1_1tui_1_1style.html#a8d3863af28c51f57fd7cdd83fb506a8d", null ],
+      [ "bold", "structneforce_1_1tui_1_1style.html#afe18b79d3a4bd1ddd58a05e16d94ab39", null ],
+      [ "border", "structneforce_1_1tui_1_1style.html#a3b6af2ee5c9604b4f91c530c9b93d060", null ],
+      [ "borderColor", "structneforce_1_1tui_1_1style.html#a7f3896a132849b032e53c1eb7e179b78", null ],
+      [ "dim", "structneforce_1_1tui_1_1style.html#aa16dec6136add1fc5b39b3e79a87160a", null ],
+      [ "fg", "structneforce_1_1tui_1_1style.html#a0f3ff8ee959b106e18f811819524afe8", null ],
+      [ "flex_grow", "structneforce_1_1tui_1_1style.html#a4316cac1da67b335ba206191eec89739", null ],
+      [ "flex_shrink", "structneforce_1_1tui_1_1style.html#abb0cdc29c8f8e6df272da968093bd364", null ],
+      [ "height", "structneforce_1_1tui_1_1style.html#af22fcd420f46657084dd00110f864e61", null ],
+      [ "italic", "structneforce_1_1tui_1_1style.html#aefd4fd37ce40a9192898a34185bd9650", null ],
+      [ "margin", "structneforce_1_1tui_1_1style.html#a805bf9e26c36b782c19ffdc9b2c51429", null ],
+      [ "padding", "structneforce_1_1tui_1_1style.html#aa894165160cf38aa13412025c8bbc541", null ],
+      [ "reverse", "structneforce_1_1tui_1_1style.html#aa1c48aac16670631b698a4d2a16f192c", null ],
+      [ "strikethrough", "structneforce_1_1tui_1_1style.html#ad7969e2792d0c5d9b73b6afdcb5777db", null ],
+      [ "text_wrap", "structneforce_1_1tui_1_1style.html#ad0499b5c6836cc173830a8bdce56f6a7", null ],
+      [ "underline", "structneforce_1_1tui_1_1style.html#a0cf16846f050dab752e60e34e71c3169", null ],
+      [ "underlined_double", "structneforce_1_1tui_1_1style.html#a55ee92f4c8c9c15fcfeb403f82a25e19", null ],
+      [ "width", "structneforce_1_1tui_1_1style.html#a76793c57b4c0ac6a0c3f86e92ded5e14", null ]
     ] ],
-    [ "box_props", "structbox__props.html", [
-      [ "padding", "structbox__props_1_1padding.html", null ],
-      [ "margin", "structbox__props_1_1margin.html", null ],
-      [ "align", "structbox__props.html#a412d8ddc50f8098c7b9e9a63930fdf50", null ],
-      [ "align_content", "structbox__props.html#ad671a5ed548fd1d8e0b4540b1c7360f2", null ],
-      [ "cross_gap", "structbox__props.html#afa473f4472a30ba46c39b97c45683d9e", null ],
-      [ "dir", "structbox__props.html#a6d3f503249b0484471876c7ce3ae0239", null ],
-      [ "flex_grow", "structbox__props.html#afddde1412e4769a849fb5b6856a43c4e", null ],
-      [ "flex_shrink", "structbox__props.html#a55869122d2b97ec42bd7993ca0f56c3f", null ],
-      [ "gap", "structbox__props.html#afc79bc9dd9ba374e2bea2cf79fd5ff15", null ],
-      [ "height", "structbox__props.html#a6cdd70744c0620f131740eb67b94f3ae", null ],
-      [ "justify", "structbox__props.html#a4b2bdea5c3c9eff9547c701f08baf423", null ],
-      [ "width", "structbox__props.html#afff916862c19fed570c0c272f467bb6d", null ],
-      [ "wrap", "structbox__props.html#add328f9fa8fd4c909bed3661fdaa8e1b", null ]
+    [ "neforce::tui::box_props", "structneforce_1_1tui_1_1box__props.html", [
+      [ "padding", "structneforce_1_1tui_1_1box__props_1_1padding.html", null ],
+      [ "margin", "structneforce_1_1tui_1_1box__props_1_1margin.html", null ],
+      [ "align", "structneforce_1_1tui_1_1box__props.html#a753f582dbd56a71ac01c665a688815b9", null ],
+      [ "align_content", "structneforce_1_1tui_1_1box__props.html#a96bf2b3ff267adcd6dab1479165bc870", null ],
+      [ "cross_gap", "structneforce_1_1tui_1_1box__props.html#a1fd28cb122d6b56eeb4948927104eae5", null ],
+      [ "dir", "structneforce_1_1tui_1_1box__props.html#affb4b48d872ac007d0c9e2609ecc12c2", null ],
+      [ "flex_grow", "structneforce_1_1tui_1_1box__props.html#a3ef20a1a8718ed7630dec4c8a2e9dbcd", null ],
+      [ "flex_shrink", "structneforce_1_1tui_1_1box__props.html#abbbebaa5d8d74b3726a1804cc3d4be92", null ],
+      [ "gap", "structneforce_1_1tui_1_1box__props.html#a3669dbbe31734903fe861a69d3adc470", null ],
+      [ "height", "structneforce_1_1tui_1_1box__props.html#a5dbb04e8b7764621a30f1b647b1cdc09", null ],
+      [ "justify", "structneforce_1_1tui_1_1box__props.html#aa7f2604c09934a242d2e80e121d4d212", null ],
+      [ "width", "structneforce_1_1tui_1_1box__props.html#ab9bd181b748fffcfd69cc2eee1fe6059", null ],
+      [ "wrap", "structneforce_1_1tui_1_1box__props.html#aa97fc8887f10fdaaa99af7dc07bb67a7", null ]
     ] ],
-    [ "theme", "structtheme.html", [
-      [ "button_style", "structtheme.html#a2b7f25f87632841b2624f7c4b87c2fb4", null ],
-      [ "input_style", "structtheme.html#a36dbd692ebb406dfbd3e1bb60cc25fc7", null ],
-      [ "text_style", "structtheme.html#ac99924a7488c77db13b677dcbbd72ca1", null ],
-      [ "bg", "structtheme.html#a4683db94a9157909ae90512986bb32dc", null ],
-      [ "border", "structtheme.html#aba221269c55035d68782a5d46cf937e7", null ],
-      [ "danger", "structtheme.html#a266d88cc664a3757623d54edea435eae", null ],
-      [ "fg", "structtheme.html#ad551965708290b2434e4395d1cd1abd1", null ],
-      [ "muted", "structtheme.html#a12e406b70c536fe597d41b2a83621fda", null ],
-      [ "primary", "structtheme.html#a3197efad10cb0b9143a5159beaa77c5f", null ],
-      [ "secondary", "structtheme.html#a0b6c2c1bd5103956df0c3acf4284ab5a", null ],
-      [ "success", "structtheme.html#a1047443f88342c845592e70cf63803b7", null ],
-      [ "warning", "structtheme.html#a9580fd3831a1376dd6722b2ceb1b52be", null ]
+    [ "neforce::tui::theme", "structneforce_1_1tui_1_1theme.html", [
+      [ "button_style", "structneforce_1_1tui_1_1theme.html#a2b988d63c0f02eb6abad1e4a25db989b", null ],
+      [ "input_style", "structneforce_1_1tui_1_1theme.html#a04ec5764521f13fc8a9afc1023240f79", null ],
+      [ "text_style", "structneforce_1_1tui_1_1theme.html#a09c185d302ec6f88c745a7f92e973225", null ],
+      [ "bg", "structneforce_1_1tui_1_1theme.html#a68afbd1cf04f0991552144f427c4e87a", null ],
+      [ "border", "structneforce_1_1tui_1_1theme.html#a2fda8d093301569ceba044822ede9111", null ],
+      [ "danger", "structneforce_1_1tui_1_1theme.html#ab8ea604b4a7594ef4d54af6fea70bb79", null ],
+      [ "fg", "structneforce_1_1tui_1_1theme.html#a07ad9a201eea7f5bff7f5663f586365f", null ],
+      [ "muted", "structneforce_1_1tui_1_1theme.html#aa1de7f8d980d7918b3e13965a5442b3b", null ],
+      [ "primary", "structneforce_1_1tui_1_1theme.html#a411742862cb11a7d305a2e6be5a23f76", null ],
+      [ "secondary", "structneforce_1_1tui_1_1theme.html#acbb10810a3ef096d1b11db4fb0934543", null ],
+      [ "success", "structneforce_1_1tui_1_1theme.html#a573f8be10c2af04decc82aa70365db72", null ],
+      [ "warning", "structneforce_1_1tui_1_1theme.html#a3142f08a0fc8bca69634731be5173f3f", null ]
     ] ],
-    [ "table", "classtable.html", [
-      [ "table", "classtable.html#ac6db7481032cba66b5ff70bef0de41c8", null ],
-      [ "table", "classtable.html#a5a5c8de199f6d617ae16707b35d14d46", null ],
-      [ "border", "classtable.html#acb5b6e7779e066e2869e8ce82ed9edd2", null ],
-      [ "decorate", "classtable.html#aea1cbd1862d37a020ec97508ff0917c6", null ],
-      [ "decorate_alternate_row", "classtable.html#ab4faf5b1516c850e602ec358b4a8f8dd", null ],
-      [ "render", "classtable.html#a7d5a9768844af8d611fa852608a4c5e6", null ],
-      [ "select_all", "classtable.html#a6bac83b2496122137d24f98ada9e3887", null ],
-      [ "select_column", "classtable.html#afa327e52b7bff56e897faa0291258cf3", null ],
-      [ "select_rectangle", "classtable.html#a39beda3467c99e4fa098be7360cb6015", null ],
-      [ "select_row", "classtable.html#a8f1618e4d81dfc9714cd32860f532fc7", null ],
-      [ "separator", "classtable.html#a3eaff4464b6d212ba02819a408a8eb11", null ]
+    [ "neforce::tui::table", "classneforce_1_1tui_1_1table.html", [
+      [ "table", "classneforce_1_1tui_1_1table.html#a6331ef4f905014d8e8bfd2dfbea7abf1", null ],
+      [ "table", "classneforce_1_1tui_1_1table.html#ae1db35ef5a5712fc33005baa104ebac1", null ],
+      [ "border", "classneforce_1_1tui_1_1table.html#a36ae0c05bf697d66f23336cd4acb0f15", null ],
+      [ "decorate", "classneforce_1_1tui_1_1table.html#a90a7bbe70bf27fa36046ca97c0de6e74", null ],
+      [ "decorate_alternate_row", "classneforce_1_1tui_1_1table.html#a8348225e903ea90648e9d9213c08e8aa", null ],
+      [ "render", "classneforce_1_1tui_1_1table.html#a526404db40ecc722fcd56c8acc85199b", null ],
+      [ "select_all", "classneforce_1_1tui_1_1table.html#a4d76cf6fafa1ed1b89bc6c14bb413521", null ],
+      [ "select_column", "classneforce_1_1tui_1_1table.html#ac5de295838963b63c5d6fbdc113ee6ea", null ],
+      [ "select_rectangle", "classneforce_1_1tui_1_1table.html#acd86ba118675315fa38598f69e483cd9", null ],
+      [ "select_row", "classneforce_1_1tui_1_1table.html#a510f4a7d661994d19ef0dee5262d9806", null ],
+      [ "separator", "classneforce_1_1tui_1_1table.html#a4af3a101fea2cc5fa088fc05c9e4872f", null ]
     ] ],
-    [ "key_event", "structkey__event.html", [
-      [ "type", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7", [
-        [ "unknown", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7aad921d60486366258809553a3db49a4a", null ],
-        [ "up", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7a46c48bec0d282018b9d167eef7711b2c", null ],
-        [ "down", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7a74e8333ad11685ff3bdae589c8f6e34d", null ],
-        [ "left", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7a811882fecd5c7618d7099ebbd39ea254", null ],
-        [ "right", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7a7c4f29407893c334a6cb7a87bf045c0d", null ],
-        [ "home", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7a106a6c241b8797f52e1e77317b96a201", null ],
-        [ "end", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7a7f021a1415b86f2d013b2618fb31ae53", null ],
-        [ "page_up", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7af8e72578226499b7311f292f1deba130", null ],
-        [ "page_down", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7ad8a0a6a1d9f3b78b1af0293cf6ac5dd7", null ],
-        [ "insert", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7ae0df5f3dfd2650ae5be9993434e2b2c0", null ],
-        [ "delete_", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7a02aaa1f70ced421d7834d2b4581bb296", null ],
-        [ "enter", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7ae2a7106f1cc8bb1e1318df70aa0a3540", null ],
-        [ "tab", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7ae7f8cbd87d347be881cba92dad128518", null ],
-        [ "tab_reverse", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7aeb668a27cc115f2c64f316351ff4a705", null ],
-        [ "escape", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7ae0ebc3c409070d07f1df0f2f4132509e", null ],
-        [ "backspace", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7a5528770f4bce9c9b0ce9bbb8645aef45", null ],
-        [ "F1", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7ae1dffc8709f31a4987c8a88334107e89", null ],
-        [ "F2", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7afe5c3684dce76cdd9f7f42430868aa74", null ],
-        [ "F3", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7a4b6bf4b531770872d4328ce69bef5627", null ],
-        [ "F4", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7ae7e0e72401a9f2718ed0f39f2861d702", null ],
-        [ "F5", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7a37f438df6a6d5ba4c17ef8ca58562f00", null ],
-        [ "F6", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7a1faf42f2823f184eb2c9f0dffe5d73f2", null ],
-        [ "F7", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7a47489eb597b7db34caa24b1fc78fc839", null ],
-        [ "F8", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7a4787509ad9f9d747a81a30e9dde3d4a7", null ],
-        [ "F9", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7a892a245e287c163080b23db737d3c4c9", null ],
-        [ "F10", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7ab213ce22ca6ad4eda8db82966b9b6e5a", null ],
-        [ "F11", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7a643b0662422d1d0dffa3fca2e2bf28a8", null ],
-        [ "F12", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7ae902674982fc99aa343cdd94da7476c3", null ],
-        [ "F13", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7a95dfde4807d4d6a9eec499203b3c24a0", null ],
-        [ "F14", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7a2468649b6215c4cdd2aef5095b3f5932", null ],
-        [ "F15", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7ae53b55851b9ff4979f2c3ff434a4a138", null ],
-        [ "F16", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7a56d8353718e6fdc78b8d69078a2cdb94", null ],
-        [ "F17", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7affa5882d1ddcf903bf0d0dbc30bfc604", null ],
-        [ "F18", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7a810b30cdfc07fd7fff553a94b828ff78", null ],
-        [ "F19", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7acd7c2a221ef5d0a34acc0bcd679b2054", null ],
-        [ "F20", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7afc335adb3d69d3d8270769e1923ea4dc", null ],
-        [ "F21", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7a77e9eee7c579eef5f3731ecf1053c02e", null ],
-        [ "F22", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7a7fa06ead699fcbd63132370ffe13335a", null ],
-        [ "F23", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7a889645d530078147e7dc69a9caadc31e", null ],
-        [ "F24", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7aebd7820c520d05eca2d775c37d141273", null ],
-        [ "printable", "structkey__event.html#a3b00e55e030921cacba31b40ed8406e7a2acb3c622363ea3ca6f5a0feeb3c642a", null ]
+    [ "neforce::tui::event_dispatcher", "classneforce_1_1tui_1_1event__dispatcher.html", [
+      [ "event_dispatcher", "classneforce_1_1tui_1_1event__dispatcher.html#a2b8aafd7c4708b28a8999a4d69c21e63", null ],
+      [ "dispatch_key", "classneforce_1_1tui_1_1event__dispatcher.html#afd4542d7d534c156d6e3bc3eb82a156a", null ],
+      [ "dispatch_mouse", "classneforce_1_1tui_1_1event__dispatcher.html#a95186407b81e9d5b605a6ef5654b0763", null ],
+      [ "set_dirty_callback", "classneforce_1_1tui_1_1event__dispatcher.html#a0196ebdba5f78bb70099975db7ebb1fc", null ]
+    ] ],
+    [ "neforce::tui::key_event", "structneforce_1_1tui_1_1key__event.html", [
+      [ "type", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8", [
+        [ "unknown", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8aad921d60486366258809553a3db49a4a", null ],
+        [ "up", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8a46c48bec0d282018b9d167eef7711b2c", null ],
+        [ "down", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8a74e8333ad11685ff3bdae589c8f6e34d", null ],
+        [ "left", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8a811882fecd5c7618d7099ebbd39ea254", null ],
+        [ "right", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8a7c4f29407893c334a6cb7a87bf045c0d", null ],
+        [ "home", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8a106a6c241b8797f52e1e77317b96a201", null ],
+        [ "end", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8a7f021a1415b86f2d013b2618fb31ae53", null ],
+        [ "page_up", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8af8e72578226499b7311f292f1deba130", null ],
+        [ "page_down", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8ad8a0a6a1d9f3b78b1af0293cf6ac5dd7", null ],
+        [ "insert", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8ae0df5f3dfd2650ae5be9993434e2b2c0", null ],
+        [ "delete_", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8a02aaa1f70ced421d7834d2b4581bb296", null ],
+        [ "enter", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8ae2a7106f1cc8bb1e1318df70aa0a3540", null ],
+        [ "tab", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8ae7f8cbd87d347be881cba92dad128518", null ],
+        [ "tab_reverse", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8aeb668a27cc115f2c64f316351ff4a705", null ],
+        [ "escape", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8ae0ebc3c409070d07f1df0f2f4132509e", null ],
+        [ "backspace", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8a5528770f4bce9c9b0ce9bbb8645aef45", null ],
+        [ "F1", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8ae1dffc8709f31a4987c8a88334107e89", null ],
+        [ "F2", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8afe5c3684dce76cdd9f7f42430868aa74", null ],
+        [ "F3", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8a4b6bf4b531770872d4328ce69bef5627", null ],
+        [ "F4", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8ae7e0e72401a9f2718ed0f39f2861d702", null ],
+        [ "F5", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8a37f438df6a6d5ba4c17ef8ca58562f00", null ],
+        [ "F6", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8a1faf42f2823f184eb2c9f0dffe5d73f2", null ],
+        [ "F7", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8a47489eb597b7db34caa24b1fc78fc839", null ],
+        [ "F8", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8a4787509ad9f9d747a81a30e9dde3d4a7", null ],
+        [ "F9", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8a892a245e287c163080b23db737d3c4c9", null ],
+        [ "F10", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8ab213ce22ca6ad4eda8db82966b9b6e5a", null ],
+        [ "F11", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8a643b0662422d1d0dffa3fca2e2bf28a8", null ],
+        [ "F12", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8ae902674982fc99aa343cdd94da7476c3", null ],
+        [ "F13", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8a95dfde4807d4d6a9eec499203b3c24a0", null ],
+        [ "F14", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8a2468649b6215c4cdd2aef5095b3f5932", null ],
+        [ "F15", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8ae53b55851b9ff4979f2c3ff434a4a138", null ],
+        [ "F16", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8a56d8353718e6fdc78b8d69078a2cdb94", null ],
+        [ "F17", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8affa5882d1ddcf903bf0d0dbc30bfc604", null ],
+        [ "F18", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8a810b30cdfc07fd7fff553a94b828ff78", null ],
+        [ "F19", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8acd7c2a221ef5d0a34acc0bcd679b2054", null ],
+        [ "F20", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8afc335adb3d69d3d8270769e1923ea4dc", null ],
+        [ "F21", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8a77e9eee7c579eef5f3731ecf1053c02e", null ],
+        [ "F22", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8a7fa06ead699fcbd63132370ffe13335a", null ],
+        [ "F23", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8a889645d530078147e7dc69a9caadc31e", null ],
+        [ "F24", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8aebd7820c520d05eca2d775c37d141273", null ],
+        [ "printable", "structneforce_1_1tui_1_1key__event.html#ad09bcf031c0ca2f6907e96a114db54d8a2acb3c622363ea3ca6f5a0feeb3c642a", null ]
       ] ],
-      [ "is_printable", "structkey__event.html#a9848bd11f1860b564b05777782679ae1", null ],
-      [ "cp", "structkey__event.html#a9afdbb0e589ba5c1f372f8b4e40642a9", null ],
-      [ "key", "structkey__event.html#a14785abaa4ffaa72c4bdb06a9e73f0fb", null ],
-      [ "mods", "structkey__event.html#a81d8e023d5c45632c26265a1d54ea4a8", null ]
+      [ "is_printable", "structneforce_1_1tui_1_1key__event.html#a990801dd75eea76cc5c9774a52e781e2", null ],
+      [ "cp", "structneforce_1_1tui_1_1key__event.html#a3f798afc496f8dff296c6e7e5edd263a", null ],
+      [ "key", "structneforce_1_1tui_1_1key__event.html#a56588379acfc56c8b55f27d783076cef", null ],
+      [ "mods", "structneforce_1_1tui_1_1key__event.html#af554a7660e311167f9639de451e35eb3", null ]
     ] ],
-    [ "mouse_event", "structmouse__event.html", [
-      [ "action", "structmouse__event.html#ae54d9d9ed4a32c328ca6c2c4e0017241", null ],
-      [ "button", "structmouse__event.html#ae452c523778c3d42c653097cb03a94d6", null ],
-      [ "mods", "structmouse__event.html#ab720677f6a26a8fc8c425307428a4d1a", null ],
-      [ "x", "structmouse__event.html#a8ae3be13ee1105cc79dde6827285fd23", null ],
-      [ "y", "structmouse__event.html#ab19cc71ffa4626dcb564aa048c048942", null ]
+    [ "neforce::tui::mouse_event", "structneforce_1_1tui_1_1mouse__event.html", [
+      [ "action", "structneforce_1_1tui_1_1mouse__event.html#a35e87c544c5d26cd6a734b7e09c6282d", null ],
+      [ "button", "structneforce_1_1tui_1_1mouse__event.html#a4c1c4af2934c00034c8d26dfa119275d", null ],
+      [ "mods", "structneforce_1_1tui_1_1mouse__event.html#afa7c05267f95af940e7c6bc4f90762c4", null ],
+      [ "x", "structneforce_1_1tui_1_1mouse__event.html#ac8fa66cf0683b02d644416087c17b862", null ],
+      [ "y", "structneforce_1_1tui_1_1mouse__event.html#a32c314a623896100e1ea499ee1a3e496", null ]
     ] ],
-    [ "resize_event", "structresize__event.html", [
-      [ "height", "structresize__event.html#aeed67c3c4eb71f1bac113e85cfdeb575", null ],
-      [ "width", "structresize__event.html#a2338c9488eff9803e0eb3951bc76fc27", null ]
+    [ "neforce::tui::resize_event", "structneforce_1_1tui_1_1resize__event.html", [
+      [ "height", "structneforce_1_1tui_1_1resize__event.html#ad965fa514a93ac936d3ebf0d33a6e56f", null ],
+      [ "width", "structneforce_1_1tui_1_1resize__event.html#af966af14f1168346a0bf857517442e67", null ]
     ] ],
-    [ "input_driver", "classinput__driver.html", [
-      [ "input_driver", "classinput__driver.html#acff3bd2ee1b71bf1970f6d2656f7e57a", null ],
-      [ "start", "classinput__driver.html#ad3e5665372f1a6049bc78071d3c58629", null ],
-      [ "stop", "classinput__driver.html#a4cf8dc5c2e4454a18b75987c71dd8701", null ]
+    [ "neforce::tui::focus_manager", "classneforce_1_1tui_1_1focus__manager.html", [
+      [ "chain", "classneforce_1_1tui_1_1focus__manager.html#a016c38d22264224093e5a50c27b6c79f", null ],
+      [ "focus_next", "classneforce_1_1tui_1_1focus__manager.html#a6c4bb480df97a1403b02451442b271ea", null ],
+      [ "focus_prev", "classneforce_1_1tui_1_1focus__manager.html#ac573040f84d193145a3035f1b2dab08f", null ],
+      [ "focused", "classneforce_1_1tui_1_1focus__manager.html#ae830dc7062602e466c888a3683040253", null ],
+      [ "is_chain_dirty", "classneforce_1_1tui_1_1focus__manager.html#a8ac7cad604775904109213d764933aed", null ],
+      [ "mark_chain_dirty", "classneforce_1_1tui_1_1focus__manager.html#ab8b629c74ed57900ef0a895c715e844e", null ],
+      [ "rebuild_chain", "classneforce_1_1tui_1_1focus__manager.html#a7900b2d99d93d2f65515136b98b45087", null ],
+      [ "set_focus", "classneforce_1_1tui_1_1focus__manager.html#a5caa05376a594e0b66a0d7bc84adec55", null ]
     ] ],
-    [ "reconciler", "classreconciler.html", [
-      [ "reconciler", "classreconciler.html#afc8ba4115dbd286e79c89fd48696041c", null ],
-      [ "dispatch_key", "classreconciler.html#aaa140d90768f4a83c77fda9d27b29a59", null ],
-      [ "dispatch_mouse", "classreconciler.html#a2d30a0383ccaa7408e0bf0f7d84e3aae", null ],
-      [ "flush", "classreconciler.html#acfe04783fbf5e41b1c7aea125d8a50b0", null ],
-      [ "is_dirty", "classreconciler.html#a5731e5de48eb66053781024d9c3c82a6", null ],
-      [ "mark_dirty", "classreconciler.html#a7a05178ca18d719b39f01653ec809dde", null ],
-      [ "mount", "classreconciler.html#a55c2ed670e6af6d920186180ea088ee3", null ],
-      [ "schedule_render_callback", "classreconciler.html#a34781e50b934f49b56d6b251b9c0dde6", null ],
-      [ "schedule_update", "classreconciler.html#a4f7fa222cb99ce3535f9625523213fe8", null ],
-      [ "set_theme", "classreconciler.html#a1916a6e1372ade536f539f5534cdcf30", null ]
+    [ "neforce::tui::input_driver", "classneforce_1_1tui_1_1input__driver.html", [
+      [ "input_driver", "classneforce_1_1tui_1_1input__driver.html#a07ca3865b291ffcb4dd9960c2cc25925", null ],
+      [ "start", "classneforce_1_1tui_1_1input__driver.html#a6fd14a834706e045210c6bbe8df66416", null ],
+      [ "stop", "classneforce_1_1tui_1_1input__driver.html#a5ac06fb2d282ec845963bd6e579199f7", null ]
     ] ],
-    [ "dimensions", "structdimensions.html", [
-      [ "dimx", "structdimensions.html#aa5cafec04e655777c1402df5f88d531d", null ],
-      [ "dimy", "structdimensions.html#a17bfafc98948ef1745d16d559947b5da", null ]
+    [ "neforce::tui::reconciler", "classneforce_1_1tui_1_1reconciler.html", [
+      [ "reconciler", "classneforce_1_1tui_1_1reconciler.html#a2dbcb5ff39adea1cf196997bc986fc54", null ],
+      [ "dispatch_key", "classneforce_1_1tui_1_1reconciler.html#a997e324ab4fa40ed1594a9fda7681791", null ],
+      [ "dispatch_mouse", "classneforce_1_1tui_1_1reconciler.html#a14b77cd8ae9c1b1f79e236d3036843c4", null ],
+      [ "flush", "classneforce_1_1tui_1_1reconciler.html#a1b6541a04c83a716841c91f3bf7304d5", null ],
+      [ "is_dirty", "classneforce_1_1tui_1_1reconciler.html#a1915226612587a15571dfb7cd8ee5b81", null ],
+      [ "mark_dirty", "classneforce_1_1tui_1_1reconciler.html#a91e5c1bdd87abf2b6f9bbd02c858dbc7", null ],
+      [ "mount", "classneforce_1_1tui_1_1reconciler.html#a9d9af27a1906926e73642b9fdb53186c", null ],
+      [ "schedule_render_callback", "classneforce_1_1tui_1_1reconciler.html#a42adc9b1551a8dafa55075d11b35cc5e", null ],
+      [ "schedule_update", "classneforce_1_1tui_1_1reconciler.html#ad996d2d8c1f45c1275290d9bc1208e8a", null ],
+      [ "set_theme", "classneforce_1_1tui_1_1reconciler.html#afe8660fb11f27965d65d62dcf13cae4d", null ]
     ] ],
-    [ "cell", "structcell.html", [
-      [ "reset", "structcell.html#acf6c8607a1da213eed3b81aebb284333", null ],
-      [ "visually_equal", "structcell.html#afd8f9e1191458c08b133b9e7bce46b6a", null ],
-      [ "automerge", "structcell.html#aa8aa96e655602df232b9550add3742b8", null ],
-      [ "background", "structcell.html#a2a5c475f120cc30d6b3a5f43ed6ab097", null ],
-      [ "blink", "structcell.html#ad1f2aecda75b509aeae4a254429a406c", null ],
-      [ "bold", "structcell.html#a7c38daf5614cc806389ba442b6e119f6", null ],
-      [ "character", "structcell.html#a2ca614035b1c85943bce2accb76d2f86", null ],
-      [ "dim", "structcell.html#afb024862c076fef16581506be835ad85", null ],
-      [ "foreground", "structcell.html#a0263be3720d72d92c3532cf1f16d874c", null ],
-      [ "hyperlink", "structcell.html#ad975f3418e2d785c375edb49971b2e30", null ],
-      [ "inverted", "structcell.html#aed2cffe182622efaf39a5b29589b388c", null ],
-      [ "italic", "structcell.html#a05c8811fb0567f7a9d52ed579fe16cce", null ],
-      [ "strikethrough", "structcell.html#a14b916747514c8e360ecf6d4d8880bb0", null ],
-      [ "underlined", "structcell.html#ac5f6662d2c5dadcf5bc674bdde10cda3", null ],
-      [ "underlined_double", "structcell.html#a0cd4f630a562ed46fc456bfbb344313e", null ]
+    [ "neforce::tui::scrollbar_hit", "structneforce_1_1tui_1_1scrollbar__hit.html", [
+      [ "content_h", "structneforce_1_1tui_1_1scrollbar__hit.html#ad517075d6f7c30cc86b87537d395f4fe", null ],
+      [ "scroll_state", "structneforce_1_1tui_1_1scrollbar__hit.html#a91b847aea3442a18a8f87e41971a923e", null ],
+      [ "sv_w", "structneforce_1_1tui_1_1scrollbar__hit.html#a74a5f4cc1b198f1aefb693a043838274", null ],
+      [ "sv_x", "structneforce_1_1tui_1_1scrollbar__hit.html#ac86f9bf360e9784236f3ce601e22b192", null ],
+      [ "thumb_pos", "structneforce_1_1tui_1_1scrollbar__hit.html#a63928909875a3dd8e8d5a0d98113fa9a", null ],
+      [ "thumb_size", "structneforce_1_1tui_1_1scrollbar__hit.html#a940665e15a580f42a9006292c9075408", null ],
+      [ "track_h", "structneforce_1_1tui_1_1scrollbar__hit.html#a49584eeef1d567f1486e5d6880ed7615", null ],
+      [ "track_x", "structneforce_1_1tui_1_1scrollbar__hit.html#a43634744c9053b2cb7b37680d551d100", null ],
+      [ "track_y", "structneforce_1_1tui_1_1scrollbar__hit.html#ab8cee541fa83687c47fd2a9af0fa05d7", null ],
+      [ "vertical", "structneforce_1_1tui_1_1scrollbar__hit.html#a3d7367fcbde40ec7aa63bacb3dbc9a7d", null ]
     ] ],
-    [ "cursor", "structcursor.html", [
-      [ "shape", "structcursor.html#afc21335c996b37ae24d3eace75cc8387", [
-        [ "Hidden", "structcursor.html#afc21335c996b37ae24d3eace75cc8387a7acdf85c69cc3c5305456a293524386e", null ],
-        [ "BlockBlinking", "structcursor.html#afc21335c996b37ae24d3eace75cc8387af80748c6ee888c3185368508fb07b3ca", null ],
-        [ "Block", "structcursor.html#afc21335c996b37ae24d3eace75cc8387ae1e4c8c9ccd9fc39c391da4bcd093fb2", null ],
-        [ "UnderlineBlinking", "structcursor.html#afc21335c996b37ae24d3eace75cc8387a3691c3b4b256e332c8807926edbf5e0f", null ],
-        [ "Underline", "structcursor.html#afc21335c996b37ae24d3eace75cc8387a852721aa5fc738dfedff2945d71da439", null ],
-        [ "BarBlinking", "structcursor.html#afc21335c996b37ae24d3eace75cc8387a5c488983b4087e2a72a06117643dcb48", null ],
-        [ "Bar", "structcursor.html#afc21335c996b37ae24d3eace75cc8387addc35f88fa71b6ef142ae61f35364653", null ]
+    [ "neforce::tui::renderer", "classneforce_1_1tui_1_1renderer.html", [
+      [ "renderer", "classneforce_1_1tui_1_1renderer.html#a50165330444cb09e2822b9366df26e66", null ],
+      [ "apply_border", "classneforce_1_1tui_1_1renderer.html#af789e4ef8ee107131fadb900741b64a4", null ],
+      [ "apply_clear", "classneforce_1_1tui_1_1renderer.html#a72ef6ff4635c4bc61fa1a2ab5ed67f35", null ],
+      [ "apply_style_to_cell", "classneforce_1_1tui_1_1renderer.html#abd3213ff84c16356be99681da54d0dae", null ],
+      [ "apply_text", "classneforce_1_1tui_1_1renderer.html#a342424404fa00429ee9b4fa56cd34216", null ],
+      [ "apply_text", "classneforce_1_1tui_1_1renderer.html#a6d44c863a7fd754585cb375f6150670d", null ],
+      [ "clear_element_area", "classneforce_1_1tui_1_1renderer.html#a4015d89377a7f2179061086dd376563d", null ],
+      [ "render", "classneforce_1_1tui_1_1renderer.html#a6223cbe571d927cdc2140743fc49c0fb", null ],
+      [ "render_button", "classneforce_1_1tui_1_1renderer.html#a7652c43f5473169bb87685aaf2d1d3ba", null ],
+      [ "render_checkbox", "classneforce_1_1tui_1_1renderer.html#a1cb996a83bf1f8fb0f5dec888fd75ba4", null ],
+      [ "render_separator", "classneforce_1_1tui_1_1renderer.html#aaeb0e01503ca320574ba651568385498", null ],
+      [ "render_text_block", "classneforce_1_1tui_1_1renderer.html#a1c08bfdaef3bcb115e40aba7dba79875", null ],
+      [ "scrollbar_hits", "classneforce_1_1tui_1_1renderer.html#a4f75734151e55d940caf10ee03399ed5", null ],
+      [ "set_term_size", "classneforce_1_1tui_1_1renderer.html#a0226e47652e32957b932a2808b807e3d", null ]
+    ] ],
+    [ "neforce::tui::dimensions", "structneforce_1_1tui_1_1dimensions.html", [
+      [ "dimx", "structneforce_1_1tui_1_1dimensions.html#a242151fa02a9e53273cf850146b85f64", null ],
+      [ "dimy", "structneforce_1_1tui_1_1dimensions.html#ad8ede0fd343be82f3331e75382e9e6be", null ]
+    ] ],
+    [ "neforce::tui::cell", "structneforce_1_1tui_1_1cell.html", [
+      [ "reset", "structneforce_1_1tui_1_1cell.html#a85716c461b295528028e3e529bf678e0", null ],
+      [ "visually_equal", "structneforce_1_1tui_1_1cell.html#a29eabfd9df796e83fa0e70b659b0e9c5", null ],
+      [ "automerge", "structneforce_1_1tui_1_1cell.html#ac4c126a305a72ba2614c2d4d40ab4046", null ],
+      [ "background", "structneforce_1_1tui_1_1cell.html#aa77b3c6d8e98f5ccec8e0a9f10790456", null ],
+      [ "blink", "structneforce_1_1tui_1_1cell.html#a0d93b8f08cd03e170e75f8831ada8d5c", null ],
+      [ "bold", "structneforce_1_1tui_1_1cell.html#a54b263796f4bffcbcff2fb74bbfefc31", null ],
+      [ "character", "structneforce_1_1tui_1_1cell.html#af1051f555d6920be555a98e58f4659ae", null ],
+      [ "dim", "structneforce_1_1tui_1_1cell.html#a3b25de5ad7103aa345d871c6d917474c", null ],
+      [ "foreground", "structneforce_1_1tui_1_1cell.html#a2a8989a418401529699d0ef15c40e621", null ],
+      [ "hyperlink", "structneforce_1_1tui_1_1cell.html#a32ab4e5ac3f5bb91226fbc79b97f451e", null ],
+      [ "inverted", "structneforce_1_1tui_1_1cell.html#a7d4e742494b3d0ad803eaf9ff72e3ff1", null ],
+      [ "italic", "structneforce_1_1tui_1_1cell.html#a152cd8b7fb987e00e545a47b9bef525e", null ],
+      [ "strikethrough", "structneforce_1_1tui_1_1cell.html#aabae772c411db9d537b1dc0409770aeb", null ],
+      [ "underlined", "structneforce_1_1tui_1_1cell.html#a92a10a779c5357a2db81d5f3396ae48d", null ],
+      [ "underlined_double", "structneforce_1_1tui_1_1cell.html#a23628fbfb67362dc7ff1bf4d46a8ea05", null ]
+    ] ],
+    [ "neforce::tui::cursor", "structneforce_1_1tui_1_1cursor.html", [
+      [ "shape", "structneforce_1_1tui_1_1cursor.html#ae2ef976b7ab2d11d8ffc621e4c8458a0", [
+        [ "Hidden", "structneforce_1_1tui_1_1cursor.html#ae2ef976b7ab2d11d8ffc621e4c8458a0a7acdf85c69cc3c5305456a293524386e", null ],
+        [ "BlockBlinking", "structneforce_1_1tui_1_1cursor.html#ae2ef976b7ab2d11d8ffc621e4c8458a0af80748c6ee888c3185368508fb07b3ca", null ],
+        [ "Block", "structneforce_1_1tui_1_1cursor.html#ae2ef976b7ab2d11d8ffc621e4c8458a0ae1e4c8c9ccd9fc39c391da4bcd093fb2", null ],
+        [ "UnderlineBlinking", "structneforce_1_1tui_1_1cursor.html#ae2ef976b7ab2d11d8ffc621e4c8458a0a3691c3b4b256e332c8807926edbf5e0f", null ],
+        [ "Underline", "structneforce_1_1tui_1_1cursor.html#ae2ef976b7ab2d11d8ffc621e4c8458a0a852721aa5fc738dfedff2945d71da439", null ],
+        [ "BarBlinking", "structneforce_1_1tui_1_1cursor.html#ae2ef976b7ab2d11d8ffc621e4c8458a0a5c488983b4087e2a72a06117643dcb48", null ],
+        [ "Bar", "structneforce_1_1tui_1_1cursor.html#ae2ef976b7ab2d11d8ffc621e4c8458a0addc35f88fa71b6ef142ae61f35364653", null ]
       ] ],
-      [ "shape", "structcursor.html#abe922ecb410d960a00fd5193aaf86b61", null ],
-      [ "x", "structcursor.html#a1b4aaf0d8ba80877d408ed2de314f1f9", null ],
-      [ "y", "structcursor.html#a878ff45fa28624f0b25accafb7ff0550", null ]
+      [ "shape", "structneforce_1_1tui_1_1cursor.html#a89e9e080981b8f3f4a773eec908b3e8a", null ],
+      [ "x", "structneforce_1_1tui_1_1cursor.html#a6ae860169c061afe08ffc71e5c022cef", null ],
+      [ "y", "structneforce_1_1tui_1_1cursor.html#a619ed3ac0fdc9787aa3fd56bde066cf9", null ]
     ] ],
-    [ "surface", "classsurface.html", [
-      [ "surface", "classsurface.html#aafc131836753930e62b21c01bfdee6e6", null ],
-      [ "at", "classsurface.html#a88c55c146a33987fee9abee1328f015d", null ],
-      [ "cell_at", "classsurface.html#aa6d4258621b19b23ee5f06b4563fa67f", null ],
-      [ "clear", "classsurface.html#a58eedd6e3b12d31abc746bf822da6133", null ],
-      [ "dimx", "classsurface.html#a9486df0d0722e47fd49e7c2abd72ef96", null ],
-      [ "dimy", "classsurface.html#a35cfc040da7cc073a658126b56a91d3d", null ],
-      [ "fast_cell_at", "classsurface.html#ad9f32a35dce476e5ab8d65396819082a", null ]
+    [ "neforce::tui::surface", "classneforce_1_1tui_1_1surface.html", [
+      [ "surface", "classneforce_1_1tui_1_1surface.html#abc5cf99c8a587f8a3735ac4c0491c04d", null ],
+      [ "at", "classneforce_1_1tui_1_1surface.html#aa01a865d8ee8b214f65ec8a379d54781", null ],
+      [ "cell_at", "classneforce_1_1tui_1_1surface.html#a51796be9c39c7906d5ea6e1da1f42e02", null ],
+      [ "clear", "classneforce_1_1tui_1_1surface.html#acf4cbeae62e7bbe45c5cd31421699af7", null ],
+      [ "dimx", "classneforce_1_1tui_1_1surface.html#a6a9e3c6f5c0514a2ce101e692d26a87d", null ],
+      [ "dimy", "classneforce_1_1tui_1_1surface.html#ab6beac6902c28c208b69acfd253f85d5", null ],
+      [ "fast_cell_at", "classneforce_1_1tui_1_1surface.html#a334a6fbe5b33abaea650e707afe57fcb", null ]
     ] ],
-    [ "screen", "classscreen.html", [
-      [ "screen", "classscreen.html#a2914579582eddc0ccdf9b3298616dd51", null ],
-      [ "clear", "classscreen.html#a1976049e8632cfb8030cfd8f1256c195", null ],
-      [ "cursor", "classscreen.html#a2431529bd8c71005cedd434ce84f0082", null ],
-      [ "hyperlink", "classscreen.html#aff7b9f7309abbab985fafc2929615d31", null ],
-      [ "register_hyperlink", "classscreen.html#a847e792ae3ba59f83abf5f1f50bb48cf", null ],
-      [ "reset_position", "classscreen.html#a2d37e80bbb623e6d22d00d9f2c64406a", null ],
-      [ "resize", "classscreen.html#a3b0b2b33a8ffd8757987e4629be921ce", null ],
-      [ "set_cursor", "classscreen.html#a33778befc1fd3aa696177743819eea38", null ],
-      [ "to_string", "classscreen.html#a2714ae922fcc2edcd221a075709efe16", null ]
+    [ "neforce::tui::screen", "classneforce_1_1tui_1_1screen.html", [
+      [ "screen", "classneforce_1_1tui_1_1screen.html#a32577fbb75dc67fbc1f764cee452cb1f", null ],
+      [ "clear", "classneforce_1_1tui_1_1screen.html#af0609b48c139c1577750545cda5a60a9", null ],
+      [ "cursor", "classneforce_1_1tui_1_1screen.html#af30098e86d1d6f1052f15b74fd8301d1", null ],
+      [ "hyperlink", "classneforce_1_1tui_1_1screen.html#a0ef3e8daf8309e978e6a6faefa6ed9b4", null ],
+      [ "register_hyperlink", "classneforce_1_1tui_1_1screen.html#a0847ab789bb846a1bced16b18b2289fc", null ],
+      [ "reset_position", "classneforce_1_1tui_1_1screen.html#a864c5af010c9f8b7870f5bba25b319b7", null ],
+      [ "resize", "classneforce_1_1tui_1_1screen.html#abff719279cb9c2d8eec70d52464366c4", null ],
+      [ "set_cursor", "classneforce_1_1tui_1_1screen.html#a5d5d76e9168bd682ff483c5b44c1e0ff", null ],
+      [ "to_plaintext", "classneforce_1_1tui_1_1screen.html#a3beaefbce1b4a18e9acb4d447983fde3", null ],
+      [ "to_string", "classneforce_1_1tui_1_1screen.html#a52e82b2472b59a6f84162be14053914f", null ]
     ] ],
-    [ "decorator", "group___t_u_i.html#ga898adc8dcc620bb02e5b25e31b4e5990", null ],
-    [ "elements", "group___t_u_i.html#gae8bac98dad9d17000958d20b8f50d5b8", null ],
-    [ "graph_function", "group___t_u_i.html#ga97b0e9fda477886e53f5bffcb218ef14", null ],
-    [ "gauge_direction", "group___t_u_i.html#ga2ff19048a7ac6e99cb67e220980a2219", [
-      [ "gauge_direction::right", "group___t_u_i.html#gga2ff19048a7ac6e99cb67e220980a2219a7c4f29407893c334a6cb7a87bf045c0d", null ],
-      [ "gauge_direction::left", "group___t_u_i.html#gga2ff19048a7ac6e99cb67e220980a2219a811882fecd5c7618d7099ebbd39ea254", null ],
-      [ "gauge_direction::up", "group___t_u_i.html#gga2ff19048a7ac6e99cb67e220980a2219a46c48bec0d282018b9d167eef7711b2c", null ],
-      [ "gauge_direction::down", "group___t_u_i.html#gga2ff19048a7ac6e99cb67e220980a2219a74e8333ad11685ff3bdae589c8f6e34d", null ]
+    [ "neforce::tui::decorator", "group___t_u_i.html#ga541ebadbac45b59b4e9fa15ee9ada6f6", null ],
+    [ "neforce::tui::elements", "group___t_u_i.html#ga86b483e3aa66f1eeb472aa997b157e2a", null ],
+    [ "neforce::tui::graph_function", "group___t_u_i.html#gafc471244ebd617bf703ae6a49e8ca741", null ],
+    [ "neforce::tui::gauge_direction", "group___t_u_i.html#ga8d40dfb53018becbe431d904b3fbe121", [
+      [ "neforce::tui::gauge_direction::right", "group___t_u_i.html#gga8d40dfb53018becbe431d904b3fbe121a7c4f29407893c334a6cb7a87bf045c0d", null ],
+      [ "neforce::tui::gauge_direction::left", "group___t_u_i.html#gga8d40dfb53018becbe431d904b3fbe121a811882fecd5c7618d7099ebbd39ea254", null ],
+      [ "neforce::tui::gauge_direction::up", "group___t_u_i.html#gga8d40dfb53018becbe431d904b3fbe121a46c48bec0d282018b9d167eef7711b2c", null ],
+      [ "neforce::tui::gauge_direction::down", "group___t_u_i.html#gga8d40dfb53018becbe431d904b3fbe121a74e8333ad11685ff3bdae589c8f6e34d", null ]
     ] ],
-    [ "key_modifier", "group___t_u_i.html#ga83e3b878ca91928b8124cae69317e420", [
-      [ "key_modifier::none", "group___t_u_i.html#gga83e3b878ca91928b8124cae69317e420a334c4a4c42fdb79d7ebc3e73b517e6f8", null ],
-      [ "key_modifier::ctrl", "group___t_u_i.html#gga83e3b878ca91928b8124cae69317e420abbf7ea1d373e03d16d1418909b05eaf6", null ],
-      [ "key_modifier::alt", "group___t_u_i.html#gga83e3b878ca91928b8124cae69317e420a34823136d0dd91d0f5d22db740f7679c", null ],
-      [ "key_modifier::shift", "group___t_u_i.html#gga83e3b878ca91928b8124cae69317e420a2ab64f4ee279e5baf7ab7059b15e6d12", null ]
+    [ "neforce::tui::key_modifier", "group___t_u_i.html#gafec1c40799515c1ff06a2364b9ac9d41", [
+      [ "neforce::tui::key_modifier::none", "group___t_u_i.html#ggafec1c40799515c1ff06a2364b9ac9d41a334c4a4c42fdb79d7ebc3e73b517e6f8", null ],
+      [ "neforce::tui::key_modifier::ctrl", "group___t_u_i.html#ggafec1c40799515c1ff06a2364b9ac9d41abbf7ea1d373e03d16d1418909b05eaf6", null ],
+      [ "neforce::tui::key_modifier::alt", "group___t_u_i.html#ggafec1c40799515c1ff06a2364b9ac9d41a34823136d0dd91d0f5d22db740f7679c", null ],
+      [ "neforce::tui::key_modifier::shift", "group___t_u_i.html#ggafec1c40799515c1ff06a2364b9ac9d41a2ab64f4ee279e5baf7ab7059b15e6d12", null ]
     ] ],
-    [ "mouse_action", "group___t_u_i.html#ga8fda71d62f1efe9e2f76ad018833d037", [
-      [ "mouse_action::press", "group___t_u_i.html#gga8fda71d62f1efe9e2f76ad018833d037a5f0038e170564c7ad98d949c741a4da2", null ],
-      [ "mouse_action::release", "group___t_u_i.html#gga8fda71d62f1efe9e2f76ad018833d037a123fead50246387983ee340507115ef4", null ],
-      [ "mouse_action::move", "group___t_u_i.html#gga8fda71d62f1efe9e2f76ad018833d037a3734a903022249b3010be1897042568e", null ],
-      [ "mouse_action::wheel", "group___t_u_i.html#gga8fda71d62f1efe9e2f76ad018833d037a5eda0ea98768e91b815fa6667e4f0178", null ]
+    [ "neforce::tui::mouse_action", "group___t_u_i.html#ga2cb32f83d482b13e50c57d9a2aed1ee5", [
+      [ "neforce::tui::mouse_action::press", "group___t_u_i.html#gga2cb32f83d482b13e50c57d9a2aed1ee5a5f0038e170564c7ad98d949c741a4da2", null ],
+      [ "neforce::tui::mouse_action::release", "group___t_u_i.html#gga2cb32f83d482b13e50c57d9a2aed1ee5a123fead50246387983ee340507115ef4", null ],
+      [ "neforce::tui::mouse_action::move", "group___t_u_i.html#gga2cb32f83d482b13e50c57d9a2aed1ee5a3734a903022249b3010be1897042568e", null ],
+      [ "neforce::tui::mouse_action::wheel", "group___t_u_i.html#gga2cb32f83d482b13e50c57d9a2aed1ee5a5eda0ea98768e91b815fa6667e4f0178", null ]
     ] ],
-    [ "mouse_button", "group___t_u_i.html#gaf798e894dc9edcb17ec3660896a890ba", [
-      [ "mouse_button::left", "group___t_u_i.html#ggaf798e894dc9edcb17ec3660896a890baa811882fecd5c7618d7099ebbd39ea254", null ],
-      [ "mouse_button::middle", "group___t_u_i.html#ggaf798e894dc9edcb17ec3660896a890baa4a548addbfb239bbd12f5afe11a4b6dc", null ],
-      [ "mouse_button::right", "group___t_u_i.html#ggaf798e894dc9edcb17ec3660896a890baa7c4f29407893c334a6cb7a87bf045c0d", null ],
-      [ "mouse_button::wheelup", "group___t_u_i.html#ggaf798e894dc9edcb17ec3660896a890baa800f2d07b62bbc15176bbcc4f49bbd36", null ],
-      [ "mouse_button::wheeldown", "group___t_u_i.html#ggaf798e894dc9edcb17ec3660896a890baad6028dde0a2dcdfcc018cc7f0797804d", null ],
-      [ "mouse_button::none", "group___t_u_i.html#ggaf798e894dc9edcb17ec3660896a890baa334c4a4c42fdb79d7ebc3e73b517e6f8", null ]
+    [ "neforce::tui::mouse_button", "group___t_u_i.html#ga61f3e518f1c26efd1c15c597e5a43762", [
+      [ "neforce::tui::mouse_button::left", "group___t_u_i.html#gga61f3e518f1c26efd1c15c597e5a43762a811882fecd5c7618d7099ebbd39ea254", null ],
+      [ "neforce::tui::mouse_button::middle", "group___t_u_i.html#gga61f3e518f1c26efd1c15c597e5a43762a4a548addbfb239bbd12f5afe11a4b6dc", null ],
+      [ "neforce::tui::mouse_button::right", "group___t_u_i.html#gga61f3e518f1c26efd1c15c597e5a43762a7c4f29407893c334a6cb7a87bf045c0d", null ],
+      [ "neforce::tui::mouse_button::wheelup", "group___t_u_i.html#gga61f3e518f1c26efd1c15c597e5a43762a800f2d07b62bbc15176bbcc4f49bbd36", null ],
+      [ "neforce::tui::mouse_button::wheeldown", "group___t_u_i.html#gga61f3e518f1c26efd1c15c597e5a43762ad6028dde0a2dcdfcc018cc7f0797804d", null ],
+      [ "neforce::tui::mouse_button::none", "group___t_u_i.html#gga61f3e518f1c26efd1c15c597e5a43762a334c4a4c42fdb79d7ebc3e73b517e6f8", null ]
     ] ],
-    [ "bgcolor", "group___t_u_i.html#ga84a1c79c80d26e854e9639cdadd4a81d", null ],
-    [ "blink", "group___t_u_i.html#ga43cd237c480c5b1524357822356eb458", null ],
-    [ "bold", "group___t_u_i.html#ga91e434d9f869c9cd45059bb51853b766", null ],
-    [ "border", "group___t_u_i.html#ga64cadbe6212bd2bad701e61880de589f", null ],
-    [ "catch_event", "group___t_u_i.html#ga4ab2bcb20fa171ac20b6525ca39d4ded", null ],
-    [ "collapsible", "group___t_u_i.html#ga5cc88be98a959a1c4e044113829434ca", null ],
-    [ "color", "group___t_u_i.html#ga0da5f46f1b435f58b1765ed91da39f9a", null ],
-    [ "compute_layout", "group___t_u_i.html#ga604e3f2c4740ea9d70244c41f09a4ff9", null ],
-    [ "dim", "group___t_u_i.html#ga730caa4655b0da15ac9257e6a084d64c", null ],
-    [ "dropdown", "group___t_u_i.html#gabdf745cb52372a76a5da226775a68484", null ],
-    [ "flex_el", "group___t_u_i.html#gac27f8a55f835bf5b04faa3b96128ce67", null ],
-    [ "flex_grow_el", "group___t_u_i.html#gae5b2362ab293606db7b0238c910a5f10", null ],
-    [ "flex_shrink_el", "group___t_u_i.html#ga203b4daf7e9a6d138d5afaeb2bbae1dd", null ],
-    [ "gauge", "group___t_u_i.html#ga6353e60650173361bcbcd597c005db36", null ],
-    [ "gauge_direction", "group___t_u_i.html#ga0a49513d0ab668833fa66d27e6bd63a0", null ],
-    [ "graph", "group___t_u_i.html#gad5873b6dde89d4742c3dae47bbf313da", null ],
-    [ "graph", "group___t_u_i.html#gaf94624a824356255db9a94dd0e2bca14", null ],
-    [ "hoverable", "group___t_u_i.html#ga9e081c85fb69d6706a1804825ec909e8", null ],
-    [ "hoverable", "group___t_u_i.html#gac0e9eaf4636dae34fcc0c8da16d9691e", null ],
-    [ "hscroll_indicator", "group___t_u_i.html#ga3a1920a300d46e4cda000572a0b50261", null ],
-    [ "inverted", "group___t_u_i.html#ga9f54b30a71bdcd6111b14681f52ea0c2", null ],
-    [ "italic", "group___t_u_i.html#ga1607e946073ef4962a2ddd6aaf71d89e", null ],
-    [ "maybe", "group___t_u_i.html#ga0da9c36ad3d36ebe5efb07ecb3630ee0", null ],
-    [ "menu", "group___t_u_i.html#gad531121e5761a10123a375515a47f80a", null ],
-    [ "modal", "group___t_u_i.html#ga46e4fa809f823db4d684b2bc72662657", null ],
-    [ "operator|", "group___t_u_i.html#gae9c8abf68079519850d7466cff8dbae1", null ],
-    [ "operator|", "group___t_u_i.html#gae69f7d03210271d79cee9ab3d8961430", null ],
-    [ "operator|", "group___t_u_i.html#ga130259638b3a9adb84c2966bd885a909", null ],
-    [ "operator|=", "group___t_u_i.html#ga0a0d1f2dde4e057877235d9856e61904", null ],
-    [ "paragraph", "group___t_u_i.html#gaf198c9ef6dc535ab4d0078c6aa650f7a", null ],
-    [ "paragraph_align_center", "group___t_u_i.html#ga958eec91631801965adc245b4db56378", null ],
-    [ "paragraph_align_right", "group___t_u_i.html#gab0656d168ae7977f548d2d9e904b040b", null ],
-    [ "Radiobox", "group___t_u_i.html#ga47d2c255131f13aa75091b9020a8f48b", null ],
-    [ "renderer", "group___t_u_i.html#ga9f49473583e44e7170d8c3bf935f73b9", null ],
-    [ "renderer", "group___t_u_i.html#gaa718ddea9066af0644d39fc24d7d994a", null ],
-    [ "renderer", "group___t_u_i.html#ga62edf738907e8a281c88e037cb5cbe75", null ],
-    [ "resizable_split_bottom", "group___t_u_i.html#ga7b6cf874d121581e5879e6fb7c7227f1", null ],
-    [ "resizable_split_left", "group___t_u_i.html#gad93909f6427649e22a942b8c3182ad7f", null ],
-    [ "resizable_split_right", "group___t_u_i.html#ga894fcaf60c071ba3bdea0590bdafb455", null ],
-    [ "resizable_split_top", "group___t_u_i.html#gae57cafdbc6d3545d08c80c87a61c8648", null ],
-    [ "scroll_view", "group___t_u_i.html#ga6aa3563b2500c8a4dff967839b785b7c", null ],
-    [ "slider", "group___t_u_i.html#ga5bafd7b31459ca0b7adbaa00a395436a", null ],
-    [ "spinner", "group___t_u_i.html#ga1667aee6c34aad1fbb58d490de307baf", null ],
-    [ "strikethrough", "group___t_u_i.html#ga4441d245c4ccc7415afdeed42f923e4d", null ],
-    [ "text_input", "group___t_u_i.html#ga970195ac8e066d0a21f326efa3cbb506", null ],
-    [ "text_wrap", "group___t_u_i.html#gac70b8a7b64ef1585dd631e1c95a24223", null ],
-    [ "toggle", "group___t_u_i.html#ga87b15d08cb2cf21ef2489c9aa2042d12", null ],
-    [ "underlined", "group___t_u_i.html#ga0555fce6ac791933bc4201f3acbf427e", null ],
-    [ "underlined_double", "group___t_u_i.html#ga39ed85cdc86d9a0eac4edaa6023dfaff", null ],
-    [ "vscroll_indicator", "group___t_u_i.html#ga2cca1dec1f04e65ff9c0990df4f94d0f", null ],
-    [ "window", "group___t_u_i.html#ga83c8d5778dcad829f1f5cc7e0a273dca", null ],
-    [ "dark_theme", "group___t_u_i.html#ga68a47e3ac97263e866521b06fa87f3c1", null ]
+    [ "neforce::tui::bgcolor", "group___t_u_i.html#ga30575c5ee613bf29d32fcdf21411ad9b", null ],
+    [ "neforce::tui::blink", "group___t_u_i.html#ga4827ebce9ae89c56c8f064dfce7ff624", null ],
+    [ "neforce::tui::bold", "group___t_u_i.html#ga16ce65d36fbcb291f4349a4ac00bf672", null ],
+    [ "neforce::tui::border", "group___t_u_i.html#ga0a13d9cf3726ef8d4e7820b63891f078", null ],
+    [ "neforce::tui::color", "group___t_u_i.html#ga5a6710b179fd24c551c9b1c8c1719f0d", null ],
+    [ "neforce::tui::compute_layout", "group___t_u_i.html#ga4c548071d658b6b267b69bc9cc629099", null ],
+    [ "neforce::tui::dim", "group___t_u_i.html#ga90e7dc6567524f889b2ce7db0ddd7fb8", null ],
+    [ "neforce::tui::find_element_at", "group___t_u_i.html#ga140440f0befaee0988648e06496f70bf", null ],
+    [ "neforce::tui::flex_el", "group___t_u_i.html#gabe4c0690cf478e4f2daabbd2dec127da", null ],
+    [ "neforce::tui::flex_grow_el", "group___t_u_i.html#ga09b14da9bd2fce236c6ad7eae5d0f150", null ],
+    [ "neforce::tui::flex_shrink_el", "group___t_u_i.html#gaab2299244a504409fc743623883cd2a9", null ],
+    [ "neforce::tui::gauge", "group___t_u_i.html#gae01f0babb87ef22821acc733c939e0ec", null ],
+    [ "neforce::tui::gauge_direction", "group___t_u_i.html#ga79c00e87d342365f189f2857bbea1611", null ],
+    [ "neforce::tui::graph", "group___t_u_i.html#ga33cfa342078f3c87338cedc2120e4933", null ],
+    [ "neforce::tui::graph", "group___t_u_i.html#ga70a4e7a3bd7bf4e9f23846d9e7a6959a", null ],
+    [ "neforce::tui::hit_test_at", "group___t_u_i.html#ga4069de75c7644384e77ffd497d9893b4", null ],
+    [ "neforce::tui::hscroll_indicator", "group___t_u_i.html#gabde4fec8699f3c8777bc417cd74f10a0", null ],
+    [ "neforce::tui::inverted", "group___t_u_i.html#gaa01832cd26c963800adb481e75cfe7eb", null ],
+    [ "neforce::tui::italic", "group___t_u_i.html#ga10fe7efc13a67e5dbd5d7e170d7be8d8", null ],
+    [ "neforce::tui::operator|", "group___t_u_i.html#ga6e03bad35a4e01849c1ebde6f0de6b44", null ],
+    [ "neforce::tui::operator|", "group___t_u_i.html#ga69d149ce021bddba2fa2bdd1e1af3544", null ],
+    [ "neforce::tui::operator|", "group___t_u_i.html#gabdaa1fca4ede9adb3c7580e90dd95ea8", null ],
+    [ "neforce::tui::operator|=", "group___t_u_i.html#gaa8f5ee4b1bafb6028e9e01f87a74126b", null ],
+    [ "neforce::tui::paragraph", "group___t_u_i.html#gafac3ae1b1063f08ef5e120fc64338779", null ],
+    [ "neforce::tui::paragraph_align_center", "group___t_u_i.html#ga3af774f9ad6fe693a65c96e08efadc25", null ],
+    [ "neforce::tui::paragraph_align_right", "group___t_u_i.html#ga21ad18a3138c3c3d02470e4d79a9a4bc", null ],
+    [ "neforce::tui::spinner", "group___t_u_i.html#gafd3455eed228714545942968d509350b", null ],
+    [ "neforce::tui::strikethrough", "group___t_u_i.html#ga4451883450bbf0855acb67f3a9d971df", null ],
+    [ "neforce::tui::text_wrap", "group___t_u_i.html#gaa5c37868d6050af442a23b2ac63b876f", null ],
+    [ "neforce::tui::underlined", "group___t_u_i.html#gaa83ea4874d3c6511ce59be46964e0939", null ],
+    [ "neforce::tui::underlined_double", "group___t_u_i.html#ga69a196e074b14a70b17c2c3b451bcab4", null ],
+    [ "neforce::tui::vscroll_indicator", "group___t_u_i.html#gaabaedad32ab2548a3ed7dc4b7af77b89", null ],
+    [ "neforce::tui::dark_theme", "group___t_u_i.html#ga41217bfd0af3992bd574656d88835808", null ]
 ];

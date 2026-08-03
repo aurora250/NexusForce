@@ -1,0 +1,300 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1http_1_1cache__filter" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>neforce::http::cache_filter</compoundname>
+    <basecompoundref refid="classneforce_1_1http_1_1http__filter" prot="public" virt="non-virtual">neforce::http::http_filter</basecompoundref>
+    <includes refid="http__cache_8hpp" local="no">http_cache.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1cache__filter_1a35c55b2d45d6247fdb601d9d747fcaf4" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::http::cache_filter::enabled</definition>
+        <argsstring></argsstring>
+        <name>enabled</name>
+        <qualifiedname>neforce::http::cache_filter::enabled</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="118" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" bodystart="118" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1cache__filter_1a996592157a9fa0ae466d9e83786bff5f" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::http::cache_filter::cache_only_get</definition>
+        <argsstring></argsstring>
+        <name>cache_only_get</name>
+        <qualifiedname>neforce::http::cache_filter::cache_only_get</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="119" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" bodystart="119" bodyend="119"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1cache__filter_1a376a1c8653c22acae3f557ef11ac17b6" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1http_1_1response__cache" kindref="compound">response_cache</ref> *</type>
+        <definition>response_cache* neforce::http::cache_filter::cache_</definition>
+        <argsstring></argsstring>
+        <name>cache_</name>
+        <qualifiedname>neforce::http::cache_filter::cache_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="133" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" bodystart="133" bodyend="133"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1cache__filter_1ae9f36ac807a02c90632b7bb9547d5451" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::cache_filter::cache_filter</definition>
+        <argsstring>()=default</argsstring>
+        <name>cache_filter</name>
+        <qualifiedname>neforce::http::cache_filter::cache_filter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="121" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1cache__filter_1ae8502c99c62ac7d8be1f830da796da8d" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::cache_filter::cache_filter</definition>
+        <argsstring>(response_cache *cache)</argsstring>
+        <name>cache_filter</name>
+        <qualifiedname>neforce::http::cache_filter::cache_filter</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1http_1_1response__cache" kindref="compound">response_cache</ref> *</type>
+          <declname>cache</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="122" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" bodystart="122" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1cache__filter_1adf39ea527284ae85f5172cb227fb1ad7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::cache_filter::set_cache</definition>
+        <argsstring>(response_cache *cache)</argsstring>
+        <name>set_cache</name>
+        <qualifiedname>neforce::http::cache_filter::set_cache</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1http_1_1response__cache" kindref="compound">response_cache</ref> *</type>
+          <declname>cache</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="125" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" bodystart="125" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1cache__filter_1ab0e3b98a63ad5e0cad138398c310afda" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::http::cache_filter::pre_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response) override</argsstring>
+        <name>pre_filter</name>
+        <qualifiedname>neforce::http::cache_filter::pre_filter</qualifiedname>
+        <reimplements refid="classneforce_1_1http_1_1http__filter_1a66c5af31a812075314a85ef38b9d55eb">pre_filter</reimplements>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>预处理方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>返回false表示中断后续处理</para>
+</simplesect>
+在请求处理前调用，可以检查请求、修改请求或提前返回响应。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="127" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1cache__filter_1acd11a0f59edc9363567ee7e69bf19d86" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void neforce::http::cache_filter::post_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response) override</argsstring>
+        <name>post_filter</name>
+        <qualifiedname>neforce::http::cache_filter::post_filter</qualifiedname>
+        <reimplements refid="classneforce_1_1http_1_1http__filter_1a14ac82a85eee7e20c9d912f97b50535f">post_filter</reimplements>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>后处理方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+在响应发送前调用，可以修改响应头或正文。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="128" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1cache__filter_1a0b264122ac69358e5a4dfd2626c6225b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void neforce::http::cache_filter::do_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response) override</argsstring>
+        <name>do_filter</name>
+        <qualifiedname>neforce::http::cache_filter::do_filter</qualifiedname>
+        <reimplements refid="classneforce_1_1http_1_1http__filter_1a354b28748f728effc3a651e7c9fa96a6">do_filter</reimplements>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>核心过滤方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+执行实际的过滤逻辑。通常由具体处理器实现， 中间件过滤器可能不实现此方法。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="129" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" bodystart="129" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1cache__filter_1aa74ab3abd62f7446cd8a1e06f80fe629" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::http::cache_filter::name</definition>
+        <argsstring>() const override</argsstring>
+        <name>name</name>
+        <qualifiedname>neforce::http::cache_filter::name</qualifiedname>
+        <reimplements refid="classneforce_1_1http_1_1http__filter_1a16dc9ccb76e7dccf41f4ae732ea01afe">name</reimplements>
+        <briefdescription>
+<para>获取过滤器名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>过滤器名称 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="130" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" bodystart="130" bodyend="130"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>HTTP缓存过滤器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>自动缓存GET请求的响应，处理If-None-Match和If-Modified-Since。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::http::cache_filter</label>
+        <link refid="classneforce_1_1http_1_1cache__filter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::http::http_filter</label>
+        <link refid="classneforce_1_1http_1_1http__filter"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::http::cache_filter</label>
+        <link refid="classneforce_1_1http_1_1cache__filter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::http::http_filter</label>
+        <link refid="classneforce_1_1http_1_1http__filter"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="116" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" bodystart="116" bodyend="134"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1http_1_1cache__filter_1a376a1c8653c22acae3f557ef11ac17b6" prot="private" virt="non-virtual"><scope>neforce::http::cache_filter</scope><name>cache_</name></member>
+      <member refid="classneforce_1_1http_1_1cache__filter_1ae9f36ac807a02c90632b7bb9547d5451" prot="public" virt="non-virtual"><scope>neforce::http::cache_filter</scope><name>cache_filter</name></member>
+      <member refid="classneforce_1_1http_1_1cache__filter_1ae8502c99c62ac7d8be1f830da796da8d" prot="public" virt="non-virtual"><scope>neforce::http::cache_filter</scope><name>cache_filter</name></member>
+      <member refid="classneforce_1_1http_1_1cache__filter_1a996592157a9fa0ae466d9e83786bff5f" prot="public" virt="non-virtual"><scope>neforce::http::cache_filter</scope><name>cache_only_get</name></member>
+      <member refid="classneforce_1_1http_1_1cache__filter_1a0b264122ac69358e5a4dfd2626c6225b" prot="public" virt="virtual"><scope>neforce::http::cache_filter</scope><name>do_filter</name></member>
+      <member refid="classneforce_1_1http_1_1cache__filter_1a35c55b2d45d6247fdb601d9d747fcaf4" prot="public" virt="non-virtual"><scope>neforce::http::cache_filter</scope><name>enabled</name></member>
+      <member refid="classneforce_1_1http_1_1cache__filter_1aa74ab3abd62f7446cd8a1e06f80fe629" prot="public" virt="virtual"><scope>neforce::http::cache_filter</scope><name>name</name></member>
+      <member refid="classneforce_1_1http_1_1cache__filter_1acd11a0f59edc9363567ee7e69bf19d86" prot="public" virt="virtual"><scope>neforce::http::cache_filter</scope><name>post_filter</name></member>
+      <member refid="classneforce_1_1http_1_1cache__filter_1ab0e3b98a63ad5e0cad138398c310afda" prot="public" virt="virtual"><scope>neforce::http::cache_filter</scope><name>pre_filter</name></member>
+      <member refid="classneforce_1_1http_1_1cache__filter_1adf39ea527284ae85f5172cb227fb1ad7" prot="public" virt="non-virtual"><scope>neforce::http::cache_filter</scope><name>set_cache</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter_1a157ba2513278a823db4ea1b36be341f0" prot="public" virt="virtual"><scope>neforce::http::cache_filter</scope><name>~http_filter</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

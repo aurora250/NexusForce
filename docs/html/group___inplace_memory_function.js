@@ -1,6 +1,6 @@
 var group___inplace_memory_function =
 [
-    [ "construct", "group___inplace_memory_function.html#ga9e6a0c6da451f33867d11cbea1d0cf12", null ],
-    [ "destroy", "group___inplace_memory_function.html#gaf6d29acd514e82a97c7809f66079f300", null ],
-    [ "destroy", "group___inplace_memory_function.html#ga0d7b6e1476664ca8b85b124f487ae342", null ]
+    [ "neforce::construct", "group___inplace_memory_function.html#ga209897e20022ce0e7c15c49e20901720", null ],
+    [ "neforce::destroy", "group___inplace_memory_function.html#ga93ffba256aa0e8e86a2dc5f043082b1d", null ],
+    [ "neforce::destroy", "group___inplace_memory_function.html#ga331a75759198aa8083265b23c0b3b913", null ]
 ];

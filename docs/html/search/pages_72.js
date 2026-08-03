@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['编码规则_0',['UTF-8 编码规则',['../group___code_point.html#utf8_encoding',1,'']]]
+  ['系统、并发与命令行_0',['⚙️ 系统、并发与命令行',['../index.html#autotoc_md14',1,'']]],
+  ['系统接口_20system_1',['⚙️ 系统接口 (System)',['../index.html#autotoc_md26',1,'']]]
 ];

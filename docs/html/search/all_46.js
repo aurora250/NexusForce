@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['压缩对_0',['压缩对',['../group___compressed_pair.html',1,'']]],
-  ['压缩解压缩_1',['压缩解压缩',['../group___compression.html',1,'']]],
-  ['压缩_20compress_2',['📦 压缩 (Compress)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md32',1,'']]]
+  ['单位后缀说明_0',['单位后缀说明',['../group___byte_size.html#unit_suffixes',1,'']]],
+  ['单次调用_1',['单次调用',['../group___call_once.html',1,'']]]
 ];

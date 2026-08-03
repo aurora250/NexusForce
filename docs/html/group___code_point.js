@@ -1,24 +1,24 @@
 var group___code_point =
 [
-    [ "codepoint", "classcodepoint.html", [
-      [ "codepoint", "classcodepoint.html#ac1d376afed57c718685d023345867c65", null ],
-      [ "codepoint", "classcodepoint.html#adf7d8944816347ba3aefcca692ae21e8", null ],
-      [ "codepoint", "classcodepoint.html#abf3fd638a4436db6800bafe9f543b16d", null ],
-      [ "codepoint", "classcodepoint.html#abf29fb9b124b0a0f54afbb3b7b74844d", null ],
-      [ "append_to", "classcodepoint.html#ad5ec860f3407adf538aac80106f4a13b", null ],
-      [ "append_to", "classcodepoint.html#aec04440229dbf33585649a017be1dae9", null ],
-      [ "append_to", "classcodepoint.html#ae92078f825d07e7989a9350cf3251321", null ],
-      [ "append_to", "classcodepoint.html#a7314fbb0bd0caf0852ff3b434d4bc6a5", null ],
-      [ "append_to", "classcodepoint.html#a7d9fdbda25dae744df0fac4b49444e66", null ],
-      [ "display_width", "classcodepoint.html#abb9133971053d48bae097210f36a6315", null ],
-      [ "is_ascii", "classcodepoint.html#a7876f9adc0c922f3991e081ac01716c7", null ],
-      [ "is_bmp", "classcodepoint.html#ac2541988a6b948b7496d1b39628c81fd", null ],
-      [ "is_replacement", "classcodepoint.html#a1cdc351eeb5a0c03f7cc2a7f4a34dfec", null ],
-      [ "is_supplementary", "classcodepoint.html#a911866174ad7892efd4336cab8e44676", null ],
-      [ "needs_surrogate_pair", "classcodepoint.html#a55154ba8f8d16407f7a0390fcfc0c77d", null ],
-      [ "to_char32", "classcodepoint.html#a3481e8f571d9fae334dbe74c59ad237f", null ],
-      [ "utf16_length", "classcodepoint.html#a81017f2d4c6b74945efef889037ccc21", null ],
-      [ "utf8_length", "classcodepoint.html#abbf4985b5785488a2199f3a373cb3532", null ],
-      [ "value", "classcodepoint.html#af44dad42fbb2b64fb3e842d0db9acd6d", null ]
+    [ "neforce::codepoint", "classneforce_1_1codepoint.html", [
+      [ "codepoint", "classneforce_1_1codepoint.html#aacbcf965d7d41d282d0e1df75a35de58", null ],
+      [ "codepoint", "classneforce_1_1codepoint.html#a4f3c08c18ba6af14298f1e8284193b9a", null ],
+      [ "codepoint", "classneforce_1_1codepoint.html#a93d30d23160b1f7f0b113291cf174079", null ],
+      [ "codepoint", "classneforce_1_1codepoint.html#ac026d45430ee11ca733909a2464333a6", null ],
+      [ "append_to", "classneforce_1_1codepoint.html#aa403e644ac055f708e1abbb4a06ff0ff", null ],
+      [ "append_to", "classneforce_1_1codepoint.html#a01f733b521a8ba5ed651da496e1fe04b", null ],
+      [ "append_to", "classneforce_1_1codepoint.html#a4610e317c5f62f9340011efe515abd94", null ],
+      [ "append_to", "classneforce_1_1codepoint.html#aa61cbc09c90b7dc816ae78bafdc0b384", null ],
+      [ "append_to", "classneforce_1_1codepoint.html#a8be07304bc03ce847b1ebef24db266d2", null ],
+      [ "display_width", "classneforce_1_1codepoint.html#a8dafa73182b19d1ff87edc262a5fafb7", null ],
+      [ "is_ascii", "classneforce_1_1codepoint.html#af6b4db2637ad45848bad2cee582d9636", null ],
+      [ "is_bmp", "classneforce_1_1codepoint.html#a4bdc1950a9eede757aa82039f274dd6f", null ],
+      [ "is_replacement", "classneforce_1_1codepoint.html#a6dfd0f58f741d86fae438da5c9245eed", null ],
+      [ "is_supplementary", "classneforce_1_1codepoint.html#a82aa69e643a3880180bcb9b9b77c1591", null ],
+      [ "needs_surrogate_pair", "classneforce_1_1codepoint.html#a282a06b9f89a3b1423366865f7f0daa7", null ],
+      [ "to_char32", "classneforce_1_1codepoint.html#a2ea69f0e57815353fd0909be9ca57798", null ],
+      [ "utf16_length", "classneforce_1_1codepoint.html#a3084a68b878b2bfe0eef83fb512cd707", null ],
+      [ "utf8_length", "classneforce_1_1codepoint.html#aa02370baaf68b6543230e62836e42c25", null ],
+      [ "value", "classneforce_1_1codepoint.html#a7cee39f969dc9deb67e693d455e50c1f", null ]
     ] ]
 ];

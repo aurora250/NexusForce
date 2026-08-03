@@ -1,0 +1,431 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1tui_1_1component" kind="class" language="C++" prot="public">
+    <compoundname>neforce::tui::component</compoundname>
+    <basecompoundref refid="classneforce_1_1tui_1_1component__base" prot="public" virt="non-virtual">neforce::tui::component_base</basecompoundref>
+    <includes refid="component_8hpp" local="no">component.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename P</type>
+        <defval><ref refid="structneforce_1_1tui_1_1empty__props" kindref="compound">empty_props</ref></defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1tui_1_1component_1a3dc905815736d75a84f95225911fb100" prot="public" static="no">
+        <type>P</type>
+        <definition>using neforce::tui::component&lt; P &gt;::props_type = P</definition>
+        <argsstring></argsstring>
+        <name>props_type</name>
+        <qualifiedname>neforce::tui::component::props_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" line="351" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" bodystart="351" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classneforce_1_1tui_1_1component_1a85c0d5bdbeb865097f11d23c5ef1a427" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class reconciler</definition>
+        <argsstring></argsstring>
+        <name>reconciler</name>
+        <qualifiedname>neforce::tui::component::reconciler</qualifiedname>
+        <param>
+          <type>reconciler</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" line="391" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" bodystart="391" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classneforce_1_1tui_1_1component_1af9951d9a55b3775f31867c32466edb6c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class focus_manager</definition>
+        <argsstring></argsstring>
+        <name>focus_manager</name>
+        <qualifiedname>neforce::tui::component::focus_manager</qualifiedname>
+        <param>
+          <type>focus_manager</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" line="392" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" bodystart="392" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classneforce_1_1tui_1_1component_1a5b97104505447c42689b96b15027d832" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class application</definition>
+        <argsstring></argsstring>
+        <name>application</name>
+        <qualifiedname>neforce::tui::component::application</qualifiedname>
+        <param>
+          <type>application</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" line="393" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" bodystart="393" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1component_1ac98ef7687532964a06a6127d314084fc" prot="private" static="no" mutable="no">
+        <type>props_type</type>
+        <definition>props_type neforce::tui::component&lt; P &gt;::props_</definition>
+        <argsstring></argsstring>
+        <name>props_</name>
+        <qualifiedname>neforce::tui::component::props_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" line="395" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" bodystart="395" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tui_1_1component_1a5946db3012872209633ebf8cd8cbb8e1" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; void &gt; &gt;</type>
+        <definition>vector&lt;shared_ptr&lt;void&gt; &gt; neforce::tui::component&lt; P &gt;::states_</definition>
+        <argsstring></argsstring>
+        <name>states_</name>
+        <qualifiedname>neforce::tui::component::states_</qualifiedname>
+        <briefdescription>
+<para>类型擦除的状态列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" line="396" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" bodystart="396" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1tui_1_1component_1a806efaf9903ee09dc47e0cf13c613e38" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::tui::component&lt; P &gt;::component</definition>
+        <argsstring>()=default</argsstring>
+        <name>component</name>
+        <qualifiedname>neforce::tui::component::component</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" line="353" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1component_1a227826f89e1b261d38a4b1545be31979" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::tui::component&lt; P &gt;::~component</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~component</name>
+        <qualifiedname>neforce::tui::component::~component</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" line="354" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1component_1aa092c344bfed57b6c0fed7c6b2d4518f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::tui::component&lt; P &gt;::component</definition>
+        <argsstring>(const component &amp;)=delete</argsstring>
+        <name>component</name>
+        <qualifiedname>neforce::tui::component::component</qualifiedname>
+        <param>
+          <type>const component &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" line="355" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1component_1a9dd2833fab201c3c13ad4bf874070a60" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>component &amp;</type>
+        <definition>component &amp; neforce::tui::component&lt; P &gt;::operator=</definition>
+        <argsstring>(const component &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::tui::component::operator=</qualifiedname>
+        <param>
+          <type>const component &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" line="356" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1component_1afa3062ef67b9f5acddeab1aee056e193" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::tui::component&lt; P &gt;::component</definition>
+        <argsstring>(component &amp;&amp;)=delete</argsstring>
+        <name>component</name>
+        <qualifiedname>neforce::tui::component::component</qualifiedname>
+        <param>
+          <type>component &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" line="357" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1component_1aba2b898bc4e4794e6f7b61864a919fd0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>component &amp;</type>
+        <definition>component &amp; neforce::tui::component&lt; P &gt;::operator=</definition>
+        <argsstring>(component &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::tui::component::operator=</qualifiedname>
+        <param>
+          <type>component &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" line="358" column="15"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classneforce_1_1tui_1_1component_1ae4ed9f892a8068578594bfdfe8459c06" prot="protected" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const props_type &amp;</type>
+        <definition>const props_type &amp; neforce::tui::component&lt; P &gt;::props</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>props</name>
+        <qualifiedname>neforce::tui::component::props</qualifiedname>
+        <briefdescription>
+<para>获取父组件传入的属性 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>属性常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" line="365" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" bodystart="365" bodyend="365"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1component_1a0540fb1322c8fc3f88111db665a1c255" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1tui_1_1state" kindref="compound">state</ref>&lt; T &gt; &amp;</type>
+        <definition>state&lt; T &gt; &amp; neforce::tui::component&lt; P &gt;::create_state</definition>
+        <argsstring>(T initial)</argsstring>
+        <name>create_state</name>
+        <qualifiedname>neforce::tui::component::create_state</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>initial</declname>
+        </param>
+        <briefdescription>
+<para>创建响应式状态变量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>initial</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>状态变量引用</para>
+</simplesect>
+状态变量生命周期绑定到组件。</para>
+<para><simplesect kind="note"><para>必须在构造函数或 <ref refid="classneforce_1_1tui_1_1component__base_1a736db56c7d8740e70b2be1d8bfef8636" kindref="member">setup()</ref> 中调用，禁止在 <ref refid="classneforce_1_1tui_1_1component__base_1a2041f66a3c35966be31037e991abd5fb" kindref="member">render()</ref> 中动态创建。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" line="378" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" bodystart="378" bodyend="382"/>
+        <references refid="group___shared_pointer_1gacdaa04ead5936b6c9e0f024297dcf54f" compoundref="shared__ptr_8hpp" startline="849" endline="877">neforce::make_shared</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1tui_1_1component__base_1a08878b052b4c79a6ac0e12b2dfb23230" compoundref="component_8hpp" startline="324">neforce::tui::component_base::strand_</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tui_1_1component_1abfd67f5702ea0df954421251f6be3041" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::tui::component&lt; P &gt;::set_props</definition>
+        <argsstring>(props_type p)</argsstring>
+        <name>set_props</name>
+        <qualifiedname>neforce::tui::component::set_props</qualifiedname>
+        <param>
+          <type>props_type</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>注入属性 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>属性值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" line="388" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" bodystart="388" bodyend="388"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>组件模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>P</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>属性类型，父组件向子组件传递的只读参数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+所有 TUI 组件应继承此类并实现 <ref refid="classneforce_1_1tui_1_1component__base_1a2041f66a3c35966be31037e991abd5fb" kindref="member">render()</ref>。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::tui::component&lt; P &gt;</label>
+        <link refid="classneforce_1_1tui_1_1component"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::tui::component_base</label>
+        <link refid="classneforce_1_1tui_1_1component__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>neforce::io_context</label>
+        <link refid="classneforce_1_1io__context"/>
+      </node>
+      <node id="3">
+        <label>neforce::strand</label>
+        <link refid="classneforce_1_1strand"/>
+      </node>
+      <node id="1">
+        <label>neforce::tui::component&lt; P &gt;</label>
+        <link refid="classneforce_1_1tui_1_1component"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::tui::component_base</label>
+        <link refid="classneforce_1_1tui_1_1component__base"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>active_child_</edgelabel>
+          <edgelabel>parent_</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>strand_</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>ctx_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>children_</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::vector&lt; neforce::unique_ptr&lt; neforce::tui::component_base &gt; &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" line="349" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/tui/component/component.hpp" bodystart="349" bodyend="397"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1tui_1_1component__base_1a31855b9fb899bf783ed3d12f17a53940" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>active</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1a1417df6a96170278ccae50d47c86db57" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>active_child</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1a40dd5704371529d5a3080807b2ff927d" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>active_child</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1a80aebfa7eef650cacfe5d0e61af1a9f1" prot="protected" virt="non-virtual"><scope>neforce::tui::component</scope><name>active_child_</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1a0226d7a0b3784f2cbff7e6ec8f87e4fe" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>add_child</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1ac2d0059d4d48b0522fd7c1ffde7b9b66" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>child_at</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1ac00c6d3259dceb08c4dc4e6aaa0a1ef0" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>child_count</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1aefbcc973f77793bd823ec79c300dc5df" prot="protected" virt="non-virtual"><scope>neforce::tui::component</scope><name>children_</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1ae75c976b0eec61ec50ae985cc8656aff" prot="public" virt="virtual"><scope>neforce::tui::component</scope><name>cleanup</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1ac56f8b15b78f43eec6da29e88fddd599" prot="protected" virt="virtual"><scope>neforce::tui::component</scope><name>collect_focusable</name></member>
+      <member refid="classneforce_1_1tui_1_1component_1a806efaf9903ee09dc47e0cf13c613e38" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>component</name></member>
+      <member refid="classneforce_1_1tui_1_1component_1aa092c344bfed57b6c0fed7c6b2d4518f" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>component</name></member>
+      <member refid="classneforce_1_1tui_1_1component_1afa3062ef67b9f5acddeab1aee056e193" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>component</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1abb6caddef954ff9b2998cd9562a85490" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>context</name></member>
+      <member refid="classneforce_1_1tui_1_1component_1a0540fb1322c8fc3f88111db665a1c255" prot="protected" virt="non-virtual"><scope>neforce::tui::component</scope><name>create_state</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1aa810dd5d278dc8c9a1e2cb152dd87372" prot="protected" virt="non-virtual"><scope>neforce::tui::component</scope><name>ctx_</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1acca399f5c1e6fe6c3135db87b8ae71c2" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>detach</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1acc6779e6eb699d9287b3ab1d2275e289" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>detach_all_children</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1a80de146cd35df1c867722d78eb0fae4d" prot="public" virt="virtual"><scope>neforce::tui::component</scope><name>focusable</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1a963e0c1e213b62414651c6b3c3b3fc88" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>focused</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1a5a41bc0181e5ad936a1390c1ff2ffd03" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>has_focus</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1a876201a2059b279844047e8944bb5a61" prot="protected" virt="non-virtual"><scope>neforce::tui::component</scope><name>has_focus_</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1a5342dbc7ef88ce2d6de50086b0e5db6f" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>index</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1a81fa01cfe5b19e0b72b99393e4bd147c" prot="public" virt="virtual"><scope>neforce::tui::component</scope><name>on_animation</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1a0b25da364ce75e255497611c8cf02f92" prot="public" virt="virtual"><scope>neforce::tui::component</scope><name>on_key</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1af4bfaddd53a497fb4e64367c01eecb63" prot="public" virt="virtual"><scope>neforce::tui::component</scope><name>on_mouse</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1a82ce416c23877065fa4c353f76c8b935" prot="public" virt="virtual"><scope>neforce::tui::component</scope><name>on_mouse_leave</name></member>
+      <member refid="classneforce_1_1tui_1_1component_1a9dd2833fab201c3c13ad4bf874070a60" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1tui_1_1component_1aba2b898bc4e4794e6f7b61864a919fd0" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1ac948e4367be25aa197105e4972760922" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>parent</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1a2ad426ec8797c7ab855840eda6991ae3" prot="protected" virt="non-virtual"><scope>neforce::tui::component</scope><name>parent_</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1a296c0a23e06b886a60e78af7ea3aaf35" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>pass_through</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1a676128402c69a9488e3f52193d70534d" prot="protected" virt="non-virtual"><scope>neforce::tui::component</scope><name>pass_through_</name></member>
+      <member refid="classneforce_1_1tui_1_1component_1ae4ed9f892a8068578594bfdfe8459c06" prot="protected" virt="non-virtual"><scope>neforce::tui::component</scope><name>props</name></member>
+      <member refid="classneforce_1_1tui_1_1component_1ac98ef7687532964a06a6127d314084fc" prot="private" virt="non-virtual"><scope>neforce::tui::component</scope><name>props_</name></member>
+      <member refid="classneforce_1_1tui_1_1component_1a3dc905815736d75a84f95225911fb100" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>props_type</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1a5e0cd2ed9e7c1ccb0a7360476f66f39a" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>provide_context</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1aa99564aa3133a592d13e3e7751b229c7" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>remove_child</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1a2041f66a3c35966be31037e991abd5fb" prot="public" virt="pure-virtual"><scope>neforce::tui::component</scope><name>render</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1a8768fd357a3ebc8e3a113fa6168be502" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>schedule_render</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1a1fc6ce924b5303ac76813806c1da6760" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>set_active_child</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1ad7e2f2c27c22aea35c6c57d8e5456588" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>set_has_focus</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1a44b29970061a6bb03ce1b0146fb16826" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>set_pass_through</name></member>
+      <member refid="classneforce_1_1tui_1_1component_1abfd67f5702ea0df954421251f6be3041" prot="protected" virt="non-virtual"><scope>neforce::tui::component</scope><name>set_props</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1a736db56c7d8740e70b2be1d8bfef8636" prot="public" virt="virtual"><scope>neforce::tui::component</scope><name>setup</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1af5053f5d794fbe69c00b543050ab1130" prot="public" virt="virtual"><scope>neforce::tui::component</scope><name>should_update</name></member>
+      <member refid="classneforce_1_1tui_1_1component_1a5946db3012872209633ebf8cd8cbb8e1" prot="private" virt="non-virtual"><scope>neforce::tui::component</scope><name>states_</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1a08878b052b4c79a6ac0e12b2dfb23230" prot="protected" virt="non-virtual"><scope>neforce::tui::component</scope><name>strand_</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1a22adbe654da678fcea385b372d3bcd97" prot="public" virt="virtual"><scope>neforce::tui::component</scope><name>take_focus</name></member>
+      <member refid="classneforce_1_1tui_1_1component_1a227826f89e1b261d38a4b1545be31979" prot="public" virt="non-virtual"><scope>neforce::tui::component</scope><name>~component</name></member>
+      <member refid="classneforce_1_1tui_1_1component__base_1a328f6b510f6d8f6089705816db11b3ba" prot="public" virt="virtual"><scope>neforce::tui::component</scope><name>~component_base</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

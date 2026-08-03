@@ -1,6 +1,6 @@
 var group___quantifier_algorithms =
 [
-    [ "all_of", "group___quantifier_algorithms.html#gad953b0ada9620c3fd485317b9db7093e", null ],
-    [ "any_of", "group___quantifier_algorithms.html#gac20e73ba59f5ba9db9ce34e6970a88dc", null ],
-    [ "none_of", "group___quantifier_algorithms.html#gace2f064497b7230c156f70f5da706edc", null ]
+    [ "neforce::all_of", "group___quantifier_algorithms.html#gaf292a6cbdc939ee785ec599562d53515", null ],
+    [ "neforce::any_of", "group___quantifier_algorithms.html#gadcabcdd40a68552af35b819c35bb1570", null ],
+    [ "neforce::none_of", "group___quantifier_algorithms.html#gac0b828760dbc01c48f8cf03d443d34b9", null ]
 ];

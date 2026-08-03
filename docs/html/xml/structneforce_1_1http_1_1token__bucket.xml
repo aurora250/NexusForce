@@ -1,0 +1,270 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1http_1_1token__bucket" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::http::token_bucket</compoundname>
+    <includes refid="rate__limiter_8hpp" local="no">rate_limiter.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structneforce_1_1http_1_1token__bucket_1ad106960113e59ac01c2dbf9e8c22fe06" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double neforce::http::token_bucket::tokens</definition>
+        <argsstring></argsstring>
+        <name>tokens</name>
+        <qualifiedname>neforce::http::token_bucket::tokens</qualifiedname>
+        <initializer>{0.}</initializer>
+        <briefdescription>
+<para>当前令牌数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="33" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="33" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1http_1_1token__bucket_1ac7b73435855fb9adeaa6b58a19994a4e" prot="public" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga5405672bf9962081e6fcd1448d4bce4a" kindref="member">uint64_t</ref></type>
+        <definition>uint64_t neforce::http::token_bucket::last_refill_ms</definition>
+        <argsstring></argsstring>
+        <name>last_refill_ms</name>
+        <qualifiedname>neforce::http::token_bucket::last_refill_ms</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>上次补充时间（毫秒时间戳） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="34" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1http_1_1token__bucket_1aba1f8afe12992e726e629652acecf743" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double neforce::http::token_bucket::refill_rate</definition>
+        <argsstring></argsstring>
+        <name>refill_rate</name>
+        <qualifiedname>neforce::http::token_bucket::refill_rate</qualifiedname>
+        <initializer>{1.}</initializer>
+        <briefdescription>
+<para>每秒补充令牌数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="35" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1http_1_1token__bucket_1a1c6a76ae6da3d68a0b3137fde2668751" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double neforce::http::token_bucket::capacity</definition>
+        <argsstring></argsstring>
+        <name>capacity</name>
+        <qualifiedname>neforce::http::token_bucket::capacity</qualifiedname>
+        <initializer>{1.}</initializer>
+        <briefdescription>
+<para>桶容量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="36" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1http_1_1token__bucket_1a9628de588cf244d9c9f86283ce975b74" prot="public" static="no" mutable="yes">
+        <type><ref refid="classneforce_1_1mutex" kindref="compound">mutex</ref></type>
+        <definition>mutex neforce::http::token_bucket::mutex_</definition>
+        <argsstring></argsstring>
+        <name>mutex_</name>
+        <qualifiedname>neforce::http::token_bucket::mutex_</qualifiedname>
+        <briefdescription>
+<para>保护内部状态 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="37" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1http_1_1token__bucket_1a4914177f7227d1a5569c639211a31b7a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::token_bucket::token_bucket</definition>
+        <argsstring>()=default</argsstring>
+        <name>token_bucket</name>
+        <qualifiedname>neforce::http::token_bucket::token_bucket</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="39" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1http_1_1token__bucket_1a6a13db34ecfe907588ae493eb98f884a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::token_bucket::~token_bucket</definition>
+        <argsstring>()=default</argsstring>
+        <name>~token_bucket</name>
+        <qualifiedname>neforce::http::token_bucket::~token_bucket</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="40" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1http_1_1token__bucket_1a3411380c147d55918af9120cc7b88141" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::token_bucket::token_bucket</definition>
+        <argsstring>(double rate, double burst)</argsstring>
+        <name>token_bucket</name>
+        <qualifiedname>neforce::http::token_bucket::token_bucket</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>rate</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>burst</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="42" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="42" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1http_1_1token__bucket_1a7532ec068e25bbe6ea0b9e93fe6d2f74" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::token_bucket::token_bucket</definition>
+        <argsstring>(const token_bucket &amp;other)</argsstring>
+        <name>token_bucket</name>
+        <qualifiedname>neforce::http::token_bucket::token_bucket</qualifiedname>
+        <param>
+          <type>const token_bucket &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="48" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="48" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1http_1_1token__bucket_1a96d8909e7afb94342f93f94ddacf1f45" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>token_bucket &amp;</type>
+        <definition>token_bucket &amp; neforce::http::token_bucket::operator=</definition>
+        <argsstring>(const token_bucket &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::http::token_bucket::operator=</qualifiedname>
+        <param>
+          <type>const token_bucket &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="54" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="54" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1http_1_1token__bucket_1aa4b257a264e57b68ff01cf4e3bfae370" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::http::token_bucket::try_consume</definition>
+        <argsstring>(uint64_t now_ms)</argsstring>
+        <name>try_consume</name>
+        <qualifiedname>neforce::http::token_bucket::try_consume</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga5405672bf9962081e6fcd1448d4bce4a" kindref="member">uint64_t</ref></type>
+          <declname>now_ms</declname>
+        </param>
+        <briefdescription>
+<para>尝试消耗一个令牌 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>now_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当前时间（毫秒时间戳） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>消耗成功返回true（频次未超限）</para>
+</simplesect>
+先补充令牌（基于时间差），再尝试消耗。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="71" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1http_1_1token__bucket_1a51285e3ab98555ed20a425d05a8ea33f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::token_bucket::refill</definition>
+        <argsstring>(uint64_t now_ms)</argsstring>
+        <name>refill</name>
+        <qualifiedname>neforce::http::token_bucket::refill</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga5405672bf9962081e6fcd1448d4bce4a" kindref="member">uint64_t</ref></type>
+          <declname>now_ms</declname>
+        </param>
+        <briefdescription>
+<para>补充令牌（基于时间差） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>now_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当前时间 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="77" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>令牌桶数据结构 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>使用原子操作实现无锁的令牌消耗和补充。 </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::http::token_bucket</label>
+        <link refid="structneforce_1_1http_1_1token__bucket"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>mutex_</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::mutex</label>
+        <link refid="classneforce_1_1mutex"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="32" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="32" bodyend="78"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1http_1_1token__bucket_1a1c6a76ae6da3d68a0b3137fde2668751" prot="public" virt="non-virtual"><scope>neforce::http::token_bucket</scope><name>capacity</name></member>
+      <member refid="structneforce_1_1http_1_1token__bucket_1ac7b73435855fb9adeaa6b58a19994a4e" prot="public" virt="non-virtual"><scope>neforce::http::token_bucket</scope><name>last_refill_ms</name></member>
+      <member refid="structneforce_1_1http_1_1token__bucket_1a9628de588cf244d9c9f86283ce975b74" prot="public" virt="non-virtual"><scope>neforce::http::token_bucket</scope><name>mutex_</name></member>
+      <member refid="structneforce_1_1http_1_1token__bucket_1a96d8909e7afb94342f93f94ddacf1f45" prot="public" virt="non-virtual"><scope>neforce::http::token_bucket</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1http_1_1token__bucket_1a51285e3ab98555ed20a425d05a8ea33f" prot="public" virt="non-virtual"><scope>neforce::http::token_bucket</scope><name>refill</name></member>
+      <member refid="structneforce_1_1http_1_1token__bucket_1aba1f8afe12992e726e629652acecf743" prot="public" virt="non-virtual"><scope>neforce::http::token_bucket</scope><name>refill_rate</name></member>
+      <member refid="structneforce_1_1http_1_1token__bucket_1a4914177f7227d1a5569c639211a31b7a" prot="public" virt="non-virtual"><scope>neforce::http::token_bucket</scope><name>token_bucket</name></member>
+      <member refid="structneforce_1_1http_1_1token__bucket_1a3411380c147d55918af9120cc7b88141" prot="public" virt="non-virtual"><scope>neforce::http::token_bucket</scope><name>token_bucket</name></member>
+      <member refid="structneforce_1_1http_1_1token__bucket_1a7532ec068e25bbe6ea0b9e93fe6d2f74" prot="public" virt="non-virtual"><scope>neforce::http::token_bucket</scope><name>token_bucket</name></member>
+      <member refid="structneforce_1_1http_1_1token__bucket_1ad106960113e59ac01c2dbf9e8c22fe06" prot="public" virt="non-virtual"><scope>neforce::http::token_bucket</scope><name>tokens</name></member>
+      <member refid="structneforce_1_1http_1_1token__bucket_1aa4b257a264e57b68ff01cf4e3bfae370" prot="public" virt="non-virtual"><scope>neforce::http::token_bucket</scope><name>try_consume</name></member>
+      <member refid="structneforce_1_1http_1_1token__bucket_1a6a13db34ecfe907588ae493eb98f884a" prot="public" virt="non-virtual"><scope>neforce::http::token_bucket</scope><name>~token_bucket</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

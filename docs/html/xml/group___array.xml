@@ -3,13 +3,13 @@
   <compounddef id="group___array" kind="group">
     <compoundname>Array</compoundname>
     <title>数组</title>
-    <innerclass refid="structarray__iterator" prot="public">array_iterator</innerclass>
-    <innerclass refid="classarray" prot="public">array</innerclass>
-    <innerclass refid="structempty__array__element__tag" prot="public">empty_array_element_tag</innerclass>
-    <innerclass refid="classarray_3_01_t_00_010_01_4" prot="public">array&lt; T, 0 &gt;</innerclass>
-    <innerclass refid="struct____array__same" prot="public">__array_same</innerclass>
+    <innerclass refid="structneforce_1_1array__iterator" prot="public">neforce::array_iterator</innerclass>
+    <innerclass refid="classneforce_1_1array" prot="public">neforce::array</innerclass>
+    <innerclass refid="structneforce_1_1empty__array__element__tag" prot="public">neforce::empty_array_element_tag</innerclass>
+    <innerclass refid="classneforce_1_1array_3_01_t_00_010_01_4" prot="public">neforce::array&lt; T, 0 &gt;</innerclass>
+    <innerclass refid="structneforce_1_1____array__same" prot="public">neforce::__array_same</innerclass>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___array_1ga18c8a812fea773acaf6b0fcd8fbd529d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___array_1ga0ee54f7c15588299f206ab2759a9d582" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename First</type>
@@ -21,9 +21,10 @@
           </param>
         </templateparamlist>
         <type>NEFORCE_END_INNER__</type>
-        <definition>NEFORCE_END_INNER__ array</definition>
+        <definition>NEFORCE_END_INNER__ neforce::array</definition>
         <argsstring>(First, Rest...) -&gt; array&lt; typename inner::__array_same&lt; First, Rest... &gt;::type, 1+sizeof...(Rest)&gt;</argsstring>
         <name>array</name>
+        <qualifiedname>neforce::array</qualifiedname>
         <param>
           <type>First</type>
         </param>
@@ -38,10 +39,10 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/container/array.hpp" line="562" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/container/array.hpp" declline="562" declcolumn="1"/>
       </memberdef>
-      <memberdef kind="function" id="group___array_1gaf64621e8b4961cce0b05b361538fde60" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___array_1ga7e61fbcc78fc433743e20a3cd97d4593" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <type>size_t</type>
             <declname>Idx</declname>
             <defname>Idx</defname>
           </param>
@@ -49,17 +50,18 @@
             <type>typename T</type>
           </param>
           <param>
-            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <type>size_t</type>
             <declname>Size</declname>
             <defname>Size</defname>
           </param>
         </templateparamlist>
         <type>T &amp;</type>
-        <definition>T &amp; get</definition>
+        <definition>T &amp; neforce::get</definition>
         <argsstring>(array&lt; T, Size &gt; &amp;arr) noexcept</argsstring>
         <name>get</name>
+        <qualifiedname>neforce::get</qualifiedname>
         <param>
-          <type><ref refid="classarray" kindref="compound">array</ref>&lt; T, Size &gt; &amp;</type>
+          <type>array&lt; T, Size &gt; &amp;</type>
           <declname>arr</declname>
         </param>
         <briefdescription>
@@ -107,11 +109,12 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/container/array.hpp" line="575" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/array.hpp" bodystart="575" bodyend="578"/>
+        <references refid="group___async_1ga62fae7780686a01cf8f94a914db3e161" compoundref="future_8hpp" startline="1189" endline="1192">neforce::get</references>
       </memberdef>
-      <memberdef kind="function" id="group___array_1ga34da70f2dd5a491e85de904af5bd8549" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___array_1ga2df0ab2c25383119bb80b81888c53756" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <type>size_t</type>
             <declname>Idx</declname>
             <defname>Idx</defname>
           </param>
@@ -119,17 +122,18 @@
             <type>typename T</type>
           </param>
           <param>
-            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <type>size_t</type>
             <declname>Size</declname>
             <defname>Size</defname>
           </param>
         </templateparamlist>
         <type>const T &amp;</type>
-        <definition>const T &amp; get</definition>
+        <definition>const T &amp; neforce::get</definition>
         <argsstring>(const array&lt; T, Size &gt; &amp;arr) noexcept</argsstring>
         <name>get</name>
+        <qualifiedname>neforce::get</qualifiedname>
         <param>
-          <type>const <ref refid="classarray" kindref="compound">array</ref>&lt; T, Size &gt; &amp;</type>
+          <type>const array&lt; T, Size &gt; &amp;</type>
           <declname>arr</declname>
         </param>
         <briefdescription>
@@ -177,11 +181,12 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/container/array.hpp" line="589" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/array.hpp" bodystart="589" bodyend="592"/>
+        <references refid="group___async_1ga62fae7780686a01cf8f94a914db3e161" compoundref="future_8hpp" startline="1189" endline="1192">neforce::get</references>
       </memberdef>
-      <memberdef kind="function" id="group___array_1gaade8bccf2691eba3581e829986037e56" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___array_1ga89a6093d8731c27a49ac37484cfc2a66" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <type>size_t</type>
             <declname>Idx</declname>
             <defname>Idx</defname>
           </param>
@@ -189,17 +194,18 @@
             <type>typename T</type>
           </param>
           <param>
-            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <type>size_t</type>
             <declname>Size</declname>
             <defname>Size</defname>
           </param>
         </templateparamlist>
         <type>T &amp;&amp;</type>
-        <definition>T &amp;&amp; get</definition>
+        <definition>T &amp;&amp; neforce::get</definition>
         <argsstring>(array&lt; T, Size &gt; &amp;&amp;arr) noexcept</argsstring>
         <name>get</name>
+        <qualifiedname>neforce::get</qualifiedname>
         <param>
-          <type><ref refid="classarray" kindref="compound">array</ref>&lt; T, Size &gt; &amp;&amp;</type>
+          <type>array&lt; T, Size &gt; &amp;&amp;</type>
           <declname>arr</declname>
         </param>
         <briefdescription>
@@ -247,12 +253,13 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/container/array.hpp" line="603" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/array.hpp" bodystart="603" bodyend="606"/>
-        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___async_1ga62fae7780686a01cf8f94a914db3e161" compoundref="future_8hpp" startline="1189" endline="1192">neforce::get</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
       </memberdef>
-      <memberdef kind="function" id="group___array_1ga7a826c434e40e8084e0e436b53d5055d" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___array_1ga292340b7abaa793cd0362890f9a98171" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <type>size_t</type>
             <declname>Idx</declname>
             <defname>Idx</defname>
           </param>
@@ -260,17 +267,18 @@
             <type>typename T</type>
           </param>
           <param>
-            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <type>size_t</type>
             <declname>Size</declname>
             <defname>Size</defname>
           </param>
         </templateparamlist>
         <type>const T &amp;&amp;</type>
-        <definition>const T &amp;&amp; get</definition>
+        <definition>const T &amp;&amp; neforce::get</definition>
         <argsstring>(const array&lt; T, Size &gt; &amp;&amp;arr) noexcept</argsstring>
         <name>get</name>
+        <qualifiedname>neforce::get</qualifiedname>
         <param>
-          <type>const <ref refid="classarray" kindref="compound">array</ref>&lt; T, Size &gt; &amp;&amp;</type>
+          <type>const array&lt; T, Size &gt; &amp;&amp;</type>
           <declname>arr</declname>
         </param>
         <briefdescription>
@@ -318,7 +326,8 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/container/array.hpp" line="617" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/array.hpp" bodystart="617" bodyend="620"/>
-        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___async_1ga62fae7780686a01cf8f94a914db3e161" compoundref="future_8hpp" startline="1189" endline="1192">neforce::get</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
       </memberdef>
     </sectiondef>
     <briefdescription>

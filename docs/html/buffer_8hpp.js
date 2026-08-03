@@ -1,5 +1,5 @@
 var buffer_8hpp =
 [
-    [ "const_buffer", "group___async_buffers.html#gaf3362bf45fb28c11f4efbabf2aa3141c", null ],
-    [ "mutable_buffer", "group___async_buffers.html#ga06c3bb4bf878f75df59e10a15c7a9354", null ]
+    [ "neforce::const_buffer", "group___async_buffers.html#ga29f9bc9d9c116fe91590baac73d515de", null ],
+    [ "neforce::mutable_buffer", "group___async_buffers.html#ga2da8bce3323a3c9a7c9d08c9e441e2b0", null ]
 ];

@@ -1,6 +1,6 @@
 var group___declval_tools =
 [
-    [ "declcopy", "group___declval_tools.html#ga1eddc4b727874e17997d01e1646a2fca", null ],
-    [ "declval", "group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c", null ],
-    [ "declvoid", "group___declval_tools.html#gaa6a0ce4f78a0270ebbcc18e586d9f0ad", null ]
+    [ "neforce::declcopy", "group___declval_tools.html#gac222169c3dac847d0c2d78f5b5d13d54", null ],
+    [ "neforce::declval", "group___declval_tools.html#ga7071848a30be73f786711db2ae038447", null ],
+    [ "neforce::declvoid", "group___declval_tools.html#ga57edbb204e302c857b269d572961e1da", null ]
 ];

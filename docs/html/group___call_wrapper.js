@@ -1,7 +1,7 @@
 var group___call_wrapper =
 [
-    [ "call_wrapper&lt; Types &gt;", "structcall__wrapper.html", [
-      [ "call_wrapper", "structcall__wrapper.html#ad2f83ad37934eec521e51c9faa81a8e7", null ],
-      [ "operator()", "structcall__wrapper.html#a56e8c877fde6e6815f1ddce6b5e6a0f2", null ]
+    [ "neforce::call_wrapper&lt; Types &gt;", "structneforce_1_1call__wrapper.html", [
+      [ "call_wrapper", "structneforce_1_1call__wrapper.html#a21302c2891bed4e5f324ed1cc400e5de", null ],
+      [ "operator()", "structneforce_1_1call__wrapper.html#ab1ae1027f849af199d4cc18c19fe2a58", null ]
     ] ]
 ];

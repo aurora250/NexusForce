@@ -1,4 +1,4 @@
 var vector_8hpp =
 [
-    [ "byte_vector", "group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95", null ]
+    [ "neforce::byte_vector", "group___container.html#ga334b1ea628395ee46f944d7eacc50543", null ]
 ];

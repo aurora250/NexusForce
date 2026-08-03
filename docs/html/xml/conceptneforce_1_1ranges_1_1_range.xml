@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="conceptneforce_1_1ranges_1_1_range" kind="concept">
+    <compoundname>neforce::ranges::Range</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename R</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename R&gt;
+concept neforce::ranges::Range =  requires(R&amp; r) {
+    { r.begin() } -&gt; input_iterator;
+    { r.end() } -&gt; sentinel_for&lt;decltype(r.begin())&gt;;
+}</initializer>
+    <conceptparts>
+      <codepart line="11">    <programlisting>
+<codeline><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>R&gt;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">concept<sp/></highlight><highlight class="normal">Range<sp/>=<sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal">(R&amp;<sp/>r)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{<sp/>r.begin()<sp/>}<sp/>-&gt;<sp/>input_iterator;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{<sp/>r.end()<sp/>}<sp/>-&gt;<sp/>sentinel_for&lt;</highlight><highlight class="keyword">decltype</highlight><highlight class="normal">(r.begin())&gt;;</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+</codepart>
+    </conceptparts>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="11" column="1"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,379 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1http_1_1response__cache" kind="class" language="C++" prot="public">
+    <compoundname>neforce::http::response_cache</compoundname>
+    <includes refid="http__cache_8hpp" local="no">http_cache.hpp</includes>
+    <innerclass refid="structneforce_1_1http_1_1response__cache_1_1entry" prot="private">neforce::http::response_cache::entry</innerclass>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1response__cache_1a45e756b0917989cfae08407f9ee87aaf" prot="public" static="no" mutable="no">
+        <type><ref refid="group___duration_1ga8254730759b00eba24c4a01b0c8e10c3" kindref="member">seconds</ref></type>
+        <definition>seconds neforce::http::response_cache::default_max_age</definition>
+        <argsstring></argsstring>
+        <name>default_max_age</name>
+        <qualifiedname>neforce::http::response_cache::default_max_age</qualifiedname>
+        <initializer>{60}</initializer>
+        <briefdescription>
+<para>默认缓存时间 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="42" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1response__cache_1ac699f4b16233fb5366b62597e10093fe" prot="public" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::http::response_cache::max_entries</definition>
+        <argsstring></argsstring>
+        <name>max_entries</name>
+        <qualifiedname>neforce::http::response_cache::max_entries</qualifiedname>
+        <initializer>{10000}</initializer>
+        <briefdescription>
+<para>最大缓存条目数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="43" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1response__cache_1a53b176a9e1397e5b672209bb27492374" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1byte__size" kindref="compound">byte_size</ref></type>
+        <definition>byte_size neforce::http::response_cache::max_body_size</definition>
+        <argsstring></argsstring>
+        <name>max_body_size</name>
+        <qualifiedname>neforce::http::response_cache::max_body_size</qualifiedname>
+        <initializer>{1_MB}</initializer>
+        <briefdescription>
+<para>最大缓存响应体大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="44" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" bodystart="44" bodyend="44"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1response__cache_1aa863e0fe0df84fd07bf03cb8e859f97a" prot="private" static="no" mutable="yes">
+        <type><ref refid="classneforce_1_1shared__mutex" kindref="compound">shared_mutex</ref></type>
+        <definition>shared_mutex neforce::http::response_cache::mutex_</definition>
+        <argsstring></argsstring>
+        <name>mutex_</name>
+        <qualifiedname>neforce::http::response_cache::mutex_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="100" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1response__cache_1a3d4ca71bf02b32a58b886000ebdfaa5e" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref>, entry &gt;</type>
+        <definition>unordered_map&lt;string, entry&gt; neforce::http::response_cache::entries_</definition>
+        <argsstring></argsstring>
+        <name>entries_</name>
+        <qualifiedname>neforce::http::response_cache::entries_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="101" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1response__cache_1a3f61308f4b70363108911270c8d0f112" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::response_cache::response_cache</definition>
+        <argsstring>()=default</argsstring>
+        <name>response_cache</name>
+        <qualifiedname>neforce::http::response_cache::response_cache</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="46" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1response__cache_1a65fcbace3e4d1bc5dc7750846e203889" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; <ref refid="structneforce_1_1http_1_1cached__response" kindref="compound">cached_response</ref> &gt;</type>
+        <definition>optional&lt; cached_response &gt; neforce::http::response_cache::get</definition>
+        <argsstring>(const string &amp;key)</argsstring>
+        <name>get</name>
+        <qualifiedname>neforce::http::response_cache::get</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取缓存的响应 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>缓存键（通常为 method+url） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>缓存的响应，不存在返回none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="53" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1response__cache_1a29acba3421a3dc1ddef7d45d73974c72" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::response_cache::put</definition>
+        <argsstring>(const string &amp;key, const http_response &amp;response, seconds max_age=-1_s)</argsstring>
+        <name>put</name>
+        <qualifiedname>neforce::http::response_cache::put</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <param>
+          <type><ref refid="group___duration_1ga8254730759b00eba24c4a01b0c8e10c3" kindref="member">seconds</ref></type>
+          <declname>max_age</declname>
+          <defval>-1_s</defval>
+        </param>
+        <briefdescription>
+<para>存入缓存 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>缓存键 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>响应对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="60" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1response__cache_1ab4fd6921147b3e556db47cc75b5db574" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::response_cache::remove</definition>
+        <argsstring>(const string &amp;key)</argsstring>
+        <name>remove</name>
+        <qualifiedname>neforce::http::response_cache::remove</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>删除缓存条目 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="65" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1response__cache_1ae293132d128736006f898797443a8d06" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::response_cache::cleanup</definition>
+        <argsstring>()</argsstring>
+        <name>cleanup</name>
+        <qualifiedname>neforce::http::response_cache::cleanup</qualifiedname>
+        <briefdescription>
+<para>清理过期条目 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="70" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1response__cache_1a6a610d8ece2149133f4d2adbfaa49aa8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::response_cache::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>neforce::http::response_cache::clear</qualifiedname>
+        <briefdescription>
+<para>清空所有缓存 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="75" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1response__cache_1ab009c535eec91bd7580bdc01e5ca380d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::http::response_cache::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <qualifiedname>neforce::http::response_cache::size</qualifiedname>
+        <briefdescription>
+<para>缓存条目数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="80" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" bodystart="80" bodyend="83"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1response__cache_1a68692cc3094dd520c2c3e9994d26027e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>static string neforce::http::response_cache::generate_etag</definition>
+        <argsstring>(string_view body)</argsstring>
+        <name>generate_etag</name>
+        <qualifiedname>neforce::http::response_cache::generate_etag</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>body</declname>
+        </param>
+        <briefdescription>
+<para>生成ETag值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="88" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1response__cache_1a1fda99d9d4dcc80f1edf748b411d50b2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>static string neforce::http::response_cache::build_key</definition>
+        <argsstring>(const http_method &amp;method, string_view url)</argsstring>
+        <name>build_key</name>
+        <qualifiedname>neforce::http::response_cache::build_key</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1http_1_1http__method" kindref="compound">http_method</ref> &amp;</type>
+          <declname>method</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>url</declname>
+        </param>
+        <briefdescription>
+<para>构建缓存键 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="93" column="19"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1response__cache_1ac6dbfc760dfc6b01fe194a316e674cc6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::response_cache::evict_lru</definition>
+        <argsstring>()</argsstring>
+        <name>evict_lru</name>
+        <qualifiedname>neforce::http::response_cache::evict_lru</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="103" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>HTTP响应缓存 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>基于URL的响应缓存，支持ETag和Cache-Control。 线程安全，支持LRU淘汰。 </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>neforce::byte_size</label>
+        <link refid="classneforce_1_1byte__size"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::duration&lt; int64_t &gt;</label>
+        <link refid="structneforce_1_1duration"/>
+      </node>
+      <node id="1">
+        <label>neforce::http::response_cache</label>
+        <link refid="classneforce_1_1http_1_1response__cache"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>default_max_age</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>max_body_size</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>neforce::icommon&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>neforce::icomparable&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="8">
+        <label>neforce::ihashable&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="4">
+        <label>neforce::iobject&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1iobject"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::istringify&lt; byte_size &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" line="40" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_cache.hpp" bodystart="40" bodyend="108"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1http_1_1response__cache_1a1fda99d9d4dcc80f1edf748b411d50b2" prot="public" virt="non-virtual"><scope>neforce::http::response_cache</scope><name>build_key</name></member>
+      <member refid="classneforce_1_1http_1_1response__cache_1ae293132d128736006f898797443a8d06" prot="public" virt="non-virtual"><scope>neforce::http::response_cache</scope><name>cleanup</name></member>
+      <member refid="classneforce_1_1http_1_1response__cache_1a6a610d8ece2149133f4d2adbfaa49aa8" prot="public" virt="non-virtual"><scope>neforce::http::response_cache</scope><name>clear</name></member>
+      <member refid="classneforce_1_1http_1_1response__cache_1a45e756b0917989cfae08407f9ee87aaf" prot="public" virt="non-virtual"><scope>neforce::http::response_cache</scope><name>default_max_age</name></member>
+      <member refid="classneforce_1_1http_1_1response__cache_1a3d4ca71bf02b32a58b886000ebdfaa5e" prot="private" virt="non-virtual"><scope>neforce::http::response_cache</scope><name>entries_</name></member>
+      <member refid="classneforce_1_1http_1_1response__cache_1ac6dbfc760dfc6b01fe194a316e674cc6" prot="private" virt="non-virtual"><scope>neforce::http::response_cache</scope><name>evict_lru</name></member>
+      <member refid="classneforce_1_1http_1_1response__cache_1a68692cc3094dd520c2c3e9994d26027e" prot="public" virt="non-virtual"><scope>neforce::http::response_cache</scope><name>generate_etag</name></member>
+      <member refid="classneforce_1_1http_1_1response__cache_1a65fcbace3e4d1bc5dc7750846e203889" prot="public" virt="non-virtual"><scope>neforce::http::response_cache</scope><name>get</name></member>
+      <member refid="classneforce_1_1http_1_1response__cache_1a53b176a9e1397e5b672209bb27492374" prot="public" virt="non-virtual"><scope>neforce::http::response_cache</scope><name>max_body_size</name></member>
+      <member refid="classneforce_1_1http_1_1response__cache_1ac699f4b16233fb5366b62597e10093fe" prot="public" virt="non-virtual"><scope>neforce::http::response_cache</scope><name>max_entries</name></member>
+      <member refid="classneforce_1_1http_1_1response__cache_1aa863e0fe0df84fd07bf03cb8e859f97a" prot="private" virt="non-virtual"><scope>neforce::http::response_cache</scope><name>mutex_</name></member>
+      <member refid="classneforce_1_1http_1_1response__cache_1a29acba3421a3dc1ddef7d45d73974c72" prot="public" virt="non-virtual"><scope>neforce::http::response_cache</scope><name>put</name></member>
+      <member refid="classneforce_1_1http_1_1response__cache_1ab4fd6921147b3e556db47cc75b5db574" prot="public" virt="non-virtual"><scope>neforce::http::response_cache</scope><name>remove</name></member>
+      <member refid="classneforce_1_1http_1_1response__cache_1a3f61308f4b70363108911270c8d0f112" prot="public" virt="non-virtual"><scope>neforce::http::response_cache</scope><name>response_cache</name></member>
+      <member refid="classneforce_1_1http_1_1response__cache_1ab009c535eec91bd7580bdc01e5ca380d" prot="public" virt="non-virtual"><scope>neforce::http::response_cache</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

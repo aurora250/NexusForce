@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::http::token_bucket结构体 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('structneforce_1_1http_1_1token__bucket.html','','structneforce_1_1http_1_1token__bucket-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::http::token_bucket结构体 参考<div class="ingroups"><a class="el" href="group___h_t_t_p.html">HTTP</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>令牌桶数据结构  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="rate__limiter_8hpp_source.html">rate_limiter.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:aa4b257a264e57b68ff01cf4e3bfae370" id="r_aa4b257a264e57b68ff01cf4e3bfae370"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aa4b257a264e57b68ff01cf4e3bfae370">try_consume</a> (<a class="el" href="group___core_types.html#ga5405672bf9962081e6fcd1448d4bce4a">uint64_t</a> now_ms)</td></tr>
+<tr class="memdesc:aa4b257a264e57b68ff01cf4e3bfae370"><td class="mdescLeft">&#160;</td><td class="mdescRight">尝试消耗一个令牌  <br /></td></tr>
+<tr class="memitem:a51285e3ab98555ed20a425d05a8ea33f" id="r_a51285e3ab98555ed20a425d05a8ea33f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a51285e3ab98555ed20a425d05a8ea33f">refill</a> (<a class="el" href="group___core_types.html#ga5405672bf9962081e6fcd1448d4bce4a">uint64_t</a> now_ms)</td></tr>
+<tr class="memdesc:a51285e3ab98555ed20a425d05a8ea33f"><td class="mdescLeft">&#160;</td><td class="mdescRight">补充令牌（基于时间差）  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public 属性</h2></td></tr>
+<tr class="memitem:ad106960113e59ac01c2dbf9e8c22fe06" id="r_ad106960113e59ac01c2dbf9e8c22fe06"><td class="memItemLeft"><a id="ad106960113e59ac01c2dbf9e8c22fe06" name="ad106960113e59ac01c2dbf9e8c22fe06"></a>
+double&#160;</td><td class="memItemRight"><b>tokens</b> {0.}</td></tr>
+<tr class="memdesc:ad106960113e59ac01c2dbf9e8c22fe06"><td class="mdescLeft">&#160;</td><td class="mdescRight">当前令牌数 <br /></td></tr>
+<tr class="memitem:ac7b73435855fb9adeaa6b58a19994a4e" id="r_ac7b73435855fb9adeaa6b58a19994a4e"><td class="memItemLeft"><a id="ac7b73435855fb9adeaa6b58a19994a4e" name="ac7b73435855fb9adeaa6b58a19994a4e"></a>
+<a class="el" href="group___core_types.html#ga5405672bf9962081e6fcd1448d4bce4a">uint64_t</a>&#160;</td><td class="memItemRight"><b>last_refill_ms</b> {0}</td></tr>
+<tr class="memdesc:ac7b73435855fb9adeaa6b58a19994a4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">上次补充时间（毫秒时间戳） <br /></td></tr>
+<tr class="memitem:aba1f8afe12992e726e629652acecf743" id="r_aba1f8afe12992e726e629652acecf743"><td class="memItemLeft"><a id="aba1f8afe12992e726e629652acecf743" name="aba1f8afe12992e726e629652acecf743"></a>
+double&#160;</td><td class="memItemRight"><b>refill_rate</b> {1.}</td></tr>
+<tr class="memdesc:aba1f8afe12992e726e629652acecf743"><td class="mdescLeft">&#160;</td><td class="mdescRight">每秒补充令牌数 <br /></td></tr>
+<tr class="memitem:a1c6a76ae6da3d68a0b3137fde2668751" id="r_a1c6a76ae6da3d68a0b3137fde2668751"><td class="memItemLeft"><a id="a1c6a76ae6da3d68a0b3137fde2668751" name="a1c6a76ae6da3d68a0b3137fde2668751"></a>
+double&#160;</td><td class="memItemRight"><b>capacity</b> {1.}</td></tr>
+<tr class="memdesc:a1c6a76ae6da3d68a0b3137fde2668751"><td class="mdescLeft">&#160;</td><td class="mdescRight">桶容量 <br /></td></tr>
+<tr class="memitem:a9628de588cf244d9c9f86283ce975b74" id="r_a9628de588cf244d9c9f86283ce975b74"><td class="memItemLeft"><a id="a9628de588cf244d9c9f86283ce975b74" name="a9628de588cf244d9c9f86283ce975b74"></a>
+<a class="el" href="classneforce_1_1mutex.html">mutex</a>&#160;</td><td class="memItemRight"><b>mutex_</b></td></tr>
+<tr class="memdesc:a9628de588cf244d9c9f86283ce975b74"><td class="mdescLeft">&#160;</td><td class="mdescRight">保护内部状态 <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>令牌桶数据结构 </p>
+<p>使用原子操作实现无锁的令牌消耗和补充。 </p>
+
+<p class="definition">在文件 <a class="el" href="rate__limiter_8hpp_source.html">rate_limiter.hpp</a> 第 <a class="el" href="rate__limiter_8hpp_source.html#l00032">32</a> 行定义.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a51285e3ab98555ed20a425d05a8ea33f" name="a51285e3ab98555ed20a425d05a8ea33f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51285e3ab98555ed20a425d05a8ea33f">&#9670;&#160;</a></span>refill()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::http::token_bucket::refill </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#ga5405672bf9962081e6fcd1448d4bce4a">uint64_t</a></td>          <td class="paramname"><span class="paramname"><em>now_ms</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>补充令牌（基于时间差） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">now_ms</td><td>当前时间 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa4b257a264e57b68ff01cf4e3bfae370" name="aa4b257a264e57b68ff01cf4e3bfae370"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4b257a264e57b68ff01cf4e3bfae370">&#9670;&#160;</a></span>try_consume()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::http::token_bucket::try_consume </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#ga5405672bf9962081e6fcd1448d4bce4a">uint64_t</a></td>          <td class="paramname"><span class="paramname"><em>now_ms</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>尝试消耗一个令牌 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">now_ms</td><td>当前时间（毫秒时间戳） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>消耗成功返回true（频次未超限）</dd></dl>
+<p>先补充令牌（基于时间差），再尝试消耗。 </p>
+
+</div>
+</div>
+<hr/>该结构体的文档由以下文件生成:<ul>
+<li><a class="el" href="rate__limiter_8hpp_source.html">rate_limiter.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><b>http</b></li><li class="navelem"><a href="structneforce_1_1http_1_1token__bucket.html">token_bucket</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

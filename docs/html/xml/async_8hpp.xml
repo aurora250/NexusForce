@@ -22,7 +22,7 @@
         <link refid="iterator_8hpp"/>
         <childnode refid="24" relation="include">
         </childnode>
-        <childnode refid="54" relation="include">
+        <childnode refid="55" relation="include">
         </childnode>
       </node>
       <node id="62">
@@ -106,11 +106,11 @@
         </childnode>
         <childnode refid="49" relation="include">
         </childnode>
-        <childnode refid="50" relation="include">
-        </childnode>
         <childnode refid="51" relation="include">
         </childnode>
-        <childnode refid="56" relation="include">
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
         </childnode>
         <childnode refid="58" relation="include">
         </childnode>
@@ -192,8 +192,8 @@
         </childnode>
       </node>
       <node id="24">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
@@ -232,6 +232,8 @@
         <link refid="functional_2function_8hpp"/>
         <childnode refid="41" relation="include">
         </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
         <childnode refid="31" relation="include">
         </childnode>
         <childnode refid="38" relation="include">
@@ -263,7 +265,7 @@
         <childnode refid="46" relation="include">
         </childnode>
       </node>
-      <node id="55">
+      <node id="56">
         <label>NeForce/core/iterator/iterator_traits.hpp</label>
         <link refid="iterator__traits_8hpp"/>
         <childnode refid="14" relation="include">
@@ -275,22 +277,22 @@
         <childnode refid="64" relation="include">
         </childnode>
       </node>
-      <node id="50">
+      <node id="51">
         <label>NeForce/core/memory/aligned_buffer.hpp</label>
         <link refid="aligned__buffer_8hpp"/>
         <childnode refid="14" relation="include">
         </childnode>
       </node>
-      <node id="51">
+      <node id="52">
         <label>NeForce/core/memory/allocated_ptr.hpp</label>
         <link refid="allocated__ptr_8hpp"/>
-        <childnode refid="52" relation="include">
+        <childnode refid="53" relation="include">
         </childnode>
       </node>
-      <node id="52">
+      <node id="53">
         <label>NeForce/core/memory/allocator_traits.hpp</label>
         <link refid="allocator__traits_8hpp"/>
-        <childnode refid="53" relation="include">
+        <childnode refid="54" relation="include">
         </childnode>
         <childnode refid="33" relation="include">
         </childnode>
@@ -301,10 +303,10 @@
         <childnode refid="15" relation="include">
         </childnode>
       </node>
-      <node id="53">
+      <node id="54">
         <label>NeForce/core/memory/construct.hpp</label>
         <link refid="construct_8hpp"/>
-        <childnode refid="54" relation="include">
+        <childnode refid="55" relation="include">
         </childnode>
       </node>
       <node id="47">
@@ -322,7 +324,7 @@
       <node id="59">
         <label>NeForce/core/memory/shared_ptr.hpp</label>
         <link refid="shared__ptr_8hpp"/>
-        <childnode refid="57" relation="include">
+        <childnode refid="50" relation="include">
         </childnode>
         <childnode refid="60" relation="include">
         </childnode>
@@ -330,15 +332,15 @@
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>
-        <childnode refid="52" relation="include">
+        <childnode refid="53" relation="include">
         </childnode>
         <childnode refid="42" relation="include">
         </childnode>
       </node>
-      <node id="56">
+      <node id="57">
         <label>NeForce/core/memory/standard_allocator.hpp</label>
         <link refid="standard__allocator_8hpp"/>
-        <childnode refid="57" relation="include">
+        <childnode refid="50" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
@@ -421,10 +423,10 @@
         <childnode refid="29" relation="include">
         </childnode>
       </node>
-      <node id="54">
+      <node id="55">
         <label>NeForce/core/typeinfo/concepts.hpp</label>
         <link refid="concepts_8hpp"/>
-        <childnode refid="55" relation="include">
+        <childnode refid="56" relation="include">
         </childnode>
       </node>
       <node id="14">
@@ -502,7 +504,7 @@
       <node id="26">
         <label>intrin0.inl.h</label>
       </node>
-      <node id="57">
+      <node id="50">
         <label>new</label>
       </node>
       <node id="18">
@@ -524,10 +526,7 @@
         <label>utility</label>
       </node>
     </incdepgraph>
-    <sectiondef kind="func">
-      <member refid="group___async_1ga4bbf8cf030239a4806813af4dcafec6f" kind="function"><name>async</name></member>
-      <member refid="group___async_1gadb2e4929c373d071c43f75182fda1239" kind="function"><name>async</name></member>
-    </sectiondef>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
     <briefdescription>
 <para>异步执行函数 </para>
     </briefdescription>
@@ -546,25 +545,25 @@
 <codeline lineno="21"><highlight class="normal"></highlight></codeline>
 <codeline lineno="27"><highlight class="normal"></highlight></codeline>
 <codeline lineno="42"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Func,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args&gt;</highlight></codeline>
-<codeline lineno="43" refid="group___async_1ga4bbf8cf030239a4806813af4dcafec6f" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/><ref refid="classfuture" kindref="compound">future</ref>&lt;<ref refid="group___async_1ga80164f406d773811b831fdf90e9c411f" kindref="member">async_result_t</ref>&lt;Func,<sp/>Args...&gt;&gt;<sp/><ref refid="group___async_1ga4bbf8cf030239a4806813af4dcafec6f" kindref="member">async</ref>(<ref refid="group___async_1ga9b3224d19f20667b3b24145a7b395a33" kindref="member">launch</ref><sp/>policy,<sp/>Func&amp;&amp;<sp/><ref refid="classfunction" kindref="compound">function</ref>,<sp/>Args&amp;&amp;...<sp/>args)<sp/>{</highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Wrapper<sp/>=<sp/><ref refid="structcall__wrapper" kindref="compound">call_wrapper</ref>&lt;Func,<sp/>Args...&gt;;</highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">AsyncState<sp/>=<sp/>inner::__future_base::async_state_impl&lt;Wrapper,<sp/><ref refid="group___async_1ga80164f406d773811b831fdf90e9c411f" kindref="member">async_result_t</ref>&lt;Func,<sp/>Args...&gt;&gt;;</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DeferredState<sp/>=<sp/>inner::__future_base::deferred_state&lt;Wrapper,<sp/><ref refid="group___async_1ga80164f406d773811b831fdf90e9c411f" kindref="member">async_result_t</ref>&lt;Func,<sp/>Args...&gt;&gt;;</highlight></codeline>
+<codeline lineno="43" refid="group___async_1ga3b100cc284ba1351140d99912b389764" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/><ref refid="classneforce_1_1future" kindref="compound">future</ref>&lt;<ref refid="group___async_1gac8262c6cb66019c2802377e25ab562ab" kindref="member">async_result_t</ref>&lt;Func,<sp/>Args...&gt;&gt;<sp/><ref refid="group___async_1ga3b100cc284ba1351140d99912b389764" kindref="member">async</ref>(<ref refid="group___async_1ga5cb3a59f429bfc428307430ce64f8e5f" kindref="member">launch</ref><sp/>policy,<sp/>Func&amp;&amp;<sp/><ref refid="classneforce_1_1function" kindref="compound">function</ref>,<sp/>Args&amp;&amp;...<sp/>args)<sp/>{</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Wrapper<sp/>=<sp/><ref refid="structneforce_1_1call__wrapper" kindref="compound">call_wrapper</ref>&lt;Func,<sp/>Args...&gt;;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">AsyncState<sp/>=<sp/>inner::__future_base::async_state_impl&lt;Wrapper,<sp/><ref refid="group___async_1gac8262c6cb66019c2802377e25ab562ab" kindref="member">async_result_t</ref>&lt;Func,<sp/>Args...&gt;&gt;;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DeferredState<sp/>=<sp/>inner::__future_base::deferred_state&lt;Wrapper,<sp/><ref refid="group___async_1gac8262c6cb66019c2802377e25ab562ab" kindref="member">async_result_t</ref>&lt;Func,<sp/>Args...&gt;&gt;;</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"></highlight></codeline>
-<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;inner::__future_base::state_base&gt;</ref><sp/><ref refid="classstate" kindref="compound">state</ref>;</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>((policy<sp/>&amp;<sp/><ref refid="group___async_1gga9b3224d19f20667b3b24145a7b395a33a0df93e34273b367bb63bad28c94c78d5" kindref="member">launch::async</ref>)<sp/>==<sp/><ref refid="group___async_1gga9b3224d19f20667b3b24145a7b395a33a0df93e34273b367bb63bad28c94c78d5" kindref="member">launch::async</ref>)<sp/>{</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classstate" kindref="compound">state</ref><sp/>=<sp/>_NEFORCE<sp/><ref refid="group___shared_pointer_1gab47fa86d2917e14f57f68dfa9e83495e" kindref="member">make_shared&lt;AsyncState&gt;</ref>(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Func&gt;</ref>(<ref refid="classfunction" kindref="compound">function</ref>),<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Args&gt;</ref>(args)...);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr&lt;inner::__future_base::state_base&gt;</ref><sp/>state;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>((policy<sp/>&amp;<sp/><ref refid="group___async_1gga5cb3a59f429bfc428307430ce64f8e5fa0df93e34273b367bb63bad28c94c78d5" kindref="member">launch::async</ref>)<sp/>==<sp/><ref refid="group___async_1gga5cb3a59f429bfc428307430ce64f8e5fa0df93e34273b367bb63bad28c94c78d5" kindref="member">launch::async</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>state<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___shared_pointer_1gacdaa04ead5936b6c9e0f024297dcf54f" kindref="member">make_shared&lt;AsyncState&gt;</ref>(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" kindref="member">forward&lt;Func&gt;</ref>(<ref refid="classneforce_1_1function" kindref="compound">function</ref>),<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" kindref="member">forward&lt;Args&gt;</ref>(args)...);</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="classstate" kindref="compound">state</ref>)<sp/>{</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classstate" kindref="compound">state</ref><sp/>=<sp/>_NEFORCE<sp/><ref refid="group___shared_pointer_1gab47fa86d2917e14f57f68dfa9e83495e" kindref="member">make_shared&lt;DeferredState&gt;</ref>(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Func&gt;</ref>(<ref refid="classfunction" kindref="compound">function</ref>),<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Args&gt;</ref>(args)...);</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!state)<sp/>{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>state<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___shared_pointer_1gacdaa04ead5936b6c9e0f024297dcf54f" kindref="member">make_shared&lt;DeferredState&gt;</ref>(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" kindref="member">forward&lt;Func&gt;</ref>(<ref refid="classneforce_1_1function" kindref="compound">function</ref>),<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" kindref="member">forward&lt;Args&gt;</ref>(args)...);</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="classfuture" kindref="compound">future</ref>&lt;<ref refid="group___async_1ga80164f406d773811b831fdf90e9c411f" kindref="member">async_result_t</ref>&lt;Func,<sp/>Args...&gt;&gt;(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(<ref refid="classstate" kindref="compound">state</ref>));</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="classneforce_1_1future" kindref="compound">future</ref>&lt;<ref refid="group___async_1gac8262c6cb66019c2802377e25ab562ab" kindref="member">async_result_t</ref>&lt;Func,<sp/>Args...&gt;&gt;(_NEFORCE<sp/><ref refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" kindref="member">move</ref>(state));</highlight></codeline>
 <codeline lineno="56"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"></highlight></codeline>
 <codeline lineno="69"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Func,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args&gt;</highlight></codeline>
-<codeline lineno="70" refid="group___async_1gadb2e4929c373d071c43f75182fda1239" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/><ref refid="classfuture" kindref="compound">future</ref>&lt;<ref refid="group___async_1ga80164f406d773811b831fdf90e9c411f" kindref="member">async_result_t</ref>&lt;Func,<sp/>Args...&gt;&gt;<sp/><ref refid="group___async_1ga4bbf8cf030239a4806813af4dcafec6f" kindref="member">async</ref>(Func&amp;&amp;<sp/><ref refid="classfunction" kindref="compound">function</ref>,<sp/>Args&amp;&amp;...<sp/>args)<sp/>{</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___async_1ga4bbf8cf030239a4806813af4dcafec6f" kindref="member">async</ref>(<ref refid="group___async_1gga9b3224d19f20667b3b24145a7b395a33a0df93e34273b367bb63bad28c94c78d5" kindref="member">launch::async</ref><sp/>|<sp/><ref refid="group___async_1gga9b3224d19f20667b3b24145a7b395a33a43fff3df3fc0b3417c86dc3040fb2d86" kindref="member">launch::deferred</ref>,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Func&gt;</ref>(<ref refid="classfunction" kindref="compound">function</ref>),</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Args&gt;</ref>(args)...);</highlight></codeline>
+<codeline lineno="70" refid="group___async_1ga1e0319f6a6950bfda67d4a1eb2e31ebb" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/><ref refid="classneforce_1_1future" kindref="compound">future</ref>&lt;<ref refid="group___async_1gac8262c6cb66019c2802377e25ab562ab" kindref="member">async_result_t</ref>&lt;Func,<sp/>Args...&gt;&gt;<sp/><ref refid="group___async_1ga3b100cc284ba1351140d99912b389764" kindref="member">async</ref>(Func&amp;&amp;<sp/><ref refid="classneforce_1_1function" kindref="compound">function</ref>,<sp/>Args&amp;&amp;...<sp/>args)<sp/>{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___async_1ga3b100cc284ba1351140d99912b389764" kindref="member">async</ref>(<ref refid="group___async_1gga5cb3a59f429bfc428307430ce64f8e5fa0df93e34273b367bb63bad28c94c78d5" kindref="member">launch::async</ref><sp/>|<sp/><ref refid="group___async_1gga5cb3a59f429bfc428307430ce64f8e5fa43fff3df3fc0b3417c86dc3040fb2d86" kindref="member">launch::deferred</ref>,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" kindref="member">forward&lt;Func&gt;</ref>(<ref refid="classneforce_1_1function" kindref="compound">function</ref>),</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" kindref="member">forward&lt;Args&gt;</ref>(args)...);</highlight></codeline>
 <codeline lineno="73"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="74"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Async</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="76"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>AsyncComponents</highlight><highlight class="normal"></highlight></codeline>

@@ -1,0 +1,266 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1latch" kind="class" language="C++" prot="public">
+    <compoundname>neforce::latch</compoundname>
+    <includes refid="latch_8hpp" local="no">latch.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1latch_1a975f7b276f823c90182e18d555923369" prot="private" static="no" mutable="no">
+        <type><ref refid="group___futex_1ga6f85f98f5266663425a7c56be8ecda52" kindref="member">platform_wait_t</ref></type>
+        <definition>platform_wait_t neforce::latch::counter_</definition>
+        <argsstring></argsstring>
+        <name>counter_</name>
+        <qualifiedname>neforce::latch::counter_</qualifiedname>
+        <briefdescription>
+<para>计数器值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="38" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1latch_1a37e5f5ae4345565129b51c5cc926f310" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___futex_1ga6f85f98f5266663425a7c56be8ecda52" kindref="member">platform_wait_t</ref></type>
+        <definition>static constexpr platform_wait_t neforce::latch::max</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>max</name>
+        <qualifiedname>neforce::latch::max</qualifiedname>
+        <briefdescription>
+<para>获取闩锁的最大计数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大可能的计数值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="45" column="38" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" bodystart="45" bodyend="45"/>
+        <references refid="classneforce_1_1numeric__traits_1a3a4cc2bdbf7e98a487d29367781db135" compoundref="numeric__traits_8hpp" startline="153" endline="153">neforce::numeric_traits&lt; T, Dummy &gt;::max</references>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1latch_1a76543147be07fd675cc3d3eca9e08454" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::latch::latch</definition>
+        <argsstring>(const platform_wait_t expected) noexcept</argsstring>
+        <name>latch</name>
+        <qualifiedname>neforce::latch::latch</qualifiedname>
+        <param>
+          <type>const <ref refid="group___futex_1ga6f85f98f5266663425a7c56be8ecda52" kindref="member">platform_wait_t</ref></type>
+          <declname>expected</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>expected</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始计数值</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+创建闩锁并设置初始计数值。计数值必须为非负。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="53" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" bodystart="53" bodyend="56"/>
+        <references refid="group___debug_and_assertions_1gaeb5cd7dd15c349020f35d669e0e7dd73" compoundref="debug_8hpp" startline="47" endline="52">NEFORCE_CONSTEXPR_ASSERT</references>
+        <referencedby refid="classneforce_1_1latch_1afe0f29bd8d042de508c2099e5b44ac8c">latch</referencedby>
+        <referencedby refid="classneforce_1_1latch_1a6ed8251320fed69c8daf7794b0f8f55b">operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1latch_1ad3961c1df6218c93c83fb7d595745c26" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::latch::~latch</definition>
+        <argsstring>()=default</argsstring>
+        <name>~latch</name>
+        <qualifiedname>neforce::latch::~latch</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="58" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1latch_1afe0f29bd8d042de508c2099e5b44ac8c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::latch::latch</definition>
+        <argsstring>(const latch &amp;)=delete</argsstring>
+        <name>latch</name>
+        <qualifiedname>neforce::latch::latch</qualifiedname>
+        <param>
+          <type>const latch &amp;</type>
+        </param>
+        <briefdescription>
+<para>禁止拷贝构造 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="59" column="5"/>
+        <references refid="classneforce_1_1latch_1a76543147be07fd675cc3d3eca9e08454" compoundref="latch_8hpp" startline="53" endline="56">latch</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1latch_1a6ed8251320fed69c8daf7794b0f8f55b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1latch_1a76543147be07fd675cc3d3eca9e08454" kindref="member">latch</ref> &amp;</type>
+        <definition>latch &amp; neforce::latch::operator=</definition>
+        <argsstring>(const latch &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::latch::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1latch_1a76543147be07fd675cc3d3eca9e08454" kindref="member">latch</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>禁止拷贝赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="60" column="11"/>
+        <references refid="classneforce_1_1latch_1a76543147be07fd675cc3d3eca9e08454" compoundref="latch_8hpp" startline="53" endline="56">latch</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1latch_1afd1402035622af45e87fd7377fa18615" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::latch::count_down</definition>
+        <argsstring>(const platform_wait_t update=1) noexcept</argsstring>
+        <name>count_down</name>
+        <qualifiedname>neforce::latch::count_down</qualifiedname>
+        <param>
+          <type>const <ref refid="group___futex_1ga6f85f98f5266663425a7c56be8ecda52" kindref="member">platform_wait_t</ref></type>
+          <declname>update</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>减少计数器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>update</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>减少的数量，默认为1</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+原子地减少闩锁的计数器。如果计数器减为零，则通知所有等待线程。</para>
+<para><simplesect kind="note"><para>如果计数器变为负值，行为未定义 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="70" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" bodystart="70" bodyend="75"/>
+        <references refid="group___atomic_operations_1ga62f2fffce08ba508062c408e45c584ad" compoundref="atomic__base_8hpp" startline="757" endline="765">neforce::atomic_fetch_sub</references>
+        <references refid="group___atomic_operations_1gafe5ce51b3344134870849f820098063f" compoundref="atomic__wait_8hpp" startline="448" endline="451">neforce::atomic_notify_address</references>
+        <references refid="group___memory_order_1ga0ecbdbbd5ddbe9eda2820b9cea4826fc" compoundref="memory__order_8hpp" startline="179">neforce::memory_order_release</references>
+        <referencedby refid="classneforce_1_1latch_1a4a38f7f9990f93dc80d2e871703949fd" compoundref="latch_8hpp" startline="108" endline="111">arrive_and_wait</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1latch_1a704e8a2341429590cdb7ef266eccbcc2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::latch::try_wait</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>try_wait</name>
+        <qualifiedname>neforce::latch::try_wait</qualifiedname>
+        <briefdescription>
+<para>尝试等待 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>计数器是否为零</para>
+</simplesect>
+非阻塞地检查闩锁的计数器是否为零。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="83" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" bodystart="83" bodyend="85"/>
+        <references refid="group___atomic_operations_1gae9de058c5e8b4c3eeeba88b55b655abd" compoundref="atomic__base_8hpp" startline="507" endline="518">neforce::atomic_load</references>
+        <references refid="group___memory_order_1ga6367df7d3e137e9b30e17740435d1816" compoundref="memory__order_8hpp" startline="177">neforce::memory_order_acquire</references>
+        <referencedby refid="classneforce_1_1latch_1adc1500a9f8b663f255063ede0e956ee8" compoundref="latch_8hpp" startline="94" endline="97">wait</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1latch_1adc1500a9f8b663f255063ede0e956ee8" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::latch::wait</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>wait</name>
+        <qualifiedname>neforce::latch::wait</qualifiedname>
+        <briefdescription>
+<para>等待计数器为零 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>阻塞当前线程，直到闩锁的计数器减为零。</para>
+<para><simplesect kind="note"><para>如果计数器已经为零，则立即返回 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="94" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" bodystart="94" bodyend="97"/>
+        <references refid="group___atomic_operations_1gae06adb4c7ce500e642f4fa53f1c5411d" compoundref="atomic__wait_8hpp" startline="433" endline="436">neforce::atomic_wait_address</references>
+        <references refid="classneforce_1_1latch_1a704e8a2341429590cdb7ef266eccbcc2" compoundref="latch_8hpp" startline="83" endline="85">try_wait</references>
+        <referencedby refid="classneforce_1_1latch_1a4a38f7f9990f93dc80d2e871703949fd" compoundref="latch_8hpp" startline="108" endline="111">arrive_and_wait</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1latch_1a4a38f7f9990f93dc80d2e871703949fd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::latch::arrive_and_wait</definition>
+        <argsstring>(const platform_wait_t update=1) noexcept</argsstring>
+        <name>arrive_and_wait</name>
+        <qualifiedname>neforce::latch::arrive_and_wait</qualifiedname>
+        <param>
+          <type>const <ref refid="group___futex_1ga6f85f98f5266663425a7c56be8ecda52" kindref="member">platform_wait_t</ref></type>
+          <declname>update</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>减少计数器并等待 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>update</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>减少的数量，默认为1</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+原子地减少计数器，然后等待计数器变为零。 这是一个组合操作，等价于先调用count_down()再调用wait()。</para>
+<para><simplesect kind="note"><para>如果计数器变为负值，行为未定义 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="108" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" bodystart="108" bodyend="111"/>
+        <references refid="classneforce_1_1latch_1afd1402035622af45e87fd7377fa18615" compoundref="latch_8hpp" startline="70" endline="75">count_down</references>
+        <references refid="classneforce_1_1latch_1adc1500a9f8b663f255063ede0e956ee8" compoundref="latch_8hpp" startline="94" endline="97">wait</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>闩锁类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>闩锁是一种同步原语，用于协调多个线程的执行。 线程可以等待闩锁的计数器减为零，或者减少计数器并等待。 闩锁是一次性的，计数器减为零后不能被重置。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="36" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" bodystart="36" bodyend="112"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1latch_1a4a38f7f9990f93dc80d2e871703949fd" prot="public" virt="non-virtual"><scope>neforce::latch</scope><name>arrive_and_wait</name></member>
+      <member refid="classneforce_1_1latch_1afd1402035622af45e87fd7377fa18615" prot="public" virt="non-virtual"><scope>neforce::latch</scope><name>count_down</name></member>
+      <member refid="classneforce_1_1latch_1a975f7b276f823c90182e18d555923369" prot="private" virt="non-virtual"><scope>neforce::latch</scope><name>counter_</name></member>
+      <member refid="classneforce_1_1latch_1a76543147be07fd675cc3d3eca9e08454" prot="public" virt="non-virtual"><scope>neforce::latch</scope><name>latch</name></member>
+      <member refid="classneforce_1_1latch_1afe0f29bd8d042de508c2099e5b44ac8c" prot="public" virt="non-virtual"><scope>neforce::latch</scope><name>latch</name></member>
+      <member refid="classneforce_1_1latch_1a37e5f5ae4345565129b51c5cc926f310" prot="public" virt="non-virtual"><scope>neforce::latch</scope><name>max</name></member>
+      <member refid="classneforce_1_1latch_1a6ed8251320fed69c8daf7794b0f8f55b" prot="public" virt="non-virtual"><scope>neforce::latch</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1latch_1a704e8a2341429590cdb7ef266eccbcc2" prot="public" virt="non-virtual"><scope>neforce::latch</scope><name>try_wait</name></member>
+      <member refid="classneforce_1_1latch_1adc1500a9f8b663f255063ede0e956ee8" prot="public" virt="non-virtual"><scope>neforce::latch</scope><name>wait</name></member>
+      <member refid="classneforce_1_1latch_1ad3961c1df6218c93c83fb7d595745c26" prot="public" virt="non-virtual"><scope>neforce::latch</scope><name>~latch</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

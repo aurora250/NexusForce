@@ -1,0 +1,389 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1tree__barrier" kind="class" language="C++" prot="public">
+    <compoundname>neforce::tree_barrier</compoundname>
+    <includes refid="barrier_8hpp" local="no">barrier.hpp</includes>
+    <innerclass refid="structneforce_1_1tree__barrier_1_1state__data" prot="private">neforce::tree_barrier::state_data</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename CmplFunc</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classneforce_1_1tree__barrier_1af2ac216c54159c421db4747a7df3a642" prot="private" static="no">
+        <type><ref refid="structneforce_1_1atomic__ref__base" kindref="compound">atomic_ref_base</ref>&lt; <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> &gt;</type>
+        <definition>using neforce::tree_barrier&lt; CmplFunc &gt;::phase_ref_t = atomic_ref_base&lt;byte_t&gt;</definition>
+        <argsstring></argsstring>
+        <name>phase_ref_t</name>
+        <qualifiedname>neforce::tree_barrier::phase_ref_t</qualifiedname>
+        <briefdescription>
+<para>阶段引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" line="50" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1tree__barrier_1ac12583c6803763c9947d91c676716d01" prot="private" static="no">
+        <type><ref refid="structneforce_1_1atomic__ref__base" kindref="compound">atomic_ref_base</ref>&lt; const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> &gt;</type>
+        <definition>using neforce::tree_barrier&lt; CmplFunc &gt;::phase_cref_t = atomic_ref_base&lt;const byte_t&gt;</definition>
+        <argsstring></argsstring>
+        <name>phase_cref_t</name>
+        <qualifiedname>neforce::tree_barrier::phase_cref_t</qualifiedname>
+        <briefdescription>
+<para>阶段常量引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" line="51" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1tree__barrier_1adf9a87cf983d66e0d42379ee507d0c77" prot="public" static="no">
+        <type><ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref></type>
+        <definition>using neforce::tree_barrier&lt; CmplFunc &gt;::arrival_token = byte_t</definition>
+        <argsstring></argsstring>
+        <name>arrival_token</name>
+        <qualifiedname>neforce::tree_barrier::arrival_token</qualifiedname>
+        <briefdescription>
+<para>到达令牌类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" line="122" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" bodystart="122" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classneforce_1_1tree__barrier_1abc539719c82d6d1d7df75408e0cd056c" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto neforce::tree_barrier&lt; CmplFunc &gt;::phase_alignment</definition>
+        <argsstring></argsstring>
+        <name>phase_alignment</name>
+        <qualifiedname>neforce::tree_barrier::phase_alignment</qualifiedname>
+        <initializer>= phase_ref_t::required_alignment</initializer>
+        <briefdescription>
+<para>阶段对齐要求 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" line="53" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1tree__barrier_1a6fea0691d86cf55d14e783e1a49280e5" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gab2c4bc5144496796ce8a7feed7b8ad58" kindref="member">ptrdiff_t</ref></type>
+        <definition>ptrdiff_t neforce::tree_barrier&lt; CmplFunc &gt;::expected_count_</definition>
+        <argsstring></argsstring>
+        <name>expected_count_</name>
+        <qualifiedname>neforce::tree_barrier::expected_count_</qualifiedname>
+        <briefdescription>
+<para>期望的参与线程数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" line="65" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tree__barrier_1a98db9287802a766d3e753a61f5d23062" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; state_data[]&gt;</type>
+        <definition>unique_ptr&lt;state_data[]&gt; neforce::tree_barrier&lt; CmplFunc &gt;::state_array_</definition>
+        <argsstring></argsstring>
+        <name>state_array_</name>
+        <qualifiedname>neforce::tree_barrier::state_array_</qualifiedname>
+        <briefdescription>
+<para>状态数组指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" line="66" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tree__barrier_1a77b1f8871f823a9f0bf5bad15003f689" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic__base" kindref="compound">atomic_base</ref>&lt; <ref refid="group___platform_dependent_types_1gab2c4bc5144496796ce8a7feed7b8ad58" kindref="member">ptrdiff_t</ref> &gt;</type>
+        <definition>atomic_base&lt;ptrdiff_t&gt; neforce::tree_barrier&lt; CmplFunc &gt;::expected_adjustment_</definition>
+        <argsstring></argsstring>
+        <name>expected_adjustment_</name>
+        <qualifiedname>neforce::tree_barrier::expected_adjustment_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>期望调整值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" line="67" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tree__barrier_1adcc9499408a03a4eadd8f3da73c6ab6d" prot="private" static="no" mutable="no">
+        <type>CmplFunc</type>
+        <definition>CmplFunc neforce::tree_barrier&lt; CmplFunc &gt;::completion_function_</definition>
+        <argsstring></argsstring>
+        <name>completion_function_</name>
+        <qualifiedname>neforce::tree_barrier::completion_function_</qualifiedname>
+        <briefdescription>
+<para>完成函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" line="68" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1tree__barrier_1a1dbd954ff462d867b94a314ccc1be581" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref></type>
+        <definition>byte_t neforce::tree_barrier&lt; CmplFunc &gt;::current_phase_</definition>
+        <argsstring></argsstring>
+        <name>current_phase_</name>
+        <qualifiedname>neforce::tree_barrier::current_phase_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>当前阶段值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" line="69" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" bodystart="69" bodyend="69"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1tree__barrier_1ac0e63a3c5de357962a3ce58e32c78f84" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::tree_barrier&lt; CmplFunc &gt;::do_arrive</definition>
+        <argsstring>(const byte_t old_phase, size_t current_index)</argsstring>
+        <name>do_arrive</name>
+        <qualifiedname>neforce::tree_barrier::do_arrive</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref></type>
+          <declname>old_phase</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>current_index</declname>
+        </param>
+        <briefdescription>
+<para>执行到达操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>old_phase</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>旧阶段值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>current_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当前线程索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否完成本轮屏障</para>
+</simplesect>
+树形屏障算法的核心实现，使用多轮票证交换机制。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" line="79" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" bodystart="79" bodyend="119"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1tree__barrier_1ad9f1c130baf10f91b6e0ceb074be19a3" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1gab2c4bc5144496796ce8a7feed7b8ad58" kindref="member">ptrdiff_t</ref></type>
+        <definition>static constexpr ptrdiff_t neforce::tree_barrier&lt; CmplFunc &gt;::max</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>max</name>
+        <qualifiedname>neforce::tree_barrier::max</qualifiedname>
+        <briefdescription>
+<para>获取最大线程数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>支持的最大线程数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" line="128" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" bodystart="128" bodyend="128"/>
+        <references refid="classneforce_1_1numeric__traits_1a3a4cc2bdbf7e98a487d29367781db135" compoundref="numeric__traits_8hpp" startline="153" endline="153">neforce::numeric_traits&lt; T, Dummy &gt;::max</references>
+        <referencedby refid="classneforce_1_1barrier_1ade8e48ff64f4777e4dbbe40735fff36c" compoundref="barrier_8hpp" startline="233" endline="233">neforce::barrier&lt; CmplFunc &gt;::max</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1tree__barrier_1a48bcd1224d3f4281ccade6563326af51" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::tree_barrier&lt; CmplFunc &gt;::tree_barrier</definition>
+        <argsstring>(const ptrdiff_t expected, CmplFunc completion)</argsstring>
+        <name>tree_barrier</name>
+        <qualifiedname>neforce::tree_barrier::tree_barrier</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1gab2c4bc5144496796ce8a7feed7b8ad58" kindref="member">ptrdiff_t</ref></type>
+          <declname>expected</declname>
+        </param>
+        <param>
+          <type>CmplFunc</type>
+          <declname>completion</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>expected</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望的参与线程数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>completion</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" line="135" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" bodystart="135" bodyend="140"/>
+        <references refid="group___counting_algorithms_1ga74557c5cb91a609183df695efc54ba60" compoundref="search_8hpp" startline="391" endline="393">neforce::count</references>
+        <references refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" compoundref="unique__ptr_8hpp" startline="973" endline="975">neforce::make_unique</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tree__barrier_1a8e86b8282173c7b192d5925899e94f36" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1tree__barrier_1adf9a87cf983d66e0d42379ee507d0c77" kindref="member">arrival_token</ref></type>
+        <definition>arrival_token neforce::tree_barrier&lt; CmplFunc &gt;::arrive</definition>
+        <argsstring>(ptrdiff_t update)</argsstring>
+        <name>arrive</name>
+        <qualifiedname>neforce::tree_barrier::arrive</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1gab2c4bc5144496796ce8a7feed7b8ad58" kindref="member">ptrdiff_t</ref></type>
+          <declname>update</declname>
+        </param>
+        <briefdescription>
+<para>到达屏障点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>update</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>到达线程数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>到达令牌</para>
+</simplesect>
+线程到达屏障点，可能触发完成函数并进入下一阶段。 支持批量到达。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" line="150" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" bodystart="150" bodyend="168"/>
+        <references refid="group___thread_1ga3c2969f91e75bf621e2a3a1437f0bc46" compoundref="thread_8hpp" startline="449" endline="455">neforce::this_thread::id</references>
+        <references refid="group___memory_order_1gaf2fa121cd3849278f261b2c04fdf90a8" compoundref="memory__order_8hpp" startline="173">neforce::memory_order_relaxed</references>
+        <references refid="group___memory_order_1ga0ecbdbbd5ddbe9eda2820b9cea4826fc" compoundref="memory__order_8hpp" startline="179">neforce::memory_order_release</references>
+        <referencedby refid="classneforce_1_1tree__barrier_1a7937b4b1d8b5be5505a4a2c383eee8e8" compoundref="barrier_8hpp" startline="187" endline="190">neforce::tree_barrier&lt; CmplFunc &gt;::arrive_and_drop</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tree__barrier_1ac0602e7b2ca559e91977ab448d5f574c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::tree_barrier&lt; CmplFunc &gt;::wait</definition>
+        <argsstring>(arrival_token &amp;&amp;old_phase) const</argsstring>
+        <name>wait</name>
+        <qualifiedname>neforce::tree_barrier::wait</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1tree__barrier_1adf9a87cf983d66e0d42379ee507d0c77" kindref="member">arrival_token</ref> &amp;&amp;</type>
+          <declname>old_phase</declname>
+        </param>
+        <briefdescription>
+<para>等待屏障 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>old_phase</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>到达令牌</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+等待屏障进入下一阶段，使用原子等待机制避免忙等待。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" line="176" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" bodystart="176" bodyend="180"/>
+        <references refid="group___atomic_operations_1gae06adb4c7ce500e642f4fa53f1c5411d" compoundref="atomic__wait_8hpp" startline="433" endline="436">neforce::atomic_wait_address</references>
+        <references refid="group___memory_order_1ga6367df7d3e137e9b30e17740435d1816" compoundref="memory__order_8hpp" startline="177">neforce::memory_order_acquire</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1tree__barrier_1a7937b4b1d8b5be5505a4a2c383eee8e8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::tree_barrier&lt; CmplFunc &gt;::arrive_and_drop</definition>
+        <argsstring>()</argsstring>
+        <name>arrive_and_drop</name>
+        <qualifiedname>neforce::tree_barrier::arrive_and_drop</qualifiedname>
+        <briefdescription>
+<para>到达并退出 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>线程到达屏障点后退出参与，减少期望线程数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" line="187" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" bodystart="187" bodyend="190"/>
+        <references refid="classneforce_1_1tree__barrier_1a8e86b8282173c7b192d5925899e94f36" compoundref="barrier_8hpp" startline="150" endline="168">neforce::tree_barrier&lt; CmplFunc &gt;::arrive</references>
+        <references refid="group___memory_order_1gaf2fa121cd3849278f261b2c04fdf90a8" compoundref="memory__order_8hpp" startline="173">neforce::memory_order_relaxed</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>树形屏障 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CmplFunc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成函数类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+基于树形算法的屏障实现，使用分层的票证机制减少竞争。 提供高性能的多线程同步，支持动态调整参与线程数。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" line="49" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp" bodystart="49" bodyend="191"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1tree__barrier_1adf9a87cf983d66e0d42379ee507d0c77" prot="public" virt="non-virtual"><scope>neforce::tree_barrier</scope><name>arrival_token</name></member>
+      <member refid="classneforce_1_1tree__barrier_1a8e86b8282173c7b192d5925899e94f36" prot="public" virt="non-virtual"><scope>neforce::tree_barrier</scope><name>arrive</name></member>
+      <member refid="classneforce_1_1tree__barrier_1a7937b4b1d8b5be5505a4a2c383eee8e8" prot="public" virt="non-virtual"><scope>neforce::tree_barrier</scope><name>arrive_and_drop</name></member>
+      <member refid="classneforce_1_1tree__barrier_1adcc9499408a03a4eadd8f3da73c6ab6d" prot="private" virt="non-virtual"><scope>neforce::tree_barrier</scope><name>completion_function_</name></member>
+      <member refid="classneforce_1_1tree__barrier_1a1dbd954ff462d867b94a314ccc1be581" prot="private" virt="non-virtual"><scope>neforce::tree_barrier</scope><name>current_phase_</name></member>
+      <member refid="classneforce_1_1tree__barrier_1ac0e63a3c5de357962a3ce58e32c78f84" prot="private" virt="non-virtual"><scope>neforce::tree_barrier</scope><name>do_arrive</name></member>
+      <member refid="classneforce_1_1tree__barrier_1a77b1f8871f823a9f0bf5bad15003f689" prot="private" virt="non-virtual"><scope>neforce::tree_barrier</scope><name>expected_adjustment_</name></member>
+      <member refid="classneforce_1_1tree__barrier_1a6fea0691d86cf55d14e783e1a49280e5" prot="private" virt="non-virtual"><scope>neforce::tree_barrier</scope><name>expected_count_</name></member>
+      <member refid="classneforce_1_1tree__barrier_1ad9f1c130baf10f91b6e0ceb074be19a3" prot="public" virt="non-virtual"><scope>neforce::tree_barrier</scope><name>max</name></member>
+      <member refid="classneforce_1_1tree__barrier_1abc539719c82d6d1d7df75408e0cd056c" prot="private" virt="non-virtual"><scope>neforce::tree_barrier</scope><name>phase_alignment</name></member>
+      <member refid="classneforce_1_1tree__barrier_1ac12583c6803763c9947d91c676716d01" prot="private" virt="non-virtual"><scope>neforce::tree_barrier</scope><name>phase_cref_t</name></member>
+      <member refid="classneforce_1_1tree__barrier_1af2ac216c54159c421db4747a7df3a642" prot="private" virt="non-virtual"><scope>neforce::tree_barrier</scope><name>phase_ref_t</name></member>
+      <member refid="classneforce_1_1tree__barrier_1a98db9287802a766d3e753a61f5d23062" prot="private" virt="non-virtual"><scope>neforce::tree_barrier</scope><name>state_array_</name></member>
+      <member refid="classneforce_1_1tree__barrier_1a48bcd1224d3f4281ccade6563326af51" prot="public" virt="non-virtual"><scope>neforce::tree_barrier</scope><name>tree_barrier</name></member>
+      <member refid="classneforce_1_1tree__barrier_1ac0602e7b2ca559e91977ab448d5f574c" prot="public" virt="non-virtual"><scope>neforce::tree_barrier</scope><name>wait</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

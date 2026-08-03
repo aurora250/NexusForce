@@ -1,0 +1,250 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1http_1_1route__trie" kind="class" language="C++" prot="public">
+    <compoundname>neforce::http::route_trie</compoundname>
+    <includes refid="radix__router_8hpp" local="no">radix_router.hpp</includes>
+    <innerclass refid="structneforce_1_1http_1_1route__trie_1_1node" prot="public">neforce::http::route_trie::node</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1http_1_1route__trie_1ab39072843f934eb97b2cd3e4aeaee53e" prot="public" static="no">
+        <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;, <ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref> &amp;)&gt;</type>
+        <definition>using neforce::http::route_trie::handler_type = function&lt;void(http_request&amp;, http_response&amp;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>handler_type</name>
+        <qualifiedname>neforce::http::route_trie::handler_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="31" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1route__trie_1a5c87c5d1e9dc881b035f9e224d253c3d" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; node &gt;</type>
+        <definition>vector&lt;node&gt; neforce::http::route_trie::nodes_</definition>
+        <argsstring></argsstring>
+        <name>nodes_</name>
+        <qualifiedname>neforce::http::route_trie::nodes_</qualifiedname>
+        <initializer>{1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="44" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" bodystart="44" bodyend="44"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1route__trie_1a373b224bcf45b9ce0611a9a8ade36a1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::route_trie::route_trie</definition>
+        <argsstring>()=default</argsstring>
+        <name>route_trie</name>
+        <qualifiedname>neforce::http::route_trie::route_trie</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="47" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1route__trie_1a9755b092d28edaf60b60d31ebc1c5c3f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::route_trie::insert</definition>
+        <argsstring>(const string &amp;pattern, handler_type handler)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::http::route_trie::insert</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>pattern</declname>
+        </param>
+        <param>
+          <type>handler_type</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>插入路由规则 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pattern</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>路径模式（支持 :param 和 * 通配符） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>匹配时的处理器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="54" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" bodystart="54" bodyend="108"/>
+        <references refid="classneforce_1_1basic__string_1a6b3909ac25e4def09e6eec5e55a81e2a" compoundref="basic__string_8hpp" startline="1269" endline="1269">neforce::basic_string&lt; CharT, Traits, Alloc &gt;::empty</references>
+        <references refid="classneforce_1_1basic__string__view_1a7d0bce6cdd2137f5e7e5687cfbc90fc1" compoundref="basic__string__view_8hpp" startline="326" endline="326">neforce::basic_string_view&lt; CharT, Traits &gt;::empty</references>
+        <references refid="classneforce_1_1basic__string_1a3e38d7e4403371fc295536d18cd6e988" compoundref="basic__string_8hpp" startline="2378" endline="2381">neforce::basic_string&lt; CharT, Traits, Alloc &gt;::find</references>
+        <references refid="classneforce_1_1basic__string_1afe8ed0b7f774f5b46658f4f00e400b67" compoundref="basic__string_8hpp" startline="1342" endline="1345">neforce::basic_string&lt; CharT, Traits, Alloc &gt;::front</references>
+        <references refid="classneforce_1_1basic__string_1a0474191b03b4d78dd7d95b9da5fa218c" compoundref="basic__string_8hpp" startline="1263" endline="1263">neforce::basic_string&lt; CharT, Traits, Alloc &gt;::length</references>
+        <references refid="classneforce_1_1basic__string__view_1a72c4fc279bb6e575f66373c849ef2d7f" compoundref="basic__string__view_8hpp" startline="320" endline="320">neforce::basic_string_view&lt; CharT, Traits &gt;::length</references>
+        <references refid="classneforce_1_1numeric__traits_1a3a4cc2bdbf7e98a487d29367781db135" compoundref="numeric__traits_8hpp" startline="153" endline="153">neforce::numeric_traits&lt; T, Dummy &gt;::max</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1basic__string_1ac6cace2dfc00539b3c8afec48f6226c8" compoundref="basic__string_8hpp" startline="198">neforce::basic_string&lt; char &gt;::npos</references>
+        <references refid="classneforce_1_1basic__string_1aa3a65c900cd0a84c741fe3e0a89662e7" compoundref="basic__string_8hpp" startline="1224" endline="1230">neforce::basic_string&lt; CharT, Traits, Alloc &gt;::size</references>
+        <references refid="classneforce_1_1basic__string__view_1ab638e982a36599b447fcb8943c8d3512" compoundref="basic__string__view_8hpp" startline="418" endline="422">neforce::basic_string_view&lt; CharT, Traits &gt;::substr</references>
+        <references refid="classneforce_1_1basic__string_1a0049fbf44e36f4c7f57ebc85a2b0a376" compoundref="basic__string_8hpp" startline="2147" endline="2147">neforce::basic_string&lt; CharT, Traits, Alloc &gt;::view</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1route__trie_1a07f4b5a1af292dece68ccd536b672704" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>handler_type</type>
+        <definition>handler_type neforce::http::route_trie::match</definition>
+        <argsstring>(const string &amp;path, bool case_sensitive, vector&lt; pair&lt; string, string &gt; &gt; &amp;params)</argsstring>
+        <name>match</name>
+        <qualifiedname>neforce::http::route_trie::match</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>case_sensitive</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref>, <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt; &gt; &amp;</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+<para>匹配路径 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>请求路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>case_sensitive</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否大小写敏感 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出匹配到的参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>handler指针，未找到返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="117" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" bodystart="117" bodyend="188"/>
+        <references refid="classneforce_1_1basic__string_1a799fde2078859c22faf7554ccbfc5d1f" compoundref="basic__string_8hpp" startline="1573" endline="1611">neforce::basic_string&lt; CharT, Traits, Alloc &gt;::append</references>
+        <references refid="classneforce_1_1basic__string__view_1a7d0bce6cdd2137f5e7e5687cfbc90fc1" compoundref="basic__string__view_8hpp" startline="326" endline="326">neforce::basic_string_view&lt; CharT, Traits &gt;::empty</references>
+        <references refid="classneforce_1_1path_1a8e78d768bba5d798f7b06d0814610302" compoundref="path_8hpp" startline="247" endline="247">neforce::path::empty</references>
+        <references refid="classneforce_1_1basic__string__view_1a72c4fc279bb6e575f66373c849ef2d7f" compoundref="basic__string__view_8hpp" startline="320" endline="320">neforce::basic_string_view&lt; CharT, Traits &gt;::length</references>
+        <references refid="classneforce_1_1basic__string_1aabb667753e6c9735447e9e22f9c4819b" compoundref="basic__string_8hpp" startline="2994" endline="2997">neforce::basic_string&lt; CharT, Traits, Alloc &gt;::lowercase</references>
+        <references refid="classneforce_1_1numeric__traits_1a3a4cc2bdbf7e98a487d29367781db135" compoundref="numeric__traits_8hpp" startline="153" endline="153">neforce::numeric_traits&lt; T, Dummy &gt;::max</references>
+        <references refid="classneforce_1_1basic__string_1ac6cace2dfc00539b3c8afec48f6226c8" compoundref="basic__string_8hpp" startline="198">neforce::basic_string&lt; char &gt;::npos</references>
+        <references refid="classneforce_1_1basic__string_1af873e19bd5a4fa9f7c5353251f83ba48" compoundref="basic__string_8hpp" startline="1275" endline="1302">neforce::basic_string&lt; CharT, Traits, Alloc &gt;::reserve</references>
+        <references refid="classneforce_1_1path_1a827c66c1903c8e4e21033932058c1e49" compoundref="path_8hpp" startline="235" endline="235">neforce::path::view</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1route__trie_1a88121573b6392956f9fd510062e2ef66" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::http::route_trie::contains_path</definition>
+        <argsstring>(const string &amp;path, bool case_sensitive) const</argsstring>
+        <name>contains_path</name>
+        <qualifiedname>neforce::http::route_trie::contains_path</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>case_sensitive</declname>
+        </param>
+        <briefdescription>
+<para>检查路径是否存在 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="193" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" bodystart="193" bodyend="252"/>
+        <references refid="classneforce_1_1basic__string__view_1a7d0bce6cdd2137f5e7e5687cfbc90fc1" compoundref="basic__string__view_8hpp" startline="326" endline="326">neforce::basic_string_view&lt; CharT, Traits &gt;::empty</references>
+        <references refid="classneforce_1_1path_1a8e78d768bba5d798f7b06d0814610302" compoundref="path_8hpp" startline="247" endline="247">neforce::path::empty</references>
+        <references refid="classneforce_1_1basic__string_1aabb667753e6c9735447e9e22f9c4819b" compoundref="basic__string_8hpp" startline="2994" endline="2997">neforce::basic_string&lt; CharT, Traits, Alloc &gt;::lowercase</references>
+        <references refid="classneforce_1_1numeric__traits_1a3a4cc2bdbf7e98a487d29367781db135" compoundref="numeric__traits_8hpp" startline="153" endline="153">neforce::numeric_traits&lt; T, Dummy &gt;::max</references>
+        <references refid="classneforce_1_1basic__string_1ac6cace2dfc00539b3c8afec48f6226c8" compoundref="basic__string_8hpp" startline="198">neforce::basic_string&lt; char &gt;::npos</references>
+        <references refid="classneforce_1_1path_1a827c66c1903c8e4e21033932058c1e49" compoundref="path_8hpp" startline="235" endline="235">neforce::path::view</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1route__trie_1a09337f2b439e7047810b3e771412e4d2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::route_trie::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>neforce::http::route_trie::clear</qualifiedname>
+        <briefdescription>
+<para>清除所有路由规则 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="255" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" bodystart="255" bodyend="258"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1route__trie_1a7886a80c7fd2091d49a039f71e214c6e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::http::route_trie::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>neforce::http::route_trie::size</qualifiedname>
+        <briefdescription>
+<para>获取 trie 节点总数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="261" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" bodystart="261" bodyend="261"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>段式Trie路由器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>每HTTP方法一个实例，存储非正则路由。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="29" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" bodystart="29" bodyend="262"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1http_1_1route__trie_1a09337f2b439e7047810b3e771412e4d2" prot="public" virt="non-virtual"><scope>neforce::http::route_trie</scope><name>clear</name></member>
+      <member refid="classneforce_1_1http_1_1route__trie_1a88121573b6392956f9fd510062e2ef66" prot="public" virt="non-virtual"><scope>neforce::http::route_trie</scope><name>contains_path</name></member>
+      <member refid="classneforce_1_1http_1_1route__trie_1ab39072843f934eb97b2cd3e4aeaee53e" prot="public" virt="non-virtual"><scope>neforce::http::route_trie</scope><name>handler_type</name></member>
+      <member refid="classneforce_1_1http_1_1route__trie_1a9755b092d28edaf60b60d31ebc1c5c3f" prot="public" virt="non-virtual"><scope>neforce::http::route_trie</scope><name>insert</name></member>
+      <member refid="classneforce_1_1http_1_1route__trie_1a07f4b5a1af292dece68ccd536b672704" prot="public" virt="non-virtual"><scope>neforce::http::route_trie</scope><name>match</name></member>
+      <member refid="classneforce_1_1http_1_1route__trie_1a5c87c5d1e9dc881b035f9e224d253c3d" prot="private" virt="non-virtual"><scope>neforce::http::route_trie</scope><name>nodes_</name></member>
+      <member refid="classneforce_1_1http_1_1route__trie_1a373b224bcf45b9ce0611a9a8ade36a1c" prot="public" virt="non-virtual"><scope>neforce::http::route_trie</scope><name>route_trie</name></member>
+      <member refid="classneforce_1_1http_1_1route__trie_1a7886a80c7fd2091d49a039f71e214c6e" prot="public" virt="non-virtual"><scope>neforce::http::route_trie</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,104 +1,104 @@
 var group___database_interface =
 [
-    [ "idb_result", "structidb__result.html", [
-      [ "difference_type", "structidb__result.html#a679893315e15ca3a6009b495527a89d5", null ],
-      [ "size_type", "structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082", null ],
-      [ "empty", "structidb__result.html#aa1c85e3b42031de74a7fb1f7a95e2754", null ],
-      [ "next", "structidb__result.html#a4ffe1b5d13e654c3cb99f000e7d4d093", null ]
+    [ "neforce::idb_result", "structneforce_1_1idb__result.html", [
+      [ "difference_type", "structneforce_1_1idb__result.html#af7a1fe6b1af2018ef7737471858c214c", null ],
+      [ "size_type", "structneforce_1_1idb__result.html#a23ed87a91a6b3170822618ec0c82199c", null ],
+      [ "empty", "structneforce_1_1idb__result.html#a0040c4ab65141f26d892682ac4cab61a", null ],
+      [ "next", "structneforce_1_1idb__result.html#a60e0f20f35ec5525768825a37772489e", null ]
     ] ],
-    [ "column_meta", "structcolumn__meta.html", [
-      [ "max_length", "structcolumn__meta.html#a3c4ae6019137ed95794c50d84a6adfd7", null ],
-      [ "name", "structcolumn__meta.html#ad60942efa3742cb5e5b4a45bbf7a9088", null ],
-      [ "nullable", "structcolumn__meta.html#a3000bd379c9fe06859103945b1dfc138", null ],
-      [ "type", "structcolumn__meta.html#a1484f2a08bd9e7727a8d8404d4dab86d", null ]
+    [ "neforce::column_meta", "structneforce_1_1column__meta.html", [
+      [ "max_length", "structneforce_1_1column__meta.html#ad1fdd625d8e302157a6693e7bb9be780", null ],
+      [ "name", "structneforce_1_1column__meta.html#a07c2c110af49d0868adcf3722756eb34", null ],
+      [ "nullable", "structneforce_1_1column__meta.html#a6b64ae19b620330ef9fe707938be83d1", null ],
+      [ "type", "structneforce_1_1column__meta.html#a4e3fb335e7af1b81808ba094bd8368dd", null ]
     ] ],
-    [ "idb_tb_result", "structidb__tb__result.html", [
-      [ "column_count", "structidb__tb__result.html#a15bba511bedb7883a9770516e60d0502", null ],
-      [ "column_metadata", "structidb__tb__result.html#a847e127d534e34bc199d6168372288f0", null ],
-      [ "column_names", "structidb__tb__result.html#acf9e2cdb951dfadb26394addafd314bd", null ],
-      [ "get", "structidb__tb__result.html#ae1bc5e789f06b1d381f8922dc0c5e9af", null ],
-      [ "get_bit", "structidb__tb__result.html#ab2a5e423b358828cada7a8be14651196", null ],
-      [ "get_blob", "structidb__tb__result.html#ac3feb428fffed8adfa41c28b64bae4ea", null ],
-      [ "get_bool", "structidb__tb__result.html#ad35689b23d23b40ed9fe12c425527c58", null ],
-      [ "get_date", "structidb__tb__result.html#ac54604a476b6a85e5ff0892304adf0a3", null ],
-      [ "get_datetime", "structidb__tb__result.html#a0148e0ef2825f69afcbf37f1306b96cb", null ],
-      [ "get_decimal", "structidb__tb__result.html#a3c7275cb280846f4d59fa4b78411493d", null ],
-      [ "get_float32", "structidb__tb__result.html#a5ef4af6943ee76fadf05fc2989d56ebd", null ],
-      [ "get_float64", "structidb__tb__result.html#a1c4d6dcd48871d296845f934c8218cf9", null ],
-      [ "get_int16", "structidb__tb__result.html#aed5fa0a878a1868a38db6b29308d5299", null ],
-      [ "get_int32", "structidb__tb__result.html#a30c2b4161d1197de423889027ae5272d", null ],
-      [ "get_int64", "structidb__tb__result.html#a313b404f40b06095313fdad5a71c36d9", null ],
-      [ "get_time", "structidb__tb__result.html#a0501bb1dba04138e9347c6685a8070d2", null ],
-      [ "get_timestamp", "structidb__tb__result.html#a25e41967e2cd971cb73a691092342f7e", null ],
-      [ "row_count", "structidb__tb__result.html#aabb704cab81e3fdae2849fcdd6d73c75", null ]
+    [ "neforce::idb_tb_result", "structneforce_1_1idb__tb__result.html", [
+      [ "column_count", "structneforce_1_1idb__tb__result.html#a8fd1c091cf5f36dee5c20e42d73c8135", null ],
+      [ "column_metadata", "structneforce_1_1idb__tb__result.html#a97664c0b07fa1bf508e05a30e53146be", null ],
+      [ "column_names", "structneforce_1_1idb__tb__result.html#ab7a91a67dd864e43c6749ee92409ecb9", null ],
+      [ "get", "structneforce_1_1idb__tb__result.html#a41434171e9b717e55de7907eed6d3e5f", null ],
+      [ "get_bit", "structneforce_1_1idb__tb__result.html#a8732243cbfe3ce8b7a8c730e63de7683", null ],
+      [ "get_blob", "structneforce_1_1idb__tb__result.html#a7921f17149ed4ffad856ba48aaa7c85d", null ],
+      [ "get_bool", "structneforce_1_1idb__tb__result.html#a11939064489f7227c9014a073b934225", null ],
+      [ "get_date", "structneforce_1_1idb__tb__result.html#a9c60c71cbf41463e3ac48e891085a1e2", null ],
+      [ "get_datetime", "structneforce_1_1idb__tb__result.html#af53ce2d9bb54c0d55110488bf4d3e19f", null ],
+      [ "get_decimal", "structneforce_1_1idb__tb__result.html#a4098b769941be4f118347eaaab1fdee1", null ],
+      [ "get_float32", "structneforce_1_1idb__tb__result.html#aeefac909e3fee952c69fc346d3d22844", null ],
+      [ "get_float64", "structneforce_1_1idb__tb__result.html#ab1c079a1e03c57ed9a50dcc1c1046350", null ],
+      [ "get_int16", "structneforce_1_1idb__tb__result.html#a89a8d743de698b182d26e7713c3dcf0f", null ],
+      [ "get_int32", "structneforce_1_1idb__tb__result.html#a3b6ef4c03a0e22006be47885c3fbe936", null ],
+      [ "get_int64", "structneforce_1_1idb__tb__result.html#a29946ee1a36ec9c164a54c6417b1de39", null ],
+      [ "get_time", "structneforce_1_1idb__tb__result.html#a877e69903f6fa3dc36ebac8d3f52e9b4", null ],
+      [ "get_timestamp", "structneforce_1_1idb__tb__result.html#a12b0ad351f41f87d442f95394646347f", null ],
+      [ "row_count", "structneforce_1_1idb__tb__result.html#a0bc58ae12ed7f0d0d34c94332c2407a7", null ]
     ] ],
-    [ "idb_kv_result", "structidb__kv__result.html", [
-      [ "key", "structidb__kv__result.html#afb6bd27723ff10fb3c61e0c25ca5b6b9", null ],
-      [ "value", "structidb__kv__result.html#a0097ae6999922267e867a523038e2eca", null ],
-      [ "value_array", "structidb__kv__result.html#a54840ff181f4574be5291ddb5abd640e", null ],
-      [ "value_bool", "structidb__kv__result.html#a7d18ad352f671fd50ef9593b6f7af1bb", null ],
-      [ "value_double", "structidb__kv__result.html#a3b6995117eb8941e7b870a4935689c49", null ],
-      [ "value_hash", "structidb__kv__result.html#aad2ccd406c8e9409bbb6660660764cd8", null ],
-      [ "value_int64", "structidb__kv__result.html#a3a4b46e33ca2aac0c205716032cd64cd", null ]
+    [ "neforce::idb_kv_result", "structneforce_1_1idb__kv__result.html", [
+      [ "key", "structneforce_1_1idb__kv__result.html#a4b0725493190c5dd96fb61a07f033822", null ],
+      [ "value", "structneforce_1_1idb__kv__result.html#ac1873e71d817ec5407d6096bf0d48638", null ],
+      [ "value_array", "structneforce_1_1idb__kv__result.html#ad0a5f8b2354f418ca8079a9cf74b61cc", null ],
+      [ "value_bool", "structneforce_1_1idb__kv__result.html#aea345eb8737566557ca35f7b998c2bb1", null ],
+      [ "value_double", "structneforce_1_1idb__kv__result.html#af17e1094cb8e5067c1106b0b5f4ff973", null ],
+      [ "value_hash", "structneforce_1_1idb__kv__result.html#a1f21082e15effdfc156ed65862fdae44", null ],
+      [ "value_int64", "structneforce_1_1idb__kv__result.html#abd13b8f301e67c4e1c48451e250a578c", null ]
     ] ],
-    [ "idb_prepared_statement", "structidb__prepared__statement.html", [
-      [ "bind_param", "structidb__prepared__statement.html#a7a9038b065d93470a68a23739987ddcc", null ],
-      [ "bind_param", "structidb__prepared__statement.html#af8d4d5a5485c462827fa45fbd909d0ea", null ],
-      [ "bind_param", "structidb__prepared__statement.html#ab21150730b90141dfd37083d9d21e0f3", null ],
-      [ "bind_param", "structidb__prepared__statement.html#af8c65a9348aaa14ca7e0b8cdc3bf92d9", null ],
-      [ "bind_param", "structidb__prepared__statement.html#a5fd7f0157b00d43b238e9b79404e82eb", null ],
-      [ "bind_param", "structidb__prepared__statement.html#a203cda3f3bf52a50d91488cc333f6dcd", null ],
-      [ "bind_param", "structidb__prepared__statement.html#acf37860b88bfa7fd95272d0c2b13ce0a", null ],
-      [ "execute", "structidb__prepared__statement.html#a5edc6ce541b1a871ee9910ba9ec565f9", null ],
-      [ "execute_query", "structidb__prepared__statement.html#a04c96b62170d85a3476c1f7a11a8e6f4", null ],
-      [ "get_errno", "structidb__prepared__statement.html#ac2d8c780282f37e5033aa64025cd0435", null ],
-      [ "get_error", "structidb__prepared__statement.html#a67f600d24fe96ea4b26508953e1ac2ed", null ],
-      [ "param_count", "structidb__prepared__statement.html#a67ab1c9f04a375b478a034db711b3675", null ]
+    [ "neforce::idb_prepared_statement", "structneforce_1_1idb__prepared__statement.html", [
+      [ "bind_param", "structneforce_1_1idb__prepared__statement.html#ad874d16b23d0ab9bd5d4641c10b109ee", null ],
+      [ "bind_param", "structneforce_1_1idb__prepared__statement.html#a57a416197042b24f097827c4c2083fa4", null ],
+      [ "bind_param", "structneforce_1_1idb__prepared__statement.html#a83d5df06b54af73d6a24adfd91e35809", null ],
+      [ "bind_param", "structneforce_1_1idb__prepared__statement.html#a8ebc3a7a62d00aaf5b4e19cde9581b54", null ],
+      [ "bind_param", "structneforce_1_1idb__prepared__statement.html#ad10f3350cf59857aa941288fae75df21", null ],
+      [ "bind_param", "structneforce_1_1idb__prepared__statement.html#a1d225748e5d1447d3dbb1a28ef97072e", null ],
+      [ "bind_param", "structneforce_1_1idb__prepared__statement.html#a9219ec073f4fe401624fbda187c6a478", null ],
+      [ "execute", "structneforce_1_1idb__prepared__statement.html#a32eebdb2af37ff60943d591aeb7eb619", null ],
+      [ "execute_query", "structneforce_1_1idb__prepared__statement.html#ab063e1a59a20303603ce84215a5f52ec", null ],
+      [ "get_errno", "structneforce_1_1idb__prepared__statement.html#ae4c29021b23c7291739378437e7994c6", null ],
+      [ "get_error", "structneforce_1_1idb__prepared__statement.html#ae2fb693e9c62f6733d8a09701427963f", null ],
+      [ "param_count", "structneforce_1_1idb__prepared__statement.html#ae3c779c7dd0e64b4b3f04d3abfbf004d", null ]
     ] ],
-    [ "idb_connect", "structidb__connect.html", [
-      [ "clock_type", "structidb__connect.html#ab9be909e9ecc1db9cbcc28186de35c95", null ],
-      [ "begin", "structidb__connect.html#a24b4c723358335c8a32164c021da1bc7", null ],
-      [ "close", "structidb__connect.html#a689ce6c9a44cdc602e6006615e949e19", null ],
-      [ "commit", "structidb__connect.html#a15de30685e73d3b2855f132ae600a81a", null ],
-      [ "connect", "structidb__connect.html#a7ae3001e8ef72724b952fac4ea66cde7", null ],
-      [ "connected", "structidb__connect.html#a05b7b473cdd13c18f5b44c83e09c082d", null ],
-      [ "get_alive", "structidb__connect.html#a5fe328d4bdf863d226d7065daf2cc56b", null ],
-      [ "get_character_set", "structidb__connect.html#a81f310b0ea3085407106a63fa1ba0767", null ],
-      [ "get_errno", "structidb__connect.html#a150e2a5aac988b6abb97f9444042d06e", null ],
-      [ "get_error", "structidb__connect.html#a128b6a7646a28e85e231beb150439c01", null ],
-      [ "is_valid", "structidb__connect.html#a7b5c48c5ecdb1cdd54463da84cbc92a0", null ],
-      [ "native_handle", "structidb__connect.html#a795f60f7b0e4db4511ba51da8d54c7b3", null ],
-      [ "reconnect", "structidb__connect.html#a5faaad097bbdc6d8e530eb9f3ec7af94", null ],
-      [ "refresh_alive", "structidb__connect.html#a23d22fba9ce82c798a1363f0f816f593", null ],
-      [ "rollback", "structidb__connect.html#ae9129bc37cfcb03085e3234e2be8583a", null ],
-      [ "set_character_set", "structidb__connect.html#a7787680de395dc737bd6b14978488854", null ],
-      [ "update", "structidb__connect.html#aedacf58e2ea956b26f4862e49506c3c2", null ]
+    [ "neforce::idb_connect", "structneforce_1_1idb__connect.html", [
+      [ "clock_type", "structneforce_1_1idb__connect.html#a19ba4dec4fe5a36a450aa969c526c06b", null ],
+      [ "begin", "structneforce_1_1idb__connect.html#af214118c53ddee5d6f18ec0d746f6ff1", null ],
+      [ "close", "structneforce_1_1idb__connect.html#af6d6225fcd7850973d08c130e9cb616e", null ],
+      [ "commit", "structneforce_1_1idb__connect.html#ae23676e5461a062bfdbb6908159c253b", null ],
+      [ "connect", "structneforce_1_1idb__connect.html#af553a444d6afed3dc7cdfaf6c4728781", null ],
+      [ "connected", "structneforce_1_1idb__connect.html#a2b500b4f68777810d482c4bd3b825c60", null ],
+      [ "get_alive", "structneforce_1_1idb__connect.html#ab19c064add26edacd224ec8f106561c5", null ],
+      [ "get_character_set", "structneforce_1_1idb__connect.html#af0318eb9b4781f3b23e7c204ce37fc2a", null ],
+      [ "get_errno", "structneforce_1_1idb__connect.html#a1edc2011af057e80c6bf51be474c96f4", null ],
+      [ "get_error", "structneforce_1_1idb__connect.html#aeea50ed0bd9c617849ea99ed9222c859", null ],
+      [ "is_valid", "structneforce_1_1idb__connect.html#a63ec7b3d6fed87b7f2d870688a299264", null ],
+      [ "native_handle", "structneforce_1_1idb__connect.html#a341d10c620142f250d09cdbea16bef1f", null ],
+      [ "reconnect", "structneforce_1_1idb__connect.html#ac3d675f377900b875bf98bf831153ba7", null ],
+      [ "refresh_alive", "structneforce_1_1idb__connect.html#a31a6f186564ed8fba7ce897b657cc50b", null ],
+      [ "rollback", "structneforce_1_1idb__connect.html#ac3383dd69a282bf735394b28c40ac326", null ],
+      [ "set_character_set", "structneforce_1_1idb__connect.html#a2749768dc89fe91c34e9ce87dfb121ca", null ],
+      [ "update", "structneforce_1_1idb__connect.html#a5a85affcd82b5aeabcd085f4ad916828", null ]
     ] ],
-    [ "idb_tb_connect", "structidb__tb__connect.html", [
-      [ "prepare_statement", "structidb__tb__connect.html#a37513bfd22b7ea67498dbac6f98e8156", null ],
-      [ "query", "structidb__tb__connect.html#abc6b0d8058de22758e6c33fa9212e31e", null ]
+    [ "neforce::idb_tb_connect", "structneforce_1_1idb__tb__connect.html", [
+      [ "prepare_statement", "structneforce_1_1idb__tb__connect.html#ab1771c73133095c99d4d8f519f3343b7", null ],
+      [ "query", "structneforce_1_1idb__tb__connect.html#acd485ba5d3d407bfcde8d087bd0548b2", null ]
     ] ],
-    [ "idb_kv_connect", "structidb__kv__connect.html", [
-      [ "del", "structidb__kv__connect.html#a1c1364dd831002fc3fc73309e530e521", null ],
-      [ "exists", "structidb__kv__connect.html#a6640176b69d3705d6258cf37b828b9e9", null ],
-      [ "expire", "structidb__kv__connect.html#a0b6f095f05cd2c47c14042561ca2eff1", null ],
-      [ "get", "structidb__kv__connect.html#a3324c690954e8903d1b93e7f3f57913a", null ],
-      [ "hget", "structidb__kv__connect.html#a3bdc8d2247e47acf83518b7e5ba93f73", null ],
-      [ "hgetall", "structidb__kv__connect.html#a607d7d51d1c634a68c94f040f79252eb", null ],
-      [ "hset", "structidb__kv__connect.html#a0178a9138fe5e3fe003d452295c9883e", null ],
-      [ "lpush", "structidb__kv__connect.html#a03d9a4c0ab341017f74be3915d89e963", null ],
-      [ "lrange", "structidb__kv__connect.html#a505e795ba3d9ccdb0c1cedcc5771585a", null ],
-      [ "query", "structidb__kv__connect.html#a71f6c141ed4386fbabab0e8ea582a759", null ],
-      [ "rpush", "structidb__kv__connect.html#af04a50d57aec2f910ba84c5725721edc", null ],
-      [ "sadd", "structidb__kv__connect.html#a247ebd395ef84752931920b6c56a87f9", null ],
-      [ "set", "structidb__kv__connect.html#add7971b12793bba947a99986dd121d37", null ],
-      [ "setex", "structidb__kv__connect.html#a955af2cacf3087fe3aee5820e6267f02", null ],
-      [ "smembers", "structidb__kv__connect.html#afd8f88c705268f6b7fabf64f28dff661", null ]
+    [ "neforce::idb_kv_connect", "structneforce_1_1idb__kv__connect.html", [
+      [ "del", "structneforce_1_1idb__kv__connect.html#accce204db330738690bac4d4dc0cd540", null ],
+      [ "exists", "structneforce_1_1idb__kv__connect.html#a7e7930bcc39acb46604c1dbc847ee8ab", null ],
+      [ "expire", "structneforce_1_1idb__kv__connect.html#ab1f88d99f9dde2f6c534f79f5b6a35f4", null ],
+      [ "get", "structneforce_1_1idb__kv__connect.html#a178874c8052c2b9e2902420ec415125c", null ],
+      [ "hget", "structneforce_1_1idb__kv__connect.html#a4cc38ceb331ca39519140ecc53fd6094", null ],
+      [ "hgetall", "structneforce_1_1idb__kv__connect.html#ab1f1cf9d26fc1d3db7bcf459c48762a0", null ],
+      [ "hset", "structneforce_1_1idb__kv__connect.html#acebaf96c9c28112ff4d434fefbb6cce1", null ],
+      [ "lpush", "structneforce_1_1idb__kv__connect.html#a16002f498de0b6881188661c6555904b", null ],
+      [ "lrange", "structneforce_1_1idb__kv__connect.html#afad610b64131592c71822889b163c78b", null ],
+      [ "query", "structneforce_1_1idb__kv__connect.html#a25def2291065e6d39ee07d0fd3daa8e5", null ],
+      [ "rpush", "structneforce_1_1idb__kv__connect.html#a3692a4ce9711f8901ea63b32a87dc777", null ],
+      [ "sadd", "structneforce_1_1idb__kv__connect.html#a36a56fef757b0d368637700a7ebb80de", null ],
+      [ "set", "structneforce_1_1idb__kv__connect.html#a543247b94fcf28597da60d1798b6d65b", null ],
+      [ "setex", "structneforce_1_1idb__kv__connect.html#ab51f87a3c4cb53dd8e497d4392cf9739", null ],
+      [ "smembers", "structneforce_1_1idb__kv__connect.html#aea25809d3fd3b316cfa25391aaad7538", null ]
     ] ],
-    [ "idb_factory", "classidb__factory.html", [
-      [ "idb_factory", "classidb__factory.html#a875d00f918348f454bb6452c57579ab1", null ],
-      [ "create_connect", "classidb__factory.html#a9cfd6a805582479a8e07ccee9902e725", null ],
-      [ "create_result", "classidb__factory.html#a38cc1a9c020122afb66d6b5747a2585c", null ],
-      [ "config_", "classidb__factory.html#abf7c46aa20c88d33ddd866b4251c123a", null ]
+    [ "neforce::idb_factory", "classneforce_1_1idb__factory.html", [
+      [ "idb_factory", "classneforce_1_1idb__factory.html#ac2d0b0dd016c27abaf402cc1ffdd4f5e", null ],
+      [ "create_connect", "classneforce_1_1idb__factory.html#a3e731cc51c812ff48912b5952cdaa397", null ],
+      [ "create_result", "classneforce_1_1idb__factory.html#adf967dc27dd2074fa1f596118d03e8e2", null ],
+      [ "config_", "classneforce_1_1idb__factory.html#a4a4b0a2535301e684720a784c7aa3713", null ]
     ] ]
 ];

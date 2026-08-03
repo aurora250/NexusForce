@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
   </td>
  </tr>
  </tbody>
@@ -98,20 +98,20 @@ $(function(){initNavTree('group___coroutine_spawn.html','',''); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 类</h2></td></tr>
-<tr class="memitem:co_5Fspawn_5Ftask" id="r_co_5Fspawn_5Ftask"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structco__spawn__task.html">co_spawn_task</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">co_spawn 使用的协程任务类型  <a href="structco__spawn__task.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:neforce_3A_3Aco_5Fspawn_5Ftask" id="r_neforce_3A_3Aco_5Fspawn_5Ftask"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1co__spawn__task.html">neforce::co_spawn_task</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">co_spawn 使用的协程任务类型  <a href="structneforce_1_1co__spawn__task.html#details">更多...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:ga10a82702bdd477d3f11837b52b06a127" id="r_ga10a82702bdd477d3f11837b52b06a127"><td class="memTemplParams" colspan="2">template&lt;typename Executor, typename Func&gt; </td></tr>
-<tr class="memitem:ga10a82702bdd477d3f11837b52b06a127 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga10a82702bdd477d3f11837b52b06a127">co_spawn</a> (Executor &amp;&amp;exec, Func func)</td></tr>
-<tr class="memdesc:ga10a82702bdd477d3f11837b52b06a127"><td class="mdescLeft">&#160;</td><td class="mdescRight">在 executor 上启动协程  <br /></td></tr>
+<tr class="memitem:ga281be325f4126db51cbab239cda2efb1" id="r_ga281be325f4126db51cbab239cda2efb1"><td class="memTemplParams" colspan="2">template&lt;typename Executor, typename Func&gt; </td></tr>
+<tr class="memitem:ga281be325f4126db51cbab239cda2efb1 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga281be325f4126db51cbab239cda2efb1">neforce::co_spawn</a> (Executor &amp;&amp;exec, Func func)</td></tr>
+<tr class="memdesc:ga281be325f4126db51cbab239cda2efb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">在 executor 上启动协程  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>在 executor 上启动协程 </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
-<a id="ga10a82702bdd477d3f11837b52b06a127" name="ga10a82702bdd477d3f11837b52b06a127"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga10a82702bdd477d3f11837b52b06a127">&#9670;&#160;</a></span>co_spawn()</h2>
+<a id="ga281be325f4126db51cbab239cda2efb1" name="ga281be325f4126db51cbab239cda2efb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga281be325f4126db51cbab239cda2efb1">&#9670;&#160;</a></span>co_spawn()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -119,7 +119,7 @@ $(function(){initNavTree('group___coroutine_spawn.html','',''); });
 template&lt;typename Executor, typename Func&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void co_spawn </td>
+          <td class="memname">void neforce::co_spawn </td>
           <td>(</td>
           <td class="paramtype">Executor &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>exec</em></span>, </td>
         </tr>
@@ -141,19 +141,23 @@ template&lt;typename Executor, typename Func&gt; </div>
 </dl>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">exec</td><td>执行器（如 <a class="el" href="classio__context_1_1executor.html" title="io_context 的执行器句柄">io_context::executor</a> 或 strand） </td></tr>
+    <tr><td class="paramname">exec</td><td>执行器（如 <a class="el" href="classneforce_1_1io__context_1_1executor.html" title="io_context 的执行器句柄">io_context::executor</a> 或 strand） </td></tr>
     <tr><td class="paramname">func</td><td>协程工厂函数，返回 awaitable</td></tr>
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line"><a class="code hl_function" href="#ga10a82702bdd477d3f11837b52b06a127">co_spawn</a>(ctx.get_executor(), [&amp;]() -&gt; <a class="code hl_class" href="classawaitable.html">awaitable&lt;void&gt;</a> {</div>
+<div class="fragment"><div class="line"><a class="code hl_function" href="#ga281be325f4126db51cbab239cda2efb1">co_spawn</a>(ctx.get_executor(), [&amp;]() -&gt; <a class="code hl_class" href="classneforce_1_1awaitable.html">awaitable&lt;void&gt;</a> {</div>
 <div class="line">    auto n = co_await sock.async_receive(buf, use_awaitable);</div>
 <div class="line">    println(<span class="stringliteral">&quot;read &quot;</span>, n, <span class="stringliteral">&quot; bytes&quot;</span>);</div>
 <div class="line">});</div>
-<div class="ttc" id="aclassawaitable_html"><div class="ttname"><a href="classawaitable.html">awaitable</a></div><div class="ttdoc">可被 co_await 的异步操作结果</div><div class="ttdef"><b>定义</b> <a href="use__awaitable_8hpp_source.html#l00038">use_awaitable.hpp:38</a></div></div>
-<div class="ttc" id="agroup___coroutine_spawn_html_ga10a82702bdd477d3f11837b52b06a127"><div class="ttname"><a href="#ga10a82702bdd477d3f11837b52b06a127">co_spawn</a></div><div class="ttdeci">void co_spawn(Executor &amp;&amp;exec, Func func)</div><div class="ttdoc">在 executor 上启动协程</div><div class="ttdef"><b>定义</b> <a href="co__spawn_8hpp_source.html#l00073">co_spawn.hpp:73</a></div></div>
+<div class="ttc" id="aclassneforce_1_1awaitable_html"><div class="ttname"><a href="classneforce_1_1awaitable.html">neforce::awaitable</a></div><div class="ttdoc">可被 co_await 的异步操作结果</div><div class="ttdef"><b>定义</b> <a href="use__awaitable_8hpp_source.html#l00038">use_awaitable.hpp:38</a></div></div>
+<div class="ttc" id="agroup___coroutine_spawn_html_ga281be325f4126db51cbab239cda2efb1"><div class="ttname"><a href="#ga281be325f4126db51cbab239cda2efb1">neforce::co_spawn</a></div><div class="ttdeci">void co_spawn(Executor &amp;&amp;exec, Func func)</div><div class="ttdoc">在 executor 上启动协程</div><div class="ttdef"><b>定义</b> <a href="co__spawn_8hpp_source.html#l00073">co_spawn.hpp:73</a></div></div>
 </div><!-- fragment --> 
 <p class="definition">在文件 <a class="el" href="co__spawn_8hpp_source.html">co_spawn.hpp</a> 第 <a class="el" href="co__spawn_8hpp_source.html#l00073">73</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="co__spawn_8hpp_source.html#l00073">co_spawn()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="co__spawn_8hpp_source.html#l00073">co_spawn()</a>.</p>
 
 </div>
 </div>

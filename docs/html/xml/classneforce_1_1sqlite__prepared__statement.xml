@@ -1,0 +1,761 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1sqlite__prepared__statement" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>neforce::sqlite_prepared_statement</compoundname>
+    <basecompoundref refid="structneforce_1_1idb__prepared__statement" prot="public" virt="non-virtual">neforce::idb_prepared_statement</basecompoundref>
+    <includes refid="sqlite__prepared__statement_8hpp" local="no">sqlite_prepared_statement.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1sqlite__prepared__statement_1acd94ec22d15fea21bb9e2d6df303a6bd" prot="private" static="no" mutable="no">
+        <type>::sqlite3 *</type>
+        <definition>::sqlite3* neforce::sqlite_prepared_statement::db_</definition>
+        <argsstring></argsstring>
+        <name>db_</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::db_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>SQLite数据库连接句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="51" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sqlite__prepared__statement_1aff92fecd142a3e847daa824d17eef043" prot="private" static="no" mutable="no">
+        <type>::sqlite3_stmt *</type>
+        <definition>::sqlite3_stmt* neforce::sqlite_prepared_statement::stmt_</definition>
+        <argsstring></argsstring>
+        <name>stmt_</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::stmt_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>SQLite预处理语句句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="52" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sqlite__prepared__statement_1a45161c84a906d30babde53d7edf26d2c" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::sqlite_prepared_statement::param_count_</definition>
+        <argsstring></argsstring>
+        <name>param_count_</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::param_count_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>参数数量（?占位符个数） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="54" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sqlite__prepared__statement_1aee4d8d280d6bc8250a710e4916d03994" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; char &gt; &gt;</type>
+        <definition>vector&lt;vector&lt;char&gt; &gt; neforce::sqlite_prepared_statement::param_buffers_</definition>
+        <argsstring></argsstring>
+        <name>param_buffers_</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::param_buffers_</qualifiedname>
+        <briefdescription>
+<para>参数数据缓冲区 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="55" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sqlite__prepared__statement_1aefcea3966c90ae7b9cdf97d3e74d4a15" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::sqlite_prepared_statement::prepared_</definition>
+        <argsstring></argsstring>
+        <name>prepared_</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::prepared_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>预处理是否成功 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="56" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sqlite__prepared__statement_1a4d3a9e08be1080cf88231340d64e2728" prot="private" static="no" mutable="yes">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::sqlite_prepared_statement::last_error_</definition>
+        <argsstring></argsstring>
+        <name>last_error_</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::last_error_</qualifiedname>
+        <briefdescription>
+<para>最后错误信息 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="57" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1sqlite__prepared__statement_1a31e85bd44f200a7624a31ac94a1f5ce1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sqlite_prepared_statement::clear_bindings</definition>
+        <argsstring>()</argsstring>
+        <name>clear_bindings</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::clear_bindings</qualifiedname>
+        <briefdescription>
+<para>清除所有绑定 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>清除参数绑定并清空缓冲区。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="64" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1sqlite__prepared__statement_1abbfc55e82a5b6f2faa84bbfda3288b6f" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sqlite_prepared_statement::sqlite_prepared_statement</definition>
+        <argsstring>(::sqlite3 *db, const string &amp;sql)</argsstring>
+        <name>sqlite_prepared_statement</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::sqlite_prepared_statement</qualifiedname>
+        <param>
+          <type>::sqlite3 *</type>
+          <declname>db</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>sql</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>db</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SQLite数据库连接句柄 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SQL语句（使用?作为占位符）</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+使用sqlite3_prepare_v2预处理SQL语句， 获取参数数量（?占位符个数）。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="75" column="14"/>
+        <references refid="classneforce_1_1sqlite__prepared__statement_1abbfc55e82a5b6f2faa84bbfda3288b6f">sqlite_prepared_statement</references>
+        <referencedby refid="classneforce_1_1sqlite__prepared__statement_1ab575b35861214543b99a0aed65ef1d43">operator=</referencedby>
+        <referencedby refid="classneforce_1_1sqlite__prepared__statement_1abbfc55e82a5b6f2faa84bbfda3288b6f">sqlite_prepared_statement</referencedby>
+        <referencedby refid="classneforce_1_1sqlite__prepared__statement_1a392041709fe1c6bef930b3d20fa6a4c1">sqlite_prepared_statement</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sqlite__prepared__statement_1a98256811e569b14f4880ca69709b578a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sqlite_prepared_statement::sqlite_prepared_statement</definition>
+        <argsstring>(const sqlite_prepared_statement &amp;)=delete</argsstring>
+        <name>sqlite_prepared_statement</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::sqlite_prepared_statement</qualifiedname>
+        <param>
+          <type>const sqlite_prepared_statement &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="77" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sqlite__prepared__statement_1a56533262c39636db5d6a2f482717f2cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sqlite__prepared__statement_1abbfc55e82a5b6f2faa84bbfda3288b6f" kindref="member">sqlite_prepared_statement</ref> &amp;</type>
+        <definition>sqlite_prepared_statement &amp; neforce::sqlite_prepared_statement::operator=</definition>
+        <argsstring>(const sqlite_prepared_statement &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sqlite__prepared__statement_1abbfc55e82a5b6f2faa84bbfda3288b6f" kindref="member">sqlite_prepared_statement</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="78" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sqlite__prepared__statement_1a392041709fe1c6bef930b3d20fa6a4c1" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sqlite_prepared_statement::sqlite_prepared_statement</definition>
+        <argsstring>(sqlite_prepared_statement &amp;&amp;other) noexcept</argsstring>
+        <name>sqlite_prepared_statement</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::sqlite_prepared_statement</qualifiedname>
+        <param>
+          <type>sqlite_prepared_statement &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="84" column="5"/>
+        <references refid="classneforce_1_1sqlite__prepared__statement_1abbfc55e82a5b6f2faa84bbfda3288b6f">sqlite_prepared_statement</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sqlite__prepared__statement_1ab575b35861214543b99a0aed65ef1d43" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sqlite__prepared__statement_1abbfc55e82a5b6f2faa84bbfda3288b6f" kindref="member">sqlite_prepared_statement</ref> &amp;</type>
+        <definition>sqlite_prepared_statement &amp; neforce::sqlite_prepared_statement::operator=</definition>
+        <argsstring>(sqlite_prepared_statement &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sqlite__prepared__statement_1abbfc55e82a5b6f2faa84bbfda3288b6f" kindref="member">sqlite_prepared_statement</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="91" column="31"/>
+        <references refid="classneforce_1_1sqlite__prepared__statement_1abbfc55e82a5b6f2faa84bbfda3288b6f">sqlite_prepared_statement</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sqlite__prepared__statement_1a0c5cb9df119c9587a390ab65bfbd56da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sqlite_prepared_statement::~sqlite_prepared_statement</definition>
+        <argsstring>() override</argsstring>
+        <name>~sqlite_prepared_statement</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::~sqlite_prepared_statement</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>调用sqlite3_finalize释放预处理语句资源。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="98" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sqlite__prepared__statement_1a2900603371f97d958f81c7717f3e4d3b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::sqlite_prepared_statement::param_count</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>param_count</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::param_count</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1ae3c779c7dd0e64b4b3f04d3abfbf004d">param_count</reimplements>
+        <briefdescription>
+<para>获取参数数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>SQL语句中的?占位符数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="104" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" bodystart="104" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sqlite__prepared__statement_1a5ab6d1b6f3e968cefb98aae5302583ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::sqlite_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, string_view value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1a9219ec073f4fe401624fbda187c6a478">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定字符串视图参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引（从1开始） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="112" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sqlite__prepared__statement_1a2e5c48e5c6cfea58ab61c8e5e30ce0b9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::sqlite_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, const string &amp;value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1a83d5df06b54af73d6a24adfd91e35809">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定字符串参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引（从1开始） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="120" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" bodystart="120" bodyend="120"/>
+        <references refid="classneforce_1_1sqlite__prepared__statement_1a2e5c48e5c6cfea58ab61c8e5e30ce0b9" compoundref="sqlite__prepared__statement_8hpp" startline="120" endline="120">bind_param</references>
+        <references refid="classneforce_1_1basic__string_1a0049fbf44e36f4c7f57ebc85a2b0a376" compoundref="basic__string_8hpp" startline="2147" endline="2147">neforce::basic_string&lt; CharT, Traits, Alloc &gt;::view</references>
+        <referencedby refid="classneforce_1_1sqlite__prepared__statement_1a2e5c48e5c6cfea58ab61c8e5e30ce0b9" compoundref="sqlite__prepared__statement_8hpp" startline="120" endline="120">bind_param</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sqlite__prepared__statement_1a8bf788b43ddde44d3bc6127030df3c4c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::sqlite_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, const char *value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1a57a416197042b24f097827c4c2083fa4">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定C字符串参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引（从1开始） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>C字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="128" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" bodystart="128" bodyend="128"/>
+        <references refid="classneforce_1_1sqlite__prepared__statement_1a8bf788b43ddde44d3bc6127030df3c4c" compoundref="sqlite__prepared__statement_8hpp" startline="128" endline="128">bind_param</references>
+        <referencedby refid="classneforce_1_1sqlite__prepared__statement_1a8bf788b43ddde44d3bc6127030df3c4c" compoundref="sqlite__prepared__statement_8hpp" startline="128" endline="128">bind_param</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sqlite__prepared__statement_1a125c3dc7d8352f22031d4466bcefc3ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::sqlite_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, int32_t value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1ad10f3350cf59857aa941288fae75df21">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gaa0af497ed9ed410d4c911b409653515a" kindref="member">int32_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定32位整数参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引（从1开始） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="136" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sqlite__prepared__statement_1a8faa5a072082504ce2d591b8b7fe85a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::sqlite_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, int64_t value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1a1d225748e5d1447d3dbb1a28ef97072e">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga0b098d32ebd9cc922390914e765ca674" kindref="member">int64_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定64位整数参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引（从1开始） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="144" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sqlite__prepared__statement_1ab8a4ab28822ebdb8e66426fcca562ebc" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::sqlite_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, float64_t value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1a8ebc3a7a62d00aaf5b4e19cde9581b54">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gaaa239a2e1903add7d22b684a72e71c9a" kindref="member">float64_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定浮点数参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引（从1开始） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>浮点值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="152" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sqlite__prepared__statement_1a4bfd4916f92ba0890e6b3ffd1cdff406" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::sqlite_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, cbyte_view value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1ad874d16b23d0ab9bd5d4641c10b109ee">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1ga533a464153c7fc34d3fa5d92854c8613" kindref="member">cbyte_view</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定二进制数据参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引（从1开始） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字节视图 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true</para>
+</simplesect>
+适用于BLOB类型的参数绑定。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="162" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sqlite__prepared__statement_1a94a598a3e1fd869bccbcdb73ca9851b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::sqlite_prepared_statement::execute</definition>
+        <argsstring>() override</argsstring>
+        <name>execute</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::execute</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1a32eebdb2af37ff60943d591aeb7eb619">execute</reimplements>
+        <briefdescription>
+<para>执行非查询语句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>执行成功返回true</para>
+</simplesect>
+执行已绑定参数的预处理语句，不返回结果集。 执行后自动重置语句并清除绑定。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="171" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sqlite__prepared__statement_1a87b7c29e19f2eedb4c6353cbcd2a5860" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structneforce_1_1idb__tb__result" kindref="compound">idb_tb_result</ref> &gt;</type>
+        <definition>unique_ptr&lt; idb_tb_result &gt; neforce::sqlite_prepared_statement::execute_query</definition>
+        <argsstring>() override</argsstring>
+        <name>execute_query</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::execute_query</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1ab063e1a59a20303603ce84215a5f52ec">execute_query</reimplements>
+        <briefdescription>
+<para>执行查询语句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>查询结果集，失败返回空指针</para>
+</simplesect>
+执行查询并返回结果集对象。 注意：结果集对象在析构时会重置语句，允许语句被复用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="180" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sqlite__prepared__statement_1af30baaa39ca54c16281cb5b5c7b7b23d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+        <definition>string_view neforce::sqlite_prepared_statement::get_error</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>get_error</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::get_error</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1ae2fb693e9c62f6733d8a09701427963f">get_error</reimplements>
+        <briefdescription>
+<para>获取错误信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>错误描述字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="186" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" bodystart="186" bodyend="186"/>
+        <references refid="classneforce_1_1basic__string__view_1ad205f7743694338ba96590ee420cf19a" compoundref="basic__string__view_8hpp" startline="444" endline="446">neforce::basic_string_view&lt; CharT, Traits &gt;::view</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sqlite__prepared__statement_1ac255e0134d2d876549c3f94567ada677" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::sqlite_prepared_statement::get_errno</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>get_errno</name>
+        <qualifiedname>neforce::sqlite_prepared_statement::get_errno</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1ae4c29021b23c7291739378437e7994c6">get_errno</reimplements>
+        <briefdescription>
+<para>获取错误码 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>SQLite错误码 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="192" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" bodystart="192" bodyend="194"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>SQLite预处理语句类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>实现idb_prepared_statement接口，提供SQLite预处理语句的完整功能。 支持参数绑定、语句执行和结果集获取。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>SQL语句预处理（支持?占位符）</para>
+</listitem><listitem><para>参数绑定</para>
+</listitem><listitem><para>语句执行</para>
+</listitem><listitem><para>查询执行</para>
+</listitem><listitem><para>语句重置和资源管理</para>
+</listitem><listitem><para>错误信息获取</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>SQLite使用?作为参数占位符，参数索引从1开始。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>neforce::idb_prepared_statement</label>
+        <link refid="structneforce_1_1idb__prepared__statement"/>
+      </node>
+      <node id="1">
+        <label>neforce::sqlite_prepared_statement</label>
+        <link refid="classneforce_1_1sqlite__prepared__statement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>neforce::idb_prepared_statement</label>
+        <link refid="structneforce_1_1idb__prepared__statement"/>
+      </node>
+      <node id="1">
+        <label>neforce::sqlite_prepared_statement</label>
+        <link refid="classneforce_1_1sqlite__prepared__statement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" line="49" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp" bodystart="49" bodyend="195"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1a5ab6d1b6f3e968cefb98aae5302583ca" prot="public" virt="virtual"><scope>neforce::sqlite_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1a2e5c48e5c6cfea58ab61c8e5e30ce0b9" prot="public" virt="virtual"><scope>neforce::sqlite_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1a8bf788b43ddde44d3bc6127030df3c4c" prot="public" virt="virtual"><scope>neforce::sqlite_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1a125c3dc7d8352f22031d4466bcefc3ee" prot="public" virt="virtual"><scope>neforce::sqlite_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1a8faa5a072082504ce2d591b8b7fe85a5" prot="public" virt="virtual"><scope>neforce::sqlite_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1ab8a4ab28822ebdb8e66426fcca562ebc" prot="public" virt="virtual"><scope>neforce::sqlite_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1a4bfd4916f92ba0890e6b3ffd1cdff406" prot="public" virt="virtual"><scope>neforce::sqlite_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1a31e85bd44f200a7624a31ac94a1f5ce1" prot="private" virt="non-virtual"><scope>neforce::sqlite_prepared_statement</scope><name>clear_bindings</name></member>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1acd94ec22d15fea21bb9e2d6df303a6bd" prot="private" virt="non-virtual"><scope>neforce::sqlite_prepared_statement</scope><name>db_</name></member>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1a94a598a3e1fd869bccbcdb73ca9851b3" prot="public" virt="virtual"><scope>neforce::sqlite_prepared_statement</scope><name>execute</name></member>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1a87b7c29e19f2eedb4c6353cbcd2a5860" prot="public" virt="virtual"><scope>neforce::sqlite_prepared_statement</scope><name>execute_query</name></member>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1ac255e0134d2d876549c3f94567ada677" prot="public" virt="virtual"><scope>neforce::sqlite_prepared_statement</scope><name>get_errno</name></member>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1af30baaa39ca54c16281cb5b5c7b7b23d" prot="public" virt="virtual"><scope>neforce::sqlite_prepared_statement</scope><name>get_error</name></member>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1a4d3a9e08be1080cf88231340d64e2728" prot="private" virt="non-virtual"><scope>neforce::sqlite_prepared_statement</scope><name>last_error_</name></member>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1a56533262c39636db5d6a2f482717f2cc" prot="public" virt="non-virtual"><scope>neforce::sqlite_prepared_statement</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1ab575b35861214543b99a0aed65ef1d43" prot="public" virt="non-virtual"><scope>neforce::sqlite_prepared_statement</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1aee4d8d280d6bc8250a710e4916d03994" prot="private" virt="non-virtual"><scope>neforce::sqlite_prepared_statement</scope><name>param_buffers_</name></member>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1a2900603371f97d958f81c7717f3e4d3b" prot="public" virt="virtual"><scope>neforce::sqlite_prepared_statement</scope><name>param_count</name></member>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1a45161c84a906d30babde53d7edf26d2c" prot="private" virt="non-virtual"><scope>neforce::sqlite_prepared_statement</scope><name>param_count_</name></member>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1aefcea3966c90ae7b9cdf97d3e74d4a15" prot="private" virt="non-virtual"><scope>neforce::sqlite_prepared_statement</scope><name>prepared_</name></member>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1abbfc55e82a5b6f2faa84bbfda3288b6f" prot="public" virt="non-virtual"><scope>neforce::sqlite_prepared_statement</scope><name>sqlite_prepared_statement</name></member>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1a98256811e569b14f4880ca69709b578a" prot="public" virt="non-virtual"><scope>neforce::sqlite_prepared_statement</scope><name>sqlite_prepared_statement</name></member>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1a392041709fe1c6bef930b3d20fa6a4c1" prot="public" virt="non-virtual"><scope>neforce::sqlite_prepared_statement</scope><name>sqlite_prepared_statement</name></member>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1aff92fecd142a3e847daa824d17eef043" prot="private" virt="non-virtual"><scope>neforce::sqlite_prepared_statement</scope><name>stmt_</name></member>
+      <member refid="structneforce_1_1idb__prepared__statement_1a05ad762ff2dbd5fd42c1c57550cb77fd" prot="public" virt="virtual"><scope>neforce::sqlite_prepared_statement</scope><name>~idb_prepared_statement</name></member>
+      <member refid="classneforce_1_1sqlite__prepared__statement_1a0c5cb9df119c9587a390ab65bfbd56da" prot="public" virt="non-virtual"><scope>neforce::sqlite_prepared_statement</scope><name>~sqlite_prepared_statement</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

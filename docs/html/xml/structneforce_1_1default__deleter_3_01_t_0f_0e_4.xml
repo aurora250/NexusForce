@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1default__deleter_3_01_t_0f_0e_4" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::default_deleter&lt; T[]&gt;</compoundname>
+    <includes refid="deleter_8hpp" local="no">deleter.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1default__deleter_3_01_t_0f_0e_4_1a855b29f9cf298df7cc26428c9c3a57c2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::default_deleter&lt; T[]&gt;::default_deleter</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>default_deleter</name>
+        <qualifiedname>neforce::default_deleter&lt; T[]&gt;::default_deleter</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/deleter.hpp" line="62" column="15"/>
+        <referencedby refid="structneforce_1_1default__deleter_3_01_t_0f_0e_4_1a53de57aacb809f21236566aa798fbce4" compoundref="deleter_8hpp" startline="69" endline="69">default_deleter</referencedby>
+        <referencedby refid="structneforce_1_1default__deleter_3_01_t_0f_0e_4_1a6025132f218bbf133656af4a23561587" compoundref="deleter_8hpp" startline="87" endline="89">rebind</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1default__deleter_3_01_t_0f_0e_4_1a53de57aacb809f21236566aa798fbce4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="structneforce_1_1is__convertible" kindref="compound">is_convertible</ref>&lt; U(*)[], T(*)[]&gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::default_deleter&lt; T[]&gt;::default_deleter</definition>
+        <argsstring>(const default_deleter&lt; U[]&gt; &amp;) noexcept</argsstring>
+        <name>default_deleter</name>
+        <qualifiedname>neforce::default_deleter&lt; T[]&gt;::default_deleter</qualifiedname>
+        <param>
+          <type>const default_deleter&lt; U[]&gt; &amp;</type>
+        </param>
+        <briefdescription>
+<para>从其他数组删除器转换构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可转换为T的数组类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/deleter.hpp" line="69" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/deleter.hpp" bodystart="69" bodyend="69"/>
+        <references refid="structneforce_1_1default__deleter_3_01_t_0f_0e_4_1a855b29f9cf298df7cc26428c9c3a57c2">default_deleter</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1default__deleter_3_01_t_0f_0e_4_1af208f164766c214d8fefedb84f6200b6" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="structneforce_1_1is__convertible" kindref="compound">is_convertible</ref>&lt; U(*)[], T(*)[]&gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::default_deleter&lt; T[]&gt;::operator()</definition>
+        <argsstring>(U *ptr) const noexcept</argsstring>
+        <name>operator()</name>
+        <qualifiedname>neforce::default_deleter&lt; T[]&gt;::operator()</qualifiedname>
+        <param>
+          <type>U *</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>删除操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数组元素类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的数组指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/deleter.hpp" line="77" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/deleter.hpp" bodystart="77" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1default__deleter_3_01_t_0f_0e_4_1a6025132f218bbf133656af4a23561587" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="rvalue" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structneforce_1_1default__deleter_3_01_t_0f_0e_4_1a855b29f9cf298df7cc26428c9c3a57c2" kindref="member">default_deleter</ref>&lt; U[]&gt;</type>
+        <definition>default_deleter&lt; U[]&gt; neforce::default_deleter&lt; T[]&gt;::rebind</definition>
+        <argsstring>() &amp;&amp;noexcept</argsstring>
+        <name>rebind</name>
+        <qualifiedname>neforce::default_deleter&lt; T[]&gt;::rebind</qualifiedname>
+        <briefdescription>
+<para>重新绑定到其他数组类型的删除器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的数组元素类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定到U[]的新删除器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/deleter.hpp" line="87" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/deleter.hpp" bodystart="87" bodyend="89"/>
+        <references refid="structneforce_1_1default__deleter_3_01_t_0f_0e_4_1a855b29f9cf298df7cc26428c9c3a57c2">default_deleter</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>数组特化的默认删除器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数组元素类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/deleter.hpp" line="61" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/deleter.hpp" bodystart="61" bodyend="90"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1default__deleter_3_01_t_0f_0e_4_1a855b29f9cf298df7cc26428c9c3a57c2" prot="public" virt="non-virtual"><scope>neforce::default_deleter&lt; T[]&gt;</scope><name>default_deleter</name></member>
+      <member refid="structneforce_1_1default__deleter_3_01_t_0f_0e_4_1a53de57aacb809f21236566aa798fbce4" prot="public" virt="non-virtual"><scope>neforce::default_deleter&lt; T[]&gt;</scope><name>default_deleter</name></member>
+      <member refid="structneforce_1_1default__deleter_3_01_t_0f_0e_4_1af208f164766c214d8fefedb84f6200b6" prot="public" virt="non-virtual"><scope>neforce::default_deleter&lt; T[]&gt;</scope><name>operator()</name></member>
+      <member refid="structneforce_1_1default__deleter_3_01_t_0f_0e_4_1a6025132f218bbf133656af4a23561587" prot="public" virt="non-virtual"><scope>neforce::default_deleter&lt; T[]&gt;</scope><name>rebind</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

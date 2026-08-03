@@ -1,0 +1,525 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1stop__token_1_1stop__state" kind="struct" language="C++" prot="private">
+    <compoundname>neforce::stop_token::stop_state</compoundname>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structneforce_1_1stop__token_1_1stop__state_1abb3dcf9d07eaf0fd93ebf441c1fbbd9c" prot="public" static="no">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>using neforce::stop_token::stop_state::value_type = uint32_t</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>neforce::stop_token::stop_state::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="79" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structneforce_1_1stop__token_1_1stop__state_1ad93e43ce9f6cc5dda42935f82abb11a3" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>value_type</type>
+        <definition>value_type neforce::stop_token::stop_state::stop_requested_bit</definition>
+        <argsstring></argsstring>
+        <name>stop_requested_bit</name>
+        <qualifiedname>neforce::stop_token::stop_state::stop_requested_bit</qualifiedname>
+        <initializer>= 1</initializer>
+        <briefdescription>
+<para>停止请求位 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="80" column="37" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1stop__token_1_1stop__state_1aa9e7bbe432977a3b987b2a9f6e872f99" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>value_type</type>
+        <definition>value_type neforce::stop_token::stop_state::locked_bit</definition>
+        <argsstring></argsstring>
+        <name>locked_bit</name>
+        <qualifiedname>neforce::stop_token::stop_state::locked_bit</qualifiedname>
+        <initializer>= 2</initializer>
+        <briefdescription>
+<para>锁定位 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="81" column="37" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1stop__token_1_1stop__state_1a366ddc23ec5852bd0139c16b3bb7363e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>value_type</type>
+        <definition>value_type neforce::stop_token::stop_state::ssrc_counter_inc</definition>
+        <argsstring></argsstring>
+        <name>ssrc_counter_inc</name>
+        <qualifiedname>neforce::stop_token::stop_state::ssrc_counter_inc</qualifiedname>
+        <initializer>= 4</initializer>
+        <briefdescription>
+<para>stop_source计数器增量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="82" column="37" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structneforce_1_1stop__token_1_1stop__state_1ae122fef73e04cadf1cb54e52d68e2bfb" prot="public" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; value_type &gt;</type>
+        <definition>atomic&lt;value_type&gt; neforce::stop_token::stop_state::owners</definition>
+        <argsstring></argsstring>
+        <name>owners</name>
+        <qualifiedname>neforce::stop_token::stop_state::owners</qualifiedname>
+        <initializer>{1}</initializer>
+        <briefdescription>
+<para>所有者计数（stop_token数量） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="84" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="84" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1stop__token_1_1stop__state_1ac80fa486ed8ffcd48095803713d80067" prot="public" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; value_type &gt;</type>
+        <definition>atomic&lt;value_type&gt; neforce::stop_token::stop_state::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::stop_token::stop_state::value</qualifiedname>
+        <initializer>{ssrc_counter_inc}</initializer>
+        <briefdescription>
+<para>状态值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="85" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="85" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1stop__token_1_1stop__state_1aa184f6ec1362e6fd88d90385d20785e3" prot="public" static="no" mutable="no">
+        <type>stop_callback_node *</type>
+        <definition>stop_callback_node* neforce::stop_token::stop_state::head</definition>
+        <argsstring></argsstring>
+        <name>head</name>
+        <qualifiedname>neforce::stop_token::stop_state::head</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>回调链表头节点 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="86" column="28" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1stop__token_1_1stop__state_1ab6feec661ee7de31063ca1ec06352b13" prot="public" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1thread_1_1id" kindref="compound">thread::id</ref></type>
+        <definition>thread::id neforce::stop_token::stop_state::requester_thread_id</definition>
+        <argsstring></argsstring>
+        <name>requester_thread_id</name>
+        <qualifiedname>neforce::stop_token::stop_state::requester_thread_id</qualifiedname>
+        <briefdescription>
+<para>请求停止的线程ID </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="87" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="87" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1stop__token_1_1stop__state_1afe3263ea402f2a46c20e9de07c020b5b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::stop_token::stop_state::stop_state</definition>
+        <argsstring>()=default</argsstring>
+        <name>stop_state</name>
+        <qualifiedname>neforce::stop_token::stop_state::stop_state</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="89" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1stop__token_1_1stop__state_1aa9221d6f67f1a6ba918fa70346dd30ee" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::stop_token::stop_state::stop_possible</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>stop_possible</name>
+        <qualifiedname>neforce::stop_token::stop_state::stop_possible</qualifiedname>
+        <briefdescription>
+<para>检查是否可能收到停止请求 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否可能收到停止请求 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="95" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="95" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1stop__token_1_1stop__state_1acaa8a6db33ffad19d5cfc44909cd399e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::stop_token::stop_state::stop_requested</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>stop_requested</name>
+        <qualifiedname>neforce::stop_token::stop_state::stop_requested</qualifiedname>
+        <briefdescription>
+<para>检查是否已收到停止请求 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否已收到停止请求 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="101" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="101" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1stop__token_1_1stop__state_1a883b10296ee74fdfb1fefe1e72d22912" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::stop_token::stop_state::add_owner</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>add_owner</name>
+        <qualifiedname>neforce::stop_token::stop_state::add_owner</qualifiedname>
+        <briefdescription>
+<para>增加所有者计数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="106" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="106" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1stop__token_1_1stop__state_1a440ea2c3e9328ede279c4b61c6916d8e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::stop_token::stop_state::release_ownership</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>release_ownership</name>
+        <qualifiedname>neforce::stop_token::stop_state::release_ownership</qualifiedname>
+        <briefdescription>
+<para>减少所有者计数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>当所有者计数为0时删除状态对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="112" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="112" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1stop__token_1_1stop__state_1aa68cab974ea6ea4c93b4814c5ae8d908" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::stop_token::stop_state::add_stop_source</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>add_stop_source</name>
+        <qualifiedname>neforce::stop_token::stop_state::add_stop_source</qualifiedname>
+        <briefdescription>
+<para>增加stop_source计数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="121" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="121" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1stop__token_1_1stop__state_1a6e55b91408f629c440e9644729c3a15f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::stop_token::stop_state::remove_stop_source</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>remove_stop_source</name>
+        <qualifiedname>neforce::stop_token::stop_state::remove_stop_source</qualifiedname>
+        <briefdescription>
+<para>减少stop_source计数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="126" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="126" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1stop__token_1_1stop__state_1a3163665dca03dd1dee469f5f45e6705f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::stop_token::stop_state::lock</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>lock</name>
+        <qualifiedname>neforce::stop_token::stop_state::lock</qualifiedname>
+        <briefdescription>
+<para>锁定状态 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="131" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="131" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1stop__token_1_1stop__state_1a57d690975fa604081f2f27665e35ae0e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::stop_token::stop_state::unlock</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>unlock</name>
+        <qualifiedname>neforce::stop_token::stop_state::unlock</qualifiedname>
+        <briefdescription>
+<para>解锁状态 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="140" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="140" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1stop__token_1_1stop__state_1aa32e64ac4e23e3a854414b44cf46ef23" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::stop_token::stop_state::request_stop</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>request_stop</name>
+        <qualifiedname>neforce::stop_token::stop_state::request_stop</qualifiedname>
+        <briefdescription>
+<para>请求停止 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否成功请求停止（首次请求返回true）</para>
+</simplesect>
+设置停止请求标志，并执行所有已注册的回调函数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="148" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="148" bodyend="185"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1stop__token_1_1stop__state_1a4509787ea338bb8fc60bbfb6e7601339" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::stop_token::stop_state::register_callback</definition>
+        <argsstring>(stop_callback_node *callback_node) noexcept</argsstring>
+        <name>register_callback</name>
+        <qualifiedname>neforce::stop_token::stop_state::register_callback</qualifiedname>
+        <param>
+          <type>stop_callback_node *</type>
+          <declname>callback_node</declname>
+        </param>
+        <briefdescription>
+<para>注册回调函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>callback_node</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>回调节点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否注册成功</para>
+</simplesect>
+如果已经请求停止，立即执行回调并返回false。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="194" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="194" bodyend="213"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1stop__token_1_1stop__state_1a59b0689b40261418dc41230a1551a77e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::stop_token::stop_state::remove_callback</definition>
+        <argsstring>(stop_callback_node *callback_node)</argsstring>
+        <name>remove_callback</name>
+        <qualifiedname>neforce::stop_token::stop_state::remove_callback</qualifiedname>
+        <param>
+          <type>stop_callback_node *</type>
+          <declname>callback_node</declname>
+        </param>
+        <briefdescription>
+<para>移除回调函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>callback_node</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>回调节点</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+从链表中移除回调节点。如果正在执行回调，则等待完成。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="221" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="221" bodyend="251"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1stop__token_1_1stop__state_1a6c9913bfec259b282d4a6c82d919d2b0" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::stop_token::stop_state::try_lock</definition>
+        <argsstring>(value_type &amp;current_value, const memory_order failure_order=memory_order_acquire) noexcept</argsstring>
+        <name>try_lock</name>
+        <qualifiedname>neforce::stop_token::stop_state::try_lock</qualifiedname>
+        <param>
+          <type>value_type &amp;</type>
+          <declname>current_value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>failure_order</declname>
+          <defval><ref refid="group___memory_order_1ga6367df7d3e137e9b30e17740435d1816" kindref="member">memory_order_acquire</ref></defval>
+        </param>
+        <briefdescription>
+<para>尝试锁定状态 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>current_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当前状态值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>failure_order</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>失败时的内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否锁定成功 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="259" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="259" bodyend="261"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1stop__token_1_1stop__state_1afc6c8886f0997f48bd45887de34b5edb" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::stop_token::stop_state::try_lock_and_stop</definition>
+        <argsstring>(value_type &amp;current_value) noexcept</argsstring>
+        <name>try_lock_and_stop</name>
+        <qualifiedname>neforce::stop_token::stop_state::try_lock_and_stop</qualifiedname>
+        <param>
+          <type>value_type &amp;</type>
+          <declname>current_value</declname>
+        </param>
+        <briefdescription>
+<para>尝试锁定状态并设置停止请求标志 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>current_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当前状态值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否操作成功 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="268" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="268" bodyend="270"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1stop__token_1_1stop__state_1ab6d30863fe011d8c621be030b93a2f86" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::stop_token::stop_state::do_try_lock</definition>
+        <argsstring>(value_type &amp;current_value, value_type new_bits, const memory_order success_order, const memory_order failure_order) noexcept</argsstring>
+        <name>do_try_lock</name>
+        <qualifiedname>neforce::stop_token::stop_state::do_try_lock</qualifiedname>
+        <param>
+          <type>value_type &amp;</type>
+          <declname>current_value</declname>
+        </param>
+        <param>
+          <type>value_type</type>
+          <declname>new_bits</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>success_order</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>failure_order</declname>
+        </param>
+        <briefdescription>
+<para>尝试锁定状态的核心实现 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="275" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="275" bodyend="284"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>停止状态 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>管理停止请求的状态和已注册的回调函数。 </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>neforce::atomic&lt; value_type &gt;</label>
+        <link refid="structneforce_1_1atomic"/>
+      </node>
+      <node id="4">
+        <label>neforce::ihashable&lt; id &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="1">
+        <label>neforce::stop_token::stop_state</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>owners</edgelabel>
+          <edgelabel>value</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>requester_thread_id</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::thread::id</label>
+        <link refid="structneforce_1_1thread_1_1id"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="78" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="78" bodyend="285"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1stop__token_1_1stop__state_1a883b10296ee74fdfb1fefe1e72d22912" prot="public" virt="non-virtual"><scope>neforce::stop_token::stop_state</scope><name>add_owner</name></member>
+      <member refid="structneforce_1_1stop__token_1_1stop__state_1aa68cab974ea6ea4c93b4814c5ae8d908" prot="public" virt="non-virtual"><scope>neforce::stop_token::stop_state</scope><name>add_stop_source</name></member>
+      <member refid="structneforce_1_1stop__token_1_1stop__state_1ab6d30863fe011d8c621be030b93a2f86" prot="public" virt="non-virtual"><scope>neforce::stop_token::stop_state</scope><name>do_try_lock</name></member>
+      <member refid="structneforce_1_1stop__token_1_1stop__state_1aa184f6ec1362e6fd88d90385d20785e3" prot="public" virt="non-virtual"><scope>neforce::stop_token::stop_state</scope><name>head</name></member>
+      <member refid="structneforce_1_1stop__token_1_1stop__state_1a3163665dca03dd1dee469f5f45e6705f" prot="public" virt="non-virtual"><scope>neforce::stop_token::stop_state</scope><name>lock</name></member>
+      <member refid="structneforce_1_1stop__token_1_1stop__state_1aa9e7bbe432977a3b987b2a9f6e872f99" prot="public" virt="non-virtual"><scope>neforce::stop_token::stop_state</scope><name>locked_bit</name></member>
+      <member refid="structneforce_1_1stop__token_1_1stop__state_1ae122fef73e04cadf1cb54e52d68e2bfb" prot="public" virt="non-virtual"><scope>neforce::stop_token::stop_state</scope><name>owners</name></member>
+      <member refid="structneforce_1_1stop__token_1_1stop__state_1a4509787ea338bb8fc60bbfb6e7601339" prot="public" virt="non-virtual"><scope>neforce::stop_token::stop_state</scope><name>register_callback</name></member>
+      <member refid="structneforce_1_1stop__token_1_1stop__state_1a440ea2c3e9328ede279c4b61c6916d8e" prot="public" virt="non-virtual"><scope>neforce::stop_token::stop_state</scope><name>release_ownership</name></member>
+      <member refid="structneforce_1_1stop__token_1_1stop__state_1a59b0689b40261418dc41230a1551a77e" prot="public" virt="non-virtual"><scope>neforce::stop_token::stop_state</scope><name>remove_callback</name></member>
+      <member refid="structneforce_1_1stop__token_1_1stop__state_1a6e55b91408f629c440e9644729c3a15f" prot="public" virt="non-virtual"><scope>neforce::stop_token::stop_state</scope><name>remove_stop_source</name></member>
+      <member refid="structneforce_1_1stop__token_1_1stop__state_1aa32e64ac4e23e3a854414b44cf46ef23" prot="public" virt="non-virtual"><scope>neforce::stop_token::stop_state</scope><name>request_stop</name></member>
+      <member refid="structneforce_1_1stop__token_1_1stop__state_1ab6feec661ee7de31063ca1ec06352b13" prot="public" virt="non-virtual"><scope>neforce::stop_token::stop_state</scope><name>requester_thread_id</name></member>
+      <member refid="structneforce_1_1stop__token_1_1stop__state_1a366ddc23ec5852bd0139c16b3bb7363e" prot="public" virt="non-virtual"><scope>neforce::stop_token::stop_state</scope><name>ssrc_counter_inc</name></member>
+      <member refid="structneforce_1_1stop__token_1_1stop__state_1aa9221d6f67f1a6ba918fa70346dd30ee" prot="public" virt="non-virtual"><scope>neforce::stop_token::stop_state</scope><name>stop_possible</name></member>
+      <member refid="structneforce_1_1stop__token_1_1stop__state_1acaa8a6db33ffad19d5cfc44909cd399e" prot="public" virt="non-virtual"><scope>neforce::stop_token::stop_state</scope><name>stop_requested</name></member>
+      <member refid="structneforce_1_1stop__token_1_1stop__state_1ad93e43ce9f6cc5dda42935f82abb11a3" prot="public" virt="non-virtual"><scope>neforce::stop_token::stop_state</scope><name>stop_requested_bit</name></member>
+      <member refid="structneforce_1_1stop__token_1_1stop__state_1afe3263ea402f2a46c20e9de07c020b5b" prot="public" virt="non-virtual"><scope>neforce::stop_token::stop_state</scope><name>stop_state</name></member>
+      <member refid="structneforce_1_1stop__token_1_1stop__state_1a6c9913bfec259b282d4a6c82d919d2b0" prot="public" virt="non-virtual"><scope>neforce::stop_token::stop_state</scope><name>try_lock</name></member>
+      <member refid="structneforce_1_1stop__token_1_1stop__state_1afc6c8886f0997f48bd45887de34b5edb" prot="public" virt="non-virtual"><scope>neforce::stop_token::stop_state</scope><name>try_lock_and_stop</name></member>
+      <member refid="structneforce_1_1stop__token_1_1stop__state_1a57d690975fa604081f2f27665e35ae0e" prot="public" virt="non-virtual"><scope>neforce::stop_token::stop_state</scope><name>unlock</name></member>
+      <member refid="structneforce_1_1stop__token_1_1stop__state_1ac80fa486ed8ffcd48095803713d80067" prot="public" virt="non-virtual"><scope>neforce::stop_token::stop_state</scope><name>value</name></member>
+      <member refid="structneforce_1_1stop__token_1_1stop__state_1abb3dcf9d07eaf0fd93ebf441c1fbbd9c" prot="public" virt="non-virtual"><scope>neforce::stop_token::stop_state</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

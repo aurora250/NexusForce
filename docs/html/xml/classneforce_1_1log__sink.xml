@@ -1,0 +1,318 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1log__sink" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>neforce::log_sink</compoundname>
+    <derivedcompoundref refid="classneforce_1_1console__sink" prot="public" virt="non-virtual">neforce::console_sink</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1file__sink" prot="public" virt="non-virtual">neforce::file_sink</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1syslog__sink" prot="public" virt="non-virtual">neforce::syslog_sink</derivedcompoundref>
+    <includes refid="log__sink_8hpp" local="no">log_sink.hpp</includes>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classneforce_1_1log__sink_1aa87bf6d5f55e3913491eb4f90ef54645" prot="protected" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1log__formatter" kindref="compound">log_formatter</ref> &gt;</type>
+        <definition>unique_ptr&lt;log_formatter&gt; neforce::log_sink::formatter_</definition>
+        <argsstring></argsstring>
+        <name>formatter_</name>
+        <qualifiedname>neforce::log_sink::formatter_</qualifiedname>
+        <briefdescription>
+<para>格式化器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="49" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1log__sink_1a20202837f41ea67c95a482da70dcdf24" prot="protected" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga0b098d32ebd9cc922390914e765ca674" kindref="member">int64_t</ref></type>
+        <definition>int64_t neforce::log_sink::flush_interval_ms_</definition>
+        <argsstring></argsstring>
+        <name>flush_interval_ms_</name>
+        <qualifiedname>neforce::log_sink::flush_interval_ms_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>自动刷新间隔毫秒数（0=禁用） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="50" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" bodystart="50" bodyend="50"/>
+        <referencedby refid="classneforce_1_1log__sink_1a38e0cb3009f5cb19d39dffb1d318ba04" compoundref="log__sink_8hpp" startline="75" endline="75">set_flush_interval</referencedby>
+        <referencedby refid="classneforce_1_1log__sink_1a40f707cb6305b81f8bc526b3ab02513a" compoundref="log__sink_8hpp" startline="81" endline="83">should_auto_flush</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1log__sink_1a19e8a905a3619df08d8c0d4f447c3ddb" prot="protected" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1timestamp" kindref="compound">timestamp</ref></type>
+        <definition>timestamp neforce::log_sink::last_flush_</definition>
+        <argsstring></argsstring>
+        <name>last_flush_</name>
+        <qualifiedname>neforce::log_sink::last_flush_</qualifiedname>
+        <initializer>{<ref refid="classneforce_1_1timestamp_1ad85cc1e3d02a50caabc4d5d430ff465c" kindref="member">timestamp::now</ref>()}</initializer>
+        <briefdescription>
+<para>上次刷新的时间戳 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="51" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" bodystart="51" bodyend="51"/>
+        <referencedby refid="classneforce_1_1log__sink_1a40f707cb6305b81f8bc526b3ab02513a" compoundref="log__sink_8hpp" startline="81" endline="83">should_auto_flush</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1log__sink_1abd0eee7e21f707ce15bfbe5133b62abf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual neforce::log_sink::~log_sink</definition>
+        <argsstring>()=default</argsstring>
+        <name>~log_sink</name>
+        <qualifiedname>neforce::log_sink::~log_sink</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="54" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1log__sink_1a1d218dd0300f52850b79fac7bce68c2b" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void neforce::log_sink::log</definition>
+        <argsstring>(const log_event &amp;event)=0</argsstring>
+        <name>log</name>
+        <qualifiedname>neforce::log_sink::log</qualifiedname>
+        <reimplementedby refid="classneforce_1_1console__sink_1aef5c912eb4fe0b0f07323685b8934dfc">log</reimplementedby>
+        <reimplementedby refid="classneforce_1_1file__sink_1a8e270409f9b5d112a9c4fd36ce1feffd">log</reimplementedby>
+        <reimplementedby refid="classneforce_1_1syslog__sink_1ad26fc37a3f3e21caa33aa25f3c199628">log</reimplementedby>
+        <param>
+          <type>const <ref refid="structneforce_1_1log__event" kindref="compound">log_event</ref> &amp;</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+<para>输出一条日志事件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要输出的日志事件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="60" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1log__sink_1ad75d03906fa55c216cd627aac8c73b65" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void neforce::log_sink::flush</definition>
+        <argsstring>()=0</argsstring>
+        <name>flush</name>
+        <qualifiedname>neforce::log_sink::flush</qualifiedname>
+        <reimplementedby refid="classneforce_1_1console__sink_1a081522f092c5429036faa4b72dadd711">flush</reimplementedby>
+        <reimplementedby refid="classneforce_1_1file__sink_1a14888eff02c12e08ef8fbac34bac6475">flush</reimplementedby>
+        <reimplementedby refid="classneforce_1_1syslog__sink_1aa7ee711c390cf4bf44b7cc478c205a17">flush</reimplementedby>
+        <briefdescription>
+<para>强制刷新缓冲区 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="63" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1log__sink_1af0b4935ff56015fe69ceb1a8fa5e95b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::log_sink::set_formatter</definition>
+        <argsstring>(unique_ptr&lt; log_formatter &gt; formatter)</argsstring>
+        <name>set_formatter</name>
+        <qualifiedname>neforce::log_sink::set_formatter</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1log__formatter" kindref="compound">log_formatter</ref> &gt;</type>
+          <declname>formatter</declname>
+        </param>
+        <briefdescription>
+<para>设置格式化器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>formatter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的格式化器（unique_ptr，转移所有权） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="69" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1log__sink_1a38e0cb3009f5cb19d39dffb1d318ba04" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::log_sink::set_flush_interval</definition>
+        <argsstring>(int64_t interval_ms)</argsstring>
+        <name>set_flush_interval</name>
+        <qualifiedname>neforce::log_sink::set_flush_interval</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga0b098d32ebd9cc922390914e765ca674" kindref="member">int64_t</ref></type>
+          <declname>interval_ms</declname>
+        </param>
+        <briefdescription>
+<para>设置自动刷新间隔 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>interval_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>间隔毫秒数，0 表示禁用自动刷新 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="75" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" bodystart="75" bodyend="75"/>
+        <references refid="classneforce_1_1log__sink_1a20202837f41ea67c95a482da70dcdf24" compoundref="log__sink_8hpp" startline="50" endline="50">flush_interval_ms_</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1log__sink_1a40f707cb6305b81f8bc526b3ab02513a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::log_sink::should_auto_flush</definition>
+        <argsstring>() const</argsstring>
+        <name>should_auto_flush</name>
+        <qualifiedname>neforce::log_sink::should_auto_flush</qualifiedname>
+        <briefdescription>
+<para>检查是否需要自动刷新 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>距上次刷新已超过间隔则返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="81" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" bodystart="81" bodyend="83"/>
+        <references refid="classneforce_1_1log__sink_1a20202837f41ea67c95a482da70dcdf24" compoundref="log__sink_8hpp" startline="50" endline="50">flush_interval_ms_</references>
+        <references refid="classneforce_1_1log__sink_1a19e8a905a3619df08d8c0d4f447c3ddb" compoundref="log__sink_8hpp" startline="51" endline="51">last_flush_</references>
+        <references refid="classneforce_1_1timestamp_1ad85cc1e3d02a50caabc4d5d430ff465c" compoundref="datetime_8hpp" startline="1510" endline="1510">neforce::timestamp::now</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>日志输出目标基类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>所有日志输出目标的抽象基类。 支持设置自定义格式化器和自动刷新间隔。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>neforce::console_sink</label>
+        <link refid="classneforce_1_1console__sink"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::file_sink</label>
+        <link refid="classneforce_1_1file__sink"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::log_sink</label>
+        <link refid="classneforce_1_1log__sink"/>
+      </node>
+      <node id="4">
+        <label>neforce::syslog_sink</label>
+        <link refid="classneforce_1_1syslog__sink"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="10">
+        <label>neforce::iarithmetic&lt; timestamp &gt;</label>
+        <link refid="structneforce_1_1iarithmetic"/>
+      </node>
+      <node id="11">
+        <label>neforce::ibinary&lt; timestamp &gt;</label>
+        <link refid="structneforce_1_1ibinary"/>
+      </node>
+      <node id="7">
+        <label>neforce::icommon&lt; timestamp &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>neforce::icomparable&lt; timestamp &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="9">
+        <label>neforce::ihashable&lt; timestamp &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="4">
+        <label>neforce::iobject&lt; timestamp &gt;</label>
+        <link refid="structneforce_1_1iobject"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>neforce::ipackage&lt; timestamp, int64_t &gt;</label>
+        <link refid="structneforce_1_1ipackage"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::istringify&lt; timestamp &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+      <node id="1">
+        <label>neforce::log_sink</label>
+        <link refid="classneforce_1_1log__sink"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>formatter_</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>last_flush_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::timestamp</label>
+        <link refid="classneforce_1_1timestamp"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::unique_ptr&lt; neforce::log_formatter &gt;</label>
+        <link refid="classneforce_1_1unique__ptr"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="47" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" bodystart="47" bodyend="84"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1log__sink_1ad75d03906fa55c216cd627aac8c73b65" prot="public" virt="pure-virtual"><scope>neforce::log_sink</scope><name>flush</name></member>
+      <member refid="classneforce_1_1log__sink_1a20202837f41ea67c95a482da70dcdf24" prot="protected" virt="non-virtual"><scope>neforce::log_sink</scope><name>flush_interval_ms_</name></member>
+      <member refid="classneforce_1_1log__sink_1aa87bf6d5f55e3913491eb4f90ef54645" prot="protected" virt="non-virtual"><scope>neforce::log_sink</scope><name>formatter_</name></member>
+      <member refid="classneforce_1_1log__sink_1a19e8a905a3619df08d8c0d4f447c3ddb" prot="protected" virt="non-virtual"><scope>neforce::log_sink</scope><name>last_flush_</name></member>
+      <member refid="classneforce_1_1log__sink_1a1d218dd0300f52850b79fac7bce68c2b" prot="public" virt="pure-virtual"><scope>neforce::log_sink</scope><name>log</name></member>
+      <member refid="classneforce_1_1log__sink_1a38e0cb3009f5cb19d39dffb1d318ba04" prot="public" virt="non-virtual"><scope>neforce::log_sink</scope><name>set_flush_interval</name></member>
+      <member refid="classneforce_1_1log__sink_1af0b4935ff56015fe69ceb1a8fa5e95b3" prot="public" virt="non-virtual"><scope>neforce::log_sink</scope><name>set_formatter</name></member>
+      <member refid="classneforce_1_1log__sink_1a40f707cb6305b81f8bc526b3ab02513a" prot="public" virt="non-virtual"><scope>neforce::log_sink</scope><name>should_auto_flush</name></member>
+      <member refid="classneforce_1_1log__sink_1abd0eee7e21f707ce15bfbe5133b62abf" prot="public" virt="virtual"><scope>neforce::log_sink</scope><name>~log_sink</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['压缩_20compress_0',['📦 压缩 (Compress)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md32',1,'']]]
+  ['单位后缀说明_0',['单位后缀说明',['../group___byte_size.html#unit_suffixes',1,'']]]
 ];

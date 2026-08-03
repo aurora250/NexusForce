@@ -3,18 +3,19 @@
   <compounddef id="group___memory_allocator" kind="group">
     <compoundname>MemoryAllocator</compoundname>
     <title>内存分配器</title>
-    <innerclass refid="classstandard__allocator" prot="public">standard_allocator</innerclass>
+    <innerclass refid="classneforce_1_1standard__allocator" prot="public">neforce::standard_allocator</innerclass>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" prot="public" static="no">
+      <memberdef kind="typedef" id="group___memory_allocator_1gabd6174043c688f04c1d71b9b21148ec1" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classstandard__allocator" kindref="compound">standard_allocator</ref>&lt; T &gt;</type>
-        <definition>using allocator = standard_allocator&lt;T&gt;</definition>
+        <type>standard_allocator&lt; T &gt;</type>
+        <definition>using neforce::allocator = standard_allocator&lt;T&gt;</definition>
         <argsstring></argsstring>
         <name>allocator</name>
+        <qualifiedname>neforce::allocator</qualifiedname>
         <briefdescription>
 <para>标准分配器别名 </para>
         </briefdescription>
@@ -28,7 +29,7 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-为 <ref refid="classstandard__allocator" kindref="compound">standard_allocator</ref> 提供的类型别名，用于统一接口。 </para>
+为 <ref refid="classneforce_1_1standard__allocator" kindref="compound">standard_allocator</ref> 提供的类型别名，用于统一接口。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -36,11 +37,12 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="group___memory_allocator_1ga9ce2c744d9821a7baac89c271e4f393c" prot="public" static="no" constexpr="yes" mutable="no">
-        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
-        <definition>size_t MEMORY_ALIGN_THRESHHOLD</definition>
+      <memberdef kind="variable" id="group___memory_allocator_1ga4fa5d23f653537b722a18b450b743e60" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>size_t</type>
+        <definition>size_t neforce::MEMORY_ALIGN_THRESHHOLD</definition>
         <argsstring></argsstring>
         <name>MEMORY_ALIGN_THRESHHOLD</name>
+        <qualifiedname>neforce::MEMORY_ALIGN_THRESHHOLD</qualifiedname>
         <initializer>= 16</initializer>
         <briefdescription>
         </briefdescription>
@@ -50,11 +52,12 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/standard_allocator.hpp" line="29" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/standard_allocator.hpp" bodystart="29" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="group___memory_allocator_1gaed2855be9b0d1b8f59922915b4ece53d" prot="public" static="no" constexpr="yes" mutable="no">
-        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
-        <definition>size_t MEMORY_BIG_ALLOC_THRESHHOLD</definition>
+      <memberdef kind="variable" id="group___memory_allocator_1ga761a567df3af48cfcf167dec24453b90" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>size_t</type>
+        <definition>size_t neforce::MEMORY_BIG_ALLOC_THRESHHOLD</definition>
         <argsstring></argsstring>
         <name>MEMORY_BIG_ALLOC_THRESHHOLD</name>
+        <qualifiedname>neforce::MEMORY_BIG_ALLOC_THRESHHOLD</qualifiedname>
         <initializer>= 4096</initializer>
         <briefdescription>
         </briefdescription>
@@ -66,18 +69,19 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___memory_allocator_1ga5bd1018148e9e5aa7b7981b202946768" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___memory_allocator_1ga0ab55333431b15a376d8315da2e6977f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <type>size_t</type>
             <declname>Align</declname>
             <defname>Align</defname>
           </param>
         </templateparamlist>
         <type>void *</type>
-        <definition>void * allocate</definition>
+        <definition>void * neforce::allocate</definition>
         <argsstring>(const inner::alloc_size_t bytes)</argsstring>
         <name>allocate</name>
+        <qualifiedname>neforce::allocate</qualifiedname>
         <param>
           <type>const inner::alloc_size_t</type>
           <declname>bytes</declname>
@@ -111,21 +115,23 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/standard_allocator.hpp" line="177" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/standard_allocator.hpp" bodystart="177" bodyend="192"/>
-        <references refid="group___debug_breakpoints_and_assertions_1ga036056ab70152bfcd8042dd3404b1e5b" compoundref="breakpoint_8hpp" startline="83" endline="85">is_constant_evaluated</references>
-        <referencedby refid="classstandard__allocator_1a0095fa4b80f76aa171d2380427273160" compoundref="standard__allocator_8hpp" startline="352" endline="361">standard_allocator&lt; U &gt;::allocate</referencedby>
+        <references refid="group___memory_allocator_1ga0ab55333431b15a376d8315da2e6977f" compoundref="standard__allocator_8hpp" startline="177" endline="192">neforce::allocate</references>
+        <references refid="group___debug_and_assertions_1gafecd82bf49ca7a61bf972378b73139b9" compoundref="debug_8hpp" startline="83" endline="85">neforce::is_constant_evaluated</references>
+        <referencedby refid="group___memory_allocator_1ga0ab55333431b15a376d8315da2e6977f" compoundref="standard__allocator_8hpp" startline="177" endline="192">neforce::allocate</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___memory_allocator_1ga30246595f5c256a00e3fb9241ab5c957" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___memory_allocator_1ga10afb006af757ddac0612f95343e7d23" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <type>size_t</type>
             <declname>Align</declname>
             <defname>Align</defname>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void deallocate</definition>
+        <definition>void neforce::deallocate</definition>
         <argsstring>(void *ptr, inner::alloc_size_t bytes) noexcept</argsstring>
         <name>deallocate</name>
+        <qualifiedname>neforce::deallocate</qualifiedname>
         <param>
           <type>void *</type>
           <declname>ptr</declname>
@@ -169,17 +175,11 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/standard_allocator.hpp" line="281" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/standard_allocator.hpp" bodystart="281" bodyend="294"/>
-        <references refid="group___debug_breakpoints_and_assertions_1ga036056ab70152bfcd8042dd3404b1e5b" compoundref="breakpoint_8hpp" startline="83" endline="85">is_constant_evaluated</references>
-        <referencedby refid="classvector_1a9cc368b8111cf70e9a91367d2cefcbd8" compoundref="vector_8hpp" startline="921" endline="947">vector&lt; Value, Alloc &gt;::assign</referencedby>
-        <referencedby refid="classstandard__allocator_1a9e71a31c699a6ea6c5772c3c13f13e5a" compoundref="standard__allocator_8hpp" startline="378" endline="381">standard_allocator&lt; U &gt;::deallocate</referencedby>
-        <referencedby refid="classvector_1ab47efdba81e2bd130018669ab777d1a6" compoundref="vector_8hpp" startline="829" endline="866">vector&lt; Value, Alloc &gt;::emplace</referencedby>
-        <referencedby refid="classvector_1a2b66ef497dacca36effd4c6763d1a77e" compoundref="vector_8hpp" startline="1026" endline="1063">vector&lt; Value, Alloc &gt;::insert</referencedby>
-        <referencedby refid="classvector_1aa881433e352995ffb44260d42d6bbe84" compoundref="vector_8hpp" startline="557" endline="574">vector&lt; Value, Alloc &gt;::operator=</referencedby>
-        <referencedby refid="classvector_1a0066a7fca1a744cdb62d5fb96b51a88f" compoundref="vector_8hpp" startline="775" endline="798">vector&lt; Value, Alloc &gt;::reserve</referencedby>
-        <referencedby refid="classvector_1a8a76aacfe632435f1977dc3297c73cfc" compoundref="vector_8hpp" startline="1107" endline="1135">vector&lt; Value, Alloc &gt;::shrink_to_fit</referencedby>
-        <referencedby refid="classvector_1a27ffbd7c74b956daf01d4e611f96e4f7" compoundref="vector_8hpp" startline="579" endline="582">vector&lt; Value, Alloc &gt;::~vector</referencedby>
+        <references refid="group___memory_allocator_1ga10afb006af757ddac0612f95343e7d23" compoundref="standard__allocator_8hpp" startline="281" endline="294">neforce::deallocate</references>
+        <references refid="group___debug_and_assertions_1gafecd82bf49ca7a61bf972378b73139b9" compoundref="debug_8hpp" startline="83" endline="85">neforce::is_constant_evaluated</references>
+        <referencedby refid="group___memory_allocator_1ga10afb006af757ddac0612f95343e7d23" compoundref="standard__allocator_8hpp" startline="281" endline="294">neforce::deallocate</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___memory_allocator_1ga6940c38e975f238e7e8458ea1d5cdd30" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___memory_allocator_1gabade10418f7f309f4399393630c146e5" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -189,14 +189,15 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator==</definition>
+        <definition>bool neforce::operator==</definition>
         <argsstring>(const standard_allocator&lt; T &gt; &amp;, const standard_allocator&lt; U &gt; &amp;) noexcept</argsstring>
         <name>operator==</name>
+        <qualifiedname>neforce::operator==</qualifiedname>
         <param>
-          <type>const <ref refid="classstandard__allocator" kindref="compound">standard_allocator</ref>&lt; T &gt; &amp;</type>
+          <type>const standard_allocator&lt; T &gt; &amp;</type>
         </param>
         <param>
-          <type>const <ref refid="classstandard__allocator" kindref="compound">standard_allocator</ref>&lt; U &gt; &amp;</type>
+          <type>const standard_allocator&lt; U &gt; &amp;</type>
         </param>
         <briefdescription>
 <para>比较两个分配器是否相等 </para>
@@ -226,8 +227,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/standard_allocator.hpp" line="405" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/standard_allocator.hpp" bodystart="405" bodyend="408"/>
+        <references refid="group___function_wrapper_1ga6a8b8801c0a30a7e84b4b051aa943b64" compoundref="functional_2function_8hpp" startline="530" endline="532">neforce::operator==</references>
       </memberdef>
-      <memberdef kind="function" id="group___memory_allocator_1gaa42c11dc1654f67bc9ae35be296ea81e" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___memory_allocator_1ga2a3ed6eacbc5ae92ab5cea8669b3a57f" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -237,14 +239,15 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator!=</definition>
+        <definition>bool neforce::operator!=</definition>
         <argsstring>(const standard_allocator&lt; T &gt; &amp;, const standard_allocator&lt; U &gt; &amp;) noexcept</argsstring>
         <name>operator!=</name>
+        <qualifiedname>neforce::operator!=</qualifiedname>
         <param>
-          <type>const <ref refid="classstandard__allocator" kindref="compound">standard_allocator</ref>&lt; T &gt; &amp;</type>
+          <type>const standard_allocator&lt; T &gt; &amp;</type>
         </param>
         <param>
-          <type>const <ref refid="classstandard__allocator" kindref="compound">standard_allocator</ref>&lt; U &gt; &amp;</type>
+          <type>const standard_allocator&lt; U &gt; &amp;</type>
         </param>
         <briefdescription>
 <para>比较两个分配器是否不等 </para>
@@ -274,6 +277,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/standard_allocator.hpp" line="417" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/standard_allocator.hpp" bodystart="417" bodyend="420"/>
+        <references refid="group___function_wrapper_1ga245168fc07a7b8f6d303ddab962e1bea" compoundref="functional_2function_8hpp" startline="556" endline="558">neforce::operator!=</references>
       </memberdef>
     </sectiondef>
     <briefdescription>

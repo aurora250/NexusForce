@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1is__hash" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::is_hash</compoundname>
+    <basecompoundref refid="structneforce_1_1integral__constant" prot="public" virt="non-virtual">neforce::integral_constant&lt; bool, Value &gt;&lt; false &gt;</basecompoundref>
+    <includes refid="hash_8hpp" local="no">hash.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Func</type>
+      </param>
+      <param>
+        <type>typename Arg</type>
+      </param>
+      <param>
+        <type>typename Dummy</type>
+        <defval>void</defval>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>判断类型是否为有效的哈希函数 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Arg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Dummy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SFINAE参数，默认为void</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+检查类型是否可以作为哈希函数使用，即是否可调用并返回可转换为size_t的类型。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>false_type</label>
+        <link refid="structneforce_1_1integral__constant"/>
+      </node>
+      <node id="1">
+        <label>neforce::is_hash&lt; Func, Arg, Dummy &gt;</label>
+        <link refid="structneforce_1_1is__hash"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>false_type</label>
+        <link refid="structneforce_1_1integral__constant"/>
+      </node>
+      <node id="1">
+        <label>neforce::is_hash&lt; Func, Arg, Dummy &gt;</label>
+        <link refid="structneforce_1_1is__hash"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="655" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" bodystart="655" bodyend="655"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1integral__constant_1adca4f81f517267d92d357eaf1b9e19f0" prot="public" virt="non-virtual"><scope>neforce::is_hash</scope><name>operator value_type</name></member>
+      <member refid="structneforce_1_1integral__constant_1a1481c5c14f70051a2bf25e51a020318a" prot="public" virt="non-virtual"><scope>neforce::is_hash</scope><name>operator()</name></member>
+      <member refid="structneforce_1_1integral__constant_1a6e76651ac44b0b30321e37c77e81c319" prot="public" virt="non-virtual"><scope>neforce::is_hash</scope><name>type</name></member>
+      <member refid="structneforce_1_1integral__constant_1a5fb6f7e2680d2dcc85a47a2cf067dbad" prot="public" virt="non-virtual"><scope>neforce::is_hash</scope><name>value</name></member>
+      <member refid="structneforce_1_1integral__constant_1a155a0b0b1b5063e6bf19617994f00eb8" prot="public" virt="non-virtual"><scope>neforce::is_hash</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

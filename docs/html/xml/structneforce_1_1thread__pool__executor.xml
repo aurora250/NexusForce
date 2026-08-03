@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1thread__pool__executor" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::thread_pool_executor</compoundname>
+    <includes refid="thread__pool_8hpp" local="no">thread_pool.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structneforce_1_1thread__pool__executor_1a36187423d25d632160528f2c459cb040" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1thread__pool" kindref="compound">thread_pool</ref> *</type>
+        <definition>thread_pool* neforce::thread_pool_executor::pool</definition>
+        <argsstring></argsstring>
+        <name>pool</name>
+        <qualifiedname>neforce::thread_pool_executor::pool</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="854" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="854" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1thread__pool__executor_1a9ed632fd2245aeb8ba999fb49acd6887" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::thread_pool_executor::execute</definition>
+        <argsstring>(function&lt; void()&gt; handler)</argsstring>
+        <name>execute</name>
+        <qualifiedname>neforce::thread_pool_executor::execute</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void()&gt;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>提交 handler 到线程池 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要执行的 handler </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="860" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="860" bodyend="860"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1thread__pool__executor_1ae8cb5b78d46bad78215a7cd123ee271a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::thread_pool_executor::running_in_this_thread</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>running_in_this_thread</name>
+        <qualifiedname>neforce::thread_pool_executor::running_in_this_thread</qualifiedname>
+        <briefdescription>
+<para>检查当前线程是否为线程池 worker </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>在 worker 线程中返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="866" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="866" bodyend="866"/>
+        <references refid="group___thread_pool_1ga2656590bd84d79d876899536ede35501">neforce::get_worker_context</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para><ref refid="classneforce_1_1thread__pool" kindref="compound">thread_pool</ref> 的轻量执行器适配器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>将 <ref refid="classneforce_1_1thread__pool" kindref="compound">thread_pool</ref> 的 submit_task() 适配为 executor 接口。 </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>neforce::thread_pool</label>
+        <link refid="classneforce_1_1thread__pool"/>
+      </node>
+      <node id="1">
+        <label>neforce::thread_pool_executor</label>
+        <link refid="structneforce_1_1thread__pool__executor"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>pool</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="853" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="853" bodyend="867"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1thread__pool__executor_1a9ed632fd2245aeb8ba999fb49acd6887" prot="public" virt="non-virtual"><scope>neforce::thread_pool_executor</scope><name>execute</name></member>
+      <member refid="structneforce_1_1thread__pool__executor_1a36187423d25d632160528f2c459cb040" prot="public" virt="non-virtual"><scope>neforce::thread_pool_executor</scope><name>pool</name></member>
+      <member refid="structneforce_1_1thread__pool__executor_1ae8cb5b78d46bad78215a7cd123ee271a" prot="public" virt="non-virtual"><scope>neforce::thread_pool_executor</scope><name>running_in_this_thread</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

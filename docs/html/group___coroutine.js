@@ -1,101 +1,101 @@
 var group___coroutine =
 [
-    [ "coroutine_traits&lt; Res, Args &gt;", "structcoroutine__traits.html", null ],
-    [ "suspend_always", "structsuspend__always.html", null ],
-    [ "suspend_never", "structsuspend__never.html", null ],
-    [ "cancellation_token", "classcancellation__token.html", [
-      [ "check_awaiter", "structcancellation__token_1_1check__awaiter.html", [
-        [ "await_ready", "structcancellation__token_1_1check__awaiter.html#a37b0c4e38de746e7ca7dca8354aed798", null ],
-        [ "await_resume", "structcancellation__token_1_1check__awaiter.html#ab9f45a67e46515646ca6b302a64b7b5d", null ],
-        [ "await_suspend", "structcancellation__token_1_1check__awaiter.html#af127c8ef34d7e722eac42f8633cedcab", null ],
-        [ "token", "structcancellation__token_1_1check__awaiter.html#a6b7a548a0164dca499a1aa75cccba7d2", null ]
+    [ "neforce::coroutine_traits&lt; Res, Args &gt;", "structneforce_1_1coroutine__traits.html", null ],
+    [ "neforce::suspend_always", "structneforce_1_1suspend__always.html", null ],
+    [ "neforce::suspend_never", "structneforce_1_1suspend__never.html", null ],
+    [ "neforce::cancellation_token", "classneforce_1_1cancellation__token.html", [
+      [ "check_awaiter", "structneforce_1_1cancellation__token_1_1check__awaiter.html", [
+        [ "await_ready", "structneforce_1_1cancellation__token_1_1check__awaiter.html#ab005aedbe2f13da9a8da35340ac1437f", null ],
+        [ "await_resume", "structneforce_1_1cancellation__token_1_1check__awaiter.html#a4cc64f86e3e6d08659a3b86a3439b3b2", null ],
+        [ "await_suspend", "structneforce_1_1cancellation__token_1_1check__awaiter.html#a1c3c90eadd633c9cf5df719388d5fa45", null ],
+        [ "token", "structneforce_1_1cancellation__token_1_1check__awaiter.html#a5762022c64b20d97a980f6b1dc1faf96", null ]
       ] ],
-      [ "cancellation_token", "classcancellation__token.html#ab8b7df3b72290f339ea460e6f39fd641", null ],
-      [ "cancellation_token", "classcancellation__token.html#af58b901c45f45ac616d47ebd3dc56ea7", null ],
-      [ "~cancellation_token", "classcancellation__token.html#a8e560556afc7e861711e374069764bfc", null ],
-      [ "cancel", "classcancellation__token.html#a1c816b81662bc8177659073b145a9616", null ],
-      [ "check", "classcancellation__token.html#a52c484072d073e4d76ab6c8c3bf6cff5", null ],
-      [ "is_cancelled", "classcancellation__token.html#ab7f18cffb62c36a8579967ed1763371d", null ],
-      [ "operator=", "classcancellation__token.html#a957e3f2937364b799e2a242cc5905ba9", null ]
+      [ "cancellation_token", "classneforce_1_1cancellation__token.html#a72f02c99da91d261741f863373f90758", null ],
+      [ "cancellation_token", "classneforce_1_1cancellation__token.html#afa9cbab67af530c744ea36450c759add", null ],
+      [ "~cancellation_token", "classneforce_1_1cancellation__token.html#a9ac31afed9822d3795ceafa545e8fb14", null ],
+      [ "cancel", "classneforce_1_1cancellation__token.html#a439e5b0c5d98a4d14174d36e23e7b60f", null ],
+      [ "check", "classneforce_1_1cancellation__token.html#ad01e20427582900183c8740d4b2b5306", null ],
+      [ "is_cancelled", "classneforce_1_1cancellation__token.html#a6b3209af93994159cba4794b0c7a97c3", null ],
+      [ "operator=", "classneforce_1_1cancellation__token.html#a8812668c7baeb3034b78cff6cad37187", null ]
     ] ],
-    [ "generator&lt; T &gt;", "classgenerator.html", [
-      [ "promise_type", "structgenerator_1_1promise__type.html", [
-        [ "final_suspend", "structgenerator_1_1promise__type.html#ae9d736767bfc21d8b1f7a4a98e38dff8", null ],
-        [ "get_return_object", "structgenerator_1_1promise__type.html#afc0b169ccb92470755768b8f740b44c7", null ],
-        [ "initial_suspend", "structgenerator_1_1promise__type.html#aed95a50722368ca9c6b475553e331c2a", null ],
-        [ "return_void", "structgenerator_1_1promise__type.html#a43f2773994f02536927ca12d37ad528a", null ],
-        [ "unhandled_exception", "structgenerator_1_1promise__type.html#adae56dfd455e63193f90202e9fd67e52", null ],
-        [ "yield_value", "structgenerator_1_1promise__type.html#a8c82b2d45c73631296c21d01c754b266", null ],
-        [ "current_value", "structgenerator_1_1promise__type.html#a1703105ffebd308baa63d484212a96d4", null ],
-        [ "exception", "structgenerator_1_1promise__type.html#aa06b2a1a6c755d6f6056fdb0da186066", null ]
+    [ "neforce::generator&lt; T &gt;", "classneforce_1_1generator.html", [
+      [ "promise_type", "structneforce_1_1generator_1_1promise__type.html", [
+        [ "final_suspend", "structneforce_1_1generator_1_1promise__type.html#a4e637bb4a240b6c6c4e3abe7ddfdf421", null ],
+        [ "get_return_object", "structneforce_1_1generator_1_1promise__type.html#aab3bb9fa9b87cd8902667d54b191cbc6", null ],
+        [ "initial_suspend", "structneforce_1_1generator_1_1promise__type.html#a3f98aef37d9517cc94237a8531f3c0ae", null ],
+        [ "return_void", "structneforce_1_1generator_1_1promise__type.html#abb2ecc3aee30f482c6dd42df05881877", null ],
+        [ "unhandled_exception", "structneforce_1_1generator_1_1promise__type.html#ab8465289c407d0230219b198554205d9", null ],
+        [ "yield_value", "structneforce_1_1generator_1_1promise__type.html#af0474c561609c25600b95db55624efde", null ],
+        [ "current_value", "structneforce_1_1generator_1_1promise__type.html#a8af214afc8dacf69a906f2a6540c71f1", null ],
+        [ "exception", "structneforce_1_1generator_1_1promise__type.html#a4960b0b3b17c31831be35c413111057e", null ]
       ] ],
-      [ "iterator", "structgenerator_1_1iterator.html", [
-        [ "iterator", "structgenerator_1_1iterator.html#ae205b60cef5cab709bda4965b929d4dd", null ],
-        [ "iterator", "structgenerator_1_1iterator.html#ac0b71ccb94ce5853821103101d8104fd", null ],
-        [ "operator!=", "structgenerator_1_1iterator.html#a5df07d4ba62c8c45fe6d95a12d00eab5", null ],
-        [ "operator*", "structgenerator_1_1iterator.html#a1226c1f65215b7bb04a24f6aea3bf8c5", null ],
-        [ "operator++", "structgenerator_1_1iterator.html#ae31bd496427c6d187a9afd5bad691921", null ],
-        [ "operator++", "structgenerator_1_1iterator.html#a27fbb1bed7bd4eb2bbbe158cbe1a5666", null ],
-        [ "operator->", "structgenerator_1_1iterator.html#acb23463d005b1a5246a1457dba742611", null ],
-        [ "operator==", "structgenerator_1_1iterator.html#a90319e961db3c0c96f9fdaa4345b2ad3", null ],
-        [ "handle", "structgenerator_1_1iterator.html#abd3f4c65afa1e9f9fb05a97e2ae5465a", null ]
+      [ "iterator", "structneforce_1_1generator_1_1iterator.html", [
+        [ "iterator", "structneforce_1_1generator_1_1iterator.html#af1743807edccb85b73c9ae11f3cf6b04", null ],
+        [ "iterator", "structneforce_1_1generator_1_1iterator.html#ad07d17f002df4453e2ccf32cc6aaeebe", null ],
+        [ "operator!=", "structneforce_1_1generator_1_1iterator.html#a47aac97b16f9d5fa8be6a2522b547f3f", null ],
+        [ "operator*", "structneforce_1_1generator_1_1iterator.html#a4527243d0400c7e731a571a0def74b84", null ],
+        [ "operator++", "structneforce_1_1generator_1_1iterator.html#a4654200727fcab2ba46f44d6304911be", null ],
+        [ "operator++", "structneforce_1_1generator_1_1iterator.html#abd818490b00dd8cfa4296a65fc01bf68", null ],
+        [ "operator->", "structneforce_1_1generator_1_1iterator.html#acddd5e6f7a88b7c3f0cae4aa08165949", null ],
+        [ "operator==", "structneforce_1_1generator_1_1iterator.html#a47800077982096498c0c3804f7c3896d", null ],
+        [ "handle", "structneforce_1_1generator_1_1iterator.html#a3ffac8060e167328d7bf6cf4d9fabf88", null ]
       ] ],
-      [ "generator", "classgenerator.html#a0661e73e83bff68ae103e256007c3f2a", null ],
-      [ "generator", "classgenerator.html#aa48ca8ad825e064655e761d732e65819", null ],
-      [ "~generator", "classgenerator.html#abb02336a640655e154ad36b3098d2089", null ],
-      [ "begin", "classgenerator.html#a93d1141d7d23880142c7c76ebccd9b72", null ],
-      [ "chain", "classgenerator.html#a757dd0515c4cbda28f18c5e953a1cc23", null ],
-      [ "end", "classgenerator.html#ac71d240be5537e677c32f705a10e032c", null ],
-      [ "filter", "classgenerator.html#a42e31b9a207e4ddb02528345ec7d0b9f", null ],
-      [ "fold", "classgenerator.html#aa4f9b8c2bbf7ade48a1c22232388bdac", null ],
-      [ "for_each", "classgenerator.html#a84a424f19a10b9aa131ab3a41a96cec8", null ],
-      [ "map", "classgenerator.html#a51f5167f0cb27cdf1db9f415d465a3fb", null ],
-      [ "operator=", "classgenerator.html#a74c79ed421adae0f2c9100a32fef7d25", null ],
-      [ "skip", "classgenerator.html#a309904d7d8382a112f6367f880698b28", null ],
-      [ "take", "classgenerator.html#a46d368ae7fd0d8678a0a704aa92bd397", null ]
+      [ "generator", "classneforce_1_1generator.html#ae18c1f8bd1befb7caeaade7eace56fe0", null ],
+      [ "generator", "classneforce_1_1generator.html#a178b666f3fca006382cd4cac970acf17", null ],
+      [ "~generator", "classneforce_1_1generator.html#a8a74154ec6bd3c5e879a02156e6d583a", null ],
+      [ "begin", "classneforce_1_1generator.html#a181f1f5f2dd31082e38790ea81fc9c79", null ],
+      [ "chain", "classneforce_1_1generator.html#a372029806ba1f4d43bd104162832a5d7", null ],
+      [ "end", "classneforce_1_1generator.html#add0144f457eb4dab2037482a7d3a0c98", null ],
+      [ "filter", "classneforce_1_1generator.html#acbddb3c5dd309864f54ca44b4e2ed0a5", null ],
+      [ "fold", "classneforce_1_1generator.html#ae7b801df4904f4280f906a6857cd9a02", null ],
+      [ "for_each", "classneforce_1_1generator.html#afddec56cb807bf758ad3f757d18a4396", null ],
+      [ "map", "classneforce_1_1generator.html#aeae9ea87e0b7fef7f0de024a64d68298", null ],
+      [ "operator=", "classneforce_1_1generator.html#a5fd0d37c3a4ea32af1240e21afdaa5e2", null ],
+      [ "skip", "classneforce_1_1generator.html#a3be648e9d7570984324d11cd658dbd91", null ],
+      [ "take", "classneforce_1_1generator.html#a9ab0bf3ac33790a2fcf214913f1f7207", null ]
     ] ],
-    [ "task&lt; T &gt;", "classtask.html", [
-      [ "promise_type", "structtask_1_1promise__type.html", [
-        [ "final_awaiter", "structtask_1_1promise__type_1_1final__awaiter.html", [
-          [ "await_ready", "structtask_1_1promise__type_1_1final__awaiter.html#a8eec994c01bff91f6e824770f4a3e89f", null ],
-          [ "await_resume", "structtask_1_1promise__type_1_1final__awaiter.html#a19038e9552c057303552ca44cb07ec31", null ],
-          [ "await_suspend", "structtask_1_1promise__type_1_1final__awaiter.html#aeaf71fc9db7af58664b18ad4d5b6943e", null ]
+    [ "neforce::task&lt; T &gt;", "classneforce_1_1task.html", [
+      [ "promise_type", "structneforce_1_1task_1_1promise__type.html", [
+        [ "final_awaiter", "structneforce_1_1task_1_1promise__type_1_1final__awaiter.html", [
+          [ "await_ready", "structneforce_1_1task_1_1promise__type_1_1final__awaiter.html#a04901f3bf2299442ee0f0714e925eefd", null ],
+          [ "await_resume", "structneforce_1_1task_1_1promise__type_1_1final__awaiter.html#a8a8f211c17593b18d06bae0dda754092", null ],
+          [ "await_suspend", "structneforce_1_1task_1_1promise__type_1_1final__awaiter.html#a83152c4d8c23bc001e663c92c951a7de", null ]
         ] ],
-        [ "value_type", "structtask_1_1promise__type.html#ad6f6e12c7ce031092b0204db645fcb35", null ],
-        [ "final_suspend", "structtask_1_1promise__type.html#a6cd0f261bbc603cb79641a1437352a18", null ],
-        [ "get_return_object", "structtask_1_1promise__type.html#aad034494a4dbaa044bcaf37154e08aaa", null ],
-        [ "initial_suspend", "structtask_1_1promise__type.html#ade322af155aa4cbedfa55e785c5de167", null ],
-        [ "is_cancelled", "structtask_1_1promise__type.html#add4f907d33863244ecf95b06eaacbdf7", null ],
-        [ "return_value", "structtask_1_1promise__type.html#a4b2240e1afadcea4b4f98414914cc002", null ],
-        [ "set_cancellation_token", "structtask_1_1promise__type.html#a5339e9a8325537229a77e5263fd4a15c", null ],
-        [ "unhandled_exception", "structtask_1_1promise__type.html#a367a255980a9849de883c314ffd5f644", null ],
-        [ "continuation", "structtask_1_1promise__type.html#ab8c38567c42f18a7b160266fbccc6520", null ],
-        [ "exception", "structtask_1_1promise__type.html#ae9b2d8a552ea4349ae65ae6687bae3e2", null ],
-        [ "result", "structtask_1_1promise__type.html#a8e97bb2e04e2d02a562757f8268395ff", null ],
-        [ "token", "structtask_1_1promise__type.html#a9e4d9fe9831164c452a700ce6010335f", null ]
+        [ "value_type", "structneforce_1_1task_1_1promise__type.html#aa5b15c6217133b41fe35c0026efd9203", null ],
+        [ "final_suspend", "structneforce_1_1task_1_1promise__type.html#a6740d66aa188ad6d4667643ae26fff36", null ],
+        [ "get_return_object", "structneforce_1_1task_1_1promise__type.html#ad6fe1e74a43d760b9ca6cdf6a9e2653b", null ],
+        [ "initial_suspend", "structneforce_1_1task_1_1promise__type.html#a10b07c002ad457ea7a243de326432c42", null ],
+        [ "is_cancelled", "structneforce_1_1task_1_1promise__type.html#af7f78cb76ca75e609088ae76990499d0", null ],
+        [ "return_value", "structneforce_1_1task_1_1promise__type.html#a53ed0d7271d6030918a02aa4c39c3d46", null ],
+        [ "set_cancellation_token", "structneforce_1_1task_1_1promise__type.html#a8937475aa2d94a6e18ea9eb330f4ffbc", null ],
+        [ "unhandled_exception", "structneforce_1_1task_1_1promise__type.html#af4bef66998c337056baa81e803cf6f44", null ],
+        [ "continuation", "structneforce_1_1task_1_1promise__type.html#ae7f288c8e0cd76c244f51b442277ed98", null ],
+        [ "exception", "structneforce_1_1task_1_1promise__type.html#ad0fe89d925723f213682e0e0ad27e714", null ],
+        [ "result", "structneforce_1_1task_1_1promise__type.html#a7652f068f133f839adb238c53871a694", null ],
+        [ "token", "structneforce_1_1task_1_1promise__type.html#aa49e7586dc5c5cac3e4acd84f8eda310", null ]
       ] ],
-      [ "awaiter", "structtask_1_1awaiter.html", [
-        [ "await_ready", "structtask_1_1awaiter.html#a851717827edd19b476f3f9339730a0db", null ],
-        [ "await_resume", "structtask_1_1awaiter.html#a9dd1df2703e550a5dd2759dd453eac51", null ],
-        [ "await_suspend", "structtask_1_1awaiter.html#acb1099aa7940b78bc6f08516dfe4190e", null ],
-        [ "handle", "structtask_1_1awaiter.html#a3b7c9f9896ec3150586e5dcd54dfec05", null ]
+      [ "awaiter", "structneforce_1_1task_1_1awaiter.html", [
+        [ "await_ready", "structneforce_1_1task_1_1awaiter.html#a6c7489da3e2af1ecf900193733e35f42", null ],
+        [ "await_resume", "structneforce_1_1task_1_1awaiter.html#ade39b2a78b1bf1c03159d719cdfd3ba9", null ],
+        [ "await_suspend", "structneforce_1_1task_1_1awaiter.html#aa6b0dc8d64ea314a1d3aacee6796a746", null ],
+        [ "handle", "structneforce_1_1task_1_1awaiter.html#adeef915b62f01726d08f2b3afd125fca", null ]
       ] ],
-      [ "task", "classtask.html#ae229bb88041fade9c572408e8dcbedfd", null ],
-      [ "task", "classtask.html#a5e94b9581b7921975806fdc1483f78f4", null ],
-      [ "~task", "classtask.html#abcf9c660515466997e2ba3e6d5166dd1", null ],
-      [ "done", "classtask.html#ab631774bfa12bb16808de715b5844278", null ],
-      [ "get", "classtask.html#a58502672d9bef3a69f89611e79483c31", null ],
-      [ "is_cancelled", "classtask.html#ac359179551baf1c15f49de6ec5653b0a", null ],
-      [ "operator co_await", "classtask.html#a3650489fb1edb0a9ab612b126b94c112", null ],
-      [ "operator=", "classtask.html#a20d669386e15b25103aee3212ae684ad", null ],
-      [ "resume", "classtask.html#a4eb3a6735d6e5bf52b2d7534ba0769d4", null ],
-      [ "set_cancellation_token", "classtask.html#a055a89b2c4ef8ad941976ae9ce12349f", null ]
+      [ "task", "classneforce_1_1task.html#abca764b629538220c7d49272ccb4c950", null ],
+      [ "task", "classneforce_1_1task.html#afa39b847607407f4f2433c6e7c5f5b4a", null ],
+      [ "~task", "classneforce_1_1task.html#a1f9481eef6db3f162d56395986f4f420", null ],
+      [ "done", "classneforce_1_1task.html#ad9d0f187ac854c4ff8f3a1cb7c6b2078", null ],
+      [ "get", "classneforce_1_1task.html#aa7f6a3b9550bcc79330cb14fbcb7d372", null ],
+      [ "is_cancelled", "classneforce_1_1task.html#a9a6aee73df5b03494d55b23fe8f70cb3", null ],
+      [ "operator co_await", "classneforce_1_1task.html#ad3fe7c0ac549d6b193c38ac00972f057", null ],
+      [ "operator=", "classneforce_1_1task.html#ace8993a0e934d1ab2b348202cf1b9d7b", null ],
+      [ "resume", "classneforce_1_1task.html#a9aa547581573c4c07e97a50b6d44a46a", null ],
+      [ "set_cancellation_token", "classneforce_1_1task.html#aa57d83607866a8ab367eac4f88594316", null ]
     ] ],
-    [ "task&lt; void &gt;", "classtask_3_01void_01_4.html", null ],
-    [ "coroutine_handle", "group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181", null ],
-    [ "noop_coroutine_handle", "group___coroutine.html#ga8688aa61087dce3a6914a4d6c7f7b55a", null ],
-    [ "noop_coroutine_promise", "group___coroutine.html#ga703e941b1a9f15e23513daa24ed4d587", null ],
-    [ "noop_coroutine", "group___coroutine.html#ga43aa77a087a863d0064283cc5871fde7", null ],
-    [ "retry", "group___coroutine.html#gaeeb129739f934bdf8c9e19059ba3ee29", null ],
-    [ "when_all", "group___coroutine.html#gaf1931de6c9023a80830659338702aed7", null ]
+    [ "neforce::task&lt; void &gt;", "classneforce_1_1task_3_01void_01_4.html", null ],
+    [ "neforce::coroutine_handle", "group___coroutine.html#gaeab1ef2c1054244fa37d634f805cf95d", null ],
+    [ "neforce::noop_coroutine_handle", "group___coroutine.html#gad965f68ae41ad4d85bebc654c68ba00f", null ],
+    [ "neforce::noop_coroutine_promise", "group___coroutine.html#gac292f20982d43773fc9cb6c9d3050478", null ],
+    [ "neforce::noop_coroutine", "group___coroutine.html#ga24db9cf2e6018ed5df886af0e687a506", null ],
+    [ "neforce::retry", "group___coroutine.html#gacd16f093dc3ec261bf6e2fe846e40d5d", null ],
+    [ "neforce::when_all", "group___coroutine.html#ga23afab5fba3438cba469a2e3582e9691", null ]
 ];

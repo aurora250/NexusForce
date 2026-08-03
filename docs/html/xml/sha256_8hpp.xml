@@ -88,8 +88,8 @@
         </childnode>
       </node>
       <node id="16">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="11" relation="include">
         </childnode>
       </node>
@@ -254,30 +254,44 @@
         </childnode>
         <childnode refid="45" relation="include">
         </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
         <childnode refid="37" relation="include">
         </childnode>
       </node>
-      <node id="46">
+      <node id="48">
         <label>NeForce/core/string/basic_string_view.hpp</label>
         <link refid="basic__string__view_8hpp"/>
         <childnode refid="35" relation="include">
         </childnode>
-        <childnode refid="47" relation="include">
+        <childnode refid="49" relation="include">
         </childnode>
-        <childnode refid="48" relation="include">
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
         </childnode>
       </node>
-      <node id="47">
+      <node id="49">
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="33" relation="include">
         </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
       </node>
-      <node id="48">
+      <node id="46">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>NeForce/core/string/charset.hpp</label>
+        <link refid="charset_8hpp"/>
+        <childnode refid="46" relation="include">
+        </childnode>
         <childnode refid="9" relation="include">
         </childnode>
       </node>
@@ -287,10 +301,10 @@
         <childnode refid="43" relation="include">
         </childnode>
       </node>
-      <node id="45">
+      <node id="47">
         <label>NeForce/core/string/string_view.hpp</label>
         <link refid="string__view_8hpp"/>
-        <childnode refid="46" relation="include">
+        <childnode refid="48" relation="include">
         </childnode>
       </node>
       <node id="17">
@@ -354,13 +368,8 @@
         <label>utility</label>
       </node>
     </incdepgraph>
-    <innerclass refid="struct_s_h_a256" prot="public">SHA256</innerclass>
-    <sectiondef kind="func">
-      <member refid="group___s_h_a256_1gad81b6d3b15a334806adcc879a11ab3b9" kind="function"><name>sha256</name></member>
-      <member refid="group___s_h_a256_1gaaa34e9258f23bd22ed5079d1abe61f43" kind="function"><name>sha256</name></member>
-      <member refid="group___s_h_a256_1ga64b95a0a32be09730efe20d32edc14ad" kind="function"><name>sha256</name></member>
-      <member refid="group___s_h_a256_1ga6972e21a073d7b375706a31d18ff478a" kind="function"><name>sha256</name></member>
-    </sectiondef>
+    <innerclass refid="structneforce_1_1_s_h_a256" prot="public">neforce::SHA256</innerclass>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
     <briefdescription>
 <para>SHA-256哈希算法实现 </para>
     </briefdescription>
@@ -378,31 +387,31 @@
 <codeline lineno="15"><highlight class="normal"></highlight></codeline>
 <codeline lineno="20"><highlight class="normal"></highlight></codeline>
 <codeline lineno="82"><highlight class="normal"></highlight></codeline>
-<codeline lineno="89" refid="struct_s_h_a256" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="struct_s_h_a256" kindref="compound">SHA256</ref><sp/>{</highlight></codeline>
-<codeline lineno="95" refid="group___encryption_1ga48a15c755eec3a67835e24f3ee5fa9a9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref><sp/><ref refid="group___encryption_1ga48a15c755eec3a67835e24f3ee5fa9a9" kindref="member">hash</ref>(<ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref><sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>);</highlight></codeline>
+<codeline lineno="89" refid="structneforce_1_1_s_h_a256" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="structneforce_1_1_s_h_a256" kindref="compound">SHA256</ref><sp/>{</highlight></codeline>
+<codeline lineno="95" refid="group___encryption_1ga04cfa511531e09628ace445b150cdc8c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref><sp/><ref refid="group___encryption_1ga04cfa511531e09628ace445b150cdc8c" kindref="member">hash</ref>(<ref refid="group___memory_view_1ga533a464153c7fc34d3fa5d92854c8613" kindref="member">cbyte_view</ref><sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>);</highlight></codeline>
 <codeline lineno="96"><highlight class="normal"></highlight></codeline>
-<codeline lineno="102" refid="group___encryption_1ga699555f7ee7aa6b03e410c36abe06310" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="group___encryption_1ga699555f7ee7aa6b03e410c36abe06310" kindref="member">hash_hex</ref>(<ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref><sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>);</highlight></codeline>
+<codeline lineno="102" refid="group___encryption_1ga8923dd65a171091f776df707bb0602af" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="group___encryption_1ga8923dd65a171091f776df707bb0602af" kindref="member">hash_hex</ref>(<ref refid="group___memory_view_1ga533a464153c7fc34d3fa5d92854c8613" kindref="member">cbyte_view</ref><sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>);</highlight></codeline>
 <codeline lineno="103"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="104"><highlight class="normal"></highlight></codeline>
 <codeline lineno="105"><highlight class="normal"></highlight></codeline>
-<codeline lineno="111" refid="group___s_h_a256_1gad81b6d3b15a334806adcc879a11ab3b9" refkind="member"><highlight class="normal">NEFORCE_ALWAYS_INLINE_INLINE<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="group___s_h_a256_1gad81b6d3b15a334806adcc879a11ab3b9" kindref="member">sha256</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>)<sp/>{</highlight></codeline>
-<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___encryption_1ga699555f7ee7aa6b03e410c36abe06310" kindref="member">SHA256::hash_hex</ref>({</highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="normal"><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref>*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(<ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.data()),<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.size()});</highlight></codeline>
+<codeline lineno="111" refid="group___s_h_a256_1ga543906a2a30b2d4d8748590fb83c5c64" refkind="member"><highlight class="normal">NEFORCE_ALWAYS_INLINE_INLINE<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="group___s_h_a256_1ga543906a2a30b2d4d8748590fb83c5c64" kindref="member">sha256</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___encryption_1ga8923dd65a171091f776df707bb0602af" kindref="member">SHA256::hash_hex</ref>({</highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="normal"><ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref>*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(<ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.data()),<sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.size()});</highlight></codeline>
 <codeline lineno="113"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="114"><highlight class="normal"></highlight></codeline>
-<codeline lineno="120" refid="group___s_h_a256_1gaaa34e9258f23bd22ed5079d1abe61f43" refkind="member"><highlight class="normal">NEFORCE_ALWAYS_INLINE_INLINE<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="group___s_h_a256_1gad81b6d3b15a334806adcc879a11ab3b9" kindref="member">sha256</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>)<sp/>{</highlight></codeline>
-<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.empty())<sp/>{</highlight></codeline>
-<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___encryption_1ga699555f7ee7aa6b03e410c36abe06310" kindref="member">SHA256::hash_hex</ref>({});</highlight></codeline>
+<codeline lineno="120" refid="group___s_h_a256_1ga937c9d196aeaa8704a610f4ac710d7a3" refkind="member"><highlight class="normal">NEFORCE_ALWAYS_INLINE_INLINE<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="group___s_h_a256_1ga543906a2a30b2d4d8748590fb83c5c64" kindref="member">sha256</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.empty())<sp/>{</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___encryption_1ga8923dd65a171091f776df707bb0602af" kindref="member">SHA256::hash_hex</ref>({});</highlight></codeline>
 <codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___encryption_1ga699555f7ee7aa6b03e410c36abe06310" kindref="member">SHA256::hash_hex</ref>({</highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="normal"><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref>*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(<ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.data()),<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.size()});</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___encryption_1ga8923dd65a171091f776df707bb0602af" kindref="member">SHA256::hash_hex</ref>({</highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="normal"><ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref>*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(<ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.data()),<sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.size()});</highlight></codeline>
 <codeline lineno="125"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="126"><highlight class="normal"></highlight></codeline>
-<codeline lineno="132" refid="group___s_h_a256_1ga64b95a0a32be09730efe20d32edc14ad" refkind="member"><highlight class="normal">NEFORCE_ALWAYS_INLINE_INLINE<sp/><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref><sp/><ref refid="group___s_h_a256_1gad81b6d3b15a334806adcc879a11ab3b9" kindref="member">sha256</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref><sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___encryption_1ga48a15c755eec3a67835e24f3ee5fa9a9" kindref="member">SHA256::hash</ref>(<ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>);<sp/>}</highlight></codeline>
+<codeline lineno="132" refid="group___s_h_a256_1ga5418b26c6c9500906e2a3715d97fc80c" refkind="member"><highlight class="normal">NEFORCE_ALWAYS_INLINE_INLINE<sp/><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref><sp/><ref refid="group___s_h_a256_1ga543906a2a30b2d4d8748590fb83c5c64" kindref="member">sha256</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___memory_view_1ga533a464153c7fc34d3fa5d92854c8613" kindref="member">cbyte_view</ref><sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___encryption_1ga04cfa511531e09628ace445b150cdc8c" kindref="member">SHA256::hash</ref>(<ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>);<sp/>}</highlight></codeline>
 <codeline lineno="133"><highlight class="normal"></highlight></codeline>
-<codeline lineno="139" refid="group___s_h_a256_1ga6972e21a073d7b375706a31d18ff478a" refkind="member"><highlight class="normal">NEFORCE_ALWAYS_INLINE_INLINE<sp/><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref><sp/><ref refid="group___s_h_a256_1gad81b6d3b15a334806adcc879a11ab3b9" kindref="member">sha256</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref>&amp;<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>)<sp/>{</highlight></codeline>
-<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.empty())<sp/>{</highlight></codeline>
-<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___encryption_1ga48a15c755eec3a67835e24f3ee5fa9a9" kindref="member">SHA256::hash</ref>({});</highlight></codeline>
+<codeline lineno="139" refid="group___s_h_a256_1ga6f19a6f23d80a8aa550df32673360419" refkind="member"><highlight class="normal">NEFORCE_ALWAYS_INLINE_INLINE<sp/><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref><sp/><ref refid="group___s_h_a256_1ga543906a2a30b2d4d8748590fb83c5c64" kindref="member">sha256</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref>&amp;<sp/><ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.empty())<sp/>{</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___encryption_1ga04cfa511531e09628ace445b150cdc8c" kindref="member">SHA256::hash</ref>({});</highlight></codeline>
 <codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___encryption_1ga48a15c755eec3a67835e24f3ee5fa9a9" kindref="member">SHA256::hash</ref>(<ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.view());</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___encryption_1ga04cfa511531e09628ace445b150cdc8c" kindref="member">SHA256::hash</ref>(<ref refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" kindref="member">data</ref>.view());</highlight></codeline>
 <codeline lineno="144"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="145"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Encryption</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="147"><highlight class="normal"></highlight></codeline>

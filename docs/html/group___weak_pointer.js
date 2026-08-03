@@ -1,50 +1,50 @@
 var group___weak_pointer =
 [
-    [ "weak_ptr&lt; T &gt;", "classweak__ptr.html", [
-      [ "element_type", "classweak__ptr.html#ae778e30aa38a100c5750aecd6f5d8d8b", null ],
-      [ "weak_ptr", "classweak__ptr.html#a20a6853423bef0657ba9e7912d1118bf", null ],
-      [ "weak_ptr", "classweak__ptr.html#a3b07b6b6711dfdcf5819b0f397937ede", null ],
-      [ "weak_ptr", "classweak__ptr.html#ad954d39a77ff4b8b32cd91cd4f4affa8", null ],
-      [ "weak_ptr", "classweak__ptr.html#a08ea1426cad769cf04d9942258659f17", null ],
-      [ "weak_ptr", "classweak__ptr.html#a2141f9583dd0cafda2f02eeb58e0bd35", null ],
-      [ "weak_ptr", "classweak__ptr.html#a0aee942402261161daa557fa305b019c", null ],
-      [ "weak_ptr", "classweak__ptr.html#a5de6a8424f3667f22ba47bc92131f6be", null ],
-      [ "~weak_ptr", "classweak__ptr.html#a33e02aa3da3b60d4ebf8e6404c3e77b2", null ],
-      [ "expired", "classweak__ptr.html#a430cb63353080ed26b62015adb96e669", null ],
-      [ "lock", "classweak__ptr.html#aa8708d1965a5606f913443522d41a6d9", null ],
-      [ "operator=", "classweak__ptr.html#a3a35940bf00ab3c3e9dc56225031f466", null ],
-      [ "operator=", "classweak__ptr.html#a06b6595a7fa7840264a2f96a042962d5", null ],
-      [ "operator=", "classweak__ptr.html#a18ba70c94d44ff6744e7cc542a2f8c19", null ],
-      [ "operator=", "classweak__ptr.html#a66b64743332e92f4bc225376a599cfab", null ],
-      [ "operator=", "classweak__ptr.html#ad1910edbda514bff04d30ea3854009e8", null ],
-      [ "owner_before", "classweak__ptr.html#a4d6ab0f9309ca450a190754f5b0951af", null ],
-      [ "owner_before", "classweak__ptr.html#a3351d9ac0cabcca299924d89b2681c81", null ],
-      [ "owner_equal", "classweak__ptr.html#abc4244677b6082a5ab8a33cdd9518864", null ],
-      [ "owner_equal", "classweak__ptr.html#abb99f2a98d408d48139bf87a5a936568", null ],
-      [ "reset", "classweak__ptr.html#a7725f99ddca1116fa1a50e295d56da99", null ],
-      [ "swap", "classweak__ptr.html#ab6ce65d0fac958b888c5d52c029efbc2", null ],
-      [ "use_count", "classweak__ptr.html#a3eb1a3ce63ac6deca89e25db20ee6643", null ]
+    [ "neforce::weak_ptr&lt; T &gt;", "classneforce_1_1weak__ptr.html", [
+      [ "element_type", "classneforce_1_1weak__ptr.html#a579feb5cdff99fbe7c4f94951de87c3e", null ],
+      [ "weak_ptr", "classneforce_1_1weak__ptr.html#abd5732f4ab2add2dc82a2d0e83e87ea2", null ],
+      [ "weak_ptr", "classneforce_1_1weak__ptr.html#a1a4239ea3572c47ca25b2453df80a58d", null ],
+      [ "weak_ptr", "classneforce_1_1weak__ptr.html#a80f4b082a88d88846c49a7b508bc9870", null ],
+      [ "weak_ptr", "classneforce_1_1weak__ptr.html#a6a4edd7c3d7a94c36f58ebbc5981d9b9", null ],
+      [ "weak_ptr", "classneforce_1_1weak__ptr.html#aea68b406d3e3694ee64da11551d09ca4", null ],
+      [ "weak_ptr", "classneforce_1_1weak__ptr.html#a5cbe86a14a578b1de884b5b56abe35ca", null ],
+      [ "weak_ptr", "classneforce_1_1weak__ptr.html#a6c06efa65e7ca7c3bc759a696630fb52", null ],
+      [ "~weak_ptr", "classneforce_1_1weak__ptr.html#a8235a095216aa1bd80b19a4e0008ae98", null ],
+      [ "expired", "classneforce_1_1weak__ptr.html#a465b8a0e6c7a05d91acca1d17520d099", null ],
+      [ "lock", "classneforce_1_1weak__ptr.html#a9b6a5c3237ea141dac81beea6333b80c", null ],
+      [ "operator=", "classneforce_1_1weak__ptr.html#aa9ae30753d6a035b97ff085f9e9b9254", null ],
+      [ "operator=", "classneforce_1_1weak__ptr.html#a73167fa305d37ed56f887e7b52b61492", null ],
+      [ "operator=", "classneforce_1_1weak__ptr.html#ad942efe4f448cccd9eb775f44b56f7c0", null ],
+      [ "operator=", "classneforce_1_1weak__ptr.html#a8f336d923e0fb8fcd735876c69ed37e1", null ],
+      [ "operator=", "classneforce_1_1weak__ptr.html#a60069fed3473c3662c20e1e9674deeb2", null ],
+      [ "owner_before", "classneforce_1_1weak__ptr.html#ad33ad94b586aa18b38c850a9ffb9133b", null ],
+      [ "owner_before", "classneforce_1_1weak__ptr.html#a0c037ac70f55a6b097418eab7b0944b7", null ],
+      [ "owner_equal", "classneforce_1_1weak__ptr.html#a7bf543431ef38ccd5d85d98f4ffc7786", null ],
+      [ "owner_equal", "classneforce_1_1weak__ptr.html#ac5a25ef4f69e3c22a0eda5cd5c1a4a6a", null ],
+      [ "reset", "classneforce_1_1weak__ptr.html#ae13f47e741658187c753c491daba937b", null ],
+      [ "swap", "classneforce_1_1weak__ptr.html#acde410a58f65f9940e49ee643ba30db0", null ],
+      [ "use_count", "classneforce_1_1weak__ptr.html#add9285c60ae97d3e3cae1419f87ed60b", null ]
     ] ],
-    [ "owner_less&lt; T &gt;", "structowner__less.html", null ],
-    [ "owner_less&lt; shared_ptr&lt; T &gt; &gt;", "structowner__less_3_01shared__ptr_3_01_t_01_4_01_4.html", [
-      [ "is_transparent", "structowner__less_3_01shared__ptr_3_01_t_01_4_01_4.html#abc36a7d8f9d113ac3c881963380f2247", null ],
-      [ "operator()", "structowner__less_3_01shared__ptr_3_01_t_01_4_01_4.html#ac1e4c1754ce94c83c31fd6b30566cc5d", null ],
-      [ "operator()", "structowner__less_3_01shared__ptr_3_01_t_01_4_01_4.html#a49e31c6d02b0a24aab5f2d87e1bdcf4c", null ],
-      [ "operator()", "structowner__less_3_01shared__ptr_3_01_t_01_4_01_4.html#a60418cf26397abf09f78e8abe08fbc6a", null ]
+    [ "neforce::owner_less&lt; T &gt;", "structneforce_1_1owner__less.html", null ],
+    [ "neforce::owner_less&lt; shared_ptr&lt; T &gt; &gt;", "structneforce_1_1owner__less_3_01shared__ptr_3_01_t_01_4_01_4.html", [
+      [ "is_transparent", "structneforce_1_1owner__less_3_01shared__ptr_3_01_t_01_4_01_4.html#a8f14d03387cb7409554206da23303fd6", null ],
+      [ "operator()", "structneforce_1_1owner__less_3_01shared__ptr_3_01_t_01_4_01_4.html#abe423a3998f5e5c2bc2ce5f2baaabb94", null ],
+      [ "operator()", "structneforce_1_1owner__less_3_01shared__ptr_3_01_t_01_4_01_4.html#a98e94557f5b885a6e432489e4396fae2", null ],
+      [ "operator()", "structneforce_1_1owner__less_3_01shared__ptr_3_01_t_01_4_01_4.html#ac0423823cf99c728c44cdbb956d96d27", null ]
     ] ],
-    [ "owner_less&lt; weak_ptr&lt; T &gt; &gt;", "structowner__less_3_01weak__ptr_3_01_t_01_4_01_4.html", [
-      [ "is_transparent", "structowner__less_3_01weak__ptr_3_01_t_01_4_01_4.html#acb55b07ecf8be10a9fb8413e9e7864ba", null ],
-      [ "operator()", "structowner__less_3_01weak__ptr_3_01_t_01_4_01_4.html#ac8cd31ac55b018e03af5041c91b9b015", null ],
-      [ "operator()", "structowner__less_3_01weak__ptr_3_01_t_01_4_01_4.html#a1901a227ffd48431d2e1ed7c882b9d01", null ],
-      [ "operator()", "structowner__less_3_01weak__ptr_3_01_t_01_4_01_4.html#a31bee6d90492c73e07a115c87b5d87cd", null ]
+    [ "neforce::owner_less&lt; weak_ptr&lt; T &gt; &gt;", "structneforce_1_1owner__less_3_01weak__ptr_3_01_t_01_4_01_4.html", [
+      [ "is_transparent", "structneforce_1_1owner__less_3_01weak__ptr_3_01_t_01_4_01_4.html#afb94ee5b2d96e86c5f8ec43b3f118bec", null ],
+      [ "operator()", "structneforce_1_1owner__less_3_01weak__ptr_3_01_t_01_4_01_4.html#a53a6dcac4ceb974de63568300c09f7ec", null ],
+      [ "operator()", "structneforce_1_1owner__less_3_01weak__ptr_3_01_t_01_4_01_4.html#a8168fa43c0431cf8ed7cfeb0796e38ae", null ],
+      [ "operator()", "structneforce_1_1owner__less_3_01weak__ptr_3_01_t_01_4_01_4.html#a04401ca2dff8ee8000ce29c665874ca4", null ]
     ] ],
-    [ "owner_less&lt; void &gt;", "structowner__less_3_01void_01_4.html", [
-      [ "is_transparent", "structowner__less_3_01void_01_4.html#a9df8aed8e7dd2a644c8d645874a19ccb", null ],
-      [ "operator()", "structowner__less_3_01void_01_4.html#a4f4f90b842c8ca7343aa5991169cd39d", null ],
-      [ "operator()", "structowner__less_3_01void_01_4.html#a0a47bf6d34f46957f3631ac8dafb1add", null ],
-      [ "operator()", "structowner__less_3_01void_01_4.html#a8dc2aba419c341877e0028776d5f25e8", null ],
-      [ "operator()", "structowner__less_3_01void_01_4.html#a3584296a9c730372141e5db7e3eadb0f", null ]
+    [ "neforce::owner_less&lt; void &gt;", "structneforce_1_1owner__less_3_01void_01_4.html", [
+      [ "is_transparent", "structneforce_1_1owner__less_3_01void_01_4.html#ac060ccb9b97ff64f2ac1f1fde84adb8e", null ],
+      [ "operator()", "structneforce_1_1owner__less_3_01void_01_4.html#aaef38b5b9b0a0885cf0660002cc2d05d", null ],
+      [ "operator()", "structneforce_1_1owner__less_3_01void_01_4.html#aa747db955ef8a93b5765dd1b5bccd70d", null ],
+      [ "operator()", "structneforce_1_1owner__less_3_01void_01_4.html#ae827c1908a73640c6519122bf9360a67", null ],
+      [ "operator()", "structneforce_1_1owner__less_3_01void_01_4.html#abe04041c06f1be2d97d4bb914f67cb0c", null ]
     ] ],
-    [ "enable_shared_from_this::weak_from_this", "group___weak_pointer.html#gaf5f0f4ef4fee4243568b7a3987ac92de", null ],
-    [ "enable_shared_from_this::weak_from_this", "group___weak_pointer.html#ga78f9e2de1f42821593e5dd8183ae748a", null ]
+    [ "neforce::enable_shared_from_this::weak_from_this", "group___weak_pointer.html#ga16b7459adac2a22e58143535a72903a2", null ],
+    [ "neforce::enable_shared_from_this::weak_from_this", "group___weak_pointer.html#ga236e99bbc94cebedf0e903f2488b5b86", null ]
 ];

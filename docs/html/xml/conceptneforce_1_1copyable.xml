@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="conceptneforce_1_1copyable" kind="concept">
+    <compoundname>neforce::copyable</compoundname>
+    <includes refid="concepts_8hpp" local="no">concepts.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename T&gt;
+concept <ref refid="conceptneforce_1_1copyable" kindref="compound">neforce::copyable</ref> =  copy_constructible&lt;T&gt; &amp;&amp; movable&lt;T&gt; &amp;&amp; assignable_from&lt;T&amp;, T&amp;&gt; &amp;&amp; assignable_from&lt;T&amp;, const T&amp;&gt; &amp;&amp;
+                   assignable_from&lt;T&amp;, const T&gt;</initializer>
+    <conceptparts>
+      <codepart line="171">    <programlisting>
+<codeline><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">concept<sp/></highlight><highlight class="normal">copyable<sp/>=<sp/>copy_constructible&lt;T&gt;<sp/>&amp;&amp;<sp/>movable&lt;T&gt;<sp/>&amp;&amp;<sp/>assignable_from&lt;T&amp;,<sp/>T&amp;&gt;<sp/>&amp;&amp;<sp/>assignable_from&lt;T&amp;,<sp/>const<sp/>T&amp;&gt;<sp/>&amp;&amp;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assignable_from&lt;T&amp;,<sp/>const<sp/>T&gt;</highlight></codeline>
+    </programlisting>
+</codepart>
+    </conceptparts>
+    <briefdescription>
+<para>检查类型是否可复制 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+在movable基础上增加复制构造和复制赋值的要求。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" line="171" column="1"/>
+  </compounddef>
+</doxygen>

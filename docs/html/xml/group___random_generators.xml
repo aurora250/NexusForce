@@ -3,26 +3,27 @@
   <compounddef id="group___random_generators" kind="group">
     <compoundname>RandomGenerators</compoundname>
     <title>随机数生成器</title>
-    <innerclass refid="classrandom__lcd" prot="public">random_lcd</innerclass>
-    <innerclass refid="classrandom__mt" prot="public">random_mt</innerclass>
-    <innerclass refid="classsecret" prot="public">secret</innerclass>
+    <innerclass refid="classneforce_1_1random__lcd" prot="public">neforce::random_lcd</innerclass>
+    <innerclass refid="classneforce_1_1random__mt" prot="public">neforce::random_mt</innerclass>
+    <innerclass refid="classneforce_1_1secret" prot="public">neforce::secret</innerclass>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___random_generators_1ga078e1517fcc2443f164c1a0b7243b8db" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(gen())" virt="non-virtual">
+      <memberdef kind="function" id="group___random_generators_1ga57aa6af79f9f3fd13a47dc24e6c5e81c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(gen())" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Generator</type>
           </param>
         </templateparamlist>
-        <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
-        <definition>uint64_t lemire_bounded</definition>
+        <type>uint64_t</type>
+        <definition>uint64_t neforce::lemire_bounded</definition>
         <argsstring>(Generator &amp;&amp;gen, const uint64_t max)</argsstring>
         <name>lemire_bounded</name>
+        <qualifiedname>neforce::lemire_bounded</qualifiedname>
         <param>
           <type>Generator &amp;&amp;</type>
           <declname>gen</declname>
         </param>
         <param>
-          <type>const <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <type>const uint64_t</type>
           <declname>max</declname>
         </param>
         <briefdescription>
@@ -65,13 +66,13 @@
 </entry><entry thead="yes"><para>适用场景  </para>
 </entry></row>
 <row>
-<entry thead="no"><para><ref refid="classrandom__lcd" kindref="compound">random_lcd</ref>  </para>
+<entry thead="no"><para><ref refid="classneforce_1_1random__lcd" kindref="compound">random_lcd</ref>  </para>
 </entry><entry thead="no"><para>线性同余法 (glibc 兼容)  </para>
 </entry><entry thead="no"><para>2^31  </para>
 </entry><entry thead="no"><para>简单模拟、非安全场景  </para>
 </entry></row>
 <row>
-<entry thead="no"><para><ref refid="classrandom__mt" kindref="compound">random_mt</ref>  </para>
+<entry thead="no"><para><ref refid="classneforce_1_1random__mt" kindref="compound">random_mt</ref>  </para>
 </entry><entry thead="no"><para>MT19937 梅森旋转  </para>
 </entry><entry thead="no"><para>2^19937 - 1  </para>
 </entry><entry thead="no"><para>科学计算、统计分析  </para>

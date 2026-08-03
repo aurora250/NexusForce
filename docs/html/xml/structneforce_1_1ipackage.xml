@@ -1,0 +1,1047 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1ipackage" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::ipackage</compoundname>
+    <basecompoundref refid="structneforce_1_1icommon" prot="public" virt="non-virtual">neforce::icommon&lt; T &gt;</basecompoundref>
+    <basecompoundref refid="structneforce_1_1iarithmetic" prot="public" virt="non-virtual">neforce::iarithmetic&lt; T &gt;</basecompoundref>
+    <basecompoundref refid="structneforce_1_1ibinary" prot="public" virt="non-virtual">neforce::ibinary&lt; T &gt;</basecompoundref>
+    <derivedcompoundref refid="structneforce_1_1icharacter" prot="public" virt="non-virtual">neforce::icharacter&lt; character, char &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structneforce_1_1icharacter" prot="public" virt="non-virtual">neforce::icharacter&lt; wcharacter, wchar_t &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structneforce_1_1icharacter" prot="public" virt="non-virtual">neforce::icharacter&lt; u8character, char8_t &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structneforce_1_1icharacter" prot="public" virt="non-virtual">neforce::icharacter&lt; u16character, char16_t &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structneforce_1_1icharacter" prot="public" virt="non-virtual">neforce::icharacter&lt; u32character, char32_t &gt;</derivedcompoundref>
+    <includes refid="ipackage_8hpp" local="no">ipackage.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename PackageT</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structneforce_1_1ipackage_1a64cac633509e5457c20755adbd43013a" prot="public" static="no">
+        <type>PackageT</type>
+        <definition>using neforce::ipackage&lt; T, PackageT &gt;::package_type = PackageT</definition>
+        <argsstring></argsstring>
+        <name>package_type</name>
+        <qualifiedname>neforce::ipackage::package_type</qualifiedname>
+        <briefdescription>
+<para>包装类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="50" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="structneforce_1_1ipackage_1a74278dfe7631eaa0ef16d03365cb2e10" prot="protected" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1ipackage_1a64cac633509e5457c20755adbd43013a" kindref="member">package_type</ref></type>
+        <definition>package_type neforce::ipackage&lt; T, PackageT &gt;::value_</definition>
+        <argsstring></argsstring>
+        <name>value_</name>
+        <qualifiedname>neforce::ipackage::value_</qualifiedname>
+        <initializer>{static_cast&lt;<ref refid="structneforce_1_1ipackage_1a64cac633509e5457c20755adbd43013a" kindref="member">package_type</ref>&gt;(0)}</initializer>
+        <briefdescription>
+<para>存储的数值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="53" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="53" bodyend="53"/>
+        <referencedby refid="structneforce_1_1icharacter_1ab9630667271c82631614fe66b5e90979" compoundref="icharacter_8hpp" startline="54" endline="56">neforce::icharacter&lt; character, char &gt;::operator bool</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="structneforce_1_1ipackage_1a183bf091fdafe8f0885fc3facf522fb9" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T &amp; neforce::ipackage&lt; T, PackageT &gt;::derived</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>derived</name>
+        <qualifiedname>neforce::ipackage::derived</qualifiedname>
+        <briefdescription>
+<para>获取常量派生类引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>常量派生类引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="41" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1a0486ae05c1da0f4072dcc46b0ca82d63" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; neforce::ipackage&lt; T, PackageT &gt;::derived</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>derived</name>
+        <qualifiedname>neforce::ipackage::derived</qualifiedname>
+        <briefdescription>
+<para>获取派生类引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>派生类引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="47" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="47" bodyend="47"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1ipackage_1a2129afca313ba55c0d3249c948208d26" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::ipackage&lt; T, PackageT &gt;::ipackage</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>ipackage</name>
+        <qualifiedname>neforce::ipackage::ipackage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="56" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1a6eb9c0688d86d2225d816ec38caa0125" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::ipackage&lt; T, PackageT &gt;::ipackage</definition>
+        <argsstring>(const ipackage &amp;other) noexcept=default</argsstring>
+        <name>ipackage</name>
+        <qualifiedname>neforce::ipackage::ipackage</qualifiedname>
+        <param>
+          <type>const ipackage &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="58" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1aee9c2a48a30488f6d906a105ca95c3c2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::ipackage&lt; T, PackageT &gt;::ipackage</definition>
+        <argsstring>(ipackage &amp;&amp;other) noexcept=default</argsstring>
+        <name>ipackage</name>
+        <qualifiedname>neforce::ipackage::ipackage</qualifiedname>
+        <param>
+          <type>ipackage &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="59" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1a588ab3032347852c7cb58d577293fe59" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>ipackage &amp;</type>
+        <definition>ipackage &amp; neforce::ipackage&lt; T, PackageT &gt;::operator=</definition>
+        <argsstring>(const ipackage &amp;other) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::ipackage::operator=</qualifiedname>
+        <param>
+          <type>const ipackage &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="61" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1a99fe06d6410c9d9c4fa172a840f1c901" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>ipackage &amp;</type>
+        <definition>ipackage &amp; neforce::ipackage&lt; T, PackageT &gt;::operator=</definition>
+        <argsstring>(ipackage &amp;&amp;other) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::ipackage::operator=</qualifiedname>
+        <param>
+          <type>ipackage &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="62" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1a31d8459911d79c867db76f818f0a13ec" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::ipackage&lt; T, PackageT &gt;::ipackage</definition>
+        <argsstring>(package_type value) noexcept</argsstring>
+        <name>ipackage</name>
+        <qualifiedname>neforce::ipackage::ipackage</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1ipackage_1a64cac633509e5457c20755adbd43013a" kindref="member">package_type</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始数值</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+使用指定数值构造包装对象。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="70" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="70" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1a5644222c157497152f8cad1b6ca22f04" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::ipackage&lt; T, PackageT &gt;::operator package_type</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator package_type</name>
+        <qualifiedname>neforce::ipackage::operator package_type</qualifiedname>
+        <briefdescription>
+<para>类型转换操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>转换为包装类型的数值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="86" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="86" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1ada39825f8477a3477689e82e869c24b1" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1ipackage_1a64cac633509e5457c20755adbd43013a" kindref="member">package_type</ref></type>
+        <definition>package_type neforce::ipackage&lt; T, PackageT &gt;::value</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::ipackage::value</qualifiedname>
+        <briefdescription>
+<para>获取数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>存储的数值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="92" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="92" bodyend="92"/>
+        <referencedby refid="structneforce_1_1icharacter_1aba08ea52fe3156f94ff74a719325f5d7" compoundref="icharacter_8hpp" startline="47" endline="48">neforce::icharacter&lt; character, char &gt;::icharacter</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1ac278cde2c6bdf631880a1752d27d1b33" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga0b098d32ebd9cc922390914e765ca674" kindref="member">int64_t</ref></type>
+        <definition>int64_t neforce::ipackage&lt; T, PackageT &gt;::to_int64</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>to_int64</name>
+        <qualifiedname>neforce::ipackage::to_int64</qualifiedname>
+        <briefdescription>
+<para>转换为64位整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>转换为int64_t的数值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="98" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="98" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1acde7b1c934c36bd7a20bb9fd73139de2" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::ipackage&lt; T, PackageT &gt;::to_hash</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>to_hash</name>
+        <qualifiedname>neforce::ipackage::to_hash</qualifiedname>
+        <briefdescription>
+<para>计算哈希值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>数值的哈希值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="116" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="116" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1aef0076d7d8c07af43e8c39a6c94a67a1" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::ipackage&lt; T, PackageT &gt;::swap</definition>
+        <argsstring>(T &amp;other) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>neforce::ipackage::swap</qualifiedname>
+        <param>
+          <type>T &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换内容 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的另一个对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="122" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="122" bodyend="122"/>
+        <referencedby refid="structneforce_1_1ipackage_1aef0076d7d8c07af43e8c39a6c94a67a1" compoundref="ipackage_8hpp" startline="122" endline="122">neforce::ipackage&lt; integer8, int8_t &gt;::swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1a0947aaa8a4c7fe299361deb079867737" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::ipackage&lt; T, PackageT &gt;::equal_to</definition>
+        <argsstring>(const T &amp;other) const noexcept</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>neforce::ipackage::equal_to</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>相等比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>两个对象的数值是否相等 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="129" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="129" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1a4d409656c2945f6838a0402979961e09" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::ipackage&lt; T, PackageT &gt;::less_than</definition>
+        <argsstring>(const T &amp;other) const noexcept</argsstring>
+        <name>less_than</name>
+        <qualifiedname>neforce::ipackage::less_than</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>小于比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的数值是否小于右侧对象的数值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="136" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="136" bodyend="136"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1ad1e33653a5074ba5400ba6c95321a537" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; neforce::ipackage&lt; T, PackageT &gt;::operator+=</definition>
+        <argsstring>(const T &amp;other) noexcept</argsstring>
+        <name>operator+=</name>
+        <qualifiedname>neforce::ipackage::operator+=</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>加法赋值操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="143" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="143" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1a29992201616b2cd39a0e9dbfbf7fb5fa" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; neforce::ipackage&lt; T, PackageT &gt;::operator-=</definition>
+        <argsstring>(const T &amp;other) noexcept</argsstring>
+        <name>operator-=</name>
+        <qualifiedname>neforce::ipackage::operator-=</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>减法赋值操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="153" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="153" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1ac580fff3bc61e0e580f758e502f47b00" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; neforce::ipackage&lt; T, PackageT &gt;::operator*=</definition>
+        <argsstring>(const T &amp;other) noexcept</argsstring>
+        <name>operator*=</name>
+        <qualifiedname>neforce::ipackage::operator*=</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>乘法赋值操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="163" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="163" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1a4c30e02fc8ab3f74997f2377a0d3e366" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; neforce::ipackage&lt; T, PackageT &gt;::operator/=</definition>
+        <argsstring>(const T &amp;other)</argsstring>
+        <name>operator/=</name>
+        <qualifiedname>neforce::ipackage::operator/=</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>除法赋值操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1math__exception" kindref="compound">math_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>除数为0时 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="174" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="174" bodyend="180"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1a7196368c898a0b74138e89b873443143" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; neforce::ipackage&lt; T, PackageT &gt;::operator%=</definition>
+        <argsstring>(const T &amp;other)</argsstring>
+        <name>operator%=</name>
+        <qualifiedname>neforce::ipackage::operator%=</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>取模赋值操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1math__exception" kindref="compound">math_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>除数为0时 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="188" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="188" bodyend="191"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1a5cd0cae7c46627e7bb40bf4faf1a3db6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; neforce::ipackage&lt; T, PackageT &gt;::operator++</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>operator++</name>
+        <qualifiedname>neforce::ipackage::operator++</qualifiedname>
+        <briefdescription>
+<para>前置递增操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>递增后的自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="197" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="197" bodyend="200"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1a2c71920d6492efedaab4dd5a46ec6dd6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; neforce::ipackage&lt; T, PackageT &gt;::operator--</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>operator--</name>
+        <qualifiedname>neforce::ipackage::operator--</qualifiedname>
+        <briefdescription>
+<para>前置递减操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>递减后的自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="206" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="206" bodyend="209"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1a81873ef6815adb601f3352202cb04c3b" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>T neforce::ipackage&lt; T, PackageT &gt;::operator~</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator~</name>
+        <qualifiedname>neforce::ipackage::operator~</qualifiedname>
+        <briefdescription>
+<para>按位取反操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>按位取反后的新对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="215" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="215" bodyend="215"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1a8afafa00f2860f7748ff835158ab6fe2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; neforce::ipackage&lt; T, PackageT &gt;::operator&amp;=</definition>
+        <argsstring>(const T &amp;other) noexcept</argsstring>
+        <name>operator&amp;=</name>
+        <qualifiedname>neforce::ipackage::operator&amp;=</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>按位与赋值操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="222" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="222" bodyend="225"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1ae59f3a19c7bfd581800e2ed95723393c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; neforce::ipackage&lt; T, PackageT &gt;::operator|=</definition>
+        <argsstring>(const T &amp;other) noexcept</argsstring>
+        <name>operator|=</name>
+        <qualifiedname>neforce::ipackage::operator|=</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>按位或赋值操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="232" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="232" bodyend="235"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1a7c55bcca5e31e0877708970382550f2a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; neforce::ipackage&lt; T, PackageT &gt;::operator^=</definition>
+        <argsstring>(const T &amp;other) noexcept</argsstring>
+        <name>operator^=</name>
+        <qualifiedname>neforce::ipackage::operator^=</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>按位异或赋值操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="242" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="242" bodyend="245"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1a81de5635ce595282fe9cf52b51c592e1" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; neforce::ipackage&lt; T, PackageT &gt;::operator&lt;&lt;=</definition>
+        <argsstring>(const uint32_t shift)</argsstring>
+        <name>operator&lt;&lt;=</name>
+        <qualifiedname>neforce::ipackage::operator&lt;&lt;=</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>shift</declname>
+        </param>
+        <briefdescription>
+<para>左移赋值操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>移位位数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>移位位数超出范围时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="253" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="253" bodyend="259"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1aee84c88f612070cc6e9b4eae3aced584" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; neforce::ipackage&lt; T, PackageT &gt;::operator&gt;&gt;=</definition>
+        <argsstring>(const uint32_t shift)</argsstring>
+        <name>operator&gt;&gt;=</name>
+        <qualifiedname>neforce::ipackage::operator&gt;&gt;=</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>shift</declname>
+        </param>
+        <briefdescription>
+<para>右移赋值操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>shift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>移位位数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>移位位数超出范围时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="267" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="267" bodyend="273"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="structneforce_1_1ipackage_1ad2ffcc2bb7ea56b0ddf647e3e771124c" prot="protected" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::ipackage&lt; T, PackageT &gt;::~ipackage</definition>
+        <argsstring>()=default</argsstring>
+        <name>~ipackage</name>
+        <qualifiedname>neforce::ipackage::~ipackage</qualifiedname>
+        <briefdescription>
+<para>受保护的析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>防止通过基类指针删除派生类对象。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="79" column="15"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structneforce_1_1ipackage_1a0fa5edb34662651e7f6e85a68c982dfd" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>static constexpr size_t neforce::ipackage&lt; T, PackageT &gt;::bytes</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>bytes</name>
+        <qualifiedname>neforce::ipackage::bytes</qualifiedname>
+        <briefdescription>
+<para>获取类型字节大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>包装类型占用的字节数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="104" column="30" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="104" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1ipackage_1ae72a50582400c9bed28da1d7b2f37c7e" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>static constexpr size_t neforce::ipackage&lt; T, PackageT &gt;::bits</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>bits</name>
+        <qualifiedname>neforce::ipackage::bits</qualifiedname>
+        <briefdescription>
+<para>获取类型位大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>包装类型占用的位数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="110" column="30" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="110" bodyend="110"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>基础数值包装接口 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>派生类类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>PackageT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>包装的数值类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+提供数值类型的通用接口，包括算术运算、位运算和比较操作。 <simplesect kind="note"><para>PackageT必须是算术类型。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="8">
+        <label>neforce::character</label>
+        <link refid="structneforce_1_1character"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::iarithmetic&lt; T &gt;</label>
+        <link refid="structneforce_1_1iarithmetic"/>
+      </node>
+      <node id="6">
+        <label>neforce::ibinary&lt; T &gt;</label>
+        <link refid="structneforce_1_1ibinary"/>
+      </node>
+      <node id="7">
+        <label>neforce::icharacter&lt; character, char &gt;</label>
+        <link refid="structneforce_1_1icharacter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>neforce::icharacter&lt; u16character, char16_t &gt;</label>
+        <link refid="structneforce_1_1icharacter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>neforce::icharacter&lt; u32character, char32_t &gt;</label>
+        <link refid="structneforce_1_1icharacter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>neforce::icharacter&lt; u8character, char8_t &gt;</label>
+        <link refid="structneforce_1_1icharacter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>neforce::icharacter&lt; wcharacter, wchar_t &gt;</label>
+        <link refid="structneforce_1_1icharacter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::icommon&lt; T &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="4">
+        <label>neforce::ihashable&lt; T &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="1">
+        <label>neforce::ipackage&lt; T, PackageT &gt;</label>
+        <link refid="structneforce_1_1ipackage"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>neforce::u16character</label>
+        <link refid="structneforce_1_1u16character"/>
+        <childnode refid="13" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>neforce::u32character</label>
+        <link refid="structneforce_1_1u32character"/>
+        <childnode refid="15" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>neforce::u8character</label>
+        <link refid="structneforce_1_1u8character"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>neforce::wcharacter</label>
+        <link refid="structneforce_1_1wcharacter"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="5">
+        <label>neforce::iarithmetic&lt; T &gt;</label>
+        <link refid="structneforce_1_1iarithmetic"/>
+      </node>
+      <node id="6">
+        <label>neforce::ibinary&lt; T &gt;</label>
+        <link refid="structneforce_1_1ibinary"/>
+      </node>
+      <node id="2">
+        <label>neforce::icommon&lt; T &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="4">
+        <label>neforce::ihashable&lt; T &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="1">
+        <label>neforce::ipackage&lt; T, PackageT &gt;</label>
+        <link refid="structneforce_1_1ipackage"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" line="33" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/ipackage.hpp" bodystart="33" bodyend="274"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1ipackage_1ae72a50582400c9bed28da1d7b2f37c7e" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>bits</name></member>
+      <member refid="structneforce_1_1ipackage_1a0fa5edb34662651e7f6e85a68c982dfd" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>bytes</name></member>
+      <member refid="structneforce_1_1ipackage_1a183bf091fdafe8f0885fc3facf522fb9" prot="private" virt="non-virtual"><scope>neforce::ipackage</scope><name>derived</name></member>
+      <member refid="structneforce_1_1ipackage_1a0486ae05c1da0f4072dcc46b0ca82d63" prot="private" virt="non-virtual"><scope>neforce::ipackage</scope><name>derived</name></member>
+      <member refid="structneforce_1_1ipackage_1a0947aaa8a4c7fe299361deb079867737" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>equal_to</name></member>
+      <member refid="structneforce_1_1ipackage_1a2129afca313ba55c0d3249c948208d26" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>ipackage</name></member>
+      <member refid="structneforce_1_1ipackage_1a6eb9c0688d86d2225d816ec38caa0125" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>ipackage</name></member>
+      <member refid="structneforce_1_1ipackage_1aee9c2a48a30488f6d906a105ca95c3c2" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>ipackage</name></member>
+      <member refid="structneforce_1_1ipackage_1a31d8459911d79c867db76f818f0a13ec" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>ipackage</name></member>
+      <member refid="structneforce_1_1ipackage_1a4d409656c2945f6838a0402979961e09" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>less_than</name></member>
+      <member refid="structneforce_1_1ipackage_1a5644222c157497152f8cad1b6ca22f04" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator package_type</name></member>
+      <member refid="structneforce_1_1icomparable_1aa385e40eb8ac8bdae736966ad0cf568f" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator!=</name></member>
+      <member refid="structneforce_1_1iarithmetic_1a8b3cee3c8c5ea4eb596fc3ba2f994168" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator%</name></member>
+      <member refid="structneforce_1_1ipackage_1a7196368c898a0b74138e89b873443143" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator%=</name></member>
+      <member refid="structneforce_1_1ibinary_1a993e6484c9b971a72f3d969dd606e62a" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator&amp;</name></member>
+      <member refid="structneforce_1_1ipackage_1a8afafa00f2860f7748ff835158ab6fe2" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator&amp;=</name></member>
+      <member refid="structneforce_1_1iarithmetic_1aea0538de6e5aaa13d9dcec82a80976c6" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator*</name></member>
+      <member refid="structneforce_1_1ipackage_1ac580fff3bc61e0e580f758e502f47b00" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator*=</name></member>
+      <member refid="structneforce_1_1iarithmetic_1a6fac690bd10d6c3198b751d9f865d7d2" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator+</name></member>
+      <member refid="structneforce_1_1ipackage_1a5cd0cae7c46627e7bb40bf4faf1a3db6" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator++</name></member>
+      <member refid="structneforce_1_1iarithmetic_1aa204df8a067f00b53c4a3602648e230e" prot="public" virt="non-virtual" ambiguityscope="neforce::iarithmetic::"><scope>neforce::ipackage</scope><name>operator++</name></member>
+      <member refid="structneforce_1_1ipackage_1ad1e33653a5074ba5400ba6c95321a537" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator+=</name></member>
+      <member refid="structneforce_1_1iarithmetic_1abd7c750e7e0904f597c8ae3585a5ba85" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator-</name></member>
+      <member refid="structneforce_1_1ipackage_1a2c71920d6492efedaab4dd5a46ec6dd6" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator--</name></member>
+      <member refid="structneforce_1_1iarithmetic_1a064eac25c565ade1b5e746017a668ee5" prot="public" virt="non-virtual" ambiguityscope="neforce::iarithmetic::"><scope>neforce::ipackage</scope><name>operator--</name></member>
+      <member refid="structneforce_1_1ipackage_1a29992201616b2cd39a0e9dbfbf7fb5fa" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator-=</name></member>
+      <member refid="structneforce_1_1iarithmetic_1a5c66e86584682da3b96fd3f2440adb2e" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator/</name></member>
+      <member refid="structneforce_1_1ipackage_1a4c30e02fc8ab3f74997f2377a0d3e366" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator/=</name></member>
+      <member refid="structneforce_1_1icomparable_1a0641b58de65d6a0d5b87c2bcb47496a4" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator&lt;</name></member>
+      <member refid="structneforce_1_1ibinary_1a517fe9e5f39745d1f0139893e86a482e" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator&lt;&lt;</name></member>
+      <member refid="structneforce_1_1ipackage_1a81de5635ce595282fe9cf52b51c592e1" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator&lt;&lt;=</name></member>
+      <member refid="structneforce_1_1icomparable_1a313fba4bce20aced1ff0e6173ad6aab2" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator&lt;=</name></member>
+      <member refid="structneforce_1_1ipackage_1a588ab3032347852c7cb58d577293fe59" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1ipackage_1a99fe06d6410c9d9c4fa172a840f1c901" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1icomparable_1ab9b06f7293eb15299f8c7d5341bfbc83" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator==</name></member>
+      <member refid="structneforce_1_1icomparable_1ab8de930acec5c0261656b787f576f08d" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator&gt;</name></member>
+      <member refid="structneforce_1_1icomparable_1a644c6002f703eb487427daadfec8fb16" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator&gt;=</name></member>
+      <member refid="structneforce_1_1ibinary_1a8ffce852a517dd7921f6954d3eaae4ef" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator&gt;&gt;</name></member>
+      <member refid="structneforce_1_1ipackage_1aee84c88f612070cc6e9b4eae3aced584" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator&gt;&gt;=</name></member>
+      <member refid="structneforce_1_1ibinary_1abee0e90cccc02be1e6e8b9343d3c99da" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator^</name></member>
+      <member refid="structneforce_1_1ipackage_1a7c55bcca5e31e0877708970382550f2a" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator^=</name></member>
+      <member refid="structneforce_1_1ibinary_1a1b60f4a316f0e1d3461000b675ebed65" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator|</name></member>
+      <member refid="structneforce_1_1ipackage_1ae59f3a19c7bfd581800e2ed95723393c" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator|=</name></member>
+      <member refid="structneforce_1_1ipackage_1a81873ef6815adb601f3352202cb04c3b" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>operator~</name></member>
+      <member refid="structneforce_1_1ipackage_1a64cac633509e5457c20755adbd43013a" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>package_type</name></member>
+      <member refid="structneforce_1_1ipackage_1aef0076d7d8c07af43e8c39a6c94a67a1" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>swap</name></member>
+      <member refid="structneforce_1_1ipackage_1acde7b1c934c36bd7a20bb9fd73139de2" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>to_hash</name></member>
+      <member refid="structneforce_1_1ihashable_1a3bedfaa42740465ea8b6e58309c1f67e" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>to_ihash</name></member>
+      <member refid="structneforce_1_1ipackage_1ac278cde2c6bdf631880a1752d27d1b33" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>to_int64</name></member>
+      <member refid="structneforce_1_1ipackage_1ada39825f8477a3477689e82e869c24b1" prot="public" virt="non-virtual"><scope>neforce::ipackage</scope><name>value</name></member>
+      <member refid="structneforce_1_1ipackage_1a74278dfe7631eaa0ef16d03365cb2e10" prot="protected" virt="non-virtual"><scope>neforce::ipackage</scope><name>value_</name></member>
+      <member refid="structneforce_1_1ipackage_1ad2ffcc2bb7ea56b0ddf647e3e771124c" prot="protected" virt="non-virtual"><scope>neforce::ipackage</scope><name>~ipackage</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

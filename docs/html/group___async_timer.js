@@ -1,37 +1,37 @@
 var group___async_timer =
 [
-    [ "timer_scheduler&lt; Clock &gt;", "classtimer__scheduler.html", [
-      [ "clock_type", "classtimer__scheduler.html#a63b53abd0cbc9f95d0c55027a1581617", null ],
-      [ "duration", "classtimer__scheduler.html#a6ef27e3b872fd24bfeda7f7ec9c70868", null ],
-      [ "handler_type", "classtimer__scheduler.html#ada7122813465be5f928c9c7209325731", null ],
-      [ "time_point", "classtimer__scheduler.html#a25c8b70565c98ece1cf245a6665b20b9", null ],
-      [ "token", "classtimer__scheduler.html#a0ff7c3e92b9b906112140b804623e3ea", null ],
-      [ "timer_scheduler", "classtimer__scheduler.html#a3ec94093f0b1ba79c9a2988c37565bab", null ],
-      [ "~timer_scheduler", "classtimer__scheduler.html#a524ba8b6788fe4e0d4d28f554f50f5d8", null ],
-      [ "add_task", "classtimer__scheduler.html#ad7e2861340ab12370ceaec61a82c9129", null ],
-      [ "cancel", "classtimer__scheduler.html#aa25522eaa375942415f6ab940174a49b", null ],
-      [ "cancel_all", "classtimer__scheduler.html#ac050f83f8dbeee5c8f590c5be3e7a6d2", null ],
-      [ "is_pending", "classtimer__scheduler.html#a2e336543bee81770a128f011c5f73c69", null ],
-      [ "size", "classtimer__scheduler.html#aa7d0cbe3d1396062e710b5fa202017f3", null ],
-      [ "stop", "classtimer__scheduler.html#afc0788cb4bf13471a2d573e0342613ed", null ]
+    [ "neforce::timer_scheduler&lt; Clock &gt;", "classneforce_1_1timer__scheduler.html", [
+      [ "clock_type", "classneforce_1_1timer__scheduler.html#a1d9a4730d260662044deb61dc9f7e06b", null ],
+      [ "duration", "classneforce_1_1timer__scheduler.html#a3bb0d53e65a973440b4a5f36fa980b9f", null ],
+      [ "handler_type", "classneforce_1_1timer__scheduler.html#abc7ce1bdaf883c5c894041fb42e714c6", null ],
+      [ "time_point", "classneforce_1_1timer__scheduler.html#ad750513d39f30c1903ddb134f2ab37af", null ],
+      [ "token", "classneforce_1_1timer__scheduler.html#a97335334060b83bc3c6aa015983d14ae", null ],
+      [ "timer_scheduler", "classneforce_1_1timer__scheduler.html#a9966ebf479c11c4d4c4e8606fe0d841f", null ],
+      [ "~timer_scheduler", "classneforce_1_1timer__scheduler.html#a61d890b902bef85c1dd7ec121b5f0aa3", null ],
+      [ "add_task", "classneforce_1_1timer__scheduler.html#a3694eeedc09a5de9fadbbdb4249bd9eb", null ],
+      [ "cancel", "classneforce_1_1timer__scheduler.html#ad423b4129b0c27e750bd7148a1f04176", null ],
+      [ "cancel_all", "classneforce_1_1timer__scheduler.html#a25c551949474b0ab40af1796c145a34a", null ],
+      [ "is_pending", "classneforce_1_1timer__scheduler.html#ab3a42eed857700873a209c044c7db66f", null ],
+      [ "size", "classneforce_1_1timer__scheduler.html#a550cb22c81cfd0cfd4f880d75f460530", null ],
+      [ "stop", "classneforce_1_1timer__scheduler.html#a19256877ae85a87ef5d629b31484ff67", null ]
     ] ],
-    [ "basic_timer&lt; Clock &gt;", "classbasic__timer.html", [
-      [ "clock_type", "classbasic__timer.html#a7e207030e1c38d14b3db768051754597", null ],
-      [ "duration", "classbasic__timer.html#a70d336504e87fc9c1e99e8febb56077a", null ],
-      [ "handler_type", "classbasic__timer.html#a67fedc91a0e1ca45b0df36c719a828cb", null ],
-      [ "time_point", "classbasic__timer.html#ada96b92993c08942916f8e7fe9dc952e", null ],
-      [ "token", "classbasic__timer.html#a625e5206943c7ae7fa2c993a04643b83", null ],
-      [ "~basic_timer", "classbasic__timer.html#ad3f2d5cca2d57a577cc10cc3b627b030", null ],
-      [ "basic_timer", "classbasic__timer.html#aa5c4909463c3076787622d6cfe5ab499", null ],
-      [ "async_wait", "classbasic__timer.html#a223b9bed7f0b3230435522c57d87f09e", null ],
-      [ "cancel", "classbasic__timer.html#a5f986124bf6b4ef059408a2cffe7400e", null ],
-      [ "expires_after", "classbasic__timer.html#a41d9db90a76e0709c03def4e5f10d73b", null ],
-      [ "expires_at", "classbasic__timer.html#a4fa890be95fc2674acba94b3e11b70e0", null ],
-      [ "expires_from_now", "classbasic__timer.html#a123f1272f66d05cb56a5f12fe76b3af2", null ],
-      [ "expiry", "classbasic__timer.html#ae48121fdca2e692f812631d29b985e27", null ],
-      [ "is_active", "classbasic__timer.html#aede5aaa3d82e41b6c275282eb14ae3f8", null ],
-      [ "operator=", "classbasic__timer.html#a795e2f0ee98918bdef6fd545a3ce7df9", null ]
+    [ "neforce::basic_timer&lt; Clock &gt;", "classneforce_1_1basic__timer.html", [
+      [ "clock_type", "classneforce_1_1basic__timer.html#a252648fb26263393f516569f3e4d4e1d", null ],
+      [ "duration", "classneforce_1_1basic__timer.html#a2b2b9d9053f276f259b02e1bb72f135d", null ],
+      [ "handler_type", "classneforce_1_1basic__timer.html#ab9634089843e00ae46f2c79d440025a2", null ],
+      [ "time_point", "classneforce_1_1basic__timer.html#a0d9204f96f94be5916d9dd87f4616e1f", null ],
+      [ "token", "classneforce_1_1basic__timer.html#ae7441b488097cdc9d7edb001c64d1e36", null ],
+      [ "~basic_timer", "classneforce_1_1basic__timer.html#a647f76ae87d3d6995b707e1fbbcffa50", null ],
+      [ "basic_timer", "classneforce_1_1basic__timer.html#a2a7e119d30c2ba0d037b21aa8ab6a404", null ],
+      [ "async_wait", "classneforce_1_1basic__timer.html#ab08dd5a05c3c760984a15f40afc78bfb", null ],
+      [ "cancel", "classneforce_1_1basic__timer.html#aab8f215089f8abaa149e9494b278c020", null ],
+      [ "expires_after", "classneforce_1_1basic__timer.html#af3a902f5b71a796860573a939d13bef5", null ],
+      [ "expires_at", "classneforce_1_1basic__timer.html#aba8af39528f7cab79f10d9222ab3baff", null ],
+      [ "expires_from_now", "classneforce_1_1basic__timer.html#aad4829bca2188d6635a68466c82f2818", null ],
+      [ "expiry", "classneforce_1_1basic__timer.html#a0f6df5bce2688f139c71618e7d6d3948", null ],
+      [ "is_active", "classneforce_1_1basic__timer.html#ac0c146b47bda8b91d46c042b4019e692", null ],
+      [ "operator=", "classneforce_1_1basic__timer.html#a283f51360b63f545c2a048b676ca08c3", null ]
     ] ],
-    [ "steady_timer", "group___async_timer.html#gaf9d29e0fc3082a1789eafb7a8736a00b", null ],
-    [ "system_timer", "group___async_timer.html#ga1a05e758b1b38f82d3cfec4cc3cb55b7", null ]
+    [ "neforce::steady_timer", "group___async_timer.html#ga5d32a2782e2926012296331ed724ed74", null ],
+    [ "neforce::system_timer", "group___async_timer.html#ga06a00661e18fa45f52c1d0c9a39430d8", null ]
 ];

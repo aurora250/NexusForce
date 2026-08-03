@@ -1,67 +1,67 @@
 var group___regex =
 [
-    [ "match_result", "classmatch__result.html", [
-      [ "iterator", "classmatch__result.html#a32ed7c726cf627b6711b5ef034f264ce", null ],
-      [ "match_result", "classmatch__result.html#a0ea18f4ed7d8d309b5554677c5f8240a", null ],
-      [ "match_result", "classmatch__result.html#a7b341a0bba8ea3d8debc332bedd3bdb2", null ],
-      [ "begin", "classmatch__result.html#ac85f88994bcfac546a6560ae0d6db066", null ],
-      [ "data", "classmatch__result.html#a5c7e266cce378d35940549463e20badf", null ],
-      [ "end", "classmatch__result.html#a52f3bd119d5fe35cec608c956efb14ed", null ],
-      [ "length", "classmatch__result.html#a61aaf4755998230dcb8b1ed73a35862b", null ],
-      [ "matched", "classmatch__result.html#ae007b97056a502eef2de9aa5aaae1734", null ],
-      [ "operator[]", "classmatch__result.html#a6c49d336db4cf58bd5ec5b4c3639bc29", null ],
-      [ "position", "classmatch__result.html#a9de957c5aa39e868be775a232679a013", null ],
-      [ "position", "classmatch__result.html#a849bb9ebdd3e20c008d941baec6befc4", null ],
-      [ "prefix", "classmatch__result.html#a8eec77b7faeb34e401684d5545f713de", null ],
-      [ "size", "classmatch__result.html#afde133d3e68dea2f635b729c59142707", null ],
-      [ "suffix", "classmatch__result.html#a9cf8d4e1e9140a9d68160b0d0d7487f4", null ]
+    [ "neforce::match_result", "classneforce_1_1match__result.html", [
+      [ "iterator", "classneforce_1_1match__result.html#afb9a52d3106bb6168c6d9537176a9ccf", null ],
+      [ "match_result", "classneforce_1_1match__result.html#aecb893ee83cefaca0bc1a88dcaeb830e", null ],
+      [ "match_result", "classneforce_1_1match__result.html#a12e36c1b8ef4d6e08e8d65f0e90b61b2", null ],
+      [ "begin", "classneforce_1_1match__result.html#a03c121fe71a5574c4db40ac0d697f3f1", null ],
+      [ "data", "classneforce_1_1match__result.html#a5125a7ccea007c6b3ec7f46e04d72d3b", null ],
+      [ "end", "classneforce_1_1match__result.html#a447d5058b9d1e3247804b8f05468f022", null ],
+      [ "length", "classneforce_1_1match__result.html#a914ba272c95c0a6299a7fb6149b43cdd", null ],
+      [ "matched", "classneforce_1_1match__result.html#a7d045ad4422aa3c89ed2b7168bc9d30d", null ],
+      [ "operator[]", "classneforce_1_1match__result.html#a9f206da84ee7243f29e161375c222235", null ],
+      [ "position", "classneforce_1_1match__result.html#aefd7bc5bdd40ab98ad3476501832c4d4", null ],
+      [ "position", "classneforce_1_1match__result.html#a4fb3b17691c19a5a01875e0fa93e1578", null ],
+      [ "prefix", "classneforce_1_1match__result.html#adf8079f194ea6f21dc20cfe0f4083d17", null ],
+      [ "size", "classneforce_1_1match__result.html#abceb017da5b1e485fcde1c0c01d67210", null ],
+      [ "suffix", "classneforce_1_1match__result.html#a8b2176623dc68074a2cc5adf90ee1943", null ]
     ] ],
-    [ "regex", "classregex.html", [
-      [ "regex", "classregex.html#a9cc420382e161b3120f0c1fa2b96de1b", null ],
-      [ "regex", "classregex.html#aecd2c81befd965af87dd41fca7cb9216", null ],
-      [ "begin", "classregex.html#a6264993253734e7e4cd24843633b066d", null ],
-      [ "capture_count", "classregex.html#a43d70b49afd35ac95a547d2693e5064a", null ],
-      [ "do_match", "classregex.html#a0ef3e2eed8cf1ea82bfa140043d514d4", null ],
-      [ "end", "classregex.html#a1ebad064b0293038849fd9d077f551b7", null ],
-      [ "find_all", "classregex.html#ad764f22504fe843516c1ca901332e336", null ],
-      [ "match", "classregex.html#a374243b176773af264625294365e56cc", null ],
-      [ "operator=", "classregex.html#a4ea1a40df6dbd2c06110cc93a13d20b2", null ],
-      [ "pattern", "classregex.html#ae62c593828e819e2327817f1412d927c", null ],
-      [ "replace_all", "classregex.html#ad2d588837ecfbece42bb55ea2aff70de", null ],
-      [ "replace_all_callback", "classregex.html#ab031f04f095a00bbc98dc343c1dd799e", null ],
-      [ "replace_first", "classregex.html#aa2b3e88047eddfa040a7bfc01a7a4e9b", null ],
-      [ "search", "classregex.html#ac6d04a0530b2b38fd443df2f3505e5d3", null ],
-      [ "split", "classregex.html#ac05fd200971eb88ca528ba987c9bbd05", null ],
-      [ "valid", "classregex.html#a70c6edcad3fcbfa54791b61cc6520af7", null ]
+    [ "neforce::regex", "classneforce_1_1regex.html", [
+      [ "regex", "classneforce_1_1regex.html#aec751a1fac0bd28843427e884cdc17d7", null ],
+      [ "regex", "classneforce_1_1regex.html#a98e16df94526ccee95da5225f99cc9d5", null ],
+      [ "begin", "classneforce_1_1regex.html#a29ad19085fcebb22026e6e1af2875c5e", null ],
+      [ "capture_count", "classneforce_1_1regex.html#a5ff6a0795998772f1bff9fe5bd0b56df", null ],
+      [ "do_match", "classneforce_1_1regex.html#ad732e7f63e24a5b46c42519bb69ec69c", null ],
+      [ "end", "classneforce_1_1regex.html#ac390f34cc5c9b8f79b051b789a122ad3", null ],
+      [ "find_all", "classneforce_1_1regex.html#a70e7003042226204ea4b488214a84250", null ],
+      [ "match", "classneforce_1_1regex.html#a8e8d0770f45b5cdda3d3b8ec49d03e3e", null ],
+      [ "operator=", "classneforce_1_1regex.html#adc0d900711f027eb0a25da770099beaa", null ],
+      [ "pattern", "classneforce_1_1regex.html#ae99e413c189befcee14e47f35373c847", null ],
+      [ "replace_all", "classneforce_1_1regex.html#a91350884ff680d30d4285d9c9847e8e4", null ],
+      [ "replace_all_callback", "classneforce_1_1regex.html#a96902a0ee1aceef07d54c24d62a2a343", null ],
+      [ "replace_first", "classneforce_1_1regex.html#a13fbd323a6fad74ed9ffe266c377a4cb", null ],
+      [ "search", "classneforce_1_1regex.html#ae4684b245fa4b1896b33da9208394243", null ],
+      [ "split", "classneforce_1_1regex.html#a64b9094b897fae9e2791117598a157e5", null ],
+      [ "valid", "classneforce_1_1regex.html#aaba5a5ba8fc104732bda56b7989d4bc9", null ]
     ] ],
-    [ "regex_iterator", "classregex__iterator.html", [
-      [ "difference_type", "classregex__iterator.html#a83d13299dfa95febaa1318f1459daf65", null ],
-      [ "iterator_category", "classregex__iterator.html#a0df3260688c57350c760f43e688dff7c", null ],
-      [ "pointer", "classregex__iterator.html#ad8aa533189ab91035258c7bcf1596612", null ],
-      [ "reference", "classregex__iterator.html#a91ac94ae92e726ae490cd7bbc6331c68", null ],
-      [ "value_type", "classregex__iterator.html#a008141f536edbdd9cdb6483d231e909f", null ],
-      [ "regex_iterator", "classregex__iterator.html#a56d42abfdfd967f92f214c3c25592dc1", null ],
-      [ "regex_iterator", "classregex__iterator.html#a97363562cbf275b0a41bf156f6404f1f", null ],
-      [ "operator!=", "classregex__iterator.html#acf449d1f41d3b9fab4eccb70bd47c17e", null ],
-      [ "operator*", "classregex__iterator.html#a9b9417e67facdfa4a234cdea1287bc15", null ],
-      [ "operator++", "classregex__iterator.html#aed5b19b5be776eb0ac8087be4bd8bad4", null ],
-      [ "operator++", "classregex__iterator.html#a0de0979dd96aa54ef5e5a6269980245f", null ],
-      [ "operator->", "classregex__iterator.html#a6dc0a0e472195aa352514f392a75cf1d", null ],
-      [ "operator==", "classregex__iterator.html#a545dbc9a39afa9d2110fd8f9b46fd3c7", null ]
+    [ "neforce::regex_iterator", "classneforce_1_1regex__iterator.html", [
+      [ "difference_type", "classneforce_1_1regex__iterator.html#a2307a9ef91bf755080f6ee660b009195", null ],
+      [ "iterator_category", "classneforce_1_1regex__iterator.html#a0db10bb1c3238edd7f99daa15d6d7737", null ],
+      [ "pointer", "classneforce_1_1regex__iterator.html#a22f9846d33a0bc0664fdf8b6cc030440", null ],
+      [ "reference", "classneforce_1_1regex__iterator.html#a3dcf2dbbbb91697cbef54beca0e090c3", null ],
+      [ "value_type", "classneforce_1_1regex__iterator.html#a33d238895abf909486aed159cdc83c7e", null ],
+      [ "regex_iterator", "classneforce_1_1regex__iterator.html#a70b230aae39f40e07a504b5abe0626af", null ],
+      [ "regex_iterator", "classneforce_1_1regex__iterator.html#a0df01093b9e3dfd4a8b263c9b965d5ef", null ],
+      [ "operator!=", "classneforce_1_1regex__iterator.html#ae63524c4f7a33aa828b5dd6ff592f035", null ],
+      [ "operator*", "classneforce_1_1regex__iterator.html#afd682e8c1aee85e3c06a884eab310d33", null ],
+      [ "operator++", "classneforce_1_1regex__iterator.html#adea33a531ce8dd9f3d84787b346580d2", null ],
+      [ "operator++", "classneforce_1_1regex__iterator.html#a5269de7130a5ac98ff8d99e9446a622e", null ],
+      [ "operator->", "classneforce_1_1regex__iterator.html#a3b7d47160725285e30c0f037d58a3ec2", null ],
+      [ "operator==", "classneforce_1_1regex__iterator.html#a9764ccff54b268f78f31f37ad7fb89c5", null ]
     ] ],
-    [ "regex_token_iterator", "classregex__token__iterator.html", [
-      [ "state", "classregex__token__iterator.html#ad31d581d18f38941421775bcf8eb8ff6", [
-        [ "BEFORE_FIRST", "classregex__token__iterator.html#ad31d581d18f38941421775bcf8eb8ff6ad0b923fb885b36f92a78c19ca4cc41a0", null ],
-        [ "BETWEEN_MATCHES", "classregex__token__iterator.html#ad31d581d18f38941421775bcf8eb8ff6afad0588b7b5d0fe4e6b7fefc26731e69", null ],
-        [ "AFTER_LAST", "classregex__token__iterator.html#ad31d581d18f38941421775bcf8eb8ff6affc01f81637cc9c854cd5a002e31e400", null ],
-        [ "END", "classregex__token__iterator.html#ad31d581d18f38941421775bcf8eb8ff6ab1a326c06d88bf042f73d70f50197905", null ]
+    [ "neforce::regex_token_iterator", "classneforce_1_1regex__token__iterator.html", [
+      [ "state", "classneforce_1_1regex__token__iterator.html#a025a101874ca0fd6a344c2b61630cf98", [
+        [ "BEFORE_FIRST", "classneforce_1_1regex__token__iterator.html#a025a101874ca0fd6a344c2b61630cf98ad0b923fb885b36f92a78c19ca4cc41a0", null ],
+        [ "BETWEEN_MATCHES", "classneforce_1_1regex__token__iterator.html#a025a101874ca0fd6a344c2b61630cf98afad0588b7b5d0fe4e6b7fefc26731e69", null ],
+        [ "AFTER_LAST", "classneforce_1_1regex__token__iterator.html#a025a101874ca0fd6a344c2b61630cf98affc01f81637cc9c854cd5a002e31e400", null ],
+        [ "END", "classneforce_1_1regex__token__iterator.html#a025a101874ca0fd6a344c2b61630cf98ab1a326c06d88bf042f73d70f50197905", null ]
       ] ],
-      [ "regex_token_iterator", "classregex__token__iterator.html#ae554bca42259aaad8fa8f273b3312198", null ],
-      [ "regex_token_iterator", "classregex__token__iterator.html#a4f8db9feb800354529f9597f01dd4a7e", null ],
-      [ "operator!=", "classregex__token__iterator.html#a06fec330e95a71821ed4a17e890c0eac", null ],
-      [ "operator*", "classregex__token__iterator.html#abea9f6c470f849836a828a7e2421188f", null ],
-      [ "operator++", "classregex__token__iterator.html#a6a5fec20ca17992fbde8263bc9f913db", null ],
-      [ "operator++", "classregex__token__iterator.html#a3dc0675644637602c33ed0fb022c6ec4", null ],
-      [ "operator==", "classregex__token__iterator.html#a1ce7318c81e87261960bdcec8216c94f", null ]
+      [ "regex_token_iterator", "classneforce_1_1regex__token__iterator.html#aaffb6360f7099c061fa246b0dbd74c9e", null ],
+      [ "regex_token_iterator", "classneforce_1_1regex__token__iterator.html#a5768edd9cc4d990af9237f2aabe0fc90", null ],
+      [ "operator!=", "classneforce_1_1regex__token__iterator.html#ac75b8ec44e337f29ab91248b13e79923", null ],
+      [ "operator*", "classneforce_1_1regex__token__iterator.html#a51f6e12e40566d47a5d21742d79a0d7e", null ],
+      [ "operator++", "classneforce_1_1regex__token__iterator.html#ad6b03f43dc67c7da62f54ffabd746f37", null ],
+      [ "operator++", "classneforce_1_1regex__token__iterator.html#aef8595664783edc24d16c2a8cb1b6770", null ],
+      [ "operator==", "classneforce_1_1regex__token__iterator.html#a3a61ede99eb685f5de655dfce6795693", null ]
     ] ]
 ];

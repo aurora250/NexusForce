@@ -1,0 +1,546 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1http_1_1load__balancer" kind="class" language="C++" prot="public">
+    <compoundname>neforce::http::load_balancer</compoundname>
+    <includes refid="load__balancer_8hpp" local="no">load_balancer.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1http_1_1load__balancer_1a8625d9a67a18618f73ff716514758b99" prot="public" static="no">
+        <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; bool(const <ref refid="structneforce_1_1http_1_1lb__backend" kindref="compound">lb_backend</ref> &amp;)&gt;</type>
+        <definition>using neforce::http::load_balancer::health_check_cb = function&lt;bool(const lb_backend&amp;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>health_check_cb</name>
+        <qualifiedname>neforce::http::load_balancer::health_check_cb</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="80" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1load__balancer_1ae2a994a311276abecb07e4aa965e6503" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1http_1_1lb__backend" kindref="compound">lb_backend</ref> &gt;</type>
+        <definition>vector&lt;lb_backend&gt; neforce::http::load_balancer::backends_</definition>
+        <argsstring></argsstring>
+        <name>backends_</name>
+        <qualifiedname>neforce::http::load_balancer::backends_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="83" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1load__balancer_1af1182727d12431d1dfa0726990d59afa" prot="private" static="no" mutable="no">
+        <type><ref refid="group___h_t_t_p_1gaf6b6bb3dae52d6afe10be25d22c4c5ab" kindref="member">lb_strategy</ref></type>
+        <definition>lb_strategy neforce::http::load_balancer::strategy_</definition>
+        <argsstring></argsstring>
+        <name>strategy_</name>
+        <qualifiedname>neforce::http::load_balancer::strategy_</qualifiedname>
+        <initializer>{<ref refid="group___h_t_t_p_1ggaf6b6bb3dae52d6afe10be25d22c4c5aba1ebd8dbf8c34e255f5cbf28f35860b71" kindref="member">lb_strategy::ROUND_ROBIN</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="84" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="84" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1load__balancer_1a4423aab59eaed3366d7437a2c8334914" prot="private" static="no" mutable="yes">
+        <type><ref refid="classneforce_1_1mutex" kindref="compound">mutex</ref></type>
+        <definition>mutex neforce::http::load_balancer::mutex_</definition>
+        <argsstring></argsstring>
+        <name>mutex_</name>
+        <qualifiedname>neforce::http::load_balancer::mutex_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="85" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1load__balancer_1a266af0ef0e3bfcee422054bfb5eb3ce7" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref> &gt;</type>
+        <definition>atomic&lt;size_t&gt; neforce::http::load_balancer::rr_counter_</definition>
+        <argsstring></argsstring>
+        <name>rr_counter_</name>
+        <qualifiedname>neforce::http::load_balancer::rr_counter_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="86" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="86" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1load__balancer_1acae7e733e0425429587121a9f197ed39" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::http::load_balancer::max_failures_</definition>
+        <argsstring></argsstring>
+        <name>max_failures_</name>
+        <qualifiedname>neforce::http::load_balancer::max_failures_</qualifiedname>
+        <initializer>{3}</initializer>
+        <briefdescription>
+<para>连续失败次数阈值（标记不健康） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="88" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="88" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1load__balancer_1a9257bd941335df07d789fa3ab65bcb38" prot="private" static="no" mutable="no">
+        <type><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref></type>
+        <definition>milliseconds neforce::http::load_balancer::health_check_interval_</definition>
+        <argsstring></argsstring>
+        <name>health_check_interval_</name>
+        <qualifiedname>neforce::http::load_balancer::health_check_interval_</qualifiedname>
+        <initializer>{10000}</initializer>
+        <briefdescription>
+<para>健康检查间隔 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="89" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="89" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1load__balancer_1ae0e840f0de41342c94859293099fcec3" prot="private" static="no" mutable="no">
+        <type><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref></type>
+        <definition>milliseconds neforce::http::load_balancer::health_check_timeout_</definition>
+        <argsstring></argsstring>
+        <name>health_check_timeout_</name>
+        <qualifiedname>neforce::http::load_balancer::health_check_timeout_</qualifiedname>
+        <initializer>{3000}</initializer>
+        <briefdescription>
+<para>健康检查超时 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="90" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="90" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1load__balancer_1a05904cf3c53aa4a56235e2828809e363" prot="private" static="no" mutable="no">
+        <type>health_check_cb</type>
+        <definition>health_check_cb neforce::http::load_balancer::health_checker_</definition>
+        <argsstring></argsstring>
+        <name>health_checker_</name>
+        <qualifiedname>neforce::http::load_balancer::health_checker_</qualifiedname>
+        <briefdescription>
+<para>自定义健康检查 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="92" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1load__balancer_1a23a1dd9e05fa05989db39e401d078600" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::load_balancer::load_balancer</definition>
+        <argsstring>()=default</argsstring>
+        <name>load_balancer</name>
+        <qualifiedname>neforce::http::load_balancer::load_balancer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="95" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1load__balancer_1a65c9dcb82b987c66a47b78f7d189f9cd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::load_balancer::add_backend</definition>
+        <argsstring>(lb_backend backend)</argsstring>
+        <name>add_backend</name>
+        <qualifiedname>neforce::http::load_balancer::add_backend</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1http_1_1lb__backend" kindref="compound">lb_backend</ref></type>
+          <declname>backend</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="97" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="97" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1load__balancer_1af2020c273d71278baee061d43c7631cb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::load_balancer::remove_backend</definition>
+        <argsstring>(const string &amp;host, ports port)</argsstring>
+        <name>remove_backend</name>
+        <qualifiedname>neforce::http::load_balancer::remove_backend</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1ports" kindref="compound">ports</ref></type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="102" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="102" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1load__balancer_1abffbb6ed302f1c6f40f5766b34b1efd3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::load_balancer::set_strategy</definition>
+        <argsstring>(lb_strategy s)</argsstring>
+        <name>set_strategy</name>
+        <qualifiedname>neforce::http::load_balancer::set_strategy</qualifiedname>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gaf6b6bb3dae52d6afe10be25d22c4c5ab" kindref="member">lb_strategy</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="112" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="112" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1load__balancer_1a76914e991a1a6f3affe97fd3cc0729fd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::load_balancer::set_health_check</definition>
+        <argsstring>(health_check_cb cb)</argsstring>
+        <name>set_health_check</name>
+        <qualifiedname>neforce::http::load_balancer::set_health_check</qualifiedname>
+        <param>
+          <type>health_check_cb</type>
+          <declname>cb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="117" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="117" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1load__balancer_1a087f8555b19d08fb53a45247e3027633" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::load_balancer::set_max_failures</definition>
+        <argsstring>(size_t max)</argsstring>
+        <name>set_max_failures</name>
+        <qualifiedname>neforce::http::load_balancer::set_max_failures</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+<para>设置容忍的最大连续失败次数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="123" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="123" bodyend="123"/>
+        <references refid="group___compare_algorithms_1gacc7ec6cd2134fb437b992f481b7e5057" compoundref="algorithm_2compare_8hpp" startline="133" endline="135">neforce::max</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1load__balancer_1ac5f614d6766998d237351059cd1825ce" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::load_balancer::set_health_check_interval</definition>
+        <argsstring>(milliseconds ms)</argsstring>
+        <name>set_health_check_interval</name>
+        <qualifiedname>neforce::http::load_balancer::set_health_check_interval</qualifiedname>
+        <param>
+          <type><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref></type>
+          <declname>ms</declname>
+        </param>
+        <briefdescription>
+<para>设置健康检查间隔 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="125" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="125" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1load__balancer_1a1947c0f76e6a767c2ecac70d4c0648b9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::load_balancer::set_health_check_timeout</definition>
+        <argsstring>(milliseconds ms)</argsstring>
+        <name>set_health_check_timeout</name>
+        <qualifiedname>neforce::http::load_balancer::set_health_check_timeout</qualifiedname>
+        <param>
+          <type><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref></type>
+          <declname>ms</declname>
+        </param>
+        <briefdescription>
+<para>设置健康检查超时 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="127" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="127" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1load__balancer_1a982be71c581a329630e03a89990ee940" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1http_1_1lb__backend" kindref="compound">lb_backend</ref> *</type>
+        <definition>lb_backend * neforce::http::load_balancer::select_backend</definition>
+        <argsstring>()</argsstring>
+        <name>select_backend</name>
+        <qualifiedname>neforce::http::load_balancer::select_backend</qualifiedname>
+        <briefdescription>
+<para>选择后端节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>选中的后端，无可选用节点返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="133" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1load__balancer_1a1766afd72980ba656956d86b41120c6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::load_balancer::mark_failure</definition>
+        <argsstring>(lb_backend *backend)</argsstring>
+        <name>mark_failure</name>
+        <qualifiedname>neforce::http::load_balancer::mark_failure</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1http_1_1lb__backend" kindref="compound">lb_backend</ref> *</type>
+          <declname>backend</declname>
+        </param>
+        <briefdescription>
+<para>标记后端请求失败 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="144" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1load__balancer_1aaa19c987dbef23ade884fc77a87474d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::load_balancer::run_health_checks</definition>
+        <argsstring>()</argsstring>
+        <name>run_health_checks</name>
+        <qualifiedname>neforce::http::load_balancer::run_health_checks</qualifiedname>
+        <briefdescription>
+<para>运行健康检查（将所有标记为不健康但已恢复的节点恢复） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="149" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1load__balancer_1a42092ffeb25235b191de3aa846006765" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt;</type>
+        <definition>vector&lt; string &gt; neforce::http::load_balancer::backend_hosts</definition>
+        <argsstring>() const</argsstring>
+        <name>backend_hosts</name>
+        <qualifiedname>neforce::http::load_balancer::backend_hosts</qualifiedname>
+        <briefdescription>
+<para>获取后端主机列表快照 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="154" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="154" bodyend="161"/>
+        <references refid="classneforce_1_1vector_1aaaf6ef9757003f129c44904ff01cf261" compoundref="vector_8hpp" startline="887" endline="887">neforce::vector&lt; T, Alloc &gt;::push_back</references>
+        <references refid="group___u_t_f_converts_1gab37042647bf269d5f84844a00bc70fc4" compoundref="icharacter_8hpp" startline="115" endline="117">neforce::to_string</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1load__balancer_1a95d405d6c04dc611609c2bc4ccb605f1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::http::load_balancer::backend_count</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>backend_count</name>
+        <qualifiedname>neforce::http::load_balancer::backend_count</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="163" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="163" bodyend="163"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1load__balancer_1af3339a205eba21783225a61c5e1dddf7" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___h_t_t_p_1gaf6b6bb3dae52d6afe10be25d22c4c5ab" kindref="member">lb_strategy</ref></type>
+        <definition>lb_strategy neforce::http::load_balancer::strategy</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>strategy</name>
+        <qualifiedname>neforce::http::load_balancer::strategy</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="164" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="164" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1load__balancer_1a49ba581471c121430c2f4f36e97d55e6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::http::load_balancer::healthy_count</definition>
+        <argsstring>() const</argsstring>
+        <name>healthy_count</name>
+        <qualifiedname>neforce::http::load_balancer::healthy_count</qualifiedname>
+        <briefdescription>
+<para>获取健康节点数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="169" column="12"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1load__balancer_1a128dbf648a9179c1ba098d60e92f777f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void neforce::http::load_balancer::release_backend</definition>
+        <argsstring>(lb_backend *backend)</argsstring>
+        <name>release_backend</name>
+        <qualifiedname>neforce::http::load_balancer::release_backend</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1http_1_1lb__backend" kindref="compound">lb_backend</ref> *</type>
+          <declname>backend</declname>
+        </param>
+        <briefdescription>
+<para>释放后端节点（请求完成） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>backend</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>select_backend返回的节点指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="139" column="17"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1load__balancer_1a9a6a2995966e6330d905c64d7fe55249" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1http_1_1lb__backend" kindref="compound">lb_backend</ref> *</type>
+        <definition>lb_backend * neforce::http::load_balancer::select_round_robin</definition>
+        <argsstring>()</argsstring>
+        <name>select_round_robin</name>
+        <qualifiedname>neforce::http::load_balancer::select_round_robin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="172" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1load__balancer_1a0f5c91f3689c2c1c88f656d820d3ac7d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1http_1_1lb__backend" kindref="compound">lb_backend</ref> *</type>
+        <definition>lb_backend * neforce::http::load_balancer::select_least_connections</definition>
+        <argsstring>()</argsstring>
+        <name>select_least_connections</name>
+        <qualifiedname>neforce::http::load_balancer::select_least_connections</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="173" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1load__balancer_1aa133fb266c4b975de00428966faffd12" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1http_1_1lb__backend" kindref="compound">lb_backend</ref> *</type>
+        <definition>lb_backend * neforce::http::load_balancer::select_weighted</definition>
+        <argsstring>()</argsstring>
+        <name>select_weighted</name>
+        <qualifiedname>neforce::http::load_balancer::select_weighted</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="174" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1load__balancer_1a9fea2d72165164e1526d77bd57369e9f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1http_1_1lb__backend" kindref="compound">lb_backend</ref> *</type>
+        <definition>lb_backend * neforce::http::load_balancer::select_random</definition>
+        <argsstring>()</argsstring>
+        <name>select_random</name>
+        <qualifiedname>neforce::http::load_balancer::select_random</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="175" column="16"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>HTTP负载均衡管理器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>管理多个后端节点，按策略分发请求。 支持主动健康检查和故障转移。</para>
+<para>使用示例： <programlisting><codeline><highlight class="normal">load_balancer<sp/>lb;</highlight></codeline>
+<codeline><highlight class="normal">lb.add_backend({</highlight><highlight class="stringliteral">&quot;web1&quot;</highlight><highlight class="normal">,<sp/>ports(8080)});</highlight></codeline>
+<codeline><highlight class="normal">lb.add_backend({</highlight><highlight class="stringliteral">&quot;web2&quot;</highlight><highlight class="normal">,<sp/>ports(8080)});</highlight></codeline>
+<codeline><highlight class="normal">lb.set_strategy(<ref refid="group___h_t_t_p_1ggaf6b6bb3dae52d6afe10be25d22c4c5aba9b5adc9c167d99cbc016b883cf6a8600" kindref="member">lb_strategy::LEAST_CONNECTIONS</ref>);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>backend<sp/>=<sp/>lb.select_backend();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(backend)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>转发请求到<sp/>backend</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>lb.release_backend(backend);<sp/><sp/></highlight><highlight class="comment">//<sp/>请求完成后调用</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting> </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="78" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="78" bodyend="176"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1http_1_1load__balancer_1a65c9dcb82b987c66a47b78f7d189f9cd" prot="public" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>add_backend</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1a95d405d6c04dc611609c2bc4ccb605f1" prot="public" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>backend_count</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1a42092ffeb25235b191de3aa846006765" prot="public" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>backend_hosts</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1ae2a994a311276abecb07e4aa965e6503" prot="private" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>backends_</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1a8625d9a67a18618f73ff716514758b99" prot="public" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>health_check_cb</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1a9257bd941335df07d789fa3ab65bcb38" prot="private" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>health_check_interval_</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1ae0e840f0de41342c94859293099fcec3" prot="private" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>health_check_timeout_</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1a05904cf3c53aa4a56235e2828809e363" prot="private" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>health_checker_</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1a49ba581471c121430c2f4f36e97d55e6" prot="public" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>healthy_count</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1a23a1dd9e05fa05989db39e401d078600" prot="public" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>load_balancer</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1a1766afd72980ba656956d86b41120c6f" prot="public" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>mark_failure</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1acae7e733e0425429587121a9f197ed39" prot="private" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>max_failures_</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1a4423aab59eaed3366d7437a2c8334914" prot="private" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>mutex_</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1a128dbf648a9179c1ba098d60e92f777f" prot="public" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>release_backend</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1af2020c273d71278baee061d43c7631cb" prot="public" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>remove_backend</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1a266af0ef0e3bfcee422054bfb5eb3ce7" prot="private" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>rr_counter_</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1aaa19c987dbef23ade884fc77a87474d6" prot="public" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>run_health_checks</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1a982be71c581a329630e03a89990ee940" prot="public" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>select_backend</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1a0f5c91f3689c2c1c88f656d820d3ac7d" prot="private" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>select_least_connections</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1a9fea2d72165164e1526d77bd57369e9f" prot="private" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>select_random</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1a9a6a2995966e6330d905c64d7fe55249" prot="private" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>select_round_robin</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1aa133fb266c4b975de00428966faffd12" prot="private" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>select_weighted</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1a76914e991a1a6f3affe97fd3cc0729fd" prot="public" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>set_health_check</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1ac5f614d6766998d237351059cd1825ce" prot="public" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>set_health_check_interval</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1a1947c0f76e6a767c2ecac70d4c0648b9" prot="public" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>set_health_check_timeout</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1a087f8555b19d08fb53a45247e3027633" prot="public" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>set_max_failures</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1abffbb6ed302f1c6f40f5766b34b1efd3" prot="public" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>set_strategy</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1af3339a205eba21783225a61c5e1dddf7" prot="public" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>strategy</name></member>
+      <member refid="classneforce_1_1http_1_1load__balancer_1af1182727d12431d1dfa0726990d59afa" prot="private" virt="non-virtual"><scope>neforce::http::load_balancer</scope><name>strategy_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

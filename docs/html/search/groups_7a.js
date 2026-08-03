@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['配置格式操作_0',['配置格式操作',['../group___config_format.html',1,'']]]
+  ['选择运算仿函数_0',['选择运算仿函数',['../group___selection_functors.html',1,'']]]
 ];

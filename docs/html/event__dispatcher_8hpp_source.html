@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: event_dispatcher.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('event__dispatcher_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">event_dispatcher.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="event__dispatcher_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_TUI_EVENT_DISPATCHER_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_TUI_EVENT_DISPATCHER_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="functional_2function_8hpp.html">NeForce/core/functional/function.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="events_8hpp.html">NeForce/tui/events.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="focus__manager_8hpp.html">NeForce/tui/focus_manager.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="renderer_8hpp.html">NeForce/tui/renderer.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>NEFORCE_BEGIN_NAMESPACE__</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>NEFORCE_BEGIN_TUI__</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span></div>
+<div class="foldopen" id="foldopen00031" data-start="{" data-end="};">
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classneforce_1_1tui_1_1event__dispatcher.html">   31</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_function" href="classneforce_1_1tui_1_1event__dispatcher.html#a2b8aafd7c4708b28a8999a4d69c21e63">event_dispatcher</a> {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classneforce_1_1tui_1_1event__dispatcher.html#a2b8aafd7c4708b28a8999a4d69c21e63">   37</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classneforce_1_1tui_1_1event__dispatcher.html#a2b8aafd7c4708b28a8999a4d69c21e63">event_dispatcher</a>(<a class="code hl_class" href="classneforce_1_1tui_1_1focus__manager.html">focus_manager</a>&amp; fm);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classneforce_1_1tui_1_1event__dispatcher.html#afd4542d7d534c156d6e3bc3eb82a156a">   45</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classneforce_1_1tui_1_1event__dispatcher.html#afd4542d7d534c156d6e3bc3eb82a156a">dispatch_key</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structneforce_1_1tui_1_1key__event.html">key_event</a>&amp; e, <a class="code hl_class" href="classneforce_1_1tui_1_1component__base.html">component_base</a>* root);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classneforce_1_1tui_1_1event__dispatcher.html#a95186407b81e9d5b605a6ef5654b0763">   56</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classneforce_1_1tui_1_1event__dispatcher.html#a95186407b81e9d5b605a6ef5654b0763">dispatch_mouse</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structneforce_1_1tui_1_1mouse__event.html">mouse_event</a>&amp; e, <a class="code hl_class" href="classneforce_1_1tui_1_1component__base.html">component_base</a>* root, <span class="keyword">const</span> <a class="code hl_class" href="classneforce_1_1vector.html">vector&lt;layout_rect&gt;</a>&amp; layout,</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                        <span class="keyword">const</span> <a class="code hl_class" href="classneforce_1_1tui_1_1element.html">element</a>&amp; tree, <span class="keyword">const</span> <a class="code hl_class" href="classneforce_1_1vector.html">vector&lt;scrollbar_hit&gt;</a>&amp; hits);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="classneforce_1_1tui_1_1event__dispatcher.html#a0196ebdba5f78bb70099975db7ebb1fc">   64</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classneforce_1_1tui_1_1event__dispatcher.html#a0196ebdba5f78bb70099975db7ebb1fc">set_dirty_callback</a>(<a class="code hl_class" href="classneforce_1_1function.html">function</a>&lt;<span class="keywordtype">void</span>()&gt; cb) { mark_dirty_ = <a class="code hl_function" href="group___shift_algorithms.html#gae346eba5fb576da65e097b60463d3790">move</a>(cb); }</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keyword">struct </span>scroll_drag_state {</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <a class="code hl_class" href="classneforce_1_1tui_1_1state.html">state&lt;int&gt;</a>* scroll_state = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordtype">int</span> anchor_position = 0;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keywordtype">int</span> anchor_value = 0;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keywordtype">bool</span> vertical = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    };</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    focus_manager&amp; focus_mgr_;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    component_base* last_mouse_target_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    scroll_drag_state drag_state_storage_;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    scroll_drag_state* drag_state_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <a class="code hl_class" href="classneforce_1_1function.html">function</a>&lt;void()&gt; mark_dirty_;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>};</div>
+</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> <span class="comment">// TUI</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>NEFORCE_END_TUI__</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_TUI_EVENT_DISPATCHER_HPP__</span></div>
+<div class="ttc" id="aclassneforce_1_1function_html"><div class="ttname"><a href="classneforce_1_1function.html">neforce::function</a></div><div class="ttdoc">函数包装器主模板声明</div><div class="ttdef"><b>定义</b> <a href="functional_2function_8hpp_source.html#l00030">functional/function.hpp:30</a></div></div>
+<div class="ttc" id="aclassneforce_1_1tui_1_1component__base_html"><div class="ttname"><a href="classneforce_1_1tui_1_1component__base.html">neforce::tui::component_base</a></div><div class="ttdoc">组件基类</div><div class="ttdef"><b>定义</b> <a href="component_8hpp_source.html#l00036">component.hpp:36</a></div></div>
+<div class="ttc" id="aclassneforce_1_1tui_1_1element_html"><div class="ttname"><a href="classneforce_1_1tui_1_1element.html">neforce::tui::element</a></div><div class="ttdoc">虚拟UI元素</div><div class="ttdef"><b>定义</b> <a href="element_8hpp_source.html#l00037">element.hpp:37</a></div></div>
+<div class="ttc" id="aclassneforce_1_1tui_1_1event__dispatcher_html_a0196ebdba5f78bb70099975db7ebb1fc"><div class="ttname"><a href="classneforce_1_1tui_1_1event__dispatcher.html#a0196ebdba5f78bb70099975db7ebb1fc">neforce::tui::event_dispatcher::set_dirty_callback</a></div><div class="ttdeci">void set_dirty_callback(function&lt; void()&gt; cb)</div><div class="ttdoc">设置脏标记回调</div><div class="ttdef"><b>定义</b> <a href="#l00064">event_dispatcher.hpp:64</a></div></div>
+<div class="ttc" id="aclassneforce_1_1tui_1_1event__dispatcher_html_a2b8aafd7c4708b28a8999a4d69c21e63"><div class="ttname"><a href="classneforce_1_1tui_1_1event__dispatcher.html#a2b8aafd7c4708b28a8999a4d69c21e63">neforce::tui::event_dispatcher::event_dispatcher</a></div><div class="ttdeci">event_dispatcher(focus_manager &amp;fm)</div><div class="ttdoc">构造函数</div></div>
+<div class="ttc" id="aclassneforce_1_1tui_1_1event__dispatcher_html_a95186407b81e9d5b605a6ef5654b0763"><div class="ttname"><a href="classneforce_1_1tui_1_1event__dispatcher.html#a95186407b81e9d5b605a6ef5654b0763">neforce::tui::event_dispatcher::dispatch_mouse</a></div><div class="ttdeci">bool dispatch_mouse(const mouse_event &amp;e, component_base *root, const vector&lt; layout_rect &gt; &amp;layout, const element &amp;tree, const vector&lt; scrollbar_hit &gt; &amp;hits)</div><div class="ttdoc">分发鼠标事件</div></div>
+<div class="ttc" id="aclassneforce_1_1tui_1_1event__dispatcher_html_afd4542d7d534c156d6e3bc3eb82a156a"><div class="ttname"><a href="classneforce_1_1tui_1_1event__dispatcher.html#afd4542d7d534c156d6e3bc3eb82a156a">neforce::tui::event_dispatcher::dispatch_key</a></div><div class="ttdeci">bool dispatch_key(const key_event &amp;e, component_base *root)</div><div class="ttdoc">分发键盘事件</div></div>
+<div class="ttc" id="aclassneforce_1_1tui_1_1focus__manager_html"><div class="ttname"><a href="classneforce_1_1tui_1_1focus__manager.html">neforce::tui::focus_manager</a></div><div class="ttdoc">焦点管理器</div><div class="ttdef"><b>定义</b> <a href="focus__manager_8hpp_source.html#l00026">focus_manager.hpp:26</a></div></div>
+<div class="ttc" id="aclassneforce_1_1tui_1_1state_html"><div class="ttname"><a href="classneforce_1_1tui_1_1state.html">neforce::tui::state</a></div><div class="ttdoc">响应式状态变量</div><div class="ttdef"><b>定义</b> <a href="state_8hpp_source.html#l00036">state.hpp:36</a></div></div>
+<div class="ttc" id="aclassneforce_1_1vector_html"><div class="ttname"><a href="classneforce_1_1vector.html">neforce::vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00167">vector.hpp:167</a></div></div>
+<div class="ttc" id="aevents_8hpp_html"><div class="ttname"><a href="events_8hpp.html">events.hpp</a></div><div class="ttdoc">TUI输入事件类型定义</div></div>
+<div class="ttc" id="afocus__manager_8hpp_html"><div class="ttname"><a href="focus__manager_8hpp.html">focus_manager.hpp</a></div><div class="ttdoc">焦点管理器</div></div>
+<div class="ttc" id="afunctional_2function_8hpp_html"><div class="ttname"><a href="functional_2function_8hpp.html">function.hpp</a></div><div class="ttdoc">通用函数包装器</div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_gae346eba5fb576da65e097b60463d3790"><div class="ttname"><a href="group___shift_algorithms.html#gae346eba5fb576da65e097b60463d3790">neforce::move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00312">shift.hpp:312</a></div></div>
+<div class="ttc" id="arenderer_8hpp_html"><div class="ttname"><a href="renderer_8hpp.html">renderer.hpp</a></div><div class="ttdoc">元素树渲染器</div></div>
+<div class="ttc" id="astructneforce_1_1tui_1_1key__event_html"><div class="ttname"><a href="structneforce_1_1tui_1_1key__event.html">neforce::tui::key_event</a></div><div class="ttdoc">键盘事件</div><div class="ttdef"><b>定义</b> <a href="events_8hpp_source.html#l00047">events.hpp:47</a></div></div>
+<div class="ttc" id="astructneforce_1_1tui_1_1mouse__event_html"><div class="ttname"><a href="structneforce_1_1tui_1_1mouse__event.html">neforce::tui::mouse_event</a></div><div class="ttdoc">鼠标事件</div><div class="ttdef"><b>定义</b> <a href="events_8hpp_source.html#l00134">events.hpp:134</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>tui</b></li><li class="navelem"><a href="event__dispatcher_8hpp.html">event_dispatcher.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,775 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1ini__builder" kind="class" language="C++" prot="public">
+    <compoundname>neforce::ini_builder</compoundname>
+    <includes refid="ini__builder_8hpp" local="no">ini_builder.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1ini__builder_1af0f988984f3598ec4409e7591b7d2dcb" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1ini__document" kindref="compound">ini_document</ref> &gt;</type>
+        <definition>unique_ptr&lt;ini_document&gt; neforce::ini_builder::root_</definition>
+        <argsstring></argsstring>
+        <name>root_</name>
+        <qualifiedname>neforce::ini_builder::root_</qualifiedname>
+        <briefdescription>
+<para>正在构建的文档对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" line="40" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ini__builder_1a00c48ff10696390e4d4b2d428e36c97f" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1ini__section" kindref="compound">ini_section</ref> *</type>
+        <definition>ini_section* neforce::ini_builder::current_section_</definition>
+        <argsstring></argsstring>
+        <name>current_section_</name>
+        <qualifiedname>neforce::ini_builder::current_section_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>当前正在操作的节 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" line="41" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ini__builder_1ab705ab627d7fe4f6138843c8da8862b8" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::ini_builder::current_key_</definition>
+        <argsstring></argsstring>
+        <name>current_key_</name>
+        <qualifiedname>neforce::ini_builder::current_key_</qualifiedname>
+        <briefdescription>
+<para>当前正在设置的键名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" line="42" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1ini__builder_1a6faae7586d656bee7ef43b61956e0993" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::ini_builder::test_exception</definition>
+        <argsstring>() const</argsstring>
+        <name>test_exception</name>
+        <qualifiedname>neforce::ini_builder::test_exception</qualifiedname>
+        <briefdescription>
+<para>测试当前上下文是否有效 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1ini__exception" kindref="compound">ini_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当没有有效的节或键名时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+检查是否存在有效的节和键名设置。 如果上下文无效则抛出异常。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" line="51" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::ini_builder::ini_builder</definition>
+        <argsstring>()</argsstring>
+        <name>ini_builder</name>
+        <qualifiedname>neforce::ini_builder::ini_builder</qualifiedname>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>创建一个新的构建器实例，初始化空文档， 并将当前节设置为全局节。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" line="60" column="5"/>
+        <references refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e">ini_builder</references>
+        <referencedby refid="classneforce_1_1ini__builder_1ae502f406a5f4eb9067a13a1c6c0aaeeb">begin_section</referencedby>
+        <referencedby refid="classneforce_1_1ini__builder_1ab55275a012eb726e691e560c5b84b1c2">end_section</referencedby>
+        <referencedby refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e">ini_builder</referencedby>
+        <referencedby refid="classneforce_1_1ini__builder_1a235d07c9dbf13bf0a91750859ace1c0c">ini_builder</referencedby>
+        <referencedby refid="classneforce_1_1ini__builder_1abd9acddb83f68f65424a1bdeeb458d94">key</referencedby>
+        <referencedby refid="classneforce_1_1ini__builder_1ad3ea4509dc1d6572da5872a8e8591d76">operator=</referencedby>
+        <referencedby refid="classneforce_1_1ini__builder_1a366614b6315a7217ebe8faba81aeea83">value</referencedby>
+        <referencedby refid="classneforce_1_1ini__builder_1a1be5c13d5b9ddd3273f401b8731ae933" compoundref="ini__builder_8hpp" startline="120" endline="120">value</referencedby>
+        <referencedby refid="classneforce_1_1ini__builder_1ad7e609f82eb27d41e4bc448ca0fcefa6" compoundref="ini__builder_8hpp" startline="128" endline="128">value</referencedby>
+        <referencedby refid="classneforce_1_1ini__builder_1a90b4955dbce5ae73216ee928e9de86e9">value</referencedby>
+        <referencedby refid="classneforce_1_1ini__builder_1afddb876789046448291bcb26a76a37a8">value</referencedby>
+        <referencedby refid="classneforce_1_1ini__builder_1aabee63c7dc66a14a4818e6f69cb41456">value</referencedby>
+        <referencedby refid="classneforce_1_1ini__builder_1a2b811b2b77c74057fdfd1c65d0ceb36f">value</referencedby>
+        <referencedby refid="classneforce_1_1ini__builder_1a91d9e23e97672b7bbf2e01e8b378c249">value</referencedby>
+        <referencedby refid="classneforce_1_1ini__builder_1a6720fe41c155c32a394656a03f5ae271">value_section</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__builder_1a65e5f76a1d8f1ed1fcb639556b31a53c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::ini_builder::ini_builder</definition>
+        <argsstring>(const ini_builder &amp;)=delete</argsstring>
+        <name>ini_builder</name>
+        <qualifiedname>neforce::ini_builder::ini_builder</qualifiedname>
+        <param>
+          <type>const ini_builder &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" line="62" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__builder_1a79202b961e1256e20f07ef989c01ebdf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref> &amp;</type>
+        <definition>ini_builder &amp; neforce::ini_builder::operator=</definition>
+        <argsstring>(const ini_builder &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::ini_builder::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" line="63" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__builder_1a235d07c9dbf13bf0a91750859ace1c0c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::ini_builder::ini_builder</definition>
+        <argsstring>(ini_builder &amp;&amp;other)=default</argsstring>
+        <name>ini_builder</name>
+        <qualifiedname>neforce::ini_builder::ini_builder</qualifiedname>
+        <param>
+          <type>ini_builder &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源构建器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" line="69" column="5"/>
+        <references refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e">ini_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__builder_1ad3ea4509dc1d6572da5872a8e8591d76" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref> &amp;</type>
+        <definition>ini_builder &amp; neforce::ini_builder::operator=</definition>
+        <argsstring>(ini_builder &amp;&amp;other)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::ini_builder::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源构建器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" line="76" column="17"/>
+        <references refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e">ini_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__builder_1ae502f406a5f4eb9067a13a1c6c0aaeeb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref> &amp;</type>
+        <definition>ini_builder &amp; neforce::ini_builder::begin_section</definition>
+        <argsstring>(const string &amp;name)</argsstring>
+        <name>begin_section</name>
+        <qualifiedname>neforce::ini_builder::begin_section</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>开始一个新节 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用</para>
+</simplesect>
+创建指定名称的新节，并将其设置为当前节。 后续的键值对操作将添加到此节中。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" line="86" column="17"/>
+        <references refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e">ini_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__builder_1ab55275a012eb726e691e560c5b84b1c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref> &amp;</type>
+        <definition>ini_builder &amp; neforce::ini_builder::end_section</definition>
+        <argsstring>()</argsstring>
+        <name>end_section</name>
+        <qualifiedname>neforce::ini_builder::end_section</qualifiedname>
+        <briefdescription>
+<para>结束当前节 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用，支持链式调用</para>
+</simplesect>
+将当前节切换回全局节。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" line="94" column="17"/>
+        <references refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e">ini_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__builder_1abd9acddb83f68f65424a1bdeeb458d94" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref> &amp;</type>
+        <definition>ini_builder &amp; neforce::ini_builder::key</definition>
+        <argsstring>(const string &amp;key)</argsstring>
+        <name>key</name>
+        <qualifiedname>neforce::ini_builder::key</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>设置当前键名 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>属性键名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1ini__exception" kindref="compound">ini_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当没有有效的节上下文时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+设置当前要操作的键名，后续的 value 调用将使用此键名。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" line="104" column="17"/>
+        <references refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e">ini_builder</references>
+        <references refid="classneforce_1_1ini__builder_1abd9acddb83f68f65424a1bdeeb458d94">key</references>
+        <referencedby refid="classneforce_1_1ini__builder_1abd9acddb83f68f65424a1bdeeb458d94">key</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__builder_1a91d9e23e97672b7bbf2e01e8b378c249" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref> &amp;</type>
+        <definition>ini_builder &amp; neforce::ini_builder::value</definition>
+        <argsstring>(string value)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::ini_builder::value</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置当前键的值（字符串版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>属性值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1ini__exception" kindref="compound">ini_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当没有有效的节或键名时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" line="112" column="17"/>
+        <references refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e">ini_builder</references>
+        <references refid="classneforce_1_1ini__builder_1a91d9e23e97672b7bbf2e01e8b378c249">value</references>
+        <referencedby refid="classneforce_1_1ini__builder_1a366614b6315a7217ebe8faba81aeea83">value</referencedby>
+        <referencedby refid="classneforce_1_1ini__builder_1a1be5c13d5b9ddd3273f401b8731ae933" compoundref="ini__builder_8hpp" startline="120" endline="120">value</referencedby>
+        <referencedby refid="classneforce_1_1ini__builder_1ad7e609f82eb27d41e4bc448ca0fcefa6" compoundref="ini__builder_8hpp" startline="128" endline="128">value</referencedby>
+        <referencedby refid="classneforce_1_1ini__builder_1a90b4955dbce5ae73216ee928e9de86e9">value</referencedby>
+        <referencedby refid="classneforce_1_1ini__builder_1afddb876789046448291bcb26a76a37a8">value</referencedby>
+        <referencedby refid="classneforce_1_1ini__builder_1aabee63c7dc66a14a4818e6f69cb41456">value</referencedby>
+        <referencedby refid="classneforce_1_1ini__builder_1a2b811b2b77c74057fdfd1c65d0ceb36f">value</referencedby>
+        <referencedby refid="classneforce_1_1ini__builder_1a91d9e23e97672b7bbf2e01e8b378c249">value</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__builder_1a1be5c13d5b9ddd3273f401b8731ae933" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref> &amp;</type>
+        <definition>ini_builder &amp; neforce::ini_builder::value</definition>
+        <argsstring>(const char *value)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::ini_builder::value</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置当前键的值（C字符串版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>属性值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1ini__exception" kindref="compound">ini_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当没有有效的节或键名时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" line="120" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" bodystart="120" bodyend="120"/>
+        <references refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e">ini_builder</references>
+        <references refid="classneforce_1_1ini__builder_1a1be5c13d5b9ddd3273f401b8731ae933" compoundref="ini__builder_8hpp" startline="120" endline="120">value</references>
+        <references refid="classneforce_1_1ini__builder_1a91d9e23e97672b7bbf2e01e8b378c249">value</references>
+        <referencedby refid="classneforce_1_1ini__builder_1a1be5c13d5b9ddd3273f401b8731ae933" compoundref="ini__builder_8hpp" startline="120" endline="120">value</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__builder_1ad7e609f82eb27d41e4bc448ca0fcefa6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref> &amp;</type>
+        <definition>ini_builder &amp; neforce::ini_builder::value</definition>
+        <argsstring>(const string_view value)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::ini_builder::value</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置当前键的值（字符串视图版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>属性值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1ini__exception" kindref="compound">ini_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当没有有效的节或键名时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" line="128" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" bodystart="128" bodyend="128"/>
+        <references refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e">ini_builder</references>
+        <references refid="classneforce_1_1ini__builder_1ad7e609f82eb27d41e4bc448ca0fcefa6" compoundref="ini__builder_8hpp" startline="128" endline="128">value</references>
+        <references refid="classneforce_1_1ini__builder_1a91d9e23e97672b7bbf2e01e8b378c249">value</references>
+        <referencedby refid="classneforce_1_1ini__builder_1ad7e609f82eb27d41e4bc448ca0fcefa6" compoundref="ini__builder_8hpp" startline="128" endline="128">value</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__builder_1aabee63c7dc66a14a4818e6f69cb41456" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref> &amp;</type>
+        <definition>ini_builder &amp; neforce::ini_builder::value</definition>
+        <argsstring>(int value)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::ini_builder::value</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置当前键的值（整数版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1ini__exception" kindref="compound">ini_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当没有有效的节或键名时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" line="136" column="17"/>
+        <references refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e">ini_builder</references>
+        <references refid="classneforce_1_1ini__builder_1a91d9e23e97672b7bbf2e01e8b378c249">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__builder_1a2b811b2b77c74057fdfd1c65d0ceb36f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref> &amp;</type>
+        <definition>ini_builder &amp; neforce::ini_builder::value</definition>
+        <argsstring>(int64_t value)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::ini_builder::value</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga0b098d32ebd9cc922390914e765ca674" kindref="member">int64_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置当前键的值（64位整数版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>64位整数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1ini__exception" kindref="compound">ini_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当没有有效的节或键名时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" line="144" column="17"/>
+        <references refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e">ini_builder</references>
+        <references refid="classneforce_1_1ini__builder_1a91d9e23e97672b7bbf2e01e8b378c249">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__builder_1a90b4955dbce5ae73216ee928e9de86e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref> &amp;</type>
+        <definition>ini_builder &amp; neforce::ini_builder::value</definition>
+        <argsstring>(double value)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::ini_builder::value</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置当前键的值（浮点数版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>浮点数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1ini__exception" kindref="compound">ini_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当没有有效的节或键名时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" line="152" column="17"/>
+        <references refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e">ini_builder</references>
+        <references refid="classneforce_1_1ini__builder_1a91d9e23e97672b7bbf2e01e8b378c249">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__builder_1a366614b6315a7217ebe8faba81aeea83" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref> &amp;</type>
+        <definition>ini_builder &amp; neforce::ini_builder::value</definition>
+        <argsstring>(bool value)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::ini_builder::value</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置当前键的值（布尔值版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>布尔值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1ini__exception" kindref="compound">ini_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当没有有效的节或键名时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" line="160" column="17"/>
+        <references refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e">ini_builder</references>
+        <references refid="classneforce_1_1ini__builder_1a91d9e23e97672b7bbf2e01e8b378c249">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__builder_1afddb876789046448291bcb26a76a37a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref> &amp;</type>
+        <definition>ini_builder &amp; neforce::ini_builder::value</definition>
+        <argsstring>(double value, int precision)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::ini_builder::value</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>precision</declname>
+        </param>
+        <briefdescription>
+<para>设置当前键的值（浮点数版本，指定精度） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>浮点数值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>precision</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>小数精度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1ini__exception" kindref="compound">ini_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当没有有效的节或键名时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" line="169" column="17"/>
+        <references refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e">ini_builder</references>
+        <references refid="classneforce_1_1ini__builder_1a91d9e23e97672b7bbf2e01e8b378c249">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__builder_1a6720fe41c155c32a394656a03f5ae271" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref> &amp;</type>
+        <definition>ini_builder &amp; neforce::ini_builder::value_section</definition>
+        <argsstring>(const string &amp;name, function&lt; void(ini_builder &amp;)&gt; func)</argsstring>
+        <name>value_section</name>
+        <qualifiedname>neforce::ini_builder::value_section</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" kindref="member">ini_builder</ref> &amp;)&gt;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+<para>使用函数式方式定义值节 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>配置函数，接收ini_builder引用作为参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1ini__exception" kindref="compound">ini_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当节创建或配置过程中出错时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+在一个独立的函数作用域内定义节的内容， 函数执行完毕后自动返回当前节。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" line="181" column="17"/>
+        <references refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e">ini_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ini__builder_1a8eafc547dcc54b1c0bd9b0266ea19fd9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1ini__document" kindref="compound">ini_document</ref> &gt;</type>
+        <definition>unique_ptr&lt; ini_document &gt; neforce::ini_builder::build</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>build</name>
+        <qualifiedname>neforce::ini_builder::build</qualifiedname>
+        <briefdescription>
+<para>构建文档 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>构建完成的文档对象</para>
+</simplesect>
+完成构建过程，返回构建好的INI文档。 调用后构建器状态被移动，不应继续使用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" line="190" column="16"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>INI配置格式构建器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供流式接口构建INI配置格式，支持以下特性：<itemizedlist>
+<listitem><para>链式调用设置节和键值对</para>
+</listitem><listitem><para>支持多种数据类型自动转换</para>
+</listitem><listitem><para>支持嵌套节的函数式定义</para>
+</listitem><listitem><para>浮点数精度控制</para>
+</listitem><listitem><para>自动维护当前节上下文 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" line="38" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/ini/ini_builder.hpp" bodystart="38" bodyend="191"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1ini__builder_1ae502f406a5f4eb9067a13a1c6c0aaeeb" prot="public" virt="non-virtual"><scope>neforce::ini_builder</scope><name>begin_section</name></member>
+      <member refid="classneforce_1_1ini__builder_1a8eafc547dcc54b1c0bd9b0266ea19fd9" prot="public" virt="non-virtual"><scope>neforce::ini_builder</scope><name>build</name></member>
+      <member refid="classneforce_1_1ini__builder_1ab705ab627d7fe4f6138843c8da8862b8" prot="private" virt="non-virtual"><scope>neforce::ini_builder</scope><name>current_key_</name></member>
+      <member refid="classneforce_1_1ini__builder_1a00c48ff10696390e4d4b2d428e36c97f" prot="private" virt="non-virtual"><scope>neforce::ini_builder</scope><name>current_section_</name></member>
+      <member refid="classneforce_1_1ini__builder_1ab55275a012eb726e691e560c5b84b1c2" prot="public" virt="non-virtual"><scope>neforce::ini_builder</scope><name>end_section</name></member>
+      <member refid="classneforce_1_1ini__builder_1a7db8f0ef8e7b5759245ecd478fde1c9e" prot="public" virt="non-virtual"><scope>neforce::ini_builder</scope><name>ini_builder</name></member>
+      <member refid="classneforce_1_1ini__builder_1a65e5f76a1d8f1ed1fcb639556b31a53c" prot="public" virt="non-virtual"><scope>neforce::ini_builder</scope><name>ini_builder</name></member>
+      <member refid="classneforce_1_1ini__builder_1a235d07c9dbf13bf0a91750859ace1c0c" prot="public" virt="non-virtual"><scope>neforce::ini_builder</scope><name>ini_builder</name></member>
+      <member refid="classneforce_1_1ini__builder_1abd9acddb83f68f65424a1bdeeb458d94" prot="public" virt="non-virtual"><scope>neforce::ini_builder</scope><name>key</name></member>
+      <member refid="classneforce_1_1ini__builder_1a79202b961e1256e20f07ef989c01ebdf" prot="public" virt="non-virtual"><scope>neforce::ini_builder</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1ini__builder_1ad3ea4509dc1d6572da5872a8e8591d76" prot="public" virt="non-virtual"><scope>neforce::ini_builder</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1ini__builder_1af0f988984f3598ec4409e7591b7d2dcb" prot="private" virt="non-virtual"><scope>neforce::ini_builder</scope><name>root_</name></member>
+      <member refid="classneforce_1_1ini__builder_1a6faae7586d656bee7ef43b61956e0993" prot="private" virt="non-virtual"><scope>neforce::ini_builder</scope><name>test_exception</name></member>
+      <member refid="classneforce_1_1ini__builder_1a91d9e23e97672b7bbf2e01e8b378c249" prot="public" virt="non-virtual"><scope>neforce::ini_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1ini__builder_1a1be5c13d5b9ddd3273f401b8731ae933" prot="public" virt="non-virtual"><scope>neforce::ini_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1ini__builder_1ad7e609f82eb27d41e4bc448ca0fcefa6" prot="public" virt="non-virtual"><scope>neforce::ini_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1ini__builder_1aabee63c7dc66a14a4818e6f69cb41456" prot="public" virt="non-virtual"><scope>neforce::ini_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1ini__builder_1a2b811b2b77c74057fdfd1c65d0ceb36f" prot="public" virt="non-virtual"><scope>neforce::ini_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1ini__builder_1a90b4955dbce5ae73216ee928e9de86e9" prot="public" virt="non-virtual"><scope>neforce::ini_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1ini__builder_1a366614b6315a7217ebe8faba81aeea83" prot="public" virt="non-virtual"><scope>neforce::ini_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1ini__builder_1afddb876789046448291bcb26a76a37a8" prot="public" virt="non-virtual"><scope>neforce::ini_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1ini__builder_1a6720fe41c155c32a394656a03f5ae271" prot="public" virt="non-virtual"><scope>neforce::ini_builder</scope><name>value_section</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

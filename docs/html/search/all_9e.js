@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['相邻元素算法_0',['相邻元素算法',['../group___adjacent_algorithms.html',1,'']]]
+  ['独占智能指针_0',['独占智能指针',['../group___unique_pointer.html',1,'']]]
 ];

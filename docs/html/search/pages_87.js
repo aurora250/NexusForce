@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['预定义颜色常量_0',['预定义颜色常量',['../group___color.html#named_colors',1,'']]]
+  ['邮件格式说明_0',['邮件格式说明',['../group___s_m_t_p.html#email_format',1,'']]]
 ];

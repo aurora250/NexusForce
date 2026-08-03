@@ -83,8 +83,8 @@
         </childnode>
       </node>
       <node id="16">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="11" relation="include">
         </childnode>
       </node>
@@ -98,6 +98,8 @@
         <label>NeForce/core/functional/function.hpp</label>
         <link refid="functional_2function_8hpp"/>
         <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>
@@ -265,6 +267,8 @@
         </childnode>
         <childnode refid="47" relation="include">
         </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
         <childnode refid="48" relation="include">
         </childnode>
       </node>
@@ -275,10 +279,20 @@
         </childnode>
         <childnode refid="33" relation="include">
         </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
       </node>
-      <node id="48">
+      <node id="49">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>NeForce/core/string/charset.hpp</label>
+        <link refid="charset_8hpp"/>
+        <childnode refid="49" relation="include">
+        </childnode>
         <childnode refid="9" relation="include">
         </childnode>
       </node>
@@ -410,338 +424,9 @@
         </childnode>
       </node>
     </invincdepgraph>
-    <innerclass refid="classmeta__function" prot="public">meta_function</innerclass>
-    <sectiondef kind="func">
-      <memberdef kind="function" id="reflect_2function_8hpp_1a449f393fc16a63548805bb148adfde20" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename Ret</type>
-          </param>
-          <param>
-            <type>typename Class</type>
-          </param>
-          <param>
-            <type>typename...</type>
-            <declname>Args</declname>
-            <defname>Args</defname>
-          </param>
-          <param>
-            <type>size_t...</type>
-            <declname>Is</declname>
-            <defname>Is</defname>
-          </param>
-        </templateparamlist>
-        <type>NEFORCE_END_REFLECT__ NEFORCE_BEGIN_INNER__ Ret</type>
-        <definition>NEFORCE_END_REFLECT__ NEFORCE_BEGIN_INNER__ Ret invoke_impl</definition>
-        <argsstring>(Class *obj, Ret(Class::*func)(Args...), const vector&lt; reflect::meta_any &gt; &amp;args, index_sequence&lt; Is... &gt;)</argsstring>
-        <name>invoke_impl</name>
-        <param>
-          <type>Class *</type>
-          <declname>obj</declname>
-        </param>
-        <param>
-          <type>Ret(Class::*)(Args...)</type>
-          <declname>func</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; reflect::meta_any &gt; &amp;</type>
-          <declname>args</declname>
-        </param>
-        <param>
-          <type><ref refid="group___integer_sequence_1ga26720e99f9258f846d2e957f81425b71" kindref="member">index_sequence</ref>&lt; Is... &gt;</type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/function.hpp" line="109" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/function.hpp" bodystart="109" bodyend="112"/>
-      </memberdef>
-      <memberdef kind="function" id="reflect_2function_8hpp_1acecb40baa30fa8ca3d9c658688758a71" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename Ret</type>
-          </param>
-          <param>
-            <type>typename Class</type>
-          </param>
-          <param>
-            <type>typename...</type>
-            <declname>Args</declname>
-            <defname>Args</defname>
-          </param>
-          <param>
-            <type>size_t...</type>
-            <declname>Is</declname>
-            <defname>Is</defname>
-          </param>
-        </templateparamlist>
-        <type>Ret</type>
-        <definition>Ret invoke_impl</definition>
-        <argsstring>(const Class *obj, Ret(Class::*func)(Args...) const, const vector&lt; reflect::meta_any &gt; &amp;args, index_sequence&lt; Is... &gt;)</argsstring>
-        <name>invoke_impl</name>
-        <param>
-          <type>const Class *</type>
-          <declname>obj</declname>
-        </param>
-        <param>
-          <type>Ret(Class::*)(Args...) const</type>
-          <declname>func</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; reflect::meta_any &gt; &amp;</type>
-          <declname>args</declname>
-        </param>
-        <param>
-          <type><ref refid="group___integer_sequence_1ga26720e99f9258f846d2e957f81425b71" kindref="member">index_sequence</ref>&lt; Is... &gt;</type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/function.hpp" line="115" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/function.hpp" bodystart="115" bodyend="118"/>
-      </memberdef>
-      <memberdef kind="function" id="reflect_2function_8hpp_1a38388fa9b5f1be0b11d1cc7558e18927" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename Ret</type>
-          </param>
-          <param>
-            <type>typename...</type>
-            <declname>Args</declname>
-            <defname>Args</defname>
-          </param>
-          <param>
-            <type>size_t...</type>
-            <declname>Is</declname>
-            <defname>Is</defname>
-          </param>
-        </templateparamlist>
-        <type>Ret</type>
-        <definition>Ret invoke_impl</definition>
-        <argsstring>(Ret(*func)(Args...), const vector&lt; reflect::meta_any &gt; &amp;args, index_sequence&lt; Is... &gt;)</argsstring>
-        <name>invoke_impl</name>
-        <param>
-          <type>Ret(*)(Args...)</type>
-          <declname>func</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; reflect::meta_any &gt; &amp;</type>
-          <declname>args</declname>
-        </param>
-        <param>
-          <type><ref refid="group___integer_sequence_1ga26720e99f9258f846d2e957f81425b71" kindref="member">index_sequence</ref>&lt; Is... &gt;</type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/function.hpp" line="121" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/function.hpp" bodystart="121" bodyend="123"/>
-      </memberdef>
-      <memberdef kind="function" id="reflect_2function_8hpp_1a5509e4e7651c4bb092de930aa45aa021" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename Ret</type>
-          </param>
-          <param>
-            <type>typename Class</type>
-          </param>
-          <param>
-            <type>typename...</type>
-            <declname>Args</declname>
-            <defname>Args</defname>
-          </param>
-          <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga4414ccc8655262f0522dc640003d64b7" kindref="member">is_void_v</ref>&lt; Ret &gt;, int &gt;</type>
-            <defval>0</defval>
-          </param>
-        </templateparamlist>
-        <type>decltype(auto)</type>
-        <definition>decltype(auto) make_member_invoker</definition>
-        <argsstring>(Ret(Class::*func)(Args...))</argsstring>
-        <name>make_member_invoker</name>
-        <param>
-          <type>Ret(Class::*)(Args...)</type>
-          <declname>func</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/function.hpp" line="126" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/function.hpp" bodystart="126" bodyend="134"/>
-      </memberdef>
-      <memberdef kind="function" id="reflect_2function_8hpp_1a5509e4e7651c4bb092de930aa45aa021" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename Ret</type>
-          </param>
-          <param>
-            <type>typename Class</type>
-          </param>
-          <param>
-            <type>typename...</type>
-            <declname>Args</declname>
-            <defname>Args</defname>
-          </param>
-          <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___base_type_properties_1ga4414ccc8655262f0522dc640003d64b7" kindref="member">is_void_v</ref>&lt; Ret &gt;, int &gt;</type>
-            <defval>0</defval>
-          </param>
-        </templateparamlist>
-        <type>decltype(auto)</type>
-        <definition>decltype(auto) make_member_invoker</definition>
-        <argsstring>(Ret(Class::*func)(Args...))</argsstring>
-        <name>make_member_invoker</name>
-        <param>
-          <type>Ret(Class::*)(Args...)</type>
-          <declname>func</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/function.hpp" line="137" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/function.hpp" bodystart="137" bodyend="145"/>
-      </memberdef>
-      <memberdef kind="function" id="reflect_2function_8hpp_1ac4d8c640fe1ab34fdc22624ecc7e71c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename Ret</type>
-          </param>
-          <param>
-            <type>typename Class</type>
-          </param>
-          <param>
-            <type>typename...</type>
-            <declname>Args</declname>
-            <defname>Args</defname>
-          </param>
-          <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga4414ccc8655262f0522dc640003d64b7" kindref="member">is_void_v</ref>&lt; Ret &gt;, int &gt;</type>
-            <defval>0</defval>
-          </param>
-        </templateparamlist>
-        <type>decltype(auto)</type>
-        <definition>decltype(auto) make_const_member_invoker</definition>
-        <argsstring>(Ret(Class::*func)(Args...) const)</argsstring>
-        <name>make_const_member_invoker</name>
-        <param>
-          <type>Ret(Class::*)(Args...) const</type>
-          <declname>func</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/function.hpp" line="148" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/function.hpp" bodystart="148" bodyend="156"/>
-      </memberdef>
-      <memberdef kind="function" id="reflect_2function_8hpp_1ac4d8c640fe1ab34fdc22624ecc7e71c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename Ret</type>
-          </param>
-          <param>
-            <type>typename Class</type>
-          </param>
-          <param>
-            <type>typename...</type>
-            <declname>Args</declname>
-            <defname>Args</defname>
-          </param>
-          <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___base_type_properties_1ga4414ccc8655262f0522dc640003d64b7" kindref="member">is_void_v</ref>&lt; Ret &gt;, int &gt;</type>
-            <defval>0</defval>
-          </param>
-        </templateparamlist>
-        <type>decltype(auto)</type>
-        <definition>decltype(auto) make_const_member_invoker</definition>
-        <argsstring>(Ret(Class::*func)(Args...) const)</argsstring>
-        <name>make_const_member_invoker</name>
-        <param>
-          <type>Ret(Class::*)(Args...) const</type>
-          <declname>func</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/function.hpp" line="159" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/function.hpp" bodystart="159" bodyend="168"/>
-      </memberdef>
-      <memberdef kind="function" id="reflect_2function_8hpp_1a11ba2b734fc869c2a766ffd92452be91" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename Ret</type>
-          </param>
-          <param>
-            <type>typename...</type>
-            <declname>Args</declname>
-            <defname>Args</defname>
-          </param>
-          <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga4414ccc8655262f0522dc640003d64b7" kindref="member">is_void_v</ref>&lt; Ret &gt;, int &gt;</type>
-            <defval>0</defval>
-          </param>
-        </templateparamlist>
-        <type>decltype(auto)</type>
-        <definition>decltype(auto) make_static_invoker</definition>
-        <argsstring>(Ret(*func)(Args...))</argsstring>
-        <name>make_static_invoker</name>
-        <param>
-          <type>Ret(*)(Args...)</type>
-          <declname>func</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/function.hpp" line="171" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/function.hpp" bodystart="171" bodyend="179"/>
-      </memberdef>
-      <memberdef kind="function" id="reflect_2function_8hpp_1a11ba2b734fc869c2a766ffd92452be91" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename Ret</type>
-          </param>
-          <param>
-            <type>typename...</type>
-            <declname>Args</declname>
-            <defname>Args</defname>
-          </param>
-          <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___base_type_properties_1ga4414ccc8655262f0522dc640003d64b7" kindref="member">is_void_v</ref>&lt; Ret &gt;, int &gt;</type>
-            <defval>0</defval>
-          </param>
-        </templateparamlist>
-        <type>decltype(auto)</type>
-        <definition>decltype(auto) make_static_invoker</definition>
-        <argsstring>(Ret(*func)(Args...))</argsstring>
-        <name>make_static_invoker</name>
-        <param>
-          <type>Ret(*)(Args...)</type>
-          <declname>func</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/function.hpp" line="182" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/function.hpp" bodystart="182" bodyend="190"/>
-      </memberdef>
-    </sectiondef>
+    <innerclass refid="classneforce_1_1reflect_1_1meta__function" prot="public">neforce::reflect::meta_function</innerclass>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
+    <innernamespace refid="namespaceneforce_1_1reflect">neforce::reflect</innernamespace>
     <briefdescription>
 <para>函数反射元数据 </para>
     </briefdescription>
@@ -760,43 +445,43 @@
 <codeline lineno="15"><highlight class="normal">NEFORCE_BEGIN_REFLECT__</highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight></codeline>
-<codeline lineno="29" refid="classmeta__function" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classmeta__function_1a4817663ff1c14bf96768c7ede3eba82e" kindref="member">meta_function</ref><sp/>{</highlight></codeline>
+<codeline lineno="29" refid="classneforce_1_1reflect_1_1meta__function" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classneforce_1_1reflect_1_1meta__function_1aae28af9567bb0305cf21a5bcf2955add" kindref="member">meta_function</ref><sp/>{</highlight></codeline>
 <codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="31" refid="classmeta__function_1a9e532e44381a51d000732d3074cf6c20" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classmeta__function_1a9e532e44381a51d000732d3074cf6c20" kindref="member">invoker</ref><sp/>=<sp/><ref refid="classfunction" kindref="compound">function</ref>&lt;<ref refid="classmeta__any" kindref="compound">meta_any</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;meta_any&gt;</ref>&amp;)&gt;;<sp/></highlight></codeline>
+<codeline lineno="31" refid="classneforce_1_1reflect_1_1meta__function_1a36831f0716df3f0778db3d20d6d87868" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classneforce_1_1reflect_1_1meta__function_1a36831f0716df3f0778db3d20d6d87868" kindref="member">invoker</ref><sp/>=<sp/><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt;<ref refid="classneforce_1_1reflect_1_1meta__any" kindref="compound">meta_any</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1vector" kindref="compound">vector&lt;meta_any&gt;</ref>&amp;)&gt;;<sp/></highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>name_;<sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmeta__function_1a9e532e44381a51d000732d3074cf6c20" kindref="member">invoker</ref><sp/>invoker_;<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/>name_;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1reflect_1_1meta__function_1a36831f0716df3f0778db3d20d6d87868" kindref="member">invoker</ref><sp/>invoker_;<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>min_args_<sp/>=<sp/>0;<sp/></highlight></codeline>
 <codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>max_args_<sp/>=<sp/>0;<sp/></highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="45" refid="classmeta__function_1a4817663ff1c14bf96768c7ede3eba82e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmeta__function_1a4817663ff1c14bf96768c7ede3eba82e" kindref="member">meta_function</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="classmeta__function_1a389adfed1f7b0725f75a721aacbbdc97" kindref="member">name</ref>,<sp/><ref refid="classmeta__function_1a9e532e44381a51d000732d3074cf6c20" kindref="member">invoker</ref><sp/><ref refid="classmeta__function_1a9e532e44381a51d000732d3074cf6c20" kindref="member">invoker</ref>)<sp/>:</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>name_(<ref refid="classmeta__function_1a389adfed1f7b0725f75a721aacbbdc97" kindref="member">name</ref>),</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>invoker_(<ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(<ref refid="classmeta__function_1a9e532e44381a51d000732d3074cf6c20" kindref="member">invoker</ref>))<sp/>{}</highlight></codeline>
+<codeline lineno="45" refid="classneforce_1_1reflect_1_1meta__function_1aae28af9567bb0305cf21a5bcf2955add" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1reflect_1_1meta__function_1aae28af9567bb0305cf21a5bcf2955add" kindref="member">meta_function</ref>(<ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/><ref refid="classneforce_1_1reflect_1_1meta__function_1a04f3eead312ba4814e9351cfff8276e0" kindref="member">name</ref>,<sp/><ref refid="classneforce_1_1reflect_1_1meta__function_1a36831f0716df3f0778db3d20d6d87868" kindref="member">invoker</ref><sp/><ref refid="classneforce_1_1reflect_1_1meta__function_1a36831f0716df3f0778db3d20d6d87868" kindref="member">invoker</ref>)<sp/>:</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>name_(<ref refid="classneforce_1_1reflect_1_1meta__function_1a04f3eead312ba4814e9351cfff8276e0" kindref="member">name</ref>),</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>invoker_(<ref refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" kindref="member">move</ref>(<ref refid="classneforce_1_1reflect_1_1meta__function_1a36831f0716df3f0778db3d20d6d87868" kindref="member">invoker</ref>))<sp/>{}</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"></highlight></codeline>
-<codeline lineno="53" refid="classmeta__function_1a389adfed1f7b0725f75a721aacbbdc97" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="classmeta__function_1a389adfed1f7b0725f75a721aacbbdc97" kindref="member">name</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>name_;<sp/>}</highlight></codeline>
+<codeline lineno="53" refid="classneforce_1_1reflect_1_1meta__function_1a04f3eead312ba4814e9351cfff8276e0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref><sp/><ref refid="classneforce_1_1reflect_1_1meta__function_1a04f3eead312ba4814e9351cfff8276e0" kindref="member">name</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>name_;<sp/>}</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"></highlight></codeline>
-<codeline lineno="61" refid="classmeta__function_1a3e8ab2f65758f418b86198b3fd8d4c88" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmeta__any" kindref="compound">meta_any</ref><sp/><ref refid="classmeta__function_1a3e8ab2f65758f418b86198b3fd8d4c88" kindref="member">invoke</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>obj,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;meta_any&gt;</ref>&amp;<sp/>args)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="61" refid="classneforce_1_1reflect_1_1meta__function_1a79aa6c1c688141693988b71d3527e46d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1reflect_1_1meta__any" kindref="compound">meta_any</ref><sp/><ref refid="classneforce_1_1reflect_1_1meta__function_1a79aa6c1c688141693988b71d3527e46d" kindref="member">invoke</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>obj,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1vector" kindref="compound">vector&lt;meta_any&gt;</ref>&amp;<sp/>args)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!invoker_)<sp/>{</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classmeta__any" kindref="compound">meta_any</ref>{};</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1reflect_1_1meta__any" kindref="compound">meta_any</ref>{};</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>invoker_(obj,<sp/>args);</highlight></codeline>
 <codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(...)<sp/>{</highlight></codeline>
-<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classmeta__any" kindref="compound">meta_any</ref>{};</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1reflect_1_1meta__any" kindref="compound">meta_any</ref>{};</highlight></codeline>
 <codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="71"><highlight class="normal"></highlight></codeline>
-<codeline lineno="77" refid="classmeta__function_1a488eb83961cd7c0fe14d150a9e22dd34" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmeta__any" kindref="compound">meta_any</ref><sp/><ref refid="classmeta__function_1a488eb83961cd7c0fe14d150a9e22dd34" kindref="member">invoke</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>obj)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classmeta__function_1a488eb83961cd7c0fe14d150a9e22dd34" kindref="member">invoke</ref>(obj,<sp/>{});<sp/>}</highlight></codeline>
+<codeline lineno="77" refid="classneforce_1_1reflect_1_1meta__function_1a9b51253ddbe1326118195c0ef435f0de" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classneforce_1_1reflect_1_1meta__any" kindref="compound">meta_any</ref><sp/><ref refid="classneforce_1_1reflect_1_1meta__function_1a9b51253ddbe1326118195c0ef435f0de" kindref="member">invoke</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>obj)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1reflect_1_1meta__function_1a9b51253ddbe1326118195c0ef435f0de" kindref="member">invoke</ref>(obj,<sp/>{});<sp/>}</highlight></codeline>
 <codeline lineno="78"><highlight class="normal"></highlight></codeline>
-<codeline lineno="83" refid="classmeta__function_1aa72cc36763edc9ab20e33b26aeade89a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="classmeta__function_1aa72cc36763edc9ab20e33b26aeade89a" kindref="member">min_args</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>min_args_;<sp/>}</highlight></codeline>
+<codeline lineno="83" refid="classneforce_1_1reflect_1_1meta__function_1a1bcdb1bf823df5d46895bba12b00afc3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1reflect_1_1meta__function_1a1bcdb1bf823df5d46895bba12b00afc3" kindref="member">min_args</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>min_args_;<sp/>}</highlight></codeline>
 <codeline lineno="84"><highlight class="normal"></highlight></codeline>
-<codeline lineno="89" refid="classmeta__function_1a720622202501f723a5864d692094fa99" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="classmeta__function_1a720622202501f723a5864d692094fa99" kindref="member">max_args</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>max_args_;<sp/>}</highlight></codeline>
+<codeline lineno="89" refid="classneforce_1_1reflect_1_1meta__function_1a86f4e5cbb99a6f3997e364480593b8eb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1reflect_1_1meta__function_1a86f4e5cbb99a6f3997e364480593b8eb" kindref="member">max_args</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>max_args_;<sp/>}</highlight></codeline>
 <codeline lineno="90"><highlight class="normal"></highlight></codeline>
-<codeline lineno="96" refid="classmeta__function_1a61a34394d3453c0e97ff29e87e261d7b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmeta__function_1a61a34394d3453c0e97ff29e87e261d7b" kindref="member">set_arg_hints</ref>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group___compare_algorithms_1gabf4803a4eaf181e17a6893b2aea9a4c5" kindref="member">min</ref>,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group___compare_algorithms_1ga01c48c11cc5d3222cb2e3adf0f843f3e" kindref="member">max</ref>)<sp/>{</highlight></codeline>
-<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>min_args_<sp/>=<sp/><ref refid="group___compare_algorithms_1gabf4803a4eaf181e17a6893b2aea9a4c5" kindref="member">min</ref>;</highlight></codeline>
-<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>max_args_<sp/>=<sp/><ref refid="group___compare_algorithms_1ga01c48c11cc5d3222cb2e3adf0f843f3e" kindref="member">max</ref>;</highlight></codeline>
+<codeline lineno="96" refid="classneforce_1_1reflect_1_1meta__function_1ac88f8a46d81f790f36e5923b4f4833d1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1reflect_1_1meta__function_1ac88f8a46d81f790f36e5923b4f4833d1" kindref="member">set_arg_hints</ref>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group___compare_algorithms_1ga7bddcf59f3f004edc5551486bdbf5595" kindref="member">min</ref>,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group___compare_algorithms_1gacc7ec6cd2134fb437b992f481b7e5057" kindref="member">max</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>min_args_<sp/>=<sp/><ref refid="group___compare_algorithms_1ga7bddcf59f3f004edc5551486bdbf5595" kindref="member">min</ref>;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>max_args_<sp/>=<sp/><ref refid="group___compare_algorithms_1gacc7ec6cd2134fb437b992f481b7e5057" kindref="member">max</ref>;</highlight></codeline>
 <codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="100"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="101"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Reflection</highlight><highlight class="normal"></highlight></codeline>
@@ -806,85 +491,85 @@
 <codeline lineno="106"><highlight class="normal">NEFORCE_BEGIN_INNER__</highlight></codeline>
 <codeline lineno="107"><highlight class="normal"></highlight></codeline>
 <codeline lineno="108"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Ret,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Class,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">...<sp/>Is&gt;</highlight></codeline>
-<codeline lineno="109"><highlight class="normal">Ret<sp/>invoke_impl(Class*<sp/>obj,<sp/>Ret<sp/>(Class::*func)(Args...),<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;reflect::meta_any&gt;</ref>&amp;<sp/>args,</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___integer_sequence_1ga26720e99f9258f846d2e957f81425b71" kindref="member">index_sequence&lt;Is...&gt;</ref><sp/></highlight><highlight class="comment">/*unused*/</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="109"><highlight class="normal">Ret<sp/>invoke_impl(Class*<sp/>obj,<sp/>Ret<sp/>(Class::*func)(Args...),<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1vector" kindref="compound">vector&lt;reflect::meta_any&gt;</ref>&amp;<sp/>args,</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___integer_sequence_1ga05100867bd68ca47f2098124ceb69311" kindref="member">index_sequence&lt;Is...&gt;</ref><sp/></highlight><highlight class="comment">/*unused*/</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
 <codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(obj-&gt;*func)(args[Is].template<sp/>convert&lt;Args&gt;()...);</highlight></codeline>
 <codeline lineno="112"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="113"><highlight class="normal"></highlight></codeline>
 <codeline lineno="114"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Ret,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Class,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">...<sp/>Is&gt;</highlight></codeline>
-<codeline lineno="115"><highlight class="normal">Ret<sp/>invoke_impl(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Class*<sp/>obj,<sp/>Ret<sp/>(Class::*func)(Args...)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;reflect::meta_any&gt;</ref>&amp;<sp/>args,</highlight></codeline>
-<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___integer_sequence_1ga26720e99f9258f846d2e957f81425b71" kindref="member">index_sequence&lt;Is...&gt;</ref><sp/></highlight><highlight class="comment">/*unused*/</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="115"><highlight class="normal">Ret<sp/>invoke_impl(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Class*<sp/>obj,<sp/>Ret<sp/>(Class::*func)(Args...)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector&lt;reflect::meta_any&gt;&amp;<sp/>args,</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>index_sequence&lt;Is...&gt;<sp/></highlight><highlight class="comment">/*unused*/</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
 <codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(obj-&gt;*func)(args[Is].template<sp/>convert&lt;Args&gt;()...);</highlight></codeline>
 <codeline lineno="118"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="119"><highlight class="normal"></highlight></codeline>
 <codeline lineno="120"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Ret,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">...<sp/>Is&gt;</highlight></codeline>
-<codeline lineno="121"><highlight class="normal">Ret<sp/>invoke_impl(Ret<sp/>(*func)(Args...),<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;reflect::meta_any&gt;</ref>&amp;<sp/>args,<sp/><ref refid="group___integer_sequence_1ga26720e99f9258f846d2e957f81425b71" kindref="member">index_sequence&lt;Is...&gt;</ref><sp/></highlight><highlight class="comment">/*unused*/</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="121"><highlight class="normal">Ret<sp/>invoke_impl(Ret<sp/>(*func)(Args...),<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector&lt;reflect::meta_any&gt;&amp;<sp/>args,<sp/>index_sequence&lt;Is...&gt;<sp/></highlight><highlight class="comment">/*unused*/</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
 <codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(*func)(args[Is].template<sp/>convert&lt;Args&gt;()...);</highlight></codeline>
 <codeline lineno="123"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="124"><highlight class="normal"></highlight></codeline>
-<codeline lineno="125"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Ret,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Class,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args,<sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t&lt;is_void_v&lt;Ret&gt;</ref>,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Ret,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Class,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args,<sp/>enable_if_t&lt;is_void_v&lt;Ret&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
 <codeline lineno="126"><highlight class="normal"></highlight><highlight class="keyword">decltype</highlight><highlight class="normal">(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">)<sp/>make_member_invoker(Ret<sp/>(Class::*func)(Args...))<sp/>{</highlight></codeline>
-<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>[func](</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>obj,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;reflect::meta_any&gt;</ref>&amp;<sp/>args)<sp/>-&gt;<sp/>reflect::meta_any<sp/>{</highlight></codeline>
-<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Args)<sp/>!=<sp/>args.<ref refid="classvector_1acb504d0053283e805da9c4fe5827b018" kindref="member">size</ref>())<sp/>{</highlight></codeline>
-<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_THROW_EXCEPTION(<ref refid="structvalue__exception" kindref="compound">value_exception</ref>(</highlight><highlight class="stringliteral">&quot;Argument<sp/>count<sp/>mismatch&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>[func](</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>obj,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector&lt;reflect::meta_any&gt;&amp;<sp/>args)<sp/>-&gt;<sp/>reflect::meta_any<sp/>{</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Args)<sp/>!=<sp/>args.size())<sp/>{</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_THROW_EXCEPTION(value_exception(</highlight><highlight class="stringliteral">&quot;Argument<sp/>count<sp/>mismatch&quot;</highlight><highlight class="normal">));</highlight></codeline>
 <codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inner::invoke_impl(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">Class*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(obj),<sp/>func,<sp/>args,<sp/><ref refid="group___integer_sequence_1gaed583aed5d1c7a45292dc4dbc51d6493" kindref="member">make_index_sequence</ref>&lt;</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Args)&gt;{});</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inner::invoke_impl(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">Class*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(obj),<sp/>func,<sp/>args,<sp/>make_index_sequence&lt;</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Args)&gt;{});</highlight></codeline>
 <codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>reflect::meta_any{};</highlight></codeline>
 <codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="134"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="135"><highlight class="normal"></highlight></codeline>
-<codeline lineno="136"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Ret,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Class,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args,<sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t&lt;!is_void_v&lt;Ret&gt;</ref>,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Ret,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Class,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args,<sp/>enable_if_t&lt;!is_void_v&lt;Ret&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
 <codeline lineno="137"><highlight class="normal"></highlight><highlight class="keyword">decltype</highlight><highlight class="normal">(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">)<sp/>make_member_invoker(Ret<sp/>(Class::*func)(Args...))<sp/>{</highlight></codeline>
-<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>[func](</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>obj,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;reflect::meta_any&gt;</ref>&amp;<sp/>args)<sp/>-&gt;<sp/>reflect::meta_any<sp/>{</highlight></codeline>
-<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Args)<sp/>!=<sp/>args.<ref refid="classvector_1acb504d0053283e805da9c4fe5827b018" kindref="member">size</ref>())<sp/>{</highlight></codeline>
-<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_THROW_EXCEPTION(<ref refid="structvalue__exception" kindref="compound">value_exception</ref>(</highlight><highlight class="stringliteral">&quot;Argument<sp/>count<sp/>mismatch&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>[func](</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>obj,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector&lt;reflect::meta_any&gt;&amp;<sp/>args)<sp/>-&gt;<sp/>reflect::meta_any<sp/>{</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Args)<sp/>!=<sp/>args.size())<sp/>{</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_THROW_EXCEPTION(value_exception(</highlight><highlight class="stringliteral">&quot;Argument<sp/>count<sp/>mismatch&quot;</highlight><highlight class="normal">));</highlight></codeline>
 <codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>inner::invoke_impl(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">Class*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(obj),<sp/>func,<sp/>args,<sp/><ref refid="group___integer_sequence_1gaed583aed5d1c7a45292dc4dbc51d6493" kindref="member">make_index_sequence</ref>&lt;</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Args)&gt;{});</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>inner::invoke_impl(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">Class*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(obj),<sp/>func,<sp/>args,<sp/>make_index_sequence&lt;</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Args)&gt;{});</highlight></codeline>
 <codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>reflect::meta_any(result);</highlight></codeline>
 <codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="145"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="146"><highlight class="normal"></highlight></codeline>
-<codeline lineno="147"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Ret,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Class,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args,<sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t&lt;is_void_v&lt;Ret&gt;</ref>,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Ret,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Class,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args,<sp/>enable_if_t&lt;is_void_v&lt;Ret&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
 <codeline lineno="148"><highlight class="normal"></highlight><highlight class="keyword">decltype</highlight><highlight class="normal">(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">)<sp/>make_const_member_invoker(Ret<sp/>(Class::*func)(Args...)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>[func](</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>obj,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;reflect::meta_any&gt;</ref>&amp;<sp/>args)<sp/>-&gt;<sp/>reflect::meta_any<sp/>{</highlight></codeline>
-<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Args)<sp/>!=<sp/>args.<ref refid="classvector_1acb504d0053283e805da9c4fe5827b018" kindref="member">size</ref>())<sp/>{</highlight></codeline>
-<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_THROW_EXCEPTION(<ref refid="structvalue__exception" kindref="compound">value_exception</ref>(</highlight><highlight class="stringliteral">&quot;Argument<sp/>count<sp/>mismatch&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>[func](</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>obj,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector&lt;reflect::meta_any&gt;&amp;<sp/>args)<sp/>-&gt;<sp/>reflect::meta_any<sp/>{</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Args)<sp/>!=<sp/>args.size())<sp/>{</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_THROW_EXCEPTION(value_exception(</highlight><highlight class="stringliteral">&quot;Argument<sp/>count<sp/>mismatch&quot;</highlight><highlight class="normal">));</highlight></codeline>
 <codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inner::invoke_impl(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="normal">Class*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(obj),<sp/>func,<sp/>args,<sp/><ref refid="group___integer_sequence_1gaed583aed5d1c7a45292dc4dbc51d6493" kindref="member">make_index_sequence</ref>&lt;</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Args)&gt;{});</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inner::invoke_impl(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="normal">Class*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(obj),<sp/>func,<sp/>args,<sp/>make_index_sequence&lt;</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Args)&gt;{});</highlight></codeline>
 <codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>reflect::meta_any{};</highlight></codeline>
 <codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="156"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="157"><highlight class="normal"></highlight></codeline>
-<codeline lineno="158"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Ret,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Class,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args,<sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t&lt;!is_void_v&lt;Ret&gt;</ref>,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Ret,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Class,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args,<sp/>enable_if_t&lt;!is_void_v&lt;Ret&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
 <codeline lineno="159"><highlight class="normal"></highlight><highlight class="keyword">decltype</highlight><highlight class="normal">(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">)<sp/>make_const_member_invoker(Ret<sp/>(Class::*func)(Args...)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>[func](</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>obj,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;reflect::meta_any&gt;</ref>&amp;<sp/>args)<sp/>-&gt;<sp/>reflect::meta_any<sp/>{</highlight></codeline>
-<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Args)<sp/>!=<sp/>args.<ref refid="classvector_1acb504d0053283e805da9c4fe5827b018" kindref="member">size</ref>())<sp/>{</highlight></codeline>
-<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_THROW_EXCEPTION(<ref refid="structvalue__exception" kindref="compound">value_exception</ref>(</highlight><highlight class="stringliteral">&quot;Argument<sp/>count<sp/>mismatch&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>[func](</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>obj,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector&lt;reflect::meta_any&gt;&amp;<sp/>args)<sp/>-&gt;<sp/>reflect::meta_any<sp/>{</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Args)<sp/>!=<sp/>args.size())<sp/>{</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_THROW_EXCEPTION(value_exception(</highlight><highlight class="stringliteral">&quot;Argument<sp/>count<sp/>mismatch&quot;</highlight><highlight class="normal">));</highlight></codeline>
 <codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>result<sp/>=</highlight></codeline>
-<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inner::invoke_impl(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="normal">Class*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(obj),<sp/>func,<sp/>args,<sp/><ref refid="group___integer_sequence_1gaed583aed5d1c7a45292dc4dbc51d6493" kindref="member">make_index_sequence</ref>&lt;</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Args)&gt;{});</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inner::invoke_impl(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="normal">Class*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(obj),<sp/>func,<sp/>args,<sp/>make_index_sequence&lt;</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Args)&gt;{});</highlight></codeline>
 <codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>reflect::meta_any(result);</highlight></codeline>
 <codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="168"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="169"><highlight class="normal"></highlight></codeline>
-<codeline lineno="170"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Ret,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args,<sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t&lt;is_void_v&lt;Ret&gt;</ref>,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Ret,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args,<sp/>enable_if_t&lt;is_void_v&lt;Ret&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
 <codeline lineno="171"><highlight class="normal"></highlight><highlight class="keyword">decltype</highlight><highlight class="normal">(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">)<sp/>make_static_invoker(Ret<sp/>(*func)(Args...))<sp/>{</highlight></codeline>
-<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>[func](</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;reflect::meta_any&gt;</ref>&amp;<sp/>args)<sp/>-&gt;<sp/>reflect::meta_any<sp/>{</highlight></codeline>
-<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Args)<sp/>!=<sp/>args.<ref refid="classvector_1acb504d0053283e805da9c4fe5827b018" kindref="member">size</ref>())<sp/>{</highlight></codeline>
-<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_THROW_EXCEPTION(<ref refid="structvalue__exception" kindref="compound">value_exception</ref>(</highlight><highlight class="stringliteral">&quot;Argument<sp/>count<sp/>mismatch&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>[func](</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector&lt;reflect::meta_any&gt;&amp;<sp/>args)<sp/>-&gt;<sp/>reflect::meta_any<sp/>{</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Args)<sp/>!=<sp/>args.size())<sp/>{</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_THROW_EXCEPTION(value_exception(</highlight><highlight class="stringliteral">&quot;Argument<sp/>count<sp/>mismatch&quot;</highlight><highlight class="normal">));</highlight></codeline>
 <codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inner::invoke_impl(func,<sp/>args,<sp/><ref refid="group___integer_sequence_1gaed583aed5d1c7a45292dc4dbc51d6493" kindref="member">make_index_sequence</ref>&lt;</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Args)&gt;{});</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inner::invoke_impl(func,<sp/>args,<sp/>make_index_sequence&lt;</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Args)&gt;{});</highlight></codeline>
 <codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>reflect::meta_any{};</highlight></codeline>
 <codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="179"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="180"><highlight class="normal"></highlight></codeline>
-<codeline lineno="181"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Ret,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args,<sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t&lt;!is_void_v&lt;Ret&gt;</ref>,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Ret,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args,<sp/>enable_if_t&lt;!is_void_v&lt;Ret&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
 <codeline lineno="182"><highlight class="normal"></highlight><highlight class="keyword">decltype</highlight><highlight class="normal">(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">)<sp/>make_static_invoker(Ret<sp/>(*func)(Args...))<sp/>{</highlight></codeline>
-<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>[func](</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;reflect::meta_any&gt;</ref>&amp;<sp/>args)<sp/>-&gt;<sp/>reflect::meta_any<sp/>{</highlight></codeline>
-<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Args)<sp/>!=<sp/>args.<ref refid="classvector_1acb504d0053283e805da9c4fe5827b018" kindref="member">size</ref>())<sp/>{</highlight></codeline>
-<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_THROW_EXCEPTION(<ref refid="structvalue__exception" kindref="compound">value_exception</ref>(</highlight><highlight class="stringliteral">&quot;Argument<sp/>count<sp/>mismatch&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>[func](</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector&lt;reflect::meta_any&gt;&amp;<sp/>args)<sp/>-&gt;<sp/>reflect::meta_any<sp/>{</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Args)<sp/>!=<sp/>args.size())<sp/>{</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_THROW_EXCEPTION(value_exception(</highlight><highlight class="stringliteral">&quot;Argument<sp/>count<sp/>mismatch&quot;</highlight><highlight class="normal">));</highlight></codeline>
 <codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>inner::invoke_impl(func,<sp/>args,<sp/><ref refid="group___integer_sequence_1gaed583aed5d1c7a45292dc4dbc51d6493" kindref="member">make_index_sequence</ref>&lt;</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Args)&gt;{});</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>inner::invoke_impl(func,<sp/>args,<sp/>make_index_sequence&lt;</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(Args)&gt;{});</highlight></codeline>
 <codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>reflect::meta_any(result);</highlight></codeline>
 <codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="190"><highlight class="normal">}</highlight></codeline>

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['非求值辅助工具_0',['非求值辅助工具',['../group___declval_tools.html',1,'']]]
+  ['静态字符数字操作_0',['静态字符数字操作',['../group___static_char_digit.html',1,'']]],
+  ['静态算术运算_1',['静态算术运算',['../group___static_arithmetic.html',1,'']]]
 ];

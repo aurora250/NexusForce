@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['预定义颜色常量_0',['预定义颜色常量',['../group___color.html#named_colors',1,'']]]
+  ['随机数生成器_0',['随机数生成器',['../group___random_generators.html',1,'']]],
+  ['随机重排算法_1',['随机重排算法',['../group___shuffle_algorithms.html',1,'']]]
 ];

@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1connection" kind="class" language="C++" prot="public">
+    <compoundname>neforce::connection</compoundname>
+    <includes refid="signals_8hpp" local="no">signals.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1connection_1a67a3fe3aaa15edc8b7b0b5b38189faf2" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; bool &gt;</type>
+        <definition>shared_ptr&lt;bool&gt; neforce::connection::connected_</definition>
+        <argsstring></argsstring>
+        <name>connected_</name>
+        <qualifiedname>neforce::connection::connected_</qualifiedname>
+        <briefdescription>
+<para>连接状态标志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="127" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/signals.hpp" bodystart="127" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1connection_1adadaf271f38e5a17f7a3db9b492f1908" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::connection::connection</definition>
+        <argsstring>()</argsstring>
+        <name>connection</name>
+        <qualifiedname>neforce::connection::connection</qualifiedname>
+        <briefdescription>
+<para>默认构造函数，创建处于已连接状态的对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="133" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/signals.hpp" bodystart="133" bodyend="134"/>
+        <references refid="group___shared_pointer_1gacdaa04ead5936b6c9e0f024297dcf54f" compoundref="shared__ptr_8hpp" startline="849" endline="877">neforce::make_shared</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1connection_1affc11173b5b5a4c0b00ee37bb7061219" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::connection::disconnect</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>disconnect</name>
+        <qualifiedname>neforce::connection::disconnect</qualifiedname>
+        <briefdescription>
+<para>断开连接 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>设置连接状态为false，后续信号触发将忽略此连接。 如果连接已被断开，此操作无效果。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="142" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/signals.hpp" bodystart="142" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1connection_1a8339d14b42f5d60effe601d0d747ede3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::connection::connected</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>connected</name>
+        <qualifiedname>neforce::connection::connected</qualifiedname>
+        <briefdescription>
+<para>检查连接是否有效 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>连接是否仍然有效 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="152" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/signals.hpp" bodystart="152" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1connection_1a5887dd41902bb6028f0513939552b4b1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; bool &gt;</type>
+        <definition>shared_ptr&lt; bool &gt; neforce::connection::flag</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>flag</name>
+        <qualifiedname>neforce::connection::flag</qualifiedname>
+        <briefdescription>
+<para>获取连接标志的内部指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>共享指针指向bool标志 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="158" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/signals.hpp" bodystart="158" bodyend="158"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>连接句柄 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>用于管理信号槽连接，可以手动断开连接或检查连接状态。 可实现连接状态的线程安全共享。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="125" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/signals.hpp" bodystart="125" bodyend="159"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1connection_1a8339d14b42f5d60effe601d0d747ede3" prot="public" virt="non-virtual"><scope>neforce::connection</scope><name>connected</name></member>
+      <member refid="classneforce_1_1connection_1a67a3fe3aaa15edc8b7b0b5b38189faf2" prot="private" virt="non-virtual"><scope>neforce::connection</scope><name>connected_</name></member>
+      <member refid="classneforce_1_1connection_1adadaf271f38e5a17f7a3db9b492f1908" prot="public" virt="non-virtual"><scope>neforce::connection</scope><name>connection</name></member>
+      <member refid="classneforce_1_1connection_1affc11173b5b5a4c0b00ee37bb7061219" prot="public" virt="non-virtual"><scope>neforce::connection</scope><name>disconnect</name></member>
+      <member refid="classneforce_1_1connection_1a5887dd41902bb6028f0513939552b4b1" prot="public" virt="non-virtual"><scope>neforce::connection</scope><name>flag</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

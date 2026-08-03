@@ -1,113 +1,113 @@
 var group___async =
 [
-    [ "future&lt; Res &gt;", "classfuture.html", [
-      [ "future", "classfuture.html#a7d0aba61e382ac1909dcd970bc525f22", null ],
-      [ "future", "classfuture.html#ae603243b3c1b6c6d21bb6a3c9718975d", null ],
-      [ "get", "classfuture.html#a5c06db6e4a9055b83db367db0d402b4a", null ],
-      [ "operator=", "classfuture.html#a7b033bcdcafd506b5b415441e42d6c30", null ],
-      [ "share", "classfuture.html#ae9f9089752fe5ff4dd222eadd485d2c0", null ]
+    [ "neforce::future&lt; Res &gt;", "classneforce_1_1future.html", [
+      [ "future", "classneforce_1_1future.html#a485c440a65029ba0a4e267ca0d60e30e", null ],
+      [ "future", "classneforce_1_1future.html#a1b5b99d4a0f721f0070c1a6c44c75875", null ],
+      [ "get", "classneforce_1_1future.html#ac9566d603acc81ee159ec2f115a7b11d", null ],
+      [ "operator=", "classneforce_1_1future.html#a005142778831405c2e3eba7afddc807c", null ],
+      [ "share", "classneforce_1_1future.html#a0bb90cf9b8d4aca1b7141ce7656a488d", null ]
     ] ],
-    [ "shared_future&lt; Res &gt;", "classshared__future.html", [
-      [ "get", "classshared__future.html#a8c7a2bdcb8da8213d3389a49d8f0bf58", null ]
+    [ "neforce::shared_future&lt; Res &gt;", "classneforce_1_1shared__future.html", [
+      [ "get", "classneforce_1_1shared__future.html#aced925dbae6118b105cd72930d28fab4", null ]
     ] ],
-    [ "promise&lt; Res &gt;", "classpromise.html", [
-      [ "ptr_type", "classpromise.html#a23ef12fa1a0278408fbff4ca4d4ec86c", null ],
-      [ "result_type", "classpromise.html#a974737ae92ff2bf7c88f104121768387", null ],
-      [ "state_type", "classpromise.html#a9c9867e00fe11c873a268f9b7bfb5e5b", null ],
-      [ "promise", "classpromise.html#a980a39afa21321c8e9ec5022b0a0123c", null ],
-      [ "promise", "classpromise.html#a9a572899607d8841d930d6ae2c067280", null ],
-      [ "promise", "classpromise.html#accc51c0d31121acce00d75341b18cd34", null ],
-      [ "~promise", "classpromise.html#a42de93529f3ded56619ec146e701c556", null ],
-      [ "get_future", "classpromise.html#ab0b98ede6c487688e1d9684fc979512b", null ],
-      [ "operator=", "classpromise.html#a4f73b1bc32d04a4051b70f93279a5d23", null ],
-      [ "operator=", "classpromise.html#a0b28670f46097ce539ac1349fc6bdf69", null ],
-      [ "set_exception", "classpromise.html#ae0f41e364fa8a8f21ef340ea89e6d8c5", null ],
-      [ "set_exception_at_thread_exit", "classpromise.html#aeaadfd014af7d67f744e6791320dc8f7", null ],
-      [ "set_value", "classpromise.html#a461ea3f3f0793054804d79c134788515", null ],
-      [ "set_value_at_thread_exit", "classpromise.html#ad89aeb3b702bf1654334299b08761ea4", null ],
-      [ "swap", "classpromise.html#a4e1557182307b5f8298782037b153939", null ]
+    [ "neforce::promise&lt; Res &gt;", "classneforce_1_1promise.html", [
+      [ "ptr_type", "classneforce_1_1promise.html#a50b9ec4f27a72c67fd9b2fb437c27088", null ],
+      [ "result_type", "classneforce_1_1promise.html#ae565285e57ff9dabd0a9795d11df6146", null ],
+      [ "state_type", "classneforce_1_1promise.html#a3062fc5a5c26c38159f2ada8ac6cf770", null ],
+      [ "promise", "classneforce_1_1promise.html#a5115a090066767ed472714fccc6cc364", null ],
+      [ "promise", "classneforce_1_1promise.html#a70a87c49f0c66f27fb13d52fe604da04", null ],
+      [ "promise", "classneforce_1_1promise.html#a181ab26cdc6a5de8447e31d51823cf1b", null ],
+      [ "~promise", "classneforce_1_1promise.html#aa13260a870825145a2a41fc430e4518d", null ],
+      [ "get_future", "classneforce_1_1promise.html#a343b12c37232a40bf3211e5d924bedcf", null ],
+      [ "operator=", "classneforce_1_1promise.html#a1887fca8802734315b4040be1aca342b", null ],
+      [ "operator=", "classneforce_1_1promise.html#af580d9aafba0e9a4924588a67b775ebe", null ],
+      [ "set_exception", "classneforce_1_1promise.html#a309e61e41a54437c9b0ccc36022b909f", null ],
+      [ "set_exception_at_thread_exit", "classneforce_1_1promise.html#afeca7b2aad1c85338c7554fed48e224b", null ],
+      [ "set_value", "classneforce_1_1promise.html#ae7191cf6ec1d00556fcc19820e3c3044", null ],
+      [ "set_value_at_thread_exit", "classneforce_1_1promise.html#a8814032d7225bb97951f75bd98e97d6a", null ],
+      [ "swap", "classneforce_1_1promise.html#a95d3a513f22e21027bf15794635eeee5", null ]
     ] ],
-    [ "future&lt; Res &amp; &gt;", "classfuture_3_01_res_01_6_01_4.html", [
-      [ "get", "classfuture_3_01_res_01_6_01_4.html#a1e61af47606186d85acefdadffc9e012", null ]
+    [ "neforce::future&lt; Res &amp; &gt;", "classneforce_1_1future_3_01_res_01_6_01_4.html", [
+      [ "get", "classneforce_1_1future_3_01_res_01_6_01_4.html#a705aac35846414d29025f0d8f2e4219e", null ]
     ] ],
-    [ "future&lt; void &gt;", "classfuture_3_01void_01_4.html", [
-      [ "get", "classfuture_3_01void_01_4.html#a632abdd6d850a8132858747657f4436d", null ]
+    [ "neforce::future&lt; void &gt;", "classneforce_1_1future_3_01void_01_4.html", [
+      [ "get", "classneforce_1_1future_3_01void_01_4.html#a884499eb6dd020ced6bd363bddbc8dd3", null ]
     ] ],
-    [ "shared_future&lt; Res &amp; &gt;", "classshared__future_3_01_res_01_6_01_4.html", [
-      [ "get", "classshared__future_3_01_res_01_6_01_4.html#a865e1b43e2a01f82634375319d1275fb", null ]
+    [ "neforce::shared_future&lt; Res &amp; &gt;", "classneforce_1_1shared__future_3_01_res_01_6_01_4.html", [
+      [ "get", "classneforce_1_1shared__future_3_01_res_01_6_01_4.html#a8ef91979937504505d02e718a87351c1", null ]
     ] ],
-    [ "shared_future&lt; void &gt;", "classshared__future_3_01void_01_4.html", [
-      [ "get", "classshared__future_3_01void_01_4.html#a789420487045e376c111a6b621e7347c", null ]
+    [ "neforce::shared_future&lt; void &gt;", "classneforce_1_1shared__future_3_01void_01_4.html", [
+      [ "get", "classneforce_1_1shared__future_3_01void_01_4.html#a7416d77361ae8e441dee1ab329b1ffc9", null ]
     ] ],
-    [ "future_result&lt; T &gt;", "structfuture__result.html", null ],
-    [ "future_result&lt; void &gt;", "structfuture__result_3_01void_01_4.html", null ],
-    [ "packaged_task&lt; Res(Args...)&gt;", "classpackaged__task_3_01_res_07_args_8_8_8_08_4.html", [
-      [ "packaged_task", "classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a2218a03e808dbb4eb171fcb1c7f9881a", null ],
-      [ "packaged_task", "classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a1e138c21753a8bef3af52ab548884825", null ],
-      [ "~packaged_task", "classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a94bb0b76b969c5a71970777406a2b768", null ],
-      [ "packaged_task", "classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a3a474623a4049c9013b4b948e1f100d0", null ],
-      [ "packaged_task", "classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a78e3200ea269e7f873e946b362315ff8", null ],
-      [ "get_future", "classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a41f6eea0c7672b66b7bcae8096460d4a", null ],
-      [ "make_ready_at_thread_exit", "classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a7d75a082c1163b3d71f5bfa88ff616ab", null ],
-      [ "operator()", "classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#adb6b72da7146d018b37b4374f66109f6", null ],
-      [ "operator=", "classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a3a32c746c6407f06616b1c2eead52151", null ],
-      [ "operator=", "classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#acdf07176055889ad21430d63393c1fc3", null ],
-      [ "reset", "classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a13ff349103d61896e17b7afed6947cec", null ],
-      [ "swap", "classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#aa6f152cd498d6f799acdeafdbf183616", null ],
-      [ "valid", "classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a7cd09ddad944479f2a571e124afe79b4", null ]
+    [ "neforce::future_result&lt; T &gt;", "structneforce_1_1future__result.html", null ],
+    [ "neforce::future_result&lt; void &gt;", "structneforce_1_1future__result_3_01void_01_4.html", null ],
+    [ "neforce::packaged_task&lt; Res(Args...)&gt;", "classneforce_1_1packaged__task_3_01_res_07_args_8_8_8_08_4.html", [
+      [ "packaged_task", "classneforce_1_1packaged__task_3_01_res_07_args_8_8_8_08_4.html#a91026059c1a3803b7da092be65aef383", null ],
+      [ "packaged_task", "classneforce_1_1packaged__task_3_01_res_07_args_8_8_8_08_4.html#ab4a34e7c062cf059e0ad66bfb2d87eb7", null ],
+      [ "~packaged_task", "classneforce_1_1packaged__task_3_01_res_07_args_8_8_8_08_4.html#a0d2c165701218ad752c877fc341cec6c", null ],
+      [ "packaged_task", "classneforce_1_1packaged__task_3_01_res_07_args_8_8_8_08_4.html#a3e487c91106072421ccd5c9f8d2b1522", null ],
+      [ "packaged_task", "classneforce_1_1packaged__task_3_01_res_07_args_8_8_8_08_4.html#a065d707675d15e7cbdb73d4cf3465389", null ],
+      [ "get_future", "classneforce_1_1packaged__task_3_01_res_07_args_8_8_8_08_4.html#a80a5e799fd47093bbc3ed2151413937f", null ],
+      [ "make_ready_at_thread_exit", "classneforce_1_1packaged__task_3_01_res_07_args_8_8_8_08_4.html#a093534f060f905d0b1b47c726b812b18", null ],
+      [ "operator()", "classneforce_1_1packaged__task_3_01_res_07_args_8_8_8_08_4.html#a459c5e0541e905492053f4e2ab76e39b", null ],
+      [ "operator=", "classneforce_1_1packaged__task_3_01_res_07_args_8_8_8_08_4.html#ae1f1d5cea9a6bc24c7f6499edf193d15", null ],
+      [ "operator=", "classneforce_1_1packaged__task_3_01_res_07_args_8_8_8_08_4.html#a8cb57d21385c9adfd4f31fd0e93daff0", null ],
+      [ "reset", "classneforce_1_1packaged__task_3_01_res_07_args_8_8_8_08_4.html#a292b9343c8eefcc6e53098091f4b92c4", null ],
+      [ "swap", "classneforce_1_1packaged__task_3_01_res_07_args_8_8_8_08_4.html#ad32c85f307a496e8f0b7130091c3b923", null ],
+      [ "valid", "classneforce_1_1packaged__task_3_01_res_07_args_8_8_8_08_4.html#a491276e484a1ced7023653357e934a0f", null ]
     ] ],
-    [ "promise&lt; Res &amp; &gt;", "classpromise_3_01_res_01_6_01_4.html", [
-      [ "ptr_type", "classpromise_3_01_res_01_6_01_4.html#a58f321250d62ee76eeb219ee0e67c3ae", null ],
-      [ "result_type", "classpromise_3_01_res_01_6_01_4.html#a7473358eab49c3171e75b7368dce60cf", null ],
-      [ "state_type", "classpromise_3_01_res_01_6_01_4.html#aec672fc89e746ed40d5a19c98903b0c9", null ],
-      [ "promise", "classpromise_3_01_res_01_6_01_4.html#a0c9db50baf0d8bad238d066b51ac8b24", null ],
-      [ "promise", "classpromise_3_01_res_01_6_01_4.html#a372ff6171d84316a2795bfa364831293", null ],
-      [ "promise", "classpromise_3_01_res_01_6_01_4.html#a38396aeb0f030d94174e091a2f637561", null ],
-      [ "~promise", "classpromise_3_01_res_01_6_01_4.html#ab04a7e93ed3482b404e6ceda9242c6ea", null ],
-      [ "get_future", "classpromise_3_01_res_01_6_01_4.html#a486ff825f42139f06186a03c16d66308", null ],
-      [ "operator=", "classpromise_3_01_res_01_6_01_4.html#af0433bb0ae6c309cf2ad1bcec12d7070", null ],
-      [ "operator=", "classpromise_3_01_res_01_6_01_4.html#a24d5d7c00e15ebe697092d7038d77f35", null ],
-      [ "set_exception", "classpromise_3_01_res_01_6_01_4.html#a66ab8d73c8e51dc553ab0ea051b04643", null ],
-      [ "set_exception_at_thread_exit", "classpromise_3_01_res_01_6_01_4.html#aa7ac55c5b4f5a75ed7423c878e9d3fc6", null ],
-      [ "set_value", "classpromise_3_01_res_01_6_01_4.html#aa799d543508cfa3b78dfaa1ae80d1989", null ],
-      [ "set_value_at_thread_exit", "classpromise_3_01_res_01_6_01_4.html#a0fea8030b70d9f482beedc22dbd12d8d", null ],
-      [ "swap", "classpromise_3_01_res_01_6_01_4.html#a98f79a3eb75decbbdbcf7a6087b13ddf", null ]
+    [ "neforce::promise&lt; Res &amp; &gt;", "classneforce_1_1promise_3_01_res_01_6_01_4.html", [
+      [ "ptr_type", "classneforce_1_1promise_3_01_res_01_6_01_4.html#a3a2622038e1728b3bb0b3dd37e6e175c", null ],
+      [ "result_type", "classneforce_1_1promise_3_01_res_01_6_01_4.html#a2f5820f40851624351c1eeac691c1a1e", null ],
+      [ "state_type", "classneforce_1_1promise_3_01_res_01_6_01_4.html#a709e48e9abff5a7b22677e2c3bd59cda", null ],
+      [ "promise", "classneforce_1_1promise_3_01_res_01_6_01_4.html#a859ad93856cbf734916d7fdb30d90b75", null ],
+      [ "promise", "classneforce_1_1promise_3_01_res_01_6_01_4.html#afd5fbf3684171b109fabec2f05ae780a", null ],
+      [ "promise", "classneforce_1_1promise_3_01_res_01_6_01_4.html#a020f98aae1d50f1befa6fb280a27ade0", null ],
+      [ "~promise", "classneforce_1_1promise_3_01_res_01_6_01_4.html#a1665ea350be25e3e266a566c78796354", null ],
+      [ "get_future", "classneforce_1_1promise_3_01_res_01_6_01_4.html#a20dcf1a5523bd3ec7b075d1aa762d7f9", null ],
+      [ "operator=", "classneforce_1_1promise_3_01_res_01_6_01_4.html#aba9d5c9714b41b35ff29111226cc4367", null ],
+      [ "operator=", "classneforce_1_1promise_3_01_res_01_6_01_4.html#a4cf5a740eab98f169f58faf5d66918f7", null ],
+      [ "set_exception", "classneforce_1_1promise_3_01_res_01_6_01_4.html#ad46a1c78b6a1e45f6e2ba2dfcd2129d7", null ],
+      [ "set_exception_at_thread_exit", "classneforce_1_1promise_3_01_res_01_6_01_4.html#ab6f8a4fd80f46eaae002dd0db90ff711", null ],
+      [ "set_value", "classneforce_1_1promise_3_01_res_01_6_01_4.html#a983cade6d0e3602dbdf5895a6bc91791", null ],
+      [ "set_value_at_thread_exit", "classneforce_1_1promise_3_01_res_01_6_01_4.html#abfcb21bc162e376346d459ceb3ff356e", null ],
+      [ "swap", "classneforce_1_1promise_3_01_res_01_6_01_4.html#a7360e3a9dea96231d3ced9c40a0f94cc", null ]
     ] ],
-    [ "promise&lt; void &gt;", "classpromise_3_01void_01_4.html", [
-      [ "ptr_type", "classpromise_3_01void_01_4.html#aff4c6f463c34add52cbc58e24e54088c", null ],
-      [ "result_type", "classpromise_3_01void_01_4.html#a81d6b124af3b258df55ae78a227c5c61", null ],
-      [ "state_type", "classpromise_3_01void_01_4.html#a9574607703f74df962c70097c9b9c792", null ],
-      [ "promise", "classpromise_3_01void_01_4.html#ac277841e88a39702719d9a90b21e6c57", null ],
-      [ "promise", "classpromise_3_01void_01_4.html#a1bc7fd6a05bb8861144d8645c361a95b", null ],
-      [ "promise", "classpromise_3_01void_01_4.html#a79894a850aab5199527197290e90e65d", null ],
-      [ "~promise", "classpromise_3_01void_01_4.html#aeeeb02e8e3d6fdcd36d8b2f16a10e113", null ],
-      [ "get_future", "classpromise_3_01void_01_4.html#ab6d2478a2da868e4f153efc6d8076708", null ],
-      [ "operator=", "classpromise_3_01void_01_4.html#a050e0ae955ddd82ff8c6748723aaea4c", null ],
-      [ "operator=", "classpromise_3_01void_01_4.html#a0543dd01a3e38815590bbfeb7f4a33b1", null ],
-      [ "set_exception", "classpromise_3_01void_01_4.html#ad247f65ad7a9524faf3309c3d468e377", null ],
-      [ "set_exception_at_thread_exit", "classpromise_3_01void_01_4.html#a3bbd427040255e710348478d99a3027d", null ],
-      [ "set_value", "classpromise_3_01void_01_4.html#a23bdd3f754a3b11edcf91fec517c4a01", null ],
-      [ "set_value_at_thread_exit", "classpromise_3_01void_01_4.html#a90b6fea127bdc70fbe3d8acf0ddd0732", null ],
-      [ "swap", "classpromise_3_01void_01_4.html#ae7929a4461c89a6772b6d4e8609d32c9", null ]
+    [ "neforce::promise&lt; void &gt;", "classneforce_1_1promise_3_01void_01_4.html", [
+      [ "ptr_type", "classneforce_1_1promise_3_01void_01_4.html#a7a44cb1d92f0be477ff52f5dc78892d0", null ],
+      [ "result_type", "classneforce_1_1promise_3_01void_01_4.html#a9d805c732981d39d2b7cbcb099ce2683", null ],
+      [ "state_type", "classneforce_1_1promise_3_01void_01_4.html#ae3c895b95d233e3fa983fc66ad99edb8", null ],
+      [ "promise", "classneforce_1_1promise_3_01void_01_4.html#add1c49c4da27763934ab0220cb6a1083", null ],
+      [ "promise", "classneforce_1_1promise_3_01void_01_4.html#a77457089846f9feaaa61f53c92f416f6", null ],
+      [ "promise", "classneforce_1_1promise_3_01void_01_4.html#a82e746cb88de5388cdf4661025a58c97", null ],
+      [ "~promise", "classneforce_1_1promise_3_01void_01_4.html#a4ea2726d2383ad250e2079211113b2f7", null ],
+      [ "get_future", "classneforce_1_1promise_3_01void_01_4.html#a397cbc69d557004e7b7910dc933d357d", null ],
+      [ "operator=", "classneforce_1_1promise_3_01void_01_4.html#a41c84a1a35a025adb3b58a324f8b64fb", null ],
+      [ "operator=", "classneforce_1_1promise_3_01void_01_4.html#a80cf12c1a56bb5b0afa0dd93f4d1a082", null ],
+      [ "set_exception", "classneforce_1_1promise_3_01void_01_4.html#aa85ffe961b5a2a6660dc9edf7c4c20ff", null ],
+      [ "set_exception_at_thread_exit", "classneforce_1_1promise_3_01void_01_4.html#ad3291eaeacd32a3a16af31e0b2d35c59", null ],
+      [ "set_value", "classneforce_1_1promise_3_01void_01_4.html#aad2f3165c4a8b6452449750f664d2c83", null ],
+      [ "set_value_at_thread_exit", "classneforce_1_1promise_3_01void_01_4.html#a1a27b1fb36fb02a4b47ab8dabbfb10b2", null ],
+      [ "swap", "classneforce_1_1promise_3_01void_01_4.html#ae3d10556904348849f8eb8d9528bc749", null ]
     ] ],
-    [ "async_result_t", "group___async.html#ga80164f406d773811b831fdf90e9c411f", null ],
-    [ "future_result_t", "group___async.html#gaf0f72d6a56a7e2c518eca56a51ff014f", null ],
-    [ "future_errc", "group___async.html#ga197afef4e181c466a1c01ca7c7b4b1e6", [
-      [ "future_errc::future_already_retrieved", "group___async.html#gga197afef4e181c466a1c01ca7c7b4b1e6a829037befd349f04ff71ddea385bdb9a", null ],
-      [ "future_errc::promise_already_satisfied", "group___async.html#gga197afef4e181c466a1c01ca7c7b4b1e6a9327d6f7b9aca59b62b436696fd17a00", null ],
-      [ "future_errc::no_state", "group___async.html#gga197afef4e181c466a1c01ca7c7b4b1e6ac537dcef56fd6ff75592c0220fd3dae1", null ],
-      [ "future_errc::broken_promise", "group___async.html#gga197afef4e181c466a1c01ca7c7b4b1e6a2c6bc6062e72db1c0915032943cb6452", null ]
+    [ "neforce::async_result_t", "group___async.html#gac8262c6cb66019c2802377e25ab562ab", null ],
+    [ "neforce::future_result_t", "group___async.html#gae41bda7414d7dca6209c6c2c024871eb", null ],
+    [ "neforce::future_errc", "group___async.html#ga1dce1bf12e0792df3298c9988d0c9994", [
+      [ "neforce::future_errc::future_already_retrieved", "group___async.html#gga1dce1bf12e0792df3298c9988d0c9994a829037befd349f04ff71ddea385bdb9a", null ],
+      [ "neforce::future_errc::promise_already_satisfied", "group___async.html#gga1dce1bf12e0792df3298c9988d0c9994a9327d6f7b9aca59b62b436696fd17a00", null ],
+      [ "neforce::future_errc::no_state", "group___async.html#gga1dce1bf12e0792df3298c9988d0c9994ac537dcef56fd6ff75592c0220fd3dae1", null ],
+      [ "neforce::future_errc::broken_promise", "group___async.html#gga1dce1bf12e0792df3298c9988d0c9994a2c6bc6062e72db1c0915032943cb6452", null ]
     ] ],
-    [ "future_status", "group___async.html#gaeaacbde3b6cc8e4622e1aae2beacd4f3", [
-      [ "future_status::ready", "group___async.html#ggaeaacbde3b6cc8e4622e1aae2beacd4f3ab2fdab230a2c39f3595a947861863cb7", null ],
-      [ "future_status::timeout", "group___async.html#ggaeaacbde3b6cc8e4622e1aae2beacd4f3a90272dda245ae1fb3cf197e91a8689dc", null ],
-      [ "future_status::deferred", "group___async.html#ggaeaacbde3b6cc8e4622e1aae2beacd4f3a43fff3df3fc0b3417c86dc3040fb2d86", null ]
+    [ "neforce::future_status", "group___async.html#gaf9cba7882097ae4b1058450190d9dd8d", [
+      [ "neforce::future_status::ready", "group___async.html#ggaf9cba7882097ae4b1058450190d9dd8dab2fdab230a2c39f3595a947861863cb7", null ],
+      [ "neforce::future_status::timeout", "group___async.html#ggaf9cba7882097ae4b1058450190d9dd8da90272dda245ae1fb3cf197e91a8689dc", null ],
+      [ "neforce::future_status::deferred", "group___async.html#ggaf9cba7882097ae4b1058450190d9dd8da43fff3df3fc0b3417c86dc3040fb2d86", null ]
     ] ],
-    [ "launch", "group___async.html#ga9b3224d19f20667b3b24145a7b395a33", [
-      [ "launch::async", "group___async.html#gga9b3224d19f20667b3b24145a7b395a33a0df93e34273b367bb63bad28c94c78d5", null ],
-      [ "launch::deferred", "group___async.html#gga9b3224d19f20667b3b24145a7b395a33a43fff3df3fc0b3417c86dc3040fb2d86", null ]
+    [ "neforce::launch", "group___async.html#ga5cb3a59f429bfc428307430ce64f8e5f", [
+      [ "neforce::launch::async", "group___async.html#gga5cb3a59f429bfc428307430ce64f8e5fa0df93e34273b367bb63bad28c94c78d5", null ],
+      [ "neforce::launch::deferred", "group___async.html#gga5cb3a59f429bfc428307430ce64f8e5fa43fff3df3fc0b3417c86dc3040fb2d86", null ]
     ] ],
-    [ "async", "group___async.html#gadb2e4929c373d071c43f75182fda1239", null ],
-    [ "async", "group___async.html#ga4bbf8cf030239a4806813af4dcafec6f", null ],
-    [ "get", "group___async.html#gac14e5033806977e33886d78a20feffaa", null ]
+    [ "neforce::async", "group___async.html#ga1e0319f6a6950bfda67d4a1eb2e31ebb", null ],
+    [ "neforce::async", "group___async.html#ga3b100cc284ba1351140d99912b389764", null ],
+    [ "neforce::get", "group___async.html#ga62fae7780686a01cf8f94a914db3e161", null ]
 ];

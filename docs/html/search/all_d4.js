@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['颜色分量定义_0',['颜色分量定义',['../group___color.html#color_components',1,'']]],
-  ['颜色_1',['颜色',['../group___color.html',1,'']]]
+  ['集合样式_0',['集合样式',['../group___yaml_config.html#collection_styles',1,'']]],
+  ['集合算法_1',['集合算法',['../group___set_algorithms.html',1,'']]]
 ];

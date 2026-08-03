@@ -3,15 +3,16 @@
   <compounddef id="group___s_q_l_mapper" kind="group">
     <compoundname>SQLMapper</compoundname>
     <title>ORM</title>
-    <innerclass refid="classsql__mapper" prot="public">sql_mapper</innerclass>
+    <innerclass refid="classneforce_1_1sql__mapper" prot="public">neforce::sql_mapper</innerclass>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___s_q_l_mapper_1ga4ae4b359eeab58486b15997f87541791" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
-        <definition>string cpp_type_to_sql_type</definition>
+      <memberdef kind="function" id="group___s_q_l_mapper_1gaae77263383cf3e03dbdf7c1793d1a63d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string</type>
+        <definition>string neforce::cpp_type_to_sql_type</definition>
         <argsstring>(const reflect::type_id tid)</argsstring>
         <name>cpp_type_to_sql_type</name>
+        <qualifiedname>neforce::cpp_type_to_sql_type</qualifiedname>
         <param>
-          <type>const <ref refid="group___reflection_1ga541516a057bbd67d55d02ece107883d9" kindref="member">reflect::type_id</ref></type>
+          <type>const reflect::type_id</type>
           <declname>tid</declname>
         </param>
         <briefdescription>
@@ -34,28 +35,31 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_mapper.hpp" line="43" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_mapper.hpp" bodystart="43" bodyend="91"/>
-        <references refid="group___reflection_1ga580ac475bed401f28eca8e86b4de57c2" compoundref="reflect_2any_8hpp" startline="60" endline="70">type_id_for</references>
-        <referencedby refid="classsql__mapper_1a3c094067ab02934bed258fac30293580" compoundref="sql__mapper_8hpp" startline="238" endline="267">sql_mapper&lt; T &gt;::create_table_sql</referencedby>
+        <references refid="group___s_q_l_mapper_1gaae77263383cf3e03dbdf7c1793d1a63d" compoundref="sql__mapper_8hpp" startline="43" endline="91">neforce::cpp_type_to_sql_type</references>
+        <references refid="group___reflection_1ga44db0edaa0dbe2c60cb04e815b0a498e" compoundref="reflect_2any_8hpp" startline="60" endline="70">neforce::reflect::type_id_for</references>
+        <referencedby refid="group___s_q_l_mapper_1gaae77263383cf3e03dbdf7c1793d1a63d" compoundref="sql__mapper_8hpp" startline="43" endline="91">neforce::cpp_type_to_sql_type</referencedby>
+        <referencedby refid="classneforce_1_1sql__mapper_1a3be722a1b14ea8e3d5e87d4a88416cb3" compoundref="sql__mapper_8hpp" startline="238" endline="267">neforce::sql_mapper&lt; T &gt;::create_table_sql</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___s_q_l_mapper_1gabbea4ff42670147e8abc032de12c081b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___s_q_l_mapper_1gab12a3cb0a4edaf278522ce4adb05e44a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>reflect::meta_any</type>
-        <definition>reflect::meta_any read_column_by_type</definition>
+        <definition>reflect::meta_any neforce::read_column_by_type</definition>
         <argsstring>(const idb_tb_result &amp;row, const size_t col, const reflect::type_id tid)</argsstring>
         <name>read_column_by_type</name>
+        <qualifiedname>neforce::read_column_by_type</qualifiedname>
         <param>
-          <type>const <ref refid="structidb__tb__result" kindref="compound">idb_tb_result</ref> &amp;</type>
+          <type>const idb_tb_result &amp;</type>
           <declname>row</declname>
         </param>
         <param>
-          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <type>const size_t</type>
           <declname>col</declname>
         </param>
         <param>
-          <type>const <ref refid="group___reflection_1ga541516a057bbd67d55d02ece107883d9" kindref="member">reflect::type_id</ref></type>
+          <type>const reflect::type_id</type>
           <declname>tid</declname>
         </param>
         <briefdescription>
-<para>从结果行中按类型ID读取值到 <ref refid="classmeta__any" kindref="compound">meta_any</ref> </para>
+<para>从结果行中按类型ID读取值到 meta_any </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -90,25 +94,28 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_mapper.hpp" line="100" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_mapper.hpp" bodystart="100" bodyend="119"/>
-        <references refid="structidb__tb__result_1ae1bc5e789f06b1d381f8922dc0c5e9af">idb_tb_result::get</references>
-        <references refid="structidb__tb__result_1ad35689b23d23b40ed9fe12c425527c58">idb_tb_result::get_bool</references>
-        <references refid="structidb__tb__result_1a5ef4af6943ee76fadf05fc2989d56ebd">idb_tb_result::get_float32</references>
-        <references refid="structidb__tb__result_1a1c4d6dcd48871d296845f934c8218cf9">idb_tb_result::get_float64</references>
-        <references refid="structidb__tb__result_1a30c2b4161d1197de423889027ae5272d">idb_tb_result::get_int32</references>
-        <references refid="structidb__tb__result_1a313b404f40b06095313fdad5a71c36d9">idb_tb_result::get_int64</references>
-        <references refid="group___reflection_1ga580ac475bed401f28eca8e86b4de57c2" compoundref="reflect_2any_8hpp" startline="60" endline="70">type_id_for</references>
+        <references refid="structneforce_1_1idb__tb__result_1a41434171e9b717e55de7907eed6d3e5f">neforce::idb_tb_result::get</references>
+        <references refid="structneforce_1_1idb__tb__result_1a11939064489f7227c9014a073b934225">neforce::idb_tb_result::get_bool</references>
+        <references refid="structneforce_1_1idb__tb__result_1aeefac909e3fee952c69fc346d3d22844">neforce::idb_tb_result::get_float32</references>
+        <references refid="structneforce_1_1idb__tb__result_1ab1c079a1e03c57ed9a50dcc1c1046350">neforce::idb_tb_result::get_float64</references>
+        <references refid="structneforce_1_1idb__tb__result_1a3b6ef4c03a0e22006be47885c3fbe936">neforce::idb_tb_result::get_int32</references>
+        <references refid="structneforce_1_1idb__tb__result_1a29946ee1a36ec9c164a54c6417b1de39">neforce::idb_tb_result::get_int64</references>
+        <references refid="group___s_q_l_mapper_1gab12a3cb0a4edaf278522ce4adb05e44a" compoundref="sql__mapper_8hpp" startline="100" endline="119">neforce::read_column_by_type</references>
+        <references refid="group___reflection_1ga44db0edaa0dbe2c60cb04e815b0a498e" compoundref="reflect_2any_8hpp" startline="60" endline="70">neforce::reflect::type_id_for</references>
+        <referencedby refid="group___s_q_l_mapper_1gab12a3cb0a4edaf278522ce4adb05e44a" compoundref="sql__mapper_8hpp" startline="100" endline="119">neforce::read_column_by_type</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___s_q_l_mapper_1gac77e9362560fc03f864f72ffcb4a452c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
-        <definition>string meta_any_to_sql_literal</definition>
+      <memberdef kind="function" id="group___s_q_l_mapper_1gac850bc3d11ed21b2e553ef99fb71effd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string</type>
+        <definition>string neforce::meta_any_to_sql_literal</definition>
         <argsstring>(const reflect::meta_any &amp;val)</argsstring>
         <name>meta_any_to_sql_literal</name>
+        <qualifiedname>neforce::meta_any_to_sql_literal</qualifiedname>
         <param>
           <type>const reflect::meta_any &amp;</type>
           <declname>val</declname>
         </param>
         <briefdescription>
-<para>将 <ref refid="classmeta__any" kindref="compound">meta_any</ref> 值转换为 SQL 字面量字符串 </para>
+<para>将 meta_any 值转换为 SQL 字面量字符串 </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -127,9 +134,11 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_mapper.hpp" line="126" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_mapper.hpp" bodystart="126" bodyend="162"/>
-        <references refid="group___reflection_1ga580ac475bed401f28eca8e86b4de57c2" compoundref="reflect_2any_8hpp" startline="60" endline="70">type_id_for</references>
-        <referencedby refid="classrepository_1a109f0c64fae6903e6ce096897a7f5128" compoundref="repository_8hpp" startline="177" endline="212">repository&lt; T, Connect &gt;::find_by_id</referencedby>
-        <referencedby refid="classsql__mapper_1ac84bf889a916f5450348f7de49f9b991" compoundref="sql__mapper_8hpp" startline="382" endline="391">sql_mapper&lt; T &gt;::get_values</referencedby>
+        <references refid="group___s_q_l_mapper_1gac850bc3d11ed21b2e553ef99fb71effd" compoundref="sql__mapper_8hpp" startline="126" endline="162">neforce::meta_any_to_sql_literal</references>
+        <references refid="group___reflection_1ga44db0edaa0dbe2c60cb04e815b0a498e" compoundref="reflect_2any_8hpp" startline="60" endline="70">neforce::reflect::type_id_for</references>
+        <referencedby refid="classneforce_1_1repository_1a09f0a8bf874c099db3b1904f12eaba6a" compoundref="repository_8hpp" startline="177" endline="212">neforce::repository&lt; T, Connect &gt;::find_by_id</referencedby>
+        <referencedby refid="classneforce_1_1sql__mapper_1abe40d20bc24aa22ee214b7ac0f9e1dac" compoundref="sql__mapper_8hpp" startline="382" endline="391">neforce::sql_mapper&lt; T &gt;::get_values</referencedby>
+        <referencedby refid="group___s_q_l_mapper_1gac850bc3d11ed21b2e553ef99fb71effd" compoundref="sql__mapper_8hpp" startline="126" endline="162">neforce::meta_any_to_sql_literal</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

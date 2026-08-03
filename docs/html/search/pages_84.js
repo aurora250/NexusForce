@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['配置文件格式_0',['📁 配置文件格式',['../md__m_a_i_n_p_a_g_e.html#autotoc_md10',1,'']]]
+  ['适用场景_0',['适用场景',['../group___s_h_a256.html#usage',1,'']]]
 ];

@@ -3,16 +3,17 @@
   <compounddef id="group___plugin" kind="group">
     <compoundname>Plugin</compoundname>
     <title>插件</title>
-    <innerclass refid="structplugin__info" prot="public">plugin_info</innerclass>
-    <innerclass refid="structiplugin" prot="public">iplugin</innerclass>
-    <innerclass refid="structplugin__deleter" prot="public">plugin_deleter</innerclass>
-    <innerclass refid="classplugin__manager" prot="public">plugin_manager</innerclass>
+    <innerclass refid="structneforce_1_1plugin__info" prot="public">neforce::plugin_info</innerclass>
+    <innerclass refid="structneforce_1_1iplugin" prot="public">neforce::iplugin</innerclass>
+    <innerclass refid="structneforce_1_1plugin__deleter" prot="public">neforce::plugin_deleter</innerclass>
+    <innerclass refid="classneforce_1_1plugin__manager" prot="public">neforce::plugin_manager</innerclass>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="group___plugin_1gaf947f049a3822c8b84313e907b0ebb58" prot="public" static="no">
-        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structiplugin" kindref="compound">iplugin</ref>, <ref refid="structplugin__deleter" kindref="compound">plugin_deleter</ref> &gt;</type>
-        <definition>using plugin_ptr = unique_ptr&lt;iplugin, plugin_deleter&gt;</definition>
+      <memberdef kind="typedef" id="group___plugin_1gabd8ce662d9b26e04d67499473f021442" prot="public" static="no">
+        <type>unique_ptr&lt; iplugin, plugin_deleter &gt;</type>
+        <definition>using neforce::plugin_ptr = unique_ptr&lt;iplugin, plugin_deleter&gt;</definition>
         <argsstring></argsstring>
         <name>plugin_ptr</name>
+        <qualifiedname>neforce::plugin_ptr</qualifiedname>
         <briefdescription>
 <para>插件唯一指针类型 </para>
         </briefdescription>
@@ -25,11 +26,12 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___plugin_1ga410e53efc8f03f530c6794d60818d504" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="structiplugin" kindref="compound">iplugin</ref> *</type>
-        <definition>iplugin * create_plugin</definition>
+      <memberdef kind="function" id="group___plugin_1gacc30f46adda4b5fce81a8ed81ca292e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>iplugin *</type>
+        <definition>iplugin * neforce::create_plugin</definition>
         <argsstring>()</argsstring>
         <name>create_plugin</name>
+        <qualifiedname>neforce::create_plugin</qualifiedname>
         <briefdescription>
 <para>创建插件实例 </para>
         </briefdescription>
@@ -41,14 +43,17 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/plugin/plugin_entry.hpp" line="45" column="20" declfile="D:/Workspace/NexusForce/include/NeForce/plugin/plugin_entry.hpp" declline="45" declcolumn="20"/>
+        <references refid="group___plugin_1gacc30f46adda4b5fce81a8ed81ca292e6">neforce::create_plugin</references>
+        <referencedby refid="group___plugin_1gacc30f46adda4b5fce81a8ed81ca292e6">neforce::create_plugin</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___plugin_1ga74771a48a81e35febe1026112c62e1f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___plugin_1gad7adaf72e0a7e6ae7dfd0eba89279952" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
-        <definition>void destroy_plugin</definition>
+        <definition>void neforce::destroy_plugin</definition>
         <argsstring>(iplugin *p)</argsstring>
         <name>destroy_plugin</name>
+        <qualifiedname>neforce::destroy_plugin</qualifiedname>
         <param>
-          <type><ref refid="structiplugin" kindref="compound">iplugin</ref> *</type>
+          <type>iplugin *</type>
           <declname>p</declname>
         </param>
         <briefdescription>
@@ -69,6 +74,8 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/plugin/plugin_entry.hpp" line="54" column="17" declfile="D:/Workspace/NexusForce/include/NeForce/plugin/plugin_entry.hpp" declline="54" declcolumn="17"/>
+        <references refid="group___plugin_1gad7adaf72e0a7e6ae7dfd0eba89279952">neforce::destroy_plugin</references>
+        <referencedby refid="group___plugin_1gad7adaf72e0a7e6ae7dfd0eba89279952">neforce::destroy_plugin</referencedby>
       </memberdef>
     </sectiondef>
     <sectiondef kind="define">

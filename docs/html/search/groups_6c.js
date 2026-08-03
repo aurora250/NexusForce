@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['终止处理_0',['终止处理',['../group___termination_functions.html',1,'']]]
+  ['组合操作_0',['组合操作',['../group___async_compose.html',1,'']]]
 ];

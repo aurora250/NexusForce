@@ -1,14 +1,14 @@
 var group___allocated_ptr =
 [
-    [ "allocated_ptr&lt; Alloc &gt;", "structallocated__ptr.html", [
-      [ "pointer", "structallocated__ptr.html#a874cb8205f70d6a10bcf4e5c18868ac3", null ],
-      [ "value_type", "structallocated__ptr.html#a6fb2502757ca8c5ffbb9b4797d190508", null ],
-      [ "allocated_ptr", "structallocated__ptr.html#a8ef5c320e425255b95d2f8a8626ff93e", null ],
-      [ "allocated_ptr", "structallocated__ptr.html#a6fdae2691305f4444a372e81168d1b66", null ],
-      [ "allocated_ptr", "structallocated__ptr.html#a353ae7993b112ab48b499ee971d750e9", null ],
-      [ "~allocated_ptr", "structallocated__ptr.html#ac8a262eca5f5dbadc293c7f2f84d6c85", null ],
-      [ "get", "structallocated__ptr.html#a0242cf61cc7b0e1a10683e90f8686e57", null ],
-      [ "operator=", "structallocated__ptr.html#ad0f0a553c9dd674ed40c8e3a8cdb960d", null ]
+    [ "neforce::allocated_ptr&lt; Alloc &gt;", "structneforce_1_1allocated__ptr.html", [
+      [ "pointer", "structneforce_1_1allocated__ptr.html#ac048c0b5191845b7b573e9b98c2f5952", null ],
+      [ "value_type", "structneforce_1_1allocated__ptr.html#a5d21760d77941dd5fd23c47da552d279", null ],
+      [ "allocated_ptr", "structneforce_1_1allocated__ptr.html#a4bb37d3a1cc511e0330388ea30f81e38", null ],
+      [ "allocated_ptr", "structneforce_1_1allocated__ptr.html#a1afdcfa937125be67c00d5720fcf241e", null ],
+      [ "allocated_ptr", "structneforce_1_1allocated__ptr.html#a9b3656f513db91b4df4e7588b4124c8b", null ],
+      [ "~allocated_ptr", "structneforce_1_1allocated__ptr.html#a7201c69301823d76827816cb0f8a36f6", null ],
+      [ "get", "structneforce_1_1allocated__ptr.html#a4629e79b71167a34e0338225b10ddfe8", null ],
+      [ "operator=", "structneforce_1_1allocated__ptr.html#adad8dc753dc6e48ae89aa86644b30866", null ]
     ] ],
-    [ "allocate_guarded", "group___allocated_ptr.html#ga3f77e08830ea228fc0e451c67c396ba7", null ]
+    [ "neforce::allocate_guarded", "group___allocated_ptr.html#gaf1ab66e7851515f3cf1196166cd0e727", null ]
 ];

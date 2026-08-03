@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['独占智能指针_0',['独占智能指针',['../group___unique_pointer.html',1,'']]]
+  ['版本细节_0',['版本细节',['../group___u_u_i_d.html#version_details',1,'']]]
 ];

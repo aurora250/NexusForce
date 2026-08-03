@@ -1,0 +1,2564 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1bitmap" kind="class" language="C++" prot="public">
+    <compoundname>neforce::bitmap</compoundname>
+    <basecompoundref refid="structneforce_1_1icomparable" prot="public" virt="non-virtual">neforce::icomparable&lt; bitmap &gt;</basecompoundref>
+    <includes refid="bitmap_8hpp" local="no">bitmap.hpp</includes>
+    <innerclass refid="structneforce_1_1bitmap_1_1bit__storage" prot="private">neforce::bitmap::bit_storage</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1bitmap_1a2c470767d6a2194e1b2fb1d3fee574de" prot="public" static="no">
+        <type>bool</type>
+        <definition>using neforce::bitmap::value_type = bool</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>neforce::bitmap::value_type</qualifiedname>
+        <briefdescription>
+<para>值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="367" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="367" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1bitmap_1a34e109c751281ce67c27159dc9bb129b" prot="public" static="no">
+        <type><ref refid="structneforce_1_1bit__reference" kindref="compound">bit_reference</ref> *</type>
+        <definition>using neforce::bitmap::pointer = bit_reference*</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>neforce::bitmap::pointer</qualifiedname>
+        <briefdescription>
+<para>指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="368" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="368" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1bitmap_1a9afc1c91cc93ae43ce06208bb9c33fd1" prot="public" static="no">
+        <type><ref refid="structneforce_1_1bit__reference" kindref="compound">bit_reference</ref></type>
+        <definition>using neforce::bitmap::reference = bit_reference</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>neforce::bitmap::reference</qualifiedname>
+        <briefdescription>
+<para>引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="369" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="369" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1bitmap_1a9660bd435a82cd128a62e862f0536683" prot="public" static="no">
+        <type>const bool *</type>
+        <definition>using neforce::bitmap::const_pointer = const bool*</definition>
+        <argsstring></argsstring>
+        <name>const_pointer</name>
+        <qualifiedname>neforce::bitmap::const_pointer</qualifiedname>
+        <briefdescription>
+<para>常量指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="370" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="370" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1bitmap_1a1a761e14574fa4f66ec48cc66ca646b6" prot="public" static="no">
+        <type>const bool</type>
+        <definition>using neforce::bitmap::const_reference = const bool</definition>
+        <argsstring></argsstring>
+        <name>const_reference</name>
+        <qualifiedname>neforce::bitmap::const_reference</qualifiedname>
+        <briefdescription>
+<para>常量引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="371" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="371" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1bitmap_1a2e1719613413a5ee11d8b73319c6c371" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>using neforce::bitmap::size_type = size_t</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>neforce::bitmap::size_type</qualifiedname>
+        <briefdescription>
+<para>大小类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="372" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="372" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1bitmap_1a5a9e1b42601fb4761cf67a04751db7b9" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1gab2c4bc5144496796ce8a7feed7b8ad58" kindref="member">ptrdiff_t</ref></type>
+        <definition>using neforce::bitmap::difference_type = ptrdiff_t</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>neforce::bitmap::difference_type</qualifiedname>
+        <briefdescription>
+<para>差值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="373" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="373" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1bitmap_1a370ba51ee2ae5d4016a705421c368fdd" prot="public" static="no">
+        <type><ref refid="structneforce_1_1bitmap__iterator" kindref="compound">bitmap_iterator</ref>&lt; false, <ref refid="classneforce_1_1bitmap_1a0514120cdff5e766fa6e87f7fbf4ab0d" kindref="member">bitmap</ref> &gt;</type>
+        <definition>using neforce::bitmap::iterator = bitmap_iterator&lt;false, bitmap&gt;</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>neforce::bitmap::iterator</qualifiedname>
+        <briefdescription>
+<para>迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="374" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="374" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1bitmap_1ae3746bb0c5d29ba4e6a2dd557d76658e" prot="public" static="no">
+        <type><ref refid="structneforce_1_1bitmap__iterator" kindref="compound">bitmap_iterator</ref>&lt; true, <ref refid="classneforce_1_1bitmap_1a0514120cdff5e766fa6e87f7fbf4ab0d" kindref="member">bitmap</ref> &gt;</type>
+        <definition>using neforce::bitmap::const_iterator = bitmap_iterator&lt;true, bitmap&gt;</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <qualifiedname>neforce::bitmap::const_iterator</qualifiedname>
+        <briefdescription>
+<para>常量迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="375" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="375" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1bitmap_1a3ac1648eb3b54bffaa7c2995254d3cdc" prot="public" static="no">
+        <type>_NEFORCE <ref refid="classneforce_1_1bitmap_1a3ac1648eb3b54bffaa7c2995254d3cdc" kindref="member">reverse_iterator</ref>&lt; <ref refid="classneforce_1_1bitmap_1a370ba51ee2ae5d4016a705421c368fdd" kindref="member">iterator</ref> &gt;</type>
+        <definition>using neforce::bitmap::reverse_iterator = _NEFORCE reverse_iterator&lt;iterator&gt;</definition>
+        <argsstring></argsstring>
+        <name>reverse_iterator</name>
+        <qualifiedname>neforce::bitmap::reverse_iterator</qualifiedname>
+        <briefdescription>
+<para>反向迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="376" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="376" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1bitmap_1abb4464db57c98908f07a1c936f5d6173" prot="public" static="no">
+        <type>_NEFORCE <ref refid="classneforce_1_1bitmap_1a3ac1648eb3b54bffaa7c2995254d3cdc" kindref="member">reverse_iterator</ref>&lt; <ref refid="classneforce_1_1bitmap_1ae3746bb0c5d29ba4e6a2dd557d76658e" kindref="member">const_iterator</ref> &gt;</type>
+        <definition>using neforce::bitmap::const_reverse_iterator = _NEFORCE reverse_iterator&lt;const_iterator&gt;</definition>
+        <argsstring></argsstring>
+        <name>const_reverse_iterator</name>
+        <qualifiedname>neforce::bitmap::const_reverse_iterator</qualifiedname>
+        <briefdescription>
+<para>常量反向迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="377" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="377" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1bitmap_1ada4e97e8f00366045bfb23b3fb270145" prot="public" static="no">
+        <type><ref refid="group___memory_allocator_1gabd6174043c688f04c1d71b9b21148ec1" kindref="member">allocator</ref>&lt; <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref> &gt;</type>
+        <definition>using neforce::bitmap::allocator_type = allocator&lt;uint32_t&gt;</definition>
+        <argsstring></argsstring>
+        <name>allocator_type</name>
+        <qualifiedname>neforce::bitmap::allocator_type</qualifiedname>
+        <briefdescription>
+<para>分配器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="378" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="378" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1bitmap_1a50d140adeea52eb392d7f7ce72ba2175" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1bitmap_1a370ba51ee2ae5d4016a705421c368fdd" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::bitmap::start_</definition>
+        <argsstring></argsstring>
+        <name>start_</name>
+        <qualifiedname>neforce::bitmap::start_</qualifiedname>
+        <initializer>{this}</initializer>
+        <briefdescription>
+<para>起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="483" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="483" bodyend="483"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1bitmap_1a423cd3ebcd128f8d058645c93b9a9836" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1bitmap_1a370ba51ee2ae5d4016a705421c368fdd" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::bitmap::finish_</definition>
+        <argsstring></argsstring>
+        <name>finish_</name>
+        <qualifiedname>neforce::bitmap::finish_</qualifiedname>
+        <initializer>{this}</initializer>
+        <briefdescription>
+<para>结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="484" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="484" bodyend="484"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1bitmap_1a821ca6017feddf9248243536c3c23822" prot="private" static="no" mutable="no">
+        <type>bit_storage</type>
+        <definition>bit_storage neforce::bitmap::storage_</definition>
+        <argsstring></argsstring>
+        <name>storage_</name>
+        <qualifiedname>neforce::bitmap::storage_</qualifiedname>
+        <briefdescription>
+<para>底层存储 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="485" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="485" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a726dd30136b9d4eea2a4d0dd7a602561" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>static constexpr size_t neforce::bitmap::word_count</definition>
+        <argsstring>(const size_type word) noexcept</argsstring>
+        <name>word_count</name>
+        <qualifiedname>neforce::bitmap::word_count</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a2e1719613413a5ee11d8b73319c6c371" kindref="member">size_type</ref></type>
+          <declname>word</declname>
+        </param>
+        <briefdescription>
+<para>计算存储n个位所需的字数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>word</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="493" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="493" bodyend="495"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a50a853d688e598eab337295d6b9c5e97" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::bitmap::allocate_storage</definition>
+        <argsstring>(const size_type word)</argsstring>
+        <name>allocate_storage</name>
+        <qualifiedname>neforce::bitmap::allocate_storage</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a2e1719613413a5ee11d8b73319c6c371" kindref="member">size_type</ref></type>
+          <declname>word</declname>
+        </param>
+        <briefdescription>
+<para>分配存储空间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>word</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="501" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="501" bodyend="506"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1ad0d341ccb583cb28a64de0f8242dbd88" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::bitmap::set_iterators</definition>
+        <argsstring>(const size_type word) noexcept</argsstring>
+        <name>set_iterators</name>
+        <qualifiedname>neforce::bitmap::set_iterators</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a2e1719613413a5ee11d8b73319c6c371" kindref="member">size_type</ref></type>
+          <declname>word</declname>
+        </param>
+        <briefdescription>
+<para>设置迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>word</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="512" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="512" bodyend="515"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1ace7bb5e5dee7755568bbdd7b88cd360e" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator2</type>
+        <definition>Iterator2 neforce::bitmap::bit_copy</definition>
+        <argsstring>(Iterator1 first, Iterator1 last, Iterator2 result)</argsstring>
+        <name>bit_copy</name>
+        <qualifiedname>neforce::bitmap::bit_copy</qualifiedname>
+        <param>
+          <type>Iterator1</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>复制位范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标起始 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>目标结束位置 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="527" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="527" bodyend="533"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a8229852040b43de3fe29cb46007ba63d" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator2</type>
+        <definition>Iterator2 neforce::bitmap::bit_copy_backward</definition>
+        <argsstring>(Iterator1 first, Iterator1 last, Iterator2 result)</argsstring>
+        <name>bit_copy_backward</name>
+        <qualifiedname>neforce::bitmap::bit_copy_backward</qualifiedname>
+        <param>
+          <type>Iterator1</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>反向复制位范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标结束 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>目标起始位置 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="545" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="545" bodyend="551"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a8d98cdb5bb978579ed44a03bc1ca1ffd" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::bitmap::reallocate_insert</definition>
+        <argsstring>(const iterator &amp;position, const size_type extra_len, const bool value)</argsstring>
+        <name>reallocate_insert</name>
+        <qualifiedname>neforce::bitmap::reallocate_insert</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a370ba51ee2ae5d4016a705421c368fdd" kindref="member">iterator</ref> &amp;</type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a2e1719613413a5ee11d8b73319c6c371" kindref="member">size_type</ref></type>
+          <declname>extra_len</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>重新分配并插入 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>extra_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入长度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="559" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="559" bodyend="574"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a09ef6a0bfae994f4c3bb717612ff7efd" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::bitmap::reallocate_insert_range</definition>
+        <argsstring>(const iterator position, Iterator first, Iterator last, const size_type extra_len)</argsstring>
+        <name>reallocate_insert_range</name>
+        <qualifiedname>neforce::bitmap::reallocate_insert_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a370ba51ee2ae5d4016a705421c368fdd" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a2e1719613413a5ee11d8b73319c6c371" kindref="member">size_type</ref></type>
+          <declname>extra_len</declname>
+        </param>
+        <briefdescription>
+<para>重新分配并插入范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>extra_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入长度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="585" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="585" bodyend="599"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a8255af2feab370914922031296c15dcc" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::bitmap::insert_aux</definition>
+        <argsstring>(const iterator &amp;position, const bool value)</argsstring>
+        <name>insert_aux</name>
+        <qualifiedname>neforce::bitmap::insert_aux</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a370ba51ee2ae5d4016a705421c368fdd" kindref="member">iterator</ref> &amp;</type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>插入辅助函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="606" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="606" bodyend="614"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a18776ed1eb0b1e72c6f1f7831f590144" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___iterator_category_checks_1gace1b5811f58b26e736680d8234eb5627" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <definition>enable_if_t&lt;!is_ranges_fwd_iter_v&lt; Iterator &gt; &gt; neforce::bitmap::range_init</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>range_init</name>
+        <qualifiedname>neforce::bitmap::range_init</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围初始化（非前向迭代器版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="623" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="623" bodyend="636"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a395be1cd42d842057362c75268ecc784" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1gace1b5811f58b26e736680d8234eb5627" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <definition>enable_if_t&lt; is_ranges_fwd_iter_v&lt; Iterator &gt; &gt; neforce::bitmap::range_init</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>range_init</name>
+        <qualifiedname>neforce::bitmap::range_init</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围初始化（前向迭代器版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="645" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="645" bodyend="659"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a8b630820abc6cd08b9add9c6506db5d2" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___iterator_category_checks_1gace1b5811f58b26e736680d8234eb5627" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <definition>enable_if_t&lt;!is_ranges_fwd_iter_v&lt; Iterator &gt; &gt; neforce::bitmap::insert_range</definition>
+        <argsstring>(iterator position, Iterator first, Iterator last)</argsstring>
+        <name>insert_range</name>
+        <qualifiedname>neforce::bitmap::insert_range</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1bitmap_1a370ba51ee2ae5d4016a705421c368fdd" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入（非前向迭代器版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="669" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="669" bodyend="676"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a8ee2230ffa9a821f090f460f446ef407" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1gace1b5811f58b26e736680d8234eb5627" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <definition>enable_if_t&lt; is_ranges_fwd_iter_v&lt; Iterator &gt; &gt; neforce::bitmap::insert_range</definition>
+        <argsstring>(iterator position, Iterator first, Iterator last)</argsstring>
+        <name>insert_range</name>
+        <qualifiedname>neforce::bitmap::insert_range</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1bitmap_1a370ba51ee2ae5d4016a705421c368fdd" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入（前向迭代器版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="686" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="686" bodyend="699"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a0514120cdff5e766fa6e87f7fbf4ab0d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::bitmap::bitmap</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>bitmap</name>
+        <qualifiedname>neforce::bitmap::bitmap</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>构造一个空位图。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="707" column="15"/>
+        <referencedby refid="classneforce_1_1bitmap_1af838d31624a57d4be9c3fad69815e131" compoundref="bitmap_8hpp" startline="792" endline="798">bitmap</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a6211560dbe6738f80bef18659ae5f4db" compoundref="bitmap_8hpp" startline="758" endline="771">bitmap</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a403fa8e63ea48f887b03a471132441fb" compoundref="bitmap_8hpp" startline="743" endline="744">bitmap</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a01f303ea60e8d703de6c9d264e05b6a8" compoundref="bitmap_8hpp" startline="751" endline="752">bitmap</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a32e6b4634c2f101ba50247972f20dc42" compoundref="bitmap_8hpp" startline="715" endline="722">bitmap</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1ab796444e27f72ac3ad3acf64f4957db1" compoundref="bitmap_8hpp" startline="1160" endline="1163">equal_to</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a6dc5bf5f1f84d5ed5fcfb5c9b9f4dec6" compoundref="bitmap_8hpp" startline="1170" endline="1174">less_than</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a9735eb229bb27c554c4ca63c7c0b0d49" compoundref="bitmap_8hpp" startline="805" endline="811">operator=</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a4cd3c0526441ec485e1e8a10e2f79a56" compoundref="bitmap_8hpp" startline="778" endline="786">operator=</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1aaec445d86489c6ce679b96b904e63d54" compoundref="bitmap_8hpp" startline="1142" endline="1153">swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a32e6b4634c2f101ba50247972f20dc42" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::bitmap::bitmap</definition>
+        <argsstring>(const size_type word)</argsstring>
+        <name>bitmap</name>
+        <qualifiedname>neforce::bitmap::bitmap</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a2e1719613413a5ee11d8b73319c6c371" kindref="member">size_type</ref></type>
+          <declname>word</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>word</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+构造包含n个位的位置，所有位初始化为false。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="715" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="715" bodyend="722"/>
+        <references refid="classneforce_1_1bitmap_1a0514120cdff5e766fa6e87f7fbf4ab0d">bitmap</references>
+        <references refid="group___shift_algorithms_1ga390400a23909193701477d93522be5e9" compoundref="shift_8hpp" startline="418" endline="427">neforce::fill_n</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a954d87b80135ba2396e54b5d15a97b0b" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::bitmap::bitmap</definition>
+        <argsstring>(const size_type word, const bool value)</argsstring>
+        <name>bitmap</name>
+        <qualifiedname>neforce::bitmap::bitmap</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a2e1719613413a5ee11d8b73319c6c371" kindref="member">size_type</ref></type>
+          <declname>word</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定大小和初始值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>word</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="729" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="729" bodyend="736"/>
+        <references refid="group___shift_algorithms_1ga0e2252aa0b1e6f5f5263361835dc58a8" compoundref="shift_8hpp" startline="398" endline="406">neforce::fill</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a403fa8e63ea48f887b03a471132441fb" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::bitmap::bitmap</definition>
+        <argsstring>(const int32_t word, const bool value)</argsstring>
+        <name>bitmap</name>
+        <qualifiedname>neforce::bitmap::bitmap</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1gaa0af497ed9ed410d4c911b409653515a" kindref="member">int32_t</ref></type>
+          <declname>word</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>32位整数构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>word</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="743" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="743" bodyend="744"/>
+        <references refid="classneforce_1_1bitmap_1a0514120cdff5e766fa6e87f7fbf4ab0d">bitmap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a01f303ea60e8d703de6c9d264e05b6a8" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::bitmap::bitmap</definition>
+        <argsstring>(const int64_t word, const bool value)</argsstring>
+        <name>bitmap</name>
+        <qualifiedname>neforce::bitmap::bitmap</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga0b098d32ebd9cc922390914e765ca674" kindref="member">int64_t</ref></type>
+          <declname>word</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>64位整数构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>word</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="751" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="751" bodyend="752"/>
+        <references refid="classneforce_1_1bitmap_1a0514120cdff5e766fa6e87f7fbf4ab0d">bitmap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a6211560dbe6738f80bef18659ae5f4db" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::bitmap::bitmap</definition>
+        <argsstring>(const bitmap &amp;other)</argsstring>
+        <name>bitmap</name>
+        <qualifiedname>neforce::bitmap::bitmap</qualifiedname>
+        <param>
+          <type>const bitmap &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源位图 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="758" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="758" bodyend="771"/>
+        <references refid="classneforce_1_1bitmap_1a0514120cdff5e766fa6e87f7fbf4ab0d">bitmap</references>
+        <references refid="classneforce_1_1bitmap_1ac61d0ec9209ffae7564bec499f5a16e6" compoundref="bitmap_8hpp" startline="857" endline="857">cbegin</references>
+        <references refid="classneforce_1_1bitmap_1aff1eac82a4bf1339e24db60d5088ffcc" compoundref="bitmap_8hpp" startline="863" endline="863">cend</references>
+        <references refid="classneforce_1_1bitmap_1aad8f1117b6d4a78de2769481fb45f21e" compoundref="bitmap_8hpp" startline="921" endline="921">empty</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1bitmap_1aa9100caf76b739343327708cb277e81c" compoundref="bitmap_8hpp" startline="909" endline="909">size</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a4cd3c0526441ec485e1e8a10e2f79a56" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1a0514120cdff5e766fa6e87f7fbf4ab0d" kindref="member">bitmap</ref> &amp;</type>
+        <definition>bitmap &amp; neforce::bitmap::operator=</definition>
+        <argsstring>(const bitmap &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::bitmap::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a0514120cdff5e766fa6e87f7fbf4ab0d" kindref="member">bitmap</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源位图 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="778" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="778" bodyend="786"/>
+        <references refid="group___args_forward_functions_1ga57a2cf85645286e20c82caae70cd13dc" compoundref="type__traits_8hpp" startline="3084" endline="3086">neforce::addressof</references>
+        <references refid="classneforce_1_1bitmap_1a0514120cdff5e766fa6e87f7fbf4ab0d">bitmap</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1af838d31624a57d4be9c3fad69815e131" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::bitmap::bitmap</definition>
+        <argsstring>(bitmap &amp;&amp;other) noexcept</argsstring>
+        <name>bitmap</name>
+        <qualifiedname>neforce::bitmap::bitmap</qualifiedname>
+        <param>
+          <type>bitmap &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源位图 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="792" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="792" bodyend="798"/>
+        <references refid="classneforce_1_1bitmap_1a0514120cdff5e766fa6e87f7fbf4ab0d">bitmap</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a9735eb229bb27c554c4ca63c7c0b0d49" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1a0514120cdff5e766fa6e87f7fbf4ab0d" kindref="member">bitmap</ref> &amp;</type>
+        <definition>bitmap &amp; neforce::bitmap::operator=</definition>
+        <argsstring>(bitmap &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::bitmap::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1bitmap_1a0514120cdff5e766fa6e87f7fbf4ab0d" kindref="member">bitmap</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源位图 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="805" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="805" bodyend="811"/>
+        <references refid="group___args_forward_functions_1ga57a2cf85645286e20c82caae70cd13dc" compoundref="type__traits_8hpp" startline="3084" endline="3086">neforce::addressof</references>
+        <references refid="classneforce_1_1bitmap_1a0514120cdff5e766fa6e87f7fbf4ab0d">bitmap</references>
+        <references refid="classneforce_1_1bitmap_1aaec445d86489c6ce679b96b904e63d54" compoundref="bitmap_8hpp" startline="1142" endline="1153">swap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a03b8a3e1f8f7f16a63c03560029cebf4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga4f7b2f70ba1539ec3326d52e89698f13" kindref="member">is_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::bitmap::bitmap</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>bitmap</name>
+        <qualifiedname>neforce::bitmap::bitmap</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="820" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="820" bodyend="822"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a3fbffb6c15f6cc1289f6ba7527c8a043" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::bitmap::~bitmap</definition>
+        <argsstring>()=default</argsstring>
+        <name>~bitmap</name>
+        <qualifiedname>neforce::bitmap::~bitmap</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="827" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1ac9c717ee9f924e993fc3ea6b4a86eea1" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1a370ba51ee2ae5d4016a705421c368fdd" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::bitmap::begin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>neforce::bitmap::begin</qualifiedname>
+        <briefdescription>
+<para>获取起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个位的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="833" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="833" bodyend="833"/>
+        <referencedby refid="classneforce_1_1bitmap_1afe452da4714d57e8288e24d1169b1fe8" compoundref="bitmap_8hpp" startline="1136" endline="1136">clear</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a8f2fa81cb06cbcef0b2257f2a80a7cbe" compoundref="bitmap_8hpp" startline="953" endline="953">front</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1acfdae24b43cf3da92541e8e05dd6b5b0" compoundref="bitmap_8hpp" startline="1010" endline="1018">insert</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a0548b99786d6a6ce220b50f3a326ca20" compoundref="bitmap_8hpp" startline="936" endline="938">operator[]</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a6fbae27838c7e9e5f51f66056cf0c301" compoundref="bitmap_8hpp" startline="875" endline="875">rend</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1ad131616f30511689527904e821899d7f" compoundref="bitmap_8hpp" startline="979" endline="990">reserve</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a08c204b7a77cfff7fd4c406b88a489ee" compoundref="bitmap_8hpp" startline="1125" endline="1131">resize</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a4e25cc0d52673107ccdbada60f35e49f" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1a370ba51ee2ae5d4016a705421c368fdd" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::bitmap::end</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>neforce::bitmap::end</qualifiedname>
+        <briefdescription>
+<para>获取结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个位之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="839" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="839" bodyend="839"/>
+        <referencedby refid="classneforce_1_1bitmap_1a47ea8b55c821d106e13dbbb558a8557b" compoundref="bitmap_8hpp" startline="965" endline="965">back</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1afe452da4714d57e8288e24d1169b1fe8" compoundref="bitmap_8hpp" startline="1136" endline="1136">clear</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a94009e6ec9ffa17e2d2e2688b1c199cf" compoundref="bitmap_8hpp" startline="1115" endline="1118">erase</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a3a2313d4e265953532b7246f758f3f8a" compoundref="bitmap_8hpp" startline="1101" endline="1107">erase</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a52256f90af1a02dc434a18a4a6e2a7a4" compoundref="bitmap_8hpp" startline="1038" endline="1050">insert</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1acfdae24b43cf3da92541e8e05dd6b5b0" compoundref="bitmap_8hpp" startline="1010" endline="1018">insert</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1ab70ea36467e3b34a8e417e5f653dbf87" compoundref="bitmap_8hpp" startline="1058" endline="1069">insert</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1af39f91e6d33d0a81316fc88dc71f6dc9" compoundref="bitmap_8hpp" startline="996" endline="1002">push_back</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a46775e254ff6d9934b3fbe0c503117be" compoundref="bitmap_8hpp" startline="869" endline="869">rbegin</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1ad131616f30511689527904e821899d7f" compoundref="bitmap_8hpp" startline="979" endline="990">reserve</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a08c204b7a77cfff7fd4c406b88a489ee" compoundref="bitmap_8hpp" startline="1125" endline="1131">resize</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1af456dcbf3dbd596cd98f542edfadb3d0" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1ae3746bb0c5d29ba4e6a2dd557d76658e" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::bitmap::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>neforce::bitmap::begin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个位的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="845" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="845" bodyend="845"/>
+        <references refid="classneforce_1_1bitmap_1ac61d0ec9209ffae7564bec499f5a16e6" compoundref="bitmap_8hpp" startline="857" endline="857">cbegin</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a5f8b6c1545a0fa89f456e1d967c62dfb" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1ae3746bb0c5d29ba4e6a2dd557d76658e" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::bitmap::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>neforce::bitmap::end</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个位之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="851" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="851" bodyend="851"/>
+        <references refid="classneforce_1_1bitmap_1aff1eac82a4bf1339e24db60d5088ffcc" compoundref="bitmap_8hpp" startline="863" endline="863">cend</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1ac61d0ec9209ffae7564bec499f5a16e6" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1ae3746bb0c5d29ba4e6a2dd557d76658e" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::bitmap::cbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cbegin</name>
+        <qualifiedname>neforce::bitmap::cbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个位的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="857" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="857" bodyend="857"/>
+        <referencedby refid="classneforce_1_1bitmap_1af456dcbf3dbd596cd98f542edfadb3d0" compoundref="bitmap_8hpp" startline="845" endline="845">begin</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a6211560dbe6738f80bef18659ae5f4db" compoundref="bitmap_8hpp" startline="758" endline="771">bitmap</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a6b78f2bac752ac911c5e82380601ff7e" compoundref="bitmap_8hpp" startline="901" endline="903">crend</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1ab796444e27f72ac3ad3acf64f4957db1" compoundref="bitmap_8hpp" startline="1160" endline="1163">equal_to</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1ae0f5a5681ccd2c538aed42fe66557c9b" compoundref="bitmap_8hpp" startline="959" endline="959">front</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a6dc5bf5f1f84d5ed5fcfb5c9b9f4dec6" compoundref="bitmap_8hpp" startline="1170" endline="1174">less_than</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1ae7082d2219017b431deb4814dd6269ad" compoundref="bitmap_8hpp" startline="945" endline="947">operator[]</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1aa9100caf76b739343327708cb277e81c" compoundref="bitmap_8hpp" startline="909" endline="909">size</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1aff1eac82a4bf1339e24db60d5088ffcc" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1ae3746bb0c5d29ba4e6a2dd557d76658e" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::bitmap::cend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cend</name>
+        <qualifiedname>neforce::bitmap::cend</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个位之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="863" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="863" bodyend="863"/>
+        <referencedby refid="classneforce_1_1bitmap_1addc58ab57d4e7e30636f8caa632d1ab9" compoundref="bitmap_8hpp" startline="971" endline="971">back</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a6211560dbe6738f80bef18659ae5f4db" compoundref="bitmap_8hpp" startline="758" endline="771">bitmap</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a96b15e78c4329e1a59952ac0df33a1ea" compoundref="bitmap_8hpp" startline="893" endline="895">crbegin</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a5f8b6c1545a0fa89f456e1d967c62dfb" compoundref="bitmap_8hpp" startline="851" endline="851">end</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1ab796444e27f72ac3ad3acf64f4957db1" compoundref="bitmap_8hpp" startline="1160" endline="1163">equal_to</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a6dc5bf5f1f84d5ed5fcfb5c9b9f4dec6" compoundref="bitmap_8hpp" startline="1170" endline="1174">less_than</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1aa9100caf76b739343327708cb277e81c" compoundref="bitmap_8hpp" startline="909" endline="909">size</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a46775e254ff6d9934b3fbe0c503117be" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1a3ac1648eb3b54bffaa7c2995254d3cdc" kindref="member">reverse_iterator</ref></type>
+        <definition>reverse_iterator neforce::bitmap::rbegin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>rbegin</name>
+        <qualifiedname>neforce::bitmap::rbegin</qualifiedname>
+        <briefdescription>
+<para>获取反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个位的反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="869" column="33" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="869" bodyend="869"/>
+        <references refid="classneforce_1_1bitmap_1a4e25cc0d52673107ccdbada60f35e49f" compoundref="bitmap_8hpp" startline="839" endline="839">end</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a6fbae27838c7e9e5f51f66056cf0c301" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1a3ac1648eb3b54bffaa7c2995254d3cdc" kindref="member">reverse_iterator</ref></type>
+        <definition>reverse_iterator neforce::bitmap::rend</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>rend</name>
+        <qualifiedname>neforce::bitmap::rend</qualifiedname>
+        <briefdescription>
+<para>获取反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个位之前位置的反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="875" column="33" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="875" bodyend="875"/>
+        <references refid="classneforce_1_1bitmap_1ac9c717ee9f924e993fc3ea6b4a86eea1" compoundref="bitmap_8hpp" startline="833" endline="833">begin</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1afe05904605077812caa29e6de265a1c3" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1abb4464db57c98908f07a1c936f5d6173" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator neforce::bitmap::rbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rbegin</name>
+        <qualifiedname>neforce::bitmap::rbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个位的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="881" column="39" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="881" bodyend="881"/>
+        <references refid="classneforce_1_1bitmap_1a96b15e78c4329e1a59952ac0df33a1ea" compoundref="bitmap_8hpp" startline="893" endline="895">crbegin</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a59790ec16924ae28bfcb9aa685490519" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1abb4464db57c98908f07a1c936f5d6173" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator neforce::bitmap::rend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rend</name>
+        <qualifiedname>neforce::bitmap::rend</qualifiedname>
+        <briefdescription>
+<para>获取常量反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个位之前位置的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="887" column="39" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="887" bodyend="887"/>
+        <references refid="classneforce_1_1bitmap_1a6b78f2bac752ac911c5e82380601ff7e" compoundref="bitmap_8hpp" startline="901" endline="903">crend</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a96b15e78c4329e1a59952ac0df33a1ea" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1abb4464db57c98908f07a1c936f5d6173" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator neforce::bitmap::crbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>crbegin</name>
+        <qualifiedname>neforce::bitmap::crbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个位的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="893" column="39" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="893" bodyend="895"/>
+        <references refid="classneforce_1_1bitmap_1aff1eac82a4bf1339e24db60d5088ffcc" compoundref="bitmap_8hpp" startline="863" endline="863">cend</references>
+        <referencedby refid="classneforce_1_1bitmap_1afe05904605077812caa29e6de265a1c3" compoundref="bitmap_8hpp" startline="881" endline="881">rbegin</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a6b78f2bac752ac911c5e82380601ff7e" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1abb4464db57c98908f07a1c936f5d6173" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator neforce::bitmap::crend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>crend</name>
+        <qualifiedname>neforce::bitmap::crend</qualifiedname>
+        <briefdescription>
+<para>获取常量反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个位之前位置的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="901" column="39" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="901" bodyend="903"/>
+        <references refid="classneforce_1_1bitmap_1ac61d0ec9209ffae7564bec499f5a16e6" compoundref="bitmap_8hpp" startline="857" endline="857">cbegin</references>
+        <referencedby refid="classneforce_1_1bitmap_1a59790ec16924ae28bfcb9aa685490519" compoundref="bitmap_8hpp" startline="887" endline="887">rend</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1aa9100caf76b739343327708cb277e81c" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1a2e1719613413a5ee11d8b73319c6c371" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::bitmap::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>neforce::bitmap::size</qualifiedname>
+        <briefdescription>
+<para>获取位数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>位图中的位数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="909" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="909" bodyend="909"/>
+        <references refid="classneforce_1_1bitmap_1ac61d0ec9209ffae7564bec499f5a16e6" compoundref="bitmap_8hpp" startline="857" endline="857">cbegin</references>
+        <references refid="classneforce_1_1bitmap_1aff1eac82a4bf1339e24db60d5088ffcc" compoundref="bitmap_8hpp" startline="863" endline="863">cend</references>
+        <referencedby refid="classneforce_1_1bitmap_1a6211560dbe6738f80bef18659ae5f4db" compoundref="bitmap_8hpp" startline="758" endline="771">bitmap</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1ab796444e27f72ac3ad3acf64f4957db1" compoundref="bitmap_8hpp" startline="1160" endline="1163">equal_to</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a52256f90af1a02dc434a18a4a6e2a7a4" compoundref="bitmap_8hpp" startline="1038" endline="1050">insert</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1ab70ea36467e3b34a8e417e5f653dbf87" compoundref="bitmap_8hpp" startline="1058" endline="1069">insert</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a08c204b7a77cfff7fd4c406b88a489ee" compoundref="bitmap_8hpp" startline="1125" endline="1131">resize</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a0c7e43faf10fa2639e7e756a67741007" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1a2e1719613413a5ee11d8b73319c6c371" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::bitmap::max_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>max_size</name>
+        <qualifiedname>neforce::bitmap::max_size</qualifiedname>
+        <briefdescription>
+<para>获取最大可能位数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大位数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="915" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="915" bodyend="915"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1aad8f1117b6d4a78de2769481fb45f21e" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::bitmap::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>neforce::bitmap::empty</qualifiedname>
+        <briefdescription>
+<para>检查是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>位图是否为空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="921" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="921" bodyend="921"/>
+        <referencedby refid="classneforce_1_1bitmap_1a6211560dbe6738f80bef18659ae5f4db" compoundref="bitmap_8hpp" startline="758" endline="771">bitmap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a5aae0da3cc7d0757c8ff719248878db2" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1a2e1719613413a5ee11d8b73319c6c371" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::bitmap::capacity</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>capacity</name>
+        <qualifiedname>neforce::bitmap::capacity</qualifiedname>
+        <briefdescription>
+<para>获取容量（位数） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前分配的存储可容纳的位数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="927" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="927" bodyend="929"/>
+        <references refid="group___bit_manipulation_1gaa003b11a7fa7ed453086b439480354fb" compoundref="bitmap_8hpp" startline="24">neforce::BITMAP_WORD_SIZE</references>
+        <referencedby refid="classneforce_1_1bitmap_1a52256f90af1a02dc434a18a4a6e2a7a4" compoundref="bitmap_8hpp" startline="1038" endline="1050">insert</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1ab70ea36467e3b34a8e417e5f653dbf87" compoundref="bitmap_8hpp" startline="1058" endline="1069">insert</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1ad131616f30511689527904e821899d7f" compoundref="bitmap_8hpp" startline="979" endline="990">reserve</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a0548b99786d6a6ce220b50f3a326ca20" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1a9afc1c91cc93ae43ce06208bb9c33fd1" kindref="member">reference</ref></type>
+        <definition>reference neforce::bitmap::operator[]</definition>
+        <argsstring>(const size_type n)</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>neforce::bitmap::operator[]</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a2e1719613413a5ee11d8b73319c6c371" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>下标访问操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置的位的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="936" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="936" bodyend="938"/>
+        <references refid="classneforce_1_1bitmap_1ac9c717ee9f924e993fc3ea6b4a86eea1" compoundref="bitmap_8hpp" startline="833" endline="833">begin</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1ae7082d2219017b431deb4814dd6269ad" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1a1a761e14574fa4f66ec48cc66ca646b6" kindref="member">const_reference</ref></type>
+        <definition>const_reference neforce::bitmap::operator[]</definition>
+        <argsstring>(const size_type n) const</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>neforce::bitmap::operator[]</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a2e1719613413a5ee11d8b73319c6c371" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>常量下标访问操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置的位的常量值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="945" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="945" bodyend="947"/>
+        <references refid="classneforce_1_1bitmap_1ac61d0ec9209ffae7564bec499f5a16e6" compoundref="bitmap_8hpp" startline="857" endline="857">cbegin</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a8f2fa81cb06cbcef0b2257f2a80a7cbe" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1a9afc1c91cc93ae43ce06208bb9c33fd1" kindref="member">reference</ref></type>
+        <definition>reference neforce::bitmap::front</definition>
+        <argsstring>()</argsstring>
+        <name>front</name>
+        <qualifiedname>neforce::bitmap::front</qualifiedname>
+        <briefdescription>
+<para>访问第一个位 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>第一个位的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="953" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="953" bodyend="953"/>
+        <references refid="classneforce_1_1bitmap_1ac9c717ee9f924e993fc3ea6b4a86eea1" compoundref="bitmap_8hpp" startline="833" endline="833">begin</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1ae0f5a5681ccd2c538aed42fe66557c9b" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1a1a761e14574fa4f66ec48cc66ca646b6" kindref="member">const_reference</ref></type>
+        <definition>const_reference neforce::bitmap::front</definition>
+        <argsstring>() const</argsstring>
+        <name>front</name>
+        <qualifiedname>neforce::bitmap::front</qualifiedname>
+        <briefdescription>
+<para>常量版本，访问第一个位 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>第一个位的常量值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="959" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="959" bodyend="959"/>
+        <references refid="classneforce_1_1bitmap_1ac61d0ec9209ffae7564bec499f5a16e6" compoundref="bitmap_8hpp" startline="857" endline="857">cbegin</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a47ea8b55c821d106e13dbbb558a8557b" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1a9afc1c91cc93ae43ce06208bb9c33fd1" kindref="member">reference</ref></type>
+        <definition>reference neforce::bitmap::back</definition>
+        <argsstring>()</argsstring>
+        <name>back</name>
+        <qualifiedname>neforce::bitmap::back</qualifiedname>
+        <briefdescription>
+<para>访问最后一个位 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最后一个位的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="965" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="965" bodyend="965"/>
+        <references refid="classneforce_1_1bitmap_1a4e25cc0d52673107ccdbada60f35e49f" compoundref="bitmap_8hpp" startline="839" endline="839">end</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1addc58ab57d4e7e30636f8caa632d1ab9" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1a1a761e14574fa4f66ec48cc66ca646b6" kindref="member">const_reference</ref></type>
+        <definition>const_reference neforce::bitmap::back</definition>
+        <argsstring>() const</argsstring>
+        <name>back</name>
+        <qualifiedname>neforce::bitmap::back</qualifiedname>
+        <briefdescription>
+<para>常量版本，访问最后一个位 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最后一个位的常量值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="971" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="971" bodyend="971"/>
+        <references refid="classneforce_1_1bitmap_1aff1eac82a4bf1339e24db60d5088ffcc" compoundref="bitmap_8hpp" startline="863" endline="863">cend</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1ad131616f30511689527904e821899d7f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::bitmap::reserve</definition>
+        <argsstring>(const size_type n)</argsstring>
+        <name>reserve</name>
+        <qualifiedname>neforce::bitmap::reserve</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a2e1719613413a5ee11d8b73319c6c371" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>预留容量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要预留的位数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+确保位图至少有n位的容量。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="979" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="979" bodyend="990"/>
+        <references refid="classneforce_1_1bitmap_1ac9c717ee9f924e993fc3ea6b4a86eea1" compoundref="bitmap_8hpp" startline="833" endline="833">begin</references>
+        <references refid="classneforce_1_1bitmap_1a5aae0da3cc7d0757c8ff719248878db2" compoundref="bitmap_8hpp" startline="927" endline="929">capacity</references>
+        <references refid="classneforce_1_1bitmap_1a4e25cc0d52673107ccdbada60f35e49f" compoundref="bitmap_8hpp" startline="839" endline="839">end</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1af39f91e6d33d0a81316fc88dc71f6dc9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::bitmap::push_back</definition>
+        <argsstring>(const bool value)</argsstring>
+        <name>push_back</name>
+        <qualifiedname>neforce::bitmap::push_back</qualifiedname>
+        <param>
+          <type>const bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在末尾插入位 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="996" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="996" bodyend="1002"/>
+        <references refid="classneforce_1_1bitmap_1a4e25cc0d52673107ccdbada60f35e49f" compoundref="bitmap_8hpp" startline="839" endline="839">end</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1acfdae24b43cf3da92541e8e05dd6b5b0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1a370ba51ee2ae5d4016a705421c368fdd" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::bitmap::insert</definition>
+        <argsstring>(const iterator &amp;position, const bool value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::bitmap::insert</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a370ba51ee2ae5d4016a705421c368fdd" kindref="member">iterator</ref> &amp;</type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在指定位置插入位 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="1010" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="1010" bodyend="1018"/>
+        <references refid="classneforce_1_1bitmap_1ac9c717ee9f924e993fc3ea6b4a86eea1" compoundref="bitmap_8hpp" startline="833" endline="833">begin</references>
+        <references refid="classneforce_1_1bitmap_1a4e25cc0d52673107ccdbada60f35e49f" compoundref="bitmap_8hpp" startline="839" endline="839">end</references>
+        <referencedby refid="classneforce_1_1bitmap_1a2f643f655a337f20aa1cecd1112e619d" compoundref="bitmap_8hpp" startline="1077" endline="1079">insert</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a7ae301f427a1cc62d78cb03cb902fde0" compoundref="bitmap_8hpp" startline="1087" endline="1089">insert</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a08c204b7a77cfff7fd4c406b88a489ee" compoundref="bitmap_8hpp" startline="1125" endline="1131">resize</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a98be022c5bd084d04368bc6db2278e37" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::bitmap::insert</definition>
+        <argsstring>(iterator position, Iterator first, Iterator last)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::bitmap::insert</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1bitmap_1a370ba51ee2ae5d4016a705421c368fdd" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="1028" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="1028" bodyend="1030"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a52256f90af1a02dc434a18a4a6e2a7a4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::bitmap::insert</definition>
+        <argsstring>(const iterator &amp;position, const bool *first, const bool *last)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::bitmap::insert</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a370ba51ee2ae5d4016a705421c368fdd" kindref="member">iterator</ref> &amp;</type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const bool *</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>const bool *</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>插入布尔数组范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数组起始指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数组结束指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="1038" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="1038" bodyend="1050"/>
+        <references refid="classneforce_1_1bitmap_1a5aae0da3cc7d0757c8ff719248878db2" compoundref="bitmap_8hpp" startline="927" endline="929">capacity</references>
+        <references refid="group___iterator_operation_1ga81cd39ae0fbc7198eef37acc9ff10950" compoundref="iterator_8hpp" startline="201" endline="218">neforce::distance</references>
+        <references refid="classneforce_1_1bitmap_1a4e25cc0d52673107ccdbada60f35e49f" compoundref="bitmap_8hpp" startline="839" endline="839">end</references>
+        <references refid="classneforce_1_1bitmap_1aa9100caf76b739343327708cb277e81c" compoundref="bitmap_8hpp" startline="909" endline="909">size</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1ab70ea36467e3b34a8e417e5f653dbf87" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::bitmap::insert</definition>
+        <argsstring>(const iterator &amp;position, const size_type n, const bool value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::bitmap::insert</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a370ba51ee2ae5d4016a705421c368fdd" kindref="member">iterator</ref> &amp;</type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a2e1719613413a5ee11d8b73319c6c371" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>插入n个相同的位 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入数量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="1058" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="1058" bodyend="1069"/>
+        <references refid="classneforce_1_1bitmap_1a5aae0da3cc7d0757c8ff719248878db2" compoundref="bitmap_8hpp" startline="927" endline="929">capacity</references>
+        <references refid="classneforce_1_1bitmap_1a4e25cc0d52673107ccdbada60f35e49f" compoundref="bitmap_8hpp" startline="839" endline="839">end</references>
+        <references refid="group___shift_algorithms_1ga0e2252aa0b1e6f5f5263361835dc58a8" compoundref="shift_8hpp" startline="398" endline="406">neforce::fill</references>
+        <references refid="classneforce_1_1bitmap_1aa9100caf76b739343327708cb277e81c" compoundref="bitmap_8hpp" startline="909" endline="909">size</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a2f643f655a337f20aa1cecd1112e619d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::bitmap::insert</definition>
+        <argsstring>(const iterator &amp;pos, const int32_t n, const bool value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::bitmap::insert</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a370ba51ee2ae5d4016a705421c368fdd" kindref="member">iterator</ref> &amp;</type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1gaa0af497ed9ed410d4c911b409653515a" kindref="member">int32_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>插入n个相同的位 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入数量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="1077" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="1077" bodyend="1079"/>
+        <references refid="classneforce_1_1bitmap_1acfdae24b43cf3da92541e8e05dd6b5b0" compoundref="bitmap_8hpp" startline="1010" endline="1018">insert</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a7ae301f427a1cc62d78cb03cb902fde0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::bitmap::insert</definition>
+        <argsstring>(const iterator &amp;pos, const int64_t n, const bool value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::bitmap::insert</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a370ba51ee2ae5d4016a705421c368fdd" kindref="member">iterator</ref> &amp;</type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga0b098d32ebd9cc922390914e765ca674" kindref="member">int64_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>插入n个相同的位 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入数量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="1087" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="1087" bodyend="1089"/>
+        <references refid="classneforce_1_1bitmap_1acfdae24b43cf3da92541e8e05dd6b5b0" compoundref="bitmap_8hpp" startline="1010" endline="1018">insert</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a42bb4d85b6b26587cd80342dca3216a1" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::bitmap::pop_back</definition>
+        <argsstring>()</argsstring>
+        <name>pop_back</name>
+        <qualifiedname>neforce::bitmap::pop_back</qualifiedname>
+        <briefdescription>
+<para>删除末尾位 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="1094" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="1094" bodyend="1094"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a3a2313d4e265953532b7246f758f3f8a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1a370ba51ee2ae5d4016a705421c368fdd" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::bitmap::erase</definition>
+        <argsstring>(const iterator &amp;position)</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::bitmap::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a370ba51ee2ae5d4016a705421c368fdd" kindref="member">iterator</ref> &amp;</type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>删除指定位置的位 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向被删除元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="1101" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="1101" bodyend="1107"/>
+        <references refid="classneforce_1_1bitmap_1a4e25cc0d52673107ccdbada60f35e49f" compoundref="bitmap_8hpp" startline="839" endline="839">end</references>
+        <referencedby refid="classneforce_1_1bitmap_1afe452da4714d57e8288e24d1169b1fe8" compoundref="bitmap_8hpp" startline="1136" endline="1136">clear</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1a08c204b7a77cfff7fd4c406b88a489ee" compoundref="bitmap_8hpp" startline="1125" endline="1131">resize</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a94009e6ec9ffa17e2d2e2688b1c199cf" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1bitmap_1a370ba51ee2ae5d4016a705421c368fdd" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::bitmap::erase</definition>
+        <argsstring>(const iterator &amp;first, const iterator &amp;last)</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::bitmap::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a370ba51ee2ae5d4016a705421c368fdd" kindref="member">iterator</ref> &amp;</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a370ba51ee2ae5d4016a705421c368fdd" kindref="member">iterator</ref> &amp;</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除指定范围内的位 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向最后一个被删除元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="1115" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="1115" bodyend="1118"/>
+        <references refid="classneforce_1_1bitmap_1a4e25cc0d52673107ccdbada60f35e49f" compoundref="bitmap_8hpp" startline="839" endline="839">end</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a08c204b7a77cfff7fd4c406b88a489ee" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::bitmap::resize</definition>
+        <argsstring>(const size_type n, const bool value=bool())</argsstring>
+        <name>resize</name>
+        <qualifiedname>neforce::bitmap::resize</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a2e1719613413a5ee11d8b73319c6c371" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>value</declname>
+          <defval>bool()</defval>
+        </param>
+        <briefdescription>
+<para>调整大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的大小 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>用于填充新元素的默认值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="1125" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="1125" bodyend="1131"/>
+        <references refid="classneforce_1_1bitmap_1ac9c717ee9f924e993fc3ea6b4a86eea1" compoundref="bitmap_8hpp" startline="833" endline="833">begin</references>
+        <references refid="classneforce_1_1bitmap_1a4e25cc0d52673107ccdbada60f35e49f" compoundref="bitmap_8hpp" startline="839" endline="839">end</references>
+        <references refid="classneforce_1_1bitmap_1a3a2313d4e265953532b7246f758f3f8a" compoundref="bitmap_8hpp" startline="1101" endline="1107">erase</references>
+        <references refid="classneforce_1_1bitmap_1acfdae24b43cf3da92541e8e05dd6b5b0" compoundref="bitmap_8hpp" startline="1010" endline="1018">insert</references>
+        <references refid="classneforce_1_1bitmap_1aa9100caf76b739343327708cb277e81c" compoundref="bitmap_8hpp" startline="909" endline="909">size</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1afe452da4714d57e8288e24d1169b1fe8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::bitmap::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>neforce::bitmap::clear</qualifiedname>
+        <briefdescription>
+<para>清空位图 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="1136" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="1136" bodyend="1136"/>
+        <references refid="classneforce_1_1bitmap_1ac9c717ee9f924e993fc3ea6b4a86eea1" compoundref="bitmap_8hpp" startline="833" endline="833">begin</references>
+        <references refid="classneforce_1_1bitmap_1a4e25cc0d52673107ccdbada60f35e49f" compoundref="bitmap_8hpp" startline="839" endline="839">end</references>
+        <references refid="classneforce_1_1bitmap_1a3a2313d4e265953532b7246f758f3f8a" compoundref="bitmap_8hpp" startline="1101" endline="1107">erase</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1aaec445d86489c6ce679b96b904e63d54" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::bitmap::swap</definition>
+        <argsstring>(bitmap &amp;other) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>neforce::bitmap::swap</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1bitmap_1a0514120cdff5e766fa6e87f7fbf4ab0d" kindref="member">bitmap</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个位图的内容 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的另一个位图 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="1142" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="1142" bodyend="1153"/>
+        <references refid="group___args_forward_functions_1ga57a2cf85645286e20c82caae70cd13dc" compoundref="type__traits_8hpp" startline="3084" endline="3086">neforce::addressof</references>
+        <references refid="classneforce_1_1bitmap_1a0514120cdff5e766fa6e87f7fbf4ab0d">bitmap</references>
+        <references refid="classneforce_1_1bitmap_1aaec445d86489c6ce679b96b904e63d54" compoundref="bitmap_8hpp" startline="1142" endline="1153">swap</references>
+        <referencedby refid="classneforce_1_1bitmap_1a9735eb229bb27c554c4ca63c7c0b0d49" compoundref="bitmap_8hpp" startline="805" endline="811">operator=</referencedby>
+        <referencedby refid="classneforce_1_1bitmap_1aaec445d86489c6ce679b96b904e63d54" compoundref="bitmap_8hpp" startline="1142" endline="1153">swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1ab796444e27f72ac3ad3acf64f4957db1" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(_NEFORCE equal(this-&gt;cbegin(), this-&gt;cend(), rhs.cbegin()))" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::bitmap::equal_to</definition>
+        <argsstring>(const bitmap &amp;rhs) const</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>neforce::bitmap::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a0514120cdff5e766fa6e87f7fbf4ab0d" kindref="member">bitmap</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧位图 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果两个位图大小相等且对应位相等返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="1160" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="1160" bodyend="1163"/>
+        <references refid="classneforce_1_1bitmap_1a0514120cdff5e766fa6e87f7fbf4ab0d">bitmap</references>
+        <references refid="classneforce_1_1bitmap_1ac61d0ec9209ffae7564bec499f5a16e6" compoundref="bitmap_8hpp" startline="857" endline="857">cbegin</references>
+        <references refid="classneforce_1_1bitmap_1aff1eac82a4bf1339e24db60d5088ffcc" compoundref="bitmap_8hpp" startline="863" endline="863">cend</references>
+        <references refid="group___compare_algorithms_1ga4d20d5f9031c99a84a45fe39db9fbb78" compoundref="algorithm_2compare_8hpp" startline="54" endline="65">neforce::equal</references>
+        <references refid="classneforce_1_1bitmap_1aa9100caf76b739343327708cb277e81c" compoundref="bitmap_8hpp" startline="909" endline="909">size</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1bitmap_1a6dc5bf5f1f84d5ed5fcfb5c9b9f4dec6" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(_NEFORCE lexicographical_compare(this-&gt;cbegin(), this-&gt;cend(), rhs.cbegin(), rhs.cend()))" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::bitmap::less_than</definition>
+        <argsstring>(const bitmap &amp;rhs) const</argsstring>
+        <name>less_than</name>
+        <qualifiedname>neforce::bitmap::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1bitmap_1a0514120cdff5e766fa6e87f7fbf4ab0d" kindref="member">bitmap</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧位图 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>按字典序比较结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="1170" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="1170" bodyend="1174"/>
+        <references refid="classneforce_1_1bitmap_1a0514120cdff5e766fa6e87f7fbf4ab0d">bitmap</references>
+        <references refid="classneforce_1_1bitmap_1ac61d0ec9209ffae7564bec499f5a16e6" compoundref="bitmap_8hpp" startline="857" endline="857">cbegin</references>
+        <references refid="classneforce_1_1bitmap_1aff1eac82a4bf1339e24db60d5088ffcc" compoundref="bitmap_8hpp" startline="863" endline="863">cend</references>
+        <references refid="group___compare_algorithms_1ga7ec7e4cc2238e4a9f86b2d646d7cd032" compoundref="algorithm_2compare_8hpp" startline="450" endline="465">neforce::lexicographical_compare</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>位图容器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>位图是一种内存高效的布尔值容器，每个元素只占用一个位。 支持随机访问、动态增长和标准容器操作。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::bitmap</label>
+        <link refid="classneforce_1_1bitmap"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::icomparable&lt; bitmap &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::bitmap</label>
+        <link refid="classneforce_1_1bitmap"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::icomparable&lt; bitmap &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="365" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="365" bodyend="1175"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1bitmap_1a50a853d688e598eab337295d6b9c5e97" prot="private" virt="non-virtual"><scope>neforce::bitmap</scope><name>allocate_storage</name></member>
+      <member refid="classneforce_1_1bitmap_1ada4e97e8f00366045bfb23b3fb270145" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>allocator_type</name></member>
+      <member refid="classneforce_1_1bitmap_1a47ea8b55c821d106e13dbbb558a8557b" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>back</name></member>
+      <member refid="classneforce_1_1bitmap_1addc58ab57d4e7e30636f8caa632d1ab9" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>back</name></member>
+      <member refid="classneforce_1_1bitmap_1ac9c717ee9f924e993fc3ea6b4a86eea1" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>begin</name></member>
+      <member refid="classneforce_1_1bitmap_1af456dcbf3dbd596cd98f542edfadb3d0" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>begin</name></member>
+      <member refid="classneforce_1_1bitmap_1ace7bb5e5dee7755568bbdd7b88cd360e" prot="private" virt="non-virtual"><scope>neforce::bitmap</scope><name>bit_copy</name></member>
+      <member refid="classneforce_1_1bitmap_1a8229852040b43de3fe29cb46007ba63d" prot="private" virt="non-virtual"><scope>neforce::bitmap</scope><name>bit_copy_backward</name></member>
+      <member refid="classneforce_1_1bitmap_1a0514120cdff5e766fa6e87f7fbf4ab0d" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>bitmap</name></member>
+      <member refid="classneforce_1_1bitmap_1a32e6b4634c2f101ba50247972f20dc42" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>bitmap</name></member>
+      <member refid="classneforce_1_1bitmap_1a954d87b80135ba2396e54b5d15a97b0b" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>bitmap</name></member>
+      <member refid="classneforce_1_1bitmap_1a403fa8e63ea48f887b03a471132441fb" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>bitmap</name></member>
+      <member refid="classneforce_1_1bitmap_1a01f303ea60e8d703de6c9d264e05b6a8" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>bitmap</name></member>
+      <member refid="classneforce_1_1bitmap_1a6211560dbe6738f80bef18659ae5f4db" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>bitmap</name></member>
+      <member refid="classneforce_1_1bitmap_1af838d31624a57d4be9c3fad69815e131" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>bitmap</name></member>
+      <member refid="classneforce_1_1bitmap_1a03b8a3e1f8f7f16a63c03560029cebf4" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>bitmap</name></member>
+      <member refid="classneforce_1_1bitmap_1a5aae0da3cc7d0757c8ff719248878db2" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>capacity</name></member>
+      <member refid="classneforce_1_1bitmap_1ac61d0ec9209ffae7564bec499f5a16e6" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>cbegin</name></member>
+      <member refid="classneforce_1_1bitmap_1aff1eac82a4bf1339e24db60d5088ffcc" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>cend</name></member>
+      <member refid="classneforce_1_1bitmap_1afe452da4714d57e8288e24d1169b1fe8" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>clear</name></member>
+      <member refid="classneforce_1_1bitmap_1ae3746bb0c5d29ba4e6a2dd557d76658e" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>const_iterator</name></member>
+      <member refid="classneforce_1_1bitmap_1a9660bd435a82cd128a62e862f0536683" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>const_pointer</name></member>
+      <member refid="classneforce_1_1bitmap_1a1a761e14574fa4f66ec48cc66ca646b6" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>const_reference</name></member>
+      <member refid="classneforce_1_1bitmap_1abb4464db57c98908f07a1c936f5d6173" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>const_reverse_iterator</name></member>
+      <member refid="classneforce_1_1bitmap_1a96b15e78c4329e1a59952ac0df33a1ea" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>crbegin</name></member>
+      <member refid="classneforce_1_1bitmap_1a6b78f2bac752ac911c5e82380601ff7e" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>crend</name></member>
+      <member refid="classneforce_1_1bitmap_1a5a9e1b42601fb4761cf67a04751db7b9" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>difference_type</name></member>
+      <member refid="classneforce_1_1bitmap_1aad8f1117b6d4a78de2769481fb45f21e" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>empty</name></member>
+      <member refid="classneforce_1_1bitmap_1a4e25cc0d52673107ccdbada60f35e49f" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>end</name></member>
+      <member refid="classneforce_1_1bitmap_1a5f8b6c1545a0fa89f456e1d967c62dfb" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>end</name></member>
+      <member refid="classneforce_1_1bitmap_1ab796444e27f72ac3ad3acf64f4957db1" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>equal_to</name></member>
+      <member refid="classneforce_1_1bitmap_1a3a2313d4e265953532b7246f758f3f8a" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>erase</name></member>
+      <member refid="classneforce_1_1bitmap_1a94009e6ec9ffa17e2d2e2688b1c199cf" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>erase</name></member>
+      <member refid="classneforce_1_1bitmap_1a423cd3ebcd128f8d058645c93b9a9836" prot="private" virt="non-virtual"><scope>neforce::bitmap</scope><name>finish_</name></member>
+      <member refid="classneforce_1_1bitmap_1a8f2fa81cb06cbcef0b2257f2a80a7cbe" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>front</name></member>
+      <member refid="classneforce_1_1bitmap_1ae0f5a5681ccd2c538aed42fe66557c9b" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>front</name></member>
+      <member refid="classneforce_1_1bitmap_1acfdae24b43cf3da92541e8e05dd6b5b0" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>insert</name></member>
+      <member refid="classneforce_1_1bitmap_1a98be022c5bd084d04368bc6db2278e37" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>insert</name></member>
+      <member refid="classneforce_1_1bitmap_1a52256f90af1a02dc434a18a4a6e2a7a4" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>insert</name></member>
+      <member refid="classneforce_1_1bitmap_1ab70ea36467e3b34a8e417e5f653dbf87" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>insert</name></member>
+      <member refid="classneforce_1_1bitmap_1a2f643f655a337f20aa1cecd1112e619d" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>insert</name></member>
+      <member refid="classneforce_1_1bitmap_1a7ae301f427a1cc62d78cb03cb902fde0" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>insert</name></member>
+      <member refid="classneforce_1_1bitmap_1a8255af2feab370914922031296c15dcc" prot="private" virt="non-virtual"><scope>neforce::bitmap</scope><name>insert_aux</name></member>
+      <member refid="classneforce_1_1bitmap_1a8b630820abc6cd08b9add9c6506db5d2" prot="private" virt="non-virtual"><scope>neforce::bitmap</scope><name>insert_range</name></member>
+      <member refid="classneforce_1_1bitmap_1a8ee2230ffa9a821f090f460f446ef407" prot="private" virt="non-virtual"><scope>neforce::bitmap</scope><name>insert_range</name></member>
+      <member refid="classneforce_1_1bitmap_1a370ba51ee2ae5d4016a705421c368fdd" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>iterator</name></member>
+      <member refid="classneforce_1_1bitmap_1a6dc5bf5f1f84d5ed5fcfb5c9b9f4dec6" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>less_than</name></member>
+      <member refid="classneforce_1_1bitmap_1a0c7e43faf10fa2639e7e756a67741007" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>max_size</name></member>
+      <member refid="structneforce_1_1icomparable_1aa385e40eb8ac8bdae736966ad0cf568f" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>operator!=</name></member>
+      <member refid="structneforce_1_1icomparable_1a0641b58de65d6a0d5b87c2bcb47496a4" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>operator&lt;</name></member>
+      <member refid="structneforce_1_1icomparable_1a313fba4bce20aced1ff0e6173ad6aab2" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>operator&lt;=</name></member>
+      <member refid="classneforce_1_1bitmap_1a4cd3c0526441ec485e1e8a10e2f79a56" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1bitmap_1a9735eb229bb27c554c4ca63c7c0b0d49" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1icomparable_1ab9b06f7293eb15299f8c7d5341bfbc83" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>operator==</name></member>
+      <member refid="structneforce_1_1icomparable_1ab8de930acec5c0261656b787f576f08d" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>operator&gt;</name></member>
+      <member refid="structneforce_1_1icomparable_1a644c6002f703eb487427daadfec8fb16" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>operator&gt;=</name></member>
+      <member refid="classneforce_1_1bitmap_1a0548b99786d6a6ce220b50f3a326ca20" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>operator[]</name></member>
+      <member refid="classneforce_1_1bitmap_1ae7082d2219017b431deb4814dd6269ad" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>operator[]</name></member>
+      <member refid="classneforce_1_1bitmap_1a34e109c751281ce67c27159dc9bb129b" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>pointer</name></member>
+      <member refid="classneforce_1_1bitmap_1a42bb4d85b6b26587cd80342dca3216a1" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>pop_back</name></member>
+      <member refid="classneforce_1_1bitmap_1af39f91e6d33d0a81316fc88dc71f6dc9" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>push_back</name></member>
+      <member refid="classneforce_1_1bitmap_1a18776ed1eb0b1e72c6f1f7831f590144" prot="private" virt="non-virtual"><scope>neforce::bitmap</scope><name>range_init</name></member>
+      <member refid="classneforce_1_1bitmap_1a395be1cd42d842057362c75268ecc784" prot="private" virt="non-virtual"><scope>neforce::bitmap</scope><name>range_init</name></member>
+      <member refid="classneforce_1_1bitmap_1a46775e254ff6d9934b3fbe0c503117be" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>rbegin</name></member>
+      <member refid="classneforce_1_1bitmap_1afe05904605077812caa29e6de265a1c3" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>rbegin</name></member>
+      <member refid="classneforce_1_1bitmap_1a8d98cdb5bb978579ed44a03bc1ca1ffd" prot="private" virt="non-virtual"><scope>neforce::bitmap</scope><name>reallocate_insert</name></member>
+      <member refid="classneforce_1_1bitmap_1a09ef6a0bfae994f4c3bb717612ff7efd" prot="private" virt="non-virtual"><scope>neforce::bitmap</scope><name>reallocate_insert_range</name></member>
+      <member refid="classneforce_1_1bitmap_1a9afc1c91cc93ae43ce06208bb9c33fd1" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>reference</name></member>
+      <member refid="classneforce_1_1bitmap_1a6fbae27838c7e9e5f51f66056cf0c301" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>rend</name></member>
+      <member refid="classneforce_1_1bitmap_1a59790ec16924ae28bfcb9aa685490519" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>rend</name></member>
+      <member refid="classneforce_1_1bitmap_1ad131616f30511689527904e821899d7f" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>reserve</name></member>
+      <member refid="classneforce_1_1bitmap_1a08c204b7a77cfff7fd4c406b88a489ee" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>resize</name></member>
+      <member refid="classneforce_1_1bitmap_1a3ac1648eb3b54bffaa7c2995254d3cdc" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>reverse_iterator</name></member>
+      <member refid="classneforce_1_1bitmap_1ad0d341ccb583cb28a64de0f8242dbd88" prot="private" virt="non-virtual"><scope>neforce::bitmap</scope><name>set_iterators</name></member>
+      <member refid="classneforce_1_1bitmap_1aa9100caf76b739343327708cb277e81c" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>size</name></member>
+      <member refid="classneforce_1_1bitmap_1a2e1719613413a5ee11d8b73319c6c371" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>size_type</name></member>
+      <member refid="classneforce_1_1bitmap_1a50d140adeea52eb392d7f7ce72ba2175" prot="private" virt="non-virtual"><scope>neforce::bitmap</scope><name>start_</name></member>
+      <member refid="classneforce_1_1bitmap_1a821ca6017feddf9248243536c3c23822" prot="private" virt="non-virtual"><scope>neforce::bitmap</scope><name>storage_</name></member>
+      <member refid="classneforce_1_1bitmap_1aaec445d86489c6ce679b96b904e63d54" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>swap</name></member>
+      <member refid="classneforce_1_1bitmap_1a2c470767d6a2194e1b2fb1d3fee574de" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>value_type</name></member>
+      <member refid="classneforce_1_1bitmap_1a726dd30136b9d4eea2a4d0dd7a602561" prot="private" virt="non-virtual"><scope>neforce::bitmap</scope><name>word_count</name></member>
+      <member refid="classneforce_1_1bitmap_1a3fbffb6c15f6cc1289f6ba7527c8a043" prot="public" virt="non-virtual"><scope>neforce::bitmap</scope><name>~bitmap</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

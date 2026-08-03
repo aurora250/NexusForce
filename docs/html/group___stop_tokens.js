@@ -1,41 +1,41 @@
 var group___stop_tokens =
 [
-    [ "stop_token", "classstop__token.html", [
-      [ "stop_token", "classstop__token.html#a45e7ef5478527e4dc018c5c2937e7f27", null ],
-      [ "~stop_token", "classstop__token.html#a697e0ffd1d2dffc9cc564584333d2e6c", null ],
-      [ "stop_token", "classstop__token.html#ae83dacd04723dd3b43a4c0d4e13c7a53", null ],
-      [ "stop_token", "classstop__token.html#ac96cbcebf0ab36c708023b5e000e7f1f", null ],
-      [ "operator=", "classstop__token.html#a9c4c99d80991b9f331d8e28ed22810c1", null ],
-      [ "operator=", "classstop__token.html#aff6a0baa3ef0438b140f2c8c1aa26744", null ],
-      [ "operator==", "classstop__token.html#acab752b23d370c91fa16695bf86f7585", null ],
-      [ "stop_possible", "classstop__token.html#a82969e891b53dbdb38b1871a6a4db25f", null ],
-      [ "stop_requested", "classstop__token.html#ad7d4f283a9a1c353fb1806a777ae4942", null ],
-      [ "swap", "classstop__token.html#a7e3f7603f421bcb4de2ced918dc38746", null ]
+    [ "neforce::stop_token", "classneforce_1_1stop__token.html", [
+      [ "stop_token", "classneforce_1_1stop__token.html#a95305265f14ffe57bcb467d156c53451", null ],
+      [ "~stop_token", "classneforce_1_1stop__token.html#a8d25aa8fcfeb8e11f6111d1868d64d9e", null ],
+      [ "stop_token", "classneforce_1_1stop__token.html#a124d54ada7aad3ede918926653793c3b", null ],
+      [ "stop_token", "classneforce_1_1stop__token.html#ab0465dbdd6685635a98f7f5331213950", null ],
+      [ "operator=", "classneforce_1_1stop__token.html#ac0ce5bab72b7b46b454a3f4e80087448", null ],
+      [ "operator=", "classneforce_1_1stop__token.html#a1ec557f0675f15e028f15c9674605ef7", null ],
+      [ "operator==", "classneforce_1_1stop__token.html#a59c812b439d74a345a939a573f0b960d", null ],
+      [ "stop_possible", "classneforce_1_1stop__token.html#a442474d5acdb50fa29396add0dc33a24", null ],
+      [ "stop_requested", "classneforce_1_1stop__token.html#a8cc43b7ceb09ba287baa3dd2d743c39f", null ],
+      [ "swap", "classneforce_1_1stop__token.html#a951d50195bd01bc2d703340be24a2b93", null ]
     ] ],
-    [ "stop_source", "classstop__source.html", [
-      [ "stop_source", "classstop__source.html#a6d452cea5b84b3f5b42705d64cce02f0", null ],
-      [ "stop_source", "classstop__source.html#a39a048b47913148227416f2b298b19c4", null ],
-      [ "stop_source", "classstop__source.html#a7e79dcb1957f039edf202b7daf5b0fb2", null ],
-      [ "stop_source", "classstop__source.html#a3954562e39b61381b411aa0d86c4a921", null ],
-      [ "~stop_source", "classstop__source.html#a7bdf846edd6112f9b8d586cf412800c3", null ],
-      [ "get_token", "classstop__source.html#af7bd544be3838f3173a07601b0f63a51", null ],
-      [ "operator!=", "classstop__source.html#ac3b7eff3d02517b333d04b8997907b04", null ],
-      [ "operator=", "classstop__source.html#a2ad2aa164743cbc0c903fa462674bbf9", null ],
-      [ "operator=", "classstop__source.html#abde2f902c50c042b4715a66e4c36f088", null ],
-      [ "operator==", "classstop__source.html#a7c378d9f861b960ee8697b992b8081e0", null ],
-      [ "request_stop", "classstop__source.html#aefa6485a1a6def586c41a2652a2f3388", null ],
-      [ "stop_possible", "classstop__source.html#a4b6b098f33feb67b64862899a3fca780", null ],
-      [ "stop_requested", "classstop__source.html#ab987aea79d56d640a663c781c73df66f", null ],
-      [ "swap", "classstop__source.html#a797f952810e34eef8a89e51657f70570", null ]
+    [ "neforce::stop_source", "classneforce_1_1stop__source.html", [
+      [ "stop_source", "classneforce_1_1stop__source.html#a583d26f08b68ca7b83c761c346d60401", null ],
+      [ "stop_source", "classneforce_1_1stop__source.html#a1b7405061815a79fd910c5fe112eca6f", null ],
+      [ "stop_source", "classneforce_1_1stop__source.html#ace041d1a02a1973f54e264dcff6c859e", null ],
+      [ "stop_source", "classneforce_1_1stop__source.html#a1bc2d4d067a3cf4e1ebbcab90088c84c", null ],
+      [ "~stop_source", "classneforce_1_1stop__source.html#a34e11c9f797cac98ce212ad6bf5f29bf", null ],
+      [ "get_token", "classneforce_1_1stop__source.html#a0ff07d973d2344b10c3fe3b35bd1be03", null ],
+      [ "operator!=", "classneforce_1_1stop__source.html#a5598095d9635adfe9c7f2f8393306dfe", null ],
+      [ "operator=", "classneforce_1_1stop__source.html#a564edde9313a47dbbf19a72264612b7a", null ],
+      [ "operator=", "classneforce_1_1stop__source.html#ae73b0a5539b68c10ab1e8d476f8c1487", null ],
+      [ "operator==", "classneforce_1_1stop__source.html#a44dafe48520b88be9e6c3b8d2d4d1633", null ],
+      [ "request_stop", "classneforce_1_1stop__source.html#a7a8b787e0d08a050c43909d4956d224c", null ],
+      [ "stop_possible", "classneforce_1_1stop__source.html#a8381f97059ca7f00265d4f3d5a391e8a", null ],
+      [ "stop_requested", "classneforce_1_1stop__source.html#af20f049989f706a231e9ec9240b1936a", null ],
+      [ "swap", "classneforce_1_1stop__source.html#a3752d63aceb9b5300df6a54aa8399ef6", null ]
     ] ],
-    [ "stop_callback&lt; Callback &gt;", "classstop__callback.html", [
-      [ "callback_type", "classstop__callback.html#a3cd3524bacac20f224581815c5f61cd2", null ],
-      [ "stop_callback", "classstop__callback.html#ab404dcce69bb1444fb3945f08edb87cf", null ],
-      [ "stop_callback", "classstop__callback.html#ac3c81fc59e5a7e26f00ce293c9dc305a", null ],
-      [ "stop_callback", "classstop__callback.html#a0c175e5a531c658fa6ded6c5d6aa466c", null ],
-      [ "stop_callback", "classstop__callback.html#aa43add54714e6020d4d4511ee4ea403e", null ],
-      [ "~stop_callback", "classstop__callback.html#a453b7ad9d27ae2fc8c5601488bd8e9ea", null ],
-      [ "operator=", "classstop__callback.html#a3329d487406a6a3c806d7ad3a8c11683", null ],
-      [ "operator=", "classstop__callback.html#ae764635f1a58dcb717e0b2bd050c6a8b", null ]
+    [ "neforce::stop_callback&lt; Callback &gt;", "classneforce_1_1stop__callback.html", [
+      [ "callback_type", "classneforce_1_1stop__callback.html#af893fb188c3997e734cf6556896eabde", null ],
+      [ "stop_callback", "classneforce_1_1stop__callback.html#a5650cfa6a22e75db10fb88d3bfeb7be3", null ],
+      [ "stop_callback", "classneforce_1_1stop__callback.html#a34274664c0ff565c8441464512dcadfc", null ],
+      [ "stop_callback", "classneforce_1_1stop__callback.html#a0947c4fb0997da3441814c281dcfe854", null ],
+      [ "stop_callback", "classneforce_1_1stop__callback.html#a9fb7db213175af6c3ae38ab2516ec34a", null ],
+      [ "~stop_callback", "classneforce_1_1stop__callback.html#aa8e20c5e17ca58ddc1e1d46ab533b56f", null ],
+      [ "operator=", "classneforce_1_1stop__callback.html#ae8d2a5d3fd605ce17de912da1388c5bb", null ],
+      [ "operator=", "classneforce_1_1stop__callback.html#a8e95368c0df5b6fac2995fe7dae7e738", null ]
     ] ]
 ];

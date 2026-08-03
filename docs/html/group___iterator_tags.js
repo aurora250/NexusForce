@@ -1,9 +1,9 @@
 var group___iterator_tags =
 [
-    [ "input_iterator_tag", "structinput__iterator__tag.html", null ],
-    [ "output_iterator_tag", "structoutput__iterator__tag.html", null ],
-    [ "forward_iterator_tag", "structforward__iterator__tag.html", null ],
-    [ "bidirectional_iterator_tag", "structbidirectional__iterator__tag.html", null ],
-    [ "random_access_iterator_tag", "structrandom__access__iterator__tag.html", null ],
-    [ "contiguous_iterator_tag", "structcontiguous__iterator__tag.html", null ]
+    [ "neforce::input_iterator_tag", "structneforce_1_1input__iterator__tag.html", null ],
+    [ "neforce::output_iterator_tag", "structneforce_1_1output__iterator__tag.html", null ],
+    [ "neforce::forward_iterator_tag", "structneforce_1_1forward__iterator__tag.html", null ],
+    [ "neforce::bidirectional_iterator_tag", "structneforce_1_1bidirectional__iterator__tag.html", null ],
+    [ "neforce::random_access_iterator_tag", "structneforce_1_1random__access__iterator__tag.html", null ],
+    [ "neforce::contiguous_iterator_tag", "structneforce_1_1contiguous__iterator__tag.html", null ]
 ];

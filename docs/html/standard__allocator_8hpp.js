@@ -1,9 +1,9 @@
 var standard__allocator_8hpp =
 [
-    [ "standard_allocator&lt; T &gt;::rebind&lt; U &gt;", "structstandard__allocator_1_1rebind.html", null ],
-    [ "allocator", "group___memory_allocator.html#ga3dfc367f99e4622b5a17628bb6777e54", null ],
-    [ "allocate", "group___memory_allocator.html#ga5bd1018148e9e5aa7b7981b202946768", null ],
-    [ "deallocate", "group___memory_allocator.html#ga30246595f5c256a00e3fb9241ab5c957", null ],
-    [ "operator!=", "group___memory_allocator.html#gaa42c11dc1654f67bc9ae35be296ea81e", null ],
-    [ "operator==", "group___memory_allocator.html#ga6940c38e975f238e7e8458ea1d5cdd30", null ]
+    [ "neforce::standard_allocator&lt; T &gt;::rebind&lt; U &gt;", "structneforce_1_1standard__allocator_1_1rebind.html", null ],
+    [ "neforce::allocator", "group___memory_allocator.html#gabd6174043c688f04c1d71b9b21148ec1", null ],
+    [ "neforce::allocate", "group___memory_allocator.html#ga0ab55333431b15a376d8315da2e6977f", null ],
+    [ "neforce::deallocate", "group___memory_allocator.html#ga10afb006af757ddac0612f95343e7d23", null ],
+    [ "neforce::operator!=", "group___memory_allocator.html#ga2a3ed6eacbc5ae92ab5cea8669b3a57f", null ],
+    [ "neforce::operator==", "group___memory_allocator.html#gabade10418f7f309f4399393630c146e5", null ]
 ];

@@ -1,0 +1,582 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1ftp__protocol" kind="class" language="C++" prot="public">
+    <compoundname>neforce::ftp_protocol</compoundname>
+    <basecompoundref refid="classneforce_1_1ip__socket" prot="public" virt="non-virtual">neforce::ip_socket</basecompoundref>
+    <derivedcompoundref refid="classneforce_1_1ftp__client" prot="public" virt="non-virtual">neforce::ftp_client</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1ftp__session" prot="public" virt="non-virtual">neforce::ftp_session</derivedcompoundref>
+    <innerclass refid="structneforce_1_1ftp__protocol_1_1response" prot="public">neforce::ftp_protocol::response</innerclass>
+    <innerclass refid="structneforce_1_1ftp__protocol_1_1tls__info" prot="public">neforce::ftp_protocol::tls_info</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classneforce_1_1ftp__protocol_1a7fc13a7e02e18594105e480acf71026e" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>transfer_mode</name>
+        <qualifiedname>neforce::ftp_protocol::transfer_mode</qualifiedname>
+        <enumvalue id="classneforce_1_1ftp__protocol_1a7fc13a7e02e18594105e480acf71026ea5b7f33be48f19c25e1af2f96cffc569f" prot="public">
+          <name>ascii</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1ftp__protocol_1a7fc13a7e02e18594105e480acf71026ea9d7183f16acce70658f686ae7f1a4d20" prot="public">
+          <name>binary</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="25" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="25" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="enum" id="classneforce_1_1ftp__protocol_1a41b838352707e681703ca96aebd7d9ea" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>passive_mode</name>
+        <qualifiedname>neforce::ftp_protocol::passive_mode</qualifiedname>
+        <enumvalue id="classneforce_1_1ftp__protocol_1a41b838352707e681703ca96aebd7d9eaac76a5e84e4bdee527e274ea30c680d79" prot="public">
+          <name>active</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1ftp__protocol_1a41b838352707e681703ca96aebd7d9eaa831996cebc6c9bf7687e922c3437be69" prot="public">
+          <name>passive</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="30" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="30" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="enum" id="classneforce_1_1ftp__protocol_1aff900337e8ba39a1b74eb96855ee23dd" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>tls_mode</name>
+        <qualifiedname>neforce::ftp_protocol::tls_mode</qualifiedname>
+        <enumvalue id="classneforce_1_1ftp__protocol_1aff900337e8ba39a1b74eb96855ee23dda334c4a4c42fdb79d7ebc3e73b517e6f8" prot="public">
+          <name>none</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1ftp__protocol_1aff900337e8ba39a1b74eb96855ee23ddafcb28c9e5790f736e565156a8d8fcb6a" prot="public">
+          <name>implicit_</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1ftp__protocol_1aff900337e8ba39a1b74eb96855ee23ddac9c45ac5595e1bb329ad8e26396d93c5" prot="public">
+          <name>explicit_</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="35" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="35" bodyend="39"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classneforce_1_1ftp__protocol_1ac6e21c4db5851e9122d6736db5dcf5d4" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::ftp_protocol::kBufferSize</definition>
+        <argsstring></argsstring>
+        <name>kBufferSize</name>
+        <qualifiedname>neforce::ftp_protocol::kBufferSize</qualifiedname>
+        <initializer>= 8192</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="57" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classneforce_1_1ftp__protocol_1a8d35f6cc71f99b6acc64ae0f525c200d" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::ftp_protocol::tls_active_</definition>
+        <argsstring></argsstring>
+        <name>tls_active_</name>
+        <qualifiedname>neforce::ftp_protocol::tls_active_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="60" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ftp__protocol_1a7e33e6fa7f18df14a1e5a14dc9bd51ac" prot="protected" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1ssl__stream" kindref="compound">ssl_stream</ref></type>
+        <definition>ssl_stream neforce::ftp_protocol::ctrl_ssl_</definition>
+        <argsstring></argsstring>
+        <name>ctrl_ssl_</name>
+        <qualifiedname>neforce::ftp_protocol::ctrl_ssl_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="61" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ftp__protocol_1a65fe9eafefb7ff0fc1f56e0002341f27" prot="protected" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1ssl__context" kindref="compound">ssl_context</ref> *</type>
+        <definition>ssl_context* neforce::ftp_protocol::ssl_ctx_</definition>
+        <argsstring></argsstring>
+        <name>ssl_ctx_</name>
+        <qualifiedname>neforce::ftp_protocol::ssl_ctx_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="62" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ftp__protocol_1a0381c8e7caaee99ffb5387ee120cc9f2" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::ftp_protocol::data_tls_</definition>
+        <argsstring></argsstring>
+        <name>data_tls_</name>
+        <qualifiedname>neforce::ftp_protocol::data_tls_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="63" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ftp__protocol_1a186cb3b0eb721cfb12127d9ec21157eb" prot="protected" static="no" mutable="no">
+        <type>char</type>
+        <definition>char neforce::ftp_protocol::buffer_[kBufferSize]</definition>
+        <argsstring>[kBufferSize]</argsstring>
+        <name>buffer_</name>
+        <qualifiedname>neforce::ftp_protocol::buffer_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="65" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="65" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ftp__protocol_1a0f05240d39d9ca0ea99a36e670e1fdb4" prot="protected" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::ftp_protocol::buffer_pos_</definition>
+        <argsstring></argsstring>
+        <name>buffer_pos_</name>
+        <qualifiedname>neforce::ftp_protocol::buffer_pos_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="66" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ftp__protocol_1aafc109d6cbaabc5fa5d1f00d87d63db4" prot="protected" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::ftp_protocol::buffer_size_</definition>
+        <argsstring></argsstring>
+        <name>buffer_size_</name>
+        <qualifiedname>neforce::ftp_protocol::buffer_size_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="67" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classneforce_1_1ftp__protocol_1a9aa8389c3fc4f32a40c3a227fff0b4f1" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::ftp_protocol::ftp_protocol</definition>
+        <argsstring>()=default</argsstring>
+        <name>ftp_protocol</name>
+        <qualifiedname>neforce::ftp_protocol::ftp_protocol</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="69" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ftp__protocol_1a89636a80ddcb0fbb5499f6c21cda5815" prot="protected" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::ftp_protocol::ftp_protocol</definition>
+        <argsstring>(ftp_protocol &amp;&amp;other) noexcept</argsstring>
+        <name>ftp_protocol</name>
+        <qualifiedname>neforce::ftp_protocol::ftp_protocol</qualifiedname>
+        <param>
+          <type>ftp_protocol &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="71" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ftp__protocol_1aee97395d2a1f487ad06da0e300f6055d" prot="protected" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>ftp_protocol &amp;</type>
+        <definition>ftp_protocol &amp; neforce::ftp_protocol::operator=</definition>
+        <argsstring>(ftp_protocol &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::ftp_protocol::operator=</qualifiedname>
+        <param>
+          <type>ftp_protocol &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="72" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ftp__protocol_1ab02d9a1580797e03a7560ea8f1043a3a" prot="protected" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::ftp_protocol::ftp_protocol</definition>
+        <argsstring>(native_handle_type fd)</argsstring>
+        <name>ftp_protocol</name>
+        <qualifiedname>neforce::ftp_protocol::ftp_protocol</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gaae6b483f5dbd1f5318336f6349ff6a6a" kindref="member">native_handle_type</ref></type>
+          <declname>fd</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="74" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="74" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ftp__protocol_1ae3e911b5d252cfbcc14869893657feb6" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1gaee9aeee261c91caa424e5eb0ec5bb749" kindref="member">ssize_t</ref></type>
+        <definition>ssize_t neforce::ftp_protocol::ctrl_send</definition>
+        <argsstring>(const char *data, size_t len)</argsstring>
+        <name>ctrl_send</name>
+        <qualifiedname>neforce::ftp_protocol::ctrl_send</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="81" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ftp__protocol_1a6fc40830c04c040e0a48502fc678af0f" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1gaee9aeee261c91caa424e5eb0ec5bb749" kindref="member">ssize_t</ref></type>
+        <definition>ssize_t neforce::ftp_protocol::ctrl_recv</definition>
+        <argsstring>(char *buf, size_t len)</argsstring>
+        <name>ctrl_recv</name>
+        <qualifiedname>neforce::ftp_protocol::ctrl_recv</qualifiedname>
+        <param>
+          <type>char *</type>
+          <declname>buf</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="82" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ftp__protocol_1a6916797fdc0d248602d2a77c1861efbe" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::ftp_protocol::ctrl_read_line</definition>
+        <argsstring>(string &amp;out)</argsstring>
+        <name>ctrl_read_line</name>
+        <qualifiedname>neforce::ftp_protocol::ctrl_read_line</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="83" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ftp__protocol_1a004c34c190f713e28cecbb3c09bd2936" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>response</type>
+        <definition>response neforce::ftp_protocol::read_response</definition>
+        <argsstring>()</argsstring>
+        <name>read_response</name>
+        <qualifiedname>neforce::ftp_protocol::read_response</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="85" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ftp__protocol_1af48c3db62e6a832b25ade9dc308cb88d" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::ftp_protocol::send_response</definition>
+        <argsstring>(int code, const string &amp;msg)</argsstring>
+        <name>send_response</name>
+        <qualifiedname>neforce::ftp_protocol::send_response</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>code</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="86" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ftp__protocol_1a72f74c7ccdcc5e53a9f4bd1c4e85c0cd" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::ftp_protocol::send_response</definition>
+        <argsstring>(const response &amp;resp)</argsstring>
+        <name>send_response</name>
+        <qualifiedname>neforce::ftp_protocol::send_response</qualifiedname>
+        <param>
+          <type>const response &amp;</type>
+          <declname>resp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="87" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ftp__protocol_1a8fbdfec6ed932ad98ed3755e494589f4" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::ftp_protocol::clear_buffer</definition>
+        <argsstring>()</argsstring>
+        <name>clear_buffer</name>
+        <qualifiedname>neforce::ftp_protocol::clear_buffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="89" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="89" bodyend="92"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1ftp__protocol_1ad10d7a6a9510cc822f7429bd7bc19006" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::ftp_protocol::~ftp_protocol</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~ftp_protocol</name>
+        <qualifiedname>neforce::ftp_protocol::~ftp_protocol</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="78" column="5"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::ftp_protocol</label>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::ip_socket</label>
+        <link refid="classneforce_1_1ip__socket"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::socket_base</label>
+        <link refid="classneforce_1_1socket__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="5">
+        <label>neforce::async_stream</label>
+        <link refid="classneforce_1_1async__stream"/>
+      </node>
+      <node id="1">
+        <label>neforce::ftp_protocol</label>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>ctrl_ssl_</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>ssl_ctx_</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::ip_socket</label>
+        <link refid="classneforce_1_1ip__socket"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::socket_base</label>
+        <link refid="classneforce_1_1socket__base"/>
+      </node>
+      <node id="6">
+        <label>neforce::ssl_context</label>
+        <link refid="classneforce_1_1ssl__context"/>
+      </node>
+      <node id="4">
+        <label>neforce::ssl_stream</label>
+        <link refid="classneforce_1_1ssl__stream"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="23" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="23" bodyend="93"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1ip__socket_1a0325c30f0884ea89c03ccb42c4ec4fe8" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>address_family</name></member>
+      <member refid="classneforce_1_1socket__base_1ae7a4566c2df82eb0ba3fff8b5fc7df46" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>bind</name></member>
+      <member refid="classneforce_1_1ftp__protocol_1a186cb3b0eb721cfb12127d9ec21157eb" prot="protected" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>buffer_</name></member>
+      <member refid="classneforce_1_1ftp__protocol_1a0f05240d39d9ca0ea99a36e670e1fdb4" prot="protected" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>buffer_pos_</name></member>
+      <member refid="classneforce_1_1ftp__protocol_1aafc109d6cbaabc5fa5d1f00d87d63db4" prot="protected" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>buffer_size_</name></member>
+      <member refid="classneforce_1_1ftp__protocol_1a8fbdfec6ed932ad98ed3755e494589f4" prot="protected" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>clear_buffer</name></member>
+      <member refid="classneforce_1_1ip__socket_1ac28c4d988187869d423dd9c881b6c1ad" prot="public" virt="virtual"><scope>neforce::ftp_protocol</scope><name>close</name></member>
+      <member refid="classneforce_1_1ip__socket_1a4cdbfc7ec62fb1980c9b432567c544b8" prot="public" virt="virtual"><scope>neforce::ftp_protocol</scope><name>connect</name></member>
+      <member refid="classneforce_1_1ftp__protocol_1a6916797fdc0d248602d2a77c1861efbe" prot="protected" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>ctrl_read_line</name></member>
+      <member refid="classneforce_1_1ftp__protocol_1a6fc40830c04c040e0a48502fc678af0f" prot="protected" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>ctrl_recv</name></member>
+      <member refid="classneforce_1_1ftp__protocol_1ae3e911b5d252cfbcc14869893657feb6" prot="protected" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>ctrl_send</name></member>
+      <member refid="classneforce_1_1ftp__protocol_1a7e33e6fa7f18df14a1e5a14dc9bd51ac" prot="protected" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>ctrl_ssl_</name></member>
+      <member refid="classneforce_1_1ftp__protocol_1a0381c8e7caaee99ffb5387ee120cc9f2" prot="protected" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>data_tls_</name></member>
+      <member refid="classneforce_1_1socket__base_1a90d93d8cb0d95db21274a08b6d27205a" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>family</name></member>
+      <member refid="classneforce_1_1ip__socket_1a2f3af3f32b5f7b68649ccfda2087b81b" prot="protected" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>family_</name></member>
+      <member refid="classneforce_1_1socket__base_1a0d91356affbee30bd1e6f7cc483e508d" prot="protected" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>fd_</name></member>
+      <member refid="classneforce_1_1ftp__protocol_1a9aa8389c3fc4f32a40c3a227fff0b4f1" prot="protected" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>ftp_protocol</name></member>
+      <member refid="classneforce_1_1ftp__protocol_1a89636a80ddcb0fbb5499f6c21cda5815" prot="protected" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>ftp_protocol</name></member>
+      <member refid="classneforce_1_1ftp__protocol_1ab02d9a1580797e03a7560ea8f1043a3a" prot="protected" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>ftp_protocol</name></member>
+      <member refid="classneforce_1_1socket__base_1af49df530dda2a79b2c71300f8288bba7" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>get_keep_alive</name></member>
+      <member refid="classneforce_1_1socket__base_1a17ec17b8a17e3bee456b0048596320a8" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>get_option</name></member>
+      <member refid="classneforce_1_1socket__base_1a520522c4fdfcdc32ab604032228b959f" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>get_receive_buffer_size</name></member>
+      <member refid="classneforce_1_1socket__base_1acbd2aa324a89474bde619a624e3c9844" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>get_receive_timeout</name></member>
+      <member refid="classneforce_1_1socket__base_1a3fe176f51955f4696822063fb30d726a" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>get_reuse_address</name></member>
+      <member refid="classneforce_1_1socket__base_1aa5bb48b1079264d9664fe804212faa37" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>get_reuse_port</name></member>
+      <member refid="classneforce_1_1socket__base_1a91af69f055fd07c06ce5e03f7714dfcc" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>get_send_buffer_size</name></member>
+      <member refid="classneforce_1_1socket__base_1a67995540ea809991a0b57c04be823fc6" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>get_send_timeout</name></member>
+      <member refid="classneforce_1_1socket__base_1a21579daf2fbc2531ab85713ed529e487" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>get_tcp_nodelay</name></member>
+      <member refid="classneforce_1_1socket__base_1af49691de702dac3413c30d84bb64f734" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>invalid_handle</name></member>
+      <member refid="classneforce_1_1ip__socket_1a98a70d9b139d26347dce1ec4fac71dd5" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>ip_socket</name></member>
+      <member refid="classneforce_1_1ip__socket_1ab903e29e3d12614715fc900e1ea82c8d" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>ip_socket</name></member>
+      <member refid="classneforce_1_1ip__socket_1ac105a1ad0969027342aa7fde2522532b" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>ip_socket</name></member>
+      <member refid="classneforce_1_1ip__socket_1ab00c04d8df1df46dda74dc8d1a43df94" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>ip_socket</name></member>
+      <member refid="classneforce_1_1ip__socket_1a4931794a3b297db3646a6c8b85e9dec2" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>is_ipv4</name></member>
+      <member refid="classneforce_1_1ip__socket_1ac145bfaba7d2e8640b40ea30e4b64e0c" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>is_ipv6</name></member>
+      <member refid="classneforce_1_1socket__base_1acf76f07c4bb9652e701eb39247850f76" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>is_nonblocking</name></member>
+      <member refid="classneforce_1_1socket__base_1a688c59e456551b33a230cb139dbd685a" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>is_open</name></member>
+      <member refid="classneforce_1_1ftp__protocol_1ac6e21c4db5851e9122d6736db5dcf5d4" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>kBufferSize</name></member>
+      <member refid="classneforce_1_1socket__base_1aada611fdaa46fb9f055ef566be7fbd05" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>listen</name></member>
+      <member refid="classneforce_1_1socket__base_1abaa18d7f634b115ad1989ec023c0bf32" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>local_endpoint</name></member>
+      <member refid="classneforce_1_1socket__base_1a55e7e77823236aaf022990256793783d" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>native_handle</name></member>
+      <member refid="classneforce_1_1socket__base_1a4c5f2953bd5b46ee48a334d5c247bc0d" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>native_handle_type</name></member>
+      <member refid="classneforce_1_1socket__base_1ad636c7b9448f24dcea9ae92e3b27c263" prot="protected" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>nonblocking_</name></member>
+      <member refid="classneforce_1_1socket__base_1aa25cb567f6980041f5dc74b91913eb6d" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>open</name></member>
+      <member refid="classneforce_1_1ip__socket_1a5f93a507926ec1ddc9a6a4e728644968" prot="protected" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>open_ip</name></member>
+      <member refid="classneforce_1_1socket__base_1ac4c5240cbfd92f1b31e3f8dc7093987a" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>operator bool</name></member>
+      <member refid="classneforce_1_1ftp__protocol_1aee97395d2a1f487ad06da0e300f6055d" prot="protected" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1ip__socket_1aaf616a56b6b0e00194633d59a93e79ae" prot="public" virt="non-virtual" ambiguityscope="neforce::ip_socket::"><scope>neforce::ftp_protocol</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1ip__socket_1acd978787ab0a7d3b0123917f8c6b8a96" prot="public" virt="non-virtual" ambiguityscope="neforce::ip_socket::"><scope>neforce::ftp_protocol</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1socket__base_1ab20b8caa25bbb8071e4c908691251667" prot="public" virt="non-virtual" ambiguityscope="neforce::socket_base::"><scope>neforce::ftp_protocol</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1socket__base_1a9e86d2bd403dbba7ba100a163ea130d0" prot="public" virt="non-virtual" ambiguityscope="neforce::socket_base::"><scope>neforce::ftp_protocol</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1ftp__protocol_1a41b838352707e681703ca96aebd7d9ea" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>passive_mode</name></member>
+      <member refid="classneforce_1_1socket__base_1a8cbdda2bb8a0e190c258eb25bb445992" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>protocol</name></member>
+      <member refid="classneforce_1_1ftp__protocol_1a004c34c190f713e28cecbb3c09bd2936" prot="protected" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>read_response</name></member>
+      <member refid="classneforce_1_1socket__base_1a32f1e147a349925c32839fa1ce3b8fdc" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>release</name></member>
+      <member refid="classneforce_1_1socket__base_1ae1a4b45ff284ba83fac92aa5dc4a9adb" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>remote_endpoint</name></member>
+      <member refid="classneforce_1_1ftp__protocol_1af48c3db62e6a832b25ade9dc308cb88d" prot="protected" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>send_response</name></member>
+      <member refid="classneforce_1_1ftp__protocol_1a72f74c7ccdcc5e53a9f4bd1c4e85c0cd" prot="protected" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>send_response</name></member>
+      <member refid="classneforce_1_1socket__base_1ab55494ddb7435ace44483bf2a13d1b19" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>set_keep_alive</name></member>
+      <member refid="classneforce_1_1socket__base_1a9b75e2f51a01febdd29f2fd6941fd2ab" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>set_nonblocking</name></member>
+      <member refid="classneforce_1_1socket__base_1aebf9cdaaa399bcbdff7e7a47345d039a" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>set_option</name></member>
+      <member refid="classneforce_1_1socket__base_1a2b3e9bc783b3e3469bb213604220deed" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>set_receive_buffer_size</name></member>
+      <member refid="classneforce_1_1socket__base_1a3e028a27cad5bca645c4d8f645751dfa" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>set_receive_timeout</name></member>
+      <member refid="classneforce_1_1socket__base_1af311eb5e4b8693da9b1d1e16d0b10d13" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>set_reuse_address</name></member>
+      <member refid="classneforce_1_1socket__base_1ad2cd6c991e1b7689ecffadc57ec44df5" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>set_reuse_port</name></member>
+      <member refid="classneforce_1_1socket__base_1a5b90babf7b270d141fdeeab138550374" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>set_send_buffer_size</name></member>
+      <member refid="classneforce_1_1socket__base_1a21e4ba35840c0cc904beaaf005a846b1" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>set_send_timeout</name></member>
+      <member refid="classneforce_1_1socket__base_1a82ea11bfa98bbbd2ad2d9feeffd44782" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>set_tcp_nodelay</name></member>
+      <member refid="classneforce_1_1socket__base_1a53d78f352e1c34a1d54f475d6eaf7922" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>shutdown_both</name></member>
+      <member refid="classneforce_1_1socket__base_1a852458c313e65acc1e74bc16130e0502" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>shutdown_receive</name></member>
+      <member refid="classneforce_1_1socket__base_1ac0d78cde8681391cedca79f28e89119e" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>shutdown_send</name></member>
+      <member refid="classneforce_1_1socket__base_1a9b8731a4cb059cf60c43ca97aa688162" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>socket_base</name></member>
+      <member refid="classneforce_1_1socket__base_1accb5b278a3bc2792f893357f1e7e9812" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>socket_base</name></member>
+      <member refid="classneforce_1_1socket__base_1afa79ec1d00e839df5aaf63de31028566" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>socket_base</name></member>
+      <member refid="classneforce_1_1socket__base_1a08db6bdff24ac7930d2010da313fe5f8" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>socket_base</name></member>
+      <member refid="classneforce_1_1ftp__protocol_1a65fe9eafefb7ff0fc1f56e0002341f27" prot="protected" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>ssl_ctx_</name></member>
+      <member refid="classneforce_1_1ftp__protocol_1a8d35f6cc71f99b6acc64ae0f525c200d" prot="protected" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>tls_active_</name></member>
+      <member refid="classneforce_1_1ftp__protocol_1aff900337e8ba39a1b74eb96855ee23dd" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>tls_mode</name></member>
+      <member refid="classneforce_1_1ftp__protocol_1a7fc13a7e02e18594105e480acf71026e" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>transfer_mode</name></member>
+      <member refid="classneforce_1_1socket__base_1a6b1c0921703871f28d6903be8f02690e" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>try_open</name></member>
+      <member refid="classneforce_1_1socket__base_1a322e65239feb4f0d2fa3bf3763f31256" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>type</name></member>
+      <member refid="classneforce_1_1ftp__protocol_1ad10d7a6a9510cc822f7429bd7bc19006" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>~ftp_protocol</name></member>
+      <member refid="classneforce_1_1ip__socket_1a40b908afe34460e2d5d890a36913fac1" prot="public" virt="non-virtual"><scope>neforce::ftp_protocol</scope><name>~ip_socket</name></member>
+      <member refid="classneforce_1_1socket__base_1aef05deba68ee95bf9f5a5e3c408851a3" prot="public" virt="virtual"><scope>neforce::ftp_protocol</scope><name>~socket_base</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['完成令牌_0',['完成令牌',['../group___completion_tokens.html',1,'']]]
+  ['安全注意事项_0',['安全注意事项',['../group___hash_primary.html#security_note',1,'']]]
 ];

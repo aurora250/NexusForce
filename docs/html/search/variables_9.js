@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['join_5fclauses_0',['join_clauses',['../structsql__builder_1_1select__data.html#aea44aec6bdc126b177631a17e4cb621d',1,'sql_builder::select_data']]],
-  ['justify_1',['justify',['../structbox__props.html#a4b2bdea5c3c9eff9547c701f08baf423',1,'box_props']]]
+  ['join_5fclauses_0',['join_clauses',['../structneforce_1_1sql__builder_1_1select__data.html#a4d6594aa0b7bfe12a5b1ae48a886c0e2',1,'neforce::sql_builder::select_data']]],
+  ['justify_1',['justify',['../structneforce_1_1tui_1_1box__props.html#aa7f2604c09934a242d2e80e121d4d212',1,'neforce::tui::box_props']]]
 ];

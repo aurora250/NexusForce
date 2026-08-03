@@ -44,6 +44,19 @@ add_custom_target(doc
         VERBATIM
 )
 
+find_package(Python3 QUIET COMPONENTS Interpreter)
+if(Python3_FOUND)
+    add_custom_command(TARGET doc POST_BUILD
+        COMMAND ${Python3_EXECUTABLE}
+            ${CMAKE_SOURCE_DIR}/scripts/generate_api_index.py
+            ${DOXYGEN_OUTPUT_DIR}/xml
+            ${CMAKE_SOURCE_DIR}/docs/ai/api_index.jsonl
+        COMMENT "Generating AI agent API index (JSONL)"
+    )
+else()
+    message(WARNING "Python3 not found — AI agent API index will not be generated")
+endif()
+
 add_custom_target(doc-clean
         COMMAND ${CMAKE_COMMAND} -E remove_directory ${DOXYGEN_OUTPUT_DIR}
         COMMENT "Cleaning documentation output"
@@ -59,3 +72,4 @@ message(STATUS "  make doc-clean           # Clean documentation output")
 message(STATUS "")
 message(STATUS "HTML documentation: ${DOXYGEN_OUTPUT_DIR}/html/index.html")
 message(STATUS "XML documentation:  ${DOXYGEN_OUTPUT_DIR}/xml/")
+message(STATUS "AI agent API index: ${CMAKE_SOURCE_DIR}/docs/ai/api_index.jsonl")

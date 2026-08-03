@@ -3,26 +3,27 @@
   <compounddef id="group___type_action_check" kind="group">
     <compoundname>TypeActionCheck</compoundname>
     <title>类型行为检查</title>
-    <innerclass refid="structis__allocator" prot="public">is_allocator</innerclass>
-    <innerclass refid="structis__incrementible" prot="public">is_incrementible</innerclass>
-    <innerclass refid="structis__decrementible" prot="public">is_decrementible</innerclass>
-    <innerclass refid="structis__iterable" prot="public">is_iterable</innerclass>
-    <innerclass refid="structis__maplike" prot="public">is_maplike</innerclass>
-    <innerclass refid="structhas__construct" prot="public">has_construct</innerclass>
-    <innerclass refid="structhas__base" prot="public">has_base</innerclass>
-    <innerconcept refid="conceptis__pair__v">is_pair_v</innerconcept>
+    <innerclass refid="structneforce_1_1is__allocator" prot="public">neforce::is_allocator</innerclass>
+    <innerclass refid="structneforce_1_1is__incrementible" prot="public">neforce::is_incrementible</innerclass>
+    <innerclass refid="structneforce_1_1is__decrementible" prot="public">neforce::is_decrementible</innerclass>
+    <innerclass refid="structneforce_1_1is__iterable" prot="public">neforce::is_iterable</innerclass>
+    <innerclass refid="structneforce_1_1is__maplike" prot="public">neforce::is_maplike</innerclass>
+    <innerclass refid="structneforce_1_1has__construct" prot="public">neforce::has_construct</innerclass>
+    <innerclass refid="structneforce_1_1has__base" prot="public">neforce::has_base</innerclass>
+    <innerconcept refid="conceptneforce_1_1is__pair__v">neforce::is_pair_v</innerconcept>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="group___type_action_check_1ga57aaecec78d2faf341af215b18c7702f" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___type_action_check_1ga33523f53e5b470e385b3c7631473c3f6" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename Alloc</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_allocator_v</definition>
+        <definition>bool neforce::is_allocator_v</definition>
         <argsstring></argsstring>
         <name>is_allocator_v</name>
-        <initializer>= <ref refid="structis__allocator" kindref="compound">is_allocator</ref>&lt;Alloc&gt;::value</initializer>
+        <qualifiedname>neforce::is_allocator_v</qualifiedname>
+        <initializer>= is_allocator&lt;Alloc&gt;::value</initializer>
         <briefdescription>
 <para>is_allocator的便捷变量模板 </para>
         </briefdescription>
@@ -32,17 +33,18 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="4104" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="4104" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="group___type_action_check_1ga3c6beaa1786d1f11f5a7a5913597fae9" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___type_action_check_1gae81ddcf335c986b4b811bac2f3284e01" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_incrementible_v</definition>
+        <definition>bool neforce::is_incrementible_v</definition>
         <argsstring></argsstring>
         <name>is_incrementible_v</name>
-        <initializer>= <ref refid="structis__incrementible" kindref="compound">is_incrementible</ref>&lt;Iterator&gt;::value</initializer>
+        <qualifiedname>neforce::is_incrementible_v</qualifiedname>
+        <initializer>= is_incrementible&lt;Iterator&gt;::value</initializer>
         <briefdescription>
 <para>iis_incrementible的便捷变量模板 </para>
         </briefdescription>
@@ -52,17 +54,18 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="4152" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="4152" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="group___type_action_check_1gad278ace2a4afeb61c0e2a75418f4f86e" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___type_action_check_1ga48e064bae6ca8655294d8c98a44d4bf1" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_decrementible_v</definition>
+        <definition>bool neforce::is_decrementible_v</definition>
         <argsstring></argsstring>
         <name>is_decrementible_v</name>
-        <initializer>= <ref refid="structis__decrementible" kindref="compound">is_decrementible</ref>&lt;Iterator&gt;::value</initializer>
+        <qualifiedname>neforce::is_decrementible_v</qualifiedname>
+        <initializer>= is_decrementible&lt;Iterator&gt;::value</initializer>
         <briefdescription>
 <para>is_decrementible的便捷变量模板 </para>
         </briefdescription>
@@ -72,17 +75,18 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="4180" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="4180" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="group___type_action_check_1gadf72477d5b96869bf84dffe9ef52037c" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___type_action_check_1ga868b703506f6bb0ed800378058e2df7c" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_iterable_v</definition>
+        <definition>bool neforce::is_iterable_v</definition>
         <argsstring></argsstring>
         <name>is_iterable_v</name>
-        <initializer>= <ref refid="structis__iterable" kindref="compound">is_iterable</ref>&lt;T&gt;::value</initializer>
+        <qualifiedname>neforce::is_iterable_v</qualifiedname>
+        <initializer>= is_iterable&lt;T&gt;::value</initializer>
         <briefdescription>
 <para>is_iterable的便捷变量模板 </para>
         </briefdescription>
@@ -92,17 +96,18 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="4203" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="4203" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="group___type_action_check_1gaeb90427b60fd11a12e446ea743e4b5fa" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___type_action_check_1ga80b2d444543224db10bcb49f6d87761d" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename Map</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_maplike_v</definition>
+        <definition>bool neforce::is_maplike_v</definition>
         <argsstring></argsstring>
         <name>is_maplike_v</name>
-        <initializer>= <ref refid="structis__maplike" kindref="compound">is_maplike</ref>&lt;Map&gt;::value</initializer>
+        <qualifiedname>neforce::is_maplike_v</qualifiedname>
+        <initializer>= is_maplike&lt;Map&gt;::value</initializer>
         <briefdescription>
 <para>is_maplike的便捷变量模板 </para>
         </briefdescription>
@@ -112,7 +117,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="4244" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="4244" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="group___type_action_check_1gac880d0e8ba15b6c9acca423ed8052a10" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___type_action_check_1ga1d8dc40946d835e853570e1f5ac31641" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename Alloc</type>
@@ -127,10 +132,11 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool has_construct_v</definition>
+        <definition>bool neforce::has_construct_v</definition>
         <argsstring></argsstring>
         <name>has_construct_v</name>
-        <initializer>= <ref refid="structhas__construct" kindref="compound">has_construct</ref>&lt;Alloc, T, Args...&gt;::value</initializer>
+        <qualifiedname>neforce::has_construct_v</qualifiedname>
+        <initializer>= has_construct&lt;Alloc, T, Args...&gt;::value</initializer>
         <briefdescription>
 <para>has_construct的便捷变量模板 </para>
         </briefdescription>
@@ -140,17 +146,18 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="4282" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="4282" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="group___type_action_check_1ga6609b0135958b11799c0a91e475d9b5e" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___type_action_check_1gad5697ea3fadbaa0e6de8dad02ec38ef7" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool has_base_v</definition>
+        <definition>bool neforce::has_base_v</definition>
         <argsstring></argsstring>
         <name>has_base_v</name>
-        <initializer>= <ref refid="structhas__base" kindref="compound">has_base</ref>&lt;T&gt;::value</initializer>
+        <qualifiedname>neforce::has_base_v</qualifiedname>
+        <initializer>= has_base&lt;T&gt;::value</initializer>
         <briefdescription>
 <para>has_base的便捷变量模板 </para>
         </briefdescription>

@@ -1,42 +1,42 @@
 var group___plugin =
 [
-    [ "plugin_info", "structplugin__info.html", [
-      [ "author", "structplugin__info.html#ac9c48c117b3400890a4e83dfd9fc31cd", null ],
-      [ "description", "structplugin__info.html#a23f446a01701d7d0f86e3d1e0b672811", null ],
-      [ "library_path", "structplugin__info.html#abc39f8b5799194f35cd5827f3faa564a", null ],
-      [ "name", "structplugin__info.html#a5808cef84f5064e059009a108108c7f0", null ],
-      [ "version", "structplugin__info.html#a899b491fc4007aeae0431f4d030e904a", null ]
+    [ "neforce::plugin_info", "structneforce_1_1plugin__info.html", [
+      [ "author", "structneforce_1_1plugin__info.html#a48c11eca4354c7f1ae2a4f5ea33f1925", null ],
+      [ "description", "structneforce_1_1plugin__info.html#aefd71f295582c6c84a0c35405dd0a404", null ],
+      [ "library_path", "structneforce_1_1plugin__info.html#ad8dc3e05fec9a6b03b5bf6596989ee0b", null ],
+      [ "name", "structneforce_1_1plugin__info.html#a429c72f6312fec21d469a499f50d3488", null ],
+      [ "version", "structneforce_1_1plugin__info.html#a16d86d294774b2c9a60b7083be5649c4", null ]
     ] ],
-    [ "iplugin", "structiplugin.html", [
-      [ "execute", "structiplugin.html#a5b1f48287bf155612ce014811215da5c", null ],
-      [ "get_info", "structiplugin.html#a23d6085a2e63cbf778e215d44490ebd4", null ],
-      [ "initialize", "structiplugin.html#a470ea9b8c6b7058e8a2bb69ffe364e02", null ],
-      [ "shutdown", "structiplugin.html#ae5d9267f0a284319b9df78496ae6c8b3", null ]
+    [ "neforce::iplugin", "structneforce_1_1iplugin.html", [
+      [ "execute", "structneforce_1_1iplugin.html#ab74fe58ab9943a6ef8f8dff2f45d01b0", null ],
+      [ "get_info", "structneforce_1_1iplugin.html#a608f5a923d224938a16fb720c7b66b09", null ],
+      [ "initialize", "structneforce_1_1iplugin.html#ae897024d9966d9dae1be14ecdf10009e", null ],
+      [ "shutdown", "structneforce_1_1iplugin.html#a24ea52256942af5dcd1402671a963ee1", null ]
     ] ],
-    [ "plugin_deleter", "structplugin__deleter.html", [
-      [ "deleter_type", "structplugin__deleter.html#a1971c84fb464e400807c9fcde1cb8611", null ],
-      [ "plugin_deleter", "structplugin__deleter.html#a057a1491b7a95e65738daefe599b113a", null ],
-      [ "~plugin_deleter", "structplugin__deleter.html#a2c7aac329f10395b5c36bbce38dec815", null ],
-      [ "plugin_deleter", "structplugin__deleter.html#a03fbca2183006f758b8a204211ba1a4a", null ],
-      [ "plugin_deleter", "structplugin__deleter.html#a197e3056079c0f53fbb92666edb102ca", null ],
-      [ "operator()", "structplugin__deleter.html#a187bdbd4fd32319ac32cd8d1227814b2", null ],
-      [ "operator=", "structplugin__deleter.html#a254543f507a3e2553e27e592203c8392", null ],
-      [ "rebind", "structplugin__deleter.html#a41b7c48f4f89afe74821e7d3106576be", null ]
+    [ "neforce::plugin_deleter", "structneforce_1_1plugin__deleter.html", [
+      [ "deleter_type", "structneforce_1_1plugin__deleter.html#a48acce3dc30b72cd529d43359ce5302d", null ],
+      [ "plugin_deleter", "structneforce_1_1plugin__deleter.html#a96f13391c2207de96b0cab16ac466774", null ],
+      [ "~plugin_deleter", "structneforce_1_1plugin__deleter.html#a719c4ec518d859953310ee650e13ffe2", null ],
+      [ "plugin_deleter", "structneforce_1_1plugin__deleter.html#a5fa7b40d274b6cc08d5caceda937b822", null ],
+      [ "plugin_deleter", "structneforce_1_1plugin__deleter.html#a82d49dc3b4903ad55a20329c710432da", null ],
+      [ "operator()", "structneforce_1_1plugin__deleter.html#a03a58ba1d0e637902d926d1efe725ccf", null ],
+      [ "operator=", "structneforce_1_1plugin__deleter.html#aa2931c0c271c17fef7ad4e1f221ea475", null ],
+      [ "rebind", "structneforce_1_1plugin__deleter.html#aadd07c6f5b4ace46b959605778e37ba0", null ]
     ] ],
-    [ "plugin_manager", "classplugin__manager.html", [
-      [ "library_ptr", "classplugin__manager.html#a0814c10a16076c9d160da50950074b6a", null ],
-      [ "~plugin_manager", "classplugin__manager.html#a531cd15ddab97272ca891f2b5bc748fb", null ],
-      [ "get_plugin", "classplugin__manager.html#a6803ab9ba11d94193b89574309e7eea6", null ],
-      [ "initialize_all", "classplugin__manager.html#a448552a566139683700bd74ddc8c303c", null ],
-      [ "list_plugins", "classplugin__manager.html#aeedccefd356402794b61119b1efe64b9", null ],
-      [ "load_plugin", "classplugin__manager.html#a6739effe7939146b9c9bcb196748f01d", null ],
-      [ "load_plugins", "classplugin__manager.html#a051225a7c34fc2d4dc5a94f1e14207d9", null ],
-      [ "shutdown_all", "classplugin__manager.html#a1130feb332d99fa333e02f278c015789", null ],
-      [ "unload_plugin", "classplugin__manager.html#a9beb1072652ecc2f9080f8a545a781ae", null ]
+    [ "neforce::plugin_manager", "classneforce_1_1plugin__manager.html", [
+      [ "library_ptr", "classneforce_1_1plugin__manager.html#a92d54616f33daceb2fce2606ed42c93a", null ],
+      [ "~plugin_manager", "classneforce_1_1plugin__manager.html#a5e3beba62d73e7d58973766fa295cc3e", null ],
+      [ "get_plugin", "classneforce_1_1plugin__manager.html#a65ada228e8b4c3d9e289f4f48885b8ae", null ],
+      [ "initialize_all", "classneforce_1_1plugin__manager.html#aff734fd5ede68e4e2c876152b3944646", null ],
+      [ "list_plugins", "classneforce_1_1plugin__manager.html#a35c7381dcf1a26b8741e3c48a93f9d49", null ],
+      [ "load_plugin", "classneforce_1_1plugin__manager.html#a3c3c05b184fdf5f3be6ec1703f879a2e", null ],
+      [ "load_plugins", "classneforce_1_1plugin__manager.html#a82d13a894d76d17c040a49a1ece28b81", null ],
+      [ "shutdown_all", "classneforce_1_1plugin__manager.html#a324e8ba0dbc3be2af3a89a66e4edf879", null ],
+      [ "unload_plugin", "classneforce_1_1plugin__manager.html#a8243cfcd7bc9aabf76e3d6d9287dc6c1", null ]
     ] ],
     [ "NEFORCE_PLUGIN_CREATE_FUNC", "group___plugin.html#gaf25d3a0e4b54927bc59ad58466f31dcc", null ],
     [ "NEFORCE_PLUGIN_DESTROY_FUNC", "group___plugin.html#gad609af93bddb00f7c05edb56b9dc08bf", null ],
-    [ "plugin_ptr", "group___plugin.html#gaf947f049a3822c8b84313e907b0ebb58", null ],
-    [ "create_plugin", "group___plugin.html#ga410e53efc8f03f530c6794d60818d504", null ],
-    [ "destroy_plugin", "group___plugin.html#ga74771a48a81e35febe1026112c62e1f8", null ]
+    [ "neforce::plugin_ptr", "group___plugin.html#gabd8ce662d9b26e04d67499473f021442", null ],
+    [ "neforce::create_plugin", "group___plugin.html#gacc30f46adda4b5fce81a8ed81ca292e6", null ],
+    [ "neforce::destroy_plugin", "group___plugin.html#gad7adaf72e0a7e6ae7dfd0eba89279952", null ]
 ];

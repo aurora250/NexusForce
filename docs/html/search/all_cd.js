@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['险象指针_0',['险象指针',['../group___hazard_pointer.html',1,'']]]
+  ['部分排序_0',['部分排序',['../group___sort_algorithms.html#partial_sorting',1,'']]]
 ];

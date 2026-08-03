@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quote_5ftype_0',['quote_type',['../classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40',1,'env_variable']]]
+  ['quote_5ftype_0',['quote_type',['../classneforce_1_1env__variable.html#a61da628b3b1b21a82ccc3e87f45c41b8',1,'neforce::env_variable']]]
 ];

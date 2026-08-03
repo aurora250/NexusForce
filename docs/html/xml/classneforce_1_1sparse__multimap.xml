@@ -1,0 +1,2027 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1sparse__multimap" kind="class" language="C++" prot="public">
+    <compoundname>neforce::sparse_multimap</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">icollector&lt; sparse_multimap&lt; Key, T, less&lt; Key &gt;, allocator&lt; pair&lt; Key, T &gt; &gt; &gt; &gt;</basecompoundref>
+    <includes refid="sparse__multimap_8hpp" local="no">sparse_multimap.hpp</includes>
+    <innerclass refid="structneforce_1_1sparse__multimap_1_1value__compare" prot="public">neforce::sparse_multimap::value_compare</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename Key</type>
+      </param>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename Compare</type>
+        <defval><ref refid="structneforce_1_1less" kindref="compound">less</ref>&lt;Key&gt;</defval>
+      </param>
+      <param>
+        <type>typename Alloc</type>
+        <defval><ref refid="group___memory_allocator_1gabd6174043c688f04c1d71b9b21148ec1" kindref="member">allocator</ref>&lt;<ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt;Key, T&gt;&gt;</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1sparse__multimap_1a497885e0a33825c53977645be8ba14f3" prot="public" static="no">
+        <type>Key</type>
+        <definition>using neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::key_type = Key</definition>
+        <argsstring></argsstring>
+        <name>key_type</name>
+        <qualifiedname>neforce::sparse_multimap::key_type</qualifiedname>
+        <briefdescription>
+<para>键类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="47" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__multimap_1a19aafc45bd57085b4a1be752df29304c" prot="public" static="no">
+        <type>T</type>
+        <definition>using neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::data_type = T</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>neforce::sparse_multimap::data_type</qualifiedname>
+        <briefdescription>
+<para>数据类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="48" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__multimap_1afdf4ad0e854c455f94c5572b127ecab8" prot="public" static="no">
+        <type>T</type>
+        <definition>using neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::mapped_type = T</definition>
+        <argsstring></argsstring>
+        <name>mapped_type</name>
+        <qualifiedname>neforce::sparse_multimap::mapped_type</qualifiedname>
+        <briefdescription>
+<para>映射值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="49" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__multimap_1af53f30b685c3da11caef8c48b5f12e7f" prot="public" static="no">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; Key, T &gt;</type>
+        <definition>using neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::value_type = pair&lt;Key, T&gt;</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>neforce::sparse_multimap::value_type</qualifiedname>
+        <briefdescription>
+<para>值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="50" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__multimap_1adc511468ff0af2669aed7a60d125f318" prot="public" static="no">
+        <type>Compare</type>
+        <definition>using neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::key_compare = Compare</definition>
+        <argsstring></argsstring>
+        <name>key_compare</name>
+        <qualifiedname>neforce::sparse_multimap::key_compare</qualifiedname>
+        <briefdescription>
+<para>键比较函数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="51" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__multimap_1ad0b5246da1fbd0543de4cdbef32e0e8f" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1sparse__vector_1a5ed5f24476fd91ebc55343f2d07c8e02" kindref="member">base_type::size_type</ref></type>
+        <definition>using neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::size_type = typename base_type::size_type</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>neforce::sparse_multimap::size_type</qualifiedname>
+        <briefdescription>
+<para>大小类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="83" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__multimap_1ad4c28816923b3031968072eed5cfd56f" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1sparse__vector_1adbe98dcccaebd24e191c8fa863170b6e" kindref="member">base_type::difference_type</ref></type>
+        <definition>using neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::difference_type = typename base_type::difference_type</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>neforce::sparse_multimap::difference_type</qualifiedname>
+        <briefdescription>
+<para>差值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="84" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__multimap_1a3e044825b93e003b79af88112b18283d" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1sparse__vector_1ae1a278e7762bea8a9146b91b4bf79aed" kindref="member">base_type::pointer</ref></type>
+        <definition>using neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::pointer = typename base_type::pointer</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>neforce::sparse_multimap::pointer</qualifiedname>
+        <briefdescription>
+<para>指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="85" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__multimap_1ad21bb8e1952a6decad6d5f1beca2ab58" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1sparse__vector_1a9839f270c50bd5060756de0d021aed51" kindref="member">base_type::const_pointer</ref></type>
+        <definition>using neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::const_pointer = typename base_type::const_pointer</definition>
+        <argsstring></argsstring>
+        <name>const_pointer</name>
+        <qualifiedname>neforce::sparse_multimap::const_pointer</qualifiedname>
+        <briefdescription>
+<para>常量指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="86" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__multimap_1abfff669db6ed1475a134d9bd2be9a81d" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1sparse__vector_1adadc469352d34a63d4969c8721466a73" kindref="member">base_type::reference</ref></type>
+        <definition>using neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::reference = typename base_type::reference</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>neforce::sparse_multimap::reference</qualifiedname>
+        <briefdescription>
+<para>引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="87" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__multimap_1a24221a7fe1ede9eca382b1443d2eaf66" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1sparse__vector_1a2b4dea79f2674d990e30947714d6b7ae" kindref="member">base_type::const_reference</ref></type>
+        <definition>using neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::const_reference = typename base_type::const_reference</definition>
+        <argsstring></argsstring>
+        <name>const_reference</name>
+        <qualifiedname>neforce::sparse_multimap::const_reference</qualifiedname>
+        <briefdescription>
+<para>常量引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="88" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__multimap_1a778d8e023779f2d8896bde929d35e61f" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1sparse__vector_1a1fb96ba60c4aee5b96dc7b9bfc47baaa" kindref="member">base_type::iterator</ref></type>
+        <definition>using neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::iterator = typename base_type::iterator</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>neforce::sparse_multimap::iterator</qualifiedname>
+        <briefdescription>
+<para>迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="89" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__multimap_1a06c51a24931adb5acf7bc49a1aa332ea" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1sparse__vector_1a1adbda548b885a17f86944ef965f0028" kindref="member">base_type::const_iterator</ref></type>
+        <definition>using neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::const_iterator = typename base_type::const_iterator</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <qualifiedname>neforce::sparse_multimap::const_iterator</qualifiedname>
+        <briefdescription>
+<para>常量迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="90" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__multimap_1a36beef56a8dcf7197815d925cc199ac7" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1sparse__vector_1a2d323da9710ba783db29c4c1cfe2fe8a" kindref="member">base_type::reverse_iterator</ref></type>
+        <definition>using neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::reverse_iterator = typename base_type::reverse_iterator</definition>
+        <argsstring></argsstring>
+        <name>reverse_iterator</name>
+        <qualifiedname>neforce::sparse_multimap::reverse_iterator</qualifiedname>
+        <briefdescription>
+<para>反向迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="91" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__multimap_1a6a0336d31028d5e7acb4eefd9737b3bd" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1sparse__vector_1ad3fb0b6f9841c4ba7bbad27eb42287f5" kindref="member">base_type::const_reverse_iterator</ref></type>
+        <definition>using neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::const_reverse_iterator = typename base_type::const_reverse_iterator</definition>
+        <argsstring></argsstring>
+        <name>const_reverse_iterator</name>
+        <qualifiedname>neforce::sparse_multimap::const_reverse_iterator</qualifiedname>
+        <briefdescription>
+<para>常量反向迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="92" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1sparse__multimap_1ae187c8f9d29ea8330c2b04a1fad3d942" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1sparse__vector_1acd0cef68b122229811defc920e6a3eec" kindref="member">base_type::allocator_type</ref></type>
+        <definition>using neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::allocator_type = typename base_type::allocator_type</definition>
+        <argsstring></argsstring>
+        <name>allocator_type</name>
+        <qualifiedname>neforce::sparse_multimap::allocator_type</qualifiedname>
+        <briefdescription>
+<para>分配器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="93" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classneforce_1_1sparse__multimap_1a037eee15595cff6d0bf4dece95697fe6" prot="private" static="no">
+        <type><ref refid="classneforce_1_1sparse__vector" kindref="compound">sparse_vector</ref>&lt; Key, <ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; Key, T &gt;, <ref refid="structneforce_1_1select1st" kindref="compound">select1st</ref>&lt; <ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; Key, T &gt; &gt;, Compare, Alloc &gt;</type>
+        <definition>using neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::base_type = sparse_vector&lt;Key, pair&lt;Key, T&gt;, select1st&lt;pair&lt;Key, T&gt;&gt;, Compare, Alloc&gt;</definition>
+        <argsstring></argsstring>
+        <name>base_type</name>
+        <qualifiedname>neforce::sparse_multimap::base_type</qualifiedname>
+        <briefdescription>
+<para>底层稀疏向量类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="80" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1sparse__multimap_1a22f8b1eba04cdb08e52389d3f3b6e9a0" prot="private" static="no" mutable="no">
+        <type>base_type</type>
+        <definition>base_type neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::data_</definition>
+        <argsstring></argsstring>
+        <name>data_</name>
+        <qualifiedname>neforce::sparse_multimap::data_</qualifiedname>
+        <briefdescription>
+<para>底层稀疏向量实例 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="96" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="96" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a42774a1db2958ff392915a37eeff466d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</definition>
+        <argsstring>()</argsstring>
+        <name>sparse_multimap</name>
+        <qualifiedname>neforce::sparse_multimap::sparse_multimap</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>构造一个空sparse_multimap，使用默认的比较函数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="104" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="104" bodyend="105"/>
+        <referencedby refid="classneforce_1_1sparse__multimap_1ae7bb36f928e8759b3bcc24a918600a40" compoundref="sparse__multimap_8hpp" startline="490" endline="492">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::equal_to</referencedby>
+        <referencedby refid="classneforce_1_1sparse__multimap_1a25c5632484e6a537cb45cc13c87cf1dd" compoundref="sparse__multimap_8hpp" startline="499" endline="501">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::less_than</referencedby>
+        <referencedby refid="classneforce_1_1sparse__multimap_1a842f63446f944d2cb2d970a894587357" compoundref="sparse__multimap_8hpp" startline="126" endline="129">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1sparse__multimap_1af3ca73adb750d7d958a10859e189b1b5" compoundref="sparse__multimap_8hpp" startline="143" endline="146">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1sparse__multimap_1adadd718e9ce0d77b7d07e08bd819bd16" compoundref="sparse__multimap_8hpp" startline="193" endline="197">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1sparse__multimap_1aaf94cbb3389cef4a8a40fc8b42f9f0c7" compoundref="sparse__multimap_8hpp" startline="118" endline="119">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</referencedby>
+        <referencedby refid="classneforce_1_1sparse__multimap_1a54071a04e1bd1f80119d37eb71d71068" compoundref="sparse__multimap_8hpp" startline="135" endline="136">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</referencedby>
+        <referencedby refid="classneforce_1_1sparse__multimap_1a2ac2c389b05fa1a68958143f3bbc068e" compoundref="sparse__multimap_8hpp" startline="177" endline="178">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</referencedby>
+        <referencedby refid="classneforce_1_1sparse__multimap_1aa2cccbe24f4e188b8d39e71fd7efea0c" compoundref="sparse__multimap_8hpp" startline="185" endline="186">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</referencedby>
+        <referencedby refid="classneforce_1_1sparse__multimap_1ab1a04f8f055abd5a5b54309fb6e32c19" compoundref="sparse__multimap_8hpp" startline="483" endline="483">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a4e5bcbc5324398ee279945e1a7a8f3a6" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</definition>
+        <argsstring>(const key_compare &amp;comp)</argsstring>
+        <name>sparse_multimap</name>
+        <qualifiedname>neforce::sparse_multimap::sparse_multimap</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__multimap_1adc511468ff0af2669aed7a60d125f318" kindref="member">key_compare</ref> &amp;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="111" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="111" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1aaf94cbb3389cef4a8a40fc8b42f9f0c7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</definition>
+        <argsstring>(const sparse_multimap &amp;other)</argsstring>
+        <name>sparse_multimap</name>
+        <qualifiedname>neforce::sparse_multimap::sparse_multimap</qualifiedname>
+        <param>
+          <type>const sparse_multimap &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源sparse_multimap </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="118" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="118" bodyend="119"/>
+        <references refid="classneforce_1_1sparse__multimap_1a42774a1db2958ff392915a37eeff466d" compoundref="sparse__multimap_8hpp" startline="104" endline="105">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a842f63446f944d2cb2d970a894587357" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a42774a1db2958ff392915a37eeff466d" kindref="member">sparse_multimap</ref> &amp;</type>
+        <definition>sparse_multimap &amp; neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::operator=</definition>
+        <argsstring>(const sparse_multimap &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::sparse_multimap::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__multimap_1a42774a1db2958ff392915a37eeff466d" kindref="member">sparse_multimap</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源sparse_multimap </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="126" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="126" bodyend="129"/>
+        <references refid="classneforce_1_1sparse__multimap_1a42774a1db2958ff392915a37eeff466d" compoundref="sparse__multimap_8hpp" startline="104" endline="105">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a54071a04e1bd1f80119d37eb71d71068" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; base_type &gt;" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</definition>
+        <argsstring>(sparse_multimap &amp;&amp;other)</argsstring>
+        <name>sparse_multimap</name>
+        <qualifiedname>neforce::sparse_multimap::sparse_multimap</qualifiedname>
+        <param>
+          <type>sparse_multimap &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源sparse_multimap </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="135" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="135" bodyend="136"/>
+        <references refid="group___type_special_member_function_checks_1gae20ac6ad74f8179d6959c23cbda15965" compoundref="type__traits_8hpp" startline="2862">neforce::is_nothrow_move_constructible_v</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1sparse__multimap_1a42774a1db2958ff392915a37eeff466d" compoundref="sparse__multimap_8hpp" startline="104" endline="105">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1af3ca73adb750d7d958a10859e189b1b5" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_assignable_v&lt; base_type &gt;" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a42774a1db2958ff392915a37eeff466d" kindref="member">sparse_multimap</ref> &amp;</type>
+        <definition>sparse_multimap &amp; neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::operator=</definition>
+        <argsstring>(sparse_multimap &amp;&amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::sparse_multimap::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__multimap_1a42774a1db2958ff392915a37eeff466d" kindref="member">sparse_multimap</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源sparse_multimap </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="143" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="143" bodyend="146"/>
+        <references refid="group___type_special_member_function_checks_1ga4e478e886bb3f1dba6b5b2033f6b4702" compoundref="type__traits_8hpp" startline="2923">neforce::is_nothrow_move_assignable_v</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1sparse__multimap_1a42774a1db2958ff392915a37eeff466d" compoundref="sparse__multimap_8hpp" startline="104" endline="105">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a7021b8184cfe0d12f9a7d1cdf51b4136" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>sparse_multimap</name>
+        <qualifiedname>neforce::sparse_multimap::sparse_multimap</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="155" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="155" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a4677100cb77fe530e1f719ed5a72f9d9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</definition>
+        <argsstring>(Iterator first, Iterator last, const key_compare &amp;comp)</argsstring>
+        <name>sparse_multimap</name>
+        <qualifiedname>neforce::sparse_multimap::sparse_multimap</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__multimap_1adc511468ff0af2669aed7a60d125f318" kindref="member">key_compare</ref> &amp;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数，指定比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="168" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="168" bodyend="171"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a2ac2c389b05fa1a68958143f3bbc068e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist)</argsstring>
+        <name>sparse_multimap</name>
+        <qualifiedname>neforce::sparse_multimap::sparse_multimap</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classneforce_1_1sparse__multimap_1af53f30b685c3da11caef8c48b5f12e7f" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="177" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="177" bodyend="178"/>
+        <references refid="classneforce_1_1sparse__multimap_1aadb0eac6ba97cb23e3092170c24b48f7" compoundref="sparse__multimap_8hpp" startline="208" endline="208">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::begin</references>
+        <references refid="classneforce_1_1sparse__multimap_1a07224490e3bcfbea3ae69ed022e2b6e5" compoundref="sparse__multimap_8hpp" startline="214" endline="214">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::end</references>
+        <references refid="classneforce_1_1sparse__multimap_1a42774a1db2958ff392915a37eeff466d" compoundref="sparse__multimap_8hpp" startline="104" endline="105">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1aa2cccbe24f4e188b8d39e71fd7efea0c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist, const key_compare &amp;comp)</argsstring>
+        <name>sparse_multimap</name>
+        <qualifiedname>neforce::sparse_multimap::sparse_multimap</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classneforce_1_1sparse__multimap_1af53f30b685c3da11caef8c48b5f12e7f" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__multimap_1adc511468ff0af2669aed7a60d125f318" kindref="member">key_compare</ref> &amp;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数，指定比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="185" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="185" bodyend="186"/>
+        <references refid="classneforce_1_1sparse__multimap_1aadb0eac6ba97cb23e3092170c24b48f7" compoundref="sparse__multimap_8hpp" startline="208" endline="208">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::begin</references>
+        <references refid="classneforce_1_1sparse__multimap_1a07224490e3bcfbea3ae69ed022e2b6e5" compoundref="sparse__multimap_8hpp" startline="214" endline="214">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::end</references>
+        <references refid="classneforce_1_1sparse__multimap_1a42774a1db2958ff392915a37eeff466d" compoundref="sparse__multimap_8hpp" startline="104" endline="105">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1adadd718e9ce0d77b7d07e08bd819bd16" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a42774a1db2958ff392915a37eeff466d" kindref="member">sparse_multimap</ref> &amp;</type>
+        <definition>sparse_multimap &amp; neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::operator=</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::sparse_multimap::operator=</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classneforce_1_1sparse__multimap_1af53f30b685c3da11caef8c48b5f12e7f" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="193" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="193" bodyend="197"/>
+        <references refid="classneforce_1_1sparse__multimap_1a95153197d036a28649770389d69ef2c9" compoundref="sparse__multimap_8hpp" startline="395" endline="395">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::clear</references>
+        <references refid="classneforce_1_1sparse__multimap_1af648eea4a7de73e3dd7307e16c19ddfd" compoundref="sparse__multimap_8hpp" startline="322" endline="322">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::insert</references>
+        <references refid="classneforce_1_1sparse__multimap_1a42774a1db2958ff392915a37eeff466d" compoundref="sparse__multimap_8hpp" startline="104" endline="105">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a932efe6e338edb7f498c83dae2cb81fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::~sparse_multimap</definition>
+        <argsstring>()=default</argsstring>
+        <name>~sparse_multimap</name>
+        <qualifiedname>neforce::sparse_multimap::~sparse_multimap</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="202" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1aadb0eac6ba97cb23e3092170c24b48f7" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a778d8e023779f2d8896bde929d35e61f" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::begin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>neforce::sparse_multimap::begin</qualifiedname>
+        <briefdescription>
+<para>获取起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="208" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="208" bodyend="208"/>
+        <referencedby refid="classneforce_1_1sparse__multimap_1a2ac2c389b05fa1a68958143f3bbc068e" compoundref="sparse__multimap_8hpp" startline="177" endline="178">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</referencedby>
+        <referencedby refid="classneforce_1_1sparse__multimap_1aa2cccbe24f4e188b8d39e71fd7efea0c" compoundref="sparse__multimap_8hpp" startline="185" endline="186">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a07224490e3bcfbea3ae69ed022e2b6e5" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a778d8e023779f2d8896bde929d35e61f" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::end</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>neforce::sparse_multimap::end</qualifiedname>
+        <briefdescription>
+<para>获取结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="214" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="214" bodyend="214"/>
+        <referencedby refid="classneforce_1_1sparse__multimap_1a2ac2c389b05fa1a68958143f3bbc068e" compoundref="sparse__multimap_8hpp" startline="177" endline="178">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</referencedby>
+        <referencedby refid="classneforce_1_1sparse__multimap_1aa2cccbe24f4e188b8d39e71fd7efea0c" compoundref="sparse__multimap_8hpp" startline="185" endline="186">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a6b727e4655da411be4b2dd78d6921d6f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a06c51a24931adb5acf7bc49a1aa332ea" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>neforce::sparse_multimap::begin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="220" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="220" bodyend="220"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a5afed6a2110edbc9633bbe90a0f45452" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a06c51a24931adb5acf7bc49a1aa332ea" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>neforce::sparse_multimap::end</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="226" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="226" bodyend="226"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a22fe7cff38316e04f3f65e9125058f0e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a06c51a24931adb5acf7bc49a1aa332ea" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::cbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cbegin</name>
+        <qualifiedname>neforce::sparse_multimap::cbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="232" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="232" bodyend="232"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1aead32677a03197636b8729b76e6876b7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a06c51a24931adb5acf7bc49a1aa332ea" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::cend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cend</name>
+        <qualifiedname>neforce::sparse_multimap::cend</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="238" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="238" bodyend="238"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1ab27786e4c6b727e17bb87ca073f94078" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a36beef56a8dcf7197815d925cc199ac7" kindref="member">reverse_iterator</ref></type>
+        <definition>reverse_iterator neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::rbegin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>rbegin</name>
+        <qualifiedname>neforce::sparse_multimap::rbegin</qualifiedname>
+        <briefdescription>
+<para>获取反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最大元素的反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="244" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="244" bodyend="244"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a7be1257b62d0fd85a17653bc99453d58" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a36beef56a8dcf7197815d925cc199ac7" kindref="member">reverse_iterator</ref></type>
+        <definition>reverse_iterator neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::rend</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>rend</name>
+        <qualifiedname>neforce::sparse_multimap::rend</qualifiedname>
+        <briefdescription>
+<para>获取反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素之前位置的反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="250" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="250" bodyend="250"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1ac1c58134f44a8eaacd50c58b4811388c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a6a0336d31028d5e7acb4eefd9737b3bd" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::rbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rbegin</name>
+        <qualifiedname>neforce::sparse_multimap::rbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最大元素的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="256" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="256" bodyend="256"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1aadd6365220a0a061a4b5f05fb439c4ac" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a6a0336d31028d5e7acb4eefd9737b3bd" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::rend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rend</name>
+        <qualifiedname>neforce::sparse_multimap::rend</qualifiedname>
+        <briefdescription>
+<para>获取常量反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素之前位置的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="262" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="262" bodyend="262"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1abaf7c9ccb0b6c43ed06368c371dc0626" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a6a0336d31028d5e7acb4eefd9737b3bd" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::crbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>crbegin</name>
+        <qualifiedname>neforce::sparse_multimap::crbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最大元素的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="268" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="268" bodyend="268"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a32a08ae6dcd536327726e6cc217e677f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a6a0336d31028d5e7acb4eefd9737b3bd" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::crend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>crend</name>
+        <qualifiedname>neforce::sparse_multimap::crend</qualifiedname>
+        <briefdescription>
+<para>获取常量反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素之前位置的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="274" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="274" bodyend="274"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1abb50ed33fd6dcb1039a65e11cb7189f8" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1ad0b5246da1fbd0543de4cdbef32e0e8f" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>neforce::sparse_multimap::size</qualifiedname>
+        <briefdescription>
+<para>获取元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>sparse_multimap中的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="280" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="280" bodyend="280"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a989e861e3c1298f805ee00519fe36c9b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1ad0b5246da1fbd0543de4cdbef32e0e8f" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::max_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>max_size</name>
+        <qualifiedname>neforce::sparse_multimap::max_size</qualifiedname>
+        <briefdescription>
+<para>获取最大可能大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="286" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="286" bodyend="286"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a758d821888a959a744c9398a458ea133" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>neforce::sparse_multimap::empty</qualifiedname>
+        <briefdescription>
+<para>检查是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否为空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="292" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="292" bodyend="292"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a6adbc403a57a63f0d44e7590d0ccc032" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1adc511468ff0af2669aed7a60d125f318" kindref="member">key_compare</ref></type>
+        <definition>key_compare neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::key_comp</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>key_comp</name>
+        <qualifiedname>neforce::sparse_multimap::key_comp</qualifiedname>
+        <briefdescription>
+<para>获取键比较函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>键比较函数对象的副本 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="298" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="298" bodyend="298"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1af2f70ecfac14a90e1f471bbc6e13740a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1sparse__multimap_1_1value__compare" kindref="compound">value_compare</ref></type>
+        <definition>value_compare neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::value_comp</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>value_comp</name>
+        <qualifiedname>neforce::sparse_multimap::value_comp</qualifiedname>
+        <briefdescription>
+<para>获取值比较函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>值比较函数对象的副本 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="304" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="304" bodyend="304"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a208b595ada7cc29e214ce5c23820d341" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1sparse__multimap_1a778d8e023779f2d8896bde929d35e61f" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::emplace</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace</name>
+        <qualifiedname>neforce::sparse_multimap::emplace</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在sparse_multimap中就地构造元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="313" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="313" bodyend="315"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1af648eea4a7de73e3dd7307e16c19ddfd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a778d8e023779f2d8896bde929d35e61f" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::insert</definition>
+        <argsstring>(const value_type &amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::sparse_multimap::insert</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__multimap_1af53f30b685c3da11caef8c48b5f12e7f" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>拷贝插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="322" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="322" bodyend="322"/>
+        <referencedby refid="classneforce_1_1sparse__multimap_1adadd718e9ce0d77b7d07e08bd819bd16" compoundref="sparse__multimap_8hpp" startline="193" endline="197">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1aed2b3f4878043369aa36feb5bb58036b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a778d8e023779f2d8896bde929d35e61f" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::insert</definition>
+        <argsstring>(value_type &amp;&amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::sparse_multimap::insert</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__multimap_1af53f30b685c3da11caef8c48b5f12e7f" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>移动插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="329" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="329" bodyend="329"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a41e82057eadc904e1d204b7d3cff699a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1sparse__multimap_1a778d8e023779f2d8896bde929d35e61f" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::emplace_hint</definition>
+        <argsstring>(iterator position, Args &amp;&amp;... args)</argsstring>
+        <name>emplace_hint</name>
+        <qualifiedname>neforce::sparse_multimap::emplace_hint</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__multimap_1a778d8e023779f2d8896bde929d35e61f" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近就地构造元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="339" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="339" bodyend="341"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1aec6248949e2b74380a080868e49d5978" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a778d8e023779f2d8896bde929d35e61f" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::insert</definition>
+        <argsstring>(iterator position, const value_type &amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::sparse_multimap::insert</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__multimap_1a778d8e023779f2d8896bde929d35e61f" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__multimap_1af53f30b685c3da11caef8c48b5f12e7f" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近拷贝插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="349" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="349" bodyend="349"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a00cbe90a4245efd72e66af18ece3a2ac" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a778d8e023779f2d8896bde929d35e61f" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::insert</definition>
+        <argsstring>(iterator position, value_type &amp;&amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::sparse_multimap::insert</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__multimap_1a778d8e023779f2d8896bde929d35e61f" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__multimap_1af53f30b685c3da11caef8c48b5f12e7f" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近移动插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="357" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="357" bodyend="359"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1ac5fdfd6974d10bec3795ea494b84877b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::insert</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::sparse_multimap::insert</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="368" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="368" bodyend="370"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1aae94fb55994e6a657623cec47392cb33" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(data_.erase(position))" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::erase</definition>
+        <argsstring>(iterator position)</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::sparse_multimap::erase</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__multimap_1a778d8e023779f2d8896bde929d35e61f" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>删除指定位置的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="376" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="376" bodyend="376"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a4fd3136b5d40ee2bc53a7899fc54914f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(data_.erase(key))" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1ad0b5246da1fbd0543de4cdbef32e0e8f" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::erase</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::sparse_multimap::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__multimap_1a497885e0a33825c53977645be8ba14f3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>删除所有具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>删除的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="383" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="383" bodyend="383"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a5d2fd09291e9e7329c8dac81ec4aaa8e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(data_.erase(first, last))" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::erase</definition>
+        <argsstring>(iterator first, iterator last)</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::sparse_multimap::erase</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__multimap_1a778d8e023779f2d8896bde929d35e61f" kindref="member">iterator</ref></type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__multimap_1a778d8e023779f2d8896bde929d35e61f" kindref="member">iterator</ref></type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除指定范围内的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="390" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="390" bodyend="390"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a95153197d036a28649770389d69ef2c9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(data_.clear())" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>neforce::sparse_multimap::clear</qualifiedname>
+        <briefdescription>
+<para>清空sparse_multimap </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="395" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="395" bodyend="395"/>
+        <references refid="classneforce_1_1sparse__multimap_1a95153197d036a28649770389d69ef2c9" compoundref="sparse__multimap_8hpp" startline="395" endline="395">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::clear</references>
+        <referencedby refid="classneforce_1_1sparse__multimap_1a95153197d036a28649770389d69ef2c9" compoundref="sparse__multimap_8hpp" startline="395" endline="395">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::clear</referencedby>
+        <referencedby refid="classneforce_1_1sparse__multimap_1adadd718e9ce0d77b7d07e08bd819bd16" compoundref="sparse__multimap_8hpp" startline="193" endline="197">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a5b42bb7cd911d686fcc61a40dfc0cbdc" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a778d8e023779f2d8896bde929d35e61f" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>find</name>
+        <qualifiedname>neforce::sparse_multimap::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__multimap_1a497885e0a33825c53977645be8ba14f3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的迭代器，未找到则返回end() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="402" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="402" bodyend="402"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a613a0bdd739d8c7915ca643edc93d273" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a06c51a24931adb5acf7bc49a1aa332ea" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>find</name>
+        <qualifiedname>neforce::sparse_multimap::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__multimap_1a497885e0a33825c53977645be8ba14f3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的常量元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的常量迭代器，未找到则返回cend() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="409" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="409" bodyend="409"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a711344f0d776846fb7e2cdc270bfb08f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1ad0b5246da1fbd0543de4cdbef32e0e8f" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::count</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>count</name>
+        <qualifiedname>neforce::sparse_multimap::count</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__multimap_1a497885e0a33825c53977645be8ba14f3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>统计具有指定键的元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要统计的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>匹配的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="416" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="416" bodyend="416"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1adf115144f3dcd89da877efe3a5825f3c" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a778d8e023779f2d8896bde929d35e61f" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::lower_bound</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>lower_bound</name>
+        <qualifiedname>neforce::sparse_multimap::lower_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__multimap_1a497885e0a33825c53977645be8ba14f3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个不小于指定键的元素位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个不小于key的元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="423" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="423" bodyend="423"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a357bafb2a1101e57b1a42d4485d3b41e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a06c51a24931adb5acf7bc49a1aa332ea" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::lower_bound</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>lower_bound</name>
+        <qualifiedname>neforce::sparse_multimap::lower_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__multimap_1a497885e0a33825c53977645be8ba14f3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个不小于指定键的常量元素位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个不小于key的元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="430" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="430" bodyend="430"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a90ef3c1b7ac55f762cc5bf7fee0a7d54" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a778d8e023779f2d8896bde929d35e61f" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::upper_bound</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>upper_bound</name>
+        <qualifiedname>neforce::sparse_multimap::upper_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__multimap_1a497885e0a33825c53977645be8ba14f3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个大于指定键的元素位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个大于key的元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="437" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="437" bodyend="437"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a9cf691d0749426d83b8090e53cc5f53c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1a06c51a24931adb5acf7bc49a1aa332ea" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::upper_bound</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>upper_bound</name>
+        <qualifiedname>neforce::sparse_multimap::upper_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__multimap_1a497885e0a33825c53977645be8ba14f3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个大于指定键的常量元素位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个大于key的元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="444" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="444" bodyend="444"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a4b5e549841a410e037170d268e5d278c" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1sparse__multimap_1a778d8e023779f2d8896bde929d35e61f" kindref="member">iterator</ref>, <ref refid="classneforce_1_1sparse__multimap_1a778d8e023779f2d8896bde929d35e61f" kindref="member">iterator</ref> &gt;</type>
+        <definition>pair&lt; iterator, iterator &gt; neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>neforce::sparse_multimap::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__multimap_1a497885e0a33825c53977645be8ba14f3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的元素范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含lower_bound和upper_bound的pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="451" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="451" bodyend="451"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a441bf51a05a5104c8c618bf1245725af" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1sparse__multimap_1a06c51a24931adb5acf7bc49a1aa332ea" kindref="member">const_iterator</ref>, <ref refid="classneforce_1_1sparse__multimap_1a06c51a24931adb5acf7bc49a1aa332ea" kindref="member">const_iterator</ref> &gt;</type>
+        <definition>pair&lt; const_iterator, const_iterator &gt; neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>neforce::sparse_multimap::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__multimap_1a497885e0a33825c53977645be8ba14f3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的常量元素范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含lower_bound和upper_bound的pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="458" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="458" bodyend="460"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a069ad749afef7effa0c8f523f3165bea" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::reserve</definition>
+        <argsstring>(size_type n)</argsstring>
+        <name>reserve</name>
+        <qualifiedname>neforce::sparse_multimap::reserve</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__multimap_1ad0b5246da1fbd0543de4cdbef32e0e8f" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>预留容量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>预留的元素数量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="466" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="466" bodyend="466"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a2d83e01262b347b480ed815548b213c5" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sparse__multimap_1ad0b5246da1fbd0543de4cdbef32e0e8f" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::capacity</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>capacity</name>
+        <qualifiedname>neforce::sparse_multimap::capacity</qualifiedname>
+        <briefdescription>
+<para>获取当前容量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前分配的容量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="472" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="472" bodyend="472"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a69097351a5716fe870d032464b1bb786" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::shrink_to_fit</definition>
+        <argsstring>()</argsstring>
+        <name>shrink_to_fit</name>
+        <qualifiedname>neforce::sparse_multimap::shrink_to_fit</qualifiedname>
+        <briefdescription>
+<para>收缩容量以适应实际大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="477" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="477" bodyend="477"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1ab1a04f8f055abd5a5b54309fb6e32c19" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_swappable_v&lt; base_type &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::swap</definition>
+        <argsstring>(sparse_multimap &amp;other)</argsstring>
+        <name>swap</name>
+        <qualifiedname>neforce::sparse_multimap::swap</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sparse__multimap_1a42774a1db2958ff392915a37eeff466d" kindref="member">sparse_multimap</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个sparse_multimap的内容 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的另一个sparse_multimap </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="483" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="483" bodyend="483"/>
+        <references refid="group___swap_utility_1gafcc46bf052d9d5c47c99d6a20dadd5bc" compoundref="type__traits_8hpp" startline="3967">neforce::is_nothrow_swappable_v</references>
+        <references refid="classneforce_1_1sparse__multimap_1a42774a1db2958ff392915a37eeff466d" compoundref="sparse__multimap_8hpp" startline="104" endline="105">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1ae7bb36f928e8759b3bcc24a918600a40" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(data_==rhs.data_)" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::equal_to</definition>
+        <argsstring>(const sparse_multimap &amp;rhs) const</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>neforce::sparse_multimap::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__multimap_1a42774a1db2958ff392915a37eeff466d" kindref="member">sparse_multimap</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧sparse_multimap </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果两个sparse_multimap大小相等且对应元素相等返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="490" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="490" bodyend="492"/>
+        <references refid="classneforce_1_1sparse__multimap_1a42774a1db2958ff392915a37eeff466d" compoundref="sparse__multimap_8hpp" startline="104" endline="105">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sparse__multimap_1a25c5632484e6a537cb45cc13c87cf1dd" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(data_&lt; rhs.data_)" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::less_than</definition>
+        <argsstring>(const sparse_multimap &amp;rhs) const</argsstring>
+        <name>less_than</name>
+        <qualifiedname>neforce::sparse_multimap::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sparse__multimap_1a42774a1db2958ff392915a37eeff466d" kindref="member">sparse_multimap</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧sparse_multimap </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>按字典序比较结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="499" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="499" bodyend="501"/>
+        <references refid="classneforce_1_1sparse__multimap_1a42774a1db2958ff392915a37eeff466d" compoundref="sparse__multimap_8hpp" startline="104" endline="105">neforce::sparse_multimap&lt; Key, T, Compare, Alloc &gt;::sparse_multimap</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>稀疏多重映射容器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键比较函数类型，默认为less&lt;Key&gt; </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>分配器类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+sparse_multimap是一种关联容器，存储键值对（key-value pairs），允许重复键。 元素按照键的顺序自动排序，排序标准由Compare函数对象指定。 底层使用有序平坦数组实现，查找O(log n)，迭代缓存友好。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="41" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" bodystart="41" bodyend="502"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1sparse__multimap_1ae187c8f9d29ea8330c2b04a1fad3d942" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>allocator_type</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a037eee15595cff6d0bf4dece95697fe6" prot="private" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>base_type</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1aadb0eac6ba97cb23e3092170c24b48f7" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>begin</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a6b727e4655da411be4b2dd78d6921d6f" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>begin</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a2d83e01262b347b480ed815548b213c5" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>capacity</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a22fe7cff38316e04f3f65e9125058f0e" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>cbegin</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1aead32677a03197636b8729b76e6876b7" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>cend</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a95153197d036a28649770389d69ef2c9" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>clear</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a06c51a24931adb5acf7bc49a1aa332ea" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>const_iterator</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1ad21bb8e1952a6decad6d5f1beca2ab58" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>const_pointer</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a24221a7fe1ede9eca382b1443d2eaf66" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>const_reference</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a6a0336d31028d5e7acb4eefd9737b3bd" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>const_reverse_iterator</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a711344f0d776846fb7e2cdc270bfb08f" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>count</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1abaf7c9ccb0b6c43ed06368c371dc0626" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>crbegin</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a32a08ae6dcd536327726e6cc217e677f" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>crend</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a22f8b1eba04cdb08e52389d3f3b6e9a0" prot="private" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>data_</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a19aafc45bd57085b4a1be752df29304c" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>data_type</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1ad4c28816923b3031968072eed5cfd56f" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>difference_type</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a208b595ada7cc29e214ce5c23820d341" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>emplace</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a41e82057eadc904e1d204b7d3cff699a" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>emplace_hint</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a758d821888a959a744c9398a458ea133" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>empty</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a07224490e3bcfbea3ae69ed022e2b6e5" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>end</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a5afed6a2110edbc9633bbe90a0f45452" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>end</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a4b5e549841a410e037170d268e5d278c" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>equal_range</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a441bf51a05a5104c8c618bf1245725af" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>equal_range</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1ae7bb36f928e8759b3bcc24a918600a40" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>equal_to</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1aae94fb55994e6a657623cec47392cb33" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>erase</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a4fd3136b5d40ee2bc53a7899fc54914f" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>erase</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a5d2fd09291e9e7329c8dac81ec4aaa8e" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>erase</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a5b42bb7cd911d686fcc61a40dfc0cbdc" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>find</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a613a0bdd739d8c7915ca643edc93d273" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>find</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1af648eea4a7de73e3dd7307e16c19ddfd" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>insert</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1aed2b3f4878043369aa36feb5bb58036b" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>insert</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1aec6248949e2b74380a080868e49d5978" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>insert</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a00cbe90a4245efd72e66af18ece3a2ac" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>insert</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1ac5fdfd6974d10bec3795ea494b84877b" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>insert</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a778d8e023779f2d8896bde929d35e61f" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>iterator</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a6adbc403a57a63f0d44e7590d0ccc032" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>key_comp</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1adc511468ff0af2669aed7a60d125f318" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>key_compare</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a497885e0a33825c53977645be8ba14f3" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>key_type</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a25c5632484e6a537cb45cc13c87cf1dd" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>less_than</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1adf115144f3dcd89da877efe3a5825f3c" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>lower_bound</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a357bafb2a1101e57b1a42d4485d3b41e" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>lower_bound</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1afdf4ad0e854c455f94c5572b127ecab8" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>mapped_type</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a989e861e3c1298f805ee00519fe36c9b" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>max_size</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a842f63446f944d2cb2d970a894587357" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1af3ca73adb750d7d958a10859e189b1b5" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1adadd718e9ce0d77b7d07e08bd819bd16" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a3e044825b93e003b79af88112b18283d" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>pointer</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1ab27786e4c6b727e17bb87ca073f94078" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>rbegin</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1ac1c58134f44a8eaacd50c58b4811388c" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>rbegin</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1abfff669db6ed1475a134d9bd2be9a81d" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>reference</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a7be1257b62d0fd85a17653bc99453d58" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>rend</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1aadd6365220a0a061a4b5f05fb439c4ac" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>rend</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a069ad749afef7effa0c8f523f3165bea" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>reserve</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a36beef56a8dcf7197815d925cc199ac7" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>reverse_iterator</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a69097351a5716fe870d032464b1bb786" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>shrink_to_fit</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1abb50ed33fd6dcb1039a65e11cb7189f8" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>size</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1ad0b5246da1fbd0543de4cdbef32e0e8f" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>size_type</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a42774a1db2958ff392915a37eeff466d" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>sparse_multimap</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a4e5bcbc5324398ee279945e1a7a8f3a6" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>sparse_multimap</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1aaf94cbb3389cef4a8a40fc8b42f9f0c7" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>sparse_multimap</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a54071a04e1bd1f80119d37eb71d71068" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>sparse_multimap</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a7021b8184cfe0d12f9a7d1cdf51b4136" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>sparse_multimap</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a4677100cb77fe530e1f719ed5a72f9d9" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>sparse_multimap</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a2ac2c389b05fa1a68958143f3bbc068e" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>sparse_multimap</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1aa2cccbe24f4e188b8d39e71fd7efea0c" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>sparse_multimap</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1ab1a04f8f055abd5a5b54309fb6e32c19" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>swap</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a90ef3c1b7ac55f762cc5bf7fee0a7d54" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>upper_bound</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a9cf691d0749426d83b8090e53cc5f53c" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>upper_bound</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1af2f70ecfac14a90e1f471bbc6e13740a" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>value_comp</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1af53f30b685c3da11caef8c48b5f12e7f" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>value_type</name></member>
+      <member refid="classneforce_1_1sparse__multimap_1a932efe6e338edb7f498c83dae2cb81fc" prot="public" virt="non-virtual"><scope>neforce::sparse_multimap</scope><name>~sparse_multimap</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

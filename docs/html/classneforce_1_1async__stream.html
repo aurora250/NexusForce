@@ -1,0 +1,901 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::async_stream类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1async__stream.html','','classneforce_1_1async__stream-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::async_stream类 参考<span class="mlabels"><span class="mlabel abstract">abstract</span></span><div class="ingroups"><a class="el" href="group___async_stream.html">异步流</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>异步流抽象基类  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="async__stream_8hpp_source.html">async_stream.hpp</a>&gt;</code></p>
+<div class="dynheader">
+类 neforce::async_stream 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classneforce_1_1async__stream__inherit__graph.svg" width="307" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a5f85f4f4606e9d26f269ee668daf041c" id="r_a5f85f4f4606e9d26f269ee668daf041c"><td class="memItemLeft"><a id="a5f85f4f4606e9d26f269ee668daf041c" name="a5f85f4f4606e9d26f269ee668daf041c"></a>
+virtual&#160;</td><td class="memItemRight"><b>~async_stream</b> ()=default</td></tr>
+<tr class="memdesc:a5f85f4f4606e9d26f269ee668daf041c"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数 <br /></td></tr>
+<tr class="memitem:a7f845e8b1a117c2f5033603d007f0c38" id="r_a7f845e8b1a117c2f5033603d007f0c38"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#a7f845e8b1a117c2f5033603d007f0c38">async_read</a> (<a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;ctx, <a class="el" href="classneforce_1_1memory__view.html">memory_view</a>&lt; char &gt; buffer, <a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="classneforce_1_1error__code.html">error_code</a>, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>)&gt; handler)=0</td></tr>
+<tr class="memdesc:a7f845e8b1a117c2f5033603d007f0c38"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步读取数据  <br /></td></tr>
+<tr class="memitem:ac2ec44c1f9dda962b027aeaa44047684" id="r_ac2ec44c1f9dda962b027aeaa44047684"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#ac2ec44c1f9dda962b027aeaa44047684">async_read</a> (<a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;ctx, <a class="el" href="classneforce_1_1memory__view.html">memory_view</a>&lt; char &gt; buffer, <a class="el" href="classneforce_1_1cancellation__slot.html">cancellation_slot</a> &amp;slot, <a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="classneforce_1_1error__code.html">error_code</a>, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>)&gt; handler)=0</td></tr>
+<tr class="memdesc:ac2ec44c1f9dda962b027aeaa44047684"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步读取（带取消槽）  <br /></td></tr>
+<tr class="memitem:a91ccbec10a037c057e0a4441e640f347" id="r_a91ccbec10a037c057e0a4441e640f347"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#a91ccbec10a037c057e0a4441e640f347">async_write</a> (<a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;ctx, <a class="el" href="classneforce_1_1memory__view.html">memory_view</a>&lt; const char &gt; buffer, <a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="classneforce_1_1error__code.html">error_code</a>, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>)&gt; handler)=0</td></tr>
+<tr class="memdesc:a91ccbec10a037c057e0a4441e640f347"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步写入数据  <br /></td></tr>
+<tr class="memitem:ab02da40de9fb90b4db5acc4a3efad235" id="r_ab02da40de9fb90b4db5acc4a3efad235"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#ab02da40de9fb90b4db5acc4a3efad235">async_write</a> (<a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;ctx, <a class="el" href="classneforce_1_1memory__view.html">memory_view</a>&lt; const char &gt; buffer, <a class="el" href="classneforce_1_1cancellation__slot.html">cancellation_slot</a> &amp;slot, <a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="classneforce_1_1error__code.html">error_code</a>, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>)&gt; handler)=0</td></tr>
+<tr class="memdesc:ab02da40de9fb90b4db5acc4a3efad235"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步写入（带取消槽）  <br /></td></tr>
+<tr class="memitem:af363ab413274c2c921e5c85f439fe531" id="r_af363ab413274c2c921e5c85f439fe531"><td class="memTemplParams" colspan="2">template&lt;typename Token, <a class="el" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt;!<a class="el" href="group___type_traits_utilities.html#gaa8a9c7168b974b877ec67d99e9bf5d8c">is_same_v</a>&lt; <a class="el" href="group___type_attribute_operations.html#ga63500a8dd0f79ce1c721aebb8023ce89">decay_t</a>&lt; Token &gt;, <a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="classneforce_1_1error__code.html">error_code</a>, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>)&gt; &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:af363ab413274c2c921e5c85f439fe531 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af363ab413274c2c921e5c85f439fe531">async_read</a> (<a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;ctx, <a class="el" href="classneforce_1_1memory__view.html">memory_view</a>&lt; char &gt; buffer, Token &amp;&amp;token)</td></tr>
+<tr class="memdesc:af363ab413274c2c921e5c85f439fe531"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步读取—任意可调用对象  <br /></td></tr>
+<tr class="memitem:aac0411a9c4cfcf3e3acf2db55fe45067" id="r_aac0411a9c4cfcf3e3acf2db55fe45067"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#aac0411a9c4cfcf3e3acf2db55fe45067">async_read</a> (<a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;ctx, <a class="el" href="classneforce_1_1memory__view.html">memory_view</a>&lt; char &gt; buffer, <a class="el" href="structneforce_1_1use__future__t.html">use_future_t</a>)</td></tr>
+<tr class="memdesc:aac0411a9c4cfcf3e3acf2db55fe45067"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步读取—use_future  <br /></td></tr>
+<tr class="memitem:ab6d9164d88a6c26d6bac7c0c8ad9a994" id="r_ab6d9164d88a6c26d6bac7c0c8ad9a994"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab6d9164d88a6c26d6bac7c0c8ad9a994">async_read</a> (<a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;ctx, <a class="el" href="classneforce_1_1memory__view.html">memory_view</a>&lt; char &gt; buffer, <a class="el" href="structneforce_1_1detached__t.html">detached_t</a>)</td></tr>
+<tr class="memdesc:ab6d9164d88a6c26d6bac7c0c8ad9a994"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步读取—detached（即发即忘）  <br /></td></tr>
+<tr class="memitem:af7234d2a618f53a94eefc322dc2396ba" id="r_af7234d2a618f53a94eefc322dc2396ba"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#af7234d2a618f53a94eefc322dc2396ba">async_read</a> (<a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;ctx, <a class="el" href="classneforce_1_1memory__view.html">memory_view</a>&lt; char &gt; buffer, <a class="el" href="structneforce_1_1use__awaitable__t.html">use_awaitable_t</a>)</td></tr>
+<tr class="memdesc:af7234d2a618f53a94eefc322dc2396ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步读取—use_awaitable  <br /></td></tr>
+<tr class="memitem:a624256deadc1e290301e2d69e94cfc21" id="r_a624256deadc1e290301e2d69e94cfc21"><td class="memTemplParams" colspan="2">template&lt;typename Token, <a class="el" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt;!<a class="el" href="group___type_traits_utilities.html#gaa8a9c7168b974b877ec67d99e9bf5d8c">is_same_v</a>&lt; <a class="el" href="group___type_attribute_operations.html#ga63500a8dd0f79ce1c721aebb8023ce89">decay_t</a>&lt; Token &gt;, <a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="classneforce_1_1error__code.html">error_code</a>, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>)&gt; &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a624256deadc1e290301e2d69e94cfc21 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a624256deadc1e290301e2d69e94cfc21">async_write</a> (<a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;ctx, <a class="el" href="classneforce_1_1memory__view.html">memory_view</a>&lt; const char &gt; buffer, Token &amp;&amp;token)</td></tr>
+<tr class="memdesc:a624256deadc1e290301e2d69e94cfc21"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步写入—任意可调用对象  <br /></td></tr>
+<tr class="memitem:aa17076a09efe79ef5b838d79ea74a4c3" id="r_aa17076a09efe79ef5b838d79ea74a4c3"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#aa17076a09efe79ef5b838d79ea74a4c3">async_write</a> (<a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;ctx, <a class="el" href="classneforce_1_1memory__view.html">memory_view</a>&lt; const char &gt; buffer, <a class="el" href="structneforce_1_1use__future__t.html">use_future_t</a>)</td></tr>
+<tr class="memdesc:aa17076a09efe79ef5b838d79ea74a4c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步写入—use_future  <br /></td></tr>
+<tr class="memitem:af6891cdbbaec583e9c834e53c2858aad" id="r_af6891cdbbaec583e9c834e53c2858aad"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af6891cdbbaec583e9c834e53c2858aad">async_write</a> (<a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;ctx, <a class="el" href="classneforce_1_1memory__view.html">memory_view</a>&lt; const char &gt; buffer, <a class="el" href="structneforce_1_1detached__t.html">detached_t</a>)</td></tr>
+<tr class="memdesc:af6891cdbbaec583e9c834e53c2858aad"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步写入—detached（即发即忘）  <br /></td></tr>
+<tr class="memitem:a4c44a6f32907354ef70a018a7d0ea38c" id="r_a4c44a6f32907354ef70a018a7d0ea38c"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a4c44a6f32907354ef70a018a7d0ea38c">async_write</a> (<a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;ctx, <a class="el" href="classneforce_1_1memory__view.html">memory_view</a>&lt; const char &gt; buffer, <a class="el" href="structneforce_1_1use__awaitable__t.html">use_awaitable_t</a>)</td></tr>
+<tr class="memdesc:a4c44a6f32907354ef70a018a7d0ea38c"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步写入—use_awaitable  <br /></td></tr>
+<tr class="memitem:a254b55f24e99e42840788a11ee73b5b6" id="r_a254b55f24e99e42840788a11ee73b5b6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a254b55f24e99e42840788a11ee73b5b6">async_read</a> (<a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;ctx, <a class="el" href="classneforce_1_1mutable__buffers.html">mutable_buffers</a> &amp;bufs, <a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="classneforce_1_1error__code.html">error_code</a>, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>)&gt; handler)</td></tr>
+<tr class="memdesc:a254b55f24e99e42840788a11ee73b5b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步读取—scatter-gather  <br /></td></tr>
+<tr class="memitem:ad26516ab34705abca0a29a8489bcb610" id="r_ad26516ab34705abca0a29a8489bcb610"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad26516ab34705abca0a29a8489bcb610">async_write</a> (<a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;ctx, <a class="el" href="classneforce_1_1const__buffers.html">const_buffers</a> &amp;bufs, <a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="classneforce_1_1error__code.html">error_code</a>, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>)&gt; handler)</td></tr>
+<tr class="memdesc:ad26516ab34705abca0a29a8489bcb610"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步写入—scatter-gather  <br /></td></tr>
+<tr class="memitem:a469997cca6e819b2312d6c87d9a48af1" id="r_a469997cca6e819b2312d6c87d9a48af1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a469997cca6e819b2312d6c87d9a48af1">async_read</a> (<a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;ctx, <a class="el" href="classneforce_1_1dynamic__buffer.html">dynamic_buffer</a> &amp;buf, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> n, <a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="classneforce_1_1error__code.html">error_code</a>, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>)&gt; handler)</td></tr>
+<tr class="memdesc:a469997cca6e819b2312d6c87d9a48af1"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步读取到 <a class="el" href="classneforce_1_1dynamic__buffer.html" title="自适应扩容的动态缓冲区">dynamic_buffer</a>  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>异步流抽象基类 </p>
+<p>定义异步读写的纯虚接口。派生类实现四个纯虚方法后， 自动获得 use_future、detached、use_awaitable 等完成令牌支持。</p>
+<dl class="section note"><dt>注解</dt><dd>仅抽象异步 read/write 行为——连接（connect/accept）和地址操作留在具体类中。 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="async__stream_8hpp_source.html">async_stream.hpp</a> 第 <a class="el" href="async__stream_8hpp_source.html#l00033">33</a> 行定义.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a469997cca6e819b2312d6c87d9a48af1" name="a469997cca6e819b2312d6c87d9a48af1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a469997cca6e819b2312d6c87d9a48af1">&#9670;&#160;</a></span>async_read() <span class="overload">[1/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::async_stream::async_read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1dynamic__buffer.html">dynamic_buffer</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>buf</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="classneforce_1_1error__code.html">error_code</a>, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>)&gt;</td>          <td class="paramname"><span class="paramname"><em>handler</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>异步读取到 <a class="el" href="classneforce_1_1dynamic__buffer.html" title="自适应扩容的动态缓冲区">dynamic_buffer</a> </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>异步 I/O 执行上下文 </td></tr>
+    <tr><td class="paramname">buf</td><td>动态缓冲区（prepare/commit/consume） </td></tr>
+    <tr><td class="paramname">n</td><td>最少读取字节数 </td></tr>
+    <tr><td class="paramname">handler</td><td>完成回调 void(error_code, size_t bytes_read)</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>调用 buf.prepare(n) 获取写入区域，完成后 buf.commit(n)。 </p>
+
+<p class="definition">在文件 <a class="el" href="async__stream_8hpp_source.html">async_stream.hpp</a> 第 <a class="el" href="async__stream_8hpp_source.html#l00204">204</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a7f845e8b1a117c2f5033603d007f0c38">async_read()</a>, <a class="el" href="buffer_8hpp_source.html#l00260">neforce::dynamic_buffer::commit()</a>, <a class="el" href="shift_8hpp_source.html#l00312">neforce::move()</a> , 以及 <a class="el" href="buffer_8hpp_source.html#l00244">neforce::dynamic_buffer::prepare()</a>.</p>
+
+</div>
+</div>
+<a id="ac2ec44c1f9dda962b027aeaa44047684" name="ac2ec44c1f9dda962b027aeaa44047684"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2ec44c1f9dda962b027aeaa44047684">&#9670;&#160;</a></span>async_read() <span class="overload">[2/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void neforce::async_stream::async_read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1memory__view.html">memory_view</a>&lt; char &gt;</td>          <td class="paramname"><span class="paramname"><em>buffer</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1cancellation__slot.html">cancellation_slot</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>slot</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="classneforce_1_1error__code.html">error_code</a>, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>)&gt;</td>          <td class="paramname"><span class="paramname"><em>handler</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>异步读取（带取消槽） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>异步 I/O 执行上下文 </td></tr>
+    <tr><td class="paramname">buffer</td><td>接收缓冲区 </td></tr>
+    <tr><td class="paramname">slot</td><td>取消槽 </td></tr>
+    <tr><td class="paramname">handler</td><td>完成回调 void(error_code, size_t bytes_transferred) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>在 <a class="el" href="classneforce_1_1ssl__stream.html#a4e7622ba70d0a1cdfa1e03d369e50e9f">neforce::ssl_stream</a> , 以及 <a class="el" href="classneforce_1_1tcp__socket.html#a5db9e898fb90ce9f6c9edf57dc701b6c">neforce::tcp_socket</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="ab6d9164d88a6c26d6bac7c0c8ad9a994" name="ab6d9164d88a6c26d6bac7c0c8ad9a994"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6d9164d88a6c26d6bac7c0c8ad9a994">&#9670;&#160;</a></span>async_read() <span class="overload">[3/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::async_stream::async_read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1memory__view.html">memory_view</a>&lt; char &gt;</td>          <td class="paramname"><span class="paramname"><em>buffer</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structneforce_1_1detached__t.html">detached_t</a></td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>异步读取—detached（即发即忘） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>异步 I/O 执行上下文 </td></tr>
+    <tr><td class="paramname">buffer</td><td>接收缓冲区 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="async__stream_8hpp_source.html">async_stream.hpp</a> 第 <a class="el" href="async__stream_8hpp_source.html#l00108">108</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a7f845e8b1a117c2f5033603d007f0c38">async_read()</a>.</p>
+
+</div>
+</div>
+<a id="a7f845e8b1a117c2f5033603d007f0c38" name="a7f845e8b1a117c2f5033603d007f0c38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f845e8b1a117c2f5033603d007f0c38">&#9670;&#160;</a></span>async_read() <span class="overload">[4/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void neforce::async_stream::async_read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1memory__view.html">memory_view</a>&lt; char &gt;</td>          <td class="paramname"><span class="paramname"><em>buffer</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="classneforce_1_1error__code.html">error_code</a>, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>)&gt;</td>          <td class="paramname"><span class="paramname"><em>handler</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>异步读取数据 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>异步 I/O 执行上下文 </td></tr>
+    <tr><td class="paramname">buffer</td><td>接收缓冲区 </td></tr>
+    <tr><td class="paramname">handler</td><td>完成回调 void(error_code, size_t bytes_transferred) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>在 <a class="el" href="classneforce_1_1ssl__stream.html#aa182b58bffd104f15dda3b7b73eeccbc">neforce::ssl_stream</a> , 以及 <a class="el" href="classneforce_1_1tcp__socket.html#ab861c7fd56427b1c5d93252f9449dfb2">neforce::tcp_socket</a> 内被实现.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="async__stream_8hpp_source.html#l00204">async_read()</a>, <a class="el" href="async__stream_8hpp_source.html#l00108">async_read()</a>, <a class="el" href="async__stream_8hpp_source.html#l00087">async_read()</a>, <a class="el" href="async__stream_8hpp_source.html#l00119">async_read()</a>, <a class="el" href="async__stream_8hpp_source.html#l00097">async_read()</a> , 以及 <a class="el" href="tcp__socket_8hpp_source.html#l00296">neforce::tcp_socket::async_receive()</a>.</p>
+
+</div>
+</div>
+<a id="af363ab413274c2c921e5c85f439fe531" name="af363ab413274c2c921e5c85f439fe531"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af363ab413274c2c921e5c85f439fe531">&#9670;&#160;</a></span>async_read() <span class="overload">[5/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Token, <a class="el" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt;!<a class="el" href="group___type_traits_utilities.html#gaa8a9c7168b974b877ec67d99e9bf5d8c">is_same_v</a>&lt; <a class="el" href="group___type_attribute_operations.html#ga63500a8dd0f79ce1c721aebb8023ce89">decay_t</a>&lt; Token &gt;, <a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="classneforce_1_1error__code.html">error_code</a>, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>)&gt; &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::async_stream::async_read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1memory__view.html">memory_view</a>&lt; char &gt;</td>          <td class="paramname"><span class="paramname"><em>buffer</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Token &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>异步读取—任意可调用对象 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Token</td><td>可调用对象类型，需满足 void(error_code, size_t) 签名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>异步 I/O 执行上下文 </td></tr>
+    <tr><td class="paramname">buffer</td><td>接收缓冲区 </td></tr>
+    <tr><td class="paramname">token</td><td>完成令牌</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>委托到纯虚 async_read(ctx, buffer, function&lt;...&gt;)。 </p>
+
+<p class="definition">在文件 <a class="el" href="async__stream_8hpp_source.html">async_stream.hpp</a> 第 <a class="el" href="async__stream_8hpp_source.html#l00087">87</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a7f845e8b1a117c2f5033603d007f0c38">async_read()</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03028">neforce::forward()</a>.</p>
+
+</div>
+</div>
+<a id="af7234d2a618f53a94eefc322dc2396ba" name="af7234d2a618f53a94eefc322dc2396ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7234d2a618f53a94eefc322dc2396ba">&#9670;&#160;</a></span>async_read() <span class="overload">[6/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto neforce::async_stream::async_read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1memory__view.html">memory_view</a>&lt; char &gt;</td>          <td class="paramname"><span class="paramname"><em>buffer</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structneforce_1_1use__awaitable__t.html">use_awaitable_t</a></td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>异步读取—use_awaitable </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>异步 I/O 执行上下文 </td></tr>
+    <tr><td class="paramname">buffer</td><td>接收缓冲区 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd><a class="el" href="classneforce_1_1awaitable.html" title="可被 co_await 的异步操作结果">awaitable&lt;size_t&gt;</a> 可协程等待的结果 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="async__stream_8hpp_source.html">async_stream.hpp</a> 第 <a class="el" href="async__stream_8hpp_source.html#l00119">119</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a7f845e8b1a117c2f5033603d007f0c38">async_read()</a> , 以及 <a class="el" href="use__awaitable_8hpp_source.html#l00027">neforce::use_awaitable</a>.</p>
+
+</div>
+</div>
+<a id="aac0411a9c4cfcf3e3acf2db55fe45067" name="aac0411a9c4cfcf3e3acf2db55fe45067"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac0411a9c4cfcf3e3acf2db55fe45067">&#9670;&#160;</a></span>async_read() <span class="overload">[7/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto neforce::async_stream::async_read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1memory__view.html">memory_view</a>&lt; char &gt;</td>          <td class="paramname"><span class="paramname"><em>buffer</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structneforce_1_1use__future__t.html">use_future_t</a></td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>异步读取—use_future </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>异步 I/O 执行上下文 </td></tr>
+    <tr><td class="paramname">buffer</td><td>接收缓冲区 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd><a class="el" href="classneforce_1_1future.html">future&lt;size_t&gt;</a> 读取字节数 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="async__stream_8hpp_source.html">async_stream.hpp</a> 第 <a class="el" href="async__stream_8hpp_source.html#l00097">97</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a7f845e8b1a117c2f5033603d007f0c38">async_read()</a> , 以及 <a class="el" href="async__result_8hpp_source.html#l00037">neforce::use_future</a>.</p>
+
+</div>
+</div>
+<a id="a254b55f24e99e42840788a11ee73b5b6" name="a254b55f24e99e42840788a11ee73b5b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a254b55f24e99e42840788a11ee73b5b6">&#9670;&#160;</a></span>async_read() <span class="overload">[8/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::async_stream::async_read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1mutable__buffers.html">mutable_buffers</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>bufs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="classneforce_1_1error__code.html">error_code</a>, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>)&gt;</td>          <td class="paramname"><span class="paramname"><em>handler</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>异步读取—scatter-gather </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>异步 I/O 执行上下文 </td></tr>
+    <tr><td class="paramname">bufs</td><td>多个接收缓冲区 </td></tr>
+    <tr><td class="paramname">handler</td><td>完成回调 void(error_code, size_t total_read)</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>依次填满每个缓冲区，委托到纯虚 async_read。 </p>
+
+</div>
+</div>
+<a id="ad26516ab34705abca0a29a8489bcb610" name="ad26516ab34705abca0a29a8489bcb610"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad26516ab34705abca0a29a8489bcb610">&#9670;&#160;</a></span>async_write() <span class="overload">[1/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::async_stream::async_write </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1const__buffers.html">const_buffers</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>bufs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="classneforce_1_1error__code.html">error_code</a>, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>)&gt;</td>          <td class="paramname"><span class="paramname"><em>handler</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>异步写入—scatter-gather </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>异步 I/O 执行上下文 </td></tr>
+    <tr><td class="paramname">bufs</td><td>多个发送缓冲区 </td></tr>
+    <tr><td class="paramname">handler</td><td>完成回调 void(error_code, size_t total_written)</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>依次发送每个缓冲区，委托到纯虚 async_write。 </p>
+
+</div>
+</div>
+<a id="ab02da40de9fb90b4db5acc4a3efad235" name="ab02da40de9fb90b4db5acc4a3efad235"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab02da40de9fb90b4db5acc4a3efad235">&#9670;&#160;</a></span>async_write() <span class="overload">[2/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void neforce::async_stream::async_write </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1memory__view.html">memory_view</a>&lt; const char &gt;</td>          <td class="paramname"><span class="paramname"><em>buffer</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1cancellation__slot.html">cancellation_slot</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>slot</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="classneforce_1_1error__code.html">error_code</a>, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>)&gt;</td>          <td class="paramname"><span class="paramname"><em>handler</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>异步写入（带取消槽） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>异步 I/O 执行上下文 </td></tr>
+    <tr><td class="paramname">buffer</td><td>发送缓冲区 </td></tr>
+    <tr><td class="paramname">slot</td><td>取消槽 </td></tr>
+    <tr><td class="paramname">handler</td><td>完成回调 void(error_code, size_t bytes_transferred) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>在 <a class="el" href="classneforce_1_1ssl__stream.html#a0f2bb74e6ba00553a0e328034d4122c6">neforce::ssl_stream</a> , 以及 <a class="el" href="classneforce_1_1tcp__socket.html#ab412963b6874c243bbd25b499a91cc48">neforce::tcp_socket</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="af6891cdbbaec583e9c834e53c2858aad" name="af6891cdbbaec583e9c834e53c2858aad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6891cdbbaec583e9c834e53c2858aad">&#9670;&#160;</a></span>async_write() <span class="overload">[3/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::async_stream::async_write </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1memory__view.html">memory_view</a>&lt; const char &gt;</td>          <td class="paramname"><span class="paramname"><em>buffer</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structneforce_1_1detached__t.html">detached_t</a></td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>异步写入—detached（即发即忘） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>异步 I/O 执行上下文 </td></tr>
+    <tr><td class="paramname">buffer</td><td>发送缓冲区 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="async__stream_8hpp_source.html">async_stream.hpp</a> 第 <a class="el" href="async__stream_8hpp_source.html#l00157">157</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a91ccbec10a037c057e0a4441e640f347">async_write()</a>.</p>
+
+</div>
+</div>
+<a id="a91ccbec10a037c057e0a4441e640f347" name="a91ccbec10a037c057e0a4441e640f347"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91ccbec10a037c057e0a4441e640f347">&#9670;&#160;</a></span>async_write() <span class="overload">[4/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void neforce::async_stream::async_write </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1memory__view.html">memory_view</a>&lt; const char &gt;</td>          <td class="paramname"><span class="paramname"><em>buffer</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="classneforce_1_1error__code.html">error_code</a>, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>)&gt;</td>          <td class="paramname"><span class="paramname"><em>handler</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>异步写入数据 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>异步 I/O 执行上下文 </td></tr>
+    <tr><td class="paramname">buffer</td><td>发送缓冲区 </td></tr>
+    <tr><td class="paramname">handler</td><td>完成回调 void(error_code, size_t bytes_transferred) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>在 <a class="el" href="classneforce_1_1ssl__stream.html#a4fe64ed7d3e54e6a44108da02237b0c3">neforce::ssl_stream</a> , 以及 <a class="el" href="classneforce_1_1tcp__socket.html#af0fcb3dbad0fdfae4d8c68f3f56c09cc">neforce::tcp_socket</a> 内被实现.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="tcp__socket_8hpp_source.html#l00308">neforce::tcp_socket::async_send()</a>, <a class="el" href="async__stream_8hpp_source.html#l00157">async_write()</a>, <a class="el" href="async__stream_8hpp_source.html#l00136">async_write()</a>, <a class="el" href="async__stream_8hpp_source.html#l00168">async_write()</a> , 以及 <a class="el" href="async__stream_8hpp_source.html#l00146">async_write()</a>.</p>
+
+</div>
+</div>
+<a id="a624256deadc1e290301e2d69e94cfc21" name="a624256deadc1e290301e2d69e94cfc21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a624256deadc1e290301e2d69e94cfc21">&#9670;&#160;</a></span>async_write() <span class="overload">[5/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Token, <a class="el" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt;!<a class="el" href="group___type_traits_utilities.html#gaa8a9c7168b974b877ec67d99e9bf5d8c">is_same_v</a>&lt; <a class="el" href="group___type_attribute_operations.html#ga63500a8dd0f79ce1c721aebb8023ce89">decay_t</a>&lt; Token &gt;, <a class="el" href="classneforce_1_1function.html">function</a>&lt; void(<a class="el" href="classneforce_1_1error__code.html">error_code</a>, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>)&gt; &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::async_stream::async_write </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1memory__view.html">memory_view</a>&lt; const char &gt;</td>          <td class="paramname"><span class="paramname"><em>buffer</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Token &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>异步写入—任意可调用对象 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Token</td><td>可调用对象类型，需满足 void(error_code, size_t) 签名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>异步 I/O 执行上下文 </td></tr>
+    <tr><td class="paramname">buffer</td><td>发送缓冲区 </td></tr>
+    <tr><td class="paramname">token</td><td>完成令牌</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>委托到纯虚 async_write(ctx, buffer, function&lt;...&gt;)。 </p>
+
+<p class="definition">在文件 <a class="el" href="async__stream_8hpp_source.html">async_stream.hpp</a> 第 <a class="el" href="async__stream_8hpp_source.html#l00136">136</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a91ccbec10a037c057e0a4441e640f347">async_write()</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03028">neforce::forward()</a>.</p>
+
+</div>
+</div>
+<a id="a4c44a6f32907354ef70a018a7d0ea38c" name="a4c44a6f32907354ef70a018a7d0ea38c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c44a6f32907354ef70a018a7d0ea38c">&#9670;&#160;</a></span>async_write() <span class="overload">[6/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto neforce::async_stream::async_write </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1memory__view.html">memory_view</a>&lt; const char &gt;</td>          <td class="paramname"><span class="paramname"><em>buffer</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structneforce_1_1use__awaitable__t.html">use_awaitable_t</a></td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>异步写入—use_awaitable </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>异步 I/O 执行上下文 </td></tr>
+    <tr><td class="paramname">buffer</td><td>发送缓冲区 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd><a class="el" href="classneforce_1_1awaitable.html" title="可被 co_await 的异步操作结果">awaitable&lt;size_t&gt;</a> 可协程等待的结果 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="async__stream_8hpp_source.html">async_stream.hpp</a> 第 <a class="el" href="async__stream_8hpp_source.html#l00168">168</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a91ccbec10a037c057e0a4441e640f347">async_write()</a> , 以及 <a class="el" href="use__awaitable_8hpp_source.html#l00027">neforce::use_awaitable</a>.</p>
+
+</div>
+</div>
+<a id="aa17076a09efe79ef5b838d79ea74a4c3" name="aa17076a09efe79ef5b838d79ea74a4c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa17076a09efe79ef5b838d79ea74a4c3">&#9670;&#160;</a></span>async_write() <span class="overload">[7/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto neforce::async_stream::async_write </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1io__context.html">io_context</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1memory__view.html">memory_view</a>&lt; const char &gt;</td>          <td class="paramname"><span class="paramname"><em>buffer</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structneforce_1_1use__future__t.html">use_future_t</a></td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>异步写入—use_future </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>异步 I/O 执行上下文 </td></tr>
+    <tr><td class="paramname">buffer</td><td>发送缓冲区 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd><a class="el" href="classneforce_1_1future.html">future&lt;size_t&gt;</a> 写入字节数 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="async__stream_8hpp_source.html">async_stream.hpp</a> 第 <a class="el" href="async__stream_8hpp_source.html#l00146">146</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a91ccbec10a037c057e0a4441e640f347">async_write()</a> , 以及 <a class="el" href="async__result_8hpp_source.html#l00037">neforce::use_future</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="async__stream_8hpp_source.html">async_stream.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><a href="classneforce_1_1async__stream.html">async_stream</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

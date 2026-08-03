@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['gap_0',['gap',['../structbox__props.html#afc79bc9dd9ba374e2bea2cf79fd5ff15',1,'box_props']]],
-  ['graceful_5ftimeout_5fms_1',['graceful_timeout_ms',['../structdaemon_1_1child__config.html#adb0525b030800cebc2e4668c8b7e7c90',1,'daemon::child_config']]],
-  ['group_5fby_5ffields_2',['group_by_fields',['../structsql__builder_1_1select__data.html#a90731f76b9deeb06223065bfbffcd3dd',1,'sql_builder::select_data']]],
-  ['grouping_3',['grouping',['../structlocale_1_1numeric__info.html#a392d12f5b2c63a85498c0f7a2d8794cf',1,'locale::numeric_info']]]
+  ['gap_0',['gap',['../structneforce_1_1tui_1_1box__props.html#a3669dbbe31734903fe861a69d3adc470',1,'neforce::tui::box_props']]],
+  ['graceful_5ftimeout_5fms_1',['graceful_timeout_ms',['../structneforce_1_1daemon_1_1child__config.html#a39158855ca6a1e1a4b2cd2fdeff8fb11',1,'neforce::daemon::child_config']]],
+  ['group_5fby_5ffields_2',['group_by_fields',['../structneforce_1_1sql__builder_1_1select__data.html#abc9c97e28d9049c49518e4e6ca1414ab',1,'neforce::sql_builder::select_data']]],
+  ['grouping_3',['grouping',['../structneforce_1_1locale_1_1numeric__info.html#ab1b9576ae62ec7cd12a3b1d693a3002c',1,'neforce::locale::numeric_info']]]
 ];

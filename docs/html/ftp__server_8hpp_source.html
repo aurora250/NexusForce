@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
   </td>
  </tr>
  </tbody>
@@ -101,7 +101,7 @@ $(function(){initNavTree('ftp__server_8hpp_source.html','',''); });
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">class </span>NEFORCE_API ftp_session final : <span class="keyword">public</span> ftp_protocol {</div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <span class="keyword">explicit</span> ftp_session(tcp_socket&amp;&amp; sock) :</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    ftp_protocol(sock.<a class="code hl_enumvalue" href="group___memory_order.html#ggad658351bedece1752acbd72886a7e0e4a123fead50246387983ee340507115ef4">release</a>()) {}</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    ftp_protocol(sock.<a class="code hl_enumvalue" href="group___memory_order.html#gga6c8ae7c1b2f51ad0fc22ca0044bab9f7a123fead50246387983ee340507115ef4">release</a>()) {}</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    ftp_session(<span class="keyword">const</span> ftp_session&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    ftp_session&amp; operator=(<span class="keyword">const</span> ftp_session&amp;) = <span class="keyword">delete</span>;</div>
@@ -133,36 +133,29 @@ $(function(){initNavTree('ftp__server_8hpp_source.html','',''); });
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    ~ftp_server() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classsocket__base.html#aa1f872262e5d3464c77ee96de7550df8">listen</a>(<span class="keyword">const</span> ip_address&amp; endpoint, <span class="keywordtype">int</span> backlog = SOMAXCONN) { acceptor_.<a class="code hl_function" href="classtcp__acceptor.html#a01f29ebfd1e0f953d9f1f5ca7ec9896a">open</a>(endpoint, backlog); }</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">void</span> listen(<span class="keyword">const</span> ip_address&amp; endpoint, <span class="keywordtype">int</span> backlog = SOMAXCONN) { acceptor_.open(endpoint, backlog); }</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    NEFORCE_NODISCARD ftp_session accept() { <span class="keywordflow">return</span> ftp_session(acceptor_.<a class="code hl_function" href="classtcp__acceptor.html#a4981086af1b46cb09f58784469d16f13">accept</a>()); }</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    NEFORCE_NODISCARD ftp_session accept() { <span class="keywordflow">return</span> ftp_session(acceptor_.accept()); }</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    NEFORCE_NODISCARD optional&lt;ftp_session&gt; accept_nonblock() {</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keyword">auto</span> sock = acceptor_.<a class="code hl_function" href="classtcp__acceptor.html#a677e1317fe230cd82993671b39e0fec9">accept_nonblock</a>();</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keyword">auto</span> sock = acceptor_.accept_nonblock();</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keywordflow">if</span> (sock) {</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            <span class="keywordflow">return</span> optional&lt;ftp_session&gt;{ftp_session{<a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(*sock)}};</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            <span class="keywordflow">return</span> optional&lt;ftp_session&gt;{ftp_session{<a class="code hl_function" href="group___shift_algorithms.html#gae346eba5fb576da65e097b60463d3790">move</a>(*sock)}};</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        }</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordflow">return</span> {};</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    }</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_listening() const noexcept { <span class="keywordflow">return</span> acceptor_.<a class="code hl_function" href="classsocket__base.html#ae075f18d5fe704a278f8021d251905a0">is_open</a>(); }</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_listening() const noexcept { <span class="keywordflow">return</span> acceptor_.is_open(); }</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    NEFORCE_NODISCARD optional&lt;ip_address&gt; <a class="code hl_function" href="classsocket__base.html#a1d9ff8b37d502077065ad505098f1c10">local_endpoint</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> acceptor_.<a class="code hl_function" href="classsocket__base.html#a1d9ff8b37d502077065ad505098f1c10">local_endpoint</a>(); }</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    NEFORCE_NODISCARD optional&lt;ip_address&gt; local_endpoint()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> acceptor_.local_endpoint(); }</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classip__socket.html#a242bf63bfaf65fdb748d02ac8193dfb1">close</a>() noexcept { acceptor_.<a class="code hl_function" href="classip__socket.html#a242bf63bfaf65fdb748d02ac8193dfb1">close</a>(); }</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordtype">void</span> close() noexcept { acceptor_.close(); }</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>};</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>NEFORCE_END_NAMESPACE__</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_NETWORK_FTP_FTP_SERVER_HPP__</span></div>
-<div class="ttc" id="aclassip__socket_html_a242bf63bfaf65fdb748d02ac8193dfb1"><div class="ttname"><a href="classip__socket.html#a242bf63bfaf65fdb748d02ac8193dfb1">ip_socket::close</a></div><div class="ttdeci">bool close() noexcept override</div><div class="ttdoc">关闭socket</div><div class="ttdef"><b>定义</b> <a href="ip__socket_8hpp_source.html#l00137">ip_socket.hpp:137</a></div></div>
-<div class="ttc" id="aclasssocket__base_html_a1d9ff8b37d502077065ad505098f1c10"><div class="ttname"><a href="classsocket__base.html#a1d9ff8b37d502077065ad505098f1c10">socket_base::local_endpoint</a></div><div class="ttdeci">optional&lt; ip_address &gt; local_endpoint() const</div><div class="ttdoc">获取本地端点地址</div></div>
-<div class="ttc" id="aclasssocket__base_html_aa1f872262e5d3464c77ee96de7550df8"><div class="ttname"><a href="classsocket__base.html#aa1f872262e5d3464c77ee96de7550df8">socket_base::listen</a></div><div class="ttdeci">void listen(int backlog)</div><div class="ttdoc">开始监听连接（TCP）</div></div>
-<div class="ttc" id="aclasssocket__base_html_ae075f18d5fe704a278f8021d251905a0"><div class="ttname"><a href="classsocket__base.html#ae075f18d5fe704a278f8021d251905a0">socket_base::is_open</a></div><div class="ttdeci">bool is_open() const noexcept</div><div class="ttdoc">检查socket是否已打开</div><div class="ttdef"><b>定义</b> <a href="socket__base_8hpp_source.html#l00195">socket_base.hpp:195</a></div></div>
-<div class="ttc" id="aclasstcp__acceptor_html_a01f29ebfd1e0f953d9f1f5ca7ec9896a"><div class="ttname"><a href="classtcp__acceptor.html#a01f29ebfd1e0f953d9f1f5ca7ec9896a">tcp_acceptor::open</a></div><div class="ttdeci">void open(const ip_address &amp;endpoint, int backlog=SOMAXCONN)</div><div class="ttdoc">打开并开始监听</div></div>
-<div class="ttc" id="aclasstcp__acceptor_html_a4981086af1b46cb09f58784469d16f13"><div class="ttname"><a href="classtcp__acceptor.html#a4981086af1b46cb09f58784469d16f13">tcp_acceptor::accept</a></div><div class="ttdeci">tcp_socket accept()</div><div class="ttdoc">接受客户端连接（阻塞模式）</div></div>
-<div class="ttc" id="aclasstcp__acceptor_html_a677e1317fe230cd82993671b39e0fec9"><div class="ttname"><a href="classtcp__acceptor.html#a677e1317fe230cd82993671b39e0fec9">tcp_acceptor::accept_nonblock</a></div><div class="ttdeci">optional&lt; tcp_socket &gt; accept_nonblock()</div><div class="ttdoc">接受客户端连接（非阻塞模式）</div></div>
-<div class="ttc" id="agroup___memory_order_html_ggad658351bedece1752acbd72886a7e0e4a123fead50246387983ee340507115ef4"><div class="ttname"><a href="group___memory_order.html#ggad658351bedece1752acbd72886a7e0e4a123fead50246387983ee340507115ef4">memory_order::release</a></div><div class="ttdeci">@ release</div><div class="ttdoc">释放操作，确保前面的读写不会被重排到后面</div><div class="ttdef"><b>定义</b> <a href="memory__order_8hpp_source.html#l00167">memory_order.hpp:167</a></div></div>
-<div class="ttc" id="agroup___shift_algorithms_html_ga5cf63a30ac8a14718fe8e9a65e1267ac"><div class="ttname"><a href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00312">shift.hpp:312</a></div></div>
+<div class="ttc" id="agroup___memory_order_html_gga6c8ae7c1b2f51ad0fc22ca0044bab9f7a123fead50246387983ee340507115ef4"><div class="ttname"><a href="group___memory_order.html#gga6c8ae7c1b2f51ad0fc22ca0044bab9f7a123fead50246387983ee340507115ef4">neforce::memory_order::release</a></div><div class="ttdeci">@ release</div><div class="ttdoc">释放操作，确保前面的读写不会被重排到后面</div><div class="ttdef"><b>定义</b> <a href="memory__order_8hpp_source.html#l00167">memory_order.hpp:167</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_gae346eba5fb576da65e097b60463d3790"><div class="ttname"><a href="group___shift_algorithms.html#gae346eba5fb576da65e097b60463d3790">neforce::move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00312">shift.hpp:312</a></div></div>
 <div class="ttc" id="atcp__acceptor_8hpp_html"><div class="ttname"><a href="tcp__acceptor_8hpp.html">tcp_acceptor.hpp</a></div><div class="ttdoc">TCP Acceptor实现</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

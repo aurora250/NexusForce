@@ -1,6 +1,6 @@
 PROJECT_NAME           = "@PROJECT_NAME@"
 PROJECT_NUMBER         = @PROJECT_VERSION@
-PROJECT_BRIEF          = "A Modern C++ Library with extended functionality, web components, and utility libraries"
+PROJECT_BRIEF          = "A rigorously engineered full-stack C++ backend library."
 OUTPUT_DIRECTORY       = "@DOXYGEN_OUTPUT_DIR@"
 
 INPUT                  = "@DOXYGEN_INPUT_DIRS@" \
@@ -14,23 +14,34 @@ FILE_PATTERNS          = *.hpp \
                          *.md
 
 HTML_DYNAMIC_SECTIONS  = NO
-USE_MDFILE_AS_MAINPAGE = @CMAKE_SOURCE_DIR@/README.md
+USE_MDFILE_AS_MAINPAGE = "@CMAKE_SOURCE_DIR@/docs/MAINPAGE.md"
 
 PREDEFINED             = NEXUSFORCE_ENABLE_DOXYGEN=1 \
                          NEFORCE_USING_SSO \
                          NEFORCE_USING_INTEL_TSX \
+                         NEFORCE_USING_IO_URING \
                          NEFORCE_SUPPORT_POSTGRESQL \
                          NEFORCE_SUPPORT_MYSQL \
                          NEFORCE_SUPPORT_SQLITE3 \
                          NEFORCE_SUPPORT_HIREDIS \
                          NEFORCE_SUPPORT_ZLIB \
                          NEFORCE_SUPPORT_LZ4 \
+                         NEFORCE_SUPPORT_OPENSSL \
+                         NEFORCE_SUPPORT_PCRE2 \
+                         NEFORCE_SUPPORT_ICU \
+                         NEFORCE_SUPPORT_SIMD \
+                         NEFORCE_SUPPORT_INTEL_TSX \
+                         NEFORCE_SUPPORT_INTRINSIC_INT128 \
                          NEFORCE_STANDARD_23 \
                          NEFORCE_STANDARD_20 \
                          NEFORCE_STANDARD_17 \
                          NEFORCE_STANDARD_14 \
                          NEFORCE_PLATFORM_WINDOWS \
+                         NEFORCE_PLATFORM_WINDOWS32 \
+                         NEFORCE_PLATFORM_WINDOWS64 \
                          NEFORCE_PLATFORM_LINUX \
+                         NEFORCE_PLATFORM_LINUX32 \
+                         NEFORCE_PLATFORM_LINUX64 \
                          NEFORCE_COMPILER_GNUC \
                          NEFORCE_COMPILER_CLANG \
                          NEFORCE_COMPILER_MINGW \
@@ -39,9 +50,25 @@ PREDEFINED             = NEXUSFORCE_ENABLE_DOXYGEN=1 \
                          NEFORCE_COMPILER_LLVM_MINGW \
                          NEFORCE_COMPILER_CLANG_CL \
                          NEFORCE_ARCH_X86 \
+                         NEFORCE_ARCH_X86_32 \
+                         NEFORCE_ARCH_X86_64 \
                          NEFORCE_ARCH_ARM \
+                         NEFORCE_ARCH_ARM32 \
+                         NEFORCE_ARCH_AARCH64 \
                          NEFORCE_ARCH_RISCV \
+                         NEFORCE_ARCH_RISCV32 \
+                         NEFORCE_ARCH_RISCV64 \
                          NEFORCE_ARCH_LOONGARCH \
+                         NEFORCE_ARCH_LOONGARCH32 \
+                         NEFORCE_ARCH_LOONGARCH64 \
+                         NEFORCE_SIMD_SSE2 \
+                         NEFORCE_SIMD_AVX \
+                         NEFORCE_SIMD_AVX2 \
+                         NEFORCE_SIMD_AVX512F \
+                         NEFORCE_SIMD_SSSE3 \
+                         NEFORCE_SIMD_NEON \
+                         NEFORCE_SIMD_AES_NI \
+                         NEFORCE_SIMD_AES_ARM \
                          NEFORCE_ARCH_BITS_64 \
                          NEFORCE_ARCH_BITS_32 \
                          NEFORCE_API \
@@ -49,17 +76,43 @@ PREDEFINED             = NEXUSFORCE_ENABLE_DOXYGEN=1 \
                          NEFORCE_CONSTEXPR17=constexpr \
                          NEFORCE_INLINE17=inline \
                          NEFORCE_CONSTEXPR20=constexpr \
+                         NEFORCE_CONSTEVAL20=consteval \
+                         NEFORCE_CONSTEXPR23=constexpr \
                          NEFORCE_PURE_FUNCTION \
                          NEFORCE_CONST_FUNCTION \
                          NEFORCE_ALLOC_OPTIMIZE \
                          "NEFORCE_ALWAYS_INLINE=inline" \
                          "NEFORCE_ALWAYS_INLINE_INLINE=inline" \
                          "NEFORCE_NODISCARD=[[nodiscard]]" \
-                         "NEFORCE_ALLOC_NODISCARD=[[nodiscard]]"
+                         "NEFORCE_ALLOC_NODISCARD=[[nodiscard]]" \
                          "NEFORCE_NORETURN=[[noreturn]]" \
                          "NEFORCE_DEPRECATED=[[deprecated]]" \
                          "NEFORCE_DEPRECATED_FOR(MSG)=[[deprecated(MSG)]]" \
-                         NEFORCE_RESTRICT=__restrict
+                         NEFORCE_RESTRICT=__restrict \
+                         NEFORCE_BEGIN_NAMESPACE__="namespace neforce {" \
+                         NEFORCE_END_NAMESPACE__="}" \
+                         NEFORCE_BEGIN_SIMD__="namespace simd {" \
+                         NEFORCE_BEGIN_CONSTANTS__="namespace constants {" \
+                         NEFORCE_BEGIN_THIS_THREAD__="namespace this_thread {" \
+                         NEFORCE_BEGIN_RANGES__="namespace ranges {" \
+                         NEFORCE_BEGIN_RANGES_VIEWS__="namespace views {" \
+                         NEFORCE_BEGIN_LITERALS__="inline namespace literals {" \
+                         NEFORCE_BEGIN_REFLECT__="namespace reflect {" \
+                         NEFORCE_BEGIN_SERIALIZE__="namespace serialize {" \
+                         NEFORCE_BEGIN_HTTP__="namespace http {" \
+                         NEFORCE_BEGIN_TUI__="namespace tui {" \
+                         NEFORCE_BEGIN_COMPONENTS__="namespace components {" \
+                         NEFORCE_END_SIMD__="}" \
+                         NEFORCE_END_CONSTANTS__="}" \
+                         NEFORCE_END_THIS_THREAD__="}" \
+                         NEFORCE_END_RANGES__="}" \
+                         NEFORCE_END_RANGES_VIEWS__="}" \
+                         NEFORCE_END_LITERALS__="}" \
+                         NEFORCE_END_REFLECT__="}" \
+                         NEFORCE_END_SERIALIZE__="}" \
+                         NEFORCE_END_HTTP__="}" \
+                         NEFORCE_END_TUI__="}" \
+                         NEFORCE_END_COMPONENTS__="}"
 
 OUTPUT_LANGUAGE        = Chinese
 

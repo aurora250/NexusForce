@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
   </td>
  </tr>
  </tbody>
@@ -103,18 +103,18 @@ $(function(){initNavTree('group___shuffle_algorithms.html','',''); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:ga3bcbde813bd43737ddaf4c106caac469" id="r_ga3bcbde813bd43737ddaf4c106caac469"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
-<tr class="memitem:ga3bcbde813bd43737ddaf4c106caac469 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga3bcbde813bd43737ddaf4c106caac469">shuffle</a> (Iterator first, Iterator last)</td></tr>
-<tr class="memdesc:ga3bcbde813bd43737ddaf4c106caac469"><td class="mdescLeft">&#160;</td><td class="mdescRight">随机重排序列  <br /></td></tr>
-<tr class="memitem:ga7d0bd6e732e8ea782985610e8276d3ce" id="r_ga7d0bd6e732e8ea782985610e8276d3ce"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Generator&gt; </td></tr>
-<tr class="memitem:ga7d0bd6e732e8ea782985610e8276d3ce template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga7d0bd6e732e8ea782985610e8276d3ce">shuffle</a> (Iterator first, Iterator last, Generator &amp;rand)</td></tr>
-<tr class="memdesc:ga7d0bd6e732e8ea782985610e8276d3ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">随机重排序列（使用自定义随机数生成器）  <br /></td></tr>
+<tr class="memitem:ga1923fb855d707c657d666fc6ea2c1228" id="r_ga1923fb855d707c657d666fc6ea2c1228"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga1923fb855d707c657d666fc6ea2c1228 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga1923fb855d707c657d666fc6ea2c1228">neforce::shuffle</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga1923fb855d707c657d666fc6ea2c1228"><td class="mdescLeft">&#160;</td><td class="mdescRight">随机重排序列  <br /></td></tr>
+<tr class="memitem:gab95287909b94bdae1092f2d0f28181c9" id="r_gab95287909b94bdae1092f2d0f28181c9"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Generator&gt; </td></tr>
+<tr class="memitem:gab95287909b94bdae1092f2d0f28181c9 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gab95287909b94bdae1092f2d0f28181c9">neforce::shuffle</a> (Iterator first, Iterator last, Generator &amp;rand)</td></tr>
+<tr class="memdesc:gab95287909b94bdae1092f2d0f28181c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">随机重排序列（使用自定义随机数生成器）  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>随机重排算法的实现 </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
-<a id="ga3bcbde813bd43737ddaf4c106caac469" name="ga3bcbde813bd43737ddaf4c106caac469"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3bcbde813bd43737ddaf4c106caac469">&#9670;&#160;</a></span>shuffle() <span class="overload">[1/2]</span></h2>
+<a id="ga1923fb855d707c657d666fc6ea2c1228" name="ga1923fb855d707c657d666fc6ea2c1228"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1923fb855d707c657d666fc6ea2c1228">&#9670;&#160;</a></span>shuffle() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -122,7 +122,7 @@ $(function(){initNavTree('group___shuffle_algorithms.html','',''); });
 template&lt;typename Iterator&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void shuffle </td>
+          <td class="memname">void neforce::shuffle </td>
           <td>(</td>
           <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
         </tr>
@@ -151,16 +151,18 @@ template&lt;typename Iterator&gt; </div>
 <p>使用Fisher-Yates洗牌算法（Knuth洗牌）将范围 [first, last) 中的元素随机重排。 算法对每个位置 i（从第二个元素开始），在 [first, i] 范围内随机选择一个位置 j， 然后交换位置 i 和 j 的元素。</p>
 <dl class="section note"><dt>注解</dt><dd>要求 Iterator 满足随机访问迭代器概念 </dd>
 <dd>
-使用默认的 <a class="el" href="classrandom__lcd.html" title="线性同余随机数生成器">random_lcd</a> 线性同余随机数生成器 </dd></dl>
+使用默认的 <a class="el" href="classneforce_1_1random__lcd.html" title="线性同余随机数生成器">random_lcd</a> 线性同余随机数生成器 </dd></dl>
 
 <p class="definition">在文件 <a class="el" href="shuffle_8hpp_source.html">shuffle.hpp</a> 第 <a class="el" href="shuffle_8hpp_source.html#l00041">41</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="iterator_8hpp_source.html#l00201">distance()</a>, <a class="el" href="concepts_8hpp_source.html#l00601">is_ranges_rnd_iter_v</a>, <a class="el" href="shift_8hpp_source.html#l00440">iter_swap()</a>, <a class="el" href="iterator_8hpp_source.html#l00157">next()</a> , 以及 <a class="el" href="random_8hpp_source.html#l00135">random_lcd::next_int()</a>.</p>
+<p class="reference">引用了 <a class="el" href="iterator_8hpp_source.html#l00201">distance()</a>, <a class="el" href="concepts_8hpp_source.html#l00601">is_ranges_rnd_iter_v</a>, <a class="el" href="shift_8hpp_source.html#l00440">iter_swap()</a>, <a class="el" href="iterator_8hpp_source.html#l00157">next()</a>, <a class="el" href="random_8hpp_source.html#l00135">neforce::random_lcd::next_int()</a> , 以及 <a class="el" href="shuffle_8hpp_source.html#l00041">shuffle()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="shuffle_8hpp_source.html#l00041">shuffle()</a> , 以及 <a class="el" href="shuffle_8hpp_source.html#l00074">shuffle()</a>.</p>
 
 </div>
 </div>
-<a id="ga7d0bd6e732e8ea782985610e8276d3ce" name="ga7d0bd6e732e8ea782985610e8276d3ce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7d0bd6e732e8ea782985610e8276d3ce">&#9670;&#160;</a></span>shuffle() <span class="overload">[2/2]</span></h2>
+<a id="gab95287909b94bdae1092f2d0f28181c9" name="gab95287909b94bdae1092f2d0f28181c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab95287909b94bdae1092f2d0f28181c9">&#9670;&#160;</a></span>shuffle() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -168,7 +170,7 @@ template&lt;typename Iterator&gt; </div>
 template&lt;typename Iterator, typename Generator&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void shuffle </td>
+          <td class="memname">void neforce::shuffle </td>
           <td>(</td>
           <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
         </tr>
@@ -212,7 +214,7 @@ template&lt;typename Iterator, typename Generator&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="shuffle_8hpp_source.html">shuffle.hpp</a> 第 <a class="el" href="shuffle_8hpp_source.html#l00074">74</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="concepts_8hpp_source.html#l00601">is_ranges_rnd_iter_v</a>, <a class="el" href="shift_8hpp_source.html#l00440">iter_swap()</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00157">next()</a>.</p>
+<p class="reference">引用了 <a class="el" href="concepts_8hpp_source.html#l00601">is_ranges_rnd_iter_v</a>, <a class="el" href="shift_8hpp_source.html#l00440">iter_swap()</a>, <a class="el" href="iterator_8hpp_source.html#l00157">next()</a> , 以及 <a class="el" href="shuffle_8hpp_source.html#l00041">shuffle()</a>.</p>
 
 </div>
 </div>

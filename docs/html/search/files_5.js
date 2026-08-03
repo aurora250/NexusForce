@@ -15,9 +15,10 @@ var searchData=
   ['flat_5funordered_5fmultimap_2ehpp_12',['flat_unordered_multimap.hpp',['../flat__unordered__multimap_8hpp.html',1,'']]],
   ['flat_5funordered_5fmultiset_2ehpp_13',['flat_unordered_multiset.hpp',['../flat__unordered__multiset_8hpp.html',1,'']]],
   ['flat_5funordered_5fset_2ehpp_14',['flat_unordered_set.hpp',['../flat__unordered__set_8hpp.html',1,'']]],
-  ['format_2ehpp_15',['format.hpp',['../format_8hpp.html',1,'']]],
-  ['functional_2ffunction_2ehpp_16',['function.hpp',['../functional_2function_8hpp.html',1,'']]],
-  ['functor_2ehpp_17',['functor.hpp',['../functor_8hpp.html',1,'']]],
-  ['futex_2ehpp_18',['futex.hpp',['../futex_8hpp.html',1,'']]],
-  ['future_2ehpp_19',['future.hpp',['../future_8hpp.html',1,'']]]
+  ['focus_5fmanager_2ehpp_15',['focus_manager.hpp',['../focus__manager_8hpp.html',1,'']]],
+  ['format_2ehpp_16',['format.hpp',['../format_8hpp.html',1,'']]],
+  ['functional_2ffunction_2ehpp_17',['function.hpp',['../functional_2function_8hpp.html',1,'']]],
+  ['functor_2ehpp_18',['functor.hpp',['../functor_8hpp.html',1,'']]],
+  ['futex_2ehpp_19',['futex.hpp',['../futex_8hpp.html',1,'']]],
+  ['future_2ehpp_20',['future.hpp',['../future_8hpp.html',1,'']]]
 ];

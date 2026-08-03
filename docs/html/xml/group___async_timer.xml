@@ -3,14 +3,15 @@
   <compounddef id="group___async_timer" kind="group">
     <compoundname>AsyncTimer</compoundname>
     <title>定时调度器</title>
-    <innerclass refid="classtimer__scheduler" prot="public">timer_scheduler</innerclass>
-    <innerclass refid="classbasic__timer" prot="public">basic_timer</innerclass>
+    <innerclass refid="classneforce_1_1timer__scheduler" prot="public">neforce::timer_scheduler</innerclass>
+    <innerclass refid="classneforce_1_1basic__timer" prot="public">neforce::basic_timer</innerclass>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="group___async_timer_1gaf9d29e0fc3082a1789eafb7a8736a00b" prot="public" static="no">
-        <type><ref refid="classbasic__timer" kindref="compound">basic_timer</ref>&lt; <ref refid="structsteady__clock" kindref="compound">steady_clock</ref> &gt;</type>
-        <definition>using steady_timer = basic_timer&lt;steady_clock&gt;</definition>
+      <memberdef kind="typedef" id="group___async_timer_1ga5d32a2782e2926012296331ed724ed74" prot="public" static="no">
+        <type>basic_timer&lt; steady_clock &gt;</type>
+        <definition>using neforce::steady_timer = basic_timer&lt;steady_clock&gt;</definition>
         <argsstring></argsstring>
         <name>steady_timer</name>
+        <qualifiedname>neforce::steady_timer</qualifiedname>
         <briefdescription>
 <para>基于稳定时钟的定时器 </para>
         </briefdescription>
@@ -20,11 +21,12 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="431" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="431" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="group___async_timer_1ga1a05e758b1b38f82d3cfec4cc3cb55b7" prot="public" static="no">
-        <type><ref refid="classbasic__timer" kindref="compound">basic_timer</ref>&lt; <ref refid="structsystem__clock" kindref="compound">system_clock</ref> &gt;</type>
-        <definition>using system_timer = basic_timer&lt;system_clock&gt;</definition>
+      <memberdef kind="typedef" id="group___async_timer_1ga06a00661e18fa45f52c1d0c9a39430d8" prot="public" static="no">
+        <type>basic_timer&lt; system_clock &gt;</type>
+        <definition>using neforce::system_timer = basic_timer&lt;system_clock&gt;</definition>
         <argsstring></argsstring>
         <name>system_timer</name>
+        <qualifiedname>neforce::system_timer</qualifiedname>
         <briefdescription>
 <para>基于系统时钟的定时器 </para>
         </briefdescription>

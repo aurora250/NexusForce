@@ -3,9 +3,9 @@
   <compounddef id="group___reverse_iterator" kind="group">
     <compoundname>ReverseIterator</compoundname>
     <title>反向迭代器</title>
-    <innerclass refid="classreverse__iterator" prot="public">reverse_iterator</innerclass>
+    <innerclass refid="classneforce_1_1reverse__iterator" prot="public">neforce::reverse_iterator</innerclass>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___reverse_iterator_1ga4b3f71d48af479bcf7544d23f1c9738d" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(_NEFORCE declcopy&lt; bool &gt;(x.base()==y.base()))" virt="non-virtual">
+      <memberdef kind="function" id="group___reverse_iterator_1ga6b4d81530eaf7e9a4b640b9b14d6981d" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(_NEFORCE declcopy&lt; bool &gt;(x.base()==y.base()))" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator1</type>
@@ -15,18 +15,19 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator==</definition>
+        <definition>bool neforce::operator==</definition>
         <argsstring>(const reverse_iterator&lt; Iterator1 &gt; &amp;x, const reverse_iterator&lt; Iterator2 &gt; &amp;y)</argsstring>
         <name>operator==</name>
+        <qualifiedname>neforce::operator==</qualifiedname>
         <param>
-          <type>const <ref refid="classreverse__iterator" kindref="compound">reverse_iterator</ref>&lt; Iterator1 &gt; &amp;</type>
+          <type>const reverse_iterator&lt; Iterator1 &gt; &amp;</type>
           <declname>x</declname>
         </param>
         <param>
-          <type>const <ref refid="classreverse__iterator" kindref="compound">reverse_iterator</ref>&lt; Iterator2 &gt; &amp;</type>
+          <type>const reverse_iterator&lt; Iterator2 &gt; &amp;</type>
           <declname>y</declname>
         </param>
-    <requiresclause>requires { { x.base() == y.base() } -&gt; <ref refid="conceptconvertible__to" kindref="compound">convertible_to</ref>&lt;bool&gt;; }    </requiresclause>
+    <requiresclause>requires { { x.base() == y.base() } -&gt; convertible_to&lt;bool&gt;; }    </requiresclause>
         <briefdescription>
 <para>相等比较运算符 </para>
         </briefdescription>
@@ -72,9 +73,11 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/reverse_iterator.hpp" line="234" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/reverse_iterator.hpp" bodystart="234" bodyend="243"/>
+        <references refid="group___declval_tools_1gac222169c3dac847d0c2d78f5b5d13d54">neforce::declcopy</references>
         <references refid="group___cxx_standard_detection_1ga15a44225a036fa856299c55ee8951862" compoundref="c_09_09config_8hpp" startline="398">NEFORCE_STANDARD_20</references>
+        <references refid="group___function_wrapper_1ga6a8b8801c0a30a7e84b4b051aa943b64" compoundref="functional_2function_8hpp" startline="530" endline="532">neforce::operator==</references>
       </memberdef>
-      <memberdef kind="function" id="group___reverse_iterator_1gafbe5c1f28d78200050bf1b5a2c6bf93f" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(_NEFORCE declcopy&lt; bool &gt;(x.base() !=y.base()))" virt="non-virtual">
+      <memberdef kind="function" id="group___reverse_iterator_1gaa05ef302dbe13f38bc233a60e8572ff3" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(_NEFORCE declcopy&lt; bool &gt;(x.base() !=y.base()))" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator1</type>
@@ -84,18 +87,19 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator!=</definition>
+        <definition>bool neforce::operator!=</definition>
         <argsstring>(const reverse_iterator&lt; Iterator1 &gt; &amp;x, const reverse_iterator&lt; Iterator2 &gt; &amp;y)</argsstring>
         <name>operator!=</name>
+        <qualifiedname>neforce::operator!=</qualifiedname>
         <param>
-          <type>const <ref refid="classreverse__iterator" kindref="compound">reverse_iterator</ref>&lt; Iterator1 &gt; &amp;</type>
+          <type>const reverse_iterator&lt; Iterator1 &gt; &amp;</type>
           <declname>x</declname>
         </param>
         <param>
-          <type>const <ref refid="classreverse__iterator" kindref="compound">reverse_iterator</ref>&lt; Iterator2 &gt; &amp;</type>
+          <type>const reverse_iterator&lt; Iterator2 &gt; &amp;</type>
           <declname>y</declname>
         </param>
-    <requiresclause>requires { { x.base() != y.base() } -&gt; <ref refid="conceptconvertible__to" kindref="compound">convertible_to</ref>&lt;bool&gt;; }    </requiresclause>
+    <requiresclause>requires { { x.base() != y.base() } -&gt; convertible_to&lt;bool&gt;; }    </requiresclause>
         <briefdescription>
 <para>不等比较运算符 </para>
         </briefdescription>
@@ -141,9 +145,11 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/reverse_iterator.hpp" line="255" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/reverse_iterator.hpp" bodystart="255" bodyend="264"/>
+        <references refid="group___declval_tools_1gac222169c3dac847d0c2d78f5b5d13d54">neforce::declcopy</references>
         <references refid="group___cxx_standard_detection_1ga15a44225a036fa856299c55ee8951862" compoundref="c_09_09config_8hpp" startline="398">NEFORCE_STANDARD_20</references>
+        <references refid="group___function_wrapper_1ga245168fc07a7b8f6d303ddab962e1bea" compoundref="functional_2function_8hpp" startline="556" endline="558">neforce::operator!=</references>
       </memberdef>
-      <memberdef kind="function" id="group___reverse_iterator_1ga398913776261239ac704c17ad761c1ff" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(_NEFORCE declcopy&lt; bool &gt;(x.base() &gt; y.base()))" virt="non-virtual">
+      <memberdef kind="function" id="group___reverse_iterator_1ga490491080df79d1a8ff56af2435079c9" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(_NEFORCE declcopy&lt; bool &gt;(x.base() &gt; y.base()))" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator1</type>
@@ -153,18 +159,19 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&lt;</definition>
+        <definition>bool neforce::operator&lt;</definition>
         <argsstring>(const reverse_iterator&lt; Iterator1 &gt; &amp;x, const reverse_iterator&lt; Iterator2 &gt; &amp;y)</argsstring>
         <name>operator&lt;</name>
+        <qualifiedname>neforce::operator&lt;</qualifiedname>
         <param>
-          <type>const <ref refid="classreverse__iterator" kindref="compound">reverse_iterator</ref>&lt; Iterator1 &gt; &amp;</type>
+          <type>const reverse_iterator&lt; Iterator1 &gt; &amp;</type>
           <declname>x</declname>
         </param>
         <param>
-          <type>const <ref refid="classreverse__iterator" kindref="compound">reverse_iterator</ref>&lt; Iterator2 &gt; &amp;</type>
+          <type>const reverse_iterator&lt; Iterator2 &gt; &amp;</type>
           <declname>y</declname>
         </param>
-    <requiresclause>requires { { x.base() &gt; y.base() } -&gt; <ref refid="conceptconvertible__to" kindref="compound">convertible_to</ref>&lt;bool&gt;; }    </requiresclause>
+    <requiresclause>requires { { x.base() &gt; y.base() } -&gt; convertible_to&lt;bool&gt;; }    </requiresclause>
         <briefdescription>
 <para>小于比较运算符 </para>
         </briefdescription>
@@ -212,9 +219,10 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/reverse_iterator.hpp" line="276" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/reverse_iterator.hpp" bodystart="277" bodyend="286"/>
+        <references refid="group___declval_tools_1gac222169c3dac847d0c2d78f5b5d13d54">neforce::declcopy</references>
         <references refid="group___cxx_standard_detection_1ga15a44225a036fa856299c55ee8951862" compoundref="c_09_09config_8hpp" startline="398">NEFORCE_STANDARD_20</references>
       </memberdef>
-      <memberdef kind="function" id="group___reverse_iterator_1gaaa5d96f19c75e2328be504982326e206" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(_NEFORCE declcopy&lt; bool &gt;(x.base()&lt; y.base()))" virt="non-virtual">
+      <memberdef kind="function" id="group___reverse_iterator_1ga67c210d5b67a0d1b118fe65e719f34fa" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(_NEFORCE declcopy&lt; bool &gt;(x.base()&lt; y.base()))" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator1</type>
@@ -224,18 +232,19 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&gt;</definition>
+        <definition>bool neforce::operator&gt;</definition>
         <argsstring>(const reverse_iterator&lt; Iterator1 &gt; &amp;x, const reverse_iterator&lt; Iterator2 &gt; &amp;y)</argsstring>
         <name>operator&gt;</name>
+        <qualifiedname>neforce::operator&gt;</qualifiedname>
         <param>
-          <type>const <ref refid="classreverse__iterator" kindref="compound">reverse_iterator</ref>&lt; Iterator1 &gt; &amp;</type>
+          <type>const reverse_iterator&lt; Iterator1 &gt; &amp;</type>
           <declname>x</declname>
         </param>
         <param>
-          <type>const <ref refid="classreverse__iterator" kindref="compound">reverse_iterator</ref>&lt; Iterator2 &gt; &amp;</type>
+          <type>const reverse_iterator&lt; Iterator2 &gt; &amp;</type>
           <declname>y</declname>
         </param>
-    <requiresclause>requires { { x.base() &lt; y.base() } -&gt; <ref refid="conceptconvertible__to" kindref="compound">convertible_to</ref>&lt;bool&gt;; }    </requiresclause>
+    <requiresclause>requires { { x.base() &lt; y.base() } -&gt; convertible_to&lt;bool&gt;; }    </requiresclause>
         <briefdescription>
 <para>大于比较运算符 </para>
         </briefdescription>
@@ -281,9 +290,10 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/reverse_iterator.hpp" line="298" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/reverse_iterator.hpp" bodystart="298" bodyend="307"/>
+        <references refid="group___declval_tools_1gac222169c3dac847d0c2d78f5b5d13d54">neforce::declcopy</references>
         <references refid="group___cxx_standard_detection_1ga15a44225a036fa856299c55ee8951862" compoundref="c_09_09config_8hpp" startline="398">NEFORCE_STANDARD_20</references>
       </memberdef>
-      <memberdef kind="function" id="group___reverse_iterator_1gab718aa3645fecf53afb38317f7f132ff" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(_NEFORCE declcopy&lt; bool &gt;(x.base() &gt;=y.base()))" virt="non-virtual">
+      <memberdef kind="function" id="group___reverse_iterator_1gac527b3b9d5857fe007a65d9b1bd25e1d" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(_NEFORCE declcopy&lt; bool &gt;(x.base() &gt;=y.base()))" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator1</type>
@@ -293,18 +303,19 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&lt;=</definition>
+        <definition>bool neforce::operator&lt;=</definition>
         <argsstring>(const reverse_iterator&lt; Iterator1 &gt; &amp;x, const reverse_iterator&lt; Iterator2 &gt; &amp;y)</argsstring>
         <name>operator&lt;=</name>
+        <qualifiedname>neforce::operator&lt;=</qualifiedname>
         <param>
-          <type>const <ref refid="classreverse__iterator" kindref="compound">reverse_iterator</ref>&lt; Iterator1 &gt; &amp;</type>
+          <type>const reverse_iterator&lt; Iterator1 &gt; &amp;</type>
           <declname>x</declname>
         </param>
         <param>
-          <type>const <ref refid="classreverse__iterator" kindref="compound">reverse_iterator</ref>&lt; Iterator2 &gt; &amp;</type>
+          <type>const reverse_iterator&lt; Iterator2 &gt; &amp;</type>
           <declname>y</declname>
         </param>
-    <requiresclause>requires { { x.base() &gt;= y.base() } -&gt; <ref refid="conceptconvertible__to" kindref="compound">convertible_to</ref>&lt;bool&gt;; }    </requiresclause>
+    <requiresclause>requires { { x.base() &gt;= y.base() } -&gt; convertible_to&lt;bool&gt;; }    </requiresclause>
         <briefdescription>
 <para>小于等于比较运算符 </para>
         </briefdescription>
@@ -350,9 +361,10 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/reverse_iterator.hpp" line="318" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/reverse_iterator.hpp" bodystart="319" bodyend="328"/>
+        <references refid="group___declval_tools_1gac222169c3dac847d0c2d78f5b5d13d54">neforce::declcopy</references>
         <references refid="group___cxx_standard_detection_1ga15a44225a036fa856299c55ee8951862" compoundref="c_09_09config_8hpp" startline="398">NEFORCE_STANDARD_20</references>
       </memberdef>
-      <memberdef kind="function" id="group___reverse_iterator_1ga7ee575307ef84ddf478c5dcd5a5f0e94" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(_NEFORCE declcopy&lt; bool &gt;(x.base()&lt;=y.base()))" virt="non-virtual">
+      <memberdef kind="function" id="group___reverse_iterator_1gaa037ebf95a784cf1813b5b813216e2a9" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(_NEFORCE declcopy&lt; bool &gt;(x.base()&lt;=y.base()))" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator1</type>
@@ -362,18 +374,19 @@
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool operator&gt;=</definition>
+        <definition>bool neforce::operator&gt;=</definition>
         <argsstring>(const reverse_iterator&lt; Iterator1 &gt; &amp;x, const reverse_iterator&lt; Iterator2 &gt; &amp;y)</argsstring>
         <name>operator&gt;=</name>
+        <qualifiedname>neforce::operator&gt;=</qualifiedname>
         <param>
-          <type>const <ref refid="classreverse__iterator" kindref="compound">reverse_iterator</ref>&lt; Iterator1 &gt; &amp;</type>
+          <type>const reverse_iterator&lt; Iterator1 &gt; &amp;</type>
           <declname>x</declname>
         </param>
         <param>
-          <type>const <ref refid="classreverse__iterator" kindref="compound">reverse_iterator</ref>&lt; Iterator2 &gt; &amp;</type>
+          <type>const reverse_iterator&lt; Iterator2 &gt; &amp;</type>
           <declname>y</declname>
         </param>
-    <requiresclause>requires { { x.base() &lt;= y.base() } -&gt; <ref refid="conceptconvertible__to" kindref="compound">convertible_to</ref>&lt;bool&gt;; }    </requiresclause>
+    <requiresclause>requires { { x.base() &lt;= y.base() } -&gt; convertible_to&lt;bool&gt;; }    </requiresclause>
         <briefdescription>
 <para>大于等于比较运算符 </para>
         </briefdescription>
@@ -419,9 +432,10 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/reverse_iterator.hpp" line="340" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/reverse_iterator.hpp" bodystart="340" bodyend="349"/>
+        <references refid="group___declval_tools_1gac222169c3dac847d0c2d78f5b5d13d54">neforce::declcopy</references>
         <references refid="group___cxx_standard_detection_1ga15a44225a036fa856299c55ee8951862" compoundref="c_09_09config_8hpp" startline="398">NEFORCE_STANDARD_20</references>
       </memberdef>
-      <memberdef kind="function" id="group___reverse_iterator_1ga91d0bb039c62dfce27f8f3115800af2e" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(y.base() - x.base())" virt="non-virtual">
+      <memberdef kind="function" id="group___reverse_iterator_1ga0389ec285df952be709347201112ac49" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(y.base() - x.base())" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator1</type>
@@ -431,15 +445,16 @@
           </param>
         </templateparamlist>
         <type>decltype(auto)</type>
-        <definition>decltype(auto) operator-</definition>
+        <definition>decltype(auto) neforce::operator-</definition>
         <argsstring>(const reverse_iterator&lt; Iterator1 &gt; &amp;x, const reverse_iterator&lt; Iterator2 &gt; &amp;y)</argsstring>
         <name>operator-</name>
+        <qualifiedname>neforce::operator-</qualifiedname>
         <param>
-          <type>const <ref refid="classreverse__iterator" kindref="compound">reverse_iterator</ref>&lt; Iterator1 &gt; &amp;</type>
+          <type>const reverse_iterator&lt; Iterator1 &gt; &amp;</type>
           <declname>x</declname>
         </param>
         <param>
-          <type>const <ref refid="classreverse__iterator" kindref="compound">reverse_iterator</ref>&lt; Iterator2 &gt; &amp;</type>
+          <type>const reverse_iterator&lt; Iterator2 &gt; &amp;</type>
           <declname>y</declname>
         </param>
         <briefdescription>
@@ -489,24 +504,25 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/reverse_iterator.hpp" line="362" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/reverse_iterator.hpp" bodystart="362" bodyend="365"/>
-        <references refid="classreverse__iterator_1ad4a9d387c489b952b758661f5c0c85fa" compoundref="reverse__iterator_8hpp" startline="221" endline="221">reverse_iterator&lt; Iter &gt;::base</references>
+        <references refid="classneforce_1_1reverse__iterator_1a35e06cce2061af5ac007a2b21857b6c3" compoundref="reverse__iterator_8hpp" startline="221" endline="221">neforce::reverse_iterator&lt; Iterator &gt;::base</references>
       </memberdef>
-      <memberdef kind="function" id="group___reverse_iterator_1ga0eb2ca2718e24e302693e7e62daffc6f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(x+n)" virt="non-virtual">
+      <memberdef kind="function" id="group___reverse_iterator_1ga87c7bc8185a9a8c30cb4804225cd1c2b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(x+n)" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classreverse__iterator" kindref="compound">reverse_iterator</ref>&lt; Iterator &gt;</type>
-        <definition>reverse_iterator&lt; Iterator &gt; operator+</definition>
+        <type>reverse_iterator&lt; Iterator &gt;</type>
+        <definition>reverse_iterator&lt; Iterator &gt; neforce::operator+</definition>
         <argsstring>(iter_difference_t&lt; Iterator &gt; n, const reverse_iterator&lt; Iterator &gt; &amp;x)</argsstring>
         <name>operator+</name>
+        <qualifiedname>neforce::operator+</qualifiedname>
         <param>
-          <type><ref refid="group___iterator_traits_1gaf61f58aa2abc24434e0b77340ddf2cfa" kindref="member">iter_difference_t</ref>&lt; Iterator &gt;</type>
+          <type>iter_difference_t&lt; Iterator &gt;</type>
           <declname>n</declname>
         </param>
         <param>
-          <type>const <ref refid="classreverse__iterator" kindref="compound">reverse_iterator</ref>&lt; Iterator &gt; &amp;</type>
+          <type>const reverse_iterator&lt; Iterator &gt; &amp;</type>
           <declname>x</declname>
         </param>
         <briefdescription>
@@ -546,17 +562,19 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/reverse_iterator.hpp" line="375" column="28" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/reverse_iterator.hpp" bodystart="375" bodyend="378"/>
+        <references refid="group___normal_iterators_1gad76d2365c04436d22dcec3d28287f159" compoundref="normal__iterator_8hpp" startline="314" endline="317">neforce::operator+</references>
       </memberdef>
-      <memberdef kind="function" id="group___reverse_iterator_1gaef957127a778bd747a07d86fb0059946" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; Iterator &gt;" virt="non-virtual">
+      <memberdef kind="function" id="group___reverse_iterator_1gad5bde703f7123aa23346cced0a42646a" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; Iterator &gt;" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classreverse__iterator" kindref="compound">reverse_iterator</ref>&lt; Iterator &gt;</type>
-        <definition>reverse_iterator&lt; Iterator &gt; make_reverse_iterator</definition>
+        <type>reverse_iterator&lt; Iterator &gt;</type>
+        <definition>reverse_iterator&lt; Iterator &gt; neforce::make_reverse_iterator</definition>
         <argsstring>(Iterator it)</argsstring>
         <name>make_reverse_iterator</name>
+        <qualifiedname>neforce::make_reverse_iterator</qualifiedname>
         <param>
           <type>Iterator</type>
           <declname>it</declname>
@@ -590,9 +608,11 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/reverse_iterator.hpp" line="388" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/reverse_iterator.hpp" bodystart="388" bodyend="390"/>
-        <references refid="group___type_special_member_function_checks_1ga34e3584e54b63fd9e6a35fffd41080bd" compoundref="type__traits_8hpp" startline="2862">is_nothrow_move_constructible_v</references>
-        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
-        <referencedby refid="group___sort_algorithms_1ga821b14fdc1e7d63404b0d376f1c53d19" compoundref="sort_8hpp" startline="220" endline="245">bubble_sort</referencedby>
+        <references refid="group___type_special_member_function_checks_1gae20ac6ad74f8179d6959c23cbda15965" compoundref="type__traits_8hpp" startline="2862">neforce::is_nothrow_move_constructible_v</references>
+        <references refid="group___reverse_iterator_1gad5bde703f7123aa23346cced0a42646a" compoundref="reverse__iterator_8hpp" startline="388" endline="390">neforce::make_reverse_iterator</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <referencedby refid="group___sort_algorithms_1ga34fd3492d3de0dc84d289cb08a705715" compoundref="sort_8hpp" startline="220" endline="245">neforce::bubble_sort</referencedby>
+        <referencedby refid="group___reverse_iterator_1gad5bde703f7123aa23346cced0a42646a" compoundref="reverse__iterator_8hpp" startline="388" endline="390">neforce::make_reverse_iterator</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

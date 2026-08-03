@@ -4,16 +4,17 @@
     <compoundname>IteratorCategoryChecks</compoundname>
     <title>迭代器类型检查</title>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="group___iterator_category_checks_1gacecf3d4b6f0ff4ed650a28b53536c1b4" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___iterator_category_checks_1gaf3273fe6557d532583e5e9d1ddaa50a4" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_ranges_iter_v</definition>
+        <definition>bool neforce::is_ranges_iter_v</definition>
         <argsstring></argsstring>
         <name>is_ranges_iter_v</name>
+        <qualifiedname>neforce::is_ranges_iter_v</qualifiedname>
         <initializer>= inner::__is_iterator_with_cate_v&lt;Iterator&gt;</initializer>
         <briefdescription>
 <para>检查类型是否为范围迭代器 </para>
@@ -34,21 +35,22 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" line="517" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" bodystart="517" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="group___iterator_category_checks_1ga82451b532c89a512421a6d0d783bbb20" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___iterator_category_checks_1ga4f7b2f70ba1539ec3326d52e89698f13" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_iter_v</definition>
+        <definition>bool neforce::is_iter_v</definition>
         <argsstring></argsstring>
         <name>is_iter_v</name>
+        <qualifiedname>neforce::is_iter_v</qualifiedname>
         <initializer>                        =
 
-<ref refid="conceptiterator__typedef" kindref="compound">iterator_typedef</ref>&lt;Iterator&gt; &amp;&amp;
+iterator_typedef&lt;Iterator&gt; &amp;&amp;
 
-<ref refid="group___iterator_category_checks_1gacecf3d4b6f0ff4ed650a28b53536c1b4" kindref="member">is_ranges_iter_v</ref>&lt;Iterator&gt;</initializer>
+is_ranges_iter_v&lt;Iterator&gt;</initializer>
         <briefdescription>
 <para>检查类型是否为迭代器 </para>
         </briefdescription>
@@ -67,28 +69,29 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" line="525" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" bodystart="525" bodyend="-1"/>
-        <referencedby refid="group___iterator_operation_1ga0ebe1ee99151c272bdedc1a48d148aa2" compoundref="iterator_8hpp" startline="106" endline="129">advance</referencedby>
-        <referencedby refid="group___shift_algorithms_1ga5e0849ebed625d362d1ffd7bada46f87" compoundref="shift_8hpp" startline="90" endline="98">copy</referencedby>
-        <referencedby refid="group___shift_algorithms_1ga67989ef667ba7bc077104bcbd66957f0" compoundref="shift_8hpp" startline="171" endline="181">copy_if</referencedby>
-        <referencedby refid="group___shift_algorithms_1ga185a883f89f616f4d54214d52604a13c" compoundref="shift_8hpp" startline="151" endline="155">copy_n</referencedby>
-        <referencedby refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</referencedby>
-        <referencedby refid="group___set_algorithms_1gadd4f2d1801981f832e0d1cc5c0d8d0dc" compoundref="algorithm_2set_8hpp" startline="122" endline="141">set_difference</referencedby>
-        <referencedby refid="group___set_algorithms_1gaf5a4c4c022d7ab16d624020e39023e01" compoundref="algorithm_2set_8hpp" startline="85" endline="104">set_intersection</referencedby>
-        <referencedby refid="group___set_algorithms_1gad923c656ec1822d18d888992718b9cbc" compoundref="algorithm_2set_8hpp" startline="160" endline="181">set_symmetric_difference</referencedby>
-        <referencedby refid="group___set_algorithms_1ga9cabd9953c61fc5a9367a050d9e08b85" compoundref="algorithm_2set_8hpp" startline="47" endline="67">set_union</referencedby>
+        <referencedby refid="group___iterator_operation_1gab75e73250466cd76e5b49ff5a95a6b2d" compoundref="iterator_8hpp" startline="106" endline="129">neforce::advance</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga4b2c906611d9c77fbe7db696b043d1b9" compoundref="shift_8hpp" startline="90" endline="98">neforce::copy</referencedby>
+        <referencedby refid="group___shift_algorithms_1gaa9ca6c10ebe3fad133fafdc8224cf0c8" compoundref="shift_8hpp" startline="171" endline="181">neforce::copy_if</referencedby>
+        <referencedby refid="group___shift_algorithms_1gaa8a31d0c3d3c79d052202c76fbc092cc" compoundref="shift_8hpp" startline="151" endline="155">neforce::copy_n</referencedby>
+        <referencedby refid="group___iterator_operation_1ga81cd39ae0fbc7198eef37acc9ff10950" compoundref="iterator_8hpp" startline="201" endline="218">neforce::distance</referencedby>
+        <referencedby refid="group___set_algorithms_1ga93cb2494c964c0fd93d19e9ea72b7105" compoundref="algorithm_2set_8hpp" startline="122" endline="141">neforce::set_difference</referencedby>
+        <referencedby refid="group___set_algorithms_1ga30b770b2c85862ab2342a07fd654782c" compoundref="algorithm_2set_8hpp" startline="85" endline="104">neforce::set_intersection</referencedby>
+        <referencedby refid="group___set_algorithms_1gad589dd50e39ce334495710253249bbc1" compoundref="algorithm_2set_8hpp" startline="160" endline="181">neforce::set_symmetric_difference</referencedby>
+        <referencedby refid="group___set_algorithms_1gad5f2e0359d706f75bb5549cb4313b895" compoundref="algorithm_2set_8hpp" startline="47" endline="67">neforce::set_union</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="group___iterator_category_checks_1ga599d2f4fe13322580e70e5959b69778d" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___iterator_category_checks_1gad4ad20a0181ba7c28b10d7f297497fe9" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_ranges_input_iter_v</definition>
+        <definition>bool neforce::is_ranges_input_iter_v</definition>
         <argsstring></argsstring>
         <name>is_ranges_input_iter_v</name>
+        <qualifiedname>neforce::is_ranges_input_iter_v</qualifiedname>
         <initializer>                                     =
-<ref refid="group___convertible_checks_1gadf5e75c4b12aa7982c5a97a14510ab35" kindref="member">is_convertible_v</ref>&lt;<ref refid="group___iterator_traits_1ga72a1e059640b5b980f882da92f94dd12" kindref="member">iter_category_t</ref>&lt;Iterator&gt;, <ref refid="structinput__iterator__tag" kindref="compound">input_iterator_tag</ref>&gt;</initializer>
+is_convertible_v&lt;iter_category_t&lt;Iterator&gt;, input_iterator_tag&gt;</initializer>
         <briefdescription>
 <para>检查是否为范围输入迭代器 </para>
         </briefdescription>
@@ -107,61 +110,62 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" line="540" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" bodystart="540" bodyend="-1"/>
-        <referencedby refid="group___numeric_algorithms_1ga6df197c7189d776420d7e37b43b71bf0" compoundref="numeric_8hpp" startline="42" endline="48">accumulate</referencedby>
-        <referencedby refid="group___numeric_algorithms_1gabff943711f51bbc9d52f36b2896cdbe2" compoundref="numeric_8hpp" startline="80" endline="99">adjacent_difference</referencedby>
-        <referencedby refid="group___adjacent_algorithms_1ga13ada6eb80186e1a77c9c378a3e917be" compoundref="search_8hpp" startline="300" endline="314">adjacent_find</referencedby>
-        <referencedby refid="group___quantifier_algorithms_1gad953b0ada9620c3fd485317b9db7093e" compoundref="search_8hpp" startline="229" endline="238">all_of</referencedby>
-        <referencedby refid="group___quantifier_algorithms_1gac20e73ba59f5ba9db9ce34e6970a88dc" compoundref="search_8hpp" startline="250" endline="259">any_of</referencedby>
-        <referencedby refid="group___shift_algorithms_1ga5e0849ebed625d362d1ffd7bada46f87" compoundref="shift_8hpp" startline="90" endline="98">copy</referencedby>
-        <referencedby refid="group___shift_algorithms_1ga67989ef667ba7bc077104bcbd66957f0" compoundref="shift_8hpp" startline="171" endline="181">copy_if</referencedby>
-        <referencedby refid="group___shift_algorithms_1ga185a883f89f616f4d54214d52604a13c" compoundref="shift_8hpp" startline="151" endline="155">copy_n</referencedby>
-        <referencedby refid="group___counting_algorithms_1ga1b902ac9fed79516a0188338ec0b5c8a" compoundref="search_8hpp" startline="369" endline="379">count_if</referencedby>
-        <referencedby refid="group___compare_algorithms_1ga9cf760161111d0bfae4928ad951ed9e6" compoundref="algorithm_2compare_8hpp" startline="54" endline="65">equal</referencedby>
-        <referencedby refid="group___shift_algorithms_1ga2a7148c0cf9921ebf254675a15cb03e3" compoundref="shift_8hpp" startline="398" endline="406">fill</referencedby>
-        <referencedby refid="group___shift_algorithms_1gaf7073d1fd2edd9c564d1b7859f096194" compoundref="shift_8hpp" startline="418" endline="427">fill_n</referencedby>
-        <referencedby refid="group___finding_algorithms_1gadf82c3a47d7ebd54e4be179fe380c1cb" compoundref="search_8hpp" startline="413" endline="420">find</referencedby>
-        <referencedby refid="group___pattern_matching_algorithms_1ga1753228dbceb869e6fd58b39f1b2853d" compoundref="search_8hpp" startline="718" endline="731">find_first_of</referencedby>
-        <referencedby refid="group___finding_algorithms_1gac806ea7ce9eb5a1ae1ddf4a34dd8b3b8" compoundref="search_8hpp" startline="432" endline="439">find_if</referencedby>
-        <referencedby refid="group___finding_algorithms_1ga3b3f143e3868c5b0779cd7253d1a0a8a" compoundref="search_8hpp" startline="451" endline="458">find_if_not</referencedby>
-        <referencedby refid="group___shift_algorithms_1ga530922ef49896e64a83a39ca9bfe402d" compoundref="shift_8hpp" startline="478" endline="486">for_each</referencedby>
-        <referencedby refid="group___shift_algorithms_1ga300a18e436a38ca8585e2d174ce30a8b" compoundref="shift_8hpp" startline="498" endline="507">for_each_n</referencedby>
-        <referencedby refid="group___shift_algorithms_1gad0b532388a6235965ae2562b1f8d66d8" compoundref="shift_8hpp" startline="521" endline="530">generate</referencedby>
-        <referencedby refid="group___shift_algorithms_1ga901149b24c5b7875f92f94964cc66327" compoundref="shift_8hpp" startline="542" endline="552">generate_n</referencedby>
-        <referencedby refid="group___bound_algorithms_1gaf298d16e23f7d383c2433077142cd9a8" compoundref="search_8hpp" startline="179" endline="194">includes</referencedby>
-        <referencedby refid="group___numeric_algorithms_1ga9b45f54e78ca9574ccc6ec648637a61a" compoundref="numeric_8hpp" startline="135" endline="145">inner_product</referencedby>
-        <referencedby refid="group___sort_algorithms_1ga0b0349f7dec1fb2baa425eab3e0ea498" compoundref="sort_8hpp" startline="137" endline="151">is_sorted</referencedby>
-        <referencedby refid="group___sort_algorithms_1ga402909e515a44301eba22c4a98dc9e9a" compoundref="sort_8hpp" startline="177" endline="191">is_sorted_until</referencedby>
-        <referencedby refid="group___shift_algorithms_1gaf24b9918e7d6e917eb59c4c5f9cd613d" compoundref="shift_8hpp" startline="440" endline="444">iter_swap</referencedby>
-        <referencedby refid="group___compare_algorithms_1ga7f28c6e08419c494bbfe697cd51d7202" compoundref="algorithm_2compare_8hpp" startline="504" endline="510">lexicographical_compare</referencedby>
-        <referencedby refid="group___compare_algorithms_1ga852d6f970d2af419ffe467715fb10b01" compoundref="algorithm_2compare_8hpp" startline="450" endline="465">lexicographical_compare</referencedby>
-        <referencedby refid="group___compare_algorithms_1gae047220bf13f52d30732510ec976bf5c" compoundref="algorithm_2compare_8hpp" startline="237" endline="249">max_element</referencedby>
-        <referencedby refid="group___merge_algorithms_1ga0b9cd2bc635fe355dff2344b03e0b7bb" compoundref="merge_8hpp" startline="51" endline="68">merge</referencedby>
-        <referencedby refid="group___compare_algorithms_1gaab4025164d755b851a1282e3cfbc3d1a" compoundref="algorithm_2compare_8hpp" startline="287" endline="299">min_element</referencedby>
-        <referencedby refid="group___compare_algorithms_1gaafcb422504addb63d771b9061f7533a9" compoundref="algorithm_2compare_8hpp" startline="337" endline="376">minmax_element</referencedby>
-        <referencedby refid="group___compare_algorithms_1ga879896fd048c11390116bfa1701cdafa" compoundref="algorithm_2compare_8hpp" startline="528" endline="536">mismatch</referencedby>
-        <referencedby refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</referencedby>
-        <referencedby refid="group___quantifier_algorithms_1gace2f064497b7230c156f70f5da706edc" compoundref="search_8hpp" startline="271" endline="280">none_of</referencedby>
-        <referencedby refid="group___sort_algorithms_1ga7604c36909710fbc4e92db0d66ad5054" compoundref="sort_8hpp" startline="514" endline="536">partial_sort_copy</referencedby>
-        <referencedby refid="group___numeric_algorithms_1gad486403cf79927457465f94e4f355788" compoundref="numeric_8hpp" startline="179" endline="196">partial_sum</referencedby>
-        <referencedby refid="group___parallel_algorithms_1gad447586eb3e4c5bd99c06300195deeba" compoundref="parallel_8hpp" startline="42" endline="59">reduce</referencedby>
-        <referencedby refid="group___numeric_algorithms_1gae4dd1c0c94bba63545ca1741b661da06" compoundref="numeric_8hpp" startline="225" endline="232">sequence_fill</referencedby>
-        <referencedby refid="group___parallel_algorithms_1ga9c84b149470430f99e5bb9f2de2a03dd" compoundref="parallel_8hpp" startline="78" endline="95">transform_reduce</referencedby>
+        <referencedby refid="group___numeric_algorithms_1gab812b01df2723756f1a2734e25837071" compoundref="numeric_8hpp" startline="42" endline="48">neforce::accumulate</referencedby>
+        <referencedby refid="group___numeric_algorithms_1ga68643e9b6d80278888c4333043575e95" compoundref="numeric_8hpp" startline="80" endline="99">neforce::adjacent_difference</referencedby>
+        <referencedby refid="group___adjacent_algorithms_1ga373549745645ee36a1567427315da8da" compoundref="search_8hpp" startline="300" endline="314">neforce::adjacent_find</referencedby>
+        <referencedby refid="group___quantifier_algorithms_1gaf292a6cbdc939ee785ec599562d53515" compoundref="search_8hpp" startline="229" endline="238">neforce::all_of</referencedby>
+        <referencedby refid="group___quantifier_algorithms_1gadcabcdd40a68552af35b819c35bb1570" compoundref="search_8hpp" startline="250" endline="259">neforce::any_of</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga4b2c906611d9c77fbe7db696b043d1b9" compoundref="shift_8hpp" startline="90" endline="98">neforce::copy</referencedby>
+        <referencedby refid="group___shift_algorithms_1gaa9ca6c10ebe3fad133fafdc8224cf0c8" compoundref="shift_8hpp" startline="171" endline="181">neforce::copy_if</referencedby>
+        <referencedby refid="group___shift_algorithms_1gaa8a31d0c3d3c79d052202c76fbc092cc" compoundref="shift_8hpp" startline="151" endline="155">neforce::copy_n</referencedby>
+        <referencedby refid="group___counting_algorithms_1gaee135cf1dd1c8594fce034f2878052a1" compoundref="search_8hpp" startline="369" endline="379">neforce::count_if</referencedby>
+        <referencedby refid="group___compare_algorithms_1ga4d20d5f9031c99a84a45fe39db9fbb78" compoundref="algorithm_2compare_8hpp" startline="54" endline="65">neforce::equal</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga0e2252aa0b1e6f5f5263361835dc58a8" compoundref="shift_8hpp" startline="398" endline="406">neforce::fill</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga390400a23909193701477d93522be5e9" compoundref="shift_8hpp" startline="418" endline="427">neforce::fill_n</referencedby>
+        <referencedby refid="group___finding_algorithms_1ga969f0071b4078ce0f8f8fed37a674551" compoundref="search_8hpp" startline="413" endline="420">neforce::find</referencedby>
+        <referencedby refid="group___pattern_matching_algorithms_1ga713f49c136f8aafb2aacca05a8ee6afa" compoundref="search_8hpp" startline="718" endline="731">neforce::find_first_of</referencedby>
+        <referencedby refid="group___finding_algorithms_1ga916f45df9d86316096fdf27abacc277e" compoundref="search_8hpp" startline="432" endline="439">neforce::find_if</referencedby>
+        <referencedby refid="group___finding_algorithms_1ga6e3ef24ca3ae66ce23386b4b6019ca1f" compoundref="search_8hpp" startline="451" endline="458">neforce::find_if_not</referencedby>
+        <referencedby refid="group___shift_algorithms_1gac0bc5961a4b76f89b8483e31469940f2" compoundref="shift_8hpp" startline="478" endline="486">neforce::for_each</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga45fd174971c5c8d49161a5d162682ca3" compoundref="shift_8hpp" startline="498" endline="507">neforce::for_each_n</referencedby>
+        <referencedby refid="group___shift_algorithms_1gaac2b5045041bf7ad51d799c09b9ea167" compoundref="shift_8hpp" startline="521" endline="530">neforce::generate</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga27f87fac8971cea2346d454cdc4abf98" compoundref="shift_8hpp" startline="542" endline="552">neforce::generate_n</referencedby>
+        <referencedby refid="group___bound_algorithms_1gafc1e254093256ed2fde5d0f910923ec9" compoundref="search_8hpp" startline="179" endline="194">neforce::includes</referencedby>
+        <referencedby refid="group___numeric_algorithms_1gabe429cab7e563818ae8eb1e076599b67" compoundref="numeric_8hpp" startline="135" endline="145">neforce::inner_product</referencedby>
+        <referencedby refid="group___sort_algorithms_1gad33b8ce780e1ad19c5c44b279f6c8c05" compoundref="sort_8hpp" startline="137" endline="151">neforce::is_sorted</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga3fe47e859e839627f980a8286884a5bd" compoundref="sort_8hpp" startline="177" endline="191">neforce::is_sorted_until</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga323874bfbf5e57e5ad937fa9b02fe0de" compoundref="shift_8hpp" startline="440" endline="444">neforce::iter_swap</referencedby>
+        <referencedby refid="group___compare_algorithms_1ga2ae781f1d4ba713809ac569be7f1e5bd" compoundref="algorithm_2compare_8hpp" startline="504" endline="510">neforce::lexicographical_compare</referencedby>
+        <referencedby refid="group___compare_algorithms_1ga7ec7e4cc2238e4a9f86b2d646d7cd032" compoundref="algorithm_2compare_8hpp" startline="450" endline="465">neforce::lexicographical_compare</referencedby>
+        <referencedby refid="group___compare_algorithms_1ga070035181715f22932d12ee9d11c3b40" compoundref="algorithm_2compare_8hpp" startline="237" endline="249">neforce::max_element</referencedby>
+        <referencedby refid="group___merge_algorithms_1ga2dc6c2eec324fdb83105ef79c4bc1e16" compoundref="merge_8hpp" startline="51" endline="68">neforce::merge</referencedby>
+        <referencedby refid="group___compare_algorithms_1gae2b6457d8fa4446ee08f0a363e022766" compoundref="algorithm_2compare_8hpp" startline="287" endline="299">neforce::min_element</referencedby>
+        <referencedby refid="group___compare_algorithms_1ga01cef81098318a2152246c3d836c1545" compoundref="algorithm_2compare_8hpp" startline="337" endline="376">neforce::minmax_element</referencedby>
+        <referencedby refid="group___compare_algorithms_1ga75c13416a546f3f72bb1d5bec9ae5ab0" compoundref="algorithm_2compare_8hpp" startline="528" endline="536">neforce::mismatch</referencedby>
+        <referencedby refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</referencedby>
+        <referencedby refid="group___quantifier_algorithms_1gac0b828760dbc01c48f8cf03d443d34b9" compoundref="search_8hpp" startline="271" endline="280">neforce::none_of</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga8b8c3b6f76f9e74f17a330bb8731f183" compoundref="sort_8hpp" startline="514" endline="536">neforce::partial_sort_copy</referencedby>
+        <referencedby refid="group___numeric_algorithms_1gaebff42c184e395d721c31294061e1b4a" compoundref="numeric_8hpp" startline="179" endline="196">neforce::partial_sum</referencedby>
+        <referencedby refid="group___parallel_algorithms_1ga4a0fb7d4107998892fcf525763602f4b" compoundref="parallel_8hpp" startline="42" endline="59">neforce::reduce</referencedby>
+        <referencedby refid="group___numeric_algorithms_1gaefdeead6653bd5cb4a7bcf86230ae0b0" compoundref="numeric_8hpp" startline="225" endline="232">neforce::sequence_fill</referencedby>
+        <referencedby refid="group___parallel_algorithms_1ga093aa3ddac9a6cd37fcf464c7c577426" compoundref="parallel_8hpp" startline="78" endline="95">neforce::transform_reduce</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="group___iterator_category_checks_1gab6d2669cd256e551226328829ada6a3b" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___iterator_category_checks_1ga35feef38f376860010a83e8353bd2c7b" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_input_iter_v</definition>
+        <definition>bool neforce::is_input_iter_v</definition>
         <argsstring></argsstring>
         <name>is_input_iter_v</name>
+        <qualifiedname>neforce::is_input_iter_v</qualifiedname>
         <initializer>                              =
 
-<ref refid="conceptinput__iterator" kindref="compound">input_iterator</ref>&lt;Iterator&gt; &amp;&amp;
+input_iterator&lt;Iterator&gt; &amp;&amp;
 
-<ref refid="group___iterator_category_checks_1ga599d2f4fe13322580e70e5959b69778d" kindref="member">is_ranges_input_iter_v</ref>&lt;Iterator&gt;</initializer>
+is_ranges_input_iter_v&lt;Iterator&gt;</initializer>
         <briefdescription>
 <para>检查是否为输入迭代器 </para>
         </briefdescription>
@@ -181,18 +185,19 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" line="549" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" bodystart="549" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="group___iterator_category_checks_1ga3d298019699d72aef974a27a13c65393" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___iterator_category_checks_1gace1b5811f58b26e736680d8234eb5627" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_ranges_fwd_iter_v</definition>
+        <definition>bool neforce::is_ranges_fwd_iter_v</definition>
         <argsstring></argsstring>
         <name>is_ranges_fwd_iter_v</name>
+        <qualifiedname>neforce::is_ranges_fwd_iter_v</qualifiedname>
         <initializer>                                   =
-<ref refid="group___convertible_checks_1gadf5e75c4b12aa7982c5a97a14510ab35" kindref="member">is_convertible_v</ref>&lt;<ref refid="group___iterator_traits_1ga72a1e059640b5b980f882da92f94dd12" kindref="member">iter_category_t</ref>&lt;Iterator&gt;, <ref refid="structforward__iterator__tag" kindref="compound">forward_iterator_tag</ref>&gt;</initializer>
+is_convertible_v&lt;iter_category_t&lt;Iterator&gt;, forward_iterator_tag&gt;</initializer>
         <briefdescription>
 <para>检查是否为范围前向迭代器 </para>
         </briefdescription>
@@ -201,48 +206,49 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" line="561" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" bodystart="561" bodyend="-1"/>
-        <referencedby refid="group___compare_algorithms_1ga396286e554573557c1781c8b3bae3860" compoundref="algorithm_2compare_8hpp" startline="98" endline="102">equal_range</referencedby>
-        <referencedby refid="group___pattern_matching_algorithms_1ga9997e6a5ac3609fc198d306e328229f4" compoundref="search_8hpp" startline="666" endline="703">find_end</referencedby>
-        <referencedby refid="group___permutation_algorithms_1gaced496fe68773549c067c785b18d0991" compoundref="permutation_8hpp" startline="46" endline="95">is_permutation</referencedby>
-        <referencedby refid="group___bound_algorithms_1ga752e4da223be382b51f4af020097beab" compoundref="search_8hpp" startline="43" endline="63">lower_bound</referencedby>
-        <referencedby refid="group___remove_algorithms_1gab60509ebaf6c33a45885638e30e9e9b2" compoundref="remove_8hpp" startline="102" endline="115">remove</referencedby>
-        <referencedby refid="group___remove_algorithms_1ga5962b7908ac4eea784e2872b03294a7e" compoundref="remove_8hpp" startline="45" endline="56">remove_copy</referencedby>
-        <referencedby refid="group___remove_algorithms_1gab79933ba60a9e8d48147d15911fef58f" compoundref="remove_8hpp" startline="73" endline="84">remove_copy_if</referencedby>
-        <referencedby refid="group___remove_algorithms_1ga02dd5101700733210a677808983ebfcc" compoundref="remove_8hpp" startline="133" endline="146">remove_if</referencedby>
-        <referencedby refid="group___shift_algorithms_1ga28ebd75930fa85d6fbf02dbf7d4abd9a" compoundref="shift_8hpp" startline="623" endline="632">replace</referencedby>
-        <referencedby refid="group___shift_algorithms_1gae2c97a16277f3977ca27699123e3f936" compoundref="shift_8hpp" startline="570" endline="580">replace_copy</referencedby>
-        <referencedby refid="group___shift_algorithms_1gafa87f88f20272f80ac48216df55818a3" compoundref="shift_8hpp" startline="598" endline="609">replace_copy_if</referencedby>
-        <referencedby refid="group___shift_algorithms_1gab6555bd06efad9501cf4a3408cc54d88" compoundref="shift_8hpp" startline="647" endline="657">replace_if</referencedby>
-        <referencedby refid="group___shift_algorithms_1ga3011e9c1ea124cbb3dfed724ee9e7624" compoundref="shift_8hpp" startline="838" endline="851">rotate</referencedby>
-        <referencedby refid="group___pattern_matching_algorithms_1ga07db4eea0c988d493904052c4839973e" compoundref="search_8hpp" startline="481" endline="511">search</referencedby>
-        <referencedby refid="group___pattern_matching_algorithms_1ga9580524f56d452c88e066180e465af27" compoundref="search_8hpp" startline="539" endline="562">search_n</referencedby>
-        <referencedby refid="group___pattern_matching_algorithms_1ga2f70389e3338d4062ffc0dcccd619383" compoundref="search_8hpp" startline="577" endline="614">search_n</referencedby>
-        <referencedby refid="group___sort_algorithms_1ga256c71a6285712b47d8e9c6869ddc0f9" compoundref="sort_8hpp" startline="337" endline="355">select_sort</referencedby>
-        <referencedby refid="group___set_algorithms_1gadd4f2d1801981f832e0d1cc5c0d8d0dc" compoundref="algorithm_2set_8hpp" startline="122" endline="141">set_difference</referencedby>
-        <referencedby refid="group___set_algorithms_1gaf5a4c4c022d7ab16d624020e39023e01" compoundref="algorithm_2set_8hpp" startline="85" endline="104">set_intersection</referencedby>
-        <referencedby refid="group___set_algorithms_1gad923c656ec1822d18d888992718b9cbc" compoundref="algorithm_2set_8hpp" startline="160" endline="181">set_symmetric_difference</referencedby>
-        <referencedby refid="group___set_algorithms_1ga9cabd9953c61fc5a9367a050d9e08b85" compoundref="algorithm_2set_8hpp" startline="47" endline="67">set_union</referencedby>
-        <referencedby refid="group___shift_algorithms_1gac89d00221baafa7cde725ffcfe292aeb" compoundref="shift_8hpp" startline="884" endline="899">shift_left</referencedby>
-        <referencedby refid="group___shift_algorithms_1ga08e72453e12c29254c5a5d45e58d648f" compoundref="shift_8hpp" startline="947" endline="960">transform</referencedby>
-        <referencedby refid="group___shift_algorithms_1ga327cf7ce32d1150f27c039171a7edaa2" compoundref="shift_8hpp" startline="979" endline="995">transform</referencedby>
-        <referencedby refid="group___shift_algorithms_1ga23e2ec35ee3354bb5b33e6e32fcdcef9" compoundref="shift_8hpp" startline="1013" endline="1031">unique_copy</referencedby>
-        <referencedby refid="group___bound_algorithms_1ga6b8b644144e4b0e5f0258c0b3018385e" compoundref="search_8hpp" startline="96" endline="116">upper_bound</referencedby>
+        <referencedby refid="group___compare_algorithms_1ga02dc6da05b453e4f9760f001083566bb" compoundref="algorithm_2compare_8hpp" startline="98" endline="102">neforce::equal_range</referencedby>
+        <referencedby refid="group___pattern_matching_algorithms_1ga9a9070e956472cac1622b61b0a688c23" compoundref="search_8hpp" startline="666" endline="703">neforce::find_end</referencedby>
+        <referencedby refid="group___permutation_algorithms_1gad0359cf7b9f183a673faef0a32168558" compoundref="permutation_8hpp" startline="46" endline="95">neforce::is_permutation</referencedby>
+        <referencedby refid="group___bound_algorithms_1ga7b3b1a5476a623e135ea53851cdc80bd" compoundref="search_8hpp" startline="43" endline="63">neforce::lower_bound</referencedby>
+        <referencedby refid="group___remove_algorithms_1gaeed66e3840ca89e8469c9cee5c147987" compoundref="remove_8hpp" startline="102" endline="115">neforce::remove</referencedby>
+        <referencedby refid="group___remove_algorithms_1gaf22dbf71711f571a1e196dcffdf2ab63" compoundref="remove_8hpp" startline="45" endline="56">neforce::remove_copy</referencedby>
+        <referencedby refid="group___remove_algorithms_1ga7b135817a5ced7418449924032d3c8d9" compoundref="remove_8hpp" startline="73" endline="84">neforce::remove_copy_if</referencedby>
+        <referencedby refid="group___remove_algorithms_1gafe93cfbcbfba8fccb49c198ad3bbe4b1" compoundref="remove_8hpp" startline="133" endline="146">neforce::remove_if</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga9f53f0aef933d41a0fa784043ea0fe28" compoundref="shift_8hpp" startline="623" endline="632">neforce::replace</referencedby>
+        <referencedby refid="group___shift_algorithms_1gab619ee83ef72f2c8ee62af9144c3e5a8" compoundref="shift_8hpp" startline="570" endline="580">neforce::replace_copy</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga39e740c9f2871b9fa539a37aafcd5fbd" compoundref="shift_8hpp" startline="598" endline="609">neforce::replace_copy_if</referencedby>
+        <referencedby refid="group___shift_algorithms_1gab81854db25cfd5842f5fa3e5b628d897" compoundref="shift_8hpp" startline="647" endline="657">neforce::replace_if</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga0e6dc27cfb9b7250e71cf9487dda2161" compoundref="shift_8hpp" startline="838" endline="851">neforce::rotate</referencedby>
+        <referencedby refid="group___pattern_matching_algorithms_1ga18f6cb26bacb2dd883721adf03af4ff7" compoundref="search_8hpp" startline="481" endline="511">neforce::search</referencedby>
+        <referencedby refid="group___pattern_matching_algorithms_1gaab0ff0ae64f260b5b65182c49b9ee538" compoundref="search_8hpp" startline="539" endline="562">neforce::search_n</referencedby>
+        <referencedby refid="group___pattern_matching_algorithms_1gab1b84d9ef65c0db0349e4f711bc9b518" compoundref="search_8hpp" startline="577" endline="614">neforce::search_n</referencedby>
+        <referencedby refid="group___sort_algorithms_1gaa3c2d18404a15b5c01094424d60bb22a" compoundref="sort_8hpp" startline="337" endline="355">neforce::select_sort</referencedby>
+        <referencedby refid="group___set_algorithms_1ga93cb2494c964c0fd93d19e9ea72b7105" compoundref="algorithm_2set_8hpp" startline="122" endline="141">neforce::set_difference</referencedby>
+        <referencedby refid="group___set_algorithms_1ga30b770b2c85862ab2342a07fd654782c" compoundref="algorithm_2set_8hpp" startline="85" endline="104">neforce::set_intersection</referencedby>
+        <referencedby refid="group___set_algorithms_1gad589dd50e39ce334495710253249bbc1" compoundref="algorithm_2set_8hpp" startline="160" endline="181">neforce::set_symmetric_difference</referencedby>
+        <referencedby refid="group___set_algorithms_1gad5f2e0359d706f75bb5549cb4313b895" compoundref="algorithm_2set_8hpp" startline="47" endline="67">neforce::set_union</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga9a749abba22867e4b0579a945d4ef5d2" compoundref="shift_8hpp" startline="884" endline="899">neforce::shift_left</referencedby>
+        <referencedby refid="group___shift_algorithms_1gabe4fe08cdf85064e0deae1194b9bc6f3" compoundref="shift_8hpp" startline="947" endline="960">neforce::transform</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga5e694a23bd8a21339337c9a383232d31" compoundref="shift_8hpp" startline="979" endline="995">neforce::transform</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga067b38ce06e5eb88f37a5878b35c35e2" compoundref="shift_8hpp" startline="1013" endline="1031">neforce::unique_copy</referencedby>
+        <referencedby refid="group___bound_algorithms_1gac921ba98c610b6c4496a8824e7241c57" compoundref="search_8hpp" startline="96" endline="116">neforce::upper_bound</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="group___iterator_category_checks_1ga538373d2a6d43025a2f6531825356cf4" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___iterator_category_checks_1ga9f30f01baa17d0af2aa62da800a1d8f6" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_fwd_iter_v</definition>
+        <definition>bool neforce::is_fwd_iter_v</definition>
         <argsstring></argsstring>
         <name>is_fwd_iter_v</name>
+        <qualifiedname>neforce::is_fwd_iter_v</qualifiedname>
         <initializer>                            =
 
-<ref refid="conceptforward__iterator" kindref="compound">forward_iterator</ref>&lt;Iterator&gt; &amp;&amp;
+forward_iterator&lt;Iterator&gt; &amp;&amp;
 
-<ref refid="group___iterator_category_checks_1ga3d298019699d72aef974a27a13c65393" kindref="member">is_ranges_fwd_iter_v</ref>&lt;Iterator&gt;</initializer>
+is_ranges_fwd_iter_v&lt;Iterator&gt;</initializer>
         <briefdescription>
 <para>检查是否为前向迭代器 </para>
         </briefdescription>
@@ -252,18 +258,19 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" line="569" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" bodystart="569" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="group___iterator_category_checks_1gaa1867b9281dc7506d92e81092147150a" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___iterator_category_checks_1ga6660aae77a45c6a5e2229b4824c02b2b" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_ranges_bid_iter_v</definition>
+        <definition>bool neforce::is_ranges_bid_iter_v</definition>
         <argsstring></argsstring>
         <name>is_ranges_bid_iter_v</name>
+        <qualifiedname>neforce::is_ranges_bid_iter_v</qualifiedname>
         <initializer>                                   =
-<ref refid="group___convertible_checks_1gadf5e75c4b12aa7982c5a97a14510ab35" kindref="member">is_convertible_v</ref>&lt;<ref refid="group___iterator_traits_1ga72a1e059640b5b980f882da92f94dd12" kindref="member">iter_category_t</ref>&lt;Iterator&gt;, <ref refid="structbidirectional__iterator__tag" kindref="compound">bidirectional_iterator_tag</ref>&gt;</initializer>
+is_convertible_v&lt;iter_category_t&lt;Iterator&gt;, bidirectional_iterator_tag&gt;</initializer>
         <briefdescription>
 <para>检查是否为范围双向迭代器 </para>
         </briefdescription>
@@ -272,32 +279,33 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" line="581" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" bodystart="581" bodyend="-1"/>
-        <referencedby refid="group___sort_algorithms_1ga897ea2a00ea276fcc6f16d9dcae7deda" compoundref="sort_8hpp" startline="273" endline="309">cocktail_sort</referencedby>
-        <referencedby refid="group___shift_algorithms_1ga4d3adeb0c2f00c00929d912671c22729" compoundref="shift_8hpp" startline="245" endline="254">copy_backward</referencedby>
-        <referencedby refid="group___pattern_matching_algorithms_1ga9997e6a5ac3609fc198d306e328229f4" compoundref="search_8hpp" startline="666" endline="703">find_end</referencedby>
-        <referencedby refid="group___merge_algorithms_1ga6715ef726249eda60e6460a96678138f" compoundref="merge_8hpp" startline="294" endline="303">inplace_merge</referencedby>
-        <referencedby refid="group___shift_algorithms_1gaa743a8f01eb9828a1fe0ad25f8026c46" compoundref="shift_8hpp" startline="377" endline="384">move_backward</referencedby>
-        <referencedby refid="group___permutation_algorithms_1gaf560848588f7231ccb6f7b7e418c8364" compoundref="permutation_8hpp" startline="131" endline="160">next_permutation</referencedby>
-        <referencedby refid="group___partition_algorithms_1ga165394317b9b3996c7a9b5cd4fdc32c8" compoundref="partition_8hpp" startline="46" endline="77">partition</referencedby>
-        <referencedby refid="group___permutation_algorithms_1ga9ebc19acb4e093d3117f45942d689a8c" compoundref="permutation_8hpp" startline="193" endline="222">prev_permutation</referencedby>
-        <referencedby refid="group___shift_algorithms_1gac99c8df19a722dfd3abb231742d8e2a2" compoundref="shift_8hpp" startline="711" endline="734">reverse</referencedby>
-        <referencedby refid="group___shift_algorithms_1ga0c7b083fbce6e6870933f3fceb8519e4" compoundref="shift_8hpp" startline="915" endline="930">shift_right</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga8be648c40f5bde49757d4f18aa1e2dc6" compoundref="sort_8hpp" startline="273" endline="309">neforce::cocktail_sort</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga1fd7e111ad62b8f52e054383f93ca875" compoundref="shift_8hpp" startline="245" endline="254">neforce::copy_backward</referencedby>
+        <referencedby refid="group___pattern_matching_algorithms_1ga9a9070e956472cac1622b61b0a688c23" compoundref="search_8hpp" startline="666" endline="703">neforce::find_end</referencedby>
+        <referencedby refid="group___merge_algorithms_1ga7643d4dfc6ec0f239e9a905d3de7da47" compoundref="merge_8hpp" startline="294" endline="303">neforce::inplace_merge</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga82d3adb94a7fffab32b23952f678afe1" compoundref="shift_8hpp" startline="377" endline="384">neforce::move_backward</referencedby>
+        <referencedby refid="group___permutation_algorithms_1gafaa5fe1166637049230ea3978a354094" compoundref="permutation_8hpp" startline="131" endline="160">neforce::next_permutation</referencedby>
+        <referencedby refid="group___partition_algorithms_1ga76dbe5632406a166ef1258a0a9e25615" compoundref="partition_8hpp" startline="46" endline="77">neforce::partition</referencedby>
+        <referencedby refid="group___permutation_algorithms_1ga013670acb3050e5a4b838661220305fb" compoundref="permutation_8hpp" startline="193" endline="222">neforce::prev_permutation</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga57d000e186d74499df30ca60212e6965" compoundref="shift_8hpp" startline="711" endline="734">neforce::reverse</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga086167d7bdd5716a5cf3c679a4406fe1" compoundref="shift_8hpp" startline="915" endline="930">neforce::shift_right</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="group___iterator_category_checks_1ga706391f7411dd3fcce16948cdd980372" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___iterator_category_checks_1ga7b4f61a999410416cb40513edf9b7c66" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_bid_iter_v</definition>
+        <definition>bool neforce::is_bid_iter_v</definition>
         <argsstring></argsstring>
         <name>is_bid_iter_v</name>
+        <qualifiedname>neforce::is_bid_iter_v</qualifiedname>
         <initializer>                            =
 
-<ref refid="conceptbidirectional__iterator" kindref="compound">bidirectional_iterator</ref>&lt;Iterator&gt; &amp;&amp;
+bidirectional_iterator&lt;Iterator&gt; &amp;&amp;
 
-<ref refid="group___iterator_category_checks_1gaa1867b9281dc7506d92e81092147150a" kindref="member">is_ranges_bid_iter_v</ref>&lt;Iterator&gt;</initializer>
+is_ranges_bid_iter_v&lt;Iterator&gt;</initializer>
         <briefdescription>
 <para>检查是否为双向迭代器 </para>
         </briefdescription>
@@ -306,20 +314,21 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" line="589" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" bodystart="589" bodyend="-1"/>
-        <referencedby refid="group___iterator_operation_1ga0ebe1ee99151c272bdedc1a48d148aa2" compoundref="iterator_8hpp" startline="106" endline="129">advance</referencedby>
+        <referencedby refid="group___iterator_operation_1gab75e73250466cd76e5b49ff5a95a6b2d" compoundref="iterator_8hpp" startline="106" endline="129">neforce::advance</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="group___iterator_category_checks_1ga7e90191894e0224a9597f070cd1dcb79" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___iterator_category_checks_1gabca13f6df73a191ea3c980af9121f3c1" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_ranges_rnd_iter_v</definition>
+        <definition>bool neforce::is_ranges_rnd_iter_v</definition>
         <argsstring></argsstring>
         <name>is_ranges_rnd_iter_v</name>
+        <qualifiedname>neforce::is_ranges_rnd_iter_v</qualifiedname>
         <initializer>                                   =
-<ref refid="group___convertible_checks_1gadf5e75c4b12aa7982c5a97a14510ab35" kindref="member">is_convertible_v</ref>&lt;<ref refid="group___iterator_traits_1ga72a1e059640b5b980f882da92f94dd12" kindref="member">iter_category_t</ref>&lt;Iterator&gt;, <ref refid="structrandom__access__iterator__tag" kindref="compound">random_access_iterator_tag</ref>&gt;</initializer>
+is_convertible_v&lt;iter_category_t&lt;Iterator&gt;, random_access_iterator_tag&gt;</initializer>
         <briefdescription>
 <para>检查是否为范围随机访问迭代器 </para>
         </briefdescription>
@@ -328,36 +337,37 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" line="601" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" bodystart="601" bodyend="-1"/>
-        <referencedby refid="group___leonardo_heap_1gac60b0313c9a99501982d00f52c3017c4" compoundref="leonardo__heap_8hpp" startline="128" endline="178">adjust_leonardo_heap</referencedby>
-        <referencedby refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</referencedby>
-        <referencedby refid="group___sort_algorithms_1gad75649c2b023f9d65025c2623f049b59" compoundref="sort_8hpp" startline="598" endline="614">insertion_sort</referencedby>
-        <referencedby refid="group___heap_algorithms_1gaae9fe620a74394c9a970ebf859483572" compoundref="heap_8hpp" startline="123" endline="135">is_heap_until</referencedby>
-        <referencedby refid="group___partition_algorithms_1ga09ca7889019a50556c6f23810bf2de1d" compoundref="partition_8hpp" startline="119" endline="145">lomuto_partition</referencedby>
-        <referencedby refid="group___leonardo_heap_1gaeccafcd2bf9df72de2f4a7ec6ff469fa" compoundref="leonardo__heap_8hpp" startline="327" endline="350">make_leonardo_heap</referencedby>
-        <referencedby refid="group___sort_algorithms_1gac4e6fa13122e50c09e865328c3ab7af2" compoundref="sort_8hpp" startline="432" endline="443">merge_sort</referencedby>
-        <referencedby refid="group___leonardo_heap_1ga136d8080ad6127b70845b45e199e2c5d" compoundref="leonardo__heap_8hpp" startline="236" endline="267">pop_leonardo_heap</referencedby>
-        <referencedby refid="group___leonardo_heap_1ga339f8c175e964064f8d7e8e2676591fa" compoundref="leonardo__heap_8hpp" startline="189" endline="225">push_leonardo_heap</referencedby>
-        <referencedby refid="group___shift_algorithms_1gac99c8df19a722dfd3abb231742d8e2a2" compoundref="shift_8hpp" startline="711" endline="734">reverse</referencedby>
-        <referencedby refid="group___sort_algorithms_1ga5460a64be141e4d5b5e0eb165cbfc170" compoundref="sort_8hpp" startline="383" endline="401">shell_sort</referencedby>
-        <referencedby refid="group___shuffle_algorithms_1ga3bcbde813bd43737ddaf4c106caac469" compoundref="shuffle_8hpp" startline="41" endline="53">shuffle</referencedby>
-        <referencedby refid="group___shuffle_algorithms_1ga7d0bd6e732e8ea782985610e8276d3ce" compoundref="shuffle_8hpp" startline="74" endline="84">shuffle</referencedby>
-        <referencedby refid="group___leonardo_heap_1ga30b3db79677a6fbb9e3b71a62b48933f" compoundref="leonardo__heap_8hpp" startline="278" endline="316">sort_leonardo_heap</referencedby>
+        <referencedby refid="group___leonardo_heap_1gadab369d42b30db503093fb7710a0c071" compoundref="leonardo__heap_8hpp" startline="128" endline="178">neforce::adjust_leonardo_heap</referencedby>
+        <referencedby refid="group___iterator_operation_1ga81cd39ae0fbc7198eef37acc9ff10950" compoundref="iterator_8hpp" startline="201" endline="218">neforce::distance</referencedby>
+        <referencedby refid="group___sort_algorithms_1gab5f13ad1ba32794bb29de060b88845e3" compoundref="sort_8hpp" startline="598" endline="614">neforce::insertion_sort</referencedby>
+        <referencedby refid="group___heap_algorithms_1ga20841ab9b56c5d639240542e270b8df1" compoundref="heap_8hpp" startline="123" endline="135">neforce::is_heap_until</referencedby>
+        <referencedby refid="group___partition_algorithms_1gae80adb4f9cc2c99cdce991beba5bd6be" compoundref="partition_8hpp" startline="119" endline="145">neforce::lomuto_partition</referencedby>
+        <referencedby refid="group___leonardo_heap_1ga614eb82010a036730ed102df417c8f42" compoundref="leonardo__heap_8hpp" startline="327" endline="350">neforce::make_leonardo_heap</referencedby>
+        <referencedby refid="group___sort_algorithms_1gaac38a2038e8508eba8e2949ccbb77227" compoundref="sort_8hpp" startline="432" endline="443">neforce::merge_sort</referencedby>
+        <referencedby refid="group___leonardo_heap_1gae0b8e0d88ab3f099800a507e1c56678c" compoundref="leonardo__heap_8hpp" startline="236" endline="267">neforce::pop_leonardo_heap</referencedby>
+        <referencedby refid="group___leonardo_heap_1gabd7f4744500fb899386b3a971f6bed8a" compoundref="leonardo__heap_8hpp" startline="189" endline="225">neforce::push_leonardo_heap</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga57d000e186d74499df30ca60212e6965" compoundref="shift_8hpp" startline="711" endline="734">neforce::reverse</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga25d3caf235639ba184620b374bde3e86" compoundref="sort_8hpp" startline="383" endline="401">neforce::shell_sort</referencedby>
+        <referencedby refid="group___shuffle_algorithms_1ga1923fb855d707c657d666fc6ea2c1228" compoundref="shuffle_8hpp" startline="41" endline="53">neforce::shuffle</referencedby>
+        <referencedby refid="group___shuffle_algorithms_1gab95287909b94bdae1092f2d0f28181c9" compoundref="shuffle_8hpp" startline="74" endline="84">neforce::shuffle</referencedby>
+        <referencedby refid="group___leonardo_heap_1gac8bc87194be6d7619c0ac6ba70bc8640" compoundref="leonardo__heap_8hpp" startline="278" endline="316">neforce::sort_leonardo_heap</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="group___iterator_category_checks_1ga0d4d8785612dccf04285b9295e225eac" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___iterator_category_checks_1gaada72ef8fb353a03d9170ae44af31744" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_rnd_iter_v</definition>
+        <definition>bool neforce::is_rnd_iter_v</definition>
         <argsstring></argsstring>
         <name>is_rnd_iter_v</name>
+        <qualifiedname>neforce::is_rnd_iter_v</qualifiedname>
         <initializer>                            =
 
-<ref refid="conceptrandom__access__iterator" kindref="compound">random_access_iterator</ref>&lt;Iterator&gt; &amp;&amp;
+random_access_iterator&lt;Iterator&gt; &amp;&amp;
 
-<ref refid="group___iterator_category_checks_1ga7e90191894e0224a9597f070cd1dcb79" kindref="member">is_ranges_rnd_iter_v</ref>&lt;Iterator&gt;</initializer>
+is_ranges_rnd_iter_v&lt;Iterator&gt;</initializer>
         <briefdescription>
 <para>检查是否为随机访问迭代器 </para>
         </briefdescription>
@@ -366,20 +376,21 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" line="609" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" bodystart="609" bodyend="-1"/>
-        <referencedby refid="group___iterator_operation_1ga0ebe1ee99151c272bdedc1a48d148aa2" compoundref="iterator_8hpp" startline="106" endline="129">advance</referencedby>
+        <referencedby refid="group___iterator_operation_1gab75e73250466cd76e5b49ff5a95a6b2d" compoundref="iterator_8hpp" startline="106" endline="129">neforce::advance</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="group___iterator_category_checks_1ga1e5c556b6609e10c8d5d268d05c45e2b" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___iterator_category_checks_1ga0c4aa3f96d893f09341249c3018c0b6d" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_ranges_cot_iter_v</definition>
+        <definition>bool neforce::is_ranges_cot_iter_v</definition>
         <argsstring></argsstring>
         <name>is_ranges_cot_iter_v</name>
+        <qualifiedname>neforce::is_ranges_cot_iter_v</qualifiedname>
         <initializer>                                   =
-<ref refid="group___convertible_checks_1gadf5e75c4b12aa7982c5a97a14510ab35" kindref="member">is_convertible_v</ref>&lt;<ref refid="group___iterator_traits_1ga72a1e059640b5b980f882da92f94dd12" kindref="member">iter_category_t</ref>&lt;Iterator&gt;, <ref refid="structcontiguous__iterator__tag" kindref="compound">contiguous_iterator_tag</ref>&gt;</initializer>
+is_convertible_v&lt;iter_category_t&lt;Iterator&gt;, contiguous_iterator_tag&gt;</initializer>
         <briefdescription>
 <para>检查是否为范围连续迭代器 </para>
         </briefdescription>
@@ -389,25 +400,26 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" line="621" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" bodystart="621" bodyend="-1"/>
         <referencedby refid="classneforce_1_1lz4__compressor_1ab19465f76cfd0c241e03e3f5653a4d16" compoundref="lz4__compress_8hpp" startline="107" endline="114">neforce::lz4_compressor::compress</referencedby>
-        <referencedby refid="classzlib__compressor_1af998a7dcb0438ecb7e24aea2f5efb858" compoundref="zlib__compress_8hpp" startline="169" endline="178">zlib_compressor::compress</referencedby>
-        <referencedby refid="classzlib__compressor_1a27c509c99056483ab1a3201a0fdeb251" compoundref="zlib__compress_8hpp" startline="231" endline="242">zlib_compressor::decompress</referencedby>
+        <referencedby refid="classneforce_1_1zlib__compressor_1a44aa5ed18e33cf8d565a6ca560ea1862" compoundref="zlib__compress_8hpp" startline="169" endline="178">neforce::zlib_compressor::compress</referencedby>
+        <referencedby refid="classneforce_1_1zlib__compressor_1ac0bc7c8d01716c947bd9c784d44756bc" compoundref="zlib__compress_8hpp" startline="231" endline="242">neforce::zlib_compressor::decompress</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="group___iterator_category_checks_1ga226ddbdcd9adbe7bd858bf5f039de9e2" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___iterator_category_checks_1gaa30ae6d7c1dabf06634700c97559f6ff" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool is_cot_iter_v</definition>
+        <definition>bool neforce::is_cot_iter_v</definition>
         <argsstring></argsstring>
         <name>is_cot_iter_v</name>
+        <qualifiedname>neforce::is_cot_iter_v</qualifiedname>
         <initializer>                            =
 
-<ref refid="conceptrandom__access__iterator" kindref="compound">random_access_iterator</ref>&lt;Iterator&gt; &amp;&amp;
+random_access_iterator&lt;Iterator&gt; &amp;&amp;
 
-<ref refid="group___base_type_qualifier_check_1ga0a3172a26a55cf95dbe3c85e6611ebc0" kindref="member">is_lvalue_reference_v</ref>&lt;decltype(*_NEFORCE <ref refid="group___declval_tools_1ga7c6502597045c02b014ec72343367f5c" kindref="member">declval</ref>&lt;Iterator&amp;&gt;())&gt; &amp;&amp; <ref refid="group___type_traits_utilities_1gaa6c6bde5fd020a928e6d7b5fe8db7bb0" kindref="member">is_same_v</ref>&lt;<ref refid="group___remove_qualifiers_1gadb53d365fce2ddba102949e4ad3bf058" kindref="member">remove_cv_t</ref>&lt;Iterator&gt;, Iterator&gt; &amp;&amp;
-<ref refid="group___base_type_qualifier_check_1ga2c889f8cd634e14f11539d7bd0821744" kindref="member">is_pod_v</ref>&lt;<ref refid="group___iterator_traits_1gad620992f7bf5c8c7b5dfae7a3dd55781" kindref="member">iter_value_t</ref>&lt;Iterator&gt;&gt; &amp;&amp; <ref refid="group___iterator_category_checks_1ga1e5c556b6609e10c8d5d268d05c45e2b" kindref="member">is_ranges_cot_iter_v</ref>&lt;Iterator&gt;</initializer>
+is_lvalue_reference_v&lt;decltype(*_NEFORCE declval&lt;Iterator&amp;&gt;())&gt; &amp;&amp; is_same_v&lt;remove_cv_t&lt;Iterator&gt;, Iterator&gt; &amp;&amp;
+is_pod_v&lt;iter_value_t&lt;Iterator&gt;&gt; &amp;&amp; is_ranges_cot_iter_v&lt;Iterator&gt;</initializer>
         <briefdescription>
 <para>检查是否为连续迭代器 </para>
         </briefdescription>

@@ -11,8 +11,9 @@ var searchData=
   ['error_5fcategory_2ehpp_8',['error_category.hpp',['../error__category_8hpp.html',1,'']]],
   ['error_5fcode_2ehpp_9',['error_code.hpp',['../error__code_8hpp.html',1,'']]],
   ['error_5fcondition_2ehpp_10',['error_condition.hpp',['../error__condition_8hpp.html',1,'']]],
-  ['events_2ehpp_11',['events.hpp',['../events_8hpp.html',1,'']]],
-  ['exception_2ehpp_12',['exception.hpp',['../exception_8hpp.html',1,'']]],
-  ['exception_5fptr_2ehpp_13',['exception_ptr.hpp',['../exception__ptr_8hpp.html',1,'']]],
-  ['executor_2ehpp_14',['executor.hpp',['../executor_8hpp.html',1,'']]]
+  ['event_5fdispatcher_2ehpp_11',['event_dispatcher.hpp',['../event__dispatcher_8hpp.html',1,'']]],
+  ['events_2ehpp_12',['events.hpp',['../events_8hpp.html',1,'']]],
+  ['exception_2ehpp_13',['exception.hpp',['../exception_8hpp.html',1,'']]],
+  ['exception_5fptr_2ehpp_14',['exception_ptr.hpp',['../exception__ptr_8hpp.html',1,'']]],
+  ['executor_2ehpp_15',['executor.hpp',['../executor_8hpp.html',1,'']]]
 ];

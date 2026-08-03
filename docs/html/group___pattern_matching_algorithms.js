@@ -1,10 +1,10 @@
 var group___pattern_matching_algorithms =
 [
-    [ "find_end", "group___pattern_matching_algorithms.html#ga9997e6a5ac3609fc198d306e328229f4", null ],
-    [ "find_first_of", "group___pattern_matching_algorithms.html#ga6f541ef8f79986ada39f65ec055de358", null ],
-    [ "find_first_of", "group___pattern_matching_algorithms.html#ga1753228dbceb869e6fd58b39f1b2853d", null ],
-    [ "search", "group___pattern_matching_algorithms.html#gab41c0b2c56fb167b4a8677560491b3c3", null ],
-    [ "search", "group___pattern_matching_algorithms.html#ga07db4eea0c988d493904052c4839973e", null ],
-    [ "search_n", "group___pattern_matching_algorithms.html#ga9580524f56d452c88e066180e465af27", null ],
-    [ "search_n", "group___pattern_matching_algorithms.html#ga2f70389e3338d4062ffc0dcccd619383", null ]
+    [ "neforce::find_end", "group___pattern_matching_algorithms.html#ga9a9070e956472cac1622b61b0a688c23", null ],
+    [ "neforce::find_first_of", "group___pattern_matching_algorithms.html#ga8f08eaf6e75673291ab8700fde7e7e71", null ],
+    [ "neforce::find_first_of", "group___pattern_matching_algorithms.html#ga713f49c136f8aafb2aacca05a8ee6afa", null ],
+    [ "neforce::search", "group___pattern_matching_algorithms.html#gab5648c38836fdb200087fe9625c2c777", null ],
+    [ "neforce::search", "group___pattern_matching_algorithms.html#ga18f6cb26bacb2dd883721adf03af4ff7", null ],
+    [ "neforce::search_n", "group___pattern_matching_algorithms.html#gaab0ff0ae64f260b5b65182c49b9ee538", null ],
+    [ "neforce::search_n", "group___pattern_matching_algorithms.html#gab1b84d9ef65c0db0349e4f711bc9b518", null ]
 ];

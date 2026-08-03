@@ -1,0 +1,796 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: renderer类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classrenderer.html','','classrenderer-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">renderer类 参考<div class="ingroups"><a class="el" href="group___t_u_i.html">TUI</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>元素树渲染器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="renderer_8hpp_source.html">renderer.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:ab7acd1499764851d914ccb6d94c62482" id="r_ab7acd1499764851d914ccb6d94c62482"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ab7acd1499764851d914ccb6d94c62482">renderer</a> (<a class="el" href="classscreen.html">screen</a> &amp;target, const <a class="el" href="structtheme.html">theme</a> &amp;t, int term_w, int term_h)</td></tr>
+<tr class="memdesc:ab7acd1499764851d914ccb6d94c62482"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:ae605cecf04bef6e8e55b65de64a1ff39" id="r_ae605cecf04bef6e8e55b65de64a1ff39"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae605cecf04bef6e8e55b65de64a1ff39">render</a> (const <a class="el" href="classelement.html">element</a> &amp;tree, const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="structlayout__rect.html">layout_rect</a> &gt; &amp;layout, bool has_focus)</td></tr>
+<tr class="memdesc:ae605cecf04bef6e8e55b65de64a1ff39"><td class="mdescLeft">&#160;</td><td class="mdescRight">渲染元素树  <br /></td></tr>
+<tr class="memitem:a7a261da5db098fca2e0664f33c8dfb26" id="r_a7a261da5db098fca2e0664f33c8dfb26"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7a261da5db098fca2e0664f33c8dfb26">set_term_size</a> (int w, int h)</td></tr>
+<tr class="memdesc:a7a261da5db098fca2e0664f33c8dfb26"><td class="mdescLeft">&#160;</td><td class="mdescRight">更新终端尺寸  <br /></td></tr>
+<tr class="memitem:a45d0b53073a565d5d8968e282d76fd9f" id="r_a45d0b53073a565d5d8968e282d76fd9f"><td class="memItemLeft">const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="structscrollbar__hit.html">scrollbar_hit</a> &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a45d0b53073a565d5d8968e282d76fd9f">scrollbar_hits</a> () const noexcept</td></tr>
+<tr class="memdesc:a45d0b53073a565d5d8968e282d76fd9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取本次渲染收集的滚动条命中信息  <br /></td></tr>
+<tr class="memitem:a549a3e4cc76b6b0d3cbc14e1af2cf80e" id="r_a549a3e4cc76b6b0d3cbc14e1af2cf80e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a549a3e4cc76b6b0d3cbc14e1af2cf80e">render_text_block</a> (int x, int y, int w, int h, const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;text, const tui::style &amp;<a class="el" href="structstyle.html">style</a>, <a class="el" href="structstyle.html#a8c62373eef9123ce93b67f9b57a9c77e">style::wrap_mode</a> wm, int *out_end_x=nullptr, int *out_end_y=nullptr)</td></tr>
+<tr class="memdesc:a549a3e4cc76b6b0d3cbc14e1af2cf80e"><td class="mdescLeft">&#160;</td><td class="mdescRight">渲染文本块  <br /></td></tr>
+<tr class="memitem:a2c3f5f3d73b71b9ca67f718805a7a076" id="r_a2c3f5f3d73b71b9ca67f718805a7a076"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2c3f5f3d73b71b9ca67f718805a7a076">apply_border</a> (int x, int y, int w, int h, enum <a class="el" href="structstyle.html#ae88cb9941be72e4e00568ad4da72e921">style::border</a> <a class="el" href="group___t_u_i.html#ga996d09ad43032b0cdbab45ef5de0f391">border</a>, const _NEFORCE <a class="el" href="classcolor.html">color</a> &amp;c)</td></tr>
+<tr class="memdesc:a2c3f5f3d73b71b9ca67f718805a7a076"><td class="mdescLeft">&#160;</td><td class="mdescRight">绘制边框  <br /></td></tr>
+<tr class="memitem:ab0bfb85dedbf6eeae4fc8ca1d6517a9e" id="r_ab0bfb85dedbf6eeae4fc8ca1d6517a9e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab0bfb85dedbf6eeae4fc8ca1d6517a9e">apply_style_to_cell</a> (<a class="el" href="structcell.html">cell</a> &amp;<a class="el" href="structcell.html">cell</a>, const <a class="el" href="structstyle.html">style</a> &amp;<a class="el" href="structstyle.html">style</a>)</td></tr>
+<tr class="memdesc:ab0bfb85dedbf6eeae4fc8ca1d6517a9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">将样式字段应用到 cell  <br /></td></tr>
+<tr class="memitem:ac9b2a51b89102b2e7741490a3b4542c8" id="r_ac9b2a51b89102b2e7741490a3b4542c8"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac9b2a51b89102b2e7741490a3b4542c8">render_button</a> (int x, int y, int w, int h, const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;label, const <a class="el" href="structstyle.html">style</a> &amp;<a class="el" href="structstyle.html">style</a>, const tui::theme &amp;<a class="el" href="structtheme.html">theme</a>, <a class="el" href="structstyle.html#a50690ce0051edce19b935936e2cf7797">style::variant</a> <a class="el" href="structvariant.html">variant</a>)</td></tr>
+<tr class="memdesc:ac9b2a51b89102b2e7741490a3b4542c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">渲染按钮  <br /></td></tr>
+<tr class="memitem:a8cdc27a5fbb45b3802ede88b978a3689" id="r_a8cdc27a5fbb45b3802ede88b978a3689"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8cdc27a5fbb45b3802ede88b978a3689">render_checkbox</a> (int x, int y, int w, int h, const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;label, bool checked, const <a class="el" href="structstyle.html">style</a> &amp;<a class="el" href="structstyle.html">style</a>)</td></tr>
+<tr class="memdesc:a8cdc27a5fbb45b3802ede88b978a3689"><td class="mdescLeft">&#160;</td><td class="mdescRight">渲染复选框  <br /></td></tr>
+<tr class="memitem:a8970dd5032c00e6c3478d9b3f8289d12" id="r_a8970dd5032c00e6c3478d9b3f8289d12"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8970dd5032c00e6c3478d9b3f8289d12">render_separator</a> (int x, int y, int w)</td></tr>
+<tr class="memdesc:a8970dd5032c00e6c3478d9b3f8289d12"><td class="mdescLeft">&#160;</td><td class="mdescRight">渲染分隔线  <br /></td></tr>
+<tr class="memitem:accfae11e88f63e3dd8c0e328d7eab045" id="r_accfae11e88f63e3dd8c0e328d7eab045"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#accfae11e88f63e3dd8c0e328d7eab045">apply_clear</a> (int x, int y, int w, int h)</td></tr>
+<tr class="memdesc:accfae11e88f63e3dd8c0e328d7eab045"><td class="mdescLeft">&#160;</td><td class="mdescRight">清除指定区域  <br /></td></tr>
+<tr class="memitem:ac27e30968c0bbf612fd582e6cef61d0e" id="r_ac27e30968c0bbf612fd582e6cef61d0e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac27e30968c0bbf612fd582e6cef61d0e">apply_text</a> (int x, int y, const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;text, const <a class="el" href="structstyle.html">style</a> &amp;<a class="el" href="structstyle.html">style</a>)</td></tr>
+<tr class="memdesc:ac27e30968c0bbf612fd582e6cef61d0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">写入文本  <br /></td></tr>
+<tr class="memitem:a26abdeadb62f6eb88667b2e9d0c83553" id="r_a26abdeadb62f6eb88667b2e9d0c83553"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a26abdeadb62f6eb88667b2e9d0c83553">apply_text</a> (int x, int y, const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;text, const <a class="el" href="structstyle.html">style</a> &amp;<a class="el" href="structstyle.html">style</a>, int max_x)</td></tr>
+<tr class="memdesc:a26abdeadb62f6eb88667b2e9d0c83553"><td class="mdescLeft">&#160;</td><td class="mdescRight">写入文本  <br /></td></tr>
+<tr class="memitem:ad5e7d8279e4aa033a92780e0fd9084ea" id="r_ad5e7d8279e4aa033a92780e0fd9084ea"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad5e7d8279e4aa033a92780e0fd9084ea">clear_element_area</a> (const <a class="el" href="classelement.html">element</a> &amp;el, const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="structlayout__rect.html">layout_rect</a> &gt; &amp;layout, int &amp;idx)</td></tr>
+<tr class="memdesc:ad5e7d8279e4aa033a92780e0fd9084ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">清除元素树中所有叶子元素区域  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>元素树渲染器 </p>
+<p>将元素树与布局结果渲染到 screen 帧缓冲区。 负责文本换行、边框绘制、样式应用、滚动条绘制等。 </p>
+
+<p class="definition">在文件 <a class="el" href="renderer_8hpp_source.html">renderer.hpp</a> 第 <a class="el" href="renderer_8hpp_source.html#l00051">51</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="ab7acd1499764851d914ccb6d94c62482" name="ab7acd1499764851d914ccb6d94c62482"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7acd1499764851d914ccb6d94c62482">&#9670;&#160;</a></span>renderer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">renderer::renderer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classscreen.html">screen</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>target</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structtheme.html">theme</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>term_w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>term_h</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target</td><td>渲染目标 screen </td></tr>
+    <tr><td class="paramname">t</td><td>主题 </td></tr>
+    <tr><td class="paramname">term_w</td><td>终端宽度 </td></tr>
+    <tr><td class="paramname">term_h</td><td>终端高度 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a2c3f5f3d73b71b9ca67f718805a7a076" name="a2c3f5f3d73b71b9ca67f718805a7a076"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c3f5f3d73b71b9ca67f718805a7a076">&#9670;&#160;</a></span>apply_border()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void renderer::apply_border </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>h</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">enum <a class="el" href="structstyle.html#ae88cb9941be72e4e00568ad4da72e921">style::border</a></td>          <td class="paramname"><span class="paramname"><em>border</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const _NEFORCE <a class="el" href="classcolor.html">color</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>c</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>绘制边框 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>起始列 </td></tr>
+    <tr><td class="paramname">y</td><td>起始行 </td></tr>
+    <tr><td class="paramname">w</td><td>宽度 </td></tr>
+    <tr><td class="paramname">h</td><td>高度 </td></tr>
+    <tr><td class="paramname">border</td><td>边框样式 </td></tr>
+    <tr><td class="paramname">c</td><td>边框颜色 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="element_8hpp_source.html#l00349">border()</a>.</p>
+
+</div>
+</div>
+<a id="accfae11e88f63e3dd8c0e328d7eab045" name="accfae11e88f63e3dd8c0e328d7eab045"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accfae11e88f63e3dd8c0e328d7eab045">&#9670;&#160;</a></span>apply_clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void renderer::apply_clear </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>h</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>清除指定区域 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>起始列 </td></tr>
+    <tr><td class="paramname">y</td><td>起始行 </td></tr>
+    <tr><td class="paramname">w</td><td>宽度 </td></tr>
+    <tr><td class="paramname">h</td><td>高度 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab0bfb85dedbf6eeae4fc8ca1d6517a9e" name="ab0bfb85dedbf6eeae4fc8ca1d6517a9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0bfb85dedbf6eeae4fc8ca1d6517a9e">&#9670;&#160;</a></span>apply_style_to_cell()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void renderer::apply_style_to_cell </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structcell.html">cell</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>cell</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structstyle.html">style</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>style</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>将样式字段应用到 cell </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cell</td><td>目标 cell </td></tr>
+    <tr><td class="paramname">style</td><td>样式 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac27e30968c0bbf612fd582e6cef61d0e" name="ac27e30968c0bbf612fd582e6cef61d0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac27e30968c0bbf612fd582e6cef61d0e">&#9670;&#160;</a></span>apply_text() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void renderer::apply_text </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>text</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structstyle.html">style</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>style</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>写入文本 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>起始列 </td></tr>
+    <tr><td class="paramname">y</td><td>行 </td></tr>
+    <tr><td class="paramname">text</td><td>文本 </td></tr>
+    <tr><td class="paramname">style</td><td>样式 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a26abdeadb62f6eb88667b2e9d0c83553" name="a26abdeadb62f6eb88667b2e9d0c83553"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26abdeadb62f6eb88667b2e9d0c83553">&#9670;&#160;</a></span>apply_text() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void renderer::apply_text </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>text</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structstyle.html">style</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>style</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>max_x</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>写入文本 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>起始列 </td></tr>
+    <tr><td class="paramname">y</td><td>行 </td></tr>
+    <tr><td class="paramname">text</td><td>文本 </td></tr>
+    <tr><td class="paramname">style</td><td>样式 </td></tr>
+    <tr><td class="paramname">max_x</td><td>最大列（超出则截断） </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad5e7d8279e4aa033a92780e0fd9084ea" name="ad5e7d8279e4aa033a92780e0fd9084ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5e7d8279e4aa033a92780e0fd9084ea">&#9670;&#160;</a></span>clear_element_area()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void renderer::clear_element_area </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classelement.html">element</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>el</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="structlayout__rect.html">layout_rect</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>layout</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;</td>          <td class="paramname"><span class="paramname"><em>idx</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>清除元素树中所有叶子元素区域 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">el</td><td>元素树根 </td></tr>
+    <tr><td class="paramname">layout</td><td>布局结果 </td></tr>
+    <tr><td class="paramname">idx</td><td>当前布局索引 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae605cecf04bef6e8e55b65de64a1ff39" name="ae605cecf04bef6e8e55b65de64a1ff39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae605cecf04bef6e8e55b65de64a1ff39">&#9670;&#160;</a></span>render()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void renderer::render </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classelement.html">element</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>tree</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="structlayout__rect.html">layout_rect</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>layout</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>has_focus</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>渲染元素树 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tree</td><td>元素树根节点 </td></tr>
+    <tr><td class="paramname">layout</td><td>布局结果 </td></tr>
+    <tr><td class="paramname">has_focus</td><td>当前是否有焦点组件 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac9b2a51b89102b2e7741490a3b4542c8" name="ac9b2a51b89102b2e7741490a3b4542c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9b2a51b89102b2e7741490a3b4542c8">&#9670;&#160;</a></span>render_button()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void renderer::render_button </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>h</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>label</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structstyle.html">style</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>style</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const tui::theme &amp;</td>          <td class="paramname"><span class="paramname"><em>theme</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structstyle.html#a50690ce0051edce19b935936e2cf7797">style::variant</a></td>          <td class="paramname"><span class="paramname"><em>variant</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>渲染按钮 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>起始列 </td></tr>
+    <tr><td class="paramname">y</td><td>起始行 </td></tr>
+    <tr><td class="paramname">w</td><td>宽度 </td></tr>
+    <tr><td class="paramname">h</td><td>高度 </td></tr>
+    <tr><td class="paramname">label</td><td>按钮文本 </td></tr>
+    <tr><td class="paramname">style</td><td>样式 </td></tr>
+    <tr><td class="paramname">theme</td><td>主题 </td></tr>
+    <tr><td class="paramname">variant</td><td>按钮变体 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8cdc27a5fbb45b3802ede88b978a3689" name="a8cdc27a5fbb45b3802ede88b978a3689"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cdc27a5fbb45b3802ede88b978a3689">&#9670;&#160;</a></span>render_checkbox()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void renderer::render_checkbox </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>h</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>label</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>checked</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structstyle.html">style</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>style</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>渲染复选框 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>起始列 </td></tr>
+    <tr><td class="paramname">y</td><td>起始行 </td></tr>
+    <tr><td class="paramname">w</td><td>宽度 </td></tr>
+    <tr><td class="paramname">h</td><td>高度 </td></tr>
+    <tr><td class="paramname">label</td><td>标签文本 </td></tr>
+    <tr><td class="paramname">checked</td><td>是否选中 </td></tr>
+    <tr><td class="paramname">style</td><td>样式 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8970dd5032c00e6c3478d9b3f8289d12" name="a8970dd5032c00e6c3478d9b3f8289d12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8970dd5032c00e6c3478d9b3f8289d12">&#9670;&#160;</a></span>render_separator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void renderer::render_separator </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>w</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>渲染分隔线 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>起始列 </td></tr>
+    <tr><td class="paramname">y</td><td>行 </td></tr>
+    <tr><td class="paramname">w</td><td>宽度 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a549a3e4cc76b6b0d3cbc14e1af2cf80e" name="a549a3e4cc76b6b0d3cbc14e1af2cf80e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a549a3e4cc76b6b0d3cbc14e1af2cf80e">&#9670;&#160;</a></span>render_text_block()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void renderer::render_text_block </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>h</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>text</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const tui::style &amp;</td>          <td class="paramname"><span class="paramname"><em>style</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structstyle.html#a8c62373eef9123ce93b67f9b57a9c77e">style::wrap_mode</a></td>          <td class="paramname"><span class="paramname"><em>wm</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>out_end_x</em></span><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>out_end_y</em></span><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>渲染文本块 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>起始列 </td></tr>
+    <tr><td class="paramname">y</td><td>起始行 </td></tr>
+    <tr><td class="paramname">w</td><td>宽度约束 </td></tr>
+    <tr><td class="paramname">h</td><td>高度约束 </td></tr>
+    <tr><td class="paramname">text</td><td>文本内容 </td></tr>
+    <tr><td class="paramname">style</td><td>样式 </td></tr>
+    <tr><td class="paramname">wm</td><td>换行模式 </td></tr>
+    <tr><td class="paramname">out_end_x</td><td>输出结束列 </td></tr>
+    <tr><td class="paramname">out_end_y</td><td>输出结束行 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a45d0b53073a565d5d8968e282d76fd9f" name="a45d0b53073a565d5d8968e282d76fd9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45d0b53073a565d5d8968e282d76fd9f">&#9670;&#160;</a></span>scrollbar_hits()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="structscrollbar__hit.html">scrollbar_hit</a> &gt; &amp; renderer::scrollbar_hits </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取本次渲染收集的滚动条命中信息 </p>
+<dl class="section return"><dt>返回</dt><dd>滚动条命中列表 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="renderer_8hpp_source.html">renderer.hpp</a> 第 <a class="el" href="renderer_8hpp_source.html#l00084">84</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a7a261da5db098fca2e0664f33c8dfb26" name="a7a261da5db098fca2e0664f33c8dfb26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a261da5db098fca2e0664f33c8dfb26">&#9670;&#160;</a></span>set_term_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void renderer::set_term_size </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>h</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>更新终端尺寸 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">w</td><td>新宽度 </td></tr>
+    <tr><td class="paramname">h</td><td>新高度 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="renderer_8hpp_source.html">renderer.hpp</a> 第 <a class="el" href="renderer_8hpp_source.html#l00075">75</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="renderer_8hpp_source.html">renderer.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classrenderer.html">renderer</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

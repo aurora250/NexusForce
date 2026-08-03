@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['平台差异_0',['平台差异',['../group___u_t_f.html#platform_differences',1,'']]],
-  ['平台检测_1',['平台检测',['../group___platform_detection.html',1,'']]],
-  ['平台相关类型_2',['平台相关类型',['../group___platform_dependent_types.html',1,'']]],
-  ['平坦哈希表_3',['平坦哈希表',['../group___flat_hash_table.html',1,'']]]
+  ['布尔值同义词_0',['布尔值同义词',['../group___yaml_config.html#boolean_synonyms',1,'']]],
+  ['布隆过滤器原理_1',['布隆过滤器原理',['../group___bloom_filter.html#bloom_filter_principles',1,'']]],
+  ['布隆过滤器_2',['布隆过滤器',['../group___bloom_filter.html',1,'']]]
 ];

@@ -1,0 +1,298 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1http_1_1token__bucket__filter" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>neforce::http::token_bucket_filter</compoundname>
+    <basecompoundref refid="classneforce_1_1http_1_1http__filter" prot="public" virt="non-virtual">neforce::http::http_filter</basecompoundref>
+    <includes refid="rate__limiter_8hpp" local="no">rate_limiter.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1token__bucket__filter_1a1e4834fac8f6298dba09fb0daa9ff4d4" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1http_1_1token__bucket__limiter" kindref="compound">token_bucket_limiter</ref></type>
+        <definition>token_bucket_limiter neforce::http::token_bucket_filter::limiter_</definition>
+        <argsstring></argsstring>
+        <name>limiter_</name>
+        <qualifiedname>neforce::http::token_bucket_filter::limiter_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="137" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="137" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1token__bucket__filter_1a3a30daab9b787aa6ad05de17fe86dca4" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double neforce::http::token_bucket_filter::default_rate</definition>
+        <argsstring></argsstring>
+        <name>default_rate</name>
+        <qualifiedname>neforce::http::token_bucket_filter::default_rate</qualifiedname>
+        <initializer>{10.0}</initializer>
+        <briefdescription>
+<para>默认每秒请求数（每IP） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="140" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="140" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1token__bucket__filter_1a529f20da029d2be947e0402c93bee147" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double neforce::http::token_bucket_filter::default_burst</definition>
+        <argsstring></argsstring>
+        <name>default_burst</name>
+        <qualifiedname>neforce::http::token_bucket_filter::default_burst</qualifiedname>
+        <initializer>{20.0}</initializer>
+        <briefdescription>
+<para>默认突发容量（每IP） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="141" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="141" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1token__bucket__filter_1aaa2bbb401c5446beb142f5e423b89a6c" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::http::token_bucket_filter::per_route</definition>
+        <argsstring></argsstring>
+        <name>per_route</name>
+        <qualifiedname>neforce::http::token_bucket_filter::per_route</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>是否对每个路由单独限流 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="142" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="142" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1token__bucket__filter_1a06ba1d3faf5e495736a18281317e82e9" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::http::token_bucket_filter::enabled</definition>
+        <argsstring></argsstring>
+        <name>enabled</name>
+        <qualifiedname>neforce::http::token_bucket_filter::enabled</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+<para>是否启用 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="143" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="143" bodyend="143"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1token__bucket__filter_1a5f957ae6e8bcfa22e3f3d6621e4af3e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::token_bucket_filter::token_bucket_filter</definition>
+        <argsstring>()=default</argsstring>
+        <name>token_bucket_filter</name>
+        <qualifiedname>neforce::http::token_bucket_filter::token_bucket_filter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="145" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1token__bucket__filter_1ab5eb7f452c06cbbdcf119749dfc8ff25" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::token_bucket_filter::token_bucket_filter</definition>
+        <argsstring>(double rate, double burst)</argsstring>
+        <name>token_bucket_filter</name>
+        <qualifiedname>neforce::http::token_bucket_filter::token_bucket_filter</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>rate</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>burst</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="147" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="147" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1token__bucket__filter_1af376dbb2bb29252c039cb5193cd184fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::http::token_bucket_filter::pre_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response) override</argsstring>
+        <name>pre_filter</name>
+        <qualifiedname>neforce::http::token_bucket_filter::pre_filter</qualifiedname>
+        <reimplements refid="classneforce_1_1http_1_1http__filter_1a66c5af31a812075314a85ef38b9d55eb">pre_filter</reimplements>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>预处理方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>返回false表示中断后续处理</para>
+</simplesect>
+在请求处理前调用，可以检查请求、修改请求或提前返回响应。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="151" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1token__bucket__filter_1afd61d8ee1ca12a03482d30085e277c6b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void neforce::http::token_bucket_filter::do_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response) override</argsstring>
+        <name>do_filter</name>
+        <qualifiedname>neforce::http::token_bucket_filter::do_filter</qualifiedname>
+        <reimplements refid="classneforce_1_1http_1_1http__filter_1a354b28748f728effc3a651e7c9fa96a6">do_filter</reimplements>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>核心过滤方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+执行实际的过滤逻辑。通常由具体处理器实现， 中间件过滤器可能不实现此方法。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="152" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="152" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1token__bucket__filter_1ab05916e8f7442d6e8a0fe2d3bc771a76" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::token_bucket_filter::cleanup_expired</definition>
+        <argsstring>(seconds max_age=seconds{300})</argsstring>
+        <name>cleanup_expired</name>
+        <qualifiedname>neforce::http::token_bucket_filter::cleanup_expired</qualifiedname>
+        <param>
+          <type><ref refid="group___duration_1ga8254730759b00eba24c4a01b0c8e10c3" kindref="member">seconds</ref></type>
+          <declname>max_age</declname>
+          <defval><ref refid="group___duration_1ga8254730759b00eba24c4a01b0c8e10c3" kindref="member">seconds</ref>{300}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="154" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1token__bucket__filter_1a152efaaa932a4ce148108d2965dd00c7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::http::token_bucket_filter::name</definition>
+        <argsstring>() const override</argsstring>
+        <name>name</name>
+        <qualifiedname>neforce::http::token_bucket_filter::name</qualifiedname>
+        <reimplements refid="classneforce_1_1http_1_1http__filter_1a16dc9ccb76e7dccf41f4ae732ea01afe">name</reimplements>
+        <briefdescription>
+<para>获取过滤器名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>过滤器名称 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="156" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="156" bodyend="156"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>令牌桶HTTP限流过滤器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>在pre_filter阶段基于客户端IP和路由进行限流。 默认配置：每秒10请求，突发20请求，每IP独立限流。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>neforce::http::http_filter</label>
+        <link refid="classneforce_1_1http_1_1http__filter"/>
+      </node>
+      <node id="1">
+        <label>neforce::http::token_bucket_filter</label>
+        <link refid="classneforce_1_1http_1_1token__bucket__filter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>neforce::http::http_filter</label>
+        <link refid="classneforce_1_1http_1_1http__filter"/>
+      </node>
+      <node id="1">
+        <label>neforce::http::token_bucket_filter</label>
+        <link refid="classneforce_1_1http_1_1token__bucket__filter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="135" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="135" bodyend="161"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1http_1_1token__bucket__filter_1ab05916e8f7442d6e8a0fe2d3bc771a76" prot="public" virt="non-virtual"><scope>neforce::http::token_bucket_filter</scope><name>cleanup_expired</name></member>
+      <member refid="classneforce_1_1http_1_1token__bucket__filter_1a529f20da029d2be947e0402c93bee147" prot="public" virt="non-virtual"><scope>neforce::http::token_bucket_filter</scope><name>default_burst</name></member>
+      <member refid="classneforce_1_1http_1_1token__bucket__filter_1a3a30daab9b787aa6ad05de17fe86dca4" prot="public" virt="non-virtual"><scope>neforce::http::token_bucket_filter</scope><name>default_rate</name></member>
+      <member refid="classneforce_1_1http_1_1token__bucket__filter_1afd61d8ee1ca12a03482d30085e277c6b" prot="public" virt="virtual"><scope>neforce::http::token_bucket_filter</scope><name>do_filter</name></member>
+      <member refid="classneforce_1_1http_1_1token__bucket__filter_1a06ba1d3faf5e495736a18281317e82e9" prot="public" virt="non-virtual"><scope>neforce::http::token_bucket_filter</scope><name>enabled</name></member>
+      <member refid="classneforce_1_1http_1_1token__bucket__filter_1a1e4834fac8f6298dba09fb0daa9ff4d4" prot="private" virt="non-virtual"><scope>neforce::http::token_bucket_filter</scope><name>limiter_</name></member>
+      <member refid="classneforce_1_1http_1_1token__bucket__filter_1a152efaaa932a4ce148108d2965dd00c7" prot="public" virt="virtual"><scope>neforce::http::token_bucket_filter</scope><name>name</name></member>
+      <member refid="classneforce_1_1http_1_1token__bucket__filter_1aaa2bbb401c5446beb142f5e423b89a6c" prot="public" virt="non-virtual"><scope>neforce::http::token_bucket_filter</scope><name>per_route</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter_1a14ac82a85eee7e20c9d912f97b50535f" prot="public" virt="virtual"><scope>neforce::http::token_bucket_filter</scope><name>post_filter</name></member>
+      <member refid="classneforce_1_1http_1_1token__bucket__filter_1af376dbb2bb29252c039cb5193cd184fc" prot="public" virt="virtual"><scope>neforce::http::token_bucket_filter</scope><name>pre_filter</name></member>
+      <member refid="classneforce_1_1http_1_1token__bucket__filter_1a5f957ae6e8bcfa22e3f3d6621e4af3e0" prot="public" virt="non-virtual"><scope>neforce::http::token_bucket_filter</scope><name>token_bucket_filter</name></member>
+      <member refid="classneforce_1_1http_1_1token__bucket__filter_1ab5eb7f452c06cbbdcf119749dfc8ff25" prot="public" virt="non-virtual"><scope>neforce::http::token_bucket_filter</scope><name>token_bucket_filter</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter_1a157ba2513278a823db4ea1b36be341f0" prot="public" virt="virtual"><scope>neforce::http::token_bucket_filter</scope><name>~http_filter</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

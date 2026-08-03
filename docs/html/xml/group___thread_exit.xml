@@ -3,15 +3,16 @@
   <compounddef id="group___thread_exit" kind="group">
     <compoundname>ThreadExit</compoundname>
     <title>线程退出回调</title>
-    <innerclass refid="structthread__exit__listener" prot="public">thread_exit_listener</innerclass>
-    <innerclass refid="classthread__exit__notifier" prot="public">thread_exit_notifier</innerclass>
-    <innerclass refid="structthread__exit__elt" prot="public">thread_exit_elt</innerclass>
+    <innerclass refid="structneforce_1_1thread__exit__listener" prot="public">neforce::thread_exit_listener</innerclass>
+    <innerclass refid="classneforce_1_1thread__exit__notifier" prot="public">neforce::thread_exit_notifier</innerclass>
+    <innerclass refid="structneforce_1_1thread__exit__elt" prot="public">neforce::thread_exit_elt</innerclass>
     <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="group___thread_exit_1ga5fc0baa1aebebd461babfb58c9f37c48" prot="public" static="no">
+      <memberdef kind="typedef" id="group___thread_exit_1ga923436b5fc72c8987a54f9900e01e4a0" prot="public" static="no">
         <type>void(*)(void *)</type>
-        <definition>using thread_exit_callback_t = void (*)(void*)</definition>
+        <definition>using neforce::thread_exit_callback_t = void (*)(void*)</definition>
         <argsstring></argsstring>
         <name>thread_exit_callback_t</name>
+        <qualifiedname>neforce::thread_exit_callback_t</qualifiedname>
         <briefdescription>
 <para>线程退出回调类型 </para>
         </briefdescription>
@@ -23,17 +24,18 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___thread_exit_1ga61ee52a597905b57d6fa90f45918bdfa" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___thread_exit_1gab404c2196764167ef4a99fa9ccd7d812" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void thread_exit_register</definition>
+        <definition>void neforce::thread_exit_register</definition>
         <argsstring>(thread_exit_elt *elt, thread_exit_callback_t callback) noexcept</argsstring>
         <name>thread_exit_register</name>
+        <qualifiedname>neforce::thread_exit_register</qualifiedname>
         <param>
-          <type><ref refid="structthread__exit__elt" kindref="compound">thread_exit_elt</ref> *</type>
+          <type>thread_exit_elt *</type>
           <declname>elt</declname>
         </param>
         <param>
-          <type><ref refid="group___thread_exit_1ga5fc0baa1aebebd461babfb58c9f37c48" kindref="member">thread_exit_callback_t</ref></type>
+          <type>thread_exit_callback_t</type>
           <declname>callback</declname>
         </param>
         <briefdescription>
@@ -62,6 +64,8 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_register.hpp" line="53" column="7" declfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_register.hpp" declline="53" declcolumn="7"/>
+        <references refid="group___thread_exit_1gab404c2196764167ef4a99fa9ccd7d812">neforce::thread_exit_register</references>
+        <referencedby refid="group___thread_exit_1gab404c2196764167ef4a99fa9ccd7d812">neforce::thread_exit_register</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

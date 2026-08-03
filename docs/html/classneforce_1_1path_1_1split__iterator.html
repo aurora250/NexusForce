@@ -1,0 +1,419 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::path::split_iterator类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1path_1_1split__iterator.html','','classneforce_1_1path_1_1split__iterator-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::path::split_iterator类 参考</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>路径分割迭代器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="path_8hpp_source.html">path.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a8df721155a05809956643dadc86bd8ca" id="r_a8df721155a05809956643dadc86bd8ca"><td class="memItemLeft"><a id="a8df721155a05809956643dadc86bd8ca" name="a8df721155a05809956643dadc86bd8ca"></a>
+using&#160;</td><td class="memItemRight"><b>value_type</b> = <a class="el" href="group___string_view.html#ga5a6e8b9da034ce8d4818231c4e005eff">string_view</a></td></tr>
+<tr class="memdesc:a8df721155a05809956643dadc86bd8ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">值类型 <br /></td></tr>
+<tr class="memitem:adbabc9a094154e2bdb42c9f74d0e3d93" id="r_adbabc9a094154e2bdb42c9f74d0e3d93"><td class="memItemLeft"><a id="adbabc9a094154e2bdb42c9f74d0e3d93" name="adbabc9a094154e2bdb42c9f74d0e3d93"></a>
+using&#160;</td><td class="memItemRight"><b>reference</b> = <a class="el" href="#a8df721155a05809956643dadc86bd8ca">value_type</a></td></tr>
+<tr class="memdesc:adbabc9a094154e2bdb42c9f74d0e3d93"><td class="mdescLeft">&#160;</td><td class="mdescRight">引用类型 <br /></td></tr>
+<tr class="memitem:a296c51d25c9d4562410a3a6095911d63" id="r_a296c51d25c9d4562410a3a6095911d63"><td class="memItemLeft"><a id="a296c51d25c9d4562410a3a6095911d63" name="a296c51d25c9d4562410a3a6095911d63"></a>
+using&#160;</td><td class="memItemRight"><b>pointer</b> = void</td></tr>
+<tr class="memdesc:a296c51d25c9d4562410a3a6095911d63"><td class="mdescLeft">&#160;</td><td class="mdescRight">指针类型 <br /></td></tr>
+<tr class="memitem:a1e4da4c7b09a9cbe8498a253442a8569" id="r_a1e4da4c7b09a9cbe8498a253442a8569"><td class="memItemLeft"><a id="a1e4da4c7b09a9cbe8498a253442a8569" name="a1e4da4c7b09a9cbe8498a253442a8569"></a>
+using&#160;</td><td class="memItemRight"><b>iterator_category</b> = <a class="el" href="structneforce_1_1forward__iterator__tag.html">forward_iterator_tag</a></td></tr>
+<tr class="memdesc:a1e4da4c7b09a9cbe8498a253442a8569"><td class="mdescLeft">&#160;</td><td class="mdescRight">迭代器类别 <br /></td></tr>
+<tr class="memitem:a89300676bb9fa0a516ec07f7ada9376a" id="r_a89300676bb9fa0a516ec07f7ada9376a"><td class="memItemLeft"><a id="a89300676bb9fa0a516ec07f7ada9376a" name="a89300676bb9fa0a516ec07f7ada9376a"></a>
+using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" href="group___platform_dependent_types.html#gab2c4bc5144496796ce8a7feed7b8ad58">ptrdiff_t</a></td></tr>
+<tr class="memdesc:a89300676bb9fa0a516ec07f7ada9376a"><td class="mdescLeft">&#160;</td><td class="mdescRight">差值类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:acc93463d235a1285716d84c0a4a1b475" id="r_acc93463d235a1285716d84c0a4a1b475"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#acc93463d235a1285716d84c0a4a1b475">split_iterator</a> () noexcept=default</td></tr>
+<tr class="memdesc:acc93463d235a1285716d84c0a4a1b475"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
+<tr class="memitem:ad4c98d70f1870436a1315f185cbc3b6b" id="r_ad4c98d70f1870436a1315f185cbc3b6b"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ad4c98d70f1870436a1315f185cbc3b6b">split_iterator</a> (const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> *<a class="el" href="classneforce_1_1path.html#a690b9fff42b2a7cfcc723c73003369b4">path</a>, const <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> pos=0)</td></tr>
+<tr class="memdesc:ad4c98d70f1870436a1315f185cbc3b6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:aaa805e5eb91596fd1490513afbe10bb1" id="r_aaa805e5eb91596fd1490513afbe10bb1"><td class="memItemLeft"><a class="el" href="#adbabc9a094154e2bdb42c9f74d0e3d93">reference</a>&#160;</td><td class="memItemRight"><a class="el" href="#aaa805e5eb91596fd1490513afbe10bb1">operator*</a> () const noexcept</td></tr>
+<tr class="memdesc:aaa805e5eb91596fd1490513afbe10bb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">解引用操作符  <br /></td></tr>
+<tr class="memitem:a529434388871b11954ab58a9600722aa" id="r_a529434388871b11954ab58a9600722aa"><td class="memItemLeft"><a class="el" href="#acc93463d235a1285716d84c0a4a1b475">split_iterator</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a529434388871b11954ab58a9600722aa">operator++</a> ()</td></tr>
+<tr class="memdesc:a529434388871b11954ab58a9600722aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">前置递增操作符  <br /></td></tr>
+<tr class="memitem:a39f39e470253786eddceaf64fe64f34f" id="r_a39f39e470253786eddceaf64fe64f34f"><td class="memItemLeft"><a class="el" href="#acc93463d235a1285716d84c0a4a1b475">split_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a39f39e470253786eddceaf64fe64f34f">operator++</a> (int)</td></tr>
+<tr class="memdesc:a39f39e470253786eddceaf64fe64f34f"><td class="mdescLeft">&#160;</td><td class="mdescRight">后置递增操作符  <br /></td></tr>
+<tr class="memitem:a5d0d4a3e27f8b40850feed872ee2fdce" id="r_a5d0d4a3e27f8b40850feed872ee2fdce"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a5d0d4a3e27f8b40850feed872ee2fdce">operator==</a> (const <a class="el" href="#acc93463d235a1285716d84c0a4a1b475">split_iterator</a> &amp;b) const noexcept</td></tr>
+<tr class="memdesc:a5d0d4a3e27f8b40850feed872ee2fdce"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较操作符  <br /></td></tr>
+<tr class="memitem:a01527e7c40d2463a1279fb5ec53a80f9" id="r_a01527e7c40d2463a1279fb5ec53a80f9"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a01527e7c40d2463a1279fb5ec53a80f9">operator!=</a> (const <a class="el" href="#acc93463d235a1285716d84c0a4a1b475">split_iterator</a> &amp;b) const noexcept</td></tr>
+<tr class="memdesc:a01527e7c40d2463a1279fb5ec53a80f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">不等比较操作符  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>路径分割迭代器 </p>
+<p>将文件路径分割为各个组件（如目录名、文件名）的迭代器。 支持Windows和Linux的路径格式：</p><ul>
+<li>Windows: "C:\Windows\System32" -&gt; "C:", "Windows", "System32"</li>
+<li>Linux: "/usr/local/bin" -&gt; "", "usr", "local", "bin"</li>
+</ul>
+<p>使用前向迭代器接口，适用于范围for循环和标准算法。 </p>
+
+<p class="definition">在文件 <a class="el" href="path_8hpp_source.html">path.hpp</a> 第 <a class="el" href="path_8hpp_source.html#l00076">76</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="acc93463d235a1285716d84c0a4a1b475" name="acc93463d235a1285716d84c0a4a1b475"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc93463d235a1285716d84c0a4a1b475">&#9670;&#160;</a></span>split_iterator() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">neforce::path::split_iterator::split_iterator </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel default">default</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>默认构造函数 </p>
+<p>构造一个结束迭代器。 </p>
+
+<p class="reference">被这些函数引用 <a class="el" href="path_8hpp_source.html#l00187">operator!=()</a>, <a class="el" href="path_8hpp_source.html#l00139">operator++()</a>, <a class="el" href="path_8hpp_source.html#l00157">operator++()</a>, <a class="el" href="path_8hpp_source.html#l00172">operator==()</a> , 以及 <a class="el" href="path_8hpp_source.html#l00114">split_iterator()</a>.</p>
+
+</div>
+</div>
+<a id="ad4c98d70f1870436a1315f185cbc3b6b" name="ad4c98d70f1870436a1315f185cbc3b6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4c98d70f1870436a1315f185cbc3b6b">&#9670;&#160;</a></span>split_iterator() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">neforce::path::split_iterator::split_iterator </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> *</td>          <td class="paramname"><span class="paramname"><em>path</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a></td>          <td class="paramname"><span class="paramname"><em>pos</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>要遍历的路径字符串指针 </td></tr>
+    <tr><td class="paramname">pos</td><td>起始位置（默认为0）</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>构造一个从指定位置开始遍历路径的迭代器。 如果路径为空或起始位置无效，则构造为结束迭代器。 </p>
+
+<p class="definition">在文件 <a class="el" href="path_8hpp_source.html">path.hpp</a> 第 <a class="el" href="path_8hpp_source.html#l00114">114</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="classneforce_1_1path.html#a690b9fff42b2a7cfcc723c73003369b4">neforce::path::path()</a> , 以及 <a class="el" href="#acc93463d235a1285716d84c0a4a1b475">split_iterator()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a01527e7c40d2463a1279fb5ec53a80f9" name="a01527e7c40d2463a1279fb5ec53a80f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01527e7c40d2463a1279fb5ec53a80f9">&#9670;&#160;</a></span>operator!=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::path::split_iterator::operator!= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#acc93463d235a1285716d84c0a4a1b475">split_iterator</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>b</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>不等比较操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td>另一个迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>两个迭代器是否不等 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="path_8hpp_source.html">path.hpp</a> 第 <a class="el" href="path_8hpp_source.html#l00187">187</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#acc93463d235a1285716d84c0a4a1b475">split_iterator()</a>.</p>
+
+</div>
+</div>
+<a id="aaa805e5eb91596fd1490513afbe10bb1" name="aaa805e5eb91596fd1490513afbe10bb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa805e5eb91596fd1490513afbe10bb1">&#9670;&#160;</a></span>operator*()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#adbabc9a094154e2bdb42c9f74d0e3d93">reference</a> neforce::path::split_iterator::operator* </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>解引用操作符 </p>
+<dl class="section return"><dt>返回</dt><dd>当前路径组件的字符串视图</dd></dl>
+<p>返回当前组件的字符串视图，不包含路径分隔符。 </p>
+
+<p class="definition">在文件 <a class="el" href="path_8hpp_source.html">path.hpp</a> 第 <a class="el" href="path_8hpp_source.html#l00131">131</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="basic__string__view_8hpp_source.html#l00444">neforce::basic_string_view&lt; CharT, Traits &gt;::view()</a>.</p>
+
+</div>
+</div>
+<a id="a529434388871b11954ab58a9600722aa" name="a529434388871b11954ab58a9600722aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a529434388871b11954ab58a9600722aa">&#9670;&#160;</a></span>operator++() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#acc93463d235a1285716d84c0a4a1b475">split_iterator</a> &amp; neforce::path::split_iterator::operator++ </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>前置递增操作符 </p>
+<dl class="section return"><dt>返回</dt><dd>递增后的迭代器引用</dd></dl>
+<p>移动到下一个路径组件。 </p>
+
+<p class="definition">在文件 <a class="el" href="path_8hpp_source.html">path.hpp</a> 第 <a class="el" href="path_8hpp_source.html#l00139">139</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#acc93463d235a1285716d84c0a4a1b475">split_iterator()</a>.</p>
+
+</div>
+</div>
+<a id="a39f39e470253786eddceaf64fe64f34f" name="a39f39e470253786eddceaf64fe64f34f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39f39e470253786eddceaf64fe64f34f">&#9670;&#160;</a></span>operator++() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#acc93463d235a1285716d84c0a4a1b475">split_iterator</a> neforce::path::split_iterator::operator++ </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>后置递增操作符 </p>
+<dl class="section return"><dt>返回</dt><dd>递增前的迭代器副本 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="path_8hpp_source.html">path.hpp</a> 第 <a class="el" href="path_8hpp_source.html#l00157">157</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#acc93463d235a1285716d84c0a4a1b475">split_iterator()</a>.</p>
+
+</div>
+</div>
+<a id="a5d0d4a3e27f8b40850feed872ee2fdce" name="a5d0d4a3e27f8b40850feed872ee2fdce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d0d4a3e27f8b40850feed872ee2fdce">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::path::split_iterator::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#acc93463d235a1285716d84c0a4a1b475">split_iterator</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>b</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>相等比较操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td>另一个迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>两个迭代器是否相等</dd></dl>
+<p>两个迭代器相等当且仅当：</p><ul>
+<li>两者都处于结束状态，或者</li>
+<li>指向同一个路径且当前位置相同 </li>
+</ul>
+
+<p class="definition">在文件 <a class="el" href="path_8hpp_source.html">path.hpp</a> 第 <a class="el" href="path_8hpp_source.html#l00172">172</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#acc93463d235a1285716d84c0a4a1b475">split_iterator()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="path_8hpp_source.html">path.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><a href="classneforce_1_1path.html">path</a></li><li class="navelem"><a href="classneforce_1_1path_1_1split__iterator.html">split_iterator</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

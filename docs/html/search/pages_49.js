@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['建议_0',['IEEE 1541-2021 建议',['../group___byte_size.html#ieee_1541',1,'']]]
+  ['平台差异_0',['平台差异',['../group___u_t_f.html#platform_differences',1,'']]]
 ];

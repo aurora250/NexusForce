@@ -1,27 +1,27 @@
 var group___dynamic_library =
 [
-    [ "dynamic_library", "classdynamic__library.html", [
-      [ "load_mode", "classdynamic__library.html#abc379ef4c782709b6329f3f41fb2a1f4", [
-        [ "default_", "classdynamic__library.html#abc379ef4c782709b6329f3f41fb2a1f4a172b03053216c6158fe380805998ad6c", null ],
-        [ "lazy", "classdynamic__library.html#abc379ef4c782709b6329f3f41fb2a1f4a0ffe34b4e04c2b282c5a388b1ad8aa7a", null ],
-        [ "now", "classdynamic__library.html#abc379ef4c782709b6329f3f41fb2a1f4a97bc592b27a9ada2d9a4bb418ed0ebed", null ],
-        [ "global", "classdynamic__library.html#abc379ef4c782709b6329f3f41fb2a1f4a9c70933aff6b2a6d08c687a6cbb6b765", null ],
-        [ "local", "classdynamic__library.html#abc379ef4c782709b6329f3f41fb2a1f4af5ddaf0ca7929578b408c909429f68f2", null ],
-        [ "deep_bind", "classdynamic__library.html#abc379ef4c782709b6329f3f41fb2a1f4ad8fd587ca0ea9894c84dc614e0e2aa0e", null ]
+    [ "neforce::dynamic_library", "classneforce_1_1dynamic__library.html", [
+      [ "load_mode", "classneforce_1_1dynamic__library.html#a4dca10d9b5f63dacfd0193a7d2bdf3d4", [
+        [ "default_", "classneforce_1_1dynamic__library.html#a4dca10d9b5f63dacfd0193a7d2bdf3d4a172b03053216c6158fe380805998ad6c", null ],
+        [ "lazy", "classneforce_1_1dynamic__library.html#a4dca10d9b5f63dacfd0193a7d2bdf3d4a0ffe34b4e04c2b282c5a388b1ad8aa7a", null ],
+        [ "now", "classneforce_1_1dynamic__library.html#a4dca10d9b5f63dacfd0193a7d2bdf3d4a97bc592b27a9ada2d9a4bb418ed0ebed", null ],
+        [ "global", "classneforce_1_1dynamic__library.html#a4dca10d9b5f63dacfd0193a7d2bdf3d4a9c70933aff6b2a6d08c687a6cbb6b765", null ],
+        [ "local", "classneforce_1_1dynamic__library.html#a4dca10d9b5f63dacfd0193a7d2bdf3d4af5ddaf0ca7929578b408c909429f68f2", null ],
+        [ "deep_bind", "classneforce_1_1dynamic__library.html#a4dca10d9b5f63dacfd0193a7d2bdf3d4ad8fd587ca0ea9894c84dc614e0e2aa0e", null ]
       ] ],
-      [ "dynamic_library", "classdynamic__library.html#ac1d9397f2ebc02c31dffbded406c9880", null ],
-      [ "dynamic_library", "classdynamic__library.html#a31bb6aaaff7d126a8a1db3b73498d3f8", null ],
-      [ "dynamic_library", "classdynamic__library.html#a8cce22a852fe2d2a9dfa24cab8de97d7", null ],
-      [ "dynamic_library", "classdynamic__library.html#ad02ef87854cbd93532937eacf09e4a35", null ],
-      [ "get_load_mode", "classdynamic__library.html#a9f2d57d27f0623b6c1014f20e1ff6dd8", null ],
-      [ "has_symbol", "classdynamic__library.html#a2eaa7f7a6945b610173724323e51f351", null ],
-      [ "is_open", "classdynamic__library.html#a95748ce30c5887de00b3e2e74becb115", null ],
-      [ "list_symbols", "classdynamic__library.html#aeb39e15e9198ec9fd2cc5f85471eb3ac", null ],
-      [ "native_handle", "classdynamic__library.html#af280ac54a3962212e038f97f37baab0d", null ],
-      [ "operator=", "classdynamic__library.html#a8547e38412ac7c6ea7995e3d98ec6f40", null ],
-      [ "path", "classdynamic__library.html#aff392743b89e8c2d66b3f21360bd377c", null ],
-      [ "symbol", "classdynamic__library.html#a268aac8ebd156328103b2bdf69a996c7", null ],
-      [ "to_symbol", "classdynamic__library.html#a53c3ada7feef0304cb470365ab40470f", null ],
-      [ "unload", "classdynamic__library.html#a230c26c6c81585ebf602df7d5d6d0c67", null ]
+      [ "dynamic_library", "classneforce_1_1dynamic__library.html#a85514f19f7ec1921ef2138f2c1203378", null ],
+      [ "dynamic_library", "classneforce_1_1dynamic__library.html#acb194dc7535cc7b5a2b25385f54ffa8a", null ],
+      [ "dynamic_library", "classneforce_1_1dynamic__library.html#a3fd8b14b9dcc83a37b822213bb937d69", null ],
+      [ "dynamic_library", "classneforce_1_1dynamic__library.html#a9cd3b8452d5f0f58ef95aadbc2d9c418", null ],
+      [ "get_load_mode", "classneforce_1_1dynamic__library.html#ac5415ec07e42faf99d350cd269b9693e", null ],
+      [ "has_symbol", "classneforce_1_1dynamic__library.html#a0000d9a0133a20ebd3218e400cca2db9", null ],
+      [ "is_open", "classneforce_1_1dynamic__library.html#ae217f0a59b18b470acfcb3b2d4ac4151", null ],
+      [ "list_symbols", "classneforce_1_1dynamic__library.html#a38f85c6fe910663100898c813b181a3c", null ],
+      [ "native_handle", "classneforce_1_1dynamic__library.html#ab6d0829e05fc9017cfc5d700117f1aec", null ],
+      [ "operator=", "classneforce_1_1dynamic__library.html#a2b3fdb5ec14730904cff4d364da593d6", null ],
+      [ "path", "classneforce_1_1dynamic__library.html#a9f8da8e310a32a110a26c3bdc97078de", null ],
+      [ "symbol", "classneforce_1_1dynamic__library.html#a3b598aaee02e0ae1349971a718284588", null ],
+      [ "to_symbol", "classneforce_1_1dynamic__library.html#a512c295debbce226c357cd717884c7c8", null ],
+      [ "unload", "classneforce_1_1dynamic__library.html#a542b36284b24bc09f5d5e834f8b8a6da", null ]
     ] ]
 ];

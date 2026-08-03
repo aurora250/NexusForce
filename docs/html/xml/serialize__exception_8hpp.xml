@@ -80,8 +80,8 @@
         </childnode>
       </node>
       <node id="14">
-        <label>NeForce/core/exception/breakpoint.hpp</label>
-        <link refid="breakpoint_8hpp"/>
+        <label>NeForce/core/exception/debug.hpp</label>
+        <link refid="debug_8hpp"/>
         <childnode refid="9" relation="include">
         </childnode>
       </node>
@@ -252,30 +252,44 @@
         </childnode>
         <childnode refid="45" relation="include">
         </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
         <childnode refid="39" relation="include">
         </childnode>
       </node>
-      <node id="46">
+      <node id="48">
         <label>NeForce/core/string/basic_string_view.hpp</label>
         <link refid="basic__string__view_8hpp"/>
         <childnode refid="37" relation="include">
         </childnode>
-        <childnode refid="47" relation="include">
+        <childnode refid="49" relation="include">
         </childnode>
-        <childnode refid="48" relation="include">
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
         </childnode>
       </node>
-      <node id="47">
+      <node id="49">
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="27" relation="include">
         </childnode>
         <childnode refid="23" relation="include">
         </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
       </node>
-      <node id="48">
+      <node id="46">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>NeForce/core/string/charset.hpp</label>
+        <link refid="charset_8hpp"/>
+        <childnode refid="46" relation="include">
+        </childnode>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
@@ -285,10 +299,10 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="45">
+      <node id="47">
         <label>NeForce/core/string/string_view.hpp</label>
         <link refid="string__view_8hpp"/>
-        <childnode refid="46" relation="include">
+        <childnode refid="48" relation="include">
         </childnode>
       </node>
       <node id="15">
@@ -364,10 +378,11 @@
         </childnode>
       </node>
     </invincdepgraph>
-    <innerclass refid="structserialize__exception" prot="public">serialize_exception</innerclass>
-    <innerclass refid="structdeserialize__exception" prot="public">deserialize_exception</innerclass>
-    <innerclass refid="structmissing__required__exception" prot="public">missing_required_exception</innerclass>
-    <innerclass refid="structtype__mismatch__exception" prot="public">type_mismatch_exception</innerclass>
+    <innerclass refid="structneforce_1_1serialize__exception" prot="public">neforce::serialize_exception</innerclass>
+    <innerclass refid="structneforce_1_1deserialize__exception" prot="public">neforce::deserialize_exception</innerclass>
+    <innerclass refid="structneforce_1_1missing__required__exception" prot="public">neforce::missing_required_exception</innerclass>
+    <innerclass refid="structneforce_1_1type__mismatch__exception" prot="public">neforce::type_mismatch_exception</innerclass>
+    <innernamespace refid="namespaceneforce">neforce</innernamespace>
     <briefdescription>
 <para>序列化异常类型 </para>
     </briefdescription>
@@ -383,25 +398,25 @@
 <codeline lineno="12"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight></codeline>
 <codeline lineno="18"><highlight class="normal"></highlight></codeline>
-<codeline lineno="23" refid="structserialize__exception" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">serialize_exception<sp/>final<sp/>:<sp/>value_exception<sp/>{</highlight></codeline>
+<codeline lineno="23" refid="structneforce_1_1serialize__exception" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">serialize_exception<sp/>final<sp/>:<sp/>value_exception<sp/>{</highlight></codeline>
 <codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>serialize_exception(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>info<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Serialization<sp/>failed.&quot;</highlight><highlight class="normal">)<sp/>noexcept<sp/>:</highlight></codeline>
 <codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>value_exception(info)<sp/>{}</highlight></codeline>
 <codeline lineno="26"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="27"><highlight class="normal"></highlight></codeline>
-<codeline lineno="32" refid="structdeserialize__exception" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">deserialize_exception<sp/>:<sp/>value_exception<sp/>{</highlight></codeline>
-<codeline lineno="33" refid="structdeserialize__exception_1a381d739e55c8acdd9f9da39caea73c30" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structdeserialize__exception_1a381d739e55c8acdd9f9da39caea73c30" kindref="member">property_path</ref>;<sp/></highlight></codeline>
+<codeline lineno="32" refid="structneforce_1_1deserialize__exception" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">deserialize_exception<sp/>:<sp/>value_exception<sp/>{</highlight></codeline>
+<codeline lineno="33" refid="structneforce_1_1deserialize__exception_1af901855a846e910f93c46fe349078b11" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structneforce_1_1deserialize__exception_1af901855a846e910f93c46fe349078b11" kindref="member">property_path</ref>;<sp/></highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>deserialize_exception(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>info<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Deserialization<sp/>failed.&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="classpath" kindref="compound">path</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>deserialize_exception(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>info<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Deserialization<sp/>failed.&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="classneforce_1_1path" kindref="compound">path</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">)<sp/>noexcept<sp/>:</highlight></codeline>
 <codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>value_exception(info),</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structdeserialize__exception_1a381d739e55c8acdd9f9da39caea73c30" kindref="member">property_path</ref>(<ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(<ref refid="classpath" kindref="compound">path</ref>))<sp/>{}</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structneforce_1_1deserialize__exception_1af901855a846e910f93c46fe349078b11" kindref="member">property_path</ref>(<ref refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" kindref="member">move</ref>(<ref refid="classneforce_1_1path" kindref="compound">path</ref>))<sp/>{}</highlight></codeline>
 <codeline lineno="38"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight></codeline>
-<codeline lineno="44" refid="structmissing__required__exception" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">missing_required_exception<sp/>final<sp/>:<sp/>deserialize_exception<sp/>{</highlight></codeline>
+<codeline lineno="44" refid="structneforce_1_1missing__required__exception" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">missing_required_exception<sp/>final<sp/>:<sp/>deserialize_exception<sp/>{</highlight></codeline>
 <codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>missing_required_exception(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>property_name)<sp/>:</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>deserialize_exception(</highlight><highlight class="stringliteral">&quot;Missing<sp/>required<sp/>property.&quot;</highlight><highlight class="normal">,<sp/>property_name)<sp/>{}</highlight></codeline>
 <codeline lineno="47"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"></highlight></codeline>
-<codeline lineno="53" refid="structtype__mismatch__exception" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">type_mismatch_exception<sp/>final<sp/>:<sp/>deserialize_exception<sp/>{</highlight></codeline>
+<codeline lineno="53" refid="structneforce_1_1type__mismatch__exception" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">type_mismatch_exception<sp/>final<sp/>:<sp/>deserialize_exception<sp/>{</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>type_mismatch_exception(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>expected_type)<sp/>:</highlight></codeline>
 <codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>deserialize_exception(</highlight><highlight class="stringliteral">&quot;Type<sp/>mismatch.&quot;</highlight><highlight class="normal">,<sp/>expected_type)<sp/>{}</highlight></codeline>
 <codeline lineno="56"><highlight class="normal">};</highlight></codeline>

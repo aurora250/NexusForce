@@ -1,0 +1,656 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4" kind="class" language="C++" prot="public">
+    <compoundname>neforce::binder&lt; Func(BoundArgs...)&gt;</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">inner::weak_result_type&lt; Func &gt;</basecompoundref>
+    <includes refid="bind_8hpp" local="no">bind.hpp</includes>
+    <innerclass refid="structneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1_1arg__mapper__result" prot="private">neforce::binder&lt; Func(BoundArgs...)&gt;::arg_mapper_result</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename Func</type>
+      </param>
+      <param>
+        <type>typename...</type>
+        <declname>BoundArgs</declname>
+        <defname>BoundArgs</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1a9c6c983725dbeabf786dee778054b2f7" prot="private" static="no">
+        <type><ref refid="group___index_tuple_1ga89a73a4c0f4b82d7d6ae78748c08e098" kindref="member">build_index_tuple_t</ref>&lt; sizeof...(BoundArgs)&gt;</type>
+        <definition>using neforce::binder&lt; Func(BoundArgs...)&gt;::BoundIndexes = build_index_tuple_t&lt;sizeof...(BoundArgs)&gt;</definition>
+        <argsstring></argsstring>
+        <name>BoundIndexes</name>
+        <qualifiedname>neforce::binder&lt; Func(BoundArgs...)&gt;::BoundIndexes</qualifiedname>
+        <briefdescription>
+<para>绑定参数的索引序列 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="424" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="424" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1a56cf443ba0fa0082deb395658e4b0a10" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename BoundArg</type>
+          </param>
+          <param>
+            <type>typename CallArgs</type>
+          </param>
+        </templateparamlist>
+        <type>typename arg_mapper_result&lt; BoundArg, CallArgs &gt;::type</type>
+        <definition>using neforce::binder&lt; Func(BoundArgs...)&gt;::arg_mapper_result_t = typename arg_mapper_result&lt;BoundArg, CallArgs&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>arg_mapper_result_t</name>
+        <qualifiedname>neforce::binder&lt; Func(BoundArgs...)&gt;::arg_mapper_result_t</qualifiedname>
+        <briefdescription>
+<para>arg_mapper_result的便捷别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="447" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="447" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1a19f95879ed74539c93b905d80311f1af" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename CallArgs</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___invoke_function_1ga2d367d0c6ab0c690c67d0091d8e83c3b" kindref="member">invoke_result_t</ref>&lt; Func &amp;, arg_mapper_result_t&lt; BoundArgs, CallArgs &gt;... &gt;</type>
+        <definition>using neforce::binder&lt; Func(BoundArgs...)&gt;::result_type = invoke_result_t&lt;Func&amp;, arg_mapper_result_t&lt;BoundArgs, CallArgs&gt;...&gt;</definition>
+        <argsstring></argsstring>
+        <name>result_type</name>
+        <qualifiedname>neforce::binder&lt; Func(BoundArgs...)&gt;::result_type</qualifiedname>
+        <briefdescription>
+<para>调用结果的类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CallArgs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>调用参数元组类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="455" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="455" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1aa53e480c2d6b8eff0ee9b87208a36ecf" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename CallArgs</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___invoke_function_1ga2d367d0c6ab0c690c67d0091d8e83c3b" kindref="member">invoke_result_t</ref>&lt; const Func &amp;, arg_mapper_result_t&lt; const BoundArgs, CallArgs &gt;... &gt;</type>
+        <definition>using neforce::binder&lt; Func(BoundArgs...)&gt;::result_type_const = invoke_result_t&lt;const Func&amp;, arg_mapper_result_t&lt;const BoundArgs, CallArgs&gt;...&gt;</definition>
+        <argsstring></argsstring>
+        <name>result_type_const</name>
+        <qualifiedname>neforce::binder&lt; Func(BoundArgs...)&gt;::result_type_const</qualifiedname>
+        <briefdescription>
+<para>const调用结果的类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CallArgs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>调用参数元组类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="463" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="463" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1a7daca2c0a588e9ff46abed784bad84be" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename BoundArg</type>
+          </param>
+          <param>
+            <type>typename CallArgs</type>
+          </param>
+        </templateparamlist>
+        <type>decltype(inner::bind_arg_mapper&lt; <ref refid="group___remove_qualifiers_1gae1cc8683a631b48e3c17e0740c4463b1" kindref="member">remove_cv_t</ref>&lt; BoundArg &gt; &gt;()(_NEFORCE <ref refid="group___declval_tools_1ga7071848a30be73f786711db2ae038447" kindref="member">declval</ref>&lt; BoundArg &amp; &gt;(), _NEFORCE <ref refid="group___declval_tools_1ga7071848a30be73f786711db2ae038447" kindref="member">declval</ref>&lt; CallArgs &amp; &gt;()))</type>
+        <definition>using neforce::binder&lt; Func(BoundArgs...)&gt;::arg_mapper_type = decltype(inner::bind_arg_mapper&lt;remove_cv_t&lt;BoundArg&gt;&gt;()(_NEFORCE declval&lt;BoundArg&amp;&gt;(),
+                                                                                    _NEFORCE declval&lt;CallArgs&amp;&gt;()))</definition>
+        <argsstring></argsstring>
+        <name>arg_mapper_type</name>
+        <qualifiedname>neforce::binder&lt; Func(BoundArgs...)&gt;::arg_mapper_type</qualifiedname>
+        <briefdescription>
+<para>参数映射器的类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>BoundArg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>绑定参数类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>CallArgs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>调用参数元组类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="472" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="472" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1a1d391d854275461f38b7e6a2eb45f07a" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename CallArgs</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; static_cast&lt; bool &gt;(<ref refid="group___tuple_1ga0f12ee48accc173d7dc0448503e819a6" kindref="member">tuple_size_v</ref>&lt; CallArgs &gt;+1), Func &gt;</type>
+        <definition>using neforce::binder&lt; Func(BoundArgs...)&gt;::dependent = enable_if_t&lt;static_cast&lt;bool&gt;(tuple_size_v&lt;CallArgs&gt; + 1), Func&gt;</definition>
+        <argsstring></argsstring>
+        <name>dependent</name>
+        <qualifiedname>neforce::binder&lt; Func(BoundArgs...)&gt;::dependent</qualifiedname>
+        <briefdescription>
+<para>依赖类型，用于SFINAE </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CallArgs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>调用参数元组类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="481" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="481" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1aea3db5a55dd9d6501105ea96d0c05169" prot="private" static="no" mutable="no">
+        <type>Func</type>
+        <definition>Func neforce::binder&lt; Func(BoundArgs...)&gt;::functor_</definition>
+        <argsstring></argsstring>
+        <name>functor_</name>
+        <qualifiedname>neforce::binder&lt; Func(BoundArgs...)&gt;::functor_</qualifiedname>
+        <briefdescription>
+<para>存储的函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="426" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="426" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1ace30a1cbae6901557b4b39aae9a7852d" prot="private" static="no" mutable="no">
+        <type>tuple&lt; BoundArgs... &gt;</type>
+        <definition>tuple&lt;BoundArgs...&gt; neforce::binder&lt; Func(BoundArgs...)&gt;::bound_args_</definition>
+        <argsstring></argsstring>
+        <name>bound_args_</name>
+        <qualifiedname>neforce::binder&lt; Func(BoundArgs...)&gt;::bound_args_</qualifiedname>
+        <briefdescription>
+<para>存储的绑定参数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="427" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="427" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1ae572b98fd0fe06e7dd92583b0b16f304" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Res</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type>size_t...</type>
+            <declname>Indexes</declname>
+            <defname>Indexes</defname>
+          </param>
+        </templateparamlist>
+        <type>Res</type>
+        <definition>Res neforce::binder&lt; Func(BoundArgs...)&gt;::call</definition>
+        <argsstring>(tuple&lt; Args... &gt; &amp;&amp;args, index_tuple&lt; Indexes... &gt; idx)</argsstring>
+        <name>call</name>
+        <qualifiedname>neforce::binder&lt; Func(BoundArgs...)&gt;::call</qualifiedname>
+        <param>
+          <type>tuple&lt; Args... &gt; &amp;&amp;</type>
+          <declname>args</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1index__tuple" kindref="compound">index_tuple</ref>&lt; Indexes... &gt;</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>调用辅助函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Res</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>返回类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>调用参数类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Indexes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引序列 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>调用参数元组 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引序列对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>调用结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="494" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="494" bodyend="497"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1a4919a4c8a10d6abaf09cbb990409a357" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Res</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type>_NEFORCE size_t...</type>
+            <declname>Indexes</declname>
+            <defname>Indexes</defname>
+          </param>
+        </templateparamlist>
+        <type>Res</type>
+        <definition>Res neforce::binder&lt; Func(BoundArgs...)&gt;::call_const</definition>
+        <argsstring>(tuple&lt; Args... &gt; &amp;&amp;args, index_tuple&lt; Indexes... &gt; idx) const</argsstring>
+        <name>call_const</name>
+        <qualifiedname>neforce::binder&lt; Func(BoundArgs...)&gt;::call_const</qualifiedname>
+        <param>
+          <type>tuple&lt; Args... &gt; &amp;&amp;</type>
+          <declname>args</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1index__tuple" kindref="compound">index_tuple</ref>&lt; Indexes... &gt;</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>const调用辅助函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Res</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>返回类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>调用参数类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Indexes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引序列 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>调用参数元组 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引序列对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>调用结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="509" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="509" bodyend="512"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1a743b9e69e9cf03533df2870209041c4d" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::binder&lt; Func(BoundArgs...)&gt;::binder</definition>
+        <argsstring>(Func func, Args &amp;&amp;... args)</argsstring>
+        <name>binder</name>
+        <qualifiedname>neforce::binder&lt; Func(BoundArgs...)&gt;::binder</qualifiedname>
+        <param>
+          <type>Func</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>绑定参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要绑定的函数对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>绑定的参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="522" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="522" bodyend="524"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <referencedby refid="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1adfb72dd149677a384386b4390417e8d3">binder</referencedby>
+        <referencedby refid="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1a70e6ec6e938d8fd49fb373fc1c33b426">binder</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1a70e6ec6e938d8fd49fb373fc1c33b426" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::binder&lt; Func(BoundArgs...)&gt;::binder</definition>
+        <argsstring>(const binder &amp;)=default</argsstring>
+        <name>binder</name>
+        <qualifiedname>neforce::binder&lt; Func(BoundArgs...)&gt;::binder</qualifiedname>
+        <param>
+          <type>const binder &amp;</type>
+        </param>
+        <briefdescription>
+<para>复制构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="526" column="5"/>
+        <references refid="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1a743b9e69e9cf03533df2870209041c4d" compoundref="bind_8hpp" startline="522" endline="524">binder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1adfb72dd149677a384386b4390417e8d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::binder&lt; Func(BoundArgs...)&gt;::binder</definition>
+        <argsstring>(binder &amp;&amp;)=default</argsstring>
+        <name>binder</name>
+        <qualifiedname>neforce::binder&lt; Func(BoundArgs...)&gt;::binder</qualifiedname>
+        <param>
+          <type>binder &amp;&amp;</type>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="527" column="5"/>
+        <references refid="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1a743b9e69e9cf03533df2870209041c4d" compoundref="bind_8hpp" startline="522" endline="524">binder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1ad7d4234c5c44b883a312920b67b7ab38" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) neforce::binder&lt; Func(BoundArgs...)&gt;::operator()</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>operator()</name>
+        <qualifiedname>neforce::binder&lt; Func(BoundArgs...)&gt;::operator()</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>调用操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>调用参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>调用参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>函数调用结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="536" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="536" bodyend="539"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___tuple_1gaab424c5e65e44be2edcbbe6a9f461a12" compoundref="tuple_8hpp" startline="774" endline="777">neforce::forward_as_tuple</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1aee727a2ed05925331d914b6859215b58" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) neforce::binder&lt; Func(BoundArgs...)&gt;::operator()</definition>
+        <argsstring>(Args &amp;&amp;... args) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>neforce::binder&lt; Func(BoundArgs...)&gt;::operator()</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>const调用操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>调用参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>调用参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>函数调用结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="548" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="548" bodyend="551"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___tuple_1gaab424c5e65e44be2edcbbe6a9f461a12" compoundref="tuple_8hpp" startline="774" endline="777">neforce::forward_as_tuple</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1a816d5e21fe9ca61a3c281a2be8798303" prot="public" static="no" const="yes" explicit="no" inline="no" volatile="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::binder&lt; Func(BoundArgs...)&gt;::operator()</definition>
+        <argsstring>(Args &amp;&amp;... args) const volatile =delete</argsstring>
+        <name>operator()</name>
+        <qualifiedname>neforce::binder&lt; Func(BoundArgs...)&gt;::operator()</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="554" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>通用函数绑定器的部分特化 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>BoundArgs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>绑定的参数类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+存储函数对象和绑定的参数，当被调用时，将绑定的参数和调用时的参数 组合后调用原始函数。支持占位符参数重排。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="422" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="422" bodyend="555"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1a56cf443ba0fa0082deb395658e4b0a10" prot="private" virt="non-virtual"><scope>neforce::binder&lt; Func(BoundArgs...)&gt;</scope><name>arg_mapper_result_t</name></member>
+      <member refid="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1a7daca2c0a588e9ff46abed784bad84be" prot="private" virt="non-virtual"><scope>neforce::binder&lt; Func(BoundArgs...)&gt;</scope><name>arg_mapper_type</name></member>
+      <member refid="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1a743b9e69e9cf03533df2870209041c4d" prot="public" virt="non-virtual"><scope>neforce::binder&lt; Func(BoundArgs...)&gt;</scope><name>binder</name></member>
+      <member refid="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1a70e6ec6e938d8fd49fb373fc1c33b426" prot="public" virt="non-virtual"><scope>neforce::binder&lt; Func(BoundArgs...)&gt;</scope><name>binder</name></member>
+      <member refid="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1adfb72dd149677a384386b4390417e8d3" prot="public" virt="non-virtual"><scope>neforce::binder&lt; Func(BoundArgs...)&gt;</scope><name>binder</name></member>
+      <member refid="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1ace30a1cbae6901557b4b39aae9a7852d" prot="private" virt="non-virtual"><scope>neforce::binder&lt; Func(BoundArgs...)&gt;</scope><name>bound_args_</name></member>
+      <member refid="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1a9c6c983725dbeabf786dee778054b2f7" prot="private" virt="non-virtual"><scope>neforce::binder&lt; Func(BoundArgs...)&gt;</scope><name>BoundIndexes</name></member>
+      <member refid="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1ae572b98fd0fe06e7dd92583b0b16f304" prot="private" virt="non-virtual"><scope>neforce::binder&lt; Func(BoundArgs...)&gt;</scope><name>call</name></member>
+      <member refid="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1a4919a4c8a10d6abaf09cbb990409a357" prot="private" virt="non-virtual"><scope>neforce::binder&lt; Func(BoundArgs...)&gt;</scope><name>call_const</name></member>
+      <member refid="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1a1d391d854275461f38b7e6a2eb45f07a" prot="private" virt="non-virtual"><scope>neforce::binder&lt; Func(BoundArgs...)&gt;</scope><name>dependent</name></member>
+      <member refid="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1aea3db5a55dd9d6501105ea96d0c05169" prot="private" virt="non-virtual"><scope>neforce::binder&lt; Func(BoundArgs...)&gt;</scope><name>functor_</name></member>
+      <member refid="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1ad7d4234c5c44b883a312920b67b7ab38" prot="public" virt="non-virtual"><scope>neforce::binder&lt; Func(BoundArgs...)&gt;</scope><name>operator()</name></member>
+      <member refid="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1aee727a2ed05925331d914b6859215b58" prot="public" virt="non-virtual"><scope>neforce::binder&lt; Func(BoundArgs...)&gt;</scope><name>operator()</name></member>
+      <member refid="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1a816d5e21fe9ca61a3c281a2be8798303" prot="public" virt="non-virtual"><scope>neforce::binder&lt; Func(BoundArgs...)&gt;</scope><name>operator()</name></member>
+      <member refid="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1a19f95879ed74539c93b905d80311f1af" prot="private" virt="non-virtual"><scope>neforce::binder&lt; Func(BoundArgs...)&gt;</scope><name>result_type</name></member>
+      <member refid="classneforce_1_1binder_3_01_func_07_bound_args_8_8_8_08_4_1aa53e480c2d6b8eff0ee9b87208a36ecf" prot="private" virt="non-virtual"><scope>neforce::binder&lt; Func(BoundArgs...)&gt;</scope><name>result_type_const</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

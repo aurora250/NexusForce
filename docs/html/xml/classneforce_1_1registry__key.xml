@@ -1,0 +1,1552 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1registry__key" kind="class" language="C++" prot="public">
+    <compoundname>neforce::registry_key</compoundname>
+    <includes refid="registry__key_8hpp" local="no">registry_key.hpp</includes>
+    <innerclass refid="structneforce_1_1registry__key_1_1root__key" prot="public">neforce::registry_key::root_key</innerclass>
+    <innerclass refid="structneforce_1_1registry__key_1_1value__info" prot="public">neforce::registry_key::value_info</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classneforce_1_1registry__key_1ae380b49bb4e1922bf90fd553cb9af357" prot="public" static="no" strong="yes">
+        <type>::DWORD</type>
+        <name>value_type</name>
+        <qualifiedname>neforce::registry_key::value_type</qualifiedname>
+        <enumvalue id="classneforce_1_1registry__key_1ae380b49bb4e1922bf90fd553cb9af357a334c4a4c42fdb79d7ebc3e73b517e6f8" prot="public">
+          <name>none</name>
+          <initializer>= REG_NONE</initializer>
+          <briefdescription>
+<para>无类型 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1registry__key_1ae380b49bb4e1922bf90fd553cb9af357ab45cffe084dd3d20d928bee85e7b0f21" prot="public">
+          <name>string</name>
+          <initializer>= REG_SZ</initializer>
+          <briefdescription>
+<para>字符串类型 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1registry__key_1ae380b49bb4e1922bf90fd553cb9af357a0978fc35db2463791ebfde962517ef48" prot="public">
+          <name>expand_string</name>
+          <initializer>= REG_EXPAND_SZ</initializer>
+          <briefdescription>
+<para>可扩展字符串 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1registry__key_1ae380b49bb4e1922bf90fd553cb9af357a9d7183f16acce70658f686ae7f1a4d20" prot="public">
+          <name>binary</name>
+          <initializer>= REG_BINARY</initializer>
+          <briefdescription>
+<para>二进制数据 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1registry__key_1ae380b49bb4e1922bf90fd553cb9af357afc50124be4e2da8156d08b7375d79804" prot="public">
+          <name>dword</name>
+          <initializer>= REG_DWORD</initializer>
+          <briefdescription>
+<para>32位无符号整数 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1registry__key_1ae380b49bb4e1922bf90fd553cb9af357aa8411161cb16f462b1bdd4611965b43f" prot="public">
+          <name>qword</name>
+          <initializer>= REG_QWORD</initializer>
+          <briefdescription>
+<para>64位无符号整数 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1registry__key_1ae380b49bb4e1922bf90fd553cb9af357a0eb11d63c2fc32b79389f0f26e14434d" prot="public">
+          <name>multi_string</name>
+          <initializer>= REG_MULTI_SZ</initializer>
+          <briefdescription>
+<para>多字符串类型 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>系统注册表值类型枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>定义系统注册表支持的值类型。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="100" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" bodystart="100" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="enum" id="classneforce_1_1registry__key_1a9857dec49b598d28d6c51c5f72e30514" prot="public" static="no" strong="no">
+        <type>::REGSAM</type>
+        <name>wow64_view</name>
+        <qualifiedname>neforce::registry_key::wow64_view</qualifiedname>
+        <enumvalue id="classneforce_1_1registry__key_1a9857dec49b598d28d6c51c5f72e30514aeb48ffc0fba5642a4d85cc8d24af1e2d" prot="public">
+          <name>view_default</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>默认视图 </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1registry__key_1a9857dec49b598d28d6c51c5f72e30514a10da17c8d9a6bfaec0641230dc88b783" prot="public">
+          <name>view_32bit</name>
+          <initializer>= KEY_WOW64_32KEY</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>32 位视图 </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1registry__key_1a9857dec49b598d28d6c51c5f72e30514ab913cc9f2d477dea6d312cbfb2ef2fa4" prot="public">
+          <name>view_64bit</name>
+          <initializer>= KEY_WOW64_64KEY</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>64 位视图 </para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>注册表 32/64 位视图控制 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="114" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" bodystart="114" bodyend="118"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1registry__key_1af08133f77dffe2cce89aaba6e53a7b74" prot="private" static="no" mutable="no">
+        <type>::HKEY</type>
+        <definition>::HKEY neforce::registry_key::hkey_</definition>
+        <argsstring></argsstring>
+        <name>hkey_</name>
+        <qualifiedname>neforce::registry_key::hkey_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>注册表句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="157" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" bodystart="157" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1registry__key_1a41c6c096d064ff9e49cf03bd90496089" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::registry_key::owns_handle_</definition>
+        <argsstring></argsstring>
+        <name>owns_handle_</name>
+        <qualifiedname>neforce::registry_key::owns_handle_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否拥有句柄所有权 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="158" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" bodystart="158" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1registry__key_1aff7b0487b963e2219a12a95bd64b0591" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::registry_key::close</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>close</name>
+        <qualifiedname>neforce::registry_key::close</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="160" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1aaf972f562563f7186de2286ded367d7a" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::registry_key::throw_if_invalid</definition>
+        <argsstring>() const</argsstring>
+        <name>throw_if_invalid</name>
+        <qualifiedname>neforce::registry_key::throw_if_invalid</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="161" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1aa9a3e15697ac682004928f35b7550505" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1registry__key_1_1value__info" kindref="compound">value_info</ref></type>
+        <definition>value_info neforce::registry_key::get_value_info</definition>
+        <argsstring>(const wstring &amp;name) const</argsstring>
+        <name>get_value_info</name>
+        <qualifiedname>neforce::registry_key::get_value_info</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="162" column="17"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1registry__key_1ad39df0ba9830b4b3f46fd3996a9934a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::registry_key::registry_key</definition>
+        <argsstring>()=default</argsstring>
+        <name>registry_key</name>
+        <qualifiedname>neforce::registry_key::registry_key</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>构造一个无效的注册表项对象。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="170" column="5"/>
+        <references refid="classneforce_1_1registry__key_1ad39df0ba9830b4b3f46fd3996a9934a2">registry_key</references>
+        <referencedby refid="classneforce_1_1registry__key_1a015eefe555695700e360e0f25b40c21f">open_sub_key</referencedby>
+        <referencedby refid="classneforce_1_1registry__key_1a4190e98097df32056f4375fcd7d760de">operator=</referencedby>
+        <referencedby refid="classneforce_1_1registry__key_1ad39df0ba9830b4b3f46fd3996a9934a2">registry_key</referencedby>
+        <referencedby refid="classneforce_1_1registry__key_1aba38c0e405e8c01c058a81fce10535d0">registry_key</referencedby>
+        <referencedby refid="classneforce_1_1registry__key_1a65ae6e186174667d52fbcc69fd2de90b">registry_key</referencedby>
+        <referencedby refid="classneforce_1_1registry__key_1a8805fcb721bea8f0c273ff1a1f52d1d9">~registry_key</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1aba38c0e405e8c01c058a81fce10535d0" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::registry_key::registry_key</definition>
+        <argsstring>(::HKEY key)</argsstring>
+        <name>registry_key</name>
+        <qualifiedname>neforce::registry_key::registry_key</qualifiedname>
+        <param>
+          <type>::HKEY</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>从原生句柄构造注册表项 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原生注册表句柄</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+构造对象接管句柄的所有权，析构时自动关闭句柄。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="178" column="14"/>
+        <references refid="classneforce_1_1registry__key_1ad39df0ba9830b4b3f46fd3996a9934a2">registry_key</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1a8805fcb721bea8f0c273ff1a1f52d1d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::registry_key::~registry_key</definition>
+        <argsstring>()</argsstring>
+        <name>~registry_key</name>
+        <qualifiedname>neforce::registry_key::~registry_key</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>自动关闭注册表句柄。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="185" column="5"/>
+        <references refid="classneforce_1_1registry__key_1ad39df0ba9830b4b3f46fd3996a9934a2">registry_key</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1aeccff7ee53a6641aaa7b9b6b44b418ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::registry_key::registry_key</definition>
+        <argsstring>(const registry_key &amp;)=delete</argsstring>
+        <name>registry_key</name>
+        <qualifiedname>neforce::registry_key::registry_key</qualifiedname>
+        <param>
+          <type>const registry_key &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="187" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1a3202832447228c17e58478cfa5458bc6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1registry__key_1ad39df0ba9830b4b3f46fd3996a9934a2" kindref="member">registry_key</ref> &amp;</type>
+        <definition>registry_key &amp; neforce::registry_key::operator=</definition>
+        <argsstring>(const registry_key &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::registry_key::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1registry__key_1ad39df0ba9830b4b3f46fd3996a9934a2" kindref="member">registry_key</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="188" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1a65ae6e186174667d52fbcc69fd2de90b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::registry_key::registry_key</definition>
+        <argsstring>(registry_key &amp;&amp;other) noexcept</argsstring>
+        <name>registry_key</name>
+        <qualifiedname>neforce::registry_key::registry_key</qualifiedname>
+        <param>
+          <type>registry_key &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="194" column="5"/>
+        <references refid="classneforce_1_1registry__key_1ad39df0ba9830b4b3f46fd3996a9934a2">registry_key</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1a4190e98097df32056f4375fcd7d760de" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1registry__key_1ad39df0ba9830b4b3f46fd3996a9934a2" kindref="member">registry_key</ref> &amp;</type>
+        <definition>registry_key &amp; neforce::registry_key::operator=</definition>
+        <argsstring>(registry_key &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::registry_key::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1registry__key_1ad39df0ba9830b4b3f46fd3996a9934a2" kindref="member">registry_key</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="201" column="18"/>
+        <references refid="classneforce_1_1registry__key_1ad39df0ba9830b4b3f46fd3996a9934a2">registry_key</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1a369993deb522cb590f4e3ac7b13cf983" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::registry_key::is_valid</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_valid</name>
+        <qualifiedname>neforce::registry_key::is_valid</qualifiedname>
+        <briefdescription>
+<para>检查注册表项是否有效 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>有效返回true，否则返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="207" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" bodystart="207" bodyend="207"/>
+        <references refid="classneforce_1_1registry__key_1a369993deb522cb590f4e3ac7b13cf983" compoundref="registry__key_8hpp" startline="207" endline="207">is_valid</references>
+        <referencedby refid="classneforce_1_1registry__key_1a369993deb522cb590f4e3ac7b13cf983" compoundref="registry__key_8hpp" startline="207" endline="207">is_valid</referencedby>
+        <referencedby refid="classneforce_1_1registry__key_1a1ce149df56191afa6c1e8565c6c80930" compoundref="registry__key_8hpp" startline="213" endline="213">operator bool</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1a1ce149df56191afa6c1e8565c6c80930" prot="public" static="no" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::registry_key::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>neforce::registry_key::operator bool</qualifiedname>
+        <briefdescription>
+<para>布尔转换运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>有效返回true，否则返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="213" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" bodystart="213" bodyend="213"/>
+        <references refid="classneforce_1_1registry__key_1a369993deb522cb590f4e3ac7b13cf983" compoundref="registry__key_8hpp" startline="207" endline="207">is_valid</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1a16e26d60d973671f625d7bff2180c23c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::registry_key::create_sub_key</definition>
+        <argsstring>(const wstring &amp;name)</argsstring>
+        <name>create_sub_key</name>
+        <qualifiedname>neforce::registry_key::create_sub_key</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>创建子项 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子项名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1registry__key__exception" kindref="compound">registry_key_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当创建失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+在当前项下创建指定的子项。如果子项已存在，则直接打开。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="222" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1a0a0403c1a14fddcc464d5a42e40c7193" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::registry_key::open</definition>
+        <argsstring>(::HKEY root, const wstring &amp;path, ::REGSAM sam_desired=KEY_READ|KEY_WRITE)</argsstring>
+        <name>open</name>
+        <qualifiedname>neforce::registry_key::open</qualifiedname>
+        <param>
+          <type>::HKEY</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>::REGSAM</type>
+          <declname>sam_desired</declname>
+          <defval>KEY_READ|KEY_WRITE</defval>
+        </param>
+        <briefdescription>
+<para>打开注册表项 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>root</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>根键 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完整路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sam_desired</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>访问权限，默认为读写 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1registry__key__exception" kindref="compound">registry_key_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当打开失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+打开指定的注册表路径，替换当前对象的内容。原有句柄将被关闭。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="233" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1a015eefe555695700e360e0f25b40c21f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1registry__key_1ad39df0ba9830b4b3f46fd3996a9934a2" kindref="member">registry_key</ref></type>
+        <definition>registry_key neforce::registry_key::open_sub_key</definition>
+        <argsstring>(const wstring &amp;name, REGSAM sam_desired=KEY_READ) const</argsstring>
+        <name>open_sub_key</name>
+        <qualifiedname>neforce::registry_key::open_sub_key</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>REGSAM</type>
+          <declname>sam_desired</declname>
+          <defval>KEY_READ</defval>
+        </param>
+        <briefdescription>
+<para>打开子项 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子项名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sam_desired</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>访问权限，默认为只读 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>子项对应的registry_key对象 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1registry__key__exception" kindref="compound">registry_key_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当子项不存在或打开失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="242" column="19"/>
+        <references refid="classneforce_1_1registry__key_1ad39df0ba9830b4b3f46fd3996a9934a2">registry_key</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1ad4d02e2713dfd5be1bf372f29bd77bd2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::registry_key::delete_sub_key</definition>
+        <argsstring>(const wstring &amp;name)</argsstring>
+        <name>delete_sub_key</name>
+        <qualifiedname>neforce::registry_key::delete_sub_key</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>删除子项 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子项名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1registry__key__exception" kindref="compound">registry_key_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当删除失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>子项必须为空，否则删除失败。如需删除包含子项的项，请使用delete_key_tree。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="251" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1a98582c0a5f0ac12abe2797a81112296b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::registry_key::delete_value</definition>
+        <argsstring>(const wstring &amp;name)</argsstring>
+        <name>delete_value</name>
+        <qualifiedname>neforce::registry_key::delete_value</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>删除值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1registry__key__exception" kindref="compound">registry_key_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当值不存在或删除失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="258" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1a7da43fedeb7794e1613c50ff48609cb8" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::registry_key::has_sub_key</definition>
+        <argsstring>(const wstring &amp;name) const</argsstring>
+        <name>has_sub_key</name>
+        <qualifiedname>neforce::registry_key::has_sub_key</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>检查是否存在指定的子项 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子项名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>存在返回true，否则返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="274" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1a1785ebffd2f97fcbff61d3fe538f8997" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::registry_key::has_value</definition>
+        <argsstring>(const wstring &amp;name) const</argsstring>
+        <name>has_value</name>
+        <qualifiedname>neforce::registry_key::has_value</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>检查是否存在指定的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>存在返回true，否则返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="281" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1a5840a734274e1efbd0d4c515add0eb7d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &gt;</type>
+        <definition>vector&lt; wstring &gt; neforce::registry_key::enum_sub_key_names</definition>
+        <argsstring>() const</argsstring>
+        <name>enum_sub_key_names</name>
+        <qualifiedname>neforce::registry_key::enum_sub_key_names</qualifiedname>
+        <briefdescription>
+<para>枚举所有子项名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>子项名称的字符串向量 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1registry__key__exception" kindref="compound">registry_key_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当枚举失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="288" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1a402cfc741bc4c7ee3b3eef4974188581" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1registry__key_1_1value__info" kindref="compound">value_info</ref> &gt;</type>
+        <definition>vector&lt; value_info &gt; neforce::registry_key::enum_values</definition>
+        <argsstring>() const</argsstring>
+        <name>enum_values</name>
+        <qualifiedname>neforce::registry_key::enum_values</qualifiedname>
+        <briefdescription>
+<para>枚举所有值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>值信息结构的向量 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1registry__key__exception" kindref="compound">registry_key_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当枚举失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="295" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1a42ea372c27953955141e2935e84ae98b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::registry_key::set_string_value</definition>
+        <argsstring>(const wstring &amp;name, const wstring &amp;value)</argsstring>
+        <name>set_string_value</name>
+        <qualifiedname>neforce::registry_key::set_string_value</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置字符串值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1registry__key__exception" kindref="compound">registry_key_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当写入失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="303" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1a42844fdc9d997337c7a42a05552ef5d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::registry_key::set_expand_string_value</definition>
+        <argsstring>(const wstring &amp;name, const wstring &amp;value)</argsstring>
+        <name>set_expand_string_value</name>
+        <qualifiedname>neforce::registry_key::set_expand_string_value</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置可扩展字符串值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可扩展字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1registry__key__exception" kindref="compound">registry_key_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当写入失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="311" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1abfe000877fd87576e1eb435076eefdb4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::registry_key::set_dword_value</definition>
+        <argsstring>(const wstring &amp;name, ::DWORD value)</argsstring>
+        <name>set_dword_value</name>
+        <qualifiedname>neforce::registry_key::set_dword_value</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>::DWORD</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置32位整数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>DWORD值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1registry__key__exception" kindref="compound">registry_key_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当写入失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="319" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1a6cfa03ca36af08be06fbeb637d95b97d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::registry_key::set_qword_value</definition>
+        <argsstring>(const wstring &amp;name, ::ULONGLONG value)</argsstring>
+        <name>set_qword_value</name>
+        <qualifiedname>neforce::registry_key::set_qword_value</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>::ULONGLONG</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置64位整数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>QWORD值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1registry__key__exception" kindref="compound">registry_key_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当写入失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="327" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1af30ecfb6b4a7f7c1e07c45321e9a1874" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::registry_key::set_binary_value</definition>
+        <argsstring>(const wstring &amp;name, const ::BYTE *data, ::DWORD size)</argsstring>
+        <name>set_binary_value</name>
+        <qualifiedname>neforce::registry_key::set_binary_value</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const ::BYTE *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>::DWORD</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>设置二进制值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>二进制数据指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数据大小（字节） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1registry__key__exception" kindref="compound">registry_key_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当写入失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="336" column="10"/>
+        <references refid="group___type_erasure_functions_1ga897be37123f1690ffa096c58a510dbbe" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+        <references refid="group___type_erasure_functions_1ga69955a26617401117eaf53fa82162e2b" compoundref="type__erase_8hpp" startline="292" endline="294">neforce::size</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1a30f9f2785ef1d37b6e7f7f1f200890a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::registry_key::set_multi_string_value</definition>
+        <argsstring>(const wstring &amp;name, const vector&lt; wstring &gt; &amp;values)</argsstring>
+        <name>set_multi_string_value</name>
+        <qualifiedname>neforce::registry_key::set_multi_string_value</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &gt; &amp;</type>
+          <declname>values</declname>
+        </param>
+        <briefdescription>
+<para>设置多字符串值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>values</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串向量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1registry__key__exception" kindref="compound">registry_key_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当写入失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+多字符串值是以空字符分隔、双空字符结尾的字符串列表。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="346" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1a620cb1dc4815bc084341bceabe99c221" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref></type>
+        <definition>wstring neforce::registry_key::get_string_value</definition>
+        <argsstring>(const wstring &amp;name, const wstring &amp;default_val=L&quot;&quot;) const</argsstring>
+        <name>get_string_value</name>
+        <qualifiedname>neforce::registry_key::get_string_value</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &amp;</type>
+          <declname>default_val</declname>
+          <defval>L&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+<para>获取字符串值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>default_val</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>默认值（当值不存在时返回） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字符串值 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1registry__key__exception" kindref="compound">registry_key_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当值类型不是字符串类型时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="355" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1a70196ec871c0200775e459e6fa421047" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>::DWORD</type>
+        <definition>::DWORD neforce::registry_key::get_dword_value</definition>
+        <argsstring>(const wstring &amp;name, DWORD default_val=0) const noexcept</argsstring>
+        <name>get_dword_value</name>
+        <qualifiedname>neforce::registry_key::get_dword_value</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>DWORD</type>
+          <declname>default_val</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>获取32位整数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>default_val</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>默认值（当值不存在时返回） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>DWORD值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="363" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1aec257e41d052f198d214951d74165bb5" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>::ULONGLONG</type>
+        <definition>::ULONGLONG neforce::registry_key::get_qword_value</definition>
+        <argsstring>(const wstring &amp;name, ULONGLONG default_val=0) const noexcept</argsstring>
+        <name>get_qword_value</name>
+        <qualifiedname>neforce::registry_key::get_qword_value</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>ULONGLONG</type>
+          <declname>default_val</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>获取64位整数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>default_val</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>默认值（当值不存在时返回） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>QWORD值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="371" column="18"/>
+        <references refid="classneforce_1_1registry__key_1aec257e41d052f198d214951d74165bb5">get_qword_value</references>
+        <referencedby refid="classneforce_1_1registry__key_1aec257e41d052f198d214951d74165bb5">get_qword_value</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1a6def9bd1516fc36a2514fc58f8fc129e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> &gt;</type>
+        <definition>vector&lt; byte_t &gt; neforce::registry_key::get_binary_value</definition>
+        <argsstring>(const wstring &amp;name) const</argsstring>
+        <name>get_binary_value</name>
+        <qualifiedname>neforce::registry_key::get_binary_value</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>获取二进制值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>二进制数据向量 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1registry__key__exception" kindref="compound">registry_key_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当值不存在或类型不是REG_BINARY时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="379" column="13"/>
+        <references refid="classneforce_1_1registry__key_1a6def9bd1516fc36a2514fc58f8fc129e">get_binary_value</references>
+        <referencedby refid="classneforce_1_1registry__key_1a6def9bd1516fc36a2514fc58f8fc129e">get_binary_value</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1a6880cc49ccec7af3ee6420241934c905" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &gt;</type>
+        <definition>vector&lt; wstring &gt; neforce::registry_key::get_multi_string_value</definition>
+        <argsstring>(const wstring &amp;name) const</argsstring>
+        <name>get_multi_string_value</name>
+        <qualifiedname>neforce::registry_key::get_multi_string_value</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>获取多字符串值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字符串向量 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1registry__key__exception" kindref="compound">registry_key_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当值不存在或类型不是REG_MULTI_SZ时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="387" column="13"/>
+        <references refid="classneforce_1_1registry__key_1a6880cc49ccec7af3ee6420241934c905">get_multi_string_value</references>
+        <referencedby refid="classneforce_1_1registry__key_1a6880cc49ccec7af3ee6420241934c905">get_multi_string_value</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1aa50a52da9d4053d4114a8c60f4173b08" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>::HKEY</type>
+        <definition>::HKEY neforce::registry_key::native_handle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>native_handle</name>
+        <qualifiedname>neforce::registry_key::native_handle</qualifiedname>
+        <briefdescription>
+<para>获取原生注册表句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>HKEY句柄 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="393" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" bodystart="393" bodyend="393"/>
+        <references refid="classneforce_1_1registry__key_1aa50a52da9d4053d4114a8c60f4173b08" compoundref="registry__key_8hpp" startline="393" endline="393">native_handle</references>
+        <referencedby refid="classneforce_1_1registry__key_1aa50a52da9d4053d4114a8c60f4173b08" compoundref="registry__key_8hpp" startline="393" endline="393">native_handle</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1aa5ba9728484aa87b2a88d74bb05ddcc0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::registry_key::open</definition>
+        <argsstring>(::HKEY root, const wstring &amp;path, wow64_view view, ::REGSAM sam_desired=KEY_READ|KEY_WRITE)</argsstring>
+        <name>open</name>
+        <qualifiedname>neforce::registry_key::open</qualifiedname>
+        <param>
+          <type>::HKEY</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1registry__key_1a9857dec49b598d28d6c51c5f72e30514" kindref="member">wow64_view</ref></type>
+          <declname>view</declname>
+        </param>
+        <param>
+          <type>::REGSAM</type>
+          <declname>sam_desired</declname>
+          <defval>KEY_READ|KEY_WRITE</defval>
+        </param>
+        <briefdescription>
+<para>打开注册表项 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>root</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>根键 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完整路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>view</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>WOW64 视图选择 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sam_desired</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>访问权限，默认为读写 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1registry__key__exception" kindref="compound">registry_key_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当打开失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="403" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1registry__key_1a4cbfaf393ed43125b4a486ee115c7f5d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::registry_key::notify_change</definition>
+        <argsstring>(bool watch_subtree=true, int timeout_ms=-1)</argsstring>
+        <name>notify_change</name>
+        <qualifiedname>neforce::registry_key::notify_change</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>watch_subtree</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>timeout_ms</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+<para>监听注册表项变更（阻塞直到变更或超时） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>watch_subtree</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否同时监听子项 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timeout_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超时毫秒，-1 无限等待 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否发生了变更 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1registry__key__exception" kindref="compound">registry_key_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>监听失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="412" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1registry__key_1aec91a7f4f0aba22a5db8a25afd30b5af" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void neforce::registry_key::delete_key_tree</definition>
+        <argsstring>(::HKEY root, const wstring &amp;path)</argsstring>
+        <name>delete_key_tree</name>
+        <qualifiedname>neforce::registry_key::delete_key_tree</qualifiedname>
+        <param>
+          <type>::HKEY</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga3cf5f76be1fe4fd90bb9b377174fe0d9" kindref="member">wstring</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>递归删除注册表项树 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>root</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>根键 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完整路径</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+递归删除指定路径下的所有子项和值。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="267" column="17"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>系统注册表项类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>系统注册表项的打开、创建、读写和枚举操作。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" line="56" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/registry_key.hpp" bodystart="56" bodyend="413"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1registry__key_1aff7b0487b963e2219a12a95bd64b0591" prot="private" virt="non-virtual"><scope>neforce::registry_key</scope><name>close</name></member>
+      <member refid="classneforce_1_1registry__key_1a16e26d60d973671f625d7bff2180c23c" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>create_sub_key</name></member>
+      <member refid="classneforce_1_1registry__key_1aec91a7f4f0aba22a5db8a25afd30b5af" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>delete_key_tree</name></member>
+      <member refid="classneforce_1_1registry__key_1ad4d02e2713dfd5be1bf372f29bd77bd2" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>delete_sub_key</name></member>
+      <member refid="classneforce_1_1registry__key_1a98582c0a5f0ac12abe2797a81112296b" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>delete_value</name></member>
+      <member refid="classneforce_1_1registry__key_1a5840a734274e1efbd0d4c515add0eb7d" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>enum_sub_key_names</name></member>
+      <member refid="classneforce_1_1registry__key_1a402cfc741bc4c7ee3b3eef4974188581" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>enum_values</name></member>
+      <member refid="classneforce_1_1registry__key_1a6def9bd1516fc36a2514fc58f8fc129e" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>get_binary_value</name></member>
+      <member refid="classneforce_1_1registry__key_1a70196ec871c0200775e459e6fa421047" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>get_dword_value</name></member>
+      <member refid="classneforce_1_1registry__key_1a6880cc49ccec7af3ee6420241934c905" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>get_multi_string_value</name></member>
+      <member refid="classneforce_1_1registry__key_1aec257e41d052f198d214951d74165bb5" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>get_qword_value</name></member>
+      <member refid="classneforce_1_1registry__key_1a620cb1dc4815bc084341bceabe99c221" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>get_string_value</name></member>
+      <member refid="classneforce_1_1registry__key_1aa9a3e15697ac682004928f35b7550505" prot="private" virt="non-virtual"><scope>neforce::registry_key</scope><name>get_value_info</name></member>
+      <member refid="classneforce_1_1registry__key_1a7da43fedeb7794e1613c50ff48609cb8" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>has_sub_key</name></member>
+      <member refid="classneforce_1_1registry__key_1a1785ebffd2f97fcbff61d3fe538f8997" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>has_value</name></member>
+      <member refid="classneforce_1_1registry__key_1af08133f77dffe2cce89aaba6e53a7b74" prot="private" virt="non-virtual"><scope>neforce::registry_key</scope><name>hkey_</name></member>
+      <member refid="classneforce_1_1registry__key_1a369993deb522cb590f4e3ac7b13cf983" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>is_valid</name></member>
+      <member refid="classneforce_1_1registry__key_1aa50a52da9d4053d4114a8c60f4173b08" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>native_handle</name></member>
+      <member refid="classneforce_1_1registry__key_1a4cbfaf393ed43125b4a486ee115c7f5d" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>notify_change</name></member>
+      <member refid="classneforce_1_1registry__key_1a0a0403c1a14fddcc464d5a42e40c7193" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>open</name></member>
+      <member refid="classneforce_1_1registry__key_1aa5ba9728484aa87b2a88d74bb05ddcc0" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>open</name></member>
+      <member refid="classneforce_1_1registry__key_1a015eefe555695700e360e0f25b40c21f" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>open_sub_key</name></member>
+      <member refid="classneforce_1_1registry__key_1a1ce149df56191afa6c1e8565c6c80930" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>operator bool</name></member>
+      <member refid="classneforce_1_1registry__key_1a3202832447228c17e58478cfa5458bc6" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1registry__key_1a4190e98097df32056f4375fcd7d760de" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1registry__key_1a41c6c096d064ff9e49cf03bd90496089" prot="private" virt="non-virtual"><scope>neforce::registry_key</scope><name>owns_handle_</name></member>
+      <member refid="classneforce_1_1registry__key_1ad39df0ba9830b4b3f46fd3996a9934a2" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>registry_key</name></member>
+      <member refid="classneforce_1_1registry__key_1aba38c0e405e8c01c058a81fce10535d0" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>registry_key</name></member>
+      <member refid="classneforce_1_1registry__key_1aeccff7ee53a6641aaa7b9b6b44b418ff" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>registry_key</name></member>
+      <member refid="classneforce_1_1registry__key_1a65ae6e186174667d52fbcc69fd2de90b" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>registry_key</name></member>
+      <member refid="classneforce_1_1registry__key_1af30ecfb6b4a7f7c1e07c45321e9a1874" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>set_binary_value</name></member>
+      <member refid="classneforce_1_1registry__key_1abfe000877fd87576e1eb435076eefdb4" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>set_dword_value</name></member>
+      <member refid="classneforce_1_1registry__key_1a42844fdc9d997337c7a42a05552ef5d0" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>set_expand_string_value</name></member>
+      <member refid="classneforce_1_1registry__key_1a30f9f2785ef1d37b6e7f7f1f200890a6" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>set_multi_string_value</name></member>
+      <member refid="classneforce_1_1registry__key_1a6cfa03ca36af08be06fbeb637d95b97d" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>set_qword_value</name></member>
+      <member refid="classneforce_1_1registry__key_1a42ea372c27953955141e2935e84ae98b" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>set_string_value</name></member>
+      <member refid="classneforce_1_1registry__key_1aaf972f562563f7186de2286ded367d7a" prot="private" virt="non-virtual"><scope>neforce::registry_key</scope><name>throw_if_invalid</name></member>
+      <member refid="classneforce_1_1registry__key_1ae380b49bb4e1922bf90fd553cb9af357" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>value_type</name></member>
+      <member refid="classneforce_1_1registry__key_1a9857dec49b598d28d6c51c5f72e30514a10da17c8d9a6bfaec0641230dc88b783" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>view_32bit</name></member>
+      <member refid="classneforce_1_1registry__key_1a9857dec49b598d28d6c51c5f72e30514ab913cc9f2d477dea6d312cbfb2ef2fa4" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>view_64bit</name></member>
+      <member refid="classneforce_1_1registry__key_1a9857dec49b598d28d6c51c5f72e30514aeb48ffc0fba5642a4d85cc8d24af1e2d" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>view_default</name></member>
+      <member refid="classneforce_1_1registry__key_1a9857dec49b598d28d6c51c5f72e30514" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>wow64_view</name></member>
+      <member refid="classneforce_1_1registry__key_1a8805fcb721bea8f0c273ff1a1f52d1d9" prot="public" virt="non-virtual"><scope>neforce::registry_key</scope><name>~registry_key</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

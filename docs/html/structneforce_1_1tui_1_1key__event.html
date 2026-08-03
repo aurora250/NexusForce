@@ -1,0 +1,346 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::tui::key_event结构体 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('structneforce_1_1tui_1_1key__event.html','','structneforce_1_1tui_1_1key__event-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::tui::key_event结构体 参考<div class="ingroups"><a class="el" href="group___t_u_i.html">TUI</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>键盘事件  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="events_8hpp_source.html">events.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:ad09bcf031c0ca2f6907e96a114db54d8" id="r_ad09bcf031c0ca2f6907e96a114db54d8"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8">type</a> { <br />
+&#160;&#160;<a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8aad921d60486366258809553a3db49a4a">unknown</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8a46c48bec0d282018b9d167eef7711b2c">up</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8a74e8333ad11685ff3bdae589c8f6e34d">down</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8a811882fecd5c7618d7099ebbd39ea254">left</a>
+, <br />
+&#160;&#160;<a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8a7c4f29407893c334a6cb7a87bf045c0d">right</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8a106a6c241b8797f52e1e77317b96a201">home</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8a7f021a1415b86f2d013b2618fb31ae53">end</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8af8e72578226499b7311f292f1deba130">page_up</a>
+, <br />
+&#160;&#160;<a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8ad8a0a6a1d9f3b78b1af0293cf6ac5dd7">page_down</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8ae0df5f3dfd2650ae5be9993434e2b2c0">insert</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8a02aaa1f70ced421d7834d2b4581bb296">delete_</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8ae2a7106f1cc8bb1e1318df70aa0a3540">enter</a>
+, <br />
+&#160;&#160;<a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8ae7f8cbd87d347be881cba92dad128518">tab</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8aeb668a27cc115f2c64f316351ff4a705">tab_reverse</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8ae0ebc3c409070d07f1df0f2f4132509e">escape</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8a5528770f4bce9c9b0ce9bbb8645aef45">backspace</a>
+, <br />
+&#160;&#160;<a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8ae1dffc8709f31a4987c8a88334107e89">F1</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8afe5c3684dce76cdd9f7f42430868aa74">F2</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8a4b6bf4b531770872d4328ce69bef5627">F3</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8ae7e0e72401a9f2718ed0f39f2861d702">F4</a>
+, <br />
+&#160;&#160;<a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8a37f438df6a6d5ba4c17ef8ca58562f00">F5</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8a1faf42f2823f184eb2c9f0dffe5d73f2">F6</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8a47489eb597b7db34caa24b1fc78fc839">F7</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8a4787509ad9f9d747a81a30e9dde3d4a7">F8</a>
+, <br />
+&#160;&#160;<a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8a892a245e287c163080b23db737d3c4c9">F9</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8ab213ce22ca6ad4eda8db82966b9b6e5a">F10</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8a643b0662422d1d0dffa3fca2e2bf28a8">F11</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8ae902674982fc99aa343cdd94da7476c3">F12</a>
+, <br />
+&#160;&#160;<a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8a95dfde4807d4d6a9eec499203b3c24a0">F13</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8a2468649b6215c4cdd2aef5095b3f5932">F14</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8ae53b55851b9ff4979f2c3ff434a4a138">F15</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8a56d8353718e6fdc78b8d69078a2cdb94">F16</a>
+, <br />
+&#160;&#160;<a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8affa5882d1ddcf903bf0d0dbc30bfc604">F17</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8a810b30cdfc07fd7fff553a94b828ff78">F18</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8acd7c2a221ef5d0a34acc0bcd679b2054">F19</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8afc335adb3d69d3d8270769e1923ea4dc">F20</a>
+, <br />
+&#160;&#160;<a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8a77e9eee7c579eef5f3731ecf1053c02e">F21</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8a7fa06ead699fcbd63132370ffe13335a">F22</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8a889645d530078147e7dc69a9caadc31e">F23</a>
+, <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8aebd7820c520d05eca2d775c37d141273">F24</a>
+, <br />
+&#160;&#160;<a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8a2acb3c622363ea3ca6f5a0feeb3c642a">printable</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:ad09bcf031c0ca2f6907e96a114db54d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">特殊按键枚举  <a href="#ad09bcf031c0ca2f6907e96a114db54d8">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a990801dd75eea76cc5c9774a52e781e2" id="r_a990801dd75eea76cc5c9774a52e781e2"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a990801dd75eea76cc5c9774a52e781e2">is_printable</a> () const noexcept</td></tr>
+<tr class="memdesc:a990801dd75eea76cc5c9774a52e781e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否为可打印字符  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public 属性</h2></td></tr>
+<tr class="memitem:a56588379acfc56c8b55f27d783076cef" id="r_a56588379acfc56c8b55f27d783076cef"><td class="memItemLeft"><a id="a56588379acfc56c8b55f27d783076cef" name="a56588379acfc56c8b55f27d783076cef"></a>
+<a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8">type</a>&#160;</td><td class="memItemRight"><b>key</b> = <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8aad921d60486366258809553a3db49a4a">type::unknown</a></td></tr>
+<tr class="memdesc:a56588379acfc56c8b55f27d783076cef"><td class="mdescLeft">&#160;</td><td class="mdescRight">按键标识 <br /></td></tr>
+<tr class="memitem:a3f798afc496f8dff296c6e7e5edd263a" id="r_a3f798afc496f8dff296c6e7e5edd263a"><td class="memItemLeft"><a id="a3f798afc496f8dff296c6e7e5edd263a" name="a3f798afc496f8dff296c6e7e5edd263a"></a>
+<a class="el" href="classneforce_1_1codepoint.html">codepoint</a>&#160;</td><td class="memItemRight"><b>cp</b></td></tr>
+<tr class="memdesc:a3f798afc496f8dff296c6e7e5edd263a"><td class="mdescLeft">&#160;</td><td class="mdescRight">可打印字符的码点 <br /></td></tr>
+<tr class="memitem:af554a7660e311167f9639de451e35eb3" id="r_af554a7660e311167f9639de451e35eb3"><td class="memItemLeft"><a id="af554a7660e311167f9639de451e35eb3" name="af554a7660e311167f9639de451e35eb3"></a>
+<a class="el" href="group___t_u_i.html#gafec1c40799515c1ff06a2364b9ac9d41">key_modifier</a>&#160;</td><td class="memItemRight"><b>mods</b> = <a class="el" href="group___t_u_i.html#ggafec1c40799515c1ff06a2364b9ac9d41a334c4a4c42fdb79d7ebc3e73b517e6f8">key_modifier::none</a></td></tr>
+<tr class="memdesc:af554a7660e311167f9639de451e35eb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">当前按下的修饰键 <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>键盘事件 </p>
+<p>表示一次键盘输入，可能是特殊键或可打印字符。 特殊键由 Key 枚举标识，可打印字符通过 ch 字段传递 Unicode 码点。 </p>
+
+<p class="definition">在文件 <a class="el" href="events_8hpp_source.html">events.hpp</a> 第 <a class="el" href="events_8hpp_source.html#l00047">47</a> 行定义.</p>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
+<a id="ad09bcf031c0ca2f6907e96a114db54d8" name="ad09bcf031c0ca2f6907e96a114db54d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad09bcf031c0ca2f6907e96a114db54d8">&#9670;&#160;</a></span>type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#ad09bcf031c0ca2f6907e96a114db54d8">neforce::tui::key_event::type</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>特殊按键枚举 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8aad921d60486366258809553a3db49a4a" name="ad09bcf031c0ca2f6907e96a114db54d8aad921d60486366258809553a3db49a4a"></a>unknown&#160;</td><td class="fielddoc"><p>未知按键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8a46c48bec0d282018b9d167eef7711b2c" name="ad09bcf031c0ca2f6907e96a114db54d8a46c48bec0d282018b9d167eef7711b2c"></a>up&#160;</td><td class="fielddoc"><p>上方向键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8a74e8333ad11685ff3bdae589c8f6e34d" name="ad09bcf031c0ca2f6907e96a114db54d8a74e8333ad11685ff3bdae589c8f6e34d"></a>down&#160;</td><td class="fielddoc"><p>下方向键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8a811882fecd5c7618d7099ebbd39ea254" name="ad09bcf031c0ca2f6907e96a114db54d8a811882fecd5c7618d7099ebbd39ea254"></a>left&#160;</td><td class="fielddoc"><p>左方向键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8a7c4f29407893c334a6cb7a87bf045c0d" name="ad09bcf031c0ca2f6907e96a114db54d8a7c4f29407893c334a6cb7a87bf045c0d"></a>right&#160;</td><td class="fielddoc"><p>右方向键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8a106a6c241b8797f52e1e77317b96a201" name="ad09bcf031c0ca2f6907e96a114db54d8a106a6c241b8797f52e1e77317b96a201"></a>home&#160;</td><td class="fielddoc"><p>Home 键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8a7f021a1415b86f2d013b2618fb31ae53" name="ad09bcf031c0ca2f6907e96a114db54d8a7f021a1415b86f2d013b2618fb31ae53"></a>end&#160;</td><td class="fielddoc"><p>End 键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8af8e72578226499b7311f292f1deba130" name="ad09bcf031c0ca2f6907e96a114db54d8af8e72578226499b7311f292f1deba130"></a>page_up&#160;</td><td class="fielddoc"><p>Page Up 键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8ad8a0a6a1d9f3b78b1af0293cf6ac5dd7" name="ad09bcf031c0ca2f6907e96a114db54d8ad8a0a6a1d9f3b78b1af0293cf6ac5dd7"></a>page_down&#160;</td><td class="fielddoc"><p>Page Down 键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8ae0df5f3dfd2650ae5be9993434e2b2c0" name="ad09bcf031c0ca2f6907e96a114db54d8ae0df5f3dfd2650ae5be9993434e2b2c0"></a>insert&#160;</td><td class="fielddoc"><p>Insert 键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8a02aaa1f70ced421d7834d2b4581bb296" name="ad09bcf031c0ca2f6907e96a114db54d8a02aaa1f70ced421d7834d2b4581bb296"></a>delete_&#160;</td><td class="fielddoc"><p>Delete 键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8ae2a7106f1cc8bb1e1318df70aa0a3540" name="ad09bcf031c0ca2f6907e96a114db54d8ae2a7106f1cc8bb1e1318df70aa0a3540"></a>enter&#160;</td><td class="fielddoc"><p>回车键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8ae7f8cbd87d347be881cba92dad128518" name="ad09bcf031c0ca2f6907e96a114db54d8ae7f8cbd87d347be881cba92dad128518"></a>tab&#160;</td><td class="fielddoc"><p>Tab 键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8aeb668a27cc115f2c64f316351ff4a705" name="ad09bcf031c0ca2f6907e96a114db54d8aeb668a27cc115f2c64f316351ff4a705"></a>tab_reverse&#160;</td><td class="fielddoc"><p>Shift+Tab 键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8ae0ebc3c409070d07f1df0f2f4132509e" name="ad09bcf031c0ca2f6907e96a114db54d8ae0ebc3c409070d07f1df0f2f4132509e"></a>escape&#160;</td><td class="fielddoc"><p>Escape 键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8a5528770f4bce9c9b0ce9bbb8645aef45" name="ad09bcf031c0ca2f6907e96a114db54d8a5528770f4bce9c9b0ce9bbb8645aef45"></a>backspace&#160;</td><td class="fielddoc"><p>退格键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8ae1dffc8709f31a4987c8a88334107e89" name="ad09bcf031c0ca2f6907e96a114db54d8ae1dffc8709f31a4987c8a88334107e89"></a>F1&#160;</td><td class="fielddoc"><p>F1 功能键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8afe5c3684dce76cdd9f7f42430868aa74" name="ad09bcf031c0ca2f6907e96a114db54d8afe5c3684dce76cdd9f7f42430868aa74"></a>F2&#160;</td><td class="fielddoc"><p>F2 功能键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8a4b6bf4b531770872d4328ce69bef5627" name="ad09bcf031c0ca2f6907e96a114db54d8a4b6bf4b531770872d4328ce69bef5627"></a>F3&#160;</td><td class="fielddoc"><p>F3 功能键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8ae7e0e72401a9f2718ed0f39f2861d702" name="ad09bcf031c0ca2f6907e96a114db54d8ae7e0e72401a9f2718ed0f39f2861d702"></a>F4&#160;</td><td class="fielddoc"><p>F4 功能键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8a37f438df6a6d5ba4c17ef8ca58562f00" name="ad09bcf031c0ca2f6907e96a114db54d8a37f438df6a6d5ba4c17ef8ca58562f00"></a>F5&#160;</td><td class="fielddoc"><p>F5 功能键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8a1faf42f2823f184eb2c9f0dffe5d73f2" name="ad09bcf031c0ca2f6907e96a114db54d8a1faf42f2823f184eb2c9f0dffe5d73f2"></a>F6&#160;</td><td class="fielddoc"><p>F6 功能键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8a47489eb597b7db34caa24b1fc78fc839" name="ad09bcf031c0ca2f6907e96a114db54d8a47489eb597b7db34caa24b1fc78fc839"></a>F7&#160;</td><td class="fielddoc"><p>F7 功能键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8a4787509ad9f9d747a81a30e9dde3d4a7" name="ad09bcf031c0ca2f6907e96a114db54d8a4787509ad9f9d747a81a30e9dde3d4a7"></a>F8&#160;</td><td class="fielddoc"><p>F8 功能键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8a892a245e287c163080b23db737d3c4c9" name="ad09bcf031c0ca2f6907e96a114db54d8a892a245e287c163080b23db737d3c4c9"></a>F9&#160;</td><td class="fielddoc"><p>F9 功能键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8ab213ce22ca6ad4eda8db82966b9b6e5a" name="ad09bcf031c0ca2f6907e96a114db54d8ab213ce22ca6ad4eda8db82966b9b6e5a"></a>F10&#160;</td><td class="fielddoc"><p>F10 功能键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8a643b0662422d1d0dffa3fca2e2bf28a8" name="ad09bcf031c0ca2f6907e96a114db54d8a643b0662422d1d0dffa3fca2e2bf28a8"></a>F11&#160;</td><td class="fielddoc"><p>F11 功能键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8ae902674982fc99aa343cdd94da7476c3" name="ad09bcf031c0ca2f6907e96a114db54d8ae902674982fc99aa343cdd94da7476c3"></a>F12&#160;</td><td class="fielddoc"><p>F12 功能键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8a95dfde4807d4d6a9eec499203b3c24a0" name="ad09bcf031c0ca2f6907e96a114db54d8a95dfde4807d4d6a9eec499203b3c24a0"></a>F13&#160;</td><td class="fielddoc"><p>F13 功能键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8a2468649b6215c4cdd2aef5095b3f5932" name="ad09bcf031c0ca2f6907e96a114db54d8a2468649b6215c4cdd2aef5095b3f5932"></a>F14&#160;</td><td class="fielddoc"><p>F14 功能键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8ae53b55851b9ff4979f2c3ff434a4a138" name="ad09bcf031c0ca2f6907e96a114db54d8ae53b55851b9ff4979f2c3ff434a4a138"></a>F15&#160;</td><td class="fielddoc"><p>F15 功能键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8a56d8353718e6fdc78b8d69078a2cdb94" name="ad09bcf031c0ca2f6907e96a114db54d8a56d8353718e6fdc78b8d69078a2cdb94"></a>F16&#160;</td><td class="fielddoc"><p>F16 功能键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8affa5882d1ddcf903bf0d0dbc30bfc604" name="ad09bcf031c0ca2f6907e96a114db54d8affa5882d1ddcf903bf0d0dbc30bfc604"></a>F17&#160;</td><td class="fielddoc"><p>F17 功能键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8a810b30cdfc07fd7fff553a94b828ff78" name="ad09bcf031c0ca2f6907e96a114db54d8a810b30cdfc07fd7fff553a94b828ff78"></a>F18&#160;</td><td class="fielddoc"><p>F18 功能键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8acd7c2a221ef5d0a34acc0bcd679b2054" name="ad09bcf031c0ca2f6907e96a114db54d8acd7c2a221ef5d0a34acc0bcd679b2054"></a>F19&#160;</td><td class="fielddoc"><p>F19 功能键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8afc335adb3d69d3d8270769e1923ea4dc" name="ad09bcf031c0ca2f6907e96a114db54d8afc335adb3d69d3d8270769e1923ea4dc"></a>F20&#160;</td><td class="fielddoc"><p>F20 功能键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8a77e9eee7c579eef5f3731ecf1053c02e" name="ad09bcf031c0ca2f6907e96a114db54d8a77e9eee7c579eef5f3731ecf1053c02e"></a>F21&#160;</td><td class="fielddoc"><p>F21 功能键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8a7fa06ead699fcbd63132370ffe13335a" name="ad09bcf031c0ca2f6907e96a114db54d8a7fa06ead699fcbd63132370ffe13335a"></a>F22&#160;</td><td class="fielddoc"><p>F22 功能键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8a889645d530078147e7dc69a9caadc31e" name="ad09bcf031c0ca2f6907e96a114db54d8a889645d530078147e7dc69a9caadc31e"></a>F23&#160;</td><td class="fielddoc"><p>F23 功能键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8aebd7820c520d05eca2d775c37d141273" name="ad09bcf031c0ca2f6907e96a114db54d8aebd7820c520d05eca2d775c37d141273"></a>F24&#160;</td><td class="fielddoc"><p>F24 功能键 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad09bcf031c0ca2f6907e96a114db54d8a2acb3c622363ea3ca6f5a0feeb3c642a" name="ad09bcf031c0ca2f6907e96a114db54d8a2acb3c622363ea3ca6f5a0feeb3c642a"></a>printable&#160;</td><td class="fielddoc"><p>可打印字符，查看 ch 字段 </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="events_8hpp_source.html">events.hpp</a> 第 <a class="el" href="events_8hpp_source.html#l00051">51</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a990801dd75eea76cc5c9774a52e781e2" name="a990801dd75eea76cc5c9774a52e781e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a990801dd75eea76cc5c9774a52e781e2">&#9670;&#160;</a></span>is_printable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::tui::key_event::is_printable </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查是否为可打印字符 </p>
+<dl class="section return"><dt>返回</dt><dd>是否为可打印字符 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="events_8hpp_source.html">events.hpp</a> 第 <a class="el" href="events_8hpp_source.html#l00103">103</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="events_8hpp_source.html#l00095">key</a> , 以及 <a class="el" href="events_8hpp_source.html#l00092">printable</a>.</p>
+
+</div>
+</div>
+<hr/>该结构体的文档由以下文件生成:<ul>
+<li><a class="el" href="events_8hpp_source.html">events.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><b>tui</b></li><li class="navelem"><a href="structneforce_1_1tui_1_1key__event.html">key_event</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

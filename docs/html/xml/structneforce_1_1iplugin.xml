@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1iplugin" kind="struct" language="C++" prot="public" abstract="yes">
+    <compoundname>neforce::iplugin</compoundname>
+    <includes refid="iplugin_8hpp" local="no">iplugin.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1iplugin_1ae23fd1542c4313f4fa2c4a029045b119" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual neforce::iplugin::~iplugin</definition>
+        <argsstring>()=default</argsstring>
+        <name>~iplugin</name>
+        <qualifiedname>neforce::iplugin::~iplugin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/plugin/iplugin.hpp" line="45" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1iplugin_1a608f5a923d224938a16fb720c7b66b09" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>const <ref refid="structneforce_1_1plugin__info" kindref="compound">plugin_info</ref> &amp;</type>
+        <definition>virtual const plugin_info &amp; neforce::iplugin::get_info</definition>
+        <argsstring>() const =0</argsstring>
+        <name>get_info</name>
+        <qualifiedname>neforce::iplugin::get_info</qualifiedname>
+        <briefdescription>
+<para>获取插件信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>插件信息结构引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/plugin/iplugin.hpp" line="51" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1iplugin_1ae897024d9966d9dae1be14ecdf10009e" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void neforce::iplugin::initialize</definition>
+        <argsstring>()=0</argsstring>
+        <name>initialize</name>
+        <qualifiedname>neforce::iplugin::initialize</qualifiedname>
+        <briefdescription>
+<para>初始化插件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>在插件加载后调用，用于执行初始化操作。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/plugin/iplugin.hpp" line="58" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1iplugin_1ab74fe58ab9943a6ef8f8dff2f45d01b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void neforce::iplugin::execute</definition>
+        <argsstring>()=0</argsstring>
+        <name>execute</name>
+        <qualifiedname>neforce::iplugin::execute</qualifiedname>
+        <briefdescription>
+<para>执行插件的主要功能 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/plugin/iplugin.hpp" line="63" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1iplugin_1a24ea52256942af5dcd1402671a963ee1" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void neforce::iplugin::shutdown</definition>
+        <argsstring>()=0</argsstring>
+        <name>shutdown</name>
+        <qualifiedname>neforce::iplugin::shutdown</qualifiedname>
+        <briefdescription>
+<para>关闭插件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>在插件卸载前调用，用于清理资源。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/plugin/iplugin.hpp" line="70" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>插件接口基类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>所有插件必须实现的接口，定义了插件的生命周期管理方法。 插件需要实现初始化、执行和关闭等操作。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/plugin/iplugin.hpp" line="44" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/plugin/iplugin.hpp" bodystart="44" bodyend="71"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1iplugin_1ab74fe58ab9943a6ef8f8dff2f45d01b0" prot="public" virt="pure-virtual"><scope>neforce::iplugin</scope><name>execute</name></member>
+      <member refid="structneforce_1_1iplugin_1a608f5a923d224938a16fb720c7b66b09" prot="public" virt="pure-virtual"><scope>neforce::iplugin</scope><name>get_info</name></member>
+      <member refid="structneforce_1_1iplugin_1ae897024d9966d9dae1be14ecdf10009e" prot="public" virt="pure-virtual"><scope>neforce::iplugin</scope><name>initialize</name></member>
+      <member refid="structneforce_1_1iplugin_1a24ea52256942af5dcd1402671a963ee1" prot="public" virt="pure-virtual"><scope>neforce::iplugin</scope><name>shutdown</name></member>
+      <member refid="structneforce_1_1iplugin_1ae23fd1542c4313f4fa2c4a029045b119" prot="public" virt="virtual"><scope>neforce::iplugin</scope><name>~iplugin</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

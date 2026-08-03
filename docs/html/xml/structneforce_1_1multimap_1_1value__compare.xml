@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1multimap_1_1value__compare" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::multimap::value_compare</compoundname>
+    <includes refid="multimap_8hpp" local="no">multimap.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structneforce_1_1multimap_1_1value__compare_1ad288cd4baa95df658157c93a918b1a1c" prot="private" static="no" mutable="no">
+        <type>Compare</type>
+        <definition>Compare neforce::multimap&lt; Key, T, Compare, Alloc &gt;::value_compare::comp_</definition>
+        <argsstring></argsstring>
+        <name>comp_</name>
+        <qualifiedname>neforce::multimap::value_compare::comp_</qualifiedname>
+        <briefdescription>
+<para>键比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="57" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="structneforce_1_1multimap_1_1value__compare_1a2368255bd03ce5c70826c6cda89acece" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class multimap</definition>
+        <argsstring></argsstring>
+        <name>multimap</name>
+        <qualifiedname>neforce::multimap::value_compare::multimap</qualifiedname>
+        <param>
+          <type>multimap</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="58" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1multimap_1_1value__compare_1aa56230b3325d1539ff93f47a845630e8" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::multimap&lt; Key, T, Compare, Alloc &gt;::value_compare::value_compare</definition>
+        <argsstring>(Compare comp)</argsstring>
+        <name>value_compare</name>
+        <qualifiedname>neforce::multimap::value_compare::value_compare</qualifiedname>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="61" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="61" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1multimap_1_1value__compare_1ac2b794eba1c8fdf72d82c83811a8a513" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::multimap&lt; Key, T, Compare, Alloc &gt;::value_compare::operator()</definition>
+        <argsstring>(const value_type &amp;lhs, const value_type &amp;rhs) const noexcept</argsstring>
+        <name>operator()</name>
+        <qualifiedname>neforce::multimap::value_compare::operator()</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1multimap_1a98b61d98b339972ae53ac37704860f46" kindref="member">value_type</ref> &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1multimap_1a98b61d98b339972ae53ac37704860f46" kindref="member">value_type</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>比较两个键值对 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左侧值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果lhs的键小于rhs的键返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="70" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="70" bodyend="72"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>值比较函数对象 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>用于比较两个键值对，实际是比较它们的键。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="55" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="55" bodyend="73"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1multimap_1_1value__compare_1ad288cd4baa95df658157c93a918b1a1c" prot="private" virt="non-virtual"><scope>neforce::multimap::value_compare</scope><name>comp_</name></member>
+      <member refid="structneforce_1_1multimap_1_1value__compare_1ac2b794eba1c8fdf72d82c83811a8a513" prot="public" virt="non-virtual"><scope>neforce::multimap::value_compare</scope><name>operator()</name></member>
+      <member refid="structneforce_1_1multimap_1_1value__compare_1aa56230b3325d1539ff93f47a845630e8" prot="public" virt="non-virtual"><scope>neforce::multimap::value_compare</scope><name>value_compare</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,13 +1,13 @@
 var group___numeric_algorithms =
 [
-    [ "accumulate", "group___numeric_algorithms.html#gac179678baa7a4b73ba0fd0e1e900eebf", null ],
-    [ "accumulate", "group___numeric_algorithms.html#ga6df197c7189d776420d7e37b43b71bf0", null ],
-    [ "adjacent_difference", "group___numeric_algorithms.html#ga621598e32649f2ea9d266b71c41e21f2", null ],
-    [ "adjacent_difference", "group___numeric_algorithms.html#gabff943711f51bbc9d52f36b2896cdbe2", null ],
-    [ "inner_product", "group___numeric_algorithms.html#ga021638ddb3f053341b51d96e548afc59", null ],
-    [ "inner_product", "group___numeric_algorithms.html#ga9b45f54e78ca9574ccc6ec648637a61a", null ],
-    [ "NEFORCE_DEPRECATED_FOR", "group___numeric_algorithms.html#gaad69db0c26b01c77df17a908753028e1", null ],
-    [ "partial_sum", "group___numeric_algorithms.html#ga17436788fe58590382464a31ee83995f", null ],
-    [ "partial_sum", "group___numeric_algorithms.html#gad486403cf79927457465f94e4f355788", null ],
-    [ "sequence_fill", "group___numeric_algorithms.html#gae4dd1c0c94bba63545ca1741b661da06", null ]
+    [ "neforce::accumulate", "group___numeric_algorithms.html#gaa16f28f8b1bbf5f1c3684fefb0cc2c1a", null ],
+    [ "neforce::accumulate", "group___numeric_algorithms.html#gab812b01df2723756f1a2734e25837071", null ],
+    [ "neforce::adjacent_difference", "group___numeric_algorithms.html#gaea82f131bc40948dc9045444a59c875b", null ],
+    [ "neforce::adjacent_difference", "group___numeric_algorithms.html#ga68643e9b6d80278888c4333043575e95", null ],
+    [ "neforce::inner_product", "group___numeric_algorithms.html#gaa81b8241d5424ac0203684eeb30b88d0", null ],
+    [ "neforce::inner_product", "group___numeric_algorithms.html#gabe429cab7e563818ae8eb1e076599b67", null ],
+    [ "neforce::iota", "group___numeric_algorithms.html#gad558e3eda93293705ed566f8c6cf8d76", null ],
+    [ "neforce::partial_sum", "group___numeric_algorithms.html#ga1dcb56e784f175de2bab7bf826c7c342", null ],
+    [ "neforce::partial_sum", "group___numeric_algorithms.html#gaebff42c184e395d721c31294061e1b4a", null ],
+    [ "neforce::sequence_fill", "group___numeric_algorithms.html#gaefdeead6653bd5cb4a7bcf86230ae0b0", null ]
 ];

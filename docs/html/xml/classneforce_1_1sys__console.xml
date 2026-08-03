@@ -1,0 +1,3084 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1sys__console" kind="class" language="C++" prot="public">
+    <compoundname>neforce::sys_console</compoundname>
+    <includes refid="console_8hpp" local="no">console.hpp</includes>
+    <innerclass refid="structneforce_1_1sys__console_1_1console__size" prot="public">neforce::sys_console::console_size</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1sys__console_1a9726fe98e5a662de4b977525df3ec231" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1gaae6b483f5dbd1f5318336f6349ff6a6a" kindref="member">native_handle_type</ref></type>
+        <definition>native_handle_type neforce::sys_console::out_</definition>
+        <argsstring></argsstring>
+        <name>out_</name>
+        <qualifiedname>neforce::sys_console::out_</qualifiedname>
+        <briefdescription>
+<para>标准输出句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="90" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sys__console_1a91f4ef256e4c8c59ee8ef2b280fa2acd" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1gaae6b483f5dbd1f5318336f6349ff6a6a" kindref="member">native_handle_type</ref></type>
+        <definition>native_handle_type neforce::sys_console::in_</definition>
+        <argsstring></argsstring>
+        <name>in_</name>
+        <qualifiedname>neforce::sys_console::in_</qualifiedname>
+        <briefdescription>
+<para>标准输入句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="91" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sys__console_1a69be2e1eb205c9df539e84da39303a61" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1gaae6b483f5dbd1f5318336f6349ff6a6a" kindref="member">native_handle_type</ref></type>
+        <definition>native_handle_type neforce::sys_console::err_</definition>
+        <argsstring></argsstring>
+        <name>err_</name>
+        <qualifiedname>neforce::sys_console::err_</qualifiedname>
+        <briefdescription>
+<para>标准错误句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="92" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sys__console_1a64ca943378266f53462d2d8c4da167fe" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1sys__console_1_1console__size" kindref="compound">console_size</ref></type>
+        <definition>console_size neforce::sys_console::saved_cursor_pos_</definition>
+        <argsstring></argsstring>
+        <name>saved_cursor_pos_</name>
+        <qualifiedname>neforce::sys_console::saved_cursor_pos_</qualifiedname>
+        <initializer>{0, 0}</initializer>
+        <briefdescription>
+<para>保存的光标位置 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="95" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="95" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sys__console_1aee2b63e99e2b576728c4d742f7289364" prot="private" static="no" mutable="yes">
+        <type><ref refid="classneforce_1_1mutex" kindref="compound">mutex</ref></type>
+        <definition>mutex neforce::sys_console::mutex_</definition>
+        <argsstring></argsstring>
+        <name>mutex_</name>
+        <qualifiedname>neforce::sys_console::mutex_</qualifiedname>
+        <briefdescription>
+<para>互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="98" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sys__console_1a587444ccfbc49ee311e9bc73285420cb" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1sys__console_1_1console__size" kindref="compound">console_size</ref></type>
+        <definition>console_size neforce::sys_console::last_size_</definition>
+        <argsstring></argsstring>
+        <name>last_size_</name>
+        <qualifiedname>neforce::sys_console::last_size_</qualifiedname>
+        <initializer>{0, 0}</initializer>
+        <briefdescription>
+<para>上次记录的控制台尺寸 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="99" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="99" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sys__console_1ae28c1dbed3b91e71d119f6dedb774853" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::sys_console::alt_buffer_active_</definition>
+        <argsstring></argsstring>
+        <name>alt_buffer_active_</name>
+        <qualifiedname>neforce::sys_console::alt_buffer_active_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="101" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sys__console_1a3a36e6871596c54e93be2a32d8e42632" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::sys_console::mouse_enabled_</definition>
+        <argsstring></argsstring>
+        <name>mouse_enabled_</name>
+        <qualifiedname>neforce::sys_console::mouse_enabled_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="102" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sys__console_1a905a47e09ac5171275507970658e2e9b" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int neforce::sys_console::pending_char_</definition>
+        <argsstring></argsstring>
+        <name>pending_char_</name>
+        <qualifiedname>neforce::sys_console::pending_char_</qualifiedname>
+        <initializer>= -1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="103" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="103" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1sys__console_1ae061b8903c1f0d77fe47e088a0f3c4bf" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::print_string_unsafe</definition>
+        <argsstring>(const string &amp;str) const</argsstring>
+        <name>print_string_unsafe</name>
+        <qualifiedname>neforce::sys_console::print_string_unsafe</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="106" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="106" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a9cf285ab4e1f8761998c54a889226ffb" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::print_string_unsafe</definition>
+        <argsstring>(string_view str) const</argsstring>
+        <name>print_string_unsafe</name>
+        <qualifiedname>neforce::sys_console::print_string_unsafe</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="107" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1abdf943b871f50cd20584c6b22f2a700a" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::print_string_unsafe</definition>
+        <argsstring>(const char *str) const</argsstring>
+        <name>print_string_unsafe</name>
+        <qualifiedname>neforce::sys_console::print_string_unsafe</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="108" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="108" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a301f7ea7176ea16c36c0415fcda0fe9c" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::print_error_unsafe</definition>
+        <argsstring>(const string &amp;str) const</argsstring>
+        <name>print_error_unsafe</name>
+        <qualifiedname>neforce::sys_console::print_error_unsafe</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="110" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="110" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a227c2a4154567c9dcfd2cfd539b4882d" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::print_error_unsafe</definition>
+        <argsstring>(string_view str) const</argsstring>
+        <name>print_error_unsafe</name>
+        <qualifiedname>neforce::sys_console::print_error_unsafe</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="111" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1abc6bf719505696432f6d02f70a561d76" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::print_error_unsafe</definition>
+        <argsstring>(const char *str) const</argsstring>
+        <name>print_error_unsafe</name>
+        <qualifiedname>neforce::sys_console::print_error_unsafe</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="112" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="112" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a8152a5396fbb759e71df11383887d7eb" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::set_color_unsafe</definition>
+        <argsstring>(const color &amp;color, bool use_256_color) const</argsstring>
+        <name>set_color_unsafe</name>
+        <qualifiedname>neforce::sys_console::set_color_unsafe</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1color" kindref="compound">color</ref> &amp;</type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>use_256_color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="114" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a13b4e194e72f05d8e6566301b7454d94" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::typewriter_print_unsafe</definition>
+        <argsstring>(string_view text, milliseconds delay_per_char, bool with_sound) const</argsstring>
+        <name>typewriter_print_unsafe</name>
+        <qualifiedname>neforce::sys_console::typewriter_print_unsafe</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref></type>
+          <declname>delay_per_char</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>with_sound</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="115" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1ac37740f831ed0559d8e1500ac8e0c9e7" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::sys_console::readln_unsafe</definition>
+        <argsstring>() const</argsstring>
+        <name>readln_unsafe</name>
+        <qualifiedname>neforce::sys_console::readln_unsafe</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="117" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1ae5c2cfb869c7e670e30a79ce4cb1c387" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::sys_console::read_unsafe</definition>
+        <argsstring>() const</argsstring>
+        <name>read_unsafe</name>
+        <qualifiedname>neforce::sys_console::read_unsafe</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="118" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a7999987461f8605f306983f6c0d136f2" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>char</type>
+        <definition>char neforce::sys_console::read_char_unsafe</definition>
+        <argsstring>() const</argsstring>
+        <name>read_char_unsafe</name>
+        <qualifiedname>neforce::sys_console::read_char_unsafe</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="119" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1abbf164a9ed925a444e18e15e561849a0" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1sys__console_1_1console__size" kindref="compound">console_size</ref></type>
+        <definition>console_size neforce::sys_console::get_console_size_unsafe</definition>
+        <argsstring>() const</argsstring>
+        <name>get_console_size_unsafe</name>
+        <qualifiedname>neforce::sys_console::get_console_size_unsafe</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="120" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a769151537dd6128d114b8a11bf02fbe0" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::flush_unsafe</definition>
+        <argsstring>() const</argsstring>
+        <name>flush_unsafe</name>
+        <qualifiedname>neforce::sys_console::flush_unsafe</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="122" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a60887da7de6661b31ca9afe69c772ff2" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::ignore_unsafe</definition>
+        <argsstring>() const</argsstring>
+        <name>ignore_unsafe</name>
+        <qualifiedname>neforce::sys_console::ignore_unsafe</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="123" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1acb7a80f1c2b502f24f05df5953e15ea3" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::beep_unsafe</definition>
+        <argsstring>() const</argsstring>
+        <name>beep_unsafe</name>
+        <qualifiedname>neforce::sys_console::beep_unsafe</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="125" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1ac6ceeea6f851f71a4f0282a724131261" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::flash_screen_unsafe</definition>
+        <argsstring>() const</argsstring>
+        <name>flash_screen_unsafe</name>
+        <qualifiedname>neforce::sys_console::flash_screen_unsafe</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="126" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1aa191aa41231fe6ac29477f2497553e91" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::fade_effect_unsafe</definition>
+        <argsstring>(string_view text, const color &amp;from, const color &amp;to, milliseconds duration, bool is_fade_in) const</argsstring>
+        <name>fade_effect_unsafe</name>
+        <qualifiedname>neforce::sys_console::fade_effect_unsafe</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1color" kindref="compound">color</ref> &amp;</type>
+          <declname>from</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1color" kindref="compound">color</ref> &amp;</type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref></type>
+          <declname>duration</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>is_fade_in</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="128" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a0290bdd60c1ed5891755ade67a30c703" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sys_console::sys_console</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>sys_console</name>
+        <qualifiedname>neforce::sys_console::sys_console</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="132" column="5"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a32808c8d163e5305a7383a7055dc7dcf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sys_console::sys_console</definition>
+        <argsstring>(const sys_console &amp;)=delete</argsstring>
+        <name>sys_console</name>
+        <qualifiedname>neforce::sys_console::sys_console</qualifiedname>
+        <param>
+          <type>const sys_console &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="135" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a5b47f0eb0011183065e9934e366274c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>sys_console &amp;</type>
+        <definition>sys_console &amp; neforce::sys_console::operator=</definition>
+        <argsstring>(const sys_console &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::sys_console::operator=</qualifiedname>
+        <param>
+          <type>const sys_console &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="136" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a0a7dacd49273d783dd3469f39b97384a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sys_console::sys_console</definition>
+        <argsstring>(sys_console &amp;&amp;)=delete</argsstring>
+        <name>sys_console</name>
+        <qualifiedname>neforce::sys_console::sys_console</qualifiedname>
+        <param>
+          <type>sys_console &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="137" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1ac74057c98cccadedbb00b9c24499d9f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>sys_console &amp;</type>
+        <definition>sys_console &amp; neforce::sys_console::operator=</definition>
+        <argsstring>(sys_console &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::sys_console::operator=</qualifiedname>
+        <param>
+          <type>sys_console &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="138" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a394533bc83ed6af0ab25ab4f33318647" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sys_console::~sys_console</definition>
+        <argsstring>()=default</argsstring>
+        <name>~sys_console</name>
+        <qualifiedname>neforce::sys_console::~sys_console</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="140" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1acdf880beef0108b3687a5c864b94ab12" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::flush</definition>
+        <argsstring>()</argsstring>
+        <name>flush</name>
+        <qualifiedname>neforce::sys_console::flush</qualifiedname>
+        <briefdescription>
+<para>刷新输出缓冲区 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="154" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1ab22b25afbeb8b37bf7a71437de342541" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::ignore</definition>
+        <argsstring>()</argsstring>
+        <name>ignore</name>
+        <qualifiedname>neforce::sys_console::ignore</qualifiedname>
+        <briefdescription>
+<para>抛弃输入缓冲区中的一行 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="159" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a84fe9fa07afd82a3ba45bb256ab0e107" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::print_string</definition>
+        <argsstring>(const string &amp;str)</argsstring>
+        <name>print_string</name>
+        <qualifiedname>neforce::sys_console::print_string</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>打印字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要打印的字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="165" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a8607a05108d16ad9c823fca33374e9c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::print_string</definition>
+        <argsstring>(const string_view &amp;view)</argsstring>
+        <name>print_string</name>
+        <qualifiedname>neforce::sys_console::print_string</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref> &amp;</type>
+          <declname>view</declname>
+        </param>
+        <briefdescription>
+<para>打印字符串视图 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>view</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要打印的字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="171" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a3c630dec7a83dce4f3151718c1257e07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::print_string</definition>
+        <argsstring>(const char *str)</argsstring>
+        <name>print_string</name>
+        <qualifiedname>neforce::sys_console::print_string</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>打印C风格字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要打印的字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="177" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1acb67e7c366d1554063c4a2a3519bd723" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::print_error</definition>
+        <argsstring>(const string &amp;str)</argsstring>
+        <name>print_error</name>
+        <qualifiedname>neforce::sys_console::print_error</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>打印字符串到错误流 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要打印的字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="183" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1abb8203a72f9f58791db5eb7845e1212f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::print_error</definition>
+        <argsstring>(const string_view &amp;view)</argsstring>
+        <name>print_error</name>
+        <qualifiedname>neforce::sys_console::print_error</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref> &amp;</type>
+          <declname>view</declname>
+        </param>
+        <briefdescription>
+<para>打印字符串视图到错误流 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>view</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要打印的字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="189" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1ad2b9e1608ee464708b250ced3d1547bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::print_error</definition>
+        <argsstring>(const char *str)</argsstring>
+        <name>print_error</name>
+        <qualifiedname>neforce::sys_console::print_error</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>打印C风格字符串到错误流 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要打印的字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="195" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a330bda631a75f51438dbd85829f75154" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::sys_console::read</definition>
+        <argsstring>()</argsstring>
+        <name>read</name>
+        <qualifiedname>neforce::sys_console::read</qualifiedname>
+        <briefdescription>
+<para>读取输入（直到空白字符） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>读取的字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="201" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1adfbc8524d46752c5dd6fbd103c284d54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::sys_console::readln</definition>
+        <argsstring>()</argsstring>
+        <name>readln</name>
+        <qualifiedname>neforce::sys_console::readln</qualifiedname>
+        <briefdescription>
+<para>读取一行输入 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>读取的行 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="207" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a7b8251351a953a7a8a4b99fdbd763c73" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char</type>
+        <definition>char neforce::sys_console::read_char</definition>
+        <argsstring>()</argsstring>
+        <name>read_char</name>
+        <qualifiedname>neforce::sys_console::read_char</qualifiedname>
+        <briefdescription>
+<para>读取单个字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>读取的字符 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="213" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1aeaa4010943ceb45419588a48b7fa5c5e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::sys_console::print</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>print</name>
+        <qualifiedname>neforce::sys_console::print</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>打印任意类型的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>打印参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="221" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="221" bodyend="224"/>
+        <references refid="group___string_1ga7e7ac025ac6df3d18c9ecaa30753896c" compoundref="string__builder_8hpp" startline="191" endline="195">neforce::concatenate</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a453cb8ee885d873ceeb2b0b31e532e37" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::sys_console::printf</definition>
+        <argsstring>(const string_view fmt, Args &amp;&amp;... args)</argsstring>
+        <name>printf</name>
+        <qualifiedname>neforce::sys_console::printf</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>fmt</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>格式化打印 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式化参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="233" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="233" bodyend="236"/>
+        <references refid="group___format_1ga0f7c7c59376bf75f938eb88185d5fa5e" compoundref="format_8hpp" startline="805" endline="813">neforce::format</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a90927fd7824476e23a75be340c46eda1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::sys_console::printc</definition>
+        <argsstring>(const color &amp;color, Args &amp;&amp;... args)</argsstring>
+        <name>printc</name>
+        <qualifiedname>neforce::sys_console::printc</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1color" kindref="compound">color</ref> &amp;</type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>带颜色的打印 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>颜色 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>打印参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="245" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="245" bodyend="250"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___u_t_f_converts_1gab37042647bf269d5f84844a00bc70fc4" compoundref="icharacter_8hpp" startline="115" endline="117">neforce::to_string</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1af6259d5dfa74b362eb463e0915f4af4a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::sys_console::printcf</definition>
+        <argsstring>(const color &amp;color, const string_view fmt, Args &amp;&amp;... args)</argsstring>
+        <name>printcf</name>
+        <qualifiedname>neforce::sys_console::printcf</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1color" kindref="compound">color</ref> &amp;</type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>fmt</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>带颜色的格式化打印 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>颜色 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>打印参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="260" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="260" bodyend="265"/>
+        <references refid="group___format_1ga0f7c7c59376bf75f938eb88185d5fa5e" compoundref="format_8hpp" startline="805" endline="813">neforce::format</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a48ae770154e6e6af1e82dd981c63f4c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::println</definition>
+        <argsstring>()</argsstring>
+        <name>println</name>
+        <qualifiedname>neforce::sys_console::println</qualifiedname>
+        <briefdescription>
+<para>打印换行 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="269" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1afcf09b514d26c2d53497b6bb59440bfd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;(sizeof...(Args) &gt; 0), int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::sys_console::println</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>println</name>
+        <qualifiedname>neforce::sys_console::println</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>打印任意类型的值并换行 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>打印参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="277" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="277" bodyend="281"/>
+        <references refid="group___string_1ga7e7ac025ac6df3d18c9ecaa30753896c" compoundref="string__builder_8hpp" startline="191" endline="195">neforce::concatenate</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a9c495209c754710b6992cbde3fbd3b36" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::sys_console::printfln</definition>
+        <argsstring>(const string_view fmt, Args &amp;&amp;... args)</argsstring>
+        <name>printfln</name>
+        <qualifiedname>neforce::sys_console::printfln</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>fmt</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>格式化打印并换行 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式化参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="290" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="290" bodyend="294"/>
+        <references refid="group___format_1ga0f7c7c59376bf75f938eb88185d5fa5e" compoundref="format_8hpp" startline="805" endline="813">neforce::format</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a6ab26c2d3f5e7e4059c8ce72bdaf3ff0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::sys_console::printcln</definition>
+        <argsstring>(const color &amp;color, Args &amp;&amp;... args)</argsstring>
+        <name>printcln</name>
+        <qualifiedname>neforce::sys_console::printcln</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1color" kindref="compound">color</ref> &amp;</type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>带颜色的打印并换行 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>颜色 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>打印参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="303" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="303" bodyend="308"/>
+        <references refid="group___string_1ga7e7ac025ac6df3d18c9ecaa30753896c" compoundref="string__builder_8hpp" startline="191" endline="195">neforce::concatenate</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a9b6ecadf9ce0520e08e201ca5b3bb0c8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::sys_console::printcfln</definition>
+        <argsstring>(const color &amp;color, const string_view fmt, Args &amp;&amp;... args)</argsstring>
+        <name>printcfln</name>
+        <qualifiedname>neforce::sys_console::printcfln</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1color" kindref="compound">color</ref> &amp;</type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>fmt</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>带颜色的格式化打印并换行 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>颜色 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>打印参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="318" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="318" bodyend="323"/>
+        <references refid="group___format_1ga0f7c7c59376bf75f938eb88185d5fa5e" compoundref="format_8hpp" startline="805" endline="813">neforce::format</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a634e92ed7b2a99eabf4c23f92a8d4eea" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::sys_console::eprint</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>eprint</name>
+        <qualifiedname>neforce::sys_console::eprint</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>打印任意类型的值到错误流 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>打印参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="331" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="331" bodyend="334"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="group___u_t_f_converts_1gab37042647bf269d5f84844a00bc70fc4" compoundref="icharacter_8hpp" startline="115" endline="117">neforce::to_string</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1ac4205ed6ef9379b273b4b0a01df0731e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::sys_console::eprintf</definition>
+        <argsstring>(const string_view fmt, Args &amp;&amp;... args)</argsstring>
+        <name>eprintf</name>
+        <qualifiedname>neforce::sys_console::eprintf</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>fmt</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>格式化打印到错误流 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式化参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="343" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="343" bodyend="346"/>
+        <references refid="group___format_1ga0f7c7c59376bf75f938eb88185d5fa5e" compoundref="format_8hpp" startline="805" endline="813">neforce::format</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a04f7e2771216e8e278788b4c62f3b8be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::eprintln</definition>
+        <argsstring>()</argsstring>
+        <name>eprintln</name>
+        <qualifiedname>neforce::sys_console::eprintln</qualifiedname>
+        <briefdescription>
+<para>打印换行到错误流 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="351" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a353a15282d5496c5f7370c240ac7f361" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;(sizeof...(Args) &gt; 0), int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::sys_console::eprintln</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>eprintln</name>
+        <qualifiedname>neforce::sys_console::eprintln</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>打印任意类型的值到错误流并换行 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>打印参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="359" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="359" bodyend="363"/>
+        <references refid="group___string_1ga7e7ac025ac6df3d18c9ecaa30753896c" compoundref="string__builder_8hpp" startline="191" endline="195">neforce::concatenate</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a6f6b084b95a2228f0bca5593ec96e6e6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::sys_console::eprintfln</definition>
+        <argsstring>(const string_view fmt, Args &amp;&amp;... args)</argsstring>
+        <name>eprintfln</name>
+        <qualifiedname>neforce::sys_console::eprintfln</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>fmt</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>格式化打印到错误流并换行 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式化参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="372" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="372" bodyend="376"/>
+        <references refid="group___format_1ga0f7c7c59376bf75f938eb88185d5fa5e" compoundref="format_8hpp" startline="805" endline="813">neforce::format</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a295771a4bee5d1d2f6b146cd87f70bde" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>neforce::sys_console::clear</qualifiedname>
+        <briefdescription>
+<para>清空屏幕 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="381" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a8924be7710150d4c67dcf53caf63f003" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::pause</definition>
+        <argsstring>(string_view msg=&quot;Press enter to continue...&quot;)</argsstring>
+        <name>pause</name>
+        <qualifiedname>neforce::sys_console::pause</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>msg</declname>
+          <defval>&quot;Press enter to continue...&quot;</defval>
+        </param>
+        <briefdescription>
+<para>暂停并等待用户按键 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>msg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>提示信息 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="387" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a34dcb262e0479077d4b1e885f9033914" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::sys_console::confirmation</definition>
+        <argsstring>(string_view prompt=&quot;Are you sure? (y/n): &quot;, char yes=&apos;y&apos;, char no=&apos;n&apos;)</argsstring>
+        <name>confirmation</name>
+        <qualifiedname>neforce::sys_console::confirmation</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>prompt</declname>
+          <defval>&quot;Are you sure? (y/n): &quot;</defval>
+        </param>
+        <param>
+          <type>char</type>
+          <declname>yes</declname>
+          <defval>&apos;y&apos;</defval>
+        </param>
+        <param>
+          <type>char</type>
+          <declname>no</declname>
+          <defval>&apos;n&apos;</defval>
+        </param>
+        <briefdescription>
+<para>用户确认对话框 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>prompt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>提示信息 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>yes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>确认字符 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>no</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>取消字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否确认 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="396" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1ae5c156da9b0aac46147a294f18c042bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::sys_console::password</definition>
+        <argsstring>(string_view prompt=&quot;Password: &quot;, char mask=&apos; *&apos;, bool show_length=false)</argsstring>
+        <name>password</name>
+        <qualifiedname>neforce::sys_console::password</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>prompt</declname>
+          <defval>&quot;Password: &quot;</defval>
+        </param>
+        <param>
+          <type>char</type>
+          <declname>mask</declname>
+          <defval>&apos; *&apos;</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>show_length</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>密码输入 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>prompt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>提示信息 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mask</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>掩码字符（&apos;\0&apos;表示不显示） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>show_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否显示已输入长度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>输入的密码 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1console__exception" kindref="compound">console_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Windows中如果设置控制台模式失败 / Linux中如果进程被终止 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="406" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1ae90a995060b4fe7bd5bf99aab8f924f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::set_color</definition>
+        <argsstring>(const integer32 &amp;color)</argsstring>
+        <name>set_color</name>
+        <qualifiedname>neforce::sys_console::set_color</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1integer32" kindref="compound">integer32</ref> &amp;</type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+<para>设置颜色（使用ANSI代码） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ANSI颜色代码 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="412" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a6adbab3f12b5dc60272ce065d3a692ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::set_color</definition>
+        <argsstring>(const color &amp;color, bool use_256_color=true)</argsstring>
+        <name>set_color</name>
+        <qualifiedname>neforce::sys_console::set_color</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1color" kindref="compound">color</ref> &amp;</type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>use_256_color</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>设置颜色 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>颜色对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>use_256_color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否使用256色模式 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="419" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a5f157d1397fdaeca7af10f1f4f781ffe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::set_background_color</definition>
+        <argsstring>(const color &amp;color, bool use_256_color=true)</argsstring>
+        <name>set_background_color</name>
+        <qualifiedname>neforce::sys_console::set_background_color</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1color" kindref="compound">color</ref> &amp;</type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>use_256_color</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>设置背景色 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>颜色对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>use_256_color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否使用256色模式 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="426" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1aad7a27fa46fa30aa17cd5c1b9a0b133f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::reset_color</definition>
+        <argsstring>()</argsstring>
+        <name>reset_color</name>
+        <qualifiedname>neforce::sys_console::reset_color</qualifiedname>
+        <briefdescription>
+<para>重置颜色 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="431" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1aebe559bda518fa1680c407a11a45368f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::set_bold</definition>
+        <argsstring>(bool enable=true)</argsstring>
+        <name>set_bold</name>
+        <qualifiedname>neforce::sys_console::set_bold</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enable</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>设置粗体 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否启用粗体 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="437" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a0f56be430b74b5f023a48765d0b2893b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::set_underline</definition>
+        <argsstring>(bool enable=true)</argsstring>
+        <name>set_underline</name>
+        <qualifiedname>neforce::sys_console::set_underline</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enable</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>设置下划线 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否启用下划线 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="443" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1ac654a3769c378ec1c1ed1379607b7127" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::set_blink</definition>
+        <argsstring>(bool enable=true)</argsstring>
+        <name>set_blink</name>
+        <qualifiedname>neforce::sys_console::set_blink</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enable</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>设置闪烁 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否启用闪烁 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="449" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a091cacf50c3a3d74e135b06485e6b54b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::set_reverse</definition>
+        <argsstring>(bool enable=true)</argsstring>
+        <name>set_reverse</name>
+        <qualifiedname>neforce::sys_console::set_reverse</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enable</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>设置反色（交换前景色与背景色） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否启用反色 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="455" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a44bedb59aca313162ab193a0917b8f04" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::reset_text_attributes</definition>
+        <argsstring>()</argsstring>
+        <name>reset_text_attributes</name>
+        <qualifiedname>neforce::sys_console::reset_text_attributes</qualifiedname>
+        <briefdescription>
+<para>重置所有文本属性 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="460" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a41722759c366df31fc1622a84eb6e2cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::set_window_title</definition>
+        <argsstring>(string_view title)</argsstring>
+        <name>set_window_title</name>
+        <qualifiedname>neforce::sys_console::set_window_title</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>title</declname>
+        </param>
+        <briefdescription>
+<para>设置控制台窗口标题 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>title</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>标题字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="466" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1aadd279ad872228500fac4d226c08890c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::set_output_utf8</definition>
+        <argsstring>()</argsstring>
+        <name>set_output_utf8</name>
+        <qualifiedname>neforce::sys_console::set_output_utf8</qualifiedname>
+        <briefdescription>
+<para>设置控制台输出代码页为 UTF-8 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="471" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1afe7b8df099831b238ca8616484e42457" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::enable_virtual_terminal_processing</definition>
+        <argsstring>(bool enable=true)</argsstring>
+        <name>enable_virtual_terminal_processing</name>
+        <qualifiedname>neforce::sys_console::enable_virtual_terminal_processing</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enable</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>启用虚拟终端处理 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否启用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="477" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a743339716fddbb5e95699e67828ac93c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::enable_alternate_screen_buffer</definition>
+        <argsstring>(bool enable=true)</argsstring>
+        <name>enable_alternate_screen_buffer</name>
+        <qualifiedname>neforce::sys_console::enable_alternate_screen_buffer</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enable</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>启用或禁用交替屏幕缓冲区 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否启用交替屏幕缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="483" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a52549e1f748f2a38012de6bde202ec19" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::set_scroll_region</definition>
+        <argsstring>(int top, int bottom)</argsstring>
+        <name>set_scroll_region</name>
+        <qualifiedname>neforce::sys_console::set_scroll_region</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>bottom</declname>
+        </param>
+        <briefdescription>
+<para>设置滚动区域 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>top</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>滚动区域起始行（从 1 开始） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bottom</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>滚动区域结束行（从 1 开始） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="490" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1aec7989781c1f56a6029593a6aeede36a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::reset_scroll_region</definition>
+        <argsstring>()</argsstring>
+        <name>reset_scroll_region</name>
+        <qualifiedname>neforce::sys_console::reset_scroll_region</qualifiedname>
+        <briefdescription>
+<para>重置滚动区域为整个屏幕 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="495" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1aa6a7f1e1d6a7395738c1188643ee7ade" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::enable_mouse</definition>
+        <argsstring>(bool enable=true)</argsstring>
+        <name>enable_mouse</name>
+        <qualifiedname>neforce::sys_console::enable_mouse</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enable</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>启用或禁用鼠标输入捕获 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否启用鼠标输入捕获 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>鼠标事件序列以 ESC [&lt; 开头，需通过 <ref refid="classneforce_1_1sys__console_1a330bda631a75f51438dbd85829f75154" kindref="member">read()</ref> 或 <ref refid="classneforce_1_1sys__console_1afb2f2e47004eadf7fdca5b6b8e47f7f7" kindref="member">getch()</ref> 自行解析 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="502" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1abe56df52968033dd0e5ec14db522b803" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::sys_console::is_mouse_enabled</definition>
+        <argsstring>() const</argsstring>
+        <name>is_mouse_enabled</name>
+        <qualifiedname>neforce::sys_console::is_mouse_enabled</qualifiedname>
+        <briefdescription>
+<para>检测当前是否已启用鼠标输入 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否已启用鼠标输入 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="508" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a65043a31ccc47b528e7c71763aa624b7" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::sys_console::kbhit</definition>
+        <argsstring>()</argsstring>
+        <name>kbhit</name>
+        <qualifiedname>neforce::sys_console::kbhit</qualifiedname>
+        <briefdescription>
+<para>检查是否有键盘输入可读（非阻塞） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否有键盘输入可读 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="514" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1afb2f2e47004eadf7fdca5b6b8e47f7f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int neforce::sys_console::getch</definition>
+        <argsstring>()</argsstring>
+        <name>getch</name>
+        <qualifiedname>neforce::sys_console::getch</qualifiedname>
+        <briefdescription>
+<para>读取一个字符（无回显，若无按键则阻塞） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>读取的字符（可能为负值表示出错） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="520" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1aba95d5dfa07948623b514a13b2690be0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::progress_bar</definition>
+        <argsstring>(double percentage, int width=50, bool show_percentage=true, char fill_char=&apos;#&apos;, char empty_char=&apos; &apos;)</argsstring>
+        <name>progress_bar</name>
+        <qualifiedname>neforce::sys_console::progress_bar</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>percentage</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+          <defval>50</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>show_percentage</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>char</type>
+          <declname>fill_char</declname>
+          <defval>&apos;#&apos;</defval>
+        </param>
+        <param>
+          <type>char</type>
+          <declname>empty_char</declname>
+          <defval>&apos; &apos;</defval>
+        </param>
+        <briefdescription>
+<para>显示进度条 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>percentage</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进度百分比（0.0-100.0或0.0-1.0） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>width</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进度条宽度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>show_percentage</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否显示百分比 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fill_char</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>填充字符 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>empty_char</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>空白字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="530" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a18429eb201d79bc9bee3f1a1dd282f77" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::set_cursor_position</definition>
+        <argsstring>(int row, int column)</argsstring>
+        <name>set_cursor_position</name>
+        <qualifiedname>neforce::sys_console::set_cursor_position</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>row</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>column</declname>
+        </param>
+        <briefdescription>
+<para>设置光标位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>row</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>行（从1开始） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>column</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列（从1开始） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="538" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1ab0b9e206050ae9ce2f97e42170cf6074" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::save_cursor_position</definition>
+        <argsstring>()</argsstring>
+        <name>save_cursor_position</name>
+        <qualifiedname>neforce::sys_console::save_cursor_position</qualifiedname>
+        <briefdescription>
+<para>保存光标位置 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="543" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a779ebe41d2c0ca87950ac36e21de2d47" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::restore_cursor_position</definition>
+        <argsstring>()</argsstring>
+        <name>restore_cursor_position</name>
+        <qualifiedname>neforce::sys_console::restore_cursor_position</qualifiedname>
+        <briefdescription>
+<para>恢复光标位置 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="548" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a1bd8e74f218762d13407d4e66934a8da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::hide_cursor</definition>
+        <argsstring>(bool enable=true)</argsstring>
+        <name>hide_cursor</name>
+        <qualifiedname>neforce::sys_console::hide_cursor</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enable</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>隐藏光标 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否隐藏光标 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="554" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a60f9c26dd7b672bd558053e7a0a45333" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1sys__console_1_1console__size" kindref="compound">console_size</ref></type>
+        <definition>console_size neforce::sys_console::get_console_size</definition>
+        <argsstring>() const</argsstring>
+        <name>get_console_size</name>
+        <qualifiedname>neforce::sys_console::get_console_size</qualifiedname>
+        <briefdescription>
+<para>获取控制台尺寸 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>控制台尺寸 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="560" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1afbe5bfda77c1a9ec383ab853f6ee00c8" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::sys_console::is_terminal_resized</definition>
+        <argsstring>()</argsstring>
+        <name>is_terminal_resized</name>
+        <qualifiedname>neforce::sys_console::is_terminal_resized</qualifiedname>
+        <briefdescription>
+<para>检查终端是否已调整大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果大小发生变化返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="566" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a80f64ea44dfbbca4ee8cdf6a99d0a5ad" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::sys_console::supports_colors</definition>
+        <argsstring>() const</argsstring>
+        <name>supports_colors</name>
+        <qualifiedname>neforce::sys_console::supports_colors</qualifiedname>
+        <briefdescription>
+<para>检查是否支持颜色 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否支持 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="572" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a8cd3cfdf99117bb3335d05ad6f0deaa5" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::sys_console::supports_truecolor</definition>
+        <argsstring>() const</argsstring>
+        <name>supports_truecolor</name>
+        <qualifiedname>neforce::sys_console::supports_truecolor</qualifiedname>
+        <briefdescription>
+<para>检查是否支持真彩色 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否支持 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="578" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a31c5ca1b2fa891afa56a21d2413f422f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::sys_console::supports_unicode</definition>
+        <argsstring>() const</argsstring>
+        <name>supports_unicode</name>
+        <qualifiedname>neforce::sys_console::supports_unicode</qualifiedname>
+        <briefdescription>
+<para>检查是否支持Unicode </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否支持 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="584" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1aae4c1b6f52672845ed866f1658b43cf4" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::sys_console::is_interactive</definition>
+        <argsstring>() const</argsstring>
+        <name>is_interactive</name>
+        <qualifiedname>neforce::sys_console::is_interactive</qualifiedname>
+        <briefdescription>
+<para>检查是否是交互式终端 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否是交互式 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="590" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1acf143827ff68baf545a492204070000f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::sys_console::console_type</definition>
+        <argsstring>() const</argsstring>
+        <name>console_type</name>
+        <qualifiedname>neforce::sys_console::console_type</qualifiedname>
+        <briefdescription>
+<para>获取终端类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>终端类型字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="596" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a566b3c333370b8ac3471a1544d46394b" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1sys__console_1_1console__size" kindref="compound">console_size</ref></type>
+        <definition>console_size neforce::sys_console::query_cursor_position</definition>
+        <argsstring>()</argsstring>
+        <name>query_cursor_position</name>
+        <qualifiedname>neforce::sys_console::query_cursor_position</qualifiedname>
+        <briefdescription>
+<para>查询光标位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>光标位置，失败返回 (0, 0)</para>
+</simplesect>
+通过 DSR 转义序列查询光标位置。</para>
+<para><simplesect kind="note"><para>仅在支持 ANSI 转义的终端上有效。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="606" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1aab29d799298174d44918ab2c2406c1a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::typewriter_print</definition>
+        <argsstring>(string_view text, milliseconds delay_per_char=milliseconds(50), bool with_sound=false)</argsstring>
+        <name>typewriter_print</name>
+        <qualifiedname>neforce::sys_console::typewriter_print</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref></type>
+          <declname>delay_per_char</declname>
+          <defval><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref>(50)</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>with_sound</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>打字机效果打印 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要打印的文本 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>delay_per_char</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>每个字符的延迟 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>with_sound</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否伴随声音 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="614" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a9bf16653b0509f1f8adf8539647cf819" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::typewriter_println</definition>
+        <argsstring>(string_view text, milliseconds delay_per_char=milliseconds(50), bool with_sound=false)</argsstring>
+        <name>typewriter_println</name>
+        <qualifiedname>neforce::sys_console::typewriter_println</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref></type>
+          <declname>delay_per_char</declname>
+          <defval><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref>(50)</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>with_sound</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>打字机效果打印并换行 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要打印的文本 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>delay_per_char</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>每个字符的延迟 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>with_sound</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否伴随声音 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="622" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a0c77e202423be80ea7a5103e41d61183" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::beep</definition>
+        <argsstring>()</argsstring>
+        <name>beep</name>
+        <qualifiedname>neforce::sys_console::beep</qualifiedname>
+        <briefdescription>
+<para>发出蜂鸣声 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="627" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1ac8b28b3a95f519a1a00db28b7d19dfa9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::flash_screen</definition>
+        <argsstring>()</argsstring>
+        <name>flash_screen</name>
+        <qualifiedname>neforce::sys_console::flash_screen</qualifiedname>
+        <briefdescription>
+<para>屏幕闪烁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="632" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a68ebfe37c0a954cf65af2a8af2ef764a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::notification</definition>
+        <argsstring>(string_view message, milliseconds duration=milliseconds(2000), bool play_sound=true)</argsstring>
+        <name>notification</name>
+        <qualifiedname>neforce::sys_console::notification</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>message</declname>
+        </param>
+        <param>
+          <type><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref></type>
+          <declname>duration</declname>
+          <defval><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref>(2000)</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>play_sound</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>显示通知 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>message</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>通知消息 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>duration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>显示时长 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>play_sound</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否播放声音 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="640" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a3e952e17b842220128a2103a59a4ac80" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::fade_in</definition>
+        <argsstring>(string_view text, milliseconds duration=milliseconds(1000), const color &amp;start_color=color::black(), const color &amp;end_color=color::white())</argsstring>
+        <name>fade_in</name>
+        <qualifiedname>neforce::sys_console::fade_in</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref></type>
+          <declname>duration</declname>
+          <defval><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref>(1000)</defval>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1color" kindref="compound">color</ref> &amp;</type>
+          <declname>start_color</declname>
+          <defval><ref refid="classneforce_1_1color_1a90e7aa75e880ac2f28b725be10f6b953" kindref="member">color::black</ref>()</defval>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1color" kindref="compound">color</ref> &amp;</type>
+          <declname>end_color</declname>
+          <defval><ref refid="classneforce_1_1color_1ac6a9a36536a368ed17b76a5efa74e5b0" kindref="member">color::white</ref>()</defval>
+        </param>
+        <briefdescription>
+<para>淡入效果 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文本 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>duration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>持续时间 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>start_color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始颜色 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>end_color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束颜色 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="649" column="10"/>
+        <references refid="classneforce_1_1color_1a90e7aa75e880ac2f28b725be10f6b953" compoundref="color_8hpp" startline="810" endline="810">neforce::color::black</references>
+        <references refid="classneforce_1_1color_1ac6a9a36536a368ed17b76a5efa74e5b0" compoundref="color_8hpp" startline="813" endline="813">neforce::color::white</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1a931dff18bfb3af62119ba4b0d61de631" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::fade_out</definition>
+        <argsstring>(string_view text, milliseconds duration=milliseconds(1000), const color &amp;start_color=color::white(), const color &amp;end_color=color::black())</argsstring>
+        <name>fade_out</name>
+        <qualifiedname>neforce::sys_console::fade_out</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref></type>
+          <declname>duration</declname>
+          <defval><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref>(1000)</defval>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1color" kindref="compound">color</ref> &amp;</type>
+          <declname>start_color</declname>
+          <defval><ref refid="classneforce_1_1color_1ac6a9a36536a368ed17b76a5efa74e5b0" kindref="member">color::white</ref>()</defval>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1color" kindref="compound">color</ref> &amp;</type>
+          <declname>end_color</declname>
+          <defval><ref refid="classneforce_1_1color_1a90e7aa75e880ac2f28b725be10f6b953" kindref="member">color::black</ref>()</defval>
+        </param>
+        <briefdescription>
+<para>淡出效果 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文本 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>duration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>持续时间 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>start_color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始颜色 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>end_color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束颜色 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="659" column="10"/>
+        <references refid="classneforce_1_1color_1a90e7aa75e880ac2f28b725be10f6b953" compoundref="color_8hpp" startline="810" endline="810">neforce::color::black</references>
+        <references refid="classneforce_1_1color_1ac6a9a36536a368ed17b76a5efa74e5b0" compoundref="color_8hpp" startline="813" endline="813">neforce::color::white</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sys__console_1af8ca5d203fcee97502127f16e4015041" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sys_console::fade_in_out</definition>
+        <argsstring>(string_view text, milliseconds in_duration=milliseconds(500), milliseconds hold_duration=milliseconds(1000), milliseconds out_duration=milliseconds(500))</argsstring>
+        <name>fade_in_out</name>
+        <qualifiedname>neforce::sys_console::fade_in_out</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>text</declname>
+        </param>
+        <param>
+          <type><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref></type>
+          <declname>in_duration</declname>
+          <defval><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref>(500)</defval>
+        </param>
+        <param>
+          <type><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref></type>
+          <declname>hold_duration</declname>
+          <defval><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref>(1000)</defval>
+        </param>
+        <param>
+          <type><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref></type>
+          <declname>out_duration</declname>
+          <defval><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref>(500)</defval>
+        </param>
+        <briefdescription>
+<para>淡入-保持-淡出效果 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文本 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>in_duration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>淡入时间 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hold_duration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>保持时间 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>out_duration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>淡出时间 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="669" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1sys__console_1affae0c2d5a788840d82750e2205f00c9" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>sys_console &amp;</type>
+        <definition>static sys_console &amp; neforce::sys_console::instance</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>instance</name>
+        <qualifiedname>neforce::sys_console::instance</qualifiedname>
+        <briefdescription>
+<para>获取单例实例 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>控制台实例引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="146" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="146" bodyend="149"/>
+        <references refid="group___console_i_o_1ga6e5d10278d37ee985e2fa511123e4b2b">neforce::console</references>
+        <references refid="classneforce_1_1sys__console_1affae0c2d5a788840d82750e2205f00c9" compoundref="console_8hpp" startline="146" endline="149">instance</references>
+        <referencedby refid="classneforce_1_1sys__console_1affae0c2d5a788840d82750e2205f00c9" compoundref="console_8hpp" startline="146" endline="149">instance</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>系统控制台单例类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供了丰富的控制台输入输出功能，包括：<itemizedlist>
+<listitem><para>彩色文本输出</para>
+</listitem><listitem><para>光标控制</para>
+</listitem><listitem><para>进度条显示</para>
+</listitem><listitem><para>密码输入</para>
+</listitem><listitem><para>打字机效果</para>
+</listitem><listitem><para>淡入淡出效果</para>
+</listitem><listitem><para>终端信息查询</para>
+</listitem></itemizedlist>
+</para>
+<para>所有方法都是线程安全的。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" line="62" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/console.hpp" bodystart="62" bodyend="671"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1sys__console_1ae28c1dbed3b91e71d119f6dedb774853" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>alt_buffer_active_</name></member>
+      <member refid="classneforce_1_1sys__console_1a0c77e202423be80ea7a5103e41d61183" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>beep</name></member>
+      <member refid="classneforce_1_1sys__console_1acb7a80f1c2b502f24f05df5953e15ea3" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>beep_unsafe</name></member>
+      <member refid="classneforce_1_1sys__console_1a295771a4bee5d1d2f6b146cd87f70bde" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>clear</name></member>
+      <member refid="classneforce_1_1sys__console_1a34dcb262e0479077d4b1e885f9033914" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>confirmation</name></member>
+      <member refid="classneforce_1_1sys__console_1acf143827ff68baf545a492204070000f" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>console_type</name></member>
+      <member refid="classneforce_1_1sys__console_1a743339716fddbb5e95699e67828ac93c" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>enable_alternate_screen_buffer</name></member>
+      <member refid="classneforce_1_1sys__console_1aa6a7f1e1d6a7395738c1188643ee7ade" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>enable_mouse</name></member>
+      <member refid="classneforce_1_1sys__console_1afe7b8df099831b238ca8616484e42457" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>enable_virtual_terminal_processing</name></member>
+      <member refid="classneforce_1_1sys__console_1a634e92ed7b2a99eabf4c23f92a8d4eea" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>eprint</name></member>
+      <member refid="classneforce_1_1sys__console_1ac4205ed6ef9379b273b4b0a01df0731e" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>eprintf</name></member>
+      <member refid="classneforce_1_1sys__console_1a6f6b084b95a2228f0bca5593ec96e6e6" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>eprintfln</name></member>
+      <member refid="classneforce_1_1sys__console_1a04f7e2771216e8e278788b4c62f3b8be" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>eprintln</name></member>
+      <member refid="classneforce_1_1sys__console_1a353a15282d5496c5f7370c240ac7f361" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>eprintln</name></member>
+      <member refid="classneforce_1_1sys__console_1a69be2e1eb205c9df539e84da39303a61" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>err_</name></member>
+      <member refid="classneforce_1_1sys__console_1aa191aa41231fe6ac29477f2497553e91" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>fade_effect_unsafe</name></member>
+      <member refid="classneforce_1_1sys__console_1a3e952e17b842220128a2103a59a4ac80" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>fade_in</name></member>
+      <member refid="classneforce_1_1sys__console_1af8ca5d203fcee97502127f16e4015041" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>fade_in_out</name></member>
+      <member refid="classneforce_1_1sys__console_1a931dff18bfb3af62119ba4b0d61de631" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>fade_out</name></member>
+      <member refid="classneforce_1_1sys__console_1ac8b28b3a95f519a1a00db28b7d19dfa9" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>flash_screen</name></member>
+      <member refid="classneforce_1_1sys__console_1ac6ceeea6f851f71a4f0282a724131261" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>flash_screen_unsafe</name></member>
+      <member refid="classneforce_1_1sys__console_1acdf880beef0108b3687a5c864b94ab12" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>flush</name></member>
+      <member refid="classneforce_1_1sys__console_1a769151537dd6128d114b8a11bf02fbe0" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>flush_unsafe</name></member>
+      <member refid="classneforce_1_1sys__console_1a60f9c26dd7b672bd558053e7a0a45333" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>get_console_size</name></member>
+      <member refid="classneforce_1_1sys__console_1abbf164a9ed925a444e18e15e561849a0" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>get_console_size_unsafe</name></member>
+      <member refid="classneforce_1_1sys__console_1afb2f2e47004eadf7fdca5b6b8e47f7f7" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>getch</name></member>
+      <member refid="classneforce_1_1sys__console_1a1bd8e74f218762d13407d4e66934a8da" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>hide_cursor</name></member>
+      <member refid="classneforce_1_1sys__console_1ab22b25afbeb8b37bf7a71437de342541" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>ignore</name></member>
+      <member refid="classneforce_1_1sys__console_1a60887da7de6661b31ca9afe69c772ff2" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>ignore_unsafe</name></member>
+      <member refid="classneforce_1_1sys__console_1a91f4ef256e4c8c59ee8ef2b280fa2acd" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>in_</name></member>
+      <member refid="classneforce_1_1sys__console_1affae0c2d5a788840d82750e2205f00c9" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>instance</name></member>
+      <member refid="classneforce_1_1sys__console_1aae4c1b6f52672845ed866f1658b43cf4" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>is_interactive</name></member>
+      <member refid="classneforce_1_1sys__console_1abe56df52968033dd0e5ec14db522b803" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>is_mouse_enabled</name></member>
+      <member refid="classneforce_1_1sys__console_1afbe5bfda77c1a9ec383ab853f6ee00c8" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>is_terminal_resized</name></member>
+      <member refid="classneforce_1_1sys__console_1a65043a31ccc47b528e7c71763aa624b7" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>kbhit</name></member>
+      <member refid="classneforce_1_1sys__console_1a587444ccfbc49ee311e9bc73285420cb" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>last_size_</name></member>
+      <member refid="classneforce_1_1sys__console_1a3a36e6871596c54e93be2a32d8e42632" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>mouse_enabled_</name></member>
+      <member refid="classneforce_1_1sys__console_1aee2b63e99e2b576728c4d742f7289364" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>mutex_</name></member>
+      <member refid="classneforce_1_1sys__console_1a68ebfe37c0a954cf65af2a8af2ef764a" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>notification</name></member>
+      <member refid="classneforce_1_1sys__console_1a5b47f0eb0011183065e9934e366274c5" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1sys__console_1ac74057c98cccadedbb00b9c24499d9f4" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1sys__console_1a9726fe98e5a662de4b977525df3ec231" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>out_</name></member>
+      <member refid="classneforce_1_1sys__console_1ae5c156da9b0aac46147a294f18c042bf" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>password</name></member>
+      <member refid="classneforce_1_1sys__console_1a8924be7710150d4c67dcf53caf63f003" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>pause</name></member>
+      <member refid="classneforce_1_1sys__console_1a905a47e09ac5171275507970658e2e9b" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>pending_char_</name></member>
+      <member refid="classneforce_1_1sys__console_1aeaa4010943ceb45419588a48b7fa5c5e" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>print</name></member>
+      <member refid="classneforce_1_1sys__console_1acb67e7c366d1554063c4a2a3519bd723" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>print_error</name></member>
+      <member refid="classneforce_1_1sys__console_1abb8203a72f9f58791db5eb7845e1212f" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>print_error</name></member>
+      <member refid="classneforce_1_1sys__console_1ad2b9e1608ee464708b250ced3d1547bd" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>print_error</name></member>
+      <member refid="classneforce_1_1sys__console_1a301f7ea7176ea16c36c0415fcda0fe9c" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>print_error_unsafe</name></member>
+      <member refid="classneforce_1_1sys__console_1a227c2a4154567c9dcfd2cfd539b4882d" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>print_error_unsafe</name></member>
+      <member refid="classneforce_1_1sys__console_1abc6bf719505696432f6d02f70a561d76" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>print_error_unsafe</name></member>
+      <member refid="classneforce_1_1sys__console_1a84fe9fa07afd82a3ba45bb256ab0e107" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>print_string</name></member>
+      <member refid="classneforce_1_1sys__console_1a8607a05108d16ad9c823fca33374e9c2" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>print_string</name></member>
+      <member refid="classneforce_1_1sys__console_1a3c630dec7a83dce4f3151718c1257e07" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>print_string</name></member>
+      <member refid="classneforce_1_1sys__console_1ae061b8903c1f0d77fe47e088a0f3c4bf" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>print_string_unsafe</name></member>
+      <member refid="classneforce_1_1sys__console_1a9cf285ab4e1f8761998c54a889226ffb" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>print_string_unsafe</name></member>
+      <member refid="classneforce_1_1sys__console_1abdf943b871f50cd20584c6b22f2a700a" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>print_string_unsafe</name></member>
+      <member refid="classneforce_1_1sys__console_1a90927fd7824476e23a75be340c46eda1" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>printc</name></member>
+      <member refid="classneforce_1_1sys__console_1af6259d5dfa74b362eb463e0915f4af4a" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>printcf</name></member>
+      <member refid="classneforce_1_1sys__console_1a9b6ecadf9ce0520e08e201ca5b3bb0c8" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>printcfln</name></member>
+      <member refid="classneforce_1_1sys__console_1a6ab26c2d3f5e7e4059c8ce72bdaf3ff0" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>printcln</name></member>
+      <member refid="classneforce_1_1sys__console_1a453cb8ee885d873ceeb2b0b31e532e37" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>printf</name></member>
+      <member refid="classneforce_1_1sys__console_1a9c495209c754710b6992cbde3fbd3b36" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>printfln</name></member>
+      <member refid="classneforce_1_1sys__console_1a48ae770154e6e6af1e82dd981c63f4c0" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>println</name></member>
+      <member refid="classneforce_1_1sys__console_1afcf09b514d26c2d53497b6bb59440bfd" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>println</name></member>
+      <member refid="classneforce_1_1sys__console_1aba95d5dfa07948623b514a13b2690be0" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>progress_bar</name></member>
+      <member refid="classneforce_1_1sys__console_1a566b3c333370b8ac3471a1544d46394b" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>query_cursor_position</name></member>
+      <member refid="classneforce_1_1sys__console_1a330bda631a75f51438dbd85829f75154" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>read</name></member>
+      <member refid="classneforce_1_1sys__console_1a7b8251351a953a7a8a4b99fdbd763c73" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>read_char</name></member>
+      <member refid="classneforce_1_1sys__console_1a7999987461f8605f306983f6c0d136f2" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>read_char_unsafe</name></member>
+      <member refid="classneforce_1_1sys__console_1ae5c2cfb869c7e670e30a79ce4cb1c387" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>read_unsafe</name></member>
+      <member refid="classneforce_1_1sys__console_1adfbc8524d46752c5dd6fbd103c284d54" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>readln</name></member>
+      <member refid="classneforce_1_1sys__console_1ac37740f831ed0559d8e1500ac8e0c9e7" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>readln_unsafe</name></member>
+      <member refid="classneforce_1_1sys__console_1aad7a27fa46fa30aa17cd5c1b9a0b133f" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>reset_color</name></member>
+      <member refid="classneforce_1_1sys__console_1aec7989781c1f56a6029593a6aeede36a" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>reset_scroll_region</name></member>
+      <member refid="classneforce_1_1sys__console_1a44bedb59aca313162ab193a0917b8f04" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>reset_text_attributes</name></member>
+      <member refid="classneforce_1_1sys__console_1a779ebe41d2c0ca87950ac36e21de2d47" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>restore_cursor_position</name></member>
+      <member refid="classneforce_1_1sys__console_1ab0b9e206050ae9ce2f97e42170cf6074" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>save_cursor_position</name></member>
+      <member refid="classneforce_1_1sys__console_1a64ca943378266f53462d2d8c4da167fe" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>saved_cursor_pos_</name></member>
+      <member refid="classneforce_1_1sys__console_1a5f157d1397fdaeca7af10f1f4f781ffe" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>set_background_color</name></member>
+      <member refid="classneforce_1_1sys__console_1ac654a3769c378ec1c1ed1379607b7127" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>set_blink</name></member>
+      <member refid="classneforce_1_1sys__console_1aebe559bda518fa1680c407a11a45368f" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>set_bold</name></member>
+      <member refid="classneforce_1_1sys__console_1ae90a995060b4fe7bd5bf99aab8f924f3" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>set_color</name></member>
+      <member refid="classneforce_1_1sys__console_1a6adbab3f12b5dc60272ce065d3a692ba" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>set_color</name></member>
+      <member refid="classneforce_1_1sys__console_1a8152a5396fbb759e71df11383887d7eb" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>set_color_unsafe</name></member>
+      <member refid="classneforce_1_1sys__console_1a18429eb201d79bc9bee3f1a1dd282f77" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>set_cursor_position</name></member>
+      <member refid="classneforce_1_1sys__console_1aadd279ad872228500fac4d226c08890c" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>set_output_utf8</name></member>
+      <member refid="classneforce_1_1sys__console_1a091cacf50c3a3d74e135b06485e6b54b" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>set_reverse</name></member>
+      <member refid="classneforce_1_1sys__console_1a52549e1f748f2a38012de6bde202ec19" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>set_scroll_region</name></member>
+      <member refid="classneforce_1_1sys__console_1a0f56be430b74b5f023a48765d0b2893b" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>set_underline</name></member>
+      <member refid="classneforce_1_1sys__console_1a41722759c366df31fc1622a84eb6e2cb" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>set_window_title</name></member>
+      <member refid="classneforce_1_1sys__console_1a80f64ea44dfbbca4ee8cdf6a99d0a5ad" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>supports_colors</name></member>
+      <member refid="classneforce_1_1sys__console_1a8cd3cfdf99117bb3335d05ad6f0deaa5" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>supports_truecolor</name></member>
+      <member refid="classneforce_1_1sys__console_1a31c5ca1b2fa891afa56a21d2413f422f" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>supports_unicode</name></member>
+      <member refid="classneforce_1_1sys__console_1a0290bdd60c1ed5891755ade67a30c703" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>sys_console</name></member>
+      <member refid="classneforce_1_1sys__console_1a32808c8d163e5305a7383a7055dc7dcf" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>sys_console</name></member>
+      <member refid="classneforce_1_1sys__console_1a0a7dacd49273d783dd3469f39b97384a" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>sys_console</name></member>
+      <member refid="classneforce_1_1sys__console_1aab29d799298174d44918ab2c2406c1a8" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>typewriter_print</name></member>
+      <member refid="classneforce_1_1sys__console_1a13b4e194e72f05d8e6566301b7454d94" prot="private" virt="non-virtual"><scope>neforce::sys_console</scope><name>typewriter_print_unsafe</name></member>
+      <member refid="classneforce_1_1sys__console_1a9bf16653b0509f1f8adf8539647cf819" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>typewriter_println</name></member>
+      <member refid="classneforce_1_1sys__console_1a394533bc83ed6af0ab25ab4f33318647" prot="public" virt="non-virtual"><scope>neforce::sys_console</scope><name>~sys_console</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

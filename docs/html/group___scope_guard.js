@@ -1,24 +1,24 @@
 var group___scope_guard =
 [
-    [ "scope_exit&lt; Func &gt;", "classscope__exit.html", [
-      [ "scope_exit", "classscope__exit.html#acb4a7a473f0f26ce6cf9149260d93b9f", null ],
-      [ "scope_exit", "classscope__exit.html#ab769d4d6054b907563ef3c232da0e05b", null ],
-      [ "scope_exit", "classscope__exit.html#a280152cc8d0de57c323ecbdbf30463a6", null ],
-      [ "~scope_exit", "classscope__exit.html#ac5af4b4aaf9b226075e61d68bd320752", null ],
-      [ "release", "classscope__exit.html#a6ee2b8da9acd91d23cf4377e89e2cad1", null ]
+    [ "neforce::scope_exit&lt; Func &gt;", "classneforce_1_1scope__exit.html", [
+      [ "scope_exit", "classneforce_1_1scope__exit.html#a2708e5fb7f6d7ac8e6800129adc576b7", null ],
+      [ "scope_exit", "classneforce_1_1scope__exit.html#a4a14a5780ee0e6009146ec32c23d116b", null ],
+      [ "scope_exit", "classneforce_1_1scope__exit.html#a2763e37d9e4199f5b66c1b7315e22895", null ],
+      [ "~scope_exit", "classneforce_1_1scope__exit.html#a17b1b833aef8c235f5d9f666ba89e9ee", null ],
+      [ "release", "classneforce_1_1scope__exit.html#ab2a4c900b7079f5b99b49bc0293d7b20", null ]
     ] ],
-    [ "scope_fail&lt; Func &gt;", "classscope__fail.html", [
-      [ "scope_fail", "classscope__fail.html#af20eb2db69364e0f00abaff40d95eeec", null ],
-      [ "scope_fail", "classscope__fail.html#a4363a9e9f163a962fbcfdeb9b8387b8e", null ],
-      [ "scope_fail", "classscope__fail.html#a1778abb10d01a4053a4c28f60facd9d7", null ],
-      [ "~scope_fail", "classscope__fail.html#a58fbdf72f42b141800d07ff5f328880c", null ],
-      [ "release", "classscope__fail.html#ae3fff4410ea73092440aa346395df5ec", null ]
+    [ "neforce::scope_fail&lt; Func &gt;", "classneforce_1_1scope__fail.html", [
+      [ "scope_fail", "classneforce_1_1scope__fail.html#a56b3aa082ff0903f29640a2d3000c629", null ],
+      [ "scope_fail", "classneforce_1_1scope__fail.html#a1254d7ba1ed2638465527058d7bbac7b", null ],
+      [ "scope_fail", "classneforce_1_1scope__fail.html#ad237f7691ade3ab69a5e87ec99ff8460", null ],
+      [ "~scope_fail", "classneforce_1_1scope__fail.html#a3c51fe3e5c157bf178f0131314e49dac", null ],
+      [ "release", "classneforce_1_1scope__fail.html#aaa4c3c2d68fac0bded6883ab11a5c6a5", null ]
     ] ],
-    [ "scope_success&lt; Func &gt;", "classscope__success.html", [
-      [ "scope_success", "classscope__success.html#a7346c747f5329506a9c40dc4859af9f2", null ],
-      [ "scope_success", "classscope__success.html#a9b5d859993568166f19388c3fafc5100", null ],
-      [ "scope_success", "classscope__success.html#ad8e5cfea5c3d816a051aa600a994c6a9", null ],
-      [ "~scope_success", "classscope__success.html#a9b491f1271cf501a287b89876d92490b", null ],
-      [ "release", "classscope__success.html#a30eaf95fca08b7ed80c927ee16b3a866", null ]
+    [ "neforce::scope_success&lt; Func &gt;", "classneforce_1_1scope__success.html", [
+      [ "scope_success", "classneforce_1_1scope__success.html#ad94dcc052454cd8a53901ae651320e07", null ],
+      [ "scope_success", "classneforce_1_1scope__success.html#a119465b17b507d64eb5e71951d78dfdb", null ],
+      [ "scope_success", "classneforce_1_1scope__success.html#a9a92f5d07bb1f0180280ddc30aed3eae", null ],
+      [ "~scope_success", "classneforce_1_1scope__success.html#a3fc365aaa00f317485fb7fbe686918bb", null ],
+      [ "release", "classneforce_1_1scope__success.html#a5dad08e9d7f58afa9ead32808fdcd60c", null ]
     ] ]
 ];

@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1http_1_1session__store" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>neforce::http::session_store</compoundname>
+    <derivedcompoundref refid="classneforce_1_1http_1_1memory__session__store" prot="public" virt="non-virtual">neforce::http::memory_session_store</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1http_1_1redis__session__store" prot="public" virt="non-virtual">neforce::http::redis_session_store</derivedcompoundref>
+    <includes refid="session__store_8hpp" local="no">session_store.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1session__store_1a88e402a5b94a65d7435d6edccaf8034b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual neforce::http::session_store::~session_store</definition>
+        <argsstring>()=default</argsstring>
+        <name>~session_store</name>
+        <qualifiedname>neforce::http::session_store::~session_store</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/session_store.hpp" line="28" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1session__store_1a596f3acb5a44276b76fbac86dc958e53" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; <ref refid="structneforce_1_1http_1_1http__session" kindref="compound">http_session</ref> &gt;</type>
+        <definition>virtual optional&lt; http_session &gt; neforce::http::session_store::load</definition>
+        <argsstring>(const string &amp;id)=0</argsstring>
+        <name>load</name>
+        <qualifiedname>neforce::http::session_store::load</qualifiedname>
+        <reimplementedby refid="classneforce_1_1http_1_1memory__session__store_1a0027f66c4b31e5c12d9fcdb12df4a2a2">load</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1redis__session__store_1aa98983c4344329824f3956f0d8d532a4">load</reimplementedby>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/session_store.hpp" line="30" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1session__store_1af6fdaa0eb81251c166cb7a810d24149c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void neforce::http::session_store::save</definition>
+        <argsstring>(const http_session &amp;session)=0</argsstring>
+        <name>save</name>
+        <qualifiedname>neforce::http::session_store::save</qualifiedname>
+        <reimplementedby refid="classneforce_1_1http_1_1memory__session__store_1abdca86269e1657fb26442a3f3afa312d">save</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1redis__session__store_1a20aace6a43c6ab16e2405d45bbc0cc2c">save</reimplementedby>
+        <param>
+          <type>const <ref refid="structneforce_1_1http_1_1http__session" kindref="compound">http_session</ref> &amp;</type>
+          <declname>session</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/session_store.hpp" line="31" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1session__store_1a6411aef68827024cafc2eff29f721e06" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void neforce::http::session_store::remove</definition>
+        <argsstring>(const string &amp;id)=0</argsstring>
+        <name>remove</name>
+        <qualifiedname>neforce::http::session_store::remove</qualifiedname>
+        <reimplementedby refid="classneforce_1_1http_1_1memory__session__store_1a98ce56d0dbd14fb0c47401b69a085969">remove</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1redis__session__store_1a5d187f592b9b340366c237bb38b58fa1">remove</reimplementedby>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/session_store.hpp" line="32" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1session__store_1a6b1d5c6514623613a43d962663e2fede" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool neforce::http::session_store::exists</definition>
+        <argsstring>(const string &amp;id) const =0</argsstring>
+        <name>exists</name>
+        <qualifiedname>neforce::http::session_store::exists</qualifiedname>
+        <reimplementedby refid="classneforce_1_1http_1_1memory__session__store_1af16e10e7f87b3f54fa68abaadfd5a47b">exists</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1redis__session__store_1a7333847b6f3f597fe21b71c6f406a13c">exists</reimplementedby>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/session_store.hpp" line="33" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1session__store_1a4ff2b7dbd37dfcd10970e51ee5367d4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void neforce::http::session_store::cleanup</definition>
+        <argsstring>()=0</argsstring>
+        <name>cleanup</name>
+        <qualifiedname>neforce::http::session_store::cleanup</qualifiedname>
+        <reimplementedby refid="classneforce_1_1http_1_1memory__session__store_1a47cb60f38a9625427784e181b82c4938">cleanup</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1redis__session__store_1af6ec81a51ba4faa1b68fac761a8eb770">cleanup</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/session_store.hpp" line="34" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1session__store_1abe63e06b62499c5e0576b50ae90a8a48" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>virtual size_t neforce::http::session_store::count</definition>
+        <argsstring>() const =0</argsstring>
+        <name>count</name>
+        <qualifiedname>neforce::http::session_store::count</qualifiedname>
+        <reimplementedby refid="classneforce_1_1http_1_1memory__session__store_1accc7cdf6e3d8cded71d15d1102dbf107">count</reimplementedby>
+        <reimplementedby refid="classneforce_1_1http_1_1redis__session__store_1acb76f20285f4387bf5e6419869992236">count</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/session_store.hpp" line="35" column="21"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>会话存储抽象接口 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>所有会话存储后端必须实现此接口。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>neforce::http::memory_session_store</label>
+        <link refid="classneforce_1_1http_1_1memory__session__store"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::http::redis_session_store</label>
+        <link refid="classneforce_1_1http_1_1redis__session__store"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::http::session_store</label>
+        <link refid="classneforce_1_1http_1_1session__store"/>
+      </node>
+    </inheritancegraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/session_store.hpp" line="26" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/session_store.hpp" bodystart="26" bodyend="40"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1http_1_1session__store_1a4ff2b7dbd37dfcd10970e51ee5367d4f" prot="public" virt="pure-virtual"><scope>neforce::http::session_store</scope><name>cleanup</name></member>
+      <member refid="classneforce_1_1http_1_1session__store_1abe63e06b62499c5e0576b50ae90a8a48" prot="public" virt="pure-virtual"><scope>neforce::http::session_store</scope><name>count</name></member>
+      <member refid="classneforce_1_1http_1_1session__store_1a6b1d5c6514623613a43d962663e2fede" prot="public" virt="pure-virtual"><scope>neforce::http::session_store</scope><name>exists</name></member>
+      <member refid="classneforce_1_1http_1_1session__store_1a596f3acb5a44276b76fbac86dc958e53" prot="public" virt="pure-virtual"><scope>neforce::http::session_store</scope><name>load</name></member>
+      <member refid="classneforce_1_1http_1_1session__store_1a6411aef68827024cafc2eff29f721e06" prot="public" virt="pure-virtual"><scope>neforce::http::session_store</scope><name>remove</name></member>
+      <member refid="classneforce_1_1http_1_1session__store_1af6fdaa0eb81251c166cb7a810d24149c" prot="public" virt="pure-virtual"><scope>neforce::http::session_store</scope><name>save</name></member>
+      <member refid="classneforce_1_1http_1_1session__store_1a88e402a5b94a65d7435d6edccaf8034b" prot="public" virt="virtual"><scope>neforce::http::session_store</scope><name>~session_store</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

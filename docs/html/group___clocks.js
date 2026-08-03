@@ -1,18 +1,18 @@
 var group___clocks =
 [
-    [ "system_clock", "structsystem__clock.html", [
-      [ "duration", "structsystem__clock.html#ad217ea732521ca1ac3f900437d86288b", null ],
-      [ "period", "structsystem__clock.html#a7a0eef92cac7502aae67fdd9b2faaabc", null ],
-      [ "rep", "structsystem__clock.html#aa107f19cc41bfa88dbc2cf54f22e620d", null ],
-      [ "time_point", "structsystem__clock.html#aff5d3693a815b7e4600f56bb57b46c84", null ]
+    [ "neforce::system_clock", "structneforce_1_1system__clock.html", [
+      [ "duration", "structneforce_1_1system__clock.html#ab8ce05154fbf87cb2382d7ce09f67b58", null ],
+      [ "period", "structneforce_1_1system__clock.html#a6ecd3c045847c83f313d15e6c484d59b", null ],
+      [ "rep", "structneforce_1_1system__clock.html#a705774a159f693488bc1488c2f7cafe6", null ],
+      [ "time_point", "structneforce_1_1system__clock.html#aedace2ff398931d352203dda880cf57d", null ]
     ] ],
-    [ "steady_clock", "structsteady__clock.html", [
-      [ "duration", "structsteady__clock.html#a2835ea558a6187fa15658b5d5fcd439c", null ],
-      [ "period", "structsteady__clock.html#a136d5904eea640c1e6381e7653db3bab", null ],
-      [ "rep", "structsteady__clock.html#aa5a04d6165989b4a4ea92e45647803bd", null ],
-      [ "time_point", "structsteady__clock.html#aaf25d203f1455c8c7010a6681de52dc5", null ]
+    [ "neforce::steady_clock", "structneforce_1_1steady__clock.html", [
+      [ "duration", "structneforce_1_1steady__clock.html#ada904e5c4376b5d153ad18c53d85b563", null ],
+      [ "period", "structneforce_1_1steady__clock.html#af5ade164e4b3fb6ca659896a114f2fe6", null ],
+      [ "rep", "structneforce_1_1steady__clock.html#a6bcd58fc6c2f684dee1d7796ad4b24f6", null ],
+      [ "time_point", "structneforce_1_1steady__clock.html#a571235516977f769fec5e0eaaf49e077", null ]
     ] ],
-    [ "is_clock&lt; T &gt;", "structis__clock.html", null ],
-    [ "relative_time", "group___clocks.html#gaae0be53bf21934dcac0e3165034ca8dd", null ],
-    [ "is_clock_v", "group___clocks.html#ga2682b90c2f4b1ec7ccc3fb6b74a4fee8", null ]
+    [ "neforce::is_clock&lt; T &gt;", "structneforce_1_1is__clock.html", null ],
+    [ "neforce::relative_time", "group___clocks.html#gaf24e87912844f7efd27378f0f6f79cec", null ],
+    [ "neforce::is_clock_v", "group___clocks.html#ga15cfac8e362ab2f652fb77cdaa1f8f39", null ]
 ];

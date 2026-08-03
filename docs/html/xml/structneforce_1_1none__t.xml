@@ -1,0 +1,219 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1none__t" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::none_t</compoundname>
+    <basecompoundref refid="structneforce_1_1icommon" prot="public" virt="non-virtual">neforce::icommon&lt; none_t &gt;</basecompoundref>
+    <includes refid="none_8hpp" local="no">none.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1none__t_1adc14ac7b303f4ded2607dd0e3416ac18" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::none_t::none_t</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>none_t</name>
+        <qualifiedname>neforce::none_t::none_t</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>构造一个空状态对象，不执行任何操作。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/none.hpp" line="38" column="15"/>
+        <referencedby refid="structneforce_1_1none__t_1a7be8b9b0221afafe44a71d1564d2ad98" compoundref="none_8hpp" startline="45" endline="45">equal_to</referencedby>
+        <referencedby refid="structneforce_1_1none__t_1aff624ef53a51307943f14379f773f248" compoundref="none_8hpp" startline="52" endline="52">less_than</referencedby>
+        <referencedby refid="structneforce_1_1none__t_1ae5ba91e30fb6d2f591e5064cd6a4f7eb" compoundref="none_8hpp" startline="66" endline="66">swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1none__t_1a7be8b9b0221afafe44a71d1564d2ad98" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::none_t::equal_to</definition>
+        <argsstring>(const none_t &amp;other) const noexcept</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>neforce::none_t::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1none__t_1adc14ac7b303f4ded2607dd0e3416ac18" kindref="member">none_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>相等比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个空状态对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>总是返回true，因为所有空状态都是相等的 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/none.hpp" line="45" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/none.hpp" bodystart="45" bodyend="45"/>
+        <references refid="structneforce_1_1none__t_1a7be8b9b0221afafe44a71d1564d2ad98" compoundref="none_8hpp" startline="45" endline="45">equal_to</references>
+        <references refid="structneforce_1_1none__t_1adc14ac7b303f4ded2607dd0e3416ac18">none_t</references>
+        <referencedby refid="structneforce_1_1none__t_1a7be8b9b0221afafe44a71d1564d2ad98" compoundref="none_8hpp" startline="45" endline="45">equal_to</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1none__t_1aff624ef53a51307943f14379f773f248" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::none_t::less_than</definition>
+        <argsstring>(const none_t &amp;other) const noexcept</argsstring>
+        <name>less_than</name>
+        <qualifiedname>neforce::none_t::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1none__t_1adc14ac7b303f4ded2607dd0e3416ac18" kindref="member">none_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>小于比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个空状态对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>总是返回false，因为空状态不小于任何其他空状态 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/none.hpp" line="52" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/none.hpp" bodystart="52" bodyend="52"/>
+        <references refid="structneforce_1_1none__t_1adc14ac7b303f4ded2607dd0e3416ac18">none_t</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1none__t_1a3d8fcf695e0657329ad90afebca80960" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::none_t::to_hash</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>to_hash</name>
+        <qualifiedname>neforce::none_t::to_hash</qualifiedname>
+        <briefdescription>
+<para>计算哈希值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>FNV偏移基准值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/none.hpp" line="58" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/none.hpp" bodystart="58" bodyend="58"/>
+        <references refid="group___hash_primary_1ga1b0e6d502da5248efd1c6290a1b915ce" compoundref="hash_8hpp" startline="122">neforce::constants::FNV_OFFSET_BASIS</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1none__t_1ae5ba91e30fb6d2f591e5064cd6a4f7eb" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::none_t::swap</definition>
+        <argsstring>(none_t &amp;other) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>neforce::none_t::swap</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1none__t_1adc14ac7b303f4ded2607dd0e3416ac18" kindref="member">none_t</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个空状态对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+交换两个空状态对象，由于空状态不包含任何数据，此操作不执行任何操作。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/none.hpp" line="66" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/none.hpp" bodystart="66" bodyend="66"/>
+        <references refid="structneforce_1_1none__t_1adc14ac7b303f4ded2607dd0e3416ac18">none_t</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>空状态类型 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>表示一个不包含任何值的状态。</para>
+<para>主要用于以下场景：<orderedlist>
+<listitem><para>作为可空类型的空值表示</para>
+</listitem><listitem><para>作为占位符类型，用于类型推导和模板元编程</para>
+</listitem><listitem><para>作为标记类型 </para>
+</listitem></orderedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>neforce::icommon&lt; none_t &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::icomparable&lt; none_t &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="4">
+        <label>neforce::ihashable&lt; none_t &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="1">
+        <label>neforce::none_t</label>
+        <link refid="structneforce_1_1none__t"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>neforce::icommon&lt; none_t &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::icomparable&lt; none_t &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="4">
+        <label>neforce::ihashable&lt; none_t &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="1">
+        <label>neforce::none_t</label>
+        <link refid="structneforce_1_1none__t"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/none.hpp" line="32" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/none.hpp" bodystart="32" bodyend="67"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1none__t_1a7be8b9b0221afafe44a71d1564d2ad98" prot="public" virt="non-virtual"><scope>neforce::none_t</scope><name>equal_to</name></member>
+      <member refid="structneforce_1_1none__t_1aff624ef53a51307943f14379f773f248" prot="public" virt="non-virtual"><scope>neforce::none_t</scope><name>less_than</name></member>
+      <member refid="structneforce_1_1none__t_1adc14ac7b303f4ded2607dd0e3416ac18" prot="public" virt="non-virtual"><scope>neforce::none_t</scope><name>none_t</name></member>
+      <member refid="structneforce_1_1icomparable_1aa385e40eb8ac8bdae736966ad0cf568f" prot="public" virt="non-virtual"><scope>neforce::none_t</scope><name>operator!=</name></member>
+      <member refid="structneforce_1_1icomparable_1a0641b58de65d6a0d5b87c2bcb47496a4" prot="public" virt="non-virtual"><scope>neforce::none_t</scope><name>operator&lt;</name></member>
+      <member refid="structneforce_1_1icomparable_1a313fba4bce20aced1ff0e6173ad6aab2" prot="public" virt="non-virtual"><scope>neforce::none_t</scope><name>operator&lt;=</name></member>
+      <member refid="structneforce_1_1icomparable_1ab9b06f7293eb15299f8c7d5341bfbc83" prot="public" virt="non-virtual"><scope>neforce::none_t</scope><name>operator==</name></member>
+      <member refid="structneforce_1_1icomparable_1ab8de930acec5c0261656b787f576f08d" prot="public" virt="non-virtual"><scope>neforce::none_t</scope><name>operator&gt;</name></member>
+      <member refid="structneforce_1_1icomparable_1a644c6002f703eb487427daadfec8fb16" prot="public" virt="non-virtual"><scope>neforce::none_t</scope><name>operator&gt;=</name></member>
+      <member refid="structneforce_1_1none__t_1ae5ba91e30fb6d2f591e5064cd6a4f7eb" prot="public" virt="non-virtual"><scope>neforce::none_t</scope><name>swap</name></member>
+      <member refid="structneforce_1_1none__t_1a3d8fcf695e0657329ad90afebca80960" prot="public" virt="non-virtual"><scope>neforce::none_t</scope><name>to_hash</name></member>
+      <member refid="structneforce_1_1ihashable_1a3bedfaa42740465ea8b6e58309c1f67e" prot="public" virt="non-virtual"><scope>neforce::none_t</scope><name>to_ihash</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

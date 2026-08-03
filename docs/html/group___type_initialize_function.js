@@ -1,4 +1,4 @@
 var group___type_initialize_function =
 [
-    [ "initialize", "group___type_initialize_function.html#ga1278f68876e9220819c733bc1b3a93c1", null ]
+    [ "neforce::initialize", "group___type_initialize_function.html#gaf8945649f323b427327df549f3c42f9e", null ]
 ];

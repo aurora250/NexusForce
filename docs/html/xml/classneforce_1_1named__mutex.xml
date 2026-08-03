@@ -1,0 +1,372 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1named__mutex" kind="class" language="C++" prot="public">
+    <compoundname>neforce::named_mutex</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">neforce::mutex_base</basecompoundref>
+    <includes refid="named__mutex_8hpp" local="no">named_mutex.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1named__mutex_1a750a1ae610d3461c132e227bef64278f" prot="public" static="no">
+        <type>_NEFORCE native_handle_type</type>
+        <definition>using neforce::named_mutex::native_handle_type = _NEFORCE native_handle_type</definition>
+        <argsstring></argsstring>
+        <name>native_handle_type</name>
+        <qualifiedname>neforce::named_mutex::native_handle_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/named_mutex.hpp" line="35" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/named_mutex.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1named__mutex_1a3776ac55289ab8a9c89d9d14666ed25b" prot="private" static="no" mutable="no">
+        <type>native_handle_type</type>
+        <definition>native_handle_type neforce::named_mutex::handle_</definition>
+        <argsstring></argsstring>
+        <name>handle_</name>
+        <qualifiedname>neforce::named_mutex::handle_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/named_mutex.hpp" line="39" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/named_mutex.hpp" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1named__mutex_1a7fb816af1d5ebeed694fb6988ade3d6b" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::named_mutex::name_</definition>
+        <argsstring></argsstring>
+        <name>name_</name>
+        <qualifiedname>neforce::named_mutex::name_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/named_mutex.hpp" line="46" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/named_mutex.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1named__mutex_1aadf730083b09e7ee20e152562f320143" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::named_mutex::named_mutex</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>named_mutex</name>
+        <qualifiedname>neforce::named_mutex::named_mutex</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/named_mutex.hpp" line="52" column="5"/>
+        <referencedby refid="classneforce_1_1named__mutex_1a4cfa7deed4f1b9e7c76efe22c3d22c0f">named_mutex</referencedby>
+        <referencedby refid="classneforce_1_1named__mutex_1acaff27b4cc2f844ba25aff38ca40a424">named_mutex</referencedby>
+        <referencedby refid="classneforce_1_1named__mutex_1a4bdeaaf699fe9d9c986b4d038ccffe0c">operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1named__mutex_1a4cfa7deed4f1b9e7c76efe22c3d22c0f" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::named_mutex::named_mutex</definition>
+        <argsstring>(const string &amp;name, bool create=false)</argsstring>
+        <name>named_mutex</name>
+        <qualifiedname>neforce::named_mutex::named_mutex</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>create</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>构造函数，创建或打开命名互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>互斥锁名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>create</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否创建（true: 创建, false: 打开已有） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1share__memory__exception" kindref="compound">share_memory_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>创建或打开失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/named_mutex.hpp" line="60" column="14"/>
+        <references refid="classneforce_1_1named__mutex_1a70524de253c2e95b2594e3d86a10bb7a" compoundref="named__mutex_8hpp" startline="99" endline="99">name</references>
+        <references refid="classneforce_1_1named__mutex_1aadf730083b09e7ee20e152562f320143">named_mutex</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1named__mutex_1aa95a719a902aadde329386ac1ab5f895" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::named_mutex::~named_mutex</definition>
+        <argsstring>()</argsstring>
+        <name>~named_mutex</name>
+        <qualifiedname>neforce::named_mutex::~named_mutex</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/named_mutex.hpp" line="62" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1named__mutex_1aa1d6ec0e9ed533717df93652a7182453" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::named_mutex::named_mutex</definition>
+        <argsstring>(const named_mutex &amp;)=delete</argsstring>
+        <name>named_mutex</name>
+        <qualifiedname>neforce::named_mutex::named_mutex</qualifiedname>
+        <param>
+          <type>const named_mutex &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/named_mutex.hpp" line="64" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1named__mutex_1acd44db7d73e7c392ebae958df58ecfd7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1named__mutex_1aadf730083b09e7ee20e152562f320143" kindref="member">named_mutex</ref> &amp;</type>
+        <definition>named_mutex &amp; neforce::named_mutex::operator=</definition>
+        <argsstring>(const named_mutex &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::named_mutex::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1named__mutex_1aadf730083b09e7ee20e152562f320143" kindref="member">named_mutex</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/named_mutex.hpp" line="65" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1named__mutex_1acaff27b4cc2f844ba25aff38ca40a424" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::named_mutex::named_mutex</definition>
+        <argsstring>(named_mutex &amp;&amp;other) noexcept</argsstring>
+        <name>named_mutex</name>
+        <qualifiedname>neforce::named_mutex::named_mutex</qualifiedname>
+        <param>
+          <type>named_mutex &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/named_mutex.hpp" line="70" column="5"/>
+        <references refid="classneforce_1_1named__mutex_1aadf730083b09e7ee20e152562f320143">named_mutex</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1named__mutex_1a4bdeaaf699fe9d9c986b4d038ccffe0c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1named__mutex_1aadf730083b09e7ee20e152562f320143" kindref="member">named_mutex</ref> &amp;</type>
+        <definition>named_mutex &amp; neforce::named_mutex::operator=</definition>
+        <argsstring>(named_mutex &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::named_mutex::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1named__mutex_1aadf730083b09e7ee20e152562f320143" kindref="member">named_mutex</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/named_mutex.hpp" line="75" column="17"/>
+        <references refid="classneforce_1_1named__mutex_1aadf730083b09e7ee20e152562f320143">named_mutex</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1named__mutex_1afa8074013e536f7e619ed73a80a6d84e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::named_mutex::lock</definition>
+        <argsstring>()</argsstring>
+        <name>lock</name>
+        <qualifiedname>neforce::named_mutex::lock</qualifiedname>
+        <briefdescription>
+<para>获取互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>阻塞直到锁可用，支持跨进程同步。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/named_mutex.hpp" line="82" column="10"/>
+        <references refid="classneforce_1_1named__mutex_1afa8074013e536f7e619ed73a80a6d84e">lock</references>
+        <referencedby refid="classneforce_1_1named__mutex_1afa8074013e536f7e619ed73a80a6d84e">lock</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1named__mutex_1a8c47f60e873ba302e34440733454e919" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::named_mutex::try_lock</definition>
+        <argsstring>()</argsstring>
+        <name>try_lock</name>
+        <qualifiedname>neforce::named_mutex::try_lock</qualifiedname>
+        <briefdescription>
+<para>尝试获取互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否成功获取锁 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/named_mutex.hpp" line="88" column="10"/>
+        <references refid="classneforce_1_1named__mutex_1a8c47f60e873ba302e34440733454e919">try_lock</references>
+        <referencedby refid="classneforce_1_1named__mutex_1a8c47f60e873ba302e34440733454e919">try_lock</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1named__mutex_1aa775c75b992f5cd3ff6e46c06542458b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::named_mutex::unlock</definition>
+        <argsstring>()</argsstring>
+        <name>unlock</name>
+        <qualifiedname>neforce::named_mutex::unlock</qualifiedname>
+        <briefdescription>
+<para>释放互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/named_mutex.hpp" line="93" column="10"/>
+        <references refid="classneforce_1_1named__mutex_1aa775c75b992f5cd3ff6e46c06542458b">unlock</references>
+        <referencedby refid="classneforce_1_1named__mutex_1aa775c75b992f5cd3ff6e46c06542458b">unlock</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1named__mutex_1a70524de253c2e95b2594e3d86a10bb7a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+        <definition>const string &amp; neforce::named_mutex::name</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>name</name>
+        <qualifiedname>neforce::named_mutex::name</qualifiedname>
+        <briefdescription>
+<para>获取互斥锁名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>名称 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/named_mutex.hpp" line="99" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/named_mutex.hpp" bodystart="99" bodyend="99"/>
+        <references refid="classneforce_1_1named__mutex_1a70524de253c2e95b2594e3d86a10bb7a" compoundref="named__mutex_8hpp" startline="99" endline="99">name</references>
+        <referencedby refid="classneforce_1_1named__mutex_1a70524de253c2e95b2594e3d86a10bb7a" compoundref="named__mutex_8hpp" startline="99" endline="99">name</referencedby>
+        <referencedby refid="classneforce_1_1named__mutex_1a4cfa7deed4f1b9e7c76efe22c3d22c0f">named_mutex</referencedby>
+        <referencedby refid="classneforce_1_1named__mutex_1af07164dc9fb3375d7654bb54cbe12a60">remove</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1named__mutex_1ac655e3716681cf8428194a6002d88b27" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::named_mutex::is_valid</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_valid</name>
+        <qualifiedname>neforce::named_mutex::is_valid</qualifiedname>
+        <briefdescription>
+<para>检查是否有效 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否已成功创建或打开 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/named_mutex.hpp" line="105" column="11"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1named__mutex_1af07164dc9fb3375d7654bb54cbe12a60" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool neforce::named_mutex::remove</definition>
+        <argsstring>(const string &amp;name)</argsstring>
+        <name>remove</name>
+        <qualifiedname>neforce::named_mutex::remove</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>删除命名互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>互斥锁名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否成功删除 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/named_mutex.hpp" line="112" column="17"/>
+        <references refid="classneforce_1_1named__mutex_1a70524de253c2e95b2594e3d86a10bb7a" compoundref="named__mutex_8hpp" startline="99" endline="99">name</references>
+        <references refid="classneforce_1_1named__mutex_1af07164dc9fb3375d7654bb54cbe12a60">remove</references>
+        <referencedby refid="classneforce_1_1named__mutex_1af07164dc9fb3375d7654bb54cbe12a60">remove</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>命名互斥锁 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供独立的跨进程命名互斥锁，可与共享内存解耦使用。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/named_mutex.hpp" line="33" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/named_mutex.hpp" bodystart="33" bodyend="113"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1named__mutex_1a3776ac55289ab8a9c89d9d14666ed25b" prot="private" virt="non-virtual"><scope>neforce::named_mutex</scope><name>handle_</name></member>
+      <member refid="classneforce_1_1named__mutex_1ac655e3716681cf8428194a6002d88b27" prot="public" virt="non-virtual"><scope>neforce::named_mutex</scope><name>is_valid</name></member>
+      <member refid="classneforce_1_1named__mutex_1afa8074013e536f7e619ed73a80a6d84e" prot="public" virt="non-virtual"><scope>neforce::named_mutex</scope><name>lock</name></member>
+      <member refid="classneforce_1_1named__mutex_1a70524de253c2e95b2594e3d86a10bb7a" prot="public" virt="non-virtual"><scope>neforce::named_mutex</scope><name>name</name></member>
+      <member refid="classneforce_1_1named__mutex_1a7fb816af1d5ebeed694fb6988ade3d6b" prot="private" virt="non-virtual"><scope>neforce::named_mutex</scope><name>name_</name></member>
+      <member refid="classneforce_1_1named__mutex_1aadf730083b09e7ee20e152562f320143" prot="public" virt="non-virtual"><scope>neforce::named_mutex</scope><name>named_mutex</name></member>
+      <member refid="classneforce_1_1named__mutex_1a4cfa7deed4f1b9e7c76efe22c3d22c0f" prot="public" virt="non-virtual"><scope>neforce::named_mutex</scope><name>named_mutex</name></member>
+      <member refid="classneforce_1_1named__mutex_1aa1d6ec0e9ed533717df93652a7182453" prot="public" virt="non-virtual"><scope>neforce::named_mutex</scope><name>named_mutex</name></member>
+      <member refid="classneforce_1_1named__mutex_1acaff27b4cc2f844ba25aff38ca40a424" prot="public" virt="non-virtual"><scope>neforce::named_mutex</scope><name>named_mutex</name></member>
+      <member refid="classneforce_1_1named__mutex_1a750a1ae610d3461c132e227bef64278f" prot="public" virt="non-virtual"><scope>neforce::named_mutex</scope><name>native_handle_type</name></member>
+      <member refid="classneforce_1_1named__mutex_1acd44db7d73e7c392ebae958df58ecfd7" prot="public" virt="non-virtual"><scope>neforce::named_mutex</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1named__mutex_1a4bdeaaf699fe9d9c986b4d038ccffe0c" prot="public" virt="non-virtual"><scope>neforce::named_mutex</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1named__mutex_1af07164dc9fb3375d7654bb54cbe12a60" prot="public" virt="non-virtual"><scope>neforce::named_mutex</scope><name>remove</name></member>
+      <member refid="classneforce_1_1named__mutex_1a8c47f60e873ba302e34440733454e919" prot="public" virt="non-virtual"><scope>neforce::named_mutex</scope><name>try_lock</name></member>
+      <member refid="classneforce_1_1named__mutex_1aa775c75b992f5cd3ff6e46c06542458b" prot="public" virt="non-virtual"><scope>neforce::named_mutex</scope><name>unlock</name></member>
+      <member refid="classneforce_1_1named__mutex_1aa95a719a902aadde329386ac1ab5f895" prot="public" virt="non-virtual"><scope>neforce::named_mutex</scope><name>~named_mutex</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

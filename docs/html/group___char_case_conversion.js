@@ -1,5 +1,5 @@
 var group___char_case_conversion =
 [
-    [ "to_lowercase", "group___char_case_conversion.html#ga60868f83d50ae1a9b15e63b0df3e85d7", null ],
-    [ "to_uppercase", "group___char_case_conversion.html#ga7ef07b1f70b4539589f7d0ff1eddc003", null ]
+    [ "neforce::to_lowercase", "group___char_case_conversion.html#ga0dd2c6080624be33a9160b84f6f1c0e5", null ],
+    [ "neforce::to_uppercase", "group___char_case_conversion.html#gae737571fd3de79857498ef5b8c261142", null ]
 ];

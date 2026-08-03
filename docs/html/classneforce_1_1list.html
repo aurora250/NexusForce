@@ -1,0 +1,2876 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::list&lt; T, Alloc &gt; 模板类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1list.html','','classneforce_1_1list-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::list&lt; T, Alloc &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___container.html">标准容器</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>双向链表容器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="list_8hpp_source.html">list.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a343ce1070af2969049505b9fc49b6e97" id="r_a343ce1070af2969049505b9fc49b6e97"><td class="memItemLeft"><a id="a343ce1070af2969049505b9fc49b6e97" name="a343ce1070af2969049505b9fc49b6e97"></a>
+using&#160;</td><td class="memItemRight"><b>pointer</b> = T*</td></tr>
+<tr class="memdesc:a343ce1070af2969049505b9fc49b6e97"><td class="mdescLeft">&#160;</td><td class="mdescRight">指针类型 <br /></td></tr>
+<tr class="memitem:a574998096d8b97a6de7e6eb45ed57b41" id="r_a574998096d8b97a6de7e6eb45ed57b41"><td class="memItemLeft"><a id="a574998096d8b97a6de7e6eb45ed57b41" name="a574998096d8b97a6de7e6eb45ed57b41"></a>
+using&#160;</td><td class="memItemRight"><b>reference</b> = T&amp;</td></tr>
+<tr class="memdesc:a574998096d8b97a6de7e6eb45ed57b41"><td class="mdescLeft">&#160;</td><td class="mdescRight">引用类型 <br /></td></tr>
+<tr class="memitem:ac3044d235bd602092e61ac5b5357d222" id="r_ac3044d235bd602092e61ac5b5357d222"><td class="memItemLeft"><a id="ac3044d235bd602092e61ac5b5357d222" name="ac3044d235bd602092e61ac5b5357d222"></a>
+using&#160;</td><td class="memItemRight"><b>const_pointer</b> = const T*</td></tr>
+<tr class="memdesc:ac3044d235bd602092e61ac5b5357d222"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量指针类型 <br /></td></tr>
+<tr class="memitem:a7a1222971d4535b5f0019b3459db70f8" id="r_a7a1222971d4535b5f0019b3459db70f8"><td class="memItemLeft"><a id="a7a1222971d4535b5f0019b3459db70f8" name="a7a1222971d4535b5f0019b3459db70f8"></a>
+using&#160;</td><td class="memItemRight"><b>const_reference</b> = const T&amp;</td></tr>
+<tr class="memdesc:a7a1222971d4535b5f0019b3459db70f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量引用类型 <br /></td></tr>
+<tr class="memitem:ad63d54b0d009a063097d95dddeccbfc3" id="r_ad63d54b0d009a063097d95dddeccbfc3"><td class="memItemLeft"><a id="ad63d54b0d009a063097d95dddeccbfc3" name="ad63d54b0d009a063097d95dddeccbfc3"></a>
+using&#160;</td><td class="memItemRight"><b>value_type</b> = T</td></tr>
+<tr class="memdesc:ad63d54b0d009a063097d95dddeccbfc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">值类型 <br /></td></tr>
+<tr class="memitem:a163c35ba6bf0967b513d35c70fac59df" id="r_a163c35ba6bf0967b513d35c70fac59df"><td class="memItemLeft"><a id="a163c35ba6bf0967b513d35c70fac59df" name="a163c35ba6bf0967b513d35c70fac59df"></a>
+using&#160;</td><td class="memItemRight"><b>size_type</b> = <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a></td></tr>
+<tr class="memdesc:a163c35ba6bf0967b513d35c70fac59df"><td class="mdescLeft">&#160;</td><td class="mdescRight">大小类型 <br /></td></tr>
+<tr class="memitem:a0702cd51349c52e4d0f0eed943659673" id="r_a0702cd51349c52e4d0f0eed943659673"><td class="memItemLeft"><a id="a0702cd51349c52e4d0f0eed943659673" name="a0702cd51349c52e4d0f0eed943659673"></a>
+using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" href="group___platform_dependent_types.html#gab2c4bc5144496796ce8a7feed7b8ad58">ptrdiff_t</a></td></tr>
+<tr class="memdesc:a0702cd51349c52e4d0f0eed943659673"><td class="mdescLeft">&#160;</td><td class="mdescRight">差值类型 <br /></td></tr>
+<tr class="memitem:a81cd4ae73112f6a3a54740b4af542799" id="r_a81cd4ae73112f6a3a54740b4af542799"><td class="memItemLeft"><a id="a81cd4ae73112f6a3a54740b4af542799" name="a81cd4ae73112f6a3a54740b4af542799"></a>
+using&#160;</td><td class="memItemRight"><b>iterator</b> = list_iterator&lt;false, <a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a>&gt;</td></tr>
+<tr class="memdesc:a81cd4ae73112f6a3a54740b4af542799"><td class="mdescLeft">&#160;</td><td class="mdescRight">迭代器类型 <br /></td></tr>
+<tr class="memitem:a362fd7b8d774e7d78d76cb77460cbeb5" id="r_a362fd7b8d774e7d78d76cb77460cbeb5"><td class="memItemLeft"><a id="a362fd7b8d774e7d78d76cb77460cbeb5" name="a362fd7b8d774e7d78d76cb77460cbeb5"></a>
+using&#160;</td><td class="memItemRight"><b>const_iterator</b> = list_iterator&lt;true, <a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a>&gt;</td></tr>
+<tr class="memdesc:a362fd7b8d774e7d78d76cb77460cbeb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量迭代器类型 <br /></td></tr>
+<tr class="memitem:a59eb8999edaab2961d8224438898f0a5" id="r_a59eb8999edaab2961d8224438898f0a5"><td class="memItemLeft"><a id="a59eb8999edaab2961d8224438898f0a5" name="a59eb8999edaab2961d8224438898f0a5"></a>
+using&#160;</td><td class="memItemRight"><b>reverse_iterator</b> = _NEFORCE <a class="el" href="#a59eb8999edaab2961d8224438898f0a5">reverse_iterator</a>&lt;<a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a>&gt;</td></tr>
+<tr class="memdesc:a59eb8999edaab2961d8224438898f0a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">反向迭代器类型 <br /></td></tr>
+<tr class="memitem:ab670a3da48fd0b6135abea7765093bc4" id="r_ab670a3da48fd0b6135abea7765093bc4"><td class="memItemLeft"><a id="ab670a3da48fd0b6135abea7765093bc4" name="ab670a3da48fd0b6135abea7765093bc4"></a>
+using&#160;</td><td class="memItemRight"><b>const_reverse_iterator</b> = _NEFORCE <a class="el" href="#a59eb8999edaab2961d8224438898f0a5">reverse_iterator</a>&lt;<a class="el" href="#a362fd7b8d774e7d78d76cb77460cbeb5">const_iterator</a>&gt;</td></tr>
+<tr class="memdesc:ab670a3da48fd0b6135abea7765093bc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量反向迭代器类型 <br /></td></tr>
+<tr class="memitem:a7ce352d02a94d4764e432049a95567f1" id="r_a7ce352d02a94d4764e432049a95567f1"><td class="memItemLeft"><a id="a7ce352d02a94d4764e432049a95567f1" name="a7ce352d02a94d4764e432049a95567f1"></a>
+using&#160;</td><td class="memItemRight"><b>allocator_type</b> = Alloc</td></tr>
+<tr class="memdesc:a7ce352d02a94d4764e432049a95567f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">分配器类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a3e9adef8fa2cdc8e48e840e94cc38efc" id="r_a3e9adef8fa2cdc8e48e840e94cc38efc"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a> ()</td></tr>
+<tr class="memdesc:a3e9adef8fa2cdc8e48e840e94cc38efc"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
+<tr class="memitem:ab61fe32592ae9d2b3bd063c93cec84ba" id="r_ab61fe32592ae9d2b3bd063c93cec84ba"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ab61fe32592ae9d2b3bd063c93cec84ba">list</a> (<a class="el" href="#a163c35ba6bf0967b513d35c70fac59df">size_type</a> n)</td></tr>
+<tr class="memdesc:ab61fe32592ae9d2b3bd063c93cec84ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造包含n个默认构造元素的链表  <br /></td></tr>
+<tr class="memitem:a4a8b071cd5b5af7e6df88935dabf659f" id="r_a4a8b071cd5b5af7e6df88935dabf659f"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a4a8b071cd5b5af7e6df88935dabf659f">list</a> (<a class="el" href="#a163c35ba6bf0967b513d35c70fac59df">size_type</a> n, const T &amp;value)</td></tr>
+<tr class="memdesc:a4a8b071cd5b5af7e6df88935dabf659f"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造包含n个指定值元素的链表  <br /></td></tr>
+<tr class="memitem:a3f24c981613dba85fb83fc8af366d2f9" id="r_a3f24c981613dba85fb83fc8af366d2f9"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga4f7b2f70ba1539ec3326d52e89698f13">is_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a3f24c981613dba85fb83fc8af366d2f9 template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a3f24c981613dba85fb83fc8af366d2f9">list</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:a3f24c981613dba85fb83fc8af366d2f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">范围构造函数  <br /></td></tr>
+<tr class="memitem:a9ff79b9d3def40be095bbf5f1c04cc30" id="r_a9ff79b9d3def40be095bbf5f1c04cc30"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a9ff79b9d3def40be095bbf5f1c04cc30">list</a> (std::initializer_list&lt; T &gt; ilist)</td></tr>
+<tr class="memdesc:a9ff79b9d3def40be095bbf5f1c04cc30"><td class="mdescLeft">&#160;</td><td class="mdescRight">初始化列表构造函数  <br /></td></tr>
+<tr class="memitem:adae53643960d9a9634d7ec7b4ee9fab0" id="r_adae53643960d9a9634d7ec7b4ee9fab0"><td class="memItemLeft"><a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#adae53643960d9a9634d7ec7b4ee9fab0">operator=</a> (std::initializer_list&lt; T &gt; ilist)</td></tr>
+<tr class="memdesc:adae53643960d9a9634d7ec7b4ee9fab0"><td class="mdescLeft">&#160;</td><td class="mdescRight">初始化列表赋值运算符  <br /></td></tr>
+<tr class="memitem:afb3df1c0d6778652144d329355469f6c" id="r_afb3df1c0d6778652144d329355469f6c"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#afb3df1c0d6778652144d329355469f6c">list</a> (const list &amp;other)</td></tr>
+<tr class="memdesc:afb3df1c0d6778652144d329355469f6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝构造函数  <br /></td></tr>
+<tr class="memitem:afe4939695f4a98d091ace2d23974f361" id="r_afe4939695f4a98d091ace2d23974f361"><td class="memItemLeft"><a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#afe4939695f4a98d091ace2d23974f361">operator=</a> (const <a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a> &amp;other)</td></tr>
+<tr class="memdesc:afe4939695f4a98d091ace2d23974f361"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝赋值运算符  <br /></td></tr>
+<tr class="memitem:a1689a7e8ebd085100876080997ce1736" id="r_a1689a7e8ebd085100876080997ce1736"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a1689a7e8ebd085100876080997ce1736">list</a> (list &amp;&amp;other) noexcept(<a class="el" href="group___swap_utility.html#gafcc46bf052d9d5c47c99d6a20dadd5bc">is_nothrow_swappable_v</a>&lt; <a class="el" href="structneforce_1_1compressed__pair.html">compressed_pair</a>&lt; <a class="el" href="#a7ce352d02a94d4764e432049a95567f1">allocator_type</a>, <a class="el" href="#a163c35ba6bf0967b513d35c70fac59df">size_type</a> &gt; &gt;)</td></tr>
+<tr class="memdesc:a1689a7e8ebd085100876080997ce1736"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造函数  <br /></td></tr>
+<tr class="memitem:a9dd56edd6208b374e59b99a2f19551db" id="r_a9dd56edd6208b374e59b99a2f19551db"><td class="memItemLeft"><a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a9dd56edd6208b374e59b99a2f19551db">operator=</a> (<a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a> &amp;&amp;other) noexcept(<a class="el" href="group___swap_utility.html#gafcc46bf052d9d5c47c99d6a20dadd5bc">is_nothrow_swappable_v</a>&lt; <a class="el" href="structneforce_1_1compressed__pair.html">compressed_pair</a>&lt; <a class="el" href="#a7ce352d02a94d4764e432049a95567f1">allocator_type</a>, <a class="el" href="#a163c35ba6bf0967b513d35c70fac59df">size_type</a> &gt; &gt; &amp;&amp;<a class="el" href="group___type_special_member_function_checks.html#gab65bc375c5b6653c7fccd521711478c5">is_nothrow_destructible_v</a>&lt; node_type &gt;)</td></tr>
+<tr class="memdesc:a9dd56edd6208b374e59b99a2f19551db"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值运算符  <br /></td></tr>
+<tr class="memitem:ac5e04045b28cfc709e1a0a79dbfb16f2" id="r_ac5e04045b28cfc709e1a0a79dbfb16f2"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ac5e04045b28cfc709e1a0a79dbfb16f2">~list</a> ()</td></tr>
+<tr class="memdesc:ac5e04045b28cfc709e1a0a79dbfb16f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数  <br /></td></tr>
+<tr class="memitem:a202307b17eaf5ebb2a853faec4b10e42" id="r_a202307b17eaf5ebb2a853faec4b10e42"><td class="memItemLeft"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a202307b17eaf5ebb2a853faec4b10e42">begin</a> () noexcept</td></tr>
+<tr class="memdesc:a202307b17eaf5ebb2a853faec4b10e42"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取起始迭代器  <br /></td></tr>
+<tr class="memitem:ad324ccc01be09a167fdda863fce62e0f" id="r_ad324ccc01be09a167fdda863fce62e0f"><td class="memItemLeft"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad324ccc01be09a167fdda863fce62e0f">end</a> () noexcept</td></tr>
+<tr class="memdesc:ad324ccc01be09a167fdda863fce62e0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取结束迭代器  <br /></td></tr>
+<tr class="memitem:a2a85c9ded3bae6348a505b558ca00695" id="r_a2a85c9ded3bae6348a505b558ca00695"><td class="memItemLeft"><a class="el" href="#a362fd7b8d774e7d78d76cb77460cbeb5">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a2a85c9ded3bae6348a505b558ca00695">begin</a> () const noexcept</td></tr>
+<tr class="memdesc:a2a85c9ded3bae6348a505b558ca00695"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量起始迭代器  <br /></td></tr>
+<tr class="memitem:a77fd8e60a7acb30b16ca80e3329608f0" id="r_a77fd8e60a7acb30b16ca80e3329608f0"><td class="memItemLeft"><a class="el" href="#a362fd7b8d774e7d78d76cb77460cbeb5">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a77fd8e60a7acb30b16ca80e3329608f0">end</a> () const noexcept</td></tr>
+<tr class="memdesc:a77fd8e60a7acb30b16ca80e3329608f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量结束迭代器  <br /></td></tr>
+<tr class="memitem:aa87ae366bd1001b77c4057e427b6cce5" id="r_aa87ae366bd1001b77c4057e427b6cce5"><td class="memItemLeft"><a class="el" href="#a59eb8999edaab2961d8224438898f0a5">reverse_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa87ae366bd1001b77c4057e427b6cce5">rbegin</a> () noexcept</td></tr>
+<tr class="memdesc:aa87ae366bd1001b77c4057e427b6cce5"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取反向起始迭代器  <br /></td></tr>
+<tr class="memitem:a7e98499630053e434abc23325ea1deab" id="r_a7e98499630053e434abc23325ea1deab"><td class="memItemLeft"><a class="el" href="#a59eb8999edaab2961d8224438898f0a5">reverse_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7e98499630053e434abc23325ea1deab">rend</a> () noexcept</td></tr>
+<tr class="memdesc:a7e98499630053e434abc23325ea1deab"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取反向结束迭代器  <br /></td></tr>
+<tr class="memitem:a741e6049cb6d9988eca8082611f69de8" id="r_a741e6049cb6d9988eca8082611f69de8"><td class="memItemLeft"><a class="el" href="#ab670a3da48fd0b6135abea7765093bc4">const_reverse_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a741e6049cb6d9988eca8082611f69de8">rbegin</a> () const noexcept</td></tr>
+<tr class="memdesc:a741e6049cb6d9988eca8082611f69de8"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量反向起始迭代器  <br /></td></tr>
+<tr class="memitem:af2a8a64c1143d6f0064b254980bce6c5" id="r_af2a8a64c1143d6f0064b254980bce6c5"><td class="memItemLeft"><a class="el" href="#ab670a3da48fd0b6135abea7765093bc4">const_reverse_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#af2a8a64c1143d6f0064b254980bce6c5">rend</a> () const noexcept</td></tr>
+<tr class="memdesc:af2a8a64c1143d6f0064b254980bce6c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量反向结束迭代器  <br /></td></tr>
+<tr class="memitem:a330fbfca54c9d7f548ed7e41070bfd40" id="r_a330fbfca54c9d7f548ed7e41070bfd40"><td class="memItemLeft"><a class="el" href="#a362fd7b8d774e7d78d76cb77460cbeb5">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a330fbfca54c9d7f548ed7e41070bfd40">cbegin</a> () const noexcept</td></tr>
+<tr class="memdesc:a330fbfca54c9d7f548ed7e41070bfd40"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量起始迭代器  <br /></td></tr>
+<tr class="memitem:a1f468b5c9d3370c789b85545cce23090" id="r_a1f468b5c9d3370c789b85545cce23090"><td class="memItemLeft"><a class="el" href="#a362fd7b8d774e7d78d76cb77460cbeb5">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a1f468b5c9d3370c789b85545cce23090">cend</a> () const noexcept</td></tr>
+<tr class="memdesc:a1f468b5c9d3370c789b85545cce23090"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量结束迭代器  <br /></td></tr>
+<tr class="memitem:a21c55939e4e7380e8f6d1c1b79f03bec" id="r_a21c55939e4e7380e8f6d1c1b79f03bec"><td class="memItemLeft"><a class="el" href="#ab670a3da48fd0b6135abea7765093bc4">const_reverse_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a21c55939e4e7380e8f6d1c1b79f03bec">crbegin</a> () const noexcept</td></tr>
+<tr class="memdesc:a21c55939e4e7380e8f6d1c1b79f03bec"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量反向起始迭代器  <br /></td></tr>
+<tr class="memitem:a78afb76354dbeb54ee8260c9957de78f" id="r_a78afb76354dbeb54ee8260c9957de78f"><td class="memItemLeft"><a class="el" href="#ab670a3da48fd0b6135abea7765093bc4">const_reverse_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a78afb76354dbeb54ee8260c9957de78f">crend</a> () const noexcept</td></tr>
+<tr class="memdesc:a78afb76354dbeb54ee8260c9957de78f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量反向结束迭代器  <br /></td></tr>
+<tr class="memitem:a5445d1b5ecd7bb7a3af7822e8515e184" id="r_a5445d1b5ecd7bb7a3af7822e8515e184"><td class="memItemLeft"><a class="el" href="#a163c35ba6bf0967b513d35c70fac59df">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5445d1b5ecd7bb7a3af7822e8515e184">size</a> () const noexcept</td></tr>
+<tr class="memdesc:a5445d1b5ecd7bb7a3af7822e8515e184"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前元素数量  <br /></td></tr>
+<tr class="memitem:a75e53ec59a07d8156556dcb3515f2fd9" id="r_a75e53ec59a07d8156556dcb3515f2fd9"><td class="memItemLeft"><a class="el" href="#a163c35ba6bf0967b513d35c70fac59df">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a75e53ec59a07d8156556dcb3515f2fd9">max_size</a> () const noexcept</td></tr>
+<tr class="memdesc:a75e53ec59a07d8156556dcb3515f2fd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取最大可能大小  <br /></td></tr>
+<tr class="memitem:aacad383fc0091dbaaed125243e0f9d02" id="r_aacad383fc0091dbaaed125243e0f9d02"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aacad383fc0091dbaaed125243e0f9d02">empty</a> () const noexcept</td></tr>
+<tr class="memdesc:aacad383fc0091dbaaed125243e0f9d02"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否为空  <br /></td></tr>
+<tr class="memitem:aba0edefb03db276a77f78140b5e07dff" id="r_aba0edefb03db276a77f78140b5e07dff"><td class="memItemLeft"><a class="el" href="#a574998096d8b97a6de7e6eb45ed57b41">reference</a>&#160;</td><td class="memItemRight"><a class="el" href="#aba0edefb03db276a77f78140b5e07dff">front</a> () noexcept</td></tr>
+<tr class="memdesc:aba0edefb03db276a77f78140b5e07dff"><td class="mdescLeft">&#160;</td><td class="mdescRight">访问第一个元素  <br /></td></tr>
+<tr class="memitem:a18a363e635e8f5e535a80b3ff63010f0" id="r_a18a363e635e8f5e535a80b3ff63010f0"><td class="memItemLeft"><a class="el" href="#a7a1222971d4535b5f0019b3459db70f8">const_reference</a>&#160;</td><td class="memItemRight"><a class="el" href="#a18a363e635e8f5e535a80b3ff63010f0">front</a> () const noexcept</td></tr>
+<tr class="memdesc:a18a363e635e8f5e535a80b3ff63010f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">访问第一个常量元素  <br /></td></tr>
+<tr class="memitem:afc63d5f019a86d566e010a4aff1a2f75" id="r_afc63d5f019a86d566e010a4aff1a2f75"><td class="memItemLeft"><a class="el" href="#a574998096d8b97a6de7e6eb45ed57b41">reference</a>&#160;</td><td class="memItemRight"><a class="el" href="#afc63d5f019a86d566e010a4aff1a2f75">back</a> () noexcept</td></tr>
+<tr class="memdesc:afc63d5f019a86d566e010a4aff1a2f75"><td class="mdescLeft">&#160;</td><td class="mdescRight">访问最后一个元素  <br /></td></tr>
+<tr class="memitem:ab4b2fd0e137d02d9738b8c9ce1ac29c7" id="r_ab4b2fd0e137d02d9738b8c9ce1ac29c7"><td class="memItemLeft"><a class="el" href="#a7a1222971d4535b5f0019b3459db70f8">const_reference</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab4b2fd0e137d02d9738b8c9ce1ac29c7">back</a> () const noexcept</td></tr>
+<tr class="memdesc:ab4b2fd0e137d02d9738b8c9ce1ac29c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">访问最后一个常量元素  <br /></td></tr>
+<tr class="memitem:a88570737c77532c69bd2a0af3c337cf1" id="r_a88570737c77532c69bd2a0af3c337cf1"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a88570737c77532c69bd2a0af3c337cf1 template"><td class="memItemLeft"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a88570737c77532c69bd2a0af3c337cf1">emplace</a> (<a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> position, Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a88570737c77532c69bd2a0af3c337cf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">在指定位置构造元素  <br /></td></tr>
+<tr class="memitem:a45f52f209a0c6e1f46184a0287aae587" id="r_a45f52f209a0c6e1f46184a0287aae587"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a45f52f209a0c6e1f46184a0287aae587 template"><td class="memItemLeft"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a45f52f209a0c6e1f46184a0287aae587">emplace_back</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a45f52f209a0c6e1f46184a0287aae587"><td class="mdescLeft">&#160;</td><td class="mdescRight">在末尾构造元素  <br /></td></tr>
+<tr class="memitem:a647d3045f2bae78607e34b0987fed362" id="r_a647d3045f2bae78607e34b0987fed362"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a647d3045f2bae78607e34b0987fed362 template"><td class="memItemLeft"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a647d3045f2bae78607e34b0987fed362">emplace_front</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a647d3045f2bae78607e34b0987fed362"><td class="mdescLeft">&#160;</td><td class="mdescRight">在开头构造元素  <br /></td></tr>
+<tr class="memitem:a34cfd3800cdb2dcc075083a505349847" id="r_a34cfd3800cdb2dcc075083a505349847"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a34cfd3800cdb2dcc075083a505349847">push_front</a> (const T &amp;value)</td></tr>
+<tr class="memdesc:a34cfd3800cdb2dcc075083a505349847"><td class="mdescLeft">&#160;</td><td class="mdescRight">在开头拷贝插入元素  <br /></td></tr>
+<tr class="memitem:a41c83873b6e5d20b6c3d51e183b56e59" id="r_a41c83873b6e5d20b6c3d51e183b56e59"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a41c83873b6e5d20b6c3d51e183b56e59">push_front</a> (T &amp;&amp;value)</td></tr>
+<tr class="memdesc:a41c83873b6e5d20b6c3d51e183b56e59"><td class="mdescLeft">&#160;</td><td class="mdescRight">在开头移动插入元素  <br /></td></tr>
+<tr class="memitem:a84c65e934083906847b7c097f8881b08" id="r_a84c65e934083906847b7c097f8881b08"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a84c65e934083906847b7c097f8881b08">push_back</a> (const T &amp;value)</td></tr>
+<tr class="memdesc:a84c65e934083906847b7c097f8881b08"><td class="mdescLeft">&#160;</td><td class="mdescRight">在末尾拷贝插入元素  <br /></td></tr>
+<tr class="memitem:a7d824dbed8a40411458574b858c4125b" id="r_a7d824dbed8a40411458574b858c4125b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7d824dbed8a40411458574b858c4125b">push_back</a> (T &amp;&amp;value)</td></tr>
+<tr class="memdesc:a7d824dbed8a40411458574b858c4125b"><td class="mdescLeft">&#160;</td><td class="mdescRight">在末尾移动插入元素  <br /></td></tr>
+<tr class="memitem:a4571d093da9e7677b925cd7e951acc3b" id="r_a4571d093da9e7677b925cd7e951acc3b"><td class="memItemLeft"><a id="a4571d093da9e7677b925cd7e951acc3b" name="a4571d093da9e7677b925cd7e951acc3b"></a>
+void&#160;</td><td class="memItemRight"><b>pop_front</b> () noexcept</td></tr>
+<tr class="memdesc:a4571d093da9e7677b925cd7e951acc3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除开头元素 <br /></td></tr>
+<tr class="memitem:ab13005e97707bdffa3491be5c9234a20" id="r_ab13005e97707bdffa3491be5c9234a20"><td class="memItemLeft"><a id="ab13005e97707bdffa3491be5c9234a20" name="ab13005e97707bdffa3491be5c9234a20"></a>
+void&#160;</td><td class="memItemRight"><b>pop_back</b> () noexcept</td></tr>
+<tr class="memdesc:ab13005e97707bdffa3491be5c9234a20"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除末尾元素 <br /></td></tr>
+<tr class="memitem:aafd6b84a4f0792648f0718ec2370dfb7" id="r_aafd6b84a4f0792648f0718ec2370dfb7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aafd6b84a4f0792648f0718ec2370dfb7">assign</a> (const <a class="el" href="#a163c35ba6bf0967b513d35c70fac59df">size_type</a> n, const T &amp;value)</td></tr>
+<tr class="memdesc:aafd6b84a4f0792648f0718ec2370dfb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">赋值n个指定值的元素  <br /></td></tr>
+<tr class="memitem:a94ce2608148a744dc5792e697cd5601f" id="r_a94ce2608148a744dc5792e697cd5601f"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga4f7b2f70ba1539ec3326d52e89698f13">is_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a94ce2608148a744dc5792e697cd5601f template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a94ce2608148a744dc5792e697cd5601f">assign</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:a94ce2608148a744dc5792e697cd5601f"><td class="mdescLeft">&#160;</td><td class="mdescRight">范围赋值  <br /></td></tr>
+<tr class="memitem:a5a95d736bdbcde8a0fe0b3521e9518d8" id="r_a5a95d736bdbcde8a0fe0b3521e9518d8"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a5a95d736bdbcde8a0fe0b3521e9518d8">assign</a> (std::initializer_list&lt; T &gt; ilist)</td></tr>
+<tr class="memdesc:a5a95d736bdbcde8a0fe0b3521e9518d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">初始化列表赋值  <br /></td></tr>
+<tr class="memitem:a749860b84826d9755747a73bb9ab5a45" id="r_a749860b84826d9755747a73bb9ab5a45"><td class="memItemLeft"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a749860b84826d9755747a73bb9ab5a45">insert</a> (<a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> position, const T &amp;value)</td></tr>
+<tr class="memdesc:a749860b84826d9755747a73bb9ab5a45"><td class="mdescLeft">&#160;</td><td class="mdescRight">在指定位置拷贝插入元素  <br /></td></tr>
+<tr class="memitem:a5f9ff7d5ed872eab6ceaf3251b16fb34" id="r_a5f9ff7d5ed872eab6ceaf3251b16fb34"><td class="memItemLeft"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5f9ff7d5ed872eab6ceaf3251b16fb34">insert</a> (<a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> position, T &amp;&amp;value)</td></tr>
+<tr class="memdesc:a5f9ff7d5ed872eab6ceaf3251b16fb34"><td class="mdescLeft">&#160;</td><td class="mdescRight">在指定位置移动插入元素  <br /></td></tr>
+<tr class="memitem:ab8778e60c0fb0b55e1215274447407ff" id="r_ab8778e60c0fb0b55e1215274447407ff"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga4f7b2f70ba1539ec3326d52e89698f13">is_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ab8778e60c0fb0b55e1215274447407ff template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab8778e60c0fb0b55e1215274447407ff">insert</a> (<a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> position, Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ab8778e60c0fb0b55e1215274447407ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">范围插入  <br /></td></tr>
+<tr class="memitem:a1798913cc46afc05797b7cb4995aa672" id="r_a1798913cc46afc05797b7cb4995aa672"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1798913cc46afc05797b7cb4995aa672">insert</a> (<a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> position, std::initializer_list&lt; T &gt; ilist)</td></tr>
+<tr class="memdesc:a1798913cc46afc05797b7cb4995aa672"><td class="mdescLeft">&#160;</td><td class="mdescRight">初始化列表插入  <br /></td></tr>
+<tr class="memitem:a753a383edb60238e84701be51c6cde48" id="r_a753a383edb60238e84701be51c6cde48"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a753a383edb60238e84701be51c6cde48">insert</a> (<a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> position, <a class="el" href="#a163c35ba6bf0967b513d35c70fac59df">size_type</a> n, const T &amp;value)</td></tr>
+<tr class="memdesc:a753a383edb60238e84701be51c6cde48"><td class="mdescLeft">&#160;</td><td class="mdescRight">插入n个指定值的元素  <br /></td></tr>
+<tr class="memitem:add2d5ccc41db43f8f45cfe53e40cf5e7" id="r_add2d5ccc41db43f8f45cfe53e40cf5e7"><td class="memItemLeft"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#add2d5ccc41db43f8f45cfe53e40cf5e7">erase</a> (<a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> position) noexcept(<a class="el" href="group___type_special_member_function_checks.html#gab65bc375c5b6653c7fccd521711478c5">is_nothrow_destructible_v</a>&lt; node_type &gt;)</td></tr>
+<tr class="memdesc:add2d5ccc41db43f8f45cfe53e40cf5e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除指定位置的元素  <br /></td></tr>
+<tr class="memitem:a772c8605d48ab86ce1ddc0f6ef08fc91" id="r_a772c8605d48ab86ce1ddc0f6ef08fc91"><td class="memItemLeft"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a772c8605d48ab86ce1ddc0f6ef08fc91">erase</a> (<a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> first, <a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> last) noexcept(<a class="el" href="group___type_special_member_function_checks.html#gab65bc375c5b6653c7fccd521711478c5">is_nothrow_destructible_v</a>&lt; node_type &gt;)</td></tr>
+<tr class="memdesc:a772c8605d48ab86ce1ddc0f6ef08fc91"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除指定范围内的元素  <br /></td></tr>
+<tr class="memitem:adafe7bb9c0afa418cc21fca0d5dbc568" id="r_adafe7bb9c0afa418cc21fca0d5dbc568"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#adafe7bb9c0afa418cc21fca0d5dbc568">clear</a> () noexcept(<a class="el" href="group___type_special_member_function_checks.html#gab65bc375c5b6653c7fccd521711478c5">is_nothrow_destructible_v</a>&lt; node_type &gt;)</td></tr>
+<tr class="memdesc:adafe7bb9c0afa418cc21fca0d5dbc568"><td class="mdescLeft">&#160;</td><td class="mdescRight">清空链表  <br /></td></tr>
+<tr class="memitem:afc01e1bd6f9388aa8e505b2131b9566a" id="r_afc01e1bd6f9388aa8e505b2131b9566a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afc01e1bd6f9388aa8e505b2131b9566a">swap</a> (<a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a> &amp;other) noexcept(<a class="el" href="group___swap_utility.html#gafcc46bf052d9d5c47c99d6a20dadd5bc">is_nothrow_swappable_v</a>&lt; <a class="el" href="#a7ce352d02a94d4764e432049a95567f1">allocator_type</a> &gt;)</td></tr>
+<tr class="memdesc:afc01e1bd6f9388aa8e505b2131b9566a"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个链表的内容  <br /></td></tr>
+<tr class="memitem:ab5986b772d30e83298b4f297aca968d0" id="r_ab5986b772d30e83298b4f297aca968d0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab5986b772d30e83298b4f297aca968d0">transfer</a> (<a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> position, <a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> first, <a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> last)</td></tr>
+<tr class="memdesc:ab5986b772d30e83298b4f297aca968d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">传输元素  <br /></td></tr>
+<tr class="memitem:aab03e4ead86aa297bd88f70237697418" id="r_aab03e4ead86aa297bd88f70237697418"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; </td></tr>
+<tr class="memitem:aab03e4ead86aa297bd88f70237697418 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aab03e4ead86aa297bd88f70237697418">remove_if</a> (Pred pred)</td></tr>
+<tr class="memdesc:aab03e4ead86aa297bd88f70237697418"><td class="mdescLeft">&#160;</td><td class="mdescRight">根据谓词移除元素  <br /></td></tr>
+<tr class="memitem:a2e2995457fb3a32ddf0259bf0ea254af" id="r_a2e2995457fb3a32ddf0259bf0ea254af"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2e2995457fb3a32ddf0259bf0ea254af">remove</a> (const T &amp;value)</td></tr>
+<tr class="memdesc:a2e2995457fb3a32ddf0259bf0ea254af"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除指定值的元素  <br /></td></tr>
+<tr class="memitem:a4bd3625c1e495e1710c25b981e9cd150" id="r_a4bd3625c1e495e1710c25b981e9cd150"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4bd3625c1e495e1710c25b981e9cd150">splice</a> (<a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> position, <a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a> &amp;other)</td></tr>
+<tr class="memdesc:a4bd3625c1e495e1710c25b981e9cd150"><td class="mdescLeft">&#160;</td><td class="mdescRight">拼接整个链表  <br /></td></tr>
+<tr class="memitem:ad9ba8b7e70303790d95439152f7b9462" id="r_ad9ba8b7e70303790d95439152f7b9462"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad9ba8b7e70303790d95439152f7b9462">splice</a> (<a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> position, <a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a> &amp;other, <a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> iter)</td></tr>
+<tr class="memdesc:ad9ba8b7e70303790d95439152f7b9462"><td class="mdescLeft">&#160;</td><td class="mdescRight">拼接单个元素  <br /></td></tr>
+<tr class="memitem:a610a26faeb5eb453f913a304edb81097" id="r_a610a26faeb5eb453f913a304edb81097"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a610a26faeb5eb453f913a304edb81097">splice</a> (<a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> position, <a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a> &amp;other, <a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> first, <a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> last)</td></tr>
+<tr class="memdesc:a610a26faeb5eb453f913a304edb81097"><td class="mdescLeft">&#160;</td><td class="mdescRight">拼接范围内的元素  <br /></td></tr>
+<tr class="memitem:acee18998e056b76ce0f7a3c663642c37" id="r_acee18998e056b76ce0f7a3c663642c37"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; </td></tr>
+<tr class="memitem:acee18998e056b76ce0f7a3c663642c37 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#acee18998e056b76ce0f7a3c663642c37">merge_if</a> (<a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a> &amp;other, Pred pred)</td></tr>
+<tr class="memdesc:acee18998e056b76ce0f7a3c663642c37"><td class="mdescLeft">&#160;</td><td class="mdescRight">合并两个有序链表  <br /></td></tr>
+<tr class="memitem:af3aa3a9c109d6f7edb5c3b78ef4e682f" id="r_af3aa3a9c109d6f7edb5c3b78ef4e682f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af3aa3a9c109d6f7edb5c3b78ef4e682f">merge</a> (<a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a> &amp;other)</td></tr>
+<tr class="memdesc:af3aa3a9c109d6f7edb5c3b78ef4e682f"><td class="mdescLeft">&#160;</td><td class="mdescRight">合并两个有序链表（默认使用小于比较）  <br /></td></tr>
+<tr class="memitem:aabdb72ec39382fae75294b5acecde155" id="r_aabdb72ec39382fae75294b5acecde155"><td class="memItemLeft"><a id="aabdb72ec39382fae75294b5acecde155" name="aabdb72ec39382fae75294b5acecde155"></a>
+void&#160;</td><td class="memItemRight"><b>reverse</b> () noexcept</td></tr>
+<tr class="memdesc:aabdb72ec39382fae75294b5acecde155"><td class="mdescLeft">&#160;</td><td class="mdescRight">反转链表 <br /></td></tr>
+<tr class="memitem:a2de4f47023b192fdb75297668f10e264" id="r_a2de4f47023b192fdb75297668f10e264"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; </td></tr>
+<tr class="memitem:a2de4f47023b192fdb75297668f10e264 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2de4f47023b192fdb75297668f10e264">unique_if</a> (Pred pred) noexcept</td></tr>
+<tr class="memdesc:a2de4f47023b192fdb75297668f10e264"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除连续的重复元素  <br /></td></tr>
+<tr class="memitem:a6fba573e3becc1076165df3cbabed98f" id="r_a6fba573e3becc1076165df3cbabed98f"><td class="memItemLeft"><a id="a6fba573e3becc1076165df3cbabed98f" name="a6fba573e3becc1076165df3cbabed98f"></a>
+void&#160;</td><td class="memItemRight"><b>unique</b> () noexcept</td></tr>
+<tr class="memdesc:a6fba573e3becc1076165df3cbabed98f"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除连续的重复元素（默认使用等于比较） <br /></td></tr>
+<tr class="memitem:afcadc2a3d3110be487dea9e41ab89d16" id="r_afcadc2a3d3110be487dea9e41ab89d16"><td class="memTemplParams" colspan="2">template&lt;typename Pred&gt; </td></tr>
+<tr class="memitem:afcadc2a3d3110be487dea9e41ab89d16 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afcadc2a3d3110be487dea9e41ab89d16">sort_if</a> (Pred pred)</td></tr>
+<tr class="memdesc:afcadc2a3d3110be487dea9e41ab89d16"><td class="mdescLeft">&#160;</td><td class="mdescRight">对链表进行排序  <br /></td></tr>
+<tr class="memitem:acaac44bfe84c0df827e790f0b35726cd" id="r_acaac44bfe84c0df827e790f0b35726cd"><td class="memItemLeft"><a id="acaac44bfe84c0df827e790f0b35726cd" name="acaac44bfe84c0df827e790f0b35726cd"></a>
+void&#160;</td><td class="memItemRight"><b>sort</b> ()</td></tr>
+<tr class="memdesc:acaac44bfe84c0df827e790f0b35726cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">对链表进行排序（默认使用小于比较） <br /></td></tr>
+<tr class="memitem:a77cadef56a57dc05126b69af43ac194a" id="r_a77cadef56a57dc05126b69af43ac194a"><td class="memItemLeft"><a class="el" href="#a7a1222971d4535b5f0019b3459db70f8">const_reference</a>&#160;</td><td class="memItemRight"><a class="el" href="#a77cadef56a57dc05126b69af43ac194a">at</a> (<a class="el" href="#a163c35ba6bf0967b513d35c70fac59df">size_type</a> position) const</td></tr>
+<tr class="memdesc:a77cadef56a57dc05126b69af43ac194a"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量索引访问  <br /></td></tr>
+<tr class="memitem:a5c6700b7245cfc0615fce62792648f11" id="r_a5c6700b7245cfc0615fce62792648f11"><td class="memItemLeft"><a class="el" href="#a574998096d8b97a6de7e6eb45ed57b41">reference</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5c6700b7245cfc0615fce62792648f11">at</a> (<a class="el" href="#a163c35ba6bf0967b513d35c70fac59df">size_type</a> position)</td></tr>
+<tr class="memdesc:a5c6700b7245cfc0615fce62792648f11"><td class="mdescLeft">&#160;</td><td class="mdescRight">索引访问  <br /></td></tr>
+<tr class="memitem:a67881bcd750d42ae7d36900067d82f76" id="r_a67881bcd750d42ae7d36900067d82f76"><td class="memItemLeft"><a class="el" href="#a7a1222971d4535b5f0019b3459db70f8">const_reference</a>&#160;</td><td class="memItemRight"><a class="el" href="#a67881bcd750d42ae7d36900067d82f76">operator[]</a> (const <a class="el" href="#a163c35ba6bf0967b513d35c70fac59df">size_type</a> position) const</td></tr>
+<tr class="memdesc:a67881bcd750d42ae7d36900067d82f76"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量下标访问操作符  <br /></td></tr>
+<tr class="memitem:a296321064d54287a5d807ec616abc279" id="r_a296321064d54287a5d807ec616abc279"><td class="memItemLeft"><a class="el" href="#a574998096d8b97a6de7e6eb45ed57b41">reference</a>&#160;</td><td class="memItemRight"><a class="el" href="#a296321064d54287a5d807ec616abc279">operator[]</a> (const <a class="el" href="#a163c35ba6bf0967b513d35c70fac59df">size_type</a> position)</td></tr>
+<tr class="memdesc:a296321064d54287a5d807ec616abc279"><td class="mdescLeft">&#160;</td><td class="mdescRight">下标访问操作符  <br /></td></tr>
+<tr class="memitem:a4eedbcc20f4d8e050a98a1201d54c76c" id="r_a4eedbcc20f4d8e050a98a1201d54c76c"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a4eedbcc20f4d8e050a98a1201d54c76c">equal_to</a> (const <a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a> &amp;rhs) const noexcept(noexcept(_NEFORCE <a class="el" href="group___compare_algorithms.html#ga4d20d5f9031c99a84a45fe39db9fbb78">equal</a>(<a class="el" href="#a330fbfca54c9d7f548ed7e41070bfd40">cbegin</a>(), <a class="el" href="#a1f468b5c9d3370c789b85545cce23090">cend</a>(), rhs.cbegin())))</td></tr>
+<tr class="memdesc:a4eedbcc20f4d8e050a98a1201d54c76c"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较操作符  <br /></td></tr>
+<tr class="memitem:afb0faad1f8e10f1c4cd4d8d19adac8e3" id="r_afb0faad1f8e10f1c4cd4d8d19adac8e3"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#afb0faad1f8e10f1c4cd4d8d19adac8e3">less_than</a> (const <a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a> &amp;rhs) const noexcept(noexcept(_NEFORCE <a class="el" href="group___compare_algorithms.html#ga7ec7e4cc2238e4a9f86b2d646d7cd032">lexicographical_compare</a>(<a class="el" href="#a330fbfca54c9d7f548ed7e41070bfd40">cbegin</a>(), <a class="el" href="#a1f468b5c9d3370c789b85545cce23090">cend</a>(), rhs.cbegin(), rhs.cend())))</td></tr>
+<tr class="memdesc:afb0faad1f8e10f1c4cd4d8d19adac8e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较操作符  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;<br />
+class neforce::list&lt; T, Alloc &gt;</div><p>双向链表容器 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>元素类型 </td></tr>
+    <tr><td class="paramname">Alloc</td><td>分配器类型</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>双向链表容器，提供常数时间的插入和删除操作。 不支持随机访问，但支持双向迭代。 </p>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00185">185</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="a3e9adef8fa2cdc8e48e840e94cc38efc" name="a3e9adef8fa2cdc8e48e840e94cc38efc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e9adef8fa2cdc8e48e840e94cc38efc">&#9670;&#160;</a></span>list() <span class="overload">[1/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::list </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>默认构造函数 </p>
+<p>构造一个空链表。 </p>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00268">268</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ab61fe32592ae9d2b3bd063c93cec84ba" name="ab61fe32592ae9d2b3bd063c93cec84ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab61fe32592ae9d2b3bd063c93cec84ba">&#9670;&#160;</a></span>list() <span class="overload">[2/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::list </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a163c35ba6bf0967b513d35c70fac59df">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造包含n个默认构造元素的链表 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>元素数量 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00274">274</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a4a8b071cd5b5af7e6df88935dabf659f" name="a4a8b071cd5b5af7e6df88935dabf659f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a8b071cd5b5af7e6df88935dabf659f">&#9670;&#160;</a></span>list() <span class="overload">[3/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::list </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a163c35ba6bf0967b513d35c70fac59df">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造包含n个指定值元素的链表 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>元素数量 </td></tr>
+    <tr><td class="paramname">value</td><td>初始值 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00282">282</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a3f24c981613dba85fb83fc8af366d2f9" name="a3f24c981613dba85fb83fc8af366d2f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f24c981613dba85fb83fc8af366d2f9">&#9670;&#160;</a></span>list() <span class="overload">[4/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga4f7b2f70ba1539ec3326d52e89698f13">is_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::list </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>范围构造函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00301">301</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a9ff79b9d3def40be095bbf5f1c04cc30" name="a9ff79b9d3def40be095bbf5f1c04cc30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ff79b9d3def40be095bbf5f1c04cc30">&#9670;&#160;</a></span>list() <span class="overload">[5/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::list </td>
+          <td>(</td>
+          <td class="paramtype">std::initializer_list&lt; T &gt;</td>          <td class="paramname"><span class="paramname"><em>ilist</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>初始化列表构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ilist</td><td>初始化列表 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00318">318</a> 行定义.</p>
+
+</div>
+</div>
+<a id="afb3df1c0d6778652144d329355469f6c" name="afb3df1c0d6778652144d329355469f6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb3df1c0d6778652144d329355469f6c">&#9670;&#160;</a></span>list() <span class="overload">[6/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::list </td>
+          <td>(</td>
+          <td class="paramtype">const list&lt; T, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拷贝构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源链表 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00336">336</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a1689a7e8ebd085100876080997ce1736" name="a1689a7e8ebd085100876080997ce1736"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1689a7e8ebd085100876080997ce1736">&#9670;&#160;</a></span>list() <span class="overload">[7/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::list </td>
+          <td>(</td>
+          <td class="paramtype">list&lt; T, Alloc &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源链表 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00357">357</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ac5e04045b28cfc709e1a0a79dbfb16f2" name="ac5e04045b28cfc709e1a0a79dbfb16f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5e04045b28cfc709e1a0a79dbfb16f2">&#9670;&#160;</a></span>~list()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::~<a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a> </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>析构函数 </p>
+<p>销毁所有元素并释放内存。 </p>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00382">382</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="aafd6b84a4f0792648f0718ec2370dfb7" name="aafd6b84a4f0792648f0718ec2370dfb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafd6b84a4f0792648f0718ec2370dfb7">&#9670;&#160;</a></span>assign() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::assign </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a163c35ba6bf0967b513d35c70fac59df">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>赋值n个指定值的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>元素数量 </td></tr>
+    <tr><td class="paramname">value</td><td>要赋的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00597">597</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00618">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::assign()</a>.</p>
+
+</div>
+</div>
+<a id="a94ce2608148a744dc5792e697cd5601f" name="a94ce2608148a744dc5792e697cd5601f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94ce2608148a744dc5792e697cd5601f">&#9670;&#160;</a></span>assign() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga4f7b2f70ba1539ec3326d52e89698f13">is_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::assign </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>范围赋值 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00609">609</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5a95d736bdbcde8a0fe0b3521e9518d8" name="a5a95d736bdbcde8a0fe0b3521e9518d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a95d736bdbcde8a0fe0b3521e9518d8">&#9670;&#160;</a></span>assign() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::assign </td>
+          <td>(</td>
+          <td class="paramtype">std::initializer_list&lt; T &gt;</td>          <td class="paramname"><span class="paramname"><em>ilist</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>初始化列表赋值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ilist</td><td>初始化列表 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00618">618</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5c6700b7245cfc0615fce62792648f11" name="a5c6700b7245cfc0615fce62792648f11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c6700b7245cfc0615fce62792648f11">&#9670;&#160;</a></span>at() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a574998096d8b97a6de7e6eb45ed57b41">reference</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::at </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a163c35ba6bf0967b513d35c70fac59df">size_type</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>索引访问 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>索引位置 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指定位置元素的引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l01033">1033</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a77cadef56a57dc05126b69af43ac194a" name="a77cadef56a57dc05126b69af43ac194a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77cadef56a57dc05126b69af43ac194a">&#9670;&#160;</a></span>at() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a7a1222971d4535b5f0019b3459db70f8">const_reference</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::at </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a163c35ba6bf0967b513d35c70fac59df">size_type</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>常量索引访问 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>索引位置 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指定位置元素的常量引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l01020">1020</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ab4b2fd0e137d02d9738b8c9ce1ac29c7" name="ab4b2fd0e137d02d9738b8c9ce1ac29c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4b2fd0e137d02d9738b8c9ce1ac29c7">&#9670;&#160;</a></span>back() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a7a1222971d4535b5f0019b3459db70f8">const_reference</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::back </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>访问最后一个常量元素 </p>
+<dl class="section return"><dt>返回</dt><dd>最后一个元素的常量引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00513">513</a> 行定义.</p>
+
+</div>
+</div>
+<a id="afc63d5f019a86d566e010a4aff1a2f75" name="afc63d5f019a86d566e010a4aff1a2f75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc63d5f019a86d566e010a4aff1a2f75">&#9670;&#160;</a></span>back() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a574998096d8b97a6de7e6eb45ed57b41">reference</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::back </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>访问最后一个元素 </p>
+<dl class="section return"><dt>返回</dt><dd>最后一个元素的引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00504">504</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2a85c9ded3bae6348a505b558ca00695" name="a2a85c9ded3bae6348a505b558ca00695"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a85c9ded3bae6348a505b558ca00695">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a362fd7b8d774e7d78d76cb77460cbeb5">const_iterator</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向第一个元素的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00408">408</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a202307b17eaf5ebb2a853faec4b10e42" name="a202307b17eaf5ebb2a853faec4b10e42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a202307b17eaf5ebb2a853faec4b10e42">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向第一个元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00396">396</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01264">neforce::deque&lt; T, Alloc, BufSize &gt;::insert()</a>, <a class="el" href="algorithm_2compare_8hpp_source.html#l00270">neforce::max()</a>, <a class="el" href="list_8hpp_source.html#l00911">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::merge_if()</a>, <a class="el" href="algorithm_2compare_8hpp_source.html#l00320">neforce::min()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00851">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::splice()</a>.</p>
+
+</div>
+</div>
+<a id="a330fbfca54c9d7f548ed7e41070bfd40" name="a330fbfca54c9d7f548ed7e41070bfd40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a330fbfca54c9d7f548ed7e41070bfd40">&#9670;&#160;</a></span>cbegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a362fd7b8d774e7d78d76cb77460cbeb5">const_iterator</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::cbegin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向第一个元素的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00444">444</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a1f468b5c9d3370c789b85545cce23090" name="a1f468b5c9d3370c789b85545cce23090"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f468b5c9d3370c789b85545cce23090">&#9670;&#160;</a></span>cend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a362fd7b8d774e7d78d76cb77460cbeb5">const_iterator</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::cend </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向无效元素的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00450">450</a> 行定义.</p>
+
+</div>
+</div>
+<a id="adafe7bb9c0afa418cc21fca0d5dbc568" name="adafe7bb9c0afa418cc21fca0d5dbc568"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adafe7bb9c0afa418cc21fca0d5dbc568">&#9670;&#160;</a></span>clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::clear </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>清空链表 </p>
+<p>销毁所有元素，但保留哨兵节点。 </p>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00776">776</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a21c55939e4e7380e8f6d1c1b79f03bec" name="a21c55939e4e7380e8f6d1c1b79f03bec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21c55939e4e7380e8f6d1c1b79f03bec">&#9670;&#160;</a></span>crbegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ab670a3da48fd0b6135abea7765093bc4">const_reverse_iterator</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::crbegin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量反向起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向无效元素的常量反向迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00456">456</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a78afb76354dbeb54ee8260c9957de78f" name="a78afb76354dbeb54ee8260c9957de78f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78afb76354dbeb54ee8260c9957de78f">&#9670;&#160;</a></span>crend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ab670a3da48fd0b6135abea7765093bc4">const_reverse_iterator</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::crend </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量反向结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向第一个元素的常量反向迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00462">462</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a88570737c77532c69bd2a0af3c337cf1" name="a88570737c77532c69bd2a0af3c337cf1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88570737c77532c69bd2a0af3c337cf1">&#9670;&#160;</a></span>emplace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::emplace </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在指定位置构造元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Args</td><td>构造参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>插入位置 </td></tr>
+    <tr><td class="paramname">args</td><td>构造参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00526">526</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00543">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::emplace_back()</a>, <a class="el" href="list_8hpp_source.html#l00554">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::emplace_front()</a>, <a class="el" href="list_8hpp_source.html#l00626">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::insert()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00634">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::insert()</a>.</p>
+
+</div>
+</div>
+<a id="a45f52f209a0c6e1f46184a0287aae587" name="a45f52f209a0c6e1f46184a0287aae587"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45f52f209a0c6e1f46184a0287aae587">&#9670;&#160;</a></span>emplace_back()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::emplace_back </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在末尾构造元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Args</td><td>构造参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>构造参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00543">543</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a647d3045f2bae78607e34b0987fed362" name="a647d3045f2bae78607e34b0987fed362"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a647d3045f2bae78607e34b0987fed362">&#9670;&#160;</a></span>emplace_front()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::emplace_front </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在开头构造元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Args</td><td>构造参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>构造参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00554">554</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aacad383fc0091dbaaed125243e0f9d02" name="aacad383fc0091dbaaed125243e0f9d02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacad383fc0091dbaaed125243e0f9d02">&#9670;&#160;</a></span>empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::empty </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查是否为空 </p>
+<dl class="section return"><dt>返回</dt><dd>是否为空 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00480">480</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00851">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::splice()</a>.</p>
+
+</div>
+</div>
+<a id="a77fd8e60a7acb30b16ca80e3329608f0" name="a77fd8e60a7acb30b16ca80e3329608f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77fd8e60a7acb30b16ca80e3329608f0">&#9670;&#160;</a></span>end() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a362fd7b8d774e7d78d76cb77460cbeb5">const_iterator</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向无效元素的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00414">414</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ad324ccc01be09a167fdda863fce62e0f" name="ad324ccc01be09a167fdda863fce62e0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad324ccc01be09a167fdda863fce62e0f">&#9670;&#160;</a></span>end() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向无效元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00402">402</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="deque_8hpp_source.html#l01264">neforce::deque&lt; T, Alloc, BufSize &gt;::insert()</a>, <a class="el" href="algorithm_2compare_8hpp_source.html#l00270">neforce::max()</a>, <a class="el" href="list_8hpp_source.html#l00911">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::merge_if()</a>, <a class="el" href="algorithm_2compare_8hpp_source.html#l00320">neforce::min()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00851">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::splice()</a>.</p>
+
+</div>
+</div>
+<a id="a4eedbcc20f4d8e050a98a1201d54c76c" name="a4eedbcc20f4d8e050a98a1201d54c76c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4eedbcc20f4d8e050a98a1201d54c76c">&#9670;&#160;</a></span>equal_to()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::equal_to </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a>&lt; T, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>相等比较操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧链表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果两个链表大小相等且对应元素相等返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l01060">1060</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a772c8605d48ab86ce1ddc0f6ef08fc91" name="a772c8605d48ab86ce1ddc0f6ef08fc91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a772c8605d48ab86ce1ddc0f6ef08fc91">&#9670;&#160;</a></span>erase() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a></td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a></td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除指定范围内的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向最后一个被删除元素之后位置的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00764">764</a> 行定义.</p>
+
+</div>
+</div>
+<a id="add2d5ccc41db43f8f45cfe53e40cf5e7" name="add2d5ccc41db43f8f45cfe53e40cf5e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add2d5ccc41db43f8f45cfe53e40cf5e7">&#9670;&#160;</a></span>erase() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除指定位置的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>要删除的位置 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向被删除元素之后位置的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00746">746</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00764">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::erase()</a>, <a class="el" href="list_8hpp_source.html#l00590">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::pop_back()</a>, <a class="el" href="list_8hpp_source.html#l00585">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::pop_front()</a>, <a class="el" href="list_8hpp_source.html#l00825">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::remove_if()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00964">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::unique_if()</a>.</p>
+
+</div>
+</div>
+<a id="a18a363e635e8f5e535a80b3ff63010f0" name="a18a363e635e8f5e535a80b3ff63010f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18a363e635e8f5e535a80b3ff63010f0">&#9670;&#160;</a></span>front() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a7a1222971d4535b5f0019b3459db70f8">const_reference</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::front </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>访问第一个常量元素 </p>
+<dl class="section return"><dt>返回</dt><dd>第一个元素的常量引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00495">495</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aba0edefb03db276a77f78140b5e07dff" name="aba0edefb03db276a77f78140b5e07dff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba0edefb03db276a77f78140b5e07dff">&#9670;&#160;</a></span>front() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a574998096d8b97a6de7e6eb45ed57b41">reference</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::front </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>访问第一个元素 </p>
+<dl class="section return"><dt>返回</dt><dd>第一个元素的引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00486">486</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a749860b84826d9755747a73bb9ab5a45" name="a749860b84826d9755747a73bb9ab5a45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a749860b84826d9755747a73bb9ab5a45">&#9670;&#160;</a></span>insert() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::insert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在指定位置拷贝插入元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>插入位置 </td></tr>
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00626">626</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00597">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::assign()</a>, <a class="el" href="list_8hpp_source.html#l00609">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::assign()</a>, <a class="el" href="list_8hpp_source.html#l00691">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::insert()</a>, <a class="el" href="list_8hpp_source.html#l00326">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::operator=()</a>, <a class="el" href="list_8hpp_source.html#l00574">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::push_back()</a>, <a class="el" href="list_8hpp_source.html#l00580">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::push_back()</a>, <a class="el" href="list_8hpp_source.html#l00562">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::push_front()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00568">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::push_front()</a>.</p>
+
+</div>
+</div>
+<a id="ab8778e60c0fb0b55e1215274447407ff" name="ab8778e60c0fb0b55e1215274447407ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8778e60c0fb0b55e1215274447407ff">&#9670;&#160;</a></span>insert() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga4f7b2f70ba1539ec3326d52e89698f13">is_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::insert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>范围插入 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>插入位置 </td></tr>
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>将[first, last)范围内的元素插入到position之前。 如果插入过程中发生异常，会回滚已插入的元素。 </p>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00647">647</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a753a383edb60238e84701be51c6cde48" name="a753a383edb60238e84701be51c6cde48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a753a383edb60238e84701be51c6cde48">&#9670;&#160;</a></span>insert() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::insert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a163c35ba6bf0967b513d35c70fac59df">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>插入n个指定值的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>插入位置 </td></tr>
+    <tr><td class="paramname">n</td><td>元素数量 </td></tr>
+    <tr><td class="paramname">value</td><td>要插入的值</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>如果插入过程中发生异常，会回滚已插入的元素。 </p>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00703">703</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a1798913cc46afc05797b7cb4995aa672" name="a1798913cc46afc05797b7cb4995aa672"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1798913cc46afc05797b7cb4995aa672">&#9670;&#160;</a></span>insert() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::insert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::initializer_list&lt; T &gt;</td>          <td class="paramname"><span class="paramname"><em>ilist</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>初始化列表插入 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>插入位置 </td></tr>
+    <tr><td class="paramname">ilist</td><td>初始化列表 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00691">691</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5f9ff7d5ed872eab6ceaf3251b16fb34" name="a5f9ff7d5ed872eab6ceaf3251b16fb34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f9ff7d5ed872eab6ceaf3251b16fb34">&#9670;&#160;</a></span>insert() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::insert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在指定位置移动插入元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>插入位置 </td></tr>
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00634">634</a> 行定义.</p>
+
+</div>
+</div>
+<a id="afb0faad1f8e10f1c4cd4d8d19adac8e3" name="afb0faad1f8e10f1c4cd4d8d19adac8e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb0faad1f8e10f1c4cd4d8d19adac8e3">&#9670;&#160;</a></span>less_than()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::less_than </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a>&lt; T, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>小于比较操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧链表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>按字典序比较结果 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l01070">1070</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a75e53ec59a07d8156556dcb3515f2fd9" name="a75e53ec59a07d8156556dcb3515f2fd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75e53ec59a07d8156556dcb3515f2fd9">&#9670;&#160;</a></span>max_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a163c35ba6bf0967b513d35c70fac59df">size_type</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::max_size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取最大可能大小 </p>
+<dl class="section return"><dt>返回</dt><dd>最大元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00474">474</a> 行定义.</p>
+
+</div>
+</div>
+<a id="af3aa3a9c109d6f7edb5c3b78ef4e682f" name="af3aa3a9c109d6f7edb5c3b78ef4e682f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3aa3a9c109d6f7edb5c3b78ef4e682f">&#9670;&#160;</a></span>merge()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::merge </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a>&lt; T, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>合并两个有序链表（默认使用小于比较） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>要合并的链表 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00940">940</a> 行定义.</p>
+
+</div>
+</div>
+<a id="acee18998e056b76ce0f7a3c663642c37" name="acee18998e056b76ce0f7a3c663642c37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acee18998e056b76ce0f7a3c663642c37">&#9670;&#160;</a></span>merge_if()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Pred&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::merge_if </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a>&lt; T, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Pred</td>          <td class="paramname"><span class="paramname"><em>pred</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>合并两个有序链表 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Pred</td><td>比较谓词类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>要合并的链表 </td></tr>
+    <tr><td class="paramname">pred</td><td>二元比较谓词</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>将有序链表other合并到当前有序链表中，合并后仍保持有序。 使用pred作为比较准则。 </p>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00911">911</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00940">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::merge()</a>.</p>
+
+</div>
+</div>
+<a id="afe4939695f4a98d091ace2d23974f361" name="afe4939695f4a98d091ace2d23974f361"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe4939695f4a98d091ace2d23974f361">&#9670;&#160;</a></span>operator=() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a> &amp; <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a>&lt; T, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拷贝赋值运算符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源链表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00344">344</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a9dd56edd6208b374e59b99a2f19551db" name="a9dd56edd6208b374e59b99a2f19551db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9dd56edd6208b374e59b99a2f19551db">&#9670;&#160;</a></span>operator=() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a> &amp; <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a>&lt; T, Alloc &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动赋值运算符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源链表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00367">367</a> 行定义.</p>
+
+</div>
+</div>
+<a id="adae53643960d9a9634d7ec7b4ee9fab0" name="adae53643960d9a9634d7ec7b4ee9fab0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adae53643960d9a9634d7ec7b4ee9fab0">&#9670;&#160;</a></span>operator=() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a> &amp; <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">std::initializer_list&lt; T &gt;</td>          <td class="paramname"><span class="paramname"><em>ilist</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>初始化列表赋值运算符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ilist</td><td>初始化列表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00326">326</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a296321064d54287a5d807ec616abc279" name="a296321064d54287a5d807ec616abc279"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a296321064d54287a5d807ec616abc279">&#9670;&#160;</a></span>operator[]() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a574998096d8b97a6de7e6eb45ed57b41">reference</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::operator[] </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a163c35ba6bf0967b513d35c70fac59df">size_type</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>下标访问操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>索引位置 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指定位置元素的引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l01053">1053</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a67881bcd750d42ae7d36900067d82f76" name="a67881bcd750d42ae7d36900067d82f76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67881bcd750d42ae7d36900067d82f76">&#9670;&#160;</a></span>operator[]() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a7a1222971d4535b5f0019b3459db70f8">const_reference</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::operator[] </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a163c35ba6bf0967b513d35c70fac59df">size_type</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>常量下标访问操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>索引位置 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指定位置元素的常量引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l01046">1046</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a84c65e934083906847b7c097f8881b08" name="a84c65e934083906847b7c097f8881b08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84c65e934083906847b7c097f8881b08">&#9670;&#160;</a></span>push_back() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::push_back </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在末尾拷贝插入元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00574">574</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a7d824dbed8a40411458574b858c4125b" name="a7d824dbed8a40411458574b858c4125b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d824dbed8a40411458574b858c4125b">&#9670;&#160;</a></span>push_back() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::push_back </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在末尾移动插入元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00580">580</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a34cfd3800cdb2dcc075083a505349847" name="a34cfd3800cdb2dcc075083a505349847"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34cfd3800cdb2dcc075083a505349847">&#9670;&#160;</a></span>push_front() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::push_front </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在开头拷贝插入元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00562">562</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a41c83873b6e5d20b6c3d51e183b56e59" name="a41c83873b6e5d20b6c3d51e183b56e59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41c83873b6e5d20b6c3d51e183b56e59">&#9670;&#160;</a></span>push_front() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::push_front </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在开头移动插入元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00568">568</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a741e6049cb6d9988eca8082611f69de8" name="a741e6049cb6d9988eca8082611f69de8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a741e6049cb6d9988eca8082611f69de8">&#9670;&#160;</a></span>rbegin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ab670a3da48fd0b6135abea7765093bc4">const_reverse_iterator</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::rbegin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量反向起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向无效元素的常量反向迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00432">432</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aa87ae366bd1001b77c4057e427b6cce5" name="aa87ae366bd1001b77c4057e427b6cce5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa87ae366bd1001b77c4057e427b6cce5">&#9670;&#160;</a></span>rbegin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a59eb8999edaab2961d8224438898f0a5">reverse_iterator</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::rbegin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取反向起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向无效元素的反向迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00420">420</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2e2995457fb3a32ddf0259bf0ea254af" name="a2e2995457fb3a32ddf0259bf0ea254af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e2995457fb3a32ddf0259bf0ea254af">&#9670;&#160;</a></span>remove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::remove </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移除指定值的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要移除的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00840">840</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aab03e4ead86aa297bd88f70237697418" name="aab03e4ead86aa297bd88f70237697418"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab03e4ead86aa297bd88f70237697418">&#9670;&#160;</a></span>remove_if()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Pred&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::remove_if </td>
+          <td>(</td>
+          <td class="paramtype">Pred</td>          <td class="paramname"><span class="paramname"><em>pred</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>根据谓词移除元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Pred</td><td>谓词类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pred</td><td>一元谓词，返回true的元素将被移除 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00825">825</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00840">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::remove()</a>.</p>
+
+</div>
+</div>
+<a id="af2a8a64c1143d6f0064b254980bce6c5" name="af2a8a64c1143d6f0064b254980bce6c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2a8a64c1143d6f0064b254980bce6c5">&#9670;&#160;</a></span>rend() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ab670a3da48fd0b6135abea7765093bc4">const_reverse_iterator</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::rend </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量反向结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向第一个元素的常量反向迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00438">438</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a7e98499630053e434abc23325ea1deab" name="a7e98499630053e434abc23325ea1deab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e98499630053e434abc23325ea1deab">&#9670;&#160;</a></span>rend() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a59eb8999edaab2961d8224438898f0a5">reverse_iterator</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::rend </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取反向结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向第一个元素的反向迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00426">426</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5445d1b5ecd7bb7a3af7822e8515e184" name="a5445d1b5ecd7bb7a3af7822e8515e184"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5445d1b5ecd7bb7a3af7822e8515e184">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a163c35ba6bf0967b513d35c70fac59df">size_type</a> <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取当前元素数量 </p>
+<dl class="section return"><dt>返回</dt><dd>元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00468">468</a> 行定义.</p>
+
+</div>
+</div>
+<a id="afcadc2a3d3110be487dea9e41ab89d16" name="afcadc2a3d3110be487dea9e41ab89d16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcadc2a3d3110be487dea9e41ab89d16">&#9670;&#160;</a></span>sort_if()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Pred&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::sort_if </td>
+          <td>(</td>
+          <td class="paramtype">Pred</td>          <td class="paramname"><span class="paramname"><em>pred</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>对链表进行排序 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Pred</td><td>比较谓词类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pred</td><td>二元比较谓词</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>使用插入排序算法对链表进行排序。 </p>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00993">993</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l01013">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::sort()</a>.</p>
+
+</div>
+</div>
+<a id="a4bd3625c1e495e1710c25b981e9cd150" name="a4bd3625c1e495e1710c25b981e9cd150"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bd3625c1e495e1710c25b981e9cd150">&#9670;&#160;</a></span>splice() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::splice </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a>&lt; T, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拼接整个链表 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>目标位置 </td></tr>
+    <tr><td class="paramname">other</td><td>源链表</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>将other链表的所有元素拼接到position之前，other变为空链表。 </p>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00851">851</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a610a26faeb5eb453f913a304edb81097" name="a610a26faeb5eb453f913a304edb81097"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a610a26faeb5eb453f913a304edb81097">&#9670;&#160;</a></span>splice() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::splice </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a>&lt; T, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a></td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a></td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拼接范围内的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>目标位置 </td></tr>
+    <tr><td class="paramname">other</td><td>源链表 </td></tr>
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>将other链表中[first, last)范围内的元素拼接到position之前。 </p>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00888">888</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ad9ba8b7e70303790d95439152f7b9462" name="ad9ba8b7e70303790d95439152f7b9462"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9ba8b7e70303790d95439152f7b9462">&#9670;&#160;</a></span>splice() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::splice </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a>&lt; T, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a></td>          <td class="paramname"><span class="paramname"><em>iter</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拼接单个元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>目标位置 </td></tr>
+    <tr><td class="paramname">other</td><td>源链表 </td></tr>
+    <tr><td class="paramname">iter</td><td>指向要拼接元素的迭代器</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>将other链表中的iter指向的元素拼接到position之前。 </p>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00868">868</a> 行定义.</p>
+
+</div>
+</div>
+<a id="afc01e1bd6f9388aa8e505b2131b9566a" name="afc01e1bd6f9388aa8e505b2131b9566a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc01e1bd6f9388aa8e505b2131b9566a">&#9670;&#160;</a></span>swap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::swap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a3e9adef8fa2cdc8e48e840e94cc38efc">list</a>&lt; T, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>交换两个链表的内容 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>要交换的另一个链表 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00792">792</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00357">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::list()</a>, <a class="el" href="list_8hpp_source.html#l00344">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::operator=()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00367">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::operator=()</a>.</p>
+
+</div>
+</div>
+<a id="ab5986b772d30e83298b4f297aca968d0" name="ab5986b772d30e83298b4f297aca968d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5986b772d30e83298b4f297aca968d0">&#9670;&#160;</a></span>transfer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::transfer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a></td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a81cd4ae73112f6a3a54740b4af542799">iterator</a></td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>传输元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>目标位置 </td></tr>
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>将[first, last)范围内的元素从当前链表传输到position之前。 此操作为常数时间，不涉及元素构造和析构。 </p>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00806">806</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00911">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::merge_if()</a>, <a class="el" href="list_8hpp_source.html#l00851">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::splice()</a>, <a class="el" href="list_8hpp_source.html#l00888">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::splice()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00868">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::splice()</a>.</p>
+
+</div>
+</div>
+<a id="a2de4f47023b192fdb75297668f10e264" name="a2de4f47023b192fdb75297668f10e264"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2de4f47023b192fdb75297668f10e264">&#9670;&#160;</a></span>unique_if()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Pred&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1list.html">neforce::list</a>&lt; T, Alloc &gt;::unique_if </td>
+          <td>(</td>
+          <td class="paramtype">Pred</td>          <td class="paramname"><span class="paramname"><em>pred</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移除连续的重复元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Pred</td><td>二元谓词类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pred</td><td>用于判断两个元素是否相等的谓词</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>移除链表中所有连续重复的元素，只保留第一个。 </p>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00964">964</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00983">neforce::list&lt; pair&lt; Key, Value &gt; &gt;::unique()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="list_8hpp_source.html">list.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><a href="classneforce_1_1list.html">list</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

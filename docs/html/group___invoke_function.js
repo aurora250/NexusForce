@@ -1,14 +1,14 @@
 var group___invoke_function =
 [
-    [ "invoke_result&lt; Sign &gt;", "structinvoke__result.html", null ],
-    [ "invoke_result&lt; F(Args...)&gt;", "structinvoke__result_3_01_f_07_args_8_8_8_08_4.html", null ],
-    [ "is_invocable&lt; F, Args &gt;", "structis__invocable.html", null ],
-    [ "is_invocable_r&lt; Ret, F, Args &gt;", "structis__invocable__r.html", null ],
-    [ "is_nothrow_invocable&lt; F, Args &gt;", "structis__nothrow__invocable.html", null ],
-    [ "invoke_result_t", "group___invoke_function.html#gaf42c40449c9ef12db7fcf0532b6c90b5", null ],
-    [ "invoke", "group___invoke_function.html#ga4c75921ddce62eae2409105dc92d6da5", null ],
-    [ "invoke_r", "group___invoke_function.html#ga86b4ffbbbf4800357dfd1f122028bb14", null ],
-    [ "is_invocable_r_v", "group___invoke_function.html#gae645fe64a93d7a5c0bf8e211d495afe2", null ],
-    [ "is_invocable_v", "group___invoke_function.html#ga81546ef85e40c0b8f4fbeb8c62add13d", null ],
-    [ "is_nothrow_invocable_v", "group___invoke_function.html#gafdceccc521c88df3849b9e1acf2b153e", null ]
+    [ "neforce::invoke_result&lt; Sign &gt;", "structneforce_1_1invoke__result.html", null ],
+    [ "neforce::invoke_result&lt; F(Args...)&gt;", "structneforce_1_1invoke__result_3_01_f_07_args_8_8_8_08_4.html", null ],
+    [ "neforce::is_invocable&lt; F, Args &gt;", "structneforce_1_1is__invocable.html", null ],
+    [ "neforce::is_invocable_r&lt; Ret, F, Args &gt;", "structneforce_1_1is__invocable__r.html", null ],
+    [ "neforce::is_nothrow_invocable&lt; F, Args &gt;", "structneforce_1_1is__nothrow__invocable.html", null ],
+    [ "neforce::invoke_result_t", "group___invoke_function.html#ga2d367d0c6ab0c690c67d0091d8e83c3b", null ],
+    [ "neforce::invoke", "group___invoke_function.html#ga29759f8537daace4b5d4ce1f006f8874", null ],
+    [ "neforce::invoke_r", "group___invoke_function.html#ga84ed5697a595bf6e706411d16eb29d0c", null ],
+    [ "neforce::is_invocable_r_v", "group___invoke_function.html#gabb0315e35fb4d3e8d3afce601d4a8718", null ],
+    [ "neforce::is_invocable_v", "group___invoke_function.html#gaa3688183bfd2e86a0a9073acc02f3c2d", null ],
+    [ "neforce::is_nothrow_invocable_v", "group___invoke_function.html#ga2aa28e8abceaddb1cccbda03fd82671c", null ]
 ];

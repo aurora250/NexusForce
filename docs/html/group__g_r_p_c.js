@@ -1,12 +1,12 @@
 var group__g_r_p_c =
 [
-    [ "grpc_message", "structgrpc__message.html", null ],
-    [ "grpc_framer", "classgrpc__framer.html", [
-      [ "decode", "classgrpc__framer.html#a2a4e268868b96f57e81c105168c07750", null ],
-      [ "max_receive_size", "classgrpc__framer.html#a795d3d62b47075cadd0a34238eeb2353", null ]
+    [ "neforce::http::grpc_message", "structneforce_1_1http_1_1grpc__message.html", null ],
+    [ "neforce::http::grpc_framer", "classneforce_1_1http_1_1grpc__framer.html", [
+      [ "decode", "classneforce_1_1http_1_1grpc__framer.html#a80c590b5899fb9411ae261cedb796569", null ],
+      [ "max_receive_size", "classneforce_1_1http_1_1grpc__framer.html#a62591e610085fc5f7b92ea11c73d3fa5", null ]
     ] ],
-    [ "grpc_handler", "classgrpc__handler.html", [
-      [ "process_unary", "classgrpc__handler.html#af489eb9d91a0c262871e2ea52736a545", null ]
+    [ "neforce::http::grpc_handler", "classneforce_1_1http_1_1grpc__handler.html", [
+      [ "process_unary", "classneforce_1_1http_1_1grpc__handler.html#a9dcc8c3fffd82b6af2c8aa5a8b43246d", null ]
     ] ],
-    [ "grpc_status", "group__g_r_p_c.html#ga78dd0ac29767da3b985d742d1e927a56", null ]
+    [ "neforce::http::grpc_status", "group__g_r_p_c.html#ga378303fcd24ae4ab20722b9fc6ba3e94", null ]
 ];

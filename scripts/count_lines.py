@@ -13,28 +13,28 @@
 """
 
 import argparse
-import os
+import builtins
 import re
 import shutil
 import subprocess
 import sys
 from pathlib import Path
 
-# ── 项目目录──────────────────────────────────────────
+# 项目目录
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-# ── 默认值 ──────────────────────────────────────────────────────────────────────
+# 默认值
 DEFAULT_DIRS = ["include", "src", "tests"]
 DEFAULT_EXTS = ["c", "cpp", "h", "hpp", "py", "java", "js", "ts", "sh"]
 
-# ── ANSI 颜色 ───────────────────────────────────────────────────────────────────
+# ANSI 颜色
 RED = "\033[0;31m"
 GREEN = "\033[0;32m"
 YELLOW = "\033[1;33m"
 CYAN = "\033[0;36m"
 NC = "\033[0m"
 
-# ── 按扩展名区分的注释语法 ──────────────────────────────────────────────────────
+# 按扩展名区分的注释语法
 LINE_COMMENT_PATTERNS = {
     # C 家族: // ... 和 /* ... */
     frozenset(["c", "cpp", "h", "hpp", "java", "js", "ts", "css", "scss",
@@ -68,7 +68,7 @@ def _resolve_dirs(names: list[str]) -> list[Path]:
         if p.is_dir():
             dirs.append(p)
         else:
-            print(f"{YELLOW}[警告] 目录不存在，跳过: {p}{NC}")
+            builtins.print(f"{YELLOW}[警告] 目录不存在，跳过: {p}{NC}")
     return dirs
 
 
@@ -77,15 +77,15 @@ def _collect_files(dirs: list[Path], exts: list[str]) -> list[Path]:
     files = []
     ext_set = {e.removeprefix(".").removeprefix("*.") for e in exts}
     for d in dirs:
-        for ext in sorted(ext_set):
+        for ext in builtins.sorted(ext_set):
             files.extend(d.rglob(f"*.{ext}"))
-    return sorted(files)
+    return builtins.sorted(files)
 
 
 def count_simple(dirs: list[Path], exts: list[str]) -> None:
     """快速统计 — 只统计总行数和文件数。"""
-    print(f"{CYAN}快速统计代码行数...{NC}")
-    print("=" * 48)
+    builtins.print(f"{CYAN}快速统计代码行数...{NC}")
+    builtins.print("=" * 48)
 
     total_files = 0
     total_lines = 0
@@ -100,20 +100,20 @@ def count_simple(dirs: list[Path], exts: list[str]) -> None:
                 pass
 
         tag = GREEN if files else YELLOW
-        print(f"  {d.relative_to(PROJECT_ROOT)}: {tag}{dir_lines}{NC} 行"
-              f" ({len(files)} 个文件)")
+        builtins.print(f"  {d.relative_to(PROJECT_ROOT)}: {tag}{dir_lines}{NC} 行"
+              f" ({builtins.len(files)} 个文件)")
 
-        total_files += len(files)
+        total_files += builtins.len(files)
         total_lines += dir_lines
 
-    print("-" * 48)
-    print(f"总计: {GREEN}{total_lines}{NC} 行 ({total_files} 个文件)")
+    builtins.print("-" * 48)
+    builtins.print(f"总计: {GREEN}{total_lines}{NC} 行 ({total_files} 个文件)")
 
 
 def count_manual(dirs: list[Path], exts: list[str]) -> None:
     """手动统计 — 区分代码行、注释行、空行。"""
-    print(f"{CYAN}手动统计代码行数（代码 / 注释 / 空行）...{NC}")
-    print("=" * 48)
+    builtins.print(f"{CYAN}手动统计代码行数（代码 / 注释 / 空行）...{NC}")
+    builtins.print("=" * 48)
 
     total_files = 0
     total_lines = 0
@@ -124,11 +124,11 @@ def count_manual(dirs: list[Path], exts: list[str]) -> None:
     for d in dirs:
         files = _collect_files([d], exts)
         if not files:
-            print(f"\n{YELLOW}--- {d.relative_to(PROJECT_ROOT)} ---{NC}")
-            print("  没有找到匹配的文件")
+            builtins.print(f"\n{YELLOW}--- {d.relative_to(PROJECT_ROOT)} ---{NC}")
+            builtins.print("  没有找到匹配的文件")
             continue
 
-        print(f"\n{YELLOW}--- {d.relative_to(PROJECT_ROOT)} ---{NC}")
+        builtins.print(f"\n{YELLOW}--- {d.relative_to(PROJECT_ROOT)} ---{NC}")
 
         dir_files = 0
         dir_lines = 0
@@ -141,7 +141,7 @@ def count_manual(dirs: list[Path], exts: list[str]) -> None:
                 continue
 
             lines = text.splitlines()
-            dir_lines += len(lines)
+            dir_lines += builtins.len(lines)
 
             pattern = _get_comment_pattern(f.suffix.removeprefix("."))
             if pattern:
@@ -155,34 +155,34 @@ def count_manual(dirs: list[Path], exts: list[str]) -> None:
                         total_code += 1
             else:
                 # 未知类型：全算代码
-                total_code += len(lines)
-                total_blank += sum(1 for l in lines if not l.strip())
+                total_code += builtins.len(lines)
+                total_blank += builtins.sum(1 for l in lines if not l.strip())
 
-        print(f"  文件数: {dir_files}")
-        print(f"  总行数: {dir_lines}")
+        builtins.print(f"  文件数: {dir_files}")
+        builtins.print(f"  总行数: {dir_lines}")
 
         total_files += dir_files
         total_lines += dir_lines
 
-    print(f"\n{GREEN}" + "=" * 48)
-    print("统计汇总")
-    print("=" * 48)
-    print(f"  总文件数:     {total_files}")
-    print(f"  总行数:       {total_lines}")
-    print(f"  代码行数:     {total_code}")
-    print(f"  注释行数:     {total_comment}")
-    print(f"  空行数:       {total_blank}{NC}")
+    builtins.print(f"\n{GREEN}" + "=" * 48)
+    builtins.print("统计汇总")
+    builtins.print("=" * 48)
+    builtins.print(f"  总文件数:     {total_files}")
+    builtins.print(f"  总行数:       {total_lines}")
+    builtins.print(f"  代码行数:     {total_code}")
+    builtins.print(f"  注释行数:     {total_comment}")
+    builtins.print(f"  空行数:       {total_blank}{NC}")
 
 
 def count_cloc(dirs: list[Path], exts: list[str]) -> int:
     """使用 cloc 工具统计。返回 cloc 的退出码。"""
     if not shutil.which("cloc"):
-        print(f"{RED}错误: cloc 未安装{NC}")
-        print("安装: sudo apt install cloc / brew install cloc / choco install cloc")
+        builtins.print(f"{RED}错误: cloc 未安装{NC}")
+        builtins.print("安装: sudo apt install cloc / brew install cloc / choco install cloc")
         return 1
 
-    print(f"{CYAN}使用 cloc 统计...{NC}")
-    print("=" * 48)
+    builtins.print(f"{CYAN}使用 cloc 统计...{NC}")
+    builtins.print("=" * 48)
 
     ext_list = ",".join(e.removeprefix(".").removeprefix("*.") for e in exts)
     cmd = ["cloc", "--include-ext=" + ext_list] + [str(d) for d in dirs]
@@ -192,7 +192,7 @@ def count_cloc(dirs: list[Path], exts: list[str]) -> int:
 def _count_lines(path: Path) -> int:
     """快速统计单个文件的行数。"""
     count = 0
-    with open(path, "rb") as f:
+    with builtins.open(path, "rb") as f:
         for _ in f:
             count += 1
     return count
@@ -242,7 +242,7 @@ def main() -> int:
     dirs = _resolve_dirs(dir_names)
 
     if not dirs:
-        print(f"{RED}错误: 没有找到任何可统计的目录{NC}")
+        builtins.print(f"{RED}错误: 没有找到任何可统计的目录{NC}")
         return 1
 
     # ── 确定模式 ──
@@ -252,8 +252,8 @@ def main() -> int:
         if shutil.which("cloc"):
             return count_cloc(dirs, exts)
         else:
-            print(f"{YELLOW}提示: 安装 cloc 可获得更详细的统计信息{NC}")
-            print(f"{YELLOW}安装方法: sudo apt install cloc / brew install cloc{NC}\n")
+            builtins.print(f"{YELLOW}提示: 安装 cloc 可获得更详细的统计信息{NC}")
+            builtins.print(f"{YELLOW}安装方法: sudo apt install cloc / brew install cloc{NC}\n")
             count_simple(dirs, exts)
             return 0
     elif mode == "simple":

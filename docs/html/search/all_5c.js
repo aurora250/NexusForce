@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['安全注意事项_0',['安全注意事项',['../group___hash_primary.html#security_note',1,'']]]
+  ['守护进程_0',['守护进程',['../group___daemon.html',1,'']]]
 ];

@@ -1,0 +1,343 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::http::security_headers_filter类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1http_1_1security__headers__filter.html','','classneforce_1_1http_1_1security__headers__filter-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::http::security_headers_filter类 参考<span class="mlabels"><span class="mlabel final">final</span></span><div class="ingroups"><a class="el" href="group___h_t_t_p.html">HTTP</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>HTTP安全头过滤器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="http__security_8hpp_source.html">http_security.hpp</a>&gt;</code></p>
+<div class="dynheader">
+类 neforce::http::security_headers_filter 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classneforce_1_1http_1_1security__headers__filter__inherit__graph.svg" width="159" height="144"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:afbdf4a5c5f2b19b25c732eee1908b254" id="r_afbdf4a5c5f2b19b25c732eee1908b254"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#afbdf4a5c5f2b19b25c732eee1908b254">pre_filter</a> (<a class="el" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a> &amp;request, <a class="el" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a> &amp;response) override</td></tr>
+<tr class="memdesc:afbdf4a5c5f2b19b25c732eee1908b254"><td class="mdescLeft">&#160;</td><td class="mdescRight">预处理方法  <br /></td></tr>
+<tr class="memitem:a97ec096cd0884930c04fba42fb7b1db6" id="r_a97ec096cd0884930c04fba42fb7b1db6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a97ec096cd0884930c04fba42fb7b1db6">post_filter</a> (<a class="el" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a> &amp;request, <a class="el" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a> &amp;response) override</td></tr>
+<tr class="memdesc:a97ec096cd0884930c04fba42fb7b1db6"><td class="mdescLeft">&#160;</td><td class="mdescRight">后处理方法  <br /></td></tr>
+<tr class="memitem:a0438ef0b46932c0818fdd1619e2c9914" id="r_a0438ef0b46932c0818fdd1619e2c9914"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0438ef0b46932c0818fdd1619e2c9914">do_filter</a> (<a class="el" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a> &amp;request, <a class="el" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a> &amp;response) override</td></tr>
+<tr class="memdesc:a0438ef0b46932c0818fdd1619e2c9914"><td class="mdescLeft">&#160;</td><td class="mdescRight">核心过滤方法  <br /></td></tr>
+<tr class="memitem:a1b8406e3d1c557036efb884cfc399c16" id="r_a1b8406e3d1c557036efb884cfc399c16"><td class="memItemLeft"><a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#a1b8406e3d1c557036efb884cfc399c16">name</a> () const override</td></tr>
+<tr class="memdesc:a1b8406e3d1c557036efb884cfc399c16"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取过滤器名称  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public 属性</h2></td></tr>
+<tr class="memitem:a6394416fc327335f8382d40474a2e8aa" id="r_a6394416fc327335f8382d40474a2e8aa"><td class="memItemLeft"><a id="a6394416fc327335f8382d40474a2e8aa" name="a6394416fc327335f8382d40474a2e8aa"></a>
+bool&#160;</td><td class="memItemRight"><b>enable_hsts</b> = true</td></tr>
+<tr class="memdesc:a6394416fc327335f8382d40474a2e8aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">HSTS: 强制浏览器使用HTTPS <br /></td></tr>
+<tr class="memitem:aae18890b72612a65d74c2fbe650046c4" id="r_aae18890b72612a65d74c2fbe650046c4"><td class="memItemLeft"><a id="aae18890b72612a65d74c2fbe650046c4" name="aae18890b72612a65d74c2fbe650046c4"></a>
+<a class="el" href="group___duration.html#ga8254730759b00eba24c4a01b0c8e10c3">seconds</a>&#160;</td><td class="memItemRight"><b>hsts_max_age</b> {31536000}</td></tr>
+<tr class="memdesc:aae18890b72612a65d74c2fbe650046c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认1年 <br /></td></tr>
+<tr class="memitem:ae5e5ca2295f3934367ccbf03ccdd3bcf" id="r_ae5e5ca2295f3934367ccbf03ccdd3bcf"><td class="memItemLeft"><a id="ae5e5ca2295f3934367ccbf03ccdd3bcf" name="ae5e5ca2295f3934367ccbf03ccdd3bcf"></a>
+bool&#160;</td><td class="memItemRight"><b>hsts_include_subdomains</b> = true</td></tr>
+<tr class="memdesc:ae5e5ca2295f3934367ccbf03ccdd3bcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否包含子域名 <br /></td></tr>
+<tr class="memitem:a5bc3848a0c7fec4ca79a99e50457b0ab" id="r_a5bc3848a0c7fec4ca79a99e50457b0ab"><td class="memItemLeft"><a id="a5bc3848a0c7fec4ca79a99e50457b0ab" name="a5bc3848a0c7fec4ca79a99e50457b0ab"></a>
+bool&#160;</td><td class="memItemRight"><b>hsts_preload</b> = false</td></tr>
+<tr class="memdesc:a5bc3848a0c7fec4ca79a99e50457b0ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否加入HSTS preload列表 <br /></td></tr>
+<tr class="memitem:a189dd47e10305cc5392d637a52b41e53" id="r_a189dd47e10305cc5392d637a52b41e53"><td class="memItemLeft"><a id="a189dd47e10305cc5392d637a52b41e53" name="a189dd47e10305cc5392d637a52b41e53"></a>
+bool&#160;</td><td class="memItemRight"><b>enable_frame_options</b> = true</td></tr>
+<tr class="memdesc:a189dd47e10305cc5392d637a52b41e53"><td class="mdescLeft">&#160;</td><td class="mdescRight">X-Frame-Options: 防止Clickjacking <br /></td></tr>
+<tr class="memitem:a55ae045b788001caf41e1566f654065a" id="r_a55ae045b788001caf41e1566f654065a"><td class="memItemLeft"><a id="a55ae045b788001caf41e1566f654065a" name="a55ae045b788001caf41e1566f654065a"></a>
+<a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a>&#160;</td><td class="memItemRight"><b>frame_option_value</b> {&quot;DENY&quot;}</td></tr>
+<tr class="memdesc:a55ae045b788001caf41e1566f654065a"><td class="mdescLeft">&#160;</td><td class="mdescRight">DENY | SAMEORIGIN | ALLOW-FROM uri <br /></td></tr>
+<tr class="memitem:a51c001bba98363350f8bafe6f0285078" id="r_a51c001bba98363350f8bafe6f0285078"><td class="memItemLeft"><a id="a51c001bba98363350f8bafe6f0285078" name="a51c001bba98363350f8bafe6f0285078"></a>
+bool&#160;</td><td class="memItemRight"><b>enable_content_type_options</b> = true</td></tr>
+<tr class="memdesc:a51c001bba98363350f8bafe6f0285078"><td class="mdescLeft">&#160;</td><td class="mdescRight">X-Content-Type-Options: 防止MIME类型嗅探 <br /></td></tr>
+<tr class="memitem:a6dbcbad410918db5247a6d2eb243a181" id="r_a6dbcbad410918db5247a6d2eb243a181"><td class="memItemLeft"><a id="a6dbcbad410918db5247a6d2eb243a181" name="a6dbcbad410918db5247a6d2eb243a181"></a>
+bool&#160;</td><td class="memItemRight"><b>enable_csp</b> = true</td></tr>
+<tr class="memdesc:a6dbcbad410918db5247a6d2eb243a181"><td class="mdescLeft">&#160;</td><td class="mdescRight">Content-Security-Policy: 内容安全策略 <br /></td></tr>
+<tr class="memitem:acdf97d181f49f5c0e7685701807fc608" id="r_acdf97d181f49f5c0e7685701807fc608"><td class="memItemLeft"><a id="acdf97d181f49f5c0e7685701807fc608" name="acdf97d181f49f5c0e7685701807fc608"></a>
+<a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a>&#160;</td><td class="memItemRight"><b>csp_value</b> {&quot;default-src 'self'&quot;}</td></tr>
+<tr class="memdesc:acdf97d181f49f5c0e7685701807fc608"><td class="mdescLeft">&#160;</td><td class="mdescRight">可配置的CSP策略字符串 <br /></td></tr>
+<tr class="memitem:a032d50a956db0adeeaf5ee0592beb8ee" id="r_a032d50a956db0adeeaf5ee0592beb8ee"><td class="memItemLeft"><a id="a032d50a956db0adeeaf5ee0592beb8ee" name="a032d50a956db0adeeaf5ee0592beb8ee"></a>
+bool&#160;</td><td class="memItemRight"><b>enable_xss_protection</b> = false</td></tr>
+<tr class="memdesc:a032d50a956db0adeeaf5ee0592beb8ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">X-XSS-Protection: 浏览器XSS过滤器 <br /></td></tr>
+<tr class="memitem:a303097d86f869c3bcf5ebc0b0c8efbf5" id="r_a303097d86f869c3bcf5ebc0b0c8efbf5"><td class="memItemLeft"><a id="a303097d86f869c3bcf5ebc0b0c8efbf5" name="a303097d86f869c3bcf5ebc0b0c8efbf5"></a>
+bool&#160;</td><td class="memItemRight"><b>enable_referrer_policy</b> = true</td></tr>
+<tr class="memdesc:a303097d86f869c3bcf5ebc0b0c8efbf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Referrer-Policy: 控制Referer头的发送 <br /></td></tr>
+<tr class="memitem:a9271a8c940fbe2b0de8c01645cfa033d" id="r_a9271a8c940fbe2b0de8c01645cfa033d"><td class="memItemLeft"><a id="a9271a8c940fbe2b0de8c01645cfa033d" name="a9271a8c940fbe2b0de8c01645cfa033d"></a>
+bool&#160;</td><td class="memItemRight"><b>enable_permissions_policy</b> = true</td></tr>
+<tr class="memdesc:a9271a8c940fbe2b0de8c01645cfa033d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permissions-Policy: 控制浏览器特性权限 <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>HTTP安全头过滤器 </p>
+<p>自动在所有响应中注入安全相关的HTTP头。 默认启用所有安全头并提供合理默认值，每个header可单独禁用。 在post_filter阶段执行，不阻断请求流程。 </p>
+
+<p class="definition">在文件 <a class="el" href="http__security_8hpp_source.html">http_security.hpp</a> 第 <a class="el" href="http__security_8hpp_source.html#l00030">30</a> 行定义.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a0438ef0b46932c0818fdd1619e2c9914" name="a0438ef0b46932c0818fdd1619e2c9914"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0438ef0b46932c0818fdd1619e2c9914">&#9670;&#160;</a></span>do_filter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::http::security_headers_filter::do_filter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>request</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>response</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>核心过滤方法 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>HTTP请求 </td></tr>
+    <tr><td class="paramname">response</td><td>HTTP响应</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>执行实际的过滤逻辑。通常由具体处理器实现， 中间件过滤器可能不实现此方法。 </p>
+
+<p>实现了 <a class="el" href="classneforce_1_1http_1_1http__filter.html#a354b28748f728effc3a651e7c9fa96a6">neforce::http::http_filter</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="http__security_8hpp_source.html">http_security.hpp</a> 第 <a class="el" href="http__security_8hpp_source.html#l00063">63</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a1b8406e3d1c557036efb884cfc399c16" name="a1b8406e3d1c557036efb884cfc399c16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b8406e3d1c557036efb884cfc399c16">&#9670;&#160;</a></span>name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> neforce::http::security_headers_filter::name </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取过滤器名称 </p>
+<dl class="section return"><dt>返回</dt><dd>过滤器名称 </dd></dl>
+
+<p>重载 <a class="el" href="classneforce_1_1http_1_1http__filter.html#a16dc9ccb76e7dccf41f4ae732ea01afe">neforce::http::http_filter</a> .</p>
+
+<p class="definition">在文件 <a class="el" href="http__security_8hpp_source.html">http_security.hpp</a> 第 <a class="el" href="http__security_8hpp_source.html#l00064">64</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a97ec096cd0884930c04fba42fb7b1db6" name="a97ec096cd0884930c04fba42fb7b1db6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97ec096cd0884930c04fba42fb7b1db6">&#9670;&#160;</a></span>post_filter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::http::security_headers_filter::post_filter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>request</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>response</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>后处理方法 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>HTTP请求 </td></tr>
+    <tr><td class="paramname">response</td><td>HTTP响应</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>在响应发送前调用，可以修改响应头或正文。 </p>
+
+<p>重载 <a class="el" href="classneforce_1_1http_1_1http__filter.html#a14ac82a85eee7e20c9d912f97b50535f">neforce::http::http_filter</a> .</p>
+
+</div>
+</div>
+<a id="afbdf4a5c5f2b19b25c732eee1908b254" name="afbdf4a5c5f2b19b25c732eee1908b254"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbdf4a5c5f2b19b25c732eee1908b254">&#9670;&#160;</a></span>pre_filter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::http::security_headers_filter::pre_filter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>request</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>response</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>预处理方法 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>HTTP请求 </td></tr>
+    <tr><td class="paramname">response</td><td>HTTP响应 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回false表示中断后续处理</dd></dl>
+<p>在请求处理前调用，可以检查请求、修改请求或提前返回响应。 </p>
+
+<p>重载 <a class="el" href="classneforce_1_1http_1_1http__filter.html#a66c5af31a812075314a85ef38b9d55eb">neforce::http::http_filter</a> .</p>
+
+<p class="definition">在文件 <a class="el" href="http__security_8hpp_source.html">http_security.hpp</a> 第 <a class="el" href="http__security_8hpp_source.html#l00061">61</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="http__security_8hpp_source.html">http_security.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><b>http</b></li><li class="navelem"><a href="classneforce_1_1http_1_1security__headers__filter.html">security_headers_filter</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

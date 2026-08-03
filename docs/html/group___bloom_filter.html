@@ -28,7 +28,7 @@
   <td id="projectalign">
    <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
    </div>
-   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+   <div id="projectbrief">A rigorously engineered full-stack C++ backend library.</div>
   </td>
  </tr>
  </tbody>
@@ -98,8 +98,8 @@ $(function(){initNavTree('group___bloom_filter.html','',''); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 类</h2></td></tr>
-<tr class="memitem:bloom_5Ffilter_3C_20T_2C_20Hash_20_3E" id="r_bloom_5Ffilter_3C_20T_2C_20Hash_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classbloom__filter.html">bloom_filter&lt; T, Hash &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">布隆过滤器  <a href="classbloom__filter.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:neforce_3A_3Abloom_5Ffilter_3C_20T_2C_20Hash_20_3E" id="r_neforce_3A_3Abloom_5Ffilter_3C_20T_2C_20Hash_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classneforce_1_1bloom__filter.html">neforce::bloom_filter&lt; T, Hash &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">布隆过滤器  <a href="classneforce_1_1bloom__filter.html#details">更多...</a><br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>布隆过滤器实现 </p>
@@ -165,8 +165,8 @@ $(function(){initNavTree('group___bloom_filter.html','',''); });
 <h1 class="doxsection"><a class="anchor" id="double_hashing"></a>
 双哈希技术</h1>
 <p>本实现采用 Kirsch &amp; Mitzenmacher (2006) 提出的双哈希技术：</p>
-<p>**原理**： 仅计算两个独立的哈希值 h₁(x) 和 h₂(x)，通过线性组合生成 k 个哈希值： </p><div class="fragment"><div class="line">g_i(x) = (h₁(x) + i × h₂(x)) <a class="code hl_function" href="group___math_functions.html#ga1af3558471e357423df0f8171dec0491">mod</a> m  (i = 0, 1, ..., k-1)</div>
-<div class="ttc" id="agroup___math_functions_html_ga1af3558471e357423df0f8171dec0491"><div class="ttname"><a href="group___math_functions.html#ga1af3558471e357423df0f8171dec0491">mod</a></div><div class="ttdeci">constexpr enable_if_t&lt; is_floating_point_v&lt; T &gt;, T &gt; mod(const T x, const T y)</div><div class="ttdoc">浮点数取模运算</div><div class="ttdef"><b>定义</b> <a href="math_8hpp_source.html#l00358">math.hpp:358</a></div></div>
+<p>**原理**： 仅计算两个独立的哈希值 h₁(x) 和 h₂(x)，通过线性组合生成 k 个哈希值： </p><div class="fragment"><div class="line">g_i(x) = (h₁(x) + i × h₂(x)) <a class="code hl_function" href="group___math_functions.html#gab94dbdf460bf3c861b16565e98837f1d">mod</a> m  (i = 0, 1, ..., k-1)</div>
+<div class="ttc" id="agroup___math_functions_html_gab94dbdf460bf3c861b16565e98837f1d"><div class="ttname"><a href="group___math_functions.html#gab94dbdf460bf3c861b16565e98837f1d">neforce::mod</a></div><div class="ttdeci">constexpr enable_if_t&lt; is_floating_point_v&lt; T &gt;, T &gt; mod(const T x, const T y)</div><div class="ttdoc">浮点数取模运算</div><div class="ttdef"><b>定义</b> <a href="math_8hpp_source.html#l00358">math.hpp:358</a></div></div>
 </div><!-- fragment --><p>**优点**：</p><ul>
 <li>减少哈希计算开销</li>
 <li>理论证明与 k 个独立哈希函数具有相同的渐近性能</li>

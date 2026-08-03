@@ -1,22 +1,22 @@
 var group___bloom_filter =
 [
-    [ "bloom_filter&lt; T, Hash &gt;", "classbloom__filter.html", [
-      [ "~bloom_filter", "classbloom__filter.html#a0b16c142586f36e5c44ed910fb49a92f", null ],
-      [ "bloom_filter", "classbloom__filter.html#a2eaaefbeb4045cc9b8ddfe547500e466", null ],
-      [ "bloom_filter", "classbloom__filter.html#a68c84074a4fed2db912cb7fdba5af865", null ],
-      [ "approximate_count", "classbloom__filter.html#a3018c4b2bab45081b0925fab2d4b7af5", null ],
-      [ "bit_size", "classbloom__filter.html#a272cfff09c382be479241c75d11e1872", null ],
-      [ "capacity", "classbloom__filter.html#a302392cc3c37047327fa93ae2c3e6d4a", null ],
-      [ "clear", "classbloom__filter.html#a830ba24d1ec93b142643cd119f2e0b15", null ],
-      [ "contains", "classbloom__filter.html#a3d4090ff857a64fb41c66cc43d578edb", null ],
-      [ "empty", "classbloom__filter.html#a9b393ac4a20f1c8541454d2b41a68007", null ],
-      [ "false_positive_rate", "classbloom__filter.html#aca55a5774ae468ed172b045d553a25cc", null ],
-      [ "from_bytes", "classbloom__filter.html#a831e13ec7fa310734f30864f90875b0b", null ],
-      [ "hash_count", "classbloom__filter.html#a525feda9f5461c9d34f8856d4d010fbc", null ],
-      [ "insert", "classbloom__filter.html#ad324bb61dd9f571279f7bda12bc2b2dc", null ],
-      [ "intersect", "classbloom__filter.html#a1d249adf7843b10733d0952077be40fd", null ],
-      [ "merge", "classbloom__filter.html#a33646fafae5e79cd449470b84f8a8d9e", null ],
-      [ "to_bytes", "classbloom__filter.html#a0a5e85ff7ab12cbc8a4aea9e1a68dbd1", null ],
-      [ "unite", "classbloom__filter.html#aa2ea8a50fab72a5d35591b9e35493a9e", null ]
+    [ "neforce::bloom_filter&lt; T, Hash &gt;", "classneforce_1_1bloom__filter.html", [
+      [ "~bloom_filter", "classneforce_1_1bloom__filter.html#a2a401f0a8fa851abb64f605ee1559a53", null ],
+      [ "bloom_filter", "classneforce_1_1bloom__filter.html#a62cfb6356cd9054cd6a55dea7b6b959c", null ],
+      [ "bloom_filter", "classneforce_1_1bloom__filter.html#a73488fd944f45249deb157dc14004c1d", null ],
+      [ "approximate_count", "classneforce_1_1bloom__filter.html#adef6c65523dbd6ae0bf6f11b925217b3", null ],
+      [ "bit_size", "classneforce_1_1bloom__filter.html#a4f305b06e747691d506102bd94e7f47d", null ],
+      [ "capacity", "classneforce_1_1bloom__filter.html#a844ca16f00a48acb87394b162de0f068", null ],
+      [ "clear", "classneforce_1_1bloom__filter.html#a37508c5d822fd64607ecf45cad426ccb", null ],
+      [ "contains", "classneforce_1_1bloom__filter.html#a6fd081ae7dca21b0c6a7b097119702df", null ],
+      [ "empty", "classneforce_1_1bloom__filter.html#a82fc6d3cd688a60b81261a086be94561", null ],
+      [ "false_positive_rate", "classneforce_1_1bloom__filter.html#a84275fc1c4f2b1842479672088e69bd1", null ],
+      [ "from_bytes", "classneforce_1_1bloom__filter.html#ad4ab2fa0b3b21d50c723ef9cba0b74b5", null ],
+      [ "hash_count", "classneforce_1_1bloom__filter.html#af11f9740469502b684e3c484cc0a2ccc", null ],
+      [ "insert", "classneforce_1_1bloom__filter.html#ad505254f76cfe2b9207956f5591362e6", null ],
+      [ "intersect", "classneforce_1_1bloom__filter.html#a1824933f0f8f4f49a98d210214ad432f", null ],
+      [ "merge", "classneforce_1_1bloom__filter.html#a2d20b386de7ed98df9286a7bcae3fb38", null ],
+      [ "to_bytes", "classneforce_1_1bloom__filter.html#a010d72d2909e1601f0badd697f03026b", null ],
+      [ "unite", "classneforce_1_1bloom__filter.html#ac5396b1e4128de05e74707389fc905f0", null ]
     ] ]
 ];

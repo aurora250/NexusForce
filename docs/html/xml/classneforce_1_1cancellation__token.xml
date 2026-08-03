@@ -1,0 +1,213 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1cancellation__token" kind="class" language="C++" prot="public">
+    <compoundname>neforce::cancellation_token</compoundname>
+    <includes refid="generator_8hpp" local="no">generator.hpp</includes>
+    <innerclass refid="structneforce_1_1cancellation__token_1_1check__awaiter" prot="public">neforce::cancellation_token::check_awaiter</innerclass>
+    <innerclass refid="structneforce_1_1cancellation__token_1_1state" prot="private">neforce::cancellation_token::state</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1cancellation__token_1aea02b28088fb36f8afc429e2660f7cd1" prot="private" static="no" mutable="no">
+        <type>state *</type>
+        <definition>state* neforce::cancellation_token::state_</definition>
+        <argsstring></argsstring>
+        <name>state_</name>
+        <qualifiedname>neforce::cancellation_token::state_</qualifiedname>
+        <briefdescription>
+<para>共享状态 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="75" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1cancellation__token_1af9263900086980285d01ca037627aef7" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::cancellation_token::release</definition>
+        <argsstring>()</argsstring>
+        <name>release</name>
+        <qualifiedname>neforce::cancellation_token::release</qualifiedname>
+        <briefdescription>
+<para>释放状态引用 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="80" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="80" bodyend="84"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1cancellation__token_1a72f02c99da91d261741f863373f90758" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::cancellation_token::cancellation_token</definition>
+        <argsstring>()</argsstring>
+        <name>cancellation_token</name>
+        <qualifiedname>neforce::cancellation_token::cancellation_token</qualifiedname>
+        <briefdescription>
+<para>默认构造函数，创建新的取消令牌 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="90" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="90" bodyend="91"/>
+        <referencedby refid="classneforce_1_1cancellation__token_1afa9cbab67af530c744ea36450c759add" compoundref="generator_8hpp" startline="97" endline="102">cancellation_token</referencedby>
+        <referencedby refid="classneforce_1_1cancellation__token_1a8812668c7baeb3034b78cff6cad37187" compoundref="generator_8hpp" startline="109" endline="120">operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1cancellation__token_1afa9cbab67af530c744ea36450c759add" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::cancellation_token::cancellation_token</definition>
+        <argsstring>(const cancellation_token &amp;other)</argsstring>
+        <name>cancellation_token</name>
+        <qualifiedname>neforce::cancellation_token::cancellation_token</qualifiedname>
+        <param>
+          <type>const cancellation_token &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数，共享状态 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个取消令牌 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="97" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="97" bodyend="102"/>
+        <references refid="classneforce_1_1cancellation__token_1a72f02c99da91d261741f863373f90758" compoundref="generator_8hpp" startline="90" endline="91">cancellation_token</references>
+        <references refid="group___memory_order_1gaf2fa121cd3849278f261b2c04fdf90a8" compoundref="memory__order_8hpp" startline="173">neforce::memory_order_relaxed</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1cancellation__token_1a8812668c7baeb3034b78cff6cad37187" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1cancellation__token_1a72f02c99da91d261741f863373f90758" kindref="member">cancellation_token</ref> &amp;</type>
+        <definition>cancellation_token &amp; neforce::cancellation_token::operator=</definition>
+        <argsstring>(const cancellation_token &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::cancellation_token::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1cancellation__token_1a72f02c99da91d261741f863373f90758" kindref="member">cancellation_token</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个取消令牌 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="109" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="109" bodyend="120"/>
+        <references refid="group___args_forward_functions_1ga57a2cf85645286e20c82caae70cd13dc" compoundref="type__traits_8hpp" startline="3084" endline="3086">neforce::addressof</references>
+        <references refid="classneforce_1_1cancellation__token_1a72f02c99da91d261741f863373f90758" compoundref="generator_8hpp" startline="90" endline="91">cancellation_token</references>
+        <references refid="group___memory_order_1gaf2fa121cd3849278f261b2c04fdf90a8" compoundref="memory__order_8hpp" startline="173">neforce::memory_order_relaxed</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1cancellation__token_1a9ac31afed9822d3795ceafa545e8fb14" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::cancellation_token::~cancellation_token</definition>
+        <argsstring>()</argsstring>
+        <name>~cancellation_token</name>
+        <qualifiedname>neforce::cancellation_token::~cancellation_token</qualifiedname>
+        <briefdescription>
+<para>析构函数，释放状态 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="125" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="125" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1cancellation__token_1a439e5b0c5d98a4d14174d36e23e7b60f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::cancellation_token::cancel</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>cancel</name>
+        <qualifiedname>neforce::cancellation_token::cancel</qualifiedname>
+        <briefdescription>
+<para>请求取消 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="130" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="130" bodyend="134"/>
+        <references refid="group___memory_order_1ga0ecbdbbd5ddbe9eda2820b9cea4826fc" compoundref="memory__order_8hpp" startline="179">neforce::memory_order_release</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1cancellation__token_1a6b3209af93994159cba4794b0c7a97c3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::cancellation_token::is_cancelled</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_cancelled</name>
+        <qualifiedname>neforce::cancellation_token::is_cancelled</qualifiedname>
+        <briefdescription>
+<para>检查是否已被取消 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否已被取消 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="140" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="140" bodyend="142"/>
+        <references refid="group___memory_order_1ga6367df7d3e137e9b30e17740435d1816" compoundref="memory__order_8hpp" startline="177">neforce::memory_order_acquire</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1cancellation__token_1ad01e20427582900183c8740d4b2b5306" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1cancellation__token_1_1check__awaiter" kindref="compound">check_awaiter</ref></type>
+        <definition>check_awaiter neforce::cancellation_token::check</definition>
+        <argsstring>() const</argsstring>
+        <name>check</name>
+        <qualifiedname>neforce::cancellation_token::check</qualifiedname>
+        <briefdescription>
+<para>获取取消检查等待器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>检查等待器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="148" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="148" bodyend="148"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>取消令牌 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>用于协程的取消操作，支持多个副本共享同一个取消状态。 可以传递给协程，在适当的位置检查取消状态并抛出异常。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="36" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="36" bodyend="149"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1cancellation__token_1a439e5b0c5d98a4d14174d36e23e7b60f" prot="public" virt="non-virtual"><scope>neforce::cancellation_token</scope><name>cancel</name></member>
+      <member refid="classneforce_1_1cancellation__token_1a72f02c99da91d261741f863373f90758" prot="public" virt="non-virtual"><scope>neforce::cancellation_token</scope><name>cancellation_token</name></member>
+      <member refid="classneforce_1_1cancellation__token_1afa9cbab67af530c744ea36450c759add" prot="public" virt="non-virtual"><scope>neforce::cancellation_token</scope><name>cancellation_token</name></member>
+      <member refid="classneforce_1_1cancellation__token_1ad01e20427582900183c8740d4b2b5306" prot="public" virt="non-virtual"><scope>neforce::cancellation_token</scope><name>check</name></member>
+      <member refid="classneforce_1_1cancellation__token_1a6b3209af93994159cba4794b0c7a97c3" prot="public" virt="non-virtual"><scope>neforce::cancellation_token</scope><name>is_cancelled</name></member>
+      <member refid="classneforce_1_1cancellation__token_1a8812668c7baeb3034b78cff6cad37187" prot="public" virt="non-virtual"><scope>neforce::cancellation_token</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1cancellation__token_1af9263900086980285d01ca037627aef7" prot="private" virt="non-virtual"><scope>neforce::cancellation_token</scope><name>release</name></member>
+      <member refid="classneforce_1_1cancellation__token_1aea02b28088fb36f8afc429e2660f7cd1" prot="private" virt="non-virtual"><scope>neforce::cancellation_token</scope><name>state_</name></member>
+      <member refid="classneforce_1_1cancellation__token_1a9ac31afed9822d3795ceafa545e8fb14" prot="public" virt="non-virtual"><scope>neforce::cancellation_token</scope><name>~cancellation_token</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

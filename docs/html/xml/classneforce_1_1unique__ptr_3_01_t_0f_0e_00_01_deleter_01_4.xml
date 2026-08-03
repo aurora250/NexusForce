@@ -1,0 +1,1001 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4" kind="class" language="C++" prot="public">
+    <compoundname>neforce::unique_ptr&lt; T[], Deleter &gt;</compoundname>
+    <includes refid="unique__ptr_8hpp" local="no">unique_ptr.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename Deleter</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a4dd3fc0028a64571670dac2172d286d4" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>typename inner::__unique_ptr_impl&lt; T, U &gt;::DeleterConstraint::type</type>
+        <definition>using neforce::unique_ptr&lt; T[], Deleter &gt;::DeleterConstraint = typename inner::__unique_ptr_impl&lt;T, U&gt;::DeleterConstraint::type</definition>
+        <argsstring></argsstring>
+        <name>DeleterConstraint</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::DeleterConstraint</qualifiedname>
+        <briefdescription>
+<para>删除器约束类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="383" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="383" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a0e95c7e926f785255d5ace5babe534ca" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename E</type>
+          </param>
+          <param>
+            <type>typename UP</type>
+            <defval><ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a4da7ea1e4aca146c8bbdcdf27e10e27c" kindref="member">unique_ptr</ref>&lt;U, E&gt;</defval>
+          </param>
+          <param>
+            <type>typename UP_pointer</type>
+            <defval>typename UP::pointer</defval>
+          </param>
+          <param>
+            <type>typename UP_element_type</type>
+            <defval>typename UP::element_type</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structneforce_1_1conjunction" kindref="compound">conjunction</ref>&lt; <ref refid="structneforce_1_1is__array" kindref="compound">is_array</ref>&lt; U &gt;, <ref refid="structneforce_1_1is__same" kindref="compound">is_same</ref>&lt; <ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a100f73a171ce34edfe898b3507d5eebd" kindref="member">pointer</ref>, <ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a57e2c413b33b8f9022e3a3b1bc7a3f70" kindref="member">element_type</ref> * &gt;, <ref refid="structneforce_1_1is__same" kindref="compound">is_same</ref>&lt; UP_pointer, UP_element_type * &gt;, <ref refid="structneforce_1_1is__convertible" kindref="compound">is_convertible</ref>&lt; UP_element_type(*)[], <ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a57e2c413b33b8f9022e3a3b1bc7a3f70" kindref="member">element_type</ref>(*)[]&gt; &gt;</type>
+        <definition>using neforce::unique_ptr&lt; T[], Deleter &gt;::safe_conversion = 
+conjunction&lt;is_array&lt;U&gt;, is_same&lt;pointer, element_type*&gt;, is_same&lt;UP_pointer, UP_element_type*&gt;,
+            is_convertible&lt;UP_element_type (*)[], element_type (*)[]&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>safe_conversion</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::safe_conversion</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="395" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="395" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1ae211bd316b8ad871d127d083f4697eb1" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structneforce_1_1conjunction" kindref="compound">conjunction</ref>&lt; <ref refid="structneforce_1_1disjunction" kindref="compound">disjunction</ref>&lt; <ref refid="structneforce_1_1disjunction" kindref="compound">disjunction</ref>&lt; <ref refid="structneforce_1_1is__same" kindref="compound">is_same</ref>&lt; U, <ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a100f73a171ce34edfe898b3507d5eebd" kindref="member">pointer</ref> &gt;, <ref refid="structneforce_1_1is__same" kindref="compound">is_same</ref>&lt; U, <ref refid="group___core_types_1gacb98a47b9e384b2934a9c2dbd3c2d598" kindref="member">nullptr_t</ref> &gt; &gt;, <ref refid="structneforce_1_1conjunction" kindref="compound">conjunction</ref>&lt; <ref refid="structneforce_1_1is__pointer" kindref="compound">is_pointer</ref>&lt; U &gt;, <ref refid="structneforce_1_1is__same" kindref="compound">is_same</ref>&lt; <ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a100f73a171ce34edfe898b3507d5eebd" kindref="member">pointer</ref>, <ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a57e2c413b33b8f9022e3a3b1bc7a3f70" kindref="member">element_type</ref> * &gt;, <ref refid="structneforce_1_1is__convertible" kindref="compound">is_convertible</ref>&lt; <ref refid="group___remove_qualifiers_1ga6e51818d0daad3df5883f3719e42e7cb" kindref="member">remove_pointer_t</ref>&lt; U &gt;(*)[], <ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a57e2c413b33b8f9022e3a3b1bc7a3f70" kindref="member">element_type</ref>(*)[]&gt; &gt; &gt; &gt;</type>
+        <definition>using neforce::unique_ptr&lt; T[], Deleter &gt;::safe_conversion_raw = 
+conjunction&lt;disjunction&lt;disjunction&lt;is_same&lt;U, pointer&gt;, is_same&lt;U, nullptr_t&gt;&gt;,
+                        conjunction&lt;is_pointer&lt;U&gt;, is_same&lt;pointer, element_type*&gt;,
+                                    is_convertible&lt;remove_pointer_t&lt;U&gt; (*)[], element_type (*)[]&gt;&gt;&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>safe_conversion_raw</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::safe_conversion_raw</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="400" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="400" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a100f73a171ce34edfe898b3507d5eebd" prot="public" static="no">
+        <type>typename inner::__unique_ptr_impl&lt; T, Deleter &gt;::pointer</type>
+        <definition>using neforce::unique_ptr&lt; T[], Deleter &gt;::pointer = typename inner::__unique_ptr_impl&lt;T, Deleter&gt;::pointer</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::pointer</qualifiedname>
+        <briefdescription>
+<para>指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="388" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="388" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a57e2c413b33b8f9022e3a3b1bc7a3f70" prot="public" static="no">
+        <type>T</type>
+        <definition>using neforce::unique_ptr&lt; T[], Deleter &gt;::element_type = T</definition>
+        <argsstring></argsstring>
+        <name>element_type</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::element_type</qualifiedname>
+        <briefdescription>
+<para>元素类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="389" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="389" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a80c1b48fe65116d3be57202807a88d88" prot="public" static="no">
+        <type>Deleter</type>
+        <definition>using neforce::unique_ptr&lt; T[], Deleter &gt;::deleter_type = Deleter</definition>
+        <argsstring></argsstring>
+        <name>deleter_type</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::deleter_type</qualifiedname>
+        <briefdescription>
+<para>删除器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="390" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="390" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a3610cec6cb925e0df37fa9e885d2f3d6" prot="private" static="no" mutable="no">
+        <type>inner::__unique_ptr_data&lt; T, Deleter &gt;</type>
+        <definition>inner::__unique_ptr_data&lt;T, Deleter&gt; neforce::unique_ptr&lt; T[], Deleter &gt;::data_</definition>
+        <argsstring></argsstring>
+        <name>data_</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::data_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>内部数据存储 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="385" column="30" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="385" bodyend="385"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a4da7ea1e4aca146c8bbdcdf27e10e27c" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename Del</type>
+            <defval>Deleter</defval>
+          </param>
+          <param>
+            <type>typename</type>
+            <defval>DeleterConstraint&lt;Del&gt;</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; safe_conversion_raw&lt; U &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::unique_ptr&lt; T[], Deleter &gt;::unique_ptr</definition>
+        <argsstring>(U ptr) noexcept</argsstring>
+        <name>unique_ptr</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::unique_ptr</qualifiedname>
+        <param>
+          <type>U</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>从指针构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指针类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Del</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要管理的数组指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="414" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="414" bodyend="415"/>
+        <referencedby refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a36a7dd5b9045f120ef1630df9f1b85ba">operator=</referencedby>
+        <referencedby refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1adbd034cc150493453902534467881ef8" compoundref="unique__ptr_8hpp" startline="503" endline="506">operator=</referencedby>
+        <referencedby refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a8b5f70ac36fb90c3b9111fd0234674a0">operator=</referencedby>
+        <referencedby refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1af0a75f60e0bb8b687ae9f77491ebe969" compoundref="unique__ptr_8hpp" startline="493" endline="497">operator=</referencedby>
+        <referencedby refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a16e92446a0b22df76ca4e7f089010f5a" compoundref="unique__ptr_8hpp" startline="568" endline="568">swap</referencedby>
+        <referencedby refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a17751059d45a0c375f1f55a48597072f">unique_ptr</referencedby>
+        <referencedby refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a127593b117ecdbc15e0c7f1b23407fe5">unique_ptr</referencedby>
+        <referencedby refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a90b68efb0f33489777f727fa9bf65ece" compoundref="unique__ptr_8hpp" startline="468" endline="469">unique_ptr</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a00c43b956f3a6c033e02cb809381919c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename Del</type>
+            <defval><ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a80c1b48fe65116d3be57202807a88d88" kindref="member">deleter_type</ref></defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="structneforce_1_1conjunction" kindref="compound">conjunction</ref>&lt; safe_conversion_raw&lt; U &gt;, <ref refid="structneforce_1_1is__copy__constructible" kindref="compound">is_copy_constructible</ref>&lt; Del &gt; &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::unique_ptr&lt; T[], Deleter &gt;::unique_ptr</definition>
+        <argsstring>(U ptr, const deleter_type &amp;deleter) noexcept</argsstring>
+        <name>unique_ptr</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::unique_ptr</qualifiedname>
+        <param>
+          <type>U</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a80c1b48fe65116d3be57202807a88d88" kindref="member">deleter_type</ref> &amp;</type>
+          <declname>deleter</declname>
+        </param>
+        <briefdescription>
+<para>从指针和复制删除器构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指针类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Del</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要管理的数组指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>deleter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="426" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="426" bodyend="427"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a3e76c32b3a959910a3c86489772b5831" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename Del</type>
+            <defval><ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a80c1b48fe65116d3be57202807a88d88" kindref="member">deleter_type</ref></defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="structneforce_1_1conjunction" kindref="compound">conjunction</ref>&lt; safe_conversion_raw&lt; U &gt;, <ref refid="structneforce_1_1is__move__constructible" kindref="compound">is_move_constructible</ref>&lt; Del &gt; &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::unique_ptr&lt; T[], Deleter &gt;::unique_ptr</definition>
+        <argsstring>(U ptr, enable_if_t&lt;!is_lvalue_reference&lt; Del &gt;::value, Del &amp;&amp; &gt; deleter) noexcept</argsstring>
+        <name>unique_ptr</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::unique_ptr</qualifiedname>
+        <param>
+          <type>U</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="structneforce_1_1is__lvalue__reference" kindref="compound">is_lvalue_reference</ref>&lt; Del &gt;::value, Del &amp;&amp; &gt;</type>
+          <declname>deleter</declname>
+        </param>
+        <briefdescription>
+<para>从指针和移动删除器构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指针类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Del</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要管理的数组指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>deleter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="438" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="438" bodyend="439"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="structneforce_1_1integral__constant_1a5fb6f7e2680d2dcc85a47a2cf067dbad" compoundref="type__traits_8hpp" startline="37">neforce::integral_constant&lt; bool, Value &gt;&lt; false &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a0cc80238e7a31b38d39a7ef3c1251549" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename Del</type>
+            <defval><ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a80c1b48fe65116d3be57202807a88d88" kindref="member">deleter_type</ref></defval>
+          </param>
+          <param>
+            <type>typename DelMoveRef</type>
+            <defval><ref refid="group___remove_qualifiers_1gaf9f0052267f49df8928e207158f4c75c" kindref="member">remove_reference_t</ref>&lt;Del&gt;</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; safe_conversion_raw&lt; U &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::unique_ptr&lt; T[], Deleter &gt;::unique_ptr</definition>
+        <argsstring>(U, enable_if_t&lt; is_lvalue_reference&lt; Del &gt;::value, DelMoveRef &amp;&amp; &gt;)=delete</argsstring>
+        <name>unique_ptr</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::unique_ptr</qualifiedname>
+        <param>
+          <type>U</type>
+        </param>
+        <param>
+          <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="structneforce_1_1is__lvalue__reference" kindref="compound">is_lvalue_reference</ref>&lt; Del &gt;::value, DelMoveRef &amp;&amp; &gt;</type>
+        </param>
+        <briefdescription>
+<para>禁止从右值引用删除器构造 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="446" column="5"/>
+        <references refid="structneforce_1_1integral__constant_1a5fb6f7e2680d2dcc85a47a2cf067dbad" compoundref="type__traits_8hpp" startline="37">neforce::integral_constant&lt; bool, Value &gt;&lt; false &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a127593b117ecdbc15e0c7f1b23407fe5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::unique_ptr&lt; T[], Deleter &gt;::unique_ptr</definition>
+        <argsstring>(unique_ptr &amp;&amp;)=default</argsstring>
+        <name>unique_ptr</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::unique_ptr</qualifiedname>
+        <param>
+          <type>unique_ptr &amp;&amp;</type>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="448" column="5"/>
+        <references refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a4da7ea1e4aca146c8bbdcdf27e10e27c" compoundref="unique__ptr_8hpp" startline="414" endline="415">unique_ptr</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a46161451b58840bf816d877eb915e1a4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Del</type>
+            <defval>Deleter</defval>
+          </param>
+          <param>
+            <type>typename</type>
+            <defval>DeleterConstraint&lt;Del&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::unique_ptr&lt; T[], Deleter &gt;::unique_ptr</definition>
+        <argsstring>(nullptr_t=nullptr) noexcept</argsstring>
+        <name>unique_ptr</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::unique_ptr</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gacb98a47b9e384b2934a9c2dbd3c2d598" kindref="member">nullptr_t</ref></type>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>空指针构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Del</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="455" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="455" bodyend="455"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a90b68efb0f33489777f727fa9bf65ece" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename E</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="structneforce_1_1conjunction" kindref="compound">conjunction</ref>&lt; safe_conversion&lt; U, E &gt;, <ref refid="group___type_traits_utilities_1gaa9ea3c80d957cac4f923264b29fddb54" kindref="member">conditional_t</ref>&lt; <ref refid="structneforce_1_1is__reference" kindref="compound">is_reference</ref>&lt; Deleter &gt;::value, <ref refid="structneforce_1_1is__same" kindref="compound">is_same</ref>&lt; E, Deleter &gt;, <ref refid="structneforce_1_1is__convertible" kindref="compound">is_convertible</ref>&lt; E, Deleter &gt; &gt; &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>neforce::unique_ptr&lt; T[], Deleter &gt;::unique_ptr</definition>
+        <argsstring>(unique_ptr&lt; U, E &gt; &amp;&amp;other) noexcept</argsstring>
+        <name>unique_ptr</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::unique_ptr</qualifiedname>
+        <param>
+          <type>unique_ptr&lt; U, E &gt; &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>从其他unique_ptr转换构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>E</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源unique_ptr </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="468" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="468" bodyend="469"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a4da7ea1e4aca146c8bbdcdf27e10e27c" compoundref="unique__ptr_8hpp" startline="414" endline="415">unique_ptr</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a6103a8a0d772a9a76eb4998436010a37" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::unique_ptr&lt; T[], Deleter &gt;::~unique_ptr</definition>
+        <argsstring>()</argsstring>
+        <name>~unique_ptr</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::~unique_ptr</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="474" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="474" bodyend="480"/>
+        <references refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a78e9bda4d6ed02edffd7b7fd9cc7528d" compoundref="unique__ptr_8hpp" startline="526" endline="526">get_deleter</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a8b5f70ac36fb90c3b9111fd0234674a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a4da7ea1e4aca146c8bbdcdf27e10e27c" kindref="member">unique_ptr</ref> &amp;</type>
+        <definition>unique_ptr &amp; neforce::unique_ptr&lt; T[], Deleter &gt;::operator=</definition>
+        <argsstring>(unique_ptr &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a4da7ea1e4aca146c8bbdcdf27e10e27c" kindref="member">unique_ptr</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="482" column="16"/>
+        <references refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a4da7ea1e4aca146c8bbdcdf27e10e27c" compoundref="unique__ptr_8hpp" startline="414" endline="415">unique_ptr</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1af0a75f60e0bb8b687ae9f77491ebe969" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename E</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_traits_utilities_1ga8f016dc0792f4b698f38abb48c34c25b" kindref="member">conjunction_v</ref>&lt; safe_conversion&lt; U, E &gt;, <ref refid="structneforce_1_1is__assignable" kindref="compound">is_assignable</ref>&lt; <ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a80c1b48fe65116d3be57202807a88d88" kindref="member">deleter_type</ref> &amp;, E &amp;&amp; &gt; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a4da7ea1e4aca146c8bbdcdf27e10e27c" kindref="member">unique_ptr</ref> &amp;</type>
+        <definition>unique_ptr &amp; neforce::unique_ptr&lt; T[], Deleter &gt;::operator=</definition>
+        <argsstring>(unique_ptr&lt; U, E &gt; &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a4da7ea1e4aca146c8bbdcdf27e10e27c" kindref="member">unique_ptr</ref>&lt; U, E &gt; &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>从其他unique_ptr移动赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>E</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源unique_ptr </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="493" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="493" bodyend="497"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3028" endline="3030">neforce::forward</references>
+        <references refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a78e9bda4d6ed02edffd7b7fd9cc7528d" compoundref="unique__ptr_8hpp" startline="526" endline="526">get_deleter</references>
+        <references refid="classneforce_1_1unique__ptr_1a056ed7d7096f7361e51c3d4e57a57d34" compoundref="unique__ptr_8hpp" startline="356" endline="360">neforce::unique_ptr&lt; T, Deleter &gt;::reset</references>
+        <references refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a4da7ea1e4aca146c8bbdcdf27e10e27c" compoundref="unique__ptr_8hpp" startline="414" endline="415">unique_ptr</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1adbd034cc150493453902534467881ef8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a4da7ea1e4aca146c8bbdcdf27e10e27c" kindref="member">unique_ptr</ref> &amp;</type>
+        <definition>unique_ptr &amp; neforce::unique_ptr&lt; T[], Deleter &gt;::operator=</definition>
+        <argsstring>(nullptr_t) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::operator=</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gacb98a47b9e384b2934a9c2dbd3c2d598" kindref="member">nullptr_t</ref></type>
+        </param>
+        <briefdescription>
+<para>nullptr赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前对象引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="503" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="503" bodyend="506"/>
+        <references refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a32d529b3dc75fa7a5023025b60a87cfb" compoundref="unique__ptr_8hpp" startline="555" endline="557">reset</references>
+        <references refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a4da7ea1e4aca146c8bbdcdf27e10e27c" compoundref="unique__ptr_8hpp" startline="414" endline="415">unique_ptr</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1acb763319f324244cfb930d7e95e36ff6" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___add_qualifiers_1gadface24d2207b24b3037fb644acaf643" kindref="member">add_lvalue_reference_t</ref>&lt; <ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a57e2c413b33b8f9022e3a3b1bc7a3f70" kindref="member">element_type</ref> &gt;</type>
+        <definition>add_lvalue_reference_t&lt; element_type &gt; neforce::unique_ptr&lt; T[], Deleter &gt;::operator[]</definition>
+        <argsstring>(size_t idx) const</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::operator[]</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>数组下标运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>数组元素的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="513" column="38" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="513" bodyend="516"/>
+        <references refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a48390de732046143a25d21f74397ec4e" compoundref="unique__ptr_8hpp" startline="521" endline="521">get</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a48390de732046143a25d21f74397ec4e" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a100f73a171ce34edfe898b3507d5eebd" kindref="member">pointer</ref></type>
+        <definition>pointer neforce::unique_ptr&lt; T[], Deleter &gt;::get</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::get</qualifiedname>
+        <briefdescription>
+<para>获取原始指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="521" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="521" bodyend="521"/>
+        <referencedby refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a70348d31a90d05a7c77c041a35e7eeed" compoundref="unique__ptr_8hpp" startline="537" endline="537">operator bool</referencedby>
+        <referencedby refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1acb763319f324244cfb930d7e95e36ff6" compoundref="unique__ptr_8hpp" startline="513" endline="516">operator[]</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a78e9bda4d6ed02edffd7b7fd9cc7528d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a80c1b48fe65116d3be57202807a88d88" kindref="member">deleter_type</ref> &amp;</type>
+        <definition>deleter_type &amp; neforce::unique_ptr&lt; T[], Deleter &gt;::get_deleter</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>get_deleter</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::get_deleter</qualifiedname>
+        <briefdescription>
+<para>获取删除器引用 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="526" column="28" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="526" bodyend="526"/>
+        <referencedby refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1af0a75f60e0bb8b687ae9f77491ebe969" compoundref="unique__ptr_8hpp" startline="493" endline="497">operator=</referencedby>
+        <referencedby refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a6103a8a0d772a9a76eb4998436010a37" compoundref="unique__ptr_8hpp" startline="474" endline="480">~unique_ptr</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a28f283dbfab88328b9ad07b30b5780e6" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a80c1b48fe65116d3be57202807a88d88" kindref="member">deleter_type</ref> &amp;</type>
+        <definition>const deleter_type &amp; neforce::unique_ptr&lt; T[], Deleter &gt;::get_deleter</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_deleter</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::get_deleter</qualifiedname>
+        <briefdescription>
+<para>获取删除器常量引用 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="531" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="531" bodyend="531"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a70348d31a90d05a7c77c041a35e7eeed" prot="public" static="no" constexpr="yes" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::unique_ptr&lt; T[], Deleter &gt;::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::operator bool</qualifiedname>
+        <briefdescription>
+<para>bool转换运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否管理非空数组 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="537" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="537" bodyend="537"/>
+        <references refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a48390de732046143a25d21f74397ec4e" compoundref="unique__ptr_8hpp" startline="521" endline="521">get</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1acc6b26b021e7d0ef3c6b15b43fdd6654" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a100f73a171ce34edfe898b3507d5eebd" kindref="member">pointer</ref></type>
+        <definition>pointer neforce::unique_ptr&lt; T[], Deleter &gt;::release</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>release</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::release</qualifiedname>
+        <briefdescription>
+<para>释放所有权 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="542" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="542" bodyend="542"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a32d529b3dc75fa7a5023025b60a87cfb" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="structneforce_1_1conjunction" kindref="compound">conjunction</ref>&lt; <ref refid="structneforce_1_1disjunction" kindref="compound">disjunction</ref>&lt; <ref refid="structneforce_1_1is__same" kindref="compound">is_same</ref>&lt; U, <ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a100f73a171ce34edfe898b3507d5eebd" kindref="member">pointer</ref> &gt;, <ref refid="structneforce_1_1conjunction" kindref="compound">conjunction</ref>&lt; <ref refid="structneforce_1_1is__same" kindref="compound">is_same</ref>&lt; <ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a100f73a171ce34edfe898b3507d5eebd" kindref="member">pointer</ref>, <ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a57e2c413b33b8f9022e3a3b1bc7a3f70" kindref="member">element_type</ref> * &gt;, <ref refid="structneforce_1_1is__pointer" kindref="compound">is_pointer</ref>&lt; U &gt;, <ref refid="structneforce_1_1is__convertible" kindref="compound">is_convertible</ref>&lt; <ref refid="group___remove_qualifiers_1ga6e51818d0daad3df5883f3719e42e7cb" kindref="member">remove_pointer_t</ref>&lt; U &gt;(*)[], <ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a57e2c413b33b8f9022e3a3b1bc7a3f70" kindref="member">element_type</ref>(*)[]&gt; &gt; &gt; &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::unique_ptr&lt; T[], Deleter &gt;::reset</definition>
+        <argsstring>(U ptr) noexcept</argsstring>
+        <name>reset</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::reset</qualifiedname>
+        <param>
+          <type>U</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>重置管理的指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指针类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="555" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="555" bodyend="557"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <referencedby refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1adbd034cc150493453902534467881ef8" compoundref="unique__ptr_8hpp" startline="503" endline="506">operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a82b3374249cec51b89537a321b9032d9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::unique_ptr&lt; T[], Deleter &gt;::reset</definition>
+        <argsstring>(nullptr_t=nullptr) noexcept</argsstring>
+        <name>reset</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::reset</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gacb98a47b9e384b2934a9c2dbd3c2d598" kindref="member">nullptr_t</ref></type>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>重置为空指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="562" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="562" bodyend="562"/>
+        <references refid="classneforce_1_1unique__ptr_1a056ed7d7096f7361e51c3d4e57a57d34" compoundref="unique__ptr_8hpp" startline="356" endline="360">neforce::unique_ptr&lt; T, Deleter &gt;::reset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a16e92446a0b22df76ca4e7f089010f5a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::unique_ptr&lt; T[], Deleter &gt;::swap</definition>
+        <argsstring>(unique_ptr &amp;other) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::swap</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a4da7ea1e4aca146c8bbdcdf27e10e27c" kindref="member">unique_ptr</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个unique_ptr </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="568" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="568" bodyend="568"/>
+        <references refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a4da7ea1e4aca146c8bbdcdf27e10e27c" compoundref="unique__ptr_8hpp" startline="414" endline="415">unique_ptr</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a17751059d45a0c375f1f55a48597072f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::unique_ptr&lt; T[], Deleter &gt;::unique_ptr</definition>
+        <argsstring>(const unique_ptr &amp;)=delete</argsstring>
+        <name>unique_ptr</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::unique_ptr</qualifiedname>
+        <param>
+          <type>const unique_ptr &amp;</type>
+        </param>
+        <briefdescription>
+<para>禁止复制构造 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="570" column="5"/>
+        <references refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a4da7ea1e4aca146c8bbdcdf27e10e27c" compoundref="unique__ptr_8hpp" startline="414" endline="415">unique_ptr</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a36a7dd5b9045f120ef1630df9f1b85ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a4da7ea1e4aca146c8bbdcdf27e10e27c" kindref="member">unique_ptr</ref> &amp;</type>
+        <definition>unique_ptr &amp; neforce::unique_ptr&lt; T[], Deleter &gt;::operator=</definition>
+        <argsstring>(const unique_ptr &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a4da7ea1e4aca146c8bbdcdf27e10e27c" kindref="member">unique_ptr</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>禁止复制赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="571" column="16"/>
+        <references refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a4da7ea1e4aca146c8bbdcdf27e10e27c" compoundref="unique__ptr_8hpp" startline="414" endline="415">unique_ptr</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unique__ptr_1a712ed6cb4c3331b61e9fa396a3f4a0f3" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(*_NEFORCE declval&lt; pointer &gt;())" virt="non-virtual">
+        <type><ref refid="group___add_qualifiers_1gadface24d2207b24b3037fb644acaf643" kindref="member">add_lvalue_reference_t</ref>&lt; <ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a57e2c413b33b8f9022e3a3b1bc7a3f70" kindref="member">element_type</ref> &gt;</type>
+        <definition>add_lvalue_reference_t&lt; element_type &gt; neforce::unique_ptr&lt; T, Deleter &gt;::operator*</definition>
+        <argsstring>() const</argsstring>
+        <name>operator*</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::operator*</qualifiedname>
+        <briefdescription>
+<para>解引用运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>管理对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="306" column="38" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="306" bodyend="309"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1unique__ptr_1a735f2d839a28631457d62018259d9cd6" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a100f73a171ce34edfe898b3507d5eebd" kindref="member">pointer</ref></type>
+        <definition>pointer neforce::unique_ptr&lt; T, Deleter &gt;::operator-&gt;</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator-&gt;</name>
+        <qualifiedname>neforce::unique_ptr&lt; T[], Deleter &gt;::operator-&gt;</qualifiedname>
+        <briefdescription>
+<para>成员访问运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>管理对象的指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="315" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="315" bodyend="315"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>数组特化的unique_ptr </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数组元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Deleter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="381" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="381" bodyend="572"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a3610cec6cb925e0df37fa9e885d2f3d6" prot="private" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>data_</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a80c1b48fe65116d3be57202807a88d88" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>deleter_type</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a4dd3fc0028a64571670dac2172d286d4" prot="private" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>DeleterConstraint</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a57e2c413b33b8f9022e3a3b1bc7a3f70" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>element_type</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a48390de732046143a25d21f74397ec4e" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>get</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a78e9bda4d6ed02edffd7b7fd9cc7528d" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>get_deleter</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a28f283dbfab88328b9ad07b30b5780e6" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>get_deleter</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a70348d31a90d05a7c77c041a35e7eeed" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>operator bool</name></member>
+      <member refid="classneforce_1_1unique__ptr_1a712ed6cb4c3331b61e9fa396a3f4a0f3" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>operator*</name></member>
+      <member refid="classneforce_1_1unique__ptr_1a735f2d839a28631457d62018259d9cd6" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>operator-&gt;</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a8b5f70ac36fb90c3b9111fd0234674a0" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1af0a75f60e0bb8b687ae9f77491ebe969" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1adbd034cc150493453902534467881ef8" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a36a7dd5b9045f120ef1630df9f1b85ba" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1acb763319f324244cfb930d7e95e36ff6" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>operator[]</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a100f73a171ce34edfe898b3507d5eebd" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>pointer</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1acc6b26b021e7d0ef3c6b15b43fdd6654" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>release</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a32d529b3dc75fa7a5023025b60a87cfb" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>reset</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a82b3374249cec51b89537a321b9032d9" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>reset</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a0e95c7e926f785255d5ace5babe534ca" prot="private" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>safe_conversion</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1ae211bd316b8ad871d127d083f4697eb1" prot="private" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>safe_conversion_raw</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a16e92446a0b22df76ca4e7f089010f5a" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>swap</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a4da7ea1e4aca146c8bbdcdf27e10e27c" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>unique_ptr</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a00c43b956f3a6c033e02cb809381919c" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>unique_ptr</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a3e76c32b3a959910a3c86489772b5831" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>unique_ptr</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a0cc80238e7a31b38d39a7ef3c1251549" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>unique_ptr</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a127593b117ecdbc15e0c7f1b23407fe5" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>unique_ptr</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a46161451b58840bf816d877eb915e1a4" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>unique_ptr</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a90b68efb0f33489777f727fa9bf65ece" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>unique_ptr</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a17751059d45a0c375f1f55a48597072f" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>unique_ptr</name></member>
+      <member refid="classneforce_1_1unique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a6103a8a0d772a9a76eb4998436010a37" prot="public" virt="non-virtual"><scope>neforce::unique_ptr&lt; T[], Deleter &gt;</scope><name>~unique_ptr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

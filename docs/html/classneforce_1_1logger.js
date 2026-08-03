@@ -1,0 +1,28 @@
+var classneforce_1_1logger =
+[
+    [ "logger", "classneforce_1_1logger.html#a7c78bd721bc0c1d9e3fded433304b704", null ],
+    [ "add_context", "classneforce_1_1logger.html#a2ba314aaaed3064fa5c57820b8fd5d5f", null ],
+    [ "add_sink", "classneforce_1_1logger.html#a3726e6c50e6906b68feb179928d99603", null ],
+    [ "clear_context", "classneforce_1_1logger.html#ab2ae094e0bd82f4b2879b82dd8aa03b5", null ],
+    [ "clear_sinks", "classneforce_1_1logger.html#ae09aa9cc5bd5d81e92941f4d69293b07", null ],
+    [ "debug", "classneforce_1_1logger.html#ac9600867573df87417ba8e326fec5791", null ],
+    [ "disable_async", "classneforce_1_1logger.html#ae3447d19ddeecfbf28274c3db3748a68", null ],
+    [ "effective_level", "classneforce_1_1logger.html#aa70fe05b7d235cc328a0708fad5f5f56", null ],
+    [ "enable_async", "classneforce_1_1logger.html#a35c8e3c8c4ccee75a8c4a332e4d78e6d", null ],
+    [ "error", "classneforce_1_1logger.html#a4ff01b40b601137ab69a9ba244357dcd", null ],
+    [ "fatal", "classneforce_1_1logger.html#af7a5f195da9b04d762f731b60a517c84", null ],
+    [ "flush", "classneforce_1_1logger.html#a7d51fb9856a7c99a68e22240e7e3df86", null ],
+    [ "info", "classneforce_1_1logger.html#af4bad028743ee60c859551147bc6351f", null ],
+    [ "is_async", "classneforce_1_1logger.html#aef1de33e629444452c772c1575d202a8", null ],
+    [ "level", "classneforce_1_1logger.html#a9b0b91555a373dc80e200cc2cbeaa6bb", null ],
+    [ "log", "classneforce_1_1logger.html#a8169e6e08c8a0de05db59c37b0682c16", null ],
+    [ "name", "classneforce_1_1logger.html#ad2c32e6ce2531a01198001bf9ec323ca", null ],
+    [ "parent", "classneforce_1_1logger.html#aec5191bb161ad0ad4637e4d516d3e800", null ],
+    [ "remove_context", "classneforce_1_1logger.html#a6d8a67952352c8140a6ac2a7632bb9de", null ],
+    [ "set_auto_flush", "classneforce_1_1logger.html#a7ab5ece5ae210ab66caadaa5f0b20609", null ],
+    [ "set_filter", "classneforce_1_1logger.html#aa204e73cf6f06d37cc2f3aded61c57ae", null ],
+    [ "set_level", "classneforce_1_1logger.html#aa5380e8af1d871a8565de99daeacdb2f", null ],
+    [ "should_log", "classneforce_1_1logger.html#a736f977b8d0ee87e1cfdcb1a14c1ec1f", null ],
+    [ "trace", "classneforce_1_1logger.html#a0a39217354bc035b386d595706534ac9", null ],
+    [ "warn", "classneforce_1_1logger.html#ae9e74422c4d9dc8e93cf3360305032d4", null ]
+];
