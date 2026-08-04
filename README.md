@@ -1,10 +1,10 @@
-<p style="text-align: center;">
+<p align="center">
   <img src="resources/icon.png" width="256" alt="NexusForce">
 </p>
 
-<h1 style="text-align: center;">NexusForce V1.0.0</h1>
+<h1 align="center">NexusForce V1.0.0</h1>
 
-<p style="text-align: center;">
+<p align="center">
   <a href="https://vcpkg.io"><img src="https://img.shields.io/badge/vcpkg-Enabled-0A7FAA?style=flat-square&logo=vcpkg&logoColor=white" alt="vcpkg"></a>
   <a href="https://cmake.org"><img src="https://img.shields.io/badge/CMake-3.19+-064C8B?style=flat-square&logo=cmake&logoColor=white" alt="CMake"></a>
   <a href="https://isocpp.org"><img src="https://img.shields.io/badge/C++-14/17/20-00599C?style=flat-square&logo=cplusplus&logoColor=white" alt="C++"></a>
