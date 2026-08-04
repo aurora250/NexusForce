@@ -2,7 +2,7 @@
   <img src="resources/icon.png" width="256" alt="NexusForce">
 </p>
 
-<h1 align="center">NexusForce V1.0.0</h1>
+<h1 align="center">NexusForce V1.0.1</h1>
 
 <p align="center">
   <a href="https://vcpkg.io"><img src="https://img.shields.io/badge/vcpkg-Enabled-0A7FAA?style=flat-square&logo=vcpkg&logoColor=white" alt="vcpkg"></a>
