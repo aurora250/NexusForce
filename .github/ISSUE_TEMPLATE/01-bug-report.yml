@@ -1,0 +1,66 @@
+name: 🐛 Bug Report
+description: 报告缺陷或异常行为
+title: "[模块名] 简短描述问题现象"
+labels: ["bug"]
+body:
+  - type: input
+    id: module
+    attributes:
+      label: 涉及模块
+      description: 如 `core/async`、`network/http`、`db/sql_builder`
+      placeholder: "core/xxx"
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 环境信息
+      description: 请提供操作系统、编译器、架构和版本信息
+      value: |
+        - OS: [如 Ubuntu 24.04 / Windows 11]
+        - 编译器: [如 gcc-14 / clang-19 / MSVC 2022]
+        - 架构: [x86_64 / aarch64 / riscv64]
+        - NexusForce 版本: [commit hash 或 tag]
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期行为
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际行为
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: impact
+    attributes:
+      label: 影响评估
+      options:
+        - label: 破坏现有 API（参照 DEVELOPMENT.md section 3.1）
+        - label: 仅影响特定平台/编译器
+        - label: 安全相关（请改用 GitHub Security Advisory，参照 section 6.3）
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 附加信息
+      description: perf 数据、Valgrind 输出、core dump、复现代码等

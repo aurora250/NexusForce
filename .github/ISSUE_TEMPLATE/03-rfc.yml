@@ -1,0 +1,81 @@
+name: 📋 RFC / 设计讨论
+description: 提交设计提案，启动社区讨论（讨论期至少 72 小时）
+title: "[RFC] 提案标题"
+labels: ["rfc", "discussion"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **重要：** 本 RFC 流程遵循 `.github/DEVELOPMENT.md` section 7.2。
+        RFC 讨论期至少 72 小时，逾期无异议则默认通过。
+
+  - type: dropdown
+    id: status
+    attributes:
+      label: 状态
+      options:
+        - 草稿
+        - 讨论中
+        - 已接受
+        - 已实现
+        - 已拒绝
+    validations:
+      required: true
+
+  - type: input
+    id: author
+    attributes:
+      label: 作者
+      placeholder: "@username"
+    validations:
+      required: true
+
+  - type: input
+    id: discussion_period
+    attributes:
+      label: 讨论期
+      placeholder: "YYYY-MM-DD ~ YYYY-MM-DD"
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: 摘要
+      description: 1-2 段简述提案内容
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: 动机
+      description: 当前存在的问题或机会
+    validations:
+      required: true
+
+  - type: textarea
+    id: design
+    attributes:
+      label: 设计方案
+      description: 核心设计决策
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 替代方案
+      description: 被否决的方案及原因
+
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: 兼容性影响
+      description: 对现有 API/ABI 的影响，参照 DEVELOPMENT.md section 3.1
+
+  - type: textarea
+    id: plan
+    attributes:
+      label: 实现计划
+      description: 可选，分阶段实现步骤

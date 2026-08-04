@@ -1,0 +1,61 @@
+name: 👋 Good First Issue
+description: 面向首次贡献者的任务（低难度，范围明确）
+title: "[模块名] 任务描述"
+labels: ["good first issue"]
+body:
+  - type: input
+    id: module
+    attributes:
+      label: 涉及模块
+      placeholder: "core/xxx"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 任务描述
+      description: 具体要做什么。遵循 section 7.1 — 问题范围明确，适合新贡献者
+    validations:
+      required: true
+
+  - type: textarea
+    id: files
+    attributes:
+      label: 涉及文件
+      value: |
+        - `include/NeForce/xxx/xxx.hpp`
+        - `src/xxx/xxx.cpp`
+
+  - type: dropdown
+    id: difficulty
+    attributes:
+      label: 难度评估
+      description: 参照 DEVELOPMENT.md section 7.1 标签体系
+      options:
+        - "good first issue — 首次贡献者，问题范围明确"
+        - "beginner — 低难度，适合学习代码库结构"
+        - "junior job — 中等难度，需要一定 C++ 经验"
+        - "help wanted — 需要社区帮助"
+    validations:
+      required: true
+
+  - type: textarea
+    id: references
+    attributes:
+      label: 参考
+      description: 相关代码示例、文档、博客链接
+      value: |
+        - 开发规范: [.github/DEVELOPMENT.md](.github/DEVELOPMENT.md)
+        - 模块头文件:
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 完成标准
+      description: 参照 DEVELOPMENT.md section 4.1 / 4.3
+      options:
+        - label: 代码通过 Clang-Format
+        - label: 代码通过 Clang-Tidy
+        - label: 包含单元测试
+        - label: 公有 API 文档注释完整（section 3.4）

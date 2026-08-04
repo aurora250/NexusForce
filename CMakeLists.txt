@@ -253,7 +253,7 @@ configure_package_config_file(
         ${CMAKE_CURRENT_SOURCE_DIR}/NexusForceConfig.cmake.in
         ${CMAKE_CURRENT_BINARY_DIR}/NexusForceConfig.cmake
         INSTALL_DESTINATION ${INSTALL_CONFIGDIR}
-        PATH_VARS CMAKE_INSTALL_INCLUDEDIR CMAKE_INSTALL_LIBDIR
+        PATH_VARS CMAKE_INSTALL_INCLUDEDIR CMAKE_INSTALL_LIBDIR CMAKE_INSTALL_DATADIR
         NO_SET_AND_CHECK_MACRO
         NO_CHECK_REQUIRED_COMPONENTS_MACRO
 )
@@ -276,4 +276,9 @@ install(EXPORT NexusForceTargets
         FILE NexusForceTargets.cmake
         NAMESPACE NexusForce::
         DESTINATION ${INSTALL_CONFIGDIR}
+)
+
+install(FILES
+        ${CMAKE_CURRENT_SOURCE_DIR}/docs/ai/api_index.jsonl
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/ai
 )

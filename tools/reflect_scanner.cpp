@@ -6,7 +6,7 @@
  * _neforce_reflect_gen.cpp containing complete type registration code.
  *
  * Usage:
- *   reflect_scanner <input_dir> -o <output_file>
+ *   NFRS <input_dir> -o <output_file>
  *
  *   <input_dir>  Root directory to scan for .hpp files
  *   -o           Output path for generated C++ registration file
@@ -246,7 +246,7 @@ namespace {
                 if (!result.empty()) {
                     result += " | ";
                 }
-                result += "neforce::reflect::" + part;
+                result += "_NEFORCE reflect::" + part;
             }
             pos = pipe == string::npos ? raw_attrs.size() : pipe + 1;
         }
@@ -270,15 +270,15 @@ namespace {
             out += "namespace {\n";
             out += format("static auto _neforce_enum_{} = []() {{\n", en.name);
             out += format(
-                    "    auto& _neforce_meta = neforce::reflect::registry::instance().register_type<{}>(\"{}\");\n",
+                    "    auto& _neforce_meta = _NEFORCE reflect::registry::instance().register_type<{}>(\"{}\");\n",
                     en.name, en.name);
-            out += format("    auto ei = neforce::make_unique<neforce::reflect::meta_enum>(\"{}\", "
-                          "neforce::reflect::type_id_for<{}>());\n",
+            out += format("    auto ei = _NEFORCE make_unique<_NEFORCE reflect::meta_enum>(\"{}\", "
+                          "_NEFORCE reflect::type_id_for<{}>());\n",
                           en.name, en.underlying);
             for (const auto& val: en.values) {
-                out += format("    ei->add_entry(\"{}\", static_cast<int64_t>({}::{}));\n", val, en.name, val);
+                out += format("    ei->add_entry(\"{}\", static_cast<_NEFORCE int64_t>({}::{}));\n", val, en.name, val);
             }
-            out += "    _neforce_meta.enum_info(neforce::move(ei));\n";
+            out += "    _neforce_meta.enum_info(_NEFORCE move(ei));\n";
             out += "    return 0;\n";
             out += "}();\n";
             out += "}  // anonymous namespace\n";
@@ -289,7 +289,7 @@ namespace {
             out += format("// === Registration for class: {} ===\n", cls.name);
             out += "namespace {\n";
             out += format("static auto _neforce_reg_{} = []() {{\n", cls.name);
-            out += format("    auto builder = neforce::reflect::reflect<{}>(\"{}\");\n", cls.name, cls.name);
+            out += format("    auto builder = _NEFORCE reflect::reflect<{}>(\"{}\");\n", cls.name, cls.name);
 
             for (const auto& base: cls.bases) {
                 out += format("    builder.base(\"{}\");\n", base.name);
@@ -334,7 +334,7 @@ namespace {
     }
 
     void print_usage(const cmdline& cmd) {
-        eprint("Usage: reflect_scanner <input_dir> -o <output_file> [--exclude <path> ...]\n");
+        eprint("Usage: NFRS <input_dir> -o <output_file> [--exclude <path> ...]\n");
         eprint("\n");
         eprint("Scans C++ headers for NEFORCE_REFLECT_OBJ markers and generates\n");
         eprint("a complete type registration file.\n");

@@ -61,11 +61,21 @@ find_dependency(Threads)
 
 include("${CMAKE_CURRENT_LIST_DIR}/NexusForceCompilerOptions.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/NexusForceTargets.cmake")
+
+if(TARGET NexusForce::NFRS)
+    foreach(__nfrs_cfg IN ITEMS DEBUG RELWITHDEBINFO MINSIZEREL)
+        set_target_properties(NexusForce::NFRS PROPERTIES
+            MAP_IMPORTED_CONFIG_${__nfrs_cfg} Release
+        )
+    endforeach()
+endif()
+
 include("${CMAKE_CURRENT_LIST_DIR}/NexusForceReflectScanner.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/NexusForceRuntime.cmake")
 
 get_target_property(NEXUSFORCE_INCLUDE_DIRS NexusForce::NexusForce INTERFACE_INCLUDE_DIRECTORIES)
 set(NEXUSFORCE_LIBRARIES NexusForce::NexusForce)
+set(NEXUSFORCE_AI_API_INDEX "@PACKAGE_CMAKE_INSTALL_DATADIR@/ai/api_index.jsonl")
 set(NEXUSFORCE_FOUND TRUE)
 
 

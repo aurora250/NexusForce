@@ -1,0 +1,67 @@
+name: ✨ Feature Request
+description: 提议新功能或改进
+title: "[模块名] 功能描述"
+labels: ["enhancement"]
+body:
+  - type: input
+    id: module
+    attributes:
+      label: 涉及模块
+      description: 如新增或修改 `core/xxx`、`network/xxx`
+      placeholder: "core/xxx"
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: 动机
+      description: 当前存在的问题或机会是什么？对标 DEVELOPMENT.md section 5.2 设计合理性审查
+    validations:
+      required: true
+
+  - type: textarea
+    id: design
+    attributes:
+      label: 设计方案
+      description: 核心设计思路，说明为什么这样实现
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 替代方案
+      description: 已考虑但否决的方案及原因
+
+  - type: checkboxes
+    id: compatibility
+    attributes:
+      label: 兼容性影响
+      description: 参照 DEVELOPMENT.md section 3.1
+      options:
+        - label: 不破坏现有 API
+        - label: 若破坏，已提供迁移方案（请在下方说明）
+        - label: 需要新增依赖（请说明理由，参照 section 3.3）
+
+  - type: textarea
+    id: perf
+    attributes:
+      label: 性能影响
+      description: 预期性能提升/下降？附数据或分析。性能优化需满足 section 1.1 量化标准
+
+  - type: checkboxes
+    id: tests
+    attributes:
+      label: 测试计划
+      description: 参照 DEVELOPMENT.md section 4.1
+      options:
+        - label: 单元测试
+        - label: 集成测试
+        - label: benchmark（如涉及热路径，参照 section 1.1）
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 附加信息
+      description: 参考链接、RFC、相关 issue 等
