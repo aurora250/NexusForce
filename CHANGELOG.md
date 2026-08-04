@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.0.1] - 2026-08-04
+
+### 🐛 Bug Fixes
+
+- 修复 NFRS 被安装后索引 Release 动态库的方案
+- 修复 Clang 下推断 websocket-deflate 整形符号溢出与 GCC 不同的警告
+
 ## [1.0.0] - 2026-08-03
 
 ### 🚀 New Features

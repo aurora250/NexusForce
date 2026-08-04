@@ -1,16 +1,22 @@
-# NexusForce V1.0.0
+<p style="text-align: center;">
+  <img src="resources/icon.png" width="256" alt="NexusForce">
+</p>
 
-[![vcpkg](https://img.shields.io/badge/vcpkg-Enabled-0A7FAA?style=flat-square&logo=vcpkg&logoColor=white)](https://vcpkg.io)
-[![CMake](https://img.shields.io/badge/CMake-3.19+-064C8B?style=flat-square&logo=cmake&logoColor=white)](https://cmake.org)
-[![C++](https://img.shields.io/badge/C++-14/17/20-00599C?style=flat-square&logo=cplusplus&logoColor=white)](https://isocpp.org)
-[![CodeQL](https://github.com/aurora250/NexusForce/workflows/CodeQL%20Analysis/badge.svg)](https://github.com/aurora250/NexusForce/actions/workflows/codeql.yml)
-[![Clang Format](https://img.shields.io/badge/Clang--Format-19.0-blue?style=flat-square&logo=llvm&logoColor=white)](https://clang.llvm.org/docs/ClangFormat.html)
-[![Clang Tidy](https://img.shields.io/badge/Clang--Tidy-Passed-brightgreen?style=flat-square&logo=llvm&logoColor=white)](https://clang.llvm.org/extra/clang-tidy/)
-[![C++ Core Guidelines](https://img.shields.io/badge/C%2B%2B%20Core%20Guidelines-Checked-00599C?style=flat-square&logo=cplusplus&logoColor=white)](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)
-[![Valgrind](https://img.shields.io/badge/Valgrind-Passed-2E8B57?style=flat-square&logo=valgrind&logoColor=white)](https://valgrind.org)
-[![License](https://img.shields.io/badge/License-MIT-F9A825?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Docs](https://img.shields.io/badge/Docs-Website-1565C0?style=flat-square&logo=readthedocs&logoColor=white)](https://nexusforce.org.cn)
-[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-4CAF50?style=flat-square&logo=git&logoColor=white)](https://github.com/aurora250/NexusForce/pulls)
+<h1 style="text-align: center;">NexusForce V1.0.0</h1>
+
+<p style="text-align: center;">
+  <a href="https://vcpkg.io"><img src="https://img.shields.io/badge/vcpkg-Enabled-0A7FAA?style=flat-square&logo=vcpkg&logoColor=white" alt="vcpkg"></a>
+  <a href="https://cmake.org"><img src="https://img.shields.io/badge/CMake-3.19+-064C8B?style=flat-square&logo=cmake&logoColor=white" alt="CMake"></a>
+  <a href="https://isocpp.org"><img src="https://img.shields.io/badge/C++-14/17/20-00599C?style=flat-square&logo=cplusplus&logoColor=white" alt="C++"></a>
+  <a href="https://github.com/aurora250/NexusForce/actions/workflows/codeql.yml"><img src="https://github.com/aurora250/NexusForce/workflows/CodeQL%20Analysis/badge.svg" alt="CodeQL"></a>
+  <a href="https://clang.llvm.org/docs/ClangFormat.html"><img src="https://img.shields.io/badge/Clang--Format-19.0-blue?style=flat-square&logo=llvm&logoColor=white" alt="Clang Format"></a>
+  <a href="https://clang.llvm.org/extra/clang-tidy/"><img src="https://img.shields.io/badge/Clang--Tidy-Passed-brightgreen?style=flat-square&logo=llvm&logoColor=white" alt="Clang Tidy"></a>
+  <a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines"><img src="https://img.shields.io/badge/C%2B%2B%20Core%20Guidelines-Checked-00599C?style=flat-square&logo=cplusplus&logoColor=white" alt="C++ Core Guidelines"></a>
+  <a href="https://valgrind.org"><img src="https://img.shields.io/badge/Valgrind-Passed-2E8B57?style=flat-square&logo=valgrind&logoColor=white" alt="Valgrind"></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-F9A825?style=flat-square" alt="License"></a>
+  <a href="https://nexusforce.org.cn"><img src="https://img.shields.io/badge/Docs-Website-1565C0?style=flat-square&logo=readthedocs&logoColor=white" alt="Docs"></a>
+  <a href="https://github.com/aurora250/NexusForce/pulls"><img src="https://img.shields.io/badge/PRs-Welcome-4CAF50?style=flat-square&logo=git&logoColor=white" alt="PRs Welcome"></a>
+</p>
 
 > 🌐 **Language**  
 > Read this in other languages: [中文 (Chinese)](README.md)
