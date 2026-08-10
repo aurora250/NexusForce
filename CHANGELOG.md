@@ -1,6 +1,14 @@
 # CHANGELOG
 
-## [1.0.1] - 2026-08-04
+## [1.0.1] - 2026-08-08
+
+### 🚀 New Features
+
+- 添加 launder 编译器优化阻止屏障函数
+
+### 🔧 Improvements
+
+- 依据性能测试优化 memory 操作函数与 basic_string 操作性能
 
 ### 🐛 Bug Fixes
 

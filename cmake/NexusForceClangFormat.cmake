@@ -57,19 +57,4 @@ add_custom_target(format
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
         VERBATIM
 )
-
-set(FORMAT_CHECK_COMMANDS "")
-foreach(SOURCE_FILE ${NEXUSFORCE_FORMAT_SOURCES})
-    list(APPEND FORMAT_CHECK_COMMANDS
-            COMMAND ${CLANG_FORMAT_EXECUTABLE} -style=file --dry-run -Werror "${SOURCE_FILE}"
-    )
-endforeach()
-
-add_custom_target(format-check
-        COMMAND ${CMAKE_COMMAND} -E echo "Checking code format with ${CLANG_FORMAT_EXECUTABLE}..."
-        ${FORMAT_CHECK_COMMANDS}
-        COMMAND ${CMAKE_COMMAND} -E echo "✅ All ${NUM_SOURCES} files are properly formatted!"
-        COMMENT "Checking code format with clang-format"
-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-        VERBATIM
-)
+set_target_properties(format PROPERTIES FOLDER "utils")

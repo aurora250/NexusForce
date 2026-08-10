@@ -368,6 +368,7 @@ string yaml_parser::unescape_string(const string& str) const {
                     break;
                 case 't':
                 case '\t':
+                    // case '\t' matches the escaped literal tab character, not the escape sequence \t.
                     result += '\t';
                     break;
                 case 'n':
@@ -411,6 +412,7 @@ string yaml_parser::unescape_string(const string& str) const {
                     break;
                 case 'x': {
                     if (i + 2 >= str.size()) {
+                        // At this time i points to 'x', not '\\'
                         result += str[i];
                         break;
                     }
@@ -427,6 +429,7 @@ string yaml_parser::unescape_string(const string& str) const {
                         cp_val.append_to(result);
                         i += 2;
                     } else {
+                        // No extra rollback of i here, switch has already consumed 'x'.
                         result += str[i];
                     }
                     break;
@@ -484,6 +487,7 @@ string yaml_parser::unescape_string(const string& str) const {
                     break;
                 }
                 default:
+                    //Unknown escape sequences (such as \q) preserve the backslash and the character itself
                     result += '\\';
                     result += str[i];
                     break;

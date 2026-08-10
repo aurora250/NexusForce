@@ -7,6 +7,7 @@ macro(add_nexusforce_example NAME)
     add_executable(${NAME} ${ARGN})
     target_link_libraries(${NAME} PRIVATE NexusForce::NexusForce)
     nexusforce_compiler_options(${NAME})
+    set_target_properties(${NAME} PROPERTIES FOLDER "examples")
 endmacro()
 
 add_subdirectory(db)

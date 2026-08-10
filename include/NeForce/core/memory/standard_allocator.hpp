@@ -9,9 +9,9 @@
  * 用于管理动态内存分配和释放，支持不同对齐要求和编译器优化。
  */
 
-#include <new>
 #include "NeForce/core/exception/debug.hpp"
 #include "NeForce/core/exception/exception.hpp"
+#include "NeForce/core/memory/new.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**

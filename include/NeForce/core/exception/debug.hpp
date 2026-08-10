@@ -73,23 +73,21 @@ NEFORCE_NORETURN NEFORCE_ALWAYS_INLINE_INLINE void unreachable() noexcept {
 #endif
 }
 
-#ifdef NEFORCE_STANDARD_17
 /**
  * @brief 检查当前上下文是否在常量求值中
  * @return 如果在常量求值上下文中返回true，否则返回false
  *
  * 用于区分编译时和运行时
  */
-NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE constexpr bool is_constant_evaluated() noexcept {
+NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool is_constant_evaluated() noexcept {
     return __builtin_is_constant_evaluated();
 }
-#endif
 
 /**
  * @brief 检测当前进程是否正在被调试器附加
  * @return 如果正在调试则返回true，否则返回false
  */
-bool NEFORCE_API is_debugger_present();
+NEFORCE_NODISCARD bool NEFORCE_API is_debugger_present() noexcept;
 
 /**
  * @brief 调试断言

@@ -510,15 +510,15 @@ namespace {
     void XXH3_accumulate_512(uint64_t* acc, const byte_t* data, const byte_t* secret) noexcept {
 #if defined(NEFORCE_SIMD_AVX2)
         for (size_t i = 0; i < 8; i += 4) {
-            ::__m256i data_vec = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(data + i * 8));
-            ::__m256i key_vec = ::_mm256_xor_si256(
+            const ::__m256i data_vec = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(data + i * 8));
+            const ::__m256i key_vec = ::_mm256_xor_si256(
                     data_vec, ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(secret + i * 8)));
 
-            ::__m256i swapped = ::_mm256_permute4x64_epi64(data_vec, _MM_SHUFFLE(2, 3, 0, 1));
+            const auto swapped = _mm256_permute4x64_epi64(data_vec, _MM_SHUFFLE(2, 3, 0, 1));
             ::__m256i acc_vec = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(acc + i));
             acc_vec = ::_mm256_add_epi64(acc_vec, swapped);
 
-            ::__m256i product = ::_mm256_mul_epu32(key_vec, ::_mm256_srli_epi64(key_vec, 32));
+            const ::__m256i product = ::_mm256_mul_epu32(key_vec, ::_mm256_srli_epi64(key_vec, 32));
             acc_vec = ::_mm256_add_epi64(acc_vec, product);
 
             ::_mm256_storeu_si256(reinterpret_cast<::__m256i*>(acc + i), acc_vec);

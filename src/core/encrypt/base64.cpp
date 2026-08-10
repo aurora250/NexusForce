@@ -240,8 +240,8 @@ byte_vector base64::decode(const string_view data) {
 
 #endif
 
-    for (size_t i = padding_start; i < cleaned.size(); ++i) {
-        if (cleaned[i] != '=') {
+    for (size_t padding = padding_start; padding < cleaned.size(); ++padding) {
+        if (cleaned[padding] != '=') {
             NEFORCE_THROW_EXCEPTION(value_exception("Invalid Base64 padding"));
         }
     }
@@ -381,8 +381,8 @@ byte_vector base64::decode_url(const string_view data) {
 
 #endif
 
-    for (size_t i = padding_start; i < cleaned.size(); ++i) {
-        if (cleaned[i] != '=') {
+    for (size_t padding = padding_start; padding < cleaned.size(); ++padding) {
+        if (cleaned[padding] != '=') {
             NEFORCE_THROW_EXCEPTION(value_exception("Invalid Base64URL padding"));
         }
     }

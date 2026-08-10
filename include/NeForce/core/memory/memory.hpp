@@ -9,6 +9,8 @@
  * 这些函数类似于标准C库的memory函数，但提供constexpr支持和其他增强功能。
  */
 
+#include "NeForce/core/exception/debug.hpp"
+#include "NeForce/core/simd/memory.hpp"
 #include "NeForce/core/typeinfo/type_traits.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -28,6 +30,21 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 NEFORCE_CONSTEXPR14 void* memory_copy(void* NEFORCE_RESTRICT dest, const void* NEFORCE_RESTRICT src,
                                       size_t count) noexcept {
+    if (count < 16) {
+        if (dest == nullptr || src == nullptr) {
+            return nullptr;
+        }
+        auto* d = static_cast<byte_t*>(dest);
+        const auto* s = static_cast<const byte_t*>(src);
+        for (size_t i = 0; i < count; ++i) {
+            // NOLINTNEXTLINE(clang-analyzer-core.uninitialized.Assign)
+            d[i] = s[i];
+        }
+        return dest;
+    }
+    if (!is_constant_evaluated()) {
+        return simd::memory_copy(dest, src, count);
+    }
     if (dest == nullptr || src == nullptr) {
         return nullptr;
     }
@@ -70,6 +87,9 @@ NEFORCE_CONSTEXPR14 void* memory_copy(T* NEFORCE_RESTRICT dest, const T* NEFORCE
  */
 NEFORCE_CONSTEXPR14 void* memory_copy_offset(void* NEFORCE_RESTRICT dest, const void* NEFORCE_RESTRICT src,
                                              size_t count) noexcept {
+    if (!is_constant_evaluated()) {
+        return simd::memory_copy_offset(dest, src, count);
+    }
     if (dest == nullptr || src == nullptr) {
         return nullptr;
     }
@@ -123,6 +143,9 @@ NEFORCE_CONSTEXPR14 void* memory_copy_until(void* dest, const void* src, const b
  *         - 0：两个内存区域相等
  */
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 int memory_compare(const void* lhs, const void* rhs, size_t count) noexcept {
+    if (!is_constant_evaluated()) {
+        return simd::memory_compare(lhs, rhs, count);
+    }
     if (lhs == nullptr && rhs == nullptr) {
         return 0;
     }
@@ -167,6 +190,9 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 int memory_compare(const T& lhs, const
  * @note 支持重叠区域，当dest < src时从前向后复制，当dest > src时从后向前复制。
  */
 NEFORCE_CONSTEXPR14 void* memory_move(void* dest, const void* src, size_t count) noexcept {
+    if (!is_constant_evaluated()) {
+        return simd::memory_move(dest, src, count);
+    }
     if (dest == nullptr || src == nullptr) {
         return nullptr;
     }
@@ -196,6 +222,19 @@ NEFORCE_CONSTEXPR14 void* memory_move(void* dest, const void* src, size_t count)
  * @return 目标内存的起始指针，如果参数无效则返回nullptr
  */
 NEFORCE_CONSTEXPR14 void* memory_set(void* dest, const byte_t value, size_t count) noexcept {
+    if (count < 16) {
+        if (dest == nullptr) {
+            return nullptr;
+        }
+        auto* d = static_cast<byte_t*>(dest);
+        for (size_t i = 0; i < count; ++i) {
+            d[i] = value;
+        }
+        return dest;
+    }
+    if (!is_constant_evaluated()) {
+        return simd::memory_set(dest, value, count);
+    }
     if (dest == nullptr) {
         return nullptr;
     }
@@ -217,6 +256,10 @@ NEFORCE_CONSTEXPR14 void* memory_set(void* dest, const byte_t value, size_t coun
  * 清零内存区域。如果参数无效则不执行任何操作。
  */
 NEFORCE_CONSTEXPR14 void memory_zero(void* dest, const size_t count) noexcept {
+    if (!is_constant_evaluated()) {
+        simd::memory_zero(dest, count);
+        return;
+    }
     if (dest == nullptr) {
         return;
     }
@@ -248,6 +291,9 @@ NEFORCE_CONSTEXPR14 void memory_zero(T* dest) noexcept {
  */
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 const void* memory_find(const void* dest, const byte_t value,
                                                                   size_t count) noexcept {
+    if (!is_constant_evaluated()) {
+        return simd::memory_find(dest, value, count);
+    }
     if (dest == nullptr) {
         return nullptr;
     }
@@ -271,6 +317,9 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 const void* memory_find(const void* de
  */
 NEFORCE_CONSTEXPR14 const void* memory_find_pattern(const void* data, const size_t data_len, const void* pattern,
                                                     const size_t pattern_len) noexcept {
+    if (!is_constant_evaluated()) {
+        return simd::memory_find_pattern(data, data_len, pattern, pattern_len);
+    }
     if (data == nullptr || pattern == nullptr || data_len == 0 || pattern_len == 0 || pattern_len > data_len) {
         return nullptr;
     }
@@ -505,7 +554,10 @@ constexpr CharT* string_copy_offset(CharT* NEFORCE_RESTRICT dest, const CharT* N
  *          - 零：两个字符串相等
  */
 template <typename CharT>
-NEFORCE_PURE_FUNCTION constexpr int string_compare(const CharT* dest, const CharT* src) noexcept {
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 int string_compare(const CharT* dest, const CharT* src) noexcept {
+    if (!is_constant_evaluated()) {
+        return simd::string_compare(dest, src);
+    }
     if (dest == nullptr && src == nullptr) {
         return 0;
     }
@@ -538,7 +590,11 @@ NEFORCE_PURE_FUNCTION constexpr int string_compare(const CharT* dest, const Char
  * @return 比较结果
  */
 template <typename CharT>
-NEFORCE_PURE_FUNCTION constexpr int string_compare(const CharT* dest, const CharT* src, const size_t count) noexcept {
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 int string_compare(const CharT* dest, const CharT* src,
+                                                             const size_t count) noexcept {
+    if (!is_constant_evaluated()) {
+        return simd::string_compare(dest, src, count);
+    }
     if (dest == nullptr && src == nullptr) {
         return 0;
     }
@@ -657,8 +713,11 @@ NEFORCE_PURE_FUNCTION constexpr int string_compare_ignore_case(const CharT* s1, 
  * @return 字符串长度，不包含终止空字符
  */
 template <typename CharT>
-NEFORCE_PURE_FUNCTION constexpr size_t string_length(const CharT* str) noexcept {
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 size_t string_length(const CharT* str) noexcept {
     static_assert(is_character_v<CharT>, "CharT must be a character");
+    if (!is_constant_evaluated()) {
+        return simd::string_length(str);
+    }
     if (str == nullptr) {
         return 0;
     }
@@ -697,7 +756,10 @@ NEFORCE_PURE_FUNCTION constexpr size_t string_length(const CharT* str, const siz
  * @return 指向首次出现位置的指针，未找到或输入为空时返回空指针
  */
 template <typename CharT>
-NEFORCE_PURE_FUNCTION constexpr const CharT* string_find(const CharT* str, const CharT chr) noexcept {
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 const CharT* string_find(const CharT* str, const CharT chr) noexcept {
+    if (!is_constant_evaluated()) {
+        return simd::string_find(str, chr);
+    }
     if (str == nullptr) {
         return nullptr;
     }
@@ -722,8 +784,11 @@ NEFORCE_PURE_FUNCTION constexpr const CharT* string_find(const CharT* str, const
  * @return 指向首次出现位置的指针
  */
 template <typename CharT>
-NEFORCE_PURE_FUNCTION constexpr const CharT* string_find(const CharT* str, const CharT chr,
-                                                         const size_t count) noexcept {
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 const CharT* string_find(const CharT* str, const CharT chr,
+                                                                   const size_t count) noexcept {
+    if (!is_constant_evaluated()) {
+        return simd::string_find(str, chr, count);
+    }
     if (str == nullptr || count == 0) {
         return nullptr;
     }

@@ -298,7 +298,7 @@ NEFORCE_ALWAYS_INLINE_INLINE int popcount(vec128_t v) noexcept {
     const ::__m128i pop_high = ::_mm_shuffle_epi8(lookup, high_nibble);
     const ::__m128i pop8 = ::_mm_add_epi8(pop_low, pop_high);
     const ::__m128i sums = ::_mm_sad_epu8(pop8, ::_mm_setzero_si128());
-    return ::_mm_extract_epi16(sums, 0) + ::_mm_extract_epi16(sums, 4);
+    return _mm_extract_epi16(sums, 0) + _mm_extract_epi16(sums, 4);
 #elif defined(NEFORCE_SIMD_SSE2)
     const auto* raw = reinterpret_cast<const byte_t*>(&v);
     int total = 0;

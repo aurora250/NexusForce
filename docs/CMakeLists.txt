@@ -44,6 +44,8 @@ add_custom_target(doc
         VERBATIM
 )
 
+set_target_properties(doc PROPERTIES FOLDER "utils")
+
 find_package(Python3 QUIET COMPONENTS Interpreter)
 if(Python3_FOUND)
     add_custom_command(TARGET doc POST_BUILD
@@ -61,6 +63,8 @@ add_custom_target(doc-clean
         COMMAND ${CMAKE_COMMAND} -E remove_directory ${DOXYGEN_OUTPUT_DIR}
         COMMENT "Cleaning documentation output"
 )
+
+set_target_properties(doc-clean PROPERTIES FOLDER "utils")
 
 message(STATUS "Doc Configuration:")
 message(STATUS "Output directory:  ${DOXYGEN_OUTPUT_DIR}")

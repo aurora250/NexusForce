@@ -9,9 +9,9 @@
  */
 
 #include <typeinfo>
-#include <new>
 #include "NeForce/core/exception/exception.hpp"
 #include "NeForce/core/functional/invoke.hpp"
+#include "NeForce/core/memory/new.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**

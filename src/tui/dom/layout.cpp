@@ -655,8 +655,8 @@ namespace {
                         case style::align::stretch: {
                             if (!lines.empty() && extra_cross > 0) {
                                 const int addPerLine = extra_cross / static_cast<int>(lines.size());
-                                for (auto& line: lines) {
-                                    line.line_size += addPerLine;
+                                for (auto& l: lines) {
+                                    l.line_size += addPerLine;
                                 }
                             }
                             break;
@@ -761,11 +761,9 @@ namespace {
                         break;
                     }
                     case style::justify::space_around: {
-                        if (n > 0) {
-                            const int space = free_space / static_cast<int>(n);
-                            justify_offset = space / 2;
-                            adjusted_gap = lp.gap + space;
-                        }
+                        const int space = free_space / static_cast<int>(n);
+                        justify_offset = space / 2;
+                        adjusted_gap = lp.gap + space;
                         break;
                     }
                     case style::justify::start:

@@ -16,3 +16,4 @@ target_link_libraries(NexusForceIntegrationTest PRIVATE GTest::gtest)
 
 enable_testing()
 add_test(NAME NexusForceIntegrationTest COMMAND NexusForceIntegrationTest)
+set_target_properties(NexusForceIntegrationTest PROPERTIES FOLDER "tests")

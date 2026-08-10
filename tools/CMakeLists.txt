@@ -8,6 +8,7 @@ nexusforce_compiler_options(NFRS)
 set_target_properties(NFRS PROPERTIES
     INSTALL_RPATH "$ORIGIN/../${CMAKE_INSTALL_LIBDIR}/Release"
 )
+set_target_properties(NFRS PROPERTIES FOLDER "tools")
 
 install(TARGETS NFRS
         EXPORT NexusForceTargets

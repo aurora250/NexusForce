@@ -9,11 +9,11 @@
  * 支持引用计数、自定义删除器、分配器等功能。
  */
 
-#include <new>
 #include "NeForce/core/algorithm/compare.hpp"
 #include "NeForce/core/async/atomic.hpp"
 #include "NeForce/core/exception/exception.hpp"
 #include "NeForce/core/memory/allocator_traits.hpp"
+#include "NeForce/core/memory/new.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 

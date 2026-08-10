@@ -99,7 +99,7 @@ element table::render() const {
             if (alt_row_) {
                 if (r % 2 == 0 && even_decorator_) {
                     cell = even_decorator_(cell);
-                } else if (r % 2 == 1 && odd_decorator_) {
+                } else if (r % 2 != 0 && odd_decorator_) {
                     cell = odd_decorator_(cell);
                 }
             }

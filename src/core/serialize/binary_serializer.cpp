@@ -306,8 +306,7 @@ reflect::meta_any binary_serializer::deserialize(const byte_t* data, const size_
                     for (uint32_t j = 0; j < elem_count; ++j) {
                         const auto tag = *cursor;
                         ++cursor;
-                        if (tag == 0) {
-                        } else if (tag == 1) {
+                        if (tag == 1) {
                             cursor += sizeof(uint64_t);
                         } else if (tag == 2) {
                             if (cursor + sizeof(uint32_t) <= data_end) {

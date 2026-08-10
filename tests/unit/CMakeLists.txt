@@ -50,3 +50,4 @@ nexusforce_reflect_scan(
     TARGET NexusForceUnitTests
     HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/nfrs_test_data
 )
+set_target_properties(NexusForceUnitTests PROPERTIES FOLDER "tests")

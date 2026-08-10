@@ -810,14 +810,14 @@ public:
 #ifdef NEFORCE_USING_SSO
         const size_type len = other.size();
         if (len < sso_capacity) {
-            traits_type::copy(storage_.short_, other.data(), len);
-            traits_type::assign(storage_.short_ + len, 1, value_type());
+            _NEFORCE memory_copy(storage_.short_, other.data(), len * sizeof(value_type));
+            storage_.short_[len] = value_type();
             size_pair_.value = len;
         } else {
             const size_type cap = other.is_long() ? other.storage_.long_.cap : (len + 1);
             pointer new_ptr = size_pair_.get_base().allocate(cap);
-            traits_type::copy(new_ptr, other.data(), len);
-            traits_type::assign(new_ptr + len, 1, value_type());
+            _NEFORCE memory_copy(new_ptr, other.data(), len * sizeof(value_type));
+            new_ptr[len] = value_type();
 
             storage_.long_.ptr = new_ptr;
             storage_.long_.cap = cap;
@@ -1615,7 +1615,41 @@ public:
      * @param value 要追加的字符
      * @return 自身引用
      */
-    NEFORCE_CONSTEXPR20 basic_string& append(value_type value) { return append(1, value); }
+    NEFORCE_CONSTEXPR20 basic_string& append(value_type value) {
+        NEFORCE_DEBUG_VERIFY(size() + 1 < max_size(), "basic_string::append single char out of ranges.");
+
+#ifdef NEFORCE_USING_SSO
+        if (!is_long() && size() + 1 < sso_buffer_size) {
+            const size_type old_sz = size();
+            storage_.short_[old_sz] = value;
+            size_pair_.value = old_sz + 1;
+            storage_.short_[old_sz + 1] = value_type();
+            return *this;
+        }
+
+        const size_type old_size = size();
+        if (is_long() && storage_.long_.cap >= old_size + 2) {
+            storage_.long_.ptr[old_size] = value;
+            size_pair_.value = (old_size + 1) | long_flag;
+            storage_.long_.ptr[old_size + 1] = value_type();
+            return *this;
+        }
+
+        reallocate(1);
+        pointer p = data();
+        p[old_size] = value;
+        size_pair_.value = (old_size + 1) | (is_long() ? long_flag : 0);
+        p[old_size + 1] = value_type();
+#else
+        if (capacity_pair_.value - size_ < 2) {
+            reallocate(1);
+        }
+        data_[size_] = value;
+        ++size_;
+        data_[size_] = value_type();
+#endif
+        return *this;
+    }
 
     /**
      * @brief 追加另一个字符串的子串

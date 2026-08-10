@@ -19,11 +19,11 @@ NEFORCE_BEGIN_SIMD__
  */
 
 /**
- * @brief 将单字节广播到 128-bit SIMD 向量的全部 16 个位置
+ * @brief 将单 8-bit 值广播到 128-bit SIMD 向量的全部 16 个位置
  * @param c 源字节值
  * @return 所有字节均为 c 的向量
  */
-NEFORCE_ALWAYS_INLINE_INLINE vec128_t fill_byte(byte_t c) noexcept {
+NEFORCE_ALWAYS_INLINE_INLINE vec128_t fill_byte(uint8_t c) noexcept {
 #ifdef NEFORCE_SIMD_SSE2
     return ::_mm_set1_epi8(static_cast<char>(c));
 #elif defined(NEFORCE_SIMD_NEON)
@@ -36,6 +36,65 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t fill_byte(byte_t c) noexcept {
     return result;
 #endif
 }
+
+/**
+ * @brief 将单 16-bit 值广播到 128-bit SIMD 向量的全部 8 个位置
+ * @param v 源值
+ * @return 所有 16-bit 通道均为 v 的向量
+ */
+NEFORCE_ALWAYS_INLINE_INLINE vec128_t fill_i16(const uint16_t v) noexcept {
+#ifdef NEFORCE_SIMD_SSE2
+    return ::_mm_set1_epi16(static_cast<short>(v));
+#elif defined(NEFORCE_SIMD_NEON)
+    return ::vreinterpretq_u8_u16(::vdupq_n_u16(v));
+#else
+    vec128_t result;
+    auto* d = reinterpret_cast<uint16_t*>(result.data);
+    for (int i = 0; i < 8; ++i) {
+        d[i] = v;
+    }
+    return result;
+#endif
+}
+
+/**
+ * @brief 将单 32-bit 值广播到 128-bit SIMD 向量的全部 4 个位置
+ * @param v 源值
+ * @return 所有 32-bit 通道均为 v 的向量
+ */
+NEFORCE_ALWAYS_INLINE_INLINE vec128_t fill_i32(const uint32_t v) noexcept {
+#ifdef NEFORCE_SIMD_SSE2
+    return ::_mm_set1_epi32(static_cast<int>(v));
+#elif defined(NEFORCE_SIMD_NEON)
+    return ::vreinterpretq_u8_u32(::vdupq_n_u32(v));
+#else
+    vec128_t result;
+    auto* d = reinterpret_cast<uint32_t*>(result.data);
+    for (int i = 0; i < 4; ++i) {
+        d[i] = v;
+    }
+    return result;
+#endif
+}
+
+/**
+ * @brief 按类型大小自动选择广播宽度
+ * @tparam T 值类型
+ * @param v 源值
+ * @return 所有通道均为 v 的向量
+ */
+template <typename T>
+NEFORCE_ALWAYS_INLINE_INLINE vec128_t fill_i(const T v) noexcept {
+    static_assert(sizeof(T) <= 4, "fill_i not supports value types upper than 4 bytes");
+    if (sizeof(T) == 1) {
+        return fill_byte(static_cast<byte_t>(v));
+    }
+    if (sizeof(T) == 2) {
+        return fill_i16(static_cast<uint16_t>(v));
+    }
+    return fill_i32(static_cast<uint32_t>(v));
+}
+
 
 /**
  * @brief 非对齐加载 16 字节到 128-bit SIMD 向量

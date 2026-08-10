@@ -56,7 +56,9 @@ foreach(SOURCE_FILE ${TIDY_SOURCES})
     )
 endforeach()
 
-add_custom_target(tidy-check
+add_custom_target(tidy
         DEPENDS ${TIDY_STAMPS}
         COMMENT "Running clang-tidy on ${NUM_TIDY_SOURCES} files..."
 )
+
+set_target_properties(tidy PROPERTIES FOLDER "utils")

@@ -12,7 +12,6 @@
 #include <NeForce/core/utility/variant.hpp>
 #include <gtest/gtest.h>
 using namespace neforce;
-using std::initializer_list;
 
 namespace {
     struct small_type {
@@ -200,7 +199,7 @@ TEST(AnyTest, InPlaceConstructMultipleArgs) {
 }
 
 TEST(AnyTest, InPlaceConstructWithInitializerList) {
-    any a(pass_template_construct_tag<vector<int>>{}, initializer_list<int>{5, 6, 7});
+    any a(pass_template_construct_tag<vector<int>>{}, std::initializer_list<int>{5, 6, 7});
     EXPECT_TRUE(a.has_value());
     auto vec = any_cast<vector<int>>(a);
     EXPECT_EQ(vec, (vector<int>{5, 6, 7}));
@@ -218,7 +217,7 @@ TEST(AnyTest, Emplace) {
 
 TEST(AnyTest, EmplaceWithInitializerList) {
     any a;
-    auto& ref = a.emplace<vector<int>>(initializer_list<int>{8, 9});
+    auto& ref = a.emplace<vector<int>>(std::initializer_list<int>{8, 9});
     EXPECT_TRUE(a.has_value());
     EXPECT_EQ(ref, (vector<int>{8, 9}));
 }
@@ -269,7 +268,7 @@ TEST(AnyTest, MakeAny) {
 }
 
 TEST(AnyTest, MakeAnyWithInitializerList) {
-    auto a = make_any<vector<int>>(initializer_list<int>{10, 11});
+    auto a = make_any<vector<int>>(std::initializer_list<int>{10, 11});
     EXPECT_EQ(any_cast<vector<int>>(a), (vector<int>{10, 11}));
 }
 
@@ -914,7 +913,7 @@ TEST(VariantTest, InPlaceConstruct) {
 }
 
 TEST(VariantTest, InPlaceConstructWithInitializerList) {
-    variant<int, string> v(pass_size_construct_tag<1>{}, initializer_list<char>{'a', 'b', 'c'});
+    variant<int, string> v(pass_size_construct_tag<1>{}, std::initializer_list<char>{'a', 'b', 'c'});
     EXPECT_EQ(v.index(), 1u);
     EXPECT_EQ(v.get<1>(), "abc");
 }
@@ -1167,7 +1166,7 @@ TEST(OptionalTest, InPlaceConstruct) {
 }
 
 TEST(OptionalTest, InPlaceConstructInitList) {
-    optional<vector<int>> op(inplace_construct_tag{}, initializer_list<int>{1, 2, 3});
+    optional<vector<int>> op(inplace_construct_tag{}, std::initializer_list<int>{1, 2, 3});
     EXPECT_EQ(op.value(), (vector<int>{1, 2, 3}));
 }
 
