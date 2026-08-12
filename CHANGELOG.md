@@ -1,19 +1,40 @@
 # CHANGELOG
 
-## [1.0.1] - 2026-08-08
+## [1.0.1] - 2026-08-13
 
 ### 🚀 New Features
 
 - 添加 launder 编译器优化阻止屏障函数
+- 添加 PCLMULQDQ 指令集检测宏 `NEFORCE_SIMD_PCLMUL`
 
 ### 🔧 Improvements
 
-- 依据性能测试优化 memory 操作函数与 basic_string 操作性能
+- basic_string 单字符追加内联化，绕过 traits 层 SIMD 调度，性能提升 2-4 倍
+- basic_string 拷贝构造直连 `memory_copy` 与内联终止符写入
+- `memory_find` / `memory_set` 添加 AVX2 256-bit 宽寄存器路径，单字符查找与填充构造性能大幅提升
+- `memory_copy` / `memory_set` 对小于 16 字节的数据直接内联标量操作，跳过 SIMD 层级判断
+- AES-256 GCM 模式 GHASH 采用 PCLMULQDQ 无进位乘法替代逐位乘法
+- AES-256 解密预计算 InvMixColumns 逆轮密钥，消除每块每轮的 `aesimc` 重复变换
+- AES-256 ECB / CBC 解密 / GCM-CTR 采用 4 块交错加密，隐藏 `aesenc` 指令延迟
+- AES-256 各模式消除逐块栈拷贝与逐字节写回，改为原地处理与 SIMD 批量异或
+- AES-256 标量回退路径改用恒定时间 S-box（GF(2^8) 指数求逆），消除缓存时序侧信道
+- Base64 编解码 SSSE3 路径优化：6-bit 索引分段查表、输出组序修正、尾部走标量循环、解码校验恢复
+- 字符串转义 `escape()` 添加 SSE2 扫描路径，无特殊字符片段直接批量追加
+- JSON 解析器 `skip_space` / `parse_string` 升级 AVX2 256-bit 宽寄存器扫描路径
+- TOML 解析器空白/注释跳过、四种字符串扫描 SIMD 化
+- YAML 解析器空白/缩进/注释跳过、双引号/单引号字符串、纯量/键名/块标量行扫描 SIMD 化
+- `uuid::to_string()` 以单次预分配与十六进制表查找替代 format 引擎调用
 
 ### 🐛 Bug Fixes
 
 - 修复 NFRS 被安装后索引 Release 动态库的方案
 - 修复 Clang 下推断 websocket-deflate 整形符号溢出与 GCC 不同的警告
+- 修复 SIMD `string_length` / `string_find` 跨 16 字节块偏移未累加导致的字符串比较错误
+- 修复 `simd::memory_copy_offset` 尾部循环指针双重偏移导致的内容错乱
+- 修复 `madds_i8x16` SSSE3 路径将有符号操作数当作无符号处理的计算错误
+- 修复 Base64 SSSE3 路径 4 处缺陷：查表索引越界、输出组序反转、尾部字节丢失、解码移位错误与校验缺失
+- 修复 ARM64 等非 x64 架构错误接收 x86 SIMD 编译标志的问题
+- 修复 JSON 解析器字符串扫描控制字符检测使用有符号比较，将 UTF-8 多字节字符误判为控制字符导致 SIMD 快路径失效的问题
 
 ## [1.0.0] - 2026-08-03
 

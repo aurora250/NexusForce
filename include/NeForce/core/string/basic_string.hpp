@@ -1542,7 +1542,7 @@ public:
      * @brief 在末尾插入字符
      * @param value 要插入的字符
      */
-    NEFORCE_CONSTEXPR20 void push_back(value_type value) { append(1, value); }
+    NEFORCE_CONSTEXPR20 void push_back(value_type value) { append(value); }
 
     /**
      * @brief 删除末尾字符
@@ -1571,10 +1571,13 @@ public:
      * @return 自身引用
      */
     NEFORCE_CONSTEXPR20 basic_string& append(size_type n, value_type value) {
-        NEFORCE_DEBUG_VERIFY(size() + n < max_size(), "basic_string append iterator out of ranges.");
         if (n == 0) {
             return *this;
         }
+        if (n == 1) {
+            return append(value);
+        }
+        NEFORCE_DEBUG_VERIFY(size() + n < max_size(), "basic_string append iterator out of ranges.");
 
 #ifdef NEFORCE_USING_SSO
         if (!is_long() && size() + n < sso_buffer_size) {

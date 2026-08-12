@@ -105,78 +105,21 @@ NEFORCE_END_LITERALS__
  * 将字符串中的特殊字符转换为转义序列。
  * 对于不可打印的控制字符（<0x20），转换为Unicode转义。
  */
-NEFORCE_CONSTEXPR20 string escape(const string_view str) {
-    string result;
-    result.reserve(str.length() + str.length() / 4);
-
-    for (const char c: str) {
-        switch (c) {
-            case '\"': {
-                result += "\\\"";
-                break;
-            }
-            case '\'': {
-                result += "\\\'";
-                break;
-            }
-            case '\\': {
-                result += "\\\\";
-                break;
-            }
-            case '\b': {
-                result += "\\b";
-                break;
-            }
-            case '\f': {
-                result += "\\f";
-                break;
-            }
-            case '\n': {
-                result += "\\n";
-                break;
-            }
-            case '\r': {
-                result += "\\r";
-                break;
-            }
-            case '\t': {
-                result += "\\t";
-                break;
-            }
-            case '\v': {
-                result += "\\v";
-                break;
-            }
-            default: {
-                if (static_cast<byte_t>(c) < 0x20) {
-                    result += "\\u";
-                    constexpr char hex[] = "0123456789abcdef";
-                    result += "00";
-                    result += hex[(c >> 4) & 0x0F];
-                    result += hex[c & 0x0F];
-                } else {
-                    result += c;
-                }
-                break;
-            }
-        }
-    }
-    return result;
-}
+string NEFORCE_API escape(string_view str);
 
 /**
  * @brief 转义字符串中的特殊字符
  * @param str 要转义的字符串
  * @return 转义后的字符串
  */
-NEFORCE_CONSTEXPR20 string escape(const string& str) { return escape(str.view()); }
+inline string escape(const string& str) { return escape(str.view()); }
 
 /**
  * @brief 转义C风格字符串中的特殊字符
  * @param str C风格字符串
  * @return 转义后的字符串
  */
-NEFORCE_CONSTEXPR20 string escape(const char* str) { return escape(string_view{str}); }
+inline string escape(const char* str) { return escape(string_view{str}); }
 
 /**
  * @brief 从字符串视图中按分隔符读取一行（字符版本）

@@ -5,20 +5,77 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 void toml_parser::skip_whitespace() noexcept {
-    while (pos_ < len_) {
-        if (is_space(current())) {
-            advance();
+#ifdef NEFORCE_SIMD_AVX2
+    while (pos_ + 32 <= len_) {
+        const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(text_.data() + pos_));
+        ::__m256i ws = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(' '));
+        ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\t')));
+        ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n')));
+        ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\v')));
+        ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\f')));
+        ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\r')));
+        const int mask = ::_mm256_movemask_epi8(ws);
+        if (mask == -1) {
+            advance_bulk(32);
         } else {
-            break;
+            advance_bulk(static_cast<size_t>(countr_zero(static_cast<unsigned>(~mask))));
+            return;
         }
+    }
+#endif
+#ifdef NEFORCE_SIMD_SSE2
+    while (pos_ + 16 <= len_) {
+        const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(text_.data() + pos_));
+        ::__m128i ws = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(' '));
+        ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\t')));
+        ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n')));
+        ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\v')));
+        ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\f')));
+        ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\r')));
+        const int mask = ::_mm_movemask_epi8(ws);
+        if (mask == 0xFFFF) {
+            advance_bulk(16);
+        } else {
+            advance_bulk(static_cast<size_t>(countr_zero(static_cast<unsigned>(~mask))));
+            return;
+        }
+    }
+#endif
+    while (pos_ < len_ && is_space(text_[pos_])) {
+        advance();
     }
 }
 
 void toml_parser::skip_comment() noexcept {
-    if (current() == '#') {
-        while (!eof() && current() != '\n') {
-            advance();
+    if (current() != '#') {
+        return;
+    }
+#ifdef NEFORCE_SIMD_AVX2
+    while (pos_ + 32 <= len_) {
+        const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(text_.data() + pos_));
+        const int mask = ::_mm256_movemask_epi8(::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n')));
+        if (mask == 0) {
+            advance_bulk(32);
+        } else {
+            advance_bulk(static_cast<size_t>(countr_zero(static_cast<unsigned>(mask))));
+            return;
         }
+    }
+#endif
+#ifdef NEFORCE_SIMD_SSE2
+    while (pos_ + 16 <= len_) {
+        const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(text_.data() + pos_));
+        const int mask = ::_mm_movemask_epi8(::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n')));
+        if (mask == 0) {
+            advance_bulk(16);
+        } else {
+            advance_bulk(static_cast<size_t>(countr_zero(static_cast<unsigned>(mask))));
+            return;
+        }
+    }
+#endif
+    while (!eof() && current() != '\n') {
+        advance();
     }
 }
 
@@ -42,6 +99,34 @@ void toml_parser::skip_newlines() noexcept {
 }
 
 void toml_parser::skip_whitespace_no_newline() noexcept {
+#ifdef NEFORCE_SIMD_AVX2
+    while (pos_ + 32 <= len_) {
+        const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(text_.data() + pos_));
+        ::__m256i ws = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(' '));
+        ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\t')));
+        const int mask = ::_mm256_movemask_epi8(ws);
+        if (mask == -1) {
+            advance_bulk(32);
+        } else {
+            advance_bulk(static_cast<size_t>(countr_zero(static_cast<unsigned>(~mask))));
+            return;
+        }
+    }
+#endif
+#ifdef NEFORCE_SIMD_SSE2
+    while (pos_ + 16 <= len_) {
+        const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(text_.data() + pos_));
+        ::__m128i ws = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(' '));
+        ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\t')));
+        const int mask = ::_mm_movemask_epi8(ws);
+        if (mask == 0xFFFF) {
+            advance_bulk(16);
+        } else {
+            advance_bulk(static_cast<size_t>(countr_zero(static_cast<unsigned>(~mask))));
+            return;
+        }
+    }
+#endif
     while (pos_ < len_) {
         const char ch = text_[pos_];
         if (ch == ' ' || ch == '\t') {
@@ -78,6 +163,49 @@ void toml_parser::advance() noexcept {
         }
         pos_++;
     }
+}
+
+void toml_parser::advance_bulk(const size_t count) noexcept {
+    size_t newlines = 0;
+    size_t last_nl = 0;
+    size_t i = 0;
+
+#ifdef NEFORCE_SIMD_AVX2
+    while (i + 32 <= count) {
+        const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(text_.data() + pos_ + i));
+        const int mask = ::_mm256_movemask_epi8(::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n')));
+        if (mask != 0) {
+            newlines += static_cast<size_t>(popcount64(static_cast<unsigned>(mask)));
+            last_nl = i + static_cast<size_t>(31 - countl_zero(static_cast<unsigned>(mask)));
+        }
+        i += 32;
+    }
+#endif
+#ifdef NEFORCE_SIMD_SSE2
+    while (i + 16 <= count) {
+        const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(text_.data() + pos_ + i));
+        const int mask = ::_mm_movemask_epi8(::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n')));
+        if (mask != 0) {
+            newlines += static_cast<size_t>(popcount64(static_cast<unsigned>(mask)));
+            last_nl = i + static_cast<size_t>(31 - countl_zero(static_cast<unsigned>(mask)));
+        }
+        i += 16;
+    }
+#endif
+    for (; i < count; ++i) {
+        if (text_[pos_ + i] == '\n') {
+            newlines++;
+            last_nl = i;
+        }
+    }
+
+    if (newlines > 0) {
+        line_ += newlines;
+        column_ = count - (last_nl + 1);
+    } else {
+        column_ += count;
+    }
+    pos_ += count;
 }
 
 bool toml_parser::expect(const char ch) {
@@ -145,12 +273,62 @@ unique_ptr<toml_string> toml_parser::parse_basic_string() {
     expect('"');
     string result;
 
-    while (!eof() && current() != '"') {
-        if (current() == '\n') {
+    while (pos_ < len_) {
+#ifdef NEFORCE_SIMD_AVX2
+        while (pos_ + 32 <= len_) {
+            const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(text_.data() + pos_));
+            const ::__m256i is_quote = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('"'));
+            const ::__m256i is_bs = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\\'));
+            const ::__m256i is_nl = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
+            const ::__m256i special = ::_mm256_or_si256(::_mm256_or_si256(is_quote, is_bs), is_nl);
+            const int mask = ::_mm256_movemask_epi8(special);
+            if (mask == 0) {
+                result.append(text_.data() + pos_, 32);
+                column_ += 32;
+                pos_ += 32;
+            } else {
+                const int advance_len = countr_zero(static_cast<unsigned>(mask));
+                if (advance_len > 0) {
+                    result.append(text_.data() + pos_, static_cast<size_t>(advance_len));
+                    column_ += advance_len;
+                    pos_ += static_cast<size_t>(advance_len);
+                }
+                break;
+            }
+        }
+#endif
+#ifdef NEFORCE_SIMD_SSE2
+        while (pos_ + 16 <= len_) {
+            const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(text_.data() + pos_));
+            const ::__m128i is_quote = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('"'));
+            const ::__m128i is_bs = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\\'));
+            const ::__m128i is_nl = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
+            const ::__m128i special = ::_mm_or_si128(::_mm_or_si128(is_quote, is_bs), is_nl);
+            const int mask = ::_mm_movemask_epi8(special);
+            if (mask == 0) {
+                result.append(text_.data() + pos_, 16);
+                column_ += 16;
+                pos_ += 16;
+            } else {
+                const int advance_len = countr_zero(static_cast<unsigned>(mask));
+                if (advance_len > 0) {
+                    result.append(text_.data() + pos_, static_cast<size_t>(advance_len));
+                    column_ += advance_len;
+                    pos_ += static_cast<size_t>(advance_len);
+                }
+                break;
+            }
+        }
+#endif
+        const char c = text_[pos_];
+        if (c == '"') {
+            advance();
+            return make_unique<toml_string>(move(result), toml_string::Basic);
+        }
+        if (c == '\n') {
             throw_parse_error("Unescaped newline in basic string");
         }
-
-        if (current() == '\\') {
+        if (c == '\\') {
             advance();
             if (eof()) {
                 throw_parse_error("Unexpected end in string escape");
@@ -200,10 +378,10 @@ unique_ptr<toml_string> toml_parser::parse_basic_string() {
                     throw_parse_error(R"(Invalid escape sequence: \)"_s + current());
             }
             advance();
-        } else {
-            result += current();
-            advance();
+            continue;
         }
+        result += c;
+        advance();
     }
 
     expect('"');
@@ -214,11 +392,60 @@ unique_ptr<toml_string> toml_parser::parse_literal_string() {
     expect('\'');
     string result;
 
-    while (!eof() && current() != '\'') {
-        if (current() == '\n') {
+    while (pos_ < len_) {
+#ifdef NEFORCE_SIMD_AVX2
+        while (pos_ + 32 <= len_) {
+            const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(text_.data() + pos_));
+            const ::__m256i is_quote = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\''));
+            const ::__m256i is_nl = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
+            const ::__m256i special = ::_mm256_or_si256(is_quote, is_nl);
+            const int mask = ::_mm256_movemask_epi8(special);
+            if (mask == 0) {
+                result.append(text_.data() + pos_, 32);
+                column_ += 32;
+                pos_ += 32;
+            } else {
+                const int advance_len = countr_zero(static_cast<unsigned>(mask));
+                if (advance_len > 0) {
+                    result.append(text_.data() + pos_, static_cast<size_t>(advance_len));
+                    column_ += advance_len;
+                    pos_ += static_cast<size_t>(advance_len);
+                }
+                break;
+            }
+        }
+#endif
+#ifdef NEFORCE_SIMD_SSE2
+        while (pos_ + 16 <= len_) {
+            const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(text_.data() + pos_));
+            const ::__m128i is_quote = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\''));
+            const ::__m128i is_nl = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
+            const ::__m128i special = ::_mm_or_si128(is_quote, is_nl);
+            const int mask = ::_mm_movemask_epi8(special);
+            if (mask == 0) {
+                result.append(text_.data() + pos_, 16);
+                column_ += 16;
+                pos_ += 16;
+            } else {
+                const int advance_len = countr_zero(static_cast<unsigned>(mask));
+                if (advance_len > 0) {
+                    result.append(text_.data() + pos_, static_cast<size_t>(advance_len));
+                    column_ += advance_len;
+                    pos_ += static_cast<size_t>(advance_len);
+                }
+                break;
+            }
+        }
+#endif
+        const char c = text_[pos_];
+        if (c == '\'') {
+            advance();
+            return make_unique<toml_string>(move(result), toml_string::Literal);
+        }
+        if (c == '\n') {
             throw_parse_error("Unescaped newline in literal string");
         }
-        result += current();
+        result += c;
         advance();
     }
 
@@ -240,15 +467,61 @@ unique_ptr<toml_string> toml_parser::parse_multiline_basic_string() {
 
     string result;
 
-    while (!eof()) {
-        if (current() == '"' && peek() == '"' && peek(2) == '"') {
+    while (pos_ < len_) {
+#ifdef NEFORCE_SIMD_AVX2
+        while (pos_ + 32 <= len_) {
+            const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(text_.data() + pos_));
+            const ::__m256i is_quote = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('"'));
+            const ::__m256i is_bs = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\\'));
+            const ::__m256i special = ::_mm256_or_si256(is_quote, is_bs);
+            const int mask = ::_mm256_movemask_epi8(special);
+            if (mask == 0) {
+                result.append(text_.data() + pos_, 32);
+                advance_bulk(32);
+            } else {
+                const int advance_len = countr_zero(static_cast<unsigned>(mask));
+                if (advance_len > 0) {
+                    result.append(text_.data() + pos_, static_cast<size_t>(advance_len));
+                    advance_bulk(static_cast<size_t>(advance_len));
+                }
+                break;
+            }
+        }
+#endif
+#ifdef NEFORCE_SIMD_SSE2
+        while (pos_ + 16 <= len_) {
+            const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(text_.data() + pos_));
+            const ::__m128i is_quote = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('"'));
+            const ::__m128i is_bs = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\\'));
+            const ::__m128i special = ::_mm_or_si128(is_quote, is_bs);
+            const int mask = ::_mm_movemask_epi8(special);
+            if (mask == 0) {
+                result.append(text_.data() + pos_, 16);
+                advance_bulk(16);
+            } else {
+                const int advance_len = countr_zero(static_cast<unsigned>(mask));
+                if (advance_len > 0) {
+                    result.append(text_.data() + pos_, static_cast<size_t>(advance_len));
+                    advance_bulk(static_cast<size_t>(advance_len));
+                }
+                break;
+            }
+        }
+#endif
+        const char c = text_[pos_];
+        if (c == '"') {
+            if (peek() == '"' && peek(2) == '"') {
+                advance();
+                advance();
+                advance();
+                break;
+            }
+            result += '"';
             advance();
-            advance();
-            advance();
-            break;
+            continue;
         }
 
-        if (current() == '\\') {
+        if (c == '\\') {
             advance();
             if (eof()) {
                 throw_parse_error("Unexpected end in string escape");
@@ -318,10 +591,10 @@ unique_ptr<toml_string> toml_parser::parse_multiline_basic_string() {
                     throw_parse_error(R"(Invalid escape sequence: \)"_s + current());
             }
             advance();
-        } else {
-            result += current();
-            advance();
+            continue;
         }
+        result += c;
+        advance();
     }
 
     return make_unique<toml_string>(move(result), toml_string::MultiBasic);
@@ -341,14 +614,49 @@ unique_ptr<toml_string> toml_parser::parse_multiline_literal_string() {
 
     string result;
 
-    while (!eof()) {
-        if (current() == '\'' && peek() == '\'' && peek(2) == '\'') {
+    while (pos_ < len_) {
+#ifdef NEFORCE_SIMD_AVX2
+        while (pos_ + 32 <= len_) {
+            const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(text_.data() + pos_));
+            const int mask = ::_mm256_movemask_epi8(::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\'')));
+            if (mask == 0) {
+                result.append(text_.data() + pos_, 32);
+                advance_bulk(32);
+            } else {
+                const int advance_len = countr_zero(static_cast<unsigned>(mask));
+                if (advance_len > 0) {
+                    result.append(text_.data() + pos_, static_cast<size_t>(advance_len));
+                    advance_bulk(static_cast<size_t>(advance_len));
+                }
+                break;
+            }
+        }
+#endif
+#ifdef NEFORCE_SIMD_SSE2
+        while (pos_ + 16 <= len_) {
+            const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(text_.data() + pos_));
+            const int mask = ::_mm_movemask_epi8(::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\'')));
+            if (mask == 0) {
+                result.append(text_.data() + pos_, 16);
+                advance_bulk(16);
+            } else {
+                const int advance_len = countr_zero(static_cast<unsigned>(mask));
+                if (advance_len > 0) {
+                    result.append(text_.data() + pos_, static_cast<size_t>(advance_len));
+                    advance_bulk(static_cast<size_t>(advance_len));
+                }
+                break;
+            }
+        }
+#endif
+        const char c = text_[pos_];
+        if (c == '\'' && peek() == '\'' && peek(2) == '\'') {
             advance();
             advance();
             advance();
             break;
         }
-        result += current();
+        result += c;
         advance();
     }
 

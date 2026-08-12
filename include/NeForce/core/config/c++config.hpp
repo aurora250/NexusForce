@@ -330,6 +330,11 @@
 #        define NEFORCE_SIMD_AES_NI 1 ///< Intel AES-NI指令集可用
 #    endif
 #endif
+#if defined(NEFORCE_ARCH_X86)
+#    if defined(__PCLMUL__) || defined(_MSC_VER) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#        define NEFORCE_SIMD_PCLMUL 1 ///< PCLMULQDQ指令集可用
+#    endif
+#endif
 #if defined(NEFORCE_ARCH_ARM)
 #    if defined(__ARM_FEATURE_AES) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 #        define NEFORCE_SIMD_AES_ARM 1 ///< ARM AES指令集可用

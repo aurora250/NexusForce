@@ -1,4 +1,3 @@
-#include <NeForce/core/string/format.hpp>
 #include <NeForce/core/time/clocks.hpp>
 #include <NeForce/core/utility/hexadecimal.hpp>
 #include <NeForce/core/utility/uuid.hpp>
@@ -100,12 +99,18 @@ optional<uint64_t> uuid::timestamp_v7() const noexcept {
 }
 
 string uuid::to_string() const {
-    auto to_hex = [](byte_t b) { return format("{:02x}", b); };
+    constexpr char hex_digits[] = "0123456789abcdef";
+    string result;
+    result.reserve(36);
 
-    return format("{}{}{}{}-{}{}-{}{}-{}{}-{}{}{}{}{}{}", to_hex(data_[0]), to_hex(data_[1]), to_hex(data_[2]),
-                  to_hex(data_[3]), to_hex(data_[4]), to_hex(data_[5]), to_hex(data_[6]), to_hex(data_[7]),
-                  to_hex(data_[8]), to_hex(data_[9]), to_hex(data_[10]), to_hex(data_[11]), to_hex(data_[12]),
-                  to_hex(data_[13]), to_hex(data_[14]), to_hex(data_[15]));
+    for (size_t i = 0; i < 16; ++i) {
+        if (i == 4 || i == 6 || i == 8 || i == 10) {
+            result += '-';
+        }
+        result += hex_digits[data_[i] >> 4];
+        result += hex_digits[data_[i] & 0x0F];
+    }
+    return result;
 }
 
 uuid uuid::v4() noexcept {

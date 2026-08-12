@@ -26,6 +26,49 @@ void yaml_parser::advance() noexcept {
     pos_++;
 }
 
+void yaml_parser::advance_bulk(const size_t count) noexcept {
+    size_t newlines = 0;
+    size_t last_nl = 0;
+    size_t i = 0;
+
+#ifdef NEFORCE_SIMD_AVX2
+    while (i + 32 <= count) {
+        const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(yaml_.data() + pos_ + i));
+        const int mask = ::_mm256_movemask_epi8(::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n')));
+        if (mask != 0) {
+            newlines += static_cast<size_t>(popcount64(static_cast<unsigned>(mask)));
+            last_nl = i + static_cast<size_t>(31 - countl_zero(static_cast<unsigned>(mask)));
+        }
+        i += 32;
+    }
+#endif
+#ifdef NEFORCE_SIMD_SSE2
+    while (i + 16 <= count) {
+        const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(yaml_.data() + pos_ + i));
+        const int mask = ::_mm_movemask_epi8(::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n')));
+        if (mask != 0) {
+            newlines += static_cast<size_t>(popcount64(static_cast<unsigned>(mask)));
+            last_nl = i + static_cast<size_t>(31 - countl_zero(static_cast<unsigned>(mask)));
+        }
+        i += 16;
+    }
+#endif
+    for (; i < count; ++i) {
+        if (yaml_[pos_ + i] == '\n') {
+            newlines++;
+            last_nl = i;
+        }
+    }
+
+    if (newlines > 0) {
+        line_ += newlines;
+        column_ = count - (last_nl + 1);
+    } else {
+        column_ += count;
+    }
+    pos_ += count;
+}
+
 bool yaml_parser::match(const char ch) noexcept {
     if (current() == ch) {
         advance();
@@ -46,16 +89,73 @@ bool yaml_parser::is_whitespace(const char ch) const noexcept { return ch == ' '
 bool yaml_parser::is_newline(const char ch) const noexcept { return ch == '\n' || ch == '\r'; }
 
 void yaml_parser::skip_whitespace_inline() noexcept {
+#ifdef NEFORCE_SIMD_AVX2
+    while (pos_ + 32 <= len_) {
+        const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(yaml_.data() + pos_));
+        ::__m256i ws = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(' '));
+        ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\t')));
+        const int mask = ::_mm256_movemask_epi8(ws);
+        if (mask == -1) {
+            advance_bulk(32);
+        } else {
+            advance_bulk(static_cast<size_t>(countr_zero(static_cast<unsigned>(~mask))));
+            return;
+        }
+    }
+#endif
+#ifdef NEFORCE_SIMD_SSE2
+    while (pos_ + 16 <= len_) {
+        const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(yaml_.data() + pos_));
+        ::__m128i ws = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(' '));
+        ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\t')));
+        const int mask = ::_mm_movemask_epi8(ws);
+        if (mask == 0xFFFF) {
+            advance_bulk(16);
+        } else {
+            advance_bulk(static_cast<size_t>(countr_zero(static_cast<unsigned>(~mask))));
+            return;
+        }
+    }
+#endif
     while (!eof() && is_whitespace(current())) {
         advance();
     }
 }
 
 void yaml_parser::skip_comment() noexcept {
-    if (current() == '#') {
-        while (!eof() && !is_newline(current())) {
-            advance();
+    if (current() != '#') {
+        return;
+    }
+#ifdef NEFORCE_SIMD_AVX2
+    while (pos_ + 32 <= len_) {
+        const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(yaml_.data() + pos_));
+        ::__m256i nl = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
+        nl = ::_mm256_or_si256(nl, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\r')));
+        const int mask = ::_mm256_movemask_epi8(nl);
+        if (mask == 0) {
+            advance_bulk(32);
+        } else {
+            advance_bulk(static_cast<size_t>(countr_zero(static_cast<unsigned>(mask))));
+            return;
         }
+    }
+#endif
+#ifdef NEFORCE_SIMD_SSE2
+    while (pos_ + 16 <= len_) {
+        const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(yaml_.data() + pos_));
+        ::__m128i nl = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
+        nl = ::_mm_or_si128(nl, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\r')));
+        const int mask = ::_mm_movemask_epi8(nl);
+        if (mask == 0) {
+            advance_bulk(16);
+        } else {
+            advance_bulk(static_cast<size_t>(countr_zero(static_cast<unsigned>(mask))));
+            return;
+        }
+    }
+#endif
+    while (!eof() && !is_newline(current())) {
+        advance();
     }
 }
 
@@ -111,6 +211,32 @@ void yaml_parser::skip_whitespace_and_comments() {
 size_t yaml_parser::peek_indent() const noexcept {
     size_t indent = 0;
     size_t p = pos_;
+#ifdef NEFORCE_SIMD_AVX2
+    while (p + 32 <= len_) {
+        const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(yaml_.data() + p));
+        const int mask = ::_mm256_movemask_epi8(::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(' ')));
+        if (mask == -1) {
+            indent += 32;
+            p += 32;
+        } else {
+            indent += static_cast<size_t>(countr_zero(static_cast<unsigned>(~mask)));
+            return indent;
+        }
+    }
+#endif
+#ifdef NEFORCE_SIMD_SSE2
+    while (p + 16 <= len_) {
+        const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(yaml_.data() + p));
+        const int mask = ::_mm_movemask_epi8(::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(' ')));
+        if (mask == 0xFFFF) {
+            indent += 16;
+            p += 16;
+        } else {
+            indent += static_cast<size_t>(countr_zero(static_cast<unsigned>(~mask)));
+            return indent;
+        }
+    }
+#endif
     while (p < len_ && yaml_[p] == ' ') {
         ++indent;
         ++p;
@@ -120,6 +246,36 @@ size_t yaml_parser::peek_indent() const noexcept {
 
 size_t yaml_parser::skip_indent() {
     size_t indent = 0;
+#ifdef NEFORCE_SIMD_AVX2
+    while (pos_ + 32 <= len_) {
+        const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(yaml_.data() + pos_));
+        const int mask = ::_mm256_movemask_epi8(::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(' ')));
+        if (mask == -1) {
+            indent += 32;
+            advance_bulk(32);
+        } else {
+            const size_t spaces = static_cast<size_t>(countr_zero(static_cast<unsigned>(~mask)));
+            indent += spaces;
+            advance_bulk(spaces);
+            break;
+        }
+    }
+#endif
+#ifdef NEFORCE_SIMD_SSE2
+    while (pos_ + 16 <= len_) {
+        const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(yaml_.data() + pos_));
+        const int mask = ::_mm_movemask_epi8(::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(' ')));
+        if (mask == 0xFFFF) {
+            indent += 16;
+            advance_bulk(16);
+        } else {
+            const size_t spaces = static_cast<size_t>(countr_zero(static_cast<unsigned>(~mask)));
+            indent += spaces;
+            advance_bulk(spaces);
+            break;
+        }
+    }
+#endif
     while (!eof() && current() == ' ') {
         indent++;
         advance();
@@ -507,8 +663,68 @@ shared_ptr<yaml_string> yaml_parser::parse_plain_string() {
         throw_parse_error("Plain string cannot start with indicator");
     }
 
-    while (!eof()) {
-        const char ch = current();
+    while (pos_ < len_) {
+#ifdef NEFORCE_SIMD_AVX2
+        while (pos_ + 32 <= len_) {
+            const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(yaml_.data() + pos_));
+            ::__m256i special = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
+            special = ::_mm256_or_si256(special, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\r')));
+            special = ::_mm256_or_si256(special, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('#')));
+            special = ::_mm256_or_si256(special, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(':')));
+            if (in_flow_context_) {
+                special = ::_mm256_or_si256(special, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(',')));
+                special = ::_mm256_or_si256(special, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('[')));
+                special = ::_mm256_or_si256(special, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(']')));
+                special = ::_mm256_or_si256(special, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('{')));
+                special = ::_mm256_or_si256(special, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('}')));
+            }
+            const int mask = ::_mm256_movemask_epi8(special);
+            if (mask == 0) {
+                result.append(yaml_.data() + pos_, 32);
+                column_ += 32;
+                pos_ += 32;
+            } else {
+                const int advance_len = countr_zero(static_cast<unsigned>(mask));
+                if (advance_len > 0) {
+                    result.append(yaml_.data() + pos_, static_cast<size_t>(advance_len));
+                    column_ += advance_len;
+                    pos_ += static_cast<size_t>(advance_len);
+                }
+                break;
+            }
+        }
+#endif
+#ifdef NEFORCE_SIMD_SSE2
+        while (pos_ + 16 <= len_) {
+            const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(yaml_.data() + pos_));
+            ::__m128i special = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
+            special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\r')));
+            special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('#')));
+            special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(':')));
+            if (in_flow_context_) {
+                special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(',')));
+                special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('[')));
+                special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(']')));
+                special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('{')));
+                special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('}')));
+            }
+            const int mask = ::_mm_movemask_epi8(special);
+            if (mask == 0) {
+                result.append(yaml_.data() + pos_, 16);
+                column_ += 16;
+                pos_ += 16;
+            } else {
+                const int advance_len = countr_zero(static_cast<unsigned>(mask));
+                if (advance_len > 0) {
+                    result.append(yaml_.data() + pos_, static_cast<size_t>(advance_len));
+                    column_ += advance_len;
+                    pos_ += static_cast<size_t>(advance_len);
+                }
+                break;
+            }
+        }
+#endif
+        const char ch = yaml_[pos_];
 
         if (is_newline(ch) || ch == '#') {
             break;
@@ -539,22 +755,70 @@ shared_ptr<yaml_string> yaml_parser::parse_single_quoted_string() {
     expect('\'');
     string result;
 
-    while (!eof()) {
-        if (current() == '\'') {
+    while (pos_ < len_) {
+#ifdef NEFORCE_SIMD_AVX2
+        while (pos_ + 32 <= len_) {
+            const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(yaml_.data() + pos_));
+            const ::__m256i is_quote = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\''));
+            const ::__m256i is_nl = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
+            const ::__m256i is_cr = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\r'));
+            const ::__m256i special = ::_mm256_or_si256(is_quote, ::_mm256_or_si256(is_nl, is_cr));
+            const int mask = ::_mm256_movemask_epi8(special);
+            if (mask == 0) {
+                result.append(yaml_.data() + pos_, 32);
+                column_ += 32;
+                pos_ += 32;
+            } else {
+                const int advance_len = countr_zero(static_cast<unsigned>(mask));
+                if (advance_len > 0) {
+                    result.append(yaml_.data() + pos_, static_cast<size_t>(advance_len));
+                    column_ += advance_len;
+                    pos_ += static_cast<size_t>(advance_len);
+                }
+                break;
+            }
+        }
+#endif
+#ifdef NEFORCE_SIMD_SSE2
+        while (pos_ + 16 <= len_) {
+            const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(yaml_.data() + pos_));
+            const ::__m128i is_quote = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\''));
+            const ::__m128i is_nl = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
+            const ::__m128i is_cr = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\r'));
+            const ::__m128i special = ::_mm_or_si128(is_quote, ::_mm_or_si128(is_nl, is_cr));
+            const int mask = ::_mm_movemask_epi8(special);
+            if (mask == 0) {
+                result.append(yaml_.data() + pos_, 16);
+                column_ += 16;
+                pos_ += 16;
+            } else {
+                const int advance_len = countr_zero(static_cast<unsigned>(mask));
+                if (advance_len > 0) {
+                    result.append(yaml_.data() + pos_, static_cast<size_t>(advance_len));
+                    column_ += advance_len;
+                    pos_ += static_cast<size_t>(advance_len);
+                }
+                break;
+            }
+        }
+#endif
+        const char c = yaml_[pos_];
+        if (c == '\'') {
             advance();
             if (current() == '\'') {
                 result += '\'';
                 advance();
-            } else {
-                break;
+                continue;
             }
-        } else if (is_newline(current())) {
+            break;
+        }
+        if (is_newline(c)) {
             result += ' ';
             skip_to_next_line();
-        } else {
-            result += current();
-            advance();
+            continue;
         }
+        result += c;
+        advance();
     }
 
     return make_shared<yaml_string>(move(result), yaml_string::SingleQuoted);
@@ -564,8 +828,62 @@ shared_ptr<yaml_string> yaml_parser::parse_double_quoted_string() {
     expect('"');
     string result;
 
-    while (!eof() && current() != '"') {
-        if (current() == '\\') {
+    while (pos_ < len_) {
+#ifdef NEFORCE_SIMD_AVX2
+        while (pos_ + 32 <= len_) {
+            const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(yaml_.data() + pos_));
+            const ::__m256i is_quote = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('"'));
+            const ::__m256i is_bs = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\\'));
+            const ::__m256i is_nl = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
+            const ::__m256i is_cr = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\r'));
+            const ::__m256i special =
+                    ::_mm256_or_si256(::_mm256_or_si256(is_quote, is_bs), ::_mm256_or_si256(is_nl, is_cr));
+            const int mask = ::_mm256_movemask_epi8(special);
+            if (mask == 0) {
+                result.append(yaml_.data() + pos_, 32);
+                column_ += 32;
+                pos_ += 32;
+            } else {
+                const int advance_len = countr_zero(static_cast<unsigned>(mask));
+                if (advance_len > 0) {
+                    result.append(yaml_.data() + pos_, static_cast<size_t>(advance_len));
+                    column_ += advance_len;
+                    pos_ += static_cast<size_t>(advance_len);
+                }
+                break;
+            }
+        }
+#endif
+#ifdef NEFORCE_SIMD_SSE2
+        while (pos_ + 16 <= len_) {
+            const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(yaml_.data() + pos_));
+            const ::__m128i is_quote = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('"'));
+            const ::__m128i is_bs = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\\'));
+            const ::__m128i is_nl = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
+            const ::__m128i is_cr = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\r'));
+            const ::__m128i special = ::_mm_or_si128(::_mm_or_si128(is_quote, is_bs), ::_mm_or_si128(is_nl, is_cr));
+            const int mask = ::_mm_movemask_epi8(special);
+            if (mask == 0) {
+                result.append(yaml_.data() + pos_, 16);
+                column_ += 16;
+                pos_ += 16;
+            } else {
+                const int advance_len = countr_zero(static_cast<unsigned>(mask));
+                if (advance_len > 0) {
+                    result.append(yaml_.data() + pos_, static_cast<size_t>(advance_len));
+                    column_ += advance_len;
+                    pos_ += static_cast<size_t>(advance_len);
+                }
+                break;
+            }
+        }
+#endif
+        const char c = yaml_[pos_];
+        if (c == '"') {
+            advance();
+            return make_shared<yaml_string>(move(result), yaml_string::DoubleQuoted);
+        }
+        if (c == '\\') {
             advance();
             if (eof()) {
                 throw_parse_error("Unexpected end of string");
@@ -666,14 +984,16 @@ shared_ptr<yaml_string> yaml_parser::parse_double_quoted_string() {
                     throw_parse_error(string("Invalid escape sequence: \\") + current());
                 }
             }
-        } else if (is_newline(current())) {
+            continue;
+        }
+        if (is_newline(c)) {
             result += ' ';
             skip_to_next_line();
             skip_whitespace_inline();
-        } else {
-            result += current();
-            advance();
+            continue;
         }
+        result += c;
+        advance();
     }
 
     expect('"');
@@ -784,8 +1104,54 @@ string yaml_parser::parse_multiline_string(const bool is_literal) {
         }
 
         string line;
-        while (!eof() && !is_newline(current())) {
-            line += current();
+        while (pos_ < len_) {
+#ifdef NEFORCE_SIMD_AVX2
+            while (pos_ + 32 <= len_) {
+                const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(yaml_.data() + pos_));
+                ::__m256i nl = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
+                nl = ::_mm256_or_si256(nl, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\r')));
+                const int mask = ::_mm256_movemask_epi8(nl);
+                if (mask == 0) {
+                    line.append(yaml_.data() + pos_, 32);
+                    column_ += 32;
+                    pos_ += 32;
+                } else {
+                    const int advance_len = countr_zero(static_cast<unsigned>(mask));
+                    if (advance_len > 0) {
+                        line.append(yaml_.data() + pos_, static_cast<size_t>(advance_len));
+                        column_ += advance_len;
+                        pos_ += static_cast<size_t>(advance_len);
+                    }
+                    break;
+                }
+            }
+#endif
+#ifdef NEFORCE_SIMD_SSE2
+            while (pos_ + 16 <= len_) {
+                const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(yaml_.data() + pos_));
+                ::__m128i nl = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
+                nl = ::_mm_or_si128(nl, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\r')));
+                const int mask = ::_mm_movemask_epi8(nl);
+                if (mask == 0) {
+                    line.append(yaml_.data() + pos_, 16);
+                    column_ += 16;
+                    pos_ += 16;
+                } else {
+                    const int advance_len = countr_zero(static_cast<unsigned>(mask));
+                    if (advance_len > 0) {
+                        line.append(yaml_.data() + pos_, static_cast<size_t>(advance_len));
+                        column_ += advance_len;
+                        pos_ += static_cast<size_t>(advance_len);
+                    }
+                    break;
+                }
+            }
+#endif
+            const char ch = yaml_[pos_];
+            if (is_newline(ch)) {
+                break;
+            }
+            line += ch;
             advance();
         }
         lines.push_back(line);
@@ -1643,8 +2009,64 @@ string yaml_parser::parse_key() {
 
 string yaml_parser::parse_plain_key() {
     string key;
-    while (!eof()) {
-        const char ch = current();
+    while (pos_ < len_) {
+#ifdef NEFORCE_SIMD_AVX2
+        while (pos_ + 32 <= len_) {
+            const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(yaml_.data() + pos_));
+            ::__m256i special = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
+            special = ::_mm256_or_si256(special, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\r')));
+            special = ::_mm256_or_si256(special, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(':')));
+            special = ::_mm256_or_si256(special, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('#')));
+            special = ::_mm256_or_si256(special, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(',')));
+            special = ::_mm256_or_si256(special, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('[')));
+            special = ::_mm256_or_si256(special, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(']')));
+            special = ::_mm256_or_si256(special, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('{')));
+            special = ::_mm256_or_si256(special, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('}')));
+            const int mask = ::_mm256_movemask_epi8(special);
+            if (mask == 0) {
+                key.append(yaml_.data() + pos_, 32);
+                column_ += 32;
+                pos_ += 32;
+            } else {
+                const int advance_len = countr_zero(static_cast<unsigned>(mask));
+                if (advance_len > 0) {
+                    key.append(yaml_.data() + pos_, static_cast<size_t>(advance_len));
+                    column_ += advance_len;
+                    pos_ += static_cast<size_t>(advance_len);
+                }
+                break;
+            }
+        }
+#endif
+#ifdef NEFORCE_SIMD_SSE2
+        while (pos_ + 16 <= len_) {
+            const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(yaml_.data() + pos_));
+            ::__m128i special = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
+            special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\r')));
+            special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(':')));
+            special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('#')));
+            special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(',')));
+            special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('[')));
+            special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(']')));
+            special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('{')));
+            special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('}')));
+            const int mask = ::_mm_movemask_epi8(special);
+            if (mask == 0) {
+                key.append(yaml_.data() + pos_, 16);
+                column_ += 16;
+                pos_ += 16;
+            } else {
+                const int advance_len = countr_zero(static_cast<unsigned>(mask));
+                if (advance_len > 0) {
+                    key.append(yaml_.data() + pos_, static_cast<size_t>(advance_len));
+                    column_ += advance_len;
+                    pos_ += static_cast<size_t>(advance_len);
+                }
+                break;
+            }
+        }
+#endif
+        const char ch = yaml_[pos_];
         if (ch == ':' && (peek(1) == ' ' || is_newline(peek(1)) || peek(1) == '\0' || is_flow_indicator(peek(1)))) {
             break;
         }

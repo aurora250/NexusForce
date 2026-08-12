@@ -6,11 +6,25 @@
 #include <NeForce/core/utility/packages.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-// TODO: SIMD structural index — detect all {}[]:,"\ in one pass for token-level acceleration
-// TODO: SIMD digit scanning in parse_number() — classify 16 digits at once for faster number token extraction
-
-
 void json_parser::skip_space() noexcept {
+#ifdef NEFORCE_SIMD_AVX2
+    while (pos_ + 32 <= len_) {
+        const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(text_.data() + pos_));
+        ::__m256i ws = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(' '));
+        ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\t')));
+        ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n')));
+        ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\v')));
+        ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\f')));
+        ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\r')));
+        const int mask = ::_mm256_movemask_epi8(ws);
+        if (mask == -1) {
+            pos_ += 32;
+        } else {
+            pos_ += static_cast<size_t>(countr_zero(static_cast<unsigned>(~mask)));
+            return;
+        }
+    }
+#endif
 #ifdef NEFORCE_SIMD_SSE2
     while (pos_ + 16 <= len_) {
         const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(text_.data() + pos_));
@@ -49,12 +63,36 @@ unique_ptr<json_string> json_parser::parse_string() {
     string result;
 
     while (pos_ < len_) {
+#ifdef NEFORCE_SIMD_AVX2
+        while (pos_ + 32 <= len_) {
+            const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(text_.data() + pos_));
+            const ::__m256i is_quote = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('"'));
+            const ::__m256i is_bs = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\\'));
+            const ::__m256i is_ctrl = ::_mm256_cmpeq_epi8(::_mm256_min_epu8(v, ::_mm256_set1_epi8(0x1F)), v);
+            const ::__m256i special = ::_mm256_or_si256(::_mm256_or_si256(is_quote, is_bs), is_ctrl);
+            const int mask = ::_mm256_movemask_epi8(special);
+            if (mask == 0) {
+                result.append(text_.data() + pos_, 32);
+                pos_ += 32;
+            } else {
+                const int advance = countr_zero(static_cast<unsigned>(mask));
+                if (advance > 0) {
+                    result.append(text_.data() + pos_, static_cast<size_t>(advance));
+                    pos_ += static_cast<size_t>(advance);
+                }
+                break;
+            }
+        }
+        if (pos_ >= len_) {
+            break;
+        }
+#endif
 #ifdef NEFORCE_SIMD_SSE2
         while (pos_ + 16 <= len_) {
             const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(text_.data() + pos_));
             const ::__m128i is_quote = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('"'));
             const ::__m128i is_bs = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\\'));
-            const ::__m128i is_ctrl = ::_mm_cmpgt_epi8(::_mm_set1_epi8(0x1F), v);
+            const ::__m128i is_ctrl = ::_mm_cmpeq_epi8(::_mm_min_epu8(v, ::_mm_set1_epi8(0x1F)), v);
             const ::__m128i special = ::_mm_or_si128(::_mm_or_si128(is_quote, is_bs), is_ctrl);
             const int mask = ::_mm_movemask_epi8(special);
             if (mask == 0) {

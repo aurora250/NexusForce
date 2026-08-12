@@ -131,6 +131,12 @@ private:
     void advance() noexcept;
 
     /**
+     * @brief 批量前进多个字符
+     * @param count 前进的字符数
+     */
+    void advance_bulk(size_t count) noexcept;
+
+    /**
      * @brief 期望指定字符
      * @param ch 期望的字符
      * @return 是否成功匹配

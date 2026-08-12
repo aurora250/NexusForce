@@ -428,9 +428,8 @@ NEFORCE_ALWAYS_INLINE_INLINE void* memory_copy_offset(void* dest, const void* sr
     }
     for (size_t i = 0; i < count; ++i) {
         d[i] = s[i];
-        ++d;
     }
-    return d;
+    return d + count;
 }
 
 /**
@@ -753,15 +752,17 @@ NEFORCE_PURE_FUNCTION NEFORCE_ALWAYS_INLINE_INLINE size_t string_length(const Ch
     const auto* p = reinterpret_cast<const byte_t*>(str);
     const vec128_t zero = simd::fill_i(CharT(0));
     const int stride = static_cast<int>(sizeof(CharT));
+    size_t char_offset = 0;
 
     while (true) {
         const vec128_t v = loadu_si128(p);
         const vec128_t eq = inner::match_lanes<sizeof(CharT)>(v, zero);
         const int mask = to_bitmask(eq);
         if (mask != 0) {
-            return static_cast<size_t>(countr_zero(static_cast<unsigned>(mask)) / stride);
+            return char_offset + static_cast<size_t>(countr_zero(static_cast<unsigned>(mask)) / stride);
         }
         p += 16;
+        char_offset += 16 / stride;
     }
 }
 
@@ -784,6 +785,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_ALWAYS_INLINE_INLINE const CharT* string_find(cons
     const vec128_t target = simd::fill_i(chr);
     const vec128_t zero = simd::fill_i(CharT(0));
     const int stride = static_cast<int>(sizeof(CharT));
+    size_t char_offset = 0;
 
     while (true) {
         const vec128_t v = loadu_si128(p);
@@ -793,13 +795,13 @@ NEFORCE_PURE_FUNCTION NEFORCE_ALWAYS_INLINE_INLINE const CharT* string_find(cons
         if (mask_zero != 0) {
             const int first_null_bit = countr_zero(static_cast<unsigned>(mask_zero));
             if ((mask_target & (1 << first_null_bit)) != 0) {
-                return str + (first_null_bit / stride);
+                return str + char_offset + (first_null_bit / stride);
             }
             mask_target &= (1 << first_null_bit) - 1;
         }
 
         if (mask_target != 0) {
-            return str + (countr_zero(static_cast<unsigned>(mask_target)) / stride);
+            return str + char_offset + (countr_zero(static_cast<unsigned>(mask_target)) / stride);
         }
 
         if (mask_zero != 0) {
@@ -807,6 +809,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_ALWAYS_INLINE_INLINE const CharT* string_find(cons
         }
 
         p += 16;
+        char_offset += 16 / stride;
     }
 }
 
@@ -849,7 +852,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_ALWAYS_INLINE_INLINE const CharT* string_find(cons
             const int first_null_bit = countr_zero(static_cast<unsigned>(mask_zero));
             if (first_null_bit < remaining) {
                 if ((mask_target & (1 << first_null_bit)) != 0) {
-                    return str + (first_null_bit / stride);
+                    return str + (offset / stride) + (first_null_bit / stride);
                 }
                 mask_target &= (1 << first_null_bit) - 1;
             }

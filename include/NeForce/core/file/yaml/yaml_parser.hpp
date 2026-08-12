@@ -168,6 +168,12 @@ private:
     void advance() noexcept;
 
     /**
+     * @brief 批量前进多个字符并更新行列号
+     * @param count 前进的字符数
+     */
+    void advance_bulk(size_t count) noexcept;
+
+    /**
      * @brief 尝试匹配当前字符
      * @param ch 期望匹配的字符
      * @return 匹配成功返回 true 并前进，否则返回 false

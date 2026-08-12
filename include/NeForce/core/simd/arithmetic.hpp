@@ -286,11 +286,19 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t mulhi_i16(vec128_t a, vec128_t b) noexcept
  * @param a 左操作数（16×i8）
  * @param b 右操作数（16×i8）
  * @return [a[0]*b[0]+a[1]*b[1], a[2]*b[2]+a[3]*b[3], ...]（8×i16）
- * @note 功能等价于 SSE 的 pmaddwd 概念但作用于 8→16 位
  */
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t madds_i8x16(vec128_t a, vec128_t b) noexcept {
 #if defined(__SSSE3__) || defined(NEFORCE_SIMD_AVX2)
-    return ::_mm_maddubs_epi16(a, b);
+    const ::__m128i zero = ::_mm_setzero_si128();
+    const ::__m128i sign_a = ::_mm_cmpgt_epi8(zero, a);
+    const ::__m128i sign_b = ::_mm_cmpgt_epi8(zero, b);
+    const ::__m128i a_lo = ::_mm_unpacklo_epi8(a, sign_a);
+    const ::__m128i a_hi = ::_mm_unpackhi_epi8(a, sign_a);
+    const ::__m128i b_lo = ::_mm_unpacklo_epi8(b, sign_b);
+    const ::__m128i b_hi = ::_mm_unpackhi_epi8(b, sign_b);
+    const ::__m128i p_lo = ::_mm_mullo_epi16(a_lo, b_lo);
+    const ::__m128i p_hi = ::_mm_mullo_epi16(a_hi, b_hi);
+    return ::_mm_hadd_epi16(p_lo, p_hi);
 #elif defined(NEFORCE_SIMD_SSE2)
     const auto* sa = reinterpret_cast<const int8_t*>(&a);
     const auto* sb = reinterpret_cast<const int8_t*>(&b);
