@@ -1,28 +1,6 @@
 #include <NeForce/core/string/string.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-#ifndef NEFORCE_COMPILER_CLANG_CL
-
-template class basic_string_view<char>;
-template class basic_string_view<wchar_t>;
-#    ifdef NEFORCE_STANDARD_20
-template class basic_string_view<char8_t>;
-#    endif
-template class basic_string_view<char16_t>;
-template class basic_string_view<char32_t>;
-
-
-template class basic_string<char>;
-template class basic_string<wchar_t>;
-#    ifdef NEFORCE_STANDARD_20
-template class basic_string<char8_t>;
-#    endif
-template class basic_string<char16_t>;
-template class basic_string<char32_t>;
-
-#endif
-
-
 string escape(const string_view str) {
     string result;
     result.reserve(str.length() + str.length() / 4);

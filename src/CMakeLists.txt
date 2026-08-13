@@ -214,6 +214,14 @@ if(NEXUSFORCE_USING_INTEL_TSX)
     target_compile_definitions(NexusForce PUBLIC NEFORCE_USING_INTEL_TSX)
 endif()
 
+if(NEXUSFORCE_USING_AES_NI)
+    target_compile_definitions(NexusForce PUBLIC NEFORCE_USING_AES_NI)
+endif()
+
+if(NEXUSFORCE_USING_PCLMUL)
+    target_compile_definitions(NexusForce PUBLIC NEFORCE_USING_PCLMUL)
+endif()
+
 if(NEXUSFORCE_USING_SQLCIPHER)
     target_compile_definitions(NexusForce PUBLIC NEFORCE_USING_SQLCIPHER)
 endif()

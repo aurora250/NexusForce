@@ -894,8 +894,7 @@ auto when_all(Tasks... tasks) -> task<tuple<typename Tasks::promise_type::value_
  * 执行异步操作，失败时根据策略重试。
  */
 template <typename T, typename Factory>
-task<T> retry(Factory factory, const size_t max_attempts,
-              const function<bool(const exception_ptr&)>& should_retry = {}) {
+task<T> retry(Factory factory, const size_t max_attempts, function<bool(const exception_ptr&)> should_retry = {}) {
     static_assert(_NEFORCE is_invocable_r_v<task<T>, Factory>, "Factory must return task<T>");
 
     exception_ptr last_exception;

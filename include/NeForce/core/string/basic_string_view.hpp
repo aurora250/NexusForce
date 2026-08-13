@@ -1138,16 +1138,6 @@ template <typename CharT, typename Traits>
 constexpr size_t basic_string_view<CharT, Traits>::npos;
 #endif
 
-#ifndef NEFORCE_COMPILER_CLANG_CL
-extern template class basic_string_view<char>;
-extern template class basic_string_view<wchar_t>;
-#    ifdef NEFORCE_STANDARD_20
-extern template class basic_string_view<char8_t>;
-#    endif
-extern template class basic_string_view<char16_t>;
-extern template class basic_string_view<char32_t>;
-#endif
-
 /** @} */ // StringView
 
 NEFORCE_END_NAMESPACE__

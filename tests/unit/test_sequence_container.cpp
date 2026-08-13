@@ -454,7 +454,8 @@ TEST(ArrayTest, GetRvalue) {
 
 TEST(ArrayTest, GetConstRvalue) {
     auto arr = []() -> const array<int, 3> { return {10, 20, 30}; };
-    const int&& val = get<0>(move(arr()));
+    const array<int, 3>&& held = arr();
+    const int&& val = get<0>(move(held));
     EXPECT_EQ(val, 10);
 }
 

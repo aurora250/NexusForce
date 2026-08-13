@@ -1572,7 +1572,7 @@ TEST(TimerScheduler, ImmediateTask) {
     EXPECT_EQ(done.get_future().wait_for(500_ms), future_status::ready);
 }
 
-TEST(TimerScheduler, DestructorStopsThread) {
+TEST(TimerScheduler, DestructorStopsThread) { // may block
     {
         steady_scheduler sched;
         sched.add_task(steady_clock::now() + 1_h, [] {});
@@ -2891,10 +2891,11 @@ TEST(TaskVoid, GetResult) {
 
 TEST(TaskVoid, CoAwaitCompletion) {
     bool completed = false;
-    auto t = [&completed]() -> task<void> {
+    auto coro = [&completed]() -> task<void> {
         completed = true;
         co_return;
-    }();
+    };
+    auto t = coro();
     t.get();
     EXPECT_TRUE(completed);
 }

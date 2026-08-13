@@ -63,12 +63,11 @@ namespace {
     }
 
     byte_t AES256_inv_sbox_ct(byte_t x) {
-        // inv S(x) = gf_inv(x ^ rotl2 ^ rotl5 ^ rotl7 ^ 0x05)
-        x ^= static_cast<byte_t>((x << 2) | (x >> 6));
-        x ^= static_cast<byte_t>((x << 5) | (x >> 3));
-        x ^= static_cast<byte_t>((x << 7) | (x >> 1));
-        x ^= 0x05;
-        return AES256_gf_inv(x);
+        // inv S(x) = gf_inv(rotl1(x) ^ rotl3(x) ^ rotl6(x) ^ 0x05)
+        const auto r1 = static_cast<byte_t>((x << 1) | (x >> 7));
+        const auto r3 = static_cast<byte_t>((x << 3) | (x >> 5));
+        const auto r6 = static_cast<byte_t>((x << 6) | (x >> 2));
+        return AES256_gf_inv(static_cast<byte_t>(r1 ^ r3 ^ r6 ^ 0x05));
     }
 
     constexpr byte_t AES256_rcon[15] = {0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80,
@@ -226,17 +225,21 @@ namespace {
         ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(dst), state);
 
 #elif defined(NEFORCE_SIMD_AES_ARM)
+        // AESE adds the round key before the nonlinear SubBytes, unlike the
+        // standard AES round (AddRoundKey after MixColumns), so the round
+        // keys are shifted one position: full rounds use keys 0..12, the
+        // final AESE uses key 13 and key 14 is XORed separately.
         ::uint8x16_t state = ::vld1q_u8(src);
 
-        state = ::veorq_u8(state, ::vld1q_u8(reinterpret_cast<const uint8_t*>(expanded_key)));
-
-        for (int round = 1; round < 14; ++round) {
+        for (int round = 0; round < 13; ++round) {
             state = ::vaeseq_u8(state, ::vld1q_u8(reinterpret_cast<const uint8_t*>(
                                                expanded_key + static_cast<ptrdiff_t>(round * 16))));
             state = ::vaesmcq_u8(state);
         }
 
         state = ::vaeseq_u8(
+                state, ::vld1q_u8(reinterpret_cast<const uint8_t*>(expanded_key + static_cast<ptrdiff_t>(13 * 16))));
+        state = ::veorq_u8(
                 state, ::vld1q_u8(reinterpret_cast<const uint8_t*>(expanded_key + static_cast<ptrdiff_t>(14 * 16))));
 
         ::vst1q_u8(dst, state);
@@ -279,18 +282,26 @@ namespace {
         ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(dst), state);
 
 #elif defined(NEFORCE_SIMD_AES_ARM)
+        // AESD adds the round key before the nonlinear InvSubBytes while the
+        // standard inverse round adds it before InvMixColumns, so each full
+        // round key is InvMixColumns-transformed (AESIMC) on the fly and the
+        // keys are shifted one position: the first round uses raw key 14,
+        // full rounds use keys 13..2 and key 0 is XORed separately.
         ::uint8x16_t state = ::vld1q_u8(src);
 
-        state = ::veorq_u8(state, ::vld1q_u8(reinterpret_cast<const uint8_t*>(inv_expanded_key +
-                                                                              static_cast<ptrdiff_t>(14 * 16))));
+        state = ::vaesdq_u8(state, ::vld1q_u8(reinterpret_cast<const uint8_t*>(inv_expanded_key +
+                                                                               static_cast<ptrdiff_t>(14 * 16))));
+        state = ::vaesimcq_u8(state);
 
-        for (int round = 13; round >= 1; --round) {
-            state = ::vaesdq_u8(state, ::vld1q_u8(reinterpret_cast<const uint8_t*>(
-                                               inv_expanded_key + static_cast<ptrdiff_t>(round * 16))));
+        for (int round = 13; round >= 2; --round) {
+            state = ::vaesdq_u8(state, ::vaesimcq_u8(::vld1q_u8(reinterpret_cast<const uint8_t*>(
+                                               inv_expanded_key + static_cast<ptrdiff_t>(round * 16)))));
             state = ::vaesimcq_u8(state);
         }
 
-        state = ::vaesdq_u8(state, ::vld1q_u8(reinterpret_cast<const uint8_t*>(inv_expanded_key)));
+        state = ::vaesdq_u8(state, ::vaesimcq_u8(::vld1q_u8(reinterpret_cast<const uint8_t*>(
+                                           inv_expanded_key + static_cast<ptrdiff_t>(16)))));
+        state = ::veorq_u8(state, ::vld1q_u8(reinterpret_cast<const uint8_t*>(inv_expanded_key)));
 
         ::vst1q_u8(dst, state);
 

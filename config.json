@@ -31,6 +31,8 @@
   "feature": {
     "sso": true,
     "intel-tsx": false,
+    "aes-ni": true,
+    "pclmul": true,
     "sqlcipher": true,
     "io_uring": true
   },
@@ -40,5 +42,10 @@
     "benchmarks": true,
     "docs": true
   },
-  "simd": "AVX2"
+  "simd": {
+    "x64": "AVX2",
+    "aarch64": "BASELINE",
+    "riscv64": "BASELINE",
+    "loongarch64": "BASELINE"
+  }
 }

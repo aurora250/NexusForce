@@ -34,12 +34,21 @@ string(JSON CONFIG_USING_INTEL_TSX   GET ${JSON_CONTENT} feature intel-tsx)
 string(JSON CONFIG_USING_SQLCIPHER   GET ${JSON_CONTENT} feature sqlcipher)
 string(JSON CONFIG_USING_IO_URING    GET ${JSON_CONTENT} feature io_uring)
 
+# Missing keys default to ON: keeps AES-NI/PCLMUL enabled on Linux/GCC by
+# default, aligned with the MSVC-always-available assumption.
+string(JSON CONFIG_USING_AES_NI ERROR_VARIABLE _config_aes_ni_error GET ${JSON_CONTENT} feature aes-ni)
+if(_config_aes_ni_error)
+    set(CONFIG_USING_AES_NI ON)
+endif()
+string(JSON CONFIG_USING_PCLMUL ERROR_VARIABLE _config_pclmul_error GET ${JSON_CONTENT} feature pclmul)
+if(_config_pclmul_error)
+    set(CONFIG_USING_PCLMUL ON)
+endif()
+
 string(JSON CONFIG_BUILD_TESTS       GET ${JSON_CONTENT} build tests)
 string(JSON CONFIG_BUILD_EXAMPLES    GET ${JSON_CONTENT} build examples)
 string(JSON CONFIG_BUILD_BENCHMARKS  GET ${JSON_CONTENT} build benchmarks)
 string(JSON CONFIG_BUILD_DOCS        GET ${JSON_CONTENT} build docs)
-
-string(JSON CONFIG_SIMD_LEVEL        GET ${JSON_CONTENT} simd)
 
 
 
@@ -108,6 +117,22 @@ else()
     message(FATAL_ERROR "NexusForce: unsupported target architecture")
 endif()
 
+include(cmake/NexusForceCompilerOptions.cmake)
+
+string(JSON CONFIG_SIMD_TYPE ERROR_VARIABLE _config_simd_type_error TYPE ${JSON_CONTENT} simd)
+if(_config_simd_type_error)
+    message(FATAL_ERROR "config.json: missing \"simd\" entry")
+elseif(CONFIG_SIMD_TYPE STREQUAL "STRING")
+    string(JSON CONFIG_SIMD_LEVEL GET ${JSON_CONTENT} simd)
+elseif(CONFIG_SIMD_TYPE STREQUAL "OBJECT")
+    string(JSON CONFIG_SIMD_LEVEL ERROR_VARIABLE _config_simd_arch_error GET ${JSON_CONTENT} simd ${NEXUSFORCE_ARCH})
+    if(_config_simd_arch_error)
+        message(FATAL_ERROR "config.json: \"simd\" has no entry for architecture \"${NEXUSFORCE_ARCH}\"")
+    endif()
+else()
+    message(FATAL_ERROR "config.json: \"simd\" must be a string or a per-architecture object")
+endif()
+
 set(VCPKG_TARGET_TRIPLET ${NEXUSFORCE_VCPKG_TRIPLET} CACHE STRING "vcpkg triplet")
 
 set(CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY OFF)
@@ -149,6 +174,8 @@ option(NEXUSFORCE_USING_SSO         "Using basic_string SSO"             ${CONFI
 option(NEXUSFORCE_USING_INTEL_TSX   "Using Intel TSX"                    ${CONFIG_USING_INTEL_TSX})
 option(NEXUSFORCE_USING_SQLCIPHER   "Using SQLCipher"                    ${CONFIG_USING_SQLCIPHER})
 option(NEXUSFORCE_USING_IO_URING    "Using io uring"                     ${CONFIG_USING_IO_URING})
+option(NEXUSFORCE_USING_AES_NI      "Using AES-NI / AES crypto"          ${CONFIG_USING_AES_NI})
+option(NEXUSFORCE_USING_PCLMUL      "Using PCLMULQDQ / PMULL"            ${CONFIG_USING_PCLMUL})
 
 option(NEXUSFORCE_BUILD_TESTS       "Build unit tests"                   ${CONFIG_BUILD_TESTS})
 option(NEXUSFORCE_BUILD_EXAMPLES    "Build example programs"             ${CONFIG_BUILD_EXAMPLES})
@@ -162,8 +189,17 @@ else()
     set(NEXUSFORCE_SIMD_LEVEL_DEFAULT "AUTO")
 endif()
 
-set(NEXUSFORCE_SIMD_LEVEL "${NEXUSFORCE_SIMD_LEVEL_DEFAULT}" CACHE STRING "SIMD instruction set level (AUTO, SSE2, AVX, AVX2, AVX512)" FORCE)
-set_property(CACHE NEXUSFORCE_SIMD_LEVEL PROPERTY STRINGS AUTO SSE2 AVX AVX2 AVX512)
+# FORCE keeps config.json authoritative; a command-line
+# -DNEXUSFORCE_SIMD_LEVEL=... is therefore not honored.
+set(NEXUSFORCE_SIMD_LEVEL "${NEXUSFORCE_SIMD_LEVEL_DEFAULT}" CACHE STRING "SIMD level for ${NEXUSFORCE_ARCH}" FORCE)
+_nexusforce_arch_levels(_simd_levels ${NEXUSFORCE_ARCH})
+set_property(CACHE NEXUSFORCE_SIMD_LEVEL PROPERTY STRINGS ${_simd_levels})
+if(NOT NEXUSFORCE_SIMD_LEVEL IN_LIST _simd_levels)
+    list(JOIN _simd_levels ", " _simd_levels_joined)
+    message(FATAL_ERROR
+            "NEXUSFORCE_SIMD_LEVEL='${NEXUSFORCE_SIMD_LEVEL}' is not valid for ${NEXUSFORCE_ARCH}. "
+            "Valid levels: ${_simd_levels_joined}")
+endif()
 
 
 option(NEXUSFORCE_FORMAT            "Enable clang-format code formatting"   ON)
@@ -190,6 +226,8 @@ message(STATUS "  NEXUSFORCE_USING_SSO:           ${NEXUSFORCE_USING_SSO}")
 message(STATUS "  NEXUSFORCE_USING_INTEL_TSX:     ${NEXUSFORCE_USING_INTEL_TSX}")
 message(STATUS "  NEXUSFORCE_USING_SQLCIPHER:     ${NEXUSFORCE_USING_SQLCIPHER}")
 message(STATUS "  NEXUSFORCE_USING_IO_URING:      ${NEXUSFORCE_USING_IO_URING}")
+message(STATUS "  NEXUSFORCE_USING_AES_NI:        ${NEXUSFORCE_USING_AES_NI}")
+message(STATUS "  NEXUSFORCE_USING_PCLMUL:        ${NEXUSFORCE_USING_PCLMUL}")
 message(STATUS "")
 message(STATUS "  NEXUSFORCE_BUILD_TESTS:         ${NEXUSFORCE_BUILD_TESTS}")
 message(STATUS "  NEXUSFORCE_BUILD_EXAMPLES:      ${NEXUSFORCE_BUILD_EXAMPLES}")
@@ -254,6 +292,8 @@ set(PACKAGE_VERSION_VARS
         NEXUSFORCE_USING_INTEL_TSX
         NEXUSFORCE_USING_SQLCIPHER
         NEXUSFORCE_USING_IO_URING
+        NEXUSFORCE_USING_AES_NI
+        NEXUSFORCE_USING_PCLMUL
 
         NEXUSFORCE_SQLCIPHER_LINKED
         NEXUSFORCE_URING_LINKED

@@ -254,7 +254,7 @@ size_t yaml_parser::skip_indent() {
             indent += 32;
             advance_bulk(32);
         } else {
-            const size_t spaces = static_cast<size_t>(countr_zero(static_cast<unsigned>(~mask)));
+            const auto spaces = static_cast<size_t>(countr_zero(static_cast<unsigned>(~mask)));
             indent += spaces;
             advance_bulk(spaces);
             break;
@@ -269,7 +269,7 @@ size_t yaml_parser::skip_indent() {
             indent += 16;
             advance_bulk(16);
         } else {
-            const size_t spaces = static_cast<size_t>(countr_zero(static_cast<unsigned>(~mask)));
+            const auto spaces = static_cast<size_t>(countr_zero(static_cast<unsigned>(~mask)));
             indent += spaces;
             advance_bulk(spaces);
             break;

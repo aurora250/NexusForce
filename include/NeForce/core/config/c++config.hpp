@@ -326,12 +326,13 @@
  */
 
 #if defined(NEFORCE_ARCH_X86)
-#    if defined(__AES__) || defined(_MSC_VER) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#    if defined(__AES__) || (defined(_MSC_VER) && defined(NEFORCE_USING_AES_NI)) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 #        define NEFORCE_SIMD_AES_NI 1 ///< Intel AES-NI指令集可用
 #    endif
 #endif
 #if defined(NEFORCE_ARCH_X86)
-#    if defined(__PCLMUL__) || defined(_MSC_VER) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#    if defined(__PCLMUL__) || (defined(_MSC_VER) && defined(NEFORCE_USING_PCLMUL)) || \
+            defined(NEXUSFORCE_ENABLE_DOXYGEN)
 #        define NEFORCE_SIMD_PCLMUL 1 ///< PCLMULQDQ指令集可用
 #    endif
 #endif

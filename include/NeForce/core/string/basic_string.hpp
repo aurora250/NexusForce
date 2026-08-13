@@ -3350,17 +3350,6 @@ template <typename CharT, typename Traits, typename Alloc>
 constexpr size_t basic_string<CharT, Traits, Alloc>::npos;
 #endif
 
-
-#ifndef NEFORCE_COMPILER_CLANG_CL
-extern template class basic_string<char>;
-extern template class basic_string<wchar_t>;
-#    ifdef NEFORCE_STANDARD_20
-extern template class basic_string<char8_t>;
-#    endif
-extern template class basic_string<char16_t>;
-extern template class basic_string<char32_t>;
-#endif
-
 /** @} */ // String
 
 NEFORCE_END_NAMESPACE__
