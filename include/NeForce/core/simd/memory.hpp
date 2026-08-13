@@ -562,7 +562,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void* memory_set(void* dest, const byte_t value, si
         count -= 32;
     }
 #endif
-    const vec128_t pattern = fill_byte(value);
+    const vec128_t pattern = fill_i8(value);
 
     while (count >= 16) {
         storeu_si128(d, pattern);
@@ -586,7 +586,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void memory_zero(void* dest, const size_t count) no
     }
 
     auto* d = static_cast<byte_t*>(dest);
-    const vec128_t zero = fill_byte(0);
+    const vec128_t zero = fill_i8(0);
     size_t remaining = count;
 
     while (remaining >= 16) {
@@ -666,7 +666,7 @@ NEFORCE_ALWAYS_INLINE_INLINE const void* memory_find_pattern(const void* data, c
 
     const byte_t first_byte = pattern_ptr[0];
     const size_t last_possible = data_len - pattern_len + 1;
-    const vec128_t target = fill_byte(first_byte);
+    const vec128_t target = fill_i8(first_byte);
 
     size_t pos = 0;
     const byte_t* search_start = data_ptr;

@@ -597,9 +597,12 @@
 #ifdef NEFORCE_STANDARD_14
 #    define NEFORCE_DEPRECATED [[deprecated]]
 #    define NEFORCE_DEPRECATED_FOR(MSG) [[deprecated(MSG)]]
+#    define NEFORCE_DEPRECATED_VERSION(TARGET, VERSION, INSTEAD) \
+        [[deprecated(TARGET " will be removed after " VERSION ", using " INSTEAD " instead")]]
 #else
 #    define NEFORCE_DEPRECATED
 #    define NEFORCE_DEPRECATED_FOR(MSG)
+#    define NEFORCE_DEPRECATED_VERSION(TARGET, VERSION, INSTEAD)
 #endif
 
 

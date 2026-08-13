@@ -84,9 +84,9 @@ jobs:
             -DNEXUSFORCE_BUILD_DOCS=OFF \
             -DNEXUSFORCE_BUILD_TESTS=OFF
 
-      - name: Run clang-tidy (tidy-check target)
+      - name: Run clang-tidy
         run: |
-          cmake --build ${{ github.workspace }}/build --target tidy-check
+          cmake --build ${{ github.workspace }}/build --target tidy
 
       - name: Upload report artifact
         if: always()

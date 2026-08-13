@@ -34,7 +34,7 @@ TEST_F(SimdUtilTest, Vec512fSizeIs64) { EXPECT_EQ(sizeof(simd::vec512f_t), 64); 
 TEST_F(SimdUtilTest, Vec512dSizeIs64) { EXPECT_EQ(sizeof(simd::vec512d_t), 64); }
 
 TEST_F(SimdUtilTest, FillByteAllEqual) {
-    simd::vec128_t v = simd::fill_byte(0x42);
+    simd::vec128_t v = simd::fill_i8(0x42);
     const byte_t* bytes = reinterpret_cast<const byte_t*>(&v);
     for (int i = 0; i < 16; ++i) {
         EXPECT_EQ(bytes[i], 0x42);
@@ -42,7 +42,7 @@ TEST_F(SimdUtilTest, FillByteAllEqual) {
 }
 
 TEST_F(SimdUtilTest, FillByteZero) {
-    simd::vec128_t v = simd::fill_byte(0);
+    simd::vec128_t v = simd::fill_i8(0);
     const byte_t* bytes = reinterpret_cast<const byte_t*>(&v);
     for (int i = 0; i < 16; ++i) {
         EXPECT_EQ(bytes[i], 0);
@@ -50,7 +50,7 @@ TEST_F(SimdUtilTest, FillByteZero) {
 }
 
 TEST_F(SimdUtilTest, FillByteMax) {
-    simd::vec128_t v = simd::fill_byte(0xFF);
+    simd::vec128_t v = simd::fill_i8(0xFF);
     const byte_t* bytes = reinterpret_cast<const byte_t*>(&v);
     for (int i = 0; i < 16; ++i) {
         EXPECT_EQ(bytes[i], 0xFF);
@@ -58,7 +58,7 @@ TEST_F(SimdUtilTest, FillByteMax) {
 }
 
 TEST_F(SimdUtilTest, FillByteHighBitSet) {
-    simd::vec128_t v = simd::fill_byte(0x80);
+    simd::vec128_t v = simd::fill_i8(0x80);
     const byte_t* bytes = reinterpret_cast<const byte_t*>(&v);
     for (int i = 0; i < 16; ++i) {
         EXPECT_EQ(bytes[i], 0x80);
@@ -84,8 +84,8 @@ TEST_F(SimdUtilTest, LoadUnalignedOffsetPointer) {
 }
 
 TEST_F(SimdUtilTest, MatchBytesIdenticalVectors) {
-    simd::vec128_t a = simd::fill_byte(0x55);
-    simd::vec128_t b = simd::fill_byte(0x55);
+    simd::vec128_t a = simd::fill_i8(0x55);
+    simd::vec128_t b = simd::fill_i8(0x55);
     simd::vec128_t result = simd::match_bytes(a, b);
     const byte_t* bytes = reinterpret_cast<const byte_t*>(&result);
     for (int i = 0; i < 16; ++i) {
@@ -94,8 +94,8 @@ TEST_F(SimdUtilTest, MatchBytesIdenticalVectors) {
 }
 
 TEST_F(SimdUtilTest, MatchBytesDifferentVectors) {
-    simd::vec128_t a = simd::fill_byte(0x55);
-    simd::vec128_t b = simd::fill_byte(0xAA);
+    simd::vec128_t a = simd::fill_i8(0x55);
+    simd::vec128_t b = simd::fill_i8(0xAA);
     simd::vec128_t result = simd::match_bytes(a, b);
     const byte_t* bytes = reinterpret_cast<const byte_t*>(&result);
     for (int i = 0; i < 16; ++i) {
@@ -123,13 +123,13 @@ TEST_F(SimdUtilTest, MatchBytesPartialMatch) {
 }
 
 TEST_F(SimdUtilTest, ToBitmaskAllZeros) {
-    simd::vec128_t v = simd::fill_byte(0x00);
+    simd::vec128_t v = simd::fill_i8(0x00);
     int mask = simd::to_bitmask(v);
     EXPECT_EQ(mask, 0);
 }
 
 TEST_F(SimdUtilTest, ToBitmaskAllHighBits) {
-    simd::vec128_t v = simd::fill_byte(0x80);
+    simd::vec128_t v = simd::fill_i8(0x80);
     int mask = simd::to_bitmask(v);
     EXPECT_EQ(mask, 0xFFFF);
 }
@@ -149,16 +149,16 @@ TEST_F(SimdUtilTest, ToBitmaskBitsSetAbove7) {
 }
 
 TEST_F(SimdUtilTest, FillThenMatchThenToBitmask) {
-    simd::vec128_t a = simd::fill_byte(0x7F);
-    simd::vec128_t b = simd::fill_byte(0x7F);
+    simd::vec128_t a = simd::fill_i8(0x7F);
+    simd::vec128_t b = simd::fill_i8(0x7F);
     simd::vec128_t matched = simd::match_bytes(a, b);
     int mask = simd::to_bitmask(matched);
     EXPECT_EQ(mask, 0xFFFF);
 }
 
 TEST_F(SimdUtilTest, FillThenMatchDifferentThenToBitmask) {
-    simd::vec128_t a = simd::fill_byte(0x42);
-    simd::vec128_t b = simd::fill_byte(0x43);
+    simd::vec128_t a = simd::fill_i8(0x42);
+    simd::vec128_t b = simd::fill_i8(0x43);
     simd::vec128_t matched = simd::match_bytes(a, b);
     int mask = simd::to_bitmask(matched);
     EXPECT_EQ(mask, 0);
@@ -179,7 +179,7 @@ TEST_F(SimdUtilTest, LoadAndMatchAtVariousOffsets) {
 }
 
 TEST_F(SimdUtilTest, ContainsByteFound) {
-    simd::vec128_t v = simd::fill_byte(0x00);
+    simd::vec128_t v = simd::fill_i8(0x00);
     const byte_t b = byte_t{0x00};
     v = simd::load_unaligned(&b);
     byte_t data[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x7F, 0, 0};
@@ -188,7 +188,7 @@ TEST_F(SimdUtilTest, ContainsByteFound) {
 }
 
 TEST_F(SimdUtilTest, ContainsByteNotFound) {
-    simd::vec128_t v = simd::fill_byte(0x42);
+    simd::vec128_t v = simd::fill_i8(0x42);
     EXPECT_FALSE(simd::contains_byte(v, 0x00));
 }
 
@@ -217,7 +217,7 @@ TEST_F(SimdUtilTest, FindFirstByteAtZero) {
 }
 
 TEST_F(SimdUtilTest, FindFirstByteNotFound) {
-    simd::vec128_t v = simd::fill_byte(0x42);
+    simd::vec128_t v = simd::fill_i8(0x42);
     EXPECT_EQ(simd::find_first_byte(v, 0x99), -1);
 }
 
@@ -234,17 +234,17 @@ TEST_F(SimdUtilTest, FindLastByteAtEnd) {
 }
 
 TEST_F(SimdUtilTest, FindLastByteNotFound) {
-    simd::vec128_t v = simd::fill_byte(0x42);
+    simd::vec128_t v = simd::fill_i8(0x42);
     EXPECT_EQ(simd::find_last_byte(v, 0x99), -1);
 }
 
 TEST_F(SimdUtilTest, CountByteNone) {
-    simd::vec128_t v = simd::fill_byte(0x42);
+    simd::vec128_t v = simd::fill_i8(0x42);
     EXPECT_EQ(simd::count_byte(v, 0x00), 0);
 }
 
 TEST_F(SimdUtilTest, CountByteAll) {
-    simd::vec128_t v = simd::fill_byte(0x7F);
+    simd::vec128_t v = simd::fill_i8(0x7F);
     EXPECT_EQ(simd::count_byte(v, 0x7F), 16);
 }
 
@@ -255,12 +255,12 @@ TEST_F(SimdUtilTest, CountBytePartial) {
 }
 
 TEST_F(SimdUtilTest, IsAllZeroTrue) {
-    simd::vec128_t v = simd::fill_byte(0x00);
+    simd::vec128_t v = simd::fill_i8(0x00);
     EXPECT_TRUE(simd::is_all_zero(v));
 }
 
 TEST_F(SimdUtilTest, IsAllZeroFalse) {
-    simd::vec128_t v = simd::fill_byte(0x01);
+    simd::vec128_t v = simd::fill_i8(0x01);
     EXPECT_FALSE(simd::is_all_zero(v));
 }
 
@@ -278,7 +278,7 @@ TEST_F(SimdUtilTest, HasAnyZeroTrue) {
 }
 
 TEST_F(SimdUtilTest, HasAnyZeroFalse) {
-    simd::vec128_t v = simd::fill_byte(0xFF);
+    simd::vec128_t v = simd::fill_i8(0xFF);
     EXPECT_FALSE(simd::has_any_zero(v));
 }
 
@@ -329,25 +329,25 @@ TEST_F(SimdUtilTest, ShuffleBytesReverse) {
 TEST_F(SimdUtilTest, ShuffleBytesBroadcastFirst) {
     byte_t src[16] = {0xAA, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
     simd::vec128_t v = simd::load_unaligned(src);
-    simd::vec128_t indices = simd::fill_byte(0);
+    simd::vec128_t indices = simd::fill_i8(0);
     simd::vec128_t r = simd::shuffle_bytes(v, indices);
     EXPECT_TRUE(simd::contains_byte(r, 0xAA));
     EXPECT_EQ(simd::count_byte(r, 0xAA), 16);
 }
 
 TEST_F(SimdUtilTest, BlendBytesSelectA) {
-    simd::vec128_t a = simd::fill_byte(0xAA);
-    simd::vec128_t b = simd::fill_byte(0x55);
-    simd::vec128_t mask = simd::fill_byte(0x00);
+    simd::vec128_t a = simd::fill_i8(0xAA);
+    simd::vec128_t b = simd::fill_i8(0x55);
+    simd::vec128_t mask = simd::fill_i8(0x00);
     simd::vec128_t r = simd::blend_bytes(a, b, mask);
     simd::vec128_t matched = simd::match_bytes(r, a);
     EXPECT_EQ(simd::to_bitmask(matched), 0xFFFF);
 }
 
 TEST_F(SimdUtilTest, BlendBytesSelectB) {
-    simd::vec128_t a = simd::fill_byte(0xAA);
-    simd::vec128_t b = simd::fill_byte(0x55);
-    simd::vec128_t mask = simd::fill_byte(0x80);
+    simd::vec128_t a = simd::fill_i8(0xAA);
+    simd::vec128_t b = simd::fill_i8(0x55);
+    simd::vec128_t mask = simd::fill_i8(0x80);
     simd::vec128_t r = simd::blend_bytes(a, b, mask);
     simd::vec128_t matched = simd::match_bytes(r, b);
     EXPECT_EQ(simd::to_bitmask(matched), 0xFFFF);
@@ -382,7 +382,7 @@ TEST_F(SimdUtilTest, StoreBytesNRoundTrip) {
 }
 
 TEST_F(SimdUtilTest, StoreBytesNZeroBytes) {
-    simd::vec128_t v = simd::fill_byte(0xFF);
+    simd::vec128_t v = simd::fill_i8(0xFF);
     byte_t dst[16] = {};
     simd::store_bytes_n(dst, v, 0);
     for (int i = 0; i < 16; ++i) {
@@ -530,52 +530,52 @@ TEST_F(SimdUtilTest, PrefetchDoesNotCrash) {
 }
 
 TEST_F(SimdUtilTest, BitAnd) {
-    simd::vec128_t a = simd::fill_byte(0xFF);
-    simd::vec128_t b = simd::fill_byte(0x0F);
+    simd::vec128_t a = simd::fill_i8(0xFF);
+    simd::vec128_t b = simd::fill_i8(0x0F);
     simd::vec128_t r = simd::bit_and(a, b);
-    simd::vec128_t expected = simd::fill_byte(0x0F);
+    simd::vec128_t expected = simd::fill_i8(0x0F);
     simd::vec128_t matched = simd::match_bytes(r, expected);
     EXPECT_EQ(simd::to_bitmask(matched), 0xFFFF);
 }
 
 TEST_F(SimdUtilTest, BitOr) {
-    simd::vec128_t a = simd::fill_byte(0xF0);
-    simd::vec128_t b = simd::fill_byte(0x0F);
+    simd::vec128_t a = simd::fill_i8(0xF0);
+    simd::vec128_t b = simd::fill_i8(0x0F);
     simd::vec128_t r = simd::bit_or(a, b);
-    simd::vec128_t expected = simd::fill_byte(0xFF);
+    simd::vec128_t expected = simd::fill_i8(0xFF);
     simd::vec128_t matched = simd::match_bytes(r, expected);
     EXPECT_EQ(simd::to_bitmask(matched), 0xFFFF);
 }
 
 TEST_F(SimdUtilTest, BitXor) {
-    simd::vec128_t a = simd::fill_byte(0xFF);
-    simd::vec128_t b = simd::fill_byte(0xAA);
+    simd::vec128_t a = simd::fill_i8(0xFF);
+    simd::vec128_t b = simd::fill_i8(0xAA);
     simd::vec128_t r = simd::bit_xor(a, b);
-    simd::vec128_t expected = simd::fill_byte(0x55);
+    simd::vec128_t expected = simd::fill_i8(0x55);
     simd::vec128_t matched = simd::match_bytes(r, expected);
     EXPECT_EQ(simd::to_bitmask(matched), 0xFFFF);
 }
 
 TEST_F(SimdUtilTest, BitNot) {
-    simd::vec128_t v = simd::fill_byte(0x00);
+    simd::vec128_t v = simd::fill_i8(0x00);
     simd::vec128_t r = simd::bit_not(v);
-    simd::vec128_t expected = simd::fill_byte(0xFF);
+    simd::vec128_t expected = simd::fill_i8(0xFF);
     simd::vec128_t matched = simd::match_bytes(r, expected);
     EXPECT_EQ(simd::to_bitmask(matched), 0xFFFF);
 }
 
 TEST_F(SimdUtilTest, BitNotOfNot) {
-    simd::vec128_t v = simd::fill_byte(0x3C);
+    simd::vec128_t v = simd::fill_i8(0x3C);
     simd::vec128_t r = simd::bit_not(simd::bit_not(v));
     simd::vec128_t matched = simd::match_bytes(r, v);
     EXPECT_EQ(simd::to_bitmask(matched), 0xFFFF);
 }
 
 TEST_F(SimdUtilTest, BitAndNot) {
-    simd::vec128_t a = simd::fill_byte(0xFF);
-    simd::vec128_t b = simd::fill_byte(0x0F);
+    simd::vec128_t a = simd::fill_i8(0xFF);
+    simd::vec128_t b = simd::fill_i8(0x0F);
     simd::vec128_t r = simd::bit_andnot(a, b);
-    simd::vec128_t expected = simd::fill_byte(0xF0);
+    simd::vec128_t expected = simd::fill_i8(0xF0);
     simd::vec128_t matched = simd::match_bytes(r, expected);
     EXPECT_EQ(simd::to_bitmask(matched), 0xFFFF);
 }
@@ -693,17 +693,17 @@ TEST_F(SimdUtilTest, ShiftLeftRightByteRoundTrip) {
 }
 
 TEST_F(SimdUtilTest, PopcountAllZeros) {
-    simd::vec128_t v = simd::fill_byte(0x00);
+    simd::vec128_t v = simd::fill_i8(0x00);
     EXPECT_EQ(simd::popcount(v), 0);
 }
 
 TEST_F(SimdUtilTest, PopcountAllOnes) {
-    simd::vec128_t v = simd::fill_byte(0xFF);
+    simd::vec128_t v = simd::fill_i8(0xFF);
     EXPECT_EQ(simd::popcount(v), 128);
 }
 
 TEST_F(SimdUtilTest, PopcountAlternating) {
-    simd::vec128_t v = simd::fill_byte(0xAA);
+    simd::vec128_t v = simd::fill_i8(0xAA);
     EXPECT_EQ(simd::popcount(v), 64);
 }
 
@@ -714,17 +714,17 @@ TEST_F(SimdUtilTest, PopcountSingleBitEach) {
 }
 
 TEST_F(SimdUtilTest, AddI8) {
-    simd::vec128_t a = simd::fill_byte(1);
-    simd::vec128_t b = simd::fill_byte(2);
+    simd::vec128_t a = simd::fill_i8(1);
+    simd::vec128_t b = simd::fill_i8(2);
     simd::vec128_t r = simd::add_i8(a, b);
-    simd::vec128_t expected = simd::fill_byte(3);
+    simd::vec128_t expected = simd::fill_i8(3);
     simd::vec128_t matched = simd::match_bytes(r, expected);
     EXPECT_EQ(simd::to_bitmask(matched), 0xFFFF);
 }
 
 TEST_F(SimdUtilTest, AddI8OverflowWraps) {
-    simd::vec128_t a = simd::fill_byte(static_cast<byte_t>(127));
-    simd::vec128_t b = simd::fill_byte(1);
+    simd::vec128_t a = simd::fill_i8(static_cast<byte_t>(127));
+    simd::vec128_t b = simd::fill_i8(1);
     simd::vec128_t r = simd::add_i8(a, b);
     const auto* sb = reinterpret_cast<const int8_t*>(&r);
     for (int i = 0; i < 16; ++i) {
@@ -774,10 +774,10 @@ TEST_F(SimdUtilTest, AddI64) {
 }
 
 TEST_F(SimdUtilTest, SubI8) {
-    simd::vec128_t a = simd::fill_byte(10);
-    simd::vec128_t b = simd::fill_byte(3);
+    simd::vec128_t a = simd::fill_i8(10);
+    simd::vec128_t b = simd::fill_i8(3);
     simd::vec128_t r = simd::sub_i8(a, b);
-    simd::vec128_t expected = simd::fill_byte(7);
+    simd::vec128_t expected = simd::fill_i8(7);
     simd::vec128_t matched = simd::match_bytes(r, expected);
     EXPECT_EQ(simd::to_bitmask(matched), 0xFFFF);
 }
@@ -884,8 +884,8 @@ TEST_F(SimdUtilTest, MaddsI8x16) {
 }
 
 TEST_F(SimdUtilTest, SaturatedAddI8) {
-    simd::vec128_t a = simd::fill_byte(static_cast<byte_t>(100));
-    simd::vec128_t b = simd::fill_byte(static_cast<byte_t>(50));
+    simd::vec128_t a = simd::fill_i8(static_cast<byte_t>(100));
+    simd::vec128_t b = simd::fill_i8(static_cast<byte_t>(50));
     simd::vec128_t r = simd::saturated_add_i8(a, b);
     const auto* sb = reinterpret_cast<const int8_t*>(&r);
     for (int i = 0; i < 16; ++i) {
@@ -894,8 +894,8 @@ TEST_F(SimdUtilTest, SaturatedAddI8) {
 }
 
 TEST_F(SimdUtilTest, SaturatedAddI8NoOverflow) {
-    simd::vec128_t a = simd::fill_byte(static_cast<byte_t>(10));
-    simd::vec128_t b = simd::fill_byte(static_cast<byte_t>(20));
+    simd::vec128_t a = simd::fill_i8(static_cast<byte_t>(10));
+    simd::vec128_t b = simd::fill_i8(static_cast<byte_t>(20));
     simd::vec128_t r = simd::saturated_add_i8(a, b);
     const auto* sb = reinterpret_cast<const int8_t*>(&r);
     for (int i = 0; i < 16; ++i) {
@@ -904,8 +904,8 @@ TEST_F(SimdUtilTest, SaturatedAddI8NoOverflow) {
 }
 
 TEST_F(SimdUtilTest, SaturatedAddI8Negative) {
-    simd::vec128_t a = simd::fill_byte(static_cast<byte_t>(-100));
-    simd::vec128_t b = simd::fill_byte(static_cast<byte_t>(-50));
+    simd::vec128_t a = simd::fill_i8(static_cast<byte_t>(-100));
+    simd::vec128_t b = simd::fill_i8(static_cast<byte_t>(-50));
     simd::vec128_t r = simd::saturated_add_i8(a, b);
     const auto* sb = reinterpret_cast<const int8_t*>(&r);
     for (int i = 0; i < 16; ++i) {
@@ -929,8 +929,8 @@ TEST_F(SimdUtilTest, SaturatedAddI16) {
 }
 
 TEST_F(SimdUtilTest, SaturatedAddU8) {
-    simd::vec128_t a = simd::fill_byte(200);
-    simd::vec128_t b = simd::fill_byte(100);
+    simd::vec128_t a = simd::fill_i8(200);
+    simd::vec128_t b = simd::fill_i8(100);
     simd::vec128_t r = simd::saturated_add_u8(a, b);
     const byte_t* rb = reinterpret_cast<const byte_t*>(&r);
     for (int i = 0; i < 16; ++i) {
@@ -939,8 +939,8 @@ TEST_F(SimdUtilTest, SaturatedAddU8) {
 }
 
 TEST_F(SimdUtilTest, SaturatedAddU8NoOverflow) {
-    simd::vec128_t a = simd::fill_byte(30);
-    simd::vec128_t b = simd::fill_byte(40);
+    simd::vec128_t a = simd::fill_i8(30);
+    simd::vec128_t b = simd::fill_i8(40);
     simd::vec128_t r = simd::saturated_add_u8(a, b);
     const byte_t* rb = reinterpret_cast<const byte_t*>(&r);
     for (int i = 0; i < 16; ++i) {
@@ -963,8 +963,8 @@ TEST_F(SimdUtilTest, SaturatedAddU16) {
 }
 
 TEST_F(SimdUtilTest, SaturatedSubI8) {
-    simd::vec128_t a = simd::fill_byte(static_cast<byte_t>(-100));
-    simd::vec128_t b = simd::fill_byte(static_cast<byte_t>(50));
+    simd::vec128_t a = simd::fill_i8(static_cast<byte_t>(-100));
+    simd::vec128_t b = simd::fill_i8(static_cast<byte_t>(50));
     simd::vec128_t r = simd::saturated_sub_i8(a, b);
     const auto* sb = reinterpret_cast<const int8_t*>(&r);
     for (int i = 0; i < 16; ++i) {
@@ -986,8 +986,8 @@ TEST_F(SimdUtilTest, SaturatedSubI16) {
 }
 
 TEST_F(SimdUtilTest, SaturatedSubU8) {
-    simd::vec128_t a = simd::fill_byte(50);
-    simd::vec128_t b = simd::fill_byte(100);
+    simd::vec128_t a = simd::fill_i8(50);
+    simd::vec128_t b = simd::fill_i8(100);
     simd::vec128_t r = simd::saturated_sub_u8(a, b);
     const byte_t* rb = reinterpret_cast<const byte_t*>(&r);
     for (int i = 0; i < 16; ++i) {
@@ -996,8 +996,8 @@ TEST_F(SimdUtilTest, SaturatedSubU8) {
 }
 
 TEST_F(SimdUtilTest, SaturatedSubU8Normal) {
-    simd::vec128_t a = simd::fill_byte(100);
-    simd::vec128_t b = simd::fill_byte(30);
+    simd::vec128_t a = simd::fill_i8(100);
+    simd::vec128_t b = simd::fill_i8(30);
     simd::vec128_t r = simd::saturated_sub_u8(a, b);
     const byte_t* rb = reinterpret_cast<const byte_t*>(&r);
     for (int i = 0; i < 16; ++i) {
@@ -1115,10 +1115,10 @@ TEST_F(SimdUtilTest, MinI32) {
 }
 
 TEST_F(SimdUtilTest, MinU8) {
-    simd::vec128_t a = simd::fill_byte(100);
-    simd::vec128_t b = simd::fill_byte(200);
+    simd::vec128_t a = simd::fill_i8(100);
+    simd::vec128_t b = simd::fill_i8(200);
     simd::vec128_t r = simd::min_u8(a, b);
-    simd::vec128_t expected = simd::fill_byte(100);
+    simd::vec128_t expected = simd::fill_i8(100);
     simd::vec128_t matched = simd::match_bytes(r, expected);
     EXPECT_EQ(simd::to_bitmask(matched), 0xFFFF);
 }
@@ -1197,10 +1197,10 @@ TEST_F(SimdUtilTest, MaxI32) {
 }
 
 TEST_F(SimdUtilTest, MaxU8) {
-    simd::vec128_t a = simd::fill_byte(100);
-    simd::vec128_t b = simd::fill_byte(200);
+    simd::vec128_t a = simd::fill_i8(100);
+    simd::vec128_t b = simd::fill_i8(200);
     simd::vec128_t r = simd::max_u8(a, b);
-    simd::vec128_t expected = simd::fill_byte(200);
+    simd::vec128_t expected = simd::fill_i8(200);
     simd::vec128_t matched = simd::match_bytes(r, expected);
     EXPECT_EQ(simd::to_bitmask(matched), 0xFFFF);
 }
@@ -1232,8 +1232,8 @@ TEST_F(SimdUtilTest, MaxU32) {
 }
 
 TEST_F(SimdUtilTest, AvgU8) {
-    simd::vec128_t a = simd::fill_byte(100);
-    simd::vec128_t b = simd::fill_byte(200);
+    simd::vec128_t a = simd::fill_i8(100);
+    simd::vec128_t b = simd::fill_i8(200);
     simd::vec128_t r = simd::avg_u8(a, b);
     const byte_t* rb = reinterpret_cast<const byte_t*>(&r);
     for (int i = 0; i < 16; ++i) {
@@ -1242,8 +1242,8 @@ TEST_F(SimdUtilTest, AvgU8) {
 }
 
 TEST_F(SimdUtilTest, AvgU8OddSum) {
-    simd::vec128_t a = simd::fill_byte(10);
-    simd::vec128_t b = simd::fill_byte(11);
+    simd::vec128_t a = simd::fill_i8(10);
+    simd::vec128_t b = simd::fill_i8(11);
     simd::vec128_t r = simd::avg_u8(a, b);
     const byte_t* rb = reinterpret_cast<const byte_t*>(&r);
     for (int i = 0; i < 16; ++i) {
@@ -1267,15 +1267,15 @@ TEST_F(SimdUtilTest, AvgU16) {
 }
 
 TEST_F(SimdUtilTest, CmpeqI8) {
-    simd::vec128_t a = simd::fill_byte(0x55);
-    simd::vec128_t b = simd::fill_byte(0x55);
+    simd::vec128_t a = simd::fill_i8(0x55);
+    simd::vec128_t b = simd::fill_i8(0x55);
     simd::vec128_t r = simd::cmpeq_i8(a, b);
     EXPECT_EQ(simd::to_bitmask(r), 0xFFFF);
 }
 
 TEST_F(SimdUtilTest, CmpeqI8False) {
-    simd::vec128_t a = simd::fill_byte(0x55);
-    simd::vec128_t b = simd::fill_byte(0xAA);
+    simd::vec128_t a = simd::fill_i8(0x55);
+    simd::vec128_t b = simd::fill_i8(0xAA);
     simd::vec128_t r = simd::cmpeq_i8(a, b);
     EXPECT_EQ(simd::to_bitmask(r), 0);
 }
@@ -1528,7 +1528,7 @@ TEST_F(SimdUtilTest, CmpleF64) {
 TEST_F(SimdUtilTest, Sse2Vec128MatchesM128i) { EXPECT_EQ(sizeof(simd::vec128_t), sizeof(::__m128i)); }
 
 TEST_F(SimdUtilTest, Sse2FillByteMatchesIntrinsic) {
-    simd::vec128_t v = simd::fill_byte(0x5A);
+    simd::vec128_t v = simd::fill_i8(0x5A);
     ::__m128i ref = ::_mm_set1_epi8(0x5A);
     simd::vec128_t matched = simd::match_bytes(v, simd::load_unaligned(&ref));
     int mask = simd::to_bitmask(matched);
@@ -1603,7 +1603,7 @@ TEST_F(SimdUtilTest, Sse2BitAndNotMatchesIntrinsic) {
 #ifdef NEFORCE_SIMD_NEON
 
 TEST_F(SimdUtilTest, NeonFillByteMatchesIntrinsic) {
-    simd::vec128_t v = simd::fill_byte(0x5A);
+    simd::vec128_t v = simd::fill_i8(0x5A);
     uint8x16_t ref = vdupq_n_u8(0x5A);
     simd::vec128_t matched = simd::match_bytes(v, ref);
     EXPECT_EQ(simd::to_bitmask(matched), 0xFFFF);

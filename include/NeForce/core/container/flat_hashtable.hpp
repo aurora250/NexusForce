@@ -332,9 +332,9 @@ private:
         size_t idx = h1;
         size_t first_deleted = npos;
 
-        const simd::vec128_t h2_vec = simd::fill_byte(h2);
-        const simd::vec128_t empty_vec = simd::fill_byte(FLAT_HT_EMPTY);
-        const simd::vec128_t deleted_vec = simd::fill_byte(FLAT_HT_DELETED);
+        const simd::vec128_t h2_vec = simd::fill_i8(h2);
+        const simd::vec128_t empty_vec = simd::fill_i8(FLAT_HT_EMPTY);
+        const simd::vec128_t deleted_vec = simd::fill_i8(FLAT_HT_DELETED);
 
         for (size_t round = 0; round < capacity_; round += 16) {
             // wrap-around safe load: metadata array is exactly capacity_ bytes,
