@@ -280,7 +280,7 @@ private:
         const size_type n = _NEFORCE distance(first, last);
 
 #ifdef NEFORCE_USING_SSO
-        if (n < sso_capacity) {
+        if (n < sso_buffer_size) {
             pointer dest = storage_.short_;
             for (size_type i = 0; i < n; ++i) {
                 dest[i] = *first++;
@@ -332,7 +332,7 @@ private:
      */
     NEFORCE_CONSTEXPR20 void construct_from_ptr(const_pointer str, size_type position, size_type n) {
 #ifdef NEFORCE_USING_SSO
-        if (n < sso_capacity) {
+        if (n < sso_buffer_size) {
             traits_type::copy(storage_.short_, str + position, n);
             traits_type::assign(storage_.short_ + n, 1, value_type());
             size_pair_.value = n;
@@ -778,7 +778,7 @@ public:
      */
     NEFORCE_CONSTEXPR20 explicit basic_string(size_type n, value_type value) {
 #ifdef NEFORCE_USING_SSO
-        if (n < sso_capacity) {
+        if (n < sso_buffer_size) {
             traits_type::assign(storage_.short_, n, value);
             traits_type::assign(storage_.short_ + n, 1, value_type());
             size_pair_.value = n;
@@ -809,7 +809,12 @@ public:
     NEFORCE_CONSTEXPR20 basic_string(const basic_string& other) {
 #ifdef NEFORCE_USING_SSO
         const size_type len = other.size();
-        if (len < sso_capacity) {
+        if (len < sso_buffer_size) {
+            if (!other.is_long()) {
+                storage_ = other.storage_;
+                size_pair_.value = len;
+                return;
+            }
             _NEFORCE memory_copy(storage_.short_, other.data(), len * sizeof(value_type));
             storage_.short_[len] = value_type();
             size_pair_.value = len;
@@ -841,7 +846,7 @@ public:
 #ifdef NEFORCE_USING_SSO
         const size_type len = other.size();
 
-        if (len < sso_capacity) {
+        if (len < sso_buffer_size) {
             if (is_long()) {
                 destroy_long();
             }
@@ -977,7 +982,7 @@ public:
         const size_type len = view.size();
 
 #ifdef NEFORCE_USING_SSO
-        if (len < sso_capacity) {
+        if (len < sso_buffer_size) {
             if (is_long()) {
                 destroy_long();
             }
@@ -1066,7 +1071,7 @@ public:
     NEFORCE_CONSTEXPR20 basic_string& operator=(const_pointer str) {
         const size_type len = traits_type::length(str);
 #ifdef NEFORCE_USING_SSO
-        if (len < sso_capacity) {
+        if (len < sso_buffer_size) {
             if (is_long()) {
                 destroy_long();
             }
@@ -2103,7 +2108,7 @@ public:
             return;
         }
         const size_type len = size();
-        if (len < sso_capacity) {
+        if (len < sso_buffer_size) {
             CharT tmp[sso_buffer_size];
             traits_type::copy(tmp, storage_.long_.ptr, len);
             traits_type::assign(tmp + len, 1, value_type());

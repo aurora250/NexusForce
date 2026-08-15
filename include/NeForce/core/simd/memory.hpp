@@ -10,6 +10,9 @@
 
 #include "NeForce/core/simd/bytes.hpp"
 #include "NeForce/core/simd/compare.hpp"
+#if defined(NEFORCE_COMPILER_MSVC) && defined(NEFORCE_ARCH_X86)
+#    include <intrin.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_SIMD__
 
@@ -380,8 +383,37 @@ NEFORCE_ALWAYS_INLINE_INLINE void* memory_copy(void* dest, const void* src, size
         s += 16;
         count -= 16;
     }
-    for (size_t i = 0; i < count; ++i) {
-        d[i] = s[i];
+    if (count >= 8) {
+        d[0] = s[0];
+        d[1] = s[1];
+        d[2] = s[2];
+        d[3] = s[3];
+        d[4] = s[4];
+        d[5] = s[5];
+        d[6] = s[6];
+        d[7] = s[7];
+        d += 8;
+        s += 8;
+        count -= 8;
+    }
+    if (count >= 4) {
+        d[0] = s[0];
+        d[1] = s[1];
+        d[2] = s[2];
+        d[3] = s[3];
+        d += 4;
+        s += 4;
+        count -= 4;
+    }
+    if (count >= 2) {
+        d[0] = s[0];
+        d[1] = s[1];
+        d += 2;
+        s += 2;
+        count -= 2;
+    }
+    if (count != 0) {
+        *d = *s;
     }
     return dest;
 }
@@ -554,6 +586,12 @@ NEFORCE_ALWAYS_INLINE_INLINE void* memory_set(void* dest, const byte_t value, si
     }
 
     auto* d = static_cast<byte_t*>(dest);
+#if defined(NEFORCE_COMPILER_MSVC) && defined(NEFORCE_ARCH_X86)
+    if (count >= 4096) {
+        ::__stosb(d, value, count);
+        return dest;
+    }
+#endif
 #if defined(NEFORCE_SIMD_AVX2)
     const vec256_t pattern256 = ::_mm256_set1_epi8(static_cast<char>(value));
     while (count >= 32) {
@@ -569,8 +607,34 @@ NEFORCE_ALWAYS_INLINE_INLINE void* memory_set(void* dest, const byte_t value, si
         d += 16;
         count -= 16;
     }
-    for (size_t i = 0; i < count; ++i) {
-        d[i] = value;
+    if (count >= 8) {
+        d[0] = value;
+        d[1] = value;
+        d[2] = value;
+        d[3] = value;
+        d[4] = value;
+        d[5] = value;
+        d[6] = value;
+        d[7] = value;
+        d += 8;
+        count -= 8;
+    }
+    if (count >= 4) {
+        d[0] = value;
+        d[1] = value;
+        d[2] = value;
+        d[3] = value;
+        d += 4;
+        count -= 4;
+    }
+    if (count >= 2) {
+        d[0] = value;
+        d[1] = value;
+        d += 2;
+        count -= 2;
+    }
+    if (count != 0) {
+        *d = value;
     }
     return dest;
 }
@@ -613,6 +677,15 @@ NEFORCE_PURE_FUNCTION NEFORCE_ALWAYS_INLINE_INLINE const void* memory_find(const
     }
 
     const auto* p = static_cast<const byte_t*>(ptr);
+
+    if (count < 16) {
+        for (size_t i = 0; i < count; ++i) {
+            if (p[i] == value) {
+                return p + i;
+            }
+        }
+        return nullptr;
+    }
 
 #if defined(NEFORCE_SIMD_AVX2)
     const vec256_t target256 = ::_mm256_set1_epi8(static_cast<char>(value));

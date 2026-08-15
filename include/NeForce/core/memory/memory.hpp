@@ -36,9 +36,44 @@ NEFORCE_CONSTEXPR14 void* memory_copy(void* NEFORCE_RESTRICT dest, const void* N
         }
         auto* d = static_cast<byte_t*>(dest);
         const auto* s = static_cast<const byte_t*>(src);
-        for (size_t i = 0; i < count; ++i) {
-            // NOLINTNEXTLINE(clang-analyzer-core.uninitialized.Assign)
-            d[i] = s[i];
+        if (is_constant_evaluated()) {
+            for (size_t i = 0; i < count; ++i) {
+                // NOLINTNEXTLINE(clang-analyzer-core.uninitialized.Assign)
+                d[i] = s[i];
+            }
+            return dest;
+        }
+        if (count >= 8) {
+            d[0] = s[0];
+            d[1] = s[1];
+            d[2] = s[2];
+            d[3] = s[3];
+            d[4] = s[4];
+            d[5] = s[5];
+            d[6] = s[6];
+            d[7] = s[7];
+            d += 8;
+            s += 8;
+            count -= 8;
+        }
+        if (count >= 4) {
+            d[0] = s[0];
+            d[1] = s[1];
+            d[2] = s[2];
+            d[3] = s[3];
+            d += 4;
+            s += 4;
+            count -= 4;
+        }
+        if (count >= 2) {
+            d[0] = s[0];
+            d[1] = s[1];
+            d += 2;
+            s += 2;
+            count -= 2;
+        }
+        if (count != 0) {
+            *d = *s;
         }
         return dest;
     }
@@ -227,8 +262,40 @@ NEFORCE_CONSTEXPR14 void* memory_set(void* dest, const byte_t value, size_t coun
             return nullptr;
         }
         auto* d = static_cast<byte_t*>(dest);
-        for (size_t i = 0; i < count; ++i) {
-            d[i] = value;
+        if (is_constant_evaluated()) {
+            for (size_t i = 0; i < count; ++i) {
+                d[i] = value;
+            }
+            return dest;
+        }
+        if (count >= 8) {
+            d[0] = value;
+            d[1] = value;
+            d[2] = value;
+            d[3] = value;
+            d[4] = value;
+            d[5] = value;
+            d[6] = value;
+            d[7] = value;
+            d += 8;
+            count -= 8;
+        }
+        if (count >= 4) {
+            d[0] = value;
+            d[1] = value;
+            d[2] = value;
+            d[3] = value;
+            d += 4;
+            count -= 4;
+        }
+        if (count >= 2) {
+            d[0] = value;
+            d[1] = value;
+            d += 2;
+            count -= 2;
+        }
+        if (count != 0) {
+            *d = value;
         }
         return dest;
     }

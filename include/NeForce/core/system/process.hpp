@@ -67,12 +67,7 @@ public:
     /**
      * @brief 进程ID类型
      */
-    using native_id_type =
-#ifdef NEFORCE_PLATFORM_WINDOWS
-            unsigned long;
-#else
-            int;
-#endif
+    using native_id_type = native_size_type;
 
     /**
      * @enum std_stream

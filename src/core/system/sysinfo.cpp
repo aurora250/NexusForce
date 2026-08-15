@@ -807,6 +807,11 @@ void sysinfo::init() {
     initialized_.store(true, memory_order_release);
 }
 
+sysinfo& sysinfo::instance() noexcept {
+    static sysinfo instance;
+    return instance;
+};
+
 void sysinfo::refresh() {
     lock<mutex> lock(sysinfo_mutex());
     initialized_.store(false, memory_order_release);

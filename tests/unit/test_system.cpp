@@ -3,6 +3,7 @@
 #include <NeForce/core/system/console.hpp>
 #include <NeForce/core/system/daemon.hpp>
 #include <NeForce/core/system/dynamic_library.hpp>
+#include <NeForce/core/system/dynamic_library_import.hpp>
 #include <NeForce/core/system/environment.hpp>
 #include <NeForce/core/system/locale.hpp>
 #include <NeForce/core/system/pipe.hpp>

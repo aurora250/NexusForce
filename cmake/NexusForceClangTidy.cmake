@@ -52,6 +52,7 @@ foreach(SOURCE_FILE ${TIDY_SOURCES})
             COMMAND ${CMAKE_COMMAND} -E touch "${STAMP_FILE}"
             COMMENT "clang-tidy: ${SOURCE_FILE}"
             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+            DEPENDS "${SOURCE_FILE}"
             VERBATIM
     )
 endforeach()

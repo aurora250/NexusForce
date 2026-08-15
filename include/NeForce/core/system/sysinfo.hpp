@@ -221,10 +221,7 @@ public:
      * @brief 获取单例实例
      * @return 系统信息实例引用
      */
-    static sysinfo& instance() noexcept {
-        static sysinfo instance;
-        return instance;
-    }
+    static sysinfo& instance() noexcept;
 
     sysinfo(const sysinfo&) = delete;
     sysinfo& operator=(const sysinfo&) = delete;
