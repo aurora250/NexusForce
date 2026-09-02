@@ -532,7 +532,7 @@ public:
      *
      * 设置停止标志并执行所有注册的回调函数。
      */
-    NEFORCE_NODISCARD bool request_stop() noexcept {
+    bool request_stop() noexcept {
         if (stop_possible()) {
             return state_ref_->request_stop();
         }

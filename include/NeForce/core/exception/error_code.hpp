@@ -143,6 +143,15 @@ public:
     NEFORCE_NODISCARD size_t to_hash() const noexcept { return hash_combine_all(category_, value_); }
 };
 
+inline bool operator==(const error_code& lhs, const errc rhs) noexcept { return lhs == make_error_condition(rhs); }
+
+inline bool operator!=(const error_code& lhs, const errc rhs) noexcept { return !(lhs == rhs); }
+
+inline bool operator==(const errc lhs, const error_code& rhs) noexcept { return rhs == lhs; }
+
+inline bool operator!=(const errc lhs, const error_code& rhs) noexcept { return !(rhs == lhs); }
+
+
 /**
  * @brief 从 errc 枚举创建错误码
  * @param e 错误码枚举值

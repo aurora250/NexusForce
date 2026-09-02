@@ -1500,11 +1500,109 @@ TEST(DnsQueryResult, QueryTimeDefault) {
     EXPECT_EQ(r.query_time, milliseconds(0));
 }
 
-TEST(DnsException, ErrorCodeEnumValues) {
-    EXPECT_EQ(static_cast<int>(dns_exception::code::TIMEOUT), 0);
-    EXPECT_EQ(static_cast<int>(dns_exception::code::NETWORK_ERROR), 1);
-    EXPECT_EQ(static_cast<int>(dns_exception::code::PARSE_ERROR), 2);
-    EXPECT_EQ(static_cast<int>(dns_exception::code::SERVER_FAILURE), 3);
-    EXPECT_EQ(static_cast<int>(dns_exception::code::TRUNCATED), 4);
-    EXPECT_EQ(static_cast<int>(dns_exception::code::NO_RECORD), 5);
+TEST(DnsMessageBuilding, CasePatternApplied) {
+    auto q = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, true, false, false,
+                                     edns::DEFAULT_UDP_PAYLOAD, "ExAmPlE.CoM");
+
+    size_t offset = sizeof(dns_header);
+    EXPECT_EQ(q[offset], 7);
+    EXPECT_EQ(string(reinterpret_cast<const char*>(&q[offset + 1]), 7), "ExAmPlE");
+    offset += 8;
+    EXPECT_EQ(q[offset], 3);
+    EXPECT_EQ(string(reinterpret_cast<const char*>(&q[offset + 1]), 3), "CoM");
+    EXPECT_EQ(q[offset + 4], 0x00);
+}
+
+TEST(DnsMessageBuilding, CasePatternDoesNotChangeQuerySize) {
+    auto q1 = dns_client::build_query("www.example.com", dns_record::A, dns_class::INTERNET, true, false);
+    auto q2 = dns_client::build_query("www.example.com", dns_record::A, dns_class::INTERNET, true, false, false,
+                                      edns::DEFAULT_UDP_PAYLOAD, "WwW.ExAmPlE.CoM");
+    EXPECT_EQ(q1.size(), q2.size());
+}
+
+TEST(DnsResponseParsing, ZeroX20ValidationPasses) {
+    byte_vector resp;
+    auto hdr = make_header(1234, 0x8180, 1, 1, 0, 0);
+    resp.insert(resp.end(), hdr.begin(), hdr.end());
+    append_question(resp, "WwW.ExAmPlE.CoM", 1);
+    append_a_record(resp, "WwW.ExAmPlE.CoM", 60, "1.2.3.4");
+
+    auto result = dns_client::parse_response(resp, 1234, "WwW.ExAmPlE.CoM");
+    EXPECT_TRUE(result.is_success());
+    ASSERT_EQ(result.answers.size(), 1);
+    EXPECT_EQ(result.answers[0].data, "1.2.3.4");
+}
+
+TEST(DnsResponseParsing, ZeroX20ValidationRejectsCaseMismatch) {
+    byte_vector resp;
+    auto hdr = make_header(1234, 0x8180, 1, 1, 0, 0);
+    resp.insert(resp.end(), hdr.begin(), hdr.end());
+    append_question(resp, "www.example.com", 1);
+    append_a_record(resp, "www.example.com", 60, "1.2.3.4");
+
+    EXPECT_THROW({ dns_client::parse_response(resp, 1234, "WwW.ExAmPlE.CoM"); }, dns_exception);
+}
+
+TEST(DnsResponseParsing, ZeroX20ValidationIsSkippedWhenEmpty) {
+    byte_vector resp;
+    auto hdr = make_header(1234, 0x8180, 1, 1, 0, 0);
+    resp.insert(resp.end(), hdr.begin(), hdr.end());
+    append_question(resp, "www.example.com", 1);
+    append_a_record(resp, "www.example.com", 60, "1.2.3.4");
+
+    auto result = dns_client::parse_response(resp, 1234);
+    EXPECT_TRUE(result.is_success());
+}
+
+namespace {
+    dns_query_result make_ttl_result(const vector<uint32_t>& ttls, const bool success = true) {
+        dns_query_result result;
+        result.response_code = success ? dns_response::NON_ERROR : dns_response::NAME_ERROR;
+        for (const uint32_t ttl: ttls) {
+            result.answers.push_back(dns_record("www.example.com", dns_record::A, dns_class::INTERNET, ttl, "1.2.3.4"));
+        }
+        return result;
+    }
+} // namespace
+
+TEST(DnsClientCache, EffectiveTTLUsesMinRecordTTL) {
+    const auto result = make_ttl_result({60, 300, 900});
+    EXPECT_EQ(dns_client::effective_cache_ttl(result, seconds(300)), seconds(60));
+}
+
+TEST(DnsClientCache, EffectiveTTLCappedByConfiguredCap) {
+    const auto result = make_ttl_result({86400});
+    EXPECT_EQ(dns_client::effective_cache_ttl(result, seconds(300)), seconds(300));
+}
+
+TEST(DnsClientCache, EffectiveTTLZeroTTLDisablesCaching) {
+    const auto result = make_ttl_result({0});
+    EXPECT_EQ(dns_client::effective_cache_ttl(result, seconds(300)), seconds(0));
+}
+
+TEST(DnsClientCache, EffectiveTTLNegativeUsesNegativeCacheTTL) {
+    const auto result = make_ttl_result({60}, false);
+    EXPECT_EQ(dns_client::effective_cache_ttl(result, seconds(300)), edns::NEGATIVE_CACHE_TTL);
+}
+
+TEST(DnsClientCache, EffectiveTTLNoAnswersUsesCap) {
+    const dns_query_result result;
+    EXPECT_EQ(dns_client::effective_cache_ttl(result, seconds(300)), seconds(300));
+}
+
+TEST(DnsClientCache, EffectiveTTLCapZeroDisablesCaching) {
+    const auto result = make_ttl_result({60});
+    EXPECT_EQ(dns_client::effective_cache_ttl(result, seconds(0)), seconds(0));
+}
+
+TEST(DnsClient, SetMaxUDPRetries) {
+    dns_client client;
+    client.set_max_udp_retries(0);
+    client.set_max_udp_retries(3);
+}
+
+TEST(DnsClient, SetRandomizeCase) {
+    dns_client client;
+    client.set_randomize_case(false);
+    client.set_randomize_case(true);
 }

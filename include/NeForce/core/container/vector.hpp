@@ -778,7 +778,7 @@ public:
             return;
         }
 
-        size_type new_capacity = _NEFORCE max(capacity() * 2, n);
+        size_type new_capacity = _NEFORCE max(static_cast<size_type>(capacity() * 1.5), n);
         pointer new_start = pair_.get_base().allocate(new_capacity);
         pointer new_finish = new_start;
 

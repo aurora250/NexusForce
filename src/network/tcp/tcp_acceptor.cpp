@@ -50,7 +50,7 @@ optional<tcp_socket> tcp_acceptor::accept_nonblock() {
 
     const native_handle_type client_fd = ::accept(fd_, reinterpret_cast<::sockaddr*>(&client_storage), &addrlen);
     if (client_fd == invalid_handle) {
-        const int error = socket_exception::last_error();
+        const int error = network_exception::last_error().value();
         if (socket_exception::is_would_block(error)) {
             return none;
         }
@@ -82,7 +82,7 @@ namespace {
                 handler(error_code{}, tcp_socket(client_fd));
                 return;
             }
-            const int err = socket_exception::last_error();
+            const int err = network_exception::last_error().value();
             if (!socket_exception::is_would_block(err)) {
                 handler(error_code(err, error_category::system()), tcp_socket{});
                 return;
@@ -131,7 +131,7 @@ namespace {
             if (client_fd != tcp_acceptor::invalid_handle) {
                 handler(error_code{}, tcp_socket(client_fd));
             } else {
-                handler(error_code{static_cast<int>(socket_exception::last_error()), error_category::system()},
+                handler(error_code{static_cast<int>(network_exception::last_error().value()), error_category::system()},
                         tcp_socket{});
             }
         }

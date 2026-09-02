@@ -17,6 +17,7 @@
  */
 
 #include "NeForce/core/async/lock_free_queue.hpp"
+#include "NeForce/core/async/mutex.hpp"
 #include "NeForce/core/container/flat_unordered_map.hpp"
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/exception/error_code.hpp"

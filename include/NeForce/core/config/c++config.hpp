@@ -541,60 +541,6 @@
 #    define NEFORCE_ALLOC_NODISCARD
 #endif
 
-
-#ifdef NEFORCE_COMPILER_GNUC
-#    define NEFORCE_ALWAYS_INLINE __attribute__((always_inline))
-#    define NEFORCE_ALWAYS_INLINE_INLINE NEFORCE_ALWAYS_INLINE inline
-#elif defined(NEFORCE_COMPILER_MSVC)
-#    define NEFORCE_ALWAYS_INLINE __forceinline
-#    define NEFORCE_ALWAYS_INLINE_INLINE NEFORCE_ALWAYS_INLINE
-#else
-#    define NEFORCE_ALWAYS_INLINE inline
-#    define NEFORCE_ALWAYS_INLINE_INLINE inline
-#endif
-
-
-#ifdef NEFORCE_COMPILER_GNUC
-#    define NEFORCE_UNUSED __attribute__((unused))
-#else
-#    define NEFORCE_UNUSED
-#endif
-
-
-#ifdef NEFORCE_STANDARD_17
-#    define NEFORCE_UNLIKELY [[unlikely]]
-#else
-#    define NEFORCE_UNLIKELY
-#endif
-
-
-#ifdef NEFORCE_STANDARD_20
-#    define NEFORCE_LIKELY [[likely]]
-#else
-#    define NEFORCE_LIKELY
-#endif
-
-
-#if defined(NEFORCE_STANDARD_11)
-#    define NEFORCE_NORETURN [[noreturn]]
-#elif defined(NEFORCE_COMPILER_GNUC)
-#    define NEFORCE_NORETURN __attribute__((noreturn))
-#elif defined(NEFORCE_COMPILER_MSVC)
-#    define NEFORCE_NORETURN __declspec(noreturn)
-#else
-#    define NEFORCE_NORETURN
-#endif
-
-
-#ifndef NEFORCE_COMPILER_GNUC
-#    define NEFORCE_PURE_FUNCTION
-#    define NEFORCE_CONST_FUNCTION
-#else
-#    define NEFORCE_PURE_FUNCTION __attribute__((__pure__))
-#    define NEFORCE_CONST_FUNCTION __attribute__((__const__))
-#endif
-
-
 #ifdef NEFORCE_STANDARD_14
 #    define NEFORCE_DEPRECATED [[deprecated]]
 #    define NEFORCE_DEPRECATED_FOR(MSG) [[deprecated(MSG)]]
@@ -607,6 +553,160 @@
 #endif
 
 
+#ifdef NEFORCE_COMPILER_GNUC
+#    define NEFORCE_UNUSED __attribute__((unused))
+#else
+#    define NEFORCE_UNUSED
+#endif
+
+
+/**
+ * @defgroup PerformanceHints 性能优化提示
+ * @brief 编译器性能优化相关的宏定义
+ * @{
+ */
+
+/**
+ * @def NEFORCE_OPTIMIZE(LEVEL)
+ * @brief 为单个函数指定优化级别
+ * @param LEVEL 优化级别，如 "O0", "O1", "O2", "O3", "Os", "Ofast"
+ */
+#ifdef NEFORCE_COMPILER_GNUC
+#    define NEFORCE_OPTIMIZE(LEVEL) __attribute__((optimize(LEVEL)))
+#else
+#    define NEFORCE_OPTIMIZE(LEVEL)
+#endif
+
+
+/**
+ * @def NEFORCE_HOT
+ * @brief 指定函数被编译器优化代码布局以提高缓存局部性
+ */
+#ifdef NEFORCE_COMPILER_GNUC
+#    define NEFORCE_HOT __attribute__((hot))
+#else
+#    define NEFORCE_HOT
+#endif
+
+/**
+ * @def NEFORCE_COLD
+ * @brief 指定函数被编译器移出热点路径
+ */
+#ifdef NEFORCE_COMPILER_GNUC
+#    define NEFORCE_COLD __attribute__((cold))
+#else
+#    define NEFORCE_COLD
+#endif
+
+
+/**
+ * @def NEFORCE_TARGET(ARCH)
+ * @brief 为函数指定目标指令集
+ * @param ARCH 指令集名称，如 "sse4.2", "avx2", "avx512f"
+ */
+#ifdef NEFORCE_COMPILER_GNUC
+#    define NEFORCE_TARGET(ARCH) __attribute__((target(ARCH)))
+#else
+#    define NEFORCE_TARGET(ARCH)
+#endif
+
+/**
+ * @def NEFORCE_TARGET_CLONES(ARCH_LIST)
+ * @brief 创建函数的多个版本，运行时自动选择最优版本
+ * @param ARCH_LIST 以逗号分隔的指令集列表，如 "sse4.2,avx,avx2"
+ */
+#if defined(NEFORCE_COMPILER_GCC) && !defined(NEFORCE_COMPILER_CLANG)
+#    define NEFORCE_TARGET_CLONES(ARCH_LIST) __attribute__((target_clones(ARCH_LIST)))
+#else
+#    define NEFORCE_TARGET_CLONES(ARCH_LIST)
+#endif
+
+
+/**
+ * @def NEFORCE_ALWAYS_INLINE
+ * @brief 强制编译器内联函数
+ */
+#ifdef NEFORCE_COMPILER_GNUC
+#    define NEFORCE_ALWAYS_INLINE __attribute__((always_inline))
+#elif defined(NEFORCE_COMPILER_MSVC)
+#    define NEFORCE_ALWAYS_INLINE __forceinline
+#else
+#    define NEFORCE_ALWAYS_INLINE inline
+#endif
+
+/**
+ * @def NEFORCE_ALWAYS_INLINE_INLINE
+ * @brief 强制内联并显式添加 inline 关键字
+ */
+#ifdef NEFORCE_COMPILER_GNUC
+#    define NEFORCE_ALWAYS_INLINE_INLINE NEFORCE_ALWAYS_INLINE inline
+#elif defined(NEFORCE_COMPILER_MSVC)
+#    define NEFORCE_ALWAYS_INLINE_INLINE NEFORCE_ALWAYS_INLINE
+#else
+#    define NEFORCE_ALWAYS_INLINE_INLINE inline
+#endif
+
+
+/**
+ * @def NEFORCE_UNLIKELY
+ * @brief 提示编译器该分支不太可能执行
+ */
+#ifdef NEFORCE_STANDARD_17
+#    define NEFORCE_UNLIKELY [[unlikely]]
+#else
+#    define NEFORCE_UNLIKELY
+#endif
+
+/**
+ * @def NEFORCE_LIKELY
+ * @brief 提示编译器该分支很可能执行
+ */
+#ifdef NEFORCE_STANDARD_20
+#    define NEFORCE_LIKELY [[likely]]
+#else
+#    define NEFORCE_LIKELY
+#endif
+
+/**
+ * @def NEFORCE_NORETURN
+ * @brief 标记函数不会返回
+ */
+#if defined(NEFORCE_STANDARD_11)
+#    define NEFORCE_NORETURN [[noreturn]]
+#elif defined(NEFORCE_COMPILER_GNUC)
+#    define NEFORCE_NORETURN __attribute__((noreturn))
+#elif defined(NEFORCE_COMPILER_MSVC)
+#    define NEFORCE_NORETURN __declspec(noreturn)
+#else
+#    define NEFORCE_NORETURN
+#endif
+
+
+/**
+ * @def NEFORCE_PURE_FUNCTION
+ * @brief 标记函数为纯函数（仅依赖参数）
+ */
+#ifdef NEFORCE_COMPILER_GNUC
+#    define NEFORCE_PURE_FUNCTION __attribute__((__pure__))
+#else
+#    define NEFORCE_PURE_FUNCTION
+#endif
+
+/**
+ * @def NEFORCE_CONST_FUNCTION
+ * @brief 标记函数为常量函数（只读全局状态）
+ */
+#ifdef NEFORCE_COMPILER_GNUC
+#    define NEFORCE_CONST_FUNCTION __attribute__((__const__))
+#else
+#    define NEFORCE_CONST_FUNCTION
+#endif
+
+
+/**
+ * @def NEFORCE_NOVTABLE
+ * @brief 抑制虚表生成
+ */
 #if defined(NEFORCE_COMPILER_GNUC)
 #    define NEFORCE_NOVTABLE __attribute__((novtable))
 #elif defined(NEFORCE_COMPILER_MSVC)
@@ -615,7 +715,10 @@
 #    define NEFORCE_NOVTABLE
 #endif
 
-
+/**
+ * @def NEFORCE_ALLOC_OPTIMIZE
+ * @brief 标记分配器函数，提示编译器进行优化
+ */
 #if defined(NEFORCE_COMPILER_GNUC)
 #    define NEFORCE_ALLOC_OPTIMIZE NEFORCE_ALWAYS_INLINE
 #elif defined(NEFORCE_COMPILER_MSVC)
@@ -625,12 +728,58 @@
 #endif
 
 
+/**
+ * @def NEFORCE_RESTRICT
+ * @brief 指示指针不与其他指针别名，以助编译器优化
+ */
 #if defined(NEFORCE_COMPILER_GNUC)
 #    define NEFORCE_RESTRICT __restrict__
 #else
 #    define NEFORCE_RESTRICT __restrict
 #endif
 
+
+/**
+ * @def NEFORCE_NO_TSAN
+ * @brief 禁用线程检查 ThreadSanitizer
+ */
+#ifdef NEFORCE_COMPILER_CLANG
+#    define NEFORCE_NO_TSAN __attribute__((no_sanitize("thread")))
+#else
+#    define NEFORCE_NO_TSAN
+#endif
+
+/**
+ * @def NEFORCE_NO_ASAN
+ * @brief 禁用地址检查 AddressSanitizer
+ */
+#ifdef NEFORCE_COMPILER_CLANG
+#    define NEFORCE_NO_ASAN __attribute__((no_sanitize("address")))
+#else
+#    define NEFORCE_NO_ASAN
+#endif
+
+/**
+ * @def NEFORCE_NO_MSAN
+ * @brief 禁用内存检查 MemorySanitizer
+ */
+#ifdef NEFORCE_COMPILER_CLANG
+#    define NEFORCE_NO_MSAN __attribute__((no_sanitize("memory")))
+#else
+#    define NEFORCE_NO_MSAN
+#endif
+
+/**
+ * @def NEFORCE_NO_UBSAN
+ * @brief 禁用未定义行为检查 UndefinedBehaviorSanitizer
+ */
+#ifdef NEFORCE_COMPILER_CLANG
+#    define NEFORCE_NO_UBSAN __attribute__((no_sanitize("undefined")))
+#else
+#    define NEFORCE_NO_UBSAN
+#endif
+
+/** @} */ // PerformanceHints
 
 /**
  * @defgroup TypeRangeMacros 类型范围宏

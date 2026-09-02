@@ -16,6 +16,8 @@ const error_category& ssl_category() noexcept {
     return instance;
 }
 
-error_code ssl_exception::last_error() noexcept { return {static_cast<int>(::ERR_peek_last_error()), ssl_category()}; }
+error_code ssl_exception::last_ssl_error() noexcept {
+    return {static_cast<int>(::ERR_peek_last_error()), ssl_category()};
+}
 
 NEFORCE_END_NAMESPACE__

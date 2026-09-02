@@ -13,8 +13,8 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup DebugAndAssertions 调试与断言
- * @brief 调试和断言工具
+ * @defgroup DebugAAssertionsAOptimize 调试、断言与优化
+ * @brief 调试、断言与优化工具
  * @{
  */
 
@@ -72,6 +72,36 @@ NEFORCE_NORETURN NEFORCE_ALWAYS_INLINE_INLINE void unreachable() noexcept {
     __assume(false);
 #endif
 }
+
+
+/**
+ * @brief 向编译器提示条件表达式很可能为真
+ * @param x 条件表达式
+ * @return 条件表达式的值
+ * @warning 错误使用可能降低性能，仅在确实有概率偏差时使用
+ */
+NEFORCE_ALWAYS_INLINE_INLINE bool likely(bool x) {
+#ifdef NEFORCE_COMPILER_GNUC
+    return __builtin_expect((x), true);
+#else
+    return x;
+#endif
+}
+
+/**
+ * @brief 向编译器提示条件表达式很可能为假
+ * @param x 条件表达式
+ * @return 条件表达式的值
+ * @warning 错误使用可能降低性能，仅在确实有概率偏差时使用
+ */
+NEFORCE_ALWAYS_INLINE_INLINE bool unlikely(bool x) {
+#ifdef NEFORCE_COMPILER_GNUC
+    return __builtin_expect((x), false);
+#else
+    return x;
+#endif
+}
+
 
 /**
  * @brief 检查当前上下文是否在常量求值中

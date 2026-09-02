@@ -169,13 +169,13 @@ struct NEFORCE_API ports : iobject<ports> {
      * 创建未定义端口的对象。
      */
     constexpr ports() noexcept = default;
-    ~ports() noexcept = default;
+    NEFORCE_CONSTEXPR20 ~ports() noexcept = default;
 
     constexpr ports(const ports&) noexcept = default;
-    ports& operator=(const ports&) noexcept = default;
+    constexpr ports& operator=(const ports&) noexcept = default;
 
     constexpr ports(ports&&) noexcept = default;
-    ports& operator=(ports&&) noexcept = default;
+    constexpr ports& operator=(ports&&) noexcept = default;
 
     /**
      * @brief 从枚举值构造

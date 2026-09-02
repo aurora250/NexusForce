@@ -10,7 +10,7 @@
  */
 
 #include "NeForce/core/container/list.hpp"
-#include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/container/flat_unordered_map.hpp"
 #include "NeForce/core/time/clocks.hpp"
 #include "NeForce/core/utility/optional.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -51,10 +51,11 @@ private:
     using list_type = list<pair<Key, Value>>;           ///< 底层列表类型
     using list_iterator = typename list_type::iterator; ///< 列表迭代器类型
 
-    size_type capacity_;                          ///< 缓存容量
-    list_type list_;                              ///< 双向链表，头部为最近使用，尾部为最久未使用
-    unordered_map<Key, list_iterator> map_;       ///< 键到链表节点的映射
-    unordered_map<Key, time_point> access_times_; ///< 键到最后访问时间的映射
+    size_type capacity_; ///< 缓存容量
+    list_type list_;     ///< 双向链表，头部为最近使用，尾部为最久未使用
+
+    flat_unordered_map<Key, list_iterator> map_;       ///< 键到链表节点的映射
+    flat_unordered_map<Key, time_point> access_times_; ///< 键到最后访问时间的映射
 
 public:
     /**

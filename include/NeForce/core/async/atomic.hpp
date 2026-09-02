@@ -96,15 +96,8 @@ public:
      * @brief 检查是否支持无锁操作
      * @return 是否支持无锁
      */
-    NEFORCE_NODISCARD bool is_lock_free() const noexcept {
-        return _NEFORCE is_always_lock_free<sizeof(value_), align_inner>();
-    }
-
-    /**
-     * @brief volatile版本的检查是否支持无锁操作
-     */
-    NEFORCE_NODISCARD bool is_lock_free() const volatile noexcept {
-        return _NEFORCE is_always_lock_free<sizeof(value_), align_inner>();
+    NEFORCE_NODISCARD static constexpr bool is_lock_free() noexcept {
+        return _NEFORCE is_always_lock_free<sizeof(T), align_inner>();
     }
 
     /**
@@ -336,12 +329,7 @@ public:
      * @brief 检查是否支持无锁操作
      * @return 是否支持无锁
      */
-    NEFORCE_NODISCARD bool is_lock_free() const noexcept { return base_.is_lock_free(); }
-
-    /**
-     * @brief volatile版本的检查是否支持无锁操作
-     */
-    NEFORCE_NODISCARD bool is_lock_free() const volatile noexcept { return base_.is_lock_free(); }
+    NEFORCE_NODISCARD static constexpr bool is_lock_free() noexcept { return atomic_base<bool>::is_lock_free(); }
 
     /**
      * @brief 原子存储操作
@@ -884,6 +872,14 @@ struct atomic<long double> : atomic_float_base<long double> {
 
     using atomic_float_base<long double>::operator=;
 };
+
+
+template <typename T>
+void swap_relaxed(atomic<T>& left, atomic<T>& right) noexcept {
+    T temp = left.load(memory_order_relaxed);
+    left.store(right.load(memory_order_relaxed), memory_order_relaxed);
+    right.store(temp, memory_order_relaxed);
+}
 
 /** @} */ // AtomicOperations
 

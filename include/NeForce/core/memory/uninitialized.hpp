@@ -34,7 +34,7 @@ NEFORCE_BEGIN_INNER__
  * 对于平凡可复制类型，可以直接使用字节拷贝。
  */
 template <typename Iterator1, typename Iterator2,
-          enable_if_t<is_trivially_copy_assignable_v<iter_value_t<Iterator1>>, int> = 0>
+          enable_if_t<is_trivially_copyable_v<iter_value_t<Iterator1>>, int> = 0>
 NEFORCE_CONSTEXPR20 Iterator2 __uninitialized_copy_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
     return _NEFORCE copy(first, last, result);
 }
@@ -53,7 +53,7 @@ NEFORCE_CONSTEXPR20 Iterator2 __uninitialized_copy_aux(Iterator1 first, Iterator
  * 如果发生异常，已构造的对象会被销毁。
  */
 template <typename Iterator1, typename Iterator2,
-          enable_if_t<!is_trivially_copy_assignable_v<iter_value_t<Iterator1>>, int> = 0>
+          enable_if_t<!is_trivially_copyable_v<iter_value_t<Iterator1>>, int> = 0>
 NEFORCE_CONSTEXPR20 Iterator2 __uninitialized_copy_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
     Iterator2 cur = result;
     try {
@@ -168,7 +168,7 @@ NEFORCE_BEGIN_INNER__
  * @param last 范围结束
  * @param x 要填充的值
  */
-template <typename Iterator, typename T, enable_if_t<is_trivially_copy_assignable_v<iter_value_t<Iterator>>, int> = 0>
+template <typename Iterator, typename T, enable_if_t<is_trivially_copyable_v<iter_value_t<Iterator>>, int> = 0>
 NEFORCE_CONSTEXPR20 void __uninitialized_fill_aux(Iterator first, Iterator last, const T& x) {
     for (; first != last; ++first) {
         _NEFORCE construct(&*first, x);
@@ -184,7 +184,7 @@ NEFORCE_CONSTEXPR20 void __uninitialized_fill_aux(Iterator first, Iterator last,
  * @param x 要填充的值
  * @throws memory_exception 如果构造过程中发生异常
  */
-template <typename Iterator, typename T, enable_if_t<!is_trivially_copy_assignable_v<iter_value_t<Iterator>>, int> = 0>
+template <typename Iterator, typename T, enable_if_t<!is_trivially_copyable_v<iter_value_t<Iterator>>, int> = 0>
 NEFORCE_CONSTEXPR20 void __uninitialized_fill_aux(Iterator first, Iterator last, const T& x) {
     Iterator cur = first;
     try {
@@ -234,7 +234,7 @@ NEFORCE_BEGIN_INNER__
  * @param x 要填充的值
  * @return 填充后的结束迭代器
  */
-template <typename Iterator, typename T, enable_if_t<is_trivially_copy_assignable_v<iter_value_t<Iterator>>, int> = 0>
+template <typename Iterator, typename T, enable_if_t<is_trivially_copyable_v<iter_value_t<Iterator>>, int> = 0>
 NEFORCE_CONSTEXPR20 Iterator __uninitialized_fill_n_aux(Iterator first, size_t n, const T& x) {
     Iterator cur = first;
     for (size_t i = 0; i != n; ++i, ++cur) {
@@ -253,7 +253,7 @@ NEFORCE_CONSTEXPR20 Iterator __uninitialized_fill_n_aux(Iterator first, size_t n
  * @return 填充后的结束迭代器
  * @throws memory_exception 如果构造过程中发生异常
  */
-template <typename Iterator, typename T, enable_if_t<!is_trivially_copy_assignable_v<iter_value_t<Iterator>>, int> = 0>
+template <typename Iterator, typename T, enable_if_t<!is_trivially_copyable_v<iter_value_t<Iterator>>, int> = 0>
 NEFORCE_CONSTEXPR20 Iterator __uninitialized_fill_n_aux(Iterator first, size_t n, const T& x) {
     Iterator cur = first;
     try {
@@ -302,7 +302,7 @@ NEFORCE_BEGIN_INNER__
  * @return 输出范围结束
  */
 template <typename Iterator1, typename Iterator2,
-          enable_if_t<is_trivially_copy_assignable_v<iter_value_t<Iterator1>>, int> = 0>
+          enable_if_t<is_trivially_copyable_v<iter_value_t<Iterator1>>, int> = 0>
 NEFORCE_CONSTEXPR20 Iterator2 __uninitialized_move_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
     const auto n = static_cast<size_t>(last - first);
     const auto bytes = n * sizeof(iter_value_t<Iterator1>);
@@ -323,7 +323,7 @@ NEFORCE_CONSTEXPR20 Iterator2 __uninitialized_move_aux(Iterator1 first, Iterator
  * 使用移动构造函数构造对象，并可能使源对象处于有效但未指定的状态。
  */
 template <typename Iterator1, typename Iterator2,
-          enable_if_t<!is_trivially_copy_assignable_v<iter_value_t<Iterator1>>, int> = 0>
+          enable_if_t<!is_trivially_copyable_v<iter_value_t<Iterator1>>, int> = 0>
 NEFORCE_CONSTEXPR20 Iterator2 __uninitialized_move_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
     Iterator2 cur = result;
     try {

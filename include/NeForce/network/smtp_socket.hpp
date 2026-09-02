@@ -1,5 +1,5 @@
-#ifndef NEFORCE_NEWORK_SMTP_SOCKET_HPP__
-#define NEFORCE_NEWORK_SMTP_SOCKET_HPP__
+#ifndef NEFORCE_NETWORK_SMTP_SOCKET_HPP__
+#define NEFORCE_NETWORK_SMTP_SOCKET_HPP__
 
 /**
  * @file smtp_socket.hpp
@@ -27,18 +27,7 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * SMTP协议操作失败时抛出的异常。
  */
-struct NEFORCE_API smtp_exception final : network_exception {
-    explicit smtp_exception(const char* info = "SMTP Operation Failed.", const error_code code = last_error()) noexcept
-    :
-    network_exception(info, code) {}
-
-    explicit smtp_exception(const exception& e) :
-    network_exception(e) {}
-
-    ~smtp_exception() override = default;
-
-    NEFORCE_NODISCARD const char* type() const noexcept override { return "smtp_exception"; }
-};
+NEFORCE_ERROR_BUILD_NETWORK_CLASS(smtp_exception, "SMTP Operation Failed.")
 
 /** @} */ // Exceptions
 
@@ -415,4 +404,4 @@ public:
 /** @} */ // SMTP
 
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_NEWORK_SMTP_SOCKET_HPP__
+#endif // NEFORCE_NETWORK_SMTP_SOCKET_HPP__

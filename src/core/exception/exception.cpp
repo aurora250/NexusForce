@@ -31,8 +31,8 @@ int uncaught_exceptions() noexcept {
 }
 
 void throw_with_stack(const exception& err) {
-    printcln(color::red(), "\nException : (", err.type(), ") ", err.what());
-    printcln(color::red(), stacktrace());
+    eprintln("\nException : (", err.type(), ") ", err.what());
+    eprintln(stacktrace::current(1));
     throw err;
 }
 

@@ -1251,7 +1251,7 @@ T atomic_sub_fetch_any(T* ptr, remove_volatile_t<T> value, memory_order mo) noex
  * @return 是否支持无锁操作
  */
 template <size_t Size, size_t Align>
-NEFORCE_CONSTEXPR17 bool is_always_lock_free() noexcept {
+constexpr bool is_always_lock_free() noexcept {
 #ifdef NEFORCE_COMPILER_GNUC
     return __atomic_is_lock_free(Size, reinterpret_cast<void*>(-Align));
 #else
@@ -1632,14 +1632,7 @@ public:
      * @brief 检查是否支持无锁操作
      * @return 是否支持无锁
      */
-    NEFORCE_NODISCARD bool is_lock_free() const noexcept {
-        return _NEFORCE is_always_lock_free<sizeof(T), align_inner>();
-    }
-
-    /**
-     * @brief volatile版本的检查是否支持无锁操作
-     */
-    NEFORCE_NODISCARD bool is_lock_free() const volatile noexcept {
+    NEFORCE_NODISCARD static constexpr bool is_lock_free() noexcept {
         return _NEFORCE is_always_lock_free<sizeof(T), align_inner>();
     }
 
@@ -2063,14 +2056,7 @@ public:
      * @brief 检查是否支持无锁操作
      * @return 是否支持无锁
      */
-    NEFORCE_NODISCARD bool is_lock_free() const noexcept {
-        return _NEFORCE is_always_lock_free<sizeof(value_type), alignof(value_type)>();
-    }
-
-    /**
-     * @brief volatile版本的检查是否支持无锁操作
-     */
-    NEFORCE_NODISCARD bool is_lock_free() const volatile noexcept {
+    NEFORCE_NODISCARD static constexpr bool is_lock_free() noexcept {
         return _NEFORCE is_always_lock_free<sizeof(value_type), alignof(value_type)>();
     }
 
@@ -2429,14 +2415,7 @@ public:
     /**
      * @brief 检查是否支持无锁操作
      */
-    NEFORCE_NODISCARD bool is_lock_free() const noexcept {
-        return _NEFORCE is_always_lock_free<sizeof(Float), alignof(Float)>();
-    }
-
-    /**
-     * @brief volatile版本的检查是否支持无锁操作
-     */
-    NEFORCE_NODISCARD bool is_lock_free() const volatile noexcept {
+    NEFORCE_NODISCARD static constexpr bool is_lock_free() noexcept {
         return _NEFORCE is_always_lock_free<sizeof(Float), alignof(Float)>();
     }
 
@@ -2705,7 +2684,7 @@ public:
      * @brief 检查是否支持无锁操作
      * @return 是否支持无锁
      */
-    NEFORCE_NODISCARD bool is_lock_free() const noexcept {
+    NEFORCE_NODISCARD static constexpr bool is_lock_free() noexcept {
         return _NEFORCE is_always_lock_free<sizeof(T), required_alignment>();
     }
 
@@ -2853,7 +2832,7 @@ public:
      * @brief 检查是否支持无锁操作
      * @return 是否支持无锁
      */
-    NEFORCE_NODISCARD bool is_lock_free() const noexcept {
+    NEFORCE_NODISCARD static constexpr bool is_lock_free() noexcept {
         return _NEFORCE is_always_lock_free<sizeof(T), required_alignment>();
     }
 
@@ -3110,7 +3089,7 @@ public:
      * @brief 检查是否支持无锁操作
      * @return 是否支持无锁
      */
-    NEFORCE_NODISCARD bool is_lock_free() const noexcept {
+    NEFORCE_NODISCARD static constexpr bool is_lock_free() noexcept {
         return _NEFORCE is_always_lock_free<sizeof(Float), required_alignment>();
     }
 
@@ -3309,7 +3288,7 @@ public:
      * @brief 检查是否支持无锁操作
      * @return 是否支持无锁
      */
-    NEFORCE_NODISCARD bool is_lock_free() const noexcept {
+    NEFORCE_NODISCARD static constexpr bool is_lock_free() noexcept {
         return _NEFORCE is_always_lock_free<sizeof(T*), required_alignment>();
     }
 

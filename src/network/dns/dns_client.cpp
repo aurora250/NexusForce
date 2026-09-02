@@ -24,10 +24,38 @@ namespace {
         return tls_random.next_int(1, 65535);
     }
 
+    // Generate a 0x20 randomized-case pattern of the query name.
+    // Each ASCII letter is independently kept or flipped, so a forged
+    // response cannot guess the expected case without seeing the query.
+    string randomize_case_pattern(const string_view domain, const bool enable) {
+        if (!enable) {
+            return string(domain);
+        }
+        string pattern(domain);
+        for (size_t i = 0; i < pattern.size(); ++i) {
+            char& c = pattern[i];
+            if (c >= 'a' && c <= 'z') {
+                if (secret::next_int<uint32_t>(2) != 0) {
+                    c = static_cast<char>(c - 'a' + 'A');
+                }
+            } else if (c >= 'A' && c <= 'Z') {
+                if (secret::next_int<uint32_t>(2) != 0) {
+                    c = static_cast<char>(c - 'A' + 'a');
+                }
+            }
+        }
+        return pattern;
+    }
+
+    // Source port rotation thresholds: rotate the shared UDP socket after
+    // enough queries or enough wall time, shrinking the DNS poisoning window.
+    constexpr uint32_t g_socket_rotate_queries = 128;
+    constexpr seconds g_socket_rotate_interval{60};
+
     template <typename T>
     T read_network_be(const byte_vector& data, const size_t offset) {
         T value;
-        memory_copy(&value, &data[offset], sizeof(T));
+        _NEFORCE memory_copy(&value, &data[offset], sizeof(T));
         return endian::network_to_host(value);
     }
 
@@ -408,7 +436,8 @@ namespace {
         return record;
     }
 
-    dns_query_result parse_dns_response(const byte_vector& response, const uint16_t expected_id) {
+    dns_query_result parse_dns_response(const byte_vector& response, const uint16_t expected_id,
+                                        const string_view expected_question) {
         if (response.size() < sizeof(dns_header)) {
             NEFORCE_THROW_EXCEPTION(dns_exception::parse_error("Response too short"));
         }
@@ -441,7 +470,16 @@ namespace {
         size_t offset = sizeof(dns_header);
 
         for (uint16_t i = 0; i < header.qdcount; ++i) {
-            decode_domain_name(response, offset);
+            if (i == 0 && !expected_question.empty()) {
+                // 0x20 validation: the response must echo
+                // the exact randomized-case QNAME we sent (case-sensitive compare).
+                const string decoded = decode_domain_name(response, offset);
+                if (decoded.view() != expected_question) {
+                    NEFORCE_THROW_EXCEPTION(dns_exception::parse_error("0x20 question case mismatch in DNS response"));
+                }
+            } else {
+                decode_domain_name(response, offset);
+            }
             if (offset + 4 > response.size()) {
                 NEFORCE_THROW_EXCEPTION(dns_exception::parse_error("Question section exceeds buffer"));
             }
@@ -491,10 +529,16 @@ void dns_client::dns_query_op::start() {
         return;
     }
 
-    query_data_ = build_query(domain.view(), type, qclass, client->recursion_desired_, true, client->dnssec_ok_,
-                              client->edns_udp_payload_);
-    query_id_ = endian::network_to_host<uint16_t>(*reinterpret_cast<const uint16_t*>(query_data_.data()));
     start_time_ = steady_clock::now();
+    timeout_ = client->config_.timeout;
+    max_udp_retries_ = client->max_udp_retries_;
+    const auto budget = static_cast<uint64_t>(timeout_.count()) * (static_cast<uint64_t>(max_udp_retries_) + 1);
+    deadline_ = start_time_ + milliseconds(static_cast<int64_t>(budget));
+
+    expected_question_ = randomize_case_pattern(domain.view(), client->case_randomize_);
+    query_data_ = build_query(domain.view(), type, qclass, client->recursion_desired_, true, client->dnssec_ok_,
+                              client->edns_udp_payload_, expected_question_.view());
+    query_id_ = endian::network_to_host<uint16_t>(*reinterpret_cast<const uint16_t*>(query_data_.data()));
 
     {
         client->pending_mutex_.lock();
@@ -505,11 +549,18 @@ void dns_client::dns_query_op::start() {
         client->pending_mutex_.unlock();
     }
 
-    client->send_query(query_data_);
+    try {
+        client->maybe_rotate_socket();
+        client->send_query(query_data_);
+    } catch (...) {
+        client->unregister_query(query_id_);
+        handler(make_error_code(errc::io_error), dns_query_result{});
+        return;
+    }
     client->ensure_io_started();
 
     auto self = shared_from_this();
-    const auto timeout_ms = static_cast<uint64_t>(client->config_.timeout.count());
+    const auto timeout_ms = static_cast<uint64_t>(timeout_.count());
     timer_id_ = client->ctx_->schedule_timer(timeout_ms, [self]() { self->on_timeout(); });
 
     if (cancel_slot != nullptr) {
@@ -522,6 +573,29 @@ void dns_client::dns_query_op::start() {
     }
 }
 
+void dns_client::dns_query_op::retry_udp() {
+    expected_question_ = randomize_case_pattern(domain.view(), client->case_randomize_);
+    query_data_ = build_query(domain.view(), type, qclass, client->recursion_desired_, true, client->dnssec_ok_,
+                              client->edns_udp_payload_, expected_question_.view());
+    query_id_ = endian::network_to_host<uint16_t>(*reinterpret_cast<const uint16_t*>(query_data_.data()));
+
+    {
+        client->pending_mutex_.lock();
+        auto& entry_ref = client->pending_queries_[query_id_];
+        entry_ref.op = weak_from_this();
+        entry_ref.query_data = query_data_;
+        entry_ref.created_at = steady_clock::now();
+        client->pending_mutex_.unlock();
+    }
+
+    try {
+        client->send_query(query_data_);
+        // NOLINTNEXTLINE(bugprone-empty-catch)
+    } catch (...) {
+        // Send failure: keep waiting; the pending timeout path settles the op.
+    }
+}
+
 void dns_client::dns_query_op::on_response(const error_code /*ec*/, dns_query_result result) {
     bool expected = false;
     if (!fired_.compare_exchange_strong(expected, true)) {
@@ -529,6 +603,12 @@ void dns_client::dns_query_op::on_response(const error_code /*ec*/, dns_query_re
     }
 
     client->ctx_->cancel_timer(timer_id_);
+    client->unregister_query(query_id_);
+
+    if (result.truncated) {
+        start_tcp_fallback();
+        return;
+    }
 
     const auto end_time = steady_clock::now();
     result.query_time = time_cast<milliseconds>(end_time - start_time_);
@@ -536,24 +616,27 @@ void dns_client::dns_query_op::on_response(const error_code /*ec*/, dns_query_re
     const auto cache_key = create_cache_key(domain.view(), type, qclass);
     client->update_cache(cache_key, result);
 
-    if (result.truncated) {
-        try {
-            const auto tcp_response = client->send_tcp_query(query_data_);
-            auto tcp_result = parse_response(tcp_response, query_id_);
-            const auto tcp_end_time = steady_clock::now();
-            tcp_result.query_time = time_cast<milliseconds>(tcp_end_time - start_time_);
-            client->update_cache(cache_key, tcp_result);
-            handler(error_code{}, move(tcp_result));
-        } catch (...) {
-            handler(make_error_code(errc::protocol_error), dns_query_result{});
-        }
-        return;
-    }
-
     handler(error_code{}, move(result));
 }
 
 void dns_client::dns_query_op::on_timeout() {
+    if (fired_.load()) {
+        return;
+    }
+
+    const auto now = steady_clock::now();
+    if (udp_retries_ < max_udp_retries_ && now < deadline_) {
+        ++udp_retries_;
+        client->unregister_query(query_id_);
+        retry_udp();
+
+        auto self = shared_from_this();
+        const auto remaining_ms = time_cast<milliseconds>(deadline_ - now).count();
+        const auto next_timeout = max<int64_t>(1, min<int64_t>(timeout_.count(), remaining_ms));
+        timer_id_ = client->ctx_->schedule_timer(static_cast<uint64_t>(next_timeout), [self]() { self->on_timeout(); });
+        return;
+    }
+
     bool expected = false;
     if (!fired_.compare_exchange_strong(expected, true)) {
         return;
@@ -572,6 +655,160 @@ void dns_client::dns_query_op::do_cancel() {
     handler(make_operation_aborted(), dns_query_result{});
 }
 
+void dns_client::dns_query_op::start_tcp_fallback() {
+    // Entry points:
+    // (1) TC-flagged UDP reply from on_response(), where fired_ is already set;
+    // (2) forced-TCP mode from async_query(), where no query has been built yet and fired_ is still clear.
+    if (query_data_.empty()) {
+        start_time_ = steady_clock::now();
+        timeout_ = client->config_.timeout;
+        max_udp_retries_ = client->max_udp_retries_;
+        deadline_ = start_time_ + milliseconds(timeout_.count());
+
+        expected_question_ = randomize_case_pattern(domain.view(), client->case_randomize_);
+        query_data_ = build_query(domain.view(), type, qclass, client->recursion_desired_, true, client->dnssec_ok_,
+                                  client->edns_udp_payload_, expected_question_.view());
+        query_id_ = endian::network_to_host<uint16_t>(*reinterpret_cast<const uint16_t*>(query_data_.data()));
+
+        if (tcp_only_) {
+            client->pending_mutex_.lock();
+            auto& entry_ref = client->pending_queries_[query_id_];
+            entry_ref.op = weak_from_this();
+            entry_ref.query_data = query_data_;
+            entry_ref.created_at = steady_clock::now();
+            client->pending_mutex_.unlock();
+        }
+    }
+
+    const auto now = steady_clock::now();
+    if (now >= deadline_) {
+        finish_tcp(make_error_code(errc::timed_out), dns_query_result{});
+        return;
+    }
+
+    const auto endpoint = ip_address::parse(client->config_.server, client->config_.port);
+    if (!endpoint) {
+        finish_tcp(make_error_code(errc::invalid_argument), dns_query_result{});
+        return;
+    }
+
+    tcp_socket_ = make_unique<tcp_socket>();
+    tcp_socket_->open();
+    if (!tcp_socket_->is_open()) {
+        finish_tcp(make_error_code(errc::io_error), dns_query_result{});
+        return;
+    }
+
+    const auto remaining_ms = time_cast<milliseconds>(deadline_ - now).count();
+    auto self = shared_from_this();
+    tcp_timer_id_ = client->ctx_->schedule_timer(static_cast<uint64_t>(max<int64_t>(1, remaining_ms)),
+                                                 [self]() { self->on_tcp_timeout(); });
+    tcp_socket_->async_connect(*client->ctx_, *endpoint, [self](error_code ec) { self->on_tcp_connected(ec); });
+}
+
+void dns_client::dns_query_op::on_tcp_connected(const error_code ec) {
+    if (ec) {
+        finish_tcp(ec, dns_query_result{});
+        return;
+    }
+
+    tcp_request_buf_.resize(query_data_.size() + 2);
+    const auto len = endian::host_to_network<uint16_t>(static_cast<uint16_t>(query_data_.size()));
+    memory_copy(tcp_request_buf_.data(), &len, 2);
+    memory_copy(tcp_request_buf_.data() + 2, query_data_.data(), query_data_.size());
+
+    auto self = shared_from_this();
+    tcp_socket_->async_write(
+            *client->ctx_,
+            memory_view<const char>{reinterpret_cast<const char*>(tcp_request_buf_.data()), tcp_request_buf_.size()},
+            [self](error_code ec, size_t bytes) { self->on_tcp_written(ec, bytes); });
+}
+
+void dns_client::dns_query_op::on_tcp_written(const error_code ec, const size_t /*bytes*/) {
+    if (ec) {
+        finish_tcp(ec, dns_query_result{});
+        return;
+    }
+
+    auto self = shared_from_this();
+    tcp_socket_->async_read(*client->ctx_,
+                            memory_view<char>{reinterpret_cast<char*>(tcp_len_buf_), sizeof(tcp_len_buf_)},
+                            [self](error_code ec, size_t bytes) { self->on_tcp_len_read(ec, bytes); });
+}
+
+void dns_client::dns_query_op::on_tcp_len_read(const error_code ec, const size_t bytes) {
+    if (ec) {
+        finish_tcp(ec, dns_query_result{});
+        return;
+    }
+    if (bytes != sizeof(tcp_len_buf_)) {
+        finish_tcp(make_error_code(errc::protocol_error), dns_query_result{});
+        return;
+    }
+
+    const uint16_t len = endian::network_to_host(*reinterpret_cast<const uint16_t*>(tcp_len_buf_));
+    if (len == 0) {
+        finish_tcp(make_error_code(errc::protocol_error), dns_query_result{});
+        return;
+    }
+    tcp_response_len_ = len;
+    tcp_response_buf_.resize(len);
+    tcp_response_received_ = 0;
+
+    auto self = shared_from_this();
+    tcp_socket_->async_read(
+            *client->ctx_,
+            memory_view<char>{reinterpret_cast<char*>(tcp_response_buf_.data()), tcp_response_buf_.size()},
+            [self](error_code ec, size_t n) { self->on_tcp_body_read(ec, n); });
+}
+
+void dns_client::dns_query_op::on_tcp_body_read(const error_code ec, const size_t bytes) {
+    if (ec) {
+        finish_tcp(ec, dns_query_result{});
+        return;
+    }
+
+    tcp_response_received_ += bytes;
+    if (tcp_response_received_ < tcp_response_buf_.size()) {
+        auto self = shared_from_this();
+        tcp_socket_->async_read(
+                *client->ctx_,
+                memory_view<char>{reinterpret_cast<char*>(tcp_response_buf_.data() + tcp_response_received_),
+                                  tcp_response_buf_.size() - tcp_response_received_},
+                [self](error_code ec, size_t n) { self->on_tcp_body_read(ec, n); });
+        return;
+    }
+
+    try {
+        auto result = parse_response(tcp_response_buf_, query_id_, expected_question_.view());
+        finish_tcp(error_code{}, move(result));
+    } catch (...) {
+        finish_tcp(make_error_code(errc::protocol_error), dns_query_result{});
+    }
+}
+
+void dns_client::dns_query_op::on_tcp_timeout() { finish_tcp(make_error_code(errc::timed_out), dns_query_result{}); }
+
+void dns_client::dns_query_op::finish_tcp(const error_code ec, dns_query_result result) {
+    if (tcp_finished_) {
+        return;
+    }
+    tcp_finished_ = true;
+
+    client->ctx_->cancel_timer(tcp_timer_id_);
+    client->unregister_query(query_id_);
+    if (tcp_socket_ && tcp_socket_->is_open()) {
+        tcp_socket_->close();
+    }
+
+    if (!ec) {
+        const auto end_time = steady_clock::now();
+        result.query_time = time_cast<milliseconds>(end_time - start_time_);
+        const auto cache_key = create_cache_key(domain.view(), type, qclass);
+        client->update_cache(cache_key, result);
+    }
+    handler(ec, move(result));
+}
 
 void dns_client::start_io() {
     if (io_running_) {
@@ -591,6 +828,8 @@ void dns_client::start_io() {
         NEFORCE_THROW_EXCEPTION(dns_exception("dns_client: io_context is required for async I/O"));
     }
     register_shared_receive();
+    socket_created_at_ = steady_clock::now();
+    query_count_ = 0;
 }
 
 void dns_client::stop_io() {
@@ -604,9 +843,14 @@ void dns_client::stop_io() {
     }
 
     {
+        vector<shared_ptr<dns_query_op>> tcp_ops;
         pending_mutex_.lock();
         for (auto& pending_query: pending_queries_) {
             if (auto const op = pending_query.second.op.lock()) {
+                if (op->tcp_only_) {
+                    tcp_ops.push_back(op);
+                    continue;
+                }
                 bool fired_expected = false;
                 if (op->fired_.compare_exchange_strong(fired_expected, true)) {
                     op->handler(make_operation_aborted(), dns_query_result{});
@@ -615,6 +859,10 @@ void dns_client::stop_io() {
         }
         pending_queries_.clear();
         pending_mutex_.unlock();
+
+        for (auto const& op: tcp_ops) {
+            op->on_tcp_timeout();
+        }
     }
 
     shared_socket_.close();
@@ -663,6 +911,13 @@ void dns_client::dispatch_to_op(const uint16_t txid, byte_vector response) {
         pending_mutex_.unlock();
         return;
     }
+
+    const auto shared_op = it->second.op.lock();
+    if (shared_op != nullptr && shared_op->tcp_only_) {
+        pending_mutex_.unlock();
+        return;
+    }
+
     const weak_ptr<dns_query_op> weak_op = move(it->second.op);
     pending_queries_.erase(it);
     pending_mutex_.unlock();
@@ -673,7 +928,7 @@ void dns_client::dispatch_to_op(const uint16_t txid, byte_vector response) {
     }
 
     try {
-        auto result = parse_dns_response(response, op->query_id_);
+        auto result = parse_dns_response(response, op->query_id_, op->expected_question_.view());
         op->on_response(error_code{}, move(result));
     } catch (...) {
         bool expected = false;
@@ -704,99 +959,38 @@ void dns_client::send_query(const byte_vector& query) {
     }
 }
 
-byte_vector dns_client::send_tcp_query(const byte_vector& query) {
-    thread_local struct tcp_socket_state {
-        tcp_socket socket;
-        string server;
-        ports port;
-    } tls_tcp_state;
-
-    auto connect = [&] {
-        tls_tcp_state.socket.close();
-        tls_tcp_state.socket.open();
-
-        if (!tls_tcp_state.socket.is_open()) {
-            NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to create TCP socket"));
-        }
-        if (!tls_tcp_state.socket.set_receive_timeout(config_.timeout) ||
-            !tls_tcp_state.socket.set_send_timeout(config_.timeout)) {
-            tls_tcp_state.socket.close();
-            NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to set socket timeout"));
-        }
-
-        const auto endpoint = ip_address::parse(config_.server, config_.port);
-        if (!endpoint) {
-            tls_tcp_state.socket.close();
-            NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Invalid DNS server address"));
-        }
-
-        static_cast<ip_socket&>(tls_tcp_state.socket).connect(*endpoint);
-        tls_tcp_state.server = config_.server;
-        tls_tcp_state.port = config_.port;
-    };
-
-    if (tls_tcp_state.socket.is_open()) {
-        if (tls_tcp_state.server != config_.server || tls_tcp_state.port != config_.port) {
-            connect();
-        }
-    } else {
-        connect();
+void dns_client::maybe_rotate_socket() {
+    ++query_count_;
+    const auto elapsed = time_cast<seconds>(steady_clock::now() - socket_created_at_);
+    if (query_count_ < g_socket_rotate_queries && elapsed < g_socket_rotate_interval) {
+        return;
     }
-
-    auto send_request = [&]() -> bool {
-        if (query.size() > 65535) {
-            return false;
-        }
-
-        const auto length = endian::host_to_network<uint16_t>(query.size());
-        if (tls_tcp_state.socket.send(memory_view<const char>{reinterpret_cast<const char*>(&length), 2}) != 2) {
-            return false;
-        }
-
-        if (tls_tcp_state.socket.send(memory_view<const char>{reinterpret_cast<const char*>(query.data()),
-                                                              query.size()}) != query.size()) {
-            return false;
-        }
-
-        return true;
-    };
-
-    if (!send_request()) {
-        try {
-            connect();
-        } catch (...) {
-            NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to reconnect TCP socket"));
-        }
-        if (!send_request()) {
-            NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to send query data after reconnect"));
+    {
+        lock<mutex> lock(pending_mutex_);
+        if (!pending_queries_.empty()) {
+            return;
         }
     }
+    rotate_socket();
+}
 
-    uint16_t res_len = 0;
-    if (tls_tcp_state.socket.receive(memory_view<char>{reinterpret_cast<char*>(&res_len), 2}) != 2) {
-        NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to receive response length"));
+void dns_client::rotate_socket() {
+    lock<mutex> lock(send_mutex_);
+    if (shared_socket_.is_open()) {
+        ctx_->remove_fd(static_cast<int>(shared_socket_.native_handle()));
+        shared_socket_.close();
     }
 
-    res_len = endian::network_to_host<uint16_t>(res_len);
-    if (res_len == 0 || res_len > 65535) {
-        NEFORCE_THROW_EXCEPTION(dns_exception::parse_error("Invalid response length"));
+    shared_socket_.open();
+    if (!shared_socket_.is_open()) {
+        NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to recreate shared UDP socket"));
     }
+    shared_socket_.bind(ip_address::any());
+    shared_socket_.set_nonblocking(true);
+    register_shared_receive();
 
-    byte_vector buffer(res_len);
-    size_t total = 0;
-
-    while (total < res_len) {
-        const ssize_t received = tls_tcp_state.socket.receive(
-                memory_view<char>{reinterpret_cast<char*>(buffer.data() + total), res_len - total});
-
-        if (received <= 0) {
-            NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to receive complete response"));
-        }
-
-        total += received;
-    }
-
-    return buffer;
+    socket_created_at_ = steady_clock::now();
+    query_count_ = 0;
 }
 
 dns_client::dns_client(config cfg, io_context& ctx, const bool use_tcp) :
@@ -836,21 +1030,9 @@ void dns_client::async_query(const string_view domain, const dns_record::raw typ
     const auto cache_key = create_cache_key(domain, type, qclass);
     auto cached = check_cache(cache_key);
     if (cached) {
-        handler(error_code{}, *cached);
-        return;
-    }
-
-    if (use_tcp_) {
-        const auto query_data =
-                build_dns_query(domain, type, qclass, recursion_desired_, true, dnssec_ok_, edns_udp_payload_);
-        const auto query_id = endian::network_to_host<uint16_t>(*reinterpret_cast<const uint16_t*>(query_data.data()));
-        try {
-            const auto response = send_tcp_query(query_data);
-            auto result = parse_dns_response(response, query_id);
-            handler(error_code{}, move(result));
-        } catch (...) {
-            handler(make_error_code(errc::io_error), dns_query_result{});
-        }
+        auto h = move(handler);
+        auto res = move(*cached);
+        ctx_->post([h = move(h), res = move(res)]() mutable { h(error_code{}, move(res)); });
         return;
     }
 
@@ -860,7 +1042,13 @@ void dns_client::async_query(const string_view domain, const dns_record::raw typ
     op->type = type;
     op->qclass = qclass;
     op->handler = move(handler);
-    op->start();
+    op->tcp_only_ = use_tcp_;
+
+    if (use_tcp_) {
+        op->start_tcp_fallback();
+    } else {
+        op->start();
+    }
 }
 
 void dns_client::async_query(const string_view domain, const dns_record::raw type, const dns_class qclass,
@@ -873,21 +1061,13 @@ void dns_client::async_query(const string_view domain, const dns_record::raw typ
     const auto cache_key = create_cache_key(domain, type, qclass);
     auto cached = check_cache(cache_key);
     if (cached) {
-        handler(error_code{}, *cached);
-        return;
-    }
-
-    if (use_tcp_) {
-        const auto query_data =
-                build_dns_query(domain, type, qclass, recursion_desired_, true, dnssec_ok_, edns_udp_payload_);
-        const auto query_id = endian::network_to_host<uint16_t>(*reinterpret_cast<const uint16_t*>(query_data.data()));
-        try {
-            const auto response = send_tcp_query(query_data);
-            auto result = parse_dns_response(response, query_id);
-            handler(error_code{}, move(result));
-        } catch (...) {
-            handler(make_error_code(errc::io_error), dns_query_result{});
+        if (slot.is_cancelled()) {
+            handler(make_operation_aborted(), dns_query_result{});
+            return;
         }
+        auto h = move(handler);
+        auto res = move(*cached);
+        ctx_->post([h = move(h), res = move(res)]() mutable { h(error_code{}, move(res)); });
         return;
     }
 
@@ -898,7 +1078,13 @@ void dns_client::async_query(const string_view domain, const dns_record::raw typ
     op->qclass = qclass;
     op->handler = move(handler);
     op->cancel_slot = &slot;
-    op->start();
+    op->tcp_only_ = use_tcp_;
+
+    if (use_tcp_) {
+        op->start_tcp_fallback();
+    } else {
+        op->start();
+    }
 }
 
 auto dns_client::async_query(const string_view domain, const dns_record::raw type, const dns_class qclass,
@@ -916,8 +1102,8 @@ void dns_client::async_query(const string_view domain, const dns_record::raw typ
 }
 
 #ifdef NEFORCE_STANDARD_20
-auto dns_client::async_query(const string_view domain, const dns_record::raw type, const dns_class qclass,
-                             use_awaitable_t /*unused*/) {
+awaitable<error_code, dns_query_result> dns_client::async_query(const string_view domain, const dns_record::raw type,
+                                                                const dns_class qclass, use_awaitable_t /*unused*/) {
     async_result<use_awaitable_t, void(error_code, dns_query_result)> result(use_awaitable);
     async_query(domain, type, qclass, result.get_handler());
     return result.get();
@@ -932,7 +1118,9 @@ dns_query_result dns_client::query(const string_view domain, const dns_record::r
 
     auto fut = async_query(domain, type, qclass, use_future);
 
-    const auto deadline = steady_clock::now() + config_.timeout;
+    const auto total_budget =
+            static_cast<uint64_t>(config_.timeout.count()) * (static_cast<uint64_t>(max_udp_retries_) + 2);
+    const auto deadline = steady_clock::now() + milliseconds(static_cast<int64_t>(total_budget));
     while (fut.wait_for(milliseconds(0)) != future_status::ready) {
         const auto now = steady_clock::now();
         if (now >= deadline) {
@@ -1159,10 +1347,9 @@ vector<dns_query_result> dns_client::batch_query(const vector<string>& domains, 
         futures.push_back(query_async(domain, type));
     }
 
-    // Drive the io_context event loop while waiting for futures.
-    // future.get() only spin-waits on an atomic — it does NOT pump I/O.
-    // Without run_one() the socket callbacks never fire and promises deadlock.
-    const auto deadline = steady_clock::now() + config_.timeout;
+    const auto total_budget =
+            static_cast<uint64_t>(config_.timeout.count()) * (static_cast<uint64_t>(max_udp_retries_) + 2);
+    const auto deadline = steady_clock::now() + milliseconds(total_budget);
 
     vector<dns_query_result> results;
     results.reserve(futures.size());
@@ -1194,11 +1381,9 @@ optional<dns_query_result> dns_client::check_cache(const string& key) {
         const auto it = cache_.find(key);
         if (it != cache_.end()) {
             const auto now = steady_clock::now();
-            const auto age = time_cast<seconds>(now - it->second.second);
-            const auto& res = it->second.first;
-            const auto max_ttl = res.is_success() ? cache_ttl_ : edns::NEGATIVE_CACHE_TTL;
-            if (age < max_ttl) {
-                return optional<dns_query_result>{res};
+            const auto age = time_cast<seconds>(now - it->second.created_at);
+            if (age < it->second.ttl) {
+                return optional<dns_query_result>{it->second.result};
             }
         } else {
             return none;
@@ -1209,13 +1394,11 @@ optional<dns_query_result> dns_client::check_cache(const string& key) {
     const auto it = cache_.find(key);
     if (it != cache_.end()) {
         const auto now = steady_clock::now();
-        const auto age = time_cast<seconds>(now - it->second.second);
-        const auto& res = it->second.first;
-        const auto max_ttl = res.is_success() ? cache_ttl_ : edns::NEGATIVE_CACHE_TTL;
-        if (age >= max_ttl) {
+        const auto age = time_cast<seconds>(now - it->second.created_at);
+        if (age >= it->second.ttl) {
             cache_.erase(it);
         } else {
-            return optional<dns_query_result>{res};
+            return optional<dns_query_result>{it->second.result};
         }
     }
 
@@ -1224,17 +1407,38 @@ optional<dns_query_result> dns_client::check_cache(const string& key) {
 
 void dns_client::update_cache(const string& key, const dns_query_result& result) {
     lock<shared_mutex> write_lock(cache_mutex_);
-    cache_[key] = {result, steady_clock::now()};
+    cache_[key] = cache_entry{result, steady_clock::now(), effective_cache_ttl(result, cache_ttl_)};
+}
+
+seconds dns_client::effective_cache_ttl(const dns_query_result& result, const seconds cap) {
+    if (!result.is_success()) {
+        return edns::NEGATIVE_CACHE_TTL;
+    }
+
+    uint32_t min_record_ttl = numeric_traits<uint32_t>::max();
+    bool found = false;
+    for (const auto& record: result.answers) {
+        min_record_ttl = min(record.ttl, min_record_ttl);
+        found = true;
+    }
+    if (!found) {
+        return seconds(max<int64_t>(0, cap.count()));
+    }
+
+    const int64_t effective = min<int64_t>(static_cast<int64_t>(min_record_ttl), cap.count());
+    return seconds(max<int64_t>(0, effective));
 }
 
 byte_vector dns_client::build_query(const string_view domain, const dns_record::raw type, const dns_class qclass,
                                     const bool rd, const bool edns_enable, const bool dnssec_ok,
-                                    const uint16_t edns_payload) {
-    return build_dns_query(domain, type, qclass, rd, edns_enable, dnssec_ok, edns_payload);
+                                    const uint16_t edns_payload, const string_view case_pattern) {
+    const string_view qname = case_pattern.empty() ? domain : case_pattern;
+    return build_dns_query(qname, type, qclass, rd, edns_enable, dnssec_ok, edns_payload);
 }
 
-dns_query_result dns_client::parse_response(const byte_vector& response, const uint16_t expected_id) {
-    return parse_dns_response(response, expected_id);
+dns_query_result dns_client::parse_response(const byte_vector& response, const uint16_t expected_id,
+                                            const string_view expected_question) {
+    return parse_dns_response(response, expected_id, expected_question);
 }
 
 NEFORCE_END_NAMESPACE__

@@ -105,8 +105,8 @@ bool icmp_socket::receive_reply(const milliseconds timeout, const uint16_t expec
 #endif
 
         if (sel_ret < 0) {
-            const int err = socket_exception::last_error();
-            if (err == EINTR) {
+            const auto err = network_exception::last_error().error();
+            if (err == errc::interrupted) {
                 auto elapsed = steady_clock::now() - start;
                 remaining = timeout - time_cast<milliseconds>(elapsed);
                 continue;
@@ -123,7 +123,7 @@ bool icmp_socket::receive_reply(const milliseconds timeout, const uint16_t expec
         const ssize_t recv_len = ::recvfrom(fd_, static_cast<char*>(recv_buffer), sizeof(recv_buffer), 0,
                                             reinterpret_cast<::sockaddr*>(&peer_addr), &peer_len);
         if (recv_len < 0) {
-            const int err = socket_exception::last_error();
+            const int err = network_exception::last_error().value();
             if (socket_exception::is_would_block(err)) {
                 auto elapsed = steady_clock::now() - start;
                 remaining = timeout - time_cast<milliseconds>(elapsed);

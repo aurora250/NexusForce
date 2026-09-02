@@ -33,16 +33,16 @@ class function;
 NEFORCE_BEGIN_INNER__
 
 /**
- * @enum FUNCTION_OPERATE
+ * @enum function_operate
  * @brief 函数管理器操作类型枚举
  *
  * 定义函数管理器支持的操作类型，用于统一管理函数对象的生命周期。
  */
-enum class FUNCTION_OPERATE {
-    GET_TYPE_INFO, ///< 获取类型信息操作
-    GET_PTR,       ///< 获取指针操作
-    COPY_PTR,      ///< 复制指针操作
-    DESTROY_PTR    ///< 销毁指针操作
+enum class function_operate {
+    get_type_info, ///< 获取类型信息操作
+    get_ptr,       ///< 获取指针操作
+    copy_ptr,      ///< 复制指针操作
+    destroy_ptr    ///< 销毁指针操作
 };
 
 
@@ -134,10 +134,30 @@ public:
             static U* get(const storage_data& src) noexcept { return src.access<U*>(); }
         };
 
+        template <typename U, bool = stored_>
+        struct __get_const_pointer_impl;
+
+        template <typename U>
+        struct __get_const_pointer_impl<U, true> {
+            static const U* get(const storage_data& src) noexcept {
+                const U& f = src.access<U>();
+                return _NEFORCE addressof(f);
+            }
+        };
+
+        template <typename U>
+        struct __get_const_pointer_impl<U, false> {
+            static const U* get(const storage_data& src) noexcept { return src.access<U*>(); }
+        };
+
     protected:
         using storage_ = bool_constant<stored_>;
 
         static F* get_pointer(const storage_data& src) noexcept { return __get_pointer_impl<F>::get(src); }
+
+        static const F* get_const_pointer(const storage_data& src) noexcept {
+            return __get_const_pointer_impl<F>::get(src);
+        }
 
     private:
         template <typename Fn>
@@ -153,18 +173,18 @@ public:
         static void destroy(storage_data& data, false_type /*unused*/) { delete data.access<F*>(); }
 
     public:
-        static bool manage(storage_data& dest, const storage_data& src, const FUNCTION_OPERATE oper) {
+        static bool manage(storage_data& dest, const storage_data& src, const function_operate oper) {
             switch (oper) {
-                case FUNCTION_OPERATE::GET_TYPE_INFO:
+                case function_operate::get_type_info:
                     dest.access<const std::type_info*>() = &typeid(F);
                     break;
-                case FUNCTION_OPERATE::GET_PTR:
+                case function_operate::get_ptr:
                     dest.access<F*>() = __manager_base::get_pointer(src);
                     break;
-                case FUNCTION_OPERATE::COPY_PTR:
+                case function_operate::copy_ptr:
                     __manager_base::init_func(dest, *const_cast<const F*>(__manager_base::get_pointer(src)));
                     break;
-                case FUNCTION_OPERATE::DESTROY_PTR:
+                case function_operate::destroy_ptr:
                     __manager_base::destroy(dest, storage_());
                     break;
             }
@@ -195,7 +215,7 @@ public:
         }
     };
 
-    using manage_type = bool (*)(storage_data&, const storage_data&, FUNCTION_OPERATE);
+    using manage_type = bool (*)(storage_data&, const storage_data&, function_operate);
 
     storage_data func_{};
     manage_type manager_ = nullptr;
@@ -204,7 +224,7 @@ public:
     __function_base() noexcept = default;
     ~__function_base() {
         if (manager_ != nullptr) {
-            manager_(func_, func_, FUNCTION_OPERATE::DESTROY_PTR);
+            manager_(func_, func_, function_operate::destroy_ptr);
         }
     }
 
@@ -228,12 +248,12 @@ private:
     using base_type = __function_base::__manager_base<F>;
 
 public:
-    static bool manage(storage_data& dest, const storage_data& src, FUNCTION_OPERATE oper) {
+    static bool manage(storage_data& dest, const storage_data& src, function_operate oper) {
         switch (oper) {
-            case FUNCTION_OPERATE::GET_TYPE_INFO:
+            case function_operate::get_type_info:
                 dest.access<const std::type_info*>() = &typeid(F);
                 break;
-            case FUNCTION_OPERATE::GET_PTR:
+            case function_operate::get_ptr:
                 dest.access<F*>() = base_type::get_pointer(src);
                 break;
             default:
@@ -255,7 +275,7 @@ public:
 template <>
 class __function_manage_handler<void, void> {
 public:
-    static bool manage(storage_data& /*unused*/, const storage_data& /*unused*/, FUNCTION_OPERATE /*unused*/) {
+    static bool manage(storage_data& /*unused*/, const storage_data& /*unused*/, function_operate /*unused*/) {
         return false;
     }
 };
@@ -303,7 +323,7 @@ private:
     NEFORCE_ALWAYS_INLINE const F* __target_impl() const noexcept {
         if (manager_ == &inner::__function_handler_dispatch<Res(Args...), F>::manage) {
             inner::storage_data ptr{};
-            manager_(ptr, func_, inner::FUNCTION_OPERATE::GET_PTR);
+            manager_(ptr, func_, inner::function_operate::get_ptr);
             return ptr.access<const F*>();
         }
         return nullptr;
@@ -331,7 +351,7 @@ public:
     function(const function& other) :
     __function_base() {
         if (static_cast<bool>(other)) {
-            other.manager_(func_, other.func_, inner::FUNCTION_OPERATE::COPY_PTR);
+            other.manager_(func_, other.func_, inner::function_operate::copy_ptr);
             invoker_ = other.invoker_;
             manager_ = other.manager_;
         }
@@ -396,7 +416,7 @@ public:
      */
     function& operator=(nullptr_t np) noexcept {
         if (manager_) {
-            manager_(func_, func_, inner::FUNCTION_OPERATE::DESTROY_PTR);
+            manager_(func_, func_, inner::function_operate::destroy_ptr);
             manager_ = nullptr;
             invoker_ = nullptr;
         }
@@ -463,7 +483,7 @@ public:
     NEFORCE_NODISCARD const std::type_info& target_type() const noexcept {
         if (manager_) {
             inner::storage_data result{};
-            manager_(result, func_, inner::FUNCTION_OPERATE::GET_TYPE_INFO);
+            manager_(result, func_, inner::function_operate::get_type_info);
             if (const auto* const info = result.access<const std::type_info*>()) {
                 return *info;
             }

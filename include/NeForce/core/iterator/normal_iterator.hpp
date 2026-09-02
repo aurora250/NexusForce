@@ -45,10 +45,10 @@ public:
 
     /**
      * @brief 从底层迭代器构造
-     * @param iter 底层迭代器
+     * @param other 底层迭代器
      */
-    explicit constexpr normal_iterator(const Iterator& iter) noexcept(is_nothrow_copy_constructible_v<Iterator>) :
-    current_(iter) {}
+    explicit constexpr normal_iterator(const Iterator& other) noexcept(is_nothrow_copy_constructible_v<Iterator>) :
+    current_(other) {}
 
     /**
      * @brief 从其他normal_iterator转换构造

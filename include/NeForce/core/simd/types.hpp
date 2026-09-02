@@ -38,7 +38,7 @@ using vec128d_t = ::__m128d;
 using vec128_t = ::uint8x16_t;
 /// @brief 128-bit 单精度浮点向量（4×f32）
 using vec128f_t = ::float32x4_t;
-#    ifdef __aarch64__
+#    ifdef NEFORCE_ARCH_AARCH64
 /// @brief 128-bit 双精度浮点向量（2×f64，仅 AArch64）
 using vec128d_t = ::float64x2_t;
 #    else

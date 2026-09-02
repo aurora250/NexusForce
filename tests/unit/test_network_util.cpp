@@ -1,6 +1,7 @@
 #include <NeForce/network/util/arp.hpp>
 #include <NeForce/network/util/url.hpp>
 #include <NeForce/network/util/mac_address.hpp>
+#include <NeForce/network/util/network_exception.hpp>
 #include <gtest/gtest.h>
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <arpa/inet.h>

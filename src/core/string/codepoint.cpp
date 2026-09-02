@@ -20,7 +20,7 @@ namespace {
         }
     }
 
-    constexpr array<uint64_t, BLOCK_COUNT> build_wide_bitmap() {
+    constexpr array<uint64_t, BLOCK_COUNT> build_wide_bitmap() noexcept {
         array<uint64_t, BLOCK_COUNT> bitmap{};
         set_range(bitmap, 0x1100, 0x115F);   // Hangul Jamo
         set_range(bitmap, 0x2329, 0x232A);   // angle brackets
@@ -41,7 +41,7 @@ namespace {
         return bitmap;
     }
 
-    constexpr array<uint64_t, BLOCK_COUNT> build_zero_bitmap() {
+    constexpr array<uint64_t, BLOCK_COUNT> build_zero_bitmap() noexcept {
         array<uint64_t, BLOCK_COUNT> bitmap{};
         // C0 (0x00~0x1F)
         set_range(bitmap, 0x0000, 0x001F);
@@ -62,10 +62,8 @@ namespace {
         return bitmap;
     }
 
-    // TODO: use simd build bitmap (runtime)
     auto WIDE_BITMAP = build_wide_bitmap();
     auto ZERO_BITMAP = build_zero_bitmap();
-
 
     template <typename T>
     void append_utf8_char_aux(T& /*unused*/) {}

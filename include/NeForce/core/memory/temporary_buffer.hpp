@@ -64,10 +64,10 @@ private:
         }
     }
 
-    template <typename U = value_type, enable_if_t<is_trivially_copy_assignable_v<U>, int> = 0>
+    template <typename U = value_type, enable_if_t<is_trivially_copyable_v<U>, int> = 0>
     NEFORCE_CONSTEXPR20 void initialize_buffer(const U& /*unused*/) noexcept {}
 
-    template <typename U = value_type, enable_if_t<!is_trivially_copy_assignable_v<U>, int> = 0>
+    template <typename U = value_type, enable_if_t<!is_trivially_copyable_v<U>, int> = 0>
     NEFORCE_CONSTEXPR20 void initialize_buffer(const U& value) {
         _NEFORCE uninitialized_fill_n(buffer_, len_, value);
     }

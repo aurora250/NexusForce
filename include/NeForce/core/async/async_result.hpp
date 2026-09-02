@@ -34,11 +34,12 @@ struct detached_t {};
 struct deferred_t {};
 
 /// @brief use_future 常量
-constexpr use_future_t use_future{};
+NEFORCE_INLINE17 constexpr use_future_t use_future{};
 /// @brief detached 常量
-constexpr detached_t detached{};
+NEFORCE_INLINE17 constexpr detached_t detached{};
 /// @brief deferred 常量
-constexpr deferred_t deferred{};
+NEFORCE_INLINE17 constexpr deferred_t deferred{};
+
 
 /**
  * @class async_result

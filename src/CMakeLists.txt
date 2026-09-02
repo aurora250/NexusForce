@@ -13,6 +13,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/lazy_thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/mutex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/named_mutex.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/notification.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/semaphore.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/this_thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread.cpp
@@ -155,6 +156,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/network/util/arp.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/util/ip_address.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/util/mac_address.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/util/network_exception.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/util/ports.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/util/url.cpp
 

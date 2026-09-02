@@ -7,18 +7,6 @@
 #ifdef NEFORCE_SIMD_AES_ARM
 #    include <arm_neon.h>
 #endif
-#ifdef __NFORCE_ATTRIBUTE_AES_PCLMUL
-#    undef __NFORCE_ATTRIBUTE_AES_PCLMUL
-#endif
-#if (defined(NEFORCE_SIMD_AES_NI) || defined(NEFORCE_SIMD_PCLMUL)) && \
-        (defined(NEFORCE_COMPILER_CLANG) || defined(NEFORCE_COMPILER_GCC))
-// always_inline cannot be combined with target(...): clang/gcc refuse to inline
-// AES instructions into callers compiled without the 'aes' feature, so keep the
-// target attribute alone and let the compiler emit a plain call.
-#    define __NFORCE_ATTRIBUTE_AES_PCLMUL __attribute__((target("aes,pclmul,sse2")))
-#else
-#    define __NFORCE_ATTRIBUTE_AES_PCLMUL
-#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
@@ -119,7 +107,7 @@ namespace {
         }
     }
 
-    __NFORCE_ATTRIBUTE_AES_PCLMUL void AES256_inv_key_expansion(const byte_t* key, byte_t* inv_expanded_key) {
+    NEFORCE_TARGET("aes,pclmul,sse2") void AES256_inv_key_expansion(const byte_t* key, byte_t* inv_expanded_key) {
         AES256_key_expansion(key, inv_expanded_key);
 #if defined(NEFORCE_SIMD_AES_NI)
         // precompute InvMixColumns-transformed round keys so decrypt_block
@@ -207,8 +195,8 @@ namespace {
         }
     }
 
-    __NFORCE_ATTRIBUTE_AES_PCLMUL void encrypt_block(byte_t dst[16], const byte_t* src,
-                                                     const byte_t* expanded_key) noexcept {
+    NEFORCE_TARGET("aes,pclmul,sse2")
+    void encrypt_block(byte_t dst[16], const byte_t* src, const byte_t* expanded_key) noexcept {
 #if defined(NEFORCE_SIMD_AES_NI)
         ::__m128i state = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(src));
 
@@ -263,7 +251,7 @@ namespace {
 #endif
     }
 
-    __NFORCE_ATTRIBUTE_AES_PCLMUL
+    NEFORCE_TARGET("aes,pclmul,sse2")
     void decrypt_block(byte_t dst[16], const byte_t* src, const byte_t* inv_expanded_key) noexcept {
 #if defined(NEFORCE_SIMD_AES_NI)
         ::__m128i state = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(src));
@@ -325,7 +313,7 @@ namespace {
     }
 
 #ifdef NEFORCE_SIMD_AES_NI
-    __NFORCE_ATTRIBUTE_AES_PCLMUL
+    NEFORCE_TARGET("aes,pclmul,sse2")
     void encrypt_blocks4(byte_t* dst, const byte_t* src, const byte_t* expanded_key) noexcept {
         // Four independent AES chains in flight hide the ~4 cycle aesenc latency.
         ::__m128i b0 = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(src));
@@ -361,7 +349,7 @@ namespace {
         ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(dst + 48), b3);
     }
 
-    __NFORCE_ATTRIBUTE_AES_PCLMUL
+    NEFORCE_TARGET("aes,pclmul,sse2")
     void decrypt_blocks4(byte_t* dst, const byte_t* src, const byte_t* inv_expanded_key) noexcept {
         ::__m128i b0 = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(src));
         ::__m128i b1 = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(src + 16));
@@ -475,7 +463,7 @@ namespace {
     // Reflected-domain GHASH multiply. Value convention is identical to the scalar gf128_multiply:
     // value bit 127 == data byte 0 bit 7 == x^0, and the reduction identity is
     // x^128 == x^7 + x^2 + x + 1 (fold constant 0xE1).
-    __NFORCE_ATTRIBUTE_AES_PCLMUL ::__m128i ghash_reduce(const ::__m128i q) noexcept {
+    NEFORCE_TARGET("aes,pclmul,sse2")::__m128i ghash_reduce(const ::__m128i q) noexcept {
         // q: 127-bit value (bit 127 clear). Fold q*x^128 into the low 128 bits:
         //   t = q ^ (q<<1) ^ (q>>1) ^ (q>>6)
         //   underflow bits (x^128..x^133) re-fold via the 0xE1 spread at the top.
@@ -493,7 +481,7 @@ namespace {
         return ::_mm_set_epi64x(static_cast<int64_t>(t_hi ^ fold_hi), static_cast<int64_t>(t_lo));
     }
 
-    __NFORCE_ATTRIBUTE_AES_PCLMUL ::__m128i ghash_mult(const ::__m128i a, const ::__m128i b) noexcept {
+    NEFORCE_TARGET("aes,pclmul,sse2")::__m128i ghash_mult(const ::__m128i a, const ::__m128i b) noexcept {
         const ::__m128i mask_lo = ::_mm_set_epi64x(0, -1);
         const ::__m128i a_lo = ::_mm_and_si128(a, mask_lo);
         const auto a_hi = _mm_srli_si128(a, 8);
@@ -536,8 +524,9 @@ namespace {
         ctx.H_lo = endian::read_be64(H + 8);
     }
 
-    __NFORCE_ATTRIBUTE_AES_PCLMUL void ghash_update(const ghash_context& ctx, uint64_t& state_hi, uint64_t& state_lo,
-                                                    const byte_t* data, size_t len) {
+    NEFORCE_TARGET("aes,pclmul,sse2")
+    void ghash_update(const ghash_context& ctx, uint64_t& state_hi, uint64_t& state_lo, const byte_t* data,
+                      size_t len) {
 #ifdef NEFORCE_SIMD_PCLMUL
         const ::__m128i h = ::_mm_set_epi64x(static_cast<int64_t>(ctx.H_hi), static_cast<int64_t>(ctx.H_lo));
         ::__m128i state = ::_mm_set_epi64x(static_cast<int64_t>(state_hi), static_cast<int64_t>(state_lo));
@@ -602,7 +591,7 @@ namespace {
 
 #ifdef NEFORCE_SIMD_AES_NI
     // Four independent AES chains in flight hide the ~4 cycle aesenc latency.
-    __NFORCE_ATTRIBUTE_AES_PCLMUL
+    NEFORCE_TARGET("aes,pclmul,sse2")
     void AES256_ctr_keystream_x4(byte_t counter[16], const byte_t* expanded_key, byte_t keystream[64]) noexcept {
         ::__m128i c0 = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(counter));
         ::__m128i c1 = ::_mm_add_epi32(c0, ::_mm_set_epi32(1, 0, 0, 0));

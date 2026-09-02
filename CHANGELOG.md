@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [1.0.1] - 2026-08-13
+## [1.0.1] - 2026-09-03
 
 ### 🚀 New Features
 
@@ -24,6 +24,14 @@
 - TOML 解析器空白/注释跳过、四种字符串扫描 SIMD 化
 - YAML 解析器空白/缩进/注释跳过、双引号/单引号字符串、纯量/键名/块标量行扫描 SIMD 化
 - `uuid::to_string()` 以单次预分配与十六进制表查找替代 format 引擎调用
+- dns_client 添加 UDP 超时自动重试：换新随机查询 ID 重发，可通过 set_max_udp_retries() 配置重试次数，总超时预算为单轮超时 ×（重试次数 + 1）
+- dns_client 添加 0x20 随机大小写编码与响应校验（set_randomize_case()，防 DNS 欺骗加固）
+- dns_client 添加共享 UDP socket 源端口定期轮换（缩小 DNS 欺骗攻击窗口）
+- dns_client 缓存遵循记录自身 TTL（effective_cache_ttl()，上限可配，否定缓存遵循 RFC 2308）
+- dns_client TCP 截断回退与强制 TCP 模式改为异步状态机（基于 tcp_socket::async_connect / async_read / async_write），不再阻塞事件循环线程
+- dns_client 缓存命中回调改为经 io_context 异步投递，与 Asio 完成令牌惯例一致
+- dns_client::build_query / parse_response 添加可选 0x20 大小写模式参数（源码兼容）
+- `lock_free_queue` 新增显式生产者/消费者令牌、批量入队/出队、无分配接口、内存统计 get_mem_stats，BSD/Boost 许可证署名
 
 ### 🐛 Bug Fixes
 
@@ -36,6 +44,9 @@
 - 修复 ARM64 等非 x64 架构错误接收 x86 SIMD 编译标志的问题
 - 修复 JSON 解析器字符串扫描控制字符检测使用有符号比较，将 UTF-8 多字节字符误判为控制字符导致 SIMD 快路径失效的问题
 - 修复 `retry` 使用引用函数作为参数时在 clang -O2 优化下编译器空悬引用对象导致 ABORT 的问题
+- 修复 use_awaitable 完成令牌在协程恢复时丢失 continuation 导致协程永不恢复的缺陷，awaitable 改为共享状态实现，支持作为协程返回类型
+- 修复 dns_client UDP 发送失败时 pending 查询条目悬挂的问题
+- 修复 `uninitialized_*` 系列与 `temporary_buffer` 的平凡路径分派条件
 
 ## [1.0.0] - 2026-08-03
 

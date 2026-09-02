@@ -13,6 +13,8 @@
 #include <NeForce/core/async/hazard_ptr.hpp>
 #include <NeForce/core/async/io_context.hpp>
 #include <NeForce/core/async/latch.hpp>
+#include <NeForce/core/async/lock_free_queue.hpp>
+#include <NeForce/core/async/notification.hpp>
 #include <NeForce/core/async/scope_thread.hpp>
 #include <NeForce/core/async/signals.hpp>
 #include <NeForce/core/async/stop_token.hpp>
@@ -21,7 +23,9 @@
 #include <NeForce/core/async/thread_tracker.hpp>
 #include <NeForce/core/async/use_awaitable.hpp>
 #include <NeForce/core/async/virtual_thread.hpp>
+#include <NeForce/core/iterator/move_iterator.hpp>
 #include <NeForce/core/utility/tuple.hpp>
+#include <iterator>
 #include <gtest/gtest.h>
 using namespace neforce;
 
@@ -3620,3 +3624,751 @@ TEST(CoSpawnTest, TcpEchoWithCoAwait) {
 }
 
 #endif
+
+namespace {
+    struct lfuq_move_only {
+        int value;
+        explicit lfuq_move_only(int v) :
+        value(v) {}
+        lfuq_move_only(const lfuq_move_only&) = delete;
+        lfuq_move_only& operator=(const lfuq_move_only&) = delete;
+        lfuq_move_only(lfuq_move_only&&) noexcept = default;
+        lfuq_move_only& operator=(lfuq_move_only&&) noexcept = default;
+    };
+
+    struct lfuq_throwing_copy {
+        int value;
+        static int alive;
+        explicit lfuq_throwing_copy(int v) :
+        value(v) {
+            ++alive;
+        }
+        lfuq_throwing_copy(const lfuq_throwing_copy& o) :
+        value(o.value) {
+            if (value == -1) {
+                throw exception("copy throw");
+            }
+            ++alive;
+        }
+        lfuq_throwing_copy(lfuq_throwing_copy&& o) noexcept :
+        value(o.value) {
+            ++alive;
+        }
+        lfuq_throwing_copy& operator=(const lfuq_throwing_copy&) = default;
+        lfuq_throwing_copy& operator=(lfuq_throwing_copy&&) = default;
+        ~lfuq_throwing_copy() { --alive; }
+    };
+    int lfuq_throwing_copy::alive = 0;
+
+    struct lfuq_throwing_assign {
+        int value;
+        explicit lfuq_throwing_assign(int v) :
+        value(v) {}
+        lfuq_throwing_assign(const lfuq_throwing_assign&) = default;
+        lfuq_throwing_assign(lfuq_throwing_assign&&) noexcept = default;
+        lfuq_throwing_assign& operator=(const lfuq_throwing_assign&) = default;
+        lfuq_throwing_assign& operator=(lfuq_throwing_assign&& o) {
+            if (o.value == -1) {
+                throw exception("assign throw");
+            }
+            value = o.value;
+            return *this;
+        }
+    };
+
+    struct lfuq_small_block_traits : lock_free_queue_traits {
+        static constexpr size_t BLOCK_SIZE = 8;
+    };
+
+    struct lfuq_limited_traits : lock_free_queue_traits {
+        static constexpr size_t MAX_SUBQUEUE_SIZE = 64;
+    };
+
+    struct lfuq_no_implicit_traits : lock_free_queue_traits {
+        static constexpr size_t INITIAL_IMPLICIT_PRODUCER_HASH_SIZE = 0;
+    };
+
+    struct lfuq_recycle_traits : lock_free_queue_traits {
+        static constexpr bool RECYCLE_ALLOCATED_BLOCKS = true;
+    };
+} // namespace
+
+TEST(LockFreeQueue, DefaultConstruct) {
+    lock_free_queue<int> q;
+    EXPECT_TRUE(q.empty());
+    EXPECT_EQ(q.size(), 0u);
+    EXPECT_EQ(q.size_approx(), 0u);
+}
+
+TEST(LockFreeQueue, EnqueueDequeueFifo) {
+    lock_free_queue<int> q;
+    for (int i = 0; i < 100; ++i) {
+        EXPECT_TRUE(q.enqueue(i));
+    }
+    EXPECT_EQ(q.size_approx(), 100u);
+    int value = 0;
+    for (int i = 0; i < 100; ++i) {
+        EXPECT_TRUE(q.try_dequeue(value));
+        EXPECT_EQ(value, i);
+    }
+    EXPECT_FALSE(q.try_dequeue(value));
+    EXPECT_TRUE(q.empty());
+}
+
+TEST(LockFreeQueue, FifoAcrossBlocks) {
+    lock_free_queue<int> q;
+    for (int i = 0; i < 1000; ++i) {
+        EXPECT_TRUE(q.enqueue(i));
+    }
+    int value = 0;
+    for (int i = 0; i < 1000; ++i) {
+        EXPECT_TRUE(q.try_dequeue(value));
+        EXPECT_EQ(value, i);
+    }
+}
+
+TEST(LockFreeQueue, CopyAndMoveEnqueue) {
+    lock_free_queue<string> q;
+    string a = "alpha";
+    EXPECT_TRUE(q.enqueue(a));
+    EXPECT_TRUE(q.enqueue(string("beta")));
+    string out;
+    EXPECT_TRUE(q.try_dequeue(out));
+    EXPECT_EQ(out, "alpha");
+    EXPECT_TRUE(q.try_dequeue(out));
+    EXPECT_EQ(out, "beta");
+}
+
+TEST(LockFreeQueue, TryEnqueueTryDequeue) {
+    lock_free_queue<int> q;
+    EXPECT_TRUE(q.try_enqueue(1));
+    EXPECT_TRUE(q.try_enqueue(2));
+    int value = 0;
+    EXPECT_TRUE(q.try_dequeue(value));
+    EXPECT_EQ(value, 1);
+    EXPECT_TRUE(q.try_dequeue(value));
+    EXPECT_EQ(value, 2);
+    EXPECT_FALSE(q.try_dequeue(value));
+}
+
+TEST(LockFreeQueue, TryDequeueEmpty) {
+    lock_free_queue<int> q;
+    int value = 0;
+    EXPECT_FALSE(q.try_dequeue(value));
+    EXPECT_FALSE(q.try_dequeue_non_interleaved(value));
+}
+
+TEST(LockFreeQueue, StringElements) {
+    lock_free_queue<string> q;
+    for (int i = 0; i < 50; ++i) {
+        EXPECT_TRUE(q.enqueue("item_" + to_string(i)));
+    }
+    string out;
+    for (int i = 0; i < 50; ++i) {
+        EXPECT_TRUE(q.try_dequeue(out));
+        EXPECT_EQ(out, "item_" + to_string(i));
+    }
+}
+
+TEST(LockFreeQueue, MoveOnlyElements) {
+    lock_free_queue<lfuq_move_only> q;
+    EXPECT_TRUE(q.enqueue(lfuq_move_only(1)));
+    EXPECT_TRUE(q.enqueue(lfuq_move_only(2)));
+    lfuq_move_only out(0);
+    EXPECT_TRUE(q.try_dequeue(out));
+    EXPECT_EQ(out.value, 1);
+    EXPECT_TRUE(q.try_dequeue(out));
+    EXPECT_EQ(out.value, 2);
+    EXPECT_FALSE(q.try_dequeue(out));
+}
+
+TEST(LockFreeQueue, SizeAndEmpty) {
+    lock_free_queue<int> q;
+    EXPECT_TRUE(q.empty());
+    q.enqueue(1);
+    EXPECT_FALSE(q.empty());
+    EXPECT_EQ(q.size(), 1u);
+    q.enqueue(2);
+    EXPECT_EQ(q.size(), 2u);
+    int value;
+    q.try_dequeue(value);
+    EXPECT_EQ(q.size(), 1u);
+    q.try_dequeue(value);
+    EXPECT_TRUE(q.empty());
+    EXPECT_EQ(q.size(), 0u);
+}
+
+TEST(LockFreeQueue, BulkEnqueueDequeue) {
+    lock_free_queue<int> q;
+    vector<int> items;
+    for (int i = 0; i < 100; ++i) {
+        items.push_back(i);
+    }
+    EXPECT_TRUE(q.enqueue_bulk(items.begin(), items.size()));
+    EXPECT_EQ(q.size_approx(), 100u);
+    vector<int> out(100);
+    size_t got = q.try_dequeue_bulk(out.begin(), 100);
+    EXPECT_EQ(got, 100u);
+    for (int i = 0; i < 100; ++i) {
+        EXPECT_EQ(out[i], i);
+    }
+}
+
+TEST(LockFreeQueue, BulkPartialDequeue) {
+    lock_free_queue<int> q;
+    vector<int> items;
+    for (int i = 0; i < 100; ++i) {
+        items.push_back(i);
+    }
+    EXPECT_TRUE(q.enqueue_bulk(items.begin(), items.size()));
+    vector<int> out(30);
+    size_t got = q.try_dequeue_bulk(out.begin(), 30);
+    EXPECT_EQ(got, 30u);
+    for (int i = 0; i < 30; ++i) {
+        EXPECT_EQ(out[i], i);
+    }
+    vector<int> rest(70);
+    got = q.try_dequeue_bulk(rest.begin(), 70);
+    EXPECT_EQ(got, 70u);
+    for (int i = 0; i < 70; ++i) {
+        EXPECT_EQ(rest[i], i + 30);
+    }
+    EXPECT_TRUE(q.empty());
+}
+
+TEST(LockFreeQueue, BulkMoveOnly) {
+    lock_free_queue<lfuq_move_only> q;
+    vector<lfuq_move_only> items;
+    for (int i = 0; i < 100; ++i) {
+        items.push_back(lfuq_move_only(i));
+    }
+    EXPECT_TRUE(q.enqueue_bulk(make_move_iterator(items.begin()), 100));
+    lfuq_move_only out(0);
+    for (int i = 0; i < 100; ++i) {
+        EXPECT_TRUE(q.try_dequeue(out));
+        EXPECT_EQ(out.value, i);
+    }
+}
+
+TEST(LockFreeQueue, BulkEmptyRange) {
+    lock_free_queue<int> q;
+    int dummy = 0;
+    EXPECT_TRUE(q.enqueue_bulk(&dummy, 0));
+    EXPECT_TRUE(q.empty());
+}
+
+TEST(LockFreeQueue, ProducerTokenEnqueue) {
+    lock_free_queue<int> q;
+    producer_token pt(q);
+    EXPECT_TRUE(pt.valid());
+    for (int i = 0; i < 50; ++i) {
+        EXPECT_TRUE(q.enqueue(pt, i));
+    }
+    int value = 0;
+    for (int i = 0; i < 50; ++i) {
+        EXPECT_TRUE(q.try_dequeue(value));
+        EXPECT_EQ(value, i);
+    }
+}
+
+TEST(LockFreeQueue, ProducerTokenMoveAndSwap) {
+    lock_free_queue<int> q;
+    producer_token pt1(q);
+    EXPECT_TRUE(pt1.valid());
+    producer_token pt2(move(pt1));
+    EXPECT_FALSE(pt1.valid());
+    EXPECT_TRUE(pt2.valid());
+    pt1 = move(pt2);
+    EXPECT_TRUE(pt1.valid());
+    EXPECT_FALSE(pt2.valid());
+    pt2 = producer_token(q);
+    EXPECT_TRUE(pt2.valid());
+    producer_token pt3(q);
+    pt1.swap(pt3);
+    EXPECT_TRUE(pt1.valid());
+    EXPECT_TRUE(pt3.valid());
+    swap(pt1, pt3);
+    EXPECT_TRUE(pt1.valid());
+    EXPECT_TRUE(pt3.valid());
+}
+
+TEST(LockFreeQueue, ProducerTokenDestructorRecycles) {
+    lock_free_queue<int> q;
+    {
+        producer_token pt(q);
+        EXPECT_TRUE(q.enqueue(pt, 1));
+        int value = 0;
+        EXPECT_TRUE(q.try_dequeue(value));
+    }
+    producer_token pt2(q);
+    EXPECT_TRUE(pt2.valid());
+}
+
+TEST(LockFreeQueue, ConsumerTokenSingleProducer) {
+    lock_free_queue<int> q;
+    for (int i = 0; i < 10; ++i) {
+        q.enqueue(i);
+    }
+    consumer_token ct(q);
+    int value = 0;
+    for (int i = 0; i < 10; ++i) {
+        EXPECT_TRUE(q.try_dequeue(ct, value));
+        EXPECT_EQ(value, i);
+    }
+    EXPECT_FALSE(q.try_dequeue(ct, value));
+}
+
+TEST(LockFreeQueue, ConsumerTokenMultipleProducers) {
+    lock_free_queue<int> q;
+    producer_token pt1(q);
+    producer_token pt2(q);
+    for (int i = 0; i < 300; ++i) {
+        EXPECT_TRUE(q.enqueue(pt1, i));
+        EXPECT_TRUE(q.enqueue(pt2, 1000 + i));
+    }
+    consumer_token ct(q);
+    int value = 0;
+    int count = 0;
+    while (q.try_dequeue(ct, value)) {
+        ++count;
+    }
+    EXPECT_EQ(count, 600);
+}
+
+TEST(LockFreeQueue, TryDequeueFromProducer) {
+    lock_free_queue<int> q;
+    producer_token pt(q);
+    EXPECT_TRUE(q.enqueue(pt, 7));
+    EXPECT_TRUE(q.enqueue(pt, 8));
+    int value = 0;
+    EXPECT_TRUE(q.try_dequeue_from_producer(pt, value));
+    EXPECT_EQ(value, 7);
+    EXPECT_TRUE(q.try_dequeue_from_producer(pt, value));
+    EXPECT_EQ(value, 8);
+    EXPECT_FALSE(q.try_dequeue_from_producer(pt, value));
+}
+
+TEST(LockFreeQueue, TryDequeueBulkFromProducer) {
+    lock_free_queue<int> q;
+    producer_token pt(q);
+    vector<int> items;
+    for (int i = 0; i < 40; ++i) {
+        items.push_back(i);
+    }
+    EXPECT_TRUE(q.enqueue_bulk(pt, items.begin(), items.size()));
+    vector<int> out(40);
+    size_t got = q.try_dequeue_bulk_from_producer(pt, out.begin(), 40);
+    EXPECT_EQ(got, 40u);
+    for (int i = 0; i < 40; ++i) {
+        EXPECT_EQ(out[i], i);
+    }
+}
+
+TEST(LockFreeQueue, TryDequeueNonInterleaved) {
+    lock_free_queue<int> q;
+    for (int i = 0; i < 5; ++i) {
+        q.enqueue(i);
+    }
+    int value = 0;
+    for (int i = 0; i < 5; ++i) {
+        EXPECT_TRUE(q.try_dequeue_non_interleaved(value));
+        EXPECT_EQ(value, i);
+    }
+    EXPECT_FALSE(q.try_dequeue_non_interleaved(value));
+}
+
+TEST(LockFreeQueue, MoveConstructor) {
+    lock_free_queue<int> q1;
+    q1.enqueue(1);
+    q1.enqueue(2);
+    lock_free_queue<int> q2(move(q1));
+    EXPECT_TRUE(q1.empty());
+    EXPECT_EQ(q2.size_approx(), 2u);
+    int value = 0;
+    EXPECT_TRUE(q2.try_dequeue(value));
+    EXPECT_EQ(value, 1);
+    EXPECT_TRUE(q2.try_dequeue(value));
+    EXPECT_EQ(value, 2);
+    EXPECT_TRUE(q2.enqueue(3));
+    EXPECT_TRUE(q2.try_dequeue(value));
+    EXPECT_EQ(value, 3);
+}
+
+TEST(LockFreeQueue, MoveAssignment) {
+    lock_free_queue<int> q1;
+    q1.enqueue(10);
+    lock_free_queue<int> q2;
+    q2.enqueue(20);
+    q2 = move(q1);
+    int value = 0;
+    EXPECT_TRUE(q2.try_dequeue(value));
+    EXPECT_EQ(value, 10);
+    EXPECT_TRUE(q1.try_dequeue(value));
+    EXPECT_EQ(value, 20);
+}
+
+TEST(LockFreeQueue, Swap) {
+    lock_free_queue<int> q1;
+    lock_free_queue<int> q2;
+    q1.enqueue(1);
+    q2.enqueue(2);
+    q1.swap(q2);
+    int value = 0;
+    EXPECT_TRUE(q1.try_dequeue(value));
+    EXPECT_EQ(value, 2);
+    EXPECT_TRUE(q2.try_dequeue(value));
+    EXPECT_EQ(value, 1);
+    lock_free_queue<int> q3;
+    lock_free_queue<int> q4;
+    q3.enqueue(3);
+    swap(q3, q4);
+    EXPECT_TRUE(q3.empty());
+    EXPECT_TRUE(q4.try_dequeue(value));
+    EXPECT_EQ(value, 3);
+}
+
+TEST(LockFreeQueue, IsLockFree) { EXPECT_TRUE(lock_free_queue<int>::is_lock_free()); }
+
+TEST(LockFreeQueue, CapacityConstructor) {
+    lock_free_queue<int> q(1024);
+    for (int i = 0; i < 2000; ++i) {
+        EXPECT_TRUE(q.enqueue(i));
+    }
+    int value = 0;
+    for (int i = 0; i < 2000; ++i) {
+        EXPECT_TRUE(q.try_dequeue(value));
+        EXPECT_EQ(value, i);
+    }
+}
+
+TEST(LockFreeQueue, ProducerCountConstructor) {
+    lock_free_queue<int> q(256, 2, 4);
+    EXPECT_TRUE(q.enqueue(1));
+    producer_token pt(q);
+    EXPECT_TRUE(q.enqueue(pt, 2));
+    int value = 0;
+    int count = 0;
+    while (q.try_dequeue(value)) {
+        ++count;
+    }
+    EXPECT_EQ(count, 2);
+}
+
+TEST(LockFreeQueue, SmallBlockTraits) {
+    lock_free_queue<int, lfuq_small_block_traits> q;
+    for (int i = 0; i < 1000; ++i) {
+        EXPECT_TRUE(q.enqueue(i));
+    }
+    int value = 0;
+    for (int i = 0; i < 1000; ++i) {
+        EXPECT_TRUE(q.try_dequeue(value));
+        EXPECT_EQ(value, i);
+    }
+    producer_token pt(q);
+    for (int i = 0; i < 500; ++i) {
+        EXPECT_TRUE(q.enqueue(pt, i));
+    }
+    consumer_token ct(q);
+    int count = 0;
+    while (q.try_dequeue(ct, value)) {
+        ++count;
+    }
+    EXPECT_EQ(count, 500);
+}
+
+TEST(LockFreeQueue, LimitedSubqueueSize) {
+    lock_free_queue<int, lfuq_limited_traits> q;
+    for (int i = 0; i < 64; ++i) {
+        EXPECT_TRUE(q.enqueue(i));
+    }
+    EXPECT_FALSE(q.enqueue(64));
+    int value = 0;
+    for (int i = 0; i < 64; ++i) {
+        EXPECT_TRUE(q.try_dequeue(value));
+        EXPECT_EQ(value, i);
+    }
+    EXPECT_FALSE(q.try_dequeue(value));
+}
+
+TEST(LockFreeQueue, TryEnqueueLimitedByIndexCapacity) {
+    lock_free_queue<int> q;
+    for (int i = 0; i < 1024; ++i) {
+        EXPECT_TRUE(q.try_enqueue(i));
+    }
+    EXPECT_FALSE(q.try_enqueue(1024));
+    int value = 0;
+    for (int i = 0; i < 1024; ++i) {
+        EXPECT_TRUE(q.try_dequeue(value));
+        EXPECT_EQ(value, i);
+    }
+    EXPECT_FALSE(q.try_dequeue(value));
+}
+
+TEST(LockFreeQueue, TryEnqueueBulkRollsBackWhenFull) {
+    lock_free_queue<int, lfuq_limited_traits> q;
+    vector<int> items;
+    for (int i = 0; i < 100; ++i) {
+        items.push_back(i);
+    }
+    EXPECT_FALSE(q.try_enqueue_bulk(items.begin(), items.size()));
+    EXPECT_TRUE(q.empty());
+    vector<int> small(60);
+    for (int i = 0; i < 60; ++i) {
+        small[i] = i;
+    }
+    EXPECT_TRUE(q.try_enqueue_bulk(small.begin(), small.size()));
+    EXPECT_EQ(q.size_approx(), 60u);
+    int value = 0;
+    for (int i = 0; i < 60; ++i) {
+        EXPECT_TRUE(q.try_dequeue(value));
+        EXPECT_EQ(value, i);
+    }
+}
+
+TEST(LockFreeQueue, NoImplicitProduction) {
+    lock_free_queue<int, lfuq_no_implicit_traits> q;
+    EXPECT_FALSE(q.enqueue(1));
+    EXPECT_FALSE(q.try_enqueue(2));
+    producer_token pt(q);
+    EXPECT_TRUE(q.enqueue(pt, 3));
+    int value = 0;
+    EXPECT_TRUE(q.try_dequeue(value));
+    EXPECT_EQ(value, 3);
+}
+
+TEST(LockFreeQueue, RecycleAllocatedBlocks) {
+    lock_free_queue<int, lfuq_recycle_traits> q(0);
+    for (int i = 0; i < 100; ++i) {
+        EXPECT_TRUE(q.enqueue(i));
+    }
+    int value = 0;
+    for (int i = 0; i < 100; ++i) {
+        EXPECT_TRUE(q.try_dequeue(value));
+        EXPECT_EQ(value, i);
+    }
+    for (int i = 0; i < 100; ++i) {
+        EXPECT_TRUE(q.enqueue(i + 1000));
+    }
+    for (int i = 0; i < 100; ++i) {
+        EXPECT_TRUE(q.try_dequeue(value));
+        EXPECT_EQ(value, i + 1000);
+    }
+}
+
+TEST(LockFreeQueue, MultiThreadExactlyOnce) {
+    constexpr int producers = 4;
+    constexpr int items_per_producer = 2000;
+    constexpr int total = producers * items_per_producer;
+    lock_free_queue<int> q;
+    atomic<bool> start{false};
+    atomic<int> remaining{total};
+    vector<atomic<int>> seen;
+    seen.reserve(total);
+    for (int i = 0; i < total; ++i) {
+        seen.emplace_back(0);
+    }
+    vector<thread> workers;
+    for (int p = 0; p < producers; ++p) {
+        workers.push_back(thread([&q, &start, p] {
+            while (!start.load()) {
+                this_thread::yield();
+            }
+            for (int i = 0; i < items_per_producer; ++i) {
+                q.enqueue(p * items_per_producer + i);
+            }
+        }));
+    }
+    workers.push_back(thread([&] {
+        while (!start.load()) {
+            this_thread::yield();
+        }
+        int value = 0;
+        while (remaining.load() > 0) {
+            if (q.try_dequeue(value)) {
+                seen[value].fetch_add(1);
+                remaining.fetch_sub(1);
+            } else {
+                this_thread::yield();
+            }
+        }
+    }));
+    start.store(true);
+    for (auto& t: workers) {
+        t.join();
+    }
+    for (int i = 0; i < total; ++i) {
+        EXPECT_EQ(seen[i].load(), 1);
+    }
+}
+
+TEST(LockFreeQueue, MultiThreadMultiConsumer) {
+    constexpr int producers = 4;
+    constexpr int items_per_producer = 1000;
+    constexpr int consumers = 4;
+    constexpr int total = producers * items_per_producer;
+    lock_free_queue<int> q;
+    atomic<bool> start{false};
+    atomic<int> remaining{total};
+    vector<atomic<int>> seen;
+    seen.reserve(total);
+    for (int i = 0; i < total; ++i) {
+        seen.emplace_back(0);
+    }
+    vector<thread> workers;
+    for (int p = 0; p < producers; ++p) {
+        workers.push_back(thread([&q, &start, p] {
+            while (!start.load()) {
+                this_thread::yield();
+            }
+            for (int i = 0; i < items_per_producer; ++i) {
+                q.enqueue(p * items_per_producer + i);
+            }
+        }));
+    }
+    for (int c = 0; c < consumers; ++c) {
+        workers.push_back(thread([&] {
+            while (!start.load()) {
+                this_thread::yield();
+            }
+            int value = 0;
+            while (remaining.load() > 0) {
+                if (q.try_dequeue(value)) {
+                    seen[value].fetch_add(1);
+                    remaining.fetch_sub(1);
+                } else {
+                    this_thread::yield();
+                }
+            }
+        }));
+    }
+    start.store(true);
+    for (auto& t: workers) {
+        t.join();
+    }
+    for (int i = 0; i < total; ++i) {
+        EXPECT_EQ(seen[i].load(), 1);
+    }
+}
+
+TEST(LockFreeQueue, ProducerThreadExitRecycles) {
+    lock_free_queue<int> q;
+    constexpr int per_wave = 100;
+    for (int wave = 0; wave < 2; ++wave) {
+        vector<thread> producers;
+        for (int p = 0; p < 2; ++p) {
+            producers.push_back(thread([&q, wave, p] {
+                int base = (wave * 2 + p) * per_wave;
+                for (int i = 0; i < per_wave; ++i) {
+                    q.enqueue(base + i);
+                }
+            }));
+        }
+        for (auto& t: producers) {
+            t.join();
+        }
+    }
+    int value = 0;
+    int count = 0;
+    while (q.try_dequeue(value)) {
+        ++count;
+    }
+    EXPECT_EQ(count, 4 * per_wave);
+}
+
+TEST(LockFreeQueue, PopBlocksUntilAvailable) {
+    lock_free_queue<int> q;
+    atomic<bool> go{false};
+    thread producer([&] {
+        while (!go.load()) {
+            this_thread::yield();
+        }
+        q.enqueue(42);
+    });
+    go.store(true);
+    auto value = q.pop();
+    producer.join();
+    ASSERT_TRUE(value != nullptr);
+    EXPECT_EQ(*value, 42);
+}
+
+TEST(LockFreeQueue, PushTryPopCompat) {
+    lock_free_queue<int> q;
+    q.push(1);
+    q.push(2);
+    q.push(3);
+    EXPECT_EQ(q.size(), 3u);
+    auto a = q.try_pop();
+    ASSERT_TRUE(a != nullptr);
+    EXPECT_EQ(*a, 1);
+    auto b = q.try_pop();
+    ASSERT_TRUE(b != nullptr);
+    EXPECT_EQ(*b, 2);
+    auto c = q.try_pop();
+    ASSERT_TRUE(c != nullptr);
+    EXPECT_EQ(*c, 3);
+    auto d = q.try_pop();
+    EXPECT_TRUE(d == nullptr);
+}
+
+TEST(LockFreeQueue, ClearCompat) {
+    lock_free_queue<int> q;
+    for (int i = 0; i < 10; ++i) {
+        q.push(i);
+    }
+    EXPECT_FALSE(q.empty());
+    q.clear();
+    EXPECT_TRUE(q.empty());
+    EXPECT_EQ(q.size(), 0u);
+}
+
+TEST(LockFreeQueue, BulkEnqueueRollsBackOnThrow) {
+    lock_free_queue<lfuq_throwing_copy> q;
+    {
+        vector<lfuq_throwing_copy> items;
+        items.push_back(lfuq_throwing_copy(1));
+        items.push_back(lfuq_throwing_copy(2));
+        items.push_back(lfuq_throwing_copy(-1));
+        items.push_back(lfuq_throwing_copy(3));
+        EXPECT_THROW(q.enqueue_bulk(items.begin(), items.size()), exception);
+    }
+    EXPECT_EQ(lfuq_throwing_copy::alive, 0);
+    EXPECT_TRUE(q.empty());
+    EXPECT_TRUE(q.enqueue(lfuq_throwing_copy(5)));
+    {
+        lfuq_throwing_copy out(0);
+        EXPECT_TRUE(q.try_dequeue(out));
+        EXPECT_EQ(out.value, 5);
+    }
+    EXPECT_EQ(lfuq_throwing_copy::alive, 0);
+}
+
+TEST(LockFreeQueue, DequeueGuardOnThrowingAssign) {
+    lock_free_queue<lfuq_throwing_assign> q;
+    EXPECT_TRUE(q.enqueue(lfuq_throwing_assign(1)));
+    EXPECT_TRUE(q.enqueue(lfuq_throwing_assign(-1)));
+    lfuq_throwing_assign out(0);
+    EXPECT_TRUE(q.try_dequeue(out));
+    EXPECT_EQ(out.value, 1);
+    EXPECT_THROW(q.try_dequeue(out), exception);
+    EXPECT_TRUE(q.empty());
+    EXPECT_FALSE(q.try_dequeue(out));
+}
+
+TEST(LockFreeQueue, DestructorDestroysRemaining) {
+    {
+        lock_free_queue<lfuq_throwing_copy> q;
+        for (int i = 0; i < 5; ++i) {
+            q.enqueue(lfuq_throwing_copy(i));
+        }
+        EXPECT_EQ(lfuq_throwing_copy::alive, 5);
+    }
+    EXPECT_EQ(lfuq_throwing_copy::alive, 0);
+}
+
+TEST(LockFreeQueue, TokenInvalidAfterQueueDestruction) {
+    unique_ptr<lock_free_queue<int>> q(new lock_free_queue<int>());
+    producer_token pt(*q);
+    EXPECT_TRUE(pt.valid());
+    q.reset();
+    EXPECT_FALSE(pt.valid());
+}

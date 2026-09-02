@@ -37,10 +37,10 @@ using byte_t = unsigned char;
 
 
 /**
- * @typedef native_size_type
+ * @typedef native_id_type
  * @brief 系统ID类型
  */
-using native_size_type =
+using native_id_type =
 #ifdef NEFORCE_PLATFORM_WINDOWS
         unsigned long;
 #else

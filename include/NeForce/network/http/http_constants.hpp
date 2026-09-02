@@ -13,8 +13,8 @@
  * - 协议分隔符
  */
 
-#include "NeForce/core/exception/system_exception.hpp"
 #include "NeForce/core/interface/istringify.hpp"
+#include "NeForce/network/util/network_exception.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -28,7 +28,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * @extends network_exception
  * @brief HTTP操作异常
  */
-NEFORCE_ERROR_BUILD_FINAL_CLASS(http_exception, network_exception, "Http Actions Failed");
+NEFORCE_ERROR_BUILD_NETWORK_CLASS(http_exception, "HTTP Operation Failed.")
 
 /** @} */ // Exceptions
 

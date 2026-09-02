@@ -854,7 +854,7 @@ bool sys_console::kbhit() {
 int sys_console::getch() {
     lock<mutex> lock(mutex_);
     if (pending_char_ != -1) {
-        int ch = pending_char_;
+        const int ch = pending_char_;
         pending_char_ = -1;
         return ch;
     }

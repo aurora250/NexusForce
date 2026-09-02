@@ -8,7 +8,7 @@
  * 此文件提供了SSL操作的异常类型和OpenSSL错误码到错误类别的映射。
  */
 
-#include "NeForce/core/exception/error_code.hpp"
+#include "NeForce/network/util/network_exception.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -56,12 +56,12 @@ NEFORCE_API const error_category& ssl_category() noexcept;
  * @struct ssl_exception
  * @brief SSL操作异常
  */
-struct NEFORCE_API ssl_exception final : thirdparty_exception {
+struct NEFORCE_API ssl_exception final : network_exception {
     /**
      * @brief 获取OpenSSL错误队列中的最后一个错误码（不弹出）
      * @return error_code
      */
-    static error_code last_error() noexcept;
+    static error_code last_ssl_error() noexcept;
 
     /**
      * @brief 错误信息构造函数
@@ -70,16 +70,14 @@ struct NEFORCE_API ssl_exception final : thirdparty_exception {
      * 错误码自动从 OpenSSL 错误队列获取。
      */
     explicit ssl_exception(const string& info = "SSL Operation Failed.") noexcept :
-    thirdparty_exception(info.data()),
-    code_(last_error()) {}
+    network_exception(info.data(), last_ssl_error()) {}
 
     /**
      * @brief 错误码构造函数
      * @param code OpenSSL错误码
      */
     explicit ssl_exception(const int code) :
-    thirdparty_exception(ssl_category().message(code).data()),
-    code_(code, ssl_category()) {}
+    network_exception(ssl_category().message(code), error_code(code, ssl_category())) {}
 
     /**
      * @brief 构造函数
@@ -87,24 +85,14 @@ struct NEFORCE_API ssl_exception final : thirdparty_exception {
      * @param code OpenSSL错误码
      */
     explicit ssl_exception(const string& info, const int code) noexcept :
-    thirdparty_exception(info.data()),
-    code_(code, ssl_category()) {}
+    network_exception(info.data(), error_code(code, ssl_category())) {}
 
     explicit ssl_exception(const exception& e) :
-    thirdparty_exception(e) {}
+    network_exception(e) {}
 
     ~ssl_exception() override = default;
 
     NEFORCE_NODISCARD const char* type() const noexcept override { return "ssl_exception"; }
-
-    /**
-     * @brief 获取 error_code 对象
-     * @return error_code 常量引用
-     */
-    NEFORCE_NODISCARD const error_code& code() const noexcept { return code_; }
-
-private:
-    error_code code_; ///< 错误码
 };
 
 /** @} */ // Exceptions

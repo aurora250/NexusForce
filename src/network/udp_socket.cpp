@@ -161,7 +161,7 @@ namespace {
                 handler(error_code{}, static_cast<size_t>(result), move(sender));
                 return;
             }
-            const int err = socket_exception::last_error();
+            const int err = network_exception::last_error().value();
             if (!socket_exception::is_would_block(err)) {
                 handler(error_code(err, error_category::system()), 0, ip_address{});
                 return;
@@ -236,7 +236,7 @@ void udp_socket::async_send_to(io_context& ctx, memory_view<const char> data, co
         handler(error_code{}, static_cast<size_t>(result));
         return;
     }
-    const int err = socket_exception::last_error();
+    const int err = network_exception::last_error().value();
     if (!socket_exception::is_would_block(err)) {
         handler(error_code(err, error_category::system()), 0);
         return;
@@ -261,7 +261,7 @@ void udp_socket::async_send_to(io_context& ctx, memory_view<const char> data, co
         if (r > 0) {
             (*handler_ptr)(error_code{}, static_cast<size_t>(r));
         } else {
-            (*handler_ptr)(error_code{socket_exception::last_error(), error_category::system()}, 0);
+            (*handler_ptr)(error_code{network_exception::last_error().value(), error_category::system()}, 0);
         }
     });
 
@@ -278,7 +278,7 @@ void udp_socket::async_send_to(io_context& ctx, memory_view<const char> data, co
             if (r > 0) {
                 (*handler_ptr)(error_code{}, static_cast<size_t>(r));
             } else {
-                (*handler_ptr)(error_code{socket_exception::last_error(), error_category::system()}, 0);
+                (*handler_ptr)(error_code{network_exception::last_error().value(), error_category::system()}, 0);
             }
         }
     }
@@ -297,7 +297,7 @@ void udp_socket::async_send_to(io_context& ctx, memory_view<const char> data, co
         handler(error_code{}, static_cast<size_t>(result));
         return;
     }
-    const int err = socket_exception::last_error();
+    const int err = network_exception::last_error().value();
     if (!socket_exception::is_would_block(err)) {
         handler(error_code(err, error_category::system()), 0);
         return;
@@ -330,7 +330,7 @@ void udp_socket::async_send_to(io_context& ctx, memory_view<const char> data, co
         if (r > 0) {
             (*handler_ptr)(error_code{}, static_cast<size_t>(r));
         } else {
-            (*handler_ptr)(error_code{socket_exception::last_error(), error_category::system()}, 0);
+            (*handler_ptr)(error_code{network_exception::last_error().value(), error_category::system()}, 0);
         }
     });
 
@@ -347,7 +347,7 @@ void udp_socket::async_send_to(io_context& ctx, memory_view<const char> data, co
             if (r > 0) {
                 (*handler_ptr)(error_code{}, static_cast<size_t>(r));
             } else {
-                (*handler_ptr)(error_code{socket_exception::last_error(), error_category::system()}, 0);
+                (*handler_ptr)(error_code{network_exception::last_error().value(), error_category::system()}, 0);
             }
         }
     }

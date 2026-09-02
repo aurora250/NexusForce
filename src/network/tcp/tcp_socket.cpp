@@ -67,7 +67,7 @@ bool tcp_socket::connect(const ip_address& endpoint, const milliseconds timeout,
         return true;
     }
 
-    int error = socket_exception::last_error();
+    int error = network_exception::last_error().value();
 #ifdef NEFORCE_PLATFORM_WINDOWS
     if (error != WSAEWOULDBLOCK) {
         if (was_blocking) {
@@ -84,11 +84,11 @@ bool tcp_socket::connect(const ip_address& endpoint, const milliseconds timeout,
     }
 #endif
 
-    fd_set write_fds;
+    ::fd_set write_fds;
     FD_ZERO(&write_fds);
     FD_SET(fd_, &write_fds);
 
-    timeval tv{};
+    ::timeval tv{};
     tv.tv_sec = static_cast<long>(timeout.count() / 1000);
     tv.tv_usec = static_cast<long>((timeout.count() % 1000) * 1000);
 
@@ -118,7 +118,7 @@ bool tcp_socket::connect(const ip_address& endpoint, const milliseconds timeout,
         if (was_blocking) {
             ignore = set_nonblocking(false);
         }
-        const auto code = error_code{optval != 0 ? optval : socket_exception::last_error(), system_category()};
+        const auto code = error_code{optval != 0 ? optval : network_exception::last_error().value(), system_category()};
         NEFORCE_THROW_EXCEPTION(socket_exception("Failed to get socket options or socket error occurred", code));
     }
 
@@ -276,7 +276,7 @@ namespace {
                 return;
             }
 
-            const int err = socket_exception::last_error();
+            const int err = network_exception::last_error().value();
 #ifdef NEFORCE_PLATFORM_WINDOWS
             if (err != WSAEWOULDBLOCK && err != WSAEALREADY && err != WSAEINPROGRESS) {
 #else
@@ -339,7 +339,8 @@ namespace {
                 handler(error_code{});
             } else {
                 restore_blocking();
-                handler(error_code(optval != 0 ? optval : socket_exception::last_error(), error_category::system()));
+                handler(error_code(optval != 0 ? optval : network_exception::last_error().value(),
+                                   error_category::system()));
             }
         }
 
@@ -449,7 +450,8 @@ namespace {
             } else if (result == 0) {
                 handler(error_code{make_error_code(errc::connection_reset)}, 0);
             } else {
-                handler(error_code{static_cast<int>(socket_exception::last_error()), error_category::system()}, 0);
+                handler(error_code{static_cast<int>(network_exception::last_error().value()), error_category::system()},
+                        0);
             }
         }
     };
@@ -558,7 +560,8 @@ namespace {
             if (result > 0) {
                 handler(error_code{}, static_cast<size_t>(result));
             } else {
-                handler(error_code{static_cast<int>(socket_exception::last_error()), error_category::system()}, 0);
+                handler(error_code{static_cast<int>(network_exception::last_error().value()), error_category::system()},
+                        0);
             }
         }
     };

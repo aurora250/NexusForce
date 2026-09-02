@@ -141,7 +141,7 @@ public:
      */
     template <typename Error, enable_if_t<is_base_of_v<exception, Error>, int> = 0>
     explicit exception(const Error& error) :
-    exception(error.what(), error.type(), error.code()) {}
+    exception(error.what()) {}
 
     /**
      * @brief 虚析构函数

@@ -3,11 +3,11 @@ if(NOT NEXUSFORCE_BUILD_EXAMPLES)
     return()
 endif()
 
-macro(add_nexusforce_example NAME)
+macro(add_nexusforce_example NAME SUB)
     add_executable(${NAME} ${ARGN})
     target_link_libraries(${NAME} PRIVATE NexusForce::NexusForce)
     nexusforce_compiler_options(${NAME})
-    set_target_properties(${NAME} PROPERTIES FOLDER "examples")
+    set_target_properties(${NAME} PROPERTIES FOLDER "examples/${SUB}")
 endmacro()
 
 add_subdirectory(db)

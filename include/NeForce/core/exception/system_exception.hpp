@@ -19,6 +19,9 @@ struct system_exception : exception {
     exception(info),
     code_(code) {}
 
+    explicit system_exception(const string& info, const error_code code = last_error()) noexcept :
+    system_exception(info.data(), code) {}
+
     explicit system_exception(const error_code code) :
     code_(code) {}
 
@@ -44,6 +47,9 @@ struct device_exception : system_exception {
                               const error_code code = last_error()) noexcept :
     system_exception(info, code) {}
 
+    explicit device_exception(const string& info, const error_code code = last_error()) noexcept :
+    system_exception(info, code) {}
+
     explicit device_exception(const error_code err) :
     system_exception(err) {}
 
@@ -64,6 +70,9 @@ struct file_exception final : system_exception {
     :
     system_exception(info, code) {}
 
+    explicit file_exception(const string& info, const error_code code = last_error()) noexcept :
+    system_exception(info, code) {}
+
     explicit file_exception(const error_code err) :
     system_exception(err) {}
 
@@ -73,26 +82,6 @@ struct file_exception final : system_exception {
     ~file_exception() override = default;
 
     NEFORCE_NODISCARD const char* type() const noexcept override { return "file_exception"; }
-};
-
-/**
- * @struct network_exception
- * @brief 网络操作或行为异常
- */
-struct network_exception : system_exception {
-    explicit network_exception(const char* info = "Network Operation or Action Failed.",
-                               const error_code code = last_error()) noexcept :
-    system_exception(info, code) {}
-
-    explicit network_exception(const error_code err) :
-    system_exception(err) {}
-
-    explicit network_exception(const exception& e) :
-    system_exception(e) {}
-
-    ~network_exception() override = default;
-
-    NEFORCE_NODISCARD const char* type() const noexcept override { return "network_exception"; }
 };
 
 /** @} */ // Exceptions

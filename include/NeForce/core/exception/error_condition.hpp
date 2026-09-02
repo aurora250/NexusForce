@@ -53,7 +53,7 @@ public:
      *
      * 等价于 make_error_condition(e)，类别为 generic_category()。
      */
-    explicit error_condition(errc e) noexcept { *this = make_error_condition(e); }
+    error_condition(errc e) noexcept { *this = make_error_condition(e); }
 
     /**
      * @brief 赋值错误条件值和类别
@@ -112,6 +112,15 @@ public:
         return value_ < rhs.value_;
     }
 };
+
+inline bool operator==(const error_condition& lhs, const errc rhs) noexcept { return lhs == make_error_condition(rhs); }
+
+inline bool operator!=(const error_condition& lhs, const errc rhs) noexcept { return !(lhs == rhs); }
+
+inline bool operator==(const errc lhs, const error_condition& rhs) noexcept { return rhs == lhs; }
+
+inline bool operator!=(const errc lhs, const error_condition& rhs) noexcept { return !(rhs == lhs); }
+
 
 /**
  * @brief 从 errc 枚举创建错误条件

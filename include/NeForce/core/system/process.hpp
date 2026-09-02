@@ -67,16 +67,16 @@ public:
     /**
      * @brief 进程ID类型
      */
-    using native_id_type = native_size_type;
+    using native_id_type = _NEFORCE native_id_type;
 
     /**
      * @enum std_stream
      * @brief 标准流标识
      */
     enum class std_stream {
-        stdin,  ///< 标准输入
-        stdout, ///< 标准输出
-        stderr  ///< 标准错误
+        in,  ///< 标准输入
+        out, ///< 标准输出
+        err  ///< 标准错误
     };
 
     /**

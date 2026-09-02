@@ -8,9 +8,9 @@
  * 此文件提供了Socket基础类。
  */
 
-#include "NeForce/core/exception/system_exception.hpp"
 #include "NeForce/core/time/duration.hpp"
 #include "NeForce/network/util/ip_address.hpp"
+#include "NeForce/network/util/network_exception.hpp"
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <linux/if_ether.h>
 #endif
@@ -27,23 +27,23 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * Socket操作失败时抛出的异常，封装了系统错误码。
  */
-struct NEFORCE_API socket_exception final : network_exception {
-    /**
-     * @brief 获取最后系统Socket错误码
-     * @return 错误码
-     */
-    static int last_error() noexcept;
-
+struct socket_exception final : network_exception {
     /**
      * @brief 检查错误码是否表示操作会阻塞
      * @param error 错误码
      * @return 是会阻塞返回true
      */
-    static bool is_would_block(int error) noexcept;
+    static bool NEFORCE_API is_would_block(int error) noexcept;
 
     explicit socket_exception(const char* info = "Socket Operation Failed.",
-                              const error_code code = error_code(last_error(), system_category())) noexcept :
+                              const error_code code = network_exception::last_error()) noexcept :
     network_exception(info, code) {}
+
+    explicit socket_exception(const string& info, const error_code code = network_exception::last_error()) noexcept :
+    network_exception(info, code) {}
+
+    explicit socket_exception(const error_code err) :
+    network_exception(err) {}
 
     explicit socket_exception(const exception& e) :
     network_exception(e) {}

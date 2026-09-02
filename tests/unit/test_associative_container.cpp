@@ -11,6 +11,7 @@
 #include <NeForce/core/container/sparse_multimap.hpp>
 #include <NeForce/core/container/sparse_multiset.hpp>
 #include <NeForce/core/container/sparse_set.hpp>
+#include <NeForce/core/container/ttl_cache.hpp>
 #include <NeForce/core/container/flat_unordered_map.hpp>
 #include <NeForce/core/container/flat_unordered_set.hpp>
 #include <NeForce/core/container/flat_unordered_multimap.hpp>

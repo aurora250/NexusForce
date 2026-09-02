@@ -37,7 +37,7 @@ public:
     using reference = iter_reference_t<Iterator>;        ///< 引用类型
 
 private:
-    Iterator current; ///< 底层迭代器
+    Iterator current_; ///< 底层迭代器
 
 public:
     /**
@@ -47,15 +47,15 @@ public:
 
     /**
      * @brief 从底层迭代器构造
-     * @param x 底层迭代器
+     * @param other 底层迭代器
      */
-    constexpr explicit reverse_iterator(Iterator x) noexcept(is_nothrow_move_constructible_v<Iterator>) :
-    current(_NEFORCE move(x)) {}
+    constexpr explicit reverse_iterator(Iterator other) noexcept(is_nothrow_move_constructible_v<Iterator>) :
+    current_(_NEFORCE move(other)) {}
 
     /**
      * @brief 从其他类型的反向迭代器构造
      * @tparam U 其他迭代器类型
-     * @param x 其他反向迭代器
+     * @param other 其他反向迭代器
      *
      * 允许从兼容迭代器类型的反向迭代器构造。
      */
@@ -63,15 +63,15 @@ public:
 #ifdef NEFORCE_STANDARD_20
         requires(!same_as<U, Iterator> && convertible_to<const U&, Iterator>)
 #endif // NEFORCE_STANDARD_20
-    constexpr explicit reverse_iterator(const reverse_iterator<U>& x) noexcept(
+    constexpr explicit reverse_iterator(const reverse_iterator<U>& other) noexcept(
             is_nothrow_constructible_v<Iterator, const U&>) :
-    current(x.current) {
+    current_(other.current_) {
     }
 
     /**
      * @brief 从其他类型的反向迭代器赋值
      * @tparam U 其他迭代器类型
-     * @param x 其他反向迭代器
+     * @param other 其他反向迭代器
      * @return 当前反向迭代器的引用
      */
     template <typename U>
@@ -79,8 +79,8 @@ public:
         requires(!same_as<U, Iterator> && convertible_to<const U&, Iterator> && assignable_from<Iterator&, const U&>)
 #endif // NEFORCE_STANDARD_20
     constexpr reverse_iterator&
-    operator=(const reverse_iterator<U>& x) noexcept(is_nothrow_assignable<reverse_iterator&, const U&>::value) {
-        current = x.current;
+    operator=(const reverse_iterator<U>& other) noexcept(is_nothrow_assignable<reverse_iterator&, const U&>::value) {
+        current_ = other.current_;
         return *this;
     }
 
@@ -94,7 +94,7 @@ public:
      */
     NEFORCE_NODISCARD constexpr reference operator*() const
             noexcept(is_nothrow_copy_assignable<Iterator>::value && noexcept(*--(_NEFORCE declval<Iterator&>()))) {
-        Iterator iter = current;
+        Iterator iter = current_;
         return *--iter;
     }
 
@@ -111,7 +111,7 @@ public:
         requires(is_pointer_v<Iterator> || requires(const Iterator it) { it.operator->(); })
 #endif // NEFORCE_STANDARD_20
     {
-        Iterator tmp = current;
+        Iterator tmp = current_;
         --tmp;
         return _NEFORCE to_pointer(tmp);
     }
@@ -122,8 +122,8 @@ public:
      *
      * 反向迭代器的递增对应底层迭代器的递减。
      */
-    constexpr reverse_iterator& operator++() noexcept(noexcept(--current)) {
-        --current;
+    constexpr reverse_iterator& operator++() noexcept(noexcept(--current_)) {
+        --current_;
         return *this;
     }
 
@@ -132,9 +132,9 @@ public:
      * @return 递增前的反向迭代器副本
      */
     constexpr reverse_iterator operator++(int) noexcept(is_nothrow_copy_constructible_v<Iterator> &&
-                                                        noexcept(--current)) {
+                                                        noexcept(--current_)) {
         reverse_iterator tmp = *this;
-        --current;
+        --current_;
         return tmp;
     }
 
@@ -144,8 +144,8 @@ public:
      *
      * 反向迭代器的递减对应底层迭代器的递增。
      */
-    constexpr reverse_iterator& operator--() noexcept(noexcept(++current)) {
-        ++current;
+    constexpr reverse_iterator& operator--() noexcept(noexcept(++current_)) {
+        ++current_;
         return *this;
     }
 
@@ -154,9 +154,9 @@ public:
      * @return 递减前的反向迭代器副本
      */
     constexpr reverse_iterator operator--(int) noexcept(is_nothrow_copy_constructible_v<Iterator> &&
-                                                        noexcept(++current)) {
+                                                        noexcept(++current_)) {
         reverse_iterator tmp = *this;
-        ++current;
+        ++current_;
         return tmp;
     }
 
@@ -168,8 +168,8 @@ public:
      * 反向迭代器的前进对应底层迭代器的后退。
      */
     constexpr reverse_iterator operator+(const difference_type n) const
-            noexcept(noexcept(reverse_iterator(current - n))) {
-        return reverse_iterator(current - n);
+            noexcept(noexcept(reverse_iterator(current_ - n))) {
+        return reverse_iterator(current_ - n);
     }
 
     /**
@@ -177,8 +177,8 @@ public:
      * @param n 前进距离
      * @return 当前反向迭代器的引用
      */
-    constexpr reverse_iterator& operator+=(const difference_type n) noexcept(noexcept(current -= n)) {
-        current -= n;
+    constexpr reverse_iterator& operator+=(const difference_type n) noexcept(noexcept(current_ -= n)) {
+        current_ -= n;
         return *this;
     }
 
@@ -190,8 +190,8 @@ public:
      * 反向迭代器的后退对应底层迭代器的前进。
      */
     constexpr reverse_iterator operator-(const difference_type n) const
-            noexcept(noexcept(reverse_iterator(current + n))) {
-        return reverse_iterator(current + n);
+            noexcept(noexcept(reverse_iterator(current_ + n))) {
+        return reverse_iterator(current_ + n);
     }
 
     /**
@@ -199,8 +199,8 @@ public:
      * @param n 后退距离
      * @return 当前反向迭代器的引用
      */
-    constexpr reverse_iterator& operator-=(const difference_type n) noexcept(noexcept(current += n)) {
-        current += n;
+    constexpr reverse_iterator& operator-=(const difference_type n) noexcept(noexcept(current_ += n)) {
+        current_ += n;
         return *this;
     }
 
@@ -210,7 +210,7 @@ public:
      * @return 偏移n个位置后的元素引用
      */
     constexpr reference operator[](const difference_type n) const
-            noexcept(noexcept(_NEFORCE declcopy<reference>(reverse_iterator(current - n)))) {
+            noexcept(noexcept(_NEFORCE declcopy<reference>(reverse_iterator(current_ - n)))) {
         return *(*this + n);
     }
 
@@ -218,7 +218,7 @@ public:
      * @brief 获取底层迭代器
      * @return 底层迭代器的常量引用
      */
-    NEFORCE_NODISCARD constexpr const Iterator& base() const noexcept { return current; }
+    NEFORCE_NODISCARD constexpr const Iterator& base() const noexcept { return current_; }
 };
 
 /**

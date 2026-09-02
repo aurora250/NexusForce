@@ -91,9 +91,7 @@ private:
     native_handle_type in_;  ///< 标准输入句柄
     native_handle_type err_; ///< 标准错误句柄
 
-#ifdef NEFORCE_PLATFORM_WINDOWS
     console_size saved_cursor_pos_{0, 0}; ///< 保存的光标位置
-#endif
 
     mutable mutex mutex_;          ///< 互斥锁
     console_size last_size_{0, 0}; ///< 上次记录的控制台尺寸

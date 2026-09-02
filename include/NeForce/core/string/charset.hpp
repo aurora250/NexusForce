@@ -10,7 +10,6 @@
  */
 
 #include "NeForce/core/string/char_types.hpp"
-#include "NeForce/core/typeinfo/type_traits.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**

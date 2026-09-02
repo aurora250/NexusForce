@@ -15,11 +15,12 @@
 #include "NeForce/core/async/promise.hpp"
 #include "NeForce/core/async/shared_mutex.hpp"
 #include "NeForce/core/async/use_awaitable.hpp"
-#include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/container/flat_unordered_map.hpp"
 #include "NeForce/core/memory/weak_ptr.hpp"
 #include "NeForce/core/time/clocks.hpp"
 #include "NeForce/core/utility/optional.hpp"
 #include "NeForce/network/dns/dns_message.hpp"
+#include "NeForce/network/tcp/tcp_socket.hpp"
 #include "NeForce/network/udp_socket.hpp"
 #include "NeForce/network/util/ports.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -36,12 +37,15 @@ NEFORCE_BEGIN_NAMESPACE__
  * 提供DNS查询服务的完整实现，支持缓存、超时控制和多种查询类型。
  *
  * 主要功能：
- * - DNS查询（支持A、AAAA、CNAME、MX、TXT等记录类型）
- * - DNS缓存（减少重复查询）
+ * - DNS查询（A、AAAA、CNAME、MX、TXT等记录类型）
+ * - DNS缓存
  * - 同步/异步查询
  * - 批量查询
- * - 反向查询（PTR记录）
- * - TCP/UDP协议自动切换（响应截断时自动切换TCP）
+ * - 反向查询
+ * - TCP/UDP协议自动切换
+ * - UDP超时自动重试
+ * - 0x20 随机大小写编码与响应校验
+ * - 源端口定期轮换
  */
 class NEFORCE_API dns_client {
 public:
@@ -52,7 +56,7 @@ public:
     struct config {
         string server{"8.8.8.8"};   ///< DNS服务器地址
         ports port{ports::DNS};     ///< DNS服务器端口
-        milliseconds timeout{5000}; ///< 查询超时时间
+        milliseconds timeout{5000}; ///< 单轮查询超时时间
     };
 
 private:
@@ -61,7 +65,8 @@ private:
      * @brief 单个 DNS 查询的异步操作状态
      *
      * 管理从发送到响应的完整生命周期：构造查询包、注册到共享 pending map、
-     * 定时器超时、取消槽回调。通过 shared_from_this 确保在异步回调期间存活。
+     * 定时器超时、UDP 重试、TCP 截断回退状态机、取消槽回调。
+     * 通过 shared_from_this 确保在异步回调期间存活。
      */
     struct dns_query_op : enable_shared_from_this<dns_query_op> {
         dns_client* client;
@@ -76,10 +81,34 @@ private:
         size_t timer_id_{0};
         steady_clock::time_point start_time_;
 
+        string expected_question_;          ///< 期望的QNAME（0x20 随机大小写模式，用于响应校验）
+        uint8_t udp_retries_{0};            ///< 已执行的UDP重试次数
+        uint8_t max_udp_retries_{0};        ///< UDP最大重试次数（自客户端配置复制）
+        milliseconds timeout_{5000};        ///< 单轮查询超时（自客户端配置复制）
+        steady_clock::time_point deadline_; ///< 查询总预算截止时间（含UDP重试与TCP回退）
+
+        unique_ptr<tcp_socket> tcp_socket_; ///< TCP回退socket（异步状态机）
+        byte_vector tcp_request_buf_;       ///< 2字节长度前缀+查询报文
+        byte_t tcp_len_buf_[2]{0, 0};       ///< 响应长度缓冲区
+        uint16_t tcp_response_len_{0};      ///< 响应长度（网络序解码后）
+        byte_vector tcp_response_buf_;      ///< 响应缓冲区
+        size_t tcp_response_received_{0};   ///< 已接收的响应字节数
+        size_t tcp_timer_id_{0};            ///< TCP阶段超时定时器ID
+        bool tcp_finished_{false};          ///< TCP回退是否已完成（防定时器竞态重复完成）
+        bool tcp_only_{false};              ///< 强制TCP模式（不处理UDP响应）
+
         void start();
+        void retry_udp();
         void on_response(error_code ec, dns_query_result result);
         void on_timeout();
         void do_cancel();
+        void start_tcp_fallback();
+        void on_tcp_connected(error_code ec);
+        void on_tcp_written(error_code ec, size_t bytes);
+        void on_tcp_len_read(error_code ec, size_t bytes);
+        void on_tcp_body_read(error_code ec, size_t bytes);
+        void on_tcp_timeout();
+        void finish_tcp(error_code ec, dns_query_result result);
     };
 
     struct pending_entry {
@@ -88,22 +117,39 @@ private:
         steady_clock::time_point created_at{steady_clock::now()}; ///< 创建时间
     };
 
-    config config_{};                                                               ///< 客户端配置
-    unordered_map<string, pair<dns_query_result, steady_clock::time_point>> cache_; ///< DNS缓存
-    mutable shared_mutex cache_mutex_;                                              ///< 缓存互斥锁
-    seconds cache_ttl_{300};                                                        ///< 缓存TTL
-    bool use_tcp_ = false;                                                          ///< 是否强制使用TCP
+    /**
+     * @struct cache_entry
+     * @brief DNS缓存条目
+     *
+     * 携带按记录TTL计算的生效时长，过期后由查询路径惰性淘汰。
+     */
+    struct cache_entry {
+        dns_query_result result;             ///< 查询结果
+        steady_clock::time_point created_at; ///< 创建时间
+        seconds ttl{0};                      ///< 生效TTL
+    };
+
+    config config_{};                               ///< 客户端配置
+    flat_unordered_map<string, cache_entry> cache_; ///< DNS缓存
+    mutable shared_mutex cache_mutex_;              ///< 缓存互斥锁
+    seconds cache_ttl_{300};                        ///< 缓存TTL上限
+    bool use_tcp_ = false;                          ///< 是否强制使用TCP
 
     bool recursion_desired_ = true;                        ///< 是否期望递归查询（RD）
     uint16_t edns_udp_payload_{edns::DEFAULT_UDP_PAYLOAD}; ///< EDNS0 UDP载荷大小
     bool dnssec_ok_ = false;                               ///< 是否请求DNSSEC（DO）
 
-    udp_socket shared_socket_;                               ///< 共享UDP socket
-    unordered_map<uint16_t, pending_entry> pending_queries_; ///< 待处理查询（ID索引）
-    mutable mutex pending_mutex_;                            ///< 待处理查询互斥锁
-    mutable mutex send_mutex_;                               ///< 发送互斥锁
-    io_context* ctx_{nullptr};                               ///< 异步 I/O 执行上下文
-    atomic<bool> io_running_{false};                         ///< I/O循环运行标志
+    udp_socket shared_socket_;                                    ///< 共享UDP socket
+    flat_unordered_map<uint16_t, pending_entry> pending_queries_; ///< 待处理查询（ID索引）
+    mutable mutex pending_mutex_;                                 ///< 待处理查询互斥锁
+    mutable mutex send_mutex_;                                    ///< 发送互斥锁
+    io_context* ctx_{nullptr};                                    ///< 异步 I/O 执行上下文
+    atomic<bool> io_running_{false};                              ///< I/O循环运行标志
+
+    uint8_t max_udp_retries_{edns::MAX_UDP_RETRIES};  ///< UDP最大重试次数
+    bool case_randomize_{true};                       ///< 0x20 随机大小写编码开关
+    uint32_t query_count_{0};                         ///< 距上次源端口轮换的查询计数
+    steady_clock::time_point socket_created_at_{0_s}; ///< 当前共享socket的创建时间
 
 private:
     void ensure_io_started();
@@ -116,7 +162,8 @@ private:
     void unregister_query(uint16_t txid);
 
     void send_query(const byte_vector& query);
-    byte_vector send_tcp_query(const byte_vector& query);
+    void maybe_rotate_socket();
+    void rotate_socket();
 
     optional<dns_query_result> check_cache(const string& key);
     void update_cache(const string& key, const dns_query_result& result);
@@ -164,8 +211,9 @@ public:
     void set_use_tcp(const bool use_tcp) noexcept { use_tcp_ = use_tcp; }
 
     /**
-     * @brief 设置缓存TTL
-     * @param ttl 缓存生存时间
+     * @brief 设置缓存TTL上限
+     * @param ttl 缓存生存时间上限
+     * @note 生效TTL取记录自身TTL与该上限的较小值；失败响应固定使用否定缓存TTL。
      */
     void set_cache_ttl(const seconds ttl) noexcept { cache_ttl_ = ttl; }
 
@@ -186,6 +234,29 @@ public:
      * @param ok 是否启用DNSSEC
      */
     void set_dnssec_ok(const bool ok) noexcept { dnssec_ok_ = ok; }
+
+    /**
+     * @brief 设置UDP最大重试次数
+     * @param retries 重试次数上限
+     */
+    void set_max_udp_retries(const uint8_t retries) noexcept { max_udp_retries_ = retries; }
+
+    /**
+     * @brief 设置0x20随机大小写编码开关
+     * @param enable 是否启用
+     */
+    void set_randomize_case(const bool enable) noexcept { case_randomize_ = enable; }
+
+    /**
+     * @brief 计算缓存生效TTL
+     * @param result 查询结果
+     * @param cap TTL上限
+     * @return 生效TTL
+     *
+     * 成功结果取答案记录的最小TTL与上限的较小值（无答案时取上限），
+     * 失败结果固定使用否定缓存TTL（RFC 2308）。
+     */
+    static seconds effective_cache_ttl(const dns_query_result& result, seconds cap);
 
     /**
      * @brief 清空缓存
@@ -273,7 +344,8 @@ public:
      * @param qclass 查询类
      * @return awaitable<dns_query_result> 可协程等待的结果
      */
-    auto async_query(string_view domain, dns_record::raw type, dns_class qclass, use_awaitable_t);
+    awaitable<error_code, dns_query_result> async_query(string_view domain, dns_record::raw type, dns_class qclass,
+                                                        use_awaitable_t);
 #endif
 
     /**
@@ -355,20 +427,24 @@ public:
      * @param edns_enable 是否启用EDNS0
      * @param dnssec_ok 是否请求DNSSEC
      * @param edns_payload EDNS0 UDP载荷大小
+     * @param case_pattern 0x20大小写模式（空表示原样编码）
      * @return 编码后的DNS查询消息
      */
     static byte_vector build_query(string_view domain, dns_record::raw type = dns_record::A,
                                    dns_class qclass = dns_class::INTERNET, bool rd = true, bool edns_enable = true,
-                                   bool dnssec_ok = false, uint16_t edns_payload = edns::DEFAULT_UDP_PAYLOAD);
+                                   bool dnssec_ok = false, uint16_t edns_payload = edns::DEFAULT_UDP_PAYLOAD,
+                                   string_view case_pattern = {});
 
     /**
      * @brief 解析DNS响应消息
      * @param response 原始响应数据
      * @param expected_id 期望的查询ID（0表示不校验）
+     * @param expected_question 期望的QNAME（0x20大小写校验，空表示不校验）
      * @return 解析后的查询结果
      * @throws dns_exception 解析或校验失败时抛出
      */
-    static dns_query_result parse_response(const byte_vector& response, uint16_t expected_id = 0);
+    static dns_query_result parse_response(const byte_vector& response, uint16_t expected_id = 0,
+                                           string_view expected_question = {});
 };
 
 

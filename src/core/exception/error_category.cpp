@@ -54,9 +54,10 @@ string system_error_category::message(const int32_t ev) const {
     if (ev == 0) {
         return "success";
     }
-    const ::LPSTR buf = nullptr;
+    ::LPSTR buf = nullptr;
     ::FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
-                     nullptr, static_cast<::DWORD>(ev), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), buf, 0, nullptr);
+                     nullptr, static_cast<::DWORD>(ev), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+                     reinterpret_cast<::LPSTR>(&buf), 0, nullptr);
     string result;
     if (buf != nullptr) {
         result = buf;

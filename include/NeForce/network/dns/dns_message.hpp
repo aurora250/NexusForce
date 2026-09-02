@@ -21,6 +21,7 @@
 #include "NeForce/core/exception/system_exception.hpp"
 #include "NeForce/core/string/string.hpp"
 #include "NeForce/core/time/duration.hpp"
+#include "NeForce/network/util/network_exception.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -225,30 +226,17 @@ enum class dns_response : uint8_t {
  */
 class dns_exception final : public network_exception {
 public:
-    /**
-     * @enum code
-     * @brief DNS异常错误码
-     */
-    enum class code {
-        TIMEOUT,        ///< 查询超时
-        NETWORK_ERROR,  ///< 网络错误
-        PARSE_ERROR,    ///< 解析错误
-        SERVER_FAILURE, ///< 服务器失败
-        TRUNCATED,      ///< 响应被截断
-        NO_RECORD       ///< 无记录
-    };
-
     explicit dns_exception(const string& info) :
-    network_exception(info.data()) {}
+    network_exception(info) {}
 
-    dns_exception(const string& info, const code code) :
-    network_exception(info.data(), error_code{static_cast<int>(code), generic_category()}) {}
+    dns_exception(const string& info, const network_errc code) :
+    network_exception(info, error_code{static_cast<int>(code), network_category()}) {}
 
     /**
      * @brief 创建超时异常
      * @return DNS异常对象
      */
-    static dns_exception timeout() { return {"DNS query timeout", code::TIMEOUT}; }
+    static dns_exception timeout() { return {"DNS query timeout", network_errc::timeout}; }
 
     /**
      * @brief 创建网络错误异常
@@ -256,7 +244,7 @@ public:
      * @param code 错误码
      * @return DNS异常对象
      */
-    static dns_exception network_error(const string& detail, const code code = code::NETWORK_ERROR) {
+    static dns_exception network_error(const string& detail, const network_errc code = network_errc::network_error) {
         return {"Network error: " + detail, code};
     }
 
@@ -265,7 +253,9 @@ public:
      * @param detail 错误详情
      * @return DNS异常对象
      */
-    static dns_exception parse_error(const string& detail) { return {"Parse error: " + detail, code::PARSE_ERROR}; }
+    static dns_exception parse_error(const string& detail) {
+        return {"Parse error: " + detail, network_errc::parse_error};
+    }
 
     NEFORCE_NODISCARD const char* type() const noexcept override { return "dns_exception"; }
 };

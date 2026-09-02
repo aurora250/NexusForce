@@ -30,14 +30,6 @@ namespace {
 constexpr socket_base::native_handle_type socket_base::invalid_handle;
 #endif
 
-int socket_exception::last_error() noexcept {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    return ::WSAGetLastError();
-#else
-    return errno;
-#endif
-}
-
 bool socket_exception::is_would_block(int error) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return error == WSAEWOULDBLOCK;

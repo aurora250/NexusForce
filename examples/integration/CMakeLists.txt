@@ -1,4 +1,4 @@
-add_nexusforce_example(NexusForceIntegrationExample
+add_nexusforce_example(NexusForceIntegrationExample integration
     main.cpp
     task_store.cpp
     ws_broadcaster.cpp

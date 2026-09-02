@@ -23,8 +23,10 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /// @brief 协程 awaitable 完成令牌
 struct use_awaitable_t {};
+
 /// @brief use_awaitable 常量
-constexpr use_awaitable_t use_awaitable{};
+NEFORCE_INLINE17 constexpr use_awaitable_t use_awaitable{};
+
 
 /**
  * @class awaitable
@@ -36,18 +38,105 @@ constexpr use_awaitable_t use_awaitable{};
  */
 template <typename... Args>
 class awaitable {
+private:
+    struct state {
+        tuple<Args...> data{};                    ///< 完成值
+        bool ready{false};                        ///< 是否已完成
+        exception_ptr exception{nullptr};         ///< 完成异常
+        coroutine_handle<> continuation{nullptr}; ///< 挂起的协程句柄
+    };
+
+    shared_ptr<state> state_; ///< 共享状态
+
+    explicit awaitable(shared_ptr<state> s) :
+    state_(_NEFORCE move(s)) {}
+
 public:
-    awaitable() = default;
+    /**
+     * @struct promise_type
+     * @brief 协程 promise 类型
+     */
+    struct promise_type {
+        shared_ptr<state> state_; ///< 与协程返回对象共享的状态
+
+        /**
+         * @brief 构造函数
+         */
+        promise_type() :
+        state_(_NEFORCE make_shared<state>()) {}
+
+        /**
+         * @brief 获取协程返回对象
+         */
+        awaitable get_return_object() { return awaitable(state_); }
+
+        /**
+         * @brief 协程创建后立即执行
+         */
+        suspend_never initial_suspend() noexcept { return {}; }
+
+        /**
+         * @brief 协程结束钩子：标记完成并恢复外部等待者
+         */
+        auto final_suspend() noexcept {
+            struct awaiter {
+                shared_ptr<state> state;
+                NEFORCE_NODISCARD bool await_ready() const noexcept { return false; }
+                void await_suspend(coroutine_handle<> h) noexcept {
+                    state->ready = true;
+                    if (state->continuation) {
+                        state->continuation.resume();
+                    }
+                    h.destroy();
+                }
+                void await_resume() noexcept {}
+            };
+            return awaiter{state_};
+        }
+
+        /**
+         * @brief co_return 结果存储
+         * @param value 协程返回值
+         */
+        template <typename U>
+        void return_value(U&& value) {
+            static_assert(sizeof...(Args) == 1, "awaitable with multiple results cannot be a coroutine return type");
+            _NEFORCE get<0>(state_->data) = _NEFORCE forward<U>(value);
+            state_->ready = true;
+            if (state_->continuation) {
+                state_->continuation.resume();
+            }
+        }
+
+        /**
+         * @brief 协程异常捕获
+         */
+        void unhandled_exception() {
+            state_->exception = current_exception();
+            state_->ready = true;
+            if (state_->continuation) {
+                state_->continuation.resume();
+            }
+        }
+    };
+
+    /**
+     * @brief 默认构造函数
+     *
+     * 构造一个独立的未就绪 awaitable。
+     */
+    awaitable() :
+    state_(_NEFORCE make_shared<state>()) {}
 
     /**
      * @brief 设置完成值
      * @param args 异步操作的结果参数
      */
     void set_value(Args... args) {
-        data_ = _NEFORCE make_tuple(_NEFORCE move(args)...);
-        ready_ = true;
-        if (continuation_) {
-            continuation_.resume();
+        state_->data = _NEFORCE make_tuple(_NEFORCE move(args)...);
+        state_->ready = true;
+        if (state_->continuation) {
+            state_->continuation.resume();
         }
     }
 
@@ -55,35 +144,33 @@ public:
      * @brief 设置异常
      */
     void set_exception(exception_ptr e) {
-        exception_ = move(e);
-        ready_ = true;
-        if (continuation_) {
-            continuation_.resume();
+        state_->exception = _NEFORCE move(e);
+        state_->ready = true;
+        if (state_->continuation) {
+            state_->continuation.resume();
         }
     }
 
-    NEFORCE_NODISCARD bool await_ready() const noexcept { return ready_; }
+    NEFORCE_NODISCARD bool await_ready() const noexcept { return state_->ready; }
 
-    void await_suspend(coroutine_handle<> h) noexcept { continuation_ = h; }
+    void await_suspend(coroutine_handle<> h) noexcept { state_->continuation = h; }
 
+    /**
+     * @brief 协程恢复时的结果获取
+     * @return 单参数返回该参数值，多参数返回 tuple，异常时重抛
+     */
     auto await_resume() {
-        if (exception_) {
-            rethrow_exception(exception_);
+        if (state_->exception) {
+            rethrow_exception(state_->exception);
         }
         if constexpr (sizeof...(Args) == 1) {
-            return _NEFORCE move(_NEFORCE get<0>(data_));
+            return _NEFORCE move(_NEFORCE get<0>(state_->data));
         } else if constexpr (sizeof...(Args) == 0) {
             return;
         } else {
-            return _NEFORCE move(data_);
+            return _NEFORCE move(state_->data);
         }
     }
-
-private:
-    tuple<Args...> data_{};
-    bool ready_{false};
-    exception_ptr exception_{nullptr};
-    coroutine_handle<> continuation_{nullptr};
 };
 
 
@@ -107,21 +194,17 @@ struct async_result<use_awaitable_t, void(Args...)> {
     handler_type handler_;
 
     explicit async_result(use_awaitable_t /*unused*/) {
-        awaitable_ = make_shared<return_type>();
+        awaitable_ = _NEFORCE make_shared<return_type>();
         handler_.awaitable_ = awaitable_;
     }
 
     handler_type get_handler() { return handler_; }
 
-    return_type get() { return _NEFORCE move(*awaitable_); }
+    return_type get() noexcept { return *awaitable_; }
 };
 
 /**
  * @brief awaitable 的 void 特化
- *
- * 用于返回类型为 void 的异步操作（如 async_handshake、async_connect）。
- * 同时支持作为协程返回类型——lambda 中可使用 co_await 构建异步链，
- * 协程完成时自动触发 awaitable::set_value()。
  */
 template <>
 class awaitable<void> {

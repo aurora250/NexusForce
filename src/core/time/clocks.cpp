@@ -83,18 +83,15 @@ steady_clock::time_point steady_clock::now() noexcept {
             return f;
         }();
 
-        using rep = steady_clock::rep;
         const rep ticks = static_cast<rep>(count.QuadPart);
         const rep nanos_per_tick = 1'000'000'000LL / static_cast<rep>(freq.QuadPart);
         const rep remainder = 1'000'000'000LL % static_cast<rep>(freq.QuadPart);
-        rep total_nanos = (ticks * nanos_per_tick) + ((ticks / static_cast<rep>(freq.QuadPart)) * remainder);
+        const rep total_nanos = (ticks * nanos_per_tick) + ((ticks / static_cast<rep>(freq.QuadPart)) * remainder);
 #elif defined(NEFORCE_PLATFORM_LINUX)
         ::timespec ts{};
         ::clock_gettime(CLOCK_MONOTONIC, &ts);
 
-        using clock_rep = steady_clock::rep;
-        const clock_rep total_nanos =
-                static_cast<clock_rep>(ts.tv_sec) * 1'000'000'000LL + static_cast<clock_rep>(ts.tv_nsec);
+        const rep total_nanos = static_cast<rep>(ts.tv_sec) * 1'000'000'000LL + static_cast<rep>(ts.tv_nsec);
 #endif
         return time_point(duration(total_nanos));
     } catch (...) {
@@ -115,7 +112,7 @@ milliseconds relative_time(const int64_t sec, const int64_t nsec, const bool is_
     }
 
     if (diff_ns <= 0_ns) {
-        return 0_ms;
+        return milliseconds(0);
     }
 
     const milliseconds diff_ms = diff_ns.to_milli();
