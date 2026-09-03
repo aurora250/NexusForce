@@ -63,8 +63,8 @@ string escape(const string_view str) {
     size_t i = 0;
     while (i < len) {
         while (i + 16 <= len) {
-            const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(str.data() + i));
-            ::__m128i special = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('"'));
+            const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(str.data() + i));
+            simd::vec128_t special = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('"'));
             special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\'')));
             special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\\')));
             special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(::_mm_min_epu8(v, ::_mm_set1_epi8(0x1F)), v));

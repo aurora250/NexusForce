@@ -146,9 +146,9 @@ public:
     /**
      * @brief 异步接受—use_future
      * @param ctx 异步 I/O 执行上下文
-     * @return future<tcp_socket> 已连接的 socket
+     * @return 已连接的 socket
      */
-    decltype(auto) async_accept(io_context& ctx, use_future_t /*unused*/) {
+    future<tcp_socket> async_accept(io_context& ctx, use_future_t /*unused*/) {
         async_result<use_future_t, void(error_code, tcp_socket)> result(use_future);
         async_accept(ctx, function<void(error_code, tcp_socket)>(result.get_handler()));
         return result.get();
@@ -166,9 +166,9 @@ public:
     /**
      * @brief 异步接受—use_awaitable
      * @param ctx 异步 I/O 执行上下文
-     * @return awaitable<tcp_socket> 可协程等待的结果
+     * @return 协程等待结果
      */
-    decltype(auto) async_accept(io_context& ctx, use_awaitable_t /*unused*/) {
+    awaitable<error_code, tcp_socket> async_accept(io_context& ctx, use_awaitable_t /*unused*/) {
         async_result<use_awaitable_t, void(error_code, tcp_socket)> result(use_awaitable);
         async_accept(ctx, function<void(error_code, tcp_socket)>(result.get_handler()));
         return result.get();

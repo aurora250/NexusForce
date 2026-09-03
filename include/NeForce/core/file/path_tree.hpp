@@ -196,10 +196,8 @@ private:
     static void traverse_dfs_impl(const node::ptr& current, const visitor& v, bool& stopped);
     static void collect_impl(const node::ptr& current, const filter& f, vector<node::ptr>& result);
     static node::ptr clone_node(const node::ptr& src, const node::ptr& new_parent, size_t depth);
-
     static node::ptr prune_impl(const node::ptr& src, const filter& f, const node::ptr& new_parent, size_t depth);
-
-    NEFORCE_NODISCARD string to_string_impl(const node::ptr& n, string_view indent, size_t depth) const;
+    static string to_string_impl(const node::ptr& n, string_view indent, size_t depth);
 
 public:
     path_tree() = default;

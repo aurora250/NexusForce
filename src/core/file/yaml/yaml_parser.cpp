@@ -33,7 +33,7 @@ void yaml_parser::advance_bulk(const size_t count) noexcept {
 
 #ifdef NEFORCE_SIMD_AVX2
     while (i + 32 <= count) {
-        const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(yaml_.data() + pos_ + i));
+        const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(yaml_.data() + pos_ + i));
         const int mask = ::_mm256_movemask_epi8(::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n')));
         if (mask != 0) {
             newlines += static_cast<size_t>(popcount64(static_cast<unsigned>(mask)));
@@ -44,7 +44,7 @@ void yaml_parser::advance_bulk(const size_t count) noexcept {
 #endif
 #ifdef NEFORCE_SIMD_SSE2
     while (i + 16 <= count) {
-        const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(yaml_.data() + pos_ + i));
+        const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(yaml_.data() + pos_ + i));
         const int mask = ::_mm_movemask_epi8(::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n')));
         if (mask != 0) {
             newlines += static_cast<size_t>(popcount64(static_cast<unsigned>(mask)));
@@ -91,8 +91,8 @@ bool yaml_parser::is_newline(const char ch) const noexcept { return ch == '\n' |
 void yaml_parser::skip_whitespace_inline() noexcept {
 #ifdef NEFORCE_SIMD_AVX2
     while (pos_ + 32 <= len_) {
-        const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(yaml_.data() + pos_));
-        ::__m256i ws = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(' '));
+        const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(yaml_.data() + pos_));
+        simd::vec256_t ws = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(' '));
         ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\t')));
         const int mask = ::_mm256_movemask_epi8(ws);
         if (mask == -1) {
@@ -105,8 +105,8 @@ void yaml_parser::skip_whitespace_inline() noexcept {
 #endif
 #ifdef NEFORCE_SIMD_SSE2
     while (pos_ + 16 <= len_) {
-        const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(yaml_.data() + pos_));
-        ::__m128i ws = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(' '));
+        const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(yaml_.data() + pos_));
+        simd::vec128_t ws = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(' '));
         ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\t')));
         const int mask = ::_mm_movemask_epi8(ws);
         if (mask == 0xFFFF) {
@@ -128,8 +128,8 @@ void yaml_parser::skip_comment() noexcept {
     }
 #ifdef NEFORCE_SIMD_AVX2
     while (pos_ + 32 <= len_) {
-        const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(yaml_.data() + pos_));
-        ::__m256i nl = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
+        const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(yaml_.data() + pos_));
+        simd::vec256_t nl = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
         nl = ::_mm256_or_si256(nl, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\r')));
         const int mask = ::_mm256_movemask_epi8(nl);
         if (mask == 0) {
@@ -142,8 +142,8 @@ void yaml_parser::skip_comment() noexcept {
 #endif
 #ifdef NEFORCE_SIMD_SSE2
     while (pos_ + 16 <= len_) {
-        const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(yaml_.data() + pos_));
-        ::__m128i nl = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
+        const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(yaml_.data() + pos_));
+        simd::vec128_t nl = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
         nl = ::_mm_or_si128(nl, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\r')));
         const int mask = ::_mm_movemask_epi8(nl);
         if (mask == 0) {
@@ -213,7 +213,7 @@ size_t yaml_parser::peek_indent() const noexcept {
     size_t p = pos_;
 #ifdef NEFORCE_SIMD_AVX2
     while (p + 32 <= len_) {
-        const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(yaml_.data() + p));
+        const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(yaml_.data() + p));
         const int mask = ::_mm256_movemask_epi8(::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(' ')));
         if (mask == -1) {
             indent += 32;
@@ -226,7 +226,7 @@ size_t yaml_parser::peek_indent() const noexcept {
 #endif
 #ifdef NEFORCE_SIMD_SSE2
     while (p + 16 <= len_) {
-        const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(yaml_.data() + p));
+        const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(yaml_.data() + p));
         const int mask = ::_mm_movemask_epi8(::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(' ')));
         if (mask == 0xFFFF) {
             indent += 16;
@@ -248,7 +248,7 @@ size_t yaml_parser::skip_indent() {
     size_t indent = 0;
 #ifdef NEFORCE_SIMD_AVX2
     while (pos_ + 32 <= len_) {
-        const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(yaml_.data() + pos_));
+        const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(yaml_.data() + pos_));
         const int mask = ::_mm256_movemask_epi8(::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(' ')));
         if (mask == -1) {
             indent += 32;
@@ -263,7 +263,7 @@ size_t yaml_parser::skip_indent() {
 #endif
 #ifdef NEFORCE_SIMD_SSE2
     while (pos_ + 16 <= len_) {
-        const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(yaml_.data() + pos_));
+        const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(yaml_.data() + pos_));
         const int mask = ::_mm_movemask_epi8(::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(' ')));
         if (mask == 0xFFFF) {
             indent += 16;
@@ -666,8 +666,8 @@ shared_ptr<yaml_string> yaml_parser::parse_plain_string() {
     while (pos_ < len_) {
 #ifdef NEFORCE_SIMD_AVX2
         while (pos_ + 32 <= len_) {
-            const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(yaml_.data() + pos_));
-            ::__m256i special = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
+            const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(yaml_.data() + pos_));
+            simd::vec256_t special = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
             special = ::_mm256_or_si256(special, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\r')));
             special = ::_mm256_or_si256(special, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('#')));
             special = ::_mm256_or_si256(special, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(':')));
@@ -696,8 +696,8 @@ shared_ptr<yaml_string> yaml_parser::parse_plain_string() {
 #endif
 #ifdef NEFORCE_SIMD_SSE2
         while (pos_ + 16 <= len_) {
-            const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(yaml_.data() + pos_));
-            ::__m128i special = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
+            const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(yaml_.data() + pos_));
+            simd::vec128_t special = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
             special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\r')));
             special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('#')));
             special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(':')));
@@ -758,11 +758,11 @@ shared_ptr<yaml_string> yaml_parser::parse_single_quoted_string() {
     while (pos_ < len_) {
 #ifdef NEFORCE_SIMD_AVX2
         while (pos_ + 32 <= len_) {
-            const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(yaml_.data() + pos_));
-            const ::__m256i is_quote = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\''));
-            const ::__m256i is_nl = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
-            const ::__m256i is_cr = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\r'));
-            const ::__m256i special = ::_mm256_or_si256(is_quote, ::_mm256_or_si256(is_nl, is_cr));
+            const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(yaml_.data() + pos_));
+            const simd::vec256_t is_quote = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\''));
+            const simd::vec256_t is_nl = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
+            const simd::vec256_t is_cr = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\r'));
+            const simd::vec256_t special = ::_mm256_or_si256(is_quote, ::_mm256_or_si256(is_nl, is_cr));
             const int mask = ::_mm256_movemask_epi8(special);
             if (mask == 0) {
                 result.append(yaml_.data() + pos_, 32);
@@ -781,11 +781,11 @@ shared_ptr<yaml_string> yaml_parser::parse_single_quoted_string() {
 #endif
 #ifdef NEFORCE_SIMD_SSE2
         while (pos_ + 16 <= len_) {
-            const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(yaml_.data() + pos_));
-            const ::__m128i is_quote = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\''));
-            const ::__m128i is_nl = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
-            const ::__m128i is_cr = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\r'));
-            const ::__m128i special = ::_mm_or_si128(is_quote, ::_mm_or_si128(is_nl, is_cr));
+            const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(yaml_.data() + pos_));
+            const simd::vec128_t is_quote = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\''));
+            const simd::vec128_t is_nl = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
+            const simd::vec128_t is_cr = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\r'));
+            const simd::vec128_t special = ::_mm_or_si128(is_quote, ::_mm_or_si128(is_nl, is_cr));
             const int mask = ::_mm_movemask_epi8(special);
             if (mask == 0) {
                 result.append(yaml_.data() + pos_, 16);
@@ -831,12 +831,12 @@ shared_ptr<yaml_string> yaml_parser::parse_double_quoted_string() {
     while (pos_ < len_) {
 #ifdef NEFORCE_SIMD_AVX2
         while (pos_ + 32 <= len_) {
-            const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(yaml_.data() + pos_));
-            const ::__m256i is_quote = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('"'));
-            const ::__m256i is_bs = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\\'));
-            const ::__m256i is_nl = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
-            const ::__m256i is_cr = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\r'));
-            const ::__m256i special =
+            const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(yaml_.data() + pos_));
+            const simd::vec256_t is_quote = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('"'));
+            const simd::vec256_t is_bs = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\\'));
+            const simd::vec256_t is_nl = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
+            const simd::vec256_t is_cr = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\r'));
+            const simd::vec256_t special =
                     ::_mm256_or_si256(::_mm256_or_si256(is_quote, is_bs), ::_mm256_or_si256(is_nl, is_cr));
             const int mask = ::_mm256_movemask_epi8(special);
             if (mask == 0) {
@@ -856,12 +856,13 @@ shared_ptr<yaml_string> yaml_parser::parse_double_quoted_string() {
 #endif
 #ifdef NEFORCE_SIMD_SSE2
         while (pos_ + 16 <= len_) {
-            const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(yaml_.data() + pos_));
-            const ::__m128i is_quote = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('"'));
-            const ::__m128i is_bs = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\\'));
-            const ::__m128i is_nl = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
-            const ::__m128i is_cr = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\r'));
-            const ::__m128i special = ::_mm_or_si128(::_mm_or_si128(is_quote, is_bs), ::_mm_or_si128(is_nl, is_cr));
+            const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(yaml_.data() + pos_));
+            const simd::vec128_t is_quote = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('"'));
+            const simd::vec128_t is_bs = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\\'));
+            const simd::vec128_t is_nl = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
+            const simd::vec128_t is_cr = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\r'));
+            const simd::vec128_t special =
+                    ::_mm_or_si128(::_mm_or_si128(is_quote, is_bs), ::_mm_or_si128(is_nl, is_cr));
             const int mask = ::_mm_movemask_epi8(special);
             if (mask == 0) {
                 result.append(yaml_.data() + pos_, 16);
@@ -1107,8 +1108,9 @@ string yaml_parser::parse_multiline_string(const bool is_literal) {
         while (pos_ < len_) {
 #ifdef NEFORCE_SIMD_AVX2
             while (pos_ + 32 <= len_) {
-                const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(yaml_.data() + pos_));
-                ::__m256i nl = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
+                const simd::vec256_t v =
+                        ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(yaml_.data() + pos_));
+                simd::vec256_t nl = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
                 nl = ::_mm256_or_si256(nl, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\r')));
                 const int mask = ::_mm256_movemask_epi8(nl);
                 if (mask == 0) {
@@ -1128,8 +1130,9 @@ string yaml_parser::parse_multiline_string(const bool is_literal) {
 #endif
 #ifdef NEFORCE_SIMD_SSE2
             while (pos_ + 16 <= len_) {
-                const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(yaml_.data() + pos_));
-                ::__m128i nl = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
+                const simd::vec128_t v =
+                        ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(yaml_.data() + pos_));
+                simd::vec128_t nl = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
                 nl = ::_mm_or_si128(nl, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\r')));
                 const int mask = ::_mm_movemask_epi8(nl);
                 if (mask == 0) {
@@ -2012,8 +2015,8 @@ string yaml_parser::parse_plain_key() {
     while (pos_ < len_) {
 #ifdef NEFORCE_SIMD_AVX2
         while (pos_ + 32 <= len_) {
-            const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(yaml_.data() + pos_));
-            ::__m256i special = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
+            const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(yaml_.data() + pos_));
+            simd::vec256_t special = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
             special = ::_mm256_or_si256(special, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\r')));
             special = ::_mm256_or_si256(special, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(':')));
             special = ::_mm256_or_si256(special, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('#')));
@@ -2040,8 +2043,8 @@ string yaml_parser::parse_plain_key() {
 #endif
 #ifdef NEFORCE_SIMD_SSE2
         while (pos_ + 16 <= len_) {
-            const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(yaml_.data() + pos_));
-            ::__m128i special = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
+            const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(yaml_.data() + pos_));
+            simd::vec128_t special = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
             special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\r')));
             special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(':')));
             special = ::_mm_or_si128(special, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('#')));

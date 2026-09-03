@@ -7,8 +7,8 @@ NEFORCE_BEGIN_NAMESPACE__
 void toml_parser::skip_whitespace() noexcept {
 #ifdef NEFORCE_SIMD_AVX2
     while (pos_ + 32 <= len_) {
-        const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(text_.data() + pos_));
-        ::__m256i ws = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(' '));
+        const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(text_.data() + pos_));
+        simd::vec256_t ws = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(' '));
         ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\t')));
         ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n')));
         ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\v')));
@@ -25,8 +25,8 @@ void toml_parser::skip_whitespace() noexcept {
 #endif
 #ifdef NEFORCE_SIMD_SSE2
     while (pos_ + 16 <= len_) {
-        const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(text_.data() + pos_));
-        ::__m128i ws = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(' '));
+        const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(text_.data() + pos_));
+        simd::vec128_t ws = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(' '));
         ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\t')));
         ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n')));
         ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\v')));
@@ -52,7 +52,7 @@ void toml_parser::skip_comment() noexcept {
     }
 #ifdef NEFORCE_SIMD_AVX2
     while (pos_ + 32 <= len_) {
-        const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(text_.data() + pos_));
+        const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(text_.data() + pos_));
         const int mask = ::_mm256_movemask_epi8(::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n')));
         if (mask == 0) {
             advance_bulk(32);
@@ -64,7 +64,7 @@ void toml_parser::skip_comment() noexcept {
 #endif
 #ifdef NEFORCE_SIMD_SSE2
     while (pos_ + 16 <= len_) {
-        const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(text_.data() + pos_));
+        const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(text_.data() + pos_));
         const int mask = ::_mm_movemask_epi8(::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n')));
         if (mask == 0) {
             advance_bulk(16);
@@ -101,8 +101,8 @@ void toml_parser::skip_newlines() noexcept {
 void toml_parser::skip_whitespace_no_newline() noexcept {
 #ifdef NEFORCE_SIMD_AVX2
     while (pos_ + 32 <= len_) {
-        const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(text_.data() + pos_));
-        ::__m256i ws = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(' '));
+        const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(text_.data() + pos_));
+        simd::vec256_t ws = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(' '));
         ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\t')));
         const int mask = ::_mm256_movemask_epi8(ws);
         if (mask == -1) {
@@ -115,8 +115,8 @@ void toml_parser::skip_whitespace_no_newline() noexcept {
 #endif
 #ifdef NEFORCE_SIMD_SSE2
     while (pos_ + 16 <= len_) {
-        const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(text_.data() + pos_));
-        ::__m128i ws = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(' '));
+        const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(text_.data() + pos_));
+        simd::vec128_t ws = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(' '));
         ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\t')));
         const int mask = ::_mm_movemask_epi8(ws);
         if (mask == 0xFFFF) {
@@ -172,7 +172,7 @@ void toml_parser::advance_bulk(const size_t count) noexcept {
 
 #ifdef NEFORCE_SIMD_AVX2
     while (i + 32 <= count) {
-        const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(text_.data() + pos_ + i));
+        const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(text_.data() + pos_ + i));
         const int mask = ::_mm256_movemask_epi8(::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n')));
         if (mask != 0) {
             newlines += static_cast<size_t>(popcount64(static_cast<unsigned>(mask)));
@@ -183,7 +183,7 @@ void toml_parser::advance_bulk(const size_t count) noexcept {
 #endif
 #ifdef NEFORCE_SIMD_SSE2
     while (i + 16 <= count) {
-        const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(text_.data() + pos_ + i));
+        const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(text_.data() + pos_ + i));
         const int mask = ::_mm_movemask_epi8(::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n')));
         if (mask != 0) {
             newlines += static_cast<size_t>(popcount64(static_cast<unsigned>(mask)));
@@ -276,11 +276,11 @@ unique_ptr<toml_string> toml_parser::parse_basic_string() {
     while (pos_ < len_) {
 #ifdef NEFORCE_SIMD_AVX2
         while (pos_ + 32 <= len_) {
-            const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(text_.data() + pos_));
-            const ::__m256i is_quote = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('"'));
-            const ::__m256i is_bs = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\\'));
-            const ::__m256i is_nl = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
-            const ::__m256i special = ::_mm256_or_si256(::_mm256_or_si256(is_quote, is_bs), is_nl);
+            const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(text_.data() + pos_));
+            const simd::vec256_t is_quote = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('"'));
+            const simd::vec256_t is_bs = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\\'));
+            const simd::vec256_t is_nl = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
+            const simd::vec256_t special = ::_mm256_or_si256(::_mm256_or_si256(is_quote, is_bs), is_nl);
             const int mask = ::_mm256_movemask_epi8(special);
             if (mask == 0) {
                 result.append(text_.data() + pos_, 32);
@@ -299,11 +299,11 @@ unique_ptr<toml_string> toml_parser::parse_basic_string() {
 #endif
 #ifdef NEFORCE_SIMD_SSE2
         while (pos_ + 16 <= len_) {
-            const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(text_.data() + pos_));
-            const ::__m128i is_quote = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('"'));
-            const ::__m128i is_bs = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\\'));
-            const ::__m128i is_nl = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
-            const ::__m128i special = ::_mm_or_si128(::_mm_or_si128(is_quote, is_bs), is_nl);
+            const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(text_.data() + pos_));
+            const simd::vec128_t is_quote = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('"'));
+            const simd::vec128_t is_bs = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\\'));
+            const simd::vec128_t is_nl = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
+            const simd::vec128_t special = ::_mm_or_si128(::_mm_or_si128(is_quote, is_bs), is_nl);
             const int mask = ::_mm_movemask_epi8(special);
             if (mask == 0) {
                 result.append(text_.data() + pos_, 16);
@@ -395,10 +395,10 @@ unique_ptr<toml_string> toml_parser::parse_literal_string() {
     while (pos_ < len_) {
 #ifdef NEFORCE_SIMD_AVX2
         while (pos_ + 32 <= len_) {
-            const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(text_.data() + pos_));
-            const ::__m256i is_quote = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\''));
-            const ::__m256i is_nl = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
-            const ::__m256i special = ::_mm256_or_si256(is_quote, is_nl);
+            const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(text_.data() + pos_));
+            const simd::vec256_t is_quote = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\''));
+            const simd::vec256_t is_nl = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
+            const simd::vec256_t special = ::_mm256_or_si256(is_quote, is_nl);
             const int mask = ::_mm256_movemask_epi8(special);
             if (mask == 0) {
                 result.append(text_.data() + pos_, 32);
@@ -417,10 +417,10 @@ unique_ptr<toml_string> toml_parser::parse_literal_string() {
 #endif
 #ifdef NEFORCE_SIMD_SSE2
         while (pos_ + 16 <= len_) {
-            const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(text_.data() + pos_));
-            const ::__m128i is_quote = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\''));
-            const ::__m128i is_nl = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
-            const ::__m128i special = ::_mm_or_si128(is_quote, is_nl);
+            const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(text_.data() + pos_));
+            const simd::vec128_t is_quote = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\''));
+            const simd::vec128_t is_nl = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
+            const simd::vec128_t special = ::_mm_or_si128(is_quote, is_nl);
             const int mask = ::_mm_movemask_epi8(special);
             if (mask == 0) {
                 result.append(text_.data() + pos_, 16);
@@ -470,10 +470,10 @@ unique_ptr<toml_string> toml_parser::parse_multiline_basic_string() {
     while (pos_ < len_) {
 #ifdef NEFORCE_SIMD_AVX2
         while (pos_ + 32 <= len_) {
-            const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(text_.data() + pos_));
-            const ::__m256i is_quote = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('"'));
-            const ::__m256i is_bs = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\\'));
-            const ::__m256i special = ::_mm256_or_si256(is_quote, is_bs);
+            const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(text_.data() + pos_));
+            const simd::vec256_t is_quote = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('"'));
+            const simd::vec256_t is_bs = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\\'));
+            const simd::vec256_t special = ::_mm256_or_si256(is_quote, is_bs);
             const int mask = ::_mm256_movemask_epi8(special);
             if (mask == 0) {
                 result.append(text_.data() + pos_, 32);
@@ -490,10 +490,10 @@ unique_ptr<toml_string> toml_parser::parse_multiline_basic_string() {
 #endif
 #ifdef NEFORCE_SIMD_SSE2
         while (pos_ + 16 <= len_) {
-            const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(text_.data() + pos_));
-            const ::__m128i is_quote = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('"'));
-            const ::__m128i is_bs = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\\'));
-            const ::__m128i special = ::_mm_or_si128(is_quote, is_bs);
+            const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(text_.data() + pos_));
+            const simd::vec128_t is_quote = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('"'));
+            const simd::vec128_t is_bs = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\\'));
+            const simd::vec128_t special = ::_mm_or_si128(is_quote, is_bs);
             const int mask = ::_mm_movemask_epi8(special);
             if (mask == 0) {
                 result.append(text_.data() + pos_, 16);
@@ -617,7 +617,7 @@ unique_ptr<toml_string> toml_parser::parse_multiline_literal_string() {
     while (pos_ < len_) {
 #ifdef NEFORCE_SIMD_AVX2
         while (pos_ + 32 <= len_) {
-            const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(text_.data() + pos_));
+            const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(text_.data() + pos_));
             const int mask = ::_mm256_movemask_epi8(::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\'')));
             if (mask == 0) {
                 result.append(text_.data() + pos_, 32);
@@ -634,7 +634,7 @@ unique_ptr<toml_string> toml_parser::parse_multiline_literal_string() {
 #endif
 #ifdef NEFORCE_SIMD_SSE2
         while (pos_ + 16 <= len_) {
-            const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(text_.data() + pos_));
+            const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(text_.data() + pos_));
             const int mask = ::_mm_movemask_epi8(::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\'')));
             if (mask == 0) {
                 result.append(text_.data() + pos_, 16);

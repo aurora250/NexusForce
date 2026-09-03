@@ -119,8 +119,7 @@ template <typename T>
 constexpr bool circular_less_than(T a, T b) noexcept {
     static_assert(is_integral_v<T> && !numeric_traits<T>::is_signed,
                   "circular_less_than requires an unsigned integer type");
-    return static_cast<T>(a - b) >
-           static_cast<T>(static_cast<T>(1) << (static_cast<T>(sizeof(T) * numeric_traits<char>::digits)));
+    return (a - b) > (static_cast<T>(1) << (numeric_traits<T>::digits - 1));
 }
 
 template <typename T>
@@ -171,31 +170,31 @@ NEFORCE_END_INNER__
  */
 struct lock_free_queue_traits {
     /// 通用尺寸类型
-    using size_t = size_t;
+    using size_t = _NEFORCE size_t;
 
     /// 入队/出队索引类型
-    using index_t = size_t;
+    using index_t = _NEFORCE size_t;
 
     /// 每个 block 存储的元素数量，必须为 2 的幂
-    static constexpr size_t BLOCK_SIZE = 32;
+    static constexpr _NEFORCE size_t BLOCK_SIZE = 32;
 
     /// 显式生产者 block 空状态由逐元素标志切换为计数器的阈值
-    static constexpr size_t EXPLICIT_BLOCK_EMPTY_COUNTER_THRESHOLD = 32;
+    static constexpr _NEFORCE size_t EXPLICIT_BLOCK_EMPTY_COUNTER_THRESHOLD = 32;
 
     /// 单个显式生产者预期持有的满 block 数量，必须为 2 的幂
-    static constexpr size_t EXPLICIT_INITIAL_INDEX_SIZE = 32;
+    static constexpr _NEFORCE size_t EXPLICIT_INITIAL_INDEX_SIZE = 32;
 
     /// 单个隐式生产者预期持有的满 block 数量，必须为 2 的幂
-    static constexpr size_t IMPLICIT_INITIAL_INDEX_SIZE = 32;
+    static constexpr _NEFORCE size_t IMPLICIT_INITIAL_INDEX_SIZE = 32;
 
     /// 线程 ID 到隐式生产者的哈希表初始大小，必须为 2 的幂
-    static constexpr size_t INITIAL_IMPLICIT_PRODUCER_HASH_SIZE = 32;
+    static constexpr _NEFORCE size_t INITIAL_IMPLICIT_PRODUCER_HASH_SIZE = 32;
 
     /// 显式消费者在触发全体消费者轮转前最多消费的元素数量
-    static constexpr uint32_t EXPLICIT_CONSUMER_CONSUMPTION_QUOTA_BEFORE_ROTATE = 256;
+    static constexpr _NEFORCE uint32_t EXPLICIT_CONSUMER_CONSUMPTION_QUOTA_BEFORE_ROTATE = 256;
 
     /// 单个子队列的最大元素数（含），超出则入队失败，按块大小向上取整
-    static constexpr size_t MAX_SUBQUEUE_SIZE = inner::const_numeric_max<size_t>::value;
+    static constexpr _NEFORCE size_t MAX_SUBQUEUE_SIZE = inner::const_numeric_max<_NEFORCE size_t>::value;
 
     /// 等待信号量时自旋的次数（保留字段，供阻塞变体使用）
     static constexpr int MAX_SEMA_SPINS = 10000;
@@ -208,7 +207,7 @@ struct lock_free_queue_traits {
      * @param size 请求的字节数
      * @return 分配的内存指针，失败返回 nullptr
      */
-    static void* malloc(size_t size) { return ::malloc(size); }
+    static void* malloc(_NEFORCE size_t size) { return ::malloc(size); }
 
     /**
      * @brief 自定义内存释放函数

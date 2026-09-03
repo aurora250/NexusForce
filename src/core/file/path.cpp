@@ -138,6 +138,8 @@ path path::lexically_normal() const {
         start = 1;
     }
 
+    result = drive_prefix;
+
 #else
     // Check if it starts with '/'
     if (!path_.empty() && path_[0] == '/') {
@@ -180,16 +182,9 @@ path path::lexically_normal() const {
     }
 
     // Reconstruct the normalized path string
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    result = drive_prefix;
     if (is_absolute) {
         result += preferred_separator;
     }
-#else
-    if (is_absolute) {
-        result += '/';
-    }
-#endif
 
     for (size_t i = 0; i < normalized.size(); ++i) {
         if (i > 0) {
@@ -203,15 +198,13 @@ path path::lexically_normal() const {
     }
 
     // Handles situations where all components are eliminated on the absolute path
+    if (is_absolute && normalized.empty()) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (is_absolute && normalized.empty()) {
         return path(drive_prefix + preferred_separator);
-    }
 #else
-    if (is_absolute && normalized.empty()) {
         return path("/");
-    }
 #endif
+    }
 
     return path(move(result));
 }
@@ -232,16 +225,15 @@ path path::absolute(const path& base) const {
     char buf[PATH_MAX];
     if (::realpath(path_.data(), buf) != nullptr) {
         return path(string(buf));
-    } else {
-        if (path_.empty()) {
-            return base;
-        }
-        if (path_[0] == '/') {
-            return *this;
-        }
-        const path joined = base / *this;
-        return joined.lexically_normal();
     }
+    if (path_.empty()) {
+        return base;
+    }
+    if (path_[0] == '/') {
+        return *this;
+    }
+    const path joined = base / *this;
+    return joined.lexically_normal();
 #endif
 }
 
@@ -305,7 +297,6 @@ path path::current_executable_path() {
     if (len == 0) {
         return {};
     }
-    return path{string(buf, len)};
 #else
     char buf[PATH_MAX];
     ssize_t len = ::readlink("/proc/self/exe", buf, sizeof(buf) - 1);
@@ -313,8 +304,8 @@ path path::current_executable_path() {
         return {};
     }
     buf[len] = '\0';
-    return path(buf);
 #endif
+    return path{string(buf, len)};
 }
 
 path& path::operator/=(const path& other) {

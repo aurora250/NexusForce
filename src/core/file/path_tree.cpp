@@ -209,7 +209,7 @@ void path_tree::scan_impl(const node::ptr& parent, const scan_options& options, 
             const string_view ext = child_path.extension();
             ext_ok = false;
             for (const auto& e: options.extensions) {
-                if (ext == e.view()) {
+                if (ext == e) {
                     ext_ok = true;
                     break;
                 }
@@ -520,7 +520,7 @@ path_tree::node::ptr path_tree::prune_impl(const node::ptr& src, const filter& f
         return nullptr;
     }
 
-    auto cloned = make_shared<node>(src->get_path(), src->type(), depth);
+    shared_ptr<node> cloned = make_shared<node>(src->get_path(), src->type(), depth);
     if (new_parent) {
         cloned->parent_ = new_parent;
     }
@@ -583,7 +583,7 @@ string path_tree::to_string(const string_view indent) const {
     return to_string_impl(root_, indent, 0);
 }
 
-string path_tree::to_string_impl(const node::ptr& n, const string_view indent, const size_t depth) const {
+string path_tree::to_string_impl(const node::ptr& n, const string_view indent, const size_t depth) {
     if (!n) {
         return {};
     }

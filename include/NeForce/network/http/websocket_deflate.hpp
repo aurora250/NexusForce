@@ -11,6 +11,7 @@
 
 #include "NeForce/core/string/string.hpp"
 #ifdef NEFORCE_SUPPORT_ZLIB
+#    include "NeForce/core/memory/unique_ptr.hpp"
 #    include "NeForce/compress/zlib_compress.hpp"
 #endif
 NEFORCE_BEGIN_NAMESPACE__

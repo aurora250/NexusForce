@@ -10,9 +10,7 @@
  * 包括一次性压缩和流式压缩两种模式。
  */
 
-#if defined(NEFORCE_SUPPORT_LZ4) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
-#    include <lz4.h>
-#    include "NeForce/core/container/vector.hpp"
+#ifdef NEFORCE_SUPPORT_LZ4
 #    include "NeForce/core/string/string.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -192,12 +190,12 @@ public:
      */
     class NEFORCE_API stream_compressor {
     private:
-        ::LZ4_stream_t* stream_ = nullptr; ///< LZ4流对象
-        bool use_hc_ = false;              ///< 是否使用HC压缩模式
-        int level_ = 0;                    ///< 压缩级别
-        size_t bytes_input_ = 0;           ///< 输入字节计数
-        size_t bytes_output_ = 0;          ///< 输出字节计数
-        bool finished_ = false;            ///< 是否已完成
+        void* stream_ = nullptr;  ///< LZ4流对象
+        bool use_hc_ = false;     ///< 是否使用HC压缩模式
+        int level_ = 0;           ///< 压缩级别
+        size_t bytes_input_ = 0;  ///< 输入字节计数
+        size_t bytes_output_ = 0; ///< 输出字节计数
+        bool finished_ = false;   ///< 是否已完成
 
     public:
         /**
@@ -300,10 +298,10 @@ public:
      */
     class NEFORCE_API stream_decompressor {
     private:
-        ::LZ4_streamDecode_t* stream_ = nullptr; ///< LZ4解码流对象
-        size_t bytes_input_ = 0;                 ///< 输入字节计数
-        size_t bytes_output_ = 0;                ///< 输出字节计数
-        bool finished_ = false;                  ///< 是否已完成
+        void* stream_ = nullptr;  ///< LZ4解码流对象
+        size_t bytes_input_ = 0;  ///< 输入字节计数
+        size_t bytes_output_ = 0; ///< 输出字节计数
+        bool finished_ = false;   ///< 是否已完成
 
     public:
         /**

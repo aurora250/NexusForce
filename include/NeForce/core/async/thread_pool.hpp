@@ -14,7 +14,7 @@
 #include "NeForce/core/async/timer.hpp"
 #include "NeForce/core/container/priority_queue.hpp"
 #include "NeForce/core/container/queue.hpp"
-#include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/container/flat_unordered_map.hpp"
 #include "NeForce/core/memory/weak_ptr.hpp"
 #include "NeForce/core/system/sysinfo.hpp"
 #include "NeForce/core/time/datetime.hpp"
@@ -384,10 +384,10 @@ private:
         static NEFORCE_API void reset_id() noexcept;
     };
 
-    unordered_map<id_type, unique_ptr<lazy_thread>> threads_map_; ///< 线程映射
-    unordered_map<id_type, worker_context> worker_contexts_;      ///< 工作线程上下文映射
-    vector<atomic<worker_context*>> worker_contexts_ptr_;         ///< 工作线程上下文指针数组
-    mutex worker_contexts_mtx_;                                   ///< 工作线程上下文互斥锁
+    flat_unordered_map<id_type, unique_ptr<lazy_thread>> threads_map_; ///< 线程映射
+    flat_unordered_map<id_type, worker_context> worker_contexts_;      ///< 工作线程上下文映射
+    vector<atomic<worker_context*>> worker_contexts_ptr_;              ///< 工作线程上下文指针数组
+    mutex worker_contexts_mtx_;                                        ///< 工作线程上下文互斥锁
 
     timer_scheduler<steady_clock> timer_; ///< 定时器调度器
 

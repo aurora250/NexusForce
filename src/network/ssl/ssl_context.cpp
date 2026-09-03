@@ -124,7 +124,7 @@ namespace {
 
             ::PCCERT_CONTEXT pCertCtx = nullptr;
             while ((pCertCtx = ::CertEnumCertificatesInStore(hStore, pCertCtx)) != nullptr) {
-                const unsigned char* cert_data = pCertCtx->pbCertEncoded;
+                const byte_t* cert_data = pCertCtx->pbCertEncoded;
                 ::X509* x509 = ::d2i_X509(nullptr, &cert_data, static_cast<long>(pCertCtx->cbCertEncoded));
                 if (x509 != nullptr) {
                     if (::X509_STORE_add_cert(store, x509) == 1) {
@@ -243,15 +243,15 @@ void ssl_context::load_certificate_from_memory(const string& cert_pem, const str
         NEFORCE_THROW_EXCEPTION(value_exception("Certificate or key PEM data is empty"));
     }
 
-    bio_guard cert_bio{::BIO_new_mem_buf(cert_pem.data(), static_cast<int>(cert_pem.size()))};
-    bio_guard key_bio{::BIO_new_mem_buf(key_pem.data(), static_cast<int>(key_pem.size()))};
+    const bio_guard cert_bio{::BIO_new_mem_buf(cert_pem.data(), static_cast<int>(cert_pem.size()))};
+    const bio_guard key_bio{::BIO_new_mem_buf(key_pem.data(), static_cast<int>(key_pem.size()))};
 
     if (!cert_bio || !key_bio) {
         NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to create BIO"));
     }
 
-    x509_guard cert{::PEM_read_bio_X509(cert_bio.get(), nullptr, nullptr, nullptr)};
-    evp_pkey_guard key{::PEM_read_bio_PrivateKey(key_bio.get(), nullptr, nullptr, nullptr)};
+    const x509_guard cert{::PEM_read_bio_X509(cert_bio.get(), nullptr, nullptr, nullptr)};
+    const evp_pkey_guard key{::PEM_read_bio_PrivateKey(key_bio.get(), nullptr, nullptr, nullptr)};
 
     if (!cert || !key) {
         NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to parse PEM data"));

@@ -1,5 +1,5 @@
 #include <NeForce/core/system/stacktrace.hpp>
-#include <NeForce/core/container/unordered_map.hpp>
+#include <NeForce/core/container/flat_unordered_map.hpp>
 #include <NeForce/core/utility/packages.hpp>
 #include <NeForce/core/async/mutex.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -47,8 +47,8 @@ namespace {
         size_t line{0};
     };
 
-    unordered_map<void*, source_location>& source_cache() {
-        static unordered_map<void*, source_location> cache;
+    flat_unordered_map<void*, source_location>& source_cache() {
+        static flat_unordered_map<void*, source_location> cache;
         return cache;
     }
 
@@ -58,7 +58,7 @@ namespace {
     }
 
     source_location resolve_source_location(void* addr) {
-        Dl_info info;
+        ::Dl_info info;
         if (::dladdr(addr, &info) == 0 || info.dli_fname == nullptr) {
             return {};
         }

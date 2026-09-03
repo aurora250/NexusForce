@@ -832,7 +832,7 @@ TEST(DnsClientIntegration, QueryAsync) {
 
         client.set_max_udp_retries(0);
 
-        auto future = client.query_async("example.com", dns_record::A);
+        auto future = client.async_query("example.com", dns_record::A, dns_class::INTERNET, use_future);
         const auto deadline = steady_clock::now() + milliseconds(5000);
         while (future.wait_for(milliseconds(0)) != future_status::ready) {
             if (steady_clock::now() >= deadline) {

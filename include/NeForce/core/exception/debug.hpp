@@ -82,7 +82,7 @@ NEFORCE_NORETURN NEFORCE_ALWAYS_INLINE_INLINE void unreachable() noexcept {
  */
 NEFORCE_ALWAYS_INLINE_INLINE bool likely(bool x) {
 #ifdef NEFORCE_COMPILER_GNUC
-    return __builtin_expect((x), true);
+    return static_cast<bool>(__builtin_expect(static_cast<long>(x), 1L));
 #else
     return x;
 #endif
@@ -96,7 +96,7 @@ NEFORCE_ALWAYS_INLINE_INLINE bool likely(bool x) {
  */
 NEFORCE_ALWAYS_INLINE_INLINE bool unlikely(bool x) {
 #ifdef NEFORCE_COMPILER_GNUC
-    return __builtin_expect((x), false);
+    return static_cast<bool>(__builtin_expect(static_cast<long>(x), 0L));
 #else
     return x;
 #endif

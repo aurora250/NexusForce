@@ -1087,8 +1087,8 @@ void dns_client::async_query(const string_view domain, const dns_record::raw typ
     }
 }
 
-auto dns_client::async_query(const string_view domain, const dns_record::raw type, const dns_class qclass,
-                             use_future_t /*unused*/) {
+future<dns_query_result> dns_client::async_query(const string_view domain, const dns_record::raw type,
+                                                 const dns_class qclass, use_future_t /*unused*/) {
     async_result<use_future_t, void(error_code, dns_query_result)> result(use_future);
     async_query(domain, type, qclass, result.get_handler());
     auto fut = result.get();
@@ -1344,7 +1344,7 @@ vector<dns_query_result> dns_client::batch_query(const vector<string>& domains, 
     futures.reserve(domains.size());
 
     for (const auto& domain: domains) {
-        futures.push_back(query_async(domain, type));
+        futures.push_back(async_query(domain.view(), type, dns_class::INTERNET, use_future));
     }
 
     const auto total_budget =

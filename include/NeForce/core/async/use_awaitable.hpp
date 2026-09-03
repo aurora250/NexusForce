@@ -80,7 +80,7 @@ public:
          */
         auto final_suspend() noexcept {
             struct awaiter {
-                shared_ptr<state> state;
+                shared_ptr<awaitable::state> state;
                 NEFORCE_NODISCARD bool await_ready() const noexcept { return false; }
                 void await_suspend(coroutine_handle<> h) noexcept {
                     state->ready = true;

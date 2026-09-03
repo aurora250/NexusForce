@@ -179,12 +179,7 @@ bool socket_base::get_option(const int level, const int optname, void* optval, :
     if (!is_open()) {
         return false;
     }
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
     return ::getsockopt(fd_, level, optname, static_cast<char*>(optval), optlen) == 0;
-#else
-    return ::getsockopt(fd_, level, optname, optval, optlen) == 0;
-#endif
 }
 
 bool socket_base::set_reuse_address(const bool enable) noexcept {

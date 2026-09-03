@@ -11,9 +11,7 @@
  */
 
 #ifdef NEFORCE_SUPPORT_ZLIB
-#    include <zlib.h>
 #    include "NeForce/core/string/string.hpp"
-#    include "NeForce/core/memory/unique_ptr.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -59,10 +57,10 @@ private:
  * 定义不同的压缩级别，在压缩速度和压缩率之间进行权衡。
  */
 enum class compress_level : int8_t {
-    none = Z_NO_COMPRESSION,               ///< 无压缩
-    best_speed = Z_BEST_SPEED,             ///< 最快速度，压缩率最低
-    default_level = Z_DEFAULT_COMPRESSION, ///< 默认压缩级别
-    best_compression = Z_BEST_COMPRESSION  ///< 最佳压缩率，速度最慢
+    none = 0,            ///< 无压缩
+    best_speed = 1,      ///< 最快速度，压缩率最低
+    default_level = -1,  ///< 默认压缩级别
+    best_compression = 9 ///< 最佳压缩率，速度最慢
 };
 
 /**
@@ -72,11 +70,11 @@ enum class compress_level : int8_t {
  * 定义不同的压缩策略，针对不同类型的数据进行优化。
  */
 enum class compress_strategy : int8_t {
-    default_strategy = Z_DEFAULT_STRATEGY, ///< 默认策略，适用于通用数据
-    filtered = Z_FILTERED,                 ///< 过滤策略，适用于由过滤器产生的数据
-    huffman_only = Z_HUFFMAN_ONLY,         ///< 仅使用霍夫曼编码
-    rle = Z_RLE,                           ///< 游程编码
-    fixed = Z_FIXED                        ///< 固定霍夫曼编码
+    default_strategy = 0, ///< 默认策略，适用于通用数据
+    filtered = 1,         ///< 过滤策略，适用于由过滤器产生的数据
+    huffman_only = 2,     ///< 仅使用霍夫曼编码
+    rle = 3,              ///< 游程编码
+    fixed = 4             ///< 固定霍夫曼编码
 };
 
 /**
@@ -101,28 +99,6 @@ enum class compress_format : int8_t {
  */
 class NEFORCE_API zlib_compressor {
 private:
-    struct compressor_stream_deleter {
-        void operator()(::z_stream* s) const noexcept {
-            if (s != nullptr) {
-                if (s->state != nullptr) {
-                    ::deflateEnd(s);
-                }
-                delete s;
-            }
-        }
-    };
-
-    struct decompressor_stream_deleter {
-        void operator()(::z_stream* s) const noexcept {
-            if (s != nullptr) {
-                if (s->state != nullptr) {
-                    ::inflateEnd(s);
-                }
-                delete s;
-            }
-        }
-    };
-
     /**
      * @brief 压缩数据的内部实现
      * @param data 输入数据指针
@@ -263,8 +239,7 @@ public:
      */
     class NEFORCE_API stream_compressor {
     private:
-        unique_ptr<::z_stream, compressor_stream_deleter> stream_; ///< zlib流对象
-
+        void* stream_;             ///< zlib流对象
         bool initialized_ = false; ///< 是否已初始化
         size_t bytes_input_ = 0;   ///< 输入字节计数
         size_t bytes_output_ = 0;  ///< 输出字节计数
@@ -284,7 +259,7 @@ public:
         /**
          * @brief 析构函数
          */
-        ~stream_compressor() = default;
+        ~stream_compressor();
 
         stream_compressor(const stream_compressor&) = delete;
         stream_compressor& operator=(const stream_compressor&) = delete;
@@ -376,8 +351,7 @@ public:
      */
     class NEFORCE_API stream_decompressor {
     private:
-        unique_ptr<::z_stream, decompressor_stream_deleter> stream_; ///< zlib流对象
-
+        void* stream_;             ///< zlib流对象
         bool initialized_ = false; ///< 是否已初始化
         size_t bytes_input_ = 0;   ///< 输入字节计数
         size_t bytes_output_ = 0;  ///< 输出字节计数
@@ -393,7 +367,7 @@ public:
         /**
          * @brief 析构函数
          */
-        ~stream_decompressor() = default;
+        ~stream_decompressor();
 
         stream_decompressor(const stream_decompressor&) = delete;
         stream_decompressor& operator=(const stream_decompressor&) = delete;

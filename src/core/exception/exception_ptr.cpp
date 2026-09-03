@@ -74,7 +74,9 @@ exception_ptr current_exception() noexcept {
     __NEFORCE_EXPAND_MAKE_EXCEPTION_PTR(locale_exception)
     __NEFORCE_EXPAND_MAKE_EXCEPTION_PTR(pipe_exception)
     __NEFORCE_EXPAND_MAKE_EXCEPTION_PTR(process_exception)
+#ifdef NEFORCE_PLATFORM_WINDOWS
     __NEFORCE_EXPAND_MAKE_EXCEPTION_PTR(registry_key_exception)
+#endif
     __NEFORCE_EXPAND_MAKE_EXCEPTION_PTR(share_memory_exception)
     __NEFORCE_EXPAND_MAKE_EXCEPTION_PTR(system_exception)
     // value family

@@ -60,11 +60,11 @@ namespace {
     }
 
 #ifdef NEFORCE_SIMD_SSE2
-    NEFORCE_ALWAYS_INLINE_INLINE ::__m128i chacha20_rotl32(__m128i v, const int bits) {
+    NEFORCE_ALWAYS_INLINE_INLINE simd::vec128_t chacha20_rotl32(simd::vec128_t v, const int bits) {
         return ::_mm_or_si128(::_mm_slli_epi32(v, bits), ::_mm_srli_epi32(v, 32 - bits));
     }
 
-    void chacha20_quarter_round_simd(::__m128i& a, ::__m128i& b, ::__m128i& c, ::__m128i& d) {
+    void chacha20_quarter_round_simd(simd::vec128_t& a, simd::vec128_t& b, simd::vec128_t& c, simd::vec128_t& d) {
         a = ::_mm_add_epi32(a, b);
         d = ::_mm_xor_si128(d, a);
         d = chacha20_rotl32(d, 16);
@@ -80,19 +80,20 @@ namespace {
     }
 
     void chacha20_block_simd(const byte_t* key, const uint32_t counter, const byte_t* nonce, byte_t* output) {
-        ::__m128i v0 = ::_mm_set_epi32(endian::read_le32(CHACHA_CONST + 12), endian::read_le32(CHACHA_CONST + 8),
-                                       endian::read_le32(CHACHA_CONST + 4), endian::read_le32(CHACHA_CONST + 0));
-        ::__m128i v1 = ::_mm_set_epi32(
+        const simd::vec128_t v0 =
+                ::_mm_set_epi32(endian::read_le32(CHACHA_CONST + 12), endian::read_le32(CHACHA_CONST + 8),
+                                endian::read_le32(CHACHA_CONST + 4), endian::read_le32(CHACHA_CONST + 0));
+        const simd::vec128_t v1 = ::_mm_set_epi32(
                 static_cast<int>(endian::read_le32(key + 12)), static_cast<int>(endian::read_le32(key + 8)),
                 static_cast<int>(endian::read_le32(key + 4)), static_cast<int>(endian::read_le32(key + 0)));
-        ::__m128i v2 = ::_mm_set_epi32(
+        const simd::vec128_t v2 = ::_mm_set_epi32(
                 static_cast<int>(endian::read_le32(key + 28)), static_cast<int>(endian::read_le32(key + 24)),
                 static_cast<int>(endian::read_le32(key + 20)), static_cast<int>(endian::read_le32(key + 16)));
-        ::__m128i v3 = ::_mm_set_epi32(static_cast<int>(endian::read_le32(nonce + 8)),
-                                       static_cast<int>(endian::read_le32(nonce + 4)),
-                                       static_cast<int>(endian::read_le32(nonce + 0)), static_cast<int>(counter));
+        const simd::vec128_t v3 = ::_mm_set_epi32(
+                static_cast<int>(endian::read_le32(nonce + 8)), static_cast<int>(endian::read_le32(nonce + 4)),
+                static_cast<int>(endian::read_le32(nonce + 0)), static_cast<int>(counter));
 
-        ::__m128i w0 = v0, w1 = v1, w2 = v2, w3 = v3;
+        simd::vec128_t w0 = v0, w1 = v1, w2 = v2, w3 = v3;
 
         for (int i = 0; i < 10; ++i) {
             chacha20_quarter_round_simd(w0, w1, w2, w3);
@@ -113,10 +114,10 @@ namespace {
         w2 = ::_mm_add_epi32(w2, v2);
         w3 = ::_mm_add_epi32(w3, v3);
 
-        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(output + 0), w0);
-        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(output + 16), w1);
-        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(output + 32), w2);
-        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(output + 48), w3);
+        ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(output + 0), w0);
+        ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(output + 16), w1);
+        ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(output + 32), w2);
+        ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(output + 48), w3);
     }
 #endif
 
@@ -138,11 +139,11 @@ namespace {
 #ifdef NEFORCE_SIMD_SSE2
             size_t j = 0;
             for (; j + 16 <= chunk; j += 16) {
-                const ::__m128i d = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(data + offset + j));
-                const ::__m128i k = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(keystream + j));
-                const ::__m128i r = ::_mm_xor_si128(d, k);
+                const simd::vec128_t d = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(data + offset + j));
+                const simd::vec128_t k = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(keystream + j));
+                const simd::vec128_t r = ::_mm_xor_si128(d, k);
                 alignas(16) byte_t buf[16];
-                ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(buf), r);
+                ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(buf), r);
                 out.insert(out.end(), buf, buf + 16);
             }
             for (; j < chunk; ++j) {

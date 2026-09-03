@@ -1,28 +1,7 @@
 #include <benchmark/benchmark.h>
 #include <NeForce/core/async/thread_pool.hpp>
 #include <NeForce/core/numeric/random.hpp>
-#include <NeForce/core/exception/terminate.hpp>
-#include <NeForce/core/system/console.hpp>
-#include <NeForce/core/system/stacktrace.hpp>
 using namespace neforce;
-
-namespace {
-    int _terminate_handler_reg = []() {
-        neforce::set_terminate([]() {
-            eprintfln("[TERMINATE] thread_id={}", this_thread::id().native_handle());
-            eprintfln("[TERMINATE] call stack:{}", stacktrace::current().to_string());
-            const auto exp = current_exception();
-            try {
-                if (exp) {
-                    rethrow_exception(exp);
-                }
-            } catch (const exception& e) {
-                eprintfln("[TERMINATE] current exception: {}:{}", e.type(), e.what());
-            }
-        });
-        return 0;
-    }();
-} // namespace
 
 inline void burn(uint64_t iterations) {
     uint64_t sum = 0;
@@ -38,11 +17,9 @@ static vector<uint64_t> make_unbalanced_workload(size_t total, size_t heavy_pct,
     vector<uint64_t> workloads(total);
     thread_local random_mt rnd{};
     generate(workloads.begin(), workloads.end(),
-             [&] { return (rnd.next_int(0, 99) < heavy_pct) ? heavy_cost : light_cost; });
+             [&] { return (rnd.next_int<size_t>(0, 99) < heavy_pct) ? heavy_cost : light_cost; });
     return workloads;
 }
-
-#if 0
 
 // ============================================================
 // 1. Throughput
@@ -169,8 +146,6 @@ BENCHMARK(BM_ThreadPool_StealStrategy)
         ->ArgsProduct({benchmark::CreateRange(4, 16, 2), {0, 1, 2, 3}})
         ->ArgNames({"threads", "strategy"})
         ->Unit(benchmark::kMillisecond);
-
-#endif
 
 // ============================================================
 // 3. Pool mode comparison
@@ -340,23 +315,7 @@ static void BM_ThreadPool_MultiProducer(benchmark::State& state) {
             producers.emplace_back([&, p] {
                 for (int64_t i = 0; i < tasks_per_producer; ++i) {
                     auto result = pool.submit_task([] { burn(50); });
-                    try {
-                        result.future.get();
-                    } catch (const exception& e) {
-                        auto st = result.task_info->status.load();
-                        eprintfln("[PRODUCER] p={} i={} tid={} EXCEPTION: {} {}  task_info_status={} error={}", p, i,
-                                  this_thread::id().native_handle(), e.type(), e.what(), static_cast<int>(st),
-                                  result.task_info->error);
-                        eprintfln("[PRODUCER] pool stats: total_threads={} idle={} queue={} submitted={} completed={}",
-                                  pool.statistics().total_threads, pool.statistics().idle_threads,
-                                  pool.statistics().queue_size, pool.statistics().total_submitted,
-                                  pool.statistics().total_completed);
-                        throw;
-                    } catch (...) {
-                        eprintfln("[PRODUCER] p={} i={} tid={} UNKNOWN EXCEPTION after get", p, i,
-                                  this_thread::id().native_handle());
-                        throw;
-                    }
+                    result.future.get();
                     total_submitted.fetch_add(1, memory_order_relaxed);
                 }
             });

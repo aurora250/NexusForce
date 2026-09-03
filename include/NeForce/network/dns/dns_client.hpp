@@ -275,17 +275,19 @@ public:
                            dns_class qclass = dns_class::INTERNET);
 
     /**
-     * @brief 异步DNS查询（遗留 API——返回 future）
+     * @brief 异步DNS查询
      * @param domain 域名
      * @param type 记录类型
      * @param qclass 查询类
      * @return future对象，可等待查询结果
      */
+    NEFORCE_DEPRECATED_VERSION("query_async(const string&, dns_record::raw, dns_class)", "v2.0.0",
+                               "async_query(string_view, dns_record::raw, dns_class, use_future_t)")
     future<dns_query_result> query_async(const string& domain, dns_record::raw type = dns_record::A,
                                          dns_class qclass = dns_class::INTERNET);
 
     /**
-     * @brief 异步DNS查询——回调完成
+     * @brief 回调异步DNS查询
      * @param domain 域名
      * @param type 记录类型
      * @param qclass 查询类
@@ -295,7 +297,7 @@ public:
                      function<void(error_code, dns_query_result)> handler);
 
     /**
-     * @brief 异步DNS查询——回调完成 + 取消槽
+     * @brief 取消槽异步DNS查询
      * @param domain 域名
      * @param type 记录类型
      * @param qclass 查询类
@@ -306,7 +308,7 @@ public:
                      function<void(error_code, dns_query_result)> handler);
 
     /**
-     * @brief 异步DNS查询——任意完成令牌
+     * @brief 完成令牌异步DNS查询
      * @tparam Token 完成令牌类型（use_future / detached / use_awaitable / 任意可调用对象）
      * @param domain 域名
      * @param type 记录类型
@@ -320,16 +322,16 @@ public:
     }
 
     /**
-     * @brief 异步DNS查询——use_future
+     * @brief future 异步DNS查询
      * @param domain 域名
      * @param type 记录类型
      * @param qclass 查询类
      * @return future<dns_query_result> 异步查询结果
      */
-    auto async_query(string_view domain, dns_record::raw type, dns_class qclass, use_future_t);
+    future<dns_query_result> async_query(string_view domain, dns_record::raw type, dns_class qclass, use_future_t);
 
     /**
-     * @brief 异步DNS查询——detached（即发即忘）
+     * @brief detached 异步DNS查询
      * @param domain 域名
      * @param type 记录类型
      * @param qclass 查询类
@@ -338,7 +340,7 @@ public:
 
 #ifdef NEFORCE_STANDARD_20
     /**
-     * @brief 异步DNS查询——use_awaitable
+     * @brief awaitable 异步DNS查询
      * @param domain 域名
      * @param type 记录类型
      * @param qclass 查询类

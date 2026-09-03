@@ -9,8 +9,8 @@ NEFORCE_BEGIN_NAMESPACE__
 void json_parser::skip_space() noexcept {
 #ifdef NEFORCE_SIMD_AVX2
     while (pos_ + 32 <= len_) {
-        const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(text_.data() + pos_));
-        ::__m256i ws = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(' '));
+        const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(text_.data() + pos_));
+        simd::vec256_t ws = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(' '));
         ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\t')));
         ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n')));
         ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\v')));
@@ -27,8 +27,8 @@ void json_parser::skip_space() noexcept {
 #endif
 #ifdef NEFORCE_SIMD_SSE2
     while (pos_ + 16 <= len_) {
-        const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(text_.data() + pos_));
-        ::__m128i ws = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(' '));
+        const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(text_.data() + pos_));
+        simd::vec128_t ws = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(' '));
         ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\t')));
         ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n')));
         ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\v')));
@@ -65,11 +65,11 @@ unique_ptr<json_string> json_parser::parse_string() {
     while (pos_ < len_) {
 #ifdef NEFORCE_SIMD_AVX2
         while (pos_ + 32 <= len_) {
-            const ::__m256i v = ::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(text_.data() + pos_));
-            const ::__m256i is_quote = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('"'));
-            const ::__m256i is_bs = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\\'));
-            const ::__m256i is_ctrl = ::_mm256_cmpeq_epi8(::_mm256_min_epu8(v, ::_mm256_set1_epi8(0x1F)), v);
-            const ::__m256i special = ::_mm256_or_si256(::_mm256_or_si256(is_quote, is_bs), is_ctrl);
+            const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(text_.data() + pos_));
+            const simd::vec256_t is_quote = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('"'));
+            const simd::vec256_t is_bs = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\\'));
+            const simd::vec256_t is_ctrl = ::_mm256_cmpeq_epi8(::_mm256_min_epu8(v, ::_mm256_set1_epi8(0x1F)), v);
+            const simd::vec256_t special = ::_mm256_or_si256(::_mm256_or_si256(is_quote, is_bs), is_ctrl);
             const int mask = ::_mm256_movemask_epi8(special);
             if (mask == 0) {
                 result.append(text_.data() + pos_, 32);
@@ -89,11 +89,11 @@ unique_ptr<json_string> json_parser::parse_string() {
 #endif
 #ifdef NEFORCE_SIMD_SSE2
         while (pos_ + 16 <= len_) {
-            const ::__m128i v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(text_.data() + pos_));
-            const ::__m128i is_quote = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('"'));
-            const ::__m128i is_bs = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\\'));
-            const ::__m128i is_ctrl = ::_mm_cmpeq_epi8(::_mm_min_epu8(v, ::_mm_set1_epi8(0x1F)), v);
-            const ::__m128i special = ::_mm_or_si128(::_mm_or_si128(is_quote, is_bs), is_ctrl);
+            const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(text_.data() + pos_));
+            const simd::vec128_t is_quote = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('"'));
+            const simd::vec128_t is_bs = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\\'));
+            const simd::vec128_t is_ctrl = ::_mm_cmpeq_epi8(::_mm_min_epu8(v, ::_mm_set1_epi8(0x1F)), v);
+            const simd::vec128_t special = ::_mm_or_si128(::_mm_or_si128(is_quote, is_bs), is_ctrl);
             const int mask = ::_mm_movemask_epi8(special);
             if (mask == 0) {
                 result.append(text_.data() + pos_, 16);

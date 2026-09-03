@@ -1,11 +1,17 @@
 #include <NeForce/core/encrypt/aes256.hpp>
 #include <NeForce/core/memory/endian.hpp>
+#include <NeForce/core/simd/types.hpp>
 #include <NeForce/core/utility/hexadecimal.hpp>
 #if defined(NEFORCE_SIMD_AES_NI) || defined(NEFORCE_SIMD_PCLMUL)
 #    include <wmmintrin.h>
 #endif
-#ifdef NEFORCE_SIMD_AES_ARM
-#    include <arm_neon.h>
+#ifdef __NEFORCE_TARGET_APS
+#    undef __NEFORCE_TARGET_APS
+#endif
+#if defined(NEFORCE_SIMD_AES_NI) && defined(NEFORCE_SIMD_PCLMUL) && defined(NEFORCE_SIMD_SSE2)
+#    define __NEFORCE_TARGET_APS NEFORCE_TARGET("aes,pclmul,sse2")
+#else
+#    define __NEFORCE_TARGET_APS
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -107,16 +113,17 @@ namespace {
         }
     }
 
-    NEFORCE_TARGET("aes,pclmul,sse2") void AES256_inv_key_expansion(const byte_t* key, byte_t* inv_expanded_key) {
+    __NEFORCE_TARGET_APS void AES256_inv_key_expansion(const byte_t* key, byte_t* inv_expanded_key) {
         AES256_key_expansion(key, inv_expanded_key);
 #if defined(NEFORCE_SIMD_AES_NI)
         // precompute InvMixColumns-transformed round keys so decrypt_block
         // does not apply aesimc per block per round
         for (int round = 1; round < 14; ++round) {
-            ::__m128i rk = ::_mm_loadu_si128(
-                    reinterpret_cast<const ::__m128i*>(inv_expanded_key + static_cast<ptrdiff_t>(round * 16)));
+            simd::vec128_t rk = ::_mm_loadu_si128(
+                    reinterpret_cast<const simd::vec128_t*>(inv_expanded_key + static_cast<ptrdiff_t>(round * 16)));
             rk = ::_mm_aesimc_si128(rk);
-            ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(inv_expanded_key + static_cast<ptrdiff_t>(round * 16)), rk);
+            ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(inv_expanded_key + static_cast<ptrdiff_t>(round * 16)),
+                               rk);
         }
 #endif
     }
@@ -195,29 +202,29 @@ namespace {
         }
     }
 
-    NEFORCE_TARGET("aes,pclmul,sse2")
+    __NEFORCE_TARGET_APS
     void encrypt_block(byte_t dst[16], const byte_t* src, const byte_t* expanded_key) noexcept {
 #if defined(NEFORCE_SIMD_AES_NI)
-        ::__m128i state = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(src));
+        simd::vec128_t state = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(src));
 
-        state = ::_mm_xor_si128(state, ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(expanded_key)));
+        state = ::_mm_xor_si128(state, ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(expanded_key)));
 
         for (int round = 1; round < 14; ++round) {
-            state = _mm_aesenc_si128(state, ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(
+            state = _mm_aesenc_si128(state, ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(
                                                     expanded_key + static_cast<ptrdiff_t>(round * 16))));
         }
 
-        state = ::_mm_aesenclast_si128(state, ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(
+        state = ::_mm_aesenclast_si128(state, ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(
                                                       expanded_key + static_cast<ptrdiff_t>(14 * 16))));
 
-        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(dst), state);
+        ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(dst), state);
 
 #elif defined(NEFORCE_SIMD_AES_ARM)
         // AESE adds the round key before the nonlinear SubBytes, unlike the
         // standard AES round (AddRoundKey after MixColumns), so the round
         // keys are shifted one position: full rounds use keys 0..12, the
         // final AESE uses key 13 and key 14 is XORed separately.
-        ::uint8x16_t state = ::vld1q_u8(src);
+        simd::vec128_t state = ::vld1q_u8(src);
 
         for (int round = 0; round < 13; ++round) {
             state = ::vaeseq_u8(state, ::vld1q_u8(reinterpret_cast<const uint8_t*>(
@@ -251,23 +258,24 @@ namespace {
 #endif
     }
 
-    NEFORCE_TARGET("aes,pclmul,sse2")
+    __NEFORCE_TARGET_APS
     void decrypt_block(byte_t dst[16], const byte_t* src, const byte_t* inv_expanded_key) noexcept {
 #if defined(NEFORCE_SIMD_AES_NI)
-        ::__m128i state = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(src));
+        simd::vec128_t state = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(src));
 
-        state = ::_mm_xor_si128(state, ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(
+        state = ::_mm_xor_si128(state, ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(
                                                inv_expanded_key + static_cast<ptrdiff_t>(14 * 16))));
 
         // round keys 1..13 are already InvMixColumns-transformed (AES256_inv_key_expansion)
         for (int round = 13; round >= 1; --round) {
-            state = ::_mm_aesdec_si128(state, ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(
+            state = ::_mm_aesdec_si128(state, ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(
                                                       inv_expanded_key + static_cast<ptrdiff_t>(round * 16))));
         }
 
-        state = ::_mm_aesdeclast_si128(state, ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(inv_expanded_key)));
+        state = ::_mm_aesdeclast_si128(state,
+                                       ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(inv_expanded_key)));
 
-        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(dst), state);
+        ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(dst), state);
 
 #elif defined(NEFORCE_SIMD_AES_ARM)
         // AESD adds the round key before the nonlinear InvSubBytes while the
@@ -275,7 +283,7 @@ namespace {
         // round key is InvMixColumns-transformed (AESIMC) on the fly and the
         // keys are shifted one position: the first round uses raw key 14,
         // full rounds use keys 13..2 and key 0 is XORed separately.
-        ::uint8x16_t state = ::vld1q_u8(src);
+        simd::vec128_t state = ::vld1q_u8(src);
 
         state = ::vaesdq_u8(state, ::vld1q_u8(reinterpret_cast<const uint8_t*>(inv_expanded_key +
                                                                                static_cast<ptrdiff_t>(14 * 16))));
@@ -313,83 +321,83 @@ namespace {
     }
 
 #ifdef NEFORCE_SIMD_AES_NI
-    NEFORCE_TARGET("aes,pclmul,sse2")
+    __NEFORCE_TARGET_APS
     void encrypt_blocks4(byte_t* dst, const byte_t* src, const byte_t* expanded_key) noexcept {
         // Four independent AES chains in flight hide the ~4 cycle aesenc latency.
-        ::__m128i b0 = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(src));
-        ::__m128i b1 = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(src + 16));
-        ::__m128i b2 = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(src + 32));
-        ::__m128i b3 = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(src + 48));
+        simd::vec128_t b0 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(src));
+        simd::vec128_t b1 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(src + 16));
+        simd::vec128_t b2 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(src + 32));
+        simd::vec128_t b3 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(src + 48));
 
-        const ::__m128i rk0 = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(expanded_key));
+        const simd::vec128_t rk0 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(expanded_key));
         b0 = ::_mm_xor_si128(b0, rk0);
         b1 = ::_mm_xor_si128(b1, rk0);
         b2 = ::_mm_xor_si128(b2, rk0);
         b3 = ::_mm_xor_si128(b3, rk0);
 
         for (int round = 1; round < 14; ++round) {
-            const ::__m128i rk = ::_mm_loadu_si128(
-                    reinterpret_cast<const ::__m128i*>(expanded_key + static_cast<ptrdiff_t>(round * 16)));
+            const simd::vec128_t rk = ::_mm_loadu_si128(
+                    reinterpret_cast<const simd::vec128_t*>(expanded_key + static_cast<ptrdiff_t>(round * 16)));
             b0 = ::_mm_aesenc_si128(b0, rk);
             b1 = ::_mm_aesenc_si128(b1, rk);
             b2 = ::_mm_aesenc_si128(b2, rk);
             b3 = ::_mm_aesenc_si128(b3, rk);
         }
 
-        const ::__m128i rk14 =
-                ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(expanded_key + static_cast<ptrdiff_t>(14 * 16)));
+        const simd::vec128_t rk14 = ::_mm_loadu_si128(
+                reinterpret_cast<const simd::vec128_t*>(expanded_key + static_cast<ptrdiff_t>(14 * 16)));
         b0 = ::_mm_aesenclast_si128(b0, rk14);
         b1 = ::_mm_aesenclast_si128(b1, rk14);
         b2 = ::_mm_aesenclast_si128(b2, rk14);
         b3 = ::_mm_aesenclast_si128(b3, rk14);
 
-        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(dst), b0);
-        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(dst + 16), b1);
-        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(dst + 32), b2);
-        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(dst + 48), b3);
+        ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(dst), b0);
+        ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(dst + 16), b1);
+        ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(dst + 32), b2);
+        ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(dst + 48), b3);
     }
 
-    NEFORCE_TARGET("aes,pclmul,sse2")
+    __NEFORCE_TARGET_APS
     void decrypt_blocks4(byte_t* dst, const byte_t* src, const byte_t* inv_expanded_key) noexcept {
-        ::__m128i b0 = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(src));
-        ::__m128i b1 = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(src + 16));
-        ::__m128i b2 = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(src + 32));
-        ::__m128i b3 = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(src + 48));
+        simd::vec128_t b0 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(src));
+        simd::vec128_t b1 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(src + 16));
+        simd::vec128_t b2 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(src + 32));
+        simd::vec128_t b3 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(src + 48));
 
-        const ::__m128i rk14 = ::_mm_loadu_si128(
-                reinterpret_cast<const ::__m128i*>(inv_expanded_key + static_cast<ptrdiff_t>(14 * 16)));
+        const simd::vec128_t rk14 = ::_mm_loadu_si128(
+                reinterpret_cast<const simd::vec128_t*>(inv_expanded_key + static_cast<ptrdiff_t>(14 * 16)));
         b0 = ::_mm_xor_si128(b0, rk14);
         b1 = ::_mm_xor_si128(b1, rk14);
         b2 = ::_mm_xor_si128(b2, rk14);
         b3 = ::_mm_xor_si128(b3, rk14);
 
         for (int round = 13; round >= 1; --round) {
-            const ::__m128i rk = ::_mm_loadu_si128(
-                    reinterpret_cast<const ::__m128i*>(inv_expanded_key + static_cast<ptrdiff_t>(round * 16)));
+            const simd::vec128_t rk = ::_mm_loadu_si128(
+                    reinterpret_cast<const simd::vec128_t*>(inv_expanded_key + static_cast<ptrdiff_t>(round * 16)));
             b0 = ::_mm_aesdec_si128(b0, rk);
             b1 = ::_mm_aesdec_si128(b1, rk);
             b2 = ::_mm_aesdec_si128(b2, rk);
             b3 = ::_mm_aesdec_si128(b3, rk);
         }
 
-        const ::__m128i rk0 = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(inv_expanded_key));
+        const simd::vec128_t rk0 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(inv_expanded_key));
         b0 = ::_mm_aesdeclast_si128(b0, rk0);
         b1 = ::_mm_aesdeclast_si128(b1, rk0);
         b2 = ::_mm_aesdeclast_si128(b2, rk0);
         b3 = ::_mm_aesdeclast_si128(b3, rk0);
 
-        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(dst), b0);
-        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(dst + 16), b1);
-        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(dst + 32), b2);
-        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(dst + 48), b3);
+        ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(dst), b0);
+        ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(dst + 16), b1);
+        ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(dst + 32), b2);
+        ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(dst + 48), b3);
     }
 #endif
 
     void xor_block(byte_t* dst, const byte_t* src) {
 #if defined(NEFORCE_SIMD_SSE2)
-        const ::__m128i a = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(dst));
-        const ::__m128i b = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(src));
-        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(dst), ::_mm_xor_si128(a, b));
+        const simd::vec128_t a = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(dst));
+        const simd::vec128_t b = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(src));
+        ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(dst), ::_mm_xor_si128(a, b));
 #else
         for (int i = 0; i < 16; ++i) {
             dst[i] ^= src[i];
@@ -401,9 +409,9 @@ namespace {
 #if defined(NEFORCE_SIMD_SSE2)
         size_t i = 0;
         for (; i + 16 <= len; i += 16) {
-            const ::__m128i va = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(a + i));
-            const ::__m128i vb = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(b + i));
-            ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(dst + i), ::_mm_xor_si128(va, vb));
+            const simd::vec128_t va = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(a + i));
+            const simd::vec128_t vb = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(b + i));
+            ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(dst + i), ::_mm_xor_si128(va, vb));
         }
         for (; i < len; ++i) {
             dst[i] = a[i] ^ b[i];
@@ -463,7 +471,7 @@ namespace {
     // Reflected-domain GHASH multiply. Value convention is identical to the scalar gf128_multiply:
     // value bit 127 == data byte 0 bit 7 == x^0, and the reduction identity is
     // x^128 == x^7 + x^2 + x + 1 (fold constant 0xE1).
-    NEFORCE_TARGET("aes,pclmul,sse2")::__m128i ghash_reduce(const ::__m128i q) noexcept {
+    __NEFORCE_TARGET_APS simd::vec128_t ghash_reduce(const simd::vec128_t q) noexcept {
         // q: 127-bit value (bit 127 clear). Fold q*x^128 into the low 128 bits:
         //   t = q ^ (q<<1) ^ (q>>1) ^ (q>>6)
         //   underflow bits (x^128..x^133) re-fold via the 0xE1 spread at the top.
@@ -481,24 +489,24 @@ namespace {
         return ::_mm_set_epi64x(static_cast<int64_t>(t_hi ^ fold_hi), static_cast<int64_t>(t_lo));
     }
 
-    NEFORCE_TARGET("aes,pclmul,sse2")::__m128i ghash_mult(const ::__m128i a, const ::__m128i b) noexcept {
-        const ::__m128i mask_lo = ::_mm_set_epi64x(0, -1);
-        const ::__m128i a_lo = ::_mm_and_si128(a, mask_lo);
+    __NEFORCE_TARGET_APS simd::vec128_t ghash_mult(const simd::vec128_t a, const simd::vec128_t b) noexcept {
+        const simd::vec128_t mask_lo = ::_mm_set_epi64x(0, -1);
+        const simd::vec128_t a_lo = ::_mm_and_si128(a, mask_lo);
         const auto a_hi = _mm_srli_si128(a, 8);
-        const ::__m128i b_lo = ::_mm_and_si128(b, mask_lo);
+        const simd::vec128_t b_lo = ::_mm_and_si128(b, mask_lo);
         const auto b_hi = _mm_srli_si128(b, 8);
 
         const auto p0 = _mm_clmulepi64_si128(a, b, 0x00);
         const auto p3 = _mm_clmulepi64_si128(a, b, 0x11);
-        const ::__m128i mid = ::_mm_xor_si128(
+        const simd::vec128_t mid = ::_mm_xor_si128(
                 ::_mm_xor_si128(_mm_clmulepi64_si128(::_mm_xor_si128(a_lo, a_hi), ::_mm_xor_si128(b_lo, b_hi), 0x00),
                                 p0),
                 p3);
 
         // 256-bit product P = [P_hi : P_lo];
         // the reflected 128-bit result is P bits 254..127 = (P_lo >> 63) | (P_hi << 1)
-        const ::__m128i p_lo = ::_mm_xor_si128(p0, _mm_slli_si128(mid, 8));
-        const ::__m128i p_hi = ::_mm_xor_si128(p3, _mm_srli_si128(mid, 8));
+        const simd::vec128_t p_lo = ::_mm_xor_si128(p0, _mm_slli_si128(mid, 8));
+        const simd::vec128_t p_hi = ::_mm_xor_si128(p3, _mm_srli_si128(mid, 8));
 
         const uint64_t p_lo_hi = ::_mm_cvtsi128_si64(_mm_srli_si128(p_lo, 8));
         const uint64_t p_hi_lo = ::_mm_cvtsi128_si64(p_hi);
@@ -508,7 +516,8 @@ namespace {
         const uint64_t res_hi = (p_hi_lo >> 63) | (p_hi_hi << 1);
 
         // Q = P bits 0..126 (bit 127 belongs to the result)
-        const ::__m128i q = ::_mm_and_si128(p_lo, ::_mm_set_epi64x(static_cast<int64_t>(0x7FFFFFFFFFFFFFFFULL), -1));
+        const simd::vec128_t q =
+                ::_mm_and_si128(p_lo, ::_mm_set_epi64x(static_cast<int64_t>(0x7FFFFFFFFFFFFFFFULL), -1));
         return ::_mm_xor_si128(::_mm_set_epi64x(static_cast<int64_t>(res_hi), static_cast<int64_t>(res_lo)),
                                ghash_reduce(q));
     }
@@ -524,16 +533,16 @@ namespace {
         ctx.H_lo = endian::read_be64(H + 8);
     }
 
-    NEFORCE_TARGET("aes,pclmul,sse2")
+    __NEFORCE_TARGET_APS
     void ghash_update(const ghash_context& ctx, uint64_t& state_hi, uint64_t& state_lo, const byte_t* data,
                       size_t len) {
 #ifdef NEFORCE_SIMD_PCLMUL
-        const ::__m128i h = ::_mm_set_epi64x(static_cast<int64_t>(ctx.H_hi), static_cast<int64_t>(ctx.H_lo));
-        ::__m128i state = ::_mm_set_epi64x(static_cast<int64_t>(state_hi), static_cast<int64_t>(state_lo));
+        const simd::vec128_t h = ::_mm_set_epi64x(static_cast<int64_t>(ctx.H_hi), static_cast<int64_t>(ctx.H_lo));
+        simd::vec128_t state = ::_mm_set_epi64x(static_cast<int64_t>(state_hi), static_cast<int64_t>(state_lo));
 
         while (len >= 16) {
-            const ::__m128i block = ::_mm_set_epi64x(static_cast<int64_t>(endian::read_be64(data)),
-                                                     static_cast<int64_t>(endian::read_be64(data + 8)));
+            const simd::vec128_t block = ::_mm_set_epi64x(static_cast<int64_t>(endian::read_be64(data)),
+                                                          static_cast<int64_t>(endian::read_be64(data + 8)));
             state = ghash_mult(::_mm_xor_si128(state, block), h);
             data += 16;
             len -= 16;
@@ -541,8 +550,8 @@ namespace {
         if (len > 0) {
             byte_t padded[16] = {0};
             memory_copy(padded, data, len);
-            const ::__m128i block = ::_mm_set_epi64x(static_cast<int64_t>(endian::read_be64(padded)),
-                                                     static_cast<int64_t>(endian::read_be64(padded + 8)));
+            const simd::vec128_t block = ::_mm_set_epi64x(static_cast<int64_t>(endian::read_be64(padded)),
+                                                          static_cast<int64_t>(endian::read_be64(padded + 8)));
             state = ghash_mult(::_mm_xor_si128(state, block), h);
         }
 
@@ -591,37 +600,37 @@ namespace {
 
 #ifdef NEFORCE_SIMD_AES_NI
     // Four independent AES chains in flight hide the ~4 cycle aesenc latency.
-    NEFORCE_TARGET("aes,pclmul,sse2")
+    __NEFORCE_TARGET_APS
     void AES256_ctr_keystream_x4(byte_t counter[16], const byte_t* expanded_key, byte_t keystream[64]) noexcept {
-        ::__m128i c0 = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(counter));
-        ::__m128i c1 = ::_mm_add_epi32(c0, ::_mm_set_epi32(1, 0, 0, 0));
-        ::__m128i c2 = ::_mm_add_epi32(c0, ::_mm_set_epi32(2, 0, 0, 0));
-        ::__m128i c3 = ::_mm_add_epi32(c0, ::_mm_set_epi32(3, 0, 0, 0));
+        simd::vec128_t c0 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(counter));
+        simd::vec128_t c1 = ::_mm_add_epi32(c0, ::_mm_set_epi32(1, 0, 0, 0));
+        simd::vec128_t c2 = ::_mm_add_epi32(c0, ::_mm_set_epi32(2, 0, 0, 0));
+        simd::vec128_t c3 = ::_mm_add_epi32(c0, ::_mm_set_epi32(3, 0, 0, 0));
 
-        const ::__m128i rk0 = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(expanded_key));
+        const simd::vec128_t rk0 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(expanded_key));
         c0 = ::_mm_xor_si128(c0, rk0);
         c1 = ::_mm_xor_si128(c1, rk0);
         c2 = ::_mm_xor_si128(c2, rk0);
         c3 = ::_mm_xor_si128(c3, rk0);
         for (int round = 1; round < 14; ++round) {
-            const ::__m128i rk = ::_mm_loadu_si128(
-                    reinterpret_cast<const ::__m128i*>(expanded_key + static_cast<ptrdiff_t>(round * 16)));
+            const simd::vec128_t rk = ::_mm_loadu_si128(
+                    reinterpret_cast<const simd::vec128_t*>(expanded_key + static_cast<ptrdiff_t>(round * 16)));
             c0 = ::_mm_aesenc_si128(c0, rk);
             c1 = ::_mm_aesenc_si128(c1, rk);
             c2 = ::_mm_aesenc_si128(c2, rk);
             c3 = ::_mm_aesenc_si128(c3, rk);
         }
-        const ::__m128i rk14 =
-                ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(expanded_key + static_cast<ptrdiff_t>(14 * 16)));
+        const simd::vec128_t rk14 = ::_mm_loadu_si128(
+                reinterpret_cast<const simd::vec128_t*>(expanded_key + static_cast<ptrdiff_t>(14 * 16)));
         c0 = ::_mm_aesenclast_si128(c0, rk14);
         c1 = ::_mm_aesenclast_si128(c1, rk14);
         c2 = ::_mm_aesenclast_si128(c2, rk14);
         c3 = ::_mm_aesenclast_si128(c3, rk14);
 
-        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(keystream), c0);
-        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(keystream + 16), c1);
-        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(keystream + 32), c2);
-        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(keystream + 48), c3);
+        ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(keystream), c0);
+        ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(keystream + 16), c1);
+        ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(keystream + 32), c2);
+        ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(keystream + 48), c3);
 
         inc32(counter);
         inc32(counter);
@@ -805,35 +814,38 @@ byte_vector AES256::decrypt_cbc(cbyte_view data, cbyte_view key, cbyte_view iv) 
     byte_t prev[16];
     memory_copy(prev, iv.data(), 16);
 
+    size_t i = 0;
+
 #ifdef NEFORCE_SIMD_AES_NI
     // CBC decryption blocks are independent: decrypt 4 at once, then XOR the chain
-    size_t i = 0;
     for (; i + 64 <= data.size(); i += 64) {
         decrypt_blocks4(result.data() + i, data.data() + i, inv_expanded_key);
 
-        ::__m128i p0 = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(result.data() + i));
-        ::__m128i p1 = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(result.data() + i + 16));
-        ::__m128i p2 = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(result.data() + i + 32));
-        ::__m128i p3 = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(result.data() + i + 48));
+        simd::vec128_t p0 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(result.data() + i));
+        simd::vec128_t p1 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(result.data() + i + 16));
+        simd::vec128_t p2 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(result.data() + i + 32));
+        simd::vec128_t p3 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(result.data() + i + 48));
 
-        const ::__m128i c0 = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(data.data() + i));
-        const ::__m128i c1 = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(data.data() + i + 16));
-        const ::__m128i c2 = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(data.data() + i + 32));
-        const ::__m128i c3 = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(data.data() + i + 48));
-        const ::__m128i prev_v = ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(prev));
+        const simd::vec128_t c0 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(data.data() + i));
+        const simd::vec128_t c1 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(data.data() + i + 16));
+        const simd::vec128_t c2 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(data.data() + i + 32));
+        const simd::vec128_t c3 NEFORCE_UNUSED =
+                ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(data.data() + i + 48));
+        const simd::vec128_t prev_v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(prev));
 
         p0 = ::_mm_xor_si128(p0, prev_v);
         p1 = ::_mm_xor_si128(p1, c0);
         p2 = ::_mm_xor_si128(p2, c1);
         p3 = ::_mm_xor_si128(p3, c2);
 
-        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(result.data() + i), p0);
-        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(result.data() + i + 16), p1);
-        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(result.data() + i + 32), p2);
-        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(result.data() + i + 48), p3);
+        ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(result.data() + i), p0);
+        ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(result.data() + i + 16), p1);
+        ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(result.data() + i + 32), p2);
+        ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(result.data() + i + 48), p3);
 
         memory_copy(prev, data.data() + i + 48, 16);
     }
+#endif
     for (; i < data.size(); i += 16) {
         byte_t block[16];
         memory_copy(block, data.data() + i, 16);
@@ -841,22 +853,13 @@ byte_vector AES256::decrypt_cbc(cbyte_view data, cbyte_view key, cbyte_view iv) 
         xor_block(result.data() + i, prev);
         memory_copy(prev, data.data() + i, 16);
     }
-#else
-    for (size_t i = 0; i < data.size(); i += 16) {
-        byte_t block[16];
-        memory_copy(block, data.data() + i, 16);
-        decrypt_block(result.data() + i, block, inv_expanded_key);
-        xor_block(result.data() + i, prev);
-        memory_copy(prev, data.data() + i, 16);
-    }
-#endif
     return result;
 }
 
 byte_vector AES256::encrypt_cbc_pkcs7(cbyte_view data, cbyte_view key, cbyte_view iv) {
     byte_vector padded{data.data(), data.size()};
     const byte_t padding = 16 - (padded.size() % 16);
-    for (int i = 0; i < padding; ++i) {
+    for (byte_t i = 0; i < padding; ++i) {
         padded.push_back(padding);
     }
     return encrypt_cbc(padded.view(), key, iv);
