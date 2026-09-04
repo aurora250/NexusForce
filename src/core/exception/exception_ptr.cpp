@@ -97,8 +97,12 @@ exception_ptr current_exception() noexcept {
     __NEFORCE_EXPAND_MAKE_EXCEPTION_PTR(database_typecast_exception)
     __NEFORCE_EXPAND_MAKE_EXCEPTION_PTR(database_stmt_exception)
     __NEFORCE_EXPAND_MAKE_EXCEPTION_PTR(database_exception)
+#ifdef NEFORCE_SUPPORT_LZ4
     __NEFORCE_EXPAND_MAKE_EXCEPTION_PTR(lz4_exception)
+#endif
+#ifdef NEFORCE_SUPPORT_ZLIB
     __NEFORCE_EXPAND_MAKE_EXCEPTION_PTR(zlib_exception)
+#endif
     __NEFORCE_EXPAND_MAKE_EXCEPTION_PTR(thirdparty_exception)
     // direct exception family
     __NEFORCE_EXPAND_MAKE_EXCEPTION_PTR(expected_exception)
