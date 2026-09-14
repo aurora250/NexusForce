@@ -1,8 +1,17 @@
 #include <NeForce/db/sqlite/sqlite_connect.hpp>
 #ifdef NEFORCE_SUPPORT_SQLITE3
+#    ifdef NEFORCE_SUPPORT_SQLCIPHER
+#        include <sqlcipher/sqlite3.h>
+#    else
+#        include <sqlite3.h>
+#    endif
 #    include <NeForce/db/sqlite/sqlite_prepared_statement.hpp>
 #    include <NeForce/db/sqlite/sqlite_result.hpp>
 NEFORCE_BEGIN_NAMESPACE__
+
+sqlite_connect::sqlite_connect() noexcept { ::sqlite3_open(nullptr, reinterpret_cast<sqlite3**>(&link_)); }
+
+sqlite_connect::~sqlite_connect() noexcept { this->close(); }
 
 bool sqlite_connect::connect(const db_config& config) {
     last_error_.clear();
@@ -10,9 +19,9 @@ bool sqlite_connect::connect(const db_config& config) {
     if (connected()) {
         close();
     }
-    if (::sqlite3_open(config.database.data(), &link_) != SQLITE_OK) {
-        last_error_ = ::sqlite3_errmsg(link_);
-        last_errno_ = ::sqlite3_errcode(link_);
+    if (::sqlite3_open(config.database.data(), reinterpret_cast<sqlite3**>(&link_)) != SQLITE_OK) {
+        last_error_ = ::sqlite3_errmsg(static_cast<sqlite3*>(link_));
+        last_errno_ = ::sqlite3_errcode(static_cast<sqlite3*>(link_));
         close();
         return false;
     }
@@ -32,20 +41,21 @@ bool sqlite_connect::connect(const db_config& config, const string& encryption_k
     if (connected()) {
         close();
     }
-    if (::sqlite3_open(config.database.data(), &link_) != SQLITE_OK) {
-        last_error_ = ::sqlite3_errmsg(link_);
-        last_errno_ = ::sqlite3_errcode(link_);
+    if (::sqlite3_open(config.database.data(), reinterpret_cast<sqlite3**>(&link_)) != SQLITE_OK) {
+        last_error_ = ::sqlite3_errmsg(static_cast<sqlite3*>(link_));
+        last_errno_ = ::sqlite3_errcode(static_cast<sqlite3*>(link_));
         close();
         return false;
     }
     if (!encryption_key.empty()) {
         if (type == key_type::RAW) {
-            ::sqlite3_exec(link_, "PRAGMA cipher_kdf_iter = 1;", nullptr, nullptr, nullptr);
+            ::sqlite3_exec(static_cast<sqlite3*>(link_), "PRAGMA cipher_kdf_iter = 1;", nullptr, nullptr, nullptr);
         }
-        const int rc = ::sqlite3_key_v2(link_, "main", encryption_key.data(), static_cast<int>(encryption_key.size()));
+        const int rc = ::sqlite3_key_v2(static_cast<sqlite3*>(link_), "main", encryption_key.data(),
+                                        static_cast<int>(encryption_key.size()));
         if (rc != SQLITE_OK) {
-            last_error_ = ::sqlite3_errmsg(link_);
-            last_errno_ = ::sqlite3_errcode(link_);
+            last_error_ = ::sqlite3_errmsg(static_cast<sqlite3*>(link_));
+            last_errno_ = ::sqlite3_errcode(static_cast<sqlite3*>(link_));
             close();
             return false;
         }
@@ -63,12 +73,13 @@ bool sqlite_connect::rekey(const string& new_key, const key_type type) {
         return false;
     }
     if (type == key_type::RAW) {
-        ::sqlite3_exec(link_, "PRAGMA cipher_kdf_iter = 1;", nullptr, nullptr, nullptr);
+        ::sqlite3_exec(static_cast<::sqlite3*>(link_), "PRAGMA cipher_kdf_iter = 1;", nullptr, nullptr, nullptr);
     }
-    const int rc = ::sqlite3_rekey_v2(link_, "main", new_key.data(), static_cast<int>(new_key.size()));
+    const int rc = ::sqlite3_rekey_v2(static_cast<::sqlite3*>(link_), "main", new_key.data(),
+                                      static_cast<int>(new_key.size()));
     if (rc != SQLITE_OK) {
-        last_error_ = ::sqlite3_errmsg(link_);
-        last_errno_ = ::sqlite3_errcode(link_);
+        last_error_ = ::sqlite3_errmsg(static_cast<::sqlite3*>(link_));
+        last_errno_ = ::sqlite3_errcode(static_cast<::sqlite3*>(link_));
         return false;
     }
     return true;
@@ -78,7 +89,7 @@ bool sqlite_connect::rekey(const string& new_key, const key_type type) {
 
 void sqlite_connect::close() noexcept {
     if (link_ != nullptr) {
-        ::sqlite3_close(link_);
+        ::sqlite3_close(static_cast<::sqlite3*>(link_));
         link_ = nullptr;
     }
 }
@@ -90,7 +101,7 @@ bool sqlite_connect::set_character_set(const string& encoding) {
 
 string_view sqlite_connect::get_character_set() const {
     ::sqlite3_stmt* stmt = nullptr;
-    if (::sqlite3_prepare_v2(link_, "PRAGMA encoding;", -1, &stmt, nullptr) != SQLITE_OK) {
+    if (::sqlite3_prepare_v2(static_cast<::sqlite3*>(link_), "PRAGMA encoding;", -1, &stmt, nullptr) != SQLITE_OK) {
         return {};
     }
     string_view encoding;
@@ -109,8 +120,8 @@ bool sqlite_connect::update(const string& sql) const {
     }
 
     char* error_msg = nullptr;
-    if (::sqlite3_exec(link_, sql.data(), nullptr, nullptr, &error_msg) != SQLITE_OK) {
-        last_errno_ = ::sqlite3_errcode(link_);
+    if (::sqlite3_exec(static_cast<::sqlite3*>(link_), sql.data(), nullptr, nullptr, &error_msg) != SQLITE_OK) {
+        last_errno_ = ::sqlite3_errcode(static_cast<::sqlite3*>(link_));
         if (error_msg != nullptr) {
             last_error_ = error_msg;
             ::sqlite3_free(error_msg);
@@ -126,7 +137,7 @@ unique_ptr<idb_tb_result> sqlite_connect::query(const string& sql) const {
     }
 
     ::sqlite3_stmt* stmt = nullptr;
-    if (::sqlite3_prepare_v2(link_, sql.data(), -1, &stmt, nullptr) != SQLITE_OK) {
+    if (::sqlite3_prepare_v2(static_cast<::sqlite3*>(link_), sql.data(), -1, &stmt, nullptr) != SQLITE_OK) {
         return {};
     }
     return make_unique<sqlite_result>(stmt);
@@ -137,7 +148,7 @@ unique_ptr<idb_prepared_statement> sqlite_connect::prepare_statement(const strin
 }
 
 bool sqlite_connect::table_exists(const string& table) const {
-    auto result = query(table_exists_query(table));
+    const auto result = query(table_exists_query(table));
     return result != nullptr && result->next();
 }
 
@@ -146,12 +157,12 @@ bool sqlite_connect::is_valid() const {
         return false;
     }
     ::sqlite3_stmt* stmt = nullptr;
-    if (::sqlite3_prepare_v2(link_, "SELECT 1;", -1, &stmt, nullptr) == SQLITE_OK) {
+    if (::sqlite3_prepare_v2(static_cast<::sqlite3*>(link_), "SELECT 1;", -1, &stmt, nullptr) == SQLITE_OK) {
         ::sqlite3_finalize(stmt);
         return true;
     }
-    last_error_ = ::sqlite3_errmsg(link_);
-    last_errno_ = ::sqlite3_errcode(link_);
+    last_error_ = ::sqlite3_errmsg(static_cast<::sqlite3*>(link_));
+    last_errno_ = ::sqlite3_errcode(static_cast<::sqlite3*>(link_));
     return false;
 }
 

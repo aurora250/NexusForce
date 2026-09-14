@@ -9,7 +9,6 @@
  */
 
 #ifdef NEFORCE_SUPPORT_HIREDIS
-#    include <hiredis/hiredis.h>
 #    include "NeForce/db/db_interface.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -40,9 +39,9 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 struct NEFORCE_API redis_result final : idb_kv_result {
 private:
-    ::redisReply* result_ = nullptr; ///< hiredis回复对象
-    size_type cursor_ = 0;           ///< 当前游标位置
-    size_type rows_ = 0;             ///< 行数（键值对数量）
+    void* result_ = nullptr; ///< hiredis回复对象
+    size_type cursor_ = 0;   ///< 当前游标位置
+    size_type rows_ = 0;     ///< 行数（键值对数量）
 
     unique_ptr<vector<string>> column_names_;           ///< 列名列表（兼容性保留）
     unique_ptr<vector<pair<string, string>>> kv_pairs_; ///< 键值对列表
@@ -68,7 +67,7 @@ public:
      * - 数组回复：如果元素数为偶数，解析为键值对
      * - 其他类型：作为单值处理
      */
-    explicit redis_result(::redisReply* reply);
+    explicit redis_result(void* reply);
 
     /**
      * @brief 析构函数
@@ -156,13 +155,13 @@ public:
      * @brief 获取Redis回复类型
      * @return redisReplyType枚举值
      */
-    NEFORCE_NODISCARD int type() const noexcept { return result_ != nullptr ? result_->type : -1; }
+    NEFORCE_NODISCARD int type() const noexcept;
 
     /**
      * @brief 检查是否为空值回复
      * @return 空值回复返回true
      */
-    NEFORCE_NODISCARD bool is_nil() const noexcept { return result_ != nullptr && result_->type == REDIS_REPLY_NIL; }
+    NEFORCE_NODISCARD bool is_nil() const noexcept;
 };
 
 /** @} */ // Redis

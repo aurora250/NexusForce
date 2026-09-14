@@ -9,8 +9,8 @@
  */
 
 #ifdef NEFORCE_SUPPORT_MYSQL
-#    include <mysql/mysql.h>
 #    include "NeForce/db/sql_connect_base.hpp"
+#    include "NeForce/db/mysql/mysql_util.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -40,7 +40,7 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 struct NEFORCE_API mysql_connect final : sql_connect_base<mysql_connect> {
 protected:
-    ::MYSQL* link_ = nullptr; ///< MySQL连接句柄
+    void* link_ = nullptr; ///< MySQL连接句柄
     friend sql_connect_base<mysql_connect>;
 
 private:
@@ -98,7 +98,7 @@ public:
      * @param str 选项值字符串
      * @return 设置成功返回true
      */
-    NEFORCE_NODISCARD bool set_options(::mysql_option option, const string& str) const noexcept;
+    NEFORCE_NODISCARD bool set_options(mysql_option option, const string& str) const noexcept;
 
     /**
      * @brief 获取当前字符集
@@ -150,7 +150,7 @@ public:
      * @brief 检查连接是否有效
      * @return 有效返回true
      */
-    NEFORCE_NODISCARD bool is_valid() const noexcept override { return ::mysql_ping(link_) == 0; }
+    NEFORCE_NODISCARD bool is_valid() const noexcept override;
 
     size_t batch_insert(const string& table, const vector<string>& columns,
                         const vector<vector<string>>& rows) override;

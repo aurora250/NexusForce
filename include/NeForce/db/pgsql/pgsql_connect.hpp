@@ -9,7 +9,6 @@
  */
 
 #ifdef NEFORCE_SUPPORT_POSTGRESQL
-#    include <libpq-fe.h>
 #    include "NeForce/db/sql_connect_base.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -41,7 +40,7 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API pgsql_connect final : public sql_connect_base<pgsql_connect> {
 protected:
-    ::PGconn* link_ = nullptr; ///< PostgreSQL连接句柄
+    void* link_ = nullptr; ///< PostgreSQL连接句柄
     friend sql_connect_base<pgsql_connect>;
 
 private:

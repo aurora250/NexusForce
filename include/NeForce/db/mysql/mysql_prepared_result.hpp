@@ -9,8 +9,8 @@
  */
 
 #ifdef NEFORCE_SUPPORT_MYSQL
-#    include <mysql/mysql.h>
 #    include "NeForce/db/db_interface.hpp"
+#    include "NeForce/db/mysql/mysql_util.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -39,20 +39,20 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API mysql_prepared_result final : public idb_tb_result {
 private:
-    ::MYSQL_STMT* stmt_ = nullptr;    ///< MySQL预处理语句句柄
-    ::MYSQL_RES* metadata_ = nullptr; ///< 结果集元数据
-    uint32_t column_count_ = 0;       ///< 列数
-    uint64_t row_count_ = 0;          ///< 行数
-    bool has_current_row_ = false;    ///< 是否有当前行
+    void* stmt_ = nullptr;         ///< MySQL预处理语句句柄
+    void* metadata_ = nullptr;     ///< 结果集元数据
+    uint32_t column_count_ = 0;    ///< 列数
+    uint64_t row_count_ = 0;       ///< 行数
+    bool has_current_row_ = false; ///< 是否有当前行
 
-    unique_ptr<vector<string_view>> column_names_ = make_unique<vector<string_view>>();               ///< 列名列表
-    unique_ptr<vector<::enum_field_types>> column_types_ = make_unique<vector<::enum_field_types>>(); ///< 列类型列表
+    unique_ptr<vector<string_view>> column_names_ = make_unique<vector<string_view>>();             ///< 列名列表
+    unique_ptr<vector<mysql_column_type>> column_types_ = make_unique<vector<mysql_column_type>>(); ///< 列类型列表
 
-    unique_ptr<vector<::MYSQL_BIND>> bind_results_ = make_unique<vector<::MYSQL_BIND>>(); ///< 结果绑定数组
-    unique_ptr<vector<vector<char>>> buffers_ = make_unique<vector<vector<char>>>();      ///< 数据缓冲区
-    unique_ptr<vector<unsigned long>> lengths_ = make_unique<vector<unsigned long>>();    ///< 数据长度数组
-    unique_ptr<vector<bool>> is_null_ = make_unique<vector<bool>>();                      ///< NULL标志数组
-    unique_ptr<vector<bool>> is_error_ = make_unique<vector<bool>>();                     ///< 错误标志数组
+    unique_ptr<vector<void*>> bind_results_ = make_unique<vector<void*>>();            ///< 结果绑定数组
+    unique_ptr<vector<vector<char>>> buffers_ = make_unique<vector<vector<char>>>();   ///< 数据缓冲区
+    unique_ptr<vector<unsigned long>> lengths_ = make_unique<vector<unsigned long>>(); ///< 数据长度数组
+    unique_ptr<vector<bool>> is_null_ = make_unique<vector<bool>>();                   ///< NULL标志数组
+    unique_ptr<vector<bool>> is_error_ = make_unique<vector<bool>>();                  ///< 错误标志数组
 
     void initialize_bindings() const;
 
@@ -64,7 +64,7 @@ public:
      *
      * 获取结果集元数据，初始化列绑定，存储结果集。
      */
-    explicit mysql_prepared_result(::MYSQL_STMT* stmt);
+    explicit mysql_prepared_result(void* stmt);
 
     /**
      * @brief 析构函数
@@ -114,7 +114,7 @@ public:
      * @brief 获取列类型列表
      * @return MySQL字段类型列表
      */
-    NEFORCE_NODISCARD const vector<::enum_field_types>& column_types() const { return *column_types_; }
+    NEFORCE_NODISCARD const vector<mysql_column_type>& column_types() const { return *column_types_; }
 
     /**
      * @brief 获取字符串值

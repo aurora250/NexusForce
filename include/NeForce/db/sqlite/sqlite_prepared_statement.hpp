@@ -9,11 +9,6 @@
  */
 
 #ifdef NEFORCE_SUPPORT_SQLITE3
-#    ifdef NEFORCE_SUPPORT_SQLCIPHER
-#        include <sqlcipher/sqlite3.h>
-#    else
-#        include <sqlite3.h>
-#    endif
 #    include "NeForce/db/db_interface.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -37,7 +32,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * 支持参数绑定、语句执行和结果集获取。
  *
  * 主要功能：
- * - SQL语句预处理（支持?占位符）
+ * - SQL语句预处理
  * - 参数绑定
  * - 语句执行
  * - 查询执行
@@ -48,10 +43,10 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API sqlite_prepared_statement final : public idb_prepared_statement {
 private:
-    ::sqlite3* db_ = nullptr;        ///< SQLite数据库连接句柄
-    ::sqlite3_stmt* stmt_ = nullptr; ///< SQLite预处理语句句柄
+    void* db_ = nullptr;   ///< SQLite数据库连接句柄
+    void* stmt_ = nullptr; ///< SQLite预处理语句句柄
 
-    uint32_t param_count_ = 0;           ///< 参数数量（?占位符个数）
+    uint32_t param_count_ = 0;           ///< 参数数量
     vector<vector<char>> param_buffers_; ///< 参数数据缓冲区
     bool prepared_ = false;              ///< 预处理是否成功
     mutable string last_error_;          ///< 最后错误信息
@@ -67,12 +62,9 @@ public:
     /**
      * @brief 构造函数
      * @param db SQLite数据库连接句柄
-     * @param sql SQL语句（使用?作为占位符）
-     *
-     * 使用sqlite3_prepare_v2预处理SQL语句，
-     * 获取参数数量（?占位符个数）。
+     * @param sql SQL语句
      */
-    explicit sqlite_prepared_statement(::sqlite3* db, const string& sql);
+    explicit sqlite_prepared_statement(void* db, const string& sql);
 
     sqlite_prepared_statement(const sqlite_prepared_statement&) = delete;
     sqlite_prepared_statement& operator=(const sqlite_prepared_statement&) = delete;
@@ -92,8 +84,6 @@ public:
 
     /**
      * @brief 析构函数
-     *
-     * 调用sqlite3_finalize释放预处理语句资源。
      */
     ~sqlite_prepared_statement() override;
 
@@ -173,9 +163,6 @@ public:
     /**
      * @brief 执行查询语句
      * @return 查询结果集，失败返回空指针
-     *
-     * 执行查询并返回结果集对象。
-     * 注意：结果集对象在析构时会重置语句，允许语句被复用。
      */
     unique_ptr<idb_tb_result> execute_query() override;
 
@@ -189,9 +176,7 @@ public:
      * @brief 获取错误码
      * @return SQLite错误码
      */
-    NEFORCE_NODISCARD uint32_t get_errno() const noexcept override {
-        return db_ != nullptr ? ::sqlite3_errcode(db_) : 0;
-    }
+    NEFORCE_NODISCARD uint32_t get_errno() const noexcept override;
 };
 
 /** @} */ // SQLite3

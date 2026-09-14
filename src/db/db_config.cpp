@@ -26,6 +26,7 @@ db_config db_config::for_mysql(const string& db) {
 #ifdef NEFORCE_SUPPORT_SQLITE3
 db_config db_config::for_sqlite(const string& file) {
     db_config config;
+    config.port = ports::UNDEF;
     config.database = file;
     return config;
 }

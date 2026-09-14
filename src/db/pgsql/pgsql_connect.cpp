@@ -1,5 +1,6 @@
 #include <NeForce/db/pgsql/pgsql_connect.hpp>
 #ifdef NEFORCE_SUPPORT_POSTGRESQL
+#    include <libpq-fe.h>
 #    include <NeForce/core/utility/packages.hpp>
 #    include <NeForce/db/pgsql/pgsql_prepared_statement.hpp>
 #    include <NeForce/db/pgsql/pgsql_result.hpp>
@@ -39,8 +40,8 @@ bool pgsql_connect::connect(const db_config& config) {
     string conn_str = build_conn_string(config);
     link_ = ::PQconnectdb(conn_str.data());
 
-    if (link_ == nullptr || ::PQstatus(link_) != ::CONNECTION_OK) {
-        string last_error = ::PQerrorMessage(link_);
+    if (link_ == nullptr || ::PQstatus(static_cast<::PGconn*>(link_)) != ::CONNECTION_OK) {
+        string last_error = ::PQerrorMessage(static_cast<::PGconn*>(link_));
         close();
         last_error_ = move(last_error);
         last_errno_ = 1;
@@ -58,7 +59,7 @@ bool pgsql_connect::reconnect(const db_config& config) {
 
 void pgsql_connect::close() {
     if (link_ != nullptr) {
-        ::PQfinish(link_);
+        ::PQfinish(static_cast<::PGconn*>(link_));
         link_ = nullptr;
     }
 }
@@ -68,7 +69,8 @@ bool pgsql_connect::set_character_set(const string& encoding) {
         return false;
     }
 
-    ::PGresult* res = ::PQexec(link_, ("SET client_encoding TO " + encoding).data());
+    const string query = "SET client_encoding TO " + encoding;
+    ::PGresult* res = ::PQexec(static_cast<::PGconn*>(link_), query.data());
     if (res == nullptr) {
         return false;
     }
@@ -83,7 +85,7 @@ string_view pgsql_connect::get_character_set() const {
         return {};
     }
 
-    ::PGresult* res = ::PQexec(link_, "SHOW client_encoding");
+    ::PGresult* res = ::PQexec(static_cast<::PGconn*>(link_), "SHOW client_encoding");
     if (res == nullptr) {
         return {};
     }
@@ -104,7 +106,7 @@ bool pgsql_connect::update(const string& sql) const {
         return false;
     }
 
-    ::PGresult* res = ::PQexec(link_, sql.data());
+    ::PGresult* res = ::PQexec(static_cast<::PGconn*>(link_), sql.data());
     if (res == nullptr) {
         return false;
     }
@@ -114,14 +116,16 @@ bool pgsql_connect::update(const string& sql) const {
     return status == ::PGRES_COMMAND_OK;
 }
 
-bool pgsql_connect::connected() const { return link_ != nullptr && ::PQstatus(link_) == ::CONNECTION_OK; }
+bool pgsql_connect::connected() const {
+    return link_ != nullptr && ::PQstatus(static_cast<::PGconn*>(link_)) == ::CONNECTION_OK;
+}
 
 unique_ptr<idb_tb_result> pgsql_connect::query(const string& sql) const {
     if (link_ == nullptr) {
         return nullptr;
     }
 
-    ::PGresult* res = ::PQexec(link_, sql.data());
+    ::PGresult* res = ::PQexec(static_cast<::PGconn*>(link_), sql.data());
     if (res == nullptr) {
         return nullptr;
     }

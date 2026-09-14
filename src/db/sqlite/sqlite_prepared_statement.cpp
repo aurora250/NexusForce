@@ -1,32 +1,38 @@
 #include <NeForce/db/sqlite/sqlite_prepared_statement.hpp>
 #ifdef NEFORCE_SUPPORT_SQLITE3
+#    ifdef NEFORCE_SUPPORT_SQLCIPHER
+#        include <sqlcipher/sqlite3.h>
+#    else
+#        include <sqlite3.h>
+#    endif
 #    include <NeForce/db/sqlite/sqlite_result.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 void sqlite_prepared_statement::clear_bindings() {
     if (stmt_ != nullptr) {
-        ::sqlite3_clear_bindings(stmt_);
+        ::sqlite3_clear_bindings(static_cast<::sqlite3_stmt*>(stmt_));
     }
     param_buffers_.clear();
     param_buffers_.resize(param_count_);
 }
 
-sqlite_prepared_statement::sqlite_prepared_statement(::sqlite3* db, const string& sql) :
+sqlite_prepared_statement::sqlite_prepared_statement(void* db, const string& sql) :
 db_(db) {
     if (db_ == nullptr) {
         last_error_ = "Database connection is null";
         return;
     }
 
-    const int rc = ::sqlite3_prepare_v2(db_, sql.data(), static_cast<int>(sql.size()), &stmt_, nullptr);
+    const int rc = ::sqlite3_prepare_v2(static_cast<sqlite3*>(db_), sql.data(), static_cast<int>(sql.size()),
+                                        reinterpret_cast<::sqlite3_stmt**>(&stmt_), nullptr);
     if (rc != SQLITE_OK) {
-        last_error_ = ::sqlite3_errmsg(db_);
+        last_error_ = ::sqlite3_errmsg(static_cast<sqlite3*>(db_));
         stmt_ = nullptr;
         prepared_ = false;
         return;
     }
 
-    param_count_ = static_cast<uint32_t>(::sqlite3_bind_parameter_count(stmt_));
+    param_count_ = static_cast<uint32_t>(::sqlite3_bind_parameter_count(static_cast<::sqlite3_stmt*>(stmt_)));
     param_buffers_.resize(param_count_);
     prepared_ = true;
 }
@@ -52,7 +58,7 @@ sqlite_prepared_statement& sqlite_prepared_statement::operator=(sqlite_prepared_
     }
 
     if (stmt_ != nullptr) {
-        ::sqlite3_finalize(stmt_);
+        ::sqlite3_finalize(static_cast<::sqlite3_stmt*>(stmt_));
     }
     db_ = other.db_;
     stmt_ = other.stmt_;
@@ -73,7 +79,7 @@ sqlite_prepared_statement& sqlite_prepared_statement::operator=(sqlite_prepared_
 
 sqlite_prepared_statement::~sqlite_prepared_statement() {
     if (stmt_ != nullptr) {
-        ::sqlite3_finalize(stmt_);
+        ::sqlite3_finalize(static_cast<::sqlite3_stmt*>(stmt_));
         stmt_ = nullptr;
     }
 }
@@ -88,10 +94,10 @@ bool sqlite_prepared_statement::bind_param(const uint32_t index, const string_vi
         param_buffers_.resize(index);
     }
     param_buffers_[index - 1].assign(value.data(), value.data() + len);
-    const int rc = ::sqlite3_bind_text(stmt_, static_cast<int>(index), param_buffers_[index - 1].data(),
-                                       static_cast<int>(len), SQLITE_TRANSIENT);
+    const int rc = ::sqlite3_bind_text(static_cast<::sqlite3_stmt*>(stmt_), static_cast<int>(index),
+                                       param_buffers_[index - 1].data(), static_cast<int>(len), SQLITE_TRANSIENT);
     if (rc != SQLITE_OK) {
-        last_error_ = ::sqlite3_errmsg(db_);
+        last_error_ = ::sqlite3_errmsg(static_cast<sqlite3*>(db_));
         return false;
     }
     return true;
@@ -102,9 +108,9 @@ bool sqlite_prepared_statement::bind_param(const uint32_t index, const int32_t v
         last_error_ = "Invalid parameter index or statement not prepared";
         return false;
     }
-    const int rc = ::sqlite3_bind_int(stmt_, static_cast<int>(index), value);
+    const int rc = ::sqlite3_bind_int(static_cast<::sqlite3_stmt*>(stmt_), static_cast<int>(index), value);
     if (rc != SQLITE_OK) {
-        last_error_ = ::sqlite3_errmsg(db_);
+        last_error_ = ::sqlite3_errmsg(static_cast<sqlite3*>(db_));
         return false;
     }
     return true;
@@ -115,9 +121,9 @@ bool sqlite_prepared_statement::bind_param(const uint32_t index, const int64_t v
         last_error_ = "Invalid parameter index or statement not prepared";
         return false;
     }
-    const int rc = ::sqlite3_bind_int64(stmt_, static_cast<int>(index), value);
+    const int rc = ::sqlite3_bind_int64(static_cast<::sqlite3_stmt*>(stmt_), static_cast<int>(index), value);
     if (rc != SQLITE_OK) {
-        last_error_ = ::sqlite3_errmsg(db_);
+        last_error_ = ::sqlite3_errmsg(static_cast<sqlite3*>(db_));
         return false;
     }
     return true;
@@ -128,9 +134,9 @@ bool sqlite_prepared_statement::bind_param(const uint32_t index, const float64_t
         last_error_ = "Invalid parameter index or statement not prepared";
         return false;
     }
-    const int rc = ::sqlite3_bind_double(stmt_, static_cast<int>(index), value);
+    const int rc = ::sqlite3_bind_double(static_cast<::sqlite3_stmt*>(stmt_), static_cast<int>(index), value);
     if (rc != SQLITE_OK) {
-        last_error_ = ::sqlite3_errmsg(db_);
+        last_error_ = ::sqlite3_errmsg(static_cast<sqlite3*>(db_));
         return false;
     }
     return true;
@@ -146,10 +152,11 @@ bool sqlite_prepared_statement::bind_param(const uint32_t index, const cbyte_vie
     }
     param_buffers_[index - 1].resize(value.size());
     memory_copy(param_buffers_[index - 1].data(), value.data(), value.size());
-    const int rc = ::sqlite3_bind_blob(stmt_, static_cast<int>(index), param_buffers_[index - 1].data(),
-                                       static_cast<int>(value.size()), SQLITE_TRANSIENT);
+    const int rc =
+            ::sqlite3_bind_blob(static_cast<::sqlite3_stmt*>(stmt_), static_cast<int>(index),
+                                param_buffers_[index - 1].data(), static_cast<int>(value.size()), SQLITE_TRANSIENT);
     if (rc != SQLITE_OK) {
-        last_error_ = ::sqlite3_errmsg(db_);
+        last_error_ = ::sqlite3_errmsg(static_cast<sqlite3*>(db_));
         return false;
     }
     return true;
@@ -160,13 +167,13 @@ bool sqlite_prepared_statement::execute() {
         last_error_ = "Statement not prepared";
         return false;
     }
-    const int rc = ::sqlite3_step(stmt_);
+    const int rc = ::sqlite3_step(static_cast<::sqlite3_stmt*>(stmt_));
     if (rc != SQLITE_DONE) {
-        last_error_ = ::sqlite3_errmsg(db_);
-        ::sqlite3_reset(stmt_);
+        last_error_ = ::sqlite3_errmsg(static_cast<sqlite3*>(db_));
+        ::sqlite3_reset(static_cast<::sqlite3_stmt*>(stmt_));
         return false;
     }
-    ::sqlite3_reset(stmt_);
+    ::sqlite3_reset(static_cast<::sqlite3_stmt*>(stmt_));
     clear_bindings();
     return true;
 }
@@ -176,8 +183,12 @@ unique_ptr<idb_tb_result> sqlite_prepared_statement::execute_query() {
         last_error_ = "Statement not prepared";
         return nullptr;
     }
-    ::sqlite3_reset(stmt_);
-    return make_unique<sqlite_result>(stmt_, sqlite_cleanup_action::reset);
+    ::sqlite3_reset(static_cast<::sqlite3_stmt*>(stmt_));
+    return make_unique<sqlite_result>(stmt_, sqlite_cleanup::reset);
+}
+
+uint32_t sqlite_prepared_statement::get_errno() const noexcept {
+    return db_ != nullptr ? ::sqlite3_errcode(static_cast<sqlite3*>(db_)) : 0;
 }
 
 NEFORCE_END_NAMESPACE__

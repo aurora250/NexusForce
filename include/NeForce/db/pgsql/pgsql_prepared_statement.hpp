@@ -9,7 +9,6 @@
  */
 
 #ifdef NEFORCE_SUPPORT_POSTGRESQL
-#    include <libpq-fe.h>
 #    include "NeForce/db/db_interface.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -50,7 +49,7 @@ private:
         vector<int> param_formats;      ///< 参数格式数组（0=文本，1=二进制）
     };
 
-    ::PGconn* conn_ = nullptr;                                ///< PostgreSQL连接句柄
+    void* conn_ = nullptr;                                    ///< PostgreSQL连接句柄
     string stmt_name_;                                        ///< 预处理语句名称
     string sql_;                                              ///< 原始SQL语句
     uint32_t param_count_ = 0;                                ///< 参数数量
@@ -70,7 +69,7 @@ public:
      * 解析SQL语句获取参数数量，创建服务器端预处理语句。
      * 自动生成唯一的语句名称。
      */
-    pgsql_prepared_statement(PGconn* conn, string sql);
+    pgsql_prepared_statement(void* conn, string sql);
 
     /**
      * @brief 析构函数

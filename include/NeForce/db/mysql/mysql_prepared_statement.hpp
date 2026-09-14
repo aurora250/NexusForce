@@ -9,7 +9,6 @@
  */
 
 #ifdef NEFORCE_SUPPORT_MYSQL
-#    include <mysql/mysql.h>
 #    include "NeForce/db/db_interface.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -42,11 +41,11 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API mysql_prepared_statement final : public idb_prepared_statement {
 private:
-    ::MYSQL_STMT* stmt_ = nullptr; ///< MySQL预处理语句句柄
-    ::MYSQL* conn_ = nullptr;      ///< MySQL连接句柄
-    uint32_t param_count_ = 0;     ///< 参数数量
+    void* stmt_ = nullptr;     ///< MySQL预处理语句句柄
+    void* conn_ = nullptr;     ///< MySQL连接句柄
+    uint32_t param_count_ = 0; ///< 参数数量
 
-    vector<::MYSQL_BIND> bind_params_;   ///< 参数绑定数组
+    vector<char> bind_params_;           ///< 参数绑定数组
     vector<vector<char>> param_buffers_; ///< 参数数据缓冲区
 
 public:
@@ -58,7 +57,7 @@ public:
      *
      * 初始化预处理语句，获取参数数量。
      */
-    mysql_prepared_statement(::MYSQL* conn, string_view sql);
+    mysql_prepared_statement(void* conn, string_view sql);
 
     /**
      * @brief 移动构造函数

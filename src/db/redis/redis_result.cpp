@@ -1,5 +1,6 @@
 #include <NeForce/db/redis/redis_result.hpp>
 #ifdef NEFORCE_SUPPORT_HIREDIS
+#    include <hiredis/hiredis.h>
 #    include <NeForce/core/utility/packages.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -41,17 +42,17 @@ string redis_result::get_string() const {
         return {value()};
     }
     if (is_array_ && cursor_ > 0) {
-        ::redisReply* element = result_->element[cursor_ - 1];
+        ::redisReply* element = static_cast<::redisReply*>(result_)->element[cursor_ - 1];
         return format_redis_reply_element(element);
     }
-    return format_redis_reply_element(result_);
+    return format_redis_reply_element(static_cast<::redisReply*>(result_));
 }
 
 redis_result::redis_result() :
 column_names_(make_unique<vector<string>>()),
 kv_pairs_(make_unique<vector<pair<string, string>>>()) {}
 
-redis_result::redis_result(::redisReply* reply) :
+redis_result::redis_result(void* reply) :
 result_(reply),
 column_names_(make_unique<vector<string>>()),
 kv_pairs_(make_unique<vector<pair<string, string>>>()) {
@@ -59,15 +60,16 @@ kv_pairs_(make_unique<vector<pair<string, string>>>()) {
         return;
     }
 
-    switch (result_->type) {
+    switch (static_cast<::redisReply*>(result_)->type) {
         case REDIS_REPLY_ARRAY: {
             is_array_ = true;
-            rows_ = result_->elements;
+            rows_ = static_cast<::redisReply*>(result_)->elements;
 
             if (rows_ % 2 == 0) {
                 for (size_t i = 0; i < rows_; i += 2) {
-                    const string key = format_redis_reply_element(result_->element[i]);
-                    const string value = format_redis_reply_element(result_->element[i + 1]);
+                    const string key = format_redis_reply_element(static_cast<::redisReply*>(result_)->element[i]);
+                    const string value =
+                            format_redis_reply_element(static_cast<::redisReply*>(result_)->element[i + 1]);
                     kv_pairs_->emplace_back(move(key), move(value));
                 }
                 rows_ = kv_pairs_->size();
@@ -82,7 +84,7 @@ kv_pairs_(make_unique<vector<pair<string, string>>>()) {
         case REDIS_REPLY_INTEGER: {
             rows_ = 1;
             column_names_->push_back("result");
-            string value = format_redis_reply_element(result_);
+            string value = format_redis_reply_element(static_cast<::redisReply*>(result_));
             kv_pairs_->emplace_back("", move(value));
             break;
         }
@@ -133,8 +135,8 @@ int64_t redis_result::value_int64() const {
     if (result_ == nullptr) {
         return 0;
     }
-    if (result_->type == REDIS_REPLY_INTEGER) {
-        return result_->integer;
+    if (static_cast<::redisReply*>(result_)->type == REDIS_REPLY_INTEGER) {
+        return static_cast<::redisReply*>(result_)->integer;
     }
     return integer64::parse(get_string().view()).value();
 }
@@ -143,13 +145,19 @@ double redis_result::value_double() const { return float64::parse(get_string().v
 
 vector<string> redis_result::value_array() const {
     vector<string> result;
-    if (result_ != nullptr && result_->type == REDIS_REPLY_ARRAY) {
-        for (size_t i = 0; i < result_->elements; ++i) {
-            string value = format_redis_reply_element(result_->element[i]);
+    if (result_ != nullptr && static_cast<::redisReply*>(result_)->type == REDIS_REPLY_ARRAY) {
+        for (size_t i = 0; i < static_cast<::redisReply*>(result_)->elements; ++i) {
+            string value = format_redis_reply_element(static_cast<::redisReply*>(result_)->element[i]);
             result.push_back(move(value));
         }
     }
     return result;
+}
+
+int redis_result::type() const noexcept { return result_ != nullptr ? static_cast<::redisReply*>(result_)->type : -1; }
+
+bool redis_result::is_nil() const noexcept {
+    return result_ != nullptr && static_cast<::redisReply*>(result_)->type == REDIS_REPLY_NIL;
 }
 
 NEFORCE_END_NAMESPACE__

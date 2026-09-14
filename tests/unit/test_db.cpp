@@ -1575,7 +1575,7 @@ TEST_F(MysqlConnectTest, GetCharacterSetBeforeConnectReturnsNonNull) {
 }
 
 TEST_F(MysqlConnectTest, SetOptionsBeforeConnectReturnsTrue) {
-    EXPECT_TRUE(conn.set_options(MYSQL_OPT_CONNECT_TIMEOUT, "10"));
+    EXPECT_TRUE(conn.set_options(mysql_option::connect_timeout, "10"));
 }
 
 TEST_F(MysqlConnectTest, IsValidWithoutConnectReturnsFalse) { EXPECT_FALSE(conn.is_valid()); }
@@ -1650,12 +1650,12 @@ TEST_F(PgsqlConnectTest, SetCharacterSetBeforeConnectReturnsFalse) { EXPECT_FALS
 class PgsqlResultTest : public ::testing::Test {};
 
 TEST_F(PgsqlResultTest, NullResultIsEmpty) {
-    pgsql_tb_result result{static_cast<::PGresult*>(nullptr), true};
+    pgsql_tb_result result{nullptr, true};
     EXPECT_TRUE(result.empty());
 }
 
 TEST_F(PgsqlResultTest, NullResultHasZeroRows) {
-    pgsql_tb_result result{static_cast<::PGresult*>(nullptr), true};
+    pgsql_tb_result result{nullptr, true};
     EXPECT_EQ(result.row_count(), 0);
     EXPECT_EQ(result.column_count(), 0);
 }
@@ -1770,7 +1770,7 @@ TEST_F(RedisResultTest, DefaultConstructorIsNotNil) {
 }
 
 TEST_F(RedisResultTest, NullReplyIsEmpty) {
-    redis_result result{static_cast<::redisReply*>(nullptr)};
+    redis_result result{nullptr};
     EXPECT_TRUE(result.empty());
 }
 

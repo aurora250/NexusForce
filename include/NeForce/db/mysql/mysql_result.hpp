@@ -9,8 +9,8 @@
  */
 
 #ifdef NEFORCE_SUPPORT_MYSQL
-#    include <mysql/mysql.h>
 #    include "NeForce/db/db_interface.hpp"
+#    include "NeForce/db/mysql/mysql_util.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -39,13 +39,13 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 struct NEFORCE_API mysql_result final : idb_tb_result {
 private:
-    ::MYSQL_RES* result_ = nullptr; ///< MySQL结果集句柄
-    ::MYSQL_ROW cursor_ = nullptr;  ///< 当前行指针
-    size_type rows_ = 0;            ///< 总行数
-    size_type columns_ = 0;         ///< 总列数
+    void* result_ = nullptr;  ///< MySQL结果集句柄
+    char** cursor_ = nullptr; ///< 当前行指针
+    size_type rows_ = 0;      ///< 总行数
+    size_type columns_ = 0;   ///< 总列数
 
-    unique_ptr<vector<string_view>> column_name_;         ///< 列名列表
-    unique_ptr<vector<::enum_field_types>> column_types_; ///< 列类型列表
+    unique_ptr<vector<string_view>> column_name_;        ///< 列名列表
+    unique_ptr<vector<mysql_column_type>> column_types_; ///< 列类型列表
 
 public:
     /**
@@ -61,7 +61,7 @@ public:
      *
      * 获取结果集元数据。
      */
-    explicit mysql_result(::MYSQL_RES* result);
+    explicit mysql_result(void* result);
 
     /**
      * @brief 析构函数
@@ -100,7 +100,7 @@ public:
      * @brief 获取列类型列表
      * @return MySQL字段类型列表
      */
-    NEFORCE_NODISCARD const vector<::enum_field_types>& column_types() const noexcept { return *column_types_; }
+    NEFORCE_NODISCARD const vector<mysql_column_type>& column_types() const noexcept { return *column_types_; }
 
     /**
      * @brief 移动到下一行

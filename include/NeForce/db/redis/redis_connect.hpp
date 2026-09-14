@@ -9,7 +9,6 @@
  */
 
 #ifdef NEFORCE_SUPPORT_HIREDIS
-#    include <hiredis/hiredis.h>
 #    include "NeForce/db/db_interface.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -42,11 +41,11 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 struct NEFORCE_API redis_connect final : idb_kv_connect {
 private:
-    ::redisContext* link_ = nullptr;  ///< Redis连接上下文
+    void* link_ = nullptr;            ///< Redis连接上下文
     mutable string last_error_;       ///< 最后错误信息
     mutable uint32_t last_errno_ = 0; ///< 最后错误码
 
-    ::redisReply* execute_command(string_view command, const vector<string_view>& args) const;
+    void* execute_command(string_view command, const vector<string_view>& args) const;
     bool authenticate(const string& password) const;
     bool select_database(const string& db_index) const;
 
@@ -128,7 +127,7 @@ public:
      * @brief 检查连接是否已建立
      * @return 已连接返回true
      */
-    bool connected() const noexcept override { return link_ != nullptr && link_->err == 0; }
+    bool connected() const noexcept override;
 
     /**
      * @brief 检查连接是否有效

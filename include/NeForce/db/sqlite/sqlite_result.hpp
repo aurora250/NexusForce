@@ -9,11 +9,6 @@
  */
 
 #ifdef NEFORCE_SUPPORT_SQLITE3
-#    ifdef NEFORCE_SUPPORT_SQLCIPHER
-#        include <sqlcipher/sqlite3.h>
-#    else
-#        include <sqlite3.h>
-#    endif
 #    include "NeForce/db/db_interface.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -32,9 +27,9 @@ NEFORCE_BEGIN_NAMESPACE__
 /**
  * @brief SQLite语句清理方式
  */
-enum class sqlite_cleanup_action : uint8_t {
-    finalize, ///< 调用sqlite3_finalize释放语句（用于普通查询）
-    reset     ///< 调用sqlite3_reset重置语句（用于预处理语句复用）
+enum class sqlite_cleanup : uint8_t {
+    finalize, ///< 释放语句
+    reset     ///< 重置语句
 };
 
 /**
@@ -49,16 +44,14 @@ enum class sqlite_cleanup_action : uint8_t {
  * - 逐行遍历结果集
  * - 支持多种数据类型转换
  * - NULL值处理
- * - 自动语句资源管理（finalize或reset）
- *
- * @note 普通查询使用finalize模式（默认），预处理语句查询使用reset模式以允许语句复用。
+ * - 自动语句资源管理
  */
 struct NEFORCE_API sqlite_result final : idb_tb_result {
 private:
-    ::sqlite3_stmt* stmt_ = nullptr;                                  ///< SQLite预处理语句句柄
-    sqlite_cleanup_action cleanup_ = sqlite_cleanup_action::finalize; ///< 清理方式
-    size_type cursor_ = 0;                                            ///< 当前行索引
-    size_type columns_ = 0;                                           ///< 总列数
+    void* stmt_ = nullptr;                              ///< SQLite预处理语句句柄
+    sqlite_cleanup cleanup_ = sqlite_cleanup::finalize; ///< 清理方式
+    size_type cursor_ = 0;                              ///< 当前行索引
+    size_type columns_ = 0;                             ///< 总列数
 
     unique_ptr<vector<string_view>> column_names_; ///< 列名列表
     unique_ptr<vector<int>> column_types_;         ///< 列类型列表
@@ -78,28 +71,24 @@ public:
      * 获取结果集的列数、列名和列类型信息。
      * 默认使用finalize清理方式。
      */
-    explicit sqlite_result(::sqlite3_stmt* statement);
+    explicit sqlite_result(void* statement);
 
     /**
-     * @brief 构造函数（带清理方式）
+     * @brief 构造函数
      * @param statement SQLite预处理语句句柄
-     * @param cleanup 清理方式（finalize或reset）
-     *
-     * 预处理语句查询应使用reset方式，以允许语句复用。
+     * @param cleanup 清理方式
      */
-    sqlite_result(::sqlite3_stmt* statement, sqlite_cleanup_action cleanup);
+    sqlite_result(void* statement, sqlite_cleanup cleanup);
 
     /**
      * @brief 析构函数
-     *
-     * 根据cleanup_标志调用sqlite3_finalize或sqlite3_reset。
      */
     ~sqlite_result() override;
 
     /**
      * @brief 获取结果集行数
      * @return 始终返回0
-     * @deprecated SQLite无法高效获取行数，建议使用COUNT(*)
+     * @deprecated 建议使用COUNT(*)
      */
     NEFORCE_NODISCARD NEFORCE_DEPRECATED_FOR("use COUNT(*) instead of using this function") size_type
             row_count() const noexcept override {

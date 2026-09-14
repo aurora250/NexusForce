@@ -9,13 +9,6 @@
  */
 
 #ifdef NEFORCE_SUPPORT_SQLITE3
-#    ifdef NEFORCE_SUPPORT_SQLCIPHER
-#        include <sqlcipher/sqlite3.h>
-
-#        include <utility>
-#    else
-#        include <sqlite3.h>
-#    endif
 #    include "NeForce/db/sql_connect_base.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -44,13 +37,9 @@ NEFORCE_BEGIN_NAMESPACE__
  * - 查询结果获取
  * - 预处理语句支持
  * - 连接健康检查
- *
- * @note SQLite连接是文件级别的，database字段指定数据库文件路径。
- *       支持内存数据库（":memory:"）。
  */
 struct NEFORCE_API sqlite_connect final : sql_connect_base<sqlite_connect> {
 public:
-#    ifdef NEFORCE_SUPPORT_SQLCIPHER
     /**
      * @enum key_type
      * @brief SQLCipher 加密密钥类型
@@ -64,10 +53,9 @@ public:
         PBKDF2, ///< 口令派生
         RAW     ///< 原始密钥
     };
-#    endif
 
 protected:
-    ::sqlite3* link_ = nullptr; ///< SQLite数据库连接句柄
+    void* link_ = nullptr; ///< SQLite数据库连接句柄
     friend sql_connect_base<sqlite_connect>;
 
 private:
@@ -78,16 +66,16 @@ public:
     /**
      * @brief 默认构造函数
      *
-     * 创建内存数据库连接（临时数据库）。
+     * 创建内存数据库连接。
      */
-    sqlite_connect() noexcept { ::sqlite3_open(nullptr, &link_); }
+    sqlite_connect() noexcept;
 
     /**
      * @brief 析构函数
      *
      * 自动关闭数据库连接。
      */
-    ~sqlite_connect() noexcept override { this->close(); }
+    ~sqlite_connect() noexcept override;
 
     /**
      * @brief 建立数据库连接
@@ -103,8 +91,6 @@ public:
      * @brief 重新连接数据库
      * @param config 连接配置
      * @return 重连成功返回true
-     *
-     * 关闭当前连接，使用新配置重新连接。
      */
     NEFORCE_NODISCARD bool reconnect(const db_config& config) override;
 
@@ -128,8 +114,6 @@ public:
      * @param encryption_key 加密密钥
      * @param type 密钥类型
      * @return 重连成功返回true
-     *
-     * 关闭当前连接，使用新配置重新连接。
      */
     NEFORCE_NODISCARD bool reconnect(const db_config& config, const string& encryption_key,
                                      key_type type = key_type::PBKDF2);
@@ -248,7 +232,7 @@ public:
      * @brief 构造函数
      * @param config 数据库配置
      * @param encryption_key 加密密钥
-     * @param type 密钥类型：PBKDF2=口令派生, RAW=原始密钥字节
+     * @param type 密钥类型
      */
     explicit sqlite_factory(db_config config, string encryption_key,
                             sqlite_connect::key_type type = sqlite_connect::key_type::PBKDF2) :

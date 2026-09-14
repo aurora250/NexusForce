@@ -1,44 +1,49 @@
 #include <NeForce/db/sqlite/sqlite_result.hpp>
 #ifdef NEFORCE_SUPPORT_SQLITE3
+#    ifdef NEFORCE_SUPPORT_SQLCIPHER
+#        include <sqlcipher/sqlite3.h>
+#    else
+#        include <sqlite3.h>
+#    endif
 NEFORCE_BEGIN_NAMESPACE__
 
 sqlite_result::sqlite_result() :
 column_names_(make_unique<vector<string_view>>()),
 column_types_(make_unique<vector<int>>()) {}
 
-sqlite_result::sqlite_result(::sqlite3_stmt* statement) :
+sqlite_result::sqlite_result(void* statement) :
 stmt_(statement),
 column_names_(make_unique<vector<string_view>>()),
 column_types_(make_unique<vector<int>>()) {
     if (stmt_ != nullptr) {
-        columns_ = ::sqlite3_column_count(stmt_);
+        columns_ = ::sqlite3_column_count(static_cast<::sqlite3_stmt*>(stmt_));
         for (size_type i = 0; i < columns_; ++i) {
-            column_names_->push_back(::sqlite3_column_name(stmt_, static_cast<int>(i)));
-            column_types_->push_back(::sqlite3_column_type(stmt_, static_cast<int>(i)));
+            column_names_->push_back(::sqlite3_column_name(static_cast<::sqlite3_stmt*>(stmt_), static_cast<int>(i)));
+            column_types_->push_back(::sqlite3_column_type(static_cast<::sqlite3_stmt*>(stmt_), static_cast<int>(i)));
         }
     }
 }
 
-sqlite_result::sqlite_result(::sqlite3_stmt* statement, const sqlite_cleanup_action cleanup) :
+sqlite_result::sqlite_result(void* statement, const sqlite_cleanup cleanup) :
 stmt_(statement),
 cleanup_(cleanup),
 column_names_(make_unique<vector<string_view>>()),
 column_types_(make_unique<vector<int>>()) {
     if (stmt_ != nullptr) {
-        columns_ = ::sqlite3_column_count(stmt_);
+        columns_ = ::sqlite3_column_count(static_cast<::sqlite3_stmt*>(stmt_));
         for (size_type i = 0; i < columns_; ++i) {
-            column_names_->push_back(::sqlite3_column_name(stmt_, static_cast<int>(i)));
-            column_types_->push_back(::sqlite3_column_type(stmt_, static_cast<int>(i)));
+            column_names_->push_back(::sqlite3_column_name(static_cast<::sqlite3_stmt*>(stmt_), static_cast<int>(i)));
+            column_types_->push_back(::sqlite3_column_type(static_cast<::sqlite3_stmt*>(stmt_), static_cast<int>(i)));
         }
     }
 }
 
 sqlite_result::~sqlite_result() {
     if (stmt_ != nullptr) {
-        if (cleanup_ == sqlite_cleanup_action::finalize) {
-            ::sqlite3_finalize(stmt_);
+        if (cleanup_ == sqlite_cleanup::finalize) {
+            ::sqlite3_finalize(static_cast<::sqlite3_stmt*>(stmt_));
         } else {
-            ::sqlite3_reset(stmt_);
+            ::sqlite3_reset(static_cast<::sqlite3_stmt*>(stmt_));
         }
     }
 }
@@ -47,56 +52,57 @@ bool sqlite_result::next() noexcept {
     if (empty()) {
         return false;
     }
-    return ::sqlite3_step(stmt_) == SQLITE_ROW && (++cursor_) != 0U;
+    return ::sqlite3_step(static_cast<::sqlite3_stmt*>(stmt_)) == SQLITE_ROW && (++cursor_) != 0U;
 }
 
 string_view sqlite_result::get(const size_type n) const noexcept {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
-    const auto* text = reinterpret_cast<const char*>(::sqlite3_column_text(stmt_, static_cast<int>(n)));
+    const auto* text = reinterpret_cast<const char*>(
+            ::sqlite3_column_text(static_cast<::sqlite3_stmt*>(stmt_), static_cast<int>(n)));
     return text != nullptr ? string_view{text} : ""_sv;
 }
 
 bool sqlite_result::get_bool(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
-    return ::sqlite3_column_int(stmt_, static_cast<int>(n)) != 0;
+    return ::sqlite3_column_int(static_cast<::sqlite3_stmt*>(stmt_), static_cast<int>(n)) != 0;
 }
 
 int16_t sqlite_result::get_int16(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
-    return static_cast<int16_t>(::sqlite3_column_int(stmt_, static_cast<int>(n)));
+    return static_cast<int16_t>(::sqlite3_column_int(static_cast<::sqlite3_stmt*>(stmt_), static_cast<int>(n)));
 }
 
 int32_t sqlite_result::get_int32(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
-    return ::sqlite3_column_int(stmt_, static_cast<int>(n));
+    return ::sqlite3_column_int(static_cast<::sqlite3_stmt*>(stmt_), static_cast<int>(n));
 }
 
 int64_t sqlite_result::get_int64(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
-    return ::sqlite3_column_int64(stmt_, static_cast<int>(n));
+    return ::sqlite3_column_int64(static_cast<::sqlite3_stmt*>(stmt_), static_cast<int>(n));
 }
 
 float32_t sqlite_result::get_float32(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
-    return static_cast<float32_t>(::sqlite3_column_double(stmt_, static_cast<int>(n)));
+    return static_cast<float32_t>(::sqlite3_column_double(static_cast<::sqlite3_stmt*>(stmt_), static_cast<int>(n)));
 }
 
 float64_t sqlite_result::get_float64(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
-    return static_cast<float64_t>(::sqlite3_column_double(stmt_, static_cast<int>(n)));
+    return static_cast<float64_t>(::sqlite3_column_double(static_cast<::sqlite3_stmt*>(stmt_), static_cast<int>(n)));
 }
 
 decimal_t sqlite_result::get_decimal(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
-    return static_cast<decimal_t>(::sqlite3_column_double(stmt_, static_cast<int>(n)));
+    return static_cast<decimal_t>(::sqlite3_column_double(static_cast<::sqlite3_stmt*>(stmt_), static_cast<int>(n)));
 }
 
 vector<char> sqlite_result::get_blob(const size_type n) const {
@@ -120,7 +126,8 @@ uint64_t sqlite_result::get_bit(const size_type n) const noexcept {
 datetime sqlite_result::get_datetime(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
-    const auto* text = reinterpret_cast<const char*>(::sqlite3_column_text(stmt_, static_cast<int>(n)));
+    const auto* text = reinterpret_cast<const char*>(
+            ::sqlite3_column_text(static_cast<::sqlite3_stmt*>(stmt_), static_cast<int>(n)));
     if (text != nullptr) {
         return datetime::parse(text);
     }
@@ -130,7 +137,8 @@ datetime sqlite_result::get_datetime(const size_type n) const {
 timestamp sqlite_result::get_timestamp(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
-    return timestamp{static_cast<long>(::sqlite3_column_int64(stmt_, static_cast<int>(n)))};
+    return timestamp{
+            static_cast<long>(::sqlite3_column_int64(static_cast<::sqlite3_stmt*>(stmt_), static_cast<int>(n)))};
 }
 
 column_meta sqlite_result::column_metadata(const size_type n) const {

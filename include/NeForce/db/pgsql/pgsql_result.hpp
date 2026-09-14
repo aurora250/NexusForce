@@ -9,7 +9,6 @@
  */
 
 #ifdef NEFORCE_SUPPORT_POSTGRESQL
-#    include <libpq-fe.h>
 #    include "NeForce/db/db_interface.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -40,7 +39,7 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API pgsql_tb_result final : public idb_tb_result {
 private:
-    ::PGresult* result_ = nullptr;                      ///< PostgreSQL结果集句柄
+    void* result_ = nullptr;                            ///< PostgreSQL结果集句柄
     size_type current_row_{static_cast<size_type>(-1)}; ///< 当前行索引
     size_type row_count_ = 0;                           ///< 总行数
     size_type column_count_ = 0;                        ///< 总列数
@@ -55,7 +54,7 @@ public:
      *
      * 获取结果集的行数和列数信息。
      */
-    explicit pgsql_tb_result(::PGresult* result, bool owns = true);
+    explicit pgsql_tb_result(void* result, bool owns = true);
 
     /**
      * @brief 析构函数

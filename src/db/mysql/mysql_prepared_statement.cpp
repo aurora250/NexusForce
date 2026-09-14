@@ -1,10 +1,11 @@
 #include <NeForce/db/mysql/mysql_prepared_statement.hpp>
 #ifdef NEFORCE_SUPPORT_MYSQL
+#    include <mysql/mysql.h>
 #    include <NeForce/db/mysql/mysql_prepared_result.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
-    void throw_if_stmt_null(const ::MYSQL_STMT* ptr_) {
+    void throw_if_stmt_null(const void* ptr_) {
         if (ptr_ != nullptr) {
             return;
         }
@@ -13,34 +14,34 @@ namespace {
 } // namespace
 
 
-mysql_prepared_statement::mysql_prepared_statement(::MYSQL* conn, const string_view sql) :
+mysql_prepared_statement::mysql_prepared_statement(void* conn, const string_view sql) :
 conn_(conn) {
     if (conn_ == nullptr) {
         NEFORCE_THROW_EXCEPTION(database_stmt_exception("Invalid MySQL connection pointer"));
     }
-    stmt_ = ::mysql_stmt_init(conn_);
+    stmt_ = ::mysql_stmt_init(static_cast<::MYSQL*>(conn_));
     if (stmt_ == nullptr) {
         NEFORCE_THROW_EXCEPTION(database_stmt_exception("mysql_stmt_init failed"));
     }
 
-    if (::mysql_stmt_prepare(stmt_, sql.data(), sql.size()) != 0) {
-        const string_view err = ::mysql_stmt_error(stmt_);
-        ::mysql_stmt_close(stmt_);
+    if (::mysql_stmt_prepare(static_cast<::MYSQL_STMT*>(stmt_), sql.data(), sql.size()) != 0) {
+        const string_view err = ::mysql_stmt_error(static_cast<::MYSQL_STMT*>(stmt_));
+        ::mysql_stmt_close(static_cast<::MYSQL_STMT*>(stmt_));
         stmt_ = nullptr;
         NEFORCE_THROW_EXCEPTION(database_stmt_exception(err.data()));
     }
 
-    param_count_ = ::mysql_stmt_param_count(stmt_);
-    bind_params_.resize(param_count_);
+    param_count_ = ::mysql_stmt_param_count(static_cast<::MYSQL_STMT*>(stmt_));
+    bind_params_.resize(param_count_ * sizeof(::MYSQL_BIND));
     param_buffers_.resize(param_count_);
     for (unsigned int i = 0; i < param_count_; ++i) {
-        memory_zero(&bind_params_[i]);
+        memory_zero(&bind_params_[i * sizeof(::MYSQL_BIND)], sizeof(::MYSQL_BIND));
     }
 }
 
 mysql_prepared_statement::~mysql_prepared_statement() {
     if (stmt_ != nullptr) {
-        ::mysql_stmt_close(stmt_);
+        ::mysql_stmt_close(static_cast<::MYSQL_STMT*>(stmt_));
         stmt_ = nullptr;
     }
 }
@@ -62,7 +63,7 @@ mysql_prepared_statement& mysql_prepared_statement::operator=(mysql_prepared_sta
     }
 
     if (stmt_ != nullptr) {
-        ::mysql_stmt_close(stmt_);
+        ::mysql_stmt_close(static_cast<::MYSQL_STMT*>(stmt_));
     }
     stmt_ = other.stmt_;
     conn_ = other.conn_;
@@ -86,13 +87,14 @@ bool mysql_prepared_statement::bind_param(const uint32_t index, const string_vie
         buffer.assign(value.begin(), value.end());
         buffer.push_back('\0');
 
-        ::MYSQL_BIND& bind = bind_params_[index];
-        memory_zero(&bind);
+        ::MYSQL_BIND bind;
+        memory_zero(&bind, sizeof(::MYSQL_BIND));
         bind.buffer_type = ::MYSQL_TYPE_STRING;
         bind.buffer = buffer.data();
         bind.buffer_length = buffer.size();
         bind.length = nullptr;
         bind.is_null = nullptr;
+        memory_copy(&bind_params_[index * sizeof(::MYSQL_BIND)], reinterpret_cast<char*>(&bind));
         return true;
     } catch (...) {
         return false;
@@ -110,11 +112,12 @@ bool mysql_prepared_statement::bind_param(const uint32_t index, const int32_t va
         buffer.resize(sizeof(int32_t));
         memory_copy(buffer.data(), &value, sizeof(int32_t));
 
-        ::MYSQL_BIND& bind = bind_params_[index];
-        memory_zero(&bind);
+        ::MYSQL_BIND bind;
+        memory_zero(&bind, sizeof(::MYSQL_BIND));
         bind.buffer_type = ::MYSQL_TYPE_LONG;
         bind.buffer = buffer.data();
         bind.is_unsigned = false;
+        memory_copy(&bind_params_[index * sizeof(::MYSQL_BIND)], reinterpret_cast<char*>(&bind));
         return true;
     } catch (...) {
         return false;
@@ -132,11 +135,12 @@ bool mysql_prepared_statement::bind_param(const uint32_t index, const int64_t va
         buffer.resize(sizeof(int64_t));
         memory_copy(buffer.data(), &value, sizeof(int64_t));
 
-        ::MYSQL_BIND& bind = bind_params_[index];
-        memory_zero(&bind);
+        ::MYSQL_BIND bind;
+        memory_zero(&bind, sizeof(::MYSQL_BIND));
         bind.buffer_type = ::MYSQL_TYPE_LONGLONG;
         bind.buffer = buffer.data();
         bind.is_unsigned = false;
+        memory_copy(&bind_params_[index * sizeof(::MYSQL_BIND)], reinterpret_cast<char*>(&bind));
         return true;
     } catch (...) {
         return false;
@@ -154,10 +158,11 @@ bool mysql_prepared_statement::bind_param(const uint32_t index, const float64_t 
         buffer.resize(sizeof(float64_t));
         memory_copy(buffer.data(), &value, sizeof(float64_t));
 
-        ::MYSQL_BIND& bind = bind_params_[index];
-        memory_zero(&bind);
+        ::MYSQL_BIND bind;
+        memory_zero(&bind, sizeof(::MYSQL_BIND));
         bind.buffer_type = ::MYSQL_TYPE_DOUBLE;
         bind.buffer = buffer.data();
+        memory_copy(&bind_params_[index * sizeof(::MYSQL_BIND)], reinterpret_cast<char*>(&bind));
         return true;
     } catch (...) {
         return false;
@@ -175,11 +180,12 @@ bool mysql_prepared_statement::bind_param(const uint32_t index, const cbyte_view
         buffer.resize(value.size());
         memory_copy(buffer.data(), value.data(), value.size());
 
-        ::MYSQL_BIND& bind = bind_params_[index];
-        memory_zero(&bind);
+        ::MYSQL_BIND bind;
+        memory_zero(&bind, sizeof(::MYSQL_BIND));
         bind.buffer_type = ::MYSQL_TYPE_BLOB;
         bind.buffer = buffer.data();
         bind.buffer_length = value.size();
+        memory_copy(&bind_params_[index * sizeof(::MYSQL_BIND)], reinterpret_cast<char*>(&bind));
         return true;
     } catch (...) {
         return false;
@@ -189,21 +195,23 @@ bool mysql_prepared_statement::bind_param(const uint32_t index, const cbyte_view
 bool mysql_prepared_statement::execute() {
     throw_if_stmt_null(stmt_);
     if (param_count_ > 0) {
-        if (::mysql_stmt_bind_param(stmt_, bind_params_.data())) {
+        if (::mysql_stmt_bind_param(static_cast<::MYSQL_STMT*>(stmt_),
+                                    reinterpret_cast<::MYSQL_BIND*>(bind_params_.data()))) {
             return false;
         }
     }
-    return ::mysql_stmt_execute(stmt_) == 0;
+    return ::mysql_stmt_execute(static_cast<::MYSQL_STMT*>(stmt_)) == 0;
 }
 
 unique_ptr<idb_tb_result> mysql_prepared_statement::execute_query() {
     throw_if_stmt_null(stmt_);
     if (param_count_ > 0) {
-        if (::mysql_stmt_bind_param(stmt_, bind_params_.data())) {
+        if (::mysql_stmt_bind_param(static_cast<::MYSQL_STMT*>(stmt_),
+                                    reinterpret_cast<::MYSQL_BIND*>(bind_params_.data()))) {
             return nullptr;
         }
     }
-    if (::mysql_stmt_execute(stmt_) != 0) {
+    if (::mysql_stmt_execute(static_cast<::MYSQL_STMT*>(stmt_)) != 0) {
         return nullptr;
     }
     return make_unique<mysql_prepared_result>(stmt_);
@@ -213,14 +221,14 @@ string_view mysql_prepared_statement::get_error() const noexcept {
     if (stmt_ == nullptr) {
         return "Invalid statement!";
     }
-    return ::mysql_stmt_error(stmt_);
+    return ::mysql_stmt_error(static_cast<::MYSQL_STMT*>(stmt_));
 }
 
 uint32_t mysql_prepared_statement::get_errno() const noexcept {
     if (stmt_ == nullptr) {
         return 0;
     }
-    return ::mysql_stmt_errno(stmt_);
+    return ::mysql_stmt_errno(static_cast<::MYSQL_STMT*>(stmt_));
 }
 
 NEFORCE_END_NAMESPACE__

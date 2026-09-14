@@ -1,11 +1,12 @@
 #include <NeForce/db/pgsql/pgsql_prepared_statement.hpp>
 #ifdef NEFORCE_SUPPORT_POSTGRESQL
+#    include <libpq-fe.h>
 #    include <NeForce/core/async/atomic.hpp>
 #    include <NeForce/core/utility/packages.hpp>
 #    include <NeForce/db/pgsql/pgsql_result.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-pgsql_prepared_statement::pgsql_prepared_statement(::PGconn* conn, string sql) :
+pgsql_prepared_statement::pgsql_prepared_statement(void* conn, string sql) :
 conn_(conn),
 sql_(move(sql)) {
     static atomic<uint64_t> stmt_counter{0};
@@ -35,7 +36,8 @@ sql_(move(sql)) {
     last_error_.clear();
     last_errno_ = 0;
 
-    ::PGresult* result = ::PQprepare(conn_, stmt_name_.data(), sql_.data(), static_cast<int>(param_count_), nullptr);
+    ::PGresult* result = ::PQprepare(static_cast<::PGconn*>(conn_), stmt_name_.data(), sql_.data(),
+                                     static_cast<int>(param_count_), nullptr);
     if (result == nullptr) {
         set_error("Failed to prepare statement", 1);
         return;
@@ -44,7 +46,7 @@ sql_(move(sql)) {
     const ::ExecStatusType status = ::PQresultStatus(result);
     ::PQclear(result);
     if (status != ::PGRES_COMMAND_OK) {
-        set_error(::PQerrorMessage(conn_), 2);
+        set_error(::PQerrorMessage(static_cast<::PGconn*>(conn_)), 2);
     }
 }
 
@@ -55,7 +57,7 @@ pgsql_prepared_statement::~pgsql_prepared_statement() {
 
     try {
         const string deallocate_sql = "DEALLOCATE " + move(stmt_name_);
-        ::PGresult* result = ::PQexec(conn_, deallocate_sql.data());
+        ::PGresult* result = ::PQexec(static_cast<::PGconn*>(conn_), deallocate_sql.data());
         if (result != nullptr) {
             ::PQclear(result);
         }
@@ -129,8 +131,8 @@ bool pgsql_prepared_statement::execute() {
     last_errno_ = 0;
 
     ::PGresult* result =
-            ::PQexecPrepared(conn_, stmt_name_.data(), static_cast<int>(param_count_), data_->param_ptrs.data(),
-                             data_->param_lengths.data(), data_->param_formats.data(), 0);
+            ::PQexecPrepared(static_cast<::PGconn*>(conn_), stmt_name_.data(), static_cast<int>(param_count_),
+                             data_->param_ptrs.data(), data_->param_lengths.data(), data_->param_formats.data(), 0);
 
     if (result == nullptr) {
         set_error("Failed to execute prepared statement", 4);
@@ -141,7 +143,7 @@ bool pgsql_prepared_statement::execute() {
     ::PQclear(result);
 
     if (status != ::PGRES_COMMAND_OK && status != ::PGRES_TUPLES_OK) {
-        set_error(::PQerrorMessage(conn_), 5);
+        set_error(::PQerrorMessage(static_cast<::PGconn*>(conn_)), 5);
         return false;
     }
 
@@ -152,10 +154,11 @@ unique_ptr<idb_tb_result> pgsql_prepared_statement::execute_query() {
     last_error_.clear();
     last_errno_ = 0;
 
-    ::PGresult* result = ::PQexecPrepared(conn_, stmt_name_.data(), static_cast<int>(param_count_),
-                                          data_->param_ptrs.empty() ? nullptr : data_->param_ptrs.data(),
-                                          data_->param_lengths.empty() ? nullptr : data_->param_lengths.data(),
-                                          data_->param_formats.empty() ? nullptr : data_->param_formats.data(), 0);
+    ::PGresult* result =
+            ::PQexecPrepared(static_cast<::PGconn*>(conn_), stmt_name_.data(), static_cast<int>(param_count_),
+                             data_->param_ptrs.empty() ? nullptr : data_->param_ptrs.data(),
+                             data_->param_lengths.empty() ? nullptr : data_->param_lengths.data(),
+                             data_->param_formats.empty() ? nullptr : data_->param_formats.data(), 0);
 
     if (result == nullptr) {
         set_error("Failed to execute prepared statement query", 6);
@@ -164,7 +167,7 @@ unique_ptr<idb_tb_result> pgsql_prepared_statement::execute_query() {
 
     const ::ExecStatusType status = ::PQresultStatus(result);
     if (status != ::PGRES_TUPLES_OK) {
-        set_error(::PQerrorMessage(conn_), 7);
+        set_error(::PQerrorMessage(static_cast<::PGconn*>(conn_)), 7);
         ::PQclear(result);
         return nullptr;
     }
