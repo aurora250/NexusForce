@@ -89,8 +89,10 @@ bool redis_connect::connect(const db_config& config) {
 
 #    ifdef NEFORCE_PLATFORM_WINDOWS
     constexpr ::DWORD timeout_ms = 3000;
-    ::setsockopt(link_->fd, SOL_SOCKET, SO_RCVTIMEO, reinterpret_cast<const char*>(&timeout_ms), sizeof(timeout_ms));
-    ::setsockopt(link_->fd, SOL_SOCKET, SO_SNDTIMEO, reinterpret_cast<const char*>(&timeout_ms), sizeof(timeout_ms));
+    ::setsockopt(static_cast<::redisContext*>(link_)->fd, SOL_SOCKET, SO_RCVTIMEO,
+                 reinterpret_cast<const char*>(&timeout_ms), sizeof(timeout_ms));
+    ::setsockopt(static_cast<::redisContext*>(link_)->fd, SOL_SOCKET, SO_SNDTIMEO,
+                 reinterpret_cast<const char*>(&timeout_ms), sizeof(timeout_ms));
 #    else
     constexpr ::timeval rw_timeout{3, 0};
     ::redisSetTimeout(static_cast<::redisContext*>(link_), rw_timeout);

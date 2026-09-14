@@ -1,6 +1,6 @@
 #ifndef NEFORCE_DB_MYSQL_MYSQL_UTIL_HPP__
 #define NEFORCE_DB_MYSQL_MYSQL_UTIL_HPP__
-#include "NeForce/core/config/c++config.hpp"
+#include "NeForce/core/typeinfo/types.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -68,6 +68,7 @@ enum class mysql_option : int32_t {
     ssl_session_data              // SSL/TLS 会话数据，用于会话复用
 };
 
+// NOLINTNEXTLINE(readability-enum-initial-value)
 enum class mysql_column_type {
     decimal,
     tiny,
