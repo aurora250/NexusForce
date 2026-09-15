@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [1.0.1] - 2026-09-11
+## [unreleased]
 
 ### 🚀 New Features
 
@@ -25,10 +25,8 @@
 - 随机数引擎的统一取值接口抽取到公共基类 `random_engine`（CRTP），各引擎只需实现原始随机数产生与字宽描述，消除 8 份重复实现
 - `random_lcd` 的 64 位取值由两次 31 位输出拼接改为跨字拼接的真实 64 位均匀随机数，`next_float<double>()` 不再被限制在 [0, 0.25)
 - `secret` 新增实例化 `operator()` 与 `min()` / `max()`，可作为满足 UniformRandomBitGenerator 概念的引擎传给分布函数
-- 随机数分布函数的数学运算改用本库 `math.hpp`（`square_root` / `logarithm_e` / `logarithm_1p` / `exponential_e` / `logarithm_factorial`），移除对 C 数学库的依赖，跨平台结果一致
 - `logarithm_e()` 改为倒数归约 + 2 的整数次幂阶梯归约 + 反双曲正切级数（14 项定长、系数预计算），消除逐项除法与随数值规模增长的归约循环
 - `square_root()` 改为阶梯归一化 + 线性初值牛顿迭代，迭代次数由与数值大小相关的数十次降至 5 次以内
-
 - `tcp_client::connect()` 的域名解析改为受 `connect_timeout_` 总预算约束（A/AAAA 查询共享剩余时间切片并禁用 UDP 重试），避免解析失败时按 dns 客户端完整超时预算阻塞数十秒
 - `dns_client` 新增 `timeout()` / `max_udp_retries()` 读取接口，便于调用方保存与恢复查询预算配置
 - `basic_string` 单字符追加内联化，绕过 traits 层 SIMD 调度，性能提升 2-4 倍
@@ -72,15 +70,11 @@
 - `filesystem::copy()` Windows 侧补充最后访问/修改时间保留，与 Linux 侧 `fchmod` / `futimens` 行为对齐
 - `file_async` 在无 io_uring 的 Linux 上阻塞 `pread` / `pwrite` 下沉到工作线程并以 io_context 投递完成，不再占用事件循环线程
 - `file_async` io_uring 路径显式解析不再依赖内核对 `UINT64_MAX` 偏移的处理
-- 统一各工作流的 vcpkg 缓存：抽出 `.github/actions/setup-vcpkg` 与 `save-vcpkg-cache` 复合 Action，缓存键与缓存路径只定义一处；二进制归档按 `vcpkg.json` 哈希建键、工具树按平台建键，并显式固定 `VCPKG_DEFAULT_BINARY_CACHE`（Windows 上的默认位置为 `%LOCALAPPDATA%\vcpkg\archives`，与各工作流此前缓存的 `~/.cache/vcpkg` 并非同一目录），不再缓存按矩阵分裂的 15 份 `vcpkg_installed`，PR 运行只读取不写入
-- `nexusforce_deploy_runtime()` 从仅部署 NexusForce.dll 扩展为部署完整运行时依赖闭包：按目标配置复制库文件本身，再复制安装前缀 bin 目录下的第三方依赖；安装前缀缺少依赖时退化为旧行为并提示重新安装
-- `scripts/install_nexusforce.py` 的生成器探测不再写死 Visual Studio 2022：改为经 `vswhere` 读取已安装 Visual Studio 的主版本（16/17/18）映射到生成器名，并校验当前 CMake 是否认识该生成器，探测不到时回退 Ninja
-- `nexusforce_install_runtime_dependencies()` 的依赖搜索范围扩展到目标所链接的每个导入目标（vcpkg 端口）自身的目录与 vcpkg 已安装目录，并对解析器未解析出的依赖按文件名再做一次大小写不敏感查找：只靠构建输出目录解析在 app-local deps 未复制全部端口时会漏依赖
+- `nexusforce_install_runtime_dependencies()` 的依赖搜索范围扩展到目标所链接的每个导入目标自身的目录与 vcpkg 已安装目录，并对解析器未解析出的依赖按文件名再做一次大小写不敏感查找：只靠构建输出目录解析在 app-local deps 未复制全部端口时会漏依赖
 
 ### 🐛 Bug Fixes
 
 - 修复 `ssl_socket` 异步读写绕过 TLS 层的缺陷，现按 TLS 激活状态路由至 `ssl_stream`
-- 澄清 `share_memory` 的跨平台生命周期语义并修正相应用例：Windows 上命名映射对象随最后一个句柄关闭即被系统销毁（名称消失、`remove` 退化为存在性检查），POSIX 上名称保留在 `/dev/shm` 直到 `remove`；此前三个用例按 POSIX 持久语义编写并在 Windows 上被固定跳过
 - 修复 Windows `io_context` 事件注册缺失 FD_CONNECT / FD_CLOSE 使非阻塞 connect 的完成或失败通知不被注册/映射
 - 修复 Windows `io_context` WSAEVENT 句柄生命周期竞态：`remove_fd()` 在监视线程 `WSAWaitForMultipleEvents` 等待期间直接 `CloseHandle`
 - 修复 `io_context` fd/文件完成回调的 use-after-free：回调执行中调用 `remove_fd()` 或重复注册会销毁正在执行的回调存储

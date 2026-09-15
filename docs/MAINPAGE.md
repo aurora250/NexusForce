@@ -324,8 +324,8 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 ### 📊 数学库 (Math)
 - **数学常量** - 常用数学常数
 - **数学函数** - 超越函数与数值计算
-- **随机数生成** - LC、梅森旋转、PCG、异或移位旋转、位宽适配与硬件噪声算法 `random_lcd` / `random_mt` / `random_pcg32` / `random_pcg64` / `random_xoroshiro128` / `random_xoroshiro256` / `bit_gen` / `secret`
-- **随机数分布** - 均匀、伯努利、正态、指数、对数均匀与泊松分布 `uniform_int` / `uniform_real` / `bernoulli` / `normal` / `exponential` / `log_uniform` / `poisson`，引擎符合标准库 UniformRandomBitGenerator 概念
+- **随机数生成** - LC、梅森旋转、PCG、异或移位旋转、位宽适配与硬件噪声算法
+- **随机数分布** - 均匀、伯努利、正态、指数、对数均匀与泊松分布，引擎符合标准库 UniformRandomBitGenerator 概念
 - **128位数学计算** - 128位有符号/无符号数值操作 `int128_t` / `uint128_t`
 
 ---
