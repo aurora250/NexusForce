@@ -1097,7 +1097,7 @@ TYPED_TEST(RandomUrbgConformanceTest, SharedInterfaceWorksForEveryEngine) {
 
     TypeParam uniform(777);
     for (int i = 0; i < 64; ++i) {
-        const double value = uniform.next_float<double>();
+        const double value = uniform.template next_float<double>();
         EXPECT_GE(value, 0.0);
         EXPECT_LE(value, 1.0);
     }
