@@ -158,8 +158,8 @@ bool tcp_server_base::start(const int backlog) noexcept {
             try {
                 accept_loop();
                 // NOLINTNEXTLINE(bugprone-empty-catch)
-            } catch (...) {
-                // ignore
+            } catch (const exception& e) {
+                NEFORCE_REPORT_EXCEPTION(e);
             }
         });
 

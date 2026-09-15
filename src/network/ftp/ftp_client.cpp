@@ -418,8 +418,8 @@ ftp_client::~ftp_client() {
     try {
         disconnect();
         // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (...) {
-        // ignore
+    } catch (const exception& e) {
+        NEFORCE_REPORT_EXCEPTION(e);
     }
 }
 

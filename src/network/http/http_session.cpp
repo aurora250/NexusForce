@@ -50,15 +50,15 @@ http_cookie http_cookie::parse(const string_view header, string default_domain, 
                 try {
                     c.max_age = seconds{integer32::parse(attr_val).value()};
                     // NOLINTNEXTLINE(bugprone-empty-catch)
-                } catch (...) {
-                    // ignore
+                } catch (const exception& e) {
+                    NEFORCE_REPORT_EXCEPTION(e);
                 }
             } else if (attr_lower == "expires") {
                 try {
                     c.expires = datetime::parse_RFC1123(attr_val);
                     // NOLINTNEXTLINE(bugprone-empty-catch)
-                } catch (...) {
-                    // ignore
+                } catch (const exception& e) {
+                    NEFORCE_REPORT_EXCEPTION(e);
                 }
             }
         }

@@ -45,12 +45,12 @@ namespace {
         size_t pos = 0;
 
         while (pos < chunked_data.size()) {
-            size_t line_end = chunked_data.find("\r\n", pos);
+            const size_t line_end = chunked_data.find("\r\n", pos);
             if (line_end == string::npos) {
                 NEFORCE_THROW_EXCEPTION(http_exception("Malformed chunked body: missing chunk size line"));
             }
             string_view size_line = chunked_data.view(pos, line_end - pos).trim();
-            size_t semi = size_line.find(';');
+            const size_t semi = size_line.find(';');
             if (semi != string_view::npos) {
                 size_line = size_line.head(semi);
             }
@@ -65,7 +65,7 @@ namespace {
             if (chunk_size == 0) {
                 if (trailers_out != nullptr) {
                     while (pos < chunked_data.size()) {
-                        size_t trailer_end = chunked_data.find("\r\n", pos);
+                        const size_t trailer_end = chunked_data.find("\r\n", pos);
                         if (trailer_end == string::npos || trailer_end == pos) {
                             if (trailer_end == pos) {
                                 pos = trailer_end + 2;
@@ -73,7 +73,7 @@ namespace {
                             break;
                         }
                         string_view trailer_line = chunked_data.view(pos, trailer_end - pos);
-                        size_t colon = trailer_line.find(':');
+                        const size_t colon = trailer_line.find(':');
                         if (colon != string_view::npos) {
                             string key(trailer_line.view(0, colon).trim());
                             string val(trailer_line.view(colon + 1).trim());
@@ -83,7 +83,7 @@ namespace {
                     }
                 } else {
                     while (pos < chunked_data.size()) {
-                        size_t trailer_end = chunked_data.find("\r\n", pos);
+                        const size_t trailer_end = chunked_data.find("\r\n", pos);
                         if (trailer_end == string::npos || trailer_end == pos) {
                             if (trailer_end == pos) {
                                 pos = trailer_end + 2;
@@ -125,6 +125,84 @@ namespace {
             str += format("{:x}", secret::next_int<uint32_t>(16));
         }
         return move(str);
+    }
+
+
+    void send_response(tcp_socket* client_socket, const http_response& response) {
+        const string header = response.build_header_string();
+
+#ifdef NEFORCE_PLATFORM_LINUX
+        if (!client_socket->is_ssl() && response.redirect_url.empty() && !response.body.empty()) {
+            ::iovec iov[2];
+            iov[0].iov_base = const_cast<char*>(header.data());
+            iov[0].iov_len = header.size();
+            iov[1].iov_base = const_cast<char*>(response.body.data());
+            iov[1].iov_len = response.body.size();
+
+            while (iov[0].iov_len > 0) {
+                const ssize_t n = ::writev(client_socket->native_handle(), iov, 2);
+                if (n <= 0) {
+                    NEFORCE_THROW_EXCEPTION(socket_exception("send_response writev failed"));
+                }
+                auto written = static_cast<size_t>(n);
+                if (written >= iov[0].iov_len) {
+                    written -= iov[0].iov_len;
+                    iov[0].iov_len = 0;
+                    iov[1].iov_base = static_cast<char*>(iov[1].iov_base) + written;
+                    iov[1].iov_len -= written;
+                } else {
+                    iov[0].iov_base = static_cast<char*>(iov[0].iov_base) + written;
+                    iov[0].iov_len -= written;
+                }
+            }
+            return;
+        }
+#endif
+
+        const string data = header + response.body;
+        client_socket->send_all(memory_view<const char>(data.data(), data.size()));
+    }
+
+    void add_session_cookie(const http_request& request, http_response& response, http_session* session,
+                            const http_cookie_name& name) {
+
+        if (session == nullptr || !session->is_new_session()) {
+            return;
+        }
+
+        http_cookie session_cookie;
+        session_cookie.name = name;
+        session_cookie.value = session->session_id();
+        session_cookie.http_only = true;
+
+        const bool is_https = request.header(http_key::X_Forwarded_Proto()) == "https";
+        session_cookie.secure = is_https;
+        session_cookie.same_site = is_https ? http_key::Strict() : http_key::Lax();
+
+        response.cookies.emplace_back(move(session_cookie));
+        session->touch();
+    }
+
+    void send_error_response(tcp_socket* client_socket, const http_status status, const string& message) {
+        try {
+            http_response error_response;
+            error_response.status = status;
+            error_response.status_message = http_status_message(status);
+            error_response.set_content_type(http_content::HTML_TEXT());
+            error_response.body = "<!DOCTYPE html>"
+                                  "<html><head><title>Error</title></head>"
+                                  "<body><h1>" +
+                                  error_response.status_message +
+                                  "</h1>"
+                                  "<p>" +
+                                  message +
+                                  "</p>"
+                                  "</body></html>";
+            send_response(client_socket, error_response);
+            // NOLINTNEXTLINE(bugprone-empty-catch)
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
+        }
     }
 } // namespace
 
@@ -297,7 +375,7 @@ http_request http_server::parse_request(tcp_socket* client_socket, session_manag
                 }
                 string decoded = decode_chunked_body(request_data.view(body_start));
                 request_data.resize(body_start);
-                request_data += decoded;
+                request_data += move(decoded);
             } else {
                 if (content_length > max_body_size.bytes()) {
                     NEFORCE_THROW_EXCEPTION(http_exception("Request body too large"));
@@ -367,83 +445,6 @@ http_session* http_server::get_or_create_session(http_request& request, const bo
     return sess;
 }
 
-void send_response(tcp_socket* client_socket, const http_response& response) {
-    const string header = response.build_header_string();
-
-#ifdef NEFORCE_PLATFORM_LINUX
-    if (!client_socket->is_ssl() && response.redirect_url.empty() && !response.body.empty()) {
-        ::iovec iov[2];
-        iov[0].iov_base = const_cast<char*>(header.data());
-        iov[0].iov_len = header.size();
-        iov[1].iov_base = const_cast<char*>(response.body.data());
-        iov[1].iov_len = response.body.size();
-
-        while (iov[0].iov_len > 0) {
-            const ssize_t n = ::writev(client_socket->native_handle(), iov, 2);
-            if (n <= 0) {
-                NEFORCE_THROW_EXCEPTION(socket_exception("send_response writev failed"));
-            }
-            auto written = static_cast<size_t>(n);
-            if (written >= iov[0].iov_len) {
-                written -= iov[0].iov_len;
-                iov[0].iov_len = 0;
-                iov[1].iov_base = static_cast<char*>(iov[1].iov_base) + written;
-                iov[1].iov_len -= written;
-            } else {
-                iov[0].iov_base = static_cast<char*>(iov[0].iov_base) + written;
-                iov[0].iov_len -= written;
-            }
-        }
-        return;
-    }
-#endif
-
-    const string data = header + response.body;
-    client_socket->send_all(memory_view<const char>(data.data(), data.size()));
-}
-
-void add_session_cookie(const http_request& request, http_response& response, http_session* session,
-                        const http_cookie_name& name) {
-
-    if (session == nullptr || !session->is_new_session()) {
-        return;
-    }
-
-    http_cookie session_cookie;
-    session_cookie.name = name;
-    session_cookie.value = session->session_id();
-    session_cookie.http_only = true;
-
-    const bool is_https = request.header(http_key::X_Forwarded_Proto()) == "https";
-    session_cookie.secure = is_https;
-    session_cookie.same_site = is_https ? http_key::Strict() : http_key::Lax();
-
-    response.cookies.emplace_back(move(session_cookie));
-    session->touch();
-}
-
-void send_error_response(tcp_socket* client_socket, const http_status status, const string& message) {
-    try {
-        http_response error_response;
-        error_response.status = status;
-        error_response.status_message = http_status_message(status);
-        error_response.set_content_type(http_content::HTML_TEXT());
-        error_response.body = "<!DOCTYPE html>"
-                              "<html><head><title>Error</title></head>"
-                              "<body><h1>" +
-                              error_response.status_message +
-                              "</h1>"
-                              "<p>" +
-                              message +
-                              "</p>"
-                              "</body></html>";
-        send_response(client_socket, error_response);
-        // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (...) {
-        // ignore
-    }
-}
-
 void http_server::handle_client(unique_ptr<tcp_socket> client_socket) {
     static constexpr size_t max_keep_alive_requests = 100;
 
@@ -473,9 +474,9 @@ void http_server::handle_client(unique_ptr<tcp_socket> client_socket) {
 
     // ALPN h2 detection: If the TLS handshake is agreed to h2, the HTTP/2 connection is directly initiated
     if (client_socket->is_ssl()) {
-        auto* ssl_sock = dynamic_cast<ssl_socket*>(client_socket.get());
+        const auto* ssl_sock = dynamic_cast<ssl_socket*>(client_socket.get());
         if (ssl_sock != nullptr) {
-            string alpn = ssl_sock->get_alpn_negotiated();
+            const string alpn = ssl_sock->get_alpn_negotiated();
             if (alpn == "h2") {
                 auto conn = make_shared<http2_connection>(move(client_socket), *ctx_);
                 conn->set_router(&router_);
@@ -539,7 +540,7 @@ bool http_server::try_upgrade(unique_ptr<tcp_socket>& client_socket, http_reques
 
     {
         const string proto_lower = upgrade.lowercase();
-        auto it = upgrade_handlers_.find(string(proto_lower));
+        const auto it = upgrade_handlers_.find(proto_lower);
         if (it != upgrade_handlers_.end() && it->second) {
             if (it->second(request, client_socket.get())) {
                 static_cast<void>(client_socket.release());
@@ -593,7 +594,7 @@ bool http_server::try_upgrade(unique_ptr<tcp_socket>& client_socket, http_reques
 
 void http_server::handle_connect(const unique_ptr<tcp_socket>& client_socket, http_request& request) {
     const string_view path = request.path.view();
-    size_t colon = path.find(':');
+    const size_t colon = path.find(':');
     if (colon == string_view::npos) {
         send_error_response(client_socket.get(), http_status::S4_BAD_REQUEST, "Invalid CONNECT target");
         return;
@@ -795,7 +796,7 @@ bool http_server::load_certificate(const string& cert_file, const string& key_fi
     return ssl_srv->load_certificate(cert_file, key_file);
 }
 
-http_session* http_server::get_session(http_request& request, bool create) {
+http_session* http_server::get_session(http_request& request, const bool create) {
     return get_or_create_session(request, create, session_manager_, cookie_name_);
 }
 

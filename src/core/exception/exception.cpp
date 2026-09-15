@@ -1,4 +1,5 @@
 #include <NeForce/core/exception/exception.hpp>
+#include <NeForce/core/exception/terminate.hpp>
 #include <NeForce/core/system/console.hpp>
 #include <NeForce/core/system/stacktrace.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -30,9 +31,24 @@ int uncaught_exceptions() noexcept {
 #endif
 }
 
+void report_with_stack(const exception& err) noexcept {
+    try {
+        eprintln("\nException : (", err.type(), ") ", err.what());
+        eprintln(stacktrace::current(1));
+        // NOLINTNEXTLINE(bugprone-empty-catch)
+    } catch (...) {
+        // ignore
+    }
+}
+
 void throw_with_stack(const exception& err) {
-    eprintln("\nException : (", err.type(), ") ", err.what());
-    eprintln(stacktrace::current(1));
+    try {
+        eprintln("\nException : (", err.type(), ") ", err.what());
+        eprintln(stacktrace::current(1));
+        // NOLINTNEXTLINE(bugprone-empty-catch)
+    } catch (...) {
+        // ignore
+    }
     throw err;
 }
 

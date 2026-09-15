@@ -153,15 +153,15 @@ bool tcp_client_base::connect(const string& host, ports port) {
                 dns_->set_timeout(budget_for_query());
                 ipv4s = dns_->resolve_a(host.view());
                 // NOLINTNEXTLINE(bugprone-empty-catch)
-            } catch (...) {
-                // ignore
+            } catch (const exception& e) {
+                NEFORCE_REPORT_EXCEPTION(e);
             }
             try {
                 dns_->set_timeout(budget_for_query());
                 ipv6s = dns_->resolve_aaaa(host.view());
                 // NOLINTNEXTLINE(bugprone-empty-catch)
-            } catch (...) {
-                // ignore
+            } catch (const exception& e) {
+                NEFORCE_REPORT_EXCEPTION(e);
             }
 
             dns_->set_timeout(saved_timeout);
@@ -212,8 +212,8 @@ void tcp_client_base::disconnect() noexcept {
         }
         socket_->close();
         // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (...) {
-        // ignore
+    } catch (const exception& e) {
+        NEFORCE_REPORT_EXCEPTION(e);
     }
 
     socket_.reset();

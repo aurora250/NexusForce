@@ -44,12 +44,16 @@ namespace {
 } // namespace
 #endif
 
-
 daemon::~daemon() {
-    if (state_ != daemon_state::stopped) {
-        request_shutdown();
+    try {
+        if (state_ != daemon_state::stopped) {
+            request_shutdown();
+        }
+        remove_pid_file();
+        // NOLINTNEXTLINE(bugprone-empty-catch)
+    } catch (const exception& e) {
+        NEFORCE_REPORT_EXCEPTION(e);
     }
-    remove_pid_file();
 }
 
 bool daemon::daemonize(const string& work_dir) {
@@ -148,7 +152,7 @@ bool daemon::write_pid_file(const string& path) {
 #endif
 }
 
-void daemon::remove_pid_file() noexcept {
+void daemon::remove_pid_file() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     if (pid_handle_ != nullptr) {
         ::CloseHandle(pid_handle_);
@@ -170,7 +174,7 @@ void daemon::remove_pid_file() noexcept {
 #endif
 }
 
-bool daemon::is_pid_file_locked(const string& path) noexcept {
+bool daemon::is_pid_file_locked(const string& path) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const wstring wpath = character::to_wstring(path.view());
     const ::HANDLE hFile = ::CreateFileW(wpath.data(), GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING,

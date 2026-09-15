@@ -60,7 +60,11 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/yaml/yaml_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/yaml/yaml_value.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/functional/hash.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/random.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/random/engine.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/random/lcg.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/random/mt.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/random/pcg.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/random/secret.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/serialize/binary_serializer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/serialize/json_serializer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/reflect/registry.cpp

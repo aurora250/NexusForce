@@ -69,8 +69,8 @@ namespace {
                     resp.http_version_major = uinteger16::parse(ver.head(dot)).value();
                     resp.http_version_minor = uinteger16::parse(ver.tail(dot + 1)).value();
                     // NOLINTNEXTLINE(bugprone-empty-catch)
-                } catch (...) {
-                    // ignore
+                } catch (const exception& e) {
+                    NEFORCE_REPORT_EXCEPTION(e);
                 }
             }
         }
@@ -88,8 +88,8 @@ namespace {
                 resp.status_message = http_status_message(resp.status);
             }
             // NOLINTNEXTLINE(bugprone-empty-catch)
-        } catch (...) {
-            // ignore
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
         }
         resp.status_message = status_line.tail(sp2 + 1);
 
@@ -130,8 +130,8 @@ namespace {
                     try {
                         resp.content_length = uinteger64::parse(value).value();
                         // NOLINTNEXTLINE(bugprone-empty-catch)
-                    } catch (...) {
-                        // ignore
+                    } catch (const exception& e) {
+                        NEFORCE_REPORT_EXCEPTION(e);
                     }
                 }
             }

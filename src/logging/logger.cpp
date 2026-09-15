@@ -30,8 +30,8 @@ logger::~logger() {
         disable_async();
         clear_sinks();
         // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (...) {
-        // ignore
+    } catch (const exception& e) {
+        NEFORCE_REPORT_EXCEPTION(e);
     }
 }
 
@@ -149,8 +149,8 @@ void logger::disable_async() {
                 sink->log(ev);
             }
             // NOLINTNEXTLINE(bugprone-empty-catch)
-        } catch (...) {
-            // ignore
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
         }
     }
 
@@ -254,8 +254,8 @@ void logger::drain_events() {
                     sink->log(ev);
                 }
                 // NOLINTNEXTLINE(bugprone-empty-catch)
-            } catch (...) {
-                // ignore
+            } catch (const exception& e) {
+                NEFORCE_REPORT_EXCEPTION(e);
             }
         }
     }
@@ -266,8 +266,8 @@ void logger::drain_events() {
             try {
                 sink->flush();
                 // NOLINTNEXTLINE(bugprone-empty-catch)
-            } catch (...) {
-                // ignore
+            } catch (const exception& e) {
+                NEFORCE_REPORT_EXCEPTION(e);
             }
         }
         lock<mutex> fl(flush_mutex_);
@@ -295,8 +295,8 @@ void logger::process_event_direct(const log_event& event) {
         try {
             sink->log(event);
             // NOLINTNEXTLINE(bugprone-empty-catch)
-        } catch (...) {
-            // ignore
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
         }
     }
 }
@@ -380,8 +380,8 @@ void logger::flush() {
                         sink->log(ev);
                     }
                     // NOLINTNEXTLINE(bugprone-empty-catch)
-                } catch (...) {
-                    // ignore
+                } catch (const exception& e) {
+                    NEFORCE_REPORT_EXCEPTION(e);
                 }
             }
         }
@@ -392,8 +392,8 @@ void logger::flush() {
         try {
             sink->flush();
             // NOLINTNEXTLINE(bugprone-empty-catch)
-        } catch (...) {
-            // ignore
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
         }
     }
 }

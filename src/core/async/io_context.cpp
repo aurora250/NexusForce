@@ -220,8 +220,8 @@ io_context::~io_context() {
     try {
         stop();
         // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (...) {
-        // ignore
+    } catch (const exception& e) {
+        NEFORCE_REPORT_EXCEPTION(e);
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -235,8 +235,8 @@ io_context::~io_context() {
                 monitor_thread_.join();
             }
             // NOLINTNEXTLINE(bugprone-empty-catch)
-        } catch (...) {
-            // ignore
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
         }
     }
 #endif
@@ -467,8 +467,8 @@ size_t io_context::run() {
                 monitor_thread_.join();
             }
             // NOLINTNEXTLINE(bugprone-empty-catch)
-        } catch (...) {
-            // ignore
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
         }
     }
 #endif
@@ -642,8 +642,8 @@ void io_context::run_pool(size_t n) {
                 try {
                     run();
                     // NOLINTNEXTLINE(bugprone-empty-catch)
-                } catch (...) {
-                    // Prevent terminate from uncaught exceptions
+                } catch (const exception& e) {
+                    NEFORCE_REPORT_EXCEPTION(e);
                 }
             });
         }

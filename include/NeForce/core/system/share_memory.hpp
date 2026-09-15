@@ -122,6 +122,7 @@ public:
 
     /**
      * @brief 关闭共享内存
+     * @note Windows 上若这是该名称的最后一个句柄，共享内存对象会被系统立即销毁
      */
     void close() noexcept;
 
@@ -223,8 +224,8 @@ public:
      * @brief 删除共享内存对象
      * @param name 共享内存名称
      * @return 是否成功删除
-     * @note 即使关闭句柄，如果还有其他进程持有句柄，对象仍会存在
-     *       可以尝试打开以检查是否真的被移除
+     * @note 即使关闭句柄，如果还有其他进程持有句柄，对象仍会存在，可以尝试打开以检查是否真的被移除
+     * @note Windows 上命名映射对象随最后一个句柄关闭而销毁
      */
     static bool remove(const string& name);
 

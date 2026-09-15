@@ -14,13 +14,8 @@ owns_result_(owns) {
 }
 
 pgsql_tb_result::~pgsql_tb_result() {
-    try {
-        if (owns_result_ && result_ != nullptr) {
-            ::PQclear(static_cast<::PGresult*>(result_));
-        }
-        // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (...) {
-        // ignore
+    if (owns_result_ && result_ != nullptr) {
+        ::PQclear(static_cast<::PGresult*>(result_));
     }
 }
 

@@ -245,8 +245,8 @@ void system_signal_manager::stop_monitoring() noexcept {
             timeout_thread_.join();
         }
         // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (...) {
-        // ignore
+    } catch (const exception& e) {
+        NEFORCE_REPORT_EXCEPTION(e);
     }
 }
 

@@ -215,8 +215,8 @@ void http_filter_chain::execute_post_filters_async(http_request& request, http_r
                 try {
                     entry.filter->post_filter(req(), res());
                     // NOLINTNEXTLINE(bugprone-empty-catch)
-                } catch (...) {
-                    // ignore
+                } catch (const exception& e) {
+                    NEFORCE_REPORT_EXCEPTION(e);
                 }
                 run_next();
             }

@@ -186,10 +186,10 @@ public:
     bool write_pid_file(const string& path);
 
     /** @brief 删除 PID 文件并释放锁 */
-    void remove_pid_file() noexcept;
+    void remove_pid_file();
 
     /** @brief 检查 PID 文件是否被锁定 */
-    NEFORCE_NODISCARD static bool is_pid_file_locked(const string& path) noexcept;
+    NEFORCE_NODISCARD static bool is_pid_file_locked(const string& path);
 
     /**
      * @brief 添加受管理的子进程

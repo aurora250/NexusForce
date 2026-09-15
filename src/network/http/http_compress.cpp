@@ -67,7 +67,6 @@ namespace {
                     if (!q_str.empty()) {
                         try {
                             q_value = float64::parse(q_str).value();
-                            // NOLINTNEXTLINE(bugprone-empty-catch)
                         } catch (...) {
                             q_value = 0.0;
                         }
@@ -151,8 +150,8 @@ void compress_filter::post_filter(http_request& request, http_response& response
             response.set_header("Vary", string(vary) + ", Accept-Encoding");
         }
         // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (...) {
-        // ignore
+    } catch (const exception& e) {
+        NEFORCE_REPORT_EXCEPTION(e);
     }
 }
 

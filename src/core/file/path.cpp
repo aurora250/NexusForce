@@ -426,9 +426,9 @@ vector<path> path::child_dirs(const bool include_hidden) const {
     return result;
 }
 
-bool path::exists() const noexcept { return path::exists(path_); }
+bool path::exists() const { return path::exists(path_); }
 
-bool path::exists(const string& path) noexcept {
+bool path::exists(const string& path) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const wstring wpath = character::to_wstring(path.view());
     return ::GetFileAttributesW(wpath.data()) != INVALID_FILE_ATTRIBUTES;
@@ -438,9 +438,9 @@ bool path::exists(const string& path) noexcept {
 #endif
 }
 
-bool path::is_directory() const noexcept { return path::is_directory(path_); }
+bool path::is_directory() const { return path::is_directory(path_); }
 
-bool path::is_directory(const string& path) noexcept {
+bool path::is_directory(const string& path) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const wstring wpath = character::to_wstring(path.view());
     const ::DWORD attrib = ::GetFileAttributesW(wpath.data());
@@ -454,9 +454,9 @@ bool path::is_directory(const string& path) noexcept {
 #endif
 }
 
-bool path::is_file() const noexcept { return path::is_file(path_); }
+bool path::is_file() const { return path::is_file(path_); }
 
-bool path::is_file(const string& path) noexcept {
+bool path::is_file(const string& path) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const wstring wpath = character::to_wstring(path.view());
     const ::DWORD attrib = ::GetFileAttributesW(wpath.data());

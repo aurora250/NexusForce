@@ -220,6 +220,13 @@ NEFORCE_ERROR_BUILD_DERIVED_CLASS(database_exception, thirdparty_exception, "Dat
 int NEFORCE_API uncaught_exceptions() noexcept;
 
 /**
+ * @brief 输出异常并打印堆栈信息
+ * @param err 要输出的异常对象
+ * @note 异常会被消费，不再抛出
+ */
+void NEFORCE_API report_with_stack(const exception& err) noexcept;
+
+/**
  * @brief 抛出异常并打印堆栈信息
  * @param err 要抛出的异常对象
  */
@@ -229,6 +236,12 @@ NEFORCE_NORETURN void NEFORCE_API throw_with_stack(const exception& err);
 #    define NEFORCE_THROW_EXCEPTION(err) throw_with_stack(err)
 #else
 #    define NEFORCE_THROW_EXCEPTION(err) throw err
+#endif
+
+#if (defined(NEFORCE_STATE_DEBUG) || !defined(NDEBUG))
+#    define NEFORCE_REPORT_EXCEPTION(err) report_with_stack(err)
+#else
+#    define NEFORCE_REPORT_EXCEPTION(err)
 #endif
 
 /** @} */ // ExceptionHandling

@@ -117,8 +117,8 @@ void plugin_manager::shutdown_all() noexcept {
         try {
             pair.second->shutdown();
             // NOLINTNEXTLINE(bugprone-empty-catch)
-        } catch (...) {
-            // ignore
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
         }
     }
     plugins_.clear();

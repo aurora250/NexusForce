@@ -393,40 +393,40 @@ public:
      * @brief 检查路径是否存在
      * @return 是否存在
      */
-    NEFORCE_NODISCARD bool exists() const noexcept;
+    NEFORCE_NODISCARD bool exists() const;
 
     /**
      * @brief 检查路径是否为目录
      * @return 是否为目录
      */
-    NEFORCE_NODISCARD bool is_directory() const noexcept;
+    NEFORCE_NODISCARD bool is_directory() const;
 
     /**
      * @brief 检查路径是否为普通文件
      * @return 是否为文件
      */
-    NEFORCE_NODISCARD bool is_file() const noexcept;
+    NEFORCE_NODISCARD bool is_file() const;
 
     /**
      * @brief 检查路径是否存在
      * @param path 要检查的路径字符串
      * @return 是否存在
      */
-    NEFORCE_NODISCARD static bool exists(const string& path) noexcept;
+    NEFORCE_NODISCARD static bool exists(const string& path);
 
     /**
      * @brief 检查路径是否为目录
      * @param path 要检查的路径字符串
      * @return 是否为目录
      */
-    NEFORCE_NODISCARD static bool is_directory(const string& path) noexcept;
+    NEFORCE_NODISCARD static bool is_directory(const string& path);
 
     /**
      * @brief 检查路径是否为文件
      * @param path 要检查的路径字符串
      * @return 是否为文件
      */
-    NEFORCE_NODISCARD static bool is_file(const string& path) noexcept;
+    NEFORCE_NODISCARD static bool is_file(const string& path);
 
     /**
      * @brief 获取文件扩展名

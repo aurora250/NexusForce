@@ -128,8 +128,8 @@ websocket_server::~websocket_server() {
     try {
         stop();
         // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (...) {
-        // ignore
+    } catch (const exception& e) {
+        NEFORCE_REPORT_EXCEPTION(e);
     }
 }
 
@@ -205,8 +205,8 @@ void websocket_session::write_loop() {
             try {
                 on_error_(e);
                 // NOLINTNEXTLINE(bugprone-empty-catch)
-            } catch (...) {
-                // ignore
+            } catch (const exception& e) {
+                NEFORCE_REPORT_EXCEPTION(e);
             }
         }
         return;
@@ -220,8 +220,8 @@ void websocket_session::write_loop() {
             ctrl_queue_.pop();
         }
         // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (...) {
-        // ignore
+    } catch (const exception& e) {
+        NEFORCE_REPORT_EXCEPTION(e);
     }
 }
 
@@ -238,8 +238,8 @@ void websocket_session::read_loop() {
             try {
                 on_error_(e);
                 // NOLINTNEXTLINE(bugprone-empty-catch)
-            } catch (...) {
-                // ignore
+            } catch (const exception& e) {
+                NEFORCE_REPORT_EXCEPTION(e);
             }
         }
     }
@@ -327,8 +327,8 @@ bool websocket_session::read_frame() {
             try {
                 on_error_(e);
                 // NOLINTNEXTLINE(bugprone-empty-catch)
-            } catch (...) {
-                // ignore
+            } catch (const exception& e) {
+                NEFORCE_REPORT_EXCEPTION(e);
             }
         }
         return false;
@@ -431,8 +431,8 @@ void websocket_session::deliver_message(const string& data, websocket_opcode opc
                 try {
                     on_error_(e);
                     // NOLINTNEXTLINE(bugprone-empty-catch)
-                } catch (...) {
-                    // ignore
+                } catch (const exception& e) {
+                    NEFORCE_REPORT_EXCEPTION(e);
                 }
             }
         }
@@ -490,8 +490,8 @@ void websocket_session::heartbeat_loop() {
             try {
                 on_error_(e);
                 // NOLINTNEXTLINE(bugprone-empty-catch)
-            } catch (...) {
-                // ignore
+            } catch (const exception& e) {
+                NEFORCE_REPORT_EXCEPTION(e);
             }
         }
     }
@@ -535,8 +535,8 @@ void websocket_session::do_stop(websocket_status status, const string& reason, b
         try {
             on_close_(move(status), reason);
             // NOLINTNEXTLINE(bugprone-empty-catch)
-        } catch (...) {
-            // ignore
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
         }
     }
 
@@ -620,8 +620,8 @@ bool websocket_session::send(const string& data, const websocket_opcode opcode) 
                 return ok;
             }
             // NOLINTNEXTLINE(bugprone-empty-catch)
-        } catch (...) {
-            // ignore
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
         }
     }
 #endif

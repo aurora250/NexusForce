@@ -1339,8 +1339,8 @@ process::memory_info process::get_memory_info(native_id_type process_id) {
                             const auto hwm_kb = static_cast<unsigned long>(to_uint64(num_sv));
                             mem_info.peak_working_set_size = static_cast<size_t>(hwm_kb) * 1024;
                             // NOLINTNEXTLINE(bugprone-empty-catch)
-                        } catch (...) {
-                            // ignore
+                        } catch (const exception& e) {
+                            NEFORCE_REPORT_EXCEPTION(e);
                         }
                     }
                 }
@@ -1365,8 +1365,8 @@ process::memory_info process::get_memory_info(native_id_type process_id) {
                             const auto swap_kb = static_cast<unsigned long>(to_uint64(num_sv));
                             mem_info.pagefile_usage = static_cast<size_t>(swap_kb) * 1024;
                             // NOLINTNEXTLINE(bugprone-empty-catch)
-                        } catch (...) {
-                            // ignore
+                        } catch (const exception& e) {
+                            NEFORCE_REPORT_EXCEPTION(e);
                         }
                     }
                 }

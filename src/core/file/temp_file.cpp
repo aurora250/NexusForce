@@ -62,8 +62,8 @@ void temp_file::cleanup_all_temp_files() {
                     filesystem::remove(temp_path);
                 }
                 // NOLINTNEXTLINE(bugprone-empty-catch)
-            } catch (...) {
-                // ignore
+            } catch (const exception& e) {
+                NEFORCE_REPORT_EXCEPTION(e);
             }
         }
     }
@@ -145,8 +145,8 @@ void temp_file::cleanup() noexcept {
             registry.erase(it);
         }
         // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (...) {
-        // ignore
+    } catch (const exception& e) {
+        NEFORCE_REPORT_EXCEPTION(e);
     }
 
     if (delete_policy_ == delete_policy::AUTO_DELETE) {
@@ -158,8 +158,8 @@ void temp_file::cleanup() noexcept {
                     filesystem::remove(file_path);
                 }
                 // NOLINTNEXTLINE(bugprone-empty-catch)
-            } catch (...) {
-                // ignore
+            } catch (const exception& e) {
+                NEFORCE_REPORT_EXCEPTION(e);
             }
         }
     }

@@ -108,8 +108,8 @@ thread::thread_monitor::~thread_monitor() noexcept {
     try {
         hook::invoke(hook::point::thread_end, thread_id_);
         // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (...) {
-        // ignore
+    } catch (const exception& e) {
+        NEFORCE_REPORT_EXCEPTION(e);
     }
     thread_tracker::instance().on_thread_destroy();
 }
@@ -190,8 +190,8 @@ thread& thread::operator=(thread&& other) noexcept {
         try {
             hook::invoke(hook::point::before_destroy, id_);
             // NOLINTNEXTLINE(bugprone-empty-catch)
-        } catch (...) {
-            // ignore
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
         }
         terminate();
     }
@@ -214,8 +214,8 @@ thread::~thread() {
     try {
         hook::invoke(hook::point::before_destroy, id_);
         // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (...) {
-        // ignore
+    } catch (const exception& e) {
+        NEFORCE_REPORT_EXCEPTION(e);
     }
     if (joinable()) {
         terminate();

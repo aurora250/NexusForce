@@ -63,8 +63,8 @@ pgsql_prepared_statement::~pgsql_prepared_statement() {
         }
         data_.reset();
         // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (...) {
-        // ignore
+    } catch (const exception& e) {
+        NEFORCE_REPORT_EXCEPTION(e);
     }
 }
 

@@ -226,8 +226,8 @@ void terminate() noexcept {
             handler();
         }
         // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (...) {
-        // ignore
+    } catch (const exception& e) {
+        NEFORCE_REPORT_EXCEPTION(e);
     }
     abort();
 }
@@ -286,8 +286,8 @@ void exit(const int status) {
     try {
         exit_handler_manager::instance().execute_exit_handlers();
         // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (...) {
-        // ignore
+    } catch (const exception& e) {
+        NEFORCE_REPORT_EXCEPTION(e);
     }
 
     ::fflush(nullptr);
@@ -315,8 +315,8 @@ void quick_exit(const int status) noexcept {
     try {
         exit_handler_manager::instance().execute_quick_exit_handlers();
         // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (...) {
-        // ignore
+    } catch (const exception& e) {
+        NEFORCE_REPORT_EXCEPTION(e);
     }
     immediate_exit(status);
 }

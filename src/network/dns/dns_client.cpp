@@ -594,8 +594,8 @@ void dns_client::dns_query_op::retry_udp() {
     try {
         client->send_query(query_data_);
         // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (...) {
-        // Send failure: keep waiting; the pending timeout path settles the op.
+    } catch (const exception& e) {
+        NEFORCE_REPORT_EXCEPTION(e);
     }
 }
 
@@ -1012,8 +1012,8 @@ dns_client::~dns_client() {
     try {
         stop_io();
         // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (...) {
-        // ignore
+    } catch (const exception& e) {
+        NEFORCE_REPORT_EXCEPTION(e);
     }
 }
 

@@ -41,8 +41,8 @@ http2_connection::~http2_connection() {
     try {
         close_connection();
         // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (...) {
-        // ignore
+    } catch (const exception& e) {
+        NEFORCE_REPORT_EXCEPTION(e);
     }
 }
 

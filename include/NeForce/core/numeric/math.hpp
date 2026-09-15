@@ -1,4 +1,4 @@
-﻿#ifndef NEFORCE_CORE_NUMERIC_MATH_HPP__
+#ifndef NEFORCE_CORE_NUMERIC_MATH_HPP__
 #define NEFORCE_CORE_NUMERIC_MATH_HPP__
 
 /**
@@ -30,6 +30,9 @@ NEFORCE_BEGIN_CONSTANTS__
  * | PHI            | φ    | 1.61803398874989484820          | 黄金分割比               |
  * | TWO_PI_HI      | 2π   | 6.28318530717958647692          | 2π 高位部分（用于精确归约）|
  * | TWO_PI_LO      | -    | 2.44929359829470641435e-16      | 2π 低位部分（补偿）      |
+ * | LN2            | ln2  | 0.69314718055994530942          | 自然对数 2               |
+ * | INV_LN2        | log₂e| 1.44269504088896340736          | log₂(e)                  |
+ * | SQRT_2         | √2   | 1.41421356237309504880          | 2 的平方根               |
  * | MACHINE_EPSILON| ε    | 取决于 decimal_t                | 机器精度（最小正数差）   |
  * | DEFAULT_TOLERANCE | - | 1e-12                           | 默认数值容差             |
  * @{
@@ -52,6 +55,95 @@ NEFORCE_INLINE17 constexpr decimal_t MACHINE_EPSILON = numeric_traits<decimal_t>
 NEFORCE_INLINE17 constexpr decimal_t DEFAULT_TOLERANCE = 1e-12L;
 /// 宽松容差
 NEFORCE_INLINE17 constexpr decimal_t LOOSE_TOLERANCE = 1e-9L;
+
+/// 自然对数 2
+NEFORCE_INLINE17 constexpr decimal_t LN2 = 0.69314718055994530941723212145817656807L;
+/// log₂(e)
+NEFORCE_INLINE17 constexpr decimal_t INV_LN2 = 1.44269504088896340735992468100189213743L;
+/// 2 的平方根
+NEFORCE_INLINE17 constexpr decimal_t SQRT_2 = 1.41421356237309504880168872420969807857L;
+
+/**
+ * @brief e^x 泰勒展开系数（1/n!，n = 0..19）
+ *
+ * 范围归约后 |r| <= ln(2)/2，19 阶即可达到长双精度。
+ */
+NEFORCE_INLINE17 constexpr decimal_t EXPONENTIAL_COEFFICIENTS[20] = {1.0L / 1.0L,
+                                                                     1.0L / 1.0L,
+                                                                     1.0L / 2.0L,
+                                                                     1.0L / 6.0L,
+                                                                     1.0L / 24.0L,
+                                                                     1.0L / 120.0L,
+                                                                     1.0L / 720.0L,
+                                                                     1.0L / 5040.0L,
+                                                                     1.0L / 40320.0L,
+                                                                     1.0L / 362880.0L,
+                                                                     1.0L / 3628800.0L,
+                                                                     1.0L / 39916800.0L,
+                                                                     1.0L / 479001600.0L,
+                                                                     1.0L / 6227020800.0L,
+                                                                     1.0L / 87178291200.0L,
+                                                                     1.0L / 1307674368000.0L,
+                                                                     1.0L / 20922789888000.0L,
+                                                                     1.0L / 355687428096000.0L,
+                                                                     1.0L / 6402373705728000.0L,
+                                                                     1.0L / 121645100408832000.0L};
+
+/**
+ * @brief 自然对数级数系数（1/3、1/5 … 1/29）
+ *
+ * 归约后 |a| <= (√2 - 1)/(√2 + 1)，14 项即可达到长双精度。
+ */
+NEFORCE_INLINE17 constexpr decimal_t LOGARITHM_COEFFICIENTS[14] = {
+        1.0L / 3.0L,  1.0L / 5.0L,  1.0L / 7.0L,  1.0L / 9.0L,  1.0L / 11.0L, 1.0L / 13.0L, 1.0L / 15.0L,
+        1.0L / 17.0L, 1.0L / 19.0L, 1.0L / 21.0L, 1.0L / 23.0L, 1.0L / 25.0L, 1.0L / 27.0L, 1.0L / 29.0L};
+
+/**
+ * @brief log(1 + x) 级数系数（1/1、1/2 … 1/22）
+ *
+ * |x| <= 1/8 时 22 项即可达到长双精度。
+ */
+NEFORCE_INLINE17 constexpr decimal_t LOGARITHM_1P_COEFFICIENTS[22] = {
+        1.0L / 1.0L,  1.0L / 2.0L,  1.0L / 3.0L,  1.0L / 4.0L,  1.0L / 5.0L,  1.0L / 6.0L,  1.0L / 7.0L,  1.0L / 8.0L,
+        1.0L / 9.0L,  1.0L / 10.0L, 1.0L / 11.0L, 1.0L / 12.0L, 1.0L / 13.0L, 1.0L / 14.0L, 1.0L / 15.0L, 1.0L / 16.0L,
+        1.0L / 17.0L, 1.0L / 18.0L, 1.0L / 19.0L, 1.0L / 20.0L, 1.0L / 21.0L, 1.0L / 22.0L};
+
+/**
+ * @brief ln(n!) 查表值（n = 0..32）
+ */
+NEFORCE_INLINE17 constexpr decimal_t LOGARITHM_FACTORIAL[33] = {0.0L,
+                                                                0.0L,
+                                                                0.6931471805599453094172L,
+                                                                1.791759469228055000812L,
+                                                                3.178053830347945619647L,
+                                                                4.787491742782045994248L,
+                                                                6.57925121201010099506L,
+                                                                8.525161361065414300166L,
+                                                                10.60460290274525022842L,
+                                                                12.80182748008146961121L,
+                                                                15.10441257307551529523L,
+                                                                17.50230784587388583929L,
+                                                                19.98721449566188614952L,
+                                                                22.55216385312342288557L,
+                                                                25.19122118273868150009L,
+                                                                27.89927138384089156609L,
+                                                                30.67186010608067280376L,
+                                                                33.50507345013688888401L,
+                                                                36.39544520803305357622L,
+                                                                39.33988418719949403622L,
+                                                                42.33561646075348502966L,
+                                                                45.38013889847690802616L,
+                                                                48.47118135183522387964L,
+                                                                51.60667556776437357045L,
+                                                                54.78472939811231919009L,
+                                                                58.00360522298051993929L,
+                                                                61.26170176100200198477L,
+                                                                64.55753862700633105895L,
+                                                                67.88974313718153498289L,
+                                                                71.25703896716800901007L,
+                                                                74.65823634883016438549L,
+                                                                78.09222355331531063142L,
+                                                                81.5579594561150371785L};
 
 /**
  * @brief 预计算的斐波那契数列
@@ -136,7 +228,9 @@ NEFORCE_END_CONSTANTS__
  *
  * @section performance_notes 性能与精度说明
  * - 三角函数使用参数归约减少大输入值的误差
- * - 泰勒级数迭代次数由机器精度自适应确定
+ * - 对数与指数使用 2 的整数次幂阶梯归约后再展开级数，级数项以预计算倒数系数相乘实现
+ * - 平方根以线性近似为初值做牛顿迭代，5 次迭代内即可达到长双精度
+ * - 阶乘对数采用查表 + 斯特林级数，避免大数阶乘溢出
  * - 预计算的斐波那契数列加速小索引值的查询
  *
  * @see https://standards.ieee.org/ieee/754/6210/
@@ -421,13 +515,124 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t exponential(const uint32_t n
 }
 
 /**
+ * @brief 计算 2 的整数次幂
+ * @param exponent 指数
+ * @return 2^exponent
+ *
+ * 使用二进制幂计算，最多需要 2 * log₂(|exponent|) 次乘法，
+ * 结果超出浮点表示范围时按 IEEE 754 规则上溢为无穷大或下溢为 0。
+ */
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t power_of_two(const int64_t exponent) noexcept {
+    decimal_t scale = 1.0L;
+    decimal_t factor = exponent >= 0 ? 2.0L : 0.5L;
+    auto remaining = static_cast<uint64_t>(exponent >= 0 ? exponent : -exponent);
+
+    while (remaining > 0) {
+        if ((remaining & 1U) != 0U) {
+            scale *= factor;
+        }
+        remaining >>= 1U;
+        if (remaining > 0) {
+            factor *= factor;
+        }
+    }
+    return scale;
+}
+
+/**
+ * @brief 按 2 的整数次幂归一化正数
+ * @param value 输入输出参数，输入为正数，输出归一化到 [1, 2) 的尾数
+ * @return 归一化使用的指数
+ *
+ * 归一化前的数值 = 归一化后的数值 × 2^返回值
+ */
+NEFORCE_CONSTEXPR14 int64_t normalize_power_of_two(decimal_t& value) noexcept {
+    decimal_t steps[10];
+    steps[0] = 2.0L;
+    for (int i = 1; i < 10; ++i) {
+        steps[i] = steps[i - 1] * steps[i - 1];
+    }
+
+    int64_t exponent = 0;
+
+    for (int i = 9; i >= 0; --i) {
+        while (value >= 2.0L * steps[i]) {
+            value /= steps[i];
+            exponent += static_cast<int64_t>(1) << i;
+        }
+    }
+    while (value >= 2.0L) {
+        value *= 0.5L;
+        ++exponent;
+    }
+
+    for (int i = 9; i >= 0; --i) {
+        while (value < 1.0L && value * steps[i] <= 1.0L) {
+            value *= steps[i];
+            exponent -= static_cast<int64_t>(1) << i;
+        }
+    }
+    while (value < 1.0L) {
+        value *= 2.0L;
+        --exponent;
+    }
+    return exponent;
+}
+
+/**
+ * @brief 计算 e 的 x 次幂
+ * @param x 指数
+ * @return e^x
+ *
+ * 采用范围归约 + 泰勒展开 + 2 的整数次幂缩放
+ */
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t exponential_e(const decimal_t x) noexcept {
+    if (is_nan(x)) {
+        return x;
+    }
+    if (is_infinity(x)) {
+        return x > 0 ? x : 0.0L;
+    }
+    if (x == 0.0L) {
+        return 1.0L;
+    }
+
+    constexpr decimal_t MAX_EXPONENT = sizeof(decimal_t) == sizeof(double) ? 709.78271289338397L : 11356.523406294143L;
+    constexpr decimal_t MIN_EXPONENT =
+            sizeof(decimal_t) == sizeof(double) ? -745.13321910194110L : -11433.462743168135L;
+
+    if (x > MAX_EXPONENT) {
+        return static_cast<decimal_t>(numeric_traits<decimal_t>::infinity());
+    }
+    if (x < MIN_EXPONENT) {
+        return 0.0L;
+    }
+
+    const decimal_t nearest = x * constants::INV_LN2;
+    int64_t k = safe_trunc(nearest);
+    if (nearest - static_cast<decimal_t>(k) > 0.5L) {
+        ++k;
+    } else if (nearest - static_cast<decimal_t>(k) < -0.5L) {
+        --k;
+    }
+
+    const decimal_t r = x - static_cast<decimal_t>(k) * constants::LN2;
+
+    decimal_t polynomial = constants::EXPONENTIAL_COEFFICIENTS[19];
+    for (int i = 18; i >= 0; --i) {
+        polynomial = polynomial * r + constants::EXPONENTIAL_COEFFICIENTS[i];
+    }
+    return polynomial * power_of_two(k);
+}
+
+/**
  * @brief 计算自然对数
  * @param x 真数
  * @return ln(x)
  *
- * 使用反正切泰勒展开计算。
+ * 采用倒数归约 + 2 的整数次幂阶梯归约 + 反正切级数
  */
-NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t logarithm_e(const decimal_t x) noexcept {
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t logarithm_e(const decimal_t x) noexcept {
     if (is_nan(x)) {
         return x;
     }
@@ -440,36 +645,61 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t logarithm_e(const decimal_t
     if (is_infinity(x) && x > 0) {
         return x;
     }
+    if (x < 1.0L) {
+        return -logarithm_e(1.0L / x);
+    }
 
-    int64_t k = 0;
     decimal_t m = x;
+    int64_t k = normalize_power_of_two(m);
 
-    if (m >= 2.0L) {
-        while (m >= 2.0L) {
-            m *= 0.5L;
-            ++k;
-        }
-    } else if (m < 1.0L) {
-        while (m < 1.0L) {
-            m *= 2.0L;
-            --k;
-        }
+    if (m > constants::SQRT_2) {
+        m *= 0.5L;
+        ++k;
     }
 
     const decimal_t a = (m - 1.0L) / (m + 1.0L);
     const decimal_t a2 = a * a;
     decimal_t term = a;
     decimal_t s = a;
-    decimal_t n = 1.0L;
 
-    while (absolute(term) > constants::MACHINE_EPSILON * absolute(s)) {
+    for (uint32_t n = 1; n <= 14; ++n) {
         term *= a2;
-        n += 2.0L;
-        s += term / n;
+        s += term * constants::LOGARITHM_COEFFICIENTS[n - 1];
     }
 
-    constexpr decimal_t LN2 = 0.69314718055994530941723212145817656807L;
-    return 2.0L * s + static_cast<decimal_t>(k) * LN2;
+    return 2.0L * s + static_cast<decimal_t>(k) * constants::LN2;
+}
+
+/**
+ * @brief 计算 ln(1 + x)
+ * @param x 真数减一
+ * @return ln(1 + x)
+ */
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t logarithm_1p(const decimal_t x) noexcept {
+    if (is_nan(x) || x < -1.0L) {
+        return numeric_traits<decimal_t>::quiet_nan();
+    }
+    if (x == -1.0L) {
+        return static_cast<decimal_t>(-numeric_traits<decimal_t>::infinity());
+    }
+    if (is_infinity(x)) {
+        return x;
+    }
+    if (x == 0.0L) {
+        return 0.0L;
+    }
+
+    if (absolute(x) <= 0.125L) {
+        decimal_t term = x;
+        decimal_t total = 0.0L;
+
+        for (uint32_t n = 1; n <= 22; ++n) {
+            total += term * constants::LOGARITHM_1P_COEFFICIENTS[n - 1];
+            term *= -x;
+        }
+        return total;
+    }
+    return logarithm_e(1.0L + x);
 }
 
 /**
@@ -506,7 +736,7 @@ NEFORCE_CONSTEXPR14 decimal_t logarithm_10(const decimal_t x) { return logarithm
  * @param precise 精度要求
  * @return √x
  *
- * 使用牛顿迭代法计算。
+ * 使用 2 的整数次幂阶梯把 x 归一化为 m·2^k（m ∈ [1, 4)、k 为偶数）
  */
 NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t
 square_root(const decimal_t x, const decimal_t precise = constants::DEFAULT_TOLERANCE) noexcept {
@@ -523,13 +753,21 @@ square_root(const decimal_t x, const decimal_t precise = constants::DEFAULT_TOLE
         return x;
     }
 
-    decimal_t guess = x * 0.5L;
+    decimal_t m = x;
+    int64_t k = normalize_power_of_two(m);
+    if ((k & 1) != 0) {
+        m *= 2.0L;
+        --k;
+    }
+
+    decimal_t guess = 1.0L + (m - 1.0L) / 3.0L;
     decimal_t prev = 0.0L;
     do {
         prev = guess;
-        guess = 0.5L * (prev + x / prev);
+        guess = 0.5L * (prev + m / prev);
     } while (absolute(guess - prev) > precise * absolute(guess));
-    return guess;
+
+    return guess * power_of_two(k / 2);
 }
 
 /**
@@ -576,6 +814,29 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 uint64_t factorial(const uint32_t n) 
         result *= i;
     }
     return result;
+}
+
+/**
+ * @brief 计算阶乘的自然对数
+ * @param n 非负整数
+ * @return ln(n!)
+ *
+ * n ≤ 32 时直接查表，n > 32 时使用斯特林级数
+ * ln(n!) = (n + 1/2)ln(n) - n + ln(2π)/2 + 1/(12n) - 1/(360n³) + 1/(1260n⁵) - 1/(1680n⁷)
+ */
+NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t logarithm_factorial(const uint64_t n) noexcept {
+    if (n <= 32) {
+        return constants::LOGARITHM_FACTORIAL[n];
+    }
+
+    const auto value = static_cast<decimal_t>(n);
+    const decimal_t inverse = 1.0L / value;
+    const decimal_t inverse2 = inverse * inverse;
+    const decimal_t correction =
+            1.0L / 12.0L + inverse2 * (-1.0L / 360.0L + inverse2 * (1.0L / 1260.0L + inverse2 * (-1.0L / 1680.0L)));
+
+    return (value + 0.5L) * logarithm_e(value) - value + 0.91893853320467274178032973640561763986L +
+           inverse * correction;
 }
 
 /**

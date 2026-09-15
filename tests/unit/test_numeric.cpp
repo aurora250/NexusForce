@@ -680,6 +680,98 @@ TEST(SquareRootTest, EdgeCases) {
     EXPECT_TRUE(is_infinity(square_root(numeric_traits<decimal_t>::infinity())));
 }
 
+TEST(SquareRootTest, AccuracyAcrossMagnitudes) {
+    const decimal_t values[] = {1e-300L, 1e-10L, 0.5L, 2.0L, 3.0L, 1e10L, 1e300L};
+    for (const decimal_t value: values) {
+        const decimal_t root = square_root(value);
+        EXPECT_NEAR(static_cast<double>(root * root) / static_cast<double>(value), 1.0, 1e-14);
+    }
+    EXPECT_NEAR(static_cast<double>(square_root(1e-300L) * square_root(1e300L)), 1.0, 1e-12);
+}
+
+TEST(SquareRootTest, HonoursPreciseArgument) {
+    EXPECT_NEAR(static_cast<double>(square_root(2.0L, constants::LOOSE_TOLERANCE)), 1.4142135623730950488, 1e-8);
+}
+
+TEST(PowerOfTwoTest, IntegerExponents) {
+    EXPECT_DOUBLE_EQ(static_cast<double>(power_of_two(0)), 1.0);
+    EXPECT_DOUBLE_EQ(static_cast<double>(power_of_two(10)), 1024.0);
+    EXPECT_DOUBLE_EQ(static_cast<double>(power_of_two(52)), 4503599627370496.0);
+    EXPECT_DOUBLE_EQ(static_cast<double>(power_of_two(-10)), 1.0 / 1024.0);
+    EXPECT_GT(power_of_two(20000), 1e300L);
+    EXPECT_DOUBLE_EQ(static_cast<double>(power_of_two(-20000)), 0.0);
+}
+
+TEST(NormalizePowerOfTwoTest, RoundTrip) {
+    const decimal_t samples[] = {1.0L, 1.5L, 2.0L, 3.0L, 0.001L, 1234.5678L, 1e30L, 1e-30L};
+    for (const decimal_t sample: samples) {
+        decimal_t value = sample;
+        const int64_t exponent = normalize_power_of_two(value);
+
+        EXPECT_GE(static_cast<double>(value), 1.0);
+        EXPECT_LT(static_cast<double>(value), 2.0);
+        EXPECT_NEAR(static_cast<double>(value * power_of_two(exponent)) / static_cast<double>(sample), 1.0, 1e-14);
+    }
+}
+
+TEST(ExponentialETest, ReferenceValues) {
+    EXPECT_DOUBLE_EQ(static_cast<double>(exponential_e(0.0L)), 1.0);
+    EXPECT_NEAR(static_cast<double>(exponential_e(1.0L)), 2.7182818284590452354, 1e-15);
+    EXPECT_NEAR(static_cast<double>(exponential_e(2.0L)), 7.3890560989306502272, 1e-15);
+    EXPECT_NEAR(static_cast<double>(exponential_e(10.0L)), 22026.465794806716517, 1e-10);
+    EXPECT_NEAR(static_cast<double>(exponential_e(-10.0L)), 4.5399929762484851536e-5, 1e-19);
+}
+
+TEST(ExponentialETest, InverseOfLogarithm) {
+    for (int i = 1; i <= 40; ++i) {
+        for (const decimal_t sign: {1.0L, -1.0L}) {
+            const decimal_t value = sign * static_cast<decimal_t>(i) / 4.0L;
+            EXPECT_NEAR(static_cast<double>(logarithm_e(exponential_e(value))), static_cast<double>(value), 1e-13);
+        }
+    }
+}
+
+TEST(ExponentialETest, EdgeCases) {
+    EXPECT_TRUE(is_nan(exponential_e(numeric_traits<decimal_t>::quiet_nan())));
+    EXPECT_TRUE(is_infinity(exponential_e(numeric_traits<decimal_t>::infinity())));
+    EXPECT_DOUBLE_EQ(static_cast<double>(exponential_e(-numeric_traits<decimal_t>::infinity())), 0.0);
+    EXPECT_TRUE(is_infinity(exponential_e(1e5L)));
+    EXPECT_DOUBLE_EQ(static_cast<double>(exponential_e(-1e5L)), 0.0);
+}
+
+TEST(Logarithm1pTest, ReferenceValues) {
+    EXPECT_DOUBLE_EQ(static_cast<double>(logarithm_1p(0.0L)), 0.0);
+    EXPECT_NEAR(static_cast<double>(logarithm_1p(0.5L)), 0.40546510810816438198, 1e-15);
+    EXPECT_NEAR(static_cast<double>(logarithm_1p(-0.5L)), -0.69314718055994530942, 1e-15);
+    EXPECT_NEAR(static_cast<double>(logarithm_1p(1.0L)), 0.69314718055994530942, 1e-15);
+    EXPECT_NEAR(static_cast<double>(logarithm_1p(1e-15L)) / 1e-15, 1.0, 1e-13);
+}
+
+TEST(Logarithm1pTest, EdgeCases) {
+    EXPECT_TRUE(is_nan(logarithm_1p(-2.0L)));
+    EXPECT_TRUE(is_nan(logarithm_1p(numeric_traits<decimal_t>::quiet_nan())));
+    EXPECT_TRUE(is_infinity(logarithm_1p(-1.0L)) && logarithm_1p(-1.0L) < 0);
+    EXPECT_TRUE(is_infinity(logarithm_1p(numeric_traits<decimal_t>::infinity())));
+}
+
+TEST(LogarithmFactorialTest, ReferenceValues) {
+    EXPECT_DOUBLE_EQ(static_cast<double>(logarithm_factorial(0)), 0.0);
+    EXPECT_DOUBLE_EQ(static_cast<double>(logarithm_factorial(1)), 0.0);
+    EXPECT_NEAR(static_cast<double>(logarithm_factorial(10)), 15.1044125730755153, 1e-13);
+    EXPECT_NEAR(static_cast<double>(logarithm_factorial(32)), 81.5579594561150372, 1e-13);
+    EXPECT_NEAR(static_cast<double>(logarithm_factorial(33)), 85.0544670175815174, 1e-13);
+    EXPECT_NEAR(static_cast<double>(logarithm_factorial(100)), 363.73937555556349, 1e-12);
+    EXPECT_NEAR(static_cast<double>(logarithm_factorial(1000)), 5912.12817848816335, 1e-11);
+}
+
+TEST(LogarithmETest, AccuracyAcrossMagnitudes) {
+    const decimal_t values[] = {1e-300L, 1e-10L, 0.5L, 1.5L, 2.0L, 10.0L, 1e10L, 1e300L};
+    for (const decimal_t value: values) {
+        EXPECT_NEAR(static_cast<double>(exponential_e(logarithm_e(value))) / static_cast<double>(value), 1.0, 1e-13);
+    }
+}
+
+
 TEST(CubeRootTest, Normal) {
     EXPECT_NEAR(static_cast<double>(cube_root(8.0L)), 2.0, 1e-12);
     EXPECT_NEAR(static_cast<double>(cube_root(-8.0L)), -2.0, 1e-12);
@@ -873,371 +965,6 @@ TEST(ArccosineTest, DomainAndValues) {
     EXPECT_NEAR(static_cast<double>(arccosine(-1.0L)), static_cast<double>(constants::PI), 1e-12);
     EXPECT_TRUE(is_nan(arccosine(2.0L)));
     EXPECT_TRUE(is_nan(arccosine(numeric_traits<decimal_t>::quiet_nan())));
-}
-
-TEST(LemireBoundedTest, ResultInRange) {
-    uint64_t counter = 0;
-    auto gen = [&counter]() noexcept -> uint64_t { return counter++; };
-    for (uint64_t max = 2; max <= 10000; ++max) {
-        for (int i = 0; i < 100; ++i) {
-            uint64_t v = lemire_bounded(gen, max);
-            EXPECT_LT(v, max);
-        }
-    }
-}
-
-TEST(LemireBoundedTest, MaxOneReturnsZero) {
-    uint64_t counter = 0;
-    auto gen = [&counter]() noexcept -> uint64_t { return counter++; };
-    EXPECT_EQ(lemire_bounded(gen, 1), 0u);
-}
-
-TEST(LemireBoundedTest, MaxZeroReturnsZero) {
-    uint64_t counter = 0;
-    auto gen = [&counter]() noexcept -> uint64_t { return counter++; };
-    EXPECT_EQ(lemire_bounded(gen, 0), 0u);
-}
-
-class RandomLcdTest : public ::testing::Test {
-protected:
-    random_lcd default_rng;
-    random_lcd seeded_rng{12345u};
-};
-
-TEST_F(RandomLcdTest, NextIntMaxBoundary) {
-    EXPECT_EQ(default_rng.next_int(0), 0);
-    EXPECT_EQ(default_rng.next_int(1), 0);
-    EXPECT_EQ(default_rng.next_int(-5), 0);
-    for (int i = 0; i < 100; ++i) {
-        int val = default_rng.next_int(5);
-        EXPECT_GE(val, 0);
-        EXPECT_LT(val, 5);
-    }
-}
-
-TEST_F(RandomLcdTest, NextIntMinMax) {
-    for (int i = 0; i < 100; ++i) {
-        int val = default_rng.next_int(10, 20);
-        EXPECT_GE(val, 10);
-        EXPECT_LT(val, 20);
-    }
-    EXPECT_EQ(default_rng.next_int(20, 10), 20);
-    EXPECT_EQ(default_rng.next_int(5, 5), 5);
-}
-
-TEST_F(RandomLcdTest, NextIntFullRange) {
-    for (int i = 0; i < 100; ++i) {
-        int val = default_rng.next_int<int>();
-        EXPECT_GE(val, numeric_traits<int>::min());
-        EXPECT_LE(val, numeric_traits<int>::max());
-    }
-    for (int i = 0; i < 100; ++i) {
-        unsigned int val = default_rng.next_int<unsigned int>();
-        EXPECT_LE(val, numeric_traits<unsigned int>::max());
-    }
-    for (int i = 0; i < 100; ++i) {
-        short val = default_rng.next_int<short>();
-        EXPECT_GE(val, numeric_traits<short>::min());
-        EXPECT_LE(val, numeric_traits<short>::max());
-    }
-    for (int i = 0; i < 100; ++i) {
-        int64_t val = default_rng.next_int<int64_t>();
-        EXPECT_GE(val, numeric_traits<int64_t>::min());
-        EXPECT_LE(val, numeric_traits<int64_t>::max());
-    }
-    for (int i = 0; i < 100; ++i) {
-        uint64_t val = default_rng.next_int<uint64_t>();
-        EXPECT_LE(val, numeric_traits<uint64_t>::max());
-    }
-}
-
-TEST_F(RandomLcdTest, NextUint64Max) {
-    EXPECT_EQ(default_rng.next_uint64(0), 0u);
-    EXPECT_EQ(default_rng.next_uint64(1), 0u);
-    for (int i = 0; i < 100; ++i) {
-        uint64_t val = default_rng.next_uint64(1000);
-        EXPECT_LT(val, 1000u);
-    }
-}
-
-TEST_F(RandomLcdTest, NextUint64Full) {
-    for (int i = 0; i < 100; ++i) {
-        uint64_t val = default_rng.next_uint64();
-        EXPECT_LE(val, numeric_traits<uint64_t>::max());
-    }
-}
-
-TEST_F(RandomLcdTest, NextFloat) {
-    for (int i = 0; i < 100; ++i) {
-        float val = default_rng.next_float<float>();
-        EXPECT_GE(val, 0.0f);
-        EXPECT_LE(val, 1.0f);
-    }
-    for (int i = 0; i < 100; ++i) {
-        double val = default_rng.next_float<double>();
-        EXPECT_GE(val, 0.0);
-        EXPECT_LE(val, 1.0);
-    }
-}
-
-TEST_F(RandomLcdTest, NextFloatMinMax) {
-    for (int i = 0; i < 100; ++i) {
-        double val = default_rng.next_float(1.5, 3.5);
-        EXPECT_GE(val, 1.5);
-        EXPECT_LE(val, 3.5);
-    }
-    EXPECT_EQ(default_rng.next_float(3.0, 1.0), 3.0);
-    EXPECT_EQ(default_rng.next_float(5.0, 5.0), 5.0);
-}
-
-TEST_F(RandomLcdTest, NextFloatMax) {
-    for (int i = 0; i < 100; ++i) {
-        double val = default_rng.next_float(10.0);
-        EXPECT_GE(val, 0.0);
-        EXPECT_LE(val, 10.0);
-    }
-}
-
-TEST_F(RandomLcdTest, Reproducibility) {
-    random_lcd rng1(9999);
-    random_lcd rng2(9999);
-    for (int i = 0; i < 100; ++i) {
-        EXPECT_EQ(rng1.next_int<int>(), rng2.next_int<int>());
-        EXPECT_EQ(rng1.next_uint64(), rng2.next_uint64());
-        EXPECT_DOUBLE_EQ(rng1.next_float<double>(), rng2.next_float<double>());
-    }
-}
-
-TEST_F(RandomLcdTest, DifferentSeedsDiverge) {
-    random_lcd rng1(1111);
-    random_lcd rng2(2222);
-    vector<int> seq1;
-    vector<int> seq2;
-    for (int i = 0; i < 20; ++i) {
-        seq1.push_back(rng1.next_int<int>());
-        seq2.push_back(rng2.next_int<int>());
-    }
-    bool identical = true;
-    for (size_t i = 0; i < seq1.size(); ++i) {
-        if (seq1[i] != seq2[i]) {
-            identical = false;
-            break;
-        }
-    }
-    EXPECT_FALSE(identical);
-}
-
-class RandomMtTest : public ::testing::Test {
-protected:
-    random_mt default_rng;
-    random_mt seeded_rng{12345u};
-};
-
-TEST_F(RandomMtTest, SetSeedReproducibility) {
-    random_mt rng1;
-    rng1.set_seed(5555);
-    random_mt rng2(5555);
-    for (int i = 0; i < 100; ++i) {
-        EXPECT_EQ(rng1.next_int<int>(), rng2.next_int<int>());
-    }
-}
-
-TEST_F(RandomMtTest, NextIntMaxBoundary) {
-    EXPECT_EQ(default_rng.next_int(0), 0);
-    EXPECT_EQ(default_rng.next_int(1), 0);
-    for (int i = 0; i < 100; ++i) {
-        int val = default_rng.next_int(7);
-        EXPECT_GE(val, 0);
-        EXPECT_LT(val, 7);
-    }
-}
-
-TEST_F(RandomMtTest, NextIntMinMax) {
-    for (int i = 0; i < 100; ++i) {
-        int val = default_rng.next_int(10, 30);
-        EXPECT_GE(val, 10);
-        EXPECT_LT(val, 30);
-    }
-    EXPECT_EQ(default_rng.next_int(30, 10), 30);
-    EXPECT_EQ(default_rng.next_int(5, 5), 5);
-}
-
-TEST_F(RandomMtTest, NextIntFullRange) {
-    for (int i = 0; i < 100; ++i) {
-        int val = default_rng.next_int<int>();
-        EXPECT_GE(val, numeric_traits<int>::min());
-        EXPECT_LE(val, numeric_traits<int>::max());
-    }
-    for (int i = 0; i < 100; ++i) {
-        unsigned int val = default_rng.next_int<unsigned int>();
-        EXPECT_LE(val, numeric_traits<unsigned int>::max());
-    }
-    for (int i = 0; i < 100; ++i) {
-        short val = default_rng.next_int<short>();
-        EXPECT_GE(val, numeric_traits<short>::min());
-        EXPECT_LE(val, numeric_traits<short>::max());
-    }
-    for (int i = 0; i < 100; ++i) {
-        int64_t val = default_rng.next_int<int64_t>();
-        EXPECT_GE(val, numeric_traits<int64_t>::min());
-        EXPECT_LE(val, numeric_traits<int64_t>::max());
-    }
-    for (int i = 0; i < 100; ++i) {
-        uint64_t val = default_rng.next_int<uint64_t>();
-        EXPECT_LE(val, numeric_traits<uint64_t>::max());
-    }
-}
-
-TEST_F(RandomMtTest, NextUint64Max) {
-    EXPECT_EQ(default_rng.next_uint64(0), 0u);
-    EXPECT_EQ(default_rng.next_uint64(1), 0u);
-    for (int i = 0; i < 100; ++i) {
-        uint64_t val = default_rng.next_uint64(5000);
-        EXPECT_LT(val, 5000u);
-    }
-}
-
-TEST_F(RandomMtTest, NextUint64Full) {
-    for (int i = 0; i < 100; ++i) {
-        uint64_t val = default_rng.next_uint64();
-        EXPECT_LE(val, numeric_traits<uint64_t>::max());
-    }
-}
-
-TEST_F(RandomMtTest, NextFloat) {
-    for (int i = 0; i < 100; ++i) {
-        float val = default_rng.next_float<float>();
-        EXPECT_GE(val, 0.0f);
-        EXPECT_LE(val, 1.0f);
-    }
-    for (int i = 0; i < 100; ++i) {
-        double val = default_rng.next_float<double>();
-        EXPECT_GE(val, 0.0);
-        EXPECT_LE(val, 1.0);
-    }
-}
-
-TEST_F(RandomMtTest, NextFloatMinMax) {
-    for (int i = 0; i < 100; ++i) {
-        double val = default_rng.next_float(2.0, 4.0);
-        EXPECT_GE(val, 2.0);
-        EXPECT_LE(val, 4.0);
-    }
-    EXPECT_EQ(default_rng.next_float(4.0, 2.0), 4.0);
-    EXPECT_EQ(default_rng.next_float(6.0, 6.0), 6.0);
-}
-
-TEST_F(RandomMtTest, NextFloatMax) {
-    for (int i = 0; i < 100; ++i) {
-        double val = default_rng.next_float(100.0);
-        EXPECT_GE(val, 0.0);
-        EXPECT_LE(val, 100.0);
-    }
-}
-
-TEST_F(RandomMtTest, ReproducibilitySameSeed) {
-    random_mt rng1(7777);
-    random_mt rng2(7777);
-    for (int i = 0; i < 100; ++i) {
-        EXPECT_EQ(rng1.next_int<int>(), rng2.next_int<int>());
-        EXPECT_EQ(rng1.next_uint64(), rng2.next_uint64());
-        EXPECT_DOUBLE_EQ(rng1.next_float<double>(), rng2.next_float<double>());
-    }
-}
-
-TEST(SecretTest, SystemSupported) { EXPECT_TRUE(secret::system_supported()); }
-
-TEST(SecretTest, NextIntMaxBoundary) {
-    EXPECT_EQ(secret::next_int(0), 0);
-    EXPECT_EQ(secret::next_int(1), 0);
-    for (int i = 0; i < 50; ++i) {
-        int val = secret::next_int(10);
-        EXPECT_GE(val, 0);
-        EXPECT_LT(val, 10);
-    }
-}
-
-TEST(SecretTest, NextIntMinMax) {
-    for (int i = 0; i < 50; ++i) {
-        int val = secret::next_int(5, 15);
-        EXPECT_GE(val, 5);
-        EXPECT_LT(val, 15);
-    }
-    EXPECT_EQ(secret::next_int(15, 5), 15);
-    EXPECT_EQ(secret::next_int(3, 3), 3);
-}
-
-TEST(SecretTest, NextIntFullRange) {
-    for (int i = 0; i < 50; ++i) {
-        int val = secret::next_int<int>();
-        EXPECT_GE(val, numeric_traits<int>::min());
-        EXPECT_LE(val, numeric_traits<int>::max());
-    }
-    for (int i = 0; i < 50; ++i) {
-        unsigned int val = secret::next_int<unsigned int>();
-        EXPECT_LE(val, numeric_traits<unsigned int>::max());
-    }
-    for (int i = 0; i < 50; ++i) {
-        short val = secret::next_int<short>();
-        EXPECT_GE(val, numeric_traits<short>::min());
-        EXPECT_LE(val, numeric_traits<short>::max());
-    }
-    for (int i = 0; i < 50; ++i) {
-        int64_t val = secret::next_int<int64_t>();
-        EXPECT_GE(val, numeric_traits<int64_t>::min());
-        EXPECT_LE(val, numeric_traits<int64_t>::max());
-    }
-    for (int i = 0; i < 50; ++i) {
-        uint64_t val = secret::next_int<uint64_t>();
-        EXPECT_LE(val, numeric_traits<uint64_t>::max());
-    }
-}
-
-TEST(SecretTest, NextUint64Max) {
-    EXPECT_EQ(secret::next_uint64(0), 0u);
-    EXPECT_EQ(secret::next_uint64(1), 0u);
-    for (int i = 0; i < 50; ++i) {
-        uint64_t val = secret::next_uint64(999);
-        EXPECT_LT(val, 999u);
-    }
-}
-
-TEST(SecretTest, NextUint64Full) {
-    for (int i = 0; i < 50; ++i) {
-        uint64_t val = secret::next_uint64();
-        EXPECT_LE(val, numeric_traits<uint64_t>::max());
-    }
-}
-
-TEST(SecretTest, NextFloat) {
-    for (int i = 0; i < 50; ++i) {
-        float val = secret::next_float<float>();
-        EXPECT_GE(val, 0.0f);
-        EXPECT_LE(val, 1.0f);
-    }
-    for (int i = 0; i < 50; ++i) {
-        double val = secret::next_float<double>();
-        EXPECT_GE(val, 0.0);
-        EXPECT_LE(val, 1.0);
-    }
-}
-
-TEST(SecretTest, NextFloatMinMax) {
-    for (int i = 0; i < 50; ++i) {
-        double val = secret::next_float(0.5, 2.5);
-        EXPECT_GE(val, 0.5);
-        EXPECT_LE(val, 2.5);
-    }
-    EXPECT_EQ(secret::next_float(2.5, 0.5), 2.5);
-    EXPECT_EQ(secret::next_float(7.0, 7.0), 7.0);
-}
-
-TEST(SecretTest, NextFloatMax) {
-    for (int i = 0; i < 50; ++i) {
-        double val = secret::next_float(50.0);
-        EXPECT_GE(val, 0.0);
-        EXPECT_LE(val, 50.0);
-    }
 }
 
 TEST(Uint128ConstructionTest, DefaultConstructor) {

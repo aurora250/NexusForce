@@ -43,8 +43,8 @@ websocket_deflate_config websocket_deflate_config::negotiate(const string_view r
                             cfg.client_max_window_bits = bits;
                         }
                         // NOLINTNEXTLINE(bugprone-empty-catch)
-                    } catch (...) {
-                        // ignore
+                    } catch (const exception& e) {
+                        NEFORCE_REPORT_EXCEPTION(e);
                     }
                 }
             }
@@ -72,8 +72,8 @@ websocket_deflate_config websocket_deflate_config::negotiate(const string_view r
                             cfg.server_max_window_bits = bits;
                         }
                         // NOLINTNEXTLINE(bugprone-empty-catch)
-                    } catch (...) {
-                        // ignore
+                    } catch (const exception& e) {
+                        NEFORCE_REPORT_EXCEPTION(e);
                     }
                 }
             }

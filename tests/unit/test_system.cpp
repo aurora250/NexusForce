@@ -4276,19 +4276,33 @@ TEST_F(ShareMemoryTest, Constructor_ReadOnly_Success) {
 }
 
 TEST_F(ShareMemoryTest, Open_AfterClose_ReopensSuccessfully) {
+    share_memory holder(test_shm_name, test_size, share_memory::open_mode::create_only);
+
     share_memory shm;
-    shm.open(test_shm_name, test_size, share_memory::open_mode::create_only);
+    shm.open(test_shm_name, test_size, share_memory::open_mode::open_only);
     EXPECT_TRUE(shm.is_open());
 
     shm.close();
     EXPECT_FALSE(shm.is_open());
 
-    try {
-        shm.open(test_shm_name, 0, share_memory::open_mode::open_only);
-        EXPECT_TRUE(shm.is_open());
-    } catch (const share_memory_exception& e) {
-        GTEST_SKIP() << "share_memory may close failed in Windows: " << e.what();
-    }
+    shm.open(test_shm_name, 0, share_memory::open_mode::open_only);
+    EXPECT_TRUE(shm.is_open());
+}
+
+TEST_F(ShareMemoryTest, NameLifetimeAfterLastHandleClose) {
+    share_memory creator(test_shm_name, test_size, share_memory::open_mode::create_only);
+    EXPECT_TRUE(creator.is_open());
+
+    creator.close();
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    EXPECT_FALSE(share_memory::exists(test_shm_name));
+    EXPECT_THROW(share_memory shm(test_shm_name, 0, share_memory::open_mode::open_only), share_memory_exception);
+#else
+    EXPECT_TRUE(share_memory::exists(test_shm_name));
+    share_memory shm(test_shm_name, 0, share_memory::open_mode::open_only);
+    EXPECT_TRUE(shm.is_open());
+#endif
 }
 
 TEST_F(ShareMemoryTest, Open_AlreadyOpen_ClosesAndReopens) {
@@ -4616,16 +4630,10 @@ TEST_F(ShareMemoryTest, AccessMode_ReadOnly_PreventsWrite) {
     string_copy(static_cast<char*>(shm_writer.data()), "readonly test");
     shm_writer.flush();
     shm_writer.unmap();
-    shm_writer.close();
 
-    try {
-        share_memory shm_reader(test_shm_name, 0, share_memory::open_mode::open_only,
-                                share_memory::access_mode::read_only);
-        shm_reader.map();
-        EXPECT_STREQ(static_cast<const char*>(shm_reader.data()), "readonly test");
-    } catch (const share_memory_exception& e) {
-        GTEST_SKIP() << "share_memory may close failed in Windows: " << e.what();
-    }
+    share_memory shm_reader(test_shm_name, 0, share_memory::open_mode::open_only, share_memory::access_mode::read_only);
+    shm_reader.map();
+    EXPECT_STREQ(static_cast<const char*>(shm_reader.data()), "readonly test");
 }
 
 TEST_F(ShareMemoryTest, MapWithOffset_PartialMapping_Success) {
@@ -4718,19 +4726,14 @@ TEST_F(ShareMemoryTest, StructDataSharing_Success) {
 
     shm.flush();
     shm.unmap();
-    shm.close();
 
-    try {
-        share_memory shm2(test_shm_name, 0, share_memory::open_mode::open_only);
-        shm2.map();
-        const auto* read_td = shm2.data<TestData>();
+    share_memory shm2(test_shm_name, 0, share_memory::open_mode::open_only);
+    shm2.map();
+    const auto* read_td = shm2.data<TestData>();
 
-        EXPECT_EQ(read_td->id, 42);
-        EXPECT_DOUBLE_EQ(read_td->value, 3.14159);
-        EXPECT_STREQ(read_td->name, "test struct");
-    } catch (const share_memory_exception& e) {
-        GTEST_SKIP() << "share_memory may close failed in Windows: " << e.what();
-    }
+    EXPECT_EQ(read_td->id, 42);
+    EXPECT_DOUBLE_EQ(read_td->value, 3.14159);
+    EXPECT_STREQ(read_td->name, "test struct");
 }
 
 TEST_F(ShareMemoryTest, OpenOrCreate_ExistingSize_ReturnsCorrectSize) {
