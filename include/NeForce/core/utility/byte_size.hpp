@@ -226,7 +226,7 @@ public:
      * @brief 转换为可读字符串
      * @return 格式化字符串
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const { return to_string(unit::AUTO, 2, true); }
+    NEFORCE_NODISCARD string to_string() const { return to_string(unit::AUTO, 2, true); }
 
     /**
      * @brief 转换为指定单位的字符串
@@ -235,7 +235,7 @@ public:
      * @param binary 是否使用二进制
      * @return 格式化字符串
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(unit u, int precision = 2, bool binary = true) const;
+    NEFORCE_NODISCARD string to_string(unit u, int precision = 2, bool binary = true) const;
 
     /**
      * @brief 检查是否为零
@@ -488,14 +488,12 @@ constexpr decimal_t byte_size::as(unit u, bool binary) const {
     return static_cast<decimal_t>(bytes_) / static_cast<decimal_t>(divisor);
 }
 
-NEFORCE_CONSTEXPR20 string byte_size::to_string(unit u, int precision, bool binary) const {
+inline string byte_size::to_string(unit u, int precision, bool binary) const {
     if (u == unit::AUTO) {
         if (bytes_ == 0) {
-            const string fmt = "{" + format(":.{}f", precision) + "} B";
-            return format(fmt.view(), static_cast<decimal_t>(0));
+            return _NEFORCE to_string_fixed(static_cast<decimal_t>(0), precision) + " B";
         }
 
-        const string fmt = "{" + format(":.{}f", precision) + "} {}";
         const uint64_t base = binary ? 1024 : 1000;
         auto val = static_cast<decimal_t>(bytes_);
         auto current_unit = unit::B;
@@ -510,12 +508,11 @@ NEFORCE_CONSTEXPR20 string byte_size::to_string(unit u, int precision, bool bina
             current_unit = units[i + 1];
         }
 
-        return format(fmt.view(), val, inner::byte_size_unit_to_string(current_unit, binary));
+        return _NEFORCE to_string_fixed(val, precision) + " " + inner::byte_size_unit_to_string(current_unit, binary);
     }
 
-    const string fmt = "{" + format(":.{}f", precision) + "} {}";
     const decimal_t val = as(u, binary);
-    return format(fmt.view(), val, inner::byte_size_unit_to_string(u, binary));
+    return _NEFORCE to_string_fixed(val, precision) + " " + inner::byte_size_unit_to_string(u, binary);
 }
 
 /// @endcond

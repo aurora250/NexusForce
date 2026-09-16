@@ -513,10 +513,8 @@ struct float32 : iobject<float32>, ipackage<float32, float32_t> {
         return value_ != _NEFORCE initialize<value_type>();
     }
 
-    NEFORCE_NODISCARD static NEFORCE_CONSTEXPR20 string to_string(const value_type value) {
-        return float32(value).to_string();
-    }
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const { return inner::__float_to_string<char>(value_); }
+    NEFORCE_NODISCARD static string to_string(const value_type value) { return float32(value).to_string(); }
+    NEFORCE_NODISCARD string to_string() const { return inner::__float_to_string<char>(value_); }
 
     NEFORCE_NODISCARD static constexpr float32 parse(const string_view str) {
         return float32{_NEFORCE to_float32(str)};
@@ -565,10 +563,8 @@ struct float64 : iobject<float64>, ipackage<float64, float64_t> {
         return value_ != _NEFORCE initialize<value_type>();
     }
 
-    NEFORCE_NODISCARD static NEFORCE_CONSTEXPR20 string to_string(const value_type value) {
-        return float64(value).to_string();
-    }
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const { return inner::__float_to_string<char>(value_); }
+    NEFORCE_NODISCARD static string to_string(const value_type value) { return float64(value).to_string(); }
+    NEFORCE_NODISCARD string to_string() const { return inner::__float_to_string<char>(value_); }
 
     NEFORCE_NODISCARD static constexpr float64 parse(const string_view str) {
         return float64{_NEFORCE to_float64(str)};
@@ -617,10 +613,8 @@ struct decimal : iobject<decimal>, ipackage<decimal, decimal_t> {
         return value_ != _NEFORCE initialize<value_type>();
     }
 
-    NEFORCE_NODISCARD static NEFORCE_CONSTEXPR20 string to_string(const value_type value) {
-        return decimal(value).to_string();
-    }
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const { return inner::__float_to_string<char>(value_); }
+    NEFORCE_NODISCARD static string to_string(const value_type value) { return decimal(value).to_string(); }
+    NEFORCE_NODISCARD string to_string() const { return inner::__float_to_string<char>(value_); }
 
     NEFORCE_NODISCARD static constexpr decimal parse(const string_view str) {
         return decimal{_NEFORCE to_decimal(str)};

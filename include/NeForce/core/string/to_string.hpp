@@ -320,6 +320,8 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string __int_to_string_dispatch(T x) {
     return inner::__uint_to_string<char>(x);
 }
 
+string NEFORCE_API float_to_string_exact(double value, int precision, bool use_scientific, int max_scale);
+
 /**
  * @brief 将浮点数转换为字符串
  * @tparam CharT 字符类型
@@ -331,9 +333,9 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string __int_to_string_dispatch(T x) {
  * @return 字符串表示
  */
 template <typename CharT, typename T>
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT>
-__float_to_string_with_precision(T x, int precision = 6, const bool force_scientific = false,
-                                 const bool force_fixed = false) {
+NEFORCE_NODISCARD basic_string<CharT> __float_to_string_with_precision(T x, int precision = 6,
+                                                                       const bool force_scientific = false,
+                                                                       const bool force_fixed = false) {
     static_assert(is_floating_point_v<T>, "T must be a floating point type");
 
     if (_NEFORCE is_nan(x)) {
@@ -348,107 +350,28 @@ __float_to_string_with_precision(T x, int precision = 6, const bool force_scient
         return basic_string<CharT>{"-inf"};
     }
 
-    basic_string<CharT> result;
-
     const bool is_negative = (x < 0);
-    if (is_negative) {
-        result += '-';
-        x = -x;
-    }
-
-    precision = _NEFORCE max(precision, 0);
+    const double magnitude = is_negative ? -static_cast<double>(x) : static_cast<double>(x);
 
     bool use_scientific = false;
-    int exponent = 0;
-
     if (force_scientific) {
         use_scientific = true;
     } else if (force_fixed) {
         use_scientific = false;
     } else {
-        use_scientific = (x != 0) && (x >= 1e6 || x < 1e-4);
+        use_scientific = (magnitude != 0.0) && (magnitude >= 1e6 || magnitude < 1e-4);
     }
 
-    if (use_scientific && x != 0) {
-        const double log_val = logarithm_10(static_cast<double>(x));
-        exponent = static_cast<int>(log_val >= 0 ? log_val : log_val - 1.0);
+    const string text = inner::float_to_string_exact(magnitude, precision, use_scientific, 340);
 
-        if (exponent >= 0) {
-            for (int i = 0; i < exponent; ++i) {
-                x /= static_cast<T>(10);
-            }
-        } else {
-            for (int i = 0; i < -exponent; ++i) {
-                x *= static_cast<T>(10);
-            }
-        }
-
-        if (x >= static_cast<T>(10)) {
-            x /= static_cast<T>(10);
-            ++exponent;
-        } else if (x < static_cast<T>(1) && x > static_cast<T>(0)) {
-            x *= static_cast<T>(10);
-            --exponent;
-        }
+    basic_string<CharT> result;
+    result.reserve(text.size() + 1);
+    if (is_negative) {
+        result += static_cast<CharT>('-');
     }
-
-    auto integer_part = static_cast<uint64_t>(x);
-    T fractional_part = x - static_cast<T>(integer_part);
-
-    uint64_t frac_int = 0;
-    uint64_t frac_scale = 1;
-
-    if (precision > 0) {
-        const int safe_precision = (precision > 18) ? 18 : precision;
-        for (int i = 0; i < safe_precision; ++i) {
-            frac_scale *= 10;
-        }
-
-        frac_int = static_cast<uint64_t>(fractional_part * static_cast<T>(frac_scale) + static_cast<T>(0.5));
-
-        if (frac_int >= frac_scale) {
-            frac_int -= frac_scale;
-            ++integer_part;
-
-            if (use_scientific && integer_part >= 10) {
-                integer_part /= 10;
-                ++exponent;
-            }
-        }
+    for (const char c: text) {
+        result += static_cast<CharT>(c);
     }
-
-    result += inner::__uint_to_string<CharT>(integer_part);
-
-    if (precision > 0) {
-        result += static_cast<CharT>('.');
-        basic_string<CharT> frac_str = inner::__uint_to_string<CharT>(frac_int);
-
-        const int safe_precision = (precision > 18) ? 18 : precision;
-        const int leading_zeros = safe_precision - static_cast<int>(frac_str.size());
-        for (int i = 0; i < leading_zeros; ++i) {
-            result += static_cast<CharT>('0');
-        }
-        result += frac_str;
-
-        for (int i = safe_precision; i < precision; ++i) {
-            result += static_cast<CharT>('0');
-        }
-    }
-
-    if (use_scientific) {
-        result += static_cast<CharT>('e');
-        if (exponent >= 0) {
-            result += static_cast<CharT>('+');
-        } else {
-            result += static_cast<CharT>('-');
-            exponent = -exponent;
-        }
-        if (exponent < 10) {
-            result += static_cast<CharT>('0');
-        }
-        result += inner::__uint_to_string<CharT>(static_cast<uint64_t>(exponent));
-    }
-
     return result;
 }
 
@@ -460,7 +383,7 @@ __float_to_string_with_precision(T x, int precision = 6, const bool force_scient
  * @return 字符串表示
  */
 template <typename CharT, typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string<CharT> __float_to_string(T x) {
+NEFORCE_NODISCARD basic_string<CharT> __float_to_string(T x) {
     return inner::__float_to_string_with_precision<CharT>(x, 6, false, false);
 }
 
@@ -476,7 +399,7 @@ NEFORCE_END_INNER__
  * @return 字符串表示
  */
 template <typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string_with_precision(T x, int precision, bool scientific = false) {
+NEFORCE_NODISCARD string to_string_with_precision(T x, int precision, bool scientific = false) {
     return inner::__float_to_string_with_precision<char>(x, precision, scientific, !scientific);
 }
 
@@ -488,7 +411,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string_with_precision(T x, int p
  * @return 字符串表示
  */
 template <typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string_general(T x, int precision = 6) {
+NEFORCE_NODISCARD string to_string_general(T x, int precision = 6) {
     return inner::__float_to_string_with_precision<char>(x, precision, false, false);
 }
 
@@ -500,7 +423,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string_general(T x, int precisio
  * @return 字符串表示
  */
 template <typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string_fixed(T x, int precision = 6) {
+NEFORCE_NODISCARD string to_string_fixed(T x, int precision = 6) {
     return inner::__float_to_string_with_precision<char>(x, precision, false, true);
 }
 
@@ -512,7 +435,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string_fixed(T x, int precision 
  * @return 字符串表示
  */
 template <typename T, enable_if_t<is_floating_point<T>::value, int> = 0>
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string_scientific(T x, int precision = 6) {
+NEFORCE_NODISCARD string to_string_scientific(T x, int precision = 6) {
     return inner::__float_to_string_with_precision<char>(x, precision, true, false);
 }
 

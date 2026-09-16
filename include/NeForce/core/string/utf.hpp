@@ -164,20 +164,13 @@ struct character : icharacter<character, char> {
      * @param obj 字符视图
      * @return 宽字符串（UTF-8转wchar_t）
      */
-    static NEFORCE_CONSTEXPR20 wstring to_wstring(const basic_string_view<value_type>& obj) {
+    static wstring to_wstring(const basic_string_view<value_type>& obj) {
         if (obj.empty()) {
             return {};
         }
         wstring result;
         result.reserve(obj.size());
-
-        const auto* data = reinterpret_cast<const byte_t*>(obj.data());
-        size_t i = 0;
-        const size_t len = obj.size();
-
-        while (i < len) {
-            codepoint::decode_utf8(data, i, len).append_to(result);
-        }
+        codepoint::decode_utf8(reinterpret_cast<const byte_t*>(obj.data()), obj.size(), result);
         return result;
     }
 
@@ -187,20 +180,13 @@ struct character : icharacter<character, char> {
      * @param obj 字符视图
      * @return UTF-8字符串
      */
-    static NEFORCE_CONSTEXPR20 u8string to_u8string(const basic_string_view<value_type>& obj) {
+    static u8string to_u8string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) {
             return {};
         }
         u8string result;
         result.reserve(obj.size());
-
-        const auto* data = reinterpret_cast<const byte_t*>(obj.data());
-        size_t i = 0;
-        const size_t len = obj.size();
-
-        while (i < len) {
-            codepoint::decode_utf8(data, i, len).append_to(result);
-        }
+        codepoint::decode_utf8(reinterpret_cast<const byte_t*>(obj.data()), obj.size(), result);
         return result;
     }
 #endif
@@ -210,20 +196,13 @@ struct character : icharacter<character, char> {
      * @param obj 字符视图
      * @return UTF-16字符串（UTF-8转UTF-16）
      */
-    static NEFORCE_CONSTEXPR20 u16string to_u16string(const basic_string_view<value_type>& obj) {
+    static u16string to_u16string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) {
             return {};
         }
         u16string result;
-        result.reserve(obj.size() * 2);
-
-        const auto* data = reinterpret_cast<const byte_t*>(obj.data());
-        size_t i = 0;
-        const size_t len = obj.size();
-
-        while (i < len) {
-            codepoint::decode_utf8(data, i, len).append_to(result);
-        }
+        result.reserve(obj.size());
+        codepoint::decode_utf8(reinterpret_cast<const byte_t*>(obj.data()), obj.size(), result);
         return result;
     }
 
@@ -232,20 +211,13 @@ struct character : icharacter<character, char> {
      * @param obj 字符视图
      * @return UTF-32字符串（UTF-8转UTF-32）
      */
-    static NEFORCE_CONSTEXPR20 u32string to_u32string(const basic_string_view<value_type>& obj) {
+    static u32string to_u32string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) {
             return {};
         }
         u32string result;
         result.reserve(obj.size());
-
-        const auto* data = reinterpret_cast<const byte_t*>(obj.data());
-        size_t i = 0;
-        const size_t len = obj.size();
-
-        while (i < len) {
-            codepoint::decode_utf8(data, i, len).append_to(result);
-        }
+        codepoint::decode_utf8(reinterpret_cast<const byte_t*>(obj.data()), obj.size(), result);
         return result;
     }
 };
@@ -293,22 +265,12 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
      * @param obj 字符视图
      * @return 普通字符串（wchar_t转UTF-8）
      */
-    static NEFORCE_CONSTEXPR20 string to_string(const basic_string_view<value_type>& obj) {
+    static string to_string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) {
             return {};
         }
         string result;
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-        size_t i = 0;
-        while (i < obj.size()) {
-            codepoint::decode_utf16(obj.data(), i, obj.size(), false).append_to(result);
-        }
-#else
-        for (const value_type c: obj) {
-            codepoint(static_cast<uint32_t>(c)).append_to(result);
-        }
-#endif
+        codepoint::decode_wchar(obj.data(), obj.size(), false, result);
         return result;
     }
 
@@ -325,22 +287,12 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
      * @param obj 字符视图
      * @return UTF-8字符串（wchar_t转UTF-8）
      */
-    static NEFORCE_CONSTEXPR20 u8string to_u8string(const basic_string_view<value_type>& obj) {
+    static u8string to_u8string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) {
             return {};
         }
         u8string result;
-
-#    ifdef NEFORCE_PLATFORM_WINDOWS
-        size_t i = 0;
-        while (i < obj.size()) {
-            codepoint::decode_utf16(obj.data(), i, obj.size(), false).append_to(result);
-        }
-#    else
-        for (const value_type c: obj) {
-            codepoint(static_cast<uint32_t>(c)).append_to(result);
-        }
-#    endif
+        codepoint::decode_wchar(obj.data(), obj.size(), false, result);
         return result;
     }
 #endif
@@ -350,7 +302,7 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
      * @param obj 字符视图
      * @return UTF-16字符串（wchar_t转UTF-16）
      */
-    static NEFORCE_CONSTEXPR20 u16string to_u16string(const basic_string_view<value_type>& obj) {
+    static u16string to_u16string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) {
             return {};
         }
@@ -362,10 +314,7 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
             result.push_back(static_cast<char16_t>(static_cast<uint16_t>(c)));
         }
 #else
-        result.reserve(obj.size() * 2);
-        for (const value_type c: obj) {
-            codepoint(static_cast<uint32_t>(c)).append_to(result);
-        }
+        codepoint::decode_wchar(obj.data(), obj.size(), false, result);
 #endif
         return result;
     }
@@ -375,23 +324,13 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
      * @param obj 字符视图
      * @return UTF-32字符串（wchar_t转UTF-32）
      */
-    static NEFORCE_CONSTEXPR20 u32string to_u32string(const basic_string_view<value_type>& obj) {
+    static u32string to_u32string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) {
             return {};
         }
         u32string result;
         result.reserve(obj.size());
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-        size_t i = 0;
-        while (i < obj.size()) {
-            codepoint::decode_utf16(obj.data(), i, obj.size(), false).append_to(result);
-        }
-#else
-        for (const value_type c: obj) {
-            codepoint(static_cast<uint32_t>(c)).append_to(result);
-        }
-#endif
+        codepoint::decode_wchar(obj.data(), obj.size(), false, result);
         return result;
     }
 };
@@ -442,20 +381,13 @@ struct u8character : icharacter<u8character, char8_t> {
      * @param obj 字符视图
      * @return 普通字符串
      */
-    static NEFORCE_CONSTEXPR20 string to_string(const basic_string_view<value_type>& obj) {
+    static string to_string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) {
             return {};
         }
         string result;
         result.reserve(obj.size());
-
-        const auto* data = reinterpret_cast<const byte_t*>(obj.data());
-        size_t i = 0;
-        const size_t len = obj.size();
-
-        while (i < len) {
-            codepoint::decode_utf8(data, i, len).append_to(result);
-        }
+        codepoint::decode_utf8(reinterpret_cast<const byte_t*>(obj.data()), obj.size(), result);
         return result;
     }
 
@@ -464,20 +396,13 @@ struct u8character : icharacter<u8character, char8_t> {
      * @param obj 字符视图
      * @return 宽字符串（UTF-8转wchar_t）
      */
-    static NEFORCE_CONSTEXPR20 wstring to_wstring(const basic_string_view<value_type>& obj) {
+    static wstring to_wstring(const basic_string_view<value_type>& obj) {
         if (obj.empty()) {
             return {};
         }
         wstring result;
         result.reserve(obj.size());
-
-        const auto* data = reinterpret_cast<const byte_t*>(obj.data());
-        size_t i = 0;
-        const size_t len = obj.size();
-
-        while (i < len) {
-            codepoint::decode_utf8(data, i, len).append_to(result);
-        }
+        codepoint::decode_utf8(reinterpret_cast<const byte_t*>(obj.data()), obj.size(), result);
         return result;
     }
 
@@ -493,20 +418,13 @@ struct u8character : icharacter<u8character, char8_t> {
      * @param obj 字符视图
      * @return UTF-16字符串（UTF-8转UTF-16）
      */
-    static NEFORCE_CONSTEXPR20 u16string to_u16string(const basic_string_view<value_type>& obj) {
+    static u16string to_u16string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) {
             return {};
         }
         u16string result;
         result.reserve(obj.size());
-
-        const auto* data = reinterpret_cast<const byte_t*>(obj.data());
-        size_t i = 0;
-        const size_t len = obj.size();
-
-        while (i < len) {
-            codepoint::decode_utf8(data, i, len).append_to(result);
-        }
+        codepoint::decode_utf8(reinterpret_cast<const byte_t*>(obj.data()), obj.size(), result);
         return result;
     }
 
@@ -515,20 +433,13 @@ struct u8character : icharacter<u8character, char8_t> {
      * @param obj 字符视图
      * @return UTF-32字符串（UTF-8转UTF-32）
      */
-    static NEFORCE_CONSTEXPR20 u32string to_u32string(const basic_string_view<value_type>& obj) {
+    static u32string to_u32string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) {
             return {};
         }
         u32string result;
         result.reserve(obj.size());
-
-        const auto* data = reinterpret_cast<const byte_t*>(obj.data());
-        size_t i = 0;
-        const size_t len = obj.size();
-
-        while (i < len) {
-            codepoint::decode_utf8(data, i, len).append_to(result);
-        }
+        codepoint::decode_utf8(reinterpret_cast<const byte_t*>(obj.data()), obj.size(), result);
         return result;
     }
 };
@@ -599,7 +510,7 @@ public:
      * @param obj 字符视图
      * @return 普通字符串（UTF-16转UTF-8）
      */
-    static NEFORCE_CONSTEXPR20 string to_string(const basic_string_view<value_type>& obj) {
+    static string to_string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) {
             return {};
         }
@@ -609,10 +520,7 @@ public:
         bool need_swap = false;
         parse_utf16_bom(obj, start_pos, need_swap);
 
-        size_t i = start_pos;
-        while (i < obj.size()) {
-            codepoint::decode_utf16(obj.data(), i, obj.size(), need_swap).append_to(result);
-        }
+        codepoint::decode_utf16(obj.data() + start_pos, obj.size() - start_pos, need_swap, result);
         return result;
     }
 
@@ -621,7 +529,7 @@ public:
      * @param obj 字符视图
      * @return 宽字符串（UTF-16转wchar_t）
      */
-    static NEFORCE_CONSTEXPR20 wstring to_wstring(const basic_string_view<value_type>& obj) {
+    static wstring to_wstring(const basic_string_view<value_type>& obj) {
         if (obj.empty()) {
             return {};
         }
@@ -632,10 +540,7 @@ public:
         bool need_swap = false;
         parse_utf16_bom(obj, start_pos, need_swap);
 
-        size_t i = start_pos;
-        while (i < obj.size()) {
-            codepoint::decode_utf16(obj.data(), i, obj.size(), need_swap).append_to(result);
-        }
+        codepoint::decode_utf16(obj.data() + start_pos, obj.size() - start_pos, need_swap, result);
         return result;
     }
 
@@ -645,7 +550,7 @@ public:
      * @param obj 字符视图
      * @return UTF-8字符串（UTF-16转UTF-8）
      */
-    static NEFORCE_CONSTEXPR20 u8string to_u8string(const basic_string_view<value_type>& obj) {
+    static u8string to_u8string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) {
             return {};
         }
@@ -656,10 +561,7 @@ public:
         bool need_swap = false;
         parse_utf16_bom(obj, start_pos, need_swap);
 
-        size_t i = start_pos;
-        while (i < obj.size()) {
-            codepoint::decode_utf16(obj.data(), i, obj.size(), need_swap).append_to(result);
-        }
+        codepoint::decode_utf16(obj.data() + start_pos, obj.size() - start_pos, need_swap, result);
         return result;
     }
 #endif
@@ -669,7 +571,7 @@ public:
      * @param obj 字符视图
      * @return UTF-16字符串
      */
-    static NEFORCE_CONSTEXPR20 u16string to_u16string(const basic_string_view<value_type>& obj) {
+    static u16string to_u16string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) {
             return {};
         }
@@ -684,11 +586,7 @@ public:
 
         u16string result;
         result.reserve(obj.size());
-
-        size_t i = start_pos;
-        while (i < obj.size()) {
-            codepoint::decode_utf16(obj.data(), i, obj.size(), need_swap).append_to(result);
-        }
+        codepoint::decode_utf16(obj.data() + start_pos, obj.size() - start_pos, need_swap, result);
         return result;
     }
 
@@ -697,7 +595,7 @@ public:
      * @param obj 字符视图
      * @return UTF-32字符串（UTF-16转UTF-32）
      */
-    static NEFORCE_CONSTEXPR20 u32string to_u32string(const basic_string_view<value_type>& obj) {
+    static u32string to_u32string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) {
             return {};
         }
@@ -708,10 +606,7 @@ public:
         bool need_swap = false;
         parse_utf16_bom(obj, start_pos, need_swap);
 
-        size_t i = start_pos;
-        while (i < obj.size()) {
-            codepoint::decode_utf16(obj.data(), i, obj.size(), need_swap).append_to(result);
-        }
+        codepoint::decode_utf16(obj.data() + start_pos, obj.size() - start_pos, need_swap, result);
         return result;
     }
 };
@@ -759,14 +654,12 @@ struct u32character : icharacter<u32character, char32_t> {
      * @param obj 字符视图
      * @return 普通字符串（UTF-32转UTF-8）
      */
-    static NEFORCE_CONSTEXPR20 string to_string(const basic_string_view<value_type>& obj) {
+    static string to_string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) {
             return {};
         }
         string result;
-        for (const value_type c: obj) {
-            codepoint::from_utf32(c).append_to(result);
-        }
+        codepoint::encode_utf32(obj.data(), obj.size(), result);
         return result;
     }
 
@@ -775,15 +668,13 @@ struct u32character : icharacter<u32character, char32_t> {
      * @param obj 字符视图
      * @return 宽字符串（UTF-32转wchar_t）
      */
-    static NEFORCE_CONSTEXPR20 wstring to_wstring(const basic_string_view<value_type>& obj) {
+    static wstring to_wstring(const basic_string_view<value_type>& obj) {
         if (obj.empty()) {
             return {};
         }
         wstring result;
         result.reserve(obj.size());
-        for (const value_type c: obj) {
-            codepoint::from_utf32(c).append_to(result);
-        }
+        codepoint::encode_utf32(obj.data(), obj.size(), result);
         return result;
     }
 
@@ -793,15 +684,13 @@ struct u32character : icharacter<u32character, char32_t> {
      * @param obj 字符视图
      * @return UTF-8字符串（UTF-32转UTF-8）
      */
-    static NEFORCE_CONSTEXPR20 u8string to_u8string(const basic_string_view<value_type>& obj) {
+    static u8string to_u8string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) {
             return {};
         }
         u8string result;
         result.reserve(obj.size() * 4);
-        for (const value_type c: obj) {
-            codepoint::from_utf32(c).append_to(result);
-        }
+        codepoint::encode_utf32(obj.data(), obj.size(), result);
         return result;
     }
 #endif
@@ -811,15 +700,13 @@ struct u32character : icharacter<u32character, char32_t> {
      * @param obj 字符视图
      * @return UTF-16字符串（UTF-32转UTF-16）
      */
-    static NEFORCE_CONSTEXPR20 u16string to_u16string(const basic_string_view<value_type>& obj) {
+    static u16string to_u16string(const basic_string_view<value_type>& obj) {
         if (obj.empty()) {
             return {};
         }
         u16string result;
         result.reserve(obj.size() * 2);
-        for (const value_type c: obj) {
-            codepoint::from_utf32(c).append_to(result);
-        }
+        codepoint::encode_utf32(obj.data(), obj.size(), result);
         return result;
     }
 

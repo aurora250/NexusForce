@@ -71,6 +71,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/codepoint.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/regex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/string.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/string/to_string.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/vsprintf.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/cmdline.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/console.cpp

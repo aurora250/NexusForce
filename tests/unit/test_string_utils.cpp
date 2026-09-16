@@ -1551,7 +1551,6 @@ class FormatStringTest : public ::testing::Test {};
 class FormatBoolTest : public ::testing::Test {};
 class FormatCharTest : public ::testing::Test {};
 class FormatPointerTest : public ::testing::Test {};
-class FormatOptionsTest : public ::testing::Test {};
 class FormatAlignmentTest : public ::testing::Test {};
 class FormatBaseTest : public ::testing::Test {};
 class FormatFormatTest : public ::testing::Test {};
@@ -1693,21 +1692,6 @@ TEST_F(FormatPointerTest, FormatCharPointer) {
     char* ptr = str;
     EXPECT_EQ(format("{}", ptr), "Hello");
 }
-
-TEST_F(FormatOptionsTest, FillChar) { EXPECT_EQ(format("{:*>5}", "ab"), "***ab"); }
-
-TEST_F(FormatOptionsTest, WidthAndAlignment) {
-    EXPECT_EQ(format("{:<5}", "ab"), "ab   ");
-    EXPECT_EQ(format("{:>5}", "ab"), "   ab");
-}
-
-TEST_F(FormatOptionsTest, ZeroPadInteger) { EXPECT_EQ(format("{:05}", 42), "00042"); }
-
-TEST_F(FormatOptionsTest, ShowSign) { EXPECT_EQ(format("{:+}", 42), "+42"); }
-
-TEST_F(FormatOptionsTest, SpaceSign) { EXPECT_EQ(format("{: }", 42), " 42"); }
-
-TEST_F(FormatOptionsTest, Precision) { EXPECT_EQ(format("{:.3}", "Hello"), "Hel"); }
 
 TEST_F(FormatAlignmentTest, LeftAlign) { EXPECT_EQ(format("{:<10}", "Hi"), "Hi        "); }
 

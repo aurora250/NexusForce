@@ -232,6 +232,10 @@ constexpr format_options parse_number_format(const string_view& fmt_str) {
 
 NEFORCE_CONSTEXPR20 string apply_format_options(string raw, const format_options& options,
                                                 const bool is_numeric = false) {
+    if (options.width <= 0 && !options.show_sign && !options.space_sign && !(options.alternate && is_numeric)) {
+        return raw;
+    }
+
     char existing_sign = '\0';
     if (!raw.empty() && (raw[0] == '-' || raw[0] == '+' || raw[0] == ' ')) {
         char sign = raw[0];
@@ -399,7 +403,7 @@ struct formatter<T, enable_if_t<is_floating_point_v<T>>> {
      * @param options 格式化选项
      * @return 格式化后的字符串
      */
-    NEFORCE_CONSTEXPR20 string operator()(const T& value, const format_options& options) const {
+    string operator()(const T& value, const format_options& options) const {
         if (options.loc != nullptr && (options.type == format_type::DEFAULT || options.type == format_type::FIXED ||
                                        options.type == format_type::GENERAL)) {
             const int prec = (options.precision >= 0) ? options.precision : 2;
@@ -503,7 +507,7 @@ struct formatter<char> {
 
 template <typename T>
 struct formatter<T, enable_if_t<is_unpackaged_v<T> && is_base_of_v<ipackage<T, unpackage_t<T>>, T>>> {
-    NEFORCE_CONSTEXPR20 string operator()(const T value, const format_options& options) const {
+    string operator()(const T value, const format_options& options) const {
         return formatter<unpackage_t<T>>()(value.value(), options);
     }
 };
@@ -680,7 +684,11 @@ NEFORCE_CONSTEXPR20 void format_impl(const string_view fmt, size_t& pos, string&
                 NEFORCE_THROW_EXCEPTION(value_exception("Unmatched '}'"));
             }
         } else {
-            out += fmt[pos++];
+            const size_t run_start = pos;
+            while (pos < fmt.size() && fmt[pos] != '{' && fmt[pos] != '}') {
+                ++pos;
+            }
+            out.append(fmt.data() + run_start, pos - run_start);
         }
     }
 }
@@ -768,7 +776,11 @@ NEFORCE_CONSTEXPR20 void format_impl(const string_view fmt, size_t& pos, string&
                 NEFORCE_THROW_EXCEPTION(value_exception("Unmatched '}' in format string"));
             }
         } else {
-            out += fmt[pos++];
+            const size_t run_start = pos;
+            while (pos < fmt.size() && fmt[pos] != '{' && fmt[pos] != '}') {
+                ++pos;
+            }
+            out.append(fmt.data() + run_start, pos - run_start);
         }
     }
 }
@@ -785,6 +797,40 @@ NEFORCE_CONSTEXPR20 void format_impl(const string_view fmt, size_t& pos, string&
 
 NEFORCE_END_INNER__
 /// @endcond
+
+/**
+ * @brief 格式化并追加到既有字符串
+ * @tparam Args 参数类型
+ * @param out 目标字符串（追加语义）
+ * @param fmt 格式字符串
+ * @param args 要格式化的参数
+ * @throws value_exception 如果格式错误
+ *
+ * 与 format() 语义一致，但不创建新字符串。
+ */
+template <typename... Args, enable_if_t<(sizeof...(Args) > 0), int> = 0>
+NEFORCE_CONSTEXPR20 void format_to(string& out, const string_view fmt, Args&&... args) {
+    const auto args_tuple = _NEFORCE forward_as_tuple(_NEFORCE forward<Args>(args)...);
+    size_t next_seq = 0;
+    size_t pos = 0;
+    inner::format_impl(fmt, pos, out, args_tuple, next_seq);
+}
+
+/**
+ * @brief 格式化并追加到既有字符串
+ * @tparam N 格式字符串长度
+ * @tparam Args 参数类型
+ * @param out 目标字符串（追加语义）
+ * @param fmt 格式字符串字面量
+ * @param args 要格式化的参数
+ * @throws value_exception 如果格式错误
+ *
+ * 与 format() 语义一致，但不创建新字符串。
+ */
+template <size_t N, typename... Args, enable_if_t<(sizeof...(Args) > 0), int> = 0>
+NEFORCE_CONSTEXPR20 void format_to(string& out, const char (&fmt)[N], Args&&... args) {
+    _NEFORCE format_to(out, string_view(fmt, N - 1), _NEFORCE forward<Args>(args)...);
+}
 
 /**
  * @brief 格式化字符串
@@ -805,10 +851,7 @@ template <typename... Args, enable_if_t<(sizeof...(Args) > 0), int> = 0>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string format(const string_view fmt, Args&&... args) {
     string result;
     result.reserve(fmt.size() + sizeof...(Args) * 8);
-    const auto args_tuple = _NEFORCE forward_as_tuple(_NEFORCE forward<Args>(args)...);
-    size_t next_seq = 0;
-    size_t pos = 0;
-    inner::format_impl(fmt, pos, result, args_tuple, next_seq);
+    _NEFORCE format_to(result, fmt, _NEFORCE forward<Args>(args)...);
     return result;
 }
 
@@ -880,7 +923,11 @@ format_named(const string_view fmt, const std::initializer_list<pair<const char*
             result += '}';
             i += 2;
         } else {
-            result += fmt[i++];
+            const size_t run_start = i;
+            while (i < fmt.size() && fmt[i] != '{' && fmt[i] != '}') {
+                ++i;
+            }
+            result.append(fmt.data() + run_start, i - run_start);
         }
     }
     return result;

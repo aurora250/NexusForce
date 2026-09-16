@@ -10,6 +10,7 @@ add_executable(NexusForceUnitTests
         test_encrypt.cpp
         test_exception.cpp
         test_file.cpp
+        test_format.cpp
         test_functional.cpp
         test_http.cpp
         test_iterator.cpp
@@ -35,6 +36,7 @@ add_executable(NexusForceUnitTests
         test_tui.cpp
         test_tui_component.cpp
         test_tui_dom.cpp
+        test_utf.cpp
         test_util_container.cpp
         test_utility.cpp
 )

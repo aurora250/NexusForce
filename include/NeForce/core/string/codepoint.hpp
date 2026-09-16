@@ -241,13 +241,191 @@ public:
         return codepoint(static_cast<uint32_t>(value));
     }
 
+    /**
+     * @brief 批量将UTF-8字节流解码并追加到string
+     * @param data UTF-8字节数据
+     * @param len 字节长度
+     * @param result 目标字符串（追加语义）
+     */
+    static void decode_utf8(const byte_t* data, size_t len, string& result);
+
+    /**
+     * @brief 批量将UTF-8字节流解码并追加到wstring
+     * @param data UTF-8字节数据
+     * @param len 字节长度
+     * @param result 目标字符串（追加语义）
+     */
+    static void decode_utf8(const byte_t* data, size_t len, wstring& result);
+
+    /**
+     * @brief 批量将UTF-8字节流解码并追加到u16string
+     * @param data UTF-8字节数据
+     * @param len 字节长度
+     * @param result 目标字符串（追加语义）
+     */
+    static void decode_utf8(const byte_t* data, size_t len, u16string& result);
+
+    /**
+     * @brief 批量将UTF-8字节流解码并追加到u32string
+     * @param data UTF-8字节数据
+     * @param len 字节长度
+     * @param result 目标字符串（追加语义）
+     */
+    static void decode_utf8(const byte_t* data, size_t len, u32string& result);
+
+#ifdef NEFORCE_STANDARD_20
+    /**
+     * @brief 批量将UTF-8字节流解码并追加到char8_t字符串
+     * @param data UTF-8字节数据
+     * @param len 字节长度
+     * @param result 目标字符串（追加语义）
+     */
+    static void decode_utf8(const byte_t* data, size_t len, u8string& result);
+#endif
+
+    /**
+     * @brief 批量将UTF-16码元流解码并追加到string
+     * @param data UTF-16码元数据
+     * @param len 码元个数
+     * @param need_swap 是否需要字节序反转
+     * @param result 目标字符串（追加语义）
+     */
+    static void decode_utf16(const char16_t* data, size_t len, bool need_swap, string& result);
+
+    /**
+     * @brief 批量将UTF-16码元流解码并追加到wstring
+     * @param data UTF-16码元数据
+     * @param len 码元个数
+     * @param need_swap 是否需要字节序反转
+     * @param result 目标字符串（追加语义）
+     */
+    static void decode_utf16(const char16_t* data, size_t len, bool need_swap, wstring& result);
+
+    /**
+     * @brief 批量将UTF-16码元流解码并追加到u16string
+     * @param data UTF-16码元数据
+     * @param len 码元个数
+     * @param need_swap 是否需要字节序反转
+     * @param result 目标字符串（追加语义）
+     */
+    static void decode_utf16(const char16_t* data, size_t len, bool need_swap, u16string& result);
+
+    /**
+     * @brief 批量将UTF-16码元流解码并追加到u32string
+     * @param data UTF-16码元数据
+     * @param len 码元个数
+     * @param need_swap 是否需要字节序反转
+     * @param result 目标字符串（追加语义）
+     */
+    static void decode_utf16(const char16_t* data, size_t len, bool need_swap, u32string& result);
+
+#ifdef NEFORCE_STANDARD_20
+    /**
+     * @brief 批量将UTF-16码元流解码并追加到char8_t字符串
+     * @param data UTF-16码元数据
+     * @param len 码元个数
+     * @param need_swap 是否需要字节序反转
+     * @param result 目标字符串（追加语义）
+     */
+    static void decode_utf16(const char16_t* data, size_t len, bool need_swap, u8string& result);
+#endif
+
+    /**
+     * @brief 批量将宽字符流解码并追加到string
+     * @param data 宽字符数据
+     * @param len 宽字符个数
+     * @param need_swap 是否需要字节序反转
+     * @param result 目标字符串（追加语义）
+     */
+    static void decode_wchar(const wchar_t* data, size_t len, bool need_swap, string& result);
+
+    /**
+     * @brief 批量将宽字符流解码并追加到wstring
+     * @param data 宽字符数据
+     * @param len 宽字符个数
+     * @param need_swap 是否需要字节序反转
+     * @param result 目标字符串（追加语义）
+     */
+    static void decode_wchar(const wchar_t* data, size_t len, bool need_swap, wstring& result);
+
+    /**
+     * @brief 批量将宽字符流解码并追加到u16string
+     * @param data 宽字符数据
+     * @param len 宽字符个数
+     * @param need_swap 是否需要字节序反转
+     * @param result 目标字符串（追加语义）
+     */
+    static void decode_wchar(const wchar_t* data, size_t len, bool need_swap, u16string& result);
+
+    /**
+     * @brief 批量将宽字符流解码并追加到u32string
+     * @param data 宽字符数据
+     * @param len 宽字符个数
+     * @param need_swap 是否需要字节序反转
+     * @param result 目标字符串（追加语义）
+     */
+    static void decode_wchar(const wchar_t* data, size_t len, bool need_swap, u32string& result);
+
+#ifdef NEFORCE_STANDARD_20
+    /**
+     * @brief 批量将宽字符流解码并追加到char8_t字符串
+     * @param data 宽字符数据
+     * @param len 宽字符个数
+     * @param need_swap 是否需要字节序反转
+     * @param result 目标字符串（追加语义）
+     */
+    static void decode_wchar(const wchar_t* data, size_t len, bool need_swap, u8string& result);
+#endif
+
+    /**
+     * @brief 批量将UTF-32码点流编码并追加到string
+     * @param data UTF-32码点数据
+     * @param len 码点个数
+     * @param result 目标字符串（追加语义）
+     */
+    static void encode_utf32(const char32_t* data, size_t len, string& result);
+
+    /**
+     * @brief 批量将UTF-32码点流编码并追加到wstring
+     * @param data UTF-32码点数据
+     * @param len 码点个数
+     * @param result 目标字符串（追加语义）
+     */
+    static void encode_utf32(const char32_t* data, size_t len, wstring& result);
+
+    /**
+     * @brief 批量将UTF-32码点流编码并追加到u16string
+     * @param data UTF-32码点数据
+     * @param len 码点个数
+     * @param result 目标字符串（追加语义）
+     */
+    static void encode_utf32(const char32_t* data, size_t len, u16string& result);
+
+    /**
+     * @brief 批量将UTF-32码点流编码并追加到u32string
+     * @param data UTF-32码点数据
+     * @param len 码点个数
+     * @param result 目标字符串（追加语义）
+     */
+    static void encode_utf32(const char32_t* data, size_t len, u32string& result);
+
+#ifdef NEFORCE_STANDARD_20
+    /**
+     * @brief 批量将UTF-32码点流编码并追加到char8_t字符串
+     * @param data UTF-32码点数据
+     * @param len 码点个数
+     * @param result 目标字符串（追加语义）
+     */
+    static void encode_utf32(const char32_t* data, size_t len, u8string& result);
+#endif
+
 private:
     uint32_t value_{0}; ///< 存储的码点值
 
 private:
     template <typename T>
-    static bool utf16_codepoint(const T* data, size_t index, const size_t len, uint32_t& cp, size_t& consumed,
-                                const bool need_swap) {
+    static bool utf16_codepoint(const T* data, size_t index, size_t len, uint32_t& cp, size_t& consumed,
+                                bool need_swap) {
         if (index >= len) {
             cp = 0xFFFD;
             consumed = 0;
@@ -282,6 +460,36 @@ private:
         cp = c1;
         return true;
     }
+
+    template <typename Target>
+    static void transcode_utf8(const byte_t* data, size_t len, basic_string<Target>& result);
+
+    template <typename Unit, typename Target>
+    static void transcode_utf16(const Unit* data, size_t len, bool need_swap, basic_string<Target>& result);
+
+    template <typename Unit, typename Target>
+    static void transcode_utf32(const Unit* data, size_t len, basic_string<Target>& result);
+
+    static size_t decode_utf8_chunk(const byte_t* data, size_t len, char32_t* out, size_t capacity,
+                                    size_t& consumed) noexcept;
+
+    template <typename Unit>
+    static size_t decode_utf16_chunk(const Unit* data, size_t len, bool need_swap, char32_t* out, size_t capacity,
+                                     size_t& consumed) noexcept;
+
+    template <typename Unit>
+    static size_t decode_utf32_chunk(const Unit* data, size_t len, char32_t* out, size_t capacity,
+                                     size_t& consumed) noexcept;
+
+    static void append_chunk(string& result, const char32_t* codepoints, size_t count);
+
+#ifdef NEFORCE_STANDARD_20
+    static void append_chunk(u8string& result, const char32_t* codepoints, size_t count);
+#endif
+
+    static void append_chunk(u16string& result, const char32_t* codepoints, size_t count);
+    static void append_chunk(u32string& result, const char32_t* codepoints, size_t count);
+    static void append_chunk(wstring& result, const char32_t* codepoints, size_t count);
 
 public:
     /**

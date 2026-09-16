@@ -19,6 +19,7 @@
 - 随机数组件拆分为 `random/` 子目录（engine / lcg / mt / pcg / xoroshiro / bit_gen / secret / distribution），`random.hpp` 保留为聚合头
 - 添加 `random_seed()` 默认种子生成与 `splitmix64()` 种子扩展函数
 - 数学库新增 `exponential_e()`（实数指数 e^x）、`logarithm_1p()`（ln(1+x)）、`logarithm_factorial()`（ln(n!)）、`power_of_two()`（2 的整数次幂）与 `normalize_power_of_two()`（按 2 的整数次幂归一化）
+- 新增追加式格式化接口 `format_to(string&, fmt, args...)`：与 `format()` 语义一致但不新建字符串，供日志等高频路径复用目标缓冲
 
 ### 🔧 Improvements
 
@@ -71,9 +72,27 @@
 - `file_async` 在无 io_uring 的 Linux 上阻塞 `pread` / `pwrite` 下沉到工作线程并以 io_context 投递完成，不再占用事件循环线程
 - `file_async` io_uring 路径显式解析不再依赖内核对 `UINT64_MAX` 偏移的处理
 - `nexusforce_install_runtime_dependencies()` 的依赖搜索范围扩展到目标所链接的每个导入目标自身的目录与 vcpkg 已安装目录，并对解析器未解析出的依赖按文件名再做一次大小写不敏感查找：只靠构建输出目录解析在 app-local deps 未复制全部端口时会漏依赖
+- UTF 转换批量化：`character` / `wcharacter` / `u8character` / `u16character` / `u32character` 的 21 处转换循环内聚到 `codepoint` 批量接口，消除逐码点跨 TU 调用与逐字节 `push_back`，改为分块解码 + 按目标类型整段扩容写入
+- `codepoint` 新增批量转码接口：`decode_utf8` / `decode_utf16` / `decode_wchar` / `encode_utf32` 各提供 string / wstring / u16string / u32string（C++20 另有 u8string）目标重载，一次调用完成整段缓冲区转换
+- UTF 解码新增 ASCII 快速通道：SSE2 16 字节全 ASCII 块一次加宽为 16 个码点，AVX2 下以 32 字节掩码判定并复用同一加宽内核；非 x64 架构回退到字级标量扫描
+- UTF-8 解码新增同长度序列 SIMD 内核：16 字节内 8 个双字节序列（SSE2）、4 个四字节序列（SSE2）、12 字节内 4 个三字节序列（SSSE3，覆盖 CJK），超长编码与代理项等边界情况仍交由标量解码器处理以保证替换语义完全一致
+- UTF-16 与 UTF-32 源新增 SIMD 批量路径：非代理项 UTF-16 码元块一次加宽为 8 个码点，合法 UTF-32 块一次校验并搬运 4 个码点
+- `codepoint::display_width()` 的显示宽度表由两张 17408×64 位位图（约 272 KB 静态数据）改为 14 段排序区间表和二分查找，静态数据量下降约 99%，查询落在少量缓存行内
+- `character::to_u16string()` 的预留长度由 `size * 2` 修正为 `size`（UTF-8 到 UTF-16 的码元数不超过输入字节数）
+- `format()` 新增无选项快速通道：宽度、对齐、强制符号与备用前缀均未请求时直接移交渲染结果，省去一次完整拷贝与潜在分配，命中日志等高频 `{}` 场景
+- `format_impl` 与 `format_named` 的字面量片段改为整段批量追加，替代逐字符 `push_back`，直接走 `basic_string` 的 SIMD 拷贝路径
+- 浮点格式化重写为尾数精确整数换算：以 1280 位定点大整数完成尾数 × 10^s 的精确缩放与移位，再以十进制串做半值取偶舍入；定点与科学计数法在任意量级（含次正规数、DBL_MAX、1e±300）均为正确舍入，取代原先逐次乘除 10 的定标循环（最坏约 320 次）与 `fraction × 10^p + 0.5` 的非精确舍入
+- `byte_size::to_string()` 移除 format 套 format（先用 `format(":.{}f")` 构造格式串再二次 `format`），改为直接调用 `to_string_fixed()`
+
+### ⚠️ Breaking Changes
+
+- 浮点转换链不再声明为 `constexpr`：`__float_to_string` / `to_string_with_precision` / `to_string_general` / `to_string_fixed` / `to_string_scientific`，以及 `float32` / `float64` / `decimal` 的 `to_string()` 与 `byte_size::to_string()`，C++20 下不再参与常量求值（整数与布尔包装类的 `to_string` 保持可常量求值）
+- `character` / `wcharacter` / `u8character` / `u16character` / `u32character` 中转为运行时批量调用的转换函数不再声明为 `constexpr`，纯拷贝语义的函数（`character::to_string`、`u8character::to_u8string`、`u32character::to_u32string`、`wcharacter::to_wstring`）保持不变
 
 ### 🐛 Bug Fixes
 
+- 修复浮点定点格式化在二进制指数非负的整数值上小数点位置错误：原先按已放大 10^p 处理而把整数末几位误作小数，导致绝对值大于 2^52 的值（如 1e308、DBL_MAX）整数部分被截断
+- 修复 UTF-16 代理对在批量解码中折叠为单个码点时的差分一致性（新增单元测试覆盖）
 - 修复 `ssl_socket` 异步读写绕过 TLS 层的缺陷，现按 TLS 激活状态路由至 `ssl_stream`
 - 修复 Windows `io_context` 事件注册缺失 FD_CONNECT / FD_CLOSE 使非阻塞 connect 的完成或失败通知不被注册/映射
 - 修复 Windows `io_context` WSAEVENT 句柄生命周期竞态：`remove_fd()` 在监视线程 `WSAWaitForMultipleEvents` 等待期间直接 `CloseHandle`
