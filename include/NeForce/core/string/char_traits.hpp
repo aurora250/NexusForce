@@ -191,8 +191,8 @@ public:
      * @param chr 要查找的字符
      * @return 指向第一个匹配字符的指针
      */
-    NEFORCE_NODISCARD static constexpr const char_type* find(const char_type* str, const size_t n,
-                                                             const char_type chr) noexcept {
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE static constexpr const char_type* find(const char_type* str, const size_t n,
+                                                                                   const char_type chr) noexcept {
         return static_cast<const char_type*>(_NEFORCE memory_find(str, chr, n));
     }
 

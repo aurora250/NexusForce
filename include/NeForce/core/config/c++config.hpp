@@ -594,6 +594,19 @@
 
 
 /**
+ * @def NEFORCE_NOINLINE
+ * @brief 禁止编译器内联函数
+ */
+#if defined(NEFORCE_COMPILER_GNUC)
+#    define NEFORCE_NOINLINE __attribute__((noinline))
+#elif defined(NEFORCE_COMPILER_MSVC)
+#    define NEFORCE_NOINLINE __declspec(noinline)
+#else
+#    define NEFORCE_NOINLINE
+#endif
+
+
+/**
  * @def NEFORCE_TARGET(ARCH)
  * @brief 为函数指定目标指令集
  * @param ARCH 指令集名称，如 "sse4.2", "avx2", "avx512f"

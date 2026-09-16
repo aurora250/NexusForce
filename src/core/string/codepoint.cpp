@@ -445,6 +445,7 @@ size_t codepoint::decode_utf32_chunk(const Unit* data, const size_t len, char32_
             continue;
         }
 
+        // NOLINTNEXTLINE(bugprone-signed-char-misuse)
         const auto raw = static_cast<uint32_t>(data[i]);
         out[n] = is_valid_codepoint(raw) ? raw : REPLACEMENT_VALUE;
         ++i;

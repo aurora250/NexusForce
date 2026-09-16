@@ -547,7 +547,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t power_of_two(const int64_t e
  * 归一化前的数值 = 归一化后的数值 × 2^返回值
  */
 NEFORCE_CONSTEXPR14 int64_t normalize_power_of_two(decimal_t& value) noexcept {
-    decimal_t steps[10];
+    decimal_t steps[10] = {0};
     steps[0] = 2.0L;
     for (int i = 1; i < 10; ++i) {
         steps[i] = steps[i - 1] * steps[i - 1];

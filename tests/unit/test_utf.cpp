@@ -78,6 +78,15 @@ namespace {
         return result;
     }
 
+    wstring reference_utf16_to_wstring(const char16_t* data, const size_t len, const bool need_swap) {
+        wstring result;
+        size_t i = 0;
+        while (i < len) {
+            codepoint::decode_utf16(data, i, len, need_swap).append_to(result);
+        }
+        return result;
+    }
+
     string reference_utf32_to_string(const char32_t* data, const size_t len) {
         string result;
         for (size_t i = 0; i < len; ++i) {
@@ -341,6 +350,7 @@ TEST(Utf16BulkDecodeTest, MatchesScalarReference) {
     for (const bool need_swap: {false, true}) {
         const auto expected_string = reference_utf16_to_string(data, count, need_swap);
         const auto expected_u32 = reference_utf16_to_u32(data, count, need_swap);
+        const auto expected_w = reference_utf16_to_wstring(data, count, need_swap);
 
         string actual_string;
         u32string actual_u32;
@@ -353,8 +363,9 @@ TEST(Utf16BulkDecodeTest, MatchesScalarReference) {
 
         EXPECT_TRUE(same_content(expected_string, actual_string)) << "swap=" << need_swap;
         EXPECT_TRUE(same_content(expected_u32, actual_u32)) << "swap=" << need_swap;
+        EXPECT_TRUE(same_content(expected_w, actual_w)) << "swap=" << need_swap;
         EXPECT_EQ(actual_u16.size(), count);
-        EXPECT_EQ(actual_w.size(), count);
+        EXPECT_EQ(actual_w.size(), sizeof(wchar_t) == 2 ? count : expected_u32.size());
     }
 }
 

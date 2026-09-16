@@ -330,7 +330,8 @@ private:
      * @param position 起始位置
      * @param n 字符数
      */
-    NEFORCE_CONSTEXPR20 void construct_from_ptr(const_pointer str, size_type position, size_type n) {
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 void construct_from_ptr(const_pointer str, size_type position,
+                                                                      size_type n) {
 #ifdef NEFORCE_USING_SSO
         if (n < sso_buffer_size) {
             traits_type::copy(storage_.short_, str + position, n);
@@ -733,6 +734,75 @@ private:
 #endif
     }
 
+    /**
+     * @brief 追加单个字符时的扩容路径
+     * @param value 要追加的字符
+     * @return 自身引用
+     * @note 仅在现有容量不足以容纳该字符时调用。
+     */
+    NEFORCE_COLD NEFORCE_CONSTEXPR20 basic_string& reallocate_append(const value_type value) {
+#ifdef NEFORCE_USING_SSO
+        const size_type old_size = size();
+        reallocate(1);
+        pointer p = data();
+        p[old_size] = value;
+        p[old_size + 1] = value_type();
+        size_pair_.value = (old_size + 1) | long_flag;
+#else
+        reallocate(1);
+        data_[size_] = value;
+        ++size_;
+        data_[size_] = value_type();
+#endif
+        return *this;
+    }
+
+    /**
+     * @brief 追加多个相同字符时的扩容路径
+     * @param n 字符数量
+     * @param value 要追加的字符
+     * @return 自身引用
+     * @note 仅在现有容量不足以容纳这些字符时调用。
+     */
+    NEFORCE_COLD NEFORCE_CONSTEXPR20 basic_string& reallocate_append(const size_type n, const value_type value) {
+#ifdef NEFORCE_USING_SSO
+        const size_type old_size = size();
+        reallocate(n);
+        traits_type::assign(data() + old_size, n, value);
+        size_pair_.value = (old_size + n) | long_flag;
+        traits_type::assign(data() + size(), 1, value_type());
+#else
+        reallocate(n);
+        traits_type::assign(data_ + size_, n, value);
+        size_ += n;
+        traits_type::assign(data_ + size_, 1, value_type());
+#endif
+        return *this;
+    }
+
+    /**
+     * @brief 追加字符数组时的扩容路径
+     * @param str 字符指针
+     * @param n 字符数
+     * @return 自身引用
+     * @note 仅在现有容量不足以容纳这些字符时调用。
+     */
+    NEFORCE_COLD NEFORCE_CONSTEXPR20 basic_string& reallocate_append(const_pointer str, const size_type n) {
+#ifdef NEFORCE_USING_SSO
+        const size_type old_size = size();
+        reallocate(n);
+        traits_type::copy(data() + old_size, str, n);
+        size_pair_.value = (old_size + n) | long_flag;
+        traits_type::assign(data() + size(), 1, value_type());
+#else
+        reallocate(n);
+        traits_type::copy(data_ + size_, str, n);
+        size_ += n;
+        traits_type::assign(data_ + size_, 1, value_type());
+#endif
+        return *this;
+    }
+
 public:
     /**
      * @brief 默认构造函数
@@ -776,7 +846,7 @@ public:
      * @param n 字符数
      * @param value 填充字符
      */
-    NEFORCE_CONSTEXPR20 explicit basic_string(size_type n, value_type value) {
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 explicit basic_string(size_type n, value_type value) {
 #ifdef NEFORCE_USING_SSO
         if (n < sso_buffer_size) {
             traits_type::assign(storage_.short_, n, value);
@@ -806,7 +876,7 @@ public:
      * @brief 拷贝构造函数
      * @param other 源字符串
      */
-    NEFORCE_CONSTEXPR20 basic_string(const basic_string& other) {
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 basic_string(const basic_string& other) {
 #ifdef NEFORCE_USING_SSO
         const size_type len = other.size();
         if (len < sso_buffer_size) {
@@ -964,14 +1034,18 @@ public:
      * @brief 从字符串视图构造
      * @param view 字符串视图
      */
-    NEFORCE_CONSTEXPR20 basic_string(view_type view) { construct_from_ptr(view.data(), 0, view.size()); }
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 basic_string(view_type view) {
+        construct_from_ptr(view.data(), 0, view.size());
+    }
 
     /**
      * @brief 从字符串视图构造（指定长度）
      * @param view 字符串视图
      * @param n 字符数
      */
-    NEFORCE_CONSTEXPR20 basic_string(view_type view, const size_type n) { construct_from_ptr(view.data(), 0, n); }
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 basic_string(view_type view, const size_type n) {
+        construct_from_ptr(view.data(), 0, n);
+    }
 
     /**
      * @brief 字符串视图赋值运算符
@@ -1052,14 +1126,18 @@ public:
      * @note 若源字符串内部包含空字符（\\0），构造时会在此处截断。
      *       如需保留内部 NUL 字符，请使用带长度参数的构造函数。
      */
-    NEFORCE_CONSTEXPR20 basic_string(const_pointer str) { construct_from_ptr(str, 0, traits_type::length(str)); }
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 basic_string(const_pointer str) {
+        construct_from_ptr(str, 0, traits_type::length(str));
+    }
 
     /**
      * @brief 从字符数组构造（指定长度）
      * @param str 字符指针
      * @param n 字符数
      */
-    NEFORCE_CONSTEXPR20 basic_string(const_pointer str, const size_type n) { construct_from_ptr(str, 0, n); }
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 basic_string(const_pointer str, const size_type n) {
+        construct_from_ptr(str, 0, n);
+    }
 
     /**
      * @brief C风格字符串赋值运算符
@@ -1277,13 +1355,21 @@ public:
      * @brief 预留容量
      * @param n 要预留的字符数
      */
-    NEFORCE_CONSTEXPR20 void reserve(const size_type n) {
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 void reserve(const size_type n) {
         NEFORCE_DEBUG_VERIFY(n < max_size(), "basic_string reserve index out of range.");
         const size_type new_cap = n + 1;
         if (new_cap <= capacity()) {
             return;
         }
+        reserve_grow(new_cap);
+    }
 
+    /**
+     * @brief 预留容量时的扩容路径
+     * @param new_cap 目标容量
+     * @note 仅在现有容量不足时调用。
+     */
+    NEFORCE_COLD NEFORCE_CONSTEXPR20 void reserve_grow(const size_type new_cap) {
 #ifdef NEFORCE_USING_SSO
         if (!is_long()) {
             switch_to_long(new_cap);
@@ -1575,7 +1661,7 @@ public:
      * @param value 要追加的字符
      * @return 自身引用
      */
-    NEFORCE_CONSTEXPR20 basic_string& append(size_type n, value_type value) {
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 basic_string& append(size_type n, value_type value) {
         if (n == 0) {
             return *this;
         }
@@ -1585,37 +1671,32 @@ public:
         NEFORCE_DEBUG_VERIFY(size() + n < max_size(), "basic_string append iterator out of ranges.");
 
 #ifdef NEFORCE_USING_SSO
-        if (!is_long() && size() + n < sso_buffer_size) {
-            pointer p = storage_.short_ + size();
-            traits_type::assign(p, n, value);
-            size_pair_.value = size() + n;
-            traits_type::assign(storage_.short_ + size(), 1, value_type());
-            return *this;
-        }
-
         const size_type old_size = size();
-        if (is_long() && storage_.long_.cap >= old_size + n + 1) {
+        if ((size_pair_.value & long_flag) == 0) {
+            if (old_size + n < sso_buffer_size) {
+                pointer p = storage_.short_ + old_size;
+                traits_type::assign(p, n, value);
+                traits_type::assign(p + n, 1, value_type());
+                size_pair_.value = old_size + n;
+                return *this;
+            }
+        } else if (storage_.long_.cap >= old_size + n + 1) {
             pointer p = storage_.long_.ptr + old_size;
             traits_type::assign(p, n, value);
+            traits_type::assign(p + n, 1, value_type());
             size_pair_.value = (old_size + n) | long_flag;
-            traits_type::assign(storage_.long_.ptr + size(), 1, value_type());
             return *this;
         }
-
-        reallocate(n);
-        pointer p = data() + old_size;
-        traits_type::assign(p, n, value);
-        size_pair_.value = (old_size + n) | (is_long() ? long_flag : 0);
-        traits_type::assign(data() + size(), 1, value_type());
+        return reallocate_append(n, value);
 #else
         if (capacity_pair_.value - size_ <= n) {
-            reallocate(n);
+            return reallocate_append(n, value);
         }
         traits_type::assign(data_ + size_, n, value);
         size_ += n;
         traits_type::assign(data_ + size_, 1, value_type());
-#endif
         return *this;
+#endif
     }
 
     /**
@@ -1623,40 +1704,38 @@ public:
      * @param value 要追加的字符
      * @return 自身引用
      */
-    NEFORCE_CONSTEXPR20 basic_string& append(value_type value) {
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 basic_string& append(value_type value) {
         NEFORCE_DEBUG_VERIFY(size() + 1 < max_size(), "basic_string::append single char out of ranges.");
 
 #ifdef NEFORCE_USING_SSO
-        if (!is_long() && size() + 1 < sso_buffer_size) {
-            const size_type old_sz = size();
-            storage_.short_[old_sz] = value;
-            size_pair_.value = old_sz + 1;
-            storage_.short_[old_sz + 1] = value_type();
-            return *this;
+        const size_type raw = size_pair_.value;
+        if ((raw & long_flag) == 0) {
+            if (raw + 1 < sso_buffer_size) {
+                storage_.short_[raw] = value;
+                storage_.short_[raw + 1] = value_type();
+                size_pair_.value = raw + 1;
+                return *this;
+            }
+        } else {
+            const size_type old_size = raw & ~long_flag;
+            if (storage_.long_.cap >= old_size + 2) {
+                pointer p = storage_.long_.ptr;
+                p[old_size] = value;
+                p[old_size + 1] = value_type();
+                size_pair_.value = (old_size + 1) | long_flag;
+                return *this;
+            }
         }
-
-        const size_type old_size = size();
-        if (is_long() && storage_.long_.cap >= old_size + 2) {
-            storage_.long_.ptr[old_size] = value;
-            size_pair_.value = (old_size + 1) | long_flag;
-            storage_.long_.ptr[old_size + 1] = value_type();
-            return *this;
-        }
-
-        reallocate(1);
-        pointer p = data();
-        p[old_size] = value;
-        size_pair_.value = (old_size + 1) | (is_long() ? long_flag : 0);
-        p[old_size + 1] = value_type();
+        return reallocate_append(value);
 #else
         if (capacity_pair_.value - size_ < 2) {
-            reallocate(1);
+            return reallocate_append(value);
         }
         data_[size_] = value;
         ++size_;
         data_[size_] = value_type();
-#endif
         return *this;
+#endif
     }
 
     /**
@@ -1752,7 +1831,7 @@ public:
      * @param n 字符数
      * @return 自身引用
      */
-    NEFORCE_CONSTEXPR20 basic_string& append(const_pointer str, size_type n) {
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 basic_string& append(const_pointer str, size_type n) {
         NEFORCE_DEBUG_VERIFY(size() + n < max_size(), "basic_string append iterator out of ranges.");
         if (n == 0) {
             return *this;
@@ -1760,33 +1839,29 @@ public:
 
 #ifdef NEFORCE_USING_SSO
         const size_type old_size = size();
-        if (!is_long() && old_size + n < sso_buffer_size) {
-            traits_type::copy(storage_.short_ + old_size, str, n);
-            size_pair_.value = old_size + n;
-            traits_type::assign(storage_.short_ + size(), 1, value_type());
-            return *this;
-        }
-
-        if (is_long() && storage_.long_.cap >= old_size + n + 1) {
+        if ((size_pair_.value & long_flag) == 0) {
+            if (old_size + n < sso_buffer_size) {
+                traits_type::copy(storage_.short_ + old_size, str, n);
+                traits_type::assign(storage_.short_ + old_size + n, 1, value_type());
+                size_pair_.value = old_size + n;
+                return *this;
+            }
+        } else if (storage_.long_.cap >= old_size + n + 1) {
             traits_type::copy(storage_.long_.ptr + old_size, str, n);
+            traits_type::assign(storage_.long_.ptr + old_size + n, 1, value_type());
             size_pair_.value = (old_size + n) | long_flag;
-            traits_type::assign(storage_.long_.ptr + size(), 1, value_type());
             return *this;
         }
-
-        reallocate(n);
-        traits_type::copy(data() + old_size, str, n);
-        size_pair_.value = (old_size + n) | long_flag;
-        traits_type::assign(data() + size(), 1, value_type());
+        return reallocate_append(str, n);
 #else
         if (capacity_pair_.value - size_ <= n) {
-            reallocate(n);
+            return reallocate_append(str, n);
         }
         traits_type::copy(data_ + size_, str, n);
         size_ += n;
         traits_type::assign(data_ + size_, 1, value_type());
-#endif
         return *this;
+#endif
     }
 
     /**
@@ -1796,7 +1871,9 @@ public:
      * @note 若源字符串内部包含空字符（\\0），追加时会在此处截断。
      *       如需保留内部 NUL 字符，请使用带长度参数的 append() 重载。
      */
-    NEFORCE_CONSTEXPR20 basic_string& append(const_pointer str) { return append(str, traits_type::length(str)); }
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 basic_string& append(const_pointer str) {
+        return append(str, traits_type::length(str));
+    }
 
     /**
      * @brief 追加迭代器范围

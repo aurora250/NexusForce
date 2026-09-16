@@ -28,8 +28,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * @return 目标内存的起始指针，如果参数无效则返回nullptr
  * @note 使用restrict关键字优化，要求源和目标内存不重叠，否则将产生未定义行为。
  */
-NEFORCE_CONSTEXPR14 void* memory_copy(void* NEFORCE_RESTRICT dest, const void* NEFORCE_RESTRICT src,
-                                      size_t count) noexcept {
+NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR14 void* memory_copy(void* NEFORCE_RESTRICT dest,
+                                                            const void* NEFORCE_RESTRICT src, size_t count) noexcept {
     if (count < 16) {
         if (dest == nullptr || src == nullptr) {
             return nullptr;
@@ -120,8 +120,8 @@ NEFORCE_CONSTEXPR14 void* memory_copy(T* NEFORCE_RESTRICT dest, const T* NEFORCE
  * @return 目标内存复制结束后的下一个位置指针，如果参数无效则返回nullptr
  * @note 使用restrict关键字优化，要求源和目标内存不重叠，否则将产生未定义行为。
  */
-NEFORCE_CONSTEXPR14 void* memory_copy_offset(void* NEFORCE_RESTRICT dest, const void* NEFORCE_RESTRICT src,
-                                             size_t count) noexcept {
+NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR14 void*
+memory_copy_offset(void* NEFORCE_RESTRICT dest, const void* NEFORCE_RESTRICT src, size_t count) noexcept {
     if (!is_constant_evaluated()) {
         return simd::memory_copy_offset(dest, src, count);
     }
@@ -177,7 +177,8 @@ NEFORCE_CONSTEXPR14 void* memory_copy_until(void* dest, const void* src, const b
  *         - 负数：左侧内存小于右侧内存
  *         - 0：两个内存区域相等
  */
-NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 int memory_compare(const void* lhs, const void* rhs, size_t count) noexcept {
+NEFORCE_ALWAYS_INLINE NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 int memory_compare(const void* lhs, const void* rhs,
+                                                                                   size_t count) noexcept {
     if (!is_constant_evaluated()) {
         return simd::memory_compare(lhs, rhs, count);
     }
@@ -224,7 +225,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 int memory_compare(const T& lhs, const
  * @return 目标内存的起始指针，如果参数无效则返回nullptr
  * @note 支持重叠区域，当dest < src时从前向后复制，当dest > src时从后向前复制。
  */
-NEFORCE_CONSTEXPR14 void* memory_move(void* dest, const void* src, size_t count) noexcept {
+NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR14 void* memory_move(void* dest, const void* src, size_t count) noexcept {
     if (!is_constant_evaluated()) {
         return simd::memory_move(dest, src, count);
     }
@@ -256,7 +257,7 @@ NEFORCE_CONSTEXPR14 void* memory_move(void* dest, const void* src, size_t count)
  * @param count 要填充的字节数
  * @return 目标内存的起始指针，如果参数无效则返回nullptr
  */
-NEFORCE_CONSTEXPR14 void* memory_set(void* dest, const byte_t value, size_t count) noexcept {
+NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR14 void* memory_set(void* dest, const byte_t value, size_t count) noexcept {
     if (count < 16) {
         if (dest == nullptr) {
             return nullptr;
@@ -356,8 +357,8 @@ NEFORCE_CONSTEXPR14 void memory_zero(T* dest) noexcept {
  * @param count 要搜索的字节数
  * @return 指向第一个匹配字节的指针，如果没有找到则返回nullptr
  */
-NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 const void* memory_find(const void* dest, const byte_t value,
-                                                                  size_t count) noexcept {
+NEFORCE_ALWAYS_INLINE NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 const void*
+memory_find(const void* dest, const byte_t value, size_t count) noexcept {
     if (!is_constant_evaluated()) {
         return simd::memory_find(dest, value, count);
     }
@@ -780,7 +781,7 @@ NEFORCE_PURE_FUNCTION constexpr int string_compare_ignore_case(const CharT* s1, 
  * @return 字符串长度，不包含终止空字符
  */
 template <typename CharT>
-NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 size_t string_length(const CharT* str) noexcept {
+NEFORCE_ALWAYS_INLINE NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 size_t string_length(const CharT* str) noexcept {
     static_assert(is_character_v<CharT>, "CharT must be a character");
     if (!is_constant_evaluated()) {
         return simd::string_length(str);
