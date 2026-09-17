@@ -255,8 +255,10 @@ bool file::open(path pth, const bool append, file_access access, file_shared sha
     }
 
     if ((creation_flags & O_CREAT) != 0) {
+        // codeql[cpp/path-injection]
         handle_ = ::open(pth.data(), flags, mode);
     } else {
+        // codeql[cpp/path-injection]
         handle_ = ::open(pth.data(), flags);
     }
 

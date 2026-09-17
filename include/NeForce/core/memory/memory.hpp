@@ -83,9 +83,6 @@ NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR14 void* memory_copy(void* NEFORCE_RESTRI
     if (dest == nullptr || src == nullptr) {
         return nullptr;
     }
-    if (count == 0) {
-        return dest;
-    }
 
     void* res = dest;
     auto* dest_v = static_cast<volatile byte_t*>(dest);

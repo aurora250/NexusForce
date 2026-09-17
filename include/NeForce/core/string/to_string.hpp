@@ -342,11 +342,10 @@ NEFORCE_NODISCARD basic_string<CharT> __float_to_string_with_precision(T x, int 
         return basic_string<CharT>{"nan"};
     }
 
-    constexpr T inf = numeric_traits<T>::infinity();
-    if (x == inf) {
+    if (_NEFORCE is_pos_infinity(x)) {
         return basic_string<CharT>{"inf"};
     }
-    if (x == -inf) {
+    if (_NEFORCE is_neg_infinity(x)) {
         return basic_string<CharT>{"-inf"};
     }
 

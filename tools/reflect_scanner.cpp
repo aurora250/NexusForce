@@ -344,7 +344,7 @@ namespace {
 NEFORCE_END_NAMESPACE__
 
 
-void impl(int argc, const char* argv[]) {
+static void impl(int argc, const char* argv[]) {
     using namespace neforce;
 
     cmdline cmd;
@@ -355,8 +355,7 @@ void impl(int argc, const char* argv[]) {
     try {
         cmd.parse(argc, argv);
     } catch (const exception& e) {
-        eprintfln("Error: {}", e.what());
-        throw;
+        report_with_stack(e);
     }
 
     if (cmd.has("help")) {
@@ -365,14 +364,12 @@ void impl(int argc, const char* argv[]) {
     }
 
     if (!cmd.has("output")) {
-        eprintln("Error: -o <output_file> is required");
-        throw;
+        throw value_exception("Error: -o <output_file> is required");
     }
 
     const auto& positional = cmd.positional_args();
     if (positional.empty()) {
-        eprintln("Error: <input_dir> is required");
-        throw;
+        throw value_exception("Error: <input_dir> is required");
     }
 
     string input_dir = positional[0];
@@ -439,8 +436,8 @@ void impl(int argc, const char* argv[]) {
             }
         }
         // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (...) {
-        // ignore
+    } catch (const exception& e) {
+        report_with_stack(e);
     }
 
     bool output_exists = false;
@@ -448,8 +445,8 @@ void impl(int argc, const char* argv[]) {
         file test{path{output_path}};
         output_exists = true;
         // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (...) {
-        // ignore
+    } catch (const exception& e) {
+        report_with_stack(e);
     }
 
     bool need_regenerate = !output_exists || headers.empty();
@@ -536,11 +533,6 @@ int main(int argc, const char* argv[]) {
     try {
         impl(argc, argv);
     } catch (const exception& e) {
-        try {
-            eprintfln("Error: {}", e.what());
-            // NOLINTNEXTLINE(bugprone-empty-catch)
-        } catch (...) {
-            // ignore
-        }
+        report_with_stack(e);
     }
 }

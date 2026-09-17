@@ -490,10 +490,11 @@ public:
      * @return 缩放后的颜色
      */
     constexpr color operator*(const double scalar) const noexcept {
-        return {static_cast<int>(_NEFORCE round(static_cast<double>(r) * scalar)),
-                static_cast<int>(_NEFORCE round(static_cast<double>(g) * scalar)),
-                static_cast<int>(_NEFORCE round(static_cast<double>(b) * scalar)),
-                static_cast<int>(_NEFORCE round(static_cast<double>(a) * scalar))};
+        const auto s = static_cast<decimal_t>(scalar);
+        return {static_cast<int>(_NEFORCE round(static_cast<decimal_t>(r) * s)),
+                static_cast<int>(_NEFORCE round(static_cast<decimal_t>(g) * s)),
+                static_cast<int>(_NEFORCE round(static_cast<decimal_t>(b) * s)),
+                static_cast<int>(_NEFORCE round(static_cast<decimal_t>(a) * s))};
     }
 
     /**
