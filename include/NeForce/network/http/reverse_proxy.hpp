@@ -52,7 +52,7 @@ struct proxy_backend {
 class NEFORCE_API reverse_proxy_filter final : public http_filter {
 public:
     /// 请求头重写回调
-    using header_rewrite_cb = function<void(unordered_map<string, string>&)>;
+    using header_rewrite_cb = function<void(flat_unordered_map<string, string>&)>;
     /// 后端选择回调
     using backend_selector_cb = function<proxy_backend(const http_request&)>;
 

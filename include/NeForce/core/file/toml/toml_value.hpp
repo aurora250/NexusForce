@@ -8,7 +8,7 @@
  * 此文件提供了TOML（Tom's Obvious, Minimal Language）配置格式的抽象基类和具体实现类。
  */
 
-#include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/container/flat_unordered_map.hpp"
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
 #include "NeForce/core/time/datetime.hpp"
@@ -669,8 +669,8 @@ public:
  */
 class NEFORCE_API toml_table final : public toml_value {
 private:
-    unordered_map<string, unique_ptr<toml_value>> members_; ///< 成员映射表
-    bool is_inline_ = false;                                ///< 是否为内联表格
+    flat_unordered_map<string, unique_ptr<toml_value>> members_; ///< 成员映射表
+    bool is_inline_ = false;                                     ///< 是否为内联表格
 
 public:
     /**
@@ -757,7 +757,7 @@ public:
      * @brief 获取所有成员的常量引用
      * @return 成员映射表的常量引用
      */
-    NEFORCE_NODISCARD const unordered_map<string, unique_ptr<toml_value>>& get_members() const noexcept {
+    NEFORCE_NODISCARD const flat_unordered_map<string, unique_ptr<toml_value>>& get_members() const noexcept {
         return members_;
     }
 

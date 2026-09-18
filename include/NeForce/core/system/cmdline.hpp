@@ -8,7 +8,7 @@
  * 本文件提供了 cmdline 类，用于解析符合 POSIX 风格和 GNU 风格扩展的命令行参数。
  */
 
-#include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/container/flat_unordered_map.hpp"
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/functional/function.hpp"
 #include "NeForce/core/string/string.hpp"
@@ -231,11 +231,11 @@ public:
     using validator = function<string(const string& name, const string& value)>;
 
 private:
-    string program_name_;                        ///< 程序名称
-    vector<option> options_;                     ///< 选项列表
-    unordered_map<string, size_t> options_long_; ///< 长选项名索引
-    unordered_map<char, size_t> options_short_;  ///< 短选项字符索引
-    vector<string> positional_;                  ///< 位置参数
+    string program_name_;                             ///< 程序名称
+    vector<option> options_;                          ///< 选项列表
+    flat_unordered_map<string, size_t> options_long_; ///< 长选项名索引
+    flat_unordered_map<char, size_t> options_short_;  ///< 短选项字符索引
+    vector<string> positional_;                       ///< 位置参数
 
     vector<option_dependency> dependencies_;                        ///< 选项依赖关系列表
     vector<option_conflict> conflicts_;                             ///< 选项冲突关系列表

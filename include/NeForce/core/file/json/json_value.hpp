@@ -9,7 +9,7 @@
  * JSON是一种轻量级的数据交换格式，易于人类阅读和编写，也易于机器解析和生成。
  */
 
-#include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/container/flat_unordered_map.hpp"
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/interface/istringify.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
@@ -394,7 +394,7 @@ public:
  */
 class NEFORCE_API json_object final : public json_value {
 private:
-    unordered_map<string, unique_ptr<json_value>> members_; ///< 成员映射表
+    flat_unordered_map<string, unique_ptr<json_value>> members_; ///< 成员映射表
 
 public:
     /**
@@ -454,7 +454,7 @@ public:
      * @brief 获取所有成员的常量引用
      * @return 成员映射表的常量引用
      */
-    NEFORCE_NODISCARD const unordered_map<string, unique_ptr<json_value>>& get_members() const noexcept {
+    NEFORCE_NODISCARD const flat_unordered_map<string, unique_ptr<json_value>>& get_members() const noexcept {
         return members_;
     }
 };

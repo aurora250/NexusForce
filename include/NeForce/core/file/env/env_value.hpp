@@ -8,7 +8,7 @@
  * 此文件提供了ENV配置格式的抽象基类和具体实现类。
  */
 
-#include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/container/flat_unordered_map.hpp"
 #include "NeForce/core/interface/istringify.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -228,8 +228,8 @@ public:
  */
 class NEFORCE_API env_document final : public istringify<env_document> {
 private:
-    unordered_map<string, unique_ptr<env_variable>> variables_; ///< 变量映射表
-    vector<string> comments_;                                   ///< 注释列表
+    flat_unordered_map<string, unique_ptr<env_variable>> variables_; ///< 变量映射表
+    vector<string> comments_;                                        ///< 注释列表
 
 public:
     /**
@@ -317,7 +317,7 @@ public:
      * @brief 获取所有变量的常量引用
      * @return 变量映射表的常量引用
      */
-    NEFORCE_NODISCARD const unordered_map<string, unique_ptr<env_variable>>& get_variables() const noexcept {
+    NEFORCE_NODISCARD const flat_unordered_map<string, unique_ptr<env_variable>>& get_variables() const noexcept {
         return variables_;
     }
 

@@ -57,11 +57,11 @@ NEFORCE_BEGIN_HTTP__
  * auto post_resp = client.post_json("https://api.example.com/users", json);
  *
  * // POST表单请求
- * unordered_map<string, string> form = {{"username", "john"}, {"password", "123"}};
+ * flat_unordered_map<string, string> form = {{"username", "john"}, {"password", "123"}};
  * auto form_resp = client.post_form("https://example.com/login", form);
  *
  * // 设置自定义请求头
- * unordered_map<string, string> headers = {{"Authorization", "Bearer token123"}};
+ * flat_unordered_map<string, string> headers = {{"Authorization", "Bearer token123"}};
  * auto auth_resp = client.get("https://api.example.com/profile", headers);
  *
  * // 下载文件
@@ -85,19 +85,19 @@ public:
      * @brief HTTP客户端配置
      */
     struct config {
-        milliseconds connect_timeout{5000};              ///< 连接超时
-        milliseconds send_timeout{5000};                 ///< 发送超时
-        milliseconds receive_timeout{5000};              ///< 接收超时
-        uint16_t max_redirects = 5;                      ///< 最大重定向次数
-        bool follow_redirects = true;                    ///< 是否跟随重定向
-        bool keep_alive = false;                         ///< 是否保持连接
-        bool verify_ssl = true;                          ///< 是否验证SSL证书
-        byte_size max_response_size{10_MB};              ///< 最大响应大小
-        byte_size buffer_size{8_KB};                     ///< 缓冲区大小
-        unordered_map<string, string> default_headers;   ///< 默认请求头
-        string user_agent{"NexusForce HTTP Client/1.0"}; ///< User-Agent
-        string proxy_host;                               ///< 代理主机
-        ports proxy_port;                                ///< 代理端口
+        milliseconds connect_timeout{5000};                 ///< 连接超时
+        milliseconds send_timeout{5000};                    ///< 发送超时
+        milliseconds receive_timeout{5000};                 ///< 接收超时
+        uint16_t max_redirects = 5;                         ///< 最大重定向次数
+        bool follow_redirects = true;                       ///< 是否跟随重定向
+        bool keep_alive = false;                            ///< 是否保持连接
+        bool verify_ssl = true;                             ///< 是否验证SSL证书
+        byte_size max_response_size{10_MB};                 ///< 最大响应大小
+        byte_size buffer_size{8_KB};                        ///< 缓冲区大小
+        flat_unordered_map<string, string> default_headers; ///< 默认请求头
+        string user_agent{"NexusForce HTTP Client/1.0"};    ///< User-Agent
+        string proxy_host;                                  ///< 代理主机
+        ports proxy_port;                                   ///< 代理端口
         // TODO: Connection pool — max_connections_per_host, idle_timeout, max_idle_connections
         // TODO: Retry policy — max_retries, retry_backoff_ms, retry_on_status_codes (429, 502, 503, 504)
         // TODO: Circuit breaker — failure_threshold, recovery_timeout, half_open_max_requests
@@ -110,12 +110,12 @@ public:
     using client_type = ssl_client; ///< 底层客户端类型
 
 private:
-    client_type client_;                               ///< TCP/SSL客户端
-    io_context* ctx_{nullptr};                         ///< 异步 I/O 执行上下文
-    config config_;                                    ///< 客户端配置
-    unordered_map<string, http_cookie> cookie_jar_;    ///< Cookie存储
-    unordered_map<string, string> persistent_headers_; ///< 持久化请求头
-    mutable mutex mutex_;                              ///< 保护共享数据
+    client_type client_;                                    ///< TCP/SSL客户端
+    io_context* ctx_{nullptr};                              ///< 异步 I/O 执行上下文
+    config config_;                                         ///< 客户端配置
+    flat_unordered_map<string, http_cookie> cookie_jar_;    ///< Cookie存储
+    flat_unordered_map<string, string> persistent_headers_; ///< 持久化请求头
+    mutable mutex mutex_;                                   ///< 保护共享数据
 
     progress_callback_t progress_callback_; ///< 进度回调
     error_callback_t error_callback_;       ///< 错误回调
@@ -290,7 +290,7 @@ public:
      * @brief 获取所有Cookie
      * @return Cookie映射
      */
-    NEFORCE_NODISCARD unordered_map<string, http_cookie> get_cookies() const {
+    NEFORCE_NODISCARD flat_unordered_map<string, http_cookie> get_cookies() const {
         lock<mutex> lk(mutex_);
         return cookie_jar_;
     }
@@ -305,7 +305,7 @@ public:
      * 支持HTTP和HTTPS协议。
      * 自动处理Cookie和重定向。
      */
-    http_client_response get(const string& url, const unordered_map<string, string>& headers = {});
+    http_client_response get(const string& url, const flat_unordered_map<string, string>& headers = {});
 
     /**
      * @brief 发送POST请求
@@ -322,7 +322,7 @@ public:
      */
     http_client_response post(const string& url, const string& body = "",
                               const string& content_type = "application/x-www-form-urlencoded",
-                              const unordered_map<string, string>& headers = {});
+                              const flat_unordered_map<string, string>& headers = {});
 
     /**
      * @brief 发送POST JSON请求
@@ -336,7 +336,7 @@ public:
      * 适用于RESTful API调用。
      */
     http_client_response post_json(const string& url_str, const string& json_body,
-                                   const unordered_map<string, string>& headers);
+                                   const flat_unordered_map<string, string>& headers);
 
     /**
      * @brief 发送POST表单请求
@@ -349,8 +349,8 @@ public:
      * 自动将表单数据编码为URL编码格式。
      * 适用于HTML表单提交场景。
      */
-    http_client_response post_form(const string& url_str, const unordered_map<string, string>& form_data,
-                                   const unordered_map<string, string>& headers);
+    http_client_response post_form(const string& url_str, const flat_unordered_map<string, string>& form_data,
+                                   const flat_unordered_map<string, string>& headers);
 
     /**
      * @brief 发送PUT请求
@@ -366,7 +366,7 @@ public:
      */
     http_client_response put(const string& url, const string& body = "",
                              const string& content_type = "application/x-www-form-urlencoded",
-                             const unordered_map<string, string>& headers = {});
+                             const flat_unordered_map<string, string>& headers = {});
 
     /**
      * @brief 发送DELETE请求
@@ -377,7 +377,7 @@ public:
      * 发送HTTP DELETE请求到指定URL。
      * 用于删除指定资源。
      */
-    http_client_response del(const string& url, const unordered_map<string, string>& headers = {});
+    http_client_response del(const string& url, const flat_unordered_map<string, string>& headers = {});
 
     /**
      * @brief 发送HEAD请求
@@ -389,7 +389,7 @@ public:
      * 只获取响应头，不获取响应正文。
      * 适用于检查资源是否存在或获取元信息。
      */
-    http_client_response head(const string& url, const unordered_map<string, string>& headers = {});
+    http_client_response head(const string& url, const flat_unordered_map<string, string>& headers = {});
 
     /**
      * @brief 发送OPTIONS请求
@@ -401,7 +401,7 @@ public:
      * 用于获取服务器支持的HTTP方法列表。
      * 常用于CORS预检请求。
      */
-    http_client_response options(const string& url, const unordered_map<string, string>& headers = {});
+    http_client_response options(const string& url, const flat_unordered_map<string, string>& headers = {});
 
     /**
      * @brief 发送PATCH请求
@@ -417,7 +417,7 @@ public:
      */
     http_client_response patch(const string& url, const string& body = "",
                                const string& content_type = "application/x-www-form-urlencoded",
-                               const unordered_map<string, string>& headers = {});
+                               const flat_unordered_map<string, string>& headers = {});
 
     /**
      * @brief 发送自定义HTTP请求

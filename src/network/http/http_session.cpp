@@ -244,7 +244,7 @@ bool http_session::is_new_session() const noexcept {
     return is_new;
 }
 
-unordered_map<string, string> http_session::data_snapshot() const {
+flat_unordered_map<string, string> http_session::data_snapshot() const {
     lock<mutex> lk(*mtx_);
     return data;
 }

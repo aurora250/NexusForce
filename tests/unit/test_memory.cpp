@@ -6,6 +6,7 @@
 #include <NeForce/core/memory/endian.hpp>
 #include <NeForce/core/memory/memory.hpp>
 #include <NeForce/core/memory/memory_view.hpp>
+#include <NeForce/core/memory/trace_memory.hpp>
 #include <NeForce/core/memory/weak_ptr.hpp>
 #include <NeForce/core/string/string.hpp>
 #include <gtest/gtest.h>

@@ -1041,7 +1041,7 @@ TEST_F(UrlTest, DecodeTolerantEmptyString) { EXPECT_EQ(url::decode_tolerant(""),
 TEST_F(UrlTest, DecodeTolerantPlainString) { EXPECT_EQ(url::decode_tolerant("hello"), "hello"); }
 
 TEST_F(UrlTest, ParseQueryBasic) {
-    unordered_map<string, string> params;
+    flat_unordered_map<string, string> params;
     url::parse_query("key1=value1&key2=value2", params);
     EXPECT_EQ(params.size(), 2u);
     EXPECT_EQ(params["key1"], "value1");
@@ -1049,75 +1049,75 @@ TEST_F(UrlTest, ParseQueryBasic) {
 }
 
 TEST_F(UrlTest, ParseQuerySinglePair) {
-    unordered_map<string, string> params;
+    flat_unordered_map<string, string> params;
     url::parse_query("key=value", params);
     EXPECT_EQ(params.size(), 1u);
     EXPECT_EQ(params["key"], "value");
 }
 
 TEST_F(UrlTest, ParseQueryNoEquals) {
-    unordered_map<string, string> params;
+    flat_unordered_map<string, string> params;
     url::parse_query("key1&key2=value2", params);
     EXPECT_EQ(params.size(), 1u);
     EXPECT_EQ(params["key2"], "value2");
 }
 
 TEST_F(UrlTest, ParseQueryEmptyString) {
-    unordered_map<string, string> params;
+    flat_unordered_map<string, string> params;
     url::parse_query("", params);
     EXPECT_TRUE(params.empty());
 }
 
 TEST_F(UrlTest, ParseQueryEncodedCharacters) {
-    unordered_map<string, string> params;
+    flat_unordered_map<string, string> params;
     url::parse_query("key%20name=value%20data", params);
     EXPECT_EQ(params.size(), 1u);
     EXPECT_EQ(params["key name"], "value data");
 }
 
 TEST_F(UrlTest, ParseQueryPlusSignForSpace) {
-    unordered_map<string, string> params;
+    flat_unordered_map<string, string> params;
     url::parse_query("key+name=value+data", params);
     EXPECT_EQ(params.size(), 1u);
     EXPECT_EQ(params["key name"], "value data");
 }
 
 TEST_F(UrlTest, ParseQueryMultipleSameKey) {
-    unordered_map<string, string> params;
+    flat_unordered_map<string, string> params;
     url::parse_query("key=val1&key=val2", params);
     EXPECT_EQ(params.size(), 1u);
 }
 
 TEST_F(UrlTest, ParseQueryValueWithEquals) {
-    unordered_map<string, string> params;
+    flat_unordered_map<string, string> params;
     url::parse_query("key=val=ue", params);
     EXPECT_EQ(params.size(), 1u);
     EXPECT_EQ(params["key"], "val=ue");
 }
 
 TEST_F(UrlTest, ParseQueryEmptyValue) {
-    unordered_map<string, string> params;
+    flat_unordered_map<string, string> params;
     url::parse_query("key=", params);
     EXPECT_EQ(params.size(), 1u);
     EXPECT_EQ(params["key"], "");
 }
 
 TEST_F(UrlTest, ParseQueryEmptyKey) {
-    unordered_map<string, string> params;
+    flat_unordered_map<string, string> params;
     url::parse_query("=value", params);
     EXPECT_EQ(params.size(), 1u);
     EXPECT_EQ(params[""], "value");
 }
 
 TEST_F(UrlTest, ParseQueryTrailingSeparator) {
-    unordered_map<string, string> params;
+    flat_unordered_map<string, string> params;
     url::parse_query("key=value&", params);
     EXPECT_EQ(params.size(), 1u);
     EXPECT_EQ(params["key"], "value");
 }
 
 TEST_F(UrlTest, BuildQueryBasic) {
-    unordered_map<string, string> params;
+    flat_unordered_map<string, string> params;
     params["key1"] = "value1";
     params["key2"] = "value2";
     string result = url::build_query(params);
@@ -1125,24 +1125,24 @@ TEST_F(UrlTest, BuildQueryBasic) {
 }
 
 TEST_F(UrlTest, BuildQuerySinglePair) {
-    unordered_map<string, string> params;
+    flat_unordered_map<string, string> params;
     params["key"] = "value";
     EXPECT_EQ(url::build_query(params), "key=value");
 }
 
 TEST_F(UrlTest, BuildQueryEmpty) {
-    unordered_map<string, string> params;
+    flat_unordered_map<string, string> params;
     EXPECT_EQ(url::build_query(params), "");
 }
 
 TEST_F(UrlTest, BuildQueryEncodedCharacters) {
-    unordered_map<string, string> params;
+    flat_unordered_map<string, string> params;
     params["key name"] = "value data";
     EXPECT_EQ(url::build_query(params), "key+name=value+data");
 }
 
 TEST_F(UrlTest, BuildQuerySpecialCharacters) {
-    unordered_map<string, string> params;
+    flat_unordered_map<string, string> params;
     params["key&"] = "val=";
     EXPECT_EQ(url::build_query(params), "key%26=val%3D");
 }
@@ -1184,12 +1184,12 @@ TEST_F(UrlTest, RoundtripFormEncodeAndDecode) {
 }
 
 TEST_F(UrlTest, RoundtripBuildAndParseQuery) {
-    unordered_map<string, string> original;
+    flat_unordered_map<string, string> original;
     original["key1"] = "value1";
     original["key2"] = "value2";
     string query_string = url::build_query(original);
 
-    unordered_map<string, string> parsed;
+    flat_unordered_map<string, string> parsed;
     url::parse_query(query_string.view(), parsed);
     EXPECT_EQ(parsed.size(), original.size());
     EXPECT_EQ(parsed["key1"], "value1");
@@ -1197,7 +1197,7 @@ TEST_F(UrlTest, RoundtripBuildAndParseQuery) {
 }
 
 TEST_F(UrlTest, ParseQueryWithFragmentMarkerNotPresent) {
-    unordered_map<string, string> params;
+    flat_unordered_map<string, string> params;
     url::parse_query("key=value", params);
     EXPECT_EQ(params.size(), 1u);
     EXPECT_EQ(params["key"], "value");

@@ -10,7 +10,7 @@
  */
 
 #include "NeForce/core/async/mutex.hpp"
-#include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/container/flat_unordered_map.hpp"
 #include "NeForce/core/system/dynamic_library.hpp"
 #include "NeForce/plugin/plugin_entry.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -33,10 +33,10 @@ public:
     using library_ptr = unique_ptr<dynamic_library>; ///< 动态库指针类型
 
 private:
-    mutable mutex mutex_;                             ///< 互斥锁
-    unordered_map<string, plugin_ptr> plugins_;       ///< 插件名称到实例的映射
-    unordered_map<string, library_ptr> libraries_;    ///< 库路径到动态库的映射
-    unordered_map<string, string> plugin_to_library_; ///< 插件名称到库路径的映射
+    mutable mutex mutex_;                                  ///< 互斥锁
+    flat_unordered_map<string, plugin_ptr> plugins_;       ///< 插件名称到实例的映射
+    flat_unordered_map<string, library_ptr> libraries_;    ///< 库路径到动态库的映射
+    flat_unordered_map<string, string> plugin_to_library_; ///< 插件名称到库路径的映射
 
     /**
      * @brief 私有构造函数

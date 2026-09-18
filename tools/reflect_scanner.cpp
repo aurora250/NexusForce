@@ -211,7 +211,7 @@ namespace {
 
     vector<enum_info> extract_enums(const string& content) {
         vector<enum_info> enums;
-        unordered_map<string, size_t> name_index;
+        flat_unordered_map<string, size_t> name_index;
 
         const regex enum_marker(R"(NEFORCE_REFLECT_ENUM\s*\(\s*(\w+)\s*,\s*(\w+)\s*\))");
         const regex eval_marker(R"(NEFORCE_REFLECT_ENUM_VAL\s*\(\s*(\w+)\s*,\s*(\w+)\s*\))");
@@ -417,7 +417,7 @@ static void impl(int argc, const char* argv[]) {
     eprintfln("Found {} header file(s)", headers.size());
 
     string cache_path = output_path + ".cache";
-    unordered_map<string, string> cache;
+    flat_unordered_map<string, string> cache;
     try {
         file cache_file{path{cache_path}};
         string cache_content = cache_file.read();
@@ -475,7 +475,7 @@ static void impl(int argc, const char* argv[]) {
         return;
     }
 
-    unordered_map<string, string> new_cache;
+    flat_unordered_map<string, string> new_cache;
     vector<class_info> all_classes;
     vector<enum_info> all_enums;
     for (const auto& hdr: headers) {

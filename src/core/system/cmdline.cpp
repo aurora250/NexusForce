@@ -326,7 +326,7 @@ void cmdline::load_config(const string& config_path, const string& section) {
     }
     const string content = config_file.read();
 
-    unordered_map<string, string> config_values;
+    flat_unordered_map<string, string> config_values;
     const string ext = path{config_path}.extension();
 
     if (ext == ".ini") {

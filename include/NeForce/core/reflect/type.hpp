@@ -9,7 +9,7 @@
  * 包括名称、大小、基类、属性、函数、构造函数、枚举信息和容器信息等。
  */
 
-#include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/container/flat_unordered_map.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
 #include "NeForce/core/reflect/enum.hpp"
 #include "NeForce/core/reflect/function.hpp"
@@ -60,26 +60,26 @@ public:
     using container_insert_kv_func = _NEFORCE function<void(void*, const meta_any&, const meta_any&)>; ///< 插入键值对
 
 private:
-    reflect::type_id type_id_;                                    ///< 类型ID
-    string_view name_;                                            ///< 类型名称
-    size_t size_;                                                 ///< 类型大小
-    string table_name_;                                           ///< 数据库表名（空表示使用类型名称）
-    constructor_func constructor_;                                ///< 构造函数调用器
-    clone_func cloner_;                                           ///< 克隆函数
-    vector<meta_type*> base_types_;                               ///< 直接基类列表
-    vector<string> pending_base_names_;                           ///< 待解析的基类名称
-    unordered_map<string, unique_ptr<meta_property>> properties_; ///< 属性映射
-    unordered_map<string, unique_ptr<meta_function>> functions_;  ///< 函数映射
-    vector<string> signal_names_;                                 ///< 信号名称列表
-    unique_ptr<meta_enum> enum_info_;                             ///< 枚举信息
-    container_kind container_kind_ = container_kind::none;        ///< 容器类型
-    reflect::type_id element_type_id_ = 0;                        ///< 元素类型 ID
-    reflect::type_id key_type_id_ = 0;                            ///< 键类型 ID
-    reflect::type_id mapped_type_id_ = 0;                         ///< 值类型 ID
-    container_size_func container_size_;                          ///< 容器大小函数
-    container_get_func container_get_;                            ///< 按索引获取函数
-    container_insert_func container_insert_;                      ///< 插入元素函数
-    container_insert_kv_func container_insert_kv_;                ///< 插入键值对函数
+    reflect::type_id type_id_;                                         ///< 类型ID
+    string_view name_;                                                 ///< 类型名称
+    size_t size_;                                                      ///< 类型大小
+    string table_name_;                                                ///< 数据库表名（空表示使用类型名称）
+    constructor_func constructor_;                                     ///< 构造函数调用器
+    clone_func cloner_;                                                ///< 克隆函数
+    vector<meta_type*> base_types_;                                    ///< 直接基类列表
+    vector<string> pending_base_names_;                                ///< 待解析的基类名称
+    flat_unordered_map<string, unique_ptr<meta_property>> properties_; ///< 属性映射
+    flat_unordered_map<string, unique_ptr<meta_function>> functions_;  ///< 函数映射
+    vector<string> signal_names_;                                      ///< 信号名称列表
+    unique_ptr<meta_enum> enum_info_;                                  ///< 枚举信息
+    container_kind container_kind_ = container_kind::none;             ///< 容器类型
+    reflect::type_id element_type_id_ = 0;                             ///< 元素类型 ID
+    reflect::type_id key_type_id_ = 0;                                 ///< 键类型 ID
+    reflect::type_id mapped_type_id_ = 0;                              ///< 值类型 ID
+    container_size_func container_size_;                               ///< 容器大小函数
+    container_get_func container_get_;                                 ///< 按索引获取函数
+    container_insert_func container_insert_;                           ///< 插入元素函数
+    container_insert_kv_func container_insert_kv_;                     ///< 插入键值对函数
 
     void collect_properties(vector<pair<string, const meta_property*>>& result,
                             vector<reflect::type_id>* visited = nullptr) const {

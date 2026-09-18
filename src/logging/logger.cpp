@@ -1,8 +1,8 @@
 #include <NeForce/logging/logger.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-unordered_map<string, string>& mdc::storage() {
-    thread_local unordered_map<string, string> m;
+flat_unordered_map<string, string>& mdc::storage() {
+    thread_local flat_unordered_map<string, string> m;
     return m;
 }
 
@@ -20,7 +20,7 @@ void mdc::clear() { storage().clear(); }
 
 bool mdc::empty() { return storage().empty(); }
 
-unordered_map<string, string> mdc::snapshot() { return storage(); }
+flat_unordered_map<string, string> mdc::snapshot() { return storage(); }
 
 logger::logger(string name) :
 name_(move(name)) {}
@@ -85,7 +85,7 @@ void logger::set_filter(function<bool(const log_event&)> filter) {
 
 void logger::add_context(const string& key, string value) {
     lock<mutex> lock(context_mutex_);
-    auto new_data = make_shared<unordered_map<string, string>>(*context_data_);
+    auto new_data = make_shared<flat_unordered_map<string, string>>(*context_data_);
     (*new_data)[key] = move(value);
     context_data_ = move(new_data);
 }
@@ -95,14 +95,14 @@ void logger::remove_context(const string& key) {
     if (context_data_->find(key) == context_data_->end()) {
         return;
     }
-    auto new_data = make_shared<unordered_map<string, string>>(*context_data_);
+    auto new_data = make_shared<flat_unordered_map<string, string>>(*context_data_);
     new_data->erase(key);
     context_data_ = move(new_data);
 }
 
 void logger::clear_context() {
     lock<mutex> lock(context_mutex_);
-    context_data_ = make_shared<unordered_map<string, string>>();
+    context_data_ = make_shared<flat_unordered_map<string, string>>();
 }
 
 void logger::enable_async(shared_ptr<thread_pool> pool, const size_t queue_size, const overflow_policy policy) {
@@ -325,14 +325,14 @@ void logger::log(const log_level level, string msg, const source_location loc) {
     ev.thread_id = this_thread::id();
     ev.logger_name = name_;
 
-    shared_ptr<unordered_map<string, string>> logger_ctx;
+    shared_ptr<flat_unordered_map<string, string>> logger_ctx;
     {
         lock<mutex> lock(context_mutex_);
         logger_ctx = context_data_;
     }
 
     if (!mdc::empty() && logger_ctx) {
-        auto merged = make_shared<unordered_map<string, string>>(*logger_ctx);
+        auto merged = make_shared<flat_unordered_map<string, string>>(*logger_ctx);
         auto mdc_snap = mdc::snapshot();
         for (auto& [k, v]: mdc_snap) {
             (*merged)[k] = move(v);

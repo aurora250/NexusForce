@@ -9,7 +9,7 @@
  * YAML是一种人类可读的数据序列化语言，常用于配置文件、数据交换和持久化存储。
  */
 
-#include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/container/flat_unordered_map.hpp"
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/interface/istringify.hpp"
 #include "NeForce/core/memory/shared_ptr.hpp"
@@ -692,8 +692,8 @@ public:
     };
 
 private:
-    unordered_map<string, shared_ptr<yaml_value>> members; ///< 键值对存储
-    mapping_style style;                                   ///< 集合样式
+    flat_unordered_map<string, shared_ptr<yaml_value>> members; ///< 键值对存储
+    mapping_style style;                                        ///< 集合样式
 
 public:
     ~yaml_mapping() override = default;
@@ -757,7 +757,7 @@ public:
      * @brief 获取所有成员的常量引用
      * @return 键值对映射表的常量引用
      */
-    NEFORCE_NODISCARD const unordered_map<string, shared_ptr<yaml_value>>& get_members() const noexcept {
+    NEFORCE_NODISCARD const flat_unordered_map<string, shared_ptr<yaml_value>>& get_members() const noexcept {
         return members;
     }
 

@@ -1,7 +1,6 @@
 #include <NeForce/core/utility/packages.hpp>
 #include <NeForce/core/memory/byte_cursor.hpp>
 #include <NeForce/network/http/http2_connection.hpp>
-#include <algorithm>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__
 
@@ -11,7 +10,7 @@ namespace {
     constexpr size_t MAX_WRITE_BUFFER_SIZE = 1048576; // 1 MB
 
     vector<hpack_header_field> response_headers_to_hpack(int status_code,
-                                                         const unordered_map<string, string>& headers) {
+                                                         const flat_unordered_map<string, string>& headers) {
         vector<hpack_header_field> result;
         result.push_back({":status", to_string(status_code)});
 

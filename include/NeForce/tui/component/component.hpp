@@ -12,7 +12,7 @@
 
 #include "NeForce/core/async/io_context.hpp"
 #include "NeForce/core/async/strand.hpp"
-#include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/container/flat_unordered_map.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
 #include "NeForce/tui/dom/element.hpp"
 #include "NeForce/tui/dom/state.hpp"
@@ -343,8 +343,8 @@ protected:
     }
 
 private:
-    function<void(component_base*)> schedule_render_cb_; ///< 由 reconciler 注入的调度回调
-    unordered_map<size_t, shared_ptr<void>> contexts_;   ///< 上下文映射
+    function<void(component_base*)> schedule_render_cb_;    ///< 由 reconciler 注入的调度回调
+    flat_unordered_map<size_t, shared_ptr<void>> contexts_; ///< 上下文映射
 };
 
 /**

@@ -1350,7 +1350,8 @@ TEST_F(ReverseProxyIntegrationTest, HeaderRewriteCallback) {
     reverse_proxy_filter proxy(ctx_);
     proxy.set_path_prefix("/api/");
     proxy.add_backend({"backend", ports(8080)});
-    proxy.set_header_rewrite([](unordered_map<string, string>& headers) { headers["X-Forwarded-Proto"] = "https"; });
+    proxy.set_header_rewrite(
+            [](flat_unordered_map<string, string>& headers) { headers["X-Forwarded-Proto"] = "https"; });
 
     http_request req;
     req.method = http_method::GET();

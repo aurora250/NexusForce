@@ -277,7 +277,7 @@ string url::decode_tolerant(const string_view str) {
     return result;
 }
 
-void url::parse_query(const string_view query, unordered_map<string, string>& params) {
+void url::parse_query(const string_view query, flat_unordered_map<string, string>& params) {
     if (query.empty()) {
         return;
     }
@@ -300,7 +300,7 @@ void url::parse_query(const string_view query, unordered_map<string, string>& pa
     }
 }
 
-string url::build_query(const unordered_map<string, string>& params) {
+string url::build_query(const flat_unordered_map<string, string>& params) {
     if (params.empty()) {
         return "";
     }

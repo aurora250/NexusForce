@@ -76,13 +76,13 @@ private:
         ~frame() = default;
     };
 
-    stack<frame> contexts_;                                 ///< 上下文栈
-    shared_ptr<yaml_value> root_;                           ///< 根值
-    string current_key_;                                    ///< 当前键名
-    string pending_anchor_;                                 ///< 待应用的锚点名
-    string pending_tag_;                                    ///< 待应用的标签
-    unordered_map<string, shared_ptr<yaml_value>> anchors_; ///< 锚点注册表
-    vector<shared_ptr<yaml_value>> documents_;              ///< 多文档存储
+    stack<frame> contexts_;                                      ///< 上下文栈
+    shared_ptr<yaml_value> root_;                                ///< 根值
+    string current_key_;                                         ///< 当前键名
+    string pending_anchor_;                                      ///< 待应用的锚点名
+    string pending_tag_;                                         ///< 待应用的标签
+    flat_unordered_map<string, shared_ptr<yaml_value>> anchors_; ///< 锚点注册表
+    vector<shared_ptr<yaml_value>> documents_;                   ///< 多文档存储
 
     /**
      * @brief 应用待处理的锚点和标签到值上

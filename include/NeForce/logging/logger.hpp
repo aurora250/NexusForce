@@ -76,9 +76,9 @@ private:
     function<bool(const log_event&)> filter_; ///< 自定义过滤器
     mutex filter_mutex_;                      ///< filter 互斥锁
 
-    shared_ptr<unordered_map<string, string>> context_data_{
-            make_shared<unordered_map<string, string>>()}; ///< COW 上下文数据
-    mutable mutex context_mutex_;                          ///< 上下文互斥锁
+    shared_ptr<flat_unordered_map<string, string>> context_data_{
+            make_shared<flat_unordered_map<string, string>>()}; ///< COW 上下文数据
+    mutable mutex context_mutex_;                               ///< 上下文互斥锁
 
     atomic<int64_t> auto_flush_ms_{0};            ///< 自动刷新间隔毫秒
     timestamp last_auto_flush_{timestamp::now()}; ///< 上次自动刷新时间
@@ -232,9 +232,9 @@ public:
  */
 class NEFORCE_API logger_registry {
 private:
-    shared_ptr<logger> root_;                           ///< 根 Logger
-    unordered_map<string, shared_ptr<logger>> loggers_; ///< 名称到 Logger 的映射
-    mutex mutex_;                                       ///< 注册中心互斥锁
+    shared_ptr<logger> root_;                                ///< 根 Logger
+    flat_unordered_map<string, shared_ptr<logger>> loggers_; ///< 名称到 Logger 的映射
+    mutex mutex_;                                            ///< 注册中心互斥锁
 
     logger_registry();
     shared_ptr<logger> create_logger(const string& name);

@@ -141,7 +141,7 @@ private:
     size_t current_indent_ = 0;           ///< 当前行的缩进级别
     bool in_flow_context_ = false;        ///< 是否处于流样式上下文中
 
-    unordered_map<string, shared_ptr<yaml_value>> anchors_; ///< 锚点名到节点的映射表
+    flat_unordered_map<string, shared_ptr<yaml_value>> anchors_; ///< 锚点名到节点的映射表
 
     /**
      * @brief 获取当前字符

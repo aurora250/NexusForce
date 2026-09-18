@@ -28,7 +28,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * @typedef http_context
  * @brief 请求上下文，跨过滤器/中间件传递任意数据
  */
-using http_context = unordered_map<string, any>;
+using http_context = flat_unordered_map<string, any>;
 
 NEFORCE_BEGIN_HTTP__
 
@@ -84,11 +84,11 @@ struct NEFORCE_API http_server_request : iobject<http_server_request> {
     string query;                           ///< 查询字符串
     string body;                            ///< 请求正文
 
-    unordered_map<string, string> headers;    ///< 请求头
-    unordered_map<string, string> cookies;    ///< Cookie
-    unordered_map<string, string> parameters; ///< 请求参数
-    unordered_map<string, string> form_data;  ///< 表单数据
-    unordered_map<string, string> trailers;   ///< Trailer头部
+    flat_unordered_map<string, string> headers;    ///< 请求头
+    flat_unordered_map<string, string> cookies;    ///< Cookie
+    flat_unordered_map<string, string> parameters; ///< 请求参数
+    flat_unordered_map<string, string> form_data;  ///< 表单数据
+    flat_unordered_map<string, string> trailers;   ///< Trailer头部
 
     http_session* session = nullptr; ///< 会话对象
     http_context context;            ///< 请求上下文
@@ -285,12 +285,12 @@ struct NEFORCE_API http_server_response : istringify<http_server_response> {
     string version{"HTTP/1.1"};                    ///< HTTP版本
     http_status status{http_status::S4_NOT_FOUND}; ///< HTTP状态码
     string status_message;                         ///< 状态消息
-    unordered_map<string, string> headers;         ///< 响应头
+    flat_unordered_map<string, string> headers;    ///< 响应头
     vector<http_cookie> cookies;                   ///< 设置的Cookie
     string body;                                   ///< 响应正文
     string redirect_url;                           ///< 重定向URL
     string forward_path;                           ///< 转发路径
-    unordered_map<string, string> trailers;        ///< Trailer头部
+    flat_unordered_map<string, string> trailers;   ///< Trailer头部
     bool chunked_encoding{false};                  ///< 是否使用chunked传输编码
 
     /**

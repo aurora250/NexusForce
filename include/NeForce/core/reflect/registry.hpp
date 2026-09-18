@@ -32,9 +32,9 @@ NEFORCE_BEGIN_REFLECT__
  */
 class NEFORCE_API registry {
 private:
-    mutex mutex_;                                          ///< 保护类型映射的互斥锁
-    unordered_map<type_id, unique_ptr<meta_type>> types_;  ///< 类型ID到元数据的映射
-    unordered_map<type_id, type_id> name_hash_to_type_id_; ///< 名称hash到类型ID的辅助映射
+    mutex mutex_;                                               ///< 保护类型映射的互斥锁
+    flat_unordered_map<type_id, unique_ptr<meta_type>> types_;  ///< 类型ID到元数据的映射
+    flat_unordered_map<type_id, type_id> name_hash_to_type_id_; ///< 名称hash到类型ID的辅助映射
 
     registry() = default;
 

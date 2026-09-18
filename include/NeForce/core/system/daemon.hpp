@@ -9,7 +9,7 @@
 #include "NeForce/core/async/atomic.hpp"
 #include "NeForce/core/async/mutex.hpp"
 #include "NeForce/core/async/thread.hpp"
-#include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/container/flat_unordered_map.hpp"
 #include "NeForce/core/functional/function.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
 #include "NeForce/core/system/process.hpp"
@@ -128,7 +128,7 @@ private:
         bool running{false};
     };
     mutable mutex children_mutex_;
-    unordered_map<string, child_entry> children_;
+    flat_unordered_map<string, child_entry> children_;
 
     start_callback on_start_;
     stop_callback on_stop_;

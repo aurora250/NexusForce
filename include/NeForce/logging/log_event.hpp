@@ -10,7 +10,7 @@
  */
 
 #include "NeForce/core/async/thread.hpp"
-#include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/container/flat_unordered_map.hpp"
 #include "NeForce/core/exception/source_location.hpp"
 #include "NeForce/core/memory/shared_ptr.hpp"
 #include "NeForce/core/time/datetime.hpp"
@@ -123,7 +123,7 @@ enum class overflow_policy : uint8_t {
  */
 class NEFORCE_API mdc {
 private:
-    static unordered_map<string, string>& storage();
+    static flat_unordered_map<string, string>& storage();
 
 public:
     /**
@@ -159,7 +159,7 @@ public:
      * @brief 获取当前线程 MDC 的快照
      * @return MDC 键值对副本
      */
-    static unordered_map<string, string> snapshot();
+    static flat_unordered_map<string, string> snapshot();
 };
 
 
@@ -171,13 +171,13 @@ public:
  * 同一 Logger 的所有事件在不修改上下文时共享同一份 map。
  */
 struct log_event {
-    shared_ptr<unordered_map<string, string>> context; ///< 上下文（Logger + MDC）
-    string message;                                    ///< 格式化后的日志消息
-    string logger_name;                                ///< 产生此事件的 Logger 名称
-    datetime dt;                                       ///< 事件时间戳
-    source_location loc;                               ///< 源码位置
-    thread::id thread_id;                              ///< 产生此事件的线程 ID
-    log_level level;                                   ///< 日志级别
+    shared_ptr<flat_unordered_map<string, string>> context; ///< 上下文（Logger + MDC）
+    string message;                                         ///< 格式化后的日志消息
+    string logger_name;                                     ///< 产生此事件的 Logger 名称
+    datetime dt;                                            ///< 事件时间戳
+    source_location loc;                                    ///< 源码位置
+    thread::id thread_id;                                   ///< 产生此事件的线程 ID
+    log_level level;                                        ///< 日志级别
 };
 
 /** @} */ // Logging

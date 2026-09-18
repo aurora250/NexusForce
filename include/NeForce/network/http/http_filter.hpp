@@ -236,14 +236,14 @@ public:
  */
 class NEFORCE_API static_file_filter final : public http_filter {
 private:
-    string root_path_;                               ///< 文件根目录
-    unordered_map<string, http_content> mime_types_; ///< MIME类型映射
-    bool enable_cache_ = true;                       ///< 是否启用缓存
-    bool enable_range_ = true;                       ///< 是否启用Range请求支持
-    byte_size max_file_size_{10_MB};                 ///< 最大文件大小
-    string spa_fallback_path_;                       ///< SPA回退文件路径（如"index.html"），空字符串禁用
-    bool spa_fallback_enabled_ = false;              ///< 是否启用SPA回退
-    vector<string> spa_exclude_paths_;               ///< SPA回退排除路径前缀（如"/api"）
+    string root_path_;                                    ///< 文件根目录
+    flat_unordered_map<string, http_content> mime_types_; ///< MIME类型映射
+    bool enable_cache_ = true;                            ///< 是否启用缓存
+    bool enable_range_ = true;                            ///< 是否启用Range请求支持
+    byte_size max_file_size_{10_MB};                      ///< 最大文件大小
+    string spa_fallback_path_;                            ///< SPA回退文件路径（如"index.html"），空字符串禁用
+    bool spa_fallback_enabled_ = false;                   ///< 是否启用SPA回退
+    vector<string> spa_exclude_paths_;                    ///< SPA回退排除路径前缀（如"/api"）
 
 public:
     /**

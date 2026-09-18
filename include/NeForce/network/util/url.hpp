@@ -8,7 +8,7 @@
  * 此文件提供了URL（统一资源定位符）的解析和构建功能。
  */
 
-#include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/container/flat_unordered_map.hpp"
 #include "NeForce/core/utility/optional.hpp"
 #include "NeForce/network/util/ports.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -232,7 +232,7 @@ struct NEFORCE_API url : iobject<url> {
      * 将"key1=value1&key2=value2"格式的查询字符串解析为键值对。
      * 键和值会自动进行URL解码。
      */
-    static void parse_query(string_view query, unordered_map<string, string>& params);
+    static void parse_query(string_view query, flat_unordered_map<string, string>& params);
 
     /**
      * @brief 构建查询字符串
@@ -242,7 +242,7 @@ struct NEFORCE_API url : iobject<url> {
      * 将键值对转换为"key1=value1&key2=value2"格式的查询字符串。
      * 键和值会自动进行表单编码。
      */
-    NEFORCE_NODISCARD static string build_query(const unordered_map<string, string>& params);
+    NEFORCE_NODISCARD static string build_query(const flat_unordered_map<string, string>& params);
 };
 
 /** @} */ // NetworkUtil

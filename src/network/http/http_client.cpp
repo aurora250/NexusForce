@@ -574,7 +574,7 @@ void http_client::set_ssl_context(ssl_context ctx) { client_.set_ssl_context(mov
 
 void http_client::set_verify_ssl(const bool verify) { config_.verify_ssl = verify; }
 
-http_client_response http_client::get(const string& url, const unordered_map<string, string>& headers) {
+http_client_response http_client::get(const string& url, const flat_unordered_map<string, string>& headers) {
     _NEFORCE url parsed_url{url::parse(url.view())};
 
     http_client_request req;
@@ -593,7 +593,7 @@ http_client_response http_client::get(const string& url, const unordered_map<str
 }
 
 http_client_response http_client::post(const string& url, const string& body, const string& content_type,
-                                       const unordered_map<string, string>& headers) {
+                                       const flat_unordered_map<string, string>& headers) {
 
     _NEFORCE url parsed_url(url::parse(url.view()));
 
@@ -616,19 +616,19 @@ http_client_response http_client::post(const string& url, const string& body, co
 }
 
 http_client_response http_client::post_json(const string& url_str, const string& json_body,
-                                            const unordered_map<string, string>& headers) {
+                                            const flat_unordered_map<string, string>& headers) {
 
     return post(url_str, json_body, "application/json", headers);
 }
 
-http_client_response http_client::post_form(const string& url_str, const unordered_map<string, string>& form_data,
-                                            const unordered_map<string, string>& headers) {
+http_client_response http_client::post_form(const string& url_str, const flat_unordered_map<string, string>& form_data,
+                                            const flat_unordered_map<string, string>& headers) {
     const string body = url::build_query(form_data);
     return post(url_str, body, "application/x-www-form-urlencoded", headers);
 }
 
 http_client_response http_client::put(const string& url, const string& body, const string& content_type,
-                                      const unordered_map<string, string>& headers) {
+                                      const flat_unordered_map<string, string>& headers) {
 
     _NEFORCE url parsed_url(url::parse(url.view()));
 
@@ -650,7 +650,7 @@ http_client_response http_client::put(const string& url, const string& body, con
     return request(move(req));
 }
 
-http_client_response http_client::del(const string& url, const unordered_map<string, string>& headers) {
+http_client_response http_client::del(const string& url, const flat_unordered_map<string, string>& headers) {
     _NEFORCE url parsed_url(url::parse(url.view()));
 
     http_client_request req;
@@ -669,7 +669,7 @@ http_client_response http_client::del(const string& url, const unordered_map<str
     return request(move(req));
 }
 
-http_client_response http_client::head(const string& url, const unordered_map<string, string>& headers) {
+http_client_response http_client::head(const string& url, const flat_unordered_map<string, string>& headers) {
     _NEFORCE url parsed_url(url::parse(url.view()));
 
     http_client_request req;
@@ -688,7 +688,7 @@ http_client_response http_client::head(const string& url, const unordered_map<st
     return request(move(req));
 }
 
-http_client_response http_client::options(const string& url, const unordered_map<string, string>& headers) {
+http_client_response http_client::options(const string& url, const flat_unordered_map<string, string>& headers) {
     _NEFORCE url parsed_url(url::parse(url.view()));
 
     http_client_request req;
@@ -708,7 +708,7 @@ http_client_response http_client::options(const string& url, const unordered_map
 }
 
 http_client_response http_client::patch(const string& url, const string& body, const string& content_type,
-                                        const unordered_map<string, string>& headers) {
+                                        const flat_unordered_map<string, string>& headers) {
 
     _NEFORCE url parsed_url(url::parse(url.view()));
 

@@ -409,7 +409,7 @@ public:
      * @param col_map 列名到列索引的映射（为空时自动按属性名匹配）
      * @return 构建的实体对象
      */
-    static T from_row(const idb_tb_result& row, const unordered_map<string, size_t>& col_map = {}) {
+    static T from_row(const idb_tb_result& row, const flat_unordered_map<string, size_t>& col_map = {}) {
         const auto* meta = get_meta();
         auto obj_any = meta->create();
         if (!obj_any.has_value()) {
@@ -417,7 +417,7 @@ public:
         }
         void* raw = obj_any.raw();
 
-        unordered_map<string, size_t> effective_map;
+        flat_unordered_map<string, size_t> effective_map;
         if (col_map.empty()) {
             const auto& names = row.column_names();
             for (size_t i = 0; i < names.size(); ++i) {
@@ -456,7 +456,7 @@ public:
             return entities;
         }
 
-        unordered_map<string, size_t> col_map;
+        flat_unordered_map<string, size_t> col_map;
         const auto& names = result->column_names();
         for (size_t i = 0; i < names.size(); ++i) {
             col_map[names[i]] = i;

@@ -50,7 +50,7 @@ public:
     NEFORCE_NODISCARD string name() const override { return "health_check_filter"; }
 
 private:
-    unordered_map<string, check_callback> checks_;
+    flat_unordered_map<string, check_callback> checks_;
     int64_t start_time_ms_{0}; ///< 在首次请求时惰性设置
 
     pair<string, bool> build_health_json();

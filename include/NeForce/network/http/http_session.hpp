@@ -9,7 +9,7 @@
  */
 
 #include "NeForce/core/async/mutex.hpp"
-#include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/container/flat_unordered_map.hpp"
 #include "NeForce/core/memory/shared_ptr.hpp"
 #include "NeForce/core/time/datetime.hpp"
 #include "NeForce/core/time/duration.hpp"
@@ -161,13 +161,13 @@ struct NEFORCE_API http_cookie : iobject<http_cookie> {
  * @endcode
  */
 struct NEFORCE_API http_session : istringify<http_session> {
-    string id;                             ///< 会话唯一标识符
-    unordered_map<string, string> data;    ///< 会话数据存储
-    datetime last_access{datetime::now()}; ///< 最后访问时间
-    datetime create_time{datetime::now()}; ///< 创建时间
-    seconds max_age{1800};                 ///< 最大空闲时间，默认30分钟
-    bool is_new = true;                    ///< 是否为新创建的会话
-    bool invalidated = false;              ///< 是否已无效化
+    string id;                               ///< 会话唯一标识符
+    flat_unordered_map<string, string> data; ///< 会话数据存储
+    datetime last_access{datetime::now()};   ///< 最后访问时间
+    datetime create_time{datetime::now()};   ///< 创建时间
+    seconds max_age{1800};                   ///< 最大空闲时间，默认30分钟
+    bool is_new = true;                      ///< 是否为新创建的会话
+    bool invalidated = false;                ///< 是否已无效化
 
     /**
      * @brief 下标操作符
@@ -286,7 +286,7 @@ struct NEFORCE_API http_session : istringify<http_session> {
      * @brief 获取会话数据的快照
      * @return 数据副本
      */
-    NEFORCE_NODISCARD unordered_map<string, string> data_snapshot() const;
+    NEFORCE_NODISCARD flat_unordered_map<string, string> data_snapshot() const;
 
     /**
      * @brief 复制会话

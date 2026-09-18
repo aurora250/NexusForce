@@ -23,7 +23,7 @@ NEFORCE_BEGIN_HTTP__
 struct cached_response {
     http_status status{http_status::S2_OK};
     string status_message;
-    unordered_map<string, string> headers;
+    flat_unordered_map<string, string> headers;
     string body;
     string etag;
     datetime cached_at;
@@ -98,7 +98,7 @@ private:
         uint64_t last_access_ms;
     };
     mutable shared_mutex mutex_;
-    unordered_map<string, entry> entries_;
+    flat_unordered_map<string, entry> entries_;
 
     void evict_lru();
 

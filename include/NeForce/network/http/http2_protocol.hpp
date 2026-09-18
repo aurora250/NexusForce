@@ -9,7 +9,7 @@
  * 流状态机和连接/流级流量控制。
  */
 
-#include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/container/flat_unordered_map.hpp"
 #include "NeForce/core/functional/function.hpp"
 #include "NeForce/core/string/string.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -450,7 +450,7 @@ private:
     /// @brief 连接级流控窗口
     uint32_t connection_window_;
     /// @brief 流 ID → 流级窗口映射
-    unordered_map<uint32_t, uint32_t> stream_windows_;
+    flat_unordered_map<uint32_t, uint32_t> stream_windows_;
 };
 
 
@@ -481,7 +481,7 @@ public:
 
 private:
     /// @brief SETTINGS 参数映射（id → value）
-    unordered_map<uint16_t, uint32_t> params_;
+    flat_unordered_map<uint16_t, uint32_t> params_;
 };
 
 /** @} */ // HTTP

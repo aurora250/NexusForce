@@ -84,11 +84,6 @@
 - 浮点格式化重写为尾数精确整数换算：以 1280 位定点大整数完成尾数 × 10^s 的精确缩放与移位，再以十进制串做半值取偶舍入；定点与科学计数法在任意量级（含次正规数、DBL_MAX、1e±300）均为正确舍入，取代原先逐次乘除 10 的定标循环（最坏约 320 次）与 `fraction × 10^p + 0.5` 的非精确舍入
 - `byte_size::to_string()` 移除 format 套 format（先用 `format(":.{}f")` 构造格式串再二次 `format`），改为直接调用 `to_string_fixed()`
 
-### ⚠️ Breaking Changes
-
-- 浮点转换链不再声明为 `constexpr`：`__float_to_string` / `to_string_with_precision` / `to_string_general` / `to_string_fixed` / `to_string_scientific`，以及 `float32` / `float64` / `decimal` 的 `to_string()` 与 `byte_size::to_string()`，C++20 下不再参与常量求值（整数与布尔包装类的 `to_string` 保持可常量求值）
-- `character` / `wcharacter` / `u8character` / `u16character` / `u32character` 中转为运行时批量调用的转换函数不再声明为 `constexpr`，纯拷贝语义的函数（`character::to_string`、`u8character::to_u8string`、`u32character::to_u32string`、`wcharacter::to_wstring`）保持不变
-
 ### 🐛 Bug Fixes
 
 - 修复浮点定点格式化在二进制指数非负的整数值上小数点位置错误：原先按已放大 10^p 处理而把整数末几位误作小数，导致绝对值大于 2^52 的值（如 1e308、DBL_MAX）整数部分被截断
@@ -176,7 +171,6 @@
 - 修复型号字符串中 `GHz` 频率的截断：`2.40GHz` / `3.70GHz` 因十进制不可精确表示又被直接截断，改为四舍五入
 - 修复 valgrind 工作流把单元测试失败误报为内存泄漏：`--error-exitcode=1` 在 valgrind 未发现错误时会透传被测程序的退出码，任一用例失败即表现为"内存泄漏检查失败"，现改用 `99` 作为泄漏专用退出码并分别报错
 - 修复 Windows 上安装包缺失运行时依赖，导致安装前缀的 `NFRS.exe` 与下游消费者的可执行文件以 `0xc0000135`（STATUS_DLL_NOT_FOUND）启动失败：Windows 无 RPATH，安装期解析 NexusForce.dll 的依赖闭包（ICU、PCRE2、OpenSSL、zlib、lz4、hiredis、sqlcipher、libmysql、LIBPQ 等）并随安装包一并复制到 bin 目录
-- 修复安装检查工作流在 `windows-latest` 上失败：该镜像已由 Visual Studio 2022 换成 Visual Studio 2026，写死的 `-G "Visual Studio 17 2022"` 找不到实例，Windows 侧改用 `ilammy/msvc-dev-cmd` 准备 MSVC 环境并以 `Ninja Multi-Config` 配置，与 Linux 侧使用同一生成器
 
 ### 📚 Documentation
 

@@ -94,7 +94,7 @@ private:
     double default_burst_{20.0};
 
     mutable mutex mutex_;
-    unordered_map<string, bucket_entry> buckets_;
+    flat_unordered_map<string, bucket_entry> buckets_;
 
     static constexpr size_t MAX_BUCKETS_COUNT{10000};
 

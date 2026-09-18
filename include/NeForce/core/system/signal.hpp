@@ -11,7 +11,7 @@
 #include "NeForce/core/async/atomic.hpp"
 #include "NeForce/core/async/condition_variable.hpp"
 #include "NeForce/core/async/thread.hpp"
-#include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/container/flat_unordered_map.hpp"
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/functional/function.hpp"
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -146,8 +146,8 @@ private:
     mutex mutex_;           ///< 保护共享数据的互斥锁
     condition_variable cv_; ///< 信号等待条件变量
 
-    unordered_map<event, signal_handler> handlers_; ///< 信号处理函数映射
-    vector<pending_signal> pending_signals_;        ///< 待处理信号队列
+    flat_unordered_map<event, signal_handler> handlers_; ///< 信号处理函数映射
+    vector<pending_signal> pending_signals_;             ///< 待处理信号队列
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     system_event notify_event_; ///< 事件对象

@@ -89,9 +89,9 @@ private:
         bool is_regex = false;         ///< 是否为正则路由
     };
 
-    unordered_map<string, vector<route_entry>> routes_; ///< HTTP方法到路由条目的映射
-    unordered_map<string, route_trie> tries_;           ///< 每方法的路由Trie
-    http_filter_chain middleware_chain_;                ///< 中间件链
+    flat_unordered_map<string, vector<route_entry>> routes_; ///< HTTP方法到路由条目的映射
+    flat_unordered_map<string, route_trie> tries_;           ///< 每方法的路由Trie
+    http_filter_chain middleware_chain_;                     ///< 中间件链
 
     http_handler_t not_found_handler_;          ///< 404处理器
     http_handler_t method_not_allowed_handler_; ///< 405处理器

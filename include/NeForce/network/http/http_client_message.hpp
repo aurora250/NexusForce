@@ -17,7 +17,7 @@
  * - 响应状态分类
  */
 
-#include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/container/flat_unordered_map.hpp"
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/time/duration.hpp"
 #include "NeForce/network/http/http_session.hpp"
@@ -38,21 +38,21 @@ NEFORCE_BEGIN_HTTP__
  */
 struct http_client_response {
 public:
-    uint16_t http_version_major = 1;               ///< HTTP主版本号
-    uint16_t http_version_minor = 1;               ///< HTTP次版本号
-    bool chunked = false;                          ///< 是否使用分块传输编码
-    uint64_t content_length = 0;                   ///< Content-Length值
-    string effective_url;                          ///< 最终请求的URL
-    int redirect_count = 0;                        ///< 重定向次数
-    milliseconds total_time{0};                    ///< 总耗时
-    milliseconds connect_time{0};                  ///< 连接建立耗时
-    milliseconds send_time{0};                     ///< 发送请求耗时
-    milliseconds receive_time{0};                  ///< 接收响应耗时
-    http_status status = http_status::S2_OK;       ///< HTTP状态码
-    string status_message;                         ///< 状态消息
-    unordered_map<string, vector<string>> headers; ///< 响应头
-    string body;                                   ///< 响应正文
-    vector<http_cookie> cookies;                   ///< 解析后的Cookie
+    uint16_t http_version_major = 1;                    ///< HTTP主版本号
+    uint16_t http_version_minor = 1;                    ///< HTTP次版本号
+    bool chunked = false;                               ///< 是否使用分块传输编码
+    uint64_t content_length = 0;                        ///< Content-Length值
+    string effective_url;                               ///< 最终请求的URL
+    int redirect_count = 0;                             ///< 重定向次数
+    milliseconds total_time{0};                         ///< 总耗时
+    milliseconds connect_time{0};                       ///< 连接建立耗时
+    milliseconds send_time{0};                          ///< 发送请求耗时
+    milliseconds receive_time{0};                       ///< 接收响应耗时
+    http_status status = http_status::S2_OK;            ///< HTTP状态码
+    string status_message;                              ///< 状态消息
+    flat_unordered_map<string, vector<string>> headers; ///< 响应头
+    string body;                                        ///< 响应正文
+    vector<http_cookie> cookies;                        ///< 解析后的Cookie
 
     /**
      * @brief 获取第一个响应头值
@@ -136,15 +136,15 @@ public:
  * 表示一个HTTP请求，包含方法、URL、头部、查询参数和正文。
  */
 struct NEFORCE_API http_client_request {
-    http_method method{http_method::GET()};     ///< HTTP方法
-    string host;                                ///< 主机名
-    ports port;                                 ///< 端口号
-    string scheme{"http"};                      ///< 协议
-    string path = "/";                          ///< 请求路径
-    string version = "HTTP/1.1";                ///< HTTP版本
-    unordered_map<string, string> headers;      ///< 请求头
-    unordered_map<string, string> query_params; ///< 查询参数
-    string body;                                ///< 请求正文
+    http_method method{http_method::GET()};          ///< HTTP方法
+    string host;                                     ///< 主机名
+    ports port;                                      ///< 端口号
+    string scheme{"http"};                           ///< 协议
+    string path = "/";                               ///< 请求路径
+    string version = "HTTP/1.1";                     ///< HTTP版本
+    flat_unordered_map<string, string> headers;      ///< 请求头
+    flat_unordered_map<string, string> query_params; ///< 查询参数
+    string body;                                     ///< 请求正文
 
     /**
      * @brief 获取请求头值

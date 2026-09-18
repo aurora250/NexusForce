@@ -46,7 +46,7 @@ public:
 class memory_session_store final : public session_store {
 private:
     mutable shared_mutex mutex_;
-    unordered_map<string, http_session> sessions_;
+    flat_unordered_map<string, http_session> sessions_;
 
 public:
     memory_session_store() = default;

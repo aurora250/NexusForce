@@ -8,7 +8,7 @@
  * 此文件提供了INI配置格式的抽象基类和具体实现类。
  */
 
-#include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/container/flat_unordered_map.hpp"
 #include "NeForce/core/interface/istringify.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -195,8 +195,8 @@ public:
  */
 class NEFORCE_API ini_section final : public ini_value {
 private:
-    unordered_map<string, unique_ptr<ini_property>> properties_; ///< 属性映射表
-    string name_;                                                ///< 节名称
+    flat_unordered_map<string, unique_ptr<ini_property>> properties_; ///< 属性映射表
+    string name_;                                                     ///< 节名称
 
 public:
     ini_section() = default;
@@ -301,7 +301,7 @@ public:
      * @brief 获取所有属性的常量引用
      * @return 属性映射表的常量引用
      */
-    NEFORCE_NODISCARD const unordered_map<string, unique_ptr<ini_property>>& get_properties() const noexcept {
+    NEFORCE_NODISCARD const flat_unordered_map<string, unique_ptr<ini_property>>& get_properties() const noexcept {
         return properties_;
     }
 
@@ -360,8 +360,8 @@ public:
  */
 class NEFORCE_API ini_document final : public istringify<ini_document> {
 private:
-    unordered_map<string, unique_ptr<ini_section>> sections_; ///< 节映射表
-    unique_ptr<ini_section> global_section_;                  ///< 全局节（无名节）
+    flat_unordered_map<string, unique_ptr<ini_section>> sections_; ///< 节映射表
+    unique_ptr<ini_section> global_section_;                       ///< 全局节（无名节）
 
 public:
     /**
@@ -451,7 +451,7 @@ public:
      * @brief 获取所有节的常量引用
      * @return 节映射表的常量引用
      */
-    NEFORCE_NODISCARD const unordered_map<string, unique_ptr<ini_section>>& get_sections() const noexcept {
+    NEFORCE_NODISCARD const flat_unordered_map<string, unique_ptr<ini_section>>& get_sections() const noexcept {
         return sections_;
     }
 

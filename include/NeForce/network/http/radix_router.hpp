@@ -32,7 +32,7 @@ public:
 
     struct node {
         string segment;
-        unordered_map<string, size_t> children;                ///< 静态段 → 子节点索引
+        flat_unordered_map<string, size_t> children;           ///< 静态段 → 子节点索引
         size_t param_index = numeric_traits<size_t>::max();    ///< :param 子节点索引
         size_t wildcard_index = numeric_traits<size_t>::max(); ///< * 通配符子节点索引
         string param_name;                                     ///< 参数名

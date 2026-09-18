@@ -1604,7 +1604,7 @@ TEST_F(TomlBuilderTest, BuildValueIterableArray) {
 
 TEST_F(TomlBuilderTest, BuildValueIterableMap) {
     toml_builder builder;
-    unordered_map<string, int64_t> map;
+    flat_unordered_map<string, int64_t> map;
     map["a"] = 1;
     map["b"] = 2;
     builder.key("dict").value_iterable(map);
@@ -4063,7 +4063,7 @@ TEST_F(YamlBuilderTest, BuildIterableVector) {
 
 TEST_F(YamlBuilderTest, BuildIterableMap) {
     yaml_builder b;
-    unordered_map<string, int> m;
+    flat_unordered_map<string, int> m;
     m["a"] = 1;
     m["b"] = 2;
     b.key("dict").value_iterable(m);

@@ -34,7 +34,7 @@ TEST(LogFormatterTest, ParseBasicPattern) {
     ev.level = log_level::INFO;
     ev.message = "Hello";
     ev.loc = source_location{"test.cpp", "test_func", 42};
-    ev.context = make_shared<unordered_map<string, string>>();
+    ev.context = make_shared<flat_unordered_map<string, string>>();
     string result = formatter.format(ev);
     EXPECT_NE(result.find("INFO"), string::npos);
     EXPECT_NE(result.find("Hello"), string::npos);
@@ -47,7 +47,7 @@ TEST(LogFormatterTest, ContextPlaceholder) {
     ev.level = log_level::INFO;
     ev.message = "test";
     ev.loc = source_location{"test.cpp", "test_func", 42};
-    auto ctx = make_shared<unordered_map<string, string>>();
+    auto ctx = make_shared<flat_unordered_map<string, string>>();
     (*ctx)["user"] = "admin";
     ev.context = ctx;
     string result = formatter.format(ev);
@@ -61,7 +61,7 @@ TEST(LogFormatterTest, MissingContextKey) {
     ev.level = log_level::INFO;
     ev.message = "test";
     ev.loc = source_location{"test.cpp", "test_func", 42};
-    ev.context = make_shared<unordered_map<string, string>>();
+    ev.context = make_shared<flat_unordered_map<string, string>>();
     string result = formatter.format(ev);
     EXPECT_EQ(result, "");
 }
@@ -73,7 +73,7 @@ TEST(LogFormatterTest, UnknownPlaceholder) {
     ev.level = log_level::INFO;
     ev.message = "test";
     ev.loc = source_location{"test.cpp", "test_func", 42};
-    ev.context = make_shared<unordered_map<string, string>>();
+    ev.context = make_shared<flat_unordered_map<string, string>>();
     string result = formatter.format(ev);
     EXPECT_EQ(result, "{unknown}");
 }
@@ -86,7 +86,7 @@ TEST(LogFormatterTest, FileLineFuncThread) {
     ev.message = "msg";
     ev.loc = source_location{"test.cpp", "main", 42};
     ev.thread_id = this_thread::id();
-    ev.context = make_shared<unordered_map<string, string>>();
+    ev.context = make_shared<flat_unordered_map<string, string>>();
     string result = formatter.format(ev);
     EXPECT_NE(result.find("test.cpp"), string::npos);
     EXPECT_NE(result.find("42"), string::npos);
@@ -100,7 +100,7 @@ TEST(LogFormatterTest, FileOnlyBasename) {
     ev.level = log_level::INFO;
     ev.message = "msg";
     ev.loc = source_location{"/home/user/project/src/main.cpp", "main", 99};
-    ev.context = make_shared<unordered_map<string, string>>();
+    ev.context = make_shared<flat_unordered_map<string, string>>();
     string result = formatter.format(ev);
     EXPECT_EQ(result, "main.cpp");
     EXPECT_EQ(result.find('/'), string::npos);
@@ -113,7 +113,7 @@ TEST(LogFormatterTest, FilePathFull) {
     ev.level = log_level::INFO;
     ev.message = "msg";
     ev.loc = source_location{"/home/user/project/src/main.cpp", "main", 99};
-    ev.context = make_shared<unordered_map<string, string>>();
+    ev.context = make_shared<flat_unordered_map<string, string>>();
     string result = formatter.format(ev);
     EXPECT_NE(result.find("/home/user"), string::npos);
 }
@@ -127,7 +127,7 @@ TEST(ConsoleSinkTest, FormatAndOutput) {
     ev.level = log_level::WARN;
     ev.message = "console test";
     ev.loc = source_location{"test.cpp", "test", 1};
-    ev.context = make_shared<unordered_map<string, string>>();
+    ev.context = make_shared<flat_unordered_map<string, string>>();
     testing::internal::CaptureStdout();
     sink.log(ev);
     std::string output = testing::internal::GetCapturedStdout();
@@ -164,7 +164,7 @@ protected:
         ev.level = log_level::INFO;
         ev.message = move(msg);
         ev.loc = source_location{"test.cpp", "test", 1};
-        ev.context = make_shared<unordered_map<string, string>>();
+        ev.context = make_shared<flat_unordered_map<string, string>>();
         return ev;
     }
 };
@@ -512,7 +512,7 @@ TEST(SyslogSinkTest, CreateAndLog) {
     ev.level = log_level::INFO;
     ev.message = "syslog test message";
     ev.loc = source_location{"test.cpp", "test", 1};
-    ev.context = make_shared<unordered_map<string, string>>();
+    ev.context = make_shared<flat_unordered_map<string, string>>();
     EXPECT_NO_THROW(sink.log(ev));
     EXPECT_NO_THROW(sink.flush());
 }
@@ -525,7 +525,7 @@ TEST(SyslogSinkTest, Formatting) {
     ev.level = log_level::ERROR;
     ev.message = "formatted syslog";
     ev.loc = source_location{"test.cpp", "test", 1};
-    ev.context = make_shared<unordered_map<string, string>>();
+    ev.context = make_shared<flat_unordered_map<string, string>>();
     EXPECT_NO_THROW(sink.log(ev));
 }
 

@@ -40,7 +40,8 @@ namespace {
         return base64_encode(cbyte_view{reinterpret_cast<const byte_t*>(sha1_result.data()), sha1_result.size()});
     }
 
-    string decode_chunked_body(const string_view chunked_data, unordered_map<string, string>* trailers_out = nullptr) {
+    string decode_chunked_body(const string_view chunked_data,
+                               flat_unordered_map<string, string>* trailers_out = nullptr) {
         string decoded;
         size_t pos = 0;
 

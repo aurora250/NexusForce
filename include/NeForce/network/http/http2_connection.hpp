@@ -60,7 +60,7 @@ private:
     hpack_decoder decoder_;
     http2_flow_control flow_control_;
 
-    unordered_map<uint32_t, unique_ptr<http2_stream>> streams_;
+    flat_unordered_map<uint32_t, unique_ptr<http2_stream>> streams_;
     uint32_t last_stream_id_ = 0;
     atomic<bool> closed_{false};
     bool preface_received_ = false;
@@ -70,10 +70,10 @@ private:
     mutex write_mutex_;
     mutable recursive_mutex stream_mutex_; ///< 保护 streams_/pending_/stream_priorities_ 等流状态
 
-    uint32_t connection_consumed_ = 0;                   ///< 连接级已消费窗口（用于 WINDOW_UPDATE 批量发送）
-    unordered_map<uint32_t, uint32_t> stream_consumed_;  ///< 每流已消费窗口
-    unordered_map<uint32_t, uint8_t> stream_priorities_; ///< 每流优先级权重
-    uint32_t local_stream_window_ = 65535;               ///< 本地流初始窗口
+    uint32_t connection_consumed_ = 0;                        ///< 连接级已消费窗口（用于 WINDOW_UPDATE 批量发送）
+    flat_unordered_map<uint32_t, uint32_t> stream_consumed_;  ///< 每流已消费窗口
+    flat_unordered_map<uint32_t, uint8_t> stream_priorities_; ///< 每流优先级权重
+    uint32_t local_stream_window_ = 65535;                    ///< 本地流初始窗口
 
     stream_handler stream_handler_;
     close_handler close_handler_;
@@ -87,7 +87,7 @@ private:
         bool waiting_continuation = false;
     };
 
-    unordered_map<uint32_t, pending_stream> pending_;
+    flat_unordered_map<uint32_t, pending_stream> pending_;
 
     void route_stream(uint32_t stream_id, const vector<hpack_header_field>& headers, const byte_t* data,
                       size_t data_len, bool end_stream);

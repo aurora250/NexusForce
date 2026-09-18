@@ -21,7 +21,7 @@ namespace {
             return;
         }
 
-        unordered_map<size_t, void*> old_owners;
+        flat_unordered_map<size_t, void*> old_owners;
         for (const auto& old_child: old_tree.children()) {
             const size_t k = old_child.key();
             if (k != 0 && old_child.owner() != nullptr) {
