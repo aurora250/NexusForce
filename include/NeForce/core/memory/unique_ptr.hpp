@@ -348,6 +348,7 @@ public:
 
     /**
      * @brief 释放所有权
+     * @warning 调用方需管理指针生命周期，否则将造成内存泄漏
      */
     NEFORCE_CONSTEXPR20 pointer release() noexcept { return data_.release(); }
 

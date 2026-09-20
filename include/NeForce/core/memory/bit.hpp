@@ -22,14 +22,19 @@ NEFORCE_BEGIN_NAMESPACE__
  * @param x 64位无符号整数
  * @return x中1的个数
  */
-constexpr int popcount64(uint64_t x) noexcept {
-    x = x - ((x >> 1) & 0x5555555555555555ULL);
+constexpr int popcount64(const uint64_t x) noexcept {
+#if defined(NEFORCE_COMPILER_GNUC) || defined(NEFORCE_COMPILER_CLANG)
+    return __builtin_popcountll(x);
+#else
+    uint64_t v = x;
+    v = v - ((v >> 1) & 0x5555555555555555ULL);
     x = (x & 0x3333333333333333ULL) + ((x >> 2) & 0x3333333333333333ULL);
     x = (x + (x >> 4)) & 0x0F0F0F0F0F0F0F0FULL;
     x = x + (x >> 8);
     x = x + (x >> 16);
-    x = x + (x >> 32);
-    return static_cast<int>(x & 0x7FULL);
+    v = v + (v >> 32);
+    return static_cast<int>(v & 0x7FULL);
+#endif
 }
 
 /**
@@ -37,10 +42,13 @@ constexpr int popcount64(uint64_t x) noexcept {
  * @param x 64位无符号整数
  * @return x中前导零的个数，如果x为0则返回64
  */
-NEFORCE_CONSTEXPR14 int clz64(uint64_t x) noexcept {
+NEFORCE_CONSTEXPR14 int clz64(const uint64_t x) noexcept {
     if (x == 0) {
         return 64;
     }
+#if defined(NEFORCE_COMPILER_GNUC) || defined(NEFORCE_COMPILER_CLANG)
+    return __builtin_clzll(x);
+#else
     int n = 0;
     if ((x >> 32) == 0) {
         n += 32;
@@ -66,6 +74,7 @@ NEFORCE_CONSTEXPR14 int clz64(uint64_t x) noexcept {
         n += 1;
     }
     return n;
+#endif
 }
 
 /**
@@ -74,6 +83,9 @@ NEFORCE_CONSTEXPR14 int clz64(uint64_t x) noexcept {
  * @return x中1的个数
  */
 constexpr int popcount32(const uint32_t x) noexcept {
+#if defined(NEFORCE_COMPILER_GNUC) || defined(NEFORCE_COMPILER_CLANG)
+    return __builtin_popcount(x);
+#else
     auto v = x;
     v = v - ((v >> 1) & 0x55555555U);
     v = (v & 0x33333333U) + ((v >> 2) & 0x33333333U);
@@ -81,6 +93,7 @@ constexpr int popcount32(const uint32_t x) noexcept {
     v = v + (v >> 8);
     v = v + (v >> 16);
     return static_cast<int>(v & 0x3FU);
+#endif
 }
 
 /**
@@ -88,10 +101,13 @@ constexpr int popcount32(const uint32_t x) noexcept {
  * @param x 32位无符号整数
  * @return x中前导零的个数，如果x为0则返回32
  */
-NEFORCE_CONSTEXPR14 int clz32(uint32_t x) noexcept {
+NEFORCE_CONSTEXPR14 int clz32(const uint32_t x) noexcept {
     if (x == 0) {
         return 32;
     }
+#if defined(NEFORCE_COMPILER_GNUC) || defined(NEFORCE_COMPILER_CLANG)
+    return __builtin_clz(x);
+#else
     int n = 0;
     if ((x >> 16) == 0) {
         n += 16;
@@ -113,6 +129,7 @@ NEFORCE_CONSTEXPR14 int clz32(uint32_t x) noexcept {
         n += 1;
     }
     return n;
+#endif
 }
 
 /**
@@ -161,14 +178,21 @@ constexpr int countr_zero(const uintptr_t x) noexcept {
         return 32;
 #endif
     }
+#if defined(NEFORCE_COMPILER_GNUC) || defined(NEFORCE_COMPILER_CLANG)
+#    ifdef NEFORCE_ARCH_BITS_64
+    return __builtin_ctzll(x);
+#    else
+    return __builtin_ctz(x);
+#    endif
+#else
     int n = 0;
     uintptr_t v = x;
-#ifdef NEFORCE_ARCH_BITS_64
+#    ifdef NEFORCE_ARCH_BITS_64
     if ((v & 0xFFFFFFFFULL) == 0) {
         n += 32;
         v >>= 32;
     }
-#endif
+#    endif
     if ((v & 0xFFFFU) == 0) {
         n += 16;
         v >>= 16;
@@ -189,6 +213,7 @@ constexpr int countr_zero(const uintptr_t x) noexcept {
         n += 1;
     }
     return n;
+#endif
 }
 
 /**

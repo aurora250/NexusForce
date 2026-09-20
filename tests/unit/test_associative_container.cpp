@@ -5342,6 +5342,304 @@ TEST_F(FlatUnorderedMapTest, StringKey) {
     EXPECT_EQ(m["world"], 2);
 }
 
+namespace {
+
+    struct counting_alloc_state {
+        size_t allocations{0};
+        size_t deallocations{0};
+
+        void reset() noexcept {
+            allocations = 0;
+            deallocations = 0;
+        }
+
+        NEFORCE_NODISCARD size_t live() const noexcept { return allocations - deallocations; }
+    };
+
+    counting_alloc_state& counting_state() {
+        static counting_alloc_state state;
+        return state;
+    }
+
+    template <typename T>
+    class counting_allocator {
+    public:
+        using value_type = T;
+        using pointer = T*;
+        using const_pointer = const T*;
+        using reference = T&;
+        using const_reference = const T&;
+        using size_type = size_t;
+        using difference_type = ptrdiff_t;
+
+        template <typename U>
+        struct rebind {
+            using other = counting_allocator<U>;
+        };
+
+        counting_allocator() noexcept = default;
+        ~counting_allocator() = default;
+        counting_allocator(const counting_allocator&) noexcept = default;
+        counting_allocator& operator=(const counting_allocator&) noexcept = default;
+
+        template <typename U>
+        counting_allocator(const counting_allocator<U>&) noexcept {}
+
+        NEFORCE_NODISCARD pointer allocate(const size_type count) {
+            counting_state().allocations += count;
+            return static_cast<pointer>(::operator new(count * sizeof(T)));
+        }
+
+        void deallocate(pointer ptr, const size_type count) noexcept {
+            counting_state().deallocations += count;
+            ::operator delete(ptr);
+        }
+    };
+
+    template <typename T, typename U>
+    NEFORCE_NODISCARD bool operator==(const counting_allocator<T>&, const counting_allocator<U>&) noexcept {
+        return true;
+    }
+
+    template <typename T, typename U>
+    NEFORCE_NODISCARD bool operator!=(const counting_allocator<T>&, const counting_allocator<U>&) noexcept {
+        return false;
+    }
+
+    template <typename Key, typename T>
+    using counting_flat_map = flat_unordered_map<Key, T, hash<Key>, equal_to<Key>, counting_allocator<pair<Key, T>>>;
+
+} // namespace
+
+TEST_F(FlatUnorderedMapTest, CopyAssignmentIntoPopulatedMapKeepsStorageBalanced) {
+    counting_state().reset();
+    {
+        counting_flat_map<int, string> source;
+        source[1] = "one";
+        source[2] = "two";
+
+        counting_flat_map<int, string> target;
+        target[9] = "nine";
+        const size_t live_before = counting_state().live();
+
+        target = source;
+        EXPECT_LE(counting_state().live(), live_before);
+        EXPECT_EQ(target.size(), 2);
+        EXPECT_EQ(target[1], "one");
+        EXPECT_EQ(target[2], "two");
+        EXPECT_EQ(target.count(9), 0);
+    }
+    EXPECT_EQ(counting_state().live(), 0);
+}
+
+TEST_F(FlatUnorderedMapTest, CopyAssignmentFromLargerMapKeepsStorageBalanced) {
+    counting_state().reset();
+    {
+        counting_flat_map<int, string> source;
+        for (int i = 0; i < 64; ++i) {
+            source[i] = "value";
+        }
+
+        counting_flat_map<int, string> target;
+        target[1000] = "zero";
+
+        target = source;
+        EXPECT_EQ(target.size(), 64);
+        EXPECT_EQ(target[0], "value");
+        EXPECT_EQ(target.count(1000), 0);
+    }
+    EXPECT_EQ(counting_state().live(), 0);
+}
+
+TEST_F(FlatUnorderedMapTest, CopyAssignmentIntoSpaciousMapKeepsLookupWorking) {
+    counting_state().reset();
+    {
+        counting_flat_map<int, string> source;
+        source[1] = "one";
+        source[2] = "two";
+
+        counting_flat_map<int, string> spacious(32);
+        spacious[7] = "seven";
+        const size_t live_before = counting_state().live();
+
+        spacious = source;
+        EXPECT_LE(counting_state().live(), live_before);
+        EXPECT_EQ(spacious.size(), 2);
+        EXPECT_EQ(spacious.count(1), 1);
+        EXPECT_EQ(spacious.count(2), 1);
+        EXPECT_EQ(spacious[1], "one");
+        EXPECT_EQ(spacious[2], "two");
+        EXPECT_EQ(spacious.count(7), 0);
+
+        spacious[3] = "three";
+        EXPECT_EQ(spacious[3], "three");
+        EXPECT_EQ(spacious.size(), 3);
+    }
+    EXPECT_EQ(counting_state().live(), 0);
+}
+
+TEST_F(FlatUnorderedMapTest, CopyAndMoveKeepsStorageBalanced) {
+    counting_state().reset();
+    {
+        counting_flat_map<int, string> source;
+        source[1] = "one";
+        source[2] = "two";
+
+        counting_flat_map<int, string> copy(source);
+        EXPECT_EQ(copy.size(), 2);
+        EXPECT_EQ(copy[2], "two");
+
+        counting_flat_map<int, string> assigned;
+        assigned = source;
+        EXPECT_EQ(assigned.size(), 2);
+
+        counting_flat_map<int, string> moved;
+        moved = static_cast<counting_flat_map<int, string>&&>(assigned);
+        EXPECT_EQ(moved.size(), 2);
+        EXPECT_EQ(moved[1], "one");
+    }
+    EXPECT_EQ(counting_state().live(), 0);
+}
+
+TEST_F(FlatUnorderedMapTest, RepeatedFillEraseCyclesKeepCapacityBounded) {
+    flat_unordered_map<int, int> map(256);
+    const size_t capacity = map.capacity();
+    ASSERT_GT(capacity, 0u);
+
+    for (int cycle = 0; cycle < 24; ++cycle) {
+        for (int i = 0; i < 256; ++i) {
+            map[i] = i;
+        }
+        EXPECT_EQ(map.size(), 256u);
+        for (int i = 0; i < 256; ++i) {
+            EXPECT_EQ(map.erase(i), 1u);
+        }
+        EXPECT_TRUE(map.empty());
+    }
+
+    EXPECT_EQ(map.capacity(), capacity);
+    map[7] = 7;
+    EXPECT_EQ(map.at(7), 7);
+}
+
+TEST_F(FlatUnorderedMapTest, TombstonePurgeKeepsLookupsCorrect) {
+    flat_unordered_map<int, int> map;
+
+    for (int round = 0; round < 12; ++round) {
+        for (int i = 0; i < 400; ++i) {
+            map[i] = i * 3;
+        }
+        for (int i = 0; i < 400; i += 2) {
+            EXPECT_EQ(map.erase(i), 1u);
+        }
+        for (int i = 0; i < 400; ++i) {
+            if (i % 2 == 0) {
+                EXPECT_FALSE(map.contains(i));
+            } else {
+                ASSERT_TRUE(map.contains(i));
+                EXPECT_EQ(map.at(i), i * 3);
+            }
+        }
+        EXPECT_EQ(map.size(), 200u);
+        for (int i = 0; i < 400; i += 2) {
+            map[i] = round;
+        }
+        for (int i = 0; i < 400; ++i) {
+            ASSERT_TRUE(map.contains(i));
+        }
+        map.clear();
+    }
+}
+
+TEST_F(FlatUnorderedMapTest, IterationSurvivesErasingVisitedElements) {
+    flat_unordered_map<int, int> map;
+    for (int i = 0; i < 512; ++i) {
+        map[i] = i;
+    }
+
+    size_t visited = 0;
+    for (auto it = map.begin(); it != map.end();) {
+        ++visited;
+        it = map.erase(it);
+    }
+    EXPECT_EQ(visited, 512u);
+    EXPECT_TRUE(map.empty());
+    EXPECT_EQ(map.begin(), map.end());
+}
+
+TEST_F(FlatUnorderedMapTest, ErasingAheadDuringIterationNeverYieldsErasedElements) {
+    flat_unordered_map<int, int> map;
+    for (int i = 0; i < 256; ++i) {
+        map[i] = i;
+    }
+
+    std::vector<bool> erased(256, false);
+    for (auto it = map.begin(); it != map.end(); ++it) {
+        EXPECT_FALSE(erased[static_cast<size_t>(it->first)]) << "yielded erased key " << it->first;
+        const size_t ahead = static_cast<size_t>(it->first + 128) % 256u;
+        if (!erased[ahead]) {
+            erased[ahead] = true;
+            EXPECT_EQ(map.erase(static_cast<int>(ahead)), 1u);
+        }
+    }
+
+    for (size_t i = 0; i < erased.size(); ++i) {
+        EXPECT_EQ(map.contains(static_cast<int>(i)), !erased[i]) << "key " << i;
+    }
+}
+
+TEST_F(FlatUnorderedMapTest, GroupBoundarySlotsRemainReachable) {
+    flat_unordered_map<int, int> map;
+    for (int i = 0; i < 3000; ++i) {
+        map[i * 7] = i;
+    }
+    EXPECT_EQ(map.size(), 3000u);
+
+    size_t iterated = 0;
+    for (auto it = map.begin(); it != map.end(); ++it) {
+        EXPECT_EQ(it->second, it->first / 7);
+        ++iterated;
+    }
+    EXPECT_EQ(iterated, 3000u);
+
+    for (int i = 0; i < 3000; ++i) {
+        ASSERT_TRUE(map.contains(i * 7)) << "key " << i * 7;
+        EXPECT_EQ(map.at(i * 7), i);
+    }
+}
+
+TEST(UnorderedMapMoveFromTest, InsertAfterMoveKeepsWorking) {
+    unordered_map<int, int> source;
+    for (int i = 0; i < 64; ++i) {
+        source[i] = i;
+    }
+
+    unordered_map<int, int> moved(static_cast<unordered_map<int, int>&&>(source));
+    EXPECT_EQ(moved.size(), 64u);
+    for (int i = 0; i < 64; ++i) {
+        ASSERT_EQ(moved.count(i), 1u) << "key " << i;
+    }
+
+    for (int i = 100; i < 200; ++i) {
+        source[i] = i * 2;
+    }
+    EXPECT_EQ(source.size(), 100u);
+    for (int i = 100; i < 200; ++i) {
+        const auto it = source.find(i);
+        ASSERT_NE(it, source.end()) << "key " << i;
+        EXPECT_EQ(it->second, i * 2);
+    }
+
+    unordered_map<int, int> assigned;
+    assigned = static_cast<unordered_map<int, int>&&>(moved);
+    for (int i = 0; i < 32; ++i) {
+        assigned[i + 1000] = i;
+    }
+    EXPECT_EQ(assigned.size(), 96u);
+    EXPECT_EQ(assigned.count(0), 1u);
+    EXPECT_EQ(assigned.count(1000), 1u);
+}
+
 class FlatUnorderedSetTest : public ::testing::Test {
 protected:
     void SetUp() override {}

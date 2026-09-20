@@ -123,7 +123,7 @@ public:
      * @tparam T 新的元素类型
      */
     template <typename T>
-    using rebind_alloc = alloc_rebind<Alloc, T>;
+    using rebind_alloc = typename alloc_rebind<Alloc, T>::type;
 
     /**
      * @brief 重新绑定分配器特性类型

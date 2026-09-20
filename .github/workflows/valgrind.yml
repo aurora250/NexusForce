@@ -80,6 +80,7 @@ jobs:
           valgrind \
             --suppressions=../valgrind.supp \
             --leak-check=full \
+            --child-silent-after-fork=yes \
             --show-leak-kinds=definite,indirect,possible \
             --errors-for-leak-kinds=definite,indirect \
             --error-exitcode=99 \

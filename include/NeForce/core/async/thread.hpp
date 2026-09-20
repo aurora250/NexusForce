@@ -74,12 +74,7 @@ public:
         /**
          * @brief 系统线程标识符类型
          */
-        using native_id_type =
-#ifdef NEFORCE_PLATFORM_WINDOWS
-                ::DWORD;
-#else
-                ::pthread_t;
-#endif
+        using native_id_type = unsigned long;
 
     private:
         native_id_type id_{0}; ///< 系统线程标识符
@@ -118,13 +113,7 @@ public:
          * @param rhs 右操作数
          * @return 两个线程ID是否相等
          */
-        NEFORCE_NODISCARD bool operator==(const id& rhs) const noexcept {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-            return id_ == rhs.id_;
-#else
-            return ::pthread_equal(id_, rhs.id_) != 0;
-#endif
-        }
+        NEFORCE_NODISCARD bool operator==(const id& rhs) const noexcept { return id_ == rhs.id_; }
 
         /**
          * @brief 不等于比较运算符
@@ -217,8 +206,6 @@ private:
     /**
      * @struct thread_startup_args
      * @brief 线程启动参数
-     *
-     * 传递给线程入口函数的参数结构。
      */
     struct thread_startup_args {
         unique_ptr<data_base> data; ///< 线程执行数据
@@ -254,9 +241,9 @@ public:
      */
     using native_handle_type =
 #ifdef NEFORCE_PLATFORM_WINDOWS
-            ::HANDLE;
+            void*;
 #else
-            ::pthread_t;
+            unsigned long;
 #endif
 
 private:
@@ -446,7 +433,7 @@ NEFORCE_BEGIN_THIS_THREAD__
  * @brief 获取当前线程标识符
  * @return 当前线程的标识符
  */
-NEFORCE_ALWAYS_INLINE_INLINE thread::id id() noexcept {
+NEFORCE_ALWAYS_INLINE_INLINE NEFORCE_CONST_FUNCTION thread::id id() noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return thread::id(::GetCurrentThreadId());
 #else
@@ -458,7 +445,7 @@ NEFORCE_ALWAYS_INLINE_INLINE thread::id id() noexcept {
  * @brief 获取当前线程句柄
  * @return 当前线程的句柄
  */
-NEFORCE_ALWAYS_INLINE_INLINE thread::native_handle_type handle() noexcept {
+NEFORCE_ALWAYS_INLINE_INLINE NEFORCE_CONST_FUNCTION thread::native_handle_type handle() noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return ::GetCurrentThread();
 #else

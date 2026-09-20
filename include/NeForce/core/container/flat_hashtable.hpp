@@ -15,6 +15,7 @@
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/interface/icollector.hpp"
 #include "NeForce/core/interface/iiterator.hpp"
+#include "NeForce/core/memory/allocator_traits.hpp"
 #include "NeForce/core/memory/construct.hpp"
 #include "NeForce/core/memory/bit.hpp"
 #include "NeForce/core/simd/bytes.hpp"
@@ -90,6 +91,7 @@ public:
 private:
     size_type index_ = 0;                       ///< 当前 slot 索引
     const container_type* container_ = nullptr; ///< 关联容器指针
+    int mask_ = -1;                             ///< 当前组内 index_ 之后的占用位掩码，-1 表示未缓存
 
     template <typename, typename, typename, typename, typename, typename>
     friend class flat_hashtable;
@@ -124,19 +126,35 @@ public:
 
     /**
      * @brief 递增操作
-     *
-     * 扫描到下一个非 EMPTY、非 DELETED 的 slot。
      */
     void increment() noexcept {
         NEFORCE_DEBUG_VERIFY(container_ != nullptr, "null container in flat_hashtable_iterator");
-        ++index_;
-        while (index_ < container_->capacity_) {
-            const byte_t meta = container_->metadata_[index_];
-            if (meta != container_type::FLAT_HT_EMPTY && meta != container_type::FLAT_HT_DELETED) {
+        const size_type capacity = container_->capacity_;
+        const size_type next = index_ + 1;
+        const size_type offset = next & (container_type::FLAT_HT_GROUP - 1);
+        const size_type base = next - offset;
+
+        if (mask_ < 0 || offset == 0) {
+            if (next >= capacity) {
+                index_ = capacity;
+                mask_ = -1;
                 return;
             }
-            ++index_;
+            mask_ = container_type::occupied_mask(container_->metadata_, base) & ~((1 << offset) - 1);
         }
+
+        if (mask_ != 0) {
+            index_ = base + static_cast<size_type>(countr_zero(static_cast<uintptr_t>(static_cast<unsigned>(mask_))));
+            mask_ &= mask_ - 1;
+            if (index_ >= capacity || !container_type::is_taken(container_->metadata_[index_])) {
+                mask_ = -1;
+                index_ = container_type::find_occupied(container_->metadata_, capacity, index_);
+            }
+            return;
+        }
+
+        index_ = container_type::find_occupied(container_->metadata_, capacity, base + container_type::FLAT_HT_GROUP);
+        mask_ = -1;
     }
 
     /**
@@ -195,20 +213,26 @@ public:
 
     using allocator_type = Alloc; ///< 分配器类型
 
+    /// 元数据数组使用的重绑定分配器
+    using byte_allocator_type = typename allocator_traits<allocator_type>::template rebind_alloc<byte_t>;
+
     static constexpr byte_t FLAT_HT_EMPTY = 0x80;   ///< EMPTY 元数据标记
     static constexpr byte_t FLAT_HT_DELETED = 0xFE; ///< DELETED 元数据标记
     static constexpr byte_t FLAT_HT_H2_MASK = 0x7F; ///< H2 标签位掩码
+    static constexpr size_t FLAT_HT_GROUP = 16;     ///< SIMD 组扫描宽度
+    static constexpr size_t FLAT_HT_PAD = 16;       ///< 元数据尾部哨兵字节数
     static constexpr size_t npos = static_cast<size_t>(-1);
 
 private:
-    Value* data_ = nullptr;      ///< 数据数组
-    byte_t* metadata_ = nullptr; ///< 元数据字节数组
-    size_t capacity_ = 0;        ///< slot 总数（2 的幂）
-    size_t size_ = 0;            ///< 存活元素数
-    size_t growth_left_ = 0;     ///< 触发 rehash 前可插入数
-    hasher hasher_{};            ///< 哈希函数对象
-    key_equal equals_{};         ///< 键相等比较对象
-    ExtractKey extracter_{};     ///< 值提取键对象
+    Value* data_ = nullptr;       ///< 数据数组
+    byte_t* metadata_ = nullptr;  ///< 元数据字节数组
+    size_t capacity_ = 0;         ///< slot 总数
+    size_t size_ = 0;             ///< 存活元素数
+    size_t growth_threshold_ = 0; ///< 触发扩容的元素数上限
+    size_t deleted_ = 0;          ///< DELETED 槽数量
+    hasher hasher_{};             ///< 哈希函数对象
+    key_equal equals_{};          ///< 键相等比较对象
+    ExtractKey extracter_{};      ///< 值提取键对象
 
     compressed_pair<allocator_type, float> alloc_lf_{default_construct_tag{}, 0.875F}; ///< 分配器与最大负载因子
 
@@ -221,15 +245,73 @@ private:
      * @param n 参考值
      * @return 2 的幂
      */
-    static size_t next_power_of_2(const size_t n) noexcept {
+    NEFORCE_ALWAYS_INLINE_INLINE static size_t next_power_of_2(const size_t n) noexcept {
         if (n <= 16) {
             return 16;
         }
-        size_t result = 1;
-        while (result < n) {
-            result <<= 1;
+        return static_cast<size_t>(bit_ceil(static_cast<uintptr_t>(n)));
+    }
+
+    /**
+     * @brief 由容量与最大负载因子推导扩容阈值
+     * @param capacity 容量
+     * @param lf 最大负载因子
+     * @return 触发扩容的元素数上限
+     */
+    NEFORCE_ALWAYS_INLINE_INLINE static size_t threshold_of(const size_t capacity, const float lf) noexcept {
+        return static_cast<size_t>(static_cast<float>(capacity) * lf);
+    }
+
+    /**
+     * @brief 判断元数据标记是否指向占用槽
+     * @param meta 元数据字节
+     * @return 该槽位是否存活
+     */
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE static constexpr bool is_taken(const byte_t meta) noexcept {
+        return meta < FLAT_HT_EMPTY;
+    }
+
+    /**
+     * @brief 读取一个元数据组的占用位掩码
+     * @param metadata 元数据数组
+     * @param base 组起始索引
+     * @return 16 位掩码，bit i 置位表示 base+i 槽位被占用
+     */
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE static int occupied_mask(const byte_t* metadata,
+                                                                            const size_type base) noexcept {
+#ifdef NEFORCE_SIMD_SSE2
+        return (~simd::to_bitmask(simd::load_unaligned(metadata + base))) & 0xFFFF;
+#else
+        int mask = 0;
+        for (size_t i = 0; i < FLAT_HT_GROUP; ++i) {
+            const byte_t meta = metadata[base + i];
+            if (meta != FLAT_HT_EMPTY && meta != FLAT_HT_DELETED) {
+                mask |= (1 << i);
+            }
         }
-        return result;
+        return mask;
+#endif
+    }
+
+    /**
+     * @brief 从指定位置开始查找首个占用槽
+     * @param metadata 元数据数组
+     * @param capacity 容量
+     * @param from 起始位置
+     * @return 首个占用槽的索引，未找到时返回 capacity
+     */
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE static size_type
+    find_occupied(const byte_t* metadata, const size_type capacity, size_type from) noexcept {
+        while (from < capacity) {
+            const size_type offset = from & (FLAT_HT_GROUP - 1);
+            const size_type base = from - offset;
+            const int mask = occupied_mask(metadata, base) & ~((1 << offset) - 1);
+            if (mask != 0) {
+                return base + static_cast<size_type>(countr_zero(static_cast<uintptr_t>(static_cast<unsigned>(mask))));
+            }
+            from = base + FLAT_HT_GROUP;
+        }
+        return capacity;
     }
 
     /**
@@ -253,6 +335,42 @@ private:
     allocator_type& get_allocator() noexcept { return alloc_lf_.get_base(); }
 
     /**
+     * @brief 分配元数据数组
+     * @param capacity 容量
+     * @return 元数据数组指针，尾部含 FLAT_HT_GROUP 个 EMPTY 哨兵字节
+     * @throws memory_exception 元数据分配失败
+     */
+    NEFORCE_NODISCARD byte_t* allocate_metadata(const size_t capacity) {
+        byte_allocator_type alloc(get_allocator());
+        byte_t* mem = nullptr;
+        try {
+            mem = alloc.allocate(capacity + FLAT_HT_PAD);
+        } catch (...) {
+            NEFORCE_THROW_EXCEPTION(memory_exception("flat_hashtable metadata allocation failed"));
+        }
+        if (mem == nullptr) {
+            NEFORCE_THROW_EXCEPTION(memory_exception("flat_hashtable metadata allocation failed"));
+        }
+        for (size_t i = 0; i < capacity + FLAT_HT_PAD; ++i) {
+            mem[i] = FLAT_HT_EMPTY;
+        }
+        return mem;
+    }
+
+    /**
+     * @brief 释放元数据数组
+     * @param mem 元数据数组指针
+     * @param capacity 该数组对应的容量
+     */
+    void free_metadata(byte_t* mem, const size_t capacity) noexcept {
+        if (mem == nullptr) {
+            return;
+        }
+        byte_allocator_type alloc(get_allocator());
+        alloc.deallocate(mem, capacity + FLAT_HT_PAD);
+    }
+
+    /**
      * @brief 分配存储数组
      * @param cap 容量
      */
@@ -260,17 +378,23 @@ private:
         if (cap == 0) {
             return;
         }
+        free_arrays();
+        capacity_ = 0;
+        size_ = 0;
+        deleted_ = 0;
+        growth_threshold_ = 0;
+
         allocator_type& alloc = get_allocator();
         data_ = alloc.allocate(cap);
-        metadata_ = static_cast<byte_t*>(::operator new(cap * sizeof(byte_t), std::nothrow));
-        if (metadata_ == nullptr) {
+        try {
+            metadata_ = allocate_metadata(cap);
+        } catch (...) {
             alloc.deallocate(data_, cap);
             data_ = nullptr;
-            NEFORCE_THROW_EXCEPTION(memory_exception("flat_hashtable metadata allocation failed"));
+            throw;
         }
-        for (size_t i = 0; i < cap; ++i) {
-            metadata_[i] = FLAT_HT_EMPTY;
-        }
+        capacity_ = cap;
+        growth_threshold_ = threshold_of(capacity_, max_load_factor());
     }
 
     /**
@@ -288,20 +412,39 @@ private:
             data_ = nullptr;
         }
         if (metadata_ != nullptr) {
-            ::operator delete(metadata_, std::nothrow);
+            free_metadata(metadata_, capacity_);
             metadata_ = nullptr;
         }
     }
 
     /**
-     * @brief 标量探测：查找键或插入位置
+     * @brief 加载一个元数据组，跨数组尾部时按环状顺序拼装
+     * @param idx 组起始索引
+     * @param group 输出的组缓冲
+     */
+    void load_meta_group(const size_t idx, byte_t* group) const noexcept {
+        const size_t remaining = capacity_ - idx;
+        if (remaining >= FLAT_HT_GROUP) {
+            _NEFORCE memory_copy(group, metadata_ + idx, FLAT_HT_GROUP);
+            return;
+        }
+        for (size_t k = 0; k < remaining; ++k) {
+            group[k] = metadata_[idx + k];
+        }
+        for (size_t k = 0; k < FLAT_HT_GROUP - remaining; ++k) {
+            group[remaining + k] = metadata_[k];
+        }
+    }
+
+    /**
+     * @brief 标量探测键或插入位置
+     * @param hash 键的哈希值
      * @param key 要查找的键
      * @param h2 H2 标签
-     * @return {slot_index, found} — found=true 表示已存在，found=false 表示插入位置
+     * @return {slot_index, found}
      */
-    pair<size_t, bool> probe_find_or_insert(const key_type& key, const byte_t h2) const noexcept {
-        const size_t h1 = hash_to_index(hasher_(key));
-        size_t idx = h1;
+    pair<size_t, bool> probe_find_or_insert(const size_t hash, const key_type& key, const byte_t h2) const noexcept {
+        size_t idx = hash_to_index(hash);
         size_t first_deleted = npos;
 
         for (size_t i = 0; i < capacity_; ++i) {
@@ -322,13 +465,15 @@ private:
     }
 
     /**
-     * @brief SIMD 批量探测：查找键或插入位置
+     * @brief SIMD 探测键或插入位置
+     * @param hash 键的哈希值
      * @param key 要查找的键
      * @param h2 H2 标签
      * @return {slot_index, found}
      */
-    pair<size_t, bool> probe_find_or_insert_simd(const key_type& key, const byte_t h2) const noexcept {
-        const size_t h1 = hash_to_index(hasher_(key));
+    pair<size_t, bool> probe_find_or_insert_simd(const size_t hash, const key_type& key,
+                                                 const byte_t h2) const noexcept {
+        const size_t h1 = hash_to_index(hash);
         size_t idx = h1;
         size_t first_deleted = npos;
 
@@ -336,21 +481,15 @@ private:
         const simd::vec128_t empty_vec = simd::fill_i8(FLAT_HT_EMPTY);
         const simd::vec128_t deleted_vec = simd::fill_i8(FLAT_HT_DELETED);
 
-        for (size_t round = 0; round < capacity_; round += 16) {
+        for (size_t round = 0; round < capacity_; round += FLAT_HT_GROUP) {
             // wrap-around safe load: metadata array is exactly capacity_ bytes,
             // a 16-byte load from idx may cross the array boundary
+            byte_t buf[FLAT_HT_GROUP];
             simd::vec128_t meta_vec;
-            const size_t remaining = capacity_ - idx;
-            if (remaining >= 16) {
+            if (capacity_ - idx >= FLAT_HT_GROUP) {
                 meta_vec = simd::load_unaligned(metadata_ + idx);
             } else {
-                byte_t buf[16];
-                for (size_t k = 0; k < remaining; ++k) {
-                    buf[k] = metadata_[idx + k];
-                }
-                for (size_t k = 0; k < 16 - remaining; ++k) {
-                    buf[remaining + k] = metadata_[k];
-                }
+                load_meta_group(idx, buf);
                 meta_vec = simd::load_unaligned(buf);
             }
 
@@ -389,37 +528,163 @@ private:
                 first_deleted = (idx + del_bit) & (capacity_ - 1);
             }
 
-            idx = (idx + 16) & (capacity_ - 1);
+            idx = (idx + FLAT_HT_GROUP) & (capacity_ - 1);
         }
         return {first_deleted, false};
     }
 
     /**
-     * @brief 计算是否需要 rehash
+     * @brief 查找键所在槽位
+     * @param hash 键的哈希值
+     * @param key 要查找的键
+     * @param h2 H2 标签
+     * @return 槽位索引，未找到时返回 npos
+     */
+    NEFORCE_NODISCARD size_type probe_find(const size_t hash, const key_type& key, const byte_t h2) const noexcept {
+        size_t idx = hash_to_index(hash);
+#ifdef NEFORCE_SIMD_SSE2
+        const simd::vec128_t h2_vec = simd::fill_i8(h2);
+        const simd::vec128_t empty_vec = simd::fill_i8(FLAT_HT_EMPTY);
+
+        for (size_t round = 0; round < capacity_; round += FLAT_HT_GROUP) {
+            byte_t buf[FLAT_HT_GROUP];
+            simd::vec128_t meta_vec;
+            if (capacity_ - idx >= FLAT_HT_GROUP) {
+                meta_vec = simd::load_unaligned(metadata_ + idx);
+            } else {
+                load_meta_group(idx, buf);
+                meta_vec = simd::load_unaligned(buf);
+            }
+
+            int match = simd::to_bitmask(simd::match_bytes(meta_vec, h2_vec));
+            const int empty_mask = simd::to_bitmask(simd::match_bytes(meta_vec, empty_vec));
+
+            while (match != 0) {
+                const int bit = countr_zero(static_cast<uintptr_t>(match));
+                const size_t slot = (idx + bit) & (capacity_ - 1);
+                if (equals_(extracter_(data_[slot]), key)) {
+                    return slot;
+                }
+                match &= (match - 1);
+            }
+
+            if (empty_mask != 0) {
+                return npos;
+            }
+            idx = (idx + FLAT_HT_GROUP) & (capacity_ - 1);
+        }
+        return npos;
+#else
+        for (size_t i = 0; i < capacity_; ++i) {
+            const byte_t meta = metadata_[idx];
+            if (meta == FLAT_HT_EMPTY) {
+                return npos;
+            }
+            if (meta == h2 && equals_(extracter_(data_[idx]), key)) {
+                return idx;
+            }
+            idx = (idx + 1) & (capacity_ - 1);
+        }
+        return npos;
+#endif
+    }
+
+    /**
+     * @brief 统计探测链上匹配键的元素数量
+     * @param hash 键的哈希值
+     * @param key 要统计的键
+     * @param h2 H2 标签
+     * @return 匹配的元素数量
+     */
+    NEFORCE_NODISCARD size_type probe_count(const size_t hash, const key_type& key, const byte_t h2) const noexcept {
+        size_t idx = hash_to_index(hash);
+        size_type result = 0;
+#ifdef NEFORCE_SIMD_SSE2
+        const simd::vec128_t h2_vec = simd::fill_i8(h2);
+        const simd::vec128_t empty_vec = simd::fill_i8(FLAT_HT_EMPTY);
+
+        for (size_t round = 0; round < capacity_; round += FLAT_HT_GROUP) {
+            byte_t buf[FLAT_HT_GROUP];
+            simd::vec128_t meta_vec;
+            if (capacity_ - idx >= FLAT_HT_GROUP) {
+                meta_vec = simd::load_unaligned(metadata_ + idx);
+            } else {
+                load_meta_group(idx, buf);
+                meta_vec = simd::load_unaligned(buf);
+            }
+
+            int match = simd::to_bitmask(simd::match_bytes(meta_vec, h2_vec));
+            const int empty_mask = simd::to_bitmask(simd::match_bytes(meta_vec, empty_vec));
+            const int stop =
+                    empty_mask != 0 ? countr_zero(static_cast<uintptr_t>(empty_mask)) : static_cast<int>(FLAT_HT_GROUP);
+            match &= (stop >= static_cast<int>(FLAT_HT_GROUP)) ? 0xFFFF : ((1 << stop) - 1);
+
+            while (match != 0) {
+                const int bit = countr_zero(static_cast<uintptr_t>(match));
+                const size_t slot = (idx + bit) & (capacity_ - 1);
+                if (equals_(extracter_(data_[slot]), key)) {
+                    ++result;
+                }
+                match &= (match - 1);
+            }
+
+            if (empty_mask != 0) {
+                return result;
+            }
+            idx = (idx + FLAT_HT_GROUP) & (capacity_ - 1);
+        }
+        return result;
+#else
+        for (size_t i = 0; i < capacity_; ++i) {
+            const byte_t meta = metadata_[idx];
+            if (meta == FLAT_HT_EMPTY) {
+                return result;
+            }
+            if (meta == h2 && equals_(extracter_(data_[idx]), key)) {
+                ++result;
+            }
+            idx = (idx + 1) & (capacity_ - 1);
+        }
+        return result;
+#endif
+    }
+
+    /**
+     * @brief 计算是否需要扩容
      * @return 是否需要扩容
      */
-    NEFORCE_NODISCARD bool should_rehash() const noexcept { return growth_left_ == 0; }
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE bool should_rehash() const noexcept {
+        return size_ + 1 > growth_threshold_;
+    }
+
+    /**
+     * @brief 判断墓碑是否已经多到需要原地重建
+     * @return 是否需要清理墓碑
+     */
+    NEFORCE_NODISCARD bool needs_purge() const noexcept {
+        return deleted_ != 0 && size_ + deleted_ >= growth_threshold_;
+    }
 
     /**
      * @brief 重新哈希
      * @param min_capacity 最小目标容量
+     * @param purge_only 只清理墓碑，不允许扩容
      */
-    void rehash_impl(const size_t min_capacity) {
+    void rehash_impl(const size_t min_capacity, const bool purge_only = false) {
         const size_t needed = max(min_capacity, static_cast<size_t>(static_cast<double>(size_) / max_load_factor()));
         const size_t new_capacity = next_power_of_2(needed);
-        if (new_capacity <= capacity_) {
+        if (new_capacity < capacity_ || (new_capacity == capacity_ && !purge_only)) {
             return;
         }
 
         allocator_type& alloc = get_allocator();
         Value* new_data = alloc.allocate(new_capacity);
-        auto* new_metadata = static_cast<byte_t*>(::operator new(new_capacity * sizeof(byte_t), std::nothrow));
-        if (new_metadata == nullptr) {
+        byte_t* new_metadata = nullptr;
+        try {
+            new_metadata = allocate_metadata(new_capacity);
+        } catch (...) {
             alloc.deallocate(new_data, new_capacity);
-            NEFORCE_THROW_EXCEPTION(memory_exception("flat_hashtable rehash metadata allocation failed"));
-        }
-        for (size_t i = 0; i < new_capacity; ++i) {
-            new_metadata[i] = FLAT_HT_EMPTY;
+            throw;
         }
 
         const size_t old_capacity = capacity_;
@@ -489,22 +754,21 @@ private:
                     _NEFORCE destroy(&new_data[i]);
                 }
             }
+            free_metadata(new_metadata, new_capacity);
             alloc.deallocate(new_data, new_capacity);
-            ::operator delete(new_metadata, std::nothrow);
             throw;
         }
 
+        free_metadata(old_metadata, old_capacity);
         if (old_data) {
             alloc.deallocate(old_data, old_capacity);
-        }
-        if (old_metadata != nullptr) {
-            ::operator delete(old_metadata, std::nothrow);
         }
 
         data_ = new_data;
         metadata_ = new_metadata;
         capacity_ = new_capacity;
-        growth_left_ = static_cast<size_t>(static_cast<double>(capacity_) * max_load_factor()) - size_;
+        growth_threshold_ = threshold_of(capacity_, max_load_factor());
+        deleted_ = 0;
     }
 
     /**
@@ -516,10 +780,12 @@ private:
      */
     template <typename... Args>
     void construct_at(const size_t idx, const byte_t h2, Args&&... args) {
+        if (metadata_[idx] == FLAT_HT_DELETED) {
+            --deleted_;
+        }
         _NEFORCE construct(&data_[idx], _NEFORCE forward<Args>(args)...);
         metadata_[idx] = h2;
         ++size_;
-        --growth_left_;
     }
 
     /**
@@ -555,9 +821,15 @@ private:
         if (other.capacity_ == 0) {
             return;
         }
-        alloc_arrays(other.capacity_);
-        capacity_ = other.capacity_;
-        growth_left_ = other.growth_left_;
+        if (capacity_ != other.capacity_) {
+            alloc_arrays(other.capacity_);
+        } else {
+            for (size_t i = 0; i < capacity_; ++i) {
+                metadata_[i] = FLAT_HT_EMPTY;
+            }
+            size_ = 0;
+        }
+        deleted_ = 0;
         try {
             for (size_t i = 0; i < other.capacity_; ++i) {
                 metadata_[i] = other.metadata_[i];
@@ -566,6 +838,7 @@ private:
                 }
             }
             size_ = other.size_;
+            deleted_ = other.deleted_;
         } catch (...) {
             clear();
             throw;
@@ -668,8 +941,6 @@ public:
         if (n > 0) {
             const size_t cap = next_power_of_2(static_cast<size_t>(static_cast<double>(n) / max_load_factor()));
             alloc_arrays(cap);
-            capacity_ = cap;
-            growth_left_ = static_cast<size_t>(static_cast<double>(cap) * max_load_factor());
         }
     }
 
@@ -683,8 +954,6 @@ public:
         if (n > 0) {
             const size_t cap = next_power_of_2(static_cast<size_t>(static_cast<double>(n) / max_load_factor()));
             alloc_arrays(cap);
-            capacity_ = cap;
-            growth_left_ = static_cast<size_t>(static_cast<double>(cap) * max_load_factor());
         }
     }
 
@@ -700,8 +969,6 @@ public:
         if (n > 0) {
             const size_t cap = next_power_of_2(static_cast<size_t>(static_cast<double>(n) / max_load_factor()));
             alloc_arrays(cap);
-            capacity_ = cap;
-            growth_left_ = static_cast<size_t>(static_cast<double>(cap) * max_load_factor());
         }
     }
 
@@ -719,8 +986,6 @@ public:
         if (n > 0) {
             const size_t cap = next_power_of_2(static_cast<size_t>(static_cast<double>(n) / max_load_factor()));
             alloc_arrays(cap);
-            capacity_ = cap;
-            growth_left_ = static_cast<size_t>(static_cast<double>(cap) * max_load_factor());
         }
     }
 
@@ -763,7 +1028,8 @@ public:
     metadata_(other.metadata_),
     capacity_(other.capacity_),
     size_(other.size_),
-    growth_left_(other.growth_left_),
+    growth_threshold_(other.growth_threshold_),
+    deleted_(other.deleted_),
     hasher_(_NEFORCE move(other.hasher_)),
     equals_(_NEFORCE move(other.equals_)),
     extracter_(_NEFORCE move(other.extracter_)),
@@ -772,7 +1038,8 @@ public:
         other.metadata_ = nullptr;
         other.capacity_ = 0;
         other.size_ = 0;
-        other.growth_left_ = 0;
+        other.growth_threshold_ = 0;
+        other.deleted_ = 0;
     }
 
     /**
@@ -903,7 +1170,7 @@ public:
     void max_load_factor(const float lf) noexcept {
         NEFORCE_DEBUG_VERIFY(lf > 0, "flat_hashtable load factor invalid.");
         alloc_lf_.value = lf;
-        growth_left_ = static_cast<size_t>(static_cast<double>(capacity_) * lf) - size_;
+        growth_threshold_ = threshold_of(capacity_, lf);
     }
 
     /**
@@ -926,16 +1193,27 @@ public:
     }
 
     /**
+     * @brief 为插入一个元素腾出空间
+     */
+    NEFORCE_NOINLINE NEFORCE_COLD void grow_for_insert() {
+        if (should_rehash()) {
+            const size_type new_cap = capacity_ == 0 ? 16 : capacity_ * 2;
+            rehash(max(new_cap, static_cast<size_t>(static_cast<double>(size_ + 1) / max_load_factor())));
+        } else if (needs_purge()) {
+            rehash_impl(capacity_, true);
+        }
+    }
+
+    /**
      * @brief 构造元素（唯一键版本）
      * @tparam Args 构造参数类型
      * @param args 构造参数
      * @return 插入结果（迭代器和是否成功）
      */
     template <typename... Args>
-    pair<iterator, bool> emplace_unique(Args&&... args) {
-        if (should_rehash()) {
-            const size_type new_cap = capacity_ == 0 ? 16 : capacity_ * 2;
-            rehash(max(new_cap, static_cast<size_t>(static_cast<double>(size_ + 1) / max_load_factor())));
+    NEFORCE_ALWAYS_INLINE_INLINE pair<iterator, bool> emplace_unique(Args&&... args) {
+        if (should_rehash() || needs_purge()) {
+            NEFORCE_UNLIKELY { grow_for_insert(); }
         }
 
         value_type tmp(_NEFORCE forward<Args>(args)...);
@@ -944,9 +1222,9 @@ public:
         const byte_t h2 = hash_to_h2(hash);
 
 #ifdef NEFORCE_SIMD_SSE2
-        pair<size_t, bool> probe_result = probe_find_or_insert_simd(key, h2);
+        const pair<size_t, bool> probe_result = flat_hashtable::probe_find_or_insert_simd(hash, key, h2);
 #else
-        pair<size_t, bool> probe_result = probe_find_or_insert(key, h2);
+        const pair<size_t, bool> probe_result = flat_hashtable::probe_find_or_insert(hash, key, h2);
 #endif
 
         if (probe_result.second) {
@@ -954,10 +1232,12 @@ public:
         }
 
         const size_t insert_idx = probe_result.first;
+        if (metadata_[insert_idx] == FLAT_HT_DELETED) {
+            --deleted_;
+        }
         _NEFORCE construct(&data_[insert_idx], _NEFORCE move(tmp));
         metadata_[insert_idx] = h2;
         ++size_;
-        --growth_left_;
         return {iterator(insert_idx, this), true};
     }
 
@@ -969,9 +1249,8 @@ public:
      */
     template <typename... Args>
     iterator emplace_equal(Args&&... args) {
-        if (should_rehash()) {
-            const size_type new_cap = capacity_ == 0 ? 16 : capacity_ * 2;
-            rehash(max(new_cap, static_cast<size_t>(static_cast<double>(size_ + 1) / max_load_factor())));
+        if (should_rehash() || needs_purge()) {
+            NEFORCE_UNLIKELY { grow_for_insert(); }
         }
 
         value_type tmp(_NEFORCE forward<Args>(args)...);
@@ -1068,6 +1347,7 @@ public:
         for (; n > 0; --n, ++first) {
             insert_unique(*first);
         }
+        return;
     }
 
     /**
@@ -1081,6 +1361,7 @@ public:
         for (; first != last; ++first) {
             insert_unique(*first);
         }
+        return;
     }
 
     /**
@@ -1104,6 +1385,7 @@ public:
         for (; n > 0; --n, ++first) {
             insert_equal(*first);
         }
+        return;
     }
 
     /**
@@ -1117,6 +1399,7 @@ public:
         for (; first != last; ++first) {
             insert_equal(*first);
         }
+        return;
     }
 
     /**
@@ -1140,6 +1423,46 @@ public:
         size_t idx = hash_to_index(hash);
         size_type erased = 0;
 
+#ifdef NEFORCE_SIMD_SSE2
+        const simd::vec128_t h2_vec = simd::fill_i8(h2);
+        const simd::vec128_t empty_vec = simd::fill_i8(FLAT_HT_EMPTY);
+
+        for (size_t round = 0; round < capacity_; round += FLAT_HT_GROUP) {
+            byte_t buf[FLAT_HT_GROUP];
+            simd::vec128_t meta_vec;
+            if (capacity_ - idx >= FLAT_HT_GROUP) {
+                meta_vec = simd::load_unaligned(metadata_ + idx);
+            } else {
+                load_meta_group(idx, buf);
+                meta_vec = simd::load_unaligned(buf);
+            }
+
+            int match = simd::to_bitmask(simd::match_bytes(meta_vec, h2_vec));
+            const int empty_mask = simd::to_bitmask(simd::match_bytes(meta_vec, empty_vec));
+            const int stop =
+                    empty_mask != 0 ? countr_zero(static_cast<uintptr_t>(empty_mask)) : static_cast<int>(FLAT_HT_GROUP);
+            match &= (stop >= static_cast<int>(FLAT_HT_GROUP)) ? 0xFFFF : ((1 << stop) - 1);
+
+            while (match != 0) {
+                const int bit = countr_zero(static_cast<uintptr_t>(match));
+                const size_t slot = (idx + bit) & (capacity_ - 1);
+                if (equals_(extracter_(data_[slot]), key)) {
+                    _NEFORCE destroy(&data_[slot]);
+                    metadata_[slot] = FLAT_HT_DELETED;
+                    ++deleted_;
+                    ++erased;
+                    --size_;
+                }
+                match &= (match - 1);
+            }
+
+            if (empty_mask != 0) {
+                return erased;
+            }
+            idx = (idx + FLAT_HT_GROUP) & (capacity_ - 1);
+        }
+        return erased;
+#else
         for (size_t i = 0; i < capacity_; ++i) {
             const byte_t meta = metadata_[idx];
             if (meta == FLAT_HT_EMPTY) {
@@ -1148,12 +1471,14 @@ public:
             if (meta == h2 && equals_(extracter_(data_[idx]), key)) {
                 _NEFORCE destroy(&data_[idx]);
                 metadata_[idx] = FLAT_HT_DELETED;
+                ++deleted_;
                 ++erased;
                 --size_;
             }
             idx = (idx + 1) & (capacity_ - 1);
         }
         return erased;
+#endif
     }
 
     /**
@@ -1172,17 +1497,10 @@ public:
 
         _NEFORCE destroy(&data_[position.index()]);
         metadata_[position.index()] = FLAT_HT_DELETED;
+        ++deleted_;
         --size_;
 
-        size_t next = position.index() + 1;
-        while (next < capacity_) {
-            const byte_t next_meta = metadata_[next];
-            if (next_meta != FLAT_HT_EMPTY && next_meta != FLAT_HT_DELETED) {
-                return iterator(next, this);
-            }
-            ++next;
-        }
-        return end();
+        return iterator(find_occupied(metadata_, capacity_, position.index() + 1), this);
     }
 
     /**
@@ -1204,6 +1522,7 @@ public:
             if (meta != FLAT_HT_EMPTY && meta != FLAT_HT_DELETED) {
                 _NEFORCE destroy(&data_[idx]);
                 metadata_[idx] = FLAT_HT_DELETED;
+                ++deleted_;
                 --size_;
             }
         }
@@ -1240,7 +1559,7 @@ public:
             metadata_[i] = FLAT_HT_EMPTY;
         }
         size_ = 0;
-        growth_left_ = static_cast<size_t>(static_cast<double>(capacity_) * max_load_factor());
+        deleted_ = 0;
     }
 
     /**
@@ -1253,20 +1572,8 @@ public:
             return end();
         }
         const size_t hash = hasher_(key);
-        const byte_t h2 = hash_to_h2(hash);
-        size_t idx = hash_to_index(hash);
-
-        for (size_t i = 0; i < capacity_; ++i) {
-            const byte_t meta = metadata_[idx];
-            if (meta == FLAT_HT_EMPTY) {
-                return end();
-            }
-            if (meta == h2 && equals_(extracter_(data_[idx]), key)) {
-                return iterator(idx, this);
-            }
-            idx = (idx + 1) & (capacity_ - 1);
-        }
-        return end();
+        const size_type idx = probe_find(hash, key, hash_to_h2(hash));
+        return idx == npos ? end() : iterator(idx, this);
     }
 
     /**
@@ -1279,20 +1586,8 @@ public:
             return cend();
         }
         const size_t hash = hasher_(key);
-        const byte_t h2 = hash_to_h2(hash);
-        size_t idx = hash_to_index(hash);
-
-        for (size_t i = 0; i < capacity_; ++i) {
-            const byte_t meta = metadata_[idx];
-            if (meta == FLAT_HT_EMPTY) {
-                return cend();
-            }
-            if (meta == h2 && equals_(extracter_(data_[idx]), key)) {
-                return const_iterator(idx, this);
-            }
-            idx = (idx + 1) & (capacity_ - 1);
-        }
-        return cend();
+        const size_type idx = probe_find(hash, key, hash_to_h2(hash));
+        return idx == npos ? cend() : const_iterator(idx, this);
     }
 
     /**
@@ -1305,21 +1600,7 @@ public:
             return 0;
         }
         const size_t hash = hasher_(key);
-        const byte_t h2 = hash_to_h2(hash);
-        size_t idx = hash_to_index(hash);
-        size_type result = 0;
-
-        for (size_t i = 0; i < capacity_; ++i) {
-            const byte_t meta = metadata_[idx];
-            if (meta == FLAT_HT_EMPTY) {
-                break;
-            }
-            if (meta == h2 && equals_(extracter_(data_[idx]), key)) {
-                ++result;
-            }
-            idx = (idx + 1) & (capacity_ - 1);
-        }
-        return result;
+        return probe_count(hash, key, hash_to_h2(hash));
     }
 
     /**
@@ -1327,7 +1608,13 @@ public:
      * @param key 要检查的键
      * @return 是否包含
      */
-    NEFORCE_NODISCARD bool contains(const key_type& key) const noexcept { return find(key) != cend(); }
+    NEFORCE_NODISCARD bool contains(const key_type& key) const noexcept {
+        if (capacity_ == 0) {
+            return false;
+        }
+        const size_t hash = hasher_(key);
+        return probe_find(hash, key, hash_to_h2(hash)) != npos;
+    }
 
     /**
      * @brief 获取等于指定键的元素范围
@@ -1371,9 +1658,6 @@ public:
             last_idx = (last_idx + 1) & (capacity_ - 1);
         }
         if (last_idx == first_idx || last_idx < first_idx) {
-            // wraparound: the range extends past the end of the array,
-            // second iterator points to end() since forward iteration
-            // cannot jump from the end back to the beginning
             return {iterator(first_idx, this), end()};
         }
         return {iterator(first_idx, this), iterator(last_idx, this)};
@@ -1439,7 +1723,8 @@ public:
         _NEFORCE swap(metadata_, other.metadata_);
         _NEFORCE swap(capacity_, other.capacity_);
         _NEFORCE swap(size_, other.size_);
-        _NEFORCE swap(growth_left_, other.growth_left_);
+        _NEFORCE swap(growth_threshold_, other.growth_threshold_);
+        _NEFORCE swap(deleted_, other.deleted_);
         _NEFORCE swap(hasher_, other.hasher_);
         _NEFORCE swap(equals_, other.equals_);
         _NEFORCE swap(extracter_, other.extracter_);

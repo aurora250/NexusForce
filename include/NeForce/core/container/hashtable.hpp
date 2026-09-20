@@ -99,7 +99,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * | 特性              | 规范参数                                    |
  * |-------------------|-------------------------------------------|
  * | 冲突解决          | 链地址法（Separate Chaining）                |
- * | 桶大小增长策略    | 素数表（约 1.5 倍增长）                        |
+ * | 桶大小增长策略    | 素数表（约 2 倍增长）                          |
  * | 最大负载因子      | 1.0（默认，可配置）                           |
  * | 迭代器类别        | 前向迭代器（Forward Iterator）               |
  * | 异常安全          | 基本保证（insert 时分配失败不影响原有状态）     |
@@ -445,6 +445,18 @@ private:
     }
 
     /**
+     * @brief 计算扩容目标桶数
+     * @return 约为当前桶数 2 倍的目标桶数
+     *
+     * @note 与 libstdc++ / MSVC 的桶增长策略对齐：按倍数而非逐元素增长，
+     *       可显著减少无预留插入时的 rehash 次数。
+     */
+    NEFORCE_NODISCARD size_type growth_target() const noexcept {
+        const size_type current = buckets_.size();
+        return current == 0 ? size_ + 1 : current * 2;
+    }
+
+    /**
      * @brief 初始化桶数组
      * @param n 期望的桶数量
      */
@@ -510,9 +522,7 @@ private:
      * @param other 源哈希表
      */
     void copy_from(const hashtable& other) {
-        buckets_.clear();
-        buckets_.reserve(other.buckets_.size());
-        buckets_.insert(buckets_.end(), other.buckets_.size(), nullptr);
+        buckets_.assign(other.buckets_.size(), nullptr);
         try {
             for (size_type i = 0; i < other.buckets_.size(); ++i) {
                 if (link_type cur = other.buckets_[i]) {
@@ -1034,7 +1044,7 @@ public:
      * @return 桶索引
      */
     NEFORCE_NODISCARD size_type bucket_index(const key_type& key) const noexcept(is_nothrow_hashable_v<key_type>) {
-        return hashtable::bucket_index_key(key);
+        return hashtable::bucket_index_key(key, buckets_.size());
     }
 
     /**
@@ -1151,7 +1161,7 @@ public:
     template <typename... Args>
     pair<iterator, bool> emplace_unique(Args&&... args) {
         if (size_ + 1 > static_cast<size_type>(buckets_.size() * max_load_factor())) {
-            rehash(size_ + 1);
+            rehash(hashtable::growth_target());
         }
         const link_type node = hashtable::new_node(_NEFORCE forward<Args>(args)...);
         return hashtable::insert_unique_noresize(node);
@@ -1166,7 +1176,7 @@ public:
     template <typename... Args>
     iterator emplace_equal(Args&&... args) {
         if (size_ + 1 > static_cast<size_type>(buckets_.size() * max_load_factor())) {
-            rehash(size_ + 1);
+            rehash(hashtable::growth_target());
         }
         const link_type node = hashtable::new_node(_NEFORCE forward<Args>(args)...);
         return hashtable::insert_equal_noresize(node);

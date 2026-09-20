@@ -34,6 +34,13 @@
 - `basic_string` 拷贝构造直连 `memory_copy` 与内联终止符写入
 - `memory_find` / `memory_set` 添加 AVX2 256-bit 宽寄存器路径，单字符查找与填充构造性能大幅提升
 - `memory_copy` / `memory_set` 对小于 16 字节的数据直接内联标量操作，跳过 SIMD 层级判断
+- `flat_hashtable` 查询接口补齐 SIMD 组探测
+- `flat_hashtable` 迭代器缓存当前元数据组的占用位掩码，组内递增只需一次位运算；配合元数据尾部哨兵字节，越界组加载不再需要边界分支
+- `flat_hashtable` 插入路径不再重复计算哈希，并拆分为内联热路径与 `NEFORCE_NOINLINE` 冷扩容路径
+- `flat_hashtable` 元数据数组改由重绑定后的容器分配器分配，此前绕过分配器直接使用 `::operator new`，自定义分配器无法观测到这部分内存
+- `flat_hashtable::next_power_of_2` 由循环移位改为 `bit_ceil` 位运算
+- `hashtable` 桶增长策略由约 1.5 倍对齐到约 2 倍，无预留插入的 rehash 次数由 O(log₁.₅ n) 降至 O(log₂ n)
+- `hashtable::copy_from` 的桶数组重建由 `clear` + `reserve` + `insert` 三趟改为单趟 `assign`
 - AES-256 GCM 模式 GHASH 采用 PCLMULQDQ 无进位乘法替代逐位乘法
 - AES-256 解密预计算 InvMixColumns 逆轮密钥，消除每块每轮的 `aesimc` 重复变换
 - AES-256 ECB / CBC 解密 / GCM-CTR 采用 4 块交错加密，隐藏 `aesenc` 指令延迟
@@ -86,6 +93,11 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 `flat_hashtable` 删除元素后不归还扩容额度，导致反复「填充—删除」时容量无界增长（实测 n=262144 时每 12 轮容量从 2 槽/元素膨胀到 16 槽/元素）：扩容判据改由 `size_` 与最大负载因子直接派生，不再依赖只在插入时递减的计数
+- 修复 `flat_hashtable` 墓碑（DELETED）永不回收导致探测链持续变长：新增墓碑计数，占用槽逼近扩容阈值时等容量原地重建
+- 修复 `flat_hashtable` 在已有容量的对象上重新分配存储数组时不回收旧数组导致的内存泄漏
+- 修复 `allocator_traits::rebind_alloc<T>` 未取 `alloc_rebind` 的 `type`，返回的是元函数而非重绑定后的分配器类型，任何使用该别名的地方都无法编译
+- 修复 `hashtable::bucket_index()` 调用 `bucket_index_key()` 时漏传桶数参数（模板成员未被实例化而长期潜伏）
 - 修复浮点定点格式化在二进制指数非负的整数值上小数点位置错误：原先按已放大 10^p 处理而把整数末几位误作小数，导致绝对值大于 2^52 的值（如 1e308、DBL_MAX）整数部分被截断
 - 修复 UTF-16 代理对在批量解码中折叠为单个码点时的差分一致性（新增单元测试覆盖）
 - 修复 `ssl_socket` 异步读写绕过 TLS 层的缺陷，现按 TLS 激活状态路由至 `ssl_stream`
