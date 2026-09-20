@@ -142,15 +142,15 @@ void* thread::thread_entry(void* arg) {
 void thread::start_thread_impl(thread_startup_args* args) {
     hook::invoke(hook::point::before_create, id_);
 
-    id::native_id_type tid = 0;
-
 #ifdef NEFORCE_PLATFORM_WINDOWS
+    unsigned int tid = 0;
     handle_ = reinterpret_cast<native_handle_type>(::_beginthreadex(nullptr, 0, thread_entry, args, 0, &tid));
     if (handle_ == nullptr) {
         delete args;
         NEFORCE_THROW_EXCEPTION(thread_exception("Failed to create thread"));
     }
 #else
+    id::native_id_type tid = 0;
     if (::pthread_create(&tid, nullptr, thread_entry, args) != 0) {
         delete args;
         NEFORCE_THROW_EXCEPTION(thread_exception("Failed to create thread"));
