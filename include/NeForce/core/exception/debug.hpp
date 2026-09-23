@@ -25,12 +25,14 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 仅在调试模式下检查条件，发布模式下不产生任何代码。
  */
-#    define NEFORCE_DEBUG_VERIFY(CON, MESG) \
-        {                                   \
-            if (CON) {                      \
-            } else {                        \
-                assert(false && MESG);      \
-            }                               \
+#    define NEFORCE_DEBUG_VERIFY(CON, MESG)  \
+        {                                    \
+            if (_NEFORCE likely(CON)) {      \
+            } else {                         \
+                _NEFORCE debug_stacktrace(); \
+                assert(false && MESG);       \
+                _NEFORCE unreachable();      \
+            }                                \
         }
 #else
 #    define NEFORCE_DEBUG_VERIFY(CON, MESG)
@@ -80,7 +82,7 @@ NEFORCE_NORETURN NEFORCE_ALWAYS_INLINE_INLINE void unreachable() noexcept {
  * @return 条件表达式的值
  * @warning 错误使用可能降低性能，仅在确实有概率偏差时使用
  */
-NEFORCE_ALWAYS_INLINE_INLINE bool likely(bool x) {
+NEFORCE_ALWAYS_INLINE constexpr bool likely(bool x) noexcept {
 #if defined(NEFORCE_COMPILER_GNUC) || defined(NEFORCE_COMPILER_CLANG)
     return static_cast<bool>(__builtin_expect(static_cast<long>(x), 1L));
 #else
@@ -94,7 +96,7 @@ NEFORCE_ALWAYS_INLINE_INLINE bool likely(bool x) {
  * @return 条件表达式的值
  * @warning 错误使用可能降低性能，仅在确实有概率偏差时使用
  */
-NEFORCE_ALWAYS_INLINE_INLINE bool unlikely(bool x) {
+NEFORCE_ALWAYS_INLINE constexpr bool unlikely(bool x) noexcept {
 #if defined(NEFORCE_COMPILER_GNUC) || defined(NEFORCE_COMPILER_CLANG)
     return static_cast<bool>(__builtin_expect(static_cast<long>(x), 0L));
 #else
@@ -120,14 +122,23 @@ NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool is_constant_evaluated() n
 NEFORCE_NODISCARD bool NEFORCE_API is_debugger_present() noexcept;
 
 /**
- * @brief 调试断言
+ * @brief 断言失败时触发断点
  * @param condition 条件表达式
  * @param message 断言失败时的消息
- *
- * 当条件为false时，输出断言失败信息并触发调试断点（如果正在调试）。
- * 仅在调试构建中有效，发布构建中此函数为空操作。
  */
-void NEFORCE_API debug_assert(bool condition, const char* message = nullptr);
+void NEFORCE_API debug_breakpoint(bool condition, const char* message = nullptr) noexcept;
+
+/**
+ * @brief 断言失败时触发 assert 并输出堆栈信息
+ * @param condition 条件表达式
+ * @param message 断言失败时的消息
+ */
+void NEFORCE_API assert_stacktrace(bool condition, const char* message = nullptr) noexcept;
+
+/**
+ * @brief 输出堆栈信息
+ */
+void NEFORCE_API debug_stacktrace() noexcept;
 
 /**
  * @brief 触发调试断点
@@ -162,7 +173,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void breakpoint() noexcept {
  * 首先检查是否有调试器附加，如果有则触发断点。
  * 适用于条件性断点，避免在非调试环境中意外中断。
  */
-NEFORCE_ALWAYS_INLINE_INLINE void breakpoint_if_debugging() {
+NEFORCE_ALWAYS_INLINE_INLINE void breakpoint_if_debugging() noexcept {
     if (is_debugger_present()) {
         breakpoint();
     }

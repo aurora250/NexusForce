@@ -640,10 +640,10 @@ TEST(DebugUtilTest, DebuggerPresentQueryIsCallable) {
     (void) present;
 }
 
-TEST(DebugUtilTest, DebugAssertWithTrueCondition) { debug_assert(true); }
+TEST(DebugUtilTest, DebugAssertWithTrueCondition) { debug_breakpoint(true); }
 
 TEST(DebugUtilTest, DebugAssertWithFalseConditionDoesNotAbortWithoutDebugger) {
-    debug_assert(false, "intentional failure in DebugUtilTest");
+    debug_breakpoint(false, "intentional failure in DebugUtilTest");
 }
 
 TEST(DebugUtilTest, VerifyMacroPassingCondition) { NEFORCE_DEBUG_VERIFY(true, "pass"); }

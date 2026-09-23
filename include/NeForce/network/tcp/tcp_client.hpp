@@ -117,6 +117,11 @@ protected:
         }
     }
 
+    /**
+     * @brief 关闭底层socket并清理连接状态
+     */
+    void close_connection() noexcept;
+
 public:
     /**
      * @brief 构造函数
@@ -137,7 +142,7 @@ public:
     /**
      * @brief 析构函数
      */
-    virtual ~tcp_client_base() { disconnect(); }
+    virtual ~tcp_client_base() { close_connection(); }
 
     tcp_client_base(const tcp_client_base&) = delete;
     tcp_client_base& operator=(const tcp_client_base&) = delete;

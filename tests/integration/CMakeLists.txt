@@ -17,3 +17,15 @@ target_link_libraries(NexusForceIntegrationTest PRIVATE GTest::gtest)
 enable_testing()
 add_test(NAME NexusForceIntegrationTest COMMAND NexusForceIntegrationTest)
 set_target_properties(NexusForceIntegrationTest PROPERTIES FOLDER "tests")
+
+if(NEXUSFORCE_USING_MEMORY_POOL)
+    add_executable(NexusForceAllocatorOverrideTest
+            main.cpp
+            test_allocator_override.cpp
+            $<TARGET_OBJECTS:NexusForceMemoryPoolOverride>
+    )
+    target_link_libraries(NexusForceAllocatorOverrideTest PRIVATE NexusForce::NexusForce GTest::gtest)
+    nexusforce_compiler_options(NexusForceAllocatorOverrideTest)
+    add_test(NAME NexusForceAllocatorOverrideTest COMMAND NexusForceAllocatorOverrideTest)
+    set_target_properties(NexusForceAllocatorOverrideTest PROPERTIES FOLDER "tests")
+endif()

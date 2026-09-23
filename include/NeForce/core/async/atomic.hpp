@@ -248,7 +248,7 @@ struct atomic<T*> : atomic_base<T*> {
     atomic(atomic&&) noexcept = default;
     atomic& operator=(atomic&&) noexcept = default;
 
-    explicit atomic(T* value) noexcept :
+    explicit constexpr atomic(T* value) noexcept :
     atomic_base<T*>(value) {}
 
     using atomic_base<T*>::operator=;
@@ -268,7 +268,7 @@ struct atomic<T&> : atomic_ref_base<T> {
     atomic(atomic&&) noexcept = default;
     atomic& operator=(atomic&&) noexcept = default;
 
-    explicit atomic(T& value) noexcept :
+    explicit constexpr atomic(T& value) noexcept :
     atomic_ref_base<T>(value) {}
 
     using atomic_ref_base<T>::operator=;

@@ -200,13 +200,12 @@ bool tcp_client_base::connect(const string& host, ports port) {
     return false;
 }
 
-void tcp_client_base::disconnect() noexcept {
+void tcp_client_base::close_connection() noexcept {
     if (!socket_) {
         return;
     }
 
     try {
-        pre_disconnect();
         if (disconnect_callback_) {
             disconnect_callback_();
         }
@@ -219,6 +218,21 @@ void tcp_client_base::disconnect() noexcept {
     socket_.reset();
     connected_host_.clear();
     connected_port_ = ports::UNDEF;
+}
+
+void tcp_client_base::disconnect() noexcept {
+    if (!socket_) {
+        return;
+    }
+
+    try {
+        pre_disconnect();
+        // NOLINTNEXTLINE(bugprone-empty-catch)
+    } catch (const exception& e) {
+        NEFORCE_REPORT_EXCEPTION(e);
+    }
+
+    close_connection();
 }
 
 ssize_t tcp_client_base::send(const void* data, size_t length) {

@@ -92,8 +92,8 @@ private:
         storage_internal(const storage_internal&) = delete;
         storage_internal& operator=(const storage_internal&) = delete;
 
-        void* ptr_ = nullptr;                                               ///< 堆存储指针
-        aligned_storage_t<SBO_SIZE, alignof(_NEFORCE max_align_t)> buffer_; ///< SBO 栈缓冲区
+        void* ptr_ = nullptr;                ///< 堆存储指针
+        aligned_storage_t<SBO_SIZE> buffer_; ///< SBO 栈缓冲区
     };
 
     /**

@@ -576,6 +576,107 @@ public:
     }
 
     /**
+     * @brief 使用指定分配器构造空向量
+     * @param alloc 分配器
+     */
+    NEFORCE_CONSTEXPR20 explicit vector(const allocator_type& alloc) :
+    pair_(exact_arg_construct_tag{}, alloc, nullptr) {
+        constexpr size_type init_cap = 1;
+        pointer result = pair_.get_base().allocate(init_cap);
+        finish_ = start_ = result;
+        pair_.value = finish_ + init_cap;
+    }
+
+    /**
+     * @brief 使用指定分配器构造 n 个默认构造元素的向量
+     * @param n 元素数量
+     * @param alloc 分配器
+     */
+    NEFORCE_CONSTEXPR20 explicit vector(const size_type n, const allocator_type& alloc) :
+    pair_(exact_arg_construct_tag{}, alloc, nullptr) {
+        start_ = pair_.get_base().allocate(n);
+        finish_ = start_;
+        try {
+            for (size_type i = 0; i < n; ++i) {
+                _NEFORCE construct(finish_);
+                ++finish_;
+            }
+        } catch (...) {
+            _NEFORCE destroy(start_, finish_);
+            pair_.get_base().deallocate(start_, n);
+            throw;
+        }
+        pair_.value = start_ + n;
+    }
+
+    /**
+     * @brief 使用指定分配器构造 n 个指定值元素的向量
+     * @param n 元素数量
+     * @param value 初始值
+     * @param alloc 分配器
+     */
+    NEFORCE_CONSTEXPR20 explicit vector(const size_type n, const T& value, const allocator_type& alloc) :
+    pair_(exact_arg_construct_tag{}, alloc, nullptr) {
+        fill_initialize(n, value);
+    }
+
+    /**
+     * @brief 拷贝构造并指定分配器
+     * @param other 源向量
+     * @param alloc 分配器
+     */
+    NEFORCE_CONSTEXPR20 vector(const vector& other, const allocator_type& alloc) :
+    pair_(exact_arg_construct_tag{}, alloc, nullptr) {
+        const size_type n = other.size();
+        start_ = allocate_and_copy(n, other.begin(), other.end());
+        finish_ = start_ + n;
+        pair_.value = finish_;
+    }
+
+    /**
+     * @brief 移动构造并指定分配器
+     * @param other 源向量
+     * @param alloc 分配器
+     */
+    NEFORCE_CONSTEXPR20 vector(vector&& other, const allocator_type& alloc) :
+    pair_(exact_arg_construct_tag{}, alloc, nullptr) {
+        const size_type n = other.size();
+        start_ = allocate_and_move(n, other.begin(), other.end());
+        finish_ = start_ + n;
+        pair_.value = finish_;
+        other.clear();
+    }
+
+    /**
+     * @brief 范围构造并指定分配器
+     * @tparam Iterator 迭代器类型
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     * @param alloc 分配器
+     */
+    template <typename Iterator, enable_if_t<is_ranges_iter_v<Iterator>, int> = 0>
+    NEFORCE_CONSTEXPR20 vector(Iterator first, Iterator last, const allocator_type& alloc) :
+    pair_(exact_arg_construct_tag{}, alloc, nullptr) {
+        range_initialize(first, last);
+    }
+
+    /**
+     * @brief 初始化列表构造并指定分配器
+     * @param ilist 初始化列表
+     * @param alloc 分配器
+     */
+    NEFORCE_CONSTEXPR20 vector(std::initializer_list<T> ilist, const allocator_type& alloc) :
+    vector(ilist.begin(), ilist.end(), alloc) {}
+
+    /**
+     * @brief 内存视图构造并指定分配器
+     * @param view 内存视图
+     * @param alloc 分配器
+     */
+    NEFORCE_CONSTEXPR20 vector(memory_view<T> view, const allocator_type& alloc) :
+    vector(view.begin(), view.end(), alloc) {}
+
+    /**
      * @brief 析构函数
      */
     NEFORCE_CONSTEXPR20 ~vector() {
@@ -681,6 +782,13 @@ public:
      */
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type capacity() const noexcept {
         return static_cast<size_type>(pair_.value - start_);
+    }
+
+    /**
+     * @brief 获取当前分配器
+     */
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const allocator_type& get_allocator() const noexcept {
+        return pair_.get_base();
     }
 
     /**

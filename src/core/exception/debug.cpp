@@ -1,5 +1,6 @@
 #include <NeForce/core/exception/debug.hpp>
 #include <NeForce/core/system/console.hpp>
+#include <NeForce/core/system/stacktrace.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <debugapi.h>
 #endif
@@ -36,10 +37,40 @@ bool is_debugger_present() noexcept {
     }
 }
 
-void debug_assert(bool condition, const char* message) {
-    if (!condition) {
-        eprintln("Debug assertion failed:", message);
+void debug_breakpoint(bool condition, const char* message) noexcept {
+    if (likely(condition)) {
+    } else {
+        try {
+            eprintln("debug assertion failed: ", message);
+            eprintln("stacktrace: \n", stacktrace::current());
+            // NOLINTNEXTLINE(bugprone-empty-catch)
+        } catch (...) {
+            // ignore
+        }
         breakpoint_if_debugging();
+    }
+}
+
+void assert_stacktrace(bool condition, const char* message) noexcept {
+    if (likely(condition)) {
+    } else {
+        try {
+            eprintln(stacktrace::current());
+            // NOLINTNEXTLINE(bugprone-empty-catch)
+        } catch (...) {
+            // ignore
+        }
+        assert(false && message);
+        unreachable();
+    }
+}
+
+void debug_stacktrace() noexcept {
+    try {
+        eprintln(stacktrace::current());
+        // NOLINTNEXTLINE(bugprone-empty-catch)
+    } catch (...) {
+        // ignore
     }
 }
 

@@ -12,6 +12,7 @@ endmacro()
 
 add_subdirectory(db)
 add_subdirectory(logging)
+add_subdirectory(memory)
 add_subdirectory(network)
 add_subdirectory(tui)
 

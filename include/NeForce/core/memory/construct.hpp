@@ -10,6 +10,7 @@
  */
 
 #include "NeForce/core/typeinfo/concepts.hpp"
+#include <new>
 NEFORCE_BEGIN_NAMESPACE__
 
 /**

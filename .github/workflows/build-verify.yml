@@ -93,6 +93,15 @@ jobs:
             cppstd: 20
 
           - os: ubuntu-latest
+            compiler: clang
+            config: pool-off
+            cppstd: 20
+          - os: ubuntu-latest
+            compiler: clang
+            config: pool-tls-global-dynamic
+            cppstd: 20
+
+          - os: ubuntu-latest
             compiler: gcc
             config: cross-riscv64
             cppstd: 20
@@ -241,6 +250,20 @@ jobs:
                 -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
               )
               ;;
+            pool-off)
+              FLAGS+=(
+                -DNEXUSFORCE_USING_MEMORY_POOL=OFF
+                -DNEXUSFORCE_BUILD_EXAMPLES=OFF
+                -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
+              )
+              ;;
+            pool-tls-global-dynamic)
+              FLAGS+=(
+                -DCMAKE_CXX_FLAGS=-DNEFORCE_MEMORY_POOL_TLS_GLOBAL_DYNAMIC
+                -DNEXUSFORCE_BUILD_EXAMPLES=OFF
+                -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
+              )
+              ;;
             cross-riscv64)
               FLAGS+=(
                 -DVCPKG_TARGET_TRIPLET=riscv64-linux
@@ -361,3 +384,78 @@ jobs:
           echo "| 配置 | ${{ matrix.config }} |" >> $GITHUB_STEP_SUMMARY
           echo "| C++ 标准 | ${{ matrix.cppstd }} |" >> $GITHUB_STEP_SUMMARY
         shell: bash
+
+  allocator:
+    name: "allocator · global new/delete override (gcc · Release)"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install system dependencies (Ubuntu)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+            build-essential      \
+            cmake                \
+            ninja-build          \
+            pkg-config           \
+            libtirpc-dev         \
+            liburing-dev         \
+            curl                 \
+            zip                  \
+            unzip                \
+            tar
+
+      - name: Setup vcpkg
+        id: vcpkg
+        uses: ./.github/actions/setup-vcpkg
+
+      - name: CMake configure
+        shell: bash
+        run: |
+          cmake -B build -G Ninja \
+            -DCMAKE_C_COMPILER=gcc \
+            -DCMAKE_CXX_COMPILER=g++ \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_TOOLCHAIN_FILE="$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" \
+            -DNEXUSFORCE_BUILD_DOCS=OFF \
+            -DNEXUSFORCE_BUILD_EXAMPLES=OFF \
+            -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
+
+      - name: Build library and allocator test targets
+        shell: bash
+        run: |
+          cmake --build build --parallel --target \
+            NexusForce NexusForceUnitTests NexusForceAllocatorOverrideTest
+
+      - name: Run memory pool unit tests
+        shell: bash
+        run: |
+          ./build/bin/Release/NexusForceUnitTests --gtest_filter='MemoryPool*:PoolAllocator*'
+
+      - name: Run global override integration test
+        shell: bash
+        run: |
+          ./build/bin/Release/NexusForceAllocatorOverrideTest
+
+      - name: Save vcpkg binary cache
+        uses: ./.github/actions/save-vcpkg-cache
+        with:
+          cache-key: ${{ steps.vcpkg.outputs.cache-key }}
+          cache-hit: ${{ steps.vcpkg.outputs.cache-hit }}
+          binary-cache: ${{ steps.vcpkg.outputs.binary-cache }}
+          tool-cache-key: ${{ steps.vcpkg.outputs.tool-cache-key }}
+          tool-cache-hit: ${{ steps.vcpkg.outputs.tool-cache-hit }}
+          vcpkg-tool-cache-path: ${{ steps.vcpkg.outputs.vcpkg-tool-cache-path }}
+
+      - name: Summary
+        if: always()
+        shell: bash
+        run: |
+          echo "| 项目 | 值 |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|----|" >> $GITHUB_STEP_SUMMARY
+          echo "| 平台 | ubuntu-latest |" >> $GITHUB_STEP_SUMMARY
+          echo "| 编译器 | gcc |" >> $GITHUB_STEP_SUMMARY
+          echo "| 配置 | 默认（NEXUSFORCE_USING_MEMORY_POOL=ON，链接 NexusForceMemoryPoolOverride） |" >> $GITHUB_STEP_SUMMARY
+          echo "| 覆盖生效验证 | new/delete 计入 system_memory_pool() 统计 |" >> $GITHUB_STEP_SUMMARY

@@ -3448,7 +3448,7 @@ constexpr size_t alignment_of_v = alignment_of<T>::value;
  * @tparam Len 存储大小
  * @tparam Align 对齐要求
  */
-template <size_t Len, size_t Align = alignof(_NEFORCE max_align_t)>
+template <size_t Len, size_t Align = alignof(max_align_t)>
 struct aligned_storage {
     static_assert((Align & (Align - 1)) == 0, "Alignment must be power of two");
 
@@ -3465,7 +3465,7 @@ struct aligned_storage {
  * @typedef aligned_storage_t
  * @brief aligned_storage的便捷别名
  */
-template <size_t Len, size_t Align = alignof(_NEFORCE max_align_t)>
+template <size_t Len, size_t Align = alignof(max_align_t)>
 using aligned_storage_t = typename aligned_storage<Len, Align>::type;
 
 

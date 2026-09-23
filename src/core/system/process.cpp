@@ -11,6 +11,7 @@
 #    include <shellapi.h>
 #    include <securitybaseapi.h>
 #    include <TlHelp32.h>
+#    include <winternl.h>
 #    ifdef max
 #        undef max
 #    endif
@@ -137,7 +138,13 @@ namespace {
         }
     }
 
-    const auto page_size = sysinfo::instance().get_system_info().page_size;
+    uint32_t process_page_size() noexcept {
+        static const uint32_t cached = []() -> uint32_t {
+            const long ps = ::sysconf(::_SC_PAGESIZE);
+            return ps > 0 ? static_cast<uint32_t>(ps) : 4096;
+        }();
+        return cached;
+    }
 
     bool has_pkexec() noexcept { return ::access("/usr/bin/pkexec", X_OK) == 0; }
     bool has_sudo() noexcept { return ::access("/usr/bin/sudo", X_OK) == 0; }
@@ -1273,6 +1280,10 @@ process::memory_info process::get_memory_info(native_id_type process_id) {
     }
 
     ::CloseHandle(hProcess);
+
+    ::PROCESS_VM_COUNTERS vmc{};
+    ::NtQueryInformationProcess(hProcess, ProcessVmCounters, &vmc, sizeof(vmc), nullptr);
+    mem_info.virtual_size = vmc.VirtualSize;
 #else
     ::FILE* fp = ::fopen(("/proc/" + to_string(process_id) + "/statm").data(), "r");
     if (fp != nullptr) {
@@ -1304,13 +1315,14 @@ process::memory_info process::get_memory_info(native_id_type process_id) {
 
                 try {
                     return static_cast<unsigned long>(to_uint64(num_sv));
-                } catch (...) {
+                } catch (const exception& e) {
+                    NEFORCE_REPORT_EXCEPTION(e);
                     return 0;
                 }
             };
 
-            ignore = parse_next_ulong(); // size
-            mem_info.working_set_size = parse_next_ulong() * static_cast<size_t>(page_size);
+            mem_info.virtual_size = parse_next_ulong() * static_cast<size_t>(process_page_size());
+            mem_info.working_set_size = parse_next_ulong() * static_cast<size_t>(process_page_size());
         }
         ::fclose(fp);
     }
@@ -1380,6 +1392,8 @@ process::memory_info process::get_memory_info(native_id_type process_id) {
 #endif
     return mem_info;
 }
+
+process::memory_info process::current_memory_info() { return get_memory_info(current_id()); }
 
 process::state process::get_state(native_id_type process_id) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -1682,7 +1696,7 @@ string process::search_path(const string& executable) {
         return "";
     }
 
-    if (executable.find('/') != string::npos || executable.find('\\') != string::npos) {
+    if (executable.contains('/') || executable.contains('\\')) {
         return executable;
     }
 

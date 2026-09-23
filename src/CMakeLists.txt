@@ -60,6 +60,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/yaml/yaml_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/yaml/yaml_value.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/functional/hash.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/memory_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/random/engine.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/random/lcg.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/random/mt.cpp
@@ -213,6 +214,16 @@ target_compile_definitions(NexusForce
         NEXUSFORCE_VERSION_PATCH=${NEXUSFORCE_VERSION_PATCH}
         NEXUSFORCE_VERSION="${NEXUSFORCE_VERSION}"
 )
+
+if(NEXUSFORCE_USING_MEMORY_POOL)
+    target_sources(NexusForce PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/new.cpp)
+    target_compile_definitions(NexusForce PUBLIC NEFORCE_USING_MEMORY_POOL)
+    # The library's own allocation sites must bind to this library's replacement operators instead of libstdc++'s,
+    # whatever the load order of the consuming process is.
+    if(UNIX AND NOT APPLE)
+        target_link_options(NexusForce PRIVATE "LINKER:-Bsymbolic-functions")
+    endif()
+endif()
 
 if(NEXUSFORCE_USING_SSO)
     target_compile_definitions(NexusForce PUBLIC NEFORCE_USING_SSO)
@@ -435,6 +446,19 @@ message(STATUS "ICU linked successfully")
 message(STATUS "")
 
 
+# 全局分配器覆盖目标
+if(NEXUSFORCE_USING_MEMORY_POOL)
+    add_library(NexusForceMemoryPoolOverride OBJECT ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/new.cpp)
+    target_link_libraries(NexusForceMemoryPoolOverride PUBLIC NexusForce::NexusForce)
+    target_compile_definitions(NexusForceMemoryPoolOverride PRIVATE NEFORCE_USING_MEMORY_POOL)
+    set_target_properties(NexusForceMemoryPoolOverride PROPERTIES FOLDER "src")
+    nexusforce_compiler_options(NexusForceMemoryPoolOverride)
+
+    add_library(NexusForceMemoryPoolOverrideStatic STATIC $<TARGET_OBJECTS:NexusForceMemoryPoolOverride>)
+    target_link_libraries(NexusForceMemoryPoolOverrideStatic PUBLIC NexusForce::NexusForce)
+    set_target_properties(NexusForceMemoryPoolOverrideStatic PROPERTIES FOLDER "src")
+endif()
+
 # 安装库文件
 install(TARGETS NexusForce
         EXPORT NexusForceTargets
@@ -445,3 +469,10 @@ install(TARGETS NexusForce
 
         INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
+
+if(NEXUSFORCE_USING_MEMORY_POOL)
+    install(TARGETS NexusForceMemoryPoolOverrideStatic
+            EXPORT NexusForceTargets
+            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    )
+endif()

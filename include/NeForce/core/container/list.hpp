@@ -375,6 +375,124 @@ public:
     }
 
     /**
+     * @brief 使用指定分配器构造空链表
+     * @param alloc 分配器
+     */
+    explicit list(const allocator_type& alloc) :
+    pair_(exact_arg_construct_tag{}, alloc, 0) {
+        list::init_header();
+    }
+
+    /**
+     * @brief 使用指定分配器构造 n 个默认构造元素的链表
+     * @param n 元素数量
+     * @param alloc 分配器
+     */
+    explicit list(size_type n, const allocator_type& alloc) :
+    list(alloc) {
+        try {
+            while ((n--) != 0U) {
+                emplace_back();
+            }
+        } catch (...) {
+            clear();
+            throw;
+        }
+    }
+
+    /**
+     * @brief 使用指定分配器构造 n 个指定值元素的链表
+     * @param n 元素数量
+     * @param value 初始值
+     * @param alloc 分配器
+     */
+    list(size_type n, const T& value, const allocator_type& alloc) :
+    list(alloc) {
+        try {
+            while ((n--) != 0U) {
+                emplace_back(value);
+            }
+        } catch (...) {
+            clear();
+            throw;
+        }
+    }
+
+    /**
+     * @brief 拷贝构造并指定分配器
+     * @param other 源链表
+     * @param alloc 分配器
+     */
+    list(const list& other, const allocator_type& alloc) :
+    list(alloc) {
+        try {
+            for (auto iter = other.cbegin(); iter != other.cend(); ++iter) {
+                emplace_back(*iter);
+            }
+        } catch (...) {
+            clear();
+            throw;
+        }
+    }
+
+    /**
+     * @brief 移动构造并指定分配器
+     * @param other 源链表
+     * @param alloc 分配器
+     *
+     * 若分配器相等，则直接窃取节点；
+     * 否则逐元素移动构造，并清空源链表。
+     */
+    list(list&& other, const allocator_type& alloc) :
+    pair_(exact_arg_construct_tag{}, alloc, 0) {
+        list::init_header();
+
+        if (pair_.get_base() == other.get_allocator()) {
+            list::swap(other);
+            return;
+        }
+
+        try {
+            for (auto iter = other.begin(); iter != other.end(); ++iter) {
+                emplace_back(_NEFORCE move(*iter));
+            }
+            other.clear();
+        } catch (...) {
+            clear();
+            throw;
+        }
+    }
+
+    /**
+     * @brief 范围构造并指定分配器
+     * @tparam Iterator 迭代器类型
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     * @param alloc 分配器
+     */
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+    list(Iterator first, Iterator last, const allocator_type& alloc) :
+    list(alloc) {
+        try {
+            while (first != last) {
+                emplace_back(*first);
+                ++first;
+            }
+        } catch (...) {
+            clear();
+            throw;
+        }
+    }
+
+    /**
+     * @brief 初始化列表构造并指定分配器
+     * @param ilist 初始化列表
+     * @param alloc 分配器
+     */
+    list(std::initializer_list<T> ilist, const allocator_type& alloc) :
+    list(ilist.begin(), ilist.end(), alloc) {}
+
+    /**
      * @brief 析构函数
      *
      * 销毁所有元素并释放内存。
@@ -472,6 +590,11 @@ public:
      * @return 最大元素数量
      */
     NEFORCE_NODISCARD size_type max_size() const noexcept { return static_cast<size_type>(-1); }
+
+    /**
+     * @brief 获取当前分配器
+     */
+    NEFORCE_NODISCARD const allocator_type& get_allocator() const noexcept { return pair_.get_base(); }
 
     /**
      * @brief 检查是否为空

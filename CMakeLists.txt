@@ -33,6 +33,7 @@ string(JSON CONFIG_USING_SSO         GET ${JSON_CONTENT} feature sso)
 string(JSON CONFIG_USING_INTEL_TSX   GET ${JSON_CONTENT} feature intel-tsx)
 string(JSON CONFIG_USING_SQLCIPHER   GET ${JSON_CONTENT} feature sqlcipher)
 string(JSON CONFIG_USING_IO_URING    GET ${JSON_CONTENT} feature io_uring)
+string(JSON CONFIG_USING_MEMORY_POOL GET ${JSON_CONTENT} feature memory-pool)
 
 # Missing keys default to ON: keeps AES-NI/PCLMUL enabled on Linux/GCC by
 # default, aligned with the MSVC-always-available assumption.
@@ -171,12 +172,13 @@ option(NEXUSFORCE_ENABLE_REDIS      "Enable Redis database support"      ${CONFI
 option(NEXUSFORCE_ENABLE_ZLIB       "Enable zlib compression support"    ${CONFIG_ENABLE_ZLIB})
 option(NEXUSFORCE_ENABLE_LZ4        "Enable lz4 compression support"     ${CONFIG_ENABLE_LZ4})
 
-option(NEXUSFORCE_USING_SSO         "Using basic_string SSO"             ${CONFIG_USING_SSO})
-option(NEXUSFORCE_USING_INTEL_TSX   "Using Intel TSX"                    ${CONFIG_USING_INTEL_TSX})
-option(NEXUSFORCE_USING_SQLCIPHER   "Using SQLCipher"                    ${CONFIG_USING_SQLCIPHER})
-option(NEXUSFORCE_USING_IO_URING    "Using io uring"                     ${CONFIG_USING_IO_URING})
-option(NEXUSFORCE_USING_AES_NI      "Using AES-NI / AES crypto"          ${CONFIG_USING_AES_NI})
-option(NEXUSFORCE_USING_PCLMUL      "Using PCLMULQDQ / PMULL"            ${CONFIG_USING_PCLMUL})
+option(NEXUSFORCE_USING_SSO         "Using basic_string SSO"                   ${CONFIG_USING_SSO})
+option(NEXUSFORCE_USING_INTEL_TSX   "Using Intel TSX"                          ${CONFIG_USING_INTEL_TSX})
+option(NEXUSFORCE_USING_SQLCIPHER   "Using SQLCipher"                          ${CONFIG_USING_SQLCIPHER})
+option(NEXUSFORCE_USING_IO_URING    "Using io uring"                           ${CONFIG_USING_IO_URING})
+option(NEXUSFORCE_USING_AES_NI      "Using AES-NI / AES crypto"                ${CONFIG_USING_AES_NI})
+option(NEXUSFORCE_USING_PCLMUL      "Using PCLMULQDQ / PMULL"                  ${CONFIG_USING_PCLMUL})
+option(NEXUSFORCE_USING_MEMORY_POOL "Using memory pool to global operator new" ${CONFIG_USING_MEMORY_POOL})
 
 option(NEXUSFORCE_BUILD_TESTS       "Build unit tests"                   ${CONFIG_BUILD_TESTS})
 option(NEXUSFORCE_BUILD_EXAMPLES    "Build example programs"             ${CONFIG_BUILD_EXAMPLES})
@@ -213,6 +215,17 @@ option(NEXUSFORCE_ENABLE_TSAN       "Build with ThreadSanitizer"            OFF)
 _nexusforce_validate_sanitizers()
 _nexusforce_sanitizer_summary(NEXUSFORCE_SANITIZER_SUMMARY)
 
+# AddressSanitizer and ThreadSanitizer install their own operator new / delete,
+# and a second replacement in the same process makes both of them unreliable.
+# The pool itself stays enabled, only the global replacement is dropped,
+# so the sanitizer workflows keep working as documented.
+if(NEXUSFORCE_USING_MEMORY_POOL AND (NEXUSFORCE_ENABLE_ASAN OR NEXUSFORCE_ENABLE_TSAN))
+    message(WARNING
+            "NEXUSFORCE_ENABLE_ASAN / NEXUSFORCE_ENABLE_TSAN replace operator new themselves; "
+            "disabling NEXUSFORCE_USING_MEMORY_POOL for this build (memory_pool itself stays available).")
+    set(NEXUSFORCE_USING_MEMORY_POOL OFF)
+endif()
+
 
 message(STATUS "Project Configuration:")
 message(STATUS "")
@@ -236,6 +249,7 @@ message(STATUS "  NEXUSFORCE_USING_SQLCIPHER:     ${NEXUSFORCE_USING_SQLCIPHER}"
 message(STATUS "  NEXUSFORCE_USING_IO_URING:      ${NEXUSFORCE_USING_IO_URING}")
 message(STATUS "  NEXUSFORCE_USING_AES_NI:        ${NEXUSFORCE_USING_AES_NI}")
 message(STATUS "  NEXUSFORCE_USING_PCLMUL:        ${NEXUSFORCE_USING_PCLMUL}")
+message(STATUS "  NEXUSFORCE_USING_MEMORY_POOL:   ${NEXUSFORCE_USING_MEMORY_POOL}")
 message(STATUS "")
 message(STATUS "  NEXUSFORCE_BUILD_TESTS:         ${NEXUSFORCE_BUILD_TESTS}")
 message(STATUS "  NEXUSFORCE_BUILD_EXAMPLES:      ${NEXUSFORCE_BUILD_EXAMPLES}")

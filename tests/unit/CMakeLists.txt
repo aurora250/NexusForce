@@ -16,6 +16,7 @@ add_executable(NexusForceUnitTests
         test_iterator.cpp
         test_logging.cpp
         test_memory.cpp
+        test_memory_pool.cpp
         test_network.cpp
         test_network_ssl_tcp.cpp
         test_network_util.cpp

@@ -1014,6 +1014,66 @@ public:
     }
 
     /**
+     * @brief 使用指定分配器构造空红黑树
+     * @param alloc 分配器
+     */
+    explicit rb_tree(const allocator_type& alloc) :
+    size_pair_(exact_arg_construct_tag{}, alloc, 0) {
+        header_init();
+    }
+
+    /**
+     * @brief 使用指定比较函数和分配器构造空红黑树
+     * @param comp 比较函数对象
+     * @param alloc 分配器
+     */
+    rb_tree(const Compare& comp, const allocator_type& alloc) :
+    key_compare_(comp),
+    size_pair_(exact_arg_construct_tag{}, alloc, 0) {
+        header_init();
+    }
+
+    /**
+     * @brief 拷贝构造并指定分配器
+     * @param other 源红黑树
+     * @param alloc 分配器
+     */
+    rb_tree(const rb_tree& other, const allocator_type& alloc) :
+    key_compare_(other.key_compare_),
+    extracter_(other.extracter_),
+    size_pair_(exact_arg_construct_tag{}, alloc, 0) {
+        header_init();
+        rb_tree::copy_from(other);
+    }
+
+    /**
+     * @brief 移动构造并指定分配器
+     * @param other 源红黑树
+     * @param alloc 分配器
+     */
+    rb_tree(rb_tree&& other, const allocator_type& alloc) :
+    key_compare_(_NEFORCE move(other.key_compare_)),
+    extracter_(_NEFORCE move(other.extracter_)),
+    size_pair_(exact_arg_construct_tag{}, alloc, 0) {
+        header_init();
+
+        if (size_pair_.get_base() == other.size_pair_.get_base()) {
+            _NEFORCE swap(header_, other.header_);
+            _NEFORCE swap(size_pair_.value, other.size_pair_.value);
+        } else {
+            try {
+                for (auto iter = other.begin(); iter != other.end(); ++iter) {
+                    emplace_unique(_NEFORCE move(*iter));
+                }
+                other.clear();
+            } catch (...) {
+                clear();
+                throw;
+            }
+        }
+    }
+
+    /**
      * @brief 析构函数
      */
     ~rb_tree() {
@@ -1106,6 +1166,11 @@ public:
      * @return 最大元素数量
      */
     NEFORCE_NODISCARD size_type max_size() const noexcept { return static_cast<size_type>(-1); }
+
+    /**
+     * @brief 获取当前分配器
+     */
+    NEFORCE_NODISCARD const allocator_type& get_allocator() const noexcept { return size_pair_.get_base(); }
 
     /**
      * @brief 检查是否为空

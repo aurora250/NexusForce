@@ -24,10 +24,13 @@ NEFORCE_BEGIN_NAMESPACE__
 using nullptr_t = decltype(nullptr);
 
 /**
- * @typedef max_align_t
+ * @struct max_align_t
  * @brief 最大对齐类型
  */
-using max_align_t = double;
+struct max_align_t {
+    long long max_align_ll alignas(alignof(long long));
+    long double max_align_ld alignas(alignof(long double));
+};
 
 /**
  * @typedef byte_t
@@ -336,6 +339,13 @@ using intmax_t = int64_t;
  */
 using uintmax_t = uint64_t;
 
+/**
+ * @typedef align_t
+ * @brief 无符号对齐类型
+ */
+enum class align_t : size_t {
+};
+
 /** @} */ // PlatformDependentTypes
 
 /**
@@ -523,14 +533,35 @@ struct unpack_utility_construct_tag {
 
 /** @} */ // ConstructionTags
 
+/**
+ * @defgroup UtilTags 辅助标签
+ * @brief 辅助标签，用于快速使用简单的功能
+ * @{
+ */
+
+/**
+ * @struct ignore_t
+ * @brief 忽略返回值标签类型
+ */
 struct ignore_t {
     template <typename T>
-    NEFORCE_CONSTEXPR14 const ignore_t& operator=(const T& /*unused*/) const noexcept {
+    NEFORCE_ALWAYS_INLINE constexpr const ignore_t& operator=(const T& /*unused*/) const noexcept {
         return *this;
     }
 };
 
 NEFORCE_INLINE17 constexpr ignore_t ignore{};
+
+
+/**
+ * @struct nothrow_t
+ * @brief 不抛出错误标签类型
+ */
+struct nothrow_t {};
+
+NEFORCE_INLINE17 constexpr nothrow_t nothrow{};
+
+/** @} */ // UtilTags
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_TYPEINFO_TYPES_HPP__

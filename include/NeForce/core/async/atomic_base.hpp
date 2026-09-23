@@ -2656,7 +2656,7 @@ public:
      * @brief 构造函数
      * @param value 被引用的对象
      */
-    explicit atomic_ref_base(T& value) :
+    explicit constexpr atomic_ref_base(T& value) :
     ptr_(_NEFORCE addressof(value)) {
         NEFORCE_CONSTEXPR_ASSERT((static_cast<uintptr_t>(ptr_) % required_alignment) == 0);
     }
@@ -2807,7 +2807,7 @@ public:
      * @brief 构造函数
      * @param value 被引用的整数
      */
-    explicit atomic_ref_base(T& value) :
+    explicit constexpr atomic_ref_base(T& value) :
     ptr_(&value) {
         NEFORCE_CONSTEXPR_ASSERT((reinterpret_cast<uintptr_t>(ptr_) % required_alignment) == 0);
     }
@@ -3064,7 +3064,7 @@ public:
      * @brief 构造函数
      * @param value 被引用的浮点数
      */
-    explicit atomic_ref_base(Float& value) :
+    explicit constexpr atomic_ref_base(Float& value) :
     ptr_(&value) {
         NEFORCE_CONSTEXPR_ASSERT((static_cast<uintptr_t>(ptr_) % required_alignment) == 0);
     }
@@ -3263,7 +3263,7 @@ public:
      * @brief 构造函数
      * @param value 被引用的指针
      */
-    explicit atomic_ref_base(T*& value) :
+    explicit constexpr atomic_ref_base(T*& value) :
     ptr_(_NEFORCE addressof(value)) {
         NEFORCE_CONSTEXPR_ASSERT((static_cast<uintptr_t>(ptr_) % required_alignment) == 0);
     }

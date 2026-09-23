@@ -24,6 +24,9 @@
 - 添加 `random_seed()` 默认种子生成与 `splitmix64()` 种子扩展函数
 - 数学库新增 `exponential_e()`（实数指数 e^x）、`logarithm_1p()`（ln(1+x)）、`logarithm_factorial()`（ln(n!)）、`power_of_two()`（2 的整数次幂）与 `normalize_power_of_two()`（按 2 的整数次幂归一化）
 - 新增追加式格式化接口 `format_to(string&, fmt, args...)`：与 `format()` 语义一致但不新建字符串，供日志等高频路径复用目标缓冲
+- 添加高性能内存池组件 `memory_pool`：小对象由零块头 span 承担，尺寸类与归属通过进程级 64 KiB 槽位地址映射表查询，大对象直接映射操作系统内存并记录区域头部
+- 添加分配器 `pool_allocator<T>`，可直接用于容器
+- 添加全局 `operator new` / `delete` 覆盖选项 `NEXUSFORCE_USING_MEMORY_POOL`：库自身通过 `-Wl,-Bsymbolic-functions` 绑定本地定义，另提供 `NexusForceMemoryPoolOverride`（OBJECT）与 `NexusForceMemoryPoolOverrideStatic`（STATIC）目标，编入可执行文件即可获得进程级覆盖。
 
 ### 🔧 Improvements
 - `thread_pool` 新增存活巡检：定时器线程每 50 ms 检查，命中则唤醒全部停驻线程，任何丢唤醒状态都能在 50 ms 内自愈；正常提交/排空模式不会触发
@@ -107,6 +110,17 @@
 - `format_impl` 与 `format_named` 的字面量片段改为整段批量追加，替代逐字符 `push_back`，直接走 `basic_string` 的 SIMD 拷贝路径
 - 浮点格式化重写为尾数精确整数换算：以 1280 位定点大整数完成尾数 × 10^s 的精确缩放与移位，再以十进制串做半值取偶舍入；定点与科学计数法在任意量级（含次正规数、DBL_MAX、1e±300）均为正确舍入，取代原先逐次乘除 10 的定标循环（最坏约 320 次）与 `fraction × 10^p + 0.5` 的非精确舍入
 - `byte_size::to_string()` 移除 format 套 format（先用 `format(":.{}f")` 构造格式串再二次 `format`），改为直接调用 `to_string_fixed()`
+- `memory_pool` 线程缓存改为按尺寸类成对存放（每类 `{空闲链头, 数量}`，恰好占一条缓存行），此前链头数组与计数数组相距约 230 字节，一次分配要触碰两条缓存行
+- `memory_pool` 尺寸类查表改为 256 项表（覆盖 ≤ 256 字节的常见请求）加无分支位宽公式，取代原先最多三个比较分支；1 KiB 尺寸类的往返延迟由 glibc 的 1.13 倍降为 0.82 倍
+- `memory_pool` 批量归还按 span 分组拼接：同一 span 的连续块只做一次空闲链拼接与一次计数更新，临界区长度与批量块数解耦，`512 × 64 B` 批量模式由 1.77 倍降至 1.12 倍
+- `memory_pool` 空 span 保留预算调整为 2 MiB（每个尺寸类仍保留至少 1 个），混合尺寸 churn 后的常驻由 4.3 MB 降至 2.5 MB
+- `memory_pool` 分配快路径内联到头部，线程缓存命中不再进入库内函数，线程缓存访问次数由两次降为一次
+- 注意：内联快路径使线程缓存的内部布局成为编译期接口的一部分，升级库后消费方必须一并重新编译
+- `memory_pool` 线程缓存访问改用 initial-exec TLS 模型，消除每次分配经过的 `__tls_get_addr` 调用
+- `memory_pool` 空 span 保留策略由每个尺寸类保留 1 个改为全池字节预算 + 每类下限 1 个，突发负载不再每轮重建 span、不再逐块踩新页，`128×4 KiB` 批量路径吞吐提升约 20 倍
+- `memory_pool` refill 批量按线程缓存字节目标推导，小对象的加锁与链表搬运频率下降
+- `memory_pool` 批量释放时同一 64 KiB 槽位只查询一次地址映射表
+- `memory_pool` 新增每线程大对象区域缓存，大对象分配释放不再进入全池锁，线程退出时归还
 
 ### 🐛 Bug Fixes
 - 修复唤醒策略单靠空闲巡检线程数提示而可能漏唤醒、导致调用者永久阻塞的缺陷，改由存活巡检兜底
@@ -208,6 +222,10 @@
 - 修复型号字符串中 `GHz` 频率的截断：`2.40GHz` / `3.70GHz` 因十进制不可精确表示又被直接截断，改为四舍五入
 - 修复 valgrind 工作流把单元测试失败误报为内存泄漏：`--error-exitcode=1` 在 valgrind 未发现错误时会透传被测程序的退出码，任一用例失败即表现为"内存泄漏检查失败"，现改用 `99` 作为泄漏专用退出码并分别报错
 - 修复 Windows 上安装包缺失运行时依赖，导致安装前缀的 `NFRS.exe` 与下游消费者的可执行文件以 `0xc0000135`（STATUS_DLL_NOT_FOUND）启动失败：Windows 无 RPATH，安装期解析 NexusForce.dll 的依赖闭包（ICU、PCRE2、OpenSSL、zlib、lz4、hiredis、sqlcipher、libmysql、LIBPQ 等）并随安装包一并复制到 bin 目录
+- 修复内存池自旋锁在多线程下丢唤醒导致挂死，其唤醒被自身的等待计数门控，已经抬起竞争标记、尚未进入等待器的线程会错过唤醒而永久停驻，改为等待期望值固定为竞争标记 + 标记清零时无条件唤醒的两阶段协议
+- 修复 `memory_pool` 在线程缓存关闭时仍向线程缓存填充整批块的缺陷，此前这些块既不归还也不复用
+- 修复 `memory_pool` 尺寸类下标缺少边界校验的缺陷：`size_to_class()` 返回的大对象哨兵值在小对象路径被当作数组下标使用，现降级走大对象路径
+- 修复 `memory_pool` 超大请求（超过 2^46 字节）在区域尺寸计算中溢出的缺陷，现直接返回失败而不是映射一小块内存
 
 ### 📚 Documentation
 

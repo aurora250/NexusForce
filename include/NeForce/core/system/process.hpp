@@ -75,6 +75,7 @@ public:
      * 包含进程的工作集和页面文件使用情况。
      */
     struct memory_info {
+        size_t virtual_size{0};          /**< 虚拟内存大小（字节） */
         size_t working_set_size{0};      /**< 当前工作集大小（字节） */
         size_t peak_working_set_size{0}; /**< 峰值工作集大小（字节） */
         size_t pagefile_usage{0};        /**< 当前页面文件使用量（字节） */
@@ -441,8 +442,15 @@ public:
     /**
      * @brief 查询任意进程的内存信息
      * @param process_id 目标进程 ID
+     * @return 内存信息
      */
     NEFORCE_NODISCARD static memory_info get_memory_info(native_id_type process_id);
+
+    /**
+     * @brief 获取当前进程的内存信息
+     * @return 内存信息
+     */
+    NEFORCE_NODISCARD static memory_info current_memory_info();
 
     /**
      * @brief 查询任意进程的运行状态
