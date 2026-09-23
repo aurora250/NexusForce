@@ -1,12 +1,36 @@
 #include <NeForce/core/async/thread_pool.hpp>
 #include <NeForce/core/exception/terminate.hpp>
+#include <NeForce/core/memory/bit.hpp>
 #include <NeForce/core/string/string_builder.hpp>
-#include <NeForce/core/utility/packages.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
     atomic<uint32_t> g_pool_thread_id{0};
-}
+    atomic<uint32_t> g_affinity_cursor{0};
+
+    // Adaptive spin before parking: a worker that keeps finding work doubles its
+    // spin budget (so a busy pool never generates a futex wake-up per task),
+    // while a worker that burns a whole budget without finding work halves it and
+    // parks, so an idle pool costs essentially no CPU.
+    constexpr size_t idle_min_spin_rounds = 8;
+    constexpr size_t idle_max_spin_rounds = 512;
+    constexpr size_t idle_relax_cutoff = 128;
+    constexpr size_t idle_steal_rounds = 4;
+
+    // A worker that owns a deep local queue publishes one wake-up credit so a
+    // parked sibling can come and steal; the owner withdraws the credit as soon
+    // as its queue drops below the threshold again.
+    constexpr uint32_t local_steal_signal_depth = 8;
+
+    constexpr int64_t scaler_interval_ms = 1;
+    constexpr int64_t liveness_interval_ms = 50;
+    constexpr uint32_t scaler_slack = 1;
+
+    inline bool cpu_mask_test(const uint64_t mask, const uint32_t cpu) noexcept {
+        return (mask & (static_cast<uint64_t>(1) << cpu)) != 0ULL;
+    }
+} // namespace
+
 
 uint32_t thread_pool::thread_pool_id_generator::get_new_id() noexcept {
     return g_pool_thread_id.fetch_add(1, memory_order_relaxed);
@@ -175,7 +199,14 @@ id(other.id),
 is_stealing(other.is_stealing.load(memory_order_relaxed)),
 consecutive_idle_count(other.consecutive_idle_count),
 cpu_core(other.cpu_core),
-numa_node(other.numa_node) {}
+numa_node(other.numa_node),
+attached(other.attached.load(memory_order_relaxed)),
+published_size(other.published_size.load(memory_order_relaxed)),
+retire(other.retire.load(memory_order_relaxed)),
+completed(other.completed.load(memory_order_relaxed)),
+stolen(other.stolen.load(memory_order_relaxed)),
+failed(other.failed.load(memory_order_relaxed)),
+steal_signalled(other.steal_signalled) {}
 
 worker_context& worker_context::operator=(worker_context&& other) noexcept {
     if (addressof(other) == this) {
@@ -187,7 +218,34 @@ worker_context& worker_context::operator=(worker_context&& other) noexcept {
     consecutive_idle_count = other.consecutive_idle_count;
     cpu_core = other.cpu_core;
     numa_node = other.numa_node;
+    attached.store(other.attached.load(memory_order_relaxed), memory_order_relaxed);
+    published_size.store(other.published_size.load(memory_order_relaxed), memory_order_relaxed);
+    retire.store(other.retire.load(memory_order_relaxed), memory_order_relaxed);
+    completed.store(other.completed.load(memory_order_relaxed), memory_order_relaxed);
+    stolen.store(other.stolen.load(memory_order_relaxed), memory_order_relaxed);
+    failed.store(other.failed.load(memory_order_relaxed), memory_order_relaxed);
+    steal_signalled = other.steal_signalled;
+    spin_budget = other.spin_budget;
+    idle_counted = other.idle_counted;
     return *this;
+}
+
+void worker_context::reset() noexcept {
+    queue = local_queue();
+    id = 0;
+    is_stealing.store(false, memory_order_relaxed);
+    consecutive_idle_count = 0;
+    cpu_core = 0;
+    numa_node = 0;
+    attached.store(false, memory_order_relaxed);
+    published_size.store(0, memory_order_relaxed);
+    retire.store(false, memory_order_relaxed);
+    completed.store(0, memory_order_relaxed);
+    stolen.store(0, memory_order_relaxed);
+    failed.store(0, memory_order_relaxed);
+    steal_signalled = false;
+    spin_budget = 64;
+    idle_counted = false;
 }
 
 size_t thread_pool::max_thread_threshhold() noexcept {
@@ -207,265 +265,596 @@ string thread_pool::pool_statistics::to_string() const {
     return result.build();
 }
 
-void thread_pool::thread_function(const id_type thread_id) {
-    worker_context ctx;
-    ctx.id = thread_id;
+void thread_pool::publish_local_size(worker_context& ctx) {
+    const auto depth = static_cast<uint32_t>(ctx.queue.size());
+    ctx.published_size.store(depth, memory_order_release);
 
-    {
-        const auto& cpu_info = sysinfo::instance().get_CPU_info();
-        const uint32_t cpu_count = cpu_info.logical_processors;
-        uint32_t core = thread_id % (cpu_count > 0 ? cpu_count : 1);
-        if (numa_nodes_ != nullptr && !numa_nodes_->empty()) {
-            const auto& node = (*numa_nodes_)[thread_id % numa_nodes_->size()];
-            ctx.numa_node = node.node_id;
-            if (!node.core_list.empty()) {
-                core = node.core_list[thread_id % node.core_list.size()];
-            }
+    if (depth >= local_steal_signal_depth) {
+        if (!ctx.steal_signalled && parked_workers_.load(memory_order_relaxed) != 0U &&
+            idle_workers_.load(memory_order_relaxed) == 0U) {
+            ctx.steal_signalled = true;
+            wake_word_.fetch_add(1, memory_order_release);
+            wake_word_.notify_one();
         }
-        ctx.cpu_core = core;
-    }
-
-    {
-        lock<mutex> lock(worker_contexts_mtx_);
-        worker_contexts_.emplace(thread_id, move(ctx));
-        if (thread_id < worker_contexts_ptr_.size()) {
-            worker_contexts_ptr_[thread_id].store(&worker_contexts_[thread_id], memory_order_release);
-        }
-    }
-
-    get_worker_context() = &worker_contexts_[thread_id];
-    get_worker_context()->queue.set_steal_strategy(configured_steal_strategy_, configured_steal_batch_);
-    ++idle_thread_size_;
-    work_available_.notify_all();
-
-    auto last = system_clock::now();
-
-    for (;;) {
-        optional<task_type> task{};
-        worker_context& self = *get_worker_context();
-
-        // L1: local queue (hot path, zero contention)
-        if (!self.queue.empty()) {
-            task = self.queue.try_pop();
-        }
-
-        // L2: lock-free global queue
-        if (!task && global_queue_) {
-            auto ptr = global_queue_->try_pop();
-            if (ptr && *ptr) {
-                task = move(**ptr);
-                global_task_count_.fetch_sub(1, memory_order_relaxed);
-            } else if (global_task_count_.load(memory_order_acquire) > 0) {
-                // The counter indicates tasks are pending but try_pop returned empty.
-                // This occurs with the lock-free queue when a producer has stored data in the tail node but
-                // not yet advanced the tail pointer (transient empty window).
-                // Brief spin-and-retry before falling through to the idle path
-                // so that we do not escalate to deep sleep while tasks are actually available.
-                for (int r = 0; r < 16 && !task; ++r) {
-                    this_thread::relax();
-                    ptr = global_queue_->try_pop();
-                    if (ptr && *ptr) {
-                        task = move(**ptr);
-                        global_task_count_.fetch_sub(1, memory_order_relaxed);
-                    }
-                }
-            }
-        }
-
-        // L3: work-stealing
-        if (!task) {
-            task = try_steal_task(self);
-        }
-
-        // L4: priority queue (rare path)
-        if (!task) {
-            lock<mutex> lk(priority_mtx_);
-            if (!priority_queue_.empty()) {
-                task = priority_queue_.top().task;
-                priority_queue_.pop();
-            }
-        }
-
-        if (task) {
-            self.consecutive_idle_count = 0;
-            --idle_thread_size_;
-            (*task)();
-            ++total_completed_tasks_;
-            ++idle_thread_size_;
-            last = system_clock::now();
-        } else {
-            ++self.consecutive_idle_count;
-
-            // If the submission counter indicates pending tasks,
-            // do not escalate the idle level — the lock-free queue may be
-            // in a transient empty window (data stored before tail advanced).
-            // Yield and retry so that we do not drift into deep sleep while work is available.
-            //
-            // Only applies while the pool is running; when !is_running
-            // we must fall through to the CV-wait path where the exit check lives,
-            // otherwise workers would spin forever during shutdown.
-            if (is_running_.load(memory_order_relaxed) && global_task_count_.load(memory_order_acquire) > 0) {
-                this_thread::yield();
-                continue;
-            }
-
-            if (self.consecutive_idle_count < 16) {
-                this_thread::relax();
-                if (is_running_.load(memory_order_relaxed)) {
-                    continue;
-                }
-            } else if (self.consecutive_idle_count < 256) {
-                this_thread::yield();
-                if (is_running_.load(memory_order_relaxed)) {
-                    continue;
-                }
-            }
-
-            // Deep idle: CV wait
-            unique_lock<mutex> lk(work_available_mtx_);
-
-            if (!is_running_) {
-                --idle_thread_size_;
-                {
-                    lock<mutex> ctx_lock(worker_contexts_mtx_);
-                    if (thread_id < worker_contexts_ptr_.size()) {
-                        worker_contexts_ptr_[thread_id].store(nullptr, memory_order_release);
-                    }
-                    worker_contexts_.erase(thread_id);
-                    threads_map_.erase(thread_id);
-                    if (threads_map_.empty()) {
-                        exit_cond_.notify_all();
-                    }
-                }
-                lk.unlock_quiet();
-                get_worker_context() = nullptr;
-                return;
-            }
-
-            if (pool_mode_ == pool_mode::cached) {
-                work_available_.wait_for(lk, seconds(1));
-                auto now = system_clock::now();
-                const auto sub = time_cast<seconds>(now - last);
-                if (sub.count() >= static_cast<int64_t>(max_idle_seconds) && threads_map_.size() > init_thread_size_) {
-                    --idle_thread_size_;
-                    {
-                        lock<mutex> ctx_lock(worker_contexts_mtx_);
-                        if (thread_id < worker_contexts_ptr_.size()) {
-                            worker_contexts_ptr_[thread_id].store(nullptr, memory_order_release);
-                        }
-                        worker_contexts_.erase(thread_id);
-                        threads_map_.erase(thread_id);
-                        if (threads_map_.empty()) {
-                            exit_cond_.notify_all();
-                        }
-                    }
-                    lk.unlock_quiet();
-                    get_worker_context() = nullptr;
-                    return;
-                }
-            } else {
-                work_available_.wait_for(lk, milliseconds(1));
-            }
-        }
+    } else {
+        ctx.steal_signalled = false;
     }
 }
 
-optional<thread_pool::task_type> thread_pool::try_steal_task(worker_context& ctx) {
-    if (ctx.consecutive_idle_count > 10 && ctx.consecutive_idle_count % 4 != 0) {
-        return none;
+void thread_pool::wake_workers(const uint32_t backlog) noexcept {
+    const uint32_t parked = parked_workers_.load(memory_order_relaxed);
+    if (parked == 0U) {
+        return;
     }
-    if (steal_worker_count_.load(memory_order_acquire) >= worker_contexts_ptr_.size() / 2) {
+
+    const uint32_t idle = idle_workers_.load(memory_order_relaxed);
+
+    // Workers that are already polling pick the backlog up on their own, so a
+    // pool with enough awake workers costs no syscall at all. Liveness does not
+    // depend on this shortcut: liveness_tick() prods the pool whenever queued
+    // work stops making progress.
+    if (idle >= backlog) {
+        return;
+    }
+
+    wake_word_.fetch_add(1, memory_order_release);
+    if (backlog > idle + 1U) {
+        wake_word_.notify_all();
+    } else {
+        wake_word_.notify_one();
+    }
+}
+
+optional<thread_pool::task_type> thread_pool::try_take_priority() {
+    if (priority_pending_.load(memory_order_acquire) == 0U) {
         return none;
     }
 
-    steal_worker_count_.fetch_add(1, memory_order_release);
-    ctx.is_stealing.store(true, memory_order_release);
+    lock<mutex> lk(priority_mtx_);
+    if (priority_queue_.empty()) {
+        return none;
+    }
+
+    auto task = priority_queue_.top().task;
+    priority_queue_.pop();
+    priority_pending_.fetch_sub(1, memory_order_acq_rel);
+    pending_tasks_.fetch_sub(1, memory_order_acq_rel);
+    return task;
+}
+
+optional<thread_pool::task_type> thread_pool::try_steal_task(worker_context& ctx) {
+    if (ctx.consecutive_idle_count < idle_steal_rounds) {
+        return none;
+    }
+
+    const uint32_t active = attached_workers_.load(memory_order_acquire);
+    if (active < 2U) {
+        return none;
+    }
+    if (steal_worker_count_.load(memory_order_acquire) >= (active + 1U) / 2U) {
+        return none;
+    }
+
+    // A context is only read after its attached flag was observed true, and the
+    // acquire path waits for steal_worker_count_ to drain before a context is
+    // reused, so no global lock is needed to keep contexts alive.
+    steal_worker_count_.fetch_add(1, memory_order_acq_rel);
+    ctx.is_stealing.store(true, memory_order_relaxed);
 
     const uint32_t my_node = ctx.numa_node;
     const bool has_numa = (numa_nodes_ != nullptr && !numa_nodes_->empty());
 
-    worker_context* same_node_target = nullptr;
-    size_t same_node_max = 0;
-    worker_context* cross_node_target = nullptr;
-    size_t cross_node_max = 0;
+    worker_context* best = nullptr;
+    uint32_t best_size = 0;
 
-    // Hold worker_contexts_mtx_ for the entire scan+steal to prevent
-    // target workers from exiting and destroying their context mid-access.
-    lock<mutex> lock(worker_contexts_mtx_);
-
-    for (auto& atomic_ptr: worker_contexts_ptr_) {
-        worker_context* ptr = atomic_ptr.load(memory_order_acquire);
-        if (ptr == nullptr || ptr->id == ctx.id || ptr->is_stealing.load(memory_order_acquire)) {
+    for (size_t i = 0; i < worker_index_.size(); ++i) {
+        worker_context* target = worker_index_[i].load(memory_order_acquire);
+        if (target == nullptr || target == &ctx) {
+            continue;
+        }
+        if (!target->attached.load(memory_order_acquire)) {
+            continue;
+        }
+        if (target->is_stealing.load(memory_order_relaxed)) {
             continue;
         }
 
-        const size_t other_size = ptr->queue.size();
-        if (other_size == 0) {
+        const uint32_t depth = target->published_size.load(memory_order_acquire);
+        if (depth == 0U) {
             continue;
         }
 
-        if (has_numa && ptr->numa_node == my_node) {
-            if (other_size > same_node_max) {
-                same_node_max = other_size;
-                same_node_target = ptr;
+        if (has_numa && target->numa_node != my_node) {
+            if (depth > best_size + 4U) {
+                best = target;
+                best_size = depth;
             }
-        } else {
-            if (other_size > cross_node_max) {
-                cross_node_max = other_size;
-                cross_node_target = ptr;
-            }
+        } else if (depth > best_size) {
+            best = target;
+            best_size = depth;
         }
     }
 
-    optional<task_type> result;
-
-    // Prefer same-NUMA-node stealing
-    if (same_node_target != nullptr && same_node_max > 0) {
-        result = same_node_target->queue.be_stolen_by(ctx.queue);
+    optional<task_type> result{none};
+    if (best != nullptr) {
+        result = best->queue.be_stolen_by(ctx.queue);
         if (result) {
-            total_stolen_tasks_.fetch_add(1, memory_order_relaxed);
+            ctx.stolen.fetch_add(1, memory_order_relaxed);
+            publish_local_size(ctx);
         }
     }
 
-    // Cross-NUMA fallback: only if remote queue is significantly larger
-    if (!result && cross_node_target != nullptr && cross_node_max > 4) {
-        result = cross_node_target->queue.be_stolen_by(ctx.queue);
-        if (result) {
-            total_stolen_tasks_.fetch_add(1, memory_order_relaxed);
-        }
-    }
-
-    ctx.is_stealing.store(false, memory_order_release);
-    steal_worker_count_.fetch_sub(1, memory_order_release);
-
+    ctx.is_stealing.store(false, memory_order_relaxed);
+    steal_worker_count_.fetch_sub(1, memory_order_acq_rel);
     return result;
+}
+
+void thread_pool::apply_affinity(worker_context& ctx, const size_t slot_index) {
+    auto core = static_cast<uint32_t>(slot_index);
+
+    if (numa_nodes_ != nullptr && !numa_nodes_->empty()) {
+        const auto& node = (*numa_nodes_)[slot_index % numa_nodes_->size()];
+        ctx.numa_node = node.node_id;
+        if (!node.core_list.empty()) {
+            core = node.core_list[slot_index % node.core_list.size()];
+        }
+    }
+
+    const uint64_t allowed = allowed_cpus_;
+    if (allowed != 0ULL && !cpu_mask_test(allowed, core)) {
+        // The computed core is outside the process CPU mask (taskset, cgroups):
+        // fall back to a CPU of the allowed set, rotating across pools.
+        const auto total = static_cast<uint32_t>(popcount64(allowed));
+        if (total != 0U) {
+            const auto wanted = g_affinity_cursor.fetch_add(1, memory_order_relaxed) % total;
+            uint32_t seen = 0;
+            for (uint32_t cpu = 0; cpu < 64U; ++cpu) {
+                if (!cpu_mask_test(allowed, cpu)) {
+                    continue;
+                }
+                if (seen == wanted) {
+                    core = cpu;
+                    break;
+                }
+                ++seen;
+            }
+        }
+    }
+
+    ctx.cpu_core = core;
+
+    if (affinity_enabled_.load(memory_order_relaxed) && allowed != 0ULL && cpu_mask_test(allowed, core)) {
+        this_thread::set_affinity(static_cast<size_t>(static_cast<uint64_t>(1) << core));
+    }
+}
+
+size_t thread_pool::acquire_slot() {
+    lock<mutex> lk(workers_mtx_);
+
+    for (size_t i = 0; i < worker_slots_.size(); ++i) {
+        if (worker_slots_[i] && !worker_slots_[i]->used) {
+            worker_slots_[i]->used = true;
+            return i;
+        }
+    }
+
+    if (worker_slots_.size() >= thread_threshhold_) {
+        return numeric_traits<size_t>::max();
+    }
+
+    auto slot = make_unique<worker_slot>();
+    slot->context = make_unique<worker_context>();
+    slot->used = true;
+    worker_slots_.emplace_back(_NEFORCE move(slot));
+    return worker_slots_.size() - 1;
+}
+
+bool thread_pool::spawn_worker() {
+    const size_t slot_index = acquire_slot();
+    if (slot_index == numeric_traits<size_t>::max() || slot_index >= worker_index_.size()) {
+        return false;
+    }
+
+    const auto& slot = worker_slots_[slot_index];
+
+    // A context may only be reused once every thief that observed it is gone:
+    // steal_worker_count_ is bumped before any context field is touched.
+    while (steal_worker_count_.load(memory_order_acquire) != 0U) {
+        this_thread::yield();
+    }
+    slot->context->reset();
+    slot->id = thread_pool_id_generator::get_new_id();
+    slot->context->id = slot->id;
+    worker_index_[slot_index].store(slot->context.get(), memory_order_release);
+
+    auto worker_func = [this, slot_index] { thread_function(slot_index); };
+    slot->thread = make_unique<lazy_thread>(_NEFORCE move(worker_func));
+    slot->thread->start();
+    slot->thread->detach();
+    return true;
+}
+
+bool thread_pool::dispatch_task(task_type&& job, const priority_type priority, const shared_ptr<task_info>& info) {
+    if (static_cast<uint32_t>(priority) > 0) {
+        {
+            lock<mutex> lk(priority_mtx_);
+            priority_queue_.emplace(_NEFORCE move(job), priority, info);
+        }
+        priority_pending_.fetch_add(1, memory_order_release);
+        const uint32_t priority_before = pending_tasks_.fetch_add(1, memory_order_release);
+        ++total_submitted_tasks_;
+        wake_workers(priority_before + 1U);
+        return true;
+    }
+
+    auto* ctx = get_worker_context();
+    if (ctx != nullptr && ctx->queue.remain_size() > 0U) {
+        ctx->queue.push_back(_NEFORCE move(job));
+        publish_local_size(*ctx);
+        ++total_submitted_tasks_;
+        return true;
+    }
+
+    const uint32_t pending_before = pending_tasks_.fetch_add(1, memory_order_acq_rel);
+    if (global_queue_ == nullptr || pending_before >= task_threshhold_ || !global_queue_->enqueue(_NEFORCE move(job))) {
+        pending_tasks_.fetch_sub(1, memory_order_acq_rel);
+        return false;
+    }
+
+    ++total_submitted_tasks_;
+    wake_workers(pending_before + 1U);
+    return true;
+}
+
+void thread_pool::liveness_tick() {
+    // Safety net for the whole family of lost-wakeup states: if work is queued
+    // while every worker is parked (or busy with something that never returns),
+    // prod the pool instead of leaving the submitter blocked forever. It runs on
+    // the timer thread every liveness_interval_ms and costs one timer entry.
+    const uint32_t pending = pending_tasks_.load(memory_order_acquire);
+
+    size_t completed = 0;
+    for (size_t i = 0; i < worker_slots_.size(); ++i) {
+        if (worker_slots_[i] && worker_slots_[i]->context) {
+            completed += worker_slots_[i]->context->completed.load(memory_order_relaxed);
+        }
+    }
+
+    // Only a genuine stall (queued work plus zero progress during a whole tick)
+    // triggers the prod, so the normal submit/drain pattern never sees an extra
+    // wake-up storm.
+    if (pending != 0U && completed == liveness_completed_ && parked_workers_.load(memory_order_relaxed) != 0U &&
+        idle_workers_.load(memory_order_relaxed) == 0U) {
+        wake_word_.fetch_add(1, memory_order_release);
+        wake_word_.notify_all();
+    }
+    liveness_completed_ = completed;
+
+    if (is_running_.load(memory_order_acquire) && timer_) {
+        timer_->add_task(steady_clock::now() + milliseconds(liveness_interval_ms), [this] { liveness_tick(); });
+    }
+}
+
+void thread_pool::prewarm_dispatch(const int64_t deadline_ns) {
+    if (!is_running_.load(memory_order_acquire)) {
+        return;
+    }
+
+    // Whichever worker claims the hint first keeps spinning until the deadline;
+    // the claim also keeps every other idle worker parked, so at most one core is
+    // spent on warm-up.
+    warm_deadline_ns_.store(deadline_ns, memory_order_release);
+    wake_word_.fetch_add(1, memory_order_release);
+    wake_word_.notify_one();
+}
+
+bool thread_pool::hold_warm_spin(worker_context& self) {
+    const auto deadline = warm_deadline_ns_.load(memory_order_acquire);
+    if (deadline == 0) {
+        return false;
+    }
+
+    const auto now_ns = time_cast<nanoseconds>(steady_clock::now() - steady_clock::time_point{}).count();
+    if (now_ns >= deadline) {
+        if (warm_owner_.load(memory_order_acquire) == static_cast<int32_t>(self.id)) {
+            warm_owner_.store(-1, memory_order_release);
+            warm_deadline_ns_.store(0, memory_order_release);
+        }
+        return false;
+    }
+
+    int32_t expected = -1;
+    if (warm_owner_.compare_exchange_strong(expected, static_cast<int32_t>(self.id), memory_order_acq_rel,
+                                            memory_order_acquire) ||
+        expected == static_cast<int32_t>(self.id)) {
+        while (is_running_.load(memory_order_acquire)) {
+            const auto tick = time_cast<nanoseconds>(steady_clock::now() - steady_clock::time_point{}).count();
+            if (tick >= deadline) {
+                break;
+            }
+            this_thread::relax();
+        }
+        warm_owner_.store(-1, memory_order_release);
+        warm_deadline_ns_.store(0, memory_order_release);
+        return true;
+    }
+
+    return false;
+}
+
+void thread_pool::worker_cleanup(const size_t slot_index) {
+    const auto& slot = worker_slots_[slot_index];
+    worker_context* const ctx = slot->context.get();
+
+    if (ctx != nullptr) {
+        ctx->attached.store(false, memory_order_release);
+
+        if (ctx->idle_counted) {
+            ctx->idle_counted = false;
+            idle_workers_.fetch_sub(1, memory_order_relaxed);
+        }
+
+        // Finish the tasks this worker still owns instead of dropping them.
+        for (;;) {
+            auto remaining = ctx->queue.try_pop();
+            if (!remaining) {
+                break;
+            }
+            if (*remaining) {
+                try {
+                    (*remaining)();
+                    ctx->completed.fetch_add(1, memory_order_relaxed);
+                } catch (...) {
+                    ctx->failed.fetch_add(1, memory_order_relaxed);
+                }
+            }
+        }
+
+        ctx->steal_signalled = false;
+    }
+
+    worker_index_[slot_index].store(nullptr, memory_order_release);
+    get_worker_context() = nullptr;
+
+    {
+        lock<mutex> lk(workers_mtx_);
+        slot->used = false;
+    }
+
+    attached_workers_.fetch_sub(1, memory_order_acq_rel);
+    attached_workers_.notify_all();
+}
+
+void thread_pool::thread_function(const size_t slot_index) {
+    worker_context* const self_ptr = worker_index_[slot_index].load(memory_order_acquire);
+    if (self_ptr == nullptr) {
+        return;
+    }
+    worker_context& self = *self_ptr;
+
+    get_worker_context() = &self;
+    self.queue.set_steal_strategy(configured_steal_strategy_, configured_steal_batch_);
+    apply_affinity(self, slot_index);
+
+    self.attached.store(true, memory_order_release);
+    attached_workers_.fetch_add(1, memory_order_acq_rel);
+    attached_workers_.notify_all();
+
+    const auto take_task = [this, &self]() -> optional<task_type> {
+        auto task = try_take_priority();
+        if (task) {
+            return task;
+        }
+
+        if (!self.queue.empty()) {
+            task = self.queue.try_pop();
+            publish_local_size(self);
+            if (task) {
+                return task;
+            }
+        }
+
+        if (global_queue_) {
+            task_type item;
+            if (global_queue_->try_dequeue(item)) {
+                pending_tasks_.fetch_sub(1, memory_order_acq_rel);
+                return optional<task_type>{_NEFORCE move(item)};
+            }
+        }
+
+        return try_steal_task(self);
+    };
+
+    const auto execute = [&self](task_type& task) {
+        try {
+            task();
+            self.completed.fetch_add(1, memory_order_relaxed);
+        } catch (...) {
+            // A task must never be able to kill its worker thread.
+            self.failed.fetch_add(1, memory_order_relaxed);
+        }
+    };
+
+    for (;;) {
+        auto task = take_task();
+        if (task) {
+            if (self.idle_counted) {
+                self.idle_counted = false;
+                idle_workers_.fetch_sub(1, memory_order_relaxed);
+            }
+            if (self.spin_budget < idle_max_spin_rounds) {
+                self.spin_budget <<= 1;
+            }
+            self.consecutive_idle_count = 0;
+            wake_workers(pending_tasks_.load(memory_order_acquire));
+            execute(*task);
+            continue;
+        }
+
+        if (!is_running_.load(memory_order_acquire) || self.retire.load(memory_order_acquire)) {
+            break;
+        }
+
+        if (hold_warm_spin(self)) {
+            if (self.idle_counted) {
+                self.idle_counted = false;
+                idle_workers_.fetch_sub(1, memory_order_relaxed);
+            }
+            self.consecutive_idle_count = 0;
+            continue;
+        }
+
+        ++self.consecutive_idle_count;
+        if (self.consecutive_idle_count == 1 && !self.idle_counted) {
+            self.idle_counted = true;
+            idle_workers_.fetch_add(1, memory_order_relaxed);
+        }
+        if (self.consecutive_idle_count <= self.spin_budget) {
+            if (self.consecutive_idle_count <= idle_relax_cutoff) {
+                this_thread::relax();
+            } else {
+                this_thread::yield();
+            }
+            continue;
+        }
+
+        // Only shrink the spin budget when the pool really has nothing to do,
+        // so a hot pool keeps its workers ready instead of parking and paying a
+        // wake-up syscall per submission.
+        if (pending_tasks_.load(memory_order_acquire) == 0U && self.spin_budget > idle_min_spin_rounds) {
+            self.spin_budget >>= 1;
+        }
+        if (self.idle_counted) {
+            self.idle_counted = false;
+            idle_workers_.fetch_sub(1, memory_order_relaxed);
+        }
+
+        // Park on wake_word_: a producer bumps it only after the task has been
+        // published, so a parked worker can never miss a wake-up and a parked
+        // pool costs no CPU. The word only ever grows, so the wait cannot be
+        // disturbed by counter bookkeeping.
+        const uint32_t observed = wake_word_.load(memory_order_acquire);
+        parked_workers_.fetch_add(1, memory_order_relaxed);
+
+        task = take_task();
+        if (task) {
+            parked_workers_.fetch_sub(1, memory_order_relaxed);
+            self.consecutive_idle_count = 0;
+            wake_workers(pending_tasks_.load(memory_order_acquire));
+            execute(*task);
+            continue;
+        }
+
+        if (wake_word_.load(memory_order_acquire) == observed) {
+            self.consecutive_idle_count = 0;
+            wake_word_.wait(observed, memory_order_acquire);
+        }
+        parked_workers_.fetch_sub(1, memory_order_relaxed);
+        self.consecutive_idle_count = self.spin_budget;
+    }
+
+    worker_cleanup(slot_index);
+}
+
+void thread_pool::scaler_function() {
+    while (!scaler_stop_.load(memory_order_acquire)) {
+        this_thread::sleep_for_ms(scaler_interval_ms);
+        if (scaler_stop_.load(memory_order_acquire) || !is_running_.load(memory_order_acquire)) {
+            break;
+        }
+        if (pool_mode_.load(memory_order_relaxed) != pool_mode::cached) {
+            continue;
+        }
+
+        const uint32_t attached = attached_workers_.load(memory_order_acquire);
+        const uint32_t parked = parked_workers_.load(memory_order_relaxed);
+        const uint32_t pending = pending_tasks_.load(memory_order_acquire);
+
+        // Grow only when there is more runnable work than workers, shrink only
+        // with a slack, so the pool does not oscillate around the balance point.
+        // A large backlog ramps several workers per tick instead of one, which is
+        // what keeps cached mode competitive with a fixed pool under a burst.
+        if (pending > attached && attached < thread_threshhold_) {
+            uint32_t step = pending / (attached == 0U ? 1U : attached);
+            step = step == 0U ? 1U : min(step, static_cast<uint32_t>(4));
+            for (uint32_t i = 0; i < step; ++i) {
+                if (attached_workers_.load(memory_order_acquire) >= thread_threshhold_) {
+                    break;
+                }
+                spawn_worker();
+            }
+            continue;
+        }
+
+        if (attached > init_thread_size_ && parked > pending + scaler_slack) {
+            for (size_t i = 0; i < worker_index_.size(); ++i) {
+                worker_context* target = worker_index_[i].load(memory_order_acquire);
+                if (target == nullptr || !target->attached.load(memory_order_acquire)) {
+                    continue;
+                }
+                if (target->published_size.load(memory_order_acquire) != 0U) {
+                    continue;
+                }
+
+                target->retire.store(true, memory_order_release);
+                wake_word_.fetch_add(1, memory_order_release);
+                wake_word_.notify_all();
+                break;
+            }
+        }
+    }
 }
 
 thread_pool::pool_statistics thread_pool::statistics_unsafe() const {
     pool_statistics stats{};
-    stats.total_threads = threads_map_.size();
-    stats.idle_threads = idle_thread_size_.load();
+    size_t completed = 0;
+    size_t stolen = 0;
+    size_t attached = 0;
+
+    for (size_t i = 0; i < worker_slots_.size(); ++i) {
+        if (!worker_slots_[i]) {
+            continue;
+        }
+        const auto* ctx = worker_slots_[i]->context.get();
+        if (ctx == nullptr) {
+            continue;
+        }
+        completed += ctx->completed.load(memory_order_relaxed);
+        stolen += ctx->stolen.load(memory_order_relaxed);
+        if (ctx->attached.load(memory_order_acquire)) {
+            ++attached;
+        }
+    }
+
+    stats.total_threads = attached;
+    stats.idle_threads = parked_workers_.load(memory_order_relaxed);
     stats.busy_threads = stats.total_threads > stats.idle_threads ? stats.total_threads - stats.idle_threads : 0;
-    stats.queue_size = global_task_count_.load();
-    stats.total_submitted = total_submitted_tasks_.load();
-    stats.total_stolen = total_stolen_tasks_.load();
-    stats.total_completed = total_completed_tasks_.load();
+    stats.queue_size = pending_tasks_.load(memory_order_acquire);
+    stats.total_submitted = total_submitted_tasks_.load(memory_order_relaxed);
+    stats.total_stolen = stolen;
+    stats.total_completed = completed;
     return stats;
 }
 
 thread_pool::thread_pool() :
+timer_(make_unique<timer_scheduler<steady_clock>>()),
 thread_threshhold_{max_thread_threshhold()} {
-    worker_contexts_.reserve(thread_threshhold_);
-    worker_contexts_ptr_.reserve(thread_threshhold_);
-    for (size_t i = 0; i < thread_threshhold_; ++i) {
-        atomic<worker_context*> tmp;
-        tmp.store(nullptr, memory_order_relaxed);
-        worker_contexts_ptr_.emplace_back(move(tmp));
+    worker_slots_.reserve(thread_threshhold_);
+    reset_worker_index(thread_threshhold_);
+}
+
+void thread_pool::reset_worker_index(const size_t capacity) {
+    worker_index_.clear();
+    worker_index_.reserve(capacity);
+    for (size_t i = 0; i < capacity; ++i) {
+        atomic<worker_context*> empty;
+        empty.store(nullptr, memory_order_relaxed);
+        worker_index_.emplace_back(_NEFORCE move(empty));
     }
 }
 
 thread_pool::~thread_pool() {
-    if (!is_running_) {
+    if (!is_running_.load(memory_order_acquire)) {
         return;
     }
     try {
@@ -476,15 +865,15 @@ thread_pool::~thread_pool() {
 }
 
 bool thread_pool::set_mode(const pool_mode mode) noexcept {
-    if (is_running_) {
+    if (is_running_.load(memory_order_acquire)) {
         return false;
     }
-    pool_mode_ = mode;
+    pool_mode_.store(mode, memory_order_relaxed);
     return true;
 }
 
 bool thread_pool::set_steal_mode(const steal_strategy strategy, const uint32_t steal_batch) noexcept {
-    if (is_running_) {
+    if (is_running_.load(memory_order_acquire)) {
         return false;
     }
     configured_steal_strategy_ = strategy;
@@ -492,97 +881,163 @@ bool thread_pool::set_steal_mode(const steal_strategy strategy, const uint32_t s
     return true;
 }
 
+bool thread_pool::set_warmup_window(const int64_t window_us) noexcept {
+    if (is_running_.load(memory_order_acquire)) {
+        return false;
+    }
+    warmup_window_us_ = window_us > 0 ? window_us : 0;
+    return true;
+}
+
+void thread_pool::set_task_tracking(const bool enable) noexcept {
+    task_tracking_enabled_.store(enable, memory_order_relaxed);
+}
+
+shared_ptr<task_info> thread_pool::make_task_info(const priority_type priority) {
+    if (!task_tracking_enabled_.load(memory_order_relaxed)) {
+        // One shared placeholder keeps submit_result::task_info non-null while
+        // removing the per-task allocation from the hot path entirely.
+        static shared_ptr<task_info> placeholder = make_shared<task_info>(0, priority);
+        return placeholder;
+    }
+    return make_shared<task_info>(generate_task_id(), priority);
+}
+
+bool thread_pool::set_cpu_affinity(const bool enable) noexcept {
+    if (is_running_.load(memory_order_acquire)) {
+        return false;
+    }
+    affinity_enabled_.store(enable, memory_order_relaxed);
+    return true;
+}
+
 bool thread_pool::set_task_threshhold(const size_t threshhold) noexcept {
-    if (is_running_) {
+    if (is_running_.load(memory_order_acquire)) {
         return false;
     }
     task_threshhold_ = threshhold;
     return true;
 }
 
-bool thread_pool::set_thread_threshhold(const size_t threshhold) noexcept {
-    if (is_running_ || pool_mode_ == pool_mode::fixed) {
+bool thread_pool::set_thread_threshhold(const size_t threshhold) {
+    if (is_running_.load(memory_order_acquire) || pool_mode_.load(memory_order_relaxed) == pool_mode::fixed) {
         return false;
     }
+
     thread_threshhold_ = threshhold > max_thread_threshhold() ? max_thread_threshhold() : threshhold;
+    if (thread_threshhold_ == 0) {
+        thread_threshhold_ = 1;
+    }
+
+    lock<mutex> lk(workers_mtx_);
+    worker_slots_.clear();
+    reset_worker_index(thread_threshhold_);
+    worker_slots_.reserve(thread_threshhold_);
     return true;
 }
 
 thread_pool::pool_statistics thread_pool::statistics() const { return statistics_unsafe(); }
 
 bool thread_pool::start(const size_t init_thread_size) {
-    if (is_running_) {
+    if (is_running_.load(memory_order_acquire)) {
         return false;
     }
 
-    {
-        const auto& numa_info = sysinfo::instance().get_numa_info();
-        if (!numa_info.empty()) {
-            numa_nodes_ = &numa_info;
-        }
+    const auto& numa_info = sysinfo::instance().get_numa_info();
+    numa_nodes_ = numa_info.empty() ? nullptr : &numa_info;
+
+    global_queue_ = make_unique<lock_free_queue<task_type>>();
+    timer_ = make_unique<timer_scheduler<steady_clock>>();
+
+    uint64_t allowed = 0;
+    if (!this_thread::affinity(allowed)) {
+        allowed = 0;
     }
-    global_queue_ = make_unique<lock_free_queue<shared_ptr<task_type>>>();
+    allowed_cpus_ = allowed;
 
     {
-        lock<mutex> ctx_lock(worker_contexts_mtx_);
-        worker_contexts_.clear();
-        for (auto& ptr: worker_contexts_ptr_) {
-            ptr.store(nullptr, memory_order_release);
-        }
+        lock<mutex> lk(workers_mtx_);
+        worker_slots_.clear();
+        reset_worker_index(thread_threshhold_);
     }
 
-    is_running_ = true;
+    pending_tasks_.store(0, memory_order_relaxed);
+    priority_pending_.store(0, memory_order_relaxed);
+    wake_word_.store(0, memory_order_relaxed);
+    warm_deadline_ns_.store(0, memory_order_relaxed);
+    warm_owner_.store(-1, memory_order_relaxed);
+    parked_workers_.store(0, memory_order_relaxed);
+    idle_workers_.store(0, memory_order_relaxed);
+    steal_worker_count_.store(0, memory_order_relaxed);
+    attached_workers_.store(0, memory_order_relaxed);
+    total_submitted_tasks_.store(0, memory_order_relaxed);
+    next_task_id_.store(0, memory_order_relaxed);
+    thread_pool_id_generator::reset_id();
+    scaler_stop_.store(false, memory_order_relaxed);
+
     init_thread_size_ = init_thread_size;
-    idle_thread_size_ = 0;
+    is_running_.store(true, memory_order_release);
 
-    for (id_type i = 0; i < init_thread_size_; i++) {
-        id_type thread_id = thread_pool_id_generator::get_new_id();
-        auto worker_func = [this, thread_id]() { thread_function(thread_id); };
-        auto ptr = make_unique<lazy_thread>(move(worker_func));
-
-        {
-            lock<mutex> ctx_lock(worker_contexts_mtx_);
-            if (thread_id >= worker_contexts_ptr_.size()) {
-                worker_contexts_ptr_.reserve(thread_id + 1);
-                for (size_t j = worker_contexts_ptr_.size(); j <= thread_id; ++j) {
-                    atomic<worker_context*> tmp;
-                    tmp.store(nullptr, memory_order_relaxed);
-                    worker_contexts_ptr_.emplace_back(move(tmp));
-                }
-            }
-        }
-
-        {
-            lock<mutex> ctx_lock(worker_contexts_mtx_);
-            auto result = threads_map_.emplace(thread_id, move(ptr));
-            result.first->second->start();
-            result.first->second->detach();
+    for (size_t i = 0; i < init_thread_size_; ++i) {
+        if (!spawn_worker()) {
+            break;
         }
     }
 
-    this_thread::sleep_for_ms(5);
+    // Ready barrier instead of a fixed sleep: wait until every worker registered.
+    const auto deadline = steady_clock::now() + seconds(2);
+    uint32_t attached = attached_workers_.load(memory_order_acquire);
+    while (attached < init_thread_size_ && steady_clock::now() < deadline) {
+        attached_workers_.wait(attached, memory_order_acquire);
+        attached = attached_workers_.load(memory_order_acquire);
+    }
+
+    if (timer_) {
+        timer_->add_task(steady_clock::now() + milliseconds(liveness_interval_ms), [this] { liveness_tick(); });
+    }
+
+    if (pool_mode_.load(memory_order_relaxed) == pool_mode::cached) {
+        scaler_thread_ = make_unique<lazy_thread>([this] { scaler_function(); });
+        scaler_thread_->start();
+    }
 
     return true;
 }
 
 thread_pool::pool_statistics thread_pool::stop() {
-    if (!is_running_) {
+    if (!is_running_.load(memory_order_acquire)) {
         return {};
     }
-    const size_t saved_total_threads = threads_map_.size();
 
-    is_running_ = false;
+    const size_t saved_total_threads = attached_workers_.load(memory_order_acquire);
 
-    timer_.stop();
+    is_running_.store(false, memory_order_release);
 
-    {
-        unique_lock<mutex> lk(work_available_mtx_);
-        work_available_.notify_all();
-        exit_cond_.wait(lk, [&] {
-            lock<mutex> ctx_lock(worker_contexts_mtx_);
-            return threads_map_.empty();
-        });
+    scaler_stop_.store(true, memory_order_release);
+    if (scaler_thread_) {
+        if (scaler_thread_->joinable()) {
+            scaler_thread_->join();
+        }
+        scaler_thread_.reset();
     }
+
+    if (timer_) {
+        timer_->stop();
+    }
+
+    // Wake every parked worker: the wait word has to change, shutdown must never
+    // depend on a wake-up that only a producer would normally provide.
+    wake_word_.fetch_add(attached_workers_.load(memory_order_acquire) + 1U, memory_order_acq_rel);
+    wake_word_.notify_all();
+
+    uint32_t attached = attached_workers_.load(memory_order_acquire);
+    while (attached != 0U) {
+        attached_workers_.wait(attached, memory_order_acquire);
+        attached = attached_workers_.load(memory_order_acquire);
+    }
+
+    auto stat = statistics_unsafe();
+    stat.total_threads = saved_total_threads;
 
     if (global_queue_) {
         global_queue_->clear();
@@ -596,27 +1051,24 @@ thread_pool::pool_statistics thread_pool::stop() {
     }
 
     {
-        lock<mutex> ctx_lock(worker_contexts_mtx_);
-        for (auto& ptr: worker_contexts_ptr_) {
-            ptr.store(nullptr, memory_order_release);
-        }
-        worker_contexts_.clear();
+        lock<mutex> lk(workers_mtx_);
+        worker_slots_.clear();
+        worker_index_.clear();
     }
 
-    auto stat = statistics_unsafe();
-    stat.total_threads = saved_total_threads;
-
-    total_submitted_tasks_ = 0;
-    total_completed_tasks_ = 0;
-    total_stolen_tasks_ = 0;
-    global_task_count_ = 0;
-    steal_worker_count_ = 0;
+    total_submitted_tasks_.store(0, memory_order_relaxed);
     next_task_id_.store(0, memory_order_relaxed);
+    pending_tasks_.store(0, memory_order_relaxed);
+    priority_pending_.store(0, memory_order_relaxed);
+    wake_word_.store(0, memory_order_relaxed);
+    warm_deadline_ns_.store(0, memory_order_relaxed);
+    warm_owner_.store(-1, memory_order_relaxed);
+    parked_workers_.store(0, memory_order_relaxed);
+    idle_workers_.store(0, memory_order_relaxed);
+    steal_worker_count_.store(0, memory_order_relaxed);
     thread_pool_id_generator::reset_id();
 
-    threads_map_.clear();
     init_thread_size_ = 0;
-    idle_thread_size_ = 0;
 
     return stat;
 }

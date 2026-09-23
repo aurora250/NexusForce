@@ -32,20 +32,10 @@ private:
     template <typename>
     friend class random_engine;
 
-    static constexpr size_t n = 624;           ///< 状态向量长度
-    static constexpr size_t m = 397;           ///< 中间偏移量
-    static constexpr seed_type a = 0x9908b0df; ///< 旋转矩阵常数
-    static constexpr seed_type u = 11;         ///< 位掩码1
-    static constexpr seed_type s = 7;          ///< 位移量1
-    static constexpr seed_type b = 0x9d2c5680; ///< 位掩码2
-    static constexpr seed_type t = 15;         ///< 位移量2
-    static constexpr seed_type c = 0xefc60000; ///< 位掩码3
-    static constexpr seed_type l = 18;         ///< 位移量3
+    static constexpr size_t n = 624; ///< 状态向量长度
 
     seed_type state_[n] = {}; ///< 状态向量
     size_t index_ = n;        ///< 当前状态索引
-
-    void twist() noexcept;
 
     static constexpr size_t word_bits() noexcept { return 32; }
 

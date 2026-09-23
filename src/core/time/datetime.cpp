@@ -3,8 +3,6 @@
 #    include <NeForce/core/config/windef.hpp>
 #    include <sysinfoapi.h>
 #    include <timezoneapi.h>
-#else
-#    include <ctime>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 

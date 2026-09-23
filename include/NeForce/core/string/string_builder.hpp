@@ -167,14 +167,15 @@ void __concat_append(string_builder& sb, Args&&... args) {
     (sb.append(_NEFORCE forward<Args>(args)), ...);
 }
 #else
+inline void __concat_append(string_builder&) noexcept {}
+template <typename Last>
+void __concat_append(string_builder& sb, Last&& last) {
+    sb.append(_NEFORCE forward<Last>(last));
+}
 template <typename First, typename... Rest>
 void __concat_append(string_builder& sb, First&& first, Rest&&... rest) {
     sb.append(_NEFORCE forward<First>(first));
     __concat_append(sb, _NEFORCE forward<Rest>(rest)...);
-}
-template <typename Last>
-void __concat_append(string_builder& sb, Last&& last) {
-    sb.append(_NEFORCE forward<Last>(last));
 }
 #endif
 

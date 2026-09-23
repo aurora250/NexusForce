@@ -3,7 +3,11 @@
 ## [unreleased]
 
 ### 🚀 New Features
-
+- 添加 `thread_pool::post_task()`：投递不关心结果的任务，不分配 `task_info`、不创建 future/promise，单次投递开销约为 `submit_task()` 的三分之一（实测 447 ns/任务 vs 1325 ns/任务）
+- 添加 `thread_pool::set_task_tracking()` / `task_tracking()`：关闭后提交路径不再为每个任务分配 `task_info`（`submit_result::task_info` 返回共享占位对象）
+- 添加 `thread_pool::set_warmup_window()` / `warmup_window()`：定时任务到期前唤醒一个工作线程并保持自旋，把 `submit_after` 的冷唤醒变为热派发
+- 添加 `timer_scheduler::set_spin_window()` / `spin_window()`：到期前自旋守时窗口，消除条件变量唤醒的调度延迟
+- 添加 `thread_pool::set_cpu_affinity()` / `cpu_affinity()`：工作线程可绑定到进程允许 CPU 集合内的不同核心，默认关闭
 - 添加 `launder` 编译器优化阻止屏障函数
 - 添加 `likely` / `unlikely`
 - 添加 CMake 多架构 SIMD 检测配置
@@ -22,7 +26,20 @@
 - 新增追加式格式化接口 `format_to(string&, fmt, args...)`：与 `format()` 语义一致但不新建字符串，供日志等高频路径复用目标缓冲
 
 ### 🔧 Improvements
-
+- `thread_pool` 新增存活巡检：定时器线程每 50 ms 检查，命中则唤醒全部停驻线程，任何丢唤醒状态都能在 50 ms 内自愈；正常提交/排空模式不会触发
+- `timer_scheduler` 在到期前 `spin_window` 窗口内提前唤醒并自旋守时，`submit_after` 的平均绝对偏差由约 130 µs 降至 5–36 µs
+- `thread_pool` 定时任务预热：`submit_after` 在到期前唤醒一个工作线程保持热态，消除定时任务因工作线程已停驻而产生的约 75 µs 冷唤醒延迟
+- `thread_pool` 缓存模式伸缩线程按积压比例一次扩充多个线程，突发负载下更快逼近目标并发度
+- `lock_free_queue` 隐式生产者线程退出时同步递减哈希计数，避免反复创建短生命周期线程导致哈希表无谓翻倍扩容
+- `thread_pool` 提交路径重构：全局队列直接存放任务对象，出队改用非分配的 `try_dequeue`，生产者侧每任务少一次堆分配
+- `thread_pool` 工作线程停驻改为等待单调递增的唤醒字，取代 1ms 条件变量轮询与 256 轮 `sched_yield` 阶梯：16 线程空闲 CPU 占用由 11.8% 单核降至 0.05%
+- `thread_pool` 自旋预算自适应：取到任务则倍增，确无任务可做时减半并停驻
+- `thread_pool` 唤醒策略按积压量决定：已有空闲线程在轮询时提交完全不产生唤醒系统调用，积压超过空闲线程数时一次 `notify_all` 唤醒整组停驻线程
+- `thread_pool` 每任务统计改为工作线程本地计数，`statistics()` 时归并，热路径不再有 `total_completed` / `idle_thread_size` 全局原子写
+- `thread_pool` 工作窃取扫描不再持全局互斥量：上下文地址在池生命周期内稳定，窃取者先校验 `attached` 标记，摘除线程时等待窃取者离场
+- `thread_pool` 窃取目标选择改用每个工作线程发布的队列深度，避免扫描时触碰非候选者的缓存行
+- `thread_pool` 缓存模式线程伸缩移出提交热路径，改由独立伸缩线程按积压与空闲数带滞回增减，`start(n)` 作为硬下限
+- `thread_pool::start()` 以就绪屏障等待全部工作线程注册完成，取代固定 5ms 睡眠
 - 随机数引擎的统一取值接口抽取到公共基类 `random_engine`（CRTP），各引擎只需实现原始随机数产生与字宽描述，消除 8 份重复实现
 - `random_lcd` 的 64 位取值由两次 31 位输出拼接改为跨字拼接的真实 64 位均匀随机数，`next_float<double>()` 不再被限制在 [0, 0.25)
 - `secret` 新增实例化 `operator()` 与 `min()` / `max()`，可作为满足 UniformRandomBitGenerator 概念的引擎传给分布函数
@@ -92,7 +109,15 @@
 - `byte_size::to_string()` 移除 format 套 format（先用 `format(":.{}f")` 构造格式串再二次 `format`），改为直接调用 `to_string_fixed()`
 
 ### 🐛 Bug Fixes
-
+- 修复唤醒策略单靠空闲巡检线程数提示而可能漏唤醒、导致调用者永久阻塞的缺陷，改由存活巡检兜底
+- 修复 `string_builder` 的 `concatenate()` 在 C++14 下无法编译：`__concat_append` 的递归终止分支缺失，`Rest` 为空时调用不存在的零参重载
+- 修复 `thread_pool` 优先级倒置：工作线程原先先探测全局 FIFO 再探测优先级堆，只要普通队列有积压，高优先级任务就永远排在其后，现按 优先级 → 本地 → 全局 → 窃取 顺序探测
+- 修复 `thread_pool` 待处理任务计数下溢：计数在入队之后才自增，而消费者可能先出队并自减，计数回绕为 4294967295 后阈值判断误判为队列已满，任务被静默拒绝，现改为入队前自增
+- 修复 `thread_pool` 在待处理计数与队列不一致时无界自旋：工作线程以 `yield()` 永久空转占满 CPU，同时等待该任务的调用者永久阻塞，现改为停驻等待并在入队失败时显式失败任务
+- 修复 `thread_pool` 忽略全局队列入队失败结果导致任务静默丢失：现检查 `enqueue` 返回值并回退计数，任务以 `failed` 状态与错误信息显式失败
+- 修复任务函数抛出异常会终止工作线程，现工作线程捕获并计入失败计数
+- 修复缓存模式工作线程退出时丢弃其本地队列中未执行的任务，现退出前执行完毕
+- 修复 `thread_pool` 在 `stop()` 后重启时定时器调度器已被停止、`submit_after` 永久不触发的问题
 - 修复 `flat_hashtable` 删除元素后不归还扩容额度，导致反复「填充—删除」时容量无界增长（实测 n=262144 时每 12 轮容量从 2 槽/元素膨胀到 16 槽/元素）：扩容判据改由 `size_` 与最大负载因子直接派生，不再依赖只在插入时递减的计数
 - 修复 `flat_hashtable` 墓碑（DELETED）永不回收导致探测链持续变长：新增墓碑计数，占用槽逼近扩容阈值时等容量原地重建
 - 修复 `flat_hashtable` 在已有容量的对象上重新分配存储数组时不回收旧数组导致的内存泄漏

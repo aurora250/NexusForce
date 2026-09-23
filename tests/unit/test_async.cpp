@@ -1945,6 +1945,424 @@ TEST(ThreadPool, WaitMultipleFutures) {
     pool.stop();
 }
 
+namespace {
+    bool wait_until_true(const function<bool()>& predicate, const int64_t timeout_ms = 5000) {
+        const auto deadline = steady_clock::now() + milliseconds(timeout_ms);
+        while (steady_clock::now() < deadline) {
+            if (predicate()) {
+                return true;
+            }
+            this_thread::sleep_for(1_ms);
+        }
+        return predicate();
+    }
+} // namespace
+
+TEST(ThreadPool, PostTaskRunsWithoutFuture) {
+    thread_pool pool;
+    pool.start(2);
+
+    atomic<int> counter{0};
+    for (int i = 0; i < 64; ++i) {
+        pool.post_task([&counter] { counter.fetch_add(1); });
+    }
+
+    EXPECT_TRUE(wait_until_true([&counter] { return counter.load() == 64; }));
+    EXPECT_EQ(counter.load(), 64);
+    pool.stop();
+}
+
+TEST(ThreadPool, PostTaskWithPriorityRunsBothClasses) {
+    thread_pool pool;
+    pool.start(2);
+
+    atomic<int> low{0};
+    atomic<int> high{0};
+    for (int i = 0; i < 16; ++i) {
+        pool.post_task(static_cast<thread_pool::priority_type>(0), [&low] { low.fetch_add(1); });
+        pool.post_task(static_cast<thread_pool::priority_type>(1), [&high] { high.fetch_add(1); });
+    }
+
+    EXPECT_TRUE(wait_until_true([&] { return low.load() == 16 && high.load() == 16; }));
+    EXPECT_EQ(low.load(), 16);
+    EXPECT_EQ(high.load(), 16);
+    pool.stop();
+}
+
+TEST(ThreadPool, PostTaskFromWorkerRunsNestedTask) {
+    thread_pool pool;
+    pool.start(2);
+
+    atomic<bool> nested_ran{false};
+    auto outer = pool.submit_task([&pool, &nested_ran] { pool.post_task([&nested_ran] { nested_ran.store(true); }); });
+    outer.future.get();
+
+    EXPECT_TRUE(wait_until_true([&nested_ran] { return nested_ran.load(); }));
+    pool.stop();
+}
+
+TEST(ThreadPool, PostTaskBeforeStartIsIgnored) {
+    thread_pool pool;
+    atomic<int> counter{0};
+    pool.post_task([&counter] { counter.fetch_add(1); });
+    EXPECT_EQ(counter.load(), 0);
+}
+
+TEST(ThreadPool, SubmitBeforeStartFailsGracefully) {
+    thread_pool pool;
+    auto res = pool.submit_task([] { return 1; });
+    ASSERT_TRUE(res.task_info != nullptr);
+    EXPECT_TRUE(res.task_info->is_finished());
+    EXPECT_EQ(res.task_info->status.load(), task_info::status::failed);
+}
+
+TEST(ThreadPool, SubmitAfterStopThenRestartWorks) {
+    thread_pool pool;
+    pool.start(2);
+
+    auto res = pool.submit_after(10, [] { return 7; });
+    EXPECT_EQ(res.future.get(), 7);
+    pool.stop();
+
+    EXPECT_TRUE(pool.start(2));
+    auto again = pool.submit_after(10, [] { return 8; });
+    EXPECT_EQ(again.future.get(), 8);
+    pool.stop();
+}
+
+TEST(ThreadPool, TaskInfoTracksCompletion) {
+    thread_pool pool;
+    pool.start(1);
+
+    auto res = pool.submit_task([] { return 42; });
+    EXPECT_EQ(res.future.get(), 42);
+    ASSERT_TRUE(res.task_info != nullptr);
+    EXPECT_TRUE(res.task_info->is_finished());
+    EXPECT_EQ(res.task_info->status.load(), task_info::status::completed);
+    EXPECT_GT(res.task_info->submit_time.value(), 0);
+    EXPECT_GT(res.task_info->finish_time.value(), 0);
+    EXPECT_EQ(res.task_info->id, 0u);
+    pool.stop();
+}
+
+TEST(ThreadPool, TaskTrackingDisabledStillRunsTasks) {
+    thread_pool pool;
+    EXPECT_TRUE(pool.task_tracking());
+    pool.set_task_tracking(false);
+    EXPECT_FALSE(pool.task_tracking());
+    pool.start(2);
+
+    auto res = pool.submit_task([] { return 5; });
+    EXPECT_EQ(res.future.get(), 5);
+    EXPECT_TRUE(res.task_info != nullptr);
+    EXPECT_FALSE(res.task_info->is_finished());
+    pool.stop();
+}
+
+TEST(ThreadPool, TaskTrackingCanBeToggledWhileRunning) {
+    thread_pool pool;
+    pool.start(2);
+
+    auto first = pool.submit_task([] { return 1; });
+    EXPECT_EQ(first.future.get(), 1);
+
+    pool.set_task_tracking(false);
+    auto second = pool.submit_task([] { return 2; });
+    EXPECT_EQ(second.future.get(), 2);
+
+    pool.set_task_tracking(true);
+    auto third = pool.submit_task([] { return 3; });
+    EXPECT_EQ(third.future.get(), 3);
+    EXPECT_TRUE(third.task_info->is_finished());
+
+    pool.stop();
+}
+
+TEST(ThreadPool, StatisticsCountsAllCompletedTasks) {
+    thread_pool pool;
+    pool.start(4);
+
+    vector<future<void>> futures;
+    futures.reserve(512);
+    for (int i = 0; i < 512; ++i) {
+        auto res = pool.submit_task([] {});
+        futures.push_back(move(res.future));
+    }
+    for (auto& f: futures) {
+        f.get();
+    }
+
+    const auto stats = pool.statistics();
+    EXPECT_GE(stats.total_completed, 512u);
+    EXPECT_EQ(stats.total_submitted, 512u);
+    EXPECT_EQ(stats.queue_size, 0u);
+    pool.stop();
+}
+
+TEST(ThreadPool, WorkerSurvivesTaskException) {
+    thread_pool pool;
+    pool.start(2);
+
+    auto failing = pool.submit_task([]() -> int { throw value_exception("boom"); });
+    EXPECT_THROW(failing.future.get(), exception);
+    EXPECT_EQ(failing.task_info->status.load(), task_info::status::failed);
+
+    auto ok = pool.submit_task([] { return 3; });
+    EXPECT_EQ(ok.future.get(), 3);
+
+    pool.stop();
+}
+
+TEST(ThreadPool, IdlePoolPicksUpWorkAfterWorkersPark) {
+    thread_pool pool;
+    pool.start(4);
+
+    this_thread::sleep_for(200_ms);
+
+    for (int round = 0; round < 4; ++round) {
+        auto res = pool.submit_task([] { return 9; });
+        EXPECT_EQ(res.future.get(), 9);
+        this_thread::sleep_for(50_ms);
+    }
+
+    pool.stop();
+}
+
+TEST(ThreadPool, HighPriorityRunsBeforeLowPriority) {
+    constexpr size_t thread_count = 4;
+    constexpr int64_t high_count = 100;
+    constexpr int64_t low_count = 100;
+
+    thread_pool pool;
+    pool.start(thread_count);
+
+    atomic<bool> gate{false};
+    atomic<int64_t> gate_engaged{0};
+    vector<future<void>> futures;
+
+    for (size_t i = 0; i < thread_count; ++i) {
+        auto res = pool.submit_task([&gate, &gate_engaged] {
+            gate_engaged.fetch_add(1, memory_order_release);
+            while (!gate.load(memory_order_acquire)) {
+                this_thread::yield();
+            }
+        });
+        futures.push_back(move(res.future));
+    }
+
+    EXPECT_TRUE(wait_until_true([&gate_engaged] { return gate_engaged.load() == static_cast<int64_t>(thread_count); }));
+
+    atomic<int64_t> high_done{0};
+    atomic<int64_t> low_before_high{0};
+
+    for (int64_t i = 0; i < high_count; ++i) {
+        auto res = pool.submit_task(static_cast<thread_pool::priority_type>(1),
+                                    [&high_done] { high_done.fetch_add(1, memory_order_acq_rel); });
+        futures.push_back(move(res.future));
+    }
+    for (int64_t i = 0; i < low_count; ++i) {
+        auto res = pool.submit_task([&high_done, &low_before_high] {
+            if (high_done.load(memory_order_acquire) < high_count) {
+                low_before_high.fetch_add(1, memory_order_relaxed);
+            }
+        });
+        futures.push_back(move(res.future));
+    }
+
+    gate.store(true, memory_order_release);
+    for (auto& f: futures) {
+        f.get();
+    }
+
+    EXPECT_EQ(gate_engaged.load(), static_cast<int64_t>(thread_count));
+    EXPECT_EQ(high_done.load(), high_count);
+    EXPECT_LE(low_before_high.load(), static_cast<int64_t>(thread_count));
+    pool.stop();
+}
+
+TEST(ThreadPool, CachedModeScalesWithBacklog) {
+    thread_pool pool;
+    pool.set_mode(thread_pool::pool_mode::cached);
+    EXPECT_GT(pool.max_thread_threshhold(), 2u);
+    EXPECT_TRUE(pool.set_thread_threshhold(8));
+    pool.start(1);
+    EXPECT_FALSE(pool.set_thread_threshhold(16));
+    EXPECT_EQ(pool.mode(), thread_pool::pool_mode::cached);
+
+    vector<future<void>> futures;
+    futures.reserve(64);
+    for (int i = 0; i < 64; ++i) {
+        auto res = pool.submit_task([] { this_thread::sleep_for(10_ms); });
+        futures.push_back(move(res.future));
+    }
+
+    bool scaled = wait_until_true([&pool] { return pool.statistics().total_threads > 1; }, 2000);
+    for (auto& f: futures) {
+        f.get();
+    }
+    EXPECT_TRUE(scaled);
+    pool.stop();
+}
+
+TEST(ThreadPool, WarmupWindowConfiguration) {
+    thread_pool pool;
+    EXPECT_EQ(pool.warmup_window(), 200);
+
+    EXPECT_TRUE(pool.set_warmup_window(0));
+    EXPECT_EQ(pool.warmup_window(), 0);
+    EXPECT_TRUE(pool.set_warmup_window(-10));
+    EXPECT_EQ(pool.warmup_window(), 0);
+    EXPECT_TRUE(pool.set_warmup_window(500));
+    EXPECT_EQ(pool.warmup_window(), 500);
+
+    pool.start(2);
+    EXPECT_FALSE(pool.set_warmup_window(100));
+    EXPECT_EQ(pool.warmup_window(), 500);
+    pool.stop();
+}
+
+TEST(ThreadPool, CpuAffinityConfiguration) {
+    thread_pool pool;
+    EXPECT_FALSE(pool.cpu_affinity());
+    EXPECT_TRUE(pool.set_cpu_affinity(true));
+    EXPECT_TRUE(pool.cpu_affinity());
+
+    pool.start(2);
+    EXPECT_FALSE(pool.set_cpu_affinity(false));
+    EXPECT_TRUE(pool.cpu_affinity());
+
+    auto res = pool.submit_task([] { return 4; });
+    EXPECT_EQ(res.future.get(), 4);
+    pool.stop();
+
+    EXPECT_TRUE(pool.set_cpu_affinity(false));
+    EXPECT_FALSE(pool.cpu_affinity());
+}
+
+TEST(ThreadPool, StealModeRejectedWhileRunning) {
+    thread_pool pool;
+    EXPECT_TRUE(pool.set_steal_mode(local_queue::steal_strategy::adaptive, 4));
+    pool.start(2);
+    EXPECT_FALSE(pool.set_steal_mode(local_queue::steal_strategy::single, 1));
+    pool.stop();
+}
+
+TEST(ThreadPool, DelayAccuracyStaysBoundedWithWarmup) {
+    thread_pool pool;
+    EXPECT_TRUE(pool.set_warmup_window(200));
+    pool.start(4);
+
+    constexpr int64_t delay_ms = 20;
+    const auto start = steady_clock::now();
+    auto res = pool.submit_after(delay_ms, [] { return 1; });
+    EXPECT_EQ(res.future.get(), 1);
+    const auto elapsed = time_cast<microseconds>(steady_clock::now() - start).count();
+
+    EXPECT_GE(elapsed, delay_ms * 1000 - 1000);
+    EXPECT_LE(elapsed, delay_ms * 1000 + 20000);
+    pool.stop();
+}
+
+TEST(ThreadPool, NestedFanOutCompletesAllChildren) {
+    thread_pool pool;
+    pool.start(4);
+
+    constexpr int64_t root_count = 8;
+    constexpr int64_t children = 16;
+    atomic<int64_t> children_done{0};
+
+    vector<vector<future<void>>> child_futures(root_count);
+    for (auto& slot: child_futures) {
+        slot.reserve(children);
+    }
+
+    vector<future<void>> root_futures;
+    root_futures.reserve(root_count);
+    for (int64_t r = 0; r < root_count; ++r) {
+        auto& slot = child_futures[static_cast<size_t>(r)];
+        auto res = pool.submit_task([&pool, &slot, &children_done] {
+            for (int64_t c = 0; c < children; ++c) {
+                auto child = pool.submit_task([&children_done] { children_done.fetch_add(1, memory_order_relaxed); });
+                slot.push_back(move(child.future));
+            }
+        });
+        root_futures.push_back(move(res.future));
+    }
+
+    for (auto& f: root_futures) {
+        f.get();
+    }
+    for (auto& slot: child_futures) {
+        for (auto& f: slot) {
+            f.get();
+        }
+    }
+
+    EXPECT_EQ(children_done.load(), root_count * children);
+    const auto stats = pool.statistics();
+    EXPECT_GE(stats.total_completed, static_cast<size_t>(root_count * children));
+    pool.stop();
+}
+
+TEST(WorkerContext, ResetClearsAllState) {
+    worker_context ctx;
+    ctx.id = 7;
+    ctx.consecutive_idle_count = 9;
+    ctx.cpu_core = 3;
+    ctx.numa_node = 1;
+    ctx.attached.store(true);
+    ctx.published_size.store(5);
+    ctx.retire.store(true);
+    ctx.completed.store(11);
+    ctx.stolen.store(2);
+    ctx.failed.store(1);
+    ctx.steal_signalled = true;
+    ctx.spin_budget = 256;
+    ctx.idle_counted = true;
+
+    ctx.reset();
+
+    EXPECT_EQ(ctx.id, 0u);
+    EXPECT_EQ(ctx.consecutive_idle_count, 0u);
+    EXPECT_EQ(ctx.cpu_core, 0u);
+    EXPECT_EQ(ctx.numa_node, 0u);
+    EXPECT_FALSE(ctx.attached.load());
+    EXPECT_EQ(ctx.published_size.load(), 0u);
+    EXPECT_FALSE(ctx.retire.load());
+    EXPECT_EQ(ctx.completed.load(), 0u);
+    EXPECT_EQ(ctx.stolen.load(), 0u);
+    EXPECT_EQ(ctx.failed.load(), 0u);
+    EXPECT_FALSE(ctx.steal_signalled);
+    EXPECT_EQ(ctx.spin_budget, 64u);
+    EXPECT_FALSE(ctx.idle_counted);
+}
+
+TEST(TimerScheduler, SpinWindowConfiguration) {
+    timer_scheduler<steady_clock> timer;
+    EXPECT_EQ(time_cast<microseconds>(timer.spin_window()).count(), 100);
+
+    timer.set_spin_window(microseconds(0));
+    EXPECT_EQ(timer.spin_window().count(), 0);
+
+    timer.set_spin_window(microseconds(500));
+    EXPECT_EQ(time_cast<microseconds>(timer.spin_window()).count(), 500);
+
+    atomic<bool> fired{false};
+    promise<void> done;
+    auto fut = done.get_future();
+    const auto start = steady_clock::now();
+    timer.add_task(steady_clock::now() + 5_ms, [&fired, &done] {
+        fired.store(true);
+        done.set_value();
+    });
+    fut.get();
+
+    EXPECT_TRUE(fired.load());
+    const auto elapsed = time_cast<microseconds>(steady_clock::now() - start).count();
+    EXPECT_GE(elapsed, 4000);
+    EXPECT_LE(elapsed, 50000);
+}
+
 #ifdef NEFORCE_STANDARD_20
 
 namespace {

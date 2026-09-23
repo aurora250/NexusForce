@@ -14,7 +14,6 @@
 #include "NeForce/core/async/timer.hpp"
 #include "NeForce/core/container/priority_queue.hpp"
 #include "NeForce/core/container/queue.hpp"
-#include "NeForce/core/container/flat_unordered_map.hpp"
 #include "NeForce/core/memory/weak_ptr.hpp"
 #include "NeForce/core/system/sysinfo.hpp"
 #include "NeForce/core/time/datetime.hpp"
@@ -211,11 +210,53 @@ struct NEFORCE_API worker_context {
     uint32_t cpu_core{0};              ///< 绑定的 CPU 核心编号
     uint32_t numa_node{0};             ///< 所属 NUMA 节点编号
 
+    /**
+     * @brief 已注册标记
+     * @warning 窃取者必须先读取该标记，为 false 时不得访问本上下文的其它字段
+     */
+    atomic<bool> attached{false};
+
+    /**
+     * @brief 本地队列长度发布值
+     * @note 由所有者维护，窃取者据此选择目标，避免触碰非候选者的缓存行
+     */
+    atomic<uint32_t> published_size{0};
+
+    /**
+     * @brief 退出请求标记
+     * @note 缓存模式收缩线程时由伸缩线程设置
+     */
+    atomic<bool> retire{false};
+
+    atomic<size_t> completed{0}; ///< 本工作线程完成的任务数
+    atomic<size_t> stolen{0};    ///< 本工作线程成功窃取的任务数
+    atomic<size_t> failed{0};    ///< 本工作线程执行失败的任务数
+
+    /**
+     * @brief 是否已发布窃取唤醒信号
+     * @note 仅由上下文所有者读写
+     */
+    bool steal_signalled{false};
+
+    /**
+     * @brief 停驻前的自旋预算
+     * @note 取到任务时倍增、确无任务可做时减半，使繁忙期不产生唤醒系统调用、空闲时迅速停驻
+     */
+    size_t spin_budget{64};
+
+    bool idle_counted{false}; ///< 是否已计入"空闲轮询中"的计数
+
     worker_context() = default;
     worker_context(const worker_context&) = delete;
     worker_context& operator=(const worker_context&) = delete;
     worker_context(worker_context&& other) noexcept;
     worker_context& operator=(worker_context&& other) noexcept;
+
+    /**
+     * @brief 重置为可复用状态
+     * @warning 仅可在确认没有窃取者持有该上下文时调用
+     */
+    void reset() noexcept;
 };
 
 
@@ -384,48 +425,101 @@ private:
         static NEFORCE_API void reset_id() noexcept;
     };
 
-    flat_unordered_map<id_type, unique_ptr<lazy_thread>> threads_map_; ///< 线程映射
-    flat_unordered_map<id_type, worker_context> worker_contexts_;      ///< 工作线程上下文映射
-    vector<atomic<worker_context*>> worker_contexts_ptr_;              ///< 工作线程上下文指针数组
-    mutex worker_contexts_mtx_;                                        ///< 工作线程上下文互斥锁
+    /**
+     * @struct worker_slot
+     * @brief 工作线程槽位
+     */
+    struct worker_slot {
+        unique_ptr<lazy_thread> thread;     ///< 线程对象
+        unique_ptr<worker_context> context; ///< 上下文
+        id_type id{0};                      ///< 线程ID
+        bool used{false};                   ///< 槽位是否已占用
+    };
 
-    timer_scheduler<steady_clock> timer_; ///< 定时器调度器
 
-    id_type init_thread_size_{0}; ///< 初始线程数
-    size_t thread_threshhold_;    ///< 线程数阈值
+    unique_ptr<timer_scheduler<steady_clock>> timer_;     ///< 定时器调度器（随 start 重建）
+    unique_ptr<lock_free_queue<task_type>> global_queue_; ///< 全局无锁任务队列
+    unique_ptr<lazy_thread> scaler_thread_;               ///< 缓存模式伸缩线程
 
-    steal_strategy configured_steal_strategy_{steal_strategy::adaptive}; ///< 配置的窃取策略
-    uint32_t configured_steal_batch_{4};                                 ///< 配置的窃取批次大小
-
-    unique_ptr<lock_free_queue<shared_ptr<task_type>>> global_queue_; ///< 全局无锁任务队列
-    priority_queue<priority_task> priority_queue_;                    ///< 高优先级任务队列（仅 priority>0）
-    mutex priority_mtx_;                                              ///< 优先级队列互斥锁
-
-    atomic<uint32_t> global_task_count_{0};       ///< 全局任务队列任务计数
-    atomic<uint32_t> idle_thread_size_{0};        ///< 空闲线程数
+    size_t thread_threshhold_;                    ///< 线程数阈值
     size_t task_threshhold_{task_max_threshhold}; ///< 任务队列阈值
 
-    mutex work_available_mtx_;          ///< 工作可用互斥锁
-    condition_variable work_available_; ///< 工作可用条件变量
-    condition_variable exit_cond_;      ///< 退出条件变量
+    /**
+     * @brief 上一次存活巡检观察到的完成计数
+     * @note 仅由定时器线程访问
+     */
+    size_t liveness_completed_{0};
+
+    int64_t warmup_window_us_{200}; ///< 定时任务预热窗口
+
+    /**
+     * @brief 定时任务预热截止时刻
+     * @note 非零表示已指派一个工作线程在到期前保持自旋，避免定时任务遭遇冷唤醒
+     */
+    atomic<int64_t> warm_deadline_ns_{0};
+
+    atomic<size_t> total_submitted_tasks_{0}; ///< 总提交任务计数
+    atomic<uint64_t> next_task_id_{0};        ///< 下一个任务ID
+    uint64_t allowed_cpus_{0};                ///< 进程允许的 CPU 掩码
 
     const vector<sysinfo::numa_node_info>* numa_nodes_{nullptr}; ///< NUMA 节点信息指针
 
-    atomic<pool_mode> pool_mode_{pool_mode::fixed}; ///< 线程池模式
-    atomic<bool> is_running_{false};                ///< 是否正在运行
+    vector<unique_ptr<worker_slot>> worker_slots_; ///< 槽位表
+    vector<atomic<worker_context*>> worker_index_; ///< 上下文索引
+    priority_queue<priority_task> priority_queue_; ///< 高优先级任务队列
 
-    atomic<size_t> total_submitted_tasks_{0}; ///< 总提交任务计数
-    atomic<size_t> total_completed_tasks_{0}; ///< 总完成任务计数
-    atomic<size_t> total_stolen_tasks_{0};    ///< 总窃取任务计数
-    atomic<size_t> steal_worker_count_{0};    ///< 正在窃取的工作线程数
-    atomic<uint64_t> next_task_id_{0};        ///< 下一个任务ID
+    mutable mutex workers_mtx_; ///< 保护槽位表结构变更
+    mutex priority_mtx_;        ///< 优先级队列互斥锁
+
+    id_type init_thread_size_{0};        ///< 初始线程数
+    uint32_t configured_steal_batch_{4}; ///< 配置的窃取批次大小
+
+    /**
+     * @brief 优先级队列待处理任务数
+     * @note 工作线程据此以一次原子读取代每次加锁探测优先级队列
+     */
+    atomic<uint32_t> priority_pending_{0};
+
+    atomic<int32_t> warm_owner_{-1}; ///< 预热线程编号
+
+    /**
+     * @brief 待处理任务总数
+     * @note 工作线程停驻时以该计数所在缓存行为参照做脏检查
+     */
+    atomic<uint32_t> pending_tasks_{0};
+
+    atomic<uint32_t> wake_word_{0};          ///< 单调递增的唤醒字
+    atomic<uint32_t> attached_workers_{0};   ///< 已注册工作线程数
+    atomic<uint32_t> parked_workers_{0};     ///< 停驻工作线程数
+    atomic<uint32_t> idle_workers_{0};       ///< 空闲但仍在校验任务的线程数
+    atomic<uint32_t> steal_worker_count_{0}; ///< 正在窃取的工作线程数
+
+    steal_strategy configured_steal_strategy_{steal_strategy::adaptive}; ///< 配置的窃取策略
+    atomic<pool_mode> pool_mode_{pool_mode::fixed};                      ///< 线程池模式
+    atomic<bool> is_running_{false};                                     ///< 是否正在运行
+    atomic<bool> scaler_stop_{false};                                    ///< 伸缩线程退出标记
+    atomic<bool> affinity_enabled_{false};                               ///< 是否绑定工作线程到 CPU
+    atomic<bool> task_tracking_enabled_{true};                           ///< 是否为每个任务分配并记录任务信息
 
 private:
     uint64_t generate_task_id() { return next_task_id_.fetch_add(1, memory_order_relaxed); }
 
-    void thread_function(id_type thread_id);
+    void thread_function(size_t slot_index);
     optional<task_type> try_steal_task(worker_context& ctx);
-
+    optional<task_type> try_take_priority();
+    void publish_local_size(worker_context& ctx);
+    void wake_workers(uint32_t backlog) noexcept;
+    NEFORCE_NODISCARD shared_ptr<task_info> make_task_info(priority_type priority);
+    void prewarm_dispatch(int64_t deadline_ns);
+    void liveness_tick();
+    bool dispatch_task(task_type&& job, priority_type priority, const shared_ptr<task_info>& info);
+    NEFORCE_NODISCARD bool hold_warm_spin(worker_context& self);
+    void worker_cleanup(size_t slot_index);
+    void scaler_function();
+    size_t acquire_slot();
+    bool spawn_worker();
+    void apply_affinity(worker_context& ctx, size_t slot_index);
+    void reset_worker_index(size_t capacity);
     pool_statistics statistics_unsafe() const;
 
 public:
@@ -461,6 +555,45 @@ public:
     bool set_steal_mode(steal_strategy strategy, uint32_t steal_batch = 4) noexcept;
 
     /**
+     * @brief 设置定时任务预热窗口
+     * @param window_us 预热窗口，0 表示关闭
+     * @return 设置成功返回true（线程池未运行时）
+     */
+    bool set_warmup_window(int64_t window_us) noexcept;
+
+    /**
+     * @brief 查询定时任务预热窗口
+     * @return 预热窗口（微秒）
+     */
+    NEFORCE_NODISCARD int64_t warmup_window() const noexcept { return warmup_window_us_; }
+
+    /**
+     * @brief 设置任务信息跟踪开关
+     * @param enable 是否启用
+     */
+    void set_task_tracking(bool enable) noexcept;
+
+    /**
+     * @brief 查询任务信息跟踪开关
+     * @return 已启用返回true
+     */
+    NEFORCE_NODISCARD bool task_tracking() const noexcept { return task_tracking_enabled_; }
+
+    /**
+     * @brief 设置工作线程 CPU 绑定开关
+     * @param enable 是否启用
+     * @return 设置成功返回true（线程池未运行时）
+     * @note 启用后工作线程会绑定到进程允许 CPU 集合内的不同核心，避免被调度器迁移
+     */
+    bool set_cpu_affinity(bool enable) noexcept;
+
+    /**
+     * @brief 查询工作线程 CPU 绑定开关
+     * @return 已启用返回true
+     */
+    NEFORCE_NODISCARD bool cpu_affinity() const noexcept { return affinity_enabled_; }
+
+    /**
      * @brief 设置任务队列阈值
      * @param threshhold 新阈值
      * @return 设置成功返回true（线程池未运行时）
@@ -472,7 +605,7 @@ public:
      * @param threshhold 新阈值
      * @return 设置成功返回true（线程池未运行时且处于缓存模式）
      */
-    bool set_thread_threshhold(size_t threshhold) noexcept;
+    bool set_thread_threshhold(size_t threshhold);
 
     /**
      * @brief 检查线程池是否正在运行
@@ -504,6 +637,31 @@ public:
      * @return 停止前的统计信息
      */
     pool_statistics stop();
+
+    /**
+     * @brief 投递任务
+     * @tparam Func 可调用对象类型
+     * @tparam Args 参数类型
+     * @param priority 任务优先级
+     * @param func 可调用对象
+     * @param args 参数
+     * @note 适用于 fire-and-forget 场景
+     * @warning 任务抛出的异常会计入工作线程的失败计数而不传递
+     */
+    template <typename Func, typename... Args>
+    void post_task(priority_type priority, Func&& func, Args&&... args);
+
+    /**
+     * @brief 投递任务（使用默认优先级0）
+     * @tparam Func 可调用对象类型
+     * @tparam Args 参数类型
+     * @param func 可调用对象
+     * @param args 参数
+     */
+    template <typename Func, typename... Args>
+    void post_task(Func&& func, Args&&... args) {
+        this->post_task(static_cast<priority_type>(0), _NEFORCE forward<Func>(func), _NEFORCE forward<Args>(args)...);
+    }
 
     /**
      * @brief 提交任务
@@ -632,7 +790,8 @@ submit_result<invoke_result_t<Func, Args...>> thread_pool::submit_task(const pri
 
     using Result = invoke_result_t<Func, Args...>;
 
-    auto info = make_shared<task_info>(generate_task_id(), priority);
+    auto info = make_task_info(priority);
+    const bool tracked = task_tracking_enabled_.load(memory_order_relaxed);
 
     const auto current_group = get_current_task_group();
     if (current_group) {
@@ -641,18 +800,22 @@ submit_result<invoke_result_t<Func, Args...>> thread_pool::submit_task(const pri
 
     auto task = _NEFORCE make_shared<packaged_task<Result()>>(
             [func = _NEFORCE forward<Func>(func), args = _NEFORCE make_tuple(_NEFORCE forward<Args>(args)...),
-             group = current_group, info]() mutable -> Result {
+             group = current_group, info, tracked]() mutable -> Result {
                 struct context_guard {
                     shared_ptr<task_info> info;
                     shared_ptr<task_group> group_inner;
                     shared_ptr<task_group> prev_group_inner;
+                    bool tracked;
 
-                    explicit context_guard(shared_ptr<task_info> i, shared_ptr<task_group> g) :
+                    context_guard(shared_ptr<task_info> i, shared_ptr<task_group> g, const bool track) :
                     info(move(i)),
-                    group_inner(move(g)) {
-                        info->status.store(task_info::status::running, memory_order_release);
-                        info->start_time = timestamp::now();
-                        info->worker_thread_id = get_worker_context() ? get_worker_context()->id : 0;
+                    group_inner(move(g)),
+                    tracked(track) {
+                        if (tracked) {
+                            info->status.store(task_info::status::running, memory_order_release);
+                            info->start_time = timestamp::now();
+                            info->worker_thread_id = get_worker_context() ? get_worker_context()->id : 0;
+                        }
 
                         prev_group_inner = get_current_task_group();
                         get_current_task_group() = group_inner;
@@ -660,10 +823,12 @@ submit_result<invoke_result_t<Func, Args...>> thread_pool::submit_task(const pri
 
                     ~context_guard() noexcept {
                         try {
-                            info->finish_time = timestamp::now();
-                            auto expected = task_info::status::running;
-                            info->status.compare_exchange_strong(expected, task_info::status::completed,
-                                                                 memory_order_release);
+                            if (tracked) {
+                                info->finish_time = timestamp::now();
+                                auto expected = task_info::status::running;
+                                info->status.compare_exchange_strong(expected, task_info::status::completed,
+                                                                     memory_order_release);
+                            }
 
                             get_current_task_group() = prev_group_inner;
                             if (group_inner) {
@@ -676,16 +841,20 @@ submit_result<invoke_result_t<Func, Args...>> thread_pool::submit_task(const pri
                     }
                 };
 
-                context_guard guard(info, group);
+                context_guard guard(info, group, tracked);
                 try {
                     return _NEFORCE apply(func, args);
                 } catch (const exception& e) {
-                    info->status.store(task_info::status::failed, memory_order_release);
-                    info->error = e.what();
+                    if (tracked) {
+                        info->status.store(task_info::status::failed, memory_order_release);
+                        info->error = e.what();
+                    }
                     throw;
                 } catch (...) {
-                    info->status.store(task_info::status::failed, memory_order_release);
-                    info->error = "Unknown exception";
+                    if (tracked) {
+                        info->status.store(task_info::status::failed, memory_order_release);
+                        info->error = "Unknown exception";
+                    }
                     throw;
                 }
             });
@@ -693,65 +862,23 @@ submit_result<invoke_result_t<Func, Args...>> thread_pool::submit_task(const pri
     auto res = task->get_future();
     task_type job([task] { (*task)(); });
 
-    if (static_cast<uint32_t>(priority) > 0) {
-        {
-            lock<mutex> lk(priority_mtx_);
-            priority_queue_.emplace(move(job), priority, info);
-        }
-        ++total_submitted_tasks_;
-        work_available_.notify_one();
-    } else {
-        auto* ctx = get_worker_context();
-
-        if (global_task_count_.load(memory_order_acquire) >= task_threshhold_) {
-            info->status.store(task_info::status::failed, memory_order_release);
-            info->error = "Task queue is full";
-            return submit_result<Result>{_NEFORCE move(res), _NEFORCE move(info)};
-        }
-
-        if (ctx != nullptr && ctx->queue.remain_size() > 0) {
-            ctx->queue.push_back(move(job));
-            ++total_submitted_tasks_;
-        } else if (ctx == nullptr) {
-            global_task_count_.fetch_add(1, memory_order_release);
-            global_queue_->push(make_shared<task_type>(move(job)));
-            ++total_submitted_tasks_;
-            work_available_.notify_one();
-        } else {
-            global_task_count_.fetch_add(1, memory_order_release);
-            global_queue_->push(make_shared<task_type>(move(job)));
-            ++total_submitted_tasks_;
-            work_available_.notify_one();
-        }
-    }
-
-    if (pool_mode_.load() == pool_mode::cached) {
-        const uint32_t idle = idle_thread_size_.load(memory_order_acquire);
-        const uint32_t pending = global_task_count_.load(memory_order_acquire);
-        if (pending > idle) {
-            lock<mutex> lk(worker_contexts_mtx_);
-            if (threads_map_.size() < thread_threshhold_) {
-                id_type thread_id = thread_pool_id_generator::get_new_id();
-                auto worker_func = [this, thread_id]() { thread_function(thread_id); };
-                auto ptr = _NEFORCE make_unique<lazy_thread>(_NEFORCE move(worker_func));
-
-                if (thread_id >= worker_contexts_ptr_.size()) {
-                    worker_contexts_ptr_.reserve(thread_id + 1);
-                    for (size_t i = worker_contexts_ptr_.size(); i <= thread_id; ++i) {
-                        atomic<worker_context*> tmp;
-                        tmp.store(nullptr, memory_order_relaxed);
-                        worker_contexts_ptr_.emplace_back(_NEFORCE move(tmp));
-                    }
-                }
-
-                auto result = threads_map_.emplace(thread_id, _NEFORCE move(ptr));
-                result.first->second->start();
-                result.first->second->detach();
-            }
-        }
+    if (!dispatch_task(_NEFORCE move(job), priority, info) && tracked) {
+        info->status.store(task_info::status::failed, memory_order_release);
+        info->error = global_queue_ == nullptr ? "Thread pool is not running" : "Task queue is full";
     }
 
     return submit_result<Result>{_NEFORCE move(res), _NEFORCE move(info)};
+}
+
+template <typename Func, typename... Args>
+void thread_pool::post_task(priority_type priority, Func&& func, Args&&... args) {
+    static_assert(is_invocable_v<Func, Args...>, "Func must be invocable with Args");
+
+    task_type job([func = _NEFORCE forward<Func>(func), args = _NEFORCE make_tuple(_NEFORCE forward<Args>(
+                                                                args)...)]() mutable { _NEFORCE apply(func, args); });
+
+    static const shared_ptr<task_info> untracked;
+    (void) dispatch_task(_NEFORCE move(job), priority, untracked);
 }
 
 template <typename Func, typename... Args>
@@ -761,44 +888,61 @@ thread_pool::submit_after(const int64_t delay_ms, const priority_type priority, 
 
     using Result = invoke_result_t<Func, Args...>;
 
-    auto info = make_shared<task_info>(generate_task_id(), priority);
+    auto info = make_task_info(priority);
+    const bool tracked = task_tracking_enabled_.load(memory_order_relaxed);
 
     auto task = _NEFORCE make_shared<packaged_task<Result()>>(
-            [func = _NEFORCE forward<Func>(func), tup = _NEFORCE make_tuple(_NEFORCE forward<Args>(args)...),
-             info]() mutable {
+            [func = _NEFORCE forward<Func>(func), tup = _NEFORCE make_tuple(_NEFORCE forward<Args>(args)...), info,
+             tracked]() mutable {
                 struct context_guard {
                     shared_ptr<task_info> info;
+                    bool tracked;
 
-                    explicit context_guard(shared_ptr<task_info> i) :
-                    info(move(i)) {
-                        info->status.store(task_info::status::running, memory_order_release);
-                        info->start_time = timestamp::now();
-                        info->worker_thread_id = get_worker_context() ? get_worker_context()->id : 0;
+                    context_guard(shared_ptr<task_info> i, const bool track) :
+                    info(move(i)),
+                    tracked(track) {
+                        if (tracked) {
+                            info->status.store(task_info::status::running, memory_order_release);
+                            info->start_time = timestamp::now();
+                            info->worker_thread_id = get_worker_context() ? get_worker_context()->id : 0;
+                        }
                     }
 
                     ~context_guard() noexcept {
-                        info->finish_time = timestamp::now();
-                        auto expected = task_info::status::running;
-                        info->status.compare_exchange_strong(expected, task_info::status::completed,
-                                                             memory_order_release);
+                        if (tracked) {
+                            info->finish_time = timestamp::now();
+                            auto expected = task_info::status::running;
+                            info->status.compare_exchange_strong(expected, task_info::status::completed,
+                                                                 memory_order_release);
+                        }
                     }
                 };
 
-                context_guard guard(info);
+                context_guard guard(info, tracked);
 
                 try {
                     return _NEFORCE apply(func, tup);
                 } catch (const exception& e) {
-                    info->status.store(task_info::status::failed, memory_order_release);
-                    info->error = e.what();
+                    if (tracked) {
+                        info->status.store(task_info::status::failed, memory_order_release);
+                        info->error = e.what();
+                    }
                     throw;
                 }
             });
 
     auto res = task->get_future();
 
-    auto expire_time = steady_clock::now() + milliseconds(delay_ms);
-    timer_.add_task(expire_time, [this, task = _NEFORCE move(task), priority]() mutable {
+    const auto expire_time = steady_clock::now() + milliseconds(delay_ms);
+    const auto window_us = warmup_window_us_;
+    if (window_us > 0 && timer_) {
+        const auto deadline_ns = time_cast<nanoseconds>(expire_time - steady_clock::time_point{}).count();
+        const auto prewarm_time = expire_time - microseconds(window_us);
+        if (prewarm_time > steady_clock::now()) {
+            timer_->add_task(prewarm_time, [this, deadline_ns] { prewarm_dispatch(deadline_ns); });
+        }
+    }
+    timer_->add_task(expire_time, [this, task = _NEFORCE move(task), priority]() mutable {
         this->submit_task(priority, [task]() { (*task)(); });
     });
 
@@ -826,12 +970,12 @@ thread_pool::periodic_token thread_pool::submit_every(int64_t interval_ms, const
         }
         if (auto locked = weak_handler.lock()) {
             auto next_time = steady_clock::now() + milliseconds(interval_ms);
-            timer_.add_task(next_time, [locked]() { (*locked)(); });
+            timer_->add_task(next_time, [locked]() { (*locked)(); });
         }
     };
 
     auto first_time = steady_clock::now() + milliseconds(interval_ms);
-    timer_.add_task(first_time, [handler_ptr]() { (*handler_ptr)(); });
+    timer_->add_task(first_time, [handler_ptr]() { (*handler_ptr)(); });
     return state;
 }
 
