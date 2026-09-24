@@ -1,6 +1,5 @@
 #include <NeForce/core/memory/memory_pool.hpp>
 #include <NeForce/core/container/vector.hpp>
-#include <NeForce/core/async/thread.hpp>
 #include <NeForce/core/string/string.hpp>
 #include <benchmark/benchmark.h>
 using namespace neforce;
@@ -12,6 +11,24 @@ namespace {
     }
 
     void touch(void* block) noexcept { benchmark::DoNotOptimize(*static_cast<unsigned char*>(block) = 0x5A); }
+
+    /// One worker per physical core: the primary SMT thread of each P-core first, then the E-cores.
+    constexpr int g_worker_cpu_order[] = {0,  2,  4,  6,  8,  10, 12, 14, 16, 17, 18, 19,
+                                          20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
+
+    void pin_worker_thread(const size_t worker_index) noexcept {
+        constexpr size_t slots = extent_v<decltype(g_worker_cpu_order)>;
+        static_cast<void>(this_thread::bind_core(g_worker_cpu_order[worker_index % slots]));
+    }
+
+    void pin_worker_thread_once(const size_t worker_index) noexcept {
+        thread_local size_t pinned_index = static_cast<size_t>(-1);
+
+        if (pinned_index != worker_index) {
+            pin_worker_thread(worker_index);
+            pinned_index = worker_index;
+        }
+    }
 
     struct glibc_backend {
         static void* allocate(const size_t size) { return malloc(size); }
@@ -60,29 +77,17 @@ namespace {
 
     template <typename Backend>
     void threaded_loop(benchmark::State& state, const size_t size) {
+        pin_worker_thread_once(static_cast<size_t>(state.thread_index()));
+
         constexpr size_t rounds = 20000;
         for (auto _: state) {
-            atomic<int64_t> operations{0};
-            vector<thread> workers;
-            const size_t count = static_cast<size_t>(state.threads());
-            workers.reserve(count);
-            for (size_t index = 0; index < count; ++index) {
-                workers.emplace_back([&operations, size]() {
-                    int64_t local = 0;
-                    for (size_t round = 0; round < rounds; ++round) {
-                        void* block = Backend::allocate(size);
-                        touch(block);
-                        Backend::release(block);
-                        ++local;
-                    }
-                    operations.fetch_add(local * 2, memory_order_relaxed);
-                });
+            for (size_t round = 0; round < rounds; ++round) {
+                void* block = Backend::allocate(size);
+                touch(block);
+                Backend::release(block);
             }
-            for (auto& worker: workers) {
-                worker.join();
-            }
-            state.SetItemsProcessed(operations.load());
-            state.SetBytesProcessed(operations.load() / 2 * static_cast<int64_t>(size));
+            state.SetItemsProcessed(static_cast<int64_t>(rounds) * 2);
+            state.SetBytesProcessed(static_cast<int64_t>(rounds) * static_cast<int64_t>(size));
         }
     }
 

@@ -19,7 +19,8 @@ namespace {
                 stats.peak_mapped_bytes);
         println("  小对象 span {} / 大对象映射 {} / 保留区域 {} / 保留空闲 span {}", stats.small_mapped_bytes,
                 stats.large_mapped_bytes, stats.cached_region_bytes, stats.cached_empty_bytes);
-        println("  映射次数 {} / 归还次数 {}", stats.os_map_calls, stats.os_unmap_calls);
+        println("  映射次数 {} / 归还次数 {} / 外来释放 {}", stats.os_map_calls, stats.os_unmap_calls,
+                stats.foreign_releases);
     }
 } // namespace
 

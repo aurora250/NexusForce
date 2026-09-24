@@ -1,4 +1,5 @@
 #include "install_consumer.hpp"
+#include <NeForce/core/memory/memory_pool.hpp>
 #include <NeForce/core/reflect/reflect.hpp>
 #include <NeForce/core/system/console.hpp>
 
@@ -144,6 +145,14 @@ int main() {
     text += " install";
     check(text == "NexusForce install", "core string facilities work from an installed package");
     check(registered("InstallConsumerOrder"), "registry lookup is stable across repeated queries");
+
+    // --- the allocator model --------------------------------------------------------------------
+    memory_pool& pool = system_memory_pool();
+#ifdef NEFORCE_USING_MEMORY_POOL
+    string pooled(96, 'x');
+    check(pool.owns(pooled.data()), "the installed package routes library containers to the memory pool");
+#endif
+    check(pool.foreign_release_count() == 0, "no allocation crossed the allocator boundary");
 
     println(string("checks: ") + to_string(checks) + ", failures: " + to_string(failures));
 

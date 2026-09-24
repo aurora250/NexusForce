@@ -216,13 +216,12 @@ target_compile_definitions(NexusForce
 )
 
 if(NEXUSFORCE_USING_MEMORY_POOL)
-    target_sources(NexusForce PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/new.cpp)
+    # The pool backs the library's own containers through standard_allocator,
+    # which reaches the exported system_memory_pool() singleton.
+    # The shared library no longer replaces the global operator new / delete, so consumers,
+    # other DLLs and the library itself all stay on one allocator by construction;
+    # a process wide replacement is a separate, explicit opt-in (NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE).
     target_compile_definitions(NexusForce PUBLIC NEFORCE_USING_MEMORY_POOL)
-    # The library's own allocation sites must bind to this library's replacement operators instead of libstdc++'s,
-    # whatever the load order of the consuming process is.
-    if(UNIX AND NOT APPLE)
-        target_link_options(NexusForce PRIVATE "LINKER:-Bsymbolic-functions")
-    endif()
 endif()
 
 if(NEXUSFORCE_USING_SSO)
@@ -447,15 +446,18 @@ message(STATUS "")
 
 
 # 全局分配器覆盖目标
-if(NEXUSFORCE_USING_MEMORY_POOL)
+# 打开 NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE 只构建提供者，不会让消费者自动继承；
+# 需要整进程统一的模块必须显式链接 NexusForceMemoryPoolOverrideStatic。
+if(NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE)
     add_library(NexusForceMemoryPoolOverride OBJECT ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/new.cpp)
     target_link_libraries(NexusForceMemoryPoolOverride PUBLIC NexusForce::NexusForce)
-    target_compile_definitions(NexusForceMemoryPoolOverride PRIVATE NEFORCE_USING_MEMORY_POOL)
+    target_compile_definitions(NexusForceMemoryPoolOverride PRIVATE NEFORCE_USING_MEMORY_POOL NEFORCE_USING_MEMORY_POOL_OVERRIDE)
     set_target_properties(NexusForceMemoryPoolOverride PROPERTIES FOLDER "src")
     nexusforce_compiler_options(NexusForceMemoryPoolOverride)
 
     add_library(NexusForceMemoryPoolOverrideStatic STATIC $<TARGET_OBJECTS:NexusForceMemoryPoolOverride>)
     target_link_libraries(NexusForceMemoryPoolOverrideStatic PUBLIC NexusForce::NexusForce)
+    target_compile_definitions(NexusForceMemoryPoolOverrideStatic INTERFACE NEFORCE_USING_MEMORY_POOL_OVERRIDE)
     set_target_properties(NexusForceMemoryPoolOverrideStatic PROPERTIES FOLDER "src")
 endif()
 
@@ -470,7 +472,7 @@ install(TARGETS NexusForce
         INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 
-if(NEXUSFORCE_USING_MEMORY_POOL)
+if(NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE)
     install(TARGETS NexusForceMemoryPoolOverrideStatic
             EXPORT NexusForceTargets
             ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}

@@ -220,6 +220,31 @@ jobs:
           require "$NF_PREFIX/lib/cmake/NexusForce/NexusForceReflectScanner.cmake"
           require "$NF_PREFIX/lib/cmake/NexusForce/NexusForceRuntime.cmake"
 
+          if ! grep -q 'NEFORCE_USING_MEMORY_POOL' "$NF_PREFIX/lib/cmake/NexusForce/NexusForceTargets.cmake"; then
+            echo "::error::the exported targets do not forward NEFORCE_USING_MEMORY_POOL to consumers"
+            status=1
+          fi
+
+          for variable in NEXUSFORCE_USING_MEMORY_POOL NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE; do
+            if ! grep -q "$variable" "$NF_PREFIX/lib/cmake/NexusForce/NexusForceConfig.cmake"; then
+              echo "::error::the installed package config does not report $variable"
+              status=1
+            fi
+          done
+
+          if [ "$RUNNER_OS" != "Windows" ]; then
+            for library in "$NF_PREFIX/lib/libNexusForce.so" "$NF_PREFIX/lib/libNexusForced.so"; do
+              if nm -D --defined-only "$library" | grep -E ' (_Znwm|_Znam|_ZdlPv|_ZdaPv)(St11align_val_t)?$'; then
+                echo "::error::$library defines a global allocation operator"
+                status=1
+              fi
+              if ! nm -D --defined-only "$library" | grep -q '_ZN7neforce18system_memory_poolEv'; then
+                echo "::error::$library does not export the pool singleton"
+                status=1
+              fi
+            done
+          fi
+
           if [ "$RUNNER_OS" = "Windows" ]; then
             require "$NF_PREFIX/bin/NFRS.exe"
             require "$NF_PREFIX/bin/NexusForce.dll"
@@ -241,6 +266,18 @@ jobs:
                 fi
                 require "$NF_PREFIX/bin/$import"
               done < <(dumpbin -dependents "$library" | tr -d '\r' | sed -n 's/^ *\([A-Za-z0-9._-]*\.dll\)$/\1/p')
+            done
+
+            for library in "$NF_PREFIX/bin/NexusForce.dll" "$NF_PREFIX/bin/NexusForced.dll"; do
+              if dumpbin -exports "$library" | grep -E '\?\?(_[UV])?[23]@YA'; then
+                echo "::error::$library exports a global allocation operator"
+                status=1
+              fi
+
+              if ! dumpbin -exports "$library" | grep -q 'system_memory_pool@neforce@@'; then
+                echo "::error::$library does not export the pool singleton"
+                status=1
+              fi
             done
           else
             require "$NF_PREFIX/bin/NFRS"

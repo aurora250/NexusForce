@@ -364,6 +364,40 @@ jobs:
 
           exit $BUILD_EXIT
 
+      - name: Check the allocator boundary (Windows)
+        if: runner.os == 'Windows' && matrix.compiler == 'msvc' && matrix.config == 'full'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          dll=build/bin/Release/NexusForce.dll
+          exe=build/bin/Release/NexusForceUnitTests.exe
+
+          for artifact in "$dll" "$exe"; do
+            if [ ! -f "$artifact" ]; then
+              echo "::error::$artifact was not produced"
+              exit 1
+            fi
+          done
+
+          if dumpbin -exports "$dll" | grep -E '\?\?(_[UV])?[23]@YA'; then
+            echo "::error::NexusForce.dll exports a global allocation operator: consumers would silently"
+            echo "::error::use the pool while third party C++ DLLs keep the C runtime heap"
+            exit 1
+          fi
+
+          if dumpbin -imports "$exe" | grep -E '\?\?(_[UV])?[23]@YA'; then
+            echo "::error::the unit test executable imports a global allocation operator from NexusForce.dll"
+            exit 1
+          fi
+
+          if ! dumpbin -exports "$dll" | grep -q 'system_memory_pool@neforce@@'; then
+            echo "::error::NexusForce.dll does not export the pool singleton"
+            exit 1
+          fi
+
+          echo "the allocator boundary holds: NexusForce.dll exports the pool but no allocation operators"
+
       - name: Save vcpkg binary cache
         uses: ./.github/actions/save-vcpkg-cache
         with:
@@ -421,13 +455,14 @@ jobs:
             -DCMAKE_TOOLCHAIN_FILE="$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" \
             -DNEXUSFORCE_BUILD_DOCS=OFF \
             -DNEXUSFORCE_BUILD_EXAMPLES=OFF \
-            -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
+            -DNEXUSFORCE_BUILD_BENCHMARKS=OFF \
+            -DNEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE=ON
 
       - name: Build library and allocator test targets
         shell: bash
         run: |
           cmake --build build --parallel --target \
-            NexusForce NexusForceUnitTests NexusForceAllocatorOverrideTest
+            NexusForce NexusForceUnitTests NexusForceMemoryPoolOverrideStatic NexusForceAllocatorOverrideTest
 
       - name: Run memory pool unit tests
         shell: bash
@@ -438,6 +473,31 @@ jobs:
         shell: bash
         run: |
           ./build/bin/Release/NexusForceAllocatorOverrideTest
+
+      - name: Verify the shared library leaves the global operators alone
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          library=$(find build -name 'libNexusForce.so' -not -path '*vcpkg*' | head -1)
+          if [ -z "$library" ]; then
+            echo "::error::libNexusForce.so was not produced"
+            exit 1
+          fi
+          echo "checking $library"
+
+          if nm -D --defined-only "$library" | grep -E ' (_Znwm|_Znam|_ZdlPv|_ZdaPv)(St11align_val_t)?$'; then
+            echo "::error::the shared library defines the global allocation operators, so every consumer"
+            echo "::error::and every other shared library is silently moved onto a second heap"
+            exit 1
+          fi
+
+          if ! nm -D --defined-only "$library" | grep -q '_ZN7neforce18system_memory_poolEv'; then
+            echo "::error::system_memory_pool() is not exported; consumers cannot reach the pool"
+            exit 1
+          fi
+
+          echo "the library exports the pool singleton and does not replace the global operators"
 
       - name: Save vcpkg binary cache
         uses: ./.github/actions/save-vcpkg-cache
@@ -457,5 +517,5 @@ jobs:
           echo "|------|----|" >> $GITHUB_STEP_SUMMARY
           echo "| 平台 | ubuntu-latest |" >> $GITHUB_STEP_SUMMARY
           echo "| 编译器 | gcc |" >> $GITHUB_STEP_SUMMARY
-          echo "| 配置 | 默认（NEXUSFORCE_USING_MEMORY_POOL=ON，链接 NexusForceMemoryPoolOverride） |" >> $GITHUB_STEP_SUMMARY
+          echo "| 配置 | NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE=ON |" >> $GITHUB_STEP_SUMMARY
           echo "| 覆盖生效验证 | new/delete 计入 system_memory_pool() 统计 |" >> $GITHUB_STEP_SUMMARY

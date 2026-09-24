@@ -35,6 +35,13 @@ string(JSON CONFIG_USING_SQLCIPHER   GET ${JSON_CONTENT} feature sqlcipher)
 string(JSON CONFIG_USING_IO_URING    GET ${JSON_CONTENT} feature io_uring)
 string(JSON CONFIG_USING_MEMORY_POOL GET ${JSON_CONTENT} feature memory-pool)
 
+# The global allocator override is a process wide decision and stays off unless config.json asks for it.
+string(JSON CONFIG_MEMORY_POOL_OVERRIDE ERROR_VARIABLE _config_pool_override_error
+        GET ${JSON_CONTENT} feature memory-pool-global-override)
+if(_config_pool_override_error)
+    set(CONFIG_MEMORY_POOL_OVERRIDE OFF)
+endif()
+
 # Missing keys default to ON: keeps AES-NI/PCLMUL enabled on Linux/GCC by
 # default, aligned with the MSVC-always-available assumption.
 string(JSON CONFIG_USING_AES_NI ERROR_VARIABLE _config_aes_ni_error GET ${JSON_CONTENT} feature aes-ni)
@@ -178,7 +185,13 @@ option(NEXUSFORCE_USING_SQLCIPHER   "Using SQLCipher"                          $
 option(NEXUSFORCE_USING_IO_URING    "Using io uring"                           ${CONFIG_USING_IO_URING})
 option(NEXUSFORCE_USING_AES_NI      "Using AES-NI / AES crypto"                ${CONFIG_USING_AES_NI})
 option(NEXUSFORCE_USING_PCLMUL      "Using PCLMULQDQ / PMULL"                  ${CONFIG_USING_PCLMUL})
-option(NEXUSFORCE_USING_MEMORY_POOL "Using memory pool to global operator new" ${CONFIG_USING_MEMORY_POOL})
+
+option(NEXUSFORCE_USING_MEMORY_POOL
+        "Using memory pool as the allocator of library containers" ${CONFIG_USING_MEMORY_POOL})
+option(NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE
+        "Replace the process wide operator new / delete with the memory pool" ${CONFIG_MEMORY_POOL_OVERRIDE})
+option(NEXUSFORCE_OVERRIDE_TEST_WITH_SHARED_GTEST
+        "Build the allocator override test against a shared GTest (rejected by the Windows debug heap)" OFF)
 
 option(NEXUSFORCE_BUILD_TESTS       "Build unit tests"                   ${CONFIG_BUILD_TESTS})
 option(NEXUSFORCE_BUILD_EXAMPLES    "Build example programs"             ${CONFIG_BUILD_EXAMPLES})
@@ -217,13 +230,16 @@ _nexusforce_sanitizer_summary(NEXUSFORCE_SANITIZER_SUMMARY)
 
 # AddressSanitizer and ThreadSanitizer install their own operator new / delete,
 # and a second replacement in the same process makes both of them unreliable.
-# The pool itself stays enabled, only the global replacement is dropped,
+# The pool itself stays available, only the allocator substitution is dropped,
 # so the sanitizer workflows keep working as documented.
-if(NEXUSFORCE_USING_MEMORY_POOL AND (NEXUSFORCE_ENABLE_ASAN OR NEXUSFORCE_ENABLE_TSAN))
+if((NEXUSFORCE_USING_MEMORY_POOL OR NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE) AND
+   (NEXUSFORCE_ENABLE_ASAN OR NEXUSFORCE_ENABLE_TSAN))
     message(WARNING
-            "NEXUSFORCE_ENABLE_ASAN / NEXUSFORCE_ENABLE_TSAN replace operator new themselves; "
-            "disabling NEXUSFORCE_USING_MEMORY_POOL for this build (memory_pool itself stays available).")
+            "NEXUSFORCE_ENABLE_ASAN / NEXUSFORCE_ENABLE_TSAN own the allocation path; disabling "
+            "NEXUSFORCE_USING_MEMORY_POOL and NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE for this build "
+            "(memory_pool itself stays available).")
     set(NEXUSFORCE_USING_MEMORY_POOL OFF)
+    set(NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE OFF)
 endif()
 
 
@@ -249,7 +265,9 @@ message(STATUS "  NEXUSFORCE_USING_SQLCIPHER:     ${NEXUSFORCE_USING_SQLCIPHER}"
 message(STATUS "  NEXUSFORCE_USING_IO_URING:      ${NEXUSFORCE_USING_IO_URING}")
 message(STATUS "  NEXUSFORCE_USING_AES_NI:        ${NEXUSFORCE_USING_AES_NI}")
 message(STATUS "  NEXUSFORCE_USING_PCLMUL:        ${NEXUSFORCE_USING_PCLMUL}")
-message(STATUS "  NEXUSFORCE_USING_MEMORY_POOL:   ${NEXUSFORCE_USING_MEMORY_POOL}")
+message(STATUS "")
+message(STATUS "  NEXUSFORCE_USING_MEMORY_POOL:           ${NEXUSFORCE_USING_MEMORY_POOL}")
+message(STATUS "  NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE: ${NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE}")
 message(STATUS "")
 message(STATUS "  NEXUSFORCE_BUILD_TESTS:         ${NEXUSFORCE_BUILD_TESTS}")
 message(STATUS "  NEXUSFORCE_BUILD_EXAMPLES:      ${NEXUSFORCE_BUILD_EXAMPLES}")

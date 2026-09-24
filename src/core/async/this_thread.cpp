@@ -1,5 +1,6 @@
 #include <NeForce/core/async/this_thread.hpp>
 #include <NeForce/core/system/sysinfo.hpp>
+#include <algorithm>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <windef.h>
 #    include <WinBase.h>
@@ -30,6 +31,15 @@ namespace {
         li.HighPart = ft.dwHighDateTime;
         return li.QuadPart / 10000;
     }
+
+    constexpr int g_thread_priority_map[] = {
+            0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, // -15 .. -2
+            10,                                                    // -1
+            30,                                                    //  0
+            50,                                                    //  1
+            70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70,    // 2 .. 14
+            90                                                     // 15
+    };
 #endif
 
     const auto pcount = sysinfo::instance().get_system_info().processor_numbers;
@@ -201,7 +211,7 @@ bool set_affinity(size_t cpu_mask) noexcept {
 
 bool affinity(uint64_t& affi) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    ::DWORD_PTR mask = ::SetThreadAffinityMask(::GetCurrentThread(), 0);
+    const ::DWORD_PTR mask = ::SetThreadAffinityMask(::GetCurrentThread(), 0);
     if (mask == 0) {
         return false;
     }
@@ -255,6 +265,9 @@ bool cpu_time(cpu_times& times) noexcept {
 }
 
 bool set_priority(int priority) noexcept {
+    priority = max(priority, 0);
+    priority = min(priority, 100);
+
 #ifdef NEFORCE_PLATFORM_WINDOWS
     int win_priority = THREAD_PRIORITY_LOWEST;
     if (priority >= 90) {
@@ -277,6 +290,9 @@ bool set_priority(int priority) noexcept {
     }
     const int min_p = ::sched_get_priority_min(policy);
     const int max_p = ::sched_get_priority_max(policy);
+    if (max_p <= min_p) {
+        return param.sched_priority == min_p;
+    }
     param.sched_priority = min_p + (priority * (max_p - min_p)) / 100;
     return ::pthread_setschedparam(::pthread_self(), policy, &param) == 0;
 #endif
@@ -285,22 +301,12 @@ bool set_priority(int priority) noexcept {
 int priority() noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const int win_priority = ::GetThreadPriority(::GetCurrentThread());
-    if (win_priority == THREAD_PRIORITY_ERROR_RETURN) {
+    const unsigned idx = static_cast<unsigned>(win_priority) + 15U;
+    constexpr unsigned slot = extent_v<decltype(g_thread_priority_map)>;
+    if (idx >= slot) {
         return 0;
     }
-    if (win_priority == THREAD_PRIORITY_TIME_CRITICAL) {
-        return 90;
-    } else if (win_priority >= THREAD_PRIORITY_HIGHEST) {
-        return 70;
-    } else if (win_priority >= THREAD_PRIORITY_ABOVE_NORMAL) {
-        return 50;
-    } else if (win_priority >= THREAD_PRIORITY_NORMAL) {
-        return 30;
-    } else if (win_priority >= THREAD_PRIORITY_BELOW_NORMAL) {
-        return 10;
-    } else {
-        return 0;
-    }
+    return g_thread_priority_map[idx];
 #else
     int policy = 0;
     ::sched_param param;

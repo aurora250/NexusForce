@@ -60,6 +60,21 @@ if(NOT EXISTS "${NEXUSFORCE_AI_API_INDEX}")
     message(FATAL_ERROR "NEXUSFORCE_AI_API_INDEX does not point at an installed file: ${NEXUSFORCE_AI_API_INDEX}")
 endif()
 
+# The allocator mode is part of the ABI: library containers are allocated by the process wide memory pool
+# inside the shared library, so a consumer compiled without the matching definition would free pooled blocks
+# through the C runtime heap. The package has to forward the definition, not merely report the option.
+if(NOT DEFINED NEXUSFORCE_USING_MEMORY_POOL)
+    message(FATAL_ERROR "installed package does not report NEXUSFORCE_USING_MEMORY_POOL")
+endif()
+
+get_target_property(_nexusforce_interface_definitions NexusForce::NexusForce INTERFACE_COMPILE_DEFINITIONS)
+if(NEXUSFORCE_USING_MEMORY_POOL AND NOT _nexusforce_interface_definitions MATCHES "NEFORCE_USING_MEMORY_POOL")
+    message(FATAL_ERROR
+            "the installed package reports the memory pool as enabled but does not forward "
+            "NEFORCE_USING_MEMORY_POOL to consumers: consumer containers would use the C runtime heap "
+            "while the library uses the pool")
+endif()
+
 add_executable(install_consumer main.cpp)
 
 target_link_libraries(install_consumer PRIVATE NexusForce::NexusForce)

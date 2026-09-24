@@ -258,7 +258,7 @@ public:
      * @param brand CPU型号字符串
      * @return 标称频率，单位 MHz；型号字符串不含频率信息时返回 0
      */
-    NEFORCE_NODISCARD static uint32_t parse_brand_frequency(const string_view brand) noexcept;
+    NEFORCE_NODISCARD static uint32_t parse_brand_frequency(string_view brand) noexcept;
 
     /**
      * @brief 获取操作系统版本信息

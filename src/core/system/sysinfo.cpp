@@ -188,13 +188,13 @@ namespace {
 
         // Get the current CPU frequency from the registry
         ::HKEY hkey = nullptr;
-        if (::RegOpenKeyExA(HKEY_LOCAL_MACHINE, R"(HARDWARE\DESCRIPTION\System\CentralProcessor\0)", 0, KEY_READ,
+        if (::RegOpenKeyExW(HKEY_LOCAL_MACHINE, LR"(HARDWARE\DESCRIPTION\System\CentralProcessor\0)", 0, KEY_READ,
                             &hkey) == ERROR_SUCCESS) {
 
             ::DWORD mhz = 0;
             ::DWORD size = sizeof(::DWORD);
 
-            if (::RegQueryValueExA(hkey, "~MHz", nullptr, nullptr, reinterpret_cast<::LPBYTE>(&mhz), &size) ==
+            if (::RegQueryValueExW(hkey, L"~MHz", nullptr, nullptr, reinterpret_cast<::LPBYTE>(&mhz), &size) ==
                 ERROR_SUCCESS) {
                 cpu_info.current_MHz = mhz;
             }
@@ -202,12 +202,13 @@ namespace {
             mhz = 0;
             size = sizeof(::DWORD);
 
-            LONG result = ::RegQueryValueExA(hkey, "MaxMHz", nullptr, nullptr, reinterpret_cast<::LPBYTE>(&mhz), &size);
+            LONG result =
+                    ::RegQueryValueExW(hkey, L"MaxMHz", nullptr, nullptr, reinterpret_cast<::LPBYTE>(&mhz), &size);
 
             if (result != ERROR_SUCCESS) {
                 mhz = 0;
                 size = sizeof(::DWORD);
-                result = ::RegQueryValueExA(hkey, "MaxClockSpeed", nullptr, nullptr, reinterpret_cast<::LPBYTE>(&mhz),
+                result = ::RegQueryValueExW(hkey, L"MaxClockSpeed", nullptr, nullptr, reinterpret_cast<::LPBYTE>(&mhz),
                                             &size);
             }
 
@@ -423,7 +424,7 @@ namespace {
 
     void get_os_version_internal(sysinfo::os_version_info& os_version_info) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        const ::HMODULE ntdll = ::GetModuleHandle("ntdll.dll");
+        const ::HMODULE ntdll = ::GetModuleHandleW(L"ntdll.dll");
         if (ntdll != nullptr) {
             using RtlGetVersionPtr = ::NTSTATUS(__stdcall*)(::LPOSVERSIONINFOW);
             const auto RtlGetVersion = reinterpret_cast<RtlGetVersionPtr>(::GetProcAddress(ntdll, "RtlGetVersion"));
@@ -439,14 +440,14 @@ namespace {
         }
 
         ::HKEY hkey{};
-        if (::RegOpenKeyEx(HKEY_LOCAL_MACHINE, R"(SOFTWARE\Microsoft\Windows NT\CurrentVersion)", 0, KEY_READ, &hkey) ==
-            ERROR_SUCCESS) {
+        if (::RegOpenKeyExW(HKEY_LOCAL_MACHINE, LR"(SOFTWARE\Microsoft\Windows NT\CurrentVersion)", 0, KEY_READ,
+                            &hkey) == ERROR_SUCCESS) {
 
             char product_name[256];
             ::DWORD size = sizeof(product_name);
 
-            if (::RegQueryValueEx(hkey, "ProductName", nullptr, nullptr, reinterpret_cast<::LPBYTE>(product_name),
-                                  &size) == ERROR_SUCCESS) {
+            if (::RegQueryValueExW(hkey, L"ProductName", nullptr, nullptr, reinterpret_cast<::LPBYTE>(product_name),
+                                   &size) == ERROR_SUCCESS) {
                 os_version_info.product_name = product_name;
             }
 
@@ -840,10 +841,10 @@ float64_t sysinfo::cpu_usage() {
     static bool initialized = false;
 
     if (!initialized) {
-        if (::PdhOpenQuery(nullptr, 0, &cpu_query) != ERROR_SUCCESS) {
+        if (::PdhOpenQueryW(nullptr, 0, &cpu_query) != ERROR_SUCCESS) {
             return 0.0;
         }
-        if (::PdhAddCounter(cpu_query, "\\Processor(_Total)\\% Processor Time", 0, &cpu_total) != ERROR_SUCCESS) {
+        if (::PdhAddCounterW(cpu_query, L"\\Processor(_Total)\\% Processor Time", 0, &cpu_total) != ERROR_SUCCESS) {
             ::PdhCloseQuery(cpu_query);
             return 0.0;
         }
@@ -961,23 +962,24 @@ sysinfo::disk_info sysinfo::get_disk_info(const char* path) {
     disk_info info;
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    char resolved_path[MAX_PATH];
+    wchar_t resolved_path[MAX_PATH];
     if (path == nullptr) {
-        if (::GetCurrentDirectoryA(MAX_PATH, resolved_path) == FALSE) {
+        if (::GetCurrentDirectoryW(MAX_PATH, resolved_path) == FALSE) {
             return info;
         }
-        if (resolved_path[1] == ':') {
-            resolved_path[3] = '\0';
+        if (resolved_path[1] == L':') {
+            resolved_path[3] = L'\0';
         } else {
-            string_copy(resolved_path, "C:\\");
+            string_copy(resolved_path, L"C:\\");
         }
     } else {
-        string_copy(resolved_path, path);
+        const wstring wpath = character::to_wstring(path);
+        string_copy(resolved_path, wpath.data());
     }
 
     ::ULARGE_INTEGER freeBytesAvailable, totalBytes, totalFreeBytes;
-    if (::GetDiskFreeSpaceExA(resolved_path, &freeBytesAvailable, &totalBytes, &totalFreeBytes) == TRUE) {
-        info.path = resolved_path;
+    if (::GetDiskFreeSpaceExW(resolved_path, &freeBytesAvailable, &totalBytes, &totalFreeBytes) == TRUE) {
+        info.path = wcharacter::to_string(resolved_path);
         info.total_bytes = totalBytes.QuadPart;
         info.free_bytes = totalFreeBytes.QuadPart;
         info.used_bytes = info.total_bytes - info.free_bytes;
@@ -1029,7 +1031,7 @@ vector<sysinfo::network_interface> sysinfo::network_interfaces() {
                     const_cast<::LPSOCKADDR>(sa),
                     static_cast<::DWORD>(sa->sa_family == AF_INET6 ? sizeof(::SOCKADDR_IN6) : sizeof(::SOCKADDR_IN)),
                     nullptr, addr_buf, &addr_len);
-            iface.address = to_string(addr_buf);
+            iface.address = wcharacter::to_string(addr_buf);
         }
 
         if (a->PhysicalAddressLength > 0) {

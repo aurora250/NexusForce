@@ -184,7 +184,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **标准容器** - `array`/`vector`/`list`/`deque`/`map`/`set`/`unordered_map`/`unordered_set`/`sparse_map`/`sparse_set`/`flat_unordered_map`/`flat_unordered_set` 等
 - **`rb_tree`** - 自平衡二叉搜索树实现
 - **`hashtable`** - 链地址法哈希表
-- **`flat_hashtable`** - SwissTable 开放寻址平坦哈希表，H2 预过滤 + SIMD 批量探测
+- **`flat_hashtable`** - 高性能 SwissTable 开放寻址平坦哈希表，H2 预过滤 + SIMD 批量探测，性能测试详见 [平坦哈希表性能测试记录](benchmark/container/PERFORMANCE.md)
 - **`bloom_filter`** - 概率性数据结构
 - **`lru_cache`/`ttl_cache`** - 基于最近最少使用/过期时间的缓存策略
 - **`buffer_chain`** - 零拷贝链式缓冲区，支持 writev 聚合输出
@@ -327,6 +327,12 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **构造/析构工具** - 对象生命周期管理
 - **`trace_allocator` ** - 调试用内存监控
 - **`standard_allocator`** - 基于编译器特性的策略特化分配器
+- **`memory_pool` / `pool_allocator`** - 高性能内存池：零块头 span + 尺寸类 + 线程本地缓存，大对象直接映射操作系统内存，性能测试详见 [内存池性能测试记录](benchmark/memory/PERFORMANCE.md)
+
+#### 分配器模型
+
+- 打开 `NEXUSFORCE_USING_MEMORY_POOL`（默认）时，库容器（`basic_string`、`vector` 等）的分配统一由全局内存池承担
+- 显式打开 `NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE` 并让每个会跨模块传递所有权的 C++ 模块链接 `NexusForceMemoryPoolOverrideStatic` 以使全进程使用全局内存池
 
 ### 📦 压缩 (Compress)
 - **lz4 压缩** - `lz4_compressor` 高速数据压缩/解压

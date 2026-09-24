@@ -1,11 +1,11 @@
 #include <NeForce/core/memory/new.hpp>
-#ifdef NEFORCE_USING_MEMORY_POOL
+#ifdef NEFORCE_USING_MEMORY_POOL_OVERRIDE
+#    include <NeForce/core/algorithm/compare.hpp>
 #    include <NeForce/core/exception/exception.hpp>
 #    include <NeForce/core/memory/memory_pool.hpp>
 
 namespace {
-    constexpr _NEFORCE size_t default_alignment = alignof(_NEFORCE max_align_t) > 16 ? alignof(_NEFORCE max_align_t)
-                                                                                     : 16;
+    constexpr _NEFORCE size_t default_alignment = _NEFORCE max<size_t>(alignof(_NEFORCE max_align_t), 16);
 
     NEFORCE_ALWAYS_INLINE void* pool_allocate(const _NEFORCE size_t size, const _NEFORCE size_t alignment) noexcept {
         return _NEFORCE system_memory_pool().try_allocate(size, alignment);
@@ -30,6 +30,7 @@ namespace {
 } // namespace
 
 
+// NOLINTNEXTLINE(readability-inconsistent-declaration-parameter-name)
 void* operator new(const _NEFORCE size_t size) {
     void* block = pool_allocate(size, default_alignment);
     if (block == nullptr) {
@@ -38,42 +39,52 @@ void* operator new(const _NEFORCE size_t size) {
     return block;
 }
 
+// NOLINTNEXTLINE(readability-inconsistent-declaration-parameter-name)
 void* operator new[](const _NEFORCE size_t size) { return ::operator new(size); }
 
+// NOLINTNEXTLINE(readability-inconsistent-declaration-parameter-name)
 void* operator new(const _NEFORCE size_t size, const std::nothrow_t& tag) noexcept {
     static_cast<void>(tag);
     return pool_allocate_nothrow(size, default_alignment);
 }
 
+// NOLINTNEXTLINE(readability-inconsistent-declaration-parameter-name)
 void* operator new[](const _NEFORCE size_t size, const std::nothrow_t& tag) noexcept {
     static_cast<void>(tag);
     return pool_allocate_nothrow(size, default_alignment);
 }
 
+// NOLINTNEXTLINE(readability-inconsistent-declaration-parameter-name)
 void operator delete(void* ptr) noexcept { pool_release(ptr); }
 
+// NOLINTNEXTLINE(readability-inconsistent-declaration-parameter-name)
 void operator delete[](void* ptr) noexcept { pool_release(ptr); }
 
+// NOLINTNEXTLINE(readability-inconsistent-declaration-parameter-name)
 void operator delete(void* ptr, const _NEFORCE size_t size) noexcept {
     static_cast<void>(size);
     pool_release(ptr);
 }
 
+// NOLINTNEXTLINE(readability-inconsistent-declaration-parameter-name)
 void operator delete[](void* ptr, const _NEFORCE size_t size) noexcept {
     static_cast<void>(size);
     pool_release(ptr);
 }
 
+// NOLINTNEXTLINE(readability-inconsistent-declaration-parameter-name)
 void operator delete(void* ptr, const std::nothrow_t& tag) noexcept {
     static_cast<void>(tag);
     pool_release(ptr);
 }
 
+// NOLINTNEXTLINE(readability-inconsistent-declaration-parameter-name)
 void operator delete[](void* ptr, const std::nothrow_t& tag) noexcept {
     static_cast<void>(tag);
     pool_release(ptr);
 }
 
+// NOLINTNEXTLINE(readability-inconsistent-declaration-parameter-name)
 void* operator new(const _NEFORCE size_t size, const std::align_val_t align) {
     void* block = pool_allocate(size, aligned_size(align));
     if (block == nullptr) {
@@ -82,46 +93,55 @@ void* operator new(const _NEFORCE size_t size, const std::align_val_t align) {
     return block;
 }
 
+// NOLINTNEXTLINE(readability-inconsistent-declaration-parameter-name)
 void* operator new[](const _NEFORCE size_t size, const std::align_val_t align) { return ::operator new(size, align); }
 
+// NOLINTNEXTLINE(readability-inconsistent-declaration-parameter-name)
 void* operator new(const _NEFORCE size_t size, const std::align_val_t align, const std::nothrow_t& tag) noexcept {
     static_cast<void>(tag);
     return pool_allocate_nothrow(size, aligned_size(align));
 }
 
+// NOLINTNEXTLINE(readability-inconsistent-declaration-parameter-name)
 void* operator new[](const _NEFORCE size_t size, const std::align_val_t align, const std::nothrow_t& tag) noexcept {
     static_cast<void>(tag);
     return pool_allocate_nothrow(size, aligned_size(align));
 }
 
+// NOLINTNEXTLINE(readability-inconsistent-declaration-parameter-name)
 void operator delete(void* ptr, const std::align_val_t align) noexcept {
     static_cast<void>(align);
     pool_release(ptr);
 }
 
+// NOLINTNEXTLINE(readability-inconsistent-declaration-parameter-name)
 void operator delete[](void* ptr, const std::align_val_t align) noexcept {
     static_cast<void>(align);
     pool_release(ptr);
 }
 
+// NOLINTNEXTLINE(readability-inconsistent-declaration-parameter-name)
 void operator delete(void* ptr, const _NEFORCE size_t size, const std::align_val_t align) noexcept {
     static_cast<void>(size);
     static_cast<void>(align);
     pool_release(ptr);
 }
 
+// NOLINTNEXTLINE(readability-inconsistent-declaration-parameter-name)
 void operator delete[](void* ptr, const _NEFORCE size_t size, const std::align_val_t align) noexcept {
     static_cast<void>(size);
     static_cast<void>(align);
     pool_release(ptr);
 }
 
+// NOLINTNEXTLINE(readability-inconsistent-declaration-parameter-name)
 void operator delete(void* ptr, const std::align_val_t align, const std::nothrow_t& tag) noexcept {
     static_cast<void>(align);
     static_cast<void>(tag);
     pool_release(ptr);
 }
 
+// NOLINTNEXTLINE(readability-inconsistent-declaration-parameter-name)
 void operator delete[](void* ptr, const std::align_val_t align, const std::nothrow_t& tag) noexcept {
     static_cast<void>(align);
     static_cast<void>(tag);
@@ -174,4 +194,4 @@ void* operator new[](const _NEFORCE size_t size, const _NEFORCE align_t align, c
     return pool_allocate_nothrow(size, aligned_size(align));
 }
 
-#endif // NEFORCE_USING_MEMORY_POOL
+#endif // NEFORCE_USING_MEMORY_POOL_OVERRIDE

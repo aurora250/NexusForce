@@ -15,7 +15,7 @@ signaled_(initial_state),
 type_(t) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const ::BOOL manual = (t == type::manual_reset) ? TRUE : FALSE;
-    handle_ = ::CreateEventA(nullptr, manual, initial_state ? TRUE : FALSE, nullptr);
+    handle_ = ::CreateEventW(nullptr, manual, initial_state ? TRUE : FALSE, nullptr);
     if (handle_ == nullptr) {
         NEFORCE_THROW_EXCEPTION(system_exception("CreateEvent failed"));
     }

@@ -178,6 +178,13 @@ bool NEFORCE_API set_affinity(size_t cpu_mask) noexcept;
 bool NEFORCE_API affinity(uint64_t& affi) noexcept;
 
 /**
+ * @brief 将线程绑定在指定 CPU
+ * @param core_index CPU 序号
+ * @return 绑定是否成功
+ */
+bool NEFORCE_API bind_core(uint32_t core_index) noexcept;
+
+/**
  * @brief 获取当前线程的 CPU 时间
  * @param times 用户态和内核态时间
  * @return 成功返回 true

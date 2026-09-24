@@ -52,12 +52,7 @@ namespace {
             -1;
 #endif
 
-    const auto granularity =
-#ifdef NEFORCE_PLATFORM_WINDOWS
-            sysinfo::instance().get_system_info().allocation_granularity;
-#else
-            sysinfo::instance().get_system_info().page_size;
-#endif
+    const auto granularity = sysinfo::instance().get_system_info().allocation_granularity;
 } // namespace
 
 

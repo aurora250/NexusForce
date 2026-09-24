@@ -41,7 +41,7 @@ void debug_breakpoint(bool condition, const char* message) noexcept {
     if (likely(condition)) {
     } else {
         try {
-            eprintln("debug assertion failed: ", message);
+            eprintln("assertion failed: ", message);
             eprintln("stacktrace: \n", stacktrace::current());
             // NOLINTNEXTLINE(bugprone-empty-catch)
         } catch (...) {
@@ -55,7 +55,8 @@ void assert_stacktrace(bool condition, const char* message) noexcept {
     if (likely(condition)) {
     } else {
         try {
-            eprintln(stacktrace::current());
+            eprintln("assertion failed: ", message);
+            eprintln("stacktrace: \n", stacktrace::current());
             // NOLINTNEXTLINE(bugprone-empty-catch)
         } catch (...) {
             // ignore

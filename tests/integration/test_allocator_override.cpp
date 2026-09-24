@@ -24,8 +24,8 @@ namespace {
 } // namespace
 
 TEST(AllocatorOverride, NewAndDeleteAreServedByTheMemoryPool) {
-#ifndef NEFORCE_USING_MEMORY_POOL
-    GTEST_SKIP() << "NEXUSFORCE_USING_MEMORY_POOL is disabled";
+#ifndef NEFORCE_USING_MEMORY_POOL_OVERRIDE
+    GTEST_SKIP() << "NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE is disabled";
 #else
     memory_pool& pool = system_memory_pool();
     const size_t before = pool.stats().active_blocks;
@@ -56,8 +56,8 @@ TEST(AllocatorOverride, NewAndDeleteAreServedByTheMemoryPool) {
 }
 
 TEST(AllocatorOverride, ArrayAndSizedDeleteForms) {
-#ifndef NEFORCE_USING_MEMORY_POOL
-    GTEST_SKIP() << "NEXUSFORCE_USING_MEMORY_POOL is disabled";
+#ifndef NEFORCE_USING_MEMORY_POOL_OVERRIDE
+    GTEST_SKIP() << "NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE is disabled";
 #else
     auto* bytes = new unsigned char[5000];
     ASSERT_NE(bytes, nullptr);
@@ -78,8 +78,8 @@ TEST(AllocatorOverride, ArrayAndSizedDeleteForms) {
 }
 
 TEST(AllocatorOverride, NothrowFormsReportFailureInsteadOfThrowing) {
-#ifndef NEFORCE_USING_MEMORY_POOL
-    GTEST_SKIP() << "NEXUSFORCE_USING_MEMORY_POOL is disabled";
+#ifndef NEFORCE_USING_MEMORY_POOL_OVERRIDE
+    GTEST_SKIP() << "NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE is disabled";
 #else
     void* ok = ::operator new(1024, neforce::nothrow);
     ASSERT_NE(ok, nullptr);
@@ -96,8 +96,8 @@ TEST(AllocatorOverride, NothrowFormsReportFailureInsteadOfThrowing) {
 }
 
 TEST(AllocatorOverride, AlignedFormsAreHonored) {
-#ifndef NEFORCE_USING_MEMORY_POOL
-    GTEST_SKIP() << "NEXUSFORCE_USING_MEMORY_POOL is disabled";
+#ifndef NEFORCE_USING_MEMORY_POOL_OVERRIDE
+    GTEST_SKIP() << "NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE is disabled";
 #else
     auto* item = new wide_payload();
     ASSERT_NE(item, nullptr);
@@ -114,8 +114,8 @@ TEST(AllocatorOverride, AlignedFormsAreHonored) {
 }
 
 TEST(AllocatorOverride, StandardContainersUseThePool) {
-#ifndef NEFORCE_USING_MEMORY_POOL
-    GTEST_SKIP() << "NEXUSFORCE_USING_MEMORY_POOL is disabled";
+#ifndef NEFORCE_USING_MEMORY_POOL_OVERRIDE
+    GTEST_SKIP() << "NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE is disabled";
 #else
     memory_pool& pool = system_memory_pool();
     const size_t before = pool.stats().os_map_calls;
@@ -134,8 +134,8 @@ TEST(AllocatorOverride, StandardContainersUseThePool) {
 }
 
 TEST(AllocatorOverride, MultiThreadedAllocationIsRaceFree) {
-#ifndef NEFORCE_USING_MEMORY_POOL
-    GTEST_SKIP() << "NEXUSFORCE_USING_MEMORY_POOL is disabled";
+#ifndef NEFORCE_USING_MEMORY_POOL_OVERRIDE
+    GTEST_SKIP() << "NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE is disabled";
 #else
     atomic<int> errors{0};
     vector<thread> workers;
@@ -179,8 +179,8 @@ TEST(AllocatorOverride, MultiThreadedAllocationIsRaceFree) {
 }
 
 TEST(AllocatorOverride, RepeatedLargeAllocationsDoNotInflateResidentMemory) {
-#ifndef NEFORCE_USING_MEMORY_POOL
-    GTEST_SKIP() << "NEXUSFORCE_USING_MEMORY_POOL is disabled";
+#ifndef NEFORCE_USING_MEMORY_POOL_OVERRIDE
+    GTEST_SKIP() << "NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE is disabled";
 #else
     memory_pool& pool = system_memory_pool();
     for (int round = 0; round < 64; ++round) {

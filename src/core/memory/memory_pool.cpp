@@ -4,10 +4,9 @@
 #include <NeForce/core/async/this_thread.hpp>
 #include <new>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#    ifdef NEFORCE_ARCH_X86_64
-#        include <immintrin.h>
-#    endif
-#    include <windows.h>
+#    include <NeForce/core/config/windef.hpp>
+#    include <sysinfoapi.h>
+#    include <memoryapi.h>
 #else
 #    include <sys/mman.h>
 #    include <unistd.h>
@@ -51,7 +50,7 @@ namespace {
     /// Target payload bytes per span, used to derive span geometry for every size class.
     constexpr size_t g_span_target_payload = 65536 - g_span_header_size;
 
-    NEFORCE_ALWAYS_INLINE void lock_spin(memory_pool::spinlock& lock) noexcept {
+    void lock_spin(memory_pool::spinlock& lock) noexcept {
         uint32_t expected = 0;
         for (int round = 0; round < g_lock_spin_rounds; ++round) {
             if (lock.value.compare_exchange_weak(expected, 1, memory_order_acquire, memory_order_relaxed)) {
@@ -65,7 +64,7 @@ namespace {
         }
     }
 
-    NEFORCE_ALWAYS_INLINE void unlock_spin(memory_pool::spinlock& lock) noexcept {
+    void unlock_spin(memory_pool::spinlock& lock) noexcept {
         if (lock.value.exchange(0, memory_order_release) == 2) {
             _NEFORCE futex_notify(&lock.value, true);
         }
@@ -82,7 +81,10 @@ namespace {
         memory_pool::spinlock* lock_;
     };
 
-    NEFORCE_ALWAYS_INLINE size_t page_size() noexcept {
+    // The pool is built on first use, which can happen inside a static initializer,
+    // so its construction must not call into any other component:
+    // a call that allocates (sysinfo::instance() does) would re-enter the pool while it is still being built and read half initialized state.
+    size_t page_size() noexcept {
         static size_t cached = []() -> size_t {
 #ifdef NEFORCE_PLATFORM_WINDOWS
             ::SYSTEM_INFO info;
@@ -96,15 +98,17 @@ namespace {
         return cached;
     }
 
-    NEFORCE_ALWAYS_INLINE size_t round_up(const size_t value, const size_t align) noexcept {
+    size_t round_up(const size_t value, const size_t align) noexcept {
+        NEFORCE_DEBUG_VERIFY(align != 0, "memory pool alignment must not be zero.");
         return (value + align - 1) / align * align;
     }
 
-    NEFORCE_ALWAYS_INLINE size_t divide_round_up(const size_t value, const size_t align) noexcept {
+    size_t divide_round_up(const size_t value, const size_t align) noexcept {
+        NEFORCE_DEBUG_VERIFY(align != 0, "memory pool alignment must not be zero.");
         return (value + align - 1) / align;
     }
 
-    NEFORCE_ALWAYS_INLINE void* os_map(const size_t bytes) noexcept {
+    void* os_map(const size_t bytes) noexcept {
         if (bytes == 0) {
             return nullptr;
         }
@@ -116,7 +120,7 @@ namespace {
 #endif
     }
 
-    NEFORCE_ALWAYS_INLINE void os_unmap(void* ptr, const size_t bytes) noexcept {
+    void os_unmap(void* ptr, const size_t bytes) noexcept {
         if (ptr == nullptr) {
             return;
         }
@@ -167,8 +171,7 @@ namespace {
         return lock;
     }
 
-    NEFORCE_ALWAYS_INLINE uint64_t pack_tag(const uint32_t owner_id, const uint16_t class_index,
-                                            const uint8_t kind) noexcept {
+    uint64_t pack_tag(const uint32_t owner_id, const uint16_t class_index, const uint8_t kind) noexcept {
         return (static_cast<uint64_t>(owner_id) << 32) | (static_cast<uint64_t>(class_index) << 16) |
                static_cast<uint64_t>(kind);
     }
@@ -209,11 +212,11 @@ namespace {
         return page;
     }
 
-    NEFORCE_ALWAYS_INLINE size_t map_l1_index(const uintptr_t addr) noexcept {
+    size_t map_l1_index(const uintptr_t addr) noexcept {
         return static_cast<size_t>((addr >> 32) & (g_map_l1_size - 1));
     }
 
-    NEFORCE_ALWAYS_INLINE size_t map_l2_index(const uintptr_t addr) noexcept {
+    size_t map_l2_index(const uintptr_t addr) noexcept {
         return static_cast<size_t>((addr >> g_slot_shift) & (g_map_l2_size - 1));
     }
 
@@ -508,6 +511,7 @@ void memory_pool::initialize(const options& opts) noexcept {
     peak_active_bytes_.store(0, memory_order_relaxed);
     os_map_calls_.store(0, memory_order_relaxed);
     os_unmap_calls_.store(0, memory_order_relaxed);
+    foreign_releases_.store(0, memory_order_relaxed);
     registry_insert(this, id_);
 }
 
@@ -519,6 +523,8 @@ size_t memory_pool::block_size(const size_t class_index) noexcept {
 uint32_t memory_pool::id() const noexcept { return id_; }
 
 const memory_pool::options& memory_pool::config() const noexcept { return options_; }
+
+size_t memory_pool::foreign_release_count() const noexcept { return foreign_releases_.load(memory_order_relaxed); }
 
 memory_pool::thread_cache& memory_pool::current_cache() noexcept {
     struct holder {
@@ -830,6 +836,8 @@ void memory_pool::deallocate(void* ptr, const size_t bytes) noexcept {
     }
     map_view view;
     if (!map_read(ptr, view)) {
+        // Foreign pointers come from another allocator in the same process
+        foreign_releases_.fetch_add(1, memory_order_relaxed);
         NEFORCE_DEBUG_VERIFY(false, "memory pool received a pointer it does not own.");
         return;
     }
@@ -1197,6 +1205,7 @@ memory_pool::statistics memory_pool::stats() noexcept {
     result.peak_active_bytes = peak_active_bytes_.load(memory_order_relaxed);
     result.os_map_calls = os_map_calls_.load(memory_order_relaxed);
     result.os_unmap_calls = os_unmap_calls_.load(memory_order_relaxed);
+    result.foreign_releases = foreign_releases_.load(memory_order_relaxed);
     return result;
 }
 

@@ -14,7 +14,6 @@
 
 #include "NeForce/core/async/atomic.hpp"
 #include "NeForce/core/exception/exception.hpp"
-#include "NeForce/core/memory/bit.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -100,6 +99,11 @@ public:
     static constexpr size_t small_max = 16384;
 
     /**
+     * @brief 直接查表覆盖的请求上限（1 KiB）
+     */
+    static constexpr size_t lookup_max = 1024;
+
+    /**
      * @brief 分配器保证的最小对齐（字节）
      */
     static constexpr size_t min_align = 16;
@@ -157,6 +161,7 @@ public:
         size_t os_map_calls = 0;               ///< 自操作系统映射的次数
         size_t os_unmap_calls = 0;             ///< 归还操作系统的次数
         class_statistics classes[class_count]; ///< 各尺寸类统计
+        size_t foreign_releases = 0;           ///< 收到非本池所有指针的释放次数
     };
 
 public:
@@ -255,6 +260,12 @@ public:
     NEFORCE_NODISCARD bool owns(const void* ptr) const noexcept;
 
     /**
+     * @brief 查询外来指针的释放次数
+     * @return 自本实例构造以来收到的不属于本池的指针释放次数
+     */
+    NEFORCE_NODISCARD size_t foreign_release_count() const noexcept;
+
+    /**
      * @brief 归还当前线程的缓存
      */
     void flush_thread_cache() noexcept;
@@ -301,16 +312,13 @@ public:
      * @return 尺寸类下标，超过小对象上限时返回 class_count
      */
     NEFORCE_NODISCARD static size_t size_to_class(size_t bytes) noexcept {
-        if (bytes <= 256) {
-            return small_size_class_table[bytes == 0 ? 0 : bytes - 1];
+        if (bytes <= lookup_max) {
+            return small_class_by_16[(bytes + 15) >> 4];
         }
         if (bytes > small_max) {
             return class_count;
         }
-        const auto value = bytes - 1;
-        const auto width = static_cast<size_t>(bit_width(static_cast<uintptr_t>(value)));
-        const size_t index = (value >> shift_by_width[width]) + offset_by_width[width];
-        return index < class_count ? index : class_count;
+        return small_class_by_128[(bytes - 1 - lookup_max) >> 7];
     }
 
 private:
@@ -377,20 +385,25 @@ private:
     static void release_thread_cache(thread_cache& cache) noexcept;
     static memory_pool* pool_for_id(uint32_t id) noexcept;
 
-    static constexpr uint8_t small_size_class_table[256] = {
-            0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
-            1,  1,  1,  1,  1,  1,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  3,  3,  3,  3,
-            3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,
-            4,  4,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  6,  6,  6,  6,  6,  6,  6,  6,
-            6,  6,  6,  6,  6,  6,  6,  6,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  8,  8,
-            8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,
-            8,  8,  8,  8,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  9,
-            9,  9,  9,  9,  9,  9,  9,  9,  9,  9,  10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
-            10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
-            11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11};
+    /**
+     * @brief 小对象请求尺寸表
+     */
+    static constexpr uint8_t small_class_by_16[65] = {
+            0,  0,  1,  2,  3,  4,  5,  6,  7,  8,  8,  9,  9,  10, 10, 11, 11, 12, 12, 12, 12, 13,
+            13, 13, 13, 14, 14, 14, 14, 15, 15, 15, 15, 16, 16, 16, 16, 16, 16, 16, 16, 17, 17, 17,
+            17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 18, 18, 19, 19, 19, 19, 19, 19, 19, 19,
+    };
 
-    static constexpr uint8_t shift_by_width[16] = {4, 4, 4, 4, 4, 4, 4, 4, 5, 6, 7, 8, 9, 10, 11, 11};
-    static constexpr uint8_t offset_by_width[16] = {0, 0, 0, 0, 0, 0, 0, 0, 4, 8, 12, 16, 20, 24, 28, 28};
+    /**
+     * @brief 1 KiB 以上小对象请求尺寸表
+     */
+    static constexpr uint8_t small_class_by_128[120] = {
+            20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 24, 24, 25, 25, 25, 25, 26, 26, 26, 26, 27, 27, 27, 27,
+            28, 28, 28, 28, 28, 28, 28, 28, 29, 29, 29, 29, 29, 29, 29, 29, 30, 30, 30, 30, 30, 30, 30, 30,
+            31, 31, 31, 31, 31, 31, 31, 31, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32,
+            33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 34, 34, 34, 34, 34, 34, 34, 34,
+            34, 34, 34, 34, 34, 34, 34, 34, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35,
+    };
 
     uint32_t id_;
     uint32_t alive_;
@@ -411,13 +424,14 @@ private:
     atomic<size_t> peak_active_bytes_;
     atomic<size_t> os_map_calls_;
     atomic<size_t> os_unmap_calls_;
+    atomic<size_t> foreign_releases_;
 };
 
 /**
  * @brief 获取进程级系统内存池
  * @return 系统内存池引用
  */
-NEFORCE_NODISCARD memory_pool& NEFORCE_API system_memory_pool() noexcept;
+NEFORCE_NODISCARD NEFORCE_API memory_pool& system_memory_pool() noexcept;
 
 
 /**

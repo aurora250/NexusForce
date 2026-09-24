@@ -11,7 +11,6 @@
 #    include <shellapi.h>
 #    include <securitybaseapi.h>
 #    include <TlHelp32.h>
-#    include <winternl.h>
 #    ifdef max
 #        undef max
 #    endif
@@ -1281,9 +1280,6 @@ process::memory_info process::get_memory_info(native_id_type process_id) {
 
     ::CloseHandle(hProcess);
 
-    ::PROCESS_VM_COUNTERS vmc{};
-    ::NtQueryInformationProcess(hProcess, ProcessVmCounters, &vmc, sizeof(vmc), nullptr);
-    mem_info.virtual_size = vmc.VirtualSize;
 #else
     ::FILE* fp = ::fopen(("/proc/" + to_string(process_id) + "/statm").data(), "r");
     if (fp != nullptr) {

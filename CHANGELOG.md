@@ -26,9 +26,12 @@
 - 新增追加式格式化接口 `format_to(string&, fmt, args...)`：与 `format()` 语义一致但不新建字符串，供日志等高频路径复用目标缓冲
 - 添加高性能内存池组件 `memory_pool`：小对象由零块头 span 承担，尺寸类与归属通过进程级 64 KiB 槽位地址映射表查询，大对象直接映射操作系统内存并记录区域头部
 - 添加分配器 `pool_allocator<T>`，可直接用于容器
-- 添加全局 `operator new` / `delete` 覆盖选项 `NEXUSFORCE_USING_MEMORY_POOL`：库自身通过 `-Wl,-Bsymbolic-functions` 绑定本地定义，另提供 `NexusForceMemoryPoolOverride`（OBJECT）与 `NexusForceMemoryPoolOverrideStatic`（STATIC）目标，编入可执行文件即可获得进程级覆盖。
+- 添加进程级全局覆盖选项 `NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE`：提供显式的 `NexusForceMemoryPoolOverride`（OBJECT）与 `NexusForceMemoryPoolOverrideStatic`（STATIC）目标，需要整个进程统一分配器的程序由自己把目标链接进每个模块
 
 ### 🔧 Improvements
+- `standard_allocator` 的分配与释放改由进程级内存池承担，库容器在库与消费者两侧共用同一个导出池单例，跨模块释放天然安全，不再依赖全局 `operator new` 是否被替换
+- 共享库不再替换全局 `operator new` / `delete`：第三方 C++ DLL 与消费者不再被隐式接管
+- `memory_pool` 新增 `foreign_release_count()` 与 `statistics::foreign_releases`：对外来指针的释放做无条件计数，发布版下的分配器边界失配由静默变为可观测
 - `thread_pool` 新增存活巡检：定时器线程每 50 ms 检查，命中则唤醒全部停驻线程，任何丢唤醒状态都能在 50 ms 内自愈；正常提交/排空模式不会触发
 - `timer_scheduler` 在到期前 `spin_window` 窗口内提前唤醒并自旋守时，`submit_after` 的平均绝对偏差由约 130 µs 降至 5–36 µs
 - `thread_pool` 定时任务预热：`submit_after` 在到期前唤醒一个工作线程保持热态，消除定时任务因工作线程已停驻而产生的约 75 µs 冷唤醒延迟

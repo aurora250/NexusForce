@@ -608,3 +608,48 @@ TEST(PoolAllocator, AllocateAndDeallocateRoundTrip) {
     EXPECT_EQ(pool.stats().active_bytes, 0U);
     EXPECT_TRUE(pool.verify());
 }
+
+TEST(MemoryPool, LibraryContainersAreServedByTheSystemPool) {
+#ifdef NEFORCE_USING_MEMORY_POOL
+    memory_pool& pool = system_memory_pool();
+    {
+        string text(96, 'x');
+        EXPECT_TRUE(pool.owns(text.data()));
+        vector<int> values;
+        values.reserve(4096);
+        EXPECT_TRUE(pool.owns(values.data()));
+        EXPECT_EQ(values.capacity(), 4096U);
+    }
+    pool.flush_thread_cache();
+    EXPECT_TRUE(pool.verify());
+#else
+    GTEST_SKIP() << "NEXUSFORCE_USING_MEMORY_POOL is disabled";
+#endif
+}
+
+TEST(MemoryPool, GlobalOperatorNewStaysOnTheCrtWithoutTheExplicitOverride) {
+#if defined(NEFORCE_USING_MEMORY_POOL_OVERRIDE)
+    GTEST_SKIP() << "the process wide allocator override is enabled";
+#else
+    memory_pool& pool = system_memory_pool();
+    void* block = ::operator new(4096);
+    ASSERT_NE(block, nullptr);
+    EXPECT_FALSE(pool.owns(block));
+    ::operator delete(block);
+#endif
+}
+
+TEST(MemoryPool, ForeignReleaseIsCountedInReleaseBuilds) {
+#if defined(NEFORCE_STATE_DEBUG) || defined(NEFORCE_USING_MEMORY_POOL_OVERRIDE)
+    GTEST_SKIP() << "debug builds assert on foreign pointers and the override owns the global operators";
+#else
+    memory_pool& pool = system_memory_pool();
+    const size_t before = pool.foreign_release_count();
+    void* block = ::operator new(64);
+    ASSERT_NE(block, nullptr);
+    pool.deallocate(block);
+    EXPECT_EQ(pool.foreign_release_count(), before + 1);
+    EXPECT_EQ(pool.stats().foreign_releases, pool.foreign_release_count());
+    ::operator delete(block);
+#endif
+}

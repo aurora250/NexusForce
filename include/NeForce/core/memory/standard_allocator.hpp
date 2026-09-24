@@ -12,6 +12,9 @@
 #include "NeForce/core/exception/debug.hpp"
 #include "NeForce/core/exception/exception.hpp"
 #include "NeForce/core/memory/new.hpp"
+#ifdef NEFORCE_USING_MEMORY_POOL
+#    include "NeForce/core/memory/memory_pool.hpp"
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -92,6 +95,41 @@ NEFORCE_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_SENTINEL =
 #endif // NEFORCE_COMPILER_MSVC
 
 
+#ifdef NEFORCE_USING_MEMORY_POOL
+
+/**
+ * @brief 内存池分配辅助函数
+ * @tparam Align 对齐要求
+ * @param bytes 要分配的字节数
+ * @return 分配的内存指针
+ * @throws allocate_exception 当内存池无法提供内存时抛出
+ */
+template <size_t Align>
+NEFORCE_ALLOC_OPTIMIZE void* __pool_allocate_aux(const alloc_size_t bytes) {
+    constexpr size_t alignment = Align < MEMORY_ALIGN_THRESHHOLD ? MEMORY_ALIGN_THRESHHOLD : Align;
+    void* block = system_memory_pool().try_allocate(bytes, alignment);
+    if (block == nullptr) {
+        NEFORCE_THROW_EXCEPTION(allocate_exception("memory pool allocate failed"));
+    }
+    return block;
+}
+
+/**
+ * @brief 内存池释放辅助函数
+ * @tparam Align 对齐要求
+ * @param[in,out] ptr 要释放的内存指针引用
+ * @param[in,out] bytes 要释放的字节数引用
+ */
+template <size_t Align>
+void __pool_deallocate_aux(void*& ptr, alloc_size_t& bytes) noexcept {
+    static_cast<void>(bytes);
+    system_memory_pool().deallocate(ptr);
+    ptr = nullptr;
+}
+
+#endif // NEFORCE_USING_MEMORY_POOL
+
+
 /**
  * @brief 基础分配辅助函数
  * @tparam Align 对齐要求
@@ -102,7 +140,10 @@ NEFORCE_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_SENTINEL =
  */
 template <size_t Align>
 NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* __allocate_aux(const alloc_size_t bytes) {
-#ifdef NEFORCE_COMPILER_MSVC
+#ifdef NEFORCE_USING_MEMORY_POOL
+    return __pool_allocate_aux<Align>(bytes);
+#else
+#    ifdef NEFORCE_COMPILER_MSVC
     if (bytes >= MEMORY_BIG_ALLOC_THRESHHOLD) {
         const size_t block_size = MEMORY_NO_USER_SIZE + bytes;
         if (block_size <= bytes) {
@@ -112,13 +153,14 @@ NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* __allocate_aux(const alloc_size
         NEFORCE_DEBUG_VERIFY(holder != 0, "invalid argument");
         auto* const ptr = reinterpret_cast<void*>((holder + MEMORY_NO_USER_SIZE) & ~(MEMORY_BIG_ALLOC_ALIGN - 1));
         static_cast<uintptr_t*>(ptr)[-1] = holder;
-#    ifdef NEFORCE_STATE_DEBUG
+#        ifdef NEFORCE_STATE_DEBUG
         static_cast<uintptr_t*>(ptr)[-2] = MEMORY_BIG_ALLOC_SENTINEL;
-#    endif
+#        endif
         return ptr;
     }
-#endif
+#    endif
     return operator new(bytes);
+#endif // NEFORCE_USING_MEMORY_POOL
 }
 
 #ifdef NEFORCE_STANDARD_17
@@ -133,18 +175,22 @@ NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* __allocate_aux(const alloc_size
  */
 template <size_t Align, enable_if_t<(Align > MEMORY_ALIGN_THRESHHOLD), int> = 0>
 NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* __allocate_dispatch(const alloc_size_t bytes) {
+#    ifdef NEFORCE_USING_MEMORY_POOL
+    return __pool_allocate_aux<Align>(bytes);
+#    else
     size_t align = Align;
-#    ifdef NEFORCE_COMPILER_MSVC
+#        ifdef NEFORCE_COMPILER_MSVC
     if (bytes >= MEMORY_BIG_ALLOC_THRESHHOLD) {
         align = Align > MEMORY_BIG_ALLOC_ALIGN ? Align : MEMORY_BIG_ALLOC_ALIGN;
     }
-#    endif
-#    if defined(NEFORCE_COMPILER_CLANG) && defined(NEFORCE_STANDARD_20)
+#        endif
+#        if defined(NEFORCE_COMPILER_CLANG) && defined(NEFORCE_STANDARD_20)
     if (_NEFORCE is_constant_evaluated()) {
         return operator new(bytes);
     }
-#    endif
+#        endif
     return operator new(bytes, std::align_val_t{align});
+#    endif // NEFORCE_USING_MEMORY_POOL
 }
 
 /**
@@ -205,27 +251,31 @@ NEFORCE_BEGIN_INNER__
  */
 template <size_t Align>
 void __deallocate_aux(void*& ptr, inner::alloc_size_t& bytes) noexcept {
-#ifdef NEFORCE_COMPILER_MSVC
+#ifdef NEFORCE_USING_MEMORY_POOL
+    __pool_deallocate_aux<Align>(ptr, bytes);
+#else
+#    ifdef NEFORCE_COMPILER_MSVC
     if (bytes >= MEMORY_BIG_ALLOC_THRESHHOLD) {
         bytes += MEMORY_NO_USER_SIZE;
         const uintptr_t* const user_ptr = static_cast<uintptr_t*>(ptr);
         const uintptr_t holder = user_ptr[-1];
         NEFORCE_DEBUG_VERIFY(user_ptr[-2] == MEMORY_BIG_ALLOC_SENTINEL, "invalid sentinel.");
-#    ifdef NEFORCE_STATE_DEBUG
+#        ifdef NEFORCE_STATE_DEBUG
         constexpr uintptr_t min_shift = 2 * sizeof(void*);
-#    else
+#        else
         constexpr uintptr_t min_shift = sizeof(void*);
-#    endif
+#        endif
         const uintptr_t shift = reinterpret_cast<uintptr_t>(ptr) - holder;
         NEFORCE_DEBUG_VERIFY(shift >= min_shift && shift <= MEMORY_NO_USER_SIZE, "invalid argument.");
         ptr = reinterpret_cast<void*>(holder);
     }
-#endif
-#if defined(NEFORCE_STANDARD_14) && defined(NEFORCE_COMPILER_MSVC)
+#    endif
+#    if defined(NEFORCE_STANDARD_14) && defined(NEFORCE_COMPILER_MSVC)
     operator delete(ptr, bytes);
-#else
+#    else
     operator delete(ptr);
-#endif
+#    endif
+#endif // NEFORCE_USING_MEMORY_POOL
 }
 
 #ifdef NEFORCE_STANDARD_17
@@ -240,17 +290,21 @@ void __deallocate_aux(void*& ptr, inner::alloc_size_t& bytes) noexcept {
  */
 template <size_t Align, enable_if_t<(Align > MEMORY_ALIGN_THRESHHOLD), int> = 0>
 NEFORCE_CONSTEXPR20 void __deallocate_dispatch(void*& ptr, inner::alloc_size_t& bytes) noexcept {
+#    ifdef NEFORCE_USING_MEMORY_POOL
+    __pool_deallocate_aux<Align>(ptr, bytes);
+#    else
     size_t align = Align;
-#    ifdef NEFORCE_COMPILER_MSVC
+#        ifdef NEFORCE_COMPILER_MSVC
     if (bytes > MEMORY_BIG_ALLOC_THRESHHOLD) {
         align = Align > MEMORY_BIG_ALLOC_ALIGN ? Align : MEMORY_BIG_ALLOC_ALIGN;
     }
-#    endif
-#    if defined(NEFORCE_STANDARD_14) && defined(NEFORCE_COMPILER_MSVC)
+#        endif
+#        if defined(NEFORCE_STANDARD_14) && defined(NEFORCE_COMPILER_MSVC)
     operator delete(ptr, bytes, std::align_val_t{align});
-#    else
+#        else
     operator delete(ptr, std::align_val_t{align});
-#    endif
+#        endif
+#    endif // NEFORCE_USING_MEMORY_POOL
 }
 
 /**

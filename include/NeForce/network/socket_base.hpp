@@ -88,14 +88,9 @@ public:
 #endif
 
     /**
-     * @brief 无效句柄常量
+     * @brief 无效句柄
      */
-    static constexpr native_handle_type invalid_handle =
-#ifdef NEFORCE_PLATFORM_WINDOWS
-            numeric_traits<native_handle_type>::max(); ///< 无效句柄
-#else
-            -1; ///< 无效句柄
-#endif
+    static constexpr native_handle_type invalid_handle = static_cast<native_handle_type>(-1);
 
     /**
      * @brief 最大连接队列数常量
