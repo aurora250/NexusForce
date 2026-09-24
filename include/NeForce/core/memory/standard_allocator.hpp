@@ -105,7 +105,7 @@ NEFORCE_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_SENTINEL =
  * @throws allocate_exception 当内存池无法提供内存时抛出
  */
 template <size_t Align>
-NEFORCE_ALLOC_OPTIMIZE void* __pool_allocate_aux(const alloc_size_t bytes) {
+void* __pool_allocate_aux(const alloc_size_t bytes) {
     constexpr size_t alignment = Align < MEMORY_ALIGN_THRESHHOLD ? MEMORY_ALIGN_THRESHHOLD : Align;
     void* block = system_memory_pool().try_allocate(bytes, alignment);
     if (block == nullptr) {
@@ -139,7 +139,7 @@ void __pool_deallocate_aux(void*& ptr, alloc_size_t& bytes) noexcept {
  * 处理内存分配的基础函数，包含编译器特定的优化。
  */
 template <size_t Align>
-NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* __allocate_aux(const alloc_size_t bytes) {
+NEFORCE_CONSTEXPR20 void* __allocate_aux(const alloc_size_t bytes) {
 #ifdef NEFORCE_USING_MEMORY_POOL
     return __pool_allocate_aux<Align>(bytes);
 #else
@@ -174,7 +174,7 @@ NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* __allocate_aux(const alloc_size
  * 使用对齐分配操作符，支持大于阈值的高对齐要求。
  */
 template <size_t Align, enable_if_t<(Align > MEMORY_ALIGN_THRESHHOLD), int> = 0>
-NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* __allocate_dispatch(const alloc_size_t bytes) {
+NEFORCE_CONSTEXPR20 void* __allocate_dispatch(const alloc_size_t bytes) {
 #    ifdef NEFORCE_USING_MEMORY_POOL
     return __pool_allocate_aux<Align>(bytes);
 #    else
@@ -202,7 +202,7 @@ NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* __allocate_dispatch(const alloc
  * 使用基础分配函数处理低对齐要求的分配。
  */
 template <size_t Align, enable_if_t<Align <= MEMORY_ALIGN_THRESHHOLD, int> = 0>
-NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* __allocate_dispatch(const alloc_size_t bytes) {
+NEFORCE_CONSTEXPR20 void* __allocate_dispatch(const alloc_size_t bytes) {
     return inner::__allocate_aux<Align>(bytes);
 }
 
@@ -220,7 +220,7 @@ NEFORCE_END_INNER__
  * 内存分配的统一入口。
  */
 template <size_t Align>
-NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* allocate(const inner::alloc_size_t bytes) {
+NEFORCE_CONSTEXPR20 void* allocate(const inner::alloc_size_t bytes) {
     if (bytes == 0) {
         return nullptr;
     }
@@ -403,7 +403,7 @@ public:
      *
      * 分配 n 个 T 类型的连续内存空间。
      */
-    NEFORCE_ALLOC_NODISCARD NEFORCE_CONSTEXPR20 NEFORCE_ALLOC_OPTIMIZE static pointer allocate(const size_type n) {
+    NEFORCE_ALLOC_NODISCARD NEFORCE_CONSTEXPR20 static pointer allocate(const size_type n) {
         const size_type alloc_size = sizeof(value_type) * n;
         NEFORCE_DEBUG_VERIFY(alloc_size <= static_cast<size_type>(-1), "allocation will cause memory overflow.");
         try {
@@ -419,9 +419,7 @@ public:
      * @return 指向分配内存的指针
      * @throws allocate_exception 如果内存分配失败
      */
-    NEFORCE_ALLOC_NODISCARD NEFORCE_CONSTEXPR20 NEFORCE_ALLOC_OPTIMIZE static pointer allocate() {
-        return standard_allocator::allocate(1);
-    }
+    NEFORCE_ALLOC_NODISCARD NEFORCE_CONSTEXPR20 static pointer allocate() { return standard_allocator::allocate(1); }
 
     /**
      * @brief 释放先前分配的内存

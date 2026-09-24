@@ -236,7 +236,7 @@ namespace {
         if (root == nullptr) {
             return false;
         }
-        memory_pool::map_entry* page = root->l1[map_l1_index(addr)].load(memory_order_acquire);
+        const memory_pool::map_entry* page = root->l1[map_l1_index(addr)].load(memory_order_acquire);
         if (page == nullptr) {
             return false;
         }

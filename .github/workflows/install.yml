@@ -234,7 +234,7 @@ jobs:
 
           if [ "$RUNNER_OS" != "Windows" ]; then
             for library in "$NF_PREFIX/lib/libNexusForce.so" "$NF_PREFIX/lib/libNexusForced.so"; do
-              if nm -D --defined-only "$library" | grep -E ' (_Znwm|_Znam|_ZdlPv|_ZdaPv)(St11align_val_t)?$'; then
+              if nm -D --defined-only "$library" | grep -E ' (_Znwm|_Znam|_ZdlPv|_ZdaPv)(m|St11align_val_t|St11align_val_tm|RKSt9nothrow_t|St11align_val_tRKSt9nothrow_t)?$'; then
                 echo "::error::$library defines a global allocation operator"
                 status=1
               fi
@@ -268,11 +268,26 @@ jobs:
               done < <(dumpbin -dependents "$library" | tr -d '\r' | sed -n 's/^ *\([A-Za-z0-9._-]*\.dll\)$/\1/p')
             done
 
+            forbidden=(
+              '??2@YAPEAX_K@Z'
+              '??3@YAXPEAX@Z'
+              '??_U@YAPEAX_K@Z'
+              '??_V@YAXPEAX@Z'
+              '??2@YAPEAX_KW4align_val_t@std@@@Z'
+              '??3@YAXPEAXW4align_val_t@std@@@Z'
+              '??_U@YAPEAX_KW4align_val_t@std@@@Z'
+              '??_V@YAXPEAXW4align_val_t@std@@@Z'
+              '??3@YAXPEAX_K@Z'
+              '??_V@YAXPEAX_K@Z'
+            )
+
             for library in "$NF_PREFIX/bin/NexusForce.dll" "$NF_PREFIX/bin/NexusForced.dll"; do
-              if dumpbin -exports "$library" | grep -E '\?\?(_[UV])?[23]@YA'; then
-                echo "::error::$library exports a global allocation operator"
-                status=1
-              fi
+              for symbol in "${forbidden[@]}"; do
+                if dumpbin -exports "$library" | grep -F -- "$symbol"; then
+                  echo "::error::$library exports the replaceable allocation operator $symbol"
+                  status=1
+                fi
+              done
 
               if ! dumpbin -exports "$library" | grep -q 'system_memory_pool@neforce@@'; then
                 echo "::error::$library does not export the pool singleton"

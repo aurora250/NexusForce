@@ -638,19 +638,17 @@
 #elif defined(NEFORCE_COMPILER_MSVC)
 #    define NEFORCE_ALWAYS_INLINE __forceinline
 #else
-#    define NEFORCE_ALWAYS_INLINE inline
+#    define NEFORCE_ALWAYS_INLINE
 #endif
 
 /**
  * @def NEFORCE_ALWAYS_INLINE_INLINE
  * @brief 强制内联并显式添加 inline 关键字
  */
-#ifdef NEFORCE_COMPILER_GNUC
-#    define NEFORCE_ALWAYS_INLINE_INLINE NEFORCE_ALWAYS_INLINE inline
-#elif defined(NEFORCE_COMPILER_MSVC)
+#ifdef NEFORCE_COMPILER_MSVC
 #    define NEFORCE_ALWAYS_INLINE_INLINE NEFORCE_ALWAYS_INLINE
 #else
-#    define NEFORCE_ALWAYS_INLINE_INLINE inline
+#    define NEFORCE_ALWAYS_INLINE_INLINE NEFORCE_ALWAYS_INLINE inline
 #endif
 
 
@@ -723,13 +721,23 @@
 #endif
 
 /**
+ * @def NEFORCE_ALLOCATOR
+ * @brief MSVC 内存分配函数提示
+ */
+#ifdef NEFORCE_COMPILER_MSVC
+#    define NEFORCE_ALLOCATOR __declspec(allocator)
+#else
+#    define NEFORCE_ALLOCATOR
+#endif
+
+/**
  * @def NEFORCE_ALLOC_OPTIMIZE
  * @brief 标记分配器函数，提示编译器进行优化
  */
 #if defined(NEFORCE_COMPILER_GNUC)
 #    define NEFORCE_ALLOC_OPTIMIZE NEFORCE_ALWAYS_INLINE
 #elif defined(NEFORCE_COMPILER_MSVC)
-#    define NEFORCE_ALLOC_OPTIMIZE __declspec(allocator)
+#    define NEFORCE_ALLOC_OPTIMIZE NEFORCE_ALLOCATOR
 #else
 #    define NEFORCE_ALLOC_OPTIMIZE
 #endif

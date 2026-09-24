@@ -380,16 +380,37 @@ jobs:
             fi
           done
 
-          if dumpbin -exports "$dll" | grep -E '\?\?(_[UV])?[23]@YA'; then
-            echo "::error::NexusForce.dll exports a global allocation operator: consumers would silently"
-            echo "::error::use the pool while third party C++ DLLs keep the C runtime heap"
-            exit 1
-          fi
+          forbidden=(
+            '??2@YAPEAX_K@Z'
+            '??3@YAXPEAX@Z'
+            '??_U@YAPEAX_K@Z'
+            '??_V@YAXPEAX@Z'
+            '??2@YAPEAX_KW4align_val_t@std@@@Z'
+            '??3@YAXPEAXW4align_val_t@std@@@Z'
+            '??_U@YAPEAX_KW4align_val_t@std@@@Z'
+            '??_V@YAXPEAXW4align_val_t@std@@@Z'
+            '??3@YAXPEAX_K@Z'
+            '??_V@YAXPEAX_K@Z'
+          )
 
-          if dumpbin -imports "$exe" | grep -E '\?\?(_[UV])?[23]@YA'; then
-            echo "::error::the unit test executable imports a global allocation operator from NexusForce.dll"
-            exit 1
-          fi
+          for symbol in "${forbidden[@]}"; do
+            if dumpbin -exports "$dll" | grep -F -- "$symbol"; then
+              echo "::error::NexusForce.dll exports the replaceable allocation operator $symbol: consumers"
+              echo "::error::would silently use the pool while third party DLLs keep the C runtime heap"
+              exit 1
+            fi
+          done
+
+          from_nexusforce=$(dumpbin -imports "$exe" | awk '
+              /^  [A-Za-z0-9_.-]+\.dll[[:space:]]*$/ { module = $1; next }
+              module ~ /^NexusForce/ { print }
+            ')
+          for symbol in "${forbidden[@]}"; do
+            if printf '%s\n' "$from_nexusforce" | grep -F -- "$symbol" >/dev/null; then
+              echo "::error::the unit test executable imports $symbol from NexusForce.dll"
+              exit 1
+            fi
+          done
 
           if ! dumpbin -exports "$dll" | grep -q 'system_memory_pool@neforce@@'; then
             echo "::error::NexusForce.dll does not export the pool singleton"
@@ -486,7 +507,7 @@ jobs:
           fi
           echo "checking $library"
 
-          if nm -D --defined-only "$library" | grep -E ' (_Znwm|_Znam|_ZdlPv|_ZdaPv)(St11align_val_t)?$'; then
+          if nm -D --defined-only "$library" | grep -E ' (_Znwm|_Znam|_ZdlPv|_ZdaPv)(m|St11align_val_t|St11align_val_tm|RKSt9nothrow_t|St11align_val_tRKSt9nothrow_t)?$'; then
             echo "::error::the shared library defines the global allocation operators, so every consumer"
             echo "::error::and every other shared library is silently moved onto a second heap"
             exit 1
