@@ -80,9 +80,7 @@ class consumer_token;
 NEFORCE_BEGIN_INNER__
 
 NEFORCE_INLINE17 constexpr thread::id invalid_thread_id_zero{0};
-#ifdef NEFORCE_PLATFORM_WINDOWS
 NEFORCE_INLINE17 constexpr thread::id invalid_thread_id_max{static_cast<thread::id::native_id_type>(-1)};
-#endif
 
 template <typename T>
 struct const_numeric_max {
@@ -2682,16 +2680,11 @@ private:
                         while (true) {
                             index &= main_hash->capacity_ - 1;
                             auto empty = inner::invalid_thread_id_zero;
-#ifdef NEFORCE_PLATFORM_WINDOWS
                             auto reusable = inner::invalid_thread_id_max;
                             if (main_hash->entries_[index].key_.compare_exchange_strong(empty, id, memory_order_seq_cst,
                                                                                         memory_order_relaxed) ||
                                 main_hash->entries_[index].key_.compare_exchange_strong(
                                         reusable, id, memory_order_seq_cst, memory_order_relaxed)) {
-#else
-                            if (main_hash->entries_[index].key_.compare_exchange_strong(empty, id, memory_order_seq_cst,
-                                                                                        memory_order_relaxed)) {
-#endif
                                 main_hash->entries_[index].value_ = value;
                                 break;
                             }
@@ -2759,7 +2752,6 @@ private:
                 while (true) {
                     index &= main_hash->capacity_ - 1;
                     auto empty = inner::invalid_thread_id_zero;
-#ifdef NEFORCE_PLATFORM_WINDOWS
                     auto reusable = inner::invalid_thread_id_max;
                     if (main_hash->entries_[index].key_.compare_exchange_strong(reusable, id, memory_order_seq_cst,
                                                                                 memory_order_relaxed)) {
@@ -2767,7 +2759,6 @@ private:
                         main_hash->entries_[index].value_ = producer;
                         break;
                     }
-#endif
                     if (main_hash->entries_[index].key_.compare_exchange_strong(empty, id, memory_order_seq_cst,
                                                                                 memory_order_relaxed)) {
                         main_hash->entries_[index].value_ = producer;
@@ -2794,17 +2785,10 @@ private:
             do {
                 index &= hash->capacity_ - 1;
                 probed_key = id;
-#ifdef NEFORCE_PLATFORM_WINDOWS
                 if (hash->entries_[index].key_.compare_exchange_strong(probed_key, inner::invalid_thread_id_max,
                                                                        memory_order_seq_cst, memory_order_relaxed)) {
                     break;
                 }
-#else
-                if (hash->entries_[index].key_.compare_exchange_strong(probed_key, inner::invalid_thread_id_zero,
-                                                                       memory_order_seq_cst, memory_order_relaxed)) {
-                    break;
-                }
-#endif
                 ++index;
             } while (probed_key != inner::invalid_thread_id_zero);
         }

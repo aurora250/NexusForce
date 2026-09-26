@@ -22,11 +22,22 @@ namespace {
     // as its queue drops below the threshold again.
     constexpr uint32_t local_steal_signal_depth = 8;
 
+    // A worker that finds a backlog far deeper than the pool itself behind the task
+    // it just took pulls a whole batch out of the global queue and parks the surplus
+    // in its own local queue, so a bulk submission is carried by the per-worker rings
+    // instead of by the shared queue (one shared-queue round trip per batch instead of
+    // per task). The depth threshold keeps coarse-grained jobs out of the batch path:
+    // handing eight long tasks to one worker would leave the other workers idle at the
+    // tail of the job, which costs far more than the shared-queue traffic it saves.
+    constexpr size_t local_batch_size = 8;
+    constexpr uint32_t local_batch_depth_ratio = 16;
+
     constexpr int64_t scaler_interval_ms = 1;
-    constexpr int64_t liveness_interval_ms = 50;
+
+    constexpr int64_t liveness_interval_ms = 200;
     constexpr uint32_t scaler_slack = 1;
 
-    inline bool cpu_mask_test(const uint64_t mask, const uint32_t cpu) noexcept {
+    bool cpu_mask_test(const uint64_t mask, const uint32_t cpu) noexcept {
         return (mask & (static_cast<uint64_t>(1) << cpu)) != 0ULL;
     }
 } // namespace
@@ -265,6 +276,111 @@ string thread_pool::pool_statistics::to_string() const {
     return result.build();
 }
 
+optional<thread_pool::task_type> thread_pool::take_task(worker_context& self) {
+    auto task = try_take_priority();
+    if (task) {
+        return task;
+    }
+
+    if (!self.queue.empty()) {
+        task = self.queue.try_pop();
+        publish_local_size(self);
+        if (task) {
+            return task;
+        }
+    }
+
+    if (global_queue_) {
+        task_type item;
+        if (global_queue_->try_dequeue(item)) {
+            pending_tasks_.fetch_sub(1, memory_order_acq_rel);
+            // Only a backlog deeper than local_batch_depth_ratio rounds of all attached workers is worth batching;
+            // see the threshold rationale next to local_batch_depth_ratio.
+            const uint32_t backlog = pending_tasks_.load(memory_order_relaxed);
+            if (backlog > local_batch_depth_ratio * attached_workers_.load(memory_order_acquire)) {
+                take_batch(self);
+            }
+            return optional<task_type>{_NEFORCE move(item)};
+        }
+    }
+
+    return try_steal_task(self);
+}
+
+void thread_pool::execute_task(worker_context& self, task_type& task) {
+    try {
+        task();
+        self.completed.fetch_add(1, memory_order_relaxed);
+    } catch (...) {
+        // A task must never be able to kill its worker thread.
+        self.failed.fetch_add(1, memory_order_relaxed);
+    }
+
+    if (helpers_waiting_.load(memory_order_relaxed) != 0U) {
+        wake_word_.fetch_add(1, memory_order_release);
+        wake_word_.notify_all();
+    }
+}
+
+void thread_pool::help_until_ready(const function<bool()>& ready) {
+    auto* ctx = get_worker_context();
+    if (ctx == nullptr || !is_running_.load(memory_order_acquire)) {
+        return;
+    }
+
+    for (;;) {
+        if (ready()) {
+            return;
+        }
+
+        ctx->consecutive_idle_count = idle_steal_rounds;
+        auto task = take_task(*ctx);
+        if (task) {
+            execute_task(*ctx, *task);
+            continue;
+        }
+
+        // Nothing to advance right now: park on the wake word. The readiness predicate is
+        // published before the completing worker inspects helpers_waiting_, so a completion
+        // that races with the park either becomes visible to the re-check below or bumps the
+        // word, and no wake-up can be lost.
+        helpers_waiting_.fetch_add(1, memory_order_acq_rel);
+        const uint32_t observed = wake_word_.load(memory_order_acquire);
+        if (ready()) {
+            helpers_waiting_.fetch_sub(1, memory_order_acq_rel);
+            continue;
+        }
+
+        parked_workers_.fetch_add(1, memory_order_relaxed);
+        if (wake_word_.load(memory_order_acquire) == observed) {
+            wake_word_.wait(observed, memory_order_acquire);
+        }
+        parked_workers_.fetch_sub(1, memory_order_relaxed);
+        helpers_waiting_.fetch_sub(1, memory_order_acq_rel);
+    }
+}
+
+size_t thread_pool::take_batch(worker_context& ctx) {
+    const size_t room = ctx.queue.remain_size();
+    if (room == 0U) {
+        return 0;
+    }
+
+    const size_t want = room < local_batch_size ? room : local_batch_size;
+    array<task_type, local_batch_size> batch;
+    const size_t got = global_queue_->try_dequeue_bulk(addressof(batch[0]), want);
+    if (got == 0U) {
+        return 0;
+    }
+
+    for (size_t i = 0; i < got; ++i) {
+        ctx.queue.push_back(_NEFORCE move(batch[i]));
+    }
+    pending_tasks_.fetch_sub(static_cast<uint32_t>(got), memory_order_acq_rel);
+    publish_local_size(ctx);
+    return got;
+}
+
 void thread_pool::publish_local_size(worker_context& ctx) {
     const auto depth = static_cast<uint32_t>(ctx.queue.size());
     ctx.published_size.store(depth, memory_order_release);
@@ -287,18 +403,8 @@ void thread_pool::wake_workers(const uint32_t backlog) noexcept {
         return;
     }
 
-    const uint32_t idle = idle_workers_.load(memory_order_relaxed);
-
-    // Workers that are already polling pick the backlog up on their own, so a
-    // pool with enough awake workers costs no syscall at all. Liveness does not
-    // depend on this shortcut: liveness_tick() prods the pool whenever queued
-    // work stops making progress.
-    if (idle >= backlog) {
-        return;
-    }
-
     wake_word_.fetch_add(1, memory_order_release);
-    if (backlog > idle + 1U) {
+    if (backlog > parked) {
         wake_word_.notify_all();
     } else {
         wake_word_.notify_one();
@@ -424,7 +530,7 @@ void thread_pool::apply_affinity(worker_context& ctx, const size_t slot_index) {
     ctx.cpu_core = core;
 
     if (affinity_enabled_.load(memory_order_relaxed) && allowed != 0ULL && cpu_mask_test(allowed, core)) {
-        this_thread::set_affinity(static_cast<size_t>(static_cast<uint64_t>(1) << core));
+        this_thread::bind_core(core);
     }
 }
 
@@ -483,6 +589,7 @@ bool thread_pool::dispatch_task(task_type&& job, const priority_type priority, c
         priority_pending_.fetch_add(1, memory_order_release);
         const uint32_t priority_before = pending_tasks_.fetch_add(1, memory_order_release);
         ++total_submitted_tasks_;
+        arm_liveness_tick();
         wake_workers(priority_before + 1U);
         return true;
     }
@@ -492,6 +599,7 @@ bool thread_pool::dispatch_task(task_type&& job, const priority_type priority, c
         ctx->queue.push_back(_NEFORCE move(job));
         publish_local_size(*ctx);
         ++total_submitted_tasks_;
+        arm_liveness_tick();
         return true;
     }
 
@@ -502,36 +610,46 @@ bool thread_pool::dispatch_task(task_type&& job, const priority_type priority, c
     }
 
     ++total_submitted_tasks_;
+    arm_liveness_tick();
     wake_workers(pending_before + 1U);
     return true;
 }
 
+void thread_pool::arm_liveness_tick() {
+    bool expected = false;
+    if (!liveness_armed_.compare_exchange_strong(expected, true, memory_order_acq_rel, memory_order_relaxed)) {
+        return;
+    }
+    if (timer_) {
+        timer_->add_task(steady_clock::now() + milliseconds(liveness_interval_ms), [this] { liveness_tick(); });
+    }
+}
+
 void thread_pool::liveness_tick() {
-    // Safety net for the whole family of lost-wakeup states: if work is queued
-    // while every worker is parked (or busy with something that never returns),
-    // prod the pool instead of leaving the submitter blocked forever. It runs on
-    // the timer thread every liveness_interval_ms and costs one timer entry.
     const uint32_t pending = pending_tasks_.load(memory_order_acquire);
 
     size_t completed = 0;
+    size_t local_depth = 0;
     for (size_t i = 0; i < worker_slots_.size(); ++i) {
         if (worker_slots_[i] && worker_slots_[i]->context) {
             completed += worker_slots_[i]->context->completed.load(memory_order_relaxed);
+            local_depth += worker_slots_[i]->context->published_size.load(memory_order_acquire);
         }
     }
+    const bool has_work = pending != 0U || local_depth != 0U;
 
-    // Only a genuine stall (queued work plus zero progress during a whole tick)
-    // triggers the prod, so the normal submit/drain pattern never sees an extra
-    // wake-up storm.
-    if (pending != 0U && completed == liveness_completed_ && parked_workers_.load(memory_order_relaxed) != 0U &&
-        idle_workers_.load(memory_order_relaxed) == 0U) {
+    // Only a genuine stall (queued work plus zero progress during a whole tick) triggers the prod,
+    // so the normal submit/drain pattern never sees an extra wake-up storm.
+    if (has_work && completed == liveness_completed_) {
         wake_word_.fetch_add(1, memory_order_release);
         wake_word_.notify_all();
     }
     liveness_completed_ = completed;
 
-    if (is_running_.load(memory_order_acquire) && timer_) {
+    if (has_work && is_running_.load(memory_order_acquire) && timer_) {
         timer_->add_task(steady_clock::now() + milliseconds(liveness_interval_ms), [this] { liveness_tick(); });
+    } else {
+        liveness_armed_.store(false, memory_order_release);
     }
 }
 
@@ -540,9 +658,6 @@ void thread_pool::prewarm_dispatch(const int64_t deadline_ns) {
         return;
     }
 
-    // Whichever worker claims the hint first keeps spinning until the deadline;
-    // the claim also keeps every other idle worker parked, so at most one core is
-    // spent on warm-up.
     warm_deadline_ns_.store(deadline_ns, memory_order_release);
     wake_word_.fetch_add(1, memory_order_release);
     wake_word_.notify_one();
@@ -640,43 +755,10 @@ void thread_pool::thread_function(const size_t slot_index) {
     attached_workers_.fetch_add(1, memory_order_acq_rel);
     attached_workers_.notify_all();
 
-    const auto take_task = [this, &self]() -> optional<task_type> {
-        auto task = try_take_priority();
-        if (task) {
-            return task;
-        }
-
-        if (!self.queue.empty()) {
-            task = self.queue.try_pop();
-            publish_local_size(self);
-            if (task) {
-                return task;
-            }
-        }
-
-        if (global_queue_) {
-            task_type item;
-            if (global_queue_->try_dequeue(item)) {
-                pending_tasks_.fetch_sub(1, memory_order_acq_rel);
-                return optional<task_type>{_NEFORCE move(item)};
-            }
-        }
-
-        return try_steal_task(self);
-    };
-
-    const auto execute = [&self](task_type& task) {
-        try {
-            task();
-            self.completed.fetch_add(1, memory_order_relaxed);
-        } catch (...) {
-            // A task must never be able to kill its worker thread.
-            self.failed.fetch_add(1, memory_order_relaxed);
-        }
-    };
+    size_t pending_stall_retries = 0;
 
     for (;;) {
-        auto task = take_task();
+        auto task = take_task(self);
         if (task) {
             if (self.idle_counted) {
                 self.idle_counted = false;
@@ -687,7 +769,7 @@ void thread_pool::thread_function(const size_t slot_index) {
             }
             self.consecutive_idle_count = 0;
             wake_workers(pending_tasks_.load(memory_order_acquire));
-            execute(*task);
+            execute_task(self, *task);
             continue;
         }
 
@@ -729,21 +811,28 @@ void thread_pool::thread_function(const size_t slot_index) {
             idle_workers_.fetch_sub(1, memory_order_relaxed);
         }
 
-        // Park on wake_word_: a producer bumps it only after the task has been
-        // published, so a parked worker can never miss a wake-up and a parked
-        // pool costs no CPU. The word only ever grows, so the wait cannot be
-        // disturbed by counter bookkeeping.
         const uint32_t observed = wake_word_.load(memory_order_acquire);
         parked_workers_.fetch_add(1, memory_order_relaxed);
 
-        task = take_task();
+        task = take_task(self);
         if (task) {
             parked_workers_.fetch_sub(1, memory_order_relaxed);
             self.consecutive_idle_count = 0;
+            pending_stall_retries = 0;
             wake_workers(pending_tasks_.load(memory_order_acquire));
-            execute(*task);
+            execute_task(self, *task);
             continue;
         }
+
+        if (pending_tasks_.load(memory_order_acquire) != 0U && pending_stall_retries < 64U) {
+            ++pending_stall_retries;
+            wake_word_.fetch_add(1, memory_order_release);
+            wake_word_.notify_one();
+            parked_workers_.fetch_sub(1, memory_order_relaxed);
+            this_thread::relax();
+            continue;
+        }
+        pending_stall_retries = 0;
 
         if (wake_word_.load(memory_order_acquire) == observed) {
             self.consecutive_idle_count = 0;
@@ -968,6 +1057,7 @@ bool thread_pool::start(const size_t init_thread_size) {
     warm_owner_.store(-1, memory_order_relaxed);
     parked_workers_.store(0, memory_order_relaxed);
     idle_workers_.store(0, memory_order_relaxed);
+    helpers_waiting_.store(0, memory_order_relaxed);
     steal_worker_count_.store(0, memory_order_relaxed);
     attached_workers_.store(0, memory_order_relaxed);
     total_submitted_tasks_.store(0, memory_order_relaxed);
@@ -990,10 +1080,6 @@ bool thread_pool::start(const size_t init_thread_size) {
     while (attached < init_thread_size_ && steady_clock::now() < deadline) {
         attached_workers_.wait(attached, memory_order_acquire);
         attached = attached_workers_.load(memory_order_acquire);
-    }
-
-    if (timer_) {
-        timer_->add_task(steady_clock::now() + milliseconds(liveness_interval_ms), [this] { liveness_tick(); });
     }
 
     if (pool_mode_.load(memory_order_relaxed) == pool_mode::cached) {
@@ -1065,6 +1151,7 @@ thread_pool::pool_statistics thread_pool::stop() {
     warm_owner_.store(-1, memory_order_relaxed);
     parked_workers_.store(0, memory_order_relaxed);
     idle_workers_.store(0, memory_order_relaxed);
+    helpers_waiting_.store(0, memory_order_relaxed);
     steal_worker_count_.store(0, memory_order_relaxed);
     thread_pool_id_generator::reset_id();
 

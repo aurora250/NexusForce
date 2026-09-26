@@ -168,6 +168,12 @@ public:
 NEFORCE_ERROR_BUILD_DERIVED_CLASS(memory_exception, exception, "Memory Operation Failed.")
 
 /**
+ * @struct thread_exception
+ * @brief 线程操作异常
+ */
+NEFORCE_ERROR_BUILD_FINAL_CLASS(thread_exception, exception, "Thread Operation Failed.")
+
+/**
  * @struct allocate_exception
  * @brief 内存分配异常
  */

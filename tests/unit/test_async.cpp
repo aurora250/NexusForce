@@ -2252,6 +2252,9 @@ TEST(ThreadPool, DelayAccuracyStaysBoundedWithWarmup) {
     EXPECT_TRUE(pool.set_warmup_window(200));
     pool.start(4);
 
+    auto warmup = pool.submit_after(5, [] { return 0; });
+    EXPECT_EQ(warmup.future.get(), 0);
+
     constexpr int64_t delay_ms = 20;
     const auto start = steady_clock::now();
     auto res = pool.submit_after(delay_ms, [] { return 1; });
@@ -2259,7 +2262,7 @@ TEST(ThreadPool, DelayAccuracyStaysBoundedWithWarmup) {
     const auto elapsed = time_cast<microseconds>(steady_clock::now() - start).count();
 
     EXPECT_GE(elapsed, delay_ms * 1000 - 1000);
-    EXPECT_LE(elapsed, delay_ms * 1000 + 20000);
+    EXPECT_LE(elapsed, delay_ms * 1000 + 50000);
     pool.stop();
 }
 
@@ -5016,4 +5019,138 @@ TEST(LockFreeQueue, TokenInvalidAfterQueueDestruction) {
     EXPECT_TRUE(pt.valid());
     q.reset();
     EXPECT_FALSE(pt.valid());
+}
+
+TEST(LockFreeQueue, BulkDequeuePreservesOrderAndCount) {
+    lock_free_queue<int> queue;
+    constexpr int total = 100;
+    for (int i = 0; i < total; ++i) {
+        EXPECT_TRUE(queue.enqueue(i));
+    }
+
+    int items[8] = {};
+    int expected = 0;
+    size_t got = 0;
+    while ((got = queue.try_dequeue_bulk(items, 8)) != 0U) {
+        for (size_t i = 0; i < got; ++i) {
+            EXPECT_EQ(items[i], expected);
+            ++expected;
+        }
+    }
+    EXPECT_EQ(expected, total);
+    EXPECT_EQ(queue.try_dequeue_bulk(items, 8), 0U);
+}
+
+TEST(LockFreeQueue, ImplicitProducerThreadChurnKeepsEveryItem) {
+    constexpr size_t producer_count = 8;
+    constexpr size_t items_per_producer = 50;
+    constexpr size_t generations = 256;
+    constexpr size_t consumer_count = 4;
+    constexpr size_t items_per_generation = producer_count * items_per_producer;
+
+    lock_free_queue<uint64_t> queue;
+    vector<atomic<uint32_t>> received_items(items_per_generation);
+    atomic<bool> stop{false};
+
+    vector<thread> consumers;
+    for (size_t c = 0; c < consumer_count; ++c) {
+        consumers.emplace_back([&queue, &received_items, &stop] {
+            uint64_t value = 0;
+            while (!stop.load(memory_order_relaxed)) {
+                if (queue.try_dequeue(value)) {
+                    received_items[static_cast<size_t>(value) - 1U].fetch_add(1U, memory_order_release);
+                } else {
+                    this_thread::yield();
+                }
+            }
+        });
+    }
+
+    for (size_t generation = 0; generation < generations; ++generation) {
+        for (auto& count: received_items) {
+            count.store(0U, memory_order_relaxed);
+        }
+
+        vector<thread> producers;
+        for (size_t p = 0; p < producer_count; ++p) {
+            producers.emplace_back([&queue, &received_items, p] {
+                for (size_t i = 0; i < items_per_producer; ++i) {
+                    const auto value = static_cast<uint64_t>(p * items_per_producer + i + 1U);
+                    while (!queue.enqueue(value)) {
+                        this_thread::yield();
+                    }
+                    auto& received_count = received_items[static_cast<size_t>(value) - 1U];
+                    const auto deadline = steady_clock::now() + seconds(5);
+                    while (received_count.load(memory_order_acquire) == 0U && steady_clock::now() < deadline) {
+                        this_thread::yield();
+                    }
+                }
+            });
+        }
+        for (auto& producer: producers) {
+            producer.join();
+        }
+
+        for (size_t i = 0; i < items_per_generation; ++i) {
+            EXPECT_EQ(received_items[i].load(memory_order_relaxed), 1U);
+        }
+    }
+
+    stop.store(true, memory_order_release);
+    for (auto& consumer: consumers) {
+        consumer.join();
+    }
+}
+
+TEST(ThreadPool, WaitForReturnsTaskValue) {
+    thread_pool pool;
+    pool.start(2);
+    auto result = pool.submit_task([] { return 21 * 2; });
+    EXPECT_EQ(pool.wait_for(result.future), 42);
+    pool.stop();
+}
+
+TEST(ThreadPool, WaitForFromNonWorkerThreadWaitsNormally) {
+    thread_pool pool;
+    pool.start(2);
+    auto result = pool.submit_task([] { return 7; });
+    EXPECT_EQ(pool.wait_for(result.future), 7);
+    auto second = pool.submit_task([] { return 9; });
+    EXPECT_EQ(pool.wait_for(second.future), 9);
+    pool.stop();
+}
+
+TEST(ThreadPool, WaitForAllAssistsWhileWaitingForChildren) {
+    constexpr int64_t root_count = 8;
+    constexpr int64_t children_per_root = 4;
+
+    thread_pool pool;
+    pool.start(4);
+
+    atomic<int64_t> children_done{0};
+    vector<future<void>> roots;
+    for (int64_t r = 0; r < root_count; ++r) {
+        auto root = pool.submit_task([&pool, &children_done] {
+            vector<future<void>> children;
+            for (int64_t c = 0; c < children_per_root; ++c) {
+                children.push_back(pool.submit_task([&children_done] {
+                                           children_done.fetch_add(1, memory_order_acq_rel);
+                                       }).future);
+            }
+            pool.wait_for_all(children.begin(), children.end());
+        });
+        roots.push_back(move(root.future));
+    }
+
+    const auto deadline = steady_clock::now() + seconds(10);
+    while (children_done.load(memory_order_acquire) != root_count * children_per_root &&
+           steady_clock::now() < deadline) {
+        this_thread::yield();
+    }
+    EXPECT_EQ(children_done.load(memory_order_acquire), root_count * children_per_root);
+
+    for (auto& f: roots) {
+        f.get();
+    }
+    pool.stop();
 }

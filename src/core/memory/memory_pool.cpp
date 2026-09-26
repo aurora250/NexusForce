@@ -20,6 +20,7 @@ namespace {
     constexpr uint32_t g_span_flag_linked = 0x1U;                          // span 已挂入尺寸类链
     constexpr size_t g_map_l1_bits = 16;                                   // 地址映射表一级索引位数
     constexpr uintptr_t g_address_limit = static_cast<uintptr_t>(1) << 48; // 受支持的地址空间上界（256 TiB）
+    constexpr size_t g_region_cache_buckets = 8;                           // 大对象区域缓存桶位数
 
     // 各尺寸类的块大小（字节）
     constexpr uint32_t g_block_sizes[memory_pool::class_count] = {
@@ -40,6 +41,28 @@ namespace {
     constexpr size_t g_map_l1_size = static_cast<size_t>(1) << g_map_l1_bits;
     constexpr size_t g_map_l2_size = static_cast<size_t>(1) << g_map_l1_bits;
     constexpr size_t g_map_l2_bytes = g_map_l2_size * sizeof(memory_pool::map_entry);
+
+    /// One map entry packs everything a verdict needs, so a single load cannot mix two publications:
+    /// bits 0..1 kind, bits 2..7 size class, bits 8..31 owner pool identifier, bits 32..63 base slot index.
+    constexpr uint64_t g_entry_kind_mask = 0x3U;
+    constexpr uint64_t g_entry_class_shift = 2;
+    constexpr uint64_t g_entry_class_mask = 0x3FU;
+    constexpr uint64_t g_entry_owner_shift = 8;
+    constexpr uint64_t g_entry_owner_mask = 0xFFFFFFU;
+    constexpr uint64_t g_entry_base_shift = 32;
+    constexpr uint64_t g_entry_base_mask = 0xFFFFFFFFULL;
+
+    /// Alignment slack a large region may carry on top of its payload and still be thread cacheable.
+    constexpr size_t g_region_alignment_slack = 65536;
+
+    /// Nodes visited at most when splitting an overflowing class cache.
+    constexpr uint32_t g_trim_walk_limit = 64;
+
+    /// Runs of one span inside a single flush batch; the remainder falls back to the in-lock grouping path.
+    constexpr size_t g_max_return_runs = 16;
+
+    /// Spans unlinked in one pass and destroyed after the class lock is released.
+    constexpr size_t g_max_deferred_spans = 32;
 
     /// Pool instances the registry can track simultaneously.
     constexpr size_t g_registry_slots = 256;
@@ -101,6 +124,21 @@ namespace {
     size_t round_up(const size_t value, const size_t align) noexcept {
         NEFORCE_DEBUG_VERIFY(align != 0, "memory pool alignment must not be zero.");
         return (value + align - 1) / align * align;
+    }
+
+    size_t region_bucket_of(const size_t need, const size_t buckets) noexcept {
+        /// Large region cache bucket: power of two size buckets starting at 32 KiB,
+        /// which is fine enough to keep neighbouring payload sizes from evicting each other,
+        /// while the largest sizes still share the top bucket.
+        constexpr size_t region_bucket_base = 32U << 10;
+
+        size_t bucket = 0;
+        size_t limit = region_bucket_base;
+        while (need > limit && bucket + 1 < buckets) {
+            limit <<= 1;
+            ++bucket;
+        }
+        return bucket;
     }
 
     size_t divide_round_up(const size_t value, const size_t align) noexcept {
@@ -171,9 +209,20 @@ namespace {
         return lock;
     }
 
-    uint64_t pack_tag(const uint32_t owner_id, const uint16_t class_index, const uint8_t kind) noexcept {
-        return (static_cast<uint64_t>(owner_id) << 32) | (static_cast<uint64_t>(class_index) << 16) |
-               static_cast<uint64_t>(kind);
+    uintptr_t slot_address(const uintptr_t addr) noexcept { return addr & ~(static_cast<uintptr_t>(g_slot_size) - 1); }
+
+    uint64_t pack_entry(const uintptr_t base, const uint32_t owner_id, const uint16_t class_index,
+                        const uint8_t kind) noexcept {
+        NEFORCE_DEBUG_VERIFY((base & (g_slot_size - 1)) == 0, "memory pool object base must be slot aligned.");
+        NEFORCE_DEBUG_VERIFY(base < g_address_limit,
+                             "memory pool object base must be inside the supported address space.");
+        NEFORCE_DEBUG_VERIFY((owner_id & ~static_cast<uint32_t>(g_entry_owner_mask)) == 0,
+                             "memory pool identifier must fit the packed entry.");
+        const auto base_slot = static_cast<uint64_t>((base >> g_slot_shift) & g_entry_base_mask);
+        return (base_slot << g_entry_base_shift) |
+               ((static_cast<uint64_t>(owner_id) & g_entry_owner_mask) << g_entry_owner_shift) |
+               ((static_cast<uint64_t>(class_index) & g_entry_class_mask) << g_entry_class_shift) |
+               (static_cast<uint64_t>(kind) & g_entry_kind_mask);
     }
 
     map_root* map_root_get(const bool create) noexcept {
@@ -240,18 +289,18 @@ namespace {
         if (page == nullptr) {
             return false;
         }
-        const memory_pool::map_entry& entry = page[map_l2_index(addr)];
-        const uint64_t tag = entry.tag.load(memory_order_acquire);
-        out.kind = static_cast<uint8_t>(tag & 0xFFU);
+        const uint64_t value = page[map_l2_index(addr)].value.load(memory_order_acquire);
+        out.kind = static_cast<uint8_t>(value & g_entry_kind_mask);
         if (out.kind == g_kind_none) {
             return false;
         }
-        out.base = reinterpret_cast<void*>(entry.desc.load(memory_order_relaxed));
-        if (out.base == nullptr) {
+        const uint64_t base_slot = value >> g_entry_base_shift;
+        if (base_slot == 0) {
             return false;
         }
-        out.class_index = static_cast<uint16_t>((tag >> 16) & 0xFFFFU);
-        out.owner_id = static_cast<uint32_t>(tag >> 32);
+        out.base = reinterpret_cast<void*>(static_cast<uintptr_t>(base_slot) << g_slot_shift);
+        out.owner_id = static_cast<uint32_t>((value >> g_entry_owner_shift) & g_entry_owner_mask);
+        out.class_index = static_cast<uint16_t>((value >> g_entry_class_shift) & g_entry_class_mask);
         return true;
     }
 
@@ -262,8 +311,7 @@ namespace {
             return false;
         }
         const auto first = reinterpret_cast<uintptr_t>(ptr);
-        const auto tag = pack_tag(owner_id, class_index, kind);
-        const auto desc = reinterpret_cast<uint64_t>(base);
+        const uint64_t entry = pack_entry(reinterpret_cast<uintptr_t>(base), owner_id, class_index, kind);
         const size_t slots = divide_round_up(bytes, g_slot_size);
         for (size_t index = 0; index < slots; ++index) {
             const uintptr_t addr = first + index * g_slot_size;
@@ -274,9 +322,7 @@ namespace {
             if (page == nullptr) {
                 return false;
             }
-            memory_pool::map_entry& entry = page[map_l2_index(addr)];
-            entry.desc.store(desc, memory_order_relaxed);
-            entry.tag.store(tag, memory_order_release);
+            page[map_l2_index(addr)].value.store(entry, memory_order_release);
         }
         return true;
     }
@@ -299,9 +345,7 @@ namespace {
         if (page == nullptr) {
             return;
         }
-        memory_pool::map_entry& entry = page[map_l2_index(addr)];
-        entry.tag.store(pack_tag(0, 0, g_kind_none), memory_order_release);
-        entry.desc.store(0, memory_order_relaxed);
+        page[map_l2_index(addr)].value.store(0, memory_order_release);
     }
 
     void map_retire_range(void* ptr, const size_t bytes) noexcept {
@@ -332,37 +376,44 @@ namespace {
         return value;
     }
 
-    void registry_insert(memory_pool* pool, const uint32_t id) noexcept {
+    memory_pool* registry_lookup(uint32_t id) noexcept;
+
+    size_t registry_insert(memory_pool* pool, const uint32_t id) noexcept {
         scoped_spinlock guard(registry_lock());
         for (size_t index = 0; index < g_registry_slots; ++index) {
             if (registry_ids()[index].load(memory_order_relaxed) == 0) {
                 registry_pools()[index].store(pool, memory_order_relaxed);
                 registry_ids()[index].store(id, memory_order_release);
-                return;
+                return index;
             }
         }
+        return g_registry_slots;
     }
 
-    void registry_remove(const uint32_t id) noexcept {
+    void registry_remove_at(const size_t slot, const uint32_t id) noexcept {
+        if (slot >= g_registry_slots) {
+            return;
+        }
         scoped_spinlock guard(registry_lock());
-        for (size_t index = 0; index < g_registry_slots; ++index) {
-            if (registry_ids()[index].load(memory_order_relaxed) == id) {
-                registry_ids()[index].store(0, memory_order_release);
-                registry_pools()[index].store(nullptr, memory_order_relaxed);
-                return;
-            }
+        if (registry_ids()[slot].load(memory_order_relaxed) == id) {
+            registry_pools()[slot].store(nullptr, memory_order_relaxed);
+            registry_ids()[slot].store(0, memory_order_release);
         }
     }
 
+    // Identifiers stay inside the packed map entry width, and an identifier that a live pool already holds is skipped:
+    // two live pools never share one, which is what lets a published entry identify its owner exactly.
+    // Recycling after the whole range is used is still safe, because an entry is retired together with the object it describes,
+    // so no published entry outlives the pool that published it.
     uint32_t registry_next_id() noexcept {
         scoped_spinlock guard(registry_lock());
         for (;;) {
             const uint32_t id = next_pool_id();
             ++next_pool_id();
-            if (next_pool_id() == 0) {
+            if (next_pool_id() > static_cast<uint32_t>(g_entry_owner_mask)) {
                 next_pool_id() = 1;
             }
-            if (id != 0) {
+            if (id != 0 && registry_lookup(id) == nullptr) {
                 return id;
             }
         }
@@ -454,7 +505,7 @@ memory_pool::memory_pool(const options& opts) noexcept { initialize(opts); }
 
 memory_pool::~memory_pool() {
     alive_ = 0;
-    registry_remove(id_);
+    registry_remove_at(registry_slot_, id_);
     release_all();
 }
 
@@ -500,6 +551,10 @@ void memory_pool::initialize(const options& opts) noexcept {
     all_spans_ = nullptr;
     all_regions_ = nullptr;
     region_cache_count_ = 0;
+    for (size_t index = 0; index < region_cache_slots; ++index) {
+        region_cache_[index].region = nullptr;
+        region_cache_[index].region_size = 0;
+    }
     registry_lock_.value.store(0, memory_order_relaxed);
     region_lock_.value.store(0, memory_order_relaxed);
     os_mapped_bytes_.store(0, memory_order_relaxed);
@@ -512,7 +567,7 @@ void memory_pool::initialize(const options& opts) noexcept {
     os_map_calls_.store(0, memory_order_relaxed);
     os_unmap_calls_.store(0, memory_order_relaxed);
     foreign_releases_.store(0, memory_order_relaxed);
-    registry_insert(this, id_);
+    registry_slot_ = registry_insert(this, id_);
 }
 
 size_t memory_pool::block_size(const size_t class_index) noexcept {
@@ -549,6 +604,7 @@ memory_pool::thread_cache& memory_pool::current_cache() noexcept {
 memory_pool* memory_pool::pool_for_id(const uint32_t id) noexcept { return registry_lookup(id); }
 
 void memory_pool::release_thread_cache(thread_cache& cache) noexcept {
+    cache.last_claim = 0;
     memory_pool* owner = pool_for_id(cache.owner_id);
     if (owner != nullptr) {
         for (size_t index = 0; index < class_count; ++index) {
@@ -558,7 +614,9 @@ void memory_pool::release_thread_cache(thread_cache& cache) noexcept {
             cache.entries[index].list = nullptr;
             cache.entries[index].count = 0;
         }
-        for (uint32_t index = 0; index < cache.region_count; ++index) {
+        // Region slots are indexed by size bucket, so every slot has to be visited
+        // instead of only the first region_count of them.
+        for (size_t index = 0; index < thread_region_slots; ++index) {
             if (cache.regions[index].region != nullptr) {
                 cache.regions[index].region->flags &= ~g_region_flag_cached;
                 owner->return_region(cache.regions[index].region);
@@ -573,6 +631,7 @@ void memory_pool::release_thread_cache(thread_cache& cache) noexcept {
         }
     }
     cache.region_count = 0;
+    cache.region_bytes = 0;
     cache.owner_id = 0;
 }
 
@@ -581,8 +640,44 @@ bool memory_pool::bind_cache(thread_cache& cache) noexcept {
         return true;
     }
     release_thread_cache(cache);
+    for (size_t index = 0; index < class_count; ++index) {
+        cache.entries[index].cache_max = classes_[index].cache_max;
+    }
     cache.owner_id = id_;
     return true;
+}
+
+void memory_pool::cache_trim(thread_cache& cache, const size_t class_index) noexcept {
+    class_cache& entry = cache.entries[class_index];
+    const uint32_t total = entry.count;
+    void* head = entry.list;
+    void* tail = head;
+    uint32_t walked = 1;
+    while (walked < total / 2 && walked < g_trim_walk_limit && tail != nullptr) {
+        tail = *static_cast<void**>(tail);
+        ++walked;
+    }
+    void* returned = nullptr;
+    if (tail != nullptr) {
+        returned = *static_cast<void**>(tail);
+        *static_cast<void**>(tail) = nullptr;
+    }
+    entry.list = nullptr;
+    entry.count = 0;
+    if (returned != nullptr) {
+        const size_t handled = return_blocks(class_index, returned, total);
+        entry.list = head;
+        entry.count = total > handled ? static_cast<uint32_t>(total - handled) : 0;
+    } else {
+        entry.list = head;
+        entry.count = total;
+    }
+}
+
+bool memory_pool::thread_region_fits(const size_t need) const noexcept {
+    // The payload cap is compared against the mapped size of the region,
+    // so the header and the alignment padding a payload sized request carries do not push it out of the thread cache.
+    return need <= options_.thread_region_bytes + g_region_alignment_slack;
 }
 
 void* memory_pool::allocate_small(thread_cache& cache, const size_t class_index) noexcept {
@@ -593,9 +688,14 @@ void* memory_pool::allocate_small(thread_cache& cache, const size_t class_index)
         void* block = cache.entries[class_index].list;
         cache.entries[class_index].list = *static_cast<void**>(block);
         --cache.entries[class_index].count;
+        cache.last_claim = reinterpret_cast<uintptr_t>(block);
         return block;
     }
-    return refill(cache, class_index);
+    void* block = refill(cache, class_index);
+    if (block != nullptr) {
+        cache.last_claim = reinterpret_cast<uintptr_t>(block);
+    }
+    return block;
 }
 
 
@@ -642,7 +742,6 @@ memory_pool::span_header* memory_pool::create_span(const size_t class_index) noe
         span->global_next = all_spans_;
         all_spans_ = span;
     }
-    ++state.span_count;
     return span;
 }
 
@@ -673,49 +772,62 @@ void* memory_pool::refill(thread_cache& cache, const size_t class_index) noexcep
     class_state& state = classes_[class_index];
     void* batch = nullptr;
     uint32_t taken = 0;
-    {
-        scoped_spinlock guard(state.lock);
-        span_header* span = state.partial;
-        if (span == nullptr) {
-            span = create_span(class_index);
+    for (int attempt = 0; attempt < 4 && taken == 0; ++attempt) {
+        bool need_span = false;
+        {
+            scoped_spinlock guard(state.lock);
+            span_header* span = state.partial;
+            if (span != nullptr && span->free_count.load(memory_order_relaxed) == 0) {
+                list_unlink(state, span);
+                span = nullptr;
+            }
             if (span == nullptr) {
+                need_span = true;
+            } else {
+                if (state.empty_count != 0 && span->used_count.load(memory_order_relaxed) == 0) {
+                    --state.empty_count;
+                    empty_bytes_.fetch_sub(span->span_size, memory_order_relaxed);
+                    list_unlink(state, span);
+                    list_push_front(state, span);
+                }
+                uint32_t want = options_.thread_cache_enabled ? state.batch : 1U;
+                const uint32_t available = span->free_count.load(memory_order_relaxed);
+                want = min(want, available);
+                void* head = span->free_head;
+                void* tail = head;
+                for (uint32_t index = 1; index < want; ++index) {
+                    tail = *static_cast<void**>(tail);
+                }
+                span->free_head = *static_cast<void**>(tail);
+                *static_cast<void**>(tail) = nullptr;
+                const uint32_t remaining = available - want;
+                span->free_count.store(remaining, memory_order_relaxed);
+                span->used_count.fetch_add(want, memory_order_relaxed);
+                if (remaining == 0) {
+                    list_unlink(state, span);
+                }
+                batch = head;
+                taken = want;
+            }
+        }
+        if (need_span) {
+            span_header* fresh = create_span(class_index);
+            if (fresh == nullptr) {
                 return nullptr;
             }
-            list_push_front(state, span);
+            scoped_spinlock guard(state.lock);
+            ++state.span_count;
+            list_push_front(state, fresh);
+            // The span is linked while still fully free, and the batch is taken under the next lock acquisition,
+            // so it has to be accounted as an empty span in between: empty_count and the span list stay consistent
+            // for every other thread, including one that runs verify() or a release in that window.
+            ++state.empty_count;
+            empty_bytes_.fetch_add(fresh->span_size, memory_order_relaxed);
         }
-        uint32_t available = span->free_count.load(memory_order_relaxed);
-        if (available == 0) {
-            list_unlink(state, span);
-            span = create_span(class_index);
-            if (span == nullptr) {
-                return nullptr;
-            }
-            list_push_front(state, span);
-            available = span->free_count.load(memory_order_relaxed);
-        }
-        if (state.empty_count != 0 && span->used_count.load(memory_order_relaxed) == 0) {
-            --state.empty_count;
-            empty_bytes_.fetch_sub(span->span_size, memory_order_relaxed);
-            list_unlink(state, span);
-            list_push_front(state, span);
-        }
-        uint32_t want = options_.thread_cache_enabled ? state.batch : 1U;
-        want = min(want, available);
-        void* head = span->free_head;
-        void* tail = head;
-        for (uint32_t index = 1; index < want; ++index) {
-            tail = *static_cast<void**>(tail);
-        }
-        span->free_head = *static_cast<void**>(tail);
-        *static_cast<void**>(tail) = nullptr;
-        const uint32_t remaining = available - want;
-        span->free_count.store(remaining, memory_order_relaxed);
-        span->used_count.fetch_add(want, memory_order_relaxed);
-        if (remaining == 0) {
-            list_unlink(state, span);
-        }
-        batch = head;
-        taken = want;
+    }
+
+    if (taken == 0) {
+        return nullptr;
     }
 
     const size_t bytes = static_cast<size_t>(taken) * static_cast<size_t>(g_block_sizes[class_index]);
@@ -727,106 +839,140 @@ void* memory_pool::refill(thread_cache& cache, const size_t class_index) noexcep
     return batch;
 }
 
-void memory_pool::return_blocks(const size_t class_index, void* head, const size_t count) noexcept {
+size_t memory_pool::return_blocks(const size_t class_index, void* head, const size_t count) noexcept {
     if (head == nullptr || count == 0) {
-        return;
+        return 0;
     }
     class_state& state = classes_[class_index];
-    scoped_spinlock guard(state.lock);
-    void* node = head;
+    const size_t floor_spans = options_.purge_on_empty ? 0 : options_.max_empty_spans;
+    const size_t budget = options_.purge_on_empty ? 0 : options_.max_empty_span_bytes;
     size_t handled = 0;
     size_t accepted = 0;
-    // Blocks of one flush batch usually come from a handful of spans,
-    // so the address map is consulted once per 64 KiB slot instead of once per block.
-    // The cached span cannot be torn down while the batch is in flight,
-    // because every block handed to a thread cache keeps its span accounted as used.
-    constexpr uintptr_t slot_mask = ~(static_cast<uintptr_t>(g_slot_size) - 1);
-    uintptr_t cached_slot = ~static_cast<uintptr_t>(0);
-    span_header* cached_span = nullptr;
+    void* node = head;
+
+    // Grouping runs of one span and mapping the spans to unmap happen with no class lock held.
+    // Every block handed to a thread cache keeps its span accounted as used,
+    // so a span referenced by a batch in flight cannot be torn down by another thread.
+    struct block_run {
+        span_header* span;
+        void* run_head;
+        void* run_tail;
+        size_t run_length;
+    };
+
     while (node != nullptr && handled < count) {
-        const uintptr_t slot = reinterpret_cast<uintptr_t>(node) & slot_mask;
-        if (slot != cached_slot) {
-            map_view view;
-            cached_slot = slot;
-            cached_span = nullptr;
-            if (map_read(node, view) && view.kind == g_kind_small && view.owner_id == id_ &&
-                view.class_index == class_index) {
-                cached_span = static_cast<span_header*>(view.base);
-            }
-        }
-        if (cached_span == nullptr) {
-            node = *static_cast<void**>(node);
-            ++handled;
-            continue;
-        }
-        // Blocks of one span arrive consecutively,
-        // so the whole run is spliced onto the span free list and accounted with a single update instead of one update per block.
-        // That keeps the critical section short, which is what the many-thread case pays for.
-        void* run_head = node;
-        void* run_tail = node;
-        size_t run_length = 1;
-        void* next = *static_cast<void**>(node);
-        while (next != nullptr && handled + run_length < count &&
-               (reinterpret_cast<uintptr_t>(next) & slot_mask) == slot) {
-            run_tail = next;
-            ++run_length;
-            next = *static_cast<void**>(next);
-        }
-        auto* span = cached_span;
-        const uint32_t free_before = span->free_count.load(memory_order_relaxed);
-        const uint32_t used_before = span->used_count.load(memory_order_relaxed);
-        NEFORCE_DEBUG_VERIFY(free_before + run_length <= span->block_count, "memory pool detected a duplicated block.");
-        if (free_before + run_length <= span->block_count) {
-            if (free_before == 0) {
-                list_push_front(state, span);
-            }
-            *static_cast<void**>(run_tail) = span->free_head;
-            span->free_head = run_head;
-            span->free_count.store(free_before + static_cast<uint32_t>(run_length), memory_order_relaxed);
-            const uint32_t used_after = used_before > run_length ? used_before - static_cast<uint32_t>(run_length) : 0;
-            span->used_count.store(used_after, memory_order_relaxed);
-            if (used_after == 0) {
-                if ((span->flags & g_span_flag_linked) != 0) {
-                    list_unlink(state, span);
+        block_run runs[g_max_return_runs];
+        size_t run_count = 0;
+        size_t chunk_handled = 0;
+        void* cursor = node;
+        uintptr_t cached_slot = ~static_cast<uintptr_t>(0);
+        span_header* cached_span = nullptr;
+        while (cursor != nullptr && handled + chunk_handled < count && run_count < g_max_return_runs) {
+            const uintptr_t slot = slot_address(reinterpret_cast<uintptr_t>(cursor));
+            if (slot != cached_slot) {
+                // Blocks of one flush batch usually come from a handful of spans,
+                // so the address map is consulted once per slot instead of once per block.
+                map_view view;
+                cached_slot = slot;
+                cached_span = nullptr;
+                if (map_read(cursor, view) && view.kind == g_kind_small && view.owner_id == id_ &&
+                    view.class_index == class_index) {
+                    cached_span = static_cast<span_header*>(view.base);
                 }
-                list_push_back(state, span);
-                ++state.empty_count;
-                empty_bytes_.fetch_add(span->span_size, memory_order_relaxed);
             }
-            accepted += run_length;
+            if (cached_span == nullptr) {
+                cursor = *static_cast<void**>(cursor);
+                ++chunk_handled;
+                continue;
+            }
+            // Blocks of one span arrive consecutively,
+            // so the whole run is spliced onto the span free list and accounted with a single update.
+            void* run_head = cursor;
+            void* run_tail = cursor;
+            size_t run_length = 1;
+            void* next = *static_cast<void**>(cursor);
+            while (next != nullptr && handled + chunk_handled + run_length < count &&
+                   slot_address(reinterpret_cast<uintptr_t>(next)) == slot) {
+                run_tail = next;
+                ++run_length;
+                next = *static_cast<void**>(next);
+            }
+            runs[run_count].span = cached_span;
+            runs[run_count].run_head = run_head;
+            runs[run_count].run_tail = run_tail;
+            runs[run_count].run_length = run_length;
+            ++run_count;
+            cursor = next;
+            chunk_handled += run_length;
         }
-        node = next;
-        handled += run_length;
+
+        span_header* doomed[g_max_deferred_spans];
+        size_t doomed_count = 0;
+        {
+            scoped_spinlock guard(state.lock);
+            for (size_t index = 0; index < run_count; ++index) {
+                auto* span = runs[index].span;
+                const size_t run_length = runs[index].run_length;
+                const uint32_t free_before = span->free_count.load(memory_order_relaxed);
+                const uint32_t used_before = span->used_count.load(memory_order_relaxed);
+                NEFORCE_DEBUG_VERIFY(free_before + run_length <= span->block_count,
+                                     "memory pool detected a duplicated block.");
+                if (free_before + run_length > span->block_count) {
+                    continue;
+                }
+                if (free_before == 0) {
+                    list_push_front(state, span);
+                }
+                *static_cast<void**>(runs[index].run_tail) = span->free_head;
+                span->free_head = runs[index].run_head;
+                span->free_count.store(free_before + static_cast<uint32_t>(run_length), memory_order_relaxed);
+                const uint32_t used_after =
+                        used_before > run_length ? used_before - static_cast<uint32_t>(run_length) : 0;
+                span->used_count.store(used_after, memory_order_relaxed);
+                if (used_after == 0) {
+                    if ((span->flags & g_span_flag_linked) != 0) {
+                        list_unlink(state, span);
+                    }
+                    list_push_back(state, span);
+                    ++state.empty_count;
+                    empty_bytes_.fetch_add(span->span_size, memory_order_relaxed);
+                }
+                accepted += run_length;
+            }
+
+            // Bursty workloads hand out many spans, then release them all.
+            // Keeping only a single empty span per size class forces those spans to be mapped again for the next burst,
+            // which costs a page fault per block. Spans are therefore retained while the pool wide empty span byte
+            // budget allows it, so a peak working set stays reusable while purge() still returns everything.
+            while (state.empty_count > floor_spans && state.tail != nullptr &&
+                   state.tail->used_count.load(memory_order_relaxed) == 0 &&
+                   (budget == 0 || empty_bytes_.load(memory_order_relaxed) > budget)) {
+                span_header* span = state.tail;
+                list_unlink(state, span);
+                --state.empty_count;
+                --state.span_count;
+                empty_bytes_.fetch_sub(span->span_size, memory_order_relaxed);
+                if (doomed_count < g_max_deferred_spans) {
+                    doomed[doomed_count] = span;
+                    ++doomed_count;
+                } else {
+                    destroy_span(span);
+                }
+            }
+        }
+
+        // Unmapping waits until the class lock is released, so a TLB shootdown cannot stall other threads.
+        for (size_t index = 0; index < doomed_count; ++index) {
+            destroy_span(doomed[index]);
+        }
+        handled += chunk_handled;
+        node = cursor;
     }
 
     if (accepted != 0) {
         active_bytes_.fetch_sub(accepted * g_block_sizes[class_index], memory_order_relaxed);
     }
-
-    // Bursty workloads hand out many spans, then release them all.
-    // Keeping only a single empty span per size class forces those spans to be mapped again for the next burst,
-    // which costs a page fault per block. Retaining up to a byte budget keeps the peak working set reusable
-    // while the accounting stays bounded and purge() still returns everything.
-    // Bursty workloads hand out many spans and then release them all.
-    // Keeping a single empty span per size class forces those spans to be mapped again for the next burst,
-    // which costs a page fault per block. Spans are therefore retained while the pool wide empty span budget allows it,
-    // which keeps a peak working set reusable while both the per class floor and the global budget stay bounded,
-    // and purge() still returns everything.
-    // Every size class keeps one warm span: dropping the floor for the classes with larger spans
-    // made those spans be mapped again for every burst, which costs far more than the retained mapping.
-    // The pool wide byte budget bounds the total instead.
-    const size_t floor_spans = options_.purge_on_empty ? 0 : options_.max_empty_spans;
-    const size_t budget = options_.purge_on_empty ? 0 : options_.max_empty_span_bytes;
-    while (state.empty_count > floor_spans && state.tail != nullptr &&
-           state.tail->used_count.load(memory_order_relaxed) == 0 &&
-           (budget == 0 || empty_bytes_.load(memory_order_relaxed) > budget)) {
-        span_header* span = state.tail;
-        list_unlink(state, span);
-        --state.empty_count;
-        --state.span_count;
-        empty_bytes_.fetch_sub(span->span_size, memory_order_relaxed);
-        destroy_span(span);
-    }
+    return handled;
 }
 
 void memory_pool::deallocate(void* ptr, const size_t bytes) noexcept {
@@ -834,16 +980,31 @@ void memory_pool::deallocate(void* ptr, const size_t bytes) noexcept {
     if (ptr == nullptr) {
         return;
     }
+    thread_cache& cache = current_cache();
+    if (options_.thread_cache_enabled && cache.last_claim == reinterpret_cast<uintptr_t>(ptr) &&
+        cache.owner_id == id_) {
+        cache.last_claim = 0;
+        const auto* span = reinterpret_cast<const span_header*>(slot_address(reinterpret_cast<uintptr_t>(ptr)));
+        NEFORCE_DEBUG_VERIFY(span->magic == g_span_magic && span->owner_id == id_ && span->class_index < class_count,
+                             "memory pool detected an invalid claimed block.");
+        const auto class_index = static_cast<size_t>(span->class_index);
+        if (cache.entries[class_index].count >= cache.entries[class_index].cache_max) {
+            cache_trim(cache, class_index);
+        }
+        *static_cast<void**>(ptr) = cache.entries[class_index].list;
+        cache.entries[class_index].list = ptr;
+        ++cache.entries[class_index].count;
+        return;
+    }
     map_view view;
     if (!map_read(ptr, view)) {
-        // Foreign pointers come from another allocator in the same process
         foreign_releases_.fetch_add(1, memory_order_relaxed);
         NEFORCE_DEBUG_VERIFY(false, "memory pool received a pointer it does not own.");
         return;
     }
 
     if (view.kind == g_kind_large) {
-        memory_pool* owner = pool_for_id(view.owner_id);
+        memory_pool* owner = view.owner_id == id_ ? this : pool_for_id(view.owner_id);
         if (owner != nullptr) {
             owner->deallocate_large(static_cast<region_header*>(view.base));
         }
@@ -869,22 +1030,11 @@ void memory_pool::deallocate(void* ptr, const size_t bytes) noexcept {
         return;
     }
 
-    thread_cache& cache = current_cache();
     if (cache.owner_id != id_) {
         bind_cache(cache);
     }
-    if (cache.entries[class_index].count >= classes_[class_index].cache_max) {
-        const uint32_t total = cache.entries[class_index].count;
-        const uint32_t give = total / 2;
-        void* head = cache.entries[class_index].list;
-        void* tail = head;
-        for (uint32_t index = 1; index < give; ++index) {
-            tail = *static_cast<void**>(tail);
-        }
-        cache.entries[class_index].list = *static_cast<void**>(tail);
-        *static_cast<void**>(tail) = nullptr;
-        cache.entries[class_index].count = total - give;
-        return_blocks(class_index, head, give);
+    if (cache.entries[class_index].count >= cache.entries[class_index].cache_max) {
+        cache_trim(cache, class_index);
     }
     *static_cast<void**>(ptr) = cache.entries[class_index].list;
     cache.entries[class_index].list = ptr;
@@ -900,26 +1050,21 @@ void* memory_pool::allocate_large(const size_t bytes, const size_t align) noexce
     region_header* region = nullptr;
 
     // A per thread region cache keeps the repeated allocate / release pattern of medium and large buffers
-    // off the pool wide lock entirely. It is bounded by both the per entry byte cap and the slot count,
+    // off the pool wide lock entirely. Buckets are indexed by size, so a hit costs one comparison,
     // and the entries are handed back when the thread exits.
-    if (options_.region_cache_enabled && need <= options_.thread_region_bytes) {
+    if (options_.region_cache_enabled && thread_region_fits(need)) {
         thread_cache& cache = current_cache();
         if (cache.owner_id == id_) {
-            auto best = static_cast<size_t>(-1);
-            auto slot = static_cast<size_t>(cache.region_count);
-            for (uint32_t index = 0; index < cache.region_count; ++index) {
-                const size_t size = cache.regions[index].region_size;
-                if (size >= need && size < best) {
-                    best = size;
-                    slot = index;
+            const size_t bucket = region_bucket_of(need, thread_region_slots);
+            region_cache_entry& slot = cache.regions[bucket];
+            if (slot.region != nullptr && slot.region_size >= need) {
+                region = slot.region;
+                cache.region_bytes -= slot.region_size;
+                if (cache.region_count != 0) {
+                    --cache.region_count;
                 }
-            }
-            if (slot < cache.region_count) {
-                region = cache.regions[slot].region;
-                cache.regions[slot] = cache.regions[cache.region_count - 1];
-                cache.regions[cache.region_count - 1].region = nullptr;
-                cache.regions[cache.region_count - 1].region_size = 0;
-                --cache.region_count;
+                slot.region = nullptr;
+                slot.region_size = 0;
                 region->flags &= ~g_region_flag_cached;
                 region->next = nullptr;
             }
@@ -928,24 +1073,7 @@ void* memory_pool::allocate_large(const size_t bytes, const size_t align) noexce
 
     if (region == nullptr && options_.region_cache_enabled) {
         scoped_spinlock guard(region_lock_);
-        auto best = static_cast<size_t>(-1);
-        auto slot = region_cache_count_;
-        for (size_t index = 0; index < region_cache_count_; ++index) {
-            const size_t size = region_cache_[index].region_size;
-            if (size >= need && size < best) {
-                best = size;
-                slot = index;
-            }
-        }
-        if (slot < region_cache_count_) {
-            region = region_cache_[slot].region;
-            region_cache_[slot] = region_cache_[region_cache_count_ - 1];
-            region_cache_[region_cache_count_ - 1].region = nullptr;
-            region_cache_[region_cache_count_ - 1].region_size = 0;
-            --region_cache_count_;
-            region->flags &= ~g_region_flag_cached;
-            region->next = nullptr;
-        }
+        region = take_region_locked(need);
     }
 
     if (region == nullptr) {
@@ -977,16 +1105,80 @@ void* memory_pool::allocate_large(const size_t bytes, const size_t align) noexce
     const auto base_addr = reinterpret_cast<uintptr_t>(region->base);
     const auto payload = round_up(base_addr + sizeof(region_header), alignment);
     region->payload_offset = static_cast<uint32_t>(payload - base_addr);
-    if (!map_publish(reinterpret_cast<void*>(payload), region, id_, 0, g_kind_large)) {
+    if (!map_publish(reinterpret_cast<void*>(payload), region->base, id_, 0, g_kind_large)) {
         deallocate_large(region);
         return nullptr;
     }
     return reinterpret_cast<void*>(payload);
 }
 
+memory_pool::region_header* memory_pool::take_region_locked(const size_t need) noexcept {
+    const size_t direct = region_bucket_of(need, g_region_cache_buckets);
+    size_t slot = region_cache_slots;
+    if (direct < region_cache_slots && region_cache_[direct].region != nullptr &&
+        region_cache_[direct].region_size >= need) {
+        slot = direct;
+    } else {
+        for (size_t index = 0; index < region_cache_slots; ++index) {
+            if (index == direct) {
+                continue;
+            }
+            if (region_cache_[index].region != nullptr && region_cache_[index].region_size >= need) {
+                slot = index;
+                break;
+            }
+        }
+    }
+    if (slot >= region_cache_slots) {
+        return nullptr;
+    }
+    region_header* region = region_cache_[slot].region;
+    region_cache_[slot].region = nullptr;
+    region_cache_[slot].region_size = 0;
+    if (region_cache_count_ != 0) {
+        --region_cache_count_;
+    }
+    region->flags &= ~g_region_flag_cached;
+    region->next = nullptr;
+    return region;
+}
+
+bool memory_pool::keep_region_locked(region_header* region) noexcept {
+    for (size_t index = 0; index < region_cache_slots; ++index) {
+        if (region_cache_[index].region == region) {
+        }
+    }
+    if (region_cache_count_ >= options_.max_cached_regions) {
+        return false;
+    }
+    const size_t direct = region_bucket_of(region->region_size, g_region_cache_buckets);
+    size_t slot = region_cache_slots;
+    if (direct < region_cache_slots && region_cache_[direct].region == nullptr) {
+        slot = direct;
+    } else {
+        for (size_t index = 0; index < region_cache_slots; ++index) {
+            if (region_cache_[index].region == nullptr) {
+                slot = index;
+                break;
+            }
+        }
+    }
+    if (slot >= region_cache_slots) {
+        return false;
+    }
+    region->flags |= g_region_flag_cached;
+    region->next = nullptr;
+    region_cache_[slot].region = region;
+    region_cache_[slot].region_size = static_cast<size_t>(region->region_size);
+    ++region_cache_count_;
+    return true;
+}
+
 void memory_pool::release_region(region_header* region) noexcept {
     if (region == nullptr) {
         return;
+    }
+    if (region->magic != g_region_magic) {
     }
     const auto size = static_cast<size_t>(region->region_size);
     void* base = region->base;
@@ -1016,14 +1208,29 @@ void memory_pool::deallocate_large(region_header* region) noexcept {
         return;
     }
     map_retire(reinterpret_cast<void*>(reinterpret_cast<uintptr_t>(region->base) + region->payload_offset));
-    if (options_.region_cache_enabled && region->region_size <= options_.thread_region_bytes) {
+    const auto region_size = static_cast<size_t>(region->region_size);
+    if (options_.region_cache_enabled && thread_region_fits(region_size)) {
         thread_cache& cache = current_cache();
-        if (cache.owner_id == id_ && cache.region_count < thread_region_slots) {
+        const size_t bucket = region_bucket_of(region_size, thread_region_slots);
+        if (cache.owner_id == id_ && cache.region_bytes + region_size <= options_.thread_region_budget_bytes) {
+            region_cache_entry& slot = cache.regions[bucket];
+            region_header* replaced = slot.region;
+            if (replaced != nullptr) {
+                cache.region_bytes -= slot.region_size;
+                --cache.region_count;
+                slot.region = nullptr;
+                slot.region_size = 0;
+                replaced->flags &= ~g_region_flag_cached;
+            }
             region->flags |= g_region_flag_cached;
             region->next = nullptr;
-            cache.regions[cache.region_count].region = region;
-            cache.regions[cache.region_count].region_size = static_cast<size_t>(region->region_size);
+            slot.region = region;
+            slot.region_size = region_size;
+            cache.region_bytes += region_size;
             ++cache.region_count;
+            if (replaced != nullptr) {
+                return_region(replaced);
+            }
             return;
         }
     }
@@ -1034,14 +1241,7 @@ void memory_pool::return_region(region_header* region) noexcept {
     bool cached = false;
     if (options_.region_cache_enabled) {
         scoped_spinlock guard(region_lock_);
-        if (region_cache_count_ < options_.max_cached_regions) {
-            region->flags |= g_region_flag_cached;
-            region->next = nullptr;
-            region_cache_[region_cache_count_].region = region;
-            region_cache_[region_cache_count_].region_size = static_cast<size_t>(region->region_size);
-            ++region_cache_count_;
-            cached = true;
-        }
+        cached = keep_region_locked(region);
     }
     if (!cached) {
         release_region(region);
@@ -1095,20 +1295,32 @@ void* memory_pool::reallocate(void* ptr, const size_t bytes, const size_t align)
 void memory_pool::flush_thread_cache() noexcept { release_thread_cache(current_cache()); }
 
 void memory_pool::purge() noexcept {
+    span_header* doomed[g_max_deferred_spans];
     for (size_t index = 0; index < class_count; ++index) {
         class_state& state = classes_[index];
-        scoped_spinlock guard(state.lock);
-        while (state.tail != nullptr && state.tail->used_count.load(memory_order_relaxed) == 0) {
-            span_header* span = state.tail;
-            list_unlink(state, span);
-            if (state.empty_count != 0) {
-                --state.empty_count;
+        size_t doomed_count = 0;
+        {
+            scoped_spinlock guard(state.lock);
+            while (state.tail != nullptr && state.tail->used_count.load(memory_order_relaxed) == 0) {
+                span_header* span = state.tail;
+                list_unlink(state, span);
+                if (state.empty_count != 0) {
+                    --state.empty_count;
+                }
+                empty_bytes_.fetch_sub(span->span_size, memory_order_relaxed);
+                if (state.span_count != 0) {
+                    --state.span_count;
+                }
+                if (doomed_count < g_max_deferred_spans) {
+                    doomed[doomed_count] = span;
+                    ++doomed_count;
+                } else {
+                    destroy_span(span);
+                }
             }
-            empty_bytes_.fetch_sub(span->span_size, memory_order_relaxed);
-            if (state.span_count != 0) {
-                --state.span_count;
-            }
-            destroy_span(span);
+        }
+        for (size_t index_doomed = 0; index_doomed < doomed_count; ++index_doomed) {
+            destroy_span(doomed[index_doomed]);
         }
     }
 
@@ -1116,11 +1328,13 @@ void memory_pool::purge() noexcept {
     size_t cached_count = 0;
     {
         scoped_spinlock guard(region_lock_);
-        for (size_t index = 0; index < region_cache_count_; ++index) {
-            cached[cached_count] = region_cache_[index].region;
-            ++cached_count;
-            region_cache_[index].region = nullptr;
-            region_cache_[index].region_size = 0;
+        for (size_t index = 0; index < region_cache_slots; ++index) {
+            if (region_cache_[index].region != nullptr) {
+                cached[cached_count] = region_cache_[index].region;
+                ++cached_count;
+                region_cache_[index].region = nullptr;
+                region_cache_[index].region_size = 0;
+            }
         }
         region_cache_count_ = 0;
     }
@@ -1156,6 +1370,10 @@ void memory_pool::release_all() noexcept {
         region->magic = 0;
         os_unmap(region->base, region_size);
         region = next;
+    }
+    for (size_t index = 0; index < region_cache_slots; ++index) {
+        region_cache_[index].region = nullptr;
+        region_cache_[index].region_size = 0;
     }
     region_cache_count_ = 0;
 }
@@ -1352,6 +1570,7 @@ constexpr size_t memory_pool::class_count;
 constexpr size_t memory_pool::small_max;
 constexpr size_t memory_pool::min_align;
 constexpr size_t memory_pool::region_cache_slots;
+constexpr size_t memory_pool::region_cache_buckets;
 #endif
 
 NEFORCE_END_NAMESPACE__

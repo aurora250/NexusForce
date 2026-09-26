@@ -43,8 +43,7 @@ public:
      * @brief 地址映射表条目
      */
     struct map_entry {
-        atomic<uint64_t> desc; ///< span 头部或区域头部地址
-        atomic<uint64_t> tag;  ///< 归属标识、尺寸类与槽位类型的打包值
+        atomic<uint64_t> value; ///< 基址槽位号、注册槽位与代次、尺寸类、槽位类型
     };
 
     /**
@@ -88,10 +87,9 @@ public:
     static constexpr size_t class_count = 36;
 
     /**
-     * @def MEMORY_POOL_THREAD_REGION_SLOTS
      * @brief 每个线程保留的大对象区域槽位数
      */
-    static constexpr size_t thread_region_slots = 4;
+    static constexpr size_t thread_region_slots = 8;
 
     /**
      * @brief 小对象尺寸上限（16 KiB）
@@ -118,17 +116,18 @@ public:
      * @brief 内存池配置
      */
     struct options {
-        size_t thread_cache_max = 64;             ///< 每个尺寸类在线程缓存中保留的块数上限
-        size_t thread_cache_batch = 32;           ///< 与中央堆交互时每次搬运的块数下限
-        size_t thread_cache_bytes = 4096;         ///< 每个尺寸类在线程缓存中保留的字节目标，决定搬运批量
-        size_t thread_cache_max_bytes = 1U << 20; ///< 每个尺寸类线程缓存容量的字节上限，决定溢出阈值
-        size_t max_empty_spans = 1;               ///< 每个尺寸类缓存的完全空闲 span 数下限
-        size_t max_empty_span_bytes = 2U << 20;   ///< 全池保留完全空闲 span 的字节预算
-        size_t max_cached_regions = 8;            ///< 全池大对象区域缓存条目数上限
-        size_t thread_region_bytes = 256U << 10;  ///< 线程保留单个大对象区域的字节上限
-        bool thread_cache_enabled = true;         ///< 是否启用线程本地缓存
-        bool region_cache_enabled = true;         ///< 是否启用大对象区域复用缓存
-        bool purge_on_empty = false;              ///< 是否在 span 完全空闲时立即归还操作系统
+        size_t thread_cache_max = 64;                 ///< 每个尺寸类在线程缓存中保留的块数上限
+        size_t thread_cache_batch = 32;               ///< 与中央堆交互时每次搬运的块数下限
+        size_t thread_cache_bytes = 4096;             ///< 每个尺寸类在线程缓存中保留的字节目标，决定搬运批量
+        size_t thread_cache_max_bytes = 1U << 20;     ///< 每个尺寸类线程缓存容量的字节上限，决定溢出阈值
+        size_t max_empty_spans = 1;                   ///< 每个尺寸类缓存的完全空闲 span 数下限
+        size_t max_empty_span_bytes = 2U << 20;       ///< 全池保留完全空闲 span 的字节预算
+        size_t max_cached_regions = 8;                ///< 全池大对象区域缓存条目数上限
+        size_t thread_region_bytes = 256U << 10;      ///< 线程保留单个大对象区域的载荷字节上限
+        size_t thread_region_budget_bytes = 2U << 20; ///< 线程保留大对象区域的映射字节总预算
+        bool thread_cache_enabled = true;             ///< 是否启用线程本地缓存
+        bool region_cache_enabled = true;             ///< 是否启用大对象区域复用缓存
+        bool purge_on_empty = false;                  ///< 是否在 span 完全空闲时立即归还操作系统
     };
 
     /**
@@ -220,6 +219,7 @@ public:
                     void* block = cache.entries[class_index].list;
                     cache.entries[class_index].list = *static_cast<void**>(block);
                     --cache.entries[class_index].count;
+                    cache.last_claim = reinterpret_cast<uintptr_t>(block);
                     return block;
                 }
                 return allocate_small(cache, class_index);
@@ -349,13 +349,13 @@ private:
 
 
     /**
-     * @struct thread_cache
-     * @brief 线程本地缓存
+     * @struct class_cache
+     * @brief 单个尺寸类的线程本地缓存项
      */
     struct class_cache {
-        void* list;     ///< 该尺寸类的空闲块链头
-        uint32_t count; ///< 该尺寸类的空闲块数量
-        uint32_t pad_;  ///< 对齐填充，使每个尺寸类恰好占用一条缓存行
+        void* list;         ///< 该尺寸类的空闲块链头
+        uint32_t count;     ///< 该尺寸类的空闲块数量
+        uint32_t cache_max; ///< 该尺寸类的溢出阈值副本，避免热路径访问中央堆
     };
 
     /**
@@ -365,19 +365,25 @@ private:
     struct thread_cache {
         uint32_t owner_id;                               ///< 当前绑定内存池标识，0 表示未绑定
         uint32_t region_count;                           ///< 本线程保留的大对象区域数
-        class_cache entries[class_count];                ///< 各尺寸类的空闲块链，按类成对存放
+        uintptr_t last_claim;                            ///< 最近一次交付且尚未归还的块，0 表示快捷路径不可用
+        size_t region_bytes;                             ///< 本线程保留的大对象区域映射字节总数
+        class_cache entries[class_count];                ///< 各尺寸类的空闲块链
         region_cache_entry regions[thread_region_slots]; ///< 本线程保留的大对象区域
     };
 
     void initialize(const options& opts) noexcept;
     void release_all() noexcept;
     bool bind_cache(thread_cache& cache) noexcept;
+    void cache_trim(thread_cache& cache, size_t class_index) noexcept;
+    NEFORCE_NODISCARD bool thread_region_fits(size_t need) const noexcept;
     void* refill(thread_cache& cache, size_t class_index) noexcept;
-    void return_blocks(size_t class_index, void* head, size_t count) noexcept;
+    size_t return_blocks(size_t class_index, void* head, size_t count) noexcept;
     span_header* create_span(size_t class_index) noexcept;
     void destroy_span(span_header* span) noexcept;
     void* allocate_large(size_t bytes, size_t align) noexcept;
     void deallocate_large(region_header* region) noexcept;
+    region_header* take_region_locked(size_t need) noexcept;
+    bool keep_region_locked(region_header* region) noexcept;
     void return_region(region_header* region) noexcept;
     void release_region(region_header* region) noexcept;
     void* allocate_small(thread_cache& cache, size_t class_index) noexcept;
@@ -415,6 +421,7 @@ private:
     region_cache_entry region_cache_[region_cache_slots];
     size_t region_cache_count_;
     spinlock region_lock_;
+    size_t registry_slot_;
     atomic<size_t> os_mapped_bytes_;
     atomic<size_t> peak_mapped_bytes_;
     atomic<size_t> small_mapped_bytes_;
@@ -438,7 +445,6 @@ NEFORCE_NODISCARD NEFORCE_API memory_pool& system_memory_pool() noexcept;
  * @class pool_allocator
  * @brief 内存池分配器适配器
  * @tparam T 要分配的元素类型
- * @note 可绑定到任意 memory_pool 实例
  */
 template <typename T>
 class pool_allocator {
@@ -466,8 +472,7 @@ public:
      *
      * 绑定系统内存池
      */
-    pool_allocator() noexcept :
-    pool_(&_NEFORCE system_memory_pool()) {}
+    pool_allocator() noexcept = default;
 
     /**
      * @brief 构造函数
@@ -530,7 +535,7 @@ public:
     NEFORCE_NODISCARD memory_pool* pool() const noexcept { return pool_; }
 
 private:
-    memory_pool* pool_;
+    memory_pool* pool_{&system_memory_pool()};
 };
 
 /**

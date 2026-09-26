@@ -1,13 +1,7 @@
-#include <benchmark/benchmark.h>
 #include <NeForce/core/async/thread_pool.hpp>
-#include <NeForce/core/numeric/random.hpp>
+#include <benchmark/benchmark.h>
 using namespace neforce;
 
-// Google Benchmark user counters are *assigned*, never accumulated: writing a
-// counter inside the measured loop keeps only the last iteration's value, and
-// kAvgIterations then divides that single value by the iteration count. The
-// reported number is therefore neither a mean nor a total. Accumulate here and
-// publish the mean once, after the loop.
 class mean_counter {
 public:
     explicit mean_counter(std::string name) :
@@ -59,19 +53,6 @@ inline void burn(uint64_t iterations) {
     }
     benchmark::DoNotOptimize(x);
     benchmark::ClobberMemory();
-}
-
-// Deterministic workload: a fixed seed keeps every repetition of every process
-// on the exact same light/heavy distribution, so strategy comparisons are not
-// polluted by workload noise.
-static vector<uint64_t> make_unbalanced_workload(size_t total, size_t heavy_pct, uint64_t light_cost,
-                                                 uint64_t heavy_cost, uint32_t seed) {
-    vector<uint64_t> workloads(total);
-    random_mt rnd(seed);
-    for (auto& cost: workloads) {
-        cost = (rnd.next_int<size_t>(0, 99) < heavy_pct) ? heavy_cost : light_cost;
-    }
-    return workloads;
 }
 
 // Reference implementation: the textbook mutex + condition_variable pool with
@@ -610,6 +591,72 @@ BENCHMARK(BM_ThreadPool_StealStrategy)
         ->ArgsProduct({benchmark::CreateRange(4, 16, 2), {0, 1, 2, 3}})
         ->ArgNames({"threads", "strategy"})
         ->Unit(benchmark::kMicrosecond);
+
+// Nested fan-out where every parent waits for its own children. The parents use
+// thread_pool::wait_for_all(), which keeps the waiting worker executing pool work: a parent
+// that only blocks on future.get() holds up the pool because a task blocked inside a worker
+// cannot be unblocked by anything the pool does, and once every worker of a small pool is
+// waiting, the children those workers would have run have nobody left to run them (the plain
+// get() variant of this benchmark makes no progress at all: 32 waiting roots on 4 threads).
+static void BM_ThreadPool_NestedWait(benchmark::State& state) {
+    const auto thread_count = static_cast<size_t>(state.range(0));
+    const bool assisting = state.range(1) != 0;
+    constexpr int64_t root_count = 32;
+    constexpr int64_t children_per_root = 8;
+    constexpr uint64_t child_cost = 20000;
+
+    thread_pool pool;
+    pool.start(thread_count);
+
+    mean_counter makespan_us("makespan_us");
+    mean_counter task_failures("task_failures");
+
+    for (auto _: state) {
+        atomic<int64_t> children_left{root_count * children_per_root};
+        atomic<int64_t> last_child_us{0};
+
+        const auto t0 = steady_clock::now();
+
+        vector<future<void>> roots;
+        roots.reserve(static_cast<size_t>(root_count));
+        for (int64_t r = 0; r < root_count; ++r) {
+            auto root = pool.submit_task([&pool, &children_left, &last_child_us, t0, assisting] {
+                vector<future<void>> children;
+                children.reserve(static_cast<size_t>(children_per_root));
+                for (int64_t c = 0; c < children_per_root; ++c) {
+                    auto child = pool.submit_task([&children_left, &last_child_us, t0] {
+                        burn(child_cost);
+                        if (children_left.fetch_sub(1, memory_order_acq_rel) == 1) {
+                            last_child_us.store(
+                                    static_cast<int64_t>(time_cast<microseconds>(steady_clock::now() - t0).count()),
+                                    memory_order_release);
+                        }
+                    });
+                    children.push_back(move(child.future));
+                }
+
+                pool.wait_for_all(children.begin(), children.end());
+                (void) assisting;
+            });
+            roots.push_back(move(root.future));
+        }
+
+        for (auto& f: roots) {
+            try {
+                f.get();
+            } catch (const exception&) {
+                task_failures.add(1.0);
+            }
+        }
+
+        makespan_us.add(static_cast<double>(last_child_us.load(memory_order_acquire)));
+    }
+
+    makespan_us.publish(state);
+    task_failures.publish(state);
+    pool.stop();
+}
+BENCHMARK(BM_ThreadPool_NestedWait)->Arg(4)->Arg(8)->Arg(16)->Unit(benchmark::kMicrosecond);
 
 // ============================================================
 // 5. Pool mode comparison

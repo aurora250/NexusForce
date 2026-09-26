@@ -444,21 +444,14 @@ private:
     size_t thread_threshhold_;                    ///< 线程数阈值
     size_t task_threshhold_{task_max_threshhold}; ///< 任务队列阈值
 
-    /**
-     * @brief 上一次存活巡检观察到的完成计数
-     * @note 仅由定时器线程访问
-     */
-    size_t liveness_completed_{0};
+    size_t liveness_completed_{0};       ///< 上一次存活巡检观察到的完成计数
+    atomic<bool> liveness_armed_{false}; ///< 存活巡检是否已布防
 
-    int64_t warmup_window_us_{200}; ///< 定时任务预热窗口
-
-    /**
-     * @brief 定时任务预热截止时刻
-     * @note 非零表示已指派一个工作线程在到期前保持自旋，避免定时任务遭遇冷唤醒
-     */
-    atomic<int64_t> warm_deadline_ns_{0};
+    int64_t warmup_window_us_{200};       ///< 定时任务预热窗口
+    atomic<int64_t> warm_deadline_ns_{0}; ///< 定时任务预热截止时刻
 
     atomic<size_t> total_submitted_tasks_{0}; ///< 总提交任务计数
+    atomic<int64_t> last_wake_ns_{0};         ///< 上一次唤醒停驻线程的时刻
     atomic<uint64_t> next_task_id_{0};        ///< 下一个任务ID
     uint64_t allowed_cpus_{0};                ///< 进程允许的 CPU 掩码
 
@@ -492,6 +485,7 @@ private:
     atomic<uint32_t> attached_workers_{0};   ///< 已注册工作线程数
     atomic<uint32_t> parked_workers_{0};     ///< 停驻工作线程数
     atomic<uint32_t> idle_workers_{0};       ///< 空闲但仍在校验任务的线程数
+    atomic<uint32_t> helpers_waiting_{0};    ///< 正在等待结果并代为执行任务的线程数
     atomic<uint32_t> steal_worker_count_{0}; ///< 正在窃取的工作线程数
 
     steal_strategy configured_steal_strategy_{steal_strategy::adaptive}; ///< 配置的窃取策略
@@ -507,11 +501,16 @@ private:
     void thread_function(size_t slot_index);
     optional<task_type> try_steal_task(worker_context& ctx);
     optional<task_type> try_take_priority();
+    size_t take_batch(worker_context& ctx);
+    optional<task_type> take_task(worker_context& self);
+    void execute_task(worker_context& self, task_type& task);
+    void help_until_ready(const function<bool()>& ready);
     void publish_local_size(worker_context& ctx);
     void wake_workers(uint32_t backlog) noexcept;
     NEFORCE_NODISCARD shared_ptr<task_info> make_task_info(priority_type priority);
     void prewarm_dispatch(int64_t deadline_ns);
     void liveness_tick();
+    void arm_liveness_tick();
     bool dispatch_task(task_type&& job, priority_type priority, const shared_ptr<task_info>& info);
     NEFORCE_NODISCARD bool hold_warm_spin(worker_context& self);
     void worker_cleanup(size_t slot_index);
@@ -765,6 +764,39 @@ public:
     template <typename... Types>
     static tuple<future_result_t<Types>...> wait(future<Types>&&... futures) {
         return _NEFORCE make_tuple(_NEFORCE get(futures)...);
+    }
+
+    /**
+     * @brief 等待任务结果，等待期间代为执行池内任务
+     * @tparam T 任务返回值类型
+     * @param result 要等待的任务 future
+     * @return 任务的返回值
+     */
+    template <typename T>
+    T wait_for(future<T>& result) {
+        help_until_ready([&result] { return result.wait_for(milliseconds(0)) == future_status::ready; });
+        return result.get();
+    }
+
+    /**
+     * @brief 等待一组任务结果，等待期间代为执行池内任务
+     * @tparam Iterator future 迭代器类型
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     */
+    template <typename Iterator>
+    void wait_for_all(Iterator first, Iterator last) {
+        help_until_ready([first, last] {
+            for (auto it = first; it != last; ++it) {
+                if (it->wait_for(milliseconds(0)) != future_status::ready) {
+                    return false;
+                }
+            }
+            return true;
+        });
+        for (auto it = first; it != last; ++it) {
+            it->get();
+        }
     }
 };
 
