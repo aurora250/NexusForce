@@ -17,7 +17,7 @@ namespace {
         char data[192];
     };
 
-    size_t resident_kb() {
+    size_t resident_bytes() {
         const auto mi = process::get_memory_info(process::current_id());
         return mi.working_set_size;
     }
@@ -183,6 +183,8 @@ TEST(AllocatorOverride, RepeatedLargeAllocationsDoNotInflateResidentMemory) {
     GTEST_SKIP() << "NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE is disabled";
 #else
     memory_pool& pool = system_memory_pool();
+    pool.flush_thread_cache();
+    pool.purge();
     for (int round = 0; round < 64; ++round) {
         auto* block = static_cast<unsigned char*>(::operator new(1U << 20));
         ASSERT_NE(block, nullptr);
@@ -190,15 +192,22 @@ TEST(AllocatorOverride, RepeatedLargeAllocationsDoNotInflateResidentMemory) {
         block[(1U << 20) - 1] = 2;
         ::operator delete(block);
     }
-    const size_t after_warmup = resident_kb();
+    const size_t after_warmup = resident_bytes();
+    const size_t map_calls_warmup = pool.stats().os_map_calls;
+    const size_t unmap_calls_warmup = pool.stats().os_unmap_calls;
     for (int round = 0; round < 512; ++round) {
         auto* block = static_cast<unsigned char*>(::operator new(1U << 20));
         ASSERT_NE(block, nullptr);
         block[0] = 3;
         ::operator delete(block);
     }
-    const size_t after = resident_kb();
-    EXPECT_LT(after, after_warmup + 65536);
+    const size_t after = resident_bytes();
+    // The exact signal: reusing one cached region must not map or unmap anything.
+    EXPECT_EQ(pool.stats().os_map_calls, map_calls_warmup);
+    EXPECT_EQ(pool.stats().os_unmap_calls, unmap_calls_warmup);
+    // The resident size is a coarse guard on purpose: its unit and the bookkeeping overhead of a profiler
+    // (valgrind and friends) are both platform and environment dependent.
+    EXPECT_LT(after, after_warmup + (1U << 20));
     pool.flush_thread_cache();
     pool.purge();
     EXPECT_TRUE(pool.verify());
